@@ -42,7 +42,7 @@ class DeclarationsTest extends AbstractXtendTestCase {
 			val suppressWarning = clazz.annotations.head
 			val supressWarningsDeclaration = suppressWarning.annotationTypeDeclaration
 			assertEquals('java.lang.SuppressWarnings', supressWarningsDeclaration.qualifiedName)
-			assertEquals('unused', suppressWarning.getStringValue('value'))
+			assertEquals('unused', suppressWarning.getStringArrayValue('value').get(0))
 			
 			assertEquals(2, supressWarningsDeclaration.annotations.size)
 			

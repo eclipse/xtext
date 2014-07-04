@@ -527,6 +527,176 @@ abstract class AbstractReusableActiveAnnotationTests {
 		]
 	}
 	
+	@Test def void testAnnotationArrayValueGetting_01() {
+		assertProcessing(
+			'myannotation/MyAnnotation.xtend' -> '''
+				package myannotation
+
+				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+				
+				@Active(MyAnnotationProcessor)
+				annotation MyAnnotation {
+					boolean[] value
+				}
+				
+				class MyAnnotationProcessor extends AbstractClassProcessor {
+				
+					override doRegisterGlobals(ClassDeclaration it, extension RegisterGlobalsContext context) {
+						check
+					}
+				
+					override doTransform(MutableClassDeclaration it, extension TransformationContext context) {
+						check
+					}
+				
+					def check(ClassDeclaration it) {
+						switch qualifiedName {
+							case 'myusercode.UserCode',
+							case 'myusercode.UserCode2': {
+								val value = annotations.head.getBooleanArrayValue("value")
+								if (value.size != 1) {
+									throw new AssertionError("value.size != 1")
+								}
+								if (!value.head) {
+									throw new AssertionError("!value.head")
+								}
+								try {
+									annotations.head.getBooleanValue("value")
+									throw new AssertionError('annotations.head.getBooleanValue("value")')
+								} catch (Exception e) {
+								}
+							}
+							case 'myusercode.UserCode3': {
+								val value = annotations.head.getBooleanArrayValue("value")
+								if (value.size != 2) {
+									throw new AssertionError("value.size != 2")
+								}
+								if (!value.head) {
+									throw new AssertionError("!value.head")
+								}
+								if (value.last) {
+									throw new AssertionError("value.last")
+								}
+								try {
+									annotations.head.getBooleanValue("value")
+									throw new AssertionError('annotations.head.getBooleanValue("value")')
+								} catch (Exception e) {
+								}
+							}
+							default:
+								throw new AssertionError('Unexpected type: ' + qualifiedName)
+						}
+					}
+				
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				import myannotation.MyAnnotation
+				
+				@MyAnnotation(true)
+				class UserCode {}
+				
+				@MyAnnotation(#[true])
+				class UserCode2 {}
+				
+				@MyAnnotation(true, false)
+				class UserCode3 {}
+			'''
+		) []
+	}
+	
+	@Test def void testAnnotationArrayValueGetting_02() {
+		assertProcessing(
+			'myannotation/MyAnnotation.xtend' -> '''
+				package myannotation
+
+				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+				
+				@Active(MyAnnotationProcessor)
+				annotation MyAnnotation {
+					Class<?>[] value
+				}
+				
+				class MyAnnotationProcessor extends AbstractClassProcessor {
+				
+					override doRegisterGlobals(ClassDeclaration it, extension RegisterGlobalsContext context) {
+						check
+					}
+				
+					override doTransform(MutableClassDeclaration it, extension TransformationContext context) {
+						check
+					}
+				
+					def check(ClassDeclaration it) {
+						switch qualifiedName {
+							case 'myusercode.UserCode',
+							case 'myusercode.UserCode2': {
+								val value = annotations.head.getClassArrayValue("value")
+								if (value.size != 1) {
+									throw new AssertionError("value.size != 1")
+								}
+								if (value.head.name != 'java.lang.String') {
+									throw new AssertionError("value.head.name != 'java.lang.String'")
+								}
+								try {
+									annotations.head.getClassValue("value")
+									throw new AssertionError('annotations.head.getClassValue("value")')
+								} catch (Exception e) {
+								}
+							}
+							case 'myusercode.UserCode3': {
+								val value = annotations.head.getClassArrayValue("value")
+								if (value.size != 2) {
+									throw new AssertionError("value.size != 2")
+								}
+								if (value.head.name != 'java.lang.String') {
+									throw new AssertionError("value.head.name != 'java.lang.String'")
+								}
+								if (value.last.name != 'java.lang.Integer') {
+									throw new AssertionError("value.last.name != 'java.lang.Integer'")
+								}
+								try {
+									annotations.head.getClassValue("value")
+									throw new AssertionError('annotations.head.getClassValue("value")')
+								} catch (Exception e) {
+								}
+							}
+							default:
+								throw new AssertionError('Unexpected type: ' + qualifiedName)
+						}
+					}
+				
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				import myannotation.MyAnnotation
+				
+				@MyAnnotation(String)
+				class UserCode {}
+				
+				@MyAnnotation(#[String])
+				class UserCode2 {}
+				
+				@MyAnnotation(String, Integer)
+				class UserCode3 {}
+			'''
+		) []
+	}
+	
 	@Ignore("Setting annotation values of type Expression is not possible")
 	@Test def void testAnnotationValueSetting_AsExpression() {
 		assertProcessing(

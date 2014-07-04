@@ -661,36 +661,21 @@ class CompilationUnitImpl implements CompilationUnit {
 		]
 	}
 	
+	def Object translateAnnotationValue(XExpression expression, JvmTypeReference expectedType, boolean isArray) {
+		val value = evaluate(expression, expectedType)
+		translateAnnotationValue(value, expectedType, isArray)
+	}
 	
 	def Object translateAnnotationValue(JvmAnnotationValue value, boolean isArray) {
 		val Pair<List<?>, Class<?>> result = switch value {
 			JvmCustomAnnotationValue case value.values.empty && isArray: {
-				val expectedType = findExpectedType(value).getType as JvmArrayType
-				val componentType = expectedType.componentType
-				val componentTypeName = componentType.identifier
-				emptyList -> switch(componentTypeName) {
-					case 'java.lang.Class': TypeReference
-					case 'java.lang.String': String
-					case 'boolean': boolean
-					case 'int': int
-					case 'byte': byte
-					case 'char': char
-					case 'double': double
-					case 'float': float
-					case 'long': long
-					case 'short': short
-					default:
-						switch(componentType) {
-							JvmEnumerationType: EnumerationValueDeclaration
-							JvmAnnotationType: AnnotationReference
-							default: Object
-						}
-				}
+				emptyList -> findExpectedType(value).toArrayComponentType
 			}
 			JvmCustomAnnotationValue : {
 				// custom values always contain a single expression and will already return an array if it's a multi value.
 				val expectedType = findExpectedType(value)
-				return value.values.filter(XExpression).map[evaluate(it, expectedType)].head
+				val result = value.values.filter(XExpression).map[evaluate(it, expectedType)].head
+				return translateAnnotationValue(result, expectedType, isArray)
 			}
 			JvmTypeAnnotationValue : value.values.map[toTypeReference(it)] -> TypeReference 
 			JvmAnnotationAnnotationValue : value.values.map[toAnnotationReference(it)] -> AnnotationReference   
@@ -710,6 +695,40 @@ class CompilationUnitImpl implements CompilationUnit {
 			return toArrayOfType(result.key, result.value)
 		} else {
 			return result.key.head
+		}
+	}
+	
+	protected def translateAnnotationValue(Object value, JvmTypeReference expectedType, boolean isArray) {
+		if (value == null) {
+			return null
+		}
+		if (!isArray || value.class.array) { 
+			return value
+		}
+		toArrayOfType(newArrayList(value), expectedType.toArrayComponentType)
+	}
+	
+	protected def toArrayComponentType(JvmTypeReference valueExpectedType) {
+		val expectedType = valueExpectedType.type as JvmArrayType
+		val componentType = expectedType.componentType
+		val componentTypeName = componentType.identifier
+		switch(componentTypeName) {
+			case 'java.lang.Class': TypeReference
+			case 'java.lang.String': String
+			case 'boolean': boolean
+			case 'int': int
+			case 'byte': byte
+			case 'char': char
+			case 'double': double
+			case 'float': float
+			case 'long': long
+			case 'short': short
+			default:
+				switch(componentType) {
+					JvmEnumerationType: EnumerationValueDeclaration
+					JvmAnnotationType: AnnotationReference
+					default: Object
+				}
 		}
 	}
 	
