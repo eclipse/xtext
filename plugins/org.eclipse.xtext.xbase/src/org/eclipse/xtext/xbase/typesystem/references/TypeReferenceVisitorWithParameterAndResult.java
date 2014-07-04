@@ -13,6 +13,9 @@ package org.eclipse.xtext.xbase.typesystem.references;
  */
 public abstract class TypeReferenceVisitorWithParameterAndResult<Param, Result> {
 
+	/**
+	 * @param param some parameter.
+	 */
 	/* @Nullable */
 	protected Result doVisitTypeReference(LightweightTypeReference reference, Param param) {
 		throw new UnsupportedOperationException("Missing implementation for " + reference);

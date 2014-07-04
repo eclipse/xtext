@@ -188,7 +188,7 @@ public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTyp
 				if (constraint instanceof JvmUpperBound) {
 					upperBoundSeen = true;
 					result.addUpperBound(visit(constraint.getTypeReference()).getWrapperTypeIfPrimitive());
-				} else {
+				} else if (result.getLowerBound() == null) {
 					result.setLowerBound(visit(constraint.getTypeReference()).getWrapperTypeIfPrimitive());
 				}
 			}

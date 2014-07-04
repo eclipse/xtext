@@ -58,6 +58,11 @@ public class IssueCodes {
 	public static final String INVALID_NUMBER_OF_ARGUMENTS = ISSUE_CODE_PREFIX + "invalid_number_of_arguments";
 	public static final String INVALID_NUMBER_OF_TYPE_ARGUMENTS = ISSUE_CODE_PREFIX + "invalid_number_of_type_arguments";
 	/**
+	 * Indicates that an invalid wildcard reference was defined, e.g.
+	 * &lt;? extends Number & CharSequence&gt;
+	 */
+	public static final String INVALID_WILDCARD_CONSTRAINTS = ISSUE_CODE_PREFIX + "invalid_wildcard_constraints";
+	/**
 	 * Covers error conditions like the following:
 	 * <ul>
 	 * <li>Object&lt;String&gt;</li>
