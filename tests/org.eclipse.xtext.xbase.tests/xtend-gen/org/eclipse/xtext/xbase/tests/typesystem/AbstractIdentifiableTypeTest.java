@@ -9,6 +9,8 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -59,24 +61,26 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
     try {
       final XExpression xExpression = this.expression(expression, false);
       TreeIterator<EObject> _eAll = EcoreUtil2.eAll(xExpression);
-      final Function1<EObject, EObject> _function = new Function1<EObject, EObject>() {
-        public EObject apply(final EObject it) {
-          EObject _switchResult = null;
+      final Function1<EObject, List<? extends EObject>> _function = new Function1<EObject, List<? extends EObject>>() {
+        public List<? extends EObject> apply(final EObject it) {
+          List<? extends EObject> _switchResult = null;
           boolean _matched = false;
           if (!_matched) {
             if (it instanceof XClosure) {
               _matched=true;
-              _switchResult = ((XClosure)it).getImplicitParameter();
+              _switchResult = ((XClosure)it).getImplicitFormalParameters();
             }
           }
           if (!_matched) {
-            _switchResult = it;
+            _switchResult = Collections.<EObject>unmodifiableList(Lists.<EObject>newArrayList(it));
           }
           return _switchResult;
         }
       };
-      Iterator<EObject> _map = IteratorExtensions.<EObject, EObject>map(_eAll, _function);
-      Set<EObject> _set = IteratorExtensions.<EObject>toSet(_map);
+      Iterator<List<? extends EObject>> _map = IteratorExtensions.<EObject, List<? extends EObject>>map(_eAll, _function);
+      Iterable<List<? extends EObject>> _iterable = IteratorExtensions.<List<? extends EObject>>toIterable(_map);
+      Iterable<EObject> _flatten = Iterables.<EObject>concat(_iterable);
+      Set<EObject> _set = IterableExtensions.<EObject>toSet(_flatten);
       final Function1<EObject, Boolean> _function_1 = new Function1<EObject, Boolean>() {
         public Boolean apply(final EObject it) {
           boolean _and = false;

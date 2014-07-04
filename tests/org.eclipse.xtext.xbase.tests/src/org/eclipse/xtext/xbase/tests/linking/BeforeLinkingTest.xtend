@@ -40,7 +40,7 @@ class BeforeLinkingTest extends AbstractXbaseTestCase {
 		resource.resolveLazyCrossReferences(null)
 		val assignment = block.expressions.head as XVariableDeclaration
 		val lambda = assignment.right as XClosure
-		val implicitParameter = lambda.implicitParameter
+		val implicitParameter = lambda.implicitFormalParameters.head
 		assertEquals('String', implicitParameter.parameterType.simpleName)
 		resource.update(0, 0, '')
 		assertNotNull(implicitParameter.eResource)
