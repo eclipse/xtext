@@ -62,7 +62,7 @@ class XtendResourceDescription extends DefaultResourceDescription {
 				switch expression {
 					// an unresolved member feature call, where the receiver is a type literal could potentially become
 					// a reference to a nested type
-					XMemberFeatureCall case expression.feature.eIsProxy && !expression.explicitOperationCallOrBuilderSyntax: {
+					XMemberFeatureCall case expression.feature != null && expression.feature.eIsProxy && !expression.explicitOperationCallOrBuilderSyntax: {
 						val receiver = expression.actualReceiver
 						switch receiver {
 							XAbstractFeatureCall case receiver.typeLiteral: {
