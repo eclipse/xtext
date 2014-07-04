@@ -83,9 +83,17 @@ public class XtendResourceDescription extends DefaultResourceDescription {
           if (!_matched) {
             if (expression instanceof XMemberFeatureCall) {
               boolean _and = false;
+              boolean _and_1 = false;
               JvmIdentifiableElement _feature = ((XMemberFeatureCall)expression).getFeature();
-              boolean _eIsProxy = _feature.eIsProxy();
-              if (!_eIsProxy) {
+              boolean _notEquals_1 = (!Objects.equal(_feature, null));
+              if (!_notEquals_1) {
+                _and_1 = false;
+              } else {
+                JvmIdentifiableElement _feature_1 = ((XMemberFeatureCall)expression).getFeature();
+                boolean _eIsProxy = _feature_1.eIsProxy();
+                _and_1 = _eIsProxy;
+              }
+              if (!_and_1) {
                 _and = false;
               } else {
                 boolean _isExplicitOperationCallOrBuilderSyntax = ((XMemberFeatureCall)expression).isExplicitOperationCallOrBuilderSyntax();
