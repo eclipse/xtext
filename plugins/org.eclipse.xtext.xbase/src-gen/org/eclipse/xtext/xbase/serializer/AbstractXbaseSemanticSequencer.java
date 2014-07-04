@@ -86,7 +86,11 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 				}
 				else break;
 			case TypesPackage.JVM_LOWER_BOUND:
-				if(context == grammarAccess.getJvmLowerBoundRule()) {
+				if(context == grammarAccess.getJvmLowerBoundAndedRule()) {
+					sequence_JvmLowerBoundAnded(context, (JvmLowerBound) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getJvmLowerBoundRule()) {
 					sequence_JvmLowerBound(context, (JvmLowerBound) semanticObject); 
 					return; 
 				}

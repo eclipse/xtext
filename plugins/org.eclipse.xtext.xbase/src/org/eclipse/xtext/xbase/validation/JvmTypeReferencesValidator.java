@@ -24,6 +24,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVoid;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeReferences;
@@ -63,6 +64,32 @@ public class JvmTypeReferencesValidator extends AbstractDeclarativeValidator {
 		for (int i=0;i<arguments.size();i++) {
 			JvmTypeReference jvmTypeReference = arguments.get(i);
 			checkNotPrimitive(jvmTypeReference);
+		}
+	}
+	
+	@Check
+	public void checkNotMultipleBounds(JvmWildcardTypeReference typeRef) {
+		List<JvmTypeConstraint> constraints = typeRef.getConstraints();
+		if (constraints.size() >= 2) {
+			int upperBounds = 0;
+			int lowerBounds = 0;
+			for(int i = 0; i < constraints.size(); i++) {
+				JvmTypeConstraint constraint = constraints.get(i);
+				if (constraint.eClass() == TypesPackage.Literals.JVM_UPPER_BOUND) {
+					upperBounds++;
+					if (upperBounds > 1) {
+						error("Invalid type constraint. Cannot use multiple upper bounds in wildcards.", 
+								typeRef, TypesPackage.Literals.JVM_CONSTRAINT_OWNER__CONSTRAINTS, i, IssueCodes.INVALID_WILDCARD_CONSTRAINTS);
+						return;
+					}
+				} else {
+					lowerBounds++;
+					if (lowerBounds > 1) {
+						error("Invalid type constraint. Cannot use multiple lower bounds in wildcards.", 
+								typeRef, TypesPackage.Literals.JVM_CONSTRAINT_OWNER__CONSTRAINTS, i, IssueCodes.INVALID_WILDCARD_CONSTRAINTS);
+					}
+				}
+			}
 		}
 	}
 	

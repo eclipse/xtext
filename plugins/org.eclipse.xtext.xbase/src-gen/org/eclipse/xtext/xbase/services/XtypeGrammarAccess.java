@@ -230,16 +230,24 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Action cJvmWildcardTypeReferenceAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cQuestionMarkKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
-		private final Assignment cConstraintsAssignment_2_0 = (Assignment)cAlternatives_2.eContents().get(0);
-		private final RuleCall cConstraintsJvmUpperBoundParserRuleCall_2_0_0 = (RuleCall)cConstraintsAssignment_2_0.eContents().get(0);
-		private final Assignment cConstraintsAssignment_2_1 = (Assignment)cAlternatives_2.eContents().get(1);
-		private final RuleCall cConstraintsJvmLowerBoundParserRuleCall_2_1_0 = (RuleCall)cConstraintsAssignment_2_1.eContents().get(0);
+		private final Group cGroup_2_0 = (Group)cAlternatives_2.eContents().get(0);
+		private final Assignment cConstraintsAssignment_2_0_0 = (Assignment)cGroup_2_0.eContents().get(0);
+		private final RuleCall cConstraintsJvmUpperBoundParserRuleCall_2_0_0_0 = (RuleCall)cConstraintsAssignment_2_0_0.eContents().get(0);
+		private final Assignment cConstraintsAssignment_2_0_1 = (Assignment)cGroup_2_0.eContents().get(1);
+		private final RuleCall cConstraintsJvmUpperBoundAndedParserRuleCall_2_0_1_0 = (RuleCall)cConstraintsAssignment_2_0_1.eContents().get(0);
+		private final Group cGroup_2_1 = (Group)cAlternatives_2.eContents().get(1);
+		private final Assignment cConstraintsAssignment_2_1_0 = (Assignment)cGroup_2_1.eContents().get(0);
+		private final RuleCall cConstraintsJvmLowerBoundParserRuleCall_2_1_0_0 = (RuleCall)cConstraintsAssignment_2_1_0.eContents().get(0);
+		private final Assignment cConstraintsAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
+		private final RuleCall cConstraintsJvmLowerBoundAndedParserRuleCall_2_1_1_0 = (RuleCall)cConstraintsAssignment_2_1_1.eContents().get(0);
 		
 		//JvmWildcardTypeReference:
-		//	{JvmWildcardTypeReference} "?" (constraints+=JvmUpperBound | constraints+=JvmLowerBound)?;
+		//	{JvmWildcardTypeReference} "?" (constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded* |
+		//	constraints+=JvmLowerBound constraints+=JvmLowerBoundAnded*)?;
 		public ParserRule getRule() { return rule; }
 
-		//{JvmWildcardTypeReference} "?" (constraints+=JvmUpperBound | constraints+=JvmLowerBound)?
+		//{JvmWildcardTypeReference} "?" (constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded* | constraints+=JvmLowerBound
+		//constraints+=JvmLowerBoundAnded*)?
 		public Group getGroup() { return cGroup; }
 
 		//{JvmWildcardTypeReference}
@@ -248,20 +256,39 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		//"?"
 		public Keyword getQuestionMarkKeyword_1() { return cQuestionMarkKeyword_1; }
 
-		//(constraints+=JvmUpperBound | constraints+=JvmLowerBound)?
+		//(constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded* | constraints+=JvmLowerBound
+		//constraints+=JvmLowerBoundAnded*)?
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
+		//constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*
+		public Group getGroup_2_0() { return cGroup_2_0; }
+
 		//constraints+=JvmUpperBound
-		public Assignment getConstraintsAssignment_2_0() { return cConstraintsAssignment_2_0; }
+		public Assignment getConstraintsAssignment_2_0_0() { return cConstraintsAssignment_2_0_0; }
 
 		//JvmUpperBound
-		public RuleCall getConstraintsJvmUpperBoundParserRuleCall_2_0_0() { return cConstraintsJvmUpperBoundParserRuleCall_2_0_0; }
+		public RuleCall getConstraintsJvmUpperBoundParserRuleCall_2_0_0_0() { return cConstraintsJvmUpperBoundParserRuleCall_2_0_0_0; }
+
+		//constraints+=JvmUpperBoundAnded*
+		public Assignment getConstraintsAssignment_2_0_1() { return cConstraintsAssignment_2_0_1; }
+
+		//JvmUpperBoundAnded
+		public RuleCall getConstraintsJvmUpperBoundAndedParserRuleCall_2_0_1_0() { return cConstraintsJvmUpperBoundAndedParserRuleCall_2_0_1_0; }
+
+		//constraints+=JvmLowerBound constraints+=JvmLowerBoundAnded*
+		public Group getGroup_2_1() { return cGroup_2_1; }
 
 		//constraints+=JvmLowerBound
-		public Assignment getConstraintsAssignment_2_1() { return cConstraintsAssignment_2_1; }
+		public Assignment getConstraintsAssignment_2_1_0() { return cConstraintsAssignment_2_1_0; }
 
 		//JvmLowerBound
-		public RuleCall getConstraintsJvmLowerBoundParserRuleCall_2_1_0() { return cConstraintsJvmLowerBoundParserRuleCall_2_1_0; }
+		public RuleCall getConstraintsJvmLowerBoundParserRuleCall_2_1_0_0() { return cConstraintsJvmLowerBoundParserRuleCall_2_1_0_0; }
+
+		//constraints+=JvmLowerBoundAnded*
+		public Assignment getConstraintsAssignment_2_1_1() { return cConstraintsAssignment_2_1_1; }
+
+		//JvmLowerBoundAnded
+		public RuleCall getConstraintsJvmLowerBoundAndedParserRuleCall_2_1_1_0() { return cConstraintsJvmLowerBoundAndedParserRuleCall_2_1_1_0; }
 	}
 
 	public class JvmUpperBoundElements extends AbstractParserRuleElementFinder {
@@ -328,6 +355,30 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 
 		//"super"
 		public Keyword getSuperKeyword_0() { return cSuperKeyword_0; }
+
+		//typeReference=JvmTypeReference
+		public Assignment getTypeReferenceAssignment_1() { return cTypeReferenceAssignment_1; }
+
+		//JvmTypeReference
+		public RuleCall getTypeReferenceJvmTypeReferenceParserRuleCall_1_0() { return cTypeReferenceJvmTypeReferenceParserRuleCall_1_0; }
+	}
+
+	public class JvmLowerBoundAndedElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "JvmLowerBoundAnded");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cAmpersandKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cTypeReferenceAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cTypeReferenceJvmTypeReferenceParserRuleCall_1_0 = (RuleCall)cTypeReferenceAssignment_1.eContents().get(0);
+		
+		//JvmLowerBoundAnded returns JvmLowerBound:
+		//	"&" typeReference=JvmTypeReference;
+		public ParserRule getRule() { return rule; }
+
+		//"&" typeReference=JvmTypeReference
+		public Group getGroup() { return cGroup; }
+
+		//"&"
+		public Keyword getAmpersandKeyword_0() { return cAmpersandKeyword_0; }
 
 		//typeReference=JvmTypeReference
 		public Assignment getTypeReferenceAssignment_1() { return cTypeReferenceAssignment_1; }
@@ -588,6 +639,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	private JvmUpperBoundElements pJvmUpperBound;
 	private JvmUpperBoundAndedElements pJvmUpperBoundAnded;
 	private JvmLowerBoundElements pJvmLowerBound;
+	private JvmLowerBoundAndedElements pJvmLowerBoundAnded;
 	private JvmTypeParameterElements pJvmTypeParameter;
 	private QualifiedNameElements pQualifiedName;
 	private QualifiedNameWithWildcardElements pQualifiedNameWithWildcard;
@@ -685,7 +737,8 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//JvmWildcardTypeReference:
-	//	{JvmWildcardTypeReference} "?" (constraints+=JvmUpperBound | constraints+=JvmLowerBound)?;
+	//	{JvmWildcardTypeReference} "?" (constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded* |
+	//	constraints+=JvmLowerBound constraints+=JvmLowerBoundAnded*)?;
 	public JvmWildcardTypeReferenceElements getJvmWildcardTypeReferenceAccess() {
 		return (pJvmWildcardTypeReference != null) ? pJvmWildcardTypeReference : (pJvmWildcardTypeReference = new JvmWildcardTypeReferenceElements());
 	}
@@ -722,6 +775,16 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getJvmLowerBoundRule() {
 		return getJvmLowerBoundAccess().getRule();
+	}
+
+	//JvmLowerBoundAnded returns JvmLowerBound:
+	//	"&" typeReference=JvmTypeReference;
+	public JvmLowerBoundAndedElements getJvmLowerBoundAndedAccess() {
+		return (pJvmLowerBoundAnded != null) ? pJvmLowerBoundAnded : (pJvmLowerBoundAnded = new JvmLowerBoundAndedElements());
+	}
+	
+	public ParserRule getJvmLowerBoundAndedRule() {
+		return getJvmLowerBoundAndedAccess().getRule();
 	}
 
 	//JvmTypeParameter:

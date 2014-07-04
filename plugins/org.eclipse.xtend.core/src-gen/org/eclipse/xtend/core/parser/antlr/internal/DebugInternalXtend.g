@@ -1211,8 +1211,8 @@ ruleJvmArgumentTypeReference :
 // Rule JvmWildcardTypeReference
 ruleJvmWildcardTypeReference :
 	'?' (
-		ruleJvmUpperBound |
-		ruleJvmLowerBound
+		ruleJvmUpperBound ruleJvmUpperBoundAnded* |
+		ruleJvmLowerBound ruleJvmLowerBoundAnded*
 	)?
 ;
 
@@ -1229,6 +1229,11 @@ ruleJvmUpperBoundAnded :
 // Rule JvmLowerBound
 ruleJvmLowerBound :
 	'super' ruleJvmTypeReference
+;
+
+// Rule JvmLowerBoundAnded
+ruleJvmLowerBoundAnded :
+	'&' ruleJvmTypeReference
 ;
 
 // Rule JvmTypeParameter

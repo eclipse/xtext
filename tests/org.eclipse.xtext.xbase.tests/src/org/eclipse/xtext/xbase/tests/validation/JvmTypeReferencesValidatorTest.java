@@ -112,4 +112,18 @@ public class JvmTypeReferencesValidatorTest extends AbstractXbaseTestCase {
 		XExpression expression = expression("{ val int<String, Iterable<? extends Number & CharSequence>, (int, Iterable<DoesNotExist>)=>int> x = null }");
 		helper.assertNoErrors(expression, IssueCodes.TYPE_ARGUMENT_ON_NON_GENERIC_TYPE);
 	}
+	
+	@Test 
+	public void testInvalidWildcard_1() throws Exception {
+		XExpression expression = expression("null as Iterable<? extends String & Number>");
+		helper.assertError(expression, TypesPackage.Literals.JVM_WILDCARD_TYPE_REFERENCE, IssueCodes.INVALID_WILDCARD_CONSTRAINTS, 
+				"Invalid type constraint. Cannot use multiple upper bounds in wildcards.");
+	}
+	
+	@Test 
+	public void testInvalidWildcard_2() throws Exception {
+		XExpression expression = expression("null as Iterable<? super String & Number>");
+		helper.assertError(expression, TypesPackage.Literals.JVM_WILDCARD_TYPE_REFERENCE, IssueCodes.INVALID_WILDCARD_CONSTRAINTS, 
+				"Invalid type constraint. Cannot use multiple lower bounds in wildcards.");
+	}
 }
