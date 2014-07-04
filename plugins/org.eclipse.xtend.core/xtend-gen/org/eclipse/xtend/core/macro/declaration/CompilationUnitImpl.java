@@ -1237,6 +1237,15 @@ public class CompilationUnitImpl implements CompilationUnit {
     return this.<JvmAnnotationReference, JvmAnnotationReferenceImpl>getOrCreate(delegate, _function);
   }
   
+  public Object translateAnnotationValue(final XExpression expression, final JvmTypeReference expectedType, final boolean isArray) {
+    Object _xblockexpression = null;
+    {
+      final Object value = this.evaluate(expression, expectedType);
+      _xblockexpression = this.translateAnnotationValue(value, expectedType, isArray);
+    }
+    return _xblockexpression;
+  }
+  
   public Object translateAnnotationValue(final JvmAnnotationValue value, final boolean isArray) {
     Pair<List<?>, Class<?>> _switchResult = null;
     boolean _matched = false;
@@ -1252,99 +1261,10 @@ public class CompilationUnitImpl implements CompilationUnit {
         }
         if (_and) {
           _matched=true;
-          Pair<List<?>, Class<?>> _xblockexpression = null;
-          {
-            JvmTypeReference _findExpectedType = this.findExpectedType(value);
-            JvmType _type = _findExpectedType.getType();
-            final JvmArrayType expectedType = ((JvmArrayType) _type);
-            final JvmComponentType componentType = expectedType.getComponentType();
-            final String componentTypeName = componentType.getIdentifier();
-            List<Object> _emptyList = CollectionLiterals.<Object>emptyList();
-            Class<?> _switchResult_1 = null;
-            boolean _matched_1 = false;
-            if (!_matched_1) {
-              if (Objects.equal(componentTypeName, "java.lang.Class")) {
-                _matched_1=true;
-                _switchResult_1 = TypeReference.class;
-              }
-            }
-            if (!_matched_1) {
-              if (Objects.equal(componentTypeName, "java.lang.String")) {
-                _matched_1=true;
-                _switchResult_1 = String.class;
-              }
-            }
-            if (!_matched_1) {
-              if (Objects.equal(componentTypeName, "boolean")) {
-                _matched_1=true;
-                _switchResult_1 = boolean.class;
-              }
-            }
-            if (!_matched_1) {
-              if (Objects.equal(componentTypeName, "int")) {
-                _matched_1=true;
-                _switchResult_1 = int.class;
-              }
-            }
-            if (!_matched_1) {
-              if (Objects.equal(componentTypeName, "byte")) {
-                _matched_1=true;
-                _switchResult_1 = byte.class;
-              }
-            }
-            if (!_matched_1) {
-              if (Objects.equal(componentTypeName, "char")) {
-                _matched_1=true;
-                _switchResult_1 = char.class;
-              }
-            }
-            if (!_matched_1) {
-              if (Objects.equal(componentTypeName, "double")) {
-                _matched_1=true;
-                _switchResult_1 = double.class;
-              }
-            }
-            if (!_matched_1) {
-              if (Objects.equal(componentTypeName, "float")) {
-                _matched_1=true;
-                _switchResult_1 = float.class;
-              }
-            }
-            if (!_matched_1) {
-              if (Objects.equal(componentTypeName, "long")) {
-                _matched_1=true;
-                _switchResult_1 = long.class;
-              }
-            }
-            if (!_matched_1) {
-              if (Objects.equal(componentTypeName, "short")) {
-                _matched_1=true;
-                _switchResult_1 = short.class;
-              }
-            }
-            if (!_matched_1) {
-              Class<?> _switchResult_2 = null;
-              boolean _matched_2 = false;
-              if (!_matched_2) {
-                if (componentType instanceof JvmEnumerationType) {
-                  _matched_2=true;
-                  _switchResult_2 = EnumerationValueDeclaration.class;
-                }
-              }
-              if (!_matched_2) {
-                if (componentType instanceof JvmAnnotationType) {
-                  _matched_2=true;
-                  _switchResult_2 = AnnotationReference.class;
-                }
-              }
-              if (!_matched_2) {
-                _switchResult_2 = Object.class;
-              }
-              _switchResult_1 = _switchResult_2;
-            }
-            _xblockexpression = Pair.<List<?>, Class<?>>of(_emptyList, _switchResult_1);
-          }
-          _switchResult = _xblockexpression;
+          List<Object> _emptyList = CollectionLiterals.<Object>emptyList();
+          JvmTypeReference _findExpectedType = this.findExpectedType(value);
+          Class<?> _arrayComponentType = this.toArrayComponentType(_findExpectedType);
+          _switchResult = Pair.<List<?>, Class<?>>of(_emptyList, _arrayComponentType);
         }
       }
     }
@@ -1360,7 +1280,8 @@ public class CompilationUnitImpl implements CompilationUnit {
           }
         };
         Iterable<Object> _map = IterableExtensions.<XExpression, Object>map(_filter, _function);
-        return IterableExtensions.<Object>head(_map);
+        final Object result = IterableExtensions.<Object>head(_map);
+        return this.translateAnnotationValue(result, expectedType, isArray);
       }
     }
     if (!_matched) {
@@ -1478,6 +1399,125 @@ public class CompilationUnitImpl implements CompilationUnit {
       List<?> _key_1 = result.getKey();
       return IterableExtensions.head(_key_1);
     }
+  }
+  
+  protected Object translateAnnotationValue(final Object value, final JvmTypeReference expectedType, final boolean isArray) {
+    Object _xblockexpression = null;
+    {
+      boolean _equals = Objects.equal(value, null);
+      if (_equals) {
+        return null;
+      }
+      boolean _or = false;
+      if ((!isArray)) {
+        _or = true;
+      } else {
+        Class<?> _class = value.getClass();
+        boolean _isArray = _class.isArray();
+        _or = _isArray;
+      }
+      if (_or) {
+        return value;
+      }
+      ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList(value);
+      Class<?> _arrayComponentType = this.toArrayComponentType(expectedType);
+      _xblockexpression = this.toArrayOfType(_newArrayList, _arrayComponentType);
+    }
+    return _xblockexpression;
+  }
+  
+  protected Class<?> toArrayComponentType(final JvmTypeReference valueExpectedType) {
+    Class<?> _xblockexpression = null;
+    {
+      JvmType _type = valueExpectedType.getType();
+      final JvmArrayType expectedType = ((JvmArrayType) _type);
+      final JvmComponentType componentType = expectedType.getComponentType();
+      final String componentTypeName = componentType.getIdentifier();
+      Class<?> _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (Objects.equal(componentTypeName, "java.lang.Class")) {
+          _matched=true;
+          _switchResult = TypeReference.class;
+        }
+      }
+      if (!_matched) {
+        if (Objects.equal(componentTypeName, "java.lang.String")) {
+          _matched=true;
+          _switchResult = String.class;
+        }
+      }
+      if (!_matched) {
+        if (Objects.equal(componentTypeName, "boolean")) {
+          _matched=true;
+          _switchResult = boolean.class;
+        }
+      }
+      if (!_matched) {
+        if (Objects.equal(componentTypeName, "int")) {
+          _matched=true;
+          _switchResult = int.class;
+        }
+      }
+      if (!_matched) {
+        if (Objects.equal(componentTypeName, "byte")) {
+          _matched=true;
+          _switchResult = byte.class;
+        }
+      }
+      if (!_matched) {
+        if (Objects.equal(componentTypeName, "char")) {
+          _matched=true;
+          _switchResult = char.class;
+        }
+      }
+      if (!_matched) {
+        if (Objects.equal(componentTypeName, "double")) {
+          _matched=true;
+          _switchResult = double.class;
+        }
+      }
+      if (!_matched) {
+        if (Objects.equal(componentTypeName, "float")) {
+          _matched=true;
+          _switchResult = float.class;
+        }
+      }
+      if (!_matched) {
+        if (Objects.equal(componentTypeName, "long")) {
+          _matched=true;
+          _switchResult = long.class;
+        }
+      }
+      if (!_matched) {
+        if (Objects.equal(componentTypeName, "short")) {
+          _matched=true;
+          _switchResult = short.class;
+        }
+      }
+      if (!_matched) {
+        Class<?> _switchResult_1 = null;
+        boolean _matched_1 = false;
+        if (!_matched_1) {
+          if (componentType instanceof JvmEnumerationType) {
+            _matched_1=true;
+            _switchResult_1 = EnumerationValueDeclaration.class;
+          }
+        }
+        if (!_matched_1) {
+          if (componentType instanceof JvmAnnotationType) {
+            _matched_1=true;
+            _switchResult_1 = AnnotationReference.class;
+          }
+        }
+        if (!_matched_1) {
+          _switchResult_1 = Object.class;
+        }
+        _switchResult = _switchResult_1;
+      }
+      _xblockexpression = _switchResult;
+    }
+    return _xblockexpression;
   }
   
   protected JvmTypeReference findExpectedType(final JvmAnnotationValue value) {

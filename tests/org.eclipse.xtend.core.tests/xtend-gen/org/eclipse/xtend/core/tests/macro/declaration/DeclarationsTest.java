@@ -88,8 +88,9 @@ public class DeclarationsTest extends AbstractXtendTestCase {
         final AnnotationTypeDeclaration supressWarningsDeclaration = suppressWarning.getAnnotationTypeDeclaration();
         String _qualifiedName_1 = supressWarningsDeclaration.getQualifiedName();
         Assert.assertEquals("java.lang.SuppressWarnings", _qualifiedName_1);
-        String _stringValue = suppressWarning.getStringValue("value");
-        Assert.assertEquals("unused", _stringValue);
+        String[] _stringArrayValue = suppressWarning.getStringArrayValue("value");
+        Object _get = _stringArrayValue[0];
+        Assert.assertEquals("unused", _get);
         Iterable<? extends AnnotationReference> _annotations_1 = supressWarningsDeclaration.getAnnotations();
         int _size = IterableExtensions.size(_annotations_1);
         Assert.assertEquals(2, _size);

@@ -72,10 +72,11 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	}
 	
 	override getBooleanValue(String name) {
-		switch value : getValue(name) {
-			Boolean: value
-			default: false
+		val value = getValue(name)
+		if (value == null) {
+			return false 
 		}
+		value as Boolean
 	}
 	
 	override getByteArrayValue(String name) {
@@ -83,10 +84,11 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	}
 	
 	override getByteValue(String name) {
-		switch value : getValue(name) {
-			Byte: value
-			default: 0 as byte
+		val value = getValue(name)
+		if (value == null) {
+			return 0 as byte
 		}
+		value as Byte
 	}
 	
 	override getCharArrayValue(String name) {
@@ -94,10 +96,13 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	}
 	
 	override getCharValue(String name) {
-		switch value : getValue(name) {
+		val value = getValue(name)
+		if (value == null) {
+			return 0 as char
+		}
+		switch value {
 			Byte: value as char
-			Character: value
-			default: 0 as char
+			default: value as Character
 		}
 	}
 	
@@ -114,15 +119,18 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	}
 	
 	override getDoubleValue(String name) {
-		switch value : getValue(name) {
+		val value = getValue(name)
+		if (value == null) {
+			return 0
+		}
+		switch value {
 			Character: value as double
 			Byte: value as double
 			Short: value as double
 			Integer: value as double
 			Long: value as double
 			Float: value as double
-			Double: value
-			default: 0 
+			default: value as Double
 		}
 	}
 	
@@ -139,14 +147,17 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	}
 	
 	override getFloatValue(String name) {
-		switch value : getValue(name) {
+		val value = getValue(name)
+		if (value == null) {
+			return 0
+		}
+		switch value {
 			Character: value as float
 			Byte: value as float
 			Short: value as float
 			Integer: value as float
 			Long: value as float
-			Float: value
-			default: 0 
+			default: value as Float 
 		} 
 	}
 	
@@ -155,12 +166,15 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	}
 	
 	override getIntValue(String name) {
-		switch value : getValue(name) {
+		val value = getValue(name)
+		if (value == null) {
+			return 0
+		}
+		switch value {
 			Character: value as int
 			Byte: value as int
 			Short: value as int
-			Integer: value
-			default: 0 
+			default: value as Integer 
 		}
 	}
 	
@@ -169,13 +183,16 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	}
 	
 	override getLongValue(String name) {
-		switch value : getValue(name) {
+		val value = getValue(name)
+		if (value == null) {
+			return 0
+		}
+		switch value {
 			Character: value as long
 			Byte: value as long
 			Short: value as long
 			Integer: value as long
-			Long: value
-			default: 0 
+			default: value as Long
 		}
 	}
 	
@@ -184,10 +201,13 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	}
 	
 	override getShortValue(String name) {
-		switch value : getValue(name) {
+		val value = getValue(name)
+		if (value == null) {
+			return 0 as short
+		}
+		switch value {
 			Byte: value as short
-			Short: value
-			default: 0 as short
+			default: value as Short
 		}
 	}
 	
