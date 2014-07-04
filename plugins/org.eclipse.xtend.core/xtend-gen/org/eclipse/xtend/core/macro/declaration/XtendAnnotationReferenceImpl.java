@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -25,9 +26,11 @@ import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
@@ -97,90 +100,79 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
   }
   
   public Expression getExpression(final String property) {
-    boolean _and = false;
-    boolean _equals = Objects.equal(property, "value");
-    if (!_equals) {
-      _and = false;
-    } else {
-      XAnnotation _delegate = this.getDelegate();
-      XExpression _value = _delegate.getValue();
-      boolean _notEquals = (!Objects.equal(_value, null));
-      _and = _notEquals;
-    }
-    if (_and) {
+    final XExpression value = this.findValue(property);
+    boolean _notEquals = (!Objects.equal(value, null));
+    if (_notEquals) {
       CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-      XAnnotation _delegate_1 = this.getDelegate();
-      XExpression _value_1 = _delegate_1.getValue();
-      return _compilationUnit.toExpression(_value_1);
-    }
-    XAnnotation _delegate_2 = this.getDelegate();
-    EList<XAnnotationElementValuePair> _elementValuePairs = _delegate_2.getElementValuePairs();
-    final Function1<XAnnotationElementValuePair, Boolean> _function = new Function1<XAnnotationElementValuePair, Boolean>() {
-      public Boolean apply(final XAnnotationElementValuePair it) {
-        JvmOperation _element = it.getElement();
-        String _simpleName = _element.getSimpleName();
-        return Boolean.valueOf(Objects.equal(_simpleName, property));
-      }
-    };
-    XAnnotationElementValuePair _findFirst = IterableExtensions.<XAnnotationElementValuePair>findFirst(_elementValuePairs, _function);
-    XExpression _value_2 = null;
-    if (_findFirst!=null) {
-      _value_2=_findFirst.getValue();
-    }
-    final XExpression expression = _value_2;
-    boolean _notEquals_1 = (!Objects.equal(expression, null));
-    if (_notEquals_1) {
-      CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
-      return _compilationUnit_1.toExpression(expression);
+      return _compilationUnit.toExpression(value);
     }
     return null;
   }
   
   public Object getValue(final String property) {
-    boolean _and = false;
-    boolean _equals = Objects.equal(property, "value");
-    if (!_equals) {
-      _and = false;
-    } else {
-      XAnnotation _delegate = this.getDelegate();
-      XExpression _value = _delegate.getValue();
-      boolean _notEquals = (!Objects.equal(_value, null));
-      _and = _notEquals;
-    }
-    if (_and) {
-      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-      XAnnotation _delegate_1 = this.getDelegate();
-      XExpression _value_1 = _delegate_1.getValue();
-      return _compilationUnit.evaluate(_value_1, null);
-    }
-    XAnnotation _delegate_2 = this.getDelegate();
-    EList<XAnnotationElementValuePair> _elementValuePairs = _delegate_2.getElementValuePairs();
-    final Function1<XAnnotationElementValuePair, Boolean> _function = new Function1<XAnnotationElementValuePair, Boolean>() {
-      public Boolean apply(final XAnnotationElementValuePair it) {
-        JvmOperation _element = it.getElement();
-        String _simpleName = _element.getSimpleName();
-        return Boolean.valueOf(Objects.equal(_simpleName, property));
-      }
-    };
-    final XAnnotationElementValuePair annoValue = IterableExtensions.<XAnnotationElementValuePair>findFirst(_elementValuePairs, _function);
-    XExpression _value_2 = null;
-    if (annoValue!=null) {
-      _value_2=annoValue.getValue();
-    }
-    final XExpression expression = _value_2;
-    boolean _notEquals_1 = (!Objects.equal(expression, null));
-    if (_notEquals_1) {
-      CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
-      JvmOperation _element = annoValue.getElement();
-      JvmTypeReference _returnType = null;
-      if (_element!=null) {
-        _returnType=_element.getReturnType();
-      }
-      return _compilationUnit_1.evaluate(expression, _returnType);
+    final XExpression value = this.findValue(property);
+    boolean _notEquals = (!Objects.equal(value, null));
+    if (_notEquals) {
+      return this.translateAnnotationValue(value, property);
     }
     AnnotationTypeDeclaration _annotationTypeDeclaration = this.getAnnotationTypeDeclaration();
     AnnotationTypeElementDeclaration _findDeclaredAnnotationTypeElement = _annotationTypeDeclaration.findDeclaredAnnotationTypeElement(property);
     return _findDeclaredAnnotationTypeElement.getDefaultValue();
+  }
+  
+  protected XExpression findValue(final String property) {
+    XExpression _xblockexpression = null;
+    {
+      boolean _equals = Objects.equal(property, "value");
+      if (_equals) {
+        XAnnotation _delegate = this.getDelegate();
+        return _delegate.getValue();
+      }
+      XAnnotation _delegate_1 = this.getDelegate();
+      EList<XAnnotationElementValuePair> _elementValuePairs = _delegate_1.getElementValuePairs();
+      final Function1<XAnnotationElementValuePair, Boolean> _function = new Function1<XAnnotationElementValuePair, Boolean>() {
+        public Boolean apply(final XAnnotationElementValuePair it) {
+          JvmOperation _element = it.getElement();
+          String _simpleName = _element.getSimpleName();
+          return Boolean.valueOf(Objects.equal(_simpleName, property));
+        }
+      };
+      XAnnotationElementValuePair _findFirst = IterableExtensions.<XAnnotationElementValuePair>findFirst(_elementValuePairs, _function);
+      XExpression _value = null;
+      if (_findFirst!=null) {
+        _value=_findFirst.getValue();
+      }
+      _xblockexpression = _value;
+    }
+    return _xblockexpression;
+  }
+  
+  protected Object translateAnnotationValue(final XExpression value, final String property) {
+    XAnnotation _delegate = this.getDelegate();
+    final JvmType annotationType = _delegate.getAnnotationType();
+    if ((annotationType instanceof JvmAnnotationType)) {
+      EList<JvmMember> _members = ((JvmAnnotationType)annotationType).getMembers();
+      Iterable<JvmOperation> _filter = Iterables.<JvmOperation>filter(_members, JvmOperation.class);
+      final Function1<JvmOperation, Boolean> _function = new Function1<JvmOperation, Boolean>() {
+        public Boolean apply(final JvmOperation it) {
+          String _simpleName = it.getSimpleName();
+          return Boolean.valueOf(Objects.equal(_simpleName, property));
+        }
+      };
+      final JvmOperation operation = IterableExtensions.<JvmOperation>findFirst(_filter, _function);
+      boolean _notEquals = (!Objects.equal(operation, null));
+      if (_notEquals) {
+        CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+        TypeReferences _typeReferences = _compilationUnit.getTypeReferences();
+        JvmTypeReference _returnType = operation.getReturnType();
+        final boolean array = _typeReferences.isArray(_returnType);
+        CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
+        JvmTypeReference _returnType_1 = operation.getReturnType();
+        return _compilationUnit_1.translateAnnotationValue(value, _returnType_1, array);
+      }
+    }
+    CompilationUnitImpl _compilationUnit_2 = this.getCompilationUnit();
+    return _compilationUnit_2.translateAnnotationValue(value, null, false);
   }
   
   public AnnotationReference getAnnotationValue(final String name) {
@@ -199,8 +191,16 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
   }
   
   public boolean getBooleanValue(final String name) {
-    Object _value = this.getValue(name);
-    return (((Boolean) _value)).booleanValue();
+    Boolean _xblockexpression = null;
+    {
+      final Object value = this.getValue(name);
+      boolean _equals = Objects.equal(value, null);
+      if (_equals) {
+        return false;
+      }
+      _xblockexpression = ((Boolean) value);
+    }
+    return (_xblockexpression).booleanValue();
   }
   
   public byte[] getByteArrayValue(final String name) {
@@ -209,8 +209,16 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
   }
   
   public byte getByteValue(final String name) {
-    Object _value = this.getValue(name);
-    return (((Byte) _value)).byteValue();
+    Byte _xblockexpression = null;
+    {
+      final Object value = this.getValue(name);
+      boolean _equals = Objects.equal(value, null);
+      if (_equals) {
+        return ((byte) 0);
+      }
+      _xblockexpression = ((Byte) value);
+    }
+    return (_xblockexpression).byteValue();
   }
   
   public char[] getCharArrayValue(final String name) {
@@ -219,8 +227,27 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
   }
   
   public char getCharValue(final String name) {
-    Object _value = this.getValue(name);
-    return (((Character) _value)).charValue();
+    Character _xblockexpression = null;
+    {
+      final Object value = this.getValue(name);
+      boolean _equals = Objects.equal(value, null);
+      if (_equals) {
+        return ((char) 0);
+      }
+      Character _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (value instanceof Byte) {
+          _matched=true;
+          _switchResult = Character.valueOf(((char) ((Byte) value).byteValue()));
+        }
+      }
+      if (!_matched) {
+        _switchResult = ((Character) value);
+      }
+      _xblockexpression = _switchResult;
+    }
+    return (_xblockexpression).charValue();
   }
   
   public TypeReference getClassValue(final String name) {
@@ -239,8 +266,57 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
   }
   
   public double getDoubleValue(final String name) {
-    Object _value = this.getValue(name);
-    return (((Double) _value)).doubleValue();
+    Double _xblockexpression = null;
+    {
+      final Object value = this.getValue(name);
+      boolean _equals = Objects.equal(value, null);
+      if (_equals) {
+        return 0;
+      }
+      Double _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (value instanceof Character) {
+          _matched=true;
+          _switchResult = Double.valueOf(((double) ((Character) value).charValue()));
+        }
+      }
+      if (!_matched) {
+        if (value instanceof Byte) {
+          _matched=true;
+          _switchResult = Double.valueOf(((double) ((Byte) value).byteValue()));
+        }
+      }
+      if (!_matched) {
+        if (value instanceof Short) {
+          _matched=true;
+          _switchResult = Double.valueOf(((double) ((Short) value).shortValue()));
+        }
+      }
+      if (!_matched) {
+        if (value instanceof Integer) {
+          _matched=true;
+          _switchResult = Double.valueOf(((double) ((Integer) value).intValue()));
+        }
+      }
+      if (!_matched) {
+        if (value instanceof Long) {
+          _matched=true;
+          _switchResult = Double.valueOf(((double) ((Long) value).longValue()));
+        }
+      }
+      if (!_matched) {
+        if (value instanceof Float) {
+          _matched=true;
+          _switchResult = Double.valueOf(((double) ((Float) value).floatValue()));
+        }
+      }
+      if (!_matched) {
+        _switchResult = ((Double) value);
+      }
+      _xblockexpression = _switchResult;
+    }
+    return (_xblockexpression).doubleValue();
   }
   
   public EnumerationValueDeclaration getEnumValue(final String name) {
@@ -259,8 +335,51 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
   }
   
   public float getFloatValue(final String name) {
-    Object _value = this.getValue(name);
-    return (((Float) _value)).floatValue();
+    Float _xblockexpression = null;
+    {
+      final Object value = this.getValue(name);
+      boolean _equals = Objects.equal(value, null);
+      if (_equals) {
+        return 0;
+      }
+      Float _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (value instanceof Character) {
+          _matched=true;
+          _switchResult = Float.valueOf(((float) ((Character) value).charValue()));
+        }
+      }
+      if (!_matched) {
+        if (value instanceof Byte) {
+          _matched=true;
+          _switchResult = Float.valueOf(((float) ((Byte) value).byteValue()));
+        }
+      }
+      if (!_matched) {
+        if (value instanceof Short) {
+          _matched=true;
+          _switchResult = Float.valueOf(((float) ((Short) value).shortValue()));
+        }
+      }
+      if (!_matched) {
+        if (value instanceof Integer) {
+          _matched=true;
+          _switchResult = Float.valueOf(((float) ((Integer) value).intValue()));
+        }
+      }
+      if (!_matched) {
+        if (value instanceof Long) {
+          _matched=true;
+          _switchResult = Float.valueOf(((float) ((Long) value).longValue()));
+        }
+      }
+      if (!_matched) {
+        _switchResult = ((Float) value);
+      }
+      _xblockexpression = _switchResult;
+    }
+    return (_xblockexpression).floatValue();
   }
   
   public int[] getIntArrayValue(final String name) {
@@ -269,8 +388,39 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
   }
   
   public int getIntValue(final String name) {
-    Object _value = this.getValue(name);
-    return (((Integer) _value)).intValue();
+    Integer _xblockexpression = null;
+    {
+      final Object value = this.getValue(name);
+      boolean _equals = Objects.equal(value, null);
+      if (_equals) {
+        return 0;
+      }
+      Integer _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (value instanceof Character) {
+          _matched=true;
+          _switchResult = Integer.valueOf(((int) ((Character) value).charValue()));
+        }
+      }
+      if (!_matched) {
+        if (value instanceof Byte) {
+          _matched=true;
+          _switchResult = Integer.valueOf(((int) ((Byte) value).byteValue()));
+        }
+      }
+      if (!_matched) {
+        if (value instanceof Short) {
+          _matched=true;
+          _switchResult = Integer.valueOf(((int) ((Short) value).shortValue()));
+        }
+      }
+      if (!_matched) {
+        _switchResult = ((Integer) value);
+      }
+      _xblockexpression = _switchResult;
+    }
+    return (_xblockexpression).intValue();
   }
   
   public long[] getLongArrayValue(final String name) {
@@ -279,8 +429,45 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
   }
   
   public long getLongValue(final String name) {
-    Object _value = this.getValue(name);
-    return (((Long) _value)).longValue();
+    Long _xblockexpression = null;
+    {
+      final Object value = this.getValue(name);
+      boolean _equals = Objects.equal(value, null);
+      if (_equals) {
+        return 0;
+      }
+      Long _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (value instanceof Character) {
+          _matched=true;
+          _switchResult = Long.valueOf(((long) ((Character) value).charValue()));
+        }
+      }
+      if (!_matched) {
+        if (value instanceof Byte) {
+          _matched=true;
+          _switchResult = Long.valueOf(((long) ((Byte) value).byteValue()));
+        }
+      }
+      if (!_matched) {
+        if (value instanceof Short) {
+          _matched=true;
+          _switchResult = Long.valueOf(((long) ((Short) value).shortValue()));
+        }
+      }
+      if (!_matched) {
+        if (value instanceof Integer) {
+          _matched=true;
+          _switchResult = Long.valueOf(((long) ((Integer) value).intValue()));
+        }
+      }
+      if (!_matched) {
+        _switchResult = ((Long) value);
+      }
+      _xblockexpression = _switchResult;
+    }
+    return (_xblockexpression).longValue();
   }
   
   public short[] getShortArrayValue(final String name) {
@@ -289,8 +476,27 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
   }
   
   public short getShortValue(final String name) {
-    Object _value = this.getValue(name);
-    return (((Short) _value)).shortValue();
+    Short _xblockexpression = null;
+    {
+      final Object value = this.getValue(name);
+      boolean _equals = Objects.equal(value, null);
+      if (_equals) {
+        return ((short) 0);
+      }
+      Short _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (value instanceof Byte) {
+          _matched=true;
+          _switchResult = Short.valueOf(((short) ((Byte) value).byteValue()));
+        }
+      }
+      if (!_matched) {
+        _switchResult = ((Short) value);
+      }
+      _xblockexpression = _switchResult;
+    }
+    return (_xblockexpression).shortValue();
   }
   
   public String[] getStringArrayValue(final String name) {

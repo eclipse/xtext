@@ -51,6 +51,8 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 
 import static org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage.Literals.*
 import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.xtext.common.types.JvmOperation
+import org.eclipse.xtext.xbase.XExpression
 
 abstract class XtendNamedElementImpl<T extends EObject> extends AbstractNamedElementImpl<T> {
 	
@@ -503,24 +505,38 @@ class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotation> impl
 	}
 	
 	override getExpression(String property) {
-		if (property == 'value' && delegate.value != null) {
-			return compilationUnit.toExpression(delegate.value)
+		val value = property.findValue
+		if (value != null) {
+			return compilationUnit.toExpression(value)
 		}
-		val expression = delegate.elementValuePairs.findFirst[element.simpleName == property]?.value
-		if (expression != null)
-			return compilationUnit.toExpression(expression)
 		return null
 	}
 	
 	override getValue(String property) {
-		if (property == 'value' && delegate.value != null) {
-			return compilationUnit.evaluate(delegate.value, null)
+		val value = property.findValue
+		if (value != null) {
+			return value.translateAnnotationValue(property)		
 		}
-		val annoValue = delegate.elementValuePairs.findFirst[element.simpleName == property]
-		val expression = annoValue?.value
-		if (expression != null)
-			return compilationUnit.evaluate(expression, annoValue.element?.returnType)
 		return annotationTypeDeclaration.findDeclaredAnnotationTypeElement(property).defaultValue
+	}
+	
+	protected def findValue(String property) {
+		if (property == 'value') {
+			return delegate.value
+		}
+		delegate.elementValuePairs.findFirst[element.simpleName == property]?.value
+	}
+	
+	protected def translateAnnotationValue(XExpression value, String property) {
+		val annotationType = delegate.annotationType
+		if (annotationType instanceof JvmAnnotationType) {
+			val operation = annotationType.members.filter(JvmOperation).findFirst[simpleName == property]
+			if (operation != null) {
+				val array = compilationUnit.typeReferences.isArray(operation.returnType)
+				return compilationUnit.translateAnnotationValue(value, operation.returnType, array)
+			}
+		}
+		return compilationUnit.translateAnnotationValue(value, null, false)
 	}
 	
 	override getAnnotationValue(String name) {
@@ -536,7 +552,11 @@ class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotation> impl
 	}
 	
 	override getBooleanValue(String name) {
-		getValue(name) as Boolean
+		val value = getValue(name)
+		if (value == null) {
+			return false 
+		}
+		value as Boolean
 	}
 	
 	override getByteArrayValue(String name) {
@@ -544,7 +564,11 @@ class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotation> impl
 	}
 	
 	override getByteValue(String name) {
-		getValue(name) as Byte
+		val value = getValue(name)
+		if (value == null) {
+			return 0 as byte
+		}
+		value as Byte
 	}
 	
 	override getCharArrayValue(String name) {
@@ -552,7 +576,14 @@ class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotation> impl
 	}
 	
 	override getCharValue(String name) {
-		getValue(name) as Character
+		val value = getValue(name)
+		if (value == null) {
+			return 0 as char
+		}
+		switch value {
+			Byte: value as char
+			default: value as Character
+		}
 	}
 	
 	override getClassValue(String name) {
@@ -568,7 +599,19 @@ class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotation> impl
 	}
 	
 	override getDoubleValue(String name) {
-		getValue(name) as Double
+		val value = getValue(name)
+		if (value == null) {
+			return 0
+		}
+		switch value {
+			Character: value as double
+			Byte: value as double
+			Short: value as double
+			Integer: value as double
+			Long: value as double
+			Float: value as double
+			default: value as Double
+		}
 	}
 	
 	override getEnumValue(String name) {
@@ -584,7 +627,18 @@ class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotation> impl
 	}
 	
 	override getFloatValue(String name) {
-		getValue(name) as Float
+		val value = getValue(name)
+		if (value == null) {
+			return 0
+		}
+		switch value {
+			Character: value as float
+			Byte: value as float
+			Short: value as float
+			Integer: value as float
+			Long: value as float
+			default: value as Float 
+		}
 	}
 	
 	override getIntArrayValue(String name) {
@@ -592,7 +646,16 @@ class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotation> impl
 	}
 	
 	override getIntValue(String name) {
-		getValue(name) as Integer
+		val value = getValue(name)
+		if (value == null) {
+			return 0
+		}
+		switch value {
+			Character: value as int
+			Byte: value as int
+			Short: value as int
+			default: value as Integer 
+		}
 	}
 	
 	override getLongArrayValue(String name) {
@@ -600,7 +663,17 @@ class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotation> impl
 	}
 	
 	override getLongValue(String name) {
-		getValue(name) as Long
+		val value = getValue(name)
+		if (value == null) {
+			return 0
+		}
+		switch value {
+			Character: value as long
+			Byte: value as long
+			Short: value as long
+			Integer: value as long
+			default: value as Long
+		}
 	}
 	
 	override getShortArrayValue(String name) {
@@ -608,7 +681,14 @@ class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotation> impl
 	}
 	
 	override getShortValue(String name) {
-		getValue(name) as Short
+		val value = getValue(name)
+		if (value == null) {
+			return 0 as short
+		}
+		switch value {
+			Byte: value as short
+			default: value as Short
+		}
 	}
 	
 	override getStringArrayValue(String name) {

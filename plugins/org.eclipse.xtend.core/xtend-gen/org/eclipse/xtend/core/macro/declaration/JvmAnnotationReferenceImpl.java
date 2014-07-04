@@ -182,20 +182,16 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   public boolean getBooleanValue(final String name) {
-    Boolean _switchResult = null;
-    Object _value = this.getValue(name);
-    final Object value = _value;
-    boolean _matched = false;
-    if (!_matched) {
-      if (value instanceof Boolean) {
-        _matched=true;
-        _switchResult = ((Boolean)value);
+    Boolean _xblockexpression = null;
+    {
+      final Object value = this.getValue(name);
+      boolean _equals = Objects.equal(value, null);
+      if (_equals) {
+        return false;
       }
+      _xblockexpression = ((Boolean) value);
     }
-    if (!_matched) {
-      _switchResult = Boolean.valueOf(false);
-    }
-    return (_switchResult).booleanValue();
+    return (_xblockexpression).booleanValue();
   }
   
   public byte[] getByteArrayValue(final String name) {
@@ -204,20 +200,16 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   public byte getByteValue(final String name) {
-    Byte _switchResult = null;
-    Object _value = this.getValue(name);
-    final Object value = _value;
-    boolean _matched = false;
-    if (!_matched) {
-      if (value instanceof Byte) {
-        _matched=true;
-        _switchResult = ((Byte)value);
+    Byte _xblockexpression = null;
+    {
+      final Object value = this.getValue(name);
+      boolean _equals = Objects.equal(value, null);
+      if (_equals) {
+        return ((byte) 0);
       }
+      _xblockexpression = ((Byte) value);
     }
-    if (!_matched) {
-      _switchResult = Byte.valueOf(((byte) 0));
-    }
-    return (_switchResult).byteValue();
+    return (_xblockexpression).byteValue();
   }
   
   public char[] getCharArrayValue(final String name) {
@@ -226,26 +218,27 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   public char getCharValue(final String name) {
-    Character _switchResult = null;
-    Object _value = this.getValue(name);
-    final Object value = _value;
-    boolean _matched = false;
-    if (!_matched) {
-      if (value instanceof Byte) {
-        _matched=true;
-        _switchResult = Character.valueOf(((char) ((Byte) value).byteValue()));
+    Character _xblockexpression = null;
+    {
+      final Object value = this.getValue(name);
+      boolean _equals = Objects.equal(value, null);
+      if (_equals) {
+        return ((char) 0);
       }
-    }
-    if (!_matched) {
-      if (value instanceof Character) {
-        _matched=true;
-        _switchResult = ((Character)value);
+      Character _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (value instanceof Byte) {
+          _matched=true;
+          _switchResult = Character.valueOf(((char) ((Byte) value).byteValue()));
+        }
       }
+      if (!_matched) {
+        _switchResult = ((Character) value);
+      }
+      _xblockexpression = _switchResult;
     }
-    if (!_matched) {
-      _switchResult = Character.valueOf(((char) 0));
-    }
-    return (_switchResult).charValue();
+    return (_xblockexpression).charValue();
   }
   
   public TypeReference getClassValue(final String name) {
@@ -264,56 +257,57 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   public double getDoubleValue(final String name) {
-    double _switchResult = (double) 0;
-    Object _value = this.getValue(name);
-    final Object value = _value;
-    boolean _matched = false;
-    if (!_matched) {
-      if (value instanceof Character) {
-        _matched=true;
-        _switchResult = ((double) ((Character) value).charValue());
+    Double _xblockexpression = null;
+    {
+      final Object value = this.getValue(name);
+      boolean _equals = Objects.equal(value, null);
+      if (_equals) {
+        return 0;
       }
-    }
-    if (!_matched) {
-      if (value instanceof Byte) {
-        _matched=true;
-        _switchResult = ((double) ((Byte) value).byteValue());
+      Double _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (value instanceof Character) {
+          _matched=true;
+          _switchResult = Double.valueOf(((double) ((Character) value).charValue()));
+        }
       }
-    }
-    if (!_matched) {
-      if (value instanceof Short) {
-        _matched=true;
-        _switchResult = ((double) ((Short) value).shortValue());
+      if (!_matched) {
+        if (value instanceof Byte) {
+          _matched=true;
+          _switchResult = Double.valueOf(((double) ((Byte) value).byteValue()));
+        }
       }
-    }
-    if (!_matched) {
-      if (value instanceof Integer) {
-        _matched=true;
-        _switchResult = ((double) ((Integer) value).intValue());
+      if (!_matched) {
+        if (value instanceof Short) {
+          _matched=true;
+          _switchResult = Double.valueOf(((double) ((Short) value).shortValue()));
+        }
       }
-    }
-    if (!_matched) {
-      if (value instanceof Long) {
-        _matched=true;
-        _switchResult = ((double) ((Long) value).longValue());
+      if (!_matched) {
+        if (value instanceof Integer) {
+          _matched=true;
+          _switchResult = Double.valueOf(((double) ((Integer) value).intValue()));
+        }
       }
-    }
-    if (!_matched) {
-      if (value instanceof Float) {
-        _matched=true;
-        _switchResult = ((double) ((Float) value).floatValue());
+      if (!_matched) {
+        if (value instanceof Long) {
+          _matched=true;
+          _switchResult = Double.valueOf(((double) ((Long) value).longValue()));
+        }
       }
-    }
-    if (!_matched) {
-      if (value instanceof Double) {
-        _matched=true;
-        _switchResult = ((Double) value).doubleValue();
+      if (!_matched) {
+        if (value instanceof Float) {
+          _matched=true;
+          _switchResult = Double.valueOf(((double) ((Float) value).floatValue()));
+        }
       }
+      if (!_matched) {
+        _switchResult = ((Double) value);
+      }
+      _xblockexpression = _switchResult;
     }
-    if (!_matched) {
-      _switchResult = 0;
-    }
-    return _switchResult;
+    return (_xblockexpression).doubleValue();
   }
   
   public EnumerationValueDeclaration getEnumValue(final String name) {
@@ -332,50 +326,51 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   public float getFloatValue(final String name) {
-    float _switchResult = (float) 0;
-    Object _value = this.getValue(name);
-    final Object value = _value;
-    boolean _matched = false;
-    if (!_matched) {
-      if (value instanceof Character) {
-        _matched=true;
-        _switchResult = ((float) ((Character) value).charValue());
+    Float _xblockexpression = null;
+    {
+      final Object value = this.getValue(name);
+      boolean _equals = Objects.equal(value, null);
+      if (_equals) {
+        return 0;
       }
-    }
-    if (!_matched) {
-      if (value instanceof Byte) {
-        _matched=true;
-        _switchResult = ((float) ((Byte) value).byteValue());
+      Float _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (value instanceof Character) {
+          _matched=true;
+          _switchResult = Float.valueOf(((float) ((Character) value).charValue()));
+        }
       }
-    }
-    if (!_matched) {
-      if (value instanceof Short) {
-        _matched=true;
-        _switchResult = ((float) ((Short) value).shortValue());
+      if (!_matched) {
+        if (value instanceof Byte) {
+          _matched=true;
+          _switchResult = Float.valueOf(((float) ((Byte) value).byteValue()));
+        }
       }
-    }
-    if (!_matched) {
-      if (value instanceof Integer) {
-        _matched=true;
-        _switchResult = ((float) ((Integer) value).intValue());
+      if (!_matched) {
+        if (value instanceof Short) {
+          _matched=true;
+          _switchResult = Float.valueOf(((float) ((Short) value).shortValue()));
+        }
       }
-    }
-    if (!_matched) {
-      if (value instanceof Long) {
-        _matched=true;
-        _switchResult = ((float) ((Long) value).longValue());
+      if (!_matched) {
+        if (value instanceof Integer) {
+          _matched=true;
+          _switchResult = Float.valueOf(((float) ((Integer) value).intValue()));
+        }
       }
-    }
-    if (!_matched) {
-      if (value instanceof Float) {
-        _matched=true;
-        _switchResult = ((Float) value).floatValue();
+      if (!_matched) {
+        if (value instanceof Long) {
+          _matched=true;
+          _switchResult = Float.valueOf(((float) ((Long) value).longValue()));
+        }
       }
+      if (!_matched) {
+        _switchResult = ((Float) value);
+      }
+      _xblockexpression = _switchResult;
     }
-    if (!_matched) {
-      _switchResult = 0;
-    }
-    return _switchResult;
+    return (_xblockexpression).floatValue();
   }
   
   public int[] getIntArrayValue(final String name) {
@@ -384,38 +379,39 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   public int getIntValue(final String name) {
-    Integer _switchResult = null;
-    Object _value = this.getValue(name);
-    final Object value = _value;
-    boolean _matched = false;
-    if (!_matched) {
-      if (value instanceof Character) {
-        _matched=true;
-        _switchResult = Integer.valueOf(((int) ((Character) value).charValue()));
+    Integer _xblockexpression = null;
+    {
+      final Object value = this.getValue(name);
+      boolean _equals = Objects.equal(value, null);
+      if (_equals) {
+        return 0;
       }
-    }
-    if (!_matched) {
-      if (value instanceof Byte) {
-        _matched=true;
-        _switchResult = Integer.valueOf(((int) ((Byte) value).byteValue()));
+      Integer _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (value instanceof Character) {
+          _matched=true;
+          _switchResult = Integer.valueOf(((int) ((Character) value).charValue()));
+        }
       }
-    }
-    if (!_matched) {
-      if (value instanceof Short) {
-        _matched=true;
-        _switchResult = Integer.valueOf(((int) ((Short) value).shortValue()));
+      if (!_matched) {
+        if (value instanceof Byte) {
+          _matched=true;
+          _switchResult = Integer.valueOf(((int) ((Byte) value).byteValue()));
+        }
       }
-    }
-    if (!_matched) {
-      if (value instanceof Integer) {
-        _matched=true;
-        _switchResult = ((Integer)value);
+      if (!_matched) {
+        if (value instanceof Short) {
+          _matched=true;
+          _switchResult = Integer.valueOf(((int) ((Short) value).shortValue()));
+        }
       }
+      if (!_matched) {
+        _switchResult = ((Integer) value);
+      }
+      _xblockexpression = _switchResult;
     }
-    if (!_matched) {
-      _switchResult = Integer.valueOf(0);
-    }
-    return (_switchResult).intValue();
+    return (_xblockexpression).intValue();
   }
   
   public long[] getLongArrayValue(final String name) {
@@ -424,44 +420,45 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   public long getLongValue(final String name) {
-    long _switchResult = (long) 0;
-    Object _value = this.getValue(name);
-    final Object value = _value;
-    boolean _matched = false;
-    if (!_matched) {
-      if (value instanceof Character) {
-        _matched=true;
-        _switchResult = ((long) ((Character) value).charValue());
+    Long _xblockexpression = null;
+    {
+      final Object value = this.getValue(name);
+      boolean _equals = Objects.equal(value, null);
+      if (_equals) {
+        return 0;
       }
-    }
-    if (!_matched) {
-      if (value instanceof Byte) {
-        _matched=true;
-        _switchResult = ((long) ((Byte) value).byteValue());
+      Long _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (value instanceof Character) {
+          _matched=true;
+          _switchResult = Long.valueOf(((long) ((Character) value).charValue()));
+        }
       }
-    }
-    if (!_matched) {
-      if (value instanceof Short) {
-        _matched=true;
-        _switchResult = ((long) ((Short) value).shortValue());
+      if (!_matched) {
+        if (value instanceof Byte) {
+          _matched=true;
+          _switchResult = Long.valueOf(((long) ((Byte) value).byteValue()));
+        }
       }
-    }
-    if (!_matched) {
-      if (value instanceof Integer) {
-        _matched=true;
-        _switchResult = ((long) ((Integer) value).intValue());
+      if (!_matched) {
+        if (value instanceof Short) {
+          _matched=true;
+          _switchResult = Long.valueOf(((long) ((Short) value).shortValue()));
+        }
       }
-    }
-    if (!_matched) {
-      if (value instanceof Long) {
-        _matched=true;
-        _switchResult = ((Long) value).longValue();
+      if (!_matched) {
+        if (value instanceof Integer) {
+          _matched=true;
+          _switchResult = Long.valueOf(((long) ((Integer) value).intValue()));
+        }
       }
+      if (!_matched) {
+        _switchResult = ((Long) value);
+      }
+      _xblockexpression = _switchResult;
     }
-    if (!_matched) {
-      _switchResult = 0;
-    }
-    return _switchResult;
+    return (_xblockexpression).longValue();
   }
   
   public short[] getShortArrayValue(final String name) {
@@ -470,26 +467,27 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   public short getShortValue(final String name) {
-    Short _switchResult = null;
-    Object _value = this.getValue(name);
-    final Object value = _value;
-    boolean _matched = false;
-    if (!_matched) {
-      if (value instanceof Byte) {
-        _matched=true;
-        _switchResult = Short.valueOf(((short) ((Byte) value).byteValue()));
+    Short _xblockexpression = null;
+    {
+      final Object value = this.getValue(name);
+      boolean _equals = Objects.equal(value, null);
+      if (_equals) {
+        return ((short) 0);
       }
-    }
-    if (!_matched) {
-      if (value instanceof Short) {
-        _matched=true;
-        _switchResult = ((Short)value);
+      Short _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (value instanceof Byte) {
+          _matched=true;
+          _switchResult = Short.valueOf(((short) ((Byte) value).byteValue()));
+        }
       }
+      if (!_matched) {
+        _switchResult = ((Short) value);
+      }
+      _xblockexpression = _switchResult;
     }
-    if (!_matched) {
-      _switchResult = Short.valueOf(((short) 0));
-    }
-    return (_switchResult).shortValue();
+    return (_xblockexpression).shortValue();
   }
   
   public String[] getStringArrayValue(final String name) {
