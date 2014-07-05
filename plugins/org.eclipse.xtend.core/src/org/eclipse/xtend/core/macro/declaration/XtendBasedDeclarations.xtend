@@ -521,7 +521,7 @@ class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotation> impl
 	}
 	
 	protected def findValue(String property) {
-		if (property == 'value') {
+		if (property == 'value' && delegate.value != null) {
 			return delegate.value
 		}
 		delegate.elementValuePairs.findFirst[element.simpleName == property]?.value
