@@ -1215,7 +1215,10 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.append("case \'myusercode.UserCode\',");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("case \'myusercode.UserCode2\': {");
+    _builder.append("case \'myusercode.UserCode2\',");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("case \'myusercode.UserCode4\': {");
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("val value = annotations.head.getBooleanArrayValue(\"value\")");
@@ -1257,7 +1260,10 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.append("}");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("case \'myusercode.UserCode3\': {");
+    _builder.append("case \'myusercode.UserCode3\',");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("case \'myusercode.UserCode5\': {");
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("val value = annotations.head.getBooleanArrayValue(\"value\")");
@@ -1344,6 +1350,20 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("class UserCode3 {}");
     _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@MyAnnotation(value=true)");
+    _builder_1.newLine();
+    _builder_1.append("class UserCode4 {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@MyAnnotation(value=#[true, false])");
+    _builder_1.newLine();
+    _builder_1.append("class UserCode5 {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
@@ -1414,7 +1434,10 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.append("case \'myusercode.UserCode\',");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("case \'myusercode.UserCode2\': {");
+    _builder.append("case \'myusercode.UserCode2\',");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("case \'myusercode.UserCode4\': {");
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("val value = annotations.head.getClassArrayValue(\"value\")");
@@ -1456,7 +1479,10 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.append("}");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("case \'myusercode.UserCode3\': {");
+    _builder.append("case \'myusercode.UserCode3\',");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("case \'myusercode.UserCode5\': {");
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("val value = annotations.head.getClassArrayValue(\"value\")");
@@ -1542,6 +1568,20 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.append("@MyAnnotation(String, Integer)");
     _builder_1.newLine();
     _builder_1.append("class UserCode3 {}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@MyAnnotation(value=String)");
+    _builder_1.newLine();
+    _builder_1.append("class UserCode4 {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@MyAnnotation(value=#[String, Integer])");
+    _builder_1.newLine();
+    _builder_1.append("class UserCode5 {");
+    _builder_1.newLine();
+    _builder_1.append("}");
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {

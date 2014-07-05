@@ -557,7 +557,8 @@ abstract class AbstractReusableActiveAnnotationTests {
 					def check(ClassDeclaration it) {
 						switch qualifiedName {
 							case 'myusercode.UserCode',
-							case 'myusercode.UserCode2': {
+							case 'myusercode.UserCode2',
+							case 'myusercode.UserCode4': {
 								val value = annotations.head.getBooleanArrayValue("value")
 								if (value.size != 1) {
 									throw new AssertionError("value.size != 1")
@@ -571,7 +572,8 @@ abstract class AbstractReusableActiveAnnotationTests {
 								} catch (Exception e) {
 								}
 							}
-							case 'myusercode.UserCode3': {
+							case 'myusercode.UserCode3',
+							case 'myusercode.UserCode5': {
 								val value = annotations.head.getBooleanArrayValue("value")
 								if (value.size != 2) {
 									throw new AssertionError("value.size != 2")
@@ -608,6 +610,14 @@ abstract class AbstractReusableActiveAnnotationTests {
 				
 				@MyAnnotation(true, false)
 				class UserCode3 {}
+				
+				@MyAnnotation(value=true)
+				class UserCode4 {
+				}
+				
+				@MyAnnotation(value=#[true, false])
+				class UserCode5 {
+				}
 			'''
 		) []
 	}
@@ -642,7 +652,8 @@ abstract class AbstractReusableActiveAnnotationTests {
 					def check(ClassDeclaration it) {
 						switch qualifiedName {
 							case 'myusercode.UserCode',
-							case 'myusercode.UserCode2': {
+							case 'myusercode.UserCode2',
+							case 'myusercode.UserCode4': {
 								val value = annotations.head.getClassArrayValue("value")
 								if (value.size != 1) {
 									throw new AssertionError("value.size != 1")
@@ -656,7 +667,8 @@ abstract class AbstractReusableActiveAnnotationTests {
 								} catch (Exception e) {
 								}
 							}
-							case 'myusercode.UserCode3': {
+							case 'myusercode.UserCode3',
+							case 'myusercode.UserCode5': {
 								val value = annotations.head.getClassArrayValue("value")
 								if (value.size != 2) {
 									throw new AssertionError("value.size != 2")
@@ -693,6 +705,14 @@ abstract class AbstractReusableActiveAnnotationTests {
 				
 				@MyAnnotation(String, Integer)
 				class UserCode3 {}
+				
+				@MyAnnotation(value=String)
+				class UserCode4 {
+				}
+				
+				@MyAnnotation(value=#[String, Integer])
+				class UserCode5 {
+				}
 			'''
 		) []
 	}
