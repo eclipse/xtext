@@ -3,7 +3,6 @@
 */
 package org.eclipse.xtend.ide.outline;
 
-import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Sets.*;
 import static java.util.Collections.*;
@@ -12,21 +11,19 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.ui.JavaElementImageDescriptor;
 import org.eclipse.xtend.core.jvmmodel.DispatchHelper;
 import org.eclipse.xtend.core.jvmmodel.XtendJvmModelInferrer;
-import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.labeling.XtendImages;
-import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
@@ -56,21 +53,35 @@ public class XtendOutlineSourceTreeProvider extends AbstractMultiModeOutlineTree
 		if (modelElement instanceof XtendFile) {
 			XtendFile xtendFile = (XtendFile) modelElement;
 			getOutlineNodeFactory().createPackageAndImporNodes(parentNode, xtendFile);
+			Set<JvmMember> processedFeatures = newHashSet();
 			for (XtendTypeDeclaration xtendType : xtendFile.getXtendTypes()) {
-				createNodeForType(parentNode, xtendType);
+				createNodeForType(parentNode, xtendType, processedFeatures);
 			}
 		}
 	}
 
-	private void createNodeForType(IOutlineNode parentNode, XtendTypeDeclaration xtendType) {
-		EObjectNode classNode = createNode(parentNode, xtendType);
-		createFeatureNodes(classNode, xtendType);
+	@Override
+	protected void internalCreateChildren(IOutlineNode parentNode, EObject modelElement) {
+		if (modelElement instanceof XtendTypeDeclaration) {
+			Set<JvmMember> processedFeatures = newHashSet();
+			final JvmDeclaredType inferredType = getAssociations().getInferredType((XtendTypeDeclaration) modelElement);
+			createFeatureNodes(parentNode, (XtendTypeDeclaration) modelElement, inferredType, processedFeatures);
+		} else {
+			super.internalCreateChildren(parentNode, modelElement);
+		}
 	}
 
-	private void createFeatureNodes(IOutlineNode parentNode, XtendTypeDeclaration xtendType) {
+	private void createNodeForType(IOutlineNode parentNode, XtendTypeDeclaration xtendType,
+			Set<JvmMember> processedFeatures) {
+		EObjectNode classNode = createXtendNode(parentNode, xtendType, 0);
 		final JvmDeclaredType inferredType = getAssociations().getInferredType(xtendType);
+		processedFeatures.add(inferredType);
+		createFeatureNodes(classNode, xtendType, inferredType, processedFeatures);
+	}
+
+	private void createFeatureNodes(IOutlineNode parentNode, XtendTypeDeclaration xtendType,
+			JvmDeclaredType inferredType, Set<JvmMember> processedFeatures) {
 		if (inferredType != null) {
-			Set<JvmFeature> processedFeatures = newHashSet();
 			createFeatureNodesForType(parentNode, xtendType, inferredType, inferredType, processedFeatures, 0);
 		} else {
 			for (XtendMember member : xtendType.getMembers())
@@ -79,36 +90,39 @@ public class XtendOutlineSourceTreeProvider extends AbstractMultiModeOutlineTree
 	}
 
 	private void createFeatureNodesForType(IOutlineNode parentNode, XtendTypeDeclaration xtendType,
-			JvmDeclaredType inferredType, final JvmDeclaredType baseType, Set<JvmFeature> processedFeatures,
+			JvmDeclaredType inferredType, final JvmDeclaredType baseType, Set<JvmMember> processedFeatures,
 			int inheritanceDepth) {
 		if (xtendType != null) {
-			for (XtendTypeDeclaration nestedType : filter(xtendType.getMembers(), XtendTypeDeclaration.class))
-				createNodeForType(parentNode, nestedType);
-		}
-		if (xtendType instanceof XtendClass) {
-			createDispatchOperationNodes(parentNode, inferredType, baseType, processedFeatures, inheritanceDepth);
-		}
-		for (JvmFeature feature : filter(inferredType.getMembers(), JvmFeature.class)) {
-			if (!processedFeatures.contains(feature)) {
-				EObject primarySourceElement = getAssociations().getPrimarySourceElement(feature);
-				if (feature instanceof JvmConstructor && feature.getDeclaringType().isLocal()) {
-					continue;
-				}
-				IOutlineNode featureNode = createNodeForFeature(parentNode, baseType, feature,
-						primarySourceElement != null ? primarySourceElement : feature, inheritanceDepth);
-				EList<JvmGenericType> localClasses = feature.getLocalClasses();
-				if (!localClasses.isEmpty()) {
-					for (JvmGenericType jvmGenericType : localClasses) {
-						Set<EObject> sourceElements = getAssociations().getSourceElements(jvmGenericType);
-						for (EObject eObject : sourceElements) {
-							if (eObject instanceof XtendTypeDeclaration)
-								createNodeForType(featureNode, (XtendTypeDeclaration) eObject);
+			for (XtendMember xtendMember : xtendType.getMembers()) {
+				EObject jvmElement = getAssociations().getPrimaryJvmElement(xtendMember);
+				if (jvmElement instanceof JvmMember && !processedFeatures.contains(jvmElement)) {
+					if (xtendMember instanceof XtendTypeDeclaration) {
+						if (!inferredType.equals(baseType)) {
+							Set<JvmMember> hideSuper = newHashSet(processedFeatures);
+							hideSuper.addAll(newHashSet(baseType.getAllFeatures()));
+							createNodeForType(parentNode, xtendMember, hideSuper, inheritanceDepth);
+						} else {
+							createNodeForType(parentNode, xtendMember, processedFeatures, inheritanceDepth);
+						}
+					} else if (jvmElement instanceof JvmFeature) {
+						JvmFeature jvmFeature = (JvmFeature) jvmElement;
+						if(skipFeature(jvmFeature)) {
+							continue;
+						}
+						if (isDispatchRelated(jvmFeature)) {
+							createDispatchOperationNodes(parentNode, inferredType, baseType, processedFeatures,
+									inheritanceDepth);
+						} else {
+							XtendEObjectNode featureNode = createNodeForFeature(parentNode, inferredType, jvmFeature,
+									xtendMember, inheritanceDepth);
+							handleLocalClasses(processedFeatures, jvmElement, jvmFeature, featureNode, inheritanceDepth);
 						}
 					}
+					addJvmFeature(processedFeatures, (JvmMember) jvmElement);
 				}
-				addJvmFeature(processedFeatures, feature);
 			}
 		}
+
 		if (isShowInherited()) {
 			if (inferredType instanceof JvmGenericType) {
 				JvmTypeReference extendedClass = ((JvmGenericType) inferredType).getExtendedClass();
@@ -123,8 +137,29 @@ public class XtendOutlineSourceTreeProvider extends AbstractMultiModeOutlineTree
 		}
 	}
 
+	private void handleLocalClasses(Set<JvmMember> processedFeatures, EObject jvmElement, JvmFeature jvmFeature,
+			XtendEObjectNode featureNode, int inheritanceDepth) {
+		if (!jvmFeature.getLocalClasses().isEmpty()) {
+			for (JvmGenericType jvmGenericType : jvmFeature.getLocalClasses()) {
+				Set<EObject> sourceElements = getAssociations().getSourceElements(jvmGenericType);
+				for (EObject eObject : sourceElements) {
+					if (eObject instanceof XtendTypeDeclaration) {
+						createNodeForType(featureNode, eObject, processedFeatures, inheritanceDepth);
+						addJvmFeature(processedFeatures, (JvmMember) jvmElement);
+					}
+				}
+			}
+		}
+	}
+
+	private boolean isDispatchRelated(JvmFeature jvmFeature) {
+		return jvmFeature instanceof JvmOperation
+				&& (dispatchHelper.isDispatchFunction((JvmOperation) jvmFeature) || dispatchHelper
+						.isDispatcherFunction((JvmOperation) jvmFeature));
+	}
+
 	private void createDispatchOperationNodes(IOutlineNode parentNode, JvmDeclaredType inferredType,
-			final JvmDeclaredType baseType, Set<JvmFeature> processedFeatures, int inheritanceDepth) {
+			final JvmDeclaredType baseType, Set<JvmMember> processedFeatures, int inheritanceDepth) {
 		for (JvmOperation operation : inferredType.getDeclaredOperations()) {
 			if (dispatchHelper.isDispatcherFunction(operation)) {
 				JvmOperation dispatcher = operation;
@@ -164,7 +199,22 @@ public class XtendOutlineSourceTreeProvider extends AbstractMultiModeOutlineTree
 		}
 	}
 
-	private void addCreateExtensionJvmFeatures(Set<JvmFeature> processedFeatures, JvmFeature feature) {
+	@Override
+	protected void createInheritedFeatureNodes(IOutlineNode parentNode, JvmDeclaredType baseType,
+			Set<JvmMember> processedFeatures, int inheritanceDepth, JvmTypeReference superType) {
+		if (superType.getType() instanceof JvmDeclaredType) {
+			JvmDeclaredType superClass = ((JvmGenericType) superType.getType());
+			EObject xtendSuperClass = getAssociations().getPrimarySourceElement(superType.getType());
+			if (xtendSuperClass instanceof XtendTypeDeclaration) {
+				createFeatureNodesForType(parentNode, (XtendTypeDeclaration) xtendSuperClass, superClass, baseType,
+						processedFeatures, inheritanceDepth + 1);
+			} else {
+				createFeatureNodesForType(parentNode, superClass, baseType, processedFeatures, inheritanceDepth + 1);
+			}
+		}
+	}
+
+	private void addCreateExtensionJvmFeatures(Set<JvmMember> processedFeatures, JvmMember feature) {
 		EObject sourceElement = getAssociations().getPrimarySourceElement(feature);
 		if (!(sourceElement instanceof XtendFunction)) {
 			return;
@@ -187,19 +237,19 @@ public class XtendOutlineSourceTreeProvider extends AbstractMultiModeOutlineTree
 		}
 	}
 
-	private void createInheritedFeatureNodes(IOutlineNode parentNode, JvmDeclaredType baseType,
-			Set<JvmFeature> processedFeatures, int inheritanceDepth, JvmTypeReference superType) {
-		if (superType.getType() instanceof JvmDeclaredType) {
-			JvmDeclaredType superClass = ((JvmGenericType) superType.getType());
-			EObject xtendSuperClass = getAssociations().getPrimarySourceElement(superType.getType());
-			createFeatureNodesForType(parentNode, (XtendTypeDeclaration) xtendSuperClass, superClass, baseType,
-					processedFeatures, inheritanceDepth + 1);
-		}
+	@Override
+	protected void addJvmFeature(Set<JvmMember> processedFeatures, JvmMember feature) {
+		super.addJvmFeature(processedFeatures, feature);
+		addCreateExtensionJvmFeatures(processedFeatures, feature);
 	}
 
-	private void addJvmFeature(Set<JvmFeature> processedFeatures, JvmFeature feature) {
-		processedFeatures.add(feature);
-		addCreateExtensionJvmFeatures(processedFeatures, feature);
+	@Override
+	protected void createNodeForType(IOutlineNode parentNode, EObject someType, Set<JvmMember> processedFeatures,
+			int inheritanceDepth) {
+		if (someType instanceof XtendTypeDeclaration) {
+			XtendTypeDeclaration xtendType = (XtendTypeDeclaration) someType;
+			createNodeForType(parentNode, xtendType, processedFeatures);
+		}
 	}
 
 }

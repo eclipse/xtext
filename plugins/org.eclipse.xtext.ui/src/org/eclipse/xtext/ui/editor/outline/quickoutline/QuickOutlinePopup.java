@@ -13,7 +13,6 @@ import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.dialogs.PopupDialog;
-import org.eclipse.jface.viewers.AbstractTreeViewer;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -201,7 +200,7 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 		filterAndSorter.setComparator(comparator);
 		contentProvider.setFilterAndSorter(filterAndSorter);
 		treeViewer.setLabelProvider(labelProvider);
-		treeViewer.setAutoExpandLevel(AbstractTreeViewer.ALL_LEVELS);
+		treeViewer.setAutoExpandLevel(2);
 		IOutlineNode rootNode = document.readOnly(new IUnitOfWork<IOutlineNode, XtextResource>() {
 			public IOutlineNode exec(XtextResource state) throws Exception {
 				IOutlineNode rootNode = treeProvider.createRoot(document);

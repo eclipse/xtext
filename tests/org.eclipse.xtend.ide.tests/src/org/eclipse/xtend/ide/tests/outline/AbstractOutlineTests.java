@@ -7,16 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.outline;
 
+import java.util.List;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.ide.outline.SwitchOutlineModeContribution;
 import org.eclipse.xtend.ide.outline.XtendOutlineTreeProvider;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
+import org.eclipse.xtext.ui.editor.outline.actions.SortOutlineContribution;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter;
+import org.eclipse.xtext.ui.editor.outline.impl.OutlineMode;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.junit.Test;
 
@@ -75,6 +80,12 @@ public abstract class AbstractOutlineTests extends AbstractXtendUITestCase {
 	@Test
 	public void testTypeParameter() throws Exception {
 		AssertBuilder assertBuilder = newAssertBuilder("class Foo <T extends Object> {}");
+		assertBuilder.numChildren(1).child(0, "Foo<T extends Object>").numChildren(0);
+	}
+
+	@Test
+	public void testTypeParameter1() throws Exception {
+		AssertBuilder assertBuilder = newAssertBuilder("class Foo <T> {}");
 		assertBuilder.numChildren(1).child(0, "Foo<T>").numChildren(0);
 	}
 
@@ -118,7 +129,15 @@ public abstract class AbstractOutlineTests extends AbstractXtendUITestCase {
 	@Test
 	public void testMethodWithTypeParameter() throws Exception {
 		AssertBuilder assertBuilder = newAssertBuilder("class Foo { def <T> foo() {null} }");
-		assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "foo() : Object").numChildren(0);
+		assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "foo() <T extends Object> : Object")
+				.numChildren(0);
+	}
+
+	@Test
+	public void testMethodWithReturnTypeParameter() throws Exception {
+		AssertBuilder assertBuilder = newAssertBuilder("class Foo { def <T> Foo<T> foo() {null} }");
+		assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "foo() <T extends Object> : Foo<T>")
+				.numChildren(0);
 	}
 
 	@Test
@@ -201,17 +220,17 @@ public abstract class AbstractOutlineTests extends AbstractXtendUITestCase {
 	public void testNestedTypes() throws Exception {
 		AssertBuilder assertBuilder = newAssertBuilder("class Foo { int foo static class Bar { def bar() {} interface Baz {} enum FooBar{ X } } }");
 		AssertBuilder foo = assertBuilder.numChildren(1).child(0, "Foo").numChildren(2);
-		foo.child(1, "foo : int").numChildren(0);
-		AssertBuilder bar = foo.child(0, "Bar").numChildren(3);
-		bar.child(0, "Baz").numChildren(0);
-		bar.child(1, "FooBar").numChildren(1);
-		bar.child(2, "bar() : Object").numChildren(0);
+		foo.child(0, "foo : int").numChildren(0);
+		AssertBuilder bar = foo.child(1, "Bar").numChildren(3);
+		bar.child(0, "bar() : Object").numChildren(0);
+		bar.child(1, "Baz").numChildren(0);
+		bar.child(2, "FooBar").numChildren(1);
 	}
 
 	@Test
 	public void testAnonymousTypes() throws Exception {
-		AssertBuilder assertBuilder = newAssertBuilder("class Foo<T> { def Foo<String> bar() { new Foo<String>() { override bar() { } } } }");
-		AssertBuilder foo = assertBuilder.numChildren(1).child(0, "Foo<T>").numChildren(1);
+		AssertBuilder assertBuilder = newAssertBuilder("class Foo<T extends Object> { def Foo<String> bar() { new Foo<String>() { override bar() { } } } }");
+		AssertBuilder foo = assertBuilder.numChildren(1).child(0, "Foo<T extends Object>").numChildren(1);
 		AssertBuilder bar = foo.child(0, "bar() : Foo<String>").numChildren(1);
 		AssertBuilder barBar = bar.child(0, "new Foo<String>() {...}").numChildren(1);
 		barBar.child(0, "bar() : Foo<String>").numChildren(0);
@@ -238,6 +257,17 @@ public abstract class AbstractOutlineTests extends AbstractXtendUITestCase {
 
 	protected WorkbenchTestHelper getWorkbenchTestHelper() {
 		return workbenchTestHelper;
+	}
+
+	protected void setShowInherited(boolean isShowInherited) {
+		List<OutlineMode> modes = getTreeProvider().getOutlineModes();
+		getTreeProvider().setCurrentMode((isShowInherited) ? modes.get(1) : modes.get(0));
+	}
+
+	protected void setJvmMode(boolean isJvmMode) {
+		getPreferenceStoreAccess().getWritablePreferenceStore().setValue(SwitchOutlineModeContribution.PREFERENCE_KEY,
+				isJvmMode);
+		getPreferenceStoreAccess().getWritablePreferenceStore().setValue(SortOutlineContribution.PREFERENCE_KEY, false);
 	}
 
 	public class AssertBuilder {

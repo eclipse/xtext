@@ -8,7 +8,9 @@
 package org.eclipse.xtend.ide.labeling;
 
 import org.eclipse.jdt.internal.ui.JavaPluginImages;
+import org.eclipse.jdt.internal.ui.viewsupport.JavaElementImageProvider;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.ui.IImageHelper.IImageDescriptorHelper;
 import org.eclipse.xtext.xbase.ui.labeling.XbaseImages2;
@@ -38,7 +40,7 @@ public class XtendImages extends XbaseImages2 {
 	}
 
 	public ImageDescriptor forPackage() {
-		return JavaPluginImages.DESC_OBJS_PACKDECL;
+		return getDecorated(JavaPluginImages.DESC_OBJS_PACKDECL, 0);
 	}
 
 	public ImageDescriptor forDispatcherFunction(JvmVisibility visibility, int adornments) {
@@ -50,5 +52,10 @@ public class XtendImages extends XbaseImages2 {
 
 	public ImageDescriptor forFile() {
 		return imageHelper.getImageDescriptor("xtend.gif");
+	}
+	
+	@Override
+	protected Point imagesSize() {
+		return JavaElementImageProvider.BIG_SIZE;
 	}
 }
