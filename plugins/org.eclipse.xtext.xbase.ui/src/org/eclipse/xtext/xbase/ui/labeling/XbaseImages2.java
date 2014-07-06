@@ -14,6 +14,7 @@ import org.eclipse.jdt.internal.ui.JavaPluginImages;
 import org.eclipse.jdt.internal.ui.viewsupport.JavaElementImageProvider;
 import org.eclipse.jdt.ui.JavaElementImageDescriptor;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.xtext.common.types.JvmVisibility;
 
 /**
@@ -26,7 +27,7 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 public class XbaseImages2 {
 
 	public ImageDescriptor forImportContainer() {
-		return JavaPluginImages.DESC_OBJS_IMPCONT;
+		return getDecorated(JavaPluginImages.DESC_OBJS_IMPCONT, 0);
 	}
 
 	public ImageDescriptor forImport() {
@@ -40,7 +41,7 @@ public class XbaseImages2 {
 	 *            OR-ed flags from {@link JavaElementImageDescriptor} to denote decorations
 	 */
 	public ImageDescriptor forClass(JvmVisibility visibility, int adornments) {
-		return getDecorated(getTypeImageDescriptor(false, false, toFlags(visibility), false), adornments);
+		return getDecorated(getTypeImageDescriptor(true, false, toFlags(visibility), false), adornments);
 	}
 
 	/**
@@ -50,7 +51,7 @@ public class XbaseImages2 {
 	 *            OR-ed flags from {@link JavaElementImageDescriptor} to denote decorations
 	 */
 	public ImageDescriptor forInterface(JvmVisibility visibility, int adornments) {
-		return getDecorated(getTypeImageDescriptor(false, true, toFlags(visibility) | Flags.AccInterface, false),
+		return getDecorated(getTypeImageDescriptor(true, false, toFlags(visibility) | Flags.AccInterface, false),
 				adornments);
 	}
 
@@ -61,7 +62,7 @@ public class XbaseImages2 {
 	 *            OR-ed flags from {@link JavaElementImageDescriptor} to denote decorations
 	 */
 	public ImageDescriptor forEnum(JvmVisibility visibility, int adornments) {
-		return getDecorated(getTypeImageDescriptor(false, false, toFlags(visibility) | Flags.AccEnum, false),
+		return getDecorated(getTypeImageDescriptor(true, false, toFlags(visibility) | Flags.AccEnum, false),
 				adornments);
 	}
 
@@ -72,7 +73,7 @@ public class XbaseImages2 {
 	 *            OR-ed flags from {@link JavaElementImageDescriptor} to denote decorations
 	 */
 	public ImageDescriptor forAnnotation(JvmVisibility visibility, int adornments) {
-		return getDecorated(getTypeImageDescriptor(false, true, toFlags(visibility) | Flags.AccAnnotation, false),
+		return getDecorated(getTypeImageDescriptor(true, true, toFlags(visibility) | Flags.AccAnnotation, false),
 				adornments);
 	}
 
@@ -124,10 +125,16 @@ public class XbaseImages2 {
 	}
 
 	protected ImageDescriptor getDecorated(ImageDescriptor baseImage, int adornments) {
-		if (adornments == 0)
-			return baseImage;
-		else
-			return new JavaElementImageDescriptor(baseImage, adornments, JavaElementImageProvider.SMALL_SIZE);
+		return new JavaElementImageDescriptor(baseImage, adornments, imagesSize());
+	}
+
+	/**
+	 * Possible Values:<br>
+	 * {@link JavaElementImageProvider#SMALL_SIZE}
+	 * {@link JavaElementImageProvider#BIG_SIZE}
+	 */
+	protected Point imagesSize() {
+		return JavaElementImageProvider.BIG_SIZE;
 	}
 
 	protected int toFlags(JvmVisibility visibility) {

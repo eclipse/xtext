@@ -16,10 +16,8 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.ide.outline.ShowSyntheticMembersContribution;
-import org.eclipse.xtend.ide.outline.SwitchOutlineModeContribution;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
-import org.eclipse.xtext.ui.editor.outline.actions.SortOutlineContribution;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter;
 import org.eclipse.xtext.util.Files;
 import org.junit.Test;
@@ -49,6 +47,25 @@ public class JvmOutlineTests extends AbstractOutlineTests {
 	void configure(ShowSyntheticMembersContribution filter, OutlineFilterAndSorter sorter) {
 		sorter.addFilter(filter.getFilter());
 		this.sorter = sorter;
+	}
+
+	@Test
+	@Override
+	public void testNestedTypes() throws Exception {
+		AssertBuilder assertBuilder = newAssertBuilder("class Foo { int foo static class Bar { def bar() {} interface Baz {} enum FooBar{ X } } }");
+		AssertBuilder foo = assertBuilder.numChildren(1).child(0, "Foo").numChildren(2);
+		AssertBuilder bar = foo.child(0, "Bar").numChildren(3);
+		foo.child(1, "foo : int").numChildren(0);
+		bar.child(0, "Baz").numChildren(0);
+		bar.child(1, "FooBar").numChildren(1);
+		bar.child(2, "bar() : Object").numChildren(0);
+	}
+
+	@Override
+	@Test
+	public void testTypeParameter1() throws Exception {
+		AssertBuilder assertBuilder = newAssertBuilder("class Foo<T> {}");
+		assertBuilder.numChildren(1).child(0, "Foo<T extends Object>").numChildren(0);
 	}
 
 	@Test
@@ -152,17 +169,10 @@ public class JvmOutlineTests extends AbstractOutlineTests {
 		AssertBuilder clientAAFile = newAssertBuilder(xtendFile).numChildren(3);
 		clientAAFile.leaf(0, "clienttest");
 		clientAAFile.child(1, "AAOutlineTest").leaf(0, "myPublicMethod() : void");
-		StyledString styledString = new StyledString("AAOutlineTestInterface", StyledString.QUALIFIER_STYLER)
-				.append(new StyledString(" - clienttest.test", StyledString.DECORATIONS_STYLER));
+		StyledString styledString = new StyledString("AAOutlineTestInterface - clienttest.test", StyledString.QUALIFIER_STYLER);
 		AssertBuilder createdtype = clientAAFile.child(2, styledString).numChildren(1);
 		createdtype.child(0, new StyledString("myPublicMethod() : void", StyledString.QUALIFIER_STYLER));
 		WorkbenchTestHelper.deleteProject(clientProj);
-	}
-
-	private void setJvmMode(boolean isJvmMode) {
-		getPreferenceStoreAccess().getWritablePreferenceStore().setValue(SwitchOutlineModeContribution.PREFERENCE_KEY,
-				isJvmMode);
-		getPreferenceStoreAccess().getWritablePreferenceStore().setValue(SortOutlineContribution.PREFERENCE_KEY, false);
 	}
 
 	@Override

@@ -215,10 +215,19 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
         _xifexpression = returnType.getHumanReadableName();
       }
       final String returnTypeString = _xifexpression;
+      final String typeParam = this.uiStrings.typeParameters(element);
+      String _xifexpression_1 = null;
+      boolean _isEmpty = typeParam.isEmpty();
+      if (_isEmpty) {
+        _xifexpression_1 = (" : " + returnTypeString);
+      } else {
+        _xifexpression_1 = (((" " + typeParam) + " : ") + returnTypeString);
+      }
+      final String decoratedPart = _xifexpression_1;
       String _parameters = this.uiStrings.parameters(element);
       String _plus = (simpleName + _parameters);
       StyledString _styledString = new StyledString(_plus);
-      StyledString _styledString_1 = new StyledString((" : " + returnTypeString), StyledString.DECORATIONS_STYLER);
+      StyledString _styledString_1 = new StyledString(decoratedPart, StyledString.DECORATIONS_STYLER);
       _xblockexpression = _styledString.append(_styledString_1);
     }
     return _xblockexpression;

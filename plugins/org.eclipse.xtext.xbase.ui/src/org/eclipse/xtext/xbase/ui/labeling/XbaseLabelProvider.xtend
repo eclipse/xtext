@@ -128,8 +128,10 @@ class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 				"void" 
 			else
 				returnType.humanReadableName
-		new StyledString(simpleName + uiStrings.parameters(element))
-			.append(new StyledString(" : " + returnTypeString, StyledString.DECORATIONS_STYLER))
+		val typeParam = uiStrings.typeParameters(element)
+		val decoratedPart = if (typeParam.empty) " : "+returnTypeString else " " + typeParam + " : "+returnTypeString
+		new StyledString(simpleName +  uiStrings.parameters(element))
+			.append(new StyledString(decoratedPart, StyledString.DECORATIONS_STYLER))
 	}
 	
 	protected def dispatch ImageDescriptor imageDescriptor(Object element) {

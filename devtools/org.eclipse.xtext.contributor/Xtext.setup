@@ -99,7 +99,7 @@
       <p2Repositories url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
       <p2Repositories url="${xtext.nightly.composite}"/>
       <p2Repositories url="http://download.eclipse.org/technology/m2e/releases/1.0/"/>
-      <p2Repositories url="http://download.itemis.com/updates/releases/2.1.0/"/>
+      <p2Repositories url="http://download.itemis.com/updates/releases/2.1.1/"/>
       <p2Repositories url="http://download.eclipse.org/eclipse/updates/3.5/"/>
       <p2Repositories url="http://download.eclipse.org/tools/gef/updates/milestones"/>
       <p2Repositories url="${emf.update.site}"/>
