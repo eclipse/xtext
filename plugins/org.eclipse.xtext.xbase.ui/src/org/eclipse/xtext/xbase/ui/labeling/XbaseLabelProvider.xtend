@@ -124,12 +124,17 @@ class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 
 	protected def StyledString signature(String simpleName, JvmIdentifiableElement element) {
 		val returnType = typeResolver.resolveTypes(element).getActualType(element)
-		val returnTypeString = if (returnType == null) 
-				"void" 
+		val returnTypeString = if (returnType == null)
+				"void"
 			else
 				returnType.humanReadableName
-		new StyledString(simpleName + uiStrings.parameters(element))
-			.append(new StyledString(" : " + returnTypeString, StyledString.DECORATIONS_STYLER))
+		var decoratedPart = " : " + returnTypeString
+		val typeParam = uiStrings.typeParameters(element) ?: ""
+		if (typeParam != "") {
+			decoratedPart = " " + typeParam + " : " + returnTypeString
+		}
+		return new StyledString(simpleName + uiStrings.parameters(element)).append(
+			new StyledString(decoratedPart, StyledString.DECORATIONS_STYLER))
 	}
 	
 	protected def dispatch ImageDescriptor imageDescriptor(Object element) {

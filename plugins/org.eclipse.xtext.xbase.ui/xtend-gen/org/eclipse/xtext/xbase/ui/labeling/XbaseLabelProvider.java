@@ -203,25 +203,34 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
   }
   
   protected StyledString signature(final String simpleName, final JvmIdentifiableElement element) {
-    StyledString _xblockexpression = null;
-    {
-      IResolvedTypes _resolveTypes = this.typeResolver.resolveTypes(element);
-      final LightweightTypeReference returnType = _resolveTypes.getActualType(element);
-      String _xifexpression = null;
-      boolean _equals = Objects.equal(returnType, null);
-      if (_equals) {
-        _xifexpression = "void";
-      } else {
-        _xifexpression = returnType.getHumanReadableName();
-      }
-      final String returnTypeString = _xifexpression;
-      String _parameters = this.uiStrings.parameters(element);
-      String _plus = (simpleName + _parameters);
-      StyledString _styledString = new StyledString(_plus);
-      StyledString _styledString_1 = new StyledString((" : " + returnTypeString), StyledString.DECORATIONS_STYLER);
-      _xblockexpression = _styledString.append(_styledString_1);
+    IResolvedTypes _resolveTypes = this.typeResolver.resolveTypes(element);
+    final LightweightTypeReference returnType = _resolveTypes.getActualType(element);
+    String _xifexpression = null;
+    boolean _equals = Objects.equal(returnType, null);
+    if (_equals) {
+      _xifexpression = "void";
+    } else {
+      _xifexpression = returnType.getHumanReadableName();
     }
-    return _xblockexpression;
+    final String returnTypeString = _xifexpression;
+    String decoratedPart = (" : " + returnTypeString);
+    String _elvis = null;
+    String _typeParameters = this.uiStrings.typeParameters(element);
+    if (_typeParameters != null) {
+      _elvis = _typeParameters;
+    } else {
+      _elvis = "";
+    }
+    final String typeParam = _elvis;
+    boolean _notEquals = (!Objects.equal(typeParam, ""));
+    if (_notEquals) {
+      decoratedPart = (((" " + typeParam) + " : ") + returnTypeString);
+    }
+    String _parameters = this.uiStrings.parameters(element);
+    String _plus = (simpleName + _parameters);
+    StyledString _styledString = new StyledString(_plus);
+    StyledString _styledString_1 = new StyledString(decoratedPart, StyledString.DECORATIONS_STYLER);
+    return _styledString.append(_styledString_1);
   }
   
   protected ImageDescriptor _imageDescriptor(final Object element) {

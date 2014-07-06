@@ -397,7 +397,10 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 	}
 
 	public EObject getPrimaryJvmElement(EObject sourceElement) {
-		return getJvmElements(sourceElement).iterator().next();
+		Iterator<EObject> iterator = getJvmElements(sourceElement).iterator();
+		if (iterator.hasNext())
+			return iterator.next();
+		return null;
 	}
 
 	public boolean isPrimaryJvmElement(EObject jvmElement) {
