@@ -99,17 +99,17 @@ public class BackgroundOutlineTreeProvider implements IOutlineTreeStructureProvi
 	}
 
 	protected ImageDescriptor getImageDescriptor(Object modelElement) {
-		if (labelProvider instanceof ILabelProviderImageDescriptorExtension)
-			return ((ILabelProviderImageDescriptorExtension) labelProvider).getImageDescriptor(modelElement);
+		if (getLabelProvider() instanceof ILabelProviderImageDescriptorExtension)
+			return ((ILabelProviderImageDescriptorExtension) getLabelProvider()).getImageDescriptor(modelElement);
 		else
 			return null;
 	}
 
 	protected Object getText(Object modelElement) {
-		if (labelProvider instanceof IStyledLabelProvider)
-			return ((IStyledLabelProvider) labelProvider).getStyledText(modelElement);
+		if (getLabelProvider() instanceof IStyledLabelProvider)
+			return ((IStyledLabelProvider) getLabelProvider()).getStyledText(modelElement);
 		else
-			return labelProvider.getText(modelElement);
+			return getLabelProvider().getText(modelElement);
 	}
 
 	protected boolean isLeaf(final EObject modelElement) {
@@ -122,5 +122,13 @@ public class BackgroundOutlineTreeProvider implements IOutlineTreeStructureProvi
 
 	protected OutlineNodeFactory getOutlineNodeFactory() {
 		return factory;
+	}
+	
+	/**
+	 * TODO will provide an annotatedWith based Binding later
+	 * @since 2.7
+	 */
+	protected ILabelProvider getLabelProvider() {
+		return labelProvider;
 	}
 }
