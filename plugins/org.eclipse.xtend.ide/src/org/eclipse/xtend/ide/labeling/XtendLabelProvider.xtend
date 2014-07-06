@@ -15,15 +15,11 @@ import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtend.core.xtend.XtendInterface
-import org.eclipse.xtext.common.types.JvmEnumerationLiteral
-import org.eclipse.xtext.common.types.JvmField
-import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping
 import org.eclipse.xtext.xbase.ui.labeling.XbaseImageAdornments
-import org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider
 import org.eclipse.xtext.xbase.validation.UIStrings
 
 /**
@@ -31,7 +27,7 @@ import org.eclipse.xtext.xbase.validation.UIStrings
  * 
  * @author Jan Koehnlein
  */
-public class XtendLabelProvider extends XbaseLabelProvider {
+public class XtendLabelProvider extends XtendJvmLabelProvider {
 
 	@Inject UIStrings uiStrings
 
@@ -119,18 +115,6 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 		text(element.inferredType)
 	}
 
-	protected override text(JvmGenericType element) {
-		val local = element.isLocal()
-		if (local) {
-			val supertype = element.superTypes.head
-			return '''new «supertype.simpleName»() {...}'''
-		}
-		element.simpleName + if (element.typeParameters.empty)
-			""
-		else
-			uiStrings.typeParameters(element.typeParameters)
-	}
-
 	protected def text(XtendConstructor element) {
 		"new" + uiStrings.parameters(element.inferredConstructor)
 	}
@@ -164,17 +148,8 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 		new StyledString(element.name)
 	}
 
-	protected override text(JvmField element) {
-		return new StyledString(element.simpleName).append(
-			new StyledString(" : " + element.type.simpleName, StyledString.DECORATIONS_STYLER))
-	}
-
 	protected def text(XtendEnumLiteral element) {
 		element.name
-	}
-	
-	protected def text(JvmEnumerationLiteral element) {
-		element.simpleName
 	}
 
 	protected def JvmTypeReference getDisplayedType(XtendField field) {
