@@ -13,8 +13,8 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.ide.labeling.XtendImages;
-import org.eclipse.xtext.common.types.JvmField;
-import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
@@ -31,19 +31,31 @@ public class XtendOutlineNodeFactory extends OutlineNodeFactory {
 
 	@Inject
 	private XtendImages images;
-	
+
 	public XtendFeatureNode createXtendFeatureNode(IOutlineNode parentNode, EObject modelElement,
 			ImageDescriptor imageDescriptor, Object text, boolean isLeaf, boolean synthetic, int inheritanceDepth) {
 		XtendFeatureNode featureNode = new XtendFeatureNode(modelElement, parentNode, imageDescriptor, text, isLeaf);
+		configureNode(parentNode, modelElement, inheritanceDepth, featureNode);
+		featureNode.setSynthetic(synthetic);
+		return featureNode;
+	}
+
+	public XtendEObjectNode createXtendEOBjectNode(IOutlineNode parentNode, EObject modelElement,
+			ImageDescriptor imageDescriptor, Object text, boolean isLeaf, boolean synthetic, int inheritanceDepth) {
+		XtendEObjectNode featureNode = new XtendEObjectNode(modelElement, parentNode, imageDescriptor, text, isLeaf);
+		configureNode(parentNode, modelElement, inheritanceDepth, featureNode);
+		return featureNode;
+	}
+
+	private void configureNode(IOutlineNode parentNode, EObject modelElement, int inheritanceDepth,
+			XtendEObjectNode featureNode) {
 		ICompositeNode parserNode = NodeModelUtils.getNode(modelElement);
 		if (parserNode != null)
 			featureNode.setTextRegion(parserNode.getTextRegion());
 		if (isLocalElement(parentNode, modelElement))
 			featureNode.setShortTextRegion(getLocationInFileProvider().getSignificantTextRegion(modelElement));
 		featureNode.setStatic(isStatic(modelElement));
-		featureNode.setSynthetic(synthetic);
 		featureNode.setInheritanceDepth(inheritanceDepth);
-		return featureNode;
 	}
 
 	public String createPackageAndImporNodes(DocumentRootNode parentNode, XtendFile xtendFile) {
@@ -61,10 +73,10 @@ public class XtendOutlineNodeFactory extends OutlineNodeFactory {
 	}
 
 	protected boolean isStatic(EObject element) {
-		if (element instanceof JvmField)
-			return ((JvmField) element).isStatic();
-		else if (element instanceof JvmOperation)
-			return ((JvmOperation) element).isStatic();
+		if (element instanceof JvmFeature)
+			return ((JvmFeature) element).isStatic();
+		else if (element instanceof JvmDeclaredType)
+			return ((JvmDeclaredType) element).isStatic();
 		else if (element instanceof XtendMember)
 			return ((XtendMember) element).isStatic();
 		else

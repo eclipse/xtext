@@ -77,7 +77,7 @@
                 <message_argument value="delete(Path)"/>
             </message_arguments>
         </filter>
-        <filter id="405901410">
+        <filter comment="API tooling bug" id="405901410">
             <message_arguments>
                 <message_argument value="org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport"/>
                 <message_argument value="mkdir(Path)"/>

@@ -15,12 +15,12 @@ import org.eclipse.xtext.ui.editor.outline.impl.EStructuralFeatureNode;
 public class XtendOutlineNodeComparator extends SortOutlineContribution.DefaultComparator {
 	@Override
 	public int getCategory(IOutlineNode node) {
-		if(node instanceof XtendFeatureNode) 
-			return internalGetCategory(node) + 100 * ((XtendFeatureNode)node).getInheritanceDepth();
+		if (node instanceof XtendEObjectNode)
+			return internalGetCategory(node) + 100 * ((XtendEObjectNode) node).getInheritanceDepth();
 		else
 			return internalGetCategory(node);
 	}
-	
+
 	protected int internalGetCategory(IOutlineNode node) {
 		if (node instanceof EStructuralFeatureNode) {
 			EStructuralFeature feature = ((EStructuralFeatureNode) node).getEStructuralFeature();
@@ -29,19 +29,20 @@ public class XtendOutlineNodeComparator extends SortOutlineContribution.DefaultC
 			else
 				return 10;
 		}
-		boolean isStatic = node instanceof XtendFeatureNode && ((XtendFeatureNode) node).isStatic();
+		boolean isStatic = node instanceof XtendFeatureNode && ((XtendEObjectNode) node).isStatic();
 		if (node instanceof EObjectNode) {
 			EClass eClass = ((EObjectNode) node).getEClass();
-			if (XtendPackage.Literals.XTEND_TYPE_DECLARATION.isSuperTypeOf(eClass))
+			if (XtendPackage.Literals.XTEND_TYPE_DECLARATION.isSuperTypeOf(eClass)
+					|| TypesPackage.Literals.JVM_DECLARED_TYPE.isSuperTypeOf(eClass))
 				return 20;
-			if (eClass == XtendPackage.Literals.XTEND_FIELD || eClass == TypesPackage.Literals.JVM_FIELD) 
+			if (eClass == XtendPackage.Literals.XTEND_FIELD || eClass == TypesPackage.Literals.JVM_FIELD)
 				return isStatic ? 30 : 50;
 			if (eClass == XtendPackage.Literals.XTEND_CONSTRUCTOR || eClass == TypesPackage.Literals.JVM_CONSTRUCTOR)
 				return 60;
 			if (eClass == XtendPackage.Literals.XTEND_FUNCTION || eClass == TypesPackage.Literals.JVM_OPERATION) {
-				if(isStatic) 
-					return 40; 
-				else 
+				if (isStatic)
+					return 40;
+				else
 					return (node instanceof XtendFeatureNode && ((XtendFeatureNode) node).isDispatch()) ? 70 : 80;
 			}
 		}

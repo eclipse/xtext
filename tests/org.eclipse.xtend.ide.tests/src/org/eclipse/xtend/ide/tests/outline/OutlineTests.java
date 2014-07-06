@@ -79,9 +79,9 @@ public class OutlineTests extends AbstractOutlineTests {
 				+ " def dispatch bar(Object y) {''}" + " def dispatch foo(Object y) {''}" + " String fooBar"
 				+ " new() {}" + " def static void s() {}" + " static String ss" + "}");
 		AssertBuilder foo = assertBuilder.numChildren(1).child(0, "Foo").numChildren(7);
-		foo.child(0, "foo(Object) : String").numChildren(2);
-		foo.child(1, "bar(Object) : String").numChildren(2);
-		foo.child(2, "baz() : Object").numChildren(0);
+		foo.child(0, "baz() : Object").numChildren(0);
+		foo.child(1, "foo(Object) : String").numChildren(2);
+		foo.child(2, "bar(Object) : String").numChildren(2);
 		foo.child(3, "fooBar : String").numChildren(0);
 		foo.child(4, "new()").numChildren(0);
 		foo.child(5, "s() : void").numChildren(0);

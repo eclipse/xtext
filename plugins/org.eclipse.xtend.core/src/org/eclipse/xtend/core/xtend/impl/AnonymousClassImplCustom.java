@@ -16,5 +16,14 @@ public class AnonymousClassImplCustom extends AnonymousClassImpl {
 	public boolean isAnonymous() {
 		return true;
 	}
-	
+
+	@Override
+	public boolean isStatic() {
+		return false;
+	}
+
+	@Override
+	public boolean isFinal() {
+		return true;
+	}
 }
