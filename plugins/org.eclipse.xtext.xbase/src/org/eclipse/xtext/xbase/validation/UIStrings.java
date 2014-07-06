@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.validation;
 
 import static com.google.common.collect.Iterables.*;
+import static com.google.common.collect.Lists.*;
 
 import java.util.Iterator;
 import java.util.List;
@@ -22,12 +23,15 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -48,21 +52,21 @@ public class UIStrings {
 
 	@Inject
 	private LazyURIEncoder lazyURIEncoder;
-	
+
 	@Inject
 	private IBatchTypeResolver typeResolver;
-	
+
 	public String signature(JvmExecutable executable) {
 		StringBuilder b = new StringBuilder(executable.getSimpleName());
 		b.append(parameters(executable));
-		if(executable instanceof JvmOperation) 
+		if (executable instanceof JvmOperation)
 			b.append(" : ").append(((JvmOperation) executable).getReturnType().getSimpleName());
 		return b.toString();
 	}
-	
+
 	public String parameters(JvmIdentifiableElement element) {
 		if (element instanceof JvmExecutable) {
-			return "(" + parameterTypes(((JvmExecutable)element).getParameters(), ((JvmExecutable)element).isVarArgs()) + ")";
+			return "(" + parameterTypes(((JvmExecutable) element).getParameters(), ((JvmExecutable) element).isVarArgs()) + ")";
 		}
 		return "";
 	}
@@ -82,7 +86,7 @@ public class UIStrings {
 		}
 		return "";
 	}
-	
+
 	public String typeParameters(JvmIdentifiableElement element) {
 		if (element instanceof JvmTypeParameterDeclarator) {
 			List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) element).getTypeParameters();
@@ -90,7 +94,7 @@ public class UIStrings {
 		}
 		return "";
 	}
-	
+
 	public String typeArguments(XAbstractFeatureCall featureCall) {
 		return "<" + referencesToString(featureCall.getTypeArguments()) + ">";
 	}
@@ -99,21 +103,39 @@ public class UIStrings {
 		return "<" + referencesToString(constructorCall.getTypeArguments()) + ">";
 	}
 
-	protected String toString(Iterable<? extends JvmIdentifiableElement> elements) {
+	protected String toString(Iterable<? extends JvmTypeParameter> elements) {
 		StringBuilder buffer = new StringBuilder();
 		boolean needsSeparator = false;
-		for (JvmIdentifiableElement type : elements) {
+		for (JvmTypeParameter type : elements) {
 			if (needsSeparator)
 				buffer.append(", ");
 			needsSeparator = true;
-			if(type != null) {
+			if (type != null) {
 				buffer.append(type.getSimpleName());
-			} else 
+				List<String> upper = newArrayList();
+				String lower = null;
+				for (JvmTypeConstraint constr : type.getConstraints()) {
+					String simpleName = constr.getTypeReference().getSimpleName();
+					if (constr instanceof JvmUpperBound) {
+						upper.add(simpleName);
+					} else {
+						lower = simpleName;
+					}
+				}
+				if(!upper.isEmpty()) {
+					buffer.append(" extends ");
+					buffer.append(Strings.concat(" & ", upper));
+				}
+				if(lower!=null) {
+					buffer.append(" super ");
+					buffer.append(lower);
+				}
+			} else
 				buffer.append("[null]");
 		}
 		return buffer.toString();
 	}
-	
+
 	protected String referencesToString(Iterable<? extends JvmTypeReference> elements) {
 		StringBuilder buffer = new StringBuilder();
 		boolean needsSeparator = false;
@@ -125,12 +147,12 @@ public class UIStrings {
 		}
 		return buffer.toString();
 	}
-	
+
 	/**
 	 * @since 2.4
 	 */
 	public String referenceToString(JvmTypeReference typeRef, String defaultLabel) {
-		if(typeRef != null) {
+		if (typeRef != null) {
 			if (typeRef instanceof JvmAnyTypeReference)
 				return "Object";
 			else {
@@ -168,7 +190,7 @@ public class UIStrings {
 				return referenceToString(reference);
 			}
 			StringBuilder result = new StringBuilder(reference.toString());
-			while(iterator.hasNext()) {
+			while (iterator.hasNext()) {
 				reference = resolvedTypes.getActualType(iterator.next());
 				result.append(", ");
 				result.append(referenceToString(reference));
@@ -196,5 +218,5 @@ public class UIStrings {
 			}
 		}));
 	}
-	
+
 }
