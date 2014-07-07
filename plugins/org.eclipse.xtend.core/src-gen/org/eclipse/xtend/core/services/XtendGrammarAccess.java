@@ -4847,7 +4847,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XCasePart:
-	//	{XCasePart} typeGuard=JvmTypeReference? ("case" case=XExpression)? (":" then=XExpression | ",");
+	//	{XCasePart} typeGuard=JvmTypeReference? ("case" case=XExpression)? (":" then=XExpression | fallThrough?=",");
 	public XbaseGrammarAccess.XCasePartElements getXCasePartAccess() {
 		return gaXbaseWithAnnotations.getXCasePartAccess();
 	}

@@ -1969,13 +1969,14 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cColonKeyword_3_0_0 = (Keyword)cGroup_3_0.eContents().get(0);
 		private final Assignment cThenAssignment_3_0_1 = (Assignment)cGroup_3_0.eContents().get(1);
 		private final RuleCall cThenXExpressionParserRuleCall_3_0_1_0 = (RuleCall)cThenAssignment_3_0_1.eContents().get(0);
-		private final Keyword cCommaKeyword_3_1 = (Keyword)cAlternatives_3.eContents().get(1);
+		private final Assignment cFallThroughAssignment_3_1 = (Assignment)cAlternatives_3.eContents().get(1);
+		private final Keyword cFallThroughCommaKeyword_3_1_0 = (Keyword)cFallThroughAssignment_3_1.eContents().get(0);
 		
 		//XCasePart:
-		//	{XCasePart} typeGuard=JvmTypeReference? ("case" case=XExpression)? (":" then=XExpression | ",");
+		//	{XCasePart} typeGuard=JvmTypeReference? ("case" case=XExpression)? (":" then=XExpression | fallThrough?=",");
 		public ParserRule getRule() { return rule; }
 
-		//{XCasePart} typeGuard=JvmTypeReference? ("case" case=XExpression)? (":" then=XExpression | ",")
+		//{XCasePart} typeGuard=JvmTypeReference? ("case" case=XExpression)? (":" then=XExpression | fallThrough?=",")
 		public Group getGroup() { return cGroup; }
 
 		//{XCasePart}
@@ -1999,7 +2000,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//XExpression
 		public RuleCall getCaseXExpressionParserRuleCall_2_1_0() { return cCaseXExpressionParserRuleCall_2_1_0; }
 
-		//":" then=XExpression | ","
+		//":" then=XExpression | fallThrough?=","
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 
 		//":" then=XExpression
@@ -2014,8 +2015,11 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//XExpression
 		public RuleCall getThenXExpressionParserRuleCall_3_0_1_0() { return cThenXExpressionParserRuleCall_3_0_1_0; }
 
+		//fallThrough?=","
+		public Assignment getFallThroughAssignment_3_1() { return cFallThroughAssignment_3_1; }
+
 		//","
-		public Keyword getCommaKeyword_3_1() { return cCommaKeyword_3_1; }
+		public Keyword getFallThroughCommaKeyword_3_1_0() { return cFallThroughCommaKeyword_3_1_0; }
 	}
 
 	public class XForLoopExpressionElements extends AbstractParserRuleElementFinder {
@@ -3767,7 +3771,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XCasePart:
-	//	{XCasePart} typeGuard=JvmTypeReference? ("case" case=XExpression)? (":" then=XExpression | ",");
+	//	{XCasePart} typeGuard=JvmTypeReference? ("case" case=XExpression)? (":" then=XExpression | fallThrough?=",");
 	public XCasePartElements getXCasePartAccess() {
 		return (pXCasePart != null) ? pXCasePart : (pXCasePart = new XCasePartElements());
 	}

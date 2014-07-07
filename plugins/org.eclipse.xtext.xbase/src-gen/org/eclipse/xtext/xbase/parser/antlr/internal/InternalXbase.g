@@ -3040,11 +3040,22 @@ ruleXCasePart returns [EObject current=null]
 
 )
 ))
-    |	otherlv_6=',' 
+    |(
+(
+		lv_fallThrough_6_0=	',' 
     {
-    	newLeafNode(otherlv_6, grammarAccess.getXCasePartAccess().getCommaKeyword_3_1());
+        newLeafNode(lv_fallThrough_6_0, grammarAccess.getXCasePartAccess().getFallThroughCommaKeyword_3_1_0());
     }
-))
+ 
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getXCasePartRule());
+	        }
+       		setWithLastConsumed($current, "fallThrough", true, ",");
+	    }
+
+)
+)))
 ;
 
 
