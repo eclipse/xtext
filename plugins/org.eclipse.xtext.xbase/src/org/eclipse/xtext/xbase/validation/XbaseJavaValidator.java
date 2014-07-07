@@ -101,6 +101,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.Functions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
@@ -1395,6 +1396,15 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	protected boolean isHidden(INode child) {
 		return child instanceof ILeafNode && ((ILeafNode) child).isHidden();
+	}
+	
+	@Check
+	public void checkRedundantCase(XSwitchExpression switchExpression) {
+		XCasePart casePart = IterableExtensions.last(switchExpression.getCases());
+		if (casePart == null || !(casePart.isFallThrough() && casePart.getThen() == null)) {
+			return;
+		}
+		error("Redundant case.", casePart, null, IssueCodes.REDUNDANT_CASE);
 	}
 	
 	@Check

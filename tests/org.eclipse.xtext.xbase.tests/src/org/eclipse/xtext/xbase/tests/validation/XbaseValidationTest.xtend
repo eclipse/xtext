@@ -948,4 +948,50 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 		}
 		'''.expression.assertWarning(XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE, "equals", "false")
 	}
+
+	@Test def void testRedundantCases_01() {
+		'''
+			switch i : 1 {
+				case 1,
+			}
+		'''.expression.assertError(XbasePackage.Literals.XCASE_PART, IssueCodes.REDUNDANT_CASE)
+	}
+
+	@Test def void testRedundantCases_02() {
+		'''
+			switch i : 1 {
+				case 1,
+				case 2,
+			}
+		'''.expression.assertError(XbasePackage.Literals.XCASE_PART, IssueCodes.REDUNDANT_CASE)
+	}
+
+	@Test def void testRedundantCases_03() {
+		'''
+			switch i : 1 {
+				case 1,
+				default: 1
+			}
+		'''.expression.assertError(XbasePackage.Literals.XCASE_PART, IssueCodes.REDUNDANT_CASE)
+	}
+
+	@Test def void testRedundantCases_04() {
+		'''
+			switch i : 1 {
+				case 1,
+				case 2,
+				default: 1
+			}
+		'''.expression.assertError(XbasePackage.Literals.XCASE_PART, IssueCodes.REDUNDANT_CASE)
+	}
+
+	@Test def void testRedundantCases_05() {
+		'''
+			switch i : 1 {
+				case 1,
+				case 2: 1
+			}
+		'''.expression.assertNoError(IssueCodes.REDUNDANT_CASE)
+	}
+
 }

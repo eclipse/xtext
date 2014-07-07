@@ -17,6 +17,7 @@ public class IssueCodes {
 	public static final String ABSTRACT_CLASS_INSTANTIATION = ISSUE_CODE_PREFIX + "abstract_class_instantiation";
 	public static final String AMBIGUOUS_FEATURE_CALL = ISSUE_CODE_PREFIX + "ambiguous_feature_call";
 	public static final String DUPLICATE_CASE = ISSUE_CODE_PREFIX + "duplicate_case";
+	public static final String REDUNDANT_CASE = ISSUE_CODE_PREFIX + "redundant_case";
 	/* see https://bugs.eclipse.org/bugs/show_bug.cgi?id=397062 */
 	/**
 	 * This indicates an overload problem, e.g. if two implicit receivers provide methods
