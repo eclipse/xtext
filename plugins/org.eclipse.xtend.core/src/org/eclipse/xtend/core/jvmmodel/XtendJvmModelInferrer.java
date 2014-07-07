@@ -153,13 +153,17 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 				logger.error("Couldn't create annotation contexts", t);
 				return;
 			}
-			
-			for (ActiveAnnotationContext ctx : contexts.getContexts().values()) {
-				try {
-					annotationProcessor.indexingPhase(ctx, acceptor, CancelIndicator.NullImpl);
-				} catch (Throwable t) {
-					ctx.handleProcessingError(xtendFile.eResource(), t);
+			try {
+				contexts.before(ActiveAnnotationContexts.AnnotationCallback.INDEXING);
+				for (ActiveAnnotationContext ctx : contexts.getContexts().values()) {
+					try {
+						annotationProcessor.indexingPhase(ctx, acceptor, CancelIndicator.NullImpl);
+					} catch (Throwable t) {
+						ctx.handleProcessingError(xtendFile.eResource(), t);
+					}
 				}
+			} finally {
+				contexts.after(ActiveAnnotationContexts.AnnotationCallback.INDEXING);
 			}
 		} finally {
 			compilerPhases.setIndexing(xtendFile, false);
@@ -170,12 +174,17 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			for (Runnable runnable : doLater) {
 				runnable.run();
 			}
-			for (ActiveAnnotationContext ctx : contexts.getContexts().values()) {
-				try {
-					annotationProcessor.inferencePhase(ctx, CancelIndicator.NullImpl);
-				} catch (Throwable t) {
-					ctx.handleProcessingError(xtendFile.eResource(), t);
+			try {
+				contexts.before(ActiveAnnotationContexts.AnnotationCallback.INFERENCE);
+				for (ActiveAnnotationContext ctx : contexts.getContexts().values()) {
+					try {
+						annotationProcessor.inferencePhase(ctx, CancelIndicator.NullImpl);
+					} catch (Throwable t) {
+						ctx.handleProcessingError(xtendFile.eResource(), t);
+					}
 				}
+			} finally {
+				contexts.after(ActiveAnnotationContexts.AnnotationCallback.INFERENCE);
 			}
 		}
 	}

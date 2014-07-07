@@ -182,6 +182,12 @@ public class IndexingOwnedConverter extends OwnedConverter {
       JvmTypeReference _wrapIfNecessary = this.wrapIfNecessary(_returnType_1);
       final LightweightTypeReference returnType = this.visit(_wrapIfNecessary);
       result.setReturnType(returnType);
+      if ((reference instanceof XFunctionTypeRefImplCustom)) {
+        boolean _isProcedure = this.isProcedure(((XFunctionTypeRefImplCustom)reference));
+        if (_isProcedure) {
+          return result;
+        }
+      }
       ITypeReferenceOwner _owner_1 = this.getOwner();
       final WildcardTypeReference typeArgument = new WildcardTypeReference(_owner_1);
       typeArgument.addUpperBound(returnType);
