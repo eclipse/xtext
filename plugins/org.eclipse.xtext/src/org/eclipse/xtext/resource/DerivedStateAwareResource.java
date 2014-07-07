@@ -158,18 +158,4 @@ public class DerivedStateAwareResource extends LazyLinkingResource {
 		}
 	}
 	
-	/**
-	 * @since 2.7
-	 */
-	public boolean isChangingDerivedState() {
-		return isInitializing;
-	}
-
-	/**
-	 * @since 2.7
-	 */
-	public boolean hasDerivedState() {
-		return fullyInitialized;
-	}
-
 }
