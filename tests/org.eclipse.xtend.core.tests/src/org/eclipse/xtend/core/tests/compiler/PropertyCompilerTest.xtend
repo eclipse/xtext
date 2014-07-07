@@ -18,6 +18,63 @@ import org.junit.Test
 class PropertyCompilerTest extends AbstractXtendCompilerTest {
 	@Inject
 	extension ValidationTestHelper
+	
+	@Test
+	def testBug438347_01() {
+		assertCompilesTo('''
+			class C<T> {
+				@Property var (T)=>void s
+			}
+		''', '''
+			import org.eclipse.xtend.lib.Property;
+			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			import org.eclipse.xtext.xbase.lib.Pure;
+			
+			@SuppressWarnings("all")
+			public class C<T extends Object> {
+			  @Property
+			  private Procedure1<? super T> _s;
+			  
+			  @Pure
+			  public Procedure1<? super T> getS() {
+			    return this._s;
+			  }
+			  
+			  public void setS(final Procedure1<? super T> s) {
+			    this._s = s;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testBug438347_02() {
+		assertCompilesTo('''
+			class C {
+				@Property var (String)=>void s
+			}
+		''', '''
+			import org.eclipse.xtend.lib.Property;
+			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			import org.eclipse.xtext.xbase.lib.Pure;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  @Property
+			  private Procedure1<? super String> _s;
+			  
+			  @Pure
+			  public Procedure1<? super String> getS() {
+			    return this._s;
+			  }
+			  
+			  public void setS(final Procedure1<? super String> s) {
+			    this._s = s;
+			  }
+			}
+		''')
+	}
+	
 	@Test
 	def compileProperty() {
 		val generatorConfig = generatorConfigProvider.get(null)
