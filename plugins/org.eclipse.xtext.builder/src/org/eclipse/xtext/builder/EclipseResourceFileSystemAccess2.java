@@ -490,9 +490,13 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	}
 
 	private void syncIfNecessary(IFile result) {
+		syncIfNecessary(result, monitor);
+	}
+
+	private void syncIfNecessary(IFile result, IProgressMonitor progressMonitor) {
 		if (!result.isSynchronized(IResource.DEPTH_ZERO)) {
 			try {
-				result.refreshLocal(IResource.DEPTH_ZERO, monitor);
+				result.refreshLocal(IResource.DEPTH_ZERO, progressMonitor);
 			} catch (CoreException c) {
 				// ignore
 			}
@@ -532,11 +536,25 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	}
 
 	protected IFile getFile(String fileName, String outputName) {
+		return getFile(fileName, outputName, monitor);
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	protected IFile getFile(String fileName, String outputName, IProgressMonitor progressMonitor) {
 		OutputConfiguration configuration = getOutputConfig(outputName);
 		IContainer container = getContainer(configuration);
 		IFile result = container.getFile(new Path(fileName));
-		syncIfNecessary(result);
+		syncIfNecessary(result, progressMonitor);
 		return result;
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public URI getURI(String fileName, IProgressMonitor progressMonitor) {
+		return getURI(fileName, DEFAULT_OUTPUT, progressMonitor);
 	}
 
 	/**
@@ -545,28 +563,63 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	 * @since 2.3
 	 */
 	public URI getURI(String fileName, String outputConfiguration) {
-		IFile file = getFile(fileName, outputConfiguration);
+		return getURI(fileName, outputConfiguration, monitor);
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public URI getURI(String fileName, String outputConfiguration, IProgressMonitor progressMonitor) {
+		IFile file = getFile(fileName, outputConfiguration, progressMonitor);
 		return URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public InputStream readBinaryFile(String fileName, IProgressMonitor progressMonitor) {
+		return readBinaryFile(fileName, DEFAULT_OUTPUT, progressMonitor);
 	}
 
 	/**
 	 * @since 2.4
 	 */
 	public InputStream readBinaryFile(String fileName, String outputCfgName) throws RuntimeIOException {
+		return readBinaryFile(fileName, outputCfgName, monitor);
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public InputStream readBinaryFile(String fileName, String outputCfgName, IProgressMonitor progressMonitor) throws RuntimeIOException {
 		try {
-			IFile file = getFile(fileName, outputCfgName);
+			IFile file = getFile(fileName, outputCfgName, progressMonitor);
 			return file.getContents();
 		} catch (CoreException e) {
 			throw new RuntimeIOException(e);
 		}
 	}
-
+	
+	/**
+	 * @since 2.7
+	 */
+	public CharSequence readTextFile(String fileName, IProgressMonitor progressMonitor) {
+		return readTextFile(fileName, DEFAULT_OUTPUT, progressMonitor);
+	}
+	
 	/**
 	 * @since 2.4
 	 */
 	public CharSequence readTextFile(String fileName, String outputCfgName) throws RuntimeIOException {
+		return readTextFile(fileName, outputCfgName, monitor);
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	public CharSequence readTextFile(String fileName, String outputCfgName, IProgressMonitor progressMonitor) throws RuntimeIOException {
 		try {
-			IFile file = getFile(fileName, outputCfgName);
+			IFile file = getFile(fileName, outputCfgName, progressMonitor);
 			String encoding = getEncoding(file);
 			InputStream inputStream = file.getContents();
 			try {

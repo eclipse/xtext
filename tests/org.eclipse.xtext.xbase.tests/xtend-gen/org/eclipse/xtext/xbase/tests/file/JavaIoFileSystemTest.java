@@ -164,9 +164,10 @@ public class JavaIoFileSystemTest {
     Iterable<? extends Path> _children_1 = this.fs.getChildren(Path.ROOT);
     int _size = IterableExtensions.size(_children_1);
     Assert.assertEquals(_join, 1, _size);
-    Path _path = new Path("/bar");
-    boolean _mkdir = this.fs.mkdir(_path);
-    Assert.assertTrue(_mkdir);
+    final Path path = new Path("/bar");
+    this.fs.mkdir(path);
+    boolean _exists = this.fs.exists(path);
+    Assert.assertTrue(_exists);
     Iterable<? extends Path> _children_2 = this.fs.getChildren(Path.ROOT);
     int _size_1 = IterableExtensions.size(_children_2);
     Assert.assertEquals(2, _size_1);

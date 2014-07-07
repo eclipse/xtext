@@ -8,19 +8,19 @@
 package org.eclipse.xtext.xbase.tests.file
 
 import java.io.File
+import java.io.FileInputStream
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport
 import org.eclipse.xtend.lib.macro.file.Path
+import org.eclipse.xtext.junit4.internal.TemporaryFolder
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.xbase.file.JavaIOFileSystemSupport
 import org.eclipse.xtext.xbase.file.ProjectConfig
 import org.eclipse.xtext.xbase.file.WorkspaceConfig
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 
 import static org.junit.Assert.*
-import java.io.FileInputStream
-import org.eclipse.xtext.junit4.internal.TemporaryFolder
-import org.junit.Rule
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -91,7 +91,9 @@ class JavaIoFileSystemTest {
 	@Test def void testGetWorkspaceChildren() {
 		assertEquals(Path.ROOT.children.join('[', ', ', ']') [ it.segments.join('.') ], 1, Path.ROOT.children.size)
 		
-		assertTrue(new Path("/bar").mkdir)
+		val path = new Path("/bar")
+		path.mkdir
+		assertTrue(path.exists)
 		
 		assertEquals(2, Path.ROOT.children.size)
 	}
