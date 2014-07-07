@@ -13,6 +13,76 @@ import org.junit.Test
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 class AnnotationCompilerTest extends AbstractXtendCompilerTest {
+	
+	@Test
+	def testAnnotationWithEnumValue_01() {
+		assertCompilesTo('''
+			class C {
+				@A(NAME)
+				String s1
+				@A(value=NAME)
+				String s2
+			}
+			annotation A {
+				E value
+			}
+			enum E {
+				NAME
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  @A(E.NAME)
+			  private String s1;
+			  
+			  @A(value = E.NAME)
+			  private String s2;
+			}
+		''')
+	}
+	
+	@Test
+	def testAnnotationWithEnumValue_02() {
+		assertCompilesTo('''
+			class C {
+				@A(NAME)
+				String s1
+				@A(NAME, NAME)
+				String s2
+				@A(#[NAME])
+				String s3
+				@A(value=NAME)
+				String s4
+				@A(value=#[NAME])
+				String s5
+			}
+			annotation A {
+				E[] value
+			}
+			enum E {
+				NAME
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  @A(E.NAME)
+			  private String s1;
+			  
+			  @A({ E.NAME, E.NAME })
+			  private String s2;
+			  
+			  @A({ E.NAME })
+			  private String s3;
+			  
+			  @A(value = E.NAME)
+			  private String s4;
+			  
+			  @A(value = { E.NAME })
+			  private String s5;
+			}
+		''')
+	}
+	
 	@Test
 	def testAnnotation() {
 		assertCompilesTo('''

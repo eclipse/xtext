@@ -19,13 +19,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -66,7 +64,6 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.Pair;
-import org.eclipse.xtext.xbase.scoping.batch.ITypeImporter;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
@@ -415,21 +412,6 @@ public class XbaseTypeComputer implements ITypeComputer {
 			ITypeComputationState caseState = casePartState.withNonVoidExpectation();
 			if (localIsEnum) {
 				assert potentialEnumType != null;
-				class EnumLiteralImporter implements ITypeImporter.Client {
-					private JvmDeclaredType enumType;
-
-					public EnumLiteralImporter(JvmDeclaredType enumType) {
-						this.enumType = enumType;
-					}
-
-					public void doAddImports(ITypeImporter importer) {
-						for(JvmMember member: enumType.getMembers()) {
-							if (member instanceof JvmEnumerationLiteral) {
-								importer.importStatic(enumType, member.getSimpleName());
-							}
-						}
-					}
-				}
 				caseState.addImports(new EnumLiteralImporter((JvmDeclaredType) localPotentialEnumType));
 			}
 			caseState.withinScope(casePart);
