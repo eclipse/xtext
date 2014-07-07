@@ -35,6 +35,122 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
   private ValidationTestHelper _validationTestHelper;
   
   @Test
+  public void testBug438347_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C<T> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Property var (T)=>void s");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtend.lib.Property;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Pure;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C<T extends Object> {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Property");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private Procedure1<? super T> _s;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Pure");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Procedure1<? super T> getS() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return this._s;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void setS(final Procedure1<? super T> s) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("this._s = s;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testBug438347_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Property var (String)=>void s");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtend.lib.Property;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Pure;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Property");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private Procedure1<? super String> _s;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Pure");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Procedure1<? super String> getS() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return this._s;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void setS(final Procedure1<? super String> s) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("this._s = s;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void compileProperty() {
     final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
     StringConcatenation _builder = new StringConcatenation();

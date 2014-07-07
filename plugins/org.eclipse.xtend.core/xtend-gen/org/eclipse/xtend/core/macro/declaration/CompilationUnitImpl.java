@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.macro.ActiveAnnotationContexts;
 import org.eclipse.xtend.core.macro.CompilationContextImpl;
 import org.eclipse.xtend.core.macro.ConstantExpressionsInterpreter;
 import org.eclipse.xtend.core.macro.declaration.AnnotationReferenceBuildContextImpl;
@@ -383,7 +384,11 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public void setXtendFile(final XtendFile xtendFile) {
     this._xtendFile = xtendFile;
-    Resource _eResource = xtendFile.eResource();
+  }
+  
+  public void before(final ActiveAnnotationContexts.AnnotationCallback phase) {
+    XtendFile _xtendFile = this.getXtendFile();
+    Resource _eResource = _xtendFile.eResource();
     ResourceSet _resourceSet = _eResource.getResourceSet();
     final StandardTypeReferenceOwner standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, _resourceSet);
     boolean _isIndexing = this.isIndexing();
@@ -393,6 +398,13 @@ public class CompilationUnitImpl implements CompilationUnit {
     } else {
       OwnedConverter _ownedConverter = new OwnedConverter(standardTypeReferenceOwner);
       this.typeRefConverter = _ownedConverter;
+    }
+  }
+  
+  public void after(final ActiveAnnotationContexts.AnnotationCallback phase) {
+    boolean _equals = Objects.equal(phase, ActiveAnnotationContexts.AnnotationCallback.INDEXING);
+    if (_equals) {
+      this.identityCache.clear();
     }
   }
   
@@ -906,35 +918,30 @@ public class CompilationUnitImpl implements CompilationUnit {
       if (_equals) {
         return null;
       }
-      final Function1<JvmTypeReference, TypeReference> _function = new Function1<JvmTypeReference, TypeReference>() {
-        public TypeReference apply(final JvmTypeReference it) {
-          TypeReference _switchResult = null;
-          boolean _matched = false;
-          if (!_matched) {
-            if (delegate instanceof XComputedTypeReferenceImplCustom) {
-              boolean _isEquivalentComputed = ((XComputedTypeReferenceImplCustom)delegate).isEquivalentComputed();
-              boolean _not = (!_isEquivalentComputed);
-              if (_not) {
-                _matched=true;
-                InferredTypeReferenceImpl _inferredTypeReferenceImpl = new InferredTypeReferenceImpl();
-                final Procedure1<InferredTypeReferenceImpl> _function = new Procedure1<InferredTypeReferenceImpl>() {
-                  public void apply(final InferredTypeReferenceImpl it) {
-                    it.setDelegate(((XComputedTypeReferenceImplCustom)delegate));
-                    it.setCompilationUnit(CompilationUnitImpl.this);
-                  }
-                };
-                _switchResult = ObjectExtensions.<InferredTypeReferenceImpl>operator_doubleArrow(_inferredTypeReferenceImpl, _function);
+      TypeReference _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (delegate instanceof XComputedTypeReferenceImplCustom) {
+          boolean _isEquivalentComputed = ((XComputedTypeReferenceImplCustom)delegate).isEquivalentComputed();
+          boolean _not = (!_isEquivalentComputed);
+          if (_not) {
+            _matched=true;
+            InferredTypeReferenceImpl _inferredTypeReferenceImpl = new InferredTypeReferenceImpl();
+            final Procedure1<InferredTypeReferenceImpl> _function = new Procedure1<InferredTypeReferenceImpl>() {
+              public void apply(final InferredTypeReferenceImpl it) {
+                it.setDelegate(((XComputedTypeReferenceImplCustom)delegate));
+                it.setCompilationUnit(CompilationUnitImpl.this);
               }
-            }
+            };
+            _switchResult = ObjectExtensions.<InferredTypeReferenceImpl>operator_doubleArrow(_inferredTypeReferenceImpl, _function);
           }
-          if (!_matched) {
-            LightweightTypeReference _lightweightReference = CompilationUnitImpl.this.typeRefConverter.toLightweightReference(delegate);
-            _switchResult = CompilationUnitImpl.this.toTypeReference(_lightweightReference);
-          }
-          return _switchResult;
         }
-      };
-      _xblockexpression = this.<JvmTypeReference, TypeReference>getOrCreate(delegate, _function);
+      }
+      if (!_matched) {
+        LightweightTypeReference _lightweightReference = this.typeRefConverter.toLightweightReference(delegate);
+        _switchResult = this.toTypeReference(_lightweightReference);
+      }
+      _xblockexpression = _switchResult;
     }
     return _xblockexpression;
   }
