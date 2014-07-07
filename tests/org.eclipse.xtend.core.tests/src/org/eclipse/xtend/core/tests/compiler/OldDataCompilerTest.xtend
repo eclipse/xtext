@@ -6,15 +6,15 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.compiler
+
 import com.google.inject.Inject
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Test
-import org.junit.Ignore
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-class DataCompilerTest extends AbstractXtendCompilerTest {
+class OldDataCompilerTest extends AbstractXtendCompilerTest {
 	
 	@Inject
 	extension ValidationTestHelper
@@ -125,10 +125,6 @@ class DataCompilerTest extends AbstractXtendCompilerTest {
 			public class Foo {
 			  private final String _name = "foo";
 			  
-			  public Foo() {
-			    super();
-			  }
-			  
 			  @Override
 			  @Pure
 			  public int hashCode() {
@@ -186,10 +182,6 @@ class DataCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Foo {
 			  private final String _name = "foo";
-			  
-			  public Foo() {
-			    super();
-			  }
 			  
 			  @Override
 			  @Pure
@@ -319,10 +311,6 @@ class DataCompilerTest extends AbstractXtendCompilerTest {
 			@Data class Foo {
 				int foo
 				
-				new(String bar) {
-					_foo = 1
-				}
-				
 				def getFoo(String bar) {
 					1
 				}
@@ -399,10 +387,6 @@ class DataCompilerTest extends AbstractXtendCompilerTest {
 			    Class<? extends Node> _class = this.getClass();
 			    String _simpleName = _class.getSimpleName();
 			    return _simpleName.toLowerCase();
-			  }
-			  
-			  public Node() {
-			    super();
 			  }
 			  
 			  @Override
@@ -496,7 +480,6 @@ class DataCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	@Ignore("Switched the check of, because the necessary API needs to be distributed as a nightly first")
 	def testSuperClassWithTypeParameters() {
 		'''
 			@Data class Foo<T> {
@@ -510,7 +493,6 @@ class DataCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	@Ignore("DeclaredConstructor has correct context type, but still returns Object")
 	def testClassAndSuperClassWithTypeParameters() {
 		'''
 			@Data class Foo<T> {
