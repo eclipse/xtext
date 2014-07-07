@@ -38,7 +38,6 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBasicForLoopExpression;
-import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCastedExpression;
@@ -70,11 +69,10 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
-import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.internal.FeatureLinkHelper;
@@ -87,22 +85,16 @@ import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnknownTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
-import org.eclipse.xtext.xbase.util.XExpressionHelper;
 import org.eclipse.xtext.xbase.util.XSwitchExpressions;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XbaseCompiler extends FeatureCallCompiler {
-	
-	@Inject 
-	private XExpressionHelper expressionHelper;
 	
 	@Inject 
 	private IEarlyExitComputer earlyExitComputer;
@@ -124,61 +116,12 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			internalToJavaStatement(element, b, true);
 	}
 
+	/**
+	 * @param isReferenced unused in this context but necessary for dispatch signature 
+	 */
 	protected void _toJavaStatement(final XSetLiteral literal, ITreeAppendable b, boolean isReferenced) {
-		LightweightTypeReference literalType = resolveType(literal, Map.class);
-		if(literalType != null) {
-			if(isReferenced)
-				declareSyntheticVariable(literal, b);
-			for(XExpression element: literal.getElements()) {
-				if (expressionHelper.isOperatorFromExtension(element, OperatorMapping.MAPPED_TO, ObjectExtensions.class)) {
-					XBinaryOperation binaryOperation = (XBinaryOperation) element;
-					internalToJavaStatement(binaryOperation.getLeftOperand(), b, true);
-					internalToJavaStatement(binaryOperation.getRightOperand(), b, true);
-				} else if (isType(element, Pair.class)) {
-					internalToJavaStatement(element, b, true);
-				}
-			}
-			LightweightTypeReference keyType = literalType.getTypeArguments().get(0);
-			LightweightTypeReference valueType = literalType.getTypeArguments().get(1);
-			JvmType mapsClass = findKnownTopLevelType(Maps.class, literal);
-			
-			final String tempMapName = b.declareSyntheticVariable(Tuples.create(literal,  "_tempMap"), "_tempMap");
-			b.newLine();
-			serialize(literalType.toTypeReference(), literal, b);
-			b.append(" ").append(tempMapName).append(" = ");
-			b.append(mapsClass).append(".<").append(keyType).append(", ").append(valueType).append(">newHashMap()").append(";").newLine();
-			for(XExpression element: literal.getElements())  {
-				if (expressionHelper.isOperatorFromExtension(element, OperatorMapping.MAPPED_TO, ObjectExtensions.class)) {
-					XBinaryOperation binaryOperation = (XBinaryOperation) element;
-					b.append(tempMapName).append(".put(");
-					internalToJavaExpression(binaryOperation.getLeftOperand(), b);
-					b.append(", ");
-					internalToJavaExpression(binaryOperation.getRightOperand(), b);
-					b.append(");").newLine();
-				} else if (isType(element, Pair.class)) {
-					b.append(tempMapName).append(".put(");
-					internalToJavaExpression(element, b);
-					b.append(" == null ? null : ");
-					internalToJavaExpression(element, b);
-					b.append(".getKey()");
-					b.append(", ");
-					internalToJavaExpression(element, b);
-					b.append(" == null ? null : ");
-					internalToJavaExpression(element, b);
-					b.append(".getValue()");
-					b.append(");").newLine();
-				}
-			}
-			if(isReferenced) 
-				b.append(getVarName(literal, b)).append(" = ");
-			JvmType collectionsClass = findKnownTopLevelType(Collections.class, literal);
-			b.append(collectionsClass)
-				.append(".<").append(keyType).append(", ").append(valueType)
-				.append(">unmodifiableMap(").append(tempMapName).append(");");
-		} else {
-			for(XExpression element: literal.getElements()) 
-				internalToJavaStatement(element, b, true);
-		}
+		for(XExpression element: literal.getElements()) 
+			internalToJavaStatement(element, b, true);
 	}
 
 	protected boolean isType(XExpression element, Class<?> clazz) {
@@ -212,7 +155,11 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	protected void _toJavaExpression(XListLiteral literal, ITreeAppendable b) {
 		LightweightTypeReference literalType = batchTypeResolver.resolveTypes(literal).getActualType(literal);
-		if (literalType != null && literalType.isArray()) {
+		if (literalType == null) {
+			b.append("error - couldn't compute type for literal : "+literal);
+			return;
+		} 
+		if (literalType.isArray()) {
 			LightweightTypeReference expectedType = batchTypeResolver.resolveTypes(literal).getExpectedType(literal);
 			boolean skipTypeName = false;
 			if (expectedType != null && expectedType.isArray()) {
@@ -240,16 +187,37 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			}
 			return;
 		} else {
-			appendImmutableCollectionExpression(literal, b, "unmodifiableList", Lists.class, "newArrayList");
+			appendImmutableCollectionExpression(literal, b, "unmodifiableList", CollectionLiterals.class, "newArrayList");
 		}
 	}
 
 	protected void _toJavaExpression(XSetLiteral literal, ITreeAppendable b) {
 		LightweightTypeReference literalType = batchTypeResolver.resolveTypes(literal).getActualType(literal);
-		if(literalType != null && !literalType.isType(Map.class)) 
-			appendImmutableCollectionExpression(literal, b, "unmodifiableSet", Sets.class, "newHashSet");
-		else
-			b.trace(literal, false).append(getVarName(literal, b));
+		if (literalType == null) {
+			b.append("error - couldn't compute type for literal : "+literal);
+			return;
+		} 
+		if (literalType.isType(Map.class)) {
+			LightweightTypeReference keyType = literalType.getTypeArguments().get(0);
+			LightweightTypeReference valueType = literalType.getTypeArguments().get(1);
+			JvmType literalsClass = findKnownTopLevelType(CollectionLiterals.class, literal);
+			JvmType collectionsClass = findKnownTopLevelType(Collections.class, literal);
+			b.append(collectionsClass)
+				.append(".<").append(keyType).append(", ").append(valueType)
+				.append(">unmodifiableMap(");
+			b.append(literalsClass).append(".<").append(keyType).append(", ").append(valueType).append(">newHashMap(");
+			Iterator<XExpression> elements = literal.getElements().iterator();
+			while(elements.hasNext())  {
+				XExpression element = elements.next();
+				internalToJavaExpression(element, b);
+				if (elements.hasNext()) {
+					b.append(", ");
+				}
+			}
+			b.append("))");
+		} else {
+			appendImmutableCollectionExpression(literal, b, "unmodifiableSet", CollectionLiterals.class, "newHashSet");
+		}
 	}
 	
 	protected void appendImmutableCollectionExpression(XCollectionLiteral literal,
@@ -1696,8 +1664,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			return false;
 		}
 		if (expr instanceof XSetLiteral) {
-			LightweightTypeReference literalType = batchTypeResolver.resolveTypes(expr).getActualType(expr);
-			return literalType != null && literalType.isType(Map.class);
+			return false;
 		}
 		if (expr instanceof XCastedExpression) {
 			return false;

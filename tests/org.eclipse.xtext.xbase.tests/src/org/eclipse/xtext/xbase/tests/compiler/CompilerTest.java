@@ -694,9 +694,22 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"\n'foo'.toFirstUpper");
 	}
 	
+	@Test public void testSetLiteral() throws Exception {
+		assertCompilesTo(
+				"return java.util.Collections.<String>unmodifiableSet(org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newHashSet(\"foo\"));\n",
+				"#{'foo'}");
+	}
+	
+	@Test public void testMapLiteral() throws Exception {
+		assertCompilesTo(
+				"org.eclipse.xtext.xbase.lib.Pair<String, Integer> _mappedTo = org.eclipse.xtext.xbase.lib.Pair.<String, Integer>of(\"foo\", Integer.valueOf(42));\n"+
+				"return java.util.Collections.<String, Integer>unmodifiableMap(org.eclipse.xtext.xbase.lib.CollectionLiterals.<String, Integer>newHashMap(_mappedTo));\n",
+				"#{'foo'->42}");
+	}
+	
 	@Test public void testListLiteralAsList() throws Exception {
 		assertCompilesTo(
-				"return java.util.Collections.<String>unmodifiableList(com.google.common.collect.Lists.<String>newArrayList(\"foo\"));\n",
+				"return java.util.Collections.<String>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList(\"foo\"));\n",
 				"#['foo']");
 	}
 
