@@ -4878,12 +4878,11 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			}
 		'''.assertCompilesTo('''
 			package org.xtext.example.mydsl;
-
-			import com.google.common.collect.Maps;
-			import com.google.common.collect.Sets;
+			
 			import java.util.Collections;
 			import java.util.Map;
 			import java.util.Set;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Pair;
 			import org.xtext.example.mydsl.Bug412642_2;
 			
@@ -4894,22 +4893,13 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public void bar() {
 			    final Pair<String, Integer> pair = Pair.<String, Integer>of("Apple", Integer.valueOf(1));
 			    final Pair<String, Integer> _pair = pair;
-			    Map<Object, Object> _xsetliteral = null;
+			    Pair<String, Integer> _mappedTo = Pair.<String, Integer>of("Banana", Integer.valueOf(2));
 			    Pair<String, Integer> _methodStaticPair = Bug412642_2.methodStaticPair();
 			    Pair<Object, Object> _plus = this.operator_plus(
 			      1, 2);
-			    Map<Object, Object> _tempMap = Maps.<Object, Object>newHashMap();
-			    _tempMap.put(pair == null ? null : pair.getKey(), pair == null ? null : pair.getValue());
-			    _tempMap.put(_pair == null ? null : _pair.getKey(), _pair == null ? null : _pair.getValue());
-			    _tempMap.put("Banana", Integer.valueOf(2));
-			    _tempMap.put(Bug412642_2.staticPair == null ? null : Bug412642_2.staticPair.getKey(), Bug412642_2.staticPair == null ? null : Bug412642_2.staticPair.getValue());
-			    _tempMap.put(this.pairField == null ? null : this.pairField.getKey(), this.pairField == null ? null : this.pairField.getValue());
-			    _tempMap.put(_methodStaticPair == null ? null : _methodStaticPair.getKey(), _methodStaticPair == null ? null : _methodStaticPair.getValue());
-			    _tempMap.put(_plus == null ? null : _plus.getKey(), _plus == null ? null : _plus.getValue());
-			    _xsetliteral = Collections.<Object, Object>unmodifiableMap(_tempMap);
-			    final Map<Object, Object> map2 = _xsetliteral;
-			    Pair<String, Integer> _mappedTo = Pair.<String, Integer>of("Banana", Integer.valueOf(2));
-			    final Set<?> map3 = Collections.<Object>unmodifiableSet(Sets.<Object>newHashSet(Integer.valueOf((1 * 2)), _mappedTo));
+			    final Map<Object, Object> map2 = Collections.<Object, Object>unmodifiableMap(CollectionLiterals.<Object, Object>newHashMap(pair, _pair, _mappedTo, Bug412642_2.staticPair, this.pairField, _methodStaticPair, _plus));
+			    Pair<String, Integer> _mappedTo_1 = Pair.<String, Integer>of("Banana", Integer.valueOf(2));
+			    final Set<?> map3 = Collections.<Object>unmodifiableSet(CollectionLiterals.<Object>newHashSet(Integer.valueOf((1 * 2)), _mappedTo_1));
 			  }
 			  
 			  public Pair<Object, Object> operator_plus(final int operant, final int operand2) {
@@ -4958,12 +4948,11 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			}
 		'''.assertCompilesTo('''
 			package org.xtext.example.mydsl;
-
-			import com.google.common.collect.Maps;
-			import com.google.common.collect.Sets;
+			
 			import java.util.Collections;
 			import java.util.Map;
 			import java.util.Set;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Pair;
 			import org.xtext.example.mydsl.Bug412642_2;
 			
@@ -4974,22 +4963,13 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public void bar() {
 			    final Pair<String, Integer> pair = Pair.<String, Integer>of("Apple", Integer.valueOf(1));
 			    final Pair<String, Integer> _pair = pair;
-			    Map<Object, Object> _xsetliteral = null;
+			    Pair<String, Integer> _mappedTo = Pair.<String, Integer>of("Banana", Integer.valueOf(2));
 			    Pair<String, Integer> _methodStaticPair = Bug412642_2.methodStaticPair();
 			    Pair<Object, Object> _plus = this.operator_plus(
 			      1, 2);
-			    Map<Object, Object> _tempMap = Maps.<Object, Object>newHashMap();
-			    _tempMap.put(pair == null ? null : pair.getKey(), pair == null ? null : pair.getValue());
-			    _tempMap.put(_pair == null ? null : _pair.getKey(), _pair == null ? null : _pair.getValue());
-			    _tempMap.put("Banana", Integer.valueOf(2));
-			    _tempMap.put(Bug412642_2.staticPair == null ? null : Bug412642_2.staticPair.getKey(), Bug412642_2.staticPair == null ? null : Bug412642_2.staticPair.getValue());
-			    _tempMap.put(this.pairField == null ? null : this.pairField.getKey(), this.pairField == null ? null : this.pairField.getValue());
-			    _tempMap.put(_methodStaticPair == null ? null : _methodStaticPair.getKey(), _methodStaticPair == null ? null : _methodStaticPair.getValue());
-			    _tempMap.put(_plus == null ? null : _plus.getKey(), _plus == null ? null : _plus.getValue());
-			    _xsetliteral = Collections.<Object, Object>unmodifiableMap(_tempMap);
-			    final Map<Object, Object> map2 = _xsetliteral;
-			    Pair<String, Integer> _mappedTo = Pair.<String, Integer>of("Banana", Integer.valueOf(2));
-			    final Set<?> map3 = Collections.<Object>unmodifiableSet(Sets.<Object>newHashSet(Integer.valueOf((1 * 2)), _mappedTo));
+			    final Map<Object, Object> map2 = Collections.<Object, Object>unmodifiableMap(CollectionLiterals.<Object, Object>newHashMap(pair, _pair, _mappedTo, Bug412642_2.staticPair, this.pairField, _methodStaticPair, _plus));
+			    Pair<String, Integer> _mappedTo_1 = Pair.<String, Integer>of("Banana", Integer.valueOf(2));
+			    final Set<?> map3 = Collections.<Object>unmodifiableSet(CollectionLiterals.<Object>newHashSet(Integer.valueOf((1 * 2)), _mappedTo_1));
 			  }
 			  
 			  public Pair<Object, Object> operator_plus(final int operant, final int operand2) {
@@ -5069,38 +5049,37 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  
 			}
 		'''.assertCompilesTo('''
-			import com.google.common.collect.Lists;
-			import com.google.common.collect.Sets;
 			import java.util.Collections;
 			import java.util.List;
 			import java.util.Set;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			
 			@SuppressWarnings("all")
 			public class EmptyCollections {
 			  public List<String> emptyList() {
 			    List<String> _xblockexpression = null;
 			    {
-			      final List<String> result = Collections.<String>unmodifiableList(Lists.<String>newArrayList());
+			      final List<String> result = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList());
 			      _xblockexpression = result;
 			    }
 			    return _xblockexpression;
 			  }
 			  
 			  public List<String> emptyList2() {
-			    return Collections.<String>unmodifiableList(Lists.<String>newArrayList());
+			    return Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList());
 			  }
 			  
 			  public Set<String> emptySet() {
 			    Set<String> _xblockexpression = null;
 			    {
-			      final Set<String> result = Collections.<String>unmodifiableSet(Sets.<String>newHashSet());
+			      final Set<String> result = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet());
 			      _xblockexpression = result;
 			    }
 			    return _xblockexpression;
 			  }
 			  
 			  public Set<String> emptySet2() {
-			    return Collections.<String>unmodifiableSet(Sets.<String>newHashSet());
+			    return Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet());
 			  }
 			}
 		''')

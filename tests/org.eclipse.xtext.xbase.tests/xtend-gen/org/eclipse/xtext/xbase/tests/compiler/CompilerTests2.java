@@ -1946,7 +1946,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.newLine();
       _builder_1.append("}");
       _builder_1.newLine();
-      _builder_1.append("final java.util.List<Integer> i = java.util.Collections.<Integer>unmodifiableList(com.google.common.collect.Lists.<Integer>newArrayList(Integer.valueOf(_xifexpression)));");
+      _builder_1.append("final java.util.List<Integer> i = java.util.Collections.<Integer>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Integer>newArrayList(Integer.valueOf(_xifexpression)));");
       _builder_1.newLine();
       _builder_1.append("Integer _head = org.eclipse.xtext.xbase.lib.IterableExtensions.<Integer>head(i);");
       _builder_1.newLine();
@@ -2566,7 +2566,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
     _builder_1.newLine();
     _builder_1.append("};");
     _builder_1.newLine();
-    _builder_1.append("final boolean bug = (boolean) org.eclipse.xtext.xbase.lib.IterableExtensions.<Boolean>reduce(java.util.Collections.<Boolean>unmodifiableList(com.google.common.collect.Lists.<Boolean>newArrayList(Boolean.valueOf(true), Boolean.valueOf(false), Boolean.valueOf(true))), _function);");
+    _builder_1.append("final boolean bug = (boolean) org.eclipse.xtext.xbase.lib.IterableExtensions.<Boolean>reduce(java.util.Collections.<Boolean>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Boolean>newArrayList(Boolean.valueOf(true), Boolean.valueOf(false), Boolean.valueOf(true))), _function);");
     _builder_1.newLine();
     this.compilesTo(_builder, _builder_1);
   }
@@ -2700,7 +2700,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.append("if ((element instanceof Double)) {");
       _builder_1.newLine();
       _builder_1.append("  ");
-      _builder_1.append("final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableList(com.google.common.collect.Lists.<Double>newArrayList(((Double)element)));");
+      _builder_1.append("final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Double>newArrayList(((Double)element)));");
       _builder_1.newLine();
       _builder_1.append("}");
       _builder_1.newLine();
@@ -2750,7 +2750,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.append("_matched=true;");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableList(com.google.common.collect.Lists.<Double>newArrayList(((Double)element)));");
+      _builder_1.append("final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Double>newArrayList(((Double)element)));");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("}");
@@ -2789,7 +2789,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.append("if ((element instanceof Double)) {");
       _builder_1.newLine();
       _builder_1.append("  ");
-      _builder_1.append("final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableSet(com.google.common.collect.Sets.<Double>newHashSet(((Double)element)));");
+      _builder_1.append("final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableSet(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Double>newHashSet(((Double)element)));");
       _builder_1.newLine();
       _builder_1.append("}");
       _builder_1.newLine();
@@ -2839,7 +2839,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.append("_matched=true;");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableSet(com.google.common.collect.Sets.<Double>newHashSet(((Double)element)));");
+      _builder_1.append("final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableSet(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Double>newHashSet(((Double)element)));");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("}");

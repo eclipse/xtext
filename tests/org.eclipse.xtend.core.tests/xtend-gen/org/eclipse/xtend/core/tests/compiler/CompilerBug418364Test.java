@@ -86,9 +86,9 @@ public class CompilerBug418364Test extends AbstractXtendCompilerTest {
     _builder.append("class R extends G {}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import com.google.common.collect.Lists;");
-    _builder_1.newLine();
     _builder_1.append("import java.util.Collections;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.CollectionLiterals;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
@@ -99,7 +99,7 @@ public class CompilerBug418364Test extends AbstractXtendCompilerTest {
     _builder_1.append("public void m(final R r) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("r.setInput(Collections.<Object>unmodifiableList(Lists.<Object>newArrayList()));");
+    _builder_1.append("r.setInput(Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList()));");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -135,9 +135,9 @@ public class CompilerBug418364Test extends AbstractXtendCompilerTest {
     _builder.append("class R extends G {}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import com.google.common.collect.Lists;");
-    _builder_1.newLine();
     _builder_1.append("import java.util.Collections;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.CollectionLiterals;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
@@ -148,7 +148,7 @@ public class CompilerBug418364Test extends AbstractXtendCompilerTest {
     _builder_1.append("public void m(final R r) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("r.setInput(Collections.<String>unmodifiableList(Lists.<String>newArrayList()));");
+    _builder_1.append("r.setInput(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList()));");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -186,9 +186,9 @@ public class CompilerBug418364Test extends AbstractXtendCompilerTest {
     _builder.append("class R extends G2 {}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import com.google.common.collect.Lists;");
-    _builder_1.newLine();
     _builder_1.append("import java.util.Collections;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.CollectionLiterals;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
@@ -199,7 +199,7 @@ public class CompilerBug418364Test extends AbstractXtendCompilerTest {
     _builder_1.append("public void m(final R r) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("r.setInput(Collections.<Number>unmodifiableList(Lists.<Number>newArrayList()));");
+    _builder_1.append("r.setInput(Collections.<Number>unmodifiableList(CollectionLiterals.<Number>newArrayList()));");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -237,9 +237,9 @@ public class CompilerBug418364Test extends AbstractXtendCompilerTest {
     _builder.append("class R extends G2 {}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import com.google.common.collect.Lists;");
-    _builder_1.newLine();
     _builder_1.append("import java.util.Collections;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.CollectionLiterals;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
@@ -250,7 +250,7 @@ public class CompilerBug418364Test extends AbstractXtendCompilerTest {
     _builder_1.append("public void m(final R r) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("r.setInput(Collections.<Number>unmodifiableList(Lists.<Number>newArrayList()));");
+    _builder_1.append("r.setInput(Collections.<Number>unmodifiableList(CollectionLiterals.<Number>newArrayList()));");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

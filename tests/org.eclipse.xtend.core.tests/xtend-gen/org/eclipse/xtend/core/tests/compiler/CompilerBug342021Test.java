@@ -2274,8 +2274,6 @@ public class CompilerBug342021Test extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import com.google.common.collect.Sets;");
-    _builder_1.newLine();
     _builder_1.append("import java.util.ArrayList;");
     _builder_1.newLine();
     _builder_1.append("import java.util.Collections;");
@@ -2352,7 +2350,7 @@ public class CompilerBug342021Test extends AbstractXtendCompilerTest {
     _builder_1.append("} else {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("return Collections.<Object>unmodifiableSet(Sets.<Object>newHashSet());");
+    _builder_1.append("return Collections.<Object>unmodifiableSet(CollectionLiterals.<Object>newHashSet());");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");

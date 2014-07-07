@@ -2287,8 +2287,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import com.google.common.collect.Sets;");
-    _builder_1.newLine();
     _builder_1.append("import java.util.AbstractMap;");
     _builder_1.newLine();
     _builder_1.append("import java.util.Collections;");
@@ -2296,6 +2294,8 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("import java.util.Map;");
     _builder_1.newLine();
     _builder_1.append("import java.util.Set;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.CollectionLiterals;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
@@ -2321,7 +2321,7 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("Map.Entry.class.getDeclaredMethods();");
     _builder_1.newLine();
     _builder_1.append("          ");
-    _builder_1.append("_xblockexpression = Collections.<Map.Entry<String, String>>unmodifiableSet(Sets.<Map.Entry<String, String>>newHashSet());");
+    _builder_1.append("_xblockexpression = Collections.<Map.Entry<String, String>>unmodifiableSet(CollectionLiterals.<Map.Entry<String, String>>newHashSet());");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("}");
@@ -3018,11 +3018,11 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import com.google.common.collect.Lists;");
-    _builder_1.newLine();
     _builder_1.append("import java.util.Collections;");
     _builder_1.newLine();
     _builder_1.append("import java.util.List;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.CollectionLiterals;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
@@ -3033,7 +3033,7 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public void foo() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final List<Runnable> bar = Collections.<Runnable>unmodifiableList(Lists.<Runnable>newArrayList(new Runnable() {");
+    _builder_1.append("final List<Runnable> bar = Collections.<Runnable>unmodifiableList(CollectionLiterals.<Runnable>newArrayList(new Runnable() {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public void run() {");
