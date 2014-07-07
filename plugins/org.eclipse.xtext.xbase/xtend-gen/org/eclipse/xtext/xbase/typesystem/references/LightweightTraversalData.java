@@ -28,10 +28,6 @@ public class LightweightTraversalData {
   
   private final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> _typeParameterMapping = CollectionLiterals.<JvmTypeParameter, LightweightMergedBoundTypeArgument>newLinkedHashMap();
   
-  public LightweightTraversalData() {
-    super();
-  }
-  
   @Override
   @Pure
   public int hashCode() {

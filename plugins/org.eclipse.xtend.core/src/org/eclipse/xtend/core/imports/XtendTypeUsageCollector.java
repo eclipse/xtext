@@ -37,8 +37,8 @@ public class XtendTypeUsageCollector extends TypeUsageCollector {
 	
 	@Override
 	protected PreferredType findPreferredType(JvmDeclaredType referencedType, String text) {
-		if (referencedType != null && referencedType.getQualifiedName().equals(XtendImportedNamespaceScopeProvider.OLD_PROPERTY_ANNOTATION.toString("."))) 
-			return new PreferredType("Property");
+		if (referencedType != null && referencedType.getQualifiedName().equals(XtendImportedNamespaceScopeProvider.OLD_DATA_ANNOTATION.toString("."))) 
+			return new PreferredType("Data");
 		return super.findPreferredType(referencedType, text);
 	}
 }
