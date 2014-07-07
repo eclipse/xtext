@@ -968,11 +968,11 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 				}
 			}
 		'''.assertCompilesTo('''
-			import com.google.common.collect.Sets;
 			import java.util.AbstractMap;
 			import java.util.Collections;
 			import java.util.Map;
 			import java.util.Set;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			
 			@SuppressWarnings("all")
 			public class C {
@@ -982,7 +982,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			        Set<Map.Entry<String, String>> _xblockexpression = null;
 			        {
 			          Map.Entry.class.getDeclaredMethods();
-			          _xblockexpression = Collections.<Map.Entry<String, String>>unmodifiableSet(Sets.<Map.Entry<String, String>>newHashSet());
+			          _xblockexpression = Collections.<Map.Entry<String, String>>unmodifiableSet(CollectionLiterals.<Map.Entry<String, String>>newHashSet());
 			        }
 			        return _xblockexpression;
 			      }
@@ -1284,14 +1284,14 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 				}
 			}
 		'''.assertCompilesTo('''
-			import com.google.common.collect.Lists;
 			import java.util.Collections;
 			import java.util.List;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			
 			@SuppressWarnings("all")
 			public class Foo {
 			  public void foo() {
-			    final List<Runnable> bar = Collections.<Runnable>unmodifiableList(Lists.<Runnable>newArrayList(new Runnable() {
+			    final List<Runnable> bar = Collections.<Runnable>unmodifiableList(CollectionLiterals.<Runnable>newArrayList(new Runnable() {
 			      public void run() {
 			      }
 			    }));

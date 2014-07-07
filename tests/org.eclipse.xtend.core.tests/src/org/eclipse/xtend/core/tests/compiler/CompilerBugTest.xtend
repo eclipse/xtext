@@ -78,9 +78,9 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 				}
 			}
 		''','''
-			import com.google.common.collect.Lists;
 			import java.util.Collections;
 			import java.util.List;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.IterableExtensions;
 			
 			@SuppressWarnings("all")
@@ -90,7 +90,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public String n() {
-			    String[] _m = this.m(Collections.<String[]>unmodifiableList(Lists.<String[]>newArrayList()));
+			    String[] _m = this.m(Collections.<String[]>unmodifiableList(CollectionLiterals.<String[]>newArrayList()));
 			    return _m[5];
 			  }
 			}
@@ -106,9 +106,9 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 				}
 			}
 		''','''
-			import com.google.common.collect.Lists;
 			import java.util.Collections;
 			import java.util.List;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			
 			@SuppressWarnings("all")
 			public class C {
@@ -117,7 +117,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public Object n() {
-			    return this.m(Collections.<String[]>unmodifiableList(Lists.<String[]>newArrayList(new String[] { "a", "a" })));
+			    return this.m(Collections.<String[]>unmodifiableList(CollectionLiterals.<String[]>newArrayList(new String[] { "a", "a" })));
 			  }
 			}
 		''')
@@ -902,9 +902,9 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    }
 			}
 		''', '''
-			import com.google.common.collect.Lists;
 			import java.util.Collections;
 			import java.util.List;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Functions.Function1;
 			import org.eclipse.xtext.xbase.lib.ListExtensions;
 			
@@ -916,7 +916,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			        return it.toString();
 			      }
 			    };
-			    List<String> _map = ListExtensions.<Integer, String>map(Collections.<Integer>unmodifiableList(Lists.<Integer>newArrayList(Integer.valueOf(1), Integer.valueOf(2), Integer.valueOf(3))), _function);
+			    List<String> _map = ListExtensions.<Integer, String>map(Collections.<Integer>unmodifiableList(CollectionLiterals.<Integer>newArrayList(Integer.valueOf(1), Integer.valueOf(2), Integer.valueOf(3))), _function);
 			    _map.toString();
 			  }
 			}
@@ -2092,15 +2092,14 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 				val f = #[#["a"], #{} ] 
 			}
 		''', '''
-			import com.google.common.collect.Lists;
-			import com.google.common.collect.Sets;
 			import java.util.Collection;
 			import java.util.Collections;
 			import java.util.List;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			
 			@SuppressWarnings("all")
 			public class C {
-			  private final List<? extends Collection<String>> f = Collections.<Collection<String>>unmodifiableList(Lists.<Collection<String>>newArrayList(Collections.<String>unmodifiableList(Lists.<String>newArrayList("a")), Collections.<String>unmodifiableSet(Sets.<String>newHashSet())));
+			  private final List<? extends Collection<String>> f = Collections.<Collection<String>>unmodifiableList(CollectionLiterals.<Collection<String>>newArrayList(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("a")), Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet())));
 			}
 		''')
 	}
