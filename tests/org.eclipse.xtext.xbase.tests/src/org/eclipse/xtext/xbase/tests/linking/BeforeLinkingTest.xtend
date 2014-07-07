@@ -43,8 +43,7 @@ class BeforeLinkingTest extends AbstractXbaseTestCase {
 		val implicitParameter = lambda.implicitFormalParameters.head
 		assertEquals('String', implicitParameter.parameterType.simpleName)
 		resource.update(0, 0, '')
-		assertNotNull(implicitParameter.eResource)
-		assertNull(implicitParameter.parameterType)
+		assertNull(implicitParameter.eResource)
 	}
 	
 	@Test
