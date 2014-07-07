@@ -160,6 +160,15 @@ public abstract class AbstractResolvedExecutable implements IResolvedExecutable 
 	 * @return <code>false</code> if the parameter may be substituted. <code>true</code> if it should be preserved.
 	 */
 	protected boolean isResolvedTypeParameter(JvmTypeParameter typeParameter) {
+		return isResolvedTypeParameter(getContextType(), typeParameter);
+	}
+	
+	protected boolean isResolvedTypeParameter(LightweightTypeReference typeReference, JvmTypeParameter typeParameter) {
+		for (LightweightTypeReference typeArgument : typeReference.getTypeArguments()) {
+			if (typeParameter.equals(typeArgument.getType()) || isResolvedTypeParameter(typeArgument, typeParameter)) {
+				return true;
+			}
+		}
 		return false;
 	}
 	
