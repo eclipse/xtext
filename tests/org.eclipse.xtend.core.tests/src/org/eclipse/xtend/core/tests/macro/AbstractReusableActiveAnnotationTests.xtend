@@ -15,6 +15,8 @@ import org.junit.Ignore
 import org.junit.Test
 
 import static org.junit.Assert.*
+import org.eclipse.xtend.core.macro.declaration.MutableJvmFieldDeclarationImpl
+import org.eclipse.xtend.core.macro.declaration.MutableJvmMethodDeclarationImpl
 
 abstract class AbstractReusableActiveAnnotationTests {
 	
@@ -73,6 +75,66 @@ abstract class AbstractReusableActiveAnnotationTests {
 			val fooType = foo.findDeclaredField('foo_field').type
 			assertEquals(fooType, typeReferenceProvider.newTypeReference(Integer))
 			assertEquals(fooType, foo.findDeclaredMethod('foo').returnType)
+		]
+	}
+	@Test def void testTracing() {
+		assertProcessing(
+			'myannotation/Getters.xtend' -> '''
+				package myannotation
+
+				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+				
+				@Active(GettersProcessor)
+				annotation Getters {
+				}
+				
+				class GettersProcessor extends AbstractClassProcessor {
+				
+					override doTransform(MutableClassDeclaration cls, extension TransformationContext context) {
+						cls.declaredFields.filter[isThePrimaryGeneratedJavaElement].forEach [field|
+							cls.addMethod("get" + field.simpleName.toFirstUpper) [
+								primarySourceElement = field
+								returnType = field.type
+								body = ["return this." + field.simpleName + ";"]
+								field.markAsRead
+							]
+						]
+					}
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+
+				import myannotation.Getters
+				
+				@Getters
+				class Client {
+				
+					val int bar = 1
+				
+					def create new Integer(1) foo() {
+					}
+				
+				}
+			'''
+		) [
+			val cls = typeLookup.findClass("myusercode.Client")
+			val barField = cls.findDeclaredField("bar")
+			val getters = cls.declaredMethods.filter[simpleName.startsWith("get")]
+			assertEquals(1, getters.size)
+			val getBar = getters.head
+			assertEquals("getBar", getBar.simpleName)
+			
+			val barJvmField = (barField as MutableJvmFieldDeclarationImpl).delegate
+			val getBarJvmMethod = (getBar as MutableJvmMethodDeclarationImpl).delegate
+			val elementsAssociatedWithBarField = jvmAssociations.getJvmElements(jvmAssociations.getPrimarySourceElement(barJvmField))
+			
+			assertEquals(2, elementsAssociatedWithBarField.size)
+			assertEquals(barJvmField, elementsAssociatedWithBarField.get(0))
+			assertEquals(getBarJvmMethod, elementsAssociatedWithBarField.get(1))
 		]
 	}
 	
