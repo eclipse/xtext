@@ -3216,4 +3216,128 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 	}
+	
+	@Test def void fixRedundantCase_01() {
+		create("Foo.xtend",
+		'''
+			class Foo {
+				def foo() {
+					switch i : 1 {
+						cas|e 1,
+					}
+				}
+			}
+		'''
+		)
+		.assertIssueCodes(REDUNDANT_CASE)
+		.assertResolutionLabels("Remove redundant case.", "Assign empty expression.")
+		.assertModelAfterQuickfix("Remove redundant case.",
+		'''
+			class Foo {
+				def foo() {
+					switch i : 1 {
+						
+					}
+				}
+			}
+		''')
+		.assertModelAfterQuickfix("Assign empty expression.",
+		'''
+			class Foo {
+				def foo() {
+					switch i : 1 {
+						case 1: {
+							
+						}
+					}
+				}
+			}
+		''')
+	}
+	
+	@Test def void fixRedundantCase_02() {
+		create("Foo.xtend",
+		'''
+			class Foo {
+				def foo() {
+					switch i : 1 {
+						case 1,
+						cas|e 2,
+					}
+				}
+			}
+		'''
+		)
+		.assertIssueCodes(REDUNDANT_CASE)
+		.assertResolutionLabels("Remove redundant case.", "Assign empty expression.")
+		.assertModelAfterQuickfix("Remove redundant case.",
+		'''
+			class Foo {
+				def foo() {
+					switch i : 1 {
+						case 1,
+						
+					}
+				}
+			}
+		''')
+		.assertModelAfterQuickfix("Assign empty expression.",
+		'''
+			class Foo {
+				def foo() {
+					switch i : 1 {
+						case 1,
+						case 2: {
+							
+						}
+					}
+				}
+			}
+		''')
+	}
+	
+	@Test def void fixRedundantCase_03() {
+		create("Foo.xtend",
+		'''
+			class Foo {
+				def foo() {
+					switch i : 1 {
+						case 1,
+						cas|e 2,
+						default: 1
+					}
+				}
+			}
+		'''
+		)
+		.assertIssueCodes(REDUNDANT_CASE)
+		.assertResolutionLabels("Remove redundant case.", "Assign empty expression.")
+		.assertModelAfterQuickfix("Remove redundant case.",
+		'''
+			class Foo {
+				def foo() {
+					switch i : 1 {
+						case 1,
+						
+						default: 1
+					}
+				}
+			}
+		''')
+		.assertModelAfterQuickfix("Assign empty expression.",
+		'''
+			class Foo {
+				def foo() {
+					switch i : 1 {
+						case 1,
+						case 2: {
+							
+						}
+						default: 1
+					}
+				}
+			}
+		''')
+	}
+
 }
