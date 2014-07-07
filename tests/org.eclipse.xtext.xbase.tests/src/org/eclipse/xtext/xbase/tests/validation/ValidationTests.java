@@ -515,6 +515,30 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertError(((XBlockExpression)expression).getExpressions().get(1), XbasePackage.Literals.XNULL_LITERAL, UNREACHABLE_CODE);
 	}
 	
+	@Test public void testUnreachableCode_03() throws Exception {
+		XExpression expression = expression(
+				"{\n" + 
+				"	switch i : 0 {\n" +
+				"		case 1: return 1\n" +
+				"		default: return 2\n" +
+				"	}\n" +
+				"	return 3" +
+				"}");
+		helper.assertError(expression, XbasePackage.Literals.XRETURN_EXPRESSION, UNREACHABLE_CODE);
+	}
+	
+	@Test public void testUnreachableCode_04() throws Exception {
+		XExpression expression = expression(
+				"{\n" + 
+				"	switch i : 0 {\n" +
+				"		case 1,\n" +
+				"		default: return 2\n" +
+				"	}\n" +
+				"	return 3" +
+				"}");
+		helper.assertError(expression, XbasePackage.Literals.XRETURN_EXPRESSION, UNREACHABLE_CODE);
+	}
+	
 	@Test public void testUnreachableCode421508_01() throws Exception {
 		XExpression expression = expression(
 				"{  val a = true val b = true" +
