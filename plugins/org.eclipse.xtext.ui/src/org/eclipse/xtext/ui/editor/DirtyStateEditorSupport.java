@@ -32,6 +32,7 @@ import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtext.resource.DescriptionUtils;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
@@ -442,7 +443,7 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 			return;
 		if (isDirty || ((!resource.isTrackingModification() || resource.isModified()) && delegatingClientAwareResource.isDirty() && dirtyStateManager.manageDirtyState(delegatingClientAwareResource))) {
 			synchronized (dirtyStateManager) {
-				IResourceDescription.Manager resourceDescriptionManager = resource.getResourceServiceProvider().getResourceDescriptionManager();
+				Manager resourceDescriptionManager = getResourceDescriptionManager(resource.getURI());
 				final IResourceDescription newDescription = resourceDescriptionManager.getResourceDescription(resource);
 				if (haveEObjectDescriptionsChanged(newDescription, resourceDescriptionManager)) {
 					dirtyResource.copyState(newDescription);
@@ -451,14 +452,27 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 			}
 		}
 	}
+	
+	/**
+	 * @since 2.7
+	 */
+	protected IResourceServiceProvider.Registry getResourceServiceProviderRegistry() {
+		return resourceServiceProviderRegistry;
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	protected IResourceDescription.Manager getResourceDescriptionManager(URI resourceURI) {
+		return resourceServiceProviderRegistry.getResourceServiceProvider(resourceURI).getResourceDescriptionManager();	
+	}
 
 	/**
 	 * @deprecated Use {@link #haveEObjectDescriptionsChanged(IResourceDescription, org.eclipse.xtext.resource.IResourceDescription.Manager)}.
 	 */
 	@Deprecated
 	public boolean haveEObjectDescriptionsChanged(final IResourceDescription newDescription) {
-		IResourceDescription.Manager resourceDescriptionManager = resourceServiceProviderRegistry.getResourceServiceProvider(newDescription.getURI()).getResourceDescriptionManager();
-		return haveEObjectDescriptionsChanged(newDescription, resourceDescriptionManager);
+		return haveEObjectDescriptionsChanged(newDescription, getResourceDescriptionManager(newDescription.getURI()));
 	}
 
 	/**
@@ -572,4 +586,5 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	public void setResourceDescriptions(IResourceDescriptions resourceDescriptions) {
 		this.resourceDescriptions = resourceDescriptions;
 	}
+	
 }

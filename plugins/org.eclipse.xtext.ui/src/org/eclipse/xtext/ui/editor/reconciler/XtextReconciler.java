@@ -66,7 +66,7 @@ public class XtextReconciler extends Job implements IReconciler {
 	private boolean isInstalled;
 	private boolean shouldInstallCompletionListener;
 	private volatile boolean paused;
-	private XtextEditor editor;
+	private volatile XtextEditor editor;
 	private ITextViewer textViewer;
 	private TextInputListener textInputListener;
 	private final DocumentListener documentListener;

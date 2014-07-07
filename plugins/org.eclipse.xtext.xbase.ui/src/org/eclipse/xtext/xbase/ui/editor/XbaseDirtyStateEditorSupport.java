@@ -7,15 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.editor;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.DirtyStateEditorSupport;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 
 /**
+ * For {@link BatchLinkableResource}s, the dirty state announcement has to be performed by the reconciler. 
+ * 
  * @author Jan Koehnlein - Initial contribution and API
+ * @see XbaseDirtyStateEditorSupport
+ * @see XbaseDirtyStateResourceDescription
  */
 public class XbaseDirtyStateEditorSupport extends DirtyStateEditorSupport {
-
+	
 	public void announceDirtyState(BatchLinkableResource resource) {
 		super.modelChanged(resource);
 	}
@@ -24,5 +30,12 @@ public class XbaseDirtyStateEditorSupport extends DirtyStateEditorSupport {
 	public void modelChanged(XtextResource resource) {
 		if(!(resource instanceof BatchLinkableResource))
 			super.modelChanged(resource);
+	}
+	
+	@Override
+	protected Manager getResourceDescriptionManager(URI resourceURI) {
+		XbaseDirtyStateResourceDescription.Manager xbaseSpecific = getResourceServiceProviderRegistry()
+				.getResourceServiceProvider(resourceURI).get(XbaseDirtyStateResourceDescription.Manager.class);
+		return xbaseSpecific != null ? xbaseSpecific : super.getResourceDescriptionManager(resourceURI);
 	}
 }
