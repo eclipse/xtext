@@ -10,9 +10,11 @@ package org.eclipse.xtext.xbase.annotations.typesystem;
 import java.util.List;
 
 import org.eclipse.xtext.common.types.JvmAnnotationType;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XExpression;
@@ -20,6 +22,7 @@ import org.eclipse.xtext.xbase.XListLiteral;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
+import org.eclipse.xtext.xbase.typesystem.computation.EnumLiteralImporter;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.XbaseTypeComputer;
@@ -117,7 +120,8 @@ public class XbaseWithAnnotationsTypeComputer extends XbaseTypeComputer {
 			LightweightTypeReference actualExpectation =  (value instanceof XListLiteral)
 					? expectation
 					: componentType;
-			ITypeComputationResult result = state.withExpectation(actualExpectation).computeTypes(value);
+			ITypeComputationState expectationState = addEnumImportsIfNecessary(state, actualExpectation, componentType.getType());
+			ITypeComputationResult result = expectationState.computeTypes(value);
 			LightweightTypeReference resultType = result.getActualExpressionType();
 			if (resultType != null && !actualExpectation.isAssignableFrom(resultType)) {
 				if (value instanceof XListLiteral) {
@@ -133,7 +137,8 @@ public class XbaseWithAnnotationsTypeComputer extends XbaseTypeComputer {
 		} else if (expectation == null) {
 			state.withNonVoidExpectation().computeTypes(value);
 		} else {
-			ITypeComputationResult valueResult = state.withExpectation(expectation).computeTypes(value);
+			ITypeComputationState expectationState = addEnumImportsIfNecessary(state, expectation, expectation.getType());
+			ITypeComputationResult valueResult = expectationState.computeTypes(value);
 			LightweightTypeReference valueResultType = valueResult.getActualExpressionType();
 			if (valueResultType != null && !expectation.isAssignableFrom(valueResultType)) {
 				if (value instanceof XListLiteral) {
@@ -152,6 +157,14 @@ public class XbaseWithAnnotationsTypeComputer extends XbaseTypeComputer {
 				}
 			}
 		}
+	}
+
+	private ITypeComputationState addEnumImportsIfNecessary(ITypeComputationState state, LightweightTypeReference expectedType, JvmType enumTypeCandidate) {
+		ITypeComputationState expectationState = state.withExpectation(expectedType);
+		if (enumTypeCandidate != null && enumTypeCandidate.eClass() == TypesPackage.Literals.JVM_ENUMERATION_TYPE) {
+			expectationState.addImports(new EnumLiteralImporter((JvmDeclaredType) enumTypeCandidate));
+		}
+		return expectationState;
 	}
 
 }
