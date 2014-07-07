@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
-import org.eclipse.emf.common.util.DelegatingEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
@@ -25,7 +24,7 @@ public class JvmEnumerationTypeImplCustom extends JvmEnumerationTypeImpl {
 				if (member instanceof JvmEnumerationLiteral)
 					list.add((JvmEnumerationLiteral) member);
 			}
-			literals = new DelegatingEList.UnmodifiableEList<JvmEnumerationLiteral>(list);
+			literals = list;
 		}
 		return literals;
 	}
