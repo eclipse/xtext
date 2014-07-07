@@ -125,6 +125,38 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 		});
 	}
 	
+	@Fix(IssueCodes.REDUNDANT_CASE)
+	public void fixRedundantCase(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Remove redundant case.", "Remove redundant case.", null, new ReplaceModification(issue, ""));
+		acceptor.accept(issue, "Assign empty expression.", "Assign empty expression.", null, new ISemanticModification() {
+			
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				XSwitchExpression switchExpression = EcoreUtil2.getContainerOfType(element, XSwitchExpression.class);
+				if (switchExpression == null) {
+					return;
+				}
+				XCasePart casePart = IterableExtensions.last(switchExpression.getCases());
+				if (casePart == null || !(casePart.isFallThrough() && casePart.getThen() == null)) {
+					return;
+				}
+				List<INode> nodes = NodeModelUtils.findNodesForFeature(casePart, XbasePackage.Literals.XCASE_PART__FALL_THROUGH);
+				if (nodes.isEmpty()) {
+					return;
+				}
+				INode firstNode = IterableExtensions.head(nodes);
+				INode lastNode = IterableExtensions.last(nodes);
+				int offset = firstNode.getOffset();
+				int length = lastNode.getEndOffset() - offset;
+				ReplacingAppendable appendable = appendableFactory.create(context.getXtextDocument(), (XtextResource) element.eResource(), offset, length);
+				appendable.append(": {");
+				appendable.increaseIndentation().newLine();
+				appendable.decreaseIndentation().newLine().append("}");
+				appendable.commitChanges();
+			}
+		
+		});
+	}
+	
 	@Fix(IssueCodes.INCOMPLETE_CASES_ON_ENUM)
 	public void fixIncompleteCasesOnEnum(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Add 'default' case", "Add 'default' case", null, new ISemanticModification() {

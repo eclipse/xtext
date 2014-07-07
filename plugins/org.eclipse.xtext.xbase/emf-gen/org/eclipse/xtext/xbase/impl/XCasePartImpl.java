@@ -32,6 +32,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XCasePartImpl#getCase <em>Case</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XCasePartImpl#getThen <em>Then</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XCasePartImpl#getTypeGuard <em>Type Guard</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XCasePartImpl#isFallThrough <em>Fall Through</em>}</li>
  * </ul>
  * </p>
  *
@@ -68,6 +69,26 @@ public class XCasePartImpl extends MinimalEObjectImpl.Container implements XCase
 	 * @ordered
 	 */
 	protected JvmTypeReference typeGuard;
+
+	/**
+	 * The default value of the '{@link #isFallThrough() <em>Fall Through</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isFallThrough()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean FALL_THROUGH_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isFallThrough() <em>Fall Through</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isFallThrough()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean fallThrough = FALL_THROUGH_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -239,6 +260,29 @@ public class XCasePartImpl extends MinimalEObjectImpl.Container implements XCase
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isFallThrough()
+	{
+		return fallThrough;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFallThrough(boolean newFallThrough)
+	{
+		boolean oldFallThrough = fallThrough;
+		fallThrough = newFallThrough;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XCASE_PART__FALL_THROUGH, oldFallThrough, fallThrough));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -270,6 +314,8 @@ public class XCasePartImpl extends MinimalEObjectImpl.Container implements XCase
 				return getThen();
 			case XbasePackage.XCASE_PART__TYPE_GUARD:
 				return getTypeGuard();
+			case XbasePackage.XCASE_PART__FALL_THROUGH:
+				return isFallThrough();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -292,6 +338,9 @@ public class XCasePartImpl extends MinimalEObjectImpl.Container implements XCase
 				return;
 			case XbasePackage.XCASE_PART__TYPE_GUARD:
 				setTypeGuard((JvmTypeReference)newValue);
+				return;
+			case XbasePackage.XCASE_PART__FALL_THROUGH:
+				setFallThrough((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -316,6 +365,9 @@ public class XCasePartImpl extends MinimalEObjectImpl.Container implements XCase
 			case XbasePackage.XCASE_PART__TYPE_GUARD:
 				setTypeGuard((JvmTypeReference)null);
 				return;
+			case XbasePackage.XCASE_PART__FALL_THROUGH:
+				setFallThrough(FALL_THROUGH_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -336,8 +388,27 @@ public class XCasePartImpl extends MinimalEObjectImpl.Container implements XCase
 				return then != null;
 			case XbasePackage.XCASE_PART__TYPE_GUARD:
 				return typeGuard != null;
+			case XbasePackage.XCASE_PART__FALL_THROUGH:
+				return fallThrough != FALL_THROUGH_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString()
+	{
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (fallThrough: ");
+		result.append(fallThrough);
+		result.append(')');
+		return result.toString();
 	}
 
 } //XCasePartImpl

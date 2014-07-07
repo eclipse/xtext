@@ -2259,4 +2259,109 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testRedundantCases_01() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("switch i : 1 {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("case 1,");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XCASE_PART, IssueCodes.REDUNDANT_CASE);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testRedundantCases_02() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("switch i : 1 {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("case 1,");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("case 2,");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XCASE_PART, IssueCodes.REDUNDANT_CASE);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testRedundantCases_03() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("switch i : 1 {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("case 1,");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("default: 1");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertWarning(_expression, XbasePackage.Literals.XCASE_PART, IssueCodes.REDUNDANT_CASE);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testRedundantCases_04() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("switch i : 1 {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("case 1,");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("case 2,");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("default: 1");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertWarning(_expression, XbasePackage.Literals.XCASE_PART, IssueCodes.REDUNDANT_CASE);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testRedundantCases_05() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("switch i : 1 {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("case 1,");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("case 2: 1");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoIssue(_expression, XbasePackage.Literals.XCASE_PART, IssueCodes.REDUNDANT_CASE);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

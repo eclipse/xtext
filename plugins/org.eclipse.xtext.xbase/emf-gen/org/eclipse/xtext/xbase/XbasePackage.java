@@ -219,13 +219,22 @@ public interface XbasePackage extends EPackage
 	int XCASE_PART__TYPE_GUARD = 2;
 
 	/**
+	 * The feature id for the '<em><b>Fall Through</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCASE_PART__FALL_THROUGH = 3;
+
+	/**
 	 * The number of structural features of the '<em>XCase Part</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XCASE_PART_FEATURE_COUNT = 3;
+	int XCASE_PART_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XBlockExpressionImpl <em>XBlock Expression</em>}' class.
@@ -1985,6 +1994,17 @@ public interface XbasePackage extends EPackage
 	EReference getXCasePart_TypeGuard();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XCasePart#isFallThrough <em>Fall Through</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Fall Through</em>'.
+	 * @see org.eclipse.xtext.xbase.XCasePart#isFallThrough()
+	 * @see #getXCasePart()
+	 * @generated
+	 */
+	EAttribute getXCasePart_FallThrough();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XBlockExpression <em>XBlock Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3217,6 +3237,14 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EReference XCASE_PART__TYPE_GUARD = eINSTANCE.getXCasePart_TypeGuard();
+
+		/**
+		 * The meta object literal for the '<em><b>Fall Through</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XCASE_PART__FALL_THROUGH = eINSTANCE.getXCasePart_FallThrough();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XBlockExpressionImpl <em>XBlock Expression</em>}' class.

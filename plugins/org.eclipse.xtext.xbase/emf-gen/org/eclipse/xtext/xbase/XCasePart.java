@@ -22,6 +22,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  *   <li>{@link org.eclipse.xtext.xbase.XCasePart#getCase <em>Case</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XCasePart#getThen <em>Then</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XCasePart#getTypeGuard <em>Type Guard</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XCasePart#isFallThrough <em>Fall Through</em>}</li>
  * </ul>
  * </p>
  *
@@ -108,5 +109,31 @@ public interface XCasePart extends EObject
 	 * @generated
 	 */
 	void setTypeGuard(JvmTypeReference value);
+
+	/**
+	 * Returns the value of the '<em><b>Fall Through</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Fall Through</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Fall Through</em>' attribute.
+	 * @see #setFallThrough(boolean)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXCasePart_FallThrough()
+	 * @model
+	 * @generated
+	 */
+	boolean isFallThrough();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XCasePart#isFallThrough <em>Fall Through</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Fall Through</em>' attribute.
+	 * @see #isFallThrough()
+	 * @generated
+	 */
+	void setFallThrough(boolean value);
 
 } // XCasePart
