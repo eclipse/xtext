@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.scoping.batch.FeatureScopes;
 import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
@@ -37,24 +38,34 @@ public abstract class AbstractBatchTypeResolver implements IBatchTypeResolver {
 	}
 	
 	/* @NonNull */
+	public IResolvedTypes resolveTypes(/* @NonNull */ Resource resource) {
+		return resolveTypes(resource, null);
+	}
+
+	/* @NonNull */
 	public final IResolvedTypes resolveTypes(final /* @Nullable */ EObject object) {
-		if (object == null || object.eIsProxy()) {
-			return IResolvedTypes.NULL;
-		}
-		return doResolveTypes(object);
+		return resolveTypes(object, null);
 	}
 	
 	/* @NonNull */
-	public IResolvedTypes resolveTypes(/* @NonNull */ Resource resource) {
+	public final IResolvedTypes resolveTypes(final /* @Nullable */ EObject object, CancelIndicator monitor) {
+		if (object == null || object.eIsProxy()) {
+			return IResolvedTypes.NULL;
+		}
+		return doResolveTypes(object, monitor);
+	}
+	
+	/* @NonNull */
+	public IResolvedTypes resolveTypes(/* @NonNull */ Resource resource, /* @Nullable */ CancelIndicator monitor) {
 		List<EObject> resourceContents = resource.getContents();
 		if (resourceContents.isEmpty()) {
 			IFeatureScopeSession session = scopeProvider.newSession(resource);
 			return new EmptyResolvedTypes(session, featureScopes, new StandardTypeReferenceOwner(services, resource));
 		} else {
-			return resolveTypes(resourceContents.get(0));
+			return resolveTypes(resourceContents.get(0), monitor);
 		}
 	}
 
 	/* @NonNull */
-	protected abstract IResolvedTypes doResolveTypes(/* @NonNull */ EObject object);
+	protected abstract IResolvedTypes doResolveTypes(/* @NonNull */ EObject object, /* @Nullable */ CancelIndicator monitor);
 }

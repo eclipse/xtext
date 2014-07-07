@@ -13,6 +13,7 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -102,6 +103,8 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	protected abstract LightweightTypeReference acceptType(XExpression alreadyHandled, ResolvedTypes types, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... conformanceHint);
 	
 	public final ITypeComputationResult computeTypes(/* @Nullable */ XExpression expression) {
+		if(resolvedTypes.getMonitor().isCanceled())
+			throw new OperationCanceledException();
 		if (expression != null) {
 			if (expression.eContainer() == null && expression.eResource() == null)
 				throw new IllegalStateException("Dangling expression: " + expression);

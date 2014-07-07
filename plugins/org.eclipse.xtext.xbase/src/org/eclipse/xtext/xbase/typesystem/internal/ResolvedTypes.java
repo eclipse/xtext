@@ -29,6 +29,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.IssueSeverities;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XClosure;
@@ -128,10 +129,19 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	private Set<XExpression> refinedTypes;
 	private Set<XExpression> propagatedTypes;
 	private List<JvmTypeParameter> declaredTypeParameters;
+	private CancelIndicator monitor;
 	
-	protected ResolvedTypes(DefaultReentrantTypeResolver resolver) {
+	protected ResolvedTypes(DefaultReentrantTypeResolver resolver, CancelIndicator monitor) {
 		this.resolver = resolver;
 		this.converter = createConverter();
+		this.monitor = monitor;
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	protected CancelIndicator getMonitor() {
+		return monitor;
 	}
 	
 	protected void clear() {
