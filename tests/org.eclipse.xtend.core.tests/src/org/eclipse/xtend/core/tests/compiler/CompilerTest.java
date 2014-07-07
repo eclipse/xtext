@@ -3009,7 +3009,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 	@Test public void testBug366293() throws Exception {
 		invokeAndExpect2("success", 
 				"def String whileLoopTest () {\n" + 
-				"        while (true)\n" + 
+				"        while ('foo'.length==3)\n" + 
 				"            try {\n" + 
 				"                return 'success'\n" + 
 				"            }\n" + 

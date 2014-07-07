@@ -605,17 +605,25 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	 * @param isReferenced unused in this context but necessary for dispatch signature 
 	 */
 	protected void _toJavaStatement(XWhileExpression expr, ITreeAppendable b, boolean isReferenced) {
-		internalToJavaStatement(expr.getPredicate(), b, true);
-		final String varName = b.declareSyntheticVariable(expr, "_while");
-		b.newLine().append("boolean ").append(varName).append(" = ");
-		internalToJavaExpression(expr.getPredicate(), b);
-		b.append(";");
+		boolean needsStatement = !canCompileToJavaExpression(expr.getPredicate(), b);
+		String varName = null;
+		if (needsStatement) {
+			internalToJavaStatement(expr.getPredicate(), b, true);
+			varName = b.declareSyntheticVariable(expr, "_while");
+			b.newLine().append("boolean ").append(varName).append(" = ");
+			internalToJavaExpression(expr.getPredicate(), b);
+			b.append(";");
+		}
 		b.newLine().append("while (");
-		b.append(varName);
+		if (needsStatement) {
+			b.append(varName);
+		} else {
+			internalToJavaExpression(expr.getPredicate(), b);
+		}
 		b.append(") {").increaseIndentation();
 		b.openPseudoScope();
 		internalToJavaStatement(expr.getBody(), b, false);
-		if (!earlyExitComputer.isEarlyExit(expr.getBody())) {
+		if (needsStatement && !earlyExitComputer.isEarlyExit(expr.getBody())) {
 			internalToJavaStatement(expr.getPredicate(), b, true);
 			b.newLine();
 			b.append(varName).append(" = ");
@@ -630,19 +638,27 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	 * @param isReferenced unused in this context but necessary for dispatch signature  
 	 */
 	protected void _toJavaStatement(XDoWhileExpression expr, ITreeAppendable b, boolean isReferenced) {
-		String variable = b.declareSyntheticVariable(expr, "_dowhile");
-		b.newLine().append("boolean ").append(variable).append(" = false;");
+		boolean needsStatement = !canCompileToJavaExpression(expr.getPredicate(), b);
+		String variable = null;
+		if (needsStatement) {
+			variable = b.declareSyntheticVariable(expr, "_dowhile");
+			b.newLine().append("boolean ").append(variable).append(" = false;");
+		}
 		b.newLine().append("do {").increaseIndentation();
 		internalToJavaStatement(expr.getBody(), b, false);
-		internalToJavaStatement(expr.getPredicate(), b, true);
-		b.newLine();
-		if (!earlyExitComputer.isEarlyExit(expr.getBody())) {
+		if (needsStatement && !earlyExitComputer.isEarlyExit(expr.getBody())) {
+			internalToJavaStatement(expr.getPredicate(), b, true);
+			b.newLine();
 			b.append(variable).append(" = ");
 			internalToJavaExpression(expr.getPredicate(), b);
 			b.append(";");
 		}
 		b.decreaseIndentation().newLine().append("} while(");
-		b.append(variable);
+		if (needsStatement) {
+			b.append(variable);
+		} else {
+			internalToJavaExpression(expr.getPredicate(), b);
+		}
 		b.append(");");
 	}
 	
@@ -1597,9 +1613,6 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			return true;
 		}
 		if (expression instanceof XSetLiteral) {
-			if (isType(expression, Map.class)) {
-				return false;
-			}
 			XSetLiteral setLiteral = (XSetLiteral) expression;
 			for (XExpression element : setLiteral.getElements()) {
 				if (!internalCanCompileToJavaExpression(element, appendable)) {

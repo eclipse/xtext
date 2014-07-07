@@ -735,9 +735,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			  private Group layer;
 			  
 			  public void onChanged(final Change<? extends T> change) {
-			    boolean _next = change.next();
-			    boolean _while = _next;
-			    while (_while) {
+			    while (change.next()) {
 			      {
 			        boolean _wasAdded = change.wasAdded();
 			        if (_wasAdded) {
@@ -763,8 +761,6 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			          IterableExtensions.forEach(_removed, _function_1);
 			        }
 			      }
-			      boolean _next_1 = change.next();
-			      _while = _next_1;
 			    }
 			  }
 			}
@@ -822,9 +818,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			  private Group layer;
 			  
 			  public void onChanged(final Change<? extends T> change) {
-			    boolean _next = change.next();
-			    boolean _while = _next;
-			    while (_while) {
+			    while (change.next()) {
 			      {
 			        boolean _wasAdded = change.wasAdded();
 			        if (_wasAdded) {
@@ -850,8 +844,6 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			          IterableExtensions.forEach(_removed, _function_1);
 			        }
 			      }
-			      boolean _next_1 = change.next();
-			      _while = _next_1;
 			    }
 			  }
 			}
