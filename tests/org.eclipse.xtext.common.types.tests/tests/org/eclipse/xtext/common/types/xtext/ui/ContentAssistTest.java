@@ -153,10 +153,12 @@ public class ContentAssistTest extends AbstractContentAssistProcessorTest {
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=438191
 	 */
 	@Test public void testSubtypeProposals() throws Exception {
-		ICompletionProposal[] proposals = newBuilder().append("import java.util.* subtype I").computeCompletionProposals();
-		for (ICompletionProposal iCompletionProposal : proposals) {
-			String displayString = iCompletionProposal.getDisplayString();
-			assertFalse(displayString, displayString.contains(Iterable.class.getSimpleName()));
+		if (isJDT_3_6_orLater()) {
+			ICompletionProposal[] proposals = newBuilder().append("import java.util.* subtype I").computeCompletionProposals();
+			for (ICompletionProposal iCompletionProposal : proposals) {
+				String displayString = iCompletionProposal.getDisplayString();
+				assertFalse(displayString, displayString.contains(Iterable.class.getSimpleName()));
+			}
 		}
 	}
 	
