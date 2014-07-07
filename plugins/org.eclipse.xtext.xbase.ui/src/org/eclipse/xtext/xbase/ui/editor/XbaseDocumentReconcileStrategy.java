@@ -14,12 +14,7 @@ import org.eclipse.xtext.ui.editor.DirtyStateEditorSupport;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.reconciler.XtextDocumentReconcileStrategy;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.eclipse.xtext.util.IResourceScopeCache;
-import org.eclipse.xtext.util.OnChangeEvictingCache;
-import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
-
-import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -34,14 +29,18 @@ public class XbaseDocumentReconcileStrategy extends XtextDocumentReconcileStrate
 	}
 	
 	@Override
-	protected void postParse(XtextResource resource, IProgressMonitor monitor) {
+	protected void postParse(XtextResource resource, final IProgressMonitor monitor) {
 		if(resource instanceof BatchLinkableResource) {
 			BatchLinkableResource batchLinkableResource = (BatchLinkableResource) resource;
 			DirtyStateEditorSupport dirtyStateEditorSupport = editor.getXtextEditorCallback().getDirtyStateEditorSupport();
 			if (dirtyStateEditorSupport instanceof XbaseDirtyStateEditorSupport) 
 				((XbaseDirtyStateEditorSupport) dirtyStateEditorSupport).announceDirtyState(batchLinkableResource);
 			batchLinkableResource.installDerivedState(false);
-			batchLinkableResource.resolveLazyCrossReferences(CancelIndicator.NullImpl);
+			batchLinkableResource.resolveLazyCrossReferences(new CancelIndicator() {
+				public boolean isCanceled() {
+					return monitor.isCanceled();
+				}
+			});
 		}
 	}
 	
