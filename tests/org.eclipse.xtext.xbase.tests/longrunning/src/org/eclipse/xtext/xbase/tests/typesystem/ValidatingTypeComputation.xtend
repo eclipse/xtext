@@ -26,6 +26,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.TypeData
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference
+import org.eclipse.xtext.util.CancelIndicator
 
 /**
  * @author Sebastian Zarnekow
@@ -46,8 +47,8 @@ class ValidatingBatchTypeResolver extends DefaultBatchTypeResolver {
  */
 class ValidatingReentrantTypeResolver extends DefaultReentrantTypeResolver {
 	
-	override createResolvedTypes() {
-		return new ValidatingRootResolvedTypes(this)
+	override createResolvedTypes(CancelIndicator monitor) {
+		return new ValidatingRootResolvedTypes(this, monitor)
 	}
 	
 }
@@ -57,8 +58,8 @@ class ValidatingReentrantTypeResolver extends DefaultReentrantTypeResolver {
  */
 class ValidatingRootResolvedTypes extends RootResolvedTypes {
 	
-	new(DefaultReentrantTypeResolver resolver) {
-		super(resolver)
+	new(DefaultReentrantTypeResolver resolver, CancelIndicator monitor) {
+		super(resolver, monitor)
 	}
 	
 	override pushReassigningTypes() {

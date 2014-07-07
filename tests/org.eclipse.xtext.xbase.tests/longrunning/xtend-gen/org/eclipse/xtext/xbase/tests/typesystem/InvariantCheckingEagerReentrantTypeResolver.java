@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.tests.typesystem.EagerReentrantTypeResolver;
 import org.eclipse.xtext.xbase.tests.typesystem.ValidatingRootResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes;
@@ -16,7 +17,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes;
  */
 @SuppressWarnings("all")
 public class InvariantCheckingEagerReentrantTypeResolver extends EagerReentrantTypeResolver {
-  protected RootResolvedTypes createResolvedTypes() {
-    return new ValidatingRootResolvedTypes(this);
+  protected RootResolvedTypes createResolvedTypes(final CancelIndicator monitor) {
+    return new ValidatingRootResolvedTypes(this, monitor);
   }
 }
