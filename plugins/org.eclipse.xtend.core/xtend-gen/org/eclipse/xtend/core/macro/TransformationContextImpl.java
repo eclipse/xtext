@@ -107,11 +107,16 @@ public class TransformationContextImpl implements TransformationContext {
       Iterable<JvmIdentifiableElement> _filter = Iterables.<JvmIdentifiableElement>filter(_jvmElements, 
         JvmIdentifiableElement.class);
       final JvmIdentifiableElement derivedElement = IterableExtensions.<JvmIdentifiableElement>head(_filter);
-      boolean _notEquals = (!Objects.equal(derivedElement, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (derivedElement != null);
+      if (_tripleNotEquals) {
         CompilationUnitImpl _unit = this.getUnit();
         NamedElement _namedElement = _unit.toNamedElement(derivedElement);
         return ((MutableNamedElement) _namedElement);
+      }
+    } else {
+      boolean _isGenerated = this.isGenerated(source);
+      if (_isGenerated) {
+        return ((MutableNamedElement) source);
       }
     }
     return null;
@@ -132,6 +137,11 @@ public class TransformationContextImpl implements TransformationContext {
           return _unit_1.toXtendParameterDeclaration(((XtendParameter)sourceElement));
         }
       }
+    } else {
+      boolean _isSource = this.isSource(target);
+      if (_isSource) {
+        return target;
+      }
     }
     return null;
   }
@@ -150,21 +160,10 @@ public class TransformationContextImpl implements TransformationContext {
     return _xblockexpression;
   }
   
-  public void setPrimarySourceElement(final MutableNamedElement generatedElement, final NamedElement sourceElement) {
-    boolean _isGenerated = this.isGenerated(generatedElement);
-    boolean _not = (!_isGenerated);
-    if (_not) {
-      String _plus = (generatedElement + "is not a generated element");
-      throw new IllegalArgumentException(_plus);
-    }
-    boolean _isSource = this.isSource(sourceElement);
-    boolean _not_1 = (!_isSource);
-    if (_not_1) {
-      String _plus_1 = (sourceElement + "is not a source element");
-      throw new IllegalArgumentException(_plus_1);
-    }
+  public void setPrimarySourceElement(final MutableNamedElement secondaryElement, final NamedElement primaryElement) {
+    final NamedElement sourceElement = this.getPrimarySourceElement(primaryElement);
     EObject _delegate = ((XtendNamedElementImpl<?>) sourceElement).getDelegate();
-    JvmIdentifiableElement _delegate_1 = ((JvmNamedElementImpl<?>) generatedElement).getDelegate();
+    JvmIdentifiableElement _delegate_1 = ((JvmNamedElementImpl<?>) secondaryElement).getDelegate();
     this.associator.associate(_delegate, _delegate_1);
   }
   

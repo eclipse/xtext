@@ -57,8 +57,11 @@ class TransformationContextImpl implements TransformationContext {
 		if (isSource(source)) {
 			val derivedElement = associations.getJvmElements((source as XtendNamedElementImpl<?>).delegate).filter(
 				JvmIdentifiableElement).head
-			if (derivedElement != null)
+			if (derivedElement !== null) {
 				return unit.toNamedElement(derivedElement) as MutableNamedElement
+			}
+		} else if (isGenerated(source)) {
+			return source as MutableNamedElement
 		}
 		return null
 	}
@@ -71,8 +74,9 @@ class TransformationContextImpl implements TransformationContext {
 			} else if (sourceElement instanceof XtendParameter) {
 				return unit.toXtendParameterDeclaration(sourceElement)
 			}
+		} else if (isSource(target)) {
+			return target
 		}
-		return null
 	}
 
 	override isThePrimaryGeneratedJavaElement(NamedElement target) {
@@ -82,12 +86,9 @@ class TransformationContextImpl implements TransformationContext {
 		source.getPrimaryGeneratedJavaElement == target
 	}
 	
-	override setPrimarySourceElement(MutableNamedElement generatedElement, NamedElement sourceElement) {
-		if (!isGenerated(generatedElement))
-			throw new IllegalArgumentException(generatedElement + "is not a generated element")
-		if (!isSource(sourceElement))
-			throw new IllegalArgumentException(sourceElement + "is not a source element")
-		associator.associate((sourceElement as XtendNamedElementImpl<?>).delegate, (generatedElement as JvmNamedElementImpl<?>).delegate)
+	override setPrimarySourceElement(MutableNamedElement secondaryElement, NamedElement primaryElement) {
+		val sourceElement = primaryElement.primarySourceElement
+		associator.associate((sourceElement as XtendNamedElementImpl<?>).delegate, (secondaryElement as JvmNamedElementImpl<?>).delegate)
 	}
 	
 	override addError(Element element, String message) {
