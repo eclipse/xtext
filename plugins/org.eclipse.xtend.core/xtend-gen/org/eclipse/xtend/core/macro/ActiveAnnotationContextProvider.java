@@ -73,6 +73,7 @@ public class ActiveAnnotationContextProvider {
         final ActiveAnnotationContexts result = ActiveAnnotationContexts.installNew(_eResource);
         final CompilationUnitImpl compilationUnit = this.compilationUnitProvider.get();
         compilationUnit.setXtendFile(file);
+        result.compilationUnit = compilationUnit;
         final IAcceptor<Pair<JvmAnnotationType, XAnnotation>> _function = new IAcceptor<Pair<JvmAnnotationType, XAnnotation>>() {
           public void accept(final Pair<JvmAnnotationType, XAnnotation> it) {
             try {

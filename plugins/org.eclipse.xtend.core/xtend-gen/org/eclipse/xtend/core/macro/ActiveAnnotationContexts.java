@@ -15,6 +15,7 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContext;
+import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -23,8 +24,28 @@ import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class ActiveAnnotationContexts extends AdapterImpl {
+  public enum AnnotationCallback {
+    INDEXING,
+    
+    INFERENCE,
+    
+    VALIDATION,
+    
+    GENERATION;
+  }
+  
   @Property
   private final Map<JvmAnnotationType, ActiveAnnotationContext> _contexts = CollectionLiterals.<JvmAnnotationType, ActiveAnnotationContext>newLinkedHashMap();
+  
+  protected CompilationUnitImpl compilationUnit;
+  
+  public void before(final ActiveAnnotationContexts.AnnotationCallback phase) {
+    this.compilationUnit.before(phase);
+  }
+  
+  public void after(final ActiveAnnotationContexts.AnnotationCallback phase) {
+    this.compilationUnit.after(phase);
+  }
   
   public static ActiveAnnotationContexts installNew(final Resource resource) {
     EList<Adapter> _eAdapters = resource.eAdapters();
