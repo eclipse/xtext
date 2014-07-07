@@ -73,9 +73,7 @@ public class BeforeLinkingTest extends AbstractXbaseTestCase {
       Assert.assertEquals("String", _simpleName);
       resource.update(0, 0, "");
       Resource _eResource_1 = implicitParameter.eResource();
-      Assert.assertNotNull(_eResource_1);
-      JvmTypeReference _parameterType_1 = implicitParameter.getParameterType();
-      Assert.assertNull(_parameterType_1);
+      Assert.assertNull(_eResource_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
