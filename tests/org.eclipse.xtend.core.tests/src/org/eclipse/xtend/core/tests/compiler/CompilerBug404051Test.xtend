@@ -147,9 +147,9 @@ class CompilerBug404051Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import com.google.common.collect.Lists;
 			import java.util.Collections;
 			import java.util.List;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Functions.Function1;
 			import org.eclipse.xtext.xbase.lib.IterableExtensions;
 			
@@ -161,7 +161,7 @@ class CompilerBug404051Test extends AbstractXtendCompilerTest {
 			        return Integer.valueOf(it.length());
 			      }
 			    };
-			    Iterable<? extends Integer> _flatMap = this.<String, Integer>flatMap(Collections.<String>unmodifiableList(Lists.<String>newArrayList()), _function);
+			    Iterable<? extends Integer> _flatMap = this.<String, Integer>flatMap(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList()), _function);
 			    final Function1<Integer, Integer> _function_1 = new Function1<Integer, Integer>() {
 			      public Integer apply(final Integer it) {
 			        return Integer.valueOf(it.intValue());
@@ -189,9 +189,9 @@ class CompilerBug404051Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import com.google.common.collect.Lists;
 			import java.util.Collections;
 			import java.util.List;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Functions.Function1;
 			import org.eclipse.xtext.xbase.lib.IterableExtensions;
 			
@@ -203,7 +203,7 @@ class CompilerBug404051Test extends AbstractXtendCompilerTest {
 			        return null;
 			      }
 			    };
-			    Iterable<? extends Number> _flatMap = this.<String, Number>flatMap(Collections.<String>unmodifiableList(Lists.<String>newArrayList()), _function);
+			    Iterable<? extends Number> _flatMap = this.<String, Number>flatMap(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList()), _function);
 			    final Function1<Number, Integer> _function_1 = new Function1<Number, Integer>() {
 			      public Integer apply(final Number it) {
 			        return Integer.valueOf(it.intValue());
