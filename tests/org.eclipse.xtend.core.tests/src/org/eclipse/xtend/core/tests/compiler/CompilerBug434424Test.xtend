@@ -116,4 +116,129 @@ class CompilerBug434424Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
+	@Test
+	def test_05() {
+		assertCompilesTo('''
+			class C {
+				static String string
+				def String getString() {
+					string
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  private static String string;
+			  
+			  public String getString() {
+			    return C.string;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def test_06() {
+		assertCompilesTo('''
+			class C {
+				def static m(String s) {
+					Class.forName(s)
+				}
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Exceptions;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public static Class<?> m(final String s) {
+			    try {
+			      return Class.forName(s);
+			    } catch (Throwable _e) {
+			      throw Exceptions.sneakyThrow(_e);
+			    }
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def test_07() {
+		assertCompilesTo('''
+			import static extension Ext.*
+			class Client {
+			  def m(C c) {
+			    c.m('')
+			  }
+			}
+			class C {
+			  static def m(String s) {}
+			}
+			class Ext {
+			  static def m(C c, String s) {}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class Client {
+			  public Object m(final C c) {
+			    return Ext.m(c, "");
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def test_08() {
+		assertCompilesTo('''
+			import static extension Ext.*
+			class Client {
+			  def static m(C c) {
+			    c.m('')
+			  }
+			}
+			class C {
+			  static def m(String s) {}
+			}
+			class Ext {
+			  static def m(C c, String s) {}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class Client {
+			  public static Object m(final C c) {
+			    return Ext.m(c, "");
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def test_09() {
+		assertCompilesTo('''
+			class Client {
+			  extension Ext
+			  def m(C c) {
+			    c.m('')
+			  }
+			}
+			class C {
+			  static def m(String s) {}
+			}
+			class Ext {
+			  def m(C c, String s) {}
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Extension;
+			
+			@SuppressWarnings("all")
+			public class Client {
+			  @Extension
+			  private Ext _ext;
+			  
+			  public Object m(final C c) {
+			    return this._ext.m(c, "");
+			  }
+			}
+		''')
+	}
+	
 }

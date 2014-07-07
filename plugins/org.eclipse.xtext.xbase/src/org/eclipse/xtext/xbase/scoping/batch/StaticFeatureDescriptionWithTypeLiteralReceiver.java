@@ -14,6 +14,11 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
+ * A description that has a receiver expression which resolves to a type. The feature is considered to be a static
+ * member of that type thus it is the dot-notation variant of expressions with a static qualifier, e.g.
+ * {@code String::CASE_INSENSITIVE_COMPARATOR} and {@code String.CASE_INSENSITIVE_COMPARATOR} are equivalent.
+ * The latter member feature call is described by a {@link StaticFeatureDescriptionWithTypeLiteralReceiver}.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class StaticFeatureDescriptionWithTypeLiteralReceiver extends StaticFeatureDescriptionWithSyntacticReceiver {

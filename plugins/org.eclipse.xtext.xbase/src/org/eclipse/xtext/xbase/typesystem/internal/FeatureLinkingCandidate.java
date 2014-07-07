@@ -490,6 +490,16 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	protected CandidateCompareResult compareByNameAndStaticFlag(AbstractPendingLinkingCandidate<?> right) {
 		if (!getFeature().getSimpleName().equals(right.getFeature().getSimpleName())) {
 			// If the features have different names, it is possible to disambiguate them in the generated Java code
+			// prefer the unsugared feature
+			if (description.isValidStaticState() == right.description.isValidStaticState()) {
+				String concreteSyntax = description.getName().getFirstSegment();
+				if (getFeature().getSimpleName().equals(concreteSyntax) && (getFeatureCall().isExplicitOperationCallOrBuilderSyntax() == getFeature() instanceof JvmExecutable)) {
+					return CandidateCompareResult.THIS; 
+				} else if (right.getFeature().getSimpleName().equals(concreteSyntax) && (getFeatureCall().isExplicitOperationCallOrBuilderSyntax() == right.getFeature() instanceof JvmExecutable)) {
+					return CandidateCompareResult.OTHER;
+				}
+			}
+			// If the features have different names, it is possible to disambiguate them in the generated Java code
 			// prefer the instance feature
 			if (isStatic() != right.description.isStatic()) {
 				if (isStatic()) {
@@ -507,6 +517,12 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 					}
 				} else if (casted.isStatic()) {
 					return CandidateCompareResult.THIS;
+				}
+				if (description.isValidStaticState() != right.description.isValidStaticState()) {
+					if (description.isValidStaticState()) {
+						return CandidateCompareResult.THIS;
+					}
+					return CandidateCompareResult.OTHER;
 				}
 			}
 		}
@@ -661,6 +677,12 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 
 	protected CandidateCompareResult compareByArgumentTypes(FeatureLinkingCandidate right, int leftBoxing, int rightBoxing) {
 		if (isExtension() != right.isExtension()) {
+			if (description.isValidStaticState() != right.description.isValidStaticState()) {
+				if (description.isValidStaticState()) {
+					return CandidateCompareResult.THIS;
+				}
+				return CandidateCompareResult.OTHER;
+			}
 			if (isExtension())
 				return CandidateCompareResult.OTHER;
 			return CandidateCompareResult.THIS;
