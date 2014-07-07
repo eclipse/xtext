@@ -21,7 +21,8 @@ import org.junit.Test
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-class EditorValidationTest extends AbstractXtendUITestCase {
+class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
+	
 	@Inject extension WorkbenchTestHelper helper
 	@Inject extension SyncUtil
 	@Inject IResourceValidator validator
@@ -132,12 +133,22 @@ class EditorValidationTest extends AbstractXtendUITestCase {
 			assertTrue(issues.toString,issues.empty)
 			return null
 		]
+		
 		interfaceEditor.document.set(interfaceChanged)
 		interfaceEditor.waitForReconciler
 		classEditor.waitForDirtyStateUpdater
 		classEditor.document.readOnly [
 			val issues = validator.validate(it, CheckMode.NORMAL_AND_FAST, [|false])
 			assertEquals(1, issues.size)
+			return null
+		]
+		
+		interfaceEditor.document.set(interface)
+		interfaceEditor.waitForReconciler
+		classEditor.waitForDirtyStateUpdater
+		classEditor.document.readOnly [
+			val issues = validator.validate(it, CheckMode.NORMAL_AND_FAST, [|false])
+			assertTrue(issues.toString,issues.empty)
 			return null
 		]
 	}
@@ -170,6 +181,7 @@ class EditorValidationTest extends AbstractXtendUITestCase {
 			assertTrue(issues.toString,issues.empty)
 			return null
 		]
+
 		interfaceEditor.document.set(interfaceChanged)
 		interfaceEditor.waitForReconciler
 		classEditor.waitForDirtyStateUpdater
@@ -178,7 +190,15 @@ class EditorValidationTest extends AbstractXtendUITestCase {
 			assertEquals(issues.toString, 2, issues.size)
 			return null
 		]
+
+		interfaceEditor.document.set(interface)
+		interfaceEditor.waitForReconciler
+		classEditor.waitForDirtyStateUpdater
+		classEditor.document.readOnly [
+			val issues = validator.validate(it, CheckMode.NORMAL_AND_FAST, [|false])
+			assertTrue(issues.toString,issues.empty)
+			return null
+		]
 	}
-	
 	
 }
