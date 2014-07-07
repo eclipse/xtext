@@ -8,6 +8,7 @@
 package org.eclipse.xtext.common.types.impl;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.DelegatingEcoreEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
@@ -24,7 +25,7 @@ public class JvmEnumerationTypeImplCustom extends JvmEnumerationTypeImpl {
 				if (member instanceof JvmEnumerationLiteral)
 					list.add((JvmEnumerationLiteral) member);
 			}
-			literals = list;
+			literals = new DelegatingEcoreEList.UnmodifiableEList<JvmEnumerationLiteral>(this, TypesPackage.Literals.JVM_ENUMERATION_TYPE__LITERALS, list);
 		}
 		return literals;
 	}
