@@ -109,6 +109,6 @@ public abstract class AbstractXbaseQuickfixTest extends AbstractXbaseUITestCase 
   }
   
   public Injector getInjector() {
-    return this.getInjector();
+    return AbstractXbaseQuickfixTest.injector;
   }
 }
