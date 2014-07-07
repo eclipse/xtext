@@ -28,6 +28,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -42,9 +43,12 @@ import org.eclipse.xtext.generator.OutputConfiguration.SourceMapping;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.util.ResourceUtil;
 import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.internal.Stopwatches;
+import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -64,7 +68,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	private final static Logger logger = Logger.getLogger(BuilderParticipant.class);
 
 	@Inject
-	private org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy clusteringPolicy;
+	private IResourceClusteringPolicy clusteringPolicy;
 
 	@Inject
 	private Provider<EclipseResourceFileSystemAccess2> fileSystemAccessProvider;
@@ -86,6 +90,13 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 
 	private EclipseOutputConfigurationProvider outputConfigurationProvider;
 	private BuilderPreferenceAccess builderPreferenceAccess;
+	
+	/**
+	 * @since 2.7
+	 */
+	public IStorage2UriMapper getStorage2UriMapper() {
+		return storage2UriMapper;
+	}
 
 	/**
 	 * @since 2.4
@@ -172,27 +183,35 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			return;
 		}
 		
-		// monitor handling
-		if (monitor.isCanceled())
-			throw new OperationCanceledException();
-		SubMonitor subMonitor = SubMonitor.convert(monitor, 2);
-
-		EclipseResourceFileSystemAccess2 access = fileSystemAccessProvider.get();
-		IProject builtProject = context.getBuiltProject();
-		access.setProject(builtProject);
-		Map<String, OutputConfiguration> outputConfigurations = getOutputConfigurations(context);
-		refreshOutputFolders(context, outputConfigurations, subMonitor.newChild(1));
-		access.setOutputConfigurations(outputConfigurations);
-		if (context.getBuildType() == BuildType.CLEAN || context.getBuildType() == BuildType.RECOVERY) {
-			SubMonitor cleanMonitor = SubMonitor.convert(subMonitor.newChild(1), outputConfigurations.size());
-			for (OutputConfiguration config : outputConfigurations.values()) {
-				cleanOutput(context, config, access, cleanMonitor.newChild(1));
+		StoppedTask task = Stopwatches.forTask("org.eclipse.xtext.builder.BuilderParticipant.build(IBuildContext, IProgressMonitor)");
+		try {
+			task.start();
+			
+			// monitor handling
+			if (monitor.isCanceled())
+				throw new OperationCanceledException();
+			SubMonitor subMonitor = SubMonitor.convert(monitor, 2);
+	
+			EclipseResourceFileSystemAccess2 access = fileSystemAccessProvider.get();
+			IProject builtProject = context.getBuiltProject();
+			access.setProject(builtProject);
+			Map<String, OutputConfiguration> outputConfigurations = getOutputConfigurations(context);
+			refreshOutputFolders(context, outputConfigurations, subMonitor.newChild(1));
+			access.setOutputConfigurations(outputConfigurations);
+			if (context.getBuildType() == BuildType.CLEAN || context.getBuildType() == BuildType.RECOVERY) {
+				SubMonitor cleanMonitor = SubMonitor.convert(subMonitor.newChild(1), outputConfigurations.size());
+				for (OutputConfiguration config : outputConfigurations.values()) {
+					cleanOutput(context, config, access, cleanMonitor.newChild(1));
+				}
+				if (context.getBuildType() == BuildType.CLEAN)
+					return;
 			}
-			if (context.getBuildType() == BuildType.CLEAN)
-				return;
+			Map<OutputConfiguration, Iterable<IMarker>> generatorMarkers = getGeneratorMarkers(builtProject, outputConfigurations.values());
+			doBuild(deltas, outputConfigurations, generatorMarkers, context, access, monitor);
+
+		} finally {
+			task.stop();
 		}
-		Map<OutputConfiguration, Iterable<IMarker>> generatorMarkers = getGeneratorMarkers(builtProject, outputConfigurations.values());
-		doBuild(deltas, outputConfigurations, generatorMarkers, context, access, monitor);
 	}
 
 	/**
@@ -251,15 +270,15 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	/**
 	 * @since 2.7
 	 */
-	protected void logErrorDuringCompilation(final IResourceDescription.Delta delta, Throwable e) {
+	protected void logErrorDuringCompilation(final URI uri, Throwable e) {
 		Throwable cause = e;
 		if (cause instanceof CoreException) {
 			cause = cause.getCause();
 		}
-		if (delta == null) {
-			logger.error("Error during compilation of.", e);
+		if (uri == null) {
+			logger.error("Error during compilation.", e);
 		} else {
-			logger.error("Error during compilation of '" + delta.getUri() + "'.", e);
+			logger.error("Error during compilation of '" + uri + "'.", e);
 		}
 	}
 
@@ -429,7 +448,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			} catch (OperationCanceledException e) {
 				throw e;
 			} catch (Exception e) {
-				logErrorDuringCompilation(delta, e);
+				logErrorDuringCompilation(delta.getUri(), e);
 			}
 			return true;
 		}
