@@ -67,7 +67,10 @@ public class XtendTypeComputer extends XbaseWithAnnotationsTypeComputer {
 	
 	protected void _computeTypes(AnonymousClass anonymousClass, ITypeComputationState state) {
 		JvmGenericType type = associations.getInferredType(anonymousClass);
-		LocalVariableCapturer.captureLocalVariables(type, state);
+		if (type != null) {
+			// should never be null but the associations don't promise anything
+			LocalVariableCapturer.captureLocalVariables(type, state);
+		}
 		state.computeTypes(anonymousClass.getConstructorCall());
 	}
 	
