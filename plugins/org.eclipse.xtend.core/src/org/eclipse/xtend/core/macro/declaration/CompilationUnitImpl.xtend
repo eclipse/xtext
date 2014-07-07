@@ -121,6 +121,7 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom
+import org.eclipse.xtend.core.macro.ActiveAnnotationContexts
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -244,12 +245,19 @@ class CompilationUnitImpl implements CompilationUnit {
 	
 	def void setXtendFile(XtendFile xtendFile) {
 		this._xtendFile = xtendFile
+	}
+	
+	def void before(ActiveAnnotationContexts.AnnotationCallback phase) {
 		val standardTypeReferenceOwner = new StandardTypeReferenceOwner(services, xtendFile.eResource.resourceSet)
 		if (indexing) {
 			this.typeRefConverter = new IndexingOwnedConverter(standardTypeReferenceOwner)	
 		} else {
 			this.typeRefConverter = new OwnedConverter(standardTypeReferenceOwner)
 		}
+	}
+	
+	def void after(ActiveAnnotationContexts.AnnotationCallback phase) {
+		identityCache.clear
 	}
 	
 	def getTypeRefConverter() {
@@ -498,17 +506,15 @@ class CompilationUnitImpl implements CompilationUnit {
 		 */
 		if (delegate == null)
 			return null
-		getOrCreate(delegate) [
-			switch delegate {
-				XComputedTypeReferenceImplCustom case !delegate.isEquivalentComputed: {
-					new InferredTypeReferenceImpl => [
-						it.delegate = delegate
-						compilationUnit = this
-					]
-				}
-				default : toTypeReference(typeRefConverter.toLightweightReference(delegate))
+		switch delegate {
+			XComputedTypeReferenceImplCustom case !delegate.isEquivalentComputed: {
+				new InferredTypeReferenceImpl => [
+					it.delegate = delegate
+					compilationUnit = this
+				]
 			}
-		]
+			default : toTypeReference(typeRefConverter.toLightweightReference(delegate))
+		}
 	}
 
 	def TypeReference toTypeReference(LightweightTypeReference delegate) {
