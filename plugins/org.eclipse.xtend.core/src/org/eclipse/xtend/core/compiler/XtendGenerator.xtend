@@ -53,21 +53,26 @@ class XtendGenerator extends JvmModelGenerator {
 		val ctxs = ActiveAnnotationContexts.find(input);
 		if (ctxs == null)
 			return;
-		for (context : ctxs.contexts.values) {
-			try {
-				switch processor : context.processorInstance {
-					CodeGenerationParticipant<NamedElement> : {
-						val codeGenServices = new CodeGenerationContextImpl => [
-							fileSystemSupport = context.compilationUnit.fileSystemSupport
-							fileLocations = context.compilationUnit.fileLocations
-						]
-						val elements = context.annotatedSourceElements.map[context.compilationUnit.toXtendMemberDeclaration(it as XtendMember)]
-						processor.doGenerateCode(elements, codeGenServices)
+		try {
+			ctxs.before(ActiveAnnotationContexts.AnnotationCallback.GENERATION);
+			for (context : ctxs.contexts.values) {
+				try {
+					switch processor : context.processorInstance {
+						CodeGenerationParticipant<NamedElement> : {
+							val codeGenServices = new CodeGenerationContextImpl => [
+								fileSystemSupport = context.compilationUnit.fileSystemSupport
+								fileLocations = context.compilationUnit.fileLocations
+							]
+							val elements = context.annotatedSourceElements.map[context.compilationUnit.toXtendMemberDeclaration(it as XtendMember)]
+							processor.doGenerateCode(elements, codeGenServices)
+						}
 					}
+				} catch (Throwable t) {
+					context.handleProcessingError(input, t)
 				}
-			} catch (Throwable t) {
-				context.handleProcessingError(input, t)
 			}
+		} finally {
+			ctxs.after(ActiveAnnotationContexts.AnnotationCallback.GENERATION);
 		}
 	}
 	

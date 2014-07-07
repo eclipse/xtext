@@ -97,7 +97,23 @@ class ActiveAnnotationContext {
 
 class ActiveAnnotationContexts extends AdapterImpl {
 	
+	enum AnnotationCallback {
+		INDEXING,
+		INFERENCE,
+		VALIDATION,
+		GENERATION
+	}
+	
 	@Property val Map<JvmAnnotationType, ActiveAnnotationContext> contexts = newLinkedHashMap
+	protected CompilationUnitImpl compilationUnit
+	
+	def void before(AnnotationCallback phase) {
+		compilationUnit.before(phase)
+	}
+	
+	def void after(AnnotationCallback phase) {
+		compilationUnit.after(phase)
+	} 
 	
 	def static ActiveAnnotationContexts installNew(Resource resource) {
 		var result = resource.eAdapters.filter(ActiveAnnotationContexts).head
@@ -132,6 +148,7 @@ class ActiveAnnotationContextProvider {
 			val result = ActiveAnnotationContexts.installNew(file.eResource)
 			val compilationUnit = compilationUnitProvider.get
 			compilationUnit.xtendFile = file
+			result.compilationUnit = compilationUnit
 			searchAnnotatedElements(file) [
 				if (!result.contexts.containsKey(key)) {
 					val fa = new ActiveAnnotationContext

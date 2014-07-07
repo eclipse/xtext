@@ -161,17 +161,15 @@ class ResolvingCrossReferenceDuringIndexing extends AbstractXtendUITestCase {
 	@Test def void testResolvingXFunctionTypeRef_2() {
 		"=>void".testResolvingXFunctionTypeRef('''
 			Assert.assertNotNull(type)
-			Assert.assertEquals(1, type.actualTypeArguments.size)
-			Assert.assertEquals("? extends java.lang.Void", type.actualTypeArguments.head.name)
+			Assert.assertEquals(0, type.actualTypeArguments.size)
 		''')
 	}
 
 	@Test def void testResolvingXFunctionTypeRef_3() {
 		"(int)=>void".testResolvingXFunctionTypeRef('''
 			Assert.assertNotNull(type)
-			Assert.assertEquals(2, type.actualTypeArguments.size)
+			Assert.assertEquals(1, type.actualTypeArguments.size)
 			Assert.assertEquals("? super java.lang.Integer", type.actualTypeArguments.head.name)
-			Assert.assertEquals("? extends java.lang.Void", type.actualTypeArguments.tail.head.name)
 		''')
 	}
 
