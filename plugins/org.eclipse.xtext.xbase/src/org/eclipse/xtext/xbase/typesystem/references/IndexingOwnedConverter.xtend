@@ -106,7 +106,11 @@ class IndexingOwnedConverter extends OwnedConverter {
 		if (reference.getReturnType() != null) {
 			val returnType = visit(wrapIfNecessary(reference.getReturnType()))
 			result.setReturnType(returnType);
-
+			if (reference instanceof XFunctionTypeRefImplCustom) {
+				if (reference.isProcedure) {
+					return result
+				}
+			}
 			val typeArgument = new WildcardTypeReference(owner)
 			typeArgument.addUpperBound(returnType)
 			result.addTypeArgument(typeArgument);

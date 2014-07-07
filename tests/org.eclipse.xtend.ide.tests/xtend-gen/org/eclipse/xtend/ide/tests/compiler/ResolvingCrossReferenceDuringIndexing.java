@@ -266,9 +266,7 @@ public class ResolvingCrossReferenceDuringIndexing extends AbstractXtendUITestCa
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Assert.assertNotNull(type)");
     _builder.newLine();
-    _builder.append("Assert.assertEquals(1, type.actualTypeArguments.size)");
-    _builder.newLine();
-    _builder.append("Assert.assertEquals(\"? extends java.lang.Void\", type.actualTypeArguments.head.name)");
+    _builder.append("Assert.assertEquals(0, type.actualTypeArguments.size)");
     _builder.newLine();
     this.testResolvingXFunctionTypeRef("=>void", _builder.toString());
   }
@@ -278,11 +276,9 @@ public class ResolvingCrossReferenceDuringIndexing extends AbstractXtendUITestCa
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Assert.assertNotNull(type)");
     _builder.newLine();
-    _builder.append("Assert.assertEquals(2, type.actualTypeArguments.size)");
+    _builder.append("Assert.assertEquals(1, type.actualTypeArguments.size)");
     _builder.newLine();
     _builder.append("Assert.assertEquals(\"? super java.lang.Integer\", type.actualTypeArguments.head.name)");
-    _builder.newLine();
-    _builder.append("Assert.assertEquals(\"? extends java.lang.Void\", type.actualTypeArguments.tail.head.name)");
     _builder.newLine();
     this.testResolvingXFunctionTypeRef("(int)=>void", _builder.toString());
   }
