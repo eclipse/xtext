@@ -26,7 +26,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
@@ -56,7 +55,6 @@ public class Storage2UriMapperImpl implements IStorage2UriMapperExtension {
 		public boolean isRejected(/* @NonNull */ IFolder folder) {
 			return false;
 		}
-		@SuppressWarnings("null")
 		/* @NonNull */ 
 		public Iterable<Pair<IStorage, IProject>> getStorages(/* @NonNull */ URI uri) {
 			return Collections.emptyList();
@@ -121,7 +119,6 @@ public class Storage2UriMapperImpl implements IStorage2UriMapperExtension {
 						}
 						return false;
 					}
-					@SuppressWarnings("null")
 					/* @NonNull */
 					public Iterable<Pair<IStorage, IProject>> getStorages(/* @NonNull */ final URI uri) {
 						return Iterables.concat(Lists.transform(allContributions, new Function<IStorage2UriMapperContribution, Iterable<Pair<IStorage, IProject>>>() {
@@ -184,7 +181,6 @@ public class Storage2UriMapperImpl implements IStorage2UriMapperExtension {
 	 * @return <code>true</code> if the folder should be traversed. <code>False</code> otherwise.
 	 * @since 2.4
 	 */
-	@SuppressWarnings("null")
 	protected boolean isHandled(IFolder folder) {
 		return !contribution.isRejected(folder);
 	}
@@ -216,7 +212,6 @@ public class Storage2UriMapperImpl implements IStorage2UriMapperExtension {
 		return ResourcesPlugin.getWorkspace().getRoot();
 	}
 
-	@SuppressWarnings("null")
 	public URI getUri(IStorage storage) {
 		if (!uriValidator.isPossiblyManaged(storage))
 			return null;

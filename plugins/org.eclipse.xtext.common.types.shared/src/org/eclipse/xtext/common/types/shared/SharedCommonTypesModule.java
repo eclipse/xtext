@@ -15,7 +15,6 @@ import org.eclipse.xtext.builder.clustering.CurrentDescriptions;
 import org.eclipse.xtext.builder.trace.TraceForStorageProvider;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
-import org.eclipse.xtext.common.types.access.jdt.JvmTypesAwareResourceSetInitializer;
 import org.eclipse.xtext.common.types.ui.refactoring.JvmRefactoringResourceSetProvider;
 import org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameProcessor;
 import org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy;
@@ -37,7 +36,6 @@ import org.eclipse.xtext.ui.refactoring.impl.AbstractRenameProcessor;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameRefactoringProvider;
 import org.eclipse.xtext.ui.refactoring.impl.RefactoringResourceSetProvider;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
-import org.eclipse.xtext.ui.resource.JavaProjectResourceSetInitializer;
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 
 import com.google.inject.Binder;
@@ -60,7 +58,6 @@ public class SharedCommonTypesModule implements Module {
 		binder.bind(AbstractRenameProcessor.class).to(JvmMemberRenameProcessor.class);
 		binder.bind(IRenameStrategy.Provider.class).to(JvmMemberRenameStrategy.Provider.class);
 		binder.bind(RefactoringResourceSetProvider.class).to(JvmRefactoringResourceSetProvider.class);
-		binder.bind(JavaProjectResourceSetInitializer.class).to(JvmTypesAwareResourceSetInitializer.class);
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance("Java");
 		
 		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.LIVE_SCOPE)).to(LiveShadowedResourceDescriptions.class);

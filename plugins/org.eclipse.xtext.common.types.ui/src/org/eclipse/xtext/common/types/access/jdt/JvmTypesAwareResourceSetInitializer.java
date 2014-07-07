@@ -7,24 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.jdt;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.ui.resource.JavaProjectResourceSetInitializer;
-
-import com.google.inject.Inject;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ * @deprecated This class is no longer necessary. The binding will be removed if the language is regenerated.
  * @since 2.6
  */
+@Deprecated
 public class JvmTypesAwareResourceSetInitializer extends JavaProjectResourceSetInitializer {
-	@Inject
-	private IJvmTypeProvider.Factory typeProviderFactory;
-
-	@Override
-	public void initialize(ResourceSet resourceSet, IProject project) {
-		super.initialize(resourceSet, project);
-		typeProviderFactory.findOrCreateTypeProvider(resourceSet);
-	}
 }
