@@ -65,15 +65,15 @@ class CompilerBug413138Test extends AbstractXtendCompilerTest {
 			    def <U extends T> Iterable<U> save(Iterable<U> entities);
 			}
 		''', '''
-			import com.google.common.collect.Lists;
 			import java.util.Collections;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  private StringRepository repository;
 			  
 			  public Iterable<String> m() {
-			    return this.repository.<String>save(Collections.<String>unmodifiableList(Lists.<String>newArrayList()));
+			    return this.repository.<String>save(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList()));
 			  }
 			}
 		''')
@@ -126,15 +126,15 @@ class CompilerBug413138Test extends AbstractXtendCompilerTest {
 			    def <U extends T> Iterable<U> save(Iterable<U> entities);
 			}
 		''', '''
-			import com.google.common.collect.Lists;
 			import java.util.Collections;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  private CharSeqRepository repository;
 			  
 			  public Iterable<String> m() {
-			    return this.repository.<String>save(Collections.<String>unmodifiableList(Lists.<String>newArrayList("a")));
+			    return this.repository.<String>save(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("a")));
 			  }
 			}
 		''')

@@ -29,10 +29,10 @@ class CompilerBug416305Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import com.google.common.collect.Lists;
 			import java.util.Collections;
 			import java.util.Iterator;
 			import java.util.List;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			
 			@SuppressWarnings("all")
 			public class A<T extends Object> {
@@ -43,7 +43,7 @@ class CompilerBug416305Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public static void main(final String[] args) {
-			    final List<String> list = Collections.<String>unmodifiableList(Lists.<String>newArrayList("abc", "def"));
+			    final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("abc", "def"));
 			    final A<String> a = new A<String>();
 			    a.<String>f(list);
 			  }
@@ -66,10 +66,10 @@ class CompilerBug416305Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import com.google.common.collect.Lists;
 			import java.util.Collections;
 			import java.util.Iterator;
 			import java.util.List;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			
 			@SuppressWarnings("all")
 			public class A<T extends Object> {
@@ -80,7 +80,7 @@ class CompilerBug416305Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public static void main(final String[] args) {
-			    final List<String> list = Collections.<String>unmodifiableList(Lists.<String>newArrayList("abc", "def"));
+			    final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("abc", "def"));
 			    final A<CharSequence> a = new A<CharSequence>();
 			    a.<String>f(list);
 			  }
@@ -103,10 +103,10 @@ class CompilerBug416305Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import com.google.common.collect.Lists;
 			import java.util.Collections;
 			import java.util.Iterator;
 			import java.util.List;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			
 			@SuppressWarnings("all")
 			public class A<T extends Object> {
@@ -117,7 +117,7 @@ class CompilerBug416305Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public static void main(final String[] args) {
-			    final List<String> list = Collections.<String>unmodifiableList(Lists.<String>newArrayList());
+			    final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList());
 			    final A<String> a = new A<String>();
 			    a.<String>f(list);
 			  }

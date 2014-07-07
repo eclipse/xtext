@@ -952,7 +952,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			} else {
 			  _xifexpression = 2;
 			}
-			final java.util.List<Integer> i = java.util.Collections.<Integer>unmodifiableList(com.google.common.collect.Lists.<Integer>newArrayList(Integer.valueOf(_xifexpression)));
+			final java.util.List<Integer> i = java.util.Collections.<Integer>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Integer>newArrayList(Integer.valueOf(_xifexpression)));
 			Integer _head = org.eclipse.xtext.xbase.lib.IterableExtensions.<Integer>head(i);
 			boolean _lessThan = ((_head).intValue() < 10);
 			boolean _while = _lessThan;
@@ -1248,7 +1248,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			    return Boolean.valueOf(_and);
 			  }
 			};
-			final boolean bug = (boolean) org.eclipse.xtext.xbase.lib.IterableExtensions.<Boolean>reduce(java.util.Collections.<Boolean>unmodifiableList(com.google.common.collect.Lists.<Boolean>newArrayList(Boolean.valueOf(true), Boolean.valueOf(false), Boolean.valueOf(true))), _function);
+			final boolean bug = (boolean) org.eclipse.xtext.xbase.lib.IterableExtensions.<Boolean>reduce(java.util.Collections.<Boolean>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Boolean>newArrayList(Boolean.valueOf(true), Boolean.valueOf(false), Boolean.valueOf(true))), _function);
 		''')
 	}
 	
@@ -1307,7 +1307,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		'''.compilesTo('''
 			final Number element = null;
 			if ((element instanceof Double)) {
-			  final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableList(com.google.common.collect.Lists.<Double>newArrayList(((Double)element)));
+			  final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Double>newArrayList(((Double)element)));
 			}
 		''')
 	}
@@ -1328,7 +1328,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			if (!_matched) {
 			  if (element instanceof Double) {
 			    _matched=true;
-			    final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableList(com.google.common.collect.Lists.<Double>newArrayList(((Double)element)));
+			    final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Double>newArrayList(((Double)element)));
 			  }
 			}
 		''')
@@ -1345,7 +1345,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		'''.compilesTo('''
 			final Number element = null;
 			if ((element instanceof Double)) {
-			  final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableSet(com.google.common.collect.Sets.<Double>newHashSet(((Double)element)));
+			  final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableSet(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Double>newHashSet(((Double)element)));
 			}
 		''')
 	}
@@ -1366,7 +1366,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			if (!_matched) {
 			  if (element instanceof Double) {
 			    _matched=true;
-			    final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableSet(com.google.common.collect.Sets.<Double>newHashSet(((Double)element)));
+			    final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableSet(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Double>newHashSet(((Double)element)));
 			  }
 			}
 		''')

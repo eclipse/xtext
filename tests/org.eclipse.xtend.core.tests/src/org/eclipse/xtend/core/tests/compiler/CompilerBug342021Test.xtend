@@ -926,7 +926,6 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			    }
 			}
 		''', '''
-			import com.google.common.collect.Sets;
 			import java.util.ArrayList;
 			import java.util.Collections;
 			import java.util.Iterator;
@@ -955,7 +954,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			        ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("");
 			        return (Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray());
 			      } else {
-			        return Collections.<Object>unmodifiableSet(Sets.<Object>newHashSet());
+			        return Collections.<Object>unmodifiableSet(CollectionLiterals.<Object>newHashSet());
 			      }
 			    }
 			    return _switchResult;

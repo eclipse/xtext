@@ -49,13 +49,13 @@ class CompilerBug418364Test extends AbstractXtendCompilerTest {
 			}
 			class R extends G {}
 		''', '''
-			import com.google.common.collect.Lists;
 			import java.util.Collections;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public void m(final R r) {
-			    r.setInput(Collections.<Object>unmodifiableList(Lists.<Object>newArrayList()));
+			    r.setInput(Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList()));
 			  }
 			}
 		''')
@@ -74,13 +74,13 @@ class CompilerBug418364Test extends AbstractXtendCompilerTest {
 			}
 			class R extends G {}
 		''', '''
-			import com.google.common.collect.Lists;
 			import java.util.Collections;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public void m(final R r) {
-			    r.setInput(Collections.<String>unmodifiableList(Lists.<String>newArrayList()));
+			    r.setInput(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList()));
 			  }
 			}
 		''')
@@ -100,13 +100,13 @@ class CompilerBug418364Test extends AbstractXtendCompilerTest {
 			class G2<T extends Number> extends G<String, T> {}
 			class R extends G2 {}
 		''', '''
-			import com.google.common.collect.Lists;
 			import java.util.Collections;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public void m(final R r) {
-			    r.setInput(Collections.<Number>unmodifiableList(Lists.<Number>newArrayList()));
+			    r.setInput(Collections.<Number>unmodifiableList(CollectionLiterals.<Number>newArrayList()));
 			  }
 			}
 		''')
@@ -126,13 +126,13 @@ class CompilerBug418364Test extends AbstractXtendCompilerTest {
 			class G2<T extends Number> extends G<String, Iterable<T>> {}
 			class R extends G2 {}
 		''', '''
-			import com.google.common.collect.Lists;
 			import java.util.Collections;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public void m(final R r) {
-			    r.setInput(Collections.<Number>unmodifiableList(Lists.<Number>newArrayList()));
+			    r.setInput(Collections.<Number>unmodifiableList(CollectionLiterals.<Number>newArrayList()));
 			  }
 			}
 		''')
