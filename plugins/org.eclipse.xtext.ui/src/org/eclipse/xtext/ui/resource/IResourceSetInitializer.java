@@ -10,12 +10,20 @@ package org.eclipse.xtext.ui.resource;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.ui.shared.contribution.SharedStateContribution;
 
 import com.google.common.annotations.Beta;
 
 /**
  * An initializer may configure the resource set according to the
- * specific semantics of the project.
+ * specific semantics of the project. These initializers have to be
+ * registered as a {@link SharedStateContribution} to participate
+ * in the initialization of a resource set that is produced by the
+ * builder, other languages or some other client of the {@link IResourceSetProvider}.
+ * 
+ * Clients may choose to implement the interface and use it for their
+ * own purpose but usually its recommend to use a dedicated protocol or 
+ * implementation for custom initialization logic.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.5

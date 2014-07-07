@@ -24,7 +24,7 @@ public class XtextLiveScopeResourceSetProvider extends XtextResourceSetProvider 
 	@Override
 	public ResourceSet get(IProject project) {
 		ResourceSet resourceSet = super.get(project);
-		liveScopeResourceSetInitializer.initialize(resourceSet, project);
+		liveScopeResourceSetInitializer.initialize(resourceSet);
 		return resourceSet;
 	}
 

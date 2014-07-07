@@ -24,14 +24,6 @@
             </message_arguments>
         </filter>
     </resource>
-    <resource path="src/org/eclipse/xtext/ui/editor/contentassist/antlr/internal/AbstractInternalContentAssistParser.java" type="org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser">
-        <filter comment="internal field changed" id="388161617">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser"/>
-                <message_argument value="marked"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="src/org/eclipse/xtext/ui/editor/hover/html/XtextBrowserInformationControl.java" type="org.eclipse.xtext.ui.editor.hover.html.XtextBrowserInformationControl">
         <filter comment="Intentional extends clause" id="576720909">
             <message_arguments>
@@ -84,6 +76,19 @@
         <filter comment="Refactored towards greater extensibility" id="404791350">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/resource/LiveScopeResourceSetInitializer.java" type="org.eclipse.xtext.ui.resource.LiveScopeResourceSetInitializer">
+        <filter comment="Removed bogus implementation of IResourceSetInitializer" id="337682486">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.resource.LiveScopeResourceSetInitializer"/>
+            </message_arguments>
+        </filter>
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.resource.LiveScopeResourceSetInitializer"/>
+                <message_argument value="initialize(ResourceSet, IProject)"/>
             </message_arguments>
         </filter>
     </resource>

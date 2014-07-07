@@ -18,8 +18,6 @@ import com.google.inject.Inject;
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
-@Deprecated
-// use org.eclipse.xtext.common.types.access.jdt.JvmTypesAwareResourceSetInitializer
 public class JvmRefactoringResourceSetProvider extends RefactoringResourceSetProvider {
 
 	@Inject
