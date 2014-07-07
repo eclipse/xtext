@@ -546,10 +546,8 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			public class C {
 			  public void m() {
 			    if (false) {
-			      boolean _while = true;
-			      while (_while) {
+			      while (true) {
 			        "".toString();
-			        _while = true;
 			      }
 			    }
 			  }
@@ -860,9 +858,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    final AbstractIterator<T> _function = new AbstractIterator<T>() {
 			      @Override
 			      protected T computeNext() {
-			        boolean _hasNext = iter.hasNext();
-			        boolean _while = _hasNext;
-			        while (_while) {
+			        while (iter.hasNext()) {
 			          {
 			            final T elem = iter.next();
 			            boolean _notEquals = (!Objects.equal(elem, null));
@@ -870,8 +866,6 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			              return elem;
 			            }
 			          }
-			          boolean _hasNext_1 = iter.hasNext();
-			          _while = _hasNext_1;
 			        }
 			        return this.endOfData();
 			      }
@@ -1373,10 +1367,8 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    if (!_matched) {
 			      if (Objects.equal(a, "b")) {
 			        _matched=true;
-			        boolean _while = true;
-			        while (_while) {
+			        while (true) {
 			          "".toString();
-			          _while = true;
 			        }
 			      }
 			    }
@@ -1424,10 +1416,8 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    if (!_matched) {
 			      if (Objects.equal(a, "b")) {
 			        _matched=true;
-			        boolean _while = true;
-			        while (_while) {
+			        while (true) {
 			          "".toString();
-			          _while = true;
 			        }
 			      }
 			    }
@@ -1477,10 +1467,8 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			        _matched=true;
 			        String _xblockexpression = null;
 			        {
-			          boolean _while = true;
-			          while (_while) {
+			          while (true) {
 			            "".toString();
-			            _while = true;
 			          }
 			          _xblockexpression = "";
 			        }
@@ -5100,8 +5088,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			public class Foo {
 			  public String foo() {
 			    final StringBuilder x = new StringBuilder();
-			    boolean _while = (x instanceof CharSequence);
-			    while (_while) {
+			    while ((x instanceof CharSequence)) {
 			      return x.toString();
 			    }
 			    return null;

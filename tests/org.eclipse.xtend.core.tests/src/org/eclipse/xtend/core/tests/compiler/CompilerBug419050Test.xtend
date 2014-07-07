@@ -56,16 +56,14 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public boolean m1(final boolean x) {
-			    boolean _while = x;
-			    while (_while) {
+			    while (x) {
 			      return true;
 			    }
 			    return false;
 			  }
 			  
 			  public Boolean m2(final boolean x) {
-			    boolean _while = x;
-			    while (_while) {
+			    while (x) {
 			      return Boolean.valueOf(true);
 			    }
 			    return null;
@@ -140,9 +138,7 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public void m(final boolean b) {
 			    if (b) {
-			      boolean _while = false;
-			      while (_while) {
-			        _while = false;
+			      while (false) {
 			      }
 			    }
 			  }
@@ -207,8 +203,7 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public Boolean m(final boolean b) {
-			    boolean _while = true;
-			    while (_while) {
+			    while (true) {
 			      return Boolean.valueOf(false);
 			    }
 			    return null;
@@ -229,8 +224,7 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public boolean m(final boolean b) {
-			    boolean _while = true;
-			    while (_while) {
+			    while (true) {
 			      return false;
 			    }
 			    return false;
@@ -257,16 +251,14 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 			  public boolean m(final boolean b) {
 			    final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
 			      public Boolean apply(final String s) {
-			        boolean _while = true;
-			        while (_while) {
+			        while (true) {
 			          return Boolean.valueOf(false);
 			        }
 			        return null;
 			      }
 			    };
 			    final Function1<String, Boolean> func = _function;
-			    boolean _while = true;
-			    while (_while) {
+			    while (true) {
 			      return (func.apply("foo")).booleanValue();
 			    }
 			    return false;
@@ -293,16 +285,14 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 			  public boolean m(final boolean b) {
 			    final Predicate<String> _function = new Predicate<String>() {
 			      public boolean apply(final String it) {
-			        boolean _while = true;
-			        while (_while) {
+			        while (true) {
 			          return false;
 			        }
 			        return false;
 			      }
 			    };
 			    final Predicate<String> func = _function;
-			    boolean _while = true;
-			    while (_while) {
+			    while (true) {
 			      return func.apply("foo");
 			    }
 			    return false;

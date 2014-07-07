@@ -383,11 +383,9 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			public class C {
 			  public void m() {
 			    A a = null;
-			    boolean _while = (a instanceof B);
-			    while (_while) {
+			    while ((a instanceof B)) {
 			      A _get = ((B)a).get();
 			      a = _get;
-			      _while = (a instanceof B);
 			    }
 			  }
 			}
@@ -2287,8 +2285,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public String m(final String s) {
-			    boolean _while = true;
-			    while (_while) {
+			    while (true) {
 			      try {
 			        return "string";
 			      } catch (final Throwable _t) {
@@ -2321,12 +2318,10 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public String m(final String s) {
-			    boolean _while = true;
-			    while (_while) {
+			    while (true) {
 			      if (true) {
 			        return "string";
 			      }
-			      _while = true;
 			    }
 			    return null;
 			  }
