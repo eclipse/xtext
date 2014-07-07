@@ -106,5 +106,79 @@ class EditorValidationTest extends AbstractXtendUITestCase {
 		]
 	}
 	
+	@Test def void testAddedInterfaceMethod() {
+		val interface = '''
+			interface Foo {
+			}
+		'''
+		val interfaceChanged = '''
+			interface Foo {
+				def void bar(String b)
+			}
+		'''
+		val class = '''
+			class Bar implements Foo {
+			}
+		'''
+
+		val interfaceFile = createFile("Foo.xtend", interface)
+		val classFile = createFile("Bar.xtend", class)
+		waitForBuild(null)
+		assertEquals(0, classFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE).length)
+		val interfaceEditor = openEditor(interfaceFile)
+		val classEditor = openEditor(classFile)
+		classEditor.document.readOnly [
+			val issues = validator.validate(it, CheckMode.NORMAL_AND_FAST, [|false])
+			assertTrue(issues.toString,issues.empty)
+			return null
+		]
+		interfaceEditor.document.set(interfaceChanged)
+		interfaceEditor.waitForReconciler
+		classEditor.waitForDirtyStateUpdater
+		classEditor.document.readOnly [
+			val issues = validator.validate(it, CheckMode.NORMAL_AND_FAST, [|false])
+			assertEquals(1, issues.size)
+			return null
+		]
+	}
+	
+	@Test def void testChangedOverriddenSignature() {
+		val interface = '''
+			interface Foo {
+				def void bar()
+			}
+		'''
+		val interfaceChanged = '''
+			interface Foo {
+				def void bar(String b)
+			}
+		'''
+		val class = '''
+			class Bar implements Foo {
+				override bar() {}
+			}
+		'''
+
+		val interfaceFile = createFile("Foo.xtend", interface)
+		val classFile = createFile("Bar.xtend", class)
+		waitForBuild(null)
+		assertEquals(0, classFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE).length)
+		val interfaceEditor = openEditor(interfaceFile)
+		val classEditor = openEditor(classFile)
+		classEditor.document.readOnly [
+			val issues = validator.validate(it, CheckMode.NORMAL_AND_FAST, [|false])
+			assertTrue(issues.toString,issues.empty)
+			return null
+		]
+		interfaceEditor.document.set(interfaceChanged)
+		interfaceEditor.waitForReconciler
+		classEditor.waitForDirtyStateUpdater
+		classEditor.document.readOnly [
+			val issues = validator.validate(it, CheckMode.NORMAL_AND_FAST, [|false])
+			assertEquals(issues.toString, 2, issues.size)
+			return null
+		]
+	}
+	
 	
 }

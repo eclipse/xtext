@@ -214,4 +214,155 @@ public class EditorValidationTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testAddedInterfaceMethod() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("interface Foo {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final String interface_ = _builder.toString();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("interface Foo {");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("def void bar(String b)");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      final String interfaceChanged = _builder_1.toString();
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("class Bar implements Foo {");
+      _builder_2.newLine();
+      _builder_2.append("}");
+      _builder_2.newLine();
+      final String class_ = _builder_2.toString();
+      final IFile interfaceFile = this.helper.createFile("Foo.xtend", interface_);
+      final IFile classFile = this.helper.createFile("Bar.xtend", class_);
+      this._syncUtil.waitForBuild(null);
+      IMarker[] _findMarkers = classFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
+      int _length = _findMarkers.length;
+      Assert.assertEquals(0, _length);
+      final XtextEditor interfaceEditor = this.helper.openEditor(interfaceFile);
+      final XtextEditor classEditor = this.helper.openEditor(classFile);
+      IXtextDocument _document = classEditor.getDocument();
+      final IUnitOfWork<Object, XtextResource> _function = new IUnitOfWork<Object, XtextResource>() {
+        public Object exec(final XtextResource it) throws Exception {
+          final CancelIndicator _function = new CancelIndicator() {
+            public boolean isCanceled() {
+              return false;
+            }
+          };
+          final List<Issue> issues = EditorValidationTest.this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function);
+          String _string = issues.toString();
+          boolean _isEmpty = issues.isEmpty();
+          Assert.assertTrue(_string, _isEmpty);
+          return null;
+        }
+      };
+      _document.<Object>readOnly(_function);
+      IXtextDocument _document_1 = interfaceEditor.getDocument();
+      _document_1.set(interfaceChanged);
+      this._syncUtil.waitForReconciler(interfaceEditor);
+      this._syncUtil.waitForDirtyStateUpdater(classEditor);
+      IXtextDocument _document_2 = classEditor.getDocument();
+      final IUnitOfWork<Object, XtextResource> _function_1 = new IUnitOfWork<Object, XtextResource>() {
+        public Object exec(final XtextResource it) throws Exception {
+          final CancelIndicator _function = new CancelIndicator() {
+            public boolean isCanceled() {
+              return false;
+            }
+          };
+          final List<Issue> issues = EditorValidationTest.this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function);
+          int _size = issues.size();
+          Assert.assertEquals(1, _size);
+          return null;
+        }
+      };
+      _document_2.<Object>readOnly(_function_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testChangedOverriddenSignature() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("interface Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void bar()");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final String interface_ = _builder.toString();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("interface Foo {");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("def void bar(String b)");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      final String interfaceChanged = _builder_1.toString();
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("class Bar implements Foo {");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.append("override bar() {}");
+      _builder_2.newLine();
+      _builder_2.append("}");
+      _builder_2.newLine();
+      final String class_ = _builder_2.toString();
+      final IFile interfaceFile = this.helper.createFile("Foo.xtend", interface_);
+      final IFile classFile = this.helper.createFile("Bar.xtend", class_);
+      this._syncUtil.waitForBuild(null);
+      IMarker[] _findMarkers = classFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
+      int _length = _findMarkers.length;
+      Assert.assertEquals(0, _length);
+      final XtextEditor interfaceEditor = this.helper.openEditor(interfaceFile);
+      final XtextEditor classEditor = this.helper.openEditor(classFile);
+      IXtextDocument _document = classEditor.getDocument();
+      final IUnitOfWork<Object, XtextResource> _function = new IUnitOfWork<Object, XtextResource>() {
+        public Object exec(final XtextResource it) throws Exception {
+          final CancelIndicator _function = new CancelIndicator() {
+            public boolean isCanceled() {
+              return false;
+            }
+          };
+          final List<Issue> issues = EditorValidationTest.this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function);
+          String _string = issues.toString();
+          boolean _isEmpty = issues.isEmpty();
+          Assert.assertTrue(_string, _isEmpty);
+          return null;
+        }
+      };
+      _document.<Object>readOnly(_function);
+      IXtextDocument _document_1 = interfaceEditor.getDocument();
+      _document_1.set(interfaceChanged);
+      this._syncUtil.waitForReconciler(interfaceEditor);
+      this._syncUtil.waitForDirtyStateUpdater(classEditor);
+      IXtextDocument _document_2 = classEditor.getDocument();
+      final IUnitOfWork<Object, XtextResource> _function_1 = new IUnitOfWork<Object, XtextResource>() {
+        public Object exec(final XtextResource it) throws Exception {
+          final CancelIndicator _function = new CancelIndicator() {
+            public boolean isCanceled() {
+              return false;
+            }
+          };
+          final List<Issue> issues = EditorValidationTest.this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function);
+          String _string = issues.toString();
+          int _size = issues.size();
+          Assert.assertEquals(_string, 2, _size);
+          return null;
+        }
+      };
+      _document_2.<Object>readOnly(_function_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }
