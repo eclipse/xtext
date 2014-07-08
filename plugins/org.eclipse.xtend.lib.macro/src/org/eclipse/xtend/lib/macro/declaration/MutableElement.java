@@ -12,7 +12,7 @@ public interface MutableElement extends Element {
 
 	/**
 	 * Removes this element from its container and renders it invalid.
-	 * @exception IllegalStateException if it was not possible to remove
+	 * @throws IllegalStateException if this element has already been removed or it was not possible to remove
 	 */
 	public void remove();
 

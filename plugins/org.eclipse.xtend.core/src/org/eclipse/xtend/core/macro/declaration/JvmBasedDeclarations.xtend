@@ -74,11 +74,12 @@ import static extension org.eclipse.xtext.EcoreUtil2.*
 abstract class JvmElementImpl<T extends EObject> extends AbstractElementImpl<T> {
 	
 	def remove() {
-		if (delegate.eContainer == null)
-			return;
+		Preconditions.checkState(delegate.eResource != null, '''This element has already been removed: «delegate»''')
+		
+		compilationUnit.jvmModelAssociator.removeAllAssociation(delegate)
 		EcoreUtil.remove(delegate)
-		if (delegate.eContainer != null)
-			throw new IllegalStateException("Couldn't remove "+delegate.toString)
+		
+		Preconditions.checkState(delegate.eResource == null, '''Couldn't remove: «delegate»''')
 	}
 	
 }
@@ -267,6 +268,10 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 	
 	override setSimpleName(String name) {
 		throw new UnsupportedOperationException("The type cannot be renamed.")
+	}
+	
+	override remove() {
+		throw new UnsupportedOperationException("The type cannot be removed.")
 	}
 	
 }
@@ -1086,11 +1091,12 @@ class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDeclaration
 	}
 	
 	override remove() {
-		if (delegate.eContainer == null)
-			return;
+		Preconditions.checkState(delegate.eResource != null, '''This element has already been removed: «delegate»''')
+		
+		compilationUnit.jvmModelAssociator.removeAllAssociation(delegate)
 		EcoreUtil.remove(delegate)
-		if (delegate.eContainer != null)
-			throw new IllegalStateException("Couldn't remove "+delegate.toString)
+		
+		Preconditions.checkState(delegate.eResource == null, '''Couldn't remove: «delegate»''')
 	}
 	
 	override addAnnotation(AnnotationReference annotationReference) {

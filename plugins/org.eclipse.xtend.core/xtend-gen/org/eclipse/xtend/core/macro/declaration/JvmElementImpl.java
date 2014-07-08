@@ -8,29 +8,39 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
+import com.google.common.base.Preconditions;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
+import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
+import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 
 @SuppressWarnings("all")
 public abstract class JvmElementImpl<T extends EObject> extends AbstractElementImpl<T> {
   public void remove() {
     T _delegate = this.getDelegate();
-    EObject _eContainer = _delegate.eContainer();
-    boolean _equals = Objects.equal(_eContainer, null);
-    if (_equals) {
-      return;
-    }
+    Resource _eResource = _delegate.eResource();
+    boolean _notEquals = (!Objects.equal(_eResource, null));
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("This element has already been removed: ");
     T _delegate_1 = this.getDelegate();
-    EcoreUtil.remove(_delegate_1);
+    _builder.append(_delegate_1, "");
+    Preconditions.checkState(_notEquals, _builder);
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    IJvmModelAssociator _jvmModelAssociator = _compilationUnit.getJvmModelAssociator();
     T _delegate_2 = this.getDelegate();
-    EObject _eContainer_1 = _delegate_2.eContainer();
-    boolean _notEquals = (!Objects.equal(_eContainer_1, null));
-    if (_notEquals) {
-      T _delegate_3 = this.getDelegate();
-      String _string = _delegate_3.toString();
-      String _plus = ("Couldn\'t remove " + _string);
-      throw new IllegalStateException(_plus);
-    }
+    _jvmModelAssociator.removeAllAssociation(_delegate_2);
+    T _delegate_3 = this.getDelegate();
+    EcoreUtil.remove(_delegate_3);
+    T _delegate_4 = this.getDelegate();
+    Resource _eResource_1 = _delegate_4.eResource();
+    boolean _equals = Objects.equal(_eResource_1, null);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Couldn\'t remove: ");
+    T _delegate_5 = this.getDelegate();
+    _builder_1.append(_delegate_5, "");
+    Preconditions.checkState(_equals, _builder_1);
   }
 }

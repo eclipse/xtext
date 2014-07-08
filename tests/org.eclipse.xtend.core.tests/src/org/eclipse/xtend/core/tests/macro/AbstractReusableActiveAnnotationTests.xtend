@@ -3,9 +3,14 @@ package org.eclipse.xtend.core.tests.macro
 import com.google.inject.Inject
 import org.eclipse.xtend.core.compiler.XtendGenerator
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
+import org.eclipse.xtend.core.macro.declaration.MutableJvmFieldDeclarationImpl
+import org.eclipse.xtend.core.macro.declaration.MutableJvmMethodDeclarationImpl
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference
+import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration
+import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.EnumerationTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration
+import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclarator
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtext.common.types.JvmDeclaredType
@@ -15,8 +20,6 @@ import org.junit.Ignore
 import org.junit.Test
 
 import static org.junit.Assert.*
-import org.eclipse.xtend.core.macro.declaration.MutableJvmFieldDeclarationImpl
-import org.eclipse.xtend.core.macro.declaration.MutableJvmMethodDeclarationImpl
 
 abstract class AbstractReusableActiveAnnotationTests {
 	
@@ -2684,6 +2687,150 @@ abstract class AbstractReusableActiveAnnotationTests {
 				targetFolder : /userProject/xtend-gen
 				projectFolder: /userProject
 			'''.toString, declaredClass.docComment)
+		]
+	}
+	
+	@Test def void testRemove() {
+		assertProcessing(
+			'myannotation/MyAnnotation.xtend' -> '''
+				package myannotation
+
+				import com.google.common.base.Preconditions
+				import java.util.List
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.TransformationParticipant
+				import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement
+				import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration
+				
+				@Active(MyAnnotationProcessor)
+				annotation MyAnnotation {
+				}
+				
+				class MyAnnotationProcessor implements TransformationParticipant<MutableNamedElement> {
+				
+					override doTransform(List<? extends MutableNamedElement> annotatedTargetElements,
+						extension TransformationContext context) {
+						for (annotatedTargetElement : annotatedTargetElements) {
+							remove(annotatedTargetElement, context)
+						}
+					}
+				
+					def dispatch void remove(MutableNamedElement annotatedTargetElement, extension TransformationContext context) {
+						val sourceElement = annotatedTargetElement.primarySourceElement
+						Preconditions.checkState(sourceElement != null,
+							'«»''a source element should not be null before removing, but: «'«'»sourceElement«'»'»'«»'')
+						Preconditions.checkState(sourceElement.primaryGeneratedJavaElement == annotatedTargetElement,
+							'«»''expected: «'«'»annotatedTargetElement«'»'», but: «'«'»sourceElement.primaryGeneratedJavaElement«'»'»'«»'')
+				
+						annotatedTargetElement.remove
+				
+						Preconditions.checkState(annotatedTargetElement.primarySourceElement == null,
+							'«»''a source element should be null after removing, but: «'«'»annotatedTargetElement.primarySourceElement«'»'»'«»'')
+						Preconditions.checkState(sourceElement.primaryGeneratedJavaElement == null,
+							'«»''a target element should be null after removing, but: «'«'»sourceElement.primaryGeneratedJavaElement«'»'»'«»'')
+				
+						try {
+							annotatedTargetElement.remove
+							Preconditions.checkState(false, '«»''«'«'»IllegalArgumentException«'»'» is expected'«»'')
+						} catch (IllegalStateException e) {
+							Preconditions.checkState(e.message.startsWith("This element has already been removed: "),
+								'«»''Wrong error message: «'«'»e.message«'»'»'«»'')
+						}
+					}
+				
+					def dispatch void remove(MutableTypeDeclaration annotatedTargetElement, extension TransformationContext context) {
+						try {
+							annotatedTargetElement.remove
+							Preconditions.checkState(false, '«»''«'«'»UnsupportedOperationException«'»'» is expected'«»'')
+						} catch (UnsupportedOperationException e) {
+							Preconditions.checkState(e.message == "The type cannot be removed.", ''«»'Wrong error message: «'«'»e.message«'»'»'«»'')
+						}
+					}
+				
+				}
+
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				import myannotation.MyAnnotation
+
+				@MyAnnotation
+				class UserClass {
+				
+					@MyAnnotation
+					String fieldToRemove
+				
+					@MyAnnotation
+					new(String arg) {
+					}
+				
+					new(@MyAnnotation Integer argToRemove) {
+					}
+				
+					@MyAnnotation
+					def methodToRemove() {
+					}
+				
+					@MyAnnotation
+					static class NestedClass {
+					}
+				
+					@MyAnnotation
+					static interface NestedInteface {
+					}
+				
+					@MyAnnotation
+					static annotation NestedAnnotation {
+					}
+				
+					@MyAnnotation
+					static enum NestedEnum {
+					}
+				
+				}
+				
+				@MyAnnotation
+				enum UserEnum {
+				}
+				
+				@MyAnnotation
+				interface UserInterface {
+					@MyAnnotation
+					def String methodToRemove();
+				}
+				
+				@MyAnnotation
+				annotation UserAnnotation {
+					@MyAnnotation
+					String fieldToRemove
+				}
+			'''
+		) [
+			val clazz = typeLookup.findClass('myusercode.UserClass')
+			assertNotNull(clazz)
+			assertEquals(5, clazz.declaredMembers.size)
+			
+			val constructor = clazz.declaredConstructors.head
+			assertNotNull(clazz)
+			assertEquals(0, constructor.parameters.size)
+			
+			assertEquals(1, clazz.declaredMembers.filter(ClassDeclaration).size)
+			assertEquals(1, clazz.declaredMembers.filter(InterfaceDeclaration).size)
+			assertEquals(1, clazz.declaredMembers.filter(EnumerationTypeDeclaration).size)
+			assertEquals(1, clazz.declaredMembers.filter(AnnotationTypeDeclaration).size)
+			
+			val enum = typeLookup.findEnumerationType('myusercode.UserEnum')
+			assertNotNull(enum)
+			
+			val interface = typeLookup.findInterface('myusercode.UserInterface')
+			assertNotNull(interface)
+			assertEquals(0, interface.declaredMembers.size)
+			
+			val annotation = typeLookup.findAnnotationType('myusercode.UserAnnotation')
+			assertNotNull(annotation)
+			assertEquals(0, annotation.declaredMembers.size)
 		]
 	}
 }

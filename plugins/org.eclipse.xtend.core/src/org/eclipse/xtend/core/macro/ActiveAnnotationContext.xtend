@@ -33,6 +33,7 @@ import org.eclipse.xtext.validation.EObjectDiagnosticImpl
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.lib.Pair
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
+import org.eclipse.xtend.core.xtend.XtendAnnotationType
 
 /**
  * @author Sven Efftinge
@@ -192,6 +193,12 @@ class ActiveAnnotationContextProvider {
 				]
 			}
 			XtendEnum : {
+				element.registerMacroAnnotations(acceptor)
+				element.members.forEach [
+					searchAnnotatedElements(acceptor)
+				]
+			}
+			XtendAnnotationType : {
 				element.registerMacroAnnotations(acceptor)
 				element.members.forEach [
 					searchAnnotatedElements(acceptor)

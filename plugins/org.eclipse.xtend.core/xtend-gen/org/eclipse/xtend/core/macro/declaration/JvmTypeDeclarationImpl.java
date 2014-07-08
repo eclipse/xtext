@@ -252,4 +252,8 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
   public void setSimpleName(final String name) {
     throw new UnsupportedOperationException("The type cannot be renamed.");
   }
+  
+  public void remove() {
+    throw new UnsupportedOperationException("The type cannot be removed.");
+  }
 }

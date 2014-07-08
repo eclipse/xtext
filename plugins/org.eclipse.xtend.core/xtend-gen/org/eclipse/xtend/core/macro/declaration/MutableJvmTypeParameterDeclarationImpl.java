@@ -8,8 +8,9 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
+import com.google.common.base.Preconditions;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
@@ -20,11 +21,13 @@ import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclarator;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclarator;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
 
@@ -50,22 +53,27 @@ public class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDecl
   
   public void remove() {
     JvmTypeParameter _delegate = this.getDelegate();
-    EObject _eContainer = _delegate.eContainer();
-    boolean _equals = Objects.equal(_eContainer, null);
-    if (_equals) {
-      return;
-    }
+    Resource _eResource = _delegate.eResource();
+    boolean _notEquals = (!Objects.equal(_eResource, null));
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("This element has already been removed: ");
     JvmTypeParameter _delegate_1 = this.getDelegate();
-    EcoreUtil.remove(_delegate_1);
+    _builder.append(_delegate_1, "");
+    Preconditions.checkState(_notEquals, _builder);
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    IJvmModelAssociator _jvmModelAssociator = _compilationUnit.getJvmModelAssociator();
     JvmTypeParameter _delegate_2 = this.getDelegate();
-    EObject _eContainer_1 = _delegate_2.eContainer();
-    boolean _notEquals = (!Objects.equal(_eContainer_1, null));
-    if (_notEquals) {
-      JvmTypeParameter _delegate_3 = this.getDelegate();
-      String _string = _delegate_3.toString();
-      String _plus = ("Couldn\'t remove " + _string);
-      throw new IllegalStateException(_plus);
-    }
+    _jvmModelAssociator.removeAllAssociation(_delegate_2);
+    JvmTypeParameter _delegate_3 = this.getDelegate();
+    EcoreUtil.remove(_delegate_3);
+    JvmTypeParameter _delegate_4 = this.getDelegate();
+    Resource _eResource_1 = _delegate_4.eResource();
+    boolean _equals = Objects.equal(_eResource_1, null);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Couldn\'t remove: ");
+    JvmTypeParameter _delegate_5 = this.getDelegate();
+    _builder_1.append(_delegate_5, "");
+    Preconditions.checkState(_equals, _builder_1);
   }
   
   public AnnotationReference addAnnotation(final AnnotationReference annotationReference) {

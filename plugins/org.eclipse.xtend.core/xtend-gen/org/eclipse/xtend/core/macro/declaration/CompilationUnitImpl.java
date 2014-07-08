@@ -173,6 +173,7 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
 import org.eclipse.xtext.xbase.file.ParallelFileSystemSupport;
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -272,6 +273,9 @@ public class CompilationUnitImpl implements CompilationUnit {
   private IXtendJvmAssociations associations;
   
   @Inject
+  private IJvmModelAssociator jvmModelAssociator;
+  
+  @Inject
   private ConstantExpressionsInterpreter interpreter;
   
   @Inject
@@ -310,6 +314,10 @@ public class CompilationUnitImpl implements CompilationUnit {
   private Map<Object, Object> identityCache = CollectionLiterals.<Object, Object>newHashMap();
   
   private OwnedConverter typeRefConverter;
+  
+  public IJvmModelAssociator getJvmModelAssociator() {
+    return this.jvmModelAssociator;
+  }
   
   public IXtendJvmAssociations getJvmAssociations() {
     return this.associations;

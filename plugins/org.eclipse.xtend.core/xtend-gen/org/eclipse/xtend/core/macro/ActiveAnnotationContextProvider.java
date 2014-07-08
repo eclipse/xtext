@@ -22,6 +22,7 @@ import org.eclipse.xtend.core.macro.XAnnotationExtensions;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
+import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendEnum;
@@ -222,6 +223,19 @@ public class ActiveAnnotationContextProvider {
         _matched=true;
         this.registerMacroAnnotations(((XtendAnnotationTarget)element), acceptor);
         EList<XtendMember> _members = ((XtendEnum)element).getMembers();
+        final Procedure1<XtendMember> _function = new Procedure1<XtendMember>() {
+          public void apply(final XtendMember it) {
+            ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);
+          }
+        };
+        IterableExtensions.<XtendMember>forEach(_members, _function);
+      }
+    }
+    if (!_matched) {
+      if (element instanceof XtendAnnotationType) {
+        _matched=true;
+        this.registerMacroAnnotations(((XtendAnnotationTarget)element), acceptor);
+        EList<XtendMember> _members = ((XtendAnnotationType)element).getMembers();
         final Procedure1<XtendMember> _function = new Procedure1<XtendMember>() {
           public void apply(final XtendMember it) {
             ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);
