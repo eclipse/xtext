@@ -1,6 +1,5 @@
 package org.eclipse.xtend.ide.tests.codebuilder;
 
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import java.util.Collections;
 import org.eclipse.xtend.ide.codebuilder.AbstractConstructorBuilder;
@@ -10,6 +9,7 @@ import org.eclipse.xtend.ide.tests.codebuilder.AbstractBuilderTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -180,7 +180,7 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
         LightweightTypeReference _createTypeRef = ConstructorBuilderTest.this.createTypeRef(Exception.class, _xtendClass_1);
         JvmDeclaredType _xtendClass_2 = ConstructorBuilderTest.this.getXtendClass();
         LightweightTypeReference _createTypeRef_1 = ConstructorBuilderTest.this.createTypeRef(RuntimeException.class, _xtendClass_2);
-        it.setExceptions(Collections.<LightweightTypeReference>unmodifiableList(Lists.<LightweightTypeReference>newArrayList(_createTypeRef, _createTypeRef_1)));
+        it.setExceptions(Collections.<LightweightTypeReference>unmodifiableList(CollectionLiterals.<LightweightTypeReference>newArrayList(_createTypeRef, _createTypeRef_1)));
       }
     };
     AbstractConstructorBuilder _doubleArrow = ObjectExtensions.<AbstractConstructorBuilder>operator_doubleArrow(_createConstructorBuilder, _function);
@@ -206,7 +206,7 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
         LightweightTypeReference _createTypeRef = ConstructorBuilderTest.this.createTypeRef(Exception.class, _javaClass_1);
         JvmDeclaredType _javaClass_2 = ConstructorBuilderTest.this.getJavaClass();
         LightweightTypeReference _createTypeRef_1 = ConstructorBuilderTest.this.createTypeRef(RuntimeException.class, _javaClass_2);
-        it.setExceptions(Collections.<LightweightTypeReference>unmodifiableList(Lists.<LightweightTypeReference>newArrayList(_createTypeRef, _createTypeRef_1)));
+        it.setExceptions(Collections.<LightweightTypeReference>unmodifiableList(CollectionLiterals.<LightweightTypeReference>newArrayList(_createTypeRef, _createTypeRef_1)));
       }
     };
     AbstractConstructorBuilder _doubleArrow = ObjectExtensions.<AbstractConstructorBuilder>operator_doubleArrow(_createConstructorBuilder, _function);

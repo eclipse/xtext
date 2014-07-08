@@ -131,9 +131,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
     boolean _xblockexpression = false;
     {
       final Iterator<UnconfirmedStructuralChangesDelta> i = this.unconfirmedDeltas.iterator();
-      boolean _hasNext = i.hasNext();
-      boolean _while = _hasNext;
-      while (_while) {
+      while (i.hasNext()) {
         {
           final UnconfirmedStructuralChangesDelta unconfirmed = i.next();
           boolean _and = false;
@@ -156,8 +154,6 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
             }
           }
         }
-        boolean _hasNext_1 = i.hasNext();
-        _while = _hasNext_1;
       }
       int _size = this.unconfirmedDeltas.size();
       _xblockexpression = (_size != 0);

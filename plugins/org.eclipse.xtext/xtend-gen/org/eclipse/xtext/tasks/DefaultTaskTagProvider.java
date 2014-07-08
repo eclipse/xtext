@@ -8,7 +8,6 @@
 package org.eclipse.xtext.tasks;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import java.util.Collections;
 import java.util.List;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -16,6 +15,7 @@ import org.eclipse.xtext.tasks.ITaskTagProvider;
 import org.eclipse.xtext.tasks.Priority;
 import org.eclipse.xtext.tasks.TaskTag;
 import org.eclipse.xtext.tasks.TaskTags;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -55,7 +55,7 @@ public class DefaultTaskTagProvider implements ITaskTagProvider {
           }
         };
         TaskTag _doubleArrow_2 = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag_2, _function_2);
-        Iterables.<TaskTag>addAll(_taskTags, Collections.<TaskTag>unmodifiableList(Lists.<TaskTag>newArrayList(_doubleArrow, _doubleArrow_1, _doubleArrow_2)));
+        Iterables.<TaskTag>addAll(_taskTags, Collections.<TaskTag>unmodifiableList(CollectionLiterals.<TaskTag>newArrayList(_doubleArrow, _doubleArrow_1, _doubleArrow_2)));
       }
     };
     return ObjectExtensions.<TaskTags>operator_doubleArrow(_taskTags, _function);

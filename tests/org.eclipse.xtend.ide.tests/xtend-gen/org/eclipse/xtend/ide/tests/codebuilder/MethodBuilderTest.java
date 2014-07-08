@@ -1,6 +1,5 @@
 package org.eclipse.xtend.ide.tests.codebuilder;
 
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import java.util.Collections;
 import org.eclipse.emf.ecore.EObject;
@@ -13,6 +12,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -306,7 +306,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
         LightweightTypeReference _createTypeRef = MethodBuilderTest.this.createTypeRef(Exception.class, _xtendClass_1);
         JvmDeclaredType _xtendClass_2 = MethodBuilderTest.this.getXtendClass();
         LightweightTypeReference _createTypeRef_1 = MethodBuilderTest.this.createTypeRef(RuntimeException.class, _xtendClass_2);
-        it.setExceptions(Collections.<LightweightTypeReference>unmodifiableList(Lists.<LightweightTypeReference>newArrayList(_createTypeRef, _createTypeRef_1)));
+        it.setExceptions(Collections.<LightweightTypeReference>unmodifiableList(CollectionLiterals.<LightweightTypeReference>newArrayList(_createTypeRef, _createTypeRef_1)));
       }
     };
     AbstractMethodBuilder _doubleArrow = ObjectExtensions.<AbstractMethodBuilder>operator_doubleArrow(_createMethodBuilder, _function);
@@ -333,7 +333,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
         LightweightTypeReference _createTypeRef = MethodBuilderTest.this.createTypeRef(Exception.class, _javaClass_1);
         JvmDeclaredType _javaClass_2 = MethodBuilderTest.this.getJavaClass();
         LightweightTypeReference _createTypeRef_1 = MethodBuilderTest.this.createTypeRef(RuntimeException.class, _javaClass_2);
-        it.setExceptions(Collections.<LightweightTypeReference>unmodifiableList(Lists.<LightweightTypeReference>newArrayList(_createTypeRef, _createTypeRef_1)));
+        it.setExceptions(Collections.<LightweightTypeReference>unmodifiableList(CollectionLiterals.<LightweightTypeReference>newArrayList(_createTypeRef, _createTypeRef_1)));
       }
     };
     AbstractMethodBuilder _doubleArrow = ObjectExtensions.<AbstractMethodBuilder>operator_doubleArrow(_createMethodBuilder, _function);
@@ -456,7 +456,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
           }
         };
         JvmTypeParameter _doubleArrow_1 = ObjectExtensions.<JvmTypeParameter>operator_doubleArrow(_createJvmTypeParameter_1, _function_1);
-        it.setTypeParameters(Collections.<JvmTypeParameter>unmodifiableList(Lists.<JvmTypeParameter>newArrayList(_doubleArrow, _doubleArrow_1)));
+        it.setTypeParameters(Collections.<JvmTypeParameter>unmodifiableList(CollectionLiterals.<JvmTypeParameter>newArrayList(_doubleArrow, _doubleArrow_1)));
       }
     };
     AbstractMethodBuilder _doubleArrow = ObjectExtensions.<AbstractMethodBuilder>operator_doubleArrow(_createMethodBuilder, _function);
@@ -493,7 +493,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
           }
         };
         JvmTypeParameter _doubleArrow_1 = ObjectExtensions.<JvmTypeParameter>operator_doubleArrow(_createJvmTypeParameter_1, _function_1);
-        it.setTypeParameters(Collections.<JvmTypeParameter>unmodifiableList(Lists.<JvmTypeParameter>newArrayList(_doubleArrow, _doubleArrow_1)));
+        it.setTypeParameters(Collections.<JvmTypeParameter>unmodifiableList(CollectionLiterals.<JvmTypeParameter>newArrayList(_doubleArrow, _doubleArrow_1)));
       }
     };
     AbstractMethodBuilder _doubleArrow = ObjectExtensions.<AbstractMethodBuilder>operator_doubleArrow(_createMethodBuilder, _function);

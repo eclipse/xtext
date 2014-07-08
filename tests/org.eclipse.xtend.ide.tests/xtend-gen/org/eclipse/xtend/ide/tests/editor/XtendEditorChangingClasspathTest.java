@@ -117,27 +117,11 @@ public class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
         producer.apply();
         final int maxAttempts = 5;
         int attempt = 0;
-        boolean _and = false;
-        Boolean _head = IterableExtensions.<Boolean>head(listenToEvent);
-        if (!(_head).booleanValue()) {
-          _and = false;
-        } else {
-          _and = (attempt < maxAttempts);
-        }
-        boolean _while = _and;
-        while (_while) {
+        while (((IterableExtensions.<Boolean>head(listenToEvent)).booleanValue() && (attempt < maxAttempts))) {
           {
             Thread.sleep(50);
             attempt = (attempt + 1);
           }
-          boolean _and_1 = false;
-          Boolean _head_1 = IterableExtensions.<Boolean>head(listenToEvent);
-          if (!(_head_1).booleanValue()) {
-            _and_1 = false;
-          } else {
-            _and_1 = (attempt < maxAttempts);
-          }
-          _while = _and_1;
         }
         _xblockexpression = IterableExtensions.<IResourceDescription.Event>head(event);
       }
@@ -167,27 +151,11 @@ public class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
         producer.apply();
         final int maxAttempts = 5;
         int attempt = 0;
-        boolean _and = false;
-        Boolean _head = IterableExtensions.<Boolean>head(listenToEvent);
-        if (!(_head).booleanValue()) {
-          _and = false;
-        } else {
-          _and = (attempt < maxAttempts);
-        }
-        boolean _while = _and;
-        while (_while) {
+        while (((IterableExtensions.<Boolean>head(listenToEvent)).booleanValue() && (attempt < maxAttempts))) {
           {
             Thread.sleep(50);
             attempt = (attempt + 1);
           }
-          boolean _and_1 = false;
-          Boolean _head_1 = IterableExtensions.<Boolean>head(listenToEvent);
-          if (!(_head_1).booleanValue()) {
-            _and_1 = false;
-          } else {
-            _and_1 = (attempt < maxAttempts);
-          }
-          _while = _and_1;
         }
         _xblockexpression = IterableExtensions.<IResourceDescription.Event>head(event);
       }

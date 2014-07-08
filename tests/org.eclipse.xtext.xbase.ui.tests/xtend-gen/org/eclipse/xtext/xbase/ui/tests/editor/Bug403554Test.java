@@ -29,10 +29,7 @@ public class Bug403554Test extends AbstractXbaseContentAssistBugTest {
     String _name = ArrayList.class.getName();
     IType type = project.findType(_name);
     IMethod method = type.getMethod("subList", new String[] { "I", "I" });
-    boolean _exists = method.exists();
-    boolean _not = (!_exists);
-    boolean _while = _not;
-    while (_while) {
+    while ((!method.exists())) {
       {
         String superclassName = type.getSuperclassName();
         final int idx = superclassName.indexOf("<");
@@ -45,9 +42,6 @@ public class Bug403554Test extends AbstractXbaseContentAssistBugTest {
         IMethod _method = type.getMethod("subList", new String[] { "I", "I" });
         method = _method;
       }
-      boolean _exists_1 = method.exists();
-      boolean _not_1 = (!_exists_1);
-      _while = _not_1;
     }
     String _elementName = type.getElementName();
     this.declarator = _elementName;

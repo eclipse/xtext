@@ -3,7 +3,6 @@ package org.eclipse.xtend.core.resource;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
-import com.google.common.collect.Sets;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -40,7 +39,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
 public class XtendResourceDescription extends DefaultResourceDescription {
-  private final static Set<String> primitivesFilter = Collections.<String>unmodifiableSet(Sets.<String>newHashSet("boolean", "int", "char", "byte", "short", "long", "double", "float", "void"));
+  private final static Set<String> primitivesFilter = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("boolean", "int", "char", "byte", "short", "long", "double", "float", "void"));
   
   private IBatchTypeResolver typeResolver;
   

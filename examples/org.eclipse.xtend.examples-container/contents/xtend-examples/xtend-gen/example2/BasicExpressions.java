@@ -8,7 +8,6 @@
 package example2;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.Lists;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.HashMap;
@@ -39,7 +38,7 @@ public class BasicExpressions {
   
   @Test
   public void collections() {
-    final List<String> list = Collections.<String>unmodifiableList(Lists.<String>newArrayList("Hello", "World"));
+    final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("Hello", "World"));
     final Function1<String, String> _function = new Function1<String, String>() {
       public String apply(final String it) {
         return it.toUpperCase();
@@ -128,18 +127,14 @@ public class BasicExpressions {
         counter = (counter + 1);
       }
     }
-    final Iterator<Integer> iterator = Collections.<Integer>unmodifiableList(Lists.<Integer>newArrayList(Integer.valueOf(1), Integer.valueOf(2), Integer.valueOf(3), Integer.valueOf(4), Integer.valueOf(5))).iterator();
+    final Iterator<Integer> iterator = Collections.<Integer>unmodifiableList(CollectionLiterals.<Integer>newArrayList(Integer.valueOf(1), Integer.valueOf(2), Integer.valueOf(3), Integer.valueOf(4), Integer.valueOf(5))).iterator();
     counter = 1;
-    boolean _hasNext = iterator.hasNext();
-    boolean _while = _hasNext;
-    while (_while) {
+    while (iterator.hasNext()) {
       {
         final Integer i_1 = iterator.next();
         Assert.assertEquals(counter, (i_1).intValue());
         counter = (counter + 1);
       }
-      boolean _hasNext_1 = iterator.hasNext();
-      _while = _hasNext_1;
     }
   }
 }

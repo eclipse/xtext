@@ -7,11 +7,11 @@
  */
 package org.eclipse.xtext.ui.tests.editor.syntaxcoloring;
 
-import com.google.common.collect.Lists;
 import java.util.Collections;
 import java.util.List;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AttributedPosition;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.HighlightingPresenter;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +27,7 @@ public class HighlightingPresenterPositionIndexTest extends HighlightingPresente
   public void setUp() {
     AttributedPosition _attributedPosition = new AttributedPosition(0, 2, null, null);
     AttributedPosition _attributedPosition_1 = new AttributedPosition(2, 2, null, null);
-    this.positions = Collections.<AttributedPosition>unmodifiableList(Lists.<AttributedPosition>newArrayList(_attributedPosition, _attributedPosition_1));
+    this.positions = Collections.<AttributedPosition>unmodifiableList(CollectionLiterals.<AttributedPosition>newArrayList(_attributedPosition, _attributedPosition_1));
   }
   
   @Test

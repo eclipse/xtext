@@ -36,9 +36,7 @@ public class FlexerBasedTemplateBodyHighlighter extends TemplateBodyHighlighter 
     StringReader _stringReader = new StringReader(body);
     final FlexTokenSource tokenSource = this._flexerFactory.createTokenSource(_stringReader);
     Token token = tokenSource.nextToken();
-    boolean _notEquals = (!Objects.equal(token, Token.EOF_TOKEN));
-    boolean _while = _notEquals;
-    while (_while) {
+    while ((!Objects.equal(token, Token.EOF_TOKEN))) {
       {
         int _type = token.getType();
         final String id = this._abstractAntlrTokenToAttributeIdMapper.getId(_type);
@@ -48,8 +46,6 @@ public class FlexerBasedTemplateBodyHighlighter extends TemplateBodyHighlighter 
         Token _nextToken = tokenSource.nextToken();
         token = _nextToken;
       }
-      boolean _notEquals_1 = (!Objects.equal(token, Token.EOF_TOKEN));
-      _while = _notEquals_1;
     }
   }
 }

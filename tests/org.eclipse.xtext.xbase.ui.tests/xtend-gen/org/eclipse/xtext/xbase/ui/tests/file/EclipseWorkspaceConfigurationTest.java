@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.ui.tests.file;
 
-import com.google.common.collect.Sets;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
@@ -22,6 +21,7 @@ import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -77,7 +77,7 @@ public class EclipseWorkspaceConfigurationTest {
                 }
               };
               OutputConfiguration _doubleArrow = ObjectExtensions.<OutputConfiguration>operator_doubleArrow(_outputConfiguration, _function);
-              return Collections.<OutputConfiguration>unmodifiableSet(Sets.<OutputConfiguration>newHashSet(_doubleArrow));
+              return Collections.<OutputConfiguration>unmodifiableSet(CollectionLiterals.<OutputConfiguration>newHashSet(_doubleArrow));
             }
           };
           MockEclipseOutputConfiguration _mockEclipseOutputConfiguration = new MockEclipseOutputConfiguration(_function);

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.tasks;
 
-import com.google.common.collect.Lists;
 import java.util.Collections;
 import java.util.List;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -20,6 +19,7 @@ import org.eclipse.xtext.tasks.Task;
 import org.eclipse.xtext.tasks.TaskAssert;
 import org.eclipse.xtext.tasks.TaskTag;
 import org.eclipse.xtext.tasks.TaskTags;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -76,7 +76,7 @@ public class DefaultTaskParserTest {
     };
     Task _doubleArrow = ObjectExtensions.<Task>operator_doubleArrow(_task, _function);
     this.assertContainsTasks(_builder, 
-      Collections.<Task>unmodifiableList(Lists.<Task>newArrayList(_doubleArrow)));
+      Collections.<Task>unmodifiableList(CollectionLiterals.<Task>newArrayList(_doubleArrow)));
   }
   
   @Test
@@ -172,7 +172,7 @@ public class DefaultTaskParserTest {
     };
     Task _doubleArrow_3 = ObjectExtensions.<Task>operator_doubleArrow(_task_3, _function_3);
     this.assertContainsTasks(_builder, 
-      Collections.<Task>unmodifiableList(Lists.<Task>newArrayList(_doubleArrow, _doubleArrow_1, _doubleArrow_2, _doubleArrow_3)));
+      Collections.<Task>unmodifiableList(CollectionLiterals.<Task>newArrayList(_doubleArrow, _doubleArrow_1, _doubleArrow_2, _doubleArrow_3)));
   }
   
   private void assertContainsTasks(final CharSequence source, final List<Task> expectedTasks) {

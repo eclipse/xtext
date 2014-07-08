@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.tests.resources;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -103,7 +102,7 @@ public class XbaseResourceDescriptionStrategyTest extends AbstractXbaseTestCase 
       final Set<String> referenceDescriptions = IterableExtensions.<String>toSet(_map);
       int _size = referenceDescriptions.size();
       Assert.assertEquals(2, _size);
-      final Set<String> expectation = Collections.<String>unmodifiableSet(Sets.<String>newHashSet("java:/Objects/java.lang.String#java.lang.String", "java:/Objects/java.lang.String#java.lang.String.valueOf(java.lang.Object)"));
+      final Set<String> expectation = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("java:/Objects/java.lang.String#java.lang.String", "java:/Objects/java.lang.String#java.lang.String.valueOf(java.lang.Object)"));
       Assert.assertEquals(expectation, referenceDescriptions);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

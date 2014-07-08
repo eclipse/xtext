@@ -370,14 +370,8 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
       IProject _project = it.getProject();
       final IFile result = _project.getFile(("src/" + fileName));
       IContainer parent = result.getParent();
-      boolean _exists = parent.exists();
-      boolean _not = (!_exists);
-      boolean _while = _not;
-      while (_while) {
+      while ((!parent.exists())) {
         ((IFolder) parent).create(true, false, null);
-        boolean _exists_1 = parent.exists();
-        boolean _not_1 = (!_exists_1);
-        _while = _not_1;
       }
       StringInputStream _stringInputStream = new StringInputStream(contents);
       result.create(_stringInputStream, true, null);

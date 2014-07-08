@@ -4,7 +4,6 @@ import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import java.util.Arrays;
 import java.util.Collections;
@@ -148,12 +147,12 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
       boolean _matched = false;
       if (!_matched) {
-        if (Objects.equal(_list, Collections.<Object>unmodifiableList(Lists.<Object>newArrayList()))) {
+        if (Objects.equal(_list, Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList()))) {
           _matched=true;
         }
         if (!_matched) {
           TypeReference _string = this.context.getString();
-          if (Objects.equal(_list, Collections.<TypeReference>unmodifiableList(Lists.<TypeReference>newArrayList(_string)))) {
+          if (Objects.equal(_list, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(_string)))) {
             _matched=true;
           }
         }
@@ -163,7 +162,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
           TypeReference _newArrayTypeReference = this.context.newArrayTypeReference(_newTypeReference);
           TypeReference _object = this.context.getObject();
           TypeReference _newArrayTypeReference_1 = this.context.newArrayTypeReference(_object);
-          if (Objects.equal(_list, Collections.<TypeReference>unmodifiableList(Lists.<TypeReference>newArrayList(_string_1, _newArrayTypeReference, _newArrayTypeReference_1)))) {
+          if (Objects.equal(_list, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(_string_1, _newArrayTypeReference, _newArrayTypeReference_1)))) {
             _matched=true;
           }
         }
@@ -316,7 +315,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       };
       Iterable<Set<? extends TypeReference>> _map = IterableExtensions.map(_declaredSuperTypes, _function);
       Iterable<TypeReference> _flatten = Iterables.<TypeReference>concat(_map);
-      Iterable<TypeReference> _plus = Iterables.<TypeReference>concat(Collections.<TypeReference>unmodifiableList(Lists.<TypeReference>newArrayList(it)), _flatten);
+      Iterable<TypeReference> _plus = Iterables.<TypeReference>concat(Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(it)), _flatten);
       final Function1<TypeReference, Boolean> _function_1 = new Function1<TypeReference, Boolean>() {
         public Boolean apply(final TypeReference it) {
           Type _type = it.getType();
@@ -450,7 +449,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
             _and_2 = false;
           } else {
             TypeReference _object = this.context.getObject();
-            boolean _equals_3 = Objects.equal(parameterTypes, Collections.<TypeReference>unmodifiableList(Lists.<TypeReference>newArrayList(_object)));
+            boolean _equals_3 = Objects.equal(parameterTypes, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(_object)));
             _and_2 = _equals_3;
           }
           _or_2 = _and_2;
@@ -620,7 +619,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
       boolean _matched = false;
       if (!_matched) {
-        if (Objects.equal(_list, Collections.<Object>unmodifiableList(Lists.<Object>newArrayList()))) {
+        if (Objects.equal(_list, Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList()))) {
           _matched=true;
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("this.");
@@ -632,7 +631,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       }
       if (!_matched) {
         TypeReference _string = this.context.getString();
-        if (Objects.equal(_list, Collections.<TypeReference>unmodifiableList(Lists.<TypeReference>newArrayList(_string)))) {
+        if (Objects.equal(_list, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(_string)))) {
           _matched=true;
           StringConcatenation _builder_1 = new StringConcatenation();
           _builder_1.append("this.");
@@ -651,7 +650,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
         TypeReference _newArrayTypeReference = this.context.newArrayTypeReference(_newTypeReference);
         TypeReference _object = this.context.getObject();
         TypeReference _newArrayTypeReference_1 = this.context.newArrayTypeReference(_object);
-        if (Objects.equal(_list, Collections.<TypeReference>unmodifiableList(Lists.<TypeReference>newArrayList(_string_1, _newArrayTypeReference, _newArrayTypeReference_1)))) {
+        if (Objects.equal(_list, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(_string_1, _newArrayTypeReference, _newArrayTypeReference_1)))) {
           _matched=true;
           StringConcatenation _builder_2 = new StringConcatenation();
           _builder_2.append("this.");

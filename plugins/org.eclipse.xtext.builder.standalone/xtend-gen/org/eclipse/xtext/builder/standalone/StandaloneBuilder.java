@@ -225,22 +225,12 @@ public class StandaloneBuilder {
     ArrayList<IResourceDescription> _newArrayList = CollectionLiterals.<IResourceDescription>newArrayList();
     ResourceDescriptionsData index = new ResourceDescriptionsData(_newArrayList);
     Iterator<URI> allResourceIterator = allResourcesURIs.iterator();
-    boolean _hasNext = allResourceIterator.hasNext();
-    boolean _while = _hasNext;
-    while (_while) {
+    while (allResourceIterator.hasNext()) {
       {
         List<Resource> resources = CollectionLiterals.<Resource>newArrayList();
         int clusterIndex = 0;
         boolean continue_ = true;
-        boolean _and = false;
-        boolean _hasNext_1 = allResourceIterator.hasNext();
-        if (!_hasNext_1) {
-          _and = false;
-        } else {
-          _and = continue_;
-        }
-        boolean _while_1 = _and;
-        while (_while_1) {
+        while ((allResourceIterator.hasNext() && continue_)) {
           {
             final URI uri = allResourceIterator.next();
             final Resource resource = resourceSet.getResource(uri, true);
@@ -253,21 +243,11 @@ public class StandaloneBuilder {
               continue_ = false;
             }
           }
-          boolean _and_1 = false;
-          boolean _hasNext_2 = allResourceIterator.hasNext();
-          if (!_hasNext_2) {
-            _and_1 = false;
-          } else {
-            _and_1 = continue_;
-          }
-          _while_1 = _and_1;
         }
         if ((!continue_)) {
           this.clearResourceSet(resourceSet);
         }
       }
-      boolean _hasNext_1 = allResourceIterator.hasNext();
-      _while = _hasNext_1;
     }
     this.installIndex(resourceSet, index);
     if (needsJava) {
@@ -280,22 +260,12 @@ public class StandaloneBuilder {
     }
     final Iterator<URI> sourceResourceIterator = sourceResourceURIs.iterator();
     boolean isErrorFree = true;
-    boolean _hasNext_1 = sourceResourceIterator.hasNext();
-    boolean _while_1 = _hasNext_1;
-    while (_while_1) {
+    while (sourceResourceIterator.hasNext()) {
       {
         List<Resource> resources = CollectionLiterals.<Resource>newArrayList();
         int clusterIndex = 0;
         boolean continue_ = true;
-        boolean _and = false;
-        boolean _hasNext_2 = sourceResourceIterator.hasNext();
-        if (!_hasNext_2) {
-          _and = false;
-        } else {
-          _and = continue_;
-        }
-        boolean _while_2 = _and;
-        while (_while_2) {
+        while ((sourceResourceIterator.hasNext() && continue_)) {
           {
             final URI uri = sourceResourceIterator.next();
             final Resource resource = resourceSet.getResource(uri, true);
@@ -311,23 +281,15 @@ public class StandaloneBuilder {
               continue_ = false;
             }
           }
-          boolean _and_1 = false;
-          boolean _hasNext_3 = sourceResourceIterator.hasNext();
-          if (!_hasNext_3) {
-            _and_1 = false;
-          } else {
-            _and_1 = continue_;
-          }
-          _while_2 = _and_1;
         }
-        boolean _and_1 = false;
+        boolean _and = false;
         boolean _isFailOnValidationError = this.isFailOnValidationError();
         if (!_isFailOnValidationError) {
-          _and_1 = false;
+          _and = false;
         } else {
-          _and_1 = (!isErrorFree);
+          _and = (!isErrorFree);
         }
-        if (_and_1) {
+        if (_and) {
           return isErrorFree;
         }
         this.generate(resources);
@@ -335,8 +297,6 @@ public class StandaloneBuilder {
           this.clearResourceSet(resourceSet);
         }
       }
-      boolean _hasNext_2 = sourceResourceIterator.hasNext();
-      _while_1 = _hasNext_2;
     }
     return isErrorFree;
   }

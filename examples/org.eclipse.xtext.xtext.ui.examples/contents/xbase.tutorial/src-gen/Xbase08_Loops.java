@@ -17,19 +17,13 @@ public class Xbase08_Loops {
       }
       /* result; */
       int i = 0;
-      int _size = list.size();
-      boolean _lessThan = (i < _size);
-      boolean _while = _lessThan;
-      while (_while) {
+      while ((i < list.size())) {
         {
           String _get = list.get(i);
           String _plus = ("whiled-" + _get);
           result.add(_plus);
           i = (i + 1);
         }
-        int _size_1 = list.size();
-        boolean _lessThan_1 = (i < _size_1);
-        _while = _lessThan_1;
       }
       _xblockexpression = result;
     }

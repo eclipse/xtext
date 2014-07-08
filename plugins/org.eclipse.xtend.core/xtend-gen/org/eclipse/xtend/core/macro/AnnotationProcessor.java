@@ -168,10 +168,7 @@ public class AnnotationProcessor {
       final Runnable _function = new Runnable() {
         public void run() {
           try {
-            boolean _get = isFinished.get();
-            boolean _not = (!_get);
-            boolean _while = _not;
-            while (_while) {
+            while ((!isFinished.get())) {
               {
                 boolean _isCanceled = cancelIndicator.isCanceled();
                 if (_isCanceled) {
@@ -181,9 +178,6 @@ public class AnnotationProcessor {
                 }
                 Thread.sleep(100);
               }
-              boolean _get_1 = isFinished.get();
-              boolean _not_1 = (!_get_1);
-              _while = _not_1;
             }
           } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
