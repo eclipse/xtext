@@ -21,6 +21,7 @@ import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.internal.Stopwatches
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtend.core.xtend.XtendParameter
+import org.eclipse.xtend.lib.macro.ValidationParticipant
 
 /**
  * It checks whether the files contain macro annotations and calls their register and processing functions.
@@ -31,6 +32,7 @@ class AnnotationProcessor {
 	
 	@Inject Provider<TransformationContextImpl> modifyContextProvider
 	@Inject Provider<RegisterGlobalsContextImpl> registerGlobalsContextProvider
+	@Inject Provider<ValidationContextImpl> validationContextProvider
 
 	/**
 	 * gets called from Xtend compiler, during "model inference", i.e. translation of Xtend AST to Java AST
@@ -70,9 +72,36 @@ class AnnotationProcessor {
 								XtendMember : ctx.compilationUnit.toXtendMemberDeclaration(it)
 								XtendParameter : ctx.compilationUnit.toXtendParameterDeclaration(it)
 							}
-							return modifyCtx.getPrimaryGeneratedJavaElement(xtendMember)
+							return modifyCtx.getPrimaryGeneratedJavaElement(xtendMember) as MutableNamedElement
 						]
 						processor.doTransform(map, modifyCtx)
+					]
+				}
+			}
+		} finally {
+			task.stop
+		}
+	}
+	
+	def validationPhase(ActiveAnnotationContext ctx, CancelIndicator monitor) {
+		val task = Stopwatches.forTask('[macros] validationPhase (AnnotationProcessor.validationPhase)')
+		task.start
+		try {
+			switch processor : ctx.processorInstance{
+				ValidationParticipant<NamedElement>: {
+					val validationContext = validationContextProvider.get
+					ctx.compilationUnit.modifyAllowed = false
+					validationContext.unit = ctx.compilationUnit
+					
+					runWithCancelIndiciator(ctx, monitor) [|
+						val map = ctx.annotatedSourceElements.map[
+							val xtendMember = switch it {
+								XtendMember : ctx.compilationUnit.toXtendMemberDeclaration(it)
+								XtendParameter : ctx.compilationUnit.toXtendParameterDeclaration(it)
+							}
+							return validationContext.getPrimaryGeneratedJavaElement(xtendMember)
+						]
+						processor.doValidate(map, validationContext)
 					]
 				}
 			}

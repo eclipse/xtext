@@ -121,6 +121,7 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -168,10 +169,12 @@ class CompilationUnitImpl implements CompilationUnit {
 	@Inject CompilerPhases compilerPhases;
 
 	@Property XtendFile xtendFile
+	@Property boolean modifyAllowed = true
 	@Inject CommonTypeComputationServices services;
 	@Inject TypeReferences typeReferences
 	@Inject JvmTypesBuilder typesBuilder
 	@Inject IXtendJvmAssociations associations
+	@Inject IJvmModelAssociator jvmAssociator
 	@Inject ConstantExpressionsInterpreter interpreter
 	@Inject IEObjectDocumentationProvider documentationProvider
 	@Inject IFileHeaderProvider fileHeaderProvider
@@ -182,16 +185,22 @@ class CompilationUnitImpl implements CompilationUnit {
 	@Inject FileLocations fileLocations
 	@Inject ReadAndWriteTracking readAndWriteTracking
 	
-	@Property val ProblemSupport problemSupport = new ProblemSupportImpl(this)
+	@Property val ProblemSupport problemSupport= new ProblemSupportImpl(this)
 	@Property val TypeReferenceProvider typeReferenceProvider = new TypeReferenceProviderImpl(this)
 	@Property val AnnotationReferenceProvider annotationReferenceProvider = new AnnotationReferenceProviderImpl(this)
 	@Property val TypeLookupImpl typeLookup = new TypeLookupImpl(this)
+	@Property val TracabilityImpl tracability = new TracabilityImpl(this)
+	@Property val AssociatorImpl associator = new AssociatorImpl(this)
 	
 	Map<Object, Object> identityCache = newHashMap
 	OwnedConverter typeRefConverter
 	
 	def IXtendJvmAssociations getJvmAssociations() {
 		return associations
+	}
+	
+	def IJvmModelAssociator getJvmAssociator() {
+		return jvmAssociator
 	}
 	
 	def TypeReferences getTypeReferences() {
@@ -322,7 +331,7 @@ class CompilationUnitImpl implements CompilationUnit {
 		getOrCreate(delegate) [
 			switch delegate {
 				JvmGenericType case delegate.isInterface:
-					if (delegate.belongedToCompilationUnit) {
+					if (delegate.belongedToCompilationUnit && modifyAllowed) {
 						new MutableJvmInterfaceDeclarationImpl => [
 							it.delegate = delegate 
 							it.compilationUnit = this
@@ -334,7 +343,7 @@ class CompilationUnitImpl implements CompilationUnit {
 						]
 					}
 				JvmGenericType:
-					if (delegate.belongedToCompilationUnit) {
+					if (delegate.belongedToCompilationUnit && modifyAllowed) {
 						new MutableJvmClassDeclarationImpl => [
 							it.delegate = delegate
 							it.compilationUnit = this
@@ -346,7 +355,7 @@ class CompilationUnitImpl implements CompilationUnit {
 						]
 					}
 				JvmAnnotationType:
-					if (delegate.belongedToCompilationUnit) {
+					if (delegate.belongedToCompilationUnit && modifyAllowed) {
 						new MutableJvmAnnotationTypeDeclarationImpl => [
 							it.delegate = delegate
 							it.compilationUnit = this
@@ -358,7 +367,7 @@ class CompilationUnitImpl implements CompilationUnit {
 						]
 					}
 				JvmEnumerationType:
-					if (delegate.belongedToCompilationUnit) {
+					if (delegate.belongedToCompilationUnit && modifyAllowed) {
 						new MutableJvmEnumerationTypeDeclarationImpl => [
 							it.delegate = delegate
 							it.compilationUnit = this
@@ -374,7 +383,7 @@ class CompilationUnitImpl implements CompilationUnit {
 
 	def TypeParameterDeclaration toTypeParameterDeclaration(JvmTypeParameter delegate) {
 		getOrCreate(delegate) [
-			if (delegate.belongedToCompilationUnit) {
+			if (delegate.belongedToCompilationUnit && modifyAllowed) {
 				new MutableJvmTypeParameterDeclarationImpl => [
 					it.delegate = delegate
 					it.compilationUnit = this
@@ -389,7 +398,7 @@ class CompilationUnitImpl implements CompilationUnit {
 
 	def ParameterDeclaration toParameterDeclaration(JvmFormalParameter delegate) {
 		getOrCreate(delegate) [
-			if (delegate.belongedToCompilationUnit) {
+			if (delegate.belongedToCompilationUnit && modifyAllowed) {
 				new MutableJvmParameterDeclarationImpl => [
 					it.delegate = delegate
 					it.compilationUnit = this
@@ -409,7 +418,7 @@ class CompilationUnitImpl implements CompilationUnit {
 					toTypeDeclaration(delegate)
 				JvmOperation: {
 					if (delegate.declaringType instanceof JvmAnnotationType) {
-						if (delegate.belongedToCompilationUnit) {
+						if (delegate.belongedToCompilationUnit && modifyAllowed) {
 							new MutableJvmAnnotationTypeElementDeclarationImpl => [
 								it.delegate = delegate
 								it.compilationUnit = this
@@ -421,7 +430,7 @@ class CompilationUnitImpl implements CompilationUnit {
 							]
 						}
 					} else {
-						if (delegate.belongedToCompilationUnit) {
+						if (delegate.belongedToCompilationUnit && modifyAllowed) {
 							new MutableJvmMethodDeclarationImpl => [
 								it.delegate = delegate
 								it.compilationUnit = this
@@ -435,7 +444,7 @@ class CompilationUnitImpl implements CompilationUnit {
 					} as MemberDeclaration
 				} 
 				JvmConstructor:
-					if (delegate.belongedToCompilationUnit) {
+					if (delegate.belongedToCompilationUnit && modifyAllowed) {
 						new MutableJvmConstructorDeclarationImpl => [
 							it.delegate = delegate
 							it.compilationUnit = this
@@ -447,7 +456,7 @@ class CompilationUnitImpl implements CompilationUnit {
 						]
 					}
 				JvmEnumerationLiteral:
-					if (delegate.belongedToCompilationUnit) {
+					if (delegate.belongedToCompilationUnit && modifyAllowed) {
 						new MutableJvmEnumerationValueDeclarationImpl => [
 							it.delegate = delegate
 							it.compilationUnit = this		
@@ -459,7 +468,7 @@ class CompilationUnitImpl implements CompilationUnit {
 						]
 					}
 				JvmField:
-					if (delegate.belongedToCompilationUnit) {
+					if (delegate.belongedToCompilationUnit && modifyAllowed) {
 						new MutableJvmFieldDeclarationImpl => [
 							it.delegate = delegate
 							it.compilationUnit = this

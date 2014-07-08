@@ -287,6 +287,177 @@ public abstract class AbstractReusableActiveAnnotationTests {
   }
   
   @Test
+  public void testValidationPhase() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package myannotation");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.Active");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.AbstractClassProcessor");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.ValidationContext");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.TransformationContext");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@Active(ValidatingProcessor)");
+    _builder.newLine();
+    _builder.append("annotation ValidatingAnnotation {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class ValidatingProcessor extends AbstractClassProcessor {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override doTransform(MutableClassDeclaration cls, extension TransformationContext context) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("cls.addWarning(\"Foo\")");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("cls.addWarning(\"Bar\")");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override doValidate(ClassDeclaration cls, extension ValidationContext context) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("cls.addWarning(\"Baz\")");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("cls.addWarning(\"There were \" + cls.problems.size +  \" problems\")");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/ValidatingAnnotation.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package myusercode");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import myannotation.*");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@ValidatingAnnotation");
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      public void apply(final CompilationUnitImpl it) {
+        TypeLookupImpl _typeLookup = it.getTypeLookup();
+        final MutableClassDeclaration cls = _typeLookup.findClass("myusercode.Foo");
+        ProblemSupport _problemSupport = it.getProblemSupport();
+        final List<? extends Problem> problems = _problemSupport.getProblems(cls);
+        int _size = problems.size();
+        Assert.assertEquals(4, _size);
+        Problem _get = problems.get(0);
+        String _message = _get.getMessage();
+        Assert.assertEquals("Foo", _message);
+        Problem _get_1 = problems.get(1);
+        String _message_1 = _get_1.getMessage();
+        Assert.assertEquals("Bar", _message_1);
+        Problem _get_2 = problems.get(2);
+        String _message_2 = _get_2.getMessage();
+        Assert.assertEquals("Baz", _message_2);
+        Problem _get_3 = problems.get(3);
+        String _message_3 = _get_3.getMessage();
+        Assert.assertEquals("There were 3 problems", _message_3);
+      }
+    };
+    this.assertProcessing(_mappedTo, _mappedTo_1, _function);
+  }
+  
+  @Test(expected = RuntimeException.class)
+  public void testNoMutationInValidationPhase() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package myannotation");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.Active");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.ValidationParticipant");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.ValidationContext");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.TransformationContext");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@Active(EvilProcessor)");
+    _builder.newLine();
+    _builder.append("annotation EvilAnnotation {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class EvilProcessor implements ValidationParticipant<MutableClassDeclaration> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override doValidate(List<? extends MutableClassDeclaration> classes, extension ValidationContext context) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("classes.forEach[");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("final = true");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/EvilAnnotation.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package myusercode");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import myannotation.*");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@EvilAnnotation");
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      public void apply(final CompilationUnitImpl it) {
+      }
+    };
+    this.assertProcessing(_mappedTo, _mappedTo_1, _function);
+  }
+  
+  @Test
   public void testSetEmptyListAsAnnotationValue() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package myannotation");
@@ -4356,7 +4527,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
         ProblemSupport _problemSupport = it.getProblemSupport();
         Iterable<? extends MutableFieldDeclaration> _declaredFields = clazz.getDeclaredFields();
         MutableFieldDeclaration _head = IterableExtensions.head(_declaredFields);
-        List<Problem> _problems = _problemSupport.getProblems(_head);
+        List<? extends Problem> _problems = _problemSupport.getProblems(_head);
         boolean _isEmpty = _problems.isEmpty();
         Assert.assertTrue(_isEmpty);
       }
@@ -4790,13 +4961,13 @@ public abstract class AbstractReusableActiveAnnotationTests {
         Iterable<? extends MutableFieldDeclaration> _declaredFields = type.getDeclaredFields();
         final MutableFieldDeclaration field = IterableExtensions.head(_declaredFields);
         ProblemSupport _problemSupport = it.getProblemSupport();
-        List<Problem> _problems = _problemSupport.getProblems(field);
-        Problem _head = IterableExtensions.<Problem>head(_problems);
+        List<? extends Problem> _problems = _problemSupport.getProblems(field);
+        Problem _head = IterableExtensions.head(_problems);
         String _message = _head.getMessage();
         Assert.assertEquals("field-warning", _message);
         ProblemSupport _problemSupport_1 = it.getProblemSupport();
-        List<Problem> _problems_1 = _problemSupport_1.getProblems(method);
-        Problem _head_1 = IterableExtensions.<Problem>head(_problems_1);
+        List<? extends Problem> _problems_1 = _problemSupport_1.getProblems(method);
+        Problem _head_1 = IterableExtensions.head(_problems_1);
         String _message_1 = _head_1.getMessage();
         Assert.assertEquals("warning", _message_1);
       }

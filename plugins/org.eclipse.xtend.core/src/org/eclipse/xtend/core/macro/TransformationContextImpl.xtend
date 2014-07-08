@@ -7,90 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.macro
 
-import com.google.inject.Inject
-import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
-import org.eclipse.xtend.core.macro.declaration.JvmNamedElementImpl
-import org.eclipse.xtend.core.macro.declaration.XtendNamedElementImpl
 import org.eclipse.xtend.lib.macro.TransformationContext
+import org.eclipse.xtend.lib.macro.declaration.AnnotationReference
 import org.eclipse.xtend.lib.macro.declaration.Element
+import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement
 import org.eclipse.xtend.lib.macro.declaration.NamedElement
 import org.eclipse.xtend.lib.macro.declaration.Type
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
-import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtend.lib.macro.file.Path
-import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1
 import org.eclipse.xtend.lib.macro.services.AnnotationReferenceBuildContext
-import org.eclipse.xtend.lib.macro.declaration.AnnotationReference
-import org.eclipse.xtend.core.xtend.XtendMember
-import org.eclipse.xtend.core.xtend.XtendParameter
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1
 
 class TransformationContextImpl implements TransformationContext {
-
-	@Inject IXtendJvmAssociations associations
-	
-	@Inject IJvmModelAssociator associator
-
 	@Property CompilationUnitImpl unit
 
-	override isExternal(NamedElement element) {
-		!isSource(element) && !isGenerated(element)
-	}
-
-	override isGenerated(NamedElement element) {
-		switch element {
-			JvmNamedElementImpl<? extends JvmIdentifiableElement>: {
-				return element.delegate.eResource == unit.xtendFile.eResource
-			}
-			default:
-				false
-		}
-	}
-
-	override isSource(NamedElement element) {
-		element instanceof XtendNamedElementImpl<?>
-	}
-
-	override getPrimaryGeneratedJavaElement(NamedElement source) {
-		if (isSource(source)) {
-			val derivedElement = associations.getJvmElements((source as XtendNamedElementImpl<?>).delegate).filter(
-				JvmIdentifiableElement).head
-			if (derivedElement !== null) {
-				return unit.toNamedElement(derivedElement) as MutableNamedElement
-			}
-		} else if (isGenerated(source)) {
-			return source as MutableNamedElement
-		}
-		return null
-	}
-	
-	override getPrimarySourceElement(NamedElement target) {
-		if (isGenerated(target)) {
-			val sourceElement = associations.getSourceElements((target as JvmNamedElementImpl<?>).delegate).head
-			if (sourceElement instanceof XtendMember) {
-				return unit.toXtendMemberDeclaration(sourceElement)
-			} else if (sourceElement instanceof XtendParameter) {
-				return unit.toXtendParameterDeclaration(sourceElement)
-			}
-		} else if (isSource(target)) {
-			return target
-		}
-	}
-
-	override isThePrimaryGeneratedJavaElement(NamedElement target) {
-		val source = target.primarySourceElement
-		if (source === null)
-			return false;
-		source.getPrimaryGeneratedJavaElement == target
-	}
-	
-	override setPrimarySourceElement(MutableNamedElement secondaryElement, NamedElement primaryElement) {
-		val sourceElement = primaryElement.primarySourceElement
-		associator.associate((sourceElement as XtendNamedElementImpl<?>).delegate, (secondaryElement as JvmNamedElementImpl<?>).delegate)
-	}
-	
 	override addError(Element element, String message) {
 		unit.problemSupport.addError(element, message)
 	}
@@ -293,6 +224,34 @@ class TransformationContextImpl implements TransformationContext {
 	
 	override newSelfTypeReference(Type typeDeclaration) {
 		unit.typeReferenceProvider.newSelfTypeReference(typeDeclaration)
+	}
+	
+	override getPrimaryGeneratedJavaElement(NamedElement source) {
+		unit.tracability.getPrimaryGeneratedJavaElement(source)
+	}
+	
+	override getPrimarySourceElement(NamedElement target) {
+		unit.tracability.getPrimarySourceElement(target)
+	}
+	
+	override isExternal(NamedElement element) {
+		unit.tracability.isExternal(element)
+	}
+	
+	override isGenerated(NamedElement element) {
+		unit.tracability.isGenerated(element)
+	}
+	
+	override isSource(NamedElement element) {
+		unit.tracability.isSource(element)
+	}
+	
+	override isThePrimaryGeneratedJavaElement(NamedElement target) {
+		unit.tracability.isThePrimaryGeneratedJavaElement(target)
+	}
+	
+	override setPrimarySourceElement(MutableNamedElement primaryElement, NamedElement secondaryElement) {
+		unit.associator.setPrimarySourceElement(primaryElement, secondaryElement)
 	}
 	
 }
