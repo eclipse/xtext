@@ -19,8 +19,7 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtext.common.types,
  org.eclipse.xtext.xbase.lib,
  org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional
-Import-Package: org.apache.log4j,
- org.eclipse.xtext.xbase.lib
+Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.xbase.testlanguages,
  org.eclipse.xtext.xbase.testlanguages.services,
