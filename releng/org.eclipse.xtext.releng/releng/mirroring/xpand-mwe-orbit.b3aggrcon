@@ -19,6 +19,7 @@
     <bundles name="org.apache.log4j.source"/>
     <bundles name="org.aopalliance"/>
     <bundles name="org.easymock"/>
+    <bundles name="org.junit" versionRange="[4.11.0.v201303080030]"/>
     <bundles name="org.easymock.source"/>
     <bundles name="org.antlr.runtime"/>
     <bundles name="org.antlr.runtime.source"/>
