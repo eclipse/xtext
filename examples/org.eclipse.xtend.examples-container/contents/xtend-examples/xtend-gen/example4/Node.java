@@ -24,10 +24,6 @@ public class Node {
     return _simpleName.toLowerCase();
   }
   
-  public Node() {
-    super();
-  }
-  
   @Override
   @Pure
   public int hashCode() {
