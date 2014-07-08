@@ -44,12 +44,11 @@ public class XbaseDocumentReconcileStrategy extends XtextDocumentReconcileStrate
 		if (resource instanceof BatchLinkableResource) {
 			try {
 				BatchLinkableResource batchLinkableResource = (BatchLinkableResource) resource;
-				if (editor != null) { 
-					CompoundXtextEditorCallback xtextEditorCallback = editor.getXtextEditorCallback();
-					DirtyStateEditorSupport dirtyStateEditorSupport = xtextEditorCallback
-							.getDirtyStateEditorSupport();
+				if (editor != null) {
+					DirtyStateEditorSupport dirtyStateEditorSupport = editor.getDirtyStateEditorSupport();
 					if (dirtyStateEditorSupport instanceof XbaseDirtyStateEditorSupport)
-						((XbaseDirtyStateEditorSupport) dirtyStateEditorSupport).announceDirtyState(batchLinkableResource);
+						((XbaseDirtyStateEditorSupport) dirtyStateEditorSupport)
+								.announceDirtyState(batchLinkableResource);
 				}
 				batchLinkableResource.installDerivedState(false);
 				batchLinkableResource.resolveLazyCrossReferences(new CancelIndicator() {

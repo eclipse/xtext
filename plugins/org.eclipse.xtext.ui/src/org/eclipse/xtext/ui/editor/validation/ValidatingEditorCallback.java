@@ -19,7 +19,11 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Michael Clay
+ * @deprecated This class seems to be a remainder of the old days, when validation was triggered
+ *   by an IXtextEditorCallback. It's problematic as it introduces a second DirtyStateEditorSupport
+ *   instance by means of its superclass. 
  */
+@Deprecated 
 public class ValidatingEditorCallback extends AbstractDirtyStateAwareEditorCallback {
 	@Inject
 	private IResourceValidator resourceValidator;

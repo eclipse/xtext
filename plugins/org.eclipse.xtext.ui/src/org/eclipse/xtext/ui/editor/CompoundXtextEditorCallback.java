@@ -105,17 +105,4 @@ public class CompoundXtextEditorCallback implements IXtextEditorCallback {
 			}
 		}
 	}
-	
-	/**
-	 * @since 2.7
-	 */
-	public DirtyStateEditorSupport getDirtyStateEditorSupport() {
-		for(IXtextEditorCallback callback: editorCallbacks) {
-			if(callback instanceof AbstractDirtyStateAwareEditorCallback) {
-				return ((AbstractDirtyStateAwareEditorCallback) callback).getDirtyStateEditorSupport();
-			}
-		}
-		return null;
-	}
-
 }
