@@ -10,6 +10,7 @@ package org.eclipse.xtend.lib.macro;
 import java.util.List;
 
 import org.eclipse.xtend.lib.macro.declaration.NamedElement;
+import org.eclipse.xtext.xbase.lib.Extension;
 
 import com.google.common.annotations.Beta;
 
@@ -38,5 +39,5 @@ public interface RegisterGlobalsParticipant<T extends NamedElement> {
 	 * @see RegisterGlobalsContext
 	 */
 	void doRegisterGlobals(List<? extends T> annotatedSourceElements,
-			RegisterGlobalsContext context);
+			@Extension RegisterGlobalsContext context);
 }

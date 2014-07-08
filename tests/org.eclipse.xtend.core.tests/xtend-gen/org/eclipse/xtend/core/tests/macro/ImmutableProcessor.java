@@ -1,6 +1,7 @@
 package org.eclipse.xtend.core.tests.macro;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Sets;
 import java.util.Collections;
 import java.util.List;
 import org.eclipse.xtend.lib.macro.TransformationContext;
@@ -13,7 +14,6 @@ import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -119,7 +119,7 @@ public class ImmutableProcessor implements TransformationParticipant<MutableClas
                         TypeReference _primitiveByte = context.getPrimitiveByte();
                         TypeReference _primitiveShort = context.getPrimitiveShort();
                         TypeReference _type_1 = f.getType();
-                        boolean _contains = Collections.<TypeReference>unmodifiableSet(CollectionLiterals.<TypeReference>newHashSet(_primitiveInt, _primitiveChar, _primitiveByte, _primitiveShort)).contains(_type_1);
+                        boolean _contains = Collections.<TypeReference>unmodifiableSet(Sets.<TypeReference>newHashSet(_primitiveInt, _primitiveChar, _primitiveByte, _primitiveShort)).contains(_type_1);
                         if (_contains) {
                           _builder.append("result = prime * result + ");
                           String _simpleName_1 = f.getSimpleName();

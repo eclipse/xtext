@@ -35,6 +35,7 @@ import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
 @SuppressWarnings("all")
 public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl implements MutableFieldDeclaration {
   public void markAsRead() {
+    this.checkMutable();
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     ReadAndWriteTracking _readAndWriteTracking = _compilationUnit.getReadAndWriteTracking();
     JvmField _delegate = this.getDelegate();
@@ -45,6 +46,7 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
   }
   
   public void markAsInitializedBy(final ConstructorDeclaration constructorDeclaration) {
+    this.checkMutable();
     JvmConstructor _switchResult = null;
     boolean _matched = false;
     if (!_matched) {
@@ -84,6 +86,7 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
   }
   
   public void setInitializer(final Expression initializer) {
+    this.checkMutable();
     boolean _equals = Objects.equal(initializer, null);
     if (_equals) {
       CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
@@ -100,6 +103,7 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
   }
   
   public void setInitializer(final CompilationStrategy initializer) {
+    this.checkMutable();
     boolean _notEquals = (!Objects.equal(initializer, null));
     Preconditions.checkArgument(_notEquals, "initializer cannot be null");
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
@@ -108,6 +112,7 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
   }
   
   public void setInitializer(final StringConcatenationClient template) {
+    this.checkMutable();
     boolean _notEquals = (!Objects.equal(template, null));
     Preconditions.checkArgument(_notEquals, "template cannot be null");
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
@@ -116,26 +121,31 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
   }
   
   public void setFinal(final boolean isFinal) {
+    this.checkMutable();
     JvmField _delegate = this.getDelegate();
     _delegate.setFinal(isFinal);
   }
   
   public void setStatic(final boolean isStatic) {
+    this.checkMutable();
     JvmField _delegate = this.getDelegate();
     _delegate.setStatic(isStatic);
   }
   
   public void setTransient(final boolean isTransient) {
+    this.checkMutable();
     JvmField _delegate = this.getDelegate();
     _delegate.setTransient(isTransient);
   }
   
   public void setVolatile(final boolean isVolatile) {
+    this.checkMutable();
     JvmField _delegate = this.getDelegate();
     _delegate.setVolatile(isVolatile);
   }
   
   public void setType(final TypeReference type) {
+    this.checkMutable();
     boolean _notEquals = (!Objects.equal(type, null));
     Preconditions.checkArgument(_notEquals, "type cannot be null");
     JvmField _delegate = this.getDelegate();

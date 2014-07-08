@@ -37,6 +37,7 @@ public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmA
   }
   
   public void setDocComment(final String docComment) {
+    this.checkMutable();
     T _delegate = this.getDelegate();
     EList<Adapter> _eAdapters = _delegate.eAdapters();
     Adapter _adapter = EcoreUtil.getAdapter(_eAdapters, DocumentationAdapter.class);
@@ -60,6 +61,7 @@ public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmA
   }
   
   public void setVisibility(final Visibility visibility) {
+    this.checkMutable();
     T _delegate = this.getDelegate();
     JvmVisibility _switchResult = null;
     if (visibility != null) {
@@ -91,6 +93,7 @@ public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmA
   }
   
   public void setSimpleName(final String name) {
+    this.checkMutable();
     ConditionUtils.checkJavaIdentifier(name, "name");
     T _delegate = this.getDelegate();
     final T it = _delegate;

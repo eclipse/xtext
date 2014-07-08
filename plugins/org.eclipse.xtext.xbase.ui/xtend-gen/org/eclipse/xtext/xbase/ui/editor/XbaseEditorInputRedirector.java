@@ -176,18 +176,36 @@ public class XbaseEditorInputRedirector {
       Iterable<ILocationInResource> _allAssociatedLocations = trace.getAllAssociatedLocations();
       final Iterator<ILocationInResource> allLocations = _allAssociatedLocations.iterator();
       ILocationInResource sourceInformation = null;
-      while ((allLocations.hasNext() && Objects.equal(sourceInformation, null))) {
+      boolean _and = false;
+      boolean _hasNext = allLocations.hasNext();
+      if (!_hasNext) {
+        _and = false;
+      } else {
+        boolean _equals_1 = Objects.equal(sourceInformation, null);
+        _and = _equals_1;
+      }
+      boolean _while = _and;
+      while (_while) {
         {
           final ILocationInResource candidate = allLocations.next();
           LanguageInfo _language = candidate.getLanguage();
-          boolean _equals_1 = this.languageInfo.equals(_language);
-          if (_equals_1) {
+          boolean _equals_2 = this.languageInfo.equals(_language);
+          if (_equals_2) {
             sourceInformation = candidate;
           }
         }
+        boolean _and_1 = false;
+        boolean _hasNext_1 = allLocations.hasNext();
+        if (!_hasNext_1) {
+          _and_1 = false;
+        } else {
+          boolean _equals_2 = Objects.equal(sourceInformation, null);
+          _and_1 = _equals_2;
+        }
+        _while = _and_1;
       }
-      boolean _equals_1 = Objects.equal(sourceInformation, null);
-      if (_equals_1) {
+      boolean _equals_2 = Objects.equal(sourceInformation, null);
+      if (_equals_2) {
         return input;
       }
       final IStorage originalStorage = sourceInformation.getStorage();

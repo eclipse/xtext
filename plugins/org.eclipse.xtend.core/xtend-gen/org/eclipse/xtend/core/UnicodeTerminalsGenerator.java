@@ -80,7 +80,8 @@ class UnicodeTerminalsGenerator {
     char c = Character.MIN_VALUE;
     final StringWriter result = new StringWriter();
     final PrintWriter printer = new PrintWriter(result, true);
-    while ((c != Character.MAX_VALUE)) {
+    boolean _while = (c != Character.MAX_VALUE);
+    while (_while) {
       {
         Boolean _apply = guard.apply(Integer.valueOf(((int) c)));
         if ((_apply).booleanValue()) {
@@ -120,6 +121,7 @@ class UnicodeTerminalsGenerator {
         }
         c = ((char) (c + 1));
       }
+      _while = (c != Character.MAX_VALUE);
     }
     return result;
   }

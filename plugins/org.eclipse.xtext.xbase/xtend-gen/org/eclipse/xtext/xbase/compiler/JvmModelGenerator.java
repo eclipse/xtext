@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.compiler;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -1899,7 +1900,7 @@ public class JvmModelGenerator implements IGenerator {
       String _identifier_1 = type.getIdentifier();
       String _plus_2 = (_identifier_1 + ".");
       String _plus_3 = (_plus_2 + "values()");
-      final Set<String> syntheticEnumMethods = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet(_plus_1, _plus_3));
+      final Set<String> syntheticEnumMethods = Collections.<String>unmodifiableSet(Sets.<String>newHashSet(_plus_1, _plus_3));
       EList<JvmMember> _members = type.getMembers();
       final Function1<JvmMember, Boolean> _function = new Function1<JvmMember, Boolean>() {
         public Boolean apply(final JvmMember it) {

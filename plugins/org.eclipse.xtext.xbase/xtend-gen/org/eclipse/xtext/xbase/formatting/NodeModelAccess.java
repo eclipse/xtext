@@ -105,9 +105,11 @@ public class NodeModelAccess {
     ILeafNode _xblockexpression = null;
     {
       INode current = node;
-      while ((current instanceof ICompositeNode)) {
+      boolean _while = (current instanceof ICompositeNode);
+      while (_while) {
         INode _lastChild = ((ICompositeNode)current).getLastChild();
         current = _lastChild;
+        _while = (current instanceof ICompositeNode);
       }
       final INode current1 = current;
       final Function1<ILeafNode, Boolean> _function = new Function1<ILeafNode, Boolean>() {
@@ -157,7 +159,9 @@ public class NodeModelAccess {
         return ((ILeafNode) node);
       }
       final NodeIterator ni = new NodeIterator(node);
-      while (ni.hasNext()) {
+      boolean _hasNext = ni.hasNext();
+      boolean _while = _hasNext;
+      while (_while) {
         {
           final INode next = ni.next();
           boolean _and_1 = false;
@@ -171,6 +175,8 @@ public class NodeModelAccess {
             return ((ILeafNode) next);
           }
         }
+        boolean _hasNext_1 = ni.hasNext();
+        _while = _hasNext_1;
       }
     }
     return ((ILeafNode)_xifexpression);

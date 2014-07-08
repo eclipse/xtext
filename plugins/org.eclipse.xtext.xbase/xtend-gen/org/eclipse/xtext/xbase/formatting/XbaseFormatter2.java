@@ -1306,12 +1306,14 @@ public class XbaseFormatter2 extends AbstractFormatter {
   protected void _format(final XMemberFeatureCall expr, final FormattableDocument format) {
     EObject top = expr;
     ArrayList<XMemberFeatureCall> calls = CollectionLiterals.<XMemberFeatureCall>newArrayList();
-    while ((top instanceof XMemberFeatureCall)) {
+    boolean _while = (top instanceof XMemberFeatureCall);
+    while (_while) {
       {
         calls.add(((XMemberFeatureCall)top));
         XExpression _memberCallTarget = ((XMemberFeatureCall)top).getMemberCallTarget();
         top = _memberCallTarget;
       }
+      _while = (top instanceof XMemberFeatureCall);
     }
     this.format(top, format);
     boolean indented = false;
@@ -1565,12 +1567,18 @@ public class XbaseFormatter2 extends AbstractFormatter {
     AbstractRule precendece = this.binaryOperationPrecedence(expr);
     EObject top = expr;
     ArrayList<XBinaryOperation> calls = CollectionLiterals.<XBinaryOperation>newArrayList();
-    while (Objects.equal(this.binaryOperationPrecedence(top), precendece)) {
+    AbstractRule _binaryOperationPrecedence = this.binaryOperationPrecedence(top);
+    boolean _equals = Objects.equal(_binaryOperationPrecedence, precendece);
+    boolean _while = _equals;
+    while (_while) {
       {
         calls.add(((XBinaryOperation) top));
         XExpression _leftOperand = ((XBinaryOperation) top).getLeftOperand();
         top = _leftOperand;
       }
+      AbstractRule _binaryOperationPrecedence_1 = this.binaryOperationPrecedence(top);
+      boolean _equals_1 = Objects.equal(_binaryOperationPrecedence_1, precendece);
+      _while = _equals_1;
     }
     this.format(top, format);
     boolean indented = false;
@@ -2554,12 +2562,14 @@ public class XbaseFormatter2 extends AbstractFormatter {
     Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _append_1 = this._formattingDataFactory.append(typeNode, _function_2);
     format.operator_add(_append_1);
     INode node = typeNode;
-    while ((!Objects.equal(node, null))) {
+    boolean _notEquals = (!Objects.equal(node, null));
+    boolean _while = _notEquals;
+    while (_while) {
       {
         ILeafNode _immediatelyFollowingKeyword = this._nodeModelAccess.immediatelyFollowingKeyword(node, "[");
         node = _immediatelyFollowingKeyword;
-        boolean _notEquals = (!Objects.equal(node, null));
-        if (_notEquals) {
+        boolean _notEquals_1 = (!Objects.equal(node, null));
+        if (_notEquals_1) {
           final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
             public void apply(final FormattingDataInit it) {
               it.noSpace();
@@ -2569,8 +2579,8 @@ public class XbaseFormatter2 extends AbstractFormatter {
           format.operator_add(_append_2);
           ILeafNode _immediatelyFollowingKeyword_1 = this._nodeModelAccess.immediatelyFollowingKeyword(node, "]");
           node = _immediatelyFollowingKeyword_1;
-          boolean _notEquals_1 = (!Objects.equal(node, null));
-          if (_notEquals_1) {
+          boolean _notEquals_2 = (!Objects.equal(node, null));
+          if (_notEquals_2) {
             final Procedure1<FormattingDataInit> _function_4 = new Procedure1<FormattingDataInit>() {
               public void apply(final FormattingDataInit it) {
                 it.noSpace();
@@ -2581,6 +2591,8 @@ public class XbaseFormatter2 extends AbstractFormatter {
           }
         }
       }
+      boolean _notEquals_1 = (!Objects.equal(node, null));
+      _while = _notEquals_1;
     }
   }
   

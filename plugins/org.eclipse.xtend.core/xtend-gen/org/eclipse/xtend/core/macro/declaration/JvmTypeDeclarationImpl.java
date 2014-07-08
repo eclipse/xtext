@@ -85,6 +85,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
   }
   
   public MutableConstructorDeclaration addConstructor(final Procedure1<MutableConstructorDeclaration> initializer) {
+    this.checkMutable();
     boolean _notEquals = (!Objects.equal(initializer, null));
     Preconditions.checkArgument(_notEquals, "initializer cannot be null");
     T _delegate = this.getDelegate();
@@ -117,6 +118,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
   }
   
   public MutableFieldDeclaration addField(final String name, final Procedure1<MutableFieldDeclaration> initializer) {
+    this.checkMutable();
     ConditionUtils.checkJavaIdentifier(name, "name");
     boolean _notEquals = (!Objects.equal(initializer, null));
     Preconditions.checkArgument(_notEquals, "initializer cannot be null");
@@ -134,6 +136,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
   }
   
   public MutableMethodDeclaration addMethod(final String name, final Procedure1<MutableMethodDeclaration> initializer) {
+    this.checkMutable();
     ConditionUtils.checkJavaIdentifier(name, "name");
     boolean _notEquals = (!Objects.equal(initializer, null));
     Preconditions.checkArgument(_notEquals, "initializer cannot be null");

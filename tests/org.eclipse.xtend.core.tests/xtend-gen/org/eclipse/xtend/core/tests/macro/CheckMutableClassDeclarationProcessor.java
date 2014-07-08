@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.core.tests.macro;
 
+import com.google.common.collect.Lists;
 import java.util.Collections;
 import java.util.List;
 import org.eclipse.xtend.core.tests.macro.MutableAssert;
@@ -87,7 +88,7 @@ public class CheckMutableClassDeclarationProcessor extends AbstractClassProcesso
     MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "superIntefaces cannot be null", _function);
     final Procedure0 _function_1 = new Procedure0() {
       public void apply() {
-        annotatedClass.setImplementedInterfaces(Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList((TypeReference)null)));
+        annotatedClass.setImplementedInterfaces(Collections.<TypeReference>unmodifiableList(Lists.<TypeReference>newArrayList((TypeReference)null)));
       }
     };
     MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "superIntefaces cannot contain null", _function_1);
@@ -127,7 +128,7 @@ public class CheckMutableClassDeclarationProcessor extends AbstractClassProcesso
     MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "upperBounds cannot be null", _function_6);
     final Procedure0 _function_7 = new Procedure0() {
       public void apply() {
-        typeParameter.setUpperBounds(Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList((TypeReference)null)));
+        typeParameter.setUpperBounds(Collections.<TypeReference>unmodifiableList(Lists.<TypeReference>newArrayList((TypeReference)null)));
       }
     };
     MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "upperBounds cannot contain null", _function_7);

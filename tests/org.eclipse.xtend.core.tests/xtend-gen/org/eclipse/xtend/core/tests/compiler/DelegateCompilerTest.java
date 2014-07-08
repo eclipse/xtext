@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.tests.compiler;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import java.lang.reflect.Method;
 import java.util.Collections;
@@ -20,7 +21,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -217,7 +217,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
               } else {
                 Class<?>[] _parameterTypes = it.getParameterTypes();
                 List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(_parameterTypes)));
-                boolean _equals_1 = Objects.equal(_list, Collections.<Class<?>>unmodifiableList(CollectionLiterals.<Class<?>>newArrayList(String.class, Object.class)));
+                boolean _equals_1 = Objects.equal(_list, Collections.<Class<?>>unmodifiableList(Lists.<Class<?>>newArrayList(String.class, Object.class)));
                 _and_1 = _equals_1;
               }
               if (!_and_1) {

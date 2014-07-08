@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.tests.macro;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import java.util.Collections;
 import org.eclipse.xtend.core.tests.macro.MutableAssert;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
@@ -18,7 +19,6 @@ import org.eclipse.xtend.lib.macro.declaration.MutableInterfaceDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
@@ -41,7 +41,7 @@ public class InferredTypeReferencesCheckProcessor extends AbstractClassProcessor
     final Procedure0 _function_1 = new Procedure0() {
       public void apply() {
         Iterable<? extends TypeReference> _implementedInterfaces = it.getImplementedInterfaces();
-        Iterable<TypeReference> _plus = Iterables.<TypeReference>concat(_implementedInterfaces, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(type)));
+        Iterable<TypeReference> _plus = Iterables.<TypeReference>concat(_implementedInterfaces, Collections.<TypeReference>unmodifiableList(Lists.<TypeReference>newArrayList(type)));
         it.setImplementedInterfaces(_plus);
       }
     };
@@ -73,7 +73,7 @@ public class InferredTypeReferencesCheckProcessor extends AbstractClassProcessor
             final Procedure0 _function = new Procedure0() {
               public void apply() {
                 Iterable<? extends TypeReference> _upperBounds = it.getUpperBounds();
-                Iterable<TypeReference> _plus = Iterables.<TypeReference>concat(_upperBounds, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(type)));
+                Iterable<TypeReference> _plus = Iterables.<TypeReference>concat(_upperBounds, Collections.<TypeReference>unmodifiableList(Lists.<TypeReference>newArrayList(type)));
                 it.setUpperBounds(_plus);
               }
             };
@@ -96,7 +96,7 @@ public class InferredTypeReferencesCheckProcessor extends AbstractClassProcessor
         final Procedure0 _function = new Procedure0() {
           public void apply() {
             Iterable<? extends TypeReference> _extendedInterfaces = it.getExtendedInterfaces();
-            Iterable<TypeReference> _plus = Iterables.<TypeReference>concat(_extendedInterfaces, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(type)));
+            Iterable<TypeReference> _plus = Iterables.<TypeReference>concat(_extendedInterfaces, Collections.<TypeReference>unmodifiableList(Lists.<TypeReference>newArrayList(type)));
             it.setExtendedInterfaces(_plus);
           }
         };
@@ -113,7 +113,7 @@ public class InferredTypeReferencesCheckProcessor extends AbstractClassProcessor
             final Procedure0 _function = new Procedure0() {
               public void apply() {
                 Iterable<? extends TypeReference> _upperBounds = it.getUpperBounds();
-                Iterable<TypeReference> _plus = Iterables.<TypeReference>concat(_upperBounds, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(type)));
+                Iterable<TypeReference> _plus = Iterables.<TypeReference>concat(_upperBounds, Collections.<TypeReference>unmodifiableList(Lists.<TypeReference>newArrayList(type)));
                 it.setUpperBounds(_plus);
               }
             };
@@ -136,7 +136,7 @@ public class InferredTypeReferencesCheckProcessor extends AbstractClassProcessor
         final Procedure0 _function = new Procedure0() {
           public void apply() {
             Iterable<? extends TypeReference> _upperBounds = it.getUpperBounds();
-            Iterable<TypeReference> _plus = Iterables.<TypeReference>concat(_upperBounds, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(type)));
+            Iterable<TypeReference> _plus = Iterables.<TypeReference>concat(_upperBounds, Collections.<TypeReference>unmodifiableList(Lists.<TypeReference>newArrayList(type)));
             it.setUpperBounds(_plus);
           }
         };

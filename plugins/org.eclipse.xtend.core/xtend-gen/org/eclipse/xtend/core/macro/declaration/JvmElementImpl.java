@@ -20,6 +20,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 @SuppressWarnings("all")
 public abstract class JvmElementImpl<T extends EObject> extends AbstractElementImpl<T> {
   public void remove() {
+    this.checkMutable();
     T _delegate = this.getDelegate();
     Resource _eResource = _delegate.eResource();
     boolean _notEquals = (!Objects.equal(_eResource, null));
@@ -42,5 +43,14 @@ public abstract class JvmElementImpl<T extends EObject> extends AbstractElementI
     T _delegate_5 = this.getDelegate();
     _builder_1.append(_delegate_5, "");
     Preconditions.checkState(_equals, _builder_1);
+  }
+  
+  protected final void checkMutable() {
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    boolean _isModifyAllowed = _compilationUnit.isModifyAllowed();
+    boolean _not = (!_isModifyAllowed);
+    if (_not) {
+      throw new IllegalStateException("Element cannot be modified after the transformation phase");
+    }
   }
 }
