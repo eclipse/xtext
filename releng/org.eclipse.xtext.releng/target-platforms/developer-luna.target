@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.6"?>
 
-<target name="developer-luna" sequenceNumber="1">
+<target name="developer-luna" sequenceNumber="2">
 <locations>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.xpand.feature.group" version="0.0.0"/>
@@ -23,7 +23,7 @@
 <unit id="org.eclipse.pde.junit.runtime" version="0.0.0"/>
 <unit id="org.junit" version="0.0.0"/>
 <unit id="org.eclipse.core.databinding.beans" version="0.0.0"/>
-<repository location="http://download.eclipse.org/eclipse/updates/4.4milestones/"/>
+<repository location="http://download.eclipse.org/eclipse/updates/4.4/"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="com.google.guava" version="0.0.0"/>
@@ -47,7 +47,7 @@
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="de.itemis.xtext.antlr.sdk.feature.group" version="0.0.0"/>
-<repository location="http://download.itemis.com/updates/releases/2.1.0"/>
+<repository location="http://download.itemis.com/updates/releases/2.1.1"/>
 </location>
 </locations>
 </target>
