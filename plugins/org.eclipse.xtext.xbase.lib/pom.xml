@@ -9,7 +9,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>org.eclipse.xtext.xbase.lib</artifactId>
 	<name>Eclipse Xbase Runtime Library</name>
-	<description>The runtime library for the Xbase programming language.</description>
+	<description>The runtime library for the Xbase programming language.
+	</description>
 	<dependencies>
 		<dependency>
 			<groupId>com.google.guava</groupId>
@@ -19,5 +20,26 @@
 	</dependencies>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>xtend-gen</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
 	</build>
 </project>
