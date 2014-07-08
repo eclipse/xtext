@@ -41,7 +41,7 @@ package class UnicodeTerminalsGenerator {
 		var char c = Character.MIN_VALUE
 		val result = new StringWriter
 		val printer = new PrintWriter(result, true)
-		while(true) {
+		while(c != Character.MAX_VALUE) {
 			if (guard.apply(c as int)) {
 				if (!run) {
 					prev = c;
@@ -66,11 +66,8 @@ package class UnicodeTerminalsGenerator {
 				}
 			}
 			c = (c + 1) as char
-			if (c == Character.MAX_VALUE) {
-				return result;
-			}
 		}
-		
+		return result;
 	}
 	
 	
