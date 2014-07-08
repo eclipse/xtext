@@ -76,4 +76,10 @@ public interface MutableTypeDeclaration extends MutableMemberDeclaration, TypeDe
 	 */
 	public void setSimpleName(String simpleName);
 	
+	/**
+	 * It is not possible to remove a type.
+	 * @throws UnsupportedOperationException always
+	 */
+	public void remove();
+	
 }
