@@ -192,7 +192,7 @@ XSwitchExpression returns XExpression:
 XCasePart:
 	{XCasePart}
 	typeGuard=JvmTypeReference? ('case' case=XExpression)? 
-		(':' then=XExpression | ',') ;
+		(':' then=XExpression | fallThrough?=',') ;
 
 XForLoopExpression returns XExpression:
 	=>({XForLoopExpression}
