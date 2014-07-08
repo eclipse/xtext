@@ -24,6 +24,7 @@ import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
+import org.eclipse.xtend.core.xtend.XtendExecutable;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
@@ -374,7 +375,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 				expression = ((XtendField) member).getInitialValue();
 			}
 			if (expression != null) {
-				if (getInferredElements(member).isEmpty()) {
+				if (getLogicalContainerProvider().getLogicalContainer(expression) == null) {
 					computeTypes(resolvedTypes, featureScopeSession, expression);
 				} else {
 					TreeIterator<EObject> iterator = EcoreUtil2.getAllNonDerivedContents(expression);
@@ -398,10 +399,12 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 		if (getRoot() instanceof XtendTypeDeclaration) {
 			XtendMember member = EcoreUtil2.getContainerOfType(expression, XtendMember.class);
 			if (member != null) {
-				if (getInferredElements(member).isEmpty()) {
+				XExpression memberExpression = getExpression(member);
+				if (getLogicalContainerProvider().getLogicalContainer(memberExpression) == null) {
 					boolean result = EcoreUtil.isAncestor(getRoot(), expression);
 					return result;
 				}
+				
 				XAnnotation annotation = getOutermostAnnotation(expression);
 				if (annotation != null) {
 					if (getInferredElements(annotation).isEmpty()) {
@@ -419,13 +422,28 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 			} else {
 				XtendMember member = EcoreUtil2.getContainerOfType(expression, XtendMember.class);
 				if (member instanceof XtendField || member instanceof XtendFunction) {
-					if (getInferredElements(member).isEmpty()) {
+					XExpression memberExpression = getExpression(member);
+					if (getLogicalContainerProvider().getLogicalContainer(memberExpression) == null) {
 						return false;
 					}
 				}
 			}
 		}
 		return super.isHandled(expression);
+	}
+
+	protected XExpression getExpression(XtendMember member) {
+		if (member instanceof XtendField) {
+			return ((XtendField) member).getInitialValue();
+		} 
+		if (member instanceof XtendExecutable) {
+			return ((XtendExecutable) member).getExpression();
+		}
+		EObject container = member.eContainer();
+		if (container instanceof XtendMember) {
+			return getExpression((XtendMember) container);
+		}
+		return null;
 	}
 
 	/* @Nullable */
@@ -451,8 +469,11 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 				&& (identifiableElement.eContainingFeature() == XbasePackage.Literals.XCLOSURE__IMPLICIT_FORMAL_PARAMETERS
 				|| identifiableElement.eContainingFeature() == XbasePackage.Literals.XCLOSURE__DECLARED_FORMAL_PARAMETERS)) {
 			XtendMember member = EcoreUtil2.getContainerOfType(identifiableElement, XtendMember.class);
-			if (member != null && getInferredElements(member).isEmpty()) {
-				return false;
+			if (member != null) {
+				XExpression expression = getExpression(member);
+				if (expression != null && getLogicalContainerProvider().getLogicalContainer(expression) == null) {
+					return false;
+				}
 			}
 		}
 		return super.isHandled(identifiableElement);

@@ -109,6 +109,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport
 import org.eclipse.xtext.xbase.file.ParallelFileSystemSupport
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
@@ -172,6 +173,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	@Inject TypeReferences typeReferences
 	@Inject JvmTypesBuilder typesBuilder
 	@Inject IXtendJvmAssociations associations
+	@Inject IJvmModelAssociator jvmModelAssociator
 	@Inject ConstantExpressionsInterpreter interpreter
 	@Inject IEObjectDocumentationProvider documentationProvider
 	@Inject IFileHeaderProvider fileHeaderProvider
@@ -189,6 +191,10 @@ class CompilationUnitImpl implements CompilationUnit {
 	
 	Map<Object, Object> identityCache = newHashMap
 	OwnedConverter typeRefConverter
+	
+	def IJvmModelAssociator getJvmModelAssociator() {
+		jvmModelAssociator
+	}
 	
 	def IXtendJvmAssociations getJvmAssociations() {
 		return associations
