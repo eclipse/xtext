@@ -8,7 +8,9 @@
 package org.eclipse.xtend.ide.tests.editor;
 
 import com.google.inject.Inject;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
@@ -27,6 +29,9 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.InputOutput;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
@@ -96,6 +101,19 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       final String content = _builder.toString();
       final IFile file = this.helper.createFile("SomeClass.xtend", content);
       this._syncUtil.waitForBuild(null);
+      final IMarker[] markers = file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
+      final Procedure1<IMarker> _function = new Procedure1<IMarker>() {
+        public void apply(final IMarker it) {
+          try {
+            Map _attributes = it.getAttributes();
+            Collection _values = _attributes.values();
+            InputOutput.<Collection>println(_values);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      IterableExtensions.<IMarker>forEach(((Iterable<IMarker>)Conversions.doWrapArray(markers)), _function);
       IMarker[] _findMarkers = file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
       int _length = _findMarkers.length;
       Assert.assertEquals(0, _length);
@@ -107,7 +125,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       _document_1.set(content);
       this._syncUtil.waitForReconciler(editor);
       IXtextDocument _document_2 = editor.getDocument();
-      final IUnitOfWork<Object, XtextResource> _function = new IUnitOfWork<Object, XtextResource>() {
+      final IUnitOfWork<Object, XtextResource> _function_1 = new IUnitOfWork<Object, XtextResource>() {
         public Object exec(final XtextResource it) throws Exception {
           final CancelIndicator _function = new CancelIndicator() {
             public boolean isCanceled() {
@@ -121,7 +139,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
           return null;
         }
       };
-      _document_2.<Object>readOnly(_function);
+      _document_2.<Object>readOnly(_function_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

@@ -52,6 +52,10 @@ class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
 		'''
 		val file = createFile("SomeClass.xtend",content)
 		waitForBuild(null)
+		val markers = file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE)
+		markers.forEach[
+			println(attributes.values)
+		]
 		assertEquals(0, file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE).length)
 		
 		val editor = openEditor(file)
