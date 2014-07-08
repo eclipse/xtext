@@ -241,4 +241,80 @@ class CompilerBug434424Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
+	@Test
+	def test_10() {
+		assertCompilesTo('''
+			class C {
+				(Number)=>Number field
+				def void setField((Number)=>Number field) {
+					this.field = field
+				}
+				def void setField(String field) {
+					this.field = [ it ]
+				}
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  private Function1<? super Number, ? extends Number> field;
+			  
+			  public void setField(final Function1<? super Number, ? extends Number> field) {
+			    this.field = field;
+			  }
+			  
+			  public void setField(final String field) {
+			    final Function1<Number, Number> _function = new Function1<Number, Number>() {
+			      public Number apply(final Number it) {
+			        return it;
+			      }
+			    };
+			    this.field = _function;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def test_11() {
+		assertCompilesTo('''
+			class C {
+				CharSequence field
+				def void setField(String field) {
+					this.field = field
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  private CharSequence field;
+			  
+			  public void setField(final String field) {
+			    this.field = field;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def test_12() {
+		assertCompilesTo('''
+			class C {
+				def void setField(String f) {
+					var CharSequence field
+					field = f
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  public void setField(final String f) {
+			    CharSequence field = null;
+			    field = f;
+			  }
+			}
+		''')
+	}
+	
 }
