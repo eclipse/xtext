@@ -37,16 +37,12 @@ public class SkipTokensInBetweenAnnotationCompilerSmokeTest extends AbstractAnno
       ANTLRStringStream _aNTLRStringStream = new ANTLRStringStream(string);
       lexer.setCharStream(_aNTLRStringStream);
       Token token = lexer.nextToken();
-      boolean _notEquals = (!Objects.equal(token, Token.EOF_TOKEN));
-      boolean _while = _notEquals;
-      while (_while) {
+      while ((!Objects.equal(token, Token.EOF_TOKEN))) {
         {
           tokenList.add(((CommonToken) token));
           Token _nextToken = lexer.nextToken();
           token = _nextToken;
         }
-        boolean _notEquals_1 = (!Objects.equal(token, Token.EOF_TOKEN));
-        _while = _notEquals_1;
       }
     }
     for (final CommonToken token : tokenList) {

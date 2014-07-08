@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.tasks;
 
-import com.google.common.collect.Lists;
 import java.util.Collections;
 import java.util.List;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -23,6 +22,7 @@ import org.eclipse.xtext.tasks.Task;
 import org.eclipse.xtext.tasks.TaskAssert;
 import org.eclipse.xtext.tasks.TaskTag;
 import org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguageStandaloneSetup;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -52,7 +52,7 @@ public class DefaultTaskFinderTest extends AbstractXtextTests {
   @Test
   public void testNonXtextResource() {
     ResourceImpl _resourceImpl = new ResourceImpl();
-    this.assertContainsTasks(_resourceImpl, Collections.<Task>unmodifiableList(Lists.<Task>newArrayList()));
+    this.assertContainsTasks(_resourceImpl, Collections.<Task>unmodifiableList(CollectionLiterals.<Task>newArrayList()));
   }
   
   @Test
@@ -116,7 +116,7 @@ public class DefaultTaskFinderTest extends AbstractXtextTests {
       };
       Task _doubleArrow_1 = ObjectExtensions.<Task>operator_doubleArrow(_task_1, _function_1);
       this.assertContainsTasks(_resourceFromString, 
-        Collections.<Task>unmodifiableList(Lists.<Task>newArrayList(_doubleArrow, _doubleArrow_1)));
+        Collections.<Task>unmodifiableList(CollectionLiterals.<Task>newArrayList(_doubleArrow, _doubleArrow_1)));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

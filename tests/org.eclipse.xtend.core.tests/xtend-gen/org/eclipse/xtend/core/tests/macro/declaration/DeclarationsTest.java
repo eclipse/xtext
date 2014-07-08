@@ -8,7 +8,6 @@
 package org.eclipse.xtend.core.tests.macro.declaration;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.lang.reflect.AccessibleObject;
@@ -46,6 +45,7 @@ import org.eclipse.xtend.lib.macro.services.AnnotationReferenceBuildContext;
 import org.eclipse.xtend.lib.macro.services.AnnotationReferenceProvider;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -808,12 +808,12 @@ public class DeclarationsTest extends AbstractXtendTestCase {
         Assert.assertTrue(_isEmpty_2);
         TypeReferenceProvider _typeReferenceProvider_1 = it.getTypeReferenceProvider();
         TypeReference _newTypeReference = _typeReferenceProvider_1.newTypeReference(interf);
-        baseClass.setImplementedInterfaces(Collections.<TypeReference>unmodifiableList(Lists.<TypeReference>newArrayList(_newTypeReference)));
+        baseClass.setImplementedInterfaces(Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(_newTypeReference)));
         Iterable<? extends TypeReference> _implementedInterfaces_3 = baseClass.getImplementedInterfaces();
         TypeReference _head = IterableExtensions.head(_implementedInterfaces_3);
         String _simpleName_3 = _head.getSimpleName();
         Assert.assertEquals("Interface", _simpleName_3);
-        baseClass.setImplementedInterfaces(Collections.<TypeReference>unmodifiableList(Lists.<TypeReference>newArrayList()));
+        baseClass.setImplementedInterfaces(Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList()));
         Iterable<? extends TypeReference> _implementedInterfaces_4 = baseClass.getImplementedInterfaces();
         boolean _isEmpty_3 = IterableExtensions.isEmpty(_implementedInterfaces_4);
         Assert.assertTrue(_isEmpty_3);

@@ -166,7 +166,6 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
       boolean _hasNext = iterator.hasNext();
       if (_hasNext) {
         appendable.append(" throws ");
-        boolean _dowhile = false;
         do {
           {
             final LightweightTypeReference typeRef = iterator.next();
@@ -179,9 +178,7 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
               appendable.append(", ");
             }
           }
-          boolean _hasNext_1 = iterator.hasNext();
-          _dowhile = _hasNext_1;
-        } while(_dowhile);
+        } while(iterator.hasNext());
       }
       _xblockexpression = appendable;
     }

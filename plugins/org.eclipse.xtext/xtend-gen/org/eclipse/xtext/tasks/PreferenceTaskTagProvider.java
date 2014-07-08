@@ -10,7 +10,6 @@ package org.eclipse.xtext.tasks;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -44,7 +43,7 @@ public class PreferenceTaskTagProvider implements ITaskTagProvider {
   
   public final static PreferenceKey CASE_SENSITIVE_KEY = new PreferenceKey("task.caseSensitive", "true");
   
-  public final static List<PreferenceKey> KEYS = Collections.<PreferenceKey>unmodifiableList(Lists.<PreferenceKey>newArrayList(PreferenceTaskTagProvider.TAGS_KEY, PreferenceTaskTagProvider.PRIORITIES_KEY, PreferenceTaskTagProvider.CASE_SENSITIVE_KEY));
+  public final static List<PreferenceKey> KEYS = Collections.<PreferenceKey>unmodifiableList(CollectionLiterals.<PreferenceKey>newArrayList(PreferenceTaskTagProvider.TAGS_KEY, PreferenceTaskTagProvider.PRIORITIES_KEY, PreferenceTaskTagProvider.CASE_SENSITIVE_KEY));
   
   public static List<TaskTag> parseTags(final String names, final String priorities) {
     Splitter _on = Splitter.on(",");

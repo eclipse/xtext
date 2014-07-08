@@ -2,7 +2,6 @@ package org.eclipse.xtend.core.tests.macro;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import java.util.Collections;
 import java.util.List;
@@ -47,6 +46,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.junit4.internal.LineDelimiters;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -4224,7 +4224,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
         Type _type = _newTypeReference.getType();
         final AnnotationReference annotation = clazz.findAnnotation(_type);
         Object _value = annotation.getValue("value");
-        Assert.assertArrayEquals(((String[]) ((String[])Conversions.unwrapArray(Collections.<String>unmodifiableList(Lists.<String>newArrayList("foo", "bar", "baz")), String.class))), ((String[]) _value));
+        Assert.assertArrayEquals(((String[]) ((String[])Conversions.unwrapArray(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("foo", "bar", "baz")), String.class))), ((String[]) _value));
         Object _value_1 = annotation.getValue("singleValue");
         Assert.assertEquals("foo", _value_1);
         Object _value_2 = annotation.getValue("booleans");

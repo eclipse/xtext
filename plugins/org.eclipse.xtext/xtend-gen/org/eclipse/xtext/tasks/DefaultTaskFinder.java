@@ -8,7 +8,6 @@
 package org.eclipse.xtext.tasks;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import java.util.Collections;
 import java.util.List;
@@ -25,6 +24,7 @@ import org.eclipse.xtext.tasks.ITaskParser;
 import org.eclipse.xtext.tasks.ITaskTagProvider;
 import org.eclipse.xtext.tasks.Task;
 import org.eclipse.xtext.tasks.TaskTags;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -50,7 +50,7 @@ public class DefaultTaskFinder implements ITaskFinder {
       final TaskTags taskTags = this.taskTagProvider.getTaskTags(resource);
       boolean _isEmpty = IterableExtensions.isEmpty(taskTags);
       if (_isEmpty) {
-        return Collections.<Task>unmodifiableList(Lists.<Task>newArrayList());
+        return Collections.<Task>unmodifiableList(CollectionLiterals.<Task>newArrayList());
       }
       List<Task> _xifexpression = null;
       if ((resource instanceof XtextResource)) {
@@ -67,11 +67,11 @@ public class DefaultTaskFinder implements ITaskFinder {
         if (_findTasks != null) {
           _elvis = _findTasks;
         } else {
-          _elvis = Collections.<Task>unmodifiableList(Lists.<Task>newArrayList());
+          _elvis = Collections.<Task>unmodifiableList(CollectionLiterals.<Task>newArrayList());
         }
         _xifexpression = _elvis;
       } else {
-        _xifexpression = Collections.<Task>unmodifiableList(Lists.<Task>newArrayList());
+        _xifexpression = Collections.<Task>unmodifiableList(CollectionLiterals.<Task>newArrayList());
       }
       _xblockexpression = _xifexpression;
     }
@@ -111,7 +111,7 @@ public class DefaultTaskFinder implements ITaskFinder {
       IterableExtensions.<Task>forEach(tasks, _function);
       return tasks;
     }
-    return Collections.<Task>unmodifiableList(Lists.<Task>newArrayList());
+    return Collections.<Task>unmodifiableList(CollectionLiterals.<Task>newArrayList());
   }
   
   protected boolean canContainTaskTags(final ILeafNode node) {

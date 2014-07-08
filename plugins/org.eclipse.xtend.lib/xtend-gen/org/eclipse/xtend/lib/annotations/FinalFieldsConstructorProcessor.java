@@ -4,7 +4,6 @@ import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -171,7 +170,7 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
           if (_resolvedParameters != null) {
             _elvis = _resolvedParameters;
           } else {
-            _elvis = Collections.<ResolvedParameter>unmodifiableList(Lists.<ResolvedParameter>newArrayList());
+            _elvis = Collections.<ResolvedParameter>unmodifiableList(CollectionLiterals.<ResolvedParameter>newArrayList());
           }
           final Iterable<? extends ResolvedParameter> superParameters = _elvis;
           final Procedure1<ResolvedParameter> _function = new Procedure1<ResolvedParameter>() {

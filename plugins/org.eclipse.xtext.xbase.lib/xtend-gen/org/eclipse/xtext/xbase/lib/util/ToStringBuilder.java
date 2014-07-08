@@ -477,9 +477,7 @@ public final class ToStringBuilder {
         sb.increaseIndent();
       }
       boolean wasEmpty = true;
-      boolean _hasNext = iterator.hasNext();
-      boolean _while = _hasNext;
-      while (_while) {
+      while (iterator.hasNext()) {
         {
           wasEmpty = false;
           if (this.multiLine) {
@@ -487,13 +485,11 @@ public final class ToStringBuilder {
           }
           Object _next = iterator.next();
           this.internalToString(_next, sb);
-          boolean _hasNext_1 = iterator.hasNext();
-          if (_hasNext_1) {
+          boolean _hasNext = iterator.hasNext();
+          if (_hasNext) {
             sb.append(",");
           }
         }
-        boolean _hasNext_1 = iterator.hasNext();
-        _while = _hasNext_1;
       }
       if (this.multiLine) {
         sb.decreaseIndent();
@@ -525,7 +521,6 @@ public final class ToStringBuilder {
     {
       Class<?> current = clazz;
       final ArrayList<Field> result = CollectionLiterals.<Field>newArrayList();
-      boolean _dowhile = false;
       do {
         {
           Field[] _declaredFields = current.getDeclaredFields();
@@ -533,9 +528,7 @@ public final class ToStringBuilder {
           Class<?> _superclass = current.getSuperclass();
           current = _superclass;
         }
-        boolean _notEquals = (!Objects.equal(current, null));
-        _dowhile = _notEquals;
-      } while(_dowhile);
+      } while((!Objects.equal(current, null)));
       _xblockexpression = result;
     }
     return _xblockexpression;

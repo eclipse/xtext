@@ -194,9 +194,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
       }
     }
     JvmDeclaredType container = _switchResult_1;
-    boolean _notEquals_1 = (!Objects.equal(container, null));
-    boolean _while = _notEquals_1;
-    while (_while) {
+    while ((!Objects.equal(container, null))) {
       {
         Iterable<JvmFeature> _allFeatures = container.getAllFeatures();
         Iterable<JvmField> _filter = Iterables.<JvmField>filter(_allFeatures, JvmField.class);
@@ -221,8 +219,6 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
         JvmDeclaredType _declaringType = container.getDeclaringType();
         container = _declaringType;
       }
-      boolean _notEquals_2 = (!Objects.equal(container, null));
-      _while = _notEquals_2;
     }
     return result;
   }
@@ -596,14 +592,12 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
     if ((type instanceof JvmArrayType)) {
       JvmType t = type;
       String dimensions = "";
-      boolean _while = (t instanceof JvmArrayType);
-      while (_while) {
+      while ((t instanceof JvmArrayType)) {
         {
           dimensions = (dimensions + "[]");
           JvmComponentType _componentType = ((JvmArrayType)t).getComponentType();
           t = _componentType;
         }
-        _while = (t instanceof JvmArrayType);
       }
       final Class<?> componentClass = this.getJavaType(t, classFinder);
       String _name = componentClass.getName();

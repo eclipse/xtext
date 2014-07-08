@@ -8,7 +8,6 @@
 package org.eclipse.xtend.core.tests.typesystem;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -135,10 +134,8 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
       final Iterator<LightweightBoundTypeArgument> iterator = mergable.iterator();
       LightweightBoundTypeArgument first = iterator.next();
       LightweightBoundTypeArgument second = iterator.next();
-      LightweightMergedBoundTypeArgument merged = this.merger.merge(Collections.<LightweightBoundTypeArgument>unmodifiableList(Lists.<LightweightBoundTypeArgument>newArrayList(first, second)), this);
-      boolean _hasNext = iterator.hasNext();
-      boolean _while = _hasNext;
-      while (_while) {
+      LightweightMergedBoundTypeArgument merged = this.merger.merge(Collections.<LightweightBoundTypeArgument>unmodifiableList(CollectionLiterals.<LightweightBoundTypeArgument>newArrayList(first, second)), this);
+      while (iterator.hasNext()) {
         {
           LightweightTypeReference _typeReference = merged.getTypeReference();
           Object _object = new Object();
@@ -148,11 +145,9 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
           first = _lightweightBoundTypeArgument;
           LightweightBoundTypeArgument _next = iterator.next();
           second = _next;
-          LightweightMergedBoundTypeArgument _merge = this.merger.merge(Collections.<LightweightBoundTypeArgument>unmodifiableList(Lists.<LightweightBoundTypeArgument>newArrayList(first, second)), this);
+          LightweightMergedBoundTypeArgument _merge = this.merger.merge(Collections.<LightweightBoundTypeArgument>unmodifiableList(CollectionLiterals.<LightweightBoundTypeArgument>newArrayList(first, second)), this);
           merged = _merge;
         }
-        boolean _hasNext_1 = iterator.hasNext();
-        _while = _hasNext_1;
       }
       return merged;
     } catch (Throwable _e) {

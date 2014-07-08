@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.ide.tests.validation;
 
-import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -34,6 +33,7 @@ import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.util.MergeableManifest;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -247,7 +247,7 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
       final IFile manifestFile = _project.getFile("META-INF/MANIFEST.MF");
       InputStream _contents = manifestFile.getContents();
       final MergeableManifest manifest = new MergeableManifest(_contents);
-      manifest.addExportedPackages(Collections.<String>unmodifiableSet(Sets.<String>newHashSet("allowed", "discouraged;x-internal:=true")));
+      manifest.addExportedPackages(Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("allowed", "discouraged;x-internal:=true")));
       final ByteArrayOutputStream out = new ByteArrayOutputStream();
       manifest.write(out);
       byte[] _byteArray = out.toByteArray();

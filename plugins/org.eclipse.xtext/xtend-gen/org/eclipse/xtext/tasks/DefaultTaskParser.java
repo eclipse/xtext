@@ -9,7 +9,6 @@ package org.eclipse.xtext.tasks;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,7 +38,7 @@ public class DefaultTaskParser implements ITaskParser {
     {
       boolean _isEmpty = IterableExtensions.isEmpty(taskTags);
       if (_isEmpty) {
-        return Collections.<Task>unmodifiableList(Lists.<Task>newArrayList());
+        return Collections.<Task>unmodifiableList(CollectionLiterals.<Task>newArrayList());
       }
       final Function<TaskTag, String> _function = new Function<TaskTag, String>() {
         public String apply(final TaskTag it) {
@@ -51,9 +50,7 @@ public class DefaultTaskParser implements ITaskParser {
       Pattern _pattern = this.toPattern(taskTags);
       final Matcher matcher = _pattern.matcher(source);
       final ArrayList<Task> tasks = CollectionLiterals.<Task>newArrayList();
-      boolean _find = matcher.find();
-      boolean _while = _find;
-      while (_while) {
+      while (matcher.find()) {
         Task _task = new Task();
         final Procedure1<Task> _function_1 = new Procedure1<Task>() {
           public void apply(final Task it) {
@@ -74,8 +71,6 @@ public class DefaultTaskParser implements ITaskParser {
         };
         Task _doubleArrow = ObjectExtensions.<Task>operator_doubleArrow(_task, _function_1);
         tasks.add(_doubleArrow);
-        boolean _find_1 = matcher.find();
-        _while = _find_1;
       }
       _xblockexpression = tasks;
     }

@@ -8,7 +8,6 @@
 package org.eclipse.xtend.core.tests.compiler;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -21,6 +20,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -786,7 +786,7 @@ public class NewDataCompilerTest extends AbstractXtendCompilerTest {
                 public Boolean apply(final Constructor<?> it) {
                   Class<?>[] _parameterTypes = it.getParameterTypes();
                   List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(_parameterTypes)));
-                  return Boolean.valueOf(Objects.equal(_list, Collections.<Class<? extends Object>>unmodifiableList(Lists.<Class<? extends Object>>newArrayList(int.class, String.class))));
+                  return Boolean.valueOf(Objects.equal(_list, Collections.<Class<? extends Object>>unmodifiableList(CollectionLiterals.<Class<? extends Object>>newArrayList(int.class, String.class))));
                 }
               };
               boolean _exists = IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(_declaredConstructors)), _function);

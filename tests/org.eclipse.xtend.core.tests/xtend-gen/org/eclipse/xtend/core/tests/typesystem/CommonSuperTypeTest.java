@@ -9,7 +9,6 @@ package org.eclipse.xtend.core.tests.typesystem;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -172,7 +171,7 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
               public void apply(final LightweightTypeReference it) {
                 String _key = superTypeAndParam.getKey();
                 ITypeReferenceOwner _owner = superType.getOwner();
-                LightweightTypeReference _commonSuperType = conformanceComputer.getCommonSuperType(Collections.<LightweightTypeReference>unmodifiableList(Lists.<LightweightTypeReference>newArrayList(it, superType)), _owner);
+                LightweightTypeReference _commonSuperType = conformanceComputer.getCommonSuperType(Collections.<LightweightTypeReference>unmodifiableList(CollectionLiterals.<LightweightTypeReference>newArrayList(it, superType)), _owner);
                 String _simpleName = null;
                 if (_commonSuperType!=null) {
                   _simpleName=_commonSuperType.getSimpleName();

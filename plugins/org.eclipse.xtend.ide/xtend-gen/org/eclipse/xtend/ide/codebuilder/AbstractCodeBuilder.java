@@ -170,7 +170,6 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
       boolean _hasNext = iterator.hasNext();
       if (_hasNext) {
         appendable.append("<");
-        boolean _dowhile = false;
         do {
           {
             final JvmTypeParameter typeParameter = iterator.next();
@@ -211,9 +210,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
               appendable.append(",");
             }
           }
-          boolean _hasNext_1 = iterator.hasNext();
-          _dowhile = _hasNext_1;
-        } while(_dowhile);
+        } while(iterator.hasNext());
         appendable.append("> ");
       }
       _xblockexpression = appendable;

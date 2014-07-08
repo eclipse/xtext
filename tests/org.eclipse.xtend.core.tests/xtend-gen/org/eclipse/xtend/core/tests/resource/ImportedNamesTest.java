@@ -1,7 +1,6 @@
 package org.eclipse.xtend.core.tests.resource;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import java.util.Collections;
 import java.util.List;
@@ -11,6 +10,7 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -22,7 +22,7 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
   @Inject
   private IResourceDescription.Manager resourceDescriptionManager;
   
-  private final List<String> primitives = Collections.<String>unmodifiableList(Lists.<String>newArrayList("boolean", "int", "char", "byte", "short", "long", "float", "double", "void"));
+  private final List<String> primitives = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("boolean", "int", "char", "byte", "short", "long", "float", "double", "void"));
   
   @Test
   public void testPrimitivesNotIncluded() {

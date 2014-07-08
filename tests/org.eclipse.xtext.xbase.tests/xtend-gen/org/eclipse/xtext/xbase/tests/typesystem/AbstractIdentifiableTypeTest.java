@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -69,7 +68,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
           }
         }
         if (!_matched) {
-          _switchResult = Collections.<EObject>unmodifiableList(Lists.<EObject>newArrayList(it));
+          _switchResult = Collections.<EObject>unmodifiableList(CollectionLiterals.<EObject>newArrayList(it));
         }
         return _switchResult;
       }

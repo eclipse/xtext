@@ -60,17 +60,13 @@ public class ArithmeticsValidator extends AbstractArithmeticsValidator {
       return;
     }
     final TreeIterator<EObject> contents = expr.eAllContents();
-    boolean _hasNext = contents.hasNext();
-    boolean _while = _hasNext;
-    while (_while) {
+    while (contents.hasNext()) {
       {
         final EObject next = contents.next();
         if ((next instanceof FunctionCall)) {
           return;
         }
       }
-      boolean _hasNext_1 = contents.hasNext();
-      _while = _hasNext_1;
     }
     final BigDecimal decimal = this.calculator.evaluate(expr);
     String _string = decimal.toString();

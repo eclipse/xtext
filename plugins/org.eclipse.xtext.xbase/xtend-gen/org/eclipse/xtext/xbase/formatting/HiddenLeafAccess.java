@@ -176,9 +176,7 @@ public class HiddenLeafAccess {
     {
       final ArrayList<ILeafNode> result = CollectionLiterals.<ILeafNode>newArrayList();
       final NodeIterator ni = new NodeIterator(node);
-      boolean _hasNext = ni.hasNext();
-      boolean _while = _hasNext;
-      while (_while) {
+      while (ni.hasNext()) {
         {
           final INode next = ni.next();
           if ((next instanceof ILeafNode)) {
@@ -190,8 +188,6 @@ public class HiddenLeafAccess {
             }
           }
         }
-        boolean _hasNext_1 = ni.hasNext();
-        _while = _hasNext_1;
       }
       _xblockexpression = result;
     }
@@ -200,11 +196,9 @@ public class HiddenLeafAccess {
   
   protected ILeafNode findPreviousLeaf(final INode node, final Function1<? super ILeafNode, ? extends Boolean> matches) {
     INode current = node;
-    boolean _while = (current instanceof ICompositeNode);
-    while (_while) {
+    while ((current instanceof ICompositeNode)) {
       INode _lastChild = ((ICompositeNode)current).getLastChild();
       current = _lastChild;
-      _while = (current instanceof ICompositeNode);
     }
     boolean _and = false;
     if (!(current instanceof ILeafNode)) {
@@ -219,9 +213,7 @@ public class HiddenLeafAccess {
     boolean _notEquals = (!Objects.equal(current, null));
     if (_notEquals) {
       final NodeIterator ni = new NodeIterator(current);
-      boolean _hasPrevious = ni.hasPrevious();
-      boolean _while_1 = _hasPrevious;
-      while (_while_1) {
+      while (ni.hasPrevious()) {
         {
           final INode previous = ni.previous();
           boolean _and_1 = false;
@@ -235,8 +227,6 @@ public class HiddenLeafAccess {
             return ((ILeafNode) previous);
           }
         }
-        boolean _hasPrevious_1 = ni.hasPrevious();
-        _while_1 = _hasPrevious_1;
       }
     }
     return null;
@@ -246,19 +236,15 @@ public class HiddenLeafAccess {
     List<ILeafNode> _xblockexpression = null;
     {
       INode current = node;
-      boolean _while = (current instanceof ICompositeNode);
-      while (_while) {
+      while ((current instanceof ICompositeNode)) {
         INode _lastChild = ((ICompositeNode)current).getLastChild();
         current = _lastChild;
-        _while = (current instanceof ICompositeNode);
       }
       final ArrayList<ILeafNode> result = CollectionLiterals.<ILeafNode>newArrayList();
       boolean _notEquals = (!Objects.equal(current, null));
       if (_notEquals) {
         final NodeIterator ni = new NodeIterator(current);
-        boolean _hasPrevious = ni.hasPrevious();
-        boolean _while_1 = _hasPrevious;
-        while (_while_1) {
+        while (ni.hasPrevious()) {
           {
             final INode previous = ni.previous();
             boolean _and = false;
@@ -277,8 +263,6 @@ public class HiddenLeafAccess {
               }
             }
           }
-          boolean _hasPrevious_1 = ni.hasPrevious();
-          _while_1 = _hasPrevious_1;
         }
       }
       _xblockexpression = ListExtensions.<ILeafNode>reverse(result);

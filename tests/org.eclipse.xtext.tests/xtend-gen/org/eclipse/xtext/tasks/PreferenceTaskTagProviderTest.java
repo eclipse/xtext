@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.tasks;
 
-import com.google.common.collect.Lists;
 import java.util.Collections;
 import java.util.List;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
@@ -17,6 +16,7 @@ import org.eclipse.xtext.tasks.Priority;
 import org.eclipse.xtext.tasks.TaskAssert;
 import org.eclipse.xtext.tasks.TaskTag;
 import org.eclipse.xtext.tasks.TaskTags;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -56,7 +56,7 @@ public class PreferenceTaskTagProviderTest {
       }
     };
     TaskTag _doubleArrow_2 = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag_2, _function_2);
-    final List<TaskTag> tags = Collections.<TaskTag>unmodifiableList(Lists.<TaskTag>newArrayList(_doubleArrow, _doubleArrow_1, _doubleArrow_2));
+    final List<TaskTag> tags = Collections.<TaskTag>unmodifiableList(CollectionLiterals.<TaskTag>newArrayList(_doubleArrow, _doubleArrow_1, _doubleArrow_2));
     final String names = PreferenceTaskTagProvider.serializeTags(tags);
     final String prios = PreferenceTaskTagProvider.serializePriorities(tags);
     final IPreferenceValuesProvider.SingletonPreferenceValuesProvider valueProvider = new IPreferenceValuesProvider.SingletonPreferenceValuesProvider();

@@ -7,16 +7,16 @@
  */
 package org.eclipse.xtext.xbase.interpreter;
 
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.DoubleExtensions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
+import org.eclipse.xtext.xbase.lib.Pair;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -56,32 +56,26 @@ public class ConstantOperators {
   }
   
   public static void main(final String[] args) {
-    Map<String, String> _xsetliteral = null;
-    Map<String, String> _tempMap = Maps.<String, String>newHashMap();
-    _tempMap.put("Integer", "intValue()");
-    _tempMap.put("Short", "shortValue()");
-    _tempMap.put("Long", "longValue()");
-    _tempMap.put("Float", "floatValue()");
-    _tempMap.put("Double", "doubleValue()");
-    _tempMap.put("Byte", "byteValue()");
-    _xsetliteral = Collections.<String, String>unmodifiableMap(_tempMap);
-    final Map<String, String> types = _xsetliteral;
-    Map<String, String> _xsetliteral_1 = null;
-    Map<String, String> _tempMap_1 = Maps.<String, String>newHashMap();
-    _tempMap_1.put("plus", "+");
-    _tempMap_1.put("minus", "-");
-    _tempMap_1.put("divide", "/");
-    _tempMap_1.put("multiply", "*");
-    _tempMap_1.put("modulo", "%");
-    _tempMap_1.put("lessThan", "<");
-    _tempMap_1.put("greaterThan", ">");
-    _tempMap_1.put("lessEquals", "<=");
-    _tempMap_1.put("greaterEquals", ">=");
-    _tempMap_1.put("same", "===");
-    _tempMap_1.put("notSame", "!==");
-    _xsetliteral_1 = Collections.<String, String>unmodifiableMap(_tempMap_1);
-    final Map<String, String> operators = _xsetliteral_1;
-    final Set<String> booleanOps = Collections.<String>unmodifiableSet(Sets.<String>newHashSet("<", "<=", ">", ">=", "===", "!=="));
+    Pair<String, String> _mappedTo = Pair.<String, String>of("Integer", "intValue()");
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("Short", "shortValue()");
+    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("Long", "longValue()");
+    Pair<String, String> _mappedTo_3 = Pair.<String, String>of("Float", "floatValue()");
+    Pair<String, String> _mappedTo_4 = Pair.<String, String>of("Double", "doubleValue()");
+    Pair<String, String> _mappedTo_5 = Pair.<String, String>of("Byte", "byteValue()");
+    final Map<String, String> types = Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4, _mappedTo_5));
+    Pair<String, String> _mappedTo_6 = Pair.<String, String>of("plus", "+");
+    Pair<String, String> _mappedTo_7 = Pair.<String, String>of("minus", "-");
+    Pair<String, String> _mappedTo_8 = Pair.<String, String>of("divide", "/");
+    Pair<String, String> _mappedTo_9 = Pair.<String, String>of("multiply", "*");
+    Pair<String, String> _mappedTo_10 = Pair.<String, String>of("modulo", "%");
+    Pair<String, String> _mappedTo_11 = Pair.<String, String>of("lessThan", "<");
+    Pair<String, String> _mappedTo_12 = Pair.<String, String>of("greaterThan", ">");
+    Pair<String, String> _mappedTo_13 = Pair.<String, String>of("lessEquals", "<=");
+    Pair<String, String> _mappedTo_14 = Pair.<String, String>of("greaterEquals", ">=");
+    Pair<String, String> _mappedTo_15 = Pair.<String, String>of("same", "===");
+    Pair<String, String> _mappedTo_16 = Pair.<String, String>of("notSame", "!==");
+    final Map<String, String> operators = Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_6, _mappedTo_7, _mappedTo_8, _mappedTo_9, _mappedTo_10, _mappedTo_11, _mappedTo_12, _mappedTo_13, _mappedTo_14, _mappedTo_15, _mappedTo_16));
+    final Set<String> booleanOps = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("<", "<=", ">", ">=", "===", "!=="));
     Set<Map.Entry<String, String>> _entrySet = operators.entrySet();
     for (final Map.Entry<String, String> op : _entrySet) {
       {

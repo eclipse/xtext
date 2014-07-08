@@ -151,13 +151,7 @@ public class JavaEditorExtension {
       };
       JavaCore.addElementChangedListener(_function, eventMask);
       producer.apply();
-      Boolean _head = IterableExtensions.<Boolean>head(changed);
-      boolean _not = (!(_head).booleanValue());
-      boolean _while = _not;
-      while (_while) {
-        Boolean _head_1 = IterableExtensions.<Boolean>head(changed);
-        boolean _not_1 = (!(_head_1).booleanValue());
-        _while = _not_1;
+      while ((!(IterableExtensions.<Boolean>head(changed)).booleanValue())) {
       }
       String _xifexpression = null;
       if (JavaEditorExtension.VERBOSE) {

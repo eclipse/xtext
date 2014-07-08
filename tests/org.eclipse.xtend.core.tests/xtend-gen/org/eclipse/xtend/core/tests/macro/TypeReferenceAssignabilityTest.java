@@ -216,16 +216,12 @@ public class TypeReferenceAssignabilityTest extends AssignabilityTest {
       final LightweightTypeReference invariantBoundSubstitute = reference.getInvariantBoundSubstitute();
       int depth = 0;
       LightweightTypeReference componentType = invariantBoundSubstitute;
-      boolean _isArray = componentType.isArray();
-      boolean _while = _isArray;
-      while (_while) {
+      while (componentType.isArray()) {
         {
           LightweightTypeReference _componentType = componentType.getComponentType();
           componentType = _componentType;
           depth = (depth + 1);
         }
-        boolean _isArray_1 = componentType.isArray();
-        _while = _isArray_1;
       }
       JvmType _type = componentType.getType();
       Type _type_1 = unit.toType(_type);
@@ -243,14 +239,12 @@ public class TypeReferenceAssignabilityTest extends AssignabilityTest {
         }
       }
       int i = 0;
-      boolean _while_1 = (i < depth);
-      while (_while_1) {
+      while ((i < depth)) {
         {
           i = (i + 1);
           TypeReference _newArrayTypeReference = typeReferenceProvider.newArrayTypeReference(typeReference);
           typeReference = _newArrayTypeReference;
         }
-        _while_1 = (i < depth);
       }
       _xblockexpression = typeReference;
     }
