@@ -120,7 +120,7 @@ public class SyncUtil {
 	}
 	
 	public void waitForDirtyStateUpdater(XtextEditor editor) {
-		DirtyStateEditorSupport dirtyStateEditorSupport = editor.getXtextEditorCallback().getDirtyStateEditorSupport();
+		DirtyStateEditorSupport dirtyStateEditorSupport = editor.getDirtyStateEditorSupport();
 		try {
 			dirtyStateEditorSupport.waitForUpdateEditorJob();
 		} catch (InterruptedException e) {

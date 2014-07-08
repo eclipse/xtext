@@ -378,7 +378,9 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	}
 	
 	public void removeDirtyStateSupport(IDirtyStateEditorSupportClient client) {
-		if (this.currentClient == null || this.currentClient != client)
+		if (this.currentClient == null)
+			return;
+		else if(this.currentClient != client)
 			throw new IllegalStateException("Was configured with another client or not configured at all."); //$NON-NLS-1$
 		client.removeVerifyListener(this);
 		stateChangeEventBroker.removeListener(this);

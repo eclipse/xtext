@@ -59,9 +59,11 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ST;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorRegistry;
@@ -84,6 +86,7 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.ui.IImageHelper;
 import org.eclipse.xtext.ui.XtextUIMessages;
+import org.eclipse.xtext.ui.editor.DirtyStateEditorSupport.IDirtyStateEditorSupportClient;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
 import org.eclipse.xtext.ui.editor.bracketmatching.BracketMatchingPreferencesInitializer;
 import org.eclipse.xtext.ui.editor.folding.IFoldingStructureProvider;
@@ -112,7 +115,7 @@ import com.google.inject.name.Named;
  * @author Michael Clay
  * @author Dan Stefanescu - Fix for bug 278279
  */
-public class XtextEditor extends TextEditor {
+public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportClient {
 	public static final String ERROR_ANNOTATION_TYPE = "org.eclipse.xtext.ui.editor.error";
 	public static final String WARNING_ANNOTATION_TYPE = "org.eclipse.xtext.ui.editor.warning";
 	/**
@@ -174,7 +177,13 @@ public class XtextEditor extends TextEditor {
 
 	@Inject 
 	private IImageHelper imageHelper;
-	
+
+	/**
+	 * @since 2.7
+	 */
+	@Inject
+	private DirtyStateEditorSupport dirtyStateEditorSupport;
+
 	private String keyBindingScope;
 
 	private ISelectionChangedListener selectionChangedListener;
@@ -182,7 +191,7 @@ public class XtextEditor extends TextEditor {
 	private IPropertyListener dirtyListener = new IPropertyListener() {
 		public void propertyChanged(Object source, int propId) {
 			if (propId == PROP_DIRTY && !isDirty()) {
-				callback.afterSave(XtextEditor.this);
+				dirtyStateEditorSupport.markEditorClean(XtextEditor.this);
 			}
 		}
 	};
@@ -229,7 +238,12 @@ public class XtextEditor extends TextEditor {
 		}
 		removePropertyListener(dirtyListener);
 		callback.beforeSetInput(this);
+		boolean isReset = getEditorInput() != null;
+		if(isReset)
+			dirtyStateEditorSupport.removeDirtyStateSupport(this);
 		super.doSetInput(input);
+		if(isReset) 
+			dirtyStateEditorSupport.initializeDirtyStateSupport(this);
 		callback.afterSetInput(this);
 		addPropertyListener(dirtyListener);
 	}
@@ -473,6 +487,7 @@ public class XtextEditor extends TextEditor {
 		installFoldingSupport(projectionViewer);
 		installHighlightingHelper();
 		installSelectionChangedListener();
+		dirtyStateEditorSupport.initializeDirtyStateSupport(this);
 		callback.afterCreatePartControl(this);
 	}
 
@@ -519,6 +534,7 @@ public class XtextEditor extends TextEditor {
 
 	@Override
 	public void dispose() {
+		dirtyStateEditorSupport.removeDirtyStateSupport(this);
 		callback.beforeDispose(this);
 		actioncontributor.editorDisposed(this);
 		super.dispose();
@@ -618,7 +634,7 @@ public class XtextEditor extends TextEditor {
 
 	@Override
 	public boolean validateEditorInputState() {
-		return callback.onValidateEditorInputState(this) && super.validateEditorInputState();
+		return dirtyStateEditorSupport.isEditingPossible(this) && callback.onValidateEditorInputState(this) && super.validateEditorInputState();
 	}
 
 	public void updatedTitleImage(Image image) {
@@ -1335,4 +1351,35 @@ public class XtextEditor extends TextEditor {
 		
 	}
 
+	/**
+	 * @since 2.7
+	 */
+	public Shell getShell() {
+		return getSite().getShell();
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	public void addVerifyListener(VerifyListener listener) {
+		StyledText textWidget = getSourceViewer().getTextWidget();
+		if(textWidget != null) 
+			textWidget.addVerifyListener(listener);
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	public void removeVerifyListener(VerifyListener listener) {
+		StyledText textWidget = getSourceViewer().getTextWidget();
+		if(textWidget != null) 
+			textWidget.removeVerifyListener(listener);
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	public DirtyStateEditorSupport getDirtyStateEditorSupport() {
+		return dirtyStateEditorSupport;
+	}
 }

@@ -11,7 +11,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.xtext.ui.editor.AbstractDirtyStateAwareEditorCallback;
+import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 
 import com.google.inject.Inject;
@@ -19,14 +19,13 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class NatureAddingEditorCallback extends AbstractDirtyStateAwareEditorCallback {
+public class NatureAddingEditorCallback extends IXtextEditorCallback.NullImpl {
 	
 	@Inject
 	private ToggleXtextNatureAction toggleNature;
 
 	@Override
 	public void afterCreatePartControl(XtextEditor editor) {
-		super.afterCreatePartControl(editor);
 		IResource resource = editor.getResource();
 		if (resource!=null && !toggleNature.hasNature(resource.getProject()) && resource.getProject().isAccessible() && !resource.getProject().isHidden()) {
 			String title = Messages.NatureAddingEditorCallback_MessageDialog_Title;
@@ -40,5 +39,4 @@ public class NatureAddingEditorCallback extends AbstractDirtyStateAwareEditorCal
 			}
 		}
 	}
-
 }
