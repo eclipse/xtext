@@ -50,6 +50,8 @@ import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.validation.CheckMode;
+import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -70,6 +72,9 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
   @Inject
   @Extension
   private IEObjectHoverDocumentationProvider documentationProvider;
+  
+  @Inject
+  private IResourceValidator validator;
   
   @Test
   public void testSimpleModification() {
@@ -354,6 +359,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
       URI _createPlatformResourceURI = URI.createPlatformResourceURI(_string_2, true);
       final Resource resource = resourceSet.getResource(_createPlatformResourceURI, true);
       EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl);
+      this.validator.validate(resource, CheckMode.FAST_ONLY, CancelIndicator.NullImpl);
       final CompilationUnitImpl unit = this.compilationUnitProvider.get();
       EList<EObject> _contents = resource.getContents();
       Iterable<XtendFile> _filter_1 = Iterables.<XtendFile>filter(_contents, XtendFile.class);

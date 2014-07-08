@@ -17,6 +17,8 @@ import org.junit.Test
 import static org.junit.Assert.*
 import org.eclipse.xtend.core.macro.declaration.MutableJvmFieldDeclarationImpl
 import org.eclipse.xtend.core.macro.declaration.MutableJvmMethodDeclarationImpl
+import org.eclipse.xtend.core.macro.declaration.JvmClassDeclarationImpl
+import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 
 abstract class AbstractReusableActiveAnnotationTests {
 	
@@ -77,6 +79,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 			assertEquals(fooType, foo.findDeclaredMethod('foo').returnType)
 		]
 	}
+	
 	@Test def void testTracing() {
 		assertProcessing(
 			'myannotation/Getters.xtend' -> '''
@@ -136,6 +139,101 @@ abstract class AbstractReusableActiveAnnotationTests {
 			assertEquals(barJvmField, elementsAssociatedWithBarField.get(0))
 			assertEquals(getBarJvmMethod, elementsAssociatedWithBarField.get(1))
 		]
+	}
+	
+	@Test def void testValidationPhase() {
+		assertProcessing(
+			'myannotation/ValidatingAnnotation.xtend' -> '''
+				package myannotation
+				
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+				import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
+				import org.eclipse.xtend.lib.macro.ValidationContext
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				
+				@Active(ValidatingProcessor)
+				annotation ValidatingAnnotation {
+					
+				}
+				
+				class ValidatingProcessor extends AbstractClassProcessor {
+					
+					override doTransform(MutableClassDeclaration cls, extension TransformationContext context) {
+						cls.addWarning("Foo")
+						cls.addWarning("Bar")
+					}
+					
+					override doValidate(ClassDeclaration cls, extension ValidationContext context) {
+						cls.addWarning("Baz")
+						cls.addWarning("There were " + cls.problems.size +  " problems")
+					}
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+
+				import myannotation.*
+				
+				@ValidatingAnnotation
+				class Foo {
+				}
+			'''
+		)[
+			val cls = typeLookup.findClass("myusercode.Foo")
+			val problems = problemSupport.getProblems(cls)
+			assertEquals(4, problems.size)
+			assertEquals("Foo", problems.get(0).message)
+			assertEquals("Bar", problems.get(1).message)
+			assertEquals("Baz", problems.get(2).message)
+			assertEquals("There were 3 problems", problems.get(3).message)
+		]
+	}
+	
+	@Test
+	def void testNoMutationInValidationPhase() {
+		try {
+			assertProcessing(
+				'myannotation/EvilAnnotation.xtend' -> '''
+					package myannotation
+					
+					import java.util.List
+					import org.eclipse.xtend.lib.macro.Active
+					import org.eclipse.xtend.lib.macro.ValidationParticipant
+					import org.eclipse.xtend.lib.macro.ValidationContext
+					import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+					import org.eclipse.xtend.lib.macro.TransformationContext
+					
+					@Active(EvilProcessor)
+					annotation EvilAnnotation {
+						
+					}
+					
+					class EvilProcessor implements ValidationParticipant<MutableClassDeclaration> {
+						
+						override doValidate(List<? extends MutableClassDeclaration> classes, extension ValidationContext context) {
+							classes.forEach[
+								final = true
+							]
+						}
+					}
+				''',
+				'myusercode/UserCode.xtend' -> '''
+					package myusercode
+					
+					import myannotation.*
+					
+					@EvilAnnotation
+					class Foo {
+					}
+				'''
+			)[]
+			fail
+		} catch (Throwable t) {
+			assertTrue(t.message,
+				t.message.contains('''«JvmClassDeclarationImpl.name» cannot be cast to «MutableClassDeclaration.name»'''))
+		}
 	}
 	
 	@Test def void testSetEmptyListAsAnnotationValue() {

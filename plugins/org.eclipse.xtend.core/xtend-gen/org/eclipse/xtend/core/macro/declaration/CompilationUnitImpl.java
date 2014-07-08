@@ -36,6 +36,7 @@ import org.eclipse.xtend.core.macro.CompilationContextImpl;
 import org.eclipse.xtend.core.macro.ConstantExpressionsInterpreter;
 import org.eclipse.xtend.core.macro.declaration.AnnotationReferenceBuildContextImpl;
 import org.eclipse.xtend.core.macro.declaration.AnnotationReferenceProviderImpl;
+import org.eclipse.xtend.core.macro.declaration.AssociatorImpl;
 import org.eclipse.xtend.core.macro.declaration.ExpressionImpl;
 import org.eclipse.xtend.core.macro.declaration.InferredTypeReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationReferenceImpl;
@@ -66,6 +67,7 @@ import org.eclipse.xtend.core.macro.declaration.PrimitiveTypeImpl;
 import org.eclipse.xtend.core.macro.declaration.ProblemSupportImpl;
 import org.eclipse.xtend.core.macro.declaration.ResolvedConstructorImpl;
 import org.eclipse.xtend.core.macro.declaration.ResolvedMethodImpl;
+import org.eclipse.xtend.core.macro.declaration.TracabilityImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeReferenceProviderImpl;
@@ -173,6 +175,7 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
 import org.eclipse.xtext.xbase.file.ParallelFileSystemSupport;
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -259,6 +262,9 @@ public class CompilationUnitImpl implements CompilationUnit {
   @Property
   private XtendFile _xtendFile;
   
+  @Property
+  private boolean _modifyAllowed = true;
+  
   @Inject
   private CommonTypeComputationServices services;
   
@@ -270,6 +276,9 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   @Inject
   private IXtendJvmAssociations associations;
+  
+  @Inject
+  private IJvmModelAssociator jvmAssociator;
   
   @Inject
   private ConstantExpressionsInterpreter interpreter;
@@ -307,12 +316,22 @@ public class CompilationUnitImpl implements CompilationUnit {
   @Property
   private final TypeLookupImpl _typeLookup = new TypeLookupImpl(this);
   
+  @Property
+  private final TracabilityImpl _tracability = new TracabilityImpl(this);
+  
+  @Property
+  private final AssociatorImpl _associator = new AssociatorImpl(this);
+  
   private Map<Object, Object> identityCache = CollectionLiterals.<Object, Object>newHashMap();
   
   private OwnedConverter typeRefConverter;
   
   public IXtendJvmAssociations getJvmAssociations() {
     return this.associations;
+  }
+  
+  public IJvmModelAssociator getJvmAssociator() {
+    return this.jvmAssociator;
   }
   
   public TypeReferences getTypeReferences() {
@@ -536,8 +555,15 @@ public class CompilationUnitImpl implements CompilationUnit {
             if (_isInterface) {
               _matched=true;
               JvmInterfaceDeclarationImpl _xifexpression = null;
+              boolean _and = false;
               boolean _isBelongedToCompilationUnit = CompilationUnitImpl.this.isBelongedToCompilationUnit(delegate);
-              if (_isBelongedToCompilationUnit) {
+              if (!_isBelongedToCompilationUnit) {
+                _and = false;
+              } else {
+                boolean _isModifyAllowed = CompilationUnitImpl.this.isModifyAllowed();
+                _and = _isModifyAllowed;
+              }
+              if (_and) {
                 MutableJvmInterfaceDeclarationImpl _mutableJvmInterfaceDeclarationImpl = new MutableJvmInterfaceDeclarationImpl();
                 final Procedure1<MutableJvmInterfaceDeclarationImpl> _function = new Procedure1<MutableJvmInterfaceDeclarationImpl>() {
                   public void apply(final MutableJvmInterfaceDeclarationImpl it) {
@@ -564,8 +590,15 @@ public class CompilationUnitImpl implements CompilationUnit {
           if (delegate instanceof JvmGenericType) {
             _matched=true;
             JvmClassDeclarationImpl _xifexpression = null;
+            boolean _and = false;
             boolean _isBelongedToCompilationUnit = CompilationUnitImpl.this.isBelongedToCompilationUnit(delegate);
-            if (_isBelongedToCompilationUnit) {
+            if (!_isBelongedToCompilationUnit) {
+              _and = false;
+            } else {
+              boolean _isModifyAllowed = CompilationUnitImpl.this.isModifyAllowed();
+              _and = _isModifyAllowed;
+            }
+            if (_and) {
               MutableJvmClassDeclarationImpl _mutableJvmClassDeclarationImpl = new MutableJvmClassDeclarationImpl();
               final Procedure1<MutableJvmClassDeclarationImpl> _function = new Procedure1<MutableJvmClassDeclarationImpl>() {
                 public void apply(final MutableJvmClassDeclarationImpl it) {
@@ -591,8 +624,15 @@ public class CompilationUnitImpl implements CompilationUnit {
           if (delegate instanceof JvmAnnotationType) {
             _matched=true;
             JvmAnnotationTypeDeclarationImpl _xifexpression = null;
+            boolean _and = false;
             boolean _isBelongedToCompilationUnit = CompilationUnitImpl.this.isBelongedToCompilationUnit(delegate);
-            if (_isBelongedToCompilationUnit) {
+            if (!_isBelongedToCompilationUnit) {
+              _and = false;
+            } else {
+              boolean _isModifyAllowed = CompilationUnitImpl.this.isModifyAllowed();
+              _and = _isModifyAllowed;
+            }
+            if (_and) {
               MutableJvmAnnotationTypeDeclarationImpl _mutableJvmAnnotationTypeDeclarationImpl = new MutableJvmAnnotationTypeDeclarationImpl();
               final Procedure1<MutableJvmAnnotationTypeDeclarationImpl> _function = new Procedure1<MutableJvmAnnotationTypeDeclarationImpl>() {
                 public void apply(final MutableJvmAnnotationTypeDeclarationImpl it) {
@@ -618,8 +658,15 @@ public class CompilationUnitImpl implements CompilationUnit {
           if (delegate instanceof JvmEnumerationType) {
             _matched=true;
             JvmEnumerationTypeDeclarationImpl _xifexpression = null;
+            boolean _and = false;
             boolean _isBelongedToCompilationUnit = CompilationUnitImpl.this.isBelongedToCompilationUnit(delegate);
-            if (_isBelongedToCompilationUnit) {
+            if (!_isBelongedToCompilationUnit) {
+              _and = false;
+            } else {
+              boolean _isModifyAllowed = CompilationUnitImpl.this.isModifyAllowed();
+              _and = _isModifyAllowed;
+            }
+            if (_and) {
               MutableJvmEnumerationTypeDeclarationImpl _mutableJvmEnumerationTypeDeclarationImpl = new MutableJvmEnumerationTypeDeclarationImpl();
               final Procedure1<MutableJvmEnumerationTypeDeclarationImpl> _function = new Procedure1<MutableJvmEnumerationTypeDeclarationImpl>() {
                 public void apply(final MutableJvmEnumerationTypeDeclarationImpl it) {
@@ -651,8 +698,15 @@ public class CompilationUnitImpl implements CompilationUnit {
     final Function1<JvmTypeParameter, JvmTypeParameterDeclarationImpl> _function = new Function1<JvmTypeParameter, JvmTypeParameterDeclarationImpl>() {
       public JvmTypeParameterDeclarationImpl apply(final JvmTypeParameter it) {
         JvmTypeParameterDeclarationImpl _xifexpression = null;
+        boolean _and = false;
         boolean _isBelongedToCompilationUnit = CompilationUnitImpl.this.isBelongedToCompilationUnit(delegate);
-        if (_isBelongedToCompilationUnit) {
+        if (!_isBelongedToCompilationUnit) {
+          _and = false;
+        } else {
+          boolean _isModifyAllowed = CompilationUnitImpl.this.isModifyAllowed();
+          _and = _isModifyAllowed;
+        }
+        if (_and) {
           MutableJvmTypeParameterDeclarationImpl _mutableJvmTypeParameterDeclarationImpl = new MutableJvmTypeParameterDeclarationImpl();
           final Procedure1<MutableJvmTypeParameterDeclarationImpl> _function = new Procedure1<MutableJvmTypeParameterDeclarationImpl>() {
             public void apply(final MutableJvmTypeParameterDeclarationImpl it) {
@@ -681,8 +735,15 @@ public class CompilationUnitImpl implements CompilationUnit {
     final Function1<JvmFormalParameter, JvmParameterDeclarationImpl> _function = new Function1<JvmFormalParameter, JvmParameterDeclarationImpl>() {
       public JvmParameterDeclarationImpl apply(final JvmFormalParameter it) {
         JvmParameterDeclarationImpl _xifexpression = null;
+        boolean _and = false;
         boolean _isBelongedToCompilationUnit = CompilationUnitImpl.this.isBelongedToCompilationUnit(delegate);
-        if (_isBelongedToCompilationUnit) {
+        if (!_isBelongedToCompilationUnit) {
+          _and = false;
+        } else {
+          boolean _isModifyAllowed = CompilationUnitImpl.this.isModifyAllowed();
+          _and = _isModifyAllowed;
+        }
+        if (_and) {
           MutableJvmParameterDeclarationImpl _mutableJvmParameterDeclarationImpl = new MutableJvmParameterDeclarationImpl();
           final Procedure1<MutableJvmParameterDeclarationImpl> _function = new Procedure1<MutableJvmParameterDeclarationImpl>() {
             public void apply(final MutableJvmParameterDeclarationImpl it) {
@@ -725,8 +786,15 @@ public class CompilationUnitImpl implements CompilationUnit {
             JvmDeclaredType _declaringType = ((JvmOperation)delegate).getDeclaringType();
             if ((_declaringType instanceof JvmAnnotationType)) {
               JvmAnnotationTypeElementDeclarationImpl _xifexpression_1 = null;
+              boolean _and = false;
               boolean _isBelongedToCompilationUnit = CompilationUnitImpl.this.isBelongedToCompilationUnit(delegate);
-              if (_isBelongedToCompilationUnit) {
+              if (!_isBelongedToCompilationUnit) {
+                _and = false;
+              } else {
+                boolean _isModifyAllowed = CompilationUnitImpl.this.isModifyAllowed();
+                _and = _isModifyAllowed;
+              }
+              if (_and) {
                 MutableJvmAnnotationTypeElementDeclarationImpl _mutableJvmAnnotationTypeElementDeclarationImpl = new MutableJvmAnnotationTypeElementDeclarationImpl();
                 final Procedure1<MutableJvmAnnotationTypeElementDeclarationImpl> _function = new Procedure1<MutableJvmAnnotationTypeElementDeclarationImpl>() {
                   public void apply(final MutableJvmAnnotationTypeElementDeclarationImpl it) {
@@ -748,8 +816,15 @@ public class CompilationUnitImpl implements CompilationUnit {
               _xifexpression = _xifexpression_1;
             } else {
               JvmMethodDeclarationImpl _xifexpression_2 = null;
+              boolean _and_1 = false;
               boolean _isBelongedToCompilationUnit_1 = CompilationUnitImpl.this.isBelongedToCompilationUnit(delegate);
-              if (_isBelongedToCompilationUnit_1) {
+              if (!_isBelongedToCompilationUnit_1) {
+                _and_1 = false;
+              } else {
+                boolean _isModifyAllowed_1 = CompilationUnitImpl.this.isModifyAllowed();
+                _and_1 = _isModifyAllowed_1;
+              }
+              if (_and_1) {
                 MutableJvmMethodDeclarationImpl _mutableJvmMethodDeclarationImpl = new MutableJvmMethodDeclarationImpl();
                 final Procedure1<MutableJvmMethodDeclarationImpl> _function_2 = new Procedure1<MutableJvmMethodDeclarationImpl>() {
                   public void apply(final MutableJvmMethodDeclarationImpl it) {
@@ -777,8 +852,15 @@ public class CompilationUnitImpl implements CompilationUnit {
           if (delegate instanceof JvmConstructor) {
             _matched=true;
             JvmConstructorDeclarationImpl _xifexpression = null;
+            boolean _and = false;
             boolean _isBelongedToCompilationUnit = CompilationUnitImpl.this.isBelongedToCompilationUnit(delegate);
-            if (_isBelongedToCompilationUnit) {
+            if (!_isBelongedToCompilationUnit) {
+              _and = false;
+            } else {
+              boolean _isModifyAllowed = CompilationUnitImpl.this.isModifyAllowed();
+              _and = _isModifyAllowed;
+            }
+            if (_and) {
               MutableJvmConstructorDeclarationImpl _mutableJvmConstructorDeclarationImpl = new MutableJvmConstructorDeclarationImpl();
               final Procedure1<MutableJvmConstructorDeclarationImpl> _function = new Procedure1<MutableJvmConstructorDeclarationImpl>() {
                 public void apply(final MutableJvmConstructorDeclarationImpl it) {
@@ -804,8 +886,15 @@ public class CompilationUnitImpl implements CompilationUnit {
           if (delegate instanceof JvmEnumerationLiteral) {
             _matched=true;
             JvmEnumerationValueDeclarationImpl _xifexpression = null;
+            boolean _and = false;
             boolean _isBelongedToCompilationUnit = CompilationUnitImpl.this.isBelongedToCompilationUnit(delegate);
-            if (_isBelongedToCompilationUnit) {
+            if (!_isBelongedToCompilationUnit) {
+              _and = false;
+            } else {
+              boolean _isModifyAllowed = CompilationUnitImpl.this.isModifyAllowed();
+              _and = _isModifyAllowed;
+            }
+            if (_and) {
               MutableJvmEnumerationValueDeclarationImpl _mutableJvmEnumerationValueDeclarationImpl = new MutableJvmEnumerationValueDeclarationImpl();
               final Procedure1<MutableJvmEnumerationValueDeclarationImpl> _function = new Procedure1<MutableJvmEnumerationValueDeclarationImpl>() {
                 public void apply(final MutableJvmEnumerationValueDeclarationImpl it) {
@@ -831,8 +920,15 @@ public class CompilationUnitImpl implements CompilationUnit {
           if (delegate instanceof JvmField) {
             _matched=true;
             JvmFieldDeclarationImpl _xifexpression = null;
+            boolean _and = false;
             boolean _isBelongedToCompilationUnit = CompilationUnitImpl.this.isBelongedToCompilationUnit(delegate);
-            if (_isBelongedToCompilationUnit) {
+            if (!_isBelongedToCompilationUnit) {
+              _and = false;
+            } else {
+              boolean _isModifyAllowed = CompilationUnitImpl.this.isModifyAllowed();
+              _and = _isModifyAllowed;
+            }
+            if (_and) {
               MutableJvmFieldDeclarationImpl _mutableJvmFieldDeclarationImpl = new MutableJvmFieldDeclarationImpl();
               final Procedure1<MutableJvmFieldDeclarationImpl> _function = new Procedure1<MutableJvmFieldDeclarationImpl>() {
                 public void apply(final MutableJvmFieldDeclarationImpl it) {
@@ -1798,6 +1894,15 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   @Pure
+  public boolean isModifyAllowed() {
+    return this._modifyAllowed;
+  }
+  
+  public void setModifyAllowed(final boolean modifyAllowed) {
+    this._modifyAllowed = modifyAllowed;
+  }
+  
+  @Pure
   public ProblemSupport getProblemSupport() {
     return this._problemSupport;
   }
@@ -1815,5 +1920,15 @@ public class CompilationUnitImpl implements CompilationUnit {
   @Pure
   public TypeLookupImpl getTypeLookup() {
     return this._typeLookup;
+  }
+  
+  @Pure
+  public TracabilityImpl getTracability() {
+    return this._tracability;
+  }
+  
+  @Pure
+  public AssociatorImpl getAssociator() {
+    return this._associator;
   }
 }

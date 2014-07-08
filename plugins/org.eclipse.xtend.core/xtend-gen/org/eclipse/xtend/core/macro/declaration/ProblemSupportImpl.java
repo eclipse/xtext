@@ -72,7 +72,7 @@ public class ProblemSupportImpl implements ProblemSupport {
     _warnings.add(_eObjectDiagnosticImpl);
   }
   
-  public List<Problem> getProblems(final Element element) {
+  public List<? extends Problem> getProblems(final Element element) {
     this.checkCanceled();
     final Pair<Resource, EObject> resAndObj = this.getResourceAndEObject(element);
     final Resource resource = resAndObj.getKey();
