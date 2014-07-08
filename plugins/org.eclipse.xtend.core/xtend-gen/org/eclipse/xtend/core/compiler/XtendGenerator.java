@@ -94,42 +94,46 @@ public class XtendGenerator extends JvmModelGenerator {
     Map<JvmAnnotationType, ActiveAnnotationContext> _contexts = ctxs.getContexts();
     Collection<ActiveAnnotationContext> _values = _contexts.values();
     for (final ActiveAnnotationContext context : _values) {
-      try {
-        Object _processorInstance = context.getProcessorInstance();
-        final Object processor = _processorInstance;
-        boolean _matched = false;
-        if (!_matched) {
-          if (processor instanceof CodeGenerationParticipant) {
-            _matched=true;
-            CodeGenerationContextImpl _codeGenerationContextImpl = new CodeGenerationContextImpl();
-            final Procedure1<CodeGenerationContextImpl> _function = new Procedure1<CodeGenerationContextImpl>() {
-              public void apply(final CodeGenerationContextImpl it) {
-                CompilationUnitImpl _compilationUnit = context.getCompilationUnit();
-                MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
-                it.setFileSystemSupport(_fileSystemSupport);
-                CompilationUnitImpl _compilationUnit_1 = context.getCompilationUnit();
-                FileLocations _fileLocations = _compilationUnit_1.getFileLocations();
-                it.setFileLocations(_fileLocations);
-              }
-            };
-            final CodeGenerationContextImpl codeGenServices = ObjectExtensions.<CodeGenerationContextImpl>operator_doubleArrow(_codeGenerationContextImpl, _function);
-            List<XtendAnnotationTarget> _annotatedSourceElements = context.getAnnotatedSourceElements();
-            final Function1<XtendAnnotationTarget, MemberDeclaration> _function_1 = new Function1<XtendAnnotationTarget, MemberDeclaration>() {
-              public MemberDeclaration apply(final XtendAnnotationTarget it) {
-                CompilationUnitImpl _compilationUnit = context.getCompilationUnit();
-                return _compilationUnit.toXtendMemberDeclaration(((XtendMember) it));
-              }
-            };
-            final List<MemberDeclaration> elements = ListExtensions.<XtendAnnotationTarget, MemberDeclaration>map(_annotatedSourceElements, _function_1);
-            ((CodeGenerationParticipant<NamedElement>)processor).doGenerateCode(elements, codeGenServices);
+      {
+        CompilationUnitImpl _compilationUnit = context.getCompilationUnit();
+        _compilationUnit.setModifyAllowed(false);
+        try {
+          Object _processorInstance = context.getProcessorInstance();
+          final Object processor = _processorInstance;
+          boolean _matched = false;
+          if (!_matched) {
+            if (processor instanceof CodeGenerationParticipant) {
+              _matched=true;
+              CodeGenerationContextImpl _codeGenerationContextImpl = new CodeGenerationContextImpl();
+              final Procedure1<CodeGenerationContextImpl> _function = new Procedure1<CodeGenerationContextImpl>() {
+                public void apply(final CodeGenerationContextImpl it) {
+                  CompilationUnitImpl _compilationUnit = context.getCompilationUnit();
+                  MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
+                  it.setFileSystemSupport(_fileSystemSupport);
+                  CompilationUnitImpl _compilationUnit_1 = context.getCompilationUnit();
+                  FileLocations _fileLocations = _compilationUnit_1.getFileLocations();
+                  it.setFileLocations(_fileLocations);
+                }
+              };
+              final CodeGenerationContextImpl codeGenServices = ObjectExtensions.<CodeGenerationContextImpl>operator_doubleArrow(_codeGenerationContextImpl, _function);
+              List<XtendAnnotationTarget> _annotatedSourceElements = context.getAnnotatedSourceElements();
+              final Function1<XtendAnnotationTarget, MemberDeclaration> _function_1 = new Function1<XtendAnnotationTarget, MemberDeclaration>() {
+                public MemberDeclaration apply(final XtendAnnotationTarget it) {
+                  CompilationUnitImpl _compilationUnit = context.getCompilationUnit();
+                  return _compilationUnit.toXtendMemberDeclaration(((XtendMember) it));
+                }
+              };
+              final List<MemberDeclaration> elements = ListExtensions.<XtendAnnotationTarget, MemberDeclaration>map(_annotatedSourceElements, _function_1);
+              ((CodeGenerationParticipant<NamedElement>)processor).doGenerateCode(elements, codeGenServices);
+            }
           }
-        }
-      } catch (final Throwable _t) {
-        if (_t instanceof Throwable) {
-          final Throwable t = (Throwable)_t;
-          context.handleProcessingError(input, t);
-        } else {
-          throw Exceptions.sneakyThrow(_t);
+        } catch (final Throwable _t) {
+          if (_t instanceof Throwable) {
+            final Throwable t = (Throwable)_t;
+            context.handleProcessingError(input, t);
+          } else {
+            throw Exceptions.sneakyThrow(_t);
+          }
         }
       }
     }

@@ -54,6 +54,7 @@ class XtendGenerator extends JvmModelGenerator {
 		if (ctxs == null)
 			return;
 		for (context : ctxs.contexts.values) {
+			context.compilationUnit.modifyAllowed = false
 			try {
 				switch processor : context.processorInstance {
 					CodeGenerationParticipant<NamedElement> : {

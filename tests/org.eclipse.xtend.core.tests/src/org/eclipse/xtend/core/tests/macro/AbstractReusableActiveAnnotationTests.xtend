@@ -236,6 +236,51 @@ abstract class AbstractReusableActiveAnnotationTests {
 		}
 	}
 	
+	@Test def void testDetectOrphanedElements() {
+		assertProcessing(
+				'myannotation/EvilAnnotation.xtend' -> '''
+					package myannotation
+					
+					import java.util.List
+					import org.eclipse.xtend.lib.macro.Active
+					import org.eclipse.xtend.lib.macro.TransformationParticipant
+					import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+					import org.eclipse.xtend.lib.macro.TransformationContext
+					
+					@Active(EvilProcessor)
+					annotation EvilAnnotation {
+						
+					}
+					
+					class EvilProcessor implements TransformationParticipant<MutableClassDeclaration> {
+						
+						override doTransform(List<? extends MutableClassDeclaration> classes, extension TransformationContext context) {
+							classes.forEach[
+								addField("foo")[
+									type = object
+									markAsRead
+								]
+							]
+						}
+					}
+				''',
+				'myusercode/UserCode.xtend' -> '''
+					package myusercode
+					
+					import myannotation.EvilAnnotation
+					
+					@EvilAnnotation
+					class Foo {
+					}
+				'''
+			)[
+				assertTrue(xtendFile.eResource.warnings.exists[
+					message.contains("myusercode.Foo.foo has no source element")
+					&& line == 1
+				])
+			]
+	}
+	
 	@Test def void testSetEmptyListAsAnnotationValue() {
 		assertProcessing(
 			'myannotation/MyAnnotation.xtend' -> '''

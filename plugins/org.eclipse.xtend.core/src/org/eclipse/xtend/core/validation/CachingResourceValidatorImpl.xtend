@@ -11,6 +11,9 @@ import org.eclipse.xtend.core.macro.ActiveAnnotationContextProvider
 import org.eclipse.xtend.core.macro.ActiveAnnotationContexts
 import org.eclipse.xtend.core.macro.AnnotationProcessor
 import org.eclipse.xtend.core.xtend.XtendFile
+import org.eclipse.xtend.core.xtend.XtendPackage
+import org.eclipse.xtext.common.types.JvmDeclaredType
+import org.eclipse.xtext.common.types.JvmMember
 import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.OnChangeEvictingCache
@@ -21,16 +24,19 @@ import org.eclipse.xtext.validation.EObjectDiagnosticImpl
 import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.validation.ResourceValidatorImpl
 import org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 
 class CachingResourceValidatorImpl extends DerivedStateAwareResourceValidator {
 
 	static val log = Logger.getLogger(ResourceValidatorImpl)
 
 	@Inject OnChangeEvictingCache cache
-	
+
 	@Inject AnnotationProcessor annotationProcessor
-	
+
 	@Inject ActiveAnnotationContextProvider contextProvider
+
+	@Inject IJvmModelAssociations associations
 
 	override validate(Resource resource, CheckMode mode, CancelIndicator mon) {
 		try {
@@ -58,11 +64,11 @@ class CachingResourceValidatorImpl extends DerivedStateAwareResourceValidator {
 			val result = Lists.newArrayListWithExpectedSize(resource.getErrors.size + resource.getWarnings.size)
 			try {
 				val acceptor = createAcceptor(result)
-				
+
 				if (mode.shouldCheck(CheckType.FAST)) {
 					runActiveAnnotationValidation(resource, mon)
 				}
-				
+
 				if (monitor.isCanceled)
 					return #[]
 
@@ -73,7 +79,7 @@ class CachingResourceValidatorImpl extends DerivedStateAwareResourceValidator {
 						issueFromXtextResourceDiagnostic(error, Severity.ERROR, acceptor)
 					}
 
-					for (warning: resource.warnings) {
+					for (warning : resource.warnings) {
 						if (monitor.isCanceled)
 							return #[]
 						issueFromXtextResourceDiagnostic(warning, Severity.WARNING, acceptor)
@@ -84,7 +90,7 @@ class CachingResourceValidatorImpl extends DerivedStateAwareResourceValidator {
 					return #[]
 				val syntaxDiagFail = !result.isEmpty
 				logCheckStatus(resource, syntaxDiagFail, "Syntax")
-				
+
 				validate(resource, mode, monitor, acceptor)
 				if (monitor.isCanceled)
 					return #[]
@@ -96,26 +102,70 @@ class CachingResourceValidatorImpl extends DerivedStateAwareResourceValidator {
 			task.stop
 		}
 	}
-	
-	def runActiveAnnotationValidation(Resource resource, CancelIndicator indicator) {
+
+	private def runActiveAnnotationValidation(Resource resource, CancelIndicator monitor) {
 		val file = resource.contents.head as XtendFile
 		var ActiveAnnotationContexts contexts
 		try {
 			contexts = contextProvider.computeContext(file)
 		} catch (Throwable t) {
-			resource.errors.add(new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.PROCESSING_ERROR, "Could not create active annotation contexts", file, null, -1, null))
+			handleProcessorInitializationError(file)
 			return
 		}
-		
-		for (ActiveAnnotationContext ctx : contexts.getContexts.values) {
+
+		for (ActiveAnnotationContext ctx : contexts.contexts.values) {
+			if (monitor.isCanceled) {
+				return
+			}
 			try {
-				annotationProcessor.validationPhase(ctx, indicator)
+				annotationProcessor.validationPhase(ctx, monitor)
 			} catch (Throwable t) {
 				ctx.handleProcessingError(file.eResource, t)
 			}
 		}
+		addWarningsForOrphanedJvmElements(file, monitor)
 	}
-	
+
+	private def handleProcessorInitializationError(XtendFile file) {
+		file.eResource.errors.add(
+			new EObjectDiagnosticImpl(
+				Severity.ERROR,
+				IssueCodes.PROCESSING_ERROR,
+				"Could not create active annotation contexts",
+				file,
+				XtendPackage.Literals.XTEND_FILE__PACKAGE,
+				-1,
+				null
+			))
+	}
+
+	private def addWarningsForOrphanedJvmElements(XtendFile file, CancelIndicator monitor) {
+		for (jvmType : file.eResource.contents.tail.filter(JvmDeclaredType)) {
+			for (jvmMember : jvmType.eAllContents.filter(JvmMember).toIterable) {
+				if (monitor.isCanceled) {
+					return
+				}
+				val sourceElement = associations.getPrimarySourceElement(jvmMember)
+				if (sourceElement === null) {
+					addWarningForOrphanedJvmElement(file, jvmMember)
+				}
+			}
+		}
+	}
+
+	private def addWarningForOrphanedJvmElement(XtendFile file, JvmMember jvmElement) {
+		file.eResource.warnings.add(
+			new EObjectDiagnosticImpl(
+				Severity.WARNING,
+				IssueCodes.ORPHAN_ELMENT,
+				'''The generated element «jvmElement.qualifiedName» has no source element''',
+				file,
+				XtendPackage.Literals.XTEND_FILE__PACKAGE,
+				-1,
+				null
+			))
+	}
+
 	private def logCheckStatus(Resource resource, boolean parserDiagFail, String string) {
 		if (log.isDebugEnabled) {
 			log.debug(string + " check " + (if(parserDiagFail) "FAIL" else "OK") + "! Resource: " + resource.getURI)

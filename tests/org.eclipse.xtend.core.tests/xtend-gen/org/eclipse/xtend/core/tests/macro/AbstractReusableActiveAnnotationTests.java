@@ -479,6 +479,104 @@ public abstract class AbstractReusableActiveAnnotationTests {
   }
   
   @Test
+  public void testDetectOrphanedElements() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package myannotation");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.Active");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.TransformationParticipant");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.TransformationContext");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@Active(EvilProcessor)");
+    _builder.newLine();
+    _builder.append("annotation EvilAnnotation {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class EvilProcessor implements TransformationParticipant<MutableClassDeclaration> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override doTransform(List<? extends MutableClassDeclaration> classes, extension TransformationContext context) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("classes.forEach[");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("addField(\"foo\")[");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("type = object");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("markAsRead");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/EvilAnnotation.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package myusercode");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import myannotation.EvilAnnotation");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@EvilAnnotation");
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      public void apply(final CompilationUnitImpl it) {
+        XtendFile _xtendFile = it.getXtendFile();
+        Resource _eResource = _xtendFile.eResource();
+        EList<Resource.Diagnostic> _warnings = _eResource.getWarnings();
+        final Function1<Resource.Diagnostic, Boolean> _function = new Function1<Resource.Diagnostic, Boolean>() {
+          public Boolean apply(final Resource.Diagnostic it) {
+            boolean _and = false;
+            String _message = it.getMessage();
+            boolean _contains = _message.contains("myusercode.Foo.foo has no source element");
+            if (!_contains) {
+              _and = false;
+            } else {
+              int _line = it.getLine();
+              boolean _equals = (_line == 1);
+              _and = _equals;
+            }
+            return Boolean.valueOf(_and);
+          }
+        };
+        boolean _exists = IterableExtensions.<Resource.Diagnostic>exists(_warnings, _function);
+        Assert.assertTrue(_exists);
+      }
+    };
+    this.assertProcessing(_mappedTo, _mappedTo_1, _function);
+  }
+  
+  @Test
   public void testSetEmptyListAsAnnotationValue() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package myannotation");
