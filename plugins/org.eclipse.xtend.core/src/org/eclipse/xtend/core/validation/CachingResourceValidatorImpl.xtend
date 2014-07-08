@@ -6,6 +6,8 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.core.macro.ActiveAnnotationContext
 import org.eclipse.xtend.core.macro.ActiveAnnotationContexts
 import org.eclipse.xtend.core.macro.AnnotationProcessor
+import org.eclipse.xtext.common.types.JvmDeclaredType
+import org.eclipse.xtext.common.types.JvmMember
 import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.IAcceptor
@@ -13,12 +15,16 @@ import org.eclipse.xtext.util.OnChangeEvictingCache
 import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
+import org.eclipse.xtext.xbase.typesystem.computation.DiagnosticOnFirstKeyword
 
 class CachingResourceValidatorImpl extends DerivedStateAwareResourceValidator {
 
 	@Inject OnChangeEvictingCache cache
-	
 	@Inject AnnotationProcessor annotationProcessor
+	@Inject extension IJvmModelAssociations
+	@Inject extension JvmTypeExtensions 
 
 	override validate(Resource resource, CheckMode mode, CancelIndicator mon) {
 		try {
@@ -36,6 +42,7 @@ class CachingResourceValidatorImpl extends DerivedStateAwareResourceValidator {
 
 	override protected collectResourceDiagnostics(Resource resource, CancelIndicator monitor, IAcceptor<Issue> acceptor) {
 		runActiveAnnotationValidation(resource, monitor)
+		addWarningsForOrphanedJvmElements(resource, monitor)
 		for (error : resource.errors) {
 			if (monitor.isCanceled) {
 				return
@@ -44,8 +51,9 @@ class CachingResourceValidatorImpl extends DerivedStateAwareResourceValidator {
 		}
 
 		for (warning : resource.warnings) {
-			if (monitor.isCanceled)
-				return;
+			if (monitor.isCanceled) {
+				return
+			}
 			issueFromXtextResourceDiagnostic(warning, Severity.WARNING, acceptor)
 		}
 	}
@@ -70,5 +78,30 @@ class CachingResourceValidatorImpl extends DerivedStateAwareResourceValidator {
 		} finally {
 			contexts.after(ActiveAnnotationContexts.AnnotationCallback.VALIDATION);
 		}
+	}
+
+	private def addWarningsForOrphanedJvmElements(Resource resource, CancelIndicator monitor) {
+		for (jvmType : resource.contents.tail.filter(JvmDeclaredType)) {
+			for (jvmMember : jvmType.eAllContents.filter(JvmMember).filter[!synthetic].toIterable) {
+				if (monitor.isCanceled) {
+					return
+				}
+				val sourceElement = jvmMember.primarySourceElement
+				if (sourceElement === null) {
+					addWarningForOrphanedJvmElement(resource, jvmMember)
+				}
+			}
+		}
+	}
+
+	private def addWarningForOrphanedJvmElement(Resource resource, JvmMember jvmElement) {
+		resource.warnings.add(
+			new DiagnosticOnFirstKeyword(
+				Severity.WARNING,
+				IssueCodes.ORPHAN_ELMENT,
+				'''The generated element «jvmElement.qualifiedName» has no source element''',
+				resource.contents.head,
+				null
+			))
 	}
 }
