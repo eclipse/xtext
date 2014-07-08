@@ -439,6 +439,10 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 				EnumSet<ConformanceHint> result = getReceiverConformanceHints();
 				return result;
 			}
+		} else if (idx == 1) {
+			if (getExpression() instanceof XAssignment && getFeature() instanceof JvmField) {
+				return super.getConformanceHints(0, recompute);
+			}
 		}
 		return super.getConformanceHints(idx, recompute);
 	}
@@ -483,6 +487,22 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		CandidateCompareResult result = super.compareByArgumentTypes(right);
 		if (result == CandidateCompareResult.AMBIGUOUS && !right.isTypeLiteral()) {
 			result = compareByNameAndStaticFlag(right);
+		}
+		return result;
+	}
+	
+	@Override
+	protected CandidateCompareResult compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right, boolean recompute) {
+		CandidateCompareResult result = super.compareByArgumentTypes(right, recompute);
+		if (result == CandidateCompareResult.AMBIGUOUS && getExpression() instanceof XAssignment) {
+			if (description.isValidStaticState() == right.description.isValidStaticState()) {
+				if (getFeature() instanceof JvmExecutable != right.getFeature() instanceof JvmExecutable) {
+					if (getFeature() instanceof JvmExecutable) {
+						return CandidateCompareResult.OTHER;
+					}
+					return CandidateCompareResult.THIS;
+				}
+			}
 		}
 		return result;
 	}
