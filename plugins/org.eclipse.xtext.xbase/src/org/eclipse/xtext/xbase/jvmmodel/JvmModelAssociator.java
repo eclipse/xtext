@@ -36,6 +36,7 @@ import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.util.Maps2;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -361,6 +362,38 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		sourceToTargetMap(resource).clear();
 		targetToSourceMap(resource).clear();
 		getLogicalContainerMapping(resource).clear();
+	}
+
+	public void removeAssociation(EObject sourceElement, EObject jvmElement) {
+		Preconditions.checkArgument(sourceElement != null, "source element cannot be null");
+		Preconditions.checkArgument(jvmElement != null, "jvm element cannot be null");
+		
+		Resource resource = jvmElement.eResource();
+		Preconditions.checkArgument(resource != null, "jvm element cannot be dangling");
+		Preconditions.checkArgument(resource == sourceElement.eResource(), "source and jvm elements should belong to the same resource");
+		
+		Set<EObject> sources = targetToSourceMap(resource).get(jvmElement);
+		if (sources != null && sources.remove(sourceElement)) {
+			Set<EObject> targets = sourceToTargetMap(resource).get(sourceElement);
+			targets.remove(sourceElement);
+		}
+	}
+
+	public void removeAllAssociation(EObject jvmElement) {
+		Preconditions.checkArgument(jvmElement != null, "jvm element cannot be null");
+		
+		Resource resource = jvmElement.eResource();
+		Preconditions.checkArgument(resource != null, "jvm element cannot be dangling");
+		
+		Set<EObject> sources = targetToSourceMap(resource).remove(jvmElement);
+		if (sources == null || sources.isEmpty()) {
+			return;
+		}
+		Map<EObject, Set<EObject>> sourceToTargetMap = sourceToTargetMap(resource);
+		for (EObject sourceElement : sources) {
+			Set<EObject> targets = sourceToTargetMap.get(sourceElement);
+			targets.remove(jvmElement);
+		}
 	}
 
 	public static class JvmDeclaredTypeAcceptor implements IJvmDeclaredTypeAcceptor {
