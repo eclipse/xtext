@@ -18,7 +18,9 @@ import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @deprecated since 2.7 the {@link DirtyStateEditorSupport} is directly served by the {@link XtextEditor}
  */
+@Deprecated
 public abstract class AbstractDirtyStateAwareEditorCallback implements IXtextEditorCallback, IDirtyStateEditorSupportClient {
 	
 	@Inject
@@ -90,12 +92,5 @@ public abstract class AbstractDirtyStateAwareEditorCallback implements IXtextEdi
 		StyledText widget = sourceViewer.getTextWidget();
 		if (widget != null)
 			widget.removeVerifyListener(listener);
-	}
-	
-	/**
-	 * @since 2.7
-	 */
-	public DirtyStateEditorSupport getDirtyStateEditorSupport() {
-		return editorSupport;
 	}
 }
