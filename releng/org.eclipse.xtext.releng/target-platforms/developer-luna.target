@@ -21,6 +21,7 @@
 <unit id="org.eclipse.pde.core" version="0.0.0"/>
 <unit id="org.eclipse.pde.ui" version="0.0.0"/>
 <unit id="org.eclipse.pde.junit.runtime" version="0.0.0"/>
+<unit id="org.eclipse.platform.feature.group" version="0.0.0"/>
 <unit id="org.junit" version="0.0.0"/>
 <unit id="org.eclipse.core.databinding.beans" version="0.0.0"/>
 <repository location="http://download.eclipse.org/eclipse/updates/4.4/"/>
