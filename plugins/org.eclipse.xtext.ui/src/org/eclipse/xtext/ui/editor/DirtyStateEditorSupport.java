@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
@@ -67,7 +68,7 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	 */
 	protected class UpdateEditorStateJob extends Job {
 
-		private boolean coarseGrainedChange;
+		private AtomicInteger coarseGrainedChanges;
 
 		private Queue<IResourceDescription.Delta> pendingChanges;
 
@@ -78,13 +79,16 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 		protected UpdateEditorStateJob(ISchedulingRule rule, String name) {
 			super(name);
 			setRule(rule);
+			coarseGrainedChanges = new AtomicInteger();
 			pendingChanges = new ConcurrentLinkedQueue<IResourceDescription.Delta>();
 		}
 		
 		protected void scheduleFor(IResourceDescription.Event event) {
 			cancel();
-			coarseGrainedChange = coarseGrainedChange || event instanceof IResourceDescription.CoarseGrainedEvent;
-			pendingChanges.addAll(event.getDeltas());
+			if (event instanceof IResourceDescription.CoarseGrainedEvent)
+				coarseGrainedChanges.incrementAndGet();
+			else
+				pendingChanges.addAll(event.getDeltas());
 			schedule(getDelay());
 		}
 
@@ -124,7 +128,8 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 				if (document == null) {
 					return Status.OK_STATUS;
 				}
-				final boolean[] isReparseRequired = new boolean[] { coarseGrainedChange };
+				int coarseGrainedChangesSeen = coarseGrainedChanges.get();
+				final boolean[] isReparseRequired = new boolean[] { coarseGrainedChangesSeen > 0 };
 				final Pair<IResourceDescription.Event, Integer> event = mergePendingDeltas();
 				Collection<Resource> affectedResources = document.readOnly(
 						new IUnitOfWork<Collection<Resource>, XtextResource>() {
@@ -147,15 +152,12 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 				if (monitor.isCanceled()) {
 					return Status.OK_STATUS;
 				}
-				try {
-					unloadAffectedResourcesAndReparseDocument(document, affectedResources, isReparseRequired[0]);
-					for (int i = 0; i < event.getSecond(); i++) {
-						pendingChanges.poll();
-					}
-					return Status.OK_STATUS;
-				} finally {
-					coarseGrainedChange = false;	
+				unloadAffectedResourcesAndReparseDocument(document, affectedResources, isReparseRequired[0]);
+				for (int i = 0; i < event.getSecond(); i++) {
+					pendingChanges.poll();
 				}
+				coarseGrainedChanges.addAndGet(-coarseGrainedChangesSeen);
+				return Status.OK_STATUS;
 			} catch (Throwable e) {
 				LOG.error("Error updating dirty state editor", e);
 				return Status.OK_STATUS;
