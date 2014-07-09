@@ -172,7 +172,7 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
     return CollectionLiterals.<String>newArrayList(_packageName);
   }
   
-  public String[] getImportedPackagesRt(final Grammar grammar) {
+  public String[] getRequiredBundlesRt(final Grammar grammar) {
     List<String> _xifexpression = null;
     boolean _isGenerateXtendStub = this.isGenerateXtendStub();
     if (_isGenerateXtendStub) {

@@ -61,14 +61,14 @@ class ContentAssistFragment extends Xtend2GeneratorFragment implements IInheriti
 	}
 	
 	override getRequiredBundlesUi(Grammar grammar) {
-		singletonList('org.eclipse.xtext.ui')
+		if(generateStub)
+			newArrayList('org.eclipse.xtext.ui', 'org.eclipse.xtext.xbase.lib')
+		else
+			singletonList('org.eclipse.xtext.ui')
 	}
 	
 	override getImportedPackagesUi(Grammar grammar) {
-		if(generateStub)
-			newArrayList('org.apache.log4j', 'org.eclipse.xtext.xbase.lib')
-		else
-			singleton('org.apache.log4j')
+		singleton('org.apache.log4j')
 	}
 	
 	override getExportedPackagesUi(Grammar grammar) {

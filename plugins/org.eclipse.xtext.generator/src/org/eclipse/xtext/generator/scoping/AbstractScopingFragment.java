@@ -141,11 +141,8 @@ public abstract class AbstractScopingFragment extends AbstractInheritingGenerato
 		return new String[] { Strings.skipLastToken(getScopeProviderName(grammar, getNaming()),".") };
 	}
 	
-	/**
-	 * @since 2.4
-	 */
 	@Override
-	public String[] getImportedPackagesRt(Grammar grammar) {
+	public String[] getRequiredBundlesRt(Grammar grammar) {
 		if(isGenerateXtendStub)
 			return new String[] { "org.eclipse.xtext.xbase.lib" };
 		else

@@ -97,7 +97,7 @@ class SerializerFragment extends Xtend2GeneratorFragment implements IStubGenerat
 		return newArrayList(names.semanticSequencer.packageName)
 	}
 	
-	override getImportedPackagesRt(Grammar grammar) {
+	override getRequiredBundlesRt(Grammar grammar) {
 		if(generateXtendStub) 
 			singletonList('org.eclipse.xtext.xbase.lib')
 		else 

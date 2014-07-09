@@ -133,6 +133,11 @@ public class GeneratorFragment extends AbstractGeneratorFragment implements IStu
 
 	@Override
 	public String[] getImportedPackagesRt(Grammar grammar) {
+		return Strings.EMPTY_ARRAY;
+	}
+	
+	@Override
+	public String[] getRequiredBundlesRt(Grammar grammar) {
 		if (isGenerateStub(grammar))
 			return new String[] {
 					"org.eclipse.xtext.xbase.lib"

@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.generator.contentAssist;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -92,18 +91,18 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
   }
   
   public String[] getRequiredBundlesUi(final Grammar grammar) {
-    return ((String[])Conversions.unwrapArray(Collections.<String>singletonList("org.eclipse.xtext.ui"), String.class));
+    List<String> _xifexpression = null;
+    boolean _isGenerateStub = this.isGenerateStub();
+    if (_isGenerateStub) {
+      _xifexpression = CollectionLiterals.<String>newArrayList("org.eclipse.xtext.ui", "org.eclipse.xtext.xbase.lib");
+    } else {
+      _xifexpression = Collections.<String>singletonList("org.eclipse.xtext.ui");
+    }
+    return ((String[])Conversions.unwrapArray(_xifexpression, String.class));
   }
   
   public String[] getImportedPackagesUi(final Grammar grammar) {
-    Collection<String> _xifexpression = null;
-    boolean _isGenerateStub = this.isGenerateStub();
-    if (_isGenerateStub) {
-      _xifexpression = CollectionLiterals.<String>newArrayList("org.apache.log4j", "org.eclipse.xtext.xbase.lib");
-    } else {
-      _xifexpression = Collections.<String>singleton("org.apache.log4j");
-    }
-    return ((String[])Conversions.unwrapArray(_xifexpression, String.class));
+    return ((String[])Conversions.unwrapArray(Collections.<String>singleton("org.apache.log4j"), String.class));
   }
   
   public String[] getExportedPackagesUi(final Grammar grammar) {
