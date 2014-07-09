@@ -18,12 +18,12 @@
 			<cs:products alias="output" base="${buckminster.output}/site.tp/" />
 		</cs:private>
 
-		<cs:public name="create.category.xml" actor="ant">
+	<!-- <cs:public name="create.category.xml" actor="ant">
 			<cs:actorProperties>
 				<cs:property key="buildFile" value="packaging.ant" />
 				<cs:property key="targets" value="-create.category.xml" />
 			</cs:actorProperties>
-		</cs:public>
+		</cs:public>-->
 
 		<cs:public name="statistic.add" actor="ant">
 			<cs:actorProperties>
@@ -142,7 +142,6 @@
 				<cs:property key="targets" value="p2.modification" />
 			</cs:actorProperties>
 			<cs:prerequisites>
-				<cs:attribute name="create.category.xml" alias="create.category" />
 				<cs:attribute name="site.p2.raw" alias="raw.repository" />
 				<cs:attribute name="statistic.add" alias="statistics" />
 			</cs:prerequisites>

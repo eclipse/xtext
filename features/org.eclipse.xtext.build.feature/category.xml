@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature id="org.eclipse.xtext.docs" version="0.0.0">
+      <category name="hidden_category"/>
+   </feature>
+   <feature id="org.eclipse.xtext.examples" version="0.0.0">
+      <category name="hidden_category"/>
+   </feature>
+   <feature id="org.eclipse.xtext.runtime" version="0.0.0">
+      <category name="hidden_category"/>
+   </feature>
+   <feature id="org.eclipse.xtext.redist" version="0.0.0">
+      <category name="xtext"/>
+   </feature>
+   <feature id="org.eclipse.xtext.sdk" version="0.0.0">
+      <category name="xtext"/>
+   </feature>
+   <feature id="org.eclipse.xtext.ui" version="0.0.0">
+      <category name="hidden_category"/>
+   </feature>
+   <feature id="org.eclipse.xtext.license" version="0.0.0">
+      <category name="hidden_category"/>
+   </feature>
+   <feature id="org.eclipse.xtext.xtext" version="0.0.0">
+      <category name="hidden_category"/>
+   </feature>
+   <feature id="org.eclipse.xtext.xbase" version="0.0.0">
+      <category name="hidden_category"/>
+   </feature>
+   <feature id="org.eclipse.xtend.sdk" version="0.0.0">
+      <category name="xtend"/>
+   </feature>
+   <feature id="org.eclipse.xtend.gwt" version="0.0.0">
+      <category name="xtend"/>
+   </feature>
+   <feature id="org.eclipse.xtext.gwt" version="0.0.0">
+      <category name="hidden_category"/>
+   </feature>
+   <category-def name="xtext" label="Xtext">
+      <description>
+         Xtext is a framework for development of programming languages and domain specific languages. It covers all aspects of a complete language infrastructure, from parsers, over linker, compiler or interpreter to fully-blown top-notch Eclipse IDE integration. It comes with good defaults for all these aspects and at the same time every single aspect can be tailored to your needs.
+      </description>
+   </category-def>
+   <category-def name="xtend" label="Xtend">
+      <description>
+         Xtend is a flexible and expressive dialect of Java, which compiles into readable Java 5 compatible source code. You can use any existing Java library seamlessly. The compiled output is readable and pretty-printed, and tends to run as fast as the equivalent handwritten Java code.
+      </description>
+   </category-def>
+   <category-def name="hidden_category"/>
+</site>
