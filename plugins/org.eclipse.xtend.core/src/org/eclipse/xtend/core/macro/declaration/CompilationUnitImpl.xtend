@@ -535,15 +535,17 @@ class CompilationUnitImpl implements CompilationUnit {
 		 */
 		if (delegate == null)
 			return null
-		switch delegate {
-			XComputedTypeReferenceImplCustom case !delegate.isEquivalentComputed: {
-				new InferredTypeReferenceImpl => [
-					it.delegate = delegate
-					compilationUnit = this
-				]
+		getOrCreate(delegate) [
+			switch delegate {
+				XComputedTypeReferenceImplCustom case !delegate.isEquivalentComputed: {
+					new InferredTypeReferenceImpl => [
+						it.delegate = delegate
+						compilationUnit = this
+					]
+				}
+				default : toTypeReference(typeRefConverter.toLightweightReference(delegate))
 			}
-			default : toTypeReference(typeRefConverter.toLightweightReference(delegate))
-		}
+		]
 	}
 
 	def TypeReference toTypeReference(LightweightTypeReference delegate) {

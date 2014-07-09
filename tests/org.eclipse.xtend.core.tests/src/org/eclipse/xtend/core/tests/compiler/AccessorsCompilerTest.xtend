@@ -221,6 +221,30 @@ class AccessorsCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
+	def void testSpecifyingVisiblityNoStaticImport() {
+		'''
+			import org.eclipse.xtend.lib.annotations.Accessors
+			@Accessors(PROTECTED_GETTER, PROTECTED_SETTER)
+			class C {
+				int a
+				@Accessors(PRIVATE_GETTER, PUBLIC_SETTER) int b
+				@Accessors(NONE) int c
+			}
+		'''.compile[
+			compiledClass => [
+				assertTrue(Modifier.isProtected(getDeclaredMethod("getA").modifiers))
+				assertTrue(Modifier.isProtected(getDeclaredMethod("setA", int).modifiers))
+				
+				assertTrue(Modifier.isPrivate(getDeclaredMethod("getB").modifiers))
+				assertTrue(Modifier.isPublic(getDeclaredMethod("setB", int).modifiers))
+				
+				assertFalse(declaredMethods.exists[name == "getC"])
+				assertFalse(declaredMethods.exists[name == "setC"])
+			]
+		]
+	}
+	
+	@Test
 	def void testIntegrationWithData() {
 		'''
 			import org.eclipse.xtend.lib.annotations.Accessors
