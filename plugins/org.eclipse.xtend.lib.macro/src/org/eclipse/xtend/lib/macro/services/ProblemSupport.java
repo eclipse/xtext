@@ -26,7 +26,7 @@ public interface ProblemSupport {
 	 * @param element the element to look up problems
 	 * @return the problems associated with the given {@link Element}
 	 */
-	List<Problem> getProblems(Element element);
+	List<? extends Problem> getProblems(Element element);
 	
 	/**
 	 * Adds a problem marker with severity {@link Severity}#ERROR to the given element
