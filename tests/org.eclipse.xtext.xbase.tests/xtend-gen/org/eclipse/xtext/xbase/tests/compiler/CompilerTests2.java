@@ -59,11 +59,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
     _builder_1.newLine();
     _builder_1.append("final java.util.Iterator<CharSequence> treeIt = _newArrayList.iterator();");
     _builder_1.newLine();
-    _builder_1.append("boolean _hasNext = treeIt.hasNext();");
-    _builder_1.newLine();
-    _builder_1.append("boolean _while = _hasNext;");
-    _builder_1.newLine();
-    _builder_1.append("while (_while) {");
+    _builder_1.append("while (treeIt.hasNext()) {");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("{");
