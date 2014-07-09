@@ -82,38 +82,29 @@ public class DataProcessor extends AbstractClassProcessor {
       }
     };
     IterableExtensions.forEach(_dataFields, _function);
-    boolean _and = false;
-    boolean _hasUserDefinedConstructor = requiredArgsUtil.hasUserDefinedConstructor(it);
-    boolean _not = (!_hasUserDefinedConstructor);
-    if (!_not) {
-      _and = false;
-    } else {
-      boolean _hasFinalFieldsConstructor = requiredArgsUtil.hasFinalFieldsConstructor(it);
-      boolean _not_1 = (!_hasFinalFieldsConstructor);
-      _and = _not_1;
-    }
-    if (_and) {
+    boolean _needsFinalFieldConstructor = requiredArgsUtil.needsFinalFieldConstructor(it);
+    if (_needsFinalFieldConstructor) {
       requiredArgsUtil.addFinalFieldsConstructor(it);
     }
     boolean _hasHashCode = ehUtil.hasHashCode(it);
-    boolean _not_2 = (!_hasHashCode);
-    if (_not_2) {
+    boolean _not = (!_hasHashCode);
+    if (_not) {
       Iterable<? extends MutableFieldDeclaration> _dataFields_1 = util.getDataFields(it);
       ResolvedConstructor _superConstructor = requiredArgsUtil.getSuperConstructor(it);
       boolean _tripleNotEquals = (_superConstructor != null);
       ehUtil.addHashCode(it, _dataFields_1, _tripleNotEquals);
     }
     boolean _hasEquals = ehUtil.hasEquals(it);
-    boolean _not_3 = (!_hasEquals);
-    if (_not_3) {
+    boolean _not_1 = (!_hasEquals);
+    if (_not_1) {
       Iterable<? extends MutableFieldDeclaration> _dataFields_2 = util.getDataFields(it);
       ResolvedConstructor _superConstructor_1 = requiredArgsUtil.getSuperConstructor(it);
       boolean _tripleNotEquals_1 = (_superConstructor_1 != null);
       ehUtil.addEquals(it, _dataFields_2, _tripleNotEquals_1);
     }
     boolean _hasToString = toStringUtil.hasToString(it);
-    boolean _not_4 = (!_hasToString);
-    if (_not_4) {
+    boolean _not_2 = (!_hasToString);
+    if (_not_2) {
       ResolvedConstructor _superConstructor_2 = requiredArgsUtil.getSuperConstructor(it);
       boolean _tripleEquals = (_superConstructor_2 == null);
       if (_tripleEquals) {
@@ -142,15 +133,8 @@ public class DataProcessor extends AbstractClassProcessor {
     Iterable<? extends MutableFieldDeclaration> _dataFields_4 = util.getDataFields(it);
     final Procedure1<MutableFieldDeclaration> _function_1 = new Procedure1<MutableFieldDeclaration>() {
       public void apply(final MutableFieldDeclaration it) {
-        boolean _and = false;
         boolean _shouldAddGetter = getterUtil.shouldAddGetter(it);
-        if (!_shouldAddGetter) {
-          _and = false;
-        } else {
-          boolean _canAddGetter = getterUtil.canAddGetter(it);
-          _and = _canAddGetter;
-        }
-        if (_and) {
+        if (_shouldAddGetter) {
           Visibility _elvis = null;
           AccessorType _getterType = getterUtil.getGetterType(it);
           Visibility _visibility = null;

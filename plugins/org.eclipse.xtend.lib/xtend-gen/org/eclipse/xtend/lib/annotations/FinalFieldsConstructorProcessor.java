@@ -32,12 +32,12 @@ import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.expression.Expression;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
@@ -95,141 +95,202 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
       return IterableExtensions.filter(_declaredFields, _function);
     }
     
-    public boolean hasUserDefinedConstructor(final MutableClassDeclaration it) {
-      NamedElement _primarySourceElement = this.context.getPrimarySourceElement(it);
-      Iterable<? extends ConstructorDeclaration> _declaredConstructors = ((ClassDeclaration) _primarySourceElement).getDeclaredConstructors();
-      boolean _isEmpty = IterableExtensions.isEmpty(_declaredConstructors);
-      return (!_isEmpty);
+    public boolean needsFinalFieldConstructor(final MutableClassDeclaration it) {
+      boolean _and = false;
+      boolean _hasFinalFieldsConstructor = this.hasFinalFieldsConstructor(it);
+      boolean _not = (!_hasFinalFieldsConstructor);
+      if (!_not) {
+        _and = false;
+      } else {
+        NamedElement _primarySourceElement = this.context.getPrimarySourceElement(it);
+        Iterable<? extends ConstructorDeclaration> _declaredConstructors = ((ClassDeclaration) _primarySourceElement).getDeclaredConstructors();
+        boolean _isEmpty = IterableExtensions.isEmpty(_declaredConstructors);
+        _and = _isEmpty;
+      }
+      return _and;
     }
     
     public boolean hasFinalFieldsConstructor(final MutableTypeDeclaration cls) {
-      Iterable<? extends MutableConstructorDeclaration> _declaredConstructors = cls.getDeclaredConstructors();
-      final Function1<MutableConstructorDeclaration, Boolean> _function = new Function1<MutableConstructorDeclaration, Boolean>() {
-        public Boolean apply(final MutableConstructorDeclaration it) {
-          boolean _xblockexpression = false;
-          {
-            final ArrayList<TypeReference> expectedTypes = CollectionLiterals.<TypeReference>newArrayList();
-            ResolvedConstructor _superConstructor = Util.this.getSuperConstructor(cls);
-            boolean _tripleNotEquals = (_superConstructor != null);
-            if (_tripleNotEquals) {
-              ResolvedConstructor _superConstructor_1 = Util.this.getSuperConstructor(cls);
-              Iterable<? extends ResolvedParameter> _resolvedParameters = _superConstructor_1.getResolvedParameters();
-              final Function1<ResolvedParameter, TypeReference> _function = new Function1<ResolvedParameter, TypeReference>() {
-                public TypeReference apply(final ResolvedParameter it) {
-                  return it.getResolvedType();
-                }
-              };
-              Iterable<TypeReference> _map = IterableExtensions.map(_resolvedParameters, _function);
-              Iterables.<TypeReference>addAll(expectedTypes, _map);
-            }
-            Iterable<? extends MutableFieldDeclaration> _finalFields = Util.this.getFinalFields(cls);
-            final Function1<MutableFieldDeclaration, TypeReference> _function_1 = new Function1<MutableFieldDeclaration, TypeReference>() {
-              public TypeReference apply(final MutableFieldDeclaration it) {
-                return it.getType();
-              }
-            };
-            Iterable<TypeReference> _map_1 = IterableExtensions.map(_finalFields, _function_1);
-            Iterables.<TypeReference>addAll(expectedTypes, _map_1);
+      boolean _xblockexpression = false;
+      {
+        final ArrayList<TypeReference> expectedTypes = this.getFinalFieldsConstructorArgumentTypes(cls);
+        Iterable<? extends MutableConstructorDeclaration> _declaredConstructors = cls.getDeclaredConstructors();
+        final Function1<MutableConstructorDeclaration, Boolean> _function = new Function1<MutableConstructorDeclaration, Boolean>() {
+          public Boolean apply(final MutableConstructorDeclaration it) {
             Iterable<? extends MutableParameterDeclaration> _parameters = it.getParameters();
-            final Function1<MutableParameterDeclaration, TypeReference> _function_2 = new Function1<MutableParameterDeclaration, TypeReference>() {
+            final Function1<MutableParameterDeclaration, TypeReference> _function = new Function1<MutableParameterDeclaration, TypeReference>() {
               public TypeReference apply(final MutableParameterDeclaration it) {
                 return it.getType();
               }
             };
-            Iterable<TypeReference> _map_2 = IterableExtensions.map(_parameters, _function_2);
-            List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map_2);
-            _xblockexpression = Objects.equal(_list, expectedTypes);
+            Iterable<TypeReference> _map = IterableExtensions.map(_parameters, _function);
+            List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
+            return Boolean.valueOf(Objects.equal(_list, expectedTypes));
           }
-          return Boolean.valueOf(_xblockexpression);
-        }
-      };
-      return IterableExtensions.exists(_declaredConstructors, _function);
+        };
+        _xblockexpression = IterableExtensions.exists(_declaredConstructors, _function);
+      }
+      return _xblockexpression;
     }
     
-    public MutableConstructorDeclaration addFinalFieldsConstructor(final MutableClassDeclaration cls) {
+    public ArrayList<TypeReference> getFinalFieldsConstructorArgumentTypes(final MutableTypeDeclaration cls) {
+      ArrayList<TypeReference> _xblockexpression = null;
+      {
+        final ArrayList<TypeReference> types = CollectionLiterals.<TypeReference>newArrayList();
+        ResolvedConstructor _superConstructor = this.getSuperConstructor(cls);
+        boolean _tripleNotEquals = (_superConstructor != null);
+        if (_tripleNotEquals) {
+          ResolvedConstructor _superConstructor_1 = this.getSuperConstructor(cls);
+          Iterable<? extends ResolvedParameter> _resolvedParameters = _superConstructor_1.getResolvedParameters();
+          final Function1<ResolvedParameter, TypeReference> _function = new Function1<ResolvedParameter, TypeReference>() {
+            public TypeReference apply(final ResolvedParameter it) {
+              return it.getResolvedType();
+            }
+          };
+          Iterable<TypeReference> _map = IterableExtensions.map(_resolvedParameters, _function);
+          Iterables.<TypeReference>addAll(types, _map);
+        }
+        Iterable<? extends MutableFieldDeclaration> _finalFields = this.getFinalFields(cls);
+        final Function1<MutableFieldDeclaration, TypeReference> _function_1 = new Function1<MutableFieldDeclaration, TypeReference>() {
+          public TypeReference apply(final MutableFieldDeclaration it) {
+            return it.getType();
+          }
+        };
+        Iterable<TypeReference> _map_1 = IterableExtensions.map(_finalFields, _function_1);
+        Iterables.<TypeReference>addAll(types, _map_1);
+        _xblockexpression = types;
+      }
+      return _xblockexpression;
+    }
+    
+    public String getConstructorAlreadyExistsMessage(final MutableTypeDeclaration it) {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("Cannot create FinalFieldsConstructor as a constructor with the signature \"new(");
+      ArrayList<TypeReference> _finalFieldsConstructorArgumentTypes = this.getFinalFieldsConstructorArgumentTypes(it);
+      String _join = IterableExtensions.join(_finalFieldsConstructorArgumentTypes, ",");
+      _builder.append(_join, "");
+      _builder.append(")\" already exists.");
+      return _builder.toString();
+    }
+    
+    public void addFinalFieldsConstructor(final MutableClassDeclaration it) {
+      boolean _hasFinalFieldsConstructor = this.hasFinalFieldsConstructor(it);
+      if (_hasFinalFieldsConstructor) {
+        String _constructorAlreadyExistsMessage = this.getConstructorAlreadyExistsMessage(it);
+        this.context.addError(it, _constructorAlreadyExistsMessage);
+        return;
+      }
       final Procedure1<MutableConstructorDeclaration> _function = new Procedure1<MutableConstructorDeclaration>() {
         public void apply(final MutableConstructorDeclaration it) {
-          NamedElement _primarySourceElement = Util.this.context.getPrimarySourceElement(cls);
+          MutableTypeDeclaration _declaringType = it.getDeclaringType();
+          NamedElement _primarySourceElement = Util.this.context.getPrimarySourceElement(_declaringType);
           Util.this.context.setPrimarySourceElement(it, _primarySourceElement);
           Util.this.makeFinalFieldsConstructor(it);
         }
       };
-      return cls.addConstructor(_function);
+      it.addConstructor(_function);
     }
     
-    public MutableConstructorDeclaration makeFinalFieldsConstructor(final MutableConstructorDeclaration ctor) {
-      final Procedure1<MutableConstructorDeclaration> _function = new Procedure1<MutableConstructorDeclaration>() {
-        public void apply(final MutableConstructorDeclaration it) {
-          Iterable<? extends ResolvedParameter> _elvis = null;
-          MutableTypeDeclaration _declaringType = ctor.getDeclaringType();
-          ResolvedConstructor _superConstructor = Util.this.getSuperConstructor(_declaringType);
-          Iterable<? extends ResolvedParameter> _resolvedParameters = null;
-          if (_superConstructor!=null) {
-            _resolvedParameters=_superConstructor.getResolvedParameters();
-          }
-          if (_resolvedParameters != null) {
-            _elvis = _resolvedParameters;
-          } else {
-            _elvis = Collections.<ResolvedParameter>unmodifiableList(CollectionLiterals.<ResolvedParameter>newArrayList());
-          }
-          final Iterable<? extends ResolvedParameter> superParameters = _elvis;
-          final Procedure1<ResolvedParameter> _function = new Procedure1<ResolvedParameter>() {
-            public void apply(final ResolvedParameter p) {
-              ParameterDeclaration _declaration = p.getDeclaration();
-              String _simpleName = _declaration.getSimpleName();
-              TypeReference _resolvedType = p.getResolvedType();
-              it.addParameter(_simpleName, _resolvedType);
-            }
-          };
-          IterableExtensions.forEach(superParameters, _function);
-          final HashMap<MutableFieldDeclaration, MutableParameterDeclaration> fieldToParameter = CollectionLiterals.<MutableFieldDeclaration, MutableParameterDeclaration>newHashMap();
-          MutableTypeDeclaration _declaringType_1 = it.getDeclaringType();
-          Iterable<? extends MutableFieldDeclaration> _finalFields = Util.this.getFinalFields(_declaringType_1);
-          final Procedure1<MutableFieldDeclaration> _function_1 = new Procedure1<MutableFieldDeclaration>() {
-            public void apply(final MutableFieldDeclaration p) {
-              p.markAsInitializedBy(ctor);
-              String _simpleName = p.getSimpleName();
-              TypeReference _type = p.getType();
-              final MutableParameterDeclaration param = it.addParameter(_simpleName, _type);
-              fieldToParameter.put(p, param);
-            }
-          };
-          IterableExtensions.forEach(_finalFields, _function_1);
-          StringConcatenationClient _client = new StringConcatenationClient() {
-            @Override
-            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-              _builder.append("super(");
-              final Function1<ResolvedParameter, String> _function = new Function1<ResolvedParameter, String>() {
-                public String apply(final ResolvedParameter it) {
-                  ParameterDeclaration _declaration = it.getDeclaration();
-                  return _declaration.getSimpleName();
-                }
-              };
-              String _join = IterableExtensions.join(superParameters, ", ", _function);
-              _builder.append(_join, "");
-              _builder.append(");");
-              _builder.newLineIfNotEmpty();
-              {
-                MutableTypeDeclaration _declaringType = it.getDeclaringType();
-                Iterable<? extends MutableFieldDeclaration> _finalFields = Util.this.getFinalFields(_declaringType);
-                for(final MutableFieldDeclaration arg : _finalFields) {
-                  _builder.append("this.");
-                  String _simpleName = arg.getSimpleName();
-                  _builder.append(_simpleName, "");
-                  _builder.append(" = ");
-                  MutableParameterDeclaration _get = fieldToParameter.get(arg);
-                  String _simpleName_1 = _get.getSimpleName();
-                  _builder.append(_simpleName_1, "");
-                  _builder.append(";");
-                  _builder.newLineIfNotEmpty();
-                }
-              }
-            }
-          };
-          it.setBody(_client);
+    private final static Pattern EMPTY_BODY = Pattern.compile("\\{\\s*\\}");
+    
+    public void makeFinalFieldsConstructor(final MutableConstructorDeclaration it) {
+      MutableTypeDeclaration _declaringType = it.getDeclaringType();
+      boolean _hasFinalFieldsConstructor = this.hasFinalFieldsConstructor(_declaringType);
+      if (_hasFinalFieldsConstructor) {
+        MutableTypeDeclaration _declaringType_1 = it.getDeclaringType();
+        String _constructorAlreadyExistsMessage = this.getConstructorAlreadyExistsMessage(_declaringType_1);
+        this.context.addError(it, _constructorAlreadyExistsMessage);
+        return;
+      }
+      Iterable<? extends MutableParameterDeclaration> _parameters = it.getParameters();
+      boolean _isEmpty = IterableExtensions.isEmpty(_parameters);
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        this.context.addError(it, "Parameter list must be empty");
+      }
+      boolean _and = false;
+      Expression _body = it.getBody();
+      boolean _tripleNotEquals = (_body != null);
+      if (!_tripleNotEquals) {
+        _and = false;
+      } else {
+        Expression _body_1 = it.getBody();
+        String _string = _body_1.toString();
+        Matcher _matcher = FinalFieldsConstructorProcessor.Util.EMPTY_BODY.matcher(_string);
+        boolean _matches = _matcher.matches();
+        boolean _not_1 = (!_matches);
+        _and = _not_1;
+      }
+      if (_and) {
+        this.context.addError(it, "Body must be empty");
+      }
+      Iterable<? extends ResolvedParameter> _elvis = null;
+      MutableTypeDeclaration _declaringType_2 = it.getDeclaringType();
+      ResolvedConstructor _superConstructor = this.getSuperConstructor(_declaringType_2);
+      Iterable<? extends ResolvedParameter> _resolvedParameters = null;
+      if (_superConstructor!=null) {
+        _resolvedParameters=_superConstructor.getResolvedParameters();
+      }
+      if (_resolvedParameters != null) {
+        _elvis = _resolvedParameters;
+      } else {
+        _elvis = Collections.<ResolvedParameter>unmodifiableList(CollectionLiterals.<ResolvedParameter>newArrayList());
+      }
+      final Iterable<? extends ResolvedParameter> superParameters = _elvis;
+      final Procedure1<ResolvedParameter> _function = new Procedure1<ResolvedParameter>() {
+        public void apply(final ResolvedParameter p) {
+          ParameterDeclaration _declaration = p.getDeclaration();
+          String _simpleName = _declaration.getSimpleName();
+          TypeReference _resolvedType = p.getResolvedType();
+          it.addParameter(_simpleName, _resolvedType);
         }
       };
-      return ObjectExtensions.<MutableConstructorDeclaration>operator_doubleArrow(ctor, _function);
+      IterableExtensions.forEach(superParameters, _function);
+      final HashMap<MutableFieldDeclaration, MutableParameterDeclaration> fieldToParameter = CollectionLiterals.<MutableFieldDeclaration, MutableParameterDeclaration>newHashMap();
+      MutableTypeDeclaration _declaringType_3 = it.getDeclaringType();
+      Iterable<? extends MutableFieldDeclaration> _finalFields = this.getFinalFields(_declaringType_3);
+      final Procedure1<MutableFieldDeclaration> _function_1 = new Procedure1<MutableFieldDeclaration>() {
+        public void apply(final MutableFieldDeclaration p) {
+          p.markAsInitializedBy(it);
+          String _simpleName = p.getSimpleName();
+          TypeReference _type = p.getType();
+          final MutableParameterDeclaration param = it.addParameter(_simpleName, _type);
+          fieldToParameter.put(p, param);
+        }
+      };
+      IterableExtensions.forEach(_finalFields, _function_1);
+      StringConcatenationClient _client = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          _builder.append("super(");
+          final Function1<ResolvedParameter, String> _function = new Function1<ResolvedParameter, String>() {
+            public String apply(final ResolvedParameter it) {
+              ParameterDeclaration _declaration = it.getDeclaration();
+              return _declaration.getSimpleName();
+            }
+          };
+          String _join = IterableExtensions.join(superParameters, ", ", _function);
+          _builder.append(_join, "");
+          _builder.append(");");
+          _builder.newLineIfNotEmpty();
+          {
+            MutableTypeDeclaration _declaringType = it.getDeclaringType();
+            Iterable<? extends MutableFieldDeclaration> _finalFields = Util.this.getFinalFields(_declaringType);
+            for(final MutableFieldDeclaration arg : _finalFields) {
+              _builder.append("this.");
+              String _simpleName = arg.getSimpleName();
+              _builder.append(_simpleName, "");
+              _builder.append(" = ");
+              MutableParameterDeclaration _get = fieldToParameter.get(arg);
+              String _simpleName_1 = _get.getSimpleName();
+              _builder.append(_simpleName_1, "");
+              _builder.append(";");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
+      };
+      it.setBody(_client);
     }
     
     public ResolvedConstructor getSuperConstructor(final TypeDeclaration it) {
@@ -273,37 +334,12 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
     }
     @Extension
     final FinalFieldsConstructorProcessor.Util util = new FinalFieldsConstructorProcessor.Util(context);
-    boolean _hasFinalFieldsConstructor = util.hasFinalFieldsConstructor(it);
-    if (_hasFinalFieldsConstructor) {
-      context.addError(it, "A RequiredArgsConstructor is already defined");
-    }
     util.addFinalFieldsConstructor(it);
   }
-  
-  private final static Pattern EMPTY_BODY = Pattern.compile("\\{\\s*\\}");
   
   protected void _transform(final MutableConstructorDeclaration it, @Extension final TransformationContext context) {
     @Extension
     final FinalFieldsConstructorProcessor.Util util = new FinalFieldsConstructorProcessor.Util(context);
-    Iterable<? extends MutableParameterDeclaration> _parameters = it.getParameters();
-    boolean _isEmpty = IterableExtensions.isEmpty(_parameters);
-    boolean _not = (!_isEmpty);
-    if (_not) {
-      context.addError(it, "Parameter list must be empty");
-    }
-    Expression _body = it.getBody();
-    String _string = _body.toString();
-    Matcher _matcher = FinalFieldsConstructorProcessor.EMPTY_BODY.matcher(_string);
-    boolean _matches = _matcher.matches();
-    boolean _not_1 = (!_matches);
-    if (_not_1) {
-      context.addError(it, "Body must be empty");
-    }
-    MutableTypeDeclaration _declaringType = it.getDeclaringType();
-    boolean _hasFinalFieldsConstructor = util.hasFinalFieldsConstructor(_declaringType);
-    if (_hasFinalFieldsConstructor) {
-      context.addError(it, "A FinalFieldsConstructor is already defined");
-    }
     util.makeFinalFieldsConstructor(it);
   }
   

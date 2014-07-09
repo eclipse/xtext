@@ -181,7 +181,7 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       _builder.newLine();
       final String source = _builder.toString();
       XtendClass _clazz = this.clazz(source);
-      this._validationTestHelper.assertError(_clazz, XtendPackage.Literals.XTEND_CONSTRUCTOR, "user.issue", "FinalFieldsConstructor", "already defined");
+      this._validationTestHelper.assertError(_clazz, XtendPackage.Literals.XTEND_CONSTRUCTOR, "user.issue", "FinalFieldsConstructor", "new(int)", "already exists");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -208,7 +208,7 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       _builder.newLine();
       final String source = _builder.toString();
       XtendClass _clazz = this.clazz(source);
-      this._validationTestHelper.assertError(_clazz, XtendPackage.Literals.XTEND_CONSTRUCTOR, "user.issue", "FinalFieldsConstructor", "already defined");
+      this._validationTestHelper.assertError(_clazz, XtendPackage.Literals.XTEND_CONSTRUCTOR, "user.issue", "FinalFieldsConstructor", "new(int)", "already exists");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

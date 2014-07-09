@@ -79,7 +79,7 @@ class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTest {
 				@FinalFieldsConstructor new() {}
 			}
 		'''
-		source.clazz.assertError(XtendPackage.Literals.XTEND_CONSTRUCTOR, "user.issue", "FinalFieldsConstructor", "already defined")
+		source.clazz.assertError(XtendPackage.Literals.XTEND_CONSTRUCTOR, "user.issue", "FinalFieldsConstructor", "new(int)", "already exists")
 	}
 	
 	@Test def testDuplicate2() {
@@ -91,7 +91,7 @@ class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTest {
 				@FinalFieldsConstructor new() {}
 			}
 		'''
-		source.clazz.assertError(XtendPackage.Literals.XTEND_CONSTRUCTOR, "user.issue", "FinalFieldsConstructor", "already defined")
+		source.clazz.assertError(XtendPackage.Literals.XTEND_CONSTRUCTOR, "user.issue", "FinalFieldsConstructor", "new(int)", "already exists")
 	}
 	
 	@Test def testParameterListValidation() {
