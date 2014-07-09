@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aggregator:Aggregation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:aggregator="http://www.eclipse.org/b3/2011/aggregator/1.1.0" label="Luna" buildRoot="./local-repo/" packedStrategy="SKIP">
+  <validationSets description="Luna Distro" label="Luna">
+    <contributions href="../aggregator/xtext.b3aggrcon#/"/>
+    <contributions href="../aggregator/common.b3aggrcon#/"/>
+    <validationRepositories location="http://download.eclipse.org/eclipse/updates/4.4/"/>
+    <validationRepositories location="http://download.eclipse.org/releases/luna/"/>
+  </validationSets>
+  <configurations/>
+</aggregator:Aggregation>
