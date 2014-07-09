@@ -24,6 +24,104 @@ class XImportSectionValidationTest extends AbstractXtendTestCase {
 
 	@Inject
 	extension ValidationTestHelper
+	
+	@Test def void checkUnnecessaryImportForEnumLiteral_1() {
+		val file = '''
+			import static java.lang.annotation.RetentionPolicy.*
+			
+			class C {
+				def m(java.lang.annotation.RetentionPolicy p) {
+					switch(p) {
+						case CLASS: true
+						default: false
+					}
+				}
+			}
+		'''.toString.file
+		file.assertWarning(XIMPORT_DECLARATION, IMPORT_UNUSED, "The import 'java.lang.annotation.RetentionPolicy' is never used.")
+	}
+	
+	@Test def void checkUnnecessaryImportForEnumLiteral_2() {
+		val file = '''
+			import static java.lang.annotation.ElementType.*
+			
+			class C {
+				def m(java.lang.annotation.RetentionPolicy p) {
+					switch(p) {
+						case TYPE: true
+						default: false
+					}
+				}
+			}
+		'''.toString.file
+		file.assertNoWarnings(XIMPORT_DECLARATION, IMPORT_UNUSED)
+	}
+	
+	@Test def void checkUnnecessaryImportForEnumLiteral_3() {
+		val file = '''
+			import static java.lang.annotation.RetentionPolicy.*
+			
+			@java.lang.annotation.Retention(CLASS)
+			annotation A {
+			}
+		'''.toString.file
+		file.assertWarning(XIMPORT_DECLARATION, IMPORT_UNUSED, "The import 'java.lang.annotation.RetentionPolicy' is never used.")
+	}
+	
+	@Test def void checkUnnecessaryImportForEnumLiteral_4() {
+		val file = '''
+			import static java.lang.annotation.ElementType.*
+			
+			@java.lang.annotation.Target(TYPE, METHOD)
+			annotation A {
+			}
+		'''.toString.file
+		file.assertWarning(XIMPORT_DECLARATION, IMPORT_UNUSED, "The import 'java.lang.annotation.ElementType' is never used.")
+	}
+	
+	@Test def void checkUnnecessaryImportForEnumLiteral_5() {
+		val file = '''
+			import static java.lang.annotation.ElementType.*
+			
+			@java.lang.annotation.Retention(TYPE, METHOD)
+			annotation A {
+			}
+		'''.toString.file
+		file.assertNoWarnings(XIMPORT_DECLARATION, IMPORT_UNUSED)
+	}
+	
+	@Test def void checkUnnecessaryImportForEnumLiteral_6() {
+		val file = '''
+			import static java.lang.annotation.RetentionPolicy.*
+			
+			@java.lang.annotation.Retention(value=CLASS)
+			annotation A {
+			}
+		'''.toString.file
+		file.assertWarning(XIMPORT_DECLARATION, IMPORT_UNUSED, "The import 'java.lang.annotation.RetentionPolicy' is never used.")
+	}
+	
+	@Test def void checkUnnecessaryImportForEnumLiteral_7() {
+		val file = '''
+			import static java.lang.annotation.ElementType.*
+			
+			@java.lang.annotation.Target(value=#[TYPE, METHOD])
+			annotation A {
+			}
+		'''.toString.file
+		file.assertWarning(XIMPORT_DECLARATION, IMPORT_UNUSED, "The import 'java.lang.annotation.ElementType' is never used.")
+	}
+	
+	@Test def void checkUnnecessaryImportForEnumLiteral_8() {
+		val file = '''
+			import static java.lang.annotation.ElementType.*
+			
+			@java.lang.annotation.Retention(value=#[TYPE, METHOD])
+			annotation A {
+			}
+		'''.toString.file
+		file.assertNoWarnings(XIMPORT_DECLARATION, IMPORT_UNUSED)
+	}
 
 	@Test def void checkImportWithStaticAccess_0() {
 		val file = '''
