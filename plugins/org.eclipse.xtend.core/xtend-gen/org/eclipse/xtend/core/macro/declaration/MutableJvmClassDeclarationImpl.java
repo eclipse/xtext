@@ -48,6 +48,7 @@ import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
 @SuppressWarnings("all")
 public class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl implements MutableClassDeclaration {
   public void markAsRead() {
+    this.checkMutable();
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     ReadAndWriteTracking _readAndWriteTracking = _compilationUnit.getReadAndWriteTracking();
     JvmGenericType _delegate = this.getDelegate();
@@ -110,26 +111,31 @@ public class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl impl
   }
   
   public void setStrictFloatingPoint(final boolean isStrictFloatingPoint) {
+    this.checkMutable();
     JvmGenericType _delegate = this.getDelegate();
     _delegate.setStrictFloatingPoint(isStrictFloatingPoint);
   }
   
   public void setAbstract(final boolean isAbstract) {
+    this.checkMutable();
     JvmGenericType _delegate = this.getDelegate();
     _delegate.setAbstract(isAbstract);
   }
   
   public void setFinal(final boolean isFinal) {
+    this.checkMutable();
     JvmGenericType _delegate = this.getDelegate();
     _delegate.setFinal(isFinal);
   }
   
   public void setStatic(final boolean isStatic) {
+    this.checkMutable();
     JvmGenericType _delegate = this.getDelegate();
     _delegate.setStatic(isStatic);
   }
   
   public void setExtendedClass(final TypeReference superclass) {
+    this.checkMutable();
     ConditionUtils.checkInferredTypeReferences("extended class", superclass);
     JvmTypeReference _xifexpression = null;
     boolean _notEquals = (!Objects.equal(superclass, null));
@@ -174,6 +180,7 @@ public class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl impl
   }
   
   public void setImplementedInterfaces(final Iterable<? extends TypeReference> superInterfaces) {
+    this.checkMutable();
     ConditionUtils.checkIterable(superInterfaces, "superIntefaces");
     ConditionUtils.checkInferredTypeReferences("implemented interface", ((TypeReference[])Conversions.unwrapArray(superInterfaces, TypeReference.class)));
     JvmGenericType _delegate = this.getDelegate();
@@ -209,6 +216,7 @@ public class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl impl
   }
   
   public MutableTypeParameterDeclaration addTypeParameter(final String name, final TypeReference... upperBounds) {
+    this.checkMutable();
     ConditionUtils.checkJavaIdentifier(name, "name");
     ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(upperBounds)), "upperBounds");
     ConditionUtils.checkInferredTypeReferences("parameter type", upperBounds);

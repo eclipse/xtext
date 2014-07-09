@@ -74,12 +74,18 @@ import static extension org.eclipse.xtext.EcoreUtil2.*
 abstract class JvmElementImpl<T extends EObject> extends AbstractElementImpl<T> {
 	
 	def remove() {
+		checkMutable
 		Preconditions.checkState(delegate.eResource != null, '''This element has already been removed: «delegate»''')
 		
 		compilationUnit.jvmModelAssociator.removeAllAssociation(delegate)
 		EcoreUtil.remove(delegate)
 		
 		Preconditions.checkState(delegate.eResource == null, '''Couldn't remove: «delegate»''')
+	}
+	
+	protected final def checkMutable() {
+		if (!compilationUnit.modifyAllowed) 
+			throw new IllegalStateException("Element cannot be modified after the transformation phase")
 	}
 	
 }
@@ -103,6 +109,7 @@ abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> extends Jv
 	}
 	
 	def addAnnotation(AnnotationReference annotationReference) {
+		checkMutable
 		Preconditions.checkArgument(annotationReference != null, "annotationReference cannot be null")
 		if (annotationReference instanceof JvmAnnotationReferenceImpl) {
 			val jvmAnnotationReference = annotationReference.delegate.cloneWithProxies
@@ -114,6 +121,7 @@ abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> extends Jv
 	}
 	
 	def boolean removeAnnotation(AnnotationReference annotationReference) {
+		checkMutable
 		if (annotationReference instanceof JvmAnnotationReferenceImpl) {
 			return this.delegate.annotations.remove(annotationReference.delegate)
 		}
@@ -134,6 +142,7 @@ abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotati
 	}
 	
 	def setDocComment(String docComment) {
+		checkMutable
 		var adapter = EcoreUtil.getAdapter(delegate.eAdapters(), DocumentationAdapter) as DocumentationAdapter;
 		if (adapter == null) {
 			adapter = new DocumentationAdapter
@@ -147,6 +156,7 @@ abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotati
 	}
 	
 	def setVisibility(Visibility visibility) {
+		checkMutable
 		delegate.visibility = switch visibility {
 			case Visibility.DEFAULT : JvmVisibility.DEFAULT
 			case Visibility.PUBLIC : JvmVisibility.PUBLIC
@@ -160,6 +170,7 @@ abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotati
 	}
 	
 	def setSimpleName(String name) {
+		checkMutable
 		checkJavaIdentifier(name, "name");
 		switch (it: delegate) {
 			JvmMemberImplCustom : clearIdentifierCache
@@ -192,6 +203,7 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 	}
 	
 	def addConstructor(Procedure1<MutableConstructorDeclaration> initializer) {
+		checkMutable
 		Preconditions.checkArgument(initializer != null, "initializer cannot be null")
 		// remove default constructor
 		val constructor = delegate.members.filter(JvmConstructor).findFirst[compilationUnit.typeExtensions.isSingleSyntheticDefaultConstructor(it)]
@@ -208,6 +220,7 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 	}
 	
 	def addField(String name, Procedure1<MutableFieldDeclaration> initializer) {
+		checkMutable
 		checkJavaIdentifier(name, "name")
 		Preconditions.checkArgument(initializer != null, "initializer cannot be null")
 		val newField = TypesFactory.eINSTANCE.createJvmField
@@ -220,6 +233,7 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 	}
 	
 	def addMethod(String name, Procedure1<MutableMethodDeclaration> initializer) {
+		checkMutable
 		checkJavaIdentifier(name, "name")
 		Preconditions.checkArgument(initializer != null, "initializer cannot be null")
 		val newMethod = TypesFactory.eINSTANCE.createJvmOperation
@@ -279,6 +293,7 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 class MutableJvmInterfaceDeclarationImpl extends JvmInterfaceDeclarationImpl implements MutableInterfaceDeclaration {
 	
 	override markAsRead() {
+		checkMutable
 		compilationUnit.readAndWriteTracking.markReadAccess(delegate)
 	}
 	
@@ -327,6 +342,7 @@ class MutableJvmInterfaceDeclarationImpl extends JvmInterfaceDeclarationImpl imp
 	}
 	
 	override setExtendedInterfaces(Iterable<? extends TypeReference> superinterfaces) {
+		checkMutable
 		checkIterable(superinterfaces, "superinterfaces")
 		delegate.superTypes.clear
 		for (typeRef : superinterfaces) {
@@ -337,10 +353,12 @@ class MutableJvmInterfaceDeclarationImpl extends JvmInterfaceDeclarationImpl imp
 	}
 	
 	override setStrictFloatingPoint(boolean isStrictFloatingPoint) {
+		checkMutable
 		delegate.setStrictFloatingPoint(isStrictFloatingPoint)
 	}
 	
 	override addTypeParameter(String name, TypeReference... upperBounds) {
+		checkMutable
 		checkJavaIdentifier(name, "name");
 		checkIterable(upperBounds, "upperBounds")
 		checkInferredTypeReferences("parameter type", upperBounds)
@@ -374,6 +392,7 @@ class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType>
 	}
 	
 	override addMethod(String name, Procedure1<MutableMethodDeclaration> initializer) {
+		checkMutable
 		val result = super.addMethod(name, initializer)
 		result.setAbstract(true)
 		return result;
@@ -388,6 +407,7 @@ class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType>
 class MutableJvmAnnotationTypeDeclarationImpl extends JvmAnnotationTypeDeclarationImpl implements MutableAnnotationTypeDeclaration {
 	
 	override markAsRead() {
+		checkMutable
 		compilationUnit.readAndWriteTracking.markReadAccess(delegate)
 	}
 	
@@ -432,6 +452,7 @@ class MutableJvmAnnotationTypeDeclarationImpl extends JvmAnnotationTypeDeclarati
 	}
 	
 	override MutableAnnotationTypeElementDeclaration addAnnotationTypeElement(String name, Procedure1<MutableAnnotationTypeElementDeclaration> initializer) {
+		checkMutable
 		checkJavaIdentifier(name, "name")
 		Preconditions.checkArgument(initializer != null, "initializer cannot be null")
 		val newAnnotationElement = TypesFactory.eINSTANCE.createJvmOperation
@@ -480,6 +501,7 @@ class JvmAnnotationTypeDeclarationImpl extends JvmTypeDeclarationImpl<JvmAnnotat
 class MutableJvmEnumerationTypeDeclarationImpl extends JvmEnumerationTypeDeclarationImpl implements MutableEnumerationTypeDeclaration {
 	
 	override markAsRead() {
+		checkMutable
 		compilationUnit.readAndWriteTracking.markReadAccess(delegate)
 	}
 	
@@ -532,6 +554,7 @@ class MutableJvmEnumerationTypeDeclarationImpl extends JvmEnumerationTypeDeclara
 	}
 	
 	override addValue(String name, Procedure1<MutableEnumerationValueDeclaration> initializer) {
+		checkMutable
 		checkJavaIdentifier(name, "name")
 		Preconditions.checkArgument(initializer != null, "initializer cannot be null")
 		val jvmLiteral = TypesFactory.eINSTANCE.createJvmEnumerationLiteral
@@ -560,6 +583,7 @@ class JvmEnumerationTypeDeclarationImpl extends JvmTypeDeclarationImpl<JvmEnumer
 class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl implements MutableClassDeclaration {
 	
 	override markAsRead() {
+		checkMutable
 		compilationUnit.readAndWriteTracking.markReadAccess(delegate)
 	}
 	
@@ -608,22 +632,27 @@ class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl implements 
 	}
 
 	override setStrictFloatingPoint(boolean isStrictFloatingPoint) {
+		checkMutable
 		delegate.setStrictFloatingPoint(isStrictFloatingPoint)
 	}
 
 	override setAbstract(boolean isAbstract) {
+		checkMutable
 		delegate.setAbstract(isAbstract)
 	}
 	
 	override setFinal(boolean isFinal) {
+		checkMutable
 		delegate.setFinal(isFinal)
 	}
 	
 	override setStatic(boolean isStatic) {
+		checkMutable
 		delegate.setStatic(isStatic)
 	}
 	
 	override setExtendedClass(TypeReference superclass) {
+		checkMutable
 		checkInferredTypeReferences("extended class", superclass)
 		val newTypeRef = 
 			if (superclass != null) {
@@ -638,6 +667,7 @@ class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl implements 
 	}
 	
 	override setImplementedInterfaces(Iterable<? extends TypeReference> superInterfaces) {
+		checkMutable
 		checkIterable(superInterfaces, "superIntefaces")
 		checkInferredTypeReferences("implemented interface", superInterfaces)
 		val oldInterfaces = delegate.superTypes.filter[it.type instanceof JvmGenericType && (type as JvmGenericType).isInterface]
@@ -648,6 +678,7 @@ class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl implements 
 	}
 	
 	override addTypeParameter(String name, TypeReference... upperBounds) {
+		checkMutable
 		checkJavaIdentifier(name, "name")
 		checkIterable(upperBounds, "upperBounds")
 		checkInferredTypeReferences("parameter type", upperBounds)
@@ -739,6 +770,7 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 	}
 	
 	def setBody(Expression body) {
+		checkMutable
 		if (body == null) {
 			compilationUnit.jvmTypesBuilder.removeExistingBody(delegate)
 		} else {
@@ -747,6 +779,7 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 	}
 	
 	def setExceptions(TypeReference... exceptions) {
+		checkMutable
 		checkIterable(exceptions, "exceptions")
 		checkInferredTypeReferences("exception type", exceptions)
 		delegate.exceptions.clear
@@ -758,10 +791,12 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 	}
 	
 	def setVarArgs(boolean isVarArgs) {
+		checkMutable
 		delegate.setVarArgs(isVarArgs)
 	}
 	
 	def MutableTypeParameterDeclaration addTypeParameter(String name, TypeReference... upperBounds) {
+		checkMutable
 		checkJavaIdentifier(name, "name")
 		checkIterable(upperBounds, "upperBounds")
 		checkInferredTypeReferences("parameter type", upperBounds)
@@ -778,16 +813,19 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 	}
 	
 	def setBody(CompilationStrategy compilationStrategy) {
+		checkMutable
 		Preconditions.checkArgument(compilationStrategy != null, "compilationStrategy cannot be null")
 		compilationUnit.setCompilationStrategy(delegate, compilationStrategy)
 	}
 	
 	def setBody(StringConcatenationClient compilationTemplate) {
+		checkMutable
 		Preconditions.checkArgument(compilationTemplate != null, "compilationTemplate cannot be null")
 		compilationUnit.setCompilationTemplate(delegate, compilationTemplate)
 	}
 	
 	def MutableParameterDeclaration addParameter(String name, TypeReference type) {
+		checkMutable
 		checkJavaIdentifier(name, "name");
 		Preconditions.checkArgument(type != null, "type cannot be null");
 		if (type.inferred)
@@ -804,6 +842,7 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 class MutableJvmParameterDeclarationImpl extends JvmParameterDeclarationImpl implements MutableParameterDeclaration {
 	
 	override markAsRead() {
+		checkMutable
 		compilationUnit.readAndWriteTracking.markReadAccess(delegate)
 	}
 	
@@ -812,6 +851,7 @@ class MutableJvmParameterDeclarationImpl extends JvmParameterDeclarationImpl imp
 	}
 	
 	override setSimpleName(String name) {
+		checkMutable
 		checkJavaIdentifier(name, "name");
 		delegate.name = name
 	}
@@ -833,6 +873,7 @@ class JvmParameterDeclarationImpl extends JvmAnnotationTargetImpl<JvmFormalParam
 class MutableJvmMethodDeclarationImpl extends JvmMethodDeclarationImpl implements MutableMethodDeclaration {
 	
 	override markAsRead() {
+		checkMutable
 		compilationUnit.readAndWriteTracking.markReadAccess(delegate)
 	}
 	
@@ -849,23 +890,28 @@ class MutableJvmMethodDeclarationImpl extends JvmMethodDeclarationImpl implement
 	}
 	
 	override setStrictFloatingPoint(boolean isStrictFloatingPoint) {
+		checkMutable
 		delegate.setStrictFloatingPoint(isStrictFloatingPoint)
 	}
 
 	override setNative(boolean isNative) {
+		checkMutable
 		delegate.setNative(isNative)
 	}
 
 	override setReturnType(TypeReference type) {
+		checkMutable
 		Preconditions.checkArgument(type != null, "returnType cannot be null");
 		delegate.setReturnType(compilationUnit.toJvmTypeReference(type))
 	}
 	
 	override setAbstract(boolean isAbstract) {
+		checkMutable
 		delegate.setAbstract(isAbstract)
 	}
 	
 	override setFinal(boolean isFinal) {
+		checkMutable
 		delegate.setFinal(isFinal)
 	}
 	
@@ -874,14 +920,17 @@ class MutableJvmMethodDeclarationImpl extends JvmMethodDeclarationImpl implement
 //	}
 	
 	override setStatic(boolean isStatic) {
+		checkMutable
 		delegate.setStatic(isStatic)
 	}
 	
 	override setSynchronized(boolean isSynchronized) {
+		checkMutable
 		delegate.setSynchronized(isSynchronized)
 	}
 	
 	override setDefault(boolean isDefault) {
+		checkMutable
 		delegate.setDefault(isDefault)
 	}
 	
@@ -930,6 +979,7 @@ class JvmMethodDeclarationImpl extends JvmExecutableDeclarationImpl<JvmOperation
 class MutableJvmConstructorDeclarationImpl extends JvmConstructorDeclarationImpl implements MutableConstructorDeclaration {
 	
 	override markAsRead() {
+		checkMutable
 		compilationUnit.readAndWriteTracking.markReadAccess(delegate)
 	}
 	
@@ -958,6 +1008,7 @@ class JvmConstructorDeclarationImpl extends JvmExecutableDeclarationImpl<JvmCons
 class MutableJvmEnumerationValueDeclarationImpl extends JvmEnumerationValueDeclarationImpl implements MutableEnumerationValueDeclaration {
 	
 	override markAsRead() {
+		checkMutable
 		compilationUnit.readAndWriteTracking.markReadAccess(delegate)
 	}
 	
@@ -982,6 +1033,7 @@ class JvmEnumerationValueDeclarationImpl extends JvmMemberDeclarationImpl<JvmEnu
 class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl implements MutableFieldDeclaration {
 	
 	override markAsRead() {
+		checkMutable
 		compilationUnit.readAndWriteTracking.markReadAccess(delegate)
 	}
 	
@@ -990,6 +1042,7 @@ class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl implements 
 	}
 	
 	override markAsInitializedBy(ConstructorDeclaration constructorDeclaration) {
+		checkMutable
 		val constructor = switch constructorDeclaration {
 			JvmConstructorDeclarationImpl: constructorDeclaration.delegate
 			XtendConstructorDeclarationImpl: {
@@ -1007,6 +1060,7 @@ class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl implements 
 	}
 	
 	override setInitializer(Expression initializer) {
+		checkMutable
 		if (initializer == null) {
 			compilationUnit.jvmTypesBuilder.removeExistingBody(delegate)
 		} else {
@@ -1015,32 +1069,39 @@ class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl implements 
 	}
 	
 	override setInitializer(CompilationStrategy initializer) {
+		checkMutable
 		Preconditions.checkArgument(initializer != null, "initializer cannot be null")
 		compilationUnit.setCompilationStrategy(delegate, initializer)
 	}
 	
 	override setInitializer(StringConcatenationClient template) {
+		checkMutable
 		Preconditions.checkArgument(template != null, "template cannot be null")
 		compilationUnit.setCompilationTemplate(delegate, template)
 	}
 
 	override setFinal(boolean isFinal) {
+		checkMutable
 		delegate.setFinal(isFinal)
 	}
 	
 	override setStatic(boolean isStatic) {
+		checkMutable
 		delegate.setStatic(isStatic)
 	}
 	
 	override setTransient(boolean isTransient) {
+		checkMutable
 		delegate.setTransient(isTransient)
 	}
 	
 	override setVolatile(boolean isVolatile) {
+		checkMutable
 		delegate.setVolatile(isVolatile)
 	}
 	
 	override setType(TypeReference type) {
+		checkMutable
 		Preconditions.checkArgument(type != null, "type cannot be null");
 		delegate.setType(compilationUnit.toJvmTypeReference(type))
 	}
@@ -1078,6 +1139,7 @@ class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> impleme
 class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDeclarationImpl implements MutableAnnotationTarget, MutableTypeParameterDeclaration {
 	
 	override markAsRead() {
+		checkMutable
 		compilationUnit.readAndWriteTracking.markReadAccess(delegate)
 	}
 	
@@ -1086,11 +1148,13 @@ class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDeclaration
 	}
 	
 	override setSimpleName(String name) {
+		checkMutable
 		checkJavaIdentifier(name, "name");
 		delegate.name = name
 	}
 	
 	override remove() {
+		checkMutable
 		Preconditions.checkState(delegate.eResource != null, '''This element has already been removed: «delegate»''')
 		
 		compilationUnit.jvmModelAssociator.removeAllAssociation(delegate)
@@ -1108,6 +1172,7 @@ class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDeclaration
 	}
 	
 	override setUpperBounds(Iterable<? extends TypeReference> upperBounds) {
+		checkMutable
 		checkIterable(upperBounds, "upperBounds")
 		checkInferredTypeReferences("parameter type", upperBounds)
 		delegate.constraints.clear
@@ -1119,6 +1184,10 @@ class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDeclaration
 		}
 	}
 	
+	protected final def checkMutable() {
+		if (!compilationUnit.modifyAllowed) 
+			throw new IllegalStateException("Element cannot be modified after the transformation phase")
+	}
 }
 
 class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImpl implements AnnotationTarget, TypeParameterDeclaration {
@@ -1144,6 +1213,7 @@ class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImpl imple
 class MutableJvmAnnotationTypeElementDeclarationImpl extends JvmAnnotationTypeElementDeclarationImpl implements MutableAnnotationTypeElementDeclaration {
 
 	override markAsRead() {
+		checkMutable
 		compilationUnit.readAndWriteTracking.markReadAccess(delegate)
 	}
 	

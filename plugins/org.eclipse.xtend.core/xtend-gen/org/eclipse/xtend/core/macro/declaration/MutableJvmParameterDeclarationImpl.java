@@ -19,6 +19,7 @@ import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
 @SuppressWarnings("all")
 public class MutableJvmParameterDeclarationImpl extends JvmParameterDeclarationImpl implements MutableParameterDeclaration {
   public void markAsRead() {
+    this.checkMutable();
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     ReadAndWriteTracking _readAndWriteTracking = _compilationUnit.getReadAndWriteTracking();
     JvmFormalParameter _delegate = this.getDelegate();
@@ -31,6 +32,7 @@ public class MutableJvmParameterDeclarationImpl extends JvmParameterDeclarationI
   }
   
   public void setSimpleName(final String name) {
+    this.checkMutable();
     ConditionUtils.checkJavaIdentifier(name, "name");
     JvmFormalParameter _delegate = this.getDelegate();
     _delegate.setName(name);

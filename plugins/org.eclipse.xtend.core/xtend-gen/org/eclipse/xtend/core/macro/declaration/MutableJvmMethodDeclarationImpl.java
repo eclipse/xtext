@@ -26,6 +26,7 @@ import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
 @SuppressWarnings("all")
 public class MutableJvmMethodDeclarationImpl extends JvmMethodDeclarationImpl implements MutableMethodDeclaration {
   public void markAsRead() {
+    this.checkMutable();
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     ReadAndWriteTracking _readAndWriteTracking = _compilationUnit.getReadAndWriteTracking();
     JvmOperation _delegate = this.getDelegate();
@@ -48,16 +49,19 @@ public class MutableJvmMethodDeclarationImpl extends JvmMethodDeclarationImpl im
   }
   
   public void setStrictFloatingPoint(final boolean isStrictFloatingPoint) {
+    this.checkMutable();
     JvmOperation _delegate = this.getDelegate();
     _delegate.setStrictFloatingPoint(isStrictFloatingPoint);
   }
   
   public void setNative(final boolean isNative) {
+    this.checkMutable();
     JvmOperation _delegate = this.getDelegate();
     _delegate.setNative(isNative);
   }
   
   public void setReturnType(final TypeReference type) {
+    this.checkMutable();
     boolean _notEquals = (!Objects.equal(type, null));
     Preconditions.checkArgument(_notEquals, "returnType cannot be null");
     JvmOperation _delegate = this.getDelegate();
@@ -67,26 +71,31 @@ public class MutableJvmMethodDeclarationImpl extends JvmMethodDeclarationImpl im
   }
   
   public void setAbstract(final boolean isAbstract) {
+    this.checkMutable();
     JvmOperation _delegate = this.getDelegate();
     _delegate.setAbstract(isAbstract);
   }
   
   public void setFinal(final boolean isFinal) {
+    this.checkMutable();
     JvmOperation _delegate = this.getDelegate();
     _delegate.setFinal(isFinal);
   }
   
   public void setStatic(final boolean isStatic) {
+    this.checkMutable();
     JvmOperation _delegate = this.getDelegate();
     _delegate.setStatic(isStatic);
   }
   
   public void setSynchronized(final boolean isSynchronized) {
+    this.checkMutable();
     JvmOperation _delegate = this.getDelegate();
     _delegate.setSynchronized(isSynchronized);
   }
   
   public void setDefault(final boolean isDefault) {
+    this.checkMutable();
     JvmOperation _delegate = this.getDelegate();
     _delegate.setDefault(isDefault);
   }

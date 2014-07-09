@@ -21,7 +21,7 @@ import com.google.common.annotations.Beta;
  * @author Sven Efftinge
  */
 @Beta
-public abstract class AbstractClassProcessor implements RegisterGlobalsParticipant<ClassDeclaration>, TransformationParticipant<MutableClassDeclaration>, CodeGenerationParticipant<ClassDeclaration> {
+public abstract class AbstractClassProcessor implements RegisterGlobalsParticipant<ClassDeclaration>, TransformationParticipant<MutableClassDeclaration>, CodeGenerationParticipant<ClassDeclaration>, ValidationParticipant<ClassDeclaration> {
 
 	public void doRegisterGlobals(List<? extends ClassDeclaration> annotatedClasses, @Extension RegisterGlobalsContext context) {
 		for (ClassDeclaration annotatedClass : annotatedClasses) {
@@ -63,5 +63,20 @@ public abstract class AbstractClassProcessor implements RegisterGlobalsParticipa
 	 * @see CodeGenerationParticipant#doGenerateCode(List, CodeGenerationContext)
 	 */
 	public void doGenerateCode(ClassDeclaration annotatedClass, @Extension CodeGenerationContext context) {}
+	
+	public void doValidate(List<? extends ClassDeclaration> annotatedClasses, @Extension ValidationContext context) {
+		for (ClassDeclaration annotatedClass : annotatedClasses) {
+			doValidate(annotatedClass, context);
+		}
+	}
+
+	/**
+	 * Invoked by the validator
+	 * @param annotatedClass the generated class that should be validated 
+	 * @param context 
+	 * @see #doValidate(List, ValidationContext)
+	 * @since 2.7
+	 */
+	public void doValidate(ClassDeclaration annotatedClass, @Extension ValidationContext context) {}
 
 }

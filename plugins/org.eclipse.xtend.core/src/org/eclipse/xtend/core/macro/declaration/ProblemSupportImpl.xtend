@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
 class ProblemSupportImpl implements ProblemSupport {
 	
 	CompilationUnitImpl compilationUnit
+	
 	new (CompilationUnitImpl compilationUnit) {
 		this.compilationUnit = compilationUnit
 	}
@@ -35,14 +36,21 @@ class ProblemSupportImpl implements ProblemSupport {
 		compilationUnit.checkCanceled
 	}
 	
+	private def checkValidationAllowed() {
+		if (!compilationUnit.isValidationAllowed)
+			throw new IllegalStateException("Adding issues is not allowed after the validation phase")
+	}
+	
 	override addError(Element element, String message) {
 		checkCanceled
+		checkValidationAllowed
 		val resAndObj = getResourceAndEObject(element)
 		resAndObj.key.errors.add(new EObjectDiagnosticImpl(Severity.ERROR, 'user.issue', message, resAndObj.value, getSignificantFeature(resAndObj.value), -1, null))
 	}
 	
 	override addWarning(Element element, String message) {
 		checkCanceled
+		checkValidationAllowed
 		val resAndObj = getResourceAndEObject(element)
 		resAndObj.key.warnings.add(new EObjectDiagnosticImpl(Severity.WARNING, 'user.issue', message, resAndObj.value, getSignificantFeature(resAndObj.value), -1, null))
 	}

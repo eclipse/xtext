@@ -44,6 +44,7 @@ public abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> ext
   public AnnotationReference addAnnotation(final AnnotationReference annotationReference) {
     AnnotationReference _xblockexpression = null;
     {
+      this.checkMutable();
       boolean _notEquals = (!Objects.equal(annotationReference, null));
       Preconditions.checkArgument(_notEquals, "annotationReference cannot be null");
       AnnotationReference _xifexpression = null;
@@ -71,6 +72,7 @@ public abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> ext
   }
   
   public boolean removeAnnotation(final AnnotationReference annotationReference) {
+    this.checkMutable();
     if ((annotationReference instanceof JvmAnnotationReferenceImpl)) {
       T _delegate = this.getDelegate();
       EList<JvmAnnotationReference> _annotations = _delegate.getAnnotations();

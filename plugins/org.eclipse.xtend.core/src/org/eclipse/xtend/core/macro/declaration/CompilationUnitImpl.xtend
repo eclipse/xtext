@@ -170,6 +170,8 @@ class CompilationUnitImpl implements CompilationUnit {
 	@Inject CompilerPhases compilerPhases;
 
 	@Property XtendFile xtendFile
+	boolean modifyAllowed = true
+	boolean validationAllowed = true
 	@Inject CommonTypeComputationServices services;
 	@Inject TypeReferences typeReferences
 	@Inject JvmTypesBuilder typesBuilder
@@ -185,10 +187,12 @@ class CompilationUnitImpl implements CompilationUnit {
 	@Inject FileLocations fileLocations
 	@Inject ReadAndWriteTracking readAndWriteTracking
 	
-	@Property val ProblemSupport problemSupport = new ProblemSupportImpl(this)
+	@Property val ProblemSupport problemSupport= new ProblemSupportImpl(this)
 	@Property val TypeReferenceProvider typeReferenceProvider = new TypeReferenceProviderImpl(this)
 	@Property val AnnotationReferenceProvider annotationReferenceProvider = new AnnotationReferenceProviderImpl(this)
 	@Property val TypeLookupImpl typeLookup = new TypeLookupImpl(this)
+	@Property val TracabilityImpl tracability = new TracabilityImpl(this)
+	@Property val AssociatorImpl associator = new AssociatorImpl(this)
 	
 	Map<Object, Object> identityCache = newHashMap
 	OwnedConverter typeRefConverter
@@ -199,6 +203,10 @@ class CompilationUnitImpl implements CompilationUnit {
 	
 	def IXtendJvmAssociations getJvmAssociations() {
 		return associations
+	}
+	
+	def IJvmModelAssociator getJvmAssociator() {
+		return jvmModelAssociator
 	}
 	
 	def TypeReferences getTypeReferences() {
@@ -222,6 +230,14 @@ class CompilationUnitImpl implements CompilationUnit {
 	
 	def getTypeExtensions() {
 		typeExtensions
+	}
+	
+	def isModifyAllowed() {
+		modifyAllowed
+	}
+	
+	def isValidationAllowed() {
+		validationAllowed
 	}
 	
 	ParallelFileSystemSupport parallelFileSystemSupport
@@ -267,6 +283,10 @@ class CompilationUnitImpl implements CompilationUnit {
 	def void after(ActiveAnnotationContexts.AnnotationCallback phase) {
 		if (phase == ActiveAnnotationContexts.AnnotationCallback.INDEXING)
 			identityCache.clear
+		if (phase == ActiveAnnotationContexts.AnnotationCallback.INFERENCE)
+			modifyAllowed = false
+		if (phase == ActiveAnnotationContexts.AnnotationCallback.VALIDATION)
+			validationAllowed = false
 	}
 	
 	def getTypeRefConverter() {

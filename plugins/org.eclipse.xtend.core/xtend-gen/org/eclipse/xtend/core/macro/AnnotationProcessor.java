@@ -15,12 +15,14 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContext;
 import org.eclipse.xtend.core.macro.RegisterGlobalsContextImpl;
 import org.eclipse.xtend.core.macro.TransformationContextImpl;
+import org.eclipse.xtend.core.macro.ValidationContextImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant;
 import org.eclipse.xtend.lib.macro.TransformationParticipant;
+import org.eclipse.xtend.lib.macro.ValidationParticipant;
 import org.eclipse.xtend.lib.macro.declaration.Declaration;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement;
@@ -44,6 +46,9 @@ public class AnnotationProcessor {
   
   @Inject
   private Provider<RegisterGlobalsContextImpl> registerGlobalsContextProvider;
+  
+  @Inject
+  private Provider<ValidationContextImpl> validationContextProvider;
   
   /**
    * gets called from Xtend compiler, during "model inference", i.e. translation of Xtend AST to Java AST
@@ -136,11 +141,74 @@ public class AnnotationProcessor {
                         }
                       }
                       final Declaration xtendMember = _switchResult;
-                      return modifyCtx.getPrimaryGeneratedJavaElement(xtendMember);
+                      NamedElement _primaryGeneratedJavaElement = modifyCtx.getPrimaryGeneratedJavaElement(xtendMember);
+                      return ((MutableNamedElement) _primaryGeneratedJavaElement);
                     }
                   };
                   final List<MutableNamedElement> map = ListExtensions.<XtendAnnotationTarget, MutableNamedElement>map(_annotatedSourceElements, _function);
                   ((TransformationParticipant<MutableNamedElement>)processor).doTransform(map, modifyCtx);
+                }
+              };
+              _xblockexpression_1 = this.runWithCancelIndiciator(ctx, monitor, _function);
+            }
+            _switchResult = _xblockexpression_1;
+          }
+        }
+        _xtrycatchfinallyexpression = _switchResult;
+      } finally {
+        task.stop();
+      }
+      _xblockexpression = _xtrycatchfinallyexpression;
+    }
+    return _xblockexpression;
+  }
+  
+  public Object validationPhase(final ActiveAnnotationContext ctx, final CancelIndicator monitor) {
+    Object _xblockexpression = null;
+    {
+      final Stopwatches.StoppedTask task = Stopwatches.forTask("[macros] validationPhase (AnnotationProcessor.validationPhase)");
+      task.start();
+      Object _xtrycatchfinallyexpression = null;
+      try {
+        Object _switchResult = null;
+        Object _processorInstance = ctx.getProcessorInstance();
+        final Object processor = _processorInstance;
+        boolean _matched = false;
+        if (!_matched) {
+          if (processor instanceof ValidationParticipant) {
+            _matched=true;
+            Object _xblockexpression_1 = null;
+            {
+              final ValidationContextImpl validationContext = this.validationContextProvider.get();
+              CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
+              validationContext.setUnit(_compilationUnit);
+              final Runnable _function = new Runnable() {
+                public void run() {
+                  List<XtendAnnotationTarget> _annotatedSourceElements = ctx.getAnnotatedSourceElements();
+                  final Function1<XtendAnnotationTarget, NamedElement> _function = new Function1<XtendAnnotationTarget, NamedElement>() {
+                    public NamedElement apply(final XtendAnnotationTarget it) {
+                      Declaration _switchResult = null;
+                      boolean _matched = false;
+                      if (!_matched) {
+                        if (it instanceof XtendMember) {
+                          _matched=true;
+                          CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
+                          _switchResult = _compilationUnit.toXtendMemberDeclaration(((XtendMember)it));
+                        }
+                      }
+                      if (!_matched) {
+                        if (it instanceof XtendParameter) {
+                          _matched=true;
+                          CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
+                          _switchResult = _compilationUnit.toXtendParameterDeclaration(((XtendParameter)it));
+                        }
+                      }
+                      final Declaration xtendMember = _switchResult;
+                      return validationContext.getPrimaryGeneratedJavaElement(xtendMember);
+                    }
+                  };
+                  final List<NamedElement> map = ListExtensions.<XtendAnnotationTarget, NamedElement>map(_annotatedSourceElements, _function);
+                  ((ValidationParticipant<NamedElement>)processor).doValidate(map, validationContext);
                 }
               };
               _xblockexpression_1 = this.runWithCancelIndiciator(ctx, monitor, _function);
