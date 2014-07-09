@@ -73,20 +73,9 @@ public class ResourceValidatorImpl implements IResourceValidator {
 					+ resource.getWarnings().size());
 			try {
 				IAcceptor<Issue> acceptor = createAcceptor(result);
-				// Syntactical and linking errors
-				// Collect EMF Resource Diagnostics
-				if (mode.shouldCheck(CheckType.FAST)) {
-					for (int i = 0; i < resource.getErrors().size(); i++) {
-						if (monitor.isCanceled())
-							return Collections.emptyList();
-						issueFromXtextResourceDiagnostic(resource.getErrors().get(i), Severity.ERROR, acceptor);
-					}
 
-					for (int i = 0; i < resource.getWarnings().size(); i++) {
-						if (monitor.isCanceled())
-							return Collections.emptyList();
-						issueFromXtextResourceDiagnostic(resource.getWarnings().get(i), Severity.WARNING, acceptor);
-					}
+				if (mode.shouldCheck(CheckType.FAST)) {
+					collectResourceDiagnostics(resource, monitor, acceptor);
 				}
 
 				if (monitor.isCanceled())
@@ -94,8 +83,6 @@ public class ResourceValidatorImpl implements IResourceValidator {
 				boolean syntaxDiagFail = !result.isEmpty();
 				logCheckStatus(resource, syntaxDiagFail, "Syntax");
 
-				// Validation errors
-				// Collect validator diagnostics
 				validate(resource, mode, monitor, acceptor);
 				if (monitor.isCanceled())
 					return Collections.emptyList();
@@ -105,6 +92,23 @@ public class ResourceValidatorImpl implements IResourceValidator {
 			return result;
 		} finally {
 			task.stop();
+		}
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	protected void collectResourceDiagnostics(Resource resource, final CancelIndicator monitor, IAcceptor<Issue> acceptor) {
+		for (int i = 0; i < resource.getErrors().size(); i++) {
+			if (monitor.isCanceled())
+				return;
+			issueFromXtextResourceDiagnostic(resource.getErrors().get(i), Severity.ERROR, acceptor);
+		}
+
+		for (int i = 0; i < resource.getWarnings().size(); i++) {
+			if (monitor.isCanceled())
+				return;
+			issueFromXtextResourceDiagnostic(resource.getWarnings().get(i), Severity.WARNING, acceptor);
 		}
 	}
 

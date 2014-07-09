@@ -16,6 +16,20 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtend/lib/macro/AbstractFieldProcessor.java" type="org.eclipse.xtend.lib.macro.AbstractFieldProcessor">
+        <filter id="337764418">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtend.lib.macro.AbstractFieldProcessor"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtend/lib/macro/AbstractMethodProcessor.java" type="org.eclipse.xtend.lib.macro.AbstractMethodProcessor">
+        <filter id="337764418">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtend.lib.macro.AbstractMethodProcessor"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtend/lib/macro/TransformationContext.java" type="org.eclipse.xtend.lib.macro.TransformationContext">
         <filter id="403984517">
             <message_arguments>
@@ -81,6 +95,19 @@
             <message_arguments>
                 <message_argument value="org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport"/>
                 <message_argument value="mkdir(Path)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtend/lib/macro/services/Tracability.java" type="org.eclipse.xtend.lib.macro.services.Tracability">
+        <filter id="405901410">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtend.lib.macro.services.Tracability"/>
+                <message_argument value="getPrimaryGeneratedJavaElement(NamedElement)"/>
+            </message_arguments>
+        </filter>
+        <filter id="1211105284">
+            <message_arguments>
+                <message_argument value="getPrimaryGeneratedJavaElement(NamedElement)"/>
             </message_arguments>
         </filter>
     </resource>

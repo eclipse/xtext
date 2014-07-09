@@ -18,6 +18,7 @@ import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
 @SuppressWarnings("all")
 public class MutableJvmAnnotationTypeElementDeclarationImpl extends JvmAnnotationTypeElementDeclarationImpl implements MutableAnnotationTypeElementDeclaration {
   public void markAsRead() {
+    this.checkMutable();
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     ReadAndWriteTracking _readAndWriteTracking = _compilationUnit.getReadAndWriteTracking();
     JvmOperation _delegate = this.getDelegate();

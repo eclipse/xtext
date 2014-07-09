@@ -37,6 +37,7 @@ import org.eclipse.xtend.core.macro.CompilationContextImpl;
 import org.eclipse.xtend.core.macro.ConstantExpressionsInterpreter;
 import org.eclipse.xtend.core.macro.declaration.AnnotationReferenceBuildContextImpl;
 import org.eclipse.xtend.core.macro.declaration.AnnotationReferenceProviderImpl;
+import org.eclipse.xtend.core.macro.declaration.AssociatorImpl;
 import org.eclipse.xtend.core.macro.declaration.ExpressionImpl;
 import org.eclipse.xtend.core.macro.declaration.InferredTypeReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationReferenceImpl;
@@ -67,6 +68,7 @@ import org.eclipse.xtend.core.macro.declaration.PrimitiveTypeImpl;
 import org.eclipse.xtend.core.macro.declaration.ProblemSupportImpl;
 import org.eclipse.xtend.core.macro.declaration.ResolvedConstructorImpl;
 import org.eclipse.xtend.core.macro.declaration.ResolvedMethodImpl;
+import org.eclipse.xtend.core.macro.declaration.TracabilityImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeReferenceProviderImpl;
@@ -261,6 +263,10 @@ public class CompilationUnitImpl implements CompilationUnit {
   @Property
   private XtendFile _xtendFile;
   
+  private boolean modifyAllowed = true;
+  
+  private boolean validationAllowed = true;
+  
   @Inject
   private CommonTypeComputationServices services;
   
@@ -312,6 +318,12 @@ public class CompilationUnitImpl implements CompilationUnit {
   @Property
   private final TypeLookupImpl _typeLookup = new TypeLookupImpl(this);
   
+  @Property
+  private final TracabilityImpl _tracability = new TracabilityImpl(this);
+  
+  @Property
+  private final AssociatorImpl _associator = new AssociatorImpl(this);
+  
   private Map<Object, Object> identityCache = CollectionLiterals.<Object, Object>newHashMap();
   
   private OwnedConverter typeRefConverter;
@@ -322,6 +334,10 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public IXtendJvmAssociations getJvmAssociations() {
     return this.associations;
+  }
+  
+  public IJvmModelAssociator getJvmAssociator() {
+    return this.jvmModelAssociator;
   }
   
   public TypeReferences getTypeReferences() {
@@ -346,6 +362,14 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public JvmTypeExtensions getTypeExtensions() {
     return this.typeExtensions;
+  }
+  
+  public boolean isModifyAllowed() {
+    return this.modifyAllowed;
+  }
+  
+  public boolean isValidationAllowed() {
+    return this.validationAllowed;
   }
   
   private ParallelFileSystemSupport parallelFileSystemSupport;
@@ -414,6 +438,14 @@ public class CompilationUnitImpl implements CompilationUnit {
     boolean _equals = Objects.equal(phase, ActiveAnnotationContexts.AnnotationCallback.INDEXING);
     if (_equals) {
       this.identityCache.clear();
+    }
+    boolean _equals_1 = Objects.equal(phase, ActiveAnnotationContexts.AnnotationCallback.INFERENCE);
+    if (_equals_1) {
+      this.modifyAllowed = false;
+    }
+    boolean _equals_2 = Objects.equal(phase, ActiveAnnotationContexts.AnnotationCallback.VALIDATION);
+    if (_equals_2) {
+      this.validationAllowed = false;
     }
   }
   
@@ -1831,5 +1863,15 @@ public class CompilationUnitImpl implements CompilationUnit {
   @Pure
   public TypeLookupImpl getTypeLookup() {
     return this._typeLookup;
+  }
+  
+  @Pure
+  public TracabilityImpl getTracability() {
+    return this._tracability;
+  }
+  
+  @Pure
+  public AssociatorImpl getAssociator() {
+    return this._associator;
   }
 }

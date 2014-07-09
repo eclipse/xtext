@@ -69,6 +69,7 @@ public class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGener
   }
   
   public MutableMethodDeclaration addMethod(final String name, final Procedure1<MutableMethodDeclaration> initializer) {
+    this.checkMutable();
     final MutableMethodDeclaration result = super.addMethod(name, initializer);
     result.setAbstract(true);
     return result;

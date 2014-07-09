@@ -40,6 +40,7 @@ import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
 @SuppressWarnings("all")
 public class MutableJvmInterfaceDeclarationImpl extends JvmInterfaceDeclarationImpl implements MutableInterfaceDeclaration {
   public void markAsRead() {
+    this.checkMutable();
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     ReadAndWriteTracking _readAndWriteTracking = _compilationUnit.getReadAndWriteTracking();
     JvmGenericType _delegate = this.getDelegate();
@@ -102,6 +103,7 @@ public class MutableJvmInterfaceDeclarationImpl extends JvmInterfaceDeclarationI
   }
   
   public void setExtendedInterfaces(final Iterable<? extends TypeReference> superinterfaces) {
+    this.checkMutable();
     ConditionUtils.checkIterable(superinterfaces, "superinterfaces");
     JvmGenericType _delegate = this.getDelegate();
     EList<JvmTypeReference> _superTypes = _delegate.getSuperTypes();
@@ -122,11 +124,13 @@ public class MutableJvmInterfaceDeclarationImpl extends JvmInterfaceDeclarationI
   }
   
   public void setStrictFloatingPoint(final boolean isStrictFloatingPoint) {
+    this.checkMutable();
     JvmGenericType _delegate = this.getDelegate();
     _delegate.setStrictFloatingPoint(isStrictFloatingPoint);
   }
   
   public MutableTypeParameterDeclaration addTypeParameter(final String name, final TypeReference... upperBounds) {
+    this.checkMutable();
     ConditionUtils.checkJavaIdentifier(name, "name");
     ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(upperBounds)), "upperBounds");
     ConditionUtils.checkInferredTypeReferences("parameter type", upperBounds);
