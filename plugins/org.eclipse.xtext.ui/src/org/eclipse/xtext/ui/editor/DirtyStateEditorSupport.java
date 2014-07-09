@@ -456,6 +456,14 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	}
 	
 	/**
+	 * Only for testing
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	public void setResourceServiceProviderRegistry(IResourceServiceProvider.Registry resourceServiceProviderRegistry) {
+		this.resourceServiceProviderRegistry = resourceServiceProviderRegistry;
+	}
+	
+	/**
 	 * @since 2.7
 	 */
 	protected IResourceServiceProvider.Registry getResourceServiceProviderRegistry() {

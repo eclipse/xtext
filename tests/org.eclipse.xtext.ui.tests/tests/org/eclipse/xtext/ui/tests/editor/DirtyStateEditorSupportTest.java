@@ -25,12 +25,14 @@ import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IContainer.Manager;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
+import org.eclipse.xtext.resource.impl.ResourceServiceProviderRegistryImpl;
 import org.eclipse.xtext.ui.editor.DirtyStateEditorSupport;
 import org.eclipse.xtext.ui.editor.DirtyStateEditorSupport.IDirtyStateEditorSupportClient;
 import org.eclipse.xtext.ui.editor.DirtyStateManager;
@@ -72,10 +74,16 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		resourceSet = new ResourceSetImpl();
 		resourceURI = URI.createURI("scheme://foo");
 		resource = new XtextResource(resourceURI);
-		DefaultResourceServiceProvider resourceServiceProvider = new DefaultResourceServiceProvider() {
+		final DefaultResourceServiceProvider resourceServiceProvider = new DefaultResourceServiceProvider() {
 			@Override
 			public org.eclipse.xtext.resource.IResourceDescription.Manager getResourceDescriptionManager() {
 				return DirtyStateEditorSupportTest.this;
+			}
+		};
+		ResourceServiceProviderRegistryImpl registry = new ResourceServiceProviderRegistryImpl() {
+			@Override
+			public IResourceServiceProvider getResourceServiceProvider(URI uri) {
+				return resourceServiceProvider;
 			}
 		};
 		resource.setResourceServiceProvider(resourceServiceProvider);
@@ -90,6 +98,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		dirtyStateSupport.setStateChangeEventBroker(stateChangeEventBroker);
 		dirtyResource = new DocumentBasedDirtyResource();
 		dirtyStateSupport.setDirtyResource(dirtyResource);
+		dirtyStateSupport.setResourceServiceProviderRegistry(registry);
 		ignoreConcurrentEditing = Lists.newLinkedList();
 		exportedObjects = Collections.emptyList();
 	}
