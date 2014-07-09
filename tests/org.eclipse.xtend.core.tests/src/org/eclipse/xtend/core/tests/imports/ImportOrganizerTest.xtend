@@ -42,6 +42,48 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 		assertEquals(expected.toString, builder.toString)
 	}
 
+	@Test def testEnumerationLiteralInAnnotation() {
+		'''
+			import static java.lang.annotation.RetentionPolicy.*
+			
+			@java.lang.annotation.Retention(CLASS)
+			annotation A {
+			}
+		'''.assertIsOrganizedTo('''
+			import java.lang.annotation.Retention
+			
+			@Retention(CLASS)
+			annotation A {
+			}
+		''')
+	}
+
+	@Test def testEnumerationLiteralInSwitch() {
+		'''
+			import static java.lang.annotation.RetentionPolicy.*
+			
+			class C {
+				def m(java.lang.annotation.RetentionPolicy p) {
+					switch p {
+						case CLASS: true
+						default: false
+					}
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			import java.lang.annotation.RetentionPolicy
+			
+			class C {
+				def m(RetentionPolicy p) {
+					switch p {
+						case CLASS: true
+						default: false
+					}
+				}
+			}
+		''')
+	}
+
 	@Test def testSimple() {
 		'''
 			package foo
