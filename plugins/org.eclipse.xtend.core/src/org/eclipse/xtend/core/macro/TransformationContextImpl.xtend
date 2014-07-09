@@ -18,6 +18,7 @@ import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtend.lib.macro.services.AnnotationReferenceBuildContext
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure0
 
 class TransformationContextImpl implements TransformationContext {
 	@Property CompilationUnitImpl unit
@@ -32,6 +33,10 @@ class TransformationContextImpl implements TransformationContext {
 
 	override getProblems(Element element) {
 		unit.problemSupport.getProblems(element)
+	}
+	
+	override validateLater(Procedure0 validationCallback) {
+		unit.problemSupport.validateLater(validationCallback)
 	}
 
 	override getAnyType() {

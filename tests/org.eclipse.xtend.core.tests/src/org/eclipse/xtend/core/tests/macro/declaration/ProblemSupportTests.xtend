@@ -7,6 +7,7 @@ import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.junit.Test
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl
+import org.eclipse.xtend.core.macro.ActiveAnnotationContexts
 
 class ProblemSupportTests extends AbstractXtendTestCase {
 	
@@ -46,6 +47,7 @@ class ProblemSupportTests extends AbstractXtendTestCase {
 	def asCompilationUnit(XtendFile file, (CompilationUnitImpl)=>void block) {
 		val compilationUnit = compilationUnitProvider.get
 		compilationUnit.xtendFile = file
+		compilationUnit.before(ActiveAnnotationContexts.AnnotationCallback.INFERENCE)
 		block.apply(compilationUnit)
 	}
 }
