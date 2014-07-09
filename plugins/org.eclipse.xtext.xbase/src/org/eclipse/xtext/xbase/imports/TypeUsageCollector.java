@@ -17,7 +17,12 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmAnnotationType;
+import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -46,13 +51,16 @@ import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
+import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.scoping.batch.ImplicitlyImportedFeatures;
@@ -60,9 +68,11 @@ import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.computation.IAmbiguousLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.util.FeatureCallAsTypeLiteralHelper;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
@@ -257,6 +267,11 @@ public class TypeUsageCollector {
 		XExpression expression = linkingCandidate.getExpression();
 		if (expression instanceof XAbstractFeatureCall) {
 			JvmIdentifiableElement feature = linkingCandidate.getFeature();
+			if (feature instanceof JvmEnumerationLiteral && expression instanceof XFeatureCall) {
+				if (isEnumLiteralImplicitelyImported(expression, (JvmEnumerationLiteral) feature)) {
+					return;
+				}
+			}
 			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) expression;
 			if ((feature instanceof JvmOperation || feature instanceof JvmField) && featureCall.isStatic()) {
 				if (featureCall.isExtension()) {
@@ -268,6 +283,50 @@ public class TypeUsageCollector {
 		}
 	}
 	
+	private boolean isEnumLiteralImplicitelyImported(XExpression expression, JvmEnumerationLiteral literal) {
+		XCasePart container = EcoreUtil2.getContainerOfType(expression, XCasePart.class);
+		if (container != null && EcoreUtil.isAncestor(container.getCase(), expression)) {
+			XSwitchExpression switchExpression = (XSwitchExpression) container.eContainer();
+			if (switchExpression.getSwitch() != null) {
+				LightweightTypeReference switchVarType = batchTypeResolver.resolveTypes(expression).getActualType(switchExpression.getSwitch());
+				if (switchVarType != null && literal.getEnumType() == switchVarType.getType()) {
+					return true;
+				}
+			}
+		} else {
+			XAnnotation annotation = EcoreUtil2.getContainerOfType(expression, XAnnotation.class); 
+			if (annotation != null) {
+				if (annotation.getValue() != null && EcoreUtil.isAncestor(annotation.getValue(), expression)) {
+					JvmType type = annotation.getAnnotationType();
+					if (type instanceof JvmAnnotationType) {
+						Iterable<JvmFeature> valueCandidates = ((JvmAnnotationType) type).findAllFeaturesByName("value");
+						JvmOperation value = (JvmOperation) Iterables.getFirst(valueCandidates, null);
+						JvmType expectedType = getTypeForAnnotationValue(value);
+						if (literal.getEnumType() == expectedType) {
+							return true;
+						}
+					}
+				} else {
+					XAnnotationElementValuePair valuePair = EcoreUtil2.getContainerOfType(expression, XAnnotationElementValuePair.class);
+					JvmOperation operation = valuePair.getElement();
+					JvmType expectedType = getTypeForAnnotationValue(operation);
+					if (literal.getEnumType() == expectedType) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	private JvmType getTypeForAnnotationValue(JvmOperation value) {
+		JvmType expectedType = value.getReturnType().getType();
+		if (expectedType instanceof JvmArrayType) {
+			expectedType = ((JvmArrayType) expectedType).getComponentType();
+		}
+		return expectedType;
+	}
+
 	protected void addJavaDocReferences(EObject element) {
 		if(element != null && documentationProvider != null && currentThisType != null) {
 			for(INode documentationNode: documentationProvider.getDocumentationNodes(element)) {
