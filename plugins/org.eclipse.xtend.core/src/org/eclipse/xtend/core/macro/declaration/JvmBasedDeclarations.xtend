@@ -70,6 +70,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1
 
 import static org.eclipse.xtend.core.macro.ConditionUtils.*
 import static extension org.eclipse.xtext.EcoreUtil2.*
+import org.eclipse.xtend.core.macro.ActiveAnnotationContexts.AnnotationCallback
 
 abstract class JvmElementImpl<T extends EObject> extends AbstractElementImpl<T> {
 	
@@ -84,8 +85,8 @@ abstract class JvmElementImpl<T extends EObject> extends AbstractElementImpl<T> 
 	}
 	
 	protected final def checkMutable() {
-		if (!compilationUnit.modifyAllowed) 
-			throw new IllegalStateException("Element cannot be modified after the transformation phase")
+		if (compilationUnit.lastPhase != AnnotationCallback.INFERENCE) 
+			throw new IllegalStateException("Element cannot be modified outside the transformation phase")
 	}
 	
 }
@@ -1185,8 +1186,8 @@ class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDeclaration
 	}
 	
 	protected final def checkMutable() {
-		if (!compilationUnit.modifyAllowed) 
-			throw new IllegalStateException("Element cannot be modified after the transformation phase")
+		if (compilationUnit.lastPhase != AnnotationCallback.INFERENCE) 
+			throw new IllegalStateException("Element cannot be modified outside the transformation phase")
 	}
 }
 
