@@ -59,6 +59,7 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
 import org.eclipse.xtext.xbase.interpreter.AbstractConstantExpressionsInterpreter;
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException;
@@ -73,6 +74,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
 import org.eclipse.xtext.xbase.typesystem.util.PendingLinkingCandidateResolver;
 import org.eclipse.xtext.xbase.typesystem.util.TypeLiteralLinkingCandidateResolver;
@@ -383,34 +385,72 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
       return _switchResult;
     }
     final String featureName = it.getConcreteSyntaxFeatureName();
-    Map<String, JvmIdentifiableElement> _visibleFeatures = ctx.getVisibleFeatures();
-    boolean _containsKey = _visibleFeatures.containsKey(featureName);
+    JvmTypeReference _expectedType = ctx.getExpectedType();
+    final JvmType expectedRawType = _expectedType.getType();
+    Map<String, JvmIdentifiableElement> _xifexpression = null;
+    boolean _isEnumExpectationInAnnotationValue = this.isEnumExpectationInAnnotationValue(it, expectedRawType);
+    if (_isEnumExpectationInAnnotationValue) {
+      HashMap<String, JvmIdentifiableElement> _xblockexpression = null;
+      {
+        JvmEnumerationType _switchResult_1 = null;
+        boolean _matched_1 = false;
+        if (!_matched_1) {
+          if (expectedRawType instanceof JvmEnumerationType) {
+            _matched_1=true;
+            _switchResult_1 = ((JvmEnumerationType)expectedRawType);
+          }
+        }
+        if (!_matched_1) {
+          if (expectedRawType instanceof JvmArrayType) {
+            _matched_1=true;
+            JvmComponentType _componentType = ((JvmArrayType)expectedRawType).getComponentType();
+            _switchResult_1 = ((JvmEnumerationType) _componentType);
+          }
+        }
+        final JvmEnumerationType enumType = _switchResult_1;
+        Map<String, JvmIdentifiableElement> _visibleFeatures = ctx.getVisibleFeatures();
+        final HashMap<String, JvmIdentifiableElement> copy = new HashMap<String, JvmIdentifiableElement>(_visibleFeatures);
+        EList<JvmEnumerationLiteral> _literals = enumType.getLiterals();
+        final Procedure1<JvmEnumerationLiteral> _function = new Procedure1<JvmEnumerationLiteral>() {
+          public void apply(final JvmEnumerationLiteral it) {
+            String _simpleName = it.getSimpleName();
+            copy.put(_simpleName, it);
+          }
+        };
+        IterableExtensions.<JvmEnumerationLiteral>forEach(_literals, _function);
+        _xblockexpression = copy;
+      }
+      _xifexpression = _xblockexpression;
+    } else {
+      _xifexpression = ctx.getVisibleFeatures();
+    }
+    final Map<String, JvmIdentifiableElement> visibleFeatures = _xifexpression;
+    boolean _containsKey = visibleFeatures.containsKey(featureName);
     if (_containsKey) {
       Object _switchResult_1 = null;
-      Map<String, JvmIdentifiableElement> _visibleFeatures_1 = ctx.getVisibleFeatures();
-      JvmIdentifiableElement _get = _visibleFeatures_1.get(featureName);
+      JvmIdentifiableElement _get = visibleFeatures.get(featureName);
       final JvmIdentifiableElement visibleFeature = _get;
       boolean _matched_1 = false;
       if (!_matched_1) {
         if (visibleFeature instanceof JvmEnumerationLiteral) {
           _matched_1=true;
-          JvmEnumerationLiteral _xblockexpression = null;
+          JvmEnumerationLiteral _xblockexpression_1 = null;
           {
             this.resolveFeature(it, visibleFeature);
-            _xblockexpression = ((JvmEnumerationLiteral)visibleFeature);
+            _xblockexpression_1 = ((JvmEnumerationLiteral)visibleFeature);
           }
-          _switchResult_1 = _xblockexpression;
+          _switchResult_1 = _xblockexpression_1;
         }
       }
       if (!_matched_1) {
         if (visibleFeature instanceof JvmField) {
           _matched_1=true;
-          Object _xblockexpression = null;
+          Object _xblockexpression_1 = null;
           {
             this.resolveFeature(it, visibleFeature);
-            _xblockexpression = this.evaluateField(it, ((JvmField)visibleFeature), ctx);
+            _xblockexpression_1 = this.evaluateField(it, ((JvmField)visibleFeature), ctx);
           }
-          _switchResult_1 = _xblockexpression;
+          _switchResult_1 = _xblockexpression_1;
         }
       }
       return _switchResult_1;
@@ -422,6 +462,35 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
       return this.toTypeReference(type, 0);
     }
     throw new UnresolvableFeatureException(("Couldn\'t resolve feature " + featureName), it);
+  }
+  
+  private boolean isEnumExpectationInAnnotationValue(final XFeatureCall it, final JvmType expectedRawType) {
+    boolean _or = false;
+    if ((expectedRawType instanceof JvmEnumerationType)) {
+      _or = true;
+    } else {
+      _or = ((expectedRawType instanceof JvmArrayType) && (((JvmArrayType) expectedRawType).getComponentType() instanceof JvmEnumerationType));
+    }
+    if (_or) {
+      EObject container = it.eContainer();
+      if ((container instanceof XAnnotationElementValuePair)) {
+        return true;
+      }
+      if ((container instanceof XAnnotation)) {
+        return true;
+      }
+      if ((container instanceof XListLiteral)) {
+        EObject _eContainer = ((XListLiteral)container).eContainer();
+        container = _eContainer;
+        if ((container instanceof XAnnotationElementValuePair)) {
+          return true;
+        }
+        if ((container instanceof XAnnotation)) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
   
   protected Object _internalEvaluate(final XMemberFeatureCall it, final Context ctx) {

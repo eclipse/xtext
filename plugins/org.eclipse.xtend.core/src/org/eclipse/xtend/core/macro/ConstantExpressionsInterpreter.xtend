@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.macro
 
 import com.google.inject.Inject
+import java.util.HashMap
 import java.util.LinkedHashSet
 import java.util.Map
 import org.eclipse.emf.ecore.EObject
@@ -37,6 +38,7 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.xbase.XNumberLiteral
 import org.eclipse.xtext.xbase.XbasePackage
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration
 import org.eclipse.xtext.xbase.interpreter.AbstractConstantExpressionsInterpreter
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException
@@ -183,8 +185,22 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 			}
 		}
 		val featureName = concreteSyntaxFeatureName
-		if (ctx.visibleFeatures.containsKey(featureName)) {
-			return switch visibleFeature : ctx.visibleFeatures.get(featureName) {
+		val expectedRawType = ctx.expectedType.type
+		val visibleFeatures = if (isEnumExpectationInAnnotationValue(expectedRawType)) {
+			val enumType = switch(expectedRawType) {
+				JvmEnumerationType: expectedRawType
+				JvmArrayType: expectedRawType.componentType as JvmEnumerationType
+			}
+			val copy = new HashMap(ctx.visibleFeatures)
+			enumType.literals.forEach [
+				copy.put(simpleName, it)
+			]
+			copy
+		} else {
+			ctx.visibleFeatures
+		}
+		if (visibleFeatures.containsKey(featureName)) {
+			return switch visibleFeature : visibleFeatures.get(featureName) {
 				JvmEnumerationLiteral : {
 					resolveFeature(visibleFeature)
 					visibleFeature
@@ -201,6 +217,29 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 			return toTypeReference(type, 0)
 		}
 		throw new UnresolvableFeatureException("Couldn't resolve feature "+featureName, it)
+	}
+	
+	private def isEnumExpectationInAnnotationValue(XFeatureCall it, JvmType expectedRawType) {
+		if (expectedRawType instanceof JvmEnumerationType || expectedRawType instanceof JvmArrayType && (expectedRawType as JvmArrayType).componentType instanceof JvmEnumerationType) {
+			// TODO annotation values don't know something about their logical container?
+			var container = it.eContainer 
+			if (container instanceof XAnnotationElementValuePair) {
+				return true
+			}
+			if (container instanceof XAnnotation) {
+				return true
+			}
+			if (container instanceof XListLiteral) {
+				container = container.eContainer
+				if (container instanceof XAnnotationElementValuePair) {
+					return true
+				}
+				if (container instanceof XAnnotation) {
+					return true
+				}
+			}
+		}
+		return false;
 	}
 
 	def dispatch Object internalEvaluate(XMemberFeatureCall it, Context ctx) {
