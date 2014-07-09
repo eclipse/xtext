@@ -124,7 +124,7 @@ then
 	done
 else
 	repository_urls="$REMOTE_REPOSITORIES"
-	echo "local repositories folder is empty... using remote urls"
+	echo "zipped repositories folder is empty... using $REMOTE_REPOSITORIES urls"
 fi
 
 cd $DIR_ROOT

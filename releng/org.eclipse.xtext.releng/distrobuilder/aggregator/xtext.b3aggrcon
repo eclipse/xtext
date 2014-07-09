@@ -10,4 +10,7 @@
     <features name="org.eclipse.xtend.sdk.feature.group"/>
     <features name="org.eclipse.xtend.gwt.feature.group"/>
   </repositories>
+  <repositories enabled="false" location="http://download.itemis.de/updates/releases/2.1.1/">
+    <features name="de.itemis.xtext.antlr.feature.feature.group"/>
+  </repositories>
 </aggregator:Contribution>
