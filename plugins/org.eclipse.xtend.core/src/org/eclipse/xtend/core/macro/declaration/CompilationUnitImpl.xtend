@@ -57,7 +57,6 @@ import org.eclipse.xtend.lib.macro.file.FileLocations
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport
 import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtend.lib.macro.services.AnnotationReferenceProvider
-import org.eclipse.xtend.lib.macro.services.ProblemSupport
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue
@@ -122,7 +121,10 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom
-import org.eclipse.xtend.core.macro.ActiveAnnotationContexts
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.annotations.AccessorType
+import org.eclipse.xtend.core.macro.ActiveAnnotationContexts.AnnotationCallback
+import org.eclipse.xtend.lib.macro.services.ProblemSupport
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -170,8 +172,8 @@ class CompilationUnitImpl implements CompilationUnit {
 	@Inject CompilerPhases compilerPhases;
 
 	@Property XtendFile xtendFile
-	boolean modifyAllowed = true
-	boolean validationAllowed = true
+	@Accessors(AccessorType.PUBLIC_GETTER) 
+	AnnotationCallback lastPhase = AnnotationCallback.INDEXING 
 	@Inject CommonTypeComputationServices services;
 	@Inject TypeReferences typeReferences
 	@Inject JvmTypesBuilder typesBuilder
@@ -187,7 +189,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	@Inject FileLocations fileLocations
 	@Inject ReadAndWriteTracking readAndWriteTracking
 	
-	@Property val ProblemSupport problemSupport= new ProblemSupportImpl(this)
+	val ProblemSupportImpl problemSupport= new ProblemSupportImpl(this)
 	@Property val TypeReferenceProvider typeReferenceProvider = new TypeReferenceProviderImpl(this)
 	@Property val AnnotationReferenceProvider annotationReferenceProvider = new AnnotationReferenceProviderImpl(this)
 	@Property val TypeLookupImpl typeLookup = new TypeLookupImpl(this)
@@ -232,12 +234,8 @@ class CompilationUnitImpl implements CompilationUnit {
 		typeExtensions
 	}
 	
-	def isModifyAllowed() {
-		modifyAllowed
-	}
-	
-	def isValidationAllowed() {
-		validationAllowed
+	def ProblemSupport getProblemSupport() {
+		problemSupport
 	}
 	
 	ParallelFileSystemSupport parallelFileSystemSupport
@@ -271,22 +269,22 @@ class CompilationUnitImpl implements CompilationUnit {
 		this.typeRefConverter = new OwnedConverter(new StandardTypeReferenceOwner(services, xtendFile))
 	}
 	
-	def void before(ActiveAnnotationContexts.AnnotationCallback phase) {
+	def void before(AnnotationCallback phase) {
+		lastPhase = phase
 		val standardTypeReferenceOwner = new StandardTypeReferenceOwner(services, xtendFile)
-		if (ActiveAnnotationContexts.AnnotationCallback.INDEXING == phase) {
+		if (AnnotationCallback.INDEXING == phase) {
 			this.typeRefConverter = new IndexingOwnedConverter(standardTypeReferenceOwner)	
 		} else {
 			this.typeRefConverter = new OwnedConverter(standardTypeReferenceOwner)
 		}
+		if (AnnotationCallback.VALIDATION == phase) {
+			problemSupport.validationPhaseStarted
+		}
 	}
 	
-	def void after(ActiveAnnotationContexts.AnnotationCallback phase) {
-		if (phase == ActiveAnnotationContexts.AnnotationCallback.INDEXING)
+	def void after(AnnotationCallback phase) {
+		if (phase == AnnotationCallback.INDEXING)
 			identityCache.clear
-		if (phase == ActiveAnnotationContexts.AnnotationCallback.INFERENCE)
-			modifyAllowed = false
-		if (phase == ActiveAnnotationContexts.AnnotationCallback.VALIDATION)
-			validationAllowed = false
 	}
 	
 	def getTypeRefConverter() {

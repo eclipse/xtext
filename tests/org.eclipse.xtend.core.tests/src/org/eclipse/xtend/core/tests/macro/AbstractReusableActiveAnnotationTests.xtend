@@ -192,6 +192,47 @@ abstract class AbstractReusableActiveAnnotationTests {
 		]
 	}
 	
+	@Test def void testValidateLater() {
+		assertProcessing(
+			'myannotation/ValidateLater.xtend' -> '''
+				package myannotation
+				
+				import org.eclipse.xtend.lib.macro.AbstractFieldProcessor
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
+				
+				@Active(ValidateLaterProcessor)
+				annotation ValidateLater {
+				}
+				
+				class ValidateLaterProcessor extends AbstractFieldProcessor {
+				
+					override doTransform(MutableFieldDeclaration it, extension TransformationContext context) {
+						validateLater[ |
+							if (type.inferred && type.is(primitiveBoolean))
+								addWarning("The type was inferred and boolean")
+						]
+					}
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+
+				import myannotation.*
+				
+				class Foo {
+					@ValidateLater val foo = true
+				}
+			'''
+		)[
+			val cls = typeLookup.findClass("myusercode.Foo")
+			val problems = problemSupport.getProblems(cls.declaredFields.head)
+			assertEquals(1, problems.size)
+			assertEquals("The type was inferred and boolean", problems.get(0).message)
+		]
+	}
+	
 	@Test
 	def void testNoMutationInValidationPhase() {
 		try {

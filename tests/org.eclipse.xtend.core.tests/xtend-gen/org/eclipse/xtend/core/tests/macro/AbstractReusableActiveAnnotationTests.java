@@ -392,6 +392,85 @@ public abstract class AbstractReusableActiveAnnotationTests {
   }
   
   @Test
+  public void testValidateLater() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package myannotation");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.AbstractFieldProcessor");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.Active");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.TransformationContext");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@Active(ValidateLaterProcessor)");
+    _builder.newLine();
+    _builder.append("annotation ValidateLater {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class ValidateLaterProcessor extends AbstractFieldProcessor {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override doTransform(MutableFieldDeclaration it, extension TransformationContext context) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("validateLater[ |");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("if (type.inferred && type.is(primitiveBoolean))");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("addWarning(\"The type was inferred and boolean\")");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/ValidateLater.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package myusercode");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import myannotation.*");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("@ValidateLater val foo = true");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      public void apply(final CompilationUnitImpl it) {
+        TypeLookupImpl _typeLookup = it.getTypeLookup();
+        final MutableClassDeclaration cls = _typeLookup.findClass("myusercode.Foo");
+        ProblemSupport _problemSupport = it.getProblemSupport();
+        Iterable<? extends MutableFieldDeclaration> _declaredFields = cls.getDeclaredFields();
+        MutableFieldDeclaration _head = IterableExtensions.head(_declaredFields);
+        final List<? extends Problem> problems = _problemSupport.getProblems(_head);
+        int _size = problems.size();
+        Assert.assertEquals(1, _size);
+        Problem _get = problems.get(0);
+        String _message = _get.getMessage();
+        Assert.assertEquals("The type was inferred and boolean", _message);
+      }
+    };
+    this.assertProcessing(_mappedTo, _mappedTo_1, _function);
+  }
+  
+  @Test
   public void testNoMutationInValidationPhase() {
     try {
       StringConcatenation _builder = new StringConcatenation();

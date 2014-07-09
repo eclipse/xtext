@@ -21,6 +21,7 @@ import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtend.lib.macro.declaration.Visibility
 import org.junit.Test
+import org.eclipse.xtend.core.macro.ActiveAnnotationContexts
 
 /**
  * @author Sven Efftinge
@@ -460,6 +461,7 @@ class DeclarationsTest extends AbstractXtendTestCase {
 	def asCompilationUnit(XtendFile file, (CompilationUnitImpl)=>void block) {
 		val compilationUnit = compilationUnitProvider.get
 		compilationUnit.xtendFile = file
+		compilationUnit.before(ActiveAnnotationContexts.AnnotationCallback.INFERENCE)
 		block.apply(compilationUnit)
 	}
 }

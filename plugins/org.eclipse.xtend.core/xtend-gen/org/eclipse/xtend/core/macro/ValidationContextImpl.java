@@ -33,6 +33,7 @@ import org.eclipse.xtend.lib.macro.services.ProblemSupport;
 import org.eclipse.xtend.lib.macro.services.Tracability;
 import org.eclipse.xtend.lib.macro.services.TypeLookup;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
@@ -95,6 +96,10 @@ public class ValidationContextImpl implements ValidationContext {
   
   public List<? extends Problem> getProblems(final Element element) {
     return this.getProblemSupport().getProblems(element);
+  }
+  
+  public void validateLater(final Procedure0 validationCallback) {
+    this.getProblemSupport().validateLater(validationCallback);
   }
   
   public MutableAnnotationTypeDeclaration findAnnotationType(final String qualifiedName) {

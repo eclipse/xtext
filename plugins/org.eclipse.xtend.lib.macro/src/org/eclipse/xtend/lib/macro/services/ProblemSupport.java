@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.eclipse.xtend.lib.macro.declaration.Element;
 import org.eclipse.xtend.lib.macro.services.Problem.Severity;
+import org.eclipse.xtext.xbase.lib.Procedures;
 
 import com.google.common.annotations.Beta;
 
@@ -44,4 +45,12 @@ public interface ProblemSupport {
 	 */
 	void addWarning(Element element, String message);
 
+	/**
+	 * @param validationCallback
+	 *            a callback that will be executed in the validation phase, when
+	 *            all transformations have been done and types are inferred.
+	 * @since 2.7
+	 */
+	void validateLater(Procedures.Procedure0 validationCallback);
 }
+

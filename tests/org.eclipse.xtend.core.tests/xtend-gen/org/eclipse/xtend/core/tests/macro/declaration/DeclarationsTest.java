@@ -13,6 +13,7 @@ import com.google.inject.Provider;
 import java.lang.reflect.AccessibleObject;
 import java.util.Collections;
 import java.util.List;
+import org.eclipse.xtend.core.macro.ActiveAnnotationContexts;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
@@ -1012,6 +1013,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
   public void asCompilationUnit(final XtendFile file, final Procedure1<? super CompilationUnitImpl> block) {
     final CompilationUnitImpl compilationUnit = this.compilationUnitProvider.get();
     compilationUnit.setXtendFile(file);
+    compilationUnit.before(ActiveAnnotationContexts.AnnotationCallback.INFERENCE);
     block.apply(compilationUnit);
   }
 }

@@ -100,6 +100,8 @@ import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.AccessorType;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
@@ -263,9 +265,8 @@ public class CompilationUnitImpl implements CompilationUnit {
   @Property
   private XtendFile _xtendFile;
   
-  private boolean modifyAllowed = true;
-  
-  private boolean validationAllowed = true;
+  @Accessors(AccessorType.PUBLIC_GETTER)
+  private ActiveAnnotationContexts.AnnotationCallback lastPhase = ActiveAnnotationContexts.AnnotationCallback.INDEXING;
   
   @Inject
   private CommonTypeComputationServices services;
@@ -306,8 +307,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   @Inject
   private ReadAndWriteTracking readAndWriteTracking;
   
-  @Property
-  private final ProblemSupport _problemSupport = new ProblemSupportImpl(this);
+  private final ProblemSupportImpl problemSupport = new ProblemSupportImpl(this);
   
   @Property
   private final TypeReferenceProvider _typeReferenceProvider = new TypeReferenceProviderImpl(this);
@@ -364,12 +364,8 @@ public class CompilationUnitImpl implements CompilationUnit {
     return this.typeExtensions;
   }
   
-  public boolean isModifyAllowed() {
-    return this.modifyAllowed;
-  }
-  
-  public boolean isValidationAllowed() {
-    return this.validationAllowed;
+  public ProblemSupport getProblemSupport() {
+    return this.problemSupport;
   }
   
   private ParallelFileSystemSupport parallelFileSystemSupport;
@@ -422,6 +418,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   public void before(final ActiveAnnotationContexts.AnnotationCallback phase) {
+    this.lastPhase = phase;
     XtendFile _xtendFile = this.getXtendFile();
     final StandardTypeReferenceOwner standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, _xtendFile);
     boolean _equals = Objects.equal(ActiveAnnotationContexts.AnnotationCallback.INDEXING, phase);
@@ -432,20 +429,16 @@ public class CompilationUnitImpl implements CompilationUnit {
       OwnedConverter _ownedConverter = new OwnedConverter(standardTypeReferenceOwner);
       this.typeRefConverter = _ownedConverter;
     }
+    boolean _equals_1 = Objects.equal(ActiveAnnotationContexts.AnnotationCallback.VALIDATION, phase);
+    if (_equals_1) {
+      this.problemSupport.validationPhaseStarted();
+    }
   }
   
   public void after(final ActiveAnnotationContexts.AnnotationCallback phase) {
     boolean _equals = Objects.equal(phase, ActiveAnnotationContexts.AnnotationCallback.INDEXING);
     if (_equals) {
       this.identityCache.clear();
-    }
-    boolean _equals_1 = Objects.equal(phase, ActiveAnnotationContexts.AnnotationCallback.INFERENCE);
-    if (_equals_1) {
-      this.modifyAllowed = false;
-    }
-    boolean _equals_2 = Objects.equal(phase, ActiveAnnotationContexts.AnnotationCallback.VALIDATION);
-    if (_equals_2) {
-      this.validationAllowed = false;
     }
   }
   
@@ -1847,11 +1840,6 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   @Pure
-  public ProblemSupport getProblemSupport() {
-    return this._problemSupport;
-  }
-  
-  @Pure
   public TypeReferenceProvider getTypeReferenceProvider() {
     return this._typeReferenceProvider;
   }
@@ -1874,5 +1862,10 @@ public class CompilationUnitImpl implements CompilationUnit {
   @Pure
   public AssociatorImpl getAssociator() {
     return this._associator;
+  }
+  
+  @Pure
+  public ActiveAnnotationContexts.AnnotationCallback getLastPhase() {
+    return this.lastPhase;
   }
 }

@@ -5,6 +5,7 @@ import com.google.inject.Provider;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend.core.macro.ActiveAnnotationContexts;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
@@ -112,6 +113,7 @@ public class ProblemSupportTests extends AbstractXtendTestCase {
   public void asCompilationUnit(final XtendFile file, final Procedure1<? super CompilationUnitImpl> block) {
     final CompilationUnitImpl compilationUnit = this.compilationUnitProvider.get();
     compilationUnit.setXtendFile(file);
+    compilationUnit.before(ActiveAnnotationContexts.AnnotationCallback.INFERENCE);
     block.apply(compilationUnit);
   }
 }

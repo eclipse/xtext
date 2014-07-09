@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.macro.ActiveAnnotationContexts;
 import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.ProblemImpl;
@@ -32,13 +33,18 @@ import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class ProblemSupportImpl implements ProblemSupport {
   private CompilationUnitImpl compilationUnit;
+  
+  private final List<Procedure0> delayedTasks = CollectionLiterals.<Procedure0>newArrayList();
   
   public ProblemSupportImpl(final CompilationUnitImpl compilationUnit) {
     this.compilationUnit = compilationUnit;
@@ -49,9 +55,9 @@ public class ProblemSupportImpl implements ProblemSupport {
   }
   
   private void checkValidationAllowed() {
-    boolean _isValidationAllowed = this.compilationUnit.isValidationAllowed();
-    boolean _not = (!_isValidationAllowed);
-    if (_not) {
+    ActiveAnnotationContexts.AnnotationCallback _lastPhase = this.compilationUnit.getLastPhase();
+    boolean _greaterThan = (_lastPhase.compareTo(ActiveAnnotationContexts.AnnotationCallback.VALIDATION) > 0);
+    if (_greaterThan) {
       throw new IllegalStateException("Adding issues is not allowed after the validation phase");
     }
   }
@@ -80,6 +86,26 @@ public class ProblemSupportImpl implements ProblemSupport {
     EStructuralFeature _significantFeature = this.getSignificantFeature(_value_1);
     EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.WARNING, "user.issue", message, _value, _significantFeature, (-1), null);
     _warnings.add(_eObjectDiagnosticImpl);
+  }
+  
+  public void validateLater(final Procedure0 validationCallback) {
+    ActiveAnnotationContexts.AnnotationCallback _lastPhase = this.compilationUnit.getLastPhase();
+    boolean _lessThan = (_lastPhase.compareTo(ActiveAnnotationContexts.AnnotationCallback.VALIDATION) < 0);
+    if (_lessThan) {
+      this.delayedTasks.add(validationCallback);
+    } else {
+      validationCallback.apply();
+    }
+  }
+  
+  public void validationPhaseStarted() {
+    final Procedure1<Procedure0> _function = new Procedure1<Procedure0>() {
+      public void apply(final Procedure0 it) {
+        it.apply();
+      }
+    };
+    IterableExtensions.<Procedure0>forEach(this.delayedTasks, _function);
+    this.delayedTasks.clear();
   }
   
   public List<? extends Problem> getProblems(final Element element) {
