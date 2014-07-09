@@ -21,7 +21,7 @@ import com.google.common.annotations.Beta;
  * @author Sven Efftinge
  */
 @Beta
-public class AbstractMethodProcessor implements RegisterGlobalsParticipant<MethodDeclaration>, TransformationParticipant<MutableMethodDeclaration>, CodeGenerationParticipant<MethodDeclaration> {
+public abstract class AbstractMethodProcessor implements RegisterGlobalsParticipant<MethodDeclaration>, TransformationParticipant<MutableMethodDeclaration>, CodeGenerationParticipant<MethodDeclaration>, ValidationParticipant<MethodDeclaration> {
 	
 	public void doRegisterGlobals(List<? extends MethodDeclaration> annotatedMethods, RegisterGlobalsContext context) {
 		for (MethodDeclaration annotatedMethod : annotatedMethods) {
@@ -58,4 +58,20 @@ public class AbstractMethodProcessor implements RegisterGlobalsParticipant<Metho
 	 * @param context
 	 */
 	public void doGenerateCode(MethodDeclaration annotatedMethod, @Extension CodeGenerationContext context) {}
+
+	public void doValidate(List<? extends MethodDeclaration> annotatedMethods, @Extension ValidationContext context) {
+		for (MethodDeclaration annotatedMethod : annotatedMethods) {
+			doValidate(annotatedMethod, context);
+		}
+	}
+
+	/**
+	 * Invoked by the validator 
+	 * @param annotatedMethod that generated method that should be validated
+	 * @param context
+	 * @see #doValidate(MethodDeclaration, ValidationContext)
+	 * @since 2.7
+	 */
+	public void doValidate(MethodDeclaration annotatedMethod, ValidationContext context) {
+	}
 }

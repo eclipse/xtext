@@ -44,6 +44,7 @@ import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
 @SuppressWarnings("all")
 public class MutableJvmEnumerationTypeDeclarationImpl extends JvmEnumerationTypeDeclarationImpl implements MutableEnumerationTypeDeclaration {
   public void markAsRead() {
+    this.checkMutable();
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     ReadAndWriteTracking _readAndWriteTracking = _compilationUnit.getReadAndWriteTracking();
     JvmEnumerationType _delegate = this.getDelegate();
@@ -117,6 +118,7 @@ public class MutableJvmEnumerationTypeDeclarationImpl extends JvmEnumerationType
   }
   
   public MutableEnumerationValueDeclaration addValue(final String name, final Procedure1<MutableEnumerationValueDeclaration> initializer) {
+    this.checkMutable();
     ConditionUtils.checkJavaIdentifier(name, "name");
     boolean _notEquals = (!Objects.equal(initializer, null));
     Preconditions.checkArgument(_notEquals, "initializer cannot be null");

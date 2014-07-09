@@ -34,6 +34,7 @@ import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
 @SuppressWarnings("all")
 public class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDeclarationImpl implements MutableAnnotationTarget, MutableTypeParameterDeclaration {
   public void markAsRead() {
+    this.checkMutable();
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     ReadAndWriteTracking _readAndWriteTracking = _compilationUnit.getReadAndWriteTracking();
     JvmTypeParameter _delegate = this.getDelegate();
@@ -46,12 +47,14 @@ public class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDecl
   }
   
   public void setSimpleName(final String name) {
+    this.checkMutable();
     ConditionUtils.checkJavaIdentifier(name, "name");
     JvmTypeParameter _delegate = this.getDelegate();
     _delegate.setName(name);
   }
   
   public void remove() {
+    this.checkMutable();
     JvmTypeParameter _delegate = this.getDelegate();
     Resource _eResource = _delegate.eResource();
     boolean _notEquals = (!Objects.equal(_eResource, null));
@@ -85,6 +88,7 @@ public class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDecl
   }
   
   public void setUpperBounds(final Iterable<? extends TypeReference> upperBounds) {
+    this.checkMutable();
     ConditionUtils.checkIterable(upperBounds, "upperBounds");
     ConditionUtils.checkInferredTypeReferences("parameter type", ((TypeReference[])Conversions.unwrapArray(upperBounds, TypeReference.class)));
     JvmTypeParameter _delegate = this.getDelegate();
@@ -100,6 +104,15 @@ public class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDecl
         EList<JvmTypeConstraint> _constraints_1 = _delegate_1.getConstraints();
         _constraints_1.add(jvmUpperBound);
       }
+    }
+  }
+  
+  protected final void checkMutable() {
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    boolean _isModifyAllowed = _compilationUnit.isModifyAllowed();
+    boolean _not = (!_isModifyAllowed);
+    if (_not) {
+      throw new IllegalStateException("Element cannot be modified after the transformation phase");
     }
   }
 }

@@ -37,6 +37,8 @@ import org.junit.runner.RunWith
 import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import static org.junit.Assert.*
+import org.eclipse.xtext.validation.IResourceValidator
+import org.eclipse.xtext.validation.CheckMode
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XtendIDEInjectorProvider))
@@ -44,6 +46,8 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 
 	@Inject
 	private extension IEObjectHoverDocumentationProvider documentationProvider
+	
+	@Inject IResourceValidator validator
 
 	// dummy override, to make launch config available
 	@Test override testSimpleModification() {
@@ -152,6 +156,7 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 		val resourceSet = resourceSetProvider.get(userProject.project)
 		val resource = resourceSet.getResource(URI.createPlatformResourceURI(sourceFile.fullPath.toString, true), true)
 		EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl)
+		validator.validate(resource, CheckMode.FAST_ONLY, CancelIndicator.NullImpl)
 		val unit = compilationUnitProvider.get
 		unit.xtendFile = resource.contents.filter(XtendFile).head
 		expectations.apply(unit)

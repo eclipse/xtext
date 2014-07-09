@@ -46,6 +46,7 @@ import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
 @SuppressWarnings("all")
 public class MutableJvmAnnotationTypeDeclarationImpl extends JvmAnnotationTypeDeclarationImpl implements MutableAnnotationTypeDeclaration {
   public void markAsRead() {
+    this.checkMutable();
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     ReadAndWriteTracking _readAndWriteTracking = _compilationUnit.getReadAndWriteTracking();
     JvmAnnotationType _delegate = this.getDelegate();
@@ -103,6 +104,7 @@ public class MutableJvmAnnotationTypeDeclarationImpl extends JvmAnnotationTypeDe
   }
   
   public MutableAnnotationTypeElementDeclaration addAnnotationTypeElement(final String name, final Procedure1<MutableAnnotationTypeElementDeclaration> initializer) {
+    this.checkMutable();
     ConditionUtils.checkJavaIdentifier(name, "name");
     boolean _notEquals = (!Objects.equal(initializer, null));
     Preconditions.checkArgument(_notEquals, "initializer cannot be null");

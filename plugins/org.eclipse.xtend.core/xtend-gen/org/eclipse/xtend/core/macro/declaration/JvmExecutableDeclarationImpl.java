@@ -93,6 +93,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
   }
   
   public void setBody(final Expression body) {
+    this.checkMutable();
     boolean _equals = Objects.equal(body, null);
     if (_equals) {
       CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
@@ -109,6 +110,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
   }
   
   public void setExceptions(final TypeReference... exceptions) {
+    this.checkMutable();
     ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(exceptions)), "exceptions");
     ConditionUtils.checkInferredTypeReferences("exception type", exceptions);
     T _delegate = this.getDelegate();
@@ -127,11 +129,13 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
   }
   
   public void setVarArgs(final boolean isVarArgs) {
+    this.checkMutable();
     T _delegate = this.getDelegate();
     _delegate.setVarArgs(isVarArgs);
   }
   
   public MutableTypeParameterDeclaration addTypeParameter(final String name, final TypeReference... upperBounds) {
+    this.checkMutable();
     ConditionUtils.checkJavaIdentifier(name, "name");
     ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(upperBounds)), "upperBounds");
     ConditionUtils.checkInferredTypeReferences("parameter type", upperBounds);
@@ -156,6 +160,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
   }
   
   public void setBody(final CompilationStrategy compilationStrategy) {
+    this.checkMutable();
     boolean _notEquals = (!Objects.equal(compilationStrategy, null));
     Preconditions.checkArgument(_notEquals, "compilationStrategy cannot be null");
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
@@ -164,6 +169,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
   }
   
   public void setBody(final StringConcatenationClient compilationTemplate) {
+    this.checkMutable();
     boolean _notEquals = (!Objects.equal(compilationTemplate, null));
     Preconditions.checkArgument(_notEquals, "compilationTemplate cannot be null");
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
@@ -172,6 +178,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
   }
   
   public MutableParameterDeclaration addParameter(final String name, final TypeReference type) {
+    this.checkMutable();
     ConditionUtils.checkJavaIdentifier(name, "name");
     boolean _notEquals = (!Objects.equal(type, null));
     Preconditions.checkArgument(_notEquals, "type cannot be null");

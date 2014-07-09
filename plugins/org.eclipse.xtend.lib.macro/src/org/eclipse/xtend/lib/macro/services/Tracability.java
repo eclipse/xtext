@@ -8,7 +8,6 @@
 package org.eclipse.xtend.lib.macro.services;
 
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
-import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement;
 import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 
 import com.google.common.annotations.Beta;
@@ -47,7 +46,7 @@ public interface Tracability {
 	 * @param source
 	 * @return the primary generated element (Java) derived from the given source element (Xtend).
 	 */
-	MutableNamedElement getPrimaryGeneratedJavaElement(NamedElement source);
+	NamedElement getPrimaryGeneratedJavaElement(NamedElement source);
 	/**
 	 * @since 2.7
 	 * @param target

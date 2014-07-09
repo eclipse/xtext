@@ -48,8 +48,17 @@ public class ProblemSupportImpl implements ProblemSupport {
     this.compilationUnit.checkCanceled();
   }
   
+  private void checkValidationAllowed() {
+    boolean _isValidationAllowed = this.compilationUnit.isValidationAllowed();
+    boolean _not = (!_isValidationAllowed);
+    if (_not) {
+      throw new IllegalStateException("Adding issues is not allowed after the validation phase");
+    }
+  }
+  
   public void addError(final Element element, final String message) {
     this.checkCanceled();
+    this.checkValidationAllowed();
     final Pair<Resource, EObject> resAndObj = this.getResourceAndEObject(element);
     Resource _key = resAndObj.getKey();
     EList<Resource.Diagnostic> _errors = _key.getErrors();
@@ -62,6 +71,7 @@ public class ProblemSupportImpl implements ProblemSupport {
   
   public void addWarning(final Element element, final String message) {
     this.checkCanceled();
+    this.checkValidationAllowed();
     final Pair<Resource, EObject> resAndObj = this.getResourceAndEObject(element);
     Resource _key = resAndObj.getKey();
     EList<Resource.Diagnostic> _warnings = _key.getWarnings();
@@ -72,7 +82,7 @@ public class ProblemSupportImpl implements ProblemSupport {
     _warnings.add(_eObjectDiagnosticImpl);
   }
   
-  public List<Problem> getProblems(final Element element) {
+  public List<? extends Problem> getProblems(final Element element) {
     this.checkCanceled();
     final Pair<Resource, EObject> resAndObj = this.getResourceAndEObject(element);
     final Resource resource = resAndObj.getKey();

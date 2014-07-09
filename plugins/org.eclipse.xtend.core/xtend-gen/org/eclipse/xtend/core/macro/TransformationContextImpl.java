@@ -7,23 +7,13 @@
  */
 package org.eclipse.xtend.core.macro;
 
-import com.google.common.base.Objects;
-import com.google.common.collect.Iterables;
-import com.google.inject.Inject;
 import java.io.InputStream;
 import java.net.URI;
 import java.util.List;
-import java.util.Set;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.macro.declaration.AssociatorImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
-import org.eclipse.xtend.core.macro.declaration.JvmNamedElementImpl;
+import org.eclipse.xtend.core.macro.declaration.TracabilityImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
-import org.eclipse.xtend.core.macro.declaration.XtendNamedElementImpl;
-import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.core.xtend.XtendMember;
-import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
@@ -44,128 +34,13 @@ import org.eclipse.xtend.lib.macro.services.AnnotationReferenceProvider;
 import org.eclipse.xtend.lib.macro.services.Problem;
 import org.eclipse.xtend.lib.macro.services.ProblemSupport;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class TransformationContextImpl implements TransformationContext {
-  @Inject
-  private IXtendJvmAssociations associations;
-  
-  @Inject
-  private IJvmModelAssociator associator;
-  
   @Property
   private CompilationUnitImpl _unit;
-  
-  public boolean isExternal(final NamedElement element) {
-    boolean _and = false;
-    boolean _isSource = this.isSource(element);
-    boolean _not = (!_isSource);
-    if (!_not) {
-      _and = false;
-    } else {
-      boolean _isGenerated = this.isGenerated(element);
-      boolean _not_1 = (!_isGenerated);
-      _and = _not_1;
-    }
-    return _and;
-  }
-  
-  public boolean isGenerated(final NamedElement element) {
-    boolean _switchResult = false;
-    boolean _matched = false;
-    if (!_matched) {
-      if (element instanceof JvmNamedElementImpl) {
-        _matched=true;
-        JvmIdentifiableElement _delegate = ((JvmNamedElementImpl<? extends JvmIdentifiableElement>)element).getDelegate();
-        Resource _eResource = _delegate.eResource();
-        CompilationUnitImpl _unit = this.getUnit();
-        XtendFile _xtendFile = _unit.getXtendFile();
-        Resource _eResource_1 = _xtendFile.eResource();
-        return Objects.equal(_eResource, _eResource_1);
-      }
-    }
-    if (!_matched) {
-      _switchResult = false;
-    }
-    return _switchResult;
-  }
-  
-  public boolean isSource(final NamedElement element) {
-    return (element instanceof XtendNamedElementImpl<?>);
-  }
-  
-  public MutableNamedElement getPrimaryGeneratedJavaElement(final NamedElement source) {
-    boolean _isSource = this.isSource(source);
-    if (_isSource) {
-      EObject _delegate = ((XtendNamedElementImpl<?>) source).getDelegate();
-      Set<EObject> _jvmElements = this.associations.getJvmElements(_delegate);
-      Iterable<JvmIdentifiableElement> _filter = Iterables.<JvmIdentifiableElement>filter(_jvmElements, 
-        JvmIdentifiableElement.class);
-      final JvmIdentifiableElement derivedElement = IterableExtensions.<JvmIdentifiableElement>head(_filter);
-      boolean _tripleNotEquals = (derivedElement != null);
-      if (_tripleNotEquals) {
-        CompilationUnitImpl _unit = this.getUnit();
-        NamedElement _namedElement = _unit.toNamedElement(derivedElement);
-        return ((MutableNamedElement) _namedElement);
-      }
-    } else {
-      boolean _isGenerated = this.isGenerated(source);
-      if (_isGenerated) {
-        return ((MutableNamedElement) source);
-      }
-    }
-    return null;
-  }
-  
-  public NamedElement getPrimarySourceElement(final NamedElement target) {
-    boolean _isGenerated = this.isGenerated(target);
-    if (_isGenerated) {
-      JvmIdentifiableElement _delegate = ((JvmNamedElementImpl<?>) target).getDelegate();
-      Set<EObject> _sourceElements = this.associations.getSourceElements(_delegate);
-      final EObject sourceElement = IterableExtensions.<EObject>head(_sourceElements);
-      if ((sourceElement instanceof XtendMember)) {
-        CompilationUnitImpl _unit = this.getUnit();
-        return _unit.toXtendMemberDeclaration(((XtendMember)sourceElement));
-      } else {
-        if ((sourceElement instanceof XtendParameter)) {
-          CompilationUnitImpl _unit_1 = this.getUnit();
-          return _unit_1.toXtendParameterDeclaration(((XtendParameter)sourceElement));
-        }
-      }
-    } else {
-      boolean _isSource = this.isSource(target);
-      if (_isSource) {
-        return target;
-      }
-    }
-    return null;
-  }
-  
-  public boolean isThePrimaryGeneratedJavaElement(final NamedElement target) {
-    boolean _xblockexpression = false;
-    {
-      final NamedElement source = this.getPrimarySourceElement(target);
-      boolean _tripleEquals = (source == null);
-      if (_tripleEquals) {
-        return false;
-      }
-      MutableNamedElement _primaryGeneratedJavaElement = this.getPrimaryGeneratedJavaElement(source);
-      _xblockexpression = Objects.equal(_primaryGeneratedJavaElement, target);
-    }
-    return _xblockexpression;
-  }
-  
-  public void setPrimarySourceElement(final MutableNamedElement secondaryElement, final NamedElement primaryElement) {
-    final NamedElement sourceElement = this.getPrimarySourceElement(primaryElement);
-    EObject _delegate = ((XtendNamedElementImpl<?>) sourceElement).getDelegate();
-    JvmIdentifiableElement _delegate_1 = ((JvmNamedElementImpl<?>) secondaryElement).getDelegate();
-    this.associator.associate(_delegate, _delegate_1);
-  }
   
   public void addError(final Element element, final String message) {
     CompilationUnitImpl _unit = this.getUnit();
@@ -179,7 +54,7 @@ public class TransformationContextImpl implements TransformationContext {
     _problemSupport.addWarning(element, message);
   }
   
-  public List<Problem> getProblems(final Element element) {
+  public List<? extends Problem> getProblems(final Element element) {
     CompilationUnitImpl _unit = this.getUnit();
     ProblemSupport _problemSupport = _unit.getProblemSupport();
     return _problemSupport.getProblems(element);
@@ -471,6 +346,48 @@ public class TransformationContextImpl implements TransformationContext {
     CompilationUnitImpl _unit = this.getUnit();
     TypeReferenceProvider _typeReferenceProvider = _unit.getTypeReferenceProvider();
     return _typeReferenceProvider.newSelfTypeReference(typeDeclaration);
+  }
+  
+  public NamedElement getPrimaryGeneratedJavaElement(final NamedElement source) {
+    CompilationUnitImpl _unit = this.getUnit();
+    TracabilityImpl _tracability = _unit.getTracability();
+    return _tracability.getPrimaryGeneratedJavaElement(source);
+  }
+  
+  public NamedElement getPrimarySourceElement(final NamedElement target) {
+    CompilationUnitImpl _unit = this.getUnit();
+    TracabilityImpl _tracability = _unit.getTracability();
+    return _tracability.getPrimarySourceElement(target);
+  }
+  
+  public boolean isExternal(final NamedElement element) {
+    CompilationUnitImpl _unit = this.getUnit();
+    TracabilityImpl _tracability = _unit.getTracability();
+    return _tracability.isExternal(element);
+  }
+  
+  public boolean isGenerated(final NamedElement element) {
+    CompilationUnitImpl _unit = this.getUnit();
+    TracabilityImpl _tracability = _unit.getTracability();
+    return _tracability.isGenerated(element);
+  }
+  
+  public boolean isSource(final NamedElement element) {
+    CompilationUnitImpl _unit = this.getUnit();
+    TracabilityImpl _tracability = _unit.getTracability();
+    return _tracability.isSource(element);
+  }
+  
+  public boolean isThePrimaryGeneratedJavaElement(final NamedElement target) {
+    CompilationUnitImpl _unit = this.getUnit();
+    TracabilityImpl _tracability = _unit.getTracability();
+    return _tracability.isThePrimaryGeneratedJavaElement(target);
+  }
+  
+  public void setPrimarySourceElement(final MutableNamedElement primaryElement, final NamedElement secondaryElement) {
+    CompilationUnitImpl _unit = this.getUnit();
+    AssociatorImpl _associator = _unit.getAssociator();
+    _associator.setPrimarySourceElement(primaryElement, secondaryElement);
   }
   
   @Pure
