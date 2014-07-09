@@ -24,6 +24,33 @@ class XImportSectionValidationTest extends AbstractXtendTestCase {
 
 	@Inject
 	extension ValidationTestHelper
+	
+	@Test def void checkUnnecessaryImportForEnumLiteral_1() {
+		val file = '''
+			import static java.lang.annotation.RetentionPolicy.*
+			
+			class C {
+				def m(java.lang.annotation.RetentionPolicy p) {
+					switch(p) {
+						case CLASS: true
+						default: false
+					}
+				}
+			}
+		'''.toString.file
+		file.assertWarning(XIMPORT_DECLARATION, IMPORT_UNUSED, "The import 'java.lang.annotation.RetentionPolicy' is never used.")
+	}
+	
+	@Test def void checkUnnecessaryImportForEnumLiteral_2() {
+		val file = '''
+			import static java.lang.annotation.RetentionPolicy.*
+			
+			@java.lang.annotation.Retention(CLASS)
+			annotation A {
+			}
+		'''.toString.file
+		file.assertWarning(XIMPORT_DECLARATION, IMPORT_UNUSED, "The import 'java.lang.annotation.RetentionPolicy' is never used.")
+	}
 
 	@Test def void checkImportWithStaticAccess_0() {
 		val file = '''

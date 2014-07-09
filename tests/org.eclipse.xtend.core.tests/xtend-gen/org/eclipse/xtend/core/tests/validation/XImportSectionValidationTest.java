@@ -29,6 +29,64 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
   private ValidationTestHelper _validationTestHelper;
   
   @Test
+  public void checkUnnecessaryImportForEnumLiteral_1() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import static java.lang.annotation.RetentionPolicy.*");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class C {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def m(java.lang.annotation.RetentionPolicy p) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("switch(p) {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("case CLASS: true");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("default: false");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      String _string = _builder.toString();
+      final XtendFile file = this.file(_string);
+      this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "The import \'java.lang.annotation.RetentionPolicy\' is never used.");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void checkUnnecessaryImportForEnumLiteral_2() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import static java.lang.annotation.RetentionPolicy.*");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("@java.lang.annotation.Retention(CLASS)");
+      _builder.newLine();
+      _builder.append("annotation A {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      String _string = _builder.toString();
+      final XtendFile file = this.file(_string);
+      this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "The import \'java.lang.annotation.RetentionPolicy\' is never used.");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void checkImportWithStaticAccess_0() {
     try {
       StringConcatenation _builder = new StringConcatenation();

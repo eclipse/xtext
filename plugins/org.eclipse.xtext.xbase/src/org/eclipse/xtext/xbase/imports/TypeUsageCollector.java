@@ -17,7 +17,9 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -46,6 +48,7 @@ import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
+import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
@@ -257,6 +260,11 @@ public class TypeUsageCollector {
 		XExpression expression = linkingCandidate.getExpression();
 		if (expression instanceof XAbstractFeatureCall) {
 			JvmIdentifiableElement feature = linkingCandidate.getFeature();
+			if (feature instanceof JvmEnumerationLiteral && expression instanceof XFeatureCall) {
+				if (isEnumLiteralImplicitelyImported(expression)) {
+					return;
+				}
+			}
 			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) expression;
 			if ((feature instanceof JvmOperation || feature instanceof JvmField) && featureCall.isStatic()) {
 				if (featureCall.isExtension()) {
@@ -268,6 +276,18 @@ public class TypeUsageCollector {
 		}
 	}
 	
+	private boolean isEnumLiteralImplicitelyImported(XExpression expression) {
+		XCasePart container = EcoreUtil2.getContainerOfType(expression, XCasePart.class);
+		if (container != null && EcoreUtil.isAncestor(container.getCase(), expression)) {
+			return true;
+		}
+		if (EcoreUtil2.getContainerOfType(expression, XAnnotation.class) != null) {
+			// TODO should check logical container as soon as it is available for annotation values
+			return true;
+		}
+		return false;
+	}
+
 	protected void addJavaDocReferences(EObject element) {
 		if(element != null && documentationProvider != null && currentThisType != null) {
 			for(INode documentationNode: documentationProvider.getDocumentationNodes(element)) {

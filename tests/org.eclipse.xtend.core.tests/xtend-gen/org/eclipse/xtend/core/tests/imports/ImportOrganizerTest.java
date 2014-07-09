@@ -89,6 +89,88 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testEnumerationLiteralInAnnotation() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import static java.lang.annotation.RetentionPolicy.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@java.lang.annotation.Retention(CLASS)");
+    _builder.newLine();
+    _builder.append("annotation A {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.lang.annotation.Retention");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@Retention(CLASS)");
+    _builder_1.newLine();
+    _builder_1.append("annotation A {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testEnumerationLiteralInSwitch() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import static java.lang.annotation.RetentionPolicy.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def m(java.lang.annotation.RetentionPolicy p) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("switch p {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("case CLASS: true");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("default: false");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.lang.annotation.RetentionPolicy");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class C {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def m(RetentionPolicy p) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("switch p {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("case CLASS: true");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("default: false");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testSimple() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
