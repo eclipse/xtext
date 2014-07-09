@@ -48,7 +48,7 @@ class DataProcessor extends AbstractClassProcessor {
 		dataFields.forEach [
 			final = true
 		]
-		if (!hasUserDefinedConstructor && !hasFinalFieldsConstructor) {
+		if (needsFinalFieldConstructor) {
 			addFinalFieldsConstructor
 		}
 		if (!hasHashCode) {
@@ -61,7 +61,7 @@ class DataProcessor extends AbstractClassProcessor {
 			addDataToString
 		}
 		dataFields.forEach [
-			if (shouldAddGetter && canAddGetter) {
+			if (shouldAddGetter) {
 				addGetter(Visibility.PUBLIC)
 			}
 			simpleName = "_" + simpleName.toFirstLower
