@@ -23,10 +23,13 @@ import org.eclipse.xtext.validation.EObjectDiagnosticImpl
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
+import static org.eclipse.xtend.core.macro.ActiveAnnotationContexts.AnnotationCallback.*
+import java.util.List
 
 class ProblemSupportImpl implements ProblemSupport {
 	
 	CompilationUnitImpl compilationUnit
+	val List<()=> void> delayedTasks = newArrayList
 	
 	new (CompilationUnitImpl compilationUnit) {
 		this.compilationUnit = compilationUnit
@@ -37,7 +40,7 @@ class ProblemSupportImpl implements ProblemSupport {
 	}
 	
 	private def checkValidationAllowed() {
-		if (!compilationUnit.isValidationAllowed)
+		if (compilationUnit.lastPhase > VALIDATION)
 			throw new IllegalStateException("Adding issues is not allowed after the validation phase")
 	}
 	
@@ -53,6 +56,19 @@ class ProblemSupportImpl implements ProblemSupport {
 		checkValidationAllowed
 		val resAndObj = getResourceAndEObject(element)
 		resAndObj.key.warnings.add(new EObjectDiagnosticImpl(Severity.WARNING, 'user.issue', message, resAndObj.value, getSignificantFeature(resAndObj.value), -1, null))
+	}
+	
+	override validateLater(()=>void validationCallback) {
+		if(compilationUnit.lastPhase < VALIDATION) {
+			delayedTasks.add(validationCallback)
+		} else {
+			validationCallback.apply
+		}
+	}
+	
+	def validationPhaseStarted() {
+		delayedTasks.forEach[apply]
+		delayedTasks.clear
 	}
 	
 	override getProblems(Element element) {

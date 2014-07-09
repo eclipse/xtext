@@ -12,6 +12,7 @@ import com.google.common.base.Preconditions;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtend.core.macro.ActiveAnnotationContexts;
 import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmTypeParameterDeclarationImpl;
@@ -109,10 +110,10 @@ public class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDecl
   
   protected final void checkMutable() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    boolean _isModifyAllowed = _compilationUnit.isModifyAllowed();
-    boolean _not = (!_isModifyAllowed);
-    if (_not) {
-      throw new IllegalStateException("Element cannot be modified after the transformation phase");
+    ActiveAnnotationContexts.AnnotationCallback _lastPhase = _compilationUnit.getLastPhase();
+    boolean _notEquals = (!Objects.equal(_lastPhase, ActiveAnnotationContexts.AnnotationCallback.INFERENCE));
+    if (_notEquals) {
+      throw new IllegalStateException("Element cannot be modified outside the transformation phase");
     }
   }
 }

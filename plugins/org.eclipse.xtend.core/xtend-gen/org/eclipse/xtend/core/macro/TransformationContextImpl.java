@@ -34,6 +34,7 @@ import org.eclipse.xtend.lib.macro.services.AnnotationReferenceProvider;
 import org.eclipse.xtend.lib.macro.services.Problem;
 import org.eclipse.xtend.lib.macro.services.ProblemSupport;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
@@ -58,6 +59,12 @@ public class TransformationContextImpl implements TransformationContext {
     CompilationUnitImpl _unit = this.getUnit();
     ProblemSupport _problemSupport = _unit.getProblemSupport();
     return _problemSupport.getProblems(element);
+  }
+  
+  public void validateLater(final Procedure0 validationCallback) {
+    CompilationUnitImpl _unit = this.getUnit();
+    ProblemSupport _problemSupport = _unit.getProblemSupport();
+    _problemSupport.validateLater(validationCallback);
   }
   
   public TypeReference getAnyType() {
