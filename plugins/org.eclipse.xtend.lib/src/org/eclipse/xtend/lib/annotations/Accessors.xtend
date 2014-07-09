@@ -56,22 +56,22 @@ class AccessorsProcessor implements TransformationParticipant<MutableMemberDecla
 		elements.forEach[transform(context)]
 	}
 
-	def dispatch transform(MutableFieldDeclaration it, extension TransformationContext context) {
+	def dispatch void transform(MutableFieldDeclaration it, extension TransformationContext context) {
 		extension val util = new AccessorsProcessor.Util(context)
-		if (shouldAddGetter && canAddGetter) {
+		if (shouldAddGetter) {
 			addGetter(getterType.toVisibility)
 		}
-		if (shouldAddSetter && canAddSetter) {
+		if (shouldAddSetter) {
 			addSetter(setterType.toVisibility)
 		}
 	}
 
-	def dispatch transform(MutableClassDeclaration it, extension TransformationContext context) {
+	def dispatch void transform(MutableClassDeclaration it, extension TransformationContext context) {
 		if (findAnnotation(Data.findTypeGlobally) !== null) {
 			return
 		}
 		val extension requiredArgsUtil = new FinalFieldsConstructorProcessor.Util(context)
-		if (!hasUserDefinedConstructor && !hasFinalFieldsConstructor) {
+		if (needsFinalFieldConstructor) {
 			addFinalFieldsConstructor
 		}
 		declaredFields.filter[!static && thePrimaryGeneratedJavaElement].forEach[_transform(context)]
@@ -124,28 +124,33 @@ class AccessorsProcessor implements TransformationParticipant<MutableMemberDecla
 			findAnnotation(Accessors.findTypeGlobally)
 		}
 
-		def canAddGetter(MutableFieldDeclaration field) {
+		def validateGetter(MutableFieldDeclaration field) {
+			if (field.type.inferred) {
+				field.addWarning('''
+					Support for inferred types on getters may be removed in the future.
+					Important validations cannot be done. Also, for boolean types the
+					getter may incorrectly be prefixed with "get" instead of "is".
+				''')
+				return
+			}
 			val overriddenGetter = field.declaringType.newSelfTypeReference.allResolvedMethods.findFirst [
 				declaration.simpleName == field.getterName && resolvedParameters.empty
 			]
-			if (overriddenGetter == null)
-				return true
-			val overriddenDeclaration = overriddenGetter.declaration
-			if (overriddenDeclaration.final) {
-				field.addError(
-					'''Cannot override the final method «overriddenGetter.simpleSignature» in «overriddenDeclaration.
-						declaringType.simpleName»''')
-				return false
+			if (overriddenGetter !== null) {
+				val overriddenDeclaration = overriddenGetter.declaration
+				if (overriddenDeclaration.final) {
+					field.addError(
+						'''Cannot override the final method «overriddenGetter.simpleSignature» in «overriddenDeclaration.
+							declaringType.simpleName»''')
+				}
+				if (!overriddenGetter.resolvedReturnType.isAssignableFrom(field.type)) {
+					field.addError(
+						'''
+							Cannot override the method «overriddenGetter.simpleSignature» in «overriddenDeclaration.declaringType.simpleName», 
+							because its return type is incompatible with «field.type.simpleName»
+						''')
+				}
 			}
-			if (!overriddenGetter.resolvedReturnType.isAssignableFrom(field.type)) {
-				field.addError(
-					'''
-						Cannot override the method «overriddenGetter.simpleSignature» in «overriddenDeclaration.declaringType.simpleName», 
-						because its return type is incompatible with «field.type.simpleName»
-					''')
-				return false
-			}
-			return true
 		}
 
 		def getGetterName(FieldDeclaration it) {
@@ -157,6 +162,7 @@ class AccessorsProcessor implements TransformationParticipant<MutableMemberDecla
 		}
 
 		def void addGetter(MutableFieldDeclaration field, Visibility visibility) {
+			field.validateGetter
 			field.markAsRead
 			field.declaringType.addMethod(field.getterName) [
 				primarySourceElement = field.primarySourceElement
@@ -193,43 +199,40 @@ class AccessorsProcessor implements TransformationParticipant<MutableMemberDecla
 			!final && !hasSetter && setterType !== AccessorType.NONE
 		}
 
-		def canAddSetter(MutableFieldDeclaration field) {
+		def validateSetter(MutableFieldDeclaration field) {
 			if (field.final) {
 				field.addError("Cannot set a final field")
-				return false
 			}
 			if (field.type.inferred) {
 				field.addError("Type cannot be inferred.")
-				return false
+				return
 			}
 			val overriddenSetter = field.declaringType.newSelfTypeReference.allResolvedMethods.findFirst [
 				declaration.simpleName == field.setterName && resolvedParameters.size == 1 &&
 					field.type.isAssignableFrom(resolvedParameters.head.resolvedType)
 			]
-			if (overriddenSetter == null)
-				return true
-			val overriddenDeclaration = overriddenSetter.declaration
-			if (overriddenDeclaration.final) {
-				field.addError(
-					'''Cannot override the final method «overriddenSetter.simpleSignature» in «overriddenDeclaration.
-						declaringType.simpleName»''')
-				return false
+			if (overriddenSetter !== null) {
+				val overriddenDeclaration = overriddenSetter.declaration
+				if (overriddenDeclaration.final) {
+					field.addError(
+						'''Cannot override the final method «overriddenSetter.simpleSignature» in «overriddenDeclaration.
+							declaringType.simpleName»''')
+				}
+				if (!overriddenSetter.resolvedReturnType.isVoid) {
+					field.addError(
+						'''
+							Cannot override the method «overriddenSetter.simpleSignature» in «overriddenDeclaration.declaringType.simpleName», because its return type is not void»
+						''')
+				}
 			}
-			if (!overriddenSetter.resolvedReturnType.isVoid) {
-				field.addError(
-					'''
-						Cannot override the method «overriddenSetter.simpleSignature» in «overriddenDeclaration.declaringType.simpleName», because its return type is not void»
-					''')
-				return false
-			}
-			return true
 		}
 
 		def void addSetter(MutableFieldDeclaration field, Visibility visibility) {
+			field.validateSetter
 			field.declaringType.addMethod(field.setterName) [
 				primarySourceElement = field.primarySourceElement
 				returnType = primitiveVoid
-				val param = addParameter(field.simpleName, field.type)
+				val param = addParameter(field.simpleName, if (field.type.inferred) object else field.type)
 				body = '''«field.fieldOwner».«field.simpleName» = «param.simpleName»;'''
 				static = field.static
 				it.visibility = visibility

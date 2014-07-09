@@ -46,25 +46,11 @@ class FinalFieldsConstructorProcessor implements TransformationParticipant<Mutab
 			return
 		}
 		val extension util = new FinalFieldsConstructorProcessor.Util(context)
-		if (hasFinalFieldsConstructor) {
-			addError("A RequiredArgsConstructor is already defined")
-		}
 		addFinalFieldsConstructor
 	}
 
-	static val EMPTY_BODY = Pattern.compile("\\{\\s*\\}")
-
 	def dispatch void transform(MutableConstructorDeclaration it, extension TransformationContext context) {
 		val extension util = new FinalFieldsConstructorProcessor.Util(context)
-		if (!parameters.empty) {
-			addError("Parameter list must be empty")
-		}
-		if (!EMPTY_BODY.matcher(body.toString).matches) {
-			addError("Body must be empty")
-		}
-		if (hasFinalFieldsConstructor(declaringType)) {
-			addError("A FinalFieldsConstructor is already defined")
-		}
 		makeFinalFieldsConstructor
 	}
 
@@ -84,47 +70,62 @@ class FinalFieldsConstructorProcessor implements TransformationParticipant<Mutab
 			declaredFields.filter[!static && final == true && initializer == null && thePrimaryGeneratedJavaElement]
 		}
 
-		def hasUserDefinedConstructor(MutableClassDeclaration it) {
-			!(primarySourceElement as ClassDeclaration).declaredConstructors.isEmpty
+		def needsFinalFieldConstructor(MutableClassDeclaration it) {
+			!hasFinalFieldsConstructor
+			&& (primarySourceElement as ClassDeclaration).declaredConstructors.isEmpty
 		}
 
 		def hasFinalFieldsConstructor(MutableTypeDeclaration cls) {
+			val expectedTypes = newArrayList
+			if (cls.superConstructor !== null) {
+				expectedTypes += cls.superConstructor.resolvedParameters.map[resolvedType]
+			}
+			expectedTypes += cls.finalFields.map[type]
 			cls.declaredConstructors.exists [
-				val expectedTypes = newArrayList
-				if (cls.superConstructor !== null) {
-					expectedTypes += cls.superConstructor.resolvedParameters.map[resolvedType]
-				}
-				expectedTypes += cls.finalFields.map[type]
 				parameters.map[type].toList == expectedTypes
 			]
 		}
 
-		def addFinalFieldsConstructor(MutableClassDeclaration cls) {
-			cls.addConstructor [
-				primarySourceElement = cls.primarySourceElement
+		def addFinalFieldsConstructor(MutableClassDeclaration it) {
+			if (hasFinalFieldsConstructor) {
+				addError("A FinalFieldsConstructor is already defined")
+				return
+			}
+			addConstructor [
+				primarySourceElement = declaringType.primarySourceElement
 				makeFinalFieldsConstructor
 			]
 		}
+		
+		static val EMPTY_BODY = Pattern.compile("\\{\\s*\\}")
 
-		def makeFinalFieldsConstructor(MutableConstructorDeclaration ctor) {
-			ctor => [
-				val superParameters = ctor.declaringType.superConstructor?.resolvedParameters ?: #[]
-				superParameters.forEach [ p |
-					addParameter(p.declaration.simpleName, p.resolvedType)
-				]
-				val fieldToParameter = newHashMap
-				declaringType.finalFields.forEach [ p |
-					p.markAsInitializedBy(ctor)
-					val param = addParameter(p.simpleName, p.type)
-					fieldToParameter.put(p, param)
-				]
-				body = '''
-					super(«superParameters.join(", ")[declaration.simpleName]»);
-					«FOR arg : declaringType.finalFields»
-						this.«arg.simpleName» = «fieldToParameter.get(arg).simpleName»;
-					«ENDFOR»
-				'''
+		def makeFinalFieldsConstructor(MutableConstructorDeclaration it) {
+			if (hasFinalFieldsConstructor(declaringType)) {
+				addError("A FinalFieldsConstructor is already defined")
+				return
+			}
+			if (!parameters.empty) {
+				addError("Parameter list must be empty")
+			}
+			if (body !== null && !EMPTY_BODY.matcher(body.toString).matches) {
+				addError("Body must be empty")
+			}
+			val superParameters = declaringType.superConstructor?.resolvedParameters ?: #[]
+			superParameters.forEach [ p |
+				addParameter(p.declaration.simpleName, p.resolvedType)
 			]
+			val fieldToParameter = newHashMap
+			declaringType.finalFields.forEach [ p |
+				p.markAsInitializedBy(it)
+				val param = addParameter(p.simpleName, p.type)
+				fieldToParameter.put(p, param)
+			]
+			body = '''
+				super(«superParameters.join(", ")[declaration.simpleName]»);
+				«FOR arg : declaringType.finalFields»
+					this.«arg.simpleName» = «fieldToParameter.get(arg).simpleName»;
+				«ENDFOR»
+			'''
 		}
 
 		def getSuperConstructor(TypeDeclaration it) {
