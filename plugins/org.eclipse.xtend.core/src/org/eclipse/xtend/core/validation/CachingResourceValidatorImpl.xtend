@@ -43,19 +43,7 @@ class CachingResourceValidatorImpl extends DerivedStateAwareResourceValidator {
 	override protected collectResourceDiagnostics(Resource resource, CancelIndicator monitor, IAcceptor<Issue> acceptor) {
 		runActiveAnnotationValidation(resource, monitor)
 		addWarningsForOrphanedJvmElements(resource, monitor)
-		for (error : resource.errors) {
-			if (monitor.isCanceled) {
-				return
-			}
-			issueFromXtextResourceDiagnostic(error, Severity.ERROR, acceptor)
-		}
-
-		for (warning : resource.warnings) {
-			if (monitor.isCanceled) {
-				return
-			}
-			issueFromXtextResourceDiagnostic(warning, Severity.WARNING, acceptor)
-		}
+		super.collectResourceDiagnostics(resource, monitor, acceptor)
 	}
 	
 	private def runActiveAnnotationValidation(Resource resource, CancelIndicator monitor) {

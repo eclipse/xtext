@@ -95,26 +95,7 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
   protected void collectResourceDiagnostics(final Resource resource, final CancelIndicator monitor, final IAcceptor<Issue> acceptor) {
     this.runActiveAnnotationValidation(resource, monitor);
     this.addWarningsForOrphanedJvmElements(resource, monitor);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    for (final Resource.Diagnostic error : _errors) {
-      {
-        boolean _isCanceled = monitor.isCanceled();
-        if (_isCanceled) {
-          return;
-        }
-        this.issueFromXtextResourceDiagnostic(error, Severity.ERROR, acceptor);
-      }
-    }
-    EList<Resource.Diagnostic> _warnings = resource.getWarnings();
-    for (final Resource.Diagnostic warning : _warnings) {
-      {
-        boolean _isCanceled = monitor.isCanceled();
-        if (_isCanceled) {
-          return;
-        }
-        this.issueFromXtextResourceDiagnostic(warning, Severity.WARNING, acceptor);
-      }
-    }
+    super.collectResourceDiagnostics(resource, monitor, acceptor);
   }
   
   private void runActiveAnnotationValidation(final Resource resource, final CancelIndicator monitor) {
