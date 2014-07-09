@@ -508,6 +508,81 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
+  public void testSpecifyingVisiblityNoStaticImport() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Accessors");
+      _builder.newLine();
+      _builder.append("@Accessors(PROTECTED_GETTER, PROTECTED_SETTER)");
+      _builder.newLine();
+      _builder.append("class C {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("int a");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Accessors(PRIVATE_GETTER, PUBLIC_SETTER) int b");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Accessors(NONE) int c");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        public void accept(final CompilationTestHelper.Result it) {
+          Class<?> _compiledClass = it.getCompiledClass();
+          final Procedure1<Class<?>> _function = new Procedure1<Class<?>>() {
+            public void apply(final Class<?> it) {
+              try {
+                Method _declaredMethod = it.getDeclaredMethod("getA");
+                int _modifiers = _declaredMethod.getModifiers();
+                boolean _isProtected = Modifier.isProtected(_modifiers);
+                Assert.assertTrue(_isProtected);
+                Method _declaredMethod_1 = it.getDeclaredMethod("setA", int.class);
+                int _modifiers_1 = _declaredMethod_1.getModifiers();
+                boolean _isProtected_1 = Modifier.isProtected(_modifiers_1);
+                Assert.assertTrue(_isProtected_1);
+                Method _declaredMethod_2 = it.getDeclaredMethod("getB");
+                int _modifiers_2 = _declaredMethod_2.getModifiers();
+                boolean _isPrivate = Modifier.isPrivate(_modifiers_2);
+                Assert.assertTrue(_isPrivate);
+                Method _declaredMethod_3 = it.getDeclaredMethod("setB", int.class);
+                int _modifiers_3 = _declaredMethod_3.getModifiers();
+                boolean _isPublic = Modifier.isPublic(_modifiers_3);
+                Assert.assertTrue(_isPublic);
+                Method[] _declaredMethods = it.getDeclaredMethods();
+                final Function1<Method, Boolean> _function = new Function1<Method, Boolean>() {
+                  public Boolean apply(final Method it) {
+                    String _name = it.getName();
+                    return Boolean.valueOf(Objects.equal(_name, "getC"));
+                  }
+                };
+                boolean _exists = IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods)), _function);
+                Assert.assertFalse(_exists);
+                Method[] _declaredMethods_1 = it.getDeclaredMethods();
+                final Function1<Method, Boolean> _function_1 = new Function1<Method, Boolean>() {
+                  public Boolean apply(final Method it) {
+                    String _name = it.getName();
+                    return Boolean.valueOf(Objects.equal(_name, "setC"));
+                  }
+                };
+                boolean _exists_1 = IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods_1)), _function_1);
+                Assert.assertFalse(_exists_1);
+              } catch (Throwable _e) {
+                throw Exceptions.sneakyThrow(_e);
+              }
+            }
+          };
+          ObjectExtensions.<Class<?>>operator_doubleArrow(_compiledClass, _function);
+        }
+      };
+      this.compilationTestHelper.compile(_builder, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testIntegrationWithData() {
     try {
       StringConcatenation _builder = new StringConcatenation();

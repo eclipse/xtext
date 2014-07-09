@@ -959,30 +959,40 @@ public class CompilationUnitImpl implements CompilationUnit {
       if (_equals) {
         return null;
       }
-      TypeReference _switchResult = null;
-      boolean _matched = false;
-      if (!_matched) {
-        if (delegate instanceof XComputedTypeReferenceImplCustom) {
-          boolean _isEquivalentComputed = ((XComputedTypeReferenceImplCustom)delegate).isEquivalentComputed();
-          boolean _not = (!_isEquivalentComputed);
-          if (_not) {
-            _matched=true;
-            InferredTypeReferenceImpl _inferredTypeReferenceImpl = new InferredTypeReferenceImpl();
-            final Procedure1<InferredTypeReferenceImpl> _function = new Procedure1<InferredTypeReferenceImpl>() {
-              public void apply(final InferredTypeReferenceImpl it) {
-                it.setDelegate(((XComputedTypeReferenceImplCustom)delegate));
-                it.setCompilationUnit(CompilationUnitImpl.this);
+      final Function1<JvmTypeReference, TypeReference> _function = new Function1<JvmTypeReference, TypeReference>() {
+        public TypeReference apply(final JvmTypeReference it) {
+          TypeReference _switchResult = null;
+          boolean _matched = false;
+          if (!_matched) {
+            if (delegate instanceof XComputedTypeReferenceImplCustom) {
+              _matched=true;
+              TypeReference _xifexpression = null;
+              boolean _isEquivalentComputed = ((XComputedTypeReferenceImplCustom)delegate).isEquivalentComputed();
+              boolean _not = (!_isEquivalentComputed);
+              if (_not) {
+                InferredTypeReferenceImpl _inferredTypeReferenceImpl = new InferredTypeReferenceImpl();
+                final Procedure1<InferredTypeReferenceImpl> _function = new Procedure1<InferredTypeReferenceImpl>() {
+                  public void apply(final InferredTypeReferenceImpl it) {
+                    it.setDelegate(((XComputedTypeReferenceImplCustom)delegate));
+                    it.setCompilationUnit(CompilationUnitImpl.this);
+                  }
+                };
+                _xifexpression = ObjectExtensions.<InferredTypeReferenceImpl>operator_doubleArrow(_inferredTypeReferenceImpl, _function);
+              } else {
+                JvmTypeReference _equivalent = ((XComputedTypeReferenceImplCustom)delegate).getEquivalent();
+                _xifexpression = CompilationUnitImpl.this.toTypeReference(_equivalent);
               }
-            };
-            _switchResult = ObjectExtensions.<InferredTypeReferenceImpl>operator_doubleArrow(_inferredTypeReferenceImpl, _function);
+              _switchResult = _xifexpression;
+            }
           }
+          if (!_matched) {
+            LightweightTypeReference _lightweightReference = CompilationUnitImpl.this.typeRefConverter.toLightweightReference(delegate);
+            _switchResult = CompilationUnitImpl.this.toTypeReference(_lightweightReference);
+          }
+          return _switchResult;
         }
-      }
-      if (!_matched) {
-        LightweightTypeReference _lightweightReference = this.typeRefConverter.toLightweightReference(delegate);
-        _switchResult = this.toTypeReference(_lightweightReference);
-      }
-      _xblockexpression = _switchResult;
+      };
+      _xblockexpression = this.<JvmTypeReference, TypeReference>getOrCreate(delegate, _function);
     }
     return _xblockexpression;
   }
