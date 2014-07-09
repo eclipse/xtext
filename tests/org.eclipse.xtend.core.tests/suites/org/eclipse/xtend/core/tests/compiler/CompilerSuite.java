@@ -18,6 +18,7 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({
+	AccessorsCompilerTest.class,
 	AnnotationCompilerTest.class,
 	AnnotationsCompilerTest.class,
 	AnnotationValueCompilerTest.class,
