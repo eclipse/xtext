@@ -32,7 +32,7 @@ class DataProcessor extends AbstractClassProcessor {
 		dataFields.forEach [
 			final = true
 		]
-		if (!hasUserDefinedConstructor && !hasFinalFieldsConstructor) {
+		if (needsFinalFieldConstructor) {
 			addFinalFieldsConstructor
 		}
 		if (!hasHashCode) {
@@ -49,7 +49,7 @@ class DataProcessor extends AbstractClassProcessor {
 			}
 		}
 		dataFields.forEach [
-			if (shouldAddGetter && canAddGetter) {
+			if (shouldAddGetter) {
 				addGetter(getterType?.toVisibility ?: Visibility.PUBLIC)
 			}
 		]

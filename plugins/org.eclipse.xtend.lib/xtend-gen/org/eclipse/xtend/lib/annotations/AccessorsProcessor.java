@@ -168,7 +168,12 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
       return it.findAnnotation(_findTypeGlobally);
     }
     
-    public boolean canAddGetter(final MutableFieldDeclaration field) {
+    public void validateGetter(final MutableFieldDeclaration field) {
+      TypeReference _type = field.getType();
+      boolean _isInferred = _type.isInferred();
+      if (_isInferred) {
+        return;
+      }
       MutableTypeDeclaration _declaringType = field.getDeclaringType();
       TypeReference _newSelfTypeReference = this.context.newSelfTypeReference(_declaringType);
       Iterable<? extends ResolvedMethod> _allResolvedMethods = _newSelfTypeReference.getAllResolvedMethods();
@@ -190,48 +195,44 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
         }
       };
       final ResolvedMethod overriddenGetter = IterableExtensions.findFirst(_allResolvedMethods, _function);
-      boolean _equals = Objects.equal(overriddenGetter, null);
-      if (_equals) {
-        return true;
-      }
-      final MethodDeclaration overriddenDeclaration = overriddenGetter.getDeclaration();
-      boolean _isFinal = overriddenDeclaration.isFinal();
-      if (_isFinal) {
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("Cannot override the final method ");
-        String _simpleSignature = overriddenGetter.getSimpleSignature();
-        _builder.append(_simpleSignature, "");
-        _builder.append(" in ");
-        TypeDeclaration _declaringType_1 = overriddenDeclaration.getDeclaringType();
-        String _simpleName = _declaringType_1.getSimpleName();
-        _builder.append(_simpleName, "");
-        this.context.addError(field, _builder.toString());
-        return false;
-      }
-      TypeReference _resolvedReturnType = overriddenGetter.getResolvedReturnType();
-      TypeReference _type = field.getType();
-      boolean _isAssignableFrom = _resolvedReturnType.isAssignableFrom(_type);
-      boolean _not = (!_isAssignableFrom);
-      if (_not) {
-        StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("Cannot override the method ");
-        String _simpleSignature_1 = overriddenGetter.getSimpleSignature();
-        _builder_1.append(_simpleSignature_1, "");
-        _builder_1.append(" in ");
-        TypeDeclaration _declaringType_2 = overriddenDeclaration.getDeclaringType();
-        String _simpleName_1 = _declaringType_2.getSimpleName();
-        _builder_1.append(_simpleName_1, "");
-        _builder_1.append(", ");
-        _builder_1.newLineIfNotEmpty();
-        _builder_1.append("because its return type is incompatible with ");
+      boolean _tripleNotEquals = (overriddenGetter != null);
+      if (_tripleNotEquals) {
+        final MethodDeclaration overriddenDeclaration = overriddenGetter.getDeclaration();
+        boolean _isFinal = overriddenDeclaration.isFinal();
+        if (_isFinal) {
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("Cannot override the final method ");
+          String _simpleSignature = overriddenGetter.getSimpleSignature();
+          _builder.append(_simpleSignature, "");
+          _builder.append(" in ");
+          TypeDeclaration _declaringType_1 = overriddenDeclaration.getDeclaringType();
+          String _simpleName = _declaringType_1.getSimpleName();
+          _builder.append(_simpleName, "");
+          this.context.addError(field, _builder.toString());
+        }
+        TypeReference _resolvedReturnType = overriddenGetter.getResolvedReturnType();
         TypeReference _type_1 = field.getType();
-        String _simpleName_2 = _type_1.getSimpleName();
-        _builder_1.append(_simpleName_2, "");
-        _builder_1.newLineIfNotEmpty();
-        this.context.addError(field, _builder_1.toString());
-        return false;
+        boolean _isAssignableFrom = _resolvedReturnType.isAssignableFrom(_type_1);
+        boolean _not = (!_isAssignableFrom);
+        if (_not) {
+          StringConcatenation _builder_1 = new StringConcatenation();
+          _builder_1.append("Cannot override the method ");
+          String _simpleSignature_1 = overriddenGetter.getSimpleSignature();
+          _builder_1.append(_simpleSignature_1, "");
+          _builder_1.append(" in ");
+          TypeDeclaration _declaringType_2 = overriddenDeclaration.getDeclaringType();
+          String _simpleName_1 = _declaringType_2.getSimpleName();
+          _builder_1.append(_simpleName_1, "");
+          _builder_1.append(", ");
+          _builder_1.newLineIfNotEmpty();
+          _builder_1.append("because its return type is incompatible with ");
+          TypeReference _type_2 = field.getType();
+          String _simpleName_2 = _type_2.getSimpleName();
+          _builder_1.append(_simpleName_2, "");
+          _builder_1.newLineIfNotEmpty();
+          this.context.addError(field, _builder_1.toString());
+        }
       }
-      return true;
     }
     
     public String getGetterName(final FieldDeclaration it) {
@@ -273,6 +274,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
     }
     
     public void addGetter(final MutableFieldDeclaration field, final Visibility visibility) {
+      this.validateGetter(field);
       field.markAsRead();
       MutableTypeDeclaration _declaringType = field.getDeclaringType();
       String _getterName = this.getGetterName(field);
@@ -392,17 +394,16 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
       return _and;
     }
     
-    public boolean canAddSetter(final MutableFieldDeclaration field) {
+    public void validateSetter(final MutableFieldDeclaration field) {
       boolean _isFinal = field.isFinal();
       if (_isFinal) {
         this.context.addError(field, "Cannot set a final field");
-        return false;
       }
       TypeReference _type = field.getType();
       boolean _isInferred = _type.isInferred();
       if (_isInferred) {
         this.context.addError(field, "Type cannot be inferred.");
-        return false;
+        return;
       }
       MutableTypeDeclaration _declaringType = field.getDeclaringType();
       TypeReference _newSelfTypeReference = this.context.newSelfTypeReference(_declaringType);
@@ -437,45 +438,42 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
         }
       };
       final ResolvedMethod overriddenSetter = IterableExtensions.findFirst(_allResolvedMethods, _function);
-      boolean _equals = Objects.equal(overriddenSetter, null);
-      if (_equals) {
-        return true;
+      boolean _tripleNotEquals = (overriddenSetter != null);
+      if (_tripleNotEquals) {
+        final MethodDeclaration overriddenDeclaration = overriddenSetter.getDeclaration();
+        boolean _isFinal_1 = overriddenDeclaration.isFinal();
+        if (_isFinal_1) {
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("Cannot override the final method ");
+          String _simpleSignature = overriddenSetter.getSimpleSignature();
+          _builder.append(_simpleSignature, "");
+          _builder.append(" in ");
+          TypeDeclaration _declaringType_1 = overriddenDeclaration.getDeclaringType();
+          String _simpleName = _declaringType_1.getSimpleName();
+          _builder.append(_simpleName, "");
+          this.context.addError(field, _builder.toString());
+        }
+        TypeReference _resolvedReturnType = overriddenSetter.getResolvedReturnType();
+        boolean _isVoid = _resolvedReturnType.isVoid();
+        boolean _not = (!_isVoid);
+        if (_not) {
+          StringConcatenation _builder_1 = new StringConcatenation();
+          _builder_1.append("Cannot override the method ");
+          String _simpleSignature_1 = overriddenSetter.getSimpleSignature();
+          _builder_1.append(_simpleSignature_1, "");
+          _builder_1.append(" in ");
+          TypeDeclaration _declaringType_2 = overriddenDeclaration.getDeclaringType();
+          String _simpleName_1 = _declaringType_2.getSimpleName();
+          _builder_1.append(_simpleName_1, "");
+          _builder_1.append(", because its return type is not void»");
+          _builder_1.newLineIfNotEmpty();
+          this.context.addError(field, _builder_1.toString());
+        }
       }
-      final MethodDeclaration overriddenDeclaration = overriddenSetter.getDeclaration();
-      boolean _isFinal_1 = overriddenDeclaration.isFinal();
-      if (_isFinal_1) {
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("Cannot override the final method ");
-        String _simpleSignature = overriddenSetter.getSimpleSignature();
-        _builder.append(_simpleSignature, "");
-        _builder.append(" in ");
-        TypeDeclaration _declaringType_1 = overriddenDeclaration.getDeclaringType();
-        String _simpleName = _declaringType_1.getSimpleName();
-        _builder.append(_simpleName, "");
-        this.context.addError(field, _builder.toString());
-        return false;
-      }
-      TypeReference _resolvedReturnType = overriddenSetter.getResolvedReturnType();
-      boolean _isVoid = _resolvedReturnType.isVoid();
-      boolean _not = (!_isVoid);
-      if (_not) {
-        StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("Cannot override the method ");
-        String _simpleSignature_1 = overriddenSetter.getSimpleSignature();
-        _builder_1.append(_simpleSignature_1, "");
-        _builder_1.append(" in ");
-        TypeDeclaration _declaringType_2 = overriddenDeclaration.getDeclaringType();
-        String _simpleName_1 = _declaringType_2.getSimpleName();
-        _builder_1.append(_simpleName_1, "");
-        _builder_1.append(", because its return type is not void»");
-        _builder_1.newLineIfNotEmpty();
-        this.context.addError(field, _builder_1.toString());
-        return false;
-      }
-      return true;
     }
     
     public void addSetter(final MutableFieldDeclaration field, final Visibility visibility) {
+      this.validateSetter(field);
       MutableTypeDeclaration _declaringType = field.getDeclaringType();
       String _setterName = this.getSetterName(field);
       final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
@@ -485,8 +483,15 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
           TypeReference _primitiveVoid = Util.this.context.getPrimitiveVoid();
           it.setReturnType(_primitiveVoid);
           String _simpleName = field.getSimpleName();
+          TypeReference _xifexpression = null;
           TypeReference _type = field.getType();
-          final MutableParameterDeclaration param = it.addParameter(_simpleName, _type);
+          boolean _isInferred = _type.isInferred();
+          if (_isInferred) {
+            _xifexpression = Util.this.context.getObject();
+          } else {
+            _xifexpression = field.getType();
+          }
+          final MutableParameterDeclaration param = it.addParameter(_simpleName, _xifexpression);
           StringConcatenationClient _client = new StringConcatenationClient() {
             @Override
             protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -523,28 +528,14 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
   protected void _transform(final MutableFieldDeclaration it, @Extension final TransformationContext context) {
     @Extension
     final AccessorsProcessor.Util util = new AccessorsProcessor.Util(context);
-    boolean _and = false;
     boolean _shouldAddGetter = util.shouldAddGetter(it);
-    if (!_shouldAddGetter) {
-      _and = false;
-    } else {
-      boolean _canAddGetter = util.canAddGetter(it);
-      _and = _canAddGetter;
-    }
-    if (_and) {
+    if (_shouldAddGetter) {
       AccessorType _getterType = util.getGetterType(it);
       Visibility _visibility = util.toVisibility(_getterType);
       util.addGetter(it, _visibility);
     }
-    boolean _and_1 = false;
     boolean _shouldAddSetter = util.shouldAddSetter(it);
-    if (!_shouldAddSetter) {
-      _and_1 = false;
-    } else {
-      boolean _canAddSetter = util.canAddSetter(it);
-      _and_1 = _canAddSetter;
-    }
-    if (_and_1) {
+    if (_shouldAddSetter) {
       AccessorType _setterType = util.getSetterType(it);
       Visibility _visibility_1 = util.toVisibility(_setterType);
       util.addSetter(it, _visibility_1);
@@ -560,17 +551,8 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
     }
     @Extension
     final FinalFieldsConstructorProcessor.Util requiredArgsUtil = new FinalFieldsConstructorProcessor.Util(context);
-    boolean _and = false;
-    boolean _hasUserDefinedConstructor = requiredArgsUtil.hasUserDefinedConstructor(it);
-    boolean _not = (!_hasUserDefinedConstructor);
-    if (!_not) {
-      _and = false;
-    } else {
-      boolean _hasFinalFieldsConstructor = requiredArgsUtil.hasFinalFieldsConstructor(it);
-      boolean _not_1 = (!_hasFinalFieldsConstructor);
-      _and = _not_1;
-    }
-    if (_and) {
+    boolean _needsFinalFieldConstructor = requiredArgsUtil.needsFinalFieldConstructor(it);
+    if (_needsFinalFieldConstructor) {
       requiredArgsUtil.addFinalFieldsConstructor(it);
     }
     Iterable<? extends MutableFieldDeclaration> _declaredFields = it.getDeclaredFields();

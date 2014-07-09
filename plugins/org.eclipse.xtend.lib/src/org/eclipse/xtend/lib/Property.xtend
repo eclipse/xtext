@@ -34,10 +34,10 @@ class PropertyProcessor extends AbstractFieldProcessor {
 	
 	override doTransform(MutableFieldDeclaration it, extension TransformationContext context) {
 		extension val util = new AccessorsProcessor.Util(context)
-		if (!hasGetter && canAddGetter) {
+		if (!hasGetter) {
 			addGetter(Visibility.PUBLIC)
 		}
-		if (!final && !hasSetter && canAddSetter) {
+		if (!final && !hasSetter) {
 			addSetter(Visibility.PUBLIC)
 		}
 		simpleName = "_" + simpleName.toFirstLower
