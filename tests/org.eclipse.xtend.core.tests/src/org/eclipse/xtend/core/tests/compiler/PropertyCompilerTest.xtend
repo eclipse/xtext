@@ -113,13 +113,14 @@ class PropertyCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def compileReadonlyPropertyWithoutType() {
 		val generatorConfig = generatorConfigProvider.get(null)
-		assertCompilesTo(
-			'''
-				class C {
-					@Property
-					val string = ''
-				}
-			''',
+		val source = '''
+			class C {
+				@Property
+				val string = ''
+			}
+		'''
+		source.clazz.assertWarning(XtendPackage.Literals.XTEND_FIELD, "user.issue", "inferred")
+		source.assertCompilesTo(
 			'''
 				import org.eclipse.xtend.lib.Property;
 				import org.eclipse.xtext.xbase.lib.Pure;

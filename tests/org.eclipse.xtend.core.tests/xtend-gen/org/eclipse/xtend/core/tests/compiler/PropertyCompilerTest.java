@@ -218,51 +218,58 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
   
   @Test
   public void compileReadonlyPropertyWithoutType() {
-    final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class C {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("@Property");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("val string = \'\'");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import org.eclipse.xtend.lib.Property;");
-    _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.lib.Pure;");
-    _builder_1.newLine();
-    _builder_1.newLine();
-    _builder_1.append("@SuppressWarnings(\"all\")");
-    _builder_1.newLine();
-    _builder_1.append("public class C {");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("@Property");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("private final String _string = \"\";");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("@Pure");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("public String getString() {");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return this._string;");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1, generatorConfig);
+    try {
+      final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class C {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Property");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val string = \'\'");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final String source = _builder.toString();
+      XtendClass _clazz = this.clazz(source);
+      this._validationTestHelper.assertWarning(_clazz, XtendPackage.Literals.XTEND_FIELD, "user.issue", "inferred");
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("import org.eclipse.xtend.lib.Property;");
+      _builder_1.newLine();
+      _builder_1.append("import org.eclipse.xtext.xbase.lib.Pure;");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("@SuppressWarnings(\"all\")");
+      _builder_1.newLine();
+      _builder_1.append("public class C {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("@Property");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("private final String _string = \"\";");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("@Pure");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("public String getString() {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("return this._string;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.assertCompilesTo(source, _builder_1, generatorConfig);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
