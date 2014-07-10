@@ -85,13 +85,13 @@ class TypeReferenceProviderImpl implements TypeReferenceProvider {
 	override newTypeReference(String typeName, TypeReference... typeArguments) {
 		checkCanceled
 		val type = typeReferences.findDeclaredType(typeName, xtendFile)
-		if (type == null)
+		if (type === null)
 			return null
 		toTypeReference(createTypeRef(type, typeArguments.map[toJvmTypeReference] as JvmTypeReference[]))
 	}
 	
 	def createTypeRef(JvmType type, JvmTypeReference... typeArgs) {
-		if (type == null) {
+		if (type === null) {
 			throw new NullPointerException("type")
 		}
 		val reference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
@@ -142,7 +142,7 @@ class TypeReferenceProviderImpl implements TypeReferenceProvider {
 			}
 		}
 		
-		if (type == null)
+		if (type === null)
 			return null
 		toTypeReference(createTypeRef(type, typeArguments.map[toJvmTypeReference] as JvmTypeReference[]))
 	}
@@ -152,7 +152,7 @@ class TypeReferenceProviderImpl implements TypeReferenceProvider {
 	}
 	
 	override newWildcardTypeReference(TypeReference upperBound) {
-		if (upperBound == null) {
+		if (upperBound === null) {
 			toTypeReference(typeReferences.wildCard())
 		} else {
 			toTypeReference(typeReferences.wildCardExtends(upperBound.toJvmTypeReference))
@@ -160,7 +160,7 @@ class TypeReferenceProviderImpl implements TypeReferenceProvider {
 	}
 	
 	override newWildcardTypeReferenceWithLowerBound(TypeReference lowerBound) {
-		if (lowerBound == null) {
+		if (lowerBound === null) {
 			toTypeReference(typeReferences.wildCard())
 		} else {
 			toTypeReference(typeReferences.wildCardSuper(lowerBound.toJvmTypeReference))

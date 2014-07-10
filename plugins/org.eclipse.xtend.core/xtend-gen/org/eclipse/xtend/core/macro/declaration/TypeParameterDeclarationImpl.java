@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -73,8 +72,8 @@ public class TypeParameterDeclarationImpl extends AbstractElementImpl<JvmTypePar
   }
   
   public boolean isAssignableFrom(final Type otherType) {
-    boolean _equals = Objects.equal(otherType, null);
-    if (_equals) {
+    boolean _tripleEquals = (otherType == null);
+    if (_tripleEquals) {
       return false;
     }
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();

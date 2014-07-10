@@ -89,7 +89,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
       boolean _xifexpression = false;
       TypeReference _newTypeReference = this.context.newTypeReference(cls);
       TypeReference _object = this.context.getObject();
-      boolean _equals = Objects.equal(_newTypeReference, _object);
+      boolean _equals = _newTypeReference.equals(_object);
       if (_equals) {
         _xifexpression = false;
       } else {

@@ -158,7 +158,8 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
         }
         if (!_matched) {
           TypeReference _string_1 = this.context.getString();
-          TypeReference _newTypeReference = this.context.newTypeReference(Class.class);
+          TypeReference _newWildcardTypeReference = this.context.newWildcardTypeReference();
+          TypeReference _newTypeReference = this.context.newTypeReference(Class.class, _newWildcardTypeReference);
           TypeReference _newArrayTypeReference = this.context.newArrayTypeReference(_newTypeReference);
           TypeReference _object = this.context.getObject();
           TypeReference _newArrayTypeReference_1 = this.context.newArrayTypeReference(_object);
@@ -234,8 +235,15 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
         boolean valid = true;
         for (final TypeReference iface : listedInterfaces) {
           {
-            boolean _contains = availableInterfaces.contains(iface);
-            boolean _not = (!_contains);
+            final Function1<TypeReference, Boolean> _function = new Function1<TypeReference, Boolean>() {
+              public Boolean apply(final TypeReference it) {
+                Type _type = it.getType();
+                Type _type_1 = iface.getType();
+                return Boolean.valueOf(Objects.equal(_type, _type_1));
+              }
+            };
+            boolean _exists = IterableExtensions.exists(availableInterfaces, _function);
+            boolean _not = (!_exists);
             if (_not) {
               StringConcatenation _builder = new StringConcatenation();
               TypeReference _type_1 = this.getType(delegate);
@@ -247,8 +255,15 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
               this.context.addError(delegate, _builder.toString());
               valid = false;
             }
-            boolean _contains_1 = interfacesOfDeclaringType.contains(iface);
-            boolean _not_1 = (!_contains_1);
+            final Function1<TypeReference, Boolean> _function_1 = new Function1<TypeReference, Boolean>() {
+              public Boolean apply(final TypeReference it) {
+                Type _type = it.getType();
+                Type _type_1 = iface.getType();
+                return Boolean.valueOf(Objects.equal(_type, _type_1));
+              }
+            };
+            boolean _exists_1 = IterableExtensions.exists(interfacesOfDeclaringType, _function_1);
+            boolean _not_1 = (!_exists_1);
             if (_not_1) {
               StringConcatenation _builder_1 = new StringConcatenation();
               String _simpleName_2 = declaringType.getSimpleName();
@@ -579,7 +594,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
     }
     
     public TypeReference replace(final TypeReference target, final TypeReference oldType, final TypeReference newType) {
-      boolean _equals = Objects.equal(target, oldType);
+      boolean _equals = target.equals(oldType);
       if (_equals) {
         return newType;
       }
@@ -646,7 +661,8 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       }
       if (!_matched) {
         TypeReference _string_1 = this.context.getString();
-        TypeReference _newTypeReference = this.context.newTypeReference(Class.class);
+        TypeReference _newWildcardTypeReference = this.context.newWildcardTypeReference();
+        TypeReference _newTypeReference = this.context.newTypeReference(Class.class, _newWildcardTypeReference);
         TypeReference _newArrayTypeReference = this.context.newArrayTypeReference(_newTypeReference);
         TypeReference _object = this.context.getObject();
         TypeReference _newArrayTypeReference_1 = this.context.newArrayTypeReference(_object);

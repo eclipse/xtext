@@ -34,8 +34,8 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
   public TypeReference getEquivalent() {
     TypeReference _xblockexpression = null;
     {
-      boolean _equals = Objects.equal(this._equivalent, null);
-      if (_equals) {
+      boolean _tripleEquals = (this._equivalent == null);
+      if (_tripleEquals) {
         XComputedTypeReferenceImplCustom _delegate = this.getDelegate();
         boolean _isEquivalentComputed = _delegate.isEquivalentComputed();
         if (_isEquivalentComputed) {
@@ -62,8 +62,8 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
     List<TypeReference> _xblockexpression = null;
     {
       TypeReference _equivalent = this.getEquivalent();
-      boolean _equals = Objects.equal(_equivalent, null);
-      if (_equals) {
+      boolean _tripleEquals = (_equivalent == null);
+      if (_tripleEquals) {
         String _message = this.message("getActualTypeArguments()");
         throw new UnsupportedOperationException(_message);
       }
@@ -77,8 +77,8 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
     TypeReference _xblockexpression = null;
     {
       TypeReference _equivalent = this.getEquivalent();
-      boolean _equals = Objects.equal(_equivalent, null);
-      if (_equals) {
+      boolean _tripleEquals = (_equivalent == null);
+      if (_tripleEquals) {
         String _message = this.message("getArrayComponentType()");
         throw new UnsupportedOperationException(_message);
       }
@@ -92,8 +92,8 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
     TypeReference _xblockexpression = null;
     {
       TypeReference _equivalent = this.getEquivalent();
-      boolean _equals = Objects.equal(_equivalent, null);
-      if (_equals) {
+      boolean _tripleEquals = (_equivalent == null);
+      if (_tripleEquals) {
         String _message = this.message("getLowerBound()");
         throw new UnsupportedOperationException(_message);
       }
@@ -107,8 +107,8 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
     String _xblockexpression = null;
     {
       TypeReference _equivalent = this.getEquivalent();
-      boolean _equals = Objects.equal(_equivalent, null);
-      if (_equals) {
+      boolean _tripleEquals = (_equivalent == null);
+      if (_tripleEquals) {
         String _message = this.message("getName()");
         throw new UnsupportedOperationException(_message);
       }
@@ -122,8 +122,8 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
     TypeReference _xblockexpression = null;
     {
       TypeReference _equivalent = this.getEquivalent();
-      boolean _equals = Objects.equal(_equivalent, null);
-      if (_equals) {
+      boolean _tripleEquals = (_equivalent == null);
+      if (_tripleEquals) {
         String _message = this.message("getPrimitiveIfWrapper()");
         throw new UnsupportedOperationException(_message);
       }
@@ -137,8 +137,8 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
     String _xblockexpression = null;
     {
       TypeReference _equivalent = this.getEquivalent();
-      boolean _equals = Objects.equal(_equivalent, null);
-      if (_equals) {
+      boolean _tripleEquals = (_equivalent == null);
+      if (_tripleEquals) {
         String _message = this.message("getSimpleName()");
         throw new UnsupportedOperationException(_message);
       }
@@ -152,8 +152,8 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
     Type _xblockexpression = null;
     {
       TypeReference _equivalent = this.getEquivalent();
-      boolean _equals = Objects.equal(_equivalent, null);
-      if (_equals) {
+      boolean _tripleEquals = (_equivalent == null);
+      if (_tripleEquals) {
         String _message = this.message("getType()");
         throw new UnsupportedOperationException(_message);
       }
@@ -167,8 +167,8 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
     TypeReference _xblockexpression = null;
     {
       TypeReference _equivalent = this.getEquivalent();
-      boolean _equals = Objects.equal(_equivalent, null);
-      if (_equals) {
+      boolean _tripleEquals = (_equivalent == null);
+      if (_tripleEquals) {
         String _message = this.message("getUpperBound()");
         throw new UnsupportedOperationException(_message);
       }
@@ -182,8 +182,8 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
     TypeReference _xblockexpression = null;
     {
       TypeReference _equivalent = this.getEquivalent();
-      boolean _equals = Objects.equal(_equivalent, null);
-      if (_equals) {
+      boolean _tripleEquals = (_equivalent == null);
+      if (_tripleEquals) {
         String _message = this.message("getWrapperIfPrimitive()");
         throw new UnsupportedOperationException(_message);
       }
@@ -197,8 +197,8 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
     boolean _xblockexpression = false;
     {
       TypeReference _equivalent = this.getEquivalent();
-      boolean _equals = Objects.equal(_equivalent, null);
-      if (_equals) {
+      boolean _tripleEquals = (_equivalent == null);
+      if (_tripleEquals) {
         String _message = this.message("isAnyType()");
         throw new UnsupportedOperationException(_message);
       }
@@ -212,8 +212,8 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
     boolean _xblockexpression = false;
     {
       TypeReference _equivalent = this.getEquivalent();
-      boolean _equals = Objects.equal(_equivalent, null);
-      if (_equals) {
+      boolean _tripleEquals = (_equivalent == null);
+      if (_tripleEquals) {
         String _message = this.message("isArray()");
         throw new UnsupportedOperationException(_message);
       }
@@ -227,8 +227,8 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
     boolean _xblockexpression = false;
     {
       TypeReference _equivalent = this.getEquivalent();
-      boolean _equals = Objects.equal(_equivalent, null);
-      if (_equals) {
+      boolean _tripleEquals = (_equivalent == null);
+      if (_tripleEquals) {
         String _message = this.message("isAssignableFrom()");
         throw new UnsupportedOperationException(_message);
       }
@@ -242,8 +242,8 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
     boolean _xblockexpression = false;
     {
       TypeReference _equivalent = this.getEquivalent();
-      boolean _equals = Objects.equal(_equivalent, null);
-      if (_equals) {
+      boolean _tripleEquals = (_equivalent == null);
+      if (_tripleEquals) {
         String _message = this.message("isPrimitive()");
         throw new UnsupportedOperationException(_message);
       }
@@ -257,8 +257,8 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
     boolean _xblockexpression = false;
     {
       TypeReference _equivalent = this.getEquivalent();
-      boolean _equals = Objects.equal(_equivalent, null);
-      if (_equals) {
+      boolean _tripleEquals = (_equivalent == null);
+      if (_tripleEquals) {
         String _message = this.message("isVoid()");
         throw new UnsupportedOperationException(_message);
       }
@@ -272,8 +272,8 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
     boolean _xblockexpression = false;
     {
       TypeReference _equivalent = this.getEquivalent();
-      boolean _equals = Objects.equal(_equivalent, null);
-      if (_equals) {
+      boolean _tripleEquals = (_equivalent == null);
+      if (_tripleEquals) {
         String _message = this.message("isWildCard()");
         throw new UnsupportedOperationException(_message);
       }
@@ -287,8 +287,8 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
     boolean _xblockexpression = false;
     {
       TypeReference _equivalent = this.getEquivalent();
-      boolean _equals = Objects.equal(_equivalent, null);
-      if (_equals) {
+      boolean _tripleEquals = (_equivalent == null);
+      if (_tripleEquals) {
         String _message = this.message("isWrapper()");
         throw new UnsupportedOperationException(_message);
       }
@@ -302,8 +302,8 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
     Iterable<? extends TypeReference> _xblockexpression = null;
     {
       TypeReference _equivalent = this.getEquivalent();
-      boolean _equals = Objects.equal(_equivalent, null);
-      if (_equals) {
+      boolean _tripleEquals = (_equivalent == null);
+      if (_tripleEquals) {
         String _message = this.message("getDeclaredSuperTypes()");
         throw new UnsupportedOperationException(_message);
       }
@@ -317,8 +317,8 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
     Iterable<? extends ResolvedMethod> _xblockexpression = null;
     {
       TypeReference _equivalent = this.getEquivalent();
-      boolean _equals = Objects.equal(_equivalent, null);
-      if (_equals) {
+      boolean _tripleEquals = (_equivalent == null);
+      if (_tripleEquals) {
         String _message = this.message("getDeclaredResolvedMethods()");
         throw new UnsupportedOperationException(_message);
       }
@@ -332,8 +332,8 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
     Iterable<? extends ResolvedConstructor> _xblockexpression = null;
     {
       TypeReference _equivalent = this.getEquivalent();
-      boolean _equals = Objects.equal(_equivalent, null);
-      if (_equals) {
+      boolean _tripleEquals = (_equivalent == null);
+      if (_tripleEquals) {
         String _message = this.message("getDeclaredResolvedConstructors()");
         throw new UnsupportedOperationException(_message);
       }
@@ -347,8 +347,8 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
     Iterable<? extends ResolvedMethod> _xblockexpression = null;
     {
       TypeReference _equivalent = this.getEquivalent();
-      boolean _equals = Objects.equal(_equivalent, null);
-      if (_equals) {
+      boolean _tripleEquals = (_equivalent == null);
+      if (_tripleEquals) {
         String _message = this.message("getAllResolvedMethods()");
         throw new UnsupportedOperationException(_message);
       }
@@ -365,6 +365,39 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
   public String toString() {
     XComputedTypeReferenceImplCustom _delegate = this.getDelegate();
     return _delegate.toString();
+  }
+  
+  public boolean equals(final Object obj) {
+    if ((obj instanceof InferredTypeReferenceImpl)) {
+      XComputedTypeReferenceImplCustom _delegate = this.getDelegate();
+      XComputedTypeReferenceImplCustom _delegate_1 = ((InferredTypeReferenceImpl)obj).getDelegate();
+      return _delegate.equals(_delegate_1);
+    }
+    return false;
+  }
+  
+  public int hashCode() {
+    XComputedTypeReferenceImplCustom _delegate = this.getDelegate();
+    return _delegate.hashCode();
+  }
+  
+  public boolean is(final TypeReference other) {
+    boolean _xblockexpression = false;
+    {
+      TypeReference _equivalent = this.getEquivalent();
+      boolean _tripleEquals = (_equivalent == null);
+      if (_tripleEquals) {
+        String _message = this.message("is()");
+        throw new UnsupportedOperationException(_message);
+      }
+      TypeReference _equivalent_1 = this.getEquivalent();
+      _xblockexpression = _equivalent_1.is(other);
+    }
+    return _xblockexpression;
+  }
+  
+  public boolean operator_equals(final Object other) {
+    return Objects.equal(this, other);
   }
   
   public void setEquivalent(final TypeReference equivalent) {

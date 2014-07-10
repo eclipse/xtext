@@ -70,7 +70,7 @@ class EqualsHashCodeProcessor extends AbstractClassProcessor {
 		}
 
 		def boolean hasSuperEquals(ClassDeclaration cls) {
-			if (cls.newTypeReference == object)
+			if (cls.newTypeReference.equals(object))
 				false
 			else if (cls.hasEquals)
 				true

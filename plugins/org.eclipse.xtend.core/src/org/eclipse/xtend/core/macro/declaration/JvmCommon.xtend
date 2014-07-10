@@ -164,7 +164,7 @@ class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeReference> im
 	
 	override getArrayComponentType() {
 		val componentType = delegate.componentType
-		if (componentType == null)
+		if (componentType === null)
 			return null
 		return compilationUnit.toTypeReference(componentType)
 	}
@@ -241,23 +241,27 @@ class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeReference> im
 			.allOperations.map[compilationUnit.toResolvedMethod(it)]
 	}
 	
+	override isInferred() {
+		return false
+	}
+	
+	override operator_equals(Object other) {
+		ObjectExtensions.operator_equals(this, other)
+	}
+	
 	override equals(Object obj) {
-		if (obj === this)
-			return true
-		if (obj instanceof TypeReference) {
-			// TODO this logic is flawed since rawtype / generic types are assignable in both directions
-			return obj.isAssignableFrom(this) && this.isAssignableFrom(obj)
+		if (obj instanceof TypeReferenceImpl) {
+			return delegate.identifier == obj.delegate.identifier
 		}
 		return false
 	}
 	
 	override hashCode() {
-		// TODO type may be null, e.g. for wildcards or unknown types
-		delegate.type.qualifiedName.hashCode
+		delegate.identifier.hashCode
 	}
 	
-	override isInferred() {
-		return false
+	override is(TypeReference other) {
+		name == other.name
 	}
 	
 }
@@ -271,7 +275,7 @@ class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedTypeReferen
 	}
 	
 	def TypeReference getEquivalent() {
-		if (_equivalent == null) {
+		if (_equivalent === null) {
 			if (delegate.equivalentComputed) {
 				lightweightTypeReference = compilationUnit.typeRefConverter.toLightweightReference(delegate)
 				_equivalent = 	compilationUnit.toTypeReference(lightweightTypeReference)
@@ -285,140 +289,140 @@ class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedTypeReferen
 	}
 	
 	override getActualTypeArguments() {
-		if (equivalent == null) {
+		if (equivalent === null) {
 			throw new UnsupportedOperationException(message('getActualTypeArguments()'))
 		}
 		equivalent.actualTypeArguments
 	}
 	
 	override getArrayComponentType() {
-		if (equivalent == null) {
+		if (equivalent === null) {
 			throw new UnsupportedOperationException(message('getArrayComponentType()'))
 		}
 		equivalent.arrayComponentType
 	}
 	
 	override getLowerBound() {
-		if (equivalent == null) {
+		if (equivalent === null) {
 			throw new UnsupportedOperationException(message('getLowerBound()'))
 		}
 		equivalent.lowerBound
 	}
 	
 	override getName() {
-		if (equivalent == null) {
+		if (equivalent === null) {
 			throw new UnsupportedOperationException(message('getName()'))
 		}
 		equivalent.name
 	}
 	
 	override getPrimitiveIfWrapper() {
-		if (equivalent == null) {
+		if (equivalent === null) {
 			throw new UnsupportedOperationException(message('getPrimitiveIfWrapper()'))
 		}
 		equivalent.primitiveIfWrapper
 	}
 	
 	override getSimpleName() {
-		if (equivalent == null) {
+		if (equivalent === null) {
 			throw new UnsupportedOperationException(message('getSimpleName()'))
 		}
 		equivalent.simpleName
 	}
 	
 	override getType() {
-		if (equivalent == null) {
+		if (equivalent === null) {
 			throw new UnsupportedOperationException(message('getType()'))
 		}
 		equivalent.type
 	}
 	
 	override getUpperBound() {
-		if (equivalent == null) {
+		if (equivalent === null) {
 			throw new UnsupportedOperationException(message('getUpperBound()'))
 		}
 		equivalent.upperBound
 	}
 	
 	override getWrapperIfPrimitive() {
-		if (equivalent == null) {
+		if (equivalent === null) {
 			throw new UnsupportedOperationException(message('getWrapperIfPrimitive()'))
 		}
 		equivalent.wrapperIfPrimitive
 	}
 	
 	override isAnyType() {
-		if (equivalent == null) {
+		if (equivalent === null) {
 			throw new UnsupportedOperationException(message('isAnyType()'))
 		}
 		equivalent.anyType
 	}
 	
 	override isArray() {
-		if (equivalent == null) {
+		if (equivalent === null) {
 			throw new UnsupportedOperationException(message('isArray()'))
 		}
 		equivalent.array
 	}
 	
 	override isAssignableFrom(TypeReference typeReference) {
-		if (equivalent == null) {
+		if (equivalent === null) {
 			throw new UnsupportedOperationException(message('isAssignableFrom()'))
 		}
 		equivalent.isAssignableFrom(typeReference)
 	}
 	
 	override isPrimitive() {
-		if (equivalent == null) {
+		if (equivalent === null) {
 			throw new UnsupportedOperationException(message('isPrimitive()'))
 		}
 		equivalent.primitive
 	}
 	
 	override isVoid() {
-		if (equivalent == null) {
+		if (equivalent === null) {
 			throw new UnsupportedOperationException(message('isVoid()'))
 		}
 		equivalent.isVoid
 	}
 	
 	override isWildCard() {
-		if (equivalent == null) {
+		if (equivalent === null) {
 			throw new UnsupportedOperationException(message('isWildCard()'))
 		}
 		equivalent.wildCard
 	}
 	
 	override isWrapper() {
-		if (equivalent == null) {
+		if (equivalent === null) {
 			throw new UnsupportedOperationException(message('isWrapper()'))
 		}
 		equivalent.wrapper
 	}
 	
 	override getDeclaredSuperTypes() {
-		if (equivalent == null) {
+		if (equivalent === null) {
 			throw new UnsupportedOperationException(message('getDeclaredSuperTypes()'))
 		}
 		equivalent.declaredSuperTypes
 	}
 	
 	override getDeclaredResolvedMethods() {
-		if (equivalent == null) {
+		if (equivalent === null) {
 			throw new UnsupportedOperationException(message('getDeclaredResolvedMethods()'))
 		}
 		equivalent.declaredResolvedMethods
 	}
 	
 	override getDeclaredResolvedConstructors() {
-		if (equivalent == null) {
+		if (equivalent === null) {
 			throw new UnsupportedOperationException(message('getDeclaredResolvedConstructors()'))
 		}
 		equivalent.declaredResolvedConstructors
 	}
 	
 	override getAllResolvedMethods() {
-		if (equivalent == null) {
+		if (equivalent === null) {
 			throw new UnsupportedOperationException(message('getAllResolvedMethods()'))
 		}
 		equivalent.allResolvedMethods
@@ -432,6 +436,28 @@ class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedTypeReferen
 		delegate.toString
 	}
 	
+	override equals(Object obj) {
+		if (obj instanceof InferredTypeReferenceImpl) {
+			return delegate.equals(obj.delegate)
+		}
+		return false
+	}
+	
+	override hashCode() {
+		delegate.hashCode
+	}
+	
+	override is(TypeReference other) {
+		if (equivalent === null) {
+			throw new UnsupportedOperationException(message('is()'))
+		}
+		equivalent.is(other)
+	}
+	
+	override operator_equals(Object other) {
+		ObjectExtensions.operator_equals(this, other)
+	}
+	
 }
 
 // types
@@ -443,7 +469,7 @@ class VoidTypeImpl extends AbstractElementImpl<JvmVoid> implements VoidType {
 	}
 	
 	override isAssignableFrom(Type otherType) {
-		if (otherType == null)
+		if (otherType === null)
 			return false;
 		val thisTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(this)
 		val thatTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(otherType)
@@ -476,7 +502,7 @@ class PrimitiveTypeImpl extends AbstractElementImpl<JvmPrimitiveType> implements
 	}
 	
 	override isAssignableFrom(Type otherType) {
-		if (otherType == null)
+		if (otherType === null)
 			return false;
 		val thisTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(this)
 		val thatTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(otherType)
@@ -516,7 +542,7 @@ class TypeParameterDeclarationImpl extends AbstractElementImpl<JvmTypeParameter>
 	}
 	
 	override isAssignableFrom(Type otherType) {
-		if (otherType == null)
+		if (otherType === null)
 			return false;
 		val thisTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(this)
 		val thatTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(otherType)
