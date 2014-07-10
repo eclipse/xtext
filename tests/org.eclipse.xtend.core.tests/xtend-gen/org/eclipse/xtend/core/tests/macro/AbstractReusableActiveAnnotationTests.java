@@ -506,11 +506,15 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("import org.eclipse.xtend.lib.macro.Active");
     _builder.newLine();
-    _builder.append("import org.eclipse.xtend.lib.macro.TransformationParticipant");
+    _builder.append("import org.eclipse.xtend.lib.macro.AbstractClassProcessor");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration");
     _builder.newLine();
     _builder.append("import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration");
     _builder.newLine();
     _builder.append("import org.eclipse.xtend.lib.macro.TransformationContext");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.RegisterGlobalsContext");
     _builder.newLine();
     _builder.newLine();
     _builder.append("@Active(EvilProcessor)");
@@ -522,7 +526,24 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.append("}");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("class EvilProcessor implements TransformationParticipant<MutableClassDeclaration> {");
+    _builder.append("class EvilProcessor extends AbstractClassProcessor {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override doRegisterGlobals(List<? extends ClassDeclaration> classes, extension RegisterGlobalsContext context) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("classes.forEach[");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("registerClass(qualifiedName+\'.Inner\')");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
     _builder.newLine();
     _builder.append("\t");
     _builder.newLine();
@@ -589,6 +610,119 @@ public abstract class AbstractReusableActiveAnnotationTests {
         };
         boolean _exists = IterableExtensions.<Resource.Diagnostic>exists(_warnings, _function);
         Assert.assertTrue(_exists);
+        XtendFile _xtendFile_1 = it.getXtendFile();
+        Resource _eResource_1 = _xtendFile_1.eResource();
+        EList<Resource.Diagnostic> _warnings_1 = _eResource_1.getWarnings();
+        final Function1<Resource.Diagnostic, Boolean> _function_1 = new Function1<Resource.Diagnostic, Boolean>() {
+          public Boolean apply(final Resource.Diagnostic it) {
+            boolean _and = false;
+            String _message = it.getMessage();
+            boolean _contains = _message.contains("myusercode.Foo$Inner has no source element");
+            if (!_contains) {
+              _and = false;
+            } else {
+              int _line = it.getLine();
+              boolean _equals = (_line == 1);
+              _and = _equals;
+            }
+            return Boolean.valueOf(_and);
+          }
+        };
+        boolean _exists_1 = IterableExtensions.<Resource.Diagnostic>exists(_warnings_1, _function_1);
+        Assert.assertTrue(_exists_1);
+        XtendFile _xtendFile_2 = it.getXtendFile();
+        Resource _eResource_2 = _xtendFile_2.eResource();
+        EList<Resource.Diagnostic> _warnings_2 = _eResource_2.getWarnings();
+        int _size = _warnings_2.size();
+        Assert.assertEquals(2, _size);
+      }
+    };
+    this.assertProcessing(_mappedTo, _mappedTo_1, _function);
+  }
+  
+  @Test
+  public void testDetectOrphanedElements2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package myannotation");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.Active");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.AbstractClassProcessor");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.TransformationContext");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.RegisterGlobalsContext");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@Active(EvilProcessor)");
+    _builder.newLine();
+    _builder.append("annotation EvilAnnotation {}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class EvilProcessor extends AbstractClassProcessor {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override doRegisterGlobals(ClassDeclaration clazz, extension RegisterGlobalsContext context) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("registerClass(clazz.qualifiedName+\'.Inner\')");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override doTransform(MutableClassDeclaration clazz, extension TransformationContext context) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("findClass(clazz.qualifiedName+\'.Inner\').primarySourceElement = clazz");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/EvilAnnotation.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package myusercode");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import myannotation.EvilAnnotation");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@EvilAnnotation");
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("Comparable<String> p = new Comparable<String>() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("override compareTo(String other) { 42 }");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      public void apply(final CompilationUnitImpl it) {
+        XtendFile _xtendFile = it.getXtendFile();
+        Resource _eResource = _xtendFile.eResource();
+        EList<Resource.Diagnostic> _warnings = _eResource.getWarnings();
+        boolean _isEmpty = _warnings.isEmpty();
+        Assert.assertTrue(_isEmpty);
       }
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
