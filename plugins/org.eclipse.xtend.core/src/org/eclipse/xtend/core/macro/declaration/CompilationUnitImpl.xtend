@@ -543,18 +543,23 @@ class CompilationUnitImpl implements CompilationUnit {
 						compilationUnit = this
 					]
 				}
-				default : toTypeReference(typeRefConverter.toLightweightReference(delegate))
+				default : toTypeReference(typeRefConverter.toLightweightReference(delegate), delegate)
 			}
 		]
 	}
 
 	def TypeReference toTypeReference(LightweightTypeReference delegate) {
+		delegate.toTypeReference(null)
+	}
+	
+	def TypeReference toTypeReference(LightweightTypeReference delegate, JvmTypeReference source) {
 		checkCanceled
 		if (delegate == null)
 			return null
 		new TypeReferenceImpl => [
 			it.delegate = delegate
 			it.compilationUnit = this
+			it.source = source
 		]
 	}
 
