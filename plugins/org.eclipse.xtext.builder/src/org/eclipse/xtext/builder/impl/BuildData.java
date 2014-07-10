@@ -24,16 +24,26 @@ public class BuildData {
 	private final QueuedBuildData queuedBuildData;
 	private final String projectName;
 	private final ResourceSet resourceSet;
+	private boolean indexingOnly;
 	
 	public BuildData(String projectName, ResourceSet resourceSet, ToBeBuilt toBeBuilt, QueuedBuildData queuedBuildData) {
+		this(projectName, resourceSet, toBeBuilt, queuedBuildData, false);
+	}
+	
+	public BuildData(String projectName, ResourceSet resourceSet, ToBeBuilt toBeBuilt, QueuedBuildData queuedBuildData, boolean indexingOnly) {
 		this.projectName = projectName;
 		this.resourceSet = resourceSet;
 		this.toBeBuilt = toBeBuilt;
 		this.queuedBuildData = queuedBuildData;
+		this.indexingOnly = indexingOnly;
 	}
 
 	public boolean isEmpty() {
 		return getToBeDeleted().isEmpty() && getToBeUpdated().isEmpty() && queuedBuildData.isEmpty(projectName);
+	}
+	
+	public boolean isIndexingOnly() {
+		return indexingOnly;
 	}
 
 	public Set<URI> getToBeDeleted() {
