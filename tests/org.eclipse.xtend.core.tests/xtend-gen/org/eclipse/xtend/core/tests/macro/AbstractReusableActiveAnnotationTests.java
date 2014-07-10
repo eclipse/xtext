@@ -597,7 +597,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
           public Boolean apply(final Resource.Diagnostic it) {
             boolean _and = false;
             String _message = it.getMessage();
-            boolean _contains = _message.contains("myusercode.Foo.foo has no source element");
+            boolean _contains = _message.contains("The generated element \'myusercode.Foo.foo\' is not associated with a source element.");
             if (!_contains) {
               _and = false;
             } else {
@@ -617,7 +617,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
           public Boolean apply(final Resource.Diagnostic it) {
             boolean _and = false;
             String _message = it.getMessage();
-            boolean _contains = _message.contains("myusercode.Foo$Inner has no source element");
+            boolean _contains = _message.contains("The generated element \'myusercode.Foo.Inner\' is not associated with a source element.");
             if (!_contains) {
               _and = false;
             } else {

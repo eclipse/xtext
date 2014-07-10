@@ -184,10 +184,10 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
   private boolean addWarningForOrphanedJvmElement(final Resource resource, final JvmMember jvmElement) {
     EList<Resource.Diagnostic> _warnings = resource.getWarnings();
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("The generated element ");
-    String _qualifiedName = jvmElement.getQualifiedName();
+    _builder.append("The generated element \'");
+    String _qualifiedName = jvmElement.getQualifiedName('.');
     _builder.append(_qualifiedName, "");
-    _builder.append(" has no source element");
+    _builder.append("\' is not associated with a source element. The producing active annotation should set the \'primarySourceElement\'.");
     EList<EObject> _contents = resource.getContents();
     EObject _head = IterableExtensions.<EObject>head(_contents);
     DiagnosticOnFirstKeyword _diagnosticOnFirstKeyword = new DiagnosticOnFirstKeyword(

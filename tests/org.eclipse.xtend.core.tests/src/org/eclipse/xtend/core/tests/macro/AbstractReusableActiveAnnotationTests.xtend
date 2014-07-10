@@ -291,11 +291,11 @@ abstract class AbstractReusableActiveAnnotationTests {
 				'''
 			)[
 				assertTrue(xtendFile.eResource.warnings.exists[
-					message.contains("myusercode.Foo.foo has no source element")
+					message.contains("The generated element 'myusercode.Foo.foo' is not associated with a source element.")
 					&& line == 1
 				])
 				assertTrue(xtendFile.eResource.warnings.exists[
-					message.contains("myusercode.Foo$Inner has no source element")
+					message.contains("The generated element 'myusercode.Foo.Inner' is not associated with a source element.")
 					&& line == 1
 				])
 				assertEquals(2, xtendFile.eResource.warnings.size)
