@@ -36,6 +36,8 @@ import org.eclipse.xtend.lib.macro.declaration.ExecutableDeclaration
 import org.eclipse.xtext.xbase.typesystem.^override.IResolvedConstructor
 import org.eclipse.xtend.lib.macro.declaration.ResolvedTypeParameter
 import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.common.types.JvmTypeReference
 
 abstract class AbstractElementImpl<T> {
 	@Property T delegate
@@ -135,6 +137,8 @@ class ResolvedConstructorImpl extends ResolvedExecutableImpl<IResolvedConstructo
 }
 
 class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeReference> implements TypeReference {
+	
+	@Accessors JvmTypeReference source
 
 	override getName() {
 		delegate.javaIdentifier
