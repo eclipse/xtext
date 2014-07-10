@@ -258,13 +258,15 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                         // Make the new resource description known and update the map.
                         newState.register(newDelta);
                         // Validate now.
-                        try {
-                        	updateMarkers(newDelta, resourceSet, subProgress.newChild(1));
-                        } catch (OperationCanceledException e) {
-                        	loadOperation.cancel();
-                        	throw e;
-                        } catch (Exception e) {
-                        	LOGGER.error("Error validating "+newDelta.getUri(), e);
+                        if (!buildData.isIndexingOnly()) {
+	                        try {
+	                        	updateMarkers(newDelta, resourceSet, subProgress.newChild(1));
+	                        } catch (OperationCanceledException e) {
+	                        	loadOperation.cancel();
+	                        	throw e;
+	                        } catch (Exception e) {
+	                        	LOGGER.error("Error validating "+newDelta.getUri(), e);
+	                        }
                         }
                     }
                     subProgress.worked(1);
