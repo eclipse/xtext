@@ -179,7 +179,8 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		// return early if there's nothing to do.
 		// we reuse the isEmpty() impl from BuildData assuming that it doesnT access the ResourceSet which is still null 
 		// and would be expensive to create.
-		if (new BuildData(getProject().getName(), null, toBeBuilt, queuedBuildData).isEmpty())
+		boolean indexingOnly = type == BuildType.RECOVERY;
+		if (new BuildData(getProject().getName(), null, toBeBuilt, queuedBuildData, indexingOnly).isEmpty())
 			return;
 		
 		SubMonitor progress = SubMonitor.convert(monitor, 2);
@@ -188,9 +189,9 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		if (resourceSet instanceof ResourceSetImpl) {
 			((ResourceSetImpl) resourceSet).setURIResourceMap(Maps.<URI, Resource> newHashMap());
 		}
-		BuildData buildData = new BuildData(getProject().getName(), resourceSet, toBeBuilt, queuedBuildData);
+		BuildData buildData = new BuildData(getProject().getName(), resourceSet, toBeBuilt, queuedBuildData, indexingOnly);
 		ImmutableList<Delta> deltas = builderState.update(buildData, progress.newChild(1));
-		if (participant != null) {
+		if (participant != null && !indexingOnly) {
 			participant.build(new BuildContext(this, resourceSet, deltas, type),
 					progress.newChild(1));
 			getProject().getWorkspace().checkpoint(false);
