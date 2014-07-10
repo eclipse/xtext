@@ -19,6 +19,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -58,30 +59,21 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 		Object text = getText(synthetic ? jvmFeature : semanticFeature);
 		ImageDescriptor image = getImageDescriptor(synthetic ? jvmFeature : semanticFeature);
 		if (isShowInherited()) {
-			StyledString label = (text instanceof StyledString) ? (StyledString) text : new StyledString(
-					text.toString());
-			label.append(new StyledString(" - " + jvmFeature.getDeclaringType().getIdentifier(),
-					StyledString.QUALIFIER_STYLER));
-			return getOutlineNodeFactory().createXtendFeatureNode(parentNode, jvmFeature, image, label, true,
-					synthetic, inheritanceDepth);
-		}
-		if (!associations.isPrimaryJvmElement(jvmFeature)) {
-			if (text instanceof StyledString) {
-				text = new StyledString(text.toString(), StyledString.QUALIFIER_STYLER);
-			}
+			return getOutlineNodeFactory().createXtendFeatureNode(parentNode, jvmFeature, image, text, true, synthetic,
+					inheritanceDepth);
 		}
 		return getOutlineNodeFactory().createXtendFeatureNode(parentNode, synthetic ? jvmFeature : semanticFeature,
 				image, text, true, synthetic, inheritanceDepth);
 	}
 
 	protected final void createFeatureNodesForType(IOutlineNode parentNode, JvmDeclaredType inferredType,
-			final JvmDeclaredType baseType, Set<JvmMember> processedFeatures, int inheritanceDepth) {
+			final JvmDeclaredType baseType, Set<JvmMember> processedMembers, int inheritanceDepth) {
 		for (JvmMember member : inferredType.getMembers()) {
-			if (!processedFeatures.contains(member)) {
+			if (!processedMembers.contains(member)) {
 				if (member instanceof JvmDeclaredType) {
 					JvmDeclaredType jvmNestedType = (JvmDeclaredType) member;
 					if (isShowInherited()) {
-						Set<JvmMember> hideSuper = newHashSet(processedFeatures);
+						Set<JvmMember> hideSuper = newHashSet(processedMembers);
 						hideSuper.addAll(newHashSet(baseType.getAllFeatures()));
 						EObject sourceElement = associations.getPrimarySourceElement(member);
 						if (sourceElement instanceof XtendTypeDeclaration) {
@@ -90,7 +82,7 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 							createNodeForType(parentNode, jvmNestedType, hideSuper, inheritanceDepth);
 						}
 					} else {
-						createNodeForType(parentNode, jvmNestedType, processedFeatures, inheritanceDepth);
+						createNodeForType(parentNode, jvmNestedType, processedMembers, inheritanceDepth);
 					}
 				} else if (member instanceof JvmFeature) {
 					JvmFeature feature = (JvmFeature) member;
@@ -102,11 +94,11 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 					EList<JvmGenericType> localClasses = feature.getLocalClasses();
 					if (!localClasses.isEmpty()) {
 						for (JvmGenericType jvmGenericType : localClasses) {
-							createNodeForType(featureNode, jvmGenericType, processedFeatures, inheritanceDepth);
+							createNodeForType(featureNode, jvmGenericType, processedMembers, inheritanceDepth);
 						}
 					}
 				}
-				addJvmFeature(processedFeatures, member);
+				addJvmFeature(processedMembers, member);
 			}
 		}
 
@@ -114,10 +106,9 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 			if (inferredType instanceof JvmGenericType) {
 				JvmTypeReference extendedClass = ((JvmGenericType) inferredType).getExtendedClass();
 				if (extendedClass != null)
-					createInheritedFeatureNodes(parentNode, baseType, processedFeatures, inheritanceDepth,
-							extendedClass);
+					createInheritedFeatureNodes(parentNode, baseType, processedMembers, inheritanceDepth, extendedClass);
 				for (JvmTypeReference extendedInterface : ((JvmGenericType) inferredType).getExtendedInterfaces()) {
-					createInheritedFeatureNodes(parentNode, baseType, processedFeatures, inheritanceDepth,
+					createInheritedFeatureNodes(parentNode, baseType, processedMembers, inheritanceDepth,
 							extendedInterface);
 				}
 			}
@@ -135,20 +126,20 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 	}
 
 	protected abstract void createNodeForType(IOutlineNode parentNode, EObject someType,
-			Set<JvmMember> processedFeatures, int inheritanceDepth);
+			Set<JvmMember> processedMembers, int inheritanceDepth);
 
 	protected EObjectNode createNodeForType(IOutlineNode parentNode, JvmDeclaredType typeElement,
-			Set<JvmMember> processedFeatures, int inheritanceDepth) {
+			Set<JvmMember> processedMembers, int inheritanceDepth) {
 		XtendEObjectNode classNode = createXtendNode(parentNode, typeElement, inheritanceDepth);
-		if (!processedFeatures.contains(typeElement)) {
-			processedFeatures.add(typeElement);
-			createFeatureNodesForType(classNode, typeElement, typeElement, processedFeatures, inheritanceDepth);
+		if (!processedMembers.contains(typeElement)) {
+			processedMembers.add(typeElement);
+			createFeatureNodesForType(classNode, typeElement, typeElement, processedMembers, inheritanceDepth);
 		}
 		return classNode;
 	}
 
 	abstract protected void createInheritedFeatureNodes(IOutlineNode parentNode, JvmDeclaredType baseType,
-			Set<JvmMember> processedFeatures, int inheritanceDepth, JvmTypeReference superType);
+			Set<JvmMember> processedMembers, int inheritanceDepth, JvmTypeReference superType);
 
 	protected boolean isShowInherited() {
 		return modeAware.getCurrentMode() == XtendOutlineModes.SHOW_INHERITED_MODE;
@@ -159,8 +150,8 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 		super.internalCreateChildren(parentNode, modelElement);
 	}
 
-	protected void addJvmFeature(Set<JvmMember> processedFeatures, JvmMember feature) {
-		processedFeatures.add(feature);
+	protected void addJvmFeature(Set<JvmMember> processedMembers, JvmMember feature) {
+		processedMembers.add(feature);
 	}
 
 	public IOutlineTreeProvider.ModeAware getModeAware() {
@@ -179,6 +170,7 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 
 	protected XtendEObjectNode createXtendNode(IOutlineNode parentNode, EObject modelElement, int inheritanceDepth) {
 		Object text = getText(modelElement);
+
 		ImageDescriptor image = getImageDescriptor(modelElement);
 		boolean syntatic = false;
 		if (modelElement instanceof JvmIdentifiableElement) {
@@ -186,31 +178,56 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 		}
 		XtendEObjectNode objectNode = getOutlineNodeFactory().createXtendEOBjectNode(parentNode, modelElement, image,
 				text, true, syntatic, inheritanceDepth);
-		if (isShowInherited()) {
-			if (modelElement instanceof JvmDeclaredType) {
-				if (text instanceof StyledString) {
-					JvmDeclaredType jvmDeclaredType = (JvmDeclaredType) modelElement;
-					String qualifier = jvmDeclaredType.getPackageName();
-					if (jvmDeclaredType.eContainer() instanceof JvmGenericType) {
-						qualifier = ((JvmGenericType) jvmDeclaredType.eContainer()).getQualifiedName('.');
-					}
-					text = new StyledString().append((StyledString) text).append(" - " + qualifier,
-							StyledString.QUALIFIER_STYLER);
-				}
-			} else if (modelElement instanceof XtendTypeDeclaration) {
-				XtendTypeDeclaration xtendType = (XtendTypeDeclaration) modelElement;
-				if (xtendType.eContainer() instanceof XtendTypeDeclaration) {
-					String qualifiedName = getQualifiedName((XtendTypeDeclaration) xtendType.eContainer(), '.');
-					text = new StyledString().append((StyledString) text).append(" - " + qualifiedName,
-							StyledString.QUALIFIER_STYLER);
-				}
-			}
-			objectNode.setText(text);
-		}
 		return objectNode;
 	}
 
-	private String getQualifiedName(XtendTypeDeclaration xtendType, char innerClassDelimiter) {
+	@Override
+	protected Object getText(Object modelElement) {
+		Object supertext = super.getText(modelElement);
+		if (!(supertext instanceof StyledString)) {
+			return supertext;
+		}
+		StyledString styledText = (StyledString) supertext;
+		if (modelElement instanceof JvmMember) {
+			JvmMember jvmMember = (JvmMember) modelElement;
+			if (!getAssociations().getSourceElements(jvmMember).isEmpty()
+					&& !getAssociations().isPrimaryJvmElement(jvmMember)) {
+				styledText = new StyledString(styledText.toString(), StyledString.QUALIFIER_STYLER);
+			}
+			if (isShowInherited()) {
+				String qualifier = createQualifier(jvmMember);
+				if (qualifier != null) {
+					styledText = new StyledString().append(styledText).append(" - " + qualifier,
+							StyledString.QUALIFIER_STYLER);
+				}
+			}
+		} else if (isShowInherited() && modelElement instanceof XtendMember) {
+			XtendMember xtendMember = (XtendMember) modelElement;
+			if (xtendMember.eContainer() instanceof XtendTypeDeclaration) {
+				String qualifiedName = createQualifier((XtendTypeDeclaration) xtendMember.eContainer(), '.');
+				styledText = new StyledString().append(styledText).append(" - " + qualifiedName,
+						StyledString.QUALIFIER_STYLER);
+			}
+		}
+		return styledText;
+	}
+
+	private String createQualifier(JvmMember jvmMember) {
+		String qualifier = null;
+		if (jvmMember instanceof JvmFeature) {
+			qualifier = jvmMember.getDeclaringType().getIdentifier();
+		} else if (jvmMember instanceof JvmDeclaredType) {
+			((JvmDeclaredType) jvmMember).getPackageName();
+			if (jvmMember.eContainer() instanceof JvmGenericType) {
+				qualifier = ((JvmGenericType) jvmMember.eContainer()).getQualifiedName('.');
+			} else if (jvmMember instanceof JvmDeclaredType) {
+				qualifier = ((JvmDeclaredType) jvmMember).getPackageName();
+			}
+		}
+		return qualifier;
+	}
+
+	private String createQualifier(XtendTypeDeclaration xtendType, char innerClassDelimiter) {
 		if (xtendType.getName() == null)
 			return null;
 		XtendTypeDeclaration declaringType = null;
@@ -223,7 +240,7 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 				return xtendType.getName();
 			return packageName + "." + xtendType.getName();
 		}
-		String parentName = getQualifiedName(declaringType, innerClassDelimiter);
+		String parentName = createQualifier(declaringType, innerClassDelimiter);
 		if (parentName == null)
 			return null;
 		return parentName + innerClassDelimiter + xtendType.getName();
