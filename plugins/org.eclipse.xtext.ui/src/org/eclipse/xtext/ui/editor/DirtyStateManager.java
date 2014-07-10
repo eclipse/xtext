@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.editor;
 
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 
 import org.eclipse.emf.common.util.URI;
@@ -23,6 +24,7 @@ import org.eclipse.xtext.resource.impl.AbstractResourceDescriptionChangeEventSou
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
 
 import com.google.common.base.Function;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.MapMaker;
 
@@ -30,7 +32,7 @@ import com.google.common.collect.MapMaker;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 // TODO: batch events according to the contract of IDirtyStateManager
-public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSource implements IDirtyStateManager {
+public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSource implements IDirtyStateManager, IDirtyStateManagerExtension {
 
 	private ConcurrentMap<URI, IDirtyResource> managedResources;
 	
@@ -198,6 +200,13 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 				return Collections.emptyList();
 			}
 		}));
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	public List<URI> getDirtyResourceURIs() {
+		return ImmutableList.copyOf(managedResources.keySet());
 	}
 	
 }
