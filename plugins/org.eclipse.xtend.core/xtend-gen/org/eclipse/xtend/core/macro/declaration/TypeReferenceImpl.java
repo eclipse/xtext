@@ -12,13 +12,16 @@ import java.util.List;
 import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.UnknownType;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.macro.declaration.ResolvedConstructor;
 import org.eclipse.xtend.lib.macro.declaration.ResolvedMethod;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
@@ -27,6 +30,9 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
 public class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeReference> implements TypeReference {
+  @Accessors
+  private JvmTypeReference source;
+  
   public String getName() {
     LightweightTypeReference _delegate = this.getDelegate();
     return _delegate.getJavaIdentifier();
@@ -261,5 +267,14 @@ public class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeRefere
   
   public boolean isInferred() {
     return false;
+  }
+  
+  @Pure
+  public JvmTypeReference getSource() {
+    return this.source;
+  }
+  
+  public void setSource(final JvmTypeReference source) {
+    this.source = source;
   }
 }
