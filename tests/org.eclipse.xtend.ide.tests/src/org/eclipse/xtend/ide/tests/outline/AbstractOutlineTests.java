@@ -273,6 +273,7 @@ public abstract class AbstractOutlineTests extends AbstractXtendUITestCase {
 	public class AssertBuilder {
 
 		private final IOutlineNode node;
+		private int index = -1;
 
 		AssertBuilder(IOutlineNode node) {
 			this.node = node;
@@ -319,7 +320,13 @@ public abstract class AbstractOutlineTests extends AbstractXtendUITestCase {
 			IOutlineNode[] sortedChildren = getSorter().filterAndSort(node.getChildren());
 			if (sortedChildren.length <= index)
 				fail("Missing child node " + index);
+			this.index = index;
 			return new AssertBuilder(sortedChildren[index], text);
+		}
+
+		AssertBuilder nextChild(String text) {
+			this.index = this.index + 1;
+			return child(index, text);
 		}
 
 		AssertBuilder leaf(int index, String text) {

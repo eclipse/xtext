@@ -73,13 +73,12 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 				if (member instanceof JvmDeclaredType) {
 					JvmDeclaredType jvmNestedType = (JvmDeclaredType) member;
 					if (isShowInherited()) {
-						Set<JvmMember> hideSuper = newHashSet();
-						hideSuper.addAll(newHashSet(baseType.getAllFeatures()));
+						Set<JvmMember> forgetProcessed = newHashSet();
 						EObject sourceElement = associations.getPrimarySourceElement(member);
 						if (sourceElement instanceof XtendTypeDeclaration) {
-							createNodeForType(parentNode, sourceElement, hideSuper, inheritanceDepth);
+							createNodeForType(parentNode, sourceElement, forgetProcessed, inheritanceDepth);
 						} else {
-							createNodeForType(parentNode, jvmNestedType, hideSuper, inheritanceDepth);
+							createNodeForType(parentNode, jvmNestedType, forgetProcessed, inheritanceDepth);
 						}
 					} else {
 						createNodeForType(parentNode, jvmNestedType, processedMembers, inheritanceDepth);
@@ -94,11 +93,12 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 					EList<JvmGenericType> localClasses = feature.getLocalClasses();
 					if (!localClasses.isEmpty()) {
 						for (JvmGenericType jvmGenericType : localClasses) {
-							createNodeForType(featureNode, jvmGenericType, processedMembers, inheritanceDepth);
+							Set<JvmMember> forgetProcessed = newHashSet();
+							createNodeForType(featureNode, jvmGenericType, forgetProcessed, inheritanceDepth);
 						}
 					}
 				}
-				addJvmFeature(processedMembers, member);
+				rememberJvmMember(processedMembers, member);
 			}
 		}
 
@@ -150,7 +150,7 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 		super.internalCreateChildren(parentNode, modelElement);
 	}
 
-	protected void addJvmFeature(Set<JvmMember> processedMembers, JvmMember feature) {
+	protected void rememberJvmMember(Set<JvmMember> processedMembers, JvmMember feature) {
 		processedMembers.add(feature);
 	}
 
@@ -205,8 +205,9 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 			XtendMember xtendMember = (XtendMember) modelElement;
 			if (xtendMember.eContainer() instanceof XtendTypeDeclaration) {
 				String qualifiedName = createQualifier((XtendTypeDeclaration) xtendMember.eContainer(), '.');
-				styledText = new StyledString().append(styledText).append(" - " + qualifiedName,
-						StyledString.QUALIFIER_STYLER);
+				if (qualifiedName != null)
+					styledText = new StyledString().append(styledText).append(" - " + qualifiedName,
+							StyledString.QUALIFIER_STYLER);
 			}
 		}
 		return styledText;
