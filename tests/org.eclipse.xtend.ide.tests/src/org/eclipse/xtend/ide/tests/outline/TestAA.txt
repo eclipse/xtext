@@ -27,6 +27,7 @@ class TestAAProcessor extends AbstractClassProcessor {
 	
 	override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
 		val interfaceType = findInterface(annotatedClass.interfaceName)
+		interfaceType.primarySourceElement = annotatedClass
 		annotatedClass.implementedInterfaces = annotatedClass.implementedInterfaces + #[interfaceType.newTypeReference]
 		for (method : annotatedClass.declaredMethods) {
 			if (method.visibility == Visibility.PUBLIC) {
@@ -37,6 +38,7 @@ class TestAAProcessor extends AbstractClassProcessor {
 						addParameter(p.simpleName, p.type)
 					}
 					exceptions = method.exceptions
+					primarySourceElement = method
 				]
 			}
 		}
