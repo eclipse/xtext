@@ -170,8 +170,8 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 				return;
 			}
 			Assert.isLegal(document instanceof XtextDocument);
-			XtextDocument xtextDocument = (XtextDocument) document;
-			xtextDocument.internalModify(new IUnitOfWork.Void<XtextResource>() {
+			final XtextDocument xtextDocument = (XtextDocument) document;
+			xtextDocument.modify(new IUnitOfWork.Void<XtextResource>() {
 
 				@Override
 				public void process(XtextResource resource) throws Exception {
@@ -185,10 +185,13 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 							resourceSet.getResources().remove(affectedResource);
 						}
 					}
-					resource.reparse(document.get());
+					if (!(currentClient instanceof IDirtyStateEditorSupportClientExtension))
+						resource.reparse(document.get());
 				}
 
 			});
+			if (currentClient instanceof IDirtyStateEditorSupportClientExtension)
+				((IDirtyStateEditorSupportClientExtension) currentClient).forceReconcile();
 		}
 
 	}
@@ -235,7 +238,14 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 		void removeVerifyListener(VerifyListener listener);
 		
 	}
-	
+
+	/**
+	 * @since 2.7
+	 */
+	public interface IDirtyStateEditorSupportClientExtension {
+		void forceReconcile();
+	}
+
 	/**
 	 * Simple delegate which can remove itself from the dirty
 	 * state manager. It is used to discard unmodified
