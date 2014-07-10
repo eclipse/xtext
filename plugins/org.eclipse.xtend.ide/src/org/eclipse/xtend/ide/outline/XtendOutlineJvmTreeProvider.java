@@ -40,9 +40,9 @@ public class XtendOutlineJvmTreeProvider extends AbstractMultiModeOutlineTreePro
 			primaryPackage = getOutlineNodeFactory().createPackageAndImporNodes(parentNode, (XtendFile) modelElement);
 		}
 		EList<EObject> contents = modelElement.eResource().getContents();
-		Set<JvmMember> processedFeatures = newHashSet();
 
 		for (EObject eObject : contents) {
+			Set<JvmMember> processedFeatures = newHashSet();
 			if (eObject instanceof JvmDeclaredType) {
 				JvmDeclaredType jvmDeclaredType = (JvmDeclaredType) eObject;
 				String packageName = jvmDeclaredType.getPackageName();

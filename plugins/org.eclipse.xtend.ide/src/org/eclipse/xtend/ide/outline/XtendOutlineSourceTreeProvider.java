@@ -53,8 +53,8 @@ public class XtendOutlineSourceTreeProvider extends AbstractMultiModeOutlineTree
 		if (modelElement instanceof XtendFile) {
 			XtendFile xtendFile = (XtendFile) modelElement;
 			getOutlineNodeFactory().createPackageAndImporNodes(parentNode, xtendFile);
-			Set<JvmMember> processedFeatures = newHashSet();
 			for (XtendTypeDeclaration xtendType : xtendFile.getXtendTypes()) {
+				Set<JvmMember> processedFeatures = newHashSet();
 				createNodeForType(parentNode, xtendType, processedFeatures);
 			}
 		}

@@ -73,7 +73,7 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 				if (member instanceof JvmDeclaredType) {
 					JvmDeclaredType jvmNestedType = (JvmDeclaredType) member;
 					if (isShowInherited()) {
-						Set<JvmMember> hideSuper = newHashSet(processedMembers);
+						Set<JvmMember> hideSuper = newHashSet();
 						hideSuper.addAll(newHashSet(baseType.getAllFeatures()));
 						EObject sourceElement = associations.getPrimarySourceElement(member);
 						if (sourceElement instanceof XtendTypeDeclaration) {
