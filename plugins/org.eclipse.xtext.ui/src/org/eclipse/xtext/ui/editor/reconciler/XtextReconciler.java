@@ -101,6 +101,10 @@ public class XtextReconciler extends Job implements IReconciler {
 		}
 
 		public void documentChanged(DocumentEvent event) {
+			if (Display.getCurrent() == null) {
+				log.error("Changes to the document must only be applied from the Display thread to keep them ordered",
+						new Exception());
+			}
 			handleDocumentChanged(event);
 		}
 
@@ -210,6 +214,10 @@ public class XtextReconciler extends Job implements IReconciler {
 	}
 
 	protected void handleInputDocumentChanged(IDocument oldInput, IDocument newInput) {
+		if (Display.getCurrent() == null) {
+			log.error("Changes to the document must only be applied from the Display thread to keep them ordered",
+					new Exception());
+		}
 		if (shouldInstallCompletionListener) {
 			ContentAssistantFacade facade = ((ISourceViewerExtension4) textViewer).getContentAssistantFacade();
 			if (facade != null) {
@@ -217,17 +225,19 @@ public class XtextReconciler extends Job implements IReconciler {
 			}
 			shouldInstallCompletionListener = false;
 		}
-		if (oldInput instanceof IXtextDocument) {
-			((IXtextDocument) oldInput).removeXtextDocumentContentObserver(documentListener);
-		}
-		if (newInput instanceof IXtextDocument) {
-			((IXtextDocument) newInput).addXtextDocumentContentObserver(documentListener);
-			final IXtextDocument document = XtextDocumentUtil.get(textViewer);
-			strategy.setDocument(document);
-			if (!initalProcessDone && strategy instanceof IReconcilingStrategyExtension) {
-				initalProcessDone = true;
-				IReconcilingStrategyExtension reconcilingStrategyExtension = (IReconcilingStrategyExtension) strategy;
-				reconcilingStrategyExtension.initialReconcile();
+		if(oldInput != newInput) {
+			if (oldInput instanceof IXtextDocument) {
+				((IXtextDocument) oldInput).removeXtextDocumentContentObserver(documentListener);
+			}
+			if (newInput instanceof IXtextDocument) {
+				((IXtextDocument) newInput).addXtextDocumentContentObserver(documentListener);
+				final IXtextDocument document = XtextDocumentUtil.get(textViewer);
+				strategy.setDocument(document);
+				if (!initalProcessDone && strategy instanceof IReconcilingStrategyExtension) {
+					initalProcessDone = true;
+					IReconcilingStrategyExtension reconcilingStrategyExtension = (IReconcilingStrategyExtension) strategy;
+					reconcilingStrategyExtension.initialReconcile();
+				}
 			}
 		}
 		if (oldInput != null && newInput != null) {
@@ -236,10 +246,6 @@ public class XtextReconciler extends Job implements IReconciler {
 	}
 
 	private void handleDocumentChanged(DocumentEvent event) {
-		if (Display.getCurrent() == null) {
-			log.error("Changes to the document must only be applied from the Display thread to keep them ordered",
-					new Exception());
-		}
 		cancel();
 		if (log.isTraceEnabled())
 			log.trace("Reconciler cancelled");
@@ -248,7 +254,17 @@ public class XtextReconciler extends Job implements IReconciler {
 		if (log.isTraceEnabled())
 			log.trace("Reconciler scheduled with delay: " + delay);
 	}
-
+	
+	/**
+	 * @since 2.7
+	 */
+	public void forceReconcile() {
+		if(editor != null && editor.getDocument() != null) {
+			DocumentEvent dummyEvent = new DocumentEvent(editor.getDocument(), 0, 0, "");
+			handleDocumentChanged(dummyEvent);
+		}
+	}
+	
 	/**
 	 * {@link Display#syncExec(Runnable)} will interrupt the Display thread causing pendingChange.put() to fail. A
 	 * skipped event will break the resource, so we try again until the queue eats it.

@@ -39,6 +39,7 @@ import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.TextUtilities;
 import org.eclipse.jface.text.link.LinkedModeModel;
 import org.eclipse.jface.text.link.LinkedPosition;
+import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.AnnotationPainter;
 import org.eclipse.jface.text.source.IAnnotationAccess;
@@ -87,6 +88,7 @@ import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.ui.IImageHelper;
 import org.eclipse.xtext.ui.XtextUIMessages;
 import org.eclipse.xtext.ui.editor.DirtyStateEditorSupport.IDirtyStateEditorSupportClient;
+import org.eclipse.xtext.ui.editor.DirtyStateEditorSupport.IDirtyStateEditorSupportClientExtension;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
 import org.eclipse.xtext.ui.editor.bracketmatching.BracketMatchingPreferencesInitializer;
 import org.eclipse.xtext.ui.editor.folding.IFoldingStructureProvider;
@@ -98,6 +100,7 @@ import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.preferences.PreferenceConstants;
+import org.eclipse.xtext.ui.editor.reconciler.XtextReconciler;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingHelper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.TextAttributeProvider;
 import org.eclipse.xtext.ui.editor.toggleComments.ToggleSLCommentAction;
@@ -115,7 +118,7 @@ import com.google.inject.name.Named;
  * @author Michael Clay
  * @author Dan Stefanescu - Fix for bug 278279
  */
-public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportClient {
+public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportClient, IDirtyStateEditorSupportClientExtension {
 	public static final String ERROR_ANNOTATION_TYPE = "org.eclipse.xtext.ui.editor.error";
 	public static final String WARNING_ANNOTATION_TYPE = "org.eclipse.xtext.ui.editor.warning";
 	/**
@@ -1379,7 +1382,15 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 	/**
 	 * @since 2.7
 	 */
+	public void forceReconcile() {
+		((XtextReconciler) ((IAdaptable) getInternalSourceViewer()).getAdapter(IReconciler.class)).forceReconcile();
+	}
+	
+	/**
+	 * @since 2.7
+	 */
 	public DirtyStateEditorSupport getDirtyStateEditorSupport() {
 		return dirtyStateEditorSupport;
 	}
+	
 }
