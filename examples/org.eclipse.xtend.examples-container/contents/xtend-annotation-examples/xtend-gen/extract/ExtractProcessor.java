@@ -40,6 +40,7 @@ public class ExtractProcessor extends AbstractClassProcessor {
   public void doTransform(final MutableClassDeclaration annotatedClass, @Extension final TransformationContext context) {
     String _interfaceName = this.getInterfaceName(annotatedClass);
     final MutableInterfaceDeclaration interfaceType = context.findInterface(_interfaceName);
+    context.setPrimarySourceElement(interfaceType, annotatedClass);
     Iterable<? extends TypeReference> _implementedInterfaces = annotatedClass.getImplementedInterfaces();
     TypeReference _newTypeReference = context.newTypeReference(interfaceType);
     Iterable<TypeReference> _plus = Iterables.<TypeReference>concat(_implementedInterfaces, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(_newTypeReference)));
@@ -64,6 +65,7 @@ public class ExtractProcessor extends AbstractClassProcessor {
             }
             Iterable<? extends TypeReference> _exceptions = method.getExceptions();
             it.setExceptions(((TypeReference[])Conversions.unwrapArray(_exceptions, TypeReference.class)));
+            context.setPrimarySourceElement(it, method);
           }
         };
         interfaceType.addMethod(_simpleName, _function);
