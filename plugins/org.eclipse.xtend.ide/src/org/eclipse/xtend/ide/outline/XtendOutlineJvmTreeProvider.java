@@ -47,16 +47,10 @@ public class XtendOutlineJvmTreeProvider extends AbstractMultiModeOutlineTreePro
 				JvmDeclaredType jvmDeclaredType = (JvmDeclaredType) eObject;
 				String packageName = jvmDeclaredType.getPackageName();
 				EObjectNode typeNode = createNodeForType(parentNode, jvmDeclaredType, processedFeatures, 0);
-				Object text = getText(jvmDeclaredType);
-				if (!getAssociations().isPrimaryJvmElement(jvmDeclaredType)) {
-					if (text instanceof StyledString) {
-						text = new StyledString(text.toString(), StyledString.QUALIFIER_STYLER);
-					}
-				}
-				if (packageName != null && (!packageName.equals(primaryPackage) || isShowInherited())) {
-					if (text instanceof StyledString) {
-						typeNode.setText(((StyledString) text).append(new StyledString(" - " + packageName,
-								StyledString.QUALIFIER_STYLER)));
+				if (!isShowInherited() && packageName != null && (!packageName.equals(primaryPackage))) {
+					if (typeNode.getText() instanceof StyledString) {
+						typeNode.setText(((StyledString) typeNode.getText()).append(new StyledString(" - "
+								+ packageName, StyledString.QUALIFIER_STYLER)));
 					}
 				}
 			}
