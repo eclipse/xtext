@@ -251,16 +251,24 @@ abstract class AbstractReusableActiveAnnotationTests {
 					
 					import java.util.List
 					import org.eclipse.xtend.lib.macro.Active
-					import org.eclipse.xtend.lib.macro.TransformationParticipant
+					import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+					import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 					import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 					import org.eclipse.xtend.lib.macro.TransformationContext
+					import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
 					
 					@Active(EvilProcessor)
 					annotation EvilAnnotation {
 						
 					}
 					
-					class EvilProcessor implements TransformationParticipant<MutableClassDeclaration> {
+					class EvilProcessor extends AbstractClassProcessor {
+						
+						override doRegisterGlobals(List<? extends ClassDeclaration> classes, extension RegisterGlobalsContext context) {
+							classes.forEach[
+								registerClass(qualifiedName+'.Inner')
+							]
+						}
 						
 						override doTransform(List<? extends MutableClassDeclaration> classes, extension TransformationContext context) {
 							classes.forEach[
@@ -286,6 +294,56 @@ abstract class AbstractReusableActiveAnnotationTests {
 					message.contains("myusercode.Foo.foo has no source element")
 					&& line == 1
 				])
+				assertTrue(xtendFile.eResource.warnings.exists[
+					message.contains("myusercode.Foo$Inner has no source element")
+					&& line == 1
+				])
+				assertEquals(2, xtendFile.eResource.warnings.size)
+			]
+	}
+	
+	@Test def void testDetectOrphanedElements2() {
+		assertProcessing(
+				'myannotation/EvilAnnotation.xtend' -> '''
+					package myannotation
+					
+					import java.util.List
+					import org.eclipse.xtend.lib.macro.Active
+					import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+					import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
+					import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+					import org.eclipse.xtend.lib.macro.TransformationContext
+					import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
+					
+					@Active(EvilProcessor)
+					annotation EvilAnnotation {}
+					
+					class EvilProcessor extends AbstractClassProcessor {
+						
+						override doRegisterGlobals(ClassDeclaration clazz, extension RegisterGlobalsContext context) {
+							registerClass(clazz.qualifiedName+'.Inner')
+						}
+						
+						override doTransform(MutableClassDeclaration clazz, extension TransformationContext context) {
+							findClass(clazz.qualifiedName+'.Inner').primarySourceElement = clazz
+						}
+					}
+				''',
+				'myusercode/UserCode.xtend' -> '''
+					package myusercode
+					
+					import myannotation.EvilAnnotation
+					import com.google.inject.Provider
+					
+					@EvilAnnotation
+					class Foo {
+						Provider<String> p = new Provider<String>() {
+							override get() { 'foo' }
+						}
+					}
+				'''
+			)[
+				assertTrue(xtendFile.eResource.warnings.empty)
 			]
 	}
 	
