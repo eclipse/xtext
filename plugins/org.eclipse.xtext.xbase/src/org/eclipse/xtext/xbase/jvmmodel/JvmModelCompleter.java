@@ -11,6 +11,8 @@ import static com.google.common.collect.Iterables.*;
 
 import java.lang.annotation.Annotation;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtend.lib.macro.services.Associator;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -46,6 +48,12 @@ public class JvmModelCompleter {
 	
 	@Inject 
 	private JvmTypeExtensions typeExtensions;  
+	
+	@Inject
+	private IJvmModelAssociations associations;
+	
+	@Inject
+	private IJvmModelAssociator associator;
 
 	public void complete(Iterable<? extends JvmIdentifiableElement> elements) {
 		for (JvmIdentifiableElement element : elements) {
@@ -82,13 +90,16 @@ public class JvmModelCompleter {
 			if (objectType != null)
 				element.getSuperTypes().add(objectType);
 		}
-		
+		EObject primarySourceElement = associations.getPrimarySourceElement(element);
 		JvmOperation values = typesFactory.createJvmOperation();
 		values.setVisibility(JvmVisibility.PUBLIC);
 		values.setStatic(true);
 		values.setSimpleName("values");
 		values.setReturnType(references.createArrayType(references.createTypeRef(element)));
 		typeExtensions.setSynthetic(values, true);
+		if (primarySourceElement != null) {
+			associator.associatePrimary(primarySourceElement, values);
+		}
 		element.getMembers().add(values);
 		
 		JvmOperation valueOf = typesFactory.createJvmOperation();
@@ -101,6 +112,9 @@ public class JvmModelCompleter {
 		param.setParameterType(references.getTypeForName(String.class, element));
 		valueOf.getParameters().add(param);
 		typeExtensions.setSynthetic(valueOf, true);
+		if (primarySourceElement != null) {
+			associator.associatePrimary(primarySourceElement, valueOf);
+		}
 		element.getMembers().add(valueOf);
 	}
 
@@ -141,6 +155,11 @@ public class JvmModelCompleter {
 				JvmConstructor constructor = TypesFactory.eINSTANCE.createJvmConstructor();
 				constructor.setSimpleName(element.getSimpleName());
 				constructor.setVisibility(JvmVisibility.PUBLIC);
+				typeExtensions.setSynthetic(constructor, true);
+				EObject primarySourceElement = associations.getPrimarySourceElement(element);
+				if (primarySourceElement != null) {
+					associator.associatePrimary(primarySourceElement, constructor);
+				}
 				element.getMembers().add(constructor);
 			}
 		}
