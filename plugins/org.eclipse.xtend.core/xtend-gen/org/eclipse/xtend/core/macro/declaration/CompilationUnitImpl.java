@@ -982,7 +982,7 @@ public class CompilationUnitImpl implements CompilationUnit {
           }
           if (!_matched) {
             LightweightTypeReference _lightweightReference = CompilationUnitImpl.this.typeRefConverter.toLightweightReference(delegate);
-            _switchResult = CompilationUnitImpl.this.toTypeReference(_lightweightReference);
+            _switchResult = CompilationUnitImpl.this.toTypeReference(_lightweightReference, delegate);
           }
           return _switchResult;
         }
@@ -993,6 +993,10 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   public TypeReference toTypeReference(final LightweightTypeReference delegate) {
+    return this.toTypeReference(delegate, null);
+  }
+  
+  public TypeReference toTypeReference(final LightweightTypeReference delegate, final JvmTypeReference source) {
     TypeReferenceImpl _xblockexpression = null;
     {
       this.checkCanceled();
@@ -1005,6 +1009,7 @@ public class CompilationUnitImpl implements CompilationUnit {
         public void apply(final TypeReferenceImpl it) {
           it.setDelegate(delegate);
           it.setCompilationUnit(CompilationUnitImpl.this);
+          it.setSource(source);
         }
       };
       _xblockexpression = ObjectExtensions.<TypeReferenceImpl>operator_doubleArrow(_typeReferenceImpl, _function);
