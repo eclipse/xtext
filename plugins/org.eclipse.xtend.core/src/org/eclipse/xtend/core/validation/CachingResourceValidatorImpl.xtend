@@ -99,9 +99,10 @@ class CachingResourceValidatorImpl extends DerivedStateAwareResourceValidator {
 			new DiagnosticOnFirstKeyword(
 				Severity.WARNING,
 				IssueCodes.ORPHAN_ELMENT,
-				'''The generated element «jvmElement.qualifiedName» has no source element''',
+				'''The generated element '«jvmElement.getQualifiedName(".")»' is not associated with a source element. The producing active annotation should set the 'primarySourceElement'.''',
 				resource.contents.head,
 				null
 			))
 	}
 }
+		
