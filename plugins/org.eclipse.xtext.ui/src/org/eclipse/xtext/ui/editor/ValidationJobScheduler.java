@@ -7,12 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor;
 
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.DescriptionUtils;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 
@@ -36,7 +38,10 @@ public class ValidationJobScheduler implements IValidationJobScheduler {
 	
 	@Inject
 	private IResourceDescriptions resourceDescriptions;
-	
+
+	@Inject
+	private IResourceDescription.Manager resourceDescriptionManager;
+
 	@Inject
 	private DescriptionUtils descriptionUtils;
 	
@@ -55,11 +60,23 @@ public class ValidationJobScheduler implements IValidationJobScheduler {
 			// resource was just created - build is likely to be running in background
 			return;
 		}
-		Set<URI> outgoingReferences = descriptionUtils.collectOutgoingReferences(description);
-		for(URI outgoing: outgoingReferences) {
-			if (isDirty(outgoing)) {
-				document.checkAndUpdateAnnotations();
-				return;
+		if (dirtyStateManager instanceof IDirtyStateManagerExtension) {
+			List<URI> dirtyResourceURIs = ((IDirtyStateManagerExtension) dirtyStateManager).getDirtyResourceURIs();
+			for(URI dirtyResourceURI: dirtyResourceURIs) {
+				IResourceDescription dirtyResourceDescription = dirtyStateManager.getDirtyResourceDescription(dirtyResourceURI);
+				ChangedResourceDescriptionDelta delta = new ChangedResourceDescriptionDelta(null, dirtyResourceDescription);
+				if(resourceDescriptionManager.isAffected(delta, description)) {
+					document.checkAndUpdateAnnotations();
+					return;
+				}
+			}
+		} else {
+			Set<URI> outgoingReferences = descriptionUtils.collectOutgoingReferences(description);
+			for(URI outgoing: outgoingReferences) {
+				if (isDirty(outgoing)) {
+					document.checkAndUpdateAnnotations();
+					return;
+				}
 			}
 		}
 	}
