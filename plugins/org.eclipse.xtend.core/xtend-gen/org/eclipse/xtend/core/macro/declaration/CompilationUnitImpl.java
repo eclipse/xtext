@@ -959,35 +959,26 @@ public class CompilationUnitImpl implements CompilationUnit {
       if (_equals) {
         return null;
       }
-      final Function1<JvmTypeReference, TypeReference> _function = new Function1<JvmTypeReference, TypeReference>() {
-        public TypeReference apply(final JvmTypeReference it) {
-          TypeReference _switchResult = null;
-          boolean _matched = false;
-          if (!_matched) {
-            if (delegate instanceof XComputedTypeReferenceImplCustom) {
-              boolean _isEquivalentComputed = ((XComputedTypeReferenceImplCustom)delegate).isEquivalentComputed();
-              boolean _not = (!_isEquivalentComputed);
-              if (_not) {
-                _matched=true;
-                InferredTypeReferenceImpl _inferredTypeReferenceImpl = new InferredTypeReferenceImpl();
-                final Procedure1<InferredTypeReferenceImpl> _function = new Procedure1<InferredTypeReferenceImpl>() {
-                  public void apply(final InferredTypeReferenceImpl it) {
-                    it.setDelegate(((XComputedTypeReferenceImplCustom)delegate));
-                    it.setCompilationUnit(CompilationUnitImpl.this);
-                  }
-                };
-                _switchResult = ObjectExtensions.<InferredTypeReferenceImpl>operator_doubleArrow(_inferredTypeReferenceImpl, _function);
-              }
+      TypeReference _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (delegate instanceof XComputedTypeReferenceImplCustom) {
+          _matched=true;
+          InferredTypeReferenceImpl _inferredTypeReferenceImpl = new InferredTypeReferenceImpl();
+          final Procedure1<InferredTypeReferenceImpl> _function = new Procedure1<InferredTypeReferenceImpl>() {
+            public void apply(final InferredTypeReferenceImpl it) {
+              it.setDelegate(((XComputedTypeReferenceImplCustom)delegate));
+              it.setCompilationUnit(CompilationUnitImpl.this);
             }
-          }
-          if (!_matched) {
-            LightweightTypeReference _lightweightReference = CompilationUnitImpl.this.typeRefConverter.toLightweightReference(delegate);
-            _switchResult = CompilationUnitImpl.this.toTypeReference(_lightweightReference, delegate);
-          }
-          return _switchResult;
+          };
+          _switchResult = ObjectExtensions.<InferredTypeReferenceImpl>operator_doubleArrow(_inferredTypeReferenceImpl, _function);
         }
-      };
-      _xblockexpression = this.<JvmTypeReference, TypeReference>getOrCreate(delegate, _function);
+      }
+      if (!_matched) {
+        LightweightTypeReference _lightweightReference = this.typeRefConverter.toLightweightReference(delegate);
+        _switchResult = this.toTypeReference(_lightweightReference, delegate);
+      }
+      _xblockexpression = _switchResult;
     }
     return _xblockexpression;
   }

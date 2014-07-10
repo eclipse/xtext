@@ -236,7 +236,7 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
       if ((it instanceof ClassDeclaration)) {
         TypeReference _extendedClass = ((ClassDeclaration)it).getExtendedClass();
         TypeReference _object = this.context.getObject();
-        boolean _equals = Objects.equal(_extendedClass, _object);
+        boolean _equals = _extendedClass.equals(_object);
         if (_equals) {
           return null;
         }

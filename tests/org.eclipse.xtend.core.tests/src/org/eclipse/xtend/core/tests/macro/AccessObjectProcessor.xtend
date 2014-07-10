@@ -73,7 +73,7 @@ class AccessObjectProcessor implements TransformationParticipant<MutableClassDec
 			val pkg = it.qualifiedName.substring(0, it.qualifiedName.length-it.simpleName.length)
 			
 			val ser = newTypeReference(typeof(Serializable))
-			if ( ser == null )
+			if ( ser === null )
 				addError("Cannot find Serializable")
 			
 			val PVersionName = pkg+"P"+it.simpleName;

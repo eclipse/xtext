@@ -6,12 +6,12 @@ import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtend.lib.macro.TransformationParticipant
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration
-import org.junit.Ignore
 import org.junit.Test
 
 class ImmutableAnnotationTest extends AbstractActiveAnnotationTest {
 	
-	@Ignore("We need to suppress the initialization check.") @Test def void defSimpleTest() {
+	@Test def void defSimpleTest() {
+		setJavaCompilerClassPath(#[Immutable])
 		'''
 			import org.eclipse.xtend.core.tests.macro.Immutable
 			
@@ -38,6 +38,7 @@ class ImmutableProcessor implements TransformationParticipant<MutableClassDeclar
 			val fields = clazz.declaredFields
 			clazz.addConstructor[
 				for (f : fields) {
+					f.markAsInitializedBy(it)
 					addParameter(f.simpleName, f.type)
 				}
 				body = ['''
@@ -53,6 +54,7 @@ class ImmutableProcessor implements TransformationParticipant<MutableClassDeclar
 				val getterName = 'get'+f.simpleName.toFirstUpper
 				
 				clazz.tryAddMethod(getterName) [
+					f.markAsRead
 					returnType = f.type
 					body = ['''
 						return «f.simpleName»;
@@ -71,15 +73,15 @@ class ImmutableProcessor implements TransformationParticipant<MutableClassDeclar
 						int result = 1;
 					«ENDIF»
 					«FOR f : fields»
-						«IF f.type == primitiveBoolean»
+						«IF f.type.is(primitiveBoolean)»
 							result = prime * result + («f.simpleName» ? 1231 : 1237);
 						«ELSEIF #{primitiveInt, primitiveChar, primitiveByte, primitiveShort}.contains(f.type)»
 							result = prime * result + «f.simpleName»;
-						«ELSEIF primitiveLong == f.type»
+						«ELSEIF primitiveLong.is(f.type)»
 							result = prime * result + (int) («f.simpleName» ^ («f.simpleName» >>> 32));
-						«ELSEIF primitiveFloat == f.type»
+						«ELSEIF primitiveFloat.is(f.type)»
 							result = prime * result + Float.floatToIntBits(«f.simpleName»);
-						«ELSEIF primitiveDouble == f.type»
+						«ELSEIF primitiveDouble.is(f.type)»
 							result = prime * result + (int) (Double.doubleToLongBits(«f.simpleName») ^ (Double.doubleToLongBits(«f.simpleName») >>> 32));
 						«ELSE»
 							result = prime * result + ((«f.simpleName»== null) ? 0 : «f.simpleName».hashCode());

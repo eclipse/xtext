@@ -79,8 +79,8 @@ public class PrimitiveTypeImpl extends AbstractElementImpl<JvmPrimitiveType> imp
   }
   
   public boolean isAssignableFrom(final Type otherType) {
-    boolean _equals = Objects.equal(otherType, null);
-    if (_equals) {
+    boolean _tripleEquals = (otherType == null);
+    if (_tripleEquals) {
       return false;
     }
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();

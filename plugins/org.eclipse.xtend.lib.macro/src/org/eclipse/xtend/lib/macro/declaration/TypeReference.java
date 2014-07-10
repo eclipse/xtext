@@ -170,4 +170,26 @@ public interface TypeReference extends Element {
 	 * @since 2.7
 	 */
 	Iterable<? extends ResolvedMethod> getAllResolvedMethods();
+	
+	/**
+	 * Checks whether this {@link TypeReference} refers to the same type as the other one.
+	 * @param other the type to test equivalence against
+	 * @return true if this type and the given type are equivalent
+	 * @since 2.7
+	 */
+	boolean is(TypeReference other);
+	
+	/**
+	 * Note that {@link TypeReference#isInferred() inferred} {@link TypeReference}s will never
+	 * be equal to explicit ones. During the validation and code generation phases however, 
+	 * you can use {@link #is(TypeReference)} to see whether an inferred type reference refers 
+	 * to the same type as another {@link TypeReference}
+	 * 
+	 * @param other the object to test equality against
+	 * @return whether the two objects are equal according to {@link Object#equals(Object)}
+	 * @since 2.7
+	 * @deprecated use #is(TypeReference)
+	 */
+	@Deprecated
+	boolean operator_equals(Object other);
 }

@@ -3,19 +3,19 @@ package org.eclipse.xtend.core.tests.macro;
 import java.lang.reflect.Constructor;
 import org.eclipse.xtend.core.compiler.batch.XtendCompilerTester;
 import org.eclipse.xtend.core.tests.macro.AbstractActiveAnnotationTest;
+import org.eclipse.xtend.core.tests.macro.Immutable;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 @SuppressWarnings("all")
 public class ImmutableAnnotationTest extends AbstractActiveAnnotationTest {
-  @Ignore("We need to suppress the initialization check.")
   @Test
   public void defSimpleTest() {
+    this._xtendCompilerTester.setJavaCompilerClassPath(new Class<?>[] { Immutable.class });
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import org.eclipse.xtend.core.tests.macro.Immutable");
     _builder.newLine();

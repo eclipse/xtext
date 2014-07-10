@@ -526,26 +526,21 @@ class CompilationUnitImpl implements CompilationUnit {
 	}
 
 	def TypeReference toTypeReference(JvmTypeReference delegate) {
-
-		/*
-		 * Nested JvmTypeReference's identity will not be preserved
-		 * i.e. given 'List<String> myField' we will get the same TypeReference instance when asking
-		 * the field for its type. But when asking for type arguments on that TypeReference we will 
-		 * get a new instance representing 'String' each time.
-		 */
 		if (delegate == null)
 			return null
-		getOrCreate(delegate) [
-			switch delegate {
-				XComputedTypeReferenceImplCustom case !delegate.isEquivalentComputed: {
-					new InferredTypeReferenceImpl => [
-						it.delegate = delegate
-						compilationUnit = this
-					]
-				}
-				default : toTypeReference(typeRefConverter.toLightweightReference(delegate), delegate)
+		/*
+		 * We don't need to cache type references, as no mutable state
+		 * is associated with them
+		 */
+		switch delegate {
+			XComputedTypeReferenceImplCustom : {
+				new InferredTypeReferenceImpl => [
+					it.delegate = delegate
+					compilationUnit = this
+				]
 			}
-		]
+			default : toTypeReference(typeRefConverter.toLightweightReference(delegate), delegate)
+		}
 	}
 
 	def TypeReference toTypeReference(LightweightTypeReference delegate) {

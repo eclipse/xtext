@@ -129,7 +129,7 @@ class FinalFieldsConstructorProcessor implements TransformationParticipant<Mutab
 
 		def getSuperConstructor(TypeDeclaration it) {
 			if (it instanceof ClassDeclaration) {
-				if (extendedClass == object)
+				if (extendedClass.equals(object))
 					return null;
 				return extendedClass.declaredResolvedConstructors.head
 			} else {

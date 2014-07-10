@@ -155,18 +155,18 @@ public abstract class AbstractReusableActiveAnnotationTests {
         final TypeReference barType = _findDeclaredField.getType();
         TypeReferenceProvider _typeReferenceProvider = it.getTypeReferenceProvider();
         TypeReference _primitiveInt = _typeReferenceProvider.getPrimitiveInt();
-        Assert.assertEquals(barType, _primitiveInt);
+        AbstractReusableActiveAnnotationTests.this.assertSameType(barType, _primitiveInt);
         MutableMethodDeclaration _findDeclaredMethod = foo.findDeclaredMethod("bar");
         TypeReference _returnType = _findDeclaredMethod.getReturnType();
-        Assert.assertEquals(barType, _returnType);
+        AbstractReusableActiveAnnotationTests.this.assertSameType(barType, _returnType);
         MutableFieldDeclaration _findDeclaredField_1 = foo.findDeclaredField("foo_field");
         final TypeReference fooType = _findDeclaredField_1.getType();
         TypeReferenceProvider _typeReferenceProvider_1 = it.getTypeReferenceProvider();
         TypeReference _newTypeReference = _typeReferenceProvider_1.newTypeReference(Integer.class);
-        Assert.assertEquals(fooType, _newTypeReference);
+        AbstractReusableActiveAnnotationTests.this.assertSameType(fooType, _newTypeReference);
         MutableMethodDeclaration _findDeclaredMethod_1 = foo.findDeclaredMethod("foo");
         TypeReference _returnType_1 = _findDeclaredMethod_1.getReturnType();
-        Assert.assertEquals(fooType, _returnType_1);
+        AbstractReusableActiveAnnotationTests.this.assertSameType(fooType, _returnType_1);
       }
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
@@ -904,12 +904,12 @@ public abstract class AbstractReusableActiveAnnotationTests {
         TypeReference _type = _findDeclaredField.getType();
         MutableMethodDeclaration _findDeclaredMethod = foo.findDeclaredMethod("y");
         TypeReference _returnType = _findDeclaredMethod.getReturnType();
-        Assert.assertEquals(_type, _returnType);
+        AbstractReusableActiveAnnotationTests.this.assertSameType(_type, _returnType);
         MutableFieldDeclaration _findDeclaredField_1 = bar.findDeclaredField("x");
         TypeReference _type_1 = _findDeclaredField_1.getType();
         MutableMethodDeclaration _findDeclaredMethod_1 = foo.findDeclaredMethod("x");
         TypeReference _returnType_1 = _findDeclaredMethod_1.getReturnType();
-        Assert.assertEquals(_type_1, _returnType_1);
+        AbstractReusableActiveAnnotationTests.this.assertSameType(_type_1, _returnType_1);
       }
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
@@ -5988,5 +5988,17 @@ public abstract class AbstractReusableActiveAnnotationTests {
       }
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
+  }
+  
+  public void assertSameType(final TypeReference first, final TypeReference second) {
+    boolean _is = first.is(second);
+    boolean _not = (!_is);
+    if (_not) {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append(first, "");
+      _builder.append(" does not refer to the same type as ");
+      _builder.append(second, "");
+      Assert.fail(_builder.toString());
+    }
   }
 }
