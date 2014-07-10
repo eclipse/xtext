@@ -88,7 +88,7 @@ class DelegateProcessor implements TransformationParticipant<MutableMemberDeclar
 			switch parameters.map[type].toList {
 				case #[],
 				case #[string],
-				case #[string, Class.newTypeReference.newArrayTypeReference, object.newArrayTypeReference]:
+				case #[string, Class.newTypeReference(newWildcardTypeReference).newArrayTypeReference, object.newArrayTypeReference]:
 					true
 				default: {
 					addError("Not a valid delegate signature, use () or (String methodName) or (String methodName, Class<?>[] argumentTypes, Object[] arguments)")
@@ -122,11 +122,11 @@ class DelegateProcessor implements TransformationParticipant<MutableMemberDeclar
 			val listedInterfaces = delegate.listedInterfaces
 			var valid = true
 			for(iface : listedInterfaces) {
-				if (!availableInterfaces.contains(iface)) {
+				if (!availableInterfaces.exists[type == iface.type]) {
 					delegate.addError('''«delegate.type.simpleName» does not implement «iface.simpleName»''')
 					valid = false
 				}
-				if (!interfacesOfDeclaringType.contains(iface)) {
+				if (!interfacesOfDeclaringType.exists[type == iface.type]) {
 					delegate.addError('''«declaringType.simpleName» does not implement «iface.simpleName»''')
 					valid = false
 				}
@@ -203,7 +203,7 @@ class DelegateProcessor implements TransformationParticipant<MutableMemberDeclar
 		}
 		
 		def TypeReference replace(TypeReference target, TypeReference oldType, TypeReference newType) {
-			if (target == oldType) 
+			if (target.equals(oldType)) 
 				return newType
 			if (target.actualTypeArguments.contains(oldType)) {
 				return newTypeReference(target.type, target.actualTypeArguments.map[replace(oldType, newType)])
@@ -221,7 +221,7 @@ class DelegateProcessor implements TransformationParticipant<MutableMemberDeclar
 					'''this.«simpleName»()'''
 				case #[string]: 
 					'''this.«simpleName»("«method.simpleName»")'''
-				case #[string, Class.newTypeReference.newArrayTypeReference, object.newArrayTypeReference]: {
+				case #[string, Class.newTypeReference(newWildcardTypeReference).newArrayTypeReference, object.newArrayTypeReference]: {
 					'''this.«simpleName»("«method.simpleName»", new Class[]{«method.parameters.join(", ")[type.type.simpleName + ".class"]»}, new Object[]{«method.parameters.join(", ")[simpleName]»})'''
 				}
 				default:

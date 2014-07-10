@@ -89,8 +89,8 @@ public class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeRefere
   public TypeReference getArrayComponentType() {
     LightweightTypeReference _delegate = this.getDelegate();
     final LightweightTypeReference componentType = _delegate.getComponentType();
-    boolean _equals = Objects.equal(componentType, null);
-    if (_equals) {
+    boolean _tripleEquals = (componentType == null);
+    if (_tripleEquals) {
       return null;
     }
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
@@ -239,34 +239,35 @@ public class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeRefere
     return ListExtensions.<IResolvedOperation, ResolvedMethod>map(_allOperations, _function);
   }
   
+  public boolean isInferred() {
+    return false;
+  }
+  
+  public boolean operator_equals(final Object other) {
+    return Objects.equal(this, other);
+  }
+  
   public boolean equals(final Object obj) {
-    boolean _tripleEquals = (obj == this);
-    if (_tripleEquals) {
-      return true;
-    }
-    if ((obj instanceof TypeReference)) {
-      boolean _and = false;
-      boolean _isAssignableFrom = ((TypeReference)obj).isAssignableFrom(this);
-      if (!_isAssignableFrom) {
-        _and = false;
-      } else {
-        boolean _isAssignableFrom_1 = this.isAssignableFrom(((TypeReference)obj));
-        _and = _isAssignableFrom_1;
-      }
-      return _and;
+    if ((obj instanceof TypeReferenceImpl)) {
+      LightweightTypeReference _delegate = this.getDelegate();
+      String _identifier = _delegate.getIdentifier();
+      LightweightTypeReference _delegate_1 = ((TypeReferenceImpl)obj).getDelegate();
+      String _identifier_1 = _delegate_1.getIdentifier();
+      return Objects.equal(_identifier, _identifier_1);
     }
     return false;
   }
   
   public int hashCode() {
     LightweightTypeReference _delegate = this.getDelegate();
-    JvmType _type = _delegate.getType();
-    String _qualifiedName = _type.getQualifiedName();
-    return _qualifiedName.hashCode();
+    String _identifier = _delegate.getIdentifier();
+    return _identifier.hashCode();
   }
   
-  public boolean isInferred() {
-    return false;
+  public boolean is(final TypeReference other) {
+    String _name = this.getName();
+    String _name_1 = other.getName();
+    return Objects.equal(_name, _name_1);
   }
   
   @Pure

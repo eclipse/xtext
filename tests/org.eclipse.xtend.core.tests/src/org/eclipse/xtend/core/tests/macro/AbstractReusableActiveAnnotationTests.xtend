@@ -72,12 +72,12 @@ abstract class AbstractReusableActiveAnnotationTests {
 			val foo = typeLookup.findClass("myusercode.Client")
 			
 			val barType = foo.findDeclaredField('bar_field').type
-			assertEquals(barType, typeReferenceProvider.primitiveInt)
-			assertEquals(barType, foo.findDeclaredMethod('bar').returnType)
+			assertSameType(barType, typeReferenceProvider.primitiveInt)
+			assertSameType(barType, foo.findDeclaredMethod('bar').returnType)
 			
 			val fooType = foo.findDeclaredField('foo_field').type
-			assertEquals(fooType, typeReferenceProvider.newTypeReference(Integer))
-			assertEquals(fooType, foo.findDeclaredMethod('foo').returnType)
+			assertSameType(fooType, typeReferenceProvider.newTypeReference(Integer))
+			assertSameType(fooType, foo.findDeclaredMethod('foo').returnType)
 		]
 	}
 	
@@ -429,8 +429,8 @@ abstract class AbstractReusableActiveAnnotationTests {
 			val foo = typeLookup.findClass("myusercode.Foo")
 			val bar = typeLookup.findClass("myusercode.Bar")
 			
-			assertEquals(foo.findDeclaredField('y').type, foo.findDeclaredMethod('y').returnType)
-			assertEquals(bar.findDeclaredField('x').type, foo.findDeclaredMethod('x').returnType)
+			assertSameType(foo.findDeclaredField('y').type, foo.findDeclaredMethod('y').returnType)
+			assertSameType(bar.findDeclaredField('x').type, foo.findDeclaredMethod('x').returnType)
 		]
 	}
 	
@@ -2980,5 +2980,11 @@ abstract class AbstractReusableActiveAnnotationTests {
 			assertNotNull(annotation)
 			assertEquals(0, annotation.declaredMembers.size)
 		]
+	}
+	
+	def void assertSameType(TypeReference first, TypeReference second) {
+		if (!first.is(second)) {
+			fail('''«first» does not refer to the same type as «second»''')
+		}
 	}
 }

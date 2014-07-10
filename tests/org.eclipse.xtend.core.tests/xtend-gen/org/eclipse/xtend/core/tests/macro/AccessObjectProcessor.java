@@ -63,15 +63,15 @@ public class AccessObjectProcessor implements TransformationParticipant<MutableC
         int _minus = (_length - _length_1);
         final String pkg = _qualifiedName.substring(0, _minus);
         final TypeReference ser = ctx.newTypeReference(Serializable.class);
-        boolean _equals = Objects.equal(ser, null);
-        if (_equals) {
+        boolean _tripleEquals = (ser == null);
+        if (_tripleEquals) {
           ctx.addError(it, "Cannot find Serializable");
         }
         String _simpleName_1 = it.getSimpleName();
         final String PVersionName = ((pkg + "P") + _simpleName_1);
         final MutableClassDeclaration p = ctx.findClass(PVersionName);
-        boolean _equals_1 = Objects.equal(p, null);
-        if (_equals_1) {
+        boolean _equals = Objects.equal(p, null);
+        if (_equals) {
           ctx.addError(it, (("Class " + PVersionName) + " not found"));
         }
         boolean _and = false;
@@ -90,8 +90,8 @@ public class AccessObjectProcessor implements TransformationParticipant<MutableC
         String _simpleName_2 = it.getSimpleName();
         final String GVersionName = ((pkg + "G") + _simpleName_2);
         final MutableClassDeclaration g = ctx.findClass(GVersionName);
-        boolean _equals_2 = Objects.equal(g, null);
-        if (_equals_2) {
+        boolean _equals_1 = Objects.equal(g, null);
+        if (_equals_1) {
           ctx.addError(it, (("Class " + GVersionName) + " not found"));
         }
         boolean _and_1 = false;

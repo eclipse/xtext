@@ -1,6 +1,5 @@
 package org.eclipse.xtend.core.macro.declaration;
 
-import com.google.common.base.Objects;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
@@ -128,8 +127,8 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
       TypeReferences _typeReferences = this.compilationUnit.getTypeReferences();
       XtendFile _xtendFile = this.compilationUnit.getXtendFile();
       final JvmType type = _typeReferences.findDeclaredType(typeName, _xtendFile);
-      boolean _equals = Objects.equal(type, null);
-      if (_equals) {
+      boolean _tripleEquals = (type == null);
+      if (_tripleEquals) {
         return null;
       }
       final Function1<TypeReference, JvmTypeReference> _function = new Function1<TypeReference, JvmTypeReference>() {
@@ -145,8 +144,8 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
   }
   
   public JvmParameterizedTypeReference createTypeRef(final JvmType type, final JvmTypeReference... typeArgs) {
-    boolean _equals = Objects.equal(type, null);
-    if (_equals) {
+    boolean _tripleEquals = (type == null);
+    if (_tripleEquals) {
       throw new NullPointerException("type");
     }
     final JvmParameterizedTypeReference reference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
@@ -262,8 +261,8 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
         throw new IllegalArgumentException(("couldn\'t construct type reference for type " + typeDeclaration));
       }
       final JvmComponentType type = _switchResult;
-      boolean _equals = Objects.equal(type, null);
-      if (_equals) {
+      boolean _tripleEquals = (type == null);
+      if (_tripleEquals) {
         return null;
       }
       final Function1<TypeReference, JvmTypeReference> _function = new Function1<TypeReference, JvmTypeReference>() {
@@ -284,8 +283,8 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
   
   public TypeReference newWildcardTypeReference(final TypeReference upperBound) {
     TypeReference _xifexpression = null;
-    boolean _equals = Objects.equal(upperBound, null);
-    if (_equals) {
+    boolean _tripleEquals = (upperBound == null);
+    if (_tripleEquals) {
       TypeReferences _typeReferences = this.compilationUnit.getTypeReferences();
       JvmWildcardTypeReference _wildCard = _typeReferences.wildCard();
       _xifexpression = this.compilationUnit.toTypeReference(_wildCard);
@@ -300,8 +299,8 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
   
   public TypeReference newWildcardTypeReferenceWithLowerBound(final TypeReference lowerBound) {
     TypeReference _xifexpression = null;
-    boolean _equals = Objects.equal(lowerBound, null);
-    if (_equals) {
+    boolean _tripleEquals = (lowerBound == null);
+    if (_tripleEquals) {
       TypeReferences _typeReferences = this.compilationUnit.getTypeReferences();
       JvmWildcardTypeReference _wildCard = _typeReferences.wildCard();
       _xifexpression = this.compilationUnit.toTypeReference(_wildCard);

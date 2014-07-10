@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import com.google.common.base.Objects;
 import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.lib.macro.declaration.Type;
@@ -23,8 +22,8 @@ public class VoidTypeImpl extends AbstractElementImpl<JvmVoid> implements VoidTy
   }
   
   public boolean isAssignableFrom(final Type otherType) {
-    boolean _equals = Objects.equal(otherType, null);
-    if (_equals) {
+    boolean _tripleEquals = (otherType == null);
+    if (_tripleEquals) {
       return false;
     }
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
