@@ -107,6 +107,7 @@ public class XtextGeneratorIT {
 		Verifier verifier = new Verifier(testDir.getAbsolutePath(), debug );
 		verifier.setMavenDebug(debug);
 		verifier.setForkJvm(!debug);
+		verifier.setEnvironmentVariable("MAVEN_OPTS", "-Xmx2048m -XX:MaxPermSize=256m");
 		return verifier;
 	}
 
