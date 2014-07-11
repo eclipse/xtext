@@ -18,6 +18,10 @@ import org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceV
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.typesystem.computation.DiagnosticOnFirstKeyword
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
+import org.eclipse.xtext.common.types.JvmConstructor
+import org.eclipse.xtext.common.types.JvmField
+import org.eclipse.xtext.common.types.JvmOperation
+import org.eclipse.xtext.common.types.JvmExecutable
 
 class CachingResourceValidatorImpl extends DerivedStateAwareResourceValidator {
 
@@ -87,10 +91,26 @@ class CachingResourceValidatorImpl extends DerivedStateAwareResourceValidator {
 			new DiagnosticOnFirstKeyword(
 				Severity.WARNING,
 				IssueCodes.ORPHAN_ELMENT,
-				'''The generated element '«jvmElement.identifier»' is not associated with a source element. The producing active annotation should set the 'primarySourceElement'.''',
+				'''The generated «jvmElement.uiString» is not associated with a source element. The producing active annotation should use 'setPrimarySourceElement'.''',
 				resource.contents.head,
 				null
 			))
 	}
+	
+	private def getUiString(JvmMember member) {
+		val uiString = new StringBuilder
+		val type = switch(member) {
+			JvmConstructor: "constructor"
+			JvmField : "field"
+			JvmOperation : "method"
+			JvmDeclaredType : "type"
+		}
+		uiString.append(type).append(" '").append(member.getQualifiedName("."))
+		if (member instanceof JvmExecutable) {
+			val parameterTypes = member.parameters.join(", ")[parameterType.simpleName]
+			uiString.append("(").append(parameterTypes).append(")")
+		}
+		uiString.append("'")
+		uiString.toString
+	}
 }
-		

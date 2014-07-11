@@ -653,6 +653,9 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.append("\t\t\t\t");
     _builder.append("body = [\"return null;\"]");
     _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("addParameter(\"x\", Integer.newTypeReference)");
+    _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("]");
     _builder.newLine();
@@ -688,7 +691,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
           public Boolean apply(final Resource.Diagnostic it) {
             boolean _and = false;
             String _message = it.getMessage();
-            boolean _contains = _message.contains("The generated element \'myusercode.Foo.foo\' is not associated with a source element.");
+            boolean _contains = _message.contains("The generated field \'myusercode.Foo.foo\' is not associated with a source element.");
             if (!_contains) {
               _and = false;
             } else {
@@ -708,7 +711,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
           public Boolean apply(final Resource.Diagnostic it) {
             boolean _and = false;
             String _message = it.getMessage();
-            boolean _contains = _message.contains("The generated element \'myusercode.Foo.foo()\' is not associated with a source element.");
+            boolean _contains = _message.contains("The generated method \'myusercode.Foo.foo(Integer)\' is not associated with a source element.");
             if (!_contains) {
               _and = false;
             } else {
@@ -728,7 +731,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
           public Boolean apply(final Resource.Diagnostic it) {
             boolean _and = false;
             String _message = it.getMessage();
-            boolean _contains = _message.contains("The generated element \'myusercode.Foo$Inner\' is not associated with a source element.");
+            boolean _contains = _message.contains("The generated type \'myusercode.Foo.Inner\' is not associated with a source element.");
             if (!_contains) {
               _and = false;
             } else {

@@ -20,8 +20,14 @@ import org.eclipse.xtend.core.macro.AnnotationProcessor;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.IAcceptor;
@@ -165,10 +171,10 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
   private boolean addWarningForOrphanedJvmElement(final Resource resource, final JvmMember jvmElement) {
     EList<Resource.Diagnostic> _warnings = resource.getWarnings();
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("The generated element \'");
-    String _identifier = jvmElement.getIdentifier();
-    _builder.append(_identifier, "");
-    _builder.append("\' is not associated with a source element. The producing active annotation should set the \'primarySourceElement\'.");
+    _builder.append("The generated ");
+    String _uiString = this.getUiString(jvmElement);
+    _builder.append(_uiString, "");
+    _builder.append(" is not associated with a source element. The producing active annotation should use \'setPrimarySourceElement\'.");
     EList<EObject> _contents = resource.getContents();
     EObject _head = IterableExtensions.<EObject>head(_contents);
     DiagnosticOnFirstKeyword _diagnosticOnFirstKeyword = new DiagnosticOnFirstKeyword(
@@ -176,5 +182,59 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
       IssueCodes.ORPHAN_ELMENT, _builder.toString(), _head, 
       null);
     return _warnings.add(_diagnosticOnFirstKeyword);
+  }
+  
+  private String getUiString(final JvmMember member) {
+    String _xblockexpression = null;
+    {
+      final StringBuilder uiString = new StringBuilder();
+      String _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (member instanceof JvmConstructor) {
+          _matched=true;
+          _switchResult = "constructor";
+        }
+      }
+      if (!_matched) {
+        if (member instanceof JvmField) {
+          _matched=true;
+          _switchResult = "field";
+        }
+      }
+      if (!_matched) {
+        if (member instanceof JvmOperation) {
+          _matched=true;
+          _switchResult = "method";
+        }
+      }
+      if (!_matched) {
+        if (member instanceof JvmDeclaredType) {
+          _matched=true;
+          _switchResult = "type";
+        }
+      }
+      final String type = _switchResult;
+      StringBuilder _append = uiString.append(type);
+      StringBuilder _append_1 = _append.append(" \'");
+      String _qualifiedName = member.getQualifiedName('.');
+      _append_1.append(_qualifiedName);
+      if ((member instanceof JvmExecutable)) {
+        EList<JvmFormalParameter> _parameters = ((JvmExecutable)member).getParameters();
+        final Function1<JvmFormalParameter, String> _function = new Function1<JvmFormalParameter, String>() {
+          public String apply(final JvmFormalParameter it) {
+            JvmTypeReference _parameterType = it.getParameterType();
+            return _parameterType.getSimpleName();
+          }
+        };
+        final String parameterTypes = IterableExtensions.<JvmFormalParameter>join(_parameters, ", ", _function);
+        StringBuilder _append_2 = uiString.append("(");
+        StringBuilder _append_3 = _append_2.append(parameterTypes);
+        _append_3.append(")");
+      }
+      uiString.append("\'");
+      _xblockexpression = uiString.toString();
+    }
+    return _xblockexpression;
   }
 }
