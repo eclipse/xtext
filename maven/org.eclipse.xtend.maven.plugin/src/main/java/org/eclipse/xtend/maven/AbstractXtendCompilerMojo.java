@@ -18,11 +18,18 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Arrays;
 import java.util.Properties;
 import java.util.Set;
 
 import org.apache.maven.artifact.Artifact;
+import org.apache.maven.execution.MavenSession;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.toolchain.Toolchain;
+import org.apache.maven.toolchain.ToolchainManager;
+import org.apache.maven.toolchain.java.DefaultJavaToolChain;
+import org.codehaus.plexus.util.DirectoryScanner;
+import org.codehaus.plexus.util.xml.Xpp3Dom;
 import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
@@ -46,6 +53,20 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 			return new File(filePath).exists();
 		}
 	};
+
+	/**
+	 * @component
+	 */
+	private ToolchainManager toolchainManager;
+
+	/**
+	 * The current build session instance. This is used for toolchain manager API calls.
+	 *
+	 * @parameter expression="${session}"
+	 * @required
+	 * @readonly
+	 */
+	private MavenSession session;
 
 	@Inject
 	protected Provider<XtendBatchCompiler> xtendBatchCompilerProvider;
@@ -98,6 +119,9 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 		xtend2BatchCompiler.setDeleteTempDirectory(false);
 		getLog().debug("Set classpath: " + classPath);
 		xtend2BatchCompiler.setClassPath(classPath);
+		String bootClassPath = getBootClassPath();
+		getLog().debug("Set bootClasspath: " + bootClassPath);
+		xtend2BatchCompiler.setBootClassPath(bootClassPath);
 		getLog().debug("Set source path: " + concat(File.pathSeparator, newArrayList(filtered)));
 		xtend2BatchCompiler.setSourcePath(concat(File.pathSeparator, newArrayList(filtered)));
 		getLog().debug("Set output path: " + outputPath);
@@ -112,20 +136,79 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 		}
 	}
 
+	private String getBootClassPath() {
+		Toolchain toolchain = toolchainManager.getToolchainFromBuildContext("jdk", session);
+		if (toolchain instanceof DefaultJavaToolChain) {
+			DefaultJavaToolChain javaToolChain = (DefaultJavaToolChain) toolchain;
+			getLog().info("Using toolchain " + javaToolChain);
+
+			String[] includes = {"jre/lib/*", "jre/lib/ext/*", "jre/lib/endorsed/*"};
+			String[] excludes = new String[0];
+			Xpp3Dom config = (Xpp3Dom) javaToolChain.getModel().getConfiguration();
+			if (config != null) {
+				Xpp3Dom bootClassPath = config.getChild("bootClassPath");
+				if (bootClassPath != null) {
+					Xpp3Dom includeParent = bootClassPath.getChild("includes");
+					if (includeParent != null) {
+						includes = getValues(includeParent.getChildren("include"));
+					}
+					Xpp3Dom excludeParent = bootClassPath.getChild("excludes");
+					if (excludeParent != null) {
+						excludes = getValues(excludeParent.getChildren("exclude"));
+					}
+				}
+			}
+
+			return scanBootclasspath(javaToolChain.getJavaHome(), includes, excludes);
+		}
+		return "";
+	}
+
+	private String scanBootclasspath(String javaHome, String[] includes, String[] excludes) {
+		getLog().debug("Scanning bootClassPath:\n"
+				+"\tjavaHome = " + javaHome + "\n"
+				+"\tincludes = "+ Arrays.toString(includes) + "\n"
+				+"\texcludes = "+ Arrays.toString(excludes)
+		);
+		DirectoryScanner scanner = new DirectoryScanner();
+		scanner.setBasedir(new File(javaHome));
+		scanner.setIncludes(includes);
+		scanner.setExcludes(excludes);
+		scanner.scan();
+
+		StringBuilder bootClassPath = new StringBuilder();
+		String[] includedFiles = scanner.getIncludedFiles();
+		for (int i = 0; i < includedFiles.length; i++) {
+			if (i > 0) {
+				bootClassPath.append(File.pathSeparator);
+			}
+			bootClassPath.append(new File(javaHome, includedFiles[i]).getAbsolutePath());
+		}
+		return bootClassPath.toString();
+	}
+
+	private String[] getValues(Xpp3Dom[] children) {
+		String[] values = new String[children.length];
+		for (int i = 0; i < values.length; i++) {
+			values[i] = children[i].getValue();
+		}
+		return values;
+	}
+
 	private void configureWorkspace(List<String> sourceDirectories, String outputPath) throws MojoExecutionException {
 		WorkspaceConfig workspaceConfig = new WorkspaceConfig(project.getBasedir().getParentFile().getAbsolutePath());
 		ProjectConfig projectConfig = new ProjectConfig(project.getBasedir().getName());
 		URI absoluteRootPath = project.getBasedir().getAbsoluteFile().toURI();
 		URI relativizedTarget = absoluteRootPath.relativize(new File(outputPath).toURI());
 		if (relativizedTarget.isAbsolute()) {
-			throw new MojoExecutionException("Output path '" + outputPath
-					+ "' must be a child of the project folder '" + absoluteRootPath + "'");
+			throw new MojoExecutionException("Output path '" + outputPath + "' must be a child of the project folder '"
+					+ absoluteRootPath + "'");
 		}
 		for (String source : sourceDirectories) {
 			URI relativizedSrc = absoluteRootPath.relativize(new File(source).toURI());
 			if (relativizedSrc.isAbsolute()) {
-				throw new MojoExecutionException("Source folder " + source
-						+ " must be a child of the project folder " + absoluteRootPath);
+				throw new MojoExecutionException("Source folder " + source + " must be a child of the project folder "
+						+ absoluteRootPath);
 			}
 			projectConfig.addSourceFolderMapping(relativizedSrc.getPath(), relativizedTarget.getPath());
 		}

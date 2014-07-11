@@ -126,6 +126,10 @@ public class XtendBatchCompiler {
 	protected Writer errorWriter;
 	protected String sourcePath;
 	protected String classPath;
+	/**
+	 * @since 2.7
+	 */
+	protected String bootClassPath;
 	protected boolean useCurrentClassLoaderAsParent;
 	protected String outputPath;
 	protected String fileEncoding;
@@ -230,6 +234,13 @@ public class XtendBatchCompiler {
 
 	public void setClassPath(String classPath) {
 		this.classPath = classPath;
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public void setBootClassPath(String bootClassPath) {
+		this.bootClassPath= bootClassPath;
 	}
 
 	public void setOutputPath(String outputPath) {
@@ -457,6 +468,9 @@ public class XtendBatchCompiler {
 		if (isVerbose()) {
 			commandLine.add("-verbose");
 		}
+		if (!isEmpty(bootClassPath)) {
+			commandLine.add("-bootclasspath \"" + concat(File.pathSeparator, getBootClassPathEntries())+"\"");
+		}
 		if (!isEmpty(classPath)) {
 			commandLine.add("-cp \"" + concat(File.pathSeparator, getClassPathEntries())+"\"");
 		}
@@ -527,7 +541,7 @@ public class XtendBatchCompiler {
 				return !Strings.isEmpty(input.trim());
 			}
 		});
-		Iterable<URL> classPathUrls = Iterables.transform(classPathEntries, new Function<String, URL>() {
+		Function<String, URL> toUrl = new Function<String, URL>() {
 			public URL apply(String from) {
 				try {
 					return new File(from).toURI().toURL();
@@ -535,16 +549,23 @@ public class XtendBatchCompiler {
 					throw new RuntimeException(e);
 				}
 			}
-		});
+		};
+		Iterable<URL> classPathUrls = Iterables.transform(classPathEntries, toUrl);
 		if (log.isDebugEnabled()) {
 			log.debug("classpath used for Xtend compilation : " + classPathUrls);
 		}
-		ClassLoader urlClassLoader;
+		ClassLoader parentClassLoader;
 		if (useCurrentClassLoaderAsParent) {
-			urlClassLoader = new URLClassLoader(toArray(classPathUrls, URL.class), currentClassLoader);
+			parentClassLoader = currentClassLoader;
 		} else {
-			urlClassLoader = new URLClassLoader(toArray(classPathUrls, URL.class), ClassLoader.getSystemClassLoader().getParent());
+			if (isEmpty(bootClassPath)) {
+				parentClassLoader = ClassLoader.getSystemClassLoader().getParent();
+			} else {
+				Iterable<URL> bootClassPathUrls = Iterables.transform(getBootClassPathEntries(), toUrl);
+				parentClassLoader = new BootClassLoader(toArray(bootClassPathUrls, URL.class));
+			}
 		}
+		ClassLoader urlClassLoader = new URLClassLoader(toArray(classPathUrls, URL.class), parentClassLoader);
 		new ClasspathTypeProvider(urlClassLoader, resourceSet, skipIndexLookup ? null : indexedJvmTypeAccess);
 		((XtextResourceSet) resourceSet).setClasspathURIContext(urlClassLoader);
 		
@@ -635,6 +656,13 @@ public class XtendBatchCompiler {
 
 	protected List<String> getClassPathEntries() {
 		return getDirectories(classPath);
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	protected List<String> getBootClassPathEntries() {
+		return getDirectories(bootClassPath);
 	}
 
 	protected List<String> getSourcePathDirectories() {
