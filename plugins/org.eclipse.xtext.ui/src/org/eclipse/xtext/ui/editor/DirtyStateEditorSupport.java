@@ -171,7 +171,7 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 			}
 			Assert.isLegal(document instanceof XtextDocument);
 			final XtextDocument xtextDocument = (XtextDocument) document;
-			xtextDocument.modify(new IUnitOfWork.Void<XtextResource>() {
+			xtextDocument.internalModify(new IUnitOfWork.Void<XtextResource>() {
 
 				@Override
 				public void process(XtextResource resource) throws Exception {
@@ -185,13 +185,13 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 							resourceSet.getResources().remove(affectedResource);
 						}
 					}
-					if (!(currentClient instanceof IDirtyStateEditorSupportClientExtension))
+					if (currentClient instanceof IDirtyStateEditorSupportClientExtension)
+						((IDirtyStateEditorSupportClientExtension) currentClient).forceReconcile();
+					else 
 						resource.reparse(document.get());
 				}
 
 			});
-			if (currentClient instanceof IDirtyStateEditorSupportClientExtension)
-				((IDirtyStateEditorSupportClientExtension) currentClient).forceReconcile();
 		}
 
 	}
@@ -443,7 +443,7 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	 */
 	public void waitForUpdateEditorJob() throws InterruptedException {
 		if(updateEditorStateJob != null)
-				updateEditorStateJob.join();
+			updateEditorStateJob.join();
 	}
 
 	protected UpdateEditorStateJob createUpdateEditorJob() {

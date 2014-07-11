@@ -15,6 +15,7 @@ import org.eclipse.xtext.resource.DescriptionUtils;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 
@@ -40,6 +41,9 @@ public class ValidationJobScheduler implements IValidationJobScheduler {
 	private IResourceDescriptions resourceDescriptions;
 
 	@Inject
+	private ResourceDescriptionsProvider resourceDescriptionsProvider;
+
+	@Inject
 	private IResourceDescription.Manager resourceDescriptionManager;
 
 	@Inject
@@ -55,23 +59,25 @@ public class ValidationJobScheduler implements IValidationJobScheduler {
 		URI uri = document.getResourceURI();
 		if (uri == null)
 			return;
-		IResourceDescription description = resourceDescriptions.getResourceDescription(uri);
-		if (description == null) {
+		IResourceDescriptions persistedDescriptions = resourceDescriptionsProvider.createPersistedResourceDescriptions();
+		IResourceDescription documentDescription = resourceDescriptions.getResourceDescription(uri);
+		if (documentDescription == null) {
 			// resource was just created - build is likely to be running in background
 			return;
 		}
 		if (dirtyStateManager instanceof IDirtyStateManagerExtension) {
 			List<URI> dirtyResourceURIs = ((IDirtyStateManagerExtension) dirtyStateManager).getDirtyResourceURIs();
 			for(URI dirtyResourceURI: dirtyResourceURIs) {
-				IResourceDescription dirtyResourceDescription = dirtyStateManager.getDirtyResourceDescription(dirtyResourceURI);
-				ChangedResourceDescriptionDelta delta = new ChangedResourceDescriptionDelta(null, dirtyResourceDescription);
-				if(resourceDescriptionManager.isAffected(delta, description)) {
+				IResourceDescription dirtyDescription = dirtyStateManager.getDirtyResourceDescription(dirtyResourceURI);
+				IResourceDescription persistedDescription = persistedDescriptions.getResourceDescription(dirtyResourceURI);
+				ChangedResourceDescriptionDelta delta = new ChangedResourceDescriptionDelta(persistedDescription, dirtyDescription);
+				if(resourceDescriptionManager.isAffected(delta, documentDescription)) {
 					document.checkAndUpdateAnnotations();
 					return;
 				}
 			}
 		} else {
-			Set<URI> outgoingReferences = descriptionUtils.collectOutgoingReferences(description);
+			Set<URI> outgoingReferences = descriptionUtils.collectOutgoingReferences(documentDescription);
 			for(URI outgoing: outgoingReferences) {
 				if (isDirty(outgoing)) {
 					document.checkAndUpdateAnnotations();
