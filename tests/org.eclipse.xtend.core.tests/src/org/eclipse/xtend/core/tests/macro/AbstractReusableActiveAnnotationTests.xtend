@@ -320,6 +320,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 								addMethod("foo")[
 									returnType = object
 									body = ["return null;"]
+									addParameter("x", Integer.newTypeReference)
 								]
 							]
 						}
@@ -336,15 +337,15 @@ abstract class AbstractReusableActiveAnnotationTests {
 				'''
 			)[
 				assertTrue(xtendFile.eResource.warnings.exists[
-					message.contains("The generated element 'myusercode.Foo.foo' is not associated with a source element.")
+					message.contains("The generated field 'myusercode.Foo.foo' is not associated with a source element.")
 					&& line == 1
 				])
 				assertTrue(xtendFile.eResource.warnings.exists[
-					message.contains("The generated element 'myusercode.Foo.foo()' is not associated with a source element.")
+					message.contains("The generated method 'myusercode.Foo.foo(Integer)' is not associated with a source element.")
 					&& line == 1
 				])
 				assertTrue(xtendFile.eResource.warnings.exists[
-					message.contains("The generated element 'myusercode.Foo$Inner' is not associated with a source element.")
+					message.contains("The generated type 'myusercode.Foo.Inner' is not associated with a source element.")
 					&& line == 1
 				])
 				assertEquals(3, xtendFile.eResource.warnings.size)
