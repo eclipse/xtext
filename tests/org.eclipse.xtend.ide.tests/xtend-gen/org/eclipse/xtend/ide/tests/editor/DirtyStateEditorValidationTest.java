@@ -7,26 +7,37 @@
  */
 package org.eclipse.xtend.ide.tests.editor;
 
+import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import java.util.Iterator;
 import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.jface.text.source.Annotation;
+import org.eclipse.jface.text.source.IAnnotationModel;
+import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
-import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
@@ -106,22 +117,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       IXtextDocument _document_1 = editor.getDocument();
       _document_1.set(content);
       this._syncUtil.waitForReconciler(editor);
-      IXtextDocument _document_2 = editor.getDocument();
-      final IUnitOfWork<Object, XtextResource> _function = new IUnitOfWork<Object, XtextResource>() {
-        public Object exec(final XtextResource it) throws Exception {
-          final CancelIndicator _function = new CancelIndicator() {
-            public boolean isCanceled() {
-              return false;
-            }
-          };
-          final List<Issue> issues = DirtyStateEditorValidationTest.this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function);
-          String _string = issues.toString();
-          boolean _isEmpty = issues.isEmpty();
-          Assert.assertTrue(_string, _isEmpty);
-          return null;
-        }
-      };
-      _document_2.<Object>readOnly(_function);
+      this.assertNumberOfErrorAnnotations(editor, 0);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -175,41 +171,11 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       IXtextDocument _document = editor.getDocument();
       _document.set(contentWithoutBar);
       this._syncUtil.waitForReconciler(editor);
+      this.assertNumberOfErrorAnnotations(editor, 3);
       IXtextDocument _document_1 = editor.getDocument();
-      final IUnitOfWork<Object, XtextResource> _function = new IUnitOfWork<Object, XtextResource>() {
-        public Object exec(final XtextResource it) throws Exception {
-          final CancelIndicator _function = new CancelIndicator() {
-            public boolean isCanceled() {
-              return false;
-            }
-          };
-          final List<Issue> issues = DirtyStateEditorValidationTest.this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function);
-          String _string = issues.toString();
-          int _length = ((Object[])Conversions.unwrapArray(issues, Object.class)).length;
-          Assert.assertEquals(_string, 3, _length);
-          return null;
-        }
-      };
-      _document_1.<Object>readOnly(_function);
-      IXtextDocument _document_2 = editor.getDocument();
-      _document_2.set((contentWithoutBar + bar));
+      _document_1.set((contentWithoutBar + bar));
       this._syncUtil.waitForReconciler(editor);
-      IXtextDocument _document_3 = editor.getDocument();
-      final IUnitOfWork<Object, XtextResource> _function_1 = new IUnitOfWork<Object, XtextResource>() {
-        public Object exec(final XtextResource it) throws Exception {
-          final CancelIndicator _function = new CancelIndicator() {
-            public boolean isCanceled() {
-              return false;
-            }
-          };
-          final List<Issue> issues = DirtyStateEditorValidationTest.this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function);
-          String _string = issues.toString();
-          boolean _isEmpty = issues.isEmpty();
-          Assert.assertTrue(_string, _isEmpty);
-          return null;
-        }
-      };
-      _document_3.<Object>readOnly(_function_1);
+      this.assertNumberOfErrorAnnotations(editor, 0);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -247,7 +213,13 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       Assert.assertEquals(0, _length);
       final XtextEditor interfaceEditor = this.helper.openEditor(interfaceFile);
       final XtextEditor classEditor = this.helper.openEditor(classFile);
-      IXtextDocument _document = classEditor.getDocument();
+      this.assertNumberOfErrorAnnotations(classEditor, 0);
+      IXtextDocument _document = interfaceEditor.getDocument();
+      _document.set(interfaceChanged);
+      this._syncUtil.waitForReconciler(interfaceEditor);
+      this._syncUtil.waitForDirtyStateUpdater(classEditor);
+      this._syncUtil.waitForReconciler(classEditor);
+      IXtextDocument _document_1 = classEditor.getDocument();
       final IUnitOfWork<Object, XtextResource> _function = new IUnitOfWork<Object, XtextResource>() {
         public Object exec(final XtextResource it) throws Exception {
           final CancelIndicator _function = new CancelIndicator() {
@@ -257,37 +229,19 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
           };
           final List<Issue> issues = DirtyStateEditorValidationTest.this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function);
           String _string = issues.toString();
-          boolean _isEmpty = issues.isEmpty();
-          Assert.assertTrue(_string, _isEmpty);
-          return null;
-        }
-      };
-      _document.<Object>readOnly(_function);
-      IXtextDocument _document_1 = interfaceEditor.getDocument();
-      _document_1.set(interfaceChanged);
-      this._syncUtil.waitForReconciler(interfaceEditor);
-      this._syncUtil.waitForDirtyStateUpdater(classEditor);
-      IXtextDocument _document_2 = classEditor.getDocument();
-      final IUnitOfWork<Object, XtextResource> _function_1 = new IUnitOfWork<Object, XtextResource>() {
-        public Object exec(final XtextResource it) throws Exception {
-          final CancelIndicator _function = new CancelIndicator() {
-            public boolean isCanceled() {
-              return false;
-            }
-          };
-          final List<Issue> issues = DirtyStateEditorValidationTest.this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function);
           int _size = issues.size();
-          Assert.assertEquals(1, _size);
+          Assert.assertEquals(_string, 1, _size);
           return null;
         }
       };
-      _document_2.<Object>readOnly(_function_1);
-      IXtextDocument _document_3 = interfaceEditor.getDocument();
-      _document_3.set(interface_);
+      _document_1.<Object>readOnly(_function);
+      IXtextDocument _document_2 = interfaceEditor.getDocument();
+      _document_2.set(interface_);
       this._syncUtil.waitForReconciler(interfaceEditor);
       this._syncUtil.waitForDirtyStateUpdater(classEditor);
-      IXtextDocument _document_4 = classEditor.getDocument();
-      final IUnitOfWork<Object, XtextResource> _function_2 = new IUnitOfWork<Object, XtextResource>() {
+      this._syncUtil.waitForReconciler(classEditor);
+      IXtextDocument _document_3 = classEditor.getDocument();
+      final IUnitOfWork<Object, XtextResource> _function_1 = new IUnitOfWork<Object, XtextResource>() {
         public Object exec(final XtextResource it) throws Exception {
           final CancelIndicator _function = new CancelIndicator() {
             public boolean isCanceled() {
@@ -301,7 +255,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
           return null;
         }
       };
-      _document_4.<Object>readOnly(_function_2);
+      _document_3.<Object>readOnly(_function_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -345,28 +299,13 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       Assert.assertEquals(0, _length);
       final XtextEditor interfaceEditor = this.helper.openEditor(interfaceFile);
       final XtextEditor classEditor = this.helper.openEditor(classFile);
-      IXtextDocument _document = classEditor.getDocument();
-      final IUnitOfWork<Object, XtextResource> _function = new IUnitOfWork<Object, XtextResource>() {
-        public Object exec(final XtextResource it) throws Exception {
-          final CancelIndicator _function = new CancelIndicator() {
-            public boolean isCanceled() {
-              return false;
-            }
-          };
-          final List<Issue> issues = DirtyStateEditorValidationTest.this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function);
-          String _string = issues.toString();
-          boolean _isEmpty = issues.isEmpty();
-          Assert.assertTrue(_string, _isEmpty);
-          return null;
-        }
-      };
-      _document.<Object>readOnly(_function);
-      IXtextDocument _document_1 = interfaceEditor.getDocument();
-      _document_1.set(interfaceChanged);
+      this.assertNumberOfErrorAnnotations(classEditor, 0);
+      IXtextDocument _document = interfaceEditor.getDocument();
+      _document.set(interfaceChanged);
       this._syncUtil.waitForReconciler(interfaceEditor);
       this._syncUtil.waitForDirtyStateUpdater(classEditor);
-      IXtextDocument _document_2 = classEditor.getDocument();
-      final IUnitOfWork<Object, XtextResource> _function_1 = new IUnitOfWork<Object, XtextResource>() {
+      IXtextDocument _document_1 = classEditor.getDocument();
+      final IUnitOfWork<Object, XtextResource> _function = new IUnitOfWork<Object, XtextResource>() {
         public Object exec(final XtextResource it) throws Exception {
           final CancelIndicator _function = new CancelIndicator() {
             public boolean isCanceled() {
@@ -380,13 +319,13 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
           return null;
         }
       };
-      _document_2.<Object>readOnly(_function_1);
-      IXtextDocument _document_3 = interfaceEditor.getDocument();
-      _document_3.set(interface_);
+      _document_1.<Object>readOnly(_function);
+      IXtextDocument _document_2 = interfaceEditor.getDocument();
+      _document_2.set(interface_);
       this._syncUtil.waitForReconciler(interfaceEditor);
       this._syncUtil.waitForDirtyStateUpdater(classEditor);
-      IXtextDocument _document_4 = classEditor.getDocument();
-      final IUnitOfWork<Object, XtextResource> _function_2 = new IUnitOfWork<Object, XtextResource>() {
+      IXtextDocument _document_3 = classEditor.getDocument();
+      final IUnitOfWork<Object, XtextResource> _function_1 = new IUnitOfWork<Object, XtextResource>() {
         public Object exec(final XtextResource it) throws Exception {
           final CancelIndicator _function = new CancelIndicator() {
             public boolean isCanceled() {
@@ -400,7 +339,83 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
           return null;
         }
       };
-      _document_4.<Object>readOnly(_function_2);
+      _document_3.<Object>readOnly(_function_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testValidateOnOpen() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("interface Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void bar()");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final String interface_ = _builder.toString();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("interface Foo {");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("def void bar(String b)");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      final String interfaceChanged = _builder_1.toString();
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("class Bar implements Foo {");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.append("override bar() {}");
+      _builder_2.newLine();
+      _builder_2.append("}");
+      _builder_2.newLine();
+      final String class_ = _builder_2.toString();
+      final IFile interfaceFile = this.helper.createFile("Foo.xtend", interface_);
+      final IFile classFile = this.helper.createFile("Bar.xtend", class_);
+      this._syncUtil.waitForBuild(null);
+      IMarker[] _findMarkers = classFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
+      int _length = _findMarkers.length;
+      Assert.assertEquals(0, _length);
+      final XtextEditor interfaceEditor = this.helper.openEditor(interfaceFile);
+      final XtextEditor classEditor = this.helper.openEditor(classFile);
+      this.assertNumberOfErrorAnnotations(classEditor, 0);
+      this.helper.closeEditor(classEditor, false);
+      IXtextDocument _document = interfaceEditor.getDocument();
+      _document.set(interfaceChanged);
+      this._syncUtil.waitForReconciler(interfaceEditor);
+      final XtextEditor classEditorWithError = this.helper.openEditor(classFile);
+      this.assertNumberOfErrorAnnotations(classEditorWithError, 2);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  private void assertNumberOfErrorAnnotations(final XtextEditor editor, final int expectedNumber) {
+    try {
+      IXtextDocument _document = editor.getDocument();
+      Job _validationJob = ((XtextDocument) _document).getValidationJob();
+      _validationJob.join();
+      IDocumentProvider _documentProvider = editor.getDocumentProvider();
+      IEditorInput _editorInput = editor.getEditorInput();
+      IAnnotationModel _annotationModel = _documentProvider.getAnnotationModel(_editorInput);
+      Iterator _annotationIterator = _annotationModel.getAnnotationIterator();
+      final List<Object> annotations = IteratorExtensions.<Object>toList(_annotationIterator);
+      Iterable<Annotation> _filter = Iterables.<Annotation>filter(annotations, Annotation.class);
+      final Function1<Annotation, Boolean> _function = new Function1<Annotation, Boolean>() {
+        public Boolean apply(final Annotation it) {
+          String _type = it.getType();
+          return Boolean.valueOf(Objects.equal(_type, "org.eclipse.xtext.ui.editor.error"));
+        }
+      };
+      final Iterable<Annotation> errors = IterableExtensions.<Annotation>filter(_filter, _function);
+      String _string = errors.toString();
+      int _size = IterableExtensions.size(errors);
+      Assert.assertEquals(_string, expectedNumber, _size);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
