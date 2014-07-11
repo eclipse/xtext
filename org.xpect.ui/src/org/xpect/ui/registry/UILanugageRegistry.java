@@ -48,6 +48,10 @@ public class UILanugageRegistry implements ILanguageInfo.Registry {
 			if (modules.length == 0) {
 				URI uri = URI.createURI("*." + getFileExtensions().iterator().next());
 				IResourceServiceProvider provider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(uri);
+				if (provider == null) {
+					String msg = "Could not find " + IResourceServiceProvider.class.getSimpleName() + " for " + uri;
+					throw new IllegalStateException(msg + "\nRegistry:\n" + IEmfFileExtensionInfo.Registry.INSTANCE);
+				}
 				return provider.get(Injector.class);
 			} else {
 				Module runtimeModule = getRuntimeModule();

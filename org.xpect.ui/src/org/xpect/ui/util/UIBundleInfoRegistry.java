@@ -82,12 +82,12 @@ public class UIBundleInfoRegistry implements IBundleInfo.Registry {
 		Bundle[] fragments = Platform.getFragments(bundle);
 		if (fragments == null || fragments.length == 0)
 			return new UIBundleInfo(locationURI, bundle);
-		String classURI = getClassURI(clazz).toFileString();
-		if (classURI.startsWith(locationURI.toFileString()))
+		String classURI = getClassURI(clazz).toString();
+		if (classURI.startsWith(locationURI.toString()))
 			return new UIBundleInfo(locationURI, bundle);
 		for (Bundle fragment : fragments) {
 			URI fragmentURI = getBundleLocationURI(fragment);
-			if (classURI.startsWith(fragmentURI.toFileString()))
+			if (classURI.startsWith(fragmentURI.toString()))
 				return new UIBundleInfo(fragmentURI, fragment);
 		}
 		return null;

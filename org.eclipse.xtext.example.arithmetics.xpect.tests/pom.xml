@@ -1,16 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.xpect</groupId>
-	<artifactId>org.xpect.test.parent</artifactId>
+	<groupId>org.eclipse.xtext.example.arithmetics</groupId>
+	<artifactId>org.eclipse.xtext.example.arithmetics.xpect.tests</artifactId>
 	<version>0.1.0-SNAPSHOT</version>
-	<packaging>pom</packaging>
+	<packaging>eclipse-plugin</packaging>
 
 	<properties>
-		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<os-jvm-flags />
 		<memory-settings>-Xmx1G</memory-settings>
-		<target-platform-artifactId>org.xpect.target.eclipse_3_8_2-xtext_2_4_0</target-platform-artifactId>
 	</properties>
 
 	<profiles>
@@ -51,16 +49,36 @@
 					<target>
 						<artifact>
 							<groupId>org.xpect</groupId>
-							<artifactId>${target-platform-artifactId}</artifactId>
+							<artifactId>org.xpect.target.eclipse_3_8_2-xtext_2_4_0</artifactId>
 							<version>0.1.0-SNAPSHOT</version>
 						</artifact>
 					</target>
 					<environments>
-						<!-- <environment> <os>linux</os> <ws>gtk</ws> <arch>x86</arch> </environment> 
-							<environment> <os>linux</os> <ws>gtk</ws> <arch>x86_64</arch> </environment> 
-							<environment> <os>win32</os> <ws>win32</ws> <arch>x86</arch> </environment> 
-							<environment> <os>macosx</os> <ws>cocoa</ws> <arch>x86</arch> </environment> 
-							<environment> <os>win32</os> <ws>win32</ws> <arch>x86_64</arch> </environment> -->
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86_64</arch>
+						</environment>
 						<environment>
 							<os>macosx</os>
 							<ws>cocoa</ws>
@@ -94,7 +112,6 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.16</version>
 				<configuration>
-					<!-- <debugForkedProcess>true</debugForkedProcess> -->
 					<reportsDirectory>${project.build.directory}/surfire-reports-standalone</reportsDirectory>
 				</configuration>
 				<executions>
@@ -113,7 +130,7 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-
+<!-- 
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-surefire-plugin</artifactId>
@@ -121,19 +138,10 @@
 				<configuration>
 					<reportsDirectory>${project.build.directory}/surfire-reports-plugin</reportsDirectory>
 					<useUIHarness>true</useUIHarness>
-					<useUIThread>true</useUIThread>
+					<useUIThread>false</useUIThread>
 					<argLine>${memory-settings} ${os-jvm-flags}</argLine>
-					<dependencies>
-						<dependency>
-							<type>eclipse-plugin</type>
-							<artifactId>org.eclipse.xtext.logging</artifactId>
-						</dependency>
-					</dependencies>
-					<!-- <debugPort>5005</debugPort> -->
 				</configuration>
-				<!-- <executions> <execution> <phase>integration-test</phase> <goals> 
-					<goal>test</goal> </goals> </execution> </executions> -->
-			</plugin>
+			</plugin> -->
 		</plugins>
 	</build>
 </project>
