@@ -10,13 +10,16 @@ package org.eclipse.xtend.ide.tests.editor
 import com.google.inject.Inject
 import org.eclipse.core.resources.IMarker
 import org.eclipse.core.resources.IResource
+import org.eclipse.jface.text.source.Annotation
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
+import org.eclipse.xtext.ui.editor.XtextEditor
+import org.eclipse.xtext.ui.editor.model.XtextDocument
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil
-import org.eclipse.xtext.validation.CheckMode
-import org.eclipse.xtext.validation.IResourceValidator
 import org.junit.After
 import org.junit.Test
+import org.eclipse.xtext.validation.IResourceValidator
+import org.eclipse.xtext.validation.CheckMode
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -24,7 +27,9 @@ import org.junit.Test
 class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
 	
 	@Inject extension WorkbenchTestHelper helper
+	
 	@Inject extension SyncUtil
+	
 	@Inject IResourceValidator validator
 
 	@After override void tearDown() {
@@ -59,11 +64,7 @@ class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
 		editor.waitForReconciler()
 		editor.document.set(content)
 		editor.waitForReconciler()
-		editor.document.readOnly [
-			val issues = validator.validate(it, CheckMode.NORMAL_AND_FAST, [|false])
-			assertTrue(issues.toString,issues.empty)
-			return null
-		]
+		editor.assertNumberOfErrorAnnotations(0)
 	}
 	
 	/**
@@ -93,18 +94,11 @@ class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
 		val editor = openEditor(file)
 		editor.document.set(contentWithoutBar)
 		editor.waitForReconciler()
-		editor.document.readOnly [
-			val issues = validator.validate(it, CheckMode.NORMAL_AND_FAST, [|false])
-			assertEquals(issues.toString,3,issues.length)
-			return null
-		]
+		editor.assertNumberOfErrorAnnotations(3)
+
 		editor.document.set(contentWithoutBar+bar)
 		editor.waitForReconciler()
-		editor.document.readOnly [
-			val issues = validator.validate(it, CheckMode.NORMAL_AND_FAST, [|false])
-			assertTrue(issues.toString,issues.empty)
-			return null
-		]
+		editor.assertNumberOfErrorAnnotations(0)
 	}
 	
 	@Test def void testAddedInterfaceMethod() {
@@ -128,29 +122,29 @@ class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
 		assertEquals(0, classFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE).length)
 		val interfaceEditor = openEditor(interfaceFile)
 		val classEditor = openEditor(classFile)
-		classEditor.document.readOnly [
-			val issues = validator.validate(it, CheckMode.NORMAL_AND_FAST, [|false])
-			assertTrue(issues.toString,issues.empty)
-			return null
-		]
+		classEditor.assertNumberOfErrorAnnotations(0)
 		
 		interfaceEditor.document.set(interfaceChanged)
 		interfaceEditor.waitForReconciler
 		classEditor.waitForDirtyStateUpdater
+		classEditor.waitForReconciler
 		classEditor.document.readOnly [
 			val issues = validator.validate(it, CheckMode.NORMAL_AND_FAST, [|false])
-			assertEquals(1, issues.size)
+			assertEquals(issues.toString, 1, issues.size)
 			return null
 		]
+//		classEditor.assertNumberOfErrorAnnotations(1)
 		
 		interfaceEditor.document.set(interface)
 		interfaceEditor.waitForReconciler
 		classEditor.waitForDirtyStateUpdater
+		classEditor.waitForReconciler
 		classEditor.document.readOnly [
 			val issues = validator.validate(it, CheckMode.NORMAL_AND_FAST, [|false])
-			assertTrue(issues.toString,issues.empty)
+			assertTrue(issues.toString, issues.empty)
 			return null
 		]
+//		classEditor.assertNumberOfErrorAnnotations(0)
 	}
 	
 	@Test def void testChangedOverriddenSignature() {
@@ -176,12 +170,8 @@ class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
 		assertEquals(0, classFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE).length)
 		val interfaceEditor = openEditor(interfaceFile)
 		val classEditor = openEditor(classFile)
-		classEditor.document.readOnly [
-			val issues = validator.validate(it, CheckMode.NORMAL_AND_FAST, [|false])
-			assertTrue(issues.toString,issues.empty)
-			return null
-		]
-
+		classEditor.assertNumberOfErrorAnnotations(0)
+		
 		interfaceEditor.document.set(interfaceChanged)
 		interfaceEditor.waitForReconciler
 		classEditor.waitForDirtyStateUpdater
@@ -190,15 +180,57 @@ class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
 			assertEquals(issues.toString, 2, issues.size)
 			return null
 		]
-
+		//classEditor.assertNumberOfErrorAnnotations(2)
+		
 		interfaceEditor.document.set(interface)
 		interfaceEditor.waitForReconciler
 		classEditor.waitForDirtyStateUpdater
 		classEditor.document.readOnly [
 			val issues = validator.validate(it, CheckMode.NORMAL_AND_FAST, [|false])
-			assertTrue(issues.toString,issues.empty)
+			assertTrue(issues.toString, issues.empty)
 			return null
 		]
+		//classEditor.assertNumberOfErrorAnnotations(0)
 	}
 	
+	@Test def void testValidateOnOpen() {
+		val interface = '''
+			interface Foo {
+				def void bar()
+			}
+		'''
+		val interfaceChanged = '''
+			interface Foo {
+				def void bar(String b)
+			}
+		'''
+		val class = '''
+			class Bar implements Foo {
+				override bar() {}
+			}
+		'''
+
+		val interfaceFile = createFile("Foo.xtend", interface)
+		val classFile = createFile("Bar.xtend", class)
+		waitForBuild(null)
+		assertEquals(0, classFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE).length)
+		val interfaceEditor = openEditor(interfaceFile)
+
+		val classEditor = openEditor(classFile)
+		classEditor.assertNumberOfErrorAnnotations(0)
+				
+		classEditor.closeEditor(false)
+		interfaceEditor.document.set(interfaceChanged)
+		waitForReconciler(interfaceEditor)
+		
+		val classEditorWithError = openEditor(classFile)
+		classEditorWithError.assertNumberOfErrorAnnotations(2)
+	}
+	
+	private def assertNumberOfErrorAnnotations(XtextEditor editor, int expectedNumber) {
+		(editor.document as XtextDocument).validationJob.join
+		val annotations = editor.documentProvider.getAnnotationModel(editor.editorInput).annotationIterator.toList
+		val errors = annotations.filter(Annotation).filter[type == 'org.eclipse.xtext.ui.editor.error']
+		assertEquals(errors.toString, expectedNumber, errors.size)
+	}
 }
