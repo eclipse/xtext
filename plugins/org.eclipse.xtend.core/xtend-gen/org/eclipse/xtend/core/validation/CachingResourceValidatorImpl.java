@@ -166,8 +166,8 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
     EList<Resource.Diagnostic> _warnings = resource.getWarnings();
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("The generated element \'");
-    String _qualifiedName = jvmElement.getQualifiedName('.');
-    _builder.append(_qualifiedName, "");
+    String _identifier = jvmElement.getIdentifier();
+    _builder.append(_identifier, "");
     _builder.append("\' is not associated with a source element. The producing active annotation should set the \'primarySourceElement\'.");
     EList<EObject> _contents = resource.getContents();
     EObject _head = IterableExtensions.<EObject>head(_contents);
