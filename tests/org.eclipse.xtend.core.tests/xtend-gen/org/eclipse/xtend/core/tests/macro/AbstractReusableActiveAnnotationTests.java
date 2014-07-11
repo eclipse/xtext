@@ -696,7 +696,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
           public Boolean apply(final Resource.Diagnostic it) {
             boolean _and = false;
             String _message = it.getMessage();
-            boolean _contains = _message.contains("The generated element \'myusercode.Foo.Inner\' is not associated with a source element.");
+            boolean _contains = _message.contains("The generated element \'myusercode.Foo$Inner\' is not associated with a source element.");
             if (!_contains) {
               _and = false;
             } else {
@@ -712,8 +712,28 @@ public abstract class AbstractReusableActiveAnnotationTests {
         XtendFile _xtendFile_2 = it.getXtendFile();
         Resource _eResource_2 = _xtendFile_2.eResource();
         EList<Resource.Diagnostic> _warnings_2 = _eResource_2.getWarnings();
-        int _size = _warnings_2.size();
-        Assert.assertEquals(2, _size);
+        final Function1<Resource.Diagnostic, Boolean> _function_2 = new Function1<Resource.Diagnostic, Boolean>() {
+          public Boolean apply(final Resource.Diagnostic it) {
+            boolean _and = false;
+            String _message = it.getMessage();
+            boolean _contains = _message.contains("The generated element \'myusercode.Foo$Inner.Inner()\' is not associated with a source element.");
+            if (!_contains) {
+              _and = false;
+            } else {
+              int _line = it.getLine();
+              boolean _equals = (_line == 1);
+              _and = _equals;
+            }
+            return Boolean.valueOf(_and);
+          }
+        };
+        boolean _exists_2 = IterableExtensions.<Resource.Diagnostic>exists(_warnings_2, _function_2);
+        Assert.assertTrue(_exists_2);
+        XtendFile _xtendFile_3 = it.getXtendFile();
+        Resource _eResource_3 = _xtendFile_3.eResource();
+        EList<Resource.Diagnostic> _warnings_3 = _eResource_3.getWarnings();
+        int _size = _warnings_3.size();
+        Assert.assertEquals(3, _size);
       }
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);

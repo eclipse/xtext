@@ -30,11 +30,9 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
-import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.typesystem.computation.DiagnosticOnFirstKeyword;
@@ -50,10 +48,6 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
   @Inject
   @Extension
   private IJvmModelAssociations _iJvmModelAssociations;
-  
-  @Inject
-  @Extension
-  private JvmTypeExtensions _jvmTypeExtensions;
   
   public List<Issue> validate(final Resource resource, final CheckMode mode, final CancelIndicator mon) {
     try {
@@ -138,14 +132,7 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
     for (final JvmDeclaredType jvmType : _filter) {
       TreeIterator<EObject> _eAllContents = jvmType.eAllContents();
       Iterator<JvmMember> _filter_1 = Iterators.<JvmMember>filter(_eAllContents, JvmMember.class);
-      final Function1<JvmMember, Boolean> _function = new Function1<JvmMember, Boolean>() {
-        public Boolean apply(final JvmMember it) {
-          boolean _isSynthetic = CachingResourceValidatorImpl.this._jvmTypeExtensions.isSynthetic(it);
-          return Boolean.valueOf((!_isSynthetic));
-        }
-      };
-      Iterator<JvmMember> _filter_2 = IteratorExtensions.<JvmMember>filter(_filter_1, _function);
-      Iterable<JvmMember> _iterable = IteratorExtensions.<JvmMember>toIterable(_filter_2);
+      Iterable<JvmMember> _iterable = IteratorExtensions.<JvmMember>toIterable(_filter_1);
       for (final JvmMember jvmMember : _iterable) {
         {
           boolean _isCanceled = monitor.isCanceled();
@@ -166,8 +153,8 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
     EList<Resource.Diagnostic> _warnings = resource.getWarnings();
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("The generated element \'");
-    String _qualifiedName = jvmElement.getQualifiedName('.');
-    _builder.append(_qualifiedName, "");
+    String _identifier = jvmElement.getIdentifier();
+    _builder.append(_identifier, "");
     _builder.append("\' is not associated with a source element. The producing active annotation should set the \'primarySourceElement\'.");
     EList<EObject> _contents = resource.getContents();
     EObject _head = IterableExtensions.<EObject>head(_contents);

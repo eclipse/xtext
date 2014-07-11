@@ -16,7 +16,6 @@ import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
-import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 import org.eclipse.xtext.xbase.typesystem.computation.DiagnosticOnFirstKeyword
 
 class CachingResourceValidatorImpl extends DerivedStateAwareResourceValidator {
@@ -24,7 +23,6 @@ class CachingResourceValidatorImpl extends DerivedStateAwareResourceValidator {
 	@Inject OnChangeEvictingCache cache
 	@Inject AnnotationProcessor annotationProcessor
 	@Inject extension IJvmModelAssociations
-	@Inject extension JvmTypeExtensions 
 
 	override validate(Resource resource, CheckMode mode, CancelIndicator mon) {
 		try {
@@ -70,7 +68,7 @@ class CachingResourceValidatorImpl extends DerivedStateAwareResourceValidator {
 
 	private def addWarningsForOrphanedJvmElements(Resource resource, CancelIndicator monitor) {
 		for (jvmType : resource.contents.tail.filter(JvmDeclaredType)) {
-			for (jvmMember : jvmType.eAllContents.filter(JvmMember).filter[!synthetic].toIterable) {
+			for (jvmMember : jvmType.eAllContents.filter(JvmMember).toIterable) {
 				if (monitor.isCanceled) {
 					return
 				}
@@ -87,7 +85,7 @@ class CachingResourceValidatorImpl extends DerivedStateAwareResourceValidator {
 			new DiagnosticOnFirstKeyword(
 				Severity.WARNING,
 				IssueCodes.ORPHAN_ELMENT,
-				'''The generated element '«jvmElement.getQualifiedName(".")»' is not associated with a source element. The producing active annotation should set the 'primarySourceElement'.''',
+				'''The generated element '«jvmElement.identifier»' is not associated with a source element. The producing active annotation should set the 'primarySourceElement'.''',
 				resource.contents.head,
 				null
 			))
