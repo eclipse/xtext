@@ -46,7 +46,6 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 		issue.setSeverity(severity);
 		issue.setLineNumber(diagnostic.getLine());
 		issue.setMessage(diagnostic.getMessage());
-		//		issue.setmarker.put(IMarker.PRIORITY, Integer.valueOf(IMarker.PRIORITY_LOW));
 
 		if (diagnostic instanceof org.eclipse.xtext.diagnostics.Diagnostic) {
 			org.eclipse.xtext.diagnostics.Diagnostic xtextDiagnostic = (org.eclipse.xtext.diagnostics.Diagnostic) diagnostic;

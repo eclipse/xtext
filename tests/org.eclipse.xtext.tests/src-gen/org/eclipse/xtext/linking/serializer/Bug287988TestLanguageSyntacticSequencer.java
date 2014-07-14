@@ -48,10 +48,10 @@ public class Bug287988TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 * Syntax:
 	 *     (
 	     'rulecall2' | 
+	     'actions' | 
 	     'inlinedActions' | 
 	     'rulecall' | 
 	     'rulecall3' | 
-	     'actions' | 
 	     'simple'
 	 )
 	 */

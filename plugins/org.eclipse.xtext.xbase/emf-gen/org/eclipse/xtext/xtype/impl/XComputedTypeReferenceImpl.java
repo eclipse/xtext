@@ -181,9 +181,5 @@ public class XComputedTypeReferenceImpl extends JvmSpecializedTypeReferenceImplC
 		result.append(')');
 		return result.toString();
 	}
-	
-	public void unsetTypeProviderWithoutNotification() {
-		typeProvider = null;
-	}
 
 } //XComputedTypeReferenceImpl

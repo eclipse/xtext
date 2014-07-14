@@ -501,31 +501,31 @@ public class InternalXtypeLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:954:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:954:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:954:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:954:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
             {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:954:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
-            int alt5=2;
-            int LA5_0 = input.LA(1);
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:954:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
+            int alt7=2;
+            int LA7_0 = input.LA(1);
 
-            if ( (LA5_0=='\"') ) {
-                alt5=1;
+            if ( (LA7_0=='\"') ) {
+                alt7=1;
             }
-            else if ( (LA5_0=='\'') ) {
-                alt5=2;
+            else if ( (LA7_0=='\'') ) {
+                alt7=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 5, 0, input);
+                    new NoViableAltException("", 7, 0, input);
 
                 throw nvae;
             }
-            switch (alt5) {
+            switch (alt7) {
                 case 1 :
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:954:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:954:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )?
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:954:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:954:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop3:
                     do {
                         int alt3=3;
@@ -541,23 +541,15 @@ public class InternalXtypeLexer extends Lexer {
 
                         switch (alt3) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:954:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:954:21: '\\\\' .
                     	    {
                     	    match('\\'); 
-                    	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
-                    	        input.consume();
-
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
-                    	        recover(mse);
-                    	        throw mse;}
-
+                    	    matchAny(); 
 
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:954:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:954:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -577,47 +569,56 @@ public class InternalXtypeLexer extends Lexer {
                         }
                     } while (true);
 
-                    match('\"'); 
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:954:44: ( '\"' )?
+                    int alt4=2;
+                    int LA4_0 = input.LA(1);
+
+                    if ( (LA4_0=='\"') ) {
+                        alt4=1;
+                    }
+                    switch (alt4) {
+                        case 1 :
+                            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:954:44: '\"'
+                            {
+                            match('\"'); 
+
+                            }
+                            break;
+
+                    }
+
 
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:954:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:954:49: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )?
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:954:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
-                    loop4:
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:954:54: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    loop5:
                     do {
-                        int alt4=3;
-                        int LA4_0 = input.LA(1);
+                        int alt5=3;
+                        int LA5_0 = input.LA(1);
 
-                        if ( (LA4_0=='\\') ) {
-                            alt4=1;
+                        if ( (LA5_0=='\\') ) {
+                            alt5=1;
                         }
-                        else if ( ((LA4_0>='\u0000' && LA4_0<='&')||(LA4_0>='(' && LA4_0<='[')||(LA4_0>=']' && LA4_0<='\uFFFF')) ) {
-                            alt4=2;
+                        else if ( ((LA5_0>='\u0000' && LA5_0<='&')||(LA5_0>='(' && LA5_0<='[')||(LA5_0>=']' && LA5_0<='\uFFFF')) ) {
+                            alt5=2;
                         }
 
 
-                        switch (alt4) {
+                        switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:954:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:954:55: '\\\\' .
                     	    {
                     	    match('\\'); 
-                    	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
-                    	        input.consume();
-
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
-                    	        recover(mse);
-                    	        throw mse;}
-
+                    	    matchAny(); 
 
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:954:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:954:62: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -633,11 +634,28 @@ public class InternalXtypeLexer extends Lexer {
                     	    break;
 
                     	default :
-                    	    break loop4;
+                    	    break loop5;
                         }
                     } while (true);
 
-                    match('\''); 
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:954:79: ( '\\'' )?
+                    int alt6=2;
+                    int LA6_0 = input.LA(1);
+
+                    if ( (LA6_0=='\'') ) {
+                        alt6=1;
+                    }
+                    switch (alt6) {
+                        case 1 :
+                            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:954:79: '\\''
+                            {
+                            match('\''); 
+
+                            }
+                            break;
+
+                    }
+
 
                     }
                     break;
@@ -666,29 +684,29 @@ public class InternalXtypeLexer extends Lexer {
             match("/*"); 
 
             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:956:24: ( options {greedy=false; } : . )*
-            loop6:
+            loop8:
             do {
-                int alt6=2;
-                int LA6_0 = input.LA(1);
+                int alt8=2;
+                int LA8_0 = input.LA(1);
 
-                if ( (LA6_0=='*') ) {
-                    int LA6_1 = input.LA(2);
+                if ( (LA8_0=='*') ) {
+                    int LA8_1 = input.LA(2);
 
-                    if ( (LA6_1=='/') ) {
-                        alt6=2;
+                    if ( (LA8_1=='/') ) {
+                        alt8=2;
                     }
-                    else if ( ((LA6_1>='\u0000' && LA6_1<='.')||(LA6_1>='0' && LA6_1<='\uFFFF')) ) {
-                        alt6=1;
+                    else if ( ((LA8_1>='\u0000' && LA8_1<='.')||(LA8_1>='0' && LA8_1<='\uFFFF')) ) {
+                        alt8=1;
                     }
 
 
                 }
-                else if ( ((LA6_0>='\u0000' && LA6_0<=')')||(LA6_0>='+' && LA6_0<='\uFFFF')) ) {
-                    alt6=1;
+                else if ( ((LA8_0>='\u0000' && LA8_0<=')')||(LA8_0>='+' && LA8_0<='\uFFFF')) ) {
+                    alt8=1;
                 }
 
 
-                switch (alt6) {
+                switch (alt8) {
             	case 1 :
             	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:956:52: .
             	    {
@@ -698,7 +716,7 @@ public class InternalXtypeLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop6;
+            	    break loop8;
                 }
             } while (true);
 
@@ -726,17 +744,17 @@ public class InternalXtypeLexer extends Lexer {
             match("//"); 
 
             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:958:24: (~ ( ( '\\n' | '\\r' ) ) )*
-            loop7:
+            loop9:
             do {
-                int alt7=2;
-                int LA7_0 = input.LA(1);
+                int alt9=2;
+                int LA9_0 = input.LA(1);
 
-                if ( ((LA7_0>='\u0000' && LA7_0<='\t')||(LA7_0>='\u000B' && LA7_0<='\f')||(LA7_0>='\u000E' && LA7_0<='\uFFFF')) ) {
-                    alt7=1;
+                if ( ((LA9_0>='\u0000' && LA9_0<='\t')||(LA9_0>='\u000B' && LA9_0<='\f')||(LA9_0>='\u000E' && LA9_0<='\uFFFF')) ) {
+                    alt9=1;
                 }
 
 
-                switch (alt7) {
+                switch (alt9) {
             	case 1 :
             	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:958:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
@@ -754,29 +772,29 @@ public class InternalXtypeLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop7;
+            	    break loop9;
                 }
             } while (true);
 
             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:958:40: ( ( '\\r' )? '\\n' )?
-            int alt9=2;
-            int LA9_0 = input.LA(1);
+            int alt11=2;
+            int LA11_0 = input.LA(1);
 
-            if ( (LA9_0=='\n'||LA9_0=='\r') ) {
-                alt9=1;
+            if ( (LA11_0=='\n'||LA11_0=='\r') ) {
+                alt11=1;
             }
-            switch (alt9) {
+            switch (alt11) {
                 case 1 :
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:958:41: ( '\\r' )? '\\n'
                     {
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:958:41: ( '\\r' )?
-                    int alt8=2;
-                    int LA8_0 = input.LA(1);
+                    int alt10=2;
+                    int LA10_0 = input.LA(1);
 
-                    if ( (LA8_0=='\r') ) {
-                        alt8=1;
+                    if ( (LA10_0=='\r') ) {
+                        alt10=1;
                     }
-                    switch (alt8) {
+                    switch (alt10) {
                         case 1 :
                             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:958:41: '\\r'
                             {
@@ -814,18 +832,18 @@ public class InternalXtypeLexer extends Lexer {
             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:960:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:960:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
-            int cnt10=0;
-            loop10:
+            int cnt12=0;
+            loop12:
             do {
-                int alt10=2;
-                int LA10_0 = input.LA(1);
+                int alt12=2;
+                int LA12_0 = input.LA(1);
 
-                if ( ((LA10_0>='\t' && LA10_0<='\n')||LA10_0=='\r'||LA10_0==' ') ) {
-                    alt10=1;
+                if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {
+                    alt12=1;
                 }
 
 
-                switch (alt10) {
+                switch (alt12) {
             	case 1 :
             	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:
             	    {
@@ -843,12 +861,12 @@ public class InternalXtypeLexer extends Lexer {
             	    break;
 
             	default :
-            	    if ( cnt10 >= 1 ) break loop10;
+            	    if ( cnt12 >= 1 ) break loop12;
                         EarlyExitException eee =
-                            new EarlyExitException(10, input);
+                            new EarlyExitException(12, input);
                         throw eee;
                 }
-                cnt10++;
+                cnt12++;
             } while (true);
 
 
@@ -884,9 +902,9 @@ public class InternalXtypeLexer extends Lexer {
 
     public void mTokens() throws RecognitionException {
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:1:8: ( T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | RULE_ID | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
-        int alt11=24;
-        alt11 = dfa11.predict(input);
-        switch (alt11) {
+        int alt13=24;
+        alt13 = dfa13.predict(input);
+        switch (alt13) {
             case 1 :
                 // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXtype.g:1:10: T__10
                 {
@@ -1061,35 +1079,35 @@ public class InternalXtypeLexer extends Lexer {
     }
 
 
-    protected DFA11 dfa11 = new DFA11(this);
-    static final String DFA11_eotS =
+    protected DFA13 dfa13 = new DFA13(this);
+    static final String DFA13_eotS =
         "\6\uffff\1\27\3\uffff\1\42\1\uffff\1\42\2\uffff\1\42\1\uffff\1\27"+
-        "\1\uffff\3\27\13\uffff\1\42\2\uffff\2\42\2\uffff\1\42\5\uffff\11"+
+        "\3\uffff\1\27\13\uffff\1\42\2\uffff\2\42\2\uffff\1\42\5\uffff\11"+
         "\42\1\74\4\42\1\uffff\1\101\1\102\1\103\1\42\3\uffff\1\42\1\106"+
         "\1\uffff";
-    static final String DFA11_eofS =
+    static final String DFA13_eofS =
         "\107\uffff";
-    static final String DFA11_minS =
+    static final String DFA13_minS =
         "\1\0\5\uffff\1\76\3\uffff\1\170\1\uffff\1\164\2\uffff\1\155\1\uffff"+
-        "\1\44\1\uffff\2\0\1\52\13\uffff\1\164\2\uffff\1\160\1\141\2\uffff"+
-        "\1\160\5\uffff\2\145\1\164\1\157\1\156\1\162\1\151\1\162\1\144\1"+
-        "\44\1\143\1\164\1\163\1\151\1\uffff\3\44\1\157\3\uffff\1\156\1\44"+
-        "\1\uffff";
-    static final String DFA11_maxS =
+        "\1\44\3\uffff\1\52\13\uffff\1\164\2\uffff\1\160\1\141\2\uffff\1"+
+        "\160\5\uffff\2\145\1\164\1\157\1\156\1\162\1\151\1\162\1\144\1\44"+
+        "\1\143\1\164\1\163\1\151\1\uffff\3\44\1\157\3\uffff\1\156\1\44\1"+
+        "\uffff";
+    static final String DFA13_maxS =
         "\1\uffff\5\uffff\1\76\3\uffff\1\170\1\uffff\1\165\2\uffff\1\155"+
-        "\1\uffff\1\172\1\uffff\2\uffff\1\57\13\uffff\1\164\2\uffff\1\160"+
-        "\1\141\2\uffff\1\160\5\uffff\2\145\1\164\1\157\1\156\1\162\1\151"+
-        "\1\162\1\163\1\172\1\143\1\164\1\163\1\151\1\uffff\3\172\1\157\3"+
-        "\uffff\1\156\1\172\1\uffff";
-    static final String DFA11_acceptS =
+        "\1\uffff\1\172\3\uffff\1\57\13\uffff\1\164\2\uffff\1\160\1\141\2"+
+        "\uffff\1\160\5\uffff\2\145\1\164\1\157\1\156\1\162\1\151\1\162\1"+
+        "\163\1\172\1\143\1\164\1\163\1\151\1\uffff\3\172\1\157\3\uffff\1"+
+        "\156\1\172\1\uffff";
+    static final String DFA13_acceptS =
         "\1\uffff\1\1\1\2\1\3\1\4\1\5\1\uffff\1\7\1\10\1\11\1\uffff\1\13"+
-        "\1\uffff\1\15\1\16\1\uffff\1\22\1\uffff\1\23\3\uffff\1\27\1\30\1"+
-        "\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\uffff\1\23\1\13\2\uffff\1"+
-        "\15\1\16\1\uffff\1\22\1\24\1\25\1\26\1\27\16\uffff\1\14\4\uffff"+
+        "\1\uffff\1\15\1\16\1\uffff\1\22\1\uffff\1\23\2\24\1\uffff\1\27\1"+
+        "\30\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\uffff\1\23\1\13\2\uffff"+
+        "\1\15\1\16\1\uffff\1\22\1\24\1\25\1\26\1\27\16\uffff\1\14\4\uffff"+
         "\1\20\1\17\1\12\2\uffff\1\21";
-    static final String DFA11_specialS =
-        "\1\2\22\uffff\1\0\1\1\62\uffff}>";
-    static final String[] DFA11_transitionS = {
+    static final String DFA13_specialS =
+        "\1\0\106\uffff}>";
+    static final String[] DFA13_transitionS = {
             "\11\27\2\26\2\27\1\26\22\27\1\26\1\27\1\23\1\27\1\22\1\27\1"+
             "\13\1\24\1\3\1\5\1\16\1\27\1\4\1\27\1\15\1\25\13\27\1\20\1\7"+
             "\1\6\1\10\1\11\1\27\32\22\1\1\1\27\1\2\1\21\1\22\1\27\4\22\1"+
@@ -1112,8 +1130,8 @@ public class InternalXtypeLexer extends Lexer {
             "",
             "\1\42\34\uffff\32\42\4\uffff\1\42\1\uffff\32\42",
             "",
-            "\0\52",
-            "\0\52",
+            "",
+            "",
             "\1\53\4\uffff\1\54",
             "",
             "",
@@ -1171,34 +1189,34 @@ public class InternalXtypeLexer extends Lexer {
             ""
     };
 
-    static final short[] DFA11_eot = DFA.unpackEncodedString(DFA11_eotS);
-    static final short[] DFA11_eof = DFA.unpackEncodedString(DFA11_eofS);
-    static final char[] DFA11_min = DFA.unpackEncodedStringToUnsignedChars(DFA11_minS);
-    static final char[] DFA11_max = DFA.unpackEncodedStringToUnsignedChars(DFA11_maxS);
-    static final short[] DFA11_accept = DFA.unpackEncodedString(DFA11_acceptS);
-    static final short[] DFA11_special = DFA.unpackEncodedString(DFA11_specialS);
-    static final short[][] DFA11_transition;
+    static final short[] DFA13_eot = DFA.unpackEncodedString(DFA13_eotS);
+    static final short[] DFA13_eof = DFA.unpackEncodedString(DFA13_eofS);
+    static final char[] DFA13_min = DFA.unpackEncodedStringToUnsignedChars(DFA13_minS);
+    static final char[] DFA13_max = DFA.unpackEncodedStringToUnsignedChars(DFA13_maxS);
+    static final short[] DFA13_accept = DFA.unpackEncodedString(DFA13_acceptS);
+    static final short[] DFA13_special = DFA.unpackEncodedString(DFA13_specialS);
+    static final short[][] DFA13_transition;
 
     static {
-        int numStates = DFA11_transitionS.length;
-        DFA11_transition = new short[numStates][];
+        int numStates = DFA13_transitionS.length;
+        DFA13_transition = new short[numStates][];
         for (int i=0; i<numStates; i++) {
-            DFA11_transition[i] = DFA.unpackEncodedString(DFA11_transitionS[i]);
+            DFA13_transition[i] = DFA.unpackEncodedString(DFA13_transitionS[i]);
         }
     }
 
-    class DFA11 extends DFA {
+    class DFA13 extends DFA {
 
-        public DFA11(BaseRecognizer recognizer) {
+        public DFA13(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 11;
-            this.eot = DFA11_eot;
-            this.eof = DFA11_eof;
-            this.min = DFA11_min;
-            this.max = DFA11_max;
-            this.accept = DFA11_accept;
-            this.special = DFA11_special;
-            this.transition = DFA11_transition;
+            this.decisionNumber = 13;
+            this.eot = DFA13_eot;
+            this.eof = DFA13_eof;
+            this.min = DFA13_min;
+            this.max = DFA13_max;
+            this.accept = DFA13_accept;
+            this.special = DFA13_special;
+            this.transition = DFA13_transition;
         }
         public String getDescription() {
             return "1:1: Tokens : ( T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | RULE_ID | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
@@ -1208,80 +1226,60 @@ public class InternalXtypeLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA11_19 = input.LA(1);
+                        int LA13_0 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA11_19>='\u0000' && LA11_19<='\uFFFF')) ) {s = 42;}
+                        if ( (LA13_0=='[') ) {s = 1;}
 
-                        else s = 23;
+                        else if ( (LA13_0==']') ) {s = 2;}
 
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
-                        int LA11_20 = input.LA(1);
+                        else if ( (LA13_0=='(') ) {s = 3;}
 
-                        s = -1;
-                        if ( ((LA11_20>='\u0000' && LA11_20<='\uFFFF')) ) {s = 42;}
+                        else if ( (LA13_0==',') ) {s = 4;}
 
-                        else s = 23;
+                        else if ( (LA13_0==')') ) {s = 5;}
 
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA11_0 = input.LA(1);
+                        else if ( (LA13_0=='=') ) {s = 6;}
 
-                        s = -1;
-                        if ( (LA11_0=='[') ) {s = 1;}
+                        else if ( (LA13_0=='<') ) {s = 7;}
 
-                        else if ( (LA11_0==']') ) {s = 2;}
+                        else if ( (LA13_0=='>') ) {s = 8;}
 
-                        else if ( (LA11_0=='(') ) {s = 3;}
+                        else if ( (LA13_0=='?') ) {s = 9;}
 
-                        else if ( (LA11_0==',') ) {s = 4;}
+                        else if ( (LA13_0=='e') ) {s = 10;}
 
-                        else if ( (LA11_0==')') ) {s = 5;}
+                        else if ( (LA13_0=='&') ) {s = 11;}
 
-                        else if ( (LA11_0=='=') ) {s = 6;}
+                        else if ( (LA13_0=='s') ) {s = 12;}
 
-                        else if ( (LA11_0=='<') ) {s = 7;}
+                        else if ( (LA13_0=='.') ) {s = 13;}
 
-                        else if ( (LA11_0=='>') ) {s = 8;}
+                        else if ( (LA13_0=='*') ) {s = 14;}
 
-                        else if ( (LA11_0=='?') ) {s = 9;}
+                        else if ( (LA13_0=='i') ) {s = 15;}
 
-                        else if ( (LA11_0=='e') ) {s = 10;}
+                        else if ( (LA13_0==';') ) {s = 16;}
 
-                        else if ( (LA11_0=='&') ) {s = 11;}
+                        else if ( (LA13_0=='^') ) {s = 17;}
 
-                        else if ( (LA11_0=='s') ) {s = 12;}
+                        else if ( (LA13_0=='$'||(LA13_0>='A' && LA13_0<='Z')||LA13_0=='_'||(LA13_0>='a' && LA13_0<='d')||(LA13_0>='f' && LA13_0<='h')||(LA13_0>='j' && LA13_0<='r')||(LA13_0>='t' && LA13_0<='z')) ) {s = 18;}
 
-                        else if ( (LA11_0=='.') ) {s = 13;}
+                        else if ( (LA13_0=='\"') ) {s = 19;}
 
-                        else if ( (LA11_0=='*') ) {s = 14;}
+                        else if ( (LA13_0=='\'') ) {s = 20;}
 
-                        else if ( (LA11_0=='i') ) {s = 15;}
+                        else if ( (LA13_0=='/') ) {s = 21;}
 
-                        else if ( (LA11_0==';') ) {s = 16;}
+                        else if ( ((LA13_0>='\t' && LA13_0<='\n')||LA13_0=='\r'||LA13_0==' ') ) {s = 22;}
 
-                        else if ( (LA11_0=='^') ) {s = 17;}
-
-                        else if ( (LA11_0=='$'||(LA11_0>='A' && LA11_0<='Z')||LA11_0=='_'||(LA11_0>='a' && LA11_0<='d')||(LA11_0>='f' && LA11_0<='h')||(LA11_0>='j' && LA11_0<='r')||(LA11_0>='t' && LA11_0<='z')) ) {s = 18;}
-
-                        else if ( (LA11_0=='\"') ) {s = 19;}
-
-                        else if ( (LA11_0=='\'') ) {s = 20;}
-
-                        else if ( (LA11_0=='/') ) {s = 21;}
-
-                        else if ( ((LA11_0>='\t' && LA11_0<='\n')||LA11_0=='\r'||LA11_0==' ') ) {s = 22;}
-
-                        else if ( ((LA11_0>='\u0000' && LA11_0<='\b')||(LA11_0>='\u000B' && LA11_0<='\f')||(LA11_0>='\u000E' && LA11_0<='\u001F')||LA11_0=='!'||LA11_0=='#'||LA11_0=='%'||LA11_0=='+'||LA11_0=='-'||(LA11_0>='0' && LA11_0<=':')||LA11_0=='@'||LA11_0=='\\'||LA11_0=='`'||(LA11_0>='{' && LA11_0<='\uFFFF')) ) {s = 23;}
+                        else if ( ((LA13_0>='\u0000' && LA13_0<='\b')||(LA13_0>='\u000B' && LA13_0<='\f')||(LA13_0>='\u000E' && LA13_0<='\u001F')||LA13_0=='!'||LA13_0=='#'||LA13_0=='%'||LA13_0=='+'||LA13_0=='-'||(LA13_0>='0' && LA13_0<=':')||LA13_0=='@'||LA13_0=='\\'||LA13_0=='`'||(LA13_0>='{' && LA13_0<='\uFFFF')) ) {s = 23;}
 
                         if ( s>=0 ) return s;
                         break;
             }
             NoViableAltException nvae =
-                new NoViableAltException(getDescription(), 11, _s, input);
+                new NoViableAltException(getDescription(), 13, _s, input);
             error(nvae);
             throw nvae;
         }

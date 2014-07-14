@@ -7,7 +7,10 @@
  */
 package org.eclipse.xtend.core.tests.conversion;
 
+import com.google.common.collect.Iterators;
+import java.util.Iterator;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -22,7 +25,9 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -73,7 +78,12 @@ public class ValueConverterExceptionProducesErrorTest extends AbstractXtendTestC
     final Resource.Diagnostic error = IterableExtensions.<Resource.Diagnostic>head(_errors_1);
     Assert.assertNotNull(error);
     String _message = error.getMessage();
-    Assert.assertEquals("Malformed \\uxxxx encoding.", _message);
+    Assert.assertEquals("Invalid unicode", _message);
+    TreeIterator<EObject> _allContents = resource.getAllContents();
+    Iterator<XStringLiteral> _filter = Iterators.<XStringLiteral>filter(_allContents, XStringLiteral.class);
+    final XStringLiteral literal = IteratorExtensions.<XStringLiteral>head(_filter);
+    String _value = literal.getValue();
+    Assert.assertEquals("u", _value);
   }
   
   private void assertLiteral(final String expectation, final Resource resource) {

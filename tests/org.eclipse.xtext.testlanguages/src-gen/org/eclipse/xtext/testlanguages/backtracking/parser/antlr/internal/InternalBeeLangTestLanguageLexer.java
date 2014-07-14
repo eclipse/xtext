@@ -14,8 +14,8 @@ import java.util.ArrayList;
 public class InternalBeeLangTestLanguageLexer extends Lexer {
     public static final int T__68=68;
     public static final int T__69=69;
-    public static final int RULE_ID=5;
     public static final int T__66=66;
+    public static final int RULE_ID=5;
     public static final int T__67=67;
     public static final int T__29=29;
     public static final int T__64=64;
@@ -43,8 +43,8 @@ public class InternalBeeLangTestLanguageLexer extends Lexer {
     public static final int T__58=58;
     public static final int T__16=16;
     public static final int T__51=51;
-    public static final int T__15=15;
     public static final int T__52=52;
+    public static final int T__15=15;
     public static final int T__53=53;
     public static final int T__18=18;
     public static final int T__54=54;
@@ -1706,10 +1706,10 @@ public class InternalBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -1727,10 +1727,10 @@ public class InternalBeeLangTestLanguageLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop6:
                     do {
                         int alt6=3;
@@ -1746,23 +1746,15 @@ public class InternalBeeLangTestLanguageLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:21: '\\\\' .
                     	    {
                     	    match('\\'); 
-                    	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
-                    	        input.consume();
-
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
-                    	        recover(mse);
-                    	        throw mse;}
-
+                    	    matchAny(); 
 
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1787,10 +1779,10 @@ public class InternalBeeLangTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop7:
                     do {
                         int alt7=3;
@@ -1806,23 +1798,15 @@ public class InternalBeeLangTestLanguageLexer extends Lexer {
 
                         switch (alt7) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:54: '\\\\' .
                     	    {
                     	    match('\\'); 
-                    	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
-                    	        input.consume();
-
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
-                    	        recover(mse);
-                    	        throw mse;}
-
+                    	    matchAny(); 
 
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5512:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();

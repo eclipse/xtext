@@ -197,8 +197,8 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalAntl
     };
     public static final int RULE_ID=71;
     public static final int RULE_ANY_OTHER=77;
-    public static final int KEYWORD_19=67;
     public static final int KEYWORD_56=11;
+    public static final int KEYWORD_19=67;
     public static final int KEYWORD_55=17;
     public static final int KEYWORD_54=16;
     public static final int KEYWORD_17=65;
@@ -234,8 +234,8 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalAntl
     public static final int KEYWORD_25=36;
     public static final int KEYWORD_63=7;
     public static final int KEYWORD_26=37;
-    public static final int KEYWORD_62=6;
     public static final int KEYWORD_27=38;
+    public static final int KEYWORD_62=6;
     public static final int KEYWORD_20=68;
     public static final int KEYWORD_21=32;
     public static final int KEYWORD_22=33;

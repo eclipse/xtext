@@ -3953,31 +3953,31 @@ public class InternalXtendLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11761:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11761:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11761:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? ) )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11761:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
             {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11761:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
-            int alt46=2;
-            int LA46_0 = input.LA(1);
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11761:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
+            int alt48=2;
+            int LA48_0 = input.LA(1);
 
-            if ( (LA46_0=='\"') ) {
-                alt46=1;
+            if ( (LA48_0=='\"') ) {
+                alt48=1;
             }
-            else if ( (LA46_0=='\'') ) {
-                alt46=2;
+            else if ( (LA48_0=='\'') ) {
+                alt48=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 46, 0, input);
+                    new NoViableAltException("", 48, 0, input);
 
                 throw nvae;
             }
-            switch (alt46) {
+            switch (alt48) {
                 case 1 :
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11761:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11761:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )?
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11761:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11761:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop44:
                     do {
                         int alt44=3;
@@ -3993,23 +3993,15 @@ public class InternalXtendLexer extends Lexer {
 
                         switch (alt44) {
                     	case 1 :
-                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11761:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11761:21: '\\\\' .
                     	    {
                     	    match('\\'); 
-                    	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
-                    	        input.consume();
-
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
-                    	        recover(mse);
-                    	        throw mse;}
-
+                    	    matchAny(); 
 
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11761:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11761:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -4029,47 +4021,56 @@ public class InternalXtendLexer extends Lexer {
                         }
                     } while (true);
 
-                    match('\"'); 
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11761:44: ( '\"' )?
+                    int alt45=2;
+                    int LA45_0 = input.LA(1);
+
+                    if ( (LA45_0=='\"') ) {
+                        alt45=1;
+                    }
+                    switch (alt45) {
+                        case 1 :
+                            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11761:44: '\"'
+                            {
+                            match('\"'); 
+
+                            }
+                            break;
+
+                    }
+
 
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11761:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11761:49: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )?
                     {
                     match('\''); 
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11761:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
-                    loop45:
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11761:54: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    loop46:
                     do {
-                        int alt45=3;
-                        int LA45_0 = input.LA(1);
+                        int alt46=3;
+                        int LA46_0 = input.LA(1);
 
-                        if ( (LA45_0=='\\') ) {
-                            alt45=1;
+                        if ( (LA46_0=='\\') ) {
+                            alt46=1;
                         }
-                        else if ( ((LA45_0>='\u0000' && LA45_0<='&')||(LA45_0>='(' && LA45_0<='[')||(LA45_0>=']' && LA45_0<='\uFFFF')) ) {
-                            alt45=2;
+                        else if ( ((LA46_0>='\u0000' && LA46_0<='&')||(LA46_0>='(' && LA46_0<='[')||(LA46_0>=']' && LA46_0<='\uFFFF')) ) {
+                            alt46=2;
                         }
 
 
-                        switch (alt45) {
+                        switch (alt46) {
                     	case 1 :
-                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11761:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11761:55: '\\\\' .
                     	    {
                     	    match('\\'); 
-                    	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
-                    	        input.consume();
-
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
-                    	        recover(mse);
-                    	        throw mse;}
-
+                    	    matchAny(); 
 
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11761:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11761:62: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -4085,11 +4086,28 @@ public class InternalXtendLexer extends Lexer {
                     	    break;
 
                     	default :
-                    	    break loop45;
+                    	    break loop46;
                         }
                     } while (true);
 
-                    match('\''); 
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11761:79: ( '\\'' )?
+                    int alt47=2;
+                    int LA47_0 = input.LA(1);
+
+                    if ( (LA47_0=='\'') ) {
+                        alt47=1;
+                    }
+                    switch (alt47) {
+                        case 1 :
+                            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11761:79: '\\''
+                            {
+                            match('\''); 
+
+                            }
+                            break;
+
+                    }
+
 
                     }
                     break;
@@ -4118,29 +4136,29 @@ public class InternalXtendLexer extends Lexer {
             match("/*"); 
 
             // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11763:24: ( options {greedy=false; } : . )*
-            loop47:
+            loop49:
             do {
-                int alt47=2;
-                int LA47_0 = input.LA(1);
+                int alt49=2;
+                int LA49_0 = input.LA(1);
 
-                if ( (LA47_0=='*') ) {
-                    int LA47_1 = input.LA(2);
+                if ( (LA49_0=='*') ) {
+                    int LA49_1 = input.LA(2);
 
-                    if ( (LA47_1=='/') ) {
-                        alt47=2;
+                    if ( (LA49_1=='/') ) {
+                        alt49=2;
                     }
-                    else if ( ((LA47_1>='\u0000' && LA47_1<='.')||(LA47_1>='0' && LA47_1<='\uFFFF')) ) {
-                        alt47=1;
+                    else if ( ((LA49_1>='\u0000' && LA49_1<='.')||(LA49_1>='0' && LA49_1<='\uFFFF')) ) {
+                        alt49=1;
                     }
 
 
                 }
-                else if ( ((LA47_0>='\u0000' && LA47_0<=')')||(LA47_0>='+' && LA47_0<='\uFFFF')) ) {
-                    alt47=1;
+                else if ( ((LA49_0>='\u0000' && LA49_0<=')')||(LA49_0>='+' && LA49_0<='\uFFFF')) ) {
+                    alt49=1;
                 }
 
 
-                switch (alt47) {
+                switch (alt49) {
             	case 1 :
             	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11763:52: .
             	    {
@@ -4150,7 +4168,7 @@ public class InternalXtendLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop47;
+            	    break loop49;
                 }
             } while (true);
 
@@ -4178,17 +4196,17 @@ public class InternalXtendLexer extends Lexer {
             match("//"); 
 
             // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11765:24: (~ ( ( '\\n' | '\\r' ) ) )*
-            loop48:
+            loop50:
             do {
-                int alt48=2;
-                int LA48_0 = input.LA(1);
+                int alt50=2;
+                int LA50_0 = input.LA(1);
 
-                if ( ((LA48_0>='\u0000' && LA48_0<='\t')||(LA48_0>='\u000B' && LA48_0<='\f')||(LA48_0>='\u000E' && LA48_0<='\uFFFF')) ) {
-                    alt48=1;
+                if ( ((LA50_0>='\u0000' && LA50_0<='\t')||(LA50_0>='\u000B' && LA50_0<='\f')||(LA50_0>='\u000E' && LA50_0<='\uFFFF')) ) {
+                    alt50=1;
                 }
 
 
-                switch (alt48) {
+                switch (alt50) {
             	case 1 :
             	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11765:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
@@ -4206,29 +4224,29 @@ public class InternalXtendLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop48;
+            	    break loop50;
                 }
             } while (true);
 
             // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11765:40: ( ( '\\r' )? '\\n' )?
-            int alt50=2;
-            int LA50_0 = input.LA(1);
+            int alt52=2;
+            int LA52_0 = input.LA(1);
 
-            if ( (LA50_0=='\n'||LA50_0=='\r') ) {
-                alt50=1;
+            if ( (LA52_0=='\n'||LA52_0=='\r') ) {
+                alt52=1;
             }
-            switch (alt50) {
+            switch (alt52) {
                 case 1 :
                     // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11765:41: ( '\\r' )? '\\n'
                     {
                     // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11765:41: ( '\\r' )?
-                    int alt49=2;
-                    int LA49_0 = input.LA(1);
+                    int alt51=2;
+                    int LA51_0 = input.LA(1);
 
-                    if ( (LA49_0=='\r') ) {
-                        alt49=1;
+                    if ( (LA51_0=='\r') ) {
+                        alt51=1;
                     }
-                    switch (alt49) {
+                    switch (alt51) {
                         case 1 :
                             // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11765:41: '\\r'
                             {
@@ -4266,18 +4284,18 @@ public class InternalXtendLexer extends Lexer {
             // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11767:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
             // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11767:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
-            int cnt51=0;
-            loop51:
+            int cnt53=0;
+            loop53:
             do {
-                int alt51=2;
-                int LA51_0 = input.LA(1);
+                int alt53=2;
+                int LA53_0 = input.LA(1);
 
-                if ( ((LA51_0>='\t' && LA51_0<='\n')||LA51_0=='\r'||LA51_0==' ') ) {
-                    alt51=1;
+                if ( ((LA53_0>='\t' && LA53_0<='\n')||LA53_0=='\r'||LA53_0==' ') ) {
+                    alt53=1;
                 }
 
 
-                switch (alt51) {
+                switch (alt53) {
             	case 1 :
             	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:
             	    {
@@ -4295,12 +4313,12 @@ public class InternalXtendLexer extends Lexer {
             	    break;
 
             	default :
-            	    if ( cnt51 >= 1 ) break loop51;
+            	    if ( cnt53 >= 1 ) break loop53;
                         EarlyExitException eee =
-                            new EarlyExitException(51, input);
+                            new EarlyExitException(53, input);
                         throw eee;
                 }
-                cnt51++;
+                cnt53++;
             } while (true);
 
 
@@ -4336,9 +4354,9 @@ public class InternalXtendLexer extends Lexer {
 
     public void mTokens() throws RecognitionException {
         // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:1:8: ( KW_Package | KW_Semicolon | KW_Class | KW_LessThanSign | KW_Comma | KW_GreaterThanSign | KW_Extends | KW_Implements | KW_LeftCurlyBracket | KW_RightCurlyBracket | KW_Interface | KW_Enum | KW_Annotation | KW_LeftParenthesis | KW_RightParenthesis | KW_EqualsSignGreaterThanSign | KW_EqualsSign | KW_Extension | KW_Throws | KW_New | KW_Public | KW_Private | KW_Protected | KW_Abstract | KW_Static | KW_Dispatch | KW_Final | KW_Strictfp | KW_Native | KW_Volatile | KW_Synchronized | KW_Transient | KW_Val | KW_Var | KW_Def | KW_Override | KW_Create | KW_Colon | KW_AFTER | KW_BEFORE | KW_SEPARATOR | KW_Import | KW_FullStopFullStopFullStop | KW_Switch | KW_Default | KW_FOR | KW_ENDFOR | KW_IF | KW_ELSE | KW_ENDIF | KW_ELSEIF | KW_CommercialAt | KW_NumberSign | KW_LeftSquareBracket | KW_RightSquareBracket | KW_PlusSignEqualsSign | KW_HyphenMinusEqualsSign | KW_AsteriskEqualsSign | KW_SolidusEqualsSign | KW_PercentSignEqualsSign | KW_GreaterThanSignEqualsSign | KW_VerticalLineVerticalLine | KW_AmpersandAmpersand | KW_EqualsSignEqualsSign | KW_ExclamationMarkEqualsSign | KW_EqualsSignEqualsSignEqualsSign | KW_ExclamationMarkEqualsSignEqualsSign | KW_Instanceof | KW_HyphenMinusGreaterThanSign | KW_FullStopFullStopLessThanSign | KW_FullStopFullStop | KW_LessThanSignGreaterThanSign | KW_QuestionMarkColon | KW_PlusSign | KW_HyphenMinus | KW_Asterisk | KW_AsteriskAsterisk | KW_Solidus | KW_PercentSign | KW_ExclamationMark | KW_As | KW_PlusSignPlusSign | KW_HyphenMinusHyphenMinus | KW_FullStop | KW_ColonColon | KW_QuestionMarkFullStop | KW_VerticalLine | KW_If | KW_Else | KW_Case | KW_For | KW_While | KW_Do | KW_Super | KW_False | KW_True | KW_Null | KW_Typeof | KW_Throw | KW_Return | KW_Try | KW_Finally | KW_Catch | KW_QuestionMark | KW_Ampersand | RULE_ID | RULE_RICH_TEXT | RULE_RICH_TEXT_START | RULE_RICH_TEXT_END | RULE_RICH_TEXT_INBETWEEN | RULE_COMMENT_RICH_TEXT_INBETWEEN | RULE_COMMENT_RICH_TEXT_END | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
-        int alt52=120;
-        alt52 = dfa52.predict(input);
-        switch (alt52) {
+        int alt54=120;
+        alt54 = dfa54.predict(input);
+        switch (alt54) {
             case 1 :
                 // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:1:10: KW_Package
                 {
@@ -5185,47 +5203,47 @@ public class InternalXtendLexer extends Lexer {
     }
 
 
-    protected DFA52 dfa52 = new DFA52(this);
-    static final String DFA52_eotS =
+    protected DFA54 dfa54 = new DFA54(this);
+    static final String DFA54_eotS =
         "\1\uffff\1\73\1\uffff\1\73\1\101\1\uffff\1\104\2\73\2\uffff\1\73"+
         "\2\uffff\1\124\7\73\1\151\3\73\1\156\3\73\4\uffff\1\171\1\175\1"+
         "\u0080\1\u0084\1\u0086\1\u0088\1\u008a\1\u008c\1\u008f\2\73\1\67"+
-        "\1\uffff\2\67\1\u0094\1\67\2\u009b\1\67\2\uffff\3\73\2\uffff\3\73"+
-        "\5\uffff\5\73\1\u00ac\2\uffff\2\73\1\u00af\3\uffff\1\u00b1\1\uffff"+
-        "\14\73\1\u00c1\6\73\2\uffff\3\73\1\u00ce\1\uffff\3\73\1\u00d2\30"+
-        "\uffff\1\u00d4\4\uffff\2\73\1\u0093\2\uffff\2\u0094\1\uffff\1\u00dd"+
-        "\1\uffff\1\u009b\3\uffff\16\73\1\uffff\2\73\3\uffff\3\73\1\u00f2"+
-        "\1\73\1\u00f4\10\73\1\u00fe\1\uffff\1\73\1\u0100\2\73\1\u0103\1"+
-        "\u0104\4\73\3\uffff\1\u0109\2\73\3\uffff\2\73\1\u0112\2\u0094\1"+
-        "\u00dd\1\uffff\1\u0116\1\uffff\6\73\1\u011d\2\73\1\u0120\1\u0121"+
-        "\10\73\1\u012a\1\uffff\1\73\1\uffff\1\73\1\u012d\7\73\1\uffff\1"+
-        "\73\1\uffff\2\73\2\uffff\4\73\1\uffff\2\73\1\u013f\2\73\2\u0112"+
-        "\2\uffff\1\u0094\2\u0116\1\uffff\4\73\1\u014a\1\73\1\uffff\1\u014c"+
-        "\1\73\2\uffff\6\73\1\u0156\1\73\1\uffff\2\73\1\uffff\4\73\1\u015e"+
-        "\2\73\1\u0162\1\u0163\2\73\1\u0166\3\73\1\u016a\1\73\1\uffff\1\u016c"+
-        "\1\73\2\u0112\2\u0116\1\73\1\u0171\2\73\1\uffff\1\u0174\1\uffff"+
-        "\3\73\1\u0178\4\73\1\u017d\1\uffff\1\73\1\u017f\1\u0180\1\u0181"+
-        "\2\73\1\u0184\1\uffff\3\73\2\uffff\2\73\1\uffff\1\u018a\1\73\1\u018c"+
-        "\1\uffff\1\u018d\1\uffff\1\u018e\1\u0112\1\u0116\1\u018f\1\uffff"+
-        "\1\u0190\1\73\1\uffff\1\u0192\2\73\1\uffff\4\73\1\uffff\1\73\3\uffff"+
-        "\2\73\1\uffff\1\73\1\u019d\1\u019e\2\73\1\uffff\1\73\5\uffff\1\73"+
-        "\1\uffff\5\73\1\u01a8\1\73\1\u01aa\1\73\1\u01ac\2\uffff\1\u01ad"+
-        "\1\u01ae\1\73\1\u01b0\1\u01b1\1\73\1\u01b3\2\73\1\uffff\1\u01b6"+
-        "\1\uffff\1\73\3\uffff\1\u01b8\2\uffff\1\u01b9\1\uffff\1\u01ba\1"+
-        "\u01bb\1\uffff\1\73\4\uffff\1\73\1\u01be\1\uffff";
-    static final String DFA52_eofS =
+        "\1\uffff\1\67\1\u0093\1\u0097\1\67\2\u009b\3\uffff\3\73\2\uffff"+
+        "\3\73\5\uffff\5\73\1\u00ac\2\uffff\2\73\1\u00af\3\uffff\1\u00b1"+
+        "\1\uffff\14\73\1\u00c1\6\73\2\uffff\3\73\1\u00ce\1\uffff\3\73\1"+
+        "\u00d2\30\uffff\1\u00d4\4\uffff\2\73\1\u0093\1\uffff\2\u0097\2\uffff"+
+        "\1\u00dd\1\uffff\1\u009b\3\uffff\16\73\1\uffff\2\73\3\uffff\3\73"+
+        "\1\u00f2\1\73\1\u00f4\10\73\1\u00fe\1\uffff\1\73\1\u0100\2\73\1"+
+        "\u0103\1\u0104\4\73\3\uffff\1\u0109\2\73\3\uffff\2\73\1\u0111\2"+
+        "\u0097\1\u00dd\1\uffff\1\u0116\1\uffff\6\73\1\u011d\2\73\1\u0120"+
+        "\1\u0121\10\73\1\u012a\1\uffff\1\73\1\uffff\1\73\1\u012d\7\73\1"+
+        "\uffff\1\73\1\uffff\2\73\2\uffff\4\73\1\uffff\2\73\1\u013f\2\73"+
+        "\2\u0111\2\uffff\1\u0097\2\u0116\1\uffff\4\73\1\u014a\1\73\1\uffff"+
+        "\1\u014c\1\73\2\uffff\6\73\1\u0156\1\73\1\uffff\2\73\1\uffff\4\73"+
+        "\1\u015e\2\73\1\u0162\1\u0163\2\73\1\u0166\3\73\1\u016a\1\73\1\uffff"+
+        "\1\u016c\1\73\2\u0111\2\u0116\1\73\1\u0171\2\73\1\uffff\1\u0174"+
+        "\1\uffff\3\73\1\u0178\4\73\1\u017d\1\uffff\1\73\1\u017f\1\u0180"+
+        "\1\u0181\2\73\1\u0184\1\uffff\3\73\2\uffff\2\73\1\uffff\1\u018a"+
+        "\1\73\1\u018c\1\uffff\1\u018d\1\uffff\1\u018e\1\u0111\1\u0116\1"+
+        "\u018f\1\uffff\1\u0190\1\73\1\uffff\1\u0192\2\73\1\uffff\4\73\1"+
+        "\uffff\1\73\3\uffff\2\73\1\uffff\1\73\1\u019d\1\u019e\2\73\1\uffff"+
+        "\1\73\5\uffff\1\73\1\uffff\5\73\1\u01a8\1\73\1\u01aa\1\73\1\u01ac"+
+        "\2\uffff\1\u01ad\1\u01ae\1\73\1\u01b0\1\u01b1\1\73\1\u01b3\2\73"+
+        "\1\uffff\1\u01b6\1\uffff\1\73\3\uffff\1\u01b8\2\uffff\1\u01b9\1"+
+        "\uffff\1\u01ba\1\u01bb\1\uffff\1\73\4\uffff\1\73\1\u01be\1\uffff";
+    static final String DFA54_eofS =
         "\u01bf\uffff";
-    static final String DFA52_minS =
+    static final String DFA54_minS =
         "\1\0\1\141\1\uffff\1\141\1\76\1\uffff\1\75\1\154\1\146\2\uffff\1"+
         "\142\2\uffff\1\75\1\150\1\141\1\164\1\145\2\141\1\166\1\72\1\106"+
         "\2\105\1\56\1\117\1\114\1\106\4\uffff\1\53\1\55\2\52\1\75\1\174"+
-        "\1\46\1\75\1\56\1\150\1\145\1\44\1\uffff\1\165\2\0\1\u00ab\2\60"+
-        "\1\0\2\uffff\1\143\1\142\1\151\2\uffff\1\141\1\145\1\163\5\uffff"+
+        "\1\46\1\75\1\56\1\150\1\145\1\44\1\uffff\1\165\1\47\1\0\1\u00ab"+
+        "\2\60\3\uffff\1\143\1\142\1\151\2\uffff\1\141\1\145\1\163\5\uffff"+
         "\1\164\1\165\1\163\1\160\1\163\1\0\2\uffff\1\156\1\163\1\0\3\uffff"+
         "\1\75\1\uffff\1\162\1\141\1\160\1\167\1\164\1\154\1\141\1\156\1"+
         "\151\1\160\1\163\1\146\1\0\1\156\1\162\3\154\1\145\2\uffff\1\124"+
         "\1\106\1\120\1\56\1\uffff\1\122\1\104\1\123\1\0\30\uffff\1\75\4"+
-        "\uffff\1\151\1\164\1\47\2\uffff\2\0\1\uffff\1\0\1\uffff\1\60\3\uffff"+
+        "\uffff\1\151\1\164\1\47\1\uffff\2\0\2\uffff\1\0\1\uffff\1\60\3\uffff"+
         "\1\153\1\154\1\166\1\164\1\163\1\141\1\145\1\143\1\145\1\155\1\145"+
         "\1\154\1\145\1\164\1\uffff\1\157\1\164\3\uffff\1\157\1\156\1\145"+
         "\1\0\1\145\1\0\1\151\1\154\1\164\1\151\1\143\1\164\1\145\1\160\1"+
@@ -5248,17 +5266,17 @@ public class InternalXtendLexer extends Lexer {
         "\1\156\1\164\1\145\2\157\1\0\1\164\1\0\1\151\1\0\2\uffff\2\0\1\122"+
         "\2\0\1\163\1\0\1\146\1\156\1\uffff\1\0\1\uffff\1\172\3\uffff\1\0"+
         "\2\uffff\1\0\1\uffff\2\0\1\uffff\1\145\4\uffff\1\144\1\0\1\uffff";
-    static final String DFA52_maxS =
+    static final String DFA54_maxS =
         "\1\uffff\1\165\1\uffff\1\162\1\76\1\uffff\1\75\1\170\1\156\2\uffff"+
         "\1\163\2\uffff\1\76\1\171\1\165\1\171\3\157\1\166\1\72\1\106\2\105"+
         "\1\56\1\117\1\116\1\106\4\uffff\1\75\1\76\3\75\1\174\1\46\1\75\1"+
-        "\72\1\150\1\145\1\uffe6\1\uffff\1\165\2\uffff\1\u00ab\1\170\1\154"+
-        "\1\uffff\2\uffff\1\143\1\142\1\157\2\uffff\1\141\1\145\1\164\5\uffff"+
+        "\72\1\150\1\145\1\uffe6\1\uffff\1\165\1\47\1\uffff\1\u00ab\1\170"+
+        "\1\154\3\uffff\1\143\1\142\1\157\2\uffff\1\141\1\145\1\164\5\uffff"+
         "\1\164\1\165\1\163\1\160\1\164\1\ufffb\2\uffff\1\156\1\163\1\ufffb"+
         "\3\uffff\1\75\1\uffff\1\162\1\171\1\160\1\167\1\164\1\154\1\162"+
         "\1\156\1\151\1\160\1\163\1\146\1\ufffb\1\156\1\162\2\154\1\162\1"+
         "\145\2\uffff\1\124\1\106\1\120\1\74\1\uffff\1\122\1\104\1\123\1"+
-        "\ufffb\30\uffff\1\75\4\uffff\1\151\1\164\1\47\2\uffff\2\uffff\1"+
+        "\ufffb\30\uffff\1\75\4\uffff\1\151\1\164\1\47\1\uffff\2\uffff\2"+
         "\uffff\1\uffff\1\uffff\1\154\3\uffff\1\153\1\154\1\166\1\164\1\163"+
         "\1\141\1\145\1\143\1\145\1\155\1\145\1\157\1\145\1\164\1\uffff\1"+
         "\157\1\164\3\uffff\1\157\1\156\1\145\1\ufffb\1\145\1\ufffb\1\151"+
@@ -5285,19 +5303,19 @@ public class InternalXtendLexer extends Lexer {
         "\1\ufffb\2\uffff\2\ufffb\1\122\2\ufffb\1\163\1\ufffb\1\146\1\156"+
         "\1\uffff\1\ufffb\1\uffff\1\172\3\uffff\1\ufffb\2\uffff\1\ufffb\1"+
         "\uffff\2\ufffb\1\uffff\1\145\4\uffff\1\144\1\ufffb\1\uffff";
-    static final String DFA52_acceptS =
+    static final String DFA54_acceptS =
         "\2\uffff\1\2\2\uffff\1\5\3\uffff\1\11\1\12\1\uffff\1\16\1\17\20"+
-        "\uffff\1\64\1\65\1\66\1\67\14\uffff\1\152\7\uffff\1\167\1\170\3"+
-        "\uffff\1\152\1\2\3\uffff\1\110\1\4\1\5\1\75\1\6\6\uffff\1\11\1\12"+
-        "\3\uffff\1\16\1\17\1\20\1\uffff\1\21\23\uffff\1\125\1\46\4\uffff"+
-        "\1\124\4\uffff\1\64\1\65\1\66\1\67\1\70\1\122\1\112\1\71\1\105\1"+
-        "\123\1\113\1\72\1\115\1\114\1\73\1\165\1\166\1\116\1\74\1\117\1"+
-        "\76\1\127\1\77\1\151\1\uffff\1\120\1\111\1\126\1\150\3\uffff\1\164"+
-        "\1\155\2\uffff\1\156\1\uffff\1\161\1\uffff\1\162\1\163\1\167\16"+
-        "\uffff\1\130\2\uffff\1\121\1\102\1\100\17\uffff\1\135\12\uffff\1"+
-        "\53\1\106\1\107\3\uffff\1\60\1\103\1\101\10\uffff\1\157\24\uffff"+
+        "\uffff\1\64\1\65\1\66\1\67\14\uffff\1\152\6\uffff\1\164\1\167\1"+
+        "\170\3\uffff\1\152\1\2\3\uffff\1\110\1\4\1\5\1\75\1\6\6\uffff\1"+
+        "\11\1\12\3\uffff\1\16\1\17\1\20\1\uffff\1\21\23\uffff\1\125\1\46"+
+        "\4\uffff\1\124\4\uffff\1\64\1\65\1\66\1\67\1\70\1\122\1\112\1\71"+
+        "\1\105\1\123\1\113\1\72\1\115\1\114\1\73\1\165\1\166\1\116\1\74"+
+        "\1\117\1\76\1\127\1\77\1\151\1\uffff\1\120\1\111\1\126\1\150\3\uffff"+
+        "\1\164\2\uffff\1\156\1\155\1\uffff\1\161\1\uffff\1\162\1\163\1\167"+
+        "\16\uffff\1\130\2\uffff\1\121\1\102\1\100\17\uffff\1\135\12\uffff"+
+        "\1\53\1\106\1\107\3\uffff\1\60\1\103\1\101\10\uffff\1\157\24\uffff"+
         "\1\145\1\uffff\1\24\11\uffff\1\43\1\uffff\1\133\2\uffff\1\41\1\42"+
-        "\4\uffff\1\56\7\uffff\1\154\1\153\3\uffff\1\160\6\uffff\1\132\2"+
+        "\4\uffff\1\56\7\uffff\1\153\1\154\3\uffff\1\160\6\uffff\1\132\2"+
         "\uffff\1\14\1\131\10\uffff\1\140\2\uffff\1\141\21\uffff\1\61\12"+
         "\uffff\1\3\1\uffff\1\147\11\uffff\1\143\7\uffff\1\136\3\uffff\1"+
         "\33\1\137\2\uffff\1\47\3\uffff\1\62\1\uffff\1\134\4\uffff\1\25\2"+
@@ -5306,12 +5324,11 @@ public class InternalXtendLexer extends Lexer {
         "\1\7\12\uffff\1\55\1\146\11\uffff\1\30\1\uffff\1\34\1\uffff\1\32"+
         "\1\36\1\44\1\uffff\1\27\1\22\1\uffff\1\13\2\uffff\1\40\1\uffff\1"+
         "\51\1\10\1\104\1\15\2\uffff\1\37";
-    static final String DFA52_specialS =
-        "\1\22\57\uffff\1\1\1\21\3\uffff\1\11\137\uffff\1\14\1\24\1\uffff"+
-        "\1\17\76\uffff\1\15\1\0\1\23\1\2\1\uffff\1\20\62\uffff\1\13\1\7"+
-        "\2\uffff\1\25\1\16\1\5\54\uffff\1\12\1\10\1\26\1\4\50\uffff\1\6"+
-        "\1\3\117\uffff}>";
-    static final String[] DFA52_transitionS = {
+    static final String DFA54_specialS =
+        "\1\20\60\uffff\1\21\142\uffff\1\12\1\16\2\uffff\1\17\76\uffff\1"+
+        "\13\1\0\1\23\1\1\1\uffff\1\15\62\uffff\1\10\1\6\2\uffff\1\22\1\14"+
+        "\1\4\54\uffff\1\11\1\5\1\24\1\3\50\uffff\1\7\1\2\117\uffff}>";
+    static final String[] DFA54_transitionS = {
             "\11\67\2\66\2\67\1\66\22\67\1\66\1\51\1\65\1\37\1\56\1\46\1"+
             "\50\1\60\1\14\1\15\1\44\1\42\1\5\1\43\1\32\1\45\1\63\11\64\1"+
             "\26\1\2\1\4\1\16\1\6\1\52\1\36\1\27\1\30\2\56\1\34\1\33\2\56"+
@@ -5485,8 +5502,8 @@ public class InternalXtendLexer extends Lexer {
             "\6\73\2\uffff\6\73\2\uffff\3\73\3\uffff\2\73\3\uffff\2\73",
             "",
             "\1\73",
-            "\47\u0093\1\u0092\uffd8\u0093",
-            "\47\u0096\1\u0095\u0083\u0096\1\u0097\uff54\u0096",
+            "\1\u0092",
+            "\47\u0095\1\u0094\u0083\u0095\1\u0096\uff54\u0095",
             "\1\u0098",
             "\12\u009a\10\uffff\1\u009c\1\uffff\3\u009c\5\uffff\1\u009c"+
             "\13\uffff\1\u0099\6\uffff\1\u009a\2\uffff\1\u009c\1\uffff\3"+
@@ -5494,7 +5511,7 @@ public class InternalXtendLexer extends Lexer {
             "\12\u009a\10\uffff\1\u009c\1\uffff\3\u009c\5\uffff\1\u009c"+
             "\22\uffff\1\u009a\2\uffff\1\u009c\1\uffff\3\u009c\5\uffff\1"+
             "\u009c",
-            "\0\u0093",
+            "",
             "",
             "",
             "\1\u009e",
@@ -5941,9 +5958,9 @@ public class InternalXtendLexer extends Lexer {
             "\1\u00d6",
             "\1\u00d7",
             "",
+            "\47\u00d9\1\u00d8\u0083\u00d9\1\u0096\uff54\u00d9",
+            "\47\u0095\1\u0094\u0083\u0095\1\u0096\uff54\u0095",
             "",
-            "\47\u00d9\1\u00d8\u0083\u00d9\1\u0097\uff54\u00d9",
-            "\47\u0096\1\u0095\u0083\u0096\1\u0097\uff54\u0096",
             "",
             "\12\u00da\1\u00dc\2\u00da\1\u00db\ufff2\u00da",
             "",
@@ -6626,9 +6643,9 @@ public class InternalXtendLexer extends Lexer {
             "",
             "\1\u010d",
             "\1\u010e",
-            "\47\u0110\1\u010f\u0083\u0110\1\u0111\uff54\u0110",
-            "\47\u0113\1\uffff\u0083\u0113\1\u0097\uff54\u0113",
-            "\47\u0096\1\u0095\u0083\u0096\1\u0097\uff54\u0096",
+            "\47\u0110\1\u010f\u0083\u0110\1\u0112\uff54\u0110",
+            "\47\u0113\1\uffff\u0083\u0113\1\u0096\uff54\u0113",
+            "\47\u0095\1\u0094\u0083\u0095\1\u0096\uff54\u0095",
             "\12\u00da\1\u00dc\2\u00da\1\u00db\ufff2\u00da",
             "\1\u00dc",
             "\47\u0115\1\u0114\u0083\u0115\1\u00dd\uff54\u0115",
@@ -7210,11 +7227,11 @@ public class InternalXtendLexer extends Lexer {
             "\2\uffff\3\73\3\uffff\2\73\3\uffff\2\73\22\uffff\3\73",
             "\1\u0140",
             "\1\u0141",
-            "\47\u0143\1\u0142\u0083\u0143\1\u0111\uff54\u0143",
-            "\47\u0110\1\u010f\u0083\u0110\1\u0111\uff54\u0110",
+            "\47\u0143\1\u0142\u0083\u0143\1\u0112\uff54\u0143",
+            "\47\u0110\1\u010f\u0083\u0110\1\u0112\uff54\u0110",
             "",
             "",
-            "\47\u0096\1\u0095\u0083\u0096\1\u0097\uff54\u0096",
+            "\47\u0095\1\u0094\u0083\u0095\1\u0096\uff54\u0095",
             "\47\u0145\1\u0144\u0083\u0145\1\u00dd\uff54\u0145",
             "\47\u0115\1\u0114\u0083\u0115\1\u00dd\uff54\u0115",
             "",
@@ -8053,8 +8070,8 @@ public class InternalXtendLexer extends Lexer {
             "\2\uffff\6\73\2\uffff\3\73\3\uffff\2\73\3\uffff\2\73\22\uffff"+
             "\3\73",
             "\1\u016d",
-            "\47\u016e\1\uffff\u0083\u016e\1\u0111\uff54\u016e",
-            "\47\u0110\1\u010f\u0083\u0110\1\u0111\uff54\u0110",
+            "\47\u016e\1\uffff\u0083\u016e\1\u0112\uff54\u016e",
+            "\47\u0110\1\u010f\u0083\u0110\1\u0112\uff54\u0110",
             "\47\u016f\1\uffff\u0083\u016f\1\u00dd\uff54\u016f",
             "\47\u0115\1\u0114\u0083\u0115\1\u00dd\uff54\u0115",
             "\1\u0170",
@@ -9153,7 +9170,7 @@ public class InternalXtendLexer extends Lexer {
             "\1\73\1\uffff\32\73\12\uffff\132\73\3\uffff\6\73\2\uffff\6\73"+
             "\2\uffff\6\73\2\uffff\3\73\3\uffff\2\73\3\uffff\2\73\22\uffff"+
             "\3\73",
-            "\47\u0110\1\u010f\u0083\u0110\1\u0111\uff54\u0110",
+            "\47\u0110\1\u010f\u0083\u0110\1\u0112\uff54\u0110",
             "\47\u0115\1\u0114\u0083\u0115\1\u00dd\uff54\u0115",
             "\11\73\5\uffff\16\73\10\uffff\1\73\13\uffff\12\73\7\uffff\32"+
             "\73\1\uffff\1\73\2\uffff\1\73\1\uffff\32\73\4\uffff\41\73\2"+
@@ -10908,34 +10925,34 @@ public class InternalXtendLexer extends Lexer {
             ""
     };
 
-    static final short[] DFA52_eot = DFA.unpackEncodedString(DFA52_eotS);
-    static final short[] DFA52_eof = DFA.unpackEncodedString(DFA52_eofS);
-    static final char[] DFA52_min = DFA.unpackEncodedStringToUnsignedChars(DFA52_minS);
-    static final char[] DFA52_max = DFA.unpackEncodedStringToUnsignedChars(DFA52_maxS);
-    static final short[] DFA52_accept = DFA.unpackEncodedString(DFA52_acceptS);
-    static final short[] DFA52_special = DFA.unpackEncodedString(DFA52_specialS);
-    static final short[][] DFA52_transition;
+    static final short[] DFA54_eot = DFA.unpackEncodedString(DFA54_eotS);
+    static final short[] DFA54_eof = DFA.unpackEncodedString(DFA54_eofS);
+    static final char[] DFA54_min = DFA.unpackEncodedStringToUnsignedChars(DFA54_minS);
+    static final char[] DFA54_max = DFA.unpackEncodedStringToUnsignedChars(DFA54_maxS);
+    static final short[] DFA54_accept = DFA.unpackEncodedString(DFA54_acceptS);
+    static final short[] DFA54_special = DFA.unpackEncodedString(DFA54_specialS);
+    static final short[][] DFA54_transition;
 
     static {
-        int numStates = DFA52_transitionS.length;
-        DFA52_transition = new short[numStates][];
+        int numStates = DFA54_transitionS.length;
+        DFA54_transition = new short[numStates][];
         for (int i=0; i<numStates; i++) {
-            DFA52_transition[i] = DFA.unpackEncodedString(DFA52_transitionS[i]);
+            DFA54_transition[i] = DFA.unpackEncodedString(DFA54_transitionS[i]);
         }
     }
 
-    class DFA52 extends DFA {
+    class DFA54 extends DFA {
 
-        public DFA52(BaseRecognizer recognizer) {
+        public DFA54(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 52;
-            this.eot = DFA52_eot;
-            this.eof = DFA52_eof;
-            this.min = DFA52_min;
-            this.max = DFA52_max;
-            this.accept = DFA52_accept;
-            this.special = DFA52_special;
-            this.transition = DFA52_transition;
+            this.decisionNumber = 54;
+            this.eot = DFA54_eot;
+            this.eof = DFA54_eof;
+            this.min = DFA54_min;
+            this.max = DFA54_max;
+            this.accept = DFA54_accept;
+            this.special = DFA54_special;
+            this.transition = DFA54_transition;
         }
         public String getDescription() {
             return "1:1: Tokens : ( KW_Package | KW_Semicolon | KW_Class | KW_LessThanSign | KW_Comma | KW_GreaterThanSign | KW_Extends | KW_Implements | KW_LeftCurlyBracket | KW_RightCurlyBracket | KW_Interface | KW_Enum | KW_Annotation | KW_LeftParenthesis | KW_RightParenthesis | KW_EqualsSignGreaterThanSign | KW_EqualsSign | KW_Extension | KW_Throws | KW_New | KW_Public | KW_Private | KW_Protected | KW_Abstract | KW_Static | KW_Dispatch | KW_Final | KW_Strictfp | KW_Native | KW_Volatile | KW_Synchronized | KW_Transient | KW_Val | KW_Var | KW_Def | KW_Override | KW_Create | KW_Colon | KW_AFTER | KW_BEFORE | KW_SEPARATOR | KW_Import | KW_FullStopFullStopFullStop | KW_Switch | KW_Default | KW_FOR | KW_ENDFOR | KW_IF | KW_ELSE | KW_ENDIF | KW_ELSEIF | KW_CommercialAt | KW_NumberSign | KW_LeftSquareBracket | KW_RightSquareBracket | KW_PlusSignEqualsSign | KW_HyphenMinusEqualsSign | KW_AsteriskEqualsSign | KW_SolidusEqualsSign | KW_PercentSignEqualsSign | KW_GreaterThanSignEqualsSign | KW_VerticalLineVerticalLine | KW_AmpersandAmpersand | KW_EqualsSignEqualsSign | KW_ExclamationMarkEqualsSign | KW_EqualsSignEqualsSignEqualsSign | KW_ExclamationMarkEqualsSignEqualsSign | KW_Instanceof | KW_HyphenMinusGreaterThanSign | KW_FullStopFullStopLessThanSign | KW_FullStopFullStop | KW_LessThanSignGreaterThanSign | KW_QuestionMarkColon | KW_PlusSign | KW_HyphenMinus | KW_Asterisk | KW_AsteriskAsterisk | KW_Solidus | KW_PercentSign | KW_ExclamationMark | KW_As | KW_PlusSignPlusSign | KW_HyphenMinusHyphenMinus | KW_FullStop | KW_ColonColon | KW_QuestionMarkFullStop | KW_VerticalLine | KW_If | KW_Else | KW_Case | KW_For | KW_While | KW_Do | KW_Super | KW_False | KW_True | KW_Null | KW_Typeof | KW_Throw | KW_Return | KW_Try | KW_Finally | KW_Catch | KW_QuestionMark | KW_Ampersand | RULE_ID | RULE_RICH_TEXT | RULE_RICH_TEXT_START | RULE_RICH_TEXT_END | RULE_RICH_TEXT_INBETWEEN | RULE_COMMENT_RICH_TEXT_INBETWEEN | RULE_COMMENT_RICH_TEXT_END | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
@@ -10945,412 +10962,390 @@ public class InternalXtendLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA52_216 = input.LA(1);
+                        int LA54_216 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA52_216>='\u0000' && LA52_216<='&')||(LA52_216>='(' && LA52_216<='\u00AA')||(LA52_216>='\u00AC' && LA52_216<='\uFFFF')) ) {s = 275;}
+                        if ( ((LA54_216>='\u0000' && LA54_216<='&')||(LA54_216>='(' && LA54_216<='\u00AA')||(LA54_216>='\u00AC' && LA54_216<='\uFFFF')) ) {s = 275;}
 
-                        else if ( (LA52_216=='\u00AB') ) {s = 151;}
+                        else if ( (LA54_216=='\u00AB') ) {s = 150;}
 
-                        else s = 148;
+                        else s = 151;
 
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA52_48 = input.LA(1);
+                        int LA54_218 = input.LA(1);
 
                         s = -1;
-                        if ( (LA52_48=='\'') ) {s = 146;}
+                        if ( (LA54_218=='\r') ) {s = 219;}
 
-                        else if ( ((LA52_48>='\u0000' && LA52_48<='&')||(LA52_48>='(' && LA52_48<='\uFFFF')) ) {s = 147;}
+                        else if ( (LA54_218=='\n') ) {s = 220;}
 
-                        else s = 55;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA52_218 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA52_218=='\r') ) {s = 219;}
-
-                        else if ( (LA52_218=='\n') ) {s = 220;}
-
-                        else if ( ((LA52_218>='\u0000' && LA52_218<='\t')||(LA52_218>='\u000B' && LA52_218<='\f')||(LA52_218>='\u000E' && LA52_218<='\uFFFF')) ) {s = 218;}
+                        else if ( ((LA54_218>='\u0000' && LA54_218<='\t')||(LA54_218>='\u000B' && LA54_218<='\f')||(LA54_218>='\u000E' && LA54_218<='\uFFFF')) ) {s = 218;}
 
                         else s = 221;
 
                         if ( s>=0 ) return s;
                         break;
-                    case 3 : 
-                        int LA52_367 = input.LA(1);
+                    case 2 : 
+                        int LA54_367 = input.LA(1);
 
                         s = -1;
-                        if ( (LA52_367=='\'') ) {s = 276;}
+                        if ( (LA54_367=='\'') ) {s = 276;}
 
-                        else if ( (LA52_367=='\u00AB') ) {s = 221;}
+                        else if ( ((LA54_367>='\u0000' && LA54_367<='&')||(LA54_367>='(' && LA54_367<='\u00AA')||(LA54_367>='\u00AC' && LA54_367<='\uFFFF')) ) {s = 277;}
 
-                        else if ( ((LA52_367>='\u0000' && LA52_367<='&')||(LA52_367>='(' && LA52_367<='\u00AA')||(LA52_367>='\u00AC' && LA52_367<='\uFFFF')) ) {s = 277;}
+                        else if ( (LA54_367=='\u00AB') ) {s = 221;}
+
+                        else s = 278;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 3 : 
+                        int LA54_325 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA54_325=='\'') ) {s = 276;}
+
+                        else if ( (LA54_325=='\u00AB') ) {s = 221;}
+
+                        else if ( ((LA54_325>='\u0000' && LA54_325<='&')||(LA54_325>='(' && LA54_325<='\u00AA')||(LA54_325>='\u00AC' && LA54_325<='\uFFFF')) ) {s = 277;}
 
                         else s = 278;
 
                         if ( s>=0 ) return s;
                         break;
                     case 4 : 
-                        int LA52_325 = input.LA(1);
+                        int LA54_277 = input.LA(1);
 
                         s = -1;
-                        if ( (LA52_325=='\'') ) {s = 276;}
+                        if ( (LA54_277=='\'') ) {s = 276;}
 
-                        else if ( ((LA52_325>='\u0000' && LA52_325<='&')||(LA52_325>='(' && LA52_325<='\u00AA')||(LA52_325>='\u00AC' && LA52_325<='\uFFFF')) ) {s = 277;}
+                        else if ( ((LA54_277>='\u0000' && LA54_277<='&')||(LA54_277>='(' && LA54_277<='\u00AA')||(LA54_277>='\u00AC' && LA54_277<='\uFFFF')) ) {s = 277;}
 
-                        else if ( (LA52_325=='\u00AB') ) {s = 221;}
+                        else if ( (LA54_277=='\u00AB') ) {s = 221;}
 
                         else s = 278;
 
                         if ( s>=0 ) return s;
                         break;
                     case 5 : 
-                        int LA52_277 = input.LA(1);
+                        int LA54_323 = input.LA(1);
 
                         s = -1;
-                        if ( (LA52_277=='\'') ) {s = 276;}
+                        if ( (LA54_323=='\'') ) {s = 271;}
 
-                        else if ( (LA52_277=='\u00AB') ) {s = 221;}
+                        else if ( (LA54_323=='\u00AB') ) {s = 274;}
 
-                        else if ( ((LA52_277>='\u0000' && LA52_277<='&')||(LA52_277>='(' && LA52_277<='\u00AA')||(LA52_277>='\u00AC' && LA52_277<='\uFFFF')) ) {s = 277;}
+                        else if ( ((LA54_323>='\u0000' && LA54_323<='&')||(LA54_323>='(' && LA54_323<='\u00AA')||(LA54_323>='\u00AC' && LA54_323<='\uFFFF')) ) {s = 272;}
 
-                        else s = 278;
+                        else s = 273;
 
                         if ( s>=0 ) return s;
                         break;
                     case 6 : 
-                        int LA52_366 = input.LA(1);
+                        int LA54_272 = input.LA(1);
 
                         s = -1;
-                        if ( (LA52_366=='\'') ) {s = 271;}
+                        if ( (LA54_272=='\'') ) {s = 271;}
 
-                        else if ( ((LA52_366>='\u0000' && LA52_366<='&')||(LA52_366>='(' && LA52_366<='\u00AA')||(LA52_366>='\u00AC' && LA52_366<='\uFFFF')) ) {s = 272;}
+                        else if ( ((LA54_272>='\u0000' && LA54_272<='&')||(LA54_272>='(' && LA54_272<='\u00AA')||(LA54_272>='\u00AC' && LA54_272<='\uFFFF')) ) {s = 272;}
 
-                        else if ( (LA52_366=='\u00AB') ) {s = 273;}
+                        else if ( (LA54_272=='\u00AB') ) {s = 274;}
 
-                        else s = 274;
+                        else s = 273;
 
                         if ( s>=0 ) return s;
                         break;
                     case 7 : 
-                        int LA52_272 = input.LA(1);
+                        int LA54_366 = input.LA(1);
 
                         s = -1;
-                        if ( (LA52_272=='\'') ) {s = 271;}
+                        if ( (LA54_366=='\'') ) {s = 271;}
 
-                        else if ( (LA52_272=='\u00AB') ) {s = 273;}
+                        else if ( (LA54_366=='\u00AB') ) {s = 274;}
 
-                        else if ( ((LA52_272>='\u0000' && LA52_272<='&')||(LA52_272>='(' && LA52_272<='\u00AA')||(LA52_272>='\u00AC' && LA52_272<='\uFFFF')) ) {s = 272;}
+                        else if ( ((LA54_366>='\u0000' && LA54_366<='&')||(LA54_366>='(' && LA54_366<='\u00AA')||(LA54_366>='\u00AC' && LA54_366<='\uFFFF')) ) {s = 272;}
 
-                        else s = 274;
+                        else s = 273;
 
                         if ( s>=0 ) return s;
                         break;
                     case 8 : 
-                        int LA52_323 = input.LA(1);
+                        int LA54_271 = input.LA(1);
 
                         s = -1;
-                        if ( (LA52_323=='\'') ) {s = 271;}
+                        if ( (LA54_271=='\'') ) {s = 322;}
 
-                        else if ( (LA52_323=='\u00AB') ) {s = 273;}
+                        else if ( ((LA54_271>='\u0000' && LA54_271<='&')||(LA54_271>='(' && LA54_271<='\u00AA')||(LA54_271>='\u00AC' && LA54_271<='\uFFFF')) ) {s = 323;}
 
-                        else if ( ((LA52_323>='\u0000' && LA52_323<='&')||(LA52_323>='(' && LA52_323<='\u00AA')||(LA52_323>='\u00AC' && LA52_323<='\uFFFF')) ) {s = 272;}
+                        else if ( (LA54_271=='\u00AB') ) {s = 274;}
 
-                        else s = 274;
+                        else s = 273;
 
                         if ( s>=0 ) return s;
                         break;
                     case 9 : 
-                        int LA52_53 = input.LA(1);
+                        int LA54_322 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA52_53>='\u0000' && LA52_53<='\uFFFF')) ) {s = 147;}
+                        if ( ((LA54_322>='\u0000' && LA54_322<='&')||(LA54_322>='(' && LA54_322<='\u00AA')||(LA54_322>='\u00AC' && LA54_322<='\uFFFF')) ) {s = 366;}
 
-                        else s = 55;
+                        else if ( (LA54_322=='\u00AB') ) {s = 274;}
+
+                        else s = 273;
 
                         if ( s>=0 ) return s;
                         break;
                     case 10 : 
-                        int LA52_322 = input.LA(1);
+                        int LA54_148 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA52_322>='\u0000' && LA52_322<='&')||(LA52_322>='(' && LA52_322<='\u00AA')||(LA52_322>='\u00AC' && LA52_322<='\uFFFF')) ) {s = 366;}
+                        if ( (LA54_148=='\'') ) {s = 216;}
 
-                        else if ( (LA52_322=='\u00AB') ) {s = 273;}
+                        else if ( ((LA54_148>='\u0000' && LA54_148<='&')||(LA54_148>='(' && LA54_148<='\u00AA')||(LA54_148>='\u00AC' && LA54_148<='\uFFFF')) ) {s = 217;}
 
-                        else s = 274;
+                        else if ( (LA54_148=='\u00AB') ) {s = 150;}
+
+                        else s = 151;
 
                         if ( s>=0 ) return s;
                         break;
                     case 11 : 
-                        int LA52_271 = input.LA(1);
+                        int LA54_215 = input.LA(1);
 
                         s = -1;
-                        if ( (LA52_271=='\'') ) {s = 322;}
+                        if ( (LA54_215=='\'') ) {s = 271;}
 
-                        else if ( ((LA52_271>='\u0000' && LA52_271<='&')||(LA52_271>='(' && LA52_271<='\u00AA')||(LA52_271>='\u00AC' && LA52_271<='\uFFFF')) ) {s = 323;}
+                        else if ( ((LA54_215>='\u0000' && LA54_215<='&')||(LA54_215>='(' && LA54_215<='\u00AA')||(LA54_215>='\u00AC' && LA54_215<='\uFFFF')) ) {s = 272;}
 
-                        else if ( (LA52_271=='\u00AB') ) {s = 273;}
+                        else if ( (LA54_215=='\u00AB') ) {s = 274;}
 
-                        else s = 274;
+                        else s = 273;
 
                         if ( s>=0 ) return s;
                         break;
                     case 12 : 
-                        int LA52_149 = input.LA(1);
+                        int LA54_276 = input.LA(1);
 
                         s = -1;
-                        if ( (LA52_149=='\'') ) {s = 216;}
+                        if ( (LA54_276=='\'') ) {s = 324;}
 
-                        else if ( ((LA52_149>='\u0000' && LA52_149<='&')||(LA52_149>='(' && LA52_149<='\u00AA')||(LA52_149>='\u00AC' && LA52_149<='\uFFFF')) ) {s = 217;}
+                        else if ( ((LA54_276>='\u0000' && LA54_276<='&')||(LA54_276>='(' && LA54_276<='\u00AA')||(LA54_276>='\u00AC' && LA54_276<='\uFFFF')) ) {s = 325;}
 
-                        else if ( (LA52_149=='\u00AB') ) {s = 151;}
-
-                        else s = 148;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 13 : 
-                        int LA52_215 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA52_215=='\'') ) {s = 271;}
-
-                        else if ( ((LA52_215>='\u0000' && LA52_215<='&')||(LA52_215>='(' && LA52_215<='\u00AA')||(LA52_215>='\u00AC' && LA52_215<='\uFFFF')) ) {s = 272;}
-
-                        else if ( (LA52_215=='\u00AB') ) {s = 273;}
-
-                        else s = 274;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 14 : 
-                        int LA52_276 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA52_276=='\'') ) {s = 324;}
-
-                        else if ( ((LA52_276>='\u0000' && LA52_276<='&')||(LA52_276>='(' && LA52_276<='\u00AA')||(LA52_276>='\u00AC' && LA52_276<='\uFFFF')) ) {s = 325;}
-
-                        else if ( (LA52_276=='\u00AB') ) {s = 221;}
+                        else if ( (LA54_276=='\u00AB') ) {s = 221;}
 
                         else s = 278;
 
                         if ( s>=0 ) return s;
                         break;
-                    case 15 : 
-                        int LA52_152 = input.LA(1);
+                    case 13 : 
+                        int LA54_220 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA52_152>='\u0000' && LA52_152<='\t')||(LA52_152>='\u000B' && LA52_152<='\f')||(LA52_152>='\u000E' && LA52_152<='\uFFFF')) ) {s = 218;}
+                        if ( (LA54_220=='\'') ) {s = 276;}
 
-                        else if ( (LA52_152=='\r') ) {s = 219;}
+                        else if ( ((LA54_220>='\u0000' && LA54_220<='&')||(LA54_220>='(' && LA54_220<='\u00AA')||(LA54_220>='\u00AC' && LA54_220<='\uFFFF')) ) {s = 277;}
 
-                        else if ( (LA52_152=='\n') ) {s = 220;}
+                        else if ( (LA54_220=='\u00AB') ) {s = 221;}
+
+                        else s = 278;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 14 : 
+                        int LA54_149 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA54_149=='\'') ) {s = 148;}
+
+                        else if ( (LA54_149=='\u00AB') ) {s = 150;}
+
+                        else if ( ((LA54_149>='\u0000' && LA54_149<='&')||(LA54_149>='(' && LA54_149<='\u00AA')||(LA54_149>='\u00AC' && LA54_149<='\uFFFF')) ) {s = 149;}
+
+                        else s = 151;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 15 : 
+                        int LA54_152 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA54_152>='\u0000' && LA54_152<='\t')||(LA54_152>='\u000B' && LA54_152<='\f')||(LA54_152>='\u000E' && LA54_152<='\uFFFF')) ) {s = 218;}
+
+                        else if ( (LA54_152=='\r') ) {s = 219;}
+
+                        else if ( (LA54_152=='\n') ) {s = 220;}
 
                         else s = 221;
 
                         if ( s>=0 ) return s;
                         break;
                     case 16 : 
-                        int LA52_220 = input.LA(1);
+                        int LA54_0 = input.LA(1);
 
                         s = -1;
-                        if ( (LA52_220=='\'') ) {s = 276;}
+                        if ( (LA54_0=='p') ) {s = 1;}
 
-                        else if ( ((LA52_220>='\u0000' && LA52_220<='&')||(LA52_220>='(' && LA52_220<='\u00AA')||(LA52_220>='\u00AC' && LA52_220<='\uFFFF')) ) {s = 277;}
+                        else if ( (LA54_0==';') ) {s = 2;}
 
-                        else if ( (LA52_220=='\u00AB') ) {s = 221;}
+                        else if ( (LA54_0=='c') ) {s = 3;}
 
-                        else s = 278;
+                        else if ( (LA54_0=='<') ) {s = 4;}
+
+                        else if ( (LA54_0==',') ) {s = 5;}
+
+                        else if ( (LA54_0=='>') ) {s = 6;}
+
+                        else if ( (LA54_0=='e') ) {s = 7;}
+
+                        else if ( (LA54_0=='i') ) {s = 8;}
+
+                        else if ( (LA54_0=='{') ) {s = 9;}
+
+                        else if ( (LA54_0=='}') ) {s = 10;}
+
+                        else if ( (LA54_0=='a') ) {s = 11;}
+
+                        else if ( (LA54_0=='(') ) {s = 12;}
+
+                        else if ( (LA54_0==')') ) {s = 13;}
+
+                        else if ( (LA54_0=='=') ) {s = 14;}
+
+                        else if ( (LA54_0=='t') ) {s = 15;}
+
+                        else if ( (LA54_0=='n') ) {s = 16;}
+
+                        else if ( (LA54_0=='s') ) {s = 17;}
+
+                        else if ( (LA54_0=='d') ) {s = 18;}
+
+                        else if ( (LA54_0=='f') ) {s = 19;}
+
+                        else if ( (LA54_0=='v') ) {s = 20;}
+
+                        else if ( (LA54_0=='o') ) {s = 21;}
+
+                        else if ( (LA54_0==':') ) {s = 22;}
+
+                        else if ( (LA54_0=='A') ) {s = 23;}
+
+                        else if ( (LA54_0=='B') ) {s = 24;}
+
+                        else if ( (LA54_0=='S') ) {s = 25;}
+
+                        else if ( (LA54_0=='.') ) {s = 26;}
+
+                        else if ( (LA54_0=='F') ) {s = 27;}
+
+                        else if ( (LA54_0=='E') ) {s = 28;}
+
+                        else if ( (LA54_0=='I') ) {s = 29;}
+
+                        else if ( (LA54_0=='@') ) {s = 30;}
+
+                        else if ( (LA54_0=='#') ) {s = 31;}
+
+                        else if ( (LA54_0=='[') ) {s = 32;}
+
+                        else if ( (LA54_0==']') ) {s = 33;}
+
+                        else if ( (LA54_0=='+') ) {s = 34;}
+
+                        else if ( (LA54_0=='-') ) {s = 35;}
+
+                        else if ( (LA54_0=='*') ) {s = 36;}
+
+                        else if ( (LA54_0=='/') ) {s = 37;}
+
+                        else if ( (LA54_0=='%') ) {s = 38;}
+
+                        else if ( (LA54_0=='|') ) {s = 39;}
+
+                        else if ( (LA54_0=='&') ) {s = 40;}
+
+                        else if ( (LA54_0=='!') ) {s = 41;}
+
+                        else if ( (LA54_0=='?') ) {s = 42;}
+
+                        else if ( (LA54_0=='w') ) {s = 43;}
+
+                        else if ( (LA54_0=='r') ) {s = 44;}
+
+                        else if ( (LA54_0=='^') ) {s = 45;}
+
+                        else if ( (LA54_0=='$'||(LA54_0>='C' && LA54_0<='D')||(LA54_0>='G' && LA54_0<='H')||(LA54_0>='J' && LA54_0<='R')||(LA54_0>='T' && LA54_0<='Z')||LA54_0=='_'||LA54_0=='b'||(LA54_0>='g' && LA54_0<='h')||(LA54_0>='j' && LA54_0<='m')||LA54_0=='q'||LA54_0=='u'||(LA54_0>='x' && LA54_0<='z')||(LA54_0>='\u00A2' && LA54_0<='\u00A5')||LA54_0=='\u00AA'||LA54_0=='\u00B5'||LA54_0=='\u00BA'||(LA54_0>='\u00C0' && LA54_0<='\u00D6')||(LA54_0>='\u00D8' && LA54_0<='\u00F6')||(LA54_0>='\u00F8' && LA54_0<='\u0236')||(LA54_0>='\u0250' && LA54_0<='\u02C1')||(LA54_0>='\u02C6' && LA54_0<='\u02D1')||(LA54_0>='\u02E0' && LA54_0<='\u02E4')||LA54_0=='\u02EE'||LA54_0=='\u037A'||LA54_0=='\u0386'||(LA54_0>='\u0388' && LA54_0<='\u038A')||LA54_0=='\u038C'||(LA54_0>='\u038E' && LA54_0<='\u03A1')||(LA54_0>='\u03A3' && LA54_0<='\u03CE')||(LA54_0>='\u03D0' && LA54_0<='\u03F5')||(LA54_0>='\u03F7' && LA54_0<='\u03FB')||(LA54_0>='\u0400' && LA54_0<='\u0481')||(LA54_0>='\u048A' && LA54_0<='\u04CE')||(LA54_0>='\u04D0' && LA54_0<='\u04F5')||(LA54_0>='\u04F8' && LA54_0<='\u04F9')||(LA54_0>='\u0500' && LA54_0<='\u050F')||(LA54_0>='\u0531' && LA54_0<='\u0556')||LA54_0=='\u0559'||(LA54_0>='\u0561' && LA54_0<='\u0587')||(LA54_0>='\u05D0' && LA54_0<='\u05EA')||(LA54_0>='\u05F0' && LA54_0<='\u05F2')||(LA54_0>='\u0621' && LA54_0<='\u063A')||(LA54_0>='\u0640' && LA54_0<='\u064A')||(LA54_0>='\u066E' && LA54_0<='\u066F')||(LA54_0>='\u0671' && LA54_0<='\u06D3')||LA54_0=='\u06D5'||(LA54_0>='\u06E5' && LA54_0<='\u06E6')||(LA54_0>='\u06EE' && LA54_0<='\u06EF')||(LA54_0>='\u06FA' && LA54_0<='\u06FC')||LA54_0=='\u06FF'||LA54_0=='\u0710'||(LA54_0>='\u0712' && LA54_0<='\u072F')||(LA54_0>='\u074D' && LA54_0<='\u074F')||(LA54_0>='\u0780' && LA54_0<='\u07A5')||LA54_0=='\u07B1'||(LA54_0>='\u0904' && LA54_0<='\u0939')||LA54_0=='\u093D'||LA54_0=='\u0950'||(LA54_0>='\u0958' && LA54_0<='\u0961')||(LA54_0>='\u0985' && LA54_0<='\u098C')||(LA54_0>='\u098F' && LA54_0<='\u0990')||(LA54_0>='\u0993' && LA54_0<='\u09A8')||(LA54_0>='\u09AA' && LA54_0<='\u09B0')||LA54_0=='\u09B2'||(LA54_0>='\u09B6' && LA54_0<='\u09B9')||LA54_0=='\u09BD'||(LA54_0>='\u09DC' && LA54_0<='\u09DD')||(LA54_0>='\u09DF' && LA54_0<='\u09E1')||(LA54_0>='\u09F0' && LA54_0<='\u09F3')||(LA54_0>='\u0A05' && LA54_0<='\u0A0A')||(LA54_0>='\u0A0F' && LA54_0<='\u0A10')||(LA54_0>='\u0A13' && LA54_0<='\u0A28')||(LA54_0>='\u0A2A' && LA54_0<='\u0A30')||(LA54_0>='\u0A32' && LA54_0<='\u0A33')||(LA54_0>='\u0A35' && LA54_0<='\u0A36')||(LA54_0>='\u0A38' && LA54_0<='\u0A39')||(LA54_0>='\u0A59' && LA54_0<='\u0A5C')||LA54_0=='\u0A5E'||(LA54_0>='\u0A72' && LA54_0<='\u0A74')||(LA54_0>='\u0A85' && LA54_0<='\u0A8D')||(LA54_0>='\u0A8F' && LA54_0<='\u0A91')||(LA54_0>='\u0A93' && LA54_0<='\u0AA8')||(LA54_0>='\u0AAA' && LA54_0<='\u0AB0')||(LA54_0>='\u0AB2' && LA54_0<='\u0AB3')||(LA54_0>='\u0AB5' && LA54_0<='\u0AB9')||LA54_0=='\u0ABD'||LA54_0=='\u0AD0'||(LA54_0>='\u0AE0' && LA54_0<='\u0AE1')||LA54_0=='\u0AF1'||(LA54_0>='\u0B05' && LA54_0<='\u0B0C')||(LA54_0>='\u0B0F' && LA54_0<='\u0B10')||(LA54_0>='\u0B13' && LA54_0<='\u0B28')||(LA54_0>='\u0B2A' && LA54_0<='\u0B30')||(LA54_0>='\u0B32' && LA54_0<='\u0B33')||(LA54_0>='\u0B35' && LA54_0<='\u0B39')||LA54_0=='\u0B3D'||(LA54_0>='\u0B5C' && LA54_0<='\u0B5D')||(LA54_0>='\u0B5F' && LA54_0<='\u0B61')||LA54_0=='\u0B71'||LA54_0=='\u0B83'||(LA54_0>='\u0B85' && LA54_0<='\u0B8A')||(LA54_0>='\u0B8E' && LA54_0<='\u0B90')||(LA54_0>='\u0B92' && LA54_0<='\u0B95')||(LA54_0>='\u0B99' && LA54_0<='\u0B9A')||LA54_0=='\u0B9C'||(LA54_0>='\u0B9E' && LA54_0<='\u0B9F')||(LA54_0>='\u0BA3' && LA54_0<='\u0BA4')||(LA54_0>='\u0BA8' && LA54_0<='\u0BAA')||(LA54_0>='\u0BAE' && LA54_0<='\u0BB5')||(LA54_0>='\u0BB7' && LA54_0<='\u0BB9')||LA54_0=='\u0BF9'||(LA54_0>='\u0C05' && LA54_0<='\u0C0C')||(LA54_0>='\u0C0E' && LA54_0<='\u0C10')||(LA54_0>='\u0C12' && LA54_0<='\u0C28')||(LA54_0>='\u0C2A' && LA54_0<='\u0C33')||(LA54_0>='\u0C35' && LA54_0<='\u0C39')||(LA54_0>='\u0C60' && LA54_0<='\u0C61')||(LA54_0>='\u0C85' && LA54_0<='\u0C8C')||(LA54_0>='\u0C8E' && LA54_0<='\u0C90')||(LA54_0>='\u0C92' && LA54_0<='\u0CA8')||(LA54_0>='\u0CAA' && LA54_0<='\u0CB3')||(LA54_0>='\u0CB5' && LA54_0<='\u0CB9')||LA54_0=='\u0CBD'||LA54_0=='\u0CDE'||(LA54_0>='\u0CE0' && LA54_0<='\u0CE1')||(LA54_0>='\u0D05' && LA54_0<='\u0D0C')||(LA54_0>='\u0D0E' && LA54_0<='\u0D10')||(LA54_0>='\u0D12' && LA54_0<='\u0D28')||(LA54_0>='\u0D2A' && LA54_0<='\u0D39')||(LA54_0>='\u0D60' && LA54_0<='\u0D61')||(LA54_0>='\u0D85' && LA54_0<='\u0D96')||(LA54_0>='\u0D9A' && LA54_0<='\u0DB1')||(LA54_0>='\u0DB3' && LA54_0<='\u0DBB')||LA54_0=='\u0DBD'||(LA54_0>='\u0DC0' && LA54_0<='\u0DC6')||(LA54_0>='\u0E01' && LA54_0<='\u0E30')||(LA54_0>='\u0E32' && LA54_0<='\u0E33')||(LA54_0>='\u0E3F' && LA54_0<='\u0E46')||(LA54_0>='\u0E81' && LA54_0<='\u0E82')||LA54_0=='\u0E84'||(LA54_0>='\u0E87' && LA54_0<='\u0E88')||LA54_0=='\u0E8A'||LA54_0=='\u0E8D'||(LA54_0>='\u0E94' && LA54_0<='\u0E97')||(LA54_0>='\u0E99' && LA54_0<='\u0E9F')||(LA54_0>='\u0EA1' && LA54_0<='\u0EA3')||LA54_0=='\u0EA5'||LA54_0=='\u0EA7'||(LA54_0>='\u0EAA' && LA54_0<='\u0EAB')||(LA54_0>='\u0EAD' && LA54_0<='\u0EB0')||(LA54_0>='\u0EB2' && LA54_0<='\u0EB3')||LA54_0=='\u0EBD'||(LA54_0>='\u0EC0' && LA54_0<='\u0EC4')||LA54_0=='\u0EC6'||(LA54_0>='\u0EDC' && LA54_0<='\u0EDD')||LA54_0=='\u0F00'||(LA54_0>='\u0F40' && LA54_0<='\u0F47')||(LA54_0>='\u0F49' && LA54_0<='\u0F6A')||(LA54_0>='\u0F88' && LA54_0<='\u0F8B')||(LA54_0>='\u1000' && LA54_0<='\u1021')||(LA54_0>='\u1023' && LA54_0<='\u1027')||(LA54_0>='\u1029' && LA54_0<='\u102A')||(LA54_0>='\u1050' && LA54_0<='\u1055')||(LA54_0>='\u10A0' && LA54_0<='\u10C5')||(LA54_0>='\u10D0' && LA54_0<='\u10F8')||(LA54_0>='\u1100' && LA54_0<='\u1159')||(LA54_0>='\u115F' && LA54_0<='\u11A2')||(LA54_0>='\u11A8' && LA54_0<='\u11F9')||(LA54_0>='\u1200' && LA54_0<='\u1206')||(LA54_0>='\u1208' && LA54_0<='\u1246')||LA54_0=='\u1248'||(LA54_0>='\u124A' && LA54_0<='\u124D')||(LA54_0>='\u1250' && LA54_0<='\u1256')||LA54_0=='\u1258'||(LA54_0>='\u125A' && LA54_0<='\u125D')||(LA54_0>='\u1260' && LA54_0<='\u1286')||LA54_0=='\u1288'||(LA54_0>='\u128A' && LA54_0<='\u128D')||(LA54_0>='\u1290' && LA54_0<='\u12AE')||LA54_0=='\u12B0'||(LA54_0>='\u12B2' && LA54_0<='\u12B5')||(LA54_0>='\u12B8' && LA54_0<='\u12BE')||LA54_0=='\u12C0'||(LA54_0>='\u12C2' && LA54_0<='\u12C5')||(LA54_0>='\u12C8' && LA54_0<='\u12CE')||(LA54_0>='\u12D0' && LA54_0<='\u12D6')||(LA54_0>='\u12D8' && LA54_0<='\u12EE')||(LA54_0>='\u12F0' && LA54_0<='\u130E')||LA54_0=='\u1310'||(LA54_0>='\u1312' && LA54_0<='\u1315')||(LA54_0>='\u1318' && LA54_0<='\u131E')||(LA54_0>='\u1320' && LA54_0<='\u1346')||(LA54_0>='\u1348' && LA54_0<='\u135A')||(LA54_0>='\u13A0' && LA54_0<='\u13F4')||(LA54_0>='\u1401' && LA54_0<='\u166C')||(LA54_0>='\u166F' && LA54_0<='\u1676')||(LA54_0>='\u1681' && LA54_0<='\u169A')||(LA54_0>='\u16A0' && LA54_0<='\u16EA')||(LA54_0>='\u16EE' && LA54_0<='\u16F0')||(LA54_0>='\u1700' && LA54_0<='\u170C')||(LA54_0>='\u170E' && LA54_0<='\u1711')||(LA54_0>='\u1720' && LA54_0<='\u1731')||(LA54_0>='\u1740' && LA54_0<='\u1751')||(LA54_0>='\u1760' && LA54_0<='\u176C')||(LA54_0>='\u176E' && LA54_0<='\u1770')||(LA54_0>='\u1780' && LA54_0<='\u17B3')||LA54_0=='\u17D7'||(LA54_0>='\u17DB' && LA54_0<='\u17DC')||(LA54_0>='\u1820' && LA54_0<='\u1877')||(LA54_0>='\u1880' && LA54_0<='\u18A8')||(LA54_0>='\u1900' && LA54_0<='\u191C')||(LA54_0>='\u1950' && LA54_0<='\u196D')||(LA54_0>='\u1970' && LA54_0<='\u1974')||(LA54_0>='\u1D00' && LA54_0<='\u1D6B')||(LA54_0>='\u1E00' && LA54_0<='\u1E9B')||(LA54_0>='\u1EA0' && LA54_0<='\u1EF9')||(LA54_0>='\u1F00' && LA54_0<='\u1F15')||(LA54_0>='\u1F18' && LA54_0<='\u1F1D')||(LA54_0>='\u1F20' && LA54_0<='\u1F45')||(LA54_0>='\u1F48' && LA54_0<='\u1F4D')||(LA54_0>='\u1F50' && LA54_0<='\u1F57')||LA54_0=='\u1F59'||LA54_0=='\u1F5B'||LA54_0=='\u1F5D'||(LA54_0>='\u1F5F' && LA54_0<='\u1F7D')||(LA54_0>='\u1F80' && LA54_0<='\u1FB4')||(LA54_0>='\u1FB6' && LA54_0<='\u1FBC')||LA54_0=='\u1FBE'||(LA54_0>='\u1FC2' && LA54_0<='\u1FC4')||(LA54_0>='\u1FC6' && LA54_0<='\u1FCC')||(LA54_0>='\u1FD0' && LA54_0<='\u1FD3')||(LA54_0>='\u1FD6' && LA54_0<='\u1FDB')||(LA54_0>='\u1FE0' && LA54_0<='\u1FEC')||(LA54_0>='\u1FF2' && LA54_0<='\u1FF4')||(LA54_0>='\u1FF6' && LA54_0<='\u1FFC')||(LA54_0>='\u203F' && LA54_0<='\u2040')||LA54_0=='\u2054'||LA54_0=='\u2071'||LA54_0=='\u207F'||(LA54_0>='\u20A0' && LA54_0<='\u20B1')||LA54_0=='\u2102'||LA54_0=='\u2107'||(LA54_0>='\u210A' && LA54_0<='\u2113')||LA54_0=='\u2115'||(LA54_0>='\u2119' && LA54_0<='\u211D')||LA54_0=='\u2124'||LA54_0=='\u2126'||LA54_0=='\u2128'||(LA54_0>='\u212A' && LA54_0<='\u212D')||(LA54_0>='\u212F' && LA54_0<='\u2131')||(LA54_0>='\u2133' && LA54_0<='\u2139')||(LA54_0>='\u213D' && LA54_0<='\u213F')||(LA54_0>='\u2145' && LA54_0<='\u2149')||(LA54_0>='\u2160' && LA54_0<='\u2183')||(LA54_0>='\u3005' && LA54_0<='\u3007')||(LA54_0>='\u3021' && LA54_0<='\u3029')||(LA54_0>='\u3031' && LA54_0<='\u3035')||(LA54_0>='\u3038' && LA54_0<='\u303C')||(LA54_0>='\u3041' && LA54_0<='\u3096')||(LA54_0>='\u309D' && LA54_0<='\u309F')||(LA54_0>='\u30A1' && LA54_0<='\u30FF')||(LA54_0>='\u3105' && LA54_0<='\u312C')||(LA54_0>='\u3131' && LA54_0<='\u318E')||(LA54_0>='\u31A0' && LA54_0<='\u31B7')||(LA54_0>='\u31F0' && LA54_0<='\u31FF')||(LA54_0>='\u3400' && LA54_0<='\u4DB5')||(LA54_0>='\u4E00' && LA54_0<='\u9FA5')||(LA54_0>='\uA000' && LA54_0<='\uA48C')||(LA54_0>='\uAC00' && LA54_0<='\uD7A3')||(LA54_0>='\uF900' && LA54_0<='\uFA2D')||(LA54_0>='\uFA30' && LA54_0<='\uFA6A')||(LA54_0>='\uFB00' && LA54_0<='\uFB06')||(LA54_0>='\uFB13' && LA54_0<='\uFB17')||LA54_0=='\uFB1D'||(LA54_0>='\uFB1F' && LA54_0<='\uFB28')||(LA54_0>='\uFB2A' && LA54_0<='\uFB36')||(LA54_0>='\uFB38' && LA54_0<='\uFB3C')||LA54_0=='\uFB3E'||(LA54_0>='\uFB40' && LA54_0<='\uFB41')||(LA54_0>='\uFB43' && LA54_0<='\uFB44')||(LA54_0>='\uFB46' && LA54_0<='\uFBB1')||(LA54_0>='\uFBD3' && LA54_0<='\uFD3D')||(LA54_0>='\uFD50' && LA54_0<='\uFD8F')||(LA54_0>='\uFD92' && LA54_0<='\uFDC7')||(LA54_0>='\uFDF0' && LA54_0<='\uFDFC')||(LA54_0>='\uFE33' && LA54_0<='\uFE34')||(LA54_0>='\uFE4D' && LA54_0<='\uFE4F')||LA54_0=='\uFE69'||(LA54_0>='\uFE70' && LA54_0<='\uFE74')||(LA54_0>='\uFE76' && LA54_0<='\uFEFC')||LA54_0=='\uFF04'||(LA54_0>='\uFF21' && LA54_0<='\uFF3A')||LA54_0=='\uFF3F'||(LA54_0>='\uFF41' && LA54_0<='\uFF5A')||(LA54_0>='\uFF65' && LA54_0<='\uFFBE')||(LA54_0>='\uFFC2' && LA54_0<='\uFFC7')||(LA54_0>='\uFFCA' && LA54_0<='\uFFCF')||(LA54_0>='\uFFD2' && LA54_0<='\uFFD7')||(LA54_0>='\uFFDA' && LA54_0<='\uFFDC')||(LA54_0>='\uFFE0' && LA54_0<='\uFFE1')||(LA54_0>='\uFFE5' && LA54_0<='\uFFE6')) ) {s = 46;}
+
+                        else if ( (LA54_0=='\\') ) {s = 47;}
+
+                        else if ( (LA54_0=='\'') ) {s = 48;}
+
+                        else if ( (LA54_0=='\u00BB') ) {s = 49;}
+
+                        else if ( (LA54_0=='\u00AB') ) {s = 50;}
+
+                        else if ( (LA54_0=='0') ) {s = 51;}
+
+                        else if ( ((LA54_0>='1' && LA54_0<='9')) ) {s = 52;}
+
+                        else if ( (LA54_0=='\"') ) {s = 53;}
+
+                        else if ( ((LA54_0>='\t' && LA54_0<='\n')||LA54_0=='\r'||LA54_0==' ') ) {s = 54;}
+
+                        else if ( ((LA54_0>='\u0000' && LA54_0<='\b')||(LA54_0>='\u000B' && LA54_0<='\f')||(LA54_0>='\u000E' && LA54_0<='\u001F')||LA54_0=='`'||(LA54_0>='~' && LA54_0<='\u00A1')||(LA54_0>='\u00A6' && LA54_0<='\u00A9')||(LA54_0>='\u00AC' && LA54_0<='\u00B4')||(LA54_0>='\u00B6' && LA54_0<='\u00B9')||(LA54_0>='\u00BC' && LA54_0<='\u00BF')||LA54_0=='\u00D7'||LA54_0=='\u00F7'||(LA54_0>='\u0237' && LA54_0<='\u024F')||(LA54_0>='\u02C2' && LA54_0<='\u02C5')||(LA54_0>='\u02D2' && LA54_0<='\u02DF')||(LA54_0>='\u02E5' && LA54_0<='\u02ED')||(LA54_0>='\u02EF' && LA54_0<='\u0379')||(LA54_0>='\u037B' && LA54_0<='\u0385')||LA54_0=='\u0387'||LA54_0=='\u038B'||LA54_0=='\u038D'||LA54_0=='\u03A2'||LA54_0=='\u03CF'||LA54_0=='\u03F6'||(LA54_0>='\u03FC' && LA54_0<='\u03FF')||(LA54_0>='\u0482' && LA54_0<='\u0489')||LA54_0=='\u04CF'||(LA54_0>='\u04F6' && LA54_0<='\u04F7')||(LA54_0>='\u04FA' && LA54_0<='\u04FF')||(LA54_0>='\u0510' && LA54_0<='\u0530')||(LA54_0>='\u0557' && LA54_0<='\u0558')||(LA54_0>='\u055A' && LA54_0<='\u0560')||(LA54_0>='\u0588' && LA54_0<='\u05CF')||(LA54_0>='\u05EB' && LA54_0<='\u05EF')||(LA54_0>='\u05F3' && LA54_0<='\u0620')||(LA54_0>='\u063B' && LA54_0<='\u063F')||(LA54_0>='\u064B' && LA54_0<='\u066D')||LA54_0=='\u0670'||LA54_0=='\u06D4'||(LA54_0>='\u06D6' && LA54_0<='\u06E4')||(LA54_0>='\u06E7' && LA54_0<='\u06ED')||(LA54_0>='\u06F0' && LA54_0<='\u06F9')||(LA54_0>='\u06FD' && LA54_0<='\u06FE')||(LA54_0>='\u0700' && LA54_0<='\u070F')||LA54_0=='\u0711'||(LA54_0>='\u0730' && LA54_0<='\u074C')||(LA54_0>='\u0750' && LA54_0<='\u077F')||(LA54_0>='\u07A6' && LA54_0<='\u07B0')||(LA54_0>='\u07B2' && LA54_0<='\u0903')||(LA54_0>='\u093A' && LA54_0<='\u093C')||(LA54_0>='\u093E' && LA54_0<='\u094F')||(LA54_0>='\u0951' && LA54_0<='\u0957')||(LA54_0>='\u0962' && LA54_0<='\u0984')||(LA54_0>='\u098D' && LA54_0<='\u098E')||(LA54_0>='\u0991' && LA54_0<='\u0992')||LA54_0=='\u09A9'||LA54_0=='\u09B1'||(LA54_0>='\u09B3' && LA54_0<='\u09B5')||(LA54_0>='\u09BA' && LA54_0<='\u09BC')||(LA54_0>='\u09BE' && LA54_0<='\u09DB')||LA54_0=='\u09DE'||(LA54_0>='\u09E2' && LA54_0<='\u09EF')||(LA54_0>='\u09F4' && LA54_0<='\u0A04')||(LA54_0>='\u0A0B' && LA54_0<='\u0A0E')||(LA54_0>='\u0A11' && LA54_0<='\u0A12')||LA54_0=='\u0A29'||LA54_0=='\u0A31'||LA54_0=='\u0A34'||LA54_0=='\u0A37'||(LA54_0>='\u0A3A' && LA54_0<='\u0A58')||LA54_0=='\u0A5D'||(LA54_0>='\u0A5F' && LA54_0<='\u0A71')||(LA54_0>='\u0A75' && LA54_0<='\u0A84')||LA54_0=='\u0A8E'||LA54_0=='\u0A92'||LA54_0=='\u0AA9'||LA54_0=='\u0AB1'||LA54_0=='\u0AB4'||(LA54_0>='\u0ABA' && LA54_0<='\u0ABC')||(LA54_0>='\u0ABE' && LA54_0<='\u0ACF')||(LA54_0>='\u0AD1' && LA54_0<='\u0ADF')||(LA54_0>='\u0AE2' && LA54_0<='\u0AF0')||(LA54_0>='\u0AF2' && LA54_0<='\u0B04')||(LA54_0>='\u0B0D' && LA54_0<='\u0B0E')||(LA54_0>='\u0B11' && LA54_0<='\u0B12')||LA54_0=='\u0B29'||LA54_0=='\u0B31'||LA54_0=='\u0B34'||(LA54_0>='\u0B3A' && LA54_0<='\u0B3C')||(LA54_0>='\u0B3E' && LA54_0<='\u0B5B')||LA54_0=='\u0B5E'||(LA54_0>='\u0B62' && LA54_0<='\u0B70')||(LA54_0>='\u0B72' && LA54_0<='\u0B82')||LA54_0=='\u0B84'||(LA54_0>='\u0B8B' && LA54_0<='\u0B8D')||LA54_0=='\u0B91'||(LA54_0>='\u0B96' && LA54_0<='\u0B98')||LA54_0=='\u0B9B'||LA54_0=='\u0B9D'||(LA54_0>='\u0BA0' && LA54_0<='\u0BA2')||(LA54_0>='\u0BA5' && LA54_0<='\u0BA7')||(LA54_0>='\u0BAB' && LA54_0<='\u0BAD')||LA54_0=='\u0BB6'||(LA54_0>='\u0BBA' && LA54_0<='\u0BF8')||(LA54_0>='\u0BFA' && LA54_0<='\u0C04')||LA54_0=='\u0C0D'||LA54_0=='\u0C11'||LA54_0=='\u0C29'||LA54_0=='\u0C34'||(LA54_0>='\u0C3A' && LA54_0<='\u0C5F')||(LA54_0>='\u0C62' && LA54_0<='\u0C84')||LA54_0=='\u0C8D'||LA54_0=='\u0C91'||LA54_0=='\u0CA9'||LA54_0=='\u0CB4'||(LA54_0>='\u0CBA' && LA54_0<='\u0CBC')||(LA54_0>='\u0CBE' && LA54_0<='\u0CDD')||LA54_0=='\u0CDF'||(LA54_0>='\u0CE2' && LA54_0<='\u0D04')||LA54_0=='\u0D0D'||LA54_0=='\u0D11'||LA54_0=='\u0D29'||(LA54_0>='\u0D3A' && LA54_0<='\u0D5F')||(LA54_0>='\u0D62' && LA54_0<='\u0D84')||(LA54_0>='\u0D97' && LA54_0<='\u0D99')||LA54_0=='\u0DB2'||LA54_0=='\u0DBC'||(LA54_0>='\u0DBE' && LA54_0<='\u0DBF')||(LA54_0>='\u0DC7' && LA54_0<='\u0E00')||LA54_0=='\u0E31'||(LA54_0>='\u0E34' && LA54_0<='\u0E3E')||(LA54_0>='\u0E47' && LA54_0<='\u0E80')||LA54_0=='\u0E83'||(LA54_0>='\u0E85' && LA54_0<='\u0E86')||LA54_0=='\u0E89'||(LA54_0>='\u0E8B' && LA54_0<='\u0E8C')||(LA54_0>='\u0E8E' && LA54_0<='\u0E93')||LA54_0=='\u0E98'||LA54_0=='\u0EA0'||LA54_0=='\u0EA4'||LA54_0=='\u0EA6'||(LA54_0>='\u0EA8' && LA54_0<='\u0EA9')||LA54_0=='\u0EAC'||LA54_0=='\u0EB1'||(LA54_0>='\u0EB4' && LA54_0<='\u0EBC')||(LA54_0>='\u0EBE' && LA54_0<='\u0EBF')||LA54_0=='\u0EC5'||(LA54_0>='\u0EC7' && LA54_0<='\u0EDB')||(LA54_0>='\u0EDE' && LA54_0<='\u0EFF')||(LA54_0>='\u0F01' && LA54_0<='\u0F3F')||LA54_0=='\u0F48'||(LA54_0>='\u0F6B' && LA54_0<='\u0F87')||(LA54_0>='\u0F8C' && LA54_0<='\u0FFF')||LA54_0=='\u1022'||LA54_0=='\u1028'||(LA54_0>='\u102B' && LA54_0<='\u104F')||(LA54_0>='\u1056' && LA54_0<='\u109F')||(LA54_0>='\u10C6' && LA54_0<='\u10CF')||(LA54_0>='\u10F9' && LA54_0<='\u10FF')||(LA54_0>='\u115A' && LA54_0<='\u115E')||(LA54_0>='\u11A3' && LA54_0<='\u11A7')||(LA54_0>='\u11FA' && LA54_0<='\u11FF')||LA54_0=='\u1207'||LA54_0=='\u1247'||LA54_0=='\u1249'||(LA54_0>='\u124E' && LA54_0<='\u124F')||LA54_0=='\u1257'||LA54_0=='\u1259'||(LA54_0>='\u125E' && LA54_0<='\u125F')||LA54_0=='\u1287'||LA54_0=='\u1289'||(LA54_0>='\u128E' && LA54_0<='\u128F')||LA54_0=='\u12AF'||LA54_0=='\u12B1'||(LA54_0>='\u12B6' && LA54_0<='\u12B7')||LA54_0=='\u12BF'||LA54_0=='\u12C1'||(LA54_0>='\u12C6' && LA54_0<='\u12C7')||LA54_0=='\u12CF'||LA54_0=='\u12D7'||LA54_0=='\u12EF'||LA54_0=='\u130F'||LA54_0=='\u1311'||(LA54_0>='\u1316' && LA54_0<='\u1317')||LA54_0=='\u131F'||LA54_0=='\u1347'||(LA54_0>='\u135B' && LA54_0<='\u139F')||(LA54_0>='\u13F5' && LA54_0<='\u1400')||(LA54_0>='\u166D' && LA54_0<='\u166E')||(LA54_0>='\u1677' && LA54_0<='\u1680')||(LA54_0>='\u169B' && LA54_0<='\u169F')||(LA54_0>='\u16EB' && LA54_0<='\u16ED')||(LA54_0>='\u16F1' && LA54_0<='\u16FF')||LA54_0=='\u170D'||(LA54_0>='\u1712' && LA54_0<='\u171F')||(LA54_0>='\u1732' && LA54_0<='\u173F')||(LA54_0>='\u1752' && LA54_0<='\u175F')||LA54_0=='\u176D'||(LA54_0>='\u1771' && LA54_0<='\u177F')||(LA54_0>='\u17B4' && LA54_0<='\u17D6')||(LA54_0>='\u17D8' && LA54_0<='\u17DA')||(LA54_0>='\u17DD' && LA54_0<='\u181F')||(LA54_0>='\u1878' && LA54_0<='\u187F')||(LA54_0>='\u18A9' && LA54_0<='\u18FF')||(LA54_0>='\u191D' && LA54_0<='\u194F')||(LA54_0>='\u196E' && LA54_0<='\u196F')||(LA54_0>='\u1975' && LA54_0<='\u1CFF')||(LA54_0>='\u1D6C' && LA54_0<='\u1DFF')||(LA54_0>='\u1E9C' && LA54_0<='\u1E9F')||(LA54_0>='\u1EFA' && LA54_0<='\u1EFF')||(LA54_0>='\u1F16' && LA54_0<='\u1F17')||(LA54_0>='\u1F1E' && LA54_0<='\u1F1F')||(LA54_0>='\u1F46' && LA54_0<='\u1F47')||(LA54_0>='\u1F4E' && LA54_0<='\u1F4F')||LA54_0=='\u1F58'||LA54_0=='\u1F5A'||LA54_0=='\u1F5C'||LA54_0=='\u1F5E'||(LA54_0>='\u1F7E' && LA54_0<='\u1F7F')||LA54_0=='\u1FB5'||LA54_0=='\u1FBD'||(LA54_0>='\u1FBF' && LA54_0<='\u1FC1')||LA54_0=='\u1FC5'||(LA54_0>='\u1FCD' && LA54_0<='\u1FCF')||(LA54_0>='\u1FD4' && LA54_0<='\u1FD5')||(LA54_0>='\u1FDC' && LA54_0<='\u1FDF')||(LA54_0>='\u1FED' && LA54_0<='\u1FF1')||LA54_0=='\u1FF5'||(LA54_0>='\u1FFD' && LA54_0<='\u203E')||(LA54_0>='\u2041' && LA54_0<='\u2053')||(LA54_0>='\u2055' && LA54_0<='\u2070')||(LA54_0>='\u2072' && LA54_0<='\u207E')||(LA54_0>='\u2080' && LA54_0<='\u209F')||(LA54_0>='\u20B2' && LA54_0<='\u2101')||(LA54_0>='\u2103' && LA54_0<='\u2106')||(LA54_0>='\u2108' && LA54_0<='\u2109')||LA54_0=='\u2114'||(LA54_0>='\u2116' && LA54_0<='\u2118')||(LA54_0>='\u211E' && LA54_0<='\u2123')||LA54_0=='\u2125'||LA54_0=='\u2127'||LA54_0=='\u2129'||LA54_0=='\u212E'||LA54_0=='\u2132'||(LA54_0>='\u213A' && LA54_0<='\u213C')||(LA54_0>='\u2140' && LA54_0<='\u2144')||(LA54_0>='\u214A' && LA54_0<='\u215F')||(LA54_0>='\u2184' && LA54_0<='\u3004')||(LA54_0>='\u3008' && LA54_0<='\u3020')||(LA54_0>='\u302A' && LA54_0<='\u3030')||(LA54_0>='\u3036' && LA54_0<='\u3037')||(LA54_0>='\u303D' && LA54_0<='\u3040')||(LA54_0>='\u3097' && LA54_0<='\u309C')||LA54_0=='\u30A0'||(LA54_0>='\u3100' && LA54_0<='\u3104')||(LA54_0>='\u312D' && LA54_0<='\u3130')||(LA54_0>='\u318F' && LA54_0<='\u319F')||(LA54_0>='\u31B8' && LA54_0<='\u31EF')||(LA54_0>='\u3200' && LA54_0<='\u33FF')||(LA54_0>='\u4DB6' && LA54_0<='\u4DFF')||(LA54_0>='\u9FA6' && LA54_0<='\u9FFF')||(LA54_0>='\uA48D' && LA54_0<='\uABFF')||(LA54_0>='\uD7A4' && LA54_0<='\uF8FF')||(LA54_0>='\uFA2E' && LA54_0<='\uFA2F')||(LA54_0>='\uFA6B' && LA54_0<='\uFAFF')||(LA54_0>='\uFB07' && LA54_0<='\uFB12')||(LA54_0>='\uFB18' && LA54_0<='\uFB1C')||LA54_0=='\uFB1E'||LA54_0=='\uFB29'||LA54_0=='\uFB37'||LA54_0=='\uFB3D'||LA54_0=='\uFB3F'||LA54_0=='\uFB42'||LA54_0=='\uFB45'||(LA54_0>='\uFBB2' && LA54_0<='\uFBD2')||(LA54_0>='\uFD3E' && LA54_0<='\uFD4F')||(LA54_0>='\uFD90' && LA54_0<='\uFD91')||(LA54_0>='\uFDC8' && LA54_0<='\uFDEF')||(LA54_0>='\uFDFD' && LA54_0<='\uFE32')||(LA54_0>='\uFE35' && LA54_0<='\uFE4C')||(LA54_0>='\uFE50' && LA54_0<='\uFE68')||(LA54_0>='\uFE6A' && LA54_0<='\uFE6F')||LA54_0=='\uFE75'||(LA54_0>='\uFEFD' && LA54_0<='\uFF03')||(LA54_0>='\uFF05' && LA54_0<='\uFF20')||(LA54_0>='\uFF3B' && LA54_0<='\uFF3E')||LA54_0=='\uFF40'||(LA54_0>='\uFF5B' && LA54_0<='\uFF64')||(LA54_0>='\uFFBF' && LA54_0<='\uFFC1')||(LA54_0>='\uFFC8' && LA54_0<='\uFFC9')||(LA54_0>='\uFFD0' && LA54_0<='\uFFD1')||(LA54_0>='\uFFD8' && LA54_0<='\uFFD9')||(LA54_0>='\uFFDD' && LA54_0<='\uFFDF')||(LA54_0>='\uFFE2' && LA54_0<='\uFFE4')||(LA54_0>='\uFFE7' && LA54_0<='\uFFFF')) ) {s = 55;}
 
                         if ( s>=0 ) return s;
                         break;
                     case 17 : 
-                        int LA52_49 = input.LA(1);
+                        int LA54_49 = input.LA(1);
 
                         s = -1;
-                        if ( (LA52_49=='\'') ) {s = 149;}
+                        if ( (LA54_49=='\'') ) {s = 148;}
 
-                        else if ( ((LA52_49>='\u0000' && LA52_49<='&')||(LA52_49>='(' && LA52_49<='\u00AA')||(LA52_49>='\u00AC' && LA52_49<='\uFFFF')) ) {s = 150;}
+                        else if ( ((LA54_49>='\u0000' && LA54_49<='&')||(LA54_49>='(' && LA54_49<='\u00AA')||(LA54_49>='\u00AC' && LA54_49<='\uFFFF')) ) {s = 149;}
 
-                        else if ( (LA52_49=='\u00AB') ) {s = 151;}
+                        else if ( (LA54_49=='\u00AB') ) {s = 150;}
 
-                        else s = 148;
+                        else s = 151;
 
                         if ( s>=0 ) return s;
                         break;
                     case 18 : 
-                        int LA52_0 = input.LA(1);
+                        int LA54_275 = input.LA(1);
 
                         s = -1;
-                        if ( (LA52_0=='p') ) {s = 1;}
+                        if ( (LA54_275=='\'') ) {s = 148;}
 
-                        else if ( (LA52_0==';') ) {s = 2;}
+                        else if ( ((LA54_275>='\u0000' && LA54_275<='&')||(LA54_275>='(' && LA54_275<='\u00AA')||(LA54_275>='\u00AC' && LA54_275<='\uFFFF')) ) {s = 149;}
 
-                        else if ( (LA52_0=='c') ) {s = 3;}
+                        else if ( (LA54_275=='\u00AB') ) {s = 150;}
 
-                        else if ( (LA52_0=='<') ) {s = 4;}
-
-                        else if ( (LA52_0==',') ) {s = 5;}
-
-                        else if ( (LA52_0=='>') ) {s = 6;}
-
-                        else if ( (LA52_0=='e') ) {s = 7;}
-
-                        else if ( (LA52_0=='i') ) {s = 8;}
-
-                        else if ( (LA52_0=='{') ) {s = 9;}
-
-                        else if ( (LA52_0=='}') ) {s = 10;}
-
-                        else if ( (LA52_0=='a') ) {s = 11;}
-
-                        else if ( (LA52_0=='(') ) {s = 12;}
-
-                        else if ( (LA52_0==')') ) {s = 13;}
-
-                        else if ( (LA52_0=='=') ) {s = 14;}
-
-                        else if ( (LA52_0=='t') ) {s = 15;}
-
-                        else if ( (LA52_0=='n') ) {s = 16;}
-
-                        else if ( (LA52_0=='s') ) {s = 17;}
-
-                        else if ( (LA52_0=='d') ) {s = 18;}
-
-                        else if ( (LA52_0=='f') ) {s = 19;}
-
-                        else if ( (LA52_0=='v') ) {s = 20;}
-
-                        else if ( (LA52_0=='o') ) {s = 21;}
-
-                        else if ( (LA52_0==':') ) {s = 22;}
-
-                        else if ( (LA52_0=='A') ) {s = 23;}
-
-                        else if ( (LA52_0=='B') ) {s = 24;}
-
-                        else if ( (LA52_0=='S') ) {s = 25;}
-
-                        else if ( (LA52_0=='.') ) {s = 26;}
-
-                        else if ( (LA52_0=='F') ) {s = 27;}
-
-                        else if ( (LA52_0=='E') ) {s = 28;}
-
-                        else if ( (LA52_0=='I') ) {s = 29;}
-
-                        else if ( (LA52_0=='@') ) {s = 30;}
-
-                        else if ( (LA52_0=='#') ) {s = 31;}
-
-                        else if ( (LA52_0=='[') ) {s = 32;}
-
-                        else if ( (LA52_0==']') ) {s = 33;}
-
-                        else if ( (LA52_0=='+') ) {s = 34;}
-
-                        else if ( (LA52_0=='-') ) {s = 35;}
-
-                        else if ( (LA52_0=='*') ) {s = 36;}
-
-                        else if ( (LA52_0=='/') ) {s = 37;}
-
-                        else if ( (LA52_0=='%') ) {s = 38;}
-
-                        else if ( (LA52_0=='|') ) {s = 39;}
-
-                        else if ( (LA52_0=='&') ) {s = 40;}
-
-                        else if ( (LA52_0=='!') ) {s = 41;}
-
-                        else if ( (LA52_0=='?') ) {s = 42;}
-
-                        else if ( (LA52_0=='w') ) {s = 43;}
-
-                        else if ( (LA52_0=='r') ) {s = 44;}
-
-                        else if ( (LA52_0=='^') ) {s = 45;}
-
-                        else if ( (LA52_0=='$'||(LA52_0>='C' && LA52_0<='D')||(LA52_0>='G' && LA52_0<='H')||(LA52_0>='J' && LA52_0<='R')||(LA52_0>='T' && LA52_0<='Z')||LA52_0=='_'||LA52_0=='b'||(LA52_0>='g' && LA52_0<='h')||(LA52_0>='j' && LA52_0<='m')||LA52_0=='q'||LA52_0=='u'||(LA52_0>='x' && LA52_0<='z')||(LA52_0>='\u00A2' && LA52_0<='\u00A5')||LA52_0=='\u00AA'||LA52_0=='\u00B5'||LA52_0=='\u00BA'||(LA52_0>='\u00C0' && LA52_0<='\u00D6')||(LA52_0>='\u00D8' && LA52_0<='\u00F6')||(LA52_0>='\u00F8' && LA52_0<='\u0236')||(LA52_0>='\u0250' && LA52_0<='\u02C1')||(LA52_0>='\u02C6' && LA52_0<='\u02D1')||(LA52_0>='\u02E0' && LA52_0<='\u02E4')||LA52_0=='\u02EE'||LA52_0=='\u037A'||LA52_0=='\u0386'||(LA52_0>='\u0388' && LA52_0<='\u038A')||LA52_0=='\u038C'||(LA52_0>='\u038E' && LA52_0<='\u03A1')||(LA52_0>='\u03A3' && LA52_0<='\u03CE')||(LA52_0>='\u03D0' && LA52_0<='\u03F5')||(LA52_0>='\u03F7' && LA52_0<='\u03FB')||(LA52_0>='\u0400' && LA52_0<='\u0481')||(LA52_0>='\u048A' && LA52_0<='\u04CE')||(LA52_0>='\u04D0' && LA52_0<='\u04F5')||(LA52_0>='\u04F8' && LA52_0<='\u04F9')||(LA52_0>='\u0500' && LA52_0<='\u050F')||(LA52_0>='\u0531' && LA52_0<='\u0556')||LA52_0=='\u0559'||(LA52_0>='\u0561' && LA52_0<='\u0587')||(LA52_0>='\u05D0' && LA52_0<='\u05EA')||(LA52_0>='\u05F0' && LA52_0<='\u05F2')||(LA52_0>='\u0621' && LA52_0<='\u063A')||(LA52_0>='\u0640' && LA52_0<='\u064A')||(LA52_0>='\u066E' && LA52_0<='\u066F')||(LA52_0>='\u0671' && LA52_0<='\u06D3')||LA52_0=='\u06D5'||(LA52_0>='\u06E5' && LA52_0<='\u06E6')||(LA52_0>='\u06EE' && LA52_0<='\u06EF')||(LA52_0>='\u06FA' && LA52_0<='\u06FC')||LA52_0=='\u06FF'||LA52_0=='\u0710'||(LA52_0>='\u0712' && LA52_0<='\u072F')||(LA52_0>='\u074D' && LA52_0<='\u074F')||(LA52_0>='\u0780' && LA52_0<='\u07A5')||LA52_0=='\u07B1'||(LA52_0>='\u0904' && LA52_0<='\u0939')||LA52_0=='\u093D'||LA52_0=='\u0950'||(LA52_0>='\u0958' && LA52_0<='\u0961')||(LA52_0>='\u0985' && LA52_0<='\u098C')||(LA52_0>='\u098F' && LA52_0<='\u0990')||(LA52_0>='\u0993' && LA52_0<='\u09A8')||(LA52_0>='\u09AA' && LA52_0<='\u09B0')||LA52_0=='\u09B2'||(LA52_0>='\u09B6' && LA52_0<='\u09B9')||LA52_0=='\u09BD'||(LA52_0>='\u09DC' && LA52_0<='\u09DD')||(LA52_0>='\u09DF' && LA52_0<='\u09E1')||(LA52_0>='\u09F0' && LA52_0<='\u09F3')||(LA52_0>='\u0A05' && LA52_0<='\u0A0A')||(LA52_0>='\u0A0F' && LA52_0<='\u0A10')||(LA52_0>='\u0A13' && LA52_0<='\u0A28')||(LA52_0>='\u0A2A' && LA52_0<='\u0A30')||(LA52_0>='\u0A32' && LA52_0<='\u0A33')||(LA52_0>='\u0A35' && LA52_0<='\u0A36')||(LA52_0>='\u0A38' && LA52_0<='\u0A39')||(LA52_0>='\u0A59' && LA52_0<='\u0A5C')||LA52_0=='\u0A5E'||(LA52_0>='\u0A72' && LA52_0<='\u0A74')||(LA52_0>='\u0A85' && LA52_0<='\u0A8D')||(LA52_0>='\u0A8F' && LA52_0<='\u0A91')||(LA52_0>='\u0A93' && LA52_0<='\u0AA8')||(LA52_0>='\u0AAA' && LA52_0<='\u0AB0')||(LA52_0>='\u0AB2' && LA52_0<='\u0AB3')||(LA52_0>='\u0AB5' && LA52_0<='\u0AB9')||LA52_0=='\u0ABD'||LA52_0=='\u0AD0'||(LA52_0>='\u0AE0' && LA52_0<='\u0AE1')||LA52_0=='\u0AF1'||(LA52_0>='\u0B05' && LA52_0<='\u0B0C')||(LA52_0>='\u0B0F' && LA52_0<='\u0B10')||(LA52_0>='\u0B13' && LA52_0<='\u0B28')||(LA52_0>='\u0B2A' && LA52_0<='\u0B30')||(LA52_0>='\u0B32' && LA52_0<='\u0B33')||(LA52_0>='\u0B35' && LA52_0<='\u0B39')||LA52_0=='\u0B3D'||(LA52_0>='\u0B5C' && LA52_0<='\u0B5D')||(LA52_0>='\u0B5F' && LA52_0<='\u0B61')||LA52_0=='\u0B71'||LA52_0=='\u0B83'||(LA52_0>='\u0B85' && LA52_0<='\u0B8A')||(LA52_0>='\u0B8E' && LA52_0<='\u0B90')||(LA52_0>='\u0B92' && LA52_0<='\u0B95')||(LA52_0>='\u0B99' && LA52_0<='\u0B9A')||LA52_0=='\u0B9C'||(LA52_0>='\u0B9E' && LA52_0<='\u0B9F')||(LA52_0>='\u0BA3' && LA52_0<='\u0BA4')||(LA52_0>='\u0BA8' && LA52_0<='\u0BAA')||(LA52_0>='\u0BAE' && LA52_0<='\u0BB5')||(LA52_0>='\u0BB7' && LA52_0<='\u0BB9')||LA52_0=='\u0BF9'||(LA52_0>='\u0C05' && LA52_0<='\u0C0C')||(LA52_0>='\u0C0E' && LA52_0<='\u0C10')||(LA52_0>='\u0C12' && LA52_0<='\u0C28')||(LA52_0>='\u0C2A' && LA52_0<='\u0C33')||(LA52_0>='\u0C35' && LA52_0<='\u0C39')||(LA52_0>='\u0C60' && LA52_0<='\u0C61')||(LA52_0>='\u0C85' && LA52_0<='\u0C8C')||(LA52_0>='\u0C8E' && LA52_0<='\u0C90')||(LA52_0>='\u0C92' && LA52_0<='\u0CA8')||(LA52_0>='\u0CAA' && LA52_0<='\u0CB3')||(LA52_0>='\u0CB5' && LA52_0<='\u0CB9')||LA52_0=='\u0CBD'||LA52_0=='\u0CDE'||(LA52_0>='\u0CE0' && LA52_0<='\u0CE1')||(LA52_0>='\u0D05' && LA52_0<='\u0D0C')||(LA52_0>='\u0D0E' && LA52_0<='\u0D10')||(LA52_0>='\u0D12' && LA52_0<='\u0D28')||(LA52_0>='\u0D2A' && LA52_0<='\u0D39')||(LA52_0>='\u0D60' && LA52_0<='\u0D61')||(LA52_0>='\u0D85' && LA52_0<='\u0D96')||(LA52_0>='\u0D9A' && LA52_0<='\u0DB1')||(LA52_0>='\u0DB3' && LA52_0<='\u0DBB')||LA52_0=='\u0DBD'||(LA52_0>='\u0DC0' && LA52_0<='\u0DC6')||(LA52_0>='\u0E01' && LA52_0<='\u0E30')||(LA52_0>='\u0E32' && LA52_0<='\u0E33')||(LA52_0>='\u0E3F' && LA52_0<='\u0E46')||(LA52_0>='\u0E81' && LA52_0<='\u0E82')||LA52_0=='\u0E84'||(LA52_0>='\u0E87' && LA52_0<='\u0E88')||LA52_0=='\u0E8A'||LA52_0=='\u0E8D'||(LA52_0>='\u0E94' && LA52_0<='\u0E97')||(LA52_0>='\u0E99' && LA52_0<='\u0E9F')||(LA52_0>='\u0EA1' && LA52_0<='\u0EA3')||LA52_0=='\u0EA5'||LA52_0=='\u0EA7'||(LA52_0>='\u0EAA' && LA52_0<='\u0EAB')||(LA52_0>='\u0EAD' && LA52_0<='\u0EB0')||(LA52_0>='\u0EB2' && LA52_0<='\u0EB3')||LA52_0=='\u0EBD'||(LA52_0>='\u0EC0' && LA52_0<='\u0EC4')||LA52_0=='\u0EC6'||(LA52_0>='\u0EDC' && LA52_0<='\u0EDD')||LA52_0=='\u0F00'||(LA52_0>='\u0F40' && LA52_0<='\u0F47')||(LA52_0>='\u0F49' && LA52_0<='\u0F6A')||(LA52_0>='\u0F88' && LA52_0<='\u0F8B')||(LA52_0>='\u1000' && LA52_0<='\u1021')||(LA52_0>='\u1023' && LA52_0<='\u1027')||(LA52_0>='\u1029' && LA52_0<='\u102A')||(LA52_0>='\u1050' && LA52_0<='\u1055')||(LA52_0>='\u10A0' && LA52_0<='\u10C5')||(LA52_0>='\u10D0' && LA52_0<='\u10F8')||(LA52_0>='\u1100' && LA52_0<='\u1159')||(LA52_0>='\u115F' && LA52_0<='\u11A2')||(LA52_0>='\u11A8' && LA52_0<='\u11F9')||(LA52_0>='\u1200' && LA52_0<='\u1206')||(LA52_0>='\u1208' && LA52_0<='\u1246')||LA52_0=='\u1248'||(LA52_0>='\u124A' && LA52_0<='\u124D')||(LA52_0>='\u1250' && LA52_0<='\u1256')||LA52_0=='\u1258'||(LA52_0>='\u125A' && LA52_0<='\u125D')||(LA52_0>='\u1260' && LA52_0<='\u1286')||LA52_0=='\u1288'||(LA52_0>='\u128A' && LA52_0<='\u128D')||(LA52_0>='\u1290' && LA52_0<='\u12AE')||LA52_0=='\u12B0'||(LA52_0>='\u12B2' && LA52_0<='\u12B5')||(LA52_0>='\u12B8' && LA52_0<='\u12BE')||LA52_0=='\u12C0'||(LA52_0>='\u12C2' && LA52_0<='\u12C5')||(LA52_0>='\u12C8' && LA52_0<='\u12CE')||(LA52_0>='\u12D0' && LA52_0<='\u12D6')||(LA52_0>='\u12D8' && LA52_0<='\u12EE')||(LA52_0>='\u12F0' && LA52_0<='\u130E')||LA52_0=='\u1310'||(LA52_0>='\u1312' && LA52_0<='\u1315')||(LA52_0>='\u1318' && LA52_0<='\u131E')||(LA52_0>='\u1320' && LA52_0<='\u1346')||(LA52_0>='\u1348' && LA52_0<='\u135A')||(LA52_0>='\u13A0' && LA52_0<='\u13F4')||(LA52_0>='\u1401' && LA52_0<='\u166C')||(LA52_0>='\u166F' && LA52_0<='\u1676')||(LA52_0>='\u1681' && LA52_0<='\u169A')||(LA52_0>='\u16A0' && LA52_0<='\u16EA')||(LA52_0>='\u16EE' && LA52_0<='\u16F0')||(LA52_0>='\u1700' && LA52_0<='\u170C')||(LA52_0>='\u170E' && LA52_0<='\u1711')||(LA52_0>='\u1720' && LA52_0<='\u1731')||(LA52_0>='\u1740' && LA52_0<='\u1751')||(LA52_0>='\u1760' && LA52_0<='\u176C')||(LA52_0>='\u176E' && LA52_0<='\u1770')||(LA52_0>='\u1780' && LA52_0<='\u17B3')||LA52_0=='\u17D7'||(LA52_0>='\u17DB' && LA52_0<='\u17DC')||(LA52_0>='\u1820' && LA52_0<='\u1877')||(LA52_0>='\u1880' && LA52_0<='\u18A8')||(LA52_0>='\u1900' && LA52_0<='\u191C')||(LA52_0>='\u1950' && LA52_0<='\u196D')||(LA52_0>='\u1970' && LA52_0<='\u1974')||(LA52_0>='\u1D00' && LA52_0<='\u1D6B')||(LA52_0>='\u1E00' && LA52_0<='\u1E9B')||(LA52_0>='\u1EA0' && LA52_0<='\u1EF9')||(LA52_0>='\u1F00' && LA52_0<='\u1F15')||(LA52_0>='\u1F18' && LA52_0<='\u1F1D')||(LA52_0>='\u1F20' && LA52_0<='\u1F45')||(LA52_0>='\u1F48' && LA52_0<='\u1F4D')||(LA52_0>='\u1F50' && LA52_0<='\u1F57')||LA52_0=='\u1F59'||LA52_0=='\u1F5B'||LA52_0=='\u1F5D'||(LA52_0>='\u1F5F' && LA52_0<='\u1F7D')||(LA52_0>='\u1F80' && LA52_0<='\u1FB4')||(LA52_0>='\u1FB6' && LA52_0<='\u1FBC')||LA52_0=='\u1FBE'||(LA52_0>='\u1FC2' && LA52_0<='\u1FC4')||(LA52_0>='\u1FC6' && LA52_0<='\u1FCC')||(LA52_0>='\u1FD0' && LA52_0<='\u1FD3')||(LA52_0>='\u1FD6' && LA52_0<='\u1FDB')||(LA52_0>='\u1FE0' && LA52_0<='\u1FEC')||(LA52_0>='\u1FF2' && LA52_0<='\u1FF4')||(LA52_0>='\u1FF6' && LA52_0<='\u1FFC')||(LA52_0>='\u203F' && LA52_0<='\u2040')||LA52_0=='\u2054'||LA52_0=='\u2071'||LA52_0=='\u207F'||(LA52_0>='\u20A0' && LA52_0<='\u20B1')||LA52_0=='\u2102'||LA52_0=='\u2107'||(LA52_0>='\u210A' && LA52_0<='\u2113')||LA52_0=='\u2115'||(LA52_0>='\u2119' && LA52_0<='\u211D')||LA52_0=='\u2124'||LA52_0=='\u2126'||LA52_0=='\u2128'||(LA52_0>='\u212A' && LA52_0<='\u212D')||(LA52_0>='\u212F' && LA52_0<='\u2131')||(LA52_0>='\u2133' && LA52_0<='\u2139')||(LA52_0>='\u213D' && LA52_0<='\u213F')||(LA52_0>='\u2145' && LA52_0<='\u2149')||(LA52_0>='\u2160' && LA52_0<='\u2183')||(LA52_0>='\u3005' && LA52_0<='\u3007')||(LA52_0>='\u3021' && LA52_0<='\u3029')||(LA52_0>='\u3031' && LA52_0<='\u3035')||(LA52_0>='\u3038' && LA52_0<='\u303C')||(LA52_0>='\u3041' && LA52_0<='\u3096')||(LA52_0>='\u309D' && LA52_0<='\u309F')||(LA52_0>='\u30A1' && LA52_0<='\u30FF')||(LA52_0>='\u3105' && LA52_0<='\u312C')||(LA52_0>='\u3131' && LA52_0<='\u318E')||(LA52_0>='\u31A0' && LA52_0<='\u31B7')||(LA52_0>='\u31F0' && LA52_0<='\u31FF')||(LA52_0>='\u3400' && LA52_0<='\u4DB5')||(LA52_0>='\u4E00' && LA52_0<='\u9FA5')||(LA52_0>='\uA000' && LA52_0<='\uA48C')||(LA52_0>='\uAC00' && LA52_0<='\uD7A3')||(LA52_0>='\uF900' && LA52_0<='\uFA2D')||(LA52_0>='\uFA30' && LA52_0<='\uFA6A')||(LA52_0>='\uFB00' && LA52_0<='\uFB06')||(LA52_0>='\uFB13' && LA52_0<='\uFB17')||LA52_0=='\uFB1D'||(LA52_0>='\uFB1F' && LA52_0<='\uFB28')||(LA52_0>='\uFB2A' && LA52_0<='\uFB36')||(LA52_0>='\uFB38' && LA52_0<='\uFB3C')||LA52_0=='\uFB3E'||(LA52_0>='\uFB40' && LA52_0<='\uFB41')||(LA52_0>='\uFB43' && LA52_0<='\uFB44')||(LA52_0>='\uFB46' && LA52_0<='\uFBB1')||(LA52_0>='\uFBD3' && LA52_0<='\uFD3D')||(LA52_0>='\uFD50' && LA52_0<='\uFD8F')||(LA52_0>='\uFD92' && LA52_0<='\uFDC7')||(LA52_0>='\uFDF0' && LA52_0<='\uFDFC')||(LA52_0>='\uFE33' && LA52_0<='\uFE34')||(LA52_0>='\uFE4D' && LA52_0<='\uFE4F')||LA52_0=='\uFE69'||(LA52_0>='\uFE70' && LA52_0<='\uFE74')||(LA52_0>='\uFE76' && LA52_0<='\uFEFC')||LA52_0=='\uFF04'||(LA52_0>='\uFF21' && LA52_0<='\uFF3A')||LA52_0=='\uFF3F'||(LA52_0>='\uFF41' && LA52_0<='\uFF5A')||(LA52_0>='\uFF65' && LA52_0<='\uFFBE')||(LA52_0>='\uFFC2' && LA52_0<='\uFFC7')||(LA52_0>='\uFFCA' && LA52_0<='\uFFCF')||(LA52_0>='\uFFD2' && LA52_0<='\uFFD7')||(LA52_0>='\uFFDA' && LA52_0<='\uFFDC')||(LA52_0>='\uFFE0' && LA52_0<='\uFFE1')||(LA52_0>='\uFFE5' && LA52_0<='\uFFE6')) ) {s = 46;}
-
-                        else if ( (LA52_0=='\\') ) {s = 47;}
-
-                        else if ( (LA52_0=='\'') ) {s = 48;}
-
-                        else if ( (LA52_0=='\u00BB') ) {s = 49;}
-
-                        else if ( (LA52_0=='\u00AB') ) {s = 50;}
-
-                        else if ( (LA52_0=='0') ) {s = 51;}
-
-                        else if ( ((LA52_0>='1' && LA52_0<='9')) ) {s = 52;}
-
-                        else if ( (LA52_0=='\"') ) {s = 53;}
-
-                        else if ( ((LA52_0>='\t' && LA52_0<='\n')||LA52_0=='\r'||LA52_0==' ') ) {s = 54;}
-
-                        else if ( ((LA52_0>='\u0000' && LA52_0<='\b')||(LA52_0>='\u000B' && LA52_0<='\f')||(LA52_0>='\u000E' && LA52_0<='\u001F')||LA52_0=='`'||(LA52_0>='~' && LA52_0<='\u00A1')||(LA52_0>='\u00A6' && LA52_0<='\u00A9')||(LA52_0>='\u00AC' && LA52_0<='\u00B4')||(LA52_0>='\u00B6' && LA52_0<='\u00B9')||(LA52_0>='\u00BC' && LA52_0<='\u00BF')||LA52_0=='\u00D7'||LA52_0=='\u00F7'||(LA52_0>='\u0237' && LA52_0<='\u024F')||(LA52_0>='\u02C2' && LA52_0<='\u02C5')||(LA52_0>='\u02D2' && LA52_0<='\u02DF')||(LA52_0>='\u02E5' && LA52_0<='\u02ED')||(LA52_0>='\u02EF' && LA52_0<='\u0379')||(LA52_0>='\u037B' && LA52_0<='\u0385')||LA52_0=='\u0387'||LA52_0=='\u038B'||LA52_0=='\u038D'||LA52_0=='\u03A2'||LA52_0=='\u03CF'||LA52_0=='\u03F6'||(LA52_0>='\u03FC' && LA52_0<='\u03FF')||(LA52_0>='\u0482' && LA52_0<='\u0489')||LA52_0=='\u04CF'||(LA52_0>='\u04F6' && LA52_0<='\u04F7')||(LA52_0>='\u04FA' && LA52_0<='\u04FF')||(LA52_0>='\u0510' && LA52_0<='\u0530')||(LA52_0>='\u0557' && LA52_0<='\u0558')||(LA52_0>='\u055A' && LA52_0<='\u0560')||(LA52_0>='\u0588' && LA52_0<='\u05CF')||(LA52_0>='\u05EB' && LA52_0<='\u05EF')||(LA52_0>='\u05F3' && LA52_0<='\u0620')||(LA52_0>='\u063B' && LA52_0<='\u063F')||(LA52_0>='\u064B' && LA52_0<='\u066D')||LA52_0=='\u0670'||LA52_0=='\u06D4'||(LA52_0>='\u06D6' && LA52_0<='\u06E4')||(LA52_0>='\u06E7' && LA52_0<='\u06ED')||(LA52_0>='\u06F0' && LA52_0<='\u06F9')||(LA52_0>='\u06FD' && LA52_0<='\u06FE')||(LA52_0>='\u0700' && LA52_0<='\u070F')||LA52_0=='\u0711'||(LA52_0>='\u0730' && LA52_0<='\u074C')||(LA52_0>='\u0750' && LA52_0<='\u077F')||(LA52_0>='\u07A6' && LA52_0<='\u07B0')||(LA52_0>='\u07B2' && LA52_0<='\u0903')||(LA52_0>='\u093A' && LA52_0<='\u093C')||(LA52_0>='\u093E' && LA52_0<='\u094F')||(LA52_0>='\u0951' && LA52_0<='\u0957')||(LA52_0>='\u0962' && LA52_0<='\u0984')||(LA52_0>='\u098D' && LA52_0<='\u098E')||(LA52_0>='\u0991' && LA52_0<='\u0992')||LA52_0=='\u09A9'||LA52_0=='\u09B1'||(LA52_0>='\u09B3' && LA52_0<='\u09B5')||(LA52_0>='\u09BA' && LA52_0<='\u09BC')||(LA52_0>='\u09BE' && LA52_0<='\u09DB')||LA52_0=='\u09DE'||(LA52_0>='\u09E2' && LA52_0<='\u09EF')||(LA52_0>='\u09F4' && LA52_0<='\u0A04')||(LA52_0>='\u0A0B' && LA52_0<='\u0A0E')||(LA52_0>='\u0A11' && LA52_0<='\u0A12')||LA52_0=='\u0A29'||LA52_0=='\u0A31'||LA52_0=='\u0A34'||LA52_0=='\u0A37'||(LA52_0>='\u0A3A' && LA52_0<='\u0A58')||LA52_0=='\u0A5D'||(LA52_0>='\u0A5F' && LA52_0<='\u0A71')||(LA52_0>='\u0A75' && LA52_0<='\u0A84')||LA52_0=='\u0A8E'||LA52_0=='\u0A92'||LA52_0=='\u0AA9'||LA52_0=='\u0AB1'||LA52_0=='\u0AB4'||(LA52_0>='\u0ABA' && LA52_0<='\u0ABC')||(LA52_0>='\u0ABE' && LA52_0<='\u0ACF')||(LA52_0>='\u0AD1' && LA52_0<='\u0ADF')||(LA52_0>='\u0AE2' && LA52_0<='\u0AF0')||(LA52_0>='\u0AF2' && LA52_0<='\u0B04')||(LA52_0>='\u0B0D' && LA52_0<='\u0B0E')||(LA52_0>='\u0B11' && LA52_0<='\u0B12')||LA52_0=='\u0B29'||LA52_0=='\u0B31'||LA52_0=='\u0B34'||(LA52_0>='\u0B3A' && LA52_0<='\u0B3C')||(LA52_0>='\u0B3E' && LA52_0<='\u0B5B')||LA52_0=='\u0B5E'||(LA52_0>='\u0B62' && LA52_0<='\u0B70')||(LA52_0>='\u0B72' && LA52_0<='\u0B82')||LA52_0=='\u0B84'||(LA52_0>='\u0B8B' && LA52_0<='\u0B8D')||LA52_0=='\u0B91'||(LA52_0>='\u0B96' && LA52_0<='\u0B98')||LA52_0=='\u0B9B'||LA52_0=='\u0B9D'||(LA52_0>='\u0BA0' && LA52_0<='\u0BA2')||(LA52_0>='\u0BA5' && LA52_0<='\u0BA7')||(LA52_0>='\u0BAB' && LA52_0<='\u0BAD')||LA52_0=='\u0BB6'||(LA52_0>='\u0BBA' && LA52_0<='\u0BF8')||(LA52_0>='\u0BFA' && LA52_0<='\u0C04')||LA52_0=='\u0C0D'||LA52_0=='\u0C11'||LA52_0=='\u0C29'||LA52_0=='\u0C34'||(LA52_0>='\u0C3A' && LA52_0<='\u0C5F')||(LA52_0>='\u0C62' && LA52_0<='\u0C84')||LA52_0=='\u0C8D'||LA52_0=='\u0C91'||LA52_0=='\u0CA9'||LA52_0=='\u0CB4'||(LA52_0>='\u0CBA' && LA52_0<='\u0CBC')||(LA52_0>='\u0CBE' && LA52_0<='\u0CDD')||LA52_0=='\u0CDF'||(LA52_0>='\u0CE2' && LA52_0<='\u0D04')||LA52_0=='\u0D0D'||LA52_0=='\u0D11'||LA52_0=='\u0D29'||(LA52_0>='\u0D3A' && LA52_0<='\u0D5F')||(LA52_0>='\u0D62' && LA52_0<='\u0D84')||(LA52_0>='\u0D97' && LA52_0<='\u0D99')||LA52_0=='\u0DB2'||LA52_0=='\u0DBC'||(LA52_0>='\u0DBE' && LA52_0<='\u0DBF')||(LA52_0>='\u0DC7' && LA52_0<='\u0E00')||LA52_0=='\u0E31'||(LA52_0>='\u0E34' && LA52_0<='\u0E3E')||(LA52_0>='\u0E47' && LA52_0<='\u0E80')||LA52_0=='\u0E83'||(LA52_0>='\u0E85' && LA52_0<='\u0E86')||LA52_0=='\u0E89'||(LA52_0>='\u0E8B' && LA52_0<='\u0E8C')||(LA52_0>='\u0E8E' && LA52_0<='\u0E93')||LA52_0=='\u0E98'||LA52_0=='\u0EA0'||LA52_0=='\u0EA4'||LA52_0=='\u0EA6'||(LA52_0>='\u0EA8' && LA52_0<='\u0EA9')||LA52_0=='\u0EAC'||LA52_0=='\u0EB1'||(LA52_0>='\u0EB4' && LA52_0<='\u0EBC')||(LA52_0>='\u0EBE' && LA52_0<='\u0EBF')||LA52_0=='\u0EC5'||(LA52_0>='\u0EC7' && LA52_0<='\u0EDB')||(LA52_0>='\u0EDE' && LA52_0<='\u0EFF')||(LA52_0>='\u0F01' && LA52_0<='\u0F3F')||LA52_0=='\u0F48'||(LA52_0>='\u0F6B' && LA52_0<='\u0F87')||(LA52_0>='\u0F8C' && LA52_0<='\u0FFF')||LA52_0=='\u1022'||LA52_0=='\u1028'||(LA52_0>='\u102B' && LA52_0<='\u104F')||(LA52_0>='\u1056' && LA52_0<='\u109F')||(LA52_0>='\u10C6' && LA52_0<='\u10CF')||(LA52_0>='\u10F9' && LA52_0<='\u10FF')||(LA52_0>='\u115A' && LA52_0<='\u115E')||(LA52_0>='\u11A3' && LA52_0<='\u11A7')||(LA52_0>='\u11FA' && LA52_0<='\u11FF')||LA52_0=='\u1207'||LA52_0=='\u1247'||LA52_0=='\u1249'||(LA52_0>='\u124E' && LA52_0<='\u124F')||LA52_0=='\u1257'||LA52_0=='\u1259'||(LA52_0>='\u125E' && LA52_0<='\u125F')||LA52_0=='\u1287'||LA52_0=='\u1289'||(LA52_0>='\u128E' && LA52_0<='\u128F')||LA52_0=='\u12AF'||LA52_0=='\u12B1'||(LA52_0>='\u12B6' && LA52_0<='\u12B7')||LA52_0=='\u12BF'||LA52_0=='\u12C1'||(LA52_0>='\u12C6' && LA52_0<='\u12C7')||LA52_0=='\u12CF'||LA52_0=='\u12D7'||LA52_0=='\u12EF'||LA52_0=='\u130F'||LA52_0=='\u1311'||(LA52_0>='\u1316' && LA52_0<='\u1317')||LA52_0=='\u131F'||LA52_0=='\u1347'||(LA52_0>='\u135B' && LA52_0<='\u139F')||(LA52_0>='\u13F5' && LA52_0<='\u1400')||(LA52_0>='\u166D' && LA52_0<='\u166E')||(LA52_0>='\u1677' && LA52_0<='\u1680')||(LA52_0>='\u169B' && LA52_0<='\u169F')||(LA52_0>='\u16EB' && LA52_0<='\u16ED')||(LA52_0>='\u16F1' && LA52_0<='\u16FF')||LA52_0=='\u170D'||(LA52_0>='\u1712' && LA52_0<='\u171F')||(LA52_0>='\u1732' && LA52_0<='\u173F')||(LA52_0>='\u1752' && LA52_0<='\u175F')||LA52_0=='\u176D'||(LA52_0>='\u1771' && LA52_0<='\u177F')||(LA52_0>='\u17B4' && LA52_0<='\u17D6')||(LA52_0>='\u17D8' && LA52_0<='\u17DA')||(LA52_0>='\u17DD' && LA52_0<='\u181F')||(LA52_0>='\u1878' && LA52_0<='\u187F')||(LA52_0>='\u18A9' && LA52_0<='\u18FF')||(LA52_0>='\u191D' && LA52_0<='\u194F')||(LA52_0>='\u196E' && LA52_0<='\u196F')||(LA52_0>='\u1975' && LA52_0<='\u1CFF')||(LA52_0>='\u1D6C' && LA52_0<='\u1DFF')||(LA52_0>='\u1E9C' && LA52_0<='\u1E9F')||(LA52_0>='\u1EFA' && LA52_0<='\u1EFF')||(LA52_0>='\u1F16' && LA52_0<='\u1F17')||(LA52_0>='\u1F1E' && LA52_0<='\u1F1F')||(LA52_0>='\u1F46' && LA52_0<='\u1F47')||(LA52_0>='\u1F4E' && LA52_0<='\u1F4F')||LA52_0=='\u1F58'||LA52_0=='\u1F5A'||LA52_0=='\u1F5C'||LA52_0=='\u1F5E'||(LA52_0>='\u1F7E' && LA52_0<='\u1F7F')||LA52_0=='\u1FB5'||LA52_0=='\u1FBD'||(LA52_0>='\u1FBF' && LA52_0<='\u1FC1')||LA52_0=='\u1FC5'||(LA52_0>='\u1FCD' && LA52_0<='\u1FCF')||(LA52_0>='\u1FD4' && LA52_0<='\u1FD5')||(LA52_0>='\u1FDC' && LA52_0<='\u1FDF')||(LA52_0>='\u1FED' && LA52_0<='\u1FF1')||LA52_0=='\u1FF5'||(LA52_0>='\u1FFD' && LA52_0<='\u203E')||(LA52_0>='\u2041' && LA52_0<='\u2053')||(LA52_0>='\u2055' && LA52_0<='\u2070')||(LA52_0>='\u2072' && LA52_0<='\u207E')||(LA52_0>='\u2080' && LA52_0<='\u209F')||(LA52_0>='\u20B2' && LA52_0<='\u2101')||(LA52_0>='\u2103' && LA52_0<='\u2106')||(LA52_0>='\u2108' && LA52_0<='\u2109')||LA52_0=='\u2114'||(LA52_0>='\u2116' && LA52_0<='\u2118')||(LA52_0>='\u211E' && LA52_0<='\u2123')||LA52_0=='\u2125'||LA52_0=='\u2127'||LA52_0=='\u2129'||LA52_0=='\u212E'||LA52_0=='\u2132'||(LA52_0>='\u213A' && LA52_0<='\u213C')||(LA52_0>='\u2140' && LA52_0<='\u2144')||(LA52_0>='\u214A' && LA52_0<='\u215F')||(LA52_0>='\u2184' && LA52_0<='\u3004')||(LA52_0>='\u3008' && LA52_0<='\u3020')||(LA52_0>='\u302A' && LA52_0<='\u3030')||(LA52_0>='\u3036' && LA52_0<='\u3037')||(LA52_0>='\u303D' && LA52_0<='\u3040')||(LA52_0>='\u3097' && LA52_0<='\u309C')||LA52_0=='\u30A0'||(LA52_0>='\u3100' && LA52_0<='\u3104')||(LA52_0>='\u312D' && LA52_0<='\u3130')||(LA52_0>='\u318F' && LA52_0<='\u319F')||(LA52_0>='\u31B8' && LA52_0<='\u31EF')||(LA52_0>='\u3200' && LA52_0<='\u33FF')||(LA52_0>='\u4DB6' && LA52_0<='\u4DFF')||(LA52_0>='\u9FA6' && LA52_0<='\u9FFF')||(LA52_0>='\uA48D' && LA52_0<='\uABFF')||(LA52_0>='\uD7A4' && LA52_0<='\uF8FF')||(LA52_0>='\uFA2E' && LA52_0<='\uFA2F')||(LA52_0>='\uFA6B' && LA52_0<='\uFAFF')||(LA52_0>='\uFB07' && LA52_0<='\uFB12')||(LA52_0>='\uFB18' && LA52_0<='\uFB1C')||LA52_0=='\uFB1E'||LA52_0=='\uFB29'||LA52_0=='\uFB37'||LA52_0=='\uFB3D'||LA52_0=='\uFB3F'||LA52_0=='\uFB42'||LA52_0=='\uFB45'||(LA52_0>='\uFBB2' && LA52_0<='\uFBD2')||(LA52_0>='\uFD3E' && LA52_0<='\uFD4F')||(LA52_0>='\uFD90' && LA52_0<='\uFD91')||(LA52_0>='\uFDC8' && LA52_0<='\uFDEF')||(LA52_0>='\uFDFD' && LA52_0<='\uFE32')||(LA52_0>='\uFE35' && LA52_0<='\uFE4C')||(LA52_0>='\uFE50' && LA52_0<='\uFE68')||(LA52_0>='\uFE6A' && LA52_0<='\uFE6F')||LA52_0=='\uFE75'||(LA52_0>='\uFEFD' && LA52_0<='\uFF03')||(LA52_0>='\uFF05' && LA52_0<='\uFF20')||(LA52_0>='\uFF3B' && LA52_0<='\uFF3E')||LA52_0=='\uFF40'||(LA52_0>='\uFF5B' && LA52_0<='\uFF64')||(LA52_0>='\uFFBF' && LA52_0<='\uFFC1')||(LA52_0>='\uFFC8' && LA52_0<='\uFFC9')||(LA52_0>='\uFFD0' && LA52_0<='\uFFD1')||(LA52_0>='\uFFD8' && LA52_0<='\uFFD9')||(LA52_0>='\uFFDD' && LA52_0<='\uFFDF')||(LA52_0>='\uFFE2' && LA52_0<='\uFFE4')||(LA52_0>='\uFFE7' && LA52_0<='\uFFFF')) ) {s = 55;}
+                        else s = 151;
 
                         if ( s>=0 ) return s;
                         break;
                     case 19 : 
-                        int LA52_217 = input.LA(1);
+                        int LA54_217 = input.LA(1);
 
                         s = -1;
-                        if ( (LA52_217=='\'') ) {s = 149;}
+                        if ( (LA54_217=='\'') ) {s = 148;}
 
-                        else if ( (LA52_217=='\u00AB') ) {s = 151;}
+                        else if ( ((LA54_217>='\u0000' && LA54_217<='&')||(LA54_217>='(' && LA54_217<='\u00AA')||(LA54_217>='\u00AC' && LA54_217<='\uFFFF')) ) {s = 149;}
 
-                        else if ( ((LA52_217>='\u0000' && LA52_217<='&')||(LA52_217>='(' && LA52_217<='\u00AA')||(LA52_217>='\u00AC' && LA52_217<='\uFFFF')) ) {s = 150;}
+                        else if ( (LA54_217=='\u00AB') ) {s = 150;}
 
-                        else s = 148;
+                        else s = 151;
 
                         if ( s>=0 ) return s;
                         break;
                     case 20 : 
-                        int LA52_150 = input.LA(1);
+                        int LA54_324 = input.LA(1);
 
                         s = -1;
-                        if ( (LA52_150=='\'') ) {s = 149;}
+                        if ( ((LA54_324>='\u0000' && LA54_324<='&')||(LA54_324>='(' && LA54_324<='\u00AA')||(LA54_324>='\u00AC' && LA54_324<='\uFFFF')) ) {s = 367;}
 
-                        else if ( ((LA52_150>='\u0000' && LA52_150<='&')||(LA52_150>='(' && LA52_150<='\u00AA')||(LA52_150>='\u00AC' && LA52_150<='\uFFFF')) ) {s = 150;}
-
-                        else if ( (LA52_150=='\u00AB') ) {s = 151;}
-
-                        else s = 148;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 21 : 
-                        int LA52_275 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA52_275=='\'') ) {s = 149;}
-
-                        else if ( ((LA52_275>='\u0000' && LA52_275<='&')||(LA52_275>='(' && LA52_275<='\u00AA')||(LA52_275>='\u00AC' && LA52_275<='\uFFFF')) ) {s = 150;}
-
-                        else if ( (LA52_275=='\u00AB') ) {s = 151;}
-
-                        else s = 148;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 22 : 
-                        int LA52_324 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA52_324>='\u0000' && LA52_324<='&')||(LA52_324>='(' && LA52_324<='\u00AA')||(LA52_324>='\u00AC' && LA52_324<='\uFFFF')) ) {s = 367;}
-
-                        else if ( (LA52_324=='\u00AB') ) {s = 221;}
+                        else if ( (LA54_324=='\u00AB') ) {s = 221;}
 
                         else s = 278;
 
@@ -11358,7 +11353,7 @@ public class InternalXtendLexer extends Lexer {
                         break;
             }
             NoViableAltException nvae =
-                new NoViableAltException(getDescription(), 52, _s, input);
+                new NoViableAltException(getDescription(), 54, _s, input);
             error(nvae);
             throw nvae;
         }

@@ -1098,8 +1098,8 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
     };
     public static final int RULE_ID=71;
     public static final int RULE_ANY_OTHER=77;
-    public static final int KEYWORD_19=67;
     public static final int KEYWORD_56=11;
+    public static final int KEYWORD_19=67;
     public static final int KEYWORD_55=17;
     public static final int KEYWORD_54=16;
     public static final int KEYWORD_17=65;
@@ -1135,8 +1135,8 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
     public static final int KEYWORD_25=36;
     public static final int KEYWORD_63=7;
     public static final int KEYWORD_26=37;
-    public static final int KEYWORD_62=6;
     public static final int KEYWORD_27=38;
+    public static final int KEYWORD_62=6;
     public static final int KEYWORD_20=68;
     public static final int KEYWORD_21=32;
     public static final int KEYWORD_22=33;
@@ -1342,11 +1342,11 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         state.failed=false;
         return success;
     }
-    public final boolean synpred47_InternalExBeeLangTestLanguageParser() {
+    public final boolean synpred95_InternalExBeeLangTestLanguageParser() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred47_InternalExBeeLangTestLanguageParser_fragment(); // can never throw exception
+            synpred95_InternalExBeeLangTestLanguageParser_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -1356,11 +1356,11 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         state.failed=false;
         return success;
     }
-    public final boolean synpred95_InternalExBeeLangTestLanguageParser() {
+    public final boolean synpred47_InternalExBeeLangTestLanguageParser() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred95_InternalExBeeLangTestLanguageParser_fragment(); // can never throw exception
+            synpred47_InternalExBeeLangTestLanguageParser_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
