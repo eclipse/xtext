@@ -30,6 +30,11 @@ public interface Diagnostic extends org.eclipse.emf.ecore.resource.Resource.Diag
 	final String SYNTAX_DIAGNOSTIC = "org.eclipse.xtext.diagnostics.Diagnostic.Syntax";
 	
 	/**
+	 * @since 2.7
+	 */
+	final String SYNTAX_DIAGNOSTIC_WITH_RANGE = "org.eclipse.xtext.diagnostics.Diagnostic.Syntax.Range";
+	
+	/**
 	 * @deprecated use {@link #SYNTAX_DIAGNOSTIC} instead.
 	 */
 	@Deprecated
