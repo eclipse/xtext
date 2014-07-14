@@ -37,6 +37,7 @@ import com.google.inject.Inject;
  * Customization of the default outline structure.
  * 
  * @author Jan Koehnlein
+ * @author Dennis Huebner
  */
 public class XtendOutlineSourceTreeProvider extends AbstractMultiModeOutlineTreeProvider {
 	@Inject
@@ -55,7 +56,7 @@ public class XtendOutlineSourceTreeProvider extends AbstractMultiModeOutlineTree
 			getOutlineNodeFactory().createPackageAndImporNodes(parentNode, xtendFile);
 			for (XtendTypeDeclaration xtendType : xtendFile.getXtendTypes()) {
 				Set<JvmMember> processedFeatures = newHashSet();
-				createNodeForType(parentNode, xtendType, processedFeatures);
+				createNodeForType(parentNode, xtendType, processedFeatures, 0);
 			}
 		}
 	}
@@ -72,8 +73,8 @@ public class XtendOutlineSourceTreeProvider extends AbstractMultiModeOutlineTree
 	}
 
 	private void createNodeForType(IOutlineNode parentNode, XtendTypeDeclaration xtendType,
-			Set<JvmMember> processedFeatures) {
-		EObjectNode classNode = createXtendNode(parentNode, xtendType, 0);
+			Set<JvmMember> processedFeatures, int inheritanceDepth) {
+		EObjectNode classNode = createXtendNode(parentNode, xtendType, inheritanceDepth);
 		final JvmDeclaredType inferredType = getAssociations().getInferredType(xtendType);
 		processedFeatures.add(inferredType);
 		createFeatureNodes(classNode, xtendType, inferredType, processedFeatures);
@@ -247,7 +248,7 @@ public class XtendOutlineSourceTreeProvider extends AbstractMultiModeOutlineTree
 			int inheritanceDepth) {
 		if (someType instanceof XtendTypeDeclaration) {
 			XtendTypeDeclaration xtendType = (XtendTypeDeclaration) someType;
-			createNodeForType(parentNode, xtendType, processedFeatures);
+			createNodeForType(parentNode, xtendType, processedFeatures, inheritanceDepth);
 		}
 	}
 

@@ -73,6 +73,8 @@ public class XtendOutlineJvmTreeProvider extends AbstractMultiModeOutlineTreePro
 			Set<JvmMember> processedFeatures, int inheritanceDepth, JvmTypeReference superType) {
 		if (superType.getType() instanceof JvmDeclaredType) {
 			JvmDeclaredType superClass = ((JvmGenericType) superType.getType());
+			if (Object.class.getName().equals(superClass.getQualifiedName()))
+				inheritanceDepth += 10;
 			createFeatureNodesForType(parentNode, superClass, baseType, processedFeatures, inheritanceDepth + 1);
 		}
 	}

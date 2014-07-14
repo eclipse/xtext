@@ -163,17 +163,19 @@ public class JvmOutlineTests extends AbstractOutlineTests {
 		deps.add(WorkbenchTestHelper.TESTPROJECT_NAME);
 		final IProject clientProj = WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME
 				+ "-client", Iterables.toArray(deps, String.class));
-		
+
 		IResourcesSetupUtil.waitForAutoBuild();
-		
+
 		XtendFile xtendFile = getWorkbenchTestHelper().xtendFile(clientProj, "clienttest/TestAAClient.xtend",
 				"package clienttest @aatest.TestAAnnotation class AAOutlineTest { override void myPublicMethod() {}}");
 		AssertBuilder clientAAFile = newAssertBuilder(xtendFile).numChildren(3);
 		clientAAFile.leaf(0, "clienttest");
 		clientAAFile.child(1, "AAOutlineTest").leaf(0, "myPublicMethod() : void");
-		StyledString styledString = new StyledString("AAOutlineTestInterface - clienttest.test", StyledString.QUALIFIER_STYLER);
+		StyledString styledString = new StyledString("AAOutlineTestInterface - clienttest.test",
+				StyledString.QUALIFIER_STYLER);
 		AssertBuilder createdtype = clientAAFile.child(2, styledString).numChildren(1);
-		createdtype.child(0, new StyledString("myPublicMethod() : void", StyledString.QUALIFIER_STYLER));
+		createdtype.child(0, new StyledString("myPublicMethod()", StyledString.QUALIFIER_STYLER).append(" : void",
+				StyledString.DECORATIONS_STYLER));
 		WorkbenchTestHelper.deleteProject(clientProj);
 	}
 
