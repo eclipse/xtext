@@ -28,6 +28,11 @@ class XtendResourceDescriptionManager extends DerivedStateAwareResourceDescripti
 	override IResourceDescription createResourceDescription(Resource resource, IDefaultResourceDescriptionStrategy strategy) {
 		return new XtendResourceDescription(resource, strategy, cache, typeResolver, nameConverter);
 	}
+	
+	override createDelta(IResourceDescription oldDescription, IResourceDescription newDescription) {
+		new XtendResourceDescriptionDelta(oldDescription, newDescription)
+	}
+	
 }
 
 class XtendResourceDescription extends DefaultResourceDescription {

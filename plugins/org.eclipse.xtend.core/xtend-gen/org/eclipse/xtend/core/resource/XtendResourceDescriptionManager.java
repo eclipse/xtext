@@ -3,6 +3,7 @@ package org.eclipse.xtend.core.resource;
 import com.google.inject.Inject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.resource.XtendResourceDescription;
+import org.eclipse.xtend.core.resource.XtendResourceDescriptionDelta;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.DerivedStateAwareResourceDescriptionManager;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
@@ -21,5 +22,9 @@ public class XtendResourceDescriptionManager extends DerivedStateAwareResourceDe
   public IResourceDescription createResourceDescription(final Resource resource, final IDefaultResourceDescriptionStrategy strategy) {
     IResourceScopeCache _cache = this.getCache();
     return new XtendResourceDescription(resource, strategy, _cache, this.typeResolver, this.nameConverter);
+  }
+  
+  public IResourceDescription.Delta createDelta(final IResourceDescription oldDescription, final IResourceDescription newDescription) {
+    return new XtendResourceDescriptionDelta(oldDescription, newDescription);
   }
 }

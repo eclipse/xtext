@@ -18,6 +18,8 @@ public class DescriptionFlags {
 	
 	public static final int DISPATCHER_OPERATION = 1;
 	public static final int IS_STATIC = 2;
+	public static final int IS_ACTIVE_ANNOTATION = 3;
+	public static final int IS_ANNOTATION_PROCESSOR= 4;
 	
 	public boolean isDispatcherOperation(IEObjectDescription eObjectDescription) {
 		int flags = getFlags(eObjectDescription);
@@ -28,6 +30,16 @@ public class DescriptionFlags {
 		int flags = getFlags(eObjectDescription);
 		return (flags & IS_STATIC) != 0;
 	}
+	
+	public boolean isActiveAnnotation(IEObjectDescription eObjectDescription) {
+		int flags = getFlags(eObjectDescription);
+		return (flags & IS_ACTIVE_ANNOTATION) != 0;
+	}
+	
+	public boolean isAnnotationProcessor(IEObjectDescription eObjectDescription) {
+		int flags = getFlags(eObjectDescription);
+		return (flags & IS_ANNOTATION_PROCESSOR) != 0;
+	}
 
 	public int setDispatcherOperation(int flags) {
 		return flags | DISPATCHER_OPERATION;
@@ -35,6 +47,14 @@ public class DescriptionFlags {
 	
 	public int setStatic(int flags) {
 		return flags | IS_STATIC;
+	}
+	
+	public int setActiveAnnotation(int flags) {
+		return flags | IS_ACTIVE_ANNOTATION;
+	}
+	
+	public int setAnnotationProcessor(int flags) {
+		return flags | IS_ANNOTATION_PROCESSOR;
 	}
 	
 	protected int getFlags(IEObjectDescription eObjectDescription) {
