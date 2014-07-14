@@ -36,6 +36,7 @@ import org.eclipse.xtext.builder.resourceloader.IResourceLoader.LoadOperation;
 import org.eclipse.xtext.builder.resourceloader.IResourceLoader.LoadOperationException;
 import org.eclipse.xtext.builder.resourceloader.IResourceLoader.LoadResult;
 import org.eclipse.xtext.resource.CompilerPhases;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -151,7 +152,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
         // Add all pending deltas to all deltas (may be scheduled java deltas)
         Collection<Delta> pendingDeltas = buildData.getAndRemovePendingDeltas();
         allDeltas.addAll(pendingDeltas);
-        queueAffectedResources(allRemainingURIs, this, newState, allDeltas, buildData, progress.newChild(1));
+        queueAffectedResources(allRemainingURIs, this, newState, allDeltas, allDeltas, buildData, progress.newChild(1));
 
         IProject currentProject = getBuiltProject(buildData);
         LoadOperation loadOperation = null;
@@ -275,7 +276,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
 
                 loadOperation.cancel();
 
-                queueAffectedResources(allRemainingURIs, this, newState, changedDeltas, buildData, subProgress.newChild(1));
+                queueAffectedResources(allRemainingURIs, this, newState, changedDeltas, allDeltas, buildData, subProgress.newChild(1));
 
                 if(queue.size() > 0) {
                     loadOperation = crossLinkingResourceLoader.create(resourceSet, currentProject);
@@ -420,6 +421,35 @@ public class ClusteringBuilderState extends AbstractBuilderState {
             return r;
         }
     }
+    
+    /**
+     * Put all resources that depend on some changes onto the queue of resources to be processed.
+     * Updates notInDelta by removing all URIs put into the queue.
+     *
+     * @param allRemainingURIs
+     *            URIs that were not considered by prior operations.
+     * @param oldState
+     *            State before the build
+     * @param newState
+     *            The current state
+     * @param changedDeltas
+     *            the deltas that have changed {@link IEObjectDescription}s
+     * @param buildData
+     *            the underlying data for this build run.
+     * @param monitor
+     *            The progress monitor used for user feedback
+     *@deprecated use {@link #queueAffectedResources(Set, IResourceDescriptions, CurrentDescriptions, Collection, Collection, BuildData, IProgressMonitor)}
+     */
+    @Deprecated
+	protected void queueAffectedResources(
+            Set<URI> allRemainingURIs,
+            IResourceDescriptions oldState,
+            CurrentDescriptions newState,
+            Collection<Delta> changedDeltas,
+            BuildData buildData,
+            final IProgressMonitor monitor) {
+    	queueAffectedResources(allRemainingURIs, oldState, newState, changedDeltas, null, buildData, monitor);
+    }
 
     /**
      * Put all resources that depend on some changes onto the queue of resources to be processed.
@@ -431,8 +461,10 @@ public class ClusteringBuilderState extends AbstractBuilderState {
      *            State before the build
      * @param newState
      *            The current state
-     * @param deltas
-     *            The changes
+     * @param changedDeltas
+     *            the deltas that have changed {@link IEObjectDescription}s
+     * @param allDeltas 
+     *            All deltas 
      * @param buildData
      *            the underlying data for this build run.
      * @param monitor
@@ -442,10 +474,11 @@ public class ClusteringBuilderState extends AbstractBuilderState {
             Set<URI> allRemainingURIs,
             IResourceDescriptions oldState,
             CurrentDescriptions newState,
-            Collection<Delta> deltas,
+            Collection<Delta> changedDeltas,
+            Collection<Delta> allDeltas,
             BuildData buildData,
             final IProgressMonitor monitor) {
-        if (deltas.isEmpty()) {
+        if (changedDeltas.isEmpty() && (allDeltas == null)) {
             return;
         }
         final SubMonitor progress = SubMonitor.convert(monitor, allRemainingURIs.size());
@@ -461,7 +494,17 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                 // If there is no description in the old state, there's no need to re-check this over and over.
                 iter.remove();
             } else {
-                if (manager.isAffected(deltas, candidateDescription, newState)) {
+            	boolean affected;
+            	if (allDeltas == null || !(manager instanceof IResourceDescription.Manager.AllChangeAware)) {
+            		if (changedDeltas.isEmpty()) {
+            			affected = false;
+            		} else {
+            			affected = manager.isAffected(changedDeltas, candidateDescription, newState);
+            		}
+            	} else {
+            		affected = manager.isAffected(allDeltas, candidateDescription, newState);
+            	}
+                if (affected) {
                     buildData.queueURI(candidateURI);
                     iter.remove();
                 }
