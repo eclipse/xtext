@@ -11,9 +11,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
@@ -27,8 +24,6 @@ import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
-import org.eclipse.xtext.ui.MarkerTypes;
-import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
 
 import com.google.common.collect.Lists;
@@ -78,7 +73,7 @@ public class ParallelBuilderParticipant extends BuilderParticipant {
 					Runnable runnable = createRunnable(delta, context, outputConfigurations, generatorMarkers, fileSystemAccessQueue, access, subMonitor);
 					executorService.execute(runnable);
 				} catch (Exception e) {
-					logErrorDuringCompilation(delta.getUri(), e);
+					addMarkerAndLogError(delta.getUri(), e);
 				}
 			}
 			executorService.shutdown();
@@ -117,39 +112,12 @@ public class ParallelBuilderParticipant extends BuilderParticipant {
 					Thread.currentThread().interrupt();
 				}
 				for (org.eclipse.xtext.xbase.lib.Pair<URI, Throwable> exception : exceptions) {
-					if (!addMarkers(exception)) {
-						logErrorDuringCompilation(exception.getKey(), exception.getValue());
-					}
+					addMarkerAndLogError(exception.getKey(), exception.getValue());
 				}
 			}
 		} finally {
 			context.getResourceSet().eAdapters().remove(fileSystemAccessQueue);
 		}
-	}
-
-	protected boolean addMarkers(org.eclipse.xtext.xbase.lib.Pair<URI, Throwable> exception) {
-		boolean result = false;
-		
-		URI uri = exception.getKey();
-		for (Pair<IStorage, IProject> storage : getStorage2UriMapper().getStorages(uri)) {
-			IResource resource = null;
-			if (storage.getFirst() instanceof IResource) {
-				resource = (IResource) storage.getFirst();
-			} else {
-				resource = storage.getSecond();
-			}
-			if (resource != null) { 
-				try {
-					IMarker marker = resource.createMarker(MarkerTypes.NORMAL_VALIDATION);
-					marker.setAttribute(IMarker.MESSAGE, exception.getValue().getMessage());
-					marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
-					result = true;
-				} catch (CoreException e2) {
-					logErrorDuringCompilation(uri, e2);			
-				}
-			}
-		}
-		return result;
 	}
 
 	protected Runnable createRunnable(
@@ -173,7 +141,7 @@ public class ParallelBuilderParticipant extends BuilderParticipant {
 				} catch (OperationCanceledException e)  {
 					// do nothing 
 				} catch (Throwable e) {
-					logErrorDuringCompilation(delta.getUri(), e);
+					addMarkerAndLogError(delta.getUri(), e);
 				}
 			}
 

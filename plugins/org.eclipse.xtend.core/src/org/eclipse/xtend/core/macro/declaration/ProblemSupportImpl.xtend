@@ -41,7 +41,7 @@ class ProblemSupportImpl implements ProblemSupport {
 	
 	private def checkValidationAllowed() {
 		if (compilationUnit.lastPhase > VALIDATION)
-			throw new IllegalStateException("Adding issues is not allowed after the validation phase")
+			throw new IllegalStateException("Adding problems is not allowed after the validation phase")
 	}
 	
 	override addError(Element element, String message) {

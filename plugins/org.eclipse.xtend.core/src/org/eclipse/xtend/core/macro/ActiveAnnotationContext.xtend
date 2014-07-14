@@ -34,6 +34,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.lib.Pair
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
 import org.eclipse.xtend.core.xtend.XtendAnnotationType
+import com.google.common.base.Throwables
 
 /**
  * @author Sven Efftinge
@@ -48,6 +49,10 @@ class ActiveAnnotationContext {
 		if (t instanceof VirtualMachineError)
 			throw t;
 		val msg = t.messageWithStackTrace
+		if (compilationUnit.lastPhase == ActiveAnnotationContexts.AnnotationCallback.GENERATION) {
+			Throwables.propagateIfPossible(t)
+			throw new RuntimeException("Error during code generation phase", t)
+		}
 		val errors = resource.errors
 		val List<? extends EObject> sourceElements = getAnnotatedSourceElements();
 		for (EObject target : sourceElements) {
