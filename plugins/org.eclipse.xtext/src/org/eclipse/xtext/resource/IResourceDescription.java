@@ -55,6 +55,7 @@ public interface IResourceDescription extends ISelectable {
 
 	@ImplementedBy(DefaultResourceDescriptionManager.class)
 	interface Manager {
+		
 
 		/**
 		 * @return a resource description for the given resource. The result represents the current state of the given
@@ -91,6 +92,27 @@ public interface IResourceDescription extends ISelectable {
 				IResourceDescriptions context)
 				throws IllegalArgumentException;
 
+		/**
+		 * @since 2.7
+		 */
+		interface AllChangeAware extends Manager {
+			/**
+			 * Batch operation to check whether a description is affected by any given delta in
+			 * the given context. Implementations may perform any optimizations to return <code>false</code> whenever
+			 * possible, e.g. check the deltas against the visible containers.
+			 * @param deltas List of deltas to check. May not be <code>null</code>. In contrast to {@link #isAffected(Collection, IResourceDescription, IResourceDescriptions)}
+			 * callers of this method are expected to pass in all deltas, even if they don't have changed {@link IEObjectDescription}s
+			 * @param candidate The description to check. May not be <code>null</code>.
+			 * @param context The current context of the batch operation. May not be <code>null</code>.
+			 * @return whether the condidate is affected by any of the given changes.
+			 * @throws IllegalArgumentException
+			 *             if this manager is not responsible for the given candidate.
+			 */
+			boolean isAffectedByAny(Collection<IResourceDescription.Delta> deltas,
+					IResourceDescription candidate,
+					IResourceDescriptions context)
+					throws IllegalArgumentException;
+		}
 	}
 
 	/**
