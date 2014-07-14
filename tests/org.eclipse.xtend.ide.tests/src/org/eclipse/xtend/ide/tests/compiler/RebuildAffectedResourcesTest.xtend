@@ -17,6 +17,8 @@ import org.junit.Test
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 
 import static extension org.eclipse.ui.texteditor.MarkerUtilities.*
+import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil
+import org.eclipse.jdt.core.JavaCore
 
 class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 
@@ -160,6 +162,61 @@ class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 		assertNoErrorsInWorkspace
 	}
 	
+	@Test
+	def void testChangeInAnnotationProcessor() {
+		val macroProject = JavaCore.create(workbenchTestHelper.project)
+		workbenchTestHelper.createFile('anno/Anno.xtend', '''
+			package anno
+			import org.eclipse.xtend.lib.macro.Active
+			
+			@Active(AnnoProcessor)
+			annotation Anno {}
+		''')
+		val processorClass = workbenchTestHelper.createFile('anno/AnnoProcessor.xtend', '''
+			package anno
+			import org.eclipse.xtend.lib.macro.AbstractFieldProcessor
+			import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
+			import org.eclipse.xtend.lib.macro.TransformationContext
+			
+			class AnnoProcessor extends AbstractFieldProcessor {
+				override doTransform(MutableFieldDeclaration it, extension TransformationContext context) {
+				}
+			}
+		''')
+		WorkbenchTestHelper.addExportedPackages(macroProject.project, "anno")
+		
+		val clientProject = JavaCore.create(WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME + "-client"))
+		JavaProjectSetupUtil.addProjectReference(clientProject, macroProject)
+		val clientClass = workbenchTestHelper.createFileImpl(clientProject.project.fullPath.toString + "/src/" + 'Foo.xtend', '''
+			import anno.Anno
+			class Foo {
+				@Anno String foo
+				
+				def bar() {
+					foo - 3
+				}
+			}
+		''')
+		waitForAutoBuild()
+		clientClass.assertHasErrors("- cannot be resolved")
+		
+		processorClass.setContents(new StringInputStream('''
+			package anno
+			import org.eclipse.xtend.lib.macro.AbstractFieldProcessor
+			import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
+			import org.eclipse.xtend.lib.macro.TransformationContext
+			
+			class AnnoProcessor extends AbstractFieldProcessor {
+				override doTransform(MutableFieldDeclaration it, extension TransformationContext context) {
+					type = primitiveInt
+				}
+			}
+		'''),true,true, null)
+		assertNumberOfBuilds(4)
+		assertNoErrorsInWorkspace
+		WorkbenchTestHelper.deleteProject(clientProject.project)
+	}
+	
 	
 	def void assertNoErrorsInWorkspace() {
 		val findMarkers = ResourcesPlugin::workspace.root.findMarkers(IMarker::PROBLEM, true, IResource::DEPTH_INFINITE)
@@ -170,7 +227,7 @@ class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 	
 	def void assertNumberOfBuilds(int numberOfBuild) {
 		waitForAutoBuild()
-		val builderEntry = Stopwatches::allNumbers.entrySet.filter[key == 'XtextBuilder.build'].head
+		val builderEntry = Stopwatches::allNumbers.entrySet.filter[key.contains('XtextBuilder.build')].head
 		if (builderEntry == null) {
 			assertEquals(numberOfBuild, 0)
 		} else {

@@ -87,7 +87,7 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 	}
 	
 	public boolean isAffected(Delta delta, IResourceDescription candidate) throws IllegalArgumentException {
-		if (!delta.haveEObjectDescriptionsChanged())
+		if (!hasChanges(delta, candidate))
 			return false;
 		Set<QualifiedName> names = Sets.newHashSet();
 		addExportedNames(names,delta.getOld());
@@ -112,7 +112,7 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
         Set<URI> outgoingReferences = descriptionUtils.collectOutgoingReferences(candidate);
         if (!outgoingReferences.isEmpty()) {
 	        for (IResourceDescription.Delta delta : deltas)
-	            if (delta.haveEObjectDescriptionsChanged() && outgoingReferences.contains(delta.getUri()))
+	            if (hasChanges(delta, candidate) && outgoingReferences.contains(delta.getUri()))
 	                return true;
         }
         // this is a tradeoff - we could either check whether a given delta uri is contained
@@ -124,7 +124,7 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
         List<IContainer> containers = null;
         Collection<QualifiedName> importedNames = getImportedNames(candidate);
         for (IResourceDescription.Delta delta : deltas) {
-			if (delta.haveEObjectDescriptionsChanged()) {
+			if (hasChanges(delta, candidate)) {
 				// not a java resource - delta's resource should be contained in a visible container
 				// as long as we did not delete the resource
 				URI uri = delta.getUri();
@@ -145,6 +145,13 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
         }
         return false;
     }
+
+	/**
+	 * @since 2.7
+	 */
+	public boolean hasChanges(IResourceDescription.Delta delta, IResourceDescription candidate) {
+		return delta.haveEObjectDescriptionsChanged();
+	}
 
 	protected boolean isAffected(Collection<QualifiedName> importedNames, IResourceDescription description) {
 		if (description != null) {

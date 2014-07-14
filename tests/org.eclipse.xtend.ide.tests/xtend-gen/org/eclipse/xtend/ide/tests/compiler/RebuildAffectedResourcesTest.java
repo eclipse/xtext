@@ -13,12 +13,15 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.internal.StopwatchRule;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
+import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -270,6 +273,111 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
     }
   }
   
+  @Test
+  public void testChangeInAnnotationProcessor() {
+    try {
+      IProject _project = this.workbenchTestHelper.getProject();
+      final IJavaProject macroProject = JavaCore.create(_project);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package anno");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtend.lib.macro.Active");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("@Active(AnnoProcessor)");
+      _builder.newLine();
+      _builder.append("annotation Anno {}");
+      _builder.newLine();
+      this.workbenchTestHelper.createFile("anno/Anno.xtend", _builder.toString());
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package anno");
+      _builder_1.newLine();
+      _builder_1.append("import org.eclipse.xtend.lib.macro.AbstractFieldProcessor");
+      _builder_1.newLine();
+      _builder_1.append("import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration");
+      _builder_1.newLine();
+      _builder_1.append("import org.eclipse.xtend.lib.macro.TransformationContext");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("class AnnoProcessor extends AbstractFieldProcessor {");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("override doTransform(MutableFieldDeclaration it, extension TransformationContext context) {");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      final IFile processorClass = this.workbenchTestHelper.createFile("anno/AnnoProcessor.xtend", _builder_1.toString());
+      IProject _project_1 = macroProject.getProject();
+      WorkbenchTestHelper.addExportedPackages(_project_1, "anno");
+      IProject _createPluginProject = WorkbenchTestHelper.createPluginProject((WorkbenchTestHelper.TESTPROJECT_NAME + "-client"));
+      final IJavaProject clientProject = JavaCore.create(_createPluginProject);
+      JavaProjectSetupUtil.addProjectReference(clientProject, macroProject);
+      IProject _project_2 = clientProject.getProject();
+      IPath _fullPath = _project_2.getFullPath();
+      String _string = _fullPath.toString();
+      String _plus = (_string + "/src/");
+      String _plus_1 = (_plus + "Foo.xtend");
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("import anno.Anno");
+      _builder_2.newLine();
+      _builder_2.append("class Foo {");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.append("@Anno String foo");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.append("def bar() {");
+      _builder_2.newLine();
+      _builder_2.append("\t\t");
+      _builder_2.append("foo - 3");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.append("}");
+      _builder_2.newLine();
+      _builder_2.append("}");
+      _builder_2.newLine();
+      final IFile clientClass = this.workbenchTestHelper.createFileImpl(_plus_1, _builder_2.toString());
+      IResourcesSetupUtil.waitForAutoBuild();
+      this.assertHasErrors(clientClass, "- cannot be resolved");
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("package anno");
+      _builder_3.newLine();
+      _builder_3.append("import org.eclipse.xtend.lib.macro.AbstractFieldProcessor");
+      _builder_3.newLine();
+      _builder_3.append("import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration");
+      _builder_3.newLine();
+      _builder_3.append("import org.eclipse.xtend.lib.macro.TransformationContext");
+      _builder_3.newLine();
+      _builder_3.newLine();
+      _builder_3.append("class AnnoProcessor extends AbstractFieldProcessor {");
+      _builder_3.newLine();
+      _builder_3.append("\t");
+      _builder_3.append("override doTransform(MutableFieldDeclaration it, extension TransformationContext context) {");
+      _builder_3.newLine();
+      _builder_3.append("\t\t");
+      _builder_3.append("type = primitiveInt");
+      _builder_3.newLine();
+      _builder_3.append("\t");
+      _builder_3.append("}");
+      _builder_3.newLine();
+      _builder_3.append("}");
+      _builder_3.newLine();
+      StringInputStream _stringInputStream = new StringInputStream(_builder_3.toString());
+      processorClass.setContents(_stringInputStream, true, true, null);
+      this.assertNumberOfBuilds(4);
+      this.assertNoErrorsInWorkspace();
+      IProject _project_3 = clientProject.getProject();
+      WorkbenchTestHelper.deleteProject(_project_3);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   public void assertNoErrorsInWorkspace() {
     try {
       IWorkspace _workspace = ResourcesPlugin.getWorkspace();
@@ -293,7 +401,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
     final Function1<Map.Entry<String, Stopwatches.NumbersForTask>, Boolean> _function = new Function1<Map.Entry<String, Stopwatches.NumbersForTask>, Boolean>() {
       public Boolean apply(final Map.Entry<String, Stopwatches.NumbersForTask> it) {
         String _key = it.getKey();
-        return Boolean.valueOf(Objects.equal(_key, "XtextBuilder.build"));
+        return Boolean.valueOf(_key.contains("XtextBuilder.build"));
       }
     };
     Iterable<Map.Entry<String, Stopwatches.NumbersForTask>> _filter = IterableExtensions.<Map.Entry<String, Stopwatches.NumbersForTask>>filter(_entrySet, _function);
