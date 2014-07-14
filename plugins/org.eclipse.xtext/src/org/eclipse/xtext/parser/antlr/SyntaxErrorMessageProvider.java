@@ -7,7 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.antlr;
 
-import org.eclipse.xtext.diagnostics.Diagnostic;
+import static org.eclipse.xtext.diagnostics.Diagnostic.*;
+
+import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.conversion.ValueConverterWithValueException;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 
 /**
@@ -16,10 +19,26 @@ import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 public class SyntaxErrorMessageProvider implements ISyntaxErrorMessageProvider {
 
 	public SyntaxErrorMessage getSyntaxErrorMessage(IParserErrorContext context) {
-		return new SyntaxErrorMessage(context.getDefaultMessage(), Diagnostic.SYNTAX_DIAGNOSTIC);
+		return new SyntaxErrorMessage(context.getDefaultMessage(), SYNTAX_DIAGNOSTIC);
 	}
-	
+
 	public SyntaxErrorMessage getSyntaxErrorMessage(IValueConverterErrorContext context) {
-		return new SyntaxErrorMessage(context.getDefaultMessage(), Diagnostic.SYNTAX_DIAGNOSTIC);
+		ValueConverterException cause = context.getValueConverterException();
+		if (cause instanceof ValueConverterWithValueException) {
+			ValueConverterWithValueException casted = (ValueConverterWithValueException) cause;
+			if (casted.hasRange()) {
+				return createRangedSyntaxErrorMessage(context, casted.getOffset(), casted.getLength());
+			}
+		}
+		return new SyntaxErrorMessage(context.getDefaultMessage(), SYNTAX_DIAGNOSTIC);
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	protected SyntaxErrorMessage createRangedSyntaxErrorMessage(IValueConverterErrorContext context, int offset,
+			int length) {
+		String range = offset + ":" + length;
+		return new SyntaxErrorMessage(context.getDefaultMessage(), SYNTAX_DIAGNOSTIC_WITH_RANGE, new String[] { range });
 	}
 }

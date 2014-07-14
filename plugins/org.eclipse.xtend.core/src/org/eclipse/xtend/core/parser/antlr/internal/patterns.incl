@@ -18,9 +18,8 @@ DECIMAL_ERROR_PATTERN = {INT} (([eE] ([^0-9] | [bB])) ([bB][^iIdD])? | ([bB][^iI
 DECIMAL = {INT} ([eE] [+-]? {INT})? ([bB][iIdD] | [lLdDfF])?
 HEX = 0 [Xx] ( {HEX_DIGIT_OR_UNDERSCORE}+ ("#" ([bB][iI] | [lL] ))? )?
 			 
-STRING_ERROR_PATTERN=("'"([^\\\']|{ESCAPE_SEQUENCE})+)|(\"([^\\\"]|{ESCAPE_SEQUENCE})+)
-STRING=("'"([^\\\']|{ESCAPE_SEQUENCE})*"'")|(\"([^\\\"]|{ESCAPE_SEQUENCE})*\")
-ESCAPE_SEQUENCE=\\[btnfru\"\'\\]
+STRING=("'"([^\\\']|{ESCAPE_SEQUENCE})*"'"?)|(\"([^\\\"]|{ESCAPE_SEQUENCE})*\"?)
+ESCAPE_SEQUENCE=\\{ANY_OTHER}
 
 RICH_TEXT_START="'''" {IN_RICH_STRING}? {RICH_TEXT_DELIM}
 RICH_TEXT_INBETWEEN="»" {IN_RICH_STRING}? {RICH_TEXT_DELIM}

@@ -106,10 +106,10 @@ public class LexingTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testRichString_09() throws Exception {
-		assertLexing("»«'", pair("»«", "RULE_RICH_TEXT_INBETWEEN"), pair("'", "RULE_ANY_OTHER"));
-		assertLexing("»'«'", pair("»'«", "RULE_RICH_TEXT_INBETWEEN"), pair("'", "RULE_ANY_OTHER"));
-		assertLexing("»' «'", pair("»' «", "RULE_RICH_TEXT_INBETWEEN"), pair("'", "RULE_ANY_OTHER"));
-		assertLexing("» '«'", pair("» '«", "RULE_RICH_TEXT_INBETWEEN"), pair("'", "RULE_ANY_OTHER"));
+		assertLexing("»«'", pair("»«", "RULE_RICH_TEXT_INBETWEEN"), pair("'", "RULE_STRING"));
+		assertLexing("»'«'", pair("»'«", "RULE_RICH_TEXT_INBETWEEN"), pair("'", "RULE_STRING"));
+		assertLexing("»' «'", pair("»' «", "RULE_RICH_TEXT_INBETWEEN"), pair("'", "RULE_STRING"));
+		assertLexing("» '«'", pair("» '«", "RULE_RICH_TEXT_INBETWEEN"), pair("'", "RULE_STRING"));
 	}
 	
 	@Test public void testRichString_10() throws Exception {

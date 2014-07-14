@@ -356,9 +356,26 @@ public class XtextResource extends ResourceImpl {
 
 		List<Diagnostic> diagnostics = new ArrayList<Diagnostic>();
 		for (INode error : parseResult.getSyntaxErrors()) {
-			diagnostics.add(new XtextSyntaxDiagnostic(error));
+			addSyntaxDiagnostic(diagnostics, error);
 		}
 		return diagnostics;
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	protected void addSyntaxDiagnostic(List<Diagnostic> diagnostics, INode error) {
+		SyntaxErrorMessage syntaxErrorMessage = error.getSyntaxErrorMessage();
+		if (org.eclipse.xtext.diagnostics.Diagnostic.SYNTAX_DIAGNOSTIC_WITH_RANGE.equals(syntaxErrorMessage.getIssueCode())) {
+			String[] issueData = syntaxErrorMessage.getIssueData();
+			if (issueData.length == 1) {
+				String data = issueData[0];
+				int colon = data.indexOf(':');
+				diagnostics.add(new XtextSyntaxDiagnosticWithRange(error, Integer.valueOf(data.substring(0, colon)), Integer.valueOf(data.substring(colon + 1)), null));
+				return;
+			}
+		}
+		diagnostics.add(new XtextSyntaxDiagnostic(error));
 	}
 
 	public IParser getParser() {
