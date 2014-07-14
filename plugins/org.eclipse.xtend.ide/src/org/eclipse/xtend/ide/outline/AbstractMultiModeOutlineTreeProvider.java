@@ -15,8 +15,11 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.internal.ui.viewsupport.ColoringLabelProvider;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.jface.viewers.StyledString.Styler;
+import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendMember;
@@ -56,7 +59,7 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 	protected XtendFeatureNode createNodeForFeature(IOutlineNode parentNode, final JvmDeclaredType inferredType,
 			JvmFeature jvmFeature, EObject semanticFeature, int inheritanceDepth) {
 		final boolean synthetic = typeExtensions.isSynthetic(jvmFeature);
-		Object text = getText(synthetic ? jvmFeature : semanticFeature);
+		Object text = computeDecoratedText(synthetic ? jvmFeature : semanticFeature, inheritanceDepth);
 		ImageDescriptor image = getImageDescriptor(synthetic ? jvmFeature : semanticFeature);
 		if (isShowInherited()) {
 			return getOutlineNodeFactory().createXtendFeatureNode(parentNode, jvmFeature, image, text, true, synthetic,
@@ -169,7 +172,7 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 	}
 
 	protected XtendEObjectNode createXtendNode(IOutlineNode parentNode, EObject modelElement, int inheritanceDepth) {
-		Object text = getText(modelElement);
+		Object text = computeDecoratedText(modelElement, inheritanceDepth);
 
 		ImageDescriptor image = getImageDescriptor(modelElement);
 		boolean syntatic = false;
@@ -181,34 +184,53 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 		return objectNode;
 	}
 
-	@Override
-	protected Object getText(Object modelElement) {
+	protected Object computeDecoratedText(final Object modelElement, final int inheritanceDepth) {
 		Object supertext = super.getText(modelElement);
 		if (!(supertext instanceof StyledString)) {
 			return supertext;
 		}
 		StyledString styledText = (StyledString) supertext;
-		if (modelElement instanceof JvmMember) {
-			JvmMember jvmMember = (JvmMember) modelElement;
-			if (!getAssociations().getSourceElements(jvmMember).isEmpty()
-					&& !getAssociations().isPrimaryJvmElement(jvmMember)) {
-				styledText = new StyledString(styledText.toString(), StyledString.QUALIFIER_STYLER);
+		if (inheritanceDepth > 0) {
+			styledText = applyStylerToFirstSegment(styledText, ColoringLabelProvider.INHERITED_STYLER);
+		}
+		if (modelElement instanceof JvmIdentifiableElement) {
+			JvmIdentifiableElement jvmElement = (JvmIdentifiableElement) modelElement;
+			if (!getAssociations().getSourceElements(jvmElement).isEmpty()
+					&& !getAssociations().isPrimaryJvmElement(jvmElement)) {
+				styledText = applyStylerToFirstSegment(styledText, StyledString.QUALIFIER_STYLER);
 			}
-			if (isShowInherited()) {
-				String qualifier = createQualifier(jvmMember);
-				if (qualifier != null) {
-					styledText = new StyledString().append(styledText).append(" - " + qualifier,
-							StyledString.QUALIFIER_STYLER);
+		}
+		if (isShowInherited()) {
+			if (modelElement instanceof JvmMember) {
+				String qualifier = createQualifier((JvmMember) modelElement);
+				appendQualifier(styledText, qualifier);
+			} else if (modelElement instanceof XtendMember) {
+				XtendMember xtendMember = (XtendMember) modelElement;
+				if (xtendMember.eContainer() instanceof XtendTypeDeclaration) {
+					String qualifiedName = createQualifier((XtendTypeDeclaration) xtendMember.eContainer(), '.');
+					appendQualifier(styledText, qualifiedName);
 				}
 			}
-		} else if (isShowInherited() && modelElement instanceof XtendMember) {
-			XtendMember xtendMember = (XtendMember) modelElement;
-			if (xtendMember.eContainer() instanceof XtendTypeDeclaration) {
-				String qualifiedName = createQualifier((XtendTypeDeclaration) xtendMember.eContainer(), '.');
-				if (qualifiedName != null)
-					styledText = new StyledString().append(styledText).append(" - " + qualifiedName,
-							StyledString.QUALIFIER_STYLER);
+		}
+		return styledText;
+	}
+
+	private void appendQualifier(StyledString styledText, String qualifier) {
+		if (qualifier != null) {
+			styledText.append(" - " + qualifier, StyledString.QUALIFIER_STYLER);
+		}
+	}
+
+	private StyledString applyStylerToFirstSegment(StyledString styledText, Styler styler) {
+		if (styledText.getStyleRanges().length > 0) {
+			StyleRange textStyle = styledText.getStyleRanges()[0];
+			if (textStyle.start != 0) {
+				styledText.setStyle(0, textStyle.start, styler);
+			} else {
+				styledText.setStyle(0, textStyle.length, styler);
 			}
+		} else {
+			styledText = new StyledString(styledText.getString(), styler);
 		}
 		return styledText;
 	}
