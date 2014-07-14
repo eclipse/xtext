@@ -19,8 +19,11 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XMemberFeatureCall
+import org.eclipse.xtext.resource.IResourceDescription.Delta
+import java.util.Collection
+import org.eclipse.xtext.resource.IResourceDescriptions
 
-class XtendResourceDescriptionManager extends DerivedStateAwareResourceDescriptionManager {
+class XtendResourceDescriptionManager extends DerivedStateAwareResourceDescriptionManager implements IResourceDescription.Manager.AllChangeAware {
 	
 	@Inject IBatchTypeResolver typeResolver
 	@Inject IQualifiedNameConverter nameConverter
@@ -28,6 +31,19 @@ class XtendResourceDescriptionManager extends DerivedStateAwareResourceDescripti
 	override IResourceDescription createResourceDescription(Resource resource, IDefaultResourceDescriptionStrategy strategy) {
 		return new XtendResourceDescription(resource, strategy, cache, typeResolver, nameConverter);
 	}
+	
+	override hasChanges(Delta delta, IResourceDescription candidate) {
+		super.hasChanges(delta, candidate) || candidate.containsActiveAnnotation
+	}
+	
+	private def boolean containsActiveAnnotation(IResourceDescription description) {
+		description.exportedObjects.exists[userDataKeys.contains(XtendResourceDescriptionStrategy.ACTIVE_ANNOTATION_TIMESTAMP)]
+	}
+	
+	override isAffectedByAny(Collection<Delta> deltas, IResourceDescription candidate, IResourceDescriptions context) throws IllegalArgumentException {
+		isAffected(deltas, candidate, context)
+	}
+	
 }
 
 class XtendResourceDescription extends DefaultResourceDescription {
