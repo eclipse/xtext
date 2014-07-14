@@ -1276,7 +1276,8 @@
             locationURI="popup:#TextEditorContext?after=xtext.ui.SourceMenu">
          <menu
                id="xtend.ide.RefactorMenu"
-               label="Refactor">
+               label="Refactor"
+               mnemonic="Refac&amp;tor">
             <command
                   commandId="org.eclipse.xtext.ui.refactoring.RenameElement"
                   style="push">
