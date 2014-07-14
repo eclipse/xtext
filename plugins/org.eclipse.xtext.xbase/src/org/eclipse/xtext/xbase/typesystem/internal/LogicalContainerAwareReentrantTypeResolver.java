@@ -502,6 +502,25 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		return new AnyTypeReferenceProvider(member, resolvedTypes, this); 
 	}
 	
+	/**
+	 * Returns the expression that will be used to infer the given type from. If the type is 
+	 * already resolved, the result will be null. If no expression can be determined, null is
+	 * also returned.
+	 */
+	protected XExpression getInferredFrom(JvmTypeReference typeReference) {
+		if (InferredTypeIndicator.isInferred(typeReference)) {
+			XComputedTypeReference computed = (XComputedTypeReference) typeReference;
+			if (computed.getEquivalent() instanceof XComputedTypeReference) {
+				XComputedTypeReference inferred = (XComputedTypeReference) computed.getEquivalent();
+				IJvmTypeReferenceProvider typeProvider = inferred.getTypeProvider();
+				if (typeProvider instanceof DemandTypeReferenceProvider) {
+					return ((DemandTypeReferenceProvider) typeProvider).expression;
+				}
+			}
+		}
+		return null;
+	}
+	
 	@Override
 	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession session) {
 		Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes = prepare(resolvedTypes, session);

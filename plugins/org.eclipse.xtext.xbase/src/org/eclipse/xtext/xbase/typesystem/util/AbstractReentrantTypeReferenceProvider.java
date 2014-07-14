@@ -38,6 +38,10 @@ public abstract class AbstractReentrantTypeReferenceProvider implements IJvmType
 		this.computing = false;
 	}
 	
+	public boolean isComputing() {
+		return computing;
+	}
+	
 	/**
 	 * Allows to deal with reentrant invocation for the given context.
 	 * @param context the reference that is part of a recursive call graph..
