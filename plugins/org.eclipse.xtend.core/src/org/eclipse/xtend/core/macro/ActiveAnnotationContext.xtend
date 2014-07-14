@@ -190,7 +190,7 @@ class ActiveAnnotationContextProvider {
 	/**
 	 * recursively looks for macro annotations on XtendAnnotationTargets 
 	 */
-	def private void searchAnnotatedElements(EObject element, IAcceptor<Pair<JvmAnnotationType, XAnnotation>> acceptor) {
+	def void searchAnnotatedElements(EObject element, IAcceptor<Pair<JvmAnnotationType, XAnnotation>> acceptor) {
 		switch element {
 			XtendFile : {
 				element.xtendTypes.forEach [

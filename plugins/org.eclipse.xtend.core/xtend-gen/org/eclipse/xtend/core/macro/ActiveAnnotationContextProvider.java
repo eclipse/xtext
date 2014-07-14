@@ -179,7 +179,7 @@ public class ActiveAnnotationContextProvider {
   /**
    * recursively looks for macro annotations on XtendAnnotationTargets
    */
-  private void searchAnnotatedElements(final EObject element, final IAcceptor<Pair<JvmAnnotationType, XAnnotation>> acceptor) {
+  public void searchAnnotatedElements(final EObject element, final IAcceptor<Pair<JvmAnnotationType, XAnnotation>> acceptor) {
     boolean _matched = false;
     if (!_matched) {
       if (element instanceof XtendFile) {

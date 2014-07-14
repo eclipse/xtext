@@ -19,15 +19,24 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XMemberFeatureCall
+import org.eclipse.xtend.core.macro.ActiveAnnotationContextProvider
+import org.eclipse.xtend.core.macro.XAnnotationExtensions
 
 class XtendResourceDescriptionManager extends DerivedStateAwareResourceDescriptionManager {
 	
 	@Inject IBatchTypeResolver typeResolver
 	@Inject IQualifiedNameConverter nameConverter
+	@Inject ActiveAnnotationContextProvider activeAnnotationContextProvider
+	@Inject XAnnotationExtensions annotationExtensions
 	
 	override IResourceDescription createResourceDescription(Resource resource, IDefaultResourceDescriptionStrategy strategy) {
-		return new XtendResourceDescription(resource, strategy, cache, typeResolver, nameConverter);
+		return new XtendResourceDescription(resource, strategy, cache, typeResolver, nameConverter, activeAnnotationContextProvider, annotationExtensions);
 	}
+	
+	override createDelta(IResourceDescription oldDescription, IResourceDescription newDescription) {
+		new XtendResourceDescriptionDelta(oldDescription, newDescription)
+	}
+	
 }
 
 class XtendResourceDescription extends DefaultResourceDescription {
@@ -36,15 +45,20 @@ class XtendResourceDescription extends DefaultResourceDescription {
 
 	IBatchTypeResolver typeResolver
 	IQualifiedNameConverter nameConverter
+	ActiveAnnotationContextProvider activeAnnotationContextProvider
+	extension XAnnotationExtensions annotationExtensions
 
 	new(Resource resource, IDefaultResourceDescriptionStrategy strategy) {
 		super(resource, strategy)
 	}
 
-	new(Resource resource, IDefaultResourceDescriptionStrategy strategy, IResourceScopeCache cache, IBatchTypeResolver typeResolver, IQualifiedNameConverter nameConverter) {
+	new(Resource resource, IDefaultResourceDescriptionStrategy strategy, IResourceScopeCache cache, IBatchTypeResolver typeResolver, 
+		IQualifiedNameConverter nameConverter, ActiveAnnotationContextProvider activeAnnotationContextProvider, XAnnotationExtensions annotationExtensions) {
 		super(resource, strategy, cache)
 		this.typeResolver = typeResolver
 		this.nameConverter = nameConverter
+		this.activeAnnotationContextProvider = activeAnnotationContextProvider
+		this.annotationExtensions = annotationExtensions
 	}
 
 	override protected getLookUp() {
@@ -104,6 +118,14 @@ class XtendResourceDescription extends DefaultResourceDescription {
 				}
 			}
 		}
+		val activeAnnotationTypes = newHashSet
+		activeAnnotationContextProvider.searchAnnotatedElements(resource.contents.head)[
+			activeAnnotationTypes += key
+		]
+		activeAnnotationTypes.forEach[
+			result += nameConverter.toQualifiedName(processorType.qualifiedName).toLowerCase
+		]
+		
 		result.addAll(super.getImportedNames())
 		val finalResult = result.filter [
 			!primitivesFilter.contains(it.lastSegment)

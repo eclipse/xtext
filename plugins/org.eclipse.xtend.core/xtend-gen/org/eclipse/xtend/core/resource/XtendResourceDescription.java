@@ -13,6 +13,9 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtend.core.macro.ActiveAnnotationContextProvider;
+import org.eclipse.xtend.core.macro.XAnnotationExtensions;
+import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -24,14 +27,18 @@ import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
 import org.eclipse.xtext.resource.impl.EObjectDescriptionLookUp;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
@@ -45,14 +52,21 @@ public class XtendResourceDescription extends DefaultResourceDescription {
   
   private IQualifiedNameConverter nameConverter;
   
+  private ActiveAnnotationContextProvider activeAnnotationContextProvider;
+  
+  @Extension
+  private XAnnotationExtensions annotationExtensions;
+  
   public XtendResourceDescription(final Resource resource, final IDefaultResourceDescriptionStrategy strategy) {
     super(resource, strategy);
   }
   
-  public XtendResourceDescription(final Resource resource, final IDefaultResourceDescriptionStrategy strategy, final IResourceScopeCache cache, final IBatchTypeResolver typeResolver, final IQualifiedNameConverter nameConverter) {
+  public XtendResourceDescription(final Resource resource, final IDefaultResourceDescriptionStrategy strategy, final IResourceScopeCache cache, final IBatchTypeResolver typeResolver, final IQualifiedNameConverter nameConverter, final ActiveAnnotationContextProvider activeAnnotationContextProvider, final XAnnotationExtensions annotationExtensions) {
     super(resource, strategy, cache);
     this.typeResolver = typeResolver;
     this.nameConverter = nameConverter;
+    this.activeAnnotationContextProvider = activeAnnotationContextProvider;
+    this.annotationExtensions = annotationExtensions;
   }
   
   protected EObjectDescriptionLookUp getLookUp() {
@@ -196,16 +210,37 @@ public class XtendResourceDescription extends DefaultResourceDescription {
         }
       }
     }
+    final HashSet<JvmAnnotationType> activeAnnotationTypes = CollectionLiterals.<JvmAnnotationType>newHashSet();
+    Resource _resource_2 = this.getResource();
+    EList<EObject> _contents_2 = _resource_2.getContents();
+    EObject _head = IterableExtensions.<EObject>head(_contents_2);
+    final IAcceptor<Pair<JvmAnnotationType, XAnnotation>> _function = new IAcceptor<Pair<JvmAnnotationType, XAnnotation>>() {
+      public void accept(final Pair<JvmAnnotationType, XAnnotation> it) {
+        JvmAnnotationType _key = it.getKey();
+        activeAnnotationTypes.add(_key);
+      }
+    };
+    this.activeAnnotationContextProvider.searchAnnotatedElements(_head, _function);
+    final Procedure1<JvmAnnotationType> _function_1 = new Procedure1<JvmAnnotationType>() {
+      public void apply(final JvmAnnotationType it) {
+        JvmType _processorType = XtendResourceDescription.this.annotationExtensions.getProcessorType(it);
+        String _qualifiedName = _processorType.getQualifiedName();
+        QualifiedName _qualifiedName_1 = XtendResourceDescription.this.nameConverter.toQualifiedName(_qualifiedName);
+        QualifiedName _lowerCase = _qualifiedName_1.toLowerCase();
+        result.add(_lowerCase);
+      }
+    };
+    IterableExtensions.<JvmAnnotationType>forEach(activeAnnotationTypes, _function_1);
     Iterable<QualifiedName> _importedNames = super.getImportedNames();
     Iterables.<QualifiedName>addAll(result, _importedNames);
-    final Function1<QualifiedName, Boolean> _function = new Function1<QualifiedName, Boolean>() {
+    final Function1<QualifiedName, Boolean> _function_2 = new Function1<QualifiedName, Boolean>() {
       public Boolean apply(final QualifiedName it) {
         String _lastSegment = it.getLastSegment();
         boolean _contains = XtendResourceDescription.primitivesFilter.contains(_lastSegment);
         return Boolean.valueOf((!_contains));
       }
     };
-    Iterable<QualifiedName> _filter_1 = IterableExtensions.<QualifiedName>filter(result, _function);
+    Iterable<QualifiedName> _filter_1 = IterableExtensions.<QualifiedName>filter(result, _function_2);
     final Set<QualifiedName> finalResult = IterableExtensions.<QualifiedName>toSet(_filter_1);
     return finalResult;
   }
