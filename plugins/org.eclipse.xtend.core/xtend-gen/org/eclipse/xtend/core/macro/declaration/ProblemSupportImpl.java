@@ -58,7 +58,7 @@ public class ProblemSupportImpl implements ProblemSupport {
     ActiveAnnotationContexts.AnnotationCallback _lastPhase = this.compilationUnit.getLastPhase();
     boolean _greaterThan = (_lastPhase.compareTo(ActiveAnnotationContexts.AnnotationCallback.VALIDATION) > 0);
     if (_greaterThan) {
-      throw new IllegalStateException("Adding issues is not allowed after the validation phase");
+      throw new IllegalStateException("Adding problems is not allowed after the validation phase");
     }
   }
   
