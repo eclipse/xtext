@@ -17,6 +17,7 @@ import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtend.core.xtend.RichString
 import org.eclipse.xtend.core.xtend.RichStringLiteral
 import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.xtext.xbase.XStringLiteral
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -53,7 +54,9 @@ class ValueConverterExceptionProducesErrorTest extends AbstractXtendTestCase {
 		assertEquals(1, resource.errors.size)
 		val error = resource.errors.head
 		assertNotNull(error)
-		assertEquals('Malformed \\uxxxx encoding.', error.message)
+		assertEquals('Invalid unicode', error.message)
+		val literal = resource.allContents.filter(XStringLiteral).head
+		assertEquals("u", literal.value)
 	}
 	
 	private def assertLiteral(String expectation, Resource resource) {
