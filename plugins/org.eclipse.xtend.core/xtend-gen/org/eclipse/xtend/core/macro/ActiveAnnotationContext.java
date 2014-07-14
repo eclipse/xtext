@@ -7,13 +7,17 @@
  */
 package org.eclipse.xtend.core.macro;
 
+import com.google.common.base.Objects;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend.core.macro.ActiveAnnotationContexts;
+import org.eclipse.xtend.core.macro.AnnotationProcessingException;
 import org.eclipse.xtend.core.macro.AnnotationProcessor;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.validation.IssueCodes;
@@ -51,6 +55,17 @@ public class ActiveAnnotationContext {
         throw t;
       }
       final String msg = this.getMessageWithStackTrace(t);
+      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+      ActiveAnnotationContexts.AnnotationCallback _lastPhase = _compilationUnit.getLastPhase();
+      boolean _equals = Objects.equal(_lastPhase, ActiveAnnotationContexts.AnnotationCallback.GENERATION);
+      if (_equals) {
+        if ((t instanceof AnnotationProcessingException)) {
+          throw t;
+        } else {
+          URI _uRI = resource.getURI();
+          throw new AnnotationProcessingException("Error during code generation phase", t, _uRI);
+        }
+      }
       final EList<Resource.Diagnostic> errors = resource.getErrors();
       final List<? extends EObject> sourceElements = this.getAnnotatedSourceElements();
       for (final EObject target : sourceElements) {
