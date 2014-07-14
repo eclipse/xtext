@@ -36,39 +36,44 @@
    <extension point="org.eclipse.ui.menus">
         <menuContribution
             locationURI="popup:#TextEditorContext?after=group.edit">
-         <command commandId="org.eclipse.ui.edit.text.contentAssist.proposals"
-               style="push">
-            <visibleWhen
-                  checkEnabled="false">
-               <reference
-                     definitionId="isActiveEditorAnInstanceOfXtextEditor">
-               </reference>
-            </visibleWhen>
-         </command>
-      </menuContribution>
-      <menuContribution
-            locationURI="popup:#TextEditorContext?after=group.edit">
-         <command commandId="org.eclipse.xtext.ui.ToggleCommentAction"
-               style="push">
-            <visibleWhen
-                  checkEnabled="false">
-               <reference
-                     definitionId="isActiveEditorAnInstanceOfXtextEditor">
-               </reference>
-            </visibleWhen>
-         </command>
-      </menuContribution>
-      <menuContribution
-            locationURI="popup:#TextEditorContext?after=group.edit">
-         <command commandId="org.eclipse.xtext.ui.FormatAction"
-               style="push">
-            <visibleWhen
-                  checkEnabled="false">
-               <reference
-                     definitionId="isActiveEditorAnInstanceOfXtextEditor">
-               </reference>
-            </visibleWhen>
-         </command>
+         <menu
+               id="xtext.ui.SourceMenu"
+               label="Source">
+            <command
+                  commandId="org.eclipse.xtext.ui.ToggleCommentAction"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="false">
+                  <reference
+                        definitionId="isActiveEditorAnInstanceOfXtextEditor">
+                  </reference>
+               </visibleWhen>
+            </command>
+            <command
+                  commandId="org.eclipse.xtext.ui.FormatAction"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="false">
+                  <reference
+                        definitionId="isActiveEditorAnInstanceOfXtextEditor">
+                  </reference>
+               </visibleWhen>
+            </command>
+            <command
+                  commandId="org.eclipse.ui.edit.text.contentAssist.proposals"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="false">
+                  <reference
+                        definitionId="isActiveEditorAnInstanceOfXtextEditor">
+                  </reference>
+               </visibleWhen>
+            </command>
+            <separator
+                  name="xtext.ui.ImportsSeparator"
+                  visible="true">
+            </separator>
+         </menu>
       </menuContribution>
    </extension>
    <extension
@@ -364,8 +369,10 @@
 	<extension
 		point="org.eclipse.ui.menus">
 		<menuContribution locationURI="popup:#TextEditorContext?after=group.open">
-			<command commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration"
-				style="push">
+			<command
+         commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration"
+         id="xtext.ui.openDeclaration"
+         style="push">
 				<visibleWhen 
 					checkEnabled="false">
  					<reference 
