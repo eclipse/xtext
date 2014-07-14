@@ -127,7 +127,7 @@ public class XtendParallelBuilderParticipant extends ParallelBuilderParticipant 
 				} catch (OperationCanceledException e)  {
 					// do nothing 
 				} catch (Throwable e) {
-					logErrorDuringCompilation(delta.getUri(), e);
+					addMarkerAndLogError(delta.getUri(), e);
 				}
 			}
 
