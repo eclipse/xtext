@@ -25,12 +25,14 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.core.JavaProject;
+import org.eclipse.xtend.core.macro.UnhandledAnnotationProcessingException;
 import org.eclipse.xtext.builder.ParallelBuilderParticipant;
 import org.eclipse.xtext.generator.FileSystemAccessQueue;
 import org.eclipse.xtext.generator.IFileSystemAccess;
@@ -67,7 +69,11 @@ public class XtendParallelBuilderParticipant extends ParallelBuilderParticipant 
 		Resource resource = context.getResourceSet().getResource(delta.getUri(), true);
 		IFile file = getFile(resource, context);
 		if (file != null) {
-			getGenerator().doGenerate(resource, access);
+			try {
+				getGenerator().doGenerate(resource, access);
+			} catch (UnhandledAnnotationProcessingException e) {
+				addMarkerAndLog(new org.eclipse.xtext.xbase.lib.Pair<URI, Throwable>(e.getProblematicResource(), e));
+			}
 		}
 	}
 	

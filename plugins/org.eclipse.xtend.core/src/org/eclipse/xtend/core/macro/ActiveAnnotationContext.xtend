@@ -48,6 +48,9 @@ class ActiveAnnotationContext {
 		if (t instanceof VirtualMachineError)
 			throw t;
 		val msg = t.messageWithStackTrace
+		if (compilationUnit.lastPhase == ActiveAnnotationContexts.AnnotationCallback.GENERATION) {
+			throw new UnhandledAnnotationProcessingException("Error during code generation phase", t, resource.URI)
+		}
 		val errors = resource.errors
 		val List<? extends EObject> sourceElements = getAnnotatedSourceElements();
 		for (EObject target : sourceElements) {

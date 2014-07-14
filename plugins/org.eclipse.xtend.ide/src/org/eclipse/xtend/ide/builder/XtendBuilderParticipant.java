@@ -23,12 +23,14 @@ import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.core.JavaProject;
+import org.eclipse.xtend.core.macro.UnhandledAnnotationProcessingException;
 import org.eclipse.xtext.builder.BuilderParticipant;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.generator.OutputConfiguration;
@@ -72,6 +74,8 @@ public class XtendBuilderParticipant extends BuilderParticipant {
 				}
 			} catch (OperationCanceledException e) {
 				throw e;
+			} catch (UnhandledAnnotationProcessingException e) {
+				addMarkerAndLog(new org.eclipse.xtext.xbase.lib.Pair<URI, Throwable>(e.getProblematicResource(), e.getCause()));
 			} catch (RuntimeException e) {
 				if (e.getCause() instanceof CoreException) {
 					throw (CoreException) e.getCause();
@@ -80,7 +84,7 @@ public class XtendBuilderParticipant extends BuilderParticipant {
 			}
 		}
 	}
-
+	
 	protected IFile getFile(Resource resource, IBuildContext context) {
 		Iterable<Pair<IStorage, IProject>> storages = mapper.getStorages(resource.getURI());
 		for (Pair<IStorage, IProject> pair : storages) {
