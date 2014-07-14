@@ -37,7 +37,7 @@ public class ExtractTest {
     _builder.append("class MyClass {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("override String doStuff(String myParam) throws IllegalArgumentException {");
+    _builder.append("override doStuff(String myParam) throws IllegalArgumentException {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("return myParam");
@@ -63,9 +63,10 @@ public class ExtractTest {
           public void apply(final MutableMethodDeclaration it) {
             String _simpleName = it.getSimpleName();
             Assert.assertEquals("doStuff", _simpleName);
-            TypeReference _string = ctx.getString();
             TypeReference _returnType = it.getReturnType();
-            Assert.assertEquals(_string, _returnType);
+            TypeReference _string = ctx.getString();
+            boolean _is = _returnType.is(_string);
+            Assert.assertTrue(_is);
             TypeReference _newTypeReference = ctx.newTypeReference(IllegalArgumentException.class);
             Iterable<? extends TypeReference> _exceptions = it.getExceptions();
             TypeReference _head = IterableExtensions.head(_exceptions);
