@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * Copyrighst (c) 2011 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,6 +12,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.jvmmodel.DispatchHelper;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
+import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
@@ -29,6 +31,8 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class XtendResourceDescriptionStrategy extends XbaseResourceDescriptionStrategy {
+
+	public static final String ACTIVE_ANNOTATION_TIMESTAMP = "ACTIVE_ANNOTATION_TIMESTAMP";
 
 	@Inject
 	private DispatchHelper dispatchHelper;
@@ -53,6 +57,7 @@ public class XtendResourceDescriptionStrategy extends XbaseResourceDescriptionSt
 	@Override
 	protected void createUserData(EObject eObject, ImmutableMap.Builder<String, String> userData) {
 		super.createUserData(eObject, userData);
+		
 		if (eObject instanceof JvmOperation)
 			addFlags(getFlags((JvmOperation) eObject), userData);
 		else if (eObject instanceof JvmField)
@@ -61,6 +66,8 @@ public class XtendResourceDescriptionStrategy extends XbaseResourceDescriptionSt
 			addFlags(getFlags((XtendFunction) eObject), userData);
 		else if (eObject instanceof XtendField) 
 			addFlags(getFlags((XtendField) eObject), userData);
+		else if (eObject instanceof JvmAnnotationType && isActiveAnnotation((JvmAnnotationType) eObject))
+			userData.put(ACTIVE_ANNOTATION_TIMESTAMP, String.valueOf(System.currentTimeMillis()));
 	}
 
 	protected void addFlags(int flags, ImmutableMap.Builder<String, String> userData) {
@@ -89,4 +96,12 @@ public class XtendResourceDescriptionStrategy extends XbaseResourceDescriptionSt
 		return (function.isStatic()) ? descriptionFlags.setStatic(0) : 0;
 	}
 	
+	protected boolean isActiveAnnotation(JvmAnnotationType annotationType) {
+		for (JvmAnnotationReference anno : annotationType.getAnnotations()) {
+			if (anno.getAnnotation().getQualifiedName().equals("org.eclipse.xtend.lib.macro.Active")) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
