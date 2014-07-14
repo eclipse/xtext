@@ -1392,5 +1392,10 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 	public DirtyStateEditorSupport getDirtyStateEditorSupport() {
 		return dirtyStateEditorSupport;
 	}
-	
+	@Override
+	protected void editorContextMenuAboutToShow(IMenuManager menu) {
+		super.editorContextMenuAboutToShow(menu);
+		menu.remove(ITextEditorActionConstants.SHIFT_RIGHT);
+		menu.remove(ITextEditorActionConstants.SHIFT_LEFT);
+	}
 }
