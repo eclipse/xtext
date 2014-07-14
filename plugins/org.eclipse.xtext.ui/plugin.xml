@@ -35,10 +35,11 @@
    
    <extension point="org.eclipse.ui.menus">
         <menuContribution
-            locationURI="popup:#TextEditorContext?after=group.edit">
+            locationURI="popup:#TextEditorContext?after=QuickAssist">
          <menu
                id="xtext.ui.SourceMenu"
-               label="Source">
+               label="Source"
+               mnemonic="&amp;Source">
             <command
                   commandId="org.eclipse.xtext.ui.ToggleCommentAction"
                   style="push">
