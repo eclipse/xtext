@@ -71,6 +71,9 @@ import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
 import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareReentrantTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.OperationBodyComputationState;
 import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.override.BottomResolvedOperation;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
+import org.eclipse.xtext.xbase.typesystem.override.OverrideTester;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -332,6 +335,9 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 	
 	@Inject
 	private JvmTypesBuilder typesBuilder;
+	
+	@Inject
+	private OverrideTester overrideTester;
 
 	@Override
 	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession session) {
@@ -865,6 +871,32 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 			if (containingStructure instanceof XClosure)
 				return String.format("Cannot refer to the non-final variable %s inside a lambda expression", variable.getSimpleName());
 			return String.format("Cannot refer to the non-final variable %s inside a local class", variable.getSimpleName());
+		}
+		return null;
+	}
+	
+	@Override
+	protected LightweightTypeReference getReturnTypeOfOverriddenOperation(JvmOperation operation,
+			ResolvedTypes resolvedTypes, IFeatureScopeSession session) {
+		if (operation.getVisibility() == JvmVisibility.PRIVATE)
+			return null;
+		if (InferredTypeIndicator.isInferred(operation.getReturnType())) {
+			LightweightTypeReference declaringType = resolvedTypes.getActualType(operation.getDeclaringType());
+			if (declaringType == null) {
+				throw new IllegalStateException("Cannot determine declaring type of operation: " + operation);
+			}
+			BottomResolvedOperation resolvedOperation = new BottomResolvedOperation(operation, declaringType, overrideTester);
+			List<IResolvedOperation> overriddenMethods = resolvedOperation.getOverriddenAndImplementedMethods();
+			if (overriddenMethods.isEmpty())
+				return null;
+			IResolvedOperation overriddenMethod = overriddenMethods.get(0);
+			JvmOperation declaration = overriddenMethod.getDeclaration();
+			XExpression inferredFrom = getInferredFrom(declaration.getReturnType());
+			if (inferredFrom != null && inferredFrom == getInferredFrom(operation.getReturnType())) {
+				return null;
+			}
+			LightweightTypeReference result = overriddenMethod.getResolvedReturnType();
+			return result;
 		}
 		return null;
 	}

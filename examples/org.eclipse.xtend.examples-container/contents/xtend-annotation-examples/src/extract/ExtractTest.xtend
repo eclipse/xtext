@@ -19,7 +19,7 @@ class ExtractTest {
 		'''
 			@extract.Extract
 			class MyClass {
-				override String doStuff(String myParam) throws IllegalArgumentException {
+				override doStuff(String myParam) throws IllegalArgumentException {
 					return myParam
 				}
 			}
@@ -32,7 +32,7 @@ class ExtractTest {
 			
 			interf.declaredMethods.head => [
 				assertEquals('doStuff', simpleName)
-				assertEquals(string, returnType)
+				assertTrue(returnType.is(string))
 				assertEquals(IllegalArgumentException.newTypeReference, exceptions.head)
 			]
 		]
