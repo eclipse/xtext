@@ -10,6 +10,7 @@ package org.eclipse.xtext.valueconverter;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.conversion.ValueConverterWithValueException;
 import org.eclipse.xtext.conversion.impl.STRINGValueConverter;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.junit.Test;
@@ -27,6 +28,65 @@ public class STRINGConverterTest extends AbstractXtextTests {
 		with(XtextStandaloneSetup.class);
 		valueConverter = get(STRINGValueConverter.class);
 		valueConverter.setRule(GrammarUtil.findRuleForName(getGrammarAccess().getGrammar(), "STRING"));
+	}
+	
+	@Test public void testBrokenStringLiteral_01() throws Exception {
+		String s = "'";
+		try {
+			valueConverter.toValue(s, null);
+			fail();
+		} catch(ValueConverterWithValueException e) {
+			assertEquals("", e.getValue());
+			assertFalse(e.hasRange());
+		}
+	}
+	
+	@Test public void testBrokenStringLiteral_02() throws Exception {
+		String s = "' ";
+		try {
+			valueConverter.toValue(s, null);
+			fail();
+		} catch(ValueConverterWithValueException e) {
+			assertEquals(" ", e.getValue());
+			assertFalse(e.hasRange());
+		}
+	}
+	
+	@Test public void testBrokenStringLiteral_03() throws Exception {
+		String s = "' \\";
+		try {
+			valueConverter.toValue(s, null);
+			fail();
+		} catch(ValueConverterWithValueException e) {
+			assertEquals(" \\", e.getValue());
+			assertTrue(e.hasRange());
+			assertEquals(2, e.getOffset());
+			assertEquals(1, e.getLength());
+		}
+	}
+
+	@Test public void testBrokenStringLiteral_04() throws Exception {
+		String s = "' \\z";
+		try {
+			valueConverter.toValue(s, null);
+			fail();
+		} catch(ValueConverterWithValueException e) {
+			assertEquals(" z", e.getValue());
+			assertTrue(e.hasRange());
+			assertEquals(2, e.getOffset());
+			assertEquals(2, e.getLength());
+		}
+	}
+	
+	@Test public void testBrokenStringLiteral_05() throws Exception {
+		String s = "' \\z ";
+		try {
+			valueConverter.toValue(s, null);
+			fail();
+		} catch(ValueConverterWithValueException e) {
+			assertEquals(" z ", e.getValue());
+			assertFalse(e.hasRange());
+		}
 	}
 
 	@Test public void testEscapeChars() throws Exception {
@@ -59,8 +119,12 @@ public class STRINGConverterTest extends AbstractXtextTests {
 		try {
 			valueConverter.toValue("'\\u123'", null);
 			fail("Illegal short unicode sequence not detected");
-		} catch(ValueConverterException e) {
-			// normal operation
+		} catch(ValueConverterWithValueException e) {
+			String s = (String) e.getValue();
+			assertEquals("u123", s);
+			assertTrue(e.hasRange());
+			assertEquals(1, e.getOffset());
+			assertEquals(2, e.getLength());
 		}
 		assertEquals("\u1234", valueConverter.toValue("'\\u1234'", null));
 	}

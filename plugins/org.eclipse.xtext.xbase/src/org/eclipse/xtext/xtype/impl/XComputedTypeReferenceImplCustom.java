@@ -70,4 +70,8 @@ public class XComputedTypeReferenceImplCustom extends XComputedTypeReferenceImpl
 	public boolean isEquivalentComputed() {
 		return equivalent != null;
 	}
+	
+	public void unsetTypeProviderWithoutNotification() {
+		typeProvider = null;
+	}
 }
