@@ -44,6 +44,7 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy;
+import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.util.ResourceUtil;
 import org.eclipse.xtext.util.Pair;
@@ -265,6 +266,31 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 		} finally {
 			resourceSet.eSetDeliver(wasDeliver);
 		}
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	protected void addMarkerAndLog(org.eclipse.xtext.xbase.lib.Pair<URI, Throwable> exception) {
+		URI uri = exception.getKey();
+		for (Pair<IStorage, IProject> storage : getStorage2UriMapper().getStorages(uri)) {
+			IResource resource = null;
+			if (storage.getFirst() instanceof IResource) {
+				resource = (IResource) storage.getFirst();
+			} else {
+				resource = storage.getSecond();
+			}
+			if (resource != null) { 
+				try {
+					IMarker marker = resource.createMarker(MarkerTypes.NORMAL_VALIDATION);
+					marker.setAttribute(IMarker.MESSAGE, exception.getValue().getMessage() + " - See error log for details");
+					marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
+					marker.setAttribute(IMarker.LINE_NUMBER, 1);
+				} catch (CoreException ignored) {
+				}
+			}
+		}
+		logErrorDuringCompilation(uri, exception.getValue());
 	}
 
 	/**

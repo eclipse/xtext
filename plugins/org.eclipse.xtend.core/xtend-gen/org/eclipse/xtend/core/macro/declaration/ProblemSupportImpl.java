@@ -11,11 +11,13 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContexts;
+import org.eclipse.xtend.core.macro.UnhandledAnnotationProcessingException;
 import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.ProblemImpl;
@@ -58,7 +60,10 @@ public class ProblemSupportImpl implements ProblemSupport {
     ActiveAnnotationContexts.AnnotationCallback _lastPhase = this.compilationUnit.getLastPhase();
     boolean _greaterThan = (_lastPhase.compareTo(ActiveAnnotationContexts.AnnotationCallback.VALIDATION) > 0);
     if (_greaterThan) {
-      throw new IllegalStateException("Adding issues is not allowed after the validation phase");
+      XtendFile _xtendFile = this.compilationUnit.getXtendFile();
+      Resource _eResource = _xtendFile.eResource();
+      URI _uRI = _eResource.getURI();
+      throw new UnhandledAnnotationProcessingException("Adding issues is not allowed after the validation phase", _uRI);
     }
   }
   

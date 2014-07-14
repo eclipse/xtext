@@ -9,10 +9,12 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContexts;
+import org.eclipse.xtend.core.macro.UnhandledAnnotationProcessingException;
 import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -51,7 +53,10 @@ public abstract class JvmElementImpl<T extends EObject> extends AbstractElementI
     ActiveAnnotationContexts.AnnotationCallback _lastPhase = _compilationUnit.getLastPhase();
     boolean _notEquals = (!Objects.equal(_lastPhase, ActiveAnnotationContexts.AnnotationCallback.INFERENCE));
     if (_notEquals) {
-      throw new IllegalStateException("Element cannot be modified outside the transformation phase");
+      T _delegate = this.getDelegate();
+      Resource _eResource = _delegate.eResource();
+      URI _uRI = _eResource.getURI();
+      throw new UnhandledAnnotationProcessingException("Element cannot be modified outside the transformation phase", _uRI);
     }
   }
 }

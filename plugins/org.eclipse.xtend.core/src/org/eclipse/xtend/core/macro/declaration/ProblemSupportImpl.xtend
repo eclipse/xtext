@@ -25,6 +25,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
 import static org.eclipse.xtend.core.macro.ActiveAnnotationContexts.AnnotationCallback.*
 import java.util.List
+import org.eclipse.xtend.core.macro.UnhandledAnnotationProcessingException
 
 class ProblemSupportImpl implements ProblemSupport {
 	
@@ -41,7 +42,7 @@ class ProblemSupportImpl implements ProblemSupport {
 	
 	private def checkValidationAllowed() {
 		if (compilationUnit.lastPhase > VALIDATION)
-			throw new IllegalStateException("Adding issues is not allowed after the validation phase")
+			throw new UnhandledAnnotationProcessingException("Adding issues is not allowed after the validation phase", compilationUnit.xtendFile.eResource.URI)
 	}
 	
 	override addError(Element element, String message) {
