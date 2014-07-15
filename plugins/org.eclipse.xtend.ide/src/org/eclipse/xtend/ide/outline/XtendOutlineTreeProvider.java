@@ -14,6 +14,7 @@ import org.eclipse.xtext.ui.editor.outline.impl.OutlineMode;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * Composite TreeProvider which delegates to the active {@link AbstractMultiModeOutlineTreeProvider} implementation
@@ -24,9 +25,16 @@ public class XtendOutlineTreeProvider implements IOutlineTreeStructureProvider, 
 		IOutlineTreeProvider.ModeAware {
 
 	@Inject
-	private XtendOutlineSourceTreeProvider sourceTreeProvider;
+	private Provider<XtendOutlineSourceTreeProvider> sourceProvider;
 
 	@Inject
+	private Provider<XtendOutlineJvmTreeProvider> jvmProvider;
+
+	@Inject
+	private IOutlineTreeProvider.ModeAware modeAware;
+
+	private XtendOutlineSourceTreeProvider sourceTreeProvider;
+
 	private XtendOutlineJvmTreeProvider jvmTreeProvider;
 
 	@Inject
@@ -51,25 +59,41 @@ public class XtendOutlineTreeProvider implements IOutlineTreeStructureProvider, 
 
 	private AbstractMultiModeOutlineTreeProvider treeProviderInUse() {
 		if (showJvmModel) {
-			return jvmTreeProvider;
+			return getJvmTreeProvider();
+		}
+		return getSourceTreeProvider();
+	}
+
+	private final XtendOutlineJvmTreeProvider getJvmTreeProvider() {
+		if (jvmTreeProvider == null) {
+			jvmTreeProvider = jvmProvider.get();
+			jvmTreeProvider.setModeAware(modeAware);
+		}
+		return jvmTreeProvider;
+	}
+
+	private final XtendOutlineSourceTreeProvider getSourceTreeProvider() {
+		if (sourceTreeProvider == null) {
+			sourceTreeProvider = sourceProvider.get();
+			sourceTreeProvider.setModeAware(modeAware);
 		}
 		return sourceTreeProvider;
 	}
 
 	public List<OutlineMode> getOutlineModes() {
-		return treeProviderInUse().getModeAware().getOutlineModes();
+		return modeAware.getOutlineModes();
 	}
 
 	public OutlineMode getCurrentMode() {
-		return treeProviderInUse().getModeAware().getCurrentMode();
+		return modeAware.getCurrentMode();
 	}
 
 	public OutlineMode getNextMode() {
-		return treeProviderInUse().getModeAware().getNextMode();
+		return modeAware.getNextMode();
 	}
 
 	public void setCurrentMode(OutlineMode outlineMode) {
-		treeProviderInUse().getModeAware().setCurrentMode(outlineMode);
+		modeAware.setCurrentMode(outlineMode);
 	}
 
 }

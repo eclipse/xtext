@@ -123,6 +123,7 @@ import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.actions.IOutlineContribution;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter.IComparator;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeFactory;
+import org.eclipse.xtext.ui.editor.outline.quickoutline.IQuickOutlineContribution;
 import org.eclipse.xtext.ui.editor.outline.quickoutline.QuickOutlineFilterAndSorter;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
@@ -523,11 +524,17 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	}
 	
 	public Class<? extends IOutlineTreeProvider.ModeAware> bindIOutlineTreeProvider_ModeAware() {
-		return org.eclipse.xtend.ide.outline.AbstractMultiModeOutlineTreeProvider.XtendOutlineModes.class;
+		return org.eclipse.xtend.ide.outline.XtendOutlineModes.class;
 	}
 	
 	public void configureSwitchOutlineModeContribution(Binder binder) {
 		binder.bind(IOutlineContribution.class).annotatedWith(Names.named("SwitchOutlineModeContribution"))
 		.to(SwitchOutlineModeContribution.class);
 	}
+	
+	public void configureSwitchQuickOutlineModeContribution(Binder binder) {
+		binder.bind(IQuickOutlineContribution.class).annotatedWith(Names.named("SwitchQuickOutlineModeContribution"))
+				.to(SwitchOutlineModeContribution.class);
+	}
+	
 }

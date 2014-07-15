@@ -7,10 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.outline;
 
-import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Sets.*;
 
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
@@ -37,7 +35,6 @@ import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.BackgroundOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
 import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
-import org.eclipse.xtext.ui.editor.outline.impl.OutlineMode;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 
@@ -47,13 +44,13 @@ import com.google.inject.Inject;
  * @author Dennis Huebner - Initial contribution and API
  */
 public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOutlineTreeProvider {
+
 	@Inject
 	private IXtendJvmAssociations associations;
 
 	@Inject
 	private JvmTypeExtensions typeExtensions;
 
-	@Inject
 	private IOutlineTreeProvider.ModeAware modeAware;
 
 	protected XtendFeatureNode createNodeForFeature(IOutlineNode parentNode, final JvmDeclaredType inferredType,
@@ -145,7 +142,10 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 			Set<JvmMember> processedMembers, int inheritanceDepth, JvmTypeReference superType);
 
 	protected boolean isShowInherited() {
-		return modeAware.getCurrentMode() == XtendOutlineModes.SHOW_INHERITED_MODE;
+		if (modeAware != null) {
+			return modeAware.getCurrentMode() == XtendOutlineModes.SHOW_INHERITED_MODE;
+		}
+		return false;
 	}
 
 	@Override
@@ -155,10 +155,6 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 
 	protected void rememberJvmMember(Set<JvmMember> processedMembers, JvmMember feature) {
 		processedMembers.add(feature);
-	}
-
-	public IOutlineTreeProvider.ModeAware getModeAware() {
-		return modeAware;
 	}
 
 	@Override
@@ -287,36 +283,7 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 		return associations;
 	}
 
-	/**
-	 * Xtend QuickOutline Mode manager
-	 * 
-	 */
-	public static class XtendOutlineModes implements ModeAware {
-		public static final OutlineMode HIDE_INHERITED_MODE = new OutlineMode("hide", "hide inherited members");
-
-		public static final OutlineMode SHOW_INHERITED_MODE = new OutlineMode("show", "show inherited members");
-
-		private static final List<OutlineMode> MODES = newArrayList(HIDE_INHERITED_MODE, SHOW_INHERITED_MODE);
-
-		private int currentModeIndex = 0;
-
-		public List<OutlineMode> getOutlineModes() {
-			return MODES;
-		}
-
-		public OutlineMode getCurrentMode() {
-			return getOutlineModes().get(currentModeIndex);
-		}
-
-		public OutlineMode getNextMode() {
-			return getOutlineModes().get((currentModeIndex + 1) % getOutlineModes().size());
-		}
-
-		public void setCurrentMode(OutlineMode outlineMode) {
-			int newIndex = getOutlineModes().indexOf(outlineMode);
-			if (newIndex != -1)
-				currentModeIndex = newIndex;
-		}
-
+	public void setModeAware(IOutlineTreeProvider.ModeAware modeAware) {
+		this.modeAware = modeAware;
 	}
 }

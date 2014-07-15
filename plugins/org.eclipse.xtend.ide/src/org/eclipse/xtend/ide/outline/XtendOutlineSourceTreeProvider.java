@@ -40,6 +40,7 @@ import com.google.inject.Inject;
  * @author Dennis Huebner
  */
 public class XtendOutlineSourceTreeProvider extends AbstractMultiModeOutlineTreeProvider {
+
 	@Inject
 	private XbaseImageAdornments adornments;
 

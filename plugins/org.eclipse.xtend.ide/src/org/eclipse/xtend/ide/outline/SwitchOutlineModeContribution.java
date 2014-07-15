@@ -8,23 +8,29 @@
 package org.eclipse.xtend.ide.outline;
 
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.xtext.ui.PluginImageHelper;
 import org.eclipse.xtext.ui.editor.outline.actions.AbstractToggleOutlineContribution;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlinePage;
+import org.eclipse.xtext.ui.editor.outline.quickoutline.IQuickOutlineContribution;
+import org.eclipse.xtext.ui.editor.outline.quickoutline.QuickOutlinePopup;
 
 import com.google.inject.Inject;
 
 /**
- * @author dhuebner - Initial contribution and API
+ * @author Dennis Hübner - Initial contribution and API
  */
-public class SwitchOutlineModeContribution extends AbstractToggleOutlineContribution {
+public class SwitchOutlineModeContribution extends AbstractToggleOutlineContribution implements
+		IQuickOutlineContribution {
 	public static final String PREFERENCE_KEY = "ui.outline.switchMode";
 
 	@Inject
 	private PluginImageHelper imageHelper;
 
 	private OutlinePage outlinePage;
+
+	private QuickOutlinePopup quickOutline;
 
 	@Override
 	protected void configureAction(Action action) {
@@ -48,6 +54,9 @@ public class SwitchOutlineModeContribution extends AbstractToggleOutlineContribu
 				outlinePage.scheduleRefresh();
 			}
 		}
+		if (quickOutline != null) {
+			quickOutline.scheduleRefresh();
+		}
 	}
 
 	@Override
@@ -60,5 +69,14 @@ public class SwitchOutlineModeContribution extends AbstractToggleOutlineContribu
 	public void deregister(OutlinePage outlinePage) {
 		super.deregister(outlinePage);
 		this.outlinePage = null;
+	}
+
+	public void register(QuickOutlinePopup quickOutline, IMenuManager dialogMenu) {
+		this.quickOutline = quickOutline;
+		dialogMenu.add(getAction());
+	}
+
+	public void deregister(QuickOutlinePopup quickOutline) {
+		quickOutline = null;
 	}
 }
