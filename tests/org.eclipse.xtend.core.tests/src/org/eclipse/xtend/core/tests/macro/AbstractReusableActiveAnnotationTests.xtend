@@ -141,6 +141,44 @@ abstract class AbstractReusableActiveAnnotationTests {
 			assertEquals(getBarJvmMethod, elementsAssociatedWithBarField.get(1))
 		]
 	}
+
+	@Test def void testTracing2() {
+		assertProcessing(
+			'myannotation/MyAnno.xtend' -> '''
+				package myannotation
+
+				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.Active
+				
+				@Active(MyAnnoProcessor)
+				annotation MyAnno {}
+				
+				class MyAnnoProcessor extends AbstractClassProcessor {
+					override doTransform(MutableClassDeclaration cls, extension TransformationContext context) {
+						cls.addMethod("foo") [
+							primarySourceElement = cls.typeParameters.head
+							body = ["return;"]
+						]
+					}
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+
+				import myannotation.MyAnno
+				
+				@MyAnno
+				class Client<A> {}
+			'''
+		) [
+			val cls = typeLookup.findClass("myusercode.Client")
+			val fooMethod = cls.findDeclaredMethod("foo")
+			val typeParameter = tracability.getPrimarySourceElement(cls.typeParameters.head)
+			assertEquals(typeParameter, tracability.getPrimarySourceElement(fooMethod))
+		]
+	}
 	
 	@Test def void testValidationPhase() {
 		assertProcessing(

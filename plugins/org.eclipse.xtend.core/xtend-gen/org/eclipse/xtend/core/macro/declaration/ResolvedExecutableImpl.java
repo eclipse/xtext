@@ -9,7 +9,7 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
+import org.eclipse.xtend.core.macro.declaration.AbstractDelegator;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.ResolvedParameterImpl;
 import org.eclipse.xtend.lib.macro.declaration.ExecutableDeclaration;
@@ -28,7 +28,7 @@ import org.eclipse.xtext.xbase.typesystem.override.IResolvedExecutable;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
-public class ResolvedExecutableImpl<T extends IResolvedExecutable, D extends ExecutableDeclaration> extends AbstractElementImpl<T> implements ResolvedExecutable {
+public class ResolvedExecutableImpl<T extends IResolvedExecutable, D extends ExecutableDeclaration> extends AbstractDelegator<T> implements ResolvedExecutable {
   private Iterable<? extends ResolvedParameter> resolvedParameters;
   
   public Iterable<? extends ResolvedParameter> getResolvedParameters() {
