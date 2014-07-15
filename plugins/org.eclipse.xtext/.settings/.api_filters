@@ -321,4 +321,12 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/service/DefaultRuntimeModule.java" type="org.eclipse.xtext.service.DefaultRuntimeModule">
+        <filter comment="Removed bogus binding" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.service.DefaultRuntimeModule"/>
+                <message_argument value="configureIResourceDescriptionsPersisted(Binder)"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>
