@@ -23,9 +23,10 @@ var generateDotDiagram = false
 var graphvizCommand = ""
 var srcGenOnly=true
 var emfRuntimeVersion = "2.9"
+var lineDelimiter = '\n'
 
 CompositeGeneratorFragment {
-	fragment = parser.antlr.ex.rt.AntlrGeneratorFragment {
+	fragment = parser.antlr.ex.rt.AntlrGeneratorFragment auto-inject {
 		options = auto-inject {}
 	}
 	fragment = resourceFactory.ResourceFactoryFragment { 
