@@ -36,6 +36,12 @@ public class BuilderIntegrationFragment extends DefaultGeneratorFragment {
 					"binder.bind(" + IResourceDescriptions.class.getName() + ".class"
 							+ ").to("
 							+ ResourceSetBasedResourceDescriptions.class.getName() + ".class)")
+			.addConfiguredBinding(
+					IResourceDescriptions.class.getName() + "Persisted",
+					"binder.bind("+ IResourceDescriptions.class.getName() + ".class"
+							+ ").annotatedWith(com.google.inject.name.Names.named("
+							+ "org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider.PERSISTED_DESCRIPTIONS)).to("
+							+ ResourceSetBasedResourceDescriptions.class.getName() + ".class)")
 			.getBindings();
 	}
 
