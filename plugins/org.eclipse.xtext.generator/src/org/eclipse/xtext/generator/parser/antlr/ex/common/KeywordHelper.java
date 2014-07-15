@@ -24,6 +24,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil;
 
 import com.google.common.base.Function;
 import com.google.common.collect.BiMap;
@@ -107,13 +108,19 @@ public class KeywordHelper implements Adapter {
 		});
 		Iterators.addAll(treeSet, transformed);
 		BiMap<CharSequence, String> result = HashBiMap.create();
-		int i = 1;
 		for(String s: treeSet) {
 			CharSequence key = createKey(s);
-			if (!result.containsKey(key)) {
-				result.put(key, "KEYWORD_" + i);
-				i++;
+			String readableName = GrammarAccessUtil.toJavaIdentifier(s, Boolean.TRUE);
+			if (result.containsValue(readableName)) {
+				int i = 1;
+				String next = readableName + "_" + i;
+				while(result.containsValue(next)) {
+					i++;
+					next = readableName + "_" + i;
+				}
+				readableName = next;
 			}
+			result.put(key, readableName);
 		}
 		return result;
 	}

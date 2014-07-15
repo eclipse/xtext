@@ -14,16 +14,16 @@ import java.util.ArrayList;
 public class InternalBug307519TestLanguageLexer extends Lexer {
     public static final int RULE_ID=9;
     public static final int RULE_STRING=11;
+    public static final int DollarSign=7;
     public static final int RULE_ANY_OTHER=15;
-    public static final int KEYWORD_1=7;
+    public static final int T1=5;
+    public static final int T2=6;
     public static final int RULE_INT=10;
-    public static final int KEYWORD_5=4;
-    public static final int KEYWORD_4=6;
-    public static final int KEYWORD_3=5;
-    public static final int KEYWORD_2=8;
+    public static final int Foo=4;
     public static final int RULE_WS=14;
     public static final int RULE_SL_COMMENT=13;
     public static final int EOF=-1;
+    public static final int PercentSign=8;
     public static final int RULE_ML_COMMENT=12;
 
     // delegates
@@ -39,13 +39,13 @@ public class InternalBug307519TestLanguageLexer extends Lexer {
     }
     public String getGrammarFileName() { return "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g"; }
 
-    // $ANTLR start "KEYWORD_5"
-    public final void mKEYWORD_5() throws RecognitionException {
+    // $ANTLR start "Foo"
+    public final void mFoo() throws RecognitionException {
         try {
-            int _type = KEYWORD_5;
+            int _type = Foo;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:19:11: ( 'foo' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:19:13: 'foo'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:19:5: ( 'foo' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:19:7: 'foo'
             {
             match("foo"); 
 
@@ -58,15 +58,15 @@ public class InternalBug307519TestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_5"
+    // $ANTLR end "Foo"
 
-    // $ANTLR start "KEYWORD_3"
-    public final void mKEYWORD_3() throws RecognitionException {
+    // $ANTLR start "T1"
+    public final void mT1() throws RecognitionException {
         try {
-            int _type = KEYWORD_3;
+            int _type = T1;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:21:11: ( 'T1' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:21:13: 'T1'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:21:4: ( 'T1' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:21:6: 'T1'
             {
             match("T1"); 
 
@@ -79,15 +79,15 @@ public class InternalBug307519TestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_3"
+    // $ANTLR end "T1"
 
-    // $ANTLR start "KEYWORD_4"
-    public final void mKEYWORD_4() throws RecognitionException {
+    // $ANTLR start "T2"
+    public final void mT2() throws RecognitionException {
         try {
-            int _type = KEYWORD_4;
+            int _type = T2;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:23:11: ( 'T2' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:23:13: 'T2'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:23:4: ( 'T2' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:23:6: 'T2'
             {
             match("T2"); 
 
@@ -100,15 +100,15 @@ public class InternalBug307519TestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_4"
+    // $ANTLR end "T2"
 
-    // $ANTLR start "KEYWORD_1"
-    public final void mKEYWORD_1() throws RecognitionException {
+    // $ANTLR start "DollarSign"
+    public final void mDollarSign() throws RecognitionException {
         try {
-            int _type = KEYWORD_1;
+            int _type = DollarSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:25:11: ( '$' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:25:13: '$'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:25:12: ( '$' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:25:14: '$'
             {
             match('$'); 
 
@@ -120,15 +120,15 @@ public class InternalBug307519TestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_1"
+    // $ANTLR end "DollarSign"
 
-    // $ANTLR start "KEYWORD_2"
-    public final void mKEYWORD_2() throws RecognitionException {
+    // $ANTLR start "PercentSign"
+    public final void mPercentSign() throws RecognitionException {
         try {
-            int _type = KEYWORD_2;
+            int _type = PercentSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:27:11: ( '%' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:27:13: '%'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:27:13: ( '%' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:27:15: '%'
             {
             match('%'); 
 
@@ -140,7 +140,7 @@ public class InternalBug307519TestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_2"
+    // $ANTLR end "PercentSign"
 
     // $ANTLR start "RULE_ID"
     public final void mRULE_ID() throws RecognitionException {
@@ -641,89 +641,89 @@ public class InternalBug307519TestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:1:8: ( KEYWORD_5 | KEYWORD_3 | KEYWORD_4 | KEYWORD_1 | KEYWORD_2 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:1:8: ( Foo | T1 | T2 | DollarSign | PercentSign | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt12=12;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:1:10: KEYWORD_5
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:1:10: Foo
                 {
-                mKEYWORD_5(); 
+                mFoo(); 
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:1:20: KEYWORD_3
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:1:14: T1
                 {
-                mKEYWORD_3(); 
+                mT1(); 
 
                 }
                 break;
             case 3 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:1:30: KEYWORD_4
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:1:17: T2
                 {
-                mKEYWORD_4(); 
+                mT2(); 
 
                 }
                 break;
             case 4 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:1:40: KEYWORD_1
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:1:20: DollarSign
                 {
-                mKEYWORD_1(); 
+                mDollarSign(); 
 
                 }
                 break;
             case 5 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:1:50: KEYWORD_2
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:1:31: PercentSign
                 {
-                mKEYWORD_2(); 
+                mPercentSign(); 
 
                 }
                 break;
             case 6 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:1:60: RULE_ID
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:1:43: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 7 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:1:68: RULE_INT
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:1:51: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 8 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:1:77: RULE_STRING
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:1:60: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 9 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:1:89: RULE_ML_COMMENT
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:1:72: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 10 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:1:105: RULE_SL_COMMENT
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:1:88: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 11 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:1:121: RULE_WS
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:1:104: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 12 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:1:129: RULE_ANY_OTHER
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/lexer/InternalBug307519TestLanguageLexer.g:1:112: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
@@ -737,25 +737,19 @@ public class InternalBug307519TestLanguageLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\1\uffff\2\16\2\uffff\1\14\2\uffff\3\14\2\uffff\1\16\1\uffff\1\31"+
-        "\1\32\7\uffff\1\33\3\uffff";
+        "\1\uffff\2\16\2\uffff\1\14\2\uffff\3\14\2\uffff\1\16\1\uffff\1\31\1\32\7\uffff\1\33\3\uffff";
     static final String DFA12_eofS =
         "\34\uffff";
     static final String DFA12_minS =
-        "\1\0\1\157\1\61\2\uffff\1\101\2\uffff\2\0\1\52\2\uffff\1\157\1\uffff"+
-        "\2\60\7\uffff\1\60\3\uffff";
+        "\1\0\1\157\1\61\2\uffff\1\101\2\uffff\2\0\1\52\2\uffff\1\157\1\uffff\2\60\7\uffff\1\60\3\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\1\157\1\62\2\uffff\1\172\2\uffff\2\uffff\1\57\2\uffff\1"+
-        "\157\1\uffff\2\172\7\uffff\1\172\3\uffff";
+        "\1\uffff\1\157\1\62\2\uffff\1\172\2\uffff\2\uffff\1\57\2\uffff\1\157\1\uffff\2\172\7\uffff\1\172\3\uffff";
     static final String DFA12_acceptS =
-        "\3\uffff\1\4\1\5\1\uffff\1\6\1\7\3\uffff\1\13\1\14\1\uffff\1\6\2"+
-        "\uffff\1\4\1\5\1\7\1\10\1\11\1\12\1\13\1\uffff\1\2\1\3\1\1";
+        "\3\uffff\1\4\1\5\1\uffff\1\6\1\7\3\uffff\1\13\1\14\1\uffff\1\6\2\uffff\1\4\1\5\1\7\1\10\1\11\1\12\1\13\1\uffff\1\2\1\3\1\1";
     static final String DFA12_specialS =
         "\1\1\7\uffff\1\0\1\2\22\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\14\2\13\2\14\1\13\22\14\1\13\1\14\1\10\1\14\1\3\1\4\1\14"+
-            "\1\11\7\14\1\12\12\7\7\14\23\6\1\2\6\6\3\14\1\5\1\6\1\14\5\6"+
-            "\1\1\24\6\uff85\14",
+            "\11\14\2\13\2\14\1\13\22\14\1\13\1\14\1\10\1\14\1\3\1\4\1\14\1\11\7\14\1\12\12\7\7\14\23\6\1\2\6\6\3\14\1\5\1\6\1\14\5\6\1\1\24\6\uff85\14",
             "\1\15",
             "\1\17\1\20",
             "",
@@ -815,7 +809,7 @@ public class InternalBug307519TestLanguageLexer extends Lexer {
             this.transition = DFA12_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( KEYWORD_5 | KEYWORD_3 | KEYWORD_4 | KEYWORD_1 | KEYWORD_2 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
+            return "1:1: Tokens : ( Foo | T1 | T2 | DollarSign | PercentSign | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;

@@ -8,12 +8,18 @@
 
 package org.eclipse.xtext.generator;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xtext.Grammar;
+
+import com.google.common.io.Files;
 
 /**
  * Base class redirecting call backs to respective Xpand definitions. The template needs to have the same qualified name
@@ -70,5 +76,27 @@ public abstract class AbstractGeneratorFragment extends DefaultGeneratorFragment
 	protected List<Object> getParameters(Grammar grammar) {
 		return Collections.emptyList();
 	}
+
+	/**
+	 * @since 2.7
+	 */
+	protected String readFileIntoString(String filename, Charset encoding) {
+		try {
+			String result = Files.toString(new File(filename), encoding);
+			return result;
+		} catch (IOException e) {
+			throw new WrappedException(e);
+		}
+	}
 	
+	/**
+	 * @since 2.7
+	 */
+	protected void writeStringIntoFile(String filename, String content, Charset encoding) {
+		try {
+			Files.write(content, new File(filename), encoding);
+		} catch (IOException e) {
+			throw new WrappedException(e);
+		}
+	}
 }

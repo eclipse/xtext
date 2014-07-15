@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.ecore;
 
-import static java.util.Collections.*;
 import static org.eclipse.xtext.EcoreUtil2.*;
 import static org.eclipse.xtext.XtextPackage.*;
 
@@ -67,6 +66,7 @@ import org.eclipse.emf.mwe.core.ConfigurationException;
 import org.eclipse.emf.mwe.utils.GenModelHelper;
 import org.eclipse.emf.mwe.utils.Mapping;
 import org.eclipse.emf.mwe2.ecore.CvsIdFilteringGeneratorAdapterFactoryDescriptor;
+import org.eclipse.emf.mwe2.runtime.Mandatory;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xpand2.output.Outlet;
@@ -135,6 +135,22 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 	private boolean longFileNames = false;
 
 	private GenRuntimeVersion emfRuntimeVerison;
+	
+	private String lineDelimiter = Strings.newLine();
+	
+	/**
+	 * @since 2.7
+	 */
+	public String getLineDelimiter() {
+		return lineDelimiter;
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public void setLineDelimiter(String lineDelimiter) {
+		this.lineDelimiter = lineDelimiter;
+	}
 
 	{
 		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("genmodel"))
@@ -169,7 +185,7 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 			}
 		};
 		generator.getAdapterFactoryDescriptorRegistry().addDescriptor(GenModelPackage.eNS_URI,
-				new CvsIdFilteringGeneratorAdapterFactoryDescriptor());
+				new CvsIdFilteringGeneratorAdapterFactoryDescriptor(getLineDelimiter()));
 		genModel.setCanGenerate(true);
 		generator.setInput(genModel);
 		Diagnostic diagnostic = generator.generate(genModel, GenBaseGeneratorAdapter.MODEL_PROJECT_TYPE,
@@ -282,8 +298,9 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 	}
 
 	private void saveResource(Resource resource) throws IOException {
-		Map<String, ToPlatformResourceDeresolvingURIHandler> saveOptions = singletonMap(
-				XMLResource.OPTION_URI_HANDLER, new ToPlatformResourceDeresolvingURIHandler());
+		Map<String, Object> saveOptions = Maps.newHashMap();
+		saveOptions.put(XMLResource.OPTION_URI_HANDLER, new ToPlatformResourceDeresolvingURIHandler());
+		saveOptions.put(Resource.OPTION_LINE_DELIMITER, getLineDelimiter());
 		resource.save(saveOptions);
 	}
 	
@@ -630,6 +647,7 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 			genModel.setComplianceLevel(GenJDKLevel.JDK50_LITERAL);
 			genModel.setRuntimeVersion(emfRuntimeVerison);
 			genModel.setRootExtendsClass("org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container");
+			genModel.setLineDelimiter(getLineDelimiter());
 		}
 		genModelFile.getContents().add(genModel);
 		return genModel;
@@ -946,4 +964,5 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 	public String getFileExtensions() {
 		return fileExtensions;
 	}
+	
 }

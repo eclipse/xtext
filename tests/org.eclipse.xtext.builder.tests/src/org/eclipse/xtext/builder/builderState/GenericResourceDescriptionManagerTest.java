@@ -39,7 +39,7 @@ public class GenericResourceDescriptionManagerTest extends Assert {
 		Resource resource = new XMIResourceImpl(URI.createFileURI("test.ecore"));
 		resource.getContents().add(eClass);
 
-		EPackage copyOfEPackage = (EPackage) EcoreUtil.copy(EcorePackage.eINSTANCE);
+		EPackage copyOfEPackage = EcoreUtil.copy(EcorePackage.eINSTANCE);
 		Resource ecoreResource = new XMIResourceImpl(URI.createURI(copyOfEPackage.getNsURI()));
 		ecoreResource.getContents().add(copyOfEPackage);
 		

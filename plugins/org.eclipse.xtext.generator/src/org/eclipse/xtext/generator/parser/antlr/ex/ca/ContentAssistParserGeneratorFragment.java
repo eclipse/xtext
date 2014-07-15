@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.parser.antlr.ex.ca;
 
+import java.nio.charset.Charset;
 import java.util.Set;
 
 import org.eclipse.xpand2.XpandExecutionContext;
@@ -17,7 +18,6 @@ import org.eclipse.xtext.generator.Generator;
 import org.eclipse.xtext.generator.IGeneratorFragment;
 import org.eclipse.xtext.generator.parser.antlr.ex.common.AbstractAntlrGeneratorFragmentEx;
 import org.eclipse.xtext.generator.parser.antlr.ex.common.KeywordHelper;
-
 
 /**
  * A {@link IGeneratorFragment} to generate a lightweight AntLR based parser used in content assist.
@@ -44,9 +44,11 @@ public class ContentAssistParserGeneratorFragment extends AbstractAntlrGenerator
 		addAntlrParam("-lib");
 		addAntlrParam(libPath);
 		getAntlrTool().runWithEncodingAndParams(absoluteParserFileName, encoding, getAntlrParams());
-		simplifyUnorderedGroupPredicatesIfRequired(grammar, absoluteParserFileName);
-		splitParserAndLexerIfEnabled(absoluteLexerFileName, absoluteParserFileName);
-		suppressWarnings(absoluteLexerFileName, absoluteParserFileName);
+		Charset charset = Charset.forName(encoding);
+		simplifyUnorderedGroupPredicatesIfRequired(grammar, absoluteParserFileName, charset);
+		splitParserAndLexerIfEnabled(absoluteLexerFileName, absoluteParserFileName, charset);
+		suppressWarnings(absoluteLexerFileName, absoluteParserFileName, charset);
+		normalizeLineDelimiters(absoluteLexerFileName, absoluteParserFileName, charset);
 		helper.discardHelper(grammar);
 	}
 

@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.parser;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.List;
 
 import org.eclipse.emf.mwe2.runtime.Mandatory;
@@ -18,8 +19,10 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.Generator;
+import org.eclipse.xtext.generator.NewlineNormalizer;
 import org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment;
 import org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Lists;
 import com.google.common.io.CharStreams;
@@ -47,29 +50,71 @@ public class JFlexGeneratorFragment extends AbstractGeneratorFragment {
 		this.ui = ui;
 	}
 	
+	private String lineDelimiter = Strings.newLine();
+	
+	/**
+	 * @since 2.7
+	 */
+	public String getLineDelimiter() {
+		return lineDelimiter;
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public void setLineDelimiter(String lineDelimiter) {
+		this.lineDelimiter = lineDelimiter;
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	protected String getEncoding(XpandExecutionContext xpt, String outlet) {
+		return xpt.getOutput().getOutlet(outlet).getFileEncoding();
+	}
+	
 	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		final String srcGenPath;
 		final String directory;
 		final String template;
+		final String encoding; 
 		if (!ui) {
 			srcGenPath = ctx.getOutput().getOutlet(Generator.SRC_GEN).getPath();
 			directory = srcGenPath + '/' + getNaming().asPath(getNaming().basePackageRuntime(grammar) + ".parser.antlr.internal");
 			template = getTemplate() + "::generate";
+			encoding = getEncoding(ctx, Generator.SRC_GEN);
 		} else {
 			srcGenPath = ctx.getOutput().getOutlet(Generator.SRC_GEN_UI).getPath();
 			directory = srcGenPath + '/' + getNaming().asPath(getNaming().basePackageUi(grammar) + ".contentassist.antlr.internal");
 			template = getTemplate() + "::generateUI";
+			encoding = getEncoding(ctx, Generator.SRC_GEN_UI);
 		}
 		XpandFacade.create(ctx).evaluate2(template, grammar, getParameters(grammar));
 		String fileName = "Internal" + GrammarUtil.getName(grammar)	+ "Flexer.flex";
+		String javaFileName = directory + "/" + "Internal" + GrammarUtil.getName(grammar) + "Flexer.java";
 		main.runJFlex(new String[] {
 				"-d",
 				directory,
 				directory + "/" + fileName
 		});
+		Charset charset = Charset.forName(encoding);
+		String javaCode = readFileIntoString(javaFileName, charset);
+		javaCode = new NewlineNormalizer(getLineDelimiter()).normalizeLineDelimiters(javaCode);
+		javaCode = removeTimestamps(javaCode);
+		writeStringIntoFile(javaFileName, javaCode, charset);
 	}
 	
+	private String removeTimestamps(String javaCode) {
+		int timestampEnd = javaCode.indexOf("*/");
+		int commentStart = javaCode.indexOf("/*", timestampEnd);
+		String result = javaCode.substring(commentStart);
+		int timestampStart = result.indexOf("* on");
+		timestampEnd = result.indexOf("from the specification file", timestampStart);
+		result = result.substring(0, timestampStart + 2) + result.substring(timestampEnd);
+		return result;
+	}
+
 	public void setPatternPath(String patternPath) {
 		this.patternPath = patternPath;
 	}

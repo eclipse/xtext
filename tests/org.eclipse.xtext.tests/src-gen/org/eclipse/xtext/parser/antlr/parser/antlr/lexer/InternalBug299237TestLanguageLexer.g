@@ -16,9 +16,9 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 
 
 
-KEYWORD_2 : ('M'|'m')('O'|'o')('D'|'d')('E'|'e')('L'|'l');
+Model : ('M'|'m')('O'|'o')('D'|'d')('E'|'e')('L'|'l');
 
-KEYWORD_1 : ';';
+Semicolon : ';';
 
 
 

@@ -25,27 +25,27 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalCodetemplatesParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "KEYWORD_14", "KEYWORD_12", "KEYWORD_13", "KEYWORD_8", "KEYWORD_9", "KEYWORD_10", "KEYWORD_11", "KEYWORD_1", "KEYWORD_2", "KEYWORD_3", "KEYWORD_4", "KEYWORD_5", "KEYWORD_6", "KEYWORD_7", "RULE_ID", "RULE_STRING", "RULE_WS", "RULE_ANY_OTHER"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "Templates", "ReverseSolidusLessThanSignLessThanSign", "For", "DollarSignDollarSign", "DollarSignLeftCurlyBracket", "LessThanSignLessThanSign", "GreaterThanSignGreaterThanSign", "DollarSign", "LeftParenthesis", "RightParenthesis", "Comma", "FullStop", "Colon", "RightCurlyBracket", "RULE_ID", "RULE_STRING", "RULE_WS", "RULE_ANY_OTHER"
     };
     public static final int RULE_ID=18;
+    public static final int DollarSign=11;
+    public static final int ReverseSolidusLessThanSignLessThanSign=5;
+    public static final int RightParenthesis=13;
+    public static final int LessThanSignLessThanSign=9;
     public static final int RULE_ANY_OTHER=21;
-    public static final int KEYWORD_1=11;
-    public static final int KEYWORD_5=15;
-    public static final int KEYWORD_4=14;
-    public static final int KEYWORD_13=6;
-    public static final int KEYWORD_3=13;
-    public static final int KEYWORD_14=4;
-    public static final int KEYWORD_2=12;
-    public static final int KEYWORD_11=10;
+    public static final int LeftParenthesis=12;
+    public static final int Colon=16;
     public static final int EOF=-1;
-    public static final int KEYWORD_12=5;
-    public static final int KEYWORD_10=9;
+    public static final int For=6;
+    public static final int FullStop=15;
+    public static final int DollarSignLeftCurlyBracket=8;
     public static final int RULE_STRING=19;
-    public static final int KEYWORD_6=16;
-    public static final int KEYWORD_7=17;
-    public static final int KEYWORD_8=7;
-    public static final int KEYWORD_9=8;
+    public static final int DollarSignDollarSign=7;
+    public static final int Templates=4;
     public static final int RULE_WS=20;
+    public static final int Comma=14;
+    public static final int GreaterThanSignGreaterThanSign=10;
+    public static final int RightCurlyBracket=17;
 
     // delegates
     // delegators
@@ -70,20 +70,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
      	private final Map<String, String> tokenNameToValue = new HashMap<String, String>();
      	
      	{
-    		tokenNameToValue.put("KEYWORD_1", "'\u0024'");
-    		tokenNameToValue.put("KEYWORD_2", "'('");
-    		tokenNameToValue.put("KEYWORD_3", "')'");
-    		tokenNameToValue.put("KEYWORD_4", "','");
-    		tokenNameToValue.put("KEYWORD_5", "'.'");
-    		tokenNameToValue.put("KEYWORD_6", "':'");
-    		tokenNameToValue.put("KEYWORD_7", "'}'");
-    		tokenNameToValue.put("KEYWORD_8", "'\u0024\u0024'");
-    		tokenNameToValue.put("KEYWORD_9", "'\u0024{'");
-    		tokenNameToValue.put("KEYWORD_10", "'<<'");
-    		tokenNameToValue.put("KEYWORD_11", "'>>'");
-    		tokenNameToValue.put("KEYWORD_12", "'\\<<'");
-    		tokenNameToValue.put("KEYWORD_13", "'for'");
-    		tokenNameToValue.put("KEYWORD_14", "'templates'");
+    		tokenNameToValue.put("DollarSign", "'\u0024'");
+    		tokenNameToValue.put("LeftParenthesis", "'('");
+    		tokenNameToValue.put("RightParenthesis", "')'");
+    		tokenNameToValue.put("Comma", "','");
+    		tokenNameToValue.put("FullStop", "'.'");
+    		tokenNameToValue.put("Colon", "':'");
+    		tokenNameToValue.put("RightCurlyBracket", "'}'");
+    		tokenNameToValue.put("DollarSignDollarSign", "'\u0024\u0024'");
+    		tokenNameToValue.put("DollarSignLeftCurlyBracket", "'\u0024{'");
+    		tokenNameToValue.put("LessThanSignLessThanSign", "'<<'");
+    		tokenNameToValue.put("GreaterThanSignGreaterThanSign", "'>>'");
+    		tokenNameToValue.put("ReverseSolidusLessThanSignLessThanSign", "'\\<<'");
+    		tokenNameToValue.put("For", "'for'");
+    		tokenNameToValue.put("Templates", "'templates'");
      	}
      	
         public void setGrammarAccess(CodetemplatesGrammarAccess grammarAccess) {
@@ -933,7 +933,7 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
                 int alt1=2;
                 int LA1_0 = input.LA(1);
 
-                if ( (LA1_0==KEYWORD_12||LA1_0==RULE_ID||(LA1_0>=RULE_WS && LA1_0<=RULE_ANY_OTHER)) ) {
+                if ( (LA1_0==ReverseSolidusLessThanSignLessThanSign||LA1_0==RULE_ID||(LA1_0>=RULE_WS && LA1_0<=RULE_ANY_OTHER)) ) {
                     alt1=1;
                 }
 
@@ -1078,7 +1078,7 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
             int alt2=2;
             int LA2_0 = input.LA(1);
 
-            if ( (LA2_0==KEYWORD_14||LA2_0==KEYWORD_13||LA2_0==RULE_ID) ) {
+            if ( (LA2_0==Templates||LA2_0==For||LA2_0==RULE_ID) ) {
                 alt2=1;
             }
             else if ( (LA2_0==RULE_STRING) ) {
@@ -1169,10 +1169,10 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
             int alt3=2;
             int LA3_0 = input.LA(1);
 
-            if ( (LA3_0==KEYWORD_9) ) {
+            if ( (LA3_0==DollarSignLeftCurlyBracket) ) {
                 alt3=1;
             }
-            else if ( (LA3_0==KEYWORD_8||LA3_0==KEYWORD_1) ) {
+            else if ( (LA3_0==DollarSignDollarSign||LA3_0==DollarSign) ) {
                 alt3=2;
             }
             else {
@@ -1329,7 +1329,7 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
             if ( (LA5_0==RULE_STRING) ) {
                 alt5=1;
             }
-            else if ( (LA5_0==KEYWORD_14||LA5_0==KEYWORD_13||LA5_0==RULE_ID) ) {
+            else if ( (LA5_0==Templates||LA5_0==For||LA5_0==RULE_ID) ) {
                 alt5=2;
             }
             else {
@@ -1404,7 +1404,7 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
             if ( (LA6_0==RULE_STRING) ) {
                 alt6=1;
             }
-            else if ( (LA6_0==KEYWORD_14||LA6_0==KEYWORD_13||LA6_0==RULE_ID) ) {
+            else if ( (LA6_0==Templates||LA6_0==For||LA6_0==RULE_ID) ) {
                 alt6=2;
             }
             else {
@@ -1466,13 +1466,13 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__ValidID__Alternatives"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:577:1: rule__ValidID__Alternatives : ( ( RULE_ID ) | ( KEYWORD_13 ) | ( KEYWORD_14 ) );
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:577:1: rule__ValidID__Alternatives : ( ( RULE_ID ) | ( For ) | ( Templates ) );
     public final void rule__ValidID__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:581:1: ( ( RULE_ID ) | ( KEYWORD_13 ) | ( KEYWORD_14 ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:581:1: ( ( RULE_ID ) | ( For ) | ( Templates ) )
             int alt7=3;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -1480,12 +1480,12 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
                 alt7=1;
                 }
                 break;
-            case KEYWORD_13:
+            case For:
                 {
                 alt7=2;
                 }
                 break;
-            case KEYWORD_14:
+            case Templates:
                 {
                 alt7=3;
                 }
@@ -1514,13 +1514,13 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:588:6: ( KEYWORD_13 )
+                    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:588:6: ( For )
                     {
-                    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:588:6: ( KEYWORD_13 )
-                    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:589:1: KEYWORD_13
+                    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:588:6: ( For )
+                    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:589:1: For
                     {
                      before(grammarAccess.getValidIDAccess().getForKeyword_1()); 
-                    match(input,KEYWORD_13,FOLLOW_KEYWORD_13_in_rule__ValidID__Alternatives1135); 
+                    match(input,For,FOLLOW_For_in_rule__ValidID__Alternatives1135); 
                      after(grammarAccess.getValidIDAccess().getForKeyword_1()); 
 
                     }
@@ -1529,13 +1529,13 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:596:6: ( KEYWORD_14 )
+                    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:596:6: ( Templates )
                     {
-                    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:596:6: ( KEYWORD_14 )
-                    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:597:1: KEYWORD_14
+                    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:596:6: ( Templates )
+                    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:597:1: Templates
                     {
                      before(grammarAccess.getValidIDAccess().getTemplatesKeyword_2()); 
-                    match(input,KEYWORD_14,FOLLOW_KEYWORD_14_in_rule__ValidID__Alternatives1155); 
+                    match(input,Templates,FOLLOW_Templates_in_rule__ValidID__Alternatives1155); 
                      after(grammarAccess.getValidIDAccess().getTemplatesKeyword_2()); 
 
                     }
@@ -1561,13 +1561,13 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__LiteralValue__Alternatives"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:609:1: rule__LiteralValue__Alternatives : ( ( RULE_WS ) | ( RULE_ANY_OTHER ) | ( RULE_ID ) | ( KEYWORD_12 ) );
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:609:1: rule__LiteralValue__Alternatives : ( ( RULE_WS ) | ( RULE_ANY_OTHER ) | ( RULE_ID ) | ( ReverseSolidusLessThanSignLessThanSign ) );
     public final void rule__LiteralValue__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:613:1: ( ( RULE_WS ) | ( RULE_ANY_OTHER ) | ( RULE_ID ) | ( KEYWORD_12 ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:613:1: ( ( RULE_WS ) | ( RULE_ANY_OTHER ) | ( RULE_ID ) | ( ReverseSolidusLessThanSignLessThanSign ) )
             int alt8=4;
             switch ( input.LA(1) ) {
             case RULE_WS:
@@ -1585,7 +1585,7 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
                 alt8=3;
                 }
                 break;
-            case KEYWORD_12:
+            case ReverseSolidusLessThanSignLessThanSign:
                 {
                 alt8=4;
                 }
@@ -1644,13 +1644,13 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:632:6: ( KEYWORD_12 )
+                    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:632:6: ( ReverseSolidusLessThanSignLessThanSign )
                     {
-                    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:632:6: ( KEYWORD_12 )
-                    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:633:1: KEYWORD_12
+                    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:632:6: ( ReverseSolidusLessThanSignLessThanSign )
+                    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:633:1: ReverseSolidusLessThanSignLessThanSign
                     {
                      before(grammarAccess.getLiteralValueAccess().getReverseSolidusLessThanSignLessThanSignKeyword_3()); 
-                    match(input,KEYWORD_12,FOLLOW_KEYWORD_12_in_rule__LiteralValue__Alternatives1241); 
+                    match(input,ReverseSolidusLessThanSignLessThanSign,FOLLOW_ReverseSolidusLessThanSignLessThanSign_in_rule__LiteralValue__Alternatives1241); 
                      after(grammarAccess.getLiteralValueAccess().getReverseSolidusLessThanSignLessThanSignKeyword_3()); 
 
                     }
@@ -1676,20 +1676,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Dollar__Alternatives_1"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:645:1: rule__Dollar__Alternatives_1 : ( ( ( rule__Dollar__EscapedAssignment_1_0 ) ) | ( KEYWORD_1 ) );
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:645:1: rule__Dollar__Alternatives_1 : ( ( ( rule__Dollar__EscapedAssignment_1_0 ) ) | ( DollarSign ) );
     public final void rule__Dollar__Alternatives_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:649:1: ( ( ( rule__Dollar__EscapedAssignment_1_0 ) ) | ( KEYWORD_1 ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:649:1: ( ( ( rule__Dollar__EscapedAssignment_1_0 ) ) | ( DollarSign ) )
             int alt9=2;
             int LA9_0 = input.LA(1);
 
-            if ( (LA9_0==KEYWORD_8) ) {
+            if ( (LA9_0==DollarSignDollarSign) ) {
                 alt9=1;
             }
-            else if ( (LA9_0==KEYWORD_1) ) {
+            else if ( (LA9_0==DollarSign) ) {
                 alt9=2;
             }
             else {
@@ -1725,13 +1725,13 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:656:6: ( KEYWORD_1 )
+                    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:656:6: ( DollarSign )
                     {
-                    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:656:6: ( KEYWORD_1 )
-                    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:657:1: KEYWORD_1
+                    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:656:6: ( DollarSign )
+                    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:657:1: DollarSign
                     {
                      before(grammarAccess.getDollarAccess().getDollarSignKeyword_1_1()); 
-                    match(input,KEYWORD_1,FOLLOW_KEYWORD_1_in_rule__Dollar__Alternatives_11294); 
+                    match(input,DollarSign,FOLLOW_DollarSign_in_rule__Dollar__Alternatives_11294); 
                      after(grammarAccess.getDollarAccess().getDollarSignKeyword_1_1()); 
 
                     }
@@ -1795,20 +1795,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Codetemplates__Group__0__Impl"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:683:1: rule__Codetemplates__Group__0__Impl : ( KEYWORD_14 ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:683:1: rule__Codetemplates__Group__0__Impl : ( Templates ) ;
     public final void rule__Codetemplates__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:687:1: ( ( KEYWORD_14 ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:688:1: ( KEYWORD_14 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:687:1: ( ( Templates ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:688:1: ( Templates )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:688:1: ( KEYWORD_14 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:689:1: KEYWORD_14
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:688:1: ( Templates )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:689:1: Templates
             {
              before(grammarAccess.getCodetemplatesAccess().getTemplatesKeyword_0()); 
-            match(input,KEYWORD_14,FOLLOW_KEYWORD_14_in_rule__Codetemplates__Group__0__Impl1357); 
+            match(input,Templates,FOLLOW_Templates_in_rule__Codetemplates__Group__0__Impl1357); 
              after(grammarAccess.getCodetemplatesAccess().getTemplatesKeyword_0()); 
 
             }
@@ -1870,20 +1870,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Codetemplates__Group__1__Impl"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:714:1: rule__Codetemplates__Group__1__Impl : ( KEYWORD_13 ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:714:1: rule__Codetemplates__Group__1__Impl : ( For ) ;
     public final void rule__Codetemplates__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:718:1: ( ( KEYWORD_13 ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:719:1: ( KEYWORD_13 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:718:1: ( ( For ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:719:1: ( For )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:719:1: ( KEYWORD_13 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:720:1: KEYWORD_13
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:719:1: ( For )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:720:1: For
             {
              before(grammarAccess.getCodetemplatesAccess().getForKeyword_1()); 
-            match(input,KEYWORD_13,FOLLOW_KEYWORD_13_in_rule__Codetemplates__Group__1__Impl1419); 
+            match(input,For,FOLLOW_For_in_rule__Codetemplates__Group__1__Impl1419); 
              after(grammarAccess.getCodetemplatesAccess().getForKeyword_1()); 
 
             }
@@ -2030,20 +2030,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Codetemplates__Group__3__Impl"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:774:1: rule__Codetemplates__Group__3__Impl : ( KEYWORD_6 ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:774:1: rule__Codetemplates__Group__3__Impl : ( Colon ) ;
     public final void rule__Codetemplates__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:778:1: ( ( KEYWORD_6 ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:779:1: ( KEYWORD_6 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:778:1: ( ( Colon ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:779:1: ( Colon )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:779:1: ( KEYWORD_6 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:780:1: KEYWORD_6
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:779:1: ( Colon )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:780:1: Colon
             {
              before(grammarAccess.getCodetemplatesAccess().getColonKeyword_3()); 
-            match(input,KEYWORD_6,FOLLOW_KEYWORD_6_in_rule__Codetemplates__Group__3__Impl1541); 
+            match(input,Colon,FOLLOW_Colon_in_rule__Codetemplates__Group__3__Impl1541); 
              after(grammarAccess.getCodetemplatesAccess().getColonKeyword_3()); 
 
             }
@@ -2119,7 +2119,7 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
                 int alt10=2;
                 int LA10_0 = input.LA(1);
 
-                if ( (LA10_0==KEYWORD_14||LA10_0==KEYWORD_13||LA10_0==RULE_ID) ) {
+                if ( (LA10_0==Templates||LA10_0==For||LA10_0==RULE_ID) ) {
                     alt10=1;
                 }
 
@@ -2288,20 +2288,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Codetemplate__Group__1__Impl"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:872:1: rule__Codetemplate__Group__1__Impl : ( KEYWORD_2 ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:872:1: rule__Codetemplate__Group__1__Impl : ( LeftParenthesis ) ;
     public final void rule__Codetemplate__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:876:1: ( ( KEYWORD_2 ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:877:1: ( KEYWORD_2 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:876:1: ( ( LeftParenthesis ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:877:1: ( LeftParenthesis )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:877:1: ( KEYWORD_2 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:878:1: KEYWORD_2
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:877:1: ( LeftParenthesis )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:878:1: LeftParenthesis
             {
              before(grammarAccess.getCodetemplateAccess().getLeftParenthesisKeyword_1()); 
-            match(input,KEYWORD_2,FOLLOW_KEYWORD_2_in_rule__Codetemplate__Group__1__Impl1731); 
+            match(input,LeftParenthesis,FOLLOW_LeftParenthesis_in_rule__Codetemplate__Group__1__Impl1731); 
              after(grammarAccess.getCodetemplateAccess().getLeftParenthesisKeyword_1()); 
 
             }
@@ -2448,20 +2448,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Codetemplate__Group__3__Impl"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:932:1: rule__Codetemplate__Group__3__Impl : ( KEYWORD_4 ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:932:1: rule__Codetemplate__Group__3__Impl : ( Comma ) ;
     public final void rule__Codetemplate__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:936:1: ( ( KEYWORD_4 ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:937:1: ( KEYWORD_4 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:936:1: ( ( Comma ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:937:1: ( Comma )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:937:1: ( KEYWORD_4 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:938:1: KEYWORD_4
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:937:1: ( Comma )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:938:1: Comma
             {
              before(grammarAccess.getCodetemplateAccess().getCommaKeyword_3()); 
-            match(input,KEYWORD_4,FOLLOW_KEYWORD_4_in_rule__Codetemplate__Group__3__Impl1853); 
+            match(input,Comma,FOLLOW_Comma_in_rule__Codetemplate__Group__3__Impl1853); 
              after(grammarAccess.getCodetemplateAccess().getCommaKeyword_3()); 
 
             }
@@ -2608,20 +2608,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Codetemplate__Group__5__Impl"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:992:1: rule__Codetemplate__Group__5__Impl : ( KEYWORD_3 ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:992:1: rule__Codetemplate__Group__5__Impl : ( RightParenthesis ) ;
     public final void rule__Codetemplate__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:996:1: ( ( KEYWORD_3 ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:997:1: ( KEYWORD_3 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:996:1: ( ( RightParenthesis ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:997:1: ( RightParenthesis )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:997:1: ( KEYWORD_3 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:998:1: KEYWORD_3
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:997:1: ( RightParenthesis )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:998:1: RightParenthesis
             {
              before(grammarAccess.getCodetemplateAccess().getRightParenthesisKeyword_5()); 
-            match(input,KEYWORD_3,FOLLOW_KEYWORD_3_in_rule__Codetemplate__Group__5__Impl1975); 
+            match(input,RightParenthesis,FOLLOW_RightParenthesis_in_rule__Codetemplate__Group__5__Impl1975); 
              after(grammarAccess.getCodetemplateAccess().getRightParenthesisKeyword_5()); 
 
             }
@@ -2683,20 +2683,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Codetemplate__Group__6__Impl"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1023:1: rule__Codetemplate__Group__6__Impl : ( KEYWORD_13 ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1023:1: rule__Codetemplate__Group__6__Impl : ( For ) ;
     public final void rule__Codetemplate__Group__6__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1027:1: ( ( KEYWORD_13 ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1028:1: ( KEYWORD_13 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1027:1: ( ( For ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1028:1: ( For )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1028:1: ( KEYWORD_13 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1029:1: KEYWORD_13
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1028:1: ( For )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1029:1: For
             {
              before(grammarAccess.getCodetemplateAccess().getForKeyword_6()); 
-            match(input,KEYWORD_13,FOLLOW_KEYWORD_13_in_rule__Codetemplate__Group__6__Impl2037); 
+            match(input,For,FOLLOW_For_in_rule__Codetemplate__Group__6__Impl2037); 
              after(grammarAccess.getCodetemplateAccess().getForKeyword_6()); 
 
             }
@@ -3015,20 +3015,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__TemplateBodyWithQuotes__Group__1__Impl"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1158:1: rule__TemplateBodyWithQuotes__Group__1__Impl : ( KEYWORD_11 ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1158:1: rule__TemplateBodyWithQuotes__Group__1__Impl : ( GreaterThanSignGreaterThanSign ) ;
     public final void rule__TemplateBodyWithQuotes__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1162:1: ( ( KEYWORD_11 ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1163:1: ( KEYWORD_11 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1162:1: ( ( GreaterThanSignGreaterThanSign ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1163:1: ( GreaterThanSignGreaterThanSign )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1163:1: ( KEYWORD_11 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1164:1: KEYWORD_11
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1163:1: ( GreaterThanSignGreaterThanSign )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1164:1: GreaterThanSignGreaterThanSign
             {
              before(grammarAccess.getTemplateBodyWithQuotesAccess().getGreaterThanSignGreaterThanSignKeyword_1()); 
-            match(input,KEYWORD_11,FOLLOW_KEYWORD_11_in_rule__TemplateBodyWithQuotes__Group__1__Impl2296); 
+            match(input,GreaterThanSignGreaterThanSign,FOLLOW_GreaterThanSignGreaterThanSign_in_rule__TemplateBodyWithQuotes__Group__1__Impl2296); 
              after(grammarAccess.getTemplateBodyWithQuotesAccess().getGreaterThanSignGreaterThanSignKeyword_1()); 
 
             }
@@ -3164,20 +3164,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__TemplateBodyWithQuotes__Group__3__Impl"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1217:1: rule__TemplateBodyWithQuotes__Group__3__Impl : ( KEYWORD_10 ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1217:1: rule__TemplateBodyWithQuotes__Group__3__Impl : ( LessThanSignLessThanSign ) ;
     public final void rule__TemplateBodyWithQuotes__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1221:1: ( ( KEYWORD_10 ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1222:1: ( KEYWORD_10 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1221:1: ( ( LessThanSignLessThanSign ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1222:1: ( LessThanSignLessThanSign )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1222:1: ( KEYWORD_10 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1223:1: KEYWORD_10
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1222:1: ( LessThanSignLessThanSign )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1223:1: LessThanSignLessThanSign
             {
              before(grammarAccess.getTemplateBodyWithQuotesAccess().getLessThanSignLessThanSignKeyword_3()); 
-            match(input,KEYWORD_10,FOLLOW_KEYWORD_10_in_rule__TemplateBodyWithQuotes__Group__3__Impl2414); 
+            match(input,LessThanSignLessThanSign,FOLLOW_LessThanSignLessThanSign_in_rule__TemplateBodyWithQuotes__Group__3__Impl2414); 
              after(grammarAccess.getTemplateBodyWithQuotesAccess().getLessThanSignLessThanSignKeyword_3()); 
 
             }
@@ -3331,7 +3331,7 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
             int alt12=2;
             int LA12_0 = input.LA(1);
 
-            if ( (LA12_0==KEYWORD_12||LA12_0==RULE_ID||(LA12_0>=RULE_WS && LA12_0<=RULE_ANY_OTHER)) ) {
+            if ( (LA12_0==ReverseSolidusLessThanSignLessThanSign||LA12_0==RULE_ID||(LA12_0>=RULE_WS && LA12_0<=RULE_ANY_OTHER)) ) {
                 alt12=1;
             }
             switch (alt12) {
@@ -3424,7 +3424,7 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
                 int alt13=2;
                 int LA13_0 = input.LA(1);
 
-                if ( ((LA13_0>=KEYWORD_8 && LA13_0<=KEYWORD_9)||LA13_0==KEYWORD_1) ) {
+                if ( ((LA13_0>=DollarSignDollarSign && LA13_0<=DollarSignLeftCurlyBracket)||LA13_0==DollarSign) ) {
                     alt13=1;
                 }
 
@@ -3605,7 +3605,7 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
             int alt14=2;
             int LA14_0 = input.LA(1);
 
-            if ( (LA14_0==KEYWORD_12||LA14_0==RULE_ID||(LA14_0>=RULE_WS && LA14_0<=RULE_ANY_OTHER)) ) {
+            if ( (LA14_0==ReverseSolidusLessThanSignLessThanSign||LA14_0==RULE_ID||(LA14_0>=RULE_WS && LA14_0<=RULE_ANY_OTHER)) ) {
                 alt14=1;
             }
             switch (alt14) {
@@ -3684,20 +3684,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Variable__Group__0__Impl"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1411:1: rule__Variable__Group__0__Impl : ( KEYWORD_9 ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1411:1: rule__Variable__Group__0__Impl : ( DollarSignLeftCurlyBracket ) ;
     public final void rule__Variable__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1415:1: ( ( KEYWORD_9 ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1416:1: ( KEYWORD_9 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1415:1: ( ( DollarSignLeftCurlyBracket ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1416:1: ( DollarSignLeftCurlyBracket )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1416:1: ( KEYWORD_9 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1417:1: KEYWORD_9
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1416:1: ( DollarSignLeftCurlyBracket )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1417:1: DollarSignLeftCurlyBracket
             {
              before(grammarAccess.getVariableAccess().getDollarSignLeftCurlyBracketKeyword_0()); 
-            match(input,KEYWORD_9,FOLLOW_KEYWORD_9_in_rule__Variable__Group__0__Impl2792); 
+            match(input,DollarSignLeftCurlyBracket,FOLLOW_DollarSignLeftCurlyBracket_in_rule__Variable__Group__0__Impl2792); 
              after(grammarAccess.getVariableAccess().getDollarSignLeftCurlyBracketKeyword_0()); 
 
             }
@@ -4037,20 +4037,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Variable__Group__4__Impl"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1528:1: rule__Variable__Group__4__Impl : ( KEYWORD_7 ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1528:1: rule__Variable__Group__4__Impl : ( RightCurlyBracket ) ;
     public final void rule__Variable__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1532:1: ( ( KEYWORD_7 ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1533:1: ( KEYWORD_7 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1532:1: ( ( RightCurlyBracket ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1533:1: ( RightCurlyBracket )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1533:1: ( KEYWORD_7 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1534:1: KEYWORD_7
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1533:1: ( RightCurlyBracket )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1534:1: RightCurlyBracket
             {
              before(grammarAccess.getVariableAccess().getRightCurlyBracketKeyword_4()); 
-            match(input,KEYWORD_7,FOLLOW_KEYWORD_7_in_rule__Variable__Group__4__Impl3035); 
+            match(input,RightCurlyBracket,FOLLOW_RightCurlyBracket_in_rule__Variable__Group__4__Impl3035); 
              after(grammarAccess.getVariableAccess().getRightCurlyBracketKeyword_4()); 
 
             }
@@ -4129,7 +4129,7 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
             int alt17=2;
             int LA17_0 = input.LA(1);
 
-            if ( (LA17_0==KEYWORD_14||LA17_0==KEYWORD_13||LA17_0==RULE_ID) ) {
+            if ( (LA17_0==Templates||LA17_0==For||LA17_0==RULE_ID) ) {
                 alt17=1;
             }
             switch (alt17) {
@@ -4208,20 +4208,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Variable__Group_2_1__1__Impl"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1598:1: rule__Variable__Group_2_1__1__Impl : ( KEYWORD_6 ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1598:1: rule__Variable__Group_2_1__1__Impl : ( Colon ) ;
     public final void rule__Variable__Group_2_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1602:1: ( ( KEYWORD_6 ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1603:1: ( KEYWORD_6 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1602:1: ( ( Colon ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1603:1: ( Colon )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1603:1: ( KEYWORD_6 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1604:1: KEYWORD_6
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1603:1: ( Colon )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1604:1: Colon
             {
              before(grammarAccess.getVariableAccess().getColonKeyword_2_1_1()); 
-            match(input,KEYWORD_6,FOLLOW_KEYWORD_6_in_rule__Variable__Group_2_1__1__Impl3168); 
+            match(input,Colon,FOLLOW_Colon_in_rule__Variable__Group_2_1__1__Impl3168); 
              after(grammarAccess.getVariableAccess().getColonKeyword_2_1_1()); 
 
             }
@@ -5033,7 +5033,7 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
             int alt23=2;
             int LA23_0 = input.LA(1);
 
-            if ( (LA23_0==KEYWORD_14||LA23_0==KEYWORD_13||(LA23_0>=RULE_ID && LA23_0<=RULE_STRING)) ) {
+            if ( (LA23_0==Templates||LA23_0==For||(LA23_0>=RULE_ID && LA23_0<=RULE_STRING)) ) {
                 alt23=1;
             }
             switch (alt23) {
@@ -5107,20 +5107,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4__4__Impl"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1901:1: rule__Variable__Group_2_1_4__4__Impl : ( KEYWORD_3 ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1901:1: rule__Variable__Group_2_1_4__4__Impl : ( RightParenthesis ) ;
     public final void rule__Variable__Group_2_1_4__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1905:1: ( ( KEYWORD_3 ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1906:1: ( KEYWORD_3 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1905:1: ( ( RightParenthesis ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1906:1: ( RightParenthesis )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1906:1: ( KEYWORD_3 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1907:1: KEYWORD_3
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1906:1: ( RightParenthesis )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:1907:1: RightParenthesis
             {
              before(grammarAccess.getVariableAccess().getRightParenthesisKeyword_2_1_4_4()); 
-            match(input,KEYWORD_3,FOLLOW_KEYWORD_3_in_rule__Variable__Group_2_1_4__4__Impl3785); 
+            match(input,RightParenthesis,FOLLOW_RightParenthesis_in_rule__Variable__Group_2_1_4__4__Impl3785); 
              after(grammarAccess.getVariableAccess().getRightParenthesisKeyword_2_1_4_4()); 
 
             }
@@ -5557,20 +5557,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4_3_1__1__Impl"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2063:1: rule__Variable__Group_2_1_4_3_1__1__Impl : ( KEYWORD_4 ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2063:1: rule__Variable__Group_2_1_4_3_1__1__Impl : ( Comma ) ;
     public final void rule__Variable__Group_2_1_4_3_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2067:1: ( ( KEYWORD_4 ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2068:1: ( KEYWORD_4 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2067:1: ( ( Comma ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2068:1: ( Comma )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2068:1: ( KEYWORD_4 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2069:1: KEYWORD_4
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2068:1: ( Comma )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2069:1: Comma
             {
              before(grammarAccess.getVariableAccess().getCommaKeyword_2_1_4_3_1_1()); 
-            match(input,KEYWORD_4,FOLLOW_KEYWORD_4_in_rule__Variable__Group_2_1_4_3_1__1__Impl4105); 
+            match(input,Comma,FOLLOW_Comma_in_rule__Variable__Group_2_1_4_3_1__1__Impl4105); 
              after(grammarAccess.getVariableAccess().getCommaKeyword_2_1_4_3_1_1()); 
 
             }
@@ -5904,7 +5904,7 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
                 int alt28=2;
                 int LA28_0 = input.LA(1);
 
-                if ( (LA28_0==KEYWORD_5) ) {
+                if ( (LA28_0==FullStop) ) {
                     alt28=1;
                 }
 
@@ -5988,20 +5988,20 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__FQN__Group_1__0__Impl"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2220:1: rule__FQN__Group_1__0__Impl : ( KEYWORD_5 ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2220:1: rule__FQN__Group_1__0__Impl : ( FullStop ) ;
     public final void rule__FQN__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2224:1: ( ( KEYWORD_5 ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2225:1: ( KEYWORD_5 )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2224:1: ( ( FullStop ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2225:1: ( FullStop )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2225:1: ( KEYWORD_5 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2226:1: KEYWORD_5
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2225:1: ( FullStop )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2226:1: FullStop
             {
              before(grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
-            match(input,KEYWORD_5,FOLLOW_KEYWORD_5_in_rule__FQN__Group_1__0__Impl4415); 
+            match(input,FullStop,FOLLOW_FullStop_in_rule__FQN__Group_1__0__Impl4415); 
              after(grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
 
             }
@@ -6832,24 +6832,24 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Variable__ExpectingParametersAssignment_2_1_4_1"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2553:1: rule__Variable__ExpectingParametersAssignment_2_1_4_1 : ( ( KEYWORD_2 ) ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2553:1: rule__Variable__ExpectingParametersAssignment_2_1_4_1 : ( ( LeftParenthesis ) ) ;
     public final void rule__Variable__ExpectingParametersAssignment_2_1_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2557:1: ( ( ( KEYWORD_2 ) ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2558:1: ( ( KEYWORD_2 ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2557:1: ( ( ( LeftParenthesis ) ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2558:1: ( ( LeftParenthesis ) )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2558:1: ( ( KEYWORD_2 ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2559:1: ( KEYWORD_2 )
-            {
-             before(grammarAccess.getVariableAccess().getExpectingParametersLeftParenthesisKeyword_2_1_4_1_0()); 
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2560:1: ( KEYWORD_2 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2561:1: KEYWORD_2
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2558:1: ( ( LeftParenthesis ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2559:1: ( LeftParenthesis )
             {
              before(grammarAccess.getVariableAccess().getExpectingParametersLeftParenthesisKeyword_2_1_4_1_0()); 
-            match(input,KEYWORD_2,FOLLOW_KEYWORD_2_in_rule__Variable__ExpectingParametersAssignment_2_1_4_15088); 
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2560:1: ( LeftParenthesis )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2561:1: LeftParenthesis
+            {
+             before(grammarAccess.getVariableAccess().getExpectingParametersLeftParenthesisKeyword_2_1_4_1_0()); 
+            match(input,LeftParenthesis,FOLLOW_LeftParenthesis_in_rule__Variable__ExpectingParametersAssignment_2_1_4_15088); 
              after(grammarAccess.getVariableAccess().getExpectingParametersLeftParenthesisKeyword_2_1_4_1_0()); 
 
             }
@@ -7012,24 +7012,24 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__Dollar__EscapedAssignment_1_0"
-    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2623:1: rule__Dollar__EscapedAssignment_1_0 : ( ( KEYWORD_8 ) ) ;
+    // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2623:1: rule__Dollar__EscapedAssignment_1_0 : ( ( DollarSignDollarSign ) ) ;
     public final void rule__Dollar__EscapedAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2627:1: ( ( ( KEYWORD_8 ) ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2628:1: ( ( KEYWORD_8 ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2627:1: ( ( ( DollarSignDollarSign ) ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2628:1: ( ( DollarSignDollarSign ) )
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2628:1: ( ( KEYWORD_8 ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2629:1: ( KEYWORD_8 )
-            {
-             before(grammarAccess.getDollarAccess().getEscapedDollarSignDollarSignKeyword_1_0_0()); 
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2630:1: ( KEYWORD_8 )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2631:1: KEYWORD_8
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2628:1: ( ( DollarSignDollarSign ) )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2629:1: ( DollarSignDollarSign )
             {
              before(grammarAccess.getDollarAccess().getEscapedDollarSignDollarSignKeyword_1_0_0()); 
-            match(input,KEYWORD_8,FOLLOW_KEYWORD_8_in_rule__Dollar__EscapedAssignment_1_05229); 
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2630:1: ( DollarSignDollarSign )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/internal/InternalCodetemplatesParser.g:2631:1: DollarSignDollarSign
+            {
+             before(grammarAccess.getDollarAccess().getEscapedDollarSignDollarSignKeyword_1_0_0()); 
+            match(input,DollarSignDollarSign,FOLLOW_DollarSignDollarSign_in_rule__Dollar__EscapedAssignment_1_05229); 
              after(grammarAccess.getDollarAccess().getEscapedDollarSignDollarSignKeyword_1_0_0()); 
 
             }
@@ -7267,26 +7267,26 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
     public static final BitSet FOLLOW_RULE_STRING_in_rule__Variable__ParametersAlternatives_2_1_4_3_1_3_01068 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleFQN_in_rule__Variable__ParametersAlternatives_2_1_4_3_1_3_01085 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__ValidID__Alternatives1117 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_13_in_rule__ValidID__Alternatives1135 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_14_in_rule__ValidID__Alternatives1155 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_For_in_rule__ValidID__Alternatives1135 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_Templates_in_rule__ValidID__Alternatives1155 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_WS_in_rule__LiteralValue__Alternatives1189 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ANY_OTHER_in_rule__LiteralValue__Alternatives1206 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__LiteralValue__Alternatives1223 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_12_in_rule__LiteralValue__Alternatives1241 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ReverseSolidusLessThanSignLessThanSign_in_rule__LiteralValue__Alternatives1241 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Dollar__EscapedAssignment_1_0_in_rule__Dollar__Alternatives_11275 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_1_in_rule__Dollar__Alternatives_11294 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_DollarSign_in_rule__Dollar__Alternatives_11294 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Codetemplates__Group__0__Impl_in_rule__Codetemplates__Group__01326 = new BitSet(new long[]{0x0000000000000040L});
     public static final BitSet FOLLOW_rule__Codetemplates__Group__1_in_rule__Codetemplates__Group__01329 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_14_in_rule__Codetemplates__Group__0__Impl1357 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_Templates_in_rule__Codetemplates__Group__0__Impl1357 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Codetemplates__Group__1__Impl_in_rule__Codetemplates__Group__11388 = new BitSet(new long[]{0x0000000000040050L});
     public static final BitSet FOLLOW_rule__Codetemplates__Group__2_in_rule__Codetemplates__Group__11391 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_13_in_rule__Codetemplates__Group__1__Impl1419 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_For_in_rule__Codetemplates__Group__1__Impl1419 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Codetemplates__Group__2__Impl_in_rule__Codetemplates__Group__21450 = new BitSet(new long[]{0x0000000000010000L});
     public static final BitSet FOLLOW_rule__Codetemplates__Group__3_in_rule__Codetemplates__Group__21453 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Codetemplates__LanguageAssignment_2_in_rule__Codetemplates__Group__2__Impl1480 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Codetemplates__Group__3__Impl_in_rule__Codetemplates__Group__31510 = new BitSet(new long[]{0x0000000000040050L});
     public static final BitSet FOLLOW_rule__Codetemplates__Group__4_in_rule__Codetemplates__Group__31513 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_6_in_rule__Codetemplates__Group__3__Impl1541 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_Colon_in_rule__Codetemplates__Group__3__Impl1541 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Codetemplates__Group__4__Impl_in_rule__Codetemplates__Group__41572 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Codetemplates__TemplatesAssignment_4_in_rule__Codetemplates__Group__4__Impl1599 = new BitSet(new long[]{0x0000000000040052L});
     public static final BitSet FOLLOW_rule__Codetemplate__Group__0__Impl_in_rule__Codetemplate__Group__01640 = new BitSet(new long[]{0x0000000000001000L});
@@ -7294,22 +7294,22 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
     public static final BitSet FOLLOW_rule__Codetemplate__NameAssignment_0_in_rule__Codetemplate__Group__0__Impl1670 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Codetemplate__Group__1__Impl_in_rule__Codetemplate__Group__11700 = new BitSet(new long[]{0x0000000000040000L});
     public static final BitSet FOLLOW_rule__Codetemplate__Group__2_in_rule__Codetemplate__Group__11703 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_2_in_rule__Codetemplate__Group__1__Impl1731 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_LeftParenthesis_in_rule__Codetemplate__Group__1__Impl1731 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Codetemplate__Group__2__Impl_in_rule__Codetemplate__Group__21762 = new BitSet(new long[]{0x0000000000004000L});
     public static final BitSet FOLLOW_rule__Codetemplate__Group__3_in_rule__Codetemplate__Group__21765 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Codetemplate__IdAssignment_2_in_rule__Codetemplate__Group__2__Impl1792 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Codetemplate__Group__3__Impl_in_rule__Codetemplate__Group__31822 = new BitSet(new long[]{0x0000000000080000L});
     public static final BitSet FOLLOW_rule__Codetemplate__Group__4_in_rule__Codetemplate__Group__31825 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_4_in_rule__Codetemplate__Group__3__Impl1853 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_Comma_in_rule__Codetemplate__Group__3__Impl1853 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Codetemplate__Group__4__Impl_in_rule__Codetemplate__Group__41884 = new BitSet(new long[]{0x0000000000002000L});
     public static final BitSet FOLLOW_rule__Codetemplate__Group__5_in_rule__Codetemplate__Group__41887 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Codetemplate__DescriptionAssignment_4_in_rule__Codetemplate__Group__4__Impl1914 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Codetemplate__Group__5__Impl_in_rule__Codetemplate__Group__51944 = new BitSet(new long[]{0x0000000000000040L});
     public static final BitSet FOLLOW_rule__Codetemplate__Group__6_in_rule__Codetemplate__Group__51947 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_3_in_rule__Codetemplate__Group__5__Impl1975 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RightParenthesis_in_rule__Codetemplate__Group__5__Impl1975 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Codetemplate__Group__6__Impl_in_rule__Codetemplate__Group__62006 = new BitSet(new long[]{0x00000000000C0050L});
     public static final BitSet FOLLOW_rule__Codetemplate__Group__7_in_rule__Codetemplate__Group__62009 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_13_in_rule__Codetemplate__Group__6__Impl2037 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_For_in_rule__Codetemplate__Group__6__Impl2037 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Codetemplate__Group__7__Impl_in_rule__Codetemplate__Group__72068 = new BitSet(new long[]{0x0000000000100400L});
     public static final BitSet FOLLOW_rule__Codetemplate__Group__8_in_rule__Codetemplate__Group__72071 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Codetemplate__Alternatives_7_in_rule__Codetemplate__Group__7__Impl2098 = new BitSet(new long[]{0x0000000000000002L});
@@ -7320,12 +7320,12 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
     public static final BitSet FOLLOW_RULE_WS_in_rule__TemplateBodyWithQuotes__Group__0__Impl2234 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__TemplateBodyWithQuotes__Group__1__Impl_in_rule__TemplateBodyWithQuotes__Group__12265 = new BitSet(new long[]{0x00000000003409A0L});
     public static final BitSet FOLLOW_rule__TemplateBodyWithQuotes__Group__2_in_rule__TemplateBodyWithQuotes__Group__12268 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_11_in_rule__TemplateBodyWithQuotes__Group__1__Impl2296 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_GreaterThanSignGreaterThanSign_in_rule__TemplateBodyWithQuotes__Group__1__Impl2296 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__TemplateBodyWithQuotes__Group__2__Impl_in_rule__TemplateBodyWithQuotes__Group__22327 = new BitSet(new long[]{0x0000000000000200L});
     public static final BitSet FOLLOW_rule__TemplateBodyWithQuotes__Group__3_in_rule__TemplateBodyWithQuotes__Group__22330 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleTemplateBody_in_rule__TemplateBodyWithQuotes__Group__2__Impl2357 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__TemplateBodyWithQuotes__Group__3__Impl_in_rule__TemplateBodyWithQuotes__Group__32386 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_10_in_rule__TemplateBodyWithQuotes__Group__3__Impl2414 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_LessThanSignLessThanSign_in_rule__TemplateBodyWithQuotes__Group__3__Impl2414 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__TemplateBody__Group__0__Impl_in_rule__TemplateBody__Group__02453 = new BitSet(new long[]{0x00000000003409A0L});
     public static final BitSet FOLLOW_rule__TemplateBody__Group__1_in_rule__TemplateBody__Group__02456 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__TemplateBody__Group__1__Impl_in_rule__TemplateBody__Group__12514 = new BitSet(new long[]{0x00000000003409A0L});
@@ -7340,7 +7340,7 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
     public static final BitSet FOLLOW_rule__TemplateBody__PartsAssignment_2_1_in_rule__TemplateBody__Group_2__1__Impl2726 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Variable__Group__0__Impl_in_rule__Variable__Group__02761 = new BitSet(new long[]{0x0000000000150050L});
     public static final BitSet FOLLOW_rule__Variable__Group__1_in_rule__Variable__Group__02764 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_9_in_rule__Variable__Group__0__Impl2792 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_DollarSignLeftCurlyBracket_in_rule__Variable__Group__0__Impl2792 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Variable__Group__1__Impl_in_rule__Variable__Group__12823 = new BitSet(new long[]{0x0000000000150050L});
     public static final BitSet FOLLOW_rule__Variable__Group__2_in_rule__Variable__Group__12826 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_WS_in_rule__Variable__Group__1__Impl2854 = new BitSet(new long[]{0x0000000000100002L});
@@ -7351,13 +7351,13 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
     public static final BitSet FOLLOW_rule__Variable__Group__4_in_rule__Variable__Group__32948 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_WS_in_rule__Variable__Group__3__Impl2976 = new BitSet(new long[]{0x0000000000100002L});
     public static final BitSet FOLLOW_rule__Variable__Group__4__Impl_in_rule__Variable__Group__43007 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_7_in_rule__Variable__Group__4__Impl3035 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RightCurlyBracket_in_rule__Variable__Group__4__Impl3035 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Variable__Group_2_1__0__Impl_in_rule__Variable__Group_2_1__03076 = new BitSet(new long[]{0x0000000000150050L});
     public static final BitSet FOLLOW_rule__Variable__Group_2_1__1_in_rule__Variable__Group_2_1__03079 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Variable__Group_2_1_0__0_in_rule__Variable__Group_2_1__0__Impl3106 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Variable__Group_2_1__1__Impl_in_rule__Variable__Group_2_1__13137 = new BitSet(new long[]{0x0000000000140050L});
     public static final BitSet FOLLOW_rule__Variable__Group_2_1__2_in_rule__Variable__Group_2_1__13140 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_6_in_rule__Variable__Group_2_1__1__Impl3168 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_Colon_in_rule__Variable__Group_2_1__1__Impl3168 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Variable__Group_2_1__2__Impl_in_rule__Variable__Group_2_1__23199 = new BitSet(new long[]{0x0000000000140050L});
     public static final BitSet FOLLOW_rule__Variable__Group_2_1__3_in_rule__Variable__Group_2_1__23202 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_WS_in_rule__Variable__Group_2_1__2__Impl3230 = new BitSet(new long[]{0x0000000000100002L});
@@ -7384,7 +7384,7 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
     public static final BitSet FOLLOW_rule__Variable__Group_2_1_4__4_in_rule__Variable__Group_2_1_4__33699 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Variable__Group_2_1_4_3__0_in_rule__Variable__Group_2_1_4__3__Impl3726 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Variable__Group_2_1_4__4__Impl_in_rule__Variable__Group_2_1_4__43757 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_3_in_rule__Variable__Group_2_1_4__4__Impl3785 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RightParenthesis_in_rule__Variable__Group_2_1_4__4__Impl3785 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Variable__Group_2_1_4_3__0__Impl_in_rule__Variable__Group_2_1_4_3__03826 = new BitSet(new long[]{0x0000000000104000L});
     public static final BitSet FOLLOW_rule__Variable__Group_2_1_4_3__1_in_rule__Variable__Group_2_1_4_3__03829 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Variable__ParametersAssignment_2_1_4_3_0_in_rule__Variable__Group_2_1_4_3__0__Impl3856 = new BitSet(new long[]{0x0000000000000002L});
@@ -7398,7 +7398,7 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
     public static final BitSet FOLLOW_RULE_WS_in_rule__Variable__Group_2_1_4_3_1__0__Impl4043 = new BitSet(new long[]{0x0000000000100002L});
     public static final BitSet FOLLOW_rule__Variable__Group_2_1_4_3_1__1__Impl_in_rule__Variable__Group_2_1_4_3_1__14074 = new BitSet(new long[]{0x00000000001C0050L});
     public static final BitSet FOLLOW_rule__Variable__Group_2_1_4_3_1__2_in_rule__Variable__Group_2_1_4_3_1__14077 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_4_in_rule__Variable__Group_2_1_4_3_1__1__Impl4105 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_Comma_in_rule__Variable__Group_2_1_4_3_1__1__Impl4105 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Variable__Group_2_1_4_3_1__2__Impl_in_rule__Variable__Group_2_1_4_3_1__24136 = new BitSet(new long[]{0x00000000001C0050L});
     public static final BitSet FOLLOW_rule__Variable__Group_2_1_4_3_1__3_in_rule__Variable__Group_2_1_4_3_1__24139 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_WS_in_rule__Variable__Group_2_1_4_3_1__2__Impl4167 = new BitSet(new long[]{0x0000000000100002L});
@@ -7411,7 +7411,7 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
     public static final BitSet FOLLOW_rule__FQN__Group_1__0_in_rule__FQN__Group__1__Impl4349 = new BitSet(new long[]{0x0000000000008002L});
     public static final BitSet FOLLOW_rule__FQN__Group_1__0__Impl_in_rule__FQN__Group_1__04384 = new BitSet(new long[]{0x0000000000040050L});
     public static final BitSet FOLLOW_rule__FQN__Group_1__1_in_rule__FQN__Group_1__04387 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_5_in_rule__FQN__Group_1__0__Impl4415 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_FullStop_in_rule__FQN__Group_1__0__Impl4415 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FQN__Group_1__1__Impl_in_rule__FQN__Group_1__14446 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleValidID_in_rule__FQN__Group_1__1__Impl4473 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Dollar__Group__0__Impl_in_rule__Dollar__Group__04506 = new BitSet(new long[]{0x0000000000000980L});
@@ -7432,10 +7432,10 @@ public class InternalCodetemplatesParser extends AbstractInternalContentAssistPa
     public static final BitSet FOLLOW_ruleValidID_in_rule__Variable__NameAssignment_2_04990 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleValidID_in_rule__Variable__NameAssignment_2_1_0_05021 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleValidID_in_rule__Variable__TypeAssignment_2_1_35052 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_2_in_rule__Variable__ExpectingParametersAssignment_2_1_4_15088 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_LeftParenthesis_in_rule__Variable__ExpectingParametersAssignment_2_1_4_15088 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Variable__ParametersAlternatives_2_1_4_3_0_0_in_rule__Variable__ParametersAssignment_2_1_4_3_05127 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0_in_rule__Variable__ParametersAssignment_2_1_4_3_1_35160 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleLiteralValue_in_rule__Literal__ValueAssignment5193 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_8_in_rule__Dollar__EscapedAssignment_1_05229 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_DollarSignDollarSign_in_rule__Dollar__EscapedAssignment_1_05229 = new BitSet(new long[]{0x0000000000000002L});
 
 }

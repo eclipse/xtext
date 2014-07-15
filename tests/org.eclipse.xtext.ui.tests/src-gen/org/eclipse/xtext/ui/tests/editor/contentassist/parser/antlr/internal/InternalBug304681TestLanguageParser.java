@@ -7340,11 +7340,9 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
     static final String DFA7_eofS =
         "\24\uffff";
     static final String DFA7_minS =
-        "\1\24\1\uffff\4\4\1\16\1\4\1\16\1\0\1\24\1\0\1\uffff\2\5\1\0\2\16"+
-        "\2\24";
+        "\1\24\1\uffff\4\4\1\16\1\4\1\16\1\0\1\24\1\0\1\uffff\2\5\1\0\2\16\2\24";
     static final String DFA7_maxS =
-        "\1\36\1\uffff\3\4\1\37\1\16\1\4\1\23\1\0\1\34\1\0\1\uffff\2\5\1"+
-        "\0\2\16\2\34";
+        "\1\36\1\uffff\3\4\1\37\1\16\1\4\1\23\1\0\1\34\1\0\1\uffff\2\5\1\0\2\16\2\34";
     static final String DFA7_acceptS =
         "\1\uffff\1\2\12\uffff\1\1\7\uffff";
     static final String DFA7_specialS =
@@ -7466,11 +7464,9 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
     static final String DFA8_eofS =
         "\24\uffff";
     static final String DFA8_minS =
-        "\1\24\1\uffff\4\4\1\16\1\4\1\16\1\0\1\24\1\0\1\uffff\2\5\1\0\2\16"+
-        "\2\24";
+        "\1\24\1\uffff\4\4\1\16\1\4\1\16\1\0\1\24\1\0\1\uffff\2\5\1\0\2\16\2\24";
     static final String DFA8_maxS =
-        "\1\36\1\uffff\3\4\1\37\1\16\1\4\1\23\1\0\1\34\1\0\1\uffff\2\5\1"+
-        "\0\2\16\2\34";
+        "\1\36\1\uffff\3\4\1\37\1\16\1\4\1\23\1\0\1\34\1\0\1\uffff\2\5\1\0\2\16\2\34";
     static final String DFA8_acceptS =
         "\1\uffff\1\2\12\uffff\1\1\7\uffff";
     static final String DFA8_specialS =

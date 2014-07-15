@@ -36,20 +36,20 @@ import org.eclipse.xtext.ui.codetemplates.services.CodetemplatesGrammarAccess;
  	private final Map<String, String> tokenNameToValue = new HashMap<String, String>();
  	
  	{
-		tokenNameToValue.put("KEYWORD_1", "'\u0024'");
-		tokenNameToValue.put("KEYWORD_2", "'('");
-		tokenNameToValue.put("KEYWORD_3", "')'");
-		tokenNameToValue.put("KEYWORD_4", "','");
-		tokenNameToValue.put("KEYWORD_5", "'.'");
-		tokenNameToValue.put("KEYWORD_6", "':'");
-		tokenNameToValue.put("KEYWORD_7", "'}'");
-		tokenNameToValue.put("KEYWORD_8", "'\u0024\u0024'");
-		tokenNameToValue.put("KEYWORD_9", "'\u0024{'");
-		tokenNameToValue.put("KEYWORD_10", "'<<'");
-		tokenNameToValue.put("KEYWORD_11", "'>>'");
-		tokenNameToValue.put("KEYWORD_12", "'\\<<'");
-		tokenNameToValue.put("KEYWORD_13", "'for'");
-		tokenNameToValue.put("KEYWORD_14", "'templates'");
+		tokenNameToValue.put("DollarSign", "'\u0024'");
+		tokenNameToValue.put("LeftParenthesis", "'('");
+		tokenNameToValue.put("RightParenthesis", "')'");
+		tokenNameToValue.put("Comma", "','");
+		tokenNameToValue.put("FullStop", "'.'");
+		tokenNameToValue.put("Colon", "':'");
+		tokenNameToValue.put("RightCurlyBracket", "'}'");
+		tokenNameToValue.put("DollarSignDollarSign", "'\u0024\u0024'");
+		tokenNameToValue.put("DollarSignLeftCurlyBracket", "'\u0024{'");
+		tokenNameToValue.put("LessThanSignLessThanSign", "'<<'");
+		tokenNameToValue.put("GreaterThanSignGreaterThanSign", "'>>'");
+		tokenNameToValue.put("ReverseSolidusLessThanSignLessThanSign", "'\\<<'");
+		tokenNameToValue.put("For", "'for'");
+		tokenNameToValue.put("Templates", "'templates'");
  	}
  	
     public void setGrammarAccess(CodetemplatesGrammarAccess grammarAccess) {
@@ -588,7 +588,7 @@ rule__ValidID__Alternatives
     |(
 { before(grammarAccess.getValidIDAccess().getForKeyword_1()); }
 
-	KEYWORD_13 
+	For 
 
 { after(grammarAccess.getValidIDAccess().getForKeyword_1()); }
 )
@@ -596,7 +596,7 @@ rule__ValidID__Alternatives
     |(
 { before(grammarAccess.getValidIDAccess().getTemplatesKeyword_2()); }
 
-	KEYWORD_14 
+	Templates 
 
 { after(grammarAccess.getValidIDAccess().getTemplatesKeyword_2()); }
 )
@@ -632,7 +632,7 @@ rule__LiteralValue__Alternatives
     |(
 { before(grammarAccess.getLiteralValueAccess().getReverseSolidusLessThanSignLessThanSignKeyword_3()); }
 
-	KEYWORD_12 
+	ReverseSolidusLessThanSignLessThanSign 
 
 { after(grammarAccess.getLiteralValueAccess().getReverseSolidusLessThanSignLessThanSignKeyword_3()); }
 )
@@ -656,7 +656,7 @@ rule__Dollar__Alternatives_1
     |(
 { before(grammarAccess.getDollarAccess().getDollarSignKeyword_1_1()); }
 
-	KEYWORD_1 
+	DollarSign 
 
 { after(grammarAccess.getDollarAccess().getDollarSignKeyword_1_1()); }
 )
@@ -688,7 +688,7 @@ rule__Codetemplates__Group__0__Impl
 (
 { before(grammarAccess.getCodetemplatesAccess().getTemplatesKeyword_0()); }
 
-	KEYWORD_14 
+	Templates 
 
 { after(grammarAccess.getCodetemplatesAccess().getTemplatesKeyword_0()); }
 )
@@ -719,7 +719,7 @@ rule__Codetemplates__Group__1__Impl
 (
 { before(grammarAccess.getCodetemplatesAccess().getForKeyword_1()); }
 
-	KEYWORD_13 
+	For 
 
 { after(grammarAccess.getCodetemplatesAccess().getForKeyword_1()); }
 )
@@ -779,7 +779,7 @@ rule__Codetemplates__Group__3__Impl
 (
 { before(grammarAccess.getCodetemplatesAccess().getColonKeyword_3()); }
 
-	KEYWORD_6 
+	Colon 
 
 { after(grammarAccess.getCodetemplatesAccess().getColonKeyword_3()); }
 )
@@ -877,7 +877,7 @@ rule__Codetemplate__Group__1__Impl
 (
 { before(grammarAccess.getCodetemplateAccess().getLeftParenthesisKeyword_1()); }
 
-	KEYWORD_2 
+	LeftParenthesis 
 
 { after(grammarAccess.getCodetemplateAccess().getLeftParenthesisKeyword_1()); }
 )
@@ -937,7 +937,7 @@ rule__Codetemplate__Group__3__Impl
 (
 { before(grammarAccess.getCodetemplateAccess().getCommaKeyword_3()); }
 
-	KEYWORD_4 
+	Comma 
 
 { after(grammarAccess.getCodetemplateAccess().getCommaKeyword_3()); }
 )
@@ -997,7 +997,7 @@ rule__Codetemplate__Group__5__Impl
 (
 { before(grammarAccess.getCodetemplateAccess().getRightParenthesisKeyword_5()); }
 
-	KEYWORD_3 
+	RightParenthesis 
 
 { after(grammarAccess.getCodetemplateAccess().getRightParenthesisKeyword_5()); }
 )
@@ -1028,7 +1028,7 @@ rule__Codetemplate__Group__6__Impl
 (
 { before(grammarAccess.getCodetemplateAccess().getForKeyword_6()); }
 
-	KEYWORD_13 
+	For 
 
 { after(grammarAccess.getCodetemplateAccess().getForKeyword_6()); }
 )
@@ -1163,7 +1163,7 @@ rule__TemplateBodyWithQuotes__Group__1__Impl
 (
 { before(grammarAccess.getTemplateBodyWithQuotesAccess().getGreaterThanSignGreaterThanSignKeyword_1()); }
 
-	KEYWORD_11 
+	GreaterThanSignGreaterThanSign 
 
 { after(grammarAccess.getTemplateBodyWithQuotesAccess().getGreaterThanSignGreaterThanSignKeyword_1()); }
 )
@@ -1222,7 +1222,7 @@ rule__TemplateBodyWithQuotes__Group__3__Impl
 (
 { before(grammarAccess.getTemplateBodyWithQuotesAccess().getLessThanSignLessThanSignKeyword_3()); }
 
-	KEYWORD_10 
+	LessThanSignLessThanSign 
 
 { after(grammarAccess.getTemplateBodyWithQuotesAccess().getLessThanSignLessThanSignKeyword_3()); }
 )
@@ -1416,7 +1416,7 @@ rule__Variable__Group__0__Impl
 (
 { before(grammarAccess.getVariableAccess().getDollarSignLeftCurlyBracketKeyword_0()); }
 
-	KEYWORD_9 
+	DollarSignLeftCurlyBracket 
 
 { after(grammarAccess.getVariableAccess().getDollarSignLeftCurlyBracketKeyword_0()); }
 )
@@ -1533,7 +1533,7 @@ rule__Variable__Group__4__Impl
 (
 { before(grammarAccess.getVariableAccess().getRightCurlyBracketKeyword_4()); }
 
-	KEYWORD_7 
+	RightCurlyBracket 
 
 { after(grammarAccess.getVariableAccess().getRightCurlyBracketKeyword_4()); }
 )
@@ -1603,7 +1603,7 @@ rule__Variable__Group_2_1__1__Impl
 (
 { before(grammarAccess.getVariableAccess().getColonKeyword_2_1_1()); }
 
-	KEYWORD_6 
+	Colon 
 
 { after(grammarAccess.getVariableAccess().getColonKeyword_2_1_1()); }
 )
@@ -1906,7 +1906,7 @@ rule__Variable__Group_2_1_4__4__Impl
 (
 { before(grammarAccess.getVariableAccess().getRightParenthesisKeyword_2_1_4_4()); }
 
-	KEYWORD_3 
+	RightParenthesis 
 
 { after(grammarAccess.getVariableAccess().getRightParenthesisKeyword_2_1_4_4()); }
 )
@@ -2068,7 +2068,7 @@ rule__Variable__Group_2_1_4_3_1__1__Impl
 (
 { before(grammarAccess.getVariableAccess().getCommaKeyword_2_1_4_3_1_1()); }
 
-	KEYWORD_4 
+	Comma 
 
 { after(grammarAccess.getVariableAccess().getCommaKeyword_2_1_4_3_1_1()); }
 )
@@ -2225,7 +2225,7 @@ rule__FQN__Group_1__0__Impl
 (
 { before(grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); }
 
-	KEYWORD_5 
+	FullStop 
 
 { after(grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); }
 )
@@ -2560,7 +2560,7 @@ rule__Variable__ExpectingParametersAssignment_2_1_4_1
 (
 { before(grammarAccess.getVariableAccess().getExpectingParametersLeftParenthesisKeyword_2_1_4_1_0()); }
 
-	KEYWORD_2 
+	LeftParenthesis 
 
 { after(grammarAccess.getVariableAccess().getExpectingParametersLeftParenthesisKeyword_2_1_4_1_0()); }
 )
@@ -2630,7 +2630,7 @@ rule__Dollar__EscapedAssignment_1_0
 (
 { before(grammarAccess.getDollarAccess().getEscapedDollarSignDollarSignKeyword_1_0_0()); }
 
-	KEYWORD_8 
+	DollarSignDollarSign 
 
 { after(grammarAccess.getDollarAccess().getEscapedDollarSignDollarSignKeyword_1_0_0()); }
 )

@@ -36,11 +36,11 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.Bug307519TestLan
  	private final Map<String, String> tokenNameToValue = new HashMap<String, String>();
  	
  	{
-		tokenNameToValue.put("KEYWORD_1", "'\u0024'");
-		tokenNameToValue.put("KEYWORD_2", "'\%'");
-		tokenNameToValue.put("KEYWORD_3", "'T1'");
-		tokenNameToValue.put("KEYWORD_4", "'T2'");
-		tokenNameToValue.put("KEYWORD_5", "'foo'");
+		tokenNameToValue.put("DollarSign", "'\u0024'");
+		tokenNameToValue.put("PercentSign", "'\%'");
+		tokenNameToValue.put("T1", "'T1'");
+		tokenNameToValue.put("T2", "'T2'");
+		tokenNameToValue.put("Foo", "'foo'");
  	}
  	
     public void setGrammarAccess(Bug307519TestLanguageGrammarAccess grammarAccess) {
@@ -204,14 +204,14 @@ rule__EnumT__Alternatives
 :
 (
 { before(grammarAccess.getEnumTAccess().getT1EnumLiteralDeclaration_0()); }
-(	KEYWORD_3
+(	T1
 )
 { after(grammarAccess.getEnumTAccess().getT1EnumLiteralDeclaration_0()); }
 )
 
     |(
 { before(grammarAccess.getEnumTAccess().getT2EnumLiteralDeclaration_1()); }
-(	KEYWORD_4
+(	T2
 )
 { after(grammarAccess.getEnumTAccess().getT2EnumLiteralDeclaration_1()); }
 )
@@ -272,7 +272,7 @@ rule__Elem2__Group__1__Impl
 (
 { before(grammarAccess.getElem2Access().getFooKeyword_1()); }
 
-	KEYWORD_5 
+	Foo 
 
 { after(grammarAccess.getElem2Access().getFooKeyword_1()); }
 )
@@ -303,7 +303,7 @@ rule__Elem2__Group__2__Impl
 (
 { before(grammarAccess.getElem2Access().getPercentSignKeyword_2()); }
 
-	KEYWORD_2 
+	PercentSign 
 
 { after(grammarAccess.getElem2Access().getPercentSignKeyword_2()); }
 )
@@ -333,7 +333,7 @@ rule__Elem2__Group__3__Impl
 (
 { before(grammarAccess.getElem2Access().getDollarSignKeyword_3()); }
 
-	KEYWORD_1 
+	DollarSign 
 
 { after(grammarAccess.getElem2Access().getDollarSignKeyword_3()); }
 )

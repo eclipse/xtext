@@ -87,7 +87,7 @@ ruleModel returns [EObject current=null]
             $current);
     }
 )
-	otherlv_1=KEYWORD_2
+	otherlv_1=Model
     {
     	newLeafNode(otherlv_1, grammarAccess.getModelAccess().getModelKeyword_1());
     }
@@ -159,7 +159,7 @@ ruleModelElement returns [EObject current=null]
 )
 )
     |(
-	otherlv_2=KEYWORD_3
+	otherlv_2=Reference
     {
     	newLeafNode(otherlv_2, grammarAccess.getModelElementAccess().getReferenceKeyword_1_1_0());
     }
@@ -180,7 +180,7 @@ ruleModelElement returns [EObject current=null]
 
 )
 )(
-	otherlv_4=KEYWORD_1
+	otherlv_4=DollarSign
     {
     	newLeafNode(otherlv_4, grammarAccess.getModelElementAccess().getDollarSignKeyword_1_1_2_0());
     }
@@ -222,7 +222,7 @@ ruleContained returns [EObject current=null]
     }
     @after { leaveRule(); }:
 (
-	otherlv_0=KEYWORD_4
+	otherlv_0=Containment
     {
     	newLeafNode(otherlv_0, grammarAccess.getContainedAccess().getContainmentKeyword_0());
     }

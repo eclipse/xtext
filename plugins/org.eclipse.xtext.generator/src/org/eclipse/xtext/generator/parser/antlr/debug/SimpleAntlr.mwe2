@@ -10,6 +10,7 @@ var file.extensions = "simpleAntlr"
 var projectName = "org.eclipse.xtext.generator"
 var runtimeProject = "../${projectName}"
 var backtrack = true
+var lineDelimiter = '\n'
 
 Workflow {
 	
@@ -22,7 +23,7 @@ Workflow {
 		directory = "${runtimeProject}/src-gen/org/eclipse/xtext/generator/parser/antlr/debug"
 	}
 	
-	component = Generator {
+	component = Generator auto-inject {
 		pathRtProject = runtimeProject
 		projectNameRt = projectName
 		
@@ -34,7 +35,7 @@ Workflow {
 			fragment = grammarAccess.GrammarAccessFragment {}
 			
 			// generates Java API for the generated EPackages 
-			fragment = ecore.EcoreGeneratorFragment {
+			fragment = ecore.EcoreGeneratorFragment auto-inject {
 				emfRuntimeVersion = "2.9"
 			}
 			
@@ -46,7 +47,7 @@ Workflow {
 				fileExtensions = file.extensions
 			}
 				
-			fragment = parser.antlr.XtextAntlrGeneratorFragment {
+			fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
 				options = auto-inject {}
 			}
 			

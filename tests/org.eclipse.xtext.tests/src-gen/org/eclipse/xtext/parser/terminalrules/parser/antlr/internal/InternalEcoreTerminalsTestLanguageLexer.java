@@ -595,8 +595,7 @@ public class InternalEcoreTerminalsTestLanguageLexer extends Lexer {
     static final String DFA12_specialS =
         "\16\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\2\6\2\uffff\1\6\22\uffff\1\6\14\uffff\1\5\1\3\1\uffff\12\4"+
-            "\52\uffff\1\2\4\uffff\1\1",
+            "\2\6\2\uffff\1\6\22\uffff\1\6\14\uffff\1\5\1\3\1\uffff\12\4\52\uffff\1\2\4\uffff\1\1",
             "",
             "\1\10\15\uffff\1\7",
             "",

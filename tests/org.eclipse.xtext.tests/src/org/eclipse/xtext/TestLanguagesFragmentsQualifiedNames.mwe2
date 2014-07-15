@@ -18,9 +18,10 @@ var skipGenerate = false
 var backtrack = false
 var srcGenOnly=true
 var emfRuntimeVersion = "2.9"
+var lineDelimiter = '\n'
 
 CompositeGeneratorFragment {
-	fragment = parser.antlr.XtextAntlrGeneratorFragment {
+	fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
 		options = auto-inject {}
 	}
 	fragment = resourceFactory.ResourceFactoryFragment { 

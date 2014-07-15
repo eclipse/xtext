@@ -708,27 +708,19 @@ public class InternalInheritanceTestLanguageLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\1\uffff\1\16\2\uffff\1\16\1\14\2\uffff\3\14\2\uffff\1\16\3\uffff"+
-        "\1\16\5\uffff\4\16\1\35\1\16\1\uffff\1\16\1\40\1\uffff";
+        "\1\uffff\1\16\2\uffff\1\16\1\14\2\uffff\3\14\2\uffff\1\16\3\uffff\1\16\5\uffff\4\16\1\35\1\16\1\uffff\1\16\1\40\1\uffff";
     static final String DFA12_eofS =
         "\41\uffff";
     static final String DFA12_minS =
-        "\1\0\1\157\2\uffff\1\154\1\101\2\uffff\2\0\1\52\2\uffff\1\144\3"+
-        "\uffff\1\145\5\uffff\1\145\1\155\1\154\1\145\1\60\1\156\1\uffff"+
-        "\1\164\1\60\1\uffff";
+        "\1\0\1\157\2\uffff\1\154\1\101\2\uffff\2\0\1\52\2\uffff\1\144\3\uffff\1\145\5\uffff\1\145\1\155\1\154\1\145\1\60\1\156\1\uffff\1\164\1\60\1\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\1\157\2\uffff\1\154\1\172\2\uffff\2\uffff\1\57\2\uffff"+
-        "\1\144\3\uffff\1\145\5\uffff\1\145\1\155\1\154\1\145\1\172\1\156"+
-        "\1\uffff\1\164\1\172\1\uffff";
+        "\1\uffff\1\157\2\uffff\1\154\1\172\2\uffff\2\uffff\1\57\2\uffff\1\144\3\uffff\1\145\5\uffff\1\145\1\155\1\154\1\145\1\172\1\156\1\uffff\1\164\1\172\1\uffff";
     static final String DFA12_acceptS =
-        "\2\uffff\1\2\1\3\2\uffff\1\5\1\6\3\uffff\1\12\1\13\1\uffff\1\5\1"+
-        "\2\1\3\1\uffff\1\6\1\7\1\10\1\11\1\12\6\uffff\1\1\2\uffff\1\4";
+        "\2\uffff\1\2\1\3\2\uffff\1\5\1\6\3\uffff\1\12\1\13\1\uffff\1\5\1\2\1\3\1\uffff\1\6\1\7\1\10\1\11\1\12\6\uffff\1\1\2\uffff\1\4";
     static final String DFA12_specialS =
         "\1\1\7\uffff\1\0\1\2\27\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\14\2\13\2\14\1\13\22\14\1\13\1\14\1\10\4\14\1\11\7\14\1"+
-            "\12\12\7\7\14\32\6\3\14\1\5\1\6\1\14\4\6\1\4\7\6\1\1\15\6\1"+
-            "\2\1\14\1\3\uff82\14",
+            "\11\14\2\13\2\14\1\13\22\14\1\13\1\14\1\10\4\14\1\11\7\14\1\12\12\7\7\14\32\6\3\14\1\5\1\6\1\14\4\6\1\4\7\6\1\1\15\6\1\2\1\14\1\3\uff82\14",
             "\1\15",
             "",
             "",

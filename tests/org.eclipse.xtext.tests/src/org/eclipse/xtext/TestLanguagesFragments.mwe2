@@ -15,12 +15,13 @@ var generateDebugData = false
 var graphvizCommand = ""
 var srcGenOnly=true
 var emfRuntimeVersion = "2.9"
+var lineDelimiter = '\n'
 
 CompositeGeneratorFragment {
-	fragment = parser.antlr.XtextAntlrGeneratorFragment {
+	fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
 		options = auto-inject {}
 	}
-	fragment = parser.antlr.DebugAntlrGeneratorFragment {}
+	fragment = parser.antlr.DebugAntlrGeneratorFragment auto-inject {}
 	fragment = resourceFactory.ResourceFactoryFragment { 
 		fileExtensions = file.extensions
 	}

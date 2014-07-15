@@ -653,29 +653,22 @@ public class InternalAbstractTestLanguageLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\1\uffff\1\13\1\14\1\11\1\uffff\3\11\2\uffff\1\13\2\uffff\1\14\5"+
-        "\uffff\4\13\1\30\1\uffff";
+        "\1\uffff\1\13\1\14\1\11\1\uffff\3\11\2\uffff\1\13\2\uffff\1\14\5\uffff\4\13\1\30\1\uffff";
     static final String DFA12_eofS =
         "\31\uffff";
     static final String DFA12_minS =
-        "\1\0\1\154\1\56\1\101\1\uffff\2\0\1\52\2\uffff\1\145\2\uffff\1\56"+
-        "\5\uffff\1\155\1\145\1\156\1\164\1\60\1\uffff";
+        "\1\0\1\154\1\56\1\101\1\uffff\2\0\1\52\2\uffff\1\145\2\uffff\1\56\5\uffff\1\155\1\145\1\156\1\164\1\60\1\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\1\154\1\71\1\u00fc\1\uffff\2\uffff\1\57\2\uffff\1\145\2"+
-        "\uffff\1\71\5\uffff\1\155\1\145\1\156\1\164\1\172\1\uffff";
+        "\1\uffff\1\154\1\71\1\u00fc\1\uffff\2\uffff\1\57\2\uffff\1\145\2\uffff\1\71\5\uffff\1\155\1\145\1\156\1\164\1\172\1\uffff";
     static final String DFA12_acceptS =
-        "\4\uffff\1\3\3\uffff\1\10\1\11\1\uffff\1\3\1\4\1\uffff\1\2\1\5\1"+
-        "\6\1\7\1\10\5\uffff\1\1";
+        "\4\uffff\1\3\3\uffff\1\10\1\11\1\uffff\1\3\1\4\1\uffff\1\2\1\5\1\6\1\7\1\10\5\uffff\1\1";
     static final String DFA12_specialS =
         "\1\2\4\uffff\1\1\1\0\22\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\11\2\10\2\11\1\10\22\11\1\10\1\11\1\5\4\11\1\6\7\11\1\7"+
-            "\12\2\7\11\32\4\3\11\1\3\1\4\1\11\4\4\1\1\25\4\151\11\1\4\21"+
-            "\11\1\4\5\11\1\4\uff03\11",
+            "\11\11\2\10\2\11\1\10\22\11\1\10\1\11\1\5\4\11\1\6\7\11\1\7\12\2\7\11\32\4\3\11\1\3\1\4\1\11\4\4\1\1\25\4\151\11\1\4\21\11\1\4\5\11\1\4\uff03\11",
             "\1\12",
             "\1\16\1\uffff\12\15",
-            "\32\13\4\uffff\1\13\1\uffff\32\13\151\uffff\1\13\21\uffff\1"+
-            "\13\5\uffff\1\13",
+            "\32\13\4\uffff\1\13\1\uffff\32\13\151\uffff\1\13\21\uffff\1\13\5\uffff\1\13",
             "",
             "\0\17",
             "\0\17",
