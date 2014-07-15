@@ -24,6 +24,7 @@ var skipGenerate = false
 var backtrack = false
 var memoize = false
 var emfRuntimeVersion = "2.9"
+var lineDelimiter = '\n'
 
 CompositeGeneratorFragment {
 	fragment = ecore.EcoreGeneratorFragment auto-inject {}
@@ -32,11 +33,11 @@ CompositeGeneratorFragment {
 	fragment = resourceFactory.ResourceFactoryFragment { 
 		fileExtensions = file.extensions
 	} 
-	fragment = parser.antlr.XtextAntlrGeneratorFragment {
+	fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
 		options = auto-inject {}
 	}
 	fragment = contentAssist.JavaBasedContentAssistFragment {}
-	fragment = parser.antlr.ex.ca.ContentAssistParserGeneratorFragment {
+	fragment = parser.antlr.ex.ca.ContentAssistParserGeneratorFragment auto-inject {
 		options = auto-inject {}
 	}
 }

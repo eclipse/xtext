@@ -1094,83 +1094,83 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         }
 
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "KEYWORD_64", "KEYWORD_65", "KEYWORD_62", "KEYWORD_63", "KEYWORD_59", "KEYWORD_60", "KEYWORD_61", "KEYWORD_56", "KEYWORD_57", "KEYWORD_58", "KEYWORD_52", "KEYWORD_53", "KEYWORD_54", "KEYWORD_55", "KEYWORD_50", "KEYWORD_51", "KEYWORD_45", "KEYWORD_46", "KEYWORD_47", "KEYWORD_48", "KEYWORD_49", "KEYWORD_38", "KEYWORD_39", "KEYWORD_40", "KEYWORD_41", "KEYWORD_42", "KEYWORD_43", "KEYWORD_44", "KEYWORD_21", "KEYWORD_22", "KEYWORD_23", "KEYWORD_24", "KEYWORD_25", "KEYWORD_26", "KEYWORD_27", "KEYWORD_28", "KEYWORD_29", "KEYWORD_30", "KEYWORD_31", "KEYWORD_32", "KEYWORD_33", "KEYWORD_34", "KEYWORD_35", "KEYWORD_36", "KEYWORD_37", "KEYWORD_1", "KEYWORD_2", "KEYWORD_3", "KEYWORD_4", "KEYWORD_5", "KEYWORD_6", "KEYWORD_7", "KEYWORD_8", "KEYWORD_9", "KEYWORD_10", "KEYWORD_11", "KEYWORD_12", "KEYWORD_13", "KEYWORD_14", "KEYWORD_15", "KEYWORD_16", "KEYWORD_17", "KEYWORD_18", "KEYWORD_19", "KEYWORD_20", "RULE_DOCUMENTATION", "RULE_HEX", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RequiresMax", "RequiresMin", "Implements", "Properties", "Function", "Provides", "Requires", "Builder", "Context", "Version", "Cached", "Greedy", "Output", "Source", "Final", "Input", "Name", "This", "Unit", "When", "With", "ExclamationMarkEqualsSignEqualsSign", "FullStopFullStopFullStop", "EqualsSignEqualsSignEqualsSign", "Env", "New", "Val", "Var", "ExclamationMarkEqualsSign", "PercentSignEqualsSign", "AmpersandAmpersand", "AsteriskEqualsSign", "PlusSignPlusSign", "PlusSignEqualsSign", "HyphenMinusHyphenMinus", "HyphenMinusEqualsSign", "FullStopFullStop", "SolidusEqualsSign", "LessThanSignEqualsSign", "EqualsSignEqualsSign", "EqualsSignGreaterThanSign", "GreaterThanSignEqualsSign", "As", "VerticalLineVerticalLine", "TildeEqualsSign", "ExclamationMark", "PercentSign", "LeftParenthesis", "RightParenthesis", "Asterisk", "PlusSign", "Comma", "HyphenMinus", "FullStop", "Solidus", "Colon", "Semicolon", "LessThanSign", "EqualsSign", "GreaterThanSign", "LeftSquareBracket", "RightSquareBracket", "LeftCurlyBracket", "VerticalLine", "RightCurlyBracket", "RULE_DOCUMENTATION", "RULE_HEX", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
     };
     public static final int RULE_ID=71;
+    public static final int VerticalLineVerticalLine=47;
+    public static final int HyphenMinus=56;
+    public static final int RightParenthesis=52;
+    public static final int AmpersandAmpersand=34;
+    public static final int Output=16;
     public static final int RULE_ANY_OTHER=77;
-    public static final int KEYWORD_56=11;
-    public static final int KEYWORD_19=67;
-    public static final int KEYWORD_55=17;
-    public static final int KEYWORD_54=16;
-    public static final int KEYWORD_17=65;
-    public static final int KEYWORD_53=15;
-    public static final int KEYWORD_18=66;
-    public static final int KEYWORD_52=14;
-    public static final int KEYWORD_15=63;
-    public static final int KEYWORD_51=19;
-    public static final int KEYWORD_16=64;
-    public static final int KEYWORD_50=18;
-    public static final int KEYWORD_13=61;
-    public static final int KEYWORD_14=62;
-    public static final int KEYWORD_11=59;
+    public static final int ExclamationMark=49;
+    public static final int LeftParenthesis=51;
+    public static final int Final=18;
+    public static final int RightSquareBracket=65;
+    public static final int Context=12;
+    public static final int Solidus=58;
     public static final int EOF=-1;
-    public static final int KEYWORD_12=60;
-    public static final int KEYWORD_10=58;
-    public static final int KEYWORD_59=8;
-    public static final int KEYWORD_58=13;
-    public static final int KEYWORD_57=12;
+    public static final int EqualsSignEqualsSign=43;
+    public static final int GreaterThanSign=63;
+    public static final int FullStop=57;
+    public static final int Version=13;
+    public static final int PercentSign=50;
     public static final int RULE_HEX=70;
-    public static final int KEYWORD_6=54;
-    public static final int KEYWORD_7=55;
-    public static final int KEYWORD_8=56;
-    public static final int KEYWORD_9=57;
-    public static final int KEYWORD_65=5;
-    public static final int KEYWORD_28=39;
-    public static final int KEYWORD_64=4;
-    public static final int KEYWORD_29=40;
+    public static final int FullStopFullStopFullStop=26;
+    public static final int HyphenMinusHyphenMinus=38;
+    public static final int EqualsSignGreaterThanSign=44;
+    public static final int LessThanSign=61;
+    public static final int When=23;
+    public static final int Implements=6;
+    public static final int Source=17;
     public static final int RULE_INT=72;
-    public static final int KEYWORD_61=10;
-    public static final int KEYWORD_24=35;
-    public static final int KEYWORD_60=9;
-    public static final int KEYWORD_25=36;
-    public static final int KEYWORD_63=7;
-    public static final int KEYWORD_26=37;
-    public static final int KEYWORD_27=38;
-    public static final int KEYWORD_62=6;
-    public static final int KEYWORD_20=68;
-    public static final int KEYWORD_21=32;
-    public static final int KEYWORD_22=33;
-    public static final int KEYWORD_23=34;
-    public static final int KEYWORD_30=41;
-    public static final int KEYWORD_1=49;
-    public static final int KEYWORD_34=45;
-    public static final int KEYWORD_5=53;
-    public static final int KEYWORD_33=44;
-    public static final int KEYWORD_4=52;
-    public static final int KEYWORD_32=43;
-    public static final int KEYWORD_3=51;
-    public static final int KEYWORD_31=42;
-    public static final int KEYWORD_2=50;
-    public static final int KEYWORD_38=25;
-    public static final int KEYWORD_37=48;
+    public static final int EqualsSignEqualsSignEqualsSign=27;
+    public static final int TildeEqualsSign=48;
+    public static final int PlusSignPlusSign=36;
+    public static final int LeftSquareBracket=64;
+    public static final int FullStopFullStop=40;
+    public static final int Provides=9;
+    public static final int PercentSignEqualsSign=33;
+    public static final int ExclamationMarkEqualsSign=32;
+    public static final int Asterisk=53;
+    public static final int Requires=10;
+    public static final int RequiresMin=5;
+    public static final int RequiresMax=4;
+    public static final int As=46;
+    public static final int Cached=14;
+    public static final int This=21;
+    public static final int Greedy=15;
+    public static final int Unit=22;
+    public static final int Properties=7;
+    public static final int SolidusEqualsSign=41;
+    public static final int LessThanSignEqualsSign=42;
+    public static final int Colon=59;
+    public static final int LeftCurlyBracket=66;
+    public static final int Builder=11;
+    public static final int Semicolon=60;
     public static final int RULE_SL_COMMENT=75;
-    public static final int KEYWORD_36=47;
-    public static final int KEYWORD_35=46;
+    public static final int With=24;
     public static final int RULE_ML_COMMENT=74;
-    public static final int KEYWORD_39=26;
+    public static final int Input=19;
     public static final int RULE_STRING=73;
+    public static final int PlusSign=54;
+    public static final int Function=8;
     public static final int RULE_DOCUMENTATION=69;
-    public static final int KEYWORD_41=28;
-    public static final int KEYWORD_40=27;
-    public static final int KEYWORD_43=30;
-    public static final int KEYWORD_42=29;
-    public static final int KEYWORD_45=20;
-    public static final int KEYWORD_44=31;
-    public static final int KEYWORD_47=22;
+    public static final int VerticalLine=67;
+    public static final int AsteriskEqualsSign=35;
+    public static final int New=29;
+    public static final int HyphenMinusEqualsSign=39;
+    public static final int PlusSignEqualsSign=37;
+    public static final int Env=28;
+    public static final int Name=20;
+    public static final int GreaterThanSignEqualsSign=45;
+    public static final int ExclamationMarkEqualsSignEqualsSign=25;
     public static final int RULE_WS=76;
-    public static final int KEYWORD_46=21;
-    public static final int KEYWORD_49=24;
-    public static final int KEYWORD_48=23;
+    public static final int Val=30;
+    public static final int Comma=55;
+    public static final int EqualsSign=62;
+    public static final int Var=31;
+    public static final int RightCurlyBracket=68;
 
 
     public String[] getTokenNames() { return InternalExBeeLangTestLanguageParser.tokenNames; }
@@ -1183,71 +1183,71 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
      	private final Map<String, String> tokenNameToValue = new HashMap<String, String>();
      	
      	{
-    		tokenNameToValue.put("KEYWORD_1", "'!'");
-    		tokenNameToValue.put("KEYWORD_2", "'%'");
-    		tokenNameToValue.put("KEYWORD_3", "'('");
-    		tokenNameToValue.put("KEYWORD_4", "')'");
-    		tokenNameToValue.put("KEYWORD_5", "'*'");
-    		tokenNameToValue.put("KEYWORD_6", "'+'");
-    		tokenNameToValue.put("KEYWORD_7", "','");
-    		tokenNameToValue.put("KEYWORD_8", "'-'");
-    		tokenNameToValue.put("KEYWORD_9", "'.'");
-    		tokenNameToValue.put("KEYWORD_10", "'/'");
-    		tokenNameToValue.put("KEYWORD_11", "':'");
-    		tokenNameToValue.put("KEYWORD_12", "';'");
-    		tokenNameToValue.put("KEYWORD_13", "'<'");
-    		tokenNameToValue.put("KEYWORD_14", "'='");
-    		tokenNameToValue.put("KEYWORD_15", "'>'");
-    		tokenNameToValue.put("KEYWORD_16", "'['");
-    		tokenNameToValue.put("KEYWORD_17", "']'");
-    		tokenNameToValue.put("KEYWORD_18", "'{'");
-    		tokenNameToValue.put("KEYWORD_19", "'|'");
-    		tokenNameToValue.put("KEYWORD_20", "'}'");
-    		tokenNameToValue.put("KEYWORD_21", "'!='");
-    		tokenNameToValue.put("KEYWORD_22", "'%='");
-    		tokenNameToValue.put("KEYWORD_23", "'&&'");
-    		tokenNameToValue.put("KEYWORD_24", "'*='");
-    		tokenNameToValue.put("KEYWORD_25", "'++'");
-    		tokenNameToValue.put("KEYWORD_26", "'+='");
-    		tokenNameToValue.put("KEYWORD_27", "'--'");
-    		tokenNameToValue.put("KEYWORD_28", "'-='");
-    		tokenNameToValue.put("KEYWORD_29", "'..'");
-    		tokenNameToValue.put("KEYWORD_30", "'/='");
-    		tokenNameToValue.put("KEYWORD_31", "'<='");
-    		tokenNameToValue.put("KEYWORD_32", "'=='");
-    		tokenNameToValue.put("KEYWORD_33", "'=>'");
-    		tokenNameToValue.put("KEYWORD_34", "'>='");
-    		tokenNameToValue.put("KEYWORD_35", "'as'");
-    		tokenNameToValue.put("KEYWORD_36", "'||'");
-    		tokenNameToValue.put("KEYWORD_37", "'~='");
-    		tokenNameToValue.put("KEYWORD_38", "'!=='");
-    		tokenNameToValue.put("KEYWORD_39", "'...'");
-    		tokenNameToValue.put("KEYWORD_40", "'==='");
-    		tokenNameToValue.put("KEYWORD_41", "'env'");
-    		tokenNameToValue.put("KEYWORD_42", "'new'");
-    		tokenNameToValue.put("KEYWORD_43", "'val'");
-    		tokenNameToValue.put("KEYWORD_44", "'var'");
-    		tokenNameToValue.put("KEYWORD_45", "'name'");
-    		tokenNameToValue.put("KEYWORD_46", "'this'");
-    		tokenNameToValue.put("KEYWORD_47", "'unit'");
-    		tokenNameToValue.put("KEYWORD_48", "'when'");
-    		tokenNameToValue.put("KEYWORD_49", "'with'");
-    		tokenNameToValue.put("KEYWORD_50", "'final'");
-    		tokenNameToValue.put("KEYWORD_51", "'input'");
-    		tokenNameToValue.put("KEYWORD_52", "'cached'");
-    		tokenNameToValue.put("KEYWORD_53", "'greedy'");
-    		tokenNameToValue.put("KEYWORD_54", "'output'");
-    		tokenNameToValue.put("KEYWORD_55", "'source'");
-    		tokenNameToValue.put("KEYWORD_56", "'builder'");
-    		tokenNameToValue.put("KEYWORD_57", "'context'");
-    		tokenNameToValue.put("KEYWORD_58", "'version'");
-    		tokenNameToValue.put("KEYWORD_59", "'function'");
-    		tokenNameToValue.put("KEYWORD_60", "'provides'");
-    		tokenNameToValue.put("KEYWORD_61", "'requires'");
-    		tokenNameToValue.put("KEYWORD_62", "'implements'");
-    		tokenNameToValue.put("KEYWORD_63", "'properties'");
-    		tokenNameToValue.put("KEYWORD_64", "'requires-max'");
-    		tokenNameToValue.put("KEYWORD_65", "'requires-min'");
+    		tokenNameToValue.put("ExclamationMark", "'!'");
+    		tokenNameToValue.put("PercentSign", "'%'");
+    		tokenNameToValue.put("LeftParenthesis", "'('");
+    		tokenNameToValue.put("RightParenthesis", "')'");
+    		tokenNameToValue.put("Asterisk", "'*'");
+    		tokenNameToValue.put("PlusSign", "'+'");
+    		tokenNameToValue.put("Comma", "','");
+    		tokenNameToValue.put("HyphenMinus", "'-'");
+    		tokenNameToValue.put("FullStop", "'.'");
+    		tokenNameToValue.put("Solidus", "'/'");
+    		tokenNameToValue.put("Colon", "':'");
+    		tokenNameToValue.put("Semicolon", "';'");
+    		tokenNameToValue.put("LessThanSign", "'<'");
+    		tokenNameToValue.put("EqualsSign", "'='");
+    		tokenNameToValue.put("GreaterThanSign", "'>'");
+    		tokenNameToValue.put("LeftSquareBracket", "'['");
+    		tokenNameToValue.put("RightSquareBracket", "']'");
+    		tokenNameToValue.put("LeftCurlyBracket", "'{'");
+    		tokenNameToValue.put("VerticalLine", "'|'");
+    		tokenNameToValue.put("RightCurlyBracket", "'}'");
+    		tokenNameToValue.put("ExclamationMarkEqualsSign", "'!='");
+    		tokenNameToValue.put("PercentSignEqualsSign", "'%='");
+    		tokenNameToValue.put("AmpersandAmpersand", "'&&'");
+    		tokenNameToValue.put("AsteriskEqualsSign", "'*='");
+    		tokenNameToValue.put("PlusSignPlusSign", "'++'");
+    		tokenNameToValue.put("PlusSignEqualsSign", "'+='");
+    		tokenNameToValue.put("HyphenMinusHyphenMinus", "'--'");
+    		tokenNameToValue.put("HyphenMinusEqualsSign", "'-='");
+    		tokenNameToValue.put("FullStopFullStop", "'..'");
+    		tokenNameToValue.put("SolidusEqualsSign", "'/='");
+    		tokenNameToValue.put("LessThanSignEqualsSign", "'<='");
+    		tokenNameToValue.put("EqualsSignEqualsSign", "'=='");
+    		tokenNameToValue.put("EqualsSignGreaterThanSign", "'=>'");
+    		tokenNameToValue.put("GreaterThanSignEqualsSign", "'>='");
+    		tokenNameToValue.put("As", "'as'");
+    		tokenNameToValue.put("VerticalLineVerticalLine", "'||'");
+    		tokenNameToValue.put("TildeEqualsSign", "'~='");
+    		tokenNameToValue.put("ExclamationMarkEqualsSignEqualsSign", "'!=='");
+    		tokenNameToValue.put("FullStopFullStopFullStop", "'...'");
+    		tokenNameToValue.put("EqualsSignEqualsSignEqualsSign", "'==='");
+    		tokenNameToValue.put("Env", "'env'");
+    		tokenNameToValue.put("New", "'new'");
+    		tokenNameToValue.put("Val", "'val'");
+    		tokenNameToValue.put("Var", "'var'");
+    		tokenNameToValue.put("Name", "'name'");
+    		tokenNameToValue.put("This", "'this'");
+    		tokenNameToValue.put("Unit", "'unit'");
+    		tokenNameToValue.put("When", "'when'");
+    		tokenNameToValue.put("With", "'with'");
+    		tokenNameToValue.put("Final", "'final'");
+    		tokenNameToValue.put("Input", "'input'");
+    		tokenNameToValue.put("Cached", "'cached'");
+    		tokenNameToValue.put("Greedy", "'greedy'");
+    		tokenNameToValue.put("Output", "'output'");
+    		tokenNameToValue.put("Source", "'source'");
+    		tokenNameToValue.put("Builder", "'builder'");
+    		tokenNameToValue.put("Context", "'context'");
+    		tokenNameToValue.put("Version", "'version'");
+    		tokenNameToValue.put("Function", "'function'");
+    		tokenNameToValue.put("Provides", "'provides'");
+    		tokenNameToValue.put("Requires", "'requires'");
+    		tokenNameToValue.put("Implements", "'implements'");
+    		tokenNameToValue.put("Properties", "'properties'");
+    		tokenNameToValue.put("RequiresMax", "'requires-max'");
+    		tokenNameToValue.put("RequiresMin", "'requires-min'");
      	}
      	
         public void setGrammarAccess(ExBeeLangTestLanguageGrammarAccess grammarAccess) {
@@ -3530,23 +3530,23 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
                         int index94_0 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( LA94_0 ==KEYWORD_55 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 0) ) {s = 1;}
+                        if ( LA94_0 ==Source && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 0) ) {s = 1;}
 
-                        else if ( LA94_0 ==KEYWORD_54 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 1) ) {s = 2;}
+                        else if ( LA94_0 ==Output && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 1) ) {s = 2;}
 
-                        else if ( LA94_0 ==KEYWORD_60 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 2) ) {s = 3;}
+                        else if ( LA94_0 ==Provides && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 2) ) {s = 3;}
 
-                        else if ( LA94_0 ==KEYWORD_61 && ( getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 3) || getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 4) ) ) {s = 4;}
+                        else if ( LA94_0 ==Requires && ( getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 3) || getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 4) ) ) {s = 4;}
 
                         else if ( LA94_0 ==RULE_DOCUMENTATION && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 5;}
 
                         else if ( LA94_0 ==RULE_ID && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 6;}
 
-                        else if ( LA94_0 ==KEYWORD_50 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 7;}
+                        else if ( LA94_0 ==Final && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 7;}
 
-                        else if ( LA94_0 ==KEYWORD_59 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 8;}
+                        else if ( LA94_0 ==Function && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 8;}
 
-                        else if ( (LA94_0==KEYWORD_20) ) {s = 9;}
+                        else if ( (LA94_0==RightCurlyBracket) ) {s = 9;}
 
                          
                         input.seek(index94_0);
@@ -4018,23 +4018,23 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
                         int index100_0 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( LA100_0 ==KEYWORD_55 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 0) ) {s = 1;}
+                        if ( LA100_0 ==Source && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 0) ) {s = 1;}
 
-                        else if ( LA100_0 ==KEYWORD_54 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 1) ) {s = 2;}
+                        else if ( LA100_0 ==Output && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 1) ) {s = 2;}
 
-                        else if ( LA100_0 ==KEYWORD_60 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 2) ) {s = 3;}
+                        else if ( LA100_0 ==Provides && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 2) ) {s = 3;}
 
-                        else if ( LA100_0 ==KEYWORD_61 && ( getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 3) || getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 4) ) ) {s = 4;}
+                        else if ( LA100_0 ==Requires && ( getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 3) || getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 4) ) ) {s = 4;}
 
                         else if ( LA100_0 ==RULE_DOCUMENTATION && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 5;}
 
                         else if ( LA100_0 ==RULE_ID && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 6;}
 
-                        else if ( LA100_0 ==KEYWORD_50 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 7;}
+                        else if ( LA100_0 ==Final && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 7;}
 
-                        else if ( LA100_0 ==KEYWORD_59 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 8;}
+                        else if ( LA100_0 ==Function && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 8;}
 
-                        else if ( (LA100_0==EOF||LA100_0==KEYWORD_20) ) {s = 9;}
+                        else if ( (LA100_0==EOF||LA100_0==RightCurlyBracket) ) {s = 9;}
 
                          
                         input.seek(index100_0);
@@ -4117,23 +4117,23 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
                         int index101_0 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( LA101_0 ==KEYWORD_55 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 0) ) {s = 1;}
+                        if ( LA101_0 ==Source && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 0) ) {s = 1;}
 
-                        else if ( LA101_0 ==KEYWORD_54 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 1) ) {s = 2;}
+                        else if ( LA101_0 ==Output && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 1) ) {s = 2;}
 
-                        else if ( LA101_0 ==KEYWORD_60 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 2) ) {s = 3;}
+                        else if ( LA101_0 ==Provides && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 2) ) {s = 3;}
 
-                        else if ( LA101_0 ==KEYWORD_61 && ( getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 3) || getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 4) ) ) {s = 4;}
+                        else if ( LA101_0 ==Requires && ( getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 3) || getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 4) ) ) {s = 4;}
 
                         else if ( LA101_0 ==RULE_DOCUMENTATION && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 5;}
 
                         else if ( LA101_0 ==RULE_ID && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 6;}
 
-                        else if ( LA101_0 ==KEYWORD_50 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 7;}
+                        else if ( LA101_0 ==Final && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 7;}
 
-                        else if ( LA101_0 ==KEYWORD_59 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 8;}
+                        else if ( LA101_0 ==Function && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 8;}
 
-                        else if ( (LA101_0==EOF||LA101_0==KEYWORD_20) ) {s = 9;}
+                        else if ( (LA101_0==EOF||LA101_0==RightCurlyBracket) ) {s = 9;}
 
                          
                         input.seek(index101_0);
@@ -4216,23 +4216,23 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
                         int index102_0 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( LA102_0 ==KEYWORD_55 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 0) ) {s = 1;}
+                        if ( LA102_0 ==Source && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 0) ) {s = 1;}
 
-                        else if ( LA102_0 ==KEYWORD_54 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 1) ) {s = 2;}
+                        else if ( LA102_0 ==Output && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 1) ) {s = 2;}
 
-                        else if ( LA102_0 ==KEYWORD_60 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 2) ) {s = 3;}
+                        else if ( LA102_0 ==Provides && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 2) ) {s = 3;}
 
-                        else if ( LA102_0 ==KEYWORD_61 && ( getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 3) || getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 4) ) ) {s = 4;}
+                        else if ( LA102_0 ==Requires && ( getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 3) || getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 4) ) ) {s = 4;}
 
                         else if ( LA102_0 ==RULE_DOCUMENTATION && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 5;}
 
                         else if ( LA102_0 ==RULE_ID && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 6;}
 
-                        else if ( LA102_0 ==KEYWORD_50 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 7;}
+                        else if ( LA102_0 ==Final && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 7;}
 
-                        else if ( LA102_0 ==KEYWORD_59 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 8;}
+                        else if ( LA102_0 ==Function && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 8;}
 
-                        else if ( (LA102_0==EOF||LA102_0==KEYWORD_20) ) {s = 9;}
+                        else if ( (LA102_0==EOF||LA102_0==RightCurlyBracket) ) {s = 9;}
 
                          
                         input.seek(index102_0);
@@ -4315,23 +4315,23 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
                         int index103_0 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( LA103_0 ==KEYWORD_55 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 0) ) {s = 1;}
+                        if ( LA103_0 ==Source && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 0) ) {s = 1;}
 
-                        else if ( LA103_0 ==KEYWORD_54 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 1) ) {s = 2;}
+                        else if ( LA103_0 ==Output && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 1) ) {s = 2;}
 
-                        else if ( LA103_0 ==KEYWORD_60 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 2) ) {s = 3;}
+                        else if ( LA103_0 ==Provides && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 2) ) {s = 3;}
 
-                        else if ( LA103_0 ==KEYWORD_61 && ( getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 3) || getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 4) ) ) {s = 4;}
+                        else if ( LA103_0 ==Requires && ( getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 3) || getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 4) ) ) {s = 4;}
 
                         else if ( LA103_0 ==RULE_DOCUMENTATION && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 5;}
 
                         else if ( LA103_0 ==RULE_ID && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 6;}
 
-                        else if ( LA103_0 ==KEYWORD_50 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 7;}
+                        else if ( LA103_0 ==Final && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 7;}
 
-                        else if ( LA103_0 ==KEYWORD_59 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 8;}
+                        else if ( LA103_0 ==Function && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 8;}
 
-                        else if ( (LA103_0==EOF||LA103_0==KEYWORD_20) ) {s = 9;}
+                        else if ( (LA103_0==EOF||LA103_0==RightCurlyBracket) ) {s = 9;}
 
                          
                         input.seek(index103_0);
@@ -4414,23 +4414,23 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
                         int index104_0 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( LA104_0 ==KEYWORD_55 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 0) ) {s = 1;}
+                        if ( LA104_0 ==Source && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 0) ) {s = 1;}
 
-                        else if ( LA104_0 ==KEYWORD_54 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 1) ) {s = 2;}
+                        else if ( LA104_0 ==Output && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 1) ) {s = 2;}
 
-                        else if ( LA104_0 ==KEYWORD_60 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 2) ) {s = 3;}
+                        else if ( LA104_0 ==Provides && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 2) ) {s = 3;}
 
-                        else if ( LA104_0 ==KEYWORD_61 && ( getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 3) || getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 4) ) ) {s = 4;}
+                        else if ( LA104_0 ==Requires && ( getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 3) || getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 4) ) ) {s = 4;}
 
                         else if ( LA104_0 ==RULE_DOCUMENTATION && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 5;}
 
                         else if ( LA104_0 ==RULE_ID && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 6;}
 
-                        else if ( LA104_0 ==KEYWORD_50 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 7;}
+                        else if ( LA104_0 ==Final && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 7;}
 
-                        else if ( LA104_0 ==KEYWORD_59 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 8;}
+                        else if ( LA104_0 ==Function && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {s = 8;}
 
-                        else if ( (LA104_0==EOF||LA104_0==KEYWORD_20) ) {s = 9;}
+                        else if ( (LA104_0==EOF||LA104_0==RightCurlyBracket) ) {s = 9;}
 
                          
                         input.seek(index104_0);
@@ -4625,11 +4625,11 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__Model__UnitsAssignment_0_in_rule__Model__Alternatives3739 = new BitSet(new long[]{0x0000000000400002L,0x0000000000000020L});
         public static final BitSet FOLLOW_rule__Model__FunctionsAssignment_1_in_rule__Model__Alternatives3758 = new BitSet(new long[]{0x0000000000040102L,0x00000000000000A0L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__NameSpaceAssignment_1_0_in_rule__ProvidedCapability__Alternatives_13792 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_47_in_rule__ProvidedCapability__Alternatives_13811 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Unit_in_rule__ProvidedCapability__Alternatives_13811 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__NameSpaceAssignment_0_0_in_rule__AliasedRequiredCapability__Alternatives_03845 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_47_in_rule__AliasedRequiredCapability__Alternatives_03864 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Unit_in_rule__AliasedRequiredCapability__Alternatives_03864 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RequiredCapability__NameSpaceAssignment_1_0_in_rule__RequiredCapability__Alternatives_13898 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_47_in_rule__RequiredCapability__Alternatives_13917 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Unit_in_rule__RequiredCapability__Alternatives_13917 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_STRING_in_rule__Path__Alternatives3951 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Path__Group_1__0_in_rule__Path__Alternatives3968 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleClosureParameter_in_rule__FirstParameter__Alternatives4001 = new BitSet(new long[]{0x0000000000000002L});
@@ -4640,28 +4640,28 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__Function__FuncExprAssignment_8_1_in_rule__Function__Alternatives_84119 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__GuardExpression__Group_0__0_in_rule__GuardExpression__Alternatives4152 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__GuardExpression__GuardExprAssignment_1_in_rule__GuardExpression__Alternatives4170 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_14_in_rule__AssignmentOperator__Alternatives4204 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_26_in_rule__AssignmentOperator__Alternatives4224 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_28_in_rule__AssignmentOperator__Alternatives4244 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_24_in_rule__AssignmentOperator__Alternatives4264 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_30_in_rule__AssignmentOperator__Alternatives4284 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_22_in_rule__AssignmentOperator__Alternatives4304 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_37_in_rule__RelationalOperator__Alternatives4339 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_32_in_rule__RelationalOperator__Alternatives4359 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_40_in_rule__RelationalOperator__Alternatives4379 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_21_in_rule__RelationalOperator__Alternatives4399 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_38_in_rule__RelationalOperator__Alternatives4419 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_EqualsSign_in_rule__AssignmentOperator__Alternatives4204 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_PlusSignEqualsSign_in_rule__AssignmentOperator__Alternatives4224 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_HyphenMinusEqualsSign_in_rule__AssignmentOperator__Alternatives4244 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_AsteriskEqualsSign_in_rule__AssignmentOperator__Alternatives4264 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_SolidusEqualsSign_in_rule__AssignmentOperator__Alternatives4284 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_PercentSignEqualsSign_in_rule__AssignmentOperator__Alternatives4304 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_TildeEqualsSign_in_rule__RelationalOperator__Alternatives4339 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_EqualsSignEqualsSign_in_rule__RelationalOperator__Alternatives4359 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_EqualsSignEqualsSignEqualsSign_in_rule__RelationalOperator__Alternatives4379 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ExclamationMarkEqualsSign_in_rule__RelationalOperator__Alternatives4399 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ExclamationMarkEqualsSignEqualsSign_in_rule__RelationalOperator__Alternatives4419 = new BitSet(new long[]{0x0000000000000002L});
     }
 
     protected static class FollowSets002 {
-        public static final BitSet FOLLOW_KEYWORD_34_in_rule__RelationalOperator__Alternatives4439 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_31_in_rule__RelationalOperator__Alternatives4459 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_15_in_rule__RelationalOperator__Alternatives4479 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_13_in_rule__RelationalOperator__Alternatives4499 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_GreaterThanSignEqualsSign_in_rule__RelationalOperator__Alternatives4439 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_LessThanSignEqualsSign_in_rule__RelationalOperator__Alternatives4459 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_GreaterThanSign_in_rule__RelationalOperator__Alternatives4479 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_LessThanSign_in_rule__RelationalOperator__Alternatives4499 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleVarDeclaration_in_rule__TopLevelExpression__Alternatives4533 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleValDeclaration_in_rule__TopLevelExpression__Alternatives4550 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleAssignmentExpression_in_rule__TopLevelExpression__Alternatives4567 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_44_in_rule__VarDeclaration__Alternatives_2_04600 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Var_in_rule__VarDeclaration__Alternatives_2_04600 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__VarDeclaration__TypeAssignment_2_0_1_in_rule__VarDeclaration__Alternatives_2_04619 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleClosureTypeRef_in_rule__TypeRef__Alternatives4652 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleSimpleTypeRef_in_rule__TypeRef__Alternatives4669 = new BitSet(new long[]{0x0000000000000002L});
@@ -4669,20 +4669,20 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__ClosureTypeRef__Group_1_1__0_in_rule__ClosureTypeRef__Alternatives_14719 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__CachedExpression__Group_0__0_in_rule__CachedExpression__Alternatives4752 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleOrExpression_in_rule__CachedExpression__Alternatives4770 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_6_in_rule__AdditiveExpression__FunctionNameAlternatives_1_1_04803 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_8_in_rule__AdditiveExpression__FunctionNameAlternatives_1_1_04823 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_5_in_rule__MultiplicativeExpression__FunctionNameAlternatives_1_1_04858 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_10_in_rule__MultiplicativeExpression__FunctionNameAlternatives_1_1_04878 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_2_in_rule__MultiplicativeExpression__FunctionNameAlternatives_1_1_04898 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_PlusSign_in_rule__AdditiveExpression__FunctionNameAlternatives_1_1_04803 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_HyphenMinus_in_rule__AdditiveExpression__FunctionNameAlternatives_1_1_04823 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Asterisk_in_rule__MultiplicativeExpression__FunctionNameAlternatives_1_1_04858 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Solidus_in_rule__MultiplicativeExpression__FunctionNameAlternatives_1_1_04878 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_PercentSign_in_rule__MultiplicativeExpression__FunctionNameAlternatives_1_1_04898 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rulePostopExpression_in_rule__UnaryOrInfixExpression__Alternatives4932 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnaryExpression_in_rule__UnaryOrInfixExpression__Alternatives4949 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rulePreopExpression_in_rule__UnaryOrInfixExpression__Alternatives4966 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_1_in_rule__UnaryExpression__FunctionNameAlternatives_1_04999 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_8_in_rule__UnaryExpression__FunctionNameAlternatives_1_05019 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_25_in_rule__PreopExpression__FunctionNameAlternatives_1_05054 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_27_in_rule__PreopExpression__FunctionNameAlternatives_1_05074 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_27_in_rule__PostopExpression__FunctionNameAlternatives_1_1_05109 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_25_in_rule__PostopExpression__FunctionNameAlternatives_1_1_05129 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ExclamationMark_in_rule__UnaryExpression__FunctionNameAlternatives_1_04999 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_HyphenMinus_in_rule__UnaryExpression__FunctionNameAlternatives_1_05019 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_PlusSignPlusSign_in_rule__PreopExpression__FunctionNameAlternatives_1_05054 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_HyphenMinusHyphenMinus_in_rule__PreopExpression__FunctionNameAlternatives_1_05074 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_HyphenMinusHyphenMinus_in_rule__PostopExpression__FunctionNameAlternatives_1_1_05109 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_PlusSignPlusSign_in_rule__PostopExpression__FunctionNameAlternatives_1_1_05129 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__InfixExpression__Group_1_0__0_in_rule__InfixExpression__Alternatives_15163 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__InfixExpression__Group_1_1__0_in_rule__InfixExpression__Alternatives_15181 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__InfixExpression__Group_1_2__0_in_rule__InfixExpression__Alternatives_15199 = new BitSet(new long[]{0x0000000000000002L});
@@ -4697,13 +4697,13 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_ruleWithContextExpression_in_rule__PrimaryExpression__Alternatives5368 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__WithExpression__Group_2_0__0_in_rule__WithExpression__Alternatives_25400 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__WithExpression__Group_2_1__0_in_rule__WithExpression__Alternatives_25418 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_51_in_rule__KeywordVariables__NameAlternatives_1_05452 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_54_in_rule__KeywordVariables__NameAlternatives_1_05472 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_55_in_rule__KeywordVariables__NameAlternatives_1_05492 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_63_in_rule__KeywordVariables__NameAlternatives_1_05512 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_56_in_rule__KeywordVariables__NameAlternatives_1_05532 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_47_in_rule__KeywordVariables__NameAlternatives_1_05552 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_46_in_rule__KeywordVariables__NameAlternatives_1_05572 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Input_in_rule__KeywordVariables__NameAlternatives_1_05452 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Output_in_rule__KeywordVariables__NameAlternatives_1_05472 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Source_in_rule__KeywordVariables__NameAlternatives_1_05492 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Properties_in_rule__KeywordVariables__NameAlternatives_1_05512 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Builder_in_rule__KeywordVariables__NameAlternatives_1_05532 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Unit_in_rule__KeywordVariables__NameAlternatives_1_05552 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_This_in_rule__KeywordVariables__NameAlternatives_1_05572 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleValueLiteral_in_rule__Literal__Alternatives5606 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleLiteralFunction_in_rule__Literal__Alternatives5623 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureExpression__Group_2_0__0_in_rule__ClosureExpression__Alternatives_25655 = new BitSet(new long[]{0x0000000000000002L});
@@ -4723,7 +4723,7 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__Unit__DocumentationAssignment_1_in_rule__Unit__Group__1__Impl5976 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__Group__2__Impl_in_rule__Unit__Group__26007 = new BitSet(new long[]{0x0000000000002040L,0x0000000000000084L});
         public static final BitSet FOLLOW_rule__Unit__Group__3_in_rule__Unit__Group__26010 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_47_in_rule__Unit__Group__2__Impl6038 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Unit_in_rule__Unit__Group__2__Impl6038 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__Group__3__Impl_in_rule__Unit__Group__36069 = new BitSet(new long[]{0x0000000000002040L,0x0000000000000084L});
         public static final BitSet FOLLOW_rule__Unit__Group__4_in_rule__Unit__Group__36072 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__NameAssignment_3_in_rule__Unit__Group__3__Impl6099 = new BitSet(new long[]{0x0000000000000002L});
@@ -4735,20 +4735,20 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__Unit__Group_5__0_in_rule__Unit__Group__5__Impl6221 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__Group__6__Impl_in_rule__Unit__Group__66252 = new BitSet(new long[]{0x0000000000070700L,0x00000000000000A0L});
         public static final BitSet FOLLOW_rule__Unit__Group__7_in_rule__Unit__Group__66255 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_18_in_rule__Unit__Group__6__Impl6283 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_LeftCurlyBracket_in_rule__Unit__Group__6__Impl6283 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__Group__7__Impl_in_rule__Unit__Group__76314 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000010L});
         public static final BitSet FOLLOW_rule__Unit__Group__8_in_rule__Unit__Group__76317 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__UnorderedGroup_7_in_rule__Unit__Group__7__Impl6344 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__Group__8__Impl_in_rule__Unit__Group__86374 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_20_in_rule__Unit__Group__8__Impl6402 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RightCurlyBracket_in_rule__Unit__Group__8__Impl6402 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__Group_4__0__Impl_in_rule__Unit__Group_4__06451 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__Unit__Group_4__1_in_rule__Unit__Group_4__06454 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_58_in_rule__Unit__Group_4__0__Impl6482 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Version_in_rule__Unit__Group_4__0__Impl6482 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__Group_4__1__Impl_in_rule__Unit__Group_4__16513 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__VersionAssignment_4_1_in_rule__Unit__Group_4__1__Impl6540 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__Group_5__0__Impl_in_rule__Unit__Group_5__06574 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__Unit__Group_5__1_in_rule__Unit__Group_5__06577 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_62_in_rule__Unit__Group_5__0__Impl6605 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Implements_in_rule__Unit__Group_5__0__Impl6605 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__Group_5__1__Impl_in_rule__Unit__Group_5__16636 = new BitSet(new long[]{0x0080000000000000L});
         public static final BitSet FOLLOW_rule__Unit__Group_5__2_in_rule__Unit__Group_5__16639 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__ImplementsAssignment_5_1_in_rule__Unit__Group_5__1__Impl6666 = new BitSet(new long[]{0x0000000000000002L});
@@ -4759,67 +4759,67 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
     protected static class FollowSets003 {
         public static final BitSet FOLLOW_rule__Unit__Group_5_2__0__Impl_in_rule__Unit__Group_5_2__06760 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__Unit__Group_5_2__1_in_rule__Unit__Group_5_2__06763 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_7_in_rule__Unit__Group_5_2__0__Impl6791 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Comma_in_rule__Unit__Group_5_2__0__Impl6791 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__Group_5_2__1__Impl_in_rule__Unit__Group_5_2__16822 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__ImplementsAssignment_5_2_1_in_rule__Unit__Group_5_2__1__Impl6849 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_0__0__Impl_in_rule__Unit__Group_7_0__06883 = new BitSet(new long[]{0x0800000000000000L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_0__1_in_rule__Unit__Group_7_0__06886 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_55_in_rule__Unit__Group_7_0__0__Impl6914 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Source_in_rule__Unit__Group_7_0__0__Impl6914 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_0__1__Impl_in_rule__Unit__Group_7_0__16945 = new BitSet(new long[]{0x0400000000000000L,0x0000000000000280L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_0__2_in_rule__Unit__Group_7_0__16948 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_11_in_rule__Unit__Group_7_0__1__Impl6976 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Colon_in_rule__Unit__Group_7_0__1__Impl6976 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_0__2__Impl_in_rule__Unit__Group_7_0__27007 = new BitSet(new long[]{0x1000000000000000L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_0__3_in_rule__Unit__Group_7_0__27010 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__SourceLocationAssignment_7_0_2_in_rule__Unit__Group_7_0__2__Impl7037 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_0__3__Impl_in_rule__Unit__Group_7_0__37067 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_12_in_rule__Unit__Group_7_0__3__Impl7095 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Semicolon_in_rule__Unit__Group_7_0__3__Impl7095 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_1__0__Impl_in_rule__Unit__Group_7_1__07134 = new BitSet(new long[]{0x0800000000000000L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_1__1_in_rule__Unit__Group_7_1__07137 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_54_in_rule__Unit__Group_7_1__0__Impl7165 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Output_in_rule__Unit__Group_7_1__0__Impl7165 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_1__1__Impl_in_rule__Unit__Group_7_1__17196 = new BitSet(new long[]{0x0400000000000000L,0x0000000000000280L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_1__2_in_rule__Unit__Group_7_1__17199 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_11_in_rule__Unit__Group_7_1__1__Impl7227 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Colon_in_rule__Unit__Group_7_1__1__Impl7227 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_1__2__Impl_in_rule__Unit__Group_7_1__27258 = new BitSet(new long[]{0x1000000000000000L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_1__3_in_rule__Unit__Group_7_1__27261 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__OutputLocationAssignment_7_1_2_in_rule__Unit__Group_7_1__2__Impl7288 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_1__3__Impl_in_rule__Unit__Group_7_1__37318 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_12_in_rule__Unit__Group_7_1__3__Impl7346 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Semicolon_in_rule__Unit__Group_7_1__3__Impl7346 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_2__0__Impl_in_rule__Unit__Group_7_2__07385 = new BitSet(new long[]{0x0800000000000000L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_2__1_in_rule__Unit__Group_7_2__07388 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_60_in_rule__Unit__Group_7_2__0__Impl7416 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Provides_in_rule__Unit__Group_7_2__0__Impl7416 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_2__1__Impl_in_rule__Unit__Group_7_2__17447 = new BitSet(new long[]{0x0000000000400000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_2__2_in_rule__Unit__Group_7_2__17450 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_11_in_rule__Unit__Group_7_2__1__Impl7478 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Colon_in_rule__Unit__Group_7_2__1__Impl7478 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_2__2__Impl_in_rule__Unit__Group_7_2__27509 = new BitSet(new long[]{0x1000000000000000L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_2__3_in_rule__Unit__Group_7_2__27512 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__ProvidedCapabilitiesAssignment_7_2_2_in_rule__Unit__Group_7_2__2__Impl7539 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_2__3__Impl_in_rule__Unit__Group_7_2__37569 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_12_in_rule__Unit__Group_7_2__3__Impl7597 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Semicolon_in_rule__Unit__Group_7_2__3__Impl7597 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_3__0__Impl_in_rule__Unit__Group_7_3__07636 = new BitSet(new long[]{0x0800000000000000L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_3__1_in_rule__Unit__Group_7_3__07639 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_61_in_rule__Unit__Group_7_3__0__Impl7667 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Requires_in_rule__Unit__Group_7_3__0__Impl7667 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_3__1__Impl_in_rule__Unit__Group_7_3__17698 = new BitSet(new long[]{0x0000000000400000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_3__2_in_rule__Unit__Group_7_3__17701 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_11_in_rule__Unit__Group_7_3__1__Impl7729 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Colon_in_rule__Unit__Group_7_3__1__Impl7729 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_3__2__Impl_in_rule__Unit__Group_7_3__27760 = new BitSet(new long[]{0x1000000000000000L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_3__3_in_rule__Unit__Group_7_3__27763 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__RequiredCapabilitiesAssignment_7_3_2_in_rule__Unit__Group_7_3__2__Impl7790 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_3__3__Impl_in_rule__Unit__Group_7_3__37820 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_12_in_rule__Unit__Group_7_3__3__Impl7848 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Semicolon_in_rule__Unit__Group_7_3__3__Impl7848 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_4__0__Impl_in_rule__Unit__Group_7_4__07887 = new BitSet(new long[]{0x0000000010000000L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_4__1_in_rule__Unit__Group_7_4__07890 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_61_in_rule__Unit__Group_7_4__0__Impl7918 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Requires_in_rule__Unit__Group_7_4__0__Impl7918 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_4__1__Impl_in_rule__Unit__Group_7_4__17949 = new BitSet(new long[]{0x0800000000000000L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_4__2_in_rule__Unit__Group_7_4__17952 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_41_in_rule__Unit__Group_7_4__1__Impl7980 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Env_in_rule__Unit__Group_7_4__1__Impl7980 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_4__2__Impl_in_rule__Unit__Group_7_4__28011 = new BitSet(new long[]{0x0000000000400000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_4__3_in_rule__Unit__Group_7_4__28014 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_11_in_rule__Unit__Group_7_4__2__Impl8042 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Colon_in_rule__Unit__Group_7_4__2__Impl8042 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_4__3__Impl_in_rule__Unit__Group_7_4__38073 = new BitSet(new long[]{0x1000000000000000L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_4__4_in_rule__Unit__Group_7_4__38076 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__MetaRequiredCapabilitiesAssignment_7_4_3_in_rule__Unit__Group_7_4__3__Impl8103 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Unit__Group_7_4__4__Impl_in_rule__Unit__Group_7_4__48133 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_12_in_rule__Unit__Group_7_4__4__Impl8161 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Semicolon_in_rule__Unit__Group_7_4__4__Impl8161 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__Group__0__Impl_in_rule__ProvidedCapability__Group__08202 = new BitSet(new long[]{0x0000000000400000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__Group__1_in_rule__ProvidedCapability__Group__08205 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__Group__1__Impl_in_rule__ProvidedCapability__Group__18263 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000004L});
@@ -4829,48 +4829,48 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__ProvidedCapability__Group_2__0_in_rule__ProvidedCapability__Group__2__Impl8350 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__Group_2__0__Impl_in_rule__ProvidedCapability__Group_2__08387 = new BitSet(new long[]{0x0000000000902000L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__Group_2__1_in_rule__ProvidedCapability__Group_2__08390 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_18_in_rule__ProvidedCapability__Group_2__0__Impl8418 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_LeftCurlyBracket_in_rule__ProvidedCapability__Group_2__0__Impl8418 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__Group_2__1__Impl_in_rule__ProvidedCapability__Group_2__18449 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000010L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__Group_2__2_in_rule__ProvidedCapability__Group_2__18452 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__UnorderedGroup_2_1_in_rule__ProvidedCapability__Group_2__1__Impl8479 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__Group_2__2__Impl_in_rule__ProvidedCapability__Group_2__28509 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_20_in_rule__ProvidedCapability__Group_2__2__Impl8537 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RightCurlyBracket_in_rule__ProvidedCapability__Group_2__2__Impl8537 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__Group_2_1_0__0__Impl_in_rule__ProvidedCapability__Group_2_1_0__08574 = new BitSet(new long[]{0x0800000000000000L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__Group_2_1_0__1_in_rule__ProvidedCapability__Group_2_1_0__08577 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_48_in_rule__ProvidedCapability__Group_2_1_0__0__Impl8605 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_When_in_rule__ProvidedCapability__Group_2_1_0__0__Impl8605 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__Group_2_1_0__1__Impl_in_rule__ProvidedCapability__Group_2_1_0__18636 = new BitSet(new long[]{0x010A0050216B4880L,0x0000000000000284L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__Group_2_1_0__2_in_rule__ProvidedCapability__Group_2_1_0__18639 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_11_in_rule__ProvidedCapability__Group_2_1_0__1__Impl8667 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Colon_in_rule__ProvidedCapability__Group_2_1_0__1__Impl8667 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__Group_2_1_0__2__Impl_in_rule__ProvidedCapability__Group_2_1_0__28698 = new BitSet(new long[]{0x1000000000000000L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__Group_2_1_0__3_in_rule__ProvidedCapability__Group_2_1_0__28701 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__CondExprAssignment_2_1_0_2_in_rule__ProvidedCapability__Group_2_1_0__2__Impl8728 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__Group_2_1_0__3__Impl_in_rule__ProvidedCapability__Group_2_1_0__38758 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_12_in_rule__ProvidedCapability__Group_2_1_0__3__Impl8786 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Semicolon_in_rule__ProvidedCapability__Group_2_1_0__3__Impl8786 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__Group_2_1_1__0__Impl_in_rule__ProvidedCapability__Group_2_1_1__08825 = new BitSet(new long[]{0x0800000000000000L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__Group_2_1_1__1_in_rule__ProvidedCapability__Group_2_1_1__08828 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_45_in_rule__ProvidedCapability__Group_2_1_1__0__Impl8856 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Name_in_rule__ProvidedCapability__Group_2_1_1__0__Impl8856 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__Group_2_1_1__1__Impl_in_rule__ProvidedCapability__Group_2_1_1__18887 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__Group_2_1_1__2_in_rule__ProvidedCapability__Group_2_1_1__18890 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_11_in_rule__ProvidedCapability__Group_2_1_1__1__Impl8918 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Colon_in_rule__ProvidedCapability__Group_2_1_1__1__Impl8918 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__Group_2_1_1__2__Impl_in_rule__ProvidedCapability__Group_2_1_1__28949 = new BitSet(new long[]{0x1000000000000000L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__Group_2_1_1__3_in_rule__ProvidedCapability__Group_2_1_1__28952 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__NameAssignment_2_1_1_2_in_rule__ProvidedCapability__Group_2_1_1__2__Impl8979 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__Group_2_1_1__3__Impl_in_rule__ProvidedCapability__Group_2_1_1__39009 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_12_in_rule__ProvidedCapability__Group_2_1_1__3__Impl9037 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Semicolon_in_rule__ProvidedCapability__Group_2_1_1__3__Impl9037 = new BitSet(new long[]{0x0000000000000002L});
     }
 
     protected static class FollowSets004 {
         public static final BitSet FOLLOW_rule__ProvidedCapability__Group_2_1_2__0__Impl_in_rule__ProvidedCapability__Group_2_1_2__09076 = new BitSet(new long[]{0x0800000000000000L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__Group_2_1_2__1_in_rule__ProvidedCapability__Group_2_1_2__09079 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_58_in_rule__ProvidedCapability__Group_2_1_2__0__Impl9107 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Version_in_rule__ProvidedCapability__Group_2_1_2__0__Impl9107 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__Group_2_1_2__1__Impl_in_rule__ProvidedCapability__Group_2_1_2__19138 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__Group_2_1_2__2_in_rule__ProvidedCapability__Group_2_1_2__19141 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_11_in_rule__ProvidedCapability__Group_2_1_2__1__Impl9169 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Colon_in_rule__ProvidedCapability__Group_2_1_2__1__Impl9169 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__Group_2_1_2__2__Impl_in_rule__ProvidedCapability__Group_2_1_2__29200 = new BitSet(new long[]{0x1000000000000000L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__Group_2_1_2__3_in_rule__ProvidedCapability__Group_2_1_2__29203 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__VersionAssignment_2_1_2_2_in_rule__ProvidedCapability__Group_2_1_2__2__Impl9230 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ProvidedCapability__Group_2_1_2__3__Impl_in_rule__ProvidedCapability__Group_2_1_2__39260 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_12_in_rule__ProvidedCapability__Group_2_1_2__3__Impl9288 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Semicolon_in_rule__ProvidedCapability__Group_2_1_2__3__Impl9288 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group__0__Impl_in_rule__AliasedRequiredCapability__Group__09327 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group__1_in_rule__AliasedRequiredCapability__Group__09330 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Alternatives_0_in_rule__AliasedRequiredCapability__Group__0__Impl9357 = new BitSet(new long[]{0x0000000000000002L});
@@ -4884,66 +4884,66 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3__0_in_rule__AliasedRequiredCapability__Group__3__Impl9535 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_2__0__Impl_in_rule__AliasedRequiredCapability__Group_2__09573 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_2__1_in_rule__AliasedRequiredCapability__Group_2__09576 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_35_in_rule__AliasedRequiredCapability__Group_2__0__Impl9604 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_As_in_rule__AliasedRequiredCapability__Group_2__0__Impl9604 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_2__1__Impl_in_rule__AliasedRequiredCapability__Group_2__19635 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__AliasAssignment_2_1_in_rule__AliasedRequiredCapability__Group_2__1__Impl9662 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3__0__Impl_in_rule__AliasedRequiredCapability__Group_3__09696 = new BitSet(new long[]{0x000000000080A030L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3__1_in_rule__AliasedRequiredCapability__Group_3__09699 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_18_in_rule__AliasedRequiredCapability__Group_3__0__Impl9727 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_LeftCurlyBracket_in_rule__AliasedRequiredCapability__Group_3__0__Impl9727 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3__1__Impl_in_rule__AliasedRequiredCapability__Group_3__19758 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000010L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3__2_in_rule__AliasedRequiredCapability__Group_3__19761 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__UnorderedGroup_3_1_in_rule__AliasedRequiredCapability__Group_3__1__Impl9788 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3__2__Impl_in_rule__AliasedRequiredCapability__Group_3__29818 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_20_in_rule__AliasedRequiredCapability__Group_3__2__Impl9846 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RightCurlyBracket_in_rule__AliasedRequiredCapability__Group_3__2__Impl9846 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3_1_0__0__Impl_in_rule__AliasedRequiredCapability__Group_3_1_0__09883 = new BitSet(new long[]{0x0800000000000000L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3_1_0__1_in_rule__AliasedRequiredCapability__Group_3_1_0__09886 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_48_in_rule__AliasedRequiredCapability__Group_3_1_0__0__Impl9914 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_When_in_rule__AliasedRequiredCapability__Group_3_1_0__0__Impl9914 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3_1_0__1__Impl_in_rule__AliasedRequiredCapability__Group_3_1_0__19945 = new BitSet(new long[]{0x010A0050216B4880L,0x0000000000000284L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3_1_0__2_in_rule__AliasedRequiredCapability__Group_3_1_0__19948 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_11_in_rule__AliasedRequiredCapability__Group_3_1_0__1__Impl9976 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Colon_in_rule__AliasedRequiredCapability__Group_3_1_0__1__Impl9976 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3_1_0__2__Impl_in_rule__AliasedRequiredCapability__Group_3_1_0__210007 = new BitSet(new long[]{0x1000000000000000L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3_1_0__3_in_rule__AliasedRequiredCapability__Group_3_1_0__210010 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__CondExprAssignment_3_1_0_2_in_rule__AliasedRequiredCapability__Group_3_1_0__2__Impl10037 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3_1_0__3__Impl_in_rule__AliasedRequiredCapability__Group_3_1_0__310067 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_12_in_rule__AliasedRequiredCapability__Group_3_1_0__3__Impl10095 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Semicolon_in_rule__AliasedRequiredCapability__Group_3_1_0__3__Impl10095 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3_1_1__0__Impl_in_rule__AliasedRequiredCapability__Group_3_1_1__010134 = new BitSet(new long[]{0x1000000000000000L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3_1_1__1_in_rule__AliasedRequiredCapability__Group_3_1_1__010137 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__GreedyAssignment_3_1_1_0_in_rule__AliasedRequiredCapability__Group_3_1_1__0__Impl10164 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3_1_1__1__Impl_in_rule__AliasedRequiredCapability__Group_3_1_1__110194 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_12_in_rule__AliasedRequiredCapability__Group_3_1_1__1__Impl10222 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Semicolon_in_rule__AliasedRequiredCapability__Group_3_1_1__1__Impl10222 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3_1_2__0__Impl_in_rule__AliasedRequiredCapability__Group_3_1_2__010257 = new BitSet(new long[]{0x0800000000000000L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3_1_2__1_in_rule__AliasedRequiredCapability__Group_3_1_2__010260 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_65_in_rule__AliasedRequiredCapability__Group_3_1_2__0__Impl10288 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RequiresMin_in_rule__AliasedRequiredCapability__Group_3_1_2__0__Impl10288 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3_1_2__1__Impl_in_rule__AliasedRequiredCapability__Group_3_1_2__110319 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000100L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3_1_2__2_in_rule__AliasedRequiredCapability__Group_3_1_2__110322 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_11_in_rule__AliasedRequiredCapability__Group_3_1_2__1__Impl10350 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Colon_in_rule__AliasedRequiredCapability__Group_3_1_2__1__Impl10350 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3_1_2__2__Impl_in_rule__AliasedRequiredCapability__Group_3_1_2__210381 = new BitSet(new long[]{0x1000000000000000L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3_1_2__3_in_rule__AliasedRequiredCapability__Group_3_1_2__210384 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__MinAssignment_3_1_2_2_in_rule__AliasedRequiredCapability__Group_3_1_2__2__Impl10411 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3_1_2__3__Impl_in_rule__AliasedRequiredCapability__Group_3_1_2__310441 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_12_in_rule__AliasedRequiredCapability__Group_3_1_2__3__Impl10469 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Semicolon_in_rule__AliasedRequiredCapability__Group_3_1_2__3__Impl10469 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3_1_3__0__Impl_in_rule__AliasedRequiredCapability__Group_3_1_3__010508 = new BitSet(new long[]{0x0800000000000000L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3_1_3__1_in_rule__AliasedRequiredCapability__Group_3_1_3__010511 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_64_in_rule__AliasedRequiredCapability__Group_3_1_3__0__Impl10539 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RequiresMax_in_rule__AliasedRequiredCapability__Group_3_1_3__0__Impl10539 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3_1_3__1__Impl_in_rule__AliasedRequiredCapability__Group_3_1_3__110570 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000100L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3_1_3__2_in_rule__AliasedRequiredCapability__Group_3_1_3__110573 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_11_in_rule__AliasedRequiredCapability__Group_3_1_3__1__Impl10601 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Colon_in_rule__AliasedRequiredCapability__Group_3_1_3__1__Impl10601 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3_1_3__2__Impl_in_rule__AliasedRequiredCapability__Group_3_1_3__210632 = new BitSet(new long[]{0x1000000000000000L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3_1_3__3_in_rule__AliasedRequiredCapability__Group_3_1_3__210635 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__MaxAssignment_3_1_3_2_in_rule__AliasedRequiredCapability__Group_3_1_3__2__Impl10662 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3_1_3__3__Impl_in_rule__AliasedRequiredCapability__Group_3_1_3__310692 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_12_in_rule__AliasedRequiredCapability__Group_3_1_3__3__Impl10720 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Semicolon_in_rule__AliasedRequiredCapability__Group_3_1_3__3__Impl10720 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3_1_4__0__Impl_in_rule__AliasedRequiredCapability__Group_3_1_4__010759 = new BitSet(new long[]{0x0800000000000000L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3_1_4__1_in_rule__AliasedRequiredCapability__Group_3_1_4__010762 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_58_in_rule__AliasedRequiredCapability__Group_3_1_4__0__Impl10790 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Version_in_rule__AliasedRequiredCapability__Group_3_1_4__0__Impl10790 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3_1_4__1__Impl_in_rule__AliasedRequiredCapability__Group_3_1_4__110821 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3_1_4__2_in_rule__AliasedRequiredCapability__Group_3_1_4__110824 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_11_in_rule__AliasedRequiredCapability__Group_3_1_4__1__Impl10852 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Colon_in_rule__AliasedRequiredCapability__Group_3_1_4__1__Impl10852 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3_1_4__2__Impl_in_rule__AliasedRequiredCapability__Group_3_1_4__210883 = new BitSet(new long[]{0x1000000000000000L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3_1_4__3_in_rule__AliasedRequiredCapability__Group_3_1_4__210886 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__VersionRangeAssignment_3_1_4_2_in_rule__AliasedRequiredCapability__Group_3_1_4__2__Impl10913 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AliasedRequiredCapability__Group_3_1_4__3__Impl_in_rule__AliasedRequiredCapability__Group_3_1_4__310943 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_12_in_rule__AliasedRequiredCapability__Group_3_1_4__3__Impl10971 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Semicolon_in_rule__AliasedRequiredCapability__Group_3_1_4__3__Impl10971 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group__0__Impl_in_rule__RequiredCapability__Group__011010 = new BitSet(new long[]{0x0000000000400000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group__1_in_rule__RequiredCapability__Group__011013 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group__1__Impl_in_rule__RequiredCapability__Group__111071 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
@@ -4956,7 +4956,7 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3__0_in_rule__RequiredCapability__Group__3__Impl11218 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3__0__Impl_in_rule__RequiredCapability__Group_3__011256 = new BitSet(new long[]{0x000000000080A030L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3__1_in_rule__RequiredCapability__Group_3__011259 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_18_in_rule__RequiredCapability__Group_3__0__Impl11287 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_LeftCurlyBracket_in_rule__RequiredCapability__Group_3__0__Impl11287 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3__1__Impl_in_rule__RequiredCapability__Group_3__111318 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000010L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3__2_in_rule__RequiredCapability__Group_3__111321 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RequiredCapability__UnorderedGroup_3_1_in_rule__RequiredCapability__Group_3__1__Impl11348 = new BitSet(new long[]{0x0000000000000002L});
@@ -4964,59 +4964,59 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
 
     protected static class FollowSets005 {
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3__2__Impl_in_rule__RequiredCapability__Group_3__211378 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_20_in_rule__RequiredCapability__Group_3__2__Impl11406 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RightCurlyBracket_in_rule__RequiredCapability__Group_3__2__Impl11406 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3_1_0__0__Impl_in_rule__RequiredCapability__Group_3_1_0__011443 = new BitSet(new long[]{0x0800000000000000L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3_1_0__1_in_rule__RequiredCapability__Group_3_1_0__011446 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_48_in_rule__RequiredCapability__Group_3_1_0__0__Impl11474 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_When_in_rule__RequiredCapability__Group_3_1_0__0__Impl11474 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3_1_0__1__Impl_in_rule__RequiredCapability__Group_3_1_0__111505 = new BitSet(new long[]{0x010A0050216B4880L,0x0000000000000284L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3_1_0__2_in_rule__RequiredCapability__Group_3_1_0__111508 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_11_in_rule__RequiredCapability__Group_3_1_0__1__Impl11536 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Colon_in_rule__RequiredCapability__Group_3_1_0__1__Impl11536 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3_1_0__2__Impl_in_rule__RequiredCapability__Group_3_1_0__211567 = new BitSet(new long[]{0x1000000000000000L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3_1_0__3_in_rule__RequiredCapability__Group_3_1_0__211570 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RequiredCapability__CondExprAssignment_3_1_0_2_in_rule__RequiredCapability__Group_3_1_0__2__Impl11597 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3_1_0__3__Impl_in_rule__RequiredCapability__Group_3_1_0__311627 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_12_in_rule__RequiredCapability__Group_3_1_0__3__Impl11655 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Semicolon_in_rule__RequiredCapability__Group_3_1_0__3__Impl11655 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3_1_1__0__Impl_in_rule__RequiredCapability__Group_3_1_1__011694 = new BitSet(new long[]{0x1000000000000000L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3_1_1__1_in_rule__RequiredCapability__Group_3_1_1__011697 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RequiredCapability__GreedyAssignment_3_1_1_0_in_rule__RequiredCapability__Group_3_1_1__0__Impl11724 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3_1_1__1__Impl_in_rule__RequiredCapability__Group_3_1_1__111754 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_12_in_rule__RequiredCapability__Group_3_1_1__1__Impl11782 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Semicolon_in_rule__RequiredCapability__Group_3_1_1__1__Impl11782 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3_1_2__0__Impl_in_rule__RequiredCapability__Group_3_1_2__011817 = new BitSet(new long[]{0x0800000000000000L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3_1_2__1_in_rule__RequiredCapability__Group_3_1_2__011820 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_65_in_rule__RequiredCapability__Group_3_1_2__0__Impl11848 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RequiresMin_in_rule__RequiredCapability__Group_3_1_2__0__Impl11848 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3_1_2__1__Impl_in_rule__RequiredCapability__Group_3_1_2__111879 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000100L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3_1_2__2_in_rule__RequiredCapability__Group_3_1_2__111882 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_11_in_rule__RequiredCapability__Group_3_1_2__1__Impl11910 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Colon_in_rule__RequiredCapability__Group_3_1_2__1__Impl11910 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3_1_2__2__Impl_in_rule__RequiredCapability__Group_3_1_2__211941 = new BitSet(new long[]{0x1000000000000000L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3_1_2__3_in_rule__RequiredCapability__Group_3_1_2__211944 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RequiredCapability__MinAssignment_3_1_2_2_in_rule__RequiredCapability__Group_3_1_2__2__Impl11971 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3_1_2__3__Impl_in_rule__RequiredCapability__Group_3_1_2__312001 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_12_in_rule__RequiredCapability__Group_3_1_2__3__Impl12029 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Semicolon_in_rule__RequiredCapability__Group_3_1_2__3__Impl12029 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3_1_3__0__Impl_in_rule__RequiredCapability__Group_3_1_3__012068 = new BitSet(new long[]{0x0800000000000000L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3_1_3__1_in_rule__RequiredCapability__Group_3_1_3__012071 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_64_in_rule__RequiredCapability__Group_3_1_3__0__Impl12099 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RequiresMax_in_rule__RequiredCapability__Group_3_1_3__0__Impl12099 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3_1_3__1__Impl_in_rule__RequiredCapability__Group_3_1_3__112130 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000100L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3_1_3__2_in_rule__RequiredCapability__Group_3_1_3__112133 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_11_in_rule__RequiredCapability__Group_3_1_3__1__Impl12161 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Colon_in_rule__RequiredCapability__Group_3_1_3__1__Impl12161 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3_1_3__2__Impl_in_rule__RequiredCapability__Group_3_1_3__212192 = new BitSet(new long[]{0x1000000000000000L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3_1_3__3_in_rule__RequiredCapability__Group_3_1_3__212195 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RequiredCapability__MaxAssignment_3_1_3_2_in_rule__RequiredCapability__Group_3_1_3__2__Impl12222 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3_1_3__3__Impl_in_rule__RequiredCapability__Group_3_1_3__312252 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_12_in_rule__RequiredCapability__Group_3_1_3__3__Impl12280 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Semicolon_in_rule__RequiredCapability__Group_3_1_3__3__Impl12280 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3_1_4__0__Impl_in_rule__RequiredCapability__Group_3_1_4__012319 = new BitSet(new long[]{0x0800000000000000L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3_1_4__1_in_rule__RequiredCapability__Group_3_1_4__012322 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_58_in_rule__RequiredCapability__Group_3_1_4__0__Impl12350 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Version_in_rule__RequiredCapability__Group_3_1_4__0__Impl12350 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3_1_4__1__Impl_in_rule__RequiredCapability__Group_3_1_4__112381 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3_1_4__2_in_rule__RequiredCapability__Group_3_1_4__112384 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_11_in_rule__RequiredCapability__Group_3_1_4__1__Impl12412 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Colon_in_rule__RequiredCapability__Group_3_1_4__1__Impl12412 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3_1_4__2__Impl_in_rule__RequiredCapability__Group_3_1_4__212443 = new BitSet(new long[]{0x1000000000000000L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3_1_4__3_in_rule__RequiredCapability__Group_3_1_4__212446 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RequiredCapability__VersionRangeAssignment_3_1_4_2_in_rule__RequiredCapability__Group_3_1_4__2__Impl12473 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RequiredCapability__Group_3_1_4__3__Impl_in_rule__RequiredCapability__Group_3_1_4__312503 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_12_in_rule__RequiredCapability__Group_3_1_4__3__Impl12531 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Semicolon_in_rule__RequiredCapability__Group_3_1_4__3__Impl12531 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Path__Group_1__0__Impl_in_rule__Path__Group_1__012570 = new BitSet(new long[]{0x0400000000000000L,0x0000000000000280L});
         public static final BitSet FOLLOW_rule__Path__Group_1__1_in_rule__Path__Group_1__012573 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_10_in_rule__Path__Group_1__0__Impl12602 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Solidus_in_rule__Path__Group_1__0__Impl12602 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Path__Group_1__1__Impl_in_rule__Path__Group_1__112635 = new BitSet(new long[]{0x0400000000000000L});
         public static final BitSet FOLLOW_rule__Path__Group_1__2_in_rule__Path__Group_1__112638 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleQID_in_rule__Path__Group_1__1__Impl12665 = new BitSet(new long[]{0x0000000000000002L});
@@ -5024,10 +5024,10 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__Path__Group_1__3_in_rule__Path__Group_1__212697 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Path__Group_1_2__0_in_rule__Path__Group_1__2__Impl12724 = new BitSet(new long[]{0x0400000000000002L});
         public static final BitSet FOLLOW_rule__Path__Group_1__3__Impl_in_rule__Path__Group_1__312755 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_10_in_rule__Path__Group_1__3__Impl12784 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Solidus_in_rule__Path__Group_1__3__Impl12784 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Path__Group_1_2__0__Impl_in_rule__Path__Group_1_2__012825 = new BitSet(new long[]{0x0400000000000000L,0x0000000000000280L});
         public static final BitSet FOLLOW_rule__Path__Group_1_2__1_in_rule__Path__Group_1_2__012828 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_10_in_rule__Path__Group_1_2__0__Impl12856 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Solidus_in_rule__Path__Group_1_2__0__Impl12856 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Path__Group_1_2__1__Impl_in_rule__Path__Group_1_2__112887 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleQID_in_rule__Path__Group_1_2__1__Impl12914 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ParameterList__Group__0__Impl_in_rule__ParameterList__Group__012947 = new BitSet(new long[]{0x0080000000000000L});
@@ -5037,7 +5037,7 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__ParameterList__Group_1__0_in_rule__ParameterList__Group__1__Impl13034 = new BitSet(new long[]{0x0080000000000002L});
         public static final BitSet FOLLOW_rule__ParameterList__Group_1__0__Impl_in_rule__ParameterList__Group_1__013069 = new BitSet(new long[]{0x210A0050256B4880L,0x000000000000028CL});
         public static final BitSet FOLLOW_rule__ParameterList__Group_1__1_in_rule__ParameterList__Group_1__013072 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_7_in_rule__ParameterList__Group_1__0__Impl13100 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Comma_in_rule__ParameterList__Group_1__0__Impl13100 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ParameterList__Group_1__1__Impl_in_rule__ParameterList__Group_1__113131 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ParameterList__ParametersAssignment_1_1_in_rule__ParameterList__Group_1__1__Impl13158 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ParameterDeclaration__Group__0__Impl_in_rule__ParameterDeclaration__Group__013192 = new BitSet(new long[]{0x0008000000000000L,0x0000000000000088L});
@@ -5056,7 +5056,7 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__Function__FinalAssignment_2_in_rule__Function__Group__2__Impl13466 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Function__Group__3__Impl_in_rule__Function__Group__313497 = new BitSet(new long[]{0x0008000000000000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__Function__Group__4_in_rule__Function__Group__313500 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_59_in_rule__Function__Group__3__Impl13528 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Function_in_rule__Function__Group__3__Impl13528 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Function__Group__4__Impl_in_rule__Function__Group__413559 = new BitSet(new long[]{0x0008000000000000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__Function__Group__5_in_rule__Function__Group__413562 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Function__ReturnTypeAssignment_4_in_rule__Function__Group__4__Impl13589 = new BitSet(new long[]{0x0000000000000002L});
@@ -5076,12 +5076,12 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__Function__Alternatives_8_in_rule__Function__Group__8__Impl13829 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Function__Group_6__0__Impl_in_rule__Function__Group_6__013877 = new BitSet(new long[]{0x0018000004000000L,0x0000000000000088L});
         public static final BitSet FOLLOW_rule__Function__Group_6__1_in_rule__Function__Group_6__013880 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_3_in_rule__Function__Group_6__0__Impl13908 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_LeftParenthesis_in_rule__Function__Group_6__0__Impl13908 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Function__Group_6__1__Impl_in_rule__Function__Group_6__113939 = new BitSet(new long[]{0x0018000004000000L,0x0000000000000088L});
         public static final BitSet FOLLOW_rule__Function__Group_6__2_in_rule__Function__Group_6__113942 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Function__Alternatives_6_1_in_rule__Function__Group_6__1__Impl13969 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Function__Group_6__2__Impl_in_rule__Function__Group_6__214000 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_4_in_rule__Function__Group_6__2__Impl14028 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RightParenthesis_in_rule__Function__Group_6__2__Impl14028 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Function__Group_6_1_0__0__Impl_in_rule__Function__Group_6_1_0__014065 = new BitSet(new long[]{0x0080000000000000L});
         public static final BitSet FOLLOW_rule__Function__Group_6_1_0__1_in_rule__Function__Group_6_1_0__014068 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Function__ParametersAssignment_6_1_0_0_in_rule__Function__Group_6_1_0__0__Impl14095 = new BitSet(new long[]{0x0000000000000002L});
@@ -5092,12 +5092,12 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__Function__Group_6_1_0_2__0_in_rule__Function__Group_6_1_0__2__Impl14213 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Function__Group_6_1_0_1__0__Impl_in_rule__Function__Group_6_1_0_1__014250 = new BitSet(new long[]{0x0008000000000000L,0x0000000000000088L});
         public static final BitSet FOLLOW_rule__Function__Group_6_1_0_1__1_in_rule__Function__Group_6_1_0_1__014253 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_7_in_rule__Function__Group_6_1_0_1__0__Impl14281 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Comma_in_rule__Function__Group_6_1_0_1__0__Impl14281 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Function__Group_6_1_0_1__1__Impl_in_rule__Function__Group_6_1_0_1__114312 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Function__ParametersAssignment_6_1_0_1_1_in_rule__Function__Group_6_1_0_1__1__Impl14339 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Function__Group_6_1_0_2__0__Impl_in_rule__Function__Group_6_1_0_2__014373 = new BitSet(new long[]{0x0000000004000000L});
         public static final BitSet FOLLOW_rule__Function__Group_6_1_0_2__1_in_rule__Function__Group_6_1_0_2__014376 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_7_in_rule__Function__Group_6_1_0_2__0__Impl14404 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Comma_in_rule__Function__Group_6_1_0_2__0__Impl14404 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Function__Group_6_1_0_2__1__Impl_in_rule__Function__Group_6_1_0_2__114435 = new BitSet(new long[]{0x0008000000000000L,0x0000000000000088L});
         public static final BitSet FOLLOW_rule__Function__Group_6_1_0_2__2_in_rule__Function__Group_6_1_0_2__114438 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Function__VarArgsAssignment_6_1_0_2_1_in_rule__Function__Group_6_1_0_2__1__Impl14465 = new BitSet(new long[]{0x0000000000000002L});
@@ -5110,25 +5110,25 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__Function__ParametersAssignment_6_1_1_1_in_rule__Function__Group_6_1_1__1__Impl14645 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Function__Group_7__0__Impl_in_rule__Function__Group_7__014679 = new BitSet(new long[]{0x0800000000000000L,0x0000000000000004L});
         public static final BitSet FOLLOW_rule__Function__Group_7__1_in_rule__Function__Group_7__014682 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_48_in_rule__Function__Group_7__0__Impl14710 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_When_in_rule__Function__Group_7__0__Impl14710 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Function__Group_7__1__Impl_in_rule__Function__Group_7__114741 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Function__GuardAssignment_7_1_in_rule__Function__Group_7__1__Impl14768 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Function__Group_8_0__0__Impl_in_rule__Function__Group_8_0__014802 = new BitSet(new long[]{0x010A0050216B4880L,0x0000000000000284L});
         public static final BitSet FOLLOW_rule__Function__Group_8_0__1_in_rule__Function__Group_8_0__014805 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_11_in_rule__Function__Group_8_0__0__Impl14833 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Colon_in_rule__Function__Group_8_0__0__Impl14833 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Function__Group_8_0__1__Impl_in_rule__Function__Group_8_0__114864 = new BitSet(new long[]{0x1000000000000000L});
         public static final BitSet FOLLOW_rule__Function__Group_8_0__2_in_rule__Function__Group_8_0__114867 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Function__FuncExprAssignment_8_0_1_in_rule__Function__Group_8_0__1__Impl14894 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Function__Group_8_0__2__Impl_in_rule__Function__Group_8_0__214924 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_12_in_rule__Function__Group_8_0__2__Impl14952 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Semicolon_in_rule__Function__Group_8_0__2__Impl14952 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__GuardExpression__Group_0__0__Impl_in_rule__GuardExpression__Group_0__014989 = new BitSet(new long[]{0x010A0050216B4880L,0x0000000000000284L});
         public static final BitSet FOLLOW_rule__GuardExpression__Group_0__1_in_rule__GuardExpression__Group_0__014992 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_11_in_rule__GuardExpression__Group_0__0__Impl15020 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Colon_in_rule__GuardExpression__Group_0__0__Impl15020 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__GuardExpression__Group_0__1__Impl_in_rule__GuardExpression__Group_0__115051 = new BitSet(new long[]{0x1000000000000000L});
         public static final BitSet FOLLOW_rule__GuardExpression__Group_0__2_in_rule__GuardExpression__Group_0__115054 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__GuardExpression__GuardExprAssignment_0_1_in_rule__GuardExpression__Group_0__1__Impl15081 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__GuardExpression__Group_0__2__Impl_in_rule__GuardExpression__Group_0__215111 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_12_in_rule__GuardExpression__Group_0__2__Impl15139 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Semicolon_in_rule__GuardExpression__Group_0__2__Impl15139 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AssignmentExpression__Group__0__Impl_in_rule__AssignmentExpression__Group__015176 = new BitSet(new long[]{0x400002AA00000000L});
         public static final BitSet FOLLOW_rule__AssignmentExpression__Group__1_in_rule__AssignmentExpression__Group__015179 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleCachedExpression_in_rule__AssignmentExpression__Group__0__Impl15206 = new BitSet(new long[]{0x0000000000000002L});
@@ -5158,7 +5158,7 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__VarDeclaration__NameAssignment_2_1_in_rule__VarDeclaration__Group_2__1__Impl15816 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__VarDeclaration__Group_3__0__Impl_in_rule__VarDeclaration__Group_3__015850 = new BitSet(new long[]{0x010A0050216B4880L,0x0000000000000284L});
         public static final BitSet FOLLOW_rule__VarDeclaration__Group_3__1_in_rule__VarDeclaration__Group_3__015853 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_14_in_rule__VarDeclaration__Group_3__0__Impl15881 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_EqualsSign_in_rule__VarDeclaration__Group_3__0__Impl15881 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__VarDeclaration__Group_3__1__Impl_in_rule__VarDeclaration__Group_3__115912 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__VarDeclaration__ValueExprAssignment_3_1_in_rule__VarDeclaration__Group_3__1__Impl15939 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ValDeclaration__Group__0__Impl_in_rule__ValDeclaration__Group__015973 = new BitSet(new long[]{0x0000000040040000L});
@@ -5180,7 +5180,7 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__ValDeclaration__NameAssignment_4_in_rule__ValDeclaration__Group__4__Impl16246 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ValDeclaration__Group__5__Impl_in_rule__ValDeclaration__Group__516276 = new BitSet(new long[]{0x010A0050216B4880L,0x0000000000000284L});
         public static final BitSet FOLLOW_rule__ValDeclaration__Group__6_in_rule__ValDeclaration__Group__516279 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_14_in_rule__ValDeclaration__Group__5__Impl16307 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_EqualsSign_in_rule__ValDeclaration__Group__5__Impl16307 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ValDeclaration__Group__6__Impl_in_rule__ValDeclaration__Group__616338 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ValDeclaration__ValueExprAssignment_6_in_rule__ValDeclaration__Group__6__Impl16365 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__SimpleTypeRef__Group__0__Impl_in_rule__SimpleTypeRef__Group__016409 = new BitSet(new long[]{0x2000000000000000L});
@@ -5190,7 +5190,7 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__SimpleTypeRef__Group_1__0_in_rule__SimpleTypeRef__Group__1__Impl16496 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__SimpleTypeRef__Group_1__0__Impl_in_rule__SimpleTypeRef__Group_1__016531 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__SimpleTypeRef__Group_1__1_in_rule__SimpleTypeRef__Group_1__016534 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_13_in_rule__SimpleTypeRef__Group_1__0__Impl16562 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_LessThanSign_in_rule__SimpleTypeRef__Group_1__0__Impl16562 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__SimpleTypeRef__Group_1__1__Impl_in_rule__SimpleTypeRef__Group_1__116593 = new BitSet(new long[]{0x8080000000000000L});
         public static final BitSet FOLLOW_rule__SimpleTypeRef__Group_1__2_in_rule__SimpleTypeRef__Group_1__116596 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__SimpleTypeRef__ActualArgumentsListAssignment_1_1_in_rule__SimpleTypeRef__Group_1__1__Impl16623 = new BitSet(new long[]{0x0000000000000002L});
@@ -5198,24 +5198,24 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__SimpleTypeRef__Group_1__3_in_rule__SimpleTypeRef__Group_1__216656 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__SimpleTypeRef__Group_1_2__0_in_rule__SimpleTypeRef__Group_1__2__Impl16683 = new BitSet(new long[]{0x0080000000000002L});
         public static final BitSet FOLLOW_rule__SimpleTypeRef__Group_1__3__Impl_in_rule__SimpleTypeRef__Group_1__316714 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_15_in_rule__SimpleTypeRef__Group_1__3__Impl16742 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_GreaterThanSign_in_rule__SimpleTypeRef__Group_1__3__Impl16742 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__SimpleTypeRef__Group_1_2__0__Impl_in_rule__SimpleTypeRef__Group_1_2__016781 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__SimpleTypeRef__Group_1_2__1_in_rule__SimpleTypeRef__Group_1_2__016784 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_7_in_rule__SimpleTypeRef__Group_1_2__0__Impl16812 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Comma_in_rule__SimpleTypeRef__Group_1_2__0__Impl16812 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__SimpleTypeRef__Group_1_2__1__Impl_in_rule__SimpleTypeRef__Group_1_2__116843 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__SimpleTypeRef__ActualArgumentsListAssignment_1_2_1_in_rule__SimpleTypeRef__Group_1_2__1__Impl16870 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureTypeRef__Group__0__Impl_in_rule__ClosureTypeRef__Group__016904 = new BitSet(new long[]{0x0010000004000000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__ClosureTypeRef__Group__1_in_rule__ClosureTypeRef__Group__016907 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_3_in_rule__ClosureTypeRef__Group__0__Impl16935 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_LeftParenthesis_in_rule__ClosureTypeRef__Group__0__Impl16935 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureTypeRef__Group__1__Impl_in_rule__ClosureTypeRef__Group__116966 = new BitSet(new long[]{0x0010000004000000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__ClosureTypeRef__Group__2_in_rule__ClosureTypeRef__Group__116969 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureTypeRef__Alternatives_1_in_rule__ClosureTypeRef__Group__1__Impl16996 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureTypeRef__Group__2__Impl_in_rule__ClosureTypeRef__Group__217027 = new BitSet(new long[]{0x0000100000000000L});
         public static final BitSet FOLLOW_rule__ClosureTypeRef__Group__3_in_rule__ClosureTypeRef__Group__217030 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_4_in_rule__ClosureTypeRef__Group__2__Impl17058 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RightParenthesis_in_rule__ClosureTypeRef__Group__2__Impl17058 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureTypeRef__Group__3__Impl_in_rule__ClosureTypeRef__Group__317089 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__ClosureTypeRef__Group__4_in_rule__ClosureTypeRef__Group__317092 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_33_in_rule__ClosureTypeRef__Group__3__Impl17120 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_EqualsSignGreaterThanSign_in_rule__ClosureTypeRef__Group__3__Impl17120 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureTypeRef__Group__4__Impl_in_rule__ClosureTypeRef__Group__417151 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureTypeRef__ReturnTypeAssignment_4_in_rule__ClosureTypeRef__Group__4__Impl17178 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureTypeRef__Group_1_0__0__Impl_in_rule__ClosureTypeRef__Group_1_0__017218 = new BitSet(new long[]{0x0080000000000000L});
@@ -5228,12 +5228,12 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__ClosureTypeRef__Group_1_0_2__0_in_rule__ClosureTypeRef__Group_1_0__2__Impl17366 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureTypeRef__Group_1_0_1__0__Impl_in_rule__ClosureTypeRef__Group_1_0_1__017403 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__ClosureTypeRef__Group_1_0_1__1_in_rule__ClosureTypeRef__Group_1_0_1__017406 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_7_in_rule__ClosureTypeRef__Group_1_0_1__0__Impl17434 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Comma_in_rule__ClosureTypeRef__Group_1_0_1__0__Impl17434 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureTypeRef__Group_1_0_1__1__Impl_in_rule__ClosureTypeRef__Group_1_0_1__117465 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureTypeRef__ParameterTypesAssignment_1_0_1_1_in_rule__ClosureTypeRef__Group_1_0_1__1__Impl17492 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureTypeRef__Group_1_0_2__0__Impl_in_rule__ClosureTypeRef__Group_1_0_2__017526 = new BitSet(new long[]{0x0000000004000000L});
         public static final BitSet FOLLOW_rule__ClosureTypeRef__Group_1_0_2__1_in_rule__ClosureTypeRef__Group_1_0_2__017529 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_7_in_rule__ClosureTypeRef__Group_1_0_2__0__Impl17557 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Comma_in_rule__ClosureTypeRef__Group_1_0_2__0__Impl17557 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureTypeRef__Group_1_0_2__1__Impl_in_rule__ClosureTypeRef__Group_1_0_2__117588 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__ClosureTypeRef__Group_1_0_2__2_in_rule__ClosureTypeRef__Group_1_0_2__117591 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureTypeRef__VarArgsAssignment_1_0_2_1_in_rule__ClosureTypeRef__Group_1_0_2__1__Impl17618 = new BitSet(new long[]{0x0000000000000002L});
@@ -5248,7 +5248,7 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__CachedExpression__Group_0__1_in_rule__CachedExpression__Group_0__017835 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__CachedExpression__Group_0__1__Impl_in_rule__CachedExpression__Group_0__117893 = new BitSet(new long[]{0x010A0050216B4880L,0x0000000000000284L});
         public static final BitSet FOLLOW_rule__CachedExpression__Group_0__2_in_rule__CachedExpression__Group_0__117896 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_52_in_rule__CachedExpression__Group_0__1__Impl17924 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Cached_in_rule__CachedExpression__Group_0__1__Impl17924 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__CachedExpression__Group_0__2__Impl_in_rule__CachedExpression__Group_0__217955 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__CachedExpression__ExprAssignment_0_2_in_rule__CachedExpression__Group_0__2__Impl17982 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__OrExpression__Group__0__Impl_in_rule__OrExpression__Group__018018 = new BitSet(new long[]{0x0000800000000000L});
@@ -5260,7 +5260,7 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__OrExpression__Group_1__1_in_rule__OrExpression__Group_1__018142 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__OrExpression__Group_1__1__Impl_in_rule__OrExpression__Group_1__118200 = new BitSet(new long[]{0x010A0050216B4880L,0x0000000000000284L});
         public static final BitSet FOLLOW_rule__OrExpression__Group_1__2_in_rule__OrExpression__Group_1__118203 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_36_in_rule__OrExpression__Group_1__1__Impl18231 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_VerticalLineVerticalLine_in_rule__OrExpression__Group_1__1__Impl18231 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__OrExpression__Group_1__2__Impl_in_rule__OrExpression__Group_1__218262 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__OrExpression__RightExprAssignment_1_2_in_rule__OrExpression__Group_1__2__Impl18289 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AndExpression__Group__0__Impl_in_rule__AndExpression__Group__018325 = new BitSet(new long[]{0x0000000400000000L});
@@ -5275,7 +5275,7 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__AndExpression__Group_1__1_in_rule__AndExpression__Group_1__018449 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AndExpression__Group_1__1__Impl_in_rule__AndExpression__Group_1__118507 = new BitSet(new long[]{0x010A0050216B4880L,0x0000000000000284L});
         public static final BitSet FOLLOW_rule__AndExpression__Group_1__2_in_rule__AndExpression__Group_1__118510 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_23_in_rule__AndExpression__Group_1__1__Impl18538 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_AmpersandAmpersand_in_rule__AndExpression__Group_1__1__Impl18538 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AndExpression__Group_1__2__Impl_in_rule__AndExpression__Group_1__218569 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AndExpression__RightExprAssignment_1_2_in_rule__AndExpression__Group_1__2__Impl18596 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RelationalExpression__Group__0__Impl_in_rule__RelationalExpression__Group__018632 = new BitSet(new long[]{0xA0012C010A000000L});
@@ -5358,18 +5358,18 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__InfixExpression__Group_1_0__1_in_rule__InfixExpression__Group_1_0__020587 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__InfixExpression__Group_1_0__1__Impl_in_rule__InfixExpression__Group_1_0__120645 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__InfixExpression__Group_1_0__2_in_rule__InfixExpression__Group_1_0__120648 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_9_in_rule__InfixExpression__Group_1_0__1__Impl20676 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_FullStop_in_rule__InfixExpression__Group_1_0__1__Impl20676 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__InfixExpression__Group_1_0__2__Impl_in_rule__InfixExpression__Group_1_0__220707 = new BitSet(new long[]{0x0008000000000000L});
         public static final BitSet FOLLOW_rule__InfixExpression__Group_1_0__3_in_rule__InfixExpression__Group_1_0__220710 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__InfixExpression__NameAssignment_1_0_2_in_rule__InfixExpression__Group_1_0__2__Impl20737 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__InfixExpression__Group_1_0__3__Impl_in_rule__InfixExpression__Group_1_0__320767 = new BitSet(new long[]{0x211A0050256B4880L,0x000000000000028CL});
         public static final BitSet FOLLOW_rule__InfixExpression__Group_1_0__4_in_rule__InfixExpression__Group_1_0__320770 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_3_in_rule__InfixExpression__Group_1_0__3__Impl20798 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_LeftParenthesis_in_rule__InfixExpression__Group_1_0__3__Impl20798 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__InfixExpression__Group_1_0__4__Impl_in_rule__InfixExpression__Group_1_0__420829 = new BitSet(new long[]{0x211A0050256B4880L,0x000000000000028CL});
         public static final BitSet FOLLOW_rule__InfixExpression__Group_1_0__5_in_rule__InfixExpression__Group_1_0__420832 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__InfixExpression__ParameterListAssignment_1_0_4_in_rule__InfixExpression__Group_1_0__4__Impl20859 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__InfixExpression__Group_1_0__5__Impl_in_rule__InfixExpression__Group_1_0__520890 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_4_in_rule__InfixExpression__Group_1_0__5__Impl20918 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RightParenthesis_in_rule__InfixExpression__Group_1_0__5__Impl20918 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__InfixExpression__Group_1_1__0__Impl_in_rule__InfixExpression__Group_1_1__020961 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000001L});
         public static final BitSet FOLLOW_rule__InfixExpression__Group_1_1__1_in_rule__InfixExpression__Group_1_1__020964 = new BitSet(new long[]{0x0000000000000002L});
     }
@@ -5377,17 +5377,17 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
     protected static class FollowSets009 {
         public static final BitSet FOLLOW_rule__InfixExpression__Group_1_1__1__Impl_in_rule__InfixExpression__Group_1_1__121022 = new BitSet(new long[]{0x010A0050216B4880L,0x0000000000000284L});
         public static final BitSet FOLLOW_rule__InfixExpression__Group_1_1__2_in_rule__InfixExpression__Group_1_1__121025 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_16_in_rule__InfixExpression__Group_1_1__1__Impl21053 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_LeftSquareBracket_in_rule__InfixExpression__Group_1_1__1__Impl21053 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__InfixExpression__Group_1_1__2__Impl_in_rule__InfixExpression__Group_1_1__221084 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000002L});
         public static final BitSet FOLLOW_rule__InfixExpression__Group_1_1__3_in_rule__InfixExpression__Group_1_1__221087 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__InfixExpression__IndexExprAssignment_1_1_2_in_rule__InfixExpression__Group_1_1__2__Impl21114 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__InfixExpression__Group_1_1__3__Impl_in_rule__InfixExpression__Group_1_1__321144 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_17_in_rule__InfixExpression__Group_1_1__3__Impl21172 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RightSquareBracket_in_rule__InfixExpression__Group_1_1__3__Impl21172 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__InfixExpression__Group_1_2__0__Impl_in_rule__InfixExpression__Group_1_2__021211 = new BitSet(new long[]{0x0200000000000000L,0x0000000000000001L});
         public static final BitSet FOLLOW_rule__InfixExpression__Group_1_2__1_in_rule__InfixExpression__Group_1_2__021214 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__InfixExpression__Group_1_2__1__Impl_in_rule__InfixExpression__Group_1_2__121272 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__InfixExpression__Group_1_2__2_in_rule__InfixExpression__Group_1_2__121275 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_9_in_rule__InfixExpression__Group_1_2__1__Impl21303 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_FullStop_in_rule__InfixExpression__Group_1_2__1__Impl21303 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__InfixExpression__Group_1_2__2__Impl_in_rule__InfixExpression__Group_1_2__221334 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__InfixExpression__FeatureNameAssignment_1_2_2_in_rule__InfixExpression__Group_1_2__2__Impl21361 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__CallExpression__Group__0__Impl_in_rule__CallExpression__Group__021397 = new BitSet(new long[]{0x0008000000000000L});
@@ -5399,15 +5399,15 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__CallExpression__Group_1__1_in_rule__CallExpression__Group_1__021521 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__CallExpression__Group_1__1__Impl_in_rule__CallExpression__Group_1__121579 = new BitSet(new long[]{0x211A0050256B4880L,0x000000000000028CL});
         public static final BitSet FOLLOW_rule__CallExpression__Group_1__2_in_rule__CallExpression__Group_1__121582 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_3_in_rule__CallExpression__Group_1__1__Impl21610 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_LeftParenthesis_in_rule__CallExpression__Group_1__1__Impl21610 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__CallExpression__Group_1__2__Impl_in_rule__CallExpression__Group_1__221641 = new BitSet(new long[]{0x211A0050256B4880L,0x000000000000028CL});
         public static final BitSet FOLLOW_rule__CallExpression__Group_1__3_in_rule__CallExpression__Group_1__221644 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__CallExpression__ParameterListAssignment_1_2_in_rule__CallExpression__Group_1__2__Impl21671 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__CallExpression__Group_1__3__Impl_in_rule__CallExpression__Group_1__321702 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_4_in_rule__CallExpression__Group_1__3__Impl21730 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RightParenthesis_in_rule__CallExpression__Group_1__3__Impl21730 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__WithExpression__Group__0__Impl_in_rule__WithExpression__Group__021769 = new BitSet(new long[]{0x0800000000000000L,0x0000000000000084L});
         public static final BitSet FOLLOW_rule__WithExpression__Group__1_in_rule__WithExpression__Group__021772 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_49_in_rule__WithExpression__Group__0__Impl21800 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_With_in_rule__WithExpression__Group__0__Impl21800 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__WithExpression__Group__1__Impl_in_rule__WithExpression__Group__121831 = new BitSet(new long[]{0x0800000000000000L,0x0000000000000084L});
         public static final BitSet FOLLOW_rule__WithExpression__Group__2_in_rule__WithExpression__Group__121834 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__WithExpression__Group_1__0_in_rule__WithExpression__Group__1__Impl21861 = new BitSet(new long[]{0x0000000000000002L});
@@ -5420,28 +5420,28 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__WithExpression__Group_1_1__0_in_rule__WithExpression__Group_1__1__Impl22042 = new BitSet(new long[]{0x0080000000000002L});
         public static final BitSet FOLLOW_rule__WithExpression__Group_1_1__0__Impl_in_rule__WithExpression__Group_1_1__022077 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__WithExpression__Group_1_1__1_in_rule__WithExpression__Group_1_1__022080 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_7_in_rule__WithExpression__Group_1_1__0__Impl22108 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Comma_in_rule__WithExpression__Group_1_1__0__Impl22108 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__WithExpression__Group_1_1__1__Impl_in_rule__WithExpression__Group_1_1__122139 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__WithExpression__ReferencedAdviceAssignment_1_1_1_in_rule__WithExpression__Group_1_1__1__Impl22166 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__WithExpression__Group_2_0__0__Impl_in_rule__WithExpression__Group_2_0__022200 = new BitSet(new long[]{0x010A0050216B4880L,0x0000000000000284L});
         public static final BitSet FOLLOW_rule__WithExpression__Group_2_0__1_in_rule__WithExpression__Group_2_0__022203 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_11_in_rule__WithExpression__Group_2_0__0__Impl22231 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Colon_in_rule__WithExpression__Group_2_0__0__Impl22231 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__WithExpression__Group_2_0__1__Impl_in_rule__WithExpression__Group_2_0__122262 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__WithExpression__FuncExprAssignment_2_0_1_in_rule__WithExpression__Group_2_0__1__Impl22289 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__WithExpression__Group_2_1__0__Impl_in_rule__WithExpression__Group_2_1__022323 = new BitSet(new long[]{0x010A0050E16F4880L,0x0000000000000284L});
         public static final BitSet FOLLOW_rule__WithExpression__Group_2_1__1_in_rule__WithExpression__Group_2_1__022326 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_18_in_rule__WithExpression__Group_2_1__0__Impl22354 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_LeftCurlyBracket_in_rule__WithExpression__Group_2_1__0__Impl22354 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__WithExpression__Group_2_1__1__Impl_in_rule__WithExpression__Group_2_1__122385 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000010L});
         public static final BitSet FOLLOW_rule__WithExpression__Group_2_1__2_in_rule__WithExpression__Group_2_1__122388 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__WithExpression__FuncExprAssignment_2_1_1_in_rule__WithExpression__Group_2_1__1__Impl22415 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__WithExpression__Group_2_1__2__Impl_in_rule__WithExpression__Group_2_1__222445 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_20_in_rule__WithExpression__Group_2_1__2__Impl22473 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RightCurlyBracket_in_rule__WithExpression__Group_2_1__2__Impl22473 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__WithContextExpression__Group__0__Impl_in_rule__WithContextExpression__Group__022510 = new BitSet(new long[]{0x0000000000001000L});
         public static final BitSet FOLLOW_rule__WithContextExpression__Group__1_in_rule__WithContextExpression__Group__022513 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_49_in_rule__WithContextExpression__Group__0__Impl22541 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_With_in_rule__WithContextExpression__Group__0__Impl22541 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__WithContextExpression__Group__1__Impl_in_rule__WithContextExpression__Group__122572 = new BitSet(new long[]{0x010A0050216B4880L,0x0000000000000284L});
         public static final BitSet FOLLOW_rule__WithContextExpression__Group__2_in_rule__WithContextExpression__Group__122575 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_57_in_rule__WithContextExpression__Group__1__Impl22603 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Context_in_rule__WithContextExpression__Group__1__Impl22603 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__WithContextExpression__Group__2__Impl_in_rule__WithContextExpression__Group__222634 = new BitSet(new long[]{0x0000400000000000L,0x0000000000000004L});
         public static final BitSet FOLLOW_rule__WithContextExpression__Group__3_in_rule__WithContextExpression__Group__222637 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__WithContextExpression__ExprAssignment_2_in_rule__WithContextExpression__Group__2__Impl22664 = new BitSet(new long[]{0x0000000000000002L});
@@ -5452,24 +5452,24 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__WithContextExpression__ContextBlockAssignment_4_in_rule__WithContextExpression__Group__4__Impl22782 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__WithContextExpression__Group_3__0__Impl_in_rule__WithContextExpression__Group_3__022822 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__WithContextExpression__Group_3__1_in_rule__WithContextExpression__Group_3__022825 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_35_in_rule__WithContextExpression__Group_3__0__Impl22853 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_As_in_rule__WithContextExpression__Group_3__0__Impl22853 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__WithContextExpression__Group_3__1__Impl_in_rule__WithContextExpression__Group_3__122884 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__WithContextExpression__AliasAssignment_3_1_in_rule__WithContextExpression__Group_3__1__Impl22911 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__BlockExpression__Group__0__Impl_in_rule__BlockExpression__Group__022945 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000004L});
         public static final BitSet FOLLOW_rule__BlockExpression__Group__1_in_rule__BlockExpression__Group__022948 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__BlockExpression__Group__1__Impl_in_rule__BlockExpression__Group__123006 = new BitSet(new long[]{0x010A0050E16F4880L,0x0000000000000294L});
         public static final BitSet FOLLOW_rule__BlockExpression__Group__2_in_rule__BlockExpression__Group__123009 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_18_in_rule__BlockExpression__Group__1__Impl23037 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_LeftCurlyBracket_in_rule__BlockExpression__Group__1__Impl23037 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__BlockExpression__Group__2__Impl_in_rule__BlockExpression__Group__223068 = new BitSet(new long[]{0x010A0050E16F4880L,0x0000000000000294L});
         public static final BitSet FOLLOW_rule__BlockExpression__Group__3_in_rule__BlockExpression__Group__223071 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__BlockExpression__Group_2__0_in_rule__BlockExpression__Group__2__Impl23098 = new BitSet(new long[]{0x010A0050E16F4882L,0x0000000000000284L});
         public static final BitSet FOLLOW_rule__BlockExpression__Group__3__Impl_in_rule__BlockExpression__Group__323129 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_20_in_rule__BlockExpression__Group__3__Impl23157 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RightCurlyBracket_in_rule__BlockExpression__Group__3__Impl23157 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__BlockExpression__Group_2__0__Impl_in_rule__BlockExpression__Group_2__023196 = new BitSet(new long[]{0x1000000000000000L});
         public static final BitSet FOLLOW_rule__BlockExpression__Group_2__1_in_rule__BlockExpression__Group_2__023199 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__BlockExpression__ExpressionsAssignment_2_0_in_rule__BlockExpression__Group_2__0__Impl23226 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__BlockExpression__Group_2__1__Impl_in_rule__BlockExpression__Group_2__123256 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_12_in_rule__BlockExpression__Group_2__1__Impl23284 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Semicolon_in_rule__BlockExpression__Group_2__1__Impl23284 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Value__Group__0__Impl_in_rule__Value__Group__023319 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__Value__Group__1_in_rule__Value__Group__023322 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Value__Group__1__Impl_in_rule__Value__Group__123380 = new BitSet(new long[]{0x0000000000000002L});
@@ -5488,17 +5488,17 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__OperationCall__NameAssignment_1_in_rule__OperationCall__Group__1__Impl23654 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__OperationCall__Group__2__Impl_in_rule__OperationCall__Group__223684 = new BitSet(new long[]{0x211A0050256B4880L,0x000000000000028CL});
         public static final BitSet FOLLOW_rule__OperationCall__Group__3_in_rule__OperationCall__Group__223687 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_3_in_rule__OperationCall__Group__2__Impl23715 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_LeftParenthesis_in_rule__OperationCall__Group__2__Impl23715 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__OperationCall__Group__3__Impl_in_rule__OperationCall__Group__323746 = new BitSet(new long[]{0x211A0050256B4880L,0x000000000000028CL});
         public static final BitSet FOLLOW_rule__OperationCall__Group__4_in_rule__OperationCall__Group__323749 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__OperationCall__ParameterListAssignment_3_in_rule__OperationCall__Group__3__Impl23776 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__OperationCall__Group__4__Impl_in_rule__OperationCall__Group__423807 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_4_in_rule__OperationCall__Group__4__Impl23835 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RightParenthesis_in_rule__OperationCall__Group__4__Impl23835 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ConstructorCallExpression__Group__0__Impl_in_rule__ConstructorCallExpression__Group__023876 = new BitSet(new long[]{0x0000000020000000L});
         public static final BitSet FOLLOW_rule__ConstructorCallExpression__Group__1_in_rule__ConstructorCallExpression__Group__023879 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ConstructorCallExpression__Group__1__Impl_in_rule__ConstructorCallExpression__Group__123937 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__ConstructorCallExpression__Group__2_in_rule__ConstructorCallExpression__Group__123940 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_42_in_rule__ConstructorCallExpression__Group__1__Impl23968 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_New_in_rule__ConstructorCallExpression__Group__1__Impl23968 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ConstructorCallExpression__Group__2__Impl_in_rule__ConstructorCallExpression__Group__223999 = new BitSet(new long[]{0x0008400000000000L,0x0000000000000004L});
         public static final BitSet FOLLOW_rule__ConstructorCallExpression__Group__3_in_rule__ConstructorCallExpression__Group__224002 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ConstructorCallExpression__TypeExprAssignment_2_in_rule__ConstructorCallExpression__Group__2__Impl24029 = new BitSet(new long[]{0x0000000000000002L});
@@ -5512,30 +5512,30 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__ConstructorCallExpression__ContextBlockAssignment_5_in_rule__ConstructorCallExpression__Group__5__Impl24208 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ConstructorCallExpression__Group_3__0__Impl_in_rule__ConstructorCallExpression__Group_3__024251 = new BitSet(new long[]{0x211A0050256B4880L,0x000000000000028CL});
         public static final BitSet FOLLOW_rule__ConstructorCallExpression__Group_3__1_in_rule__ConstructorCallExpression__Group_3__024254 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_3_in_rule__ConstructorCallExpression__Group_3__0__Impl24282 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_LeftParenthesis_in_rule__ConstructorCallExpression__Group_3__0__Impl24282 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ConstructorCallExpression__Group_3__1__Impl_in_rule__ConstructorCallExpression__Group_3__124313 = new BitSet(new long[]{0x211A0050256B4880L,0x000000000000028CL});
         public static final BitSet FOLLOW_rule__ConstructorCallExpression__Group_3__2_in_rule__ConstructorCallExpression__Group_3__124316 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ConstructorCallExpression__ParameterListAssignment_3_1_in_rule__ConstructorCallExpression__Group_3__1__Impl24343 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ConstructorCallExpression__Group_3__2__Impl_in_rule__ConstructorCallExpression__Group_3__224374 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_4_in_rule__ConstructorCallExpression__Group_3__2__Impl24402 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RightParenthesis_in_rule__ConstructorCallExpression__Group_3__2__Impl24402 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ConstructorCallExpression__Group_4__0__Impl_in_rule__ConstructorCallExpression__Group_4__024439 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__ConstructorCallExpression__Group_4__1_in_rule__ConstructorCallExpression__Group_4__024442 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_35_in_rule__ConstructorCallExpression__Group_4__0__Impl24470 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_As_in_rule__ConstructorCallExpression__Group_4__0__Impl24470 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ConstructorCallExpression__Group_4__1__Impl_in_rule__ConstructorCallExpression__Group_4__124501 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ConstructorCallExpression__AliasAssignment_4_1_in_rule__ConstructorCallExpression__Group_4__1__Impl24528 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__InitializationBlockExpression__Group__0__Impl_in_rule__InitializationBlockExpression__Group__024562 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000004L});
         public static final BitSet FOLLOW_rule__InitializationBlockExpression__Group__1_in_rule__InitializationBlockExpression__Group__024565 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__InitializationBlockExpression__Group__1__Impl_in_rule__InitializationBlockExpression__Group__124623 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__InitializationBlockExpression__Group__2_in_rule__InitializationBlockExpression__Group__124626 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_18_in_rule__InitializationBlockExpression__Group__1__Impl24654 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_LeftCurlyBracket_in_rule__InitializationBlockExpression__Group__1__Impl24654 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__InitializationBlockExpression__Group__2__Impl_in_rule__InitializationBlockExpression__Group__224685 = new BitSet(new long[]{0x1000000000000000L});
         public static final BitSet FOLLOW_rule__InitializationBlockExpression__Group__3_in_rule__InitializationBlockExpression__Group__224688 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__InitializationBlockExpression__ExpressionsAssignment_2_in_rule__InitializationBlockExpression__Group__2__Impl24715 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__InitializationBlockExpression__Group__3__Impl_in_rule__InitializationBlockExpression__Group__324745 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000010L});
         public static final BitSet FOLLOW_rule__InitializationBlockExpression__Group__4_in_rule__InitializationBlockExpression__Group__324748 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_12_in_rule__InitializationBlockExpression__Group__3__Impl24776 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Semicolon_in_rule__InitializationBlockExpression__Group__3__Impl24776 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__InitializationBlockExpression__Group__4__Impl_in_rule__InitializationBlockExpression__Group__424807 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_20_in_rule__InitializationBlockExpression__Group__4__Impl24835 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RightCurlyBracket_in_rule__InitializationBlockExpression__Group__4__Impl24835 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__InitializationExpression__Group__0__Impl_in_rule__InitializationExpression__Group__024876 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__InitializationExpression__Group__1_in_rule__InitializationExpression__Group__024879 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__InitializationExpression__Group__1__Impl_in_rule__InitializationExpression__Group__124937 = new BitSet(new long[]{0x0800000000000000L});
@@ -5552,12 +5552,12 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__FeatureOfThis__FeatureNameAssignment_1_in_rule__FeatureOfThis__Group__1__Impl25210 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__LiteralFunction__Group__0__Impl_in_rule__LiteralFunction__Group__025244 = new BitSet(new long[]{0x2008000004000000L,0x0000000000000088L});
         public static final BitSet FOLLOW_rule__LiteralFunction__Group__1_in_rule__LiteralFunction__Group__025247 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_18_in_rule__LiteralFunction__Group__0__Impl25275 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_LeftCurlyBracket_in_rule__LiteralFunction__Group__0__Impl25275 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__LiteralFunction__Group__1__Impl_in_rule__LiteralFunction__Group__125306 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000010L});
         public static final BitSet FOLLOW_rule__LiteralFunction__Group__2_in_rule__LiteralFunction__Group__125309 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleClosureExpression_in_rule__LiteralFunction__Group__1__Impl25336 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__LiteralFunction__Group__2__Impl_in_rule__LiteralFunction__Group__225365 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_20_in_rule__LiteralFunction__Group__2__Impl25393 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RightCurlyBracket_in_rule__LiteralFunction__Group__2__Impl25393 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureExpression__Group__0__Impl_in_rule__ClosureExpression__Group__025430 = new BitSet(new long[]{0x2008000004000000L,0x0000000000000088L});
         public static final BitSet FOLLOW_rule__ClosureExpression__Group__1_in_rule__ClosureExpression__Group__025433 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureExpression__Group__1__Impl_in_rule__ClosureExpression__Group__125491 = new BitSet(new long[]{0x2008000004000000L,0x0000000000000088L});
@@ -5568,12 +5568,12 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__ClosureExpression__Alternatives_2_in_rule__ClosureExpression__Group__2__Impl25582 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureExpression__Group__3__Impl_in_rule__ClosureExpression__Group__325613 = new BitSet(new long[]{0x010A0050E16F4880L,0x0000000000000284L});
         public static final BitSet FOLLOW_rule__ClosureExpression__Group__4_in_rule__ClosureExpression__Group__325616 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_19_in_rule__ClosureExpression__Group__3__Impl25644 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_VerticalLine_in_rule__ClosureExpression__Group__3__Impl25644 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureExpression__Group__4__Impl_in_rule__ClosureExpression__Group__425675 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureExpression__FuncExprAssignment_4_in_rule__ClosureExpression__Group__4__Impl25702 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureExpression__Group_1__0__Impl_in_rule__ClosureExpression__Group_1__025742 = new BitSet(new long[]{0x0008000000000000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__ClosureExpression__Group_1__1_in_rule__ClosureExpression__Group_1__025745 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_13_in_rule__ClosureExpression__Group_1__0__Impl25773 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_LessThanSign_in_rule__ClosureExpression__Group_1__0__Impl25773 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureExpression__Group_1__1__Impl_in_rule__ClosureExpression__Group_1__125804 = new BitSet(new long[]{0x8000000000000000L});
         public static final BitSet FOLLOW_rule__ClosureExpression__Group_1__2_in_rule__ClosureExpression__Group_1__125807 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureExpression__ReturnTypeAssignment_1_1_in_rule__ClosureExpression__Group_1__1__Impl25834 = new BitSet(new long[]{0x0000000000000002L});
@@ -5581,10 +5581,10 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
     }
 
     protected static class FollowSets011 {
-        public static final BitSet FOLLOW_KEYWORD_15_in_rule__ClosureExpression__Group_1__2__Impl25892 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_GreaterThanSign_in_rule__ClosureExpression__Group_1__2__Impl25892 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureExpression__Group_2_0__0__Impl_in_rule__ClosureExpression__Group_2_0__025929 = new BitSet(new long[]{0x0008000000000000L,0x0000000000000088L});
         public static final BitSet FOLLOW_rule__ClosureExpression__Group_2_0__1_in_rule__ClosureExpression__Group_2_0__025932 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_19_in_rule__ClosureExpression__Group_2_0__0__Impl25961 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_VerticalLine_in_rule__ClosureExpression__Group_2_0__0__Impl25961 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureExpression__Group_2_0__1__Impl_in_rule__ClosureExpression__Group_2_0__125994 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureExpression__Group_2_0_1__0_in_rule__ClosureExpression__Group_2_0__1__Impl26021 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureExpression__Group_2_0_1__0__Impl_in_rule__ClosureExpression__Group_2_0_1__026055 = new BitSet(new long[]{0x0080000000000000L});
@@ -5597,12 +5597,12 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__ClosureExpression__Group_2_0_1_2__0_in_rule__ClosureExpression__Group_2_0_1__2__Impl26203 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureExpression__Group_2_0_1_1__0__Impl_in_rule__ClosureExpression__Group_2_0_1_1__026240 = new BitSet(new long[]{0x0008000000000000L,0x0000000000000088L});
         public static final BitSet FOLLOW_rule__ClosureExpression__Group_2_0_1_1__1_in_rule__ClosureExpression__Group_2_0_1_1__026243 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_7_in_rule__ClosureExpression__Group_2_0_1_1__0__Impl26271 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Comma_in_rule__ClosureExpression__Group_2_0_1_1__0__Impl26271 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureExpression__Group_2_0_1_1__1__Impl_in_rule__ClosureExpression__Group_2_0_1_1__126302 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureExpression__ParametersAssignment_2_0_1_1_1_in_rule__ClosureExpression__Group_2_0_1_1__1__Impl26329 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureExpression__Group_2_0_1_2__0__Impl_in_rule__ClosureExpression__Group_2_0_1_2__026363 = new BitSet(new long[]{0x0000000004000000L});
         public static final BitSet FOLLOW_rule__ClosureExpression__Group_2_0_1_2__1_in_rule__ClosureExpression__Group_2_0_1_2__026366 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_7_in_rule__ClosureExpression__Group_2_0_1_2__0__Impl26394 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Comma_in_rule__ClosureExpression__Group_2_0_1_2__0__Impl26394 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureExpression__Group_2_0_1_2__1__Impl_in_rule__ClosureExpression__Group_2_0_1_2__126425 = new BitSet(new long[]{0x0008000000000000L,0x0000000000000088L});
         public static final BitSet FOLLOW_rule__ClosureExpression__Group_2_0_1_2__2_in_rule__ClosureExpression__Group_2_0_1_2__126428 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ClosureExpression__VarArgsAssignment_2_0_1_2_1_in_rule__ClosureExpression__Group_2_0_1_2__1__Impl26455 = new BitSet(new long[]{0x0000000000000002L});
@@ -5622,15 +5622,15 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__BlockExpressionWithoutBrackets__Group_1__1_in_rule__BlockExpressionWithoutBrackets__Group_1__026811 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__BlockExpressionWithoutBrackets__ExpressionsAssignment_1_0_in_rule__BlockExpressionWithoutBrackets__Group_1__0__Impl26838 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__BlockExpressionWithoutBrackets__Group_1__1__Impl_in_rule__BlockExpressionWithoutBrackets__Group_1__126868 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_12_in_rule__BlockExpressionWithoutBrackets__Group_1__1__Impl26896 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Semicolon_in_rule__BlockExpressionWithoutBrackets__Group_1__1__Impl26896 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ParanthesizedExpression__Group__0__Impl_in_rule__ParanthesizedExpression__Group__026931 = new BitSet(new long[]{0x010A0050216B4880L,0x0000000000000284L});
         public static final BitSet FOLLOW_rule__ParanthesizedExpression__Group__1_in_rule__ParanthesizedExpression__Group__026934 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_3_in_rule__ParanthesizedExpression__Group__0__Impl26962 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_LeftParenthesis_in_rule__ParanthesizedExpression__Group__0__Impl26962 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ParanthesizedExpression__Group__1__Impl_in_rule__ParanthesizedExpression__Group__126993 = new BitSet(new long[]{0x0010000000000000L});
         public static final BitSet FOLLOW_rule__ParanthesizedExpression__Group__2_in_rule__ParanthesizedExpression__Group__126996 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleExpression_in_rule__ParanthesizedExpression__Group__1__Impl27023 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ParanthesizedExpression__Group__2__Impl_in_rule__ParanthesizedExpression__Group__227052 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_4_in_rule__ParanthesizedExpression__Group__2__Impl27080 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RightParenthesis_in_rule__ParanthesizedExpression__Group__2__Impl27080 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__QID__Group__0__Impl_in_rule__QID__Group__027117 = new BitSet(new long[]{0x0200000000000000L,0x00000000000001C0L});
         public static final BitSet FOLLOW_rule__QID__Group__1_in_rule__QID__Group__027120 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_ID_in_rule__QID__Group__0__Impl27147 = new BitSet(new long[]{0x0000000000000002L});
@@ -5641,7 +5641,7 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_rule__QID__Group_2__0_in_rule__QID__Group__2__Impl27264 = new BitSet(new long[]{0x0200000000000002L});
         public static final BitSet FOLLOW_rule__QID__Group_2__0__Impl_in_rule__QID__Group_2__027301 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__QID__Group_2__1_in_rule__QID__Group_2__027304 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_9_in_rule__QID__Group_2__0__Impl27332 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_FullStop_in_rule__QID__Group_2__0__Impl27332 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__QID__Group_2__1__Impl_in_rule__QID__Group_2__127363 = new BitSet(new long[]{0x0000000000000000L,0x00000000000001C0L});
         public static final BitSet FOLLOW_rule__QID__Group_2__2_in_rule__QID__Group_2__127366 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_ID_in_rule__QID__Group_2__1__Impl27393 = new BitSet(new long[]{0x0000000000000002L});
@@ -5732,14 +5732,14 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_RULE_ID_in_rule__AliasedRequiredCapability__NameAssignment_130895 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_ID_in_rule__AliasedRequiredCapability__AliasAssignment_2_130926 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleExpression_in_rule__AliasedRequiredCapability__CondExprAssignment_3_1_0_230957 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_53_in_rule__AliasedRequiredCapability__GreedyAssignment_3_1_1_030993 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Greedy_in_rule__AliasedRequiredCapability__GreedyAssignment_3_1_1_030993 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_INT_in_rule__AliasedRequiredCapability__MinAssignment_3_1_2_231032 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_INT_in_rule__AliasedRequiredCapability__MaxAssignment_3_1_3_231063 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_ID_in_rule__AliasedRequiredCapability__VersionRangeAssignment_3_1_4_231094 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_ID_in_rule__RequiredCapability__NameSpaceAssignment_1_031125 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_ID_in_rule__RequiredCapability__NameAssignment_231156 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleExpression_in_rule__RequiredCapability__CondExprAssignment_3_1_0_231187 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_53_in_rule__RequiredCapability__GreedyAssignment_3_1_1_031223 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Greedy_in_rule__RequiredCapability__GreedyAssignment_3_1_1_031223 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_INT_in_rule__RequiredCapability__MinAssignment_3_1_2_231262 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_INT_in_rule__RequiredCapability__MaxAssignment_3_1_3_231293 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_ID_in_rule__RequiredCapability__VersionRangeAssignment_3_1_4_231324 = new BitSet(new long[]{0x0000000000000002L});
@@ -5751,14 +5751,14 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_RULE_ID_in_rule__ParameterDeclaration__NameAssignment_131510 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_DOCUMENTATION_in_rule__Function__DocumentationAssignment_031541 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_ID_in_rule__Function__VisibilityAssignment_131572 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_50_in_rule__Function__FinalAssignment_231608 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Final_in_rule__Function__FinalAssignment_231608 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleTypeRef_in_rule__Function__ReturnTypeAssignment_431647 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_ID_in_rule__Function__NameAssignment_531678 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleParameterDeclaration_in_rule__Function__ParametersAssignment_6_1_0_031709 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleParameterDeclaration_in_rule__Function__ParametersAssignment_6_1_0_1_131740 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_39_in_rule__Function__VarArgsAssignment_6_1_0_2_131776 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_FullStopFullStopFullStop_in_rule__Function__VarArgsAssignment_6_1_0_2_131776 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleParameterDeclaration_in_rule__Function__ParametersAssignment_6_1_0_2_231815 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_39_in_rule__Function__VarArgsAssignment_6_1_1_031851 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_FullStopFullStopFullStop_in_rule__Function__VarArgsAssignment_6_1_1_031851 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleParameterDeclaration_in_rule__Function__ParametersAssignment_6_1_1_131890 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleGuardExpression_in_rule__Function__GuardAssignment_7_131921 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleExpression_in_rule__Function__FuncExprAssignment_8_0_131952 = new BitSet(new long[]{0x0000000000000002L});
@@ -5767,12 +5767,12 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_ruleBlockExpression_in_rule__GuardExpression__GuardExprAssignment_132045 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleAssignmentOperator_in_rule__AssignmentExpression__FunctionNameAssignment_1_132076 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleAssignmentExpression_in_rule__AssignmentExpression__RightExprAssignment_1_232107 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_50_in_rule__VarDeclaration__FinalAssignment_132143 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Final_in_rule__VarDeclaration__FinalAssignment_132143 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleTypeRef_in_rule__VarDeclaration__TypeAssignment_2_0_132182 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_ID_in_rule__VarDeclaration__NameAssignment_2_132213 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleExpression_in_rule__VarDeclaration__ValueExprAssignment_3_132244 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_50_in_rule__ValDeclaration__FinalAssignment_132280 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_43_in_rule__ValDeclaration__ImmutableAssignment_232324 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Final_in_rule__ValDeclaration__FinalAssignment_132280 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Val_in_rule__ValDeclaration__ImmutableAssignment_232324 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleTypeRef_in_rule__ValDeclaration__TypeAssignment_332363 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_ID_in_rule__ValDeclaration__NameAssignment_432394 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleExpression_in_rule__ValDeclaration__ValueExprAssignment_632425 = new BitSet(new long[]{0x0000000000000002L});
@@ -5781,9 +5781,9 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_RULE_ID_in_rule__SimpleTypeRef__ActualArgumentsListAssignment_1_2_132518 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_ID_in_rule__ClosureTypeRef__ParameterTypesAssignment_1_0_032549 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_ID_in_rule__ClosureTypeRef__ParameterTypesAssignment_1_0_1_132580 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_39_in_rule__ClosureTypeRef__VarArgsAssignment_1_0_2_132616 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_FullStopFullStopFullStop_in_rule__ClosureTypeRef__VarArgsAssignment_1_0_2_132616 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_ID_in_rule__ClosureTypeRef__ParameterTypesAssignment_1_0_2_232655 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_39_in_rule__ClosureTypeRef__VarArgsAssignment_1_1_032691 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_FullStopFullStopFullStop_in_rule__ClosureTypeRef__VarArgsAssignment_1_1_032691 = new BitSet(new long[]{0x0000000000000002L});
     }
 
     protected static class FollowSets013 {
@@ -5798,7 +5798,7 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_ruleMultiplicativeExpression_in_rule__AdditiveExpression__RightExprAssignment_1_232980 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__MultiplicativeExpression__FunctionNameAlternatives_1_1_0_in_rule__MultiplicativeExpression__FunctionNameAssignment_1_133011 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleSetExpression_in_rule__MultiplicativeExpression__RightExprAssignment_1_233044 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_29_in_rule__SetExpression__FunctionNameAssignment_1_133080 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_FullStopFullStop_in_rule__SetExpression__FunctionNameAssignment_1_133080 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnaryOrInfixExpression_in_rule__SetExpression__RightExprAssignment_1_233119 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__UnaryExpression__FunctionNameAlternatives_1_0_in_rule__UnaryExpression__FunctionNameAssignment_133150 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleInfixExpression_in_rule__UnaryExpression__ExprAssignment_233183 = new BitSet(new long[]{0x0000000000000002L});
@@ -5828,15 +5828,15 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         public static final BitSet FOLLOW_ruleInitializationBlockExpression_in_rule__ConstructorCallExpression__ContextBlockAssignment_533933 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleInitializationExpression_in_rule__InitializationBlockExpression__ExpressionsAssignment_233964 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleFeatureOfThis_in_rule__InitializationExpression__LeftExprAssignment_133995 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_11_in_rule__InitializationExpression__FunctionNameAssignment_234031 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Colon_in_rule__InitializationExpression__FunctionNameAssignment_234031 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleExpression_in_rule__InitializationExpression__RightExprAssignment_334070 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_ID_in_rule__FeatureOfThis__FeatureNameAssignment_134101 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleTypeRef_in_rule__ClosureExpression__ReturnTypeAssignment_1_134132 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleParameterDeclaration_in_rule__ClosureExpression__ParametersAssignment_2_0_1_034163 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleParameterDeclaration_in_rule__ClosureExpression__ParametersAssignment_2_0_1_1_134194 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_39_in_rule__ClosureExpression__VarArgsAssignment_2_0_1_2_134230 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_FullStopFullStopFullStop_in_rule__ClosureExpression__VarArgsAssignment_2_0_1_2_134230 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleParameterDeclaration_in_rule__ClosureExpression__ParametersAssignment_2_0_1_2_234269 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_39_in_rule__ClosureExpression__VarArgsAssignment_2_1_034305 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_FullStopFullStopFullStop_in_rule__ClosureExpression__VarArgsAssignment_2_1_034305 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleParameterDeclaration_in_rule__ClosureExpression__ParametersAssignment_2_1_134344 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleOneOrManyExpressions_in_rule__ClosureExpression__FuncExprAssignment_434375 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleTopLevelExpression_in_rule__BlockExpressionWithoutBrackets__ExpressionsAssignment_1_034406 = new BitSet(new long[]{0x0000000000000002L});
@@ -11136,10 +11136,10 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                 {
                 int LA3_1 = input.LA(2);
 
-                if ( (LA3_1==KEYWORD_47) ) {
+                if ( (LA3_1==Unit) ) {
                     alt3=1;
                 }
-                else if ( (LA3_1==KEYWORD_59||LA3_1==KEYWORD_50||LA3_1==RULE_ID) ) {
+                else if ( (LA3_1==Function||LA3_1==Final||LA3_1==RULE_ID) ) {
                     alt3=2;
                 }
                 else {
@@ -11151,7 +11151,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                 }
                 }
                 break;
-            case KEYWORD_47:
+            case Unit:
                 {
                 alt3=1;
                 }
@@ -11175,8 +11175,8 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                 }
                 }
                 break;
-            case KEYWORD_59:
-            case KEYWORD_50:
+            case Function:
+            case Final:
             case RULE_ID:
                 {
                 alt3=2;
@@ -11206,7 +11206,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                         int alt1=2;
                         int LA1_0 = input.LA(1);
 
-                        if ( (LA1_0==KEYWORD_47||LA1_0==RULE_DOCUMENTATION) ) {
+                        if ( (LA1_0==Unit||LA1_0==RULE_DOCUMENTATION) ) {
                             alt1=1;
                         }
 
@@ -11253,7 +11253,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                         int alt2=2;
                         int LA2_0 = input.LA(1);
 
-                        if ( (LA2_0==KEYWORD_59||LA2_0==KEYWORD_50||LA2_0==RULE_DOCUMENTATION||LA2_0==RULE_ID) ) {
+                        if ( (LA2_0==Function||LA2_0==Final||LA2_0==RULE_DOCUMENTATION||LA2_0==RULE_ID) ) {
                             alt2=1;
                         }
 
@@ -11304,7 +11304,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__ProvidedCapability__Alternatives_1"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1764:1: rule__ProvidedCapability__Alternatives_1 : ( ( ( rule__ProvidedCapability__NameSpaceAssignment_1_0 ) ) | ( KEYWORD_47 ) );
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1764:1: rule__ProvidedCapability__Alternatives_1 : ( ( ( rule__ProvidedCapability__NameSpaceAssignment_1_0 ) ) | ( Unit ) );
     public final void rule__ProvidedCapability__Alternatives_1() throws RecognitionException {
         int rule__ProvidedCapability__Alternatives_1_StartIndex = input.index();
 
@@ -11312,14 +11312,14 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 116) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1768:1: ( ( ( rule__ProvidedCapability__NameSpaceAssignment_1_0 ) ) | ( KEYWORD_47 ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1768:1: ( ( ( rule__ProvidedCapability__NameSpaceAssignment_1_0 ) ) | ( Unit ) )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
             if ( (LA4_0==RULE_ID) ) {
                 alt4=1;
             }
-            else if ( (LA4_0==KEYWORD_47) ) {
+            else if ( (LA4_0==Unit) ) {
                 alt4=2;
             }
             else {
@@ -11360,15 +11360,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1775:6: ( KEYWORD_47 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1775:6: ( Unit )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1775:6: ( KEYWORD_47 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1776:1: KEYWORD_47
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1775:6: ( Unit )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1776:1: Unit
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getProvidedCapabilityAccess().getUnitKeyword_1_1()); 
                     }
-                    match(input,KEYWORD_47,FollowSets001.FOLLOW_KEYWORD_47_in_rule__ProvidedCapability__Alternatives_13811); if (state.failed) return ;
+                    match(input,Unit,FollowSets001.FOLLOW_Unit_in_rule__ProvidedCapability__Alternatives_13811); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getProvidedCapabilityAccess().getUnitKeyword_1_1()); 
                     }
@@ -11397,7 +11397,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__AliasedRequiredCapability__Alternatives_0"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1788:1: rule__AliasedRequiredCapability__Alternatives_0 : ( ( ( rule__AliasedRequiredCapability__NameSpaceAssignment_0_0 ) ) | ( KEYWORD_47 ) );
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1788:1: rule__AliasedRequiredCapability__Alternatives_0 : ( ( ( rule__AliasedRequiredCapability__NameSpaceAssignment_0_0 ) ) | ( Unit ) );
     public final void rule__AliasedRequiredCapability__Alternatives_0() throws RecognitionException {
         int rule__AliasedRequiredCapability__Alternatives_0_StartIndex = input.index();
 
@@ -11405,14 +11405,14 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 117) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1792:1: ( ( ( rule__AliasedRequiredCapability__NameSpaceAssignment_0_0 ) ) | ( KEYWORD_47 ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1792:1: ( ( ( rule__AliasedRequiredCapability__NameSpaceAssignment_0_0 ) ) | ( Unit ) )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
             if ( (LA5_0==RULE_ID) ) {
                 alt5=1;
             }
-            else if ( (LA5_0==KEYWORD_47) ) {
+            else if ( (LA5_0==Unit) ) {
                 alt5=2;
             }
             else {
@@ -11453,15 +11453,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1799:6: ( KEYWORD_47 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1799:6: ( Unit )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1799:6: ( KEYWORD_47 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1800:1: KEYWORD_47
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1799:6: ( Unit )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1800:1: Unit
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getAliasedRequiredCapabilityAccess().getUnitKeyword_0_1()); 
                     }
-                    match(input,KEYWORD_47,FollowSets001.FOLLOW_KEYWORD_47_in_rule__AliasedRequiredCapability__Alternatives_03864); if (state.failed) return ;
+                    match(input,Unit,FollowSets001.FOLLOW_Unit_in_rule__AliasedRequiredCapability__Alternatives_03864); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getAliasedRequiredCapabilityAccess().getUnitKeyword_0_1()); 
                     }
@@ -11490,7 +11490,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__RequiredCapability__Alternatives_1"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1812:1: rule__RequiredCapability__Alternatives_1 : ( ( ( rule__RequiredCapability__NameSpaceAssignment_1_0 ) ) | ( KEYWORD_47 ) );
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1812:1: rule__RequiredCapability__Alternatives_1 : ( ( ( rule__RequiredCapability__NameSpaceAssignment_1_0 ) ) | ( Unit ) );
     public final void rule__RequiredCapability__Alternatives_1() throws RecognitionException {
         int rule__RequiredCapability__Alternatives_1_StartIndex = input.index();
 
@@ -11498,14 +11498,14 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 118) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1816:1: ( ( ( rule__RequiredCapability__NameSpaceAssignment_1_0 ) ) | ( KEYWORD_47 ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1816:1: ( ( ( rule__RequiredCapability__NameSpaceAssignment_1_0 ) ) | ( Unit ) )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
             if ( (LA6_0==RULE_ID) ) {
                 alt6=1;
             }
-            else if ( (LA6_0==KEYWORD_47) ) {
+            else if ( (LA6_0==Unit) ) {
                 alt6=2;
             }
             else {
@@ -11546,15 +11546,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1823:6: ( KEYWORD_47 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1823:6: ( Unit )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1823:6: ( KEYWORD_47 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1824:1: KEYWORD_47
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1823:6: ( Unit )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1824:1: Unit
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getRequiredCapabilityAccess().getUnitKeyword_1_1()); 
                     }
-                    match(input,KEYWORD_47,FollowSets001.FOLLOW_KEYWORD_47_in_rule__RequiredCapability__Alternatives_13917); if (state.failed) return ;
+                    match(input,Unit,FollowSets001.FOLLOW_Unit_in_rule__RequiredCapability__Alternatives_13917); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getRequiredCapabilityAccess().getUnitKeyword_1_1()); 
                     }
@@ -11598,7 +11598,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             if ( (LA7_0==RULE_STRING) ) {
                 alt7=1;
             }
-            else if ( (LA7_0==KEYWORD_10||LA7_0==RULE_ID) ) {
+            else if ( (LA7_0==Solidus||LA7_0==RULE_ID) ) {
                 alt7=2;
             }
             else {
@@ -11765,10 +11765,10 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             int alt9=2;
             int LA9_0 = input.LA(1);
 
-            if ( (LA9_0==KEYWORD_3||LA9_0==RULE_ID) ) {
+            if ( (LA9_0==LeftParenthesis||LA9_0==RULE_ID) ) {
                 alt9=1;
             }
-            else if ( (LA9_0==KEYWORD_39) ) {
+            else if ( (LA9_0==FullStopFullStopFullStop) ) {
                 alt9=2;
             }
             else {
@@ -11868,10 +11868,10 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             int alt10=2;
             int LA10_0 = input.LA(1);
 
-            if ( (LA10_0==KEYWORD_11) ) {
+            if ( (LA10_0==Colon) ) {
                 alt10=1;
             }
-            else if ( (LA10_0==KEYWORD_18) ) {
+            else if ( (LA10_0==LeftCurlyBracket) ) {
                 alt10=2;
             }
             else {
@@ -11971,10 +11971,10 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             int alt11=2;
             int LA11_0 = input.LA(1);
 
-            if ( (LA11_0==KEYWORD_11) ) {
+            if ( (LA11_0==Colon) ) {
                 alt11=1;
             }
-            else if ( (LA11_0==KEYWORD_18) ) {
+            else if ( (LA11_0==LeftCurlyBracket) ) {
                 alt11=2;
             }
             else {
@@ -12062,7 +12062,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__AssignmentOperator__Alternatives"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1946:1: rule__AssignmentOperator__Alternatives : ( ( KEYWORD_14 ) | ( KEYWORD_26 ) | ( KEYWORD_28 ) | ( KEYWORD_24 ) | ( KEYWORD_30 ) | ( KEYWORD_22 ) );
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1946:1: rule__AssignmentOperator__Alternatives : ( ( EqualsSign ) | ( PlusSignEqualsSign ) | ( HyphenMinusEqualsSign ) | ( AsteriskEqualsSign ) | ( SolidusEqualsSign ) | ( PercentSignEqualsSign ) );
     public final void rule__AssignmentOperator__Alternatives() throws RecognitionException {
         int rule__AssignmentOperator__Alternatives_StartIndex = input.index();
 
@@ -12070,35 +12070,35 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 124) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1950:1: ( ( KEYWORD_14 ) | ( KEYWORD_26 ) | ( KEYWORD_28 ) | ( KEYWORD_24 ) | ( KEYWORD_30 ) | ( KEYWORD_22 ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1950:1: ( ( EqualsSign ) | ( PlusSignEqualsSign ) | ( HyphenMinusEqualsSign ) | ( AsteriskEqualsSign ) | ( SolidusEqualsSign ) | ( PercentSignEqualsSign ) )
             int alt12=6;
             switch ( input.LA(1) ) {
-            case KEYWORD_14:
+            case EqualsSign:
                 {
                 alt12=1;
                 }
                 break;
-            case KEYWORD_26:
+            case PlusSignEqualsSign:
                 {
                 alt12=2;
                 }
                 break;
-            case KEYWORD_28:
+            case HyphenMinusEqualsSign:
                 {
                 alt12=3;
                 }
                 break;
-            case KEYWORD_24:
+            case AsteriskEqualsSign:
                 {
                 alt12=4;
                 }
                 break;
-            case KEYWORD_30:
+            case SolidusEqualsSign:
                 {
                 alt12=5;
                 }
                 break;
-            case KEYWORD_22:
+            case PercentSignEqualsSign:
                 {
                 alt12=6;
                 }
@@ -12113,15 +12113,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
 
             switch (alt12) {
                 case 1 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1951:1: ( KEYWORD_14 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1951:1: ( EqualsSign )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1951:1: ( KEYWORD_14 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1952:1: KEYWORD_14
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1951:1: ( EqualsSign )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1952:1: EqualsSign
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getAssignmentOperatorAccess().getEqualsSignKeyword_0()); 
                     }
-                    match(input,KEYWORD_14,FollowSets001.FOLLOW_KEYWORD_14_in_rule__AssignmentOperator__Alternatives4204); if (state.failed) return ;
+                    match(input,EqualsSign,FollowSets001.FOLLOW_EqualsSign_in_rule__AssignmentOperator__Alternatives4204); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getAssignmentOperatorAccess().getEqualsSignKeyword_0()); 
                     }
@@ -12132,15 +12132,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1959:6: ( KEYWORD_26 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1959:6: ( PlusSignEqualsSign )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1959:6: ( KEYWORD_26 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1960:1: KEYWORD_26
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1959:6: ( PlusSignEqualsSign )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1960:1: PlusSignEqualsSign
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getAssignmentOperatorAccess().getPlusSignEqualsSignKeyword_1()); 
                     }
-                    match(input,KEYWORD_26,FollowSets001.FOLLOW_KEYWORD_26_in_rule__AssignmentOperator__Alternatives4224); if (state.failed) return ;
+                    match(input,PlusSignEqualsSign,FollowSets001.FOLLOW_PlusSignEqualsSign_in_rule__AssignmentOperator__Alternatives4224); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getAssignmentOperatorAccess().getPlusSignEqualsSignKeyword_1()); 
                     }
@@ -12151,15 +12151,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1967:6: ( KEYWORD_28 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1967:6: ( HyphenMinusEqualsSign )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1967:6: ( KEYWORD_28 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1968:1: KEYWORD_28
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1967:6: ( HyphenMinusEqualsSign )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1968:1: HyphenMinusEqualsSign
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getAssignmentOperatorAccess().getHyphenMinusEqualsSignKeyword_2()); 
                     }
-                    match(input,KEYWORD_28,FollowSets001.FOLLOW_KEYWORD_28_in_rule__AssignmentOperator__Alternatives4244); if (state.failed) return ;
+                    match(input,HyphenMinusEqualsSign,FollowSets001.FOLLOW_HyphenMinusEqualsSign_in_rule__AssignmentOperator__Alternatives4244); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getAssignmentOperatorAccess().getHyphenMinusEqualsSignKeyword_2()); 
                     }
@@ -12170,15 +12170,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1975:6: ( KEYWORD_24 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1975:6: ( AsteriskEqualsSign )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1975:6: ( KEYWORD_24 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1976:1: KEYWORD_24
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1975:6: ( AsteriskEqualsSign )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1976:1: AsteriskEqualsSign
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getAssignmentOperatorAccess().getAsteriskEqualsSignKeyword_3()); 
                     }
-                    match(input,KEYWORD_24,FollowSets001.FOLLOW_KEYWORD_24_in_rule__AssignmentOperator__Alternatives4264); if (state.failed) return ;
+                    match(input,AsteriskEqualsSign,FollowSets001.FOLLOW_AsteriskEqualsSign_in_rule__AssignmentOperator__Alternatives4264); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getAssignmentOperatorAccess().getAsteriskEqualsSignKeyword_3()); 
                     }
@@ -12189,15 +12189,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                     }
                     break;
                 case 5 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1983:6: ( KEYWORD_30 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1983:6: ( SolidusEqualsSign )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1983:6: ( KEYWORD_30 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1984:1: KEYWORD_30
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1983:6: ( SolidusEqualsSign )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1984:1: SolidusEqualsSign
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getAssignmentOperatorAccess().getSolidusEqualsSignKeyword_4()); 
                     }
-                    match(input,KEYWORD_30,FollowSets001.FOLLOW_KEYWORD_30_in_rule__AssignmentOperator__Alternatives4284); if (state.failed) return ;
+                    match(input,SolidusEqualsSign,FollowSets001.FOLLOW_SolidusEqualsSign_in_rule__AssignmentOperator__Alternatives4284); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getAssignmentOperatorAccess().getSolidusEqualsSignKeyword_4()); 
                     }
@@ -12208,15 +12208,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                     }
                     break;
                 case 6 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1991:6: ( KEYWORD_22 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1991:6: ( PercentSignEqualsSign )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1991:6: ( KEYWORD_22 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1992:1: KEYWORD_22
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1991:6: ( PercentSignEqualsSign )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:1992:1: PercentSignEqualsSign
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getAssignmentOperatorAccess().getPercentSignEqualsSignKeyword_5()); 
                     }
-                    match(input,KEYWORD_22,FollowSets001.FOLLOW_KEYWORD_22_in_rule__AssignmentOperator__Alternatives4304); if (state.failed) return ;
+                    match(input,PercentSignEqualsSign,FollowSets001.FOLLOW_PercentSignEqualsSign_in_rule__AssignmentOperator__Alternatives4304); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getAssignmentOperatorAccess().getPercentSignEqualsSignKeyword_5()); 
                     }
@@ -12245,7 +12245,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__RelationalOperator__Alternatives"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2004:1: rule__RelationalOperator__Alternatives : ( ( KEYWORD_37 ) | ( KEYWORD_32 ) | ( KEYWORD_40 ) | ( KEYWORD_21 ) | ( KEYWORD_38 ) | ( KEYWORD_34 ) | ( KEYWORD_31 ) | ( KEYWORD_15 ) | ( KEYWORD_13 ) );
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2004:1: rule__RelationalOperator__Alternatives : ( ( TildeEqualsSign ) | ( EqualsSignEqualsSign ) | ( EqualsSignEqualsSignEqualsSign ) | ( ExclamationMarkEqualsSign ) | ( ExclamationMarkEqualsSignEqualsSign ) | ( GreaterThanSignEqualsSign ) | ( LessThanSignEqualsSign ) | ( GreaterThanSign ) | ( LessThanSign ) );
     public final void rule__RelationalOperator__Alternatives() throws RecognitionException {
         int rule__RelationalOperator__Alternatives_StartIndex = input.index();
 
@@ -12253,50 +12253,50 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 125) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2008:1: ( ( KEYWORD_37 ) | ( KEYWORD_32 ) | ( KEYWORD_40 ) | ( KEYWORD_21 ) | ( KEYWORD_38 ) | ( KEYWORD_34 ) | ( KEYWORD_31 ) | ( KEYWORD_15 ) | ( KEYWORD_13 ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2008:1: ( ( TildeEqualsSign ) | ( EqualsSignEqualsSign ) | ( EqualsSignEqualsSignEqualsSign ) | ( ExclamationMarkEqualsSign ) | ( ExclamationMarkEqualsSignEqualsSign ) | ( GreaterThanSignEqualsSign ) | ( LessThanSignEqualsSign ) | ( GreaterThanSign ) | ( LessThanSign ) )
             int alt13=9;
             switch ( input.LA(1) ) {
-            case KEYWORD_37:
+            case TildeEqualsSign:
                 {
                 alt13=1;
                 }
                 break;
-            case KEYWORD_32:
+            case EqualsSignEqualsSign:
                 {
                 alt13=2;
                 }
                 break;
-            case KEYWORD_40:
+            case EqualsSignEqualsSignEqualsSign:
                 {
                 alt13=3;
                 }
                 break;
-            case KEYWORD_21:
+            case ExclamationMarkEqualsSign:
                 {
                 alt13=4;
                 }
                 break;
-            case KEYWORD_38:
+            case ExclamationMarkEqualsSignEqualsSign:
                 {
                 alt13=5;
                 }
                 break;
-            case KEYWORD_34:
+            case GreaterThanSignEqualsSign:
                 {
                 alt13=6;
                 }
                 break;
-            case KEYWORD_31:
+            case LessThanSignEqualsSign:
                 {
                 alt13=7;
                 }
                 break;
-            case KEYWORD_15:
+            case GreaterThanSign:
                 {
                 alt13=8;
                 }
                 break;
-            case KEYWORD_13:
+            case LessThanSign:
                 {
                 alt13=9;
                 }
@@ -12311,15 +12311,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
 
             switch (alt13) {
                 case 1 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2009:1: ( KEYWORD_37 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2009:1: ( TildeEqualsSign )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2009:1: ( KEYWORD_37 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2010:1: KEYWORD_37
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2009:1: ( TildeEqualsSign )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2010:1: TildeEqualsSign
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getRelationalOperatorAccess().getTildeEqualsSignKeyword_0()); 
                     }
-                    match(input,KEYWORD_37,FollowSets001.FOLLOW_KEYWORD_37_in_rule__RelationalOperator__Alternatives4339); if (state.failed) return ;
+                    match(input,TildeEqualsSign,FollowSets001.FOLLOW_TildeEqualsSign_in_rule__RelationalOperator__Alternatives4339); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getRelationalOperatorAccess().getTildeEqualsSignKeyword_0()); 
                     }
@@ -12330,15 +12330,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2017:6: ( KEYWORD_32 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2017:6: ( EqualsSignEqualsSign )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2017:6: ( KEYWORD_32 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2018:1: KEYWORD_32
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2017:6: ( EqualsSignEqualsSign )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2018:1: EqualsSignEqualsSign
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getRelationalOperatorAccess().getEqualsSignEqualsSignKeyword_1()); 
                     }
-                    match(input,KEYWORD_32,FollowSets001.FOLLOW_KEYWORD_32_in_rule__RelationalOperator__Alternatives4359); if (state.failed) return ;
+                    match(input,EqualsSignEqualsSign,FollowSets001.FOLLOW_EqualsSignEqualsSign_in_rule__RelationalOperator__Alternatives4359); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getRelationalOperatorAccess().getEqualsSignEqualsSignKeyword_1()); 
                     }
@@ -12349,15 +12349,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2025:6: ( KEYWORD_40 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2025:6: ( EqualsSignEqualsSignEqualsSign )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2025:6: ( KEYWORD_40 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2026:1: KEYWORD_40
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2025:6: ( EqualsSignEqualsSignEqualsSign )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2026:1: EqualsSignEqualsSignEqualsSign
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getRelationalOperatorAccess().getEqualsSignEqualsSignEqualsSignKeyword_2()); 
                     }
-                    match(input,KEYWORD_40,FollowSets001.FOLLOW_KEYWORD_40_in_rule__RelationalOperator__Alternatives4379); if (state.failed) return ;
+                    match(input,EqualsSignEqualsSignEqualsSign,FollowSets001.FOLLOW_EqualsSignEqualsSignEqualsSign_in_rule__RelationalOperator__Alternatives4379); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getRelationalOperatorAccess().getEqualsSignEqualsSignEqualsSignKeyword_2()); 
                     }
@@ -12368,15 +12368,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2033:6: ( KEYWORD_21 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2033:6: ( ExclamationMarkEqualsSign )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2033:6: ( KEYWORD_21 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2034:1: KEYWORD_21
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2033:6: ( ExclamationMarkEqualsSign )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2034:1: ExclamationMarkEqualsSign
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getRelationalOperatorAccess().getExclamationMarkEqualsSignKeyword_3()); 
                     }
-                    match(input,KEYWORD_21,FollowSets001.FOLLOW_KEYWORD_21_in_rule__RelationalOperator__Alternatives4399); if (state.failed) return ;
+                    match(input,ExclamationMarkEqualsSign,FollowSets001.FOLLOW_ExclamationMarkEqualsSign_in_rule__RelationalOperator__Alternatives4399); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getRelationalOperatorAccess().getExclamationMarkEqualsSignKeyword_3()); 
                     }
@@ -12387,15 +12387,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                     }
                     break;
                 case 5 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2041:6: ( KEYWORD_38 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2041:6: ( ExclamationMarkEqualsSignEqualsSign )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2041:6: ( KEYWORD_38 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2042:1: KEYWORD_38
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2041:6: ( ExclamationMarkEqualsSignEqualsSign )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2042:1: ExclamationMarkEqualsSignEqualsSign
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getRelationalOperatorAccess().getExclamationMarkEqualsSignEqualsSignKeyword_4()); 
                     }
-                    match(input,KEYWORD_38,FollowSets001.FOLLOW_KEYWORD_38_in_rule__RelationalOperator__Alternatives4419); if (state.failed) return ;
+                    match(input,ExclamationMarkEqualsSignEqualsSign,FollowSets001.FOLLOW_ExclamationMarkEqualsSignEqualsSign_in_rule__RelationalOperator__Alternatives4419); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getRelationalOperatorAccess().getExclamationMarkEqualsSignEqualsSignKeyword_4()); 
                     }
@@ -12406,15 +12406,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                     }
                     break;
                 case 6 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2049:6: ( KEYWORD_34 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2049:6: ( GreaterThanSignEqualsSign )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2049:6: ( KEYWORD_34 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2050:1: KEYWORD_34
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2049:6: ( GreaterThanSignEqualsSign )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2050:1: GreaterThanSignEqualsSign
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getRelationalOperatorAccess().getGreaterThanSignEqualsSignKeyword_5()); 
                     }
-                    match(input,KEYWORD_34,FollowSets002.FOLLOW_KEYWORD_34_in_rule__RelationalOperator__Alternatives4439); if (state.failed) return ;
+                    match(input,GreaterThanSignEqualsSign,FollowSets002.FOLLOW_GreaterThanSignEqualsSign_in_rule__RelationalOperator__Alternatives4439); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getRelationalOperatorAccess().getGreaterThanSignEqualsSignKeyword_5()); 
                     }
@@ -12425,15 +12425,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                     }
                     break;
                 case 7 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2057:6: ( KEYWORD_31 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2057:6: ( LessThanSignEqualsSign )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2057:6: ( KEYWORD_31 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2058:1: KEYWORD_31
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2057:6: ( LessThanSignEqualsSign )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2058:1: LessThanSignEqualsSign
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getRelationalOperatorAccess().getLessThanSignEqualsSignKeyword_6()); 
                     }
-                    match(input,KEYWORD_31,FollowSets002.FOLLOW_KEYWORD_31_in_rule__RelationalOperator__Alternatives4459); if (state.failed) return ;
+                    match(input,LessThanSignEqualsSign,FollowSets002.FOLLOW_LessThanSignEqualsSign_in_rule__RelationalOperator__Alternatives4459); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getRelationalOperatorAccess().getLessThanSignEqualsSignKeyword_6()); 
                     }
@@ -12444,15 +12444,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                     }
                     break;
                 case 8 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2065:6: ( KEYWORD_15 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2065:6: ( GreaterThanSign )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2065:6: ( KEYWORD_15 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2066:1: KEYWORD_15
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2065:6: ( GreaterThanSign )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2066:1: GreaterThanSign
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getRelationalOperatorAccess().getGreaterThanSignKeyword_7()); 
                     }
-                    match(input,KEYWORD_15,FollowSets002.FOLLOW_KEYWORD_15_in_rule__RelationalOperator__Alternatives4479); if (state.failed) return ;
+                    match(input,GreaterThanSign,FollowSets002.FOLLOW_GreaterThanSign_in_rule__RelationalOperator__Alternatives4479); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getRelationalOperatorAccess().getGreaterThanSignKeyword_7()); 
                     }
@@ -12463,15 +12463,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                     }
                     break;
                 case 9 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2073:6: ( KEYWORD_13 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2073:6: ( LessThanSign )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2073:6: ( KEYWORD_13 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2074:1: KEYWORD_13
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2073:6: ( LessThanSign )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2074:1: LessThanSign
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getRelationalOperatorAccess().getLessThanSignKeyword_8()); 
                     }
-                    match(input,KEYWORD_13,FollowSets002.FOLLOW_KEYWORD_13_in_rule__RelationalOperator__Alternatives4499); if (state.failed) return ;
+                    match(input,LessThanSign,FollowSets002.FOLLOW_LessThanSign_in_rule__RelationalOperator__Alternatives4499); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getRelationalOperatorAccess().getLessThanSignKeyword_8()); 
                     }
@@ -12600,7 +12600,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__VarDeclaration__Alternatives_2_0"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2114:1: rule__VarDeclaration__Alternatives_2_0 : ( ( KEYWORD_44 ) | ( ( rule__VarDeclaration__TypeAssignment_2_0_1 ) ) );
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2114:1: rule__VarDeclaration__Alternatives_2_0 : ( ( Var ) | ( ( rule__VarDeclaration__TypeAssignment_2_0_1 ) ) );
     public final void rule__VarDeclaration__Alternatives_2_0() throws RecognitionException {
         int rule__VarDeclaration__Alternatives_2_0_StartIndex = input.index();
 
@@ -12608,14 +12608,14 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 127) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2118:1: ( ( KEYWORD_44 ) | ( ( rule__VarDeclaration__TypeAssignment_2_0_1 ) ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2118:1: ( ( Var ) | ( ( rule__VarDeclaration__TypeAssignment_2_0_1 ) ) )
             int alt15=2;
             int LA15_0 = input.LA(1);
 
-            if ( (LA15_0==KEYWORD_44) ) {
+            if ( (LA15_0==Var) ) {
                 alt15=1;
             }
-            else if ( (LA15_0==KEYWORD_3||LA15_0==RULE_ID) ) {
+            else if ( (LA15_0==LeftParenthesis||LA15_0==RULE_ID) ) {
                 alt15=2;
             }
             else {
@@ -12627,15 +12627,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             }
             switch (alt15) {
                 case 1 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2119:1: ( KEYWORD_44 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2119:1: ( Var )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2119:1: ( KEYWORD_44 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2120:1: KEYWORD_44
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2119:1: ( Var )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2120:1: Var
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getVarDeclarationAccess().getVarKeyword_2_0_0()); 
                     }
-                    match(input,KEYWORD_44,FollowSets002.FOLLOW_KEYWORD_44_in_rule__VarDeclaration__Alternatives_2_04600); if (state.failed) return ;
+                    match(input,Var,FollowSets002.FOLLOW_Var_in_rule__VarDeclaration__Alternatives_2_04600); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getVarDeclarationAccess().getVarKeyword_2_0_0()); 
                     }
@@ -12705,7 +12705,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             int alt16=2;
             int LA16_0 = input.LA(1);
 
-            if ( (LA16_0==KEYWORD_3) ) {
+            if ( (LA16_0==LeftParenthesis) ) {
                 alt16=1;
             }
             else if ( (LA16_0==RULE_ID) ) {
@@ -12799,7 +12799,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             if ( (LA17_0==RULE_ID) ) {
                 alt17=1;
             }
-            else if ( (LA17_0==KEYWORD_39) ) {
+            else if ( (LA17_0==FullStopFullStopFullStop) ) {
                 alt17=2;
             }
             else {
@@ -12899,10 +12899,10 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             int alt18=2;
             int LA18_0 = input.LA(1);
 
-            if ( (LA18_0==KEYWORD_52) ) {
+            if ( (LA18_0==Cached) ) {
                 alt18=1;
             }
-            else if ( (LA18_0==KEYWORD_63||LA18_0==KEYWORD_56||(LA18_0>=KEYWORD_54 && LA18_0<=KEYWORD_55)||LA18_0==KEYWORD_51||(LA18_0>=KEYWORD_46 && LA18_0<=KEYWORD_47)||LA18_0==KEYWORD_49||LA18_0==KEYWORD_42||LA18_0==KEYWORD_25||LA18_0==KEYWORD_27||LA18_0==KEYWORD_1||LA18_0==KEYWORD_3||LA18_0==KEYWORD_8||LA18_0==KEYWORD_18||LA18_0==RULE_ID||LA18_0==RULE_STRING) ) {
+            else if ( (LA18_0==Properties||LA18_0==Builder||(LA18_0>=Output && LA18_0<=Source)||LA18_0==Input||(LA18_0>=This && LA18_0<=Unit)||LA18_0==With||LA18_0==New||LA18_0==PlusSignPlusSign||LA18_0==HyphenMinusHyphenMinus||LA18_0==ExclamationMark||LA18_0==LeftParenthesis||LA18_0==HyphenMinus||LA18_0==LeftCurlyBracket||LA18_0==RULE_ID||LA18_0==RULE_STRING) ) {
                 alt18=2;
             }
             else {
@@ -12984,7 +12984,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__AdditiveExpression__FunctionNameAlternatives_1_1_0"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2204:1: rule__AdditiveExpression__FunctionNameAlternatives_1_1_0 : ( ( KEYWORD_6 ) | ( KEYWORD_8 ) );
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2204:1: rule__AdditiveExpression__FunctionNameAlternatives_1_1_0 : ( ( PlusSign ) | ( HyphenMinus ) );
     public final void rule__AdditiveExpression__FunctionNameAlternatives_1_1_0() throws RecognitionException {
         int rule__AdditiveExpression__FunctionNameAlternatives_1_1_0_StartIndex = input.index();
 
@@ -12992,14 +12992,14 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 131) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2208:1: ( ( KEYWORD_6 ) | ( KEYWORD_8 ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2208:1: ( ( PlusSign ) | ( HyphenMinus ) )
             int alt19=2;
             int LA19_0 = input.LA(1);
 
-            if ( (LA19_0==KEYWORD_6) ) {
+            if ( (LA19_0==PlusSign) ) {
                 alt19=1;
             }
-            else if ( (LA19_0==KEYWORD_8) ) {
+            else if ( (LA19_0==HyphenMinus) ) {
                 alt19=2;
             }
             else {
@@ -13011,15 +13011,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             }
             switch (alt19) {
                 case 1 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2209:1: ( KEYWORD_6 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2209:1: ( PlusSign )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2209:1: ( KEYWORD_6 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2210:1: KEYWORD_6
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2209:1: ( PlusSign )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2210:1: PlusSign
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getAdditiveExpressionAccess().getFunctionNamePlusSignKeyword_1_1_0_0()); 
                     }
-                    match(input,KEYWORD_6,FollowSets002.FOLLOW_KEYWORD_6_in_rule__AdditiveExpression__FunctionNameAlternatives_1_1_04803); if (state.failed) return ;
+                    match(input,PlusSign,FollowSets002.FOLLOW_PlusSign_in_rule__AdditiveExpression__FunctionNameAlternatives_1_1_04803); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getAdditiveExpressionAccess().getFunctionNamePlusSignKeyword_1_1_0_0()); 
                     }
@@ -13030,15 +13030,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2217:6: ( KEYWORD_8 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2217:6: ( HyphenMinus )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2217:6: ( KEYWORD_8 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2218:1: KEYWORD_8
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2217:6: ( HyphenMinus )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2218:1: HyphenMinus
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getAdditiveExpressionAccess().getFunctionNameHyphenMinusKeyword_1_1_0_1()); 
                     }
-                    match(input,KEYWORD_8,FollowSets002.FOLLOW_KEYWORD_8_in_rule__AdditiveExpression__FunctionNameAlternatives_1_1_04823); if (state.failed) return ;
+                    match(input,HyphenMinus,FollowSets002.FOLLOW_HyphenMinus_in_rule__AdditiveExpression__FunctionNameAlternatives_1_1_04823); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getAdditiveExpressionAccess().getFunctionNameHyphenMinusKeyword_1_1_0_1()); 
                     }
@@ -13067,7 +13067,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__MultiplicativeExpression__FunctionNameAlternatives_1_1_0"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2230:1: rule__MultiplicativeExpression__FunctionNameAlternatives_1_1_0 : ( ( KEYWORD_5 ) | ( KEYWORD_10 ) | ( KEYWORD_2 ) );
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2230:1: rule__MultiplicativeExpression__FunctionNameAlternatives_1_1_0 : ( ( Asterisk ) | ( Solidus ) | ( PercentSign ) );
     public final void rule__MultiplicativeExpression__FunctionNameAlternatives_1_1_0() throws RecognitionException {
         int rule__MultiplicativeExpression__FunctionNameAlternatives_1_1_0_StartIndex = input.index();
 
@@ -13075,20 +13075,20 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 132) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2234:1: ( ( KEYWORD_5 ) | ( KEYWORD_10 ) | ( KEYWORD_2 ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2234:1: ( ( Asterisk ) | ( Solidus ) | ( PercentSign ) )
             int alt20=3;
             switch ( input.LA(1) ) {
-            case KEYWORD_5:
+            case Asterisk:
                 {
                 alt20=1;
                 }
                 break;
-            case KEYWORD_10:
+            case Solidus:
                 {
                 alt20=2;
                 }
                 break;
-            case KEYWORD_2:
+            case PercentSign:
                 {
                 alt20=3;
                 }
@@ -13103,15 +13103,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
 
             switch (alt20) {
                 case 1 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2235:1: ( KEYWORD_5 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2235:1: ( Asterisk )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2235:1: ( KEYWORD_5 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2236:1: KEYWORD_5
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2235:1: ( Asterisk )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2236:1: Asterisk
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getMultiplicativeExpressionAccess().getFunctionNameAsteriskKeyword_1_1_0_0()); 
                     }
-                    match(input,KEYWORD_5,FollowSets002.FOLLOW_KEYWORD_5_in_rule__MultiplicativeExpression__FunctionNameAlternatives_1_1_04858); if (state.failed) return ;
+                    match(input,Asterisk,FollowSets002.FOLLOW_Asterisk_in_rule__MultiplicativeExpression__FunctionNameAlternatives_1_1_04858); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getMultiplicativeExpressionAccess().getFunctionNameAsteriskKeyword_1_1_0_0()); 
                     }
@@ -13122,15 +13122,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2243:6: ( KEYWORD_10 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2243:6: ( Solidus )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2243:6: ( KEYWORD_10 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2244:1: KEYWORD_10
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2243:6: ( Solidus )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2244:1: Solidus
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getMultiplicativeExpressionAccess().getFunctionNameSolidusKeyword_1_1_0_1()); 
                     }
-                    match(input,KEYWORD_10,FollowSets002.FOLLOW_KEYWORD_10_in_rule__MultiplicativeExpression__FunctionNameAlternatives_1_1_04878); if (state.failed) return ;
+                    match(input,Solidus,FollowSets002.FOLLOW_Solidus_in_rule__MultiplicativeExpression__FunctionNameAlternatives_1_1_04878); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getMultiplicativeExpressionAccess().getFunctionNameSolidusKeyword_1_1_0_1()); 
                     }
@@ -13141,15 +13141,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2251:6: ( KEYWORD_2 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2251:6: ( PercentSign )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2251:6: ( KEYWORD_2 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2252:1: KEYWORD_2
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2251:6: ( PercentSign )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2252:1: PercentSign
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getMultiplicativeExpressionAccess().getFunctionNamePercentSignKeyword_1_1_0_2()); 
                     }
-                    match(input,KEYWORD_2,FollowSets002.FOLLOW_KEYWORD_2_in_rule__MultiplicativeExpression__FunctionNameAlternatives_1_1_04898); if (state.failed) return ;
+                    match(input,PercentSign,FollowSets002.FOLLOW_PercentSign_in_rule__MultiplicativeExpression__FunctionNameAlternatives_1_1_04898); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getMultiplicativeExpressionAccess().getFunctionNamePercentSignKeyword_1_1_0_2()); 
                     }
@@ -13189,31 +13189,31 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2268:1: ( ( rulePostopExpression ) | ( ruleUnaryExpression ) | ( rulePreopExpression ) )
             int alt21=3;
             switch ( input.LA(1) ) {
-            case KEYWORD_63:
-            case KEYWORD_56:
-            case KEYWORD_54:
-            case KEYWORD_55:
-            case KEYWORD_51:
-            case KEYWORD_46:
-            case KEYWORD_47:
-            case KEYWORD_49:
-            case KEYWORD_42:
-            case KEYWORD_3:
-            case KEYWORD_18:
+            case Properties:
+            case Builder:
+            case Output:
+            case Source:
+            case Input:
+            case This:
+            case Unit:
+            case With:
+            case New:
+            case LeftParenthesis:
+            case LeftCurlyBracket:
             case RULE_ID:
             case RULE_STRING:
                 {
                 alt21=1;
                 }
                 break;
-            case KEYWORD_1:
-            case KEYWORD_8:
+            case ExclamationMark:
+            case HyphenMinus:
                 {
                 alt21=2;
                 }
                 break;
-            case KEYWORD_25:
-            case KEYWORD_27:
+            case PlusSignPlusSign:
+            case HyphenMinusHyphenMinus:
                 {
                 alt21=3;
                 }
@@ -13315,7 +13315,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__UnaryExpression__FunctionNameAlternatives_1_0"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2292:1: rule__UnaryExpression__FunctionNameAlternatives_1_0 : ( ( KEYWORD_1 ) | ( KEYWORD_8 ) );
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2292:1: rule__UnaryExpression__FunctionNameAlternatives_1_0 : ( ( ExclamationMark ) | ( HyphenMinus ) );
     public final void rule__UnaryExpression__FunctionNameAlternatives_1_0() throws RecognitionException {
         int rule__UnaryExpression__FunctionNameAlternatives_1_0_StartIndex = input.index();
 
@@ -13323,14 +13323,14 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 134) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2296:1: ( ( KEYWORD_1 ) | ( KEYWORD_8 ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2296:1: ( ( ExclamationMark ) | ( HyphenMinus ) )
             int alt22=2;
             int LA22_0 = input.LA(1);
 
-            if ( (LA22_0==KEYWORD_1) ) {
+            if ( (LA22_0==ExclamationMark) ) {
                 alt22=1;
             }
-            else if ( (LA22_0==KEYWORD_8) ) {
+            else if ( (LA22_0==HyphenMinus) ) {
                 alt22=2;
             }
             else {
@@ -13342,15 +13342,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             }
             switch (alt22) {
                 case 1 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2297:1: ( KEYWORD_1 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2297:1: ( ExclamationMark )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2297:1: ( KEYWORD_1 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2298:1: KEYWORD_1
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2297:1: ( ExclamationMark )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2298:1: ExclamationMark
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getUnaryExpressionAccess().getFunctionNameExclamationMarkKeyword_1_0_0()); 
                     }
-                    match(input,KEYWORD_1,FollowSets002.FOLLOW_KEYWORD_1_in_rule__UnaryExpression__FunctionNameAlternatives_1_04999); if (state.failed) return ;
+                    match(input,ExclamationMark,FollowSets002.FOLLOW_ExclamationMark_in_rule__UnaryExpression__FunctionNameAlternatives_1_04999); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getUnaryExpressionAccess().getFunctionNameExclamationMarkKeyword_1_0_0()); 
                     }
@@ -13361,15 +13361,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2305:6: ( KEYWORD_8 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2305:6: ( HyphenMinus )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2305:6: ( KEYWORD_8 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2306:1: KEYWORD_8
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2305:6: ( HyphenMinus )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2306:1: HyphenMinus
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getUnaryExpressionAccess().getFunctionNameHyphenMinusKeyword_1_0_1()); 
                     }
-                    match(input,KEYWORD_8,FollowSets002.FOLLOW_KEYWORD_8_in_rule__UnaryExpression__FunctionNameAlternatives_1_05019); if (state.failed) return ;
+                    match(input,HyphenMinus,FollowSets002.FOLLOW_HyphenMinus_in_rule__UnaryExpression__FunctionNameAlternatives_1_05019); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getUnaryExpressionAccess().getFunctionNameHyphenMinusKeyword_1_0_1()); 
                     }
@@ -13398,7 +13398,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__PreopExpression__FunctionNameAlternatives_1_0"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2318:1: rule__PreopExpression__FunctionNameAlternatives_1_0 : ( ( KEYWORD_25 ) | ( KEYWORD_27 ) );
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2318:1: rule__PreopExpression__FunctionNameAlternatives_1_0 : ( ( PlusSignPlusSign ) | ( HyphenMinusHyphenMinus ) );
     public final void rule__PreopExpression__FunctionNameAlternatives_1_0() throws RecognitionException {
         int rule__PreopExpression__FunctionNameAlternatives_1_0_StartIndex = input.index();
 
@@ -13406,14 +13406,14 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 135) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2322:1: ( ( KEYWORD_25 ) | ( KEYWORD_27 ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2322:1: ( ( PlusSignPlusSign ) | ( HyphenMinusHyphenMinus ) )
             int alt23=2;
             int LA23_0 = input.LA(1);
 
-            if ( (LA23_0==KEYWORD_25) ) {
+            if ( (LA23_0==PlusSignPlusSign) ) {
                 alt23=1;
             }
-            else if ( (LA23_0==KEYWORD_27) ) {
+            else if ( (LA23_0==HyphenMinusHyphenMinus) ) {
                 alt23=2;
             }
             else {
@@ -13425,15 +13425,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             }
             switch (alt23) {
                 case 1 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2323:1: ( KEYWORD_25 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2323:1: ( PlusSignPlusSign )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2323:1: ( KEYWORD_25 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2324:1: KEYWORD_25
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2323:1: ( PlusSignPlusSign )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2324:1: PlusSignPlusSign
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getPreopExpressionAccess().getFunctionNamePlusSignPlusSignKeyword_1_0_0()); 
                     }
-                    match(input,KEYWORD_25,FollowSets002.FOLLOW_KEYWORD_25_in_rule__PreopExpression__FunctionNameAlternatives_1_05054); if (state.failed) return ;
+                    match(input,PlusSignPlusSign,FollowSets002.FOLLOW_PlusSignPlusSign_in_rule__PreopExpression__FunctionNameAlternatives_1_05054); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getPreopExpressionAccess().getFunctionNamePlusSignPlusSignKeyword_1_0_0()); 
                     }
@@ -13444,15 +13444,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2331:6: ( KEYWORD_27 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2331:6: ( HyphenMinusHyphenMinus )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2331:6: ( KEYWORD_27 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2332:1: KEYWORD_27
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2331:6: ( HyphenMinusHyphenMinus )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2332:1: HyphenMinusHyphenMinus
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getPreopExpressionAccess().getFunctionNameHyphenMinusHyphenMinusKeyword_1_0_1()); 
                     }
-                    match(input,KEYWORD_27,FollowSets002.FOLLOW_KEYWORD_27_in_rule__PreopExpression__FunctionNameAlternatives_1_05074); if (state.failed) return ;
+                    match(input,HyphenMinusHyphenMinus,FollowSets002.FOLLOW_HyphenMinusHyphenMinus_in_rule__PreopExpression__FunctionNameAlternatives_1_05074); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getPreopExpressionAccess().getFunctionNameHyphenMinusHyphenMinusKeyword_1_0_1()); 
                     }
@@ -13481,7 +13481,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__PostopExpression__FunctionNameAlternatives_1_1_0"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2344:1: rule__PostopExpression__FunctionNameAlternatives_1_1_0 : ( ( KEYWORD_27 ) | ( KEYWORD_25 ) );
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2344:1: rule__PostopExpression__FunctionNameAlternatives_1_1_0 : ( ( HyphenMinusHyphenMinus ) | ( PlusSignPlusSign ) );
     public final void rule__PostopExpression__FunctionNameAlternatives_1_1_0() throws RecognitionException {
         int rule__PostopExpression__FunctionNameAlternatives_1_1_0_StartIndex = input.index();
 
@@ -13489,14 +13489,14 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 136) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2348:1: ( ( KEYWORD_27 ) | ( KEYWORD_25 ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2348:1: ( ( HyphenMinusHyphenMinus ) | ( PlusSignPlusSign ) )
             int alt24=2;
             int LA24_0 = input.LA(1);
 
-            if ( (LA24_0==KEYWORD_27) ) {
+            if ( (LA24_0==HyphenMinusHyphenMinus) ) {
                 alt24=1;
             }
-            else if ( (LA24_0==KEYWORD_25) ) {
+            else if ( (LA24_0==PlusSignPlusSign) ) {
                 alt24=2;
             }
             else {
@@ -13508,15 +13508,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             }
             switch (alt24) {
                 case 1 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2349:1: ( KEYWORD_27 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2349:1: ( HyphenMinusHyphenMinus )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2349:1: ( KEYWORD_27 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2350:1: KEYWORD_27
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2349:1: ( HyphenMinusHyphenMinus )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2350:1: HyphenMinusHyphenMinus
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getPostopExpressionAccess().getFunctionNameHyphenMinusHyphenMinusKeyword_1_1_0_0()); 
                     }
-                    match(input,KEYWORD_27,FollowSets002.FOLLOW_KEYWORD_27_in_rule__PostopExpression__FunctionNameAlternatives_1_1_05109); if (state.failed) return ;
+                    match(input,HyphenMinusHyphenMinus,FollowSets002.FOLLOW_HyphenMinusHyphenMinus_in_rule__PostopExpression__FunctionNameAlternatives_1_1_05109); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getPostopExpressionAccess().getFunctionNameHyphenMinusHyphenMinusKeyword_1_1_0_0()); 
                     }
@@ -13527,15 +13527,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2357:6: ( KEYWORD_25 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2357:6: ( PlusSignPlusSign )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2357:6: ( KEYWORD_25 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2358:1: KEYWORD_25
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2357:6: ( PlusSignPlusSign )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2358:1: PlusSignPlusSign
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getPostopExpressionAccess().getFunctionNamePlusSignPlusSignKeyword_1_1_0_1()); 
                     }
-                    match(input,KEYWORD_25,FollowSets002.FOLLOW_KEYWORD_25_in_rule__PostopExpression__FunctionNameAlternatives_1_1_05129); if (state.failed) return ;
+                    match(input,PlusSignPlusSign,FollowSets002.FOLLOW_PlusSignPlusSign_in_rule__PostopExpression__FunctionNameAlternatives_1_1_05129); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getPostopExpressionAccess().getFunctionNamePlusSignPlusSignKeyword_1_1_0_1()); 
                     }
@@ -13576,7 +13576,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             int alt25=3;
             int LA25_0 = input.LA(1);
 
-            if ( (LA25_0==KEYWORD_9) ) {
+            if ( (LA25_0==FullStop) ) {
                 int LA25_1 = input.LA(2);
 
                 if ( (synpred39_InternalExBeeLangTestLanguageParser()) ) {
@@ -13593,7 +13593,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                     throw nvae;
                 }
             }
-            else if ( (LA25_0==KEYWORD_16) ) {
+            else if ( (LA25_0==LeftSquareBracket) ) {
                 alt25=2;
             }
             else {
@@ -13960,10 +13960,10 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             int alt27=2;
             int LA27_0 = input.LA(1);
 
-            if ( (LA27_0==KEYWORD_11) ) {
+            if ( (LA27_0==Colon) ) {
                 alt27=1;
             }
-            else if ( (LA27_0==KEYWORD_18) ) {
+            else if ( (LA27_0==LeftCurlyBracket) ) {
                 alt27=2;
             }
             else {
@@ -14051,7 +14051,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__KeywordVariables__NameAlternatives_1_0"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2484:1: rule__KeywordVariables__NameAlternatives_1_0 : ( ( KEYWORD_51 ) | ( KEYWORD_54 ) | ( KEYWORD_55 ) | ( KEYWORD_63 ) | ( KEYWORD_56 ) | ( KEYWORD_47 ) | ( KEYWORD_46 ) );
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2484:1: rule__KeywordVariables__NameAlternatives_1_0 : ( ( Input ) | ( Output ) | ( Source ) | ( Properties ) | ( Builder ) | ( Unit ) | ( This ) );
     public final void rule__KeywordVariables__NameAlternatives_1_0() throws RecognitionException {
         int rule__KeywordVariables__NameAlternatives_1_0_StartIndex = input.index();
 
@@ -14059,40 +14059,40 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 140) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2488:1: ( ( KEYWORD_51 ) | ( KEYWORD_54 ) | ( KEYWORD_55 ) | ( KEYWORD_63 ) | ( KEYWORD_56 ) | ( KEYWORD_47 ) | ( KEYWORD_46 ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2488:1: ( ( Input ) | ( Output ) | ( Source ) | ( Properties ) | ( Builder ) | ( Unit ) | ( This ) )
             int alt28=7;
             switch ( input.LA(1) ) {
-            case KEYWORD_51:
+            case Input:
                 {
                 alt28=1;
                 }
                 break;
-            case KEYWORD_54:
+            case Output:
                 {
                 alt28=2;
                 }
                 break;
-            case KEYWORD_55:
+            case Source:
                 {
                 alt28=3;
                 }
                 break;
-            case KEYWORD_63:
+            case Properties:
                 {
                 alt28=4;
                 }
                 break;
-            case KEYWORD_56:
+            case Builder:
                 {
                 alt28=5;
                 }
                 break;
-            case KEYWORD_47:
+            case Unit:
                 {
                 alt28=6;
                 }
                 break;
-            case KEYWORD_46:
+            case This:
                 {
                 alt28=7;
                 }
@@ -14107,15 +14107,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
 
             switch (alt28) {
                 case 1 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2489:1: ( KEYWORD_51 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2489:1: ( Input )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2489:1: ( KEYWORD_51 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2490:1: KEYWORD_51
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2489:1: ( Input )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2490:1: Input
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getKeywordVariablesAccess().getNameInputKeyword_1_0_0()); 
                     }
-                    match(input,KEYWORD_51,FollowSets002.FOLLOW_KEYWORD_51_in_rule__KeywordVariables__NameAlternatives_1_05452); if (state.failed) return ;
+                    match(input,Input,FollowSets002.FOLLOW_Input_in_rule__KeywordVariables__NameAlternatives_1_05452); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getKeywordVariablesAccess().getNameInputKeyword_1_0_0()); 
                     }
@@ -14126,15 +14126,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2497:6: ( KEYWORD_54 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2497:6: ( Output )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2497:6: ( KEYWORD_54 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2498:1: KEYWORD_54
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2497:6: ( Output )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2498:1: Output
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getKeywordVariablesAccess().getNameOutputKeyword_1_0_1()); 
                     }
-                    match(input,KEYWORD_54,FollowSets002.FOLLOW_KEYWORD_54_in_rule__KeywordVariables__NameAlternatives_1_05472); if (state.failed) return ;
+                    match(input,Output,FollowSets002.FOLLOW_Output_in_rule__KeywordVariables__NameAlternatives_1_05472); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getKeywordVariablesAccess().getNameOutputKeyword_1_0_1()); 
                     }
@@ -14145,15 +14145,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2505:6: ( KEYWORD_55 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2505:6: ( Source )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2505:6: ( KEYWORD_55 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2506:1: KEYWORD_55
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2505:6: ( Source )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2506:1: Source
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getKeywordVariablesAccess().getNameSourceKeyword_1_0_2()); 
                     }
-                    match(input,KEYWORD_55,FollowSets002.FOLLOW_KEYWORD_55_in_rule__KeywordVariables__NameAlternatives_1_05492); if (state.failed) return ;
+                    match(input,Source,FollowSets002.FOLLOW_Source_in_rule__KeywordVariables__NameAlternatives_1_05492); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getKeywordVariablesAccess().getNameSourceKeyword_1_0_2()); 
                     }
@@ -14164,15 +14164,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2513:6: ( KEYWORD_63 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2513:6: ( Properties )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2513:6: ( KEYWORD_63 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2514:1: KEYWORD_63
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2513:6: ( Properties )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2514:1: Properties
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getKeywordVariablesAccess().getNamePropertiesKeyword_1_0_3()); 
                     }
-                    match(input,KEYWORD_63,FollowSets002.FOLLOW_KEYWORD_63_in_rule__KeywordVariables__NameAlternatives_1_05512); if (state.failed) return ;
+                    match(input,Properties,FollowSets002.FOLLOW_Properties_in_rule__KeywordVariables__NameAlternatives_1_05512); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getKeywordVariablesAccess().getNamePropertiesKeyword_1_0_3()); 
                     }
@@ -14183,15 +14183,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                     }
                     break;
                 case 5 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2521:6: ( KEYWORD_56 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2521:6: ( Builder )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2521:6: ( KEYWORD_56 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2522:1: KEYWORD_56
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2521:6: ( Builder )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2522:1: Builder
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getKeywordVariablesAccess().getNameBuilderKeyword_1_0_4()); 
                     }
-                    match(input,KEYWORD_56,FollowSets002.FOLLOW_KEYWORD_56_in_rule__KeywordVariables__NameAlternatives_1_05532); if (state.failed) return ;
+                    match(input,Builder,FollowSets002.FOLLOW_Builder_in_rule__KeywordVariables__NameAlternatives_1_05532); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getKeywordVariablesAccess().getNameBuilderKeyword_1_0_4()); 
                     }
@@ -14202,15 +14202,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                     }
                     break;
                 case 6 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2529:6: ( KEYWORD_47 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2529:6: ( Unit )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2529:6: ( KEYWORD_47 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2530:1: KEYWORD_47
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2529:6: ( Unit )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2530:1: Unit
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getKeywordVariablesAccess().getNameUnitKeyword_1_0_5()); 
                     }
-                    match(input,KEYWORD_47,FollowSets002.FOLLOW_KEYWORD_47_in_rule__KeywordVariables__NameAlternatives_1_05552); if (state.failed) return ;
+                    match(input,Unit,FollowSets002.FOLLOW_Unit_in_rule__KeywordVariables__NameAlternatives_1_05552); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getKeywordVariablesAccess().getNameUnitKeyword_1_0_5()); 
                     }
@@ -14221,15 +14221,15 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                     }
                     break;
                 case 7 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2537:6: ( KEYWORD_46 )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2537:6: ( This )
                     {
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2537:6: ( KEYWORD_46 )
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2538:1: KEYWORD_46
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2537:6: ( This )
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2538:1: This
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getKeywordVariablesAccess().getNameThisKeyword_1_0_6()); 
                     }
-                    match(input,KEYWORD_46,FollowSets002.FOLLOW_KEYWORD_46_in_rule__KeywordVariables__NameAlternatives_1_05572); if (state.failed) return ;
+                    match(input,This,FollowSets002.FOLLOW_This_in_rule__KeywordVariables__NameAlternatives_1_05572); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getKeywordVariablesAccess().getNameThisKeyword_1_0_6()); 
                     }
@@ -14273,7 +14273,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             if ( (LA29_0==RULE_STRING) ) {
                 alt29=1;
             }
-            else if ( (LA29_0==KEYWORD_18) ) {
+            else if ( (LA29_0==LeftCurlyBracket) ) {
                 alt29=2;
             }
             else {
@@ -14361,10 +14361,10 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             int alt30=2;
             int LA30_0 = input.LA(1);
 
-            if ( (LA30_0==KEYWORD_3||LA30_0==KEYWORD_19||LA30_0==RULE_ID) ) {
+            if ( (LA30_0==LeftParenthesis||LA30_0==VerticalLine||LA30_0==RULE_ID) ) {
                 alt30=1;
             }
-            else if ( (LA30_0==KEYWORD_39) ) {
+            else if ( (LA30_0==FullStopFullStopFullStop) ) {
                 alt30=2;
             }
             else {
@@ -14983,7 +14983,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Unit__Group__2__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2746:1: rule__Unit__Group__2__Impl : ( KEYWORD_47 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2746:1: rule__Unit__Group__2__Impl : ( Unit ) ;
     public final void rule__Unit__Group__2__Impl() throws RecognitionException {
         int rule__Unit__Group__2__Impl_StartIndex = input.index();
 
@@ -14991,16 +14991,16 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 151) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2750:1: ( ( KEYWORD_47 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2751:1: ( KEYWORD_47 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2750:1: ( ( Unit ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2751:1: ( Unit )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2751:1: ( KEYWORD_47 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2752:1: KEYWORD_47
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2751:1: ( Unit )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2752:1: Unit
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getUnitKeyword_2()); 
             }
-            match(input,KEYWORD_47,FollowSets002.FOLLOW_KEYWORD_47_in_rule__Unit__Group__2__Impl6038); if (state.failed) return ;
+            match(input,Unit,FollowSets002.FOLLOW_Unit_in_rule__Unit__Group__2__Impl6038); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitAccess().getUnitKeyword_2()); 
             }
@@ -15195,7 +15195,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             int alt36=2;
             int LA36_0 = input.LA(1);
 
-            if ( (LA36_0==KEYWORD_58) ) {
+            if ( (LA36_0==Version) ) {
                 alt36=1;
             }
             switch (alt36) {
@@ -15301,7 +15301,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             int alt37=2;
             int LA37_0 = input.LA(1);
 
-            if ( (LA37_0==KEYWORD_62) ) {
+            if ( (LA37_0==Implements) ) {
                 alt37=1;
             }
             switch (alt37) {
@@ -15386,7 +15386,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Unit__Group__6__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2864:1: rule__Unit__Group__6__Impl : ( KEYWORD_18 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2864:1: rule__Unit__Group__6__Impl : ( LeftCurlyBracket ) ;
     public final void rule__Unit__Group__6__Impl() throws RecognitionException {
         int rule__Unit__Group__6__Impl_StartIndex = input.index();
 
@@ -15394,16 +15394,16 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 159) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2868:1: ( ( KEYWORD_18 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2869:1: ( KEYWORD_18 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2868:1: ( ( LeftCurlyBracket ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2869:1: ( LeftCurlyBracket )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2869:1: ( KEYWORD_18 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2870:1: KEYWORD_18
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2869:1: ( LeftCurlyBracket )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2870:1: LeftCurlyBracket
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getLeftCurlyBracketKeyword_6()); 
             }
-            match(input,KEYWORD_18,FollowSets002.FOLLOW_KEYWORD_18_in_rule__Unit__Group__6__Impl6283); if (state.failed) return ;
+            match(input,LeftCurlyBracket,FollowSets002.FOLLOW_LeftCurlyBracket_in_rule__Unit__Group__6__Impl6283); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitAccess().getLeftCurlyBracketKeyword_6()); 
             }
@@ -15561,7 +15561,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Unit__Group__8__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2923:1: rule__Unit__Group__8__Impl : ( KEYWORD_20 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2923:1: rule__Unit__Group__8__Impl : ( RightCurlyBracket ) ;
     public final void rule__Unit__Group__8__Impl() throws RecognitionException {
         int rule__Unit__Group__8__Impl_StartIndex = input.index();
 
@@ -15569,16 +15569,16 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 163) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2927:1: ( ( KEYWORD_20 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2928:1: ( KEYWORD_20 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2927:1: ( ( RightCurlyBracket ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2928:1: ( RightCurlyBracket )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2928:1: ( KEYWORD_20 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2929:1: KEYWORD_20
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2928:1: ( RightCurlyBracket )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2929:1: RightCurlyBracket
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getRightCurlyBracketKeyword_8()); 
             }
-            match(input,KEYWORD_20,FollowSets002.FOLLOW_KEYWORD_20_in_rule__Unit__Group__8__Impl6402); if (state.failed) return ;
+            match(input,RightCurlyBracket,FollowSets002.FOLLOW_RightCurlyBracket_in_rule__Unit__Group__8__Impl6402); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitAccess().getRightCurlyBracketKeyword_8()); 
             }
@@ -15646,7 +15646,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Unit__Group_4__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2972:1: rule__Unit__Group_4__0__Impl : ( KEYWORD_58 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2972:1: rule__Unit__Group_4__0__Impl : ( Version ) ;
     public final void rule__Unit__Group_4__0__Impl() throws RecognitionException {
         int rule__Unit__Group_4__0__Impl_StartIndex = input.index();
 
@@ -15654,16 +15654,16 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 165) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2976:1: ( ( KEYWORD_58 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2977:1: ( KEYWORD_58 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2976:1: ( ( Version ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2977:1: ( Version )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2977:1: ( KEYWORD_58 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2978:1: KEYWORD_58
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2977:1: ( Version )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:2978:1: Version
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getVersionKeyword_4_0()); 
             }
-            match(input,KEYWORD_58,FollowSets002.FOLLOW_KEYWORD_58_in_rule__Unit__Group_4__0__Impl6482); if (state.failed) return ;
+            match(input,Version,FollowSets002.FOLLOW_Version_in_rule__Unit__Group_4__0__Impl6482); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitAccess().getVersionKeyword_4_0()); 
             }
@@ -15821,7 +15821,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Unit__Group_5__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3035:1: rule__Unit__Group_5__0__Impl : ( KEYWORD_62 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3035:1: rule__Unit__Group_5__0__Impl : ( Implements ) ;
     public final void rule__Unit__Group_5__0__Impl() throws RecognitionException {
         int rule__Unit__Group_5__0__Impl_StartIndex = input.index();
 
@@ -15829,16 +15829,16 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 169) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3039:1: ( ( KEYWORD_62 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3040:1: ( KEYWORD_62 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3039:1: ( ( Implements ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3040:1: ( Implements )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3040:1: ( KEYWORD_62 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3041:1: KEYWORD_62
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3040:1: ( Implements )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3041:1: Implements
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getImplementsKeyword_5_0()); 
             }
-            match(input,KEYWORD_62,FollowSets002.FOLLOW_KEYWORD_62_in_rule__Unit__Group_5__0__Impl6605); if (state.failed) return ;
+            match(input,Implements,FollowSets002.FOLLOW_Implements_in_rule__Unit__Group_5__0__Impl6605); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitAccess().getImplementsKeyword_5_0()); 
             }
@@ -16019,7 +16019,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
                 int alt38=2;
                 int LA38_0 = input.LA(1);
 
-                if ( (LA38_0==KEYWORD_7) ) {
+                if ( (LA38_0==Comma) ) {
                     alt38=1;
                 }
 
@@ -16109,7 +16109,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Unit__Group_5_2__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3129:1: rule__Unit__Group_5_2__0__Impl : ( KEYWORD_7 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3129:1: rule__Unit__Group_5_2__0__Impl : ( Comma ) ;
     public final void rule__Unit__Group_5_2__0__Impl() throws RecognitionException {
         int rule__Unit__Group_5_2__0__Impl_StartIndex = input.index();
 
@@ -16117,16 +16117,16 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 175) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3133:1: ( ( KEYWORD_7 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3134:1: ( KEYWORD_7 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3133:1: ( ( Comma ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3134:1: ( Comma )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3134:1: ( KEYWORD_7 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3135:1: KEYWORD_7
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3134:1: ( Comma )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3135:1: Comma
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getCommaKeyword_5_2_0()); 
             }
-            match(input,KEYWORD_7,FollowSets003.FOLLOW_KEYWORD_7_in_rule__Unit__Group_5_2__0__Impl6791); if (state.failed) return ;
+            match(input,Comma,FollowSets003.FOLLOW_Comma_in_rule__Unit__Group_5_2__0__Impl6791); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitAccess().getCommaKeyword_5_2_0()); 
             }
@@ -16284,7 +16284,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Unit__Group_7_0__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3192:1: rule__Unit__Group_7_0__0__Impl : ( KEYWORD_55 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3192:1: rule__Unit__Group_7_0__0__Impl : ( Source ) ;
     public final void rule__Unit__Group_7_0__0__Impl() throws RecognitionException {
         int rule__Unit__Group_7_0__0__Impl_StartIndex = input.index();
 
@@ -16292,16 +16292,16 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 179) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3196:1: ( ( KEYWORD_55 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3197:1: ( KEYWORD_55 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3196:1: ( ( Source ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3197:1: ( Source )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3197:1: ( KEYWORD_55 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3198:1: KEYWORD_55
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3197:1: ( Source )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3198:1: Source
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getSourceKeyword_7_0_0()); 
             }
-            match(input,KEYWORD_55,FollowSets003.FOLLOW_KEYWORD_55_in_rule__Unit__Group_7_0__0__Impl6914); if (state.failed) return ;
+            match(input,Source,FollowSets003.FOLLOW_Source_in_rule__Unit__Group_7_0__0__Impl6914); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitAccess().getSourceKeyword_7_0_0()); 
             }
@@ -16369,7 +16369,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Unit__Group_7_0__1__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3223:1: rule__Unit__Group_7_0__1__Impl : ( KEYWORD_11 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3223:1: rule__Unit__Group_7_0__1__Impl : ( Colon ) ;
     public final void rule__Unit__Group_7_0__1__Impl() throws RecognitionException {
         int rule__Unit__Group_7_0__1__Impl_StartIndex = input.index();
 
@@ -16377,16 +16377,16 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 181) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3227:1: ( ( KEYWORD_11 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3228:1: ( KEYWORD_11 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3227:1: ( ( Colon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3228:1: ( Colon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3228:1: ( KEYWORD_11 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3229:1: KEYWORD_11
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3228:1: ( Colon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3229:1: Colon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getColonKeyword_7_0_1()); 
             }
-            match(input,KEYWORD_11,FollowSets003.FOLLOW_KEYWORD_11_in_rule__Unit__Group_7_0__1__Impl6976); if (state.failed) return ;
+            match(input,Colon,FollowSets003.FOLLOW_Colon_in_rule__Unit__Group_7_0__1__Impl6976); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitAccess().getColonKeyword_7_0_1()); 
             }
@@ -16544,7 +16544,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Unit__Group_7_0__3__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3282:1: rule__Unit__Group_7_0__3__Impl : ( KEYWORD_12 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3282:1: rule__Unit__Group_7_0__3__Impl : ( Semicolon ) ;
     public final void rule__Unit__Group_7_0__3__Impl() throws RecognitionException {
         int rule__Unit__Group_7_0__3__Impl_StartIndex = input.index();
 
@@ -16552,16 +16552,16 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 185) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3286:1: ( ( KEYWORD_12 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3287:1: ( KEYWORD_12 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3286:1: ( ( Semicolon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3287:1: ( Semicolon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3287:1: ( KEYWORD_12 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3288:1: KEYWORD_12
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3287:1: ( Semicolon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3288:1: Semicolon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getSemicolonKeyword_7_0_3()); 
             }
-            match(input,KEYWORD_12,FollowSets003.FOLLOW_KEYWORD_12_in_rule__Unit__Group_7_0__3__Impl7095); if (state.failed) return ;
+            match(input,Semicolon,FollowSets003.FOLLOW_Semicolon_in_rule__Unit__Group_7_0__3__Impl7095); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitAccess().getSemicolonKeyword_7_0_3()); 
             }
@@ -16629,7 +16629,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Unit__Group_7_1__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3321:1: rule__Unit__Group_7_1__0__Impl : ( KEYWORD_54 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3321:1: rule__Unit__Group_7_1__0__Impl : ( Output ) ;
     public final void rule__Unit__Group_7_1__0__Impl() throws RecognitionException {
         int rule__Unit__Group_7_1__0__Impl_StartIndex = input.index();
 
@@ -16637,16 +16637,16 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 187) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3325:1: ( ( KEYWORD_54 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3326:1: ( KEYWORD_54 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3325:1: ( ( Output ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3326:1: ( Output )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3326:1: ( KEYWORD_54 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3327:1: KEYWORD_54
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3326:1: ( Output )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3327:1: Output
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getOutputKeyword_7_1_0()); 
             }
-            match(input,KEYWORD_54,FollowSets003.FOLLOW_KEYWORD_54_in_rule__Unit__Group_7_1__0__Impl7165); if (state.failed) return ;
+            match(input,Output,FollowSets003.FOLLOW_Output_in_rule__Unit__Group_7_1__0__Impl7165); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitAccess().getOutputKeyword_7_1_0()); 
             }
@@ -16714,7 +16714,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Unit__Group_7_1__1__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3352:1: rule__Unit__Group_7_1__1__Impl : ( KEYWORD_11 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3352:1: rule__Unit__Group_7_1__1__Impl : ( Colon ) ;
     public final void rule__Unit__Group_7_1__1__Impl() throws RecognitionException {
         int rule__Unit__Group_7_1__1__Impl_StartIndex = input.index();
 
@@ -16722,16 +16722,16 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 189) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3356:1: ( ( KEYWORD_11 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3357:1: ( KEYWORD_11 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3356:1: ( ( Colon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3357:1: ( Colon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3357:1: ( KEYWORD_11 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3358:1: KEYWORD_11
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3357:1: ( Colon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3358:1: Colon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getColonKeyword_7_1_1()); 
             }
-            match(input,KEYWORD_11,FollowSets003.FOLLOW_KEYWORD_11_in_rule__Unit__Group_7_1__1__Impl7227); if (state.failed) return ;
+            match(input,Colon,FollowSets003.FOLLOW_Colon_in_rule__Unit__Group_7_1__1__Impl7227); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitAccess().getColonKeyword_7_1_1()); 
             }
@@ -16889,7 +16889,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Unit__Group_7_1__3__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3411:1: rule__Unit__Group_7_1__3__Impl : ( KEYWORD_12 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3411:1: rule__Unit__Group_7_1__3__Impl : ( Semicolon ) ;
     public final void rule__Unit__Group_7_1__3__Impl() throws RecognitionException {
         int rule__Unit__Group_7_1__3__Impl_StartIndex = input.index();
 
@@ -16897,16 +16897,16 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 193) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3415:1: ( ( KEYWORD_12 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3416:1: ( KEYWORD_12 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3415:1: ( ( Semicolon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3416:1: ( Semicolon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3416:1: ( KEYWORD_12 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3417:1: KEYWORD_12
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3416:1: ( Semicolon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3417:1: Semicolon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getSemicolonKeyword_7_1_3()); 
             }
-            match(input,KEYWORD_12,FollowSets003.FOLLOW_KEYWORD_12_in_rule__Unit__Group_7_1__3__Impl7346); if (state.failed) return ;
+            match(input,Semicolon,FollowSets003.FOLLOW_Semicolon_in_rule__Unit__Group_7_1__3__Impl7346); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitAccess().getSemicolonKeyword_7_1_3()); 
             }
@@ -16974,7 +16974,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Unit__Group_7_2__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3450:1: rule__Unit__Group_7_2__0__Impl : ( KEYWORD_60 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3450:1: rule__Unit__Group_7_2__0__Impl : ( Provides ) ;
     public final void rule__Unit__Group_7_2__0__Impl() throws RecognitionException {
         int rule__Unit__Group_7_2__0__Impl_StartIndex = input.index();
 
@@ -16982,16 +16982,16 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 195) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3454:1: ( ( KEYWORD_60 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3455:1: ( KEYWORD_60 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3454:1: ( ( Provides ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3455:1: ( Provides )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3455:1: ( KEYWORD_60 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3456:1: KEYWORD_60
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3455:1: ( Provides )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3456:1: Provides
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getProvidesKeyword_7_2_0()); 
             }
-            match(input,KEYWORD_60,FollowSets003.FOLLOW_KEYWORD_60_in_rule__Unit__Group_7_2__0__Impl7416); if (state.failed) return ;
+            match(input,Provides,FollowSets003.FOLLOW_Provides_in_rule__Unit__Group_7_2__0__Impl7416); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitAccess().getProvidesKeyword_7_2_0()); 
             }
@@ -17059,7 +17059,7 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Unit__Group_7_2__1__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3481:1: rule__Unit__Group_7_2__1__Impl : ( KEYWORD_11 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3481:1: rule__Unit__Group_7_2__1__Impl : ( Colon ) ;
     public final void rule__Unit__Group_7_2__1__Impl() throws RecognitionException {
         int rule__Unit__Group_7_2__1__Impl_StartIndex = input.index();
 
@@ -17067,16 +17067,16 @@ abstract class InternalExBeeLangTestLanguageParser3 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 197) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3485:1: ( ( KEYWORD_11 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3486:1: ( KEYWORD_11 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3485:1: ( ( Colon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3486:1: ( Colon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3486:1: ( KEYWORD_11 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3487:1: KEYWORD_11
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3486:1: ( Colon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3487:1: Colon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getColonKeyword_7_2_1()); 
             }
-            match(input,KEYWORD_11,FollowSets003.FOLLOW_KEYWORD_11_in_rule__Unit__Group_7_2__1__Impl7478); if (state.failed) return ;
+            match(input,Colon,FollowSets003.FOLLOW_Colon_in_rule__Unit__Group_7_2__1__Impl7478); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitAccess().getColonKeyword_7_2_1()); 
             }
@@ -17246,7 +17246,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
         }
 
     // $ANTLR start "rule__Unit__Group_7_2__3__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3540:1: rule__Unit__Group_7_2__3__Impl : ( KEYWORD_12 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3540:1: rule__Unit__Group_7_2__3__Impl : ( Semicolon ) ;
     public final void rule__Unit__Group_7_2__3__Impl() throws RecognitionException {
         int rule__Unit__Group_7_2__3__Impl_StartIndex = input.index();
 
@@ -17254,16 +17254,16 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 201) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3544:1: ( ( KEYWORD_12 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3545:1: ( KEYWORD_12 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3544:1: ( ( Semicolon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3545:1: ( Semicolon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3545:1: ( KEYWORD_12 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3546:1: KEYWORD_12
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3545:1: ( Semicolon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3546:1: Semicolon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getSemicolonKeyword_7_2_3()); 
             }
-            match(input,KEYWORD_12,FollowSets003.FOLLOW_KEYWORD_12_in_rule__Unit__Group_7_2__3__Impl7597); if (state.failed) return ;
+            match(input,Semicolon,FollowSets003.FOLLOW_Semicolon_in_rule__Unit__Group_7_2__3__Impl7597); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitAccess().getSemicolonKeyword_7_2_3()); 
             }
@@ -17331,7 +17331,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Unit__Group_7_3__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3579:1: rule__Unit__Group_7_3__0__Impl : ( KEYWORD_61 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3579:1: rule__Unit__Group_7_3__0__Impl : ( Requires ) ;
     public final void rule__Unit__Group_7_3__0__Impl() throws RecognitionException {
         int rule__Unit__Group_7_3__0__Impl_StartIndex = input.index();
 
@@ -17339,16 +17339,16 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 203) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3583:1: ( ( KEYWORD_61 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3584:1: ( KEYWORD_61 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3583:1: ( ( Requires ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3584:1: ( Requires )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3584:1: ( KEYWORD_61 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3585:1: KEYWORD_61
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3584:1: ( Requires )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3585:1: Requires
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getRequiresKeyword_7_3_0()); 
             }
-            match(input,KEYWORD_61,FollowSets003.FOLLOW_KEYWORD_61_in_rule__Unit__Group_7_3__0__Impl7667); if (state.failed) return ;
+            match(input,Requires,FollowSets003.FOLLOW_Requires_in_rule__Unit__Group_7_3__0__Impl7667); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitAccess().getRequiresKeyword_7_3_0()); 
             }
@@ -17416,7 +17416,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Unit__Group_7_3__1__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3610:1: rule__Unit__Group_7_3__1__Impl : ( KEYWORD_11 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3610:1: rule__Unit__Group_7_3__1__Impl : ( Colon ) ;
     public final void rule__Unit__Group_7_3__1__Impl() throws RecognitionException {
         int rule__Unit__Group_7_3__1__Impl_StartIndex = input.index();
 
@@ -17424,16 +17424,16 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 205) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3614:1: ( ( KEYWORD_11 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3615:1: ( KEYWORD_11 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3614:1: ( ( Colon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3615:1: ( Colon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3615:1: ( KEYWORD_11 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3616:1: KEYWORD_11
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3615:1: ( Colon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3616:1: Colon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getColonKeyword_7_3_1()); 
             }
-            match(input,KEYWORD_11,FollowSets003.FOLLOW_KEYWORD_11_in_rule__Unit__Group_7_3__1__Impl7729); if (state.failed) return ;
+            match(input,Colon,FollowSets003.FOLLOW_Colon_in_rule__Unit__Group_7_3__1__Impl7729); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitAccess().getColonKeyword_7_3_1()); 
             }
@@ -17591,7 +17591,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Unit__Group_7_3__3__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3669:1: rule__Unit__Group_7_3__3__Impl : ( KEYWORD_12 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3669:1: rule__Unit__Group_7_3__3__Impl : ( Semicolon ) ;
     public final void rule__Unit__Group_7_3__3__Impl() throws RecognitionException {
         int rule__Unit__Group_7_3__3__Impl_StartIndex = input.index();
 
@@ -17599,16 +17599,16 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 209) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3673:1: ( ( KEYWORD_12 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3674:1: ( KEYWORD_12 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3673:1: ( ( Semicolon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3674:1: ( Semicolon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3674:1: ( KEYWORD_12 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3675:1: KEYWORD_12
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3674:1: ( Semicolon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3675:1: Semicolon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getSemicolonKeyword_7_3_3()); 
             }
-            match(input,KEYWORD_12,FollowSets003.FOLLOW_KEYWORD_12_in_rule__Unit__Group_7_3__3__Impl7848); if (state.failed) return ;
+            match(input,Semicolon,FollowSets003.FOLLOW_Semicolon_in_rule__Unit__Group_7_3__3__Impl7848); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitAccess().getSemicolonKeyword_7_3_3()); 
             }
@@ -17676,7 +17676,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Unit__Group_7_4__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3708:1: rule__Unit__Group_7_4__0__Impl : ( KEYWORD_61 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3708:1: rule__Unit__Group_7_4__0__Impl : ( Requires ) ;
     public final void rule__Unit__Group_7_4__0__Impl() throws RecognitionException {
         int rule__Unit__Group_7_4__0__Impl_StartIndex = input.index();
 
@@ -17684,16 +17684,16 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 211) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3712:1: ( ( KEYWORD_61 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3713:1: ( KEYWORD_61 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3712:1: ( ( Requires ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3713:1: ( Requires )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3713:1: ( KEYWORD_61 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3714:1: KEYWORD_61
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3713:1: ( Requires )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3714:1: Requires
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getRequiresKeyword_7_4_0()); 
             }
-            match(input,KEYWORD_61,FollowSets003.FOLLOW_KEYWORD_61_in_rule__Unit__Group_7_4__0__Impl7918); if (state.failed) return ;
+            match(input,Requires,FollowSets003.FOLLOW_Requires_in_rule__Unit__Group_7_4__0__Impl7918); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitAccess().getRequiresKeyword_7_4_0()); 
             }
@@ -17761,7 +17761,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Unit__Group_7_4__1__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3739:1: rule__Unit__Group_7_4__1__Impl : ( KEYWORD_41 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3739:1: rule__Unit__Group_7_4__1__Impl : ( Env ) ;
     public final void rule__Unit__Group_7_4__1__Impl() throws RecognitionException {
         int rule__Unit__Group_7_4__1__Impl_StartIndex = input.index();
 
@@ -17769,16 +17769,16 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 213) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3743:1: ( ( KEYWORD_41 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3744:1: ( KEYWORD_41 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3743:1: ( ( Env ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3744:1: ( Env )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3744:1: ( KEYWORD_41 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3745:1: KEYWORD_41
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3744:1: ( Env )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3745:1: Env
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getEnvKeyword_7_4_1()); 
             }
-            match(input,KEYWORD_41,FollowSets003.FOLLOW_KEYWORD_41_in_rule__Unit__Group_7_4__1__Impl7980); if (state.failed) return ;
+            match(input,Env,FollowSets003.FOLLOW_Env_in_rule__Unit__Group_7_4__1__Impl7980); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitAccess().getEnvKeyword_7_4_1()); 
             }
@@ -17846,7 +17846,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Unit__Group_7_4__2__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3770:1: rule__Unit__Group_7_4__2__Impl : ( KEYWORD_11 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3770:1: rule__Unit__Group_7_4__2__Impl : ( Colon ) ;
     public final void rule__Unit__Group_7_4__2__Impl() throws RecognitionException {
         int rule__Unit__Group_7_4__2__Impl_StartIndex = input.index();
 
@@ -17854,16 +17854,16 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 215) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3774:1: ( ( KEYWORD_11 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3775:1: ( KEYWORD_11 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3774:1: ( ( Colon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3775:1: ( Colon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3775:1: ( KEYWORD_11 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3776:1: KEYWORD_11
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3775:1: ( Colon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3776:1: Colon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getColonKeyword_7_4_2()); 
             }
-            match(input,KEYWORD_11,FollowSets003.FOLLOW_KEYWORD_11_in_rule__Unit__Group_7_4__2__Impl8042); if (state.failed) return ;
+            match(input,Colon,FollowSets003.FOLLOW_Colon_in_rule__Unit__Group_7_4__2__Impl8042); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitAccess().getColonKeyword_7_4_2()); 
             }
@@ -18021,7 +18021,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Unit__Group_7_4__4__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3829:1: rule__Unit__Group_7_4__4__Impl : ( KEYWORD_12 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3829:1: rule__Unit__Group_7_4__4__Impl : ( Semicolon ) ;
     public final void rule__Unit__Group_7_4__4__Impl() throws RecognitionException {
         int rule__Unit__Group_7_4__4__Impl_StartIndex = input.index();
 
@@ -18029,16 +18029,16 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 219) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3833:1: ( ( KEYWORD_12 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3834:1: ( KEYWORD_12 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3833:1: ( ( Semicolon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3834:1: ( Semicolon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3834:1: ( KEYWORD_12 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3835:1: KEYWORD_12
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3834:1: ( Semicolon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3835:1: Semicolon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnitAccess().getSemicolonKeyword_7_4_4()); 
             }
-            match(input,KEYWORD_12,FollowSets003.FOLLOW_KEYWORD_12_in_rule__Unit__Group_7_4__4__Impl8161); if (state.failed) return ;
+            match(input,Semicolon,FollowSets003.FOLLOW_Semicolon_in_rule__Unit__Group_7_4__4__Impl8161); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getUnitAccess().getSemicolonKeyword_7_4_4()); 
             }
@@ -18302,7 +18302,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             int alt39=2;
             int LA39_0 = input.LA(1);
 
-            if ( (LA39_0==KEYWORD_18) ) {
+            if ( (LA39_0==LeftCurlyBracket) ) {
                 alt39=1;
             }
             switch (alt39) {
@@ -18387,7 +18387,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__ProvidedCapability__Group_2__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3964:1: rule__ProvidedCapability__Group_2__0__Impl : ( KEYWORD_18 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3964:1: rule__ProvidedCapability__Group_2__0__Impl : ( LeftCurlyBracket ) ;
     public final void rule__ProvidedCapability__Group_2__0__Impl() throws RecognitionException {
         int rule__ProvidedCapability__Group_2__0__Impl_StartIndex = input.index();
 
@@ -18395,16 +18395,16 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 227) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3968:1: ( ( KEYWORD_18 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3969:1: ( KEYWORD_18 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3968:1: ( ( LeftCurlyBracket ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3969:1: ( LeftCurlyBracket )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3969:1: ( KEYWORD_18 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3970:1: KEYWORD_18
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3969:1: ( LeftCurlyBracket )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:3970:1: LeftCurlyBracket
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getProvidedCapabilityAccess().getLeftCurlyBracketKeyword_2_0()); 
             }
-            match(input,KEYWORD_18,FollowSets003.FOLLOW_KEYWORD_18_in_rule__ProvidedCapability__Group_2__0__Impl8418); if (state.failed) return ;
+            match(input,LeftCurlyBracket,FollowSets003.FOLLOW_LeftCurlyBracket_in_rule__ProvidedCapability__Group_2__0__Impl8418); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getProvidedCapabilityAccess().getLeftCurlyBracketKeyword_2_0()); 
             }
@@ -18562,7 +18562,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__ProvidedCapability__Group_2__2__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4023:1: rule__ProvidedCapability__Group_2__2__Impl : ( KEYWORD_20 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4023:1: rule__ProvidedCapability__Group_2__2__Impl : ( RightCurlyBracket ) ;
     public final void rule__ProvidedCapability__Group_2__2__Impl() throws RecognitionException {
         int rule__ProvidedCapability__Group_2__2__Impl_StartIndex = input.index();
 
@@ -18570,16 +18570,16 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 231) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4027:1: ( ( KEYWORD_20 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4028:1: ( KEYWORD_20 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4027:1: ( ( RightCurlyBracket ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4028:1: ( RightCurlyBracket )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4028:1: ( KEYWORD_20 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4029:1: KEYWORD_20
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4028:1: ( RightCurlyBracket )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4029:1: RightCurlyBracket
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getProvidedCapabilityAccess().getRightCurlyBracketKeyword_2_2()); 
             }
-            match(input,KEYWORD_20,FollowSets003.FOLLOW_KEYWORD_20_in_rule__ProvidedCapability__Group_2__2__Impl8537); if (state.failed) return ;
+            match(input,RightCurlyBracket,FollowSets003.FOLLOW_RightCurlyBracket_in_rule__ProvidedCapability__Group_2__2__Impl8537); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getProvidedCapabilityAccess().getRightCurlyBracketKeyword_2_2()); 
             }
@@ -18647,7 +18647,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__ProvidedCapability__Group_2_1_0__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4060:1: rule__ProvidedCapability__Group_2_1_0__0__Impl : ( KEYWORD_48 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4060:1: rule__ProvidedCapability__Group_2_1_0__0__Impl : ( When ) ;
     public final void rule__ProvidedCapability__Group_2_1_0__0__Impl() throws RecognitionException {
         int rule__ProvidedCapability__Group_2_1_0__0__Impl_StartIndex = input.index();
 
@@ -18655,16 +18655,16 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 233) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4064:1: ( ( KEYWORD_48 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4065:1: ( KEYWORD_48 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4064:1: ( ( When ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4065:1: ( When )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4065:1: ( KEYWORD_48 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4066:1: KEYWORD_48
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4065:1: ( When )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4066:1: When
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getProvidedCapabilityAccess().getWhenKeyword_2_1_0_0()); 
             }
-            match(input,KEYWORD_48,FollowSets003.FOLLOW_KEYWORD_48_in_rule__ProvidedCapability__Group_2_1_0__0__Impl8605); if (state.failed) return ;
+            match(input,When,FollowSets003.FOLLOW_When_in_rule__ProvidedCapability__Group_2_1_0__0__Impl8605); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getProvidedCapabilityAccess().getWhenKeyword_2_1_0_0()); 
             }
@@ -18732,7 +18732,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__ProvidedCapability__Group_2_1_0__1__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4091:1: rule__ProvidedCapability__Group_2_1_0__1__Impl : ( KEYWORD_11 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4091:1: rule__ProvidedCapability__Group_2_1_0__1__Impl : ( Colon ) ;
     public final void rule__ProvidedCapability__Group_2_1_0__1__Impl() throws RecognitionException {
         int rule__ProvidedCapability__Group_2_1_0__1__Impl_StartIndex = input.index();
 
@@ -18740,16 +18740,16 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 235) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4095:1: ( ( KEYWORD_11 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4096:1: ( KEYWORD_11 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4095:1: ( ( Colon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4096:1: ( Colon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4096:1: ( KEYWORD_11 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4097:1: KEYWORD_11
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4096:1: ( Colon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4097:1: Colon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getProvidedCapabilityAccess().getColonKeyword_2_1_0_1()); 
             }
-            match(input,KEYWORD_11,FollowSets003.FOLLOW_KEYWORD_11_in_rule__ProvidedCapability__Group_2_1_0__1__Impl8667); if (state.failed) return ;
+            match(input,Colon,FollowSets003.FOLLOW_Colon_in_rule__ProvidedCapability__Group_2_1_0__1__Impl8667); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getProvidedCapabilityAccess().getColonKeyword_2_1_0_1()); 
             }
@@ -18907,7 +18907,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__ProvidedCapability__Group_2_1_0__3__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4150:1: rule__ProvidedCapability__Group_2_1_0__3__Impl : ( KEYWORD_12 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4150:1: rule__ProvidedCapability__Group_2_1_0__3__Impl : ( Semicolon ) ;
     public final void rule__ProvidedCapability__Group_2_1_0__3__Impl() throws RecognitionException {
         int rule__ProvidedCapability__Group_2_1_0__3__Impl_StartIndex = input.index();
 
@@ -18915,16 +18915,16 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 239) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4154:1: ( ( KEYWORD_12 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4155:1: ( KEYWORD_12 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4154:1: ( ( Semicolon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4155:1: ( Semicolon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4155:1: ( KEYWORD_12 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4156:1: KEYWORD_12
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4155:1: ( Semicolon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4156:1: Semicolon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getProvidedCapabilityAccess().getSemicolonKeyword_2_1_0_3()); 
             }
-            match(input,KEYWORD_12,FollowSets003.FOLLOW_KEYWORD_12_in_rule__ProvidedCapability__Group_2_1_0__3__Impl8786); if (state.failed) return ;
+            match(input,Semicolon,FollowSets003.FOLLOW_Semicolon_in_rule__ProvidedCapability__Group_2_1_0__3__Impl8786); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getProvidedCapabilityAccess().getSemicolonKeyword_2_1_0_3()); 
             }
@@ -18992,7 +18992,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__ProvidedCapability__Group_2_1_1__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4189:1: rule__ProvidedCapability__Group_2_1_1__0__Impl : ( KEYWORD_45 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4189:1: rule__ProvidedCapability__Group_2_1_1__0__Impl : ( Name ) ;
     public final void rule__ProvidedCapability__Group_2_1_1__0__Impl() throws RecognitionException {
         int rule__ProvidedCapability__Group_2_1_1__0__Impl_StartIndex = input.index();
 
@@ -19000,16 +19000,16 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 241) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4193:1: ( ( KEYWORD_45 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4194:1: ( KEYWORD_45 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4193:1: ( ( Name ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4194:1: ( Name )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4194:1: ( KEYWORD_45 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4195:1: KEYWORD_45
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4194:1: ( Name )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4195:1: Name
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getProvidedCapabilityAccess().getNameKeyword_2_1_1_0()); 
             }
-            match(input,KEYWORD_45,FollowSets003.FOLLOW_KEYWORD_45_in_rule__ProvidedCapability__Group_2_1_1__0__Impl8856); if (state.failed) return ;
+            match(input,Name,FollowSets003.FOLLOW_Name_in_rule__ProvidedCapability__Group_2_1_1__0__Impl8856); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getProvidedCapabilityAccess().getNameKeyword_2_1_1_0()); 
             }
@@ -19077,7 +19077,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__ProvidedCapability__Group_2_1_1__1__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4220:1: rule__ProvidedCapability__Group_2_1_1__1__Impl : ( KEYWORD_11 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4220:1: rule__ProvidedCapability__Group_2_1_1__1__Impl : ( Colon ) ;
     public final void rule__ProvidedCapability__Group_2_1_1__1__Impl() throws RecognitionException {
         int rule__ProvidedCapability__Group_2_1_1__1__Impl_StartIndex = input.index();
 
@@ -19085,16 +19085,16 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 243) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4224:1: ( ( KEYWORD_11 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4225:1: ( KEYWORD_11 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4224:1: ( ( Colon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4225:1: ( Colon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4225:1: ( KEYWORD_11 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4226:1: KEYWORD_11
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4225:1: ( Colon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4226:1: Colon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getProvidedCapabilityAccess().getColonKeyword_2_1_1_1()); 
             }
-            match(input,KEYWORD_11,FollowSets003.FOLLOW_KEYWORD_11_in_rule__ProvidedCapability__Group_2_1_1__1__Impl8918); if (state.failed) return ;
+            match(input,Colon,FollowSets003.FOLLOW_Colon_in_rule__ProvidedCapability__Group_2_1_1__1__Impl8918); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getProvidedCapabilityAccess().getColonKeyword_2_1_1_1()); 
             }
@@ -19252,7 +19252,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__ProvidedCapability__Group_2_1_1__3__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4279:1: rule__ProvidedCapability__Group_2_1_1__3__Impl : ( KEYWORD_12 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4279:1: rule__ProvidedCapability__Group_2_1_1__3__Impl : ( Semicolon ) ;
     public final void rule__ProvidedCapability__Group_2_1_1__3__Impl() throws RecognitionException {
         int rule__ProvidedCapability__Group_2_1_1__3__Impl_StartIndex = input.index();
 
@@ -19260,16 +19260,16 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 247) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4283:1: ( ( KEYWORD_12 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4284:1: ( KEYWORD_12 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4283:1: ( ( Semicolon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4284:1: ( Semicolon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4284:1: ( KEYWORD_12 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4285:1: KEYWORD_12
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4284:1: ( Semicolon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4285:1: Semicolon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getProvidedCapabilityAccess().getSemicolonKeyword_2_1_1_3()); 
             }
-            match(input,KEYWORD_12,FollowSets003.FOLLOW_KEYWORD_12_in_rule__ProvidedCapability__Group_2_1_1__3__Impl9037); if (state.failed) return ;
+            match(input,Semicolon,FollowSets003.FOLLOW_Semicolon_in_rule__ProvidedCapability__Group_2_1_1__3__Impl9037); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getProvidedCapabilityAccess().getSemicolonKeyword_2_1_1_3()); 
             }
@@ -19337,7 +19337,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__ProvidedCapability__Group_2_1_2__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4318:1: rule__ProvidedCapability__Group_2_1_2__0__Impl : ( KEYWORD_58 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4318:1: rule__ProvidedCapability__Group_2_1_2__0__Impl : ( Version ) ;
     public final void rule__ProvidedCapability__Group_2_1_2__0__Impl() throws RecognitionException {
         int rule__ProvidedCapability__Group_2_1_2__0__Impl_StartIndex = input.index();
 
@@ -19345,16 +19345,16 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 249) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4322:1: ( ( KEYWORD_58 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4323:1: ( KEYWORD_58 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4322:1: ( ( Version ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4323:1: ( Version )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4323:1: ( KEYWORD_58 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4324:1: KEYWORD_58
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4323:1: ( Version )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4324:1: Version
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getProvidedCapabilityAccess().getVersionKeyword_2_1_2_0()); 
             }
-            match(input,KEYWORD_58,FollowSets004.FOLLOW_KEYWORD_58_in_rule__ProvidedCapability__Group_2_1_2__0__Impl9107); if (state.failed) return ;
+            match(input,Version,FollowSets004.FOLLOW_Version_in_rule__ProvidedCapability__Group_2_1_2__0__Impl9107); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getProvidedCapabilityAccess().getVersionKeyword_2_1_2_0()); 
             }
@@ -19422,7 +19422,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__ProvidedCapability__Group_2_1_2__1__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4349:1: rule__ProvidedCapability__Group_2_1_2__1__Impl : ( KEYWORD_11 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4349:1: rule__ProvidedCapability__Group_2_1_2__1__Impl : ( Colon ) ;
     public final void rule__ProvidedCapability__Group_2_1_2__1__Impl() throws RecognitionException {
         int rule__ProvidedCapability__Group_2_1_2__1__Impl_StartIndex = input.index();
 
@@ -19430,16 +19430,16 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 251) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4353:1: ( ( KEYWORD_11 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4354:1: ( KEYWORD_11 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4353:1: ( ( Colon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4354:1: ( Colon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4354:1: ( KEYWORD_11 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4355:1: KEYWORD_11
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4354:1: ( Colon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4355:1: Colon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getProvidedCapabilityAccess().getColonKeyword_2_1_2_1()); 
             }
-            match(input,KEYWORD_11,FollowSets004.FOLLOW_KEYWORD_11_in_rule__ProvidedCapability__Group_2_1_2__1__Impl9169); if (state.failed) return ;
+            match(input,Colon,FollowSets004.FOLLOW_Colon_in_rule__ProvidedCapability__Group_2_1_2__1__Impl9169); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getProvidedCapabilityAccess().getColonKeyword_2_1_2_1()); 
             }
@@ -19597,7 +19597,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__ProvidedCapability__Group_2_1_2__3__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4408:1: rule__ProvidedCapability__Group_2_1_2__3__Impl : ( KEYWORD_12 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4408:1: rule__ProvidedCapability__Group_2_1_2__3__Impl : ( Semicolon ) ;
     public final void rule__ProvidedCapability__Group_2_1_2__3__Impl() throws RecognitionException {
         int rule__ProvidedCapability__Group_2_1_2__3__Impl_StartIndex = input.index();
 
@@ -19605,16 +19605,16 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 255) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4412:1: ( ( KEYWORD_12 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4413:1: ( KEYWORD_12 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4412:1: ( ( Semicolon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4413:1: ( Semicolon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4413:1: ( KEYWORD_12 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4414:1: KEYWORD_12
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4413:1: ( Semicolon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4414:1: Semicolon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getProvidedCapabilityAccess().getSemicolonKeyword_2_1_2_3()); 
             }
-            match(input,KEYWORD_12,FollowSets004.FOLLOW_KEYWORD_12_in_rule__ProvidedCapability__Group_2_1_2__3__Impl9288); if (state.failed) return ;
+            match(input,Semicolon,FollowSets004.FOLLOW_Semicolon_in_rule__ProvidedCapability__Group_2_1_2__3__Impl9288); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getProvidedCapabilityAccess().getSemicolonKeyword_2_1_2_3()); 
             }
@@ -19893,7 +19893,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             int alt40=2;
             int LA40_0 = input.LA(1);
 
-            if ( (LA40_0==KEYWORD_35) ) {
+            if ( (LA40_0==As) ) {
                 alt40=1;
             }
             switch (alt40) {
@@ -20068,7 +20068,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__AliasedRequiredCapability__Group_2__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4570:1: rule__AliasedRequiredCapability__Group_2__0__Impl : ( KEYWORD_35 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4570:1: rule__AliasedRequiredCapability__Group_2__0__Impl : ( As ) ;
     public final void rule__AliasedRequiredCapability__Group_2__0__Impl() throws RecognitionException {
         int rule__AliasedRequiredCapability__Group_2__0__Impl_StartIndex = input.index();
 
@@ -20076,16 +20076,16 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 265) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4574:1: ( ( KEYWORD_35 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4575:1: ( KEYWORD_35 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4574:1: ( ( As ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4575:1: ( As )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4575:1: ( KEYWORD_35 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4576:1: KEYWORD_35
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4575:1: ( As )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4576:1: As
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAliasedRequiredCapabilityAccess().getAsKeyword_2_0()); 
             }
-            match(input,KEYWORD_35,FollowSets004.FOLLOW_KEYWORD_35_in_rule__AliasedRequiredCapability__Group_2__0__Impl9604); if (state.failed) return ;
+            match(input,As,FollowSets004.FOLLOW_As_in_rule__AliasedRequiredCapability__Group_2__0__Impl9604); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAliasedRequiredCapabilityAccess().getAsKeyword_2_0()); 
             }
@@ -20243,7 +20243,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__AliasedRequiredCapability__Group_3__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4633:1: rule__AliasedRequiredCapability__Group_3__0__Impl : ( KEYWORD_18 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4633:1: rule__AliasedRequiredCapability__Group_3__0__Impl : ( LeftCurlyBracket ) ;
     public final void rule__AliasedRequiredCapability__Group_3__0__Impl() throws RecognitionException {
         int rule__AliasedRequiredCapability__Group_3__0__Impl_StartIndex = input.index();
 
@@ -20251,16 +20251,16 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 269) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4637:1: ( ( KEYWORD_18 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4638:1: ( KEYWORD_18 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4637:1: ( ( LeftCurlyBracket ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4638:1: ( LeftCurlyBracket )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4638:1: ( KEYWORD_18 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4639:1: KEYWORD_18
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4638:1: ( LeftCurlyBracket )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4639:1: LeftCurlyBracket
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAliasedRequiredCapabilityAccess().getLeftCurlyBracketKeyword_3_0()); 
             }
-            match(input,KEYWORD_18,FollowSets004.FOLLOW_KEYWORD_18_in_rule__AliasedRequiredCapability__Group_3__0__Impl9727); if (state.failed) return ;
+            match(input,LeftCurlyBracket,FollowSets004.FOLLOW_LeftCurlyBracket_in_rule__AliasedRequiredCapability__Group_3__0__Impl9727); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAliasedRequiredCapabilityAccess().getLeftCurlyBracketKeyword_3_0()); 
             }
@@ -20418,7 +20418,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__AliasedRequiredCapability__Group_3__2__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4692:1: rule__AliasedRequiredCapability__Group_3__2__Impl : ( KEYWORD_20 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4692:1: rule__AliasedRequiredCapability__Group_3__2__Impl : ( RightCurlyBracket ) ;
     public final void rule__AliasedRequiredCapability__Group_3__2__Impl() throws RecognitionException {
         int rule__AliasedRequiredCapability__Group_3__2__Impl_StartIndex = input.index();
 
@@ -20426,16 +20426,16 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 273) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4696:1: ( ( KEYWORD_20 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4697:1: ( KEYWORD_20 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4696:1: ( ( RightCurlyBracket ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4697:1: ( RightCurlyBracket )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4697:1: ( KEYWORD_20 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4698:1: KEYWORD_20
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4697:1: ( RightCurlyBracket )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4698:1: RightCurlyBracket
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAliasedRequiredCapabilityAccess().getRightCurlyBracketKeyword_3_2()); 
             }
-            match(input,KEYWORD_20,FollowSets004.FOLLOW_KEYWORD_20_in_rule__AliasedRequiredCapability__Group_3__2__Impl9846); if (state.failed) return ;
+            match(input,RightCurlyBracket,FollowSets004.FOLLOW_RightCurlyBracket_in_rule__AliasedRequiredCapability__Group_3__2__Impl9846); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAliasedRequiredCapabilityAccess().getRightCurlyBracketKeyword_3_2()); 
             }
@@ -20503,7 +20503,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__AliasedRequiredCapability__Group_3_1_0__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4729:1: rule__AliasedRequiredCapability__Group_3_1_0__0__Impl : ( KEYWORD_48 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4729:1: rule__AliasedRequiredCapability__Group_3_1_0__0__Impl : ( When ) ;
     public final void rule__AliasedRequiredCapability__Group_3_1_0__0__Impl() throws RecognitionException {
         int rule__AliasedRequiredCapability__Group_3_1_0__0__Impl_StartIndex = input.index();
 
@@ -20511,16 +20511,16 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 275) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4733:1: ( ( KEYWORD_48 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4734:1: ( KEYWORD_48 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4733:1: ( ( When ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4734:1: ( When )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4734:1: ( KEYWORD_48 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4735:1: KEYWORD_48
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4734:1: ( When )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4735:1: When
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAliasedRequiredCapabilityAccess().getWhenKeyword_3_1_0_0()); 
             }
-            match(input,KEYWORD_48,FollowSets004.FOLLOW_KEYWORD_48_in_rule__AliasedRequiredCapability__Group_3_1_0__0__Impl9914); if (state.failed) return ;
+            match(input,When,FollowSets004.FOLLOW_When_in_rule__AliasedRequiredCapability__Group_3_1_0__0__Impl9914); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAliasedRequiredCapabilityAccess().getWhenKeyword_3_1_0_0()); 
             }
@@ -20588,7 +20588,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__AliasedRequiredCapability__Group_3_1_0__1__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4760:1: rule__AliasedRequiredCapability__Group_3_1_0__1__Impl : ( KEYWORD_11 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4760:1: rule__AliasedRequiredCapability__Group_3_1_0__1__Impl : ( Colon ) ;
     public final void rule__AliasedRequiredCapability__Group_3_1_0__1__Impl() throws RecognitionException {
         int rule__AliasedRequiredCapability__Group_3_1_0__1__Impl_StartIndex = input.index();
 
@@ -20596,16 +20596,16 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 277) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4764:1: ( ( KEYWORD_11 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4765:1: ( KEYWORD_11 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4764:1: ( ( Colon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4765:1: ( Colon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4765:1: ( KEYWORD_11 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4766:1: KEYWORD_11
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4765:1: ( Colon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4766:1: Colon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAliasedRequiredCapabilityAccess().getColonKeyword_3_1_0_1()); 
             }
-            match(input,KEYWORD_11,FollowSets004.FOLLOW_KEYWORD_11_in_rule__AliasedRequiredCapability__Group_3_1_0__1__Impl9976); if (state.failed) return ;
+            match(input,Colon,FollowSets004.FOLLOW_Colon_in_rule__AliasedRequiredCapability__Group_3_1_0__1__Impl9976); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAliasedRequiredCapabilityAccess().getColonKeyword_3_1_0_1()); 
             }
@@ -20763,7 +20763,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__AliasedRequiredCapability__Group_3_1_0__3__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4819:1: rule__AliasedRequiredCapability__Group_3_1_0__3__Impl : ( KEYWORD_12 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4819:1: rule__AliasedRequiredCapability__Group_3_1_0__3__Impl : ( Semicolon ) ;
     public final void rule__AliasedRequiredCapability__Group_3_1_0__3__Impl() throws RecognitionException {
         int rule__AliasedRequiredCapability__Group_3_1_0__3__Impl_StartIndex = input.index();
 
@@ -20771,16 +20771,16 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 281) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4823:1: ( ( KEYWORD_12 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4824:1: ( KEYWORD_12 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4823:1: ( ( Semicolon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4824:1: ( Semicolon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4824:1: ( KEYWORD_12 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4825:1: KEYWORD_12
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4824:1: ( Semicolon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4825:1: Semicolon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAliasedRequiredCapabilityAccess().getSemicolonKeyword_3_1_0_3()); 
             }
-            match(input,KEYWORD_12,FollowSets004.FOLLOW_KEYWORD_12_in_rule__AliasedRequiredCapability__Group_3_1_0__3__Impl10095); if (state.failed) return ;
+            match(input,Semicolon,FollowSets004.FOLLOW_Semicolon_in_rule__AliasedRequiredCapability__Group_3_1_0__3__Impl10095); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAliasedRequiredCapabilityAccess().getSemicolonKeyword_3_1_0_3()); 
             }
@@ -20938,7 +20938,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__AliasedRequiredCapability__Group_3_1_1__1__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4886:1: rule__AliasedRequiredCapability__Group_3_1_1__1__Impl : ( KEYWORD_12 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4886:1: rule__AliasedRequiredCapability__Group_3_1_1__1__Impl : ( Semicolon ) ;
     public final void rule__AliasedRequiredCapability__Group_3_1_1__1__Impl() throws RecognitionException {
         int rule__AliasedRequiredCapability__Group_3_1_1__1__Impl_StartIndex = input.index();
 
@@ -20946,16 +20946,16 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 285) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4890:1: ( ( KEYWORD_12 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4891:1: ( KEYWORD_12 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4890:1: ( ( Semicolon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4891:1: ( Semicolon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4891:1: ( KEYWORD_12 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4892:1: KEYWORD_12
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4891:1: ( Semicolon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4892:1: Semicolon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAliasedRequiredCapabilityAccess().getSemicolonKeyword_3_1_1_1()); 
             }
-            match(input,KEYWORD_12,FollowSets004.FOLLOW_KEYWORD_12_in_rule__AliasedRequiredCapability__Group_3_1_1__1__Impl10222); if (state.failed) return ;
+            match(input,Semicolon,FollowSets004.FOLLOW_Semicolon_in_rule__AliasedRequiredCapability__Group_3_1_1__1__Impl10222); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAliasedRequiredCapabilityAccess().getSemicolonKeyword_3_1_1_1()); 
             }
@@ -21023,7 +21023,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__AliasedRequiredCapability__Group_3_1_2__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4921:1: rule__AliasedRequiredCapability__Group_3_1_2__0__Impl : ( KEYWORD_65 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4921:1: rule__AliasedRequiredCapability__Group_3_1_2__0__Impl : ( RequiresMin ) ;
     public final void rule__AliasedRequiredCapability__Group_3_1_2__0__Impl() throws RecognitionException {
         int rule__AliasedRequiredCapability__Group_3_1_2__0__Impl_StartIndex = input.index();
 
@@ -21031,16 +21031,16 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 287) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4925:1: ( ( KEYWORD_65 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4926:1: ( KEYWORD_65 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4925:1: ( ( RequiresMin ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4926:1: ( RequiresMin )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4926:1: ( KEYWORD_65 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4927:1: KEYWORD_65
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4926:1: ( RequiresMin )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4927:1: RequiresMin
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAliasedRequiredCapabilityAccess().getRequiresMinKeyword_3_1_2_0()); 
             }
-            match(input,KEYWORD_65,FollowSets004.FOLLOW_KEYWORD_65_in_rule__AliasedRequiredCapability__Group_3_1_2__0__Impl10288); if (state.failed) return ;
+            match(input,RequiresMin,FollowSets004.FOLLOW_RequiresMin_in_rule__AliasedRequiredCapability__Group_3_1_2__0__Impl10288); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAliasedRequiredCapabilityAccess().getRequiresMinKeyword_3_1_2_0()); 
             }
@@ -21108,7 +21108,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__AliasedRequiredCapability__Group_3_1_2__1__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4952:1: rule__AliasedRequiredCapability__Group_3_1_2__1__Impl : ( KEYWORD_11 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4952:1: rule__AliasedRequiredCapability__Group_3_1_2__1__Impl : ( Colon ) ;
     public final void rule__AliasedRequiredCapability__Group_3_1_2__1__Impl() throws RecognitionException {
         int rule__AliasedRequiredCapability__Group_3_1_2__1__Impl_StartIndex = input.index();
 
@@ -21116,16 +21116,16 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 289) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4956:1: ( ( KEYWORD_11 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4957:1: ( KEYWORD_11 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4956:1: ( ( Colon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4957:1: ( Colon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4957:1: ( KEYWORD_11 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4958:1: KEYWORD_11
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4957:1: ( Colon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:4958:1: Colon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAliasedRequiredCapabilityAccess().getColonKeyword_3_1_2_1()); 
             }
-            match(input,KEYWORD_11,FollowSets004.FOLLOW_KEYWORD_11_in_rule__AliasedRequiredCapability__Group_3_1_2__1__Impl10350); if (state.failed) return ;
+            match(input,Colon,FollowSets004.FOLLOW_Colon_in_rule__AliasedRequiredCapability__Group_3_1_2__1__Impl10350); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAliasedRequiredCapabilityAccess().getColonKeyword_3_1_2_1()); 
             }
@@ -21283,7 +21283,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__AliasedRequiredCapability__Group_3_1_2__3__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5011:1: rule__AliasedRequiredCapability__Group_3_1_2__3__Impl : ( KEYWORD_12 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5011:1: rule__AliasedRequiredCapability__Group_3_1_2__3__Impl : ( Semicolon ) ;
     public final void rule__AliasedRequiredCapability__Group_3_1_2__3__Impl() throws RecognitionException {
         int rule__AliasedRequiredCapability__Group_3_1_2__3__Impl_StartIndex = input.index();
 
@@ -21291,16 +21291,16 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 293) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5015:1: ( ( KEYWORD_12 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5016:1: ( KEYWORD_12 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5015:1: ( ( Semicolon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5016:1: ( Semicolon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5016:1: ( KEYWORD_12 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5017:1: KEYWORD_12
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5016:1: ( Semicolon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5017:1: Semicolon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAliasedRequiredCapabilityAccess().getSemicolonKeyword_3_1_2_3()); 
             }
-            match(input,KEYWORD_12,FollowSets004.FOLLOW_KEYWORD_12_in_rule__AliasedRequiredCapability__Group_3_1_2__3__Impl10469); if (state.failed) return ;
+            match(input,Semicolon,FollowSets004.FOLLOW_Semicolon_in_rule__AliasedRequiredCapability__Group_3_1_2__3__Impl10469); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAliasedRequiredCapabilityAccess().getSemicolonKeyword_3_1_2_3()); 
             }
@@ -21368,7 +21368,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__AliasedRequiredCapability__Group_3_1_3__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5050:1: rule__AliasedRequiredCapability__Group_3_1_3__0__Impl : ( KEYWORD_64 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5050:1: rule__AliasedRequiredCapability__Group_3_1_3__0__Impl : ( RequiresMax ) ;
     public final void rule__AliasedRequiredCapability__Group_3_1_3__0__Impl() throws RecognitionException {
         int rule__AliasedRequiredCapability__Group_3_1_3__0__Impl_StartIndex = input.index();
 
@@ -21376,16 +21376,16 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 295) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5054:1: ( ( KEYWORD_64 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5055:1: ( KEYWORD_64 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5054:1: ( ( RequiresMax ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5055:1: ( RequiresMax )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5055:1: ( KEYWORD_64 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5056:1: KEYWORD_64
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5055:1: ( RequiresMax )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5056:1: RequiresMax
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAliasedRequiredCapabilityAccess().getRequiresMaxKeyword_3_1_3_0()); 
             }
-            match(input,KEYWORD_64,FollowSets004.FOLLOW_KEYWORD_64_in_rule__AliasedRequiredCapability__Group_3_1_3__0__Impl10539); if (state.failed) return ;
+            match(input,RequiresMax,FollowSets004.FOLLOW_RequiresMax_in_rule__AliasedRequiredCapability__Group_3_1_3__0__Impl10539); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAliasedRequiredCapabilityAccess().getRequiresMaxKeyword_3_1_3_0()); 
             }
@@ -21453,7 +21453,7 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__AliasedRequiredCapability__Group_3_1_3__1__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5081:1: rule__AliasedRequiredCapability__Group_3_1_3__1__Impl : ( KEYWORD_11 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5081:1: rule__AliasedRequiredCapability__Group_3_1_3__1__Impl : ( Colon ) ;
     public final void rule__AliasedRequiredCapability__Group_3_1_3__1__Impl() throws RecognitionException {
         int rule__AliasedRequiredCapability__Group_3_1_3__1__Impl_StartIndex = input.index();
 
@@ -21461,16 +21461,16 @@ abstract class InternalExBeeLangTestLanguageParser4 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 297) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5085:1: ( ( KEYWORD_11 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5086:1: ( KEYWORD_11 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5085:1: ( ( Colon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5086:1: ( Colon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5086:1: ( KEYWORD_11 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5087:1: KEYWORD_11
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5086:1: ( Colon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5087:1: Colon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAliasedRequiredCapabilityAccess().getColonKeyword_3_1_3_1()); 
             }
-            match(input,KEYWORD_11,FollowSets004.FOLLOW_KEYWORD_11_in_rule__AliasedRequiredCapability__Group_3_1_3__1__Impl10601); if (state.failed) return ;
+            match(input,Colon,FollowSets004.FOLLOW_Colon_in_rule__AliasedRequiredCapability__Group_3_1_3__1__Impl10601); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAliasedRequiredCapabilityAccess().getColonKeyword_3_1_3_1()); 
             }
@@ -21640,7 +21640,7 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
         }
 
     // $ANTLR start "rule__AliasedRequiredCapability__Group_3_1_3__3__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5140:1: rule__AliasedRequiredCapability__Group_3_1_3__3__Impl : ( KEYWORD_12 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5140:1: rule__AliasedRequiredCapability__Group_3_1_3__3__Impl : ( Semicolon ) ;
     public final void rule__AliasedRequiredCapability__Group_3_1_3__3__Impl() throws RecognitionException {
         int rule__AliasedRequiredCapability__Group_3_1_3__3__Impl_StartIndex = input.index();
 
@@ -21648,16 +21648,16 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 301) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5144:1: ( ( KEYWORD_12 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5145:1: ( KEYWORD_12 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5144:1: ( ( Semicolon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5145:1: ( Semicolon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5145:1: ( KEYWORD_12 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5146:1: KEYWORD_12
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5145:1: ( Semicolon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5146:1: Semicolon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAliasedRequiredCapabilityAccess().getSemicolonKeyword_3_1_3_3()); 
             }
-            match(input,KEYWORD_12,FollowSets004.FOLLOW_KEYWORD_12_in_rule__AliasedRequiredCapability__Group_3_1_3__3__Impl10720); if (state.failed) return ;
+            match(input,Semicolon,FollowSets004.FOLLOW_Semicolon_in_rule__AliasedRequiredCapability__Group_3_1_3__3__Impl10720); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAliasedRequiredCapabilityAccess().getSemicolonKeyword_3_1_3_3()); 
             }
@@ -21725,7 +21725,7 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__AliasedRequiredCapability__Group_3_1_4__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5179:1: rule__AliasedRequiredCapability__Group_3_1_4__0__Impl : ( KEYWORD_58 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5179:1: rule__AliasedRequiredCapability__Group_3_1_4__0__Impl : ( Version ) ;
     public final void rule__AliasedRequiredCapability__Group_3_1_4__0__Impl() throws RecognitionException {
         int rule__AliasedRequiredCapability__Group_3_1_4__0__Impl_StartIndex = input.index();
 
@@ -21733,16 +21733,16 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 303) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5183:1: ( ( KEYWORD_58 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5184:1: ( KEYWORD_58 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5183:1: ( ( Version ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5184:1: ( Version )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5184:1: ( KEYWORD_58 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5185:1: KEYWORD_58
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5184:1: ( Version )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5185:1: Version
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAliasedRequiredCapabilityAccess().getVersionKeyword_3_1_4_0()); 
             }
-            match(input,KEYWORD_58,FollowSets004.FOLLOW_KEYWORD_58_in_rule__AliasedRequiredCapability__Group_3_1_4__0__Impl10790); if (state.failed) return ;
+            match(input,Version,FollowSets004.FOLLOW_Version_in_rule__AliasedRequiredCapability__Group_3_1_4__0__Impl10790); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAliasedRequiredCapabilityAccess().getVersionKeyword_3_1_4_0()); 
             }
@@ -21810,7 +21810,7 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__AliasedRequiredCapability__Group_3_1_4__1__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5210:1: rule__AliasedRequiredCapability__Group_3_1_4__1__Impl : ( KEYWORD_11 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5210:1: rule__AliasedRequiredCapability__Group_3_1_4__1__Impl : ( Colon ) ;
     public final void rule__AliasedRequiredCapability__Group_3_1_4__1__Impl() throws RecognitionException {
         int rule__AliasedRequiredCapability__Group_3_1_4__1__Impl_StartIndex = input.index();
 
@@ -21818,16 +21818,16 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 305) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5214:1: ( ( KEYWORD_11 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5215:1: ( KEYWORD_11 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5214:1: ( ( Colon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5215:1: ( Colon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5215:1: ( KEYWORD_11 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5216:1: KEYWORD_11
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5215:1: ( Colon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5216:1: Colon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAliasedRequiredCapabilityAccess().getColonKeyword_3_1_4_1()); 
             }
-            match(input,KEYWORD_11,FollowSets004.FOLLOW_KEYWORD_11_in_rule__AliasedRequiredCapability__Group_3_1_4__1__Impl10852); if (state.failed) return ;
+            match(input,Colon,FollowSets004.FOLLOW_Colon_in_rule__AliasedRequiredCapability__Group_3_1_4__1__Impl10852); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAliasedRequiredCapabilityAccess().getColonKeyword_3_1_4_1()); 
             }
@@ -21985,7 +21985,7 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__AliasedRequiredCapability__Group_3_1_4__3__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5269:1: rule__AliasedRequiredCapability__Group_3_1_4__3__Impl : ( KEYWORD_12 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5269:1: rule__AliasedRequiredCapability__Group_3_1_4__3__Impl : ( Semicolon ) ;
     public final void rule__AliasedRequiredCapability__Group_3_1_4__3__Impl() throws RecognitionException {
         int rule__AliasedRequiredCapability__Group_3_1_4__3__Impl_StartIndex = input.index();
 
@@ -21993,16 +21993,16 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 309) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5273:1: ( ( KEYWORD_12 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5274:1: ( KEYWORD_12 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5273:1: ( ( Semicolon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5274:1: ( Semicolon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5274:1: ( KEYWORD_12 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5275:1: KEYWORD_12
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5274:1: ( Semicolon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5275:1: Semicolon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAliasedRequiredCapabilityAccess().getSemicolonKeyword_3_1_4_3()); 
             }
-            match(input,KEYWORD_12,FollowSets004.FOLLOW_KEYWORD_12_in_rule__AliasedRequiredCapability__Group_3_1_4__3__Impl10971); if (state.failed) return ;
+            match(input,Semicolon,FollowSets004.FOLLOW_Semicolon_in_rule__AliasedRequiredCapability__Group_3_1_4__3__Impl10971); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAliasedRequiredCapabilityAccess().getSemicolonKeyword_3_1_4_3()); 
             }
@@ -22435,7 +22435,7 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__RequiredCapability__Group_3__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5433:1: rule__RequiredCapability__Group_3__0__Impl : ( KEYWORD_18 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5433:1: rule__RequiredCapability__Group_3__0__Impl : ( LeftCurlyBracket ) ;
     public final void rule__RequiredCapability__Group_3__0__Impl() throws RecognitionException {
         int rule__RequiredCapability__Group_3__0__Impl_StartIndex = input.index();
 
@@ -22443,16 +22443,16 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 319) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5437:1: ( ( KEYWORD_18 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5438:1: ( KEYWORD_18 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5437:1: ( ( LeftCurlyBracket ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5438:1: ( LeftCurlyBracket )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5438:1: ( KEYWORD_18 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5439:1: KEYWORD_18
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5438:1: ( LeftCurlyBracket )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5439:1: LeftCurlyBracket
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRequiredCapabilityAccess().getLeftCurlyBracketKeyword_3_0()); 
             }
-            match(input,KEYWORD_18,FollowSets004.FOLLOW_KEYWORD_18_in_rule__RequiredCapability__Group_3__0__Impl11287); if (state.failed) return ;
+            match(input,LeftCurlyBracket,FollowSets004.FOLLOW_LeftCurlyBracket_in_rule__RequiredCapability__Group_3__0__Impl11287); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getRequiredCapabilityAccess().getLeftCurlyBracketKeyword_3_0()); 
             }
@@ -22610,7 +22610,7 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__RequiredCapability__Group_3__2__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5492:1: rule__RequiredCapability__Group_3__2__Impl : ( KEYWORD_20 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5492:1: rule__RequiredCapability__Group_3__2__Impl : ( RightCurlyBracket ) ;
     public final void rule__RequiredCapability__Group_3__2__Impl() throws RecognitionException {
         int rule__RequiredCapability__Group_3__2__Impl_StartIndex = input.index();
 
@@ -22618,16 +22618,16 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 323) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5496:1: ( ( KEYWORD_20 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5497:1: ( KEYWORD_20 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5496:1: ( ( RightCurlyBracket ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5497:1: ( RightCurlyBracket )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5497:1: ( KEYWORD_20 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5498:1: KEYWORD_20
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5497:1: ( RightCurlyBracket )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5498:1: RightCurlyBracket
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRequiredCapabilityAccess().getRightCurlyBracketKeyword_3_2()); 
             }
-            match(input,KEYWORD_20,FollowSets005.FOLLOW_KEYWORD_20_in_rule__RequiredCapability__Group_3__2__Impl11406); if (state.failed) return ;
+            match(input,RightCurlyBracket,FollowSets005.FOLLOW_RightCurlyBracket_in_rule__RequiredCapability__Group_3__2__Impl11406); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getRequiredCapabilityAccess().getRightCurlyBracketKeyword_3_2()); 
             }
@@ -22695,7 +22695,7 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__RequiredCapability__Group_3_1_0__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5529:1: rule__RequiredCapability__Group_3_1_0__0__Impl : ( KEYWORD_48 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5529:1: rule__RequiredCapability__Group_3_1_0__0__Impl : ( When ) ;
     public final void rule__RequiredCapability__Group_3_1_0__0__Impl() throws RecognitionException {
         int rule__RequiredCapability__Group_3_1_0__0__Impl_StartIndex = input.index();
 
@@ -22703,16 +22703,16 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 325) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5533:1: ( ( KEYWORD_48 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5534:1: ( KEYWORD_48 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5533:1: ( ( When ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5534:1: ( When )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5534:1: ( KEYWORD_48 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5535:1: KEYWORD_48
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5534:1: ( When )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5535:1: When
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRequiredCapabilityAccess().getWhenKeyword_3_1_0_0()); 
             }
-            match(input,KEYWORD_48,FollowSets005.FOLLOW_KEYWORD_48_in_rule__RequiredCapability__Group_3_1_0__0__Impl11474); if (state.failed) return ;
+            match(input,When,FollowSets005.FOLLOW_When_in_rule__RequiredCapability__Group_3_1_0__0__Impl11474); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getRequiredCapabilityAccess().getWhenKeyword_3_1_0_0()); 
             }
@@ -22780,7 +22780,7 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__RequiredCapability__Group_3_1_0__1__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5560:1: rule__RequiredCapability__Group_3_1_0__1__Impl : ( KEYWORD_11 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5560:1: rule__RequiredCapability__Group_3_1_0__1__Impl : ( Colon ) ;
     public final void rule__RequiredCapability__Group_3_1_0__1__Impl() throws RecognitionException {
         int rule__RequiredCapability__Group_3_1_0__1__Impl_StartIndex = input.index();
 
@@ -22788,16 +22788,16 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 327) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5564:1: ( ( KEYWORD_11 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5565:1: ( KEYWORD_11 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5564:1: ( ( Colon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5565:1: ( Colon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5565:1: ( KEYWORD_11 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5566:1: KEYWORD_11
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5565:1: ( Colon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5566:1: Colon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRequiredCapabilityAccess().getColonKeyword_3_1_0_1()); 
             }
-            match(input,KEYWORD_11,FollowSets005.FOLLOW_KEYWORD_11_in_rule__RequiredCapability__Group_3_1_0__1__Impl11536); if (state.failed) return ;
+            match(input,Colon,FollowSets005.FOLLOW_Colon_in_rule__RequiredCapability__Group_3_1_0__1__Impl11536); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getRequiredCapabilityAccess().getColonKeyword_3_1_0_1()); 
             }
@@ -22955,7 +22955,7 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__RequiredCapability__Group_3_1_0__3__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5619:1: rule__RequiredCapability__Group_3_1_0__3__Impl : ( KEYWORD_12 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5619:1: rule__RequiredCapability__Group_3_1_0__3__Impl : ( Semicolon ) ;
     public final void rule__RequiredCapability__Group_3_1_0__3__Impl() throws RecognitionException {
         int rule__RequiredCapability__Group_3_1_0__3__Impl_StartIndex = input.index();
 
@@ -22963,16 +22963,16 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 331) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5623:1: ( ( KEYWORD_12 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5624:1: ( KEYWORD_12 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5623:1: ( ( Semicolon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5624:1: ( Semicolon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5624:1: ( KEYWORD_12 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5625:1: KEYWORD_12
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5624:1: ( Semicolon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5625:1: Semicolon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRequiredCapabilityAccess().getSemicolonKeyword_3_1_0_3()); 
             }
-            match(input,KEYWORD_12,FollowSets005.FOLLOW_KEYWORD_12_in_rule__RequiredCapability__Group_3_1_0__3__Impl11655); if (state.failed) return ;
+            match(input,Semicolon,FollowSets005.FOLLOW_Semicolon_in_rule__RequiredCapability__Group_3_1_0__3__Impl11655); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getRequiredCapabilityAccess().getSemicolonKeyword_3_1_0_3()); 
             }
@@ -23130,7 +23130,7 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__RequiredCapability__Group_3_1_1__1__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5686:1: rule__RequiredCapability__Group_3_1_1__1__Impl : ( KEYWORD_12 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5686:1: rule__RequiredCapability__Group_3_1_1__1__Impl : ( Semicolon ) ;
     public final void rule__RequiredCapability__Group_3_1_1__1__Impl() throws RecognitionException {
         int rule__RequiredCapability__Group_3_1_1__1__Impl_StartIndex = input.index();
 
@@ -23138,16 +23138,16 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 335) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5690:1: ( ( KEYWORD_12 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5691:1: ( KEYWORD_12 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5690:1: ( ( Semicolon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5691:1: ( Semicolon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5691:1: ( KEYWORD_12 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5692:1: KEYWORD_12
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5691:1: ( Semicolon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5692:1: Semicolon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRequiredCapabilityAccess().getSemicolonKeyword_3_1_1_1()); 
             }
-            match(input,KEYWORD_12,FollowSets005.FOLLOW_KEYWORD_12_in_rule__RequiredCapability__Group_3_1_1__1__Impl11782); if (state.failed) return ;
+            match(input,Semicolon,FollowSets005.FOLLOW_Semicolon_in_rule__RequiredCapability__Group_3_1_1__1__Impl11782); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getRequiredCapabilityAccess().getSemicolonKeyword_3_1_1_1()); 
             }
@@ -23215,7 +23215,7 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__RequiredCapability__Group_3_1_2__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5721:1: rule__RequiredCapability__Group_3_1_2__0__Impl : ( KEYWORD_65 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5721:1: rule__RequiredCapability__Group_3_1_2__0__Impl : ( RequiresMin ) ;
     public final void rule__RequiredCapability__Group_3_1_2__0__Impl() throws RecognitionException {
         int rule__RequiredCapability__Group_3_1_2__0__Impl_StartIndex = input.index();
 
@@ -23223,16 +23223,16 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 337) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5725:1: ( ( KEYWORD_65 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5726:1: ( KEYWORD_65 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5725:1: ( ( RequiresMin ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5726:1: ( RequiresMin )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5726:1: ( KEYWORD_65 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5727:1: KEYWORD_65
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5726:1: ( RequiresMin )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5727:1: RequiresMin
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRequiredCapabilityAccess().getRequiresMinKeyword_3_1_2_0()); 
             }
-            match(input,KEYWORD_65,FollowSets005.FOLLOW_KEYWORD_65_in_rule__RequiredCapability__Group_3_1_2__0__Impl11848); if (state.failed) return ;
+            match(input,RequiresMin,FollowSets005.FOLLOW_RequiresMin_in_rule__RequiredCapability__Group_3_1_2__0__Impl11848); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getRequiredCapabilityAccess().getRequiresMinKeyword_3_1_2_0()); 
             }
@@ -23300,7 +23300,7 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__RequiredCapability__Group_3_1_2__1__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5752:1: rule__RequiredCapability__Group_3_1_2__1__Impl : ( KEYWORD_11 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5752:1: rule__RequiredCapability__Group_3_1_2__1__Impl : ( Colon ) ;
     public final void rule__RequiredCapability__Group_3_1_2__1__Impl() throws RecognitionException {
         int rule__RequiredCapability__Group_3_1_2__1__Impl_StartIndex = input.index();
 
@@ -23308,16 +23308,16 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 339) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5756:1: ( ( KEYWORD_11 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5757:1: ( KEYWORD_11 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5756:1: ( ( Colon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5757:1: ( Colon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5757:1: ( KEYWORD_11 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5758:1: KEYWORD_11
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5757:1: ( Colon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5758:1: Colon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRequiredCapabilityAccess().getColonKeyword_3_1_2_1()); 
             }
-            match(input,KEYWORD_11,FollowSets005.FOLLOW_KEYWORD_11_in_rule__RequiredCapability__Group_3_1_2__1__Impl11910); if (state.failed) return ;
+            match(input,Colon,FollowSets005.FOLLOW_Colon_in_rule__RequiredCapability__Group_3_1_2__1__Impl11910); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getRequiredCapabilityAccess().getColonKeyword_3_1_2_1()); 
             }
@@ -23475,7 +23475,7 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__RequiredCapability__Group_3_1_2__3__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5811:1: rule__RequiredCapability__Group_3_1_2__3__Impl : ( KEYWORD_12 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5811:1: rule__RequiredCapability__Group_3_1_2__3__Impl : ( Semicolon ) ;
     public final void rule__RequiredCapability__Group_3_1_2__3__Impl() throws RecognitionException {
         int rule__RequiredCapability__Group_3_1_2__3__Impl_StartIndex = input.index();
 
@@ -23483,16 +23483,16 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 343) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5815:1: ( ( KEYWORD_12 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5816:1: ( KEYWORD_12 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5815:1: ( ( Semicolon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5816:1: ( Semicolon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5816:1: ( KEYWORD_12 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5817:1: KEYWORD_12
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5816:1: ( Semicolon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5817:1: Semicolon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRequiredCapabilityAccess().getSemicolonKeyword_3_1_2_3()); 
             }
-            match(input,KEYWORD_12,FollowSets005.FOLLOW_KEYWORD_12_in_rule__RequiredCapability__Group_3_1_2__3__Impl12029); if (state.failed) return ;
+            match(input,Semicolon,FollowSets005.FOLLOW_Semicolon_in_rule__RequiredCapability__Group_3_1_2__3__Impl12029); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getRequiredCapabilityAccess().getSemicolonKeyword_3_1_2_3()); 
             }
@@ -23560,7 +23560,7 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__RequiredCapability__Group_3_1_3__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5850:1: rule__RequiredCapability__Group_3_1_3__0__Impl : ( KEYWORD_64 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5850:1: rule__RequiredCapability__Group_3_1_3__0__Impl : ( RequiresMax ) ;
     public final void rule__RequiredCapability__Group_3_1_3__0__Impl() throws RecognitionException {
         int rule__RequiredCapability__Group_3_1_3__0__Impl_StartIndex = input.index();
 
@@ -23568,16 +23568,16 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 345) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5854:1: ( ( KEYWORD_64 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5855:1: ( KEYWORD_64 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5854:1: ( ( RequiresMax ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5855:1: ( RequiresMax )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5855:1: ( KEYWORD_64 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5856:1: KEYWORD_64
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5855:1: ( RequiresMax )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5856:1: RequiresMax
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRequiredCapabilityAccess().getRequiresMaxKeyword_3_1_3_0()); 
             }
-            match(input,KEYWORD_64,FollowSets005.FOLLOW_KEYWORD_64_in_rule__RequiredCapability__Group_3_1_3__0__Impl12099); if (state.failed) return ;
+            match(input,RequiresMax,FollowSets005.FOLLOW_RequiresMax_in_rule__RequiredCapability__Group_3_1_3__0__Impl12099); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getRequiredCapabilityAccess().getRequiresMaxKeyword_3_1_3_0()); 
             }
@@ -23645,7 +23645,7 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__RequiredCapability__Group_3_1_3__1__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5881:1: rule__RequiredCapability__Group_3_1_3__1__Impl : ( KEYWORD_11 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5881:1: rule__RequiredCapability__Group_3_1_3__1__Impl : ( Colon ) ;
     public final void rule__RequiredCapability__Group_3_1_3__1__Impl() throws RecognitionException {
         int rule__RequiredCapability__Group_3_1_3__1__Impl_StartIndex = input.index();
 
@@ -23653,16 +23653,16 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 347) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5885:1: ( ( KEYWORD_11 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5886:1: ( KEYWORD_11 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5885:1: ( ( Colon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5886:1: ( Colon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5886:1: ( KEYWORD_11 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5887:1: KEYWORD_11
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5886:1: ( Colon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5887:1: Colon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRequiredCapabilityAccess().getColonKeyword_3_1_3_1()); 
             }
-            match(input,KEYWORD_11,FollowSets005.FOLLOW_KEYWORD_11_in_rule__RequiredCapability__Group_3_1_3__1__Impl12161); if (state.failed) return ;
+            match(input,Colon,FollowSets005.FOLLOW_Colon_in_rule__RequiredCapability__Group_3_1_3__1__Impl12161); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getRequiredCapabilityAccess().getColonKeyword_3_1_3_1()); 
             }
@@ -23820,7 +23820,7 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__RequiredCapability__Group_3_1_3__3__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5940:1: rule__RequiredCapability__Group_3_1_3__3__Impl : ( KEYWORD_12 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5940:1: rule__RequiredCapability__Group_3_1_3__3__Impl : ( Semicolon ) ;
     public final void rule__RequiredCapability__Group_3_1_3__3__Impl() throws RecognitionException {
         int rule__RequiredCapability__Group_3_1_3__3__Impl_StartIndex = input.index();
 
@@ -23828,16 +23828,16 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 351) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5944:1: ( ( KEYWORD_12 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5945:1: ( KEYWORD_12 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5944:1: ( ( Semicolon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5945:1: ( Semicolon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5945:1: ( KEYWORD_12 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5946:1: KEYWORD_12
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5945:1: ( Semicolon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5946:1: Semicolon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRequiredCapabilityAccess().getSemicolonKeyword_3_1_3_3()); 
             }
-            match(input,KEYWORD_12,FollowSets005.FOLLOW_KEYWORD_12_in_rule__RequiredCapability__Group_3_1_3__3__Impl12280); if (state.failed) return ;
+            match(input,Semicolon,FollowSets005.FOLLOW_Semicolon_in_rule__RequiredCapability__Group_3_1_3__3__Impl12280); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getRequiredCapabilityAccess().getSemicolonKeyword_3_1_3_3()); 
             }
@@ -23905,7 +23905,7 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__RequiredCapability__Group_3_1_4__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5979:1: rule__RequiredCapability__Group_3_1_4__0__Impl : ( KEYWORD_58 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5979:1: rule__RequiredCapability__Group_3_1_4__0__Impl : ( Version ) ;
     public final void rule__RequiredCapability__Group_3_1_4__0__Impl() throws RecognitionException {
         int rule__RequiredCapability__Group_3_1_4__0__Impl_StartIndex = input.index();
 
@@ -23913,16 +23913,16 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 353) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5983:1: ( ( KEYWORD_58 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5984:1: ( KEYWORD_58 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5983:1: ( ( Version ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5984:1: ( Version )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5984:1: ( KEYWORD_58 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5985:1: KEYWORD_58
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5984:1: ( Version )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:5985:1: Version
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRequiredCapabilityAccess().getVersionKeyword_3_1_4_0()); 
             }
-            match(input,KEYWORD_58,FollowSets005.FOLLOW_KEYWORD_58_in_rule__RequiredCapability__Group_3_1_4__0__Impl12350); if (state.failed) return ;
+            match(input,Version,FollowSets005.FOLLOW_Version_in_rule__RequiredCapability__Group_3_1_4__0__Impl12350); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getRequiredCapabilityAccess().getVersionKeyword_3_1_4_0()); 
             }
@@ -23990,7 +23990,7 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__RequiredCapability__Group_3_1_4__1__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6010:1: rule__RequiredCapability__Group_3_1_4__1__Impl : ( KEYWORD_11 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6010:1: rule__RequiredCapability__Group_3_1_4__1__Impl : ( Colon ) ;
     public final void rule__RequiredCapability__Group_3_1_4__1__Impl() throws RecognitionException {
         int rule__RequiredCapability__Group_3_1_4__1__Impl_StartIndex = input.index();
 
@@ -23998,16 +23998,16 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 355) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6014:1: ( ( KEYWORD_11 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6015:1: ( KEYWORD_11 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6014:1: ( ( Colon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6015:1: ( Colon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6015:1: ( KEYWORD_11 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6016:1: KEYWORD_11
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6015:1: ( Colon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6016:1: Colon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRequiredCapabilityAccess().getColonKeyword_3_1_4_1()); 
             }
-            match(input,KEYWORD_11,FollowSets005.FOLLOW_KEYWORD_11_in_rule__RequiredCapability__Group_3_1_4__1__Impl12412); if (state.failed) return ;
+            match(input,Colon,FollowSets005.FOLLOW_Colon_in_rule__RequiredCapability__Group_3_1_4__1__Impl12412); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getRequiredCapabilityAccess().getColonKeyword_3_1_4_1()); 
             }
@@ -24165,7 +24165,7 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__RequiredCapability__Group_3_1_4__3__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6069:1: rule__RequiredCapability__Group_3_1_4__3__Impl : ( KEYWORD_12 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6069:1: rule__RequiredCapability__Group_3_1_4__3__Impl : ( Semicolon ) ;
     public final void rule__RequiredCapability__Group_3_1_4__3__Impl() throws RecognitionException {
         int rule__RequiredCapability__Group_3_1_4__3__Impl_StartIndex = input.index();
 
@@ -24173,16 +24173,16 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 359) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6073:1: ( ( KEYWORD_12 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6074:1: ( KEYWORD_12 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6073:1: ( ( Semicolon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6074:1: ( Semicolon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6074:1: ( KEYWORD_12 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6075:1: KEYWORD_12
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6074:1: ( Semicolon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6075:1: Semicolon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRequiredCapabilityAccess().getSemicolonKeyword_3_1_4_3()); 
             }
-            match(input,KEYWORD_12,FollowSets005.FOLLOW_KEYWORD_12_in_rule__RequiredCapability__Group_3_1_4__3__Impl12531); if (state.failed) return ;
+            match(input,Semicolon,FollowSets005.FOLLOW_Semicolon_in_rule__RequiredCapability__Group_3_1_4__3__Impl12531); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getRequiredCapabilityAccess().getSemicolonKeyword_3_1_4_3()); 
             }
@@ -24250,7 +24250,7 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Path__Group_1__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6108:1: rule__Path__Group_1__0__Impl : ( ( KEYWORD_10 )? ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6108:1: rule__Path__Group_1__0__Impl : ( ( Solidus )? ) ;
     public final void rule__Path__Group_1__0__Impl() throws RecognitionException {
         int rule__Path__Group_1__0__Impl_StartIndex = input.index();
 
@@ -24258,27 +24258,27 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 361) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6112:1: ( ( ( KEYWORD_10 )? ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6113:1: ( ( KEYWORD_10 )? )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6112:1: ( ( ( Solidus )? ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6113:1: ( ( Solidus )? )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6113:1: ( ( KEYWORD_10 )? )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6114:1: ( KEYWORD_10 )?
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6113:1: ( ( Solidus )? )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6114:1: ( Solidus )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPathAccess().getSolidusKeyword_1_0()); 
             }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6115:1: ( KEYWORD_10 )?
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6115:1: ( Solidus )?
             int alt41=2;
             int LA41_0 = input.LA(1);
 
-            if ( (LA41_0==KEYWORD_10) ) {
+            if ( (LA41_0==Solidus) ) {
                 alt41=1;
             }
             switch (alt41) {
                 case 1 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6116:2: KEYWORD_10
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6116:2: Solidus
                     {
-                    match(input,KEYWORD_10,FollowSets005.FOLLOW_KEYWORD_10_in_rule__Path__Group_1__0__Impl12602); if (state.failed) return ;
+                    match(input,Solidus,FollowSets005.FOLLOW_Solidus_in_rule__Path__Group_1__0__Impl12602); if (state.failed) return ;
 
                     }
                     break;
@@ -24464,7 +24464,7 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
                 int alt42=2;
                 int LA42_0 = input.LA(1);
 
-                if ( (LA42_0==KEYWORD_10) ) {
+                if ( (LA42_0==Solidus) ) {
                     int LA42_1 = input.LA(2);
 
                     if ( (LA42_1==RULE_ID) ) {
@@ -24555,7 +24555,7 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Path__Group_1__3__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6196:1: rule__Path__Group_1__3__Impl : ( ( KEYWORD_10 )? ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6196:1: rule__Path__Group_1__3__Impl : ( ( Solidus )? ) ;
     public final void rule__Path__Group_1__3__Impl() throws RecognitionException {
         int rule__Path__Group_1__3__Impl_StartIndex = input.index();
 
@@ -24563,27 +24563,27 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 367) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6200:1: ( ( ( KEYWORD_10 )? ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6201:1: ( ( KEYWORD_10 )? )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6200:1: ( ( ( Solidus )? ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6201:1: ( ( Solidus )? )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6201:1: ( ( KEYWORD_10 )? )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6202:1: ( KEYWORD_10 )?
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6201:1: ( ( Solidus )? )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6202:1: ( Solidus )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPathAccess().getSolidusKeyword_1_3()); 
             }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6203:1: ( KEYWORD_10 )?
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6203:1: ( Solidus )?
             int alt43=2;
             int LA43_0 = input.LA(1);
 
-            if ( (LA43_0==KEYWORD_10) ) {
+            if ( (LA43_0==Solidus) ) {
                 alt43=1;
             }
             switch (alt43) {
                 case 1 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6204:2: KEYWORD_10
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6204:2: Solidus
                     {
-                    match(input,KEYWORD_10,FollowSets005.FOLLOW_KEYWORD_10_in_rule__Path__Group_1__3__Impl12784); if (state.failed) return ;
+                    match(input,Solidus,FollowSets005.FOLLOW_Solidus_in_rule__Path__Group_1__3__Impl12784); if (state.failed) return ;
 
                     }
                     break;
@@ -24657,7 +24657,7 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Path__Group_1_2__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6235:1: rule__Path__Group_1_2__0__Impl : ( KEYWORD_10 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6235:1: rule__Path__Group_1_2__0__Impl : ( Solidus ) ;
     public final void rule__Path__Group_1_2__0__Impl() throws RecognitionException {
         int rule__Path__Group_1_2__0__Impl_StartIndex = input.index();
 
@@ -24665,16 +24665,16 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 369) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6239:1: ( ( KEYWORD_10 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6240:1: ( KEYWORD_10 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6239:1: ( ( Solidus ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6240:1: ( Solidus )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6240:1: ( KEYWORD_10 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6241:1: KEYWORD_10
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6240:1: ( Solidus )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6241:1: Solidus
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPathAccess().getSolidusKeyword_1_2_0()); 
             }
-            match(input,KEYWORD_10,FollowSets005.FOLLOW_KEYWORD_10_in_rule__Path__Group_1_2__0__Impl12856); if (state.failed) return ;
+            match(input,Solidus,FollowSets005.FOLLOW_Solidus_in_rule__Path__Group_1_2__0__Impl12856); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getPathAccess().getSolidusKeyword_1_2_0()); 
             }
@@ -24939,7 +24939,7 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
                 int alt44=2;
                 int LA44_0 = input.LA(1);
 
-                if ( (LA44_0==KEYWORD_7) ) {
+                if ( (LA44_0==Comma) ) {
                     alt44=1;
                 }
 
@@ -25029,7 +25029,7 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__ParameterList__Group_1__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6359:1: rule__ParameterList__Group_1__0__Impl : ( KEYWORD_7 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6359:1: rule__ParameterList__Group_1__0__Impl : ( Comma ) ;
     public final void rule__ParameterList__Group_1__0__Impl() throws RecognitionException {
         int rule__ParameterList__Group_1__0__Impl_StartIndex = input.index();
 
@@ -25037,16 +25037,16 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 377) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6363:1: ( ( KEYWORD_7 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6364:1: ( KEYWORD_7 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6363:1: ( ( Comma ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6364:1: ( Comma )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6364:1: ( KEYWORD_7 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6365:1: KEYWORD_7
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6364:1: ( Comma )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6365:1: Comma
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getParameterListAccess().getCommaKeyword_1_0()); 
             }
-            match(input,KEYWORD_7,FollowSets005.FOLLOW_KEYWORD_7_in_rule__ParameterList__Group_1__0__Impl13100); if (state.failed) return ;
+            match(input,Comma,FollowSets005.FOLLOW_Comma_in_rule__ParameterList__Group_1__0__Impl13100); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getParameterListAccess().getCommaKeyword_1_0()); 
             }
@@ -25225,13 +25225,13 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
             int alt45=2;
             int LA45_0 = input.LA(1);
 
-            if ( (LA45_0==KEYWORD_3) ) {
+            if ( (LA45_0==LeftParenthesis) ) {
                 alt45=1;
             }
             else if ( (LA45_0==RULE_ID) ) {
                 int LA45_2 = input.LA(2);
 
-                if ( (LA45_2==KEYWORD_13||LA45_2==RULE_ID) ) {
+                if ( (LA45_2==LessThanSign||LA45_2==RULE_ID) ) {
                     alt45=1;
                 }
             }
@@ -25640,7 +25640,7 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
             int alt48=2;
             int LA48_0 = input.LA(1);
 
-            if ( (LA48_0==KEYWORD_50) ) {
+            if ( (LA48_0==Final) ) {
                 alt48=1;
             }
             switch (alt48) {
@@ -25725,7 +25725,7 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Function__Group__3__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6570:1: rule__Function__Group__3__Impl : ( KEYWORD_59 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6570:1: rule__Function__Group__3__Impl : ( Function ) ;
     public final void rule__Function__Group__3__Impl() throws RecognitionException {
         int rule__Function__Group__3__Impl_StartIndex = input.index();
 
@@ -25733,16 +25733,16 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 391) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6574:1: ( ( KEYWORD_59 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6575:1: ( KEYWORD_59 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6574:1: ( ( Function ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6575:1: ( Function )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6575:1: ( KEYWORD_59 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6576:1: KEYWORD_59
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6575:1: ( Function )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6576:1: Function
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionAccess().getFunctionKeyword_3()); 
             }
-            match(input,KEYWORD_59,FollowSets005.FOLLOW_KEYWORD_59_in_rule__Function__Group__3__Impl13528); if (state.failed) return ;
+            match(input,Function,FollowSets005.FOLLOW_Function_in_rule__Function__Group__3__Impl13528); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getFunctionAccess().getFunctionKeyword_3()); 
             }
@@ -25831,13 +25831,13 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
             int alt49=2;
             int LA49_0 = input.LA(1);
 
-            if ( (LA49_0==KEYWORD_3) ) {
+            if ( (LA49_0==LeftParenthesis) ) {
                 alt49=1;
             }
             else if ( (LA49_0==RULE_ID) ) {
                 int LA49_2 = input.LA(2);
 
-                if ( (LA49_2==KEYWORD_13||LA49_2==RULE_ID) ) {
+                if ( (LA49_2==LessThanSign||LA49_2==RULE_ID) ) {
                     alt49=1;
                 }
             }
@@ -26039,7 +26039,7 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
             int alt50=2;
             int LA50_0 = input.LA(1);
 
-            if ( (LA50_0==KEYWORD_3) ) {
+            if ( (LA50_0==LeftParenthesis) ) {
                 alt50=1;
             }
             switch (alt50) {
@@ -26145,7 +26145,7 @@ abstract class InternalExBeeLangTestLanguageParser5 extends InternalExBeeLangTes
             int alt51=2;
             int LA51_0 = input.LA(1);
 
-            if ( (LA51_0==KEYWORD_48) ) {
+            if ( (LA51_0==When) ) {
                 alt51=1;
             }
             switch (alt51) {
@@ -26332,7 +26332,7 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Function__Group_6__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6763:1: rule__Function__Group_6__0__Impl : ( KEYWORD_3 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6763:1: rule__Function__Group_6__0__Impl : ( LeftParenthesis ) ;
     public final void rule__Function__Group_6__0__Impl() throws RecognitionException {
         int rule__Function__Group_6__0__Impl_StartIndex = input.index();
 
@@ -26340,16 +26340,16 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 403) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6767:1: ( ( KEYWORD_3 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6768:1: ( KEYWORD_3 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6767:1: ( ( LeftParenthesis ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6768:1: ( LeftParenthesis )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6768:1: ( KEYWORD_3 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6769:1: KEYWORD_3
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6768:1: ( LeftParenthesis )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6769:1: LeftParenthesis
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionAccess().getLeftParenthesisKeyword_6_0()); 
             }
-            match(input,KEYWORD_3,FollowSets006.FOLLOW_KEYWORD_3_in_rule__Function__Group_6__0__Impl13908); if (state.failed) return ;
+            match(input,LeftParenthesis,FollowSets006.FOLLOW_LeftParenthesis_in_rule__Function__Group_6__0__Impl13908); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getFunctionAccess().getLeftParenthesisKeyword_6_0()); 
             }
@@ -26438,7 +26438,7 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
             int alt52=2;
             int LA52_0 = input.LA(1);
 
-            if ( (LA52_0==KEYWORD_39||LA52_0==KEYWORD_3||LA52_0==RULE_ID) ) {
+            if ( (LA52_0==FullStopFullStopFullStop||LA52_0==LeftParenthesis||LA52_0==RULE_ID) ) {
                 alt52=1;
             }
             switch (alt52) {
@@ -26518,7 +26518,7 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Function__Group_6__2__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6822:1: rule__Function__Group_6__2__Impl : ( KEYWORD_4 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6822:1: rule__Function__Group_6__2__Impl : ( RightParenthesis ) ;
     public final void rule__Function__Group_6__2__Impl() throws RecognitionException {
         int rule__Function__Group_6__2__Impl_StartIndex = input.index();
 
@@ -26526,16 +26526,16 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 407) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6826:1: ( ( KEYWORD_4 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6827:1: ( KEYWORD_4 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6826:1: ( ( RightParenthesis ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6827:1: ( RightParenthesis )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6827:1: ( KEYWORD_4 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6828:1: KEYWORD_4
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6827:1: ( RightParenthesis )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6828:1: RightParenthesis
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionAccess().getRightParenthesisKeyword_6_2()); 
             }
-            match(input,KEYWORD_4,FollowSets006.FOLLOW_KEYWORD_4_in_rule__Function__Group_6__2__Impl14028); if (state.failed) return ;
+            match(input,RightParenthesis,FollowSets006.FOLLOW_RightParenthesis_in_rule__Function__Group_6__2__Impl14028); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getFunctionAccess().getRightParenthesisKeyword_6_2()); 
             }
@@ -26721,10 +26721,10 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
                 int alt53=2;
                 int LA53_0 = input.LA(1);
 
-                if ( (LA53_0==KEYWORD_7) ) {
+                if ( (LA53_0==Comma) ) {
                     int LA53_1 = input.LA(2);
 
-                    if ( (LA53_1==KEYWORD_3||LA53_1==RULE_ID) ) {
+                    if ( (LA53_1==LeftParenthesis||LA53_1==RULE_ID) ) {
                         alt53=1;
                     }
 
@@ -26833,7 +26833,7 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
             int alt54=2;
             int LA54_0 = input.LA(1);
 
-            if ( (LA54_0==KEYWORD_7) ) {
+            if ( (LA54_0==Comma) ) {
                 alt54=1;
             }
             switch (alt54) {
@@ -26918,7 +26918,7 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Function__Group_6_1_0_1__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6951:1: rule__Function__Group_6_1_0_1__0__Impl : ( KEYWORD_7 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6951:1: rule__Function__Group_6_1_0_1__0__Impl : ( Comma ) ;
     public final void rule__Function__Group_6_1_0_1__0__Impl() throws RecognitionException {
         int rule__Function__Group_6_1_0_1__0__Impl_StartIndex = input.index();
 
@@ -26926,16 +26926,16 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 415) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6955:1: ( ( KEYWORD_7 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6956:1: ( KEYWORD_7 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6955:1: ( ( Comma ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6956:1: ( Comma )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6956:1: ( KEYWORD_7 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6957:1: KEYWORD_7
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6956:1: ( Comma )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:6957:1: Comma
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionAccess().getCommaKeyword_6_1_0_1_0()); 
             }
-            match(input,KEYWORD_7,FollowSets006.FOLLOW_KEYWORD_7_in_rule__Function__Group_6_1_0_1__0__Impl14281); if (state.failed) return ;
+            match(input,Comma,FollowSets006.FOLLOW_Comma_in_rule__Function__Group_6_1_0_1__0__Impl14281); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getFunctionAccess().getCommaKeyword_6_1_0_1_0()); 
             }
@@ -27093,7 +27093,7 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Function__Group_6_1_0_2__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7014:1: rule__Function__Group_6_1_0_2__0__Impl : ( KEYWORD_7 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7014:1: rule__Function__Group_6_1_0_2__0__Impl : ( Comma ) ;
     public final void rule__Function__Group_6_1_0_2__0__Impl() throws RecognitionException {
         int rule__Function__Group_6_1_0_2__0__Impl_StartIndex = input.index();
 
@@ -27101,16 +27101,16 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 419) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7018:1: ( ( KEYWORD_7 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7019:1: ( KEYWORD_7 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7018:1: ( ( Comma ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7019:1: ( Comma )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7019:1: ( KEYWORD_7 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7020:1: KEYWORD_7
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7019:1: ( Comma )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7020:1: Comma
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionAccess().getCommaKeyword_6_1_0_2_0()); 
             }
-            match(input,KEYWORD_7,FollowSets006.FOLLOW_KEYWORD_7_in_rule__Function__Group_6_1_0_2__0__Impl14404); if (state.failed) return ;
+            match(input,Comma,FollowSets006.FOLLOW_Comma_in_rule__Function__Group_6_1_0_2__0__Impl14404); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getFunctionAccess().getCommaKeyword_6_1_0_2_0()); 
             }
@@ -27548,7 +27548,7 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Function__Group_7__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7169:1: rule__Function__Group_7__0__Impl : ( KEYWORD_48 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7169:1: rule__Function__Group_7__0__Impl : ( When ) ;
     public final void rule__Function__Group_7__0__Impl() throws RecognitionException {
         int rule__Function__Group_7__0__Impl_StartIndex = input.index();
 
@@ -27556,16 +27556,16 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 429) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7173:1: ( ( KEYWORD_48 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7174:1: ( KEYWORD_48 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7173:1: ( ( When ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7174:1: ( When )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7174:1: ( KEYWORD_48 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7175:1: KEYWORD_48
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7174:1: ( When )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7175:1: When
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionAccess().getWhenKeyword_7_0()); 
             }
-            match(input,KEYWORD_48,FollowSets006.FOLLOW_KEYWORD_48_in_rule__Function__Group_7__0__Impl14710); if (state.failed) return ;
+            match(input,When,FollowSets006.FOLLOW_When_in_rule__Function__Group_7__0__Impl14710); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getFunctionAccess().getWhenKeyword_7_0()); 
             }
@@ -27723,7 +27723,7 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Function__Group_8_0__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7232:1: rule__Function__Group_8_0__0__Impl : ( KEYWORD_11 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7232:1: rule__Function__Group_8_0__0__Impl : ( Colon ) ;
     public final void rule__Function__Group_8_0__0__Impl() throws RecognitionException {
         int rule__Function__Group_8_0__0__Impl_StartIndex = input.index();
 
@@ -27731,16 +27731,16 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 433) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7236:1: ( ( KEYWORD_11 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7237:1: ( KEYWORD_11 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7236:1: ( ( Colon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7237:1: ( Colon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7237:1: ( KEYWORD_11 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7238:1: KEYWORD_11
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7237:1: ( Colon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7238:1: Colon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionAccess().getColonKeyword_8_0_0()); 
             }
-            match(input,KEYWORD_11,FollowSets006.FOLLOW_KEYWORD_11_in_rule__Function__Group_8_0__0__Impl14833); if (state.failed) return ;
+            match(input,Colon,FollowSets006.FOLLOW_Colon_in_rule__Function__Group_8_0__0__Impl14833); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getFunctionAccess().getColonKeyword_8_0_0()); 
             }
@@ -27898,7 +27898,7 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__Function__Group_8_0__2__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7291:1: rule__Function__Group_8_0__2__Impl : ( KEYWORD_12 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7291:1: rule__Function__Group_8_0__2__Impl : ( Semicolon ) ;
     public final void rule__Function__Group_8_0__2__Impl() throws RecognitionException {
         int rule__Function__Group_8_0__2__Impl_StartIndex = input.index();
 
@@ -27906,16 +27906,16 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 437) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7295:1: ( ( KEYWORD_12 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7296:1: ( KEYWORD_12 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7295:1: ( ( Semicolon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7296:1: ( Semicolon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7296:1: ( KEYWORD_12 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7297:1: KEYWORD_12
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7296:1: ( Semicolon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7297:1: Semicolon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionAccess().getSemicolonKeyword_8_0_2()); 
             }
-            match(input,KEYWORD_12,FollowSets006.FOLLOW_KEYWORD_12_in_rule__Function__Group_8_0__2__Impl14952); if (state.failed) return ;
+            match(input,Semicolon,FollowSets006.FOLLOW_Semicolon_in_rule__Function__Group_8_0__2__Impl14952); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getFunctionAccess().getSemicolonKeyword_8_0_2()); 
             }
@@ -27983,7 +27983,7 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__GuardExpression__Group_0__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7328:1: rule__GuardExpression__Group_0__0__Impl : ( KEYWORD_11 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7328:1: rule__GuardExpression__Group_0__0__Impl : ( Colon ) ;
     public final void rule__GuardExpression__Group_0__0__Impl() throws RecognitionException {
         int rule__GuardExpression__Group_0__0__Impl_StartIndex = input.index();
 
@@ -27991,16 +27991,16 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 439) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7332:1: ( ( KEYWORD_11 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7333:1: ( KEYWORD_11 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7332:1: ( ( Colon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7333:1: ( Colon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7333:1: ( KEYWORD_11 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7334:1: KEYWORD_11
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7333:1: ( Colon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7334:1: Colon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getGuardExpressionAccess().getColonKeyword_0_0()); 
             }
-            match(input,KEYWORD_11,FollowSets006.FOLLOW_KEYWORD_11_in_rule__GuardExpression__Group_0__0__Impl15020); if (state.failed) return ;
+            match(input,Colon,FollowSets006.FOLLOW_Colon_in_rule__GuardExpression__Group_0__0__Impl15020); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getGuardExpressionAccess().getColonKeyword_0_0()); 
             }
@@ -28158,7 +28158,7 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__GuardExpression__Group_0__2__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7387:1: rule__GuardExpression__Group_0__2__Impl : ( KEYWORD_12 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7387:1: rule__GuardExpression__Group_0__2__Impl : ( Semicolon ) ;
     public final void rule__GuardExpression__Group_0__2__Impl() throws RecognitionException {
         int rule__GuardExpression__Group_0__2__Impl_StartIndex = input.index();
 
@@ -28166,16 +28166,16 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 443) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7391:1: ( ( KEYWORD_12 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7392:1: ( KEYWORD_12 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7391:1: ( ( Semicolon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7392:1: ( Semicolon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7392:1: ( KEYWORD_12 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7393:1: KEYWORD_12
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7392:1: ( Semicolon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7393:1: Semicolon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getGuardExpressionAccess().getSemicolonKeyword_0_2()); 
             }
-            match(input,KEYWORD_12,FollowSets006.FOLLOW_KEYWORD_12_in_rule__GuardExpression__Group_0__2__Impl15139); if (state.failed) return ;
+            match(input,Semicolon,FollowSets006.FOLLOW_Semicolon_in_rule__GuardExpression__Group_0__2__Impl15139); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getGuardExpressionAccess().getSemicolonKeyword_0_2()); 
             }
@@ -28347,7 +28347,7 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
             // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7459:1: ( rule__AssignmentExpression__Group_1__0 )?
             int alt55=2;
             switch ( input.LA(1) ) {
-                case KEYWORD_14:
+                case EqualsSign:
                     {
                     int LA55_1 = input.LA(2);
 
@@ -28356,7 +28356,7 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
                     }
                     }
                     break;
-                case KEYWORD_26:
+                case PlusSignEqualsSign:
                     {
                     int LA55_2 = input.LA(2);
 
@@ -28365,7 +28365,7 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
                     }
                     }
                     break;
-                case KEYWORD_28:
+                case HyphenMinusEqualsSign:
                     {
                     int LA55_3 = input.LA(2);
 
@@ -28374,7 +28374,7 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
                     }
                     }
                     break;
-                case KEYWORD_24:
+                case AsteriskEqualsSign:
                     {
                     int LA55_4 = input.LA(2);
 
@@ -28383,7 +28383,7 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
                     }
                     }
                     break;
-                case KEYWORD_30:
+                case SolidusEqualsSign:
                     {
                     int LA55_5 = input.LA(2);
 
@@ -28392,7 +28392,7 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
                     }
                     }
                     break;
-                case KEYWORD_22:
+                case PercentSignEqualsSign:
                     {
                     int LA55_6 = input.LA(2);
 
@@ -28861,7 +28861,7 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
             int alt56=2;
             int LA56_0 = input.LA(1);
 
-            if ( (LA56_0==KEYWORD_50) ) {
+            if ( (LA56_0==Final) ) {
                 alt56=1;
             }
             switch (alt56) {
@@ -29057,7 +29057,7 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
             int alt57=2;
             int LA57_0 = input.LA(1);
 
-            if ( (LA57_0==KEYWORD_14) ) {
+            if ( (LA57_0==EqualsSign) ) {
                 alt57=1;
             }
             switch (alt57) {
@@ -29327,7 +29327,7 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__VarDeclaration__Group_3__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7765:1: rule__VarDeclaration__Group_3__0__Impl : ( KEYWORD_14 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7765:1: rule__VarDeclaration__Group_3__0__Impl : ( EqualsSign ) ;
     public final void rule__VarDeclaration__Group_3__0__Impl() throws RecognitionException {
         int rule__VarDeclaration__Group_3__0__Impl_StartIndex = input.index();
 
@@ -29335,16 +29335,16 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 467) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7769:1: ( ( KEYWORD_14 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7770:1: ( KEYWORD_14 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7769:1: ( ( EqualsSign ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7770:1: ( EqualsSign )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7770:1: ( KEYWORD_14 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7771:1: KEYWORD_14
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7770:1: ( EqualsSign )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7771:1: EqualsSign
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getVarDeclarationAccess().getEqualsSignKeyword_3_0()); 
             }
-            match(input,KEYWORD_14,FollowSets006.FOLLOW_KEYWORD_14_in_rule__VarDeclaration__Group_3__0__Impl15881); if (state.failed) return ;
+            match(input,EqualsSign,FollowSets006.FOLLOW_EqualsSign_in_rule__VarDeclaration__Group_3__0__Impl15881); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getVarDeclarationAccess().getEqualsSignKeyword_3_0()); 
             }
@@ -29608,7 +29608,7 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
             int alt58=2;
             int LA58_0 = input.LA(1);
 
-            if ( (LA58_0==KEYWORD_50) ) {
+            if ( (LA58_0==Final) ) {
                 alt58=1;
             }
             switch (alt58) {
@@ -29809,13 +29809,13 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
             int alt59=2;
             int LA59_0 = input.LA(1);
 
-            if ( (LA59_0==KEYWORD_3) ) {
+            if ( (LA59_0==LeftParenthesis) ) {
                 alt59=1;
             }
             else if ( (LA59_0==RULE_ID) ) {
                 int LA59_2 = input.LA(2);
 
-                if ( (LA59_2==KEYWORD_13||LA59_2==RULE_ID) ) {
+                if ( (LA59_2==LessThanSign||LA59_2==RULE_ID) ) {
                     alt59=1;
                 }
             }
@@ -29996,7 +29996,7 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__ValDeclaration__Group__5__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7975:1: rule__ValDeclaration__Group__5__Impl : ( KEYWORD_14 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7975:1: rule__ValDeclaration__Group__5__Impl : ( EqualsSign ) ;
     public final void rule__ValDeclaration__Group__5__Impl() throws RecognitionException {
         int rule__ValDeclaration__Group__5__Impl_StartIndex = input.index();
 
@@ -30004,16 +30004,16 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 481) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7979:1: ( ( KEYWORD_14 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7980:1: ( KEYWORD_14 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7979:1: ( ( EqualsSign ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7980:1: ( EqualsSign )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7980:1: ( KEYWORD_14 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7981:1: KEYWORD_14
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7980:1: ( EqualsSign )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:7981:1: EqualsSign
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getValDeclarationAccess().getEqualsSignKeyword_5()); 
             }
-            match(input,KEYWORD_14,FollowSets007.FOLLOW_KEYWORD_14_in_rule__ValDeclaration__Group__5__Impl16307); if (state.failed) return ;
+            match(input,EqualsSign,FollowSets007.FOLLOW_EqualsSign_in_rule__ValDeclaration__Group__5__Impl16307); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getValDeclarationAccess().getEqualsSignKeyword_5()); 
             }
@@ -30282,7 +30282,7 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
             int alt60=2;
             int LA60_0 = input.LA(1);
 
-            if ( (LA60_0==KEYWORD_13) ) {
+            if ( (LA60_0==LessThanSign) ) {
                 alt60=1;
             }
             switch (alt60) {
@@ -30367,7 +30367,7 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__SimpleTypeRef__Group_1__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8109:1: rule__SimpleTypeRef__Group_1__0__Impl : ( KEYWORD_13 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8109:1: rule__SimpleTypeRef__Group_1__0__Impl : ( LessThanSign ) ;
     public final void rule__SimpleTypeRef__Group_1__0__Impl() throws RecognitionException {
         int rule__SimpleTypeRef__Group_1__0__Impl_StartIndex = input.index();
 
@@ -30375,16 +30375,16 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 489) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8113:1: ( ( KEYWORD_13 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8114:1: ( KEYWORD_13 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8113:1: ( ( LessThanSign ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8114:1: ( LessThanSign )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8114:1: ( KEYWORD_13 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8115:1: KEYWORD_13
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8114:1: ( LessThanSign )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8115:1: LessThanSign
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSimpleTypeRefAccess().getLessThanSignKeyword_1_0()); 
             }
-            match(input,KEYWORD_13,FollowSets007.FOLLOW_KEYWORD_13_in_rule__SimpleTypeRef__Group_1__0__Impl16562); if (state.failed) return ;
+            match(input,LessThanSign,FollowSets007.FOLLOW_LessThanSign_in_rule__SimpleTypeRef__Group_1__0__Impl16562); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getSimpleTypeRefAccess().getLessThanSignKeyword_1_0()); 
             }
@@ -30570,7 +30570,7 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
                 int alt61=2;
                 int LA61_0 = input.LA(1);
 
-                if ( (LA61_0==KEYWORD_7) ) {
+                if ( (LA61_0==Comma) ) {
                     alt61=1;
                 }
 
@@ -30655,7 +30655,7 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__SimpleTypeRef__Group_1__3__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8197:1: rule__SimpleTypeRef__Group_1__3__Impl : ( KEYWORD_15 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8197:1: rule__SimpleTypeRef__Group_1__3__Impl : ( GreaterThanSign ) ;
     public final void rule__SimpleTypeRef__Group_1__3__Impl() throws RecognitionException {
         int rule__SimpleTypeRef__Group_1__3__Impl_StartIndex = input.index();
 
@@ -30663,16 +30663,16 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 495) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8201:1: ( ( KEYWORD_15 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8202:1: ( KEYWORD_15 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8201:1: ( ( GreaterThanSign ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8202:1: ( GreaterThanSign )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8202:1: ( KEYWORD_15 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8203:1: KEYWORD_15
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8202:1: ( GreaterThanSign )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8203:1: GreaterThanSign
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSimpleTypeRefAccess().getGreaterThanSignKeyword_1_3()); 
             }
-            match(input,KEYWORD_15,FollowSets007.FOLLOW_KEYWORD_15_in_rule__SimpleTypeRef__Group_1__3__Impl16742); if (state.failed) return ;
+            match(input,GreaterThanSign,FollowSets007.FOLLOW_GreaterThanSign_in_rule__SimpleTypeRef__Group_1__3__Impl16742); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getSimpleTypeRefAccess().getGreaterThanSignKeyword_1_3()); 
             }
@@ -30740,7 +30740,7 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__SimpleTypeRef__Group_1_2__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8236:1: rule__SimpleTypeRef__Group_1_2__0__Impl : ( KEYWORD_7 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8236:1: rule__SimpleTypeRef__Group_1_2__0__Impl : ( Comma ) ;
     public final void rule__SimpleTypeRef__Group_1_2__0__Impl() throws RecognitionException {
         int rule__SimpleTypeRef__Group_1_2__0__Impl_StartIndex = input.index();
 
@@ -30748,16 +30748,16 @@ abstract class InternalExBeeLangTestLanguageParser6 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 497) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8240:1: ( ( KEYWORD_7 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8241:1: ( KEYWORD_7 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8240:1: ( ( Comma ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8241:1: ( Comma )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8241:1: ( KEYWORD_7 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8242:1: KEYWORD_7
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8241:1: ( Comma )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8242:1: Comma
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSimpleTypeRefAccess().getCommaKeyword_1_2_0()); 
             }
-            match(input,KEYWORD_7,FollowSets007.FOLLOW_KEYWORD_7_in_rule__SimpleTypeRef__Group_1_2__0__Impl16812); if (state.failed) return ;
+            match(input,Comma,FollowSets007.FOLLOW_Comma_in_rule__SimpleTypeRef__Group_1_2__0__Impl16812); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getSimpleTypeRefAccess().getCommaKeyword_1_2_0()); 
             }
@@ -30927,7 +30927,7 @@ abstract class InternalExBeeLangTestLanguageParser7 extends InternalExBeeLangTes
         }
 
     // $ANTLR start "rule__ClosureTypeRef__Group__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8299:1: rule__ClosureTypeRef__Group__0__Impl : ( KEYWORD_3 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8299:1: rule__ClosureTypeRef__Group__0__Impl : ( LeftParenthesis ) ;
     public final void rule__ClosureTypeRef__Group__0__Impl() throws RecognitionException {
         int rule__ClosureTypeRef__Group__0__Impl_StartIndex = input.index();
 
@@ -30935,16 +30935,16 @@ abstract class InternalExBeeLangTestLanguageParser7 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 501) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8303:1: ( ( KEYWORD_3 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8304:1: ( KEYWORD_3 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8303:1: ( ( LeftParenthesis ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8304:1: ( LeftParenthesis )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8304:1: ( KEYWORD_3 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8305:1: KEYWORD_3
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8304:1: ( LeftParenthesis )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8305:1: LeftParenthesis
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getClosureTypeRefAccess().getLeftParenthesisKeyword_0()); 
             }
-            match(input,KEYWORD_3,FollowSets007.FOLLOW_KEYWORD_3_in_rule__ClosureTypeRef__Group__0__Impl16935); if (state.failed) return ;
+            match(input,LeftParenthesis,FollowSets007.FOLLOW_LeftParenthesis_in_rule__ClosureTypeRef__Group__0__Impl16935); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getClosureTypeRefAccess().getLeftParenthesisKeyword_0()); 
             }
@@ -31033,7 +31033,7 @@ abstract class InternalExBeeLangTestLanguageParser7 extends InternalExBeeLangTes
             int alt62=2;
             int LA62_0 = input.LA(1);
 
-            if ( (LA62_0==KEYWORD_39||LA62_0==RULE_ID) ) {
+            if ( (LA62_0==FullStopFullStopFullStop||LA62_0==RULE_ID) ) {
                 alt62=1;
             }
             switch (alt62) {
@@ -31118,7 +31118,7 @@ abstract class InternalExBeeLangTestLanguageParser7 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__ClosureTypeRef__Group__2__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8359:1: rule__ClosureTypeRef__Group__2__Impl : ( KEYWORD_4 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8359:1: rule__ClosureTypeRef__Group__2__Impl : ( RightParenthesis ) ;
     public final void rule__ClosureTypeRef__Group__2__Impl() throws RecognitionException {
         int rule__ClosureTypeRef__Group__2__Impl_StartIndex = input.index();
 
@@ -31126,16 +31126,16 @@ abstract class InternalExBeeLangTestLanguageParser7 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 505) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8363:1: ( ( KEYWORD_4 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8364:1: ( KEYWORD_4 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8363:1: ( ( RightParenthesis ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8364:1: ( RightParenthesis )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8364:1: ( KEYWORD_4 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8365:1: KEYWORD_4
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8364:1: ( RightParenthesis )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8365:1: RightParenthesis
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getClosureTypeRefAccess().getRightParenthesisKeyword_2()); 
             }
-            match(input,KEYWORD_4,FollowSets007.FOLLOW_KEYWORD_4_in_rule__ClosureTypeRef__Group__2__Impl17058); if (state.failed) return ;
+            match(input,RightParenthesis,FollowSets007.FOLLOW_RightParenthesis_in_rule__ClosureTypeRef__Group__2__Impl17058); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getClosureTypeRefAccess().getRightParenthesisKeyword_2()); 
             }
@@ -31203,7 +31203,7 @@ abstract class InternalExBeeLangTestLanguageParser7 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__ClosureTypeRef__Group__3__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8390:1: rule__ClosureTypeRef__Group__3__Impl : ( KEYWORD_33 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8390:1: rule__ClosureTypeRef__Group__3__Impl : ( EqualsSignGreaterThanSign ) ;
     public final void rule__ClosureTypeRef__Group__3__Impl() throws RecognitionException {
         int rule__ClosureTypeRef__Group__3__Impl_StartIndex = input.index();
 
@@ -31211,16 +31211,16 @@ abstract class InternalExBeeLangTestLanguageParser7 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 507) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8394:1: ( ( KEYWORD_33 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8395:1: ( KEYWORD_33 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8394:1: ( ( EqualsSignGreaterThanSign ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8395:1: ( EqualsSignGreaterThanSign )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8395:1: ( KEYWORD_33 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8396:1: KEYWORD_33
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8395:1: ( EqualsSignGreaterThanSign )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8396:1: EqualsSignGreaterThanSign
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getClosureTypeRefAccess().getEqualsSignGreaterThanSignKeyword_3()); 
             }
-            match(input,KEYWORD_33,FollowSets007.FOLLOW_KEYWORD_33_in_rule__ClosureTypeRef__Group__3__Impl17120); if (state.failed) return ;
+            match(input,EqualsSignGreaterThanSign,FollowSets007.FOLLOW_EqualsSignGreaterThanSign_in_rule__ClosureTypeRef__Group__3__Impl17120); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getClosureTypeRefAccess().getEqualsSignGreaterThanSignKeyword_3()); 
             }
@@ -31496,7 +31496,7 @@ abstract class InternalExBeeLangTestLanguageParser7 extends InternalExBeeLangTes
                 int alt63=2;
                 int LA63_0 = input.LA(1);
 
-                if ( (LA63_0==KEYWORD_7) ) {
+                if ( (LA63_0==Comma) ) {
                     int LA63_1 = input.LA(2);
 
                     if ( (LA63_1==RULE_ID) ) {
@@ -31608,7 +31608,7 @@ abstract class InternalExBeeLangTestLanguageParser7 extends InternalExBeeLangTes
             int alt64=2;
             int LA64_0 = input.LA(1);
 
-            if ( (LA64_0==KEYWORD_7) ) {
+            if ( (LA64_0==Comma) ) {
                 alt64=1;
             }
             switch (alt64) {
@@ -31693,7 +31693,7 @@ abstract class InternalExBeeLangTestLanguageParser7 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__ClosureTypeRef__Group_1_0_1__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8551:1: rule__ClosureTypeRef__Group_1_0_1__0__Impl : ( KEYWORD_7 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8551:1: rule__ClosureTypeRef__Group_1_0_1__0__Impl : ( Comma ) ;
     public final void rule__ClosureTypeRef__Group_1_0_1__0__Impl() throws RecognitionException {
         int rule__ClosureTypeRef__Group_1_0_1__0__Impl_StartIndex = input.index();
 
@@ -31701,16 +31701,16 @@ abstract class InternalExBeeLangTestLanguageParser7 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 517) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8555:1: ( ( KEYWORD_7 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8556:1: ( KEYWORD_7 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8555:1: ( ( Comma ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8556:1: ( Comma )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8556:1: ( KEYWORD_7 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8557:1: KEYWORD_7
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8556:1: ( Comma )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8557:1: Comma
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getClosureTypeRefAccess().getCommaKeyword_1_0_1_0()); 
             }
-            match(input,KEYWORD_7,FollowSets007.FOLLOW_KEYWORD_7_in_rule__ClosureTypeRef__Group_1_0_1__0__Impl17434); if (state.failed) return ;
+            match(input,Comma,FollowSets007.FOLLOW_Comma_in_rule__ClosureTypeRef__Group_1_0_1__0__Impl17434); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getClosureTypeRefAccess().getCommaKeyword_1_0_1_0()); 
             }
@@ -31868,7 +31868,7 @@ abstract class InternalExBeeLangTestLanguageParser7 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__ClosureTypeRef__Group_1_0_2__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8614:1: rule__ClosureTypeRef__Group_1_0_2__0__Impl : ( KEYWORD_7 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8614:1: rule__ClosureTypeRef__Group_1_0_2__0__Impl : ( Comma ) ;
     public final void rule__ClosureTypeRef__Group_1_0_2__0__Impl() throws RecognitionException {
         int rule__ClosureTypeRef__Group_1_0_2__0__Impl_StartIndex = input.index();
 
@@ -31876,16 +31876,16 @@ abstract class InternalExBeeLangTestLanguageParser7 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 521) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8618:1: ( ( KEYWORD_7 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8619:1: ( KEYWORD_7 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8618:1: ( ( Comma ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8619:1: ( Comma )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8619:1: ( KEYWORD_7 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8620:1: KEYWORD_7
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8619:1: ( Comma )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8620:1: Comma
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getClosureTypeRefAccess().getCommaKeyword_1_0_2_0()); 
             }
-            match(input,KEYWORD_7,FollowSets007.FOLLOW_KEYWORD_7_in_rule__ClosureTypeRef__Group_1_0_2__0__Impl17557); if (state.failed) return ;
+            match(input,Comma,FollowSets007.FOLLOW_Comma_in_rule__ClosureTypeRef__Group_1_0_2__0__Impl17557); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getClosureTypeRefAccess().getCommaKeyword_1_0_2_0()); 
             }
@@ -32408,7 +32408,7 @@ abstract class InternalExBeeLangTestLanguageParser7 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__CachedExpression__Group_0__1__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8800:1: rule__CachedExpression__Group_0__1__Impl : ( KEYWORD_52 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8800:1: rule__CachedExpression__Group_0__1__Impl : ( Cached ) ;
     public final void rule__CachedExpression__Group_0__1__Impl() throws RecognitionException {
         int rule__CachedExpression__Group_0__1__Impl_StartIndex = input.index();
 
@@ -32416,16 +32416,16 @@ abstract class InternalExBeeLangTestLanguageParser7 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 533) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8804:1: ( ( KEYWORD_52 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8805:1: ( KEYWORD_52 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8804:1: ( ( Cached ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8805:1: ( Cached )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8805:1: ( KEYWORD_52 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8806:1: KEYWORD_52
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8805:1: ( Cached )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8806:1: Cached
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCachedExpressionAccess().getCachedKeyword_0_1()); 
             }
-            match(input,KEYWORD_52,FollowSets007.FOLLOW_KEYWORD_52_in_rule__CachedExpression__Group_0__1__Impl17924); if (state.failed) return ;
+            match(input,Cached,FollowSets007.FOLLOW_Cached_in_rule__CachedExpression__Group_0__1__Impl17924); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getCachedExpressionAccess().getCachedKeyword_0_1()); 
             }
@@ -32690,7 +32690,7 @@ abstract class InternalExBeeLangTestLanguageParser7 extends InternalExBeeLangTes
                 int alt65=2;
                 int LA65_0 = input.LA(1);
 
-                if ( (LA65_0==KEYWORD_36) ) {
+                if ( (LA65_0==VerticalLineVerticalLine) ) {
                     int LA65_2 = input.LA(2);
 
                     if ( (synpred94_InternalExBeeLangTestLanguageParser()) ) {
@@ -32871,7 +32871,7 @@ abstract class InternalExBeeLangTestLanguageParser7 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__OrExpression__Group_1__1__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8957:1: rule__OrExpression__Group_1__1__Impl : ( KEYWORD_36 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8957:1: rule__OrExpression__Group_1__1__Impl : ( VerticalLineVerticalLine ) ;
     public final void rule__OrExpression__Group_1__1__Impl() throws RecognitionException {
         int rule__OrExpression__Group_1__1__Impl_StartIndex = input.index();
 
@@ -32879,16 +32879,16 @@ abstract class InternalExBeeLangTestLanguageParser7 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 543) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8961:1: ( ( KEYWORD_36 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8962:1: ( KEYWORD_36 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8961:1: ( ( VerticalLineVerticalLine ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8962:1: ( VerticalLineVerticalLine )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8962:1: ( KEYWORD_36 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8963:1: KEYWORD_36
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8962:1: ( VerticalLineVerticalLine )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:8963:1: VerticalLineVerticalLine
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOrExpressionAccess().getVerticalLineVerticalLineKeyword_1_1()); 
             }
-            match(input,KEYWORD_36,FollowSets007.FOLLOW_KEYWORD_36_in_rule__OrExpression__Group_1__1__Impl18231); if (state.failed) return ;
+            match(input,VerticalLineVerticalLine,FollowSets007.FOLLOW_VerticalLineVerticalLine_in_rule__OrExpression__Group_1__1__Impl18231); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getOrExpressionAccess().getVerticalLineVerticalLineKeyword_1_1()); 
             }
@@ -33153,7 +33153,7 @@ abstract class InternalExBeeLangTestLanguageParser7 extends InternalExBeeLangTes
                 int alt66=2;
                 int LA66_0 = input.LA(1);
 
-                if ( (LA66_0==KEYWORD_23) ) {
+                if ( (LA66_0==AmpersandAmpersand) ) {
                     int LA66_2 = input.LA(2);
 
                     if ( (synpred95_InternalExBeeLangTestLanguageParser()) ) {
@@ -33334,7 +33334,7 @@ abstract class InternalExBeeLangTestLanguageParser7 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__AndExpression__Group_1__1__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:9114:1: rule__AndExpression__Group_1__1__Impl : ( KEYWORD_23 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:9114:1: rule__AndExpression__Group_1__1__Impl : ( AmpersandAmpersand ) ;
     public final void rule__AndExpression__Group_1__1__Impl() throws RecognitionException {
         int rule__AndExpression__Group_1__1__Impl_StartIndex = input.index();
 
@@ -33342,16 +33342,16 @@ abstract class InternalExBeeLangTestLanguageParser7 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 553) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:9118:1: ( ( KEYWORD_23 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:9119:1: ( KEYWORD_23 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:9118:1: ( ( AmpersandAmpersand ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:9119:1: ( AmpersandAmpersand )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:9119:1: ( KEYWORD_23 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:9120:1: KEYWORD_23
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:9119:1: ( AmpersandAmpersand )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:9120:1: AmpersandAmpersand
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAndExpressionAccess().getAmpersandAmpersandKeyword_1_1()); 
             }
-            match(input,KEYWORD_23,FollowSets008.FOLLOW_KEYWORD_23_in_rule__AndExpression__Group_1__1__Impl18538); if (state.failed) return ;
+            match(input,AmpersandAmpersand,FollowSets008.FOLLOW_AmpersandAmpersand_in_rule__AndExpression__Group_1__1__Impl18538); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAndExpressionAccess().getAmpersandAmpersandKeyword_1_1()); 
             }
@@ -34077,7 +34077,7 @@ abstract class InternalExBeeLangTestLanguageParser7 extends InternalExBeeLangTes
                 int alt68=2;
                 int LA68_0 = input.LA(1);
 
-                if ( (LA68_0==KEYWORD_6) ) {
+                if ( (LA68_0==PlusSign) ) {
                     int LA68_2 = input.LA(2);
 
                     if ( (synpred97_InternalExBeeLangTestLanguageParser()) ) {
@@ -34086,7 +34086,7 @@ abstract class InternalExBeeLangTestLanguageParser7 extends InternalExBeeLangTes
 
 
                 }
-                else if ( (LA68_0==KEYWORD_8) ) {
+                else if ( (LA68_0==HyphenMinus) ) {
                     int LA68_3 = input.LA(2);
 
                     if ( (synpred97_InternalExBeeLangTestLanguageParser()) ) {
@@ -34558,7 +34558,7 @@ abstract class InternalExBeeLangTestLanguageParser7 extends InternalExBeeLangTes
             do {
                 int alt69=2;
                 switch ( input.LA(1) ) {
-                case KEYWORD_5:
+                case Asterisk:
                     {
                     int LA69_2 = input.LA(2);
 
@@ -34569,7 +34569,7 @@ abstract class InternalExBeeLangTestLanguageParser7 extends InternalExBeeLangTes
 
                     }
                     break;
-                case KEYWORD_10:
+                case Solidus:
                     {
                     int LA69_3 = input.LA(2);
 
@@ -34580,7 +34580,7 @@ abstract class InternalExBeeLangTestLanguageParser7 extends InternalExBeeLangTes
 
                     }
                     break;
-                case KEYWORD_2:
+                case PercentSign:
                     {
                     int LA69_4 = input.LA(2);
 
@@ -35056,7 +35056,7 @@ abstract class InternalExBeeLangTestLanguageParser7 extends InternalExBeeLangTes
                 int alt70=2;
                 int LA70_0 = input.LA(1);
 
-                if ( (LA70_0==KEYWORD_29) ) {
+                if ( (LA70_0==FullStopFullStop) ) {
                     int LA70_2 = input.LA(2);
 
                     if ( (synpred99_InternalExBeeLangTestLanguageParser()) ) {
@@ -36079,14 +36079,14 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
             int alt71=2;
             int LA71_0 = input.LA(1);
 
-            if ( (LA71_0==KEYWORD_27) ) {
+            if ( (LA71_0==HyphenMinusHyphenMinus) ) {
                 int LA71_1 = input.LA(2);
 
                 if ( (synpred100_InternalExBeeLangTestLanguageParser()) ) {
                     alt71=1;
                 }
             }
-            else if ( (LA71_0==KEYWORD_25) ) {
+            else if ( (LA71_0==PlusSignPlusSign) ) {
                 int LA71_2 = input.LA(2);
 
                 if ( (synpred100_InternalExBeeLangTestLanguageParser()) ) {
@@ -36457,7 +36457,7 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
                 int alt72=2;
                 int LA72_0 = input.LA(1);
 
-                if ( (LA72_0==KEYWORD_9) ) {
+                if ( (LA72_0==FullStop) ) {
                     int LA72_2 = input.LA(2);
 
                     if ( (synpred101_InternalExBeeLangTestLanguageParser()) ) {
@@ -36466,7 +36466,7 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
 
 
                 }
-                else if ( (LA72_0==KEYWORD_16) ) {
+                else if ( (LA72_0==LeftSquareBracket) ) {
                     int LA72_3 = input.LA(2);
 
                     if ( (synpred101_InternalExBeeLangTestLanguageParser()) ) {
@@ -36647,7 +36647,7 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__InfixExpression__Group_1_0__1__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10203:1: rule__InfixExpression__Group_1_0__1__Impl : ( KEYWORD_9 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10203:1: rule__InfixExpression__Group_1_0__1__Impl : ( FullStop ) ;
     public final void rule__InfixExpression__Group_1_0__1__Impl() throws RecognitionException {
         int rule__InfixExpression__Group_1_0__1__Impl_StartIndex = input.index();
 
@@ -36655,16 +36655,16 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 623) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10207:1: ( ( KEYWORD_9 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10208:1: ( KEYWORD_9 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10207:1: ( ( FullStop ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10208:1: ( FullStop )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10208:1: ( KEYWORD_9 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10209:1: KEYWORD_9
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10208:1: ( FullStop )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10209:1: FullStop
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getInfixExpressionAccess().getFullStopKeyword_1_0_1()); 
             }
-            match(input,KEYWORD_9,FollowSets008.FOLLOW_KEYWORD_9_in_rule__InfixExpression__Group_1_0__1__Impl20676); if (state.failed) return ;
+            match(input,FullStop,FollowSets008.FOLLOW_FullStop_in_rule__InfixExpression__Group_1_0__1__Impl20676); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getInfixExpressionAccess().getFullStopKeyword_1_0_1()); 
             }
@@ -36827,7 +36827,7 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__InfixExpression__Group_1_0__3__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10263:1: rule__InfixExpression__Group_1_0__3__Impl : ( KEYWORD_3 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10263:1: rule__InfixExpression__Group_1_0__3__Impl : ( LeftParenthesis ) ;
     public final void rule__InfixExpression__Group_1_0__3__Impl() throws RecognitionException {
         int rule__InfixExpression__Group_1_0__3__Impl_StartIndex = input.index();
 
@@ -36835,16 +36835,16 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 627) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10267:1: ( ( KEYWORD_3 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10268:1: ( KEYWORD_3 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10267:1: ( ( LeftParenthesis ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10268:1: ( LeftParenthesis )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10268:1: ( KEYWORD_3 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10269:1: KEYWORD_3
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10268:1: ( LeftParenthesis )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10269:1: LeftParenthesis
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getInfixExpressionAccess().getLeftParenthesisKeyword_1_0_3()); 
             }
-            match(input,KEYWORD_3,FollowSets008.FOLLOW_KEYWORD_3_in_rule__InfixExpression__Group_1_0__3__Impl20798); if (state.failed) return ;
+            match(input,LeftParenthesis,FollowSets008.FOLLOW_LeftParenthesis_in_rule__InfixExpression__Group_1_0__3__Impl20798); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getInfixExpressionAccess().getLeftParenthesisKeyword_1_0_3()); 
             }
@@ -36933,7 +36933,7 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
             int alt73=2;
             int LA73_0 = input.LA(1);
 
-            if ( (LA73_0==KEYWORD_63||LA73_0==KEYWORD_56||LA73_0==KEYWORD_52||(LA73_0>=KEYWORD_54 && LA73_0<=KEYWORD_55)||LA73_0==KEYWORD_51||(LA73_0>=KEYWORD_46 && LA73_0<=KEYWORD_47)||LA73_0==KEYWORD_49||LA73_0==KEYWORD_39||LA73_0==KEYWORD_42||LA73_0==KEYWORD_25||LA73_0==KEYWORD_27||LA73_0==KEYWORD_1||LA73_0==KEYWORD_3||LA73_0==KEYWORD_8||LA73_0==KEYWORD_13||(LA73_0>=KEYWORD_18 && LA73_0<=KEYWORD_19)||LA73_0==RULE_ID||LA73_0==RULE_STRING) ) {
+            if ( (LA73_0==Properties||LA73_0==Builder||LA73_0==Cached||(LA73_0>=Output && LA73_0<=Source)||LA73_0==Input||(LA73_0>=This && LA73_0<=Unit)||LA73_0==With||LA73_0==FullStopFullStopFullStop||LA73_0==New||LA73_0==PlusSignPlusSign||LA73_0==HyphenMinusHyphenMinus||LA73_0==ExclamationMark||LA73_0==LeftParenthesis||LA73_0==HyphenMinus||LA73_0==LessThanSign||(LA73_0>=LeftCurlyBracket && LA73_0<=VerticalLine)||LA73_0==RULE_ID||LA73_0==RULE_STRING) ) {
                 alt73=1;
             }
             switch (alt73) {
@@ -37013,7 +37013,7 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__InfixExpression__Group_1_0__5__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10322:1: rule__InfixExpression__Group_1_0__5__Impl : ( KEYWORD_4 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10322:1: rule__InfixExpression__Group_1_0__5__Impl : ( RightParenthesis ) ;
     public final void rule__InfixExpression__Group_1_0__5__Impl() throws RecognitionException {
         int rule__InfixExpression__Group_1_0__5__Impl_StartIndex = input.index();
 
@@ -37021,16 +37021,16 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 631) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10326:1: ( ( KEYWORD_4 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10327:1: ( KEYWORD_4 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10326:1: ( ( RightParenthesis ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10327:1: ( RightParenthesis )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10327:1: ( KEYWORD_4 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10328:1: KEYWORD_4
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10327:1: ( RightParenthesis )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10328:1: RightParenthesis
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getInfixExpressionAccess().getRightParenthesisKeyword_1_0_5()); 
             }
-            match(input,KEYWORD_4,FollowSets008.FOLLOW_KEYWORD_4_in_rule__InfixExpression__Group_1_0__5__Impl20918); if (state.failed) return ;
+            match(input,RightParenthesis,FollowSets008.FOLLOW_RightParenthesis_in_rule__InfixExpression__Group_1_0__5__Impl20918); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getInfixExpressionAccess().getRightParenthesisKeyword_1_0_5()); 
             }
@@ -37183,7 +37183,7 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__InfixExpression__Group_1_1__1__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10396:1: rule__InfixExpression__Group_1_1__1__Impl : ( KEYWORD_16 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10396:1: rule__InfixExpression__Group_1_1__1__Impl : ( LeftSquareBracket ) ;
     public final void rule__InfixExpression__Group_1_1__1__Impl() throws RecognitionException {
         int rule__InfixExpression__Group_1_1__1__Impl_StartIndex = input.index();
 
@@ -37191,16 +37191,16 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 635) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10400:1: ( ( KEYWORD_16 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10401:1: ( KEYWORD_16 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10400:1: ( ( LeftSquareBracket ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10401:1: ( LeftSquareBracket )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10401:1: ( KEYWORD_16 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10402:1: KEYWORD_16
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10401:1: ( LeftSquareBracket )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10402:1: LeftSquareBracket
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getInfixExpressionAccess().getLeftSquareBracketKeyword_1_1_1()); 
             }
-            match(input,KEYWORD_16,FollowSets009.FOLLOW_KEYWORD_16_in_rule__InfixExpression__Group_1_1__1__Impl21053); if (state.failed) return ;
+            match(input,LeftSquareBracket,FollowSets009.FOLLOW_LeftSquareBracket_in_rule__InfixExpression__Group_1_1__1__Impl21053); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getInfixExpressionAccess().getLeftSquareBracketKeyword_1_1_1()); 
             }
@@ -37358,7 +37358,7 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__InfixExpression__Group_1_1__3__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10455:1: rule__InfixExpression__Group_1_1__3__Impl : ( KEYWORD_17 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10455:1: rule__InfixExpression__Group_1_1__3__Impl : ( RightSquareBracket ) ;
     public final void rule__InfixExpression__Group_1_1__3__Impl() throws RecognitionException {
         int rule__InfixExpression__Group_1_1__3__Impl_StartIndex = input.index();
 
@@ -37366,16 +37366,16 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 639) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10459:1: ( ( KEYWORD_17 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10460:1: ( KEYWORD_17 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10459:1: ( ( RightSquareBracket ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10460:1: ( RightSquareBracket )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10460:1: ( KEYWORD_17 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10461:1: KEYWORD_17
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10460:1: ( RightSquareBracket )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10461:1: RightSquareBracket
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getInfixExpressionAccess().getRightSquareBracketKeyword_1_1_3()); 
             }
-            match(input,KEYWORD_17,FollowSets009.FOLLOW_KEYWORD_17_in_rule__InfixExpression__Group_1_1__3__Impl21172); if (state.failed) return ;
+            match(input,RightSquareBracket,FollowSets009.FOLLOW_RightSquareBracket_in_rule__InfixExpression__Group_1_1__3__Impl21172); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getInfixExpressionAccess().getRightSquareBracketKeyword_1_1_3()); 
             }
@@ -37528,7 +37528,7 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__InfixExpression__Group_1_2__1__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10525:1: rule__InfixExpression__Group_1_2__1__Impl : ( KEYWORD_9 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10525:1: rule__InfixExpression__Group_1_2__1__Impl : ( FullStop ) ;
     public final void rule__InfixExpression__Group_1_2__1__Impl() throws RecognitionException {
         int rule__InfixExpression__Group_1_2__1__Impl_StartIndex = input.index();
 
@@ -37536,16 +37536,16 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 643) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10529:1: ( ( KEYWORD_9 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10530:1: ( KEYWORD_9 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10529:1: ( ( FullStop ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10530:1: ( FullStop )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10530:1: ( KEYWORD_9 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10531:1: KEYWORD_9
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10530:1: ( FullStop )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10531:1: FullStop
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getInfixExpressionAccess().getFullStopKeyword_1_2_1()); 
             }
-            match(input,KEYWORD_9,FollowSets009.FOLLOW_KEYWORD_9_in_rule__InfixExpression__Group_1_2__1__Impl21303); if (state.failed) return ;
+            match(input,FullStop,FollowSets009.FOLLOW_FullStop_in_rule__InfixExpression__Group_1_2__1__Impl21303); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getInfixExpressionAccess().getFullStopKeyword_1_2_1()); 
             }
@@ -37810,7 +37810,7 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
                 int alt74=2;
                 int LA74_0 = input.LA(1);
 
-                if ( (LA74_0==KEYWORD_3) ) {
+                if ( (LA74_0==LeftParenthesis) ) {
                     int LA74_2 = input.LA(2);
 
                     if ( (synpred103_InternalExBeeLangTestLanguageParser()) ) {
@@ -37991,7 +37991,7 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__CallExpression__Group_1__1__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10682:1: rule__CallExpression__Group_1__1__Impl : ( KEYWORD_3 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10682:1: rule__CallExpression__Group_1__1__Impl : ( LeftParenthesis ) ;
     public final void rule__CallExpression__Group_1__1__Impl() throws RecognitionException {
         int rule__CallExpression__Group_1__1__Impl_StartIndex = input.index();
 
@@ -37999,16 +37999,16 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 653) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10686:1: ( ( KEYWORD_3 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10687:1: ( KEYWORD_3 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10686:1: ( ( LeftParenthesis ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10687:1: ( LeftParenthesis )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10687:1: ( KEYWORD_3 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10688:1: KEYWORD_3
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10687:1: ( LeftParenthesis )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10688:1: LeftParenthesis
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCallExpressionAccess().getLeftParenthesisKeyword_1_1()); 
             }
-            match(input,KEYWORD_3,FollowSets009.FOLLOW_KEYWORD_3_in_rule__CallExpression__Group_1__1__Impl21610); if (state.failed) return ;
+            match(input,LeftParenthesis,FollowSets009.FOLLOW_LeftParenthesis_in_rule__CallExpression__Group_1__1__Impl21610); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getCallExpressionAccess().getLeftParenthesisKeyword_1_1()); 
             }
@@ -38097,7 +38097,7 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
             int alt75=2;
             int LA75_0 = input.LA(1);
 
-            if ( (LA75_0==KEYWORD_63||LA75_0==KEYWORD_56||LA75_0==KEYWORD_52||(LA75_0>=KEYWORD_54 && LA75_0<=KEYWORD_55)||LA75_0==KEYWORD_51||(LA75_0>=KEYWORD_46 && LA75_0<=KEYWORD_47)||LA75_0==KEYWORD_49||LA75_0==KEYWORD_39||LA75_0==KEYWORD_42||LA75_0==KEYWORD_25||LA75_0==KEYWORD_27||LA75_0==KEYWORD_1||LA75_0==KEYWORD_3||LA75_0==KEYWORD_8||LA75_0==KEYWORD_13||(LA75_0>=KEYWORD_18 && LA75_0<=KEYWORD_19)||LA75_0==RULE_ID||LA75_0==RULE_STRING) ) {
+            if ( (LA75_0==Properties||LA75_0==Builder||LA75_0==Cached||(LA75_0>=Output && LA75_0<=Source)||LA75_0==Input||(LA75_0>=This && LA75_0<=Unit)||LA75_0==With||LA75_0==FullStopFullStopFullStop||LA75_0==New||LA75_0==PlusSignPlusSign||LA75_0==HyphenMinusHyphenMinus||LA75_0==ExclamationMark||LA75_0==LeftParenthesis||LA75_0==HyphenMinus||LA75_0==LessThanSign||(LA75_0>=LeftCurlyBracket && LA75_0<=VerticalLine)||LA75_0==RULE_ID||LA75_0==RULE_STRING) ) {
                 alt75=1;
             }
             switch (alt75) {
@@ -38177,7 +38177,7 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__CallExpression__Group_1__3__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10741:1: rule__CallExpression__Group_1__3__Impl : ( KEYWORD_4 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10741:1: rule__CallExpression__Group_1__3__Impl : ( RightParenthesis ) ;
     public final void rule__CallExpression__Group_1__3__Impl() throws RecognitionException {
         int rule__CallExpression__Group_1__3__Impl_StartIndex = input.index();
 
@@ -38185,16 +38185,16 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 657) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10745:1: ( ( KEYWORD_4 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10746:1: ( KEYWORD_4 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10745:1: ( ( RightParenthesis ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10746:1: ( RightParenthesis )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10746:1: ( KEYWORD_4 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10747:1: KEYWORD_4
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10746:1: ( RightParenthesis )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10747:1: RightParenthesis
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCallExpressionAccess().getRightParenthesisKeyword_1_3()); 
             }
-            match(input,KEYWORD_4,FollowSets009.FOLLOW_KEYWORD_4_in_rule__CallExpression__Group_1__3__Impl21730); if (state.failed) return ;
+            match(input,RightParenthesis,FollowSets009.FOLLOW_RightParenthesis_in_rule__CallExpression__Group_1__3__Impl21730); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getCallExpressionAccess().getRightParenthesisKeyword_1_3()); 
             }
@@ -38262,7 +38262,7 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__WithExpression__Group__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10780:1: rule__WithExpression__Group__0__Impl : ( KEYWORD_49 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10780:1: rule__WithExpression__Group__0__Impl : ( With ) ;
     public final void rule__WithExpression__Group__0__Impl() throws RecognitionException {
         int rule__WithExpression__Group__0__Impl_StartIndex = input.index();
 
@@ -38270,16 +38270,16 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 659) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10784:1: ( ( KEYWORD_49 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10785:1: ( KEYWORD_49 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10784:1: ( ( With ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10785:1: ( With )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10785:1: ( KEYWORD_49 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10786:1: KEYWORD_49
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10785:1: ( With )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10786:1: With
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getWithExpressionAccess().getWithKeyword_0()); 
             }
-            match(input,KEYWORD_49,FollowSets009.FOLLOW_KEYWORD_49_in_rule__WithExpression__Group__0__Impl21800); if (state.failed) return ;
+            match(input,With,FollowSets009.FOLLOW_With_in_rule__WithExpression__Group__0__Impl21800); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getWithExpressionAccess().getWithKeyword_0()); 
             }
@@ -38656,7 +38656,7 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
                 int alt77=2;
                 int LA77_0 = input.LA(1);
 
-                if ( (LA77_0==KEYWORD_7) ) {
+                if ( (LA77_0==Comma) ) {
                     alt77=1;
                 }
 
@@ -38746,7 +38746,7 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__WithExpression__Group_1_1__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10935:1: rule__WithExpression__Group_1_1__0__Impl : ( KEYWORD_7 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10935:1: rule__WithExpression__Group_1_1__0__Impl : ( Comma ) ;
     public final void rule__WithExpression__Group_1_1__0__Impl() throws RecognitionException {
         int rule__WithExpression__Group_1_1__0__Impl_StartIndex = input.index();
 
@@ -38754,16 +38754,16 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 669) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10939:1: ( ( KEYWORD_7 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10940:1: ( KEYWORD_7 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10939:1: ( ( Comma ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10940:1: ( Comma )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10940:1: ( KEYWORD_7 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10941:1: KEYWORD_7
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10940:1: ( Comma )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10941:1: Comma
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getWithExpressionAccess().getCommaKeyword_1_1_0()); 
             }
-            match(input,KEYWORD_7,FollowSets009.FOLLOW_KEYWORD_7_in_rule__WithExpression__Group_1_1__0__Impl22108); if (state.failed) return ;
+            match(input,Comma,FollowSets009.FOLLOW_Comma_in_rule__WithExpression__Group_1_1__0__Impl22108); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getWithExpressionAccess().getCommaKeyword_1_1_0()); 
             }
@@ -38921,7 +38921,7 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__WithExpression__Group_2_0__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10998:1: rule__WithExpression__Group_2_0__0__Impl : ( KEYWORD_11 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:10998:1: rule__WithExpression__Group_2_0__0__Impl : ( Colon ) ;
     public final void rule__WithExpression__Group_2_0__0__Impl() throws RecognitionException {
         int rule__WithExpression__Group_2_0__0__Impl_StartIndex = input.index();
 
@@ -38929,16 +38929,16 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 673) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11002:1: ( ( KEYWORD_11 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11003:1: ( KEYWORD_11 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11002:1: ( ( Colon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11003:1: ( Colon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11003:1: ( KEYWORD_11 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11004:1: KEYWORD_11
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11003:1: ( Colon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11004:1: Colon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getWithExpressionAccess().getColonKeyword_2_0_0()); 
             }
-            match(input,KEYWORD_11,FollowSets009.FOLLOW_KEYWORD_11_in_rule__WithExpression__Group_2_0__0__Impl22231); if (state.failed) return ;
+            match(input,Colon,FollowSets009.FOLLOW_Colon_in_rule__WithExpression__Group_2_0__0__Impl22231); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getWithExpressionAccess().getColonKeyword_2_0_0()); 
             }
@@ -39096,7 +39096,7 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__WithExpression__Group_2_1__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11061:1: rule__WithExpression__Group_2_1__0__Impl : ( KEYWORD_18 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11061:1: rule__WithExpression__Group_2_1__0__Impl : ( LeftCurlyBracket ) ;
     public final void rule__WithExpression__Group_2_1__0__Impl() throws RecognitionException {
         int rule__WithExpression__Group_2_1__0__Impl_StartIndex = input.index();
 
@@ -39104,16 +39104,16 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 677) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11065:1: ( ( KEYWORD_18 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11066:1: ( KEYWORD_18 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11065:1: ( ( LeftCurlyBracket ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11066:1: ( LeftCurlyBracket )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11066:1: ( KEYWORD_18 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11067:1: KEYWORD_18
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11066:1: ( LeftCurlyBracket )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11067:1: LeftCurlyBracket
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getWithExpressionAccess().getLeftCurlyBracketKeyword_2_1_0()); 
             }
-            match(input,KEYWORD_18,FollowSets009.FOLLOW_KEYWORD_18_in_rule__WithExpression__Group_2_1__0__Impl22354); if (state.failed) return ;
+            match(input,LeftCurlyBracket,FollowSets009.FOLLOW_LeftCurlyBracket_in_rule__WithExpression__Group_2_1__0__Impl22354); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getWithExpressionAccess().getLeftCurlyBracketKeyword_2_1_0()); 
             }
@@ -39271,7 +39271,7 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__WithExpression__Group_2_1__2__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11120:1: rule__WithExpression__Group_2_1__2__Impl : ( KEYWORD_20 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11120:1: rule__WithExpression__Group_2_1__2__Impl : ( RightCurlyBracket ) ;
     public final void rule__WithExpression__Group_2_1__2__Impl() throws RecognitionException {
         int rule__WithExpression__Group_2_1__2__Impl_StartIndex = input.index();
 
@@ -39279,16 +39279,16 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 681) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11124:1: ( ( KEYWORD_20 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11125:1: ( KEYWORD_20 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11124:1: ( ( RightCurlyBracket ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11125:1: ( RightCurlyBracket )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11125:1: ( KEYWORD_20 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11126:1: KEYWORD_20
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11125:1: ( RightCurlyBracket )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11126:1: RightCurlyBracket
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getWithExpressionAccess().getRightCurlyBracketKeyword_2_1_2()); 
             }
-            match(input,KEYWORD_20,FollowSets009.FOLLOW_KEYWORD_20_in_rule__WithExpression__Group_2_1__2__Impl22473); if (state.failed) return ;
+            match(input,RightCurlyBracket,FollowSets009.FOLLOW_RightCurlyBracket_in_rule__WithExpression__Group_2_1__2__Impl22473); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getWithExpressionAccess().getRightCurlyBracketKeyword_2_1_2()); 
             }
@@ -39356,7 +39356,7 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__WithContextExpression__Group__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11157:1: rule__WithContextExpression__Group__0__Impl : ( KEYWORD_49 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11157:1: rule__WithContextExpression__Group__0__Impl : ( With ) ;
     public final void rule__WithContextExpression__Group__0__Impl() throws RecognitionException {
         int rule__WithContextExpression__Group__0__Impl_StartIndex = input.index();
 
@@ -39364,16 +39364,16 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 683) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11161:1: ( ( KEYWORD_49 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11162:1: ( KEYWORD_49 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11161:1: ( ( With ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11162:1: ( With )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11162:1: ( KEYWORD_49 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11163:1: KEYWORD_49
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11162:1: ( With )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11163:1: With
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getWithContextExpressionAccess().getWithKeyword_0()); 
             }
-            match(input,KEYWORD_49,FollowSets009.FOLLOW_KEYWORD_49_in_rule__WithContextExpression__Group__0__Impl22541); if (state.failed) return ;
+            match(input,With,FollowSets009.FOLLOW_With_in_rule__WithContextExpression__Group__0__Impl22541); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getWithContextExpressionAccess().getWithKeyword_0()); 
             }
@@ -39441,7 +39441,7 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__WithContextExpression__Group__1__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11188:1: rule__WithContextExpression__Group__1__Impl : ( KEYWORD_57 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11188:1: rule__WithContextExpression__Group__1__Impl : ( Context ) ;
     public final void rule__WithContextExpression__Group__1__Impl() throws RecognitionException {
         int rule__WithContextExpression__Group__1__Impl_StartIndex = input.index();
 
@@ -39449,16 +39449,16 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 685) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11192:1: ( ( KEYWORD_57 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11193:1: ( KEYWORD_57 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11192:1: ( ( Context ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11193:1: ( Context )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11193:1: ( KEYWORD_57 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11194:1: KEYWORD_57
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11193:1: ( Context )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11194:1: Context
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getWithContextExpressionAccess().getContextKeyword_1()); 
             }
-            match(input,KEYWORD_57,FollowSets009.FOLLOW_KEYWORD_57_in_rule__WithContextExpression__Group__1__Impl22603); if (state.failed) return ;
+            match(input,Context,FollowSets009.FOLLOW_Context_in_rule__WithContextExpression__Group__1__Impl22603); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getWithContextExpressionAccess().getContextKeyword_1()); 
             }
@@ -39642,7 +39642,7 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
             int alt78=2;
             int LA78_0 = input.LA(1);
 
-            if ( (LA78_0==KEYWORD_35) ) {
+            if ( (LA78_0==As) ) {
                 alt78=1;
             }
             switch (alt78) {
@@ -39817,7 +39817,7 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__WithContextExpression__Group_3__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11315:1: rule__WithContextExpression__Group_3__0__Impl : ( KEYWORD_35 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11315:1: rule__WithContextExpression__Group_3__0__Impl : ( As ) ;
     public final void rule__WithContextExpression__Group_3__0__Impl() throws RecognitionException {
         int rule__WithContextExpression__Group_3__0__Impl_StartIndex = input.index();
 
@@ -39825,16 +39825,16 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 693) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11319:1: ( ( KEYWORD_35 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11320:1: ( KEYWORD_35 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11319:1: ( ( As ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11320:1: ( As )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11320:1: ( KEYWORD_35 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11321:1: KEYWORD_35
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11320:1: ( As )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11321:1: As
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getWithContextExpressionAccess().getAsKeyword_3_0()); 
             }
-            match(input,KEYWORD_35,FollowSets009.FOLLOW_KEYWORD_35_in_rule__WithContextExpression__Group_3__0__Impl22853); if (state.failed) return ;
+            match(input,As,FollowSets009.FOLLOW_As_in_rule__WithContextExpression__Group_3__0__Impl22853); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getWithContextExpressionAccess().getAsKeyword_3_0()); 
             }
@@ -40077,7 +40077,7 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__BlockExpression__Group__1__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11409:1: rule__BlockExpression__Group__1__Impl : ( KEYWORD_18 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11409:1: rule__BlockExpression__Group__1__Impl : ( LeftCurlyBracket ) ;
     public final void rule__BlockExpression__Group__1__Impl() throws RecognitionException {
         int rule__BlockExpression__Group__1__Impl_StartIndex = input.index();
 
@@ -40085,16 +40085,16 @@ abstract class InternalExBeeLangTestLanguageParser8 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 699) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11413:1: ( ( KEYWORD_18 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11414:1: ( KEYWORD_18 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11413:1: ( ( LeftCurlyBracket ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11414:1: ( LeftCurlyBracket )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11414:1: ( KEYWORD_18 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11415:1: KEYWORD_18
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11414:1: ( LeftCurlyBracket )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11415:1: LeftCurlyBracket
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBlockExpressionAccess().getLeftCurlyBracketKeyword_1()); 
             }
-            match(input,KEYWORD_18,FollowSets009.FOLLOW_KEYWORD_18_in_rule__BlockExpression__Group__1__Impl23037); if (state.failed) return ;
+            match(input,LeftCurlyBracket,FollowSets009.FOLLOW_LeftCurlyBracket_in_rule__BlockExpression__Group__1__Impl23037); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getBlockExpressionAccess().getLeftCurlyBracketKeyword_1()); 
             }
@@ -40197,7 +40197,7 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
                 int alt79=2;
                 int LA79_0 = input.LA(1);
 
-                if ( (LA79_0==KEYWORD_63||LA79_0==KEYWORD_56||LA79_0==KEYWORD_52||(LA79_0>=KEYWORD_54 && LA79_0<=KEYWORD_51)||(LA79_0>=KEYWORD_46 && LA79_0<=KEYWORD_47)||LA79_0==KEYWORD_49||(LA79_0>=KEYWORD_42 && LA79_0<=KEYWORD_44)||LA79_0==KEYWORD_25||LA79_0==KEYWORD_27||LA79_0==KEYWORD_1||LA79_0==KEYWORD_3||LA79_0==KEYWORD_8||LA79_0==KEYWORD_18||LA79_0==RULE_ID||LA79_0==RULE_STRING) ) {
+                if ( (LA79_0==Properties||LA79_0==Builder||LA79_0==Cached||(LA79_0>=Output && LA79_0<=Input)||(LA79_0>=This && LA79_0<=Unit)||LA79_0==With||(LA79_0>=New && LA79_0<=Var)||LA79_0==PlusSignPlusSign||LA79_0==HyphenMinusHyphenMinus||LA79_0==ExclamationMark||LA79_0==LeftParenthesis||LA79_0==HyphenMinus||LA79_0==LeftCurlyBracket||LA79_0==RULE_ID||LA79_0==RULE_STRING) ) {
                     alt79=1;
                 }
 
@@ -40282,7 +40282,7 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__BlockExpression__Group__3__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11468:1: rule__BlockExpression__Group__3__Impl : ( KEYWORD_20 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11468:1: rule__BlockExpression__Group__3__Impl : ( RightCurlyBracket ) ;
     public final void rule__BlockExpression__Group__3__Impl() throws RecognitionException {
         int rule__BlockExpression__Group__3__Impl_StartIndex = input.index();
 
@@ -40290,16 +40290,16 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 703) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11472:1: ( ( KEYWORD_20 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11473:1: ( KEYWORD_20 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11472:1: ( ( RightCurlyBracket ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11473:1: ( RightCurlyBracket )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11473:1: ( KEYWORD_20 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11474:1: KEYWORD_20
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11473:1: ( RightCurlyBracket )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11474:1: RightCurlyBracket
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBlockExpressionAccess().getRightCurlyBracketKeyword_3()); 
             }
-            match(input,KEYWORD_20,FollowSets009.FOLLOW_KEYWORD_20_in_rule__BlockExpression__Group__3__Impl23157); if (state.failed) return ;
+            match(input,RightCurlyBracket,FollowSets009.FOLLOW_RightCurlyBracket_in_rule__BlockExpression__Group__3__Impl23157); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getBlockExpressionAccess().getRightCurlyBracketKeyword_3()); 
             }
@@ -40457,7 +40457,7 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__BlockExpression__Group_2__1__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11535:1: rule__BlockExpression__Group_2__1__Impl : ( KEYWORD_12 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11535:1: rule__BlockExpression__Group_2__1__Impl : ( Semicolon ) ;
     public final void rule__BlockExpression__Group_2__1__Impl() throws RecognitionException {
         int rule__BlockExpression__Group_2__1__Impl_StartIndex = input.index();
 
@@ -40465,16 +40465,16 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 707) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11539:1: ( ( KEYWORD_12 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11540:1: ( KEYWORD_12 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11539:1: ( ( Semicolon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11540:1: ( Semicolon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11540:1: ( KEYWORD_12 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11541:1: KEYWORD_12
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11540:1: ( Semicolon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11541:1: Semicolon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBlockExpressionAccess().getSemicolonKeyword_2_1()); 
             }
-            match(input,KEYWORD_12,FollowSets009.FOLLOW_KEYWORD_12_in_rule__BlockExpression__Group_2__1__Impl23284); if (state.failed) return ;
+            match(input,Semicolon,FollowSets009.FOLLOW_Semicolon_in_rule__BlockExpression__Group_2__1__Impl23284); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getBlockExpressionAccess().getSemicolonKeyword_2_1()); 
             }
@@ -41072,7 +41072,7 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__OperationCall__Group__2__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11756:1: rule__OperationCall__Group__2__Impl : ( KEYWORD_3 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11756:1: rule__OperationCall__Group__2__Impl : ( LeftParenthesis ) ;
     public final void rule__OperationCall__Group__2__Impl() throws RecognitionException {
         int rule__OperationCall__Group__2__Impl_StartIndex = input.index();
 
@@ -41080,16 +41080,16 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 721) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11760:1: ( ( KEYWORD_3 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11761:1: ( KEYWORD_3 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11760:1: ( ( LeftParenthesis ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11761:1: ( LeftParenthesis )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11761:1: ( KEYWORD_3 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11762:1: KEYWORD_3
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11761:1: ( LeftParenthesis )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11762:1: LeftParenthesis
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCallAccess().getLeftParenthesisKeyword_2()); 
             }
-            match(input,KEYWORD_3,FollowSets010.FOLLOW_KEYWORD_3_in_rule__OperationCall__Group__2__Impl23715); if (state.failed) return ;
+            match(input,LeftParenthesis,FollowSets010.FOLLOW_LeftParenthesis_in_rule__OperationCall__Group__2__Impl23715); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getOperationCallAccess().getLeftParenthesisKeyword_2()); 
             }
@@ -41178,7 +41178,7 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
             int alt80=2;
             int LA80_0 = input.LA(1);
 
-            if ( (LA80_0==KEYWORD_63||LA80_0==KEYWORD_56||LA80_0==KEYWORD_52||(LA80_0>=KEYWORD_54 && LA80_0<=KEYWORD_55)||LA80_0==KEYWORD_51||(LA80_0>=KEYWORD_46 && LA80_0<=KEYWORD_47)||LA80_0==KEYWORD_49||LA80_0==KEYWORD_39||LA80_0==KEYWORD_42||LA80_0==KEYWORD_25||LA80_0==KEYWORD_27||LA80_0==KEYWORD_1||LA80_0==KEYWORD_3||LA80_0==KEYWORD_8||LA80_0==KEYWORD_13||(LA80_0>=KEYWORD_18 && LA80_0<=KEYWORD_19)||LA80_0==RULE_ID||LA80_0==RULE_STRING) ) {
+            if ( (LA80_0==Properties||LA80_0==Builder||LA80_0==Cached||(LA80_0>=Output && LA80_0<=Source)||LA80_0==Input||(LA80_0>=This && LA80_0<=Unit)||LA80_0==With||LA80_0==FullStopFullStopFullStop||LA80_0==New||LA80_0==PlusSignPlusSign||LA80_0==HyphenMinusHyphenMinus||LA80_0==ExclamationMark||LA80_0==LeftParenthesis||LA80_0==HyphenMinus||LA80_0==LessThanSign||(LA80_0>=LeftCurlyBracket && LA80_0<=VerticalLine)||LA80_0==RULE_ID||LA80_0==RULE_STRING) ) {
                 alt80=1;
             }
             switch (alt80) {
@@ -41258,7 +41258,7 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__OperationCall__Group__4__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11815:1: rule__OperationCall__Group__4__Impl : ( KEYWORD_4 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11815:1: rule__OperationCall__Group__4__Impl : ( RightParenthesis ) ;
     public final void rule__OperationCall__Group__4__Impl() throws RecognitionException {
         int rule__OperationCall__Group__4__Impl_StartIndex = input.index();
 
@@ -41266,16 +41266,16 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 725) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11819:1: ( ( KEYWORD_4 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11820:1: ( KEYWORD_4 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11819:1: ( ( RightParenthesis ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11820:1: ( RightParenthesis )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11820:1: ( KEYWORD_4 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11821:1: KEYWORD_4
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11820:1: ( RightParenthesis )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11821:1: RightParenthesis
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCallAccess().getRightParenthesisKeyword_4()); 
             }
-            match(input,KEYWORD_4,FollowSets010.FOLLOW_KEYWORD_4_in_rule__OperationCall__Group__4__Impl23835); if (state.failed) return ;
+            match(input,RightParenthesis,FollowSets010.FOLLOW_RightParenthesis_in_rule__OperationCall__Group__4__Impl23835); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getOperationCallAccess().getRightParenthesisKeyword_4()); 
             }
@@ -41428,7 +41428,7 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__ConstructorCallExpression__Group__1__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11887:1: rule__ConstructorCallExpression__Group__1__Impl : ( KEYWORD_42 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11887:1: rule__ConstructorCallExpression__Group__1__Impl : ( New ) ;
     public final void rule__ConstructorCallExpression__Group__1__Impl() throws RecognitionException {
         int rule__ConstructorCallExpression__Group__1__Impl_StartIndex = input.index();
 
@@ -41436,16 +41436,16 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 729) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11891:1: ( ( KEYWORD_42 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11892:1: ( KEYWORD_42 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11891:1: ( ( New ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11892:1: ( New )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11892:1: ( KEYWORD_42 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11893:1: KEYWORD_42
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11892:1: ( New )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:11893:1: New
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getConstructorCallExpressionAccess().getNewKeyword_1()); 
             }
-            match(input,KEYWORD_42,FollowSets010.FOLLOW_KEYWORD_42_in_rule__ConstructorCallExpression__Group__1__Impl23968); if (state.failed) return ;
+            match(input,New,FollowSets010.FOLLOW_New_in_rule__ConstructorCallExpression__Group__1__Impl23968); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getConstructorCallExpressionAccess().getNewKeyword_1()); 
             }
@@ -41731,7 +41731,7 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
             int alt82=2;
             int LA82_0 = input.LA(1);
 
-            if ( (LA82_0==KEYWORD_35) ) {
+            if ( (LA82_0==As) ) {
                 int LA82_1 = input.LA(2);
 
                 if ( (LA82_1==RULE_ID) ) {
@@ -41840,13 +41840,13 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
             int alt83=2;
             int LA83_0 = input.LA(1);
 
-            if ( (LA83_0==KEYWORD_18) ) {
+            if ( (LA83_0==LeftCurlyBracket) ) {
                 int LA83_1 = input.LA(2);
 
                 if ( (LA83_1==RULE_ID) ) {
                     int LA83_3 = input.LA(3);
 
-                    if ( (LA83_3==KEYWORD_11) ) {
+                    if ( (LA83_3==Colon) ) {
                         alt83=1;
                     }
                 }
@@ -41933,7 +41933,7 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__ConstructorCallExpression__Group_3__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12045:1: rule__ConstructorCallExpression__Group_3__0__Impl : ( KEYWORD_3 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12045:1: rule__ConstructorCallExpression__Group_3__0__Impl : ( LeftParenthesis ) ;
     public final void rule__ConstructorCallExpression__Group_3__0__Impl() throws RecognitionException {
         int rule__ConstructorCallExpression__Group_3__0__Impl_StartIndex = input.index();
 
@@ -41941,16 +41941,16 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 739) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12049:1: ( ( KEYWORD_3 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12050:1: ( KEYWORD_3 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12049:1: ( ( LeftParenthesis ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12050:1: ( LeftParenthesis )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12050:1: ( KEYWORD_3 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12051:1: KEYWORD_3
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12050:1: ( LeftParenthesis )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12051:1: LeftParenthesis
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getConstructorCallExpressionAccess().getLeftParenthesisKeyword_3_0()); 
             }
-            match(input,KEYWORD_3,FollowSets010.FOLLOW_KEYWORD_3_in_rule__ConstructorCallExpression__Group_3__0__Impl24282); if (state.failed) return ;
+            match(input,LeftParenthesis,FollowSets010.FOLLOW_LeftParenthesis_in_rule__ConstructorCallExpression__Group_3__0__Impl24282); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getConstructorCallExpressionAccess().getLeftParenthesisKeyword_3_0()); 
             }
@@ -42039,7 +42039,7 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
             int alt84=2;
             int LA84_0 = input.LA(1);
 
-            if ( (LA84_0==KEYWORD_63||LA84_0==KEYWORD_56||LA84_0==KEYWORD_52||(LA84_0>=KEYWORD_54 && LA84_0<=KEYWORD_55)||LA84_0==KEYWORD_51||(LA84_0>=KEYWORD_46 && LA84_0<=KEYWORD_47)||LA84_0==KEYWORD_49||LA84_0==KEYWORD_39||LA84_0==KEYWORD_42||LA84_0==KEYWORD_25||LA84_0==KEYWORD_27||LA84_0==KEYWORD_1||LA84_0==KEYWORD_3||LA84_0==KEYWORD_8||LA84_0==KEYWORD_13||(LA84_0>=KEYWORD_18 && LA84_0<=KEYWORD_19)||LA84_0==RULE_ID||LA84_0==RULE_STRING) ) {
+            if ( (LA84_0==Properties||LA84_0==Builder||LA84_0==Cached||(LA84_0>=Output && LA84_0<=Source)||LA84_0==Input||(LA84_0>=This && LA84_0<=Unit)||LA84_0==With||LA84_0==FullStopFullStopFullStop||LA84_0==New||LA84_0==PlusSignPlusSign||LA84_0==HyphenMinusHyphenMinus||LA84_0==ExclamationMark||LA84_0==LeftParenthesis||LA84_0==HyphenMinus||LA84_0==LessThanSign||(LA84_0>=LeftCurlyBracket && LA84_0<=VerticalLine)||LA84_0==RULE_ID||LA84_0==RULE_STRING) ) {
                 alt84=1;
             }
             switch (alt84) {
@@ -42119,7 +42119,7 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__ConstructorCallExpression__Group_3__2__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12104:1: rule__ConstructorCallExpression__Group_3__2__Impl : ( KEYWORD_4 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12104:1: rule__ConstructorCallExpression__Group_3__2__Impl : ( RightParenthesis ) ;
     public final void rule__ConstructorCallExpression__Group_3__2__Impl() throws RecognitionException {
         int rule__ConstructorCallExpression__Group_3__2__Impl_StartIndex = input.index();
 
@@ -42127,16 +42127,16 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 743) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12108:1: ( ( KEYWORD_4 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12109:1: ( KEYWORD_4 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12108:1: ( ( RightParenthesis ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12109:1: ( RightParenthesis )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12109:1: ( KEYWORD_4 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12110:1: KEYWORD_4
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12109:1: ( RightParenthesis )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12110:1: RightParenthesis
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getConstructorCallExpressionAccess().getRightParenthesisKeyword_3_2()); 
             }
-            match(input,KEYWORD_4,FollowSets010.FOLLOW_KEYWORD_4_in_rule__ConstructorCallExpression__Group_3__2__Impl24402); if (state.failed) return ;
+            match(input,RightParenthesis,FollowSets010.FOLLOW_RightParenthesis_in_rule__ConstructorCallExpression__Group_3__2__Impl24402); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getConstructorCallExpressionAccess().getRightParenthesisKeyword_3_2()); 
             }
@@ -42204,7 +42204,7 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__ConstructorCallExpression__Group_4__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12141:1: rule__ConstructorCallExpression__Group_4__0__Impl : ( KEYWORD_35 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12141:1: rule__ConstructorCallExpression__Group_4__0__Impl : ( As ) ;
     public final void rule__ConstructorCallExpression__Group_4__0__Impl() throws RecognitionException {
         int rule__ConstructorCallExpression__Group_4__0__Impl_StartIndex = input.index();
 
@@ -42212,16 +42212,16 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 745) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12145:1: ( ( KEYWORD_35 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12146:1: ( KEYWORD_35 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12145:1: ( ( As ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12146:1: ( As )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12146:1: ( KEYWORD_35 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12147:1: KEYWORD_35
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12146:1: ( As )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12147:1: As
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getConstructorCallExpressionAccess().getAsKeyword_4_0()); 
             }
-            match(input,KEYWORD_35,FollowSets010.FOLLOW_KEYWORD_35_in_rule__ConstructorCallExpression__Group_4__0__Impl24470); if (state.failed) return ;
+            match(input,As,FollowSets010.FOLLOW_As_in_rule__ConstructorCallExpression__Group_4__0__Impl24470); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getConstructorCallExpressionAccess().getAsKeyword_4_0()); 
             }
@@ -42464,7 +42464,7 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__InitializationBlockExpression__Group__1__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12235:1: rule__InitializationBlockExpression__Group__1__Impl : ( KEYWORD_18 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12235:1: rule__InitializationBlockExpression__Group__1__Impl : ( LeftCurlyBracket ) ;
     public final void rule__InitializationBlockExpression__Group__1__Impl() throws RecognitionException {
         int rule__InitializationBlockExpression__Group__1__Impl_StartIndex = input.index();
 
@@ -42472,16 +42472,16 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 751) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12239:1: ( ( KEYWORD_18 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12240:1: ( KEYWORD_18 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12239:1: ( ( LeftCurlyBracket ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12240:1: ( LeftCurlyBracket )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12240:1: ( KEYWORD_18 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12241:1: KEYWORD_18
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12240:1: ( LeftCurlyBracket )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12241:1: LeftCurlyBracket
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getInitializationBlockExpressionAccess().getLeftCurlyBracketKeyword_1()); 
             }
-            match(input,KEYWORD_18,FollowSets010.FOLLOW_KEYWORD_18_in_rule__InitializationBlockExpression__Group__1__Impl24654); if (state.failed) return ;
+            match(input,LeftCurlyBracket,FollowSets010.FOLLOW_LeftCurlyBracket_in_rule__InitializationBlockExpression__Group__1__Impl24654); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getInitializationBlockExpressionAccess().getLeftCurlyBracketKeyword_1()); 
             }
@@ -42644,7 +42644,7 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__InitializationBlockExpression__Group__3__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12295:1: rule__InitializationBlockExpression__Group__3__Impl : ( KEYWORD_12 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12295:1: rule__InitializationBlockExpression__Group__3__Impl : ( Semicolon ) ;
     public final void rule__InitializationBlockExpression__Group__3__Impl() throws RecognitionException {
         int rule__InitializationBlockExpression__Group__3__Impl_StartIndex = input.index();
 
@@ -42652,16 +42652,16 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 755) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12299:1: ( ( KEYWORD_12 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12300:1: ( KEYWORD_12 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12299:1: ( ( Semicolon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12300:1: ( Semicolon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12300:1: ( KEYWORD_12 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12301:1: KEYWORD_12
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12300:1: ( Semicolon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12301:1: Semicolon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getInitializationBlockExpressionAccess().getSemicolonKeyword_3()); 
             }
-            match(input,KEYWORD_12,FollowSets010.FOLLOW_KEYWORD_12_in_rule__InitializationBlockExpression__Group__3__Impl24776); if (state.failed) return ;
+            match(input,Semicolon,FollowSets010.FOLLOW_Semicolon_in_rule__InitializationBlockExpression__Group__3__Impl24776); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getInitializationBlockExpressionAccess().getSemicolonKeyword_3()); 
             }
@@ -42724,7 +42724,7 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__InitializationBlockExpression__Group__4__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12325:1: rule__InitializationBlockExpression__Group__4__Impl : ( KEYWORD_20 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12325:1: rule__InitializationBlockExpression__Group__4__Impl : ( RightCurlyBracket ) ;
     public final void rule__InitializationBlockExpression__Group__4__Impl() throws RecognitionException {
         int rule__InitializationBlockExpression__Group__4__Impl_StartIndex = input.index();
 
@@ -42732,16 +42732,16 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 757) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12329:1: ( ( KEYWORD_20 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12330:1: ( KEYWORD_20 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12329:1: ( ( RightCurlyBracket ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12330:1: ( RightCurlyBracket )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12330:1: ( KEYWORD_20 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12331:1: KEYWORD_20
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12330:1: ( RightCurlyBracket )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12331:1: RightCurlyBracket
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getInitializationBlockExpressionAccess().getRightCurlyBracketKeyword_4()); 
             }
-            match(input,KEYWORD_20,FollowSets010.FOLLOW_KEYWORD_20_in_rule__InitializationBlockExpression__Group__4__Impl24835); if (state.failed) return ;
+            match(input,RightCurlyBracket,FollowSets010.FOLLOW_RightCurlyBracket_in_rule__InitializationBlockExpression__Group__4__Impl24835); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getInitializationBlockExpressionAccess().getRightCurlyBracketKeyword_4()); 
             }
@@ -43349,7 +43349,7 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__LiteralFunction__Group__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12554:1: rule__LiteralFunction__Group__0__Impl : ( KEYWORD_18 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12554:1: rule__LiteralFunction__Group__0__Impl : ( LeftCurlyBracket ) ;
     public final void rule__LiteralFunction__Group__0__Impl() throws RecognitionException {
         int rule__LiteralFunction__Group__0__Impl_StartIndex = input.index();
 
@@ -43357,16 +43357,16 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 771) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12558:1: ( ( KEYWORD_18 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12559:1: ( KEYWORD_18 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12558:1: ( ( LeftCurlyBracket ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12559:1: ( LeftCurlyBracket )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12559:1: ( KEYWORD_18 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12560:1: KEYWORD_18
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12559:1: ( LeftCurlyBracket )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12560:1: LeftCurlyBracket
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLiteralFunctionAccess().getLeftCurlyBracketKeyword_0()); 
             }
-            match(input,KEYWORD_18,FollowSets010.FOLLOW_KEYWORD_18_in_rule__LiteralFunction__Group__0__Impl25275); if (state.failed) return ;
+            match(input,LeftCurlyBracket,FollowSets010.FOLLOW_LeftCurlyBracket_in_rule__LiteralFunction__Group__0__Impl25275); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getLiteralFunctionAccess().getLeftCurlyBracketKeyword_0()); 
             }
@@ -43518,7 +43518,7 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__LiteralFunction__Group__2__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12613:1: rule__LiteralFunction__Group__2__Impl : ( KEYWORD_20 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12613:1: rule__LiteralFunction__Group__2__Impl : ( RightCurlyBracket ) ;
     public final void rule__LiteralFunction__Group__2__Impl() throws RecognitionException {
         int rule__LiteralFunction__Group__2__Impl_StartIndex = input.index();
 
@@ -43526,16 +43526,16 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 775) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12617:1: ( ( KEYWORD_20 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12618:1: ( KEYWORD_20 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12617:1: ( ( RightCurlyBracket ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12618:1: ( RightCurlyBracket )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12618:1: ( KEYWORD_20 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12619:1: KEYWORD_20
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12618:1: ( RightCurlyBracket )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12619:1: RightCurlyBracket
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLiteralFunctionAccess().getRightCurlyBracketKeyword_2()); 
             }
-            match(input,KEYWORD_20,FollowSets010.FOLLOW_KEYWORD_20_in_rule__LiteralFunction__Group__2__Impl25393); if (state.failed) return ;
+            match(input,RightCurlyBracket,FollowSets010.FOLLOW_RightCurlyBracket_in_rule__LiteralFunction__Group__2__Impl25393); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getLiteralFunctionAccess().getRightCurlyBracketKeyword_2()); 
             }
@@ -43709,7 +43709,7 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
             int alt85=2;
             int LA85_0 = input.LA(1);
 
-            if ( (LA85_0==KEYWORD_13) ) {
+            if ( (LA85_0==LessThanSign) ) {
                 alt85=1;
             }
             switch (alt85) {
@@ -43896,7 +43896,7 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__ClosureExpression__Group__3__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12739:1: rule__ClosureExpression__Group__3__Impl : ( KEYWORD_19 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12739:1: rule__ClosureExpression__Group__3__Impl : ( VerticalLine ) ;
     public final void rule__ClosureExpression__Group__3__Impl() throws RecognitionException {
         int rule__ClosureExpression__Group__3__Impl_StartIndex = input.index();
 
@@ -43904,16 +43904,16 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 783) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12743:1: ( ( KEYWORD_19 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12744:1: ( KEYWORD_19 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12743:1: ( ( VerticalLine ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12744:1: ( VerticalLine )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12744:1: ( KEYWORD_19 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12745:1: KEYWORD_19
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12744:1: ( VerticalLine )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12745:1: VerticalLine
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getClosureExpressionAccess().getVerticalLineKeyword_3()); 
             }
-            match(input,KEYWORD_19,FollowSets010.FOLLOW_KEYWORD_19_in_rule__ClosureExpression__Group__3__Impl25644); if (state.failed) return ;
+            match(input,VerticalLine,FollowSets010.FOLLOW_VerticalLine_in_rule__ClosureExpression__Group__3__Impl25644); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getClosureExpressionAccess().getVerticalLineKeyword_3()); 
             }
@@ -44071,7 +44071,7 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__ClosureExpression__Group_1__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12808:1: rule__ClosureExpression__Group_1__0__Impl : ( KEYWORD_13 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12808:1: rule__ClosureExpression__Group_1__0__Impl : ( LessThanSign ) ;
     public final void rule__ClosureExpression__Group_1__0__Impl() throws RecognitionException {
         int rule__ClosureExpression__Group_1__0__Impl_StartIndex = input.index();
 
@@ -44079,16 +44079,16 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 787) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12812:1: ( ( KEYWORD_13 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12813:1: ( KEYWORD_13 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12812:1: ( ( LessThanSign ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12813:1: ( LessThanSign )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12813:1: ( KEYWORD_13 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12814:1: KEYWORD_13
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12813:1: ( LessThanSign )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12814:1: LessThanSign
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getClosureExpressionAccess().getLessThanSignKeyword_1_0()); 
             }
-            match(input,KEYWORD_13,FollowSets010.FOLLOW_KEYWORD_13_in_rule__ClosureExpression__Group_1__0__Impl25773); if (state.failed) return ;
+            match(input,LessThanSign,FollowSets010.FOLLOW_LessThanSign_in_rule__ClosureExpression__Group_1__0__Impl25773); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getClosureExpressionAccess().getLessThanSignKeyword_1_0()); 
             }
@@ -44246,7 +44246,7 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__ClosureExpression__Group_1__2__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12867:1: rule__ClosureExpression__Group_1__2__Impl : ( KEYWORD_15 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12867:1: rule__ClosureExpression__Group_1__2__Impl : ( GreaterThanSign ) ;
     public final void rule__ClosureExpression__Group_1__2__Impl() throws RecognitionException {
         int rule__ClosureExpression__Group_1__2__Impl_StartIndex = input.index();
 
@@ -44254,16 +44254,16 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 791) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12871:1: ( ( KEYWORD_15 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12872:1: ( KEYWORD_15 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12871:1: ( ( GreaterThanSign ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12872:1: ( GreaterThanSign )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12872:1: ( KEYWORD_15 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12873:1: KEYWORD_15
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12872:1: ( GreaterThanSign )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12873:1: GreaterThanSign
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getClosureExpressionAccess().getGreaterThanSignKeyword_1_2()); 
             }
-            match(input,KEYWORD_15,FollowSets011.FOLLOW_KEYWORD_15_in_rule__ClosureExpression__Group_1__2__Impl25892); if (state.failed) return ;
+            match(input,GreaterThanSign,FollowSets011.FOLLOW_GreaterThanSign_in_rule__ClosureExpression__Group_1__2__Impl25892); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getClosureExpressionAccess().getGreaterThanSignKeyword_1_2()); 
             }
@@ -44331,7 +44331,7 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
 
 
     // $ANTLR start "rule__ClosureExpression__Group_2_0__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12904:1: rule__ClosureExpression__Group_2_0__0__Impl : ( ( KEYWORD_19 )? ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12904:1: rule__ClosureExpression__Group_2_0__0__Impl : ( ( VerticalLine )? ) ;
     public final void rule__ClosureExpression__Group_2_0__0__Impl() throws RecognitionException {
         int rule__ClosureExpression__Group_2_0__0__Impl_StartIndex = input.index();
 
@@ -44339,27 +44339,27 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 793) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12908:1: ( ( ( KEYWORD_19 )? ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12909:1: ( ( KEYWORD_19 )? )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12908:1: ( ( ( VerticalLine )? ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12909:1: ( ( VerticalLine )? )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12909:1: ( ( KEYWORD_19 )? )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12910:1: ( KEYWORD_19 )?
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12909:1: ( ( VerticalLine )? )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12910:1: ( VerticalLine )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getClosureExpressionAccess().getVerticalLineKeyword_2_0_0()); 
             }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12911:1: ( KEYWORD_19 )?
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12911:1: ( VerticalLine )?
             int alt87=2;
             int LA87_0 = input.LA(1);
 
-            if ( (LA87_0==KEYWORD_19) ) {
+            if ( (LA87_0==VerticalLine) ) {
                 alt87=1;
             }
             switch (alt87) {
                 case 1 :
-                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12912:2: KEYWORD_19
+                    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:12912:2: VerticalLine
                     {
-                    match(input,KEYWORD_19,FollowSets011.FOLLOW_KEYWORD_19_in_rule__ClosureExpression__Group_2_0__0__Impl25961); if (state.failed) return ;
+                    match(input,VerticalLine,FollowSets011.FOLLOW_VerticalLine_in_rule__ClosureExpression__Group_2_0__0__Impl25961); if (state.failed) return ;
 
                     }
                     break;
@@ -44641,10 +44641,10 @@ abstract class InternalExBeeLangTestLanguageParser9 extends InternalExBeeLangTes
                 int alt88=2;
                 int LA88_0 = input.LA(1);
 
-                if ( (LA88_0==KEYWORD_7) ) {
+                if ( (LA88_0==Comma) ) {
                     int LA88_1 = input.LA(2);
 
-                    if ( (LA88_1==KEYWORD_3||LA88_1==RULE_ID) ) {
+                    if ( (LA88_1==LeftParenthesis||LA88_1==RULE_ID) ) {
                         alt88=1;
                     }
 
@@ -44765,7 +44765,7 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
             int alt89=2;
             int LA89_0 = input.LA(1);
 
-            if ( (LA89_0==KEYWORD_7) ) {
+            if ( (LA89_0==Comma) ) {
                 alt89=1;
             }
             switch (alt89) {
@@ -44850,7 +44850,7 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
 
 
     // $ANTLR start "rule__ClosureExpression__Group_2_0_1_1__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13059:1: rule__ClosureExpression__Group_2_0_1_1__0__Impl : ( KEYWORD_7 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13059:1: rule__ClosureExpression__Group_2_0_1_1__0__Impl : ( Comma ) ;
     public final void rule__ClosureExpression__Group_2_0_1_1__0__Impl() throws RecognitionException {
         int rule__ClosureExpression__Group_2_0_1_1__0__Impl_StartIndex = input.index();
 
@@ -44858,16 +44858,16 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 803) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13063:1: ( ( KEYWORD_7 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13064:1: ( KEYWORD_7 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13063:1: ( ( Comma ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13064:1: ( Comma )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13064:1: ( KEYWORD_7 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13065:1: KEYWORD_7
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13064:1: ( Comma )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13065:1: Comma
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getClosureExpressionAccess().getCommaKeyword_2_0_1_1_0()); 
             }
-            match(input,KEYWORD_7,FollowSets011.FOLLOW_KEYWORD_7_in_rule__ClosureExpression__Group_2_0_1_1__0__Impl26271); if (state.failed) return ;
+            match(input,Comma,FollowSets011.FOLLOW_Comma_in_rule__ClosureExpression__Group_2_0_1_1__0__Impl26271); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getClosureExpressionAccess().getCommaKeyword_2_0_1_1_0()); 
             }
@@ -45025,7 +45025,7 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
 
 
     // $ANTLR start "rule__ClosureExpression__Group_2_0_1_2__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13122:1: rule__ClosureExpression__Group_2_0_1_2__0__Impl : ( KEYWORD_7 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13122:1: rule__ClosureExpression__Group_2_0_1_2__0__Impl : ( Comma ) ;
     public final void rule__ClosureExpression__Group_2_0_1_2__0__Impl() throws RecognitionException {
         int rule__ClosureExpression__Group_2_0_1_2__0__Impl_StartIndex = input.index();
 
@@ -45033,16 +45033,16 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 807) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13126:1: ( ( KEYWORD_7 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13127:1: ( KEYWORD_7 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13126:1: ( ( Comma ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13127:1: ( Comma )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13127:1: ( KEYWORD_7 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13128:1: KEYWORD_7
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13127:1: ( Comma )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13128:1: Comma
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getClosureExpressionAccess().getCommaKeyword_2_0_1_2_0()); 
             }
-            match(input,KEYWORD_7,FollowSets011.FOLLOW_KEYWORD_7_in_rule__ClosureExpression__Group_2_0_1_2__0__Impl26394); if (state.failed) return ;
+            match(input,Comma,FollowSets011.FOLLOW_Comma_in_rule__ClosureExpression__Group_2_0_1_2__0__Impl26394); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getClosureExpressionAccess().getCommaKeyword_2_0_1_2_0()); 
             }
@@ -45609,7 +45609,7 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
                 int alt90=2;
                 int LA90_0 = input.LA(1);
 
-                if ( (LA90_0==KEYWORD_63||LA90_0==KEYWORD_56||LA90_0==KEYWORD_52||(LA90_0>=KEYWORD_54 && LA90_0<=KEYWORD_51)||(LA90_0>=KEYWORD_46 && LA90_0<=KEYWORD_47)||LA90_0==KEYWORD_49||(LA90_0>=KEYWORD_42 && LA90_0<=KEYWORD_44)||LA90_0==KEYWORD_25||LA90_0==KEYWORD_27||LA90_0==KEYWORD_1||LA90_0==KEYWORD_3||LA90_0==KEYWORD_8||LA90_0==KEYWORD_18||LA90_0==RULE_ID||LA90_0==RULE_STRING) ) {
+                if ( (LA90_0==Properties||LA90_0==Builder||LA90_0==Cached||(LA90_0>=Output && LA90_0<=Input)||(LA90_0>=This && LA90_0<=Unit)||LA90_0==With||(LA90_0>=New && LA90_0<=Var)||LA90_0==PlusSignPlusSign||LA90_0==HyphenMinusHyphenMinus||LA90_0==ExclamationMark||LA90_0==LeftParenthesis||LA90_0==HyphenMinus||LA90_0==LeftCurlyBracket||LA90_0==RULE_ID||LA90_0==RULE_STRING) ) {
                     alt90=1;
                 }
 
@@ -45792,7 +45792,7 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
 
 
     // $ANTLR start "rule__BlockExpressionWithoutBrackets__Group_1__1__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13375:1: rule__BlockExpressionWithoutBrackets__Group_1__1__Impl : ( KEYWORD_12 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13375:1: rule__BlockExpressionWithoutBrackets__Group_1__1__Impl : ( Semicolon ) ;
     public final void rule__BlockExpressionWithoutBrackets__Group_1__1__Impl() throws RecognitionException {
         int rule__BlockExpressionWithoutBrackets__Group_1__1__Impl_StartIndex = input.index();
 
@@ -45800,16 +45800,16 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 823) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13379:1: ( ( KEYWORD_12 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13380:1: ( KEYWORD_12 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13379:1: ( ( Semicolon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13380:1: ( Semicolon )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13380:1: ( KEYWORD_12 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13381:1: KEYWORD_12
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13380:1: ( Semicolon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13381:1: Semicolon
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBlockExpressionWithoutBracketsAccess().getSemicolonKeyword_1_1()); 
             }
-            match(input,KEYWORD_12,FollowSets011.FOLLOW_KEYWORD_12_in_rule__BlockExpressionWithoutBrackets__Group_1__1__Impl26896); if (state.failed) return ;
+            match(input,Semicolon,FollowSets011.FOLLOW_Semicolon_in_rule__BlockExpressionWithoutBrackets__Group_1__1__Impl26896); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getBlockExpressionWithoutBracketsAccess().getSemicolonKeyword_1_1()); 
             }
@@ -45877,7 +45877,7 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
 
 
     // $ANTLR start "rule__ParanthesizedExpression__Group__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13410:1: rule__ParanthesizedExpression__Group__0__Impl : ( KEYWORD_3 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13410:1: rule__ParanthesizedExpression__Group__0__Impl : ( LeftParenthesis ) ;
     public final void rule__ParanthesizedExpression__Group__0__Impl() throws RecognitionException {
         int rule__ParanthesizedExpression__Group__0__Impl_StartIndex = input.index();
 
@@ -45885,16 +45885,16 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 825) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13414:1: ( ( KEYWORD_3 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13415:1: ( KEYWORD_3 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13414:1: ( ( LeftParenthesis ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13415:1: ( LeftParenthesis )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13415:1: ( KEYWORD_3 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13416:1: KEYWORD_3
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13415:1: ( LeftParenthesis )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13416:1: LeftParenthesis
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getParanthesizedExpressionAccess().getLeftParenthesisKeyword_0()); 
             }
-            match(input,KEYWORD_3,FollowSets011.FOLLOW_KEYWORD_3_in_rule__ParanthesizedExpression__Group__0__Impl26962); if (state.failed) return ;
+            match(input,LeftParenthesis,FollowSets011.FOLLOW_LeftParenthesis_in_rule__ParanthesizedExpression__Group__0__Impl26962); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getParanthesizedExpressionAccess().getLeftParenthesisKeyword_0()); 
             }
@@ -46046,7 +46046,7 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
 
 
     // $ANTLR start "rule__ParanthesizedExpression__Group__2__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13469:1: rule__ParanthesizedExpression__Group__2__Impl : ( KEYWORD_4 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13469:1: rule__ParanthesizedExpression__Group__2__Impl : ( RightParenthesis ) ;
     public final void rule__ParanthesizedExpression__Group__2__Impl() throws RecognitionException {
         int rule__ParanthesizedExpression__Group__2__Impl_StartIndex = input.index();
 
@@ -46054,16 +46054,16 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 829) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13473:1: ( ( KEYWORD_4 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13474:1: ( KEYWORD_4 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13473:1: ( ( RightParenthesis ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13474:1: ( RightParenthesis )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13474:1: ( KEYWORD_4 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13475:1: KEYWORD_4
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13474:1: ( RightParenthesis )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13475:1: RightParenthesis
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getParanthesizedExpressionAccess().getRightParenthesisKeyword_2()); 
             }
-            match(input,KEYWORD_4,FollowSets011.FOLLOW_KEYWORD_4_in_rule__ParanthesizedExpression__Group__2__Impl27080); if (state.failed) return ;
+            match(input,RightParenthesis,FollowSets011.FOLLOW_RightParenthesis_in_rule__ParanthesizedExpression__Group__2__Impl27080); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getParanthesizedExpressionAccess().getRightParenthesisKeyword_2()); 
             }
@@ -46347,7 +46347,7 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
                 int alt92=2;
                 int LA92_0 = input.LA(1);
 
-                if ( (LA92_0==KEYWORD_9) ) {
+                if ( (LA92_0==FullStop) ) {
                     alt92=1;
                 }
 
@@ -46437,7 +46437,7 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
 
 
     // $ANTLR start "rule__QID__Group_2__0__Impl"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13598:1: rule__QID__Group_2__0__Impl : ( KEYWORD_9 ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13598:1: rule__QID__Group_2__0__Impl : ( FullStop ) ;
     public final void rule__QID__Group_2__0__Impl() throws RecognitionException {
         int rule__QID__Group_2__0__Impl_StartIndex = input.index();
 
@@ -46445,16 +46445,16 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 837) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13602:1: ( ( KEYWORD_9 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13603:1: ( KEYWORD_9 )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13602:1: ( ( FullStop ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13603:1: ( FullStop )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13603:1: ( KEYWORD_9 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13604:1: KEYWORD_9
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13603:1: ( FullStop )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:13604:1: FullStop
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQIDAccess().getFullStopKeyword_2_0()); 
             }
-            match(input,KEYWORD_9,FollowSets011.FOLLOW_KEYWORD_9_in_rule__QID__Group_2__0__Impl27332); if (state.failed) return ;
+            match(input,FullStop,FollowSets011.FOLLOW_FullStop_in_rule__QID__Group_2__0__Impl27332); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getQIDAccess().getFullStopKeyword_2_0()); 
             }
@@ -46741,22 +46741,22 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
             int alt99=6;
             int LA99_0 = input.LA(1);
 
-            if ( LA99_0 ==KEYWORD_55 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 0) ) {
+            if ( LA99_0 ==Source && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 0) ) {
                 alt99=1;
             }
-            else if ( LA99_0 ==KEYWORD_54 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 1) ) {
+            else if ( LA99_0 ==Output && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 1) ) {
                 alt99=2;
             }
-            else if ( LA99_0 ==KEYWORD_60 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 2) ) {
+            else if ( LA99_0 ==Provides && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 2) ) {
                 alt99=3;
             }
-            else if ( (LA99_0==KEYWORD_61) ) {
+            else if ( (LA99_0==Requires) ) {
                 int LA99_4 = input.LA(2);
 
-                if ( LA99_4 ==KEYWORD_41 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 4) ) {
+                if ( LA99_4 ==Env && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 4) ) {
                     alt99=5;
                 }
-                else if ( LA99_4 ==KEYWORD_11 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 3) ) {
+                else if ( LA99_4 ==Colon && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 3) ) {
                     alt99=4;
                 }
                 else {
@@ -46767,7 +46767,7 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
                     throw nvae;
                 }
             }
-            else if ( (LA99_0==KEYWORD_59||LA99_0==KEYWORD_50||LA99_0==RULE_DOCUMENTATION||LA99_0==RULE_ID) && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {
+            else if ( (LA99_0==Function||LA99_0==Final||LA99_0==RULE_DOCUMENTATION||LA99_0==RULE_ID) && getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {
                 alt99=6;
             }
             else {
@@ -47619,13 +47619,13 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
             int alt105=3;
             int LA105_0 = input.LA(1);
 
-            if ( LA105_0 ==KEYWORD_48 && getUnorderedGroupHelper().canSelect(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 0) ) {
+            if ( LA105_0 ==When && getUnorderedGroupHelper().canSelect(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 0) ) {
                 alt105=1;
             }
-            else if ( LA105_0 ==KEYWORD_45 && getUnorderedGroupHelper().canSelect(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 1) ) {
+            else if ( LA105_0 ==Name && getUnorderedGroupHelper().canSelect(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 1) ) {
                 alt105=2;
             }
-            else if ( LA105_0 ==KEYWORD_58 && getUnorderedGroupHelper().canSelect(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 2) ) {
+            else if ( LA105_0 ==Version && getUnorderedGroupHelper().canSelect(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 2) ) {
                 alt105=3;
             }
             else {
@@ -47825,13 +47825,13 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
             int alt106=2;
             int LA106_0 = input.LA(1);
 
-            if ( LA106_0 ==KEYWORD_48 && getUnorderedGroupHelper().canSelect(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 0) ) {
+            if ( LA106_0 ==When && getUnorderedGroupHelper().canSelect(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 0) ) {
                 alt106=1;
             }
-            else if ( LA106_0 ==KEYWORD_45 && getUnorderedGroupHelper().canSelect(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 1) ) {
+            else if ( LA106_0 ==Name && getUnorderedGroupHelper().canSelect(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 1) ) {
                 alt106=1;
             }
-            else if ( LA106_0 ==KEYWORD_58 && getUnorderedGroupHelper().canSelect(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 2) ) {
+            else if ( LA106_0 ==Version && getUnorderedGroupHelper().canSelect(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 2) ) {
                 alt106=1;
             }
             switch (alt106) {
@@ -47889,13 +47889,13 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
             int alt107=2;
             int LA107_0 = input.LA(1);
 
-            if ( LA107_0 ==KEYWORD_48 && getUnorderedGroupHelper().canSelect(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 0) ) {
+            if ( LA107_0 ==When && getUnorderedGroupHelper().canSelect(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 0) ) {
                 alt107=1;
             }
-            else if ( LA107_0 ==KEYWORD_45 && getUnorderedGroupHelper().canSelect(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 1) ) {
+            else if ( LA107_0 ==Name && getUnorderedGroupHelper().canSelect(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 1) ) {
                 alt107=1;
             }
-            else if ( LA107_0 ==KEYWORD_58 && getUnorderedGroupHelper().canSelect(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 2) ) {
+            else if ( LA107_0 ==Version && getUnorderedGroupHelper().canSelect(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 2) ) {
                 alt107=1;
             }
             switch (alt107) {
@@ -47985,19 +47985,19 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
             int alt108=2;
             int LA108_0 = input.LA(1);
 
-            if ( LA108_0 ==KEYWORD_48 && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0) ) {
+            if ( LA108_0 ==When && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0) ) {
                 alt108=1;
             }
-            else if ( LA108_0 ==KEYWORD_53 && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1) ) {
+            else if ( LA108_0 ==Greedy && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1) ) {
                 alt108=1;
             }
-            else if ( LA108_0 ==KEYWORD_65 && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2) ) {
+            else if ( LA108_0 ==RequiresMin && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2) ) {
                 alt108=1;
             }
-            else if ( LA108_0 ==KEYWORD_64 && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3) ) {
+            else if ( LA108_0 ==RequiresMax && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3) ) {
                 alt108=1;
             }
-            else if ( LA108_0 ==KEYWORD_58 && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4) ) {
+            else if ( LA108_0 ==Version && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4) ) {
                 alt108=1;
             }
             switch (alt108) {
@@ -48052,19 +48052,19 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
             int alt109=5;
             int LA109_0 = input.LA(1);
 
-            if ( LA109_0 ==KEYWORD_48 && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0) ) {
+            if ( LA109_0 ==When && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0) ) {
                 alt109=1;
             }
-            else if ( LA109_0 ==KEYWORD_53 && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1) ) {
+            else if ( LA109_0 ==Greedy && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1) ) {
                 alt109=2;
             }
-            else if ( LA109_0 ==KEYWORD_65 && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2) ) {
+            else if ( LA109_0 ==RequiresMin && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2) ) {
                 alt109=3;
             }
-            else if ( LA109_0 ==KEYWORD_64 && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3) ) {
+            else if ( LA109_0 ==RequiresMax && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3) ) {
                 alt109=4;
             }
-            else if ( LA109_0 ==KEYWORD_58 && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4) ) {
+            else if ( LA109_0 ==Version && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4) ) {
                 alt109=5;
             }
             else {
@@ -48360,19 +48360,19 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
             int alt110=2;
             int LA110_0 = input.LA(1);
 
-            if ( LA110_0 ==KEYWORD_48 && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0) ) {
+            if ( LA110_0 ==When && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0) ) {
                 alt110=1;
             }
-            else if ( LA110_0 ==KEYWORD_53 && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1) ) {
+            else if ( LA110_0 ==Greedy && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1) ) {
                 alt110=1;
             }
-            else if ( LA110_0 ==KEYWORD_65 && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2) ) {
+            else if ( LA110_0 ==RequiresMin && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2) ) {
                 alt110=1;
             }
-            else if ( LA110_0 ==KEYWORD_64 && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3) ) {
+            else if ( LA110_0 ==RequiresMax && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3) ) {
                 alt110=1;
             }
-            else if ( LA110_0 ==KEYWORD_58 && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4) ) {
+            else if ( LA110_0 ==Version && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4) ) {
                 alt110=1;
             }
             switch (alt110) {
@@ -48430,19 +48430,19 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
             int alt111=2;
             int LA111_0 = input.LA(1);
 
-            if ( LA111_0 ==KEYWORD_48 && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0) ) {
+            if ( LA111_0 ==When && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0) ) {
                 alt111=1;
             }
-            else if ( LA111_0 ==KEYWORD_53 && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1) ) {
+            else if ( LA111_0 ==Greedy && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1) ) {
                 alt111=1;
             }
-            else if ( LA111_0 ==KEYWORD_65 && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2) ) {
+            else if ( LA111_0 ==RequiresMin && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2) ) {
                 alt111=1;
             }
-            else if ( LA111_0 ==KEYWORD_64 && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3) ) {
+            else if ( LA111_0 ==RequiresMax && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3) ) {
                 alt111=1;
             }
-            else if ( LA111_0 ==KEYWORD_58 && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4) ) {
+            else if ( LA111_0 ==Version && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4) ) {
                 alt111=1;
             }
             switch (alt111) {
@@ -48500,19 +48500,19 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
             int alt112=2;
             int LA112_0 = input.LA(1);
 
-            if ( LA112_0 ==KEYWORD_48 && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0) ) {
+            if ( LA112_0 ==When && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0) ) {
                 alt112=1;
             }
-            else if ( LA112_0 ==KEYWORD_53 && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1) ) {
+            else if ( LA112_0 ==Greedy && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1) ) {
                 alt112=1;
             }
-            else if ( LA112_0 ==KEYWORD_65 && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2) ) {
+            else if ( LA112_0 ==RequiresMin && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2) ) {
                 alt112=1;
             }
-            else if ( LA112_0 ==KEYWORD_64 && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3) ) {
+            else if ( LA112_0 ==RequiresMax && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3) ) {
                 alt112=1;
             }
-            else if ( LA112_0 ==KEYWORD_58 && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4) ) {
+            else if ( LA112_0 ==Version && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4) ) {
                 alt112=1;
             }
             switch (alt112) {
@@ -48570,19 +48570,19 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
             int alt113=2;
             int LA113_0 = input.LA(1);
 
-            if ( LA113_0 ==KEYWORD_48 && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0) ) {
+            if ( LA113_0 ==When && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0) ) {
                 alt113=1;
             }
-            else if ( LA113_0 ==KEYWORD_53 && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1) ) {
+            else if ( LA113_0 ==Greedy && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1) ) {
                 alt113=1;
             }
-            else if ( LA113_0 ==KEYWORD_65 && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2) ) {
+            else if ( LA113_0 ==RequiresMin && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2) ) {
                 alt113=1;
             }
-            else if ( LA113_0 ==KEYWORD_64 && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3) ) {
+            else if ( LA113_0 ==RequiresMax && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3) ) {
                 alt113=1;
             }
-            else if ( LA113_0 ==KEYWORD_58 && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4) ) {
+            else if ( LA113_0 ==Version && getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4) ) {
                 alt113=1;
             }
             switch (alt113) {
@@ -48672,19 +48672,19 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
             int alt114=2;
             int LA114_0 = input.LA(1);
 
-            if ( LA114_0 ==KEYWORD_48 && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0) ) {
+            if ( LA114_0 ==When && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0) ) {
                 alt114=1;
             }
-            else if ( LA114_0 ==KEYWORD_53 && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1) ) {
+            else if ( LA114_0 ==Greedy && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1) ) {
                 alt114=1;
             }
-            else if ( LA114_0 ==KEYWORD_65 && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2) ) {
+            else if ( LA114_0 ==RequiresMin && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2) ) {
                 alt114=1;
             }
-            else if ( LA114_0 ==KEYWORD_64 && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3) ) {
+            else if ( LA114_0 ==RequiresMax && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3) ) {
                 alt114=1;
             }
-            else if ( LA114_0 ==KEYWORD_58 && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4) ) {
+            else if ( LA114_0 ==Version && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4) ) {
                 alt114=1;
             }
             switch (alt114) {
@@ -48739,19 +48739,19 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
             int alt115=5;
             int LA115_0 = input.LA(1);
 
-            if ( LA115_0 ==KEYWORD_48 && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0) ) {
+            if ( LA115_0 ==When && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0) ) {
                 alt115=1;
             }
-            else if ( LA115_0 ==KEYWORD_53 && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1) ) {
+            else if ( LA115_0 ==Greedy && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1) ) {
                 alt115=2;
             }
-            else if ( LA115_0 ==KEYWORD_65 && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2) ) {
+            else if ( LA115_0 ==RequiresMin && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2) ) {
                 alt115=3;
             }
-            else if ( LA115_0 ==KEYWORD_64 && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3) ) {
+            else if ( LA115_0 ==RequiresMax && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3) ) {
                 alt115=4;
             }
-            else if ( LA115_0 ==KEYWORD_58 && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4) ) {
+            else if ( LA115_0 ==Version && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4) ) {
                 alt115=5;
             }
             else {
@@ -49047,19 +49047,19 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
             int alt116=2;
             int LA116_0 = input.LA(1);
 
-            if ( LA116_0 ==KEYWORD_48 && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0) ) {
+            if ( LA116_0 ==When && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0) ) {
                 alt116=1;
             }
-            else if ( LA116_0 ==KEYWORD_53 && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1) ) {
+            else if ( LA116_0 ==Greedy && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1) ) {
                 alt116=1;
             }
-            else if ( LA116_0 ==KEYWORD_65 && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2) ) {
+            else if ( LA116_0 ==RequiresMin && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2) ) {
                 alt116=1;
             }
-            else if ( LA116_0 ==KEYWORD_64 && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3) ) {
+            else if ( LA116_0 ==RequiresMax && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3) ) {
                 alt116=1;
             }
-            else if ( LA116_0 ==KEYWORD_58 && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4) ) {
+            else if ( LA116_0 ==Version && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4) ) {
                 alt116=1;
             }
             switch (alt116) {
@@ -49117,19 +49117,19 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
             int alt117=2;
             int LA117_0 = input.LA(1);
 
-            if ( LA117_0 ==KEYWORD_48 && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0) ) {
+            if ( LA117_0 ==When && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0) ) {
                 alt117=1;
             }
-            else if ( LA117_0 ==KEYWORD_53 && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1) ) {
+            else if ( LA117_0 ==Greedy && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1) ) {
                 alt117=1;
             }
-            else if ( LA117_0 ==KEYWORD_65 && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2) ) {
+            else if ( LA117_0 ==RequiresMin && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2) ) {
                 alt117=1;
             }
-            else if ( LA117_0 ==KEYWORD_64 && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3) ) {
+            else if ( LA117_0 ==RequiresMax && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3) ) {
                 alt117=1;
             }
-            else if ( LA117_0 ==KEYWORD_58 && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4) ) {
+            else if ( LA117_0 ==Version && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4) ) {
                 alt117=1;
             }
             switch (alt117) {
@@ -49187,19 +49187,19 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
             int alt118=2;
             int LA118_0 = input.LA(1);
 
-            if ( LA118_0 ==KEYWORD_48 && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0) ) {
+            if ( LA118_0 ==When && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0) ) {
                 alt118=1;
             }
-            else if ( LA118_0 ==KEYWORD_53 && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1) ) {
+            else if ( LA118_0 ==Greedy && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1) ) {
                 alt118=1;
             }
-            else if ( LA118_0 ==KEYWORD_65 && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2) ) {
+            else if ( LA118_0 ==RequiresMin && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2) ) {
                 alt118=1;
             }
-            else if ( LA118_0 ==KEYWORD_64 && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3) ) {
+            else if ( LA118_0 ==RequiresMax && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3) ) {
                 alt118=1;
             }
-            else if ( LA118_0 ==KEYWORD_58 && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4) ) {
+            else if ( LA118_0 ==Version && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4) ) {
                 alt118=1;
             }
             switch (alt118) {
@@ -49257,19 +49257,19 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
             int alt119=2;
             int LA119_0 = input.LA(1);
 
-            if ( LA119_0 ==KEYWORD_48 && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0) ) {
+            if ( LA119_0 ==When && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0) ) {
                 alt119=1;
             }
-            else if ( LA119_0 ==KEYWORD_53 && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1) ) {
+            else if ( LA119_0 ==Greedy && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1) ) {
                 alt119=1;
             }
-            else if ( LA119_0 ==KEYWORD_65 && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2) ) {
+            else if ( LA119_0 ==RequiresMin && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2) ) {
                 alt119=1;
             }
-            else if ( LA119_0 ==KEYWORD_64 && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3) ) {
+            else if ( LA119_0 ==RequiresMax && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3) ) {
                 alt119=1;
             }
-            else if ( LA119_0 ==KEYWORD_58 && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4) ) {
+            else if ( LA119_0 ==Version && getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4) ) {
                 alt119=1;
             }
             switch (alt119) {
@@ -50315,7 +50315,7 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
 
 
     // $ANTLR start "rule__AliasedRequiredCapability__GreedyAssignment_3_1_1_0"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:14810:1: rule__AliasedRequiredCapability__GreedyAssignment_3_1_1_0 : ( ( KEYWORD_53 ) ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:14810:1: rule__AliasedRequiredCapability__GreedyAssignment_3_1_1_0 : ( ( Greedy ) ) ;
     public final void rule__AliasedRequiredCapability__GreedyAssignment_3_1_1_0() throws RecognitionException {
         int rule__AliasedRequiredCapability__GreedyAssignment_3_1_1_0_StartIndex = input.index();
 
@@ -50323,22 +50323,22 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 890) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:14814:1: ( ( ( KEYWORD_53 ) ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:14815:1: ( ( KEYWORD_53 ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:14814:1: ( ( ( Greedy ) ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:14815:1: ( ( Greedy ) )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:14815:1: ( ( KEYWORD_53 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:14816:1: ( KEYWORD_53 )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getAliasedRequiredCapabilityAccess().getGreedyGreedyKeyword_3_1_1_0_0()); 
-            }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:14817:1: ( KEYWORD_53 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:14818:1: KEYWORD_53
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:14815:1: ( ( Greedy ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:14816:1: ( Greedy )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAliasedRequiredCapabilityAccess().getGreedyGreedyKeyword_3_1_1_0_0()); 
             }
-            match(input,KEYWORD_53,FollowSets012.FOLLOW_KEYWORD_53_in_rule__AliasedRequiredCapability__GreedyAssignment_3_1_1_030993); if (state.failed) return ;
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:14817:1: ( Greedy )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:14818:1: Greedy
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getAliasedRequiredCapabilityAccess().getGreedyGreedyKeyword_3_1_1_0_0()); 
+            }
+            match(input,Greedy,FollowSets012.FOLLOW_Greedy_in_rule__AliasedRequiredCapability__GreedyAssignment_3_1_1_030993); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAliasedRequiredCapabilityAccess().getGreedyGreedyKeyword_3_1_1_0_0()); 
             }
@@ -50639,7 +50639,7 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
 
 
     // $ANTLR start "rule__RequiredCapability__GreedyAssignment_3_1_1_0"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:14923:1: rule__RequiredCapability__GreedyAssignment_3_1_1_0 : ( ( KEYWORD_53 ) ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:14923:1: rule__RequiredCapability__GreedyAssignment_3_1_1_0 : ( ( Greedy ) ) ;
     public final void rule__RequiredCapability__GreedyAssignment_3_1_1_0() throws RecognitionException {
         int rule__RequiredCapability__GreedyAssignment_3_1_1_0_StartIndex = input.index();
 
@@ -50647,22 +50647,22 @@ abstract class InternalExBeeLangTestLanguageParser10 extends InternalExBeeLangTe
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 897) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:14927:1: ( ( ( KEYWORD_53 ) ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:14928:1: ( ( KEYWORD_53 ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:14927:1: ( ( ( Greedy ) ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:14928:1: ( ( Greedy ) )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:14928:1: ( ( KEYWORD_53 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:14929:1: ( KEYWORD_53 )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getRequiredCapabilityAccess().getGreedyGreedyKeyword_3_1_1_0_0()); 
-            }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:14930:1: ( KEYWORD_53 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:14931:1: KEYWORD_53
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:14928:1: ( ( Greedy ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:14929:1: ( Greedy )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRequiredCapabilityAccess().getGreedyGreedyKeyword_3_1_1_0_0()); 
             }
-            match(input,KEYWORD_53,FollowSets012.FOLLOW_KEYWORD_53_in_rule__RequiredCapability__GreedyAssignment_3_1_1_031223); if (state.failed) return ;
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:14930:1: ( Greedy )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:14931:1: Greedy
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getRequiredCapabilityAccess().getGreedyGreedyKeyword_3_1_1_0_0()); 
+            }
+            match(input,Greedy,FollowSets012.FOLLOW_Greedy_in_rule__RequiredCapability__GreedyAssignment_3_1_1_031223); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getRequiredCapabilityAccess().getGreedyGreedyKeyword_3_1_1_0_0()); 
             }
@@ -51211,7 +51211,7 @@ abstract class InternalExBeeLangTestLanguageParser11 extends InternalExBeeLangTe
 
 
     // $ANTLR start "rule__Function__FinalAssignment_2"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15111:1: rule__Function__FinalAssignment_2 : ( ( KEYWORD_50 ) ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15111:1: rule__Function__FinalAssignment_2 : ( ( Final ) ) ;
     public final void rule__Function__FinalAssignment_2() throws RecognitionException {
         int rule__Function__FinalAssignment_2_StartIndex = input.index();
 
@@ -51219,22 +51219,22 @@ abstract class InternalExBeeLangTestLanguageParser11 extends InternalExBeeLangTe
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 909) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15115:1: ( ( ( KEYWORD_50 ) ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15116:1: ( ( KEYWORD_50 ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15115:1: ( ( ( Final ) ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15116:1: ( ( Final ) )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15116:1: ( ( KEYWORD_50 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15117:1: ( KEYWORD_50 )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getFunctionAccess().getFinalFinalKeyword_2_0()); 
-            }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15118:1: ( KEYWORD_50 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15119:1: KEYWORD_50
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15116:1: ( ( Final ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15117:1: ( Final )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionAccess().getFinalFinalKeyword_2_0()); 
             }
-            match(input,KEYWORD_50,FollowSets012.FOLLOW_KEYWORD_50_in_rule__Function__FinalAssignment_231608); if (state.failed) return ;
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15118:1: ( Final )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15119:1: Final
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getFunctionAccess().getFinalFinalKeyword_2_0()); 
+            }
+            match(input,Final,FollowSets012.FOLLOW_Final_in_rule__Function__FinalAssignment_231608); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getFunctionAccess().getFinalFinalKeyword_2_0()); 
             }
@@ -51455,7 +51455,7 @@ abstract class InternalExBeeLangTestLanguageParser11 extends InternalExBeeLangTe
 
 
     // $ANTLR start "rule__Function__VarArgsAssignment_6_1_0_2_1"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15194:1: rule__Function__VarArgsAssignment_6_1_0_2_1 : ( ( KEYWORD_39 ) ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15194:1: rule__Function__VarArgsAssignment_6_1_0_2_1 : ( ( FullStopFullStopFullStop ) ) ;
     public final void rule__Function__VarArgsAssignment_6_1_0_2_1() throws RecognitionException {
         int rule__Function__VarArgsAssignment_6_1_0_2_1_StartIndex = input.index();
 
@@ -51463,22 +51463,22 @@ abstract class InternalExBeeLangTestLanguageParser11 extends InternalExBeeLangTe
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 914) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15198:1: ( ( ( KEYWORD_39 ) ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15199:1: ( ( KEYWORD_39 ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15198:1: ( ( ( FullStopFullStopFullStop ) ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15199:1: ( ( FullStopFullStopFullStop ) )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15199:1: ( ( KEYWORD_39 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15200:1: ( KEYWORD_39 )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getFunctionAccess().getVarArgsFullStopFullStopFullStopKeyword_6_1_0_2_1_0()); 
-            }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15201:1: ( KEYWORD_39 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15202:1: KEYWORD_39
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15199:1: ( ( FullStopFullStopFullStop ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15200:1: ( FullStopFullStopFullStop )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionAccess().getVarArgsFullStopFullStopFullStopKeyword_6_1_0_2_1_0()); 
             }
-            match(input,KEYWORD_39,FollowSets012.FOLLOW_KEYWORD_39_in_rule__Function__VarArgsAssignment_6_1_0_2_131776); if (state.failed) return ;
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15201:1: ( FullStopFullStopFullStop )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15202:1: FullStopFullStopFullStop
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getFunctionAccess().getVarArgsFullStopFullStopFullStopKeyword_6_1_0_2_1_0()); 
+            }
+            match(input,FullStopFullStopFullStop,FollowSets012.FOLLOW_FullStopFullStopFullStop_in_rule__Function__VarArgsAssignment_6_1_0_2_131776); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getFunctionAccess().getVarArgsFullStopFullStopFullStopKeyword_6_1_0_2_1_0()); 
             }
@@ -51559,7 +51559,7 @@ abstract class InternalExBeeLangTestLanguageParser11 extends InternalExBeeLangTe
 
 
     // $ANTLR start "rule__Function__VarArgsAssignment_6_1_1_0"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15232:1: rule__Function__VarArgsAssignment_6_1_1_0 : ( ( KEYWORD_39 ) ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15232:1: rule__Function__VarArgsAssignment_6_1_1_0 : ( ( FullStopFullStopFullStop ) ) ;
     public final void rule__Function__VarArgsAssignment_6_1_1_0() throws RecognitionException {
         int rule__Function__VarArgsAssignment_6_1_1_0_StartIndex = input.index();
 
@@ -51567,22 +51567,22 @@ abstract class InternalExBeeLangTestLanguageParser11 extends InternalExBeeLangTe
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 916) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15236:1: ( ( ( KEYWORD_39 ) ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15237:1: ( ( KEYWORD_39 ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15236:1: ( ( ( FullStopFullStopFullStop ) ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15237:1: ( ( FullStopFullStopFullStop ) )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15237:1: ( ( KEYWORD_39 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15238:1: ( KEYWORD_39 )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getFunctionAccess().getVarArgsFullStopFullStopFullStopKeyword_6_1_1_0_0()); 
-            }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15239:1: ( KEYWORD_39 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15240:1: KEYWORD_39
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15237:1: ( ( FullStopFullStopFullStop ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15238:1: ( FullStopFullStopFullStop )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFunctionAccess().getVarArgsFullStopFullStopFullStopKeyword_6_1_1_0_0()); 
             }
-            match(input,KEYWORD_39,FollowSets012.FOLLOW_KEYWORD_39_in_rule__Function__VarArgsAssignment_6_1_1_031851); if (state.failed) return ;
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15239:1: ( FullStopFullStopFullStop )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15240:1: FullStopFullStopFullStop
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getFunctionAccess().getVarArgsFullStopFullStopFullStopKeyword_6_1_1_0_0()); 
+            }
+            match(input,FullStopFullStopFullStop,FollowSets012.FOLLOW_FullStopFullStopFullStop_in_rule__Function__VarArgsAssignment_6_1_1_031851); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getFunctionAccess().getVarArgsFullStopFullStopFullStopKeyword_6_1_1_0_0()); 
             }
@@ -51999,7 +51999,7 @@ abstract class InternalExBeeLangTestLanguageParser11 extends InternalExBeeLangTe
 
 
     // $ANTLR start "rule__VarDeclaration__FinalAssignment_1"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15375:1: rule__VarDeclaration__FinalAssignment_1 : ( ( KEYWORD_50 ) ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15375:1: rule__VarDeclaration__FinalAssignment_1 : ( ( Final ) ) ;
     public final void rule__VarDeclaration__FinalAssignment_1() throws RecognitionException {
         int rule__VarDeclaration__FinalAssignment_1_StartIndex = input.index();
 
@@ -52007,22 +52007,22 @@ abstract class InternalExBeeLangTestLanguageParser11 extends InternalExBeeLangTe
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 925) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15379:1: ( ( ( KEYWORD_50 ) ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15380:1: ( ( KEYWORD_50 ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15379:1: ( ( ( Final ) ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15380:1: ( ( Final ) )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15380:1: ( ( KEYWORD_50 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15381:1: ( KEYWORD_50 )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getVarDeclarationAccess().getFinalFinalKeyword_1_0()); 
-            }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15382:1: ( KEYWORD_50 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15383:1: KEYWORD_50
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15380:1: ( ( Final ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15381:1: ( Final )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getVarDeclarationAccess().getFinalFinalKeyword_1_0()); 
             }
-            match(input,KEYWORD_50,FollowSets012.FOLLOW_KEYWORD_50_in_rule__VarDeclaration__FinalAssignment_132143); if (state.failed) return ;
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15382:1: ( Final )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15383:1: Final
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getVarDeclarationAccess().getFinalFinalKeyword_1_0()); 
+            }
+            match(input,Final,FollowSets012.FOLLOW_Final_in_rule__VarDeclaration__FinalAssignment_132143); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getVarDeclarationAccess().getFinalFinalKeyword_1_0()); 
             }
@@ -52195,7 +52195,7 @@ abstract class InternalExBeeLangTestLanguageParser11 extends InternalExBeeLangTe
 
 
     // $ANTLR start "rule__ValDeclaration__FinalAssignment_1"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15443:1: rule__ValDeclaration__FinalAssignment_1 : ( ( KEYWORD_50 ) ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15443:1: rule__ValDeclaration__FinalAssignment_1 : ( ( Final ) ) ;
     public final void rule__ValDeclaration__FinalAssignment_1() throws RecognitionException {
         int rule__ValDeclaration__FinalAssignment_1_StartIndex = input.index();
 
@@ -52203,22 +52203,22 @@ abstract class InternalExBeeLangTestLanguageParser11 extends InternalExBeeLangTe
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 929) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15447:1: ( ( ( KEYWORD_50 ) ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15448:1: ( ( KEYWORD_50 ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15447:1: ( ( ( Final ) ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15448:1: ( ( Final ) )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15448:1: ( ( KEYWORD_50 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15449:1: ( KEYWORD_50 )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getValDeclarationAccess().getFinalFinalKeyword_1_0()); 
-            }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15450:1: ( KEYWORD_50 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15451:1: KEYWORD_50
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15448:1: ( ( Final ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15449:1: ( Final )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getValDeclarationAccess().getFinalFinalKeyword_1_0()); 
             }
-            match(input,KEYWORD_50,FollowSets012.FOLLOW_KEYWORD_50_in_rule__ValDeclaration__FinalAssignment_132280); if (state.failed) return ;
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15450:1: ( Final )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15451:1: Final
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getValDeclarationAccess().getFinalFinalKeyword_1_0()); 
+            }
+            match(input,Final,FollowSets012.FOLLOW_Final_in_rule__ValDeclaration__FinalAssignment_132280); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getValDeclarationAccess().getFinalFinalKeyword_1_0()); 
             }
@@ -52251,7 +52251,7 @@ abstract class InternalExBeeLangTestLanguageParser11 extends InternalExBeeLangTe
 
 
     // $ANTLR start "rule__ValDeclaration__ImmutableAssignment_2"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15466:1: rule__ValDeclaration__ImmutableAssignment_2 : ( ( KEYWORD_43 ) ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15466:1: rule__ValDeclaration__ImmutableAssignment_2 : ( ( Val ) ) ;
     public final void rule__ValDeclaration__ImmutableAssignment_2() throws RecognitionException {
         int rule__ValDeclaration__ImmutableAssignment_2_StartIndex = input.index();
 
@@ -52259,22 +52259,22 @@ abstract class InternalExBeeLangTestLanguageParser11 extends InternalExBeeLangTe
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 930) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15470:1: ( ( ( KEYWORD_43 ) ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15471:1: ( ( KEYWORD_43 ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15470:1: ( ( ( Val ) ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15471:1: ( ( Val ) )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15471:1: ( ( KEYWORD_43 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15472:1: ( KEYWORD_43 )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getValDeclarationAccess().getImmutableValKeyword_2_0()); 
-            }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15473:1: ( KEYWORD_43 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15474:1: KEYWORD_43
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15471:1: ( ( Val ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15472:1: ( Val )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getValDeclarationAccess().getImmutableValKeyword_2_0()); 
             }
-            match(input,KEYWORD_43,FollowSets012.FOLLOW_KEYWORD_43_in_rule__ValDeclaration__ImmutableAssignment_232324); if (state.failed) return ;
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15473:1: ( Val )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15474:1: Val
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getValDeclarationAccess().getImmutableValKeyword_2_0()); 
+            }
+            match(input,Val,FollowSets012.FOLLOW_Val_in_rule__ValDeclaration__ImmutableAssignment_232324); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getValDeclarationAccess().getImmutableValKeyword_2_0()); 
             }
@@ -52667,7 +52667,7 @@ abstract class InternalExBeeLangTestLanguageParser11 extends InternalExBeeLangTe
 
 
     // $ANTLR start "rule__ClosureTypeRef__VarArgsAssignment_1_0_2_1"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15609:1: rule__ClosureTypeRef__VarArgsAssignment_1_0_2_1 : ( ( KEYWORD_39 ) ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15609:1: rule__ClosureTypeRef__VarArgsAssignment_1_0_2_1 : ( ( FullStopFullStopFullStop ) ) ;
     public final void rule__ClosureTypeRef__VarArgsAssignment_1_0_2_1() throws RecognitionException {
         int rule__ClosureTypeRef__VarArgsAssignment_1_0_2_1_StartIndex = input.index();
 
@@ -52675,22 +52675,22 @@ abstract class InternalExBeeLangTestLanguageParser11 extends InternalExBeeLangTe
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 939) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15613:1: ( ( ( KEYWORD_39 ) ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15614:1: ( ( KEYWORD_39 ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15613:1: ( ( ( FullStopFullStopFullStop ) ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15614:1: ( ( FullStopFullStopFullStop ) )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15614:1: ( ( KEYWORD_39 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15615:1: ( KEYWORD_39 )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getClosureTypeRefAccess().getVarArgsFullStopFullStopFullStopKeyword_1_0_2_1_0()); 
-            }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15616:1: ( KEYWORD_39 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15617:1: KEYWORD_39
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15614:1: ( ( FullStopFullStopFullStop ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15615:1: ( FullStopFullStopFullStop )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getClosureTypeRefAccess().getVarArgsFullStopFullStopFullStopKeyword_1_0_2_1_0()); 
             }
-            match(input,KEYWORD_39,FollowSets012.FOLLOW_KEYWORD_39_in_rule__ClosureTypeRef__VarArgsAssignment_1_0_2_132616); if (state.failed) return ;
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15616:1: ( FullStopFullStopFullStop )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15617:1: FullStopFullStopFullStop
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getClosureTypeRefAccess().getVarArgsFullStopFullStopFullStopKeyword_1_0_2_1_0()); 
+            }
+            match(input,FullStopFullStopFullStop,FollowSets012.FOLLOW_FullStopFullStopFullStop_in_rule__ClosureTypeRef__VarArgsAssignment_1_0_2_132616); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getClosureTypeRefAccess().getVarArgsFullStopFullStopFullStopKeyword_1_0_2_1_0()); 
             }
@@ -52767,7 +52767,7 @@ abstract class InternalExBeeLangTestLanguageParser11 extends InternalExBeeLangTe
 
 
     // $ANTLR start "rule__ClosureTypeRef__VarArgsAssignment_1_1_0"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15647:1: rule__ClosureTypeRef__VarArgsAssignment_1_1_0 : ( ( KEYWORD_39 ) ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15647:1: rule__ClosureTypeRef__VarArgsAssignment_1_1_0 : ( ( FullStopFullStopFullStop ) ) ;
     public final void rule__ClosureTypeRef__VarArgsAssignment_1_1_0() throws RecognitionException {
         int rule__ClosureTypeRef__VarArgsAssignment_1_1_0_StartIndex = input.index();
 
@@ -52775,22 +52775,22 @@ abstract class InternalExBeeLangTestLanguageParser11 extends InternalExBeeLangTe
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 941) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15651:1: ( ( ( KEYWORD_39 ) ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15652:1: ( ( KEYWORD_39 ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15651:1: ( ( ( FullStopFullStopFullStop ) ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15652:1: ( ( FullStopFullStopFullStop ) )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15652:1: ( ( KEYWORD_39 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15653:1: ( KEYWORD_39 )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getClosureTypeRefAccess().getVarArgsFullStopFullStopFullStopKeyword_1_1_0_0()); 
-            }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15654:1: ( KEYWORD_39 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15655:1: KEYWORD_39
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15652:1: ( ( FullStopFullStopFullStop ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15653:1: ( FullStopFullStopFullStop )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getClosureTypeRefAccess().getVarArgsFullStopFullStopFullStopKeyword_1_1_0_0()); 
             }
-            match(input,KEYWORD_39,FollowSets012.FOLLOW_KEYWORD_39_in_rule__ClosureTypeRef__VarArgsAssignment_1_1_032691); if (state.failed) return ;
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15654:1: ( FullStopFullStopFullStop )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15655:1: FullStopFullStopFullStop
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getClosureTypeRefAccess().getVarArgsFullStopFullStopFullStopKeyword_1_1_0_0()); 
+            }
+            match(input,FullStopFullStopFullStop,FollowSets012.FOLLOW_FullStopFullStopFullStop_in_rule__ClosureTypeRef__VarArgsAssignment_1_1_032691); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getClosureTypeRefAccess().getVarArgsFullStopFullStopFullStopKeyword_1_1_0_0()); 
             }
@@ -53355,7 +53355,7 @@ abstract class InternalExBeeLangTestLanguageParser11 extends InternalExBeeLangTe
 
 
     // $ANTLR start "rule__SetExpression__FunctionNameAssignment_1_1"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15837:1: rule__SetExpression__FunctionNameAssignment_1_1 : ( ( KEYWORD_29 ) ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15837:1: rule__SetExpression__FunctionNameAssignment_1_1 : ( ( FullStopFullStop ) ) ;
     public final void rule__SetExpression__FunctionNameAssignment_1_1() throws RecognitionException {
         int rule__SetExpression__FunctionNameAssignment_1_1_StartIndex = input.index();
 
@@ -53363,22 +53363,22 @@ abstract class InternalExBeeLangTestLanguageParser11 extends InternalExBeeLangTe
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 953) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15841:1: ( ( ( KEYWORD_29 ) ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15842:1: ( ( KEYWORD_29 ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15841:1: ( ( ( FullStopFullStop ) ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15842:1: ( ( FullStopFullStop ) )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15842:1: ( ( KEYWORD_29 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15843:1: ( KEYWORD_29 )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getSetExpressionAccess().getFunctionNameFullStopFullStopKeyword_1_1_0()); 
-            }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15844:1: ( KEYWORD_29 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15845:1: KEYWORD_29
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15842:1: ( ( FullStopFullStop ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15843:1: ( FullStopFullStop )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSetExpressionAccess().getFunctionNameFullStopFullStopKeyword_1_1_0()); 
             }
-            match(input,KEYWORD_29,FollowSets013.FOLLOW_KEYWORD_29_in_rule__SetExpression__FunctionNameAssignment_1_133080); if (state.failed) return ;
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15844:1: ( FullStopFullStop )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:15845:1: FullStopFullStop
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getSetExpressionAccess().getFunctionNameFullStopFullStopKeyword_1_1_0()); 
+            }
+            match(input,FullStopFullStop,FollowSets013.FOLLOW_FullStopFullStop_in_rule__SetExpression__FunctionNameAssignment_1_133080); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getSetExpressionAccess().getFunctionNameFullStopFullStopKeyword_1_1_0()); 
             }
@@ -54791,7 +54791,7 @@ abstract class InternalExBeeLangTestLanguageParser11 extends InternalExBeeLangTe
 
 
     // $ANTLR start "rule__InitializationExpression__FunctionNameAssignment_2"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16299:1: rule__InitializationExpression__FunctionNameAssignment_2 : ( ( KEYWORD_11 ) ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16299:1: rule__InitializationExpression__FunctionNameAssignment_2 : ( ( Colon ) ) ;
     public final void rule__InitializationExpression__FunctionNameAssignment_2() throws RecognitionException {
         int rule__InitializationExpression__FunctionNameAssignment_2_StartIndex = input.index();
 
@@ -54799,22 +54799,22 @@ abstract class InternalExBeeLangTestLanguageParser11 extends InternalExBeeLangTe
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 983) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16303:1: ( ( ( KEYWORD_11 ) ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16304:1: ( ( KEYWORD_11 ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16303:1: ( ( ( Colon ) ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16304:1: ( ( Colon ) )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16304:1: ( ( KEYWORD_11 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16305:1: ( KEYWORD_11 )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getInitializationExpressionAccess().getFunctionNameColonKeyword_2_0()); 
-            }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16306:1: ( KEYWORD_11 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16307:1: KEYWORD_11
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16304:1: ( ( Colon ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16305:1: ( Colon )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getInitializationExpressionAccess().getFunctionNameColonKeyword_2_0()); 
             }
-            match(input,KEYWORD_11,FollowSets013.FOLLOW_KEYWORD_11_in_rule__InitializationExpression__FunctionNameAssignment_234031); if (state.failed) return ;
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16306:1: ( Colon )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16307:1: Colon
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getInitializationExpressionAccess().getFunctionNameColonKeyword_2_0()); 
+            }
+            match(input,Colon,FollowSets013.FOLLOW_Colon_in_rule__InitializationExpression__FunctionNameAssignment_234031); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getInitializationExpressionAccess().getFunctionNameColonKeyword_2_0()); 
             }
@@ -55083,7 +55083,7 @@ abstract class InternalExBeeLangTestLanguageParser11 extends InternalExBeeLangTe
 
 
     // $ANTLR start "rule__ClosureExpression__VarArgsAssignment_2_0_1_2_1"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16397:1: rule__ClosureExpression__VarArgsAssignment_2_0_1_2_1 : ( ( KEYWORD_39 ) ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16397:1: rule__ClosureExpression__VarArgsAssignment_2_0_1_2_1 : ( ( FullStopFullStopFullStop ) ) ;
     public final void rule__ClosureExpression__VarArgsAssignment_2_0_1_2_1() throws RecognitionException {
         int rule__ClosureExpression__VarArgsAssignment_2_0_1_2_1_StartIndex = input.index();
 
@@ -55091,22 +55091,22 @@ abstract class InternalExBeeLangTestLanguageParser11 extends InternalExBeeLangTe
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 989) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16401:1: ( ( ( KEYWORD_39 ) ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16402:1: ( ( KEYWORD_39 ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16401:1: ( ( ( FullStopFullStopFullStop ) ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16402:1: ( ( FullStopFullStopFullStop ) )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16402:1: ( ( KEYWORD_39 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16403:1: ( KEYWORD_39 )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getClosureExpressionAccess().getVarArgsFullStopFullStopFullStopKeyword_2_0_1_2_1_0()); 
-            }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16404:1: ( KEYWORD_39 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16405:1: KEYWORD_39
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16402:1: ( ( FullStopFullStopFullStop ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16403:1: ( FullStopFullStopFullStop )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getClosureExpressionAccess().getVarArgsFullStopFullStopFullStopKeyword_2_0_1_2_1_0()); 
             }
-            match(input,KEYWORD_39,FollowSets013.FOLLOW_KEYWORD_39_in_rule__ClosureExpression__VarArgsAssignment_2_0_1_2_134230); if (state.failed) return ;
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16404:1: ( FullStopFullStopFullStop )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16405:1: FullStopFullStopFullStop
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getClosureExpressionAccess().getVarArgsFullStopFullStopFullStopKeyword_2_0_1_2_1_0()); 
+            }
+            match(input,FullStopFullStopFullStop,FollowSets013.FOLLOW_FullStopFullStopFullStop_in_rule__ClosureExpression__VarArgsAssignment_2_0_1_2_134230); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getClosureExpressionAccess().getVarArgsFullStopFullStopFullStopKeyword_2_0_1_2_1_0()); 
             }
@@ -55187,7 +55187,7 @@ abstract class InternalExBeeLangTestLanguageParser11 extends InternalExBeeLangTe
 
 
     // $ANTLR start "rule__ClosureExpression__VarArgsAssignment_2_1_0"
-    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16435:1: rule__ClosureExpression__VarArgsAssignment_2_1_0 : ( ( KEYWORD_39 ) ) ;
+    // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16435:1: rule__ClosureExpression__VarArgsAssignment_2_1_0 : ( ( FullStopFullStopFullStop ) ) ;
     public final void rule__ClosureExpression__VarArgsAssignment_2_1_0() throws RecognitionException {
         int rule__ClosureExpression__VarArgsAssignment_2_1_0_StartIndex = input.index();
 
@@ -55195,22 +55195,22 @@ abstract class InternalExBeeLangTestLanguageParser11 extends InternalExBeeLangTe
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 991) ) { return ; }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16439:1: ( ( ( KEYWORD_39 ) ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16440:1: ( ( KEYWORD_39 ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16439:1: ( ( ( FullStopFullStopFullStop ) ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16440:1: ( ( FullStopFullStopFullStop ) )
             {
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16440:1: ( ( KEYWORD_39 ) )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16441:1: ( KEYWORD_39 )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getClosureExpressionAccess().getVarArgsFullStopFullStopFullStopKeyword_2_1_0_0()); 
-            }
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16442:1: ( KEYWORD_39 )
-            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16443:1: KEYWORD_39
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16440:1: ( ( FullStopFullStopFullStop ) )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16441:1: ( FullStopFullStopFullStop )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getClosureExpressionAccess().getVarArgsFullStopFullStopFullStopKeyword_2_1_0_0()); 
             }
-            match(input,KEYWORD_39,FollowSets013.FOLLOW_KEYWORD_39_in_rule__ClosureExpression__VarArgsAssignment_2_1_034305); if (state.failed) return ;
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16442:1: ( FullStopFullStopFullStop )
+            // ../org.eclipse.xtext.testlanguages.ui/src-gen/org/eclipse/xtext/testlanguages/backtracking/ui/contentassist/antlr/internal/InternalExBeeLangTestLanguageParser.g:16443:1: FullStopFullStopFullStop
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getClosureExpressionAccess().getVarArgsFullStopFullStopFullStopKeyword_2_1_0_0()); 
+            }
+            match(input,FullStopFullStopFullStop,FollowSets013.FOLLOW_FullStopFullStopFullStop_in_rule__ClosureExpression__VarArgsAssignment_2_1_034305); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getClosureExpressionAccess().getVarArgsFullStopFullStopFullStopKeyword_2_1_0_0()); 
             }
@@ -55446,7 +55446,7 @@ abstract class InternalExBeeLangTestLanguageParser11 extends InternalExBeeLangTe
             int alt120=2;
             int LA120_0 = input.LA(1);
 
-            if ( (LA120_0==KEYWORD_47||LA120_0==RULE_DOCUMENTATION) ) {
+            if ( (LA120_0==Unit||LA120_0==RULE_DOCUMENTATION) ) {
                 alt120=1;
             }
 
@@ -56082,7 +56082,7 @@ abstract class InternalExBeeLangTestLanguageParser12 extends InternalExBeeLangTe
             int alt121=2;
             int LA121_0 = input.LA(1);
 
-            if ( (LA121_0==KEYWORD_60) && (synpred126_InternalExBeeLangTestLanguageParser())) {
+            if ( (LA121_0==Provides) && (synpred126_InternalExBeeLangTestLanguageParser())) {
                 alt121=1;
             }
 
@@ -56188,7 +56188,7 @@ abstract class InternalExBeeLangTestLanguageParser12 extends InternalExBeeLangTe
             int alt122=2;
             int LA122_0 = input.LA(1);
 
-            if ( (LA122_0==KEYWORD_61) && (synpred128_InternalExBeeLangTestLanguageParser())) {
+            if ( (LA122_0==Requires) && (synpred128_InternalExBeeLangTestLanguageParser())) {
                 alt122=1;
             }
 
@@ -56294,7 +56294,7 @@ abstract class InternalExBeeLangTestLanguageParser12 extends InternalExBeeLangTe
             int alt123=2;
             int LA123_0 = input.LA(1);
 
-            if ( (LA123_0==KEYWORD_61) && (synpred130_InternalExBeeLangTestLanguageParser())) {
+            if ( (LA123_0==Requires) && (synpred130_InternalExBeeLangTestLanguageParser())) {
                 alt123=1;
             }
 

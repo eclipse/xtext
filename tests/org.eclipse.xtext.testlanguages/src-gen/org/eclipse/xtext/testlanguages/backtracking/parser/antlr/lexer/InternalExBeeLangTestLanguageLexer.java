@@ -13,80 +13,80 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalExBeeLangTestLanguageLexer extends Lexer {
     public static final int RULE_ID=71;
+    public static final int VerticalLineVerticalLine=47;
+    public static final int HyphenMinus=56;
+    public static final int RightParenthesis=52;
+    public static final int AmpersandAmpersand=34;
+    public static final int Output=16;
     public static final int RULE_ANY_OTHER=77;
-    public static final int KEYWORD_19=67;
-    public static final int KEYWORD_56=11;
-    public static final int KEYWORD_55=17;
-    public static final int KEYWORD_17=65;
-    public static final int KEYWORD_54=16;
-    public static final int KEYWORD_18=66;
-    public static final int KEYWORD_53=15;
-    public static final int KEYWORD_15=63;
-    public static final int KEYWORD_52=14;
-    public static final int KEYWORD_16=64;
-    public static final int KEYWORD_51=19;
-    public static final int KEYWORD_13=61;
-    public static final int KEYWORD_50=18;
-    public static final int KEYWORD_14=62;
-    public static final int KEYWORD_11=59;
-    public static final int KEYWORD_12=60;
+    public static final int ExclamationMark=49;
+    public static final int LeftParenthesis=51;
+    public static final int RightSquareBracket=65;
+    public static final int Final=18;
+    public static final int Context=12;
+    public static final int Solidus=58;
     public static final int EOF=-1;
-    public static final int KEYWORD_10=58;
-    public static final int KEYWORD_59=8;
-    public static final int KEYWORD_58=13;
-    public static final int KEYWORD_57=12;
+    public static final int GreaterThanSign=63;
+    public static final int EqualsSignEqualsSign=43;
+    public static final int FullStop=57;
+    public static final int Version=13;
+    public static final int PercentSign=50;
     public static final int RULE_HEX=70;
-    public static final int KEYWORD_6=54;
-    public static final int KEYWORD_7=55;
-    public static final int KEYWORD_8=56;
-    public static final int KEYWORD_9=57;
-    public static final int KEYWORD_65=5;
-    public static final int KEYWORD_28=39;
-    public static final int KEYWORD_64=4;
-    public static final int KEYWORD_29=40;
+    public static final int FullStopFullStopFullStop=26;
+    public static final int HyphenMinusHyphenMinus=38;
+    public static final int EqualsSignGreaterThanSign=44;
+    public static final int LessThanSign=61;
+    public static final int When=23;
+    public static final int Implements=6;
+    public static final int Source=17;
     public static final int RULE_INT=72;
-    public static final int KEYWORD_61=10;
-    public static final int KEYWORD_24=35;
-    public static final int KEYWORD_60=9;
-    public static final int KEYWORD_25=36;
-    public static final int KEYWORD_63=7;
-    public static final int KEYWORD_26=37;
-    public static final int KEYWORD_62=6;
-    public static final int KEYWORD_27=38;
-    public static final int KEYWORD_20=68;
-    public static final int KEYWORD_21=32;
-    public static final int KEYWORD_22=33;
-    public static final int KEYWORD_23=34;
-    public static final int KEYWORD_1=49;
-    public static final int KEYWORD_30=41;
-    public static final int KEYWORD_5=53;
-    public static final int KEYWORD_34=45;
-    public static final int KEYWORD_4=52;
-    public static final int KEYWORD_33=44;
-    public static final int KEYWORD_3=51;
-    public static final int KEYWORD_32=43;
-    public static final int KEYWORD_2=50;
-    public static final int KEYWORD_31=42;
-    public static final int KEYWORD_38=25;
+    public static final int EqualsSignEqualsSignEqualsSign=27;
+    public static final int TildeEqualsSign=48;
+    public static final int PlusSignPlusSign=36;
+    public static final int LeftSquareBracket=64;
+    public static final int FullStopFullStop=40;
+    public static final int Provides=9;
+    public static final int PercentSignEqualsSign=33;
+    public static final int ExclamationMarkEqualsSign=32;
+    public static final int Asterisk=53;
+    public static final int Requires=10;
+    public static final int RequiresMin=5;
+    public static final int As=46;
+    public static final int RequiresMax=4;
+    public static final int Cached=14;
+    public static final int Greedy=15;
+    public static final int This=21;
+    public static final int Unit=22;
+    public static final int Properties=7;
+    public static final int SolidusEqualsSign=41;
+    public static final int LessThanSignEqualsSign=42;
+    public static final int LeftCurlyBracket=66;
+    public static final int Colon=59;
+    public static final int Semicolon=60;
+    public static final int Builder=11;
     public static final int RULE_SL_COMMENT=75;
-    public static final int KEYWORD_37=48;
-    public static final int KEYWORD_36=47;
-    public static final int KEYWORD_35=46;
+    public static final int With=24;
     public static final int RULE_ML_COMMENT=74;
-    public static final int KEYWORD_39=26;
+    public static final int Input=19;
     public static final int RULE_STRING=73;
+    public static final int PlusSign=54;
     public static final int RULE_DOCUMENTATION=69;
-    public static final int KEYWORD_41=28;
-    public static final int KEYWORD_40=27;
-    public static final int KEYWORD_43=30;
-    public static final int KEYWORD_42=29;
-    public static final int KEYWORD_45=20;
-    public static final int KEYWORD_44=31;
+    public static final int Function=8;
+    public static final int VerticalLine=67;
+    public static final int New=29;
+    public static final int AsteriskEqualsSign=35;
+    public static final int HyphenMinusEqualsSign=39;
+    public static final int Name=20;
+    public static final int Env=28;
+    public static final int PlusSignEqualsSign=37;
+    public static final int GreaterThanSignEqualsSign=45;
+    public static final int ExclamationMarkEqualsSignEqualsSign=25;
     public static final int RULE_WS=76;
-    public static final int KEYWORD_47=22;
-    public static final int KEYWORD_46=21;
-    public static final int KEYWORD_49=24;
-    public static final int KEYWORD_48=23;
+    public static final int EqualsSign=62;
+    public static final int Comma=55;
+    public static final int Val=30;
+    public static final int Var=31;
+    public static final int RightCurlyBracket=68;
 
     // delegates
     // delegators
@@ -101,13 +101,13 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
     }
     public String getGrammarFileName() { return "../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g"; }
 
-    // $ANTLR start "KEYWORD_64"
-    public final void mKEYWORD_64() throws RecognitionException {
+    // $ANTLR start "RequiresMax"
+    public final void mRequiresMax() throws RecognitionException {
         try {
-            int _type = KEYWORD_64;
+            int _type = RequiresMax;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:19:12: ( 'requires-max' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:19:14: 'requires-max'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:19:13: ( 'requires-max' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:19:15: 'requires-max'
             {
             match("requires-max"); 
 
@@ -120,15 +120,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_64"
+    // $ANTLR end "RequiresMax"
 
-    // $ANTLR start "KEYWORD_65"
-    public final void mKEYWORD_65() throws RecognitionException {
+    // $ANTLR start "RequiresMin"
+    public final void mRequiresMin() throws RecognitionException {
         try {
-            int _type = KEYWORD_65;
+            int _type = RequiresMin;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:21:12: ( 'requires-min' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:21:14: 'requires-min'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:21:13: ( 'requires-min' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:21:15: 'requires-min'
             {
             match("requires-min"); 
 
@@ -141,12 +141,12 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_65"
+    // $ANTLR end "RequiresMin"
 
-    // $ANTLR start "KEYWORD_62"
-    public final void mKEYWORD_62() throws RecognitionException {
+    // $ANTLR start "Implements"
+    public final void mImplements() throws RecognitionException {
         try {
-            int _type = KEYWORD_62;
+            int _type = Implements;
             int _channel = DEFAULT_TOKEN_CHANNEL;
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:23:12: ( 'implements' )
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:23:14: 'implements'
@@ -162,12 +162,12 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_62"
+    // $ANTLR end "Implements"
 
-    // $ANTLR start "KEYWORD_63"
-    public final void mKEYWORD_63() throws RecognitionException {
+    // $ANTLR start "Properties"
+    public final void mProperties() throws RecognitionException {
         try {
-            int _type = KEYWORD_63;
+            int _type = Properties;
             int _channel = DEFAULT_TOKEN_CHANNEL;
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:25:12: ( 'properties' )
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:25:14: 'properties'
@@ -183,15 +183,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_63"
+    // $ANTLR end "Properties"
 
-    // $ANTLR start "KEYWORD_59"
-    public final void mKEYWORD_59() throws RecognitionException {
+    // $ANTLR start "Function"
+    public final void mFunction() throws RecognitionException {
         try {
-            int _type = KEYWORD_59;
+            int _type = Function;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:27:12: ( 'function' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:27:14: 'function'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:27:10: ( 'function' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:27:12: 'function'
             {
             match("function"); 
 
@@ -204,15 +204,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_59"
+    // $ANTLR end "Function"
 
-    // $ANTLR start "KEYWORD_60"
-    public final void mKEYWORD_60() throws RecognitionException {
+    // $ANTLR start "Provides"
+    public final void mProvides() throws RecognitionException {
         try {
-            int _type = KEYWORD_60;
+            int _type = Provides;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:29:12: ( 'provides' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:29:14: 'provides'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:29:10: ( 'provides' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:29:12: 'provides'
             {
             match("provides"); 
 
@@ -225,15 +225,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_60"
+    // $ANTLR end "Provides"
 
-    // $ANTLR start "KEYWORD_61"
-    public final void mKEYWORD_61() throws RecognitionException {
+    // $ANTLR start "Requires"
+    public final void mRequires() throws RecognitionException {
         try {
-            int _type = KEYWORD_61;
+            int _type = Requires;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:31:12: ( 'requires' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:31:14: 'requires'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:31:10: ( 'requires' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:31:12: 'requires'
             {
             match("requires"); 
 
@@ -246,15 +246,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_61"
+    // $ANTLR end "Requires"
 
-    // $ANTLR start "KEYWORD_56"
-    public final void mKEYWORD_56() throws RecognitionException {
+    // $ANTLR start "Builder"
+    public final void mBuilder() throws RecognitionException {
         try {
-            int _type = KEYWORD_56;
+            int _type = Builder;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:33:12: ( 'builder' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:33:14: 'builder'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:33:9: ( 'builder' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:33:11: 'builder'
             {
             match("builder"); 
 
@@ -267,15 +267,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_56"
+    // $ANTLR end "Builder"
 
-    // $ANTLR start "KEYWORD_57"
-    public final void mKEYWORD_57() throws RecognitionException {
+    // $ANTLR start "Context"
+    public final void mContext() throws RecognitionException {
         try {
-            int _type = KEYWORD_57;
+            int _type = Context;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:35:12: ( 'context' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:35:14: 'context'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:35:9: ( 'context' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:35:11: 'context'
             {
             match("context"); 
 
@@ -288,15 +288,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_57"
+    // $ANTLR end "Context"
 
-    // $ANTLR start "KEYWORD_58"
-    public final void mKEYWORD_58() throws RecognitionException {
+    // $ANTLR start "Version"
+    public final void mVersion() throws RecognitionException {
         try {
-            int _type = KEYWORD_58;
+            int _type = Version;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:37:12: ( 'version' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:37:14: 'version'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:37:9: ( 'version' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:37:11: 'version'
             {
             match("version"); 
 
@@ -309,15 +309,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_58"
+    // $ANTLR end "Version"
 
-    // $ANTLR start "KEYWORD_52"
-    public final void mKEYWORD_52() throws RecognitionException {
+    // $ANTLR start "Cached"
+    public final void mCached() throws RecognitionException {
         try {
-            int _type = KEYWORD_52;
+            int _type = Cached;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:39:12: ( 'cached' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:39:14: 'cached'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:39:8: ( 'cached' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:39:10: 'cached'
             {
             match("cached"); 
 
@@ -330,15 +330,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_52"
+    // $ANTLR end "Cached"
 
-    // $ANTLR start "KEYWORD_53"
-    public final void mKEYWORD_53() throws RecognitionException {
+    // $ANTLR start "Greedy"
+    public final void mGreedy() throws RecognitionException {
         try {
-            int _type = KEYWORD_53;
+            int _type = Greedy;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:41:12: ( 'greedy' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:41:14: 'greedy'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:41:8: ( 'greedy' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:41:10: 'greedy'
             {
             match("greedy"); 
 
@@ -351,15 +351,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_53"
+    // $ANTLR end "Greedy"
 
-    // $ANTLR start "KEYWORD_54"
-    public final void mKEYWORD_54() throws RecognitionException {
+    // $ANTLR start "Output"
+    public final void mOutput() throws RecognitionException {
         try {
-            int _type = KEYWORD_54;
+            int _type = Output;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:43:12: ( 'output' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:43:14: 'output'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:43:8: ( 'output' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:43:10: 'output'
             {
             match("output"); 
 
@@ -372,15 +372,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_54"
+    // $ANTLR end "Output"
 
-    // $ANTLR start "KEYWORD_55"
-    public final void mKEYWORD_55() throws RecognitionException {
+    // $ANTLR start "Source"
+    public final void mSource() throws RecognitionException {
         try {
-            int _type = KEYWORD_55;
+            int _type = Source;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:45:12: ( 'source' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:45:14: 'source'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:45:8: ( 'source' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:45:10: 'source'
             {
             match("source"); 
 
@@ -393,15 +393,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_55"
+    // $ANTLR end "Source"
 
-    // $ANTLR start "KEYWORD_50"
-    public final void mKEYWORD_50() throws RecognitionException {
+    // $ANTLR start "Final"
+    public final void mFinal() throws RecognitionException {
         try {
-            int _type = KEYWORD_50;
+            int _type = Final;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:47:12: ( 'final' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:47:14: 'final'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:47:7: ( 'final' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:47:9: 'final'
             {
             match("final"); 
 
@@ -414,15 +414,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_50"
+    // $ANTLR end "Final"
 
-    // $ANTLR start "KEYWORD_51"
-    public final void mKEYWORD_51() throws RecognitionException {
+    // $ANTLR start "Input"
+    public final void mInput() throws RecognitionException {
         try {
-            int _type = KEYWORD_51;
+            int _type = Input;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:49:12: ( 'input' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:49:14: 'input'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:49:7: ( 'input' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:49:9: 'input'
             {
             match("input"); 
 
@@ -435,15 +435,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_51"
+    // $ANTLR end "Input"
 
-    // $ANTLR start "KEYWORD_45"
-    public final void mKEYWORD_45() throws RecognitionException {
+    // $ANTLR start "Name"
+    public final void mName() throws RecognitionException {
         try {
-            int _type = KEYWORD_45;
+            int _type = Name;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:51:12: ( 'name' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:51:14: 'name'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:51:6: ( 'name' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:51:8: 'name'
             {
             match("name"); 
 
@@ -456,15 +456,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_45"
+    // $ANTLR end "Name"
 
-    // $ANTLR start "KEYWORD_46"
-    public final void mKEYWORD_46() throws RecognitionException {
+    // $ANTLR start "This"
+    public final void mThis() throws RecognitionException {
         try {
-            int _type = KEYWORD_46;
+            int _type = This;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:53:12: ( 'this' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:53:14: 'this'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:53:6: ( 'this' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:53:8: 'this'
             {
             match("this"); 
 
@@ -477,15 +477,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_46"
+    // $ANTLR end "This"
 
-    // $ANTLR start "KEYWORD_47"
-    public final void mKEYWORD_47() throws RecognitionException {
+    // $ANTLR start "Unit"
+    public final void mUnit() throws RecognitionException {
         try {
-            int _type = KEYWORD_47;
+            int _type = Unit;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:55:12: ( 'unit' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:55:14: 'unit'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:55:6: ( 'unit' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:55:8: 'unit'
             {
             match("unit"); 
 
@@ -498,15 +498,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_47"
+    // $ANTLR end "Unit"
 
-    // $ANTLR start "KEYWORD_48"
-    public final void mKEYWORD_48() throws RecognitionException {
+    // $ANTLR start "When"
+    public final void mWhen() throws RecognitionException {
         try {
-            int _type = KEYWORD_48;
+            int _type = When;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:57:12: ( 'when' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:57:14: 'when'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:57:6: ( 'when' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:57:8: 'when'
             {
             match("when"); 
 
@@ -519,15 +519,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_48"
+    // $ANTLR end "When"
 
-    // $ANTLR start "KEYWORD_49"
-    public final void mKEYWORD_49() throws RecognitionException {
+    // $ANTLR start "With"
+    public final void mWith() throws RecognitionException {
         try {
-            int _type = KEYWORD_49;
+            int _type = With;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:59:12: ( 'with' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:59:14: 'with'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:59:6: ( 'with' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:59:8: 'with'
             {
             match("with"); 
 
@@ -540,15 +540,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_49"
+    // $ANTLR end "With"
 
-    // $ANTLR start "KEYWORD_38"
-    public final void mKEYWORD_38() throws RecognitionException {
+    // $ANTLR start "ExclamationMarkEqualsSignEqualsSign"
+    public final void mExclamationMarkEqualsSignEqualsSign() throws RecognitionException {
         try {
-            int _type = KEYWORD_38;
+            int _type = ExclamationMarkEqualsSignEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:61:12: ( '!==' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:61:14: '!=='
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:61:37: ( '!==' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:61:39: '!=='
             {
             match("!=="); 
 
@@ -561,15 +561,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_38"
+    // $ANTLR end "ExclamationMarkEqualsSignEqualsSign"
 
-    // $ANTLR start "KEYWORD_39"
-    public final void mKEYWORD_39() throws RecognitionException {
+    // $ANTLR start "FullStopFullStopFullStop"
+    public final void mFullStopFullStopFullStop() throws RecognitionException {
         try {
-            int _type = KEYWORD_39;
+            int _type = FullStopFullStopFullStop;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:63:12: ( '...' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:63:14: '...'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:63:26: ( '...' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:63:28: '...'
             {
             match("..."); 
 
@@ -582,15 +582,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_39"
+    // $ANTLR end "FullStopFullStopFullStop"
 
-    // $ANTLR start "KEYWORD_40"
-    public final void mKEYWORD_40() throws RecognitionException {
+    // $ANTLR start "EqualsSignEqualsSignEqualsSign"
+    public final void mEqualsSignEqualsSignEqualsSign() throws RecognitionException {
         try {
-            int _type = KEYWORD_40;
+            int _type = EqualsSignEqualsSignEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:65:12: ( '===' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:65:14: '==='
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:65:32: ( '===' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:65:34: '==='
             {
             match("==="); 
 
@@ -603,15 +603,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_40"
+    // $ANTLR end "EqualsSignEqualsSignEqualsSign"
 
-    // $ANTLR start "KEYWORD_41"
-    public final void mKEYWORD_41() throws RecognitionException {
+    // $ANTLR start "Env"
+    public final void mEnv() throws RecognitionException {
         try {
-            int _type = KEYWORD_41;
+            int _type = Env;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:67:12: ( 'env' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:67:14: 'env'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:67:5: ( 'env' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:67:7: 'env'
             {
             match("env"); 
 
@@ -624,15 +624,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_41"
+    // $ANTLR end "Env"
 
-    // $ANTLR start "KEYWORD_42"
-    public final void mKEYWORD_42() throws RecognitionException {
+    // $ANTLR start "New"
+    public final void mNew() throws RecognitionException {
         try {
-            int _type = KEYWORD_42;
+            int _type = New;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:69:12: ( 'new' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:69:14: 'new'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:69:5: ( 'new' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:69:7: 'new'
             {
             match("new"); 
 
@@ -645,15 +645,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_42"
+    // $ANTLR end "New"
 
-    // $ANTLR start "KEYWORD_43"
-    public final void mKEYWORD_43() throws RecognitionException {
+    // $ANTLR start "Val"
+    public final void mVal() throws RecognitionException {
         try {
-            int _type = KEYWORD_43;
+            int _type = Val;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:71:12: ( 'val' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:71:14: 'val'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:71:5: ( 'val' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:71:7: 'val'
             {
             match("val"); 
 
@@ -666,15 +666,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_43"
+    // $ANTLR end "Val"
 
-    // $ANTLR start "KEYWORD_44"
-    public final void mKEYWORD_44() throws RecognitionException {
+    // $ANTLR start "Var"
+    public final void mVar() throws RecognitionException {
         try {
-            int _type = KEYWORD_44;
+            int _type = Var;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:73:12: ( 'var' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:73:14: 'var'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:73:5: ( 'var' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:73:7: 'var'
             {
             match("var"); 
 
@@ -687,15 +687,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_44"
+    // $ANTLR end "Var"
 
-    // $ANTLR start "KEYWORD_21"
-    public final void mKEYWORD_21() throws RecognitionException {
+    // $ANTLR start "ExclamationMarkEqualsSign"
+    public final void mExclamationMarkEqualsSign() throws RecognitionException {
         try {
-            int _type = KEYWORD_21;
+            int _type = ExclamationMarkEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:75:12: ( '!=' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:75:14: '!='
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:75:27: ( '!=' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:75:29: '!='
             {
             match("!="); 
 
@@ -708,15 +708,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_21"
+    // $ANTLR end "ExclamationMarkEqualsSign"
 
-    // $ANTLR start "KEYWORD_22"
-    public final void mKEYWORD_22() throws RecognitionException {
+    // $ANTLR start "PercentSignEqualsSign"
+    public final void mPercentSignEqualsSign() throws RecognitionException {
         try {
-            int _type = KEYWORD_22;
+            int _type = PercentSignEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:77:12: ( '%=' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:77:14: '%='
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:77:23: ( '%=' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:77:25: '%='
             {
             match("%="); 
 
@@ -729,15 +729,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_22"
+    // $ANTLR end "PercentSignEqualsSign"
 
-    // $ANTLR start "KEYWORD_23"
-    public final void mKEYWORD_23() throws RecognitionException {
+    // $ANTLR start "AmpersandAmpersand"
+    public final void mAmpersandAmpersand() throws RecognitionException {
         try {
-            int _type = KEYWORD_23;
+            int _type = AmpersandAmpersand;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:79:12: ( '&&' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:79:14: '&&'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:79:20: ( '&&' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:79:22: '&&'
             {
             match("&&"); 
 
@@ -750,15 +750,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_23"
+    // $ANTLR end "AmpersandAmpersand"
 
-    // $ANTLR start "KEYWORD_24"
-    public final void mKEYWORD_24() throws RecognitionException {
+    // $ANTLR start "AsteriskEqualsSign"
+    public final void mAsteriskEqualsSign() throws RecognitionException {
         try {
-            int _type = KEYWORD_24;
+            int _type = AsteriskEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:81:12: ( '*=' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:81:14: '*='
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:81:20: ( '*=' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:81:22: '*='
             {
             match("*="); 
 
@@ -771,15 +771,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_24"
+    // $ANTLR end "AsteriskEqualsSign"
 
-    // $ANTLR start "KEYWORD_25"
-    public final void mKEYWORD_25() throws RecognitionException {
+    // $ANTLR start "PlusSignPlusSign"
+    public final void mPlusSignPlusSign() throws RecognitionException {
         try {
-            int _type = KEYWORD_25;
+            int _type = PlusSignPlusSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:83:12: ( '++' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:83:14: '++'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:83:18: ( '++' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:83:20: '++'
             {
             match("++"); 
 
@@ -792,15 +792,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_25"
+    // $ANTLR end "PlusSignPlusSign"
 
-    // $ANTLR start "KEYWORD_26"
-    public final void mKEYWORD_26() throws RecognitionException {
+    // $ANTLR start "PlusSignEqualsSign"
+    public final void mPlusSignEqualsSign() throws RecognitionException {
         try {
-            int _type = KEYWORD_26;
+            int _type = PlusSignEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:85:12: ( '+=' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:85:14: '+='
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:85:20: ( '+=' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:85:22: '+='
             {
             match("+="); 
 
@@ -813,15 +813,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_26"
+    // $ANTLR end "PlusSignEqualsSign"
 
-    // $ANTLR start "KEYWORD_27"
-    public final void mKEYWORD_27() throws RecognitionException {
+    // $ANTLR start "HyphenMinusHyphenMinus"
+    public final void mHyphenMinusHyphenMinus() throws RecognitionException {
         try {
-            int _type = KEYWORD_27;
+            int _type = HyphenMinusHyphenMinus;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:87:12: ( '--' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:87:14: '--'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:87:24: ( '--' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:87:26: '--'
             {
             match("--"); 
 
@@ -834,15 +834,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_27"
+    // $ANTLR end "HyphenMinusHyphenMinus"
 
-    // $ANTLR start "KEYWORD_28"
-    public final void mKEYWORD_28() throws RecognitionException {
+    // $ANTLR start "HyphenMinusEqualsSign"
+    public final void mHyphenMinusEqualsSign() throws RecognitionException {
         try {
-            int _type = KEYWORD_28;
+            int _type = HyphenMinusEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:89:12: ( '-=' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:89:14: '-='
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:89:23: ( '-=' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:89:25: '-='
             {
             match("-="); 
 
@@ -855,15 +855,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_28"
+    // $ANTLR end "HyphenMinusEqualsSign"
 
-    // $ANTLR start "KEYWORD_29"
-    public final void mKEYWORD_29() throws RecognitionException {
+    // $ANTLR start "FullStopFullStop"
+    public final void mFullStopFullStop() throws RecognitionException {
         try {
-            int _type = KEYWORD_29;
+            int _type = FullStopFullStop;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:91:12: ( '..' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:91:14: '..'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:91:18: ( '..' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:91:20: '..'
             {
             match(".."); 
 
@@ -876,15 +876,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_29"
+    // $ANTLR end "FullStopFullStop"
 
-    // $ANTLR start "KEYWORD_30"
-    public final void mKEYWORD_30() throws RecognitionException {
+    // $ANTLR start "SolidusEqualsSign"
+    public final void mSolidusEqualsSign() throws RecognitionException {
         try {
-            int _type = KEYWORD_30;
+            int _type = SolidusEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:93:12: ( '/=' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:93:14: '/='
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:93:19: ( '/=' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:93:21: '/='
             {
             match("/="); 
 
@@ -897,15 +897,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_30"
+    // $ANTLR end "SolidusEqualsSign"
 
-    // $ANTLR start "KEYWORD_31"
-    public final void mKEYWORD_31() throws RecognitionException {
+    // $ANTLR start "LessThanSignEqualsSign"
+    public final void mLessThanSignEqualsSign() throws RecognitionException {
         try {
-            int _type = KEYWORD_31;
+            int _type = LessThanSignEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:95:12: ( '<=' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:95:14: '<='
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:95:24: ( '<=' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:95:26: '<='
             {
             match("<="); 
 
@@ -918,15 +918,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_31"
+    // $ANTLR end "LessThanSignEqualsSign"
 
-    // $ANTLR start "KEYWORD_32"
-    public final void mKEYWORD_32() throws RecognitionException {
+    // $ANTLR start "EqualsSignEqualsSign"
+    public final void mEqualsSignEqualsSign() throws RecognitionException {
         try {
-            int _type = KEYWORD_32;
+            int _type = EqualsSignEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:97:12: ( '==' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:97:14: '=='
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:97:22: ( '==' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:97:24: '=='
             {
             match("=="); 
 
@@ -939,15 +939,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_32"
+    // $ANTLR end "EqualsSignEqualsSign"
 
-    // $ANTLR start "KEYWORD_33"
-    public final void mKEYWORD_33() throws RecognitionException {
+    // $ANTLR start "EqualsSignGreaterThanSign"
+    public final void mEqualsSignGreaterThanSign() throws RecognitionException {
         try {
-            int _type = KEYWORD_33;
+            int _type = EqualsSignGreaterThanSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:99:12: ( '=>' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:99:14: '=>'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:99:27: ( '=>' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:99:29: '=>'
             {
             match("=>"); 
 
@@ -960,15 +960,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_33"
+    // $ANTLR end "EqualsSignGreaterThanSign"
 
-    // $ANTLR start "KEYWORD_34"
-    public final void mKEYWORD_34() throws RecognitionException {
+    // $ANTLR start "GreaterThanSignEqualsSign"
+    public final void mGreaterThanSignEqualsSign() throws RecognitionException {
         try {
-            int _type = KEYWORD_34;
+            int _type = GreaterThanSignEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:101:12: ( '>=' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:101:14: '>='
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:101:27: ( '>=' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:101:29: '>='
             {
             match(">="); 
 
@@ -981,15 +981,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_34"
+    // $ANTLR end "GreaterThanSignEqualsSign"
 
-    // $ANTLR start "KEYWORD_35"
-    public final void mKEYWORD_35() throws RecognitionException {
+    // $ANTLR start "As"
+    public final void mAs() throws RecognitionException {
         try {
-            int _type = KEYWORD_35;
+            int _type = As;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:103:12: ( 'as' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:103:14: 'as'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:103:4: ( 'as' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:103:6: 'as'
             {
             match("as"); 
 
@@ -1002,15 +1002,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_35"
+    // $ANTLR end "As"
 
-    // $ANTLR start "KEYWORD_36"
-    public final void mKEYWORD_36() throws RecognitionException {
+    // $ANTLR start "VerticalLineVerticalLine"
+    public final void mVerticalLineVerticalLine() throws RecognitionException {
         try {
-            int _type = KEYWORD_36;
+            int _type = VerticalLineVerticalLine;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:105:12: ( '||' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:105:14: '||'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:105:26: ( '||' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:105:28: '||'
             {
             match("||"); 
 
@@ -1023,15 +1023,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_36"
+    // $ANTLR end "VerticalLineVerticalLine"
 
-    // $ANTLR start "KEYWORD_37"
-    public final void mKEYWORD_37() throws RecognitionException {
+    // $ANTLR start "TildeEqualsSign"
+    public final void mTildeEqualsSign() throws RecognitionException {
         try {
-            int _type = KEYWORD_37;
+            int _type = TildeEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:107:12: ( '~=' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:107:14: '~='
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:107:17: ( '~=' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:107:19: '~='
             {
             match("~="); 
 
@@ -1044,15 +1044,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_37"
+    // $ANTLR end "TildeEqualsSign"
 
-    // $ANTLR start "KEYWORD_1"
-    public final void mKEYWORD_1() throws RecognitionException {
+    // $ANTLR start "ExclamationMark"
+    public final void mExclamationMark() throws RecognitionException {
         try {
-            int _type = KEYWORD_1;
+            int _type = ExclamationMark;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:109:11: ( '!' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:109:13: '!'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:109:17: ( '!' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:109:19: '!'
             {
             match('!'); 
 
@@ -1064,15 +1064,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_1"
+    // $ANTLR end "ExclamationMark"
 
-    // $ANTLR start "KEYWORD_2"
-    public final void mKEYWORD_2() throws RecognitionException {
+    // $ANTLR start "PercentSign"
+    public final void mPercentSign() throws RecognitionException {
         try {
-            int _type = KEYWORD_2;
+            int _type = PercentSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:111:11: ( '%' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:111:13: '%'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:111:13: ( '%' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:111:15: '%'
             {
             match('%'); 
 
@@ -1084,15 +1084,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_2"
+    // $ANTLR end "PercentSign"
 
-    // $ANTLR start "KEYWORD_3"
-    public final void mKEYWORD_3() throws RecognitionException {
+    // $ANTLR start "LeftParenthesis"
+    public final void mLeftParenthesis() throws RecognitionException {
         try {
-            int _type = KEYWORD_3;
+            int _type = LeftParenthesis;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:113:11: ( '(' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:113:13: '('
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:113:17: ( '(' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:113:19: '('
             {
             match('('); 
 
@@ -1104,15 +1104,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_3"
+    // $ANTLR end "LeftParenthesis"
 
-    // $ANTLR start "KEYWORD_4"
-    public final void mKEYWORD_4() throws RecognitionException {
+    // $ANTLR start "RightParenthesis"
+    public final void mRightParenthesis() throws RecognitionException {
         try {
-            int _type = KEYWORD_4;
+            int _type = RightParenthesis;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:115:11: ( ')' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:115:13: ')'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:115:18: ( ')' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:115:20: ')'
             {
             match(')'); 
 
@@ -1124,15 +1124,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_4"
+    // $ANTLR end "RightParenthesis"
 
-    // $ANTLR start "KEYWORD_5"
-    public final void mKEYWORD_5() throws RecognitionException {
+    // $ANTLR start "Asterisk"
+    public final void mAsterisk() throws RecognitionException {
         try {
-            int _type = KEYWORD_5;
+            int _type = Asterisk;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:117:11: ( '*' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:117:13: '*'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:117:10: ( '*' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:117:12: '*'
             {
             match('*'); 
 
@@ -1144,15 +1144,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_5"
+    // $ANTLR end "Asterisk"
 
-    // $ANTLR start "KEYWORD_6"
-    public final void mKEYWORD_6() throws RecognitionException {
+    // $ANTLR start "PlusSign"
+    public final void mPlusSign() throws RecognitionException {
         try {
-            int _type = KEYWORD_6;
+            int _type = PlusSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:119:11: ( '+' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:119:13: '+'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:119:10: ( '+' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:119:12: '+'
             {
             match('+'); 
 
@@ -1164,15 +1164,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_6"
+    // $ANTLR end "PlusSign"
 
-    // $ANTLR start "KEYWORD_7"
-    public final void mKEYWORD_7() throws RecognitionException {
+    // $ANTLR start "Comma"
+    public final void mComma() throws RecognitionException {
         try {
-            int _type = KEYWORD_7;
+            int _type = Comma;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:121:11: ( ',' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:121:13: ','
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:121:7: ( ',' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:121:9: ','
             {
             match(','); 
 
@@ -1184,15 +1184,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_7"
+    // $ANTLR end "Comma"
 
-    // $ANTLR start "KEYWORD_8"
-    public final void mKEYWORD_8() throws RecognitionException {
+    // $ANTLR start "HyphenMinus"
+    public final void mHyphenMinus() throws RecognitionException {
         try {
-            int _type = KEYWORD_8;
+            int _type = HyphenMinus;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:123:11: ( '-' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:123:13: '-'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:123:13: ( '-' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:123:15: '-'
             {
             match('-'); 
 
@@ -1204,15 +1204,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_8"
+    // $ANTLR end "HyphenMinus"
 
-    // $ANTLR start "KEYWORD_9"
-    public final void mKEYWORD_9() throws RecognitionException {
+    // $ANTLR start "FullStop"
+    public final void mFullStop() throws RecognitionException {
         try {
-            int _type = KEYWORD_9;
+            int _type = FullStop;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:125:11: ( '.' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:125:13: '.'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:125:10: ( '.' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:125:12: '.'
             {
             match('.'); 
 
@@ -1224,15 +1224,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_9"
+    // $ANTLR end "FullStop"
 
-    // $ANTLR start "KEYWORD_10"
-    public final void mKEYWORD_10() throws RecognitionException {
+    // $ANTLR start "Solidus"
+    public final void mSolidus() throws RecognitionException {
         try {
-            int _type = KEYWORD_10;
+            int _type = Solidus;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:127:12: ( '/' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:127:14: '/'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:127:9: ( '/' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:127:11: '/'
             {
             match('/'); 
 
@@ -1244,15 +1244,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_10"
+    // $ANTLR end "Solidus"
 
-    // $ANTLR start "KEYWORD_11"
-    public final void mKEYWORD_11() throws RecognitionException {
+    // $ANTLR start "Colon"
+    public final void mColon() throws RecognitionException {
         try {
-            int _type = KEYWORD_11;
+            int _type = Colon;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:129:12: ( ':' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:129:14: ':'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:129:7: ( ':' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:129:9: ':'
             {
             match(':'); 
 
@@ -1264,15 +1264,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_11"
+    // $ANTLR end "Colon"
 
-    // $ANTLR start "KEYWORD_12"
-    public final void mKEYWORD_12() throws RecognitionException {
+    // $ANTLR start "Semicolon"
+    public final void mSemicolon() throws RecognitionException {
         try {
-            int _type = KEYWORD_12;
+            int _type = Semicolon;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:131:12: ( ';' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:131:14: ';'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:131:11: ( ';' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:131:13: ';'
             {
             match(';'); 
 
@@ -1284,15 +1284,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_12"
+    // $ANTLR end "Semicolon"
 
-    // $ANTLR start "KEYWORD_13"
-    public final void mKEYWORD_13() throws RecognitionException {
+    // $ANTLR start "LessThanSign"
+    public final void mLessThanSign() throws RecognitionException {
         try {
-            int _type = KEYWORD_13;
+            int _type = LessThanSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:133:12: ( '<' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:133:14: '<'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:133:14: ( '<' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:133:16: '<'
             {
             match('<'); 
 
@@ -1304,12 +1304,12 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_13"
+    // $ANTLR end "LessThanSign"
 
-    // $ANTLR start "KEYWORD_14"
-    public final void mKEYWORD_14() throws RecognitionException {
+    // $ANTLR start "EqualsSign"
+    public final void mEqualsSign() throws RecognitionException {
         try {
-            int _type = KEYWORD_14;
+            int _type = EqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:135:12: ( '=' )
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:135:14: '='
@@ -1324,15 +1324,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_14"
+    // $ANTLR end "EqualsSign"
 
-    // $ANTLR start "KEYWORD_15"
-    public final void mKEYWORD_15() throws RecognitionException {
+    // $ANTLR start "GreaterThanSign"
+    public final void mGreaterThanSign() throws RecognitionException {
         try {
-            int _type = KEYWORD_15;
+            int _type = GreaterThanSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:137:12: ( '>' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:137:14: '>'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:137:17: ( '>' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:137:19: '>'
             {
             match('>'); 
 
@@ -1344,15 +1344,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_15"
+    // $ANTLR end "GreaterThanSign"
 
-    // $ANTLR start "KEYWORD_16"
-    public final void mKEYWORD_16() throws RecognitionException {
+    // $ANTLR start "LeftSquareBracket"
+    public final void mLeftSquareBracket() throws RecognitionException {
         try {
-            int _type = KEYWORD_16;
+            int _type = LeftSquareBracket;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:139:12: ( '[' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:139:14: '['
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:139:19: ( '[' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:139:21: '['
             {
             match('['); 
 
@@ -1364,15 +1364,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_16"
+    // $ANTLR end "LeftSquareBracket"
 
-    // $ANTLR start "KEYWORD_17"
-    public final void mKEYWORD_17() throws RecognitionException {
+    // $ANTLR start "RightSquareBracket"
+    public final void mRightSquareBracket() throws RecognitionException {
         try {
-            int _type = KEYWORD_17;
+            int _type = RightSquareBracket;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:141:12: ( ']' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:141:14: ']'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:141:20: ( ']' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:141:22: ']'
             {
             match(']'); 
 
@@ -1384,15 +1384,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_17"
+    // $ANTLR end "RightSquareBracket"
 
-    // $ANTLR start "KEYWORD_18"
-    public final void mKEYWORD_18() throws RecognitionException {
+    // $ANTLR start "LeftCurlyBracket"
+    public final void mLeftCurlyBracket() throws RecognitionException {
         try {
-            int _type = KEYWORD_18;
+            int _type = LeftCurlyBracket;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:143:12: ( '{' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:143:14: '{'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:143:18: ( '{' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:143:20: '{'
             {
             match('{'); 
 
@@ -1404,15 +1404,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_18"
+    // $ANTLR end "LeftCurlyBracket"
 
-    // $ANTLR start "KEYWORD_19"
-    public final void mKEYWORD_19() throws RecognitionException {
+    // $ANTLR start "VerticalLine"
+    public final void mVerticalLine() throws RecognitionException {
         try {
-            int _type = KEYWORD_19;
+            int _type = VerticalLine;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:145:12: ( '|' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:145:14: '|'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:145:14: ( '|' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:145:16: '|'
             {
             match('|'); 
 
@@ -1424,15 +1424,15 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_19"
+    // $ANTLR end "VerticalLine"
 
-    // $ANTLR start "KEYWORD_20"
-    public final void mKEYWORD_20() throws RecognitionException {
+    // $ANTLR start "RightCurlyBracket"
+    public final void mRightCurlyBracket() throws RecognitionException {
         try {
-            int _type = KEYWORD_20;
+            int _type = RightCurlyBracket;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:147:12: ( '}' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:147:14: '}'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:147:19: ( '}' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:147:21: '}'
             {
             match('}'); 
 
@@ -1444,7 +1444,7 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_20"
+    // $ANTLR end "RightCurlyBracket"
 
     // $ANTLR start "RULE_DOCUMENTATION"
     public final void mRULE_DOCUMENTATION() throws RecognitionException {
@@ -2072,523 +2072,523 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:8: ( KEYWORD_64 | KEYWORD_65 | KEYWORD_62 | KEYWORD_63 | KEYWORD_59 | KEYWORD_60 | KEYWORD_61 | KEYWORD_56 | KEYWORD_57 | KEYWORD_58 | KEYWORD_52 | KEYWORD_53 | KEYWORD_54 | KEYWORD_55 | KEYWORD_50 | KEYWORD_51 | KEYWORD_45 | KEYWORD_46 | KEYWORD_47 | KEYWORD_48 | KEYWORD_49 | KEYWORD_38 | KEYWORD_39 | KEYWORD_40 | KEYWORD_41 | KEYWORD_42 | KEYWORD_43 | KEYWORD_44 | KEYWORD_21 | KEYWORD_22 | KEYWORD_23 | KEYWORD_24 | KEYWORD_25 | KEYWORD_26 | KEYWORD_27 | KEYWORD_28 | KEYWORD_29 | KEYWORD_30 | KEYWORD_31 | KEYWORD_32 | KEYWORD_33 | KEYWORD_34 | KEYWORD_35 | KEYWORD_36 | KEYWORD_37 | KEYWORD_1 | KEYWORD_2 | KEYWORD_3 | KEYWORD_4 | KEYWORD_5 | KEYWORD_6 | KEYWORD_7 | KEYWORD_8 | KEYWORD_9 | KEYWORD_10 | KEYWORD_11 | KEYWORD_12 | KEYWORD_13 | KEYWORD_14 | KEYWORD_15 | KEYWORD_16 | KEYWORD_17 | KEYWORD_18 | KEYWORD_19 | KEYWORD_20 | RULE_DOCUMENTATION | RULE_HEX | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:8: ( RequiresMax | RequiresMin | Implements | Properties | Function | Provides | Requires | Builder | Context | Version | Cached | Greedy | Output | Source | Final | Input | Name | This | Unit | When | With | ExclamationMarkEqualsSignEqualsSign | FullStopFullStopFullStop | EqualsSignEqualsSignEqualsSign | Env | New | Val | Var | ExclamationMarkEqualsSign | PercentSignEqualsSign | AmpersandAmpersand | AsteriskEqualsSign | PlusSignPlusSign | PlusSignEqualsSign | HyphenMinusHyphenMinus | HyphenMinusEqualsSign | FullStopFullStop | SolidusEqualsSign | LessThanSignEqualsSign | EqualsSignEqualsSign | EqualsSignGreaterThanSign | GreaterThanSignEqualsSign | As | VerticalLineVerticalLine | TildeEqualsSign | ExclamationMark | PercentSign | LeftParenthesis | RightParenthesis | Asterisk | PlusSign | Comma | HyphenMinus | FullStop | Solidus | Colon | Semicolon | LessThanSign | EqualsSign | GreaterThanSign | LeftSquareBracket | RightSquareBracket | LeftCurlyBracket | VerticalLine | RightCurlyBracket | RULE_DOCUMENTATION | RULE_HEX | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt14=74;
         alt14 = dfa14.predict(input);
         switch (alt14) {
             case 1 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:10: KEYWORD_64
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:10: RequiresMax
                 {
-                mKEYWORD_64(); 
+                mRequiresMax(); 
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:21: KEYWORD_65
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:22: RequiresMin
                 {
-                mKEYWORD_65(); 
+                mRequiresMin(); 
 
                 }
                 break;
             case 3 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:32: KEYWORD_62
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:34: Implements
                 {
-                mKEYWORD_62(); 
+                mImplements(); 
 
                 }
                 break;
             case 4 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:43: KEYWORD_63
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:45: Properties
                 {
-                mKEYWORD_63(); 
+                mProperties(); 
 
                 }
                 break;
             case 5 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:54: KEYWORD_59
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:56: Function
                 {
-                mKEYWORD_59(); 
+                mFunction(); 
 
                 }
                 break;
             case 6 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:65: KEYWORD_60
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:65: Provides
                 {
-                mKEYWORD_60(); 
+                mProvides(); 
 
                 }
                 break;
             case 7 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:76: KEYWORD_61
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:74: Requires
                 {
-                mKEYWORD_61(); 
+                mRequires(); 
 
                 }
                 break;
             case 8 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:87: KEYWORD_56
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:83: Builder
                 {
-                mKEYWORD_56(); 
+                mBuilder(); 
 
                 }
                 break;
             case 9 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:98: KEYWORD_57
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:91: Context
                 {
-                mKEYWORD_57(); 
+                mContext(); 
 
                 }
                 break;
             case 10 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:109: KEYWORD_58
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:99: Version
                 {
-                mKEYWORD_58(); 
+                mVersion(); 
 
                 }
                 break;
             case 11 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:120: KEYWORD_52
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:107: Cached
                 {
-                mKEYWORD_52(); 
+                mCached(); 
 
                 }
                 break;
             case 12 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:131: KEYWORD_53
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:114: Greedy
                 {
-                mKEYWORD_53(); 
+                mGreedy(); 
 
                 }
                 break;
             case 13 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:142: KEYWORD_54
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:121: Output
                 {
-                mKEYWORD_54(); 
+                mOutput(); 
 
                 }
                 break;
             case 14 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:153: KEYWORD_55
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:128: Source
                 {
-                mKEYWORD_55(); 
+                mSource(); 
 
                 }
                 break;
             case 15 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:164: KEYWORD_50
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:135: Final
                 {
-                mKEYWORD_50(); 
+                mFinal(); 
 
                 }
                 break;
             case 16 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:175: KEYWORD_51
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:141: Input
                 {
-                mKEYWORD_51(); 
+                mInput(); 
 
                 }
                 break;
             case 17 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:186: KEYWORD_45
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:147: Name
                 {
-                mKEYWORD_45(); 
+                mName(); 
 
                 }
                 break;
             case 18 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:197: KEYWORD_46
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:152: This
                 {
-                mKEYWORD_46(); 
+                mThis(); 
 
                 }
                 break;
             case 19 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:208: KEYWORD_47
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:157: Unit
                 {
-                mKEYWORD_47(); 
+                mUnit(); 
 
                 }
                 break;
             case 20 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:219: KEYWORD_48
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:162: When
                 {
-                mKEYWORD_48(); 
+                mWhen(); 
 
                 }
                 break;
             case 21 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:230: KEYWORD_49
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:167: With
                 {
-                mKEYWORD_49(); 
+                mWith(); 
 
                 }
                 break;
             case 22 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:241: KEYWORD_38
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:172: ExclamationMarkEqualsSignEqualsSign
                 {
-                mKEYWORD_38(); 
+                mExclamationMarkEqualsSignEqualsSign(); 
 
                 }
                 break;
             case 23 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:252: KEYWORD_39
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:208: FullStopFullStopFullStop
                 {
-                mKEYWORD_39(); 
+                mFullStopFullStopFullStop(); 
 
                 }
                 break;
             case 24 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:263: KEYWORD_40
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:233: EqualsSignEqualsSignEqualsSign
                 {
-                mKEYWORD_40(); 
+                mEqualsSignEqualsSignEqualsSign(); 
 
                 }
                 break;
             case 25 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:274: KEYWORD_41
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:264: Env
                 {
-                mKEYWORD_41(); 
+                mEnv(); 
 
                 }
                 break;
             case 26 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:285: KEYWORD_42
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:268: New
                 {
-                mKEYWORD_42(); 
+                mNew(); 
 
                 }
                 break;
             case 27 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:296: KEYWORD_43
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:272: Val
                 {
-                mKEYWORD_43(); 
+                mVal(); 
 
                 }
                 break;
             case 28 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:307: KEYWORD_44
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:276: Var
                 {
-                mKEYWORD_44(); 
+                mVar(); 
 
                 }
                 break;
             case 29 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:318: KEYWORD_21
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:280: ExclamationMarkEqualsSign
                 {
-                mKEYWORD_21(); 
+                mExclamationMarkEqualsSign(); 
 
                 }
                 break;
             case 30 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:329: KEYWORD_22
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:306: PercentSignEqualsSign
                 {
-                mKEYWORD_22(); 
+                mPercentSignEqualsSign(); 
 
                 }
                 break;
             case 31 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:340: KEYWORD_23
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:328: AmpersandAmpersand
                 {
-                mKEYWORD_23(); 
+                mAmpersandAmpersand(); 
 
                 }
                 break;
             case 32 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:351: KEYWORD_24
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:347: AsteriskEqualsSign
                 {
-                mKEYWORD_24(); 
+                mAsteriskEqualsSign(); 
 
                 }
                 break;
             case 33 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:362: KEYWORD_25
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:366: PlusSignPlusSign
                 {
-                mKEYWORD_25(); 
+                mPlusSignPlusSign(); 
 
                 }
                 break;
             case 34 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:373: KEYWORD_26
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:383: PlusSignEqualsSign
                 {
-                mKEYWORD_26(); 
+                mPlusSignEqualsSign(); 
 
                 }
                 break;
             case 35 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:384: KEYWORD_27
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:402: HyphenMinusHyphenMinus
                 {
-                mKEYWORD_27(); 
+                mHyphenMinusHyphenMinus(); 
 
                 }
                 break;
             case 36 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:395: KEYWORD_28
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:425: HyphenMinusEqualsSign
                 {
-                mKEYWORD_28(); 
+                mHyphenMinusEqualsSign(); 
 
                 }
                 break;
             case 37 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:406: KEYWORD_29
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:447: FullStopFullStop
                 {
-                mKEYWORD_29(); 
+                mFullStopFullStop(); 
 
                 }
                 break;
             case 38 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:417: KEYWORD_30
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:464: SolidusEqualsSign
                 {
-                mKEYWORD_30(); 
+                mSolidusEqualsSign(); 
 
                 }
                 break;
             case 39 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:428: KEYWORD_31
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:482: LessThanSignEqualsSign
                 {
-                mKEYWORD_31(); 
+                mLessThanSignEqualsSign(); 
 
                 }
                 break;
             case 40 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:439: KEYWORD_32
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:505: EqualsSignEqualsSign
                 {
-                mKEYWORD_32(); 
+                mEqualsSignEqualsSign(); 
 
                 }
                 break;
             case 41 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:450: KEYWORD_33
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:526: EqualsSignGreaterThanSign
                 {
-                mKEYWORD_33(); 
+                mEqualsSignGreaterThanSign(); 
 
                 }
                 break;
             case 42 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:461: KEYWORD_34
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:552: GreaterThanSignEqualsSign
                 {
-                mKEYWORD_34(); 
+                mGreaterThanSignEqualsSign(); 
 
                 }
                 break;
             case 43 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:472: KEYWORD_35
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:578: As
                 {
-                mKEYWORD_35(); 
+                mAs(); 
 
                 }
                 break;
             case 44 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:483: KEYWORD_36
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:581: VerticalLineVerticalLine
                 {
-                mKEYWORD_36(); 
+                mVerticalLineVerticalLine(); 
 
                 }
                 break;
             case 45 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:494: KEYWORD_37
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:606: TildeEqualsSign
                 {
-                mKEYWORD_37(); 
+                mTildeEqualsSign(); 
 
                 }
                 break;
             case 46 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:505: KEYWORD_1
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:622: ExclamationMark
                 {
-                mKEYWORD_1(); 
+                mExclamationMark(); 
 
                 }
                 break;
             case 47 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:515: KEYWORD_2
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:638: PercentSign
                 {
-                mKEYWORD_2(); 
+                mPercentSign(); 
 
                 }
                 break;
             case 48 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:525: KEYWORD_3
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:650: LeftParenthesis
                 {
-                mKEYWORD_3(); 
+                mLeftParenthesis(); 
 
                 }
                 break;
             case 49 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:535: KEYWORD_4
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:666: RightParenthesis
                 {
-                mKEYWORD_4(); 
+                mRightParenthesis(); 
 
                 }
                 break;
             case 50 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:545: KEYWORD_5
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:683: Asterisk
                 {
-                mKEYWORD_5(); 
+                mAsterisk(); 
 
                 }
                 break;
             case 51 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:555: KEYWORD_6
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:692: PlusSign
                 {
-                mKEYWORD_6(); 
+                mPlusSign(); 
 
                 }
                 break;
             case 52 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:565: KEYWORD_7
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:701: Comma
                 {
-                mKEYWORD_7(); 
+                mComma(); 
 
                 }
                 break;
             case 53 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:575: KEYWORD_8
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:707: HyphenMinus
                 {
-                mKEYWORD_8(); 
+                mHyphenMinus(); 
 
                 }
                 break;
             case 54 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:585: KEYWORD_9
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:719: FullStop
                 {
-                mKEYWORD_9(); 
+                mFullStop(); 
 
                 }
                 break;
             case 55 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:595: KEYWORD_10
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:728: Solidus
                 {
-                mKEYWORD_10(); 
+                mSolidus(); 
 
                 }
                 break;
             case 56 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:606: KEYWORD_11
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:736: Colon
                 {
-                mKEYWORD_11(); 
+                mColon(); 
 
                 }
                 break;
             case 57 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:617: KEYWORD_12
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:742: Semicolon
                 {
-                mKEYWORD_12(); 
+                mSemicolon(); 
 
                 }
                 break;
             case 58 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:628: KEYWORD_13
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:752: LessThanSign
                 {
-                mKEYWORD_13(); 
+                mLessThanSign(); 
 
                 }
                 break;
             case 59 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:639: KEYWORD_14
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:765: EqualsSign
                 {
-                mKEYWORD_14(); 
+                mEqualsSign(); 
 
                 }
                 break;
             case 60 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:650: KEYWORD_15
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:776: GreaterThanSign
                 {
-                mKEYWORD_15(); 
+                mGreaterThanSign(); 
 
                 }
                 break;
             case 61 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:661: KEYWORD_16
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:792: LeftSquareBracket
                 {
-                mKEYWORD_16(); 
+                mLeftSquareBracket(); 
 
                 }
                 break;
             case 62 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:672: KEYWORD_17
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:810: RightSquareBracket
                 {
-                mKEYWORD_17(); 
+                mRightSquareBracket(); 
 
                 }
                 break;
             case 63 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:683: KEYWORD_18
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:829: LeftCurlyBracket
                 {
-                mKEYWORD_18(); 
+                mLeftCurlyBracket(); 
 
                 }
                 break;
             case 64 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:694: KEYWORD_19
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:846: VerticalLine
                 {
-                mKEYWORD_19(); 
+                mVerticalLine(); 
 
                 }
                 break;
             case 65 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:705: KEYWORD_20
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:859: RightCurlyBracket
                 {
-                mKEYWORD_20(); 
+                mRightCurlyBracket(); 
 
                 }
                 break;
             case 66 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:716: RULE_DOCUMENTATION
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:877: RULE_DOCUMENTATION
                 {
                 mRULE_DOCUMENTATION(); 
 
                 }
                 break;
             case 67 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:735: RULE_HEX
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:896: RULE_HEX
                 {
                 mRULE_HEX(); 
 
                 }
                 break;
             case 68 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:744: RULE_ID
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:905: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 69 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:752: RULE_INT
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:913: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 70 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:761: RULE_STRING
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:922: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 71 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:773: RULE_ML_COMMENT
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:934: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 72 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:789: RULE_SL_COMMENT
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:950: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 73 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:805: RULE_WS
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:966: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 74 :
-                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:813: RULE_ANY_OTHER
+                // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/lexer/InternalExBeeLangTestLanguageLexer.g:1:974: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
@@ -2936,7 +2936,7 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
             this.transition = DFA14_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( KEYWORD_64 | KEYWORD_65 | KEYWORD_62 | KEYWORD_63 | KEYWORD_59 | KEYWORD_60 | KEYWORD_61 | KEYWORD_56 | KEYWORD_57 | KEYWORD_58 | KEYWORD_52 | KEYWORD_53 | KEYWORD_54 | KEYWORD_55 | KEYWORD_50 | KEYWORD_51 | KEYWORD_45 | KEYWORD_46 | KEYWORD_47 | KEYWORD_48 | KEYWORD_49 | KEYWORD_38 | KEYWORD_39 | KEYWORD_40 | KEYWORD_41 | KEYWORD_42 | KEYWORD_43 | KEYWORD_44 | KEYWORD_21 | KEYWORD_22 | KEYWORD_23 | KEYWORD_24 | KEYWORD_25 | KEYWORD_26 | KEYWORD_27 | KEYWORD_28 | KEYWORD_29 | KEYWORD_30 | KEYWORD_31 | KEYWORD_32 | KEYWORD_33 | KEYWORD_34 | KEYWORD_35 | KEYWORD_36 | KEYWORD_37 | KEYWORD_1 | KEYWORD_2 | KEYWORD_3 | KEYWORD_4 | KEYWORD_5 | KEYWORD_6 | KEYWORD_7 | KEYWORD_8 | KEYWORD_9 | KEYWORD_10 | KEYWORD_11 | KEYWORD_12 | KEYWORD_13 | KEYWORD_14 | KEYWORD_15 | KEYWORD_16 | KEYWORD_17 | KEYWORD_18 | KEYWORD_19 | KEYWORD_20 | RULE_DOCUMENTATION | RULE_HEX | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
+            return "1:1: Tokens : ( RequiresMax | RequiresMin | Implements | Properties | Function | Provides | Requires | Builder | Context | Version | Cached | Greedy | Output | Source | Final | Input | Name | This | Unit | When | With | ExclamationMarkEqualsSignEqualsSign | FullStopFullStopFullStop | EqualsSignEqualsSignEqualsSign | Env | New | Val | Var | ExclamationMarkEqualsSign | PercentSignEqualsSign | AmpersandAmpersand | AsteriskEqualsSign | PlusSignPlusSign | PlusSignEqualsSign | HyphenMinusHyphenMinus | HyphenMinusEqualsSign | FullStopFullStop | SolidusEqualsSign | LessThanSignEqualsSign | EqualsSignEqualsSign | EqualsSignGreaterThanSign | GreaterThanSignEqualsSign | As | VerticalLineVerticalLine | TildeEqualsSign | ExclamationMark | PercentSign | LeftParenthesis | RightParenthesis | Asterisk | PlusSign | Comma | HyphenMinus | FullStop | Solidus | Colon | Semicolon | LessThanSign | EqualsSign | GreaterThanSign | LeftSquareBracket | RightSquareBracket | LeftCurlyBracket | VerticalLine | RightCurlyBracket | RULE_DOCUMENTATION | RULE_HEX | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;

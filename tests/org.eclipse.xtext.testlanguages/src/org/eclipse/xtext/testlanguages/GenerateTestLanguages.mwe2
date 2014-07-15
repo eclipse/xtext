@@ -5,6 +5,7 @@ import org.eclipse.xtext.generator.*
 
 var projectName = "org.eclipse.xtext.testlanguages"
 var runtimeProject = "../${projectName}"
+var lineDelimiter = '\n'
 
 Workflow {
     bean = StandaloneSetup {
@@ -19,7 +20,7 @@ Workflow {
 		directory = "${runtimeProject}.ui/src-gen"
 	}
 
-	component = Generator {
+	component = Generator auto-inject {
 		pathRtProject = runtimeProject
 		pathUiProject = "${runtimeProject}.ui"
 		projectNameRt = projectName

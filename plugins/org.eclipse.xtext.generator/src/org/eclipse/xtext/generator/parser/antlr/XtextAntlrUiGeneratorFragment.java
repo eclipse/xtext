@@ -7,8 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.parser.antlr;
 
-import static org.eclipse.xtext.util.Files.*;
-
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -63,14 +62,23 @@ public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragmen
 
 	/**
 	 * @since 2.4
+	 * @deprecated use {@link #removeBacktrackingGuardsIfEnabled(String, Charset)} instead
 	 */
+	@Deprecated
 	protected void removeBacktrackingGuardsIfEnabled(String absoluteGrammarFileName) {
+		removeBacktrackingGuardsIfEnabled(absoluteGrammarFileName, Charset.defaultCharset());
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	protected void removeBacktrackingGuardsIfEnabled(String absoluteGrammarFileName, Charset encoding) {
 		if (removeBacktrackingGuards) {
 			String javaFile = absoluteGrammarFileName.replaceAll("\\.g$", getParserFileNameSuffix());
-			String content = readFileIntoString(javaFile);
+			String content = readFileIntoString(javaFile, encoding);
 			BacktrackingGuardRemover remover = new BacktrackingGuardRemover(content, lookaheadThreshold);
 			String newContent = remover.transform();
-			writeStringIntoFile(javaFile, newContent);
+			writeStringIntoFile(javaFile, newContent, encoding);
 		}
 	}
 
@@ -83,10 +91,11 @@ public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragmen
 		addAntlrParam("-fo");
 		addAntlrParam(absoluteGrammarFileName.substring(0, absoluteGrammarFileName.lastIndexOf('/')));
 		getAntlrTool().runWithEncodingAndParams(absoluteGrammarFileName, encoding, getAntlrParams());
-		simplifyUnorderedGroupPredicatesIfRequired(grammar, absoluteGrammarFileName);
-		splitParserAndLexerIfEnabled(absoluteGrammarFileName);
-		suppressWarnings(absoluteGrammarFileName);
-		removeBacktrackingGuardsIfEnabled(absoluteGrammarFileName);
+		Charset charset = Charset.forName(getEncoding(ctx, Generator.SRC_GEN_UI));
+		simplifyUnorderedGroupPredicatesIfRequired(grammar, absoluteGrammarFileName, charset);
+		splitParserAndLexerIfEnabled(absoluteGrammarFileName, charset);
+		suppressWarnings(absoluteGrammarFileName, charset);
+		removeBacktrackingGuardsIfEnabled(absoluteGrammarFileName, charset);
 	}
 
 	@Override

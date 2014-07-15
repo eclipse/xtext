@@ -16,6 +16,7 @@ var fileExtensions = "calc"
 var projectName = "org.eclipse.xtext.example.arithmetics"
 var runtimeProject = "../${projectName}"
 var generateXtendStub = true
+var lineDelimiter = '\n'
 
 Workflow {
     bean = StandaloneSetup {
@@ -34,7 +35,7 @@ Workflow {
     	directory = "${runtimeProject}.ui/src-gen"
     }
     
-    component = Generator {
+    component = Generator auto-inject {
     	pathRtProject = runtimeProject
     	pathUiProject = "${runtimeProject}.ui"
     	pathTestProject = "${runtimeProject}.tests"

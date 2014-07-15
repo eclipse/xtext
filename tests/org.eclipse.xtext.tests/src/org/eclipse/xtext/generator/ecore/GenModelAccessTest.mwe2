@@ -14,6 +14,7 @@ import org.eclipse.xtext.generator.Generator
 
 var projectName = "org.eclipse.xtext.tests"
 var runtimeProject = "../${projectName}"
+var lineDelimiter = '\n'
 
 Workflow {
 	bean = StandaloneSetup {
@@ -26,6 +27,7 @@ Workflow {
 	component = org.eclipse.emf.mwe2.ecore.EcoreGenerator {
 		genModel = "platform:/resource/org.eclipse.xtext.tests/src/org/eclipse/xtext/generator/ecore/GenModelAccessTest.genmodel"
 		srcPath = "foo"
+		lineDelimiter = lineDelimiter
 	}
 	component = org.eclipse.xtext.generator.ecore.GenModelAccessTestGenerator {}
 }
