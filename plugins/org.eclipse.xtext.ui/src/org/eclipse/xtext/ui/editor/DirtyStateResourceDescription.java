@@ -49,7 +49,7 @@ public class DirtyStateResourceDescription extends AbstractResourceDescription {
 
 		private static Logger LOG = Logger.getLogger(Manager.class);
 
-		private static final String TEXT_HASH = Manager.class.getCanonicalName() + "_textHash";
+		public static final String TEXT_HASH = Manager.class.getCanonicalName() + "_textHash";
 
 		private IResourceDescription.Manager delegate;
 
