@@ -16,9 +16,9 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 
 
 
-KEYWORD_1 : '\n';
+LineFeedLf : '\n';
 
-KEYWORD_2 : '\r';
+CarriageReturnCr : '\r';
 
 
 

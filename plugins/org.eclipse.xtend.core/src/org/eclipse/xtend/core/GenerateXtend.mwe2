@@ -11,6 +11,7 @@ var file.extensions = "xtend"
 var projectName = "org.eclipse.xtend.core"
 var projectPath = "../${projectName}"
 
+var lineDelimiter = "\n"
 var uiProjectName = "org.eclipse.xtend.ide"
 var uiProjectPath = "../${uiProjectName}"
 var backtrack = false
@@ -41,6 +42,7 @@ Workflow {
 		srcPath ="platform:/resource/${projectName}/src"
 		srcPath ="platform:/resource/org.eclipse.xtext.common.types/src"
 		srcPath ="platform:/resource/org.eclipse.xtext.xbase/src"
+		lineDelimiter = lineDelimiter 
 	}
 	
 	component = org.eclipse.emf.mwe2.ecore.EcoreGenerator {
@@ -48,6 +50,7 @@ Workflow {
 		srcPath ="platform:/resource/${projectName}/src"
 		srcPath ="platform:/resource/org.eclipse.xtext.common.types/src"
 		srcPath ="platform:/resource/org.eclipse.xtext.xbase/src"
+		lineDelimiter = lineDelimiter
 	}
 
 	component = DirectoryCleaner {
@@ -60,7 +63,7 @@ Workflow {
 	
 	component = parser.JFlexLoader : jFlexMain {}
 
-	component = Generator {
+	component = Generator auto-inject {
 		pathRtProject = projectPath
 		pathUiProject = uiProjectPath
 		projectNameRt = projectName
@@ -81,10 +84,10 @@ Workflow {
 			fragment = resourceFactory.ResourceFactoryFragment {
 				fileExtensions = file.extensions
 			}
-			fragment = parser.ParserGenerator {
+			fragment = parser.ParserGenerator auto-inject {
 				options = auto-inject {}
 			}
-			fragment = DebugAntlrGeneratorFragment {
+			fragment = DebugAntlrGeneratorFragment auto-inject {
 				options = auto-inject {}
 			}
 			fragment = validation.JavaValidatorFragment {}
@@ -101,7 +104,7 @@ Workflow {
 				fileExtensions = file.extensions
 			}
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
-			fragment = parser.ContentAssistParserGenerator {
+			fragment = parser.ContentAssistParserGenerator auto-inject {
 				removeBacktrackingGuards = true
 				lookaheadThreshold = '5'
 				antlrParam = "-Xconversiontimeout" antlrParam = "10000"

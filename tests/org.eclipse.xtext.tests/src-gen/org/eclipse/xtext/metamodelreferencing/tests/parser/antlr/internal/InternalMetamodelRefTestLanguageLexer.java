@@ -606,8 +606,7 @@ public class InternalMetamodelRefTestLanguageLexer extends Lexer {
     static final String DFA12_specialS =
         "\1\1\3\uffff\1\2\1\0\11\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\10\2\7\2\10\1\7\22\10\1\7\1\10\1\4\4\10\1\5\7\10\1\6\12"+
-            "\3\7\10\32\2\3\10\1\1\1\2\1\10\32\2\uff85\10",
+            "\11\10\2\7\2\10\1\7\22\10\1\7\1\10\1\4\4\10\1\5\7\10\1\6\12\3\7\10\32\2\3\10\1\1\1\2\1\10\32\2\uff85\10",
             "\32\11\4\uffff\1\11\1\uffff\32\11",
             "",
             "",

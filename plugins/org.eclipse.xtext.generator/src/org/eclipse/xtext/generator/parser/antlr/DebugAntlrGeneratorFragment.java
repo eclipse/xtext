@@ -7,25 +7,30 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.parser.antlr;
 
-import static org.eclipse.xtext.util.Files.*;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.Collections;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.formatting.ILineSeparatorInformation;
 import org.eclipse.xtext.generator.Generator;
 import org.eclipse.xtext.generator.GeneratorWarning;
 import org.eclipse.xtext.generator.Naming;
+import org.eclipse.xtext.generator.NewlineNormalizer;
+import org.eclipse.xtext.generator.parser.antlr.debug.SimpleAntlrRuntimeModule;
 import org.eclipse.xtext.generator.parser.antlr.debug.SimpleAntlrStandaloneSetup;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.common.base.Joiner;
+import com.google.inject.Binder;
+import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 /**
@@ -44,26 +49,56 @@ public class DebugAntlrGeneratorFragment extends AbstractAntlrGeneratorFragment 
 		super.generate(grammar, ctx);
 		String srcGenPath = ctx.getOutput().getOutlet(Generator.SRC_GEN).getPath();
 		String absoluteGrammarFileName = srcGenPath+"/"+getGrammarFileName(grammar, getNaming()).replace('.', '/')+".g";
-		prettyPrint(absoluteGrammarFileName);
+		prettyPrint(absoluteGrammarFileName, Charset.forName(getEncoding(ctx, Generator.SRC_GEN)));
 	}
-
-	protected void prettyPrint(String absoluteGrammarFileName) {
+	
+	/**
+	 * @since 2.7
+	 */
+	protected void prettyPrint(String absoluteGrammarFileName, Charset encoding) {
 		try {
-			String content = readFileIntoString(absoluteGrammarFileName);
-			Injector injector = new SimpleAntlrStandaloneSetup().createInjectorAndDoEMFRegistration();
+			String content = readFileIntoString(absoluteGrammarFileName, encoding);
+			final ILineSeparatorInformation lineSeparatorInformation = new ILineSeparatorInformation() {
+				public String getLineSeparator() {
+					return DebugAntlrGeneratorFragment.this.getLineDelimiter();
+				}
+			};
+			Injector injector = new SimpleAntlrStandaloneSetup() {
+				@Override
+				public Injector createInjector() {
+					return Guice.createInjector(new SimpleAntlrRuntimeModule() {
+						@Override
+						public void configure(Binder binder) {
+							super.configure(binder);
+							binder.bind(ILineSeparatorInformation.class).toInstance(lineSeparatorInformation);
+						}
+					});
+				}
+			}.createInjectorAndDoEMFRegistration();
 			XtextResource resource = injector.getInstance(XtextResource.class);
 			resource.setURI(URI.createFileURI(absoluteGrammarFileName));
-			resource.load(new StringInputStream(content), null);
+			resource.load(new StringInputStream(content, encoding.name()),
+					Collections.singletonMap(XtextResource.OPTION_ENCODING, encoding.name()));
 			if (!resource.getErrors().isEmpty()) {
-				String errors = Joiner.on('\n').join(resource.getErrors());
-				throw new GeneratorWarning("Non fatal problem: Debug grammar could not be formatted due to:\n" + errors);
+				String errors = Joiner.on(getLineDelimiter()).join(resource.getErrors());
+				throw new GeneratorWarning("Non fatal problem: Debug grammar could not be formatted due to:" + getLineDelimiter() + errors);
 			}
 			ByteArrayOutputStream outputStream = new ByteArrayOutputStream(content.length());
 			resource.save(outputStream, SaveOptions.newBuilder().format().getOptions().toOptionsMap());
-			writeStringIntoFile(absoluteGrammarFileName, outputStream.toString());
+			String toBeWritten = new NewlineNormalizer(getLineDelimiter()).normalizeLineDelimiters(
+					new String(outputStream.toByteArray(), encoding.name()));
+			writeStringIntoFile(absoluteGrammarFileName, toBeWritten, encoding);
 		} catch(IOException e) {
 			throw new GeneratorWarning(e.getMessage());
 		}
+	}
+
+	/**
+	 * @deprecated use {@link #prettyPrint(String, Charset)} instead.
+	 */
+	@Deprecated
+	protected void prettyPrint(String absoluteGrammarFileName) {
+		prettyPrint(absoluteGrammarFileName, Charset.defaultCharset());
 	}
 
 	public String getGrammarFileName(Grammar g, Naming naming) {

@@ -108,7 +108,7 @@ ruleModel returns [EObject current=null]
             $current);
     }
 )((
-	otherlv_1=KEYWORD_1
+	otherlv_1=DigitOne
     {
     	newLeafNode(otherlv_1, grammarAccess.getModelAccess().getDigitOneKeyword_1_0_0());
     }
@@ -129,7 +129,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_first_3_0=
-	KEYWORD_10
+	A
     {
         newLeafNode(lv_first_3_0, grammarAccess.getModelAccess().getFirstAKeyword_1_0_1_0_0());
     }
@@ -157,7 +157,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_second_4_0=
-	KEYWORD_11
+	B
     {
         newLeafNode(lv_second_4_0, grammarAccess.getModelAccess().getSecondBKeyword_1_0_1_1_0());
     }
@@ -187,7 +187,7 @@ ruleModel returns [EObject current=null]
 
 ))
     |(
-	otherlv_5=KEYWORD_2
+	otherlv_5=DigitTwo
     {
     	newLeafNode(otherlv_5, grammarAccess.getModelAccess().getDigitTwoKeyword_1_1_0());
     }
@@ -208,7 +208,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_first_7_0=
-	KEYWORD_10
+	A
     {
         newLeafNode(lv_first_7_0, grammarAccess.getModelAccess().getFirstAKeyword_1_1_1_0_0());
     }
@@ -236,7 +236,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_second_8_0=
-	KEYWORD_11
+	B
     {
         newLeafNode(lv_second_8_0, grammarAccess.getModelAccess().getSecondBKeyword_1_1_1_1_0());
     }
@@ -264,7 +264,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_third_9_0=
-	KEYWORD_12
+	C
     {
         newLeafNode(lv_third_9_0, grammarAccess.getModelAccess().getThirdCKeyword_1_1_1_2_0());
     }
@@ -292,7 +292,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_forth_10_0=
-	KEYWORD_13
+	D
     {
         newLeafNode(lv_forth_10_0, grammarAccess.getModelAccess().getForthDKeyword_1_1_1_3_0());
     }
@@ -322,7 +322,7 @@ ruleModel returns [EObject current=null]
 
 ))
     |(
-	otherlv_11=KEYWORD_3
+	otherlv_11=DigitThree
     {
     	newLeafNode(otherlv_11, grammarAccess.getModelAccess().getDigitThreeKeyword_1_2_0());
     }
@@ -343,7 +343,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_first_13_0=
-	KEYWORD_10
+	A
     {
         newLeafNode(lv_first_13_0, grammarAccess.getModelAccess().getFirstAKeyword_1_2_1_0_0());
     }
@@ -371,7 +371,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_second_14_0=
-	KEYWORD_11
+	B
     {
         newLeafNode(lv_second_14_0, grammarAccess.getModelAccess().getSecondBKeyword_1_2_1_1_0());
     }
@@ -400,7 +400,7 @@ ruleModel returns [EObject current=null]
 
 ))
     |(
-	otherlv_15=KEYWORD_4
+	otherlv_15=DigitFour
     {
     	newLeafNode(otherlv_15, grammarAccess.getModelAccess().getDigitFourKeyword_1_3_0());
     }
@@ -421,7 +421,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_first_17_0=
-	KEYWORD_10
+	A
     {
         newLeafNode(lv_first_17_0, grammarAccess.getModelAccess().getFirstAKeyword_1_3_1_0_0());
     }
@@ -449,7 +449,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_second_18_0=
-	KEYWORD_11
+	B
     {
         newLeafNode(lv_second_18_0, grammarAccess.getModelAccess().getSecondBKeyword_1_3_1_1_0());
     }
@@ -479,7 +479,7 @@ ruleModel returns [EObject current=null]
 
 ))
     |(
-	otherlv_19=KEYWORD_5
+	otherlv_19=DigitFive
     {
     	newLeafNode(otherlv_19, grammarAccess.getModelAccess().getDigitFiveKeyword_1_4_0());
     }
@@ -500,7 +500,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_first_21_0=
-	KEYWORD_10
+	A
     {
         newLeafNode(lv_first_21_0, grammarAccess.getModelAccess().getFirstAKeyword_1_4_1_0_0());
     }
@@ -528,7 +528,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_second_22_0=
-	KEYWORD_11
+	B
     {
         newLeafNode(lv_second_22_0, grammarAccess.getModelAccess().getSecondBKeyword_1_4_1_1_0());
     }
@@ -558,7 +558,7 @@ ruleModel returns [EObject current=null]
 
 ))
     |(
-	otherlv_23=KEYWORD_6
+	otherlv_23=DigitSix
     {
     	newLeafNode(otherlv_23, grammarAccess.getModelAccess().getDigitSixKeyword_1_5_0());
     }
@@ -579,7 +579,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_firstAsList_25_0=
-	KEYWORD_10
+	A
     {
         newLeafNode(lv_firstAsList_25_0, grammarAccess.getModelAccess().getFirstAsListAKeyword_1_5_1_0_0());
     }
@@ -607,7 +607,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_secondAsList_26_0=
-	KEYWORD_11
+	B
     {
         newLeafNode(lv_secondAsList_26_0, grammarAccess.getModelAccess().getSecondAsListBKeyword_1_5_1_1_0());
     }
@@ -637,7 +637,7 @@ ruleModel returns [EObject current=null]
 
 ))
     |(
-	otherlv_27=KEYWORD_7
+	otherlv_27=DigitSeven
     {
     	newLeafNode(otherlv_27, grammarAccess.getModelAccess().getDigitSevenKeyword_1_6_0());
     }
@@ -658,7 +658,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_firstAsList_29_0=
-	KEYWORD_10
+	A
     {
         newLeafNode(lv_firstAsList_29_0, grammarAccess.getModelAccess().getFirstAsListAKeyword_1_6_1_0_0());
     }
@@ -686,7 +686,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_secondAsList_30_0=
-	KEYWORD_11
+	B
     {
         newLeafNode(lv_secondAsList_30_0, grammarAccess.getModelAccess().getSecondAsListBKeyword_1_6_1_1_0());
     }
@@ -716,7 +716,7 @@ ruleModel returns [EObject current=null]
 
 ))
     |(
-	otherlv_31=KEYWORD_8
+	otherlv_31=DigitEight
     {
     	newLeafNode(otherlv_31, grammarAccess.getModelAccess().getDigitEightKeyword_1_7_0());
     }
@@ -735,19 +735,19 @@ ruleModel returns [EObject current=null]
 	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_7_1(), 0);
 	 				}
 					({true}?=>(
-	otherlv_33=KEYWORD_10
+	otherlv_33=A
     {
     	newLeafNode(otherlv_33, grammarAccess.getModelAccess().getAKeyword_1_7_1_0_0());
     }
 
-	otherlv_34=KEYWORD_11
+	otherlv_34=B
     {
     	newLeafNode(otherlv_34, grammarAccess.getModelAccess().getBKeyword_1_7_1_0_1());
     }
 (
 (
 		lv_first_35_0=
-	KEYWORD_12
+	C
     {
         newLeafNode(lv_first_35_0, grammarAccess.getModelAccess().getFirstCKeyword_1_7_1_0_2_0());
     }
@@ -773,19 +773,19 @@ ruleModel returns [EObject current=null]
 	 				  getUnorderedGroupHelper().select(grammarAccess.getModelAccess().getUnorderedGroup_1_7_1(), 1);
 	 				}
 					({true}?=>(
-	otherlv_36=KEYWORD_10
+	otherlv_36=A
     {
     	newLeafNode(otherlv_36, grammarAccess.getModelAccess().getAKeyword_1_7_1_1_0());
     }
 
-	otherlv_37=KEYWORD_11
+	otherlv_37=B
     {
     	newLeafNode(otherlv_37, grammarAccess.getModelAccess().getBKeyword_1_7_1_1_1());
     }
 (
 (
 		lv_second_38_0=
-	KEYWORD_13
+	D
     {
         newLeafNode(lv_second_38_0, grammarAccess.getModelAccess().getSecondDKeyword_1_7_1_1_2_0());
     }
@@ -815,7 +815,7 @@ ruleModel returns [EObject current=null]
 
 ))
     |(
-	otherlv_39=KEYWORD_9
+	otherlv_39=DigitNine
     {
     	newLeafNode(otherlv_39, grammarAccess.getModelAccess().getDigitNineKeyword_1_8_0());
     }
@@ -836,7 +836,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_firstAsList_41_0=
-	KEYWORD_10
+	A
     {
         newLeafNode(lv_firstAsList_41_0, grammarAccess.getModelAccess().getFirstAsListAKeyword_1_8_1_0_0());
     }
@@ -864,7 +864,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_secondAsList_42_0=
-	KEYWORD_11
+	B
     {
         newLeafNode(lv_secondAsList_42_0, grammarAccess.getModelAccess().getSecondAsListBKeyword_1_8_1_1_0());
     }
@@ -894,7 +894,7 @@ ruleModel returns [EObject current=null]
 
 )+)
     |(
-	otherlv_43=KEYWORD_14
+	otherlv_43=DigitOneDigitZero
     {
     	newLeafNode(otherlv_43, grammarAccess.getModelAccess().getDigitOneDigitZeroKeyword_1_9_0());
     }
@@ -915,7 +915,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_firstAsList_45_0=
-	KEYWORD_10
+	A
     {
         newLeafNode(lv_firstAsList_45_0, grammarAccess.getModelAccess().getFirstAsListAKeyword_1_9_1_0_0());
     }
@@ -943,7 +943,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_secondAsList_46_0=
-	KEYWORD_11
+	B
     {
         newLeafNode(lv_secondAsList_46_0, grammarAccess.getModelAccess().getSecondAsListBKeyword_1_9_1_1_0());
     }
@@ -973,7 +973,7 @@ ruleModel returns [EObject current=null]
 
 )*)
     |(
-	otherlv_47=KEYWORD_15
+	otherlv_47=DigitOneDigitOne
     {
     	newLeafNode(otherlv_47, grammarAccess.getModelAccess().getDigitOneDigitOneKeyword_1_10_0());
     }
@@ -994,7 +994,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_first_49_0=
-	KEYWORD_10
+	A
     {
         newLeafNode(lv_first_49_0, grammarAccess.getModelAccess().getFirstAKeyword_1_10_1_0_0());
     }
@@ -1022,7 +1022,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_second_50_0=
-	KEYWORD_11
+	B
     {
         newLeafNode(lv_second_50_0, grammarAccess.getModelAccess().getSecondBKeyword_1_10_1_1_0());
     }
@@ -1052,7 +1052,7 @@ ruleModel returns [EObject current=null]
 
 )?)
     |(
-	otherlv_51=KEYWORD_16
+	otherlv_51=DigitOneDigitTwo
     {
     	newLeafNode(otherlv_51, grammarAccess.getModelAccess().getDigitOneDigitTwoKeyword_1_11_0());
     }
@@ -1073,7 +1073,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_firstAsList_53_0=
-	KEYWORD_10
+	A
     {
         newLeafNode(lv_firstAsList_53_0, grammarAccess.getModelAccess().getFirstAsListAKeyword_1_11_1_0_0());
     }
@@ -1101,7 +1101,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_secondAsList_54_0=
-	KEYWORD_11
+	B
     {
         newLeafNode(lv_secondAsList_54_0, grammarAccess.getModelAccess().getSecondAsListBKeyword_1_11_1_1_0());
     }
@@ -1146,7 +1146,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_firstAsList_56_0=
-	KEYWORD_10
+	A
     {
         newLeafNode(lv_firstAsList_56_0, grammarAccess.getModelAccess().getFirstAsListAKeyword_1_11_2_0_0());
     }
@@ -1174,7 +1174,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_secondAsList_57_0=
-	KEYWORD_11
+	B
     {
         newLeafNode(lv_secondAsList_57_0, grammarAccess.getModelAccess().getSecondAsListBKeyword_1_11_2_1_0());
     }
@@ -1204,7 +1204,7 @@ ruleModel returns [EObject current=null]
 
 ))
     |(
-	otherlv_58=KEYWORD_17
+	otherlv_58=DigitOneDigitThree
     {
     	newLeafNode(otherlv_58, grammarAccess.getModelAccess().getDigitOneDigitThreeKeyword_1_12_0());
     }
@@ -1225,7 +1225,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_firstAsList_60_0=
-	KEYWORD_10
+	A
     {
         newLeafNode(lv_firstAsList_60_0, grammarAccess.getModelAccess().getFirstAsListAKeyword_1_12_1_0_0());
     }
@@ -1253,7 +1253,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_secondAsList_61_0=
-	KEYWORD_11
+	B
     {
         newLeafNode(lv_secondAsList_61_0, grammarAccess.getModelAccess().getSecondAsListBKeyword_1_12_1_1_0());
     }
@@ -1284,7 +1284,7 @@ ruleModel returns [EObject current=null]
 )?(
 (
 		lv_firstAsList_62_0=
-	KEYWORD_10
+	A
     {
         newLeafNode(lv_firstAsList_62_0, grammarAccess.getModelAccess().getFirstAsListAKeyword_1_12_2_0());
     }
@@ -1300,7 +1300,7 @@ ruleModel returns [EObject current=null]
 )(
 (
 		lv_secondAsList_63_0=
-	KEYWORD_11
+	B
     {
         newLeafNode(lv_secondAsList_63_0, grammarAccess.getModelAccess().getSecondAsListBKeyword_1_12_3_0());
     }
@@ -1315,7 +1315,7 @@ ruleModel returns [EObject current=null]
 )
 ))
     |(
-	otherlv_64=KEYWORD_18
+	otherlv_64=DigitOneDigitFour
     {
     	newLeafNode(otherlv_64, grammarAccess.getModelAccess().getDigitOneDigitFourKeyword_1_13_0());
     }
@@ -1350,7 +1350,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_firstAsList_67_0=
-	KEYWORD_10
+	A
     {
         newLeafNode(lv_firstAsList_67_0, grammarAccess.getModelAccess().getFirstAsListAKeyword_1_13_1_0_0_0());
     }
@@ -1378,7 +1378,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_secondAsList_68_0=
-	KEYWORD_11
+	B
     {
         newLeafNode(lv_secondAsList_68_0, grammarAccess.getModelAccess().getSecondAsListBKeyword_1_13_1_0_1_0());
     }
@@ -1435,7 +1435,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_thirdAsList_70_0=
-	KEYWORD_12
+	C
     {
         newLeafNode(lv_thirdAsList_70_0, grammarAccess.getModelAccess().getThirdAsListCKeyword_1_13_1_1_0_0());
     }
@@ -1463,7 +1463,7 @@ ruleModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_forthAsList_71_0=
-	KEYWORD_13
+	D
     {
         newLeafNode(lv_forthAsList_71_0, grammarAccess.getModelAccess().getForthAsListDKeyword_1_13_1_1_1_0());
     }
@@ -1508,7 +1508,7 @@ ruleModel returns [EObject current=null]
 
 )+)
     |(
-	otherlv_72=KEYWORD_21
+	otherlv_72=Datatypes
     {
     	newLeafNode(otherlv_72, grammarAccess.getModelAccess().getDatatypesKeyword_1_14_0());
     }
@@ -1532,7 +1532,7 @@ ruleModel returns [EObject current=null]
 )
 ))
     |(
-	otherlv_74=KEYWORD_22
+	otherlv_74=Serialization
     {
     	newLeafNode(otherlv_74, grammarAccess.getModelAccess().getSerializationKeyword_1_15_0());
     }
@@ -1556,7 +1556,7 @@ ruleModel returns [EObject current=null]
 )
 ))
     |(
-	otherlv_76=KEYWORD_20
+	otherlv_76=Bug302585
     {
     	newLeafNode(otherlv_76, grammarAccess.getModelAccess().getBug302585Keyword_1_16_0());
     }
@@ -1622,7 +1622,7 @@ ruleNestedModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_first_2_0=
-	KEYWORD_10
+	A
     {
         newLeafNode(lv_first_2_0, grammarAccess.getNestedModelAccess().getFirstAKeyword_1_0_0());
     }
@@ -1650,7 +1650,7 @@ ruleNestedModel returns [EObject current=null]
 					({true}?=>(
 (
 		lv_second_3_0=
-	KEYWORD_11
+	B
     {
         newLeafNode(lv_second_3_0, grammarAccess.getNestedModelAccess().getSecondBKeyword_1_1_0());
     }
@@ -1679,7 +1679,7 @@ ruleNestedModel returns [EObject current=null]
 	}
 
 )?
-	otherlv_4=KEYWORD_19
+	otherlv_4=Nested
     {
     	newLeafNode(otherlv_4, grammarAccess.getNestedModelAccess().getNestedKeyword_2());
     }
@@ -1706,7 +1706,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
     @after { leaveRule();
     }:
 ((
-	kw=KEYWORD_1 
+	kw=DigitOne 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitOneKeyword_0_0()); 
@@ -1726,7 +1726,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_0_1(), 0);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_10 
+	kw=A 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_0_1_0()); 
@@ -1744,7 +1744,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_0_1(), 1);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_11 
+	kw=B 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_0_1_1()); 
@@ -1766,7 +1766,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 
 ))
     |(
-	kw=KEYWORD_2 
+	kw=DigitTwo 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitTwoKeyword_1_0()); 
@@ -1786,7 +1786,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_1_1(), 0);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_10 
+	kw=A 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_1_1_0()); 
@@ -1804,7 +1804,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_1_1(), 1);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_11 
+	kw=B 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_1_1_1()); 
@@ -1822,7 +1822,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_1_1(), 2);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_12 
+	kw=C 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getCKeyword_1_1_2()); 
@@ -1840,7 +1840,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_1_1(), 3);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_13 
+	kw=D 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDKeyword_1_1_3()); 
@@ -1862,7 +1862,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 
 ))
     |(
-	kw=KEYWORD_3 
+	kw=DigitThree 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitThreeKeyword_2_0()); 
@@ -1882,7 +1882,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_2_1(), 0);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_10 
+	kw=A 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_2_1_0()); 
@@ -1900,7 +1900,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_2_1(), 1);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_11 
+	kw=B 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_2_1_1()); 
@@ -1921,7 +1921,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 
 ))
     |(
-	kw=KEYWORD_4 
+	kw=DigitFour 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitFourKeyword_3_0()); 
@@ -1941,7 +1941,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_3_1(), 0);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_10 
+	kw=A 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_3_1_0()); 
@@ -1959,7 +1959,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_3_1(), 1);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_11 
+	kw=B 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_3_1_1()); 
@@ -1981,7 +1981,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 
 ))
     |(
-	kw=KEYWORD_5 
+	kw=DigitFive 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitFiveKeyword_4_0()); 
@@ -2001,7 +2001,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_4_1(), 0);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_10 
+	kw=A 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_4_1_0()); 
@@ -2019,7 +2019,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_4_1(), 1);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_11 
+	kw=B 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_4_1_1()); 
@@ -2041,7 +2041,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 
 ))
     |(
-	kw=KEYWORD_6 
+	kw=DigitSix 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitSixKeyword_5_0()); 
@@ -2061,7 +2061,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_5_1(), 0);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_10 
+	kw=A 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_5_1_0()); 
@@ -2079,7 +2079,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_5_1(), 1);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_11 
+	kw=B 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_5_1_1()); 
@@ -2101,7 +2101,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 
 ))
     |(
-	kw=KEYWORD_7 
+	kw=DigitSeven 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitSevenKeyword_6_0()); 
@@ -2121,7 +2121,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_6_1(), 0);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_10 
+	kw=A 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_6_1_0()); 
@@ -2139,7 +2139,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_6_1(), 1);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_11 
+	kw=B 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_6_1_1()); 
@@ -2161,7 +2161,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 
 ))
     |(
-	kw=KEYWORD_8 
+	kw=DigitEight 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitEightKeyword_7_0()); 
@@ -2181,19 +2181,19 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_7_1(), 0);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_10 
+	kw=A 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_7_1_0_0()); 
     }
 
-	kw=KEYWORD_11 
+	kw=B 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_7_1_0_1()); 
     }
 
-	kw=KEYWORD_12 
+	kw=C 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getCKeyword_7_1_0_2()); 
@@ -2211,19 +2211,19 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_7_1(), 1);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_10 
+	kw=A 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_7_1_1_0()); 
     }
 
-	kw=KEYWORD_11 
+	kw=B 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_7_1_1_1()); 
     }
 
-	kw=KEYWORD_13 
+	kw=D 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDKeyword_7_1_1_2()); 
@@ -2245,7 +2245,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 
 ))
     |(
-	kw=KEYWORD_9 
+	kw=DigitNine 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitNineKeyword_8_0()); 
@@ -2265,7 +2265,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_8_1(), 0);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_10 
+	kw=A 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_8_1_0()); 
@@ -2283,7 +2283,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_8_1(), 1);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_11 
+	kw=B 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_8_1_1()); 
@@ -2305,7 +2305,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 
 )+)
     |(
-	kw=KEYWORD_14 
+	kw=DigitOneDigitZero 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitOneDigitZeroKeyword_9_0()); 
@@ -2325,7 +2325,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_9_1(), 0);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_10 
+	kw=A 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_9_1_0()); 
@@ -2343,7 +2343,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_9_1(), 1);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_11 
+	kw=B 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_9_1_1()); 
@@ -2365,7 +2365,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 
 )*)
     |(
-	kw=KEYWORD_15 
+	kw=DigitOneDigitOne 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitOneDigitOneKeyword_10_0()); 
@@ -2385,7 +2385,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_10_1(), 0);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_10 
+	kw=A 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_10_1_0()); 
@@ -2403,7 +2403,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_10_1(), 1);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_11 
+	kw=B 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_10_1_1()); 
@@ -2425,7 +2425,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 
 )?)
     |(
-	kw=KEYWORD_16 
+	kw=DigitOneDigitTwo 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitOneDigitTwoKeyword_11_0()); 
@@ -2445,7 +2445,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_11_1(), 0);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_10 
+	kw=A 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_11_1_0()); 
@@ -2463,7 +2463,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_11_1(), 1);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_11 
+	kw=B 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_11_1_1()); 
@@ -2498,7 +2498,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_11_2(), 0);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_10 
+	kw=A 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_11_2_0()); 
@@ -2516,7 +2516,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_11_2(), 1);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_11 
+	kw=B 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_11_2_1()); 
@@ -2538,7 +2538,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 
 ))
     |(
-	kw=KEYWORD_17 
+	kw=DigitOneDigitThree 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitOneDigitThreeKeyword_12_0()); 
@@ -2558,7 +2558,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_12_1(), 0);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_10 
+	kw=A 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_12_1_0()); 
@@ -2576,7 +2576,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_12_1(), 1);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_11 
+	kw=B 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_12_1_1()); 
@@ -2597,20 +2597,20 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	}
 
 )?
-	kw=KEYWORD_10 
+	kw=A 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_12_2()); 
     }
 
-	kw=KEYWORD_11 
+	kw=B 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_12_3()); 
     }
 )
     |(
-	kw=KEYWORD_18 
+	kw=DigitOneDigitFour 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitOneDigitFourKeyword_13_0()); 
@@ -2644,7 +2644,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_13_1_0(), 0);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_10 
+	kw=A 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_13_1_0_0()); 
@@ -2662,7 +2662,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_13_1_0(), 1);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_11 
+	kw=B 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_13_1_0_1()); 
@@ -2709,7 +2709,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_13_1_1(), 0);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_12 
+	kw=C 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getCKeyword_13_1_1_0()); 
@@ -2727,7 +2727,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_13_1_1(), 1);
 	 				}
 					({true}?=>(
-	kw=KEYWORD_13 
+	kw=D 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDKeyword_13_1_1_1()); 
@@ -2804,14 +2804,14 @@ ruleUnorderedSerialization returns [EObject current=null]
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnorderedSerializationAccess().getUnorderedGroup_1_0(), 0);
 	 				}
 					({true}?=>(
-	otherlv_2=KEYWORD_1
+	otherlv_2=DigitOne
     {
     	newLeafNode(otherlv_2, grammarAccess.getUnorderedSerializationAccess().getDigitOneKeyword_1_0_0_0());
     }
 (
 (
 		lv_first_3_0=
-	KEYWORD_10
+	A
     {
         newLeafNode(lv_first_3_0, grammarAccess.getUnorderedSerializationAccess().getFirstAKeyword_1_0_0_1_0());
     }
@@ -2839,7 +2839,7 @@ ruleUnorderedSerialization returns [EObject current=null]
 					({true}?=>(
 (
 		lv_second_4_0=
-	KEYWORD_11
+	B
     {
         newLeafNode(lv_second_4_0, grammarAccess.getUnorderedSerializationAccess().getSecondBKeyword_1_0_1_0());
     }
@@ -2867,7 +2867,7 @@ ruleUnorderedSerialization returns [EObject current=null]
 					({true}?=>(
 (
 		lv_third_5_0=
-	KEYWORD_12
+	C
     {
         newLeafNode(lv_third_5_0, grammarAccess.getUnorderedSerializationAccess().getThirdCKeyword_1_0_2_0());
     }
@@ -2895,7 +2895,7 @@ ruleUnorderedSerialization returns [EObject current=null]
 					({true}?=>(
 (
 		lv_forth_6_0=
-	KEYWORD_13
+	D
     {
         newLeafNode(lv_forth_6_0, grammarAccess.getUnorderedSerializationAccess().getForthDKeyword_1_0_3_0());
     }
@@ -2925,7 +2925,7 @@ ruleUnorderedSerialization returns [EObject current=null]
 
 )
     |(
-	otherlv_7=KEYWORD_2
+	otherlv_7=DigitTwo
     {
     	newLeafNode(otherlv_7, grammarAccess.getUnorderedSerializationAccess().getDigitTwoKeyword_1_1_0());
     }
@@ -2946,7 +2946,7 @@ ruleUnorderedSerialization returns [EObject current=null]
 					({true}?=>(
 (
 		lv_firstAsList_9_0=
-	KEYWORD_10
+	A
     {
         newLeafNode(lv_firstAsList_9_0, grammarAccess.getUnorderedSerializationAccess().getFirstAsListAKeyword_1_1_1_0_0());
     }
@@ -2974,7 +2974,7 @@ ruleUnorderedSerialization returns [EObject current=null]
 					({true}?=>(
 (
 		lv_secondAsList_10_0=
-	KEYWORD_11
+	B
     {
         newLeafNode(lv_secondAsList_10_0, grammarAccess.getUnorderedSerializationAccess().getSecondAsListBKeyword_1_1_1_1_0());
     }
@@ -3004,7 +3004,7 @@ ruleUnorderedSerialization returns [EObject current=null]
 
 )*)
     |(
-	otherlv_11=KEYWORD_3
+	otherlv_11=DigitThree
     {
     	newLeafNode(otherlv_11, grammarAccess.getUnorderedSerializationAccess().getDigitThreeKeyword_1_2_0());
     }
@@ -3025,7 +3025,7 @@ ruleUnorderedSerialization returns [EObject current=null]
 					({true}?=>(
 (
 		lv_firstAsList_13_0=
-	KEYWORD_10
+	A
     {
         newLeafNode(lv_firstAsList_13_0, grammarAccess.getUnorderedSerializationAccess().getFirstAsListAKeyword_1_2_1_0_0());
     }
@@ -3053,7 +3053,7 @@ ruleUnorderedSerialization returns [EObject current=null]
 					({true}?=>(
 (
 		lv_second_14_0=
-	KEYWORD_11
+	B
     {
         newLeafNode(lv_second_14_0, grammarAccess.getUnorderedSerializationAccess().getSecondBKeyword_1_2_1_1_0());
     }

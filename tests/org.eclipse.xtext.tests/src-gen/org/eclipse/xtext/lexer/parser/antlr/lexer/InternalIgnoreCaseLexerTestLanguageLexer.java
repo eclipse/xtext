@@ -12,8 +12,8 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
-    public static final int KEYWORD_1=5;
-    public static final int KEYWORD_2=4;
+    public static final int Foo=5;
+    public static final int Case=4;
     public static final int RULE_WS=6;
     public static final int RULE_SL_COMMENT=7;
     public static final int EOF=-1;
@@ -31,13 +31,13 @@ public class InternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
     }
     public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g"; }
 
-    // $ANTLR start "KEYWORD_2"
-    public final void mKEYWORD_2() throws RecognitionException {
+    // $ANTLR start "Case"
+    public final void mCase() throws RecognitionException {
         try {
-            int _type = KEYWORD_2;
+            int _type = Case;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:19:11: ( ( 'C' | 'c' ) ( 'A' | 'a' ) ( 'S' | 's' ) ( 'E' | 'e' ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:19:13: ( 'C' | 'c' ) ( 'A' | 'a' ) ( 'S' | 's' ) ( 'E' | 'e' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:19:6: ( ( 'C' | 'c' ) ( 'A' | 'a' ) ( 'S' | 's' ) ( 'E' | 'e' ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:19:8: ( 'C' | 'c' ) ( 'A' | 'a' ) ( 'S' | 's' ) ( 'E' | 'e' )
             {
             if ( input.LA(1)=='C'||input.LA(1)=='c' ) {
                 input.consume();
@@ -84,15 +84,15 @@ public class InternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_2"
+    // $ANTLR end "Case"
 
-    // $ANTLR start "KEYWORD_1"
-    public final void mKEYWORD_1() throws RecognitionException {
+    // $ANTLR start "Foo"
+    public final void mFoo() throws RecognitionException {
         try {
-            int _type = KEYWORD_1;
+            int _type = Foo;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:21:11: ( ( 'F' | 'f' ) ( 'O' | 'o' ) ( 'O' | 'o' ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:21:13: ( 'F' | 'f' ) ( 'O' | 'o' ) ( 'O' | 'o' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:21:5: ( ( 'F' | 'f' ) ( 'O' | 'o' ) ( 'O' | 'o' ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:21:7: ( 'F' | 'f' ) ( 'O' | 'o' ) ( 'O' | 'o' )
             {
             if ( input.LA(1)=='F'||input.LA(1)=='f' ) {
                 input.consume();
@@ -130,7 +130,7 @@ public class InternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_1"
+    // $ANTLR end "Foo"
 
     // $ANTLR start "RULE_WS"
     public final void mRULE_WS() throws RecognitionException {
@@ -280,7 +280,7 @@ public class InternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_SL_COMMENT"
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:1:8: ( KEYWORD_2 | KEYWORD_1 | RULE_WS | RULE_SL_COMMENT )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:1:8: ( Case | Foo | RULE_WS | RULE_SL_COMMENT )
         int alt5=4;
         switch ( input.LA(1) ) {
         case 'C':
@@ -317,28 +317,28 @@ public class InternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
 
         switch (alt5) {
             case 1 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:1:10: KEYWORD_2
+                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:1:10: Case
                 {
-                mKEYWORD_2(); 
+                mCase(); 
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:1:20: KEYWORD_1
+                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:1:15: Foo
                 {
-                mKEYWORD_1(); 
+                mFoo(); 
 
                 }
                 break;
             case 3 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:1:30: RULE_WS
+                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:1:19: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 4 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:1:38: RULE_SL_COMMENT
+                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:1:27: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 

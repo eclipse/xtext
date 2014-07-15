@@ -572,10 +572,10 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -593,10 +593,10 @@ public class InternalSimpleAntlrLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -612,23 +612,15 @@ public class InternalSimpleAntlrLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:21: '\\\\' .
                     	    {
                     	    match('\\'); 
-                    	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
-                    	        input.consume();
-
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
-                    	        recover(mse);
-                    	        throw mse;}
-
+                    	    matchAny(); 
 
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -653,10 +645,10 @@ public class InternalSimpleAntlrLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -672,23 +664,15 @@ public class InternalSimpleAntlrLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:54: '\\\\' .
                     	    {
                     	    match('\\'); 
-                    	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
-                    	        input.consume();
-
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
-                    	        recover(mse);
-                    	        throw mse;}
-
+                    	    matchAny(); 
 
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1235:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1148,34 +1132,19 @@ public class InternalSimpleAntlrLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\1\uffff\1\32\1\uffff\1\32\1\36\1\uffff\1\41\1\32\6\uffff\1\52\2"+
-        "\uffff\1\30\2\uffff\3\30\2\uffff\1\32\2\uffff\1\32\5\uffff\1\32"+
-        "\17\uffff\14\32\1\101\1\102\1\32\2\uffff\1\104\1\uffff";
+        "\1\uffff\1\32\1\uffff\1\32\1\36\1\uffff\1\41\1\32\6\uffff\1\52\2\uffff\1\30\2\uffff\3\30\2\uffff\1\32\2\uffff\1\32\5\uffff\1\32\17\uffff\14\32\1\101\1\102\1\32\2\uffff\1\104\1\uffff";
     static final String DFA12_eofS =
         "\105\uffff";
     static final String DFA12_minS =
-        "\1\0\1\162\1\uffff\1\160\1\163\1\uffff\1\76\1\162\6\uffff\1\56\2"+
-        "\uffff\1\101\2\uffff\2\0\1\52\2\uffff\1\141\2\uffff\1\164\5\uffff"+
-        "\1\141\17\uffff\1\155\1\151\1\147\1\155\1\157\1\155\1\141\1\156"+
-        "\1\145\1\162\1\163\1\156\2\60\1\164\2\uffff\1\60\1\uffff";
+        "\1\0\1\162\1\uffff\1\160\1\163\1\uffff\1\76\1\162\6\uffff\1\56\2\uffff\1\101\2\uffff\2\0\1\52\2\uffff\1\141\2\uffff\1\164\5\uffff\1\141\17\uffff\1\155\1\151\1\147\1\155\1\157\1\155\1\141\1\156\1\145\1\162\1\163\1\156\2\60\1\164\2\uffff\1\60\1\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\1\162\1\uffff\1\160\1\163\1\uffff\1\76\1\162\6\uffff\1"+
-        "\56\2\uffff\1\172\2\uffff\2\uffff\1\57\2\uffff\1\141\2\uffff\1\164"+
-        "\5\uffff\1\141\17\uffff\1\155\1\151\1\147\1\155\1\157\1\155\1\141"+
-        "\1\156\1\145\1\162\1\163\1\156\2\172\1\164\2\uffff\1\172\1\uffff";
+        "\1\uffff\1\162\1\uffff\1\160\1\163\1\uffff\1\76\1\162\6\uffff\1\56\2\uffff\1\172\2\uffff\2\uffff\1\57\2\uffff\1\141\2\uffff\1\164\5\uffff\1\141\17\uffff\1\155\1\151\1\147\1\155\1\157\1\155\1\141\1\156\1\145\1\162\1\163\1\156\2\172\1\164\2\uffff\1\172\1\uffff";
     static final String DFA12_acceptS =
-        "\2\uffff\1\2\2\uffff\1\5\2\uffff\1\10\1\11\1\12\1\13\1\14\1\15\1"+
-        "\uffff\1\17\1\20\1\uffff\1\24\1\25\3\uffff\1\31\1\32\1\uffff\1\24"+
-        "\1\2\1\uffff\1\22\1\4\1\5\1\21\1\6\1\uffff\1\10\1\11\1\12\1\13\1"+
-        "\14\1\15\1\16\1\23\1\17\1\20\1\25\1\26\1\27\1\30\1\31\17\uffff\1"+
-        "\1\1\3\1\uffff\1\7";
+        "\2\uffff\1\2\2\uffff\1\5\2\uffff\1\10\1\11\1\12\1\13\1\14\1\15\1\uffff\1\17\1\20\1\uffff\1\24\1\25\3\uffff\1\31\1\32\1\uffff\1\24\1\2\1\uffff\1\22\1\4\1\5\1\21\1\6\1\uffff\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\23\1\17\1\20\1\25\1\26\1\27\1\30\1\31\17\uffff\1\1\1\3\1\uffff\1\7";
     static final String DFA12_specialS =
         "\1\0\23\uffff\1\2\1\1\57\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\30\2\27\2\30\1\27\22\30\1\27\1\30\1\24\4\30\1\25\1\17\1"+
-            "\20\1\13\1\12\2\30\1\16\1\26\12\23\1\10\1\2\1\30\1\6\1\30\1"+
-            "\14\1\30\32\22\3\30\1\21\1\22\1\30\5\22\1\7\1\1\7\22\1\3\13"+
-            "\22\1\4\1\11\1\5\1\15\uff81\30",
+            "\11\30\2\27\2\30\1\27\22\30\1\27\1\30\1\24\4\30\1\25\1\17\1\20\1\13\1\12\2\30\1\16\1\26\12\23\1\10\1\2\1\30\1\6\1\30\1\14\1\30\32\22\3\30\1\21\1\22\1\30\5\22\1\7\1\1\7\22\1\3\13\22\1\4\1\11\1\5\1\15\uff81\30",
             "\1\31",
             "",
             "\1\34",

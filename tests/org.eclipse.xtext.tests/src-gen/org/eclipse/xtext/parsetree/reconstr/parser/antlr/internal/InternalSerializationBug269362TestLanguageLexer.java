@@ -652,25 +652,19 @@ public class InternalSerializationBug269362TestLanguageLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\1\uffff\2\14\1\12\2\uffff\3\12\2\uffff\1\14\1\uffff\1\14\5\uffff"+
-        "\1\25\1\26\2\uffff";
+        "\1\uffff\2\14\1\12\2\uffff\3\12\2\uffff\1\14\1\uffff\1\14\5\uffff\1\25\1\26\2\uffff";
     static final String DFA12_eofS =
         "\27\uffff";
     static final String DFA12_minS =
-        "\1\0\1\157\1\141\1\101\2\uffff\2\0\1\52\2\uffff\1\157\1\uffff\1"+
-        "\162\5\uffff\2\60\2\uffff";
+        "\1\0\1\157\1\141\1\101\2\uffff\2\0\1\52\2\uffff\1\157\1\uffff\1\162\5\uffff\2\60\2\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\1\157\1\141\1\172\2\uffff\2\uffff\1\57\2\uffff\1\157\1"+
-        "\uffff\1\162\5\uffff\2\172\2\uffff";
+        "\1\uffff\1\157\1\141\1\172\2\uffff\2\uffff\1\57\2\uffff\1\157\1\uffff\1\162\5\uffff\2\172\2\uffff";
     static final String DFA12_acceptS =
-        "\4\uffff\1\3\1\4\3\uffff\1\10\1\11\1\uffff\1\3\1\uffff\1\4\1\5\1"+
-        "\6\1\7\1\10\2\uffff\1\1\1\2";
+        "\4\uffff\1\3\1\4\3\uffff\1\10\1\11\1\uffff\1\3\1\uffff\1\4\1\5\1\6\1\7\1\10\2\uffff\1\1\1\2";
     static final String DFA12_specialS =
         "\1\1\5\uffff\1\2\1\0\17\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\12\2\11\2\12\1\11\22\12\1\11\1\12\1\6\4\12\1\7\7\12\1\10"+
-            "\12\5\7\12\32\4\3\12\1\3\1\4\1\12\1\4\1\2\3\4\1\1\24\4\uff85"+
-            "\12",
+            "\11\12\2\11\2\12\1\11\22\12\1\11\1\12\1\6\4\12\1\7\7\12\1\10\12\5\7\12\32\4\3\12\1\3\1\4\1\12\1\4\1\2\3\4\1\1\24\4\uff85\12",
             "\1\13",
             "\1\15",
             "\32\14\4\uffff\1\14\1\uffff\32\14",

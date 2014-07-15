@@ -22,15 +22,15 @@ import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "KEYWORD_3", "KEYWORD_2", "KEYWORD_1", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "DataType", "Model", "HyphenMinusHyphenMinus", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
     };
     public static final int RULE_ID=7;
+    public static final int Model=5;
     public static final int RULE_STRING=9;
+    public static final int DataType=4;
+    public static final int HyphenMinusHyphenMinus=6;
     public static final int RULE_ANY_OTHER=13;
-    public static final int KEYWORD_1=6;
     public static final int RULE_INT=8;
-    public static final int KEYWORD_3=4;
-    public static final int KEYWORD_2=5;
     public static final int RULE_WS=12;
     public static final int RULE_SL_COMMENT=11;
     public static final int EOF=-1;
@@ -121,7 +121,7 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleModel"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:76:1: ruleModel returns [EObject current=null] : ( (otherlv_0= KEYWORD_2 ( (lv_expressions_1_0= ruleExpression ) )* ) | (otherlv_2= KEYWORD_3 ( (lv_values_3_0= ruleDataTypeExpression ) )* ) ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:76:1: ruleModel returns [EObject current=null] : ( (otherlv_0= Model ( (lv_expressions_1_0= ruleExpression ) )* ) | (otherlv_2= DataType ( (lv_values_3_0= ruleDataTypeExpression ) )* ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -135,17 +135,17 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:79:28: ( ( (otherlv_0= KEYWORD_2 ( (lv_expressions_1_0= ruleExpression ) )* ) | (otherlv_2= KEYWORD_3 ( (lv_values_3_0= ruleDataTypeExpression ) )* ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:80:1: ( (otherlv_0= KEYWORD_2 ( (lv_expressions_1_0= ruleExpression ) )* ) | (otherlv_2= KEYWORD_3 ( (lv_values_3_0= ruleDataTypeExpression ) )* ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:79:28: ( ( (otherlv_0= Model ( (lv_expressions_1_0= ruleExpression ) )* ) | (otherlv_2= DataType ( (lv_values_3_0= ruleDataTypeExpression ) )* ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:80:1: ( (otherlv_0= Model ( (lv_expressions_1_0= ruleExpression ) )* ) | (otherlv_2= DataType ( (lv_values_3_0= ruleDataTypeExpression ) )* ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:80:1: ( (otherlv_0= KEYWORD_2 ( (lv_expressions_1_0= ruleExpression ) )* ) | (otherlv_2= KEYWORD_3 ( (lv_values_3_0= ruleDataTypeExpression ) )* ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:80:1: ( (otherlv_0= Model ( (lv_expressions_1_0= ruleExpression ) )* ) | (otherlv_2= DataType ( (lv_values_3_0= ruleDataTypeExpression ) )* ) )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
-            if ( (LA3_0==KEYWORD_2) ) {
+            if ( (LA3_0==Model) ) {
                 alt3=1;
             }
-            else if ( (LA3_0==KEYWORD_3) ) {
+            else if ( (LA3_0==DataType) ) {
                 alt3=2;
             }
             else {
@@ -157,12 +157,12 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:80:2: (otherlv_0= KEYWORD_2 ( (lv_expressions_1_0= ruleExpression ) )* )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:80:2: (otherlv_0= Model ( (lv_expressions_1_0= ruleExpression ) )* )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:80:2: (otherlv_0= KEYWORD_2 ( (lv_expressions_1_0= ruleExpression ) )* )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:81:2: otherlv_0= KEYWORD_2 ( (lv_expressions_1_0= ruleExpression ) )*
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:80:2: (otherlv_0= Model ( (lv_expressions_1_0= ruleExpression ) )* )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:81:2: otherlv_0= Model ( (lv_expressions_1_0= ruleExpression ) )*
                     {
-                    otherlv_0=(Token)match(input,KEYWORD_2,FollowSets000.FOLLOW_KEYWORD_2_in_ruleModel122); if (state.failed) return current;
+                    otherlv_0=(Token)match(input,Model,FollowSets000.FOLLOW_Model_in_ruleModel122); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_0, grammarAccess.getModelAccess().getModelKeyword_0_0());
@@ -174,7 +174,7 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
                         int alt1=2;
                         int LA1_0 = input.LA(1);
 
-                        if ( ((LA1_0>=KEYWORD_1 && LA1_0<=RULE_ID)) ) {
+                        if ( ((LA1_0>=HyphenMinusHyphenMinus && LA1_0<=RULE_ID)) ) {
                             alt1=1;
                         }
 
@@ -228,12 +228,12 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:104:6: (otherlv_2= KEYWORD_3 ( (lv_values_3_0= ruleDataTypeExpression ) )* )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:104:6: (otherlv_2= DataType ( (lv_values_3_0= ruleDataTypeExpression ) )* )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:104:6: (otherlv_2= KEYWORD_3 ( (lv_values_3_0= ruleDataTypeExpression ) )* )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:105:2: otherlv_2= KEYWORD_3 ( (lv_values_3_0= ruleDataTypeExpression ) )*
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:104:6: (otherlv_2= DataType ( (lv_values_3_0= ruleDataTypeExpression ) )* )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:105:2: otherlv_2= DataType ( (lv_values_3_0= ruleDataTypeExpression ) )*
                     {
-                    otherlv_2=(Token)match(input,KEYWORD_3,FollowSets000.FOLLOW_KEYWORD_3_in_ruleModel164); if (state.failed) return current;
+                    otherlv_2=(Token)match(input,DataType,FollowSets000.FOLLOW_DataType_in_ruleModel164); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_2, grammarAccess.getModelAccess().getDataTypeKeyword_1_0());
@@ -245,7 +245,7 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
                         int alt2=2;
                         int LA2_0 = input.LA(1);
 
-                        if ( ((LA2_0>=KEYWORD_1 && LA2_0<=RULE_ID)) ) {
+                        if ( ((LA2_0>=HyphenMinusHyphenMinus && LA2_0<=RULE_ID)) ) {
                             alt2=1;
                         }
 
@@ -383,7 +383,7 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
             if ( (LA4_0==RULE_ID) ) {
                 alt4=1;
             }
-            else if ( (LA4_0==KEYWORD_1) ) {
+            else if ( (LA4_0==HyphenMinusHyphenMinus) ) {
                 alt4=2;
             }
             else {
@@ -511,7 +511,7 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "rulePreop"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:190:1: rulePreop returns [EObject current=null] : ( () ( (lv_functionName_1_0= KEYWORD_1 ) ) ( (lv_expr_2_0= ruleVariable ) ) ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:190:1: rulePreop returns [EObject current=null] : ( () ( (lv_functionName_1_0= HyphenMinusHyphenMinus ) ) ( (lv_expr_2_0= ruleVariable ) ) ) ;
     public final EObject rulePreop() throws RecognitionException {
         EObject current = null;
 
@@ -522,11 +522,11 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:193:28: ( ( () ( (lv_functionName_1_0= KEYWORD_1 ) ) ( (lv_expr_2_0= ruleVariable ) ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:194:1: ( () ( (lv_functionName_1_0= KEYWORD_1 ) ) ( (lv_expr_2_0= ruleVariable ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:193:28: ( ( () ( (lv_functionName_1_0= HyphenMinusHyphenMinus ) ) ( (lv_expr_2_0= ruleVariable ) ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:194:1: ( () ( (lv_functionName_1_0= HyphenMinusHyphenMinus ) ) ( (lv_expr_2_0= ruleVariable ) ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:194:1: ( () ( (lv_functionName_1_0= KEYWORD_1 ) ) ( (lv_expr_2_0= ruleVariable ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:194:2: () ( (lv_functionName_1_0= KEYWORD_1 ) ) ( (lv_expr_2_0= ruleVariable ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:194:1: ( () ( (lv_functionName_1_0= HyphenMinusHyphenMinus ) ) ( (lv_expr_2_0= ruleVariable ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:194:2: () ( (lv_functionName_1_0= HyphenMinusHyphenMinus ) ) ( (lv_expr_2_0= ruleVariable ) )
             {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:194:2: ()
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:195:2: 
@@ -546,13 +546,13 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:203:2: ( (lv_functionName_1_0= KEYWORD_1 ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:204:1: (lv_functionName_1_0= KEYWORD_1 )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:203:2: ( (lv_functionName_1_0= HyphenMinusHyphenMinus ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:204:1: (lv_functionName_1_0= HyphenMinusHyphenMinus )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:204:1: (lv_functionName_1_0= KEYWORD_1 )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:205:3: lv_functionName_1_0= KEYWORD_1
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:204:1: (lv_functionName_1_0= HyphenMinusHyphenMinus )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:205:3: lv_functionName_1_0= HyphenMinusHyphenMinus
             {
-            lv_functionName_1_0=(Token)match(input,KEYWORD_1,FollowSets000.FOLLOW_KEYWORD_1_in_rulePreop411); if (state.failed) return current;
+            lv_functionName_1_0=(Token)match(input,HyphenMinusHyphenMinus,FollowSets000.FOLLOW_HyphenMinusHyphenMinus_in_rulePreop411); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                       newLeafNode(lv_functionName_1_0, grammarAccess.getPreopAccess().getFunctionNameHyphenMinusHyphenMinusKeyword_1_0());
@@ -670,7 +670,7 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "rulePostop"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:254:1: rulePostop returns [EObject current=null] : (this_Variable_0= ruleVariable ( () ( (lv_functionName_2_0= KEYWORD_1 ) ) )? ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:254:1: rulePostop returns [EObject current=null] : (this_Variable_0= ruleVariable ( () ( (lv_functionName_2_0= HyphenMinusHyphenMinus ) ) )? ) ;
     public final EObject rulePostop() throws RecognitionException {
         EObject current = null;
 
@@ -681,11 +681,11 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:257:28: ( (this_Variable_0= ruleVariable ( () ( (lv_functionName_2_0= KEYWORD_1 ) ) )? ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:258:1: (this_Variable_0= ruleVariable ( () ( (lv_functionName_2_0= KEYWORD_1 ) ) )? )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:257:28: ( (this_Variable_0= ruleVariable ( () ( (lv_functionName_2_0= HyphenMinusHyphenMinus ) ) )? ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:258:1: (this_Variable_0= ruleVariable ( () ( (lv_functionName_2_0= HyphenMinusHyphenMinus ) ) )? )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:258:1: (this_Variable_0= ruleVariable ( () ( (lv_functionName_2_0= KEYWORD_1 ) ) )? )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:259:2: this_Variable_0= ruleVariable ( () ( (lv_functionName_2_0= KEYWORD_1 ) ) )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:258:1: (this_Variable_0= ruleVariable ( () ( (lv_functionName_2_0= HyphenMinusHyphenMinus ) ) )? )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:259:2: this_Variable_0= ruleVariable ( () ( (lv_functionName_2_0= HyphenMinusHyphenMinus ) ) )?
             {
             if ( state.backtracking==0 ) {
                
@@ -708,11 +708,11 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
                       afterParserOrEnumRuleCall();
                   
             }
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:270:1: ( () ( (lv_functionName_2_0= KEYWORD_1 ) ) )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:270:1: ( () ( (lv_functionName_2_0= HyphenMinusHyphenMinus ) ) )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
-            if ( (LA5_0==KEYWORD_1) ) {
+            if ( (LA5_0==HyphenMinusHyphenMinus) ) {
                 int LA5_1 = input.LA(2);
 
                 if ( (LA5_1==RULE_ID) ) {
@@ -722,13 +722,13 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
                         alt5=1;
                     }
                 }
-                else if ( (LA5_1==EOF||LA5_1==KEYWORD_1) ) {
+                else if ( (LA5_1==EOF||LA5_1==HyphenMinusHyphenMinus) ) {
                     alt5=1;
                 }
             }
             switch (alt5) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:270:2: () ( (lv_functionName_2_0= KEYWORD_1 ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:270:2: () ( (lv_functionName_2_0= HyphenMinusHyphenMinus ) )
                     {
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:270:2: ()
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:271:2: 
@@ -748,13 +748,13 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:279:2: ( (lv_functionName_2_0= KEYWORD_1 ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:280:1: (lv_functionName_2_0= KEYWORD_1 )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:279:2: ( (lv_functionName_2_0= HyphenMinusHyphenMinus ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:280:1: (lv_functionName_2_0= HyphenMinusHyphenMinus )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:280:1: (lv_functionName_2_0= KEYWORD_1 )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:281:3: lv_functionName_2_0= KEYWORD_1
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:280:1: (lv_functionName_2_0= HyphenMinusHyphenMinus )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:281:3: lv_functionName_2_0= HyphenMinusHyphenMinus
                     {
-                    lv_functionName_2_0=(Token)match(input,KEYWORD_1,FollowSets000.FOLLOW_KEYWORD_1_in_rulePostop569); if (state.failed) return current;
+                    lv_functionName_2_0=(Token)match(input,HyphenMinusHyphenMinus,FollowSets000.FOLLOW_HyphenMinusHyphenMinus_in_rulePostop569); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               newLeafNode(lv_functionName_2_0, grammarAccess.getPostopAccess().getFunctionNameHyphenMinusHyphenMinusKeyword_1_1_0());
@@ -991,7 +991,7 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
             if ( (LA6_0==RULE_ID) ) {
                 alt6=1;
             }
-            else if ( (LA6_0==KEYWORD_1) ) {
+            else if ( (LA6_0==HyphenMinusHyphenMinus) ) {
                 alt6=2;
             }
             else {
@@ -1118,7 +1118,7 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleDataTypePreop"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:405:1: ruleDataTypePreop returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= KEYWORD_1 this_DataTypeVariable_1= ruleDataTypeVariable ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:405:1: ruleDataTypePreop returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= HyphenMinusHyphenMinus this_DataTypeVariable_1= ruleDataTypeVariable ) ;
     public final AntlrDatatypeRuleToken ruleDataTypePreop() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1129,13 +1129,13 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:409:6: ( (kw= KEYWORD_1 this_DataTypeVariable_1= ruleDataTypeVariable ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:410:1: (kw= KEYWORD_1 this_DataTypeVariable_1= ruleDataTypeVariable )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:409:6: ( (kw= HyphenMinusHyphenMinus this_DataTypeVariable_1= ruleDataTypeVariable ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:410:1: (kw= HyphenMinusHyphenMinus this_DataTypeVariable_1= ruleDataTypeVariable )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:410:1: (kw= KEYWORD_1 this_DataTypeVariable_1= ruleDataTypeVariable )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:411:2: kw= KEYWORD_1 this_DataTypeVariable_1= ruleDataTypeVariable
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:410:1: (kw= HyphenMinusHyphenMinus this_DataTypeVariable_1= ruleDataTypeVariable )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:411:2: kw= HyphenMinusHyphenMinus this_DataTypeVariable_1= ruleDataTypeVariable
             {
-            kw=(Token)match(input,KEYWORD_1,FollowSets000.FOLLOW_KEYWORD_1_in_ruleDataTypePreop907); if (state.failed) return current;
+            kw=(Token)match(input,HyphenMinusHyphenMinus,FollowSets000.FOLLOW_HyphenMinusHyphenMinus_in_ruleDataTypePreop907); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                       current.merge(kw);
@@ -1226,7 +1226,7 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleDataTypePostop"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:444:1: ruleDataTypePostop returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_DataTypeVariable_0= ruleDataTypeVariable (kw= KEYWORD_1 )? ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:444:1: ruleDataTypePostop returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_DataTypeVariable_0= ruleDataTypeVariable (kw= HyphenMinusHyphenMinus )? ) ;
     public final AntlrDatatypeRuleToken ruleDataTypePostop() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1237,11 +1237,11 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:448:6: ( (this_DataTypeVariable_0= ruleDataTypeVariable (kw= KEYWORD_1 )? ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:449:1: (this_DataTypeVariable_0= ruleDataTypeVariable (kw= KEYWORD_1 )? )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:448:6: ( (this_DataTypeVariable_0= ruleDataTypeVariable (kw= HyphenMinusHyphenMinus )? ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:449:1: (this_DataTypeVariable_0= ruleDataTypeVariable (kw= HyphenMinusHyphenMinus )? )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:449:1: (this_DataTypeVariable_0= ruleDataTypeVariable (kw= KEYWORD_1 )? )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:450:5: this_DataTypeVariable_0= ruleDataTypeVariable (kw= KEYWORD_1 )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:449:1: (this_DataTypeVariable_0= ruleDataTypeVariable (kw= HyphenMinusHyphenMinus )? )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:450:5: this_DataTypeVariable_0= ruleDataTypeVariable (kw= HyphenMinusHyphenMinus )?
             {
             if ( state.backtracking==0 ) {
                
@@ -1263,14 +1263,14 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
                       afterParserOrEnumRuleCall();
                   
             }
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:460:1: (kw= KEYWORD_1 )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:460:1: (kw= HyphenMinusHyphenMinus )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
-            if ( (LA7_0==KEYWORD_1) ) {
+            if ( (LA7_0==HyphenMinusHyphenMinus) ) {
                 int LA7_1 = input.LA(2);
 
-                if ( (LA7_1==EOF||LA7_1==KEYWORD_1) ) {
+                if ( (LA7_1==EOF||LA7_1==HyphenMinusHyphenMinus) ) {
                     alt7=1;
                 }
                 else if ( (LA7_1==RULE_ID) ) {
@@ -1283,9 +1283,9 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
             }
             switch (alt7) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:461:2: kw= KEYWORD_1
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:461:2: kw= HyphenMinusHyphenMinus
                     {
-                    kw=(Token)match(input,KEYWORD_1,FollowSets000.FOLLOW_KEYWORD_1_in_ruleDataTypePostop1051); if (state.failed) return current;
+                    kw=(Token)match(input,HyphenMinusHyphenMinus,FollowSets000.FOLLOW_HyphenMinusHyphenMinus_in_ruleDataTypePostop1051); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -1408,8 +1408,8 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
     public final void synpred5_InternalBug296889ExTestLanguageParser_fragment() throws RecognitionException {   
         Token lv_functionName_2_0=null;
 
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:270:2: ( () ( (lv_functionName_2_0= KEYWORD_1 ) ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:270:2: () ( (lv_functionName_2_0= KEYWORD_1 ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:270:2: ( () ( (lv_functionName_2_0= HyphenMinusHyphenMinus ) ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:270:2: () ( (lv_functionName_2_0= HyphenMinusHyphenMinus ) )
         {
         // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:270:2: ()
         // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:271:2: 
@@ -1422,13 +1422,13 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
 
         }
 
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:279:2: ( (lv_functionName_2_0= KEYWORD_1 ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:280:1: (lv_functionName_2_0= KEYWORD_1 )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:279:2: ( (lv_functionName_2_0= HyphenMinusHyphenMinus ) )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:280:1: (lv_functionName_2_0= HyphenMinusHyphenMinus )
         {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:280:1: (lv_functionName_2_0= KEYWORD_1 )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:281:3: lv_functionName_2_0= KEYWORD_1
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:280:1: (lv_functionName_2_0= HyphenMinusHyphenMinus )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:281:3: lv_functionName_2_0= HyphenMinusHyphenMinus
         {
-        lv_functionName_2_0=(Token)match(input,KEYWORD_1,FollowSets000.FOLLOW_KEYWORD_1_in_synpred5_InternalBug296889ExTestLanguageParser569); if (state.failed) return ;
+        lv_functionName_2_0=(Token)match(input,HyphenMinusHyphenMinus,FollowSets000.FOLLOW_HyphenMinusHyphenMinus_in_synpred5_InternalBug296889ExTestLanguageParser569); if (state.failed) return ;
 
         }
 
@@ -1444,10 +1444,10 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
     public final void synpred7_InternalBug296889ExTestLanguageParser_fragment() throws RecognitionException {   
         Token kw=null;
 
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:461:2: (kw= KEYWORD_1 )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:461:2: kw= KEYWORD_1
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:461:2: (kw= HyphenMinusHyphenMinus )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.g:461:2: kw= HyphenMinusHyphenMinus
         {
-        kw=(Token)match(input,KEYWORD_1,FollowSets000.FOLLOW_KEYWORD_1_in_synpred7_InternalBug296889ExTestLanguageParser1051); if (state.failed) return ;
+        kw=(Token)match(input,HyphenMinusHyphenMinus,FollowSets000.FOLLOW_HyphenMinusHyphenMinus_in_synpred7_InternalBug296889ExTestLanguageParser1051); if (state.failed) return ;
 
         }
     }
@@ -1491,9 +1491,9 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
     private static class FollowSets000 {
         public static final BitSet FOLLOW_ruleModel_in_entryRuleModel73 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleModel83 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_2_in_ruleModel122 = new BitSet(new long[]{0x00000000000000C2L});
+        public static final BitSet FOLLOW_Model_in_ruleModel122 = new BitSet(new long[]{0x00000000000000C2L});
         public static final BitSet FOLLOW_ruleExpression_in_ruleModel142 = new BitSet(new long[]{0x00000000000000C2L});
-        public static final BitSet FOLLOW_KEYWORD_3_in_ruleModel164 = new BitSet(new long[]{0x00000000000000C2L});
+        public static final BitSet FOLLOW_DataType_in_ruleModel164 = new BitSet(new long[]{0x00000000000000C2L});
         public static final BitSet FOLLOW_ruleDataTypeExpression_in_ruleModel184 = new BitSet(new long[]{0x00000000000000C2L});
         public static final BitSet FOLLOW_ruleExpression_in_entryRuleExpression221 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleExpression231 = new BitSet(new long[]{0x0000000000000002L});
@@ -1501,12 +1501,12 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
         public static final BitSet FOLLOW_rulePreop_in_ruleExpression311 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rulePreop_in_entryRulePreop345 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRulePreop355 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_1_in_rulePreop411 = new BitSet(new long[]{0x0000000000000080L});
+        public static final BitSet FOLLOW_HyphenMinusHyphenMinus_in_rulePreop411 = new BitSet(new long[]{0x0000000000000080L});
         public static final BitSet FOLLOW_ruleVariable_in_rulePreop443 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rulePostop_in_entryRulePostop478 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRulePostop488 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleVariable_in_rulePostop538 = new BitSet(new long[]{0x0000000000000042L});
-        public static final BitSet FOLLOW_KEYWORD_1_in_rulePostop569 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_HyphenMinusHyphenMinus_in_rulePostop569 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleVariable_in_entryRuleVariable617 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleVariable627 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_ID_in_ruleVariable681 = new BitSet(new long[]{0x0000000000000002L});
@@ -1516,17 +1516,17 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
         public static final BitSet FOLLOW_ruleDataTypePreop_in_ruleDataTypeExpression813 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleDataTypePreop_in_entryRuleDataTypePreop858 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleDataTypePreop869 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_1_in_ruleDataTypePreop907 = new BitSet(new long[]{0x0000000000000080L});
+        public static final BitSet FOLLOW_HyphenMinusHyphenMinus_in_ruleDataTypePreop907 = new BitSet(new long[]{0x0000000000000080L});
         public static final BitSet FOLLOW_ruleDataTypeVariable_in_ruleDataTypePreop929 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleDataTypePostop_in_entryRuleDataTypePostop974 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleDataTypePostop985 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleDataTypeVariable_in_ruleDataTypePostop1032 = new BitSet(new long[]{0x0000000000000042L});
-        public static final BitSet FOLLOW_KEYWORD_1_in_ruleDataTypePostop1051 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_HyphenMinusHyphenMinus_in_ruleDataTypePostop1051 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleDataTypeVariable_in_entryRuleDataTypeVariable1093 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleDataTypeVariable1104 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_ID_in_ruleDataTypeVariable1143 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_1_in_synpred5_InternalBug296889ExTestLanguageParser569 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_1_in_synpred7_InternalBug296889ExTestLanguageParser1051 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_HyphenMinusHyphenMinus_in_synpred5_InternalBug296889ExTestLanguageParser569 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_HyphenMinusHyphenMinus_in_synpred7_InternalBug296889ExTestLanguageParser1051 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

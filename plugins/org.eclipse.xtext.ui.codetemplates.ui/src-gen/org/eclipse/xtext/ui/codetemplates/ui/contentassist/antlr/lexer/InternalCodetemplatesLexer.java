@@ -13,24 +13,24 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalCodetemplatesLexer extends Lexer {
     public static final int RULE_ID=18;
+    public static final int DollarSign=11;
+    public static final int ReverseSolidusLessThanSignLessThanSign=5;
+    public static final int RightParenthesis=13;
+    public static final int LessThanSignLessThanSign=9;
     public static final int RULE_ANY_OTHER=21;
-    public static final int KEYWORD_1=11;
-    public static final int KEYWORD_5=15;
-    public static final int KEYWORD_4=14;
-    public static final int KEYWORD_13=6;
-    public static final int KEYWORD_3=13;
-    public static final int KEYWORD_14=4;
-    public static final int KEYWORD_2=12;
-    public static final int KEYWORD_11=10;
-    public static final int KEYWORD_12=5;
+    public static final int LeftParenthesis=12;
+    public static final int Colon=16;
     public static final int EOF=-1;
-    public static final int KEYWORD_10=9;
+    public static final int For=6;
+    public static final int FullStop=15;
+    public static final int DollarSignLeftCurlyBracket=8;
     public static final int RULE_STRING=19;
-    public static final int KEYWORD_6=16;
-    public static final int KEYWORD_7=17;
-    public static final int KEYWORD_8=7;
-    public static final int KEYWORD_9=8;
+    public static final int DollarSignDollarSign=7;
+    public static final int Templates=4;
     public static final int RULE_WS=20;
+    public static final int Comma=14;
+    public static final int GreaterThanSignGreaterThanSign=10;
+    public static final int RightCurlyBracket=17;
 
     // delegates
     // delegators
@@ -45,13 +45,13 @@ public class InternalCodetemplatesLexer extends Lexer {
     }
     public String getGrammarFileName() { return "../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g"; }
 
-    // $ANTLR start "KEYWORD_14"
-    public final void mKEYWORD_14() throws RecognitionException {
+    // $ANTLR start "Templates"
+    public final void mTemplates() throws RecognitionException {
         try {
-            int _type = KEYWORD_14;
+            int _type = Templates;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:19:12: ( 'templates' )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:19:14: 'templates'
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:19:11: ( 'templates' )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:19:13: 'templates'
             {
             match("templates"); 
 
@@ -64,15 +64,15 @@ public class InternalCodetemplatesLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_14"
+    // $ANTLR end "Templates"
 
-    // $ANTLR start "KEYWORD_12"
-    public final void mKEYWORD_12() throws RecognitionException {
+    // $ANTLR start "ReverseSolidusLessThanSignLessThanSign"
+    public final void mReverseSolidusLessThanSignLessThanSign() throws RecognitionException {
         try {
-            int _type = KEYWORD_12;
+            int _type = ReverseSolidusLessThanSignLessThanSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:21:12: ( '\\\\<<' )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:21:14: '\\\\<<'
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:21:40: ( '\\\\<<' )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:21:42: '\\\\<<'
             {
             match("\\<<"); 
 
@@ -85,15 +85,15 @@ public class InternalCodetemplatesLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_12"
+    // $ANTLR end "ReverseSolidusLessThanSignLessThanSign"
 
-    // $ANTLR start "KEYWORD_13"
-    public final void mKEYWORD_13() throws RecognitionException {
+    // $ANTLR start "For"
+    public final void mFor() throws RecognitionException {
         try {
-            int _type = KEYWORD_13;
+            int _type = For;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:23:12: ( 'for' )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:23:14: 'for'
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:23:5: ( 'for' )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:23:7: 'for'
             {
             match("for"); 
 
@@ -106,15 +106,15 @@ public class InternalCodetemplatesLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_13"
+    // $ANTLR end "For"
 
-    // $ANTLR start "KEYWORD_8"
-    public final void mKEYWORD_8() throws RecognitionException {
+    // $ANTLR start "DollarSignDollarSign"
+    public final void mDollarSignDollarSign() throws RecognitionException {
         try {
-            int _type = KEYWORD_8;
+            int _type = DollarSignDollarSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:25:11: ( '$$' )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:25:13: '$$'
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:25:22: ( '$$' )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:25:24: '$$'
             {
             match("$$"); 
 
@@ -127,15 +127,15 @@ public class InternalCodetemplatesLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_8"
+    // $ANTLR end "DollarSignDollarSign"
 
-    // $ANTLR start "KEYWORD_9"
-    public final void mKEYWORD_9() throws RecognitionException {
+    // $ANTLR start "DollarSignLeftCurlyBracket"
+    public final void mDollarSignLeftCurlyBracket() throws RecognitionException {
         try {
-            int _type = KEYWORD_9;
+            int _type = DollarSignLeftCurlyBracket;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:27:11: ( '${' )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:27:13: '${'
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:27:28: ( '${' )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:27:30: '${'
             {
             match("${"); 
 
@@ -148,15 +148,15 @@ public class InternalCodetemplatesLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_9"
+    // $ANTLR end "DollarSignLeftCurlyBracket"
 
-    // $ANTLR start "KEYWORD_10"
-    public final void mKEYWORD_10() throws RecognitionException {
+    // $ANTLR start "LessThanSignLessThanSign"
+    public final void mLessThanSignLessThanSign() throws RecognitionException {
         try {
-            int _type = KEYWORD_10;
+            int _type = LessThanSignLessThanSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:29:12: ( '<<' )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:29:14: '<<'
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:29:26: ( '<<' )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:29:28: '<<'
             {
             match("<<"); 
 
@@ -169,15 +169,15 @@ public class InternalCodetemplatesLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_10"
+    // $ANTLR end "LessThanSignLessThanSign"
 
-    // $ANTLR start "KEYWORD_11"
-    public final void mKEYWORD_11() throws RecognitionException {
+    // $ANTLR start "GreaterThanSignGreaterThanSign"
+    public final void mGreaterThanSignGreaterThanSign() throws RecognitionException {
         try {
-            int _type = KEYWORD_11;
+            int _type = GreaterThanSignGreaterThanSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:31:12: ( '>>' )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:31:14: '>>'
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:31:32: ( '>>' )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:31:34: '>>'
             {
             match(">>"); 
 
@@ -190,15 +190,15 @@ public class InternalCodetemplatesLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_11"
+    // $ANTLR end "GreaterThanSignGreaterThanSign"
 
-    // $ANTLR start "KEYWORD_1"
-    public final void mKEYWORD_1() throws RecognitionException {
+    // $ANTLR start "DollarSign"
+    public final void mDollarSign() throws RecognitionException {
         try {
-            int _type = KEYWORD_1;
+            int _type = DollarSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:33:11: ( '$' )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:33:13: '$'
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:33:12: ( '$' )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:33:14: '$'
             {
             match('$'); 
 
@@ -210,15 +210,15 @@ public class InternalCodetemplatesLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_1"
+    // $ANTLR end "DollarSign"
 
-    // $ANTLR start "KEYWORD_2"
-    public final void mKEYWORD_2() throws RecognitionException {
+    // $ANTLR start "LeftParenthesis"
+    public final void mLeftParenthesis() throws RecognitionException {
         try {
-            int _type = KEYWORD_2;
+            int _type = LeftParenthesis;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:35:11: ( '(' )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:35:13: '('
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:35:17: ( '(' )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:35:19: '('
             {
             match('('); 
 
@@ -230,15 +230,15 @@ public class InternalCodetemplatesLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_2"
+    // $ANTLR end "LeftParenthesis"
 
-    // $ANTLR start "KEYWORD_3"
-    public final void mKEYWORD_3() throws RecognitionException {
+    // $ANTLR start "RightParenthesis"
+    public final void mRightParenthesis() throws RecognitionException {
         try {
-            int _type = KEYWORD_3;
+            int _type = RightParenthesis;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:37:11: ( ')' )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:37:13: ')'
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:37:18: ( ')' )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:37:20: ')'
             {
             match(')'); 
 
@@ -250,15 +250,15 @@ public class InternalCodetemplatesLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_3"
+    // $ANTLR end "RightParenthesis"
 
-    // $ANTLR start "KEYWORD_4"
-    public final void mKEYWORD_4() throws RecognitionException {
+    // $ANTLR start "Comma"
+    public final void mComma() throws RecognitionException {
         try {
-            int _type = KEYWORD_4;
+            int _type = Comma;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:39:11: ( ',' )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:39:13: ','
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:39:7: ( ',' )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:39:9: ','
             {
             match(','); 
 
@@ -270,15 +270,15 @@ public class InternalCodetemplatesLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_4"
+    // $ANTLR end "Comma"
 
-    // $ANTLR start "KEYWORD_5"
-    public final void mKEYWORD_5() throws RecognitionException {
+    // $ANTLR start "FullStop"
+    public final void mFullStop() throws RecognitionException {
         try {
-            int _type = KEYWORD_5;
+            int _type = FullStop;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:41:11: ( '.' )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:41:13: '.'
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:41:10: ( '.' )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:41:12: '.'
             {
             match('.'); 
 
@@ -290,15 +290,15 @@ public class InternalCodetemplatesLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_5"
+    // $ANTLR end "FullStop"
 
-    // $ANTLR start "KEYWORD_6"
-    public final void mKEYWORD_6() throws RecognitionException {
+    // $ANTLR start "Colon"
+    public final void mColon() throws RecognitionException {
         try {
-            int _type = KEYWORD_6;
+            int _type = Colon;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:43:11: ( ':' )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:43:13: ':'
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:43:7: ( ':' )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:43:9: ':'
             {
             match(':'); 
 
@@ -310,15 +310,15 @@ public class InternalCodetemplatesLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_6"
+    // $ANTLR end "Colon"
 
-    // $ANTLR start "KEYWORD_7"
-    public final void mKEYWORD_7() throws RecognitionException {
+    // $ANTLR start "RightCurlyBracket"
+    public final void mRightCurlyBracket() throws RecognitionException {
         try {
-            int _type = KEYWORD_7;
+            int _type = RightCurlyBracket;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:45:11: ( '}' )
-            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:45:13: '}'
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:45:19: ( '}' )
+            // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:45:21: '}'
             {
             match('}'); 
 
@@ -330,7 +330,7 @@ public class InternalCodetemplatesLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_7"
+    // $ANTLR end "RightCurlyBracket"
 
     // $ANTLR start "RULE_ID"
     public final void mRULE_ID() throws RecognitionException {
@@ -562,131 +562,131 @@ public class InternalCodetemplatesLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:8: ( KEYWORD_14 | KEYWORD_12 | KEYWORD_13 | KEYWORD_8 | KEYWORD_9 | KEYWORD_10 | KEYWORD_11 | KEYWORD_1 | KEYWORD_2 | KEYWORD_3 | KEYWORD_4 | KEYWORD_5 | KEYWORD_6 | KEYWORD_7 | RULE_ID | RULE_STRING | RULE_WS | RULE_ANY_OTHER )
+        // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:8: ( Templates | ReverseSolidusLessThanSignLessThanSign | For | DollarSignDollarSign | DollarSignLeftCurlyBracket | LessThanSignLessThanSign | GreaterThanSignGreaterThanSign | DollarSign | LeftParenthesis | RightParenthesis | Comma | FullStop | Colon | RightCurlyBracket | RULE_ID | RULE_STRING | RULE_WS | RULE_ANY_OTHER )
         int alt5=18;
         alt5 = dfa5.predict(input);
         switch (alt5) {
             case 1 :
-                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:10: KEYWORD_14
+                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:10: Templates
                 {
-                mKEYWORD_14(); 
+                mTemplates(); 
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:21: KEYWORD_12
+                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:20: ReverseSolidusLessThanSignLessThanSign
                 {
-                mKEYWORD_12(); 
+                mReverseSolidusLessThanSignLessThanSign(); 
 
                 }
                 break;
             case 3 :
-                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:32: KEYWORD_13
+                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:59: For
                 {
-                mKEYWORD_13(); 
+                mFor(); 
 
                 }
                 break;
             case 4 :
-                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:43: KEYWORD_8
+                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:63: DollarSignDollarSign
                 {
-                mKEYWORD_8(); 
+                mDollarSignDollarSign(); 
 
                 }
                 break;
             case 5 :
-                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:53: KEYWORD_9
+                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:84: DollarSignLeftCurlyBracket
                 {
-                mKEYWORD_9(); 
+                mDollarSignLeftCurlyBracket(); 
 
                 }
                 break;
             case 6 :
-                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:63: KEYWORD_10
+                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:111: LessThanSignLessThanSign
                 {
-                mKEYWORD_10(); 
+                mLessThanSignLessThanSign(); 
 
                 }
                 break;
             case 7 :
-                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:74: KEYWORD_11
+                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:136: GreaterThanSignGreaterThanSign
                 {
-                mKEYWORD_11(); 
+                mGreaterThanSignGreaterThanSign(); 
 
                 }
                 break;
             case 8 :
-                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:85: KEYWORD_1
+                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:167: DollarSign
                 {
-                mKEYWORD_1(); 
+                mDollarSign(); 
 
                 }
                 break;
             case 9 :
-                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:95: KEYWORD_2
+                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:178: LeftParenthesis
                 {
-                mKEYWORD_2(); 
+                mLeftParenthesis(); 
 
                 }
                 break;
             case 10 :
-                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:105: KEYWORD_3
+                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:194: RightParenthesis
                 {
-                mKEYWORD_3(); 
+                mRightParenthesis(); 
 
                 }
                 break;
             case 11 :
-                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:115: KEYWORD_4
+                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:211: Comma
                 {
-                mKEYWORD_4(); 
+                mComma(); 
 
                 }
                 break;
             case 12 :
-                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:125: KEYWORD_5
+                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:217: FullStop
                 {
-                mKEYWORD_5(); 
+                mFullStop(); 
 
                 }
                 break;
             case 13 :
-                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:135: KEYWORD_6
+                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:226: Colon
                 {
-                mKEYWORD_6(); 
+                mColon(); 
 
                 }
                 break;
             case 14 :
-                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:145: KEYWORD_7
+                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:232: RightCurlyBracket
                 {
-                mKEYWORD_7(); 
+                mRightCurlyBracket(); 
 
                 }
                 break;
             case 15 :
-                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:155: RULE_ID
+                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:250: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 16 :
-                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:163: RULE_STRING
+                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:258: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 17 :
-                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:175: RULE_WS
+                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:270: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 18 :
-                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:183: RULE_ANY_OTHER
+                // ../org.eclipse.xtext.ui.codetemplates.ui/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer/InternalCodetemplatesLexer.g:1:278: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
@@ -700,29 +700,19 @@ public class InternalCodetemplatesLexer extends Lexer {
 
     protected DFA5 dfa5 = new DFA5(this);
     static final String DFA5_eotS =
-        "\1\uffff\1\23\1\21\1\23\1\30\2\21\6\uffff\1\21\1\uffff\1\21\2\uffff"+
-        "\1\23\2\uffff\1\23\15\uffff\1\23\1\46\1\23\1\uffff\4\23\1\54\1\uffff";
+        "\1\uffff\1\23\1\21\1\23\1\30\2\21\6\uffff\1\21\1\uffff\1\21\2\uffff\1\23\2\uffff\1\23\15\uffff\1\23\1\46\1\23\1\uffff\4\23\1\54\1\uffff";
     static final String DFA5_eofS =
         "\55\uffff";
     static final String DFA5_minS =
-        "\1\0\1\145\1\74\1\157\1\44\1\74\1\76\6\uffff\1\101\1\uffff\1\0\2"+
-        "\uffff\1\155\2\uffff\1\162\15\uffff\1\160\1\60\1\154\1\uffff\1\141"+
-        "\1\164\1\145\1\163\1\60\1\uffff";
+        "\1\0\1\145\1\74\1\157\1\44\1\74\1\76\6\uffff\1\101\1\uffff\1\0\2\uffff\1\155\2\uffff\1\162\15\uffff\1\160\1\60\1\154\1\uffff\1\141\1\164\1\145\1\163\1\60\1\uffff";
     static final String DFA5_maxS =
-        "\1\uffff\1\145\1\74\1\157\1\173\1\74\1\76\6\uffff\1\172\1\uffff"+
-        "\1\uffff\2\uffff\1\155\2\uffff\1\162\15\uffff\1\160\1\172\1\154"+
-        "\1\uffff\1\141\1\164\1\145\1\163\1\172\1\uffff";
+        "\1\uffff\1\145\1\74\1\157\1\173\1\74\1\76\6\uffff\1\172\1\uffff\1\uffff\2\uffff\1\155\2\uffff\1\162\15\uffff\1\160\1\172\1\154\1\uffff\1\141\1\164\1\145\1\163\1\172\1\uffff";
     static final String DFA5_acceptS =
-        "\7\uffff\1\11\1\12\1\13\1\14\1\15\1\16\1\uffff\1\17\1\uffff\1\21"+
-        "\1\22\1\uffff\1\17\1\2\1\uffff\1\4\1\5\1\10\1\6\1\7\1\11\1\12\1"+
-        "\13\1\14\1\15\1\16\1\20\1\21\3\uffff\1\3\5\uffff\1\1";
+        "\7\uffff\1\11\1\12\1\13\1\14\1\15\1\16\1\uffff\1\17\1\uffff\1\21\1\22\1\uffff\1\17\1\2\1\uffff\1\4\1\5\1\10\1\6\1\7\1\11\1\12\1\13\1\14\1\15\1\16\1\20\1\21\3\uffff\1\3\5\uffff\1\1";
     static final String DFA5_specialS =
         "\1\0\16\uffff\1\1\35\uffff}>";
     static final String[] DFA5_transitionS = {
-            "\11\21\2\20\2\21\1\20\22\21\1\20\3\21\1\4\2\21\1\17\1\7\1\10"+
-            "\2\21\1\11\1\21\1\12\13\21\1\13\1\21\1\5\1\21\1\6\2\21\32\16"+
-            "\1\21\1\2\1\21\1\15\1\16\1\21\5\16\1\3\15\16\1\1\6\16\2\21\1"+
-            "\14\uff82\21",
+            "\11\21\2\20\2\21\1\20\22\21\1\20\3\21\1\4\2\21\1\17\1\7\1\10\2\21\1\11\1\21\1\12\13\21\1\13\1\21\1\5\1\21\1\6\2\21\32\16\1\21\1\2\1\21\1\15\1\16\1\21\5\16\1\3\15\16\1\1\6\16\2\21\1\14\uff82\21",
             "\1\22",
             "\1\24",
             "\1\25",
@@ -799,7 +789,7 @@ public class InternalCodetemplatesLexer extends Lexer {
             this.transition = DFA5_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( KEYWORD_14 | KEYWORD_12 | KEYWORD_13 | KEYWORD_8 | KEYWORD_9 | KEYWORD_10 | KEYWORD_11 | KEYWORD_1 | KEYWORD_2 | KEYWORD_3 | KEYWORD_4 | KEYWORD_5 | KEYWORD_6 | KEYWORD_7 | RULE_ID | RULE_STRING | RULE_WS | RULE_ANY_OTHER );";
+            return "1:1: Tokens : ( Templates | ReverseSolidusLessThanSignLessThanSign | For | DollarSignDollarSign | DollarSignLeftCurlyBracket | LessThanSignLessThanSign | GreaterThanSignGreaterThanSign | DollarSign | LeftParenthesis | RightParenthesis | Comma | FullStop | Colon | RightCurlyBracket | RULE_ID | RULE_STRING | RULE_WS | RULE_ANY_OTHER );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;

@@ -3780,8 +3780,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
     static final String DFA2_specialS =
         "\13\uffff}>";
     static final String[] DFA2_transitionS = {
-            "\1\1\16\uffff\1\2\3\uffff\1\7\5\uffff\1\3\1\uffff\1\4\1\5\1"+
-            "\6\3\uffff\1\10",
+            "\1\1\16\uffff\1\2\3\uffff\1\7\5\uffff\1\3\1\uffff\1\4\1\5\1\6\3\uffff\1\10",
             "\1\12\11\uffff\2\11",
             "",
             "",

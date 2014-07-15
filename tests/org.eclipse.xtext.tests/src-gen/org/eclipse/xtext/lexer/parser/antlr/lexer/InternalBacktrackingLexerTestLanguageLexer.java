@@ -13,22 +13,22 @@ import java.util.Map;
 import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
-    public static final int FRAGMENT_KEYWORD_1=14;
-    public static final int FRAGMENT_KEYWORD_2=15;
+    public static final int FRAGMENT_Abc=14;
     public static final int FRAGMENT_RULE_CHARY=20;
-    public static final int KEYWORD_1=4;
     public static final int FRAGMENT_RULE_CHARA=16;
     public static final int FRAGMENT_RULE_CHARX=18;
     public static final int RULE_CHARY=10;
-    public static final int KEYWORD_2=5;
+    public static final int Abc=4;
     public static final int EOF=-1;
     public static final int RULE_SL_COMMENT=13;
     public static final int FRAGMENT_RULE_YC=19;
     public static final int FRAGMENT_RULE_CHARC=21;
     public static final int FRAGMENT_RULE_CHARB=17;
+    public static final int FRAGMENT_Efg=15;
     public static final int SYNTHETIC_ALL_KEYWORDS=24;
     public static final int RULE_CHARX=8;
     public static final int FRAGMENT_RULE_SL_COMMENT=23;
+    public static final int Efg=5;
     public static final int RULE_YC=9;
     public static final int FRAGMENT_RULE_WS=22;
     public static final int RULE_CHARA=6;
@@ -57,26 +57,26 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
             int _type = SYNTHETIC_ALL_KEYWORDS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
             if ( state.backtracking>0 && alreadyParsedRule(input, 1) ) { return ; }
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguageLexer.g:35:24: ( ( FRAGMENT_KEYWORD_1 )=> FRAGMENT_KEYWORD_1 | ( FRAGMENT_KEYWORD_2 )=> FRAGMENT_KEYWORD_2 | ( FRAGMENT_RULE_CHARA )=> FRAGMENT_RULE_CHARA | ( FRAGMENT_RULE_CHARB )=> FRAGMENT_RULE_CHARB | ( FRAGMENT_RULE_CHARX )=> FRAGMENT_RULE_CHARX | ( FRAGMENT_RULE_YC )=> FRAGMENT_RULE_YC | ( FRAGMENT_RULE_CHARY )=> FRAGMENT_RULE_CHARY | ( FRAGMENT_RULE_CHARC )=> FRAGMENT_RULE_CHARC | ( FRAGMENT_RULE_WS )=> FRAGMENT_RULE_WS | ( FRAGMENT_RULE_SL_COMMENT )=> FRAGMENT_RULE_SL_COMMENT )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguageLexer.g:35:24: ( ( FRAGMENT_Abc )=> FRAGMENT_Abc | ( FRAGMENT_Efg )=> FRAGMENT_Efg | ( FRAGMENT_RULE_CHARA )=> FRAGMENT_RULE_CHARA | ( FRAGMENT_RULE_CHARB )=> FRAGMENT_RULE_CHARB | ( FRAGMENT_RULE_CHARX )=> FRAGMENT_RULE_CHARX | ( FRAGMENT_RULE_YC )=> FRAGMENT_RULE_YC | ( FRAGMENT_RULE_CHARY )=> FRAGMENT_RULE_CHARY | ( FRAGMENT_RULE_CHARC )=> FRAGMENT_RULE_CHARC | ( FRAGMENT_RULE_WS )=> FRAGMENT_RULE_WS | ( FRAGMENT_RULE_SL_COMMENT )=> FRAGMENT_RULE_SL_COMMENT )
             int alt1=10;
             alt1 = dfa1.predict(input);
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguageLexer.g:36:2: ( FRAGMENT_KEYWORD_1 )=> FRAGMENT_KEYWORD_1
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguageLexer.g:36:2: ( FRAGMENT_Abc )=> FRAGMENT_Abc
                     {
-                    mFRAGMENT_KEYWORD_1(); if (state.failed) return ;
+                    mFRAGMENT_Abc(); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
-                      _type = KEYWORD_1; 
+                      _type = Abc; 
                     }
 
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguageLexer.g:37:2: ( FRAGMENT_KEYWORD_2 )=> FRAGMENT_KEYWORD_2
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguageLexer.g:37:2: ( FRAGMENT_Efg )=> FRAGMENT_Efg
                     {
-                    mFRAGMENT_KEYWORD_2(); if (state.failed) return ;
+                    mFRAGMENT_Efg(); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
-                      _type = KEYWORD_2; 
+                      _type = Efg; 
                     }
 
                     }
@@ -172,13 +172,13 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
     }
     // $ANTLR end "SYNTHETIC_ALL_KEYWORDS"
 
-    // $ANTLR start "FRAGMENT_KEYWORD_1"
-    public final void mFRAGMENT_KEYWORD_1() throws RecognitionException {
-        int FRAGMENT_KEYWORD_1_StartIndex = input.index();
+    // $ANTLR start "FRAGMENT_Abc"
+    public final void mFRAGMENT_Abc() throws RecognitionException {
+        int FRAGMENT_Abc_StartIndex = input.index();
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 2) ) { return ; }
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguageLexer.g:47:29: ( 'Abc' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguageLexer.g:47:31: 'Abc'
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguageLexer.g:47:23: ( 'Abc' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguageLexer.g:47:25: 'Abc'
             {
             match("Abc"); if (state.failed) return ;
 
@@ -187,18 +187,18 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 2, FRAGMENT_KEYWORD_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 2, FRAGMENT_Abc_StartIndex); }
         }
     }
-    // $ANTLR end "FRAGMENT_KEYWORD_1"
+    // $ANTLR end "FRAGMENT_Abc"
 
-    // $ANTLR start "FRAGMENT_KEYWORD_2"
-    public final void mFRAGMENT_KEYWORD_2() throws RecognitionException {
-        int FRAGMENT_KEYWORD_2_StartIndex = input.index();
+    // $ANTLR start "FRAGMENT_Efg"
+    public final void mFRAGMENT_Efg() throws RecognitionException {
+        int FRAGMENT_Efg_StartIndex = input.index();
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 3) ) { return ; }
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguageLexer.g:49:29: ( 'Efg' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguageLexer.g:49:31: 'Efg'
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguageLexer.g:49:23: ( 'Efg' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguageLexer.g:49:25: 'Efg'
             {
             match("Efg"); if (state.failed) return ;
 
@@ -207,10 +207,10 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 3, FRAGMENT_KEYWORD_2_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 3, FRAGMENT_Efg_StartIndex); }
         }
     }
-    // $ANTLR end "FRAGMENT_KEYWORD_2"
+    // $ANTLR end "FRAGMENT_Efg"
 
     // $ANTLR start "RULE_CHARA"
     public final void mRULE_CHARA() throws RecognitionException {
@@ -640,10 +640,10 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
     // $ANTLR start synpred1_InternalBacktrackingLexerTestLanguageLexer
     public final void synpred1_InternalBacktrackingLexerTestLanguageLexer_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguageLexer.g:36:2: ( FRAGMENT_KEYWORD_1 )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguageLexer.g:36:3: FRAGMENT_KEYWORD_1
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguageLexer.g:36:2: ( FRAGMENT_Abc )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguageLexer.g:36:3: FRAGMENT_Abc
         {
-        mFRAGMENT_KEYWORD_1(); if (state.failed) return ;
+        mFRAGMENT_Abc(); if (state.failed) return ;
 
         }
     }
@@ -651,10 +651,10 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
     // $ANTLR start synpred2_InternalBacktrackingLexerTestLanguageLexer
     public final void synpred2_InternalBacktrackingLexerTestLanguageLexer_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguageLexer.g:37:2: ( FRAGMENT_KEYWORD_2 )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguageLexer.g:37:3: FRAGMENT_KEYWORD_2
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguageLexer.g:37:2: ( FRAGMENT_Efg )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguageLexer.g:37:3: FRAGMENT_Efg
         {
-        mFRAGMENT_KEYWORD_2(); if (state.failed) return ;
+        mFRAGMENT_Efg(); if (state.failed) return ;
 
         }
     }
@@ -904,8 +904,7 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
     static final String DFA1_specialS =
         "\1\0\1\2\3\uffff\1\1\7\uffff}>";
     static final String[] DFA1_transitionS = {
-            "\2\7\2\uffff\1\7\22\uffff\1\7\16\uffff\1\10\21\uffff\1\1\3\uffff"+
-            "\1\2\22\uffff\1\4\1\5\10\uffff\1\3\1\6",
+            "\2\7\2\uffff\1\7\22\uffff\1\7\16\uffff\1\10\21\uffff\1\1\3\uffff\1\2\22\uffff\1\4\1\5\10\uffff\1\3\1\6",
             "\1\11",
             "",
             "",
@@ -950,7 +949,7 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
             this.transition = DFA1_transition;
         }
         public String getDescription() {
-            return "35:1: SYNTHETIC_ALL_KEYWORDS : ( ( FRAGMENT_KEYWORD_1 )=> FRAGMENT_KEYWORD_1 | ( FRAGMENT_KEYWORD_2 )=> FRAGMENT_KEYWORD_2 | ( FRAGMENT_RULE_CHARA )=> FRAGMENT_RULE_CHARA | ( FRAGMENT_RULE_CHARB )=> FRAGMENT_RULE_CHARB | ( FRAGMENT_RULE_CHARX )=> FRAGMENT_RULE_CHARX | ( FRAGMENT_RULE_YC )=> FRAGMENT_RULE_YC | ( FRAGMENT_RULE_CHARY )=> FRAGMENT_RULE_CHARY | ( FRAGMENT_RULE_CHARC )=> FRAGMENT_RULE_CHARC | ( FRAGMENT_RULE_WS )=> FRAGMENT_RULE_WS | ( FRAGMENT_RULE_SL_COMMENT )=> FRAGMENT_RULE_SL_COMMENT );";
+            return "35:1: SYNTHETIC_ALL_KEYWORDS : ( ( FRAGMENT_Abc )=> FRAGMENT_Abc | ( FRAGMENT_Efg )=> FRAGMENT_Efg | ( FRAGMENT_RULE_CHARA )=> FRAGMENT_RULE_CHARA | ( FRAGMENT_RULE_CHARB )=> FRAGMENT_RULE_CHARB | ( FRAGMENT_RULE_CHARX )=> FRAGMENT_RULE_CHARX | ( FRAGMENT_RULE_YC )=> FRAGMENT_RULE_YC | ( FRAGMENT_RULE_CHARY )=> FRAGMENT_RULE_CHARY | ( FRAGMENT_RULE_CHARC )=> FRAGMENT_RULE_CHARC | ( FRAGMENT_RULE_WS )=> FRAGMENT_RULE_WS | ( FRAGMENT_RULE_SL_COMMENT )=> FRAGMENT_RULE_SL_COMMENT );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;

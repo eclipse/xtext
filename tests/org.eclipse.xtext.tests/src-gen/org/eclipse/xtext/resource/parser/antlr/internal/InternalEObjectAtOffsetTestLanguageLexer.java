@@ -794,28 +794,19 @@ public class InternalEObjectAtOffsetTestLanguageLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\1\uffff\3\20\3\uffff\1\16\2\uffff\3\16\2\uffff\1\20\1\uffff\2\20"+
-        "\10\uffff\1\20\1\40\1\41\1\42\1\20\3\uffff\1\20\1\45\1\uffff";
+        "\1\uffff\3\20\3\uffff\1\16\2\uffff\3\16\2\uffff\1\20\1\uffff\2\20\10\uffff\1\20\1\40\1\41\1\42\1\20\3\uffff\1\20\1\45\1\uffff";
     static final String DFA12_eofS =
         "\46\uffff";
     static final String DFA12_minS =
-        "\1\0\2\157\1\141\3\uffff\1\101\2\uffff\2\0\1\52\2\uffff\1\156\1"+
-        "\uffff\1\157\1\162\10\uffff\1\153\3\60\1\141\3\uffff\1\162\1\60"+
-        "\1\uffff";
+        "\1\0\2\157\1\141\3\uffff\1\101\2\uffff\2\0\1\52\2\uffff\1\156\1\uffff\1\157\1\162\10\uffff\1\153\3\60\1\141\3\uffff\1\162\1\60\1\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\2\157\1\141\3\uffff\1\172\2\uffff\2\uffff\1\57\2\uffff"+
-        "\1\156\1\uffff\1\157\1\162\10\uffff\1\153\3\172\1\141\3\uffff\1"+
-        "\162\1\172\1\uffff";
+        "\1\uffff\2\157\1\141\3\uffff\1\172\2\uffff\2\uffff\1\57\2\uffff\1\156\1\uffff\1\157\1\162\10\uffff\1\153\3\172\1\141\3\uffff\1\162\1\172\1\uffff";
     static final String DFA12_acceptS =
-        "\4\uffff\1\4\1\6\1\7\1\uffff\1\10\1\11\3\uffff\1\15\1\16\1\uffff"+
-        "\1\10\2\uffff\1\4\1\6\1\7\1\11\1\12\1\13\1\14\1\15\5\uffff\1\5\1"+
-        "\3\1\1\2\uffff\1\2";
+        "\4\uffff\1\4\1\6\1\7\1\uffff\1\10\1\11\3\uffff\1\15\1\16\1\uffff\1\10\2\uffff\1\4\1\6\1\7\1\11\1\12\1\13\1\14\1\15\5\uffff\1\5\1\3\1\1\2\uffff\1\2";
     static final String DFA12_specialS =
         "\1\0\11\uffff\1\1\1\2\32\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\16\2\15\2\16\1\15\22\16\1\15\1\16\1\12\4\16\1\13\4\16\1"+
-            "\4\1\16\1\6\1\14\12\11\3\16\1\5\3\16\32\10\3\16\1\7\1\10\1\16"+
-            "\1\10\1\3\3\10\1\2\23\10\1\1\uff85\16",
+            "\11\16\2\15\2\16\1\15\22\16\1\15\1\16\1\12\4\16\1\13\4\16\1\4\1\16\1\6\1\14\12\11\3\16\1\5\3\16\32\10\3\16\1\7\1\10\1\16\1\10\1\3\3\10\1\2\23\10\1\1\uff85\16",
             "\1\17",
             "\1\21",
             "\1\22",

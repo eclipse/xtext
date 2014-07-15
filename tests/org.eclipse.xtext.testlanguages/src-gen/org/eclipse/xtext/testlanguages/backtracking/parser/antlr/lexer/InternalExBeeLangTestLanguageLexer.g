@@ -16,135 +16,135 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 
 
 
-KEYWORD_64 : 'requires-max';
+RequiresMax : 'requires-max';
 
-KEYWORD_65 : 'requires-min';
+RequiresMin : 'requires-min';
 
-KEYWORD_62 : 'implements';
+Implements : 'implements';
 
-KEYWORD_63 : 'properties';
+Properties : 'properties';
 
-KEYWORD_59 : 'function';
+Function : 'function';
 
-KEYWORD_60 : 'provides';
+Provides : 'provides';
 
-KEYWORD_61 : 'requires';
+Requires : 'requires';
 
-KEYWORD_56 : 'builder';
+Builder : 'builder';
 
-KEYWORD_57 : 'context';
+Context : 'context';
 
-KEYWORD_58 : 'version';
+Version : 'version';
 
-KEYWORD_52 : 'cached';
+Cached : 'cached';
 
-KEYWORD_53 : 'greedy';
+Greedy : 'greedy';
 
-KEYWORD_54 : 'output';
+Output : 'output';
 
-KEYWORD_55 : 'source';
+Source : 'source';
 
-KEYWORD_50 : 'final';
+Final : 'final';
 
-KEYWORD_51 : 'input';
+Input : 'input';
 
-KEYWORD_45 : 'name';
+Name : 'name';
 
-KEYWORD_46 : 'this';
+This : 'this';
 
-KEYWORD_47 : 'unit';
+Unit : 'unit';
 
-KEYWORD_48 : 'when';
+When : 'when';
 
-KEYWORD_49 : 'with';
+With : 'with';
 
-KEYWORD_38 : '!==';
+ExclamationMarkEqualsSignEqualsSign : '!==';
 
-KEYWORD_39 : '...';
+FullStopFullStopFullStop : '...';
 
-KEYWORD_40 : '===';
+EqualsSignEqualsSignEqualsSign : '===';
 
-KEYWORD_41 : 'env';
+Env : 'env';
 
-KEYWORD_42 : 'new';
+New : 'new';
 
-KEYWORD_43 : 'val';
+Val : 'val';
 
-KEYWORD_44 : 'var';
+Var : 'var';
 
-KEYWORD_21 : '!=';
+ExclamationMarkEqualsSign : '!=';
 
-KEYWORD_22 : '%=';
+PercentSignEqualsSign : '%=';
 
-KEYWORD_23 : '&&';
+AmpersandAmpersand : '&&';
 
-KEYWORD_24 : '*=';
+AsteriskEqualsSign : '*=';
 
-KEYWORD_25 : '++';
+PlusSignPlusSign : '++';
 
-KEYWORD_26 : '+=';
+PlusSignEqualsSign : '+=';
 
-KEYWORD_27 : '--';
+HyphenMinusHyphenMinus : '--';
 
-KEYWORD_28 : '-=';
+HyphenMinusEqualsSign : '-=';
 
-KEYWORD_29 : '..';
+FullStopFullStop : '..';
 
-KEYWORD_30 : '/=';
+SolidusEqualsSign : '/=';
 
-KEYWORD_31 : '<=';
+LessThanSignEqualsSign : '<=';
 
-KEYWORD_32 : '==';
+EqualsSignEqualsSign : '==';
 
-KEYWORD_33 : '=>';
+EqualsSignGreaterThanSign : '=>';
 
-KEYWORD_34 : '>=';
+GreaterThanSignEqualsSign : '>=';
 
-KEYWORD_35 : 'as';
+As : 'as';
 
-KEYWORD_36 : '||';
+VerticalLineVerticalLine : '||';
 
-KEYWORD_37 : '~=';
+TildeEqualsSign : '~=';
 
-KEYWORD_1 : '!';
+ExclamationMark : '!';
 
-KEYWORD_2 : '%';
+PercentSign : '%';
 
-KEYWORD_3 : '(';
+LeftParenthesis : '(';
 
-KEYWORD_4 : ')';
+RightParenthesis : ')';
 
-KEYWORD_5 : '*';
+Asterisk : '*';
 
-KEYWORD_6 : '+';
+PlusSign : '+';
 
-KEYWORD_7 : ',';
+Comma : ',';
 
-KEYWORD_8 : '-';
+HyphenMinus : '-';
 
-KEYWORD_9 : '.';
+FullStop : '.';
 
-KEYWORD_10 : '/';
+Solidus : '/';
 
-KEYWORD_11 : ':';
+Colon : ':';
 
-KEYWORD_12 : ';';
+Semicolon : ';';
 
-KEYWORD_13 : '<';
+LessThanSign : '<';
 
-KEYWORD_14 : '=';
+EqualsSign : '=';
 
-KEYWORD_15 : '>';
+GreaterThanSign : '>';
 
-KEYWORD_16 : '[';
+LeftSquareBracket : '[';
 
-KEYWORD_17 : ']';
+RightSquareBracket : ']';
 
-KEYWORD_18 : '{';
+LeftCurlyBracket : '{';
 
-KEYWORD_19 : '|';
+VerticalLine : '|';
 
-KEYWORD_20 : '}';
+RightCurlyBracket : '}';
 
 
 

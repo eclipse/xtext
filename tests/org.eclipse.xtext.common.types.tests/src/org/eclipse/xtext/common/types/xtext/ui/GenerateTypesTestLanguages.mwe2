@@ -17,6 +17,7 @@ import de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
 
 var projectName = "org.eclipse.xtext.common.types.tests"
 var runtimeProject = "../${projectName}"
+var lineDelimiter = '\n'
 
 Workflow {
 	bean = StandaloneSetup {
@@ -29,7 +30,7 @@ Workflow {
 		directory="${runtimeProject}/src-gen"
 	} 
 	
-	component = Generator {
+	component = Generator auto-inject {
 		pathRtProject = "${runtimeProject}"
 		pathUiProject = "${runtimeProject}"
 		pathTestProject = "${runtimeProject}"

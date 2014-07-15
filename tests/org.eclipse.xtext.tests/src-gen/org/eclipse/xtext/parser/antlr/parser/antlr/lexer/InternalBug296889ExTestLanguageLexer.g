@@ -16,11 +16,11 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 
 
 
-KEYWORD_3 : 'DataType';
+DataType : 'DataType';
 
-KEYWORD_2 : 'Model';
+Model : 'Model';
 
-KEYWORD_1 : '--';
+HyphenMinusHyphenMinus : '--';
 
 
 

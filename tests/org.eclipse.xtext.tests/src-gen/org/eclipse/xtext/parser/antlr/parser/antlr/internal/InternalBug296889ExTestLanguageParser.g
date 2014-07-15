@@ -78,7 +78,7 @@ ruleModel returns [EObject current=null]
     }
     @after { leaveRule(); }:
 ((
-	otherlv_0=KEYWORD_2
+	otherlv_0=Model
     {
     	newLeafNode(otherlv_0, grammarAccess.getModelAccess().getModelKeyword_0_0());
     }
@@ -102,7 +102,7 @@ ruleModel returns [EObject current=null]
 )
 )*)
     |(
-	otherlv_2=KEYWORD_3
+	otherlv_2=DataType
     {
     	newLeafNode(otherlv_2, grammarAccess.getModelAccess().getDataTypeKeyword_1_0());
     }
@@ -203,7 +203,7 @@ rulePreop returns [EObject current=null]
 )(
 (
 		lv_functionName_1_0=
-	KEYWORD_1
+	HyphenMinusHyphenMinus
     {
         newLeafNode(lv_functionName_1_0, grammarAccess.getPreopAccess().getFunctionNameHyphenMinusHyphenMinusKeyword_1_0());
     }
@@ -279,7 +279,7 @@ rulePostop returns [EObject current=null]
 )(
 (
 		lv_functionName_2_0=
-	KEYWORD_1
+	HyphenMinusHyphenMinus
     {
         newLeafNode(lv_functionName_2_0, grammarAccess.getPostopAccess().getFunctionNameHyphenMinusHyphenMinusKeyword_1_1_0());
     }
@@ -408,7 +408,7 @@ ruleDataTypePreop returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
     @after { leaveRule();
     }:
 (
-	kw=KEYWORD_1 
+	kw=HyphenMinusHyphenMinus 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getDataTypePreopAccess().getHyphenMinusHyphenMinusKeyword_0()); 
@@ -458,7 +458,7 @@ ruleDataTypePostop returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRule
         afterParserOrEnumRuleCall();
     }
 (
-	kw=KEYWORD_1 
+	kw=HyphenMinusHyphenMinus 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getDataTypePostopAccess().getHyphenMinusHyphenMinusKeyword_1()); 

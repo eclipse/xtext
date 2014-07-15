@@ -14,6 +14,7 @@ import org.eclipse.xtext.generator.*
 
 var projectName = "org.eclipse.xtext.tests"
 var runtimeProject = "../${projectName}"
+var lineDelimiter = '\n'
 
 Workflow {
 	bean = StandaloneSetup {
@@ -26,7 +27,7 @@ Workflow {
 		directory = "${runtimeProject}/src-gen/org/eclipse/xtext/resource"
 	}
 	
-	component = Generator {
+	component = Generator auto-inject {
 		pathRtProject = runtimeProject
 		projectNameRt = projectName
 		

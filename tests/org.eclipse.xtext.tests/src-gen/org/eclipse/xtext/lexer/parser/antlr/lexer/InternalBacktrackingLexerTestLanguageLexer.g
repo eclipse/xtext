@@ -10,8 +10,8 @@ options {
 }
 
 tokens {
-	KEYWORD_1;
-	KEYWORD_2;
+	Abc;
+	Efg;
 	RULE_CHARA;
 	RULE_CHARB;
 	RULE_CHARX;
@@ -33,8 +33,8 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 
 
 SYNTHETIC_ALL_KEYWORDS :
-	(FRAGMENT_KEYWORD_1)=> FRAGMENT_KEYWORD_1 {$type = KEYWORD_1; } |
-	(FRAGMENT_KEYWORD_2)=> FRAGMENT_KEYWORD_2 {$type = KEYWORD_2; } |
+	(FRAGMENT_Abc)=> FRAGMENT_Abc {$type = Abc; } |
+	(FRAGMENT_Efg)=> FRAGMENT_Efg {$type = Efg; } |
 	(FRAGMENT_RULE_CHARA)=> FRAGMENT_RULE_CHARA {$type = RULE_CHARA; } |
 	(FRAGMENT_RULE_CHARB)=> FRAGMENT_RULE_CHARB {$type = RULE_CHARB; } |
 	(FRAGMENT_RULE_CHARX)=> FRAGMENT_RULE_CHARX {$type = RULE_CHARX; } |
@@ -44,9 +44,9 @@ SYNTHETIC_ALL_KEYWORDS :
 	(FRAGMENT_RULE_WS)=> FRAGMENT_RULE_WS {$type = RULE_WS; } |
 	(FRAGMENT_RULE_SL_COMMENT)=> FRAGMENT_RULE_SL_COMMENT {$type = RULE_SL_COMMENT; } ;
 
-fragment FRAGMENT_KEYWORD_1 : 'Abc';
+fragment FRAGMENT_Abc : 'Abc';
 
-fragment FRAGMENT_KEYWORD_2 : 'Efg';
+fragment FRAGMENT_Efg : 'Efg';
 
 
 // Rules duplicated to allow inter-rule references

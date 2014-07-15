@@ -763,17 +763,13 @@ public class InternalBug302128TestLanguageLexer extends Lexer {
     static final String DFA14_minS =
         "\1\0\1\uffff\1\75\1\0\1\75\1\uffff\1\101\2\uffff\2\0\1\52\13\uffff";
     static final String DFA14_maxS =
-        "\1\uffff\1\uffff\1\75\1\uffff\1\75\1\uffff\1\172\2\uffff\2\uffff"+
-        "\1\52\13\uffff";
+        "\1\uffff\1\uffff\1\75\1\uffff\1\75\1\uffff\1\172\2\uffff\2\uffff\1\52\13\uffff";
     static final String DFA14_acceptS =
-        "\1\uffff\1\1\3\uffff\1\4\1\uffff\1\5\1\6\3\uffff\1\11\1\12\1\1\1"+
-        "\3\1\2\1\4\1\5\1\6\1\7\1\10\1\11";
+        "\1\uffff\1\1\3\uffff\1\4\1\uffff\1\5\1\6\3\uffff\1\11\1\12\1\1\1\3\1\2\1\4\1\5\1\6\1\7\1\10\1\11";
     static final String DFA14_specialS =
         "\1\1\2\uffff\1\2\5\uffff\1\3\1\0\14\uffff}>";
     static final String[] DFA14_transitionS = {
-            "\11\15\2\14\2\15\1\14\22\15\1\14\1\15\1\11\1\5\3\15\1\12\3\15"+
-            "\1\4\1\15\1\2\1\1\1\13\12\10\3\15\1\3\3\15\32\7\3\15\1\6\1\7"+
-            "\1\15\32\7\uff85\15",
+            "\11\15\2\14\2\15\1\14\22\15\1\14\1\15\1\11\1\5\3\15\1\12\3\15\1\4\1\15\1\2\1\1\1\13\12\10\3\15\1\3\3\15\32\7\3\15\1\6\1\7\1\15\32\7\uff85\15",
             "",
             "\1\17",
             "\0\17",
