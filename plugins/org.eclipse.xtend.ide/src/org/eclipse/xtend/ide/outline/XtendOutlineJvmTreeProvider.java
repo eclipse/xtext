@@ -30,6 +30,7 @@ import com.google.inject.Inject;
  * @author Dennis Huebner
  */
 public class XtendOutlineJvmTreeProvider extends AbstractMultiModeOutlineTreeProvider {
+
 	@Inject
 	XtendJvmLabelProvider xtendJvmLableProvider;
 
