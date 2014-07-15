@@ -7,7 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.xtend.impl;
 
+import org.eclipse.xtext.common.types.JvmVisibility;
+
 /**
+ * An anonymous class is never abstract. An anonymous class is never static. An anonymous class is always implicitly
+ * final. An anonymous class is always an inner class.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class AnonymousClassImplCustom extends AnonymousClassImpl {
@@ -24,6 +29,21 @@ public class AnonymousClassImplCustom extends AnonymousClassImpl {
 
 	@Override
 	public boolean isFinal() {
+		return true;
+	}
+
+	@Override
+	public JvmVisibility getDeclaredVisibility() {
+		return JvmVisibility.DEFAULT;
+	}
+
+	@Override
+	public JvmVisibility getVisibility() {
+		return JvmVisibility.DEFAULT;
+	}
+
+	@Override
+	public boolean isLocal() {
 		return true;
 	}
 }
