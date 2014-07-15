@@ -39,10 +39,12 @@ import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.common.types.JvmTypeReference
 
-abstract class AbstractElementImpl<T> {
+abstract class AbstractDelegator<T> {
 	@Property T delegate
 	@Property CompilationUnitImpl compilationUnit
 }
+
+abstract class AbstractElementImpl<T extends EObject> extends AbstractDelegator<T>{}
 
 abstract class AbstractNamedElementImpl<T extends EObject> extends AbstractElementImpl<T> implements NamedElement {
 	
@@ -62,7 +64,7 @@ class ResolvedParameterImpl implements ResolvedParameter {
 	}
 }
 
-class ResolvedExecutableImpl<T extends IResolvedExecutable, D extends ExecutableDeclaration> extends AbstractElementImpl<T> implements ResolvedExecutable {
+class ResolvedExecutableImpl<T extends IResolvedExecutable, D extends ExecutableDeclaration> extends AbstractDelegator<T> implements ResolvedExecutable {
 	
 	Iterable<? extends ResolvedParameter> resolvedParameters 
 	
@@ -136,7 +138,7 @@ class ResolvedTypeParameterImpl implements ResolvedTypeParameter {
 class ResolvedConstructorImpl extends ResolvedExecutableImpl<IResolvedConstructor, ConstructorDeclaration> implements ResolvedConstructor {
 }
 
-class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeReference> implements TypeReference {
+class TypeReferenceImpl extends AbstractDelegator<LightweightTypeReference> implements TypeReference {
 	
 	@Accessors JvmTypeReference source
 

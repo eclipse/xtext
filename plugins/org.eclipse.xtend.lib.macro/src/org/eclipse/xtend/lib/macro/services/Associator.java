@@ -1,5 +1,7 @@
 package org.eclipse.xtend.lib.macro.services;
 
+import org.eclipse.xtend.lib.macro.declaration.Element;
+import org.eclipse.xtend.lib.macro.declaration.MutableElement;
 import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement;
 import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 
@@ -10,6 +12,12 @@ import org.eclipse.xtend.lib.macro.declaration.NamedElement;
  * @see Tracability
  */
 public interface Associator {
+	
+	/**
+	 * @deprecated use {@link #setPrimarySourceElement(MutableElement, Element)}
+	 */
+	@Deprecated
+	void setPrimarySourceElement(MutableNamedElement javaElement, NamedElement sourceElement);
 	
 	/**
 	 * Associates the generate element with the Xtend source code. Every generated element should have
@@ -32,8 +40,8 @@ public interface Associator {
 	 * primarySourceElement = field.primarySourceElement
 	 * </pre>
 	 * 
-	 * @param primaryElement the source element that the secondaryElement was derived from
-	 * @param secondaryElement the generated Java element 
+	 * @param sourceElement the source element that the secondaryElement was derived from
+	 * @param javaElement the generated Java element 
 	 */
-	void setPrimarySourceElement(MutableNamedElement primaryElement, NamedElement secondaryElement);
+	void setPrimarySourceElement(MutableElement javaElement, Element sourceElement);
 }

@@ -8,6 +8,7 @@
 package org.eclipse.xtend.lib.macro.services;
 
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
+import org.eclipse.xtend.lib.macro.declaration.Element;
 import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 
 import com.google.common.annotations.Beta;
@@ -25,39 +26,80 @@ import com.google.common.annotations.Beta;
 public interface Tracability {
 	
 	/**
+	 * @deprecated use {@link #isSource(Element)}
+	 */
+	@Deprecated
+	boolean isSource(NamedElement element);
+	
+	/**
+	 * @deprecated use {@link #isGenerated(Element)}
+	 */
+	@Deprecated
+	boolean isGenerated(NamedElement element);
+	
+	/**
+	 * @deprecated use {@link #isExternal(Element)}
+	 */
+	@Deprecated
+	boolean isExternal(NamedElement element);
+	
+	/**
+	 * @deprecated use {@link #getPrimaryGeneratedJavaElement(Element)}
+	 */
+	@Deprecated
+	NamedElement getPrimaryGeneratedJavaElement(NamedElement source);
+	/**
+	 * @deprecated use {@link #isThePrimaryGeneratedJavaElement(Element)}
+	 * @since 2.7
+	 */
+	@Deprecated
+	boolean isThePrimaryGeneratedJavaElement(NamedElement target);
+	
+	/**
+	 * @deprecated use {@link #getPrimarySourceElement(Element)}
+	 * @since 2.7
+	 */
+	@Deprecated
+	NamedElement getPrimarySourceElement(NamedElement target);
+	
+	/**
 	 * @param element
 	 * @return whether the given element is a source (i.e Xtend) element.
+	 * @since 2.7
 	 */
-	boolean isSource(NamedElement element);
+	boolean isSource(Element element);
 	
 	/**
 	 * @param element
 	 * @return whether the given element is a Java element derived from the currently processed {@link CompilationUnit}
+	 * @since 2.7
 	 */
-	boolean isGenerated(NamedElement element);
+	boolean isGenerated(Element element);
 	
 	/**
 	 * @param element
 	 * @return whether the given element is a Java element <b>not</b> derived from the currently processed {@link CompilationUnit}
+	 * @since 2.7
 	 */
-	boolean isExternal(NamedElement element);
+	boolean isExternal(Element element);
 	
 	/**
 	 * @param source
 	 * @return the primary generated element (Java) derived from the given source element (Xtend).
+	 * @since 2.7
 	 */
-	NamedElement getPrimaryGeneratedJavaElement(NamedElement source);
+	Element getPrimaryGeneratedJavaElement(Element source);
 	/**
 	 * @since 2.7
 	 * @param target
 	 * @return whether this element was already present in the Xtend source AST.
 	 */
-	boolean isThePrimaryGeneratedJavaElement(NamedElement target);
+	boolean isThePrimaryGeneratedJavaElement(Element target);
 	
 	/**
 	 * @param target
 	 * @return the source element (Xtend) the given target (Java) element is derived from
 	 * @since 2.7
 	 */
-	NamedElement getPrimarySourceElement(NamedElement target);
+	Element getPrimarySourceElement(Element target);
 }

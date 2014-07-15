@@ -125,6 +125,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.AccessorType
 import org.eclipse.xtend.core.macro.ActiveAnnotationContexts.AnnotationCallback
 import org.eclipse.xtend.lib.macro.services.ProblemSupport
+import org.eclipse.xtend.lib.macro.declaration.Element
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -518,7 +519,19 @@ class CompilationUnitImpl implements CompilationUnit {
 				JvmMember : toMemberDeclaration(delegate)
 				JvmTypeParameter : toTypeParameterDeclaration(delegate)
 				JvmFormalParameter : toParameterDeclaration(delegate)
-				default : throw new UnsupportedOperationException("Couldn't translate '"+delegate)
+				default : throw new UnsupportedOperationException("Couldn't translate '"+delegate + "'")
+			}
+		]
+	}
+	
+	def Element toJvmElement(EObject delegate) {
+		getOrCreate(delegate) [
+			switch delegate {
+				JvmIdentifiableElement : toNamedElement(delegate)
+				JvmTypeReference : toTypeReference(delegate)
+				XExpression : toExpression(delegate)
+				JvmAnnotationReference : toAnnotationReference(delegate)
+				default : throw new UnsupportedOperationException("Couldn't translate '"+delegate + "'")
 			}
 		]
 	}
@@ -633,6 +646,20 @@ class CompilationUnitImpl implements CompilationUnit {
 				it.compilationUnit = this
 			]
 		]}
+	
+	def Element toXtendElement(EObject delegate) {
+		getOrCreate(delegate) [
+			switch(delegate) {
+				XtendMember: toXtendMemberDeclaration(delegate)
+				XtendParameter: toXtendParameterDeclaration(delegate)
+				JvmTypeParameter: toXtendTypeParameterDeclaration(delegate)
+				JvmTypeReference : toTypeReference(delegate)
+				XAnnotation : toAnnotationReference(delegate)
+				XExpression : toExpression(delegate)
+				default : throw new UnsupportedOperationException("Couldn't translate '"+delegate + "'")
+			}
+		]
+	}
 	
 	def JvmTypeReference toJvmTypeReference(TypeReference typeRef) {
 		checkCanceled
