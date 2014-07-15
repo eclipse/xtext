@@ -16,6 +16,7 @@ import org.eclipse.xtext.generator.ecore2xtext.Ecore2XtextValueConverterServiceF
 
 var projectName = "org.eclipse.xtext.xtext.ui.tests"
 var runtimeProject = "../${projectName}"
+var lineDelimiter = '\n'
 
 Workflow {
 	bean = StandaloneSetup {
@@ -29,7 +30,7 @@ Workflow {
 		directory="${runtimeProject}/src-gen"
 	} 
 	
-	component = Generator {
+	component = Generator auto-inject {
 		pathRtProject = "${runtimeProject}"
 		pathUiProject = "${runtimeProject}"
 		projectNameRt = "${projectName}"
@@ -37,19 +38,19 @@ Workflow {
 		
 		language = { 
 			uri="classpath:/org/eclipse/xtext/xtext/ui/ecore2xtext/Ecore2XtextTest.xtext"
-			fragment = ecore.EcoreGeneratorFragment {
+			fragment = ecore.EcoreGeneratorFragment auto-inject {
 				emfRuntimeVersion = "2.9"
 			}
 			fragment = grammarAccess.GrammarAccessFragment {}
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
 			fragment = resourceFactory.ResourceFactoryFragment {} 
-			fragment = parser.antlr.XtextAntlrGeneratorFragment {
+			fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
 				options = {
 					classSplitting = true
 				}
 			}
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
-			fragment = parser.antlr.XtextAntlrUiGeneratorFragment {
+			fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {
 				options = {
 					classSplitting = true
 				}

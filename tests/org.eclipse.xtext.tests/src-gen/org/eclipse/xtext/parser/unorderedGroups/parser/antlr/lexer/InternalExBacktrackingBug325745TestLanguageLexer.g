@@ -16,17 +16,17 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 
 
 
-KEYWORD_6 : ':=';
+ColonEqualsSign : ':=';
 
-KEYWORD_1 : '!';
+ExclamationMark : '!';
 
-KEYWORD_2 : '*';
+Asterisk : '*';
 
-KEYWORD_3 : '.';
+FullStop : '.';
 
-KEYWORD_4 : '[';
+LeftSquareBracket : '[';
 
-KEYWORD_5 : ']';
+RightSquareBracket : ']';
 
 
 

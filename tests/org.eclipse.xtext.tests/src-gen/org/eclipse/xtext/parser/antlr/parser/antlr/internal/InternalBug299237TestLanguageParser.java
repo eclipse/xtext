@@ -21,14 +21,14 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalBug299237TestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "KEYWORD_2", "KEYWORD_1", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "Model", "Semicolon", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
     };
     public static final int RULE_ID=6;
     public static final int RULE_STRING=8;
+    public static final int Model=4;
     public static final int RULE_ANY_OTHER=12;
-    public static final int KEYWORD_1=5;
     public static final int RULE_INT=7;
-    public static final int KEYWORD_2=4;
+    public static final int Semicolon=5;
     public static final int RULE_WS=11;
     public static final int RULE_SL_COMMENT=10;
     public static final int EOF=-1;
@@ -110,7 +110,7 @@ public class InternalBug299237TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleModel"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug299237TestLanguageParser.g:70:1: ruleModel returns [EObject current=null] : (otherlv_0= KEYWORD_2 ( (lv_name_1_0= RULE_ID ) ) otherlv_2= KEYWORD_1 ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug299237TestLanguageParser.g:70:1: ruleModel returns [EObject current=null] : (otherlv_0= Model ( (lv_name_1_0= RULE_ID ) ) otherlv_2= Semicolon ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -121,13 +121,13 @@ public class InternalBug299237TestLanguageParser extends AbstractInternalAntlrPa
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug299237TestLanguageParser.g:73:28: ( (otherlv_0= KEYWORD_2 ( (lv_name_1_0= RULE_ID ) ) otherlv_2= KEYWORD_1 ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug299237TestLanguageParser.g:74:1: (otherlv_0= KEYWORD_2 ( (lv_name_1_0= RULE_ID ) ) otherlv_2= KEYWORD_1 )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug299237TestLanguageParser.g:73:28: ( (otherlv_0= Model ( (lv_name_1_0= RULE_ID ) ) otherlv_2= Semicolon ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug299237TestLanguageParser.g:74:1: (otherlv_0= Model ( (lv_name_1_0= RULE_ID ) ) otherlv_2= Semicolon )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug299237TestLanguageParser.g:74:1: (otherlv_0= KEYWORD_2 ( (lv_name_1_0= RULE_ID ) ) otherlv_2= KEYWORD_1 )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug299237TestLanguageParser.g:75:2: otherlv_0= KEYWORD_2 ( (lv_name_1_0= RULE_ID ) ) otherlv_2= KEYWORD_1
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug299237TestLanguageParser.g:74:1: (otherlv_0= Model ( (lv_name_1_0= RULE_ID ) ) otherlv_2= Semicolon )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug299237TestLanguageParser.g:75:2: otherlv_0= Model ( (lv_name_1_0= RULE_ID ) ) otherlv_2= Semicolon
             {
-            otherlv_0=(Token)match(input,KEYWORD_2,FollowSets000.FOLLOW_KEYWORD_2_in_ruleModel115); 
+            otherlv_0=(Token)match(input,Model,FollowSets000.FOLLOW_Model_in_ruleModel115); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getModelAccess().getModelKeyword_0());
                 
@@ -157,7 +157,7 @@ public class InternalBug299237TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            otherlv_2=(Token)match(input,KEYWORD_1,FollowSets000.FOLLOW_KEYWORD_1_in_ruleModel149); 
+            otherlv_2=(Token)match(input,Semicolon,FollowSets000.FOLLOW_Semicolon_in_ruleModel149); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getModelAccess().getSemicolonKeyword_2());
                 
@@ -189,9 +189,9 @@ public class InternalBug299237TestLanguageParser extends AbstractInternalAntlrPa
     private static class FollowSets000 {
         public static final BitSet FOLLOW_ruleModel_in_entryRuleModel67 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleModel77 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_2_in_ruleModel115 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_Model_in_ruleModel115 = new BitSet(new long[]{0x0000000000000040L});
         public static final BitSet FOLLOW_RULE_ID_in_ruleModel131 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_KEYWORD_1_in_ruleModel149 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Semicolon_in_ruleModel149 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

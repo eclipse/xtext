@@ -16,6 +16,7 @@ var uri = "classpath:/org/eclipse/xtext/builder/tests/BuilderTestLanguage.xtext"
 var projectName = "org.eclipse.xtext.builder.tests"
 var runtimeProject = "../${projectName}"
 var classSplitting = true
+var lineDelimiter = '\n'
 
 Workflow {
 	
@@ -28,7 +29,7 @@ Workflow {
 		directory = "${runtimeProject}/src-gen"
 	}
 	
-	component = Generator {
+	component = Generator auto-inject {
 		pathRtProject = runtimeProject
 		pathUiProject = runtimeProject
 		projectNameRt = projectName
@@ -37,16 +38,17 @@ Workflow {
 		language = auto-inject {
 			fragment = ecore.EMFGeneratorFragment {
 				emfRuntimeVersion = "2.9"
+				lineDelimiter = lineDelimiter
 			}
 			fragment = grammarAccess.GrammarAccessFragment {}
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
 			fragment = resourceFactory.ResourceFactoryFragment {}
-			fragment = parser.antlr.XtextAntlrGeneratorFragment {
+			fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
 				options = auto-inject {} 
 			}
 			fragment = validation.JavaValidatorFragment {}
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
-			fragment = parser.antlr.XtextAntlrUiGeneratorFragment { 
+			fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject { 
 				options = auto-inject {}
 			}
 			fragment = builder.BuilderIntegrationFragment {}

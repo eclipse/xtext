@@ -38,15 +38,13 @@ public class AntlrTokenDefProvider implements ITokenDefProvider {
 	
 	protected volatile Map<Integer, String> tokenDefMap;
 	
-//	private static final String TOKEN_COUNT = "Tokens";
-	
 	public Map<Integer, String> getTokenDefMap() {
 		if (antlrTokenFileProvider == null)
 			return Collections.emptyMap();
 		if (tokenDefMap == null) {
 			InputStream tokenFile = antlrTokenFileProvider.getAntlrTokenFile();
 			try {
-				BufferedReader br = new BufferedReader(new InputStreamReader(tokenFile));
+				BufferedReader br = createReader(tokenFile);
 				Map<Integer, String> tokenDefMap = new HashMap<Integer, String>();
 				String line = br.readLine();
 				Pattern pattern = Pattern.compile("(.*)=(\\d+)");
@@ -63,7 +61,7 @@ public class AntlrTokenDefProvider implements ITokenDefProvider {
 						antlrTokenDef = Strings.convertFromJavaString(antlrTokenDef, true);
 						antlrTokenDef = "'" + antlrTokenDef + "'";
 						tokenDefMap.put(antlrTokenType, antlrTokenDef);
-					} else if (antlrTokenDef.startsWith("RULE_") || antlrTokenDef.startsWith("KEYWORD_")) {
+					} else if (antlrTokenDef.startsWith("RULE_") || isKeywordToken(antlrTokenDef)) {
 						tokenDefMap.put(antlrTokenType, antlrTokenDef);
 					}
 					line = br.readLine();
@@ -82,6 +80,20 @@ public class AntlrTokenDefProvider implements ITokenDefProvider {
 			}
 		}
 		return tokenDefMap;
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	protected boolean isKeywordToken(String antlrTokenDef) {
+		return antlrTokenDef.startsWith("KEYWORD_");
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	protected BufferedReader createReader(InputStream stream) {
+		return new BufferedReader(new InputStreamReader(stream));
 	}
 
 	protected void setTokenDefMap(Map<Integer, String> tokenDefMap) {

@@ -7,6 +7,7 @@ import org.eclipse.xtext.ui.generator.*
 var grammarURI = "classpath:/org/eclipse/xtext/testlanguages/noJdt/NoJdtTestLanguage.xtext"
 var fileExtensions = "nojdt"
 var generateXtendStub = true
+var lineDelimiter = '\n'
 
 LanguageConfig auto-inject {
 	uri = grammarURI

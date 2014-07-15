@@ -7,9 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.parser.antlr;
 
-import static org.eclipse.xtext.util.Files.*;
-
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,6 +20,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
+import org.eclipse.xtext.generator.NewlineNormalizer;
 import org.eclipse.xtext.generator.parser.antlr.postProcessing.SuppressWarningsProcessor;
 import org.eclipse.xtext.generator.parser.antlr.splitting.AntlrLexerSplitter;
 import org.eclipse.xtext.generator.parser.antlr.splitting.AntlrParserSplitter;
@@ -28,6 +28,7 @@ import org.eclipse.xtext.generator.parser.antlr.splitting.BacktrackingGuardForUn
 import org.eclipse.xtext.generator.parser.antlr.splitting.PartialClassExtractor;
 import org.eclipse.xtext.generator.parser.antlr.splitting.UnorderedGroupsSplitter;
 import org.eclipse.xtext.generator.parser.packrat.PackratParserFragment;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
@@ -77,6 +78,22 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 		return result;
 	}
 	
+	private String lineDelimiter = Strings.newLine();
+	
+	/**
+	 * @since 2.7
+	 */
+	public String getLineDelimiter() {
+		return lineDelimiter;
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public void setLineDelimiter(String lineDelimiter) {
+		this.lineDelimiter = lineDelimiter;
+	}
+	
 	/**
 	 * @since 2.4
 	 */
@@ -98,77 +115,198 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 		super.generate(grammar, ctx);
 	}
 
-	protected void splitLexerClassFile(String filename) throws IOException {
-		String content = readFileIntoString(filename);
+	/**
+	 * @since 2.7
+	 */
+	protected void splitLexerClassFile(String filename, Charset encoding) throws IOException {
+		String content = readFileIntoString(filename, encoding);
 		AntlrLexerSplitter splitter = new AntlrLexerSplitter(content);
-		writeStringIntoFile(filename, splitter.transform());
+		writeStringIntoFile(filename, splitter.transform(), encoding);
+	}
+	
+	/**
+	 * @deprecated use {@link #splitLexerClassFile(String, Charset)} instead.
+	 */
+	@Deprecated
+	protected void splitLexerClassFile(String filename) throws IOException {
+		splitLexerClassFile(filename, Charset.defaultCharset());
 	}
 
-	protected void splitParserClassFile(String filename) throws IOException {
-		String content = readFileIntoString(filename);
+	/**
+	 * @since 2.7
+	 */
+	protected void splitParserClassFile(String filename, Charset encoding) throws IOException {
+		String content = readFileIntoString(filename, encoding);
 		AntlrParserSplitter splitter = new AntlrParserSplitter(content, getOptions().getFieldsPerClass());
 		PartialClassExtractor extractor = new PartialClassExtractor(splitter.transform(), getOptions().getMethodsPerClass());
-		writeStringIntoFile(filename, extractor.transform());
+		writeStringIntoFile(filename, extractor.transform(), encoding);
+	}
+	
+	/**
+	 * @deprecated use {@link #splitParserClassFile(String, Charset)} instead.
+	 */
+	@Deprecated
+	protected void splitParserClassFile(String filename) throws IOException {
+		splitParserClassFile(filename, Charset.defaultCharset());
 	}
 
-	protected void simplifyUnorderedGroupPredicatesIfRequired(Grammar grammar, String absoluteParserFileName) {
+	/**
+	 * @since 2.7
+	 */
+	protected void simplifyUnorderedGroupPredicatesIfRequired(Grammar grammar, String absoluteParserFileName, Charset encoding) {
 		try {
 			if (containsUnorderedGroup(grammar)) {
 				String javaFile = absoluteParserFileName.replaceAll("\\.g$", getParserFileNameSuffix());
-				simplifyUnorderedGroupPredicates(javaFile);
+				simplifyUnorderedGroupPredicates(javaFile, encoding);
 			}
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+	}
+	
+	/**
+	 * @deprecated use {@link #simplifyUnorderedGroupPredicatesIfRequired(Grammar, String, Charset)} instead.
+	 */
+	@Deprecated
+	protected void simplifyUnorderedGroupPredicatesIfRequired(Grammar grammar, String absoluteParserFileName) {
+		simplifyUnorderedGroupPredicatesIfRequired(grammar, absoluteParserFileName, Charset.defaultCharset());
 	}
 
 	protected String getParserFileNameSuffix() {
 		return "Parser.java";
 	}
 
-	protected void simplifyUnorderedGroupPredicates(String javaFile) throws IOException {
-		String content = readFileIntoString(javaFile);
+	/**
+	 * @since 2.7
+	 */
+	protected void simplifyUnorderedGroupPredicates(String javaFile, Charset encoding) throws IOException {
+		String content = readFileIntoString(javaFile, encoding);
 		UnorderedGroupsSplitter splitter = new UnorderedGroupsSplitter(content);
 		String transformed = splitter.transform();
 		BacktrackingGuardForUnorderedGroupsRemover remover = new BacktrackingGuardForUnorderedGroupsRemover(transformed);
 		String newContent = remover.transform();
-		writeStringIntoFile(javaFile, newContent);
+		writeStringIntoFile(javaFile, newContent, encoding);
+	}
+	
+	/**
+	 * @deprecated use {@link #simplifyUnorderedGroupPredicates(String, Charset)} instead.
+	 */
+	@Deprecated
+	protected void simplifyUnorderedGroupPredicates(String javaFile) throws IOException {
+		simplifyUnorderedGroupPredicates(javaFile, Charset.defaultCharset());
 	}
 
-	private void suppressWarningsImpl(String javaFile) {
-		String content = readFileIntoString(javaFile);
+	private void suppressWarningsImpl(String javaFile, Charset encoding) {
+		String content = readFileIntoString(javaFile, encoding);
 		content = new SuppressWarningsProcessor().process(content);
-		writeStringIntoFile(javaFile, content);
+		writeStringIntoFile(javaFile, content, encoding);
 	}
 
+	/**
+	 * @since 2.7
+	 */
+	protected void suppressWarnings(String grammarFileName, Charset encoding) {
+		suppressWarnings(grammarFileName, grammarFileName, encoding);
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	protected void suppressWarnings(String absoluteLexerGrammarFileName, String absoluteParserGrammarFileName, Charset encoding) {
+		suppressWarningsImpl(absoluteLexerGrammarFileName.replaceAll("\\.g$", getLexerFileNameSuffix()), encoding);
+		suppressWarningsImpl(absoluteParserGrammarFileName.replaceAll("\\.g$", getParserFileNameSuffix()), encoding);
+	}
+	
+	/**
+	 * @deprecated use {@link #suppressWarnings(String, Charset)} instead.
+	 */
+	@Deprecated
 	protected void suppressWarnings(String grammarFileName) {
-		suppressWarnings(grammarFileName, grammarFileName);
+		suppressWarnings(grammarFileName, Charset.defaultCharset());
 	}
 
+	/**
+	 * @deprecated use {@link #suppressWarnings(String, String, Charset)} instead.
+	 */
+	@Deprecated
 	protected void suppressWarnings(String absoluteLexerGrammarFileName, String absoluteParserGrammarFileName) {
-		suppressWarningsImpl(absoluteLexerGrammarFileName.replaceAll("\\.g$", getLexerFileNameSuffix()));
-		suppressWarningsImpl(absoluteParserGrammarFileName.replaceAll("\\.g$", getParserFileNameSuffix()));
+		suppressWarnings(absoluteLexerGrammarFileName, absoluteParserGrammarFileName, Charset.defaultCharset());
+	}
+	
+	private void normalizeLineDelimitersImpl(String javaFile, Charset encoding) {
+		String content = readFileIntoString(javaFile, encoding);
+		content = new NewlineNormalizer(lineDelimiter) {
+			// Antlr tries to outsmart us by using a line length that depends on the system
+			// line delimiter when it splits a very long String (encoded DFA) into a
+			// string concatenation
+			// Here we join these lines again.
+			@Override
+			public String normalizeLineDelimiters(CharSequence content) {
+				String result = super.normalizeLineDelimiters(content);
+				result = result.replaceAll("\"\\+\\n\\s+\"", "");
+				return result;
+			}
+		}.normalizeLineDelimiters(content);
+		writeStringIntoFile(javaFile, content, encoding);
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	protected void normalizeLineDelimiters(String grammarFileName, Charset encoding) {
+		normalizeLineDelimiters(grammarFileName, grammarFileName, encoding);
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	protected void normalizeLineDelimiters(String absoluteLexerGrammarFileName, String absoluteParserGrammarFileName, Charset encoding) {
+		normalizeLineDelimitersImpl(absoluteLexerGrammarFileName.replaceAll("\\.g$", getLexerFileNameSuffix()), encoding);
+		normalizeLineDelimitersImpl(absoluteParserGrammarFileName.replaceAll("\\.g$", getParserFileNameSuffix()), encoding);
 	}
 
 	protected String getLexerFileNameSuffix() {
 		return "Lexer.java";
 	}
 
+	/**
+	 * @since 2.7
+	 */
 	protected void splitParserAndLexerIfEnabled(String absoluteLexerGrammarFileName,
-			String absoluteParserGrammarFileName) {
+			String absoluteParserGrammarFileName, Charset encoding) {
 
 		if (getOptions().isClassSplitting()) {
 			try {
-				splitLexerClassFile(absoluteLexerGrammarFileName.replaceAll("\\.g$", getLexerFileNameSuffix()));
-				splitParserClassFile(absoluteParserGrammarFileName.replaceAll("\\.g$", getParserFileNameSuffix()));
+				splitLexerClassFile(absoluteLexerGrammarFileName.replaceAll("\\.g$", getLexerFileNameSuffix()), encoding);
+				splitParserClassFile(absoluteParserGrammarFileName.replaceAll("\\.g$", getParserFileNameSuffix()), encoding);
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
 		}
 	}
 
+	/**
+	 * @since 2.7
+	 */
+	protected void splitParserAndLexerIfEnabled(String absoluteGrammarFileName, Charset encoding) {
+		splitParserAndLexerIfEnabled(absoluteGrammarFileName, absoluteGrammarFileName, encoding);
+	}
+	
+	/**
+	 * @deprecated use {@link #splitParserAndLexerIfEnabled(String, String, Charset)} instead.
+	 */
+	@Deprecated
+	protected void splitParserAndLexerIfEnabled(String absoluteLexerGrammarFileName,
+			String absoluteParserGrammarFileName) {
+		splitParserAndLexerIfEnabled(absoluteLexerGrammarFileName, absoluteParserGrammarFileName, Charset.defaultCharset());
+	}
+
+	/**
+	 * @deprecated use {@link #splitParserAndLexerIfEnabled(String, Charset)} instead.
+	 */
+	@Deprecated
 	protected void splitParserAndLexerIfEnabled(String absoluteGrammarFileName) {
-		splitParserAndLexerIfEnabled(absoluteGrammarFileName, absoluteGrammarFileName);
+		splitParserAndLexerIfEnabled(absoluteGrammarFileName, absoluteGrammarFileName, Charset.defaultCharset());
 	}
 
 	protected boolean containsUnorderedGroup(Grammar grammar) {

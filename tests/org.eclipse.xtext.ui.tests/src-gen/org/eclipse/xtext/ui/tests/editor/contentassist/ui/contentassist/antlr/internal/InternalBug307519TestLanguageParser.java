@@ -25,20 +25,20 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalBug307519TestLanguageParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "KEYWORD_5", "KEYWORD_3", "KEYWORD_4", "KEYWORD_1", "KEYWORD_2", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "Foo", "T1", "T2", "DollarSign", "PercentSign", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
     };
     public static final int RULE_ID=9;
     public static final int RULE_STRING=11;
+    public static final int DollarSign=7;
+    public static final int T1=5;
     public static final int RULE_ANY_OTHER=15;
-    public static final int KEYWORD_1=7;
+    public static final int T2=6;
     public static final int RULE_INT=10;
-    public static final int KEYWORD_5=4;
-    public static final int KEYWORD_4=6;
-    public static final int KEYWORD_3=5;
-    public static final int KEYWORD_2=8;
+    public static final int Foo=4;
     public static final int RULE_WS=14;
     public static final int RULE_SL_COMMENT=13;
     public static final int EOF=-1;
+    public static final int PercentSign=8;
     public static final int RULE_ML_COMMENT=12;
 
     // delegates
@@ -64,11 +64,11 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalContent
      	private final Map<String, String> tokenNameToValue = new HashMap<String, String>();
      	
      	{
-    		tokenNameToValue.put("KEYWORD_1", "'\u0024'");
-    		tokenNameToValue.put("KEYWORD_2", "'%'");
-    		tokenNameToValue.put("KEYWORD_3", "'T1'");
-    		tokenNameToValue.put("KEYWORD_4", "'T2'");
-    		tokenNameToValue.put("KEYWORD_5", "'foo'");
+    		tokenNameToValue.put("DollarSign", "'\u0024'");
+    		tokenNameToValue.put("PercentSign", "'%'");
+    		tokenNameToValue.put("T1", "'T1'");
+    		tokenNameToValue.put("T2", "'T2'");
+    		tokenNameToValue.put("Foo", "'foo'");
      	}
      	
         public void setGrammarAccess(Bug307519TestLanguageGrammarAccess grammarAccess) {
@@ -162,7 +162,7 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalContent
                 int alt1=2;
                 int LA1_0 = input.LA(1);
 
-                if ( ((LA1_0>=KEYWORD_3 && LA1_0<=KEYWORD_4)) ) {
+                if ( ((LA1_0>=T1 && LA1_0<=T2)) ) {
                     alt1=1;
                 }
 
@@ -422,13 +422,13 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalContent
             int alt2=2;
             int LA2_0 = input.LA(1);
 
-            if ( (LA2_0==KEYWORD_3) ) {
+            if ( (LA2_0==T1) ) {
                 int LA2_1 = input.LA(2);
 
-                if ( (LA2_1==KEYWORD_5) ) {
+                if ( (LA2_1==Foo) ) {
                     alt2=2;
                 }
-                else if ( (LA2_1==EOF||(LA2_1>=KEYWORD_3 && LA2_1<=KEYWORD_4)) ) {
+                else if ( (LA2_1==EOF||(LA2_1>=T1 && LA2_1<=T2)) ) {
                     alt2=1;
                 }
                 else {
@@ -438,13 +438,13 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalContent
                     throw nvae;
                 }
             }
-            else if ( (LA2_0==KEYWORD_4) ) {
+            else if ( (LA2_0==T2) ) {
                 int LA2_2 = input.LA(2);
 
-                if ( (LA2_2==KEYWORD_5) ) {
+                if ( (LA2_2==Foo) ) {
                     alt2=2;
                 }
-                else if ( (LA2_2==EOF||(LA2_2>=KEYWORD_3 && LA2_2<=KEYWORD_4)) ) {
+                else if ( (LA2_2==EOF||(LA2_2>=T1 && LA2_2<=T2)) ) {
                     alt2=1;
                 }
                 else {
@@ -529,20 +529,20 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__EnumT__Alternatives"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:200:1: rule__EnumT__Alternatives : ( ( ( KEYWORD_3 ) ) | ( ( KEYWORD_4 ) ) );
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:200:1: rule__EnumT__Alternatives : ( ( ( T1 ) ) | ( ( T2 ) ) );
     public final void rule__EnumT__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:204:1: ( ( ( KEYWORD_3 ) ) | ( ( KEYWORD_4 ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:204:1: ( ( ( T1 ) ) | ( ( T2 ) ) )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
-            if ( (LA3_0==KEYWORD_3) ) {
+            if ( (LA3_0==T1) ) {
                 alt3=1;
             }
-            else if ( (LA3_0==KEYWORD_4) ) {
+            else if ( (LA3_0==T2) ) {
                 alt3=2;
             }
             else {
@@ -553,16 +553,16 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalContent
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:205:1: ( ( KEYWORD_3 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:205:1: ( ( T1 ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:205:1: ( ( KEYWORD_3 ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:206:1: ( KEYWORD_3 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:205:1: ( ( T1 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:206:1: ( T1 )
                     {
                      before(grammarAccess.getEnumTAccess().getT1EnumLiteralDeclaration_0()); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:207:1: ( KEYWORD_3 )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:207:3: KEYWORD_3
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:207:1: ( T1 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:207:3: T1
                     {
-                    match(input,KEYWORD_3,FollowSets000.FOLLOW_KEYWORD_3_in_rule__EnumT__Alternatives360); 
+                    match(input,T1,FollowSets000.FOLLOW_T1_in_rule__EnumT__Alternatives360); 
 
                     }
 
@@ -574,16 +574,16 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:212:6: ( ( KEYWORD_4 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:212:6: ( ( T2 ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:212:6: ( ( KEYWORD_4 ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:213:1: ( KEYWORD_4 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:212:6: ( ( T2 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:213:1: ( T2 )
                     {
                      before(grammarAccess.getEnumTAccess().getT2EnumLiteralDeclaration_1()); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:214:1: ( KEYWORD_4 )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:214:3: KEYWORD_4
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:214:1: ( T2 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:214:3: T2
                     {
-                    match(input,KEYWORD_4,FollowSets000.FOLLOW_KEYWORD_4_in_rule__EnumT__Alternatives380); 
+                    match(input,T2,FollowSets000.FOLLOW_T2_in_rule__EnumT__Alternatives380); 
 
                     }
 
@@ -735,20 +735,20 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Elem2__Group__1__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:267:1: rule__Elem2__Group__1__Impl : ( KEYWORD_5 ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:267:1: rule__Elem2__Group__1__Impl : ( Foo ) ;
     public final void rule__Elem2__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:271:1: ( ( KEYWORD_5 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:272:1: ( KEYWORD_5 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:271:1: ( ( Foo ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:272:1: ( Foo )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:272:1: ( KEYWORD_5 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:273:1: KEYWORD_5
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:272:1: ( Foo )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:273:1: Foo
             {
              before(grammarAccess.getElem2Access().getFooKeyword_1()); 
-            match(input,KEYWORD_5,FollowSets000.FOLLOW_KEYWORD_5_in_rule__Elem2__Group__1__Impl503); 
+            match(input,Foo,FollowSets000.FOLLOW_Foo_in_rule__Elem2__Group__1__Impl503); 
              after(grammarAccess.getElem2Access().getFooKeyword_1()); 
 
             }
@@ -810,20 +810,20 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Elem2__Group__2__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:298:1: rule__Elem2__Group__2__Impl : ( KEYWORD_2 ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:298:1: rule__Elem2__Group__2__Impl : ( PercentSign ) ;
     public final void rule__Elem2__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:302:1: ( ( KEYWORD_2 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:303:1: ( KEYWORD_2 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:302:1: ( ( PercentSign ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:303:1: ( PercentSign )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:303:1: ( KEYWORD_2 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:304:1: KEYWORD_2
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:303:1: ( PercentSign )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:304:1: PercentSign
             {
              before(grammarAccess.getElem2Access().getPercentSignKeyword_2()); 
-            match(input,KEYWORD_2,FollowSets000.FOLLOW_KEYWORD_2_in_rule__Elem2__Group__2__Impl565); 
+            match(input,PercentSign,FollowSets000.FOLLOW_PercentSign_in_rule__Elem2__Group__2__Impl565); 
              after(grammarAccess.getElem2Access().getPercentSignKeyword_2()); 
 
             }
@@ -880,20 +880,20 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Elem2__Group__3__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:328:1: rule__Elem2__Group__3__Impl : ( KEYWORD_1 ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:328:1: rule__Elem2__Group__3__Impl : ( DollarSign ) ;
     public final void rule__Elem2__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:332:1: ( ( KEYWORD_1 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:333:1: ( KEYWORD_1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:332:1: ( ( DollarSign ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:333:1: ( DollarSign )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:333:1: ( KEYWORD_1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:334:1: KEYWORD_1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:333:1: ( DollarSign )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug307519TestLanguageParser.g:334:1: DollarSign
             {
              before(grammarAccess.getElem2Access().getDollarSignKeyword_3()); 
-            match(input,KEYWORD_1,FollowSets000.FOLLOW_KEYWORD_1_in_rule__Elem2__Group__3__Impl624); 
+            match(input,DollarSign,FollowSets000.FOLLOW_DollarSign_in_rule__Elem2__Group__3__Impl624); 
              after(grammarAccess.getElem2Access().getDollarSignKeyword_3()); 
 
             }
@@ -1099,19 +1099,19 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalContent
         public static final BitSet FOLLOW_rule__EnumT__Alternatives_in_ruleEnumT273 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Model__E1Assignment_0_in_rule__Model__Alternatives308 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Model__E2Assignment_1_in_rule__Model__Alternatives326 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_3_in_rule__EnumT__Alternatives360 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_4_in_rule__EnumT__Alternatives380 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_T1_in_rule__EnumT__Alternatives360 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_T2_in_rule__EnumT__Alternatives380 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Elem2__Group__0__Impl_in_rule__Elem2__Group__0412 = new BitSet(new long[]{0x0000000000000010L});
         public static final BitSet FOLLOW_rule__Elem2__Group__1_in_rule__Elem2__Group__0415 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Elem2__ValueAssignment_0_in_rule__Elem2__Group__0__Impl442 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Elem2__Group__1__Impl_in_rule__Elem2__Group__1472 = new BitSet(new long[]{0x0000000000000100L});
         public static final BitSet FOLLOW_rule__Elem2__Group__2_in_rule__Elem2__Group__1475 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_5_in_rule__Elem2__Group__1__Impl503 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_Foo_in_rule__Elem2__Group__1__Impl503 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Elem2__Group__2__Impl_in_rule__Elem2__Group__2534 = new BitSet(new long[]{0x0000000000000080L});
         public static final BitSet FOLLOW_rule__Elem2__Group__3_in_rule__Elem2__Group__2537 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_2_in_rule__Elem2__Group__2__Impl565 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_PercentSign_in_rule__Elem2__Group__2__Impl565 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Elem2__Group__3__Impl_in_rule__Elem2__Group__3596 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_KEYWORD_1_in_rule__Elem2__Group__3__Impl624 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_DollarSign_in_rule__Elem2__Group__3__Impl624 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleElem1_in_rule__Model__E1Assignment_0668 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleElem2_in_rule__Model__E2Assignment_1699 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleEnumT_in_rule__Elem1__ValueAssignment730 = new BitSet(new long[]{0x0000000000000002L});

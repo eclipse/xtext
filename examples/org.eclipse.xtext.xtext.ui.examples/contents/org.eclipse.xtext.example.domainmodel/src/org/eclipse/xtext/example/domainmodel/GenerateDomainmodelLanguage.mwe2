@@ -15,6 +15,7 @@ var grammarURI = "classpath:/org/eclipse/xtext/example/domainmodel/Domainmodel.x
 var file.extensions = "dmodel"
 var projectName = "org.eclipse.xtext.example.domainmodel"
 var runtimeProject = "../${projectName}"
+var lineDelimiter = '\n'
 
 Workflow {
 
@@ -37,7 +38,7 @@ Workflow {
 		directory = "${runtimeProject}.tests/src-gen"
 	}
 
-	component = Generator {
+	component = Generator auto-inject {
 		pathRtProject = runtimeProject
 		pathUiProject = "${runtimeProject}.ui"
 		pathTestProject = "${runtimeProject}.tests"
@@ -52,7 +53,7 @@ Workflow {
 			fragment = grammarAccess.GrammarAccessFragment {}
 
 			// Generate java classes for Ecore models
-			fragment = ecore.EMFGeneratorFragment {
+			fragment = ecore.EMFGeneratorFragment auto-inject {
 				emfRuntimeVersion = "2.10"
 			}
 
@@ -65,7 +66,7 @@ Workflow {
 			}
 
 			// the following fragment generates an Antlr parser 
-			fragment = parser.antlr.XtextAntlrGeneratorFragment {}
+			fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {}
 
 			// java-based API for validation 
 			fragment = validation.JavaValidatorFragment {
@@ -93,7 +94,7 @@ Workflow {
 
 			// java-based API for content assistance 
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
-			fragment = parser.antlr.XtextAntlrUiGeneratorFragment {}
+			fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}
 
 			fragment = builder.BuilderIntegrationFragment {}
 

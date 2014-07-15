@@ -4554,11 +4554,9 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
     static final String DFA17_eofS =
         "\13\uffff\1\14\1\uffff";
     static final String DFA17_minS =
-        "\1\5\1\uffff\1\20\1\5\1\uffff\1\23\1\4\2\uffff\1\4\1\uffff\1\5\1"+
-        "\uffff";
+        "\1\5\1\uffff\1\20\1\5\1\uffff\1\23\1\4\2\uffff\1\4\1\uffff\1\5\1\uffff";
     static final String DFA17_maxS =
-        "\1\33\1\uffff\1\40\1\5\1\uffff\1\47\1\37\2\uffff\1\37\1\uffff\1"+
-        "\34\1\uffff";
+        "\1\33\1\uffff\1\40\1\5\1\uffff\1\47\1\37\2\uffff\1\37\1\uffff\1\34\1\uffff";
     static final String DFA17_acceptS =
         "\1\uffff\1\1\2\uffff\1\5\2\uffff\1\6\1\2\1\uffff\1\3\1\uffff\1\4";
     static final String DFA17_specialS =

@@ -20,8 +20,8 @@ public class SingleCodetemplateHighlightingLexer extends Lexer {
     public static final int KEYWORD_FOR=5;
     public static final int RULE_WS=13;
     public static final int EOF=-1;
-    public static final int KEYWORD_TEMPLATES=4;
     public static final int KEYWORD_CLOSINGBRACE=7;
+    public static final int KEYWORD_TEMPLATES=4;
 
     // delegates
     // delegators

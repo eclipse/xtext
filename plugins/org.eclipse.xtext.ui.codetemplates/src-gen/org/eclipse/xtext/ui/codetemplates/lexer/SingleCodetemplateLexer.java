@@ -12,22 +12,22 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class SingleCodetemplateLexer extends Lexer {
     public static final int RULE_ID=16;
-    public static final int RULE_ANY_OTHER=19;
-    public static final int KEYWORD_1=9;
-    public static final int KEYWORD_5=13;
-    public static final int KEYWORD_4=12;
-    public static final int KEYWORD_3=11;
-    public static final int KEYWORD_2=10;
-    public static final int KEYWORD_11=5;
-    public static final int EOF=-1;
-    public static final int KEYWORD_12=4;
-    public static final int KEYWORD_10=8;
+    public static final int DollarSignLeftCurlyBracket=7;
+    public static final int DollarSign=9;
     public static final int RULE_STRING=17;
-    public static final int KEYWORD_6=14;
-    public static final int KEYWORD_7=15;
-    public static final int KEYWORD_8=6;
-    public static final int KEYWORD_9=7;
+    public static final int RightParenthesis=11;
+    public static final int DollarSignDollarSign=6;
+    public static final int Templates=4;
+    public static final int RULE_ANY_OTHER=19;
+    public static final int LeftParenthesis=10;
+    public static final int Colon=14;
     public static final int RULE_WS=18;
+    public static final int EOF=-1;
+    public static final int For=5;
+    public static final int Comma=12;
+    public static final int FullStop=13;
+    public static final int GreaterThanSignGreaterThanSign=8;
+    public static final int RightCurlyBracket=15;
 
       private boolean literal = false;
       private boolean templateVariable = false;
@@ -51,16 +51,16 @@ public class SingleCodetemplateLexer extends Lexer {
     }
     public String getGrammarFileName() { return "../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g"; }
 
-    // $ANTLR start "KEYWORD_12"
-    public final void mKEYWORD_12() throws RecognitionException {
+    // $ANTLR start "Templates"
+    public final void mTemplates() throws RecognitionException {
         try {
-            int _type = KEYWORD_12;
+            int _type = Templates;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:25:12: ({...}? => 'templates' )
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:25:14: {...}? => 'templates'
+            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:25:11: ({...}? => 'templates' )
+            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:25:13: {...}? => 'templates'
             {
             if ( !((!literal || templateVariable)) ) {
-                throw new FailedPredicateException(input, "KEYWORD_12", "!literal || templateVariable");
+                throw new FailedPredicateException(input, "Templates", "!literal || templateVariable");
             }
             match("templates"); 
 
@@ -73,18 +73,18 @@ public class SingleCodetemplateLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_12"
+    // $ANTLR end "Templates"
 
-    // $ANTLR start "KEYWORD_11"
-    public final void mKEYWORD_11() throws RecognitionException {
+    // $ANTLR start "For"
+    public final void mFor() throws RecognitionException {
         try {
-            int _type = KEYWORD_11;
+            int _type = For;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:27:12: ({...}? => 'for' )
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:27:14: {...}? => 'for'
+            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:27:5: ({...}? => 'for' )
+            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:27:7: {...}? => 'for'
             {
             if ( !((!literal || templateVariable)) ) {
-                throw new FailedPredicateException(input, "KEYWORD_11", "!literal || templateVariable");
+                throw new FailedPredicateException(input, "For", "!literal || templateVariable");
             }
             match("for"); 
 
@@ -97,15 +97,15 @@ public class SingleCodetemplateLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_11"
+    // $ANTLR end "For"
 
-    // $ANTLR start "KEYWORD_8"
-    public final void mKEYWORD_8() throws RecognitionException {
+    // $ANTLR start "DollarSignDollarSign"
+    public final void mDollarSignDollarSign() throws RecognitionException {
         try {
-            int _type = KEYWORD_8;
+            int _type = DollarSignDollarSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:29:11: ( '$$' )
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:29:13: '$$'
+            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:29:22: ( '$$' )
+            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:29:24: '$$'
             {
             match("$$"); 
 
@@ -118,15 +118,15 @@ public class SingleCodetemplateLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_8"
+    // $ANTLR end "DollarSignDollarSign"
 
-    // $ANTLR start "KEYWORD_9"
-    public final void mKEYWORD_9() throws RecognitionException {
+    // $ANTLR start "DollarSignLeftCurlyBracket"
+    public final void mDollarSignLeftCurlyBracket() throws RecognitionException {
         try {
-            int _type = KEYWORD_9;
+            int _type = DollarSignLeftCurlyBracket;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:31:11: ( '${' )
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:31:13: '${'
+            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:31:28: ( '${' )
+            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:31:30: '${'
             {
             match("${"); 
 
@@ -140,18 +140,18 @@ public class SingleCodetemplateLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_9"
+    // $ANTLR end "DollarSignLeftCurlyBracket"
 
-    // $ANTLR start "KEYWORD_10"
-    public final void mKEYWORD_10() throws RecognitionException {
+    // $ANTLR start "GreaterThanSignGreaterThanSign"
+    public final void mGreaterThanSignGreaterThanSign() throws RecognitionException {
         try {
-            int _type = KEYWORD_10;
+            int _type = GreaterThanSignGreaterThanSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:33:12: ({...}? => '>>' )
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:33:14: {...}? => '>>'
+            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:33:32: ({...}? => '>>' )
+            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:33:34: {...}? => '>>'
             {
             if ( !((!literal || templateVariable)) ) {
-                throw new FailedPredicateException(input, "KEYWORD_10", "!literal || templateVariable");
+                throw new FailedPredicateException(input, "GreaterThanSignGreaterThanSign", "!literal || templateVariable");
             }
             match(">>"); 
 
@@ -165,15 +165,15 @@ public class SingleCodetemplateLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_10"
+    // $ANTLR end "GreaterThanSignGreaterThanSign"
 
-    // $ANTLR start "KEYWORD_1"
-    public final void mKEYWORD_1() throws RecognitionException {
+    // $ANTLR start "DollarSign"
+    public final void mDollarSign() throws RecognitionException {
         try {
-            int _type = KEYWORD_1;
+            int _type = DollarSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:35:11: ( '$' )
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:35:13: '$'
+            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:35:12: ( '$' )
+            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:35:14: '$'
             {
             match('$'); 
 
@@ -185,18 +185,18 @@ public class SingleCodetemplateLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_1"
+    // $ANTLR end "DollarSign"
 
-    // $ANTLR start "KEYWORD_2"
-    public final void mKEYWORD_2() throws RecognitionException {
+    // $ANTLR start "LeftParenthesis"
+    public final void mLeftParenthesis() throws RecognitionException {
         try {
-            int _type = KEYWORD_2;
+            int _type = LeftParenthesis;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:37:11: ({...}? => '(' )
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:37:13: {...}? => '('
+            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:37:17: ({...}? => '(' )
+            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:37:19: {...}? => '('
             {
             if ( !((!literal || templateVariable)) ) {
-                throw new FailedPredicateException(input, "KEYWORD_2", "!literal || templateVariable");
+                throw new FailedPredicateException(input, "LeftParenthesis", "!literal || templateVariable");
             }
             match('('); 
 
@@ -208,18 +208,18 @@ public class SingleCodetemplateLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_2"
+    // $ANTLR end "LeftParenthesis"
 
-    // $ANTLR start "KEYWORD_3"
-    public final void mKEYWORD_3() throws RecognitionException {
+    // $ANTLR start "RightParenthesis"
+    public final void mRightParenthesis() throws RecognitionException {
         try {
-            int _type = KEYWORD_3;
+            int _type = RightParenthesis;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:39:11: ({...}? => ')' )
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:39:13: {...}? => ')'
+            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:39:18: ({...}? => ')' )
+            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:39:20: {...}? => ')'
             {
             if ( !((!literal || templateVariable)) ) {
-                throw new FailedPredicateException(input, "KEYWORD_3", "!literal || templateVariable");
+                throw new FailedPredicateException(input, "RightParenthesis", "!literal || templateVariable");
             }
             match(')'); 
 
@@ -231,18 +231,18 @@ public class SingleCodetemplateLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_3"
+    // $ANTLR end "RightParenthesis"
 
-    // $ANTLR start "KEYWORD_4"
-    public final void mKEYWORD_4() throws RecognitionException {
+    // $ANTLR start "Comma"
+    public final void mComma() throws RecognitionException {
         try {
-            int _type = KEYWORD_4;
+            int _type = Comma;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:41:11: ({...}? => ',' )
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:41:13: {...}? => ','
+            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:41:7: ({...}? => ',' )
+            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:41:9: {...}? => ','
             {
             if ( !((!literal || templateVariable)) ) {
-                throw new FailedPredicateException(input, "KEYWORD_4", "!literal || templateVariable");
+                throw new FailedPredicateException(input, "Comma", "!literal || templateVariable");
             }
             match(','); 
 
@@ -254,18 +254,18 @@ public class SingleCodetemplateLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_4"
+    // $ANTLR end "Comma"
 
-    // $ANTLR start "KEYWORD_5"
-    public final void mKEYWORD_5() throws RecognitionException {
+    // $ANTLR start "FullStop"
+    public final void mFullStop() throws RecognitionException {
         try {
-            int _type = KEYWORD_5;
+            int _type = FullStop;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:43:11: ({...}? => '.' )
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:43:13: {...}? => '.'
+            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:43:10: ({...}? => '.' )
+            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:43:12: {...}? => '.'
             {
             if ( !((!literal || templateVariable)) ) {
-                throw new FailedPredicateException(input, "KEYWORD_5", "!literal || templateVariable");
+                throw new FailedPredicateException(input, "FullStop", "!literal || templateVariable");
             }
             match('.'); 
 
@@ -277,18 +277,18 @@ public class SingleCodetemplateLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_5"
+    // $ANTLR end "FullStop"
 
-    // $ANTLR start "KEYWORD_6"
-    public final void mKEYWORD_6() throws RecognitionException {
+    // $ANTLR start "Colon"
+    public final void mColon() throws RecognitionException {
         try {
-            int _type = KEYWORD_6;
+            int _type = Colon;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:45:11: ({...}? => ':' )
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:45:13: {...}? => ':'
+            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:45:7: ({...}? => ':' )
+            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:45:9: {...}? => ':'
             {
             if ( !((!literal || templateVariable)) ) {
-                throw new FailedPredicateException(input, "KEYWORD_6", "!literal || templateVariable");
+                throw new FailedPredicateException(input, "Colon", "!literal || templateVariable");
             }
             match(':'); 
 
@@ -300,18 +300,18 @@ public class SingleCodetemplateLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_6"
+    // $ANTLR end "Colon"
 
-    // $ANTLR start "KEYWORD_7"
-    public final void mKEYWORD_7() throws RecognitionException {
+    // $ANTLR start "RightCurlyBracket"
+    public final void mRightCurlyBracket() throws RecognitionException {
         try {
-            int _type = KEYWORD_7;
+            int _type = RightCurlyBracket;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:47:11: ({...}? => '}' )
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:47:13: {...}? => '}'
+            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:47:19: ({...}? => '}' )
+            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:47:21: {...}? => '}'
             {
             if ( !((!literal || templateVariable)) ) {
-                throw new FailedPredicateException(input, "KEYWORD_7", "!literal || templateVariable");
+                throw new FailedPredicateException(input, "RightCurlyBracket", "!literal || templateVariable");
             }
             match('}'); 
             templateVariable = false;
@@ -324,7 +324,7 @@ public class SingleCodetemplateLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "KEYWORD_7"
+    // $ANTLR end "RightCurlyBracket"
 
     // $ANTLR start "RULE_ID"
     public final void mRULE_ID() throws RecognitionException {
@@ -565,117 +565,117 @@ public class SingleCodetemplateLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:8: ( KEYWORD_12 | KEYWORD_11 | KEYWORD_8 | KEYWORD_9 | KEYWORD_10 | KEYWORD_1 | KEYWORD_2 | KEYWORD_3 | KEYWORD_4 | KEYWORD_5 | KEYWORD_6 | KEYWORD_7 | RULE_ID | RULE_STRING | RULE_WS | RULE_ANY_OTHER )
+        // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:8: ( Templates | For | DollarSignDollarSign | DollarSignLeftCurlyBracket | GreaterThanSignGreaterThanSign | DollarSign | LeftParenthesis | RightParenthesis | Comma | FullStop | Colon | RightCurlyBracket | RULE_ID | RULE_STRING | RULE_WS | RULE_ANY_OTHER )
         int alt5=16;
         alt5 = dfa5.predict(input);
         switch (alt5) {
             case 1 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:10: KEYWORD_12
+                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:10: Templates
                 {
-                mKEYWORD_12(); 
+                mTemplates(); 
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:21: KEYWORD_11
+                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:20: For
                 {
-                mKEYWORD_11(); 
+                mFor(); 
 
                 }
                 break;
             case 3 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:32: KEYWORD_8
+                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:24: DollarSignDollarSign
                 {
-                mKEYWORD_8(); 
+                mDollarSignDollarSign(); 
 
                 }
                 break;
             case 4 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:42: KEYWORD_9
+                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:45: DollarSignLeftCurlyBracket
                 {
-                mKEYWORD_9(); 
+                mDollarSignLeftCurlyBracket(); 
 
                 }
                 break;
             case 5 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:52: KEYWORD_10
+                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:72: GreaterThanSignGreaterThanSign
                 {
-                mKEYWORD_10(); 
+                mGreaterThanSignGreaterThanSign(); 
 
                 }
                 break;
             case 6 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:63: KEYWORD_1
+                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:103: DollarSign
                 {
-                mKEYWORD_1(); 
+                mDollarSign(); 
 
                 }
                 break;
             case 7 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:73: KEYWORD_2
+                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:114: LeftParenthesis
                 {
-                mKEYWORD_2(); 
+                mLeftParenthesis(); 
 
                 }
                 break;
             case 8 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:83: KEYWORD_3
+                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:130: RightParenthesis
                 {
-                mKEYWORD_3(); 
+                mRightParenthesis(); 
 
                 }
                 break;
             case 9 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:93: KEYWORD_4
+                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:147: Comma
                 {
-                mKEYWORD_4(); 
+                mComma(); 
 
                 }
                 break;
             case 10 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:103: KEYWORD_5
+                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:153: FullStop
                 {
-                mKEYWORD_5(); 
+                mFullStop(); 
 
                 }
                 break;
             case 11 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:113: KEYWORD_6
+                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:162: Colon
                 {
-                mKEYWORD_6(); 
+                mColon(); 
 
                 }
                 break;
             case 12 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:123: KEYWORD_7
+                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:168: RightCurlyBracket
                 {
-                mKEYWORD_7(); 
+                mRightCurlyBracket(); 
 
                 }
                 break;
             case 13 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:133: RULE_ID
+                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:186: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 14 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:141: RULE_STRING
+                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:194: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 15 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:153: RULE_WS
+                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:206: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 16 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:161: RULE_ANY_OTHER
+                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:214: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
@@ -793,7 +793,7 @@ public class SingleCodetemplateLexer extends Lexer {
             this.transition = DFA5_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( KEYWORD_12 | KEYWORD_11 | KEYWORD_8 | KEYWORD_9 | KEYWORD_10 | KEYWORD_1 | KEYWORD_2 | KEYWORD_3 | KEYWORD_4 | KEYWORD_5 | KEYWORD_6 | KEYWORD_7 | RULE_ID | RULE_STRING | RULE_WS | RULE_ANY_OTHER );";
+            return "1:1: Tokens : ( Templates | For | DollarSignDollarSign | DollarSignLeftCurlyBracket | GreaterThanSignGreaterThanSign | DollarSign | LeftParenthesis | RightParenthesis | Comma | FullStop | Colon | RightCurlyBracket | RULE_ID | RULE_STRING | RULE_WS | RULE_ANY_OTHER );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;

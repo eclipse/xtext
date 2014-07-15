@@ -30,6 +30,7 @@ import org.eclipse.emf.mwe.core.WorkflowInterruptedException;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent2;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
+import org.eclipse.emf.mwe2.runtime.Mandatory;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xpand2.XpandExecutionContextImpl;
 import org.eclipse.xpand2.XpandFacade;
@@ -86,6 +87,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 
 	private Naming naming = new Naming();
 	private String encoding;
+	private String lineDelimiter = Strings.newLine();
 	private String pathRtProject = ".";
 	private String pathUiProject = null;
 	private String pathTestProject = null;
@@ -280,6 +282,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 
 	protected Outlet createOutlet(boolean append, String encoding, String name, boolean overwrite, String path) {
 		Outlet outlet = new Outlet(append, encoding, name, overwrite, path);
+		outlet.addPostprocessor(new NewlineNormalizer(getLineDelimiter()));
 		for (PostProcessor pp : getPostProcessors()) {
 			outlet.addPostprocessor(pp);
 		}
@@ -618,5 +621,24 @@ public class Generator extends AbstractWorkflowComponent2 {
 	 */
 	public void setEncoding(String encoding) {
 		this.encoding = encoding;
+	}
+	
+	/**
+	 * Sets the line delimiter that is to be used by this generator. By default,
+	 * the system's line delimiter is used.
+	 * 
+	 * Usually one of {@code \n} and {@code \r\n} is to be configured. 
+	 * 
+	 * @since 2.7
+	 */
+	public void setLineDelimiter(String lineDelimiter) {
+		this.lineDelimiter = lineDelimiter;
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public String getLineDelimiter() {
+		return lineDelimiter;
 	}
 }

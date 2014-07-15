@@ -680,27 +680,19 @@ public class InternalBug362902Lexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\1\uffff\2\15\1\uffff\1\13\2\uffff\3\13\2\uffff\1\15\1\uffff\1\15"+
-        "\6\uffff\5\15\1\34\1\15\1\uffff\2\15\1\40\1\uffff";
+        "\1\uffff\2\15\1\uffff\1\13\2\uffff\3\13\2\uffff\1\15\1\uffff\1\15\6\uffff\5\15\1\34\1\15\1\uffff\2\15\1\40\1\uffff";
     static final String DFA12_eofS =
         "\41\uffff";
     static final String DFA12_minS =
-        "\1\0\1\141\1\145\1\uffff\1\101\2\uffff\2\0\1\52\2\uffff\1\166\1"+
-        "\uffff\1\154\6\uffff\1\157\1\154\1\165\1\157\1\162\1\60\1\151\1"+
-        "\uffff\1\164\1\145\1\60\1\uffff";
+        "\1\0\1\141\1\145\1\uffff\1\101\2\uffff\2\0\1\52\2\uffff\1\166\1\uffff\1\154\6\uffff\1\157\1\154\1\165\1\157\1\162\1\60\1\151\1\uffff\1\164\1\145\1\60\1\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\1\141\1\145\1\uffff\1\172\2\uffff\2\uffff\1\57\2\uffff"+
-        "\1\166\1\uffff\1\154\6\uffff\1\157\1\154\1\165\1\157\1\162\1\172"+
-        "\1\151\1\uffff\1\164\1\145\1\172\1\uffff";
+        "\1\uffff\1\141\1\145\1\uffff\1\172\2\uffff\2\uffff\1\57\2\uffff\1\166\1\uffff\1\154\6\uffff\1\157\1\154\1\165\1\157\1\162\1\172\1\151\1\uffff\1\164\1\145\1\172\1\uffff";
     static final String DFA12_acceptS =
-        "\3\uffff\1\3\1\uffff\1\4\1\5\3\uffff\1\11\1\12\1\uffff\1\4\1\uffff"+
-        "\1\3\1\5\1\6\1\7\1\10\1\11\7\uffff\1\2\3\uffff\1\1";
+        "\3\uffff\1\3\1\uffff\1\4\1\5\3\uffff\1\11\1\12\1\uffff\1\4\1\uffff\1\3\1\5\1\6\1\7\1\10\1\11\7\uffff\1\2\3\uffff\1\1";
     static final String DFA12_specialS =
         "\1\1\6\uffff\1\0\1\2\30\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\13\2\12\2\13\1\12\22\13\1\12\1\3\1\7\4\13\1\10\7\13\1\11"+
-            "\12\6\7\13\7\5\1\2\22\5\3\13\1\4\1\5\1\13\5\5\1\1\24\5\uff85"+
-            "\13",
+            "\11\13\2\12\2\13\1\12\22\13\1\12\1\3\1\7\4\13\1\10\7\13\1\11\12\6\7\13\7\5\1\2\22\5\3\13\1\4\1\5\1\13\5\5\1\1\24\5\uff85\13",
             "\1\14",
             "\1\16",
             "",

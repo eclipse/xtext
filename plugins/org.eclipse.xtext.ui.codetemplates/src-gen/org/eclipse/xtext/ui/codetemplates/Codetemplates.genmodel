@@ -5,7 +5,7 @@
     forceOverwrite="true" modelName="Codetemplates" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.codetemplates.edit"
     editorPluginID="org.eclipse.xtext.ui.codetemplates.editor" runtimeVersion="2.9"
-    usedGenPackages="../../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore ../../../../../../../org.eclipse.xtext/src/org/eclipse/xtext/Xtext.genmodel#//xtext">
+    usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore platform:/resource/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.genmodel#//xtext">
   <genPackages prefix="Templates" basePackage="org.eclipse.xtext.ui.codetemplates"
       disposableProviderFactory="true" ecorePackage="Codetemplates.ecore#/">
     <genClasses ecoreClass="Codetemplates.ecore#//Codetemplates">

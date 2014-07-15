@@ -8,13 +8,15 @@ var grammarURI
 var backtrack = false
 var memoize = false
 var classSplitting = true
-var parser = parser.antlr.XtextAntlrGeneratorFragment {
+var lineDelimiter = '\n'
+
+var parser = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
   	options = auto-inject {
   		fieldsPerClass = "100"
   		methodsPerClass = "100"
   	}
 }
-var contentAssist.parser = parser.antlr.XtextAntlrUiGeneratorFragment {
+var contentAssist.parser = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {
 	options = auto-inject {
   		fieldsPerClass = "100"
   		methodsPerClass = "100"
@@ -27,7 +29,7 @@ LanguageConfig {
 	fragment = grammarAccess.GrammarAccessFragment {}
 
 	// generates Java API for the generated EPackages 
-	fragment = ecore.EcoreGeneratorFragment {
+	fragment = ecore.EcoreGeneratorFragment auto-inject {
 		emfRuntimeVersion = "2.9"
 	}
 

@@ -16,13 +16,13 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 
 
 
-KEYWORD_4 : 'containment';
+Containment : 'containment';
 
-KEYWORD_3 : 'reference';
+Reference : 'reference';
 
-KEYWORD_2 : 'Model';
+Model : 'Model';
 
-KEYWORD_1 : '$';
+DollarSign : '$';
 
 
 

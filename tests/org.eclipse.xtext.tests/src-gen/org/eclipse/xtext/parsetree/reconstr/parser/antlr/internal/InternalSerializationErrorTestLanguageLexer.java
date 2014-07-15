@@ -822,29 +822,19 @@ public class InternalSerializationErrorTestLanguageLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\3\uffff\2\22\2\uffff\1\16\2\uffff\3\16\4\uffff\1\22\1\uffff\1\22"+
-        "\7\uffff\1\37\1\40\2\22\2\uffff\13\22\1\56\1\57\2\uffff";
+        "\3\uffff\2\22\2\uffff\1\16\2\uffff\3\16\4\uffff\1\22\1\uffff\1\22\7\uffff\1\37\1\40\2\22\2\uffff\13\22\1\56\1\57\2\uffff";
     static final String DFA12_eofS =
         "\60\uffff";
     static final String DFA12_minS =
-        "\1\0\2\uffff\1\167\1\156\2\uffff\1\101\2\uffff\2\0\1\52\4\uffff"+
-        "\1\157\1\uffff\1\145\7\uffff\2\60\1\145\1\160\2\uffff\1\161\1\164"+
-        "\1\165\2\151\1\157\1\162\1\156\1\145\1\163\1\144\2\60\2\uffff";
+        "\1\0\2\uffff\1\167\1\156\2\uffff\1\101\2\uffff\2\0\1\52\4\uffff\1\157\1\uffff\1\145\7\uffff\2\60\1\145\1\160\2\uffff\1\161\1\164\1\165\2\151\1\157\1\162\1\156\1\145\1\163\1\144\2\60\2\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\2\uffff\1\167\1\156\2\uffff\1\172\2\uffff\2\uffff\1\57"+
-        "\4\uffff\1\157\1\uffff\1\145\7\uffff\2\172\1\145\1\160\2\uffff\1"+
-        "\161\1\164\1\165\2\151\1\157\1\162\1\156\1\145\1\163\1\144\2\172"+
-        "\2\uffff";
+        "\1\uffff\2\uffff\1\167\1\156\2\uffff\1\172\2\uffff\2\uffff\1\57\4\uffff\1\157\1\uffff\1\145\7\uffff\2\172\1\145\1\160\2\uffff\1\161\1\164\1\165\2\151\1\157\1\162\1\156\1\145\1\163\1\144\2\172\2\uffff";
     static final String DFA12_acceptS =
-        "\1\uffff\1\1\1\2\2\uffff\1\7\1\10\1\uffff\1\11\1\12\3\uffff\1\16"+
-        "\1\17\1\1\1\2\1\uffff\1\11\1\uffff\1\7\1\10\1\12\1\13\1\14\1\15"+
-        "\1\16\4\uffff\1\6\1\5\15\uffff\1\4\1\3";
+        "\1\uffff\1\1\1\2\2\uffff\1\7\1\10\1\uffff\1\11\1\12\3\uffff\1\16\1\17\1\1\1\2\1\uffff\1\11\1\uffff\1\7\1\10\1\12\1\13\1\14\1\15\1\16\4\uffff\1\6\1\5\15\uffff\1\4\1\3";
     static final String DFA12_specialS =
         "\1\1\11\uffff\1\2\1\0\44\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\16\2\15\2\16\1\15\22\16\1\15\1\16\1\12\4\16\1\13\1\1\1\2"+
-            "\5\16\1\14\12\11\7\16\32\10\3\16\1\7\1\10\1\16\16\10\1\4\4\10"+
-            "\1\3\6\10\1\5\1\16\1\6\uff82\16",
+            "\11\16\2\15\2\16\1\15\22\16\1\15\1\16\1\12\4\16\1\13\1\1\1\2\5\16\1\14\12\11\7\16\32\10\3\16\1\7\1\10\1\16\16\10\1\4\4\10\1\3\6\10\1\5\1\16\1\6\uff82\16",
             "",
             "",
             "\1\21",
@@ -871,8 +861,7 @@ public class InternalSerializationErrorTestLanguageLexer extends Lexer {
             "",
             "",
             "",
-            "\12\22\7\uffff\32\22\4\uffff\1\22\1\uffff\16\22\1\36\2\22\1"+
-            "\35\10\22",
+            "\12\22\7\uffff\32\22\4\uffff\1\22\1\uffff\16\22\1\36\2\22\1\35\10\22",
             "\12\22\7\uffff\32\22\4\uffff\1\22\1\uffff\32\22",
             "\1\41",
             "\1\42",

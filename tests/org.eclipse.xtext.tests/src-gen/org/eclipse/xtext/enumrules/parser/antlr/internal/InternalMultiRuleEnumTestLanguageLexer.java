@@ -763,25 +763,19 @@ public class InternalMultiRuleEnumTestLanguageLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\1\uffff\1\20\1\21\1\22\1\23\1\24\1\25\1\16\2\uffff\3\16\2\uffff"+
-        "\1\20\13\uffff\5\20\1\41\1\uffff";
+        "\1\uffff\1\20\1\21\1\22\1\23\1\24\1\25\1\16\2\uffff\3\16\2\uffff\1\20\13\uffff\5\20\1\41\1\uffff";
     static final String DFA12_eofS =
         "\42\uffff";
     static final String DFA12_minS =
-        "\1\0\1\157\5\60\1\101\2\uffff\2\0\1\52\2\uffff\1\155\13\uffff\1"+
-        "\145\1\105\1\156\1\165\1\155\1\60\1\uffff";
+        "\1\0\1\157\5\60\1\101\2\uffff\2\0\1\52\2\uffff\1\155\13\uffff\1\145\1\105\1\156\1\165\1\155\1\60\1\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\1\157\6\172\2\uffff\2\uffff\1\57\2\uffff\1\155\13\uffff"+
-        "\1\145\1\105\1\156\1\165\1\155\1\172\1\uffff";
+        "\1\uffff\1\157\6\172\2\uffff\2\uffff\1\57\2\uffff\1\155\13\uffff\1\145\1\105\1\156\1\165\1\155\1\172\1\uffff";
     static final String DFA12_acceptS =
-        "\10\uffff\1\7\1\10\3\uffff\1\14\1\15\1\uffff\1\7\1\2\1\3\1\4\1\5"+
-        "\1\6\1\10\1\11\1\12\1\13\1\14\6\uffff\1\1";
+        "\10\uffff\1\7\1\10\3\uffff\1\14\1\15\1\uffff\1\7\1\2\1\3\1\4\1\5\1\6\1\10\1\11\1\12\1\13\1\14\6\uffff\1\1";
     static final String DFA12_specialS =
         "\1\0\11\uffff\1\1\1\2\26\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\16\2\15\2\16\1\15\22\16\1\15\1\16\1\12\4\16\1\13\7\16\1"+
-            "\14\12\11\7\16\1\2\1\3\1\4\1\5\1\6\25\10\3\16\1\7\1\10\1\16"+
-            "\22\10\1\1\7\10\uff85\16",
+            "\11\16\2\15\2\16\1\15\22\16\1\15\1\16\1\12\4\16\1\13\7\16\1\14\12\11\7\16\1\2\1\3\1\4\1\5\1\6\25\10\3\16\1\7\1\10\1\16\22\10\1\1\7\10\uff85\16",
             "\1\17",
             "\12\20\7\uffff\32\20\4\uffff\1\20\1\uffff\32\20",
             "\12\20\7\uffff\32\20\4\uffff\1\20\1\uffff\32\20",

@@ -214,7 +214,7 @@ ruleElement returns [EObject current=null]
 
 )
 )
-	otherlv_3=KEYWORD_3
+	otherlv_3=FullStop
     {
     	newLeafNode(otherlv_3, grammarAccess.getElementAccess().getFullStopKeyword_3());
     }
@@ -258,7 +258,7 @@ ruleDataType returns [EObject current=null]
 
 )
 )(
-	otherlv_1=KEYWORD_6
+	otherlv_1=ColonEqualsSign
     {
     	newLeafNode(otherlv_1, grammarAccess.getDataTypeAccess().getColonEqualsSignKeyword_1_0());
     }
@@ -338,7 +338,7 @@ ruleExpression returns [EObject current=null]
 	 				  getUnorderedGroupHelper().select(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 0);
 	 				}
 					({true}?=>(
-	otherlv_2=KEYWORD_4
+	otherlv_2=LeftSquareBracket
     {
     	newLeafNode(otherlv_2, grammarAccess.getExpressionAccess().getLeftSquareBracketKeyword_1_0());
     }
@@ -387,7 +387,7 @@ ruleExpression returns [EObject current=null]
 	}
 
 )((
-	otherlv_4=KEYWORD_4
+	otherlv_4=LeftSquareBracket
     {
     	newLeafNode(otherlv_4, grammarAccess.getExpressionAccess().getLeftSquareBracketKeyword_2_0());
     }
@@ -410,7 +410,7 @@ ruleExpression returns [EObject current=null]
 
 )
 )(
-	otherlv_6=KEYWORD_5
+	otherlv_6=RightSquareBracket
     {
     	newLeafNode(otherlv_6, grammarAccess.getExpressionAccess().getRightSquareBracketKeyword_2_2());
     }
@@ -429,7 +429,7 @@ ruleExpression returns [EObject current=null]
 	 				  getUnorderedGroupHelper().select(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 0);
 	 				}
 					({true}?=>(
-	otherlv_8=KEYWORD_5
+	otherlv_8=RightSquareBracket
     {
     	newLeafNode(otherlv_8, grammarAccess.getExpressionAccess().getRightSquareBracketKeyword_3_0());
     }
@@ -520,7 +520,7 @@ ruleSimpleTerm returns [EObject current=null]
 
 )
 )(
-	otherlv_1=KEYWORD_2
+	otherlv_1=Asterisk
     {
     	newLeafNode(otherlv_1, grammarAccess.getSimpleTermAccess().getAsteriskKeyword_0_1());
     }
@@ -543,7 +543,7 @@ ruleSimpleTerm returns [EObject current=null]
 
 )
 )?(
-	otherlv_3=KEYWORD_1
+	otherlv_3=ExclamationMark
     {
     	newLeafNode(otherlv_3, grammarAccess.getSimpleTermAccess().getExclamationMarkKeyword_0_3());
     }

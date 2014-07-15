@@ -825,26 +825,19 @@ public class InternalKeywordsTestLanguageLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\1\uffff\1\14\1\16\3\12\2\uffff\1\12\2\uffff\1\14\14\uffff\1\14"+
-        "\4\uffff\1\43\6\uffff";
+        "\1\uffff\1\14\1\16\3\12\2\uffff\1\12\2\uffff\1\14\14\uffff\1\14\4\uffff\1\43\6\uffff";
     static final String DFA12_eofS =
         "\44\uffff";
     static final String DFA12_minS =
-        "\1\0\1\157\1\142\2\0\1\101\2\uffff\1\52\2\uffff\1\157\3\uffff\2"+
-        "\0\1\uffff\2\0\4\uffff\1\134\4\uffff\1\142\6\uffff";
+        "\1\0\1\157\1\142\2\0\1\101\2\uffff\1\52\2\uffff\1\157\3\uffff\2\0\1\uffff\2\0\4\uffff\1\134\4\uffff\1\142\6\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\1\157\1\142\2\uffff\1\172\2\uffff\1\57\2\uffff\1\157\3"+
-        "\uffff\2\uffff\1\uffff\2\uffff\4\uffff\1\134\4\uffff\1\142\6\uffff";
+        "\1\uffff\1\157\1\142\2\uffff\1\172\2\uffff\1\57\2\uffff\1\157\3\uffff\2\uffff\1\uffff\2\uffff\4\uffff\1\134\4\uffff\1\142\6\uffff";
     static final String DFA12_acceptS =
-        "\6\uffff\1\11\1\12\1\uffff\1\16\1\17\1\uffff\1\11\1\3\1\4\2\uffff"+
-        "\1\13\2\uffff\1\12\1\14\1\15\1\16\1\uffff\1\5\1\10\1\6\1\7\1\uffff"+
-        "\1\5\1\10\1\6\1\7\1\1\1\2";
+        "\6\uffff\1\11\1\12\1\uffff\1\16\1\17\1\uffff\1\11\1\3\1\4\2\uffff\1\13\2\uffff\1\12\1\14\1\15\1\16\1\uffff\1\5\1\10\1\6\1\7\1\uffff\1\5\1\10\1\6\1\7\1\1\1\2";
     static final String DFA12_specialS =
         "\1\4\2\uffff\1\2\1\6\12\uffff\1\1\1\5\1\uffff\1\0\1\3\20\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\12\2\11\2\12\1\11\22\12\1\11\1\12\1\3\4\12\1\4\7\12\1\10"+
-            "\12\7\7\12\32\6\1\12\1\2\1\12\1\5\1\6\1\12\5\6\1\1\24\6\uff85"+
-            "\12",
+            "\11\12\2\11\2\12\1\11\22\12\1\11\1\12\1\3\4\12\1\4\7\12\1\10\12\7\7\12\32\6\1\12\1\2\1\12\1\5\1\6\1\12\5\6\1\1\24\6\uff85\12",
             "\1\13",
             "\1\15",
             "\141\21\1\17\2\21\1\20\uff9b\21",

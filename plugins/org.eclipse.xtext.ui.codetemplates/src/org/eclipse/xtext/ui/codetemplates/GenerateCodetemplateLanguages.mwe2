@@ -11,6 +11,7 @@ var singleTemplate.file.extensions = "___singlecodetemplate"
 var projectName = "org.eclipse.xtext.ui.codetemplates"
 var runtimeProject = "../${projectName}"
 var uiProject = "${runtimeProject}.ui"
+var lineDelimiter = '\n'
 
 Workflow { 
     bean = StandaloneSetup {
@@ -29,7 +30,7 @@ Workflow {
 		directory = "${runtimeProject}.ui/src-gen"
 	}
 
-	component = Generator {
+	component = Generator auto-inject {
 		pathRtProject = runtimeProject
 		pathUiProject = "${runtimeProject}.ui"
 		pathTestProject = "../../tests/${projectName}.tests"
@@ -43,7 +44,7 @@ Workflow {
 			fragment = grammarAccess.GrammarAccessFragment {}
 
 			// generates Java API for the generated EPackages 
-			fragment = ecore.EcoreGeneratorFragment {
+			fragment = ecore.EcoreGeneratorFragment auto-inject {
 				emfRuntimeVersion = "2.9"
 			}
 
@@ -56,7 +57,7 @@ Workflow {
 			}
 
 			// The antlr parser generator fragment.
-			fragment = parser.antlr.ex.rt.AntlrGeneratorFragment {
+			fragment = parser.antlr.ex.rt.AntlrGeneratorFragment auto-inject {
 			}
 			
 			fragment = parser.antlr.ex.ExternalAntlrLexerFragment {
@@ -97,7 +98,7 @@ Workflow {
 			}
 
 			// generates a more lightweight Antlr parser and lexer tailored for content assist  
-			fragment = parser.antlr.ex.ca.ContentAssistParserGeneratorFragment {}
+			fragment = parser.antlr.ex.ca.ContentAssistParserGeneratorFragment auto-inject {}
 
 			fragment = parser.antlr.ex.ExternalAntlrLexerFragment {
 				lexerGrammar = "org.eclipse.xtext.ui.codetemplates.ui.highlighting.CodetemplatesHighlightingLexer"
@@ -130,7 +131,7 @@ Workflow {
 			}
 
 			// The antlr parser generator fragment.
-			fragment = parser.antlr.ex.rt.AntlrGeneratorFragment {
+			fragment = parser.antlr.ex.rt.AntlrGeneratorFragment auto-inject {
 			}
 			
 			fragment = parser.antlr.ex.ExternalAntlrLexerFragment {
@@ -153,7 +154,7 @@ Workflow {
 			fragment = labeling.LabelProviderFragment {}
 
 			// generates a more lightweight Antlr parser and lexer tailored for content assist  
-			fragment = parser.antlr.ex.ca.ContentAssistParserGeneratorFragment {}
+			fragment = parser.antlr.ex.ca.ContentAssistParserGeneratorFragment auto-inject {}
 
 			fragment = parser.antlr.ex.ExternalAntlrLexerFragment {
 				lexerGrammar = "org.eclipse.xtext.ui.codetemplates.ui.highlighting.SingleCodetemplateHighlightingLexer"

@@ -72,7 +72,7 @@ ruleModel returns [EObject current=null]
     }
     @after { leaveRule(); }:
 (
-	otherlv_0=KEYWORD_2
+	otherlv_0=Model
     {
     	newLeafNode(otherlv_0, grammarAccess.getModelAccess().getModelKeyword_0());
     }
@@ -95,7 +95,7 @@ ruleModel returns [EObject current=null]
 
 )
 )
-	otherlv_2=KEYWORD_1
+	otherlv_2=Semicolon
     {
     	newLeafNode(otherlv_2, grammarAccess.getModelAccess().getSemicolonKeyword_2());
     }

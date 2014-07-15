@@ -296,8 +296,7 @@ public class InternalBug292245TestLanguageLexer extends Lexer {
     static final String DFA2_specialS =
         "\13\uffff}>";
     static final String[] DFA2_transitionS = {
-            "\2\7\2\uffff\1\7\22\uffff\1\7\6\uffff\1\5\10\uffff\12\6\7\uffff"+
-            "\4\6\1\2\1\1\15\6\1\3\6\6\3\uffff\1\4",
+            "\2\7\2\uffff\1\7\22\uffff\1\7\6\uffff\1\5\10\uffff\12\6\7\uffff\4\6\1\2\1\1\15\6\1\3\6\6\3\uffff\1\4",
             "\1\10",
             "\1\11",
             "\1\12",

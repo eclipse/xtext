@@ -30,7 +30,7 @@ Workflow {
 		directory = "${uiProject}/src-gen"
 	}
 
-	component = Generator {
+	component = Generator auto-inject {
 		pathRtProject = runtimeProject
 		pathUiProject = uiProject
 		projectNameRt = runtimeProjectName
@@ -64,7 +64,7 @@ Workflow {
 		}
 	}
 
-	component = Generator {
+	component = Generator auto-inject {
 		pathRtProject = runtimeProject
 		projectNameRt = runtimeProjectName
 		language = {

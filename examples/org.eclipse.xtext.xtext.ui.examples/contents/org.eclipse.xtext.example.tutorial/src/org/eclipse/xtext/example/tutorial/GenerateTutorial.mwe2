@@ -8,6 +8,7 @@ var grammarURI = "classpath:/org/eclipse/xtext/example/tutorial/Tutorial.xtext"
 var file.extensions = "tutorial"
 var projectName = "org.eclipse.xtext.example.tutorial"
 var runtimeProject = "../${projectName}"
+var lineDelimiter = '\n'
 
 Workflow {
     bean = StandaloneSetup {
@@ -25,7 +26,7 @@ Workflow {
         directory = "${runtimeProject}.ui/src-gen"
     }
 
-    component = Generator {
+    component = Generator auto-inject {
         pathRtProject = runtimeProject
         pathUiProject = "${runtimeProject}.ui"
         pathTestProject = "${runtimeProject}.tests"
@@ -39,7 +40,7 @@ Workflow {
             fragment = grammarAccess.GrammarAccessFragment {}
 
             // generates Java API for the generated EPackages
-            fragment = ecore.EcoreGeneratorFragment {
+            fragment = ecore.EcoreGeneratorFragment auto-inject {
             	emfRuntimeVersion = "2.9"
             }
 
@@ -57,7 +58,7 @@ Workflow {
             }
 
             // The antlr parser generator fragment.
-            fragment = parser.antlr.XtextAntlrGeneratorFragment {
+            fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
             //  options = {
             //      backtrack = true
             //  }
@@ -101,7 +102,7 @@ Workflow {
             fragment = contentAssist.JavaBasedContentAssistFragment {}
 
             // generates a more lightweight Antlr parser and lexer tailored for content assist
-            fragment = parser.antlr.XtextAntlrUiGeneratorFragment {}
+            fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}
 
             // generates junit test support classes into Generator#pathTestProject
             fragment = junit.Junit4Fragment {}
