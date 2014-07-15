@@ -9,7 +9,7 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
 import java.util.List;
-import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
+import org.eclipse.xtend.core.macro.declaration.AbstractDelegator;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.UnknownType;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -29,7 +29,7 @@ import org.eclipse.xtext.xbase.typesystem.override.ResolvedOperations;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
-public class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeReference> implements TypeReference {
+public class TypeReferenceImpl extends AbstractDelegator<LightweightTypeReference> implements TypeReference {
   @Accessors
   private JvmTypeReference source;
   

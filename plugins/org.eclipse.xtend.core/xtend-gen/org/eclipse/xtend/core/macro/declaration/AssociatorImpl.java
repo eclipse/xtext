@@ -8,14 +8,16 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
-import org.eclipse.xtend.core.macro.declaration.JvmNamedElementImpl;
+import org.eclipse.xtend.core.macro.declaration.JvmElementImpl;
 import org.eclipse.xtend.core.macro.declaration.TracabilityImpl;
-import org.eclipse.xtend.core.macro.declaration.XtendNamedElementImpl;
+import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
+import org.eclipse.xtend.lib.macro.declaration.Element;
+import org.eclipse.xtend.lib.macro.declaration.MutableElement;
 import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement;
 import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 import org.eclipse.xtend.lib.macro.services.Associator;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 
 @SuppressWarnings("all")
@@ -26,12 +28,30 @@ public class AssociatorImpl implements Associator {
     this.unit = unit;
   }
   
-  public void setPrimarySourceElement(final MutableNamedElement secondaryElement, final NamedElement primaryElement) {
+  public void setPrimarySourceElement(final MutableNamedElement javaElement, final NamedElement sourceElement) {
+    this.setPrimarySourceElement(((MutableElement) javaElement), ((Element) sourceElement));
+  }
+  
+  public void setPrimarySourceElement(final MutableElement javaElement, final Element sourceElement) {
     TracabilityImpl _tracability = this.unit.getTracability();
-    final NamedElement sourceElement = _tracability.getPrimarySourceElement(primaryElement);
+    final Element primarySourceElement = _tracability.getPrimarySourceElement(sourceElement);
+    EObject _switchResult = null;
+    boolean _matched = false;
+    if (!_matched) {
+      if (primarySourceElement instanceof TypeReferenceImpl) {
+        _matched=true;
+        _switchResult = ((TypeReferenceImpl)primarySourceElement).getSource();
+      }
+    }
+    if (!_matched) {
+      if (primarySourceElement instanceof AbstractElementImpl) {
+        _matched=true;
+        _switchResult = ((AbstractElementImpl<?>)primarySourceElement).getDelegate();
+      }
+    }
+    final EObject delegate = _switchResult;
     IJvmModelAssociator _jvmAssociator = this.unit.getJvmAssociator();
-    EObject _delegate = ((XtendNamedElementImpl<?>) sourceElement).getDelegate();
-    JvmIdentifiableElement _delegate_1 = ((JvmNamedElementImpl<?>) secondaryElement).getDelegate();
-    _jvmAssociator.associate(_delegate, _delegate_1);
+    EObject _delegate = ((JvmElementImpl<?>) javaElement).getDelegate();
+    _jvmAssociator.associate(delegate, _delegate);
   }
 }

@@ -298,7 +298,15 @@ public class ValidationContextImpl implements ValidationContext {
     return this.getTracability().getPrimaryGeneratedJavaElement(source);
   }
   
+  public Element getPrimaryGeneratedJavaElement(final Element source) {
+    return this.getTracability().getPrimaryGeneratedJavaElement(source);
+  }
+  
   public NamedElement getPrimarySourceElement(final NamedElement target) {
+    return this.getTracability().getPrimarySourceElement(target);
+  }
+  
+  public Element getPrimarySourceElement(final Element target) {
     return this.getTracability().getPrimarySourceElement(target);
   }
   
@@ -306,7 +314,15 @@ public class ValidationContextImpl implements ValidationContext {
     return this.getTracability().isExternal(element);
   }
   
+  public boolean isExternal(final Element element) {
+    return this.getTracability().isExternal(element);
+  }
+  
   public boolean isGenerated(final NamedElement element) {
+    return this.getTracability().isGenerated(element);
+  }
+  
+  public boolean isGenerated(final Element element) {
     return this.getTracability().isGenerated(element);
   }
   
@@ -314,7 +330,15 @@ public class ValidationContextImpl implements ValidationContext {
     return this.getTracability().isSource(element);
   }
   
+  public boolean isSource(final Element element) {
+    return this.getTracability().isSource(element);
+  }
+  
   public boolean isThePrimaryGeneratedJavaElement(final NamedElement target) {
+    return this.getTracability().isThePrimaryGeneratedJavaElement(target);
+  }
+  
+  public boolean isThePrimaryGeneratedJavaElement(final Element target) {
     return this.getTracability().isThePrimaryGeneratedJavaElement(target);
   }
 }

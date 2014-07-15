@@ -106,6 +106,7 @@ import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
 import org.eclipse.xtend.lib.macro.declaration.Declaration;
+import org.eclipse.xtend.lib.macro.declaration.Element;
 import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.NamedElement;
@@ -945,6 +946,44 @@ public class CompilationUnitImpl implements CompilationUnit {
     return this.<JvmIdentifiableElement, Declaration>getOrCreate(delegate, _function);
   }
   
+  public Element toJvmElement(final EObject delegate) {
+    final Function1<EObject, Element> _function = new Function1<EObject, Element>() {
+      public Element apply(final EObject it) {
+        Element _switchResult = null;
+        boolean _matched = false;
+        if (!_matched) {
+          if (delegate instanceof JvmIdentifiableElement) {
+            _matched=true;
+            _switchResult = CompilationUnitImpl.this.toNamedElement(((JvmIdentifiableElement)delegate));
+          }
+        }
+        if (!_matched) {
+          if (delegate instanceof JvmTypeReference) {
+            _matched=true;
+            _switchResult = CompilationUnitImpl.this.toTypeReference(((JvmTypeReference)delegate));
+          }
+        }
+        if (!_matched) {
+          if (delegate instanceof XExpression) {
+            _matched=true;
+            _switchResult = CompilationUnitImpl.this.toExpression(((XExpression)delegate));
+          }
+        }
+        if (!_matched) {
+          if (delegate instanceof JvmAnnotationReference) {
+            _matched=true;
+            _switchResult = CompilationUnitImpl.this.toAnnotationReference(((JvmAnnotationReference)delegate));
+          }
+        }
+        if (!_matched) {
+          throw new UnsupportedOperationException(("Couldn\'t translate \'" + delegate));
+        }
+        return _switchResult;
+      }
+    };
+    return this.<EObject, Element>getOrCreate(delegate, _function);
+  }
+  
   public TypeReference toTypeReference(final JvmTypeReference delegate) {
     TypeReference _xblockexpression = null;
     {
@@ -1177,6 +1216,47 @@ public class CompilationUnitImpl implements CompilationUnit {
       }
     };
     return this.<JvmTypeParameter, XtendTypeParameterDeclarationImpl>getOrCreate(delegate, _function);
+  }
+  
+  public Element toXtendElement(final EObject delegate) {
+    final Function1<EObject, Element> _function = new Function1<EObject, Element>() {
+      public Element apply(final EObject it) {
+        Element _switchResult = null;
+        boolean _matched = false;
+        if (!_matched) {
+          if (delegate instanceof XtendMember) {
+            _matched=true;
+            _switchResult = CompilationUnitImpl.this.toXtendMemberDeclaration(((XtendMember)delegate));
+          }
+        }
+        if (!_matched) {
+          if (delegate instanceof XtendParameter) {
+            _matched=true;
+            _switchResult = CompilationUnitImpl.this.toXtendParameterDeclaration(((XtendParameter)delegate));
+          }
+        }
+        if (!_matched) {
+          if (delegate instanceof JvmTypeParameter) {
+            _matched=true;
+            _switchResult = CompilationUnitImpl.this.toXtendTypeParameterDeclaration(((JvmTypeParameter)delegate));
+          }
+        }
+        if (!_matched) {
+          if (delegate instanceof JvmTypeReference) {
+            _matched=true;
+            _switchResult = CompilationUnitImpl.this.toTypeReference(((JvmTypeReference)delegate));
+          }
+        }
+        if (!_matched) {
+          if (delegate instanceof XExpression) {
+            _matched=true;
+            _switchResult = CompilationUnitImpl.this.toExpression(((XExpression)delegate));
+          }
+        }
+        return _switchResult;
+      }
+    };
+    return this.<EObject, Element>getOrCreate(delegate, _function);
   }
   
   public JvmTypeReference toJvmTypeReference(final TypeReference typeRef) {
