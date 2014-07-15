@@ -14,6 +14,7 @@ import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.MutableJvmFieldDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.MutableJvmMethodDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.TracabilityImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
@@ -34,6 +35,7 @@ import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclarator;
+import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.services.Problem;
@@ -286,6 +288,78 @@ public abstract class AbstractReusableActiveAnnotationTests {
         Assert.assertEquals(barJvmField, _get);
         Object _get_1 = ((Object[])Conversions.unwrapArray(elementsAssociatedWithBarField, Object.class))[1];
         Assert.assertEquals(getBarJvmMethod, _get_1);
+      }
+    };
+    this.assertProcessing(_mappedTo, _mappedTo_1, _function);
+  }
+  
+  @Test
+  public void testTracing2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package myannotation");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.AbstractClassProcessor");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.TransformationContext");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.Active");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@Active(MyAnnoProcessor)");
+    _builder.newLine();
+    _builder.append("annotation MyAnno {}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class MyAnnoProcessor extends AbstractClassProcessor {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override doTransform(MutableClassDeclaration cls, extension TransformationContext context) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("cls.addMethod(\"foo\") [");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("primarySourceElement = cls.typeParameters.head");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("body = [\"return;\"]");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/MyAnno.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package myusercode");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import myannotation.MyAnno");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@MyAnno");
+    _builder_1.newLine();
+    _builder_1.append("class Client<A> {}");
+    _builder_1.newLine();
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      public void apply(final CompilationUnitImpl it) {
+        TypeLookupImpl _typeLookup = it.getTypeLookup();
+        final MutableClassDeclaration cls = _typeLookup.findClass("myusercode.Client");
+        final MutableMethodDeclaration fooMethod = cls.findDeclaredMethod("foo");
+        TracabilityImpl _tracability = it.getTracability();
+        Iterable<? extends MutableTypeParameterDeclaration> _typeParameters = cls.getTypeParameters();
+        MutableTypeParameterDeclaration _head = IterableExtensions.head(_typeParameters);
+        final NamedElement typeParameter = _tracability.getPrimarySourceElement(_head);
+        TracabilityImpl _tracability_1 = it.getTracability();
+        NamedElement _primarySourceElement = _tracability_1.getPrimarySourceElement(fooMethod);
+        Assert.assertEquals(typeParameter, _primarySourceElement);
       }
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);

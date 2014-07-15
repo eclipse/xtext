@@ -7,11 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.macro.declaration
 
-import org.eclipse.xtend.core.xtend.XtendMember
-import org.eclipse.xtend.core.xtend.XtendParameter
+import org.eclipse.xtend.lib.macro.declaration.Element
 import org.eclipse.xtend.lib.macro.declaration.NamedElement
+import org.eclipse.xtend.lib.macro.expression.Expression
 import org.eclipse.xtend.lib.macro.services.Tracability
-import org.eclipse.xtext.common.types.JvmIdentifiableElement
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -25,29 +24,34 @@ class TracabilityImpl implements Tracability {
 	}
 	
 	override isExternal(NamedElement element) {
-		!isSource(element) && !isGenerated(element)
+		isExternal(element as Element)
 	}
 
 	override isGenerated(NamedElement element) {
-		switch element {
-			JvmNamedElementImpl<? extends JvmIdentifiableElement>: {
-				return element.delegate.eResource == unit.xtendFile.eResource
-			}
-			default:
-				false
-		}
+		isGenerated(element as Element)
 	}
 
 	override isSource(NamedElement element) {
-		element instanceof XtendNamedElementImpl<?>
+		isSource(element as Element)
 	}
 
 	override getPrimaryGeneratedJavaElement(NamedElement source) {
+		getPrimaryGeneratedJavaElement(source as Element) as NamedElement
+	}
+	
+	override getPrimarySourceElement(NamedElement target) {
+		getPrimarySourceElement(target as Element) as NamedElement
+	}
+
+	override isThePrimaryGeneratedJavaElement(NamedElement target) {
+		isThePrimaryGeneratedJavaElement(target as Element)
+	}
+
+	override getPrimaryGeneratedJavaElement(Element source) {
 		if (isSource(source)) {
-			val derivedElement = unit.jvmAssociations.getJvmElements((source as XtendNamedElementImpl<?>).delegate).filter(
-				JvmIdentifiableElement).head
+			val derivedElement = unit.jvmAssociations.getJvmElements((source as AbstractElementImpl<?>).delegate).head
 			if (derivedElement !== null) {
-				return unit.toNamedElement(derivedElement)
+				return unit.toJvmElement(derivedElement)
 			}
 		} else if (isGenerated(source)) {
 			return source
@@ -55,23 +59,46 @@ class TracabilityImpl implements Tracability {
 		return null
 	}
 	
-	override getPrimarySourceElement(NamedElement target) {
+	override getPrimarySourceElement(Element target) {
 		if (isGenerated(target)) {
-			val sourceElement = unit.jvmAssociations.getSourceElements((target as JvmNamedElementImpl<?>).delegate).head
-			if (sourceElement instanceof XtendMember) {
-				return unit.toXtendMemberDeclaration(sourceElement)
-			} else if (sourceElement instanceof XtendParameter) {
-				return unit.toXtendParameterDeclaration(sourceElement)
-			}
+			val sourceElement = unit.jvmAssociations.getSourceElements((target as AbstractElementImpl<?>).delegate).head
+			return unit.toXtendElement(sourceElement)
 		} else if (isSource(target)) {
 			return target
 		}
 	}
-
-	override isThePrimaryGeneratedJavaElement(NamedElement target) {
+	
+	override isExternal(Element element) {
+		!isSource(element) && !isGenerated(element)
+	}
+	
+	override isGenerated(Element element) {
+		switch element {
+			JvmElementImpl<?> :{
+				return element.delegate.eResource == unit.xtendFile.eResource
+			}
+			JvmTypeParameterDeclarationImpl :{
+				return element.delegate.eResource == unit.xtendFile.eResource
+			}
+			default:
+				false
+		}
+	}
+	
+	override isSource(Element element) {
+		switch element {
+			XtendNamedElementImpl<?>: true
+			Expression : true
+			TypeReferenceImpl case element.source !== null : true
+			default :false
+		}
+	}
+	
+	override isThePrimaryGeneratedJavaElement(Element target) {
 		val source = target.primarySourceElement
 		if (source === null)
 			return false;
 		source.getPrimaryGeneratedJavaElement == target
 	}
+	
 }
