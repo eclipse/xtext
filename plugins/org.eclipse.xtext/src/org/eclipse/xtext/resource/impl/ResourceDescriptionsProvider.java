@@ -57,7 +57,7 @@ public class ResourceDescriptionsProvider {
 	@Named(LIVE_SCOPE)
 	private Provider<IResourceDescriptions> liveScopeResourceDescriptions;
 
-	@Inject
+	@Inject(optional = true)
 	@Named(PERSISTED_DESCRIPTIONS)
 	private Provider<IResourceDescriptions> persistedResourceDescriptions;
 
@@ -149,8 +149,12 @@ public class ResourceDescriptionsProvider {
 	 * The returned IResourceDescriptions represent the Xtext Index' state (not shadowed by anything).
 	 * 
 	 * @since 2.6
+	 * @throws IllegalStateException if the builder integration is not configured for this language but the persisted descriptions are requested
 	 */
 	public IResourceDescriptions createPersistedResourceDescriptions() {
+		if (persistedResourceDescriptions == null) {
+			throw new IllegalStateException("Language does not provide persisted descriptions.");
+		}
 		return persistedResourceDescriptions.get();
 	}
 

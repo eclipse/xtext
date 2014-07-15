@@ -221,11 +221,6 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.LIVE_SCOPE)).to(ResourceSetBasedResourceDescriptions.class);
 	}
 	
-	/** @since 2.6 */
-	public void configureIResourceDescriptionsPersisted(Binder binder) {
-		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.PERSISTED_DESCRIPTIONS)).to(ResourceSetBasedResourceDescriptions.class);
-	}
-	
 	/** @since 2.0 */
 	public void configureGenericSemanticSequencer(com.google.inject.Binder binder) {
 		binder.bind(ISemanticSequencer.class).annotatedWith(GenericSequencer.class).to(BacktrackingSemanticSequencer.class);
