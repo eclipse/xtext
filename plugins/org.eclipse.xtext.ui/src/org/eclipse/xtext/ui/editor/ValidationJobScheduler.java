@@ -20,6 +20,8 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.google.inject.name.Named;
 
 /**
  * Default implementation of the {@link IValidationJobScheduler validation job scheduler}.
@@ -40,8 +42,10 @@ public class ValidationJobScheduler implements IValidationJobScheduler {
 	@Inject
 	private IResourceDescriptions resourceDescriptions;
 
-	@Inject
-	private ResourceDescriptionsProvider resourceDescriptionsProvider;
+	// Languages without a builder may not have persisted descriptions
+	@Inject(optional=true)
+	@Named(ResourceDescriptionsProvider.PERSISTED_DESCRIPTIONS)
+	private Provider<IResourceDescriptions> builderStateProvider;
 
 	@Inject
 	private IResourceDescription.Manager resourceDescriptionManager;
@@ -59,17 +63,18 @@ public class ValidationJobScheduler implements IValidationJobScheduler {
 		URI uri = document.getResourceURI();
 		if (uri == null)
 			return;
-		IResourceDescriptions persistedDescriptions = resourceDescriptionsProvider.createPersistedResourceDescriptions();
 		IResourceDescription documentDescription = resourceDescriptions.getResourceDescription(uri);
 		if (documentDescription == null) {
 			// resource was just created - build is likely to be running in background
 			return;
 		}
-		if (dirtyStateManager instanceof IDirtyStateManagerExtension) {
+		if (dirtyStateManager instanceof IDirtyStateManagerExtension && builderStateProvider != null) {
+			IResourceDescriptions persistedDescriptions = builderStateProvider.get();
 			List<URI> dirtyResourceURIs = ((IDirtyStateManagerExtension) dirtyStateManager).getDirtyResourceURIs();
 			for(URI dirtyResourceURI: dirtyResourceURIs) {
 				IResourceDescription dirtyDescription = dirtyStateManager.getDirtyResourceDescription(dirtyResourceURI);
 				IResourceDescription persistedDescription = persistedDescriptions.getResourceDescription(dirtyResourceURI);
+				// Shortcut to make sure we don't waste time with more involving haveEObjectDescriptionChanged computation
 				ChangedResourceDescriptionDelta delta = new ChangedResourceDescriptionDelta(persistedDescription, dirtyDescription);
 				if(resourceDescriptionManager.isAffected(delta, documentDescription)) {
 					document.checkAndUpdateAnnotations();
@@ -115,7 +120,7 @@ public class ValidationJobScheduler implements IValidationJobScheduler {
 	public void setResourceDescriptions(IResourceDescriptions resourceDescriptions) {
 		this.resourceDescriptions = resourceDescriptions;
 	}
-
+	
 	protected DescriptionUtils getDescriptionUtils() {
 		return descriptionUtils;
 	}
@@ -127,4 +132,17 @@ public class ValidationJobScheduler implements IValidationJobScheduler {
 		this.descriptionUtils = descriptionUtils;
 	}
 
+	/**
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	public void setBuilderStateProvider(Provider<IResourceDescriptions> provider) {
+		builderStateProvider = provider;
+	}
+	
+	/**
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	public void setResourceDescriptionManager(IResourceDescription.Manager resourceDescriptionManager) {
+		this.resourceDescriptionManager = resourceDescriptionManager;
+	}
 }
