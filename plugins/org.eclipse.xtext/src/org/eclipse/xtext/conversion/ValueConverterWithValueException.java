@@ -42,9 +42,6 @@ public class ValueConverterWithValueException extends ValueConverterException {
 	 */
 	public ValueConverterWithValueException(String message, INode node, Object value, int offset, int length, Exception cause) {
 		super(message, node, cause);
-		if (node == null) {
-			throw new IllegalArgumentException("node may not be null");
-		}
 		this.value = value;
 		this.offset = offset;
 		this.length = length;
