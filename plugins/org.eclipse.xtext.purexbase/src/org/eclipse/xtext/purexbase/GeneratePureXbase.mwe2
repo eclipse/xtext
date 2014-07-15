@@ -9,6 +9,7 @@ var fileExtensions = "xbase"
 var projectName = "org.eclipse.xtext.purexbase"
 var runtimeProject = "../${projectName}"
 var generateXtendStub = true
+var lineDelimiter = '\n'
 
 Workflow {
     bean = StandaloneSetup {
@@ -27,7 +28,7 @@ Workflow {
 		directory = "${runtimeProject}.ui/src-gen"
 	}
 
-	component = Generator {
+	component = Generator auto-inject {
 		pathRtProject = runtimeProject
 		pathUiProject = "${runtimeProject}.ui"
 		pathTestProject = "../../tests/${projectName}.tests"

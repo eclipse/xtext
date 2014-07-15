@@ -32,6 +32,7 @@ public class SimpleAntlrFormatter extends AbstractDeclarativeFormatter {
 		c.setLinewrap().after(getGrammarAccess().getRuleAccess().getColonKeyword_2());
 		c.setLinewrap().before(getGrammarAccess().getRuleAccess().getSemicolonKeyword_4());
 		c.setLinewrap(2).after(getGrammarAccess().getRuleAccess().getSemicolonKeyword_4());
+		c.setLinewrap().between(getGrammarAccess().getML_COMMENTRule(),	getGrammarAccess().getAntlrGrammarAccess().getGrammarKeyword_0());
 	}
 
 	@Override

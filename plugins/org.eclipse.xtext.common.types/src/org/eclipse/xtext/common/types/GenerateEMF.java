@@ -42,6 +42,7 @@ public class GenerateEMF {
 			setGenerateEdit(true);
 			setGenModel("platform:/resource/"+projectName+"/model/JavaVMTypes.genmodel");
 			addSrcPath("platform:/resource/"+projectName+"/src");
+			setLineDelimiter("\n");
 		}}.invoke(null);
 	}
 }

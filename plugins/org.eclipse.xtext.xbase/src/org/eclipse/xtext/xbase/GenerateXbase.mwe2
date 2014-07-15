@@ -18,6 +18,7 @@ var runtimeProject = "../${projectName}"
 var uiProject = "${runtimeProject}.ui"
 var backtrack = false
 var memoize = false
+var lineDelimiter = '\n'
 
 Workflow {
 	bean = StandaloneSetup {
@@ -56,6 +57,7 @@ Workflow {
 		genModel = "platform:/resource/${projectName}/model/Xbase.genmodel"
 		srcPath ="platform:/resource/${projectName}/src"
 		srcPath ="platform:/resource/org.eclipse.xtext.common.types/src"
+		lineDelimiter = lineDelimiter
 	}
 
 	component = DirectoryCleaner {
@@ -65,7 +67,7 @@ Workflow {
 		directory="${runtimeProject}/src-gen"
 	}
 	
-	component = Generator {
+	component = Generator auto-inject {
 		pathRtProject = runtimeProject
 		pathUiProject = uiProject
 		projectNameRt = projectName
@@ -81,7 +83,7 @@ Workflow {
 			}
 			fragment = formatting.FormatterFragment {}
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
-			fragment = XtextAntlrGeneratorFragment {
+			fragment = XtextAntlrGeneratorFragment auto-inject {
 				options = auto-inject {}
 			}
 		}
@@ -96,11 +98,11 @@ Workflow {
 			fragment = resourceFactory.ResourceFactoryFragment {
 				fileExtensions = "___xbase"
 			}
-			fragment = XtextAntlrGeneratorFragment {
+			fragment = XtextAntlrGeneratorFragment auto-inject {
 				options = auto-inject {}
 				antlrParam = "-Xconversiontimeout" antlrParam = "10000"
 			}
-			fragment = DebugAntlrGeneratorFragment {
+			fragment = DebugAntlrGeneratorFragment auto-inject {
 				options = auto-inject {}
 			}
 			fragment = validation.JavaValidatorFragment {
@@ -121,7 +123,7 @@ Workflow {
 			}
 			fragment = outline.OutlineTreeProviderFragment {}
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
-			fragment = XtextAntlrUiGeneratorFragment {
+			fragment = XtextAntlrUiGeneratorFragment auto-inject {
 				options = auto-inject {}
 				antlrParam = "-Xconversiontimeout" antlrParam = "10000"
 			}
@@ -137,11 +139,11 @@ Workflow {
 			fragment = resourceFactory.ResourceFactoryFragment {
 				fileExtensions = "___xbasewithannotations"
 			}
-			fragment = XtextAntlrGeneratorFragment {
+			fragment = XtextAntlrGeneratorFragment auto-inject {
 				options = auto-inject {}
 				antlrParam = "-Xconversiontimeout" antlrParam = "10000"
 			}
-			fragment = DebugAntlrGeneratorFragment {
+			fragment = DebugAntlrGeneratorFragment auto-inject {
 				options = auto-inject {}
 			}
 			fragment = validation.JavaValidatorFragment {}
@@ -160,7 +162,7 @@ Workflow {
 			}
 			fragment = outline.OutlineTreeProviderFragment {}
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
-			fragment = XtextAntlrUiGeneratorFragment {
+			fragment = XtextAntlrUiGeneratorFragment auto-inject {
 				options = auto-inject {}
 				antlrParam = "-Xconversiontimeout" antlrParam = "10000"
 			}

@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.parser.antlr;
 
+import java.nio.charset.Charset;
 import java.util.Set;
 
 import org.eclipse.emf.mwe.core.issues.Issues;
@@ -45,9 +46,11 @@ public class XtextAntlrGeneratorFragment extends AbstractAntlrGeneratorFragment 
 		addAntlrParam("-fo");
 		addAntlrParam(absoluteGrammarFileName.substring(0, absoluteGrammarFileName.lastIndexOf('/')));
 		getAntlrTool().runWithEncodingAndParams(absoluteGrammarFileName, encoding, getAntlrParams());
-		simplifyUnorderedGroupPredicatesIfRequired(grammar, absoluteGrammarFileName);
-		splitParserAndLexerIfEnabled(absoluteGrammarFileName);
-		suppressWarnings(absoluteGrammarFileName);
+		Charset charset = Charset.forName(encoding);
+		simplifyUnorderedGroupPredicatesIfRequired(grammar, absoluteGrammarFileName, charset);
+		splitParserAndLexerIfEnabled(absoluteGrammarFileName, charset);
+		suppressWarnings(absoluteGrammarFileName, charset);
+		normalizeLineDelimiters(absoluteGrammarFileName, charset);
 	}
 
 	@Override
