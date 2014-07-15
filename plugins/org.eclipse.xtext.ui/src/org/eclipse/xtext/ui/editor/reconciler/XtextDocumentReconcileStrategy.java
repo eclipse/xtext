@@ -10,17 +10,22 @@ package org.eclipse.xtext.ui.editor.reconciler;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.reconciler.DirtyRegion;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategyExtension;
 import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.xtext.resource.DerivedStateAwareResource;
+import org.eclipse.xtext.resource.IBatchLinkableResource;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.DirtyStateEditorSupport;
 import org.eclipse.xtext.ui.editor.ISourceViewerAware;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
+import org.eclipse.xtext.util.CancelIndicator;
 
 import com.google.inject.Inject;
 
@@ -51,6 +56,8 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 
 	private IProgressMonitor monitor;
 
+	private XtextEditor editor;
+
 	public void reconcile(final IRegion region) {
 		if (log.isTraceEnabled()) {
 			log.trace("reconcile region: " + region);
@@ -69,6 +76,7 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 	 * @since 2.7
 	 */
 	public void setEditor(XtextEditor editor) {
+		this.editor = editor;
 	}
 
 	public void setDocument(IDocument document) {
@@ -145,6 +153,26 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 	/**
 	 * @since 2.7
 	 */
-	protected void postParse(XtextResource resource, IProgressMonitor monitor) {
+	protected void postParse(XtextResource resource, final IProgressMonitor monitor) {
+		if (editor != null) {
+			DirtyStateEditorSupport dirtyStateEditorSupport = editor.getDirtyStateEditorSupport();
+			if (dirtyStateEditorSupport != null)
+				dirtyStateEditorSupport.announceDirtyState(resource);
+		}
+		try {
+			if (resource instanceof DerivedStateAwareResource) 
+				((DerivedStateAwareResource) resource).installDerivedState(false);
+			if (resource instanceof IBatchLinkableResource) {
+				((IBatchLinkableResource) resource).linkBatched(new CancelIndicator() {
+					public boolean isCanceled() {
+						return monitor.isCanceled();
+					}
+				});
+			}
+		} catch (OperationCanceledException exc) {
+			// ignore
+		} catch (RuntimeException exc) {
+			log.error("Error post-processing reosurce", exc);
+		}
 	}
 }

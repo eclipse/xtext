@@ -36,6 +36,7 @@ import org.eclipse.xtext.resource.impl.ResourceServiceProviderRegistryImpl;
 import org.eclipse.xtext.ui.editor.DirtyStateEditorSupport;
 import org.eclipse.xtext.ui.editor.DirtyStateEditorSupport.IDirtyStateEditorSupportClient;
 import org.eclipse.xtext.ui.editor.DirtyStateManager;
+import org.eclipse.xtext.ui.editor.DirtyStateResourceDescription;
 import org.eclipse.xtext.ui.editor.DocumentBasedDirtyResource;
 import org.eclipse.xtext.ui.editor.IDirtyResource;
 import org.eclipse.xtext.ui.editor.model.ILexerTokenRegion;
@@ -62,7 +63,6 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 	private ResourceSetImpl resourceSet;
 	private DirtyStateManager dirtyStateManager;
 	private StateChangeEventBroker stateChangeEventBroker;
-	private IXtextModelListener modelListener;
 	private DocumentBasedDirtyResource dirtyResource;
 	private IXtextDocument document;
 	private List<IEObjectDescription> exportedObjects;
@@ -78,6 +78,14 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 			@Override
 			public org.eclipse.xtext.resource.IResourceDescription.Manager getResourceDescriptionManager() {
 				return DirtyStateEditorSupportTest.this;
+			}
+			
+			@SuppressWarnings("unchecked")
+			@Override
+			public <T> T get(Class<T> t) {
+				if(DirtyStateResourceDescription.Manager.class.isAssignableFrom(t)) 
+					return (T) new DirtyStateResourceDescription.Manager(DirtyStateEditorSupportTest.this);
+				return super.get(t);
 			}
 		};
 		ResourceServiceProviderRegistryImpl registry = new ResourceServiceProviderRegistryImpl() {
@@ -106,7 +114,6 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 	@Test public void testInitialize_01(){
 		dirtyStateSupport.initializeDirtyStateSupport(this);
 		assertNotNull(verifyListener);
-		assertNotNull(modelListener);
 		assertFalse(dirtyStateManager.hasContent(resourceURI));
 		assertEquals(resourceURI, dirtyResource.getURI());
 	}
@@ -115,7 +122,6 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		dirtyStateSupport.initializeDirtyStateSupport(this);
 		dirtyStateSupport.removeDirtyStateSupport(this);
 		assertNull(verifyListener);
-		assertNull(modelListener);
 		assertFalse(dirtyStateManager.hasContent(resourceURI));
 		try {
 			dirtyResource.getURI();
@@ -130,7 +136,6 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		document = null; // client.getDocument() returns null when editor is disposing
 		dirtyStateSupport.removeDirtyStateSupport(this);
 		assertNull(verifyListener);
-		assertNull(modelListener);
 		assertFalse(dirtyStateManager.hasContent(resourceURI));
 		try {
 			dirtyResource.getURI();
@@ -246,61 +251,60 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		assertTrue(dirtyStateManager.hasContent(resourceURI));
 		dirtyStateSupport.markEditorClean(this);
 		assertFalse(dirtyStateManager.hasContent(resourceURI));
-		assertNotNull(modelListener);
 		assertNotNull(verifyListener);
 	}
 	
-	@Test public void testModelChanged_01() {
+	@Test public void testannounceDirtyState_01() {
 		dirtyStateSupport.initializeDirtyStateSupport(this);
-		dirtyStateSupport.modelChanged(resource);
+		dirtyStateSupport.announceDirtyState(resource);
 		assertTrue(dirtyStateManager.hasContent(resourceURI));
 	}
 
-	@Test public void testModelChanged_02() {
+	@Test public void testannounceDirtyState_02() {
 		ignoreConcurrentEditing.add(Boolean.TRUE);
 		dirtyStateManager.manageDirtyState(this);
 		dirtyStateSupport.initializeDirtyStateSupport(this);
 		dirtyStateSupport.isEditingPossible(this);
 		assertEquals(getContents(), dirtyStateManager.getContent(resourceURI));
 		exportedObjects = Lists.newArrayList(EObjectDescription.create(QualifiedName.create("foo"), EcoreFactory.eINSTANCE.createEClass()));
-		dirtyStateSupport.modelChanged(resource);
+		dirtyStateSupport.announceDirtyState(resource);
 		assertTrue(dirtyStateManager.hasContent(resourceURI));
 		assertEquals(get(), dirtyStateManager.getContent(resourceURI));
 	}
 	
-	@Test public void testModelChanged_03() {
+	@Test public void testannounceDirtyState_03() {
 		ignoreConcurrentEditing.add(Boolean.FALSE);
 		dirtyStateManager.manageDirtyState(this);
 		dirtyStateSupport.initializeDirtyStateSupport(this);
 		assertEquals(getContents(), dirtyStateManager.getContent(resourceURI));
-		dirtyStateSupport.modelChanged(resource);
+		dirtyStateSupport.announceDirtyState(resource);
 		assertTrue(dirtyStateManager.hasContent(resourceURI));
 		assertEquals(getContents(), dirtyStateManager.getContent(resourceURI));
 	}
 	
-	@Test public void testModelChanged_04() {
+	@Test public void testannounceDirtyState_04() {
 		ignoreConcurrentEditing.add(Boolean.TRUE);
 		dirtyStateManager.manageDirtyState(this);
 		dirtyStateSupport.initializeDirtyStateSupport(this);
 		dirtyStateSupport.isEditingPossible(this);
 		assertEquals(getContents(), dirtyStateManager.getContent(resourceURI));
-		dirtyStateSupport.modelChanged(resource);
+		dirtyStateSupport.announceDirtyState(resource);
 		assertTrue(dirtyStateManager.hasContent(resourceURI));
 		assertEquals(getContents(), dirtyStateManager.getContent(resourceURI));
 	}
 	
-	@Test public void testModelChanged_05() {
+	@Test public void testannounceDirtyState_05() {
 		dirtyStateSupport.initializeDirtyStateSupport(this);
 		resource.setTrackingModification(true);
-		dirtyStateSupport.modelChanged(resource);
+		dirtyStateSupport.announceDirtyState(resource);
 		assertFalse(dirtyStateManager.hasContent(resourceURI));
 	}
 	
-	@Test public void testModelChanged_06() {
+	@Test public void testannounceDirtyState_06() {
 		dirtyStateSupport.initializeDirtyStateSupport(this);
 		resource.setTrackingModification(true);
 		resource.setModified(true);
-		dirtyStateSupport.modelChanged(resource);
+		dirtyStateSupport.announceDirtyState(resource);
 		assertTrue(dirtyStateManager.hasContent(resourceURI));
 	}
 	
@@ -311,14 +315,10 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 	
 	@Override
 	public void addModelListener(IXtextModelListener listener) {
-		assertNull(this.modelListener);
-		this.modelListener = listener;
 	}
 	
 	@Override
 	public void removeModelListener(IXtextModelListener listener) {
-		assertSame(this.modelListener, listener);
-		this.modelListener = null;
 	}
 
 	public IXtextDocument getDocument() {
