@@ -24,6 +24,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.ui.editor.findrefs.EditorResourceAccess;
 import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Strings;
@@ -43,6 +44,9 @@ public class RuleOverrideUtil {
 
 	@Inject
 	private IQualifiedNameProvider qualifiedNameProvider;
+	
+	@Inject
+	private EditorResourceAccess localContextProvider;
 
 	public List<IEObjectDescription> getOverridingRules(final AbstractRule originalRule) {
 		Grammar grammar = GrammarUtil.getGrammar(originalRule);
@@ -62,7 +66,7 @@ public class RuleOverrideUtil {
 				}
 			}
 		};
-		referenceFinder.findAllReferences(singleton(EcoreUtil2.getPlatformResourceOrNormalizedURI(grammar)), null, acceptor,
+		referenceFinder.findAllReferences(singleton(EcoreUtil2.getPlatformResourceOrNormalizedURI(grammar)), localContextProvider, acceptor,
 				new NullProgressMonitor());
 		return overridingRules;
 	}
