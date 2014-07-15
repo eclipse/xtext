@@ -81,6 +81,7 @@ import org.eclipse.xtext.ui.editor.outline.actions.LinkWithEditorOutlineContribu
 import org.eclipse.xtext.ui.editor.outline.actions.SortOutlineContribution;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter.IComparator;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlinePage;
+import org.eclipse.xtext.ui.editor.outline.quickoutline.IQuickOutlineContribution;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
@@ -143,7 +144,7 @@ public class DefaultUiModule extends AbstractGenericModule {
 	public Class<? extends IImageHelper> bindIImageHelper() {
 		return PluginImageHelper.class;
 	}
-	
+
 	/**
 	 * @since 2.4
 	 */
@@ -317,8 +318,8 @@ public class DefaultUiModule extends AbstractGenericModule {
 	public void configureUiEncodingProvider(Binder binder) {
 		binder.bind(IEncodingProvider.class).annotatedWith(DispatchingProvider.Ui.class)
 				.to(WorkspaceEncodingProvider.class);
-	}	
-	
+	}
+
 	public Class<? extends IAllContainersState.Provider> bindIAllContainersState$Provider() {
 		return ContainerStateProvider.class;
 	}
@@ -331,10 +332,10 @@ public class DefaultUiModule extends AbstractGenericModule {
 		return XtextResourceSetProvider.class;
 	}
 
-	public Class<? extends IAnnotationHover> bindIAnnotationHover () {
-		return ProblemAnnotationHover.class;		
+	public Class<? extends IAnnotationHover> bindIAnnotationHover() {
+		return ProblemAnnotationHover.class;
 	}
-		 
+
 	public Class<? extends org.eclipse.jface.text.ITextHover> bindITextHover() {
 		return DefaultCompositeHover.class;
 	}
@@ -345,16 +346,17 @@ public class DefaultUiModule extends AbstractGenericModule {
 
 	public void configureMarkOccurrencesAction(Binder binder) {
 		binder.bind(IActionContributor.class).annotatedWith(Names.named("markOccurrences"))
-			.to(MarkOccurrenceActionContributor.class);
+				.to(MarkOccurrenceActionContributor.class);
 	}
 
 	/**
 	 * @since 2.1
 	 */
 	public void configureIResourceDescriptionsLiveScope(Binder binder) {
-		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.LIVE_SCOPE)).to(LiveShadowedResourceDescriptions.class);
+		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.LIVE_SCOPE))
+				.to(LiveShadowedResourceDescriptions.class);
 	}
-	
+
 	/**
 	 * @since 2.3
 	 */
@@ -369,35 +371,40 @@ public class DefaultUiModule extends AbstractGenericModule {
 		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("smartCaretPreferenceInitializer")) //$NON-NLS-1$
 				.to(SmartCaretPreferenceInitializer.class);
 	}
-	
+
 	/**
 	 * @since 2.4
 	 */
 	public Class<? extends IPreferenceValuesProvider> bindIPreferenceValuesProvider() {
 		return EclipsePreferencesProvider.class;
 	}
-	
+
 	/**
 	 * @since 2.4
 	 */
 	public Class<? extends ITraceURIConverter> bindITraceURIConverter() {
 		return ExtensibleTraceURIConverter.class;
 	}
-	
+
 	/**
 	 * @since 2.4
 	 */
 	public Class<? extends CopyQualifiedNameService> bindCopyQualifiedNameService() {
 		return DefaultCopyQualifiedNameService.class;
 	}
-	
+
 	/**
 	 * @since 2.6
 	 */
 	public Class<? extends IMarkerContributor> bindMarkerContributor() {
 		return TaskMarkerContributor.class;
 	}
-	
+
+	/**
+	 * @since 2.7
+	 */
+	public void configureIQuickOutlineContribution$Composite(Binder binder) {
+		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(IQuickOutlineContribution.All.class)
+				.to(IQuickOutlineContribution.Composite.class);
+	}
 }
-
-

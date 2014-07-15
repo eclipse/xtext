@@ -43,7 +43,7 @@ public abstract class AbstractToggleActionContributor {
 	}
 
 	private static final Logger logger = Logger.getLogger(AbstractToggleActionContributor.class);
-	
+
 	@Inject
 	private IPreferenceStoreAccess preferenceStoreAccess;
 
@@ -60,23 +60,26 @@ public abstract class AbstractToggleActionContributor {
 	protected boolean isPropertySet() {
 		return preferenceStoreAccess.getPreferenceStore().getBoolean(getPreferenceKey());
 	}
-	
+
 	protected IPreferenceStoreAccess getPreferenceStoreAccess() {
 		return preferenceStoreAccess;
 	}
-	
+
 	protected void toggle() {
 		boolean newState = !isPropertySet();
 		IPreferenceStore store = preferenceStoreAccess.getWritablePreferenceStore();
 		store.setValue(getPreferenceKey(), newState);
-		if (store instanceof IPersistentPreferenceStore)
+		if (store instanceof IPersistentPreferenceStore) {
 			try {
 				((IPersistentPreferenceStore) store).save();
 			} catch (IOException e) {
 				// log and ignore
 				logger.debug(e.getMessage(), e);
 			}
-		stateChanged(newState);
+		}
+		// Prevent sending state change event twice, already called by the propertyChangeListener
+		if (propertyChangeListener == null)
+			stateChanged(newState);
 	}
 
 	/**
@@ -116,9 +119,10 @@ public abstract class AbstractToggleActionContributor {
 		preferenceStore = preferenceStoreAccess.getPreferenceStore();
 		preferenceStore.addPropertyChangeListener(propertyChangeListener);
 	}
-	
+
 	protected void removePropertyChangeListener() {
-		preferenceStore.removePropertyChangeListener(propertyChangeListener);
+		if (preferenceStore != null)
+			preferenceStore.removePropertyChangeListener(propertyChangeListener);
 	}
-	
+
 }
