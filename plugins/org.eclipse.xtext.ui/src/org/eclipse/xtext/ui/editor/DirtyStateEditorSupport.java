@@ -40,7 +40,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.editor.model.IXtextModelListener;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
 import org.eclipse.xtext.util.Pair;
@@ -57,7 +56,7 @@ import com.google.inject.Inject;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Jan Koehnlein
  */
-public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDescription.Event.Listener, VerifyListener {
+public class DirtyStateEditorSupport implements IResourceDescription.Event.Listener, VerifyListener {
 	
 	private final static Logger LOG = Logger.getLogger(DirtyStateEditorSupport.class);
 	
@@ -325,7 +324,6 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 		this.currentClient = client;
 		this.isDirty = false;
 		IXtextDocument document = client.getDocument();
-		document.addModelListener(this);
 		initDirtyResource(document);
 		stateChangeEventBroker.addListener(this);
 		client.addVerifyListener(this);
@@ -401,7 +399,6 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 			document = dirtyResource.getUnderlyingDocument();
 		if (document != null) {
 			dirtyResource.disconnect(document);
-			document.removeModelListener(this);
 		}
 		this.delegatingClientAwareResource = null;
 		this.currentClient = null;
@@ -452,7 +449,10 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 		return new UpdateEditorStateJob(SCHEDULING_RULE);
 	}
 	
-	public void modelChanged(XtextResource resource) {
+	/**
+	 * @since 2.7
+	 */
+	public void announceDirtyState(XtextResource resource) {
 		if (resource == null || !dirtyResource.isInitialized())
 			return;
 		if (isDirty || ((!resource.isTrackingModification() || resource.isModified()) && delegatingClientAwareResource.isDirty() && dirtyStateManager.manageDirtyState(delegatingClientAwareResource))) {
@@ -468,6 +468,13 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	}
 	
 	/**
+	 * @since 2.7 this should no longer be called.
+	 */
+	public void modelChanged(XtextResource resource) {
+		throw new IllegalStateException("DirtyStateEditorSupport should no longer be called as an IXtextModelListener");
+	}
+	
+	/**
 	 * Only for testing
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
@@ -478,15 +485,8 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	/**
 	 * @since 2.7
 	 */
-	protected IResourceServiceProvider.Registry getResourceServiceProviderRegistry() {
-		return resourceServiceProviderRegistry;
-	}
-
-	/**
-	 * @since 2.7
-	 */
 	protected IResourceDescription.Manager getResourceDescriptionManager(URI resourceURI) {
-		return resourceServiceProviderRegistry.getResourceServiceProvider(resourceURI).getResourceDescriptionManager();	
+		return resourceServiceProviderRegistry.getResourceServiceProvider(resourceURI).get(DirtyStateResourceDescription.Manager.class);
 	}
 
 	/**

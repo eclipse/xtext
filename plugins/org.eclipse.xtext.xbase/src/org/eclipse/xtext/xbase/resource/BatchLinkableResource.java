@@ -23,6 +23,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
+import org.eclipse.xtext.resource.IBatchLinkableResource;
 import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Triple;
@@ -37,7 +38,7 @@ import com.google.inject.Inject;
  * 
  * @author Sebastian Zarnekow - Linking assumptions
  */
-public class BatchLinkableResource extends DerivedStateAwareResource implements ISynchronizable<BatchLinkableResource> {
+public class BatchLinkableResource extends DerivedStateAwareResource implements ISynchronizable<BatchLinkableResource>, IBatchLinkableResource {
 	
 	private static final Logger log = Logger.getLogger(BatchLinkableResource.class);
 	
@@ -158,5 +159,9 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 				list.add(diagnostic);
 		}
 		return null;
+	}
+
+	public void linkBatched(CancelIndicator monitor) {
+		resolveLazyCrossReferences(monitor);
 	}
 }
