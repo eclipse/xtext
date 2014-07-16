@@ -20,11 +20,11 @@ class ParallelFileSystemSupport implements MutableFileSystemSupport {
 	
 	URI uri
 	
-	AbstractFileSystemSupport delegate
+	MutableFileSystemSupport delegate
 	
 	extension FileSystemAccessQueue queue
 	
-	new(URI uri, AbstractFileSystemSupport delegate, FileSystemAccessQueue queue) {
+	new(URI uri, MutableFileSystemSupport delegate, FileSystemAccessQueue queue) {
 		this.uri = uri
 		this.delegate = delegate
 		this.queue = queue
