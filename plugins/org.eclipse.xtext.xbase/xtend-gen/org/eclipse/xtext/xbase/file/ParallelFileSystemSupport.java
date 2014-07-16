@@ -12,7 +12,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.generator.FileSystemAccessQueue;
-import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
 
@@ -23,12 +22,12 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
 public class ParallelFileSystemSupport implements MutableFileSystemSupport {
   private URI uri;
   
-  private AbstractFileSystemSupport delegate;
+  private MutableFileSystemSupport delegate;
   
   @Extension
   private FileSystemAccessQueue queue;
   
-  public ParallelFileSystemSupport(final URI uri, final AbstractFileSystemSupport delegate, final FileSystemAccessQueue queue) {
+  public ParallelFileSystemSupport(final URI uri, final MutableFileSystemSupport delegate, final FileSystemAccessQueue queue) {
     this.uri = uri;
     this.delegate = delegate;
     this.queue = queue;
