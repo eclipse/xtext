@@ -12,10 +12,12 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtend.core.formatting.FormatterPreferenceValuesProvider;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
+import org.eclipse.xtend.core.macro.declaration.ResourceChangeRegistry;
 import org.eclipse.xtend.ide.autoedit.AutoEditStrategyProvider;
 import org.eclipse.xtend.ide.autoedit.TokenTypeToPartitionMapper;
 import org.eclipse.xtend.ide.builder.JavaProjectPreferencesInitializer;
 import org.eclipse.xtend.ide.builder.SourceRelativeFileSystemAccess;
+import org.eclipse.xtend.ide.builder.UIResourceChangeRegistry;
 import org.eclipse.xtend.ide.builder.XtendParallelBuilderParticipant;
 import org.eclipse.xtend.ide.builder.XtendResourceDescriptionsProvider;
 import org.eclipse.xtend.ide.codetemplates.ui.highlighting.FlexerBasedTemplateBodyHighlighter;
@@ -537,4 +539,8 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 				.to(SwitchOutlineModeContribution.class);
 	}
 	
+	@org.eclipse.xtext.service.SingletonBinding(eager = true)
+	public Class<? extends ResourceChangeRegistry> bindResourceChangeRegistry() {
+		return UIResourceChangeRegistry.class;
+	}
 }

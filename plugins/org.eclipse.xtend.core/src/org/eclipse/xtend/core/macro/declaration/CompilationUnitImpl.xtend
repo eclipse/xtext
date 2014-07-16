@@ -185,7 +185,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	@Inject IFileHeaderProvider fileHeaderProvider
 	@Inject JvmTypeExtensions typeExtensions
 	@Inject OverrideHelper overrideHelper
-
+	@Inject ResourceChangeRegistry resourceChangeRegistry
 	@Inject AbstractFileSystemSupport fileSystemSupport
 	@Inject FileLocations fileLocations
 	@Inject ReadAndWriteTracking readAndWriteTracking
@@ -239,17 +239,21 @@ class CompilationUnitImpl implements CompilationUnit {
 		problemSupport
 	}
 	
-	ParallelFileSystemSupport parallelFileSystemSupport
+	def getResourceChangeRegistry() {
+		resourceChangeRegistry
+	}
+	
+	MutableFileSystemSupport decoratedFileSystemSupport
 	
 	def MutableFileSystemSupport getFileSystemSupport() {
-		if (parallelFileSystemSupport == null) {
+		if (decoratedFileSystemSupport == null) {
 			val fileSystemAccessQueue = xtendFile.eResource.resourceSet.eAdapters.filter(FileSystemAccessQueue).head
 			if (fileSystemAccessQueue == null) {
-				return fileSystemSupport
+				return new ChangeListenerAddingFileSystemSupport(fileSystemSupport, this)
 			}
-			parallelFileSystemSupport = new ParallelFileSystemSupport(xtendFile.eResource.URI, fileSystemSupport, fileSystemAccessQueue)
+			decoratedFileSystemSupport = new ParallelFileSystemSupport(xtendFile.eResource.URI, new ChangeListenerAddingFileSystemSupport(fileSystemSupport, this), fileSystemAccessQueue)
 		}
-		parallelFileSystemSupport
+		decoratedFileSystemSupport
 	}
 	
 	def FileLocations getFileLocations() {
