@@ -33,7 +33,6 @@ import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.TextRegion;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -76,9 +75,10 @@ public class JavaSearchHelper {
 
 	public void search(URI uri, IProgressMonitor monitor) {
 		int numResources = Iterables.size(resourceDescriptions.getAllResourceDescriptions());
-		SubMonitor subMonitor = SubMonitor.convert(monitor, numResources);
+		SubMonitor subMonitor = SubMonitor.convert(monitor, numResources / 10);
 		subMonitor.subTask("Find references in EMF resources");
 		try {
+			int i = 0;
 			for (IResourceDescription resourceDescription : resourceDescriptions.getAllResourceDescriptions()) {
 				URI resourceURI = resourceDescription.getURI();
 				IResourceServiceProvider resourceServiceProvider = serviceProviderRegistry.getResourceServiceProvider(resourceURI);
@@ -88,10 +88,12 @@ public class JavaSearchHelper {
 					if(javaSearchParticipation == null || javaSearchParticipation.canContainJvmReferences(resourceURI))
 						searchIn(uri, resourceDescription);
 				}
-				if (subMonitor.isCanceled()) {
-					return;
+				if (++i % 10 == 0) {
+					if (subMonitor.isCanceled()) {
+						return;
+					}
+					subMonitor.worked(1);
 				}
-				subMonitor.worked(1);
 			}
 			for(ResourceSet resourceSet: projectToResourceSet.values()) {
 				resourceSet.getResources().clear();
