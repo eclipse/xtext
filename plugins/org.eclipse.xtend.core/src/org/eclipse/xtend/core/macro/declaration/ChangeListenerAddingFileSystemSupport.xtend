@@ -5,89 +5,81 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.file
+package org.eclipse.xtend.core.macro.declaration
 
-import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport
-import org.eclipse.xtext.generator.FileSystemAccessQueue
-import org.eclipse.xtend.lib.macro.file.Path
 import java.io.InputStream
-import org.eclipse.emf.common.util.URI
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport
+import org.eclipse.xtend.lib.macro.file.Path
 
-/**
- * @author kosyakov - Initial contribution and API
- */
-class ParallelFileSystemSupport implements MutableFileSystemSupport {
-	
-	URI uri
-	
-	MutableFileSystemSupport delegate
-	
-	extension FileSystemAccessQueue queue
-	
-	new(URI uri, MutableFileSystemSupport delegate, FileSystemAccessQueue queue) {
-		this.uri = uri
-		this.delegate = delegate
-		this.queue = queue
+@Accessors
+class ChangeListenerAddingFileSystemSupport implements MutableFileSystemSupport {
+
+	val MutableFileSystemSupport delegate
+	val CompilationUnitImpl compilationUnit
+
+	protected def registerChangeListener(Path path) {
+		compilationUnit.resourceChangeRegistry.register(new org.eclipse.core.runtime.Path(path.toString),
+			compilationUnit.xtendFile)
 	}
-	
-	override delete(Path path) { 
-		sendAsync(uri) [|
-			delegate.delete(path)
-		]
+
+	override delete(Path path) {
+		delegate.delete(path)
 	}
-	
+
 	override mkdir(Path path) {
-		sendAsync(uri) [|
-			delegate.mkdir(path)
-		]
+		delegate.mkdir(path)
 	}
-	
+
 	override setContents(Path path, CharSequence contents) {
-		sendAsync(uri) [|
-			delegate.setContents(path, contents)
-		]
+		delegate.setContents(path, contents)
 	}
-	
+
 	override setContentsAsStream(Path path, InputStream source) {
-		sendAsync(uri) [|
-			delegate.setContentsAsStream(path, source)
-		]
+		delegate.setContentsAsStream(path, source)
 	}
-	
+
 	override exists(Path path) {
+		registerChangeListener(path)
 		delegate.exists(path)
 	}
-	
+
 	override getCharset(Path path) {
+		registerChangeListener(path)
 		delegate.getCharset(path)
 	}
-	
+
 	override getChildren(Path path) {
+		registerChangeListener(path)
 		delegate.getChildren(path)
 	}
-	
+
 	override getContents(Path path) {
+		registerChangeListener(path)
 		delegate.getContents(path)
 	}
-	
+
 	override getContentsAsStream(Path path) {
+		registerChangeListener(path)
 		delegate.getContentsAsStream(path)
 	}
-	
+
 	override getLastModification(Path path) {
+		registerChangeListener(path)
 		delegate.getLastModification(path)
 	}
-	
+
 	override isFile(Path path) {
+		registerChangeListener(path)
 		delegate.isFile(path)
 	}
-	
+
 	override isFolder(Path path) {
+		registerChangeListener(path)
 		delegate.isFolder(path)
 	}
-	
+
 	override toURI(Path path) {
 		delegate.toURI(path)
 	}
-	
 }
