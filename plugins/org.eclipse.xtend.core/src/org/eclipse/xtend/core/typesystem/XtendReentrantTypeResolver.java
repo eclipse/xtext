@@ -892,7 +892,13 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 			IResolvedOperation overriddenMethod = overriddenMethods.get(0);
 			JvmOperation declaration = overriddenMethod.getDeclaration();
 			XExpression inferredFrom = getInferredFrom(declaration.getReturnType());
-			if (inferredFrom != null && inferredFrom == getInferredFrom(operation.getReturnType())) {
+			// guard against active annotations that put an expression into a second method
+			// namely in a synthesized super type - in that case, the expression should not be
+			// inferred in the context of the super type but the subtype thus the return type
+			// of a super method has to be ignored
+			
+			// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=439535
+			if (inferredFrom != null && (inferredFrom == getInferredFrom(operation.getReturnType()) || isHandled(inferredFrom))) {
 				return null;
 			}
 			LightweightTypeReference result = overriddenMethod.getResolvedReturnType();

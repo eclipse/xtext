@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.ide.tests.editor;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.Collections;
@@ -57,7 +58,8 @@ public class DirtyStateResourceDescriptionTest extends AbstractXtendUITestCase {
     IEObjectDescription _head = IterableExtensions.<IEObjectDescription>head(_exportedObjects_1);
     final String textHash = _head.getUserData(DirtyStateResourceDescription.Manager.TEXT_HASH);
     Assert.assertNotNull(textHash);
-    Assert.assertNotEquals("", textHash);
+    boolean _equals = Objects.equal("", textHash);
+    Assert.assertFalse(_equals);
   }
   
   @Test
@@ -99,7 +101,8 @@ public class DirtyStateResourceDescriptionTest extends AbstractXtendUITestCase {
     Iterable<IEObjectDescription> _exportedObjects_1 = d1.getExportedObjects();
     IEObjectDescription _head_1 = IterableExtensions.<IEObjectDescription>head(_exportedObjects_1);
     final String textHash1 = _head_1.getUserData(DirtyStateResourceDescription.Manager.TEXT_HASH);
-    Assert.assertNotEquals(textHash, textHash1);
+    boolean _equals = Objects.equal(textHash, textHash1);
+    Assert.assertFalse(_equals);
     final IResourceDescription.Delta delta = this.dirtyManager.createDelta(d, d1);
     boolean _haveEObjectDescriptionsChanged = delta.haveEObjectDescriptionsChanged();
     Assert.assertTrue(_haveEObjectDescriptionsChanged);

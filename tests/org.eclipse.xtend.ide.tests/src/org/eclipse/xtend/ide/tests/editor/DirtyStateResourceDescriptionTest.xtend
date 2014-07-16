@@ -38,7 +38,7 @@ class DirtyStateResourceDescriptionTest extends AbstractXtendUITestCase {
 		assertEquals(1, d.exportedObjects.size)
 		val textHash = d.exportedObjects.head.getUserData(DirtyStateResourceDescription.Manager.TEXT_HASH)
 		assertNotNull(textHash)
-		assertNotEquals('', textHash)
+		assertFalse('' == textHash)
 	}
 	
 	@Test
@@ -64,7 +64,7 @@ class DirtyStateResourceDescriptionTest extends AbstractXtendUITestCase {
 			}
 		'''.dirtyResourceDescription
 		val textHash1 = d1.exportedObjects.head.getUserData(DirtyStateResourceDescription.Manager.TEXT_HASH)
-		assertNotEquals(textHash, textHash1)
+		assertFalse(textHash == textHash1)
 		
 		val delta = dirtyManager.createDelta(d, d1)
 		assertTrue(delta.haveEObjectDescriptionsChanged)
