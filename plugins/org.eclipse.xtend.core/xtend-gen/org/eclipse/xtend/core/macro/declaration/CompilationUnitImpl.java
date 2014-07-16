@@ -38,6 +38,7 @@ import org.eclipse.xtend.core.macro.ConstantExpressionsInterpreter;
 import org.eclipse.xtend.core.macro.declaration.AnnotationReferenceBuildContextImpl;
 import org.eclipse.xtend.core.macro.declaration.AnnotationReferenceProviderImpl;
 import org.eclipse.xtend.core.macro.declaration.AssociatorImpl;
+import org.eclipse.xtend.core.macro.declaration.ChangeListenerAddingFileSystemSupport;
 import org.eclipse.xtend.core.macro.declaration.ExpressionImpl;
 import org.eclipse.xtend.core.macro.declaration.InferredTypeReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationReferenceImpl;
@@ -68,6 +69,7 @@ import org.eclipse.xtend.core.macro.declaration.PrimitiveTypeImpl;
 import org.eclipse.xtend.core.macro.declaration.ProblemSupportImpl;
 import org.eclipse.xtend.core.macro.declaration.ResolvedConstructorImpl;
 import org.eclipse.xtend.core.macro.declaration.ResolvedMethodImpl;
+import org.eclipse.xtend.core.macro.declaration.ResourceChangeRegistry;
 import org.eclipse.xtend.core.macro.declaration.TracabilityImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
@@ -300,6 +302,9 @@ public class CompilationUnitImpl implements CompilationUnit {
   private OverrideHelper overrideHelper;
   
   @Inject
+  private ResourceChangeRegistry resourceChangeRegistry;
+  
+  @Inject
   private AbstractFileSystemSupport fileSystemSupport;
   
   @Inject
@@ -369,12 +374,16 @@ public class CompilationUnitImpl implements CompilationUnit {
     return this.problemSupport;
   }
   
-  private ParallelFileSystemSupport parallelFileSystemSupport;
+  public ResourceChangeRegistry getResourceChangeRegistry() {
+    return this.resourceChangeRegistry;
+  }
+  
+  private MutableFileSystemSupport decoratedFileSystemSupport;
   
   public MutableFileSystemSupport getFileSystemSupport() {
-    ParallelFileSystemSupport _xblockexpression = null;
+    MutableFileSystemSupport _xblockexpression = null;
     {
-      boolean _equals = Objects.equal(this.parallelFileSystemSupport, null);
+      boolean _equals = Objects.equal(this.decoratedFileSystemSupport, null);
       if (_equals) {
         XtendFile _xtendFile = this.getXtendFile();
         Resource _eResource = _xtendFile.eResource();
@@ -384,15 +393,16 @@ public class CompilationUnitImpl implements CompilationUnit {
         final FileSystemAccessQueue fileSystemAccessQueue = IterableExtensions.<FileSystemAccessQueue>head(_filter);
         boolean _equals_1 = Objects.equal(fileSystemAccessQueue, null);
         if (_equals_1) {
-          return this.fileSystemSupport;
+          return new ChangeListenerAddingFileSystemSupport(this.fileSystemSupport, this);
         }
         XtendFile _xtendFile_1 = this.getXtendFile();
         Resource _eResource_1 = _xtendFile_1.eResource();
         URI _uRI = _eResource_1.getURI();
-        ParallelFileSystemSupport _parallelFileSystemSupport = new ParallelFileSystemSupport(_uRI, this.fileSystemSupport, fileSystemAccessQueue);
-        this.parallelFileSystemSupport = _parallelFileSystemSupport;
+        ChangeListenerAddingFileSystemSupport _changeListenerAddingFileSystemSupport = new ChangeListenerAddingFileSystemSupport(this.fileSystemSupport, this);
+        ParallelFileSystemSupport _parallelFileSystemSupport = new ParallelFileSystemSupport(_uRI, _changeListenerAddingFileSystemSupport, fileSystemAccessQueue);
+        this.decoratedFileSystemSupport = _parallelFileSystemSupport;
       }
-      _xblockexpression = this.parallelFileSystemSupport;
+      _xblockexpression = this.decoratedFileSystemSupport;
     }
     return _xblockexpression;
   }
