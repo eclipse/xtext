@@ -275,6 +275,59 @@ class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 		WorkbenchTestHelper.deleteProject(clientProject.project)
 	}
 	
+	@Test
+	def void testChangeJavaClassLookedUpInAnnotationProcessor() {
+		val macroProject = JavaCore.create(workbenchTestHelper.project)
+		workbenchTestHelper.createFile('anno/Anno.xtend', '''
+			package anno
+			import org.eclipse.xtend.lib.macro.Active
+			import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+			import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+			import org.eclipse.xtend.lib.macro.TransformationContext
+			
+			@Active(AnnoProcessor)
+			annotation Anno {}
+			
+			class AnnoProcessor extends AbstractClassProcessor {
+				override doTransform(MutableClassDeclaration cls, extension TransformationContext context) {
+					val theType = context.findTypeGlobally("anno.A")?:context.findTypeGlobally("anno.B")
+					cls.addField("foo") [
+						type = theType.newTypeReference
+					]
+				}
+			}
+		''')
+		workbenchTestHelper.createFile('anno/B.xtend', '''
+			package anno
+			class B {}
+		''')
+		WorkbenchTestHelper.addExportedPackages(macroProject.project, "anno")
+		
+		val clientProject = JavaCore.create(WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME + "-client"))
+		JavaProjectSetupUtil.addProjectReference(clientProject, macroProject)
+		val fooClass = workbenchTestHelper.createFileImpl(clientProject.project.fullPath.toString + "/src/" + 'Foo.xtend', '''
+			import anno.Anno
+			@Anno
+			class Foo {
+				def test() {
+					foo.bar
+				}
+			}
+		''')
+		waitForAutoBuild
+		fooClass.assertHasErrors("bar is undefined")
+		
+		workbenchTestHelper.createFile('anno/A.xtend', '''
+			package anno
+			class A {
+				def bar() {}
+			}
+		''')
+		waitForAutoBuild
+		assertNoErrorsInWorkspace
+		WorkbenchTestHelper.deleteProject(clientProject.project)
+	}
+	
 	
 	def void assertNoErrorsInWorkspace() {
 		val findMarkers = ResourcesPlugin::workspace.root.findMarkers(IMarker::PROBLEM, true, IResource::DEPTH_INFINITE)

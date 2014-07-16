@@ -6,6 +6,9 @@ import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableInterfaceDeclaration
+import org.eclipse.xtext.common.types.JvmType
+import org.eclipse.xtext.xtype.XtypePackage
+import org.eclipse.xtext.common.types.TypesPackage
 
 class TypeLookupImpl implements TypeLookup {
 	
@@ -70,10 +73,13 @@ class TypeLookupImpl implements TypeLookup {
 	
 	override findTypeGlobally(String typeName) {
 		findType(typeName) ?: {
-			val result = compilationUnit.typeReferences.findDeclaredType(typeName, compilationUnit.xtendFile)
-			if (result == null)
-				null
-			else compilationUnit.toType(result)
+			val qualifiedName = compilationUnit.qualifiedNameConverter.toQualifiedName(typeName)
+			val result = compilationUnit.scopeProvider
+				.getScope(compilationUnit.xtendFile, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE)
+				.getSingleElement(qualifiedName)
+			if (result !== null && TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(result.EClass))
+				compilationUnit.toType(result.EObjectOrProxy as JvmType)
+			else null
 		} 
 	}
 	
