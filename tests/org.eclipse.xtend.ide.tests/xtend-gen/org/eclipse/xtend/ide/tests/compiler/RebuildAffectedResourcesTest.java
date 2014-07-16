@@ -1,10 +1,7 @@
 package org.eclipse.xtend.ide.tests.compiler;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
@@ -23,7 +20,6 @@ import org.eclipse.xtext.junit4.internal.StopwatchRule;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.util.StringInputStream;
-import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -369,10 +365,137 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       _builder_3.newLine();
       StringInputStream _stringInputStream = new StringInputStream(_builder_3.toString());
       processorClass.setContents(_stringInputStream, true, true, null);
-      this.assertNumberOfBuilds(4);
+      IResourcesSetupUtil.waitForAutoBuild();
       this.assertNoErrorsInWorkspace();
       IProject _project_3 = clientProject.getProject();
       WorkbenchTestHelper.deleteProject(_project_3);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testChangeInResourceReadFromAnnotationProcessor() {
+    try {
+      IProject _project = this.workbenchTestHelper.getProject();
+      final IJavaProject macroProject = JavaCore.create(_project);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package anno");
+      _builder.newLine();
+      _builder.append("import com.google.common.base.Splitter");
+      _builder.newLine();
+      _builder.append("import java.util.regex.Pattern");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtend.lib.macro.AbstractClassProcessor");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtend.lib.macro.Active");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtend.lib.macro.TransformationContext");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("@Active(AnnoProcessor)");
+      _builder.newLine();
+      _builder.append("annotation Anno {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class AnnoProcessor extends AbstractClassProcessor {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("override doTransform(MutableClassDeclaration cls, extension TransformationContext context) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("val content = context.getContents(cls.compilationUnit.filePath.parent.append(\"constants.txt\"))");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("val constants = Splitter.on(Pattern.compile(\"\\\\r?\\\\n\")).split(content)");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("constants.forEach [ constant |");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("cls.addField(constant) [");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("static = true");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("final = true");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("initializer = [\'\"\' + constant + \'\"\']");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("type = string");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("]");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("]");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this.workbenchTestHelper.createFile("anno/Anno.xtend", _builder.toString());
+      IProject _project_1 = macroProject.getProject();
+      WorkbenchTestHelper.addExportedPackages(_project_1, "anno");
+      IProject _createPluginProject = WorkbenchTestHelper.createPluginProject((WorkbenchTestHelper.TESTPROJECT_NAME + "-client"));
+      final IJavaProject clientProject = JavaCore.create(_createPluginProject);
+      JavaProjectSetupUtil.addProjectReference(clientProject, macroProject);
+      IProject _project_2 = clientProject.getProject();
+      IPath _fullPath = _project_2.getFullPath();
+      String _string = _fullPath.toString();
+      String _plus = (_string + "/src/");
+      String _plus_1 = (_plus + "constants.txt");
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("A");
+      _builder_1.newLine();
+      _builder_1.append("B");
+      final IFile constants = this.workbenchTestHelper.createFileImpl(_plus_1, _builder_1.toString());
+      IProject _project_3 = clientProject.getProject();
+      IPath _fullPath_1 = _project_3.getFullPath();
+      String _string_1 = _fullPath_1.toString();
+      String _plus_2 = (_string_1 + "/src/");
+      String _plus_3 = (_plus_2 + "Foo.xtend");
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("import anno.Anno");
+      _builder_2.newLine();
+      _builder_2.append("@Anno");
+      _builder_2.newLine();
+      _builder_2.append("class Foo {");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.append("def test() {");
+      _builder_2.newLine();
+      _builder_2.append("\t\t");
+      _builder_2.append("C");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.append("}");
+      _builder_2.newLine();
+      _builder_2.append("}");
+      _builder_2.newLine();
+      final IFile fooClass = this.workbenchTestHelper.createFileImpl(_plus_3, _builder_2.toString());
+      IResourcesSetupUtil.waitForAutoBuild();
+      this.assertHasErrors(fooClass, "C is undefined");
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("A");
+      _builder_3.newLine();
+      _builder_3.append("B");
+      _builder_3.newLine();
+      _builder_3.append("C");
+      StringInputStream _stringInputStream = new StringInputStream(_builder_3.toString());
+      constants.setContents(_stringInputStream, true, true, null);
+      IResourcesSetupUtil.waitForAutoBuild();
+      this.assertNoErrorsInWorkspace();
+      IProject _project_4 = clientProject.getProject();
+      WorkbenchTestHelper.deleteProject(_project_4);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -391,28 +514,6 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
-  public void assertNumberOfBuilds(final int numberOfBuild) {
-    IResourcesSetupUtil.waitForAutoBuild();
-    Map<String, Stopwatches.NumbersForTask> _allNumbers = Stopwatches.allNumbers();
-    Set<Map.Entry<String, Stopwatches.NumbersForTask>> _entrySet = _allNumbers.entrySet();
-    final Function1<Map.Entry<String, Stopwatches.NumbersForTask>, Boolean> _function = new Function1<Map.Entry<String, Stopwatches.NumbersForTask>, Boolean>() {
-      public Boolean apply(final Map.Entry<String, Stopwatches.NumbersForTask> it) {
-        String _key = it.getKey();
-        return Boolean.valueOf(_key.contains("XtextBuilder.build"));
-      }
-    };
-    Iterable<Map.Entry<String, Stopwatches.NumbersForTask>> _filter = IterableExtensions.<Map.Entry<String, Stopwatches.NumbersForTask>>filter(_entrySet, _function);
-    final Map.Entry<String, Stopwatches.NumbersForTask> builderEntry = IterableExtensions.<Map.Entry<String, Stopwatches.NumbersForTask>>head(_filter);
-    boolean _equals = Objects.equal(builderEntry, null);
-    if (_equals) {
-      Assert.assertEquals(numberOfBuild, 0);
-    } else {
-      Stopwatches.NumbersForTask _value = builderEntry.getValue();
-      final int actualMeasurements = _value.getNumberOfMeasurements();
-      Assert.assertEquals(numberOfBuild, actualMeasurements);
     }
   }
   

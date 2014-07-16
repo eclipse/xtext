@@ -9,7 +9,6 @@ import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.junit4.internal.StopwatchRule
 import org.eclipse.xtext.util.StringInputStream
-import org.eclipse.xtext.util.internal.Stopwatches
 import org.junit.After
 import org.junit.Rule
 import org.junit.Test
@@ -197,7 +196,7 @@ class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		waitForAutoBuild()
+		waitForAutoBuild
 		clientClass.assertHasErrors("- cannot be resolved")
 		
 		processorClass.setContents(new StringInputStream('''
@@ -212,7 +211,66 @@ class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 				}
 			}
 		'''),true,true, null)
-		assertNumberOfBuilds(4)
+		waitForAutoBuild
+		assertNoErrorsInWorkspace
+		WorkbenchTestHelper.deleteProject(clientProject.project)
+	}
+	
+	@Test
+	def void testChangeInResourceReadFromAnnotationProcessor() {
+		val macroProject = JavaCore.create(workbenchTestHelper.project)
+		workbenchTestHelper.createFile('anno/Anno.xtend', '''
+			package anno
+			import com.google.common.base.Splitter
+			import java.util.regex.Pattern
+			import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+			import org.eclipse.xtend.lib.macro.Active
+			import org.eclipse.xtend.lib.macro.TransformationContext
+			import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+			
+			@Active(AnnoProcessor)
+			annotation Anno {
+			}
+			
+			class AnnoProcessor extends AbstractClassProcessor {
+				override doTransform(MutableClassDeclaration cls, extension TransformationContext context) {
+					val content = context.getContents(cls.compilationUnit.filePath.parent.append("constants.txt"))
+					val constants = Splitter.on(Pattern.compile("\\r?\\n")).split(content)
+					constants.forEach [ constant |
+						cls.addField(constant) [
+							static = true
+							final = true
+							initializer = ['"' + constant + '"']
+							type = string
+						]
+					]
+				}
+			}
+		''')
+		WorkbenchTestHelper.addExportedPackages(macroProject.project, "anno")
+		
+		val clientProject = JavaCore.create(WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME + "-client"))
+		JavaProjectSetupUtil.addProjectReference(clientProject, macroProject)
+		val constants = workbenchTestHelper.createFileImpl(clientProject.project.fullPath.toString + "/src/" + 'constants.txt', '''
+			A
+			B''')
+		val fooClass = workbenchTestHelper.createFileImpl(clientProject.project.fullPath.toString + "/src/" + 'Foo.xtend', '''
+			import anno.Anno
+			@Anno
+			class Foo {
+				def test() {
+					C
+				}
+			}
+		''')
+		waitForAutoBuild
+		fooClass.assertHasErrors("C is undefined")
+		
+		constants.setContents(new StringInputStream('''
+			A
+			B
+			C'''),true,true, null)
+		waitForAutoBuild
 		assertNoErrorsInWorkspace
 		WorkbenchTestHelper.deleteProject(clientProject.project)
 	}
@@ -222,17 +280,6 @@ class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 		val findMarkers = ResourcesPlugin::workspace.root.findMarkers(IMarker::PROBLEM, true, IResource::DEPTH_INFINITE)
 		for (iMarker : findMarkers) {
 			assertFalse(iMarker.message, iMarker.severity == IMarker::SEVERITY_ERROR)
-		}
-	}
-	
-	def void assertNumberOfBuilds(int numberOfBuild) {
-		waitForAutoBuild()
-		val builderEntry = Stopwatches::allNumbers.entrySet.filter[key.contains('XtextBuilder.build')].head
-		if (builderEntry == null) {
-			assertEquals(numberOfBuild, 0)
-		} else {
-			val actualMeasurements = builderEntry.value.numberOfMeasurements
-			assertEquals(numberOfBuild, actualMeasurements)
 		}
 	}
 	
