@@ -126,6 +126,8 @@ import org.eclipse.xtend.lib.annotations.AccessorType
 import org.eclipse.xtend.core.macro.ActiveAnnotationContexts.AnnotationCallback
 import org.eclipse.xtend.lib.macro.services.ProblemSupport
 import org.eclipse.xtend.lib.macro.declaration.Element
+import org.eclipse.xtext.scoping.IScopeProvider
+import org.eclipse.xtext.naming.IQualifiedNameConverter
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -189,6 +191,8 @@ class CompilationUnitImpl implements CompilationUnit {
 	@Inject AbstractFileSystemSupport fileSystemSupport
 	@Inject FileLocations fileLocations
 	@Inject ReadAndWriteTracking readAndWriteTracking
+	@Inject IScopeProvider scopeProvider
+	@Inject IQualifiedNameConverter qualifiedNameConverter
 	
 	val ProblemSupportImpl problemSupport= new ProblemSupportImpl(this)
 	@Property val TypeReferenceProvider typeReferenceProvider = new TypeReferenceProviderImpl(this)
@@ -241,6 +245,14 @@ class CompilationUnitImpl implements CompilationUnit {
 	
 	def getResourceChangeRegistry() {
 		resourceChangeRegistry
+	}
+	
+	def getScopeProvider() {
+		scopeProvider
+	}
+	
+	def getQualifiedNameConverter() {
+		qualifiedNameConverter
 	}
 	
 	MutableFileSystemSupport decoratedFileSystemSupport

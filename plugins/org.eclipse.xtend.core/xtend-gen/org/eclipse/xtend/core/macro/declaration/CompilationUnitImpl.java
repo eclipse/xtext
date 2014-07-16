@@ -170,7 +170,9 @@ import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.documentation.IFileHeaderProvider;
 import org.eclipse.xtext.generator.FileSystemAccessQueue;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.CompilerPhases;
+import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XExpression;
@@ -313,6 +315,12 @@ public class CompilationUnitImpl implements CompilationUnit {
   @Inject
   private ReadAndWriteTracking readAndWriteTracking;
   
+  @Inject
+  private IScopeProvider scopeProvider;
+  
+  @Inject
+  private IQualifiedNameConverter qualifiedNameConverter;
+  
   private final ProblemSupportImpl problemSupport = new ProblemSupportImpl(this);
   
   @Property
@@ -376,6 +384,14 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public ResourceChangeRegistry getResourceChangeRegistry() {
     return this.resourceChangeRegistry;
+  }
+  
+  public IScopeProvider getScopeProvider() {
+    return this.scopeProvider;
+  }
+  
+  public IQualifiedNameConverter getQualifiedNameConverter() {
+    return this.qualifiedNameConverter;
   }
   
   private MutableFileSystemSupport decoratedFileSystemSupport;

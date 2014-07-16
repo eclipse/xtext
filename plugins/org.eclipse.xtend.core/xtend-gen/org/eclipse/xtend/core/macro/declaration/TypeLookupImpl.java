@@ -3,6 +3,7 @@ package org.eclipse.xtend.core.macro.declaration;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
@@ -16,8 +17,15 @@ import org.eclipse.xtend.lib.macro.services.TypeLookup;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xtype.XImportSection;
+import org.eclipse.xtext.xtype.XtypePackage;
 
 @SuppressWarnings("all")
 public class TypeLookupImpl implements TypeLookup {
@@ -136,15 +144,28 @@ public class TypeLookupImpl implements TypeLookup {
     } else {
       Type _xblockexpression = null;
       {
-        TypeReferences _typeReferences = this.compilationUnit.getTypeReferences();
+        IQualifiedNameConverter _qualifiedNameConverter = this.compilationUnit.getQualifiedNameConverter();
+        final QualifiedName qualifiedName = _qualifiedNameConverter.toQualifiedName(typeName);
+        IScopeProvider _scopeProvider = this.compilationUnit.getScopeProvider();
         XtendFile _xtendFile = this.compilationUnit.getXtendFile();
-        final JvmType result = _typeReferences.findDeclaredType(typeName, _xtendFile);
+        XImportSection _importSection = _xtendFile.getImportSection();
+        IScope _scope = _scopeProvider.getScope(_importSection, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE);
+        final IEObjectDescription result = _scope.getSingleElement(qualifiedName);
         Type _xifexpression = null;
-        boolean _equals = Objects.equal(result, null);
-        if (_equals) {
-          _xifexpression = null;
+        boolean _and = false;
+        boolean _tripleNotEquals = (result != null);
+        if (!_tripleNotEquals) {
+          _and = false;
         } else {
-          _xifexpression = this.compilationUnit.toType(result);
+          EClass _eClass = result.getEClass();
+          boolean _isSuperTypeOf = TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(_eClass);
+          _and = _isSuperTypeOf;
+        }
+        if (_and) {
+          EObject _eObjectOrProxy = result.getEObjectOrProxy();
+          _xifexpression = this.compilationUnit.toType(((JvmType) _eObjectOrProxy));
+        } else {
+          _xifexpression = null;
         }
         _xblockexpression = _xifexpression;
       }
