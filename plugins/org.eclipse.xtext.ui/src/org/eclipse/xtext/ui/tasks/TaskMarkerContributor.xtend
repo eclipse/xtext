@@ -15,7 +15,6 @@ import org.eclipse.core.resources.IResource
 import org.eclipse.core.runtime.CoreException
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.OperationCanceledException
-import org.eclipse.core.runtime.SubMonitor
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.tasks.ITaskFinder
 import org.eclipse.xtext.tasks.Task

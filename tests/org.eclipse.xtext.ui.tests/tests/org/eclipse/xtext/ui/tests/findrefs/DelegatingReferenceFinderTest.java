@@ -17,7 +17,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.IReferenceDescription;
@@ -25,9 +24,10 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.DefaultReferenceDescription;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
-import org.eclipse.xtext.ui.editor.findrefs.DefaultReferenceFinder;
+import org.eclipse.xtext.ui.editor.findrefs.DelegatingReferenceFinder;
 import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
 import org.eclipse.xtext.ui.editor.findrefs.SimpleLocalResourceAccess;
+import org.eclipse.xtext.ui.editor.findrefs.TargetURIConverter;
 import org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.RefactoringPackage;
 import org.eclipse.xtext.util.IAcceptor;
@@ -38,8 +38,7 @@ import org.junit.Test;
  * @author Jan Koehnlein - Initial contribution and API
  * @author Holger Schill
  */
-@SuppressWarnings("deprecation")
-public class DefaultReferenceFinderTest extends AbstractXtextTests {
+public class DelegatingReferenceFinderTest extends AbstractXtextTests {
 
 	private ResourceSet resourceSet;
 	private Resource resource;
@@ -47,7 +46,7 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 	private EObject elementB;
 	private EObject elementC;
 
-	private DefaultReferenceFinder referenceFinder;
+	private DelegatingReferenceFinder referenceFinder;
 	private CheckingAcceptor acceptor;
 	private IReferenceFinder.ILocalResourceAccess localResourceAccess;
 
@@ -64,7 +63,11 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 
 		ResourceSetBasedResourceDescriptions resourceDescriptions = get(ResourceSetBasedResourceDescriptions.class);
 		resourceDescriptions.setContext(resourceSet);
-		referenceFinder = new DefaultReferenceFinder(resourceDescriptions, get(IResourceServiceProvider.Registry.class));
+		referenceFinder = new DelegatingReferenceFinder();
+		referenceFinder.setIndexData(resourceDescriptions);
+		referenceFinder.setConverter(get(TargetURIConverter.class));
+		referenceFinder.setDelegate(get(org.eclipse.xtext.findReferences.IReferenceFinder.class));
+		referenceFinder.setResourceServiceProviderRegistry(get(IResourceServiceProvider.Registry.class));
 		localResourceAccess = new SimpleLocalResourceAccess(resourceSet);
 		acceptor = new CheckingAcceptor();
 	}
@@ -79,12 +82,12 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 	@Test public void testLocalRefs() throws Exception {
 		acceptor.expect(new DefaultReferenceDescription(elementB, elementA,
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0,
-				EcoreUtil.getURI(elementB)));
+				EcoreUtil2.getPlatformResourceOrNormalizedURI(elementB)));
 		findAllRefs(elementA, localResourceAccess);
 		acceptor.assertFinished();
 
 		acceptor.expect(new DefaultReferenceDescription(elementB, elementA,
-				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementB)));
+				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil2.getPlatformResourceOrNormalizedURI(elementB)));
 		findRefs(elementA, resource, localResourceAccess);
 		acceptor.assertFinished();
 	}
@@ -97,12 +100,12 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 		acceptor.assertFinished();
 
 		acceptor.expect(new DefaultReferenceDescription(elementD, elementC,
-				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementD)));
+				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil2.getPlatformResourceOrNormalizedURI(elementD)));
 		findAllRefs(elementC, localResourceAccess);
 		acceptor.assertFinished();
 
 		acceptor.expect(new DefaultReferenceDescription(elementD, elementC,
-				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementD)));
+				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil2.getPlatformResourceOrNormalizedURI(elementD)));
 		findRefs(elementC, refResource, localResourceAccess);
 		acceptor.assertFinished();
 	}
@@ -112,19 +115,19 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 		EObject elementD = refResource.getContents().get(0).eContents().get(0);
 
 		acceptor.expect(new DefaultReferenceDescription(elementB, elementA,
-				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementB)));
+				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil2.getPlatformResourceOrNormalizedURI(elementB)));
 		findRefs(elementA, resource, localResourceAccess);
 		acceptor.assertFinished();
 
 		acceptor.expect(new DefaultReferenceDescription(elementB, elementA,
-				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementB)));
+				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil2.getPlatformResourceOrNormalizedURI(elementB)));
 		acceptor.expect(new DefaultReferenceDescription(elementD, elementA,
-				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementD)));
+				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil2.getPlatformResourceOrNormalizedURI(elementD)));
 		findAllRefs(elementA, localResourceAccess);
 		acceptor.assertFinished();
 
 		acceptor.expect(new DefaultReferenceDescription(elementD, elementA,
-				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementD)));
+				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil2.getPlatformResourceOrNormalizedURI(elementD)));
 		findRefs(elementA, refResource, localResourceAccess);
 		acceptor.assertFinished();
 	}
@@ -137,12 +140,12 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 		acceptor.assertFinished();
 
 		acceptor.expect(new DefaultReferenceDescription(elementD, elementA,
-				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementD)));
+				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil2.getPlatformResourceOrNormalizedURI(elementD)));
 		findAllRefs(elementA, null);
 		acceptor.assertFinished();
 
 		acceptor.expect(new DefaultReferenceDescription(elementD, elementA,
-				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementD)));
+				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil2.getPlatformResourceOrNormalizedURI(elementD)));
 		findRefs(elementA, refResource, null);
 		acceptor.assertFinished();
 	}

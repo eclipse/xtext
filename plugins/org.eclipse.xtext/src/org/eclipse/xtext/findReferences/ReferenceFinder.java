@@ -42,7 +42,7 @@ public class ReferenceFinder implements IReferenceFinder {
 	@Inject
 	private IResourceServiceProvider.Registry serviceProviderRegistry;
 	
-	private static final int MONITOR_CHUNK_SIZE = 100;
+	protected static final int MONITOR_CHUNK_SIZE = 100;
 	
 	public void findReferences(
 			TargetURIs targetURIs,
@@ -191,7 +191,7 @@ public class ReferenceFinder implements IReferenceFinder {
 										URI refURI= EcoreUtil2.getPlatformResourceOrNormalizedURI(instanceOrProxy);
 										if(targetURIs.contains(refURI)) {
 											sourceURI = (sourceURI == null) ? EcoreUtil2.getPlatformResourceOrNormalizedURI(sourceCandidate) : sourceURI;
-											acceptor.accept(sourceCandidate, sourceURI, ref, i, refURI);
+											acceptor.accept(sourceCandidate, sourceURI, ref, i, instanceOrProxy, refURI);
 										}
 									}
 								}
@@ -202,7 +202,7 @@ public class ReferenceFinder implements IReferenceFinder {
 									if (targetURIs.contains(refURI)) {
 										sourceURI = (sourceURI == null) ? EcoreUtil2
 												.getPlatformResourceOrNormalizedURI(sourceCandidate) : sourceURI;
-										acceptor.accept(sourceCandidate, sourceURI, ref, -1, refURI);
+										acceptor.accept(sourceCandidate, sourceURI, ref, -1, instanceOrProxy, refURI);
 									}
 								}
 							}

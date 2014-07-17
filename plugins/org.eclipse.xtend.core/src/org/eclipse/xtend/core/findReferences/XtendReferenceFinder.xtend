@@ -105,7 +105,7 @@ class XtendReferenceFinder extends ReferenceFinder {
 		val candidateURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(candidate)
 		if (targetURISet.contains(candidateURI)) {
 			val sourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(sourceElement)
-			acceptor.accept(sourceElement, sourceURI, reference, -1, candidateURI)
+			acceptor.accept(sourceElement, sourceURI, reference, -1, candidate, candidateURI)
 		}
 	}
 	

@@ -20,6 +20,11 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 
 /**
+ * Default implementation for {@link TargetURIs}.
+ * 
+ * We extend {@link AbstractSet} on purpose to allow this instance to be funneled through
+ * the old APIs.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.7
  */
@@ -156,4 +161,7 @@ public class TargetURISet extends AbstractSet<URI> implements TargetURIs {
 		return uris.size();
 	}
 	
+	public Set<URI> asSet() {
+		return this;
+	}
 }

@@ -44,6 +44,8 @@ public class EmfResourceRenameStrategy extends AbstractRenameStrategy {
 			changeUtil.addSaveAsUpdate(targetResource, updateAcceptor);
 		} catch (IOException exc) {
 			updateAcceptor.getRefactoringStatus().add(ERROR, exc.getMessage());
+		} finally {
+			revertDeclarationChange(resourceSet);
 		}
 	}
 	
