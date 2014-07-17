@@ -55,6 +55,16 @@ public abstract class AbstractReferenceUpdater implements IReferenceUpdater {
 	public void createReferenceUpdates(ElementRenameArguments elementRenameArguments,
 			Iterable<IReferenceDescription> referenceDescriptions, IRefactoringUpdateAcceptor updateAcceptor,
 			IProgressMonitor monitor) {
+		RefactoringResourceSetProvider provider = elementRenameArguments.getResourceSetProvider();
+		createReferenceUpdates(elementRenameArguments, referenceDescriptions, updateAcceptor, provider != null ? provider : resourceSetProvider, monitor);
+	}
+	
+	protected void createReferenceUpdates(
+			ElementRenameArguments elementRenameArguments,
+			Iterable<IReferenceDescription> referenceDescriptions,
+			IRefactoringUpdateAcceptor updateAcceptor,
+			RefactoringResourceSetProvider resourceSetProvider,
+			IProgressMonitor monitor) {
 		SubMonitor progress = SubMonitor.convert(monitor, 100);
 		progress.beginTask("Sort references by project", 1);
 		Multimap<IProject, IReferenceDescription> project2references = sorter.sortByProject(referenceDescriptions);

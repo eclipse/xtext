@@ -9,11 +9,9 @@ package org.eclipse.xtext.ui.editor.findrefs;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.util.IAcceptor;
-import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.ImplementedBy;
 
@@ -31,14 +29,14 @@ import com.google.inject.ImplementedBy;
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.3
  */
+@SuppressWarnings("deprecation")
 @ImplementedBy(DefaultReferenceFinder.class)
 public interface IReferenceFinder {
 
 	/**
 	 * Provides safe read access to a resource set for searching local references.
 	 */
-	interface ILocalResourceAccess {
-		<R> R readOnly(URI resourceURI, IUnitOfWork<R, ResourceSet> work);
+	interface ILocalResourceAccess extends org.eclipse.xtext.findReferences.IReferenceFinder.IResourceAccess {
 	}
 
 	/**
@@ -55,8 +53,11 @@ public interface IReferenceFinder {
 	 * @param monitor
 	 *            the progress monitor. Can be null.
 	 */
-	void findReferences(Iterable<URI> targetURIs, Iterable<URI> sourceResourceURIs,
-			ILocalResourceAccess localResourceAccess, IAcceptor<IReferenceDescription> referenceAcceptor,
+	void findReferences(
+			Iterable<URI> targetURIs,
+			Iterable<URI> sourceResourceURIs,
+			ILocalResourceAccess localResourceAccess,
+			IAcceptor<IReferenceDescription> referenceAcceptor,
 			IProgressMonitor monitor);
 
 	/**
@@ -71,6 +72,9 @@ public interface IReferenceFinder {
 	 * @param monitor
 	 *            the progress monitor. Can be null.
 	 */
-	void findAllReferences(Iterable<URI> targetURIs, ILocalResourceAccess localResourceAccess,
-			IAcceptor<IReferenceDescription> referenceAcceptor, IProgressMonitor monitor);
+	void findAllReferences(
+			Iterable<URI> targetURIs,
+			ILocalResourceAccess localResourceAccess,
+			IAcceptor<IReferenceDescription> referenceAcceptor,
+			IProgressMonitor monitor);
 }

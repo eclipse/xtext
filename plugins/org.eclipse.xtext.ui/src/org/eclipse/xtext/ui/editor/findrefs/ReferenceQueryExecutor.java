@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.findrefs;
 
-import static java.util.Collections.*;
-
 import java.util.Iterator;
 
 import org.eclipse.core.resources.IProject;
@@ -17,7 +15,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.search.ui.NewSearchUI;
-import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.findReferences.TargetURICollector;
+import org.eclipse.xtext.findReferences.TargetURIs;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -29,6 +28,7 @@ import org.eclipse.xtext.util.SimpleAttributeResolver;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -36,6 +36,12 @@ import com.google.inject.Inject;
  */
 public class ReferenceQueryExecutor {
 
+	@Inject
+	private Provider<TargetURIs> targetURIsProvider; 
+	
+	@Inject
+	private TargetURICollector uriCollector;
+	
 	@Inject
 	private IStorage2UriMapper storage2UriMapper;
 
@@ -47,9 +53,15 @@ public class ReferenceQueryExecutor {
 
 	@Inject
 	private ReferenceQuery referenceQuery;
-
+	
+	/**
+	 * Returns an instance of {@link TargetURIs} by default.
+	 * Clients may override and enhance the result.
+	 */
 	protected Iterable<URI> getTargetURIs(EObject primaryTarget) {
-		return singleton(EcoreUtil2.getPlatformResourceOrNormalizedURI(primaryTarget));
+		TargetURIs result = targetURIsProvider.get();
+		uriCollector.add(primaryTarget, result);
+		return result;
 	}
 
 	public String getLabel(EObject primaryTarget) {
@@ -88,7 +100,10 @@ public class ReferenceQueryExecutor {
 	}
 
 	public void init(EObject target) {
-		referenceQuery.init(getTargetURIs(target), getFilter(target), getLabel(target));
+		Iterable<URI> targetURIs = getTargetURIs(target);
+		Predicate<IReferenceDescription> filter = getFilter(target);
+		String label = getLabel(target);
+		referenceQuery.init(targetURIs, filter, label);
 	}
 
 	public void execute() {

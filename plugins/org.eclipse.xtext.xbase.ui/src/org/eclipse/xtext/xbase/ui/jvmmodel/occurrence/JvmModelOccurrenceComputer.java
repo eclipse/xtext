@@ -7,32 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.jvmmodel.occurrence;
 
-import static com.google.common.collect.Iterables.*;
-
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.ui.editor.occurrences.DefaultOccurrenceComputer;
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
-
-import com.google.common.base.Function;
-import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@Deprecated
 public class JvmModelOccurrenceComputer extends DefaultOccurrenceComputer {
-
-	@Inject
-	private IJvmModelAssociations associations;
-
-	@Override
-	protected Iterable<URI> getTargetURIs(EObject target) {
-		return concat(super.getTargetURIs(target),
-				transform(associations.getJvmElements(target), new Function<EObject, URI>() {
-					public URI apply(EObject input) {
-						return EcoreUtil2.getPlatformResourceOrNormalizedURI(input);
-					}
-				}));
-	}
 }

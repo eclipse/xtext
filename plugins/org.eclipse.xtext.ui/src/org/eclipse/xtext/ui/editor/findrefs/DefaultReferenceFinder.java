@@ -46,6 +46,7 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.3
  */
+@Deprecated
 public class DefaultReferenceFinder implements IReferenceFinder, IReferenceFinderExtension1 {
 
 	private IResourceDescriptions indexData;
