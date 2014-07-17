@@ -78,14 +78,7 @@ import com.google.common.collect.Lists;
 			final Functions.Function1<? super T, C> key) {
 		if (key == null)
 			throw new NullPointerException("key");
-		Comparator<T> comparator = new Comparator<T>() {
-			public int compare(T o1, T o2) {
-				C left = key.apply(o1);
-				C right = key.apply(o2);
-				return left.compareTo(right);
-			}
-		};
-		Collections.sort(list, comparator);
+		Collections.sort(list, new KeyComparator<T, C>(key));
 		return list;
 	}
 
