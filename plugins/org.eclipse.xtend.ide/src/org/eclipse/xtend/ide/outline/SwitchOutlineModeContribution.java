@@ -77,6 +77,6 @@ public class SwitchOutlineModeContribution extends AbstractToggleOutlineContribu
 	}
 
 	public void deregister(QuickOutlinePopup quickOutline) {
-		quickOutline = null;
+		this.quickOutline = null;
 	}
 }
