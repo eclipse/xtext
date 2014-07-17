@@ -27,12 +27,9 @@ import org.eclipse.xtext.xbase.lib.internal.FunctionDelegate;
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
-import com.google.common.base.Joiner;
 import com.google.common.base.Predicates;
-import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 /**
@@ -79,13 +76,7 @@ public class IterableExtensions {
 	 *         <code>null</code> if no element matches the predicate or the iterable is empty.
 	 */
 	public static <T> T findFirst(Iterable<T> iterable, Function1<? super T, Boolean> predicate) {
-		if (predicate == null)
-			throw new NullPointerException("predicate");
-		for (T t : iterable) {
-			if (predicate.apply(t))
-				return t;
-		}
-		return null;
+		return IteratorExtensions.findFirst(iterable.iterator(), predicate);
 	}
 
 	/**
@@ -112,12 +103,7 @@ public class IterableExtensions {
 			}
 			return null;
 		} else {
-			T result = null;
-			for (T t : iterable) {
-				if (predicate.apply(t))
-					result = t;
-			}
-			return result;
+			return IteratorExtensions.findLast(iterable.iterator(), predicate);
 		}
 	}
 
@@ -129,10 +115,7 @@ public class IterableExtensions {
 	 * @return the first element in the iterable or <code>null</code>.
 	 */
 	public static <T> T head(Iterable<T> iterable) {
-		Iterator<T> iterator = iterable.iterator();
-		if (iterator.hasNext())
-			return iterator.next();
-		return null;
+		return IteratorExtensions.head(iterable.iterator());
 	}
 
 	/**
@@ -166,11 +149,7 @@ public class IterableExtensions {
 				return null;
 			return sortedSet.last();
 		} else {
-			T result = null;
-			for (T t : iterable) {
-				result = t;
-			}
-			return result;
+			return IteratorExtensions.last(iterable.iterator());
 		}
 	}
 
@@ -195,22 +174,7 @@ public class IterableExtensions {
 			return Collections.emptyList();
 		return new Iterable<T>() {
 			public Iterator<T> iterator() {
-				return new AbstractIterator<T>() {
-
-					private int remaining = count;
-
-					private Iterator<T> delegate = iterable.iterator();
-
-					@Override
-					protected T computeNext() {
-						if (remaining <= 0)
-							return endOfData();
-						if (!delegate.hasNext())
-							return endOfData();
-						remaining--;
-						return delegate.next();
-					}
-				};
+				return IteratorExtensions.take(iterable.iterator(), count);
 			}
 		};
 	}
@@ -237,25 +201,7 @@ public class IterableExtensions {
 					+ count);
 		return new Iterable<T>() {
 			public Iterator<T> iterator() {
-				return new AbstractIterator<T>() {
-
-					private Iterator<T> delegate = iterable.iterator();
-
-					{
-						int i = count;
-						while (i > 0 && delegate.hasNext()) {
-							delegate.next();
-							i--;
-						}
-					}
-
-					@Override
-					protected T computeNext() {
-						if (!delegate.hasNext())
-							return endOfData();
-						return delegate.next();
-					}
-				};
+				return IteratorExtensions.drop(iterable.iterator(), count);
 			}
 		};
 	}
@@ -270,13 +216,7 @@ public class IterableExtensions {
 	 * @return <code>true</code> if one or more elements in {@code iterable} satisfy the predicate.
 	 */
 	public static <T> boolean exists(Iterable<T> iterable, Function1<? super T, Boolean> predicate) {
-		if (predicate == null)
-			throw new NullPointerException("predicate");
-		for (T t : iterable) {
-			if (predicate.apply(t))
-				return true;
-		}
-		return false;
+		return IteratorExtensions.exists(iterable.iterator(), predicate);
 	}
 
 	/**
@@ -291,13 +231,7 @@ public class IterableExtensions {
 	 * @return <code>true</code> if one or more elements in {@code iterable} satisfy the predicate.
 	 */
 	public static <T> boolean forall(Iterable<T> iterable, Function1<? super T, Boolean> predicate) {
-		if (predicate == null)
-			throw new NullPointerException("predicate");
-		for (T t : iterable) {
-			if (!predicate.apply(t))
-				return false;
-		}
-		return true;
+		return IteratorExtensions.forall(iterable.iterator(), predicate);
 	}
 
 	/**
@@ -393,11 +327,7 @@ public class IterableExtensions {
 	 *            the procedure. May not be <code>null</code>.
 	 */
 	public static <T> void forEach(Iterable<T> iterable, Procedure1<? super T> procedure) {
-		if (procedure == null)
-			throw new NullPointerException("procedure");
-		for (T t : iterable) {
-			procedure.apply(t);
-		}
+		IteratorExtensions.forEach(iterable.iterator(), procedure);
 	}
 	
 	/**
@@ -412,14 +342,7 @@ public class IterableExtensions {
 	 * @since 2.3
 	 */
 	public static <T> void forEach(Iterable<T> iterable, Procedure2<? super T, ? super Integer> procedure) {
-		if (procedure == null)
-			throw new NullPointerException("procedure");
-		int i = 0;
-		for (T t : iterable) {
-			procedure.apply(t, i);
-			if (i != Integer.MAX_VALUE)
-				i++;
-		}
+		IteratorExtensions.forEach(iterable.iterator(), procedure);
 	}
 
 	/**
@@ -431,7 +354,7 @@ public class IterableExtensions {
 	 * @see #join(Iterable, CharSequence, Function1)
 	 */
 	public static String join(Iterable<?> iterable) {
-		return join(iterable, "");
+		return IteratorExtensions.join(iterable.iterator());
 	}
 
 	/**
@@ -447,7 +370,7 @@ public class IterableExtensions {
 	 * @see #join(Iterable, CharSequence, Function1)
 	 */
 	public static String join(Iterable<?> iterable, CharSequence separator) {
-		return Joiner.on(separator.toString()).useForNull("null").join(iterable);
+		return IteratorExtensions.join(iterable.iterator(), separator);
 	}
 
 	/**
@@ -467,20 +390,7 @@ public class IterableExtensions {
 	 */
 	public static <T> String join(Iterable<T> iterable, CharSequence separator,
 			Functions.Function1<? super T, ? extends CharSequence> function) {
-		if (separator == null)
-			throw new NullPointerException("separator");
-		if (function == null)
-			throw new NullPointerException("function");
-		StringBuilder result = new StringBuilder();
-		Iterator<T> iterator = iterable.iterator();
-		while (iterator.hasNext()) {
-			T next = iterator.next();
-			CharSequence elementToString = function.apply(next);
-			result.append(elementToString);
-			if (iterator.hasNext())
-				result.append(separator);
-		}
-		return result.toString();
+		return IteratorExtensions.join(iterable.iterator(), separator, function);
 	}
 	
 	/**
@@ -504,23 +414,7 @@ public class IterableExtensions {
 	 */
 	public static <T> String join(Iterable<T> iterable, CharSequence before, CharSequence separator, CharSequence after,
 			Functions.Function1<? super T, ? extends CharSequence> function) {
-		if (function == null)
-			throw new NullPointerException("function");
-		StringBuilder result = new StringBuilder();
-		Iterator<T> iterator = iterable.iterator();
-		boolean notEmpty = iterator.hasNext(); 
-		if (notEmpty && before != null)
-			result.append(before);
-		while (iterator.hasNext()) {
-			T next = iterator.next();
-			CharSequence elementToString = function.apply(next);
-			result.append(elementToString);
-			if (iterator.hasNext() && separator != null)
-				result.append(separator);
-		}
-		if (notEmpty && after != null)
-			result.append(after);
-		return result.toString();
+		return IteratorExtensions.join(iterable.iterator(), before, separator, after, function);
 	}
 
 	/**
@@ -600,18 +494,7 @@ public class IterableExtensions {
 	 * @return the last result of the applied combinator function or <code>null</code> for the empty input.
 	 */
 	public static <T> T reduce(Iterable<? extends T> iterable, Function2<? super T, ? super T, ? extends T> function) {
-		if (function == null)
-			throw new NullPointerException("function");
-		Iterator<? extends T> iterator = iterable.iterator();
-		if (iterator.hasNext()) {
-			T result = iterator.next();
-			while (iterator.hasNext()) {
-				result = function.apply(result, iterator.next());
-			}
-			return result;
-		} else {
-			return null;
-		}
+		return IteratorExtensions.reduce(iterable.iterator(), function);
 	}
 
 	/**
@@ -647,12 +530,7 @@ public class IterableExtensions {
 	 * @return the last result of the applied combinator function or <code>seed</code> for the empty input.
 	 */
 	public static <T, R> R fold(Iterable<T> iterable, R seed, Function2<? super R, ? super T, ? extends R> function) {
-		R result = seed;
-		Iterator<T> iterator = iterable.iterator();
-		while (iterator.hasNext()) {
-			result = function.apply(result, iterator.next());
-		}
-		return result;
+		return IteratorExtensions.fold(iterable.iterator(), seed, function);
 	}
 
 	/**
@@ -706,11 +584,7 @@ public class IterableExtensions {
 	 *         {@code computeValues}.
 	 */
 	public static <K, V> Map<K, V> toInvertedMap(Iterable<? extends K> keys, Function1<? super K, V> computeValues) {
-		Map<K, V> result = Maps.newLinkedHashMap();
-		for (K k : keys) {
-			result.put(k, computeValues.apply(k));
-		}
-		return result;
+		return IteratorExtensions.toInvertedMap(keys.iterator(), computeValues);
 	}
 
 	/**
@@ -726,13 +600,7 @@ public class IterableExtensions {
 	 *         collection to that value
 	 */
 	public static <K, V> Map<K, V> toMap(Iterable<? extends V> values, Function1<? super V, K> computeKeys) {
-		if (computeKeys == null)
-			throw new NullPointerException("computeKeys");
-		Map<K, V> result = Maps.newLinkedHashMap();
-		for (V v : values) {
-			result.put(computeKeys.apply(v), v);
-		}
-		return result;
+		return IteratorExtensions.toMap(values.iterator(), computeKeys);
 	}
 
 	/**
@@ -787,5 +655,4 @@ public class IterableExtensions {
 			final Functions.Function1<? super T, C> key) {
 		return ListExtensions.sortInplaceBy(Lists.newArrayList(iterable), key);
 	}
-
 }
