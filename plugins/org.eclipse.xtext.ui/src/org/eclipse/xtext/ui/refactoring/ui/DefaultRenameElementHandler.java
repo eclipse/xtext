@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -85,6 +86,12 @@ public class DefaultRenameElementHandler extends AbstractHandler implements IRen
 					startRenameElement(renameElementContext);
 				}
 			}
+		} catch (OperationCanceledException e) {
+			// cancelled by user, ok
+			return null;
+		} catch(InterruptedException e) {
+			// cancelled by user, ok
+			return null;
 		} catch (Exception exc) {
 			LOG.error("Error initializing refactoring", exc);
 			MessageDialog.openError(Display.getCurrent().getActiveShell(), "Error initializing refactoring",

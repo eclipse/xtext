@@ -74,12 +74,10 @@ public class EditorDocumentChange extends TextChange {
 
 	@Override
 	public RefactoringStatus isValid(IProgressMonitor pm) throws CoreException {
-		pm.beginTask("", 1);
 		RefactoringStatus refactoringStatus = new RefactoringStatus();
 		if(document instanceof IDocumentExtension4 
 				&& ((IDocumentExtension4) document).getModificationStamp() != modificationStamp)
 			refactoringStatus.addFatalError("The content of the document has changed.");
-		pm.worked(1);
 		return refactoringStatus;
 	}
 
@@ -91,7 +89,7 @@ public class EditorDocumentChange extends TextChange {
 	@Override
 	protected void commit(IDocument document, IProgressMonitor pm) throws CoreException {
 		if(doSave) 
-			editor.doSave(new NullProgressMonitor());
+			editor.doSave(pm);
 	}
 
 	@Override

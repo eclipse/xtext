@@ -45,6 +45,9 @@ public class ExtractVariableHandler extends AbstractHandler {
 	@Inject
 	private ILocationInFileProvider locationInFileProvider;
 	
+	@Inject
+	private RefactoredResourceCopier resourceCopier;
+	
 	protected static final Logger LOG = Logger.getLogger(DefaultRenameElementHandler.class);
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -56,7 +59,8 @@ public class ExtractVariableHandler extends AbstractHandler {
 				final IXtextDocument document = editor.getDocument();
 				document.readOnly(new IUnitOfWork.Void<XtextResource>() {
 					@Override
-					public void process(XtextResource resource) throws Exception {
+					public void process(XtextResource orig) throws Exception {
+						XtextResource resource = resourceCopier.loadIntoNewResourceSet(orig);
 						XExpression expression = expressionUtil.findSelectedExpression(resource, selection);
 						if(expression != null) {
 							ExtractVariableRefactoring introduceVariableRefactoring = refactoringProvider.get();
@@ -72,6 +76,8 @@ public class ExtractVariableHandler extends AbstractHandler {
 					}
 				});
 			}
+		} catch (InterruptedException e) {
+			return null;
 		} catch (Exception exc) {
 			LOG.error("Error during refactoring", exc);
 			MessageDialog.openError(Display.getCurrent().getActiveShell(), "Error during refactoring", exc.getMessage()

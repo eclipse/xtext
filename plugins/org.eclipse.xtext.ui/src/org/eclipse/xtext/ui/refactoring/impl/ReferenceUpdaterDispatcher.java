@@ -62,18 +62,11 @@ public class ReferenceUpdaterDispatcher {
 				.getReferenceUpdater2ReferenceDescriptions();
 		SubMonitor updaterProgress = progress.newChild(98).setWorkRemaining(updater2descriptions.keySet().size());
 		for (IReferenceUpdater referenceUpdater : updater2descriptions.keySet()) {
-			createReferenceUpdates(referenceUpdater, elementRenameArguments,
-					updater2descriptions.get(referenceUpdater), updateAcceptor, updaterProgress);
+			if (updaterProgress.isCanceled())
+				return;
+			referenceUpdater.createReferenceUpdates(elementRenameArguments, updater2descriptions.get(referenceUpdater), updateAcceptor,
+					updaterProgress.newChild(1));
 		}
-	}
-
-	protected void createReferenceUpdates(IReferenceUpdater referenceUpdater,
-			ElementRenameArguments elementRenameArguments, Iterable<IReferenceDescription> referenceDescriptions,
-			IRefactoringUpdateAcceptor updateAcceptor, SubMonitor updaterProgress) {
-		if (updaterProgress.isCanceled())
-			return;
-		referenceUpdater.createReferenceUpdates(elementRenameArguments, referenceDescriptions, updateAcceptor,
-				updaterProgress.newChild(1));
 	}
 
 	protected ReferenceDescriptionAcceptor createFindReferenceAcceptor(IRefactoringUpdateAcceptor updateAcceptor) {

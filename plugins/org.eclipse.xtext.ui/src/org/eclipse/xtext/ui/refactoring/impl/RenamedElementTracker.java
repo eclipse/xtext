@@ -13,6 +13,7 @@ import static org.eclipse.xtext.util.Strings.*;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -29,13 +30,18 @@ import org.eclipse.xtext.ui.refactoring.IRenamedElementTracker;
 public class RenamedElementTracker implements IRenamedElementTracker {
 
 	public Map<URI, URI> renameAndTrack(Iterable<URI> renamedElementURIs, String newName, ResourceSet resourceSet, IRenameStrategy renameStrategy, IProgressMonitor monitor) {
-		SubMonitor progress = SubMonitor.convert(monitor).setWorkRemaining(3);
 		Map<EObject, URI> renamedElement2oldURI = resolveRenamedElements(renamedElementURIs, resourceSet);
-		progress.worked(1);
+		if (monitor.isCanceled()) {
+			throw new OperationCanceledException();
+		}
 		renameStrategy.applyDeclarationChange(newName, resourceSet);
-		progress.worked(1);
+		if (monitor.isCanceled()) {
+			throw new OperationCanceledException();
+		}
 		Map<URI, URI> old2newURI = relocateRenamedElements(renamedElement2oldURI);
-		progress.worked(1);
+		if (monitor.isCanceled()) {
+			throw new OperationCanceledException();
+		}
 		renameStrategy.revertDeclarationChange(resourceSet);
 		return old2newURI;
 	}

@@ -174,8 +174,10 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 				events = Lists.newArrayList(batchedSearchResultEvents);
 				batchedSearchResultEvents.clear();
 			}
-			SubMonitor progress = SubMonitor.convert(monitor, events.size());
 			for (SearchResultEvent event : events) {
+				if (monitor.isCanceled()) {
+					return Status.CANCEL_STATUS;
+				}
 				if (event instanceof Added) {
 					addReference(((Added) event).getReferenceDescription(), true);
 				} else if (event instanceof Reset) {
@@ -187,7 +189,6 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 						}
 					}
 				}
-				progress.worked(1);
 			}
 			viewer.refresh();
 			viewer.expandToLevel(1);

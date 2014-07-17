@@ -55,15 +55,16 @@ public class DefaultResourceUIValidatorExtension extends MarkerEraser implements
 	}
 
 	protected void addMarkers(IFile file, Resource resource, CheckMode mode, IProgressMonitor monitor) {
-		SubMonitor subMonitor = SubMonitor.convert(monitor, 1);
 		try {
-			List<Issue> list = resourceValidator.validate(resource, mode, getCancelIndicator(subMonitor));
-			if (subMonitor.isCanceled()) {
+			List<Issue> list = resourceValidator.validate(resource, mode, getCancelIndicator(monitor));
+			if (monitor.isCanceled()) {
 				throw new OperationCanceledException();
 			}
-			subMonitor.worked(1);
-			deleteMarkers(file, mode, subMonitor);
-			createMarkers(file, list, subMonitor);
+			deleteMarkers(file, mode, monitor);
+			if (monitor.isCanceled()) {
+				throw new OperationCanceledException();
+			}
+			createMarkers(file, list, monitor);
 		} catch (CoreException e) {
 			log.error(e.getMessage(), e);
 		}

@@ -19,6 +19,7 @@ import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -59,8 +60,9 @@ public abstract class AbstractReferenceUpdater implements IReferenceUpdater {
 		Multimap<IProject, IReferenceDescription> project2references = sorter.sortByProject(referenceDescriptions);
 		SubMonitor allProjectsProgress = progress.newChild(98).setWorkRemaining(project2references.keySet().size());
 		for (IProject project : project2references.keySet()) {
-			if (allProjectsProgress.isCanceled())
-				break;
+			if (allProjectsProgress.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 			Multimap<URI, IReferenceDescription> resource2references = sorter.sortByResource(project2references
 					.get(project));
 			ResourceSet resourceSet = resourceSetProvider.get(project);
@@ -73,28 +75,28 @@ public abstract class AbstractReferenceUpdater implements IReferenceUpdater {
 	protected void createClusteredReferenceUpdates(ElementRenameArguments elementRenameArguments,
 			Multimap<URI, IReferenceDescription> resource2references, ResourceSet resourceSet,
 			IRefactoringUpdateAcceptor updateAcceptor, StatusWrapper status, IProgressMonitor monitor) {
-		SubMonitor progress = SubMonitor.convert(monitor, resource2references.size() + 1);
+		SubMonitor progress = SubMonitor.convert(monitor, resource2references.keySet().size() + 1);
 		if (loadTargetResources(resourceSet, elementRenameArguments, status, progress.newChild(1))) {
-			Set<Resource> targetResources = newHashSet(resourceSet.getResources());
 			if (getClusterSize() > 0) {
+				Set<Resource> targetResources = newHashSet(resourceSet.getResources());
 				Multimap<URI, IReferenceDescription> cluster = HashMultimap.create();
+				SubMonitor clusterMonitor = progress.newChild(1);
 				for (URI referringResourceURI : resource2references.keySet()) {
 					cluster.putAll(referringResourceURI, resource2references.get(referringResourceURI));
 					if (cluster.keySet().size() == getClusterSize()) {
 						unloadNonTargetResources(resourceSet, targetResources);
-						createReferenceUpdatesForCluster(elementRenameArguments, cluster, resourceSet, updateAcceptor,
-								status, progress.newChild(cluster.size()));
+						createReferenceUpdatesForCluster(elementRenameArguments, cluster, resourceSet, updateAcceptor, status, clusterMonitor);
 						cluster.clear();
 					}
 				}
 				if (!cluster.isEmpty()) {
 					unloadNonTargetResources(resourceSet, targetResources);
 					createReferenceUpdatesForCluster(elementRenameArguments, cluster, resourceSet, updateAcceptor,
-							status, progress.newChild(cluster.size()));
+							status, clusterMonitor);
 				}
 			} else {
 				createReferenceUpdatesForCluster(elementRenameArguments, resource2references, resourceSet,
-						updateAcceptor, status, progress);
+						updateAcceptor, status, progress.newChild(resource2references.keySet().size()));
 			}
 		}
 	}
@@ -118,18 +120,30 @@ public abstract class AbstractReferenceUpdater implements IReferenceUpdater {
 		SubMonitor progress = SubMonitor.convert(monitor, 100);
 		List<URI> unloadableResources = loadReferringResources(resourceSet, resource2references.keySet(), status,
 				progress.newChild(10));
+		if (progress.isCanceled()) {
+			throw new OperationCanceledException();
+		}
 		for (URI unloadableResouce : unloadableResources)
 			resource2references.removeAll(unloadableResouce);
 		List<IReferenceDescription> unresolvableReferences = resolveReferenceProxies(resourceSet,
-				resource2references.values(), status, progress.newChild(10));
+				resource2references.values(), status, progress.newChild(70));
+		if (progress.isCanceled()) {
+			throw new OperationCanceledException();
+		}
 		for (IReferenceDescription unresolvableReference : unresolvableReferences) {
 			URI unresolvableReferringResource = unresolvableReference.getSourceEObjectUri().trimFragment();
 			resource2references.remove(unresolvableReferringResource, unresolvableReference);
 		}
 		elementRenameArguments.getRenameStrategy().applyDeclarationChange(elementRenameArguments.getNewName(),
 				resourceSet);
+		if (progress.isCanceled()) {
+			throw new OperationCanceledException();
+		}
 		createReferenceUpdates(elementRenameArguments, resource2references, resourceSet, updateAcceptor,
-				progress.newChild(80));
+				progress.newChild(20));
+		if (progress.isCanceled()) {
+			throw new OperationCanceledException();
+		}
 		elementRenameArguments.getRenameStrategy().revertDeclarationChange(resourceSet);
 	}
 
@@ -137,6 +151,9 @@ public abstract class AbstractReferenceUpdater implements IReferenceUpdater {
 			Collection<IReferenceDescription> values, StatusWrapper status, IProgressMonitor monitor) {
 		List<IReferenceDescription> unresolvedDescriptions = null;
 		for (IReferenceDescription referenceDescription : values) {
+			if (monitor.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 			EObject sourceEObject = resourceSet.getEObject(referenceDescription.getSourceEObjectUri(), true);
 			if (sourceEObject == null) {
 				handleCannotLoadReferringElement(referenceDescription, status);
@@ -188,25 +205,27 @@ public abstract class AbstractReferenceUpdater implements IReferenceUpdater {
 
 	protected boolean loadTargetResources(ResourceSet resourceSet, ElementRenameArguments elementRenameArguments,
 			StatusWrapper status, IProgressMonitor monitor) {
-		SubMonitor progress = SubMonitor.convert(monitor, "Loading target resource",
-				size(elementRenameArguments.getRenamedElementURIs()));
 		boolean isSuccess = true;
 		for (URI renamedElementURI : elementRenameArguments.getRenamedElementURIs()) {
+			if (monitor.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 			EObject renamedElement = resourceSet.getEObject(renamedElementURI, true);
 			if (renamedElement == null || renamedElement.eIsProxy()) {
 				status.add(ERROR, "Cannot load target element {0}.", renamedElementURI);
 				isSuccess = false;
 			}
-			progress.worked(1);
 		}
 		return isSuccess;
 	}
 
 	protected List<URI> loadReferringResources(ResourceSet resourceSet, Iterable<URI> referringResourceURIs,
 			StatusWrapper status, IProgressMonitor monitor) {
-		SubMonitor progress = SubMonitor.convert(monitor, "Loading referencing resources", size(referringResourceURIs));
 		List<URI> unloadableResources = null;
 		for (URI referringResourceURI : referringResourceURIs) {
+			if (monitor.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 			Resource referringResource = resourceSet.getResource(referringResourceURI, true);
 			if (referringResource == null) {
 				status.add(ERROR, "Could not load referring resource ", referringResourceURI);
@@ -214,7 +233,6 @@ public abstract class AbstractReferenceUpdater implements IReferenceUpdater {
 					unloadableResources = newArrayList();
 				unloadableResources.add(referringResourceURI);
 			}
-			progress.worked(1);
 		}
 		return unloadableResources == null ? Collections.<URI> emptyList() : unloadableResources;
 	}

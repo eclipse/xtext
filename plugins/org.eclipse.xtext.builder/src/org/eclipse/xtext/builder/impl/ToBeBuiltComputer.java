@@ -167,11 +167,17 @@ public class ToBeBuiltComputer {
 		return toBeBuilt;
 	}
 
+	private static final int MONITOR_CHUNK_SIZE = 100;
+	
 	protected ToBeBuilt doRemoveProject(IProject project, IProgressMonitor monitor) {
-		SubMonitor progress = SubMonitor.convert(monitor, Iterables.size(builderState.getAllResourceDescriptions()));
+		SubMonitor progress = SubMonitor.convert(monitor, Iterables.size(builderState.getAllResourceDescriptions()) / MONITOR_CHUNK_SIZE + 1);
 		ToBeBuilt result = new ToBeBuilt();
 		Iterable<IResourceDescription> allResourceDescriptions = builderState.getAllResourceDescriptions();
+		int i = 0;
 		for (IResourceDescription description : allResourceDescriptions) {
+			if (monitor.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 			Iterable<Pair<IStorage, IProject>> storages = mapper.getStorages(description.getURI());
 			boolean onlyOnThisProject = true;
 			Iterator<Pair<IStorage, IProject>> iterator = storages.iterator();
@@ -182,7 +188,9 @@ public class ToBeBuiltComputer {
 			}
 			if (onlyOnThisProject)
 				result.getToBeDeleted().add(description.getURI());
-			progress.worked(1);
+			i++;
+			if (i % MONITOR_CHUNK_SIZE == 0)
+				progress.worked(1);
 		}
 		return result;
 	}
@@ -192,8 +200,8 @@ public class ToBeBuiltComputer {
 	 * longer contained in the project.
 	 */
 	public ToBeBuilt updateProjectNewResourcesOnly(IProject project, IProgressMonitor monitor) throws CoreException {
-		SubMonitor progress = SubMonitor.convert(monitor, Messages.ToBeBuiltComputer_CollectingReosurces, 1);
-		progress.subTask(Messages.ToBeBuiltComputer_CollectingReosurces);
+		SubMonitor progress = SubMonitor.convert(monitor, Messages.ToBeBuiltComputer_CollectingResources, 1);
+		progress.subTask(Messages.ToBeBuiltComputer_CollectingResources);
 		ToBeBuilt toBeBuilt = updateProject(project, progress.newChild(1));
 		Iterable<URI> existingURIs = Iterables.transform(builderState.getAllResourceDescriptions(),
 				new Function<IResourceDescription, URI>() {
@@ -216,11 +224,11 @@ public class ToBeBuiltComputer {
 	 * @see #isHandled(IFolder)
 	 * @see IToBeBuiltComputerContribution#updateProject(ToBeBuilt, IProject, IProgressMonitor)
 	 */
-	public ToBeBuilt updateProject(IProject project, IProgressMonitor monitor) throws CoreException {
-		final SubMonitor progress = SubMonitor.convert(monitor, Messages.ToBeBuiltComputer_CollectingReosurces, 1);
-		progress.subTask(Messages.ToBeBuiltComputer_CollectingReosurces);
+	public ToBeBuilt updateProject(IProject project, IProgressMonitor monitor) throws CoreException, OperationCanceledException {
+		final SubMonitor progress = SubMonitor.convert(monitor, Messages.ToBeBuiltComputer_CollectingResources, 10);
+		progress.subTask(Messages.ToBeBuiltComputer_CollectingResources);
 
-		final ToBeBuilt toBeBuilt = doRemoveProject(project, progress.newChild(1));
+		final ToBeBuilt toBeBuilt = doRemoveProject(project, progress.newChild(9));
 		if (!project.isAccessible())
 			return toBeBuilt;
 		if (progress.isCanceled())
@@ -238,7 +246,7 @@ public class ToBeBuiltComputer {
 				return true;
 			}
 		});
-		contribution.updateProject(toBeBuilt, project, monitor);
+		contribution.updateProject(toBeBuilt, project, progress.newChild(1));
 		return toBeBuilt;
 	}
 

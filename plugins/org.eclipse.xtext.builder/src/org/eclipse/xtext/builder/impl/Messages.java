@@ -23,7 +23,7 @@ public class Messages extends NLS {
 	public static String ProjectOpenedOrClosedListener_FromIndex;
 	public static String ProjectOpenedOrClosedListener_RemovingProject;
 	public static String RegistryBuilderParticipant_InvokingBuildParticipants;
-	public static String ToBeBuiltComputer_CollectingReosurces;
+	public static String ToBeBuiltComputer_CollectingResources;
 	public static String XtextBuilder_Building;
 	public static String XtextBuilder_CollectingResources;
 	static {
