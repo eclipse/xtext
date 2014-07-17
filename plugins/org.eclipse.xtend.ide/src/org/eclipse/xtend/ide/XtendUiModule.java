@@ -44,7 +44,6 @@ import org.eclipse.xtend.ide.editor.XtendNatureAddingEditorCallback;
 import org.eclipse.xtend.ide.editor.XtendSourceViewerConfiguration;
 import org.eclipse.xtend.ide.editor.copyqualifiedname.XtendCopyQualifiedNameService;
 import org.eclipse.xtend.ide.editor.model.XtendDocumentTokenSource;
-import org.eclipse.xtend.ide.findrefs.XtendReferenceFinder;
 import org.eclipse.xtend.ide.formatting.FormatterFactory;
 import org.eclipse.xtend.ide.formatting.preferences.FormatterResourceProvider;
 import org.eclipse.xtend.ide.highlighting.RichStringAwareTokenScanner;
@@ -110,6 +109,7 @@ import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer;
 import org.eclipse.xtext.ui.editor.copyqualifiedname.CopyQualifiedNameService;
 import org.eclipse.xtext.ui.editor.doubleClicking.DoubleClickStrategyProvider;
 import org.eclipse.xtext.ui.editor.embedded.IEditedResourceProvider;
+import org.eclipse.xtext.ui.editor.findrefs.DelegatingReferenceFinder;
 import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider;
 import org.eclipse.xtext.ui.editor.folding.IFoldingStructureProvider;
@@ -447,7 +447,7 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	}
 	
 	public Class<? extends IReferenceFinder> bindIReferenceFinder() {
-		return XtendReferenceFinder.class;
+		return DelegatingReferenceFinder.class;
 	}
 	
 	public Class<? extends JavaTypeQuickfixes> bindJavaTypeQuickfixes() {

@@ -48,8 +48,11 @@ public class ReferenceUpdaterDispatcher {
 	@Inject
 	private Provider<ResourceAccess> resourceAccessProvider;
 	
-	public void createReferenceUpdates(ElementRenameArguments elementRenameArguments, ResourceSet resourceSet,
-			IRefactoringUpdateAcceptor updateAcceptor, IProgressMonitor monitor) {
+	public void createReferenceUpdates(
+			ElementRenameArguments elementRenameArguments,
+			ResourceSet resourceSet,
+			IRefactoringUpdateAcceptor updateAcceptor,
+			IProgressMonitor monitor) {
 		SubMonitor progress = SubMonitor.convert(monitor, "Updating references", 100);
 		ResourceAccess resourceAccess = resourceAccessProvider.get();
 		resourceAccess.registerResourceSet(resourceSet);

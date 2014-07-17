@@ -12,6 +12,7 @@ import org.eclipse.xtend.core.conversion.JavaIDValueConverter;
 import org.eclipse.xtend.core.conversion.StringValueConverter;
 import org.eclipse.xtend.core.conversion.XtendValueConverterService;
 import org.eclipse.xtend.core.documentation.XtendDocumentationProvider;
+import org.eclipse.xtend.core.findReferences.XtendReferenceFinder;
 import org.eclipse.xtend.core.formatting.XtendFormatter;
 import org.eclipse.xtend.core.imports.XtendImportedTypesUsageCollector;
 import org.eclipse.xtend.core.imports.XtendImportsConfiguration;
@@ -52,6 +53,8 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.impl.IDValueConverter;
 import org.eclipse.xtext.conversion.impl.STRINGValueConverter;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
+import org.eclipse.xtext.findReferences.ReferenceFinder;
+import org.eclipse.xtext.findReferences.TargetURICollector;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
@@ -91,6 +94,7 @@ import org.eclipse.xtext.xbase.imports.ImportedTypesCollector;
 import org.eclipse.xtext.xbase.imports.TypeUsageCollector;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
+import org.eclipse.xtext.xbase.jvmmodel.JvmModelTargetURICollector;
 import org.eclipse.xtext.xbase.scoping.batch.ConstructorScopes;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver;
@@ -165,6 +169,14 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 //	public Class<? extends IScopeProvider> bindIScopeProvider() {
 //		return XtendScopeProvider.class;
 //	}
+	
+	public Class<? extends TargetURICollector> bindTargetURICollector() {
+		return JvmModelTargetURICollector.class;
+	}
+	
+	public Class<? extends ReferenceFinder> bindReferenceFinder() {
+		return XtendReferenceFinder.class;
+	}
 
 	@Override
 	public Class<? extends ILocationInFileProvider> bindILocationInFileProvider() {

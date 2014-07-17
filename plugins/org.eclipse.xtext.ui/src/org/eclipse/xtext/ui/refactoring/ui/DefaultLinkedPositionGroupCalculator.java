@@ -46,6 +46,7 @@ import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider.NoSuchStrategyException;
 import org.eclipse.xtext.ui.refactoring.IRenamedElementTracker;
+import org.eclipse.xtext.ui.refactoring.impl.CachingResourceSetProvider;
 import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument;
 import org.eclipse.xtext.ui.refactoring.impl.ProjectUtil;
 import org.eclipse.xtext.ui.refactoring.impl.RefactoringResourceSetProvider;
@@ -101,6 +102,9 @@ public class DefaultLinkedPositionGroupCalculator implements ILinkedPositionGrou
 		if (project == null)
 			throw new IllegalStateException("Could not determine project for context resource "
 					+ renameElementContext.getContextResourceURI());
+		
+		RefactoringResourceSetProvider resourceSetProvider = new CachingResourceSetProvider(DefaultLinkedPositionGroupCalculator.this.resourceSetProvider);
+		
 		ResourceSet resourceSet = resourceSetProvider.get(project);
 		EObject targetElement = resourceSet.getEObject(renameElementContext.getTargetElementURI(), true);
 		if (targetElement == null)
@@ -140,7 +144,7 @@ public class DefaultLinkedPositionGroupCalculator implements ILinkedPositionGrou
 			throw new OperationCanceledException();
 		}
 		ElementRenameArguments elementRenameArguments = new ElementRenameArguments(
-				renameElementContext.getTargetElementURI(), newName, renameStrategy, original2newEObjectURI);
+				renameElementContext.getTargetElementURI(), newName, renameStrategy, original2newEObjectURI, resourceSetProvider);
 		final List<IReferenceDescription> referenceDescriptions = newArrayList();
 		IAcceptor<IReferenceDescription> referenceAcceptor = new IAcceptor<IReferenceDescription>() {
 			public void accept(IReferenceDescription referenceDescription) {
@@ -173,7 +177,6 @@ public class DefaultLinkedPositionGroupCalculator implements ILinkedPositionGrou
 				return linkedGroup;
 			}
 		};
-		
 	}
 
 	protected LinkedPositionGroup createLinkedGroupFromReplaceEdits(List<ReplaceEdit> edits, XtextEditor xtextEditor,

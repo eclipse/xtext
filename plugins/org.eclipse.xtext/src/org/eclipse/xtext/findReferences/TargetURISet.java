@@ -1,0 +1,159 @@
+/*******************************************************************************
+ * Copyright (c) 2014 NumberFour AG (http://www.numberfour.eu).
+ * All rights reserved.
+ *******************************************************************************/
+package org.eclipse.xtext.findReferences;
+
+import java.util.AbstractSet;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
+import org.eclipse.emf.common.util.URI;
+
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Iterators;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Sets;
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ * @since 2.7
+ */
+public class TargetURISet extends AbstractSet<URI> implements TargetURIs {
+
+	private final Set<URI> uris;
+	private final Multimap<URI, URI> index;
+	private Map<Key<? extends Object>, Object> userData;
+	
+	protected TargetURISet() {
+		uris = Sets.newLinkedHashSet();
+		index = HashMultimap.create(4, 4);
+	}
+	
+	@Override
+	public Iterator<URI> iterator() {
+		return Iterators.unmodifiableIterator(uris.iterator());
+	}
+
+	public <T> T getUserData(Key<T> key) {
+		if (userData == null) {
+			return null;
+		}
+		Object result = userData.get(key);
+		if (result == null) {
+			return null;
+		}
+		Class<T> type = key.getType();
+		return type.cast(result);
+	}
+
+	public <T> void putUserData(Key<T> key, T data) {
+		if (userData == null) {
+			userData = Maps.newHashMap();
+		}
+		userData.put(key, data);
+	}
+	
+	public void addURI(URI uri) {
+		if (uris.add(uri)) {
+			index.put(uri.trimFragment(), uri);
+		}
+	}
+	
+	public void addAllURIs(Iterable<URI> uris) {
+		for(URI uri: uris) {
+			addURI(uri);
+		}
+	}
+	
+	public Collection<URI> getTargetResourceURIs() {
+		return Collections.unmodifiableCollection(index.keySet());
+	}
+	
+	public Collection<URI> getEObjectURIs(URI resourceURI) {
+		return Collections.unmodifiableCollection(index.get(resourceURI));
+	}
+
+	public boolean contains(URI uri) {
+		return uris.contains(uri);
+	}
+
+	public boolean containsResource(URI resourceURI) {
+		return index.containsKey(resourceURI);
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return uris.isEmpty();
+	}
+
+	@Override
+	public boolean contains(Object o) {
+		return uris.contains(o);
+	}
+
+	@Override
+	public Object[] toArray() {
+		return uris.toArray();
+	}
+
+	@Override
+	public <T> T[] toArray(T[] a) {
+		return uris.toArray(a);
+	}
+
+	@Override
+	public boolean add(URI e) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean remove(Object o) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean containsAll(Collection<?> c) {
+		return uris.containsAll(c);
+	}
+
+	@Override
+	public boolean addAll(Collection<? extends URI> c) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean retainAll(Collection<?> c) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean removeAll(Collection<?> c) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void clear() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		return uris.equals(o);
+	}
+
+	@Override
+	public int hashCode() {
+		return uris.hashCode();
+	}
+
+	@Override
+	public int size() {
+		return uris.size();
+	}
+	
+}

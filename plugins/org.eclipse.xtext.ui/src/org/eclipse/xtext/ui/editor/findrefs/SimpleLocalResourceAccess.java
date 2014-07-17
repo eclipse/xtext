@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.findrefs;
 
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -28,6 +29,8 @@ public class SimpleLocalResourceAccess implements IReferenceFinder.ILocalResourc
 	public <R> R readOnly(URI targetURI, IUnitOfWork<R, ResourceSet> work) {
 		try {
 			return work.exec(resourceSet);
+		} catch(OperationCanceledException e) {
+			throw e;
 		} catch(Exception exc) {
 			throw new WrappedException(exc);
 		}

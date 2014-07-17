@@ -9,13 +9,13 @@ package org.eclipse.xtend.ide.editor;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendParameter;
+import org.eclipse.xtext.ui.editor.occurrences.DefaultOccurrenceComputer;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
-import org.eclipse.xtext.xbase.ui.jvmmodel.occurrence.JvmModelOccurrenceComputer;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class OccurrenceComputer extends JvmModelOccurrenceComputer {
+public class OccurrenceComputer extends DefaultOccurrenceComputer {
 
 	@Override
 	protected boolean canBeReferencedLocally(EObject object) {

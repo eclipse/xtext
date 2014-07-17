@@ -95,13 +95,17 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 		synchronized (getLock()) {
 			try {
 				if (getEncoder().isCrossLinkFragment(this, uriFragment)) {
-					Triple<EObject, EReference, INode> triple = getEncoder().decode(this, uriFragment);
-					if (batchLinkingService.isBatchLinkable(triple.getSecond())) {
-						if (compilerPhases.isIndexing(this))
-							log.error("Don't resolve expressions during indexing!", new IllegalStateException("Resource URI : "+getURI()+", fragment : "+uriFragment));
-						return batchLinkingService.resolveBatched(triple.getFirst(), triple.getSecond(), uriFragment);
+					if (!getUnresolvableURIFragments().contains(uriFragment)) {
+						Triple<EObject, EReference, INode> triple = getEncoder().decode(this, uriFragment);
+						if (batchLinkingService.isBatchLinkable(triple.getSecond())) {
+							if (compilerPhases.isIndexing(this))
+								log.error("Don't resolve expressions during indexing!", new IllegalStateException("Resource URI : "+getURI()+", fragment : "+uriFragment));
+							return batchLinkingService.resolveBatched(triple.getFirst(), triple.getSecond(), uriFragment);
+						}
+						return super.getEObject(uriFragment, triple);
+					} else {
+						return null;
 					}
-					return super.getEObject(uriFragment, triple);
 				}
 				return basicGetEObject(uriFragment);
 			} catch (RuntimeException e) {

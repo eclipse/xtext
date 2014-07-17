@@ -88,6 +88,7 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	private StatusWrapper status;
 
 	private IRenameElementContext renameElementContext;
+	private RefactoringResourceSetProvider resourceSets;
 	private ResourceSet resourceSet;
 	private URI targetElementURI;
 	private EObject targetElement;
@@ -105,6 +106,9 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	public boolean initialize(final IRenameElementContext renameElementContext) {
 		try {
 			status = statusProvider.get();
+			
+			resourceSets = new CachingResourceSetProvider(resourceSetProvider);
+			
 			this.renameElementContext = renameElementContext;
 			this.targetElementURI = renameElementContext.getTargetElementURI();
 			resourceSet = getResourceSet(renameElementContext);
@@ -137,7 +141,7 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 			status.add(FATAL, "Could not find project for ", renameElementContext.getTargetElementURI());
 			return null;
 		}
-		return resourceSet = resourceSetProvider.get(project);
+		return resourceSet = resourceSets.get(project);
 	}
 
 	protected boolean isValidTargetFile(Resource resource, StatusWrapper status) {
@@ -239,12 +243,15 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 					renameStrategy,
 					progress.newChild(1));
 			renameStrategy.createDeclarationUpdates(newName, resourceSet, currentUpdateAcceptor);
-
+			if (progress.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 			renameArguments = new ElementRenameArguments(
 					targetElementURI,
 					newName,
 					renameStrategy,
-					original2newElementURIs);
+					original2newElementURIs,
+					resourceSets);
 			if (progress.isCanceled()) {
 				throw new OperationCanceledException();
 			}

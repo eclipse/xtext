@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.refactoring;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.ui.refactoring.impl.RefactoringResourceSetProvider;
 
 /**
  * Stores information on an element to be renamed and elements whose names change as a consequence.
@@ -23,13 +24,19 @@ public class ElementRenameArguments {
 	private final Map<URI, URI> original2newElementURIs;
 	private final IRenameStrategy renameStrategy;
 	private final String newName;
+	private final RefactoringResourceSetProvider resourceSetProvider;
 
-	public ElementRenameArguments(URI targetElementURI, String newName, IRenameStrategy renameStrategy,
-			Map<URI, URI> original2newElementURIs) {
+	public ElementRenameArguments(
+			URI targetElementURI,
+			String newName,
+			IRenameStrategy renameStrategy,
+			Map<URI, URI> original2newElementURIs,
+			RefactoringResourceSetProvider resourceSetProvider) {
 		this.newName = newName;
 		this.targetElementURI = targetElementURI;
 		this.renameStrategy = renameStrategy;
 		this.original2newElementURIs = original2newElementURIs;
+		this.resourceSetProvider = resourceSetProvider;
 	}
 
 	public Iterable<URI> getRenamedElementURIs() {
@@ -51,6 +58,10 @@ public class ElementRenameArguments {
 	
 	public String getNewName() {
 		return newName;
+	}
+	
+	public RefactoringResourceSetProvider getResourceSetProvider() {
+		return resourceSetProvider;
 	}
 
 }
