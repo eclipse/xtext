@@ -218,6 +218,9 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 					}
 				}
 			}
+			if (monitor.isCanceled()) {
+				return Status.CANCEL_STATUS;
+			}
 			return Status.OK_STATUS;
 		}
 

@@ -32,9 +32,9 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.texteditor.link.EditorLinkedModeUI;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.refactoring.ILinkedPositionGroupCalculator;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Holger Schill - Initial contribution and API
@@ -43,9 +43,6 @@ import com.google.inject.Inject;
 public class RenameLinkedMode {
 
 	private static final Logger LOG = Logger.getLogger(RenameLinkedMode.class);
-
-	@Inject
-	private ILinkedPositionGroupCalculator linkedPositionGroupCalculator;
 
 	@Inject
 	private RenameRefactoringController controller;
@@ -60,10 +57,10 @@ public class RenameLinkedMode {
 	private LinkedPositionGroup linkedPositionGroup;
 	private LinkedPosition currentPosition;
 
-	public boolean start(IRenameElementContext renameElementContext, IProgressMonitor monitor) {
+	public boolean start(IRenameElementContext renameElementContext, Provider<LinkedPositionGroup> provider, IProgressMonitor monitor) {
 		if (renameElementContext == null)
 			throw new IllegalArgumentException("RenameElementContext is null");
-		this.linkedPositionGroup = linkedPositionGroupCalculator.getLinkedPositionGroup(renameElementContext, monitor);
+		this.linkedPositionGroup = provider.get();
 		if (linkedPositionGroup == null || linkedPositionGroup.isEmpty())
 			return false;
 		this.editor = (XtextEditor) renameElementContext.getTriggeringEditor();

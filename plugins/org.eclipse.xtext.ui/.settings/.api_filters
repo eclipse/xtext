@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.ui" version="2">
     <resource path="META-INF/MANIFEST.MF">
+        <filter comment="Fixed typo" id="923795461">
+            <message_arguments>
+                <message_argument value="2.7.0"/>
+                <message_argument value="2.6.0"/>
+            </message_arguments>
+        </filter>
         <filter comment="Added some protected fields" id="924844039">
             <message_arguments>
                 <message_argument value="2.6.0"/>
@@ -107,6 +113,14 @@
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.ui.editor.model.XtextDocument.XtextDocumentLocker"/>
                 <message_argument value="beforeReadOnly(XtextResource, IUnitOfWork&lt;?,XtextResource&gt;)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/outline/impl/OutlineRefreshJob.java" type="org.eclipse.xtext.ui.editor.outline.impl.OutlineRefreshJob">
+        <filter comment="Fixed typo" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.outline.impl.OutlineRefreshJob"/>
+                <message_argument value="iternalRefreshOutlineModel(OutlineTreeState, OutlineTreeState, IOutlineTreeProvider)"/>
             </message_arguments>
         </filter>
     </resource>

@@ -117,6 +117,9 @@ public class CompositeRefactoringProcessor extends AbstractRenameProcessor {
 		SubMonitor monitor = SubMonitor.convert(pm, processors.size());
 		RefactoringStatus status = new RefactoringStatus();
 		for (RefactoringProcessor processor : processors) {
+			if (pm.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 			status.merge(processor.checkInitialConditions(monitor.newChild(1)));
 		}
 		return status;
@@ -128,6 +131,9 @@ public class CompositeRefactoringProcessor extends AbstractRenameProcessor {
 		SubMonitor monitor = SubMonitor.convert(pm, processors.size());
 		RefactoringStatus status = new RefactoringStatus();
 		for (RefactoringProcessor processor : processors) {
+			if (pm.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 			status.merge(processor.checkFinalConditions(monitor.newChild(1), context));
 		}
 		return status;
@@ -137,8 +143,12 @@ public class CompositeRefactoringProcessor extends AbstractRenameProcessor {
 	public Change createChange(IProgressMonitor pm) throws CoreException, OperationCanceledException {
 		SubMonitor monitor = SubMonitor.convert(pm, processors.size());
 		CompositeChange compositeChange = new CompositeChange(getProcessorName());
-		for (RefactoringProcessor processor : processors)
+		for (RefactoringProcessor processor : processors) {
+			if (pm.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 			compositeChange.add(processor.createChange(monitor.newChild(1)));
+		}
 		return textChangeCombiner.combineChanges(compositeChange);
 	}
 

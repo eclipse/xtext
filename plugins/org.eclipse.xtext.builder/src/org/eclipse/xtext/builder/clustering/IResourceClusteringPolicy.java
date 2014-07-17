@@ -19,7 +19,7 @@ import com.google.inject.ImplementedBy;
  * @author Knut Wannheden - Initial contribution and API
  * @Deprecated Use org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy instead
  */
-
+@SuppressWarnings("deprecation")
 @ImplementedBy(DisabledClusteringPolicy.class)
 public interface IResourceClusteringPolicy extends org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy {
 

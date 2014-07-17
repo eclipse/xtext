@@ -12,6 +12,7 @@ import static com.google.common.collect.Maps.*;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.ltk.core.refactoring.Change;
@@ -71,12 +72,13 @@ public class RefactoringUpdateAcceptor implements IRefactoringUpdateAcceptor, IC
 	}
 	
 	public Change createCompositeChange(String name, IProgressMonitor monitor) {
-		SubMonitor progress = SubMonitor.convert(monitor, document2textEdits.keySet().size()
-				+ document2change.keySet().size());
 		if(document2change.isEmpty() && document2textEdits.isEmpty())
 			return null;
 		CompositeChange compositeChange = new CompositeChange(name);
 		for (IRefactoringDocument document : document2textEdits.keySet()) {
+			if (monitor.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 			Iterable<TextEdit> textEdits = document2textEdits.get(document);
 			MultiTextEdit multiTextEdit = new MultiTextEdit();
 			for (TextEdit textEdit : textEdits) {
@@ -84,14 +86,15 @@ public class RefactoringUpdateAcceptor implements IRefactoringUpdateAcceptor, IC
 			}
 			Change change = document.createChange(name, multiTextEdit);
 			compositeChange.add(change);
-			progress.worked(1);
 		}
 		for (IRefactoringDocument document : document2change.keySet()) {
+			if (monitor.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 			Iterable<Change> documentChanges = document2change.get(document);
 			CompositeChange documentCompositeChange = new CompositeChange(name);
 			documentCompositeChange.addAll(Iterables.toArray(documentChanges, Change.class));
 			compositeChange.add(documentCompositeChange);
-			progress.worked(1);
 		}
 		return compositeChange;
 	}

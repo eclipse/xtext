@@ -124,11 +124,10 @@ public class DisplayChangeWrapper {
 	
 		@Override
 		public Change perform(final IProgressMonitor pm) throws CoreException {
-			final SubMonitor monitor = SubMonitor.convert(pm, 2);
 			Change undoChange = new DisplayRunnableWithResult<Change>() {
 				@Override
 				protected Change run() throws Exception {
-					Change result = delegate.perform(monitor.newChild(1));
+					Change result = delegate.perform(pm);
 					return result;
 				}
 			}.syncExec();
@@ -228,11 +227,10 @@ public class DisplayChangeWrapper {
 
 		@Override
 		public Change perform(final IProgressMonitor pm) throws CoreException {
-			final SubMonitor monitor = SubMonitor.convert(pm, 2);
 			Change undoChange = new DisplayRunnableWithResult<Change>() {
 				@Override
 				protected Change run() throws Exception {
-					Change result = delegate.perform(monitor.newChild(1));
+					Change result = delegate.perform(pm);
 					return result;
 				}
 			}.syncExec();

@@ -172,7 +172,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 	/**
 	 * @since 2.7
 	 */
-	protected <T> boolean updateContentBeforeRead() {
+	protected boolean updateContentBeforeRead() {
 		Object[] listeners = xtextDocumentObservers.getListeners();
 		boolean hadUpdates = false;
 		for (int i = 0; i < listeners.length; i++) {
@@ -240,6 +240,9 @@ public class XtextDocument extends Document implements IXtextDocument {
 		 */
 		public <T> T process(IUnitOfWork<T,XtextResource> transaction) {
 			releaseReadLock();
+			// lock upgrade followed by downgrade as described in
+			// java.util.concurrent.locks.ReentrantReadWriteLock
+			// 
 			// caveat: other readers/writers could potentially kick in here
 			acquireWriteLock();
 			try {
@@ -309,6 +312,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 			writeLock.lock();
 			if (log.isTraceEnabled())
 				log.trace("...write lock acquired.");
+			// next reader will get a fresh monitor instance
 			readerMonitor = new ReaderMonitor();
 		}
 
@@ -341,9 +345,10 @@ public class XtextDocument extends Document implements IXtextDocument {
 						} catch (Exception e) {
 							throw new WrappedException(e);
 						} finally {
-							releaseWriteLock();
 							try {
+								// downgrade lock to read lock 
 								acquireReadLock();
+								releaseWriteLock();
 								ensureThatStateIsNotReturned(exec, work);
 								--potentialUpdaterCount;
 								if(potentialUpdaterCount == 0 && !(work instanceof ReconcilingUnitOfWork))

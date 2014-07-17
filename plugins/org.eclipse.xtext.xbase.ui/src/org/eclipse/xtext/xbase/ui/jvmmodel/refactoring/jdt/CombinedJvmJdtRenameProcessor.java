@@ -109,6 +109,9 @@ public class CombinedJvmJdtRenameProcessor extends RenameElementProcessor {
 		SubMonitor monitor = SubMonitor.convert(pm, jvmElements2jdtProcessors.size() + 1);
 		RefactoringStatus status = super.checkInitialConditions(monitor.newChild(1));
 		for (JavaRenameProcessor processor : jvmElements2jdtProcessors.values()) {
+			if (monitor.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 			status.merge(processor.checkInitialConditions(monitor.newChild(1)));
 		}
 		return status;
@@ -122,6 +125,9 @@ public class CombinedJvmJdtRenameProcessor extends RenameElementProcessor {
 		ResourceSet resourceSet = getResourceSet(getRenameElementContext());
 		getRenameArguments().getRenameStrategy().applyDeclarationChange(getNewName(), resourceSet);
 		for (Map.Entry<URI, JavaRenameProcessor> jvmElement2jdtRefactoring : jvmElements2jdtProcessors.entrySet()) {
+			if (monitor.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 			URI renamedJvmElementURI = getRenameArguments().getNewElementURI(jvmElement2jdtRefactoring.getKey());
 			EObject renamedJvmElement = resourceSet.getEObject(renamedJvmElementURI, false);
 			if (!(renamedJvmElement instanceof JvmIdentifiableElement) || renamedJvmElement.eIsProxy()) {
@@ -141,8 +147,12 @@ public class CombinedJvmJdtRenameProcessor extends RenameElementProcessor {
 		SubMonitor monitor = SubMonitor.convert(pm, jvmElements2jdtProcessors.size() + 1);
 		CompositeChange compositeChange = new CompositeChange(getProcessorName());
 		compositeChange.add(super.createChange(monitor.newChild(1)));
-		for (JavaRenameProcessor processor : jvmElements2jdtProcessors.values())
+		for (JavaRenameProcessor processor : jvmElements2jdtProcessors.values()) {
+			if (monitor.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 			compositeChange.add(processor.createChange(monitor.newChild(1)));
+		}
 		return compositeChange;
 	}
 

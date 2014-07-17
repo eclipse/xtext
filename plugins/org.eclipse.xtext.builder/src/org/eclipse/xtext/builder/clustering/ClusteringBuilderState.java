@@ -86,6 +86,8 @@ public class ClusteringBuilderState extends AbstractBuilderState {
     @Inject
 	private CompilerPhases compilerPhases;
 
+    private static final int MONITOR_DO_UPDATE_CHUNK = 10;
+    
     /**
      * Actually do the build.
      *
@@ -172,10 +174,12 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                 }
             };
 
-            int index = 1;
+            int index = 0;
             while (!queue.isEmpty()) {
             	// heuristic: only 2/3 of ticks will be consumed; rest kept for affected resources
-                subProgress.setWorkRemaining(queue.size() * 3);
+            	if (index % MONITOR_DO_UPDATE_CHUNK == 0) {
+            		subProgress.setWorkRemaining(((queue.size() / MONITOR_DO_UPDATE_CHUNK) + 1) * 3);
+            	}
                 int clusterIndex = 0;
                 final List<Delta> changedDeltas = Lists.newArrayList();
                 while (!queue.isEmpty()) {
@@ -186,7 +190,6 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                     if (!clusteringPolicy.continueProcessing(resourceSet, null, clusterIndex)) {
                         break;
                     }
-
                     URI changedURI = null;
                     URI actualResourceURI = null;
                     Resource resource = null;
@@ -198,8 +201,12 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                         changedURI = loadResult.getUri();
                         actualResourceURI = loadResult.getResource().getURI();
                         resource = addResource(loadResult.getResource(), resourceSet);
-
-                        subProgress.subTask("Updating resource description for " + changedURI.lastSegment() + " (" + index + " of " + (index + queue.size()) + ")");
+                        if (index % MONITOR_DO_UPDATE_CHUNK == 0) {
+                        	subProgress.subTask("Updating resource descriptions chunk " + (index / MONITOR_DO_UPDATE_CHUNK + 1) + " of " + ((index + queue.size()) / MONITOR_DO_UPDATE_CHUNK + 1));
+                        }
+                        if (LOGGER.isDebugEnabled()) {
+                        	LOGGER.debug("Update resource description " + actualResourceURI);
+                        }
                         queue.remove(changedURI);
                         if(toBeDeleted.contains(changedURI)) {
                             break;
@@ -262,7 +269,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                         // Validate now.
                         if (!buildData.isIndexingOnly()) {
 	                        try {
-	                        	updateMarkers(newDelta, resourceSet, subProgress.newChild(1));
+	                        	updateMarkers(newDelta, resourceSet, subProgress);
 	                        } catch (OperationCanceledException e) {
 	                        	loadOperation.cancel();
 	                        	throw e;
@@ -271,8 +278,10 @@ public class ClusteringBuilderState extends AbstractBuilderState {
 	                        }
                         }
                     }
-                    subProgress.worked(1);
                     index++;
+                    if (index % MONITOR_DO_UPDATE_CHUNK == 0) {
+                    	subProgress.worked(1);
+                    }
                 }
 
                 loadOperation.cancel();
@@ -295,7 +304,9 @@ public class ClusteringBuilderState extends AbstractBuilderState {
         }
         return allDeltas;
     }
-
+    
+    private static final int MONITOR_WRITE_CHUNK = 50;
+    
     /**
      * Create new resource descriptions for a set of resources given by their URIs.
      *
@@ -317,7 +328,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
         ResourceSet resourceSet = buildData.getResourceSet();
         Set<URI> toBeUpdated = buildData.getToBeUpdated();
         final int n = toBeUpdated.size();
-        final SubMonitor subMonitor = SubMonitor.convert(monitor, "Write new resource descriptions", n); // TODO: NLS
+        final SubMonitor subMonitor = SubMonitor.convert(monitor, "Write new resource descriptions", n / MONITOR_WRITE_CHUNK + 1); // TODO: NLS
         IProject currentProject = getBuiltProject(buildData);
         LoadOperation loadOperation = null;
         try {
@@ -341,8 +352,12 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                     LoadResult loadResult = loadOperation.next();
                     uri = loadResult.getUri();
                     resource = addResource(loadResult.getResource(), resourceSet);
-
-                    subMonitor.subTask("Writing new resource description for " + uri.lastSegment() + " (" + index++ + " of " + n + ")"); // TODO: NLS
+                    if (index % MONITOR_WRITE_CHUNK == 0) {
+                    	subMonitor.subTask("Writing new resource descriptions chunk " + (index / MONITOR_WRITE_CHUNK + 1) + " of " + (n / MONITOR_WRITE_CHUNK + 1));
+                    }
+                    if (LOGGER.isDebugEnabled()) {
+                    	LOGGER.debug("Writing new resource description " + uri);
+                    }
 
                     final IResourceDescription.Manager manager = getResourceDescriptionManager(uri);
                     if (manager != null) {
@@ -376,8 +391,9 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                     }
                     // If we couldn't load it, there's no use trying again: do not add it to the queue
                 }
-
-                subMonitor.worked(1);
+                index++;
+                if (index % MONITOR_WRITE_CHUNK == 0)
+                	subMonitor.worked(1);
             }
         } finally {
         	compilerPhases.setIndexing(resourceSet, false);
@@ -423,6 +439,8 @@ public class ClusteringBuilderState extends AbstractBuilderState {
         }
     }
     
+    private static final int MONITOR_QUEUE_CHUNK = 100;
+    
     /**
      * Put all resources that depend on some changes onto the queue of resources to be processed.
      * Updates notInDelta by removing all URIs put into the queue.
@@ -453,8 +471,9 @@ public class ClusteringBuilderState extends AbstractBuilderState {
         if (allDeltas.isEmpty()) {
             return;
         }
-        final SubMonitor progress = SubMonitor.convert(monitor, allRemainingURIs.size());
+        final SubMonitor progress = SubMonitor.convert(monitor, allRemainingURIs.size() / MONITOR_QUEUE_CHUNK + 1);
         Iterator<URI> iter = allRemainingURIs.iterator();
+        int i = 0;
         while (iter.hasNext()) {
             if (progress.isCanceled()) {
                 throw new OperationCanceledException();
@@ -481,7 +500,9 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                     iter.remove();
                 }
             }
-            progress.worked(1);
+            i++;
+            if (i % MONITOR_QUEUE_CHUNK == 0)
+            	progress.worked(1);
         }
     }
 

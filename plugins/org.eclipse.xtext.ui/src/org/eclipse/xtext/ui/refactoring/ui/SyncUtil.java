@@ -15,7 +15,6 @@ import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.Job;
@@ -51,20 +50,32 @@ public class SyncUtil {
 			InterruptedException {
 		if (Display.getCurrent() != null && workbench != null) {
 			if (useProgressDialog) {
-				workbench.getProgressService().run(false, true, new IRunnableWithProgress() {
+				workbench.getProgressService().run(true, true, new IRunnableWithProgress() {
 					public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
-						SubMonitor progress = SubMonitor.convert(monitor, 6);
-						reconcileAllEditors(workbench, saveAll, progress.newChild(1));
-						waitForBuild(progress.newChild(4));
-						yieldToQueuedDisplayJobs(progress.newChild(1));
+						doReconcileAndBuild(saveAll, monitor);
 					}
 				});
 			} else {
-				SubMonitor progress = SubMonitor.convert(new NullProgressMonitor());
-				reconcileAllEditors(workbench, saveAll, progress.newChild(1));
-				waitForBuild(progress.newChild(4));
-				yieldToQueuedDisplayJobs(progress.newChild(1));
+				doReconcileAndBuild(saveAll, null);
 			}
+		}
+	}
+	
+	private void doReconcileAndBuild(final boolean saveAll, IProgressMonitor monitor)
+			throws InterruptedException {
+		try {
+			SubMonitor progress = SubMonitor.convert(monitor, 6);
+			reconcileAllEditors(workbench, saveAll, progress.newChild(1));
+			if (progress.isCanceled()) {
+				throw new InterruptedException();
+			}
+			waitForBuild(progress.newChild(4));
+			if (progress.isCanceled()) {
+				throw new InterruptedException();
+			}
+			yieldToQueuedDisplayJobs(progress.newChild(1));
+		} catch(OperationCanceledException e) {
+			throw new InterruptedException(); 
 		}
 	}
 
@@ -80,23 +91,26 @@ public class SyncUtil {
 		reconcileAllEditors(workbench, saveAll, monitor);
 	}
 
-	public void reconcileAllEditors(IWorkbench workbench, final boolean saveAll, IProgressMonitor monitor) {
-		SubMonitor pm0 = SubMonitor.convert(monitor, workbench.getWorkbenchWindowCount());
+	public void reconcileAllEditors(IWorkbench workbench, final boolean saveAll, final IProgressMonitor monitor) {
 		for (IWorkbenchWindow window : workbench.getWorkbenchWindows()) {
-			SubMonitor pm1 = pm0.newChild(1).setWorkRemaining(window.getPages().length);
 			for (IWorkbenchPage page : window.getPages()) {
-				SubMonitor pm2 = pm1.newChild(1).setWorkRemaining(2 * page.getEditorReferences().length);
 				for (IEditorReference editorReference : page.getEditorReferences()) {
-					if (pm2.isCanceled())
+					if (monitor.isCanceled())
 						return;
-					IEditorPart editor = editorReference.getEditor(false);
+					final IEditorPart editor = editorReference.getEditor(false);
 					if (editor != null) {
 						if (editor instanceof XtextEditor)
 							waitForReconciler((XtextEditor) editor);
 						if (editor.isDirty() && saveAll)
-							editor.doSave(pm2.newChild(1));
+							if (workbench != null) {
+								Display display = workbench.getDisplay();
+								display.syncExec(new Runnable() {
+									public void run() {
+										editor.doSave(monitor);
+									}
+								});
+							}
 					}
-					pm2.worked(1);
 				}
 			}
 		}
@@ -140,7 +154,7 @@ public class SyncUtil {
 				Job.getJobManager().join(ResourcesPlugin.FAMILY_AUTO_BUILD, monitor);
 				wasInterrupted = false;
 			} catch (OperationCanceledException e) {
-				e.printStackTrace();
+				throw e;
 			} catch (InterruptedException e) {
 				wasInterrupted = true;
 			}
@@ -152,14 +166,12 @@ public class SyncUtil {
 	}
 
 	public void yieldToQueuedDisplayJobs(IProgressMonitor monitor, int maxJobsToYieldTo) {
-		SubMonitor pm = SubMonitor.convert(monitor, maxJobsToYieldTo);
 		int count = 0;
 		if (Display.getCurrent() != null) {
 			while (count < maxJobsToYieldTo && Display.getCurrent().readAndDispatch()) {
-				if (pm.isCanceled())
+				if (monitor.isCanceled())
 					throw new OperationCanceledException();
 				++count;
-				pm.worked(1);
 			}
 			if (count == maxJobsToYieldTo) {
 				LOG.error("maxJobsToYieldTo probably exceeded. Worked: " + count);

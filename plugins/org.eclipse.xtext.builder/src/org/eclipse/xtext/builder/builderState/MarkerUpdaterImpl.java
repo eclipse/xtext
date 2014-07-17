@@ -15,7 +15,6 @@ import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
-import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -52,25 +51,23 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void updateMarkers(Delta delta, /* @Nullable */ ResourceSet resourceSet, IProgressMonitor monitor) {
-		String lastSegment = delta.getUri().lastSegment();
-		String message = Messages.MarkerUpdaterImpl_Validate + " " + (lastSegment == null ? "resource" : lastSegment);
-		SubMonitor subMonitor = SubMonitor.convert(monitor, message, 1);
-		subMonitor.subTask(message);
-
-		if (subMonitor.isCanceled()) {
+	public void updateMarkers(Delta delta, /* @Nullable */ ResourceSet resourceSet, IProgressMonitor monitor) throws OperationCanceledException {
+		if (monitor.isCanceled()) {
 			throw new OperationCanceledException();
 		}
-		processDelta(delta, resourceSet, subMonitor.newChild(1));
+		processDelta(delta, resourceSet, monitor);
 	}
 
-	private void processDelta(Delta delta, /* @Nullable */ ResourceSet resourceSet, SubMonitor childMonitor) {
+	private void processDelta(Delta delta, /* @Nullable */ ResourceSet resourceSet, IProgressMonitor monitor) throws OperationCanceledException {
 		URI uri = delta.getUri();
 		IResourceUIValidatorExtension validatorExtension = getResourceUIValidatorExtension(uri);
 		IMarkerContributor markerContributor = getMarkerContributor(uri);
 		CheckMode normalAndFastMode = CheckMode.NORMAL_AND_FAST;
 
 		for (Pair<IStorage, IProject> pair : mapper.getStorages(uri)) {
+			if (monitor.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 			if (pair.getFirst() instanceof IFile) {
 				IFile file = (IFile) pair.getFirst();
 				if (delta.getNew() != null) {
@@ -79,21 +76,21 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 					
 					Resource resource = resourceSet.getResource(uri, true);
 					if (validatorExtension != null) {
-						validatorExtension.updateValidationMarkers(file, resource, normalAndFastMode, childMonitor);
+						validatorExtension.updateValidationMarkers(file, resource, normalAndFastMode, monitor);
 					}
 					if (markerContributor != null) {
-						markerContributor.updateMarkers(file, resource, childMonitor);
+						markerContributor.updateMarkers(file, resource, monitor);
 					}
 				} else {
 					if (validatorExtension != null) {
-						validatorExtension.deleteValidationMarkers(file, normalAndFastMode, childMonitor);
+						validatorExtension.deleteValidationMarkers(file, normalAndFastMode, monitor);
 					} else {
-						deleteAllValidationMarker(file, normalAndFastMode, childMonitor);
+						deleteAllValidationMarker(file, normalAndFastMode, monitor);
 					}	
 					if (markerContributor != null) {
-						markerContributor.deleteMarkers(file, childMonitor);
+						markerContributor.deleteMarkers(file, monitor);
 					} else {
-						deleteAllContributedMarkers(file, childMonitor);
+						deleteAllContributedMarkers(file, monitor);
 					}
 				}
 			}

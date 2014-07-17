@@ -33,8 +33,6 @@ import org.eclipse.jdt.ui.text.IJavaPartitions;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceConverter;
-import org.eclipse.jface.resource.ColorDescriptor;
-import org.eclipse.jface.resource.ColorRegistry;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.text.Position;
@@ -44,8 +42,6 @@ import org.eclipse.jface.text.source.AnnotationRulerColumn;
 import org.eclipse.jface.text.source.CompositeRuler;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.IOverviewRuler;
-import org.eclipse.jface.text.source.ISharedTextColors;
-import org.eclipse.jface.text.source.IVerticalRulerColumn;
 import org.eclipse.jface.text.source.LineNumberRulerColumn;
 import org.eclipse.jface.text.source.OverviewRuler;
 import org.eclipse.jface.text.source.SourceViewer;
@@ -55,11 +51,8 @@ import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IActionBars;
-import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPartReference;
-import org.eclipse.ui.editors.text.EditorsUI;
 import org.eclipse.ui.internal.editors.text.EditorsPlugin;
 import org.eclipse.ui.progress.UIJob;
 import org.eclipse.ui.texteditor.AbstractDecoratedTextEditorPreferenceConstants;
@@ -101,7 +94,7 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 	@Inject
 	private ITraceForStorageProvider traceInformation;
 	@Inject
-	XtendImages xtendImages;
+	private XtendImages xtendImages;
 	@Inject
 	private IPreferenceStoreAccess preferenceStoreAccess;
 	@Inject
@@ -275,6 +268,10 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 		return null;
 	}
 
+	protected XtendImages getXtendImages() {
+		return xtendImages;
+	}
+	
 	protected IFile getSelectedFile() {
 		return selectedSource != null ? workspace.getRoot().getFile(selectedSource.getFullPath()) : null;
 	}
@@ -406,6 +403,8 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 		public IStatus runInUIThread(final IProgressMonitor monitor) {
 			computeAndSetInput(new DefaultWorkbenchPartSelection(getSite().getPage().getActivePart(), getSite()
 					.getPage().getSelection()), true);
+			if (monitor.isCanceled())
+				return Status.CANCEL_STATUS;
 			return Status.OK_STATUS;
 		}
 
