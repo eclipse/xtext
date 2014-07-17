@@ -180,8 +180,8 @@ String gaAccessor(EObject ele):
 /*
  *
  */
-String grammarFragmentToStr(EObject ele, String prefix):	
-	JAVA org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil.serialize(org.eclipse.emf.ecore.EObject, java.lang.String);
+String grammarFragmentToStr(EObject ele, String prefix, String lineDelimiter):	
+	JAVA org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil.serialize(org.eclipse.emf.ecore.EObject, java.lang.String, java.lang.String);
 
 
 

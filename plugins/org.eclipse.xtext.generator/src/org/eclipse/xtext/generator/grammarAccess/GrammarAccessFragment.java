@@ -10,7 +10,9 @@ package org.eclipse.xtext.generator.grammarAccess;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -23,6 +25,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.emf.mwe2.runtime.Mandatory;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.EcoreUtil2;
@@ -33,6 +36,7 @@ import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Generator;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Maps;
 
@@ -49,9 +53,31 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 
 	private String xmlVersion = null;
 
+	private String lineDelimiter = Strings.newLine();
+	
+	/**
+	 * @since 2.7
+	 */
+	public String getLineDelimiter() {
+		return lineDelimiter;
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	@Mandatory
+	public void setLineDelimiter(String lineDelimiter) {
+		this.lineDelimiter = lineDelimiter;
+	}
+	
 	@Override
 	protected String getTemplate() {
 		return GrammarAccessFragment.class.getName().replaceAll("\\.", "::");
+	}
+	
+	@Override
+	protected List<Object> getParameters(Grammar grammar) {
+		return Collections.<Object>singletonList(lineDelimiter);
 	}
 
 	@Override
