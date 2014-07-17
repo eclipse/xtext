@@ -16,6 +16,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
@@ -56,7 +57,7 @@ public class DerivedResourceCleanerJob extends Job {
 	@Override
 	protected IStatus run(IProgressMonitor monitor) {
 		if (monitor.isCanceled()) {
-			return Status.CANCEL_STATUS;
+			throw new OperationCanceledException();
 		}
 		try {
 			new WorkspaceModifyOperation() {
@@ -92,7 +93,7 @@ public class DerivedResourceCleanerJob extends Job {
 
 	protected IStatus cleanUpDerivedResources(IProgressMonitor monitor, IProject project) throws CoreException {
 		if (monitor.isCanceled()) {
-			return Status.CANCEL_STATUS;
+			throw new OperationCanceledException();
 		}
 		if (shouldBeProcessed(project)) {
 			IContainer container = project;
@@ -102,7 +103,7 @@ public class DerivedResourceCleanerJob extends Job {
 				derivedFile.delete(true, monitor);
 //				deleteEmptyParent(monitor, derivedFile.getParent());
 				if (monitor.isCanceled()) {
-					return Status.CANCEL_STATUS;
+					throw new OperationCanceledException();
 				}
 			}
 		}

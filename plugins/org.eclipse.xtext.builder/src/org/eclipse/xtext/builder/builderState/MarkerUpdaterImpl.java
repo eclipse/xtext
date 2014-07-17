@@ -71,6 +71,9 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 		CheckMode normalAndFastMode = CheckMode.NORMAL_AND_FAST;
 
 		for (Pair<IStorage, IProject> pair : mapper.getStorages(uri)) {
+			if (childMonitor.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 			if (pair.getFirst() instanceof IFile) {
 				IFile file = (IFile) pair.getFirst();
 				if (delta.getNew() != null) {

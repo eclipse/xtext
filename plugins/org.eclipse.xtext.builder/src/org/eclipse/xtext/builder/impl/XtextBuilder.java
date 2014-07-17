@@ -238,6 +238,9 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		SubMonitor progress = SubMonitor.convert(monitor, 10);
 		try {
 			ToBeBuilt toBeBuilt = toBeBuiltComputer.removeProject(getProject(), progress.newChild(2));
+			if (monitor.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 			doClean(toBeBuilt, progress.newChild(8));
 		} finally {
 			if (monitor != null)
