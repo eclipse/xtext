@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.internal.FunctionDelegate;
+import org.eclipse.xtext.xbase.lib.internal.KeyComparator;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.collect.Lists;
@@ -78,14 +79,7 @@ import com.google.common.collect.Lists;
 			final Functions.Function1<? super T, C> key) {
 		if (key == null)
 			throw new NullPointerException("key");
-		Comparator<T> comparator = new Comparator<T>() {
-			public int compare(T o1, T o2) {
-				C left = key.apply(o1);
-				C right = key.apply(o2);
-				return left.compareTo(right);
-			}
-		};
-		Collections.sort(list, comparator);
+		Collections.sort(list, new KeyComparator<T, C>(key));
 		return list;
 	}
 
