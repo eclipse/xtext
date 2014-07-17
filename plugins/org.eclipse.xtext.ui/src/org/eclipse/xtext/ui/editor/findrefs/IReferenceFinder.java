@@ -29,8 +29,7 @@ import com.google.inject.ImplementedBy;
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.3
  */
-@SuppressWarnings("deprecation")
-@ImplementedBy(DefaultReferenceFinder.class)
+@ImplementedBy(DelegatingReferenceFinder.class)
 public interface IReferenceFinder {
 
 	/**

@@ -116,15 +116,6 @@
             </message_arguments>
         </filter>
     </resource>
-    <resource path="src/org/eclipse/xtext/ui/editor/occurrences/DefaultOccurrenceComputer.java" type="org.eclipse.xtext.ui.editor.occurrences.DefaultOccurrenceComputer">
-        <filter id="643846161">
-            <message_arguments>
-                <message_argument value="TargetURIs"/>
-                <message_argument value="DefaultOccurrenceComputer"/>
-                <message_argument value="addToTarget(EObject, TargetURIs)"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="src/org/eclipse/xtext/ui/editor/outline/impl/OutlineRefreshJob.java" type="org.eclipse.xtext.ui.editor.outline.impl.OutlineRefreshJob">
         <filter comment="Fixed typo" id="338792546">
             <message_arguments>
