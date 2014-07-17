@@ -28,8 +28,11 @@ public abstract class DisplayRunnableWithResult <T>{
 					}
 				}
 			});
-			if (exceptionWrapper.get() != null)
-				throw new WrappedException(exceptionWrapper.get());
+			Exception exception = exceptionWrapper.get();
+			if (exception != null)
+				throw (exception instanceof RuntimeException) 
+					? (RuntimeException) exception 
+					: new WrappedException(exception);
 			return resultWrapper.get();
 		} else {
 			try {
