@@ -7,12 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.parser.antlr.ex;
 
-import static org.eclipse.xtext.util.Files.*;
-
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
@@ -20,11 +22,14 @@ import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.DefaultGeneratorFragment;
 import org.eclipse.xtext.generator.Generator;
+import org.eclipse.xtext.generator.NewlineNormalizer;
 import org.eclipse.xtext.generator.parser.antlr.AntlrToolFacade;
 import org.eclipse.xtext.generator.parser.antlr.postProcessing.SuppressWarningsProcessor;
 import org.eclipse.xtext.parser.antlr.Lexer;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Lists;
+import com.google.common.io.Files;
 
 
 /**
@@ -41,6 +46,22 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment {
 	private boolean contentAssist;
 
 	private List<String> antlrParams = Lists.newArrayList();
+	
+	private String lineDelimiter = Strings.newLine();
+	
+	/**
+	 * @since 2.7
+	 */
+	public String getLineDelimiter() {
+		return lineDelimiter;
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public void setLineDelimiter(String lineDelimiter) {
+		this.lineDelimiter = lineDelimiter;
+	}
 
 	public void addAntlrParam(String param) {
 		antlrParams.add(param);
@@ -84,17 +105,43 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment {
 		getAntlrTool().runWithEncodingAndParams(grammarFile, encoding, getAntlrParams());
 
 		String javaFile = srcGenPath+"/"+getLexerGrammar().replace('.', '/')+".java";
-		suppressWarningsImpl(javaFile);
+		suppressWarningsImpl(javaFile, Charset.forName(encoding));
+		normalizeTokens(javaFile, Charset.forName(encoding));
+	}
+	
+	private void normalizeTokens(String grammarFileName, Charset encoding) {
+		String tokenFile = toTokenFileName(grammarFileName);
+		String content = readFileIntoString(tokenFile, encoding);
+		content = new NewlineNormalizer(lineDelimiter).normalizeLineDelimiters(content);
+		List<String> splitted = Strings.split(content, lineDelimiter);
+		Collections.sort(splitted);
+		content = Strings.concat(lineDelimiter, splitted) + lineDelimiter;
+		writeStringIntoFile(tokenFile, content, encoding);
+	}
+	
+	private String toTokenFileName(String grammarFileName) {
+		return grammarFileName.replaceAll("\\.java$", ".tokens");
 	}
 	
 	private String getEncoding(XpandExecutionContext xpt, String outlet) {
 		return xpt.getOutput().getOutlet(outlet).getFileEncoding();
 	}
-
+	
+	/**
+	 * @deprecated use {@link #suppressWarningsImpl(String, Charset)} instead
+	 */
+	@Deprecated
 	protected void suppressWarningsImpl(String javaFile) {
-		String content = readFileIntoString(javaFile);
+		suppressWarningsImpl(javaFile, Charset.defaultCharset());
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	protected void suppressWarningsImpl(String javaFile, Charset encoding) {
+		String content = readFileIntoString(javaFile, encoding);
 		content = new SuppressWarningsProcessor().process(content);
-		writeStringIntoFile(javaFile, content);
+		writeStringIntoFile(javaFile, content, encoding);
 	}
 
 	@Override
@@ -169,6 +216,23 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment {
 
 	public boolean isContentAssist() {
 		return contentAssist;
+	}
+	
+	private String readFileIntoString(String filename, Charset encoding) {
+		try {
+			String result = Files.toString(new File(filename), encoding);
+			return result;
+		} catch (IOException e) {
+			throw new WrappedException(e);
+		}
+	}
+
+	private void writeStringIntoFile(String filename, String content, Charset encoding) {
+		try {
+			Files.write(content, new File(filename), encoding);
+		} catch (IOException e) {
+			throw new WrappedException(e);
+		}
 	}
 
 }

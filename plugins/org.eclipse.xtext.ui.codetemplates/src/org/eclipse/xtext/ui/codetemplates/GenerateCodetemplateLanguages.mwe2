@@ -60,7 +60,7 @@ Workflow {
 			fragment = parser.antlr.ex.rt.AntlrGeneratorFragment auto-inject {
 			}
 			
-			fragment = parser.antlr.ex.ExternalAntlrLexerFragment {
+			fragment = parser.antlr.ex.ExternalAntlrLexerFragment auto-inject {
 				lexerGrammar = "org.eclipse.xtext.ui.codetemplates.lexer.CodetemplatesLexer"
 				runtime = true
 				antlrParam = "-lib"
@@ -100,12 +100,12 @@ Workflow {
 			// generates a more lightweight Antlr parser and lexer tailored for content assist  
 			fragment = parser.antlr.ex.ca.ContentAssistParserGeneratorFragment auto-inject {}
 
-			fragment = parser.antlr.ex.ExternalAntlrLexerFragment {
+			fragment = parser.antlr.ex.ExternalAntlrLexerFragment auto-inject {
 				lexerGrammar = "org.eclipse.xtext.ui.codetemplates.ui.highlighting.CodetemplatesHighlightingLexer"
 				highlighting = true
 			}
 
-			fragment = parser.antlr.ex.ExternalAntlrLexerFragment {
+			fragment = parser.antlr.ex.ExternalAntlrLexerFragment auto-inject {
 				lexerGrammar = "org.eclipse.xtext.ui.codetemplates.ui.contentassist.CodetemplatesContentAssistLexer"
 				contentAssist = true
 				antlrParam = "-lib"
@@ -134,7 +134,7 @@ Workflow {
 			fragment = parser.antlr.ex.rt.AntlrGeneratorFragment auto-inject {
 			}
 			
-			fragment = parser.antlr.ex.ExternalAntlrLexerFragment {
+			fragment = parser.antlr.ex.ExternalAntlrLexerFragment auto-inject {
 				lexerGrammar = "org.eclipse.xtext.ui.codetemplates.lexer.SingleCodetemplateLexer"
 				runtime = true
 				antlrParam = "-lib"
@@ -156,12 +156,12 @@ Workflow {
 			// generates a more lightweight Antlr parser and lexer tailored for content assist  
 			fragment = parser.antlr.ex.ca.ContentAssistParserGeneratorFragment auto-inject {}
 
-			fragment = parser.antlr.ex.ExternalAntlrLexerFragment {
+			fragment = parser.antlr.ex.ExternalAntlrLexerFragment auto-inject {
 				lexerGrammar = "org.eclipse.xtext.ui.codetemplates.ui.highlighting.SingleCodetemplateHighlightingLexer"
 				highlighting = true
 			}
 
-			fragment = parser.antlr.ex.ExternalAntlrLexerFragment {
+			fragment = parser.antlr.ex.ExternalAntlrLexerFragment auto-inject {
 				lexerGrammar = "org.eclipse.xtext.ui.codetemplates.ui.contentassist.SingleCodetemplateContentAssistLexer"
 				contentAssist = true
 				antlrParam = "-lib"

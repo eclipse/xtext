@@ -96,6 +96,7 @@ public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragmen
 		splitParserAndLexerIfEnabled(absoluteGrammarFileName, charset);
 		suppressWarnings(absoluteGrammarFileName, charset);
 		removeBacktrackingGuardsIfEnabled(absoluteGrammarFileName, charset);
+		normalizeTokens(absoluteGrammarFileName, charset);
 	}
 
 	@Override

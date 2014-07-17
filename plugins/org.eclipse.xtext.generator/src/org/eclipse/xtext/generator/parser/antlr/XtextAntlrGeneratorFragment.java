@@ -51,6 +51,7 @@ public class XtextAntlrGeneratorFragment extends AbstractAntlrGeneratorFragment 
 		splitParserAndLexerIfEnabled(absoluteGrammarFileName, charset);
 		suppressWarnings(absoluteGrammarFileName, charset);
 		normalizeLineDelimiters(absoluteGrammarFileName, charset);
+		normalizeTokens(absoluteGrammarFileName, charset);
 	}
 
 	@Override

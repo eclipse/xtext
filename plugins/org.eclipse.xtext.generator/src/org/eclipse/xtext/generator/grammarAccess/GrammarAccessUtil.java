@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
@@ -24,11 +25,17 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextRuntimeModule;
+import org.eclipse.xtext.formatting.ILineSeparatorInformation;
 import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.serializer.ISerializer;
+import org.eclipse.xtext.util.Strings;
 
+import com.google.common.collect.Maps;
+import com.google.inject.Binder;
 import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Module;
 
 /**
  * @author Moritz Eysholdt
@@ -79,28 +86,52 @@ public class GrammarAccessUtil {
 		return Collections.emptyList();
 	}
 
-	private static ISerializer xtextSerializer;
+	private static Map<String, ISerializer> xtextSerializerByLineDelimiter = Maps.newHashMapWithExpectedSize(2);
 
 	public static String serialize(EObject obj, String prefix) {
+		return serialize(obj, prefix, Strings.newLine());
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public static String serialize(EObject obj, String prefix, String lineDelimiter) {
 		String s;
 		try {
 			SaveOptions options = SaveOptions.newBuilder().format().getOptions();
-			s = getSerializer().serialize(obj, options);
+			s = getSerializer(lineDelimiter).serialize(obj, options);
 		} catch (Exception e) {
 			s = e.toString();
-			// e.printStackTrace();
 		}
-		s = prefix
-				+ s.trim().replaceAll("(\\r?\\n)", "$1" + prefix).replaceAll(
-						"/\\*", "/ *").replaceAll("\\*/", "* /");
+		s = prefix + s.trim().replaceAll("(\\r?\\n)", "$1" + prefix).replaceAll("/\\*", "/ *").replaceAll("\\*/", "* /");
 		return s;
 	}
 
-	private static ISerializer getSerializer() {
-		if (xtextSerializer==null)
-			xtextSerializer = Guice.createInjector(
-					new XtextRuntimeModule()).getInstance(ISerializer.class);
-		return xtextSerializer;
+	private static ISerializer getSerializer(final String delimiter) {
+		ISerializer result = xtextSerializerByLineDelimiter.get(delimiter);
+		if (result != null) {
+			return result;
+		}
+		final ILineSeparatorInformation lineSeparatorInformation = new ILineSeparatorInformation() {
+			public String getLineSeparator() {
+				return delimiter;
+			}
+		};
+		Injector injector = Guice.createInjector(new XtextRuntimeModule() {
+			@Override
+			public void configure(Binder binder) {
+				// avoid duplicate registration of the validator
+				Module compound = getBindings();
+				compound.configure(binder);
+			}
+			@SuppressWarnings("unused")
+			public ILineSeparatorInformation bindILineSeparatorInformation() {
+				return lineSeparatorInformation;
+			}
+		});
+		result = injector.getInstance(ISerializer.class);
+		xtextSerializerByLineDelimiter.put(delimiter, result);
+		return result;
 	}
 
 	private static String getElementPath(AbstractElement ele) {

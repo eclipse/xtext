@@ -1,4 +1,4 @@
-Foo=5
 Case=4
-RULE_WS=6
+Foo=5
 RULE_SL_COMMENT=7
+RULE_WS=6

@@ -49,6 +49,8 @@ public class ContentAssistParserGeneratorFragment extends AbstractAntlrGenerator
 		splitParserAndLexerIfEnabled(absoluteLexerFileName, absoluteParserFileName, charset);
 		suppressWarnings(absoluteLexerFileName, absoluteParserFileName, charset);
 		normalizeLineDelimiters(absoluteLexerFileName, absoluteParserFileName, charset);
+		normalizeTokens(absoluteLexerFileName, charset);
+		normalizeTokens(absoluteParserFileName, charset);
 		helper.discardHelper(grammar);
 	}
 

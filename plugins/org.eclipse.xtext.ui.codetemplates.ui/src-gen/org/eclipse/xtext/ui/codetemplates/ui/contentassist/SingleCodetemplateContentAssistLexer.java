@@ -13,8 +13,8 @@ import java.util.ArrayList;
 public class SingleCodetemplateContentAssistLexer extends Lexer {
     public static final int RULE_ID=16;
     public static final int DollarSignLeftCurlyBracket=7;
-    public static final int DollarSign=9;
     public static final int RULE_STRING=17;
+    public static final int DollarSign=9;
     public static final int RightParenthesis=11;
     public static final int DollarSignDollarSign=6;
     public static final int Templates=4;

@@ -233,8 +233,8 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 		suppressWarnings(absoluteLexerGrammarFileName, absoluteParserGrammarFileName, Charset.defaultCharset());
 	}
 	
-	private void normalizeLineDelimitersImpl(String javaFile, Charset encoding) {
-		String content = readFileIntoString(javaFile, encoding);
+	private void normalizeLineDelimitersImpl(String textFile, Charset encoding) {
+		String content = readFileIntoString(textFile, encoding);
 		content = new NewlineNormalizer(lineDelimiter) {
 			// Antlr tries to outsmart us by using a line length that depends on the system
 			// line delimiter when it splits a very long String (encoded DFA) into a
@@ -247,7 +247,7 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 				return result;
 			}
 		}.normalizeLineDelimiters(content);
-		writeStringIntoFile(javaFile, content, encoding);
+		writeStringIntoFile(textFile, content, encoding);
 	}
 	
 	/**
@@ -255,6 +255,23 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	 */
 	protected void normalizeLineDelimiters(String grammarFileName, Charset encoding) {
 		normalizeLineDelimiters(grammarFileName, grammarFileName, encoding);
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	protected void normalizeTokens(String grammarFileName, Charset encoding) {
+		String tokenFile = toTokenFileName(grammarFileName);
+		String content = readFileIntoString(tokenFile, encoding);
+		content = new NewlineNormalizer(lineDelimiter).normalizeLineDelimiters(content);
+		List<String> splitted = Strings.split(content, lineDelimiter);
+		Collections.sort(splitted);
+		content = Strings.concat(lineDelimiter, splitted) + lineDelimiter;
+		writeStringIntoFile(tokenFile, content, encoding);
+	}
+	
+	private String toTokenFileName(String grammarFileName) {
+		return grammarFileName.replaceAll("\\.g$", ".tokens");
 	}
 	
 	/**

@@ -12,22 +12,22 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class CodetemplatesContentAssistLexer extends Lexer {
     public static final int RULE_ID=18;
+    public static final int DollarSignLeftCurlyBracket=8;
+    public static final int RULE_STRING=19;
     public static final int DollarSign=11;
     public static final int ReverseSolidusLessThanSignLessThanSign=5;
     public static final int RightParenthesis=13;
     public static final int LessThanSignLessThanSign=9;
+    public static final int DollarSignDollarSign=7;
+    public static final int Templates=4;
     public static final int RULE_ANY_OTHER=21;
     public static final int LeftParenthesis=12;
     public static final int Colon=16;
+    public static final int RULE_WS=20;
     public static final int EOF=-1;
     public static final int For=6;
-    public static final int FullStop=15;
-    public static final int DollarSignLeftCurlyBracket=8;
-    public static final int RULE_STRING=19;
-    public static final int DollarSignDollarSign=7;
-    public static final int Templates=4;
-    public static final int RULE_WS=20;
     public static final int Comma=14;
+    public static final int FullStop=15;
     public static final int GreaterThanSignGreaterThanSign=10;
     public static final int RightCurlyBracket=17;
 

@@ -107,7 +107,7 @@ Workflow {
 			fragment = parser.ContentAssistParserGenerator auto-inject {
 				removeBacktrackingGuards = true
 				lookaheadThreshold = '5'
-				antlrParam = "-Xconversiontimeout" antlrParam = "10000"
+				antlrParam = "-Xconversiontimeout" antlrParam = "20000"
 				options = auto-inject {
 					classSplitting = true
 				}
