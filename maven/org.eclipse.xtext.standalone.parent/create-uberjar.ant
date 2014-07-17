@@ -18,13 +18,18 @@
 		<echo>Working with: ${bundles.folder}</echo>
 
 		<!-- collect xtext/xtend jar file names -->
+		<mkdir dir="${bundles.folder}" />
 		<fileset dir="${bundles.folder}" id="xtext-xtendJars">
 			<include name="*xtext*.jar" />
 			<include name="*xtend*.jar" />
 			<exclude name="*source_*" />
 		</fileset>
+		<union id="xtext-xtendJars-ext">
+		    <resources refid="xtext-xtendJars" />
+		    <file file="${bundles.folder}/${maven.artifactid}_x.x.x.jar"/>
+		</union>
 		<!-- Extract project name from jar file name -->
-		<pathconvert property="project.bin.folders" refid="xtext-xtendJars" pathsep=" " setonempty="false">
+		<pathconvert property="project.bin.folders" refid="xtext-xtendJars-ext" pathsep=" " setonempty="false">
 			<mapper>
 				<regexpmapper handledirsep="yes" from=".*/(.*)_(.*).jar" to="\1/bin/**/*" />
 			</mapper>
@@ -95,7 +100,7 @@
 	<!-- ================================= 
 	          target: createSourcesUberjar     Sources   
 	         ================================= -->
-	<target name="createSourcesUberjar">
+	<target name="createSourcesUberjar" unless="source.skip">
 		<!-- TP bundles -->
 		<fileset dir="${bundles.folder}" id="sourceJars">
 			<include name="*source_*.jar" />
@@ -111,7 +116,7 @@
 	</target>
 
 
-	<target name="createFakeJavadoc">
+	<target name="createFakeJavadoc" unless="maven.javadoc.skip">
 		<!-- Readme -->
 		<echo file="${javadocJarTemp}/readme.txt">Xtext/Xtend javadoc can be found here: http://www.eclipse.org/modeling/tmf/javadoc/</echo>
 	</target>

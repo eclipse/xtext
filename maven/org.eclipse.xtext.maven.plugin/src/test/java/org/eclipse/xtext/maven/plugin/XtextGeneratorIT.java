@@ -78,6 +78,12 @@ public class XtextGeneratorIT {
 	}
 	@Test
 	public void xcore() throws Exception {
+		try {
+			XtextGeneratorIT.class.getClassLoader().loadClass("org.eclipse.xtext.ecore.EcoreSupport");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return;
+		}
 		Verifier verifier = verifyErrorFreeLog(ROOT + "/xcore-lang");
 		verifier.assertFilePresent(verifier.getBasedir() + "/src-gen/org/eclipse/xcoretest/MyClass2.java");
 		verifier.assertFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/org/eclipse/xcoretest/MyClass2.class");
@@ -106,7 +112,7 @@ public class XtextGeneratorIT {
 		File testDir = ResourceExtractor.simpleExtractResources(getClass(), pathToTestProject);
 		Verifier verifier = new Verifier(testDir.getAbsolutePath(), debug );
 		verifier.setMavenDebug(debug);
-		verifier.setForkJvm(!debug);
+//		verifier.setForkJvm(!debug);
 		verifier.setEnvironmentVariable("MAVEN_OPTS", "-Xmx2048m -XX:MaxPermSize=256m");
 		return verifier;
 	}

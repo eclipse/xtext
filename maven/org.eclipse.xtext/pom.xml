@@ -32,18 +32,12 @@
 							<id>org.eclipse.xtext</id>
 						</iu>
 						<iu>
-							<id>org.eclipse.xtext.util</id>
-						</iu>
-						<iu>
 							<id>org.eclipse.xtext.junit4</id>
 						</iu>
 
 						<!-- Sources -->
 						<iu>
 							<id>org.eclipse.xtext.source</id>
-						</iu>
-						<iu>
-							<id>org.eclipse.xtext.util.source</id>
 						</iu>
 						<iu>
 							<id>org.eclipse.xtext.junit4.source</id>
@@ -63,6 +57,11 @@
 		</plugins>
 	</build>
 	<dependencies>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.util</artifactId>
+			<version>[${project.version}]</version>
+		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.dependencies</artifactId>
