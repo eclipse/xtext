@@ -56,7 +56,7 @@ public class XtendContainerInitializer extends ClasspathContainerInitializer {
 			protected IStatus run(IProgressMonitor monitor) {
 				try {
 					JavaCore.setClasspathContainer(containerPath, new IJavaProject[] { project },
-							new IClasspathContainer[] { containerSuggestion }, null);
+							new IClasspathContainer[] { containerSuggestion }, monitor);
 				} catch (CoreException ex) {
 					return new Status(IStatus.ERROR, XtendActivator.getInstance().getBundle().getSymbolicName(), 0,
 							"Classpath container update failed", ex); //$NON-NLS-1$

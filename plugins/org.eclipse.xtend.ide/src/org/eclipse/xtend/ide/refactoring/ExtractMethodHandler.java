@@ -28,6 +28,7 @@ import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.ui.refactoring.ExpressionUtil;
+import org.eclipse.xtext.xbase.ui.refactoring.RefactoredResourceCopier;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -51,6 +52,9 @@ public class ExtractMethodHandler extends AbstractHandler {
 	@Inject
 	private ExtractMethodWizard.Factory wizardFactory;
 	
+	@Inject
+	private RefactoredResourceCopier resourceCopier;
+	
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {
 			syncUtil.totalSync(false);
@@ -61,7 +65,8 @@ public class ExtractMethodHandler extends AbstractHandler {
 				document.readOnly(new IUnitOfWork.Void<XtextResource>() {
 					@Override
 					public void process(XtextResource resource) throws Exception {
-						List<XExpression> expressions = expressionUtil.findSelectedSiblingExpressions(resource,
+						XtextResource copiedResource = resourceCopier.loadIntoNewResourceSet(resource);
+						List<XExpression> expressions = expressionUtil.findSelectedSiblingExpressions(copiedResource,
 								selection);
 						if (!expressions.isEmpty()) {
 							ExtractMethodRefactoring extractMethodRefactoring = refactoringProvider.get();
@@ -76,6 +81,8 @@ public class ExtractMethodHandler extends AbstractHandler {
 					}
 				});
 			}
+		} catch (InterruptedException e) {
+			return null;
 		} catch (Exception exc) {
 			LOG.error("Error during refactoring", exc);
 			MessageDialog.openError(Display.getCurrent().getActiveShell(), "Error during refactoring", exc.getMessage()

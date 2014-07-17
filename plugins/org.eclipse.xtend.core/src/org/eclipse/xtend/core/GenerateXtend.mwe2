@@ -42,7 +42,7 @@ Workflow {
 		srcPath ="platform:/resource/${projectName}/src"
 		srcPath ="platform:/resource/org.eclipse.xtext.common.types/src"
 		srcPath ="platform:/resource/org.eclipse.xtext.xbase/src"
-		lineDelimiter = lineDelimiter 
+		lineDelimiter = lineDelimiter
 	}
 	
 	component = org.eclipse.emf.mwe2.ecore.EcoreGenerator {

@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
@@ -45,6 +46,9 @@ public class XtendDependentElementsCalculator extends JvmModelDependentElementsC
 				if(xtendFunction != null) {
 					result.add(EcoreUtil2.getPlatformResourceOrNormalizedURI(xtendFunction));
 				}
+			}
+			if (monitor.isCanceled()) {
+				throw new OperationCanceledException();
 			}
 			return newArrayList(result);
 		}

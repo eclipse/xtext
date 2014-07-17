@@ -54,6 +54,7 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.refactoring.impl.EditorDocumentChange;
 import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.TextRegion;
@@ -287,10 +288,14 @@ public class ExtractMethodRefactoring extends Refactoring {
 	}
 
 	@Override
-	public RefactoringStatus checkInitialConditions(IProgressMonitor pm) throws CoreException,
+	public RefactoringStatus checkInitialConditions(final IProgressMonitor pm) throws CoreException,
 			OperationCanceledException {
 		StatusWrapper status = statusProvider.get();
-		IResolvedTypes resolvedTypes = typeResolver.resolveTypes(firstExpression);
+		IResolvedTypes resolvedTypes = typeResolver.resolveTypes(firstExpression, new CancelIndicator() {
+			public boolean isCanceled() {
+				return pm.isCanceled();
+			}
+		});
 		try {
 			Set<String> calledExternalFeatureNames = newHashSet();
 			returnType = calculateReturnType(resolvedTypes);
@@ -298,6 +303,9 @@ public class ExtractMethodRefactoring extends Refactoring {
 				returnExpression = lastExpression;
 			boolean isReturnAllowed = isEndOfOriginalMethod(); 
 			for (EObject element : EcoreUtil2.eAllContents(originalMethod.getExpression())) {
+				if (pm.isCanceled()) {
+					throw new OperationCanceledException();
+				}
 				boolean isLocalExpression = EcoreUtil.isAncestor(expressions, element);
 				if (element instanceof XFeatureCall) {
 					XFeatureCall featureCall = (XFeatureCall) element;
@@ -346,6 +354,8 @@ public class ExtractMethodRefactoring extends Refactoring {
 						localFeatureNames.add(((XVariableDeclaration) element).getIdentifier());
 				}
 			}
+		} catch (OperationCanceledException e) {
+			throw e;
 		} catch (Exception exc) {
 			handleException(exc, status);
 		}
@@ -361,12 +371,22 @@ public class ExtractMethodRefactoring extends Refactoring {
 			
 			ITextRegion expressionsRegion = getExpressionsRegion();
 			ITextRegion predecessorRegion = locationInFileProvider.getFullTextRegion(originalMethod);
-			
+			if (pm.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 			Section expressionSection = rewriter.newSection(expressionsRegion.getOffset(), expressionsRegion.getLength());
 			Section declarationSection = rewriter.newSection(predecessorRegion.getOffset() + predecessorRegion.getLength(), 0);
 			createMethodCallEdit(expressionSection, expressionsRegion);
+			if (pm.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 			createMethodDeclarationEdit(declarationSection, expressionSection.getBaseIndentLevel(), expressionsRegion);
+			if (pm.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 			textEdit = replaceConverter.convertToTextEdit(rewriter.getChanges());
+		} catch (OperationCanceledException e) {
+			throw e;
 		} catch (Exception exc) {
 			handleException(exc, status);
 		}
