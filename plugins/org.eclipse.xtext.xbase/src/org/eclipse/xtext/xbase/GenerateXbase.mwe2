@@ -77,7 +77,7 @@ Workflow {
 			forcedResourceSet = xtypeResourceSet
 			uri = "classpath:/org/eclipse/xtext/xbase/Xtype.xtext" 
 			fileExtensions="___xtype"
-			fragment = grammarAccess.GrammarAccessFragment {}
+			fragment = grammarAccess.GrammarAccessFragment auto-inject {}
 			fragment = serializer.SerializerFragment {
 				// generateDebugData = true
 			}
@@ -91,7 +91,7 @@ Workflow {
 			forcedResourceSet = xbaseResourceSet
 			uri = "classpath:/org/eclipse/xtext/xbase/Xbase.xtext" 	
 			fileExtensions = "___xbase"
-			fragment = grammarAccess.GrammarAccessFragment {}
+			fragment = grammarAccess.GrammarAccessFragment auto-inject {}
 			fragment = serializer.SerializerFragment {
 				// generateDebugData = true
 			}
@@ -132,7 +132,7 @@ Workflow {
 			forcedResourceSet = xannotationsResourceSet
 			uri = "classpath:/org/eclipse/xtext/xbase/annotations/XbaseWithAnnotations.xtext" 	
 			fileExtensions = "___xbasewithannotations"
-			fragment = grammarAccess.GrammarAccessFragment {}
+			fragment = grammarAccess.GrammarAccessFragment auto-inject {}
 			fragment = serializer.SerializerFragment {
 				// generateDebugData = true
 			}

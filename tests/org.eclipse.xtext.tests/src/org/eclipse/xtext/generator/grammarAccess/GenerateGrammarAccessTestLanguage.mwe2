@@ -33,7 +33,7 @@ Workflow {
 			uri = "classpath:/org/eclipse/xtext/generator/grammarAccess/GrammarAccessTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {
 			}
-			fragment = org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment {}
+			fragment = org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment auto-inject {}
 		}
 	}
 }
