@@ -77,7 +77,7 @@ public class AntlrGeneratorFragment extends AbstractAntlrGeneratorFragmentEx {
 		splitParserAndLexerIfEnabled(absoluteLexerFileName, absoluteParserFileName, charset);
 		suppressWarnings(absoluteLexerFileName, absoluteParserFileName, charset);
 		normalizeLineDelimiters(absoluteLexerFileName, absoluteParserFileName, charset);
-
+		normalizeTokens(absoluteParserFileName, charset);
 		MutableTokenDefProvider provider = createLexerTokensProvider(lexerBaseFileName, helper, charset);
 		for(Map.Entry<Integer, String> entry: provider.getTokenDefMap().entrySet()) {
 			String value = entry.getValue();
@@ -95,6 +95,7 @@ public class AntlrGeneratorFragment extends AbstractAntlrGeneratorFragmentEx {
 		catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+		normalizeTokens(absoluteLexerFileName, charset);
 		helper.discardHelper(grammar);
 	}
 	
