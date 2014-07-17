@@ -25,7 +25,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.eclipse.emf.mwe2.runtime.Mandatory;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.EcoreUtil2;
@@ -65,7 +64,6 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 	/**
 	 * @since 2.7
 	 */
-	@Mandatory
 	public void setLineDelimiter(String lineDelimiter) {
 		this.lineDelimiter = lineDelimiter;
 	}

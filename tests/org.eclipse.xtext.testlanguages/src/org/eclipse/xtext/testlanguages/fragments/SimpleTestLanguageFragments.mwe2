@@ -26,7 +26,7 @@ var contentAssist.parser = parser.antlr.XtextAntlrUiGeneratorFragment auto-injec
 LanguageConfig {
 	uri = grammarURI
 	// Java API to access grammar elements (required by several other fragments)
-	fragment = grammarAccess.GrammarAccessFragment {}
+	fragment = grammarAccess.GrammarAccessFragment auto-inject {}
 
 	// generates Java API for the generated EPackages 
 	fragment = ecore.EcoreGeneratorFragment auto-inject {
