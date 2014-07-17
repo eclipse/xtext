@@ -255,18 +255,18 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, Resour
         try {
           boolean _and = false;
           boolean _and_1 = false;
-          boolean _hasNature = it.hasNature(XtextProjectHelper.NATURE_ID);
-          if (!_hasNature) {
+          boolean _isAccessible = it.isAccessible();
+          if (!_isAccessible) {
             _and_1 = false;
           } else {
-            boolean _hasNature_1 = it.hasNature(JavaCore.NATURE_ID);
-            _and_1 = _hasNature_1;
+            boolean _hasNature = it.hasNature(XtextProjectHelper.NATURE_ID);
+            _and_1 = _hasNature;
           }
           if (!_and_1) {
             _and = false;
           } else {
-            boolean _isAccessible = it.isAccessible();
-            _and = _isAccessible;
+            boolean _hasNature_1 = it.hasNature(JavaCore.NATURE_ID);
+            _and = _hasNature_1;
           }
           return Boolean.valueOf(_and);
         } catch (Throwable _e) {
