@@ -17,6 +17,15 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
+ * The language that defines a given object can decide to add other objects
+ * to the set of of target URIs if they have been derived from the given object.
+ * 
+ * The implementation of {@link #add(EObject, TargetURIs)} will dispatch to the
+ * language implementation that defines the object.
+ * 
+ * Clients should override {@link #doAdd(EObject, TargetURIs)} to enhance the set of
+ * targets.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @Singleton

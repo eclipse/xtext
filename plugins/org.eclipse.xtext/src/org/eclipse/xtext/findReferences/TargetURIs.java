@@ -8,6 +8,7 @@
 package org.eclipse.xtext.findReferences;
 
 import java.util.Collection;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 
@@ -96,24 +97,60 @@ public interface TargetURIs extends Iterable<URI> {
 		
 	}
 	
+	/**
+	 * Read the user data with the given key. Returns <code>null</code> is no such user data is available.
+	 */
 	<T> T getUserData(Key<T> key);
 	
+	/**
+	 * Store user data with the given key.
+	 */
 	<T> void putUserData(Key<T> key, T data);
 	
+	/**
+	 * Add the given uri to this set of targets.
+	 */
 	void addURI(URI uri);
 	
+	/**
+	 * Adds all the uris to this set of targets.
+	 */
 	void addAllURIs(Iterable<URI> uris);
 	
+	/**
+	 * Returns the collection of target resource URIs, e.g. URIs without a fragment.
+	 */
 	Collection<URI> getTargetResourceURIs();
 	
+	/**
+	 * Return all targets that are defined in the given resource.
+	 */
 	Collection<URI> getEObjectURIs(URI resourceURI);
 	
+	/**
+	 * Returns <code>true</code> if the uri is contained in this set of targets.
+	 */
 	boolean contains(URI uri);
 	
+	/**
+	 * Returns <code>true</code> if this set of targets contains at least one element from the
+	 * given resourceURI.
+	 */
 	boolean containsResource(URI resourceURI);
 	
+	/**
+	 * Returns <code>true</code> if there is no target URI yet.
+	 */
 	boolean isEmpty();
 	
+	/**
+	 * Returns the number of known target object URIs.
+	 */
 	int size();
+	
+	/**
+	 * Returns a {@link Set} view on this resource URIs.
+	 */
+	Set<URI> asSet();
 	
 }
