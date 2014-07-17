@@ -12,6 +12,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -19,7 +20,8 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
 import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
-import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -51,6 +53,8 @@ public class OutlineRefreshJob extends Job {
 			if (!monitor.isCanceled())
 				outlinePage.refreshViewer(rootNode, newState.getExpandedNodes(), newState.getSelectedNodes());
 			return Status.OK_STATUS;
+		} catch (OperationCanceledException oce) {
+			return Status.CANCEL_STATUS;
 		} catch (Throwable t) {
 			LOG.error("Error refreshing outline", t);
 			return Status.OK_STATUS;
@@ -77,21 +81,43 @@ public class OutlineRefreshJob extends Job {
 	 */
 	protected IOutlineNode iternalRefreshOutlineModel(final OutlineTreeState formerState,
 			final OutlineTreeState newState, final IOutlineTreeProvider treeProvider) {
-		IOutlineNode rootNode = outlinePage.getXtextDocument().readOnly(new IUnitOfWork<IOutlineNode, XtextResource>() {
-			public IOutlineNode exec(XtextResource resource) throws Exception {
-				IOutlineNode rootNode = treeProvider.createRoot(outlinePage.getXtextDocument());
-				restoreChildrenSelectionAndExpansion(rootNode, resource, formerState, newState);
+		IOutlineNode rootNode = outlinePage.getXtextDocument().readOnly(new CancelableUnitOfWork<IOutlineNode, XtextResource>() {
+			@Override
+			public IOutlineNode exec(XtextResource resource, CancelIndicator cancelIndicator) throws Exception {
+				IOutlineNode rootNode = createModel(treeProvider, cancelIndicator);
+				restoreChildrenSelectionAndExpansion(rootNode, resource, formerState, newState, cancelIndicator);
 				return rootNode;
+			}
+
+			private IOutlineNode createModel(final IOutlineTreeProvider treeProvider, CancelIndicator cancelIndicator) {
+				if (treeProvider instanceof IOutlineTreeProvider.Cancelable)
+					return ((IOutlineTreeProvider.Cancelable) treeProvider).createRoot(
+							outlinePage.getXtextDocument(), cancelIndicator);
+				else
+					return treeProvider.createRoot(outlinePage.getXtextDocument());
 			}
 		});
 		return rootNode;
 	}
 	
+	/**
+	 * @deprecated use {@link #restoreChildrenSelectionAndExpansion(IOutlineNode, Resource, OutlineTreeState, OutlineTreeState, CancelIndicator)} instead
+	 */
+	@Deprecated
 	protected void restoreChildrenSelectionAndExpansion(IOutlineNode parent, Resource resource, OutlineTreeState formerState, OutlineTreeState newState) {
+		restoreChildrenSelectionAndExpansion(parent, resource, formerState, newState, CancelIndicator.NullImpl);
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	protected void restoreChildrenSelectionAndExpansion(IOutlineNode parent, Resource resource, OutlineTreeState formerState, OutlineTreeState newState, CancelIndicator cancelIndicator) {
 		List<IOutlineNode> children = parent.getChildren();
 		for(IOutlineNode child: children) {
+			if(cancelIndicator.isCanceled())
+				throw new OperationCanceledException();
 			if(containsUsingComparer(formerState.getExpandedNodes(), child)) {
-				restoreChildrenSelectionAndExpansion(child, resource, formerState, newState);
+				restoreChildrenSelectionAndExpansion(child, resource, formerState, newState, cancelIndicator);
 				newState.addExpandedNode(child);
 			}
 			if(containsUsingComparer(formerState.getSelectedNodes(), child)) {

@@ -93,6 +93,10 @@ public class XtextReconciler extends Job implements IReconciler {
 		}
 	}
 	
+	/**
+	 * @noimplement
+	 * @noextend
+	 */
 	protected class DocumentListener implements IXtextDocumentContentObserver, ICompletionListener {
 
 		private volatile boolean sessionStarted = false;
@@ -108,13 +112,16 @@ public class XtextReconciler extends Job implements IReconciler {
 			handleDocumentChanged(event);
 		}
 
-		public void performNecessaryUpdates(Processor processor) {
+		/**
+		 * @since 2.7
+		 */
+		public boolean performNecessaryUpdates(Processor processor) {
+			boolean hadUpdates = false;
 			try {
 				if (!pendingChanges.isEmpty()) {
-					processor.process(new IUnitOfWork.Void<XtextResource>() {
-						@Override
-						public void process(XtextResource state) throws Exception {
-							doRun(state, null);
+					hadUpdates = processor.process(new IUnitOfWork<Boolean, XtextResource>() {
+						public Boolean exec(XtextResource state) throws Exception {
+							return doRun(state, null);
 						}
 					});
 				}
@@ -124,6 +131,14 @@ public class XtextReconciler extends Job implements IReconciler {
 			if (sessionStarted && !paused) {
 				pause();
 			}
+			return hadUpdates;
+		}
+		
+		/**
+		 * @since 2.7
+		 */
+		public boolean hasPendingUpdates() {
+			return !pendingChanges.isEmpty();
 		}
 
 		public void assistSessionStarted(ContentAssistEvent event) {
@@ -364,7 +379,7 @@ public class XtextReconciler extends Job implements IReconciler {
 	 * 
 	 * @since 2.4
 	 */
-	private void doRun(XtextResource state, /* @Nullable */ final IProgressMonitor monitor) {
+	private boolean doRun(XtextResource state, /* @Nullable */ final IProgressMonitor monitor) {
 		if (log.isDebugEnabled()) {
 			log.debug("Preparing reconciliation."); //$NON-NLS-1$
 		}
@@ -385,7 +400,9 @@ public class XtextReconciler extends Job implements IReconciler {
 						state, replaceRegionToBeProcessed);
 				debugger.assertResouceParsedCorrectly(state, replaceRegionToBeProcessed);
 			}
+			return true;
 		}
+		return false;
 	}
 	
 	/**

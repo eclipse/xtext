@@ -12,6 +12,7 @@ import java.util.List;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineMode;
+import org.eclipse.xtext.util.CancelIndicator;
 
 import com.google.inject.ImplementedBy;
 
@@ -40,5 +41,12 @@ public interface IOutlineTreeProvider {
 		OutlineMode getNextMode();
 
 		void setCurrentMode(OutlineMode outlineMode);
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	interface Cancelable {
+		IOutlineNode createRoot(IXtextDocument document, CancelIndicator cancelIndicator);
 	}
 }

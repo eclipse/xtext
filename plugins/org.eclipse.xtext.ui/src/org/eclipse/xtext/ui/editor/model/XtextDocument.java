@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.model;
 
+import static com.google.common.collect.Lists.*;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +26,7 @@ import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.BadPositionCategoryException;
 import org.eclipse.jface.text.Document;
@@ -36,12 +39,11 @@ import org.eclipse.xtext.ui.editor.DirtyStateEditorSupport;
 import org.eclipse.xtext.ui.editor.model.IXtextDocumentContentObserver.Processor;
 import org.eclipse.xtext.ui.editor.model.edit.ITextEditComposer;
 import org.eclipse.xtext.ui.editor.model.edit.ReconcilingUnitOfWork;
-import org.eclipse.xtext.util.concurrent.AbstractReadWriteAcces;
+import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
-
-import static com.google.common.collect.Lists.*;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -167,73 +169,198 @@ public class XtextDocument extends Document implements IXtextDocument {
 		removeDocumentListener(observer);
 	}
 
-	protected <T> void updateContentBeforeRead() {
+	/**
+	 * @since 2.7
+	 */
+	protected <T> boolean updateContentBeforeRead() {
+		Object[] listeners = xtextDocumentObservers.getListeners();
+		boolean hadUpdates = false;
+		for (int i = 0; i < listeners.length; i++) {
+			hadUpdates |= ((IXtextDocumentContentObserver) listeners[i]).performNecessaryUpdates(stateAccess);
+		}
+		return hadUpdates;
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	protected boolean hasPendingUpdates() {
 		Object[] listeners = xtextDocumentObservers.getListeners();
 		for (int i = 0; i < listeners.length; i++) {
-			((IXtextDocumentContentObserver) listeners[i]).performNecessaryUpdates(stateAccess);
+			if(((IXtextDocumentContentObserver) listeners[i]).hasPendingUpdates())
+				return true;
+		}
+		return false;
+	}
+	
+	private static class ReaderMonitor implements CancelIndicator {
+
+		private boolean isCanceled = false;
+
+		public void setCanceled(boolean isCanceled) {
+			this.isCanceled = isCanceled;
+		}
+		
+		public boolean isCanceled() {
+			return isCanceled;
 		}
 	}
 
+	private volatile ReaderMonitor readerMonitor = new ReaderMonitor();
+	
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
 	 * 
 	 */
-	protected class XtextDocumentLocker extends AbstractReadWriteAcces<XtextResource> implements Processor {
-		@Override
+	protected class XtextDocumentLocker implements Processor {
+		
+		private volatile int potentialUpdaterCount = 0;
+		
+		private volatile boolean hadUpdates;
+		
+		private final ReentrantReadWriteLock rwLock = new ReentrantReadWriteLock();
+
+		private final Lock writeLock = rwLock.writeLock();
+
+		private final Lock readLock = rwLock.readLock();
+
+		private ThreadLocal<Integer> readLockCount = new ThreadLocal<Integer>() {
+			@Override
+			protected Integer initialValue() {
+				return 0;
+			}
+		};
+		
+		/**
+		 * Upgrades a read transaction to a write transaction, executes the work then downgrades to a read transaction
+		 * again.
+		 * 
+		 * @noreference
+		 * @since 2.7
+		 */
+		public <T> T process(IUnitOfWork<T,XtextResource> transaction) {
+			releaseReadLock();
+			// caveat: other readers/writers could potentially kick in here
+			acquireWriteLock();
+			try {
+				if (log.isTraceEnabled())
+					log.trace("process - " + Thread.currentThread().getName());
+				return this.modify(transaction);
+			} finally {
+				if (log.isTraceEnabled())
+					log.trace("Downgrading from write lock to read lock...");
+				acquireReadLock();
+				releaseWriteLock();
+			}
+		}
+
+		/**
+		 * Queries the number of reentrant write holds on this lock by the current thread. Delegates to
+		 * {@link ReentrantReadWriteLock#getWriteHoldCount()}.
+		 * 
+		 * @return the number of holds on the write lock by the current thread, or zero if the write lock is not held by the
+		 *         current thread
+		 * @since 2.7
+		 * @noreference
+		 */
+		protected int getWriteHoldCount() {
+			return rwLock.getWriteHoldCount();
+		}
+
+		/**
+		 * Queries the number of reentrant read holds on this lock by the current thread. A reader thread has a hold on a
+		 * lock for each lock action that is not matched by an unlock action.
+		 * 
+		 * That functionality is implemented in {@link ReentrantReadWriteLock} as well, but not before version 1.6. This is
+		 * why we have to find our own way to work around it.
+		 * 
+		 * @return the number of holds on the read lock by the current thread, or zero if the read lock is not held by the
+		 *         current thread
+		 * @since 2.7
+		 * @noreference
+		 */
+		protected int getReadHoldCount() {
+			return readLockCount.get();
+		}
+
+		private void acquireReadLock() {
+			if (log.isTraceEnabled())
+				log.trace("Trying to acquire read lock...");
+			readLock.lock();
+			readLockCount.set(readLockCount.get() + 1);
+			if (log.isTraceEnabled())
+				log.trace("...read lock acquired.");
+		}
+
+		private void releaseReadLock() {
+			readLock.unlock();
+			readLockCount.set(readLockCount.get() - 1);
+			if (log.isTraceEnabled())
+				log.trace("Read lock released.");
+		}
+
+		private void acquireWriteLock() {
+			if (validationJob!=null) {
+				validationJob.cancel();
+			}
+			readerMonitor.setCanceled(true);
+			if (log.isTraceEnabled())
+				log.trace("Trying to acquire write lock...");
+			writeLock.lock();
+			if (log.isTraceEnabled())
+				log.trace("...write lock acquired.");
+			readerMonitor = new ReaderMonitor();
+		}
+
+		private void releaseWriteLock() {
+			writeLock.unlock();
+			if (log.isTraceEnabled())
+				log.trace("Write lock released.");
+		}
+		
 		protected XtextResource getState() {
 			return resource;
 		}
 
-		@Override
-		protected void beforeReadOnly(XtextResource res, IUnitOfWork<?, XtextResource> work) {
-			if (log.isDebugEnabled())
-				log.debug("read - " + Thread.currentThread().getName());
-			// Don't updateContent on write lock request. Reentrant read doesn't matter as 
-			// updateContentBeforeRead() is cheap when the pending event queue is swept
-			if (getReadHoldCount() == 1 && getWriteHoldCount() == 0)
-				updateContentBeforeRead();
-		}
-
-		@Override
-		protected void beforeModify(XtextResource state, IUnitOfWork<?, XtextResource> work) {
-			if (log.isDebugEnabled())
-				log.debug("write - " + Thread.currentThread().getName());
-		}
-
-		@Override
-		protected void afterReadOnly(XtextResource res, Object result, IUnitOfWork<?, XtextResource> work) {
-			ensureThatStateIsNotReturned(result, work);
-		}
-
-		@Override
-		protected void afterModify(XtextResource res, Object result, IUnitOfWork<?, XtextResource> work) {
-			ensureThatStateIsNotReturned(result, work);
-			if(!(work instanceof ReconcilingUnitOfWork))
-				notifyModelListeners(res);
-		}
-
-		@Override
 		public <T> T modify(IUnitOfWork<T, XtextResource> work) {
 			try {
-				if (validationJob!=null) {
-					validationJob.cancel();
-				}
-				Object state = getState();
-				if (state instanceof ISynchronizable<?>) {
-					synchronized (((ISynchronizable<?>) state).getLock()) {
-						return super.modify(work);
-					}
-				} else {
-					return super.modify(work);
-				}
-			} catch (RuntimeException e) {
+				XtextResource state = getState();
 				try {
-					XtextResource state = getState();
-					if (state != null)
-						state.reparse(get());
-				} catch (IOException ioe) {
+					synchronized (getResourceLock()) {
+						acquireWriteLock();
+						T exec = null;
+						try {
+							potentialUpdaterCount++;
+							state = getState();
+							if (log.isDebugEnabled())
+								log.debug("write - " + Thread.currentThread().getName());
+							exec = work.exec(state);
+							return exec;
+						} catch (RuntimeException e) {
+							throw e;
+						} catch (Exception e) {
+							throw new WrappedException(e);
+						} finally {
+							releaseWriteLock();
+							try {
+								acquireReadLock();
+								ensureThatStateIsNotReturned(exec, work);
+								--potentialUpdaterCount;
+								if(potentialUpdaterCount == 0 && !(work instanceof ReconcilingUnitOfWork))
+									notifyModelListeners(state);
+							} finally {
+								releaseReadLock();
+							}
+						}
+					}
+				} catch (RuntimeException e) {
+					try {
+						if (state != null)
+							state.reparse(get());
+					} catch (IOException ioe) {
+					}
+					throw e;
 				}
-				throw e;
 			} finally {
 				if(!(work instanceof ReconcilingUnitOfWork))
 					checkAndUpdateAnnotations();
@@ -243,20 +370,58 @@ public class XtextDocument extends Document implements IXtextDocument {
 		/**
 		 * @since 2.4
 		 */
-		@Override
 		public <T> T readOnly(IUnitOfWork<T, XtextResource> work) {
-			Object state = getState();
-			if (state instanceof ISynchronizable<?>) {
-				synchronized (((ISynchronizable<?>) state).getLock()) {
-					return super.readOnly(work);
+			if(hasPendingUpdates()) 
+				readerMonitor.setCanceled(true);
+			XtextResource state = getState();
+			synchronized (getResourceLock()) {
+				acquireReadLock();
+				try {
+					potentialUpdaterCount++;
+					if (log.isDebugEnabled())
+						log.debug("read - " + Thread.currentThread().getName());
+					// Don't updateContent on write lock request. Reentrant read doesn't matter as 
+					// updateContentBeforeRead() is cheap when the pending event queue is swept
+					if (getReadHoldCount() == 1 && getWriteHoldCount() == 0) {
+						hadUpdates |= updateContentBeforeRead();
+					}
+					if(work instanceof CancelableUnitOfWork) 
+						((CancelableUnitOfWork<?, XtextResource>) work).setCancelIndicator(readerMonitor);
+					T exec = work.exec(state);
+					ensureThatStateIsNotReturned(exec, work);
+					return  exec;
+				} catch (RuntimeException e) {
+					throw e;
+				} catch (Exception e) {
+					throw new WrappedException(e);
+				} finally {
+					--potentialUpdaterCount;
+					if(potentialUpdaterCount == 0 && hadUpdates) { 
+						hadUpdates = false;	
+						notifyModelListeners(resource);
+					}
+					releaseReadLock();
 				}
-			} else {
-				return super.readOnly(work);
 			}
 		}
-
 	}
-
+	
+	/**
+	 * Introduced in 2.7 to allow read-only transactions to be cancelable. The default implementation disabled
+	 * concurrent reads on the model. To re-enable concurrent reads, return a new {@link Object} on each call.
+	 * 
+	 * Caveat: Concurrent read is problematic in EMF because proxy resolution and resource un-/loading are considered
+	 * read-only but actually change the model. This yields serious race conditions. Consider using 
+	 * {@link CancelableUnitOfWork}s instead.
+	 * 
+	 * @since 2.7
+	 */
+	protected Object getResourceLock() {
+		return (resource instanceof ISynchronizable<?>) 
+				? ((ISynchronizable<?>) resource).getLock() 
+				: resource;
+	}
+	
 	private static final Logger log = Logger.getLogger(XtextDocument.class);
 
 	private transient Job validationJob;

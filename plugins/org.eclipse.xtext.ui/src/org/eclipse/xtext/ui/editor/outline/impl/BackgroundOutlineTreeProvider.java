@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.editor.outline.impl;
 
 import java.util.List;
 
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -21,6 +22,7 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
 import org.eclipse.xtext.ui.label.ILabelProviderImageDescriptorExtension;
+import org.eclipse.xtext.util.CancelIndicator;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -39,7 +41,7 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.4
  */
-public class BackgroundOutlineTreeProvider implements IOutlineTreeStructureProvider, IOutlineTreeProvider {
+public class BackgroundOutlineTreeProvider implements IOutlineTreeStructureProvider, IOutlineTreeProvider, IOutlineTreeProvider.Cancelable {
 
 	@Inject
 	private ILabelProvider labelProvider;
@@ -47,11 +49,34 @@ public class BackgroundOutlineTreeProvider implements IOutlineTreeStructureProvi
 	@Inject
 	private OutlineNodeFactory factory;
 
-	public IOutlineNode createRoot(IXtextDocument document) {
-		return factory.createRoot(document, getImageDescriptor(document), getText(document), this);
+	private CancelIndicator cancelIndicator = CancelIndicator.NullImpl;
+
+	/**
+	 * @since 2.7
+	 */
+	public IOutlineNode createRoot(IXtextDocument document, CancelIndicator cancelIndicator) {
+		try {
+			this.cancelIndicator = cancelIndicator;
+			return factory.createRoot(document, getImageDescriptor(document), getText(document), this);
+		} finally {
+			this.cancelIndicator = CancelIndicator.NullImpl;
+		}
 	}
 
+	public IOutlineNode createRoot(IXtextDocument document) {
+		return createRoot(document, CancelIndicator.NullImpl);
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	protected void checkCanceled() {
+		if(cancelIndicator.isCanceled())
+			throw new OperationCanceledException();
+	}	
+
 	public void createChildren(IOutlineNode parentNode, EObject modelElement) {
+		checkCanceled();
 		if (modelElement != null && parentNode.hasChildren()) {
 			if (parentNode instanceof DocumentRootNode)
 				internalCreateChildren((DocumentRootNode) parentNode, modelElement);
@@ -90,6 +115,7 @@ public class BackgroundOutlineTreeProvider implements IOutlineTreeStructureProvi
 	}
 
 	protected EObjectNode createNode(IOutlineNode parentNode, EObject modelElement) {
+		checkCanceled();
 		Object text = getText(modelElement);
 		boolean isLeaf = isLeaf(modelElement);
 		if (text == null && isLeaf)
