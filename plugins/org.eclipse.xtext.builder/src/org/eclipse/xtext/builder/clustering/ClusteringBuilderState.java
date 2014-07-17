@@ -172,10 +172,13 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                 }
             };
 
-            int index = 1;
+            int index = 0;
             while (!queue.isEmpty()) {
             	// heuristic: only 2/3 of ticks will be consumed; rest kept for affected resources
-                subProgress.setWorkRemaining(queue.size() * 3);
+            	if (index % 10 == 0) {
+            		subProgress.setWorkRemaining(queue.size() * 3);
+            	}
+            	index++;
                 int clusterIndex = 0;
                 final List<Delta> changedDeltas = Lists.newArrayList();
                 while (!queue.isEmpty()) {
@@ -198,8 +201,9 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                         changedURI = loadResult.getUri();
                         actualResourceURI = loadResult.getResource().getURI();
                         resource = addResource(loadResult.getResource(), resourceSet);
-
-                        subProgress.subTask("Updating resource description for " + changedURI.lastSegment() + " (" + index + " of " + (index + queue.size()) + ")");
+                        if (index % 10 == 0) {
+                        	subProgress.subTask("Updating resource description for " + changedURI.lastSegment() + " (" + index + " of " + (index + queue.size()) + ")");
+                        }
                         queue.remove(changedURI);
                         if(toBeDeleted.contains(changedURI)) {
                             break;
@@ -262,7 +266,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                         // Validate now.
                         if (!buildData.isIndexingOnly()) {
 	                        try {
-	                        	updateMarkers(newDelta, resourceSet, subProgress.newChild(1));
+	                        	updateMarkers(newDelta, resourceSet, subProgress);
 	                        } catch (OperationCanceledException e) {
 	                        	loadOperation.cancel();
 	                        	throw e;
@@ -271,8 +275,9 @@ public class ClusteringBuilderState extends AbstractBuilderState {
 	                        }
                         }
                     }
-                    subProgress.worked(1);
-                    index++;
+                    if (index % 10 == 0) {
+                    	subProgress.worked(1);
+                    }
                 }
 
                 loadOperation.cancel();
@@ -317,7 +322,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
         ResourceSet resourceSet = buildData.getResourceSet();
         Set<URI> toBeUpdated = buildData.getToBeUpdated();
         final int n = toBeUpdated.size();
-        final SubMonitor subMonitor = SubMonitor.convert(monitor, "Write new resource descriptions", n); // TODO: NLS
+        final SubMonitor subMonitor = SubMonitor.convert(monitor, "Write new resource descriptions", n / 20); // TODO: NLS
         IProject currentProject = getBuiltProject(buildData);
         LoadOperation loadOperation = null;
         try {
@@ -341,8 +346,9 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                     LoadResult loadResult = loadOperation.next();
                     uri = loadResult.getUri();
                     resource = addResource(loadResult.getResource(), resourceSet);
-
-                    subMonitor.subTask("Writing new resource description for " + uri.lastSegment() + " (" + index++ + " of " + n + ")"); // TODO: NLS
+                    if (index % 20 == 0) {
+                    	subMonitor.subTask("Writing new resource description for " + uri.lastSegment() + " (" + index + 1 + " of " + n + ")"); // TODO: NLS
+                    }
 
                     final IResourceDescription.Manager manager = getResourceDescriptionManager(uri);
                     if (manager != null) {
@@ -376,8 +382,9 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                     }
                     // If we couldn't load it, there's no use trying again: do not add it to the queue
                 }
-
-                subMonitor.worked(1);
+                index++;
+                if (index % 20 == 0)
+                	subMonitor.worked(1);
             }
         } finally {
         	compilerPhases.setIndexing(resourceSet, false);
@@ -453,8 +460,9 @@ public class ClusteringBuilderState extends AbstractBuilderState {
         if (allDeltas.isEmpty()) {
             return;
         }
-        final SubMonitor progress = SubMonitor.convert(monitor, allRemainingURIs.size());
+        final SubMonitor progress = SubMonitor.convert(monitor, allRemainingURIs.size() / 50);
         Iterator<URI> iter = allRemainingURIs.iterator();
+        int i = 0;
         while (iter.hasNext()) {
             if (progress.isCanceled()) {
                 throw new OperationCanceledException();
@@ -481,7 +489,9 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                     iter.remove();
                 }
             }
-            progress.worked(1);
+            i++;
+            if (i % 50 == 0)
+            	progress.worked(1);
         }
     }
 

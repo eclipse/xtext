@@ -22,6 +22,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -74,6 +75,9 @@ public class JavaProjectBasedBuilderParticipant implements IXtextBuilderParticip
 		if (!isValidOutputFolder(javaProject, srcGenFolder))
 			return;
 		for (IResourceDescription.Delta delta : context.getDeltas()) {
+			if (monitor.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 			final Set<String> oldFiles = newHashSet();
 			if (sourceTargetMap.containsKey(delta.getUri())) {
 				oldFiles.addAll(sourceTargetMap.get(delta.getUri()));

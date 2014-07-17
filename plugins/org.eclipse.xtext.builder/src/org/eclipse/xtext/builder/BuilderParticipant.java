@@ -191,16 +191,19 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			// monitor handling
 			if (monitor.isCanceled())
 				throw new OperationCanceledException();
-			SubMonitor subMonitor = SubMonitor.convert(monitor, 2);
+			SubMonitor subMonitor = SubMonitor.convert(monitor, context.getBuildType() == BuildType.RECOVERY ? 5 : 3);
 	
 			EclipseResourceFileSystemAccess2 access = fileSystemAccessProvider.get();
 			IProject builtProject = context.getBuiltProject();
 			access.setProject(builtProject);
 			Map<String, OutputConfiguration> outputConfigurations = getOutputConfigurations(context);
 			refreshOutputFolders(context, outputConfigurations, subMonitor.newChild(1));
+			if (subMonitor.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 			access.setOutputConfigurations(outputConfigurations);
 			if (context.getBuildType() == BuildType.CLEAN || context.getBuildType() == BuildType.RECOVERY) {
-				SubMonitor cleanMonitor = SubMonitor.convert(subMonitor.newChild(1), outputConfigurations.size());
+				SubMonitor cleanMonitor = SubMonitor.convert(subMonitor.newChild(2), outputConfigurations.size());
 				for (OutputConfiguration config : outputConfigurations.values()) {
 					cleanOutput(context, config, access, cleanMonitor.newChild(1));
 				}
@@ -208,7 +211,10 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 					return;
 			}
 			Map<OutputConfiguration, Iterable<IMarker>> generatorMarkers = getGeneratorMarkers(builtProject, outputConfigurations.values());
-			doBuild(deltas, outputConfigurations, generatorMarkers, context, access, monitor);
+			if (subMonitor.isCanceled()) {
+				throw new OperationCanceledException();
+			}
+			doBuild(deltas, outputConfigurations, generatorMarkers, context, access, subMonitor.newChild(2));
 
 		} finally {
 			task.stop();
@@ -223,8 +229,8 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			Map<OutputConfiguration, Iterable<IMarker>> generatorMarkers, IBuildContext context,
 			EclipseResourceFileSystemAccess2 access, IProgressMonitor progressMonitor) throws CoreException {
 		final int numberOfDeltas = deltas.size();
-		SubMonitor subMonitor = SubMonitor.convert(progressMonitor, 2 * numberOfDeltas);
-		
+		SubMonitor subMonitor = SubMonitor.convert(progressMonitor, 2 * numberOfDeltas / 10);
+		SubMonitor currentMonitor = null;
 		int clusterIndex = 0;
 		for (int i = 0; i < numberOfDeltas; i++) {
 			IResourceDescription.Delta delta = deltas.get(i);
@@ -232,8 +238,11 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			if (subMonitor.isCanceled()) {
 				throw new OperationCanceledException();
 			}
-			subMonitor.subTask("Compiling " + delta.getUri().lastSegment() + " (" + i + " of " + numberOfDeltas + ")");
-			access.setMonitor(subMonitor.newChild(1));
+			if (i % 10 == 0) {
+				subMonitor.subTask("Compiling " + delta.getUri().lastSegment() + " (" + i + " of " + numberOfDeltas + ")");
+				currentMonitor = subMonitor.newChild(1);
+				access.setMonitor(currentMonitor);
+			}
 			
 			if (delta.getNew() != null && !clusteringPolicy.continueProcessing(context.getResourceSet(), delta.getUri(), clusterIndex)) {
 				clearResourceSet(context.getResourceSet());
@@ -248,8 +257,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 				access.flushSourceTraces();
 			}
 			
-			SubMonitor deleteMonitor = SubMonitor.convert(subMonitor.newChild(1), derivedResources.size());
-			cleanDerivedResources(delta, derivedResources, context, access, deleteMonitor);
+			cleanDerivedResources(delta, derivedResources, context, access, currentMonitor);
 		}
 	}
 
@@ -308,6 +316,9 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			EclipseResourceFileSystemAccess2 access, IProgressMonitor deleteMonitor) throws CoreException {
 		String uri = delta.getUri().toString();
 		for (IFile iFile : newLinkedHashSet(derivedResources)) {
+			if (deleteMonitor.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 			IMarker marker = derivedResourceMarkers.findDerivedResourceMarker(iFile, uri);
 			if (marker != null)
 				marker.delete();
@@ -397,6 +408,9 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			SubMonitor child = subMonitor.newChild(1);
 			final IProject project = ctx.getBuiltProject();
 			for (IContainer container : getOutputs(project, config)) {
+				if (monitor.isCanceled()) {
+					throw new OperationCanceledException();
+				}
 				container.refreshLocal(IResource.DEPTH_INFINITE, child);
 			}
 		}
@@ -430,6 +444,9 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			} else if (config.isCleanUpDerivedResources()) {
 				List<IFile> resources = derivedResourceMarkers.findDerivedResources(container, null);
 				for (IFile iFile : resources) {
+					if (monitor.isCanceled()) {
+						throw new OperationCanceledException();
+					}
 					if (access != null) {
 						access.deleteFile(iFile, config.getName(), monitor);
 					} else {
@@ -443,6 +460,9 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 
 	private void delete(IResource resource, OutputConfiguration config, EclipseResourceFileSystemAccess2 access,
 			IProgressMonitor monitor) throws CoreException {
+		if (monitor.isCanceled()) {
+			throw new OperationCanceledException();
+		}
 		if (resource instanceof IContainer) {
 			IContainer container = (IContainer) resource;
 			for (IResource child : container.members()) {
