@@ -655,4 +655,162 @@ public class IterableExtensions {
 			final Functions.Function1<? super T, C> key) {
 		return ListExtensions.sortInplaceBy(Lists.newArrayList(iterable), key);
 	}
+	
+
+
+	/**
+	 * Returns an Iterable containing all elements starting from the head of the source up to and excluding the first
+	 * element that violates the predicate The resulting Iterable is a lazily computed view, so any modifications to the
+	 * underlying Iterables will be reflected on subsequent iterations. The result's Iterator does not support
+	 * {@link Iterator#remove()}
+	 * 
+	 * @param iterable
+	 *            the elements from which to take
+	 * @param predicate
+	 *            the predicate which decides whether to keep taking elements
+	 * @return the taken elements
+	 * @since 2.7
+	 */
+	public static <T> Iterable<T> takeWhile(final Iterable<T> iterable, final Function1<? super T, Boolean> predicate) {
+		if (iterable == null)
+			throw new NullPointerException("iterable");
+		if (predicate == null)
+			throw new NullPointerException("predicate");
+		return new Iterable<T>() {
+			public Iterator<T> iterator() {
+				return IteratorExtensions.takeWhile(iterable.iterator(), predicate);
+			}
+		};
+	}
+
+	/**
+	 * Returns an Iterable containing all elements starting from the first element for which the drop-predicate returned
+	 * false. The resulting Iterable is a lazily computed view, so any modifications to the underlying Iterables will be
+	 * reflected on subsequent iterations. The result's Iterator does not support {@link Iterator#remove()}
+	 * 
+	 * @param iterable
+	 *            the elements from which to drop
+	 * @param predicate
+	 *            the predicate which decides whether to keep dropping elements
+	 * @return the remaining elements after dropping
+	 * @since 2.7
+	 */
+	public static <T> Iterable<T> dropWhile(final Iterable<T> iterable, final Function1<? super T, Boolean> predicate) {
+		if (iterable == null)
+			throw new NullPointerException("iterable");
+		if (predicate == null)
+			throw new NullPointerException("predicate");
+		return new Iterable<T>() {
+			public Iterator<T> iterator() {
+				return IteratorExtensions.dropWhile(iterable.iterator(), predicate);
+			}
+		};
+	}
+
+	/**
+	 * Returns An Iterable of Pairs where the nth pair is created by taking the nth element of each Iterable. The size
+	 * of the result is truncated to the size of the shortest input. E.g.
+	 * <code>zip(#["a", "b", "c"], #[1, 2, 3, 4]) == #[("a", 1), ("b", 2), ("c", 3)]</code>
+	 * 
+	 * The resulting Iterable is a lazily computed view, so any modifications to the underlying Iterables will be
+	 * reflected on subsequent iterations. The result's Iterator does not support {@link Iterator#remove()}
+	 * 
+	 * @param first
+	 *            the first Iterable
+	 * @param second
+	 *            the second Iterable
+	 * @return the zipped result
+	 * @since 2.7
+	 */
+	public static <A, B> Iterable<Pair<A, B>> zip(final Iterable<A> first, final Iterable<B> second) {
+		if (first == null)
+			throw new NullPointerException("first");
+		if (second == null)
+			throw new NullPointerException("second");
+		return new Iterable<Pair<A, B>>() {
+			public Iterator<Pair<A, B>> iterator() {
+				return IteratorExtensions.zip(first.iterator(), second.iterator());
+			}
+		};
+	}
+
+	/**
+	 * @param iterable
+	 *            the mutually comparable elements
+	 * @return the minimum element or null of the iterable was empty
+	 * @throws NullPointerException
+	 *             if the iterable has more than 1 element and any of them are <code>null</code>
+	 * @since 2.7
+	 */
+	public static <T extends Comparable<T>> T min(final Iterable<T> iterable) {
+		return IteratorExtensions.min(iterable.iterator());
+	}
+
+	/**
+	 * @param iterable
+	 *            the elements to find the minimum of
+	 * @param compareBy
+	 *            a function that returns a comparable characteristic to compare the elements by
+	 * @return the element that yields the minimum value when passed to <code>compareBy</code>
+	 * @throws NullPointerException
+	 *             if the iterable has more than 1 element <code>compareBy</code> yields <code>null</code> for any of
+	 *             the elements
+	 * @since 2.7
+	 */
+	public static <T, C extends Comparable<C>> T minBy(final Iterable<T> iterable,
+			final Function1<? super T, C> compareBy) {
+		return IteratorExtensions.minBy(iterable.iterator(), compareBy);
+	}
+
+	/**
+	 * @param iterable
+	 *            the elements to find the minimum of
+	 * @param comparator
+	 *            the comparison function
+	 * @return the mininmum element according to <code>comparator</code> or <code>null</code> if the iterable was empty.
+	 * @since 2.7
+	 */
+	public static <T> T min(final Iterable<T> iterable, Comparator<? super T> comparator) {
+		return IteratorExtensions.min(iterable.iterator(), comparator);
+	}
+
+	/**
+	 * @param iterable
+	 *            the mutually comparable elements
+	 * @return the maximum element or null of the iterable was empty
+	 * @throws NullPointerException
+	 *             if the iterable has more than 1 element and any of them are <code>null</code>
+	 * @since 2.7
+	 */
+	public static <T extends Comparable<T>> T max(final Iterable<T> iterable) {
+		return IteratorExtensions.max(iterable.iterator());
+	}
+
+	/**
+	 * @param iterable
+	 *            the elements to find the maximum of
+	 * @param compareBy
+	 *            a function that returns a comparable characteristic to compare the elements by
+	 * @return the element that yields the maximum value when passed to <code>compareBy</code>
+	 * @throws NullPointerException
+	 *             if the iterable has more than 1 element <code>compareBy</code> yields <code>null</code> for any of
+	 *             the elements
+	 * @since 2.7
+	 */
+	public static <T, C extends Comparable<C>> T maxBy(final Iterable<T> iterable,
+			final Function1<? super T, C> compareBy) {
+		return IteratorExtensions.maxBy(iterable.iterator(), compareBy);
+	}
+
+	/**
+	 * @param iterable
+	 *            the elements to find the maximum of
+	 * @param comparator
+	 *            the comparison function
+	 * @return the maximum element according to <code>comparator</code> or <code>null</code> if the iterable was empty.
+	 * @since 2.7
+	 */
+	public static <T> T max(final Iterable<T> iterable, Comparator<? super T> comparator) {
+		return IteratorExtensions.max(iterable.iterator(), comparator);
+	}
 }

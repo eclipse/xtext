@@ -11,12 +11,14 @@ import static com.google.common.collect.Lists.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.junit.Test;
 
@@ -93,6 +95,46 @@ public class IterableExtensionsTest extends BaseIterablesIteratorsTest<Iterable<
 		IterableExtensions.forEach(input, proc);
 	}
 	
+	@Override
+	protected Iterable<Integer> takeWhile(Iterable<Integer> input, Function1<Integer, Boolean> filter) {
+		return IterableExtensions.takeWhile(input, filter);
+	}
+	
+	@Override
+	protected Iterable<Integer> dropWhile(Iterable<Integer> input, Function1<Integer, Boolean> filter) {
+		return IterableExtensions.dropWhile(input, filter);
+	}
+	
+	@Override
+	protected Integer max(Iterable<Integer> input) {
+		return IterableExtensions.max(input);
+	}
+	
+	@Override
+	protected Integer max(Iterable<Integer> input, Comparator<? super Integer> comparator) {
+		return IterableExtensions.max(input, comparator);
+	}
+	
+	@Override
+	protected Integer maxBy(Iterable<Integer> input, Function1<? super Integer, String> compareBy) {
+		return IterableExtensions.maxBy(input, compareBy);
+	}
+	
+	@Override
+	protected Integer min(Iterable<Integer> input) {
+		return IterableExtensions.min(input);
+	}
+	
+	@Override
+	protected Integer min(Iterable<Integer> input, Comparator<? super Integer> comparator) {
+		return IterableExtensions.min(input, comparator);
+	}
+	
+	@Override
+	protected Integer minBy(Iterable<Integer> input, Function1<? super Integer, String> compareBy) {
+		return IterableExtensions.minBy(input, compareBy);
+	}
+	
 	@Test public void testJoinWithNull() {
 		List<String> list = Lists.newArrayList("a", null, "c");
 		String string = IterableExtensions.join(list, ",");
@@ -142,6 +184,13 @@ public class IterableExtensionsTest extends BaseIterablesIteratorsTest<Iterable<
 		assertEquals("<foo,bar", IterableExtensions.join(list, "<", ",", null, function));
 		assertEquals("<foo", IterableExtensions.join(singletonList, "<", ",", null, function));
 		assertEquals("", IterableExtensions.join(emptylist, "<", ",", null, function));
+	}
+	
+	@Test public void testZip() {
+		Iterator<Pair<String, Integer>> result = IterableExtensions.zip(newArrayList("foo", "bar"), newArrayList(1, 2, 3)).iterator();
+		assertEquals(new Pair<String, Integer>("foo", 1), result.next());
+		assertEquals(new Pair<String, Integer>("bar", 2), result.next());
+		assertFalse(result.hasNext());
 	}
 
 	
