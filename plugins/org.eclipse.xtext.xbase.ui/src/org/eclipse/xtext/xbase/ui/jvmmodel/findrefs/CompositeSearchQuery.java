@@ -51,8 +51,9 @@ public class CompositeSearchQuery extends JavaSearchQuery {
 		for(ISearchQuery child: children) {
 			IStatus status = child.run(progress.newChild(1));
 			multiStatus.add(status);
-			if(progress.isCanceled())
-				multiStatus.add(new Status(IStatus.WARNING, getPluginId(), "Search operation canceled by user"));
+			if(progress.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 		}
 		return multiStatus;
 	}

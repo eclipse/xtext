@@ -231,18 +231,31 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 		try {
 			currentUpdateAcceptor = updateAcceptorProvider.get();
 			transferChangeRedirector(currentUpdateAcceptor);
-			Iterable<URI> dependentElementURIs = dependentElementsCalculator.getDependentElementURIs(targetElement,
-					progress.newChild(1));
+			Iterable<URI> dependentElementURIs = dependentElementsCalculator.getDependentElementURIs(targetElement, progress.newChild(1));
 			Map<URI, URI> original2newElementURIs = renameElementTracker.renameAndTrack(
-					concat(getElementURIs(), dependentElementURIs), newName, resourceSet,
-					renameStrategy, progress.newChild(1));
+					concat(getElementURIs(), dependentElementURIs),
+					newName,
+					resourceSet,
+					renameStrategy,
+					progress.newChild(1));
 			renameStrategy.createDeclarationUpdates(newName, resourceSet, currentUpdateAcceptor);
 
-			renameArguments = new ElementRenameArguments(targetElementURI, newName, renameStrategy,
+			renameArguments = new ElementRenameArguments(
+					targetElementURI,
+					newName,
+					renameStrategy,
 					original2newElementURIs);
-			referenceUpdaterDispatcher.createReferenceUpdates(renameArguments, resourceSet, currentUpdateAcceptor,
+			if (progress.isCanceled()) {
+				throw new OperationCanceledException();
+			}
+			referenceUpdaterDispatcher.createReferenceUpdates(
+					renameArguments,
+					resourceSet,
+					currentUpdateAcceptor,
 					progress.newChild(98));
 			status.merge(currentUpdateAcceptor.getRefactoringStatus());
+		} catch (OperationCanceledException e) {
+			throw e;
 		} catch (Exception exc) {
 			handleException(exc, status);
 		}

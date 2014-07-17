@@ -31,6 +31,7 @@ import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
 import static org.eclipse.xtext.xtype.XtypePackage.Literals.*
 import org.eclipse.emf.ecore.EReference
 import org.eclipse.xtend.core.xtend.AnonymousClass
+import org.eclipse.core.runtime.OperationCanceledException
 
 class XtendReferenceFinder extends DefaultReferenceFinder implements IReferenceFinder {
 	
@@ -51,9 +52,11 @@ class XtendReferenceFinder extends DefaultReferenceFinder implements IReferenceF
 		// don't check local resources
 		if (targetURIs.map[trimFragment].exists[it == resourceDescription.URI])
 			return;
-			
 		val names = newHashSet()
 		for (uri : targetURIs) {
+			if (monitor.canceled) {
+				throw new OperationCanceledException
+			}
 			localResourceAccess.readOnly(uri) [
 				val obj = EcoreUtil2.getContainerOfType(it.getEObject(uri, true), JvmType)
 				if (obj != null) {

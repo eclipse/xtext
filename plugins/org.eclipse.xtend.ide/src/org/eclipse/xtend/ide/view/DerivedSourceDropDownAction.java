@@ -51,7 +51,7 @@ public class DerivedSourceDropDownAction extends Action implements IMenuCreator 
 		super();
 		this.derivedSourceView = derivedSourceView;
 		setToolTipText("Show all derived sources");
-		setImageDescriptor(derivedSourceView.xtendImages.forFilter());
+		setImageDescriptor(derivedSourceView.getXtendImages().forFilter());
 		setMenuCreator(this);
 	}
 

@@ -148,6 +148,9 @@ public class ExtractVariableRefactoring extends Refactoring {
 			ITextRegion successorRegion = locationInFileProvider.getFullTextRegion(successor);
 			
 			Section callerSection = rewriter.newSection(expressionRegion.getOffset(), expressionRegion.getLength());
+			if (pm.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 			if (isNeedsNewBlock) {
 				IRegion lineInformation = document.getLineInformationOfOffset(successorRegion.getOffset());
 				int previousLineEnd = lineInformation.getOffset() - rewriter.getLineSeparator().length();
@@ -163,6 +166,9 @@ public class ExtractVariableRefactoring extends Refactoring {
 				appendDeclaration(declarationSection, expressionRegion);
 				declarationSection.newLine();
 			}
+			if (pm.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 			String callerText = variableName;
 			// handle closure shortcut syntaxes
 			if(expression.eContainer() instanceof XMemberFeatureCall) {
@@ -173,6 +179,8 @@ public class ExtractVariableRefactoring extends Refactoring {
 				}
 			}
 			callerSection.append(callerText);
+		} catch (OperationCanceledException e) {
+			throw e;
 		} catch (Exception exc) {
 			handleException(exc, status);
 		}

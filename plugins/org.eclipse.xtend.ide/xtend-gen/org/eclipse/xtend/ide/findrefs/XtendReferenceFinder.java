@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -84,41 +85,47 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
     }
     final HashSet<QualifiedName> names = CollectionLiterals.<QualifiedName>newHashSet();
     for (final URI uri : targetURIs) {
-      final IUnitOfWork<Object, ResourceSet> _function_2 = new IUnitOfWork<Object, ResourceSet>() {
-        public Object exec(final ResourceSet it) throws Exception {
-          Object _xblockexpression = null;
-          {
-            EObject _eObject = it.getEObject(uri, true);
-            final JvmType obj = EcoreUtil2.<JvmType>getContainerOfType(_eObject, JvmType.class);
-            boolean _notEquals = (!Objects.equal(obj, null));
-            if (_notEquals) {
-              String _identifier = obj.getIdentifier();
-              QualifiedName _qualifiedName = XtendReferenceFinder.this.nameConverter.toQualifiedName(_identifier);
-              QualifiedName _lowerCase = _qualifiedName.toLowerCase();
-              names.add(_lowerCase);
-              String _qualifiedName_1 = obj.getQualifiedName('.');
-              QualifiedName _qualifiedName_2 = XtendReferenceFinder.this.nameConverter.toQualifiedName(_qualifiedName_1);
-              QualifiedName _lowerCase_1 = _qualifiedName_2.toLowerCase();
-              names.add(_lowerCase_1);
-            }
-            _xblockexpression = null;
-          }
-          return _xblockexpression;
+      {
+        boolean _isCanceled = monitor.isCanceled();
+        if (_isCanceled) {
+          throw new OperationCanceledException();
         }
-      };
-      localResourceAccess.<Object>readOnly(uri, _function_2);
+        final IUnitOfWork<Object, ResourceSet> _function_2 = new IUnitOfWork<Object, ResourceSet>() {
+          public Object exec(final ResourceSet it) throws Exception {
+            Object _xblockexpression = null;
+            {
+              EObject _eObject = it.getEObject(uri, true);
+              final JvmType obj = EcoreUtil2.<JvmType>getContainerOfType(_eObject, JvmType.class);
+              boolean _notEquals = (!Objects.equal(obj, null));
+              if (_notEquals) {
+                String _identifier = obj.getIdentifier();
+                QualifiedName _qualifiedName = XtendReferenceFinder.this.nameConverter.toQualifiedName(_identifier);
+                QualifiedName _lowerCase = _qualifiedName.toLowerCase();
+                names.add(_lowerCase);
+                String _qualifiedName_1 = obj.getQualifiedName('.');
+                QualifiedName _qualifiedName_2 = XtendReferenceFinder.this.nameConverter.toQualifiedName(_qualifiedName_1);
+                QualifiedName _lowerCase_1 = _qualifiedName_2.toLowerCase();
+                names.add(_lowerCase_1);
+              }
+              _xblockexpression = null;
+            }
+            return _xblockexpression;
+          }
+        };
+        localResourceAccess.<Object>readOnly(uri, _function_2);
+      }
     }
     Iterable<QualifiedName> _importedNames = resourceDescription.getImportedNames();
     final Set<QualifiedName> importedNames = IterableExtensions.<QualifiedName>toSet(_importedNames);
-    final Function1<QualifiedName, Boolean> _function_3 = new Function1<QualifiedName, Boolean>() {
+    final Function1<QualifiedName, Boolean> _function_2 = new Function1<QualifiedName, Boolean>() {
       public Boolean apply(final QualifiedName it) {
         return Boolean.valueOf(importedNames.contains(it));
       }
     };
-    boolean _exists_1 = IterableExtensions.<QualifiedName>exists(names, _function_3);
+    boolean _exists_1 = IterableExtensions.<QualifiedName>exists(names, _function_2);
     if (_exists_1) {
       URI _uRI = resourceDescription.getURI();
-      final IUnitOfWork<Object, ResourceSet> _function_4 = new IUnitOfWork<Object, ResourceSet>() {
+      final IUnitOfWork<Object, ResourceSet> _function_3 = new IUnitOfWork<Object, ResourceSet>() {
         public Object exec(final ResourceSet resourceSet) throws Exception {
           URI _uRI = resourceDescription.getURI();
           Resource _resource = resourceSet.getResource(_uRI, true);
@@ -131,7 +138,7 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
           return null;
         }
       };
-      localResourceAccess.<Object>readOnly(_uRI, _function_4);
+      localResourceAccess.<Object>readOnly(_uRI, _function_3);
     }
   }
   

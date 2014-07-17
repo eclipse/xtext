@@ -15,7 +15,6 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
-import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.tasks.ITaskFinder;
 import org.eclipse.xtext.tasks.Task;
@@ -42,16 +41,14 @@ public class TaskMarkerContributor implements IMarkerContributor {
   private TaskMarkerTypeProvider typeProvider;
   
   public void updateMarkers(final IFile file, final Resource resource, final IProgressMonitor monitor) {
-    final SubMonitor subMonitor = SubMonitor.convert(monitor, 1);
     try {
       final List<Task> tasks = this.taskFinder.findTasks(resource);
-      boolean _isCanceled = subMonitor.isCanceled();
+      boolean _isCanceled = monitor.isCanceled();
       if (_isCanceled) {
         throw new OperationCanceledException();
       }
-      subMonitor.worked(1);
-      this.deleteMarkers(file, subMonitor);
-      this.createTaskMarkers(file, tasks, subMonitor);
+      this.deleteMarkers(file, monitor);
+      this.createTaskMarkers(file, tasks, monitor);
     } catch (final Throwable _t) {
       if (_t instanceof CoreException) {
         final CoreException e = (CoreException)_t;

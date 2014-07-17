@@ -52,6 +52,8 @@ public class OutlineRefreshJob extends Job {
 			IOutlineNode rootNode = refreshOutlineModel(monitor, formerState, newState);
 			if (!monitor.isCanceled())
 				outlinePage.refreshViewer(rootNode, newState.getExpandedNodes(), newState.getSelectedNodes());
+			else
+				return Status.CANCEL_STATUS;
 			return Status.OK_STATUS;
 		} catch (OperationCanceledException oce) {
 			return Status.CANCEL_STATUS;
@@ -65,12 +67,12 @@ public class OutlineRefreshJob extends Job {
 			final OutlineTreeState newState) {
 		final IOutlineTreeProvider treeProvider = outlinePage.getTreeProvider();
 		if(treeProvider instanceof BackgroundOutlineTreeProvider) {
-			return iternalRefreshOutlineModel(formerState, newState, treeProvider);
+			return internalRefreshOutlineModel(formerState, newState, treeProvider);
 		} else {
 			return new DisplayRunnableWithResult<IOutlineNode>() {
 				@Override
 				protected IOutlineNode run() throws Exception {
-					return iternalRefreshOutlineModel(formerState, newState, treeProvider);
+					return internalRefreshOutlineModel(formerState, newState, treeProvider);
 				}
 			}.syncExec();
 		}
@@ -79,7 +81,7 @@ public class OutlineRefreshJob extends Job {
 	/**
 	 * @since 2.4
 	 */
-	protected IOutlineNode iternalRefreshOutlineModel(final OutlineTreeState formerState,
+	protected IOutlineNode internalRefreshOutlineModel(final OutlineTreeState formerState,
 			final OutlineTreeState newState, final IOutlineTreeProvider treeProvider) {
 		IOutlineNode rootNode = outlinePage.getXtextDocument().readOnly(new CancelableUnitOfWork<IOutlineNode, XtextResource>() {
 			@Override

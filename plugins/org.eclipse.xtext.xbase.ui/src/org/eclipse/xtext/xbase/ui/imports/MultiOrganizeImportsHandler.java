@@ -103,7 +103,7 @@ public class MultiOrganizeImportsHandler extends AbstractHandler {
 			} catch (InvocationTargetException e) {
 				handleException(e);
 			} catch (InterruptedException e) {
-				handleException(e);
+				// user cancelled, ok
 			}
 		}
 		return event.getApplicationContext();

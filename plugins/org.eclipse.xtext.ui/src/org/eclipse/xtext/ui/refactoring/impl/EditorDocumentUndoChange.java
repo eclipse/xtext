@@ -91,21 +91,18 @@ public class EditorDocumentUndoChange extends Change {
 		return new DisplayRunnableWithResult<Change>() {
 			@Override
 			protected Change run() throws Exception {
-				pm.beginTask("", 3); //$NON-NLS-1$
 				IDocument document= null;
-
 				try {
-					document= acquireDocument(new SubProgressMonitor(pm, 1));
+					document= acquireDocument(pm);
 					UndoEdit undo= performEdits(document);
-					commit(document, new SubProgressMonitor(pm, 1));
+					commit(document, pm);
 					return createUndoChange(undo);
 				} catch (BadLocationException e) {
 					throw Changes.asCoreException(e);
 				} catch (MalformedTreeException e) {
 					throw Changes.asCoreException(e);
 				} finally {
-					releaseDocument(document, new SubProgressMonitor(pm, 1));
-					pm.done();
+					releaseDocument(document, pm);
 				}
 			}
 		}.syncExec();
