@@ -168,10 +168,14 @@ public class ToBeBuiltComputer {
 	}
 
 	protected ToBeBuilt doRemoveProject(IProject project, IProgressMonitor monitor) {
-		SubMonitor progress = SubMonitor.convert(monitor, Iterables.size(builderState.getAllResourceDescriptions()));
+		SubMonitor progress = SubMonitor.convert(monitor, Iterables.size(builderState.getAllResourceDescriptions()) / 50);
 		ToBeBuilt result = new ToBeBuilt();
 		Iterable<IResourceDescription> allResourceDescriptions = builderState.getAllResourceDescriptions();
+		int i = 0;
 		for (IResourceDescription description : allResourceDescriptions) {
+			if (monitor.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 			Iterable<Pair<IStorage, IProject>> storages = mapper.getStorages(description.getURI());
 			boolean onlyOnThisProject = true;
 			Iterator<Pair<IStorage, IProject>> iterator = storages.iterator();
@@ -182,7 +186,9 @@ public class ToBeBuiltComputer {
 			}
 			if (onlyOnThisProject)
 				result.getToBeDeleted().add(description.getURI());
-			progress.worked(1);
+			i++;
+			if (i % 50 == 0)
+				progress.worked(1);
 		}
 		return result;
 	}

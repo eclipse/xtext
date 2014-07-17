@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -79,6 +80,9 @@ public class DefaultReferenceFinder implements IReferenceFinder, IReferenceFinde
 			Set<URI> targetURIsAsSet = newLinkedHashSet(targetURIs);
 			subMonitor.setWorkRemaining(targetURIsAsSet.size());
 			for (URI sourceResourceURI : sourceResourceURIs) {
+				if (subMonitor.isCanceled()) {
+					throw new OperationCanceledException();
+				}
 				IResourceDescription resourceDescription = indexData.getResourceDescription(sourceResourceURI);
 				if (resourceDescription != null)
 					findReferences(targetURIsAsSet, resourceDescription, referenceAcceptor,
@@ -137,10 +141,12 @@ public class DefaultReferenceFinder implements IReferenceFinder, IReferenceFinde
 		for (URI targetURI : localTargets) {
 			resource2target.put(targetURI.trimFragment(), targetURI);
 		}
-		final SubMonitor subMonitor = SubMonitor.convert(monitor, resource2target.keySet().size());
+		int keys = resource2target.keySet().size();
+		final SubMonitor subMonitor = SubMonitor.convert(monitor, keys / 10);
+		int i = 0;
 		for (final URI resourceURI : resource2target.keySet()) {
 			if (subMonitor.isCanceled())
-				return;
+				throw new OperationCanceledException();
 			localResourceAccess.readOnly(resourceURI, new IUnitOfWork.Void<ResourceSet>() {
 				@Override
 				public void process(ResourceSet resourceSet) throws Exception {
@@ -148,7 +154,9 @@ public class DefaultReferenceFinder implements IReferenceFinder, IReferenceFinde
 					findLocalReferencesInResource(resource2target.get(resourceURI), resource, acceptor);
 				}
 			});
-			subMonitor.worked(1);
+			i++;
+			if (i % 10 == 0)
+				subMonitor.worked(1);
 		}
 	}
 

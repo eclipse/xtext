@@ -24,6 +24,7 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.jdt.internal.ui.JavaPlugin;
@@ -406,6 +407,8 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 		public IStatus runInUIThread(final IProgressMonitor monitor) {
 			computeAndSetInput(new DefaultWorkbenchPartSelection(getSite().getPage().getActivePart(), getSite()
 					.getPage().getSelection()), true);
+			if (monitor.isCanceled())
+				return Status.CANCEL_STATUS;
 			return Status.OK_STATUS;
 		}
 

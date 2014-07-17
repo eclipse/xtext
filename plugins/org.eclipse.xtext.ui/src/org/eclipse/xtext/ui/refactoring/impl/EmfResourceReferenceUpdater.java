@@ -42,11 +42,9 @@ public class EmfResourceReferenceUpdater extends AbstractReferenceUpdater {
 	protected void createReferenceUpdates(ElementRenameArguments elementRenameArguments,
 			Multimap<URI, IReferenceDescription> resource2references, ResourceSet resourceSet,
 			IRefactoringUpdateAcceptor updateAcceptor, IProgressMonitor monitor) {
-		SubMonitor progress = SubMonitor.convert(monitor, "Updating EMF References", resource2references.keySet()
-				.size());
 		for (URI referringResourceURI : resource2references.keySet()) {
 			try {
-				if (progress.isCanceled())
+				if (monitor.isCanceled())
 					break;
 				Resource referringResource = resourceSet.getResource(referringResourceURI, false);
 				EObject refactoredElement = resourceSet.getEObject(elementRenameArguments.getNewElementURI(elementRenameArguments.getTargetElementURI()), true);
@@ -58,7 +56,6 @@ public class EmfResourceReferenceUpdater extends AbstractReferenceUpdater {
 					}
 				}
 				changeUtil.addSaveAsUpdate(referringResource, updateAcceptor);
-				progress.worked(1);
 			} catch (Exception exc) {
 				throw new WrappedException(exc);
 			}

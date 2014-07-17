@@ -13,6 +13,7 @@ import org.eclipse.xtext.ui.refactoring.ui.DefaultLinkedPositionGroupCalculator;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 
 import com.google.inject.ImplementedBy;
+import com.google.inject.Provider;
 
 /**
  * Calculates the positions that should be synchronously edited by the linked editing mode. 
@@ -23,7 +24,7 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(DefaultLinkedPositionGroupCalculator.class)
 public interface ILinkedPositionGroupCalculator {
 
-	public LinkedPositionGroup getLinkedPositionGroup(IRenameElementContext renameElementContext,
+	Provider<LinkedPositionGroup> getLinkedPositionGroup(IRenameElementContext renameElementContext,
 			IProgressMonitor monitor);
 
 }

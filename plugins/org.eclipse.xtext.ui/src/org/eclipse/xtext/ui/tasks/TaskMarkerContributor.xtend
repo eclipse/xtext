@@ -39,15 +39,13 @@ class TaskMarkerContributor implements IMarkerContributor {
 	TaskMarkerTypeProvider typeProvider
 
 	override updateMarkers(IFile file, Resource resource, IProgressMonitor monitor) {
-		val subMonitor = SubMonitor.convert(monitor, 1);
 		try {
 			val tasks = taskFinder.findTasks(resource);
-			if (subMonitor.isCanceled()) {
+			if (monitor.isCanceled()) {
 				throw new OperationCanceledException();
 			}
-			subMonitor.worked(1);
-			deleteMarkers(file, subMonitor);
-			createTaskMarkers(file, tasks, subMonitor);
+			deleteMarkers(file, monitor);
+			createTaskMarkers(file, tasks, monitor);
 		} catch (CoreException e) {
 			log.error(e.getMessage(), e);
 		}

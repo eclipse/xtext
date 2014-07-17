@@ -20,6 +20,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -91,10 +92,11 @@ public class DefaultLinkedPositionGroupCalculator implements ILinkedPositionGrou
 	@Inject
 	private Provider<LocalResourceRefactoringUpdateAcceptor> updateAcceptorProvider;
 
-	public LinkedPositionGroup getLinkedPositionGroup(IRenameElementContext renameElementContext,
+	public Provider<LinkedPositionGroup> getLinkedPositionGroup(
+			IRenameElementContext renameElementContext,
 			IProgressMonitor monitor) {
-		SubMonitor progress = SubMonitor.convert(monitor, 100);
-		XtextEditor editor = (XtextEditor) renameElementContext.getTriggeringEditor();
+		final SubMonitor progress = SubMonitor.convert(monitor, 100);
+		final XtextEditor editor = (XtextEditor) renameElementContext.getTriggeringEditor();
 		IProject project = projectUtil.getProject(renameElementContext.getContextResourceURI());
 		if (project == null)
 			throw new IllegalStateException("Could not determine project for context resource "
@@ -103,6 +105,9 @@ public class DefaultLinkedPositionGroupCalculator implements ILinkedPositionGrou
 		EObject targetElement = resourceSet.getEObject(renameElementContext.getTargetElementURI(), true);
 		if (targetElement == null)
 			throw new IllegalStateException("Target element could not be loaded");
+		if (monitor.isCanceled()) {
+			throw new OperationCanceledException();
+		}
 		IRenameStrategy.Provider strategyProvider = globalServiceProvider.findService(targetElement,
 				IRenameStrategy.Provider.class);
 		IRenameStrategy renameStrategy = null;
@@ -119,12 +124,21 @@ public class DefaultLinkedPositionGroupCalculator implements ILinkedPositionGrou
 		IDependentElementsCalculator dependentElementsCalculator =  resourceServiceProvider.get(IDependentElementsCalculator.class);
 		Iterable<URI> dependentElementURIs = dependentElementsCalculator.getDependentElementURIs(targetElement,
 				progress.newChild(10));
+		if (monitor.isCanceled()) {
+			throw new OperationCanceledException();
+		}
 		LocalResourceRefactoringUpdateAcceptor updateAcceptor = updateAcceptorProvider.get();
 		updateAcceptor.setLocalResourceURI(renameElementContext.getContextResourceURI());
 		renameStrategy.createDeclarationUpdates(newName, resourceSet, updateAcceptor);
+		if (monitor.isCanceled()) {
+			throw new OperationCanceledException();
+		}
 		Map<URI, URI> original2newEObjectURI = renamedElementTracker.renameAndTrack(
 				concat(Collections.singleton(renameElementContext.getTargetElementURI()), dependentElementURIs),
 				newName, resourceSet, renameStrategy, progress.newChild(10));
+		if (monitor.isCanceled()) {
+			throw new OperationCanceledException();
+		}
 		ElementRenameArguments elementRenameArguments = new ElementRenameArguments(
 				renameElementContext.getTargetElementURI(), newName, renameStrategy, original2newEObjectURI);
 		final List<IReferenceDescription> referenceDescriptions = newArrayList();
@@ -133,15 +147,33 @@ public class DefaultLinkedPositionGroupCalculator implements ILinkedPositionGrou
 				referenceDescriptions.add(referenceDescription);
 			}
 		};
-		referenceFinder.findReferences(elementRenameArguments.getRenamedElementURIs(),
-				singleton(renameElementContext.getContextResourceURI()), new SimpleLocalResourceAccess(resourceSet),
-				referenceAcceptor, progress.newChild(60));
+		if (monitor.isCanceled()) {
+			throw new OperationCanceledException();
+		}
+		referenceFinder.findReferences(
+				elementRenameArguments.getRenamedElementURIs(),
+				singleton(renameElementContext.getContextResourceURI()),
+				new SimpleLocalResourceAccess(resourceSet),
+				referenceAcceptor, progress.newChild(10));
+		if (monitor.isCanceled()) {
+			throw new OperationCanceledException();
+		}
 		referenceUpdater.createReferenceUpdates(elementRenameArguments, referenceDescriptions, updateAcceptor,
-				progress.newChild(10));
-		List<ReplaceEdit> textEdits = updateAcceptor.getTextEdits();
-		LinkedPositionGroup linkedGroup = createLinkedGroupFromReplaceEdits(textEdits, editor,
-				renameStrategy.getOriginalName(), progress.newChild(10));
-		return linkedGroup;
+				progress.newChild(60));
+		final List<ReplaceEdit> textEdits = updateAcceptor.getTextEdits();
+		if (monitor.isCanceled()) {
+			throw new OperationCanceledException();
+		}
+		final IRenameStrategy renameStrategy2 = renameStrategy;
+		return new Provider<LinkedPositionGroup>() {
+
+			public LinkedPositionGroup get() {
+				LinkedPositionGroup linkedGroup = createLinkedGroupFromReplaceEdits(textEdits, editor,
+						renameStrategy2.getOriginalName(), progress.newChild(10));
+				return linkedGroup;
+			}
+		};
+		
 	}
 
 	protected LinkedPositionGroup createLinkedGroupFromReplaceEdits(List<ReplaceEdit> edits, XtextEditor xtextEditor,

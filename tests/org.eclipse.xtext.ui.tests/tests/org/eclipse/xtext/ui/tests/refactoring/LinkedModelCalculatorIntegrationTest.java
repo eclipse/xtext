@@ -85,7 +85,7 @@ public class LinkedModelCalculatorIntegrationTest extends AbstractEditorTest {
 		IRenameElementContext renameElementContext = new IRenameElementContext.Impl(uri, a.eClass(), editor, editor
 				.getSelectionProvider().getSelection(), uriToFile1);
 		LinkedPositionGroup linkedPositionGroup = linkedModelCalculator.getLinkedPositionGroup(renameElementContext,
-				null);
+				null).get();
 		LinkedPosition[] positions = linkedPositionGroup.getPositions();
 		assertEquals(3, positions.length);
 		int[] offsets = { 0, 10, 24 };
@@ -114,7 +114,7 @@ public class LinkedModelCalculatorIntegrationTest extends AbstractEditorTest {
 		IRenameElementContext renameElementContext = new IRenameElementContext.Impl(uri, a.eClass(), editor, editor
 				.getSelectionProvider().getSelection(), uriToFile2);
 		LinkedPositionGroup linkedPositionGroup = linkedModelCalculator.getLinkedPositionGroup(renameElementContext,
-				null);
+				null).get();
 		LinkedPosition[] positions = linkedPositionGroup.getPositions();
 		assertEquals(2, positions.length);
 

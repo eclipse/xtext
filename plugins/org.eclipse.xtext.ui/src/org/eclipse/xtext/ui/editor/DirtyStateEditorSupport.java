@@ -20,6 +20,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.core.runtime.jobs.Job;
@@ -120,12 +121,15 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 		protected IStatus run(final IProgressMonitor monitor) {
 			try {
 				IDirtyStateEditorSupportClient myClient = currentClient;
-				if (myClient == null || monitor.isCanceled()) {
+				if (myClient == null) {
 					return Status.OK_STATUS;
 				}
 				final IXtextDocument document = myClient.getDocument();
 				if (document == null) {
 					return Status.OK_STATUS;
+				}
+				if (monitor.isCanceled()) {
+					return Status.CANCEL_STATUS;
 				}
 				int coarseGrainedChangesSeen = coarseGrainedChanges.get();
 				final boolean[] isReparseRequired = new boolean[] { coarseGrainedChangesSeen > 0 };
@@ -149,7 +153,7 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 					
 						});
 				if (monitor.isCanceled()) {
-					return Status.OK_STATUS;
+					return Status.CANCEL_STATUS;
 				}
 				unloadAffectedResourcesAndReparseDocument(document, affectedResources, isReparseRequired[0]);
 				for (int i = 0; i < event.getSecond(); i++) {
@@ -157,6 +161,8 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 				}
 				coarseGrainedChanges.addAndGet(-coarseGrainedChangesSeen);
 				return Status.OK_STATUS;
+			} catch (OperationCanceledException e) {
+				throw e;
 			} catch (Throwable e) {
 				LOG.error("Error updating dirty state editor", e);
 				return Status.OK_STATUS;

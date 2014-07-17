@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -32,20 +33,25 @@ public class DefaultDependentElementsCalculator implements IDependentElementsCal
 	private IQualifiedNameProvider nameProvider;
 
 	public List<URI> getDependentElementURIs(EObject baseElement, IProgressMonitor monitor) {
-		SubMonitor progress = SubMonitor.convert(monitor, 10);
+		SubMonitor progress = SubMonitor.convert(monitor, 2);
 		List<URI> elementURIs = Lists.newArrayList();
-		for (Iterator<EObject> i = EcoreUtil.getAllProperContents(baseElement, false); i.hasNext();) {
-			if(progress.isCanceled())
-				break;
-			EObject childElement = i.next();
+		int counter = 0;
+		for (Iterator<EObject> iterator = EcoreUtil.getAllProperContents(baseElement, false); iterator.hasNext();) {
+			if(progress.isCanceled()) {
+				throw new OperationCanceledException();
+			}
+			EObject childElement = iterator.next();
 			if (nameProvider.getFullyQualifiedName(childElement)!=null) {
 				URI childURI = EcoreUtil.getURI(childElement);
 				if (childURI != null) {
 					elementURIs.add(childURI);
 				}
 			}
-			progress.worked(1);
-			progress.setWorkRemaining(10);
+			counter++;
+			if (counter % 100 == 0) {
+				progress.worked(1);
+				progress.setWorkRemaining(2);
+			}
 		}
 		return elementURIs;
 	}

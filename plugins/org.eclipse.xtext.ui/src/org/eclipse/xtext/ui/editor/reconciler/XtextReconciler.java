@@ -327,6 +327,9 @@ public class XtextReconciler extends Job implements IReconciler {
 				}
 			});
 		}
+		if (monitor.isCanceled()) {
+			return Status.CANCEL_STATUS;
+		}
 		if (log.isDebugEnabled())
 			log.debug("Reconciliation finished. Time required: " + (System.currentTimeMillis() - start)); //$NON-NLS-1$
 		return Status.OK_STATUS;
