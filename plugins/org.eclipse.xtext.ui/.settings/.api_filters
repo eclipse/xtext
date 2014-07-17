@@ -48,6 +48,26 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/model/IXtextDocumentContentObserver.java" type="org.eclipse.xtext.ui.editor.model.IXtextDocumentContentObserver">
+        <filter comment="Allow cancelable read transactions" id="403804204">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.model.IXtextDocumentContentObserver"/>
+                <message_argument value="hasPendingUpdates()"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow cancelable read transactions" id="403804204">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.model.IXtextDocumentContentObserver"/>
+                <message_argument value="performNecessaryUpdates(IXtextDocumentContentObserver.Processor)"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow cancelable read transactions" id="405901410">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.model.IXtextDocumentContentObserver"/>
+                <message_argument value="performNecessaryUpdates(IXtextDocumentContentObserver.Processor)"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtext/ui/editor/model/JarFileMarkerAnnotationModel.java" type="org.eclipse.xtext.ui.editor.model.JarFileMarkerAnnotationModel">
         <filter comment="Intentional extends clause" id="571473929">
             <message_arguments>
@@ -56,11 +76,53 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/model/XtextDocument.java" type="org.eclipse.xtext.ui.editor.model.XtextDocument">
+        <filter comment="Allow cancelable read transactions" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.model.XtextDocument"/>
+                <message_argument value="updateContentBeforeRead()"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/model/XtextDocument.java" type="org.eclipse.xtext.ui.editor.model.XtextDocument$XtextDocumentLocker">
+        <filter comment="Allow cancelable read transactions" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.model.XtextDocument.XtextDocumentLocker"/>
+                <message_argument value="afterModify(XtextResource, Object, IUnitOfWork&lt;?,XtextResource&gt;)"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow cancelable read transactions" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.model.XtextDocument.XtextDocumentLocker"/>
+                <message_argument value="afterReadOnly(XtextResource, Object, IUnitOfWork&lt;?,XtextResource&gt;)"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow cancelable read transactions" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.model.XtextDocument.XtextDocumentLocker"/>
+                <message_argument value="beforeModify(XtextResource, IUnitOfWork&lt;?,XtextResource&gt;)"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow cancelable read transactions" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.model.XtextDocument.XtextDocumentLocker"/>
+                <message_argument value="beforeReadOnly(XtextResource, IUnitOfWork&lt;?,XtextResource&gt;)"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtext/ui/editor/quickfix/XtextResourceMarkerAnnotationModel.java" type="org.eclipse.xtext.ui.editor.quickfix.XtextResourceMarkerAnnotationModel">
         <filter comment="Intentional extends clause" id="571473929">
             <message_arguments>
                 <message_argument value="ResourceMarkerAnnotationModel"/>
                 <message_argument value="XtextResourceMarkerAnnotationModel"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/reconciler/XtextReconciler.java" type="org.eclipse.xtext.ui.editor.reconciler.XtextReconciler$DocumentListener">
+        <filter comment="Allow cancelable read transactions" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.reconciler.XtextReconciler.DocumentListener"/>
+                <message_argument value="performNecessaryUpdates(IXtextDocumentContentObserver.Processor)"/>
             </message_arguments>
         </filter>
     </resource>

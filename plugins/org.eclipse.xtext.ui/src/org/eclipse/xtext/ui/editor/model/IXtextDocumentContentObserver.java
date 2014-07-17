@@ -32,7 +32,13 @@ public interface IXtextDocumentContentObserver extends IDocumentListener {
 	 * Implementers get the chance to do any work using the passed {@link Processor}
 	 * 
 	 * @param processor
+	 * @since 2.7
 	 */
-	void performNecessaryUpdates(Processor processor);
+	boolean performNecessaryUpdates(Processor processor);
+	
+	/**
+	 * @since 2.7
+	 */
+	boolean hasPendingUpdates();
 	
 }

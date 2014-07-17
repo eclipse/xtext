@@ -34,8 +34,9 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
 		});
 		final XtextDocument document = new XtextDocument(tokenSource, null) {
 			@Override
-			protected <T> void updateContentBeforeRead() {
+			protected <T> boolean updateContentBeforeRead() {
 				s.add("x");
+				return true;
 			}
 		};
 		document.setInput(new XtextResource());

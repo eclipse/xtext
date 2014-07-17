@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.editor.outline.impl;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -24,6 +25,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.TextRegion;
@@ -38,7 +40,7 @@ import com.google.inject.Inject;
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider, IOutlineTreeProvider {
+public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider, IOutlineTreeProvider, IOutlineTreeProvider.Cancelable {
 
 	@Inject
 	protected ILabelProvider labelProvider;
@@ -46,6 +48,8 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 	@Inject
 	protected ILocationInFileProvider locationInFileProvider;
 
+	private CancelIndicator cancelIndicator = CancelIndicator.NullImpl;
+	
 	public DefaultOutlineTreeProvider() {
 	}
 
@@ -78,8 +82,29 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 		documentNode.setTextRegion(new TextRegion(0, document.getLength()));
 		return documentNode;
 	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public IOutlineNode createRoot(IXtextDocument document, CancelIndicator cancelIndicator) {
+		try {
+			this.cancelIndicator = cancelIndicator;
+			return createRoot(document);
+		} finally {
+			this.cancelIndicator = CancelIndicator.NullImpl;
+		}
+	}
 
+	/**
+	 * @since 2.7
+	 */
+	protected void checkCanceled() {
+		if(cancelIndicator.isCanceled())
+			throw new OperationCanceledException();
+	}
+	
 	public void createChildren(IOutlineNode parent, EObject modelElement) {
+		checkCanceled();
 		if (modelElement != null && parent.hasChildren())
 			createChildrenDispatcher.invoke(parent, modelElement);
 	}
@@ -108,6 +133,7 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 	}
 
 	protected void createNode(IOutlineNode parent, EObject modelElement) {
+		checkCanceled();
 		createNodeDispatcher.invoke(parent, modelElement);
 	}
 
