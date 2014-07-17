@@ -11,6 +11,7 @@
 	<packaging>pom</packaging>
 	<version>2.7.0-SNAPSHOT</version>
 	<modules>
+		<module>../../plugins/org.eclipse.xtext.util</module>
 		<module>../../plugins/org.eclipse.xtext.xbase.lib</module>
 		<module>../../plugins/org.eclipse.xtend.lib.macro</module>
 		<module>../../plugins/org.eclipse.xtend.lib</module>
@@ -226,7 +227,7 @@
 			</pluginRepositories>
 		</profile>
 		<profile>
-			<id>mirror</id>
+			<id>skip-mirror</id>
 			<activation>
 				<property>
 					<name>skipMirroring</name>

@@ -31,7 +31,7 @@
 						<iu>
 							<id>org.eclipse.jdt.core</id>
 						</iu>
-						
+
 						<!-- Sources -->
 						<iu>
 							<id>org.eclipse.jdt.core.source</id>
@@ -42,6 +42,14 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>prepare</id>
+						<configuration>
+							<skip>false</skip>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -49,4 +57,37 @@
 			</plugin>
 		</plugins>
 	</build>
+	<profiles>
+		<profile>
+			<id>skip-mirror</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-dependency-plugin</artifactId>
+						<version>2.8</version>
+						<executions>
+							<execution>
+								<id>copy-dependencies</id>
+								<goals>
+									<goal>copy-dependencies</goal>
+								</goals>
+								<configuration>
+									<excludeTransitive>true</excludeTransitive>
+									<outputDirectory>${project.build.directory}/dependencies-mvn/plugins</outputDirectory>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+			<dependencies>
+				<dependency>
+					<groupId>org.eclipse.jdt</groupId>
+					<artifactId>org.eclipse.jdt.core</artifactId>
+					<version>3.7.1</version>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
 </project>
