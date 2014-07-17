@@ -149,7 +149,7 @@ class UIResourceChangeRegistry implements IResourceChangeListener, ResourceChang
 	
 	private def forgetBuildState() {
 		val projects = workspace.root.projects.filter[
-			hasNature(XtextProjectHelper.NATURE_ID) && hasNature(JavaCore.NATURE_ID) && accessible
+			accessible && hasNature(XtextProjectHelper.NATURE_ID) && hasNature(JavaCore.NATURE_ID)
 		]
 		scheduler.scheduleBuildIfNecessary(projects, IBuildFlag.FORGET_BUILD_STATE_ONLY)
 	}
