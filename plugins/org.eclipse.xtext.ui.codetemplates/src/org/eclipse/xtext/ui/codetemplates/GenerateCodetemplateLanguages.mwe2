@@ -41,7 +41,7 @@ Workflow {
 			fileExtensions = templates.file.extensions
 
 			// Java API to access grammar elements (required by several other fragments)
-			fragment = grammarAccess.GrammarAccessFragment {}
+			fragment = grammarAccess.GrammarAccessFragment auto-inject {}
 
 			// generates Java API for the generated EPackages 
 			fragment = ecore.EcoreGeneratorFragment auto-inject {
@@ -120,7 +120,7 @@ Workflow {
 			fileExtensions = singleTemplate.file.extensions
 
 			// Java API to access grammar elements (required by several other fragments)
-			fragment = grammarAccess.GrammarAccessFragment {}
+			fragment = grammarAccess.GrammarAccessFragment auto-inject {}
 
 			// the serialization component
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
