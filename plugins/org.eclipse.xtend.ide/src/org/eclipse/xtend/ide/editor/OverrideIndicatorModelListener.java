@@ -19,6 +19,7 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.core.runtime.jobs.Job;
@@ -41,7 +42,8 @@ import org.eclipse.xtext.ui.editor.SchedulingRuleFactory;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.IXtextModelListener;
-import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
 
@@ -117,30 +119,32 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 		}
 		IXtextDocument xtextDocument = xtextEditor.getDocument();
 		IAnnotationModel annotationModel = xtextEditor.getInternalSourceViewer().getAnnotationModel();
-		Map<Annotation, Position> annotationToPosition = xtextDocument
-				.readOnly(new IUnitOfWork<Map<Annotation, Position>, XtextResource>() {
-
-					public Map<Annotation, Position> exec(XtextResource xtextResource) {
-						if (xtextResource == null)
-							return Collections.emptyMap();
-						return createOverrideIndicatorAnnotationMap(xtextResource);
-					}
-
-				});
-
-		if (monitor.isCanceled())
-			return Status.CANCEL_STATUS;
-		if (annotationModel instanceof IAnnotationModelExtension) {
-			IAnnotationModelExtension annotationModelExtension = (IAnnotationModelExtension) annotationModel;
-			Object lockObject = getLockObject(annotationModel);
-			synchronized (lockObject) {
-				annotationModelExtension.replaceAnnotations(
-						overrideIndicatorAnnotations.toArray(new Annotation[overrideIndicatorAnnotations.size()]),
-						annotationToPosition);
+		try {
+			Map<Annotation, Position> annotationToPosition = xtextDocument
+					.readOnly(new CancelableUnitOfWork<Map<Annotation, Position>, XtextResource>() {
+						@Override
+						public Map<Annotation, Position> exec(XtextResource xtextResource, CancelIndicator cancelIndicator) {
+							if (xtextResource == null)
+								return Collections.emptyMap();
+							return createOverrideIndicatorAnnotationMap(xtextResource, cancelIndicator);
+						}
+			});
+			if (monitor.isCanceled())
+				return Status.CANCEL_STATUS;
+			if (annotationModel instanceof IAnnotationModelExtension) {
+				IAnnotationModelExtension annotationModelExtension = (IAnnotationModelExtension) annotationModel;
+				Object lockObject = getLockObject(annotationModel);
+				synchronized (lockObject) {
+					annotationModelExtension.replaceAnnotations(
+							overrideIndicatorAnnotations.toArray(new Annotation[overrideIndicatorAnnotations.size()]),
+							annotationToPosition);
+				}
+				overrideIndicatorAnnotations = annotationToPosition.keySet();
 			}
-			overrideIndicatorAnnotations = annotationToPosition.keySet();
+			return Status.OK_STATUS;
+		} catch(OperationCanceledException exc) {
+			return Status.CANCEL_STATUS;
 		}
-		return Status.OK_STATUS;
 	}
 
 	private Object getLockObject(IAnnotationModel annotationModel) {
@@ -152,7 +156,7 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 		return annotationModel;
 	}
 
-	protected Map<Annotation, Position> createOverrideIndicatorAnnotationMap(XtextResource xtextResource) {
+	protected Map<Annotation, Position> createOverrideIndicatorAnnotationMap(XtextResource xtextResource, CancelIndicator cancelIndicator) {
 		List<EObject> contents = xtextResource.getContents();
 		if (contents.isEmpty())
 			return Maps.newHashMap();
@@ -163,6 +167,8 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 		XtendFile xtendFile = (XtendFile) eObject;
 		Map<Annotation, Position> annotationToPosition = Maps.newHashMap();
 		for (XtendFunction xtendFunction : getXtendFunctions(xtendFile)) {
+			if(cancelIndicator.isCanceled())
+				throw new OperationCanceledException();
 			if (xtendFunction.isOverride()) {
 				typeResolver.resolveTypes(xtendFunction);
 				INode node = NodeModelUtils.getNode(xtendFunction);
