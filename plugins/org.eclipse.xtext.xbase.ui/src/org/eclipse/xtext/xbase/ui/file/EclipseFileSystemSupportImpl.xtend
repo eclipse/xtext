@@ -22,6 +22,7 @@ import org.eclipse.core.runtime.CoreException
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport
+import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * A FileSystemSupport implementation which maps to the Eclipse Resources API.
@@ -30,7 +31,7 @@ import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport
  */
 class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
 	
-	@Property @Inject IWorkspaceRoot workspaceRoot
+	@Accessors @Inject IWorkspaceRoot workspaceRoot
 	
 	protected def getEclipseFile(Path path) {
 		workspaceRoot.getFile(new org.eclipse.core.runtime.Path(path.toString))
