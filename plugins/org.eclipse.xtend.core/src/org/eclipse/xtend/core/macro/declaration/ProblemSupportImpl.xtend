@@ -101,7 +101,7 @@ class ProblemSupportImpl implements ProblemSupport {
 			AbstractElementImpl<? extends EObject>: {
 				val resource = element.delegate.eResource
 				if (resource == compilationUnit.xtendFile.eResource) {
-					val eobject = compilationUnit.jvmAssociations.getPrimarySourceElement(element.delegate)
+					val eobject = compilationUnit.jvmModelAssociations.getPrimarySourceElement(element.delegate)
 					if (eobject == null) {
 						return resource -> element.delegate
 					}

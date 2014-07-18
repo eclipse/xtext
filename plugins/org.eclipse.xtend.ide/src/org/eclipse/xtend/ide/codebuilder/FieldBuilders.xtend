@@ -14,15 +14,16 @@ import org.eclipse.xtext.xbase.compiler.ISourceAppender
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 
 import static org.eclipse.xtext.common.types.JvmVisibility.*
+import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * @author Jan Koehnlein
  */
 abstract class AbstractFieldBuilder extends AbstractCodeBuilder {
 	
-	@Property String fieldName
-	@Property LightweightTypeReference fieldType
-	@Property boolean staticFlag
+	@Accessors String fieldName
+	@Accessors LightweightTypeReference fieldType
+	@Accessors boolean staticFlag
 	
 	override getImage() {
 		switch visibility {

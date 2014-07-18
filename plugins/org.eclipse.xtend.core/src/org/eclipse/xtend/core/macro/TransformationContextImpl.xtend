@@ -8,20 +8,20 @@
 package org.eclipse.xtend.core.macro
 
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
-import org.eclipse.xtend.lib.Property
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.Delegate
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtend.lib.macro.file.FileLocations
 import org.eclipse.xtend.lib.macro.file.FileSystemSupport
 import org.eclipse.xtend.lib.macro.services.AnnotationReferenceProvider
+import org.eclipse.xtend.lib.macro.services.Associator
 import org.eclipse.xtend.lib.macro.services.ProblemSupport
 import org.eclipse.xtend.lib.macro.services.Tracability
 import org.eclipse.xtend.lib.macro.services.TypeLookup
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider
-import org.eclipse.xtend.lib.macro.services.Associator
 
 class TransformationContextImpl implements TransformationContext {
-	@Property CompilationUnitImpl unit
+	@Accessors CompilationUnitImpl unit
 
 	@Delegate def ProblemSupport getProblemSupport() {
 		unit.problemSupport

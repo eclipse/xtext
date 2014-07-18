@@ -34,7 +34,7 @@ import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendPackage;
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.junit4.util.ParseHelper;
@@ -3132,7 +3132,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 		javaCompiler.addClassPathOfClass(Properties1.class);
 		javaCompiler.addClassPathOfClass(Function.class);
 		javaCompiler.addClassPathOfClass(StringConcatenation.class);
-		javaCompiler.addClassPathOfClass(Property.class);
+		javaCompiler.addClassPathOfClass(Accessors.class);
 	}
 	
 	protected void invokeAndExpect2(Object expectation, String xtendclassBody, String methodToInvoke, Object... args)

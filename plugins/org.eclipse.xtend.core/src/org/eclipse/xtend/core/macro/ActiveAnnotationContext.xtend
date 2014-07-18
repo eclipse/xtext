@@ -35,15 +35,16 @@ import org.eclipse.xtext.xbase.lib.Pair
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
 import org.eclipse.xtend.core.xtend.XtendAnnotationType
 import com.google.common.base.Throwables
+import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * @author Sven Efftinge
  */
-class ActiveAnnotationContext {
+@Accessors class ActiveAnnotationContext {
 	
-	@Property val List<XtendAnnotationTarget> annotatedSourceElements = newArrayList()
-	@Property Object processorInstance
-	@Property CompilationUnitImpl compilationUnit
+	val List<XtendAnnotationTarget> annotatedSourceElements = newArrayList()
+	Object processorInstance
+	CompilationUnitImpl compilationUnit
 	
 	def void handleProcessingError(Resource resource, Throwable t) {
 		if (t instanceof VirtualMachineError)
@@ -109,7 +110,7 @@ class ActiveAnnotationContexts extends AdapterImpl {
 		GENERATION
 	}
 	
-	@Property val Map<JvmAnnotationType, ActiveAnnotationContext> contexts = newLinkedHashMap
+	@Accessors val Map<JvmAnnotationType, ActiveAnnotationContext> contexts = newLinkedHashMap
 	protected CompilationUnitImpl compilationUnit
 	
 	def void before(AnnotationCallback phase) {

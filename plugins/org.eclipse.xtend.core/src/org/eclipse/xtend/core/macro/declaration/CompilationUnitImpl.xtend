@@ -24,6 +24,7 @@ import java.util.concurrent.CancellationException
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
+import org.eclipse.xtend.core.macro.ActiveAnnotationContexts.AnnotationCallback
 import org.eclipse.xtend.core.macro.CompilationContextImpl
 import org.eclipse.xtend.core.macro.ConstantExpressionsInterpreter
 import org.eclipse.xtend.core.xtend.XtendAnnotationType
@@ -38,9 +39,11 @@ import org.eclipse.xtend.core.xtend.XtendInterface
 import org.eclipse.xtend.core.xtend.XtendMember
 import org.eclipse.xtend.core.xtend.XtendParameter
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit
+import org.eclipse.xtend.lib.macro.declaration.Element
 import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration
 import org.eclipse.xtend.lib.macro.declaration.NamedElement
@@ -99,7 +102,9 @@ import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
 import org.eclipse.xtext.documentation.IFileHeaderProvider
 import org.eclipse.xtext.generator.FileSystemAccessQueue
+import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.resource.CompilerPhases
+import org.eclipse.xtext.scoping.IScopeProvider
 import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl
 import org.eclipse.xtext.xbase.XExpression
@@ -121,13 +126,6 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom
-import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtend.lib.annotations.AccessorType
-import org.eclipse.xtend.core.macro.ActiveAnnotationContexts.AnnotationCallback
-import org.eclipse.xtend.lib.macro.services.ProblemSupport
-import org.eclipse.xtend.lib.macro.declaration.Element
-import org.eclipse.xtext.scoping.IScopeProvider
-import org.eclipse.xtext.naming.IQualifiedNameConverter
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -174,86 +172,34 @@ class CompilationUnitImpl implements CompilationUnit {
 	
 	@Inject CompilerPhases compilerPhases;
 
-	@Property XtendFile xtendFile
-	@Accessors(AccessorType.PUBLIC_GETTER) 
-	AnnotationCallback lastPhase = AnnotationCallback.INDEXING 
+	@Accessors(PUBLIC_GETTER) XtendFile xtendFile
+	@Accessors(PUBLIC_GETTER) AnnotationCallback lastPhase = AnnotationCallback.INDEXING 
 	@Inject CommonTypeComputationServices services;
-	@Inject TypeReferences typeReferences
-	@Inject JvmTypesBuilder typesBuilder
-	@Inject IXtendJvmAssociations associations
-	@Inject IJvmModelAssociator jvmModelAssociator
+	@Accessors(PUBLIC_GETTER) @Inject TypeReferences typeReferences
+	@Accessors(PUBLIC_GETTER) @Inject JvmTypesBuilder jvmTypesBuilder
+	@Accessors(PUBLIC_GETTER) @Inject IXtendJvmAssociations jvmModelAssociations
+	@Accessors(PUBLIC_GETTER) @Inject IJvmModelAssociator jvmModelAssociator
 	@Inject ConstantExpressionsInterpreter interpreter
-	@Inject IEObjectDocumentationProvider documentationProvider
-	@Inject IFileHeaderProvider fileHeaderProvider
-	@Inject JvmTypeExtensions typeExtensions
-	@Inject OverrideHelper overrideHelper
-	@Inject ResourceChangeRegistry resourceChangeRegistry
+	@Accessors(PUBLIC_GETTER) @Inject IEObjectDocumentationProvider documentationProvider
+	@Accessors(PUBLIC_GETTER) @Inject IFileHeaderProvider fileHeaderProvider
+	@Accessors(PUBLIC_GETTER) @Inject JvmTypeExtensions typeExtensions
+	@Accessors(PUBLIC_GETTER) @Inject OverrideHelper overrideHelper
+	@Accessors(PUBLIC_GETTER) @Inject ResourceChangeRegistry resourceChangeRegistry
 	@Inject AbstractFileSystemSupport fileSystemSupport
-	@Inject FileLocations fileLocations
-	@Inject ReadAndWriteTracking readAndWriteTracking
-	@Inject IScopeProvider scopeProvider
-	@Inject IQualifiedNameConverter qualifiedNameConverter
+	@Accessors(PUBLIC_GETTER) @Inject FileLocations fileLocations
+	@Accessors(PUBLIC_GETTER) @Inject ReadAndWriteTracking readAndWriteTracking
+	@Accessors(PUBLIC_GETTER) @Inject IScopeProvider scopeProvider
+	@Accessors(PUBLIC_GETTER) @Inject IQualifiedNameConverter qualifiedNameConverter
 	
-	val ProblemSupportImpl problemSupport= new ProblemSupportImpl(this)
-	@Property val TypeReferenceProvider typeReferenceProvider = new TypeReferenceProviderImpl(this)
-	@Property val AnnotationReferenceProvider annotationReferenceProvider = new AnnotationReferenceProviderImpl(this)
-	@Property val TypeLookupImpl typeLookup = new TypeLookupImpl(this)
-	@Property val TracabilityImpl tracability = new TracabilityImpl(this)
-	@Property val AssociatorImpl associator = new AssociatorImpl(this)
+	@Accessors val ProblemSupportImpl problemSupport= new ProblemSupportImpl(this)
+	@Accessors val TypeReferenceProvider typeReferenceProvider = new TypeReferenceProviderImpl(this)
+	@Accessors val AnnotationReferenceProvider annotationReferenceProvider = new AnnotationReferenceProviderImpl(this)
+	@Accessors val TypeLookupImpl typeLookup = new TypeLookupImpl(this)
+	@Accessors val TracabilityImpl tracability = new TracabilityImpl(this)
+	@Accessors val AssociatorImpl associator = new AssociatorImpl(this)
 	
 	Map<Object, Object> identityCache = newHashMap
-	OwnedConverter typeRefConverter
-	
-	def IJvmModelAssociator getJvmModelAssociator() {
-		jvmModelAssociator
-	}
-	
-	def IXtendJvmAssociations getJvmAssociations() {
-		return associations
-	}
-	
-	def IJvmModelAssociator getJvmAssociator() {
-		return jvmModelAssociator
-	}
-	
-	def TypeReferences getTypeReferences() {
-		typeReferences
-	}
-	
-	def OverrideHelper getOverrideHelper() {
-		overrideHelper
-	}
-	def IEObjectDocumentationProvider getDocumentationProvider() {
-		documentationProvider
-	}
-	
-	def getFileHeaderProvider() {
-		fileHeaderProvider
-	}
-	
-	def getJvmTypesBuilder() {
-		typesBuilder
-	}
-	
-	def getTypeExtensions() {
-		typeExtensions
-	}
-	
-	def ProblemSupport getProblemSupport() {
-		problemSupport
-	}
-	
-	def getResourceChangeRegistry() {
-		resourceChangeRegistry
-	}
-	
-	def getScopeProvider() {
-		scopeProvider
-	}
-	
-	def getQualifiedNameConverter() {
-		qualifiedNameConverter
-	}
+	@Accessors(PUBLIC_GETTER) OwnedConverter typeRefConverter
 	
 	MutableFileSystemSupport decoratedFileSystemSupport
 	
@@ -268,20 +214,12 @@ class CompilationUnitImpl implements CompilationUnit {
 		decoratedFileSystemSupport
 	}
 	
-	def FileLocations getFileLocations() {
-		fileLocations
-	}
-	
-	def ReadAndWriteTracking getReadAndWriteTracking() {
-		return readAndWriteTracking;
-	}
-	
 	override Path getFilePath() {
 		return fileSystemSupport.getPath(xtendFile.eResource)
 	}
 	
 	def void setXtendFile(XtendFile xtendFile) {
-		this._xtendFile = xtendFile
+		this.xtendFile = xtendFile
 		// maintain invariants - CU should be usable without any further ado, e.g. before/after callback
 		this.typeRefConverter = new OwnedConverter(new StandardTypeReferenceOwner(services, xtendFile))
 	}
@@ -302,10 +240,6 @@ class CompilationUnitImpl implements CompilationUnit {
 	def void after(AnnotationCallback phase) {
 		if (phase == AnnotationCallback.INDEXING)
 			identityCache.clear
-	}
-	
-	def getTypeRefConverter() {
-		typeRefConverter
 	}
 	
 	def isIndexing() {
@@ -704,7 +638,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	
 	def void setCompilationStrategy(JvmExecutable executable, CompilationStrategy compilationStrategy) {
 		checkCanceled
-		typesBuilder.setBody(executable) [
+		jvmTypesBuilder.setBody(executable) [
 			val context = new CompilationContextImpl(it, this)
 			it.append(compilationStrategy.compile(context).trimTrailingLinebreak(executable))
 		]
@@ -712,7 +646,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	
 	def void setCompilationTemplate(JvmExecutable executable, StringConcatenationClient compilationTemplate) {
 		checkCanceled
-		typesBuilder.setBody(executable, compilationTemplate)
+		jvmTypesBuilder.setBody(executable, compilationTemplate)
 	}
 	
 	protected def trimTrailingLinebreak(CharSequence sequence, EObject context) {
@@ -721,7 +655,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	
 	def void setCompilationStrategy(JvmField field, CompilationStrategy compilationStrategy) {
 		checkCanceled
-		typesBuilder.setInitializer(field) [
+		jvmTypesBuilder.setInitializer(field) [
 			val context = new CompilationContextImpl(it, this)
 			it.append(compilationStrategy.compile(context))
 		]
@@ -729,7 +663,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	
 	def void setCompilationTemplate(JvmField field, StringConcatenationClient compilationTemplate) {
 		checkCanceled
-		typesBuilder.setInitializer(field, compilationTemplate)
+		jvmTypesBuilder.setInitializer(field, compilationTemplate)
 	}
 	
 	def AnnotationReference toAnnotationReference(XAnnotation delegate) {
