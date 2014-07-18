@@ -187,17 +187,10 @@ public class IterableExtensionsTest extends BaseIterablesIteratorsTest<Iterable<
 		assertEquals("", IterableExtensions.join(emptylist, "<", ",", null, function));
 	}
 	
-	@Test public void testZip() {
-		Iterator<Pair<String, Integer>> result = IterableExtensions.zip(newArrayList("foo", "bar"), newArrayList(1, 2, 3)).iterator();
-		assertEquals(new Pair<String, Integer>("foo", 1), result.next());
-		assertEquals(new Pair<String, Integer>("bar", 2), result.next());
-		assertFalse(result.hasNext());
-	}
-	
-	@Test public void testZipWitIndex() {
-		Iterator<Pair<String, Integer>> result = IterableExtensions.zipWithIndex(newArrayList("foo", "bar")).iterator();
-		assertEquals(new Pair<String, Integer>("foo", 0), result.next());
-		assertEquals(new Pair<String, Integer>("bar", 1), result.next());
+	@Test public void testIndexed() {
+		Iterator<Pair<Integer, String>> result = IterableExtensions.indexed(newArrayList("foo", "bar")).iterator();
+		assertEquals(new Pair<Integer, String>(0, "foo"), result.next());
+		assertEquals(new Pair<Integer, String>(1, "bar"), result.next());
 		assertFalse(result.hasNext());
 	}
 

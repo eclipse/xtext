@@ -709,35 +709,8 @@ public class IterableExtensions {
 	}
 
 	/**
-	 * Returns An Iterable of Pairs where the nth pair is created by taking the nth element of each Iterable. The size
-	 * of the result is truncated to the size of the shortest input. E.g.
-	 * <code>zip(#["a", "b", "c"], #[1, 2, 3, 4]) == #[("a", 1), ("b", 2), ("c", 3)]</code>
-	 * 
-	 * The resulting Iterable is a lazily computed view, so any modifications to the underlying Iterables will be
-	 * reflected on subsequent iterations. The result's Iterator does not support {@link Iterator#remove()}
-	 * 
-	 * @param first
-	 *            the first Iterable. May not be <code>null</code>.
-	 * @param second
-	 *            the second Iterable. May not be <code>null</code>.
-	 * @return the zipped result
-	 * @since 2.7
-	 */
-	public static <A, B> Iterable<Pair<A, B>> zip(final Iterable<? extends A> first, final Iterable<? extends B> second) {
-		if (first == null)
-			throw new NullPointerException("first");
-		if (second == null)
-			throw new NullPointerException("second");
-		return new Iterable<Pair<A, B>>() {
-			public Iterator<Pair<A, B>> iterator() {
-				return IteratorExtensions.zip(first.iterator(), second.iterator());
-			}
-		};
-	}
-	
-	/**
-	 * Returns an Iterable of Pairs where the nth pair is created by taking the nth element of the source its 0-based index. 
-	 *  E.g. <code>zipWitIndex(#["a", "b", "c"]) == #[("a", 0), ("b", 1), ("c", 2)]</code>
+	 * Returns an Iterable of Pairs where the nth pair is created by taking the nth element of the source as the value its 0-based index as the key. 
+	 *  E.g. <code>zipWitIndex(#["a", "b", "c"]) == #[(0, "a"), (1, "b"), (2, "c")]</code>
 	 * 
 	 * The resulting Iterable is a lazily computed view, so any modifications to the
 	 * underlying Iterable will be reflected on iteration. The result's Iterator does not support {@link Iterator#remove()}
@@ -747,12 +720,12 @@ public class IterableExtensions {
 	 * @return the zipped result
 	 * @since 2.7
 	 */
-	public static <A> Iterable<Pair<A, Integer>> zipWithIndex(final Iterable<? extends A> iterable) {
+	public static <A> Iterable<Pair<Integer, A>> indexed(final Iterable<? extends A> iterable) {
 		if (iterable == null)
 			throw new NullPointerException("iterable");
-		return new Iterable<Pair<A,Integer>>() {
-			public Iterator<Pair<A, Integer>> iterator() {
-				return IteratorExtensions.zipWithIndex(iterable.iterator());
+		return new Iterable<Pair<Integer, A>>() {
+			public Iterator<Pair<Integer, A>> iterator() {
+				return IteratorExtensions.indexed(iterable.iterator());
 			}
 		};
 	}
