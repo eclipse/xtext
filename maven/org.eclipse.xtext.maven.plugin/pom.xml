@@ -84,6 +84,12 @@
 			<version>1.4</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xbase</artifactId>
+			<version>[${project.version}]</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	<name>Xtext Maven Plugin</name>
 	<url>http://www.eclipse.org/Xtext/</url>
