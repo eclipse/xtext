@@ -10,30 +10,30 @@
 package example6;
 
 import java.util.Set;
-import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Data
 @SuppressWarnings("all")
 public class Movie {
-  private final String _title;
+  private final String title;
   
-  private final int _year;
+  private final int year;
   
-  private final double _rating;
+  private final double rating;
   
-  private final long _numberOfVotes;
+  private final long numberOfVotes;
   
-  private final Set<String> _categories;
+  private final Set<String> categories;
   
   public Movie(final String title, final int year, final double rating, final long numberOfVotes, final Set<String> categories) {
     super();
-    this._title = title;
-    this._year = year;
-    this._rating = rating;
-    this._numberOfVotes = numberOfVotes;
-    this._categories = categories;
+    this.title = title;
+    this.year = year;
+    this.rating = rating;
+    this.numberOfVotes = numberOfVotes;
+    this.categories = categories;
   }
   
   @Override
@@ -41,11 +41,11 @@ public class Movie {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((this._title== null) ? 0 : this._title.hashCode());
-    result = prime * result + this._year;
-    result = prime * result + (int) (Double.doubleToLongBits(this._rating) ^ (Double.doubleToLongBits(this._rating) >>> 32));
-    result = prime * result + (int) (this._numberOfVotes ^ (this._numberOfVotes >>> 32));
-    result = prime * result + ((this._categories== null) ? 0 : this._categories.hashCode());
+    result = prime * result + ((this.title== null) ? 0 : this.title.hashCode());
+    result = prime * result + this.year;
+    result = prime * result + (int) (Double.doubleToLongBits(this.rating) ^ (Double.doubleToLongBits(this.rating) >>> 32));
+    result = prime * result + (int) (this.numberOfVotes ^ (this.numberOfVotes >>> 32));
+    result = prime * result + ((this.categories== null) ? 0 : this.categories.hashCode());
     return result;
   }
   
@@ -59,21 +59,21 @@ public class Movie {
     if (getClass() != obj.getClass())
       return false;
     Movie other = (Movie) obj;
-    if (this._title == null) {
-      if (other._title != null)
+    if (this.title == null) {
+      if (other.title != null)
         return false;
-    } else if (!this._title.equals(other._title))
+    } else if (!this.title.equals(other.title))
       return false;
-    if (other._year != this._year)
+    if (other.year != this.year)
       return false;
-    if (Double.doubleToLongBits(other._rating) != Double.doubleToLongBits(this._rating))
+    if (Double.doubleToLongBits(other.rating) != Double.doubleToLongBits(this.rating))
       return false; 
-    if (other._numberOfVotes != this._numberOfVotes)
+    if (other.numberOfVotes != this.numberOfVotes)
       return false;
-    if (this._categories == null) {
-      if (other._categories != null)
+    if (this.categories == null) {
+      if (other.categories != null)
         return false;
-    } else if (!this._categories.equals(other._categories))
+    } else if (!this.categories.equals(other.categories))
       return false;
     return true;
   }
@@ -81,32 +81,37 @@ public class Movie {
   @Override
   @Pure
   public String toString() {
-    String result = new ToStringHelper().toString(this);
-    return result;
+    ToStringBuilder b = new ToStringBuilder(this);
+    b.add("title", this.title);
+    b.add("year", this.year);
+    b.add("rating", this.rating);
+    b.add("numberOfVotes", this.numberOfVotes);
+    b.add("categories", this.categories);
+    return b.toString();
   }
   
   @Pure
   public String getTitle() {
-    return this._title;
+    return this.title;
   }
   
   @Pure
   public int getYear() {
-    return this._year;
+    return this.year;
   }
   
   @Pure
   public double getRating() {
-    return this._rating;
+    return this.rating;
   }
   
   @Pure
   public long getNumberOfVotes() {
-    return this._numberOfVotes;
+    return this.numberOfVotes;
   }
   
   @Pure
   public Set<String> getCategories() {
-    return this._categories;
+    return this.categories;
   }
 }

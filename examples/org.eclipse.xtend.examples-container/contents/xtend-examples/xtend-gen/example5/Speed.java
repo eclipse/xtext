@@ -13,14 +13,14 @@ import example5.Distance;
 import example5.Time;
 import java.math.BigDecimal;
 import java.math.MathContext;
-import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Data
 @SuppressWarnings("all")
 public class Speed {
-  private final BigDecimal _mmPerMsec;
+  private final BigDecimal mmPerMsec;
   
   public static Speed operator_divide(final Distance d, final Time t) {
     BigDecimal _mm = d.getMm();
@@ -31,7 +31,7 @@ public class Speed {
   
   public Speed(final BigDecimal mmPerMsec) {
     super();
-    this._mmPerMsec = mmPerMsec;
+    this.mmPerMsec = mmPerMsec;
   }
   
   @Override
@@ -39,7 +39,7 @@ public class Speed {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((this._mmPerMsec== null) ? 0 : this._mmPerMsec.hashCode());
+    result = prime * result + ((this.mmPerMsec== null) ? 0 : this.mmPerMsec.hashCode());
     return result;
   }
   
@@ -53,10 +53,10 @@ public class Speed {
     if (getClass() != obj.getClass())
       return false;
     Speed other = (Speed) obj;
-    if (this._mmPerMsec == null) {
-      if (other._mmPerMsec != null)
+    if (this.mmPerMsec == null) {
+      if (other.mmPerMsec != null)
         return false;
-    } else if (!this._mmPerMsec.equals(other._mmPerMsec))
+    } else if (!this.mmPerMsec.equals(other.mmPerMsec))
       return false;
     return true;
   }
@@ -64,12 +64,13 @@ public class Speed {
   @Override
   @Pure
   public String toString() {
-    String result = new ToStringHelper().toString(this);
-    return result;
+    ToStringBuilder b = new ToStringBuilder(this);
+    b.add("mmPerMsec", this.mmPerMsec);
+    return b.toString();
   }
   
   @Pure
   public BigDecimal getMmPerMsec() {
-    return this._mmPerMsec;
+    return this.mmPerMsec;
   }
 }

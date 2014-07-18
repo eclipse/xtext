@@ -9,11 +9,14 @@ package example2;
 
 import com.google.common.base.Objects;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
@@ -47,7 +50,7 @@ public class BasicExpressions {
     List<String> _map = ListExtensions.<String, String>map(list, _function);
     String _head = IterableExtensions.<String>head(_map);
     Assert.assertEquals("HELLO", _head);
-    final HashSet<Integer> set = CollectionLiterals.<Integer>newHashSet(Integer.valueOf(1), Integer.valueOf(3), Integer.valueOf(5));
+    final Set<Integer> set = Collections.<Integer>unmodifiableSet(CollectionLiterals.<Integer>newHashSet(Integer.valueOf(1), Integer.valueOf(3), Integer.valueOf(5)));
     final Function1<Integer, Boolean> _function_1 = new Function1<Integer, Boolean>() {
       public Boolean apply(final Integer it) {
         return Boolean.valueOf(((it).intValue() >= 3));
@@ -59,9 +62,15 @@ public class BasicExpressions {
     Pair<String, Integer> _mappedTo = Pair.<String, Integer>of("one", Integer.valueOf(1));
     Pair<String, Integer> _mappedTo_1 = Pair.<String, Integer>of("two", Integer.valueOf(2));
     Pair<String, Integer> _mappedTo_2 = Pair.<String, Integer>of("three", Integer.valueOf(3));
-    final HashMap<String, Integer> map = CollectionLiterals.<String, Integer>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2);
+    final Map<String, Integer> map = Collections.<String, Integer>unmodifiableMap(CollectionLiterals.<String, Integer>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2));
     Integer _get = map.get("two");
     Assert.assertEquals(2, (_get).intValue());
+    final ArrayList<String> mutableList = CollectionLiterals.<String>newArrayList();
+    mutableList.add("Foo");
+    final HashSet<String> mutableSet = CollectionLiterals.<String>newHashSet();
+    mutableSet.add("Bar");
+    final HashMap<String, String> mutableMap = CollectionLiterals.<String, String>newHashMap();
+    mutableMap.put("Fizz", "Buzz");
   }
   
   @Test
@@ -115,6 +124,19 @@ public class BasicExpressions {
       }
     }
     Assert.assertEquals("string", _switchResult_1);
+    final int num = 3;
+    String _switchResult_2 = null;
+    switch (num) {
+      case 1:
+      case 2:
+      case 4:
+        _switchResult_2 = "divisor of 4";
+        break;
+      default:
+        _switchResult_2 = "not a divisor of 4";
+        break;
+    }
+    Assert.assertEquals("not a divisor of 4", _switchResult_2);
   }
   
   @Test
@@ -125,6 +147,13 @@ public class BasicExpressions {
       {
         Assert.assertEquals(counter, (i).intValue());
         counter = (counter + 1);
+      }
+    }
+    for (int i_1 = 11; (i_1 > 0); i_1--) {
+      {
+        Assert.assertEquals(counter, i_1);
+        int _counter = counter;
+        counter = (_counter - 1);
       }
     }
     final Iterator<Integer> iterator = Collections.<Integer>unmodifiableList(CollectionLiterals.<Integer>newArrayList(Integer.valueOf(1), Integer.valueOf(2), Integer.valueOf(3), Integer.valueOf(4), Integer.valueOf(5))).iterator();

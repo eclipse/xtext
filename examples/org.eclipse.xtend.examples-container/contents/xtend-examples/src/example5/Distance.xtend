@@ -9,25 +9,25 @@
  *******************************************************************************/
 package example5
 
-import org.eclipse.xtend.lib.Data
 import java.math.BigDecimal
+import org.eclipse.xtend.lib.annotations.Data
 
 @Data class Distance {
 	BigDecimal mm
 	
-	def operator_plus(Distance other) {
+	def +(Distance other) {
 		new Distance(this.mm + other.mm)
 	}
 	
-	def operator_minus(Distance other) {
+	def -(Distance other) {
 		new Distance(this.mm - other.mm)
 	}
 
-	def operator_multiply(int times) {
+	def *(int times) {
 		new Distance(this.mm * new BigDecimal(times))
 	}
 	
-	def operator_divide(int times) {
+	def /(int times) {
 		new Distance(this.mm / new BigDecimal(times))
 	}
 	

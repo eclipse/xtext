@@ -11,40 +11,34 @@ package example5;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
-import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Data
 @SuppressWarnings("all")
 public class Distance {
-  private final BigDecimal _mm;
+  private final BigDecimal mm;
   
   public Distance operator_plus(final Distance other) {
-    BigDecimal _mm = this.getMm();
-    BigDecimal _mm_1 = other.getMm();
-    BigDecimal _plus = _mm.add(_mm_1);
+    BigDecimal _plus = this.mm.add(other.mm);
     return new Distance(_plus);
   }
   
   public Distance operator_minus(final Distance other) {
-    BigDecimal _mm = this.getMm();
-    BigDecimal _mm_1 = other.getMm();
-    BigDecimal _minus = _mm.subtract(_mm_1);
+    BigDecimal _minus = this.mm.subtract(other.mm);
     return new Distance(_minus);
   }
   
   public Distance operator_multiply(final int times) {
-    BigDecimal _mm = this.getMm();
     BigDecimal _bigDecimal = new BigDecimal(times);
-    BigDecimal _multiply = _mm.multiply(_bigDecimal);
+    BigDecimal _multiply = this.mm.multiply(_bigDecimal);
     return new Distance(_multiply);
   }
   
   public Distance operator_divide(final int times) {
-    BigDecimal _mm = this.getMm();
     BigDecimal _bigDecimal = new BigDecimal(times);
-    BigDecimal _divide = _mm.divide(_bigDecimal, MathContext.DECIMAL128);
+    BigDecimal _divide = this.mm.divide(_bigDecimal, MathContext.DECIMAL128);
     return new Distance(_divide);
   }
   
@@ -67,7 +61,7 @@ public class Distance {
   
   public Distance(final BigDecimal mm) {
     super();
-    this._mm = mm;
+    this.mm = mm;
   }
   
   @Override
@@ -75,7 +69,7 @@ public class Distance {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((this._mm== null) ? 0 : this._mm.hashCode());
+    result = prime * result + ((this.mm== null) ? 0 : this.mm.hashCode());
     return result;
   }
   
@@ -89,10 +83,10 @@ public class Distance {
     if (getClass() != obj.getClass())
       return false;
     Distance other = (Distance) obj;
-    if (this._mm == null) {
-      if (other._mm != null)
+    if (this.mm == null) {
+      if (other.mm != null)
         return false;
-    } else if (!this._mm.equals(other._mm))
+    } else if (!this.mm.equals(other.mm))
       return false;
     return true;
   }
@@ -100,12 +94,13 @@ public class Distance {
   @Override
   @Pure
   public String toString() {
-    String result = new ToStringHelper().toString(this);
-    return result;
+    ToStringBuilder b = new ToStringBuilder(this);
+    b.add("mm", this.mm);
+    return b.toString();
   }
   
   @Pure
   public BigDecimal getMm() {
-    return this._mm;
+    return this.mm;
   }
 }
