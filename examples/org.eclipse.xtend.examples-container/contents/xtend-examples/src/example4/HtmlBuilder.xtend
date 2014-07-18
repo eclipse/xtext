@@ -8,7 +8,7 @@
 package example4
 
 import java.util.ArrayList
-import org.eclipse.xtend.lib.Data
+import org.eclipse.xtend.lib.annotations.Data
 import org.junit.Test
 
 /**

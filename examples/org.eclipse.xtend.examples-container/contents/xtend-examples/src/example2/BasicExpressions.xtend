@@ -29,17 +29,29 @@ class BasicExpressions {
 	}
 	
 	@Test def void collections() {
-		// There are various static methods to create collections
+		// There are literals for lists, sets and maps
 		// and numerous extension methods which make working with them
 		// convenient.
 		val list = #['Hello', 'World']
 		assertEquals('HELLO', list.map[toUpperCase].head)
 		
-		val set  = newHashSet(1, 3, 5)
+		val set  = #{1, 3, 5}
 		assertEquals(2, set.filter[ it >= 3].size)
 		
-		val map  = newHashMap('one' -> 1, 'two' -> 2, 'three' -> 3)
+		val map  = #{'one' -> 1, 'two' -> 2, 'three' -> 3}
 		assertEquals( 2 , map.get('two'))
+		
+		/*the literals produce immutable collections. 
+		* There are also factory methods to produce mutable ones
+		* Note that their type (seen when hovering over the name)
+		* is inferred from the control flow
+		*/
+		val mutableList = newArrayList
+		mutableList.add("Foo")
+		val mutableSet = newHashSet
+		mutableSet.add("Bar")
+		val mutableMap = newHashMap
+		mutableMap.put("Fizz", "Buzz")
 	}
 	
 	@Test def void controlStructures() {
@@ -71,6 +83,15 @@ class BasicExpressions {
 				Number : 'number'
 				String : 'string' 
 			})
+		
+		//there also is an explicit fallthrough syntax
+		val num = 3
+		assertEquals('not a divisor of 4', switch num {
+			case 1,
+			case 2,
+			case 4: 'divisor of 4'
+			default: 'not a divisor of 4'
+		})	
 	}
 	
 	@Test def void loops() {
@@ -79,6 +100,12 @@ class BasicExpressions {
 		for (i : 1 .. 10) {
 			assertEquals(counter, i)
 			counter = counter + 1
+		}
+		
+		//traditional for loop
+		for(var i = 11; i > 0; i--) {
+			assertEquals(counter, i)
+			counter -=  1 //compound assignment
 		}
 		
 		// while loop
