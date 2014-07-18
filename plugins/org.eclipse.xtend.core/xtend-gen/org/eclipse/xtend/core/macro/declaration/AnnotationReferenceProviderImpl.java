@@ -142,9 +142,9 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
       if (!_matched) {
         if (annotationTypeDelcaration instanceof XtendAnnotationTypeDeclarationImpl) {
           _matched=true;
-          IXtendJvmAssociations _jvmAssociations = this.compilationUnit.getJvmAssociations();
+          IXtendJvmAssociations _jvmModelAssociations = this.compilationUnit.getJvmModelAssociations();
           XtendAnnotationType _delegate = ((XtendAnnotationTypeDeclarationImpl)annotationTypeDelcaration).getDelegate();
-          _switchResult = _jvmAssociations.getInferredType(_delegate);
+          _switchResult = _jvmModelAssociations.getInferredType(_delegate);
         }
       }
       if (!_matched) {

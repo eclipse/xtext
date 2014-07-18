@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.parser.IEncodingProvider;
@@ -19,8 +19,8 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @SuppressWarnings("all")
 public abstract class AbstractFileSystemSupport implements MutableFileSystemSupport {
   @Inject
-  @Property
-  private IEncodingProvider _encodingProvider;
+  @Accessors
+  private IEncodingProvider encodingProvider;
   
   public CharSequence getContents(final Path path) {
     try {
@@ -66,10 +66,10 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
   
   @Pure
   public IEncodingProvider getEncodingProvider() {
-    return this._encodingProvider;
+    return this.encodingProvider;
   }
   
   public void setEncodingProvider(final IEncodingProvider encodingProvider) {
-    this._encodingProvider = encodingProvider;
+    this.encodingProvider = encodingProvider;
   }
 }

@@ -8,14 +8,16 @@
 package org.eclipse.xtext.tasks
 
 import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * @author Stefan Oehme - Initial contribution and API
  * @since 2.6
  */
+@Accessors
 class TaskTag {
-	@Property String name
-	@Property Priority priority
+	String name
+	Priority priority
 
 	def length() {
 		name.length
@@ -26,9 +28,10 @@ class TaskTag {
  * @author Stefan Oehme - Initial contribution and API
  * @since 2.6
  */
+@Accessors
 class TaskTags implements Iterable<TaskTag> {
 
-	@Property boolean caseSensitive
+	boolean caseSensitive
 	val List<TaskTag> taskTags = newArrayList
 
 	override iterator() {

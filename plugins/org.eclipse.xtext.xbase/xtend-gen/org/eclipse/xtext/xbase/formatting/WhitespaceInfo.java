@@ -1,7 +1,7 @@
 package org.eclipse.xtext.xbase.formatting;
 
 import java.util.List;
-import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.xbase.formatting.CommentInfo;
@@ -12,7 +12,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Data
 @SuppressWarnings("all")
 public class WhitespaceInfo extends LeafInfo {
-  private final int _offset;
+  private final int offset;
   
   public int getLength() {
     ILeafNode _node = this.getNode();
@@ -81,7 +81,7 @@ public class WhitespaceInfo extends LeafInfo {
   
   public WhitespaceInfo(final HiddenLeafs container, final ILeafNode node, final int newLines, final int offset) {
     super(container, node, newLines);
-    this._offset = offset;
+    this.offset = offset;
   }
   
   @Override
@@ -89,7 +89,7 @@ public class WhitespaceInfo extends LeafInfo {
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
-    result = prime * result + this._offset;
+    result = prime * result + this.offset;
     return result;
   }
   
@@ -105,13 +105,13 @@ public class WhitespaceInfo extends LeafInfo {
     if (!super.equals(obj))
       return false;
     WhitespaceInfo other = (WhitespaceInfo) obj;
-    if (other._offset != this._offset)
+    if (other.offset != this.offset)
       return false;
     return true;
   }
   
   @Pure
   public int getOffset() {
-    return this._offset;
+    return this.offset;
   }
 }

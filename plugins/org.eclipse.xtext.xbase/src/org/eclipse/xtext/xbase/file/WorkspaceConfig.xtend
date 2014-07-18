@@ -1,6 +1,7 @@
 package org.eclipse.xtext.xbase.file
 
 import java.util.Map
+import org.eclipse.xtend.lib.annotations.Data
 
 @Data class WorkspaceConfig {
 	String absoluteFileSystemPath

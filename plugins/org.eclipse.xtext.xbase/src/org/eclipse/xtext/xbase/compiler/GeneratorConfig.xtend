@@ -1,8 +1,9 @@
 package org.eclipse.xtext.xbase.compiler
 
+import org.eclipse.xtend.lib.annotations.Accessors
+
+@Accessors
 class GeneratorConfig {
-	@Property
 	boolean generateExpressions = true
-	@Property
 	boolean generateSyntheticSuppressWarnings = true
 }

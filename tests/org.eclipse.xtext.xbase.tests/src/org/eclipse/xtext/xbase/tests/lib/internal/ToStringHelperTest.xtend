@@ -8,6 +8,7 @@ import java.lang.annotation.RetentionPolicy
 import org.eclipse.xtext.util.Wrapper
 import static org.eclipse.xtext.junit4.internal.LineDelimiters.*
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder
+import org.eclipse.xtend.lib.annotations.Data
 
 class ToStringHelperTest {
 
@@ -108,8 +109,8 @@ class ToStringHelperTest {
 			toUnix(
 				'''
 				DataClass [
-				  _other = Wrapper of (DataClass@«System::identityHashCode(obj)»)
-				  _name = "test"
+				  other = Wrapper of (DataClass@«System::identityHashCode(obj)»)
+				  name = "test"
 				]'''), helper.toString(obj))
 	}
 

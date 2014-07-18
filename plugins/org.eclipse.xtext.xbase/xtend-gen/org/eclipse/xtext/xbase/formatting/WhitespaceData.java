@@ -1,24 +1,23 @@
 package org.eclipse.xtext.xbase.formatting;
 
 import com.google.common.base.Objects;
-import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.formatting.FormattingData;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Data
 @SuppressWarnings("all")
 public class WhitespaceData extends FormattingData {
-  private final String _space;
+  private final String space;
   
   public boolean isEmpty() {
-    String _space = this.getSpace();
-    return Objects.equal(_space, null);
+    return Objects.equal(this.space, null);
   }
   
   public WhitespaceData(final int offset, final int length, final int increaseIndentationChange, final int decreaseIndentationChange, final Throwable trace, final String space) {
     super(offset, length, increaseIndentationChange, decreaseIndentationChange, trace);
-    this._space = space;
+    this.space = space;
   }
   
   @Override
@@ -26,7 +25,7 @@ public class WhitespaceData extends FormattingData {
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
-    result = prime * result + ((this._space== null) ? 0 : this._space.hashCode());
+    result = prime * result + ((this.space== null) ? 0 : this.space.hashCode());
     return result;
   }
   
@@ -42,10 +41,10 @@ public class WhitespaceData extends FormattingData {
     if (!super.equals(obj))
       return false;
     WhitespaceData other = (WhitespaceData) obj;
-    if (this._space == null) {
-      if (other._space != null)
+    if (this.space == null) {
+      if (other.space != null)
         return false;
-    } else if (!this._space.equals(other._space))
+    } else if (!this.space.equals(other.space))
       return false;
     return true;
   }
@@ -53,12 +52,14 @@ public class WhitespaceData extends FormattingData {
   @Override
   @Pure
   public String toString() {
-    String result = new ToStringHelper().toString(this);
+    String result = new ToStringBuilder(this)
+    	.addAllFields()
+    	.toString();
     return result;
   }
   
   @Pure
   public String getSpace() {
-    return this._space;
+    return this.space;
   }
 }

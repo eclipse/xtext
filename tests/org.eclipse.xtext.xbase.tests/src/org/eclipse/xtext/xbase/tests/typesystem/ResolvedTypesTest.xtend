@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.tests.typesystem
 
 import com.google.inject.Inject
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.xbase.XbaseFactory
 import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver
@@ -22,14 +23,14 @@ import org.junit.Test
 class ResolvedTypesTest extends AbstractXbaseTestCase {
 	
 	@Inject 
-	@Property 
+	@Accessors
 	PublicReentrantTypeResolver resolver
 	
 	TypesFactory typesFactory = TypesFactory::eINSTANCE
 	
 	XbaseFactory xbaseFactory = XbaseFactory::eINSTANCE
 	
-	@Property
+	@Accessors
 	PublicResolvedTypes testMe
 	
 	@Before

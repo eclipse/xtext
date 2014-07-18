@@ -8,7 +8,7 @@
 package org.eclipse.xtend.ide.codebuilder;
 
 import org.eclipse.xtend.ide.codebuilder.AbstractExecutableBuilder;
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -17,63 +17,63 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  */
 @SuppressWarnings("all")
 public abstract class AbstractMethodBuilder extends AbstractExecutableBuilder {
-  @Property
-  private String _methodName;
+  @Accessors
+  private String methodName;
   
-  @Property
-  private LightweightTypeReference _returnType;
+  @Accessors
+  private LightweightTypeReference returnType;
   
-  @Property
-  private boolean _staticFlag;
+  @Accessors
+  private boolean staticFlag;
   
-  @Property
-  private boolean _abstractFlag;
+  @Accessors
+  private boolean abstractFlag;
   
-  @Property
-  private boolean _overrideFlag;
+  @Accessors
+  private boolean overrideFlag;
   
   @Pure
   public String getMethodName() {
-    return this._methodName;
+    return this.methodName;
   }
   
   public void setMethodName(final String methodName) {
-    this._methodName = methodName;
+    this.methodName = methodName;
   }
   
   @Pure
   public LightweightTypeReference getReturnType() {
-    return this._returnType;
+    return this.returnType;
   }
   
   public void setReturnType(final LightweightTypeReference returnType) {
-    this._returnType = returnType;
+    this.returnType = returnType;
   }
   
   @Pure
   public boolean isStaticFlag() {
-    return this._staticFlag;
+    return this.staticFlag;
   }
   
   public void setStaticFlag(final boolean staticFlag) {
-    this._staticFlag = staticFlag;
+    this.staticFlag = staticFlag;
   }
   
   @Pure
   public boolean isAbstractFlag() {
-    return this._abstractFlag;
+    return this.abstractFlag;
   }
   
   public void setAbstractFlag(final boolean abstractFlag) {
-    this._abstractFlag = abstractFlag;
+    this.abstractFlag = abstractFlag;
   }
   
   @Pure
   public boolean isOverrideFlag() {
-    return this._overrideFlag;
+    return this.overrideFlag;
   }
   
   public void setOverrideFlag(final boolean overrideFlag) {
-    this._overrideFlag = overrideFlag;
+    this.overrideFlag = overrideFlag;
   }
 }

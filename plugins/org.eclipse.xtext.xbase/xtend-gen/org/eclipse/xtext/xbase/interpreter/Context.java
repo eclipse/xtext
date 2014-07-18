@@ -9,38 +9,35 @@ package org.eclipse.xtext.xbase.interpreter;
 
 import java.util.Map;
 import java.util.Set;
-import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.access.impl.ClassFinder;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Data
 @SuppressWarnings("all")
 public class Context {
-  private final JvmTypeReference _expectedType;
+  private final JvmTypeReference expectedType;
   
-  private final ClassFinder _classFinder;
+  private final ClassFinder classFinder;
   
-  private final Map<String, JvmIdentifiableElement> _visibleFeatures;
+  private final Map<String, JvmIdentifiableElement> visibleFeatures;
   
-  private final Set<XExpression> _alreadyEvaluating;
+  private final Set<XExpression> alreadyEvaluating;
   
   public Context cloneWithExpectation(final JvmTypeReference newExpectation) {
-    ClassFinder _classFinder = this.getClassFinder();
-    Map<String, JvmIdentifiableElement> _visibleFeatures = this.getVisibleFeatures();
-    Set<XExpression> _alreadyEvaluating = this.getAlreadyEvaluating();
-    return new Context(newExpectation, _classFinder, _visibleFeatures, _alreadyEvaluating);
+    return new Context(newExpectation, this.classFinder, this.visibleFeatures, this.alreadyEvaluating);
   }
   
   public Context(final JvmTypeReference expectedType, final ClassFinder classFinder, final Map<String, JvmIdentifiableElement> visibleFeatures, final Set<XExpression> alreadyEvaluating) {
     super();
-    this._expectedType = expectedType;
-    this._classFinder = classFinder;
-    this._visibleFeatures = visibleFeatures;
-    this._alreadyEvaluating = alreadyEvaluating;
+    this.expectedType = expectedType;
+    this.classFinder = classFinder;
+    this.visibleFeatures = visibleFeatures;
+    this.alreadyEvaluating = alreadyEvaluating;
   }
   
   @Override
@@ -48,10 +45,10 @@ public class Context {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((this._expectedType== null) ? 0 : this._expectedType.hashCode());
-    result = prime * result + ((this._classFinder== null) ? 0 : this._classFinder.hashCode());
-    result = prime * result + ((this._visibleFeatures== null) ? 0 : this._visibleFeatures.hashCode());
-    result = prime * result + ((this._alreadyEvaluating== null) ? 0 : this._alreadyEvaluating.hashCode());
+    result = prime * result + ((this.expectedType== null) ? 0 : this.expectedType.hashCode());
+    result = prime * result + ((this.classFinder== null) ? 0 : this.classFinder.hashCode());
+    result = prime * result + ((this.visibleFeatures== null) ? 0 : this.visibleFeatures.hashCode());
+    result = prime * result + ((this.alreadyEvaluating== null) ? 0 : this.alreadyEvaluating.hashCode());
     return result;
   }
   
@@ -65,25 +62,25 @@ public class Context {
     if (getClass() != obj.getClass())
       return false;
     Context other = (Context) obj;
-    if (this._expectedType == null) {
-      if (other._expectedType != null)
+    if (this.expectedType == null) {
+      if (other.expectedType != null)
         return false;
-    } else if (!this._expectedType.equals(other._expectedType))
+    } else if (!this.expectedType.equals(other.expectedType))
       return false;
-    if (this._classFinder == null) {
-      if (other._classFinder != null)
+    if (this.classFinder == null) {
+      if (other.classFinder != null)
         return false;
-    } else if (!this._classFinder.equals(other._classFinder))
+    } else if (!this.classFinder.equals(other.classFinder))
       return false;
-    if (this._visibleFeatures == null) {
-      if (other._visibleFeatures != null)
+    if (this.visibleFeatures == null) {
+      if (other.visibleFeatures != null)
         return false;
-    } else if (!this._visibleFeatures.equals(other._visibleFeatures))
+    } else if (!this.visibleFeatures.equals(other.visibleFeatures))
       return false;
-    if (this._alreadyEvaluating == null) {
-      if (other._alreadyEvaluating != null)
+    if (this.alreadyEvaluating == null) {
+      if (other.alreadyEvaluating != null)
         return false;
-    } else if (!this._alreadyEvaluating.equals(other._alreadyEvaluating))
+    } else if (!this.alreadyEvaluating.equals(other.alreadyEvaluating))
       return false;
     return true;
   }
@@ -91,27 +88,31 @@ public class Context {
   @Override
   @Pure
   public String toString() {
-    String result = new ToStringHelper().toString(this);
-    return result;
+    ToStringBuilder b = new ToStringBuilder(this);
+    b.add("expectedType", this.expectedType);
+    b.add("classFinder", this.classFinder);
+    b.add("visibleFeatures", this.visibleFeatures);
+    b.add("alreadyEvaluating", this.alreadyEvaluating);
+    return b.toString();
   }
   
   @Pure
   public JvmTypeReference getExpectedType() {
-    return this._expectedType;
+    return this.expectedType;
   }
   
   @Pure
   public ClassFinder getClassFinder() {
-    return this._classFinder;
+    return this.classFinder;
   }
   
   @Pure
   public Map<String, JvmIdentifiableElement> getVisibleFeatures() {
-    return this._visibleFeatures;
+    return this.visibleFeatures;
   }
   
   @Pure
   public Set<XExpression> getAlreadyEvaluating() {
-    return this._alreadyEvaluating;
+    return this.alreadyEvaluating;
   }
 }

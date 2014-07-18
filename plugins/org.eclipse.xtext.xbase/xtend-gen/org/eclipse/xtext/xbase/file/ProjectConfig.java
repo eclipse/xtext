@@ -1,53 +1,48 @@
 package org.eclipse.xtext.xbase.file;
 
 import java.util.Map;
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pure;
 
+@Accessors
 @SuppressWarnings("all")
 public class ProjectConfig {
-  @Property
-  private final Path _rootPath;
+  private final Path rootPath;
   
-  @Property
-  private final String _name;
+  private final String name;
   
-  @Property
-  private final Map<Path, Path> _sourceFolderMappings = CollectionLiterals.<Path, Path>newLinkedHashMap();
+  private final Map<Path, Path> sourceFolderMappings = CollectionLiterals.<Path, Path>newLinkedHashMap();
   
   public ProjectConfig(final String name) {
-    this._name = name;
+    this.name = name;
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(Path.SEGMENT_SEPARATOR, "");
     _builder.append(name, "");
     Path _path = new Path(_builder.toString());
-    this._rootPath = _path;
+    this.rootPath = _path;
   }
   
   public void addSourceFolderMapping(final String from, final String to) {
-    Map<Path, Path> _sourceFolderMappings = this.getSourceFolderMappings();
-    Path _rootPath = this.getRootPath();
-    Path _append = _rootPath.append(from);
-    Path _rootPath_1 = this.getRootPath();
-    Path _append_1 = _rootPath_1.append(to);
-    _sourceFolderMappings.put(_append, _append_1);
+    Path _append = this.rootPath.append(from);
+    Path _append_1 = this.rootPath.append(to);
+    this.sourceFolderMappings.put(_append, _append_1);
   }
   
   @Pure
   public Path getRootPath() {
-    return this._rootPath;
+    return this.rootPath;
   }
   
   @Pure
   public String getName() {
-    return this._name;
+    return this.name;
   }
   
   @Pure
   public Map<Path, Path> getSourceFolderMappings() {
-    return this._sourceFolderMappings;
+    return this.sourceFolderMappings;
   }
 }

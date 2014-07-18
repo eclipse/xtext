@@ -8,27 +8,28 @@
 package org.eclipse.xtext.xbase.file
 
 import com.google.common.io.ByteStreams
-import java.io.File
-import java.io.FileInputStream
-import java.io.FileOutputStream
-import java.io.InputStream
-import org.eclipse.emf.common.util.URI
-import org.eclipse.xtend.lib.macro.file.Path
-import org.eclipse.xtext.util.Files
 import com.google.inject.Inject
 import com.google.inject.Provider
 import java.io.BufferedInputStream
 import java.io.BufferedOutputStream
-import org.eclipse.emf.ecore.resource.Resource
+import java.io.File
+import java.io.FileInputStream
 import java.io.FileNotFoundException
+import java.io.FileOutputStream
 import java.io.IOException
+import java.io.InputStream
+import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.macro.file.Path
+import org.eclipse.xtext.util.Files
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
 	
-	@Inject @Property Provider<WorkspaceConfig> projectInformationProvider
+	@Inject @Accessors Provider<WorkspaceConfig> projectInformationProvider
 	
 	override Iterable<? extends Path> getChildren(Path path) {
 		if (!path.exists) {

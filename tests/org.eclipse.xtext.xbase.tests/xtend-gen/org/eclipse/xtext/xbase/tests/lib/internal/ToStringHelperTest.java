@@ -2,7 +2,7 @@ package org.eclipse.xtext.xbase.tests.lib.internal;
 
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
-import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.internal.LineDelimiters;
 import org.eclipse.xtext.util.Wrapper;
@@ -23,14 +23,14 @@ public class ToStringHelperTest {
   
   @Data
   public static class DataClass {
-    public final Wrapper<ToStringHelperTest.DataClass> _other;
+    public final Wrapper<ToStringHelperTest.DataClass> other;
     
-    public final String _name;
+    public final String name;
     
     public DataClass(final Wrapper<ToStringHelperTest.DataClass> other, final String name) {
       super();
-      this._other = other;
-      this._name = name;
+      this.other = other;
+      this.name = name;
     }
     
     @Override
@@ -38,8 +38,8 @@ public class ToStringHelperTest {
     public int hashCode() {
       final int prime = 31;
       int result = 1;
-      result = prime * result + ((this._other== null) ? 0 : this._other.hashCode());
-      result = prime * result + ((this._name== null) ? 0 : this._name.hashCode());
+      result = prime * result + ((this.other== null) ? 0 : this.other.hashCode());
+      result = prime * result + ((this.name== null) ? 0 : this.name.hashCode());
       return result;
     }
     
@@ -53,15 +53,15 @@ public class ToStringHelperTest {
       if (getClass() != obj.getClass())
         return false;
       ToStringHelperTest.DataClass other = (ToStringHelperTest.DataClass) obj;
-      if (this._other == null) {
-        if (other._other != null)
+      if (this.other == null) {
+        if (other.other != null)
           return false;
-      } else if (!this._other.equals(other._other))
+      } else if (!this.other.equals(other.other))
         return false;
-      if (this._name == null) {
-        if (other._name != null)
+      if (this.name == null) {
+        if (other.name != null)
           return false;
-      } else if (!this._name.equals(other._name))
+      } else if (!this.name.equals(other.name))
         return false;
       return true;
     }
@@ -69,18 +69,20 @@ public class ToStringHelperTest {
     @Override
     @Pure
     public String toString() {
-      String result = new ToStringHelper().toString(this);
-      return result;
+      ToStringBuilder b = new ToStringBuilder(this);
+      b.add("other", this.other);
+      b.add("name", this.name);
+      return b.toString();
     }
     
     @Pure
     public Wrapper<ToStringHelperTest.DataClass> getOther() {
-      return this._other;
+      return this.other;
     }
     
     @Pure
     public String getName() {
-      return this._name;
+      return this.name;
     }
   }
   
@@ -282,13 +284,13 @@ public class ToStringHelperTest {
     _builder.append("DataClass [");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("_other = Wrapper of (DataClass@");
+    _builder.append("other = Wrapper of (DataClass@");
     int _identityHashCode = System.identityHashCode(obj);
     _builder.append(_identityHashCode, "  ");
     _builder.append(")");
     _builder.newLineIfNotEmpty();
     _builder.append("  ");
-    _builder.append("_name = \"test\"");
+    _builder.append("name = \"test\"");
     _builder.newLine();
     _builder.append("]");
     String _unix = LineDelimiters.toUnix(_builder.toString());

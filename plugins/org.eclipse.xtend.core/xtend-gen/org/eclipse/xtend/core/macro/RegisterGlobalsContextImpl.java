@@ -18,10 +18,11 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtend.lib.annotations.Delegate;
 import org.eclipse.xtend.lib.macro.RegisterGlobalsContext;
 import org.eclipse.xtend.lib.macro.file.FileLocations;
-import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
+import org.eclipse.xtend.lib.macro.file.FileSystemSupport;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
@@ -41,11 +42,11 @@ import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
-  @Property
-  private IJvmDeclaredTypeAcceptor _acceptor;
+  @Accessors
+  private IJvmDeclaredTypeAcceptor acceptor;
   
-  @Property
-  private CompilationUnitImpl _compilationUnit;
+  @Accessors
+  private CompilationUnitImpl compilationUnit;
   
   public void registerAnnotationType(final String qualifiedName) throws IllegalArgumentException {
     final JvmAnnotationType newType = TypesFactory.eINSTANCE.createJvmAnnotationType();
@@ -57,10 +58,8 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
     final JvmGenericType newType = TypesFactory.eINSTANCE.createJvmGenericType();
     newType.setVisibility(JvmVisibility.PUBLIC);
     EList<JvmTypeReference> _superTypes = newType.getSuperTypes();
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    TypeReferences _typeReferences = _compilationUnit.getTypeReferences();
-    CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
-    XtendFile _xtendFile = _compilationUnit_1.getXtendFile();
+    TypeReferences _typeReferences = this.compilationUnit.getTypeReferences();
+    XtendFile _xtendFile = this.compilationUnit.getXtendFile();
     JvmTypeReference _typeForName = _typeReferences.getTypeForName(Object.class, _xtendFile);
     _superTypes.add(_typeForName);
     this.setNameAndAccept(newType, qualifiedName);
@@ -88,17 +87,13 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
     _builder.append(qualifiedName, "");
     _builder.append("\' has already been registered.");
     Preconditions.checkArgument(_equals, _builder);
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    _compilationUnit.checkCanceled();
+    this.compilationUnit.checkCanceled();
     final Pair<String, String> namespaceAndName = this.getNameParts(qualifiedName);
-    CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
-    IFileHeaderProvider _fileHeaderProvider = _compilationUnit_1.getFileHeaderProvider();
-    CompilationUnitImpl _compilationUnit_2 = this.getCompilationUnit();
-    XtendFile _xtendFile = _compilationUnit_2.getXtendFile();
+    IFileHeaderProvider _fileHeaderProvider = this.compilationUnit.getFileHeaderProvider();
+    XtendFile _xtendFile = this.compilationUnit.getXtendFile();
     Resource _eResource = _xtendFile.eResource();
     final String headerText = _fileHeaderProvider.getFileHeader(_eResource);
-    CompilationUnitImpl _compilationUnit_3 = this.getCompilationUnit();
-    JvmTypesBuilder _jvmTypesBuilder = _compilationUnit_3.getJvmTypesBuilder();
+    JvmTypesBuilder _jvmTypesBuilder = this.compilationUnit.getJvmTypesBuilder();
     _jvmTypesBuilder.setFileHeader(newType, headerText);
     String _key = namespaceAndName.getKey();
     boolean _notEquals = (!Objects.equal(_key, null));
@@ -113,20 +108,17 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
       } else {
         String _key_2 = namespaceAndName.getKey();
         newType.setPackageName(_key_2);
-        IJvmDeclaredTypeAcceptor _acceptor = this.getAcceptor();
-        _acceptor.<JvmDeclaredType>accept(newType);
+        this.acceptor.<JvmDeclaredType>accept(newType);
       }
     } else {
-      IJvmDeclaredTypeAcceptor _acceptor_1 = this.getAcceptor();
-      _acceptor_1.<JvmDeclaredType>accept(newType);
+      this.acceptor.<JvmDeclaredType>accept(newType);
     }
     String _value = namespaceAndName.getValue();
     newType.setSimpleName(_value);
   }
   
   private JvmDeclaredType findType(final String string) {
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    XtendFile _xtendFile = _compilationUnit.getXtendFile();
+    XtendFile _xtendFile = this.compilationUnit.getXtendFile();
     Resource _eResource = _xtendFile.eResource();
     EList<EObject> _contents = _eResource.getContents();
     Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_contents, JvmDeclaredType.class);
@@ -167,93 +159,79 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
     }
   }
   
-  public boolean exists(final Path path) {
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
-    return _fileSystemSupport.exists(path);
+  @Delegate
+  public FileSystemSupport getFileSystemSupport() {
+    return this.compilationUnit.getFileSystemSupport();
   }
   
-  public String getCharset(final Path path) {
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
-    return _fileSystemSupport.getCharset(path);
-  }
-  
-  public Iterable<? extends Path> getChildren(final Path path) {
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
-    return _fileSystemSupport.getChildren(path);
-  }
-  
-  public CharSequence getContents(final Path path) {
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
-    return _fileSystemSupport.getContents(path);
-  }
-  
-  public InputStream getContentsAsStream(final Path path) {
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
-    return _fileSystemSupport.getContentsAsStream(path);
-  }
-  
-  public long getLastModification(final Path path) {
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
-    return _fileSystemSupport.getLastModification(path);
-  }
-  
-  public Path getProjectFolder(final Path path) {
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    FileLocations _fileLocations = _compilationUnit.getFileLocations();
-    return _fileLocations.getProjectFolder(path);
-  }
-  
-  public Path getSourceFolder(final Path path) {
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    FileLocations _fileLocations = _compilationUnit.getFileLocations();
-    return _fileLocations.getSourceFolder(path);
-  }
-  
-  public Path getTargetFolder(final Path sourceFolder) {
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    FileLocations _fileLocations = _compilationUnit.getFileLocations();
-    return _fileLocations.getTargetFolder(sourceFolder);
-  }
-  
-  public boolean isFile(final Path path) {
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
-    return _fileSystemSupport.isFile(path);
-  }
-  
-  public boolean isFolder(final Path path) {
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
-    return _fileSystemSupport.isFolder(path);
-  }
-  
-  public URI toURI(final Path path) {
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
-    return _fileSystemSupport.toURI(path);
+  @Delegate
+  public FileLocations getFileLocations() {
+    return this.compilationUnit.getFileLocations();
   }
   
   @Pure
   public IJvmDeclaredTypeAcceptor getAcceptor() {
-    return this._acceptor;
+    return this.acceptor;
   }
   
   public void setAcceptor(final IJvmDeclaredTypeAcceptor acceptor) {
-    this._acceptor = acceptor;
+    this.acceptor = acceptor;
   }
   
   @Pure
   public CompilationUnitImpl getCompilationUnit() {
-    return this._compilationUnit;
+    return this.compilationUnit;
   }
   
   public void setCompilationUnit(final CompilationUnitImpl compilationUnit) {
-    this._compilationUnit = compilationUnit;
+    this.compilationUnit = compilationUnit;
+  }
+  
+  public boolean exists(final Path path) {
+    return this.getFileSystemSupport().exists(path);
+  }
+  
+  public String getCharset(final Path path) {
+    return this.getFileSystemSupport().getCharset(path);
+  }
+  
+  public Iterable<? extends Path> getChildren(final Path path) {
+    return this.getFileSystemSupport().getChildren(path);
+  }
+  
+  public CharSequence getContents(final Path path) {
+    return this.getFileSystemSupport().getContents(path);
+  }
+  
+  public InputStream getContentsAsStream(final Path path) {
+    return this.getFileSystemSupport().getContentsAsStream(path);
+  }
+  
+  public long getLastModification(final Path path) {
+    return this.getFileSystemSupport().getLastModification(path);
+  }
+  
+  public boolean isFile(final Path path) {
+    return this.getFileSystemSupport().isFile(path);
+  }
+  
+  public boolean isFolder(final Path path) {
+    return this.getFileSystemSupport().isFolder(path);
+  }
+  
+  public URI toURI(final Path path) {
+    return this.getFileSystemSupport().toURI(path);
+  }
+  
+  public Path getProjectFolder(final Path path) {
+    return this.getFileLocations().getProjectFolder(path);
+  }
+  
+  public Path getSourceFolder(final Path path) {
+    return this.getFileLocations().getSourceFolder(path);
+  }
+  
+  public Path getTargetFolder(final Path sourceFolder) {
+    return this.getFileLocations().getTargetFolder(sourceFolder);
   }
 }

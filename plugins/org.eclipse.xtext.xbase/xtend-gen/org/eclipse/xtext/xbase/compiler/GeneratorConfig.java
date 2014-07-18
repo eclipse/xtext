@@ -1,31 +1,30 @@
 package org.eclipse.xtext.xbase.compiler;
 
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
 
+@Accessors
 @SuppressWarnings("all")
 public class GeneratorConfig {
-  @Property
-  private boolean _generateExpressions = true;
+  private boolean generateExpressions = true;
   
-  @Property
-  private boolean _generateSyntheticSuppressWarnings = true;
+  private boolean generateSyntheticSuppressWarnings = true;
   
   @Pure
   public boolean isGenerateExpressions() {
-    return this._generateExpressions;
+    return this.generateExpressions;
   }
   
   public void setGenerateExpressions(final boolean generateExpressions) {
-    this._generateExpressions = generateExpressions;
+    this.generateExpressions = generateExpressions;
   }
   
   @Pure
   public boolean isGenerateSyntheticSuppressWarnings() {
-    return this._generateSyntheticSuppressWarnings;
+    return this.generateSyntheticSuppressWarnings;
   }
   
   public void setGenerateSyntheticSuppressWarnings(final boolean generateSyntheticSuppressWarnings) {
-    this._generateSyntheticSuppressWarnings = generateSyntheticSuppressWarnings;
+    this.generateSyntheticSuppressWarnings = generateSyntheticSuppressWarnings;
   }
 }

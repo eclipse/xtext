@@ -1,17 +1,17 @@
 package org.eclipse.xtend.core.macro.declaration;
 
-import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Data
 @SuppressWarnings("all")
 public class UnknownType implements Type {
-  private final CompilationUnit _compilationUnit;
+  private final CompilationUnit compilationUnit;
   
-  private final String _qualifiedName;
+  private final String qualifiedName;
   
   public boolean isAssignableFrom(final Type otherType) {
     return false;
@@ -20,14 +20,12 @@ public class UnknownType implements Type {
   public String getSimpleName() {
     String _xblockexpression = null;
     {
-      String _qualifiedName = this.getQualifiedName();
-      final int idx = _qualifiedName.lastIndexOf(".");
+      final int idx = this.qualifiedName.lastIndexOf(".");
       String _xifexpression = null;
       if ((idx > 0)) {
-        String _qualifiedName_1 = this.getQualifiedName();
-        _xifexpression = _qualifiedName_1.substring(idx);
+        _xifexpression = this.qualifiedName.substring(idx);
       } else {
-        _xifexpression = this.getQualifiedName();
+        _xifexpression = this.qualifiedName;
       }
       _xblockexpression = _xifexpression;
     }
@@ -36,8 +34,8 @@ public class UnknownType implements Type {
   
   public UnknownType(final CompilationUnit compilationUnit, final String qualifiedName) {
     super();
-    this._compilationUnit = compilationUnit;
-    this._qualifiedName = qualifiedName;
+    this.compilationUnit = compilationUnit;
+    this.qualifiedName = qualifiedName;
   }
   
   @Override
@@ -45,8 +43,8 @@ public class UnknownType implements Type {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((this._compilationUnit== null) ? 0 : this._compilationUnit.hashCode());
-    result = prime * result + ((this._qualifiedName== null) ? 0 : this._qualifiedName.hashCode());
+    result = prime * result + ((this.compilationUnit== null) ? 0 : this.compilationUnit.hashCode());
+    result = prime * result + ((this.qualifiedName== null) ? 0 : this.qualifiedName.hashCode());
     return result;
   }
   
@@ -60,15 +58,15 @@ public class UnknownType implements Type {
     if (getClass() != obj.getClass())
       return false;
     UnknownType other = (UnknownType) obj;
-    if (this._compilationUnit == null) {
-      if (other._compilationUnit != null)
+    if (this.compilationUnit == null) {
+      if (other.compilationUnit != null)
         return false;
-    } else if (!this._compilationUnit.equals(other._compilationUnit))
+    } else if (!this.compilationUnit.equals(other.compilationUnit))
       return false;
-    if (this._qualifiedName == null) {
-      if (other._qualifiedName != null)
+    if (this.qualifiedName == null) {
+      if (other.qualifiedName != null)
         return false;
-    } else if (!this._qualifiedName.equals(other._qualifiedName))
+    } else if (!this.qualifiedName.equals(other.qualifiedName))
       return false;
     return true;
   }
@@ -76,17 +74,19 @@ public class UnknownType implements Type {
   @Override
   @Pure
   public String toString() {
-    String result = new ToStringHelper().toString(this);
-    return result;
+    ToStringBuilder b = new ToStringBuilder(this);
+    b.add("compilationUnit", this.compilationUnit);
+    b.add("qualifiedName", this.qualifiedName);
+    return b.toString();
   }
   
   @Pure
   public CompilationUnit getCompilationUnit() {
-    return this._compilationUnit;
+    return this.compilationUnit;
   }
   
   @Pure
   public String getQualifiedName() {
-    return this._qualifiedName;
+    return this.qualifiedName;
   }
 }

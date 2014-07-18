@@ -2,11 +2,12 @@ package org.eclipse.xtext.xbase.formatting
 
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtend.lib.annotations.Accessors
 
 abstract class AbstractFormatter implements IBasicFormatter {
 
-	@Property boolean allowIdentityEdits = false
-	@Property boolean diagnoseConflicts = true
+	@Accessors boolean allowIdentityEdits = false
+	@Accessors boolean diagnoseConflicts = true
 	boolean conflictOccurred = false
 
 	override format(XtextResource res, int offset, int length, FormattingPreferenceValues cfg) {

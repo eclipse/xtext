@@ -21,7 +21,7 @@ import org.eclipse.xtend.core.macro.AnnotationProcessor;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
@@ -37,16 +37,14 @@ import org.eclipse.xtext.xbase.lib.Pure;
 /**
  * @author Sven Efftinge
  */
+@Accessors
 @SuppressWarnings("all")
 public class ActiveAnnotationContext {
-  @Property
-  private final List<XtendAnnotationTarget> _annotatedSourceElements = CollectionLiterals.<XtendAnnotationTarget>newArrayList();
+  private final List<XtendAnnotationTarget> annotatedSourceElements = CollectionLiterals.<XtendAnnotationTarget>newArrayList();
   
-  @Property
-  private Object _processorInstance;
+  private Object processorInstance;
   
-  @Property
-  private CompilationUnitImpl _compilationUnit;
+  private CompilationUnitImpl compilationUnit;
   
   public void handleProcessingError(final Resource resource, final Throwable t) {
     try {
@@ -54,8 +52,7 @@ public class ActiveAnnotationContext {
         throw t;
       }
       final String msg = this.getMessageWithStackTrace(t);
-      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-      ActiveAnnotationContexts.AnnotationCallback _lastPhase = _compilationUnit.getLastPhase();
+      ActiveAnnotationContexts.AnnotationCallback _lastPhase = this.compilationUnit.getLastPhase();
       boolean _equals = Objects.equal(_lastPhase, ActiveAnnotationContexts.AnnotationCallback.GENERATION);
       if (_equals) {
         Throwables.propagateIfPossible(t);
@@ -142,24 +139,24 @@ public class ActiveAnnotationContext {
   
   @Pure
   public List<XtendAnnotationTarget> getAnnotatedSourceElements() {
-    return this._annotatedSourceElements;
+    return this.annotatedSourceElements;
   }
   
   @Pure
   public Object getProcessorInstance() {
-    return this._processorInstance;
+    return this.processorInstance;
   }
   
   public void setProcessorInstance(final Object processorInstance) {
-    this._processorInstance = processorInstance;
+    this.processorInstance = processorInstance;
   }
   
   @Pure
   public CompilationUnitImpl getCompilationUnit() {
-    return this._compilationUnit;
+    return this.compilationUnit;
   }
   
   public void setCompilationUnit(final CompilationUnitImpl compilationUnit) {
-    this._compilationUnit = compilationUnit;
+    this.compilationUnit = compilationUnit;
   }
 }

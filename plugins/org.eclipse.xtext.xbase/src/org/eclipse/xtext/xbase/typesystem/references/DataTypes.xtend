@@ -9,11 +9,11 @@ package org.eclipse.xtext.xbase.typesystem.references
 
 import java.util.Map
 import java.util.Set
-import org.eclipse.xtend.lib.Data
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo
+import org.eclipse.xtend.lib.annotations.Data
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

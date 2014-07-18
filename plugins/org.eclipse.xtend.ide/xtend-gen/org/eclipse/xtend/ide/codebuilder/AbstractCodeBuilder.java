@@ -16,7 +16,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
@@ -44,17 +44,17 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
  */
 @SuppressWarnings("all")
 public abstract class AbstractCodeBuilder implements ICodeBuilder {
-  @Property
-  private Object _ownerSource;
+  @Accessors
+  private Object ownerSource;
   
-  @Property
-  private JvmDeclaredType _owner;
+  @Accessors
+  private JvmDeclaredType owner;
   
-  @Property
-  private JvmVisibility _visibility;
+  @Accessors
+  private JvmVisibility visibility;
   
-  @Property
-  private EObject _context;
+  @Accessors
+  private EObject context;
   
   @Inject
   @Extension
@@ -64,8 +64,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
   private CommonTypeComputationServices services;
   
   public boolean isValid() {
-    JvmDeclaredType _owner = this.getOwner();
-    final IJavaElement javaElement = this._iJavaElementFinder.findElementFor(_owner);
+    final IJavaElement javaElement = this._iJavaElementFinder.findElementFor(this.owner);
     boolean _and = false;
     boolean _and_1 = false;
     boolean _and_2 = false;
@@ -81,22 +80,19 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
     if (!_or) {
       _and_2 = false;
     } else {
-      Object _ownerSource = this.getOwnerSource();
-      boolean _notEquals = (!Objects.equal(_ownerSource, null));
+      boolean _notEquals = (!Objects.equal(this.ownerSource, null));
       _and_2 = _notEquals;
     }
     if (!_and_2) {
       _and_1 = false;
     } else {
-      JvmDeclaredType _owner_1 = this.getOwner();
-      boolean _notEquals_1 = (!Objects.equal(_owner_1, null));
+      boolean _notEquals_1 = (!Objects.equal(this.owner, null));
       _and_1 = _notEquals_1;
     }
     if (!_and_1) {
       _and = false;
     } else {
-      EObject _context = this.getContext();
-      boolean _notEquals_2 = (!Objects.equal(_context, null));
+      boolean _notEquals_2 = (!Objects.equal(this.context, null));
       _and = _notEquals_2;
     }
     return _and;
@@ -190,8 +186,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
             if (_not) {
               appendable.append(" extends ");
               boolean isFirst = true;
-              EObject _context = this.getContext();
-              final StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(this.services, _context);
+              final StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(this.services, this.context);
               final OwnedConverter converter = new OwnedConverter(owner);
               for (final JvmUpperBound upperBound : upperBounds) {
                 {
@@ -250,37 +245,37 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
   
   @Pure
   public Object getOwnerSource() {
-    return this._ownerSource;
+    return this.ownerSource;
   }
   
   public void setOwnerSource(final Object ownerSource) {
-    this._ownerSource = ownerSource;
+    this.ownerSource = ownerSource;
   }
   
   @Pure
   public JvmDeclaredType getOwner() {
-    return this._owner;
+    return this.owner;
   }
   
   public void setOwner(final JvmDeclaredType owner) {
-    this._owner = owner;
+    this.owner = owner;
   }
   
   @Pure
   public JvmVisibility getVisibility() {
-    return this._visibility;
+    return this.visibility;
   }
   
   public void setVisibility(final JvmVisibility visibility) {
-    this._visibility = visibility;
+    this.visibility = visibility;
   }
   
   @Pure
   public EObject getContext() {
-    return this._context;
+    return this.context;
   }
   
   public void setContext(final EObject context) {
-    this._context = context;
+    this.context = context;
   }
 }

@@ -1,13 +1,13 @@
 package org.eclipse.xtend.core.formatting;
 
 import org.eclipse.xtend.core.formatting.Chunk;
-import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @Data
 @SuppressWarnings("all")
 public class SemanticWhitespace extends Chunk {
-  private final int _column;
+  private final int column;
   
   public String toString() {
     CharSequence _text = this.getText();
@@ -17,7 +17,7 @@ public class SemanticWhitespace extends Chunk {
   
   public SemanticWhitespace(final CharSequence text, final int column) {
     super(text);
-    this._column = column;
+    this.column = column;
   }
   
   @Override
@@ -25,7 +25,7 @@ public class SemanticWhitespace extends Chunk {
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
-    result = prime * result + this._column;
+    result = prime * result + this.column;
     return result;
   }
   
@@ -41,13 +41,13 @@ public class SemanticWhitespace extends Chunk {
     if (!super.equals(obj))
       return false;
     SemanticWhitespace other = (SemanticWhitespace) obj;
-    if (other._column != this._column)
+    if (other.column != this.column)
       return false;
     return true;
   }
   
   @Pure
   public int getColumn() {
-    return this._column;
+    return this.column;
   }
 }

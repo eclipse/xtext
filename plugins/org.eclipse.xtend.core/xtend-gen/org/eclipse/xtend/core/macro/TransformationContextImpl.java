@@ -11,7 +11,7 @@ import java.io.InputStream;
 import java.net.URI;
 import java.util.List;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.Delegate;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
@@ -42,64 +42,56 @@ import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class TransformationContextImpl implements TransformationContext {
-  @Property
-  private CompilationUnitImpl _unit;
+  @Accessors
+  private CompilationUnitImpl unit;
   
   @Delegate
   public ProblemSupport getProblemSupport() {
-    CompilationUnitImpl _unit = this.getUnit();
-    return _unit.getProblemSupport();
+    return this.unit.getProblemSupport();
   }
   
   @Delegate
   public TypeLookup getTypeLookup() {
-    CompilationUnitImpl _unit = this.getUnit();
-    return _unit.getTypeLookup();
+    return this.unit.getTypeLookup();
   }
   
   @Delegate
   public TypeReferenceProvider getTypeReferenceProvider() {
-    CompilationUnitImpl _unit = this.getUnit();
-    return _unit.getTypeReferenceProvider();
+    return this.unit.getTypeReferenceProvider();
   }
   
   @Delegate
   public AnnotationReferenceProvider getAnnotationReferenceProvider() {
-    CompilationUnitImpl _unit = this.getUnit();
-    return _unit.getAnnotationReferenceProvider();
+    return this.unit.getAnnotationReferenceProvider();
   }
   
   @Delegate
   public FileSystemSupport getFileSystemSupport() {
-    CompilationUnitImpl _unit = this.getUnit();
-    return _unit.getFileSystemSupport();
+    return this.unit.getFileSystemSupport();
   }
   
   @Delegate
   public FileLocations getFileLocations() {
-    CompilationUnitImpl _unit = this.getUnit();
-    return _unit.getFileLocations();
+    return this.unit.getFileLocations();
   }
   
   @Delegate
   public Tracability getTracability() {
-    CompilationUnitImpl _unit = this.getUnit();
-    return _unit.getTracability();
+    return this.unit.getTracability();
   }
   
   @Delegate
   public Associator getAssociator() {
-    CompilationUnitImpl _unit = this.getUnit();
-    return _unit.getAssociator();
+    return this.unit.getAssociator();
   }
   
   @Pure
   public CompilationUnitImpl getUnit() {
-    return this._unit;
+    return this.unit;
   }
   
   public void setUnit(final CompilationUnitImpl unit) {
-    this._unit = unit;
+    this.unit = unit;
   }
   
   public void addError(final Element element, final String message) {

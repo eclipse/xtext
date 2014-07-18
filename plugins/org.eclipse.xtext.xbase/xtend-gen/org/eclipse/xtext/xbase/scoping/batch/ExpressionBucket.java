@@ -8,10 +8,10 @@
 package org.eclipse.xtext.xbase.scoping.batch;
 
 import java.util.Map;
-import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -26,17 +26,17 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 @Data
 @SuppressWarnings("all")
 public class ExpressionBucket {
-  private final int _id;
+  private final int id;
   
-  private final Map<XExpression, LightweightTypeReference> _extensionProviders;
+  private final Map<XExpression, LightweightTypeReference> extensionProviders;
   
-  private final IResolvedFeatures.Provider _resolvedFeaturesProvider;
+  private final IResolvedFeatures.Provider resolvedFeaturesProvider;
   
   public ExpressionBucket(final int id, final Map<XExpression, LightweightTypeReference> extensionProviders, final IResolvedFeatures.Provider resolvedFeaturesProvider) {
     super();
-    this._id = id;
-    this._extensionProviders = extensionProviders;
-    this._resolvedFeaturesProvider = resolvedFeaturesProvider;
+    this.id = id;
+    this.extensionProviders = extensionProviders;
+    this.resolvedFeaturesProvider = resolvedFeaturesProvider;
   }
   
   @Override
@@ -44,9 +44,9 @@ public class ExpressionBucket {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + this._id;
-    result = prime * result + ((this._extensionProviders== null) ? 0 : this._extensionProviders.hashCode());
-    result = prime * result + ((this._resolvedFeaturesProvider== null) ? 0 : this._resolvedFeaturesProvider.hashCode());
+    result = prime * result + this.id;
+    result = prime * result + ((this.extensionProviders== null) ? 0 : this.extensionProviders.hashCode());
+    result = prime * result + ((this.resolvedFeaturesProvider== null) ? 0 : this.resolvedFeaturesProvider.hashCode());
     return result;
   }
   
@@ -60,17 +60,17 @@ public class ExpressionBucket {
     if (getClass() != obj.getClass())
       return false;
     ExpressionBucket other = (ExpressionBucket) obj;
-    if (other._id != this._id)
+    if (other.id != this.id)
       return false;
-    if (this._extensionProviders == null) {
-      if (other._extensionProviders != null)
+    if (this.extensionProviders == null) {
+      if (other.extensionProviders != null)
         return false;
-    } else if (!this._extensionProviders.equals(other._extensionProviders))
+    } else if (!this.extensionProviders.equals(other.extensionProviders))
       return false;
-    if (this._resolvedFeaturesProvider == null) {
-      if (other._resolvedFeaturesProvider != null)
+    if (this.resolvedFeaturesProvider == null) {
+      if (other.resolvedFeaturesProvider != null)
         return false;
-    } else if (!this._resolvedFeaturesProvider.equals(other._resolvedFeaturesProvider))
+    } else if (!this.resolvedFeaturesProvider.equals(other.resolvedFeaturesProvider))
       return false;
     return true;
   }
@@ -78,22 +78,25 @@ public class ExpressionBucket {
   @Override
   @Pure
   public String toString() {
-    String result = new ToStringHelper().toString(this);
-    return result;
+    ToStringBuilder b = new ToStringBuilder(this);
+    b.add("id", this.id);
+    b.add("extensionProviders", this.extensionProviders);
+    b.add("resolvedFeaturesProvider", this.resolvedFeaturesProvider);
+    return b.toString();
   }
   
   @Pure
   public int getId() {
-    return this._id;
+    return this.id;
   }
   
   @Pure
   public Map<XExpression, LightweightTypeReference> getExtensionProviders() {
-    return this._extensionProviders;
+    return this.extensionProviders;
   }
   
   @Pure
   public IResolvedFeatures.Provider getResolvedFeaturesProvider() {
-    return this._resolvedFeaturesProvider;
+    return this.resolvedFeaturesProvider;
   }
 }

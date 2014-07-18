@@ -8,32 +8,32 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public abstract class AbstractDelegator<T extends Object> {
-  @Property
-  private T _delegate;
+  @Accessors
+  private T delegate;
   
-  @Property
-  private CompilationUnitImpl _compilationUnit;
+  @Accessors
+  private CompilationUnitImpl compilationUnit;
   
   @Pure
   public T getDelegate() {
-    return this._delegate;
+    return this.delegate;
   }
   
   public void setDelegate(final T delegate) {
-    this._delegate = delegate;
+    this.delegate = delegate;
   }
   
   @Pure
   public CompilationUnitImpl getCompilationUnit() {
-    return this._compilationUnit;
+    return this.compilationUnit;
   }
   
   public void setCompilationUnit(final CompilationUnitImpl compilationUnit) {
-    this._compilationUnit = compilationUnit;
+    this.compilationUnit = compilationUnit;
   }
 }
