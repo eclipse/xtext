@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -22,7 +23,11 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+
 import com.google.common.annotations.GwtCompatible;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
@@ -264,5 +269,59 @@ import com.google.common.collect.Sets;
 			result.put(entry.getKey(), entry.getValue());
 		}
 	}
+	
+	/**
+	 * Creates an Iterable in which the first element is <code>seed</code> and the nth element is computed by calling
+	 * the <code>advance</code> function on the previous element. The Iterable ends if the <code>advance</code> function
+	 * returns <code>null</code>
+	 * 
+	 * The iterable lazily constructs only the elements that are requested. This allows to even work with infinite
+	 * sequences like "all prime numbers" as long as there is some terminating condition like "less than 1000000".
+	 * 
+	 * @param seed
+	 *            the value to begin with.
+	 * @param advance
+	 *            the function that computes the next value. May not be <code>null</code>
+	 * @return a potentially infinite Iterable of all the computed values
+	 * @since 2.7
+	 */
+	public static <T> Iterable<T> newIterable(final T seed, final Function1<? super T, ? extends T> advance) {
+		Preconditions.checkNotNull(advance, "advance");
+		return new Iterable<T>() {
+			public Iterator<T> iterator() {
+				return newIterator(seed, advance);
+			}
+		};
+	}
 
+	/**
+	 * Creates an Iterator in which the first element is <code>seed</code> and the nth element is computed by calling
+	 * the <code>advance</code> function on the previous element. The Iterator ends if the <code>advance</code> function
+	 * returns <code>null</code>
+	 * 
+	 * The iterator lazily constructs only the elements that are requested. This allows to even work with infinite
+	 * sequences like "all prime numbers" as long as there is some terminating condition like "less than 1000000".
+	 * 
+	 * @param seed
+	 *            the value to begin with.
+	 * @param advance
+	 *            the function that computes the next value. May not be <code>null</code>
+	 * @return a potentially infinite Iterator of all the computed values
+	 * @since 2.7
+	 */
+	public static <T> Iterator<T> newIterator(final T seed, final Function1<? super T, ? extends T> advance) {
+		Preconditions.checkNotNull(advance, "advance");
+		return new AbstractIterator<T>() {
+			T next = seed;
+
+			@Override
+			protected T computeNext() {
+				if (next == null)
+					return endOfData();
+				T result = next;
+				next = advance.apply(next);
+				return result;
+			}
+		};
+	}
 }
