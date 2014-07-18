@@ -193,6 +193,7 @@
 							<version>IT-SNAPSHOT</version>
 							<packaging>maven-plugin</packaging>
 							<pomFile>pom.xml</pomFile>
+							<installAtEnd>false</installAtEnd>
 						</configuration>
 					</execution>
 				</executions>
