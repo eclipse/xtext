@@ -16,6 +16,7 @@ import java.util.concurrent.ConcurrentMap
 /**
  * Use this classloader as a parent in order to supply different JDK classes than the
  * currently running VM.
+ * @since 2.7
  */
 class BootClassLoader extends URLClassLoader {
 	private final ConcurrentMap<String, Object> locks = Maps.newConcurrentMap;
