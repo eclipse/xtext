@@ -45,6 +45,7 @@ public interface Tracability {
 	
 	/**
 	 * @deprecated use {@link #getPrimaryGeneratedJavaElement(Element)}
+	 * @since 2.7
 	 */
 	@Deprecated
 	NamedElement getPrimaryGeneratedJavaElement(NamedElement source);
