@@ -19,6 +19,12 @@
                 <message_argument value="2.6.0"/>
             </message_arguments>
         </filter>
+        <filter id="923795461">
+            <message_arguments>
+                <message_argument value="2.7.0"/>
+                <message_argument value="2.6.0"/>
+            </message_arguments>
+        </filter>
     </resource>
     <resource path="META-INF/MANIFEST.MF" type="com.google.common.base.Equivalences">
         <filter comment="Guava 15" id="305422471">
