@@ -7,7 +7,7 @@
  */
 package org.eclipse.xtext.tasks;
 
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.tasks.TaskTag;
 import org.eclipse.xtext.xbase.lib.Pure;
 
@@ -15,25 +15,20 @@ import org.eclipse.xtext.xbase.lib.Pure;
  * @author Stefan Oehme - Initial contribution and API
  * @since 2.6
  */
+@Accessors
 @SuppressWarnings("all")
 public final class Task {
-  @Property
-  private TaskTag _tag;
+  private TaskTag tag;
   
-  @Property
-  private String _description;
+  private String description;
   
-  @Property
-  private int _lineNumber;
+  private int lineNumber;
   
-  @Property
-  private int _offset;
+  private int offset;
   
   public String getFullText() {
-    TaskTag _tag = this.getTag();
-    String _name = _tag.getName();
-    String _description = this.getDescription();
-    return (_name + _description);
+    String _name = this.tag.getName();
+    return (_name + this.description);
   }
   
   public int getTotalLength() {
@@ -42,43 +37,42 @@ public final class Task {
   }
   
   public int getTagLength() {
-    TaskTag _tag = this.getTag();
-    return _tag.length();
+    return this.tag.length();
   }
   
   @Pure
   public TaskTag getTag() {
-    return this._tag;
+    return this.tag;
   }
   
   public void setTag(final TaskTag tag) {
-    this._tag = tag;
+    this.tag = tag;
   }
   
   @Pure
   public String getDescription() {
-    return this._description;
+    return this.description;
   }
   
   public void setDescription(final String description) {
-    this._description = description;
+    this.description = description;
   }
   
   @Pure
   public int getLineNumber() {
-    return this._lineNumber;
+    return this.lineNumber;
   }
   
   public void setLineNumber(final int lineNumber) {
-    this._lineNumber = lineNumber;
+    this.lineNumber = lineNumber;
   }
   
   @Pure
   public int getOffset() {
-    return this._offset;
+    return this.offset;
   }
   
   public void setOffset(final int offset) {
-    this._offset = offset;
+    this.offset = offset;
   }
 }

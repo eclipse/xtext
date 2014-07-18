@@ -61,9 +61,9 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
         JvmConstructor _xblockexpression = null;
         {
           CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-          IXtendJvmAssociations _jvmAssociations = _compilationUnit.getJvmAssociations();
+          IXtendJvmAssociations _jvmModelAssociations = _compilationUnit.getJvmModelAssociations();
           XtendConstructor _delegate = ((XtendConstructorDeclarationImpl)constructorDeclaration).getDelegate();
-          final EObject jvmElement = _jvmAssociations.getPrimaryJvmElement(_delegate);
+          final EObject jvmElement = _jvmModelAssociations.getPrimaryJvmElement(_delegate);
           JvmConstructor _xifexpression = null;
           if ((jvmElement instanceof JvmConstructor)) {
             _xifexpression = ((JvmConstructor)jvmElement);

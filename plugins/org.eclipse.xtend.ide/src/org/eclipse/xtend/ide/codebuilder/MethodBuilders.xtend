@@ -14,17 +14,18 @@ import org.eclipse.xtext.xbase.compiler.ISourceAppender
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 
 import static org.eclipse.xtext.common.types.JvmVisibility.*
+import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * @author Jan Koehnlein
  */
 abstract class AbstractMethodBuilder extends AbstractExecutableBuilder {
 	
-	@Property String methodName
-	@Property LightweightTypeReference returnType
-	@Property boolean staticFlag
-	@Property boolean abstractFlag
-	@Property boolean overrideFlag
+	@Accessors String methodName
+	@Accessors LightweightTypeReference returnType
+	@Accessors boolean staticFlag
+	@Accessors boolean abstractFlag
+	@Accessors boolean overrideFlag
 }
 
 class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder.Xtend {

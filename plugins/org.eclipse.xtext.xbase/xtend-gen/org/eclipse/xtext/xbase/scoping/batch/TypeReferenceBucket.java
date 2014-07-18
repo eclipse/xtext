@@ -8,10 +8,10 @@
 package org.eclipse.xtext.xbase.scoping.batch;
 
 import java.util.List;
-import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 /**
  * A type bucket collects a number of types that originate in the
@@ -23,14 +23,14 @@ import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 @Data
 @SuppressWarnings("all")
 public class TypeReferenceBucket {
-  private final int _id;
+  private final int id;
   
-  private final List<JvmTypeReference> _types;
+  private final List<JvmTypeReference> types;
   
   public TypeReferenceBucket(final int id, final List<JvmTypeReference> types) {
     super();
-    this._id = id;
-    this._types = types;
+    this.id = id;
+    this.types = types;
   }
   
   @Override
@@ -38,8 +38,8 @@ public class TypeReferenceBucket {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + this._id;
-    result = prime * result + ((this._types== null) ? 0 : this._types.hashCode());
+    result = prime * result + this.id;
+    result = prime * result + ((this.types== null) ? 0 : this.types.hashCode());
     return result;
   }
   
@@ -53,12 +53,12 @@ public class TypeReferenceBucket {
     if (getClass() != obj.getClass())
       return false;
     TypeReferenceBucket other = (TypeReferenceBucket) obj;
-    if (other._id != this._id)
+    if (other.id != this.id)
       return false;
-    if (this._types == null) {
-      if (other._types != null)
+    if (this.types == null) {
+      if (other.types != null)
         return false;
-    } else if (!this._types.equals(other._types))
+    } else if (!this.types.equals(other.types))
       return false;
     return true;
   }
@@ -66,17 +66,19 @@ public class TypeReferenceBucket {
   @Override
   @Pure
   public String toString() {
-    String result = new ToStringHelper().toString(this);
-    return result;
+    ToStringBuilder b = new ToStringBuilder(this);
+    b.add("id", this.id);
+    b.add("types", this.types);
+    return b.toString();
   }
   
   @Pure
   public int getId() {
-    return this._id;
+    return this.id;
   }
   
   @Pure
   public List<JvmTypeReference> getTypes() {
-    return this._types;
+    return this.types;
   }
 }

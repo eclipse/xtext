@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
@@ -19,11 +19,11 @@ import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public abstract class AbstractFormatter implements IBasicFormatter {
-  @Property
-  private boolean _allowIdentityEdits = false;
+  @Accessors
+  private boolean allowIdentityEdits = false;
   
-  @Property
-  private boolean _diagnoseConflicts = true;
+  @Accessors
+  private boolean diagnoseConflicts = true;
   
   private boolean conflictOccurred = false;
   
@@ -38,8 +38,7 @@ public abstract class AbstractFormatter implements IBasicFormatter {
       EObject _head = IterableExtensions.<EObject>head(_contents);
       this.format(_head, format);
       boolean _and = false;
-      boolean _isDiagnoseConflicts = this.isDiagnoseConflicts();
-      if (!_isDiagnoseConflicts) {
+      if (!this.diagnoseConflicts) {
         _and = false;
       } else {
         boolean _isConflictOccurred = format.isConflictOccurred();
@@ -57,8 +56,7 @@ public abstract class AbstractFormatter implements IBasicFormatter {
       this.conflictOccurred = _isConflictOccurred_1;
       final List<TextReplacement> edits = format.renderToEdits(offset, length);
       List<TextReplacement> _xifexpression = null;
-      boolean _isAllowIdentityEdits = this.isAllowIdentityEdits();
-      if (_isAllowIdentityEdits) {
+      if (this.allowIdentityEdits) {
         _xifexpression = edits;
       } else {
         final Function1<TextReplacement, Boolean> _function = new Function1<TextReplacement, Boolean>() {
@@ -105,19 +103,19 @@ public abstract class AbstractFormatter implements IBasicFormatter {
   
   @Pure
   public boolean isAllowIdentityEdits() {
-    return this._allowIdentityEdits;
+    return this.allowIdentityEdits;
   }
   
   public void setAllowIdentityEdits(final boolean allowIdentityEdits) {
-    this._allowIdentityEdits = allowIdentityEdits;
+    this.allowIdentityEdits = allowIdentityEdits;
   }
   
   @Pure
   public boolean isDiagnoseConflicts() {
-    return this._diagnoseConflicts;
+    return this.diagnoseConflicts;
   }
   
   public void setDiagnoseConflicts(final boolean diagnoseConflicts) {
-    this._diagnoseConflicts = diagnoseConflicts;
+    this.diagnoseConflicts = diagnoseConflicts;
   }
 }

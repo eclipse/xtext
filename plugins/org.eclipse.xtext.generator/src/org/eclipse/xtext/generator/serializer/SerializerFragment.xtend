@@ -24,6 +24,7 @@ import com.google.inject.Binder
 import com.google.inject.name.Names
 import org.eclipse.xtext.generator.IStubGenerating
 import static java.util.Collections.*
+import org.eclipse.xtend.lib.annotations.Accessors
 
 class SerializerFragment extends Xtend2GeneratorFragment implements IStubGenerating, IStubGenerating.XtendOption {
 	
@@ -45,7 +46,7 @@ class SerializerFragment extends Xtend2GeneratorFragment implements IStubGenerat
 	
 	boolean srcGenOnly = false;
 	
-	@Property boolean generateXtendStub
+	@Accessors boolean generateXtendStub
 	
 	override protected addLocalBindings(Binder binder) {
 		binder

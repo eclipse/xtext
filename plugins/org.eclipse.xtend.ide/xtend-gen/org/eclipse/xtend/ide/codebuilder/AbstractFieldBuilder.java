@@ -8,7 +8,7 @@
 package org.eclipse.xtend.ide.codebuilder;
 
 import org.eclipse.xtend.ide.codebuilder.AbstractCodeBuilder;
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -18,14 +18,14 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  */
 @SuppressWarnings("all")
 public abstract class AbstractFieldBuilder extends AbstractCodeBuilder {
-  @Property
-  private String _fieldName;
+  @Accessors
+  private String fieldName;
   
-  @Property
-  private LightweightTypeReference _fieldType;
+  @Accessors
+  private LightweightTypeReference fieldType;
   
-  @Property
-  private boolean _staticFlag;
+  @Accessors
+  private boolean staticFlag;
   
   public String getImage() {
     String _switchResult = null;
@@ -53,28 +53,28 @@ public abstract class AbstractFieldBuilder extends AbstractCodeBuilder {
   
   @Pure
   public String getFieldName() {
-    return this._fieldName;
+    return this.fieldName;
   }
   
   public void setFieldName(final String fieldName) {
-    this._fieldName = fieldName;
+    this.fieldName = fieldName;
   }
   
   @Pure
   public LightweightTypeReference getFieldType() {
-    return this._fieldType;
+    return this.fieldType;
   }
   
   public void setFieldType(final LightweightTypeReference fieldType) {
-    this._fieldType = fieldType;
+    this.fieldType = fieldType;
   }
   
   @Pure
   public boolean isStaticFlag() {
-    return this._staticFlag;
+    return this.staticFlag;
   }
   
   public void setStaticFlag(final boolean staticFlag) {
-    this._staticFlag = staticFlag;
+    this.staticFlag = staticFlag;
   }
 }

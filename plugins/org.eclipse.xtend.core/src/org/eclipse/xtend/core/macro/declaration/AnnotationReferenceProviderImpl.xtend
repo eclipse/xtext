@@ -73,7 +73,7 @@ class AnnotationReferenceProviderImpl implements AnnotationReferenceProvider {
 				annotationTypeDelcaration.delegate
 			}
 			XtendAnnotationTypeDeclarationImpl: {
-				jvmAssociations.getInferredType(annotationTypeDelcaration.delegate)
+				jvmModelAssociations.getInferredType(annotationTypeDelcaration.delegate)
 			}
 			default : {
 				throw new IllegalArgumentException("couldn't construct type reference for type " + annotationTypeDelcaration)

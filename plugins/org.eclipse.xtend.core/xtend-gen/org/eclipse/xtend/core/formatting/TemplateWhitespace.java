@@ -1,7 +1,7 @@
 package org.eclipse.xtend.core.formatting;
 
 import org.eclipse.xtend.core.formatting.Chunk;
-import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @Data

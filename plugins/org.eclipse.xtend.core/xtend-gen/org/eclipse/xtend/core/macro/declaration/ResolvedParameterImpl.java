@@ -7,7 +7,7 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ResolvedParameter;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
@@ -17,25 +17,23 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Data
 @SuppressWarnings("all")
 public class ResolvedParameterImpl implements ResolvedParameter {
-  private final ParameterDeclaration _declaration;
+  private final ParameterDeclaration declaration;
   
-  private final TypeReference _resolvedType;
+  private final TypeReference resolvedType;
   
   public String toString() {
     StringConcatenation _builder = new StringConcatenation();
-    TypeReference _resolvedType = this.getResolvedType();
-    _builder.append(_resolvedType, "");
+    _builder.append(this.resolvedType, "");
     _builder.append(" ");
-    ParameterDeclaration _declaration = this.getDeclaration();
-    String _simpleName = _declaration.getSimpleName();
+    String _simpleName = this.declaration.getSimpleName();
     _builder.append(_simpleName, "");
     return _builder.toString();
   }
   
   public ResolvedParameterImpl(final ParameterDeclaration declaration, final TypeReference resolvedType) {
     super();
-    this._declaration = declaration;
-    this._resolvedType = resolvedType;
+    this.declaration = declaration;
+    this.resolvedType = resolvedType;
   }
   
   @Override
@@ -43,8 +41,8 @@ public class ResolvedParameterImpl implements ResolvedParameter {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((this._declaration== null) ? 0 : this._declaration.hashCode());
-    result = prime * result + ((this._resolvedType== null) ? 0 : this._resolvedType.hashCode());
+    result = prime * result + ((this.declaration== null) ? 0 : this.declaration.hashCode());
+    result = prime * result + ((this.resolvedType== null) ? 0 : this.resolvedType.hashCode());
     return result;
   }
   
@@ -58,26 +56,26 @@ public class ResolvedParameterImpl implements ResolvedParameter {
     if (getClass() != obj.getClass())
       return false;
     ResolvedParameterImpl other = (ResolvedParameterImpl) obj;
-    if (this._declaration == null) {
-      if (other._declaration != null)
+    if (this.declaration == null) {
+      if (other.declaration != null)
         return false;
-    } else if (!this._declaration.equals(other._declaration))
+    } else if (!this.declaration.equals(other.declaration))
       return false;
-    if (this._resolvedType == null) {
-      if (other._resolvedType != null)
+    if (this.resolvedType == null) {
+      if (other.resolvedType != null)
         return false;
-    } else if (!this._resolvedType.equals(other._resolvedType))
+    } else if (!this.resolvedType.equals(other.resolvedType))
       return false;
     return true;
   }
   
   @Pure
   public ParameterDeclaration getDeclaration() {
-    return this._declaration;
+    return this.declaration;
   }
   
   @Pure
   public TypeReference getResolvedType() {
-    return this._resolvedType;
+    return this.resolvedType;
   }
 }

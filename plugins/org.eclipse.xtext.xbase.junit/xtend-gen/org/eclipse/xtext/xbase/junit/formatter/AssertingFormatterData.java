@@ -1,86 +1,80 @@
 package org.eclipse.xtext.xbase.junit.formatter;
 
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.xbase.formatting.FormattingPreferenceValues;
 import org.eclipse.xtext.xbase.lib.Pure;
 
+@Accessors
 @SuppressWarnings("all")
 public class AssertingFormatterData {
-  @Property
-  private MapBasedPreferenceValues _config;
+  private MapBasedPreferenceValues config;
   
   public FormattingPreferenceValues getCfg() {
-    MapBasedPreferenceValues _config = this.getConfig();
-    return new FormattingPreferenceValues(_config);
+    return new FormattingPreferenceValues(this.config);
   }
   
-  @Property
-  private CharSequence _expectation;
+  private CharSequence expectation;
   
-  @Property
-  private CharSequence _toBeFormatted;
+  private CharSequence toBeFormatted;
   
-  @Property
-  private String _prefix;
+  private String prefix;
   
-  @Property
-  private String _postfix;
+  private String postfix;
   
-  @Property
-  private boolean _allowErrors;
+  private boolean allowErrors;
   
   @Pure
   public MapBasedPreferenceValues getConfig() {
-    return this._config;
+    return this.config;
   }
   
   public void setConfig(final MapBasedPreferenceValues config) {
-    this._config = config;
+    this.config = config;
   }
   
   @Pure
   public CharSequence getExpectation() {
-    return this._expectation;
+    return this.expectation;
   }
   
   public void setExpectation(final CharSequence expectation) {
-    this._expectation = expectation;
+    this.expectation = expectation;
   }
   
   @Pure
   public CharSequence getToBeFormatted() {
-    return this._toBeFormatted;
+    return this.toBeFormatted;
   }
   
   public void setToBeFormatted(final CharSequence toBeFormatted) {
-    this._toBeFormatted = toBeFormatted;
+    this.toBeFormatted = toBeFormatted;
   }
   
   @Pure
   public String getPrefix() {
-    return this._prefix;
+    return this.prefix;
   }
   
   public void setPrefix(final String prefix) {
-    this._prefix = prefix;
+    this.prefix = prefix;
   }
   
   @Pure
   public String getPostfix() {
-    return this._postfix;
+    return this.postfix;
   }
   
   public void setPostfix(final String postfix) {
-    this._postfix = postfix;
+    this.postfix = postfix;
   }
   
   @Pure
   public boolean isAllowErrors() {
-    return this._allowErrors;
+    return this.allowErrors;
   }
   
   public void setAllowErrors(final boolean allowErrors) {
-    this._allowErrors = allowErrors;
+    this.allowErrors = allowErrors;
   }
 }

@@ -29,7 +29,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.builder.standalone.ClusteringConfig;
@@ -76,29 +76,29 @@ public class StandaloneBuilder {
   /**
    * Map key is a file extension provided by Language FileExtensionProvider
    */
-  @Property
-  private Map<String, LanguageAccess> _languages;
+  @Accessors
+  private Map<String, LanguageAccess> languages;
   
-  @Property
-  private Iterable<String> _sourceDirs;
+  @Accessors
+  private Iterable<String> sourceDirs;
   
-  @Property
-  private Iterable<String> _classPathEntries;
+  @Accessors
+  private Iterable<String> classPathEntries;
   
-  @Property
-  private File _tempDir = Files.createTempDir();
+  @Accessors
+  private File tempDir = Files.createTempDir();
   
-  @Property
-  private String _encoding;
+  @Accessors
+  private String encoding;
   
-  @Property
-  private String _classPathLookUpFilter;
+  @Accessors
+  private String classPathLookUpFilter;
   
-  @Property
-  private boolean _failOnValidationError = true;
+  @Accessors
+  private boolean failOnValidationError = true;
   
-  @Property
-  private ClusteringConfig _clusteringConfig = null;
+  @Accessors
+  private ClusteringConfig clusteringConfig = null;
   
   @Inject
   private IndexedJvmTypeAccess jvmTypeAccess;
@@ -122,13 +122,12 @@ public class StandaloneBuilder {
     boolean _notEquals = (!Objects.equal(pathAsString, null));
     if (_notEquals) {
       File _file = new File(pathAsString);
-      this._tempDir = _file;
+      this.tempDir = _file;
     }
   }
   
   public boolean launch() {
-    Map<String, LanguageAccess> _languages = this.getLanguages();
-    Collection<LanguageAccess> _values = _languages.values();
+    Collection<LanguageAccess> _values = this.languages.values();
     final Function1<LanguageAccess, Boolean> _function = new Function1<LanguageAccess, Boolean>() {
       public Boolean apply(final LanguageAccess it) {
         return Boolean.valueOf(it.isLinksAgainstJava());
@@ -139,45 +138,37 @@ public class StandaloneBuilder {
       StandaloneBuilder.LOG.info("Using common types.");
     }
     final XtextResourceSet resourceSet = this.resourceSetProvider.get();
-    String _encoding = this.getEncoding();
-    boolean _notEquals = (!Objects.equal(_encoding, null));
+    boolean _notEquals = (!Objects.equal(this.encoding, null));
     if (_notEquals) {
       StandaloneBuilder.LOG.debug("Setting encoding.");
-      Map<String, LanguageAccess> _languages_1 = this.getLanguages();
-      Collection<LanguageAccess> _values_1 = _languages_1.values();
-      String _encoding_1 = this.getEncoding();
-      this.fileEncodingSetup(_values_1, _encoding_1);
+      Collection<LanguageAccess> _values_1 = this.languages.values();
+      this.fileEncodingSetup(_values_1, this.encoding);
     }
     StandaloneBuilder.LOG.info("Collecting source models.");
     final long startedAt = System.currentTimeMillis();
-    Iterable<String> rootsToTravers = this.getClassPathEntries();
-    String _classPathLookUpFilter = this.getClassPathLookUpFilter();
-    boolean _notEquals_1 = (!Objects.equal(_classPathLookUpFilter, null));
+    Iterable<String> rootsToTravers = this.classPathEntries;
+    boolean _notEquals_1 = (!Objects.equal(this.classPathLookUpFilter, null));
     if (_notEquals_1) {
       StandaloneBuilder.LOG.info("Class path look up filter is active.");
-      String _classPathLookUpFilter_1 = this.getClassPathLookUpFilter();
-      final Pattern cpLookUpFilter = Pattern.compile(_classPathLookUpFilter_1);
-      Iterable<String> _classPathEntries = this.getClassPathEntries();
+      final Pattern cpLookUpFilter = Pattern.compile(this.classPathLookUpFilter);
       final Function1<String, Boolean> _function_1 = new Function1<String, Boolean>() {
         public Boolean apply(final String root) {
           Matcher _matcher = cpLookUpFilter.matcher(root);
           return Boolean.valueOf(_matcher.matches());
         }
       };
-      Iterable<String> _filter = IterableExtensions.<String>filter(_classPathEntries, _function_1);
+      Iterable<String> _filter = IterableExtensions.<String>filter(this.classPathEntries, _function_1);
       rootsToTravers = _filter;
       final Iterable<String> _converted_rootsToTravers = (Iterable<String>)rootsToTravers;
       int _length = ((Object[])Conversions.unwrapArray(_converted_rootsToTravers, Object.class)).length;
       String _plus = ("Investigating " + Integer.valueOf(_length));
       String _plus_1 = (_plus + " of ");
-      Iterable<String> _classPathEntries_1 = this.getClassPathEntries();
-      int _length_1 = ((Object[])Conversions.unwrapArray(_classPathEntries_1, Object.class)).length;
+      int _length_1 = ((Object[])Conversions.unwrapArray(this.classPathEntries, Object.class)).length;
       String _plus_2 = (_plus_1 + Integer.valueOf(_length_1));
       String _plus_3 = (_plus_2 + " class path entries.");
       StandaloneBuilder.LOG.info(_plus_3);
     }
-    Iterable<String> _sourceDirs = this.getSourceDirs();
-    final List<URI> sourceResourceURIs = this.collectResources(_sourceDirs, resourceSet);
+    final List<URI> sourceResourceURIs = this.collectResources(this.sourceDirs, resourceSet);
     List<URI> _collectResources = this.collectResources(rootsToTravers, resourceSet);
     final Iterable<URI> allResourcesURIs = Iterables.<URI>concat(sourceResourceURIs, _collectResources);
     long _currentTimeMillis = System.currentTimeMillis();
@@ -185,16 +176,13 @@ public class StandaloneBuilder {
     String _plus_4 = ("Finished collecting source models. Took: " + Long.valueOf(_minus));
     String _plus_5 = (_plus_4 + " ms.");
     StandaloneBuilder.LOG.debug(_plus_5);
-    Iterable<String> _sourceDirs_1 = this.getSourceDirs();
-    Iterable<String> _classPathEntries_2 = this.getClassPathEntries();
-    final Iterable<String> allClassPathEntries = Iterables.<String>concat(_sourceDirs_1, _classPathEntries_2);
+    final Iterable<String> allClassPathEntries = Iterables.<String>concat(this.sourceDirs, this.classPathEntries);
     if (needsJava) {
       StandaloneBuilder.LOG.info("Installing type provider.");
       this.installTypeProvider(allClassPathEntries, resourceSet, null);
     }
     IResourceClusteringPolicy _xifexpression = null;
-    ClusteringConfig _clusteringConfig = this.getClusteringConfig();
-    boolean _notEquals_2 = (!Objects.equal(_clusteringConfig, null));
+    boolean _notEquals_2 = (!Objects.equal(this.clusteringConfig, null));
     if (_notEquals_2) {
       DynamicResourceClusteringPolicy _xblockexpression = null;
       {
@@ -202,16 +190,13 @@ public class StandaloneBuilder {
         DynamicResourceClusteringPolicy _dynamicResourceClusteringPolicy = new DynamicResourceClusteringPolicy();
         final Procedure1<DynamicResourceClusteringPolicy> _function_2 = new Procedure1<DynamicResourceClusteringPolicy>() {
           public void apply(final DynamicResourceClusteringPolicy it) {
-            ClusteringConfig _clusteringConfig = StandaloneBuilder.this.getClusteringConfig();
-            long _minimumFreeMemory = _clusteringConfig.getMinimumFreeMemory();
+            long _minimumFreeMemory = StandaloneBuilder.this.clusteringConfig.getMinimumFreeMemory();
             long _multiply = (_minimumFreeMemory * 1024);
             long _multiply_1 = (_multiply * 1024);
             it.setMinimumFreeMemory(_multiply_1);
-            ClusteringConfig _clusteringConfig_1 = StandaloneBuilder.this.getClusteringConfig();
-            int _minimumClusterSize = _clusteringConfig_1.getMinimumClusterSize();
+            int _minimumClusterSize = StandaloneBuilder.this.clusteringConfig.getMinimumClusterSize();
             it.setMinimumClusterSize(_minimumClusterSize);
-            ClusteringConfig _clusteringConfig_2 = StandaloneBuilder.this.getClusteringConfig();
-            long _minimumPercentFreeMemory = _clusteringConfig_2.getMinimumPercentFreeMemory();
+            long _minimumPercentFreeMemory = StandaloneBuilder.this.clusteringConfig.getMinimumPercentFreeMemory();
             it.setMinimumPercentFreeMemory(_minimumPercentFreeMemory);
           }
         };
@@ -283,8 +268,7 @@ public class StandaloneBuilder {
           }
         }
         boolean _and = false;
-        boolean _isFailOnValidationError = this.isFailOnValidationError();
-        if (!_isFailOnValidationError) {
+        if (!this.failOnValidationError) {
           _and = false;
         } else {
           _and = (!isErrorFree);
@@ -333,15 +317,13 @@ public class StandaloneBuilder {
   
   protected String compileStubs(final File stubsDir) {
     final File stubsClasses = this.createTempDir("classes");
-    Iterable<String> _classPathEntries = this.getClassPathEntries();
-    this.compiler.setClassPath(_classPathEntries);
+    this.compiler.setClassPath(this.classPathEntries);
     String _absolutePath = stubsDir.getAbsolutePath();
     String _plus = ("Compiling stubs located in " + _absolutePath);
     StandaloneBuilder.LOG.info(_plus);
-    Iterable<String> _sourceDirs = this.getSourceDirs();
     String _absolutePath_1 = stubsDir.getAbsolutePath();
     ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(_absolutePath_1);
-    Iterable<String> _plus_1 = Iterables.<String>concat(_sourceDirs, _newArrayList);
+    Iterable<String> _plus_1 = Iterables.<String>concat(this.sourceDirs, _newArrayList);
     final IJavaCompiler.CompilationResult result = this.compiler.compile(_plus_1, stubsClasses);
     if (result != null) {
       switch (result) {
@@ -366,11 +348,9 @@ public class StandaloneBuilder {
     String _absolutePath = stubsDir.getAbsolutePath();
     String _plus = ("Generating stubs into " + _absolutePath);
     StandaloneBuilder.LOG.info(_plus);
-    String _encoding = this.getEncoding();
-    boolean _notEquals = (!Objects.equal(_encoding, null));
+    boolean _notEquals = (!Objects.equal(this.encoding, null));
     if (_notEquals) {
-      String _encoding_1 = this.getEncoding();
-      this.encodingProvider.setDefaultEncoding(_encoding_1);
+      this.encodingProvider.setDefaultEncoding(this.encoding);
     }
     String _absolutePath_1 = stubsDir.getAbsolutePath();
     this.commonFileAccess.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT, _absolutePath_1);
@@ -423,7 +403,6 @@ public class StandaloneBuilder {
   protected void registerCurrentSource(final URI uri) {
     LanguageAccess _languageAccess = this.languageAccess(uri);
     final JavaIoFileSystemAccess fsa = _languageAccess.getFileSystemAccess();
-    Iterable<String> _sourceDirs = this.getSourceDirs();
     final Function1<String, String> _function = new Function1<String, String>() {
       public String apply(final String it) {
         File _file = new File(it);
@@ -432,7 +411,7 @@ public class StandaloneBuilder {
         return _createFileURI.toString();
       }
     };
-    Iterable<String> _map = IterableExtensions.<String, String>map(_sourceDirs, _function);
+    Iterable<String> _map = IterableExtensions.<String, String>map(this.sourceDirs, _function);
     final Function1<String, Boolean> _function_1 = new Function1<String, Boolean>() {
       public Boolean apply(final String it) {
         String _string = uri.toString();
@@ -466,8 +445,7 @@ public class StandaloneBuilder {
       _builder.append("Resource ");
       _builder.append(uri, "");
       _builder.append(" is not contained in any of the known source folders ");
-      Iterable<String> _sourceDirs_1 = this.getSourceDirs();
-      _builder.append(_sourceDirs_1, "");
+      _builder.append(this.sourceDirs, "");
       _builder.append(".");
       throw new IllegalStateException(_builder.toString());
     }
@@ -486,15 +464,13 @@ public class StandaloneBuilder {
   }
   
   private LanguageAccess languageAccess(final URI uri) {
-    Map<String, LanguageAccess> _languages = this.getLanguages();
     String _fileExtension = uri.fileExtension();
-    return _languages.get(_fileExtension);
+    return this.languages.get(_fileExtension);
   }
   
   protected File createTempDir(final String subDir) {
     try {
-      File _tempDir = this.getTempDir();
-      final File file = new File(_tempDir, subDir);
+      final File file = new File(this.tempDir, subDir);
       boolean _and = false;
       boolean _mkdirs = file.mkdirs();
       boolean _not = (!_mkdirs);
@@ -540,8 +516,7 @@ public class StandaloneBuilder {
   }
   
   protected List<URI> collectResources(final Iterable<String> roots, final ResourceSet resourceSet) {
-    Map<String, LanguageAccess> _languages = this.getLanguages();
-    Set<String> _keySet = _languages.keySet();
+    Set<String> _keySet = this.languages.keySet();
     final String extensions = IterableExtensions.join(_keySet, "|");
     final NameBasedFilter nameBasedFilter = new NameBasedFilter();
     nameBasedFilter.setRegularExpression(((".*\\.(?:(" + extensions) + "))$"));
@@ -672,73 +647,73 @@ public class StandaloneBuilder {
   
   @Pure
   public Map<String, LanguageAccess> getLanguages() {
-    return this._languages;
+    return this.languages;
   }
   
   public void setLanguages(final Map<String, LanguageAccess> languages) {
-    this._languages = languages;
+    this.languages = languages;
   }
   
   @Pure
   public Iterable<String> getSourceDirs() {
-    return this._sourceDirs;
+    return this.sourceDirs;
   }
   
   public void setSourceDirs(final Iterable<String> sourceDirs) {
-    this._sourceDirs = sourceDirs;
+    this.sourceDirs = sourceDirs;
   }
   
   @Pure
   public Iterable<String> getClassPathEntries() {
-    return this._classPathEntries;
+    return this.classPathEntries;
   }
   
   public void setClassPathEntries(final Iterable<String> classPathEntries) {
-    this._classPathEntries = classPathEntries;
+    this.classPathEntries = classPathEntries;
   }
   
   @Pure
   public File getTempDir() {
-    return this._tempDir;
+    return this.tempDir;
   }
   
   public void setTempDir(final File tempDir) {
-    this._tempDir = tempDir;
+    this.tempDir = tempDir;
   }
   
   @Pure
   public String getEncoding() {
-    return this._encoding;
+    return this.encoding;
   }
   
   public void setEncoding(final String encoding) {
-    this._encoding = encoding;
+    this.encoding = encoding;
   }
   
   @Pure
   public String getClassPathLookUpFilter() {
-    return this._classPathLookUpFilter;
+    return this.classPathLookUpFilter;
   }
   
   public void setClassPathLookUpFilter(final String classPathLookUpFilter) {
-    this._classPathLookUpFilter = classPathLookUpFilter;
+    this.classPathLookUpFilter = classPathLookUpFilter;
   }
   
   @Pure
   public boolean isFailOnValidationError() {
-    return this._failOnValidationError;
+    return this.failOnValidationError;
   }
   
   public void setFailOnValidationError(final boolean failOnValidationError) {
-    this._failOnValidationError = failOnValidationError;
+    this.failOnValidationError = failOnValidationError;
   }
   
   @Pure
   public ClusteringConfig getClusteringConfig() {
-    return this._clusteringConfig;
+    return this.clusteringConfig;
   }
   
   public void setClusteringConfig(final ClusteringConfig clusteringConfig) {
-    this._clusteringConfig = clusteringConfig;
+    this.clusteringConfig = clusteringConfig;
   }
 }

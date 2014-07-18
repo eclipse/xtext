@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 import org.eclipse.xtext.xbase.scoping.batch.TypeBucket;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
 
@@ -27,11 +27,11 @@ import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
 @Data
 @SuppressWarnings("all")
 public class TypeWithRestrictedNamesBucket extends TypeBucket {
-  private final Map<? extends JvmType, ? extends Set<String>> _typesToNames;
+  private final Map<? extends JvmType, ? extends Set<String>> typesToNames;
   
   public TypeWithRestrictedNamesBucket(final int id, final Map<? extends JvmType, ? extends Set<String>> types, final IResolvedFeatures.Provider resolvedFeaturesProvider) {
     super(id, null, resolvedFeaturesProvider);
-    this._typesToNames = types;
+    this.typesToNames = types;
   }
   
   public boolean isRestrictingNames() {
@@ -39,8 +39,7 @@ public class TypeWithRestrictedNamesBucket extends TypeBucket {
   }
   
   public List<? extends JvmType> getTypes() {
-    Map<? extends JvmType, ? extends Set<String>> _typesToNames = this.getTypesToNames();
-    Set<? extends JvmType> _keySet = _typesToNames.keySet();
+    Set<? extends JvmType> _keySet = this.typesToNames.keySet();
     return new ArrayList<JvmType>(_keySet);
   }
   
@@ -49,7 +48,7 @@ public class TypeWithRestrictedNamesBucket extends TypeBucket {
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
-    result = prime * result + ((this._typesToNames== null) ? 0 : this._typesToNames.hashCode());
+    result = prime * result + ((this.typesToNames== null) ? 0 : this.typesToNames.hashCode());
     return result;
   }
   
@@ -65,10 +64,10 @@ public class TypeWithRestrictedNamesBucket extends TypeBucket {
     if (!super.equals(obj))
       return false;
     TypeWithRestrictedNamesBucket other = (TypeWithRestrictedNamesBucket) obj;
-    if (this._typesToNames == null) {
-      if (other._typesToNames != null)
+    if (this.typesToNames == null) {
+      if (other.typesToNames != null)
         return false;
-    } else if (!this._typesToNames.equals(other._typesToNames))
+    } else if (!this.typesToNames.equals(other.typesToNames))
       return false;
     return true;
   }
@@ -76,12 +75,14 @@ public class TypeWithRestrictedNamesBucket extends TypeBucket {
   @Override
   @Pure
   public String toString() {
-    String result = new ToStringHelper().toString(this);
+    String result = new ToStringBuilder(this)
+    	.addAllFields()
+    	.toString();
     return result;
   }
   
   @Pure
   public Map<? extends JvmType, ? extends Set<String>> getTypesToNames() {
-    return this._typesToNames;
+    return this.typesToNames;
   }
 }

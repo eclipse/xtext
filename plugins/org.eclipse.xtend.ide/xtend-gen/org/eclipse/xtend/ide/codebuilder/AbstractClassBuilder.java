@@ -1,13 +1,13 @@
 package org.eclipse.xtend.ide.codebuilder;
 
 import org.eclipse.xtend.ide.codebuilder.AbstractCodeBuilder;
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public abstract class AbstractClassBuilder extends AbstractCodeBuilder {
-  @Property
-  private String _className;
+  @Accessors
+  private String className;
   
   public String getImage() {
     return "newclass_wiz.gif";
@@ -15,10 +15,10 @@ public abstract class AbstractClassBuilder extends AbstractCodeBuilder {
   
   @Pure
   public String getClassName() {
-    return this._className;
+    return this.className;
   }
   
   public void setClassName(final String className) {
-    this._className = className;
+    this.className = className;
   }
 }

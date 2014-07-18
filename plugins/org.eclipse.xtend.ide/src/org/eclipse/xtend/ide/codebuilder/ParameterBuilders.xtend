@@ -1,15 +1,16 @@
 package org.eclipse.xtend.ide.codebuilder
 
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.xbase.compiler.ISourceAppender
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 
 abstract class AbstractParameterBuilder extends AbstractCodeBuilder {
-	@Property String name
-	@Property LightweightTypeReference type
-	@Property boolean varArgsFlag
-	@Property boolean extensionFlag
-	@Property boolean finalFlag
+	@Accessors String name
+	@Accessors LightweightTypeReference type
+	@Accessors boolean varArgsFlag
+	@Accessors boolean extensionFlag
+	@Accessors boolean finalFlag
 	
 	override build(ISourceAppender appendable) {
 		appendable.appendModifiers

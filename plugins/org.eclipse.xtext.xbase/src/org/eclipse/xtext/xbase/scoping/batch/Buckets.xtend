@@ -18,6 +18,7 @@ import org.eclipse.xtext.xbase.typesystem.^override.IResolvedFeatures
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import java.util.Set
 import java.util.ArrayList
+import org.eclipse.xtend.lib.annotations.Data
 
 /**
  * A type bucket collects a number of types that originate in the 
@@ -54,7 +55,7 @@ class TypeWithRestrictedNamesBucket extends TypeBucket {
 	Map<? extends JvmType, ? extends Set<String>> typesToNames
 	new(int id, Map<? extends JvmType, ? extends Set<String>> types, IResolvedFeatures.Provider resolvedFeaturesProvider) {
 		super(id, null, resolvedFeaturesProvider)
-		this._typesToNames = types
+		this.typesToNames = types
 	}
 	override isRestrictingNames() {
 		return true

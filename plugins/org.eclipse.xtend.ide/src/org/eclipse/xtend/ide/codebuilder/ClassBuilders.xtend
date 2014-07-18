@@ -5,10 +5,11 @@ import org.eclipse.jdt.core.IType
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.xbase.compiler.ISourceAppender
+import org.eclipse.xtend.lib.annotations.Accessors
 
 abstract class AbstractClassBuilder extends AbstractCodeBuilder {
 	
-	@Property String className
+	@Accessors String className
 	
 	override getImage() {
 		'newclass_wiz.gif'

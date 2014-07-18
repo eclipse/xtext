@@ -1,5 +1,7 @@
 package org.eclipse.xtend.core.tests.smoke
 
+import org.eclipse.xtend.lib.annotations.Data
+
 @Data
 class Case_0 {
 	int id

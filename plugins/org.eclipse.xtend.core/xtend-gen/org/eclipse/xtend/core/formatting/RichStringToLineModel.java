@@ -12,7 +12,7 @@ import org.eclipse.xtend.core.formatting.TemplateWhitespace;
 import org.eclipse.xtend.core.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -32,8 +32,8 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
   
   private final NodeModelAccess nodeModelAccess;
   
-  @Property
-  private final LineModel _model = new LineModel();
+  @Accessors
+  private final LineModel model = new LineModel();
   
   private int offset = (-1);
   
@@ -174,16 +174,13 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
     this.startContent();
     if ((this.contentStartOffset > 0)) {
       final String lastLinesContent = this.document.substring(this.contentStartOffset, this.offset);
-      LineModel _model = this.getModel();
-      List<Line> _lines = _model.getLines();
+      List<Line> _lines = this.model.getLines();
       boolean _isEmpty = _lines.isEmpty();
       if (_isEmpty) {
-        LineModel _model_1 = this.getModel();
-        _model_1.setLeadingText(lastLinesContent);
+        this.model.setLeadingText(lastLinesContent);
         this.contentStartColumn = 0;
       } else {
-        LineModel _model_2 = this.getModel();
-        List<Line> _lines_1 = _model_2.getLines();
+        List<Line> _lines_1 = this.model.getLines();
         final Line lastLine = IterableExtensions.<Line>last(_lines_1);
         lastLine.setContent(lastLinesContent);
         int _offset = lastLine.getOffset();
@@ -213,8 +210,7 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
           int _xifexpression = (int) 0;
           boolean _tripleEquals = (lastWs == null);
           if (_tripleEquals) {
-            LineModel _model_3 = this.getModel();
-            int _rootIndentLenght = _model_3.getRootIndentLenght();
+            int _rootIndentLenght = this.model.getRootIndentLenght();
             _xifexpression = (newContentStartColumn - _rootIndentLenght);
           } else {
             int _xifexpression_1 = (int) 0;
@@ -245,8 +241,7 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
         if ((newContentStartColumn != 0)) {
           this.contentStartColumn = newContentStartColumn;
         }
-        LineModel _model_4 = this.getModel();
-        List<Line> _lines_2 = _model_4.getLines();
+        List<Line> _lines_2 = this.model.getLines();
         Line _last = IterableExtensions.<Line>last(_lines_2);
         List<Chunk> _chunks = _last.getChunks();
         Iterables.<Chunk>addAll(_chunks, this.indentationStack);
@@ -260,8 +255,7 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
     this.contentStartOffset = (-1);
     this.content = false;
     if (startNewLine) {
-      LineModel _model_5 = this.getModel();
-      List<Line> _lines_3 = _model_5.getLines();
+      List<Line> _lines_3 = this.model.getLines();
       Line _line = new Line(this.offset, semantic, charCount);
       _lines_3.add(_line);
     }
@@ -315,13 +309,11 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
   public void acceptTemplateText(final CharSequence text, final RichStringLiteral origin) {
     super.acceptTemplateText(text, origin);
     if ((!this.content)) {
-      LineModel _model = this.getModel();
-      int _rootIndentLenght = _model.getRootIndentLenght();
+      int _rootIndentLenght = this.model.getRootIndentLenght();
       boolean _lessThan = (_rootIndentLenght < 0);
       if (_lessThan) {
-        LineModel _model_1 = this.getModel();
         int _length = text.length();
-        _model_1.setRootIndentLenght(_length);
+        this.model.setRootIndentLenght(_length);
         int _length_1 = text.length();
         this.contentStartColumn = _length_1;
       }
@@ -376,6 +368,6 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
   
   @Pure
   public LineModel getModel() {
-    return this._model;
+    return this.model;
   }
 }

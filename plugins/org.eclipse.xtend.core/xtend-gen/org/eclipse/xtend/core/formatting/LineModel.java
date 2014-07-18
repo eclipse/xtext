@@ -2,33 +2,28 @@ package org.eclipse.xtend.core.formatting;
 
 import java.util.List;
 import org.eclipse.xtend.core.formatting.Line;
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
+@Accessors
 @SuppressWarnings("all")
 public class LineModel {
-  @Property
-  private String _leadingText;
+  private String leadingText;
   
-  @Property
-  private int _rootIndentLenght = (-1);
+  private int rootIndentLenght = (-1);
   
-  @Property
-  private final List<Line> _lines = CollectionLiterals.<Line>newArrayList();
+  private final List<Line> lines = CollectionLiterals.<Line>newArrayList();
   
   public String toString() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("rootIndentLenght=");
-    int _rootIndentLenght = this.getRootIndentLenght();
-    _builder.append(_rootIndentLenght, "");
+    _builder.append(this.rootIndentLenght, "");
     _builder.newLineIfNotEmpty();
-    String _leadingText = this.getLeadingText();
-    _builder.append(_leadingText, "");
-    List<Line> _lines = this.getLines();
-    String _join = IterableExtensions.join(_lines);
+    _builder.append(this.leadingText, "");
+    String _join = IterableExtensions.join(this.lines);
     _builder.append(_join, "");
     _builder.newLineIfNotEmpty();
     return _builder.toString();
@@ -36,24 +31,24 @@ public class LineModel {
   
   @Pure
   public String getLeadingText() {
-    return this._leadingText;
+    return this.leadingText;
   }
   
   public void setLeadingText(final String leadingText) {
-    this._leadingText = leadingText;
+    this.leadingText = leadingText;
   }
   
   @Pure
   public int getRootIndentLenght() {
-    return this._rootIndentLenght;
+    return this.rootIndentLenght;
   }
   
   public void setRootIndentLenght(final int rootIndentLenght) {
-    this._rootIndentLenght = rootIndentLenght;
+    this.rootIndentLenght = rootIndentLenght;
   }
   
   @Pure
   public List<Line> getLines() {
-    return this._lines;
+    return this.lines;
   }
 }

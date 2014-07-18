@@ -1,25 +1,25 @@
 package org.eclipse.xtext.xbase.formatting;
 
-import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.xbase.formatting.HiddenLeafs;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Data
 @SuppressWarnings("all")
 public abstract class LeafInfo {
-  private final HiddenLeafs _container;
+  private final HiddenLeafs container;
   
-  private final ILeafNode _node;
+  private final ILeafNode node;
   
-  private final int _newLines;
+  private final int newLines;
   
   public LeafInfo(final HiddenLeafs container, final ILeafNode node, final int newLines) {
     super();
-    this._container = container;
-    this._node = node;
-    this._newLines = newLines;
+    this.container = container;
+    this.node = node;
+    this.newLines = newLines;
   }
   
   @Override
@@ -27,9 +27,9 @@ public abstract class LeafInfo {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((this._container== null) ? 0 : this._container.hashCode());
-    result = prime * result + ((this._node== null) ? 0 : this._node.hashCode());
-    result = prime * result + this._newLines;
+    result = prime * result + ((this.container== null) ? 0 : this.container.hashCode());
+    result = prime * result + ((this.node== null) ? 0 : this.node.hashCode());
+    result = prime * result + this.newLines;
     return result;
   }
   
@@ -43,17 +43,17 @@ public abstract class LeafInfo {
     if (getClass() != obj.getClass())
       return false;
     LeafInfo other = (LeafInfo) obj;
-    if (this._container == null) {
-      if (other._container != null)
+    if (this.container == null) {
+      if (other.container != null)
         return false;
-    } else if (!this._container.equals(other._container))
+    } else if (!this.container.equals(other.container))
       return false;
-    if (this._node == null) {
-      if (other._node != null)
+    if (this.node == null) {
+      if (other.node != null)
         return false;
-    } else if (!this._node.equals(other._node))
+    } else if (!this.node.equals(other.node))
       return false;
-    if (other._newLines != this._newLines)
+    if (other.newLines != this.newLines)
       return false;
     return true;
   }
@@ -61,22 +61,25 @@ public abstract class LeafInfo {
   @Override
   @Pure
   public String toString() {
-    String result = new ToStringHelper().toString(this);
-    return result;
+    ToStringBuilder b = new ToStringBuilder(this);
+    b.add("container", this.container);
+    b.add("node", this.node);
+    b.add("newLines", this.newLines);
+    return b.toString();
   }
   
   @Pure
   public HiddenLeafs getContainer() {
-    return this._container;
+    return this.container;
   }
   
   @Pure
   public ILeafNode getNode() {
-    return this._node;
+    return this.node;
   }
   
   @Pure
   public int getNewLines() {
-    return this._newLines;
+    return this.newLines;
   }
 }

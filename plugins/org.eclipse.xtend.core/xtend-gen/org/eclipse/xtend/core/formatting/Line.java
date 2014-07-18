@@ -2,88 +2,81 @@ package org.eclipse.xtend.core.formatting;
 
 import java.util.List;
 import org.eclipse.xtend.core.formatting.Chunk;
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
+@Accessors
 @SuppressWarnings("all")
 public class Line {
-  @Property
-  private final int _offset;
+  private final int offset;
   
-  @Property
-  private final boolean _leadingSemanticNewLine;
+  private final boolean leadingSemanticNewLine;
   
-  @Property
-  private final int _newLineCharCount;
+  private final int newLineCharCount;
   
-  @Property
-  private final List<Chunk> _chunks = CollectionLiterals.<Chunk>newArrayList();
+  private final List<Chunk> chunks = CollectionLiterals.<Chunk>newArrayList();
   
-  @Property
-  private String _content;
+  private String content;
   
-  @Property
-  private int _indentLength;
-  
-  public Line(final int offset, final boolean leadingSemanticNewLine, final int newLineCharCount) {
-    this._offset = offset;
-    this._leadingSemanticNewLine = leadingSemanticNewLine;
-    this._newLineCharCount = newLineCharCount;
-  }
+  private int indentLength;
   
   public String toString() {
     String _xifexpression = null;
-    boolean _isLeadingSemanticNewLine = this.isLeadingSemanticNewLine();
-    if (_isLeadingSemanticNewLine) {
+    if (this.leadingSemanticNewLine) {
       _xifexpression = "SN";
     } else {
       _xifexpression = "";
     }
     String _plus = (_xifexpression + "\n");
-    List<Chunk> _chunks = this.getChunks();
-    String _join = IterableExtensions.join(_chunks);
+    String _join = IterableExtensions.join(this.chunks);
     String _plus_1 = (_plus + _join);
-    String _content = this.getContent();
-    return (_plus_1 + _content);
+    return (_plus_1 + this.content);
+  }
+  
+  public Line(final int offset, final boolean leadingSemanticNewLine, final int newLineCharCount) {
+    super();
+    this.offset = offset;
+    this.leadingSemanticNewLine = leadingSemanticNewLine;
+    this.newLineCharCount = newLineCharCount;
   }
   
   @Pure
   public int getOffset() {
-    return this._offset;
+    return this.offset;
   }
   
   @Pure
   public boolean isLeadingSemanticNewLine() {
-    return this._leadingSemanticNewLine;
+    return this.leadingSemanticNewLine;
   }
   
   @Pure
   public int getNewLineCharCount() {
-    return this._newLineCharCount;
+    return this.newLineCharCount;
   }
   
   @Pure
   public List<Chunk> getChunks() {
-    return this._chunks;
+    return this.chunks;
   }
   
   @Pure
   public String getContent() {
-    return this._content;
+    return this.content;
   }
   
   public void setContent(final String content) {
-    this._content = content;
+    this.content = content;
   }
   
   @Pure
   public int getIndentLength() {
-    return this._indentLength;
+    return this.indentLength;
   }
   
   public void setIndentLength(final int indentLength) {
-    this._indentLength = indentLength;
+    this.indentLength = indentLength;
   }
 }
