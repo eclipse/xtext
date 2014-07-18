@@ -8,18 +8,18 @@
 package example4;
 
 import example4.ContentNode;
-import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Data
 @SuppressWarnings("all")
 public class Contents extends ContentNode {
-  private final CharSequence _text;
+  private final CharSequence text;
   
   public Contents(final CharSequence text) {
     super();
-    this._text = text;
+    this.text = text;
   }
   
   @Override
@@ -27,7 +27,7 @@ public class Contents extends ContentNode {
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
-    result = prime * result + ((this._text== null) ? 0 : this._text.hashCode());
+    result = prime * result + ((this.text== null) ? 0 : this.text.hashCode());
     return result;
   }
   
@@ -43,10 +43,10 @@ public class Contents extends ContentNode {
     if (!super.equals(obj))
       return false;
     Contents other = (Contents) obj;
-    if (this._text == null) {
-      if (other._text != null)
+    if (this.text == null) {
+      if (other.text != null)
         return false;
-    } else if (!this._text.equals(other._text))
+    } else if (!this.text.equals(other.text))
       return false;
     return true;
   }
@@ -54,12 +54,14 @@ public class Contents extends ContentNode {
   @Override
   @Pure
   public String toString() {
-    String result = new ToStringHelper().toString(this);
+    String result = new ToStringBuilder(this)
+    	.addAllFields()
+    	.toString();
     return result;
   }
   
   @Pure
   public CharSequence getText() {
-    return this._text;
+    return this.text;
   }
 }

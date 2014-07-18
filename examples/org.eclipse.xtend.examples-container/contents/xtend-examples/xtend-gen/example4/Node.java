@@ -8,15 +8,15 @@
 package example4;
 
 import java.util.ArrayList;
-import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Data
 @SuppressWarnings("all")
 public class Node {
-  private final ArrayList<Node> _contents = CollectionLiterals.<Node>newArrayList();
+  private final ArrayList<Node> contents = CollectionLiterals.<Node>newArrayList();
   
   public String tagName() {
     Class<? extends Node> _class = this.getClass();
@@ -29,7 +29,7 @@ public class Node {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((this._contents== null) ? 0 : this._contents.hashCode());
+    result = prime * result + ((this.contents== null) ? 0 : this.contents.hashCode());
     return result;
   }
   
@@ -43,10 +43,10 @@ public class Node {
     if (getClass() != obj.getClass())
       return false;
     Node other = (Node) obj;
-    if (this._contents == null) {
-      if (other._contents != null)
+    if (this.contents == null) {
+      if (other.contents != null)
         return false;
-    } else if (!this._contents.equals(other._contents))
+    } else if (!this.contents.equals(other.contents))
       return false;
     return true;
   }
@@ -54,12 +54,13 @@ public class Node {
   @Override
   @Pure
   public String toString() {
-    String result = new ToStringHelper().toString(this);
-    return result;
+    ToStringBuilder b = new ToStringBuilder(this);
+    b.add("contents", this.contents);
+    return b.toString();
   }
   
   @Pure
   public ArrayList<Node> getContents() {
-    return this._contents;
+    return this.contents;
   }
 }

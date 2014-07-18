@@ -8,9 +8,9 @@
 package example4;
 
 import example4.Node;
-import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Data
 @SuppressWarnings("all")
@@ -41,7 +41,9 @@ public class Html extends Node {
   @Override
   @Pure
   public String toString() {
-    String result = new ToStringHelper().toString(this);
+    String result = new ToStringBuilder(this)
+    	.addAllFields()
+    	.toString();
     return result;
   }
 }
