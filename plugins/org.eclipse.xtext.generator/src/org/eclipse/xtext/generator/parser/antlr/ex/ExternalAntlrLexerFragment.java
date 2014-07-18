@@ -22,6 +22,8 @@ import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.DefaultGeneratorFragment;
 import org.eclipse.xtext.generator.Generator;
+import org.eclipse.xtext.generator.Naming;
+import org.eclipse.xtext.generator.NamingAware;
 import org.eclipse.xtext.generator.NewlineNormalizer;
 import org.eclipse.xtext.generator.parser.antlr.AntlrToolFacade;
 import org.eclipse.xtext.generator.parser.antlr.postProcessing.SuppressWarningsProcessor;
@@ -35,7 +37,7 @@ import com.google.common.io.Files;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment {
+public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment implements NamingAware {
 
 	private String lexerGrammar;
 
@@ -47,22 +49,19 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment {
 
 	private List<String> antlrParams = Lists.newArrayList();
 	
-	private String lineDelimiter = Strings.newLine();
-	
-	/**
-	 * @since 2.7
-	 */
-	public String getLineDelimiter() {
-		return lineDelimiter;
-	}
-	
-	/**
-	 * @since 2.7
-	 */
-	public void setLineDelimiter(String lineDelimiter) {
-		this.lineDelimiter = lineDelimiter;
-	}
+	private Naming naming;
 
+	/**
+	 * @since 2.7
+	 */
+	public void registerNaming(Naming naming) {
+		this.naming = naming;
+	}
+	
+	private String getLineDelimiter() {
+		return naming.getLineDelimiter();
+	}
+	
 	public void addAntlrParam(String param) {
 		antlrParams.add(param);
 	}
@@ -112,10 +111,10 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment {
 	private void normalizeTokens(String grammarFileName, Charset encoding) {
 		String tokenFile = toTokenFileName(grammarFileName);
 		String content = readFileIntoString(tokenFile, encoding);
-		content = new NewlineNormalizer(lineDelimiter).normalizeLineDelimiters(content);
-		List<String> splitted = Strings.split(content, lineDelimiter);
+		content = new NewlineNormalizer(getLineDelimiter()).normalizeLineDelimiters(content);
+		List<String> splitted = Strings.split(content, getLineDelimiter());
 		Collections.sort(splitted);
-		content = Strings.concat(lineDelimiter, splitted) + lineDelimiter;
+		content = Strings.concat(getLineDelimiter(), splitted) + getLineDelimiter();
 		writeStringIntoFile(tokenFile, content, encoding);
 	}
 	

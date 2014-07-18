@@ -13,6 +13,8 @@ import static org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstruc
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -22,7 +24,6 @@ import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Generator;
-import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.impl.TreeConstNFAToDot;
 
@@ -49,7 +50,7 @@ public class ParseTreeConstructorFragment extends AbstractGeneratorFragment {
 			try {
 				TreeConstNFAToDot ftd = new TreeConstNFAToDot();
 				String fn = new File(ctx.getOutput().getOutlet(Generator.SRC_GEN).getPath() + "/"
-						+ getNaming(ctx).asPath(getParseTreeConstructorName(grammar,getNaming()))).getCanonicalPath();
+						+ getNaming().asPath(getParseTreeConstructorName(grammar,getNaming()))).getCanonicalPath();
 				if (generateDotDiagram) {
 					PrintStream out;
 					out = new PrintStream(fn + ".dot");
@@ -67,8 +68,9 @@ public class ParseTreeConstructorFragment extends AbstractGeneratorFragment {
 		}
 	}
 
-	private Naming getNaming(XpandExecutionContext ctx) {
-		return (Naming) ctx.getGlobalVariables().get(Naming.GLOBAL_VAR_NAME).getValue();
+	@Override
+	protected List<Object> getParameters(Grammar grammar) {
+		return Collections.<Object>singletonList(getNaming().getLineDelimiter());
 	}
 
 	@Override

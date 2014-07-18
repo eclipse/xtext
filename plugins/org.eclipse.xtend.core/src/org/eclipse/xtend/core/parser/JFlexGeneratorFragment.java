@@ -22,7 +22,6 @@ import org.eclipse.xtext.generator.Generator;
 import org.eclipse.xtext.generator.NewlineNormalizer;
 import org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment;
 import org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment;
-import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Lists;
 import com.google.common.io.CharStreams;
@@ -48,22 +47,6 @@ public class JFlexGeneratorFragment extends AbstractGeneratorFragment {
 	
 	public void setUi(boolean ui) {
 		this.ui = ui;
-	}
-	
-	private String lineDelimiter = Strings.newLine();
-	
-	/**
-	 * @since 2.7
-	 */
-	public String getLineDelimiter() {
-		return lineDelimiter;
-	}
-	
-	/**
-	 * @since 2.7
-	 */
-	public void setLineDelimiter(String lineDelimiter) {
-		this.lineDelimiter = lineDelimiter;
 	}
 	
 	/**
@@ -100,7 +83,7 @@ public class JFlexGeneratorFragment extends AbstractGeneratorFragment {
 		});
 		Charset charset = Charset.forName(encoding);
 		String javaCode = readFileIntoString(javaFileName, charset);
-		javaCode = new NewlineNormalizer(getLineDelimiter()).normalizeLineDelimiters(javaCode);
+		javaCode = new NewlineNormalizer(getNaming().getLineDelimiter()).normalizeLineDelimiters(javaCode);
 		javaCode = removeTimestamps(javaCode);
 		writeStringIntoFile(javaFileName, javaCode, charset);
 	}

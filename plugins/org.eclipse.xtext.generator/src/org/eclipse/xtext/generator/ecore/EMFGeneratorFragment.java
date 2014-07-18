@@ -66,7 +66,6 @@ import org.eclipse.emf.mwe.core.ConfigurationException;
 import org.eclipse.emf.mwe.utils.GenModelHelper;
 import org.eclipse.emf.mwe.utils.Mapping;
 import org.eclipse.emf.mwe2.ecore.CvsIdFilteringGeneratorAdapterFactoryDescriptor;
-import org.eclipse.emf.mwe2.runtime.Mandatory;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xpand2.output.Outlet;
@@ -136,22 +135,10 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 
 	private GenRuntimeVersion emfRuntimeVerison;
 	
-	private String lineDelimiter = Strings.newLine();
-	
-	/**
-	 * @since 2.7
-	 */
-	public String getLineDelimiter() {
-		return lineDelimiter;
+	private String getLineDelimiter() {
+		return getNaming().getLineDelimiter();
 	}
 	
-	/**
-	 * @since 2.7
-	 */
-	public void setLineDelimiter(String lineDelimiter) {
-		this.lineDelimiter = lineDelimiter;
-	}
-
 	{
 		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("genmodel"))
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("genmodel",

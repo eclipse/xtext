@@ -35,7 +35,6 @@ import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Generator;
-import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Maps;
 
@@ -52,22 +51,6 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 
 	private String xmlVersion = null;
 
-	private String lineDelimiter = Strings.newLine();
-	
-	/**
-	 * @since 2.7
-	 */
-	public String getLineDelimiter() {
-		return lineDelimiter;
-	}
-	
-	/**
-	 * @since 2.7
-	 */
-	public void setLineDelimiter(String lineDelimiter) {
-		this.lineDelimiter = lineDelimiter;
-	}
-	
 	@Override
 	protected String getTemplate() {
 		return GrammarAccessFragment.class.getName().replaceAll("\\.", "::");
@@ -75,7 +58,7 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 	
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
-		return Collections.<Object>singletonList(lineDelimiter);
+		return Collections.<Object>singletonList(getNaming().getLineDelimiter());
 	}
 
 	@Override

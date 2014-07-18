@@ -19,7 +19,7 @@
 «EXTENSION org::eclipse::xtext::generator::grammarAccess::GrammarAccess»
 
 
-«DEFINE root FOR Grammar»
+«DEFINE root(String lineDelimiter) FOR Grammar»
 «FILE getParseTreeConstructorName().asPath()+".java" SRC_GEN-»
 /*
 «fileHeader()»
@@ -61,19 +61,19 @@ protected class ThisRootNode extends RootToken {
 	}	
 }
 	
-«EXPAND rule FOREACH allParserRules()-»
+«EXPAND rule(lineDelimiter) FOREACH allParserRules()-»
 }
 «ENDFILE»
 «ENDDEFINE»
 
-«DEFINE rule FOR ParserRule-»
+«DEFINE rule(String lineDelimiter) FOR ParserRule-»
 «IF !isDatatypeRule()»
 /************ begin Rule «name» ****************
  *
-«grammarFragmentToStr(" * ")»
+«grammarFragmentToStr(" * ", lineDelimiter)»
  *
  **/
-«EXPAND element FOR alternatives-»
+«EXPAND element(lineDelimiter) FOR alternatives-»
 
 /************ end Rule «name» ****************/
 «ENDIF»
@@ -154,7 +154,7 @@ protected class ThisRootNode extends RootToken {
 
 
 
-«DEFINE element FOR AbstractElement»
+«DEFINE element(String lineDelimiter) FOR AbstractElement»
 «ERROR "unhandled element " + metaType.name + " in " + elementMethodName()» 
 «ENDDEFINE»
 
@@ -164,47 +164,47 @@ protected class ThisRootNode extends RootToken {
 
 «REM» ************ Groups ************* «ENDREM»
 
-«DEFINE element FOR Group»
-«grammarFragmentToStr("// ")»
+«DEFINE element(String lineDelimiter) FOR Group»
+«grammarFragmentToStr("// ", lineDelimiter)»
 protected class «elementMethodName()» extends GroupToken {
 	
 «EXPAND constructor-»
 «EXPAND typeCheckTryConsume-»
 }
-«EXPAND element FOREACH elements.reject(e|e.getTreeConstState().disabled)»
+«EXPAND element(lineDelimiter) FOREACH elements.reject(e|e.getTreeConstState().disabled)»
 «ENDDEFINE»
 
 «REM» ************ Unordered Groups ************* «ENDREM»
 
-«DEFINE element FOR UnorderedGroup»
-«grammarFragmentToStr("// ")»
+«DEFINE element(String lineDelimiter) FOR UnorderedGroup»
+«grammarFragmentToStr("// ", lineDelimiter)»
 protected class «elementMethodName()» extends UnorderedGroupToken {
 	
 «EXPAND constructor-»
 «EXPAND typeCheckTryConsume-»
 }
-«EXPAND element FOREACH elements.reject(e|e.getTreeConstState().disabled)»
+«EXPAND element(lineDelimiter) FOREACH elements.reject(e|e.getTreeConstState().disabled)»
 «ENDDEFINE»
 
 
 «REM» ************ Alternatives ************* «ENDREM»
 
-«DEFINE element FOR Alternatives»
-«grammarFragmentToStr("// ")»
+«DEFINE element(String lineDelimiter) FOR Alternatives»
+«grammarFragmentToStr("// ", lineDelimiter)»
 protected class «elementMethodName()» extends AlternativesToken {
 
 «EXPAND constructor-»
 «EXPAND typeCheckTryConsume-»
 }
-«EXPAND element FOREACH elements.reject(e|e.getTreeConstState().disabled)»
+«EXPAND element(lineDelimiter) FOREACH elements.reject(e|e.getTreeConstState().disabled)»
 «ENDDEFINE»
 
 
 
 «REM» ************ RuleCall ************* «ENDREM»
 
-«DEFINE element FOR RuleCall»
-«grammarFragmentToStr("// ")»
+«DEFINE element(String lineDelimiter) FOR RuleCall»
+«grammarFragmentToStr("// ", lineDelimiter)»
 «IF calledParserRule() != null && !calledParserRule().isDatatypeRule()-»
 protected class «elementMethodName()» extends RuleCallToken {
 	
@@ -295,8 +295,8 @@ protected class «elementMethodName()» extends UnassignedTextToken {
 «ENDDEFINE»
 
 
-«DEFINE element FOR Assignment»
-«grammarFragmentToStr("// ")»
+«DEFINE element(String lineDelimiter) FOR Assignment»
+«grammarFragmentToStr("// ", lineDelimiter)»
 protected class «elementMethodName()» extends AssignmentToken  {
 	
 «EXPAND constructor-»
@@ -317,8 +317,8 @@ protected class «elementMethodName()» extends AssignmentToken  {
 
 «REM» ************ Action ************* «ENDREM»
 
-«DEFINE element FOR Action»
-«grammarFragmentToStr("// ")»
+«DEFINE element(String lineDelimiter) FOR Action»
+«grammarFragmentToStr("// ", lineDelimiter)»
 protected class «elementMethodName()» extends ActionToken  {
 
 «EXPAND constructor-»	
@@ -346,8 +346,8 @@ protected class «elementMethodName()» extends ActionToken  {
 
 «REM» ************ Keyword ************* «ENDREM»
 
-«DEFINE element FOR Keyword»
-«grammarFragmentToStr("// ")»
+«DEFINE element(String lineDelimiter) FOR Keyword»
+«grammarFragmentToStr("// ", lineDelimiter)»
 protected class «elementMethodName()» extends KeywordToken  {
 	
 «EXPAND constructor-»

@@ -30,7 +30,6 @@ import org.eclipse.emf.mwe.core.WorkflowInterruptedException;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent2;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
-import org.eclipse.emf.mwe2.runtime.Mandatory;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xpand2.XpandExecutionContextImpl;
 import org.eclipse.xpand2.XpandFacade;
@@ -87,7 +86,6 @@ public class Generator extends AbstractWorkflowComponent2 {
 
 	private Naming naming = new Naming();
 	private String encoding;
-	private String lineDelimiter = Strings.newLine();
 	private String pathRtProject = ".";
 	private String pathUiProject = null;
 	private String pathTestProject = null;
@@ -632,13 +630,13 @@ public class Generator extends AbstractWorkflowComponent2 {
 	 * @since 2.7
 	 */
 	public void setLineDelimiter(String lineDelimiter) {
-		this.lineDelimiter = lineDelimiter;
+		this.naming.setLineDelimiter(lineDelimiter);
 	}
 	
 	/**
 	 * @since 2.7
 	 */
 	public String getLineDelimiter() {
-		return lineDelimiter;
+		return naming.getLineDelimiter();
 	}
 }

@@ -38,7 +38,6 @@ Workflow {
 		language = auto-inject {
 			fragment = ecore.EMFGeneratorFragment {
 				emfRuntimeVersion = "2.9"
-				lineDelimiter = lineDelimiter
 			}
 			fragment = grammarAccess.GrammarAccessFragment auto-inject {}
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
