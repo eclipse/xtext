@@ -78,22 +78,6 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 		return result;
 	}
 	
-	private String lineDelimiter = Strings.newLine();
-	
-	/**
-	 * @since 2.7
-	 */
-	public String getLineDelimiter() {
-		return lineDelimiter;
-	}
-	
-	/**
-	 * @since 2.7
-	 */
-	public void setLineDelimiter(String lineDelimiter) {
-		this.lineDelimiter = lineDelimiter;
-	}
-	
 	/**
 	 * @since 2.4
 	 */
@@ -235,7 +219,7 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	
 	private void normalizeLineDelimitersImpl(String textFile, Charset encoding) {
 		String content = readFileIntoString(textFile, encoding);
-		content = new NewlineNormalizer(lineDelimiter) {
+		content = new NewlineNormalizer(getLineDelimiter()) {
 			// Antlr tries to outsmart us by using a line length that depends on the system
 			// line delimiter when it splits a very long String (encoded DFA) into a
 			// string concatenation
@@ -248,6 +232,13 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 			}
 		}.normalizeLineDelimiters(content);
 		writeStringIntoFile(textFile, content, encoding);
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	protected String getLineDelimiter() {
+		return getNaming().getLineDelimiter();
 	}
 	
 	/**
@@ -263,10 +254,10 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	protected void normalizeTokens(String grammarFileName, Charset encoding) {
 		String tokenFile = toTokenFileName(grammarFileName);
 		String content = readFileIntoString(tokenFile, encoding);
-		content = new NewlineNormalizer(lineDelimiter).normalizeLineDelimiters(content);
-		List<String> splitted = Strings.split(content, lineDelimiter);
+		content = new NewlineNormalizer(getLineDelimiter()).normalizeLineDelimiters(content);
+		List<String> splitted = Strings.split(content, getLineDelimiter());
 		Collections.sort(splitted);
-		content = Strings.concat(lineDelimiter, splitted) + lineDelimiter;
+		content = Strings.concat(getLineDelimiter(), splitted) + getLineDelimiter();
 		writeStringIntoFile(tokenFile, content, encoding);
 	}
 	

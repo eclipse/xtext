@@ -27,6 +27,7 @@ public class Naming {
 	private String grammarId;
 	private String projectNameRt;
 	private String projectNameUi;
+	private String lineDelimiter = Strings.newLine();
 	
 	/**
 	 * @since 2.3
@@ -61,6 +62,20 @@ public class Naming {
 	 */
 	public String getProjectNameUi() {
 		return projectNameUi;
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public String getLineDelimiter() {
+		return lineDelimiter;
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public void setLineDelimiter(String lineDelimiter) {
+		this.lineDelimiter = lineDelimiter;
 	}
 
 	public void setUiBasePackage(String uiBasePackage) {
