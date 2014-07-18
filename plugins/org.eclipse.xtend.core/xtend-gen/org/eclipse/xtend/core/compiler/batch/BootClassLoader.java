@@ -17,6 +17,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * Use this classloader as a parent in order to supply different JDK classes than the
  * currently running VM.
+ * @since 2.7
  */
 @SuppressWarnings("all")
 public class BootClassLoader extends URLClassLoader {
