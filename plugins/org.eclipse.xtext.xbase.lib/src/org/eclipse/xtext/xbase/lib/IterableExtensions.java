@@ -856,4 +856,25 @@ public class IterableExtensions {
 	public static <T> T max(final Iterable<T> iterable, Comparator<? super T> comparator) {
 		return IteratorExtensions.max(iterable.iterator(), comparator);
 	}
+
+	/**
+	 * Returns an iterable whose iterators cycle indefinitely over the elements of {@code iterable}.
+	 *
+	 * <p>
+	 * That iterator supports {@code remove()} if {@code iterable.iterator()} does. After {@code remove()} is called,
+	 * subsequent cycles omit the removed element, which is no longer in {@code iterable}. The iterator's
+	 * {@code hasNext()} method returns {@code true} until {@code iterable} is empty.
+	 *
+	 * <p>
+	 * <b>Warning:</b> Typical uses of the resulting iterator may produce an infinite loop. You must make sure that you
+	 * have a terminating condition or that you eventually remove all items.
+	 * 
+	 * @param iterable
+	 *            the elements to cycle through
+	 * @return the cycling Iterable
+	 * @since 2.7
+	 */
+	public static <T> Iterable<T> cycle(final Iterable<T> iterable) {
+		return Iterables.cycle(iterable);
+	}
 }

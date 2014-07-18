@@ -18,6 +18,7 @@ import java.util.List;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.junit.Test;
@@ -199,6 +200,24 @@ public class IterableExtensionsTest extends BaseIterablesIteratorsTest<Iterable<
 		assertEquals(new Pair<String, Integer>("bar", 1), result.next());
 		assertFalse(result.hasNext());
 	}
-
 	
+	@Test public void testCycle() {
+		Iterator<Integer> cycle = IterableExtensions.cycle(newArrayList(1,2)).iterator();
+		assertEquals(Integer.valueOf(1), cycle.next());
+		assertEquals(Integer.valueOf(2), cycle.next());
+		assertEquals(Integer.valueOf(1), cycle.next());
+		assertEquals(Integer.valueOf(2), cycle.next());
+	}
+
+	@Test public void testIterate() {
+		Iterator<Integer> ints = ObjectExtensions.iterate(1, new Function1<Integer, Integer>() {
+			public Integer apply(Integer input) {
+				return input + 1;
+			}
+		}).iterator();
+		assertEquals(Integer.valueOf(1), ints.next());
+		assertEquals(Integer.valueOf(2), ints.next());
+		assertEquals(Integer.valueOf(3), ints.next());
+		assertEquals(Integer.valueOf(4), ints.next());
+	}
 }

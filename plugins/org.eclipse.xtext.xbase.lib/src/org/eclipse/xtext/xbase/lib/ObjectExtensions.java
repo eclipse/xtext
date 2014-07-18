@@ -7,10 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import java.util.Iterator;
+
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Objects;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.AbstractIterator;
 
 /**
  * This is an extension library for all {@link Object objects}.
@@ -181,5 +186,39 @@ import com.google.common.base.Objects;
 		return second;
 	}
 	
+	/**
+	 * Creates an Iterable in which the first element is <code>seed</code> and the nth element is computed by calling
+	 * the <code>advance</code> function on the previous element. The Iterable ends if the <code>advance</code> function
+	 * returns <code>null</code>
+	 * 
+	 * The iterable lazily constructs only the elements that are requested. This allows to even work with infinite
+	 * sequences like "all prime numbers" as long as there is some terminating condition like "less than 1000000".
+	 * 
+	 * @param seed
+	 *            the value to begin with. May not be <code>null</code>
+	 * @param advance
+	 *            the function that computes the next value. May not be <code>null</code>
+	 * @return a potentially infinite Iterable of all the computed values
+	 * @since 2.7
+	 */
+	public static <T> Iterable<T> iterate(final T seed, final Function1<? super T, ? extends T> advance) {
+		Preconditions.checkNotNull(seed, "seed");
+		Preconditions.checkNotNull(advance, "advance");
+		return new Iterable<T>() {
+			public Iterator<T> iterator() {
+				return new AbstractIterator<T>() {
+					T next = seed;
+					@Override
+					protected T computeNext() {
+						if (next == null)
+							return endOfData();
+						T result = next;
+						next = advance.apply(next);
+						return result;
+					}
+				};
+			}
+		};
+	}
 	
 }
