@@ -154,6 +154,8 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		"newShortArrayOfSize()",
 		"newCharArrayOfSize()", 
 		"newIntArrayOfSize()", 
+		"newIterable()",
+		"newIterator()",
 		"newLongArrayOfSize()", 
 		"newFloatArrayOfSize()", 
 		"newDoubleArrayOfSize()", 
