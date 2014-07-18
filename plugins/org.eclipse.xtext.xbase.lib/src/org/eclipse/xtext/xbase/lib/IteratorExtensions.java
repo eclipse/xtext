@@ -765,40 +765,8 @@ import com.google.common.collect.Sets;
 	}
 
 	/**
-	 * Returns An Iterator of Pairs where the nth pair is created by taking the nth element of each Iterator. The size
-	 * of the result is truncated to the size of the shortest input. E.g.
-	 * <code>zip(#["a", "b", "c"], #[1, 2, 3, 4]) == #[("a", 1), ("b", 2), ("c", 3)]</code>
-	 * 
-	 * The resulting Iterator is a lazily computed view, so any modifications to the
-	 * underlying Iterators will be reflected on iteration. The result does not support {@link Iterator#remove()}
-	 * 
-	 * @param first
-	 *            the first Iterator. May not be <code>null</code>.
-	 * @param second
-	 *            the second Iterator. May not be <code>null</code>.
-	 * @return the zipped result
-	 * @since 2.7
-	 */
-	public static <A, B> Iterator<Pair<A, B>> zip(final Iterator<? extends A> first, final Iterator<? extends B> second) {
-		if (first == null)
-			throw new NullPointerException("first");
-		if (second == null)
-			throw new NullPointerException("second");
-		return new AbstractIterator<Pair<A, B>>() {
-			@Override
-			protected Pair<A, B> computeNext() {
-				if (first.hasNext() && second.hasNext()) {
-					return new Pair<A, B>(first.next(), second.next());
-				} else {
-					return endOfData();
-				}
-			}
-		};
-	}
-	
-	/**
-	 * Returns an Iterator of Pairs where the nth pair is created by taking the nth element of the source and its 0-based index. 
-	 *  E.g. <code>zipWitIndex(#["a", "b", "c"]) == #[("a", 0), ("b", 1), ("c", 2)]</code>
+	 * Returns an Iterator of Pairs where the nth pair is created by taking the nth element of the source as the value and its 0-based index as the key. 
+	 *  E.g. <code>zipWitIndex(#["a", "b", "c"]) == #[(0, "a"), (1, "b"), (2, "c")]</code>
 	 * 
 	 * The resulting Iterator is a lazily computed view, so any modifications to the
 	 * underlying Iterator will be reflected on iteration. The result does not support {@link Iterator#remove()}
@@ -808,15 +776,15 @@ import com.google.common.collect.Sets;
 	 * @return the zipped result
 	 * @since 2.7
 	 */
-	public static <A> Iterator<Pair<A, Integer>> zipWithIndex(final Iterator<? extends A> iterator) {
+	public static <A> Iterator<Pair<Integer, A>> indexed(final Iterator<? extends A> iterator) {
 		if (iterator == null)
 			throw new NullPointerException("iterator");
-		return new AbstractIterator<Pair<A, Integer>>() {
+		return new AbstractIterator<Pair<Integer, A>>() {
 			Integer index = 0;
 			@Override
-			protected Pair<A, Integer> computeNext() {
+			protected Pair<Integer, A> computeNext() {
 				if (iterator.hasNext()) {
-					return new Pair<A, Integer>(iterator.next(), index++);
+					return new Pair<Integer, A>(index++, iterator.next());
 				} else {
 					return endOfData();
 				}
