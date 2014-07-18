@@ -17,6 +17,7 @@ import java.util.List;
 
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
@@ -200,5 +201,15 @@ public class IterableExtensionsTest extends BaseIterablesIteratorsTest<Iterable<
 		assertFalse(result.hasNext());
 	}
 
-	
+	@Test public void testIterate() {
+		Iterator<Integer> ints = CollectionLiterals.newIterator(1, new Function1<Integer, Integer>() {
+			public Integer apply(Integer input) {
+				return input + 1;
+			}
+		});
+		assertEquals(Integer.valueOf(1), ints.next());
+		assertEquals(Integer.valueOf(2), ints.next());
+		assertEquals(Integer.valueOf(3), ints.next());
+		assertEquals(Integer.valueOf(4), ints.next());
+	}
 }
