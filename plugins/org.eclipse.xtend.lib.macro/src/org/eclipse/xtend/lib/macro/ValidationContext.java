@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtend.lib.macro;
 
-import org.eclipse.xtend.lib.macro.TransformationParticipant;
 import org.eclipse.xtend.lib.macro.file.FileLocations;
 import org.eclipse.xtend.lib.macro.file.FileSystemSupport;
 import org.eclipse.xtend.lib.macro.services.AnnotationReferenceProvider;
