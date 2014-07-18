@@ -2125,57 +2125,48 @@ org.eclipse.xtext.xbase.lib.IntegerRange$RangeIterator -> org.eclipse.xtext.xbas
     1:1:void add(java.lang.Object) -> add
     1:1:void set(java.lang.Object) -> set
 org.eclipse.xtext.xbase.lib.IterableExtensions -> org.eclipse.xtext.xbase.lib.IterableExtensions:
-    67:67:java.lang.Iterable operator_plus(java.lang.Iterable,java.lang.Iterable) -> operator_plus
-    82:88:java.lang.Object findFirst(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> findFirst
-    103:120:java.lang.Object findLast(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> findLast
-    132:135:java.lang.Object head(java.lang.Iterable) -> head
-    147:147:java.lang.Iterable tail(java.lang.Iterable) -> tail
-    158:173:java.lang.Object last(java.lang.Iterable) -> last
-    189:196:java.lang.Iterable take(java.lang.Iterable,int) -> take
-    231:238:java.lang.Iterable drop(java.lang.Iterable,int) -> drop
-    273:279:boolean exists(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> exists
-    294:300:boolean forall(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> forall
-    316:316:java.lang.Iterable filter(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> filter
-    336:336:java.lang.Iterable filter(java.lang.Iterable,java.lang.Class) -> filter
-    348:348:java.lang.Iterable filterNull(java.lang.Iterable) -> filterNull
-    367:367:java.lang.Iterable map(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> map
-    384:384:java.lang.Iterable flatten(java.lang.Iterable) -> flatten
-    396:401:void forEach(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Procedures$Procedure1) -> forEach
-    415:423:void forEach(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Procedures$Procedure2) -> forEach
-    434:434:java.lang.String join(java.lang.Iterable) -> join
-    450:450:java.lang.String join(java.lang.Iterable,java.lang.CharSequence) -> join
-    470:483:java.lang.String join(java.lang.Iterable,java.lang.CharSequence,org.eclipse.xtext.xbase.lib.Functions$Function1) -> join
-    507:523:java.lang.String join(java.lang.Iterable,java.lang.CharSequence,java.lang.CharSequence,java.lang.CharSequence,org.eclipse.xtext.xbase.lib.Functions$Function1) -> join
-    538:538:boolean elementsEqual(java.lang.Iterable,java.lang.Iterable) -> elementsEqual
-    549:549:boolean isNullOrEmpty(java.lang.Iterable) -> isNullOrEmpty
-    561:563:boolean isEmpty(java.lang.Iterable) -> isEmpty
-    574:574:int size(java.lang.Iterable) -> size
-    603:613:java.lang.Object reduce(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function2) -> reduce
-    650:655:java.lang.Object fold(java.lang.Iterable,java.lang.Object,org.eclipse.xtext.xbase.lib.Functions$Function2) -> fold
-    670:674:java.util.List toList(java.lang.Iterable) -> toList
-    689:693:java.util.Set toSet(java.lang.Iterable) -> toSet
-    709:713:java.util.Map toInvertedMap(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> toInvertedMap
-    729:735:java.util.Map toMap(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> toMap
-    751:751:java.util.List sort(java.lang.Iterable) -> sort
-    770:770:java.util.List sort(java.lang.Iterable,java.util.Comparator) -> sort
-    788:788:java.util.List sortBy(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> sortBy
+    64:64:java.lang.Iterable operator_plus(java.lang.Iterable,java.lang.Iterable) -> operator_plus
+    79:79:java.lang.Object findFirst(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> findFirst
+    94:106:java.lang.Object findLast(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> findLast
+    118:118:java.lang.Object head(java.lang.Iterable) -> head
+    130:130:java.lang.Iterable tail(java.lang.Iterable) -> tail
+    141:152:java.lang.Object last(java.lang.Iterable) -> last
+    168:175:java.lang.Iterable take(java.lang.Iterable,int) -> take
+    195:202:java.lang.Iterable drop(java.lang.Iterable,int) -> drop
+    219:219:boolean exists(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> exists
+    234:234:boolean forall(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> forall
+    250:250:java.lang.Iterable filter(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> filter
+    270:270:java.lang.Iterable filter(java.lang.Iterable,java.lang.Class) -> filter
+    282:282:java.lang.Iterable filterNull(java.lang.Iterable) -> filterNull
+    301:301:java.lang.Iterable map(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> map
+    318:318:java.lang.Iterable flatten(java.lang.Iterable) -> flatten
+    330:331:void forEach(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Procedures$Procedure1) -> forEach
+    345:346:void forEach(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Procedures$Procedure2) -> forEach
+    357:357:java.lang.String join(java.lang.Iterable) -> join
+    373:373:java.lang.String join(java.lang.Iterable,java.lang.CharSequence) -> join
+    393:393:java.lang.String join(java.lang.Iterable,java.lang.CharSequence,org.eclipse.xtext.xbase.lib.Functions$Function1) -> join
+    417:417:java.lang.String join(java.lang.Iterable,java.lang.CharSequence,java.lang.CharSequence,java.lang.CharSequence,org.eclipse.xtext.xbase.lib.Functions$Function1) -> join
+    432:432:boolean elementsEqual(java.lang.Iterable,java.lang.Iterable) -> elementsEqual
+    443:443:boolean isNullOrEmpty(java.lang.Iterable) -> isNullOrEmpty
+    455:457:boolean isEmpty(java.lang.Iterable) -> isEmpty
+    468:468:int size(java.lang.Iterable) -> size
+    497:497:java.lang.Object reduce(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function2) -> reduce
+    533:533:java.lang.Object fold(java.lang.Iterable,java.lang.Object,org.eclipse.xtext.xbase.lib.Functions$Function2) -> fold
+    548:552:java.util.List toList(java.lang.Iterable) -> toList
+    567:571:java.util.Set toSet(java.lang.Iterable) -> toSet
+    587:587:java.util.Map toInvertedMap(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> toInvertedMap
+    603:603:java.util.Map toMap(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> toMap
+    619:619:java.util.List sort(java.lang.Iterable) -> sort
+    638:638:java.util.List sort(java.lang.Iterable,java.util.Comparator) -> sort
+    656:656:java.util.List sortBy(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> sortBy
 org.eclipse.xtext.xbase.lib.IterableExtensions$1 -> org.eclipse.xtext.xbase.lib.IterableExtensions$1:
-    int val$count -> val$count
     java.lang.Iterable val$iterable -> val$iterable
-    198:198:java.util.Iterator iterator() -> iterator
-org.eclipse.xtext.xbase.lib.IterableExtensions$1$1 -> org.eclipse.xtext.xbase.lib.IterableExtensions$1$1:
-    int remaining -> remaining
-    java.util.Iterator delegate -> delegate
-    org.eclipse.xtext.xbase.lib.IterableExtensions$1 this$1 -> this$1
-    206:211:java.lang.Object computeNext() -> computeNext
+    int val$count -> val$count
+    177:177:java.util.Iterator iterator() -> iterator
 org.eclipse.xtext.xbase.lib.IterableExtensions$2 -> org.eclipse.xtext.xbase.lib.IterableExtensions$2:
     java.lang.Iterable val$iterable -> val$iterable
     int val$count -> val$count
-    240:240:java.util.Iterator iterator() -> iterator
-org.eclipse.xtext.xbase.lib.IterableExtensions$2$1 -> org.eclipse.xtext.xbase.lib.IterableExtensions$2$1:
-    java.util.Iterator delegate -> delegate
-    org.eclipse.xtext.xbase.lib.IterableExtensions$2 this$1 -> this$1
-    254:256:java.lang.Object computeNext() -> computeNext
+    204:204:java.util.Iterator iterator() -> iterator
 org.eclipse.xtext.xbase.lib.IteratorExtensions -> org.eclipse.xtext.xbase.lib.IteratorExtensions:
     46:48:java.lang.Iterable toIterable(java.util.Iterator) -> toIterable
     75:75:java.util.Iterator operator_plus(java.util.Iterator,java.util.Iterator) -> operator_plus
@@ -2529,7 +2520,6 @@ org.eclipse.xtext.xbase.lib.StringExtensions -> org.eclipse.xtext.xbase.lib.Stri
     62:62:boolean isNullOrEmpty(java.lang.String) -> isNullOrEmpty
     76:82:java.lang.String toFirstUpper(java.lang.String) -> toFirstUpper
     96:102:java.lang.String toFirstLower(java.lang.String) -> toFirstLower
-org.eclipse.xtext.xbase.lib.Synthetic -> org.eclipse.xtext.xbase.lib.Synthetic:
 org.eclipse.xtext.xbase.lib.internal.BooleanFunctionDelegate -> org.eclipse.xtext.xbase.lib.internal.BooleanFunctionDelegate:
     org.eclipse.xtext.xbase.lib.Functions$Function1 delegate -> delegate
     40:41:boolean apply(java.lang.Object) -> apply
@@ -2538,6 +2528,9 @@ org.eclipse.xtext.xbase.lib.internal.FunctionDelegate -> org.eclipse.xtext.xbase
     41:42:java.lang.Object apply(java.lang.Object) -> apply
 org.eclipse.xtext.xbase.lib.internal.ToStringHelper -> org.eclipse.xtext.xbase.lib.internal.ToStringHelper:
 org.eclipse.xtext.xbase.lib.slim.Fake -> org.eclipse.xtext.xbase.lib.slim.Fake:
+org.eclipse.xtext.xbase.lib.util.GwtToStringContext -> org.eclipse.xtext.xbase.lib.util.GwtToStringContext:
+    java.util.IdentityHashMap currentlyProcessed -> currentlyProcessed
+    20:20:java.util.IdentityHashMap getCurrentlyProcessed() -> getCurrentlyProcessed
 org.eclipse.xtext.xbase.lib.util.ReflectExtensions -> org.eclipse.xtext.xbase.lib.util.ReflectExtensions:
     40:47:void set(java.lang.Object,java.lang.String,java.lang.Object) -> set
     64:71:java.lang.Object get(java.lang.Object,java.lang.String) -> get
@@ -2545,25 +2538,73 @@ org.eclipse.xtext.xbase.lib.util.ReflectExtensions -> org.eclipse.xtext.xbase.li
     106:132:java.lang.Object invoke(java.lang.Object,java.lang.String,java.lang.Object[]) -> invoke
     136:148:boolean isCompatible(java.lang.reflect.Method,java.lang.String,java.lang.Object[]) -> isCompatible
     152:162:java.lang.Class wrapperTypeFor(java.lang.Class) -> wrapperTypeFor
-org.eclipse.xtext.xbase.lib.util.ToStringHelper -> org.eclipse.xtext.xbase.lib.util.ToStringHelper:
+org.eclipse.xtext.xbase.lib.util.ThreadLocalToStringContext -> org.eclipse.xtext.xbase.lib.util.ThreadLocalToStringContext:
     java.lang.ThreadLocal currentlyProcessed -> currentlyProcessed
-    82:83:boolean startProcessing(java.lang.Object) -> startProcessing
-    87:89:void endProcessing(java.lang.Object) -> endProcessing
-    98:118:java.lang.String toString(java.lang.Object) -> toString
-    123:123:java.lang.String toSimpleReferenceString(java.lang.Object) -> toSimpleReferenceString
-    133:143:void addField(java.lang.reflect.Field,java.lang.Object,org.eclipse.xtext.xbase.lib.util.ToStringHelper$IndentationAwareStringBuilder) -> addField
-    151:195:void internalToString(java.lang.Object,org.eclipse.xtext.xbase.lib.util.ToStringHelper$IndentationAwareStringBuilder) -> internalToString
-    204:209:java.util.List getAllDeclaredFields(java.lang.Class) -> getAllDeclaredFields
-org.eclipse.xtext.xbase.lib.util.ToStringHelper$1 -> org.eclipse.xtext.xbase.lib.util.ToStringHelper$1:
-    74:74:java.util.IdentityHashMap initialValue() -> initialValue
+    22:22:java.util.IdentityHashMap getCurrentlyProcessed() -> getCurrentlyProcessed
+org.eclipse.xtext.xbase.lib.util.ThreadLocalToStringContext$1 -> org.eclipse.xtext.xbase.lib.util.ThreadLocalToStringContext$1:
+    17:17:java.util.IdentityHashMap initialValue() -> initialValue
     1:1:java.lang.Object initialValue() -> initialValue
-org.eclipse.xtext.xbase.lib.util.ToStringHelper$IndentationAwareStringBuilder -> org.eclipse.xtext.xbase.lib.util.ToStringHelper$IndentationAwareStringBuilder:
+org.eclipse.xtext.xbase.lib.util.ToStringBuilder -> org.eclipse.xtext.xbase.lib.util.ToStringBuilder:
+    org.eclipse.xtext.xbase.lib.util.ToStringContext _toStringContext -> _toStringContext
+    java.lang.Object instance -> instance
+    java.lang.String typeName -> typeName
+    boolean multiLine -> multiLine
+    boolean skipNulls -> skipNulls
+    boolean showFieldNames -> showFieldNames
+    java.util.ArrayList parts -> parts
+    116:135:java.lang.String gwtCompatibleSimpleName(java.lang.Class) -> gwtCompatibleSimpleName
+    168:173:org.eclipse.xtext.xbase.lib.util.ToStringBuilder singleLine() -> singleLine
+    181:186:org.eclipse.xtext.xbase.lib.util.ToStringBuilder skipNulls() -> skipNulls
+    194:199:org.eclipse.xtext.xbase.lib.util.ToStringBuilder hideFieldNames() -> hideFieldNames
+    208:220:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addDeclaredFields() -> addDeclaredFields
+    229:241:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addAllFields() -> addAllFields
+    250:259:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addField(java.lang.String) -> addField
+    264:280:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addField(java.lang.reflect.Field) -> addField
+    290:290:org.eclipse.xtext.xbase.lib.util.ToStringBuilder add(java.lang.String,java.lang.Object) -> add
+    298:298:org.eclipse.xtext.xbase.lib.util.ToStringBuilder add(java.lang.Object) -> add
+    302:308:org.eclipse.xtext.xbase.lib.util.ToStringBuilder$Part addPart() -> addPart
+    312:318:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addPart(java.lang.Object) -> addPart
+    322:329:org.eclipse.xtext.xbase.lib.util.ToStringBuilder addPart(java.lang.String,java.lang.Object) -> addPart
+    336:397:java.lang.String toString() -> toString
+    401:466:void internalToString(java.lang.Object,org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder) -> internalToString
+    469:508:org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder serializeIterable(java.lang.Iterable,org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder) -> serializeIterable
+    512:516:java.lang.String toSimpleReferenceString(java.lang.Object) -> toSimpleReferenceString
+    520:534:java.util.ArrayList getAllDeclaredFields(java.lang.Class) -> getAllDeclaredFields
+    262:262:org.eclipse.xtext.xbase.lib.util.ToStringBuilder access$0(org.eclipse.xtext.xbase.lib.util.ToStringBuilder,java.lang.reflect.Field) -> access$0
+org.eclipse.xtext.xbase.lib.util.ToStringBuilder$1 -> org.eclipse.xtext.xbase.lib.util.ToStringBuilder$1:
+    org.eclipse.xtext.xbase.lib.util.ToStringBuilder this$0 -> this$0
+    214:215:void apply(java.lang.reflect.Field) -> apply
+    1:1:void apply(java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.util.ToStringBuilder$2 -> org.eclipse.xtext.xbase.lib.util.ToStringBuilder$2:
+    org.eclipse.xtext.xbase.lib.util.ToStringBuilder this$0 -> this$0
+    235:236:void apply(java.lang.reflect.Field) -> apply
+    1:1:void apply(java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.util.ToStringBuilder$3 -> org.eclipse.xtext.xbase.lib.util.ToStringBuilder$3:
+    org.eclipse.xtext.xbase.lib.util.ToStringBuilder this$0 -> this$0
+    java.lang.String val$fieldName -> val$fieldName
+    254:255:java.lang.Boolean apply(java.lang.reflect.Field) -> apply
+    1:1:java.lang.Object apply(java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder -> org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder:
     java.lang.StringBuilder builder -> builder
-    int indentation -> indentation
     java.lang.String indentationString -> indentationString
     java.lang.String newLineString -> newLineString
-    40:41:org.eclipse.xtext.xbase.lib.util.ToStringHelper$IndentationAwareStringBuilder increaseIndent() -> increaseIndent
-    45:46:org.eclipse.xtext.xbase.lib.util.ToStringHelper$IndentationAwareStringBuilder decreaseIndent() -> decreaseIndent
-    50:57:org.eclipse.xtext.xbase.lib.util.ToStringHelper$IndentationAwareStringBuilder append(java.lang.CharSequence) -> append
-    61:62:org.eclipse.xtext.xbase.lib.util.ToStringHelper$IndentationAwareStringBuilder newLine() -> newLine
-    67:67:java.lang.String toString() -> toString
+    int indentation -> indentation
+    62:67:org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder increaseIndent() -> increaseIndent
+    71:76:org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder decreaseIndent() -> decreaseIndent
+    80:93:org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder append(java.lang.CharSequence) -> append
+    97:104:org.eclipse.xtext.xbase.lib.util.ToStringBuilder$IndentationAwareStringBuilder newLine() -> newLine
+    108:108:java.lang.String toString() -> toString
+org.eclipse.xtext.xbase.lib.util.ToStringBuilder$Part -> org.eclipse.xtext.xbase.lib.util.ToStringBuilder$Part:
+    java.lang.String fieldName -> fieldName
+    java.lang.Object value -> value
+    48:48:void access$1(org.eclipse.xtext.xbase.lib.util.ToStringBuilder$Part,java.lang.Object) -> access$1
+    46:46:void access$2(org.eclipse.xtext.xbase.lib.util.ToStringBuilder$Part,java.lang.String) -> access$2
+    48:48:java.lang.Object access$3(org.eclipse.xtext.xbase.lib.util.ToStringBuilder$Part) -> access$3
+    46:46:java.lang.String access$4(org.eclipse.xtext.xbase.lib.util.ToStringBuilder$Part) -> access$4
+org.eclipse.xtext.xbase.lib.util.ToStringContext -> org.eclipse.xtext.xbase.lib.util.ToStringContext:
+    20:39:org.eclipse.xtext.xbase.lib.util.ToStringContext instance() -> instance
+    44:46:boolean startProcessing(java.lang.Object) -> startProcessing
+    50:52:void endProcessing(java.lang.Object) -> endProcessing
+    java.util.IdentityHashMap getCurrentlyProcessed() -> getCurrentlyProcessed
+org.eclipse.xtext.xbase.lib.util.ToStringHelper -> org.eclipse.xtext.xbase.lib.util.ToStringHelper:
+    41:41:java.lang.String toString(java.lang.Object) -> toString

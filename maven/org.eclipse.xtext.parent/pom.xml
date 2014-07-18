@@ -99,11 +99,6 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-deploy-plugin</artifactId>
-				<version>2.6</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
 				<version>2.2.1</version>
 				<executions>
@@ -131,6 +126,21 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>2.5.1</version>
+					<configuration>
+						<installAtEnd>true</installAtEnd>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.8</version>
+					<configuration>
+						<deployAtEnd>true</deployAtEnd>
+					</configuration>
+				</plugin>
 				<!--This plugin's configuration is used to store Eclipse m2e settings 
 					only. It has no influence on the Maven build itself. -->
 				<plugin>
@@ -185,13 +195,26 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+	<repositories>
+		<repository>
+			<id>central snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>central snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+		</pluginRepository>
+	</pluginRepositories>
+
 	<scm>
 		<connection>scm:git:git://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git</connection>
 		<developerConnection>scm:git:ssh://git.eclipse.org:29418/tmf/org.eclipse.xtext.git</developerConnection>
 		<url>http://git.eclipse.org/c/tmf/org.eclipse.xtext.git</url>
 	</scm>
-	<profiles>
 
+	<profiles>
 		<profile>
 			<id>local-build</id>
 			<properties>

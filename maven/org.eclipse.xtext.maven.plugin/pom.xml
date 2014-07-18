@@ -106,7 +106,7 @@
 						<configuration>
 							<skip>${maven.test.skip}</skip>
 							<target name="create-jar">
-									<property name="src.jar"
+								<property name="src.jar"
 									value="${project.build.directory}/${project.build.finalName}.jar" />
 								<property name="it.jar.name" value="${project.build.finalName}-it" />
 								<property name="it.jar.directory"
@@ -156,6 +156,7 @@
 							<version>IT-SNAPSHOT</version>
 							<packaging>maven-plugin</packaging>
 							<pomFile>pom.xml</pomFile>
+							<installAtEnd>false</installAtEnd>
 						</configuration>
 					</execution>
 				</executions>
