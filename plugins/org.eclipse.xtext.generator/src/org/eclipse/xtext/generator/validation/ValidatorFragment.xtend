@@ -22,6 +22,7 @@ import org.eclipse.xtext.generator.Xtend2ExecutionContext
 import org.eclipse.xtext.generator.Xtend2GeneratorFragment
 
 import static org.eclipse.xtext.GrammarUtil.*
+import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * Generates an Xtend-based model validator.
@@ -33,9 +34,9 @@ class ValidatorFragment extends Xtend2GeneratorFragment implements IInheriting, 
 	
 	@Inject extension ValidatorNaming
 	
-	@Property boolean inheritImplementation = true
+	@Accessors boolean inheritImplementation = true
 
-	@Property boolean generateStub = true
+	@Accessors boolean generateStub = true
 
 	@Inject Grammar grammar
 	

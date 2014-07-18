@@ -10,16 +10,16 @@ package org.eclipse.xtext.xbase.file
 import com.google.inject.Provider
 import com.google.inject.Singleton
 import java.io.File
+import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 @Singleton
+@Accessors
 class RuntimeWorkspaceConfigProvider implements Provider<WorkspaceConfig> {
-	
-	@Property File workspaceRoot = new File(".").absoluteFile.parentFile
-	
-	@Property WorkspaceConfig workspaceConfig
+	File workspaceRoot = new File(".").absoluteFile.parentFile
+	WorkspaceConfig workspaceConfig
 	
 	override get() {
 		if (workspaceConfig == null) {

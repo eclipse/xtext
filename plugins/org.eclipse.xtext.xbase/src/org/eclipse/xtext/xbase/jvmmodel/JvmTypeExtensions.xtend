@@ -9,6 +9,7 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.xbase.compiler.CompilationTemplateAdapter
+import org.eclipse.xtend.lib.annotations.Accessors
 
 class JvmTypeExtensions {
 	
@@ -52,7 +53,7 @@ class JvmTypeExtensions {
 }
 
 class JvmIdentifiableMetaData extends AdapterImpl {
-	@Property boolean synthetic
+	@Accessors boolean synthetic
 	
 	override isAdapterForType(Object type) {
 		JvmIdentifiableMetaData == type

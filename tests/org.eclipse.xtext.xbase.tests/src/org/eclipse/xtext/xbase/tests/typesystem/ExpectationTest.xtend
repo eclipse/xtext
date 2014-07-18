@@ -26,6 +26,7 @@ import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
 import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -374,10 +375,10 @@ class ExpectationTest extends AbstractExpectationTest {
  */
 class ExpectationTestingTypeComputer extends XbaseTypeComputer {
 	
-	@Property
+	@Accessors
 	AbstractExpectationTest test
 	
-	@Property() (XExpression)=>boolean predicate = [ it instanceof XNullLiteral ]
+	@Accessors() (XExpression)=>boolean predicate = [ it instanceof XNullLiteral ]
 	
 	override computeTypes(XExpression expression, ITypeComputationState state) {
 		if (predicate.apply(expression)) {

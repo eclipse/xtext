@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.plugin.EcorePlugin
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.builder.standalone.compiler.IJavaCompiler
 import org.eclipse.xtext.builder.standalone.compiler.IJavaCompiler.CompilationResult
@@ -41,14 +42,14 @@ class StandaloneBuilder {
 	static final Logger LOG = Logger.getLogger(StandaloneBuilder);
 
 	/**  Map key is a file extension provided by Language FileExtensionProvider   */
-	@Property Map<String, LanguageAccess> languages
-	@Property Iterable<String> sourceDirs
-	@Property Iterable<String> classPathEntries
-	@Property File tempDir = Files.createTempDir
-	@Property String encoding
-	@Property String classPathLookUpFilter
-	@Property boolean failOnValidationError = true
-	@Property ClusteringConfig clusteringConfig = null
+	@Accessors Map<String, LanguageAccess> languages
+	@Accessors Iterable<String> sourceDirs
+	@Accessors Iterable<String> classPathEntries
+	@Accessors File tempDir = Files.createTempDir
+	@Accessors String encoding
+	@Accessors String classPathLookUpFilter
+	@Accessors boolean failOnValidationError = true
+	@Accessors ClusteringConfig clusteringConfig = null
 
 	@Inject IndexedJvmTypeAccess jvmTypeAccess
 	@Inject Provider<XtextResourceSet> resourceSetProvider
@@ -59,7 +60,7 @@ class StandaloneBuilder {
 
 	def void setTempDir(String pathAsString) {
 		if (pathAsString != null) {
-			_tempDir = new File(pathAsString)
+			tempDir = new File(pathAsString)
 		}
 	}
 
