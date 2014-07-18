@@ -7,11 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.lib;
 
+import java.util.Comparator;
+import java.util.NoSuchElementException;
+
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Procedures;
 import org.junit.Assert;
 import org.junit.Test;
+
+import com.google.common.collect.Ordering;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -426,4 +431,98 @@ public abstract class BaseIterablesIteratorsTest<IterableOrIterator> extends Ass
 		}
 	}
 	
+	protected abstract IterableOrIterator takeWhile(IterableOrIterator input, Functions.Function1<Integer, Boolean> filter);
+	protected abstract IterableOrIterator dropWhile(IterableOrIterator input, Functions.Function1<Integer, Boolean> filter);
+	protected abstract Integer min(IterableOrIterator input);
+	protected abstract Integer max(IterableOrIterator input);
+	protected abstract Integer min(IterableOrIterator input, Comparator<? super Integer> comparator);
+	protected abstract Integer max(IterableOrIterator input, Comparator<? super Integer> comparator);
+	protected abstract Integer minBy(IterableOrIterator input, Functions.Function1<? super Integer, String> compareBy);
+	protected abstract Integer maxBy(IterableOrIterator input, Functions.Function1<? super Integer, String> compareBy);
+	
+	@Test public void testTakeWhile() {
+		for (IterableOrIterator testMe : testData(first, second, third, forth, fifth)) {
+			IterableOrIterator taken = takeWhile(testMe, new Function1<Integer, Boolean>() {
+				public Boolean apply(Integer p) {
+					return p <= 3;
+				}
+			});
+			assertTrue(is(taken, first, second, third));
+		}
+	}
+	
+	@Test public void testDropWhile() {
+		for (IterableOrIterator testMe : testData(first, second, third, forth, fifth)) {
+			IterableOrIterator tail = dropWhile(testMe, new Function1<Integer, Boolean>() {
+				public Boolean apply(Integer p) {
+					return p <= 3;
+				}
+			});
+			assertTrue(is(tail, forth, fifth));
+		}
+	}
+	
+	@Test public void testMinComparable() {
+		for (IterableOrIterator testMe : testData(first, second, third, forth, fifth)) {
+			Integer min = min(testMe);
+			assertEquals(first, min);
+		}
+	}
+	
+	@Test public void testMaxComparable() {
+		for (IterableOrIterator testMe : testData(first, second, third, forth, fifth)) {
+			Integer max = max(testMe);
+			assertEquals(fifth, max);
+		}
+	}
+	
+	@Test(expected = NoSuchElementException.class) 
+	public void testMinEmpty() {
+		for (IterableOrIterator testMe : testData()) {
+			min(testMe);
+		}
+	}
+	
+	@Test(expected = NoSuchElementException.class)
+	public void testMaxEmpty() {
+		for (IterableOrIterator testMe : testData()) {
+			max(testMe);
+		}
+	}
+	
+	@Test public void testMinComparator() {
+		for (IterableOrIterator testMe : testData(first, second, third, forth, fifth)) {
+			Integer min = min(testMe, Ordering.natural().reverse());
+			assertEquals(fifth, min);
+		}
+	}
+	
+	@Test public void testMaxComparator() {
+		for (IterableOrIterator testMe : testData(first, second, third, forth, fifth)) {
+			Integer max = max(testMe, Ordering.natural().reverse());
+			assertEquals(first, max);
+		}
+	}
+	
+	@Test public void testMinBy() {
+		for (IterableOrIterator testMe : testData(first, second, third, forth, fifth)) {
+			Integer min = minBy(testMe, new Function1<Integer, String>() {
+				public String apply(Integer p) {
+					return Integer.toBinaryString(p);
+				}
+			});
+			assertEquals(first, min);
+		}
+	}
+	
+	@Test public void testMaxBy() {
+		for (IterableOrIterator testMe : testData(first, second, third, forth, fifth)) {
+			Integer max = maxBy(testMe, new Function1<Integer, String>() {
+				public String apply(Integer p) {
+					return Integer.toBinaryString(p);
+				}
+			});
+			assertEquals(third, max);
+		}
+	}
 }
