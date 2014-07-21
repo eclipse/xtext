@@ -178,7 +178,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-install-plugin</artifactId>
-				<version>2.5</version>
+				<version>${maven-install-version}</version>
 				<executions>
 					<execution>
 						<phase>pre-integration-test</phase>
@@ -193,7 +193,6 @@
 							<version>IT-SNAPSHOT</version>
 							<packaging>maven-plugin</packaging>
 							<pomFile>pom.xml</pomFile>
-							<installAtEnd>false</installAtEnd>
 						</configuration>
 					</execution>
 				</executions>
