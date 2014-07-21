@@ -14,6 +14,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
@@ -66,7 +67,8 @@ public class TaskMarkerContributorTest extends AbstractXtextTests {
       String _unix = LineDelimiters.toUnix(_builder.toString());
       final IFile file = IResourcesSetupUtil.createFile("foo/foo.domainModelTest", _unix);
       final XtextResource resource = this.getResource(file);
-      this.markerContributor.updateMarkers(file, resource, null);
+      NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+      this.markerContributor.updateMarkers(file, resource, _nullProgressMonitor);
       final IMarker[] markers = file.findMarkers(TaskMarkerTypeProvider.XTEXT_TASK_TYPE, true, IResource.DEPTH_ZERO);
       int _size = ((List<IMarker>)Conversions.doWrapArray(markers)).size();
       Assert.assertEquals(2, _size);

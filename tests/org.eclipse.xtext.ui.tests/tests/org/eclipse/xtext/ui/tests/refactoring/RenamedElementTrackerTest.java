@@ -12,6 +12,7 @@ import static com.google.common.collect.Lists.*;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
@@ -65,7 +66,7 @@ public class RenamedElementTrackerTest extends AbstractXtextTests {
 
 		IRenamedElementTracker renamedElementTracker = new RenamedElementTracker();
 		Map<URI, URI> original2newElementURIs = renamedElementTracker.renameAndTrack(renamedElementURIs, newName,
-				resource.getResourceSet(), renameStrategy, null);
+				resource.getResourceSet(), renameStrategy, new NullProgressMonitor());
 
 		assertEquals("B", elementB.getName());
 		assertEquals(2, original2newElementURIs.size());

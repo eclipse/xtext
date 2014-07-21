@@ -422,9 +422,13 @@ public class XtextDocument extends Document implements IXtextDocument {
 	 * @since 2.7
 	 */
 	protected Object getResourceLock() {
-		return (resource instanceof ISynchronizable<?>) 
-				? ((ISynchronizable<?>) resource).getLock() 
-				: resource;
+		if (resource != null) {
+			return (resource instanceof ISynchronizable<?>) 
+					? ((ISynchronizable<?>) resource).getLock() 
+							: resource;
+		} else {
+			return this;
+		}
 	}
 	
 	private static final Logger log = Logger.getLogger(XtextDocument.class);
