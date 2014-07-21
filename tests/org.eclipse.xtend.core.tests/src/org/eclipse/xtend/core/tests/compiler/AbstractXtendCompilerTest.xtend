@@ -27,6 +27,7 @@ import org.hamcrest.core.Is
 import org.junit.Assert
 import org.junit.Before
 import testdata.Annotation1
+import org.eclipse.xtend.lib.annotations.Data
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

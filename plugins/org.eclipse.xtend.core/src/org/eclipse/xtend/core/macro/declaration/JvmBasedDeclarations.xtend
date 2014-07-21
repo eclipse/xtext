@@ -1047,7 +1047,7 @@ class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl implements 
 		val constructor = switch constructorDeclaration {
 			JvmConstructorDeclarationImpl: constructorDeclaration.delegate
 			XtendConstructorDeclarationImpl: {
-				val jvmElement = compilationUnit.jvmAssociations.getPrimaryJvmElement(constructorDeclaration.delegate)
+				val jvmElement = compilationUnit.jvmModelAssociations.getPrimaryJvmElement(constructorDeclaration.delegate)
 				if (jvmElement instanceof JvmConstructor) {
 					jvmElement
 				}

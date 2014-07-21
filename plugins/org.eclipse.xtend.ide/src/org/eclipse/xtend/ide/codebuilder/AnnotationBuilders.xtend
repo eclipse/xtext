@@ -5,10 +5,11 @@ import org.eclipse.jdt.core.IType
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.xbase.compiler.ISourceAppender
+import org.eclipse.xtend.lib.annotations.Accessors
 
 abstract class AbstractAnnotationBuilder extends AbstractCodeBuilder {
 	
-	@Property String annotationName
+	@Accessors String annotationName
 	
 	override getImage() {
 		'newannotation_wiz.gif'

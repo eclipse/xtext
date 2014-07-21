@@ -7,7 +7,7 @@
  *******************************************************************************/
 package test;
 
-import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtend.lib.annotations.Data;
 
 /**
  * @author Sven Efftinge - Initial contribution and API

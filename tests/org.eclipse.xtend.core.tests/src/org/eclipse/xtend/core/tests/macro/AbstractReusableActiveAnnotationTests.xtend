@@ -135,7 +135,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 			
 			val barJvmField = (barField as MutableJvmFieldDeclarationImpl).delegate
 			val getBarJvmMethod = (getBar as MutableJvmMethodDeclarationImpl).delegate
-			val elementsAssociatedWithBarField = jvmAssociations.getJvmElements(jvmAssociations.getPrimarySourceElement(barJvmField))
+			val elementsAssociatedWithBarField = jvmModelAssociations.getJvmElements(jvmModelAssociations.getPrimarySourceElement(barJvmField))
 			
 			assertEquals(2, elementsAssociatedWithBarField.size)
 			assertEquals(barJvmField, elementsAssociatedWithBarField.get(0))

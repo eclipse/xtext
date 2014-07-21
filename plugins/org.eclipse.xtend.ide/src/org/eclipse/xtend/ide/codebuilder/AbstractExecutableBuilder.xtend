@@ -5,15 +5,14 @@ import com.google.inject.Inject
 import java.util.Collections
 import java.util.List
 import java.util.Set
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.jface.viewers.StyledString
 import org.eclipse.swt.graphics.Image
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions
 import org.eclipse.xtext.xbase.compiler.ISourceAppender
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
-
-import static org.eclipse.xtext.common.types.JvmVisibility.*
-import org.eclipse.emf.ecore.EObject
 
 /**
  * @author Jan Koehnlein
@@ -25,11 +24,11 @@ abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
 	@Inject extension JdtVariableCompletions
 	@Inject extension CodeBuilderFactory 
 
-	@Property List<AbstractParameterBuilder> parameterBuilders = emptyList
-	@Property List<LightweightTypeReference> exceptions = emptyList
-	@Property List<JvmTypeParameter> typeParameters = emptyList
-	@Property String body
-	@Property boolean varArgsFlag
+	@Accessors List<AbstractParameterBuilder> parameterBuilders = emptyList
+	@Accessors List<LightweightTypeReference> exceptions = emptyList
+	@Accessors List<JvmTypeParameter> typeParameters = emptyList
+	@Accessors String body
+	@Accessors boolean varArgsFlag
 
 	def appendBody(ISourceAppender appendable, String statementSeparator) {
 		appendable.append(' {').increaseIndentation.newLine.append(body ?: defaultBody).append(statementSeparator).
