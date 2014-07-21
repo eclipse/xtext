@@ -9,7 +9,6 @@ package org.eclipse.xtend.lib.macro.services;
 
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
 import org.eclipse.xtend.lib.macro.declaration.Element;
-import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 
 import com.google.common.annotations.Beta;
 
@@ -24,45 +23,6 @@ import com.google.common.annotations.Beta;
  */
 @Beta
 public interface Tracability {
-	
-	/**
-	 * @deprecated use {@link #isSource(Element)}
-	 */
-	@Deprecated
-	boolean isSource(NamedElement element);
-	
-	/**
-	 * @deprecated use {@link #isGenerated(Element)}
-	 */
-	@Deprecated
-	boolean isGenerated(NamedElement element);
-	
-	/**
-	 * @deprecated use {@link #isExternal(Element)}
-	 */
-	@Deprecated
-	boolean isExternal(NamedElement element);
-	
-	/**
-	 * @deprecated use {@link #getPrimaryGeneratedJavaElement(Element)}
-	 * @since 2.7
-	 */
-	@Deprecated
-	NamedElement getPrimaryGeneratedJavaElement(NamedElement source);
-	/**
-	 * @deprecated use {@link #isThePrimaryGeneratedJavaElement(Element)}
-	 * @since 2.7
-	 */
-	@Deprecated
-	boolean isThePrimaryGeneratedJavaElement(NamedElement target);
-	
-	/**
-	 * @deprecated use {@link #getPrimarySourceElement(Element)}
-	 * @since 2.7
-	 */
-	@Deprecated
-	NamedElement getPrimarySourceElement(NamedElement target);
-	
 	/**
 	 * @param element
 	 * @return whether the given element is a source (i.e Xtend) element.
