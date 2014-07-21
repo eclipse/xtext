@@ -16,6 +16,7 @@ import org.junit.Test;
 public class XtendCompilerMojoTraceIT {
 
 	private static String ROOT = "/it/compile";
+	private boolean debug = false;
 
 	private String loadTraceSourcePath(String file) {
 		try {
@@ -48,7 +49,7 @@ public class XtendCompilerMojoTraceIT {
 		verifier.assertFileNotPresent(xtendGenDir + "test/.XtendA.java._trace");
 		verifier.assertFileNotPresent(xtendGenDir + "test/.XtendA2.java._trace");
 	}
-	
+
 	@Test
 	public void traceWithTestSrc() throws Exception {
 		Verifier verifier = verifyErrorFreeLog(ROOT + "/trace_withtestsrc");
@@ -63,7 +64,8 @@ public class XtendCompilerMojoTraceIT {
 
 	private Verifier verifyErrorFreeLog(String pathToTestProject, String goal) throws IOException,
 			VerificationException {
-		Verifier verifier = newVerifier(pathToTestProject);
+		Verifier verifier = newVerifier(pathToTestProject, debug);
+		verifier.setMavenDebug(debug);
 		verifier.executeGoal(goal);
 		verifier.verifyErrorFreeLog();
 		verifier.setDebug(true);
@@ -71,8 +73,8 @@ public class XtendCompilerMojoTraceIT {
 		return verifier;
 	}
 
-	private Verifier newVerifier(String pathToTestProject) throws IOException, VerificationException {
+	private Verifier newVerifier(String pathToTestProject, boolean debugMode) throws IOException, VerificationException {
 		File testDir = ResourceExtractor.simpleExtractResources(getClass(), pathToTestProject);
-		return new Verifier(testDir.getAbsolutePath());
+		return new Verifier(testDir.getAbsolutePath(), debugMode);
 	}
 }

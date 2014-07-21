@@ -56,6 +56,12 @@
 		<Bug pattern="IC_SUPERCLASS_USES_SUBCLASS_DURING_INITIALIZATION" />
 	</Match>
 	
+	<!-- Findbugs bug 1032 -->
+	<Match>
+		<Class name="org.eclipse.xtext.ui.editor.model.XtextDocument$XtextDocumentLocker" />
+		<Bug pattern="VO_VOLATILE_INCREMENT" />
+	</Match>
+	
 	
 	<!-- Some Examples:
 	<Match>

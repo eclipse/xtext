@@ -38,6 +38,7 @@
 	<properties>
 		<mavenVersion>3.2.1</mavenVersion>
 		<tycho-version>0.19.0</tycho-version>
+		<maven-install-version>2.5.1</maven-install-version>
 		<emf.version>(2.8,3.0)</emf.version>
 		<asm.version>5.0.1</asm.version>
 		<guava.version>[10.0.1,14.0.1]</guava.version>
@@ -54,6 +55,7 @@
 		<maven.compiler.target>1.5</maven.compiler.target>
 		<mirroring.phase>prepare-package</mirroring.phase>
 		<skipMirroring>false</skipMirroring>
+		<!-- <javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>  -->
 	</properties>
 	<licenses>
 		<license>
@@ -62,7 +64,33 @@
 		</license>
 	</licenses>
 	<build>
+		<extensions>
+			<!-- See https://jira.codehaus.org/browse/MINSTALL-102 -->
+			<extension>
+				<groupId>org.apache.maven.archetype</groupId>
+				<artifactId>archetype-packaging</artifactId>
+				<version>2.2</version>
+			</extension>
+		</extensions>
 		<plugins>
+			<!-- See https://jira.codehaus.org/browse/MINSTALL-102 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>1.3.1</version>
+				<configuration>
+					<bannedPlugins>
+						<excludes>
+							<exclude>org.apache.maven.plugins:maven-install-plugin</exclude>
+							<exclude>org.apache.maven.plugins:maven-deploy-plugin</exclude>
+						</excludes>
+						<includes>
+							<include>org.apache.maven.plugins:maven-install-plugin:2.5.1</include>
+							<include>org.apache.maven.plugins:maven-deploy-plugin:2.8.1</include>
+						</includes>
+					</bannedPlugins>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-gpg-plugin</artifactId>
@@ -123,17 +151,23 @@
 					</execution>
 				</executions>
 			</plugin>
+			<!-- add install and deploy here, otherwise deploying (deployAtEnd) may 
+				be skipped -->
+			<plugin>
+				<artifactId>maven-install-plugin</artifactId>
+				<version>${maven-install-version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.8.1</version>
+				<configuration>
+					<deployAtEnd>true</deployAtEnd>
+				</configuration>
+			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-deploy-plugin</artifactId>
-					<version>2.8.1</version>
-					<configuration>
-						<deployAtEnd>true</deployAtEnd>
-					</configuration>
-				</plugin>
 				<!--This plugin's configuration is used to store Eclipse m2e settings 
 					only. It has no influence on the Maven build itself. -->
 				<plugin>
@@ -192,12 +226,20 @@
 		<repository>
 			<id>central snapshots</id>
 			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+			<snapshots>
+				<enabled>true</enabled>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
 		</repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
 			<id>central snapshots</id>
 			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+			<snapshots>
+				<enabled>true</enabled>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
 
