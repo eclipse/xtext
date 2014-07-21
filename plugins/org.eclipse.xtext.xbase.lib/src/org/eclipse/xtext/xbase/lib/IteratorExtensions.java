@@ -765,11 +765,14 @@ import com.google.common.collect.Sets;
 	}
 
 	/**
-	 * Returns an Iterator of Pairs where the nth pair is created by taking the nth element of the source as the value and its 0-based index as the key. 
-	 *  E.g. <code>zipWitIndex(#["a", "b", "c"]) == #[(0, "a"), (1, "b"), (2, "c")]</code>
+	 * Returns an Iterator of Pairs where the nth pair is created by taking the nth element of the source as the value
+	 * and its 0-based index as the key. E.g.
+	 * <code>zipWitIndex(#["a", "b", "c"]) == #[(0, "a"), (1, "b"), (2, "c")]</code>
 	 * 
-	 * The resulting Iterator is a lazily computed view, so any modifications to the
-	 * underlying Iterator will be reflected on iteration. The result does not support {@link Iterator#remove()}
+	 * If the index would overflow, {@link Integer#MAX_VALUE} is returned for all subsequent elements.
+	 * 
+	 * The resulting Iterator is a lazily computed view, so any modifications to the underlying Iterator will be
+	 * reflected on iteration. The result does not support {@link Iterator#remove()}
 	 * 
 	 * @param iterator
 	 *            the elements. May not be <code>null</code>.
@@ -780,11 +783,14 @@ import com.google.common.collect.Sets;
 		if (iterator == null)
 			throw new NullPointerException("iterator");
 		return new AbstractIterator<Pair<Integer, A>>() {
-			Integer index = 0;
+			int i = 0;
 			@Override
 			protected Pair<Integer, A> computeNext() {
 				if (iterator.hasNext()) {
-					return new Pair<Integer, A>(index++, iterator.next());
+					Pair<Integer, A> next = new Pair<Integer, A>(i, iterator.next());
+					if (i != Integer.MAX_VALUE)
+						i++;
+					return next;
 				} else {
 					return endOfData();
 				}
