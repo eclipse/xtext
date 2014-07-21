@@ -17,6 +17,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
@@ -157,6 +158,8 @@ public abstract class AbstractNewXtendElementWizardPage extends NewTypeWizardPag
 					size[0] = createXtendElement(monitor, xtendFile, whitespaceInformationProvider
 							.getIndentationInformation(uri).getIndentString(), whitespaceInformationProvider
 							.getLineSeparatorInformation(uri).getLineSeparator());
+				} catch (OperationCanceledException e) {
+					throw new InterruptedException();
 				} catch (Exception e) {
 					throw new InvocationTargetException(e);
 				} finally {
@@ -167,7 +170,8 @@ public abstract class AbstractNewXtendElementWizardPage extends NewTypeWizardPag
 		try {
 			getContainer().run(true, false, op);
 		} catch (InterruptedException e) {
-			throw new RuntimeException(e);
+			// cancelled by user
+			return 0;
 		} catch (InvocationTargetException e) {
 			Throwable realException = e.getTargetException();
 			MessageDialog.openError(getShell(), getElementCreationErrorMessage(), realException.getMessage());
