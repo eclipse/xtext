@@ -5,6 +5,7 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -68,7 +69,8 @@ public class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
       EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
       XtendTypeDeclaration _get = _xtendTypes.get(0);
       final XtendClass fooClass = ((XtendClass) _get);
-      final Iterable<URI> dependentElementURIs = this.dependentElementsCalculator.getDependentElementURIs(fooClass, null);
+      NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+      final Iterable<URI> dependentElementURIs = this.dependentElementsCalculator.getDependentElementURIs(fooClass, _nullProgressMonitor);
       int _size = IterableExtensions.size(dependentElementURIs);
       Assert.assertEquals(3, _size);
       EList<XtendMember> _members = fooClass.getMembers();
@@ -123,7 +125,8 @@ public class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
       final XtendClass fooClass = ((XtendClass) _get);
       EList<XtendMember> _members = fooClass.getMembers();
       final XtendMember fooMethod1 = _members.get(1);
-      final Iterable<URI> dependentElementURIs = this.dependentElementsCalculator.getDependentElementURIs(fooMethod1, null);
+      NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+      final Iterable<URI> dependentElementURIs = this.dependentElementsCalculator.getDependentElementURIs(fooMethod1, _nullProgressMonitor);
       int _size = IterableExtensions.size(dependentElementURIs);
       Assert.assertEquals(5, _size);
       EList<XtendMember> _members_1 = fooClass.getMembers();

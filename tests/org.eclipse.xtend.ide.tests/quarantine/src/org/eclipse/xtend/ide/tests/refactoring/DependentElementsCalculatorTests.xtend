@@ -12,6 +12,7 @@ import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator
 import org.junit.Test
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
+import org.eclipse.core.runtime.NullProgressMonitor
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -33,7 +34,7 @@ class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
 			}
 		''')
 		val fooClass = file.xtendTypes.get(0) as XtendClass
-		val dependentElementURIs = dependentElementsCalculator.getDependentElementURIs(fooClass, null)
+		val dependentElementURIs = dependentElementsCalculator.getDependentElementURIs(fooClass, new NullProgressMonitor)
 		assertEquals(3, dependentElementURIs.size);
 		val fooFunction = fooClass.members.get(0) as XtendFunction
 		newArrayList(fooFunction, fooClass.inferredType, fooClass.inferredConstructor)
@@ -52,7 +53,7 @@ class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
 		IResourcesSetupUtil::waitForAutoBuild
 		val fooClass = fooFile.xtendTypes.get(0) as XtendClass
 		val fooMethod1 = fooClass.members.get(1)
-		val dependentElementURIs = dependentElementsCalculator.getDependentElementURIs(fooMethod1, null)
+		val dependentElementURIs = dependentElementsCalculator.getDependentElementURIs(fooMethod1, new NullProgressMonitor)
 		assertEquals(5, dependentElementURIs.size);
 		(fooClass.members + fooClass.inferredType.members).filter[!(it instanceof JvmConstructor)].toList
 			.forEach[assertTrue(it.toString, dependentElementURIs.exists[ element | element == it.URI])]
