@@ -8,18 +8,18 @@
 package example4;
 
 import example4.ContentNode;
-import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Data
 @SuppressWarnings("all")
 public class A extends ContentNode {
-  private final String _href;
+  private final String href;
   
   public A(final String href) {
     super();
-    this._href = href;
+    this.href = href;
   }
   
   @Override
@@ -27,7 +27,7 @@ public class A extends ContentNode {
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
-    result = prime * result + ((this._href== null) ? 0 : this._href.hashCode());
+    result = prime * result + ((this.href== null) ? 0 : this.href.hashCode());
     return result;
   }
   
@@ -43,10 +43,10 @@ public class A extends ContentNode {
     if (!super.equals(obj))
       return false;
     A other = (A) obj;
-    if (this._href == null) {
-      if (other._href != null)
+    if (this.href == null) {
+      if (other.href != null)
         return false;
-    } else if (!this._href.equals(other._href))
+    } else if (!this.href.equals(other.href))
       return false;
     return true;
   }
@@ -54,12 +54,14 @@ public class A extends ContentNode {
   @Override
   @Pure
   public String toString() {
-    String result = new ToStringHelper().toString(this);
+    String result = new ToStringBuilder(this)
+    	.addAllFields()
+    	.toString();
     return result;
   }
   
   @Pure
   public String getHref() {
-    return this._href;
+    return this.href;
   }
 }

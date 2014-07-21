@@ -10,23 +10,24 @@
 package example5
 
 import java.math.BigDecimal
+import org.eclipse.xtend.lib.annotations.Data
 
 @Data class Time {
 	BigDecimal msec
 	
-	def operator_plus(Time other) {
+	def +(Time other) {
 		new Time(this.msec + other.msec)
 	}
 	
-	def operator_minus(Time other) {
+	def -(Time other) {
 		new Time(this.msec - other.msec)
 	}
 
-	def operator_multiply(int times) {
+	def *(int times) {
 		new Time(this.msec * new BigDecimal(times))
 	}
 	
-	def operator_divide(int times) {
+	def /(int times) {
 		new Time(this.msec / new BigDecimal(times))
 	}
 	

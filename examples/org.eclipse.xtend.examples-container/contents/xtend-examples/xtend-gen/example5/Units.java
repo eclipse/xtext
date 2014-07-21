@@ -34,6 +34,14 @@ public class Units {
     Distance _plus_1 = _km_3.operator_plus(_m_1);
     Distance _multiply = _plus_1.operator_multiply(2);
     Assert.assertEquals(_km_2, _multiply);
+    Distance distance = Distance.km(10);
+    for (int i = 1; (i <= 10); i++) {
+      Distance _distance = distance;
+      Distance _km_4 = Distance.km(i);
+      distance = _distance.operator_plus(_km_4);
+    }
+    Distance _km_4 = Distance.km(65);
+    Assert.assertEquals(_km_4, distance);
   }
   
   @Test

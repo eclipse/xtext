@@ -63,9 +63,8 @@ public class Movies {
         return Double.valueOf(it.getRating());
       }
     };
-    List<Movie> _sortBy = IterableExtensions.<Movie, Double>sortBy(_filter, _function_1);
-    Movie _last = IterableExtensions.<Movie>last(_sortBy);
-    int _year = _last.getYear();
+    Movie _maxBy = IterableExtensions.<Movie, Double>maxBy(_filter, _function_1);
+    int _year = _maxBy.getYear();
     Assert.assertEquals(1989, _year);
   }
   

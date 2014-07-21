@@ -11,40 +11,34 @@ package example5;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
-import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Data
 @SuppressWarnings("all")
 public class Time {
-  private final BigDecimal _msec;
+  private final BigDecimal msec;
   
   public Time operator_plus(final Time other) {
-    BigDecimal _msec = this.getMsec();
-    BigDecimal _msec_1 = other.getMsec();
-    BigDecimal _plus = _msec.add(_msec_1);
+    BigDecimal _plus = this.msec.add(other.msec);
     return new Time(_plus);
   }
   
   public Time operator_minus(final Time other) {
-    BigDecimal _msec = this.getMsec();
-    BigDecimal _msec_1 = other.getMsec();
-    BigDecimal _minus = _msec.subtract(_msec_1);
+    BigDecimal _minus = this.msec.subtract(other.msec);
     return new Time(_minus);
   }
   
   public Time operator_multiply(final int times) {
-    BigDecimal _msec = this.getMsec();
     BigDecimal _bigDecimal = new BigDecimal(times);
-    BigDecimal _multiply = _msec.multiply(_bigDecimal);
+    BigDecimal _multiply = this.msec.multiply(_bigDecimal);
     return new Time(_multiply);
   }
   
   public Time operator_divide(final int times) {
-    BigDecimal _msec = this.getMsec();
     BigDecimal _bigDecimal = new BigDecimal(times);
-    BigDecimal _divide = _msec.divide(_bigDecimal, MathContext.DECIMAL128);
+    BigDecimal _divide = this.msec.divide(_bigDecimal, MathContext.DECIMAL128);
     return new Time(_divide);
   }
   
@@ -71,7 +65,7 @@ public class Time {
   
   public Time(final BigDecimal msec) {
     super();
-    this._msec = msec;
+    this.msec = msec;
   }
   
   @Override
@@ -79,7 +73,7 @@ public class Time {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((this._msec== null) ? 0 : this._msec.hashCode());
+    result = prime * result + ((this.msec== null) ? 0 : this.msec.hashCode());
     return result;
   }
   
@@ -93,10 +87,10 @@ public class Time {
     if (getClass() != obj.getClass())
       return false;
     Time other = (Time) obj;
-    if (this._msec == null) {
-      if (other._msec != null)
+    if (this.msec == null) {
+      if (other.msec != null)
         return false;
-    } else if (!this._msec.equals(other._msec))
+    } else if (!this.msec.equals(other.msec))
       return false;
     return true;
   }
@@ -104,12 +98,13 @@ public class Time {
   @Override
   @Pure
   public String toString() {
-    String result = new ToStringHelper().toString(this);
-    return result;
+    ToStringBuilder b = new ToStringBuilder(this);
+    b.add("msec", this.msec);
+    return b.toString();
   }
   
   @Pure
   public BigDecimal getMsec() {
-    return this._msec;
+    return this.msec;
   }
 }

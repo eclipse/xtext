@@ -9,10 +9,13 @@
  *******************************************************************************/
 package example6
 
-import org.junit.Test
-import static org.junit.Assert.*
 import java.io.FileReader
 import java.util.Set
+import org.eclipse.xtend.lib.annotations.Data
+import org.junit.Test
+
+import static org.junit.Assert.*
+
 import static extension com.google.common.io.CharStreams.*
 
 class Movies {
@@ -28,7 +31,7 @@ class Movies {
 	 * @return the year the best rated movie of 80ies (1980-1989) was released.
 	 */
 	@Test def void yearOfBestMovieFrom80ies() {
-		assertEquals(1989, movies.filter[(1980..1989).contains(year)].sortBy[rating].last.year)
+		assertEquals(1989, movies.filter[(1980..1989).contains(year)].maxBy[rating].year)
 	}
 	
 	/**
