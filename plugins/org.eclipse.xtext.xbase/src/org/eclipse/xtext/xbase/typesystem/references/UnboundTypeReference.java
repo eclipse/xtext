@@ -342,15 +342,15 @@ public class UnboundTypeReference extends LightweightTypeReference {
 					}
 				}
 			}
-			if (hasContraintHints) {
-				propageResolvedTypeToConstraints(allHints);
-			}
 			getOwner().acceptHint(getHandle(), new LightweightBoundTypeArgument(
 					resolvedTo,
 					BoundTypeArgumentSource.RESOLVED,
 					this,
 					VarianceInfo.INVARIANT,
 					typeArgument.getVariance()));
+			if (hasContraintHints) {
+				propageResolvedTypeToConstraints(allHints);
+			}
 			return true;
 		}
 		return false;
@@ -419,6 +419,9 @@ public class UnboundTypeReference extends LightweightTypeReference {
 			LightweightBoundTypeArgument singleHint = hints.get(0);
 			if (singleHint.getSource() == BoundTypeArgumentSource.RESOLVED) {
 				resolvedTo = singleHint.getTypeReference();
+				if (!getOwner().isResolved(handle)) {
+					throw new IllegalStateException("owner should know that this one is resolved");
+				}
 				return resolvedTo;
 			}
 		}
