@@ -92,19 +92,19 @@ public class XtendOutlineSourceTreeProvider extends AbstractMultiModeOutlineTree
 	}
 
 	private void createFeatureNodesForType(IOutlineNode parentNode, XtendTypeDeclaration xtendType,
-			JvmDeclaredType inferredType, final JvmDeclaredType baseType, Set<JvmMember> processedFeatures,
+			JvmDeclaredType inferredType, final JvmDeclaredType baseType, Set<JvmMember> processedMembers,
 			int inheritanceDepth) {
 		if (xtendType != null) {
 			for (XtendMember xtendMember : xtendType.getMembers()) {
 				EObject jvmElement = getAssociations().getPrimaryJvmElement(xtendMember);
-				if (jvmElement instanceof JvmMember && !processedFeatures.contains(jvmElement)) {
+				if (jvmElement instanceof JvmMember && !processedMembers.contains(jvmElement)) {
 					if (xtendMember instanceof XtendTypeDeclaration) {
 						// Nested Classes
 						if (isShowInherited()) {
 							Set<JvmMember> forgetProcessed = newHashSet();
 							createNodeForType(parentNode, xtendMember, forgetProcessed, inheritanceDepth);
 						} else {
-							createNodeForType(parentNode, xtendMember, processedFeatures, inheritanceDepth);
+							createNodeForType(parentNode, xtendMember, processedMembers, inheritanceDepth);
 						}
 					} else if (jvmElement instanceof JvmFeature) {
 						JvmFeature jvmFeature = (JvmFeature) jvmElement;
@@ -112,7 +112,7 @@ public class XtendOutlineSourceTreeProvider extends AbstractMultiModeOutlineTree
 							continue;
 						}
 						if (isDispatchRelated(jvmFeature)) {
-							createDispatchOperationNodes(parentNode, inferredType, baseType, processedFeatures,
+							createDispatchOperationNodes(parentNode, inferredType, baseType, processedMembers,
 									inheritanceDepth);
 						} else {
 							XtendEObjectNode featureNode = createNodeForFeature(parentNode, inferredType, jvmFeature,
@@ -120,22 +120,13 @@ public class XtendOutlineSourceTreeProvider extends AbstractMultiModeOutlineTree
 							handleLocalClasses(jvmFeature, featureNode, inheritanceDepth);
 						}
 					}
-					rememberJvmMember(processedFeatures, (JvmMember) jvmElement);
+					rememberJvmMember(processedMembers, (JvmMember) jvmElement);
 				}
 			}
 		}
 
 		if (isShowInherited()) {
-			if (inferredType instanceof JvmGenericType) {
-				JvmTypeReference extendedClass = ((JvmGenericType) inferredType).getExtendedClass();
-				if (extendedClass != null)
-					createInheritedFeatureNodes(parentNode, baseType, processedFeatures, inheritanceDepth,
-							extendedClass);
-				for (JvmTypeReference extendedInterface : ((JvmGenericType) inferredType).getExtendedInterfaces()) {
-					createInheritedFeatureNodes(parentNode, baseType, processedFeatures, inheritanceDepth,
-							extendedInterface);
-				}
-			}
+			handleInheritedMembers(parentNode, inferredType, baseType, processedMembers, inheritanceDepth);
 		}
 	}
 

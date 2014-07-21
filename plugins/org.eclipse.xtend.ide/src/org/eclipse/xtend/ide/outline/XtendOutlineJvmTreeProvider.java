@@ -15,7 +15,6 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.labeling.XtendJvmLabelProvider;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
@@ -73,7 +72,7 @@ public class XtendOutlineJvmTreeProvider extends AbstractMultiModeOutlineTreePro
 	protected void createInheritedFeatureNodes(IOutlineNode parentNode, JvmDeclaredType baseType,
 			Set<JvmMember> processedFeatures, int inheritanceDepth, JvmTypeReference superType) {
 		if (superType.getType() instanceof JvmDeclaredType) {
-			JvmDeclaredType superClass = ((JvmGenericType) superType.getType());
+			JvmDeclaredType superClass = ((JvmDeclaredType) superType.getType());
 			if (Object.class.getName().equals(superClass.getQualifiedName()))
 				inheritanceDepth += 10;
 			createFeatureNodesForType(parentNode, superClass, baseType, processedFeatures, inheritanceDepth + 1);
