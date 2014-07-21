@@ -10,11 +10,12 @@
 package example5
 
 import java.math.BigDecimal
+import org.eclipse.xtend.lib.annotations.Data
 
 @Data class Speed {
 	BigDecimal mmPerMsec
 
-	def static operator_divide(Distance d, Time t) {
+	def static /(Distance d, Time t) {
 		new Speed(d.mm / t.msec)
 	}
 }

@@ -24,6 +24,13 @@ class Units {
 	@Test def distances() {
 		assertEquals(15.km, 13.km + 2_000.m)
 		assertEquals(30.km, (13.km + 2_000.m) * 2)
+		
+		//if you implement +, you get += for free
+		var distance = 10.km
+		for (var i = 1; i <= 10; i++) {
+			distance += i.km
+		}
+		assertEquals(65.km, distance)
 	}
 	
 	@Test def time() {
