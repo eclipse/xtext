@@ -1,0 +1,42 @@
+Contributing to Textual Modeling Framework
+==========================================
+
+Thanks for your interest in this project.
+
+Project description:
+--------------------
+
+The Textual Modeling Framework is an umbrella project for textual modeling frameworks at Eclipse. It contains two concrete projects:
+Xtext
+TCS (currently inactive)
+ Please refer to the individual project web sites for details.
+
+- https://projects.eclipse.org/projects/modeling.tmf
+
+Developer resources:
+--------------------
+
+Information regarding source code management, builds, coding standards, and more.
+
+- https://projects.eclipse.org/projects/modeling.tmf/developer
+
+Contributor License Agreement:
+------------------------------
+
+Before your contribution can be accepted by the project, you need to create and electronically sign the Eclipse Foundation Contributor License Agreement (CLA).
+
+- http://www.eclipse.org/legal/CLA.php
+
+Search for bugs:
+----------------
+
+This project uses Bugzilla to track ongoing development and issues.
+
+- https://bugs.eclipse.org/bugs/buglist.cgi?product=TMF
+
+Create a new bug:
+-----------------
+
+Be sure to search for existing bugs before you create another one. Remember that contributions are always welcome!
+
+- https://bugs.eclipse.org/bugs/enter_bug.cgi?product=TMF
