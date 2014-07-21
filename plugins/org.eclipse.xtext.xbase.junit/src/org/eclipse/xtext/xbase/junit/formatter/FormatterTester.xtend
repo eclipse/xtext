@@ -11,6 +11,7 @@ import org.eclipse.xtext.xbase.formatting.IBasicFormatter
 import org.eclipse.xtext.xbase.formatting.TextReplacement
 import org.junit.Assert
 import org.eclipse.xtext.xbase.formatting.FormattingPreferenceValues
+import org.eclipse.xtend.lib.annotations.Accessors
 
 @SuppressWarnings("restriction")
 class FormatterTester {
@@ -109,14 +110,15 @@ class FormatterTester {
 }
 
 @SuppressWarnings("restriction")
+@Accessors
 class AssertingFormatterData {
-	@Property MapBasedPreferenceValues config
+	MapBasedPreferenceValues config
 	def getCfg() {
 		return new FormattingPreferenceValues(config);
 	}
-	@Property CharSequence expectation
-	@Property CharSequence toBeFormatted
-	@Property String prefix
-	@Property String postfix
-	@Property boolean allowErrors
+	CharSequence expectation
+	CharSequence toBeFormatted
+	String prefix
+	String postfix
+	boolean allowErrors
 }
