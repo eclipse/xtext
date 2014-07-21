@@ -68,9 +68,9 @@ public class TracabilityImpl implements Tracability {
   public Element getPrimaryGeneratedJavaElement(final Element source) {
     boolean _isSource = this.isSource(source);
     if (_isSource) {
-      IXtendJvmAssociations _jvmAssociations = this.unit.getJvmAssociations();
+      IXtendJvmAssociations _jvmModelAssociations = this.unit.getJvmModelAssociations();
       EObject _delegate = ((AbstractElementImpl<?>) source).getDelegate();
-      Set<EObject> _jvmElements = _jvmAssociations.getJvmElements(_delegate);
+      Set<EObject> _jvmElements = _jvmModelAssociations.getJvmElements(_delegate);
       final EObject derivedElement = IterableExtensions.<EObject>head(_jvmElements);
       boolean _tripleNotEquals = (derivedElement != null);
       if (_tripleNotEquals) {
@@ -88,9 +88,9 @@ public class TracabilityImpl implements Tracability {
   public Element getPrimarySourceElement(final Element target) {
     boolean _isGenerated = this.isGenerated(target);
     if (_isGenerated) {
-      IXtendJvmAssociations _jvmAssociations = this.unit.getJvmAssociations();
+      IXtendJvmAssociations _jvmModelAssociations = this.unit.getJvmModelAssociations();
       EObject _delegate = ((AbstractElementImpl<?>) target).getDelegate();
-      Set<EObject> _sourceElements = _jvmAssociations.getSourceElements(_delegate);
+      Set<EObject> _sourceElements = _jvmModelAssociations.getSourceElements(_delegate);
       final EObject sourceElement = IterableExtensions.<EObject>head(_sourceElements);
       return this.unit.toXtendElement(sourceElement);
     } else {

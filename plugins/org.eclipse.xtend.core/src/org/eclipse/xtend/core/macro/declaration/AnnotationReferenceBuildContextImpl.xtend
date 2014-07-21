@@ -40,14 +40,15 @@ import static org.eclipse.xtend.core.macro.ConditionUtils.*
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue
+import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * @author kosyakov - Initial contribution and API
  */
 class AnnotationReferenceBuildContextImpl implements AnnotationReferenceBuildContext {
 	
-	@Property JvmAnnotationReference delegate
-	@Property CompilationUnitImpl compilationUnit
+	@Accessors JvmAnnotationReference delegate
+	@Accessors CompilationUnitImpl compilationUnit
 	
 	protected def findOperation(String name) {
 		checkJavaIdentifier(name, "name")

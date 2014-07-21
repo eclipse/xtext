@@ -2,17 +2,17 @@ package org.eclipse.xtend.core.tests.smoke;
 
 import com.google.common.base.Objects;
 import java.util.ArrayList;
-import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Data
 @SuppressWarnings("all")
 public class Case_0 {
-  private final int _id;
+  private final int id;
   
   public String foo(final String a, final String b) {
     String _xblockexpression = null;
@@ -60,7 +60,7 @@ public class Case_0 {
   
   public Case_0(final int id) {
     super();
-    this._id = id;
+    this.id = id;
   }
   
   @Override
@@ -68,7 +68,7 @@ public class Case_0 {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + this._id;
+    result = prime * result + this.id;
     return result;
   }
   
@@ -82,7 +82,7 @@ public class Case_0 {
     if (getClass() != obj.getClass())
       return false;
     Case_0 other = (Case_0) obj;
-    if (other._id != this._id)
+    if (other.id != this.id)
       return false;
     return true;
   }
@@ -90,12 +90,13 @@ public class Case_0 {
   @Override
   @Pure
   public String toString() {
-    String result = new ToStringHelper().toString(this);
-    return result;
+    ToStringBuilder b = new ToStringBuilder(this);
+    b.add("id", this.id);
+    return b.toString();
   }
   
   @Pure
   public int getId() {
-    return this._id;
+    return this.id;
   }
 }

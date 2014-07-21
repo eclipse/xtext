@@ -22,6 +22,7 @@ import org.eclipse.xtext.generator.Xtend2GeneratorFragment
 
 import static java.util.Collections.*
 import static org.eclipse.xtext.GrammarUtil.*
+import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -33,9 +34,9 @@ class ContentAssistFragment extends Xtend2GeneratorFragment implements IInheriti
 
 	@Inject Grammar grammar
 
-	@Property boolean inheritImplementation = true
+	@Accessors boolean inheritImplementation = true
 
-	@Property boolean generateStub = true;
+	@Accessors boolean generateStub = true;
 	
 	@Inject @Named("fileHeader") String fileHeader
 	

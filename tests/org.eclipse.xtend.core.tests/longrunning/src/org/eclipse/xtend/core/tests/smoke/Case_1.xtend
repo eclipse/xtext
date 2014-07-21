@@ -1,9 +1,9 @@
 package org.eclipse.xtend.core.tests.smoke
 
-import org.eclipse.xtend.lib.Property
+import org.eclipse.xtend.lib.annotations.Accessors
 
 class Case_1 {
-	@Property
+	@Accessors
 	int id
 
 	def testFunction1() {

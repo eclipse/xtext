@@ -25,16 +25,17 @@ import org.eclipse.xtext.common.types.JvmUpperBound
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
+import org.eclipse.xtend.lib.annotations.Accessors
 
 /** 
  * @author Jan Koehnlein
  */
 abstract class AbstractCodeBuilder implements ICodeBuilder {
 
-	@Property Object ownerSource
-	@Property JvmDeclaredType owner
-	@Property JvmVisibility visibility
-	@Property EObject context
+	@Accessors Object ownerSource
+	@Accessors JvmDeclaredType owner
+	@Accessors JvmVisibility visibility
+	@Accessors EObject context
 	
 	@Inject extension IJavaElementFinder
 	

@@ -9,10 +9,10 @@ package org.eclipse.xtext.xbase.scoping.batch;
 
 import java.util.EnumSet;
 import java.util.List;
-import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 import org.eclipse.xtext.xbase.scoping.batch.TypeBucket;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
@@ -26,11 +26,11 @@ import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
 @Data
 @SuppressWarnings("all")
 public class SynonymTypeBucket extends TypeBucket {
-  private final EnumSet<ConformanceHint> _hints;
+  private final EnumSet<ConformanceHint> hints;
   
   public SynonymTypeBucket(final int id, final List<? extends JvmType> types, final IResolvedFeatures.Provider resolvedFeaturesProvider, final EnumSet<ConformanceHint> hints) {
     super(id, types, resolvedFeaturesProvider);
-    this._hints = hints;
+    this.hints = hints;
   }
   
   @Override
@@ -38,7 +38,7 @@ public class SynonymTypeBucket extends TypeBucket {
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
-    result = prime * result + ((this._hints== null) ? 0 : this._hints.hashCode());
+    result = prime * result + ((this.hints== null) ? 0 : this.hints.hashCode());
     return result;
   }
   
@@ -54,10 +54,10 @@ public class SynonymTypeBucket extends TypeBucket {
     if (!super.equals(obj))
       return false;
     SynonymTypeBucket other = (SynonymTypeBucket) obj;
-    if (this._hints == null) {
-      if (other._hints != null)
+    if (this.hints == null) {
+      if (other.hints != null)
         return false;
-    } else if (!this._hints.equals(other._hints))
+    } else if (!this.hints.equals(other.hints))
       return false;
     return true;
   }
@@ -65,12 +65,14 @@ public class SynonymTypeBucket extends TypeBucket {
   @Override
   @Pure
   public String toString() {
-    String result = new ToStringHelper().toString(this);
+    String result = new ToStringBuilder(this)
+    	.addAllFields()
+    	.toString();
     return result;
   }
   
   @Pure
   public EnumSet<ConformanceHint> getHints() {
-    return this._hints;
+    return this.hints;
   }
 }

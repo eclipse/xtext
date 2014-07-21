@@ -2,6 +2,7 @@ package org.eclipse.xtend.core.macro.declaration
 
 import org.eclipse.xtend.lib.macro.declaration.Type
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit
+import org.eclipse.xtend.lib.annotations.Data
 
 @Data
 class UnknownType implements Type {

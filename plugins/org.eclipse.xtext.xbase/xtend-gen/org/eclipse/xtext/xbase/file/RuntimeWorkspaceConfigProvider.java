@@ -11,7 +11,7 @@ import com.google.common.base.Objects;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import java.io.File;
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -25,25 +25,21 @@ import org.eclipse.xtext.xbase.lib.Pure;
  * @author Sven Efftinge - Initial contribution and API
  */
 @Singleton
+@Accessors
 @SuppressWarnings("all")
 public class RuntimeWorkspaceConfigProvider implements Provider<WorkspaceConfig> {
-  @Property
-  private File _workspaceRoot = new File(".").getAbsoluteFile().getParentFile();
+  private File workspaceRoot = new File(".").getAbsoluteFile().getParentFile();
   
-  @Property
-  private WorkspaceConfig _workspaceConfig;
+  private WorkspaceConfig workspaceConfig;
   
   public WorkspaceConfig get() {
-    WorkspaceConfig _workspaceConfig = this.getWorkspaceConfig();
-    boolean _equals = Objects.equal(_workspaceConfig, null);
+    boolean _equals = Objects.equal(this.workspaceConfig, null);
     if (_equals) {
-      File _workspaceRoot = this.getWorkspaceRoot();
-      String _absolutePath = _workspaceRoot.getAbsolutePath();
-      WorkspaceConfig _workspaceConfig_1 = new WorkspaceConfig(_absolutePath);
+      String _absolutePath = this.workspaceRoot.getAbsolutePath();
+      WorkspaceConfig _workspaceConfig = new WorkspaceConfig(_absolutePath);
       final Procedure1<WorkspaceConfig> _function = new Procedure1<WorkspaceConfig>() {
         public void apply(final WorkspaceConfig it) {
-          File _workspaceRoot = RuntimeWorkspaceConfigProvider.this.getWorkspaceRoot();
-          File[] _listFiles = _workspaceRoot.listFiles();
+          File[] _listFiles = RuntimeWorkspaceConfigProvider.this.workspaceRoot.listFiles();
           final Function1<File, Boolean> _function = new Function1<File, Boolean>() {
             public Boolean apply(final File it) {
               return Boolean.valueOf(it.isDirectory());
@@ -62,27 +58,27 @@ public class RuntimeWorkspaceConfigProvider implements Provider<WorkspaceConfig>
           }
         }
       };
-      WorkspaceConfig _doubleArrow = ObjectExtensions.<WorkspaceConfig>operator_doubleArrow(_workspaceConfig_1, _function);
-      this.setWorkspaceConfig(_doubleArrow);
+      WorkspaceConfig _doubleArrow = ObjectExtensions.<WorkspaceConfig>operator_doubleArrow(_workspaceConfig, _function);
+      this.workspaceConfig = _doubleArrow;
     }
-    return this.getWorkspaceConfig();
+    return this.workspaceConfig;
   }
   
   @Pure
   public File getWorkspaceRoot() {
-    return this._workspaceRoot;
+    return this.workspaceRoot;
   }
   
   public void setWorkspaceRoot(final File workspaceRoot) {
-    this._workspaceRoot = workspaceRoot;
+    this.workspaceRoot = workspaceRoot;
   }
   
   @Pure
   public WorkspaceConfig getWorkspaceConfig() {
-    return this._workspaceConfig;
+    return this.workspaceConfig;
   }
   
   public void setWorkspaceConfig(final WorkspaceConfig workspaceConfig) {
-    this._workspaceConfig = workspaceConfig;
+    this.workspaceConfig = workspaceConfig;
   }
 }

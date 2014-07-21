@@ -2,7 +2,7 @@ package org.eclipse.xtend.ide.codebuilder;
 
 import com.google.common.base.Objects;
 import org.eclipse.xtend.ide.codebuilder.AbstractCodeBuilder;
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
@@ -10,38 +10,34 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
 public abstract class AbstractParameterBuilder extends AbstractCodeBuilder {
-  @Property
-  private String _name;
+  @Accessors
+  private String name;
   
-  @Property
-  private LightweightTypeReference _type;
+  @Accessors
+  private LightweightTypeReference type;
   
-  @Property
-  private boolean _varArgsFlag;
+  @Accessors
+  private boolean varArgsFlag;
   
-  @Property
-  private boolean _extensionFlag;
+  @Accessors
+  private boolean extensionFlag;
   
-  @Property
-  private boolean _finalFlag;
+  @Accessors
+  private boolean finalFlag;
   
   public ISourceAppender build(final ISourceAppender appendable) {
     ISourceAppender _xblockexpression = null;
     {
       this.appendModifiers(appendable);
-      boolean _isVarArgsFlag = this.isVarArgsFlag();
-      if (_isVarArgsFlag) {
-        LightweightTypeReference _type = this.getType();
-        LightweightTypeReference _componentType = ((ArrayTypeReference) _type).getComponentType();
+      if (this.varArgsFlag) {
+        LightweightTypeReference _componentType = ((ArrayTypeReference) this.type).getComponentType();
         ISourceAppender _appendType = this.appendType(appendable, _componentType, "Object");
         _appendType.append("...");
       } else {
-        LightweightTypeReference _type_1 = this.getType();
-        this.appendType(appendable, _type_1, "Object");
+        this.appendType(appendable, this.type, "Object");
       }
       ISourceAppender _append = appendable.append(" ");
-      String _name = this.getName();
-      _xblockexpression = _append.append(_name);
+      _xblockexpression = _append.append(this.name);
     }
     return _xblockexpression;
   }
@@ -51,21 +47,11 @@ public abstract class AbstractParameterBuilder extends AbstractCodeBuilder {
   public boolean isValid() {
     boolean _and = false;
     boolean _and_1 = false;
-    LightweightTypeReference _type = this.getType();
-    boolean _notEquals = (!Objects.equal(_type, null));
+    boolean _notEquals = (!Objects.equal(this.type, null));
     if (!_notEquals) {
       _and_1 = false;
     } else {
-      boolean _or = false;
-      boolean _isVarArgsFlag = this.isVarArgsFlag();
-      boolean _not = (!_isVarArgsFlag);
-      if (_not) {
-        _or = true;
-      } else {
-        LightweightTypeReference _type_1 = this.getType();
-        _or = (_type_1 instanceof ArrayTypeReference);
-      }
-      _and_1 = _or;
+      _and_1 = ((!this.varArgsFlag) || (this.type instanceof ArrayTypeReference));
     }
     if (!_and_1) {
       _and = false;
@@ -82,46 +68,46 @@ public abstract class AbstractParameterBuilder extends AbstractCodeBuilder {
   
   @Pure
   public String getName() {
-    return this._name;
+    return this.name;
   }
   
   public void setName(final String name) {
-    this._name = name;
+    this.name = name;
   }
   
   @Pure
   public LightweightTypeReference getType() {
-    return this._type;
+    return this.type;
   }
   
   public void setType(final LightweightTypeReference type) {
-    this._type = type;
+    this.type = type;
   }
   
   @Pure
   public boolean isVarArgsFlag() {
-    return this._varArgsFlag;
+    return this.varArgsFlag;
   }
   
   public void setVarArgsFlag(final boolean varArgsFlag) {
-    this._varArgsFlag = varArgsFlag;
+    this.varArgsFlag = varArgsFlag;
   }
   
   @Pure
   public boolean isExtensionFlag() {
-    return this._extensionFlag;
+    return this.extensionFlag;
   }
   
   public void setExtensionFlag(final boolean extensionFlag) {
-    this._extensionFlag = extensionFlag;
+    this.extensionFlag = extensionFlag;
   }
   
   @Pure
   public boolean isFinalFlag() {
-    return this._finalFlag;
+    return this.finalFlag;
   }
   
   public void setFinalFlag(final boolean finalFlag) {
-    this._finalFlag = finalFlag;
+    this.finalFlag = finalFlag;
   }
 }

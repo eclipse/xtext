@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import org.apache.log4j.Logger;
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys;
 import org.eclipse.xtext.xbase.formatting.FormattingData;
@@ -29,41 +29,37 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class FormattableDocument {
   private final static Logger log = Logger.getLogger(FormattableDocument.class);
   
-  @Property
-  private final FormattingPreferenceValues _cfg;
+  @Accessors
+  private final FormattingPreferenceValues cfg;
   
-  @Property
-  private final String _document;
+  @Accessors
+  private final String document;
   
-  @Property
-  private final TreeMap<Integer, FormattingData> _formattings;
+  @Accessors
+  private final TreeMap<Integer, FormattingData> formattings;
   
-  @Property
-  private Throwable _rootTrace = null;
+  @Accessors
+  private Throwable rootTrace = null;
   
-  @Property
-  private boolean _conflictOccurred = false;
+  @Accessors
+  private boolean conflictOccurred = false;
   
   public FormattableDocument(final FormattingPreferenceValues cfg, final String document) {
-    this._cfg = cfg;
-    this._document = document;
+    this.cfg = cfg;
+    this.document = document;
     TreeMap<Integer, FormattingData> _treeMap = new TreeMap<Integer, FormattingData>();
-    this._formattings = _treeMap;
+    this.formattings = _treeMap;
   }
   
   public FormattableDocument(final FormattableDocument fmt) {
-    FormattingPreferenceValues _cfg = fmt.getCfg();
-    this._cfg = _cfg;
-    String _document = fmt.getDocument();
-    this._document = _document;
-    TreeMap<Integer, FormattingData> _formattings = fmt.getFormattings();
-    TreeMap<Integer, FormattingData> _treeMap = new TreeMap<Integer, FormattingData>(_formattings);
-    this._formattings = _treeMap;
+    this.cfg = fmt.cfg;
+    this.document = fmt.document;
+    TreeMap<Integer, FormattingData> _treeMap = new TreeMap<Integer, FormattingData>(fmt.formattings);
+    this.formattings = _treeMap;
   }
   
   public boolean isDebugConflicts() {
-    Throwable _rootTrace = this.getRootTrace();
-    return (!Objects.equal(_rootTrace, null));
+    return (!Objects.equal(this.rootTrace, null));
   }
   
   protected FormattingData addFormatting(final FormattingData data) {
@@ -95,12 +91,11 @@ public class FormattableDocument {
         int _length_1 = data.getLength();
         boolean _greaterThan = (_length_1 > 0);
         if (_greaterThan) {
-          String _document = this.getDocument();
           int _offset = data.getOffset();
           int _offset_1 = data.getOffset();
           int _length_2 = data.getLength();
           int _plus = (_offset_1 + _length_2);
-          final String oldText = _document.substring(_offset, _plus);
+          final String oldText = this.document.substring(_offset, _plus);
           boolean _isWhitespace = this.isWhitespace(oldText);
           boolean _not = (!_isWhitespace);
           if (_not) {
@@ -124,9 +119,8 @@ public class FormattableDocument {
             throw new IllegalStateException(("Can non format non-whitespace: " + oldText));
           }
         }
-        TreeMap<Integer, FormattingData> _formattings = this.getFormattings();
         int _offset_2 = data.getOffset();
-        final FormattingData old = _formattings.get(Integer.valueOf(_offset_2));
+        final FormattingData old = this.formattings.get(Integer.valueOf(_offset_2));
         FormattingData _xifexpression_1 = null;
         boolean _equals = Objects.equal(old, null);
         if (_equals) {
@@ -138,9 +132,8 @@ public class FormattableDocument {
         FormattingData _xifexpression_2 = null;
         boolean _notEquals_1 = (!Objects.equal(newData, null));
         if (_notEquals_1) {
-          TreeMap<Integer, FormattingData> _formattings_1 = this.getFormattings();
           int _offset_3 = data.getOffset();
-          _xifexpression_2 = _formattings_1.put(Integer.valueOf(_offset_3), newData);
+          _xifexpression_2 = this.formattings.put(Integer.valueOf(_offset_3), newData);
         }
         _xblockexpression = _xifexpression_2;
       }
@@ -211,7 +204,7 @@ public class FormattableDocument {
       } else {
         Object _xblockexpression_2 = null;
         {
-          this.setConflictOccurred(true);
+          this.conflictOccurred = true;
           boolean _isDebugConflicts = this.isDebugConflicts();
           if (_isDebugConflicts) {
             this.reportConflict(data1, data2);
@@ -234,8 +227,7 @@ public class FormattableDocument {
         public Integer apply(final Integer last, final Integer i) {
           int _xifexpression = (int) 0;
           if (((last).intValue() > 0)) {
-            String _document = FormattableDocument.this.getDocument();
-            _xifexpression = _document.lastIndexOf("\n", ((last).intValue() - 1));
+            _xifexpression = FormattableDocument.this.document.lastIndexOf("\n", ((last).intValue() - 1));
           } else {
             _xifexpression = (-1);
           }
@@ -249,8 +241,7 @@ public class FormattableDocument {
         public Integer apply(final Integer last, final Integer i) {
           int _xifexpression = (int) 0;
           if (((last).intValue() > 0)) {
-            String _document = FormattableDocument.this.getDocument();
-            _xifexpression = _document.indexOf("\n", ((last).intValue() + 1));
+            _xifexpression = FormattableDocument.this.document.indexOf("\n", ((last).intValue() + 1));
           } else {
             _xifexpression = (-1);
           }
@@ -269,18 +260,15 @@ public class FormattableDocument {
       if (((forward).intValue() >= 0)) {
         _xifexpression_1 = forward;
       } else {
-        String _document = this.getDocument();
-        _xifexpression_1 = Integer.valueOf(_document.length());
+        _xifexpression_1 = Integer.valueOf(this.document.length());
       }
       final Integer fiveLinesForwardOffset = _xifexpression_1;
-      String _document_1 = this.getDocument();
       int _offset_2 = data1.getOffset();
-      final String prefix = _document_1.substring((fiveLinesBackOffset).intValue(), _offset_2);
-      String _document_2 = this.getDocument();
+      final String prefix = this.document.substring((fiveLinesBackOffset).intValue(), _offset_2);
       int _offset_3 = data1.getOffset();
       int _length = data1.getLength();
       int _plus = (_offset_3 + _length);
-      final String postfix = _document_2.substring(_plus, (fiveLinesForwardOffset).intValue());
+      final String postfix = this.document.substring(_plus, (fiveLinesForwardOffset).intValue());
       _xblockexpression = Pair.<String, String>of(prefix, postfix);
     }
     return _xblockexpression;
@@ -288,8 +276,7 @@ public class FormattableDocument {
   
   protected void reportConflict(final FormattingData data1, final FormattingData data2) {
     final Pair<String, String> text = this.getTextAround(data1);
-    Throwable _rootTrace = this.getRootTrace();
-    StackTraceElement[] _stackTrace = _rootTrace.getStackTrace();
+    StackTraceElement[] _stackTrace = this.rootTrace.getStackTrace();
     int _size = ((List<StackTraceElement>)Conversions.doWrapArray(_stackTrace)).size();
     final int traceStart = (_size - 1);
     Throwable _trace = data1.getTrace();
@@ -365,8 +352,7 @@ public class FormattableDocument {
   }
   
   public List<TextReplacement> renderToEdits() {
-    String _document = this.getDocument();
-    int _length = _document.length();
+    int _length = this.document.length();
     return this.renderToEdits(0, _length);
   }
   
@@ -376,8 +362,7 @@ public class FormattableDocument {
       final ArrayList<TextReplacement> replacements = CollectionLiterals.<TextReplacement>newArrayList();
       int oldOffset = offset;
       int indentation = 0;
-      TreeMap<Integer, FormattingData> _formattings = this.getFormattings();
-      Collection<FormattingData> _values = _formattings.values();
+      Collection<FormattingData> _values = this.formattings.values();
       for (final FormattingData f : _values) {
         {
           int _indentationChange = f.getIndentationChange();
@@ -450,8 +435,7 @@ public class FormattableDocument {
   }
   
   public String renderToString() {
-    String _document = this.getDocument();
-    int _length = _document.length();
+    int _length = this.document.length();
     return this.renderToString(0, _length);
   }
   
@@ -469,9 +453,8 @@ public class FormattableDocument {
       List<TextReplacement> _sortBy = IterableExtensions.<TextReplacement, Integer>sortBy(edits, _function);
       for (final TextReplacement edit : _sortBy) {
         {
-          String _document = this.getDocument();
           int _offset = edit.getOffset();
-          final String text = _document.substring(lastOffset, _offset);
+          final String text = this.document.substring(lastOffset, _offset);
           newDocument.append(text);
           String _text = edit.getText();
           newDocument.append(_text);
@@ -481,8 +464,7 @@ public class FormattableDocument {
           lastOffset = _plus;
         }
       }
-      String _document = this.getDocument();
-      final String text = _document.substring(lastOffset, (offset + length));
+      final String text = this.document.substring(lastOffset, (offset + length));
       newDocument.append(text);
       _xblockexpression = newDocument.toString();
     }
@@ -508,8 +490,7 @@ public class FormattableDocument {
       int currentIndentation = 0;
       NewLineData lastWrap = null;
       int lastIndentation = 0;
-      TreeMap<Integer, FormattingData> _formattings = this.getFormattings();
-      Collection<FormattingData> _values = _formattings.values();
+      Collection<FormattingData> _values = this.formattings.values();
       for (final FormattingData f : _values) {
         int _offset = f.getOffset();
         boolean _lessThan = (_offset < offset);
@@ -527,16 +508,14 @@ public class FormattableDocument {
       int _length = lastWrap.getLength();
       int lastOffset = (_offset_1 + _length);
       int lineStart = lastOffset;
-      TreeMap<Integer, FormattingData> _formattings_1 = this.getFormattings();
       int _offset_2 = lastWrap.getOffset();
       int _plus_1 = (_offset_2 + 1);
-      SortedMap<Integer, FormattingData> _subMap = _formattings_1.subMap(Integer.valueOf(_plus_1), Integer.valueOf(offset));
+      SortedMap<Integer, FormattingData> _subMap = this.formattings.subMap(Integer.valueOf(_plus_1), Integer.valueOf(offset));
       Collection<FormattingData> _values_1 = _subMap.values();
       for (final FormattingData f_1 : _values_1) {
         {
-          String _document = this.getDocument();
           int _offset_3 = f_1.getOffset();
-          final String text = _document.substring(lastOffset, _offset_3);
+          final String text = this.document.substring(lastOffset, _offset_3);
           final int index = text.lastIndexOf("\n");
           if ((index >= 0)) {
             lineStart = (index + lastOffset);
@@ -549,10 +528,9 @@ public class FormattableDocument {
         }
       }
       int lengthDiff = 0;
-      TreeMap<Integer, FormattingData> _formattings_2 = this.getFormattings();
       int _offset_3 = lastWrap.getOffset();
       int _plus_2 = (_offset_3 + 1);
-      SortedMap<Integer, FormattingData> _subMap_1 = _formattings_2.subMap(Integer.valueOf(_plus_2), Integer.valueOf(offset));
+      SortedMap<Integer, FormattingData> _subMap_1 = this.formattings.subMap(Integer.valueOf(_plus_2), Integer.valueOf(offset));
       Collection<FormattingData> _values_2 = _subMap_1.values();
       for (final FormattingData f_2 : _values_2) {
         if ((f_2 instanceof WhitespaceData)) {
@@ -596,8 +574,7 @@ public class FormattableDocument {
       int _lineLengthBefore = this.lineLengthBefore(offset);
       int _length = lookahead.length();
       final int line = (_lineLengthBefore + _length);
-      FormattingPreferenceValues _cfg = this.getCfg();
-      int _get = _cfg.get(BasicFormatterPreferenceKeys.maxLineWidth);
+      int _get = this.cfg.get(BasicFormatterPreferenceKeys.maxLineWidth);
       return (line <= _get);
     }
   }
@@ -610,18 +587,16 @@ public class FormattableDocument {
       List<TextReplacement> _renderToEdits = this.renderToEdits();
       for (final TextReplacement edit : _renderToEdits) {
         {
-          String _document = this.getDocument();
           int _offset = edit.getOffset();
-          final String text = _document.substring(lastOffset, _offset);
+          final String text = this.document.substring(lastOffset, _offset);
           debugTrace.append(text);
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("[");
-          String _document_1 = this.getDocument();
           int _offset_1 = edit.getOffset();
           int _offset_2 = edit.getOffset();
           int _length = edit.getLength();
           int _plus = (_offset_2 + _length);
-          String _substring = _document_1.substring(_offset_1, _plus);
+          String _substring = this.document.substring(_offset_1, _plus);
           _builder.append(_substring, "");
           _builder.append("|");
           String _text = edit.getText();
@@ -634,10 +609,8 @@ public class FormattableDocument {
           lastOffset = _plus_1;
         }
       }
-      String _document = this.getDocument();
-      String _document_1 = this.getDocument();
-      int _length = _document_1.length();
-      final String text = _document.substring(lastOffset, _length);
+      int _length = this.document.length();
+      final String text = this.document.substring(lastOffset, _length);
       debugTrace.append(text);
       _xblockexpression = debugTrace.toString();
     }
@@ -649,8 +622,7 @@ public class FormattableDocument {
     if ((levels > 0)) {
       String _xblockexpression = null;
       {
-        FormattingPreferenceValues _cfg = this.getCfg();
-        final String indent = _cfg.get(BasicFormatterPreferenceKeys.indentation);
+        final String indent = this.cfg.get(BasicFormatterPreferenceKeys.indentation);
         IntegerRange _upTo = new IntegerRange(0, (levels - 1));
         final Function1<Integer, String> _function = new Function1<Integer, String>() {
           public String apply(final Integer it) {
@@ -668,8 +640,7 @@ public class FormattableDocument {
   }
   
   public int getIndentationLenght(final int levels) {
-    FormattingPreferenceValues _cfg = this.getCfg();
-    int _get = _cfg.get(BasicFormatterPreferenceKeys.indentationLength);
+    int _get = this.cfg.get(BasicFormatterPreferenceKeys.indentationLength);
     return (levels * _get);
   }
   
@@ -678,8 +649,7 @@ public class FormattableDocument {
     if ((levels > 0)) {
       String _xblockexpression = null;
       {
-        FormattingPreferenceValues _cfg = this.getCfg();
-        final String sep = _cfg.get(BasicFormatterPreferenceKeys.lineSeparator);
+        final String sep = this.cfg.get(BasicFormatterPreferenceKeys.lineSeparator);
         IntegerRange _upTo = new IntegerRange(0, (levels - 1));
         final Function1<Integer, String> _function = new Function1<Integer, String>() {
           public String apply(final Integer it) {
@@ -698,34 +668,34 @@ public class FormattableDocument {
   
   @Pure
   public FormattingPreferenceValues getCfg() {
-    return this._cfg;
+    return this.cfg;
   }
   
   @Pure
   public String getDocument() {
-    return this._document;
+    return this.document;
   }
   
   @Pure
   public TreeMap<Integer, FormattingData> getFormattings() {
-    return this._formattings;
+    return this.formattings;
   }
   
   @Pure
   public Throwable getRootTrace() {
-    return this._rootTrace;
+    return this.rootTrace;
   }
   
   public void setRootTrace(final Throwable rootTrace) {
-    this._rootTrace = rootTrace;
+    this.rootTrace = rootTrace;
   }
   
   @Pure
   public boolean isConflictOccurred() {
-    return this._conflictOccurred;
+    return this.conflictOccurred;
   }
   
   public void setConflictOccurred(final boolean conflictOccurred) {
-    this._conflictOccurred = conflictOccurred;
+    this.conflictOccurred = conflictOccurred;
   }
 }

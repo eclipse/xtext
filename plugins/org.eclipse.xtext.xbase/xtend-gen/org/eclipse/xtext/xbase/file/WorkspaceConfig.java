@@ -1,28 +1,27 @@
 package org.eclipse.xtext.xbase.file;
 
 import java.util.Map;
-import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Data
 @SuppressWarnings("all")
 public class WorkspaceConfig {
-  private final String _absoluteFileSystemPath;
+  private final String absoluteFileSystemPath;
   
-  private final Map<String, ProjectConfig> _projects = CollectionLiterals.<String, ProjectConfig>newLinkedHashMap();
+  private final Map<String, ProjectConfig> projects = CollectionLiterals.<String, ProjectConfig>newLinkedHashMap();
   
   public ProjectConfig addProjectConfig(final ProjectConfig config) {
-    Map<String, ProjectConfig> _projects = this.getProjects();
     String _name = config.getName();
-    return _projects.put(_name, config);
+    return this.projects.put(_name, config);
   }
   
   public WorkspaceConfig(final String absoluteFileSystemPath) {
     super();
-    this._absoluteFileSystemPath = absoluteFileSystemPath;
+    this.absoluteFileSystemPath = absoluteFileSystemPath;
   }
   
   @Override
@@ -30,8 +29,8 @@ public class WorkspaceConfig {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((this._absoluteFileSystemPath== null) ? 0 : this._absoluteFileSystemPath.hashCode());
-    result = prime * result + ((this._projects== null) ? 0 : this._projects.hashCode());
+    result = prime * result + ((this.absoluteFileSystemPath== null) ? 0 : this.absoluteFileSystemPath.hashCode());
+    result = prime * result + ((this.projects== null) ? 0 : this.projects.hashCode());
     return result;
   }
   
@@ -45,15 +44,15 @@ public class WorkspaceConfig {
     if (getClass() != obj.getClass())
       return false;
     WorkspaceConfig other = (WorkspaceConfig) obj;
-    if (this._absoluteFileSystemPath == null) {
-      if (other._absoluteFileSystemPath != null)
+    if (this.absoluteFileSystemPath == null) {
+      if (other.absoluteFileSystemPath != null)
         return false;
-    } else if (!this._absoluteFileSystemPath.equals(other._absoluteFileSystemPath))
+    } else if (!this.absoluteFileSystemPath.equals(other.absoluteFileSystemPath))
       return false;
-    if (this._projects == null) {
-      if (other._projects != null)
+    if (this.projects == null) {
+      if (other.projects != null)
         return false;
-    } else if (!this._projects.equals(other._projects))
+    } else if (!this.projects.equals(other.projects))
       return false;
     return true;
   }
@@ -61,17 +60,19 @@ public class WorkspaceConfig {
   @Override
   @Pure
   public String toString() {
-    String result = new ToStringHelper().toString(this);
-    return result;
+    ToStringBuilder b = new ToStringBuilder(this);
+    b.add("absoluteFileSystemPath", this.absoluteFileSystemPath);
+    b.add("projects", this.projects);
+    return b.toString();
   }
   
   @Pure
   public String getAbsoluteFileSystemPath() {
-    return this._absoluteFileSystemPath;
+    return this.absoluteFileSystemPath;
   }
   
   @Pure
   public Map<String, ProjectConfig> getProjects() {
-    return this._projects;
+    return this.projects;
   }
 }

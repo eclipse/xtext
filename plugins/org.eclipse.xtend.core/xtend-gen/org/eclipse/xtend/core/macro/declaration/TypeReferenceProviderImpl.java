@@ -202,9 +202,9 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
       if (!_matched) {
         if (typeDeclaration instanceof XtendTypeDeclarationImpl) {
           _matched=true;
-          IXtendJvmAssociations _jvmAssociations = this.compilationUnit.getJvmAssociations();
+          IXtendJvmAssociations _jvmModelAssociations = this.compilationUnit.getJvmModelAssociations();
           XtendTypeDeclaration _delegate = ((XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>)typeDeclaration).getDelegate();
-          _switchResult = _jvmAssociations.getInferredType(_delegate);
+          _switchResult = _jvmModelAssociations.getInferredType(_delegate);
         }
       }
       if (!_matched) {

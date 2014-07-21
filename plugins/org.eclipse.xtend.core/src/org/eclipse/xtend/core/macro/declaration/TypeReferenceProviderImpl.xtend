@@ -117,7 +117,7 @@ class TypeReferenceProviderImpl implements TypeReferenceProvider {
 				typeDeclaration.delegate
 			}
 			XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> : {
-				jvmAssociations.getInferredType(typeDeclaration.delegate)
+				jvmModelAssociations.getInferredType(typeDeclaration.delegate)
 			}
 			JvmTypeParameterDeclarationImpl : {
 				typeDeclaration.delegate

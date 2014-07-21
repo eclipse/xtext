@@ -16,7 +16,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContext;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -34,8 +34,8 @@ public class ActiveAnnotationContexts extends AdapterImpl {
     GENERATION;
   }
   
-  @Property
-  private final Map<JvmAnnotationType, ActiveAnnotationContext> _contexts = CollectionLiterals.<JvmAnnotationType, ActiveAnnotationContext>newLinkedHashMap();
+  @Accessors
+  private final Map<JvmAnnotationType, ActiveAnnotationContext> contexts = CollectionLiterals.<JvmAnnotationType, ActiveAnnotationContext>newLinkedHashMap();
   
   protected CompilationUnitImpl compilationUnit;
   
@@ -53,8 +53,7 @@ public class ActiveAnnotationContexts extends AdapterImpl {
     ActiveAnnotationContexts result = IterableExtensions.<ActiveAnnotationContexts>head(_filter);
     boolean _notEquals = (!Objects.equal(result, null));
     if (_notEquals) {
-      Map<JvmAnnotationType, ActiveAnnotationContext> _contexts = result.getContexts();
-      _contexts.clear();
+      result.contexts.clear();
     } else {
       ActiveAnnotationContexts _activeAnnotationContexts = new ActiveAnnotationContexts();
       result = _activeAnnotationContexts;
@@ -72,6 +71,6 @@ public class ActiveAnnotationContexts extends AdapterImpl {
   
   @Pure
   public Map<JvmAnnotationType, ActiveAnnotationContext> getContexts() {
-    return this._contexts;
+    return this.contexts;
   }
 }

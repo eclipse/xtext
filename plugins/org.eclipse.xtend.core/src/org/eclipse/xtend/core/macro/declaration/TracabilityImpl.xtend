@@ -49,7 +49,7 @@ class TracabilityImpl implements Tracability {
 
 	override getPrimaryGeneratedJavaElement(Element source) {
 		if (isSource(source)) {
-			val derivedElement = unit.jvmAssociations.getJvmElements((source as AbstractElementImpl<?>).delegate).head
+			val derivedElement = unit.jvmModelAssociations.getJvmElements((source as AbstractElementImpl<?>).delegate).head
 			if (derivedElement !== null) {
 				return unit.toJvmElement(derivedElement)
 			}
@@ -61,7 +61,7 @@ class TracabilityImpl implements Tracability {
 	
 	override getPrimarySourceElement(Element target) {
 		if (isGenerated(target)) {
-			val sourceElement = unit.jvmAssociations.getSourceElements((target as AbstractElementImpl<?>).delegate).head
+			val sourceElement = unit.jvmModelAssociations.getSourceElements((target as AbstractElementImpl<?>).delegate).head
 			return unit.toXtendElement(sourceElement)
 		} else if (isSource(target)) {
 			return target

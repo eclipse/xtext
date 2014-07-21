@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.GeneratedMetamodel;
@@ -48,11 +48,11 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
   @Extension
   private ValidatorNaming _validatorNaming;
   
-  @Property
-  private boolean _inheritImplementation = true;
+  @Accessors
+  private boolean inheritImplementation = true;
   
-  @Property
-  private boolean _generateStub = true;
+  @Accessors
+  private boolean generateStub = true;
   
   @Inject
   private Grammar grammar;
@@ -71,8 +71,7 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
     Set<Binding> _xblockexpression = null;
     {
       final BindFactory bindFactory = new BindFactory();
-      boolean _isGenerateStub = this.isGenerateStub();
-      if (_isGenerateStub) {
+      if (this.generateStub) {
         String _validatorName = this._validatorNaming.getValidatorName(grammar);
         String _validatorName_1 = this._validatorNaming.getValidatorName(grammar);
         bindFactory.addTypeToTypeEagerSingleton(_validatorName, _validatorName_1);
@@ -193,8 +192,7 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
     _builder.append("}");
     _builder.newLine();
     ctx.writeFile(Generator.SRC_GEN, _plus, _builder);
-    boolean _isGenerateStub = this.isGenerateStub();
-    if (_isGenerateStub) {
+    if (this.generateStub) {
       String _validatorName = this._validatorNaming.getValidatorName(this.grammar);
       String _asPath_1 = this._validatorNaming.asPath(_validatorName);
       String _plus_1 = (_asPath_1 + ".xtend");
@@ -406,19 +404,19 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
   
   @Pure
   public boolean isInheritImplementation() {
-    return this._inheritImplementation;
+    return this.inheritImplementation;
   }
   
   public void setInheritImplementation(final boolean inheritImplementation) {
-    this._inheritImplementation = inheritImplementation;
+    this.inheritImplementation = inheritImplementation;
   }
   
   @Pure
   public boolean isGenerateStub() {
-    return this._generateStub;
+    return this.generateStub;
   }
   
   public void setGenerateStub(final boolean generateStub) {
-    this._generateStub = generateStub;
+    this.generateStub = generateStub;
   }
 }

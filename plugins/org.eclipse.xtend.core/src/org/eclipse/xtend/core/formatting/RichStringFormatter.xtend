@@ -23,6 +23,8 @@ import org.eclipse.xtext.xbase.formatting.FormattingDataFactory
 import org.eclipse.xtext.xbase.formatting.FormattableDocument
 import org.eclipse.xtext.xbase.formatting.NewLineData
 import org.eclipse.xtext.xbase.formatting.WhitespaceData
+import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * cases to distinguish:
@@ -137,7 +139,7 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
 	private val RichString string
 	private val String document
 	private val NodeModelAccess nodeModelAccess
-	@Property val LineModel model = new LineModel
+	@Accessors val LineModel model = new LineModel
 	int offset = - 1
 	int contentStartOffset = - 1
 	int contentStartColumn = - 1
@@ -344,10 +346,11 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
 	}
 }
 
+@Accessors
 class LineModel {
-	@Property String leadingText
-	@Property int rootIndentLenght = -1
-	@Property val List<Line> lines = newArrayList
+	String leadingText
+	int rootIndentLenght = -1
+	val List<Line> lines = newArrayList
 	
 	override toString() '''
 		rootIndentLenght=«rootIndentLenght»
@@ -355,19 +358,13 @@ class LineModel {
 	'''
 }
 
-class Line {
-	@Property val int offset
-	@Property val boolean leadingSemanticNewLine
-	@Property val int newLineCharCount
-	@Property val List<Chunk> chunks = newArrayList
-	@Property String content
-	@Property int indentLength
-	
-	new (int offset, boolean leadingSemanticNewLine, int newLineCharCount) {
-		this._offset = offset
-		this._leadingSemanticNewLine = leadingSemanticNewLine
-		this._newLineCharCount = newLineCharCount
-	}
+@Accessors class Line {
+	val int offset
+	val boolean leadingSemanticNewLine
+	val int newLineCharCount
+	val List<Chunk> chunks = newArrayList
+	String content
+	int indentLength
 	
 	override toString() {
 		(if(leadingSemanticNewLine) "SN" else "") + "\n" + chunks.join + content

@@ -7,13 +7,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContexts;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
+import org.eclipse.xtend.core.macro.declaration.ProblemSupportImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
-import org.eclipse.xtend.lib.macro.services.ProblemSupport;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -40,7 +40,7 @@ public class ProblemSupportTests extends AbstractXtendTestCase {
     XtendFile _validFile = this.validFile(_builder);
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
-        ProblemSupport _problemSupport = it.getProblemSupport();
+        ProblemSupportImpl _problemSupport = it.getProblemSupport();
         Iterable<? extends TypeDeclaration> _sourceTypeDeclarations = it.getSourceTypeDeclarations();
         TypeDeclaration _head = IterableExtensions.head(_sourceTypeDeclarations);
         _problemSupport.addError(_head, "error on source");
@@ -79,7 +79,7 @@ public class ProblemSupportTests extends AbstractXtendTestCase {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration derived = _typeLookup.findClass("MyClass");
-        ProblemSupport _problemSupport = it.getProblemSupport();
+        ProblemSupportImpl _problemSupport = it.getProblemSupport();
         _problemSupport.addError(derived, "error on derived element");
         XtendFile _xtendFile = it.getXtendFile();
         Resource _eResource = _xtendFile.eResource();

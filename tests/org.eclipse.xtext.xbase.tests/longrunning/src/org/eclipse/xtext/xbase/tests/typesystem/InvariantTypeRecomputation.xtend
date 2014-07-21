@@ -33,6 +33,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.IApplicableCandidate
 import org.eclipse.xtext.xbase.typesystem.computation.IClosureCandidate
 import org.eclipse.xtext.xbase.XbasePackage
 import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * @author Sebastian Zarnekow
@@ -247,7 +248,7 @@ class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolver {
  */
 class RecordingRootResolvedTypes extends RootResolvedTypes {
 	
-	@Property
+	@Accessors
 	Map<XExpression, IApplicableCandidate> resolvedProxies
 	
 	new(DefaultReentrantTypeResolver resolver, CancelIndicator monitor) {

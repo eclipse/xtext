@@ -16,7 +16,7 @@ import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xpand2.XpandFacade;
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -47,11 +47,11 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
   @Inject
   private Grammar grammar;
   
-  @Property
-  private boolean _inheritImplementation = true;
+  @Accessors
+  private boolean inheritImplementation = true;
   
-  @Property
-  private boolean _generateStub = true;
+  @Accessors
+  private boolean generateStub = true;
   
   @Inject
   @Named("fileHeader")
@@ -77,8 +77,7 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
     Set<Binding> _xblockexpression = null;
     {
       final BindFactory bindFactory = new BindFactory();
-      boolean _isGenerateStub = this.isGenerateStub();
-      if (_isGenerateStub) {
+      if (this.generateStub) {
         String _proposalProviderName = this.getProposalProviderName(grammar);
         bindFactory.addTypeToType("org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider", _proposalProviderName);
       } else {
@@ -92,8 +91,7 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
   
   public String[] getRequiredBundlesUi(final Grammar grammar) {
     List<String> _xifexpression = null;
-    boolean _isGenerateStub = this.isGenerateStub();
-    if (_isGenerateStub) {
+    if (this.generateStub) {
       _xifexpression = CollectionLiterals.<String>newArrayList("org.eclipse.xtext.ui", "org.eclipse.xtext.xbase.lib");
     } else {
       _xifexpression = Collections.<String>singletonList("org.eclipse.xtext.ui");
@@ -118,8 +116,7 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
       final Grammar superGrammar = IterableExtensions.<Grammar>head(_usedGrammars);
       String _xifexpression = null;
       boolean _and = false;
-      boolean _isInheritImplementation = this.isInheritImplementation();
-      if (!_isInheritImplementation) {
+      if (!this.inheritImplementation) {
         _and = false;
       } else {
         boolean _notEquals = (!Objects.equal(superGrammar, null));
@@ -136,8 +133,7 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
   }
   
   public void generate(final Xtend2ExecutionContext ctx) {
-    boolean _isGenerateStub = this.isGenerateStub();
-    if (_isGenerateStub) {
+    if (this.generateStub) {
       String _proposalProviderName = this.getProposalProviderName(this.grammar);
       String _asPath = this._naming.asPath(_proposalProviderName);
       String _plus = (_asPath + ".xtend");
@@ -194,19 +190,19 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
   
   @Pure
   public boolean isInheritImplementation() {
-    return this._inheritImplementation;
+    return this.inheritImplementation;
   }
   
   public void setInheritImplementation(final boolean inheritImplementation) {
-    this._inheritImplementation = inheritImplementation;
+    this.inheritImplementation = inheritImplementation;
   }
   
   @Pure
   public boolean isGenerateStub() {
-    return this._generateStub;
+    return this.generateStub;
   }
   
   public void setGenerateStub(final boolean generateStub) {
-    this._generateStub = generateStub;
+    this.generateStub = generateStub;
   }
 }

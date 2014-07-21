@@ -8,9 +8,9 @@
 package org.eclipse.xtext.xbase.typesystem.references;
 
 import com.google.common.base.Objects;
-import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
@@ -22,30 +22,28 @@ import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 @Data
 @SuppressWarnings("all")
 public class LightweightBoundTypeArgument {
-  private final LightweightTypeReference _typeReference;
+  private final LightweightTypeReference typeReference;
   
-  private final BoundTypeArgumentSource _source;
+  private final BoundTypeArgumentSource source;
   
-  private final Object _origin;
+  private final Object origin;
   
-  private final VarianceInfo _declaredVariance;
+  private final VarianceInfo declaredVariance;
   
-  private final VarianceInfo _actualVariance;
+  private final VarianceInfo actualVariance;
   
   public boolean isValidVariancePair() {
-    VarianceInfo _declaredVariance = this.getDeclaredVariance();
-    VarianceInfo _actualVariance = this.getActualVariance();
-    VarianceInfo _mergeDeclaredWithActual = _declaredVariance.mergeDeclaredWithActual(_actualVariance);
+    VarianceInfo _mergeDeclaredWithActual = this.declaredVariance.mergeDeclaredWithActual(this.actualVariance);
     return (!Objects.equal(_mergeDeclaredWithActual, null));
   }
   
   public LightweightBoundTypeArgument(final LightweightTypeReference typeReference, final BoundTypeArgumentSource source, final Object origin, final VarianceInfo declaredVariance, final VarianceInfo actualVariance) {
     super();
-    this._typeReference = typeReference;
-    this._source = source;
-    this._origin = origin;
-    this._declaredVariance = declaredVariance;
-    this._actualVariance = actualVariance;
+    this.typeReference = typeReference;
+    this.source = source;
+    this.origin = origin;
+    this.declaredVariance = declaredVariance;
+    this.actualVariance = actualVariance;
   }
   
   @Override
@@ -53,11 +51,11 @@ public class LightweightBoundTypeArgument {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((this._typeReference== null) ? 0 : this._typeReference.hashCode());
-    result = prime * result + ((this._source== null) ? 0 : this._source.hashCode());
-    result = prime * result + ((this._origin== null) ? 0 : this._origin.hashCode());
-    result = prime * result + ((this._declaredVariance== null) ? 0 : this._declaredVariance.hashCode());
-    result = prime * result + ((this._actualVariance== null) ? 0 : this._actualVariance.hashCode());
+    result = prime * result + ((this.typeReference== null) ? 0 : this.typeReference.hashCode());
+    result = prime * result + ((this.source== null) ? 0 : this.source.hashCode());
+    result = prime * result + ((this.origin== null) ? 0 : this.origin.hashCode());
+    result = prime * result + ((this.declaredVariance== null) ? 0 : this.declaredVariance.hashCode());
+    result = prime * result + ((this.actualVariance== null) ? 0 : this.actualVariance.hashCode());
     return result;
   }
   
@@ -71,30 +69,30 @@ public class LightweightBoundTypeArgument {
     if (getClass() != obj.getClass())
       return false;
     LightweightBoundTypeArgument other = (LightweightBoundTypeArgument) obj;
-    if (this._typeReference == null) {
-      if (other._typeReference != null)
+    if (this.typeReference == null) {
+      if (other.typeReference != null)
         return false;
-    } else if (!this._typeReference.equals(other._typeReference))
+    } else if (!this.typeReference.equals(other.typeReference))
       return false;
-    if (this._source == null) {
-      if (other._source != null)
+    if (this.source == null) {
+      if (other.source != null)
         return false;
-    } else if (!this._source.equals(other._source))
+    } else if (!this.source.equals(other.source))
       return false;
-    if (this._origin == null) {
-      if (other._origin != null)
+    if (this.origin == null) {
+      if (other.origin != null)
         return false;
-    } else if (!this._origin.equals(other._origin))
+    } else if (!this.origin.equals(other.origin))
       return false;
-    if (this._declaredVariance == null) {
-      if (other._declaredVariance != null)
+    if (this.declaredVariance == null) {
+      if (other.declaredVariance != null)
         return false;
-    } else if (!this._declaredVariance.equals(other._declaredVariance))
+    } else if (!this.declaredVariance.equals(other.declaredVariance))
       return false;
-    if (this._actualVariance == null) {
-      if (other._actualVariance != null)
+    if (this.actualVariance == null) {
+      if (other.actualVariance != null)
         return false;
-    } else if (!this._actualVariance.equals(other._actualVariance))
+    } else if (!this.actualVariance.equals(other.actualVariance))
       return false;
     return true;
   }
@@ -102,32 +100,37 @@ public class LightweightBoundTypeArgument {
   @Override
   @Pure
   public String toString() {
-    String result = new ToStringHelper().toString(this);
-    return result;
+    ToStringBuilder b = new ToStringBuilder(this);
+    b.add("typeReference", this.typeReference);
+    b.add("source", this.source);
+    b.add("origin", this.origin);
+    b.add("declaredVariance", this.declaredVariance);
+    b.add("actualVariance", this.actualVariance);
+    return b.toString();
   }
   
   @Pure
   public LightweightTypeReference getTypeReference() {
-    return this._typeReference;
+    return this.typeReference;
   }
   
   @Pure
   public BoundTypeArgumentSource getSource() {
-    return this._source;
+    return this.source;
   }
   
   @Pure
   public Object getOrigin() {
-    return this._origin;
+    return this.origin;
   }
   
   @Pure
   public VarianceInfo getDeclaredVariance() {
-    return this._declaredVariance;
+    return this.declaredVariance;
   }
   
   @Pure
   public VarianceInfo getActualVariance() {
-    return this._actualVariance;
+    return this.actualVariance;
   }
 }

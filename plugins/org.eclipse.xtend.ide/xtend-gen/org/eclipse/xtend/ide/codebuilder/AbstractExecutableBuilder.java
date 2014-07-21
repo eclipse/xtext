@@ -11,7 +11,7 @@ import org.eclipse.xtend.ide.codebuilder.AbstractCodeBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractParameterBuilder;
 import org.eclipse.xtend.ide.codebuilder.CodeBuilderFactory;
 import org.eclipse.xtend.ide.codebuilder.VariableNameAcceptor;
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmVisibility;
@@ -41,29 +41,28 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
   @Extension
   private CodeBuilderFactory _codeBuilderFactory;
   
-  @Property
-  private List<AbstractParameterBuilder> _parameterBuilders = CollectionLiterals.<AbstractParameterBuilder>emptyList();
+  @Accessors
+  private List<AbstractParameterBuilder> parameterBuilders = CollectionLiterals.<AbstractParameterBuilder>emptyList();
   
-  @Property
-  private List<LightweightTypeReference> _exceptions = CollectionLiterals.<LightweightTypeReference>emptyList();
+  @Accessors
+  private List<LightweightTypeReference> exceptions = CollectionLiterals.<LightweightTypeReference>emptyList();
   
-  @Property
-  private List<JvmTypeParameter> _typeParameters = CollectionLiterals.<JvmTypeParameter>emptyList();
+  @Accessors
+  private List<JvmTypeParameter> typeParameters = CollectionLiterals.<JvmTypeParameter>emptyList();
   
-  @Property
-  private String _body;
+  @Accessors
+  private String body;
   
-  @Property
-  private boolean _varArgsFlag;
+  @Accessors
+  private boolean varArgsFlag;
   
   public ISourceAppender appendBody(final ISourceAppender appendable, final String statementSeparator) {
     ISourceAppender _append = appendable.append(" {");
     ISourceAppender _increaseIndentation = _append.increaseIndentation();
     ISourceAppender _newLine = _increaseIndentation.newLine();
     String _elvis = null;
-    String _body = this.getBody();
-    if (_body != null) {
-      _elvis = _body;
+    if (this.body != null) {
+      _elvis = this.body;
     } else {
       String _defaultBody = this.defaultBody();
       _elvis = _defaultBody;
@@ -81,30 +80,27 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
   
   public void setContext(final EObject ctx) {
     super.setContext(ctx);
-    List<AbstractParameterBuilder> _parameterBuilders = this.getParameterBuilders();
     final Procedure1<AbstractParameterBuilder> _function = new Procedure1<AbstractParameterBuilder>() {
       public void apply(final AbstractParameterBuilder it) {
         it.setContext(ctx);
       }
     };
-    IterableExtensions.<AbstractParameterBuilder>forEach(_parameterBuilders, _function);
+    IterableExtensions.<AbstractParameterBuilder>forEach(this.parameterBuilders, _function);
   }
   
   public AbstractParameterBuilder newParameterBuilder() {
     AbstractParameterBuilder _xblockexpression = null;
     {
-      List<AbstractParameterBuilder> _parameterBuilders = this.getParameterBuilders();
-      boolean _isEmpty = _parameterBuilders.isEmpty();
+      boolean _isEmpty = this.parameterBuilders.isEmpty();
       if (_isEmpty) {
         ArrayList<AbstractParameterBuilder> _newArrayList = CollectionLiterals.<AbstractParameterBuilder>newArrayList();
-        this.setParameterBuilders(_newArrayList);
+        this.parameterBuilders = _newArrayList;
       }
       JvmDeclaredType _owner = this.getOwner();
       final AbstractParameterBuilder builder = this._codeBuilderFactory.createParameterBuilder(_owner);
       EObject _context = this.getContext();
       builder.setContext(_context);
-      List<AbstractParameterBuilder> _parameterBuilders_1 = this.getParameterBuilders();
-      _parameterBuilders_1.add(builder);
+      this.parameterBuilders.add(builder);
       _xblockexpression = builder;
     }
     return _xblockexpression;
@@ -115,22 +111,17 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
     {
       appendable.append("(");
       final HashSet<String> notAllowed = CollectionLiterals.<String>newHashSet();
-      List<AbstractParameterBuilder> _parameterBuilders = this.getParameterBuilders();
-      boolean _isEmpty = _parameterBuilders.isEmpty();
+      boolean _isEmpty = this.parameterBuilders.isEmpty();
       boolean _not = (!_isEmpty);
       if (_not) {
-        List<AbstractParameterBuilder> _parameterBuilders_1 = this.getParameterBuilders();
-        AbstractParameterBuilder _last = IterableExtensions.<AbstractParameterBuilder>last(_parameterBuilders_1);
-        boolean _isVarArgsFlag = this.isVarArgsFlag();
-        _last.setVarArgsFlag(_isVarArgsFlag);
+        AbstractParameterBuilder _last = IterableExtensions.<AbstractParameterBuilder>last(this.parameterBuilders);
+        _last.setVarArgsFlag(this.varArgsFlag);
       }
-      List<AbstractParameterBuilder> _parameterBuilders_2 = this.getParameterBuilders();
-      int _size = _parameterBuilders_2.size();
+      int _size = this.parameterBuilders.size();
       ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _size, true);
       for (final Integer i : _doubleDotLessThan) {
         {
-          List<AbstractParameterBuilder> _parameterBuilders_3 = this.getParameterBuilders();
-          final AbstractParameterBuilder parameterBuilder = _parameterBuilders_3.get((i).intValue());
+          final AbstractParameterBuilder parameterBuilder = this.parameterBuilders.get((i).intValue());
           final VariableNameAcceptor acceptor = new VariableNameAcceptor(notAllowed);
           String _name = parameterBuilder.getName();
           boolean _equals = Objects.equal(_name, null);
@@ -144,8 +135,7 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
             parameterBuilder.setName(_variableName);
           }
           parameterBuilder.build(appendable);
-          List<AbstractParameterBuilder> _parameterBuilders_4 = this.getParameterBuilders();
-          int _size_1 = _parameterBuilders_4.size();
+          int _size_1 = this.parameterBuilders.size();
           int _minus = (_size_1 - 1);
           boolean _notEquals = ((i).intValue() != _minus);
           if (_notEquals) {
@@ -161,8 +151,7 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
   protected ISourceAppender appendThrowsClause(final ISourceAppender appendable) {
     ISourceAppender _xblockexpression = null;
     {
-      List<LightweightTypeReference> _exceptions = this.getExceptions();
-      final Iterator<LightweightTypeReference> iterator = _exceptions.iterator();
+      final Iterator<LightweightTypeReference> iterator = this.exceptions.iterator();
       boolean _hasNext = iterator.hasNext();
       if (_hasNext) {
         appendable.append(" throws ");
@@ -213,26 +202,23 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
     boolean _and = false;
     boolean _and_1 = false;
     boolean _and_2 = false;
-    List<AbstractParameterBuilder> _parameterBuilders = this.getParameterBuilders();
     final Function1<AbstractParameterBuilder, Boolean> _function = new Function1<AbstractParameterBuilder, Boolean>() {
       public Boolean apply(final AbstractParameterBuilder it) {
         return Boolean.valueOf(it.isValid());
       }
     };
-    boolean _forall = IterableExtensions.<AbstractParameterBuilder>forall(_parameterBuilders, _function);
+    boolean _forall = IterableExtensions.<AbstractParameterBuilder>forall(this.parameterBuilders, _function);
     if (!_forall) {
       _and_2 = false;
     } else {
-      List<LightweightTypeReference> _exceptions = this.getExceptions();
-      boolean _contains = _exceptions.contains(null);
+      boolean _contains = this.exceptions.contains(null);
       boolean _not = (!_contains);
       _and_2 = _not;
     }
     if (!_and_2) {
       _and_1 = false;
     } else {
-      List<JvmTypeParameter> _typeParameters = this.getTypeParameters();
-      boolean _contains_1 = _typeParameters.contains(null);
+      boolean _contains_1 = this.typeParameters.contains(null);
       boolean _not_1 = (!_contains_1);
       _and_1 = _not_1;
     }
@@ -247,46 +233,46 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
   
   @Pure
   public List<AbstractParameterBuilder> getParameterBuilders() {
-    return this._parameterBuilders;
+    return this.parameterBuilders;
   }
   
   public void setParameterBuilders(final List<AbstractParameterBuilder> parameterBuilders) {
-    this._parameterBuilders = parameterBuilders;
+    this.parameterBuilders = parameterBuilders;
   }
   
   @Pure
   public List<LightweightTypeReference> getExceptions() {
-    return this._exceptions;
+    return this.exceptions;
   }
   
   public void setExceptions(final List<LightweightTypeReference> exceptions) {
-    this._exceptions = exceptions;
+    this.exceptions = exceptions;
   }
   
   @Pure
   public List<JvmTypeParameter> getTypeParameters() {
-    return this._typeParameters;
+    return this.typeParameters;
   }
   
   public void setTypeParameters(final List<JvmTypeParameter> typeParameters) {
-    this._typeParameters = typeParameters;
+    this.typeParameters = typeParameters;
   }
   
   @Pure
   public String getBody() {
-    return this._body;
+    return this.body;
   }
   
   public void setBody(final String body) {
-    this._body = body;
+    this.body = body;
   }
   
   @Pure
   public boolean isVarArgsFlag() {
-    return this._varArgsFlag;
+    return this.varArgsFlag;
   }
   
   public void setVarArgsFlag(final boolean varArgsFlag) {
-    this._varArgsFlag = varArgsFlag;
+    this.varArgsFlag = varArgsFlag;
   }
 }

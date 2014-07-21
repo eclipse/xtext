@@ -7,47 +7,45 @@
  */
 package org.eclipse.xtext.builder.standalone.compiler;
 
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
+@Accessors
 @SuppressWarnings("all")
 public class CompilerConfiguration {
-  @Property
-  private String _sourceLevel = "1.5";
+  private String sourceLevel = "1.5";
   
-  @Property
-  private String _targetLevel = "1.5";
+  private String targetLevel = "1.5";
   
-  @Property
-  private boolean _verbose;
+  private boolean verbose;
   
   @Pure
   public String getSourceLevel() {
-    return this._sourceLevel;
+    return this.sourceLevel;
   }
   
   public void setSourceLevel(final String sourceLevel) {
-    this._sourceLevel = sourceLevel;
+    this.sourceLevel = sourceLevel;
   }
   
   @Pure
   public String getTargetLevel() {
-    return this._targetLevel;
+    return this.targetLevel;
   }
   
   public void setTargetLevel(final String targetLevel) {
-    this._targetLevel = targetLevel;
+    this.targetLevel = targetLevel;
   }
   
   @Pure
   public boolean isVerbose() {
-    return this._verbose;
+    return this.verbose;
   }
   
   public void setVerbose(final boolean verbose) {
-    this._verbose = verbose;
+    this.verbose = verbose;
   }
 }

@@ -3,28 +3,29 @@ package org.eclipse.xtext.xbase.formatting
 import java.util.List
 import java.util.TreeMap
 import org.apache.log4j.Logger
-import org.eclipse.xtext.xbase.lib.Pair
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.annotations.Data
 
 import static org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys.*
 
 class FormattableDocument {
 	private static val Logger log = Logger.getLogger(FormattableDocument)
-	@Property val FormattingPreferenceValues cfg
-	@Property val String document
-	@Property val TreeMap<Integer, FormattingData> formattings
-	@Property Throwable rootTrace = null
-	@Property boolean conflictOccurred = false
+	@Accessors val FormattingPreferenceValues cfg
+	@Accessors val String document
+	@Accessors val TreeMap<Integer, FormattingData> formattings
+	@Accessors Throwable rootTrace = null
+	@Accessors boolean conflictOccurred = false
 	
 	new(FormattingPreferenceValues cfg, String document){
-		this._cfg = cfg
-		this._document = document
-		this._formattings = new TreeMap()
+		this.cfg = cfg
+		this.document = document
+		this.formattings = new TreeMap()
 	}
 	
 	new(FormattableDocument fmt) {
-		this._cfg = fmt.cfg
-		this._document = fmt.document
-		this._formattings = new TreeMap(fmt.formattings)
+		this.cfg = fmt.cfg
+		this.document = fmt.document
+		this.formattings = new TreeMap(fmt.formattings)
 	}
 	
 	def boolean isDebugConflicts() {

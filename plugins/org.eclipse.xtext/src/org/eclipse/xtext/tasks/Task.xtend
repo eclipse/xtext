@@ -7,15 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.tasks
 
+import org.eclipse.xtend.lib.annotations.Accessors
+
 /**
  * @author Stefan Oehme - Initial contribution and API
  * @since 2.6
  */
+ @Accessors
 final class Task {
-	@Property TaskTag tag;
-	@Property String description;
-	@Property int lineNumber;
-	@Property int offset;
+	TaskTag tag;
+	String description;
+	int lineNumber;
+	int offset;
 
 	def String getFullText() {
 		tag.name + description

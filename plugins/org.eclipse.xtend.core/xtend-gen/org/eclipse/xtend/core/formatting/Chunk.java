@@ -1,22 +1,21 @@
 package org.eclipse.xtend.core.formatting;
 
-import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Data
 @SuppressWarnings("all")
 public abstract class Chunk {
-  private final CharSequence _text;
+  private final CharSequence text;
   
   public int getLength() {
-    CharSequence _text = this.getText();
-    return _text.length();
+    return this.text.length();
   }
   
   public Chunk(final CharSequence text) {
     super();
-    this._text = text;
+    this.text = text;
   }
   
   @Override
@@ -24,7 +23,7 @@ public abstract class Chunk {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((this._text== null) ? 0 : this._text.hashCode());
+    result = prime * result + ((this.text== null) ? 0 : this.text.hashCode());
     return result;
   }
   
@@ -38,10 +37,10 @@ public abstract class Chunk {
     if (getClass() != obj.getClass())
       return false;
     Chunk other = (Chunk) obj;
-    if (this._text == null) {
-      if (other._text != null)
+    if (this.text == null) {
+      if (other.text != null)
         return false;
-    } else if (!this._text.equals(other._text))
+    } else if (!this.text.equals(other.text))
       return false;
     return true;
   }
@@ -49,12 +48,13 @@ public abstract class Chunk {
   @Override
   @Pure
   public String toString() {
-    String result = new ToStringHelper().toString(this);
-    return result;
+    ToStringBuilder b = new ToStringBuilder(this);
+    b.add("text", this.text);
+    return b.toString();
   }
   
   @Pure
   public CharSequence getText() {
-    return this._text;
+    return this.text;
   }
 }

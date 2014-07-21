@@ -14,6 +14,7 @@ import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.MutableJvmFieldDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.MutableJvmMethodDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.ProblemSupportImpl;
 import org.eclipse.xtend.core.macro.declaration.TracabilityImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
 import org.eclipse.xtend.core.xtend.XtendFile;
@@ -40,7 +41,6 @@ import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.services.Problem;
-import org.eclipse.xtend.lib.macro.services.ProblemSupport;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -279,10 +279,10 @@ public abstract class AbstractReusableActiveAnnotationTests {
         Assert.assertEquals("getBar", _simpleName);
         final JvmField barJvmField = ((MutableJvmFieldDeclarationImpl) barField).getDelegate();
         final JvmOperation getBarJvmMethod = ((MutableJvmMethodDeclarationImpl) getBar).getDelegate();
-        IXtendJvmAssociations _jvmAssociations = it.getJvmAssociations();
-        IXtendJvmAssociations _jvmAssociations_1 = it.getJvmAssociations();
-        EObject _primarySourceElement = _jvmAssociations_1.getPrimarySourceElement(barJvmField);
-        final Set<EObject> elementsAssociatedWithBarField = _jvmAssociations.getJvmElements(_primarySourceElement);
+        IXtendJvmAssociations _jvmModelAssociations = it.getJvmModelAssociations();
+        IXtendJvmAssociations _jvmModelAssociations_1 = it.getJvmModelAssociations();
+        EObject _primarySourceElement = _jvmModelAssociations_1.getPrimarySourceElement(barJvmField);
+        final Set<EObject> elementsAssociatedWithBarField = _jvmModelAssociations.getJvmElements(_primarySourceElement);
         int _size_1 = elementsAssociatedWithBarField.size();
         Assert.assertEquals(2, _size_1);
         Object _get = ((Object[])Conversions.unwrapArray(elementsAssociatedWithBarField, Object.class))[0];
@@ -590,7 +590,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration cls = _typeLookup.findClass("myusercode.Foo");
-        ProblemSupport _problemSupport = it.getProblemSupport();
+        ProblemSupportImpl _problemSupport = it.getProblemSupport();
         final List<? extends Problem> problems = _problemSupport.getProblems(cls);
         int _size = problems.size();
         Assert.assertEquals(4, _size);
@@ -676,7 +676,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration cls = _typeLookup.findClass("myusercode.Foo");
-        ProblemSupport _problemSupport = it.getProblemSupport();
+        ProblemSupportImpl _problemSupport = it.getProblemSupport();
         Iterable<? extends MutableFieldDeclaration> _declaredFields = cls.getDeclaredFields();
         MutableFieldDeclaration _head = IterableExtensions.head(_declaredFields);
         final List<? extends Problem> problems = _problemSupport.getProblems(_head);
@@ -5129,7 +5129,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
-        ProblemSupport _problemSupport = it.getProblemSupport();
+        ProblemSupportImpl _problemSupport = it.getProblemSupport();
         Iterable<? extends MutableFieldDeclaration> _declaredFields = clazz.getDeclaredFields();
         MutableFieldDeclaration _head = IterableExtensions.head(_declaredFields);
         List<? extends Problem> _problems = _problemSupport.getProblems(_head);
@@ -5565,12 +5565,12 @@ public abstract class AbstractReusableActiveAnnotationTests {
         final MutableMethodDeclaration method = IterableExtensions.head(_declaredMethods);
         Iterable<? extends MutableFieldDeclaration> _declaredFields = type.getDeclaredFields();
         final MutableFieldDeclaration field = IterableExtensions.head(_declaredFields);
-        ProblemSupport _problemSupport = it.getProblemSupport();
+        ProblemSupportImpl _problemSupport = it.getProblemSupport();
         List<? extends Problem> _problems = _problemSupport.getProblems(field);
         Problem _head = IterableExtensions.head(_problems);
         String _message = _head.getMessage();
         Assert.assertEquals("field-warning", _message);
-        ProblemSupport _problemSupport_1 = it.getProblemSupport();
+        ProblemSupportImpl _problemSupport_1 = it.getProblemSupport();
         List<? extends Problem> _problems_1 = _problemSupport_1.getProblems(method);
         Problem _head_1 = IterableExtensions.head(_problems_1);
         String _message_1 = _head_1.getMessage();

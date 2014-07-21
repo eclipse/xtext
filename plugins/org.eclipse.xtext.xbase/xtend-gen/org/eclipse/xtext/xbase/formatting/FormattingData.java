@@ -1,37 +1,35 @@
 package org.eclipse.xtext.xbase.formatting;
 
-import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Data
 @SuppressWarnings("all")
 public abstract class FormattingData {
-  private final int _offset;
+  private final int offset;
   
-  private final int _length;
+  private final int length;
   
-  private final int _increaseIndentationChange;
+  private final int increaseIndentationChange;
   
-  private final int _decreaseIndentationChange;
+  private final int decreaseIndentationChange;
   
-  private final Throwable _trace;
+  private final Throwable trace;
   
   public abstract boolean isEmpty();
   
   public int getIndentationChange() {
-    int _increaseIndentationChange = this.getIncreaseIndentationChange();
-    int _decreaseIndentationChange = this.getDecreaseIndentationChange();
-    return (_increaseIndentationChange + _decreaseIndentationChange);
+    return (this.increaseIndentationChange + this.decreaseIndentationChange);
   }
   
   public FormattingData(final int offset, final int length, final int increaseIndentationChange, final int decreaseIndentationChange, final Throwable trace) {
     super();
-    this._offset = offset;
-    this._length = length;
-    this._increaseIndentationChange = increaseIndentationChange;
-    this._decreaseIndentationChange = decreaseIndentationChange;
-    this._trace = trace;
+    this.offset = offset;
+    this.length = length;
+    this.increaseIndentationChange = increaseIndentationChange;
+    this.decreaseIndentationChange = decreaseIndentationChange;
+    this.trace = trace;
   }
   
   @Override
@@ -39,11 +37,11 @@ public abstract class FormattingData {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + this._offset;
-    result = prime * result + this._length;
-    result = prime * result + this._increaseIndentationChange;
-    result = prime * result + this._decreaseIndentationChange;
-    result = prime * result + ((this._trace== null) ? 0 : this._trace.hashCode());
+    result = prime * result + this.offset;
+    result = prime * result + this.length;
+    result = prime * result + this.increaseIndentationChange;
+    result = prime * result + this.decreaseIndentationChange;
+    result = prime * result + ((this.trace== null) ? 0 : this.trace.hashCode());
     return result;
   }
   
@@ -57,18 +55,18 @@ public abstract class FormattingData {
     if (getClass() != obj.getClass())
       return false;
     FormattingData other = (FormattingData) obj;
-    if (other._offset != this._offset)
+    if (other.offset != this.offset)
       return false;
-    if (other._length != this._length)
+    if (other.length != this.length)
       return false;
-    if (other._increaseIndentationChange != this._increaseIndentationChange)
+    if (other.increaseIndentationChange != this.increaseIndentationChange)
       return false;
-    if (other._decreaseIndentationChange != this._decreaseIndentationChange)
+    if (other.decreaseIndentationChange != this.decreaseIndentationChange)
       return false;
-    if (this._trace == null) {
-      if (other._trace != null)
+    if (this.trace == null) {
+      if (other.trace != null)
         return false;
-    } else if (!this._trace.equals(other._trace))
+    } else if (!this.trace.equals(other.trace))
       return false;
     return true;
   }
@@ -76,32 +74,37 @@ public abstract class FormattingData {
   @Override
   @Pure
   public String toString() {
-    String result = new ToStringHelper().toString(this);
-    return result;
+    ToStringBuilder b = new ToStringBuilder(this);
+    b.add("offset", this.offset);
+    b.add("length", this.length);
+    b.add("increaseIndentationChange", this.increaseIndentationChange);
+    b.add("decreaseIndentationChange", this.decreaseIndentationChange);
+    b.add("trace", this.trace);
+    return b.toString();
   }
   
   @Pure
   public int getOffset() {
-    return this._offset;
+    return this.offset;
   }
   
   @Pure
   public int getLength() {
-    return this._length;
+    return this.length;
   }
   
   @Pure
   public int getIncreaseIndentationChange() {
-    return this._increaseIndentationChange;
+    return this.increaseIndentationChange;
   }
   
   @Pure
   public int getDecreaseIndentationChange() {
-    return this._decreaseIndentationChange;
+    return this.decreaseIndentationChange;
   }
   
   @Pure
   public Throwable getTrace() {
-    return this._trace;
+    return this.trace;
   }
 }

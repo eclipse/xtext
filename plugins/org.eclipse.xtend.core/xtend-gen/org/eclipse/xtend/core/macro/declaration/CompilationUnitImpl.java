@@ -101,7 +101,6 @@ import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
-import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
@@ -125,7 +124,6 @@ import org.eclipse.xtend.lib.macro.file.FileLocations;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtend.lib.macro.services.AnnotationReferenceProvider;
-import org.eclipse.xtend.lib.macro.services.ProblemSupport;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
@@ -218,8 +216,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   public String getSimpleName() {
-    XtendFile _xtendFile = this.getXtendFile();
-    Resource _eResource = _xtendFile.eResource();
+    Resource _eResource = this.xtendFile.eResource();
     URI _uRI = _eResource.getURI();
     String _lastSegment = _uRI.lastSegment();
     return _lastSegment.toString();
@@ -234,13 +231,11 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   public String getPackageName() {
-    XtendFile _xtendFile = this.getXtendFile();
-    return _xtendFile.getPackage();
+    return this.xtendFile.getPackage();
   }
   
   public Iterable<? extends TypeDeclaration> getSourceTypeDeclarations() {
-    XtendFile _xtendFile = this.getXtendFile();
-    EList<XtendTypeDeclaration> _xtendTypes = _xtendFile.getXtendTypes();
+    EList<XtendTypeDeclaration> _xtendTypes = this.xtendFile.getXtendTypes();
     final Function1<XtendTypeDeclaration, XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>> _function = new Function1<XtendTypeDeclaration, XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>>() {
       public XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> apply(final XtendTypeDeclaration it) {
         return CompilationUnitImpl.this.toXtendTypeDeclaration(it);
@@ -267,8 +262,8 @@ public class CompilationUnitImpl implements CompilationUnit {
   @Inject
   private CompilerPhases compilerPhases;
   
-  @Property
-  private XtendFile _xtendFile;
+  @Accessors(AccessorType.PUBLIC_GETTER)
+  private XtendFile xtendFile;
   
   @Accessors(AccessorType.PUBLIC_GETTER)
   private ActiveAnnotationContexts.AnnotationCallback lastPhase = ActiveAnnotationContexts.AnnotationCallback.INDEXING;
@@ -276,123 +271,86 @@ public class CompilationUnitImpl implements CompilationUnit {
   @Inject
   private CommonTypeComputationServices services;
   
+  @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
   private TypeReferences typeReferences;
   
+  @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
-  private JvmTypesBuilder typesBuilder;
+  private JvmTypesBuilder jvmTypesBuilder;
   
+  @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
-  private IXtendJvmAssociations associations;
+  private IXtendJvmAssociations jvmModelAssociations;
   
+  @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
   private IJvmModelAssociator jvmModelAssociator;
   
   @Inject
   private ConstantExpressionsInterpreter interpreter;
   
+  @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
   private IEObjectDocumentationProvider documentationProvider;
   
+  @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
   private IFileHeaderProvider fileHeaderProvider;
   
+  @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
   private JvmTypeExtensions typeExtensions;
   
+  @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
   private OverrideHelper overrideHelper;
   
+  @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
   private ResourceChangeRegistry resourceChangeRegistry;
   
   @Inject
   private AbstractFileSystemSupport fileSystemSupport;
   
+  @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
   private FileLocations fileLocations;
   
+  @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
   private ReadAndWriteTracking readAndWriteTracking;
   
+  @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
   private IScopeProvider scopeProvider;
   
+  @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
   private IQualifiedNameConverter qualifiedNameConverter;
   
+  @Accessors
   private final ProblemSupportImpl problemSupport = new ProblemSupportImpl(this);
   
-  @Property
-  private final TypeReferenceProvider _typeReferenceProvider = new TypeReferenceProviderImpl(this);
+  @Accessors
+  private final TypeReferenceProvider typeReferenceProvider = new TypeReferenceProviderImpl(this);
   
-  @Property
-  private final AnnotationReferenceProvider _annotationReferenceProvider = new AnnotationReferenceProviderImpl(this);
+  @Accessors
+  private final AnnotationReferenceProvider annotationReferenceProvider = new AnnotationReferenceProviderImpl(this);
   
-  @Property
-  private final TypeLookupImpl _typeLookup = new TypeLookupImpl(this);
+  @Accessors
+  private final TypeLookupImpl typeLookup = new TypeLookupImpl(this);
   
-  @Property
-  private final TracabilityImpl _tracability = new TracabilityImpl(this);
+  @Accessors
+  private final TracabilityImpl tracability = new TracabilityImpl(this);
   
-  @Property
-  private final AssociatorImpl _associator = new AssociatorImpl(this);
+  @Accessors
+  private final AssociatorImpl associator = new AssociatorImpl(this);
   
   private Map<Object, Object> identityCache = CollectionLiterals.<Object, Object>newHashMap();
   
+  @Accessors(AccessorType.PUBLIC_GETTER)
   private OwnedConverter typeRefConverter;
-  
-  public IJvmModelAssociator getJvmModelAssociator() {
-    return this.jvmModelAssociator;
-  }
-  
-  public IXtendJvmAssociations getJvmAssociations() {
-    return this.associations;
-  }
-  
-  public IJvmModelAssociator getJvmAssociator() {
-    return this.jvmModelAssociator;
-  }
-  
-  public TypeReferences getTypeReferences() {
-    return this.typeReferences;
-  }
-  
-  public OverrideHelper getOverrideHelper() {
-    return this.overrideHelper;
-  }
-  
-  public IEObjectDocumentationProvider getDocumentationProvider() {
-    return this.documentationProvider;
-  }
-  
-  public IFileHeaderProvider getFileHeaderProvider() {
-    return this.fileHeaderProvider;
-  }
-  
-  public JvmTypesBuilder getJvmTypesBuilder() {
-    return this.typesBuilder;
-  }
-  
-  public JvmTypeExtensions getTypeExtensions() {
-    return this.typeExtensions;
-  }
-  
-  public ProblemSupport getProblemSupport() {
-    return this.problemSupport;
-  }
-  
-  public ResourceChangeRegistry getResourceChangeRegistry() {
-    return this.resourceChangeRegistry;
-  }
-  
-  public IScopeProvider getScopeProvider() {
-    return this.scopeProvider;
-  }
-  
-  public IQualifiedNameConverter getQualifiedNameConverter() {
-    return this.qualifiedNameConverter;
-  }
   
   private MutableFileSystemSupport decoratedFileSystemSupport;
   
@@ -401,8 +359,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     {
       boolean _equals = Objects.equal(this.decoratedFileSystemSupport, null);
       if (_equals) {
-        XtendFile _xtendFile = this.getXtendFile();
-        Resource _eResource = _xtendFile.eResource();
+        Resource _eResource = this.xtendFile.eResource();
         ResourceSet _resourceSet = _eResource.getResourceSet();
         EList<Adapter> _eAdapters = _resourceSet.eAdapters();
         Iterable<FileSystemAccessQueue> _filter = Iterables.<FileSystemAccessQueue>filter(_eAdapters, FileSystemAccessQueue.class);
@@ -411,8 +368,7 @@ public class CompilationUnitImpl implements CompilationUnit {
         if (_equals_1) {
           return new ChangeListenerAddingFileSystemSupport(this.fileSystemSupport, this);
         }
-        XtendFile _xtendFile_1 = this.getXtendFile();
-        Resource _eResource_1 = _xtendFile_1.eResource();
+        Resource _eResource_1 = this.xtendFile.eResource();
         URI _uRI = _eResource_1.getURI();
         ChangeListenerAddingFileSystemSupport _changeListenerAddingFileSystemSupport = new ChangeListenerAddingFileSystemSupport(this.fileSystemSupport, this);
         ParallelFileSystemSupport _parallelFileSystemSupport = new ParallelFileSystemSupport(_uRI, _changeListenerAddingFileSystemSupport, fileSystemAccessQueue);
@@ -423,22 +379,13 @@ public class CompilationUnitImpl implements CompilationUnit {
     return _xblockexpression;
   }
   
-  public FileLocations getFileLocations() {
-    return this.fileLocations;
-  }
-  
-  public ReadAndWriteTracking getReadAndWriteTracking() {
-    return this.readAndWriteTracking;
-  }
-  
   public Path getFilePath() {
-    XtendFile _xtendFile = this.getXtendFile();
-    Resource _eResource = _xtendFile.eResource();
+    Resource _eResource = this.xtendFile.eResource();
     return this.fileSystemSupport.getPath(_eResource);
   }
   
   public void setXtendFile(final XtendFile xtendFile) {
-    this._xtendFile = xtendFile;
+    this.xtendFile = xtendFile;
     StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, xtendFile);
     OwnedConverter _ownedConverter = new OwnedConverter(_standardTypeReferenceOwner);
     this.typeRefConverter = _ownedConverter;
@@ -446,8 +393,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public void before(final ActiveAnnotationContexts.AnnotationCallback phase) {
     this.lastPhase = phase;
-    XtendFile _xtendFile = this.getXtendFile();
-    final StandardTypeReferenceOwner standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, _xtendFile);
+    final StandardTypeReferenceOwner standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, this.xtendFile);
     boolean _equals = Objects.equal(ActiveAnnotationContexts.AnnotationCallback.INDEXING, phase);
     if (_equals) {
       IndexingOwnedConverter _indexingOwnedConverter = new IndexingOwnedConverter(standardTypeReferenceOwner);
@@ -469,13 +415,8 @@ public class CompilationUnitImpl implements CompilationUnit {
     }
   }
   
-  public OwnedConverter getTypeRefConverter() {
-    return this.typeRefConverter;
-  }
-  
   public boolean isIndexing() {
-    XtendFile _xtendFile = this.getXtendFile();
-    return this.compilerPhases.isIndexing(_xtendFile);
+    return this.compilerPhases.isIndexing(this.xtendFile);
   }
   
   private <IN extends Object, OUT extends Object> OUT getOrCreate(final IN in, final Function1<? super IN, ? extends OUT> provider) {
@@ -935,8 +876,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public boolean isBelongedToCompilationUnit(final EObject element) {
     Resource _eResource = element.eResource();
-    XtendFile _xtendFile = this.getXtendFile();
-    Resource _eResource_1 = _xtendFile.eResource();
+    Resource _eResource_1 = this.xtendFile.eResource();
     return Objects.equal(_eResource, _eResource_1);
   }
   
@@ -1360,12 +1300,12 @@ public class CompilationUnitImpl implements CompilationUnit {
         it.append(_trimTrailingLinebreak);
       }
     };
-    this.typesBuilder.setBody(executable, _function);
+    this.jvmTypesBuilder.setBody(executable, _function);
   }
   
   public void setCompilationTemplate(final JvmExecutable executable, final StringConcatenationClient compilationTemplate) {
     this.checkCanceled();
-    this.typesBuilder.setBody(executable, compilationTemplate);
+    this.jvmTypesBuilder.setBody(executable, compilationTemplate);
   }
   
   protected CharSequence trimTrailingLinebreak(final CharSequence sequence, final EObject context) {
@@ -1381,12 +1321,12 @@ public class CompilationUnitImpl implements CompilationUnit {
         it.append(_compile);
       }
     };
-    this.typesBuilder.setInitializer(field, _function);
+    this.jvmTypesBuilder.setInitializer(field, _function);
   }
   
   public void setCompilationTemplate(final JvmField field, final StringConcatenationClient compilationTemplate) {
     this.checkCanceled();
-    this.typesBuilder.setInitializer(field, compilationTemplate);
+    this.jvmTypesBuilder.setInitializer(field, compilationTemplate);
   }
   
   public AnnotationReference toAnnotationReference(final XAnnotation delegate) {
@@ -1951,36 +1891,111 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   @Pure
   public XtendFile getXtendFile() {
-    return this._xtendFile;
-  }
-  
-  @Pure
-  public TypeReferenceProvider getTypeReferenceProvider() {
-    return this._typeReferenceProvider;
-  }
-  
-  @Pure
-  public AnnotationReferenceProvider getAnnotationReferenceProvider() {
-    return this._annotationReferenceProvider;
-  }
-  
-  @Pure
-  public TypeLookupImpl getTypeLookup() {
-    return this._typeLookup;
-  }
-  
-  @Pure
-  public TracabilityImpl getTracability() {
-    return this._tracability;
-  }
-  
-  @Pure
-  public AssociatorImpl getAssociator() {
-    return this._associator;
+    return this.xtendFile;
   }
   
   @Pure
   public ActiveAnnotationContexts.AnnotationCallback getLastPhase() {
     return this.lastPhase;
+  }
+  
+  @Pure
+  public TypeReferences getTypeReferences() {
+    return this.typeReferences;
+  }
+  
+  @Pure
+  public JvmTypesBuilder getJvmTypesBuilder() {
+    return this.jvmTypesBuilder;
+  }
+  
+  @Pure
+  public IXtendJvmAssociations getJvmModelAssociations() {
+    return this.jvmModelAssociations;
+  }
+  
+  @Pure
+  public IJvmModelAssociator getJvmModelAssociator() {
+    return this.jvmModelAssociator;
+  }
+  
+  @Pure
+  public IEObjectDocumentationProvider getDocumentationProvider() {
+    return this.documentationProvider;
+  }
+  
+  @Pure
+  public IFileHeaderProvider getFileHeaderProvider() {
+    return this.fileHeaderProvider;
+  }
+  
+  @Pure
+  public JvmTypeExtensions getTypeExtensions() {
+    return this.typeExtensions;
+  }
+  
+  @Pure
+  public OverrideHelper getOverrideHelper() {
+    return this.overrideHelper;
+  }
+  
+  @Pure
+  public ResourceChangeRegistry getResourceChangeRegistry() {
+    return this.resourceChangeRegistry;
+  }
+  
+  @Pure
+  public FileLocations getFileLocations() {
+    return this.fileLocations;
+  }
+  
+  @Pure
+  public ReadAndWriteTracking getReadAndWriteTracking() {
+    return this.readAndWriteTracking;
+  }
+  
+  @Pure
+  public IScopeProvider getScopeProvider() {
+    return this.scopeProvider;
+  }
+  
+  @Pure
+  public IQualifiedNameConverter getQualifiedNameConverter() {
+    return this.qualifiedNameConverter;
+  }
+  
+  @Pure
+  public ProblemSupportImpl getProblemSupport() {
+    return this.problemSupport;
+  }
+  
+  @Pure
+  public TypeReferenceProvider getTypeReferenceProvider() {
+    return this.typeReferenceProvider;
+  }
+  
+  @Pure
+  public AnnotationReferenceProvider getAnnotationReferenceProvider() {
+    return this.annotationReferenceProvider;
+  }
+  
+  @Pure
+  public TypeLookupImpl getTypeLookup() {
+    return this.typeLookup;
+  }
+  
+  @Pure
+  public TracabilityImpl getTracability() {
+    return this.tracability;
+  }
+  
+  @Pure
+  public AssociatorImpl getAssociator() {
+    return this.associator;
+  }
+  
+  @Pure
+  public OwnedConverter getTypeRefConverter() {
+    return this.typeRefConverter;
   }
 }

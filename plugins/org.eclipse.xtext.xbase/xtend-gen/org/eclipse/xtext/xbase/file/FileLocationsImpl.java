@@ -13,7 +13,7 @@ import com.google.inject.Provider;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.macro.file.FileLocations;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
@@ -26,14 +26,13 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @SuppressWarnings("all")
 public class FileLocationsImpl implements FileLocations {
   @Inject
-  @Property
-  private Provider<WorkspaceConfig> _projectInformationProvider;
+  @Accessors
+  private Provider<WorkspaceConfig> projectInformationProvider;
   
   protected ProjectConfig getProjectConfig(final Path path) {
     List<String> _segments = path.getSegments();
     final String string = _segments.get(0);
-    Provider<WorkspaceConfig> _projectInformationProvider = this.getProjectInformationProvider();
-    WorkspaceConfig _get = _projectInformationProvider.get();
+    WorkspaceConfig _get = this.projectInformationProvider.get();
     Map<String, ProjectConfig> _projects = _get.getProjects();
     final ProjectConfig projectConfig = _projects.get(string);
     boolean _equals = Objects.equal(projectConfig, null);
@@ -77,10 +76,10 @@ public class FileLocationsImpl implements FileLocations {
   
   @Pure
   public Provider<WorkspaceConfig> getProjectInformationProvider() {
-    return this._projectInformationProvider;
+    return this.projectInformationProvider;
   }
   
   public void setProjectInformationProvider(final Provider<WorkspaceConfig> projectInformationProvider) {
-    this._projectInformationProvider = projectInformationProvider;
+    this.projectInformationProvider = projectInformationProvider;
   }
 }

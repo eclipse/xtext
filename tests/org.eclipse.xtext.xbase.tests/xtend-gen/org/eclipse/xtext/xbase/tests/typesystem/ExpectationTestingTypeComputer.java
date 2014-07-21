@@ -7,7 +7,7 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -21,41 +21,39 @@ import org.eclipse.xtext.xbase.typesystem.computation.XbaseTypeComputer;
  */
 @SuppressWarnings("all")
 public class ExpectationTestingTypeComputer extends XbaseTypeComputer {
-  @Property
-  private AbstractExpectationTest _test;
+  @Accessors
+  private AbstractExpectationTest test;
   
-  @Property
-  private Function1<? super XExpression, ? extends Boolean> _predicate = new Function1<XExpression, Boolean>() {
+  @Accessors
+  private Function1<? super XExpression, ? extends Boolean> predicate = new Function1<XExpression, Boolean>() {
     public Boolean apply(final XExpression it) {
       return Boolean.valueOf((it instanceof XNullLiteral));
     }
   };
   
   public void computeTypes(final XExpression expression, final ITypeComputationState state) {
-    Function1<? super XExpression, ? extends Boolean> _predicate = this.getPredicate();
-    Boolean _apply = _predicate.apply(expression);
+    Boolean _apply = this.predicate.apply(expression);
     if ((_apply).booleanValue()) {
-      AbstractExpectationTest _test = this.getTest();
-      _test.recordExpectation(expression, state);
+      this.test.recordExpectation(expression, state);
     }
     super.computeTypes(expression, state);
   }
   
   @Pure
   public AbstractExpectationTest getTest() {
-    return this._test;
+    return this.test;
   }
   
   public void setTest(final AbstractExpectationTest test) {
-    this._test = test;
+    this.test = test;
   }
   
   @Pure
   public Function1<? super XExpression, ? extends Boolean> getPredicate() {
-    return this._predicate;
+    return this.predicate;
   }
   
   public void setPredicate(final Function1<? super XExpression, ? extends Boolean> predicate) {
-    this._predicate = predicate;
+    this.predicate = predicate;
   }
 }

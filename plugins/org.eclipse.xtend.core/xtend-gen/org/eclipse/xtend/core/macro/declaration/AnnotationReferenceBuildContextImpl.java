@@ -22,7 +22,7 @@ import org.eclipse.xtend.core.macro.declaration.JvmEnumerationValueDeclarationIm
 import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendAnnotationReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendEnumerationValueDeclarationImpl;
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.EnumerationTypeDeclaration;
@@ -69,16 +69,15 @@ import org.eclipse.xtext.xbase.lib.Pure;
  */
 @SuppressWarnings("all")
 public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceBuildContext {
-  @Property
-  private JvmAnnotationReference _delegate;
+  @Accessors
+  private JvmAnnotationReference delegate;
   
-  @Property
-  private CompilationUnitImpl _compilationUnit;
+  @Accessors
+  private CompilationUnitImpl compilationUnit;
   
   protected JvmOperation findOperation(final String name) {
     ConditionUtils.checkJavaIdentifier(name, "name");
-    JvmAnnotationReference _delegate = this.getDelegate();
-    final JvmAnnotationType annotationType = _delegate.getAnnotation();
+    final JvmAnnotationType annotationType = this.delegate.getAnnotation();
     Iterable<JvmOperation> _declaredOperations = annotationType.getDeclaredOperations();
     final Function1<JvmOperation, Boolean> _function = new Function1<JvmOperation, Boolean>() {
       public Boolean apply(final JvmOperation it) {
@@ -107,8 +106,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   }
   
   protected boolean remove(final JvmOperation op) {
-    JvmAnnotationReference _delegate = this.getDelegate();
-    EList<JvmAnnotationValue> _explicitValues = _delegate.getExplicitValues();
+    EList<JvmAnnotationValue> _explicitValues = this.delegate.getExplicitValues();
     Iterator<JvmAnnotationValue> _iterator = _explicitValues.iterator();
     final Predicate<JvmAnnotationValue> _function = new Predicate<JvmAnnotationValue>() {
       public boolean apply(final JvmAnnotationValue it) {
@@ -403,8 +401,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
     newValue.setOperation(op);
     this.setValue(newValue, values, componentType, mustBeArray);
     this.remove(op);
-    JvmAnnotationReference _delegate = this.getDelegate();
-    EList<JvmAnnotationValue> _explicitValues = _delegate.getExplicitValues();
+    EList<JvmAnnotationValue> _explicitValues = this.delegate.getExplicitValues();
     _explicitValues.add(newValue);
   }
   
@@ -573,8 +570,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
     Iterable<TypeReferenceImpl> _filter = Iterables.<TypeReferenceImpl>filter(((Iterable<?>)Conversions.doWrapArray(value)), TypeReferenceImpl.class);
     final Function1<TypeReferenceImpl, JvmTypeReference> _function = new Function1<TypeReferenceImpl, JvmTypeReference>() {
       public JvmTypeReference apply(final TypeReferenceImpl it) {
-        CompilationUnitImpl _compilationUnit = it.getCompilationUnit();
-        return _compilationUnit.toJvmTypeReference(it);
+        return AnnotationReferenceBuildContextImpl.this.compilationUnit.toJvmTypeReference(it);
       }
     };
     Iterable<JvmTypeReference> _map = IterableExtensions.<TypeReferenceImpl, JvmTypeReference>map(_filter, _function);
@@ -1179,19 +1175,19 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   @Pure
   public JvmAnnotationReference getDelegate() {
-    return this._delegate;
+    return this.delegate;
   }
   
   public void setDelegate(final JvmAnnotationReference delegate) {
-    this._delegate = delegate;
+    this.delegate = delegate;
   }
   
   @Pure
   public CompilationUnitImpl getCompilationUnit() {
-    return this._compilationUnit;
+    return this.compilationUnit;
   }
   
   public void setCompilationUnit(final CompilationUnitImpl compilationUnit) {
-    this._compilationUnit = compilationUnit;
+    this.compilationUnit = compilationUnit;
   }
 }

@@ -16,7 +16,7 @@ import com.google.inject.name.Names;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
@@ -67,16 +67,15 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
   
   private boolean srcGenOnly = false;
   
-  @Property
-  private boolean _generateXtendStub;
+  @Accessors
+  private boolean generateXtendStub;
   
   protected void addLocalBindings(final Binder binder) {
     AnnotatedBindingBuilder<Boolean> _bind = binder.<Boolean>bind(Boolean.class);
     Named _named = Names.named("generateXtendStub");
     LinkedBindingBuilder<Boolean> _annotatedWith = _bind.annotatedWith(_named);
     boolean _and = false;
-    boolean _isGenerateXtendStub = this.isGenerateXtendStub();
-    if (!_isGenerateXtendStub) {
+    if (!this.generateXtendStub) {
       _and = false;
     } else {
       boolean _isGenerateStub = this.isGenerateStub();
@@ -174,8 +173,7 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
   
   public String[] getRequiredBundlesRt(final Grammar grammar) {
     List<String> _xifexpression = null;
-    boolean _isGenerateXtendStub = this.isGenerateXtendStub();
-    if (_isGenerateXtendStub) {
+    if (this.generateXtendStub) {
       _xifexpression = Collections.<String>singletonList("org.eclipse.xtext.xbase.lib");
     } else {
       _xifexpression = null;
@@ -185,10 +183,10 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
   
   @Pure
   public boolean isGenerateXtendStub() {
-    return this._generateXtendStub;
+    return this.generateXtendStub;
   }
   
   public void setGenerateXtendStub(final boolean generateXtendStub) {
-    this._generateXtendStub = generateXtendStub;
+    this.generateXtendStub = generateXtendStub;
   }
 }

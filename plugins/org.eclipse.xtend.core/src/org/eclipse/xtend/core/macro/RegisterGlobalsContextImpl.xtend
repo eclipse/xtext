@@ -9,7 +9,6 @@ package org.eclipse.xtend.core.macro
 
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
 import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
-import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.common.types.TypesFactory
@@ -18,11 +17,15 @@ import org.eclipse.xtext.xbase.lib.Pair
 
 import static org.eclipse.xtend.core.macro.ConditionUtils.*
 import com.google.common.base.Preconditions
+import org.eclipse.xtend.lib.annotations.Delegate
+import org.eclipse.xtend.lib.macro.file.FileLocations
+import org.eclipse.xtend.lib.macro.file.FileSystemSupport
+import org.eclipse.xtend.lib.annotations.Accessors
 
 class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
 	
-	@Property IJvmDeclaredTypeAcceptor acceptor
-	@Property CompilationUnitImpl compilationUnit
+	@Accessors IJvmDeclaredTypeAcceptor acceptor
+	@Accessors CompilationUnitImpl compilationUnit
 	
 	override registerAnnotationType(String qualifiedName) throws IllegalArgumentException {
 		val newType = TypesFactory.eINSTANCE.createJvmAnnotationType
@@ -100,53 +103,12 @@ class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
 		}
 	}
 	
-
-	override exists(Path path) {
-		compilationUnit.fileSystemSupport.exists(path)
+	@Delegate def FileSystemSupport getFileSystemSupport() {
+		compilationUnit.fileSystemSupport
 	}
 	
-	override getCharset(Path path) {
-		compilationUnit.fileSystemSupport.getCharset(path)
-	}
-	
-	override getChildren(Path path) {
-		compilationUnit.fileSystemSupport.getChildren(path)
-	}
-	
-	override getContents(Path path) {
-		compilationUnit.fileSystemSupport.getContents(path)
-	}
-	
-	override getContentsAsStream(Path path) {
-		compilationUnit.fileSystemSupport.getContentsAsStream(path)
-	}
-	
-	override getLastModification(Path path) {
-		compilationUnit.fileSystemSupport.getLastModification(path)
-	}
-	
-	override getProjectFolder(Path path) {
-		compilationUnit.fileLocations.getProjectFolder(path)
-	}
-	
-	override getSourceFolder(Path path) {
-		compilationUnit.fileLocations.getSourceFolder(path)
-	}
-	
-	override getTargetFolder(Path sourceFolder) {
-		compilationUnit.fileLocations.getTargetFolder(sourceFolder)
-	}
-	
-	override isFile(Path path) {
-		compilationUnit.fileSystemSupport.isFile(path)
-	}
-	
-	override isFolder(Path path) {
-		compilationUnit.fileSystemSupport.isFolder(path)
-	}
-	
-	override toURI(Path path) {
-		compilationUnit.fileSystemSupport.toURI(path)
+	@Delegate def FileLocations getFileLocations() {
+		compilationUnit.fileLocations
 	}
 	
 }

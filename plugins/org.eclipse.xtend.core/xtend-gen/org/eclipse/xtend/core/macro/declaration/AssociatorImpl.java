@@ -50,8 +50,8 @@ public class AssociatorImpl implements Associator {
       }
     }
     final EObject delegate = _switchResult;
-    IJvmModelAssociator _jvmAssociator = this.unit.getJvmAssociator();
+    IJvmModelAssociator _jvmModelAssociator = this.unit.getJvmModelAssociator();
     EObject _delegate = ((JvmElementImpl<?>) javaElement).getDelegate();
-    _jvmAssociator.associate(delegate, _delegate);
+    _jvmModelAssociator.associate(delegate, _delegate);
   }
 }

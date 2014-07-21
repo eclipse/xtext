@@ -1,23 +1,23 @@
 package org.eclipse.xtext.xbase.formatting;
 
-import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Data
 @SuppressWarnings("all")
 public class TextReplacement {
-  private final int _offset;
+  private final int offset;
   
-  private final int _length;
+  private final int length;
   
-  private final String _text;
+  private final String text;
   
   public TextReplacement(final int offset, final int length, final String text) {
     super();
-    this._offset = offset;
-    this._length = length;
-    this._text = text;
+    this.offset = offset;
+    this.length = length;
+    this.text = text;
   }
   
   @Override
@@ -25,9 +25,9 @@ public class TextReplacement {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + this._offset;
-    result = prime * result + this._length;
-    result = prime * result + ((this._text== null) ? 0 : this._text.hashCode());
+    result = prime * result + this.offset;
+    result = prime * result + this.length;
+    result = prime * result + ((this.text== null) ? 0 : this.text.hashCode());
     return result;
   }
   
@@ -41,14 +41,14 @@ public class TextReplacement {
     if (getClass() != obj.getClass())
       return false;
     TextReplacement other = (TextReplacement) obj;
-    if (other._offset != this._offset)
+    if (other.offset != this.offset)
       return false;
-    if (other._length != this._length)
+    if (other.length != this.length)
       return false;
-    if (this._text == null) {
-      if (other._text != null)
+    if (this.text == null) {
+      if (other.text != null)
         return false;
-    } else if (!this._text.equals(other._text))
+    } else if (!this.text.equals(other.text))
       return false;
     return true;
   }
@@ -56,22 +56,25 @@ public class TextReplacement {
   @Override
   @Pure
   public String toString() {
-    String result = new ToStringHelper().toString(this);
-    return result;
+    ToStringBuilder b = new ToStringBuilder(this);
+    b.add("offset", this.offset);
+    b.add("length", this.length);
+    b.add("text", this.text);
+    return b.toString();
   }
   
   @Pure
   public int getOffset() {
-    return this._offset;
+    return this.offset;
   }
   
   @Pure
   public int getLength() {
-    return this._length;
+    return this.length;
   }
   
   @Pure
   public String getText() {
-    return this._text;
+    return this.text;
   }
 }

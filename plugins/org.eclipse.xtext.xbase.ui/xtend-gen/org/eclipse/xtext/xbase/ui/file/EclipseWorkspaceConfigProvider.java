@@ -13,7 +13,7 @@ import javax.inject.Provider;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
@@ -25,27 +25,24 @@ import org.eclipse.xtext.xbase.ui.file.EclipseProjectConfig;
 
 @SuppressWarnings("all")
 public class EclipseWorkspaceConfigProvider implements Provider<WorkspaceConfig> {
-  @Property
+  @Accessors
   @Inject
-  private IWorkspaceRoot _workspaceRoot;
+  private IWorkspaceRoot workspaceRoot;
   
-  @Property
+  @Accessors
   @Inject
-  private EclipseOutputConfigurationProvider _configurationProvider;
+  private EclipseOutputConfigurationProvider configurationProvider;
   
   public WorkspaceConfig get() {
-    IWorkspaceRoot _workspaceRoot = this.getWorkspaceRoot();
-    IPath _location = _workspaceRoot.getLocation();
+    IPath _location = this.workspaceRoot.getLocation();
     final String wsRoot = _location.toString();
     final WorkspaceConfig result = new WorkspaceConfig(wsRoot);
-    IWorkspaceRoot _workspaceRoot_1 = this.getWorkspaceRoot();
-    IProject[] _projects = _workspaceRoot_1.getProjects();
+    IProject[] _projects = this.workspaceRoot.getProjects();
     final Procedure1<IProject> _function = new Procedure1<IProject>() {
       public void apply(final IProject it) {
         Map<String, ProjectConfig> _projects = result.getProjects();
         String _name = it.getName();
-        EclipseOutputConfigurationProvider _configurationProvider = EclipseWorkspaceConfigProvider.this.getConfigurationProvider();
-        EclipseProjectConfig _eclipseProjectConfig = new EclipseProjectConfig(it, _configurationProvider);
+        EclipseProjectConfig _eclipseProjectConfig = new EclipseProjectConfig(it, EclipseWorkspaceConfigProvider.this.configurationProvider);
         _projects.put(_name, _eclipseProjectConfig);
       }
     };
@@ -55,19 +52,19 @@ public class EclipseWorkspaceConfigProvider implements Provider<WorkspaceConfig>
   
   @Pure
   public IWorkspaceRoot getWorkspaceRoot() {
-    return this._workspaceRoot;
+    return this.workspaceRoot;
   }
   
   public void setWorkspaceRoot(final IWorkspaceRoot workspaceRoot) {
-    this._workspaceRoot = workspaceRoot;
+    this.workspaceRoot = workspaceRoot;
   }
   
   @Pure
   public EclipseOutputConfigurationProvider getConfigurationProvider() {
-    return this._configurationProvider;
+    return this.configurationProvider;
   }
   
   public void setConfigurationProvider(final EclipseOutputConfigurationProvider configurationProvider) {
-    this._configurationProvider = configurationProvider;
+    this.configurationProvider = configurationProvider;
   }
 }

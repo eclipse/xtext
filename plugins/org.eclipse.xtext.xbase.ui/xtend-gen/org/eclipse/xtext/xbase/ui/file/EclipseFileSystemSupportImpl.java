@@ -24,7 +24,7 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
@@ -44,22 +44,20 @@ import org.eclipse.xtext.xbase.lib.Pure;
  */
 @SuppressWarnings("all")
 public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
-  @Property
+  @Accessors
   @Inject
-  private IWorkspaceRoot _workspaceRoot;
+  private IWorkspaceRoot workspaceRoot;
   
   protected IFile getEclipseFile(final Path path) {
-    IWorkspaceRoot _workspaceRoot = this.getWorkspaceRoot();
     String _string = path.toString();
     org.eclipse.core.runtime.Path _path = new org.eclipse.core.runtime.Path(_string);
-    return _workspaceRoot.getFile(_path);
+    return this.workspaceRoot.getFile(_path);
   }
   
   protected IFolder getEclipseFolder(final Path path) {
-    IWorkspaceRoot _workspaceRoot = this.getWorkspaceRoot();
     String _string = path.toString();
     org.eclipse.core.runtime.Path _path = new org.eclipse.core.runtime.Path(_string);
-    return _workspaceRoot.getFolder(_path);
+    return this.workspaceRoot.getFolder(_path);
   }
   
   protected IContainer getEclipseContainer(final Path path) {
@@ -80,7 +78,7 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
         boolean _equals = (_size == 0);
         if (_equals) {
           _matched=true;
-          _switchResult = this.getWorkspaceRoot();
+          _switchResult = this.workspaceRoot;
         }
       }
       if (!_matched) {
@@ -88,17 +86,15 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
         boolean _equals_1 = (_size_1 == 1);
         if (_equals_1) {
           _matched=true;
-          IWorkspaceRoot _workspaceRoot = this.getWorkspaceRoot();
           List<String> _segments_1 = path.getSegments();
           String _head = IterableExtensions.<String>head(_segments_1);
-          _switchResult = _workspaceRoot.getProject(_head);
+          _switchResult = this.workspaceRoot.getProject(_head);
         }
       }
       if (!_matched) {
-        IWorkspaceRoot _workspaceRoot_1 = this.getWorkspaceRoot();
         String _string = path.toString();
         org.eclipse.core.runtime.Path _path = new org.eclipse.core.runtime.Path(_string);
-        _switchResult = _workspaceRoot_1.getFolder(_path);
+        _switchResult = this.workspaceRoot.getFolder(_path);
       }
       _xblockexpression = _switchResult;
     }
@@ -106,10 +102,9 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
   }
   
   protected IResource findResource(final Path path) {
-    IWorkspaceRoot _workspaceRoot = this.getWorkspaceRoot();
     String _string = path.toString();
     org.eclipse.core.runtime.Path _path = new org.eclipse.core.runtime.Path(_string);
-    return _workspaceRoot.findMember(_path);
+    return this.workspaceRoot.findMember(_path);
   }
   
   protected org.eclipse.core.runtime.Path toEclipsePath(final Path path) {
@@ -348,10 +343,10 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
   
   @Pure
   public IWorkspaceRoot getWorkspaceRoot() {
-    return this._workspaceRoot;
+    return this.workspaceRoot;
   }
   
   public void setWorkspaceRoot(final IWorkspaceRoot workspaceRoot) {
-    this._workspaceRoot = workspaceRoot;
+    this.workspaceRoot = workspaceRoot;
   }
 }

@@ -31,7 +31,7 @@ class AssociatorImpl implements Associator {
 			TypeReferenceImpl: primarySourceElement.source
 			AbstractElementImpl<?>: primarySourceElement.delegate
 		}
-		unit.jvmAssociator.associate(delegate, (javaElement as JvmElementImpl<?>).delegate)
+		unit.jvmModelAssociator.associate(delegate, (javaElement as JvmElementImpl<?>).delegate)
 	}
 	
 }

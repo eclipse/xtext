@@ -11,6 +11,7 @@ import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.resource.CompilerPhases
 import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
+import org.eclipse.xtend.lib.annotations.Data
 
 class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvider {
 	

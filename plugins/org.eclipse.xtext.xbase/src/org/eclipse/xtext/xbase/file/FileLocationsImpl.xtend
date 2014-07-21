@@ -13,13 +13,14 @@ import org.eclipse.xtend.lib.macro.file.FileLocations
 import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.xbase.file.ProjectConfig
 import org.eclipse.xtext.xbase.file.WorkspaceConfig
+import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 class FileLocationsImpl implements FileLocations {
 	
-	@Inject @Property Provider<WorkspaceConfig> projectInformationProvider
+	@Inject @Accessors Provider<WorkspaceConfig> projectInformationProvider
 	
 	protected def ProjectConfig getProjectConfig(Path path) {
 		val string = path.getSegments().get(0)

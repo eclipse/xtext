@@ -19,12 +19,13 @@ import org.eclipse.jdt.core.IPackageFragmentRoot
 import org.eclipse.core.resources.IContainer
 import org.eclipse.core.resources.IWorkspaceRoot
 import org.eclipse.core.resources.IFolder
+import org.eclipse.xtend.lib.annotations.Accessors
 
 class EclipseWorkspaceConfigProvider implements Provider<WorkspaceConfig> {
 	
-	@Property @Inject IWorkspaceRoot workspaceRoot
+	@Accessors @Inject IWorkspaceRoot workspaceRoot
 	
-	@Property @Inject EclipseOutputConfigurationProvider configurationProvider
+	@Accessors @Inject EclipseOutputConfigurationProvider configurationProvider
 	
 	override get() {
 		val wsRoot = workspaceRoot.location.toString

@@ -26,7 +26,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.util.Files;
@@ -45,8 +45,8 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @SuppressWarnings("all")
 public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
   @Inject
-  @Property
-  private Provider<WorkspaceConfig> _projectInformationProvider;
+  @Accessors
+  private Provider<WorkspaceConfig> projectInformationProvider;
   
   public Iterable<? extends Path> getChildren(final Path path) {
     List<Path> _xblockexpression = null;
@@ -73,8 +73,7 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
   }
   
   protected File getJavaIOFile(final Path path) {
-    Provider<WorkspaceConfig> _projectInformationProvider = this.getProjectInformationProvider();
-    WorkspaceConfig _get = _projectInformationProvider.get();
+    WorkspaceConfig _get = this.projectInformationProvider.get();
     String _absoluteFileSystemPath = _get.getAbsoluteFileSystemPath();
     String _string = path.toString();
     return new File(_absoluteFileSystemPath, _string);
@@ -204,8 +203,7 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
     final URI uri = _uRIConverter.normalize(_uRI);
     boolean _isFile = uri.isFile();
     if (_isFile) {
-      Provider<WorkspaceConfig> _projectInformationProvider = this.getProjectInformationProvider();
-      WorkspaceConfig _get = _projectInformationProvider.get();
+      WorkspaceConfig _get = this.projectInformationProvider.get();
       String _absoluteFileSystemPath = _get.getAbsoluteFileSystemPath();
       File _file = new File(_absoluteFileSystemPath);
       java.net.URI _uRI_1 = _file.toURI();
@@ -230,10 +228,10 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
   
   @Pure
   public Provider<WorkspaceConfig> getProjectInformationProvider() {
-    return this._projectInformationProvider;
+    return this.projectInformationProvider;
   }
   
   public void setProjectInformationProvider(final Provider<WorkspaceConfig> projectInformationProvider) {
-    this._projectInformationProvider = projectInformationProvider;
+    this.projectInformationProvider = projectInformationProvider;
   }
 }

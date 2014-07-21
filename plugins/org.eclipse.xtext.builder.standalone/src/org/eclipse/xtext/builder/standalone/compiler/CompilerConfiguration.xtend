@@ -7,11 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.standalone.compiler
 
+import org.eclipse.xtend.lib.annotations.Accessors
+
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
+@Accessors
 class CompilerConfiguration {
-	@Property String sourceLevel = "1.5"
-	@Property String targetLevel = "1.5"
-	@Property boolean verbose
+	String sourceLevel = "1.5"
+	String targetLevel = "1.5"
+	boolean verbose
 }

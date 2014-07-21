@@ -186,9 +186,9 @@ public class ProblemSupportImpl implements ProblemSupport {
         Resource _eResource = _xtendFile.eResource();
         boolean _equals = Objects.equal(resource, _eResource);
         if (_equals) {
-          IXtendJvmAssociations _jvmAssociations = this.compilationUnit.getJvmAssociations();
+          IXtendJvmAssociations _jvmModelAssociations = this.compilationUnit.getJvmModelAssociations();
           EObject _delegate_1 = ((AbstractElementImpl<? extends EObject>)element).getDelegate();
-          final EObject eobject = _jvmAssociations.getPrimarySourceElement(_delegate_1);
+          final EObject eobject = _jvmModelAssociations.getPrimarySourceElement(_delegate_1);
           boolean _equals_1 = Objects.equal(eobject, null);
           if (_equals_1) {
             EObject _delegate_2 = ((AbstractElementImpl<? extends EObject>)element).getDelegate();
