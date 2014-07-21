@@ -8,11 +8,11 @@ import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.Element;
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 import org.eclipse.xtend.lib.macro.declaration.ResolvedConstructor;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
@@ -84,7 +84,7 @@ public class DataProcessor extends AbstractClassProcessor {
     public void addDataToString(final MutableClassDeclaration cls) {
       final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
         public void apply(final MutableMethodDeclaration it) {
-          NamedElement _primarySourceElement = Util.this.context.getPrimarySourceElement(cls);
+          Element _primarySourceElement = Util.this.context.getPrimarySourceElement(cls);
           Util.this.context.setPrimarySourceElement(it, _primarySourceElement);
           TypeReference _string = Util.this.context.getString();
           it.setReturnType(_string);

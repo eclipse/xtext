@@ -42,9 +42,6 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
     _readAndWriteTracking.markReadAccess(_delegate);
   }
   
-  public void markAsInitialized() {
-  }
-  
   public void markAsInitializedBy(final ConstructorDeclaration constructorDeclaration) {
     this.checkMutable();
     JvmConstructor _switchResult = null;

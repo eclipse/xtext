@@ -21,11 +21,14 @@ import org.junit.Test
 
 import static org.junit.Assert.*
 import org.eclipse.xtend.lib.macro.declaration.Element
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper
+import org.eclipse.xtend.core.macro.declaration.MutableJvmClassDeclarationImpl
 
 abstract class AbstractReusableActiveAnnotationTests {
 	
 	@Inject XtendGenerator generator
 	@Inject IGeneratorConfigProvider generatorConfigProvider
+	@Inject ValidationTestHelper validator
 	
 	@Test def void testInferredMethodReturnType() {
 		assertProcessing(
@@ -2443,17 +2446,18 @@ abstract class AbstractReusableActiveAnnotationTests {
 				class InitProcessor implements TransformationParticipant<MutableFieldDeclaration> {
 					
 					override doTransform(List<? extends MutableFieldDeclaration> annotatedTargetFields, extension TransformationContext context) {
-						annotatedTargetFields.forEach [ field |
-							field.setFinal(true)
-							field.markAsRead
-							field.markAsInitialized
-						]
-						annotatedTargetFields.head.declaringType.addConstructor [
+						val ctor = annotatedTargetFields.head.declaringType.addConstructor [
+							primarySourceElement = declaringType
 							body = ['''
 								«FOR f : annotatedTargetFields»
 									this.«f.simpleName» = \"foo\";
 								«ENDFOR»
 							''']
+						]
+						annotatedTargetFields.forEach [ field |
+							field.setFinal(true)
+							field.markAsRead
+							field.markAsInitializedBy(ctor)
 						]
 					}
 				}
@@ -2467,8 +2471,8 @@ abstract class AbstractReusableActiveAnnotationTests {
 				}
 			'''
 		) [
-			val clazz = typeLookup.findClass('myusercode.MyClass')
-			assertTrue(problemSupport.getProblems(clazz.declaredFields.head).empty)
+			val clazz = (typeLookup.findClass('myusercode.MyClass') as MutableJvmClassDeclarationImpl).delegate
+			validator.assertNoIssues(clazz)
 		]
 	}
 	

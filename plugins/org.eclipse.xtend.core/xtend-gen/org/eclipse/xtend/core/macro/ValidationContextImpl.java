@@ -20,7 +20,6 @@ import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableInterfaceDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.file.FileLocations;
@@ -294,48 +293,24 @@ public class ValidationContextImpl implements ValidationContext {
     return this.getFileLocations().getTargetFolder(sourceFolder);
   }
   
-  public NamedElement getPrimaryGeneratedJavaElement(final NamedElement source) {
-    return this.getTracability().getPrimaryGeneratedJavaElement(source);
-  }
-  
   public Element getPrimaryGeneratedJavaElement(final Element source) {
     return this.getTracability().getPrimaryGeneratedJavaElement(source);
-  }
-  
-  public NamedElement getPrimarySourceElement(final NamedElement target) {
-    return this.getTracability().getPrimarySourceElement(target);
   }
   
   public Element getPrimarySourceElement(final Element target) {
     return this.getTracability().getPrimarySourceElement(target);
   }
   
-  public boolean isExternal(final NamedElement element) {
-    return this.getTracability().isExternal(element);
-  }
-  
   public boolean isExternal(final Element element) {
     return this.getTracability().isExternal(element);
-  }
-  
-  public boolean isGenerated(final NamedElement element) {
-    return this.getTracability().isGenerated(element);
   }
   
   public boolean isGenerated(final Element element) {
     return this.getTracability().isGenerated(element);
   }
   
-  public boolean isSource(final NamedElement element) {
-    return this.getTracability().isSource(element);
-  }
-  
   public boolean isSource(final Element element) {
     return this.getTracability().isSource(element);
-  }
-  
-  public boolean isThePrimaryGeneratedJavaElement(final NamedElement target) {
-    return this.getTracability().isThePrimaryGeneratedJavaElement(target);
   }
   
   public boolean isThePrimaryGeneratedJavaElement(final Element target) {

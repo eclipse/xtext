@@ -82,13 +82,6 @@ public interface MutableFieldDeclaration extends MutableMemberDeclaration, Field
 	void setInitializer(StringConcatenationClient template);
 	
 	/**
-	 * Indicate that this field is properly initialized in some generated constructor.
-	 * TODO: remove this method
-	 * @since 2.6
-	 */
-	void markAsInitialized();
-	
-	/**
 	 * Indicate that this field is properly initialized by the given constructor.
 	 * @param constructorDeclaration a constructor that initializes this field
 	 * 

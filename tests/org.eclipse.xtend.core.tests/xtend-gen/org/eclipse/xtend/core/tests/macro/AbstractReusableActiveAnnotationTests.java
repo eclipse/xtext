@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.compiler.XtendGenerator;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
+import org.eclipse.xtend.core.macro.declaration.MutableJvmClassDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.MutableJvmFieldDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.MutableJvmMethodDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.ProblemSupportImpl;
@@ -37,7 +38,6 @@ import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclarator;
-import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.services.Problem;
@@ -45,8 +45,10 @@ import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.junit4.internal.LineDelimiters;
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -69,6 +71,9 @@ public abstract class AbstractReusableActiveAnnotationTests {
   
   @Inject
   private IGeneratorConfigProvider generatorConfigProvider;
+  
+  @Inject
+  private ValidationTestHelper validator;
   
   @Test
   public void testInferredMethodReturnType() {
@@ -357,9 +362,9 @@ public abstract class AbstractReusableActiveAnnotationTests {
         TracabilityImpl _tracability = it.getTracability();
         Iterable<? extends MutableTypeParameterDeclaration> _typeParameters = cls.getTypeParameters();
         MutableTypeParameterDeclaration _head = IterableExtensions.head(_typeParameters);
-        final NamedElement typeParameter = _tracability.getPrimarySourceElement(_head);
+        final Element typeParameter = _tracability.getPrimarySourceElement(_head);
         TracabilityImpl _tracability_1 = it.getTracability();
-        NamedElement _primarySourceElement = _tracability_1.getPrimarySourceElement(fooMethod);
+        Element _primarySourceElement = _tracability_1.getPrimarySourceElement(fooMethod);
         Assert.assertEquals(typeParameter, _primarySourceElement);
       }
     };
@@ -5110,7 +5115,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
   
   @Test
   public void testMarkReadAndInitialized() {
-    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/InitAnnotation.xtend", "\n\t\t\t\tpackage myannotation\n\t\t\t\t\n\t\t\t\timport java.util.List\n\t\t\t\timport org.eclipse.xtend.lib.macro.Active\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationParticipant\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration\n\n\t\t\t\t@Active(InitProcessor)\n\t\t\t\tannotation Init { }\n\t\t\t\tclass InitProcessor implements TransformationParticipant<MutableFieldDeclaration> {\n\t\t\t\t\t\n\t\t\t\t\toverride doTransform(List<? extends MutableFieldDeclaration> annotatedTargetFields, extension TransformationContext context) {\n\t\t\t\t\t\tannotatedTargetFields.forEach [ field |\n\t\t\t\t\t\t\tfield.setFinal(true)\n\t\t\t\t\t\t\tfield.markAsRead\n\t\t\t\t\t\t\tfield.markAsInitialized\n\t\t\t\t\t\t]\n\t\t\t\t\t\tannotatedTargetFields.head.declaringType.addConstructor [\n\t\t\t\t\t\t\tbody = [\'\'\'\n\t\t\t\t\t\t\t\t«FOR f : annotatedTargetFields»\n\t\t\t\t\t\t\t\t\tthis.«f.simpleName» = \"foo\";\n\t\t\t\t\t\t\t\t«ENDFOR»\n\t\t\t\t\t\t\t\'\'\']\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/InitAnnotation.xtend", "\n\t\t\t\tpackage myannotation\n\t\t\t\t\n\t\t\t\timport java.util.List\n\t\t\t\timport org.eclipse.xtend.lib.macro.Active\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationParticipant\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration\n\n\t\t\t\t@Active(InitProcessor)\n\t\t\t\tannotation Init { }\n\t\t\t\tclass InitProcessor implements TransformationParticipant<MutableFieldDeclaration> {\n\t\t\t\t\t\n\t\t\t\t\toverride doTransform(List<? extends MutableFieldDeclaration> annotatedTargetFields, extension TransformationContext context) {\n\t\t\t\t\t\tval ctor = annotatedTargetFields.head.declaringType.addConstructor [\n\t\t\t\t\t\t\tprimarySourceElement = declaringType\n\t\t\t\t\t\t\tbody = [\'\'\'\n\t\t\t\t\t\t\t\t«FOR f : annotatedTargetFields»\n\t\t\t\t\t\t\t\t\tthis.«f.simpleName» = \"foo\";\n\t\t\t\t\t\t\t\t«ENDFOR»\n\t\t\t\t\t\t\t\'\'\']\n\t\t\t\t\t\t]\n\t\t\t\t\t\tannotatedTargetFields.forEach [ field |\n\t\t\t\t\t\t\tfield.setFinal(true)\n\t\t\t\t\t\t\tfield.markAsRead\n\t\t\t\t\t\t\tfield.markAsInitializedBy(ctor)\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package myusercode");
     _builder.newLine();
@@ -5128,13 +5133,9 @@ public abstract class AbstractReusableActiveAnnotationTests {
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
-        final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
-        ProblemSupportImpl _problemSupport = it.getProblemSupport();
-        Iterable<? extends MutableFieldDeclaration> _declaredFields = clazz.getDeclaredFields();
-        MutableFieldDeclaration _head = IterableExtensions.head(_declaredFields);
-        List<? extends Problem> _problems = _problemSupport.getProblems(_head);
-        boolean _isEmpty = _problems.isEmpty();
-        Assert.assertTrue(_isEmpty);
+        MutableClassDeclaration _findClass = _typeLookup.findClass("myusercode.MyClass");
+        final JvmGenericType clazz = ((MutableJvmClassDeclarationImpl) _findClass).getDelegate();
+        AbstractReusableActiveAnnotationTests.this.validator.assertNoIssues(clazz);
       }
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);

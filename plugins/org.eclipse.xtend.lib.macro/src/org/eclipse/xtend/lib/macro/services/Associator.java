@@ -2,8 +2,6 @@ package org.eclipse.xtend.lib.macro.services;
 
 import org.eclipse.xtend.lib.macro.declaration.Element;
 import org.eclipse.xtend.lib.macro.declaration.MutableElement;
-import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement;
-import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 
 /**
  * Associates generated Java elements with their source Xtend elements 
@@ -12,13 +10,6 @@ import org.eclipse.xtend.lib.macro.declaration.NamedElement;
  * @see Tracability
  */
 public interface Associator {
-	
-	/**
-	 * @deprecated use {@link #setPrimarySourceElement(MutableElement, Element)}
-	 */
-	@Deprecated
-	void setPrimarySourceElement(MutableNamedElement javaElement, NamedElement sourceElement);
-	
 	/**
 	 * Associates the generate element with the Xtend source code. Every generated element should have
 	 * a source element. This information is used by features like "Go to Declaration" and the outline view.
