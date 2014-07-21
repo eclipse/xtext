@@ -53,6 +53,7 @@ import static org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPacka
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtend.lib.macro.declaration.Modifier
 
 abstract class XtendNamedElementImpl<T extends EObject> extends AbstractNamedElementImpl<T> {
 	
@@ -85,6 +86,10 @@ abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends XtendAn
 	
 	override getVisibility() {
 		compilationUnit.toVisibility(delegate.visibility)
+	}
+	
+	override getModifiers() {
+		delegate.modifiers.map[Modifier.valueOf(toUpperCase)].toSet
 	}
 	
 }
