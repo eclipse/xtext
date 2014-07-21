@@ -103,15 +103,17 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 		}
 
 		if (isShowInherited()) {
-			if (inferredType instanceof JvmGenericType) {
-				JvmTypeReference extendedClass = ((JvmGenericType) inferredType).getExtendedClass();
-				if (extendedClass != null)
-					createInheritedFeatureNodes(parentNode, baseType, processedMembers, inheritanceDepth, extendedClass);
-				for (JvmTypeReference extendedInterface : ((JvmGenericType) inferredType).getExtendedInterfaces()) {
-					createInheritedFeatureNodes(parentNode, baseType, processedMembers, inheritanceDepth,
-							extendedInterface);
-				}
-			}
+			handleInheritedMembers(parentNode, inferredType, baseType, processedMembers, inheritanceDepth);
+		}
+	}
+
+	protected void handleInheritedMembers(IOutlineNode parentNode, JvmDeclaredType inferredType, final JvmDeclaredType baseType,
+			Set<JvmMember> processedMembers, int inheritanceDepth) {
+		JvmTypeReference extendedClass = inferredType.getExtendedClass();
+		if (extendedClass != null)
+			createInheritedFeatureNodes(parentNode, baseType, processedMembers, inheritanceDepth, extendedClass);
+		for (JvmTypeReference extendedInterface : inferredType.getExtendedInterfaces()) {
+			createInheritedFeatureNodes(parentNode, baseType, processedMembers, inheritanceDepth, extendedInterface);
 		}
 	}
 
@@ -236,10 +238,9 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 		if (jvmMember instanceof JvmFeature) {
 			qualifier = jvmMember.getDeclaringType().getIdentifier();
 		} else if (jvmMember instanceof JvmDeclaredType) {
-			((JvmDeclaredType) jvmMember).getPackageName();
-			if (jvmMember.eContainer() instanceof JvmGenericType) {
-				qualifier = ((JvmGenericType) jvmMember.eContainer()).getQualifiedName('.');
-			} else if (jvmMember instanceof JvmDeclaredType) {
+			if (jvmMember.eContainer() instanceof JvmDeclaredType) {
+				qualifier = ((JvmDeclaredType) jvmMember.eContainer()).getQualifiedName('.');
+			} else {
 				qualifier = ((JvmDeclaredType) jvmMember).getPackageName();
 			}
 		}
