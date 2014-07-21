@@ -15,8 +15,6 @@ import org.eclipse.xtend.core.macro.declaration.TracabilityImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
 import org.eclipse.xtend.lib.macro.declaration.Element;
 import org.eclipse.xtend.lib.macro.declaration.MutableElement;
-import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement;
-import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 import org.eclipse.xtend.lib.macro.services.Associator;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 
@@ -26,10 +24,6 @@ public class AssociatorImpl implements Associator {
   
   public AssociatorImpl(final CompilationUnitImpl unit) {
     this.unit = unit;
-  }
-  
-  public void setPrimarySourceElement(final MutableNamedElement javaElement, final NamedElement sourceElement) {
-    this.setPrimarySourceElement(((MutableElement) javaElement), ((Element) sourceElement));
   }
   
   public void setPrimarySourceElement(final MutableElement javaElement, final Element sourceElement) {

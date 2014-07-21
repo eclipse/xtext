@@ -37,7 +37,6 @@ import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclarator;
-import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.services.Problem;
@@ -357,9 +356,9 @@ public abstract class AbstractReusableActiveAnnotationTests {
         TracabilityImpl _tracability = it.getTracability();
         Iterable<? extends MutableTypeParameterDeclaration> _typeParameters = cls.getTypeParameters();
         MutableTypeParameterDeclaration _head = IterableExtensions.head(_typeParameters);
-        final NamedElement typeParameter = _tracability.getPrimarySourceElement(_head);
+        final Element typeParameter = _tracability.getPrimarySourceElement(_head);
         TracabilityImpl _tracability_1 = it.getTracability();
-        NamedElement _primarySourceElement = _tracability_1.getPrimarySourceElement(fooMethod);
+        Element _primarySourceElement = _tracability_1.getPrimarySourceElement(fooMethod);
         Assert.assertEquals(typeParameter, _primarySourceElement);
       }
     };

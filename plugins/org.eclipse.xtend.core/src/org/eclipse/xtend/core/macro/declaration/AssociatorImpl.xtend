@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.macro.declaration
 
-import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement
-import org.eclipse.xtend.lib.macro.declaration.NamedElement
 import org.eclipse.xtend.lib.macro.services.Associator
 import org.eclipse.xtend.lib.macro.declaration.MutableElement
 import org.eclipse.xtend.lib.macro.declaration.Element
@@ -19,10 +17,6 @@ class AssociatorImpl implements Associator {
 	
 	new (CompilationUnitImpl unit) {
 		this.unit = unit
-	}
-	
-	override setPrimarySourceElement(MutableNamedElement javaElement, NamedElement sourceElement) {
-		setPrimarySourceElement(javaElement as MutableElement, sourceElement as Element)
 	}
 	
 	override setPrimarySourceElement(MutableElement javaElement, Element sourceElement) {
