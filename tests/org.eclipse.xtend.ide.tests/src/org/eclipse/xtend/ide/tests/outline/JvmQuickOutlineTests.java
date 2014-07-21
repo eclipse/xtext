@@ -50,6 +50,49 @@ public class JvmQuickOutlineTests extends QuickOutlineTests {
 		checkExtendedMethods(sub2, "Foo2");
 	}
 
+	@Override
+	@Test
+	public void testEnum() throws Exception {
+		setShowInherited(false);
+		super.testEnum();
+		setShowInherited(true);
+		AssertBuilder assertBuilder = newAssertBuilder("enum Foo { BAR, BAZ }");
+		AssertBuilder interfaze = assertBuilder.numChildren(1).child(0, "Foo").numChildren(30);
+		interfaze.child(0, "BAR - Foo").numChildren(0);
+		interfaze.child(1, "BAZ - Foo").numChildren(0);
+		
+		interfaze.nextChild("valueOf(Class<T>, String) <T extends Enum<T>> : T - java.lang.Enum").hasTextRegion(false);
+		interfaze.nextChild("name : String - java.lang.Enum").hasTextRegion(false);
+		interfaze.nextChild("ordinal : int - java.lang.Enum").hasTextRegion(false);
+		interfaze.nextChild("new(String, int) - java.lang.Enum").hasTextRegion(false);
+		interfaze.nextChild("clone() : Object - java.lang.Enum").hasTextRegion(false);
+		interfaze.nextChild("compareTo(E) : int - java.lang.Enum").hasTextRegion(false);
+		interfaze.nextChild("equals(Object) : boolean - java.lang.Enum").hasTextRegion(false);
+		interfaze.nextChild("finalize() : void - java.lang.Enum").hasTextRegion(false);
+		interfaze.nextChild("getDeclaringClass() : Class<E> - java.lang.Enum").hasTextRegion(false);
+		interfaze.nextChild("hashCode() : int - java.lang.Enum").hasTextRegion(false);
+		interfaze.nextChild("name() : String - java.lang.Enum").hasTextRegion(false);
+		interfaze.nextChild("ordinal() : int - java.lang.Enum").hasTextRegion(false);
+		interfaze.nextChild("readObject(ObjectInputStream) : void - java.lang.Enum").hasTextRegion(false);
+		interfaze.nextChild("readObjectNoData() : void - java.lang.Enum").hasTextRegion(false);
+		interfaze.nextChild("toString() : String - java.lang.Enum").hasTextRegion(false);
+		
+		interfaze.nextChild("compareTo(T) : int - java.lang.Comparable").hasTextRegion(false);
+		
+		interfaze.nextChild("registerNatives() : void - java.lang.Object").hasTextRegion(false);
+		interfaze.nextChild("clone() : Object - java.lang.Object").hasTextRegion(false);
+		interfaze.nextChild("equals(Object) : boolean - java.lang.Object").hasTextRegion(false);
+		interfaze.nextChild("finalize() : void - java.lang.Object").hasTextRegion(false);
+		interfaze.nextChild("getClass() : Class<?> - java.lang.Object").hasTextRegion(false);
+		interfaze.nextChild("hashCode() : int - java.lang.Object").hasTextRegion(false);
+		interfaze.nextChild("notify() : void - java.lang.Object").hasTextRegion(false);
+		interfaze.nextChild("notifyAll() : void - java.lang.Object").hasTextRegion(false);
+		interfaze.nextChild("toString() : String - java.lang.Object").hasTextRegion(false);
+		interfaze.nextChild("wait() : void - java.lang.Object").hasTextRegion(false);
+		interfaze.nextChild("wait(long) : void - java.lang.Object").hasTextRegion(false);
+		interfaze.nextChild("wait(long, int) : void - java.lang.Object").hasTextRegion(false);
+	}
+
 	private void checkExtendedMethods(AssertBuilder sub, String parentName) {
 		sub.child(0, "baz : Number - test." + parentName).numChildren(0).hasTextRegion(true);
 		sub.nextChild("bar : String - test.Super").numChildren(0).hasTextRegion(false);
