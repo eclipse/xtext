@@ -59,7 +59,7 @@ public class MarkerIssueProcessor implements IValidationIssueProcessor {
 		} catch (InvocationTargetException e) {
 			log.error("Could not create marker.", e);
 		} catch (InterruptedException e) {
-			log.error("Could not create marker.", e);
+			// cancelled by user; ok
 		}
 	}
 }

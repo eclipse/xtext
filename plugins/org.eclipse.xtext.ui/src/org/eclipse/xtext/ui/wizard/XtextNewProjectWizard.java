@@ -87,7 +87,8 @@ public abstract class XtextNewProjectWizard extends Wizard implements INewWizard
 			logger.error(e.getMessage(), e);
 		}
 		catch (final InterruptedException e) {
-			logger.error(e.getMessage(), e);
+			// cancelled by user, ok
+			return;
 		}
 	}
 

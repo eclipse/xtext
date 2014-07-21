@@ -107,6 +107,8 @@ public class RenameRefactoringExecuter {
 					return;
 				}
 			}
+		} catch (OperationCanceledException e) {
+			throw new InterruptedException();
 		} catch (InvocationTargetException e) {
 			LOG.error(e.getMessage(), e);
 		} finally {

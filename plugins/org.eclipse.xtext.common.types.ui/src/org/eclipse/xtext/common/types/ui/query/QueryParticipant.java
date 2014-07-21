@@ -89,7 +89,7 @@ public class QueryParticipant implements IQueryParticipant {
 						null);
 				wasInterrupted = false;
 			} catch (OperationCanceledException e) {
-				e.printStackTrace();
+				return;
 			} catch (InterruptedException e) {
 				wasInterrupted = true;
 			}

@@ -96,6 +96,9 @@ public class MultiOrganizeImportsHandler extends AbstractHandler {
 							throw new InvocationTargetException(e);
 						}
 					}
+					if (mon.isCanceled()) {
+						throw new InterruptedException();
+					}
 				}
 			};
 			try {

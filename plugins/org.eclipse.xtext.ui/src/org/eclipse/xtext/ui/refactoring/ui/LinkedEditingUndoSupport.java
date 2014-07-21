@@ -76,6 +76,9 @@ public class LinkedEditingUndoSupport {
 				}
 			});
 			syncUtil.waitForReconciler(editor);
+		} catch (InterruptedException e) {
+			// cancelled by user, ok
+			return;
 		} catch (Exception e) {
 			LOG.error(e.getMessage(), e);
 		}
