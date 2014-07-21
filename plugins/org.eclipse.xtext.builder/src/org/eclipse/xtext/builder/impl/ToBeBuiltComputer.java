@@ -246,6 +246,8 @@ public class ToBeBuiltComputer {
 				return true;
 			}
 		});
+		if (progress.isCanceled())
+			throw new OperationCanceledException();
 		contribution.updateProject(toBeBuilt, project, progress.newChild(1));
 		return toBeBuilt;
 	}

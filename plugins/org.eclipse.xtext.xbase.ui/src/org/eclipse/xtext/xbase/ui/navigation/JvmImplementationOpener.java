@@ -153,8 +153,10 @@ public class JvmImplementationOpener {
 									new SubProgressMonitor(monitor, 100));
 
 							if (monitor.isCanceled()) {
-								throw new OperationCanceledException();
+								throw new InterruptedException();
 							}
+						} catch (OperationCanceledException e) {
+							throw new InterruptedException(e.getMessage());
 						} catch (CoreException e) {
 							throw new InvocationTargetException(e);
 						} finally {

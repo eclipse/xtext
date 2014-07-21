@@ -23,6 +23,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
@@ -154,6 +155,8 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 								
 								resourceSet.getResources().clear();
 								resourceSet.eAdapters().clear();
+							} catch (OperationCanceledException e) {
+								throw new InterruptedException();
 							} finally {
 								if (monitor != null)
 									monitor.done();
@@ -163,7 +166,7 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 				} catch (InvocationTargetException e) {
 					log.error(e.getMessage(), e);
 				} catch (InterruptedException e) {
-					log.error(e.getMessage(), e);
+					return Status.CANCEL_STATUS;
 				}
 				return Status.OK_STATUS;
 			}
