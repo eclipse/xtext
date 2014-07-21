@@ -33,7 +33,8 @@ public class XtendOutlineNodeComparator extends SortOutlineContribution.DefaultC
 		if (node instanceof EObjectNode) {
 			EClass eClass = ((EObjectNode) node).getEClass();
 			if (XtendPackage.Literals.XTEND_TYPE_DECLARATION.isSuperTypeOf(eClass)
-					|| TypesPackage.Literals.JVM_DECLARED_TYPE.isSuperTypeOf(eClass))
+					|| TypesPackage.Literals.JVM_DECLARED_TYPE.isSuperTypeOf(eClass)
+					|| TypesPackage.Literals.JVM_ENUMERATION_LITERAL.isSuperTypeOf(eClass))
 				return 20;
 			if (eClass == XtendPackage.Literals.XTEND_FIELD || eClass == TypesPackage.Literals.JVM_FIELD)
 				return isStatic ? 30 : 50;
