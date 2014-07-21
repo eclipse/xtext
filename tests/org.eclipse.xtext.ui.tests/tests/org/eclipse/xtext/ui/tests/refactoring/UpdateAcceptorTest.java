@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.refactoring;
 
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.CompositeChange;
@@ -41,7 +42,7 @@ public class UpdateAcceptorTest extends Assert {
 		updateAcceptor.accept(resourceURI1, new ReplaceEdit(1, 2, "bar"));
 		updateAcceptor.accept(resourceURI0, new ReplaceEdit(3, 4, "baz"));
 
-		Change change = updateAcceptor.createCompositeChange(CHANGE_NAME, null);
+		Change change = updateAcceptor.createCompositeChange(CHANGE_NAME, new NullProgressMonitor());
 		assertTrue(change instanceof CompositeChange);
 		Change[] children = ((CompositeChange) change).getChildren();
 		assertEquals(2, children.length);

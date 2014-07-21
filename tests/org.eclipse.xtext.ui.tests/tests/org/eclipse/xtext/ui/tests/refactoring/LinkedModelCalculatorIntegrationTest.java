@@ -12,6 +12,7 @@ import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -85,7 +86,7 @@ public class LinkedModelCalculatorIntegrationTest extends AbstractEditorTest {
 		IRenameElementContext renameElementContext = new IRenameElementContext.Impl(uri, a.eClass(), editor, editor
 				.getSelectionProvider().getSelection(), uriToFile1);
 		LinkedPositionGroup linkedPositionGroup = linkedModelCalculator.getLinkedPositionGroup(renameElementContext,
-				null).get();
+				new NullProgressMonitor()).get();
 		LinkedPosition[] positions = linkedPositionGroup.getPositions();
 		assertEquals(3, positions.length);
 		int[] offsets = { 0, 10, 24 };
@@ -114,7 +115,7 @@ public class LinkedModelCalculatorIntegrationTest extends AbstractEditorTest {
 		IRenameElementContext renameElementContext = new IRenameElementContext.Impl(uri, a.eClass(), editor, editor
 				.getSelectionProvider().getSelection(), uriToFile2);
 		LinkedPositionGroup linkedPositionGroup = linkedModelCalculator.getLinkedPositionGroup(renameElementContext,
-				null).get();
+				new NullProgressMonitor()).get();
 		LinkedPosition[] positions = linkedPositionGroup.getPositions();
 		assertEquals(2, positions.length);
 

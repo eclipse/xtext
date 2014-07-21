@@ -22,6 +22,7 @@ import org.junit.Test
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import org.eclipse.xtext.junit4.internal.LineDelimiters
+import org.eclipse.core.runtime.NullProgressMonitor
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -48,7 +49,7 @@ class TaskMarkerContributorTest extends AbstractXtextTests {
 				 */
 			'''))
 		val resource = file.resource
-		markerContributor.updateMarkers(file, resource, null)
+		markerContributor.updateMarkers(file, resource, new NullProgressMonitor())
 		val markers = file.findMarkers(TaskMarkerTypeProvider.XTEXT_TASK_TYPE, true, IResource.DEPTH_ZERO)
 
 		assertEquals(2, markers.size)
