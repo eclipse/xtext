@@ -107,6 +107,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
+			forgetLastBuiltState();
 		} finally {
 			if (monitor != null)
 				monitor.done();

@@ -97,7 +97,7 @@ public class ParallelBuilderParticipant extends BuilderParticipant {
 						try {
 							request.procedure.apply();
 						} catch (OperationCanceledException e) {
-							
+							return;
 						} catch (Exception e) {
 							Throwable cause = e;
 							if (cause instanceof CoreException) {

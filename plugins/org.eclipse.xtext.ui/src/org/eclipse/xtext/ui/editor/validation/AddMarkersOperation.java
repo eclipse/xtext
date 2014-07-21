@@ -102,7 +102,7 @@ public class AddMarkersOperation extends WorkspaceModifyOperation {
 			// update
 			for (Issue issue : issues) {
 				if (monitor.isCanceled())
-					return;
+					throw new InterruptedException();
 				markerCreator.createMarker(issue, resource, markerTypeProvider.getMarkerType(issue));
 			}
 		}
