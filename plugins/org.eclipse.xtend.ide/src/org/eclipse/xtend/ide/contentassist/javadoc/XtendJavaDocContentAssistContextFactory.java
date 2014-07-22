@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.contentassist.javadoc;
 
+import java.util.concurrent.ExecutorService;
+
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.xtend.ide.contentassist.antlr.FlexerBasedContentAssistContextFactory;
@@ -29,7 +31,9 @@ public class XtendJavaDocContentAssistContextFactory extends ParserBasedContentA
 	@Override
 	public ContentAssistContext[] create(ITextViewer viewer, int offset, XtextResource resource) {
 		try {
-			return statefulFactoryProvider.get().create(viewer, offset, resource);
+			JavaDocStateFullFactory factory = statefulFactoryProvider.get();
+			factory.setPool(getPool());
+			return factory.create(viewer, offset, resource);
 		} catch (BadLocationException e) {
 			throw new RuntimeException(e);
 		}
@@ -37,6 +41,11 @@ public class XtendJavaDocContentAssistContextFactory extends ParserBasedContentA
 
 	public static class JavaDocStateFullFactory extends FlexerBasedContentAssistContextFactory {
 
+		@Override
+		protected void setPool(ExecutorService pool) {
+			super.setPool(pool);
+		}
+		
 		@Override
 		public String getPrefix(INode node) {
 			if(node != null) {
