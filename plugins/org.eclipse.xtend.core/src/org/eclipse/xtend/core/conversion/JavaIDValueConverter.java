@@ -7,24 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.conversion;
 
-import java.io.StringReader;
-
 import org.antlr.runtime.TokenSource;
-import org.eclipse.xtend.core.parser.antlr.internal.FlexerFactory;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.conversion.ValueConverterWithValueException;
 import org.eclipse.xtext.conversion.impl.IDValueConverter;
 import org.eclipse.xtext.nodemodel.INode;
 
-import com.google.inject.Inject;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class JavaIDValueConverter extends IDValueConverter {
-	
-	@Inject
-	private FlexerFactory flexerFactory;
 	
 	@Override
 	public String toValue(String string, INode node) {
@@ -42,8 +34,26 @@ public class JavaIDValueConverter extends IDValueConverter {
 	}
 	
 	@Override
+	protected void assertValidValue(String value) {
+		super.assertValidValue(value);
+		if (!isValidIdentifierStart(value.charAt(0))) {
+			throw new ValueConverterException(value + " is not a valid identifier.", null, null);
+		}
+		for(int i = 1, length = value.length(); i < length; i++) {
+			if (!isValidIdentifierPart(value.charAt(i))) {
+				throw new ValueConverterException(value + " is not a valid identifier.", null, null);
+			}
+		}
+	}
+	
+	@Override
+	protected void assertTokens(String value, String result) {
+		// ok
+	}
+	
+	@Override
 	protected TokenSource getTokenSource(String escapedValue) {
-		return flexerFactory.createTokenSource(new StringReader(escapedValue));
+		throw new UnsupportedOperationException();
 	}
 	
 	public static boolean isValidIdentifierStart(char c) {
