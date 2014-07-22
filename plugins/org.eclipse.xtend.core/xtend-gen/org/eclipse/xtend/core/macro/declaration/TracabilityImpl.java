@@ -21,7 +21,6 @@ import org.eclipse.xtend.core.macro.declaration.XtendAnnotationReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendNamedElementImpl;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.lib.macro.declaration.Element;
-import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtend.lib.macro.services.Tracability;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -37,32 +36,6 @@ public class TracabilityImpl implements Tracability {
   
   public TracabilityImpl(final CompilationUnitImpl unit) {
     this.unit = unit;
-  }
-  
-  public boolean isExternal(final NamedElement element) {
-    return this.isExternal(((Element) element));
-  }
-  
-  public boolean isGenerated(final NamedElement element) {
-    return this.isGenerated(((Element) element));
-  }
-  
-  public boolean isSource(final NamedElement element) {
-    return this.isSource(((Element) element));
-  }
-  
-  public NamedElement getPrimaryGeneratedJavaElement(final NamedElement source) {
-    Element _primaryGeneratedJavaElement = this.getPrimaryGeneratedJavaElement(((Element) source));
-    return ((NamedElement) _primaryGeneratedJavaElement);
-  }
-  
-  public NamedElement getPrimarySourceElement(final NamedElement target) {
-    Element _primarySourceElement = this.getPrimarySourceElement(((Element) target));
-    return ((NamedElement) _primarySourceElement);
-  }
-  
-  public boolean isThePrimaryGeneratedJavaElement(final NamedElement target) {
-    return this.isThePrimaryGeneratedJavaElement(((Element) target));
   }
   
   public Element getPrimaryGeneratedJavaElement(final Element source) {

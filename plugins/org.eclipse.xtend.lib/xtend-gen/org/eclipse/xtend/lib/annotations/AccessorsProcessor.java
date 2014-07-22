@@ -13,6 +13,7 @@ import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.TransformationParticipant;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTarget;
+import org.eclipse.xtend.lib.macro.declaration.Element;
 import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
@@ -22,7 +23,6 @@ import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 import org.eclipse.xtend.lib.macro.declaration.ResolvedMethod;
 import org.eclipse.xtend.lib.macro.declaration.ResolvedParameter;
 import org.eclipse.xtend.lib.macro.declaration.Type;
@@ -280,7 +280,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
       String _getterName = this.getGetterName(field);
       final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
         public void apply(final MutableMethodDeclaration it) {
-          NamedElement _primarySourceElement = Util.this.context.getPrimarySourceElement(field);
+          Element _primarySourceElement = Util.this.context.getPrimarySourceElement(field);
           Util.this.context.setPrimarySourceElement(it, _primarySourceElement);
           AnnotationReference _newAnnotationReference = Util.this.context.newAnnotationReference(Pure.class);
           it.addAnnotation(_newAnnotationReference);
@@ -478,7 +478,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
       String _setterName = this.getSetterName(field);
       final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
         public void apply(final MutableMethodDeclaration it) {
-          NamedElement _primarySourceElement = Util.this.context.getPrimarySourceElement(field);
+          Element _primarySourceElement = Util.this.context.getPrimarySourceElement(field);
           Util.this.context.setPrimarySourceElement(it, _primarySourceElement);
           TypeReference _primitiveVoid = Util.this.context.getPrimitiveVoid();
           it.setReturnType(_primitiveVoid);

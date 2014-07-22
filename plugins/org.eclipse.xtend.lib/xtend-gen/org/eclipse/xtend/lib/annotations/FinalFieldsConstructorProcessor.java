@@ -18,13 +18,13 @@ import org.eclipse.xtend.lib.macro.TransformationParticipant;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.Element;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableConstructorDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclarator;
-import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ResolvedConstructor;
 import org.eclipse.xtend.lib.macro.declaration.ResolvedParameter;
@@ -102,7 +102,7 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
       if (!_not) {
         _and = false;
       } else {
-        NamedElement _primarySourceElement = this.context.getPrimarySourceElement(it);
+        Element _primarySourceElement = this.context.getPrimarySourceElement(it);
         Iterable<? extends ConstructorDeclaration> _declaredConstructors = ((ClassDeclaration) _primarySourceElement).getDeclaredConstructors();
         boolean _isEmpty = IterableExtensions.isEmpty(_declaredConstructors);
         _and = _isEmpty;
@@ -183,7 +183,7 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
       final Procedure1<MutableConstructorDeclaration> _function = new Procedure1<MutableConstructorDeclaration>() {
         public void apply(final MutableConstructorDeclaration it) {
           MutableTypeDeclaration _declaringType = it.getDeclaringType();
-          NamedElement _primarySourceElement = Util.this.context.getPrimarySourceElement(_declaringType);
+          Element _primarySourceElement = Util.this.context.getPrimarySourceElement(_declaringType);
           Util.this.context.setPrimarySourceElement(it, _primarySourceElement);
           Util.this.makeFinalFieldsConstructor(it);
         }

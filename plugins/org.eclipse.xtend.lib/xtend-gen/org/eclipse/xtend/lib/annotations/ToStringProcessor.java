@@ -10,12 +10,12 @@ import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.Element;
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
@@ -71,7 +71,7 @@ public class ToStringProcessor extends AbstractClassProcessor {
     public void addReflectiveToString(final MutableClassDeclaration cls, final ToStringConfiguration config) {
       final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
         public void apply(final MutableMethodDeclaration it) {
-          NamedElement _primarySourceElement = Util.this.context.getPrimarySourceElement(cls);
+          Element _primarySourceElement = Util.this.context.getPrimarySourceElement(cls);
           Util.this.context.setPrimarySourceElement(it, _primarySourceElement);
           TypeReference _string = Util.this.context.getString();
           it.setReturnType(_string);
@@ -129,7 +129,7 @@ public class ToStringProcessor extends AbstractClassProcessor {
     public void addToString(final MutableClassDeclaration cls, final Iterable<? extends FieldDeclaration> fields, final ToStringConfiguration config) {
       final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
         public void apply(final MutableMethodDeclaration it) {
-          NamedElement _primarySourceElement = Util.this.context.getPrimarySourceElement(cls);
+          Element _primarySourceElement = Util.this.context.getPrimarySourceElement(cls);
           Util.this.context.setPrimarySourceElement(it, _primarySourceElement);
           TypeReference _string = Util.this.context.getString();
           it.setReturnType(_string);

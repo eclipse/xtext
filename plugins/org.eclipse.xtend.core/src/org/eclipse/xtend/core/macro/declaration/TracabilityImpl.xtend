@@ -8,7 +8,6 @@
 package org.eclipse.xtend.core.macro.declaration
 
 import org.eclipse.xtend.lib.macro.declaration.Element
-import org.eclipse.xtend.lib.macro.declaration.NamedElement
 import org.eclipse.xtend.lib.macro.expression.Expression
 import org.eclipse.xtend.lib.macro.services.Tracability
 
@@ -23,30 +22,6 @@ class TracabilityImpl implements Tracability {
 		this.unit = unit
 	}
 	
-	override isExternal(NamedElement element) {
-		isExternal(element as Element)
-	}
-
-	override isGenerated(NamedElement element) {
-		isGenerated(element as Element)
-	}
-
-	override isSource(NamedElement element) {
-		isSource(element as Element)
-	}
-
-	override getPrimaryGeneratedJavaElement(NamedElement source) {
-		getPrimaryGeneratedJavaElement(source as Element) as NamedElement
-	}
-	
-	override getPrimarySourceElement(NamedElement target) {
-		getPrimarySourceElement(target as Element) as NamedElement
-	}
-
-	override isThePrimaryGeneratedJavaElement(NamedElement target) {
-		isThePrimaryGeneratedJavaElement(target as Element)
-	}
-
 	override getPrimaryGeneratedJavaElement(Element source) {
 		if (isSource(source)) {
 			val derivedElement = unit.jvmModelAssociations.getJvmElements((source as AbstractElementImpl<?>).delegate).head

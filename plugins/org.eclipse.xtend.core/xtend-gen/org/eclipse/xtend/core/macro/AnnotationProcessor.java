@@ -24,6 +24,7 @@ import org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant;
 import org.eclipse.xtend.lib.macro.TransformationParticipant;
 import org.eclipse.xtend.lib.macro.ValidationParticipant;
 import org.eclipse.xtend.lib.macro.declaration.Declaration;
+import org.eclipse.xtend.lib.macro.declaration.Element;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement;
 import org.eclipse.xtend.lib.macro.declaration.NamedElement;
@@ -141,7 +142,7 @@ public class AnnotationProcessor {
                         }
                       }
                       final Declaration xtendMember = _switchResult;
-                      NamedElement _primaryGeneratedJavaElement = modifyCtx.getPrimaryGeneratedJavaElement(xtendMember);
+                      Element _primaryGeneratedJavaElement = modifyCtx.getPrimaryGeneratedJavaElement(xtendMember);
                       return ((MutableNamedElement) _primaryGeneratedJavaElement);
                     }
                   };
@@ -204,7 +205,8 @@ public class AnnotationProcessor {
                         }
                       }
                       final Declaration xtendMember = _switchResult;
-                      return validationContext.getPrimaryGeneratedJavaElement(xtendMember);
+                      Element _primaryGeneratedJavaElement = validationContext.getPrimaryGeneratedJavaElement(xtendMember);
+                      return ((NamedElement) _primaryGeneratedJavaElement);
                     }
                   };
                   final List<NamedElement> map = ListExtensions.<XtendAnnotationTarget, NamedElement>map(_annotatedSourceElements, _function);

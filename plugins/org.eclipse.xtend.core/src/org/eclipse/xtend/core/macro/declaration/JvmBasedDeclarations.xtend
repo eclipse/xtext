@@ -1038,10 +1038,6 @@ class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl implements 
 		compilationUnit.readAndWriteTracking.markReadAccess(delegate)
 	}
 	
-	// TODO: remove this method
-	override markAsInitialized() {
-	}
-	
 	override markAsInitializedBy(ConstructorDeclaration constructorDeclaration) {
 		checkMutable
 		val constructor = switch constructorDeclaration {
