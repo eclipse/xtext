@@ -2476,6 +2476,54 @@ abstract class AbstractReusableActiveAnnotationTests {
 		]
 	}
 	
+	@Test def void testMarkReadAndInitialized2() {
+		try {
+			assertProcessing(
+				'myannotation/InitAnnotation.xtend' -> "
+					package myannotation
+					
+					import java.util.List
+					import org.eclipse.xtend.lib.macro.Active
+					import org.eclipse.xtend.lib.macro.TransformationContext
+					import org.eclipse.xtend.lib.macro.TransformationParticipant
+					import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
+					import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+	
+					@Active(InitProcessor)
+					annotation Init { }
+					class InitProcessor implements TransformationParticipant<MutableFieldDeclaration> {
+						
+						override doTransform(List<? extends MutableFieldDeclaration> annotatedTargetFields, extension TransformationContext context) {
+							val ctor = annotatedTargetFields.head.declaringType.addConstructor [
+								primarySourceElement = declaringType
+								body = ['''
+									«FOR f : annotatedTargetFields»
+										this.«f.simpleName» = \"foo\";
+									«ENDFOR»
+								''']
+							]
+							annotatedTargetFields.forEach [ field |
+								field.setFinal(true)
+							]
+						}
+					}
+				",
+				'myusercode/UserCode.xtend' -> '''
+					package myusercode
+					
+					class MyClass {
+						
+						@myannotation.Init String myField
+					}
+				'''
+			) []
+			fail
+		} catch (Throwable t) {
+			assertTrue(t.message,
+				t.message.contains('''myField may not have been initialized'''))
+		}
+	}
+	
 	
 
 	@Test def void testPropertyAnnotation() {
