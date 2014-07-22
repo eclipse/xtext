@@ -27,6 +27,7 @@ import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
+import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
@@ -46,6 +47,7 @@ import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.util.DeprecationUtil;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -187,8 +189,19 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 	protected void highlightDeprecatedXtendAnnotationTarget(IHighlightedPositionAcceptor acceptor, XtendAnnotationTarget target, XAnnotation annotation){
 		JvmType annotationType = annotation.getAnnotationType();
 		if(annotationType != null && !annotationType.eIsProxy() && annotationType instanceof JvmAnnotationType && DeprecationUtil.isDeprecated((JvmAnnotationType) annotationType)){
-			EStructuralFeature nameFeature = target.eClass().getEStructuralFeature("name");
-			highlightFeature(acceptor, target, nameFeature, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
+			if (target instanceof XtendConstructor) {
+				ICompositeNode compositeNode = NodeModelUtils.getNode(target);
+				for(ILeafNode leaf: compositeNode.getLeafNodes()) {
+					if (leaf.getGrammarElement() == xtendGrammarAccess.getMemberAccess().getNewKeyword_2_2_2()) {
+						highlightNode(acceptor, leaf, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
+						highlightNode(acceptor, leaf, DefaultHighlightingConfiguration.KEYWORD_ID);
+						return;
+					}
+				}
+			} else {
+				EStructuralFeature nameFeature = target.eClass().getEStructuralFeature("name");
+				highlightFeature(acceptor, target, nameFeature, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
+			}
 		}
 	}
 
