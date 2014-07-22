@@ -15,6 +15,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.Token;
@@ -70,17 +74,25 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Singleton
 public class ParserBasedContentAssistContextFactory extends AbstractContentAssistContextFactory {
 	
 	private final static Logger log = Logger.getLogger(ParserBasedContentAssistContextFactory.class);
 
 	@Inject
 	private Provider<StatefulFactory> statefulFactoryProvider;
+
+	private ExecutorService pool;
+	
+	public ParserBasedContentAssistContextFactory() {
+		pool = Executors.newFixedThreadPool(3);
+	}
 	
 	public Provider<StatefulFactory> getStatefulFactoryProvider() {
 		return statefulFactoryProvider;
@@ -91,6 +103,8 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 	}
 	
 	public static class StatefulFactory implements Function<ContentAssistContext.Builder, ContentAssistContext> {
+		
+		private ExecutorService pool;
 		
 		/**
 		 * @since 2.5
@@ -210,20 +224,51 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 
 		protected ContentAssistContext[] doCreateContexts(int offset) throws BadLocationException {
 			initializeFromViewerAndResource(offset);
-			
+			List<Future<?>> futures = Lists.newArrayList();
 			if (!datatypeNode.equals(lastCompleteNode)) {
-				handleLastCompleteNodeAsPartOfDatatypeNode();
+				futures.add(pool.submit(new Callable<Void>() {
+					public Void call() throws Exception {
+//						long time = System.currentTimeMillis();
+						handleLastCompleteNodeAsPartOfDatatypeNode();
+//						System.out.println("handleLastCompleteNodeAsPartOfDatatypeNode(); = "
+//								+ (System.currentTimeMillis() - time) + "ms");
+						return null;
+					}
+				}));
 			}
-
 			// 2nd context: we assume, that the current token is incomplete and try to calculate
 			// any valid grammar element by removing the current token and using it as prefix
 			if (datatypeNode.equals(lastCompleteNode) && completionOffset != lastCompleteNode.getOffset()) {
-				handleLastCompleteNodeIsAtEndOfDatatypeNode();
+				futures.add(pool.submit(new Callable<Void>() {
+					public Void call() throws Exception {
+//						long time = System.currentTimeMillis();
+						handleLastCompleteNodeIsAtEndOfDatatypeNode();
+//						System.out.println("handleLastCompleteNodeIsAtEndOfDatatypeNode(); = "
+//								+ (System.currentTimeMillis() - time) + "ms");
+						return null;
+					}
+				}));
 			}
 
 			// 4th context: we assume, that the current position is perfectly ok to insert a new token, if the previous one was valid
 			if (!(lastCompleteNode instanceof ILeafNode) || lastCompleteNode.getGrammarElement() != null) {
-				handleLastCompleteNodeIsPartOfLookahead();
+				futures.add(pool.submit(new Callable<Void>() {
+					public Void call() throws Exception {
+//						long time = System.currentTimeMillis();
+						handleLastCompleteNodeIsPartOfLookahead();
+//						System.out.println("handleLastCompleteNodeIsPartOfLookahead(); = "
+//								+ (System.currentTimeMillis() - time) + "ms");
+						return null;
+					}
+				}));
+			}
+			// wait for all requests to complete
+			for(Future<?> f: futures) {
+				try {
+					f.get();
+				} catch (Exception e) {
+					log.error(e.getMessage(), e);
+				}
 			}
 			return Lists.transform(contextBuilders, this).toArray(new ContentAssistContext[contextBuilders.size()]);
 		}
@@ -231,7 +276,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		protected void initializeFromViewerAndResource(int offset) {
 			initializeAndAdjustCompletionOffset(offset);
 			initializeNodeAndModelData();
-			contextBuilders = Lists.newArrayList();
+			contextBuilders = Collections.synchronizedList(Lists.<ContentAssistContext.Builder>newArrayList());
 		}
 
 		protected void initializeNodeAndModelData() {
@@ -652,7 +697,9 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 
 	public ContentAssistContext[] create(ITextViewer viewer, int offset, XtextResource resource) {
 		try { 
-			return statefulFactoryProvider.get().create(viewer, offset, resource);
+			StatefulFactory factory = statefulFactoryProvider.get();
+			factory.pool = pool;
+			return factory.create(viewer, offset, resource);
 		}
 		catch (BadLocationException e) {
 			throw new RuntimeException(e);
