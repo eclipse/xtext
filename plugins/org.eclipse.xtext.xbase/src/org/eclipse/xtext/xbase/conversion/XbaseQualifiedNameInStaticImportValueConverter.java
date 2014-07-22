@@ -7,9 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.conversion;
 
+import com.google.inject.Singleton;
+
 /**
  * @author Anton Kosyakov - Initial contribution and API
  */
+@Singleton
 public class XbaseQualifiedNameInStaticImportValueConverter extends XbaseQualifiedNameValueConverter {
 	
 	@Override

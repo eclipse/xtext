@@ -40,9 +40,16 @@ public abstract class AbstractLexerBasedConverter<T> extends AbstractValueConver
 	public String toString(T value) {
 		assertValidValue(value);
 		String result = toEscapedString(value);
+		assertTokens(value, result);
+		return result;
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	protected void assertTokens(T value, String result) {
 		TokenSource tokenSource = getTokenSource(result);
 		assertTokens(value, tokenSource, result);
-		return result;
 	}
 
 	protected void assertTokens(T value, TokenSource tokenSource, String escapedString) {
