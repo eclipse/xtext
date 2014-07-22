@@ -467,6 +467,14 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		highlight(model);
 	}
 	
+	@Test public void testDeprecatedContructor_439885() throws Exception {
+		String model = "@Deprecated new(){}";
+		expectAbsolute(model.lastIndexOf("@"), 1, XbaseHighlightingConfiguration.ANNOTATION);
+		expectAbsolute(model.indexOf("Deprecated"), 10,XbaseHighlightingConfiguration.ANNOTATION);
+		expectAbsolute(model.indexOf("new"), 3, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
+		highlight(model);
+	}
+	
 	@Test public void testNotDeprecatedMethodAccess() throws Exception {
 		addImport(DEPRECATED_TEST_CLASS);
 		addImport("com.google.inject.Inject");
