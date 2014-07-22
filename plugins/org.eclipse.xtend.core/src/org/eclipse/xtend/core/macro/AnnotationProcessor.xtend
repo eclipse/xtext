@@ -98,7 +98,7 @@ class AnnotationProcessor {
 								XtendMember : ctx.compilationUnit.toXtendMemberDeclaration(it)
 								XtendParameter : ctx.compilationUnit.toXtendParameterDeclaration(it)
 							}
-							return validationContext.getPrimaryGeneratedJavaElement(xtendMember)
+							return validationContext.getPrimaryGeneratedJavaElement(xtendMember) as NamedElement
 						]
 						processor.doValidate(map, validationContext)
 					]
