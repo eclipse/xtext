@@ -14,6 +14,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.lib.macro.declaration;
 
+import java.util.Set;
+
 import com.google.common.annotations.Beta;
 
 /**
@@ -37,4 +39,11 @@ public interface MemberDeclaration extends Declaration {
 	 * @return the type declaring this member or <code>null</code> if this is a top level element
 	 */
 	TypeDeclaration getDeclaringType();
+	
+	/**
+	 * @return the modifiers of this Xtend element or an empty set of this is a Java element.
+	 * E.g. <code>public val foo = "foo"</code> has the modifiers {@link Modifier#VAL} and {@link Modifier#PUBLIC} 
+	 * @since 2.7
+	 */
+	Set<Modifier> getModifiers();
 }

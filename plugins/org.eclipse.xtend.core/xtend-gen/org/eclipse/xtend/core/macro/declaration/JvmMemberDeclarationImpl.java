@@ -8,12 +8,16 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
+import java.util.Collections;
+import java.util.Set;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationTargetImpl;
+import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.Modifier;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -21,9 +25,10 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.impl.JvmMemberImplCustom;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 
 @SuppressWarnings("all")
-public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotationTargetImpl<T> {
+public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotationTargetImpl<T> implements MemberDeclaration {
   public String getDocComment() {
     T _delegate = this.getDelegate();
     EList<Adapter> _eAdapters = _delegate.eAdapters();
@@ -106,5 +111,9 @@ public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmA
     }
     T _delegate_1 = this.getDelegate();
     _delegate_1.setSimpleName(name);
+  }
+  
+  public Set<Modifier> getModifiers() {
+    return Collections.<Modifier>unmodifiableSet(CollectionLiterals.<Modifier>newHashSet());
   }
 }
