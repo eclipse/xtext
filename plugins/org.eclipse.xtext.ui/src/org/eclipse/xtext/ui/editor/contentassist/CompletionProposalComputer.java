@@ -45,7 +45,7 @@ public class CompletionProposalComputer implements IUnitOfWork<ICompletionPropos
 
 	public ICompletionProposal[] exec(XtextResource resource) throws Exception {
 		ICompletionProposalAcceptor proposalAcceptor = state.decorateAcceptor((ICompletionProposalAcceptor)this);
-		ContentAssistContext[] contexts = state.getContextFactory().create(viewer, offset, resource);
+		ContentAssistContext[] contexts = createContentAssistContexts(resource);
 		for (ContentAssistContext context: contexts) {
 			if (proposalAcceptor.canAcceptMoreProposals())
 				state.getContentProposalProvider().createProposals(context, proposalAcceptor);
@@ -57,6 +57,13 @@ public class CompletionProposalComputer implements IUnitOfWork<ICompletionPropos
 			
 		}
 		return proposals.toArray(new ICompletionProposal[proposals.size()]);
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	protected ContentAssistContext[] createContentAssistContexts(XtextResource resource) {
+		return state.getContextFactory().create(viewer, offset, resource);
 	}
 
 	public void accept(ICompletionProposal proposal) {

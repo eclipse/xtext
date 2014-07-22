@@ -87,9 +87,4 @@ public class XtendValueConverterService extends XbaseValueConverterService {
 		return functionIDConverter;
 	}
 	
-	// overridden to be visible
-	@Override
-	protected IValueConverter<Object> getConverter(String lexerRule) {
-		return super.getConverter(lexerRule);
-	}
 }

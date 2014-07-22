@@ -23,6 +23,7 @@ import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * Resolves a template variable to <code>EClass classes</code> which are visible in the current scope, and are
@@ -32,6 +33,7 @@ import com.google.inject.Inject;
  * @author Michael Clay - Initial contribution and API
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Singleton
 public class CrossReferenceTemplateVariableResolver extends AbstractTemplateVariableResolver {
 	private static final Logger log = Logger.getLogger(CrossReferenceTemplateVariableResolver.class);
 
