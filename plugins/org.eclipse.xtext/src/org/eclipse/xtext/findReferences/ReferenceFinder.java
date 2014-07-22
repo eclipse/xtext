@@ -86,7 +86,7 @@ public class ReferenceFinder implements IReferenceFinder {
 		IResourceDescription resourceDescription = null;
 		if (!targetURIs.getTargetResourceURIs().contains(candidate) && (resourceDescription = descriptions.getResourceDescription(candidate)) != null) {
 			referenceFinder.findReferences(targetURIs, resourceDescription, resourceAccess, acceptor, monitor);
-		} else {
+		} else if (resourceAccess != null) {
 			resourceAccess.readOnly(candidate, new IUnitOfWork.Void<ResourceSet>() {
 				@Override
 				public void process(final ResourceSet state) throws Exception {
