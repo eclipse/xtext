@@ -135,9 +135,9 @@ abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> extends Jv
 
 }
 
-abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotationTargetImpl<T> {
+abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotationTargetImpl<T> implements MemberDeclaration {
 	
-	def getDocComment() {
+	override getDocComment() {
 		val adapter = EcoreUtil.getAdapter(delegate.eAdapters(), DocumentationAdapter) as DocumentationAdapter;
 		return adapter?.getDocumentation();
 	}
@@ -152,7 +152,7 @@ abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotati
 		adapter.setDocumentation(docComment)
 	}
 	
-	def getVisibility() {
+	override getVisibility() {
 		compilationUnit.toVisibility(delegate.visibility)
 	}
 	
@@ -166,7 +166,7 @@ abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotati
 		}
 	}
 	
-	def getDeclaringType() {
+	override getDeclaringType() {
 		compilationUnit.toTypeDeclaration(delegate.declaringType)
 	}
 	
@@ -177,6 +177,10 @@ abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotati
 			JvmMemberImplCustom : clearIdentifierCache
 		}
 		delegate.simpleName = name
+	}
+	
+	override getModifiers() {
+		#{}
 	}
 	
 }
