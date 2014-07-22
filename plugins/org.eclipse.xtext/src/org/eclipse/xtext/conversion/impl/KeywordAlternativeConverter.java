@@ -34,25 +34,48 @@ public class KeywordAlternativeConverter extends AbstractValueConverter<String> 
 	private AbstractRule delegateRule;
 	@Inject
 	private IValueConverterService delegateService;
+	private IValueConverter<Object> delegateConverter;
 
 	public String toValue(String string, INode node) throws ValueConverterException {
 		if (keywords.contains(string))
 			return string;
-		String result = (String) delegateService.toValue(string, delegateRule.getName(), node);
+		String result = (String) getDelegateConverter().toValue(string, node);
 		return result;
 	}
 
 	public String toString(String value) throws ValueConverterException {
 		if (keywords.contains(value))
 			return value;
-		String result = delegateService.toString(value, delegateRule.getName());
+		String result = getDelegateConverter().toString(value);
 		return result;
+	}
+	
+	private IValueConverter<Object> getDelegateConverter() {
+		if (delegateConverter != null) {
+			return delegateConverter;
+		}
+		if (delegateService instanceof IValueConverterService.Introspectable) {
+			return delegateConverter = ((IValueConverterService.Introspectable) delegateService).getConverter(delegateRule.getName());
+		} else {
+			final String ruleName = delegateRule.getName();
+			return delegateConverter = new IValueConverter<Object>() {
+
+				public Object toValue(String string, INode node) throws ValueConverterException {
+					return delegateService.toValue(string, ruleName, node);
+				}
+
+				public String toString(Object value) throws ValueConverterException {
+					return delegateService.toString(value, ruleName);
+				}
+				
+			};
+		}
 	}
 
 	protected String keywordToString(Keyword keyword) {
 		return keyword.getValue();
 	}
-
+	
 	/**
 	 * @throws IllegalArgumentException if the rule is not a datatype rule or does not fulfill
 	 *   the pattern <pre>RuleName: 'keyword' | 'other';</pre>

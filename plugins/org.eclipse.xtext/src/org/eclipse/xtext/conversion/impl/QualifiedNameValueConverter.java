@@ -7,9 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.conversion.impl;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -17,6 +20,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * A value converter for qualified names consisting of segments or wildcard literals separated by namespace delimiters.
@@ -24,10 +28,16 @@ import com.google.inject.Inject;
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
+@Singleton
 public class QualifiedNameValueConverter extends AbstractValueConverter<String> {
 
 	@Inject
 	protected IValueConverterService valueConverterService;
+	
+	/**
+	 * @since 2.7
+	 */
+	protected IValueConverter<Object> delegateConverter;
 
 	/**
 	 * @deprecated use {@link #getStringNamespaceDelimiter()} or {@link #getValueNamespaceDelimiter()}.
@@ -62,19 +72,21 @@ public class QualifiedNameValueConverter extends AbstractValueConverter<String> 
 	}
 
 	public String toString(String value) {
-		StringBuilder buffer = new StringBuilder();
-		boolean isFirst = true;
-		for (String segment : Strings.split(value, getValueNamespaceDelimiter())) {
-			if (!isFirst)
-				buffer.append(getStringNamespaceDelimiter());
-			isFirst = false;
-			if(getWildcardLiteral().equals(segment)) {
-				buffer.append(getWildcardLiteral());
-			} else {
-				buffer.append(delegateToString(segment));
-			}
+		String valueDelimiter = getValueNamespaceDelimiter();
+		List<String> segments = valueDelimiter.length() == 1 ? Strings.split(value, valueDelimiter.charAt(0)) : Strings.split(value, valueDelimiter);
+		int size = segments.size();
+		if (size == 1) {
+			return delegateToString(segments.get(0));
 		}
-		return buffer.toString();
+		StringBuilder result = new StringBuilder(value.length());
+		String delimiterToUse = getStringNamespaceDelimiter();
+		for (int i = 0; i < size; i++) {
+			if (i != 0) {
+				result.append(delimiterToUse);
+			}
+			result.append(delegateToString(segments.get(i)));
+		}
+		return result.toString();
 	}
 
 	public String toValue(String string, INode node) throws ValueConverterException {
@@ -131,12 +143,37 @@ public class QualifiedNameValueConverter extends AbstractValueConverter<String> 
 		return fullWildcardLiteral;
 	}
 	
+	private IValueConverter<Object> initializeDelegateConverter() {
+		if (valueConverterService instanceof IValueConverterService.Introspectable) {
+			return delegateConverter = ((IValueConverterService.Introspectable) valueConverterService).getConverter(getDelegateRuleName());
+		} else {
+			final String ruleName = getDelegateRuleName();
+			return delegateConverter = new IValueConverter<Object>() {
+
+				public Object toValue(String string, INode node) throws ValueConverterException {
+					return valueConverterService.toValue(string, ruleName, node);
+				}
+
+				public String toString(Object value) throws ValueConverterException {
+					return valueConverterService.toString(value, ruleName);
+				}
+				
+			};
+		}
+	}
+	
 	protected String delegateToString(String segment) {
-		return valueConverterService.toString(segment, getDelegateRuleName());
+		if (delegateConverter == null) {
+			return initializeDelegateConverter().toString(segment);
+		}
+		return delegateConverter.toString(segment);
 	}
 
 	protected String delegateToValue(ILeafNode leafNode) {
-		return (String) valueConverterService.toValue(leafNode.getText(), getDelegateRuleName(), leafNode);
+		if (delegateConverter == null) {
+			return (String) initializeDelegateConverter().toValue(leafNode.getText(), leafNode);
+		}
+		return (String) delegateConverter.toValue(leafNode.getText(), leafNode);
 	}
 
 }

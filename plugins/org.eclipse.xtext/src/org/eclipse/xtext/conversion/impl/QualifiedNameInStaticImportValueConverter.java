@@ -7,10 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.conversion.impl;
 
+import com.google.inject.Singleton;
+
 /**
  * @author Anton Kosyakov - Initial contribution and API
  * @since 2.6
  */
+@Singleton
 public class QualifiedNameInStaticImportValueConverter extends QualifiedNameValueConverter {
 	
 	@Override

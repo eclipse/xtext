@@ -21,5 +21,15 @@ public interface IValueConverterService {
 	Object toValue(String string, String lexerRule, INode node) throws ValueConverterException;
 
 	String toString(Object value, String lexerRule);
+	
+	/**
+	 * Extension interface to the value converter service. Clients that need to access
+	 * the very same value converter very often, may obtain it and cache it locally.
+	 * 
+	 * @since 2.7
+	 */
+	interface Introspectable {
+		IValueConverter<Object> getConverter(String lexerRule);
+	}
 
 }
