@@ -166,6 +166,13 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor, Com
 	public ICompletionProposalPostProcessor getCompletionProposalPostProcessor() {
 		return completionProposalPostProcessor;
 	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public ICompletionProposalComparator getCompletionProposalComparator() {
+		return completionProposalComparator;
+	}
 
 }
 

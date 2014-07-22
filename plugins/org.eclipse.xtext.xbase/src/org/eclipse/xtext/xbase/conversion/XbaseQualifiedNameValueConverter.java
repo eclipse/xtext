@@ -14,9 +14,12 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.util.Strings;
 
+import com.google.inject.Singleton;
+
 /**
  * @author Holger Schill - Initial contribution and API
  */
+@Singleton
 public class XbaseQualifiedNameValueConverter extends QualifiedNameValueConverter {
 	
 	@Override

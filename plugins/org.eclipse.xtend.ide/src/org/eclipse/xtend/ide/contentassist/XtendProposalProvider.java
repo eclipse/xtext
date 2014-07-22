@@ -54,6 +54,7 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
@@ -77,39 +78,41 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	@Override
 	public void completeMember_Name(final EObject model, Assignment assignment, final ContentAssistContext context,
 			final ICompletionProposalAcceptor acceptor) {
-		EObject previousModel = context.getPreviousModel();
-		if (previousModel instanceof XExpression) {
-			if (!(previousModel instanceof XBlockExpression)) {
-				return;
+		if (announceProcessing(Lists.newArrayList("completeMember_Name", model, assignment.getFeature()))) {
+			EObject previousModel = context.getPreviousModel();
+			if (previousModel instanceof XExpression) {
+				if (!(previousModel instanceof XBlockExpression)) {
+					return;
+				}
 			}
-		}
-		if (model instanceof XtendField) {
-			//TODO go up type hierarchy and collect all local fields
-			final List<XtendField> siblings = EcoreUtil2.getSiblingsOfType(model, XtendField.class);
-			Set<String> alreadyTaken = Sets.newHashSet();
-			for(XtendField sibling: siblings) {
-				alreadyTaken.add(sibling.getName());
+			if (model instanceof XtendField) {
+				//TODO go up type hierarchy and collect all local fields
+				final List<XtendField> siblings = EcoreUtil2.getSiblingsOfType(model, XtendField.class);
+				Set<String> alreadyTaken = Sets.newHashSet();
+				for(XtendField sibling: siblings) {
+					alreadyTaken.add(sibling.getName());
+				}
+				alreadyTaken.addAll(getAllKeywords());
+				completions.getVariableProposals(model, XtendPackage.Literals.XTEND_FIELD__TYPE,
+						VariableType.INSTANCE_FIELD, alreadyTaken, new JdtVariableCompletions.CompletionDataAcceptor() {
+							public void accept(String replaceText, StyledString label, Image img) {
+								acceptor.accept(createCompletionProposal(replaceText, label, img, context));
+							}
+						});
+			} else if (model instanceof XtendFunction) {
+				for(QualifiedName operator: operatorMapping.getOperators()) {
+					StyledString displayString = new StyledString(operator.getFirstSegment());
+					displayString.append(" " + operatorMapping.getMethodName(operator), StyledString.DECORATIONS_STYLER);
+					acceptor.accept(createCompletionProposal(
+							operator.getFirstSegment(),
+							displayString,
+							getImage(model),
+							context));
+				}
+				super.completeMember_Name(model, assignment, context, acceptor);
+			} else {
+				super.completeMember_Name(model, assignment, context, acceptor);
 			}
-			alreadyTaken.addAll(getAllKeywords());
-			completions.getVariableProposals(model, XtendPackage.Literals.XTEND_FIELD__TYPE,
-					VariableType.INSTANCE_FIELD, alreadyTaken, new JdtVariableCompletions.CompletionDataAcceptor() {
-						public void accept(String replaceText, StyledString label, Image img) {
-							acceptor.accept(createCompletionProposal(replaceText, label, img, context));
-						}
-					});
-		} else if (model instanceof XtendFunction) {
-			for(QualifiedName operator: operatorMapping.getOperators()) {
-				StyledString displayString = new StyledString(operator.getFirstSegment());
-				displayString.append(" " + operatorMapping.getMethodName(operator), StyledString.DECORATIONS_STYLER);
-				acceptor.accept(createCompletionProposal(
-						operator.getFirstSegment(),
-						displayString,
-						getImage(model),
-						context));
-			}
-			super.completeMember_Name(model, assignment, context, acceptor);
-		} else {
-			super.completeMember_Name(model, assignment, context, acceptor);
 		}
 	}
 	
@@ -153,21 +156,23 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	@Override
 	public void completeMember_Type(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		if (model instanceof XtendField) {
-			XtendField field = (XtendField) model;
-			if(!field.getModifiers().isEmpty()) {
-				// don't propose types everywhere but only if there's already an indicator for fields, e.g. static, extension, var, val
-				if (field.getName() != null) {
-					List<INode> nameNodes = NodeModelUtils.findNodesForFeature(model, XtendPackage.Literals.XTEND_FIELD__NAME);
-					if (nameNodes.size() == 1) {
-						INode node = nameNodes.get(0);
-						if (node.getOffset() < context.getOffset()) {
-							return;
+		if (announceProcessing(Lists.newArrayList("completeMember_Type", model, assignment.getFeature()))) {
+			if (model instanceof XtendField) {
+				XtendField field = (XtendField) model;
+				if(!field.getModifiers().isEmpty()) {
+					// don't propose types everywhere but only if there's already an indicator for fields, e.g. static, extension, var, val
+					if (field.getName() != null) {
+						List<INode> nameNodes = NodeModelUtils.findNodesForFeature(model, XtendPackage.Literals.XTEND_FIELD__NAME);
+						if (nameNodes.size() == 1) {
+							INode node = nameNodes.get(0);
+							if (node.getOffset() < context.getOffset()) {
+								return;
+							}
 						}
 					}
+					completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true,
+							getQualifiedNameValueConverter(), createVisibilityFilter(context), acceptor);
 				}
-				completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true,
-						getQualifiedNameValueConverter(), createVisibilityFilter(context), acceptor);
 			}
 		}
 	}

@@ -734,7 +734,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 								String alternative = converter.toString(otherName);
 								if (delegateMatcher.isCandidateMatchingPrefix(alternative, prefix))
 									return true;
-								String convertedAlternative = getValueConverter().toString(alternative, ruleName);
+								String convertedAlternative = valueConverter != null ? valueConverter.toString(alternative) : getValueConverter().toString(alternative, ruleName);
 								if (!convertedAlternative.equals(alternative) && 
 										delegateMatcher.isCandidateMatchingPrefix(convertedAlternative, prefix)) {
 									return true;
@@ -747,7 +747,14 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 				if (myCandidate instanceof IIdentifiableElementDescription && (isIdRule(ruleName))) {
 					ICompletionProposal result = null;
 					String proposal = getQualifiedNameConverter().toString(myCandidate.getName());
-					if (ruleName != null) {
+					if (valueConverter != null) {
+						try {
+							proposal = getValueConverter().toString(proposal, ruleName);
+						} catch (ValueConverterException e) {
+							log.debug(e.getMessage(), e);
+							return null;
+						}
+					} else if (ruleName != null) {
 						try {
 							proposal = getValueConverter().toString(proposal, ruleName);
 						} catch (ValueConverterException e) {
