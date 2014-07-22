@@ -24,6 +24,7 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.link.LinkedPosition;
@@ -31,12 +32,14 @@ import org.eclipse.jface.text.link.LinkedPositionGroup;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
+import org.eclipse.xtext.findReferences.IReferenceFinder;
 import org.eclipse.xtext.resource.IGlobalServiceProvider;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.impl.DefaultReferenceDescription;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
 import org.eclipse.xtext.ui.editor.findrefs.SimpleLocalResourceAccess;
+import org.eclipse.xtext.ui.editor.findrefs.TargetURIConverter;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
@@ -89,6 +92,9 @@ public class DefaultLinkedPositionGroupCalculator implements ILinkedPositionGrou
 
 	@Inject
 	private IReferenceUpdater referenceUpdater;
+	
+	@Inject
+	private TargetURIConverter targetURIConverter;
 
 	@Inject
 	private Provider<LocalResourceRefactoringUpdateAcceptor> updateAcceptorProvider;
@@ -146,18 +152,21 @@ public class DefaultLinkedPositionGroupCalculator implements ILinkedPositionGrou
 		ElementRenameArguments elementRenameArguments = new ElementRenameArguments(
 				renameElementContext.getTargetElementURI(), newName, renameStrategy, original2newEObjectURI, resourceSetProvider);
 		final List<IReferenceDescription> referenceDescriptions = newArrayList();
-		IAcceptor<IReferenceDescription> referenceAcceptor = new IAcceptor<IReferenceDescription>() {
+		IReferenceFinder.Acceptor referenceAcceptor = new IReferenceFinder.Acceptor() {
 			public void accept(IReferenceDescription referenceDescription) {
 				referenceDescriptions.add(referenceDescription);
+			}
+			public void accept(EObject source, URI sourceURI, EReference eReference, int index, EObject targetOrProxy,
+					URI targetURI) {
+				referenceDescriptions.add(new DefaultReferenceDescription(sourceURI, targetURI, eReference, index, null));
 			}
 		};
 		if (monitor.isCanceled()) {
 			throw new OperationCanceledException();
 		}
 		referenceFinder.findReferences(
-				elementRenameArguments.getRenamedElementURIs(),
-				singleton(renameElementContext.getContextResourceURI()),
-				new SimpleLocalResourceAccess(resourceSet),
+				targetURIConverter.fromIterable(elementRenameArguments.getRenamedElementURIs()),
+				resourceSet.getResource(renameElementContext.getContextResourceURI(), true),
 				referenceAcceptor, progress.newChild(10));
 		if (monitor.isCanceled()) {
 			throw new OperationCanceledException();

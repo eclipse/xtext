@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
@@ -33,13 +34,11 @@ import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.impl.DefaultReferenceDescription;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
-import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -84,6 +83,12 @@ public class DefaultOccurrenceComputer implements IOccurrenceComputer {
 			LOG.error("Error creating occurrence annotation", e);
 		}
 	}
+	
+	private static class EObjectReferenceAndIndex {
+		EObject source;
+		EReference reference;
+		int idx;
+	}
 
 	public Map<Annotation, Position> createAnnotationMap(XtextEditor editor, final ITextSelection selection,
 			final SubMonitor monitor) {
@@ -97,15 +102,19 @@ public class DefaultOccurrenceComputer implements IOccurrenceComputer {
 					if(resource != null) {
 						EObject target = eObjectAtOffsetHelper.resolveElementAt(resource, selection.getOffset());
 						if (target != null && ! target.eIsProxy()) {
-							final List<IReferenceDescription> references = newArrayList();
+							final List<EObjectReferenceAndIndex> references = newArrayList();
 							IReferenceFinder.Acceptor acceptor = new IReferenceFinder.Acceptor() {
 								public void accept(IReferenceDescription reference) {
-									references.add(reference);
+									throw new UnsupportedOperationException("Local references are announced per object");
 								}
 
 								public void accept(EObject source, URI sourceURI, EReference eReference, int index,
-										URI targetURI) {
-									references.add(new DefaultReferenceDescription(sourceURI, targetURI, eReference, index, null));
+										EObject targetOrProxy, URI targetURI) {
+									EObjectReferenceAndIndex acceptMe = new EObjectReferenceAndIndex();
+									acceptMe.source = source;
+									acceptMe.reference = eReference;
+									acceptMe.idx = index;
+									references.add(acceptMe);
 								}
 							};
 							Iterable<URI> targetURIs = getTargetURIs(target);
@@ -114,12 +123,13 @@ public class DefaultOccurrenceComputer implements IOccurrenceComputer {
 								result.addAllURIs(targetURIs);
 								targetURIs = result;
 							}
-							referenceFinder.findReferences((TargetURIs) getTargetURIs(target), resource, acceptor, new NullProgressMonitor() {
+							IProgressMonitor localMonitor = new NullProgressMonitor() {
 								@Override
 								public boolean isCanceled() {
 									return monitor.isCanceled() || cancelIndicator.isCanceled();
 								}
-							});
+							};
+							referenceFinder.findReferences((TargetURIs) targetURIs, resource, acceptor, localMonitor);
 							if (monitor.isCanceled() || cancelIndicator.isCanceled())
 								return emptyMap();
 							Map<Annotation, Position> result = newHashMapWithExpectedSize(references.size() + 1);
@@ -129,14 +139,14 @@ public class DefaultOccurrenceComputer implements IOccurrenceComputer {
 									addOccurrenceAnnotation(DECLARATION_ANNOTATION_TYPE, document, declarationRegion, result);
 								}
 							}
-							for (IReferenceDescription reference : references) {
+							for (EObjectReferenceAndIndex highlightMe : references) {
 								try {
-									EObject source = resource.getEObject(reference.getSourceEObjectUri().fragment());
-									if (source != null && reference.getEReference() != null) { // prevent exception for outdated data
-										ITextRegion textRegion = locationInFileProvider.getSignificantTextRegion(source,
-												reference.getEReference(), reference.getIndexInList());
-										addOccurrenceAnnotation(OCCURRENCE_ANNOTATION_TYPE, document, textRegion, result);
+									if (localMonitor.isCanceled()) {
+										return emptyMap();
 									}
+									ITextRegion textRegion = locationInFileProvider.getSignificantTextRegion(highlightMe.source,
+											highlightMe.reference, highlightMe.idx);
+									addOccurrenceAnnotation(OCCURRENCE_ANNOTATION_TYPE, document, textRegion, result);
 								} catch(Exception exc) {
 									// outdated index information. Ignore
 								}

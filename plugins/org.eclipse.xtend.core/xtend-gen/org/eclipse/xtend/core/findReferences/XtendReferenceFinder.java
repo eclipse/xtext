@@ -199,7 +199,7 @@ public class XtendReferenceFinder extends ReferenceFinder {
     boolean _contains = targetURISet.contains(candidateURI);
     if (_contains) {
       final URI sourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(sourceElement);
-      acceptor.accept(sourceElement, sourceURI, reference, (-1), candidateURI);
+      acceptor.accept(sourceElement, sourceURI, reference, (-1), candidate, candidateURI);
     }
   }
 }

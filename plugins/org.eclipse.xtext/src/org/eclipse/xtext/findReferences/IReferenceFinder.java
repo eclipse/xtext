@@ -55,7 +55,7 @@ public interface IReferenceFinder {
 	 */
 	interface Acceptor {
 		
-		void accept(EObject source, URI sourceURI, EReference eReference, int index, URI targetURI);
+		void accept(EObject source, URI sourceURI, EReference eReference, int index, EObject targetOrProxy, URI targetURI);
 		
 		void accept(IReferenceDescription description);
 		
