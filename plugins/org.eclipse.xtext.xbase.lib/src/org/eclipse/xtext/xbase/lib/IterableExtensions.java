@@ -709,11 +709,13 @@ public class IterableExtensions {
 	}
 
 	/**
-	 * Returns an Iterable of Pairs where the nth pair is created by taking the nth element of the source as the value its 0-based index as the key. 
-	 *  E.g. <code>zipWitIndex(#["a", "b", "c"]) == #[(0, "a"), (1, "b"), (2, "c")]</code>
+	 * Returns an Iterable of Pairs where the nth pair is created by taking the nth element of the source as the value
+	 * its 0-based index as the key. E.g. <code>zipWitIndex(#["a", "b", "c"]) == #[(0, "a"), (1, "b"), (2, "c")]</code>
 	 * 
-	 * The resulting Iterable is a lazily computed view, so any modifications to the
-	 * underlying Iterable will be reflected on iteration. The result's Iterator does not support {@link Iterator#remove()}
+	 * If the index would overflow, {@link Integer#MAX_VALUE} is returned for all subsequent elements.
+	 * 
+	 * The resulting Iterable is a lazily computed view, so any modifications to the underlying Iterable will be
+	 * reflected on iteration. The result's Iterator does not support {@link Iterator#remove()}
 	 * 
 	 * @param iterable
 	 *            the elements. May not be <code>null</code>.
