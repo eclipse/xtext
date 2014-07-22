@@ -43,7 +43,7 @@ import com.google.inject.Inject;
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-public abstract class AbstractDeclarativeValueConverterService extends AbstractValueConverterService {
+public abstract class AbstractDeclarativeValueConverterService extends AbstractValueConverterService implements IValueConverterService.Introspectable {
 
 	private static final Logger log = Logger.getLogger(AbstractDeclarativeValueConverterService.class);
 
@@ -72,8 +72,11 @@ public abstract class AbstractDeclarativeValueConverterService extends AbstractV
 		return getConverter(lexerRule).toValue(string, node);
 	}
 
+	/**
+	 * @since 2.7
+	 */
 	@SuppressWarnings("unchecked")
-	protected IValueConverter<Object> getConverter(String lexerRule) {
+	public IValueConverter<Object> getConverter(String lexerRule) {
 		Map<String, IValueConverter<Object>> map = getConverters();
 		if (map.containsKey(lexerRule)) {
 			return map.get(lexerRule);

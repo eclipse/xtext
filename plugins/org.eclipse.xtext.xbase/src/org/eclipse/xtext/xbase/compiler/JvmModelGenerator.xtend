@@ -568,7 +568,7 @@ class JvmModelGenerator implements IGenerator {
 				(parameterType as JvmGenericArrayTypeReference).componentType.serializeSafely("Object", tracedAppendable)
 			}
 			tracedAppendable.append("...")
-		} else {
+		} else if (parameterType != null) {
 			parameterType.serializeSafely("Object", tracedAppendable)
 		}
 		tracedAppendable.append(" ")
