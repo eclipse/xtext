@@ -317,6 +317,9 @@ public class XtextReconciler extends Job implements IReconciler {
 		if (monitor.isCanceled() || paused)
 			return Status.CANCEL_STATUS;
 
+		if (pendingChanges.isEmpty()) {
+			return Status.OK_STATUS;
+		}
 		long start = System.currentTimeMillis();
 		final IXtextDocument document = XtextDocumentUtil.get(textViewer);
 		if (document instanceof XtextDocument) {
