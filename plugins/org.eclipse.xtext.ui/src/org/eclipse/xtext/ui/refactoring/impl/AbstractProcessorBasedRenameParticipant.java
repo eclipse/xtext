@@ -84,7 +84,7 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 		try {
 			wrappedProcessors = getRenameProcessors(originalTargetElement);
 			if(wrappedProcessors != null) {
-				syncUtil.totalSync(preferences.isSaveAllBeforeRefactoring());
+				syncUtil.totalSync(preferences.isSaveAllBeforeRefactoring(), true, false);
 				return true;
 			}
 		} catch (InterruptedException e) {

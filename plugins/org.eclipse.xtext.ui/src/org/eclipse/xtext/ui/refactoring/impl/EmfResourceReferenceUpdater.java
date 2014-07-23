@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.refactoring.impl;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
@@ -45,17 +46,20 @@ public class EmfResourceReferenceUpdater extends AbstractReferenceUpdater {
 		for (URI referringResourceURI : resource2references.keySet()) {
 			try {
 				if (monitor.isCanceled())
-					break;
+					throw new OperationCanceledException();
 				Resource referringResource = resourceSet.getResource(referringResourceURI, false);
 				EObject refactoredElement = resourceSet.getEObject(elementRenameArguments.getNewElementURI(elementRenameArguments.getTargetElementURI()), true);
-				if(refactoredElement != null && refactoredElement instanceof EClassifier){
-					for(IReferenceDescription reference : resource2references.get(referringResourceURI)){
-						EObject referringEReference = referringResource.getEObject(reference.getSourceEObjectUri().fragment()).eContainer();
-						if(referringEReference != null && referringEReference instanceof EReference)
-						((EReference)referringEReference).setEType((EClassifier)refactoredElement);
+				if (refactoredElement instanceof EClassifier && referringResource != refactoredElement.eResource()) {
+					for (IReferenceDescription reference : resource2references.get(referringResourceURI)) {
+						EObject referringEReference = referringResource.getEObject(
+								reference.getSourceEObjectUri().fragment()).eContainer();
+						if (referringEReference != null && referringEReference instanceof EReference)
+							((EReference) referringEReference).setEType((EClassifier) refactoredElement);
 					}
+					changeUtil.addSaveAsUpdate(referringResource, updateAcceptor);
 				}
-				changeUtil.addSaveAsUpdate(referringResource, updateAcceptor);
+			} catch (OperationCanceledException e) {
+				throw e;
 			} catch (Exception exc) {
 				throw new WrappedException(exc);
 			}
