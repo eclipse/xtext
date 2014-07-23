@@ -136,11 +136,12 @@ class QuickfixTestBuilder {
 	}
 	
 	def protected openEditorSafely(IFile file) throws Exception {
-		waitForBuild(new NullProgressMonitor)
-		yieldToQueuedDisplayJobs(null)
+		val monitor = new NullProgressMonitor
+		waitForBuild(monitor)
+		yieldToQueuedDisplayJobs(monitor)
 		var editor = openEditor(file)
 		waitForReconciler(editor)
-		yieldToQueuedDisplayJobs(null)
+		yieldToQueuedDisplayJobs(monitor)
 		editor
 	}
 	
