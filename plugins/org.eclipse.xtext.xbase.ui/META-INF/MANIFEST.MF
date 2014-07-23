@@ -63,5 +63,6 @@ Export-Package: org.eclipse.xtext.xbase.annotations.ui;x-internal:=true,
  org.eclipse.xtext.xbase.ui.quickfix;x-internal:=true,
  org.eclipse.xtext.xbase.ui.refactoring;x-internal:=true,
  org.eclipse.xtext.xbase.ui.syntaxcoloring;x-internal:=true,
+ org.eclipse.xtext.xbase.ui.templates;x-internal:=true,
  org.eclipse.xtext.xbase.ui.validation;x-internal:=true
 Bundle-Localization: plugin

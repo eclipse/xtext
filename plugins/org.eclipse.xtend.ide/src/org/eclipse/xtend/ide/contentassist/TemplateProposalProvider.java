@@ -14,14 +14,14 @@ import org.eclipse.jface.text.templates.Template;
 import org.eclipse.jface.text.templates.persistence.TemplateStore;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.ui.editor.templates.ContextTypeIdHelper;
-import org.eclipse.xtext.ui.editor.templates.DefaultTemplateProposalProvider;
+import org.eclipse.xtext.xbase.ui.templates.XbaseTemplateProposalProvider;
 
 import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class TemplateProposalProvider extends DefaultTemplateProposalProvider {
+public class TemplateProposalProvider extends XbaseTemplateProposalProvider {
 
 	@Inject
 	public TemplateProposalProvider(TemplateStore templateStore, ContextTypeRegistry registry,

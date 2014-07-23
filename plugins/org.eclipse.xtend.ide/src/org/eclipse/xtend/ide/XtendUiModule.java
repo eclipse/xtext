@@ -30,6 +30,7 @@ import org.eclipse.xtend.ide.contentassist.antlr.DisabledInternalLexer;
 import org.eclipse.xtend.ide.contentassist.antlr.FlexProposalConflictHelper;
 import org.eclipse.xtend.ide.contentassist.antlr.FlexerBasedContentAssistContextFactory;
 import org.eclipse.xtend.ide.contentassist.antlr.FlexerBasedContentAssistParser;
+import org.eclipse.xtend.ide.contentassist.antlr.FlexerBasedPartialXtendContentAssistParser;
 import org.eclipse.xtend.ide.contentassist.antlr.internal.InternalXtendLexer;
 import org.eclipse.xtend.ide.editor.InitiallyCollapsableAwareFoldingStructureProvider;
 import org.eclipse.xtend.ide.editor.OccurrenceComputer;
@@ -89,6 +90,7 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.ui.LexerUIBindings;
 import org.eclipse.xtext.ui.codetemplates.ui.highlighting.TemplateBodyHighlighter;
+import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.IPartialContentAssistParser;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
@@ -132,6 +134,7 @@ import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.eclipse.xtext.ui.editor.templates.XtextTemplateContextType;
 import org.eclipse.xtext.ui.editor.toggleComments.ISingleLineCommentHelper;
 import org.eclipse.xtext.ui.editor.toggleComments.ToggleSLCommentAction;
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
@@ -154,6 +157,7 @@ import org.eclipse.xtext.xbase.ui.hover.XbaseDeclarativeHoverSignatureProvider;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JdtRenameRefactoringParticipantProcessor;
 import org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixes;
 import org.eclipse.xtext.xbase.ui.refactoring.ExpressionUtil;
+import org.eclipse.xtext.xbase.ui.templates.XbaseTemplateContextType;
 import org.eclipse.xtext.xbase.ui.validation.XbaseIssueSeveritiesProvider;
 
 import com.google.inject.Binder;
@@ -543,4 +547,14 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	public Class<? extends ResourceChangeRegistry> bindResourceChangeRegistry() {
 		return UIResourceChangeRegistry.class;
 	}
+	
+	@Override
+	public Class<? extends  IPartialContentAssistParser> bindIPartialContentAssistParser() {
+		return FlexerBasedPartialXtendContentAssistParser.class;
+	}
+	
+	public Class<? extends  XtextTemplateContextType> bindXtextTemplateContextType() {
+		return XbaseTemplateContextType.class;
+	}
+
 }

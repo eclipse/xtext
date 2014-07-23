@@ -29,6 +29,9 @@ public class InspectableTemplateVariableResolverRegistry {
 		if ("Enum".equals(resolver.getType())) {
 			return new InspectableEnumVariableResolver((EnumTemplateVariableResolver) resolver);
 		}
+		if ("Import".equals(resolver.getType())) {
+			return new InspectableImportsVariableResolver(resolver);
+		}
 		return null;
 	}
 	
