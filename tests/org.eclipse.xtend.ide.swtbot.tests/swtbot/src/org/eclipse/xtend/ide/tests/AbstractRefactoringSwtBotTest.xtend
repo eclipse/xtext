@@ -90,7 +90,7 @@ abstract class AbstractRefactoringSwtBotTest {
 	}	
 	
 	def renameInXtendEditor(SWTBotEclipseEditor xtendEditor, String newName, String dialogName) {
-		val renameMenuItem = xtendEditor.clickableContextMenu('Rename Element')
+		val renameMenuItem = xtendEditor.clickableContextMenu('Refactor','Rename Element')
 		renameMenuItem.click
 		if(testParams.useInlineRefactoring) {
 			waitForLinkedMode
