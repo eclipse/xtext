@@ -119,7 +119,7 @@ public abstract class AbstractRefactoringSwtBotTest {
   }
   
   public void renameInXtendEditor(final SWTBotEclipseEditor xtendEditor, final String newName, final String dialogName) {
-    final SWTBotMenu renameMenuItem = SwtBotProjectHelper.clickableContextMenu(xtendEditor, "Rename Element");
+    final SWTBotMenu renameMenuItem = SwtBotProjectHelper.clickableContextMenu(xtendEditor, "Refactor", "Rename Element");
     renameMenuItem.click();
     boolean _isUseInlineRefactoring = this.testParams.isUseInlineRefactoring();
     if (_isUseInlineRefactoring) {
