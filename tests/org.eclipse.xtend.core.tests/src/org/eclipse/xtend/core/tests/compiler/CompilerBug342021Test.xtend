@@ -19,7 +19,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 		assertCompilesTo('''
 			class C {
 				def Iterable<Object> m(String s) {
-					if (true) 
+					if ("".equals("")) 
 						[|<Object>newArrayList().iterator]
 					else
 						newArrayList(s).toArray
@@ -35,7 +35,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public Iterable<Object> m(final String s) {
 			    Iterable<Object> _xifexpression = null;
-			    if (true) {
+			    boolean _equals = "".equals("");
+			    if (_equals) {
 			      final Iterable<Object> _function = new Iterable<Object>() {
 			        public Iterator<Object> iterator() {
 			          ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
@@ -58,7 +59,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 		assertCompilesTo('''
 			class C {
 				def Iterable<Object> m() {
-					return if (true) 
+					return if ("".equals("")) 
 						[|<Object>newArrayList().iterator]
 					else
 						newArrayList('').toArray
@@ -74,7 +75,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public Iterable<Object> m() {
 			    Iterable<Object> _xifexpression = null;
-			    if (true) {
+			    boolean _equals = "".equals("");
+			    if (_equals) {
 			      final Iterable<Object> _function = new Iterable<Object>() {
 			        public Iterator<Object> iterator() {
 			          ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
@@ -96,7 +98,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 		assertCompilesTo('''
 			class C {
 				def Iterable<Object> m() {
-					if (true) 
+					if ("".equals("")) 
 						return [|<Object>newArrayList().iterator]
 					else
 						return newArrayList('').toArray
@@ -111,7 +113,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public Iterable<Object> m() {
-			    if (true) {
+			    boolean _equals = "".equals("");
+			    if (_equals) {
 			      final Iterable<Object> _function = new Iterable<Object>() {
 			        public Iterator<Object> iterator() {
 			          ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
@@ -132,7 +135,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 		assertCompilesTo('''
 			class C {
 				def Iterable<Object> m() {
-					if (true) 
+					if ("".equals("")) 
 						return [|<Object>newArrayList().iterator]
 					else
 						newArrayList('').toArray
@@ -148,7 +151,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public Iterable<Object> m() {
 			    Object[] _xifexpression = null;
-			    if (true) {
+			    boolean _equals = "".equals("");
+			    if (_equals) {
 			      final Iterable<Object> _function = new Iterable<Object>() {
 			        public Iterator<Object> iterator() {
 			          ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
@@ -170,7 +174,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 		assertCompilesTo('''
 			class C {
 				def Iterable<Object> m() {
-					if (true) 
+					if ("".equals("")) 
 						[|<Object>newArrayList().iterator]
 					else
 						return newArrayList('').toArray
@@ -186,7 +190,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public Iterable<Object> m() {
 			    Iterable<Object> _xifexpression = null;
-			    if (true) {
+			    boolean _equals = "".equals("");
+			    if (_equals) {
 			      final Iterable<Object> _function = new Iterable<Object>() {
 			        public Iterator<Object> iterator() {
 			          ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
@@ -209,7 +214,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 		assertCompilesTo('''
 			class C {
 				def Iterable<Object> m(String s) {
-					if (true) 
+					if ("".equals("")) 
 						{ [| { <Object>newArrayList().iterator } ] }
 					else
 						{ { newArrayList(s).toArray } }
@@ -225,7 +230,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public Iterable<Object> m(final String s) {
 			    Iterable<Object> _xifexpression = null;
-			    if (true) {
+			    boolean _equals = "".equals("");
+			    if (_equals) {
 			      final Iterable<Object> _function = new Iterable<Object>() {
 			        public Iterator<Object> iterator() {
 			          ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
@@ -248,7 +254,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			class C {
 				def Iterable<Object> m() {
 					return { 
-						if (true) 
+						if ("".equals("")) 
 							{ [|<Object>newArrayList().iterator] }
 						else
 							{ newArrayList('').toArray }
@@ -265,7 +271,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public Iterable<Object> m() {
 			    Iterable<Object> _xifexpression = null;
-			    if (true) {
+			    boolean _equals = "".equals("");
+			    if (_equals) {
 			      final Iterable<Object> _function = new Iterable<Object>() {
 			        public Iterator<Object> iterator() {
 			          ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
@@ -288,7 +295,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			class C {
 				def Iterable<Object> m() {
 					{
-						if (true) 
+						if ("".equals("")) 
 							{ return { [|<Object>newArrayList().iterator] } }
 						else
 							{ return { { newArrayList('') } .toArray } }
@@ -304,7 +311,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public Iterable<Object> m() {
-			    if (true) {
+			    boolean _equals = "".equals("");
+			    if (_equals) {
 			      final Iterable<Object> _function = new Iterable<Object>() {
 			        public Iterator<Object> iterator() {
 			          ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
@@ -324,7 +332,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 		assertCompilesTo('''
 			class C {
 				def Iterable<Object> m() {
-					if (true) 
+					if ("".equals("")) 
 						{ return { [|<Object>newArrayList().iterator] } }
 					else
 						{ newArrayList('').toArray }
@@ -340,7 +348,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public Iterable<Object> m() {
 			    Object[] _xifexpression = null;
-			    if (true) {
+			    boolean _equals = "".equals("");
+			    if (_equals) {
 			      final Iterable<Object> _function = new Iterable<Object>() {
 			        public Iterator<Object> iterator() {
 			          ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
@@ -362,7 +371,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 		assertCompilesTo('''
 			class C {
 				def Iterable<Object> m() {
-					if (true) 
+					if ("".equals("")) 
 						{ [|<Object>newArrayList().iterator] }
 					else
 						{ return newArrayList('').toArray }
@@ -378,7 +387,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public Iterable<Object> m() {
 			    Iterable<Object> _xifexpression = null;
-			    if (true) {
+			    boolean _equals = "".equals("");
+			    if (_equals) {
 			      final Iterable<Object> _function = new Iterable<Object>() {
 			        public Iterator<Object> iterator() {
 			          ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
@@ -402,7 +412,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			class C {
 				def Iterable<Object> m(String s) {
 					toString
-					if (true) {
+					if ("".equals("")) {
 						toString;
 						[|<Object>newArrayList().iterator]
 					} else {
@@ -424,7 +434,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			    {
 			      this.toString();
 			      Iterable<Object> _xifexpression = null;
-			      if (true) {
+			      boolean _equals = "".equals("");
+			      if (_equals) {
 			        Iterable<Object> _xblockexpression_1 = null;
 			        {
 			          this.toString();
@@ -461,7 +472,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 					toString
 					return {
 						toString
-						if (true) {
+						if ("".equals("")) {
 							toString;
 							[|<Object>newArrayList().iterator]
 						} else {
@@ -485,7 +496,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			    {
 			      this.toString();
 			      Iterable<Object> _xifexpression = null;
-			      if (true) {
+			      boolean _equals = "".equals("");
+			      if (_equals) {
 			        Iterable<Object> _xblockexpression_1 = null;
 			        {
 			          this.toString();
@@ -520,7 +532,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			class C {
 				def Iterable<Object> m() {
 					toString
-					if (true) {
+					if ("".equals("")) {
 						toString 
 						return [|<Object>newArrayList().iterator]
 					} else {
@@ -539,7 +551,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public Iterable<Object> m() {
 			    this.toString();
-			    if (true) {
+			    boolean _equals = "".equals("");
+			    if (_equals) {
 			      this.toString();
 			      final Iterable<Object> _function = new Iterable<Object>() {
 			        public Iterator<Object> iterator() {
@@ -563,7 +576,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			class C {
 				def Iterable<Object> m() {
 					toString
-					if (true) {
+					if ("".equals("")) {
 						toString
 						return [|<Object>newArrayList().iterator]
 					} else {
@@ -585,7 +598,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			    {
 			      this.toString();
 			      Object[] _xifexpression = null;
-			      if (true) {
+			      boolean _equals = "".equals("");
+			      if (_equals) {
 			        this.toString();
 			        final Iterable<Object> _function = new Iterable<Object>() {
 			          public Iterator<Object> iterator() {
@@ -618,7 +632,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 					{
 						toString
 					}
-					if (true) {
+					if ("".equals("")) {
 						{
 							toString
 						}
@@ -644,7 +658,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			    {
 			      this.toString();
 			      Iterable<Object> _xifexpression = null;
-			      if (true) {
+			      boolean _equals = "".equals("");
+			      if (_equals) {
 			        Iterable<Object> _xblockexpression_1 = null;
 			        {
 			          this.toString();

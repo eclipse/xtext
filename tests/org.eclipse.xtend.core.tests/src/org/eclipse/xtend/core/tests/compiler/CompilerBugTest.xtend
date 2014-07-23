@@ -2106,11 +2106,11 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 	def testEarlyExitInBranch_01() {
 		assertCompilesTo('''
 			class C {
-				def m() {
+				def m(int i) {
 					switch 'a' {
 						case 'b': 'a'
 						case 'c': {
-							if (1==2)
+							if (i==2)
 								return 'b'
 							else
 								return 'c'
@@ -2123,7 +2123,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class C {
-			  public String m() {
+			  public String m(final int i) {
 			    String _switchResult = null;
 			    final String _switchValue = "a";
 			    boolean _matched = false;
@@ -2136,7 +2136,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    if (!_matched) {
 			      if (Objects.equal(_switchValue, "c")) {
 			        _matched=true;
-			        if ((1 == 2)) {
+			        if ((i == 2)) {
 			          return "b";
 			        } else {
 			          return "c";
@@ -2297,7 +2297,6 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			        }
 			      }
 			    }
-			    return null;
 			  }
 			}
 		''')
@@ -2309,7 +2308,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			class C {
 				def String m(String s) {
 					while(true) {
-						if(true)
+						if(Boolean.TRUE)
 							return "string"
 					}
 			    }
@@ -2319,11 +2318,76 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			public class C {
 			  public String m(final String s) {
 			    while (true) {
-			      if (true) {
+			      if ((Boolean.TRUE).booleanValue()) {
 			        return "string";
 			      }
 			    }
-			    return null;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testBugReturnInLoop_03() {
+		assertCompilesTo('''
+			class C {
+				def String m(String s) {
+					while(1 == 1 * 1 + 0 * 7) {
+						try {
+							return "string"
+						} catch(Exception e) {
+							return "string"
+						}
+					}
+			    }
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Exceptions;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public String m(final String s) {
+			    while ((1 == ((1 * 1) + (0 * 7)))) {
+			      try {
+			        return "string";
+			      } catch (final Throwable _t) {
+			        if (_t instanceof Exception) {
+			          final Exception e = (Exception)_t;
+			          return "string";
+			        } else {
+			          throw Exceptions.sneakyThrow(_t);
+			        }
+			      }
+			    }
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testBugReturnInLoop_04() {
+		assertCompilesTo('''
+			class C {
+				def String m(boolean b) {
+					while(true) {
+						if (b)
+							return null
+						else
+							return ''
+					}
+			    }
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  public String m(final boolean b) {
+			    while (true) {
+			      if (b) {
+			        return null;
+			      } else {
+			        return "";
+			      }
+			    }
 			  }
 			}
 		''')

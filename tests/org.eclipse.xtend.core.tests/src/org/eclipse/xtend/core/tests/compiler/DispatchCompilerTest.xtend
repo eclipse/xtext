@@ -91,7 +91,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 		assertCompilesTo('''
 			class C {
 				def dispatch minus(Object operand) {
-					if (true)
+					if (''.equals(''))
 						throw new RuntimeException();
 					throw new RuntimeException();
 				}
@@ -105,7 +105,8 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  protected double _minus(final Object operand) {
-			    if (true) {
+			    boolean _equals = "".equals("");
+			    if (_equals) {
 			      throw new RuntimeException();
 			    }
 			    throw new RuntimeException();

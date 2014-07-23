@@ -339,7 +339,7 @@ class ValidationBug409602Test extends AbstractXtendTestCase {
 		val file = parser.parse('''
 			class C {
 				def m() {
-					while(true)
+					while(Boolean.TRUE)
 						return ''
 					return ''
 				}
@@ -364,7 +364,7 @@ class ValidationBug409602Test extends AbstractXtendTestCase {
 		val file = parser.parse('''
 			class C {
 				def String m() {
-					while(true)
+					while(Boolean.TRUE)
 						return ''
 					return ''
 				}

@@ -1421,7 +1421,7 @@ class AmbiguousGenericFeatureCallTest extends AmbiguityValidationTest {
 			import java.util.concurrent.*
 			class C {
 				def void n() {
-					m [| if (true) return '' ]
+					m [| if (Boolean.TRUE) return '' ]
 				}
 				def void m(Runnable r) {}
 				def void m(Callable<String> c) {}
@@ -1435,7 +1435,7 @@ class AmbiguousGenericFeatureCallTest extends AmbiguityValidationTest {
 			import java.util.concurrent.*
 			class C {
 				def void n() {
-					m [| if (true) return ''; '' ]
+					m [| if (Boolean.TRUE) return ''; '' ]
 				}
 				def void m(Runnable r) {}
 				def void m(Callable<String> c) {}
@@ -1449,7 +1449,7 @@ class AmbiguousGenericFeatureCallTest extends AmbiguityValidationTest {
 			import java.util.concurrent.*
 			class C {
 				def void n() {
-					m [| if (true) return '' else '' ]
+					m [| if (Boolean.TRUE) return '' else '' ]
 				}
 				def void m(Runnable r) {}
 				def void m(Callable<String> c) {}

@@ -118,7 +118,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 				"import java.util.LinkedList\n" +
 				"class C {\n" +
 				"	def m() {\n" + 
-				"		if (true) new ArrayList<String> else new LinkedList<String>\n" + 
+				"		if (Boolean.TRUE) new ArrayList<String> else new LinkedList<String>\n" + 
 				"	}\n" + 
 				"}\n"); 
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
@@ -135,7 +135,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 				"import java.util.LinkedList\n" +
 				"class C {\n" +
 				"	def m() {\n" + 
-				"		#[ if (true) new ArrayList<String> else new LinkedList<String> ]\n" + 
+				"		#[ if (Boolean.TRUE) new ArrayList<String> else new LinkedList<String> ]\n" + 
 				"	}\n" + 
 				"}\n"); 
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
