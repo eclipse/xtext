@@ -271,14 +271,14 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 	@Test public void testBlockHasNoSuperfluousBraces_02() throws Exception {
 		assertCompilesToStatement(
 				"\n" +
-				"if (true) {\n" +
+				"if ((Boolean.TRUE).booleanValue()) {\n" +
 				"  new Object();\n" +
 				"  new Object();\n" +
 				"} else {\n" +
 				"  new Object();\n" +
 				"  new Object();\n" +
 				"}", 
-				"if (true) { new Object() new Object() } else { new Object() new Object() }");
+				"if (Boolean.TRUE) { new Object() new Object() } else { new Object() new Object() }");
 	}
 	
 	@Test public void testBlockHasNoSuperfluousBraces_03() throws Exception {
@@ -364,12 +364,12 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 	@Test public void testIf() throws Exception {
 		assertCompilesTo(
 				"\nint _xifexpression = (int) 0;\n" +
-				"if (true) {\n" +
+				"if ((Boolean.TRUE).booleanValue()) {\n" +
 				"  _xifexpression = 42;\n" +
 				"} else {\n" +
 				"  _xifexpression = 21;\n}\n" +
 				"return _xifexpression;"
-				, "if (true) 42 else 21");
+				, "if (Boolean.TRUE) 42 else 21");
 	}
 
 	@Test public void testForEach_01() throws Exception {
@@ -508,13 +508,13 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 		assertCompilesTo(
 				"\n" + 
 				"boolean _xifexpression = false;\n" + 
-				"if ((!true)) {\n" +
+				"if ((!(Boolean.TRUE).booleanValue())) {\n" +
 				"  _xifexpression = (true == false);\n" +
 				"} else {\n" +
 				"  _xifexpression = (true != false);\n" +
 				"}\n" + 
 				"return _xifexpression;",
-				"if(!true) true==false else true!=false");
+				"if(!Boolean.TRUE) true==false else true!=false");
 	}
 	
 	@Test public void testSwitch_01() throws Exception {

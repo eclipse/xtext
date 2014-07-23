@@ -172,7 +172,7 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("def dispatch minus(Object operand) {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("if (true)");
+    _builder.append("if (\'\'.equals(\'\'))");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("throw new RuntimeException();");
@@ -205,7 +205,10 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("protected double _minus(final Object operand) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("if (true) {");
+    _builder_1.append("boolean _equals = \"\".equals(\"\");");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("if (_equals) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("throw new RuntimeException();");

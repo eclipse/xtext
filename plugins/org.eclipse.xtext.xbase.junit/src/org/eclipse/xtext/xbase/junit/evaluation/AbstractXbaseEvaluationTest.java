@@ -298,17 +298,17 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testShortCircuitBooleanExpression_00() throws Exception {
-		String expr = "true || {if (true) throw new NullPointerException() else false}";
+		String expr = "true || {if (''.equals('')) throw new NullPointerException() else false}";
 		assertEvaluatesTo(true, expr);
 	}
 	
 	@Test public void testShortCircuitBooleanExpression_01() throws Exception {
-		String expr = "false && {if (true) throw new NullPointerException() else false}";
+		String expr = "false && {if (''.equals('')) throw new NullPointerException() else false}";
 		assertEvaluatesTo(false, expr);
 	}
 	
 	@Test public void testShortCircuitBooleanExpression_02() throws Exception {
-		String expr = "true || {if (true) throw new NullPointerException else false}";
+		String expr = "true || {if (''.equals('')) throw new NullPointerException else false}";
 		assertEvaluatesTo(true, expr);
 	}
 	
@@ -625,14 +625,14 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	
 	@Ignore("Wrong type")
 	@Test public void testReturnExpression_07() throws Exception {
-		assertEvaluatesTo(null, "return if (true) while(false) ('foo'+'bar').length else null");
-		assertEvaluatesTo(null, "return if (false) while(false) ('foo'+'bar').length else null");
+		assertEvaluatesTo(null, "return if (''.equals('')) while(false) ('foo'+'bar').length else null");
+		assertEvaluatesTo(null, "return if ('1'.equals('2')) while(false) ('foo'+'bar').length else null");
 	}
 	
 	@Ignore("Wrong type")
 	@Test public void testReturnExpression_08() throws Exception {
-		assertEvaluatesTo(null, "return if (true) while(false) ('foo'+'bar').length else 'zonk'");
-		assertEvaluatesTo("zonk", "return if (false) while(false) ('foo'+'bar').length else 'zonk'");
+		assertEvaluatesTo(null, "return if (''.equals('')) while(false) ('foo'+'bar').length else 'zonk'");
+		assertEvaluatesTo("zonk", "return if ('1'.equals('2')) while(false) ('foo'+'bar').length else 'zonk'");
 	}
 	
 	@Test public void testReturnExpression_09() throws Exception {
@@ -1016,27 +1016,27 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testIfExpression_00() throws Exception {
-		assertEvaluatesTo(null, "if (0==1) 'literal'");
+		assertEvaluatesTo(null, "if (0.equals(1)) 'literal'");
 	}
 	
 	@Test public void testIfExpression_01() throws Exception {
-		assertEvaluatesTo(null, "if (false) 'literal'");
+		assertEvaluatesTo(null, "if ('1'.equals('2')) 'literal'");
 	}
 	
 	@Test public void testIfExpression_02() throws Exception {
-		assertEvaluatesTo("literal", "if (true) 'literal'");
+		assertEvaluatesTo("literal", "if (''.equals('')) 'literal'");
 	}
 	
 	@Test public void testIfExpression_03() throws Exception {
-		assertEvaluatesTo("then", "if (true) 'then' else 'else'");
+		assertEvaluatesTo("then", "if (''.equals('')) 'then' else 'else'");
 	}
 	
 	@Test public void testIfExpression_04() throws Exception {
-		assertEvaluatesTo("else", "if (false) 'then' else 'else'");
+		assertEvaluatesTo("else", "if ('1'.equals('2')) 'then' else 'else'");
 	}
 	
 	@Test public void testIfExpression_05() throws Exception {
-		assertEvaluatesTo(null, "if (false) return 'fail'");
+		assertEvaluatesTo(null, "if ('1'.equals('2')) return 'fail'");
 	}
 	
 	/**
@@ -1047,7 +1047,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		// e.g. the if expression has type 'void' but the compiler / interpreter returns 'void' since
 		// the evaluation expects a hardcoded 'Object'
 		assertEvaluatesTo(null, 
-				"if (false) return 1");
+				"if ('1'.equals('2')) return 1");
 	}
 	
 	/**
@@ -1055,7 +1055,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	 */
 	@Test public void testIfExpression_07() throws Exception {
 		assertEvaluatesTo(null, 
-				"if (false) return 1L");
+				"if ('1'.equals('2')) return 1L");
 	}
 	
 	/**
@@ -1063,7 +1063,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	 */
 	@Test public void testIfExpression_08() throws Exception {
 		assertEvaluatesTo(Integer.valueOf(0), 
-				"if (false) 1");
+				"if ('1'.equals('2')) 1");
 	}
 	
 	/**
@@ -1071,14 +1071,14 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	 */
 	@Test public void testIfExpression_09() throws Exception {
 		assertEvaluatesTo(Long.valueOf(0), 
-				"if (false) 1L");
+				"if ('1'.equals('2')) 1L");
 	}
 	
 	@Test public void testBug342021_01() throws Exception {
 		assertEvaluatesTo(Boolean.FALSE, 
 				"{\n" +
 				"  val Iterable<Object> branch = \n" + 
-				"  if (true) \n" + 
+				"  if (''.equals('')) \n" + 
 				"    [|<Object>newArrayList().iterator]\n" + 
 				"  else\n" + 
 				"    newArrayList('a').toArray\n" +
@@ -1090,7 +1090,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(Boolean.FALSE, 
 				"{\n" +
 				"  val Iterable<Object> branch = \n" + 
-				"  if (true) \n" + 
+				"  if (''.equals('')) \n" + 
 				"    { [|<Object>newArrayList().iterator] }\n" + 
 				"  else\n" + 
 				"    { ''.toString { newArrayList('a').toArray } }\n" +
@@ -1111,19 +1111,19 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testIfExpression_withThrowExpression_00() throws Exception {
-		assertEvaluatesWithException(NullPointerException.class, "if (false) throw new NullPointerException() else throw new NullPointerException()");
+		assertEvaluatesWithException(NullPointerException.class, "if ('1'.equals('2')) throw new NullPointerException() else throw new NullPointerException()");
 	}
 	
 	@Test public void testIfExpression_withThrowExpression_01() throws Exception {
-		assertEvaluatesWithException(NullPointerException.class, "if (false) 'then' else throw new NullPointerException()");
+		assertEvaluatesWithException(NullPointerException.class, "if ('1'.equals('2')) 'then' else throw new NullPointerException()");
 	}
 	
 	@Test public void testIfExpression_withThrowExpression_02() throws Exception {
-		assertEvaluatesTo("then", "if (true) 'then' else throw new NullPointerException()");
+		assertEvaluatesTo("then", "if (''.equals('')) 'then' else throw new NullPointerException()");
 	}
 	
 	@Test public void testIfExpression_withThrowExpression_03() throws Exception {
-		assertEvaluatesWithException(NullPointerException.class, "if (false) 'then' else throw new NullPointerException");
+		assertEvaluatesWithException(NullPointerException.class, "if ('1'.equals('2')) 'then' else throw new NullPointerException");
 	}
 	
 	@Test public void testVariableDeclaration_01() throws Exception {
@@ -2577,7 +2577,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testCastedExpression_05() throws Exception {
-		assertEvaluatesTo("MyString", "(if (true) { 'MyString' } else { throw new Exception() }) as String");
+		assertEvaluatesTo("MyString", "(if (''.equals('')) { 'MyString' } else { throw new Exception() }) as String");
 	}
 	
 	@Test public void testCastedExpression_06() throws Exception {
@@ -3603,51 +3603,51 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testMemberCallOnMultiType_01() throws Exception {
-		assertEvaluatesTo("ClassB", "(if (false) new testdata.ClassA() else new testdata.ClassB()).getClassName()");
-		assertEvaluatesTo("CLASSB", "(if (false) new testdata.ClassA() else new testdata.ClassB()).getUpperCaseClassName()");
-		assertEvaluatesTo("ClassA", "(if (true) new testdata.ClassA() else new testdata.ClassB()).getClassName()");
-		assertEvaluatesTo("CLASSA", "(if (true) new testdata.ClassA() else new testdata.ClassB()).getUpperCaseClassName()");
+		assertEvaluatesTo("ClassB", "(if ('1'.equals('2')) new testdata.ClassA() else new testdata.ClassB()).getClassName()");
+		assertEvaluatesTo("CLASSB", "(if ('1'.equals('2')) new testdata.ClassA() else new testdata.ClassB()).getUpperCaseClassName()");
+		assertEvaluatesTo("ClassA", "(if (''.equals('')) new testdata.ClassA() else new testdata.ClassB()).getClassName()");
+		assertEvaluatesTo("CLASSA", "(if (''.equals('')) new testdata.ClassA() else new testdata.ClassB()).getUpperCaseClassName()");
 	}
 	
 	@Test public void testMemberCallOnMultiType_02() throws Exception {
-		assertEvaluatesTo(Integer.valueOf(20), "(if (false) new Double('-20') else new Integer('20')).intValue");
-		assertEvaluatesTo(Integer.valueOf(-20), "(if (true) new Double('-20') else new Integer('20')).intValue");
+		assertEvaluatesTo(Integer.valueOf(20), "(if ('1'.equals('2')) new Double('-20') else new Integer('20')).intValue");
+		assertEvaluatesTo(Integer.valueOf(-20), "(if (''.equals('')) new Double('-20') else new Integer('20')).intValue");
 	}
 	
 	@Test public void testMemberCallOnMultiType_03() throws Exception {
 		assertEvaluatesTo(
 				Integer.valueOf(20), 
-				"newArrayList('20').map(s|if (false) new Double(s) else new Integer(s)).head.intValue");
+				"newArrayList('20').map(s|if ('1'.equals('2')) new Double(s) else new Integer(s)).head.intValue");
 	}
 	
 	@Test public void testMemberCallOnMultiType_04() throws Exception {
 		assertEvaluatesTo(
 				Integer.valueOf(20), 
-				"newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.intValue).head");
+				"newArrayList(if ('1'.equals('2')) new Double('-20') else new Integer('20')).map(v|v.intValue).head");
 	}
 	
 	@Test public void testMemberCallOnMultiType_05() throws Exception {
-		assertEvaluatesTo(Integer.valueOf(20), "{ var number = if (false) new Double('-10') else new Integer('20') number.intValue}");
+		assertEvaluatesTo(Integer.valueOf(20), "{ var number = if ('1'.equals('2')) new Double('-10') else new Integer('20') number.intValue}");
 	}
 	
 	@Test public void testMemberCallOnMultiType_06() throws Exception {
-		assertEvaluatesTo(Integer.valueOf(20), "{ var x = if (false) new Double('-10') else new Integer('20') x.intValue }");
+		assertEvaluatesTo(Integer.valueOf(20), "{ var x = if ('1'.equals('2')) new Double('-10') else new Integer('20') x.intValue }");
 	}
 	
 	@Ignore("This is actually not conformant except if generics are ignored")
 	@Test public void testMemberCallOnMultiType_07() throws Exception {
-		assertEvaluatesTo(Boolean.TRUE, "(if (false) new Double('-20') else new Integer('10')) >= 0");
+		assertEvaluatesTo(Boolean.TRUE, "(if ('1'.equals('2')) new Double('-20') else new Integer('10')) >= 0");
 	}
 	
 	@Ignore("This is actually not conformant except if generics are ignored")
 	@Test public void testMemberCallOnMultiType_08() throws Exception {
-		assertEvaluatesTo(Boolean.FALSE, "(if (false) new Double('-20') else new Integer('10')) < 0");
+		assertEvaluatesTo(Boolean.FALSE, "(if ('1'.equals('2')) new Double('-20') else new Integer('10')) < 0");
 	}
 	
 	@Test public void testMemberCallOnMultiType_09() throws Exception {
 		assertEvaluatesTo(
 				Integer.valueOf(20), 
-				"{ val Object o = newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.intValue).head o }");
+				"{ val Object o = newArrayList(if ('1'.equals('2')) new Double('-20') else new Integer('20')).map(v|v.intValue).head o }");
 	}
 	
 	@Test public void testBug343144_01() throws Exception {
@@ -4247,7 +4247,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		HashMap<Object, Object> map = newHashMap();
 		map.put("Apple", new Integer(1));
 		assertEvaluatesTo(map, "{\n" +
-									"#{ if (true) 'Apple' -> 1 else 'Banana' -> 2 }" +
+									"#{ if (''.equals('')) 'Apple' -> 1 else 'Banana' -> 2 }" +
 								"} ");
 	}
 	

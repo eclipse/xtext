@@ -15,7 +15,7 @@ import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
-import org.eclipse.xtext.xbase.interpreter.SwitchConstantExpressionsInterpreter;
+import org.eclipse.xtext.xbase.interpreter.ConstantExpressionsInterpreter;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -30,7 +30,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class SwitchConstantExpressionsInterpreterTest extends AbstractXbaseTestCase {
   @Inject
-  private SwitchConstantExpressionsInterpreter interpreter;
+  private ConstantExpressionsInterpreter interpreter;
   
   @Test
   public void testXNumberLiteral() {

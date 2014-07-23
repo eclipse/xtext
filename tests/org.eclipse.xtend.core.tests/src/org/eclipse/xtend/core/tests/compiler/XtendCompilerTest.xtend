@@ -537,16 +537,16 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	@Test def void testIfWithVoid() {
 		assertCompilesTo('''
 			public class C  {
-			    def m() {
-			    	if (false) while(true) ''.toString
+			    def m(boolean b) {
+			    	if (b) while(b) ''.toString
 				}
 			}
 		''', '''
 			@SuppressWarnings("all")
 			public class C {
-			  public void m() {
-			    if (false) {
-			      while (true) {
+			  public void m(final boolean b) {
+			    if (b) {
+			      while (b) {
 			        "".toString();
 			      }
 			    }
@@ -558,19 +558,19 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	@Test def void testIfWithVoidButNonVoidExpectation_01() {
 		assertCompilesTo('''
 			public class C  {
-				def m() {
-					val x = if (false) return '';
+				def m(boolean b) {
+					val x = if (b) return '';
 					x
 				}
 			}
 		''', '''
 			@SuppressWarnings("all")
 			public class C {
-			  public String m() {
+			  public String m(final boolean b) {
 			    Object _xblockexpression = null;
 			    {
 			      Object _xifexpression = null;
-			      if (false) {
+			      if (b) {
 			        return "";
 			      }
 			      final Object x = _xifexpression;
@@ -585,17 +585,17 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	@Test def void testIfWithVoidButNonVoidExpectation_02() {
 		assertCompilesTo('''
 			public class C  {
-				def void m() {
-					val Object x = if (false) return;
+				def void m(boolean b) {
+					val Object x = if (b) return;
 					x.toString
 				}
 			}
 		''', '''
 			@SuppressWarnings("all")
 			public class C {
-			  public void m() {
+			  public void m(final boolean b) {
 			    Object _xifexpression = null;
-			    if (false) {
+			    if (b) {
 			      return;
 			    }
 			    final Object x = _xifexpression;
@@ -608,8 +608,8 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	@Test def void testIfWithVoidButNonVoidExpectation_03() {
 		assertCompilesTo('''
 			public class C  {
-				def m() {
-					val x = if (false) return;
+				def m(boolean b) {
+					val x = if (b) return;
 					voidFunction(x)
 				}
 				def void voidFunction(Object o) {}
@@ -617,9 +617,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''', '''
 			@SuppressWarnings("all")
 			public class C {
-			  public void m() {
+			  public void m(final boolean b) {
 			    Object _xifexpression = null;
-			    if (false) {
+			    if (b) {
 			      return;
 			    }
 			    final Object x = _xifexpression;
@@ -1348,10 +1348,10 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	@Test def void testSwitchAsVoid() {
 		assertCompilesTo('''
 			public class C  {
-			    def m(Object a) {
+			    def m(Object a, boolean b) {
 			    	switch a {
-			    		case 'b': while(true) ''.toString
-			    		case 'c': if (true) return
+			    		case 'b': while(b) ''.toString
+			    		case 'c': if (b) return
 			    		case 'd': for(i: 1..1) i.toString
 			    	}
 				}
@@ -1362,12 +1362,12 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class C {
-			  public void m(final Object a) {
+			  public void m(final Object a, final boolean b) {
 			    boolean _matched = false;
 			    if (!_matched) {
 			      if (Objects.equal(a, "b")) {
 			        _matched=true;
-			        while (true) {
+			        while (b) {
 			          "".toString();
 			        }
 			      }
@@ -1375,7 +1375,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    if (!_matched) {
 			      if (Objects.equal(a, "c")) {
 			        _matched=true;
-			        if (true) {
+			        if (b) {
 			          return;
 			        }
 			      }
@@ -1397,10 +1397,10 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	@Test def void testSwitchWithNonVoidReturn_01() {
 		assertCompilesTo('''
 			public class C  {
-			    def m(Object a) {
+			    def m(Object a, boolean b) {
 			    	switch a {
-			    		case 'b': while(true) ''.toString
-			    		case 'c': if (true) return 'a'
+			    		case 'b': while(b) ''.toString
+			    		case 'c': if (b) return 'a'
 			    		case 'd': for(i: 1..1) i.toString
 			    	}
 				}
@@ -1411,12 +1411,12 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class C {
-			  public String m(final Object a) {
+			  public String m(final Object a, final boolean b) {
 			    boolean _matched = false;
 			    if (!_matched) {
 			      if (Objects.equal(a, "b")) {
 			        _matched=true;
-			        while (true) {
+			        while (b) {
 			          "".toString();
 			        }
 			      }
@@ -1424,7 +1424,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    if (!_matched) {
 			      if (Objects.equal(a, "c")) {
 			        _matched=true;
-			        if (true) {
+			        if (b) {
 			          return "a";
 			        }
 			      }
@@ -1447,10 +1447,10 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	@Test def void testSwitchWithNonVoidReturn_02() {
 		assertCompilesTo('''
 			public class C  {
-			    def m(Object a) {
+			    def m(Object a, boolean b) {
 			    	val String s = switch a {
-			    		case 'a': { while(true) ''.toString '' }
-			    		case 'b': if (true) return 'a'
+			    		case 'a': { while(b) ''.toString '' }
+			    		case 'b': if (b) return 'a'
 			    	}
 				}
 			}
@@ -1459,7 +1459,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class C {
-			  public String m(final Object a) {
+			  public String m(final Object a, final boolean b) {
 			    String _switchResult = null;
 			    boolean _matched = false;
 			    if (!_matched) {
@@ -1467,7 +1467,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			        _matched=true;
 			        String _xblockexpression = null;
 			        {
-			          while (true) {
+			          while (b) {
 			            "".toString();
 			          }
 			          _xblockexpression = "";
@@ -1478,7 +1478,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    if (!_matched) {
 			      if (Objects.equal(a, "b")) {
 			        _matched=true;
-			        if (true) {
+			        if (b) {
 			          return "a";
 			        }
 			      }
@@ -1963,11 +1963,11 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	def testSwitchWithConstantExpressions_9() {
 		'''
 		class Foo {
-			def foo() {
+			def foo(int y) {
 				switch x : 1 {
 					case 1: return true
 					default: {
-						if (x == 2) {
+						if (y == 2) {
 							return true;
 						}
 						return x == 3;
@@ -1979,14 +1979,14 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		'''
 		@SuppressWarnings("all")
 		public class Foo {
-		  public boolean foo() {
+		  public boolean foo(final int y) {
 		    final int x = 1;
 		    switch (x) {
 		      case 1:
 		        return true;
 		      default:
 		        {
-		          if ((x == 2)) {
+		          if ((y == 2)) {
 		            return true;
 		          }
 		          return (x == 3);
@@ -2001,14 +2001,14 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	def testSwitchWithConstantExpressions_10() {
 		'''
 		class Foo {
-			def foo() {
+			def foo(int y) {
 				switch x : 1 {
 					case 1:
-						if (x == 2) {
+						if (y == 2) {
 							return true
 						}
 					default:
-						if (x == 2) {
+						if (y == 2) {
 							return true
 						}
 				}
@@ -2018,16 +2018,16 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		'''
 		@SuppressWarnings("all")
 		public class Foo {
-		  public boolean foo() {
+		  public boolean foo(final int y) {
 		    final int x = 1;
 		    switch (x) {
 		      case 1:
-		        if ((x == 2)) {
+		        if ((y == 2)) {
 		          return true;
 		        }
 		        break;
 		      default:
-		        if ((x == 2)) {
+		        if ((y == 2)) {
 		          return true;
 		        }
 		        break;
@@ -3282,7 +3282,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			}
 			class B extends A {
 				override getThing() {
-					if (true)
+					if (''.equals(''))
 						return super.getThing
 					return getThing('')
 				}
@@ -4055,7 +4055,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				class MyClass implements ReturnTypeUsesTypeParameter {
 				
 					override <LocalName extends CharSequence> accept(LocalName param) {
-						[ if (true) it?.apply(param) ] 
+						[ if (Boolean.TRUE) it?.apply(param) ] 
 					}
 				}
 			''', '''
@@ -4067,7 +4067,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				  public <LocalName extends CharSequence> ReturnTypeUsesTypeParameter.Inner<LocalName> accept(final LocalName param) {
 				    final ReturnTypeUsesTypeParameter.Inner<LocalName> _function = new ReturnTypeUsesTypeParameter.Inner<LocalName>() {
 				      public void useProcedure(final Procedure1<? super LocalName> it) {
-				        if (true) {
+				        if ((Boolean.TRUE).booleanValue()) {
 				          if (it!=null) {
 				            it.apply(param);
 				          }
@@ -4787,9 +4787,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		assertCompilesTo(
 				'''
 					class StrangeBug {
-					    def getAnzuwendendeModi(String source) {
+					    def getAnzuwendendeModi(String source, boolean b) {
 						    {
-						        if (true)
+						        if (b)
 						            <String>newArrayList()
 						        else {
 						            <String>newHashSet()
@@ -4805,9 +4805,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 					
 					@SuppressWarnings("all")
 					public class StrangeBug {
-					  public List<String> getAnzuwendendeModi(final String source) {
+					  public List<String> getAnzuwendendeModi(final String source, final boolean b) {
 					    AbstractCollection<String> _xifexpression = null;
-					    if (true) {
+					    if (b) {
 					      _xifexpression = CollectionLiterals.<String>newArrayList();
 					    } else {
 					      _xifexpression = CollectionLiterals.<String>newHashSet();
@@ -5122,11 +5122,11 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	@Test def void basicForLoopWithDuplicateSyntheticVariables() {
 		'''
 			class Foo {
-				def foo() {
-					if ('a' == 'b') {
+				def foo(String s1, String s2) {
+					if (s1 == s2) {
 					}
 					for (;;) {
-						if ('b' == 'c') {
+						if (s1 == s2) {
 						}
 					}
 				}
@@ -5136,12 +5136,12 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 
 			@SuppressWarnings("all")
 			public class Foo {
-			  public void foo() {
-			    boolean _equals = Objects.equal("a", "b");
+			  public void foo(final String s1, final String s2) {
+			    boolean _equals = Objects.equal(s1, s2);
 			    if (_equals) {
 			    }
 			    for (;;) {
-			      boolean _equals_1 = Objects.equal("b", "c");
+			      boolean _equals_1 = Objects.equal(s1, s2);
 			      if (_equals_1) {
 			      }
 			    }
@@ -5187,9 +5187,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	@Test def void testBug437027() {
 		'''
 			class Foo {
-				def m() {
+				def m(boolean b) {
 			      val x = 
-			            if(false) {
+			            if(b) {
 			               return ''
 			            }
 			      intExpectation(x)
@@ -5200,9 +5200,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			@SuppressWarnings("all")
 			public class Foo {
-			  public String m() {
+			  public String m(final boolean b) {
 			    Object _xifexpression = null;
-			    if (false) {
+			    if (b) {
 			      return "";
 			    }
 			    final Object x = _xifexpression;
@@ -5222,10 +5222,10 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	@Test def void testBug437027_2() {
 		'''
 			class Foo {
-			   def m() {
+			   def m(boolean b) {
 			      val x = 
 			         identity(
-			            if(false) {
+			            if(b) {
 			               return ''
 			            }
 			         )
@@ -5239,9 +5239,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			@SuppressWarnings("all")
 			public class Foo {
-			  public Object m() {
+			  public Object m(final boolean b) {
 			    Object _xifexpression = null;
-			    if (false) {
+			    if (b) {
 			      return "";
 			    }
 			    final Object x = this.<Object>identity(_xifexpression);

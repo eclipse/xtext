@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import org.eclipse.xtext.xbase.tests.linking.BatchLinkingTest;
+import org.eclipse.xtext.xbase.tests.typing.XbaseTypeProviderTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -27,5 +28,6 @@ import org.junit.runners.Suite.SuiteClasses;
 	ClosureTypeSystemSuite.class,
 	BatchLinkingTest.class,
 	ExpectationSuite.class,
+	XbaseTypeProviderTest.class
 })
 public class TypeSystemSuite {}
