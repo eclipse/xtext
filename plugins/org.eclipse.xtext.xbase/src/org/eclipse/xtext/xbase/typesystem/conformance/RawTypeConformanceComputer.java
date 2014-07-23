@@ -621,22 +621,33 @@ public class RawTypeConformanceComputer {
 	protected int isConformantToConstraints(
 			final UnboundTypeReference left, 
 			final LightweightTypeReference right, 
-			List<LightweightBoundTypeArgument> hints, 
+			List<LightweightBoundTypeArgument> leftHints, 
 			int flags) {
-		UnboundTypeParameterPreservingSubstitutor unboundSubstitutor = new UnboundTypeParameterPreservingSubstitutor(
-				Collections.singletonMap(left.getTypeParameter(), new LightweightMergedBoundTypeArgument(right, VarianceInfo.INVARIANT)), right.getOwner()) {
-			@Override
-			public LightweightTypeReference doVisitUnboundTypeReference(UnboundTypeReference reference, Set<JvmTypeParameter> visiting) {
-				if (reference.getHandle() == left.getHandle()) {
-					return right;
-				}
-				return super.doVisitUnboundTypeReference(reference, visiting);
-			}
-		};
 		int result = flags;
-		for(LightweightBoundTypeArgument hint: hints) {
-			if (hint.getSource() == BoundTypeArgumentSource.CONSTRAINT) {
-				LightweightTypeReference constraintReference = unboundSubstitutor.substitute(hint.getTypeReference());
+		for(LightweightBoundTypeArgument leftHint: leftHints) {
+			if (leftHint.getSource() == BoundTypeArgumentSource.CONSTRAINT) {
+				final LightweightTypeReference leftHintReference = leftHint.getTypeReference();
+				final UnboundTypeParameterPreservingSubstitutor unboundSubstitutor = new UnboundTypeParameterPreservingSubstitutor(
+						Collections.singletonMap(left.getTypeParameter(), new LightweightMergedBoundTypeArgument(right, VarianceInfo.INVARIANT)), right.getOwner()) {
+					@Override
+					public LightweightTypeReference doVisitUnboundTypeReference(UnboundTypeReference reference, Set<JvmTypeParameter> visiting) {
+						if (reference.getHandle() == left.getHandle()) {
+							if (right.getKind() == KIND_UNBOUND_TYPE_REFERENCE) {
+								UnboundTypeReference rightUnbound = (UnboundTypeReference) right;
+								List<LightweightBoundTypeArgument> rightHints = rightUnbound.getAllHints();
+								for(LightweightBoundTypeArgument rightHint: rightHints) {
+									LightweightTypeReference rightHintReference = rightHint.getTypeReference();
+									if (rightHintReference != null && leftHintReference.getUniqueIdentifier().equals(rightHintReference.getUniqueIdentifier())) {
+										return super.doVisitUnboundTypeReference(reference, visiting);
+									}
+								}
+							}
+							return right;
+						}
+						return super.doVisitUnboundTypeReference(reference, visiting);
+					}
+				};
+				LightweightTypeReference constraintReference = unboundSubstitutor.substitute(leftHintReference);
 				int constraintResult = doIsConformant(constraintReference, right, flags);
 				if ((constraintResult & SUCCESS) == 0) {
 					return flags;
