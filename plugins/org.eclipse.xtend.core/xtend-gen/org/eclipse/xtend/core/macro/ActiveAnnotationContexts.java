@@ -11,6 +11,7 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.Map;
 import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -39,11 +40,15 @@ public class ActiveAnnotationContexts extends AdapterImpl {
   
   protected CompilationUnitImpl compilationUnit;
   
+  private boolean running;
+  
   public void before(final ActiveAnnotationContexts.AnnotationCallback phase) {
     this.compilationUnit.before(phase);
+    this.running = true;
   }
   
   public void after(final ActiveAnnotationContexts.AnnotationCallback phase) {
+    this.running = false;
     this.compilationUnit.after(phase);
   }
   
@@ -61,6 +66,33 @@ public class ActiveAnnotationContexts extends AdapterImpl {
       _eAdapters_1.add(result);
     }
     return result;
+  }
+  
+  public void notifyChanged(final Notification msg) {
+    boolean _and = false;
+    boolean _and_1 = false;
+    if (!(!this.running)) {
+      _and_1 = false;
+    } else {
+      boolean _isTouch = msg.isTouch();
+      boolean _not = (!_isTouch);
+      _and_1 = _not;
+    }
+    if (!_and_1) {
+      _and = false;
+    } else {
+      int _featureID = msg.getFeatureID(Resource.class);
+      boolean _equals = (Resource.RESOURCE__CONTENTS == _featureID);
+      _and = _equals;
+    }
+    if (_and) {
+      Object _notifier = msg.getNotifier();
+      final Resource resource = ((Resource) _notifier);
+      EList<Adapter> _eAdapters = resource.eAdapters();
+      _eAdapters.remove(this);
+      this.contexts.clear();
+      this.compilationUnit = null;
+    }
   }
   
   public static ActiveAnnotationContexts find(final Resource resource) {
