@@ -49,12 +49,14 @@ public class EmfResourceReferenceUpdater extends AbstractReferenceUpdater {
 					throw new OperationCanceledException();
 				Resource referringResource = resourceSet.getResource(referringResourceURI, false);
 				EObject refactoredElement = resourceSet.getEObject(elementRenameArguments.getNewElementURI(elementRenameArguments.getTargetElementURI()), true);
-				if (refactoredElement instanceof EClassifier && referringResource != refactoredElement.eResource()) {
-					for (IReferenceDescription reference : resource2references.get(referringResourceURI)) {
-						EObject referringEReference = referringResource.getEObject(
-								reference.getSourceEObjectUri().fragment()).eContainer();
-						if (referringEReference != null && referringEReference instanceof EReference)
-							((EReference) referringEReference).setEType((EClassifier) refactoredElement);
+				if (referringResource != refactoredElement.eResource()) {
+					if (refactoredElement instanceof EClassifier) { 
+						for (IReferenceDescription reference : resource2references.get(referringResourceURI)) {
+							EObject referringEReference = referringResource.getEObject(
+									reference.getSourceEObjectUri().fragment()).eContainer();
+							if (referringEReference != null && referringEReference instanceof EReference)
+								((EReference) referringEReference).setEType((EClassifier) refactoredElement);
+						}
 					}
 					changeUtil.addSaveAsUpdate(referringResource, updateAcceptor);
 				}
