@@ -51,10 +51,10 @@ public class ExpressionUtilTest extends AbstractXbaseTestCase {
     this.assertExpressionSelected("123$+$456", "123+456");
     this.assertExpressionSelected("12$3+$456", "123+456");
     this.assertExpressionSelected("123$+4$56", "123+456");
-    this.assertExpressionSelected("if(true$$) null", "true");
-    this.assertExpressionSelected("if(true)$$ null", "if(true) null");
-    this.assertExpressionSelected("if(true) null$$ else null", "null");
-    this.assertExpressionSelected("if(true) null $$else null", "if(true) null else null");
+    this.assertExpressionSelected("if(Boolean.TRUE$$) null", "Boolean.TRUE");
+    this.assertExpressionSelected("if(Boolean.TRUE)$$ null", "if(Boolean.TRUE) null");
+    this.assertExpressionSelected("if(Boolean.TRUE) null$$ else null", "null");
+    this.assertExpressionSelected("if(Boolean.TRUE) null $$else null", "if(Boolean.TRUE) null else null");
     this.assertExpressionSelected("newArrayList(\'jan\',\'hein\',\'claas\',\'pit\').map[$it|toFirstUpper]$", "[it|toFirstUpper]");
     this.assertExpressionSelected("newArrayList(\'jan\',\'hein\',\'claas\',\'pit\').map[it$|$toFirstUpper]", "[it|toFirstUpper]");
     this.assertExpressionSelected("newArrayList(\'jan\',\'hein\',\'claas\',\'pit\').map$[it|toFirstUpper]$", "[it|toFirstUpper]");
@@ -74,7 +74,7 @@ public class ExpressionUtilTest extends AbstractXbaseTestCase {
   
   @Test
   public void testSelectedExpression_02() {
-    this.assertExpressionSelected("if($$true) null", "true");
+    this.assertExpressionSelected("if(Boolean.$$TRUE) null", "Boolean.TRUE");
   }
   
   @Test
@@ -117,12 +117,12 @@ public class ExpressionUtilTest extends AbstractXbaseTestCase {
     this.assertSiblingExpressionsSelected("123$+$456", "123+456");
     this.assertSiblingExpressionsSelected("12$3+$456", "123+456");
     this.assertSiblingExpressionsSelected("123$+4$56", "123+456");
-    this.assertSiblingExpressionsSelected("if($$true) null", "true");
-    this.assertSiblingExpressionsSelected("if(true$$) null", "true");
-    this.assertSiblingExpressionsSelected("if(true)$$ null", "if(true) null");
-    this.assertSiblingExpressionsSelected("if(true) $$null", "null");
-    this.assertSiblingExpressionsSelected("if(true) null$$ else null", "null");
-    this.assertSiblingExpressionsSelected("if(true) null $$else null", "if(true) null else null");
+    this.assertSiblingExpressionsSelected("if(Boolean.$$TRUE) null", "Boolean.TRUE");
+    this.assertSiblingExpressionsSelected("if(Boolean.TRUE$$) null", "Boolean.TRUE");
+    this.assertSiblingExpressionsSelected("if(Boolean.TRUE)$$ null", "if(Boolean.TRUE) null");
+    this.assertSiblingExpressionsSelected("if(Boolean.TRUE) $$null", "null");
+    this.assertSiblingExpressionsSelected("if(Boolean.TRUE) null$$ else null", "null");
+    this.assertSiblingExpressionsSelected("if(Boolean.TRUE) null $$else null", "if(Boolean.TRUE) null else null");
   }
   
   @Test
@@ -145,11 +145,11 @@ public class ExpressionUtilTest extends AbstractXbaseTestCase {
   
   @Test
   public void testInsertionPointIf() {
-    this.assertInsertionPoint("if($1==2) true", null);
-    this.assertInsertionPoint("{ if($1==2) true }", "if(1==2) true");
-    this.assertInsertionPoint("if(1==2) $true", "true");
-    this.assertInsertionPoint("if(1==2) true else $false", "false");
-    this.assertInsertionPoint("if(1==2) { val x = 7 + $8 }", "val x = 7 + 8");
+    this.assertInsertionPoint("if($1==2.intValue) true", null);
+    this.assertInsertionPoint("{ if($1==2.intValue) true }", "if(1==2.intValue) true");
+    this.assertInsertionPoint("if(1==2.intValue) $true", "true");
+    this.assertInsertionPoint("if(1==2.intValue) true else $false", "false");
+    this.assertInsertionPoint("if(1==2.intValue) { val x = 7 + $8 }", "val x = 7 + 8");
   }
   
   @Test
