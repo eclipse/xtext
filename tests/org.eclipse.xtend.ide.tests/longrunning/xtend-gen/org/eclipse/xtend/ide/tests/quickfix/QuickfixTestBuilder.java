@@ -352,12 +352,12 @@ public class QuickfixTestBuilder {
   protected XtextEditor openEditorSafely(final IFile file) throws Exception {
     XtextEditor _xblockexpression = null;
     {
-      NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      this._syncUtil.waitForBuild(_nullProgressMonitor);
-      this._syncUtil.yieldToQueuedDisplayJobs(null);
+      final NullProgressMonitor monitor = new NullProgressMonitor();
+      this._syncUtil.waitForBuild(monitor);
+      this._syncUtil.yieldToQueuedDisplayJobs(monitor);
       XtextEditor editor = this._workbenchTestHelper.openEditor(file);
       this._syncUtil.waitForReconciler(editor);
-      this._syncUtil.yieldToQueuedDisplayJobs(null);
+      this._syncUtil.yieldToQueuedDisplayJobs(monitor);
       _xblockexpression = editor;
     }
     return _xblockexpression;

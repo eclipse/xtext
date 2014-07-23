@@ -48,9 +48,14 @@ public class SyncUtil {
 
 	public void totalSync(final boolean saveAll, boolean useProgressDialog) throws InvocationTargetException,
 			InterruptedException {
+		totalSync(saveAll, useProgressDialog, true);
+	}
+	
+	public void totalSync(final boolean saveAll, boolean useProgressDialog, boolean fork) throws InvocationTargetException,
+			InterruptedException {
 		if (Display.getCurrent() != null && workbench != null) {
 			if (useProgressDialog) {
-				workbench.getProgressService().run(true, true, new IRunnableWithProgress() {
+				workbench.getProgressService().run(fork, true, new IRunnableWithProgress() {
 					public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 						doReconcileAndBuild(saveAll, monitor);
 					}

@@ -1337,11 +1337,12 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	}
 
 	protected XtextEditor openEditorSafely(IFile file) throws Exception {
-		syncUtil.waitForBuild(null);
-		syncUtil.yieldToQueuedDisplayJobs(null);
+		NullProgressMonitor monitor = new NullProgressMonitor();
+		syncUtil.waitForBuild(monitor);
+		syncUtil.yieldToQueuedDisplayJobs(monitor);
 		XtextEditor editor = testHelper.openEditor(file);
 		syncUtil.waitForReconciler(editor);
-		syncUtil.yieldToQueuedDisplayJobs(null);
+		syncUtil.yieldToQueuedDisplayJobs(monitor);
 		return editor;
 	}
 	
