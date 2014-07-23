@@ -875,6 +875,45 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testErrorModel_29() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package x");
+    _builder.newLine();
+    _builder.append("class Y {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def String test() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("newArrayList(\'fo\',\'bar\').minBy[]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <A,B extends Comparable<? super B>> A minBy(Iterable<A> iterable, (A)=>B maxOn) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("iterable.sortBy(maxOn).last");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <A,B extends Comparable<? super B>> A minBy(java.util.Collection<A> iterable, (A)=>B maxOn) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("iterable.sortBy(maxOn).last");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
   public void testErrorModel_30() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package x class Y {");
@@ -2972,6 +3011,36 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("java.lang.annotation.RetentionPolicy<String> x");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder.toString());
+  }
+  
+  @Test
+  public void testErrorModel_112() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package x");
+    _builder.newLine();
+    _builder.append("class Y {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def String test() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("newArrayList(\'fo\',\'bar\').maxBy[]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <A,B extends Comparable<? super B>> A maxBy(Iterable<A> iterable, (A)=>B maxOn) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("iterable.sortBy(maxOn).last");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
