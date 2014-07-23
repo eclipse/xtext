@@ -41,7 +41,10 @@ public abstract class AbstractTemplateProposalProvider implements ITemplatePropo
 		this.scopeProvider = scopeProvider;
 	}
 
-	private IScopeProvider getScopeProvider() {
+	/**
+	 * @since 2.7
+	 */
+	protected IScopeProvider getScopeProvider() {
 		return scopeProvider;
 	}
 	

@@ -8,7 +8,12 @@
 package org.eclipse.xtext.ui.editor.templates;
 
 import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.DocumentRewriteSession;
+import org.eclipse.jface.text.DocumentRewriteSessionType;
+import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.IDocumentExtension4;
 import org.eclipse.jface.text.IRegion;
+import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.ICompletionProposalExtension4;
 import org.eclipse.jface.text.templates.Template;
 import org.eclipse.jface.text.templates.TemplateBuffer;
@@ -25,15 +30,15 @@ public class XtextTemplateProposal extends TemplateProposal implements ICompleti
 	public XtextTemplateProposal(Template template, TemplateContext context, IRegion region, Image image) {
 		super(template, context, region, image);
 	}
-	
+
 	public XtextTemplateProposal(Template template, TemplateContext context, IRegion region, Image image, int relevance) {
 		super(template, context, region, image, relevance);
 	}
-	
+
 	public boolean isAutoInsertable() {
 		return getTemplate().isAutoInsertable();
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == this)
@@ -41,34 +46,51 @@ public class XtextTemplateProposal extends TemplateProposal implements ICompleti
 		if (obj == null || !(obj instanceof XtextTemplateProposal))
 			return false;
 		XtextTemplateProposal other = (XtextTemplateProposal) obj;
-		
+
 		return getTemplate().equals(other.getTemplate());
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return getTemplate().hashCode();
 	}
-	
+
 	@Override
 	public String getAdditionalProposalInfo() {
 		try {
-		    TemplateContext context = getContext();
+			TemplateContext context = getContext();
 			context.setReadOnly(true);
 			TemplateBuffer templateBuffer;
 			try {
 				Template template = getTemplate();
 				if (context instanceof XtextTemplateContext) {
-					templateBuffer= ((XtextTemplateContext)context).evaluateForDisplay(template);
+					templateBuffer = ((XtextTemplateContext) context).evaluateForDisplay(template);
 				} else {
-					templateBuffer= context.evaluate(template);
+					templateBuffer = context.evaluate(template);
 				}
 			} catch (TemplateException e) {
 				return null;
 			}
 			return templateBuffer.getString();
-	    } catch (BadLocationException e) {
+		} catch (BadLocationException e) {
 			return null;
+		}
+	}
+
+	@Override
+	public void apply(ITextViewer viewer, char trigger, int stateMask, int offset) {
+		IDocument document = viewer.getDocument();
+		// ImportsVariableResolver may add imports, so start a rewrite session if possible. 
+		// This will compound all document changes in one Undo entry.
+		if (document instanceof IDocumentExtension4) {
+			IDocumentExtension4 docExt4 = (IDocumentExtension4) document;
+			DocumentRewriteSession session = docExt4.startRewriteSession(DocumentRewriteSessionType.UNRESTRICTED);
+			super.apply(viewer, trigger, stateMask, offset);
+			if (session != null) {
+				docExt4.stopRewriteSession(session);
+			}
+		} else {
+			super.apply(viewer, trigger, stateMask, offset);
 		}
 	}
 }
