@@ -842,7 +842,7 @@ public class AmbiguousGenericFeatureCallTest extends AmbiguityValidationTest {
     _builder.append("def void n() {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("m [| if (true) return \'\' ]");
+    _builder.append("m [| if (Boolean.TRUE) return \'\' ]");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -869,7 +869,7 @@ public class AmbiguousGenericFeatureCallTest extends AmbiguityValidationTest {
     _builder.append("def void n() {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("m [| if (true) return \'\'; \'\' ]");
+    _builder.append("m [| if (Boolean.TRUE) return \'\'; \'\' ]");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -896,7 +896,7 @@ public class AmbiguousGenericFeatureCallTest extends AmbiguityValidationTest {
     _builder.append("def void n() {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("m [| if (true) return \'\' else \'\' ]");
+    _builder.append("m [| if (Boolean.TRUE) return \'\' else \'\' ]");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");

@@ -186,7 +186,7 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 	
 	@Test
 	public void testNullToPrimitiveInIf() throws Exception {
-		String expressionAsString = "{ var boolean b = if (true) null b.toString }";
+		String expressionAsString = "{ var boolean b = if (Boolean.TRUE) null b.toString }";
 		XExpression xExpression = expression(expressionAsString, false);
 		List<Issue> issues = helper.validate(xExpression);
 		assertEquals(issues.toString(), 1, issues.size());
@@ -194,7 +194,7 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 	
 	@Test
 	public void testNullToPrimitiveInIfWithBlock() throws Exception {
-		String expressionAsString = "{ var boolean b = if (true) { null } b.toString }";
+		String expressionAsString = "{ var boolean b = if (Boolean.TRUE) { null } b.toString }";
 		XExpression xExpression = expression(expressionAsString, false);
 		List<Issue> issues = helper.validate(xExpression);
 		assertEquals(issues.toString(), 1, issues.size());
@@ -202,7 +202,7 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 	
 	@Test
 	public void testNullToPrimitiveInNestedIf() throws Exception {
-		String expressionAsString = "{ var boolean b = if (true) if (true) null else '' b.toString }";
+		String expressionAsString = "{ var boolean b = if (Boolean.TRUE) if (Boolean.TRUE) null else '' b.toString }";
 		XExpression xExpression = expression(expressionAsString, false);
 		List<Issue> issues = helper.validate(xExpression);
 		assertEquals(issues.toString(), 2, issues.size());

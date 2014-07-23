@@ -16,7 +16,7 @@ import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException;
-import org.eclipse.xtext.xbase.interpreter.SwitchConstantExpressionsInterpreter;
+import org.eclipse.xtext.xbase.interpreter.ConstantExpressionsInterpreter;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
@@ -34,7 +34,7 @@ public class XSwitchExpressions {
   
   @Inject
   @Extension
-  private SwitchConstantExpressionsInterpreter _switchConstantExpressionsInterpreter;
+  private ConstantExpressionsInterpreter _constantExpressionsInterpreter;
   
   public boolean isJavaSwitchExpression(final XSwitchExpression it) {
     boolean _xblockexpression = false;
@@ -116,7 +116,7 @@ public class XSwitchExpressions {
       return false;
     }
     try {
-      this._switchConstantExpressionsInterpreter.evaluate(case_);
+      this._constantExpressionsInterpreter.evaluate(case_);
       return true;
     } catch (final Throwable _t) {
       if (_t instanceof ConstantExpressionEvaluationException) {

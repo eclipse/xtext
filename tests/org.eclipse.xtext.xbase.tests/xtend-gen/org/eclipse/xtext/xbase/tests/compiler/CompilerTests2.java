@@ -1763,7 +1763,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder.append("{");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("for (var i = if (true) { 1 }; i < 10; i = i + 1) {");
+      _builder.append("for (var i = if (Boolean.TRUE) { 1 }; i < 10; i = i + 1) {");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("}");
@@ -1773,7 +1773,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("int _xifexpression = (int) 0;");
       _builder_1.newLine();
-      _builder_1.append("if (true) {");
+      _builder_1.append("if ((Boolean.TRUE).booleanValue()) {");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("_xifexpression = 1;");
@@ -1866,7 +1866,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder.append("{");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("for (val i = 0; i < 10;) {");
+      _builder.append("for (var i = 0; i < 10;) {");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("if (i == 2) {");
@@ -1883,7 +1883,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder.append("}");
       _builder.newLine();
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("for (final int i = 0; (i < 10);) {");
+      _builder_1.append("for (int i = 0; (i < 10);) {");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("if ((i == 2)) {");
@@ -1911,7 +1911,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder.append("{");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("for (val i = #[if(true) {1} else {2}]; i.head < 10;) {");
+      _builder.append("for (val i = #[if(Boolean.TRUE) {1} else {2}]; i.head < 10;) {");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("if (i.head == 2) {");
@@ -1930,7 +1930,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("int _xifexpression = (int) 0;");
       _builder_1.newLine();
-      _builder_1.append("if (true) {");
+      _builder_1.append("if ((Boolean.TRUE).booleanValue()) {");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("_xifexpression = 1;");
@@ -1993,7 +1993,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder.append("{");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("for (val i = 0; i < 10;) {");
+      _builder.append("for (var i = 0; i < 10;) {");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("return true");
@@ -2004,7 +2004,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder.append("}");
       _builder.newLine();
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("for (final int i = 0; (i < 10);) {");
+      _builder_1.append("for (int i = 0; (i < 10);) {");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("return Boolean.valueOf(true);");
@@ -2096,7 +2096,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder.append("{");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("if (true) {");
+      _builder.append("if (Boolean.TRUE) {");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("for (;;) {}");
@@ -2107,7 +2107,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder.append("}");
       _builder.newLine();
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("if (true) {");
+      _builder_1.append("if ((Boolean.TRUE).booleanValue()) {");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("for (;;) {");
