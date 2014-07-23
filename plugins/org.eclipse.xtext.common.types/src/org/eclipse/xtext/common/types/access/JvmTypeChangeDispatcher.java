@@ -10,6 +10,7 @@ package org.eclipse.xtext.common.types.access;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
@@ -25,6 +26,8 @@ import com.google.common.collect.Lists;
  */
 public class JvmTypeChangeDispatcher extends AdapterImpl {
 
+	private static final Logger LOG = Logger.getLogger(JvmTypeChangeDispatcher.class);
+	
 	public static JvmTypeChangeDispatcher findResourceChangeDispatcher(Notifier notifier) {
 		JvmTypeChangeDispatcher result = (JvmTypeChangeDispatcher) EcoreUtil.getAdapter(
 				notifier.eAdapters(), JvmTypeChangeDispatcher.class);
@@ -55,21 +58,26 @@ public class JvmTypeChangeDispatcher extends AdapterImpl {
 		@Override
 		public void notifyChanged(Notification notification) {
 			super.notifyChanged(notification);
-			List<Runnable> localListeners = null;
-			synchronized (listeners) {
-				localListeners = Lists.newArrayList(listeners);
-			}
-			if (localListeners.isEmpty() || (notification.isTouch() && !isRemoveThis(notification))) 
+			if (notification.isTouch() && !isRemoveThis(notification)) 
 				return;
+			List<Runnable> localListeners = null;
+			synchronized (listenerLock) {
+				localListeners = listeners;
+				if (localListeners.isEmpty()) {
+					return;
+				}
+				listeners = Lists.newLinkedList();
+			}
 			Iterator<Runnable> iterator = localListeners.iterator();
 			while(iterator.hasNext()) {
 				Runnable runnable = iterator.next();
 				if (runnable != null) {
-					runnable.run();
+					try {
+						runnable.run();
+					} catch(Exception e) {
+						LOG.error(e.getMessage(), e);
+					}
 				}
-			}
-			synchronized (listeners) {
-				listeners.removeAll(localListeners);
 			}
 		}
 		
@@ -99,6 +107,8 @@ public class JvmTypeChangeDispatcher extends AdapterImpl {
 	}
 	
 	private List<Runnable> listeners;
+	
+	private final Object listenerLock = new Object();
 	
 	public JvmTypeChangeDispatcher() {
 		listeners = Lists.newLinkedList();
