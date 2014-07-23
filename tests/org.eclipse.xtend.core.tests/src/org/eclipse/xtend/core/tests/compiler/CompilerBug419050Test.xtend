@@ -129,7 +129,7 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 			class C {
 				def m(boolean b) { 
 					if (b) { 
-						while(false) {}
+						while(b) {}
 					}
 				}
 			}
@@ -138,7 +138,7 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public void m(final boolean b) {
 			    if (b) {
-			      while (false) {
+			      while (b) {
 			      }
 			    }
 			  }
@@ -206,7 +206,6 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 			    while (true) {
 			      return Boolean.valueOf(false);
 			    }
-			    return null;
 			  }
 			}
 		''')
@@ -227,7 +226,6 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 			    while (true) {
 			      return false;
 			    }
-			    return false;
 			  }
 			}
 		''')
@@ -254,14 +252,12 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 			        while (true) {
 			          return Boolean.valueOf(false);
 			        }
-			        return null;
 			      }
 			    };
 			    final Function1<String, Boolean> func = _function;
 			    while (true) {
 			      return (func.apply("foo")).booleanValue();
 			    }
-			    return false;
 			  }
 			}
 		''')
@@ -288,14 +284,12 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 			        while (true) {
 			          return false;
 			        }
-			        return false;
 			      }
 			    };
 			    final Predicate<String> func = _function;
 			    while (true) {
 			      return func.apply("foo");
 			    }
-			    return false;
 			  }
 			}
 		''')

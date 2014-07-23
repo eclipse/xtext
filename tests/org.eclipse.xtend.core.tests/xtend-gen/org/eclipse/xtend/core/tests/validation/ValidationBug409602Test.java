@@ -792,7 +792,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       _builder.append("def m() {");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("while(true)");
+      _builder.append("while(Boolean.TRUE)");
       _builder.newLine();
       _builder.append("\t\t\t");
       _builder.append("return \'\'");
@@ -849,7 +849,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       _builder.append("def String m() {");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("while(true)");
+      _builder.append("while(Boolean.TRUE)");
       _builder.newLine();
       _builder.append("\t\t\t");
       _builder.append("return \'\'");

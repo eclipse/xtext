@@ -278,7 +278,7 @@ public class CompilerBug419050Test extends AbstractXtendCompilerTest {
     _builder.append("if (b) { ");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("while(false) {}");
+    _builder.append("while(b) {}");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("}");
@@ -300,7 +300,7 @@ public class CompilerBug419050Test extends AbstractXtendCompilerTest {
     _builder_1.append("if (b) {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("while (false) {");
+    _builder_1.append("while (b) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");
@@ -446,9 +446,6 @@ public class CompilerBug419050Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return null;");
-    _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
@@ -489,9 +486,6 @@ public class CompilerBug419050Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return false;");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -549,9 +543,6 @@ public class CompilerBug419050Test extends AbstractXtendCompilerTest {
     _builder_1.append("        ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("return null;");
-    _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");
     _builder_1.newLine();
@@ -569,9 +560,6 @@ public class CompilerBug419050Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return false;");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -629,9 +617,6 @@ public class CompilerBug419050Test extends AbstractXtendCompilerTest {
     _builder_1.append("        ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("return false;");
-    _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");
     _builder_1.newLine();
@@ -649,9 +634,6 @@ public class CompilerBug419050Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return false;");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

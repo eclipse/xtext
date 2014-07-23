@@ -67,13 +67,11 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
-import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
-import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.internal.FeatureLinkHelper;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
@@ -95,12 +93,6 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XbaseCompiler extends FeatureCallCompiler {
-	
-	@Inject 
-	private IEarlyExitComputer earlyExitComputer;
-	
-	@Inject 
-	private IBatchTypeResolver batchTypeResolver;
 	
 	@Inject
 	private XSwitchExpressions switchExpressions;
@@ -623,7 +615,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append(") {").increaseIndentation();
 		b.openPseudoScope();
 		internalToJavaStatement(expr.getBody(), b, false);
-		if (needsStatement && !earlyExitComputer.isEarlyExit(expr.getBody())) {
+		if (needsStatement && !isEarlyExit(expr.getBody())) {
 			internalToJavaStatement(expr.getPredicate(), b, true);
 			b.newLine();
 			b.append(varName).append(" = ");
@@ -646,7 +638,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		b.newLine().append("do {").increaseIndentation();
 		internalToJavaStatement(expr.getBody(), b, false);
-		if (needsStatement && !earlyExitComputer.isEarlyExit(expr.getBody())) {
+		if (needsStatement && !isEarlyExit(expr.getBody())) {
 			internalToJavaStatement(expr.getPredicate(), b, true);
 			b.newLine();
 			b.append(variable).append(" = ");
@@ -805,7 +797,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			}
 		}
 		
-		if (!earlyExitComputer.isEarlyExit(eachExpression)) {
+		if (!isEarlyExit(eachExpression)) {
 			if (expression != null) {
 				internalToJavaStatement(expression, loopAppendable, true);
 				loopAppendable.newLine().append(varName).append(" = ");
@@ -1118,7 +1110,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			if (then != null) {
 				executeThenPart(expr, switchResultName, then, caseAppendable, isReferenced);
 			
-				if (!earlyExitComputer.isEarlyExit(then)) {
+				if (!isEarlyExit(then)) {
 					caseAppendable.newLine().append("break;");
 				}
 			}
@@ -1136,7 +1128,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				defaultAppendable.closeScope();
 			}
 			
-			if (!earlyExitComputer.isEarlyExit(expr.getDefault())) {
+			if (!isEarlyExit(expr.getDefault())) {
 				defaultAppendable.newLine().append("break;");
 			}
 			defaultAppendable.decreaseIndentation();
@@ -1409,7 +1401,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	protected boolean allCasesAreExitedEarly(XSwitchExpression expr) {
 		for(XCasePart casePart: expr.getCases()) {
-			if(!earlyExitComputer.isEarlyExit(casePart.getThen())) {
+			if(!isEarlyExit(casePart.getThen())) {
 				return false;
 			}
 		}
