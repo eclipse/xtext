@@ -36,6 +36,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
 import org.eclipse.xtend.core.xtend.XtendAnnotationType
 import com.google.common.base.Throwables
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.emf.common.notify.Notification
 
 /**
  * @author Sven Efftinge
@@ -112,12 +113,15 @@ class ActiveAnnotationContexts extends AdapterImpl {
 	
 	@Accessors val Map<JvmAnnotationType, ActiveAnnotationContext> contexts = newLinkedHashMap
 	protected CompilationUnitImpl compilationUnit
+	private boolean running
 	
 	def void before(AnnotationCallback phase) {
 		compilationUnit.before(phase)
+		running = true
 	}
 	
 	def void after(AnnotationCallback phase) {
+		running = false
 		compilationUnit.after(phase)
 	} 
 	
@@ -130,6 +134,15 @@ class ActiveAnnotationContexts extends AdapterImpl {
 			resource.eAdapters += result
 		}
 		return result
+	}
+	
+	override notifyChanged(Notification msg) {
+		if (!running && !msg.touch && Resource.RESOURCE__CONTENTS == msg.getFeatureID(Resource)) {
+			val resource = msg.notifier as Resource
+			resource.eAdapters.remove(this)
+			contexts.clear
+			compilationUnit = null
+		}
 	}
 	
 	def static ActiveAnnotationContexts find(Resource resource) {
