@@ -69,7 +69,15 @@ public class SyncUtil {
 			if (progress.isCanceled()) {
 				throw new InterruptedException();
 			}
-			waitForBuild(progress.newChild(4));
+			if (saveAll) {
+				// only trigger a build if the editors have been saved
+				waitForBuild(progress.newChild(4));
+			} else try {
+				// otherwise wait for the current background build to finish
+				Job.getJobManager().join(ResourcesPlugin.FAMILY_MANUAL_BUILD, progress.newChild(4));
+			} catch (InterruptedException e) {
+				// Ignore
+			}
 			if (progress.isCanceled()) {
 				throw new InterruptedException();
 			}
