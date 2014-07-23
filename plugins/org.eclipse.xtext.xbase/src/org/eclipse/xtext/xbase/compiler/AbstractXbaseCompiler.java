@@ -154,7 +154,7 @@ public abstract class AbstractXbaseCompiler {
 		
 		final boolean isPrimitiveVoidExpected = expectedType.isPrimitiveVoid(); 
 		final boolean isPrimitiveVoid = isPrimitiveVoid(obj);
-		final boolean earlyExit = exitComputer.isEarlyExit(obj);
+		final boolean earlyExit = isEarlyExit(obj);
 		boolean needsSneakyThrow = needsSneakyThrow(obj, Collections.<JvmTypeReference>emptySet());
 		boolean needsToBeWrapped = earlyExit || needsSneakyThrow || !canCompileToJavaExpression(obj, appendable);
 		if (needsToBeWrapped) {
@@ -278,7 +278,7 @@ public abstract class AbstractXbaseCompiler {
 		ITreeAppendable appendable = parentAppendable.trace(obj, true);
 		final boolean isPrimitiveVoidExpected = expectedReturnType.isPrimitiveVoid(); 
 		final boolean isPrimitiveVoid = isPrimitiveVoid(obj);
-		final boolean earlyExit = exitComputer.isEarlyExit(obj);
+		final boolean earlyExit = isEarlyExit(obj);
 		boolean needsSneakyThrow = needsSneakyThrow(obj, declaredExceptions);
 		if (needsSneakyThrow && isPrimitiveVoidExpected && hasJvmConstructorCall(obj)) {
 			compileWithJvmConstructorCall((XBlockExpression) obj, appendable);
@@ -289,13 +289,13 @@ public abstract class AbstractXbaseCompiler {
 		}
 		internalToJavaStatement(obj, appendable, !isPrimitiveVoidExpected && !isPrimitiveVoid && !earlyExit);
 		if (!isPrimitiveVoidExpected && !earlyExit) {
-				appendable.newLine().append("return ");
-				if (isPrimitiveVoid && !isPrimitiveVoidExpected) {
-					appendDefaultLiteral(appendable, expectedReturnType);
-				} else {
-					internalToConvertedExpression(obj, appendable, expectedReturnType);
-				}
-				appendable.append(";");
+			appendable.newLine().append("return ");
+			if (isPrimitiveVoid && !isPrimitiveVoidExpected) {
+				appendDefaultLiteral(appendable, expectedReturnType);
+			} else {
+				internalToConvertedExpression(obj, appendable, expectedReturnType);
+			}
+			appendable.append(";");
 		}
 		if (needsSneakyThrow) {
 			generateCheckedExceptionHandling(appendable);
@@ -370,7 +370,7 @@ public abstract class AbstractXbaseCompiler {
 	public ITreeAppendable compile(XBlockExpression expr, ITreeAppendable b, LightweightTypeReference expectedReturnType) {
 		final boolean isPrimitiveVoidExpected = expectedReturnType.isPrimitiveVoid(); 
 		final boolean isPrimitiveVoid = isPrimitiveVoid(expr);
-		final boolean earlyExit = exitComputer.isEarlyExit(expr);
+		final boolean earlyExit = isEarlyExit(expr);
 		final boolean isImplicitReturn = !isPrimitiveVoidExpected && !isPrimitiveVoid && !earlyExit;
 		final EList<XExpression> expressions = expr.getExpressions();
 		for (int i = 0; i < expressions.size(); i++) {
@@ -387,6 +387,10 @@ public abstract class AbstractXbaseCompiler {
 			}
 		}
 		return b;
+	}
+
+	protected boolean isEarlyExit(XExpression expr) {
+		return exitComputer.isEarlyExit(expr);
 	}
 
 	protected boolean isPrimitiveVoid(JvmTypeReference typeRef) {

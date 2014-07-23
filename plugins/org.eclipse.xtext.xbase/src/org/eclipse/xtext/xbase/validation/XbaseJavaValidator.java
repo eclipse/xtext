@@ -31,7 +31,6 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
-import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -90,13 +89,12 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter;
 import org.eclipse.xtext.xbase.compiler.CompilationTemplateAdapter;
-import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
 import org.eclipse.xtext.xbase.imports.ImportedTypesCollector;
 import org.eclipse.xtext.xbase.imports.StaticallyImportedMemberProvider;
 import org.eclipse.xtext.xbase.imports.TypeUsages;
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException;
-import org.eclipse.xtext.xbase.interpreter.SwitchConstantExpressionsInterpreter;
+import org.eclipse.xtext.xbase.interpreter.ConstantExpressionsInterpreter;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
@@ -157,9 +155,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	private XExpressionHelper expressionHelper;
 
 	@Inject
-	private IEarlyExitComputer earlyExitComputer;
-
-	@Inject
 	private ILogicalContainerProvider logicalContainerProvider;
 	
 	@Inject
@@ -184,7 +179,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	private TypesOrderUtil typesOrderUtil;
 	
 	@Inject
-	private SwitchConstantExpressionsInterpreter switchConstantExpressionsInterpreter;
+	private ConstantExpressionsInterpreter switchConstantExpressionsInterpreter;
 	
 	@Inject
 	private Provider<ImportedTypesCollector> importedTypesCollectorProvider;
@@ -419,12 +414,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			}
 
 		}
-	}
-
-	protected boolean isImplicitReturn(XExpression expr) {
-		JvmIdentifiableElement logicalContainer = logicalContainerProvider.getLogicalContainer(expr);
-		return (logicalContainer instanceof JvmExecutable || logicalContainer instanceof JvmField || expr.eContainer() instanceof XClosure)
-				&& !earlyExitComputer.isEarlyExit(expr);
 	}
 
 	protected String getNameOfTypes(LightweightTypeReference expectedType) {

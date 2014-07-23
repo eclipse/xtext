@@ -12,15 +12,15 @@ import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.junit.Test
-import org.eclipse.xtext.xbase.interpreter.SwitchConstantExpressionsInterpreter
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral
+import org.eclipse.xtext.xbase.interpreter.ConstantExpressionsInterpreter
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
  */
 class SwitchConstantExpressionsInterpreterTest extends AbstractXbaseTestCase {
 	
-	@Inject SwitchConstantExpressionsInterpreter interpreter
+	@Inject ConstantExpressionsInterpreter interpreter
 	
 	@Test def void testXNumberLiteral() {
 		('int'->'1').evaluatesTo(1)

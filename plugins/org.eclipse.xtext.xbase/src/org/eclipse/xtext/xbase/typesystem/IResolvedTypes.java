@@ -75,12 +75,6 @@ public interface IResolvedTypes {
 	
 	List<LightweightTypeReference> getThrownExceptions(XExpression obj);
 	
-//	/**
-//	 * Returns the traced declared type for the given identifiable or <code>null</code> if none.
-//	 * @param identifiable identifiable whose type is queried.
-//	 */
-//	/* @Nullable */
-//	JvmTypeReference getDeclaredType(JvmIdentifiableElement identifiable);
 	
 	/**
 	 * Returns the actually expected type for the given expression or <code>null</code> if none.
@@ -232,11 +226,6 @@ public interface IResolvedTypes {
 		public LightweightTypeReference getActualType(JvmIdentifiableElement identifiable) {
 			return null;
 		}
-		
-//		/* @Nullable */
-//		public JvmTypeReference getDeclaredType(JvmIdentifiableElement identifiable) {
-//			return null;
-//		}
 		
 		public boolean isVoidTypeAllowed(XExpression expression) {
 			return false;
