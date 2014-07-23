@@ -482,6 +482,24 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
+	def void testErrorModel_29() throws Exception {
+		'''
+			package x
+			class Y {
+				def String test() {
+					newArrayList('fo','bar').minBy[]
+				}
+				def <A,B extends Comparable<? super B>> A minBy(Iterable<A> iterable, (A)=>B maxOn) {
+					iterable.sortBy(maxOn).last
+				}
+				def <A,B extends Comparable<? super B>> A minBy(java.util.Collection<A> iterable, (A)=>B maxOn) {
+					iterable.sortBy(maxOn).last
+				}
+			}
+		'''.processWithoutException
+	}
+	
+	@Test
 	def void testErrorModel_30() throws Exception {
 		'''
 			package x class Y {
@@ -1593,6 +1611,21 @@ class ErrorTest extends AbstractXtendTestCase {
 		fireproof('''
 			class C {
 				java.lang.annotation.RetentionPolicy<String> x
+			}
+		''')
+	}
+	
+	@Test
+	def void testErrorModel_112() throws Exception {
+		fireproof('''
+			package x
+			class Y {
+				def String test() {
+					newArrayList('fo','bar').maxBy[]
+				}
+				def <A,B extends Comparable<? super B>> A maxBy(Iterable<A> iterable, (A)=>B maxOn) {
+					iterable.sortBy(maxOn).last
+				}
 			}
 		''')
 	}
