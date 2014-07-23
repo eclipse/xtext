@@ -73,10 +73,10 @@ public class XtextDocument extends Document implements IXtextDocument {
 	}
 
 	public void disposeInput() {
-		resource = null;
 		if (validationJob != null) {
 			validationJob.cancel();
 		}
+		resource = null;
 	}
 
 	private final XtextDocumentLocker stateAccess = createDocumentLocker();

@@ -80,7 +80,7 @@ class Oven extends Assert {
 		} catch(Throwable t) {
 			t.printStackTrace
 			println(input)
-			throw new RuntimeException("Expression was: '" + input + '"', t)
+			throw new RuntimeException("Expression was: '" + input + "'", t)
 		}
 	}
 	

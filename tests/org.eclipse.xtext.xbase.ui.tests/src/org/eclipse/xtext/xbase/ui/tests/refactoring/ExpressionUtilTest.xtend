@@ -38,10 +38,10 @@ class ExpressionUtilTest extends AbstractXbaseTestCase {
 		assertExpressionSelected('12$3+$456', '123+456')
 		assertExpressionSelected('123$+4$56', '123+456')
 		
-		assertExpressionSelected('if(true$$) null', 'true')
-		assertExpressionSelected('if(true)$$ null', 'if(true) null')
-		assertExpressionSelected('if(true) null$$ else null', 'null')
-		assertExpressionSelected('if(true) null $$else null', 'if(true) null else null')
+		assertExpressionSelected('if(Boolean.TRUE$$) null', 'Boolean.TRUE')
+		assertExpressionSelected('if(Boolean.TRUE)$$ null', 'if(Boolean.TRUE) null')
+		assertExpressionSelected('if(Boolean.TRUE) null$$ else null', 'null')
+		assertExpressionSelected('if(Boolean.TRUE) null $$else null', 'if(Boolean.TRUE) null else null')
 
 		assertExpressionSelected("newArrayList('jan','hein','claas','pit').map[$it|toFirstUpper]$", '[it|toFirstUpper]')
 		assertExpressionSelected("newArrayList('jan','hein','claas','pit').map[it$|$toFirstUpper]", '[it|toFirstUpper]')
@@ -60,7 +60,8 @@ class ExpressionUtilTest extends AbstractXbaseTestCase {
 	}
 	@Test
 	def testSelectedExpression_02() {
-		assertExpressionSelected('if($$true) null', 'true')
+		assertExpressionSelected('if(Boolean.$$TRUE) null', 'Boolean.TRUE')
+//		assertExpressionSelected('if($$Boolean.TRUE) null', 'Boolean.TRUE')
 	}
 	
 	@Test
@@ -101,12 +102,13 @@ class ExpressionUtilTest extends AbstractXbaseTestCase {
 		assertSiblingExpressionsSelected('123$+$456', '123+456')
 		assertSiblingExpressionsSelected('12$3+$456', '123+456')
 		assertSiblingExpressionsSelected('123$+4$56', '123+456')
-		assertSiblingExpressionsSelected('if($$true) null', 'true')
-		assertSiblingExpressionsSelected('if(true$$) null', 'true')
-		assertSiblingExpressionsSelected('if(true)$$ null', 'if(true) null')
-		assertSiblingExpressionsSelected('if(true) $$null', 'null')
-		assertSiblingExpressionsSelected('if(true) null$$ else null', 'null')
-		assertSiblingExpressionsSelected('if(true) null $$else null', 'if(true) null else null')
+//		assertSiblingExpressionsSelected('if($$Boolean.TRUE) null', 'Boolean.TRUE')
+		assertSiblingExpressionsSelected('if(Boolean.$$TRUE) null', 'Boolean.TRUE')
+		assertSiblingExpressionsSelected('if(Boolean.TRUE$$) null', 'Boolean.TRUE')
+		assertSiblingExpressionsSelected('if(Boolean.TRUE)$$ null', 'if(Boolean.TRUE) null')
+		assertSiblingExpressionsSelected('if(Boolean.TRUE) $$null', 'null')
+		assertSiblingExpressionsSelected('if(Boolean.TRUE) null$$ else null', 'null')
+		assertSiblingExpressionsSelected('if(Boolean.TRUE) null $$else null', 'if(Boolean.TRUE) null else null')
 	}
 	
 	@Test
@@ -129,11 +131,11 @@ class ExpressionUtilTest extends AbstractXbaseTestCase {
 
 	@Test 
 	def testInsertionPointIf() {
-		assertInsertionPoint('if($1==2) true', null)
-		assertInsertionPoint('{ if($1==2) true }', 'if(1==2) true')
-		assertInsertionPoint('if(1==2) $true', 'true')
-		assertInsertionPoint('if(1==2) true else $false', 'false')
-		assertInsertionPoint('if(1==2) { val x = 7 + $8 }', 'val x = 7 + 8')
+		assertInsertionPoint('if($1==2.intValue) true', null)
+		assertInsertionPoint('{ if($1==2.intValue) true }', 'if(1==2.intValue) true')
+		assertInsertionPoint('if(1==2.intValue) $true', 'true')
+		assertInsertionPoint('if(1==2.intValue) true else $false', 'false')
+		assertInsertionPoint('if(1==2.intValue) { val x = 7 + $8 }', 'val x = 7 + 8')
 	}
 	
 	@Test 
