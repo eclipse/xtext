@@ -84,7 +84,11 @@ public class QualifiedNameValueConverter extends AbstractValueConverter<String> 
 			if (i != 0) {
 				result.append(delimiterToUse);
 			}
-			result.append(delegateToString(segments.get(i)));
+			if (i == size - 1 && getWildcardLiteral().equals(segments.get(i))) {
+				result.append(getWildcardLiteral());
+			} else {
+				result.append(delegateToString(segments.get(i)));
+			}
 		}
 		return result.toString();
 	}
