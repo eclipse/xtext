@@ -80,7 +80,7 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 	 */
 	@Test public void testIfExpression_06() throws Exception {
 		assertEvaluatesTo(0, 
-				"if (false) return 1");
+				"if (Boolean.FALSE) return 1");
 	}
 	
 	/**
@@ -88,6 +88,6 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 	 */
 	@Test public void testIfExpression_07() throws Exception {
 		assertEvaluatesTo(0l, 
-				"if (false) return 1L");
+				"if (Boolean.FALSE) return 1L");
 	}
 }
