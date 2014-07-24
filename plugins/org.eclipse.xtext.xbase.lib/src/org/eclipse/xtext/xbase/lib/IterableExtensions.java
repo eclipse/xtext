@@ -603,6 +603,25 @@ public class IterableExtensions {
 	public static <K, V> Map<K, V> toMap(Iterable<? extends V> values, Function1<? super V, K> computeKeys) {
 		return IteratorExtensions.toMap(values.iterator(), computeKeys);
 	}
+	
+	/**
+	 * Returns a map for which the {@link Map#values} are the given elements in the given order, and each key is the
+	 * product of invoking a supplied function {@code computeKeys} on its corresponding value. If the function produces
+	 * the same key for different values, the collection of these values will be contained in the map.
+	 * 
+	 * @param values
+	 *            the values to use when constructing the {@code Map}. May not be <code>null</code>.
+	 * @param computeKeys
+	 *            the function used to produce the key for each value. May not be <code>null</code>.
+	 * @return a map mapping the result of evaluating the function {@code keyFunction} on each value in the input
+	 *         collection to that value. As there can be more than one value mapped by a key, the mapping result is is a
+	 *         collection of values.
+	 * @since 2.7
+	 */
+	public static <K, V> Map<K, List<V>> groupBy(Iterable<? extends V> values,
+			Function1<? super V, ? extends K> computeKeys) {
+		return IteratorExtensions.groupBy(values.iterator(), computeKeys);
+   }
 
 	/**
 	 * Creates a sorted list that contains the items of the given iterable. The resulting list is in ascending order,

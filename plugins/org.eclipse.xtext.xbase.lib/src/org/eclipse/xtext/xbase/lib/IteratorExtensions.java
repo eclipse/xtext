@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.lib;
 
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -691,6 +692,39 @@ import com.google.common.collect.Sets;
 		}
 		return result;
 	}
+	
+	/**
+	 * Returns a map for which the {@link Map#values} are the given elements in the given order, and each key is the
+	 * product of invoking a supplied function {@code computeKeys} on its corresponding value. If the function produces
+	 * the same key for different values, the collection of these values will be contained in the map. 
+	 * The value iterator is left exhausted.
+	 * 
+	 * @param values
+	 *            the values to use when constructing the {@code Map}. May not be <code>null</code>.
+	 * @param computeKeys
+	 *            the function used to produce the key for each value. May not be <code>null</code>.
+	 * @return a map mapping the result of evaluating the function {@code keyFunction} on each value in the input
+	 *         collection to that value. As there can be more than one value mapped by a key, the mapping result is is a
+	 *         collection of values.
+	 * @since 2.7
+	 */
+	public static <K, V> Map<K, List<V>> groupBy(Iterator<? extends V> values,
+			Function1<? super V, ? extends K> computeKeys) {
+		if (computeKeys == null)
+			throw new NullPointerException("computeKeys");
+		Map<K, List<V>> result = Maps.newLinkedHashMap();
+		while(values.hasNext()) {
+			V v = values.next();
+			K key = computeKeys.apply(v);
+			List<V> grouped = result.get(key);
+			if (grouped == null) {
+				grouped = new LinkedList<V>();
+			}
+			grouped.add(v);
+			result.put(key, grouped);
+		}
+		return result;
+	}	
 
 	/**
 	 * Returns an Iterator containing all elements starting from the head of the source up to and excluding the first
