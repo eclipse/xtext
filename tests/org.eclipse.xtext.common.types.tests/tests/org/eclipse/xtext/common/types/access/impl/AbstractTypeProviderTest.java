@@ -101,7 +101,6 @@ import org.eclipse.xtext.common.types.testSetups.TypeWithInnerAnnotation;
 import org.eclipse.xtext.common.types.testSetups.TypeWithInnerEnum;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.base.Function;
@@ -1827,14 +1826,16 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		}));
 	}
 	
-	@Test @Ignore public void testInnerType_WrappedIterator_01() throws Exception {
+	@Test
+	public void testInnerType_WrappedIterator_01() throws Exception {
 		JvmGenericType wrappedIterator = (JvmGenericType) getTypeProvider().findTypeByName(
-				"com.google.common.collect.AbstractMultimap$WrappedCollection$WrappedIterator");
+				"org.eclipse.xtext.common.types.testSetups.Bug438740$Coll$Iter");
 		doTestInnerType_WrappedIterator_01(wrappedIterator);
 	}
-	@Test @Ignore public void testInnerType_WrappedIterator_01b() throws Exception {
+	@Test
+	public void testInnerType_WrappedIterator_01b() throws Exception {
 		JvmGenericType wrappedIterator = (JvmGenericType) getTypeProvider().findTypeByName(
-				"com.google.common.collect.AbstractMultimap.WrappedCollection.WrappedIterator", false);
+				"org.eclipse.xtext.common.types.testSetups.Bug438740.Coll.Iter", false);
 		doTestInnerType_WrappedIterator_01(wrappedIterator);
 	}
 	private void doTestInnerType_WrappedIterator_01(JvmGenericType wrappedIterator) {
@@ -1843,7 +1844,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertTrue(Iterables.any(wrappedIterator.getMembers(), new Predicate<JvmMember>() {
 			public boolean apply(JvmMember input) {
 				return (input instanceof JvmConstructor)
-						&& input.getSimpleName().equals("WrappedIterator")
+						&& input.getSimpleName().equals("Iter")
 						&& ((JvmConstructor)input).getParameters().size() == 0;
 			}
 		}));
@@ -1851,7 +1852,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		JvmConstructor secondConstructor = (JvmConstructor) Iterables.find(wrappedIterator.getMembers(), new Predicate<JvmMember>() {
 			public boolean apply(JvmMember input) {
 				return (input instanceof JvmConstructor)
-						&& input.getSimpleName().equals("WrappedIterator")
+						&& input.getSimpleName().equals("Iter")
 						&& ((JvmConstructor)input).getParameters().size() == 1;
 			}
 		});
