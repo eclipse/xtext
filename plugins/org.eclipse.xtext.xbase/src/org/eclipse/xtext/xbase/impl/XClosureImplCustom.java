@@ -59,6 +59,10 @@ public class XClosureImplCustom extends XClosureImpl {
 			}
 		}
 	}
+	
+	public void setLinked(boolean linked) {
+		this.linked = linked;
+	}
 
 	@Override
 	public void eUnset(int featureID)
