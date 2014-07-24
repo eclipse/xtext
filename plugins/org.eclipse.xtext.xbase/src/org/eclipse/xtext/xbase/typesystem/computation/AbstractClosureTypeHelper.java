@@ -16,6 +16,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XClosure;
+import org.eclipse.xtext.xbase.impl.XClosureImplCustom;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
@@ -156,6 +157,7 @@ public abstract class AbstractClosureTypeHelper implements IClosureCandidate {
 				targetList.addUnique(parameter);
 			}
 		}
+		((XClosureImplCustom) closure).setLinked(true);
 	}
 	
 	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
