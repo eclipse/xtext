@@ -11,14 +11,21 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.text.templates.TemplateContext;
 import org.eclipse.jface.text.templates.TemplateVariable;
+import org.eclipse.xtext.conversion.IValueConverter;
+import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.ui.codetemplates.templates.TemplatesPackage;
 import org.eclipse.xtext.ui.codetemplates.templates.Variable;
 import org.eclipse.xtext.ui.codetemplates.ui.resolvers.IInspectableTemplateVariableResolver;
 import org.eclipse.xtext.ui.editor.templates.AbstractTemplateVariableResolver;
 import org.eclipse.xtext.ui.editor.templates.XtextTemplateContext;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
+import org.eclipse.xtext.xbase.conversion.XbaseValueConverterService;
+
+import com.google.inject.Inject;
 
 /**
  * @author Dennis Huebner (dhuebner) - Initial contribution and API
@@ -26,6 +33,8 @@ import org.eclipse.xtext.validation.ValidationMessageAcceptor;
  */
 public class ImportsVariableResolver extends AbstractTemplateVariableResolver implements
 		IInspectableTemplateVariableResolver {
+	@Inject
+	private IValueConverterService valueConverterService;
 
 	public ImportsVariableResolver() {
 		super(Messages.ImportsVariableResolver_0, Messages.ImportsVariableResolver_1);
@@ -70,6 +79,20 @@ public class ImportsVariableResolver extends AbstractTemplateVariableResolver im
 		if (variable.getParameters().isEmpty()) {
 			validationMessageAcceptor.acceptError(getType() + "-variables have mandatory parameters.", variable,
 					TemplatesPackage.Literals.VARIABLE__TYPE, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);
+		} else {
+			EList<String> parameters = variable.getParameters();
+			for (int i = 0; i < parameters.size(); i++) {
+				String param = parameters.get(i);
+				try {
+					IValueConverter<String> converter = ((XbaseValueConverterService) valueConverterService)
+							.getQualifiedNameWithWildCardValueConverter();
+					converter.toString(param);
+				} catch (ValueConverterException e) {
+					validationMessageAcceptor.acceptError(getType() + " - parameter " + param
+							+ " is not a valid qualifier.", variable, TemplatesPackage.Literals.VARIABLE__PARAMETERS,
+							i, null);
+				}
+			}
 		}
 	}
 }
