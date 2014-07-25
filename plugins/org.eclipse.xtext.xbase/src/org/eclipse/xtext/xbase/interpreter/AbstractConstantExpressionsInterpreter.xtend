@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.interpreter
 import com.google.inject.Inject
 import java.util.Map
 import java.util.Set
+import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.common.types.JvmType
@@ -25,7 +26,6 @@ import org.eclipse.xtext.xbase.XStringLiteral
 import org.eclipse.xtext.xbase.XTypeLiteral
 import org.eclipse.xtext.xbase.XUnaryOperation
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
-import org.eclipse.xtend.lib.annotations.Data
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -86,7 +86,11 @@ class AbstractConstantExpressionsInterpreter {
 		val left = leftOperand.internalEvaluate(context) 
 		val right = rightOperand.internalEvaluate(context)
 
-		val op = concreteSyntaxFeatureName
+		evaluateBinaryOperation(it, left, right)
+	}
+	
+	protected def evaluateBinaryOperation(XBinaryOperation binaryOperation, Object left, Object right) {
+		val op = binaryOperation.concreteSyntaxFeatureName
 		switch op {
 			case '+': constantOperators.plus(left, right)
 			case '-': constantOperators.minus(left, right)

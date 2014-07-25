@@ -29,11 +29,9 @@ import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.interpreter.AbstractConstantExpressionsInterpreter;
-import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException;
 import org.eclipse.xtext.xbase.interpreter.Context;
 import org.eclipse.xtext.xbase.interpreter.UnresolvableFeatureException;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
 
@@ -41,7 +39,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
  * @author Anton Kosyakov - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpreter {
+public class SwitchConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpreter {
   @Inject
   @Extension
   private ILogicalContainerProvider _iLogicalContainerProvider;
@@ -49,20 +47,6 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
   @Inject
   @Extension
   private NumberLiterals numberLiterals;
-  
-  public boolean isConstant(final XExpression it, final Object value) {
-    try {
-      final Object constant = this.evaluate(it);
-      return Objects.equal(value, constant);
-    } catch (final Throwable _t) {
-      if (_t instanceof ConstantExpressionEvaluationException) {
-        final ConstantExpressionEvaluationException e = (ConstantExpressionEvaluationException)_t;
-        return false;
-      } else {
-        throw Exceptions.sneakyThrow(_t);
-      }
-    }
-  }
   
   public Object evaluate(final XExpression it) {
     return this.internalEvaluate(it, null);

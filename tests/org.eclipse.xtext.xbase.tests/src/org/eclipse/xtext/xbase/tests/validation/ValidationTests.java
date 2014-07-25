@@ -20,7 +20,9 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
+import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.junit.Ignore;
@@ -169,7 +171,7 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	}
 	
 	@Test public void testNonStatementExpression_16() throws Exception {
-		XExpression expr = expression("{val x = if (42 == 23.intValue) 'test' x}");
+		XExpression expr = expression("{val x = if (42 == 23) 'test' x}");
 		helper.assertNoErrors(expr);
 	}
 	@Test public void testNonStatementExpression_17() throws Exception {
@@ -328,7 +330,7 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	}
 	
 	@Test public void testVoidInReturnExpression_03() throws Exception {
-		XExpression expression = expression("return if (Boolean.TRUE) while(Boolean.FALSE) ('foo'+'bar').length else 'zonk'");
+		XExpression expression = expression("return if (true) while(false) ('foo'+'bar').length else 'zonk'");
 		helper.assertError(expression, XWHILE_EXPRESSION, INCOMPATIBLE_TYPES);
 		helper.assertNoIssues(expression, XIF_EXPRESSION);
 		helper.assertNoIssues(expression, XSTRING_LITERAL);
@@ -340,7 +342,7 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	}
 	
 	@Test public void testVoidInReturnExpression_05() throws Exception {
-		XExpression expression = expression("return if (Boolean.TRUE) while(Boolean.FALSE) ('foo'+'bar').length else null");
+		XExpression expression = expression("return if (true) while(false) ('foo'+'bar').length else null");
 		helper.assertError(expression, XWHILE_EXPRESSION, INCOMPATIBLE_TYPES);
 		helper.assertNoIssues(expression, XIF_EXPRESSION);
 		helper.assertNoIssues(expression, XNULL_LITERAL);
@@ -441,7 +443,7 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	}
 	
 	@Test public void testThrowsInBlock_03() throws Exception {
-		XExpression block = expression("{ if (Boolean.TRUE) throw new Exception() new Object()}");
+		XExpression block = expression("{ if (true) throw new Exception() new Object()}");
 		helper.assertNoErrors(block);
 	}
 	
@@ -473,13 +475,14 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertError(expression, XbasePackage.Literals.XRETURN_EXPRESSION, INVALID_EARLY_EXIT, "return", "context");
 	}
 	
+	@Ignore("TODO To be implemented - should be a control flow problem")
 	@Test public void testInvalidEarlyExit_04() throws Exception {
 		XExpression expression = expression("if (return 1) {}");
-		helper.assertError(expression, XbasePackage.Literals.XBLOCK_EXPRESSION, UNREACHABLE_CODE, "Unreachable expression");
+		helper.assertError(expression, XbasePackage.Literals.XRETURN_EXPRESSION, INCOMPATIBLE_TYPES, "void", "boolean");
 	}
 	
 	@Test public void testInvalidEarlyExit_05() throws Exception {
-		XExpression expression = expression("if (Boolean.TRUE) return 1 else throw new Exception()");
+		XExpression expression = expression("if (true) return 1 else throw new Exception()");
 		helper.assertNoErrors(expression);
 	}
 	
@@ -494,13 +497,16 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	}
 	
 	@Test public void testUnreachableCode_01() throws Exception {
-		XExpression expression = expression(
+		XBlockExpression expression = (XBlockExpression) expression(
 				"{" +
-				"	while (Boolean.FALSE) " +
+				"	while (false) {" +
 				"      throw new Exception() " +
+				"   }" +
 				"   null" +
 				"}");
-		helper.assertNoErrors(expression);
+		XWhileExpression whileLoop = (XWhileExpression) expression.getExpressions().get(0);
+		XThrowExpression throwExpression = (XThrowExpression) ((XBlockExpression) whileLoop.getBody()).getExpressions().get(0);
+		helper.assertError(throwExpression, XbasePackage.Literals.XTHROW_EXPRESSION, UNREACHABLE_CODE);
 	}
 	
 	@Test public void testUnreachableCode_02() throws Exception {

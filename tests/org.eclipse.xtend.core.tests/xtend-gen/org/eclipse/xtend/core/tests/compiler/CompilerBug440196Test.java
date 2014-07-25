@@ -246,4 +246,51 @@ public class CompilerBug440196Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
+  
+  @Test
+  public void test_05() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def boolean bug() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val b = true");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("while (b) return true;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public boolean bug() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("final boolean b = true;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("while (b) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("return true;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
 }

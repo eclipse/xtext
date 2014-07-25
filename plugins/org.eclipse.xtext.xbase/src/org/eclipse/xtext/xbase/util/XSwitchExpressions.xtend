@@ -13,7 +13,7 @@ import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XSwitchExpression
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
-import org.eclipse.xtext.xbase.interpreter.ConstantExpressionsInterpreter
+import org.eclipse.xtext.xbase.interpreter.SwitchConstantExpressionsInterpreter
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -24,7 +24,7 @@ class XSwitchExpressions {
 	extension IBatchTypeResolver
 
 	@Inject
-	extension ConstantExpressionsInterpreter
+	extension SwitchConstantExpressionsInterpreter
 
 	def isJavaSwitchExpression(XSwitchExpression it) {
 		val switchType = switchVariableType

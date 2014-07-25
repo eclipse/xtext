@@ -16,8 +16,6 @@ import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtend.lib.macro.declaration.Visibility
 
-import static org.eclipse.xtend.lib.annotations.AccessorType.*
-
 /**
  * @since 2.7
  */

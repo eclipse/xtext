@@ -121,7 +121,15 @@ public class AbstractConstantExpressionsInterpreter {
       final Object left = this.internalEvaluate(_leftOperand, context);
       XExpression _rightOperand = it.getRightOperand();
       final Object right = this.internalEvaluate(_rightOperand, context);
-      final String op = it.getConcreteSyntaxFeatureName();
+      _xblockexpression = this.evaluateBinaryOperation(it, left, right);
+    }
+    return _xblockexpression;
+  }
+  
+  protected Object evaluateBinaryOperation(final XBinaryOperation binaryOperation, final Object left, final Object right) {
+    Object _xblockexpression = null;
+    {
+      final String op = binaryOperation.getConcreteSyntaxFeatureName();
       Object _switchResult = null;
       boolean _matched = false;
       if (!_matched) {

@@ -31,8 +31,8 @@ import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.controlflow.ConstantConditionsInterpreter;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
-import org.eclipse.xtext.xbase.interpreter.ConstantExpressionsInterpreter;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
@@ -61,7 +61,7 @@ public class EarlyExitValidator extends AbstractDeclarativeValidator {
 	private IEarlyExitComputer earlyExitComputer;
 	
 	@Inject
-	private ConstantExpressionsInterpreter constantExpressionInterpreter;
+	private ConstantConditionsInterpreter constantExpressionInterpreter;
 	
 	@Check
 	public void checkInvalidReturnExpression(XExpression expression) {
@@ -98,13 +98,13 @@ public class EarlyExitValidator extends AbstractDeclarativeValidator {
 	@Check
 	public void checkDeadCode(XBlockExpression block) {
 		List<XExpression> expressions = block.getExpressions();
-		for(int i = 0; i < expressions.size() - 1; i++) {
+		for(int i = 0, size = expressions.size(); i < size - 1; i++) {
 			XExpression expression = expressions.get(i);
 			if (earlyExitComputer.isEarlyExit(expression)) {
 				if (!(expression instanceof XAbstractFeatureCall)) {
 					// XAbstractFeatureCall does already a decent job for its argument lists
 					// no additional error necessary
-					error("Unreachable expression.", expressions.get(i + 1), null, IssueCodes.UNREACHABLE_CODE);
+					markAsDeadCode(expressions.get(i + 1));
 				}
 				return;
 			}
@@ -113,16 +113,22 @@ public class EarlyExitValidator extends AbstractDeclarativeValidator {
 	
 	@Check
 	public void checkDeadCode(XWhileExpression loop) {
-		if (!earlyExitComputer.isEarlyExit(loop.getPredicate())) {
-			if (isConstant(loop.getPredicate(), Boolean.FALSE)) {
-				markAsDeadCode(loop.getBody());
+		XExpression predicate = loop.getPredicate();
+		if (!earlyExitComputer.isEarlyExit(predicate)) {
+			Boolean constant = getBooleanConstantOrNull(predicate);
+			if (constant != null) {
+				if (constant.booleanValue()) {
+					addIssue("Constant condition is always " + constant, predicate, null, IssueCodes.CONSTANT_BOOLEAN_CONDITION);
+				} else {
+					markAsDeadCode(loop.getBody());
+				}
 			}
 		} else {
 			markAsDeadCode(loop.getBody());
 		}
 	}
 
-	protected boolean markAsDeadCode(List<XExpression> expressions) {
+	private boolean markAsDeadCode(List<XExpression> expressions) {
 		if (!expressions.isEmpty()) {
 			markAsDeadCode(expressions.get(0));
 			return true;
@@ -130,7 +136,16 @@ public class EarlyExitValidator extends AbstractDeclarativeValidator {
 		return false;
 	}
 	
-	protected boolean markAsDeadCode(XExpression expression) {
+	private void validateCondition(XExpression expression) {
+		if (!isIgnored(IssueCodes.CONSTANT_BOOLEAN_CONDITION)) {
+			Boolean constant = getBooleanConstantOrNull(expression);
+			if (constant != null) {
+				addIssue("Constant condition is always " + constant, expression, null, IssueCodes.CONSTANT_BOOLEAN_CONDITION);
+			}
+		}
+	}
+	
+	private boolean markAsDeadCode(XExpression expression) {
 		if (expression instanceof XBlockExpression) {
 			List<XExpression> expressions = ((XBlockExpression) expression).getExpressions();
 			if (markAsDeadCode(expressions)) {
@@ -145,7 +160,7 @@ public class EarlyExitValidator extends AbstractDeclarativeValidator {
 		}
 	}
 	
-	protected boolean markAsDeadCode(JvmTypeReference typeGuard) {
+	private boolean markAsDeadCode(JvmTypeReference typeGuard) {
 		if (typeGuard != null) {
 			error("Unreachable expression.", typeGuard, null, IssueCodes.UNREACHABLE_CODE);
 			return true;
@@ -163,15 +178,7 @@ public class EarlyExitValidator extends AbstractDeclarativeValidator {
 	@Check
 	public void checkDeadCode(XIfExpression condition) {
 		if (!earlyExitComputer.isEarlyExit(condition.getIf())) {
-			if (isConstant(condition.getIf(), Boolean.TRUE)) {
-				if (condition.getElse() != null) { 
-					markAsDeadCode(condition.getElse());
-				} else {
-					error("Unnecessary condition. Expression evaluates always to true.", condition.getIf(), null, IssueCodes.UNREACHABLE_CODE);
-				}
-			} else if (isConstant(condition.getIf(), Boolean.FALSE)) {
-				markAsDeadCode(condition.getThen());
-			}
+			validateCondition(condition.getIf());
 		} else {
 			if (!markAsDeadCode(condition.getThen())) {
 				markAsDeadCode(condition.getElse());
@@ -181,11 +188,19 @@ public class EarlyExitValidator extends AbstractDeclarativeValidator {
 	
 	@Check
 	public void checkDeadCode(XBasicForLoopExpression loop) {
-		if (!earlyExitComputer.isEarlyExit(loop.getExpression())) {
-			if (isConstant(loop.getExpression(), Boolean.FALSE)) {
-				if (!markAsDeadCode(loop.getUpdateExpressions())) {
+		XExpression predicate = loop.getExpression();
+		if (!earlyExitComputer.isEarlyExit(predicate)) {
+			Boolean constant = getBooleanConstantOrNull(predicate);
+			if (constant != null) {
+				if (constant.booleanValue()) {
+					addIssue("Constant condition is always " + constant, predicate, null, IssueCodes.CONSTANT_BOOLEAN_CONDITION);
+				} else {
 					markAsDeadCode(loop.getEachExpression());
+					return;
 				}
+			}
+			if (earlyExitComputer.isEarlyExit(loop.getEachExpression())) {
+				markAsDeadCode(loop.getUpdateExpressions());
 			}
 		} else {
 			if (!markAsDeadCode(loop.getUpdateExpressions())) {
@@ -194,8 +209,10 @@ public class EarlyExitValidator extends AbstractDeclarativeValidator {
 		}
 	}
 
-	protected boolean isConstant(XExpression expression, Boolean constant) {
-		return expression != null && constantExpressionInterpreter.isConstant(expression, constant);
+	protected Boolean getBooleanConstantOrNull(XExpression expression) {
+		if (expression == null)
+			return null;
+		return constantExpressionInterpreter.getBooleanConstantOrNull(expression);
 	}
 	
 	@Check
@@ -205,32 +222,7 @@ public class EarlyExitValidator extends AbstractDeclarativeValidator {
 			XCasePart casePart = cases.get(i);
 			XExpression caseExpression = casePart.getCase();
 			if (!earlyExitComputer.isEarlyExit(caseExpression)) {
-				// TODO should we do cool stuff here?
-//				if (constantExpressionInterpreter.isConstant(caseExpression, Boolean.FALSE)) {
-//					// then part cannot be reached
-//					markAsDeadCode(casePart.getThen());
-//				} else if (casePart.getTypeGuard() == null && constantExpressionInterpreter.isConstant(caseExpression, Boolean.TRUE)) {
-//					// then part will definitely be reached
-//					// all subsequent cases are dead code, the first one shall be reported
-//					if (casePart.isFallThrough()) {
-//						int j = i + 1;
-//						for(;j < size && cases.get(j).isFallThrough(); j++) {
-//							XCasePart next = cases.get(j);
-//							if (markAsDeadCode(next.getTypeGuard()) || markAsDeadCode(next.getCase())) {
-//								i = j;
-//								j = size;
-//							}
-//						}
-//						if (j < size) {
-//							XCasePart next = cases.get(j);
-//							if (markAsDeadCode(next.getTypeGuard()) || markAsDeadCode(next.getCase())) {
-//								i = j;
-//								j = size;
-//							}
-//						}
-//					}
-//					i = markAsDeadCode(cases, casePart, i, size);
-//				}
+				validateCondition(caseExpression);
 			} else if (!markAsDeadCode(casePart.getThen())) {
 				if (casePart.getTypeGuard() == null) { 
 					i = markAsDeadCode(cases, casePart, i, size);

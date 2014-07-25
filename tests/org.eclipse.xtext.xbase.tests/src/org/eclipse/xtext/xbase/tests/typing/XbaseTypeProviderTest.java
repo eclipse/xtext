@@ -95,13 +95,13 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 
 	@Test public void testIfExpression() throws Exception {
-		assertResolvedType("java.lang.String", "if (Boolean.TRUE) 'foo' else null");
-		assertResolvedType("java.lang.String", "if (Boolean.TRUE) 'foo' else 'bar'");
-		assertResolvedType("java.lang.String", "if (Boolean.TRUE) 'foo'");
+		assertResolvedType("java.lang.String", "if (true) 'foo' else null");
+		assertResolvedType("java.lang.String", "if (true) 'foo' else 'bar'");
+		assertResolvedType("java.lang.String", "if (true) 'foo'");
 	}
 	
 	@Test public void testIfExpression_02() throws Exception {
-		assertResolvedType("java.lang.AbstractStringBuilder & java.io.Serializable", "if (Boolean.TRUE) new StringBuilder() else new StringBuffer()");
+		assertResolvedType("java.lang.AbstractStringBuilder & java.io.Serializable", "if (true) new StringBuilder() else new StringBuffer()");
 	}
 
 	@Test public void testSwitchExpression() throws Exception {
@@ -536,7 +536,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	
 	@Test public void testFeatureCall_26() throws Exception {
 		XBlockExpression block = (XBlockExpression) expression(
-				"{ val Object o = newArrayList(if (Boolean.FALSE) new Double('-20') else new Integer('20')).map(v|v.intValue).head }", true);
+				"{ val Object o = newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.intValue).head }", true);
 		XVariableDeclaration variableDeclaration = (XVariableDeclaration) block.getExpressions().get(0);
 		XExpression memberCallTarget = ((XMemberFeatureCall) variableDeclaration.getRight()).getMemberCallTarget();
 		LightweightTypeReference typeRef = getType(memberCallTarget);

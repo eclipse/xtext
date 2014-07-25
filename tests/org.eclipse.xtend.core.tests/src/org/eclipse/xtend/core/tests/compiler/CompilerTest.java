@@ -261,7 +261,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 
 	@Test public void testFieldInitialization_01() throws Exception {
 		String code =
-				"String field = if (''.equals('')) newArrayList('a', 'b').join(',') else ''\n" +
+				"String field = if (true) newArrayList('a', 'b').join(',') else ''\n" +
 				"def getField() {\n" + 
 				"  field" + 
 				"}";
@@ -660,8 +660,8 @@ public class CompilerTest extends AbstractXtendTestCase {
 		String code = 
 				"package x class Z {" +
 				"  def create(Object x) { \n" + 
-				"    if (''.equals('')) {\n" + 
-				"      if (''.equals(''))\n" + 
+				"    if(true) {\n" + 
+				"      if(true)\n" + 
 				"        ('foo'+'bar').length\n" + 
 				"      for(c : 'foo'.toCharArray)\n" + 
 				"        ('do'+'sideeffect').length\n" + 
@@ -926,7 +926,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 		String code = 
 				"package x class Z {" +
 				"  def bug(){\n" + 
-				"    if (''.equals('')) return false\n" + 
+				"    if (true) return false\n" + 
 				"  }\n" +
 				"  def invoke() {\n" +
 				"    val boolean b = bug\n" +
@@ -943,7 +943,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 		String code = 
 				"package x class Z {" +
 				"  def bug(){\n" + 
-				"    if (''.equals('')) return false false\n" + 
+				"    if (true) return false false\n" + 
 				"  }\n" +
 				"  def invoke() {\n" +
 				"    val boolean b = bug\n" +
@@ -960,7 +960,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 		String code = 
 				"package x class Z {" +
 				"  def bug(){\n" + 
-				"    if (''.equals('')) return false else false\n" + 
+				"    if (true) return false else false\n" + 
 				"  }\n" +
 				"  def invoke() {\n" +
 				"    val boolean b = bug\n" +
@@ -977,7 +977,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 		String code = 
 				"package x class Z {" +
 				"  def bug(){\n" + 
-				"    if (''.equals('')) return false return false\n" + 
+				"    if (true) return false return false\n" + 
 				"  }\n" +
 				"  def invoke() {\n" +
 				"    val boolean b = bug\n" +
@@ -994,7 +994,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 		String code = 
 				"package x class Z {" +
 				"  def bug(){\n" + 
-				"    if (''.equals('')) return false else return false\n" + 
+				"    if (true) return false else return false\n" + 
 				"  }\n" +
 				"  def invoke() {\n" +
 				"    val boolean b = bug\n" +
@@ -1011,7 +1011,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 		String code = 
 				"package x class Z {" +
 				"  def bug(){\n" + 
-				"    [|if (''.equals('')) return false].apply\n" + 
+				"    [|if (true) return false].apply\n" + 
 				"  }\n" +
 				"  def invoke() {\n" +
 				"    val boolean b = bug\n" +
@@ -1028,7 +1028,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 		String code = 
 				"package x class Z {" +
 				"  def bug(){\n" + 
-				"    [|{ if (''.equals('')) return false false }].apply\n" + 
+				"    [|{ if (true) return false false }].apply\n" + 
 				"  }\n" +
 				"  def invoke() {\n" +
 				"    val boolean b = bug\n" +
@@ -1045,7 +1045,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 		String code = 
 				"package x class Z {" +
 				"  def bug(){\n" + 
-				"    [|if (''.equals('')) return false else false].apply\n" + 
+				"    [|if (true) return false else false].apply\n" + 
 				"  }\n" +
 				"  def invoke() {\n" +
 				"    val boolean b = bug\n" +
@@ -1062,7 +1062,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 		String code = 
 				"package x class Z {" +
 				"  def bug(){\n" + 
-				"    [|{ if (''.equals('')) return false return false }].apply\n" + 
+				"    [|{ if (true) return false return false }].apply\n" + 
 				"  }\n" +
 				"  def invoke() {\n" +
 				"    val boolean b = bug\n" +
@@ -1079,7 +1079,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 		String code = 
 				"package x class Z {" +
 				"  def bug(){\n" + 
-				"    [|if (''.equals('')) return false else return false].apply\n" + 
+				"    [|if (true) return false else return false].apply\n" + 
 				"  }\n" +
 				"  def invoke() {\n" +
 				"    val boolean b = bug\n" +
@@ -1093,7 +1093,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 		String code = 
 				"package x class Z {" +
 				"  def bug(){\n" + 
-				"    if (''.equals('')) return null\n" +
+				"    if (true) return null\n" +
 				"    ''\n" + 
 				"  }\n" +
 				"  def invoke() {\n" +
@@ -1111,7 +1111,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 		String code = 
 				"package x class Z {" +
 				"  def bug(){\n" + 
-				"    if (''.equals('')) return Boolean::FALSE\n" + 
+				"    if (true) return Boolean::FALSE\n" + 
 				"  }\n" +
 				"  def invoke() {\n" +
 				"    val boolean b = bug\n" +
@@ -1128,7 +1128,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 		String code = 
 				"package x class Z {" +
 				"  def bug(){\n" + 
-				"    val x = if (''.equals('')) return Boolean::FALSE x\n" + 
+				"    val x = if (true) return Boolean::FALSE x\n" + 
 				"  }\n" +
 				"  def invoke() {\n" +
 				"    val boolean b = bug\n" +
@@ -1145,7 +1145,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 		String code = 
 				"package x class Z {" +
 				"  def bug(){\n" + 
-				"    val x = if (''.equals('')) return Boolean::FALSE else null x\n" + 
+				"    val x = if (true) return Boolean::FALSE else null x\n" + 
 				"  }\n" +
 				"  def invoke() {\n" +
 				"    val boolean b = bug\n" +
@@ -3027,8 +3027,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  do {\n" + 
 				"    try {\n" + 
 				"      toString()\n" +
-				"      if (''.equals(''))\n" +
-				"      return 'success'\n" + 
+				"      if (Boolean.TRUE) return 'success'\n" + 
 				"    }\n" + 
 				"    catch (Exception ex)\n" + 
 				"    {\n" + 
@@ -3042,7 +3041,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 		try {
 			invokeAndExpect2(null, 
 				"  def foo() {\n" +
-				"    return { if (''.equals('')) throw new Exception(\"Bug366525\") else null }\n" +
+				"    return { if(true) throw new Exception(\"Bug366525\") else null }\n" +
 				"  }\n",
 				"foo");
 			fail("Expected Exception(\"Bug366525\")");
@@ -3056,7 +3055,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 		try {
 			String javaCode = compileToJavaCode("class Foo {\n" +
 					"  def foo() {\n" +
-					"    return { if (''.equals('')) throw new Exception(\"Bug366525\") else null }\n" +
+					"    return { if(true) throw new Exception(\"Bug366525\") else null }\n" +
 					"  }\n" +
 					"}");
 			assertTrue(javaCode.contains("Exceptions.sneakyThrow"));
@@ -3070,7 +3069,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 		try {
 			String javaCode = compileToJavaCode("class Foo {\n" +
 					"  def foo() throws Exception {\n" +
-					"    return { if (''.equals('')) throw new Exception(\"Bug366525\") else null }\n" +
+					"    return { if(true) throw new Exception(\"Bug366525\") else null }\n" +
 					"  }\n" +
 					"}");
 			assertFalse(javaCode.contains("Exceptions.sneakyThrow"));

@@ -28,7 +28,6 @@ import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
-import org.eclipse.xtext.xbase.interpreter.ConstantExpressionsInterpreter;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -43,7 +42,7 @@ import com.google.inject.Singleton;
 public class DefaultEarlyExitComputer implements IEarlyExitComputer {
 
 	@Inject
-	private ConstantExpressionsInterpreter constantExpressionInterpreter;
+	private EarlyExitInterpreter earlyExitInterpreter;
 	
 	private PolymorphicDispatcher<Collection<ExitPoint>> dispatcher = PolymorphicDispatcher.createForSingleTarget("_exitPoints", this);
 	
@@ -99,19 +98,6 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
 		if (isNotEmpty(exitPoints)) {
 			return exitPoints;
 		}
-		if (isConstant(expression.getExpression(), Boolean.TRUE)) {
-			for(XExpression updateExpression: expression.getUpdateExpressions()) {
-				exitPoints = getExitPoints(updateExpression);
-				if (isNotEmpty(exitPoints)) {
-					return exitPoints;
-				}
-			}
-			exitPoints = getExitPoints(expression.getEachExpression());
-			if (isNotEmpty(exitPoints)) {
-				return exitPoints;
-			}
-			return Collections.singletonList(new ExitPoint(expression, false));
-		}
 		return Collections.emptyList();
 	}
 
@@ -126,7 +112,7 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
 		Collection<ExitPoint> exitPoints = getExitPoints(expression.getPredicate());
 		if (isNotEmpty(exitPoints))
 			return exitPoints;
-		if (isConstant(expression.getPredicate(), Boolean.TRUE)) {
+		if (isBooleanConstant(expression.getPredicate(), true)) {
 			exitPoints = getExitPoints(expression.getBody());
 			if (isNotEmpty(exitPoints))
 				return exitPoints;
@@ -135,8 +121,8 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
 		return Collections.emptyList();
 	}
 	
-	protected boolean isConstant(XExpression expression, Object value) {
-		return expression != null && constantExpressionInterpreter.isConstant(expression, value);
+	protected boolean isBooleanConstant(XExpression expression, boolean value) {
+		return earlyExitInterpreter.isConstant(expression, value);
 	}
 	
 	protected Collection<ExitPoint> _exitPoints(XDoWhileExpression expression) {
@@ -146,7 +132,7 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
 		exitPoints = getExitPoints(expression.getPredicate());
 		if (isNotEmpty(exitPoints))
 			return exitPoints;
-		if (isConstant(expression.getPredicate(), Boolean.TRUE)) {
+		if (isBooleanConstant(expression.getPredicate(), true)) {
 			return Collections.singletonList(new ExitPoint(expression, false));
 		}
 		return Collections.emptyList();
@@ -161,13 +147,7 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
 		if (isNotEmpty(ifExitPoints))
 			return ifExitPoints;
 		Collection<ExitPoint> thenExitPoints = getExitPoints(expression.getThen());
-		if (isConstant(expression.getIf(), Boolean.TRUE)) {
-			return thenExitPoints;
-		}
 		Collection<ExitPoint> elseExitPoints = getExitPoints(expression.getElse());
-		if (isConstant(expression.getIf(), Boolean.FALSE)) {
-			return elseExitPoints;
-		}
 		if (isNotEmpty(thenExitPoints) && isNotEmpty(elseExitPoints)) {
 			Collection<ExitPoint> result = Lists.newArrayList(thenExitPoints);
 			result.addAll(elseExitPoints);

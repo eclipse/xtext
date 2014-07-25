@@ -593,7 +593,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testNoReturnInCreateFunctions_00() throws Exception {
-		XtendFunction function = function("def create result: [|if (Boolean.TRUE) return 'foo' else 'bar'] foo() { }");
+		XtendFunction function = function("def create result: [|if (true) return 'foo' else 'bar'] foo() { }");
 		helper.assertNoErrors(function);
 	}
 	
