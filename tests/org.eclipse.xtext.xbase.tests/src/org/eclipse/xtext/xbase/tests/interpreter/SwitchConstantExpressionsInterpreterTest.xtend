@@ -8,12 +8,13 @@
 package org.eclipse.xtext.xbase.tests.interpreter
 
 import com.google.inject.Inject
+import org.eclipse.xtext.common.types.JvmEnumerationLiteral
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XVariableDeclaration
+import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException
+import org.eclipse.xtext.xbase.interpreter.ConstantExpressionsInterpreter
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.junit.Test
-import org.eclipse.xtext.common.types.JvmEnumerationLiteral
-import org.eclipse.xtext.xbase.interpreter.ConstantExpressionsInterpreter
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -42,6 +43,16 @@ class SwitchConstantExpressionsInterpreterTest extends AbstractXbaseTestCase {
 	
 	@Test def void testJvmFieldCall() {
 		'interpreter.Foo.FOO'.evaluatesTo(1)
+	}
+	
+	@Test def void testNullArgument_01() {
+		val brokenExpression = expression('1 !=', false)
+		assertFalse(interpreter.isConstant(brokenExpression, null))
+	}
+	
+	@Test(expected=ConstantExpressionEvaluationException) def void testNullArgument_02() {
+		val brokenExpression = expression('1 !=', false)
+		interpreter.evaluate(brokenExpression)
 	}
 	
 	@Test def void testJvmEnumerationLiteral() {
