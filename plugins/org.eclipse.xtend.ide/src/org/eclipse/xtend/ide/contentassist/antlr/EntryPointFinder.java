@@ -46,7 +46,6 @@ public class EntryPointFinder {
 	private ICompositeNode findEntryPoint(ICompositeNode node, int offset) {
 		ICompositeNode result = node;
 		result = getApplicableNode(result);
-		// TODO compare by prev first leaf and lookahead 
 		while(result != null) {
 			int remainingLookAhead = result.getLookAhead();
 			if (remainingLookAhead != 0) {
@@ -63,11 +62,17 @@ public class EntryPointFinder {
 						if (remainingLookAhead == 0) {
 							if (shouldUseParent(result, offset, leaf)) {
 								ICompositeNode parent = result.getParent();
-								if (parent.getGrammarElement() instanceof Action && ((Action) parent.getGrammarElement()).getFeature() == null) {
+								if (isUnassignedAction(parent)) {
 									INode firstChild = parent.getFirstChild();
 									if (firstChild instanceof ICompositeNode && firstChild.getGrammarElement() instanceof RuleCall) {
 										return (ICompositeNode) firstChild;
 									}
+								}
+							}
+							if (isUnassignedAction(result)) {
+								INode firstChild = result.getFirstChild();
+								if (firstChild instanceof ICompositeNode && firstChild.getGrammarElement() instanceof RuleCall) {
+									return (ICompositeNode) firstChild;
 								}
 							}
 							return result;
@@ -78,6 +83,14 @@ public class EntryPointFinder {
 			result = getApplicableNode(result.getParent());
 		}
 		return result;
+	}
+
+	protected boolean isUnassignedAction(ICompositeNode parent) {
+		return parent.getGrammarElement() instanceof Action && ((Action) parent.getGrammarElement()).getFeature() == null;
+	}
+	
+	protected boolean isAssignedAction(ICompositeNode parent) {
+		return parent.getGrammarElement() instanceof Action && ((Action) parent.getGrammarElement()).getFeature() != null;
 	}
 
 	protected boolean shouldUseParent(ICompositeNode result, int offset, ILeafNode leaf) {
@@ -106,7 +119,7 @@ public class EntryPointFinder {
 	}
 
 	protected ICompositeNode getApplicableNode(ICompositeNode result) {
-		while (result != null && (result.getGrammarElement() == null || result.getGrammarElement() instanceof Action)) {
+		while (result != null && (result.getGrammarElement() == null || isAssignedAction(result))) {
 			result = result.getParent();
 		}
 		return normalizeToParent(result);
