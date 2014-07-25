@@ -9,7 +9,7 @@ class XbaseCommentFormatterTest extends AbstractXbaseFormatterTest {
 		assertFormattedExpression('''
 			if (true)
 				println("foo")
-			else //if (true)
+			else // if (true)
 				println("bar")
 			println("end")
 		''')

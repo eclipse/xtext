@@ -3,7 +3,7 @@ package org.eclipse.xtext.xbase.tests.formatting;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.preferences.PreferenceKey;
-import org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys;
+import org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.formatting.AbstractXbaseFormatterTest;
 import org.junit.Test;
@@ -273,10 +273,21 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("val x = newArrayList(\"A\", \"b\")");
     _builder.newLine();
-    _builder.append("val y = x.filter[val z = it z.toUpperCase == z z.toUpperCase == z");
+    _builder.append("val y = x.filter [");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("z.toUpperCase == z]");
+    _builder.append("val z = it");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("z.toUpperCase == z");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("z.toUpperCase == z");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("z.toUpperCase == z");
+    _builder.newLine();
+    _builder.append("]");
     _builder.newLine();
     _builder.append("y.join");
     _builder.newLine();
@@ -1689,10 +1700,10 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   @Test
   public void formatMemberFeatureCall3() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("val ML1 = \"x\".substring(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,");
+    _builder.append("val ML1 = \"x\".substring(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28)");
+    _builder.append("15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28)");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("val ML1 = \"x\".substring(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28)");
@@ -1814,13 +1825,13 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   @Test
   public void formatBinaryExpression1() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("val ML1 = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12 + 13 + 14 + 15 +");
+    _builder.append("val ML1 = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12 + 13 + 14 +");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("16 + 17 + 18 + 19 + 20 + 21 + 22 + 23 + 24 + 25 + 26 + 27 + 28 + 29 + 30 +");
+    _builder.append("15 + 16 + 17 + 18 + 19 + 20 + 21 + 22 + 23 + 24 + 25 + 26 + 27 + 28 + 29 +");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("31 + 32 + 33 + 34 + 35 + 36");
+    _builder.append("30 + 31 + 32 + 33 + 34 + 35 + 36");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("val ML1 = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12 + 13 + 14 + 15 + 16 + 17 + 18 + 19 + 20 + 21 + 22 + 23 + 24 + 25 + 26 + 27 + 28 + 29 + 30 + 31 + 32 + 33 + 34 + 35 + 36 ");
