@@ -2,6 +2,7 @@ package org.eclipse.xtend.core.tests.formatting;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys;
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
@@ -115,10 +116,12 @@ public abstract class AbstractXtendFormatterTest {
       public void apply(final AssertingFormatterData it) {
         MapBasedPreferenceValues _config = it.getConfig();
         AbstractXtendFormatterTest.this.put(_config, BasicFormatterPreferenceKeys.maxLineWidth, Integer.valueOf(80));
+        MapBasedPreferenceValues _config_1 = it.getConfig();
+        AbstractXtendFormatterTest.this.put(_config_1, XtendFormatterPreferenceKeys.preserveOneLineMethods, Boolean.valueOf(false));
         boolean _notEquals = (!Objects.equal(cfg, null));
         if (_notEquals) {
-          MapBasedPreferenceValues _config_1 = it.getConfig();
-          cfg.apply(_config_1);
+          MapBasedPreferenceValues _config_2 = it.getConfig();
+          cfg.apply(_config_2);
         }
         it.setExpectation(expectation);
         it.setToBeFormatted(toBeFormatted);

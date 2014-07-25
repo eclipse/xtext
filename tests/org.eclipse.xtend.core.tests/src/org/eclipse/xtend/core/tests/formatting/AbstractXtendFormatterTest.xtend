@@ -10,6 +10,7 @@ import org.eclipse.xtext.xbase.junit.formatter.FormatterTester
 import org.junit.runner.RunWith
 
 import static org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys.*
+import org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(RuntimeInjectorProvider))
@@ -99,6 +100,7 @@ abstract class AbstractXtendFormatterTest {
 	) {
 		tester.assertFormatted [
 			it.config.put(maxLineWidth, 80)
+			it.config.put(XtendFormatterPreferenceKeys.preserveOneLineMethods, false)
 			if (cfg != null) cfg.apply(it.config)
 			it.expectation = expectation
 			it.toBeFormatted = toBeFormatted

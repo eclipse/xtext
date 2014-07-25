@@ -8,6 +8,7 @@ import org.eclipse.xtext.xbase.junit.formatter.FormatterTester
 import org.junit.runner.RunWith
 
 import static org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys.*
+import org.eclipse.xtext.util.Strings
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XbaseFormatterTestInjectorProvider))
@@ -41,14 +42,14 @@ abstract class AbstractXbaseFormatterTest {
 			cfg,
 			expectation.toString.trim.indent("\t"),
 			toBeFormatted.toString.trim.indent("\t"),
-			"{\n\t",
-			"\n}",
+			"{"+ Strings.newLine +"\t",
+			Strings.newLine + "}",
 			allowErrors
 		)
 	}
 
 	def protected String indent(String string, String indent) {
-		string.split("\\r?\\n").map[if(it == "") it else indent + it].join("\n")
+		string.split("\\r?\\n").map[if(it == "") it else indent + it].join(Strings.newLine)
 	}
 
 	def assertFormatted((MapBasedPreferenceValues)=>void cfg, CharSequence expectation) {

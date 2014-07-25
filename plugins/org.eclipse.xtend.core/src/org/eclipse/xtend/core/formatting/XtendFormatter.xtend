@@ -37,6 +37,7 @@ import static org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys.*
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*
 import static org.eclipse.xtext.xtype.XtypePackage.Literals.*
 import org.eclipse.xtend.core.xtend.AnonymousClass
+import org.eclipse.xtext.xbase.XBlockExpression
 
 @SuppressWarnings("restriction")
 public class XtendFormatter extends XbaseFormatter2 {
@@ -286,4 +287,13 @@ public class XtendFormatter extends XbaseFormatter2 {
 		document += member.nodeForKeyword("def").append[oneSpace]
 		document += member.nodeForKeyword("override").append[oneSpace]
 	}
+	
+	override protected isSingleLineBlock(XBlockExpression expr, FormattableDocument format) {
+		return format.cfg.get(preserveOneLineMethods)
+			&& expr.eContainer instanceof XtendFunction
+			&& expr.expressions.size <= 1
+		    && !expr.isMultiline(format) 
+			&& (expr.expressions.empty ||format.fitsIntoLine(expr.expressions.head))
+	}
+	
 }
