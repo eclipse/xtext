@@ -304,16 +304,17 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 			bindFactory =  bindFactory.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameStrategy", 
 					"org.eclipse.xtext.xbase.ui.refactoring.XbaseRenameStrategy");
 		}
-		if(usesXImportSection(grammar)) {
+		if (usesXImportSection(grammar)) {
 			bindFactory
-				.addTypeToType("org.eclipse.xtext.xbase.imports.IUnresolvedTypeResolver", 
-						"org.eclipse.xtext.xbase.ui.imports.InteractiveUnresolvedTypeResolver")
-				.addTypeToType("org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider", 
-						"org.eclipse.xtext.xbase.ui.contentassist.ImportingTypesProposalProvider");
+					.addTypeToType("org.eclipse.xtext.xbase.imports.IUnresolvedTypeResolver",
+							"org.eclipse.xtext.xbase.ui.imports.InteractiveUnresolvedTypeResolver")
+					.addTypeToType("org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider",
+							"org.eclipse.xtext.xbase.ui.contentassist.ImportingTypesProposalProvider")
+					.addTypeToType(" org.eclipse.xtext.ui.editor.templates.XtextTemplateContextType",
+							"org.eclipse.xtext.xbase.ui.templates.XbaseTemplateContextType");
 		} else {
-			bindFactory
-				.addTypeToType("org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixes", 
-						"org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixesNoImportSection");
+			bindFactory.addTypeToType("org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixes",
+					"org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixesNoImportSection");
 		}
 		return bindFactory.getBindings();
 	}
