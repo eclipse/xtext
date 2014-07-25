@@ -861,13 +861,13 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 	@Test def void testBasicForLoop_toJavaWhile_0() {
 		'''
 			{
-				for (var i = if (Boolean.TRUE) { 1 }; i < 10; i = i + 1) {
+				for (var i = if (true) { 1 }; i < 10; i = i + 1) {
 				}
 			}
 		'''.compilesTo(
 		'''
 			int _xifexpression = (int) 0;
-			if ((Boolean.TRUE).booleanValue()) {
+			if (true) {
 			  _xifexpression = 1;
 			}
 			int i = _xifexpression;
@@ -915,7 +915,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 	@Test def void testBasicForLoop_2() {
 		'''
 			{
-				for (var i = 0; i < 10;) {
+				for (val i = 0; i < 10;) {
 					if (i == 2) {
 						return true;
 					}
@@ -923,7 +923,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			}
 		'''.compilesTo(
 		'''
-			for (int i = 0; (i < 10);) {
+			for (final int i = 0; (i < 10);) {
 			  if ((i == 2)) {
 			    return Boolean.valueOf(true);
 			  }
@@ -936,7 +936,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 	@Test def void testBasicForLoop_toJavaWhile_2() {
 		'''
 			{
-				for (val i = #[if(Boolean.TRUE) {1} else {2}]; i.head < 10;) {
+				for (val i = #[if(true) {1} else {2}]; i.head < 10;) {
 					if (i.head == 2) {
 						return true;
 					}
@@ -945,7 +945,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		'''.compilesTo(
 		'''
 			int _xifexpression = (int) 0;
-			if ((Boolean.TRUE).booleanValue()) {
+			if (true) {
 			  _xifexpression = 1;
 			} else {
 			  _xifexpression = 2;
@@ -972,13 +972,13 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 	@Test def void testBasicForLoop_3() {
 		'''
 			{
-				for (var i = 0; i < 10;) {
+				for (val i = 0; i < 10;) {
 					return true
 				}
 			}
 		'''.compilesTo(
 		'''
-			for (int i = 0; (i < 10);) {
+			for (final int i = 0; (i < 10);) {
 			  return Boolean.valueOf(true);
 			}
 			return null;
@@ -1025,13 +1025,13 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 	@Test def void testBasicForLoop_6() {
 		'''
 			{
-				if (Boolean.TRUE) {
+				if (true) {
 					for (;;) {}
 				}
 			}
 		'''.compilesTo(
 		'''
-			if ((Boolean.TRUE).booleanValue()) {
+			if (true) {
 			  for (;;) {
 			  }
 			}

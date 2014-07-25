@@ -89,6 +89,7 @@ public class IssueCodes {
 	public static final String UNEXPECTED_INVOCATION_ON_TYPE_LITERAL = ISSUE_CODE_PREFIX + "unexpected_invocation_on_type_literal";
 	public static final String UNHANDLED_EXCEPTION = ISSUE_CODE_PREFIX + "unhandled_exception";
 	public static final String UNREACHABLE_CODE = ISSUE_CODE_PREFIX + "unreachable_code";
+	public static final String CONSTANT_BOOLEAN_CONDITION = ISSUE_CODE_PREFIX + "constant_condition";
 	public static final String UNREACHABLE_CASE = ISSUE_CODE_PREFIX + "unreachable_case";
 	public static final String UNREACHABLE_IF_BLOCK = ISSUE_CODE_PREFIX + "unreachable_instance_of";
 	public static final String UNREACHABLE_CATCH_BLOCK = ISSUE_CODE_PREFIX + "unreachable_catch_block";

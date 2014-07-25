@@ -94,7 +94,7 @@ import org.eclipse.xtext.xbase.imports.ImportedTypesCollector;
 import org.eclipse.xtext.xbase.imports.StaticallyImportedMemberProvider;
 import org.eclipse.xtext.xbase.imports.TypeUsages;
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException;
-import org.eclipse.xtext.xbase.interpreter.ConstantExpressionsInterpreter;
+import org.eclipse.xtext.xbase.interpreter.SwitchConstantExpressionsInterpreter;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
@@ -179,7 +179,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	private TypesOrderUtil typesOrderUtil;
 	
 	@Inject
-	private ConstantExpressionsInterpreter switchConstantExpressionsInterpreter;
+	private SwitchConstantExpressionsInterpreter switchConstantExpressionsInterpreter;
 	
 	@Inject
 	private Provider<ImportedTypesCollector> importedTypesCollectorProvider;

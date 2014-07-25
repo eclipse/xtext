@@ -239,7 +239,7 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test public void testOperationFeatureCall_8() throws Exception {
-		XExpression expression = expression("(if (Boolean.TRUE) null as Comparable<Double> else null as Comparable<Integer>).compareTo(null)");
+		XExpression expression = expression("(if (true) null as Comparable<Double> else null as Comparable<Integer>).compareTo(null)");
 		helper.assertNoErrors(expression);
 	}
 	

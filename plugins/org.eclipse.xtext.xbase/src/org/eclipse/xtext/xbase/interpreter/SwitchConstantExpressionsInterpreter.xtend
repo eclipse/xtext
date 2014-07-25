@@ -23,20 +23,11 @@ import org.eclipse.xtext.xbase.XSwitchExpression
 /**
  * @author Anton Kosyakov - Initial contribution and API
  */
-class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpreter {
+class SwitchConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpreter {
 
 	@Inject extension ILogicalContainerProvider
 
 	@Inject extension NumberLiterals numberLiterals
-
-	def boolean isConstant(XExpression it, Object value) {
-		try {
-			val constant = evaluate
-			return value == constant
-		} catch (ConstantExpressionEvaluationException e) {
-			return false;
-		}
-	}
 
 	def Object evaluate(XExpression it) {
 		internalEvaluate(null)
