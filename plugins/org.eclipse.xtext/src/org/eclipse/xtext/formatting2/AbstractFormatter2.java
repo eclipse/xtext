@@ -1,0 +1,100 @@
+/*******************************************************************************
+ * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.formatting2;
+
+import java.util.List;
+
+import org.eclipse.xtext.formatting2.internal.CommentReplacer;
+import org.eclipse.xtext.formatting2.internal.FormattableDocument;
+import org.eclipse.xtext.formatting2.internal.HiddenRegionFormatting;
+import org.eclipse.xtext.formatting2.internal.HiddenRegionFormattingMerger;
+import org.eclipse.xtext.formatting2.internal.HiddenRegionReplacer;
+import org.eclipse.xtext.formatting2.internal.TextReplacement;
+import org.eclipse.xtext.formatting2.internal.TextReplacerContext;
+import org.eclipse.xtext.formatting2.internal.TextReplacerMerger;
+import org.eclipse.xtext.formatting2.regionaccess.IComment;
+import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
+import org.eclipse.xtext.xbase.lib.Extension;
+
+/**
+ * @author Moritz Eysholdt - Initial contribution and API
+ */
+public abstract class AbstractFormatter2 implements IFormatter2 {
+
+	@Extension
+	protected ITextRegionAccess regionAccess;
+
+	private IFormatterRequest request = null;
+
+	public ITextReplacer createCommentReplacer(IComment comment) {
+		return new CommentReplacer(comment);
+	}
+
+	public IFormattableDocument createFormattableDocument() {
+		return new FormattableDocument.RootDocument(this);
+	}
+
+	public IFormattableSubDocument createFormattableSubDocument(ITextSegment region, IFormattableDocument parent) {
+		return new FormattableDocument.SubDocument(region, parent);
+	}
+
+	public IHiddenRegionFormatting createHiddenRegionFormatting(IFormattableDocument document,
+			IHiddenRegion hiddenRegion) {
+		return new HiddenRegionFormatting(document, hiddenRegion);
+	}
+
+	public IMerger<IHiddenRegionFormatting> createHiddenRegionFormattingMerger() {
+		return new HiddenRegionFormattingMerger(this);
+	}
+
+	public ITextReplacer createHiddenRegionReplacer(IHiddenRegionFormatting hiddenRegionFormatting) {
+		return new HiddenRegionReplacer(hiddenRegionFormatting);
+	}
+
+	public ITextReplacement createTextReplacement(int offset, int length, String text) {
+		return new TextReplacement(getRequest().getTextRegionAccess(), offset, length, text);
+	}
+
+	public ITextReplacerContext createTextReplacerContext(IFormattableDocument document) {
+		return new TextReplacerContext(document);
+	}
+
+	public IMerger<ITextReplacer> createTextReplacerMerger() {
+		return new TextReplacerMerger(this);
+	}
+
+	protected abstract void format(IFormattableDocument document);
+
+	final public List<ITextReplacement> format(IFormatterRequest request) {
+		try {
+			initalize(request);
+			IFormattableDocument document = createFormattableDocument();
+			format(document);
+			List<ITextReplacement> replacements = document.renderToTextReplacements();
+			return replacements;
+		} finally {
+			reset();
+		}
+	}
+
+	public IFormatterRequest getRequest() {
+		return request;
+	}
+
+	protected void initalize(IFormatterRequest request) {
+		this.request = request;
+		this.regionAccess = request.getTextRegionAccess();
+	}
+
+	protected void reset() {
+		this.request = null;
+		this.regionAccess = null;
+	}
+
+}
