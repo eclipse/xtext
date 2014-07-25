@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -679,7 +680,7 @@ import com.google.common.collect.Sets;
 	 * @param computeKeys
 	 *            the function used to produce the key for each value. May not be <code>null</code>.
 	 * @return a map mapping the result of evaluating the function {@code keyFunction} on each value in the input
-	 *         collection to that value
+	 *         iterator to that value
 	 */
 	public static <K, V> Map<K, V> toMap(Iterator<? extends V> values, Function1<? super V, K> computeKeys) {
 		if (computeKeys == null)
@@ -691,6 +692,39 @@ import com.google.common.collect.Sets;
 		}
 		return result;
 	}
+	
+	/**
+	 * Returns a map for which the {@link Map#values} is a collection of lists, where the elements in the list will 
+	 * appear in the order as they appeared in the iterator. Each key is the product of invoking the supplied 
+	 * function {@code computeKeys} on its corresponding value. So a key of that map groups a list of values for 
+	 * which the function produced exactly that key. The value iterator is left exhausted.
+	 * 
+	 * @param values
+	 *            the values to use when constructing the {@code Map}. May not be <code>null</code>.
+	 * @param computeKeys
+	 *            the function used to produce the key for each value. May not be <code>null</code>.
+	 * @return a map mapping the result of evaluating the function {@code keyFunction} on each value in the input
+	 *         iterator to that value. As there can be more than one value mapped by a key, the mapping result is is a
+	 *         list of values.
+	 * @since 2.7
+	 */
+	public static <K, V> Map<K, List<V>> groupBy(Iterator<? extends V> values,
+			Function1<? super V, ? extends K> computeKeys) {
+		if (computeKeys == null)
+			throw new NullPointerException("computeKeys");
+		Map<K, List<V>> result = Maps.newLinkedHashMap();
+		while(values.hasNext()) {
+			V v = values.next();
+			K key = computeKeys.apply(v);
+			List<V> grouped = result.get(key);
+			if (grouped == null) {
+				grouped = new ArrayList<V>();
+				result.put(key, grouped);
+			}
+			grouped.add(v);
+		}
+		return result;
+	}	
 
 	/**
 	 * Returns an Iterator containing all elements starting from the head of the source up to and excluding the first
