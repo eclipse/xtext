@@ -1,16 +1,17 @@
 package org.eclipse.xtend.core.tests.formatting
 
+import com.google.common.base.Preconditions
 import com.google.inject.Inject
+import org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.junit4.formatter.FormatterTester
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues
 import org.eclipse.xtext.preferences.PreferenceKey
-import org.eclipse.xtext.xbase.junit.formatter.FormatterTester
 import org.junit.runner.RunWith
 
 import static org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys.*
-import org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(RuntimeInjectorProvider))
@@ -20,7 +21,7 @@ abstract class AbstractXtendFormatterTest {
 	def assertFormatted(CharSequence toBeFormatted) {
 		assertFormatted(toBeFormatted, toBeFormatted/* .parse.flattenWhitespace  */)
 	}
-	
+
 	def void put(MapBasedPreferenceValues basedPreferenceValues, PreferenceKey key, Object value) {
 		basedPreferenceValues.put(key.id, value.toString)
 	}
@@ -98,16 +99,23 @@ abstract class AbstractXtendFormatterTest {
 		String postfix,
 		boolean allowErrors
 	) {
+		Preconditions.checkArgument(!allowErrors, "not supported for now")
 		tester.assertFormatted [
-			it.config.put(maxLineWidth, 80)
-			it.config.put(XtendFormatterPreferenceKeys.keepOneLineMethods, false)
-			if (cfg != null) cfg.apply(it.config)
+			it.preferences = initConfig(cfg)
 			it.expectation = expectation
 			it.toBeFormatted = toBeFormatted
 			it.prefix = prefix
 			it.postfix = postfix
-			it.allowErrors = allowErrors
 		]
+	}
+
+	def initConfig((MapBasedPreferenceValues)=>void cfg) {
+		val target = new MapBasedPreferenceValues(newHashMap)
+		target.put(maxLineWidth, 80)
+		target.put(XtendFormatterPreferenceKeys.keepOneLineMethods, false)
+		if (cfg != null)
+			cfg.apply(target)
+		target.values
 	}
 
 	def protected String decode(CharSequence seq) {
