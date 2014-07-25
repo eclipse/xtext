@@ -36,7 +36,7 @@ import com.google.inject.Inject;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-//TODO move me to Xtext
+@Deprecated // use org.eclipse.xtext.ui.editor.formatting2.ContentFormatterFactory
 public class FormatterFactory implements IContentFormatterFactory {
 
 	//TODO move me to Xtext

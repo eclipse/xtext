@@ -96,14 +96,15 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 				def modify(List<? extends MutableMethodDeclaration> annotatedMethods,
 					ModifyContext context) {
 					ctx = context
-					annotatedMethods.forEach[val type = addTypeParameter('A')
+					annotatedMethods.forEach [
+						val type = addTypeParameter('A')
 						addParameter('myParam',
 							compilationUnit.typeReferenceProvider.newTypeReference(type))
 						setExceptions(
 							newArrayList(
-								compilationUnit.typeReferenceProvider.
-									newTypeReference('java.lang.Exception')))[]]
-			
+								compilationUnit.typeReferenceProvider.newTypeReference(
+									'java.lang.Exception')))[]
+					]
 				}
 			}
 		''')	
