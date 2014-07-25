@@ -13,7 +13,7 @@ public class XtendFileFormatter extends AbstractXtendFormatterTest {
   public void formatClass11() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
       public void apply(final MapBasedPreferenceValues it) {
-        XtendFileFormatter.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
+        it.put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
       }
     };
     StringConcatenation _builder = new StringConcatenation();
@@ -31,7 +31,7 @@ public class XtendFileFormatter extends AbstractXtendFormatterTest {
   public void formatClass12() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
       public void apply(final MapBasedPreferenceValues it) {
-        XtendFileFormatter.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
+        it.put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
       }
     };
     StringConcatenation _builder = new StringConcatenation();
@@ -51,7 +51,7 @@ public class XtendFileFormatter extends AbstractXtendFormatterTest {
   public void formatClass112() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
       public void apply(final MapBasedPreferenceValues it) {
-        XtendFileFormatter.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
+        it.put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
       }
     };
     StringConcatenation _builder = new StringConcatenation();
@@ -72,7 +72,7 @@ public class XtendFileFormatter extends AbstractXtendFormatterTest {
   public void formatClass122() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
       public void apply(final MapBasedPreferenceValues it) {
-        XtendFileFormatter.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
+        it.put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
       }
     };
     StringConcatenation _builder = new StringConcatenation();
@@ -100,7 +100,6 @@ public class XtendFileFormatter extends AbstractXtendFormatterTest {
     _builder.append("class bar {");
     _builder.newLine();
     _builder.append("}");
-    _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("   ");
     _builder_1.append("package  foo  class  bar  {  }");

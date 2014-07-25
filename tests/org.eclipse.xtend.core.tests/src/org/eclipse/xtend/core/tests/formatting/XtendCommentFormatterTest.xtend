@@ -5,7 +5,7 @@ import org.junit.Test
 import org.junit.Ignore
 
 class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
-	@Test def formatSLCommentAfterpackage() {
+	@Test def formatMLCommentBeforePackage() {
 		assertFormatted('''
 			/***********
 			 * copyright
@@ -18,6 +18,21 @@ class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
 			/***********
 			 * copyright
 			 ***********/package foo
+			class zonk {}
+		''')	
+	}
+	
+	@Test def formatMLComment1() {
+		assertFormatted('''
+			/***********
+			 * copyright
+			 ***********/
+			class zonk {
+			}
+		''', '''
+			/***********
+			copyright
+			***********/
 			class zonk {}
 		''')	
 	}
@@ -96,7 +111,7 @@ class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
 		assertFormatted('''
 			package
 			/* my 
-			comment */
+			 comment */
 			foo
 			
 			class bar {
@@ -150,14 +165,86 @@ class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
 		''')	
 	}
 	
-	@Test def formatSLCommentBeforeStatement21() {
+	@Test def formatSLDocCommentInStatement21() {
 		assertFormatted('''
 			class bar {
 				// my comment
 			}
 		''', '''
 			class bar{
-			// my comment
+			 //    my comment
+			}
+		''')	
+	}
+	
+	@Test def formatSLDocCommentInStatement22() {
+		assertFormatted('''
+			class bar {
+				//
+			}
+		''', '''
+			class bar{
+			 //    
+			}
+		''')	
+	}
+	
+	@Test def formatSLCodeCommentInStatement21() {
+		assertFormatted('''
+			class bar {
+			//    my comment
+			}
+		''', '''
+			class bar{
+			//    my comment
+			}
+		''')	
+	}
+	
+	@Test def formatMLCommentInBlock1() {
+		assertFormatted('''
+			class bar {
+				/*
+				 * my comment
+				 */
+			}
+		''', '''
+			class bar{
+			/*
+			my comment
+			*/
+			}
+		''')	
+	}
+	
+	@Test def formatMLCommentInBlock2() {
+		assertFormatted('''
+			class bar {
+				/*
+				 * my comment
+				 */
+			}
+		''', '''
+			class bar{
+					/*
+					my comment
+					*/
+			}
+		''')	
+	}
+	
+	@Test def formatMLCommentInBlock3() {
+		assertFormatted('''
+			class bar {
+				/*
+				 * my comment
+				 */
+			}
+		''', '''
+			class bar{
+					/*
+							*my comment
+					*/
 			}
 		''')	
 	}
