@@ -34,7 +34,7 @@ public interface IGrammarAccess {
 	List<Pair<Keyword, Keyword>> findKeywordPairs(String leftKw, String rightKw);
 
 	List<Keyword> findKeywords(String... keywords);
-	
+
 	List<RuleCall> findRuleCalls(AbstractRule... rules);
 
 	Grammar getGrammar();
