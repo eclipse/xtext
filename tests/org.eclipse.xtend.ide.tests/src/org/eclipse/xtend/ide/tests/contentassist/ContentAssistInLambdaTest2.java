@@ -9,7 +9,6 @@ package org.eclipse.xtend.ide.tests.contentassist;
 
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
@@ -18,22 +17,6 @@ import com.google.common.collect.Lists;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class ContentAssistInLambdaTest2 extends ContentAssistTest {
-
-	// class, interface, enum, annotation proposed???
-	@Ignore
-	@Override
-	@Test
-	public void testAfterVariableDeclaration_11() throws Exception {
-		super.testAfterVariableDeclaration_11();
-	}
-	
-	// class, interface, enum, annotation proposed???
-	@Ignore
-	@Override
-	@Test
-	public void testOnStringLiteral_11() throws Exception {
-		super.testOnStringLiteral_11();
-	}
 
 	@Override
 	@Test public void testAfterBinaryOperation_10() throws Exception {
