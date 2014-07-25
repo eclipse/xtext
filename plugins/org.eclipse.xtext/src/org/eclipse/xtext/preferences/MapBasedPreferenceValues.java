@@ -9,24 +9,39 @@ package org.eclipse.xtext.preferences;
 
 import java.util.Map;
 
-public class MapBasedPreferenceValues implements IPreferenceValues {
-	private final Map<String,String> values ;
-	
+import org.eclipse.emf.ecore.resource.Resource;
+
+public class MapBasedPreferenceValues implements IPreferenceValues, IPreferenceValuesProvider {
+	private final Map<String, String> values;
+
 	public MapBasedPreferenceValues(Map<String, String> values) {
 		this.values = values;
 	}
-	
+
+	public void clear() {
+		values.clear();
+	}
+
 	public String getPreference(PreferenceKey key) {
-		String value = values.get(key.getId());		
+		String value = values.get(key.getId());
 		return value == null ? key.getDefaultValue() : value;
+	}
+
+	public IPreferenceValues getPreferenceValues(Resource context) {
+		return this;
+	}
+
+	public Map<String, String> getValues() {
+		return values;
 	}
 
 	public void put(String key, String value) {
 		values.put(key, value);
 	}
-	
-	public void clear() {
-		values.clear();
+
+	@Override
+	public String toString() {
+		return values.toString();
 	}
-	
+
 }
