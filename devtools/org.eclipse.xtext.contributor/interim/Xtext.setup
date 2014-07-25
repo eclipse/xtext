@@ -4,6 +4,7 @@
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:git="http://www.eclipse.org/oomph/setup/git/1.0"
+    xmlns:pde="http://www.eclipse.org/oomph/setup/pde/1.0"
     xmlns:predicates="http://www.eclipse.org/oomph/predicates/1.0"
     xmlns:projects="http://www.eclipse.org/oomph/setup/projects/1.0"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
@@ -11,7 +12,7 @@
     xmlns:setup.targlets="http://www.eclipse.org/oomph/setup/targlets/1.0"
     xmlns:setup.workingsets="http://www.eclipse.org/oomph/setup/workingsets/1.0"
     xmlns:workingsets="http://www.eclipse.org/oomph/workingsets/1.0"
-    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/predicates/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Predicates.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore http://www.eclipse.org/oomph/setup/targlets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupTarglets.ecore http://www.eclipse.org/oomph/setup/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupWorkingSets.ecore http://www.eclipse.org/oomph/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/WorkingSets.ecore"
+    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/pde/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/PDE.ecore http://www.eclipse.org/oomph/predicates/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Predicates.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore http://www.eclipse.org/oomph/setup/targlets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupTarglets.ecore http://www.eclipse.org/oomph/setup/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupWorkingSets.ecore http://www.eclipse.org/oomph/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/WorkingSets.ecore"
     name="xtext"
     label="Xtext">
   <setupTask
@@ -20,20 +21,10 @@
       value="2g"
       vm="true"/>
   <setupTask
-      xsi:type="setup.p2:P2Task">
-    <requirement
-        id="org.eclipse.m2e.feature.feature.group"/>
-    <requirement
-        id="org.eclipse.b3.aggregator.editor.feature.feature.group"/>
-    <requirement
-        id="org.jboss.tools.m2e.jdt.feature.feature.group"/>
-    <repository
-        url="${xtext.nightly.composite}"/>
-    <repository
-        url="http://download.eclipse.org/modeling/emft/b3/updates-4.3"/>
-    <repository
-        url="http://download.jboss.org/jbosstools/updates/m2e-extensions/m2e-jdt-compiler/"/>
-  </setupTask>
+      xsi:type="setup:EclipseIniTask"
+      option="-Doomph.redirection.setups"
+      value="=http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/interim/Xtext.setup->${git.clone.xtext.location|uri}/devtools/org.eclipse.xtext.contributor/interim/Xtext.setup"
+      vm="true"/>
   <setupTask
       xsi:type="setup:ResourceCreationTask"
       excludedTriggers="STARTUP MANUAL"
@@ -61,17 +52,26 @@
     <requirement
         id="org.eclipse.emf.mwe2.language.sdk.feature.group"/>
     <requirement
-        id="org.eclipse.emf.ecore.xcore.sdk.feature.group"/>
-    <requirement
-        id="edu.umd.cs.findbugs.plugin.eclipse.feature.group"/>
+        id="edu.umd.cs.findbugs.plugin.eclipse.feature.group"
+        optional="true"/>
     <requirement
         id="org.eclipse.epp.mpc.feature.group"/>
     <requirement
         id="org.eclipse.pde.api.tools.ee.feature.feature.group"/>
+    <requirement
+        id="org.eclipse.m2e.feature.feature.group"/>
+    <requirement
+        id="org.eclipse.b3.aggregator.editor.feature.feature.group"/>
+    <requirement
+        id="org.jboss.tools.m2e.jdt.feature.feature.group"/>
     <repository
         url="${xtext.nightly.composite}"/>
     <repository
         url="http://findbugs.cs.umd.edu/eclipse"/>
+    <repository
+        url="http://download.eclipse.org/modeling/emft/b3/updates-4.3"/>
+    <repository
+        url="http://download.jboss.org/jbosstools/updates/m2e-extensions/m2e-jdt-compiler/"/>
   </setupTask>
   <setupTask
       xsi:type="git:GitCloneTask"
@@ -187,7 +187,7 @@
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.pde.api.tools/missing_default_api_profile"
-          value="Warning"/>
+          value="Error"/>
     </setupTask>
     <setupTask
         xsi:type="setup:CompoundTask"
@@ -233,19 +233,6 @@
           key="/instance/org.eclipse.jdt.ui/content_assist_favorite_static_members"
           value="com.google.common.collect.Lists.*;com.google.common.collect.Iterables.*;com.google.common.collect.Sets.*;java.util.Collections.*;com.google.common.collect.Maps.*;java.lang.Math.*"/>
     </setupTask>
-  </setupTask>
-  <setupTask
-      xsi:type="projects:ProjectsImportTask"
-      disabled="true">
-    <sourceLocator
-        rootFolder="${git.clone.xtext.location}/devtools/"/>
-    <sourceLocator
-        rootFolder="${git.clone.xtext.location}/releng/"/>
-    <sourceLocator
-        rootFolder="${git.clone.xtext.location}/maven/"/>
-    <sourceLocator
-        rootFolder="${git.clone.xtext.location}/examples/org.eclipse.xtend.examples-container/contents"/>
-    <description>Import all developer tools</description>
   </setupTask>
   <setupTask
       xsi:type="setup.targlets:TargletTask"
@@ -667,7 +654,8 @@
     <stream
         name="master">
       <setupTask
-          xsi:type="setup.targlets:TargletTask">
+          xsi:type="setup.targlets:TargletTask"
+          id="xtext.core">
         <targlet
             name="Xtext Core">
           <requirement
@@ -698,6 +686,8 @@
               id="org.eclipse.xtend.performance.tests"/>
           <requirement
               id="org.eclipse.xtend.examples-container"/>
+          <requirement
+              id="org.eclipse.xtext.releng"/>
           <sourceLocator
               rootFolder="${git.clone.xtext.location}"/>
           <sourceLocator
@@ -792,11 +782,6 @@
         <targlet
             name="Xtext Problem Bundles with dependencies that can't be resolved">
           <requirement
-              id="org.eclipse.xtext.releng">
-            <annotation
-                source="This has the problem that it requires a Mac-specific fragment."/>
-          </requirement>
-          <requirement
               id="org.xtext.sevenlanguages.doc.xdoc"/>
           <requirement
               id="xtend.website.generator"/>
@@ -827,6 +812,12 @@
         </sourceLocator>
         <description>Maven Dependencies</description>
       </setupTask>
+      <setupTask
+          xsi:type="pde:APIBaselineTask"
+          name="Xtext"
+          version="2.6"
+          location="${installation.location}/apibaseline/2.6/"
+          remoteURI="http://download.eclipse.org/modeling/tmf/xtext/downloads/drops/2.6.0/R201405210727/tmf-xtext-Update-2.6.0.zip"/>
     </stream>
     <stream
         name="maintenance">
