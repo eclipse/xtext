@@ -4,7 +4,7 @@ import org.eclipse.xtext.preferences.MapBasedPreferenceValues
 import org.eclipse.xtext.preferences.PreferenceKey
 import org.junit.Test
 
-import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
+import static org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys.*
 
 class XbaseFormatterTest extends AbstractXbaseFormatterTest {
 	
@@ -170,10 +170,14 @@ class XbaseFormatterTest extends AbstractXbaseFormatterTest {
 	
 	@Test def formatClosuresWrapIfNeeded() {
 		assertFormattedExpression('''
-			val x = newArrayList("A", "b")
-			val y = x.filter[val z = it z.toUpperCase == z z.toUpperCase == z
-				z.toUpperCase == z]
-			y.join
+				val x = newArrayList("A", "b")
+				val y = x.filter [
+					val z = it
+					z.toUpperCase == z
+					z.toUpperCase == z
+					z.toUpperCase == z
+				]
+				y.join
 		''', '''
 			val x = newArrayList("A", "b") val y = x.filter [ val z = it z.toUpperCase == z z.toUpperCase == z z.toUpperCase == z ] y.join
 		''')	
@@ -955,8 +959,8 @@ class XbaseFormatterTest extends AbstractXbaseFormatterTest {
 	
 	@Test def formatMemberFeatureCall3() {
 		assertFormattedExpression('''
-			val ML1 = "x".substring(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
-				16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28)
+			val ML1 = "x".substring(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+				15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28)
 		''', '''
 			val ML1 = "x".substring(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28)
 		''')	
@@ -1035,9 +1039,9 @@ class XbaseFormatterTest extends AbstractXbaseFormatterTest {
 	
 	@Test def formatBinaryExpression1() {
 		assertFormattedExpression('''
-			val ML1 = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12 + 13 + 14 + 15 +
-				16 + 17 + 18 + 19 + 20 + 21 + 22 + 23 + 24 + 25 + 26 + 27 + 28 + 29 + 30 +
-				31 + 32 + 33 + 34 + 35 + 36
+			val ML1 = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12 + 13 + 14 +
+				15 + 16 + 17 + 18 + 19 + 20 + 21 + 22 + 23 + 24 + 25 + 26 + 27 + 28 + 29 +
+				30 + 31 + 32 + 33 + 34 + 35 + 36
 		''', '''
 			val ML1 = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12 + 13 + 14 + 15 + 16 + 17 + 18 + 19 + 20 + 21 + 22 + 23 + 24 + 25 + 26 + 27 + 28 + 29 + 30 + 31 + 32 + 33 + 34 + 35 + 36 
 		''')	

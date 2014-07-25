@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="formattertestlanguage" nsURI="http://simple/formattertestlanguage"
+    nsPrefix="formattertestlanguage">
+  <eClassifiers xsi:type="ecore:EClass" name="Root"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Simple" eSuperTypes="#//Root">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Delegation" eSuperTypes="#//Root">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="delegate" eType="#//Delegate"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Unassigned" eSuperTypes="#//Root"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PrefixedUnassigned" eSuperTypes="#//Root">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="delegate" eType="#//PrefixedDelegate"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PrefixedDelegate"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Delegate" eSuperTypes="#//Unassigned #//PrefixedDelegate">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>
