@@ -37,16 +37,21 @@ import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
-import org.eclipse.jface.text.Region;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtend.core.conversion.JavaConverter;
 import org.eclipse.xtend.core.conversion.JavaConverter.ConversionResult;
-import org.eclipse.xtend.ide.formatting.FormatterFactory;
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.formatting2.FormatterPreferences;
+import org.eclipse.xtext.formatting2.FormatterRequest;
+import org.eclipse.xtext.formatting2.IFormatter2;
+import org.eclipse.xtext.formatting2.ITextReplacement;
+import org.eclipse.xtext.formatting2.TextReplacements;
+import org.eclipse.xtext.formatting2.regionaccess.internal.NodeModelBaseRegionAccess;
+import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
+import org.eclipse.xtext.preferences.TypedPreferenceValues;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.LazyStringInputStream;
@@ -65,8 +70,8 @@ public class ConvertJavaCode {
 	private @Inject Provider<JavaConverter> converterProvider;
 	private @Inject IResourceSetProvider resourceSetProvider;
 	private @Inject FileExtensionProvider fileExtensionProvider;
-	private @Inject Provider<XtextDocument> documentProvider;
-	private @Inject FormatterFactory.ContentFormatter formatter;
+	private @Inject @FormatterPreferences IPreferenceValuesProvider cfgProvider;
+	private @Inject IFormatter2 formatter;
 
 	public void runJavaConverter(final Set<ICompilationUnit> compilationUnits, Shell activeShell)
 			throws ExecutionException {
@@ -170,12 +175,14 @@ public class ConvertJavaCode {
 
 	private String formatXtendCode(IFile xtendFile, final String xtendCode) throws ExecutionException {
 		try {
-			XtextDocument xtextDocument = documentProvider.get();
 			XtextResource resource = (XtextResource) createResource(xtendFile, xtendCode);
-			xtextDocument.setInput(resource);
-			xtextDocument.set(xtendCode);
-			formatter.format(xtextDocument, new Region(0, xtendCode.length()));
-			return xtextDocument.get();
+			FormatterRequest request = new FormatterRequest();
+			request.setAllowIdentityEdits(false);
+			request.setTokens(new NodeModelBaseRegionAccess.Builder().withResource(resource).create());
+			request.setPreferenceValues(TypedPreferenceValues.castOrWrap(cfgProvider.getPreferenceValues(resource)));
+			List<ITextReplacement> replacements = formatter.format(request);
+			String formatted = TextReplacements.apply(xtendCode, replacements);
+			return formatted;
 		} catch (ExecutionException e) {
 			return null;
 		}

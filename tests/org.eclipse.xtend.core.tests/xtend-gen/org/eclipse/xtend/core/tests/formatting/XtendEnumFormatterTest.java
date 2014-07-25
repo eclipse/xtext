@@ -68,7 +68,7 @@ public class XtendEnumFormatterTest extends AbstractXtendFormatterTest {
   public void formatLiteral03() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
       public void apply(final MapBasedPreferenceValues it) {
-        XtendEnumFormatterTest.this.put(it, XtendFormatterPreferenceKeys.blankLinesBetweenEnumLiterals, Integer.valueOf(1));
+        it.put(XtendFormatterPreferenceKeys.blankLinesBetweenEnumLiterals, Integer.valueOf(1));
       }
     };
     StringConcatenation _builder = new StringConcatenation();
@@ -94,7 +94,7 @@ public class XtendEnumFormatterTest extends AbstractXtendFormatterTest {
   public void formatBraces_01() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
       public void apply(final MapBasedPreferenceValues it) {
-        XtendEnumFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
+        it.put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
       }
     };
     StringConcatenation _builder = new StringConcatenation();
@@ -112,7 +112,7 @@ public class XtendEnumFormatterTest extends AbstractXtendFormatterTest {
   public void formatBraces_02() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
       public void apply(final MapBasedPreferenceValues it) {
-        XtendEnumFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
+        it.put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
       }
     };
     StringConcatenation _builder = new StringConcatenation();

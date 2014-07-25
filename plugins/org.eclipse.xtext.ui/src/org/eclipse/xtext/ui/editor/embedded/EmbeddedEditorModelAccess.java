@@ -35,9 +35,7 @@ public class EmbeddedEditorModelAccess {
 
 	private final IEditedResourceProvider resourceProvider;
 
-	public EmbeddedEditorModelAccess(
-			SourceViewer viewer, 
-			IEditedResourceProvider resourceProvider, 
+	public EmbeddedEditorModelAccess(SourceViewer viewer, IEditedResourceProvider resourceProvider,
 			boolean insertLineBreaks) {
 		this.viewer = viewer;
 		this.resourceProvider = resourceProvider;
@@ -65,7 +63,7 @@ public class EmbeddedEditorModelAccess {
 		}
 		this.viewer.setDocument(document, annotationModel, prefix.length(), editablePart.length());
 	}
-	
+
 	protected XtextResource createResource(String content) {
 		XtextResource result = this.resourceProvider.createResource();
 		try {

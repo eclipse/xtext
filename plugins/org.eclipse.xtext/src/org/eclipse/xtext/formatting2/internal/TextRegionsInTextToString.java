@@ -1,0 +1,127 @@
+/*******************************************************************************
+ * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.formatting2.internal;
+
+import java.util.List;
+
+import org.eclipse.xtext.formatting2.ITextReplacement;
+import org.eclipse.xtext.formatting2.ITextSegment;
+import org.eclipse.xtext.formatting2.TextReplacements;
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
+
+import com.google.common.base.Strings;
+import com.google.common.base.Throwables;
+import com.google.common.collect.Lists;
+
+/**
+ * @author Moritz Eysholdt - Initial contribution and API
+ */
+public class TextRegionsInTextToString {
+
+	private ITextSegment frame;
+	private List<ITextReplacement> items = Lists.newArrayList();
+	private int leadingLines = 4;
+	private ITextRegionAccess textRegionAccess;
+	private int trailingLines = 4;
+
+	public TextRegionsInTextToString add(ITextReplacement region) {
+		items.add(region);
+		return this;
+	}
+
+	public TextRegionsInTextToString add(ITextSegment region, String title) {
+		items.add(new TextReplacement(region.getTextRegionAccess(), region.getOffset(), region.getLength(), title));
+		return this;
+	}
+
+	protected String box(String title, String content) {
+		final int width = 80;
+		final int min = 3;
+		int titleLenght = title.length() + 2;
+		final int left = Math.max((width - titleLenght) / 2, min);
+		StringBuilder result = new StringBuilder();
+		result.append(Strings.repeat("-", left));
+		result.append(" ");
+		result.append(title);
+		result.append(" ");
+		if (left > min)
+			result.append(Strings.repeat("-", width - left - titleLenght));
+		result.append("\n");
+		result.append(org.eclipse.xtext.util.Strings.trimTrailingLineBreak(content));
+		result.append("\n");
+		result.append(Strings.repeat("-", width));
+		return result.toString();
+	}
+
+	public ITextSegment getFrame() {
+		if (this.frame != null)
+			return this.frame;
+		ITextSegment[] array = items.toArray(new ITextSegment[items.size()]);
+		ITextRegionAccess regionAccess = getTextRegionAccess();
+		if (regionAccess != null)
+			return regionAccess.expandRegionsByLines(getLeadingLines(), getTrailingLines(), array);
+		return null;
+	}
+
+	public List<ITextReplacement> getItems() {
+		return items;
+	}
+
+	public int getLeadingLines() {
+		return leadingLines;
+	}
+
+	public ITextRegionAccess getTextRegionAccess() {
+		if (this.textRegionAccess != null)
+			return this.textRegionAccess;
+		for (ITextReplacement item : this.items)
+			return item.getTextRegionAccess();
+		return null;
+	}
+
+	public int getTrailingLines() {
+		return trailingLines;
+	}
+
+	public TextRegionsInTextToString setFrame(ITextSegment frame) {
+		this.frame = frame;
+		return this;
+	}
+
+	public TextRegionsInTextToString setLeadingLines(int leadingLines) {
+		this.leadingLines = leadingLines;
+		return this;
+	}
+
+	public TextRegionsInTextToString setTextRegionAccess(ITextRegionAccess textRegionAccess) {
+		this.textRegionAccess = textRegionAccess;
+		return this;
+	}
+
+	public TextRegionsInTextToString setTrailingLines(int trailingLines) {
+		this.trailingLines = trailingLines;
+		return this;
+	}
+
+	@Override
+	public String toString() {
+		try {
+			ITextRegionAccess access = getTextRegionAccess();
+			ITextSegment frame = getFrame();
+			if (access == null || frame == null)
+				return "(null)";
+			StringBuilder builder = new StringBuilder();
+			String vizualized = TextReplacements.apply(frame, items);
+			builder.append(box("document snippet", vizualized));
+			return builder.toString();
+		} catch (Exception e) {
+			return box("error", e.getMessage() + "\n" + Throwables.getStackTraceAsString(e));
+		}
+	}
+
+}
