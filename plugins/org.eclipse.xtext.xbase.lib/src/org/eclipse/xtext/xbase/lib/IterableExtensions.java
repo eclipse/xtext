@@ -605,17 +605,18 @@ public class IterableExtensions {
 	}
 	
 	/**
-	 * Returns a map for which the {@link Map#values} are the given elements in the given order, and each key is the
-	 * product of invoking a supplied function {@code computeKeys} on its corresponding value. If the function produces
-	 * the same key for different values, the collection of these values will be contained in the map.
+	 * Returns a map for which the {@link Map#values} is a collection of lists, where the elements in the list will 
+	 * appear in the order as they appeared in the iterable. Each key is the product of invoking the supplied 
+	 * function {@code computeKeys} on its corresponding value. So a key of that map groups a list of values for 
+	 * which the function produced exactly that key.  
 	 * 
 	 * @param values
 	 *            the values to use when constructing the {@code Map}. May not be <code>null</code>.
 	 * @param computeKeys
 	 *            the function used to produce the key for each value. May not be <code>null</code>.
 	 * @return a map mapping the result of evaluating the function {@code keyFunction} on each value in the input
-	 *         collection to that value. As there can be more than one value mapped by a key, the mapping result is is a
-	 *         collection of values.
+	 *         iterable to that value. As there can be more than one value mapped by a key, the mapping result is is a
+	 *         list of values.
 	 * @since 2.7
 	 */
 	public static <K, V> Map<K, List<V>> groupBy(Iterable<? extends V> values,

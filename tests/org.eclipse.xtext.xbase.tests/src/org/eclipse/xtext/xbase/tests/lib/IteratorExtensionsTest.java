@@ -238,12 +238,12 @@ public class IteratorExtensionsTest extends BaseIterablesIteratorsTest<Iterator<
 		Assert.assertEquals("Expected grouped map size", 2, map.size());
 		Assert.assertTrue("Contains 1 as key", map.keySet().contains(1));
 		Assert.assertEquals("Contains 2 entries for key 1", 2, map.get(1).size());
-		Assert.assertTrue("Contains entry 1->A for key 1", map.get(1).contains(new Pair<Integer, String>(1, "A")));
-		Assert.assertTrue("Contains entry 1->a for key 1", map.get(1).contains(new Pair<Integer, String>(1, "a")));
+		Assert.assertEquals("Contains entry 1->A for key 1", new Pair<Integer, String>(1, "A"), map.get(1).get(0));
+		Assert.assertEquals("Contains entry 1->a for key 1", new Pair<Integer, String>(1, "a"), map.get(1).get(1));
 		Assert.assertTrue("Contains 2 as key", map.keySet().contains(2));
 		Assert.assertEquals("Contains 2 entries for key 2", 2, map.get(2).size());
-		Assert.assertTrue("Contains entry 2->B for key 2", map.get(2).contains(new Pair<Integer, String>(2, "B")));
-		Assert.assertTrue("Contains entry 2->b for key 2", map.get(2).contains(new Pair<Integer, String>(2, "b")));
+		Assert.assertEquals("Contains entry 2->B for key 2", new Pair<Integer, String>(2, "B"), map.get(2).get(0));
+		Assert.assertEquals("Contains entry 2->b for key 2", new Pair<Integer, String>(2, "b"), map.get(2).get(1));
 	}
 
 	@Test
