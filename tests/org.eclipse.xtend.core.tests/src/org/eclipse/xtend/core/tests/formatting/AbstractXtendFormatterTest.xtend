@@ -1,16 +1,16 @@
 package org.eclipse.xtend.core.tests.formatting
 
 import com.google.inject.Inject
+import org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.junit4.formatter.FormatterTester
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues
-import org.eclipse.xtext.preferences.PreferenceKey
-import org.eclipse.xtext.xbase.junit.formatter.FormatterTester
+import org.eclipse.xtext.util.TextRegion
 import org.junit.runner.RunWith
 
 import static org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys.*
-import org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(RuntimeInjectorProvider))
@@ -19,10 +19,6 @@ abstract class AbstractXtendFormatterTest {
 
 	def assertFormatted(CharSequence toBeFormatted) {
 		assertFormatted(toBeFormatted, toBeFormatted/* .parse.flattenWhitespace  */)
-	}
-	
-	def void put(MapBasedPreferenceValues basedPreferenceValues, PreferenceKey key, Object value) {
-		basedPreferenceValues.put(key.id, value.toString)
 	}
 
 	def private toMember(CharSequence expression) '''
@@ -99,14 +95,15 @@ abstract class AbstractXtendFormatterTest {
 		boolean allowErrors
 	) {
 		tester.assertFormatted [
-			it.config.put(maxLineWidth, 80)
-			it.config.put(XtendFormatterPreferenceKeys.keepOneLineMethods, false)
-			if (cfg != null) cfg.apply(it.config)
-			it.expectation = expectation
-			it.toBeFormatted = toBeFormatted
-			it.prefix = prefix
-			it.postfix = postfix
-			it.allowErrors = allowErrors
+			it.preferences = [
+				put(maxLineWidth, 80)
+				put(XtendFormatterPreferenceKeys.keepOneLineMethods, false)
+				cfg?.apply(it)
+			]
+			it.expectation = prefix + expectation + postfix
+			it.toBeFormatted = prefix + toBeFormatted + postfix
+			it.request.regions += new TextRegion(prefix.length, toBeFormatted.length)
+			it.allowSyntaxErrors = allowErrors
 		]
 	}
 
