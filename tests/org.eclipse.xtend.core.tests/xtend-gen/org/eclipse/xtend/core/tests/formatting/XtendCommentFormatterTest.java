@@ -8,7 +8,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
   @Test
-  public void formatSLCommentAfterpackage() {
+  public void formatMLCommentBeforePackage() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/***********");
     _builder.newLine();
@@ -33,6 +33,33 @@ public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("***********/package foo");
+    _builder_1.newLine();
+    _builder_1.append("class zonk {}");
+    _builder_1.newLine();
+    this.assertFormatted(_builder, _builder_1);
+  }
+  
+  @Test
+  public void formatMLComment1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("/***********");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* copyright");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("***********/");
+    _builder.newLine();
+    _builder.append("class zonk {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("/***********");
+    _builder_1.newLine();
+    _builder_1.append("copyright");
+    _builder_1.newLine();
+    _builder_1.append("***********/");
     _builder_1.newLine();
     _builder_1.append("class zonk {}");
     _builder_1.newLine();
@@ -151,6 +178,7 @@ public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.append("/* my ");
     _builder.newLine();
+    _builder.append(" ");
     _builder.append("comment */");
     _builder.newLine();
     _builder.append("foo");
@@ -234,7 +262,7 @@ public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
   }
   
   @Test
-  public void formatSLCommentBeforeStatement21() {
+  public void formatSLDocCommentInStatement21() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class bar {");
     _builder.newLine();
@@ -246,7 +274,144 @@ public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class bar{");
     _builder_1.newLine();
-    _builder_1.append("// my comment");
+    _builder_1.append(" ");
+    _builder_1.append("//    my comment");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertFormatted(_builder, _builder_1);
+  }
+  
+  @Test
+  public void formatSLDocCommentInStatement22() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("//");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class bar{");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("//    ");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertFormatted(_builder, _builder_1);
+  }
+  
+  @Test
+  public void formatSLCodeCommentInStatement21() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("//    my comment");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class bar{");
+    _builder_1.newLine();
+    _builder_1.append("//    my comment");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertFormatted(_builder, _builder_1);
+  }
+  
+  @Test
+  public void formatMLCommentInBlock1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("/*");
+    _builder.newLine();
+    _builder.append("\t ");
+    _builder.append("* my comment");
+    _builder.newLine();
+    _builder.append("\t ");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class bar{");
+    _builder_1.newLine();
+    _builder_1.append("/*");
+    _builder_1.newLine();
+    _builder_1.append("my comment");
+    _builder_1.newLine();
+    _builder_1.append("*/");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertFormatted(_builder, _builder_1);
+  }
+  
+  @Test
+  public void formatMLCommentInBlock2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("/*");
+    _builder.newLine();
+    _builder.append("\t ");
+    _builder.append("* my comment");
+    _builder.newLine();
+    _builder.append("\t ");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class bar{");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("/*");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("my comment");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("*/");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertFormatted(_builder, _builder_1);
+  }
+  
+  @Test
+  public void formatMLCommentInBlock3() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("/*");
+    _builder.newLine();
+    _builder.append("\t ");
+    _builder.append("* my comment");
+    _builder.newLine();
+    _builder.append("\t ");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class bar{");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("/*");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t\t");
+    _builder_1.append("*my comment");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("*/");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();

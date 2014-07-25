@@ -223,7 +223,7 @@ public class XtendInterfaceFormatterTest extends AbstractXtendFormatterTest {
   public void formatMethod01() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
       public void apply(final MapBasedPreferenceValues it) {
-        XtendInterfaceFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
+        it.put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
       }
     };
     StringConcatenation _builder = new StringConcatenation();
@@ -244,7 +244,7 @@ public class XtendInterfaceFormatterTest extends AbstractXtendFormatterTest {
   public void formatMethod02() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
       public void apply(final MapBasedPreferenceValues it) {
-        XtendInterfaceFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
+        it.put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
       }
     };
     StringConcatenation _builder = new StringConcatenation();
@@ -267,7 +267,7 @@ public class XtendInterfaceFormatterTest extends AbstractXtendFormatterTest {
   public void formatMethod03() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
       public void apply(final MapBasedPreferenceValues it) {
-        XtendInterfaceFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
+        it.put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
       }
     };
     StringConcatenation _builder = new StringConcatenation();
@@ -290,7 +290,7 @@ public class XtendInterfaceFormatterTest extends AbstractXtendFormatterTest {
   public void formatMethod04() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
       public void apply(final MapBasedPreferenceValues it) {
-        XtendInterfaceFormatterTest.this.put(it, XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
+        it.put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
       }
     };
     StringConcatenation _builder = new StringConcatenation();

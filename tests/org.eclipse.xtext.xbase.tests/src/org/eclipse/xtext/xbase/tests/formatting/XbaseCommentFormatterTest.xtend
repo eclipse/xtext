@@ -1,34 +1,47 @@
 package org.eclipse.xtext.xbase.tests.formatting
 
-import org.eclipse.xtext.xbase.tests.formatting.AbstractXbaseFormatterTest
+import com.google.inject.Inject
+import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.junit4.XtextRunner
 import org.junit.Test
+import org.junit.runner.RunWith
 
-class XbaseCommentFormatterTest extends AbstractXbaseFormatterTest {
+@RunWith(typeof(XtextRunner))
+@InjectWith(typeof(XbaseFormatterTestInjectorProvider))
+class XbaseCommentFormatterTest {
+
+	@Inject extension XbaseFormatterTester
 
 	@Test def commentInIfExpression() {
-		assertFormattedExpression('''
-			if (true)
-				println("foo")
-			else //if (true)
-				println("bar")
-			println("end")
-		''')
+		assertFormattedExpression [
+			toBeFormatted = '''
+				if (true)
+					println("foo")
+				else // if (true)
+					println("bar")
+				println("end")
+			'''
+		]
 	}
-	
-	@Test def commentAfterForExpression1() {
-		assertFormattedExpression('''
-			for (f : #[])
-				if (1 < 2) {
-				}
 
-			// foo
-			var lastOffset = ""
-		''')
+	@Test def commentAfterForExpression1() {
+		assertFormattedExpression [
+			toBeFormatted = '''
+				for (f : #[])
+					if (1 < 2) {
+					}
+				
+				// foo
+				var lastOffset = ""
+			'''
+		]
 	}
-	
+
 	@Test def commentAfterForExpression3() {
-		assertFormattedExpression('''
-			val ll = #[].map(e|e.toString) // error here
-		''')
+		assertFormattedExpression [
+			toBeFormatted = '''
+				val ll = #[].map(e|e.toString) // error here
+			'''
+		]
 	}
 }
