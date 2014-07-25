@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException;
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionsInterpreter;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -72,6 +73,27 @@ public class SwitchConstantExpressionsInterpreterTest extends AbstractXbaseTestC
   @Test
   public void testJvmFieldCall() {
     this.evaluatesTo("interpreter.Foo.FOO", Integer.valueOf(1));
+  }
+  
+  @Test
+  public void testNullArgument_01() {
+    try {
+      final XExpression brokenExpression = this.expression("1 !=", false);
+      boolean _isConstant = this.interpreter.isConstant(brokenExpression, null);
+      Assert.assertFalse(_isConstant);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test(expected = ConstantExpressionEvaluationException.class)
+  public void testNullArgument_02() {
+    try {
+      final XExpression brokenExpression = this.expression("1 !=", false);
+      this.interpreter.evaluate(brokenExpression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
