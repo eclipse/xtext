@@ -21,9 +21,10 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-//TODO Move me to xtext core
+@Deprecated
+// use org.eclipse.xtext.formatting2.FormatterPreferenceValuesProvider
 public class FormatterPreferenceValuesProvider implements IFormattingPreferenceValuesProvider {
-	
+
 	private @Inject IWhitespaceInformationProvider whitespaceInfo;
 	private @Inject IPreferenceValuesProvider valuesProvider;
 
@@ -31,9 +32,9 @@ public class FormatterPreferenceValuesProvider implements IFormattingPreferenceV
 		final IPreferenceValues preferenceValues = internalGetRawPreferenceValues(resource);
 		final String indent = whitespaceInfo.getIndentationInformation(resource.getURI()).getIndentString();
 		final String lineSep = whitespaceInfo.getLineSeparatorInformation(resource.getURI()).getLineSeparator();
-		
+
 		return new IPreferenceValues() {
-			
+
 			public String getPreference(PreferenceKey key) {
 				if (key == indentation) {
 					return indent;
@@ -43,7 +44,7 @@ public class FormatterPreferenceValuesProvider implements IFormattingPreferenceV
 				}
 				return preferenceValues.getPreference(key);
 			}
-			
+
 		};
 	}
 

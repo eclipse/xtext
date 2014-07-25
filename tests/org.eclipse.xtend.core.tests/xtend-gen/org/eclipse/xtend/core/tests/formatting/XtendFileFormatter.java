@@ -100,7 +100,6 @@ public class XtendFileFormatter extends AbstractXtendFormatterTest {
     _builder.append("class bar {");
     _builder.newLine();
     _builder.append("}");
-    _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("   ");
     _builder_1.append("package  foo  class  bar  {  }");
