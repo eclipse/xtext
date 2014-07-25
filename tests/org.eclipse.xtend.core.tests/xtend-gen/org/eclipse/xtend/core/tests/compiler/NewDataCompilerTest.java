@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.List;
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.util.IAcceptor;
@@ -626,6 +627,27 @@ public class NewDataCompilerTest extends AbstractXtendCompilerTest {
         }
       };
       this.compilationTestHelper.compile(text, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testVariable() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Data");
+      _builder.newLine();
+      _builder.append("@Data class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var foo = 3");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final String text = _builder.toString();
+      XtendClass _clazz = this.clazz(text);
+      this._validationTestHelper.assertError(_clazz, XtendPackage.Literals.XTEND_FIELD, "user.issue", "\'var\'");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
