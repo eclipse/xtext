@@ -10,7 +10,7 @@ package org.eclipse.xtend.core.tests.compiler
 import com.google.inject.Inject
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Test
-
+import org.eclipse.xtend.core.xtend.XtendPackage
 
 class NewDataCompilerTest extends AbstractXtendCompilerTest {
 	
@@ -234,8 +234,6 @@ class NewDataCompilerTest extends AbstractXtendCompilerTest {
 		]
 	}
 	
-	
-	
 	@Test
 	def void testWithCreateExtension() {
 		val text = '''
@@ -249,6 +247,17 @@ class NewDataCompilerTest extends AbstractXtendCompilerTest {
 		text.compile[
 			assertFalse(compiledClass.declaredMethods.exists[name.startsWith("get")])
 		]
+	}
+	
+	@Test
+	def void testVariable() {
+		val text = '''
+			import org.eclipse.xtend.lib.annotations.Data
+			@Data class Foo {
+				var foo = 3
+			}
+		'''
+		clazz(text).assertError(XtendPackage.Literals.XTEND_FIELD, "user.issue", "'var'")
 	}
 	
 	@Test
