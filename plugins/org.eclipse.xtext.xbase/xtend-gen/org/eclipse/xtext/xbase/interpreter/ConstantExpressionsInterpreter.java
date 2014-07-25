@@ -193,6 +193,8 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
       return _internalEvaluate((XAnnotation)it, ctx);
     } else if (it != null) {
       return _internalEvaluate(it, ctx);
+    } else if (it == null) {
+      return _internalEvaluate((Void)null, ctx);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(it, ctx).toString());

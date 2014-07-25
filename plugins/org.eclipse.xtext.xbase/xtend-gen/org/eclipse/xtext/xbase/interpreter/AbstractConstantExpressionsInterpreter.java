@@ -45,6 +45,10 @@ public class AbstractConstantExpressionsInterpreter {
     throw this.notConstantExpression(expression);
   }
   
+  protected Object _internalEvaluate(final Void nullValue, final Context ctx) {
+    throw this.notConstantExpression(null);
+  }
+  
   public ConstantExpressionEvaluationException notConstantExpression(final XExpression expression) {
     String _text = null;
     if (expression!=null) {
@@ -278,6 +282,8 @@ public class AbstractConstantExpressionsInterpreter {
       return _internalEvaluate((XAnnotation)it, ctx);
     } else if (it != null) {
       return _internalEvaluate(it, ctx);
+    } else if (it == null) {
+      return _internalEvaluate((Void)null, ctx);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(it, ctx).toString());

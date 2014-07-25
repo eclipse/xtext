@@ -1630,6 +1630,28 @@ class ErrorTest extends AbstractXtendTestCase {
 		''')
 	}
 	
+	@Test
+	def void testErrorModel_113() throws Exception {
+		processWithoutException('''
+			package org.eclipse.xtend.core.tests.smoke
+			
+			class Case_2 {
+			
+				def aOrB(String a, String b) {
+					if (a.isNullOrEmpty()) 
+						b
+					else
+						a 
+				}
+				
+				def returnInIf() {
+					if ('x'!=) return 'xx' else return 'yy'
+				}
+			
+			}
+		''')
+	}
+	
 	def processWithoutException(CharSequence input) throws Exception {
 		val resource = resourceSet.createResource(URI::createURI("abcdefg.xtend"))
 		resource.load(new StringInputStream(input.toString), null)

@@ -3047,6 +3047,50 @@ public class ErrorTest extends AbstractXtendTestCase {
     this._oven.fireproof(_builder.toString());
   }
   
+  @Test
+  public void testErrorModel_113() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package org.eclipse.xtend.core.tests.smoke");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Case_2 {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def aOrB(String a, String b) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("if (a.isNullOrEmpty()) ");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("b");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("else");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("a ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def returnInIf() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("if (\'x\'!=) return \'xx\' else return \'yy\'");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
   public XtendFile processWithoutException(final CharSequence input) throws Exception {
     XtextResourceSet _resourceSet = this.getResourceSet();
     URI _createURI = URI.createURI("abcdefg.xtend");

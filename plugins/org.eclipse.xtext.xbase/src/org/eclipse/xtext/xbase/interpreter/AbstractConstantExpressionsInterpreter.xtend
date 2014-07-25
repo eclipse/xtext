@@ -38,6 +38,10 @@ class AbstractConstantExpressionsInterpreter {
 		throw notConstantExpression(expression)
 	}
 	
+	def dispatch Object internalEvaluate(Void nullValue, Context ctx) {
+		throw notConstantExpression(null)
+	}
+	
 	def notConstantExpression(XExpression expression) {
 		new ConstantExpressionEvaluationException("Not a constant expression : '" + expression?.toText + "'", expression)
 	}
