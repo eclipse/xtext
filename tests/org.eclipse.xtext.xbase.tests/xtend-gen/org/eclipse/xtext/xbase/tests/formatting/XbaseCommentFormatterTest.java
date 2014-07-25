@@ -14,7 +14,7 @@ public class XbaseCommentFormatterTest extends AbstractXbaseFormatterTest {
     _builder.append("\t");
     _builder.append("println(\"foo\")");
     _builder.newLine();
-    _builder.append("else //if (true)");
+    _builder.append("else // if (true)");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("println(\"bar\")");

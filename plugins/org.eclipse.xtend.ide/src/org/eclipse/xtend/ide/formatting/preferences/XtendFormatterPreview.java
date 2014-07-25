@@ -13,44 +13,34 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
-import org.apache.log4j.Logger;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.internal.ui.preferences.formatter.ProfileManager;
 import org.eclipse.jface.preference.PreferenceConverter;
-import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.MarginPainter;
 import org.eclipse.jface.text.Region;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.RGB;
-import org.eclipse.text.edits.MalformedTreeException;
-import org.eclipse.text.edits.TextEdit;
 import org.eclipse.ui.texteditor.AbstractDecoratedTextEditorPreferenceConstants;
-import org.eclipse.xtend.core.formatting.FormatterPreferenceValuesProvider;
-import org.eclipse.xtend.ide.formatting.FormatterFactory;
-import org.eclipse.xtend.ide.formatting.FormatterFactory.FormattingUnitOfWork;
-import org.eclipse.xtext.preferences.IPreferenceValues;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditor;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorModelAccess;
+import org.eclipse.xtext.ui.editor.formatting2.ContentFormatter;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
-import org.eclipse.xtext.xbase.formatting.IBasicFormatter;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 @SuppressWarnings("restriction")
 public class XtendFormatterPreview implements Observer {
-	
-	private final static Logger log = Logger.getLogger(XtendFormatterPreview.class);
-	
+
 	@Inject
 	private IPreferenceStoreAccess preferenceStoreAccess;
-	
+
 	@Inject
-	private IBasicFormatter formatter;
-	
+	private Provider<ContentFormatter> formatterProvider;
+
 	private EmbeddedEditor editorHandle;
 	private String previewContent;
 	private EmbeddedEditorModelAccess modelAccess;
@@ -103,35 +93,24 @@ public class XtendFormatterPreview implements Observer {
 			}
 		}
 	}
-	
-	public void doUpdate(final Map<String,String> map) {
+
+	public void doUpdate(final Map<String, String> map) {
 		checkEditorHandleIsSet();
 		final MapBasedPreferenceValues values = new MapBasedPreferenceValues(map);
 		String maxLineWidthValue = values.getPreference(maxLineWidth);
 		if (maxLineWidthValue != null) {
 			moveMarginToColumn(maxLineWidthValue);
 		}
-		
+
 		StyledText widget = null;
 		try {
 			widget = (StyledText) editorHandle.getViewer().getControl();
 			widget.setRedraw(false); // disable redraw, otherwise this would causes funny animation effects during formating.
 			this.modelAccess.updateModel("", previewContent, "");
-			FormattingUnitOfWork unitOfWork = new FormatterFactory.FormattingUnitOfWork(formatter, new Region(0,
-					editorHandle.getDocument().getLength()), new FormatterPreferenceValuesProvider() {
-						@Override
-						public IPreferenceValues getPreferenceValues(Resource context) {
-							return values;
-						}});
 			XtextDocument document = editorHandle.getDocument();
-			TextEdit textEdit = document.priorityReadOnly(unitOfWork);
-			try {
-				textEdit.apply(document);
-			} catch (MalformedTreeException e) {
-				log.error("Error applying text edits", e);
-			} catch (BadLocationException e) {
-				log.error("Error applying text edits", e);
-			}
+			ContentFormatter formatter = formatterProvider.get();
+			formatter.setPreferencesProvider(values);
+			formatter.format(document, new Region(0, document.getLength()));
 			editorHandle.getViewer().setSelection(null); // reset selection, otherwise the whole new content will be selected
 		} finally {
 			if (widget != null)
