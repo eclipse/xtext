@@ -372,7 +372,8 @@ public class QuickfixTestBuilder {
     final Procedure1<IFile> _function = new Procedure1<IFile>() {
       public void apply(final IFile it) {
         try {
-          it.delete(true, null);
+          NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+          it.delete(true, _nullProgressMonitor);
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
@@ -397,7 +398,8 @@ public class QuickfixTestBuilder {
       ObjectExtensions.<IPersistentPreferenceStore>operator_doubleArrow(_preferenceStore, _function_1);
       this.modifiedIssueCodes = null;
     }
-    this._syncUtil.yieldToQueuedDisplayJobs(null);
+    NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+    this._syncUtil.yieldToQueuedDisplayJobs(_nullProgressMonitor);
   }
   
   public QuickfixTestBuilder removeFile(final String fileName) {

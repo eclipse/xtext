@@ -148,7 +148,7 @@ class QuickfixTestBuilder {
 	def tearDown() {
 		if(editor != null)
 			closeEditor(editor, false)
-		files.forEach[ delete(true, null) ]
+		files.forEach[ delete(true, new NullProgressMonitor) ]
 		files.clear
 		if (modifiedIssueCodes != null) {
 			preferenceStore => [
@@ -158,7 +158,7 @@ class QuickfixTestBuilder {
 			]
 			modifiedIssueCodes = null;
 		}		
-		yieldToQueuedDisplayJobs(null)
+		yieldToQueuedDisplayJobs(new NullProgressMonitor)
 	}
 	
 	def removeFile(String fileName) {
