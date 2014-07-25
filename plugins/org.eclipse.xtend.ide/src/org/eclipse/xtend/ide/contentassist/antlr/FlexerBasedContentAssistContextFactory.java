@@ -18,6 +18,8 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.xtend.core.parser.InternalFlexer;
 import org.eclipse.xtend.ide.contentassist.antlr.internal.ContentAssistFlexerFactory;
 import org.eclipse.xtend.ide.contentassist.antlr.internal.InternalXtendParser;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory;
 import org.eclipse.xtext.util.Strings;
@@ -55,9 +57,37 @@ public class FlexerBasedContentAssistContextFactory extends ParserBasedContentAs
 			}
 		}
 		String prefix = "";
-		String completeInput = viewer.getDocument().get(0, completionOffset);
-		Collection<FollowElement> followElements = parser.getFollowElements(completeInput, strict);
+		Collection<FollowElement> followElements = parseFollowElements(completionOffset, strict);
+//		String completeInput = viewer.getDocument().get(0, completionOffset);
+//		Collection<FollowElement> followElements = parser.getFollowElements(completeInput, strict);
 		doCreateContexts(lastCompleteNode, currentNode, prefix, previousModel, followElements);
+	}
+
+	protected Collection<FollowElement> parseFollowElements(int offset, boolean strict) {
+		return ((FlexerBasedContentAssistParser)parser).getFollowElements(parseResult, offset, strict);
+	}
+	
+	@Override
+	protected void handleLastCompleteNodeAsPartOfDatatypeNode() throws BadLocationException {
+		String prefix = getPrefix(datatypeNode);
+		Collection<FollowElement> followElements = parseFollowElements(datatypeNode.getOffset(), false);
+		INode lastCompleteNodeBeforeDatatype = getLastCompleteNodeByOffset(rootNode, datatypeNode.getTotalOffset());
+		doCreateContexts(lastCompleteNodeBeforeDatatype, datatypeNode, prefix, currentModel, followElements);
+	}
+	
+	@Override
+	protected void handleLastCompleteNodeIsAtEndOfDatatypeNode() throws BadLocationException {
+		String prefix = getPrefix(lastCompleteNode);
+		INode previousNode = getLastCompleteNodeByOffset(rootNode, lastCompleteNode.getOffset());
+		EObject previousModel = previousNode.getSemanticElement();
+		INode currentDatatypeNode = getContainingDatatypeRuleNode(currentNode);
+		Collection<FollowElement> followElements = parseFollowElements(lastCompleteNode.getOffset(), false);
+		int prevSize = contextBuilders.size();
+		doCreateContexts(previousNode, currentDatatypeNode, prefix, previousModel, followElements);
+		
+		if (lastCompleteNode instanceof ILeafNode && lastCompleteNode.getGrammarElement() == null && contextBuilders.size() != prevSize) {
+			handleLastCompleteNodeHasNoGrammarElement(contextBuilders.subList(prevSize, contextBuilders.size()), previousModel);
+		}
 	}
 	
 	protected boolean isErrorToken(int token) {
