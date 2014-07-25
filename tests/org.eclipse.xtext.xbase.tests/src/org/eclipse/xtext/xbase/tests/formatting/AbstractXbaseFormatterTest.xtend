@@ -1,14 +1,14 @@
 package org.eclipse.xtext.xbase.tests.formatting
 
+import com.google.common.base.Preconditions
 import com.google.inject.Inject
+import org.eclipse.xtext.formatting2.FormatterPreferenceKeys
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.junit4.formatter.FormatterTester
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues
-import org.eclipse.xtext.xbase.junit.formatter.FormatterTester
-import org.junit.runner.RunWith
-
-import static org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys.*
 import org.eclipse.xtext.util.Strings
+import org.junit.runner.RunWith
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XbaseFormatterTestInjectorProvider))
@@ -72,20 +72,21 @@ abstract class AbstractXbaseFormatterTest {
 		String postfix,
 		boolean allowErrors
 	) {
+		Preconditions.checkArgument(!allowErrors, "not supported for now")
 		tester.assertFormatted [
-			initConfig(it.config, cfg)
+			it.preferences = initConfig(cfg)
 			it.expectation = expectation
 			it.toBeFormatted = toBeFormatted
 			it.prefix = prefix
 			it.postfix = postfix
-			it.allowErrors = allowErrors
 		]
 	}
 
-	def initConfig(MapBasedPreferenceValues target, (MapBasedPreferenceValues)=>void cfg) {
-		target.put(maxLineWidth.id, 80.toString)
+	def initConfig((MapBasedPreferenceValues)=>void cfg) {
+		val target = new MapBasedPreferenceValues(newHashMap)
+		target.put(FormatterPreferenceKeys.maxLineWidth.id, 80.toString)
 		if (cfg != null)
 			cfg.apply(target)
+		target.values
 	}
-
 }
