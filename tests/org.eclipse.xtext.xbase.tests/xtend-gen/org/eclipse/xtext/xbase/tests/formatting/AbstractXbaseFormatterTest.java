@@ -6,6 +6,7 @@ import java.util.List;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys;
 import org.eclipse.xtext.xbase.junit.formatter.AssertingFormatterData;
 import org.eclipse.xtext.xbase.junit.formatter.FormatterTester;
@@ -51,9 +52,12 @@ public abstract class AbstractXbaseFormatterTest {
     String _string_1 = toBeFormatted.toString();
     String _trim_1 = _string_1.trim();
     String _indent_1 = this.indent(_trim_1, "\t");
-    this.assertFormatted(cfg, _indent, _indent_1, 
-      "{\n\t", 
-      "\n}", allowErrors);
+    String _newLine = Strings.newLine();
+    String _plus = ("{" + _newLine);
+    String _plus_1 = (_plus + "\t");
+    String _newLine_1 = Strings.newLine();
+    String _plus_2 = (_newLine_1 + "}");
+    this.assertFormatted(cfg, _indent, _indent_1, _plus_1, _plus_2, allowErrors);
   }
   
   protected String indent(final String string, final String indent) {
@@ -71,7 +75,8 @@ public abstract class AbstractXbaseFormatterTest {
       }
     };
     List<String> _map = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(_split)), _function);
-    return IterableExtensions.join(_map, "\n");
+    String _newLine = Strings.newLine();
+    return IterableExtensions.join(_map, _newLine);
   }
   
   public void assertFormatted(final Procedure1<? super MapBasedPreferenceValues> cfg, final CharSequence expectation) {
