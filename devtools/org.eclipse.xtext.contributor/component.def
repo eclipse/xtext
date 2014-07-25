@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<targlets:ComponentDefinition
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:targlets="http://www.eclipse.org/oomph/targlets/1.0"
+    xsi:schemaLocation="http://www.eclipse.org/oomph/targlets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Targlets.ecore"
+    id="org.eclipse.xtext.contributor"
+    version="1.0.0.qualifier">
+  <requirement
+      id="org.eclipse.xtend.sdk.feature.group"/>
+  <requirement
+      id="org.eclipse.xtend.tests.feature.group"/>
+  <requirement
+      id="org.eclipse.xtext.sdk.feature.group"/>
+  <requirement
+      id="org.eclipse.xtext.tests.feature.group"/>
+  <requirement
+      id="org.eclipse.xtext.compatibility.galileo"/>
+</targlets:ComponentDefinition>
