@@ -1,92 +1,181 @@
 package org.eclipse.xtext.xbase.tests.formatting;
 
+import com.google.inject.Inject;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.xbase.tests.formatting.AbstractXbaseFormatterTest;
+import org.eclipse.xtext.junit4.InjectWith;
+import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.junit4.formatter.FormatterTestRequest;
+import org.eclipse.xtext.junit4.formatter.FormatterTester;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.tests.formatting.XbaseFormatterTestInjectorProvider;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+@RunWith(XtextRunner.class)
+@InjectWith(XbaseFormatterTestInjectorProvider.class)
 @SuppressWarnings("all")
-public class TypeReferenceFormatterTest extends AbstractXbaseFormatterTest {
-  public void assertTypeRef(final CharSequence toBeFormatted) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("{");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("var ");
-    _builder.append(toBeFormatted, "\t");
-    _builder.append(" x");
-    _builder.newLineIfNotEmpty();
-    _builder.append("}");
-    _builder.newLine();
-    this.assertFormatted(_builder);
+public class TypeReferenceFormatterTest {
+  @Inject
+  private FormatterTester tester;
+  
+  private void assertFormattedTypeRef(final Procedure1<? super FormatterTestRequest> test) {
+    final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      public void apply(final FormatterTestRequest it) {
+        test.apply(it);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("{");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("var ");
+        CharSequence _toBeFormatted = it.getToBeFormatted();
+        _builder.append(_toBeFormatted, "\t");
+        _builder.append(" x");
+        _builder.newLineIfNotEmpty();
+        _builder.append("}");
+        _builder.newLine();
+        it.setToBeFormatted(_builder);
+      }
+    };
+    this.tester.assertFormatted(_function);
   }
   
   @Test
   public void simple() {
-    this.assertTypeRef("String");
+    final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      public void apply(final FormatterTestRequest it) {
+        it.setToBeFormatted("String");
+      }
+    };
+    this.assertFormattedTypeRef(_function);
   }
   
   @Test
   public void array1() {
-    this.assertTypeRef("String[]");
+    final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      public void apply(final FormatterTestRequest it) {
+        it.setToBeFormatted("String[]");
+      }
+    };
+    this.assertFormattedTypeRef(_function);
   }
   
   @Test
   public void array2() {
-    this.assertTypeRef("String[][]");
+    final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      public void apply(final FormatterTestRequest it) {
+        it.setToBeFormatted("String[][]");
+      }
+    };
+    this.assertFormattedTypeRef(_function);
   }
   
   @Test
   public void function0() {
-    this.assertTypeRef("=>void");
+    final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      public void apply(final FormatterTestRequest it) {
+        it.setToBeFormatted("=>void");
+      }
+    };
+    this.assertFormattedTypeRef(_function);
   }
   
   @Test
   public void function1() {
-    this.assertTypeRef("()=>void");
+    final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      public void apply(final FormatterTestRequest it) {
+        it.setToBeFormatted("()=>void");
+      }
+    };
+    this.assertFormattedTypeRef(_function);
   }
   
   @Test
   public void function2() {
-    this.assertTypeRef("(String)=>String");
+    final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      public void apply(final FormatterTestRequest it) {
+        it.setToBeFormatted("(String)=>String");
+      }
+    };
+    this.assertFormattedTypeRef(_function);
   }
   
   @Test
   public void function3() {
-    this.assertTypeRef("(Collection<?>)=>Collection<?>");
+    final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      public void apply(final FormatterTestRequest it) {
+        it.setToBeFormatted("(Collection<?>)=>Collection<?>");
+      }
+    };
+    this.assertFormattedTypeRef(_function);
   }
   
   @Test
   public void function4() {
-    this.assertTypeRef("(Collection<? extends String>)=>Collection<? extends String>");
+    final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      public void apply(final FormatterTestRequest it) {
+        it.setToBeFormatted("(Collection<? extends String>)=>Collection<? extends String>");
+      }
+    };
+    this.assertFormattedTypeRef(_function);
   }
   
   @Test
   public void function5() {
-    this.assertTypeRef("(String, String)=>String");
+    final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      public void apply(final FormatterTestRequest it) {
+        it.setToBeFormatted("(String, String)=>String");
+      }
+    };
+    this.assertFormattedTypeRef(_function);
   }
   
   @Test
   public void parameters1() {
-    this.assertTypeRef("Collection<String>");
+    final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      public void apply(final FormatterTestRequest it) {
+        it.setToBeFormatted("Collection<String>");
+      }
+    };
+    this.assertFormattedTypeRef(_function);
   }
   
   @Test
   public void parameters2() {
-    this.assertTypeRef("Map<String, String>");
+    final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      public void apply(final FormatterTestRequest it) {
+        it.setToBeFormatted("Map<String, String>");
+      }
+    };
+    this.assertFormattedTypeRef(_function);
   }
   
   @Test
   public void parametersNested() {
-    this.assertTypeRef("Map<Collection<String>, Collection<String>>");
+    final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      public void apply(final FormatterTestRequest it) {
+        it.setToBeFormatted("Map<Collection<String>, Collection<String>>");
+      }
+    };
+    this.assertFormattedTypeRef(_function);
   }
   
   @Test
   public void parametersUpperBound() {
-    this.assertTypeRef("Collection<? extends String>");
+    final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      public void apply(final FormatterTestRequest it) {
+        it.setToBeFormatted("Collection<? extends String>");
+      }
+    };
+    this.assertFormattedTypeRef(_function);
   }
   
   @Test
   public void parametersLowerBound() {
-    this.assertTypeRef("Collection<? super String>");
+    final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      public void apply(final FormatterTestRequest it) {
+        it.setToBeFormatted("Collection<? super String>");
+      }
+    };
+    this.assertFormattedTypeRef(_function);
   }
 }
