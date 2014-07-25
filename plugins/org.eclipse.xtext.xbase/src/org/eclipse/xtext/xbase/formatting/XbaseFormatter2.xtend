@@ -47,6 +47,7 @@ import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
 import static org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys.*
 import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 import org.eclipse.xtext.xbase.XSynchronizedExpression
+import org.eclipse.xtext.xbase.XCasePart
 
 class XbaseFormatter2 extends AbstractFormatter {
 	@Inject extension NodeModelAccess
@@ -710,13 +711,23 @@ class XbaseFormatter2 extends AbstractFormatter {
 			format += open.prepend[noSpace]
 		val close = expr.nodeForKeyword("}")
 		if (open != null && close != null) {
+			val multiLine = !expr.isSingleLineBlock(format)
 			if (expr.expressions.empty) {
-				if(open.hiddenLeafsAfter.containsComment)
-					format += open.append[newLine increaseIndentation decreaseIndentation]
-				else
-					format += open.append[newLine]
+				if(open.hiddenLeafsAfter.containsComment) {
+					if (multiLine) {
+						format += open.append[newLine increaseIndentation decreaseIndentation]
+					} else {
+						format += open.append[oneSpace]
+					}
+				} else {
+					format += open.append[if (multiLine) newLine else noSpace]
+				}
 			} else {
-				format += open.append[cfg(blankLinesAroundExpression) increaseIndentation]
+				if (multiLine) {
+					format += open.append[cfg(blankLinesAroundExpression) increaseIndentation]
+				} else {
+					format += open.append[oneSpace]
+				}
 				for (child : expr.expressions) {
 					child.format(format)
 					if (child != expr.expressions.last || close != null) {
@@ -724,15 +735,21 @@ class XbaseFormatter2 extends AbstractFormatter {
 						val sem = childNode.immediatelyFollowingKeyword(";")
 						if (sem != null) {
 							format += sem.prepend[noSpace]
-							format += sem.append[cfg(blankLinesAroundExpression)]
+							format += sem.append[if (multiLine) cfg(blankLinesAroundExpression) else oneSpace]
 						} else {
-							format += childNode.append[cfg(blankLinesAroundExpression)]
+							format += childNode.append[if (multiLine) cfg(blankLinesAroundExpression) else oneSpace]
 						}
 					}
 				}
-				format += close.prepend[decreaseIndentation]
+				if (multiLine) {
+					format += close.prepend[decreaseIndentation]
+				}
 			}
 		}
+	}
+	
+	def protected isSingleLineBlock(XBlockExpression expr, FormattableDocument format) {
+		return false;
 	}
 
 	def protected dispatch void format(XTypeLiteral expr, FormattableDocument format) {

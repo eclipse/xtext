@@ -67,6 +67,7 @@ import org.eclipse.xtext.xbase.formatting.FormattableDocument;
 import org.eclipse.xtext.xbase.formatting.FormattingData;
 import org.eclipse.xtext.xbase.formatting.FormattingDataFactory;
 import org.eclipse.xtext.xbase.formatting.FormattingDataInit;
+import org.eclipse.xtext.xbase.formatting.FormattingPreferenceValues;
 import org.eclipse.xtext.xbase.formatting.HiddenLeafAccess;
 import org.eclipse.xtext.xbase.formatting.HiddenLeafs;
 import org.eclipse.xtext.xbase.formatting.NodeModelAccess;
@@ -968,6 +969,53 @@ public class XtendFormatter extends XbaseFormatter2 {
     };
     Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _append_11 = this._formattingDataFactory.append(_nodeForKeyword_11, _function_11);
     document.operator_add(_append_11);
+  }
+  
+  protected boolean isSingleLineBlock(final XBlockExpression expr, final FormattableDocument format) {
+    boolean _and = false;
+    boolean _and_1 = false;
+    boolean _and_2 = false;
+    boolean _and_3 = false;
+    FormattingPreferenceValues _cfg = format.getCfg();
+    boolean _get = _cfg.get(XtendFormatterPreferenceKeys.preserveOneLineMethods);
+    if (!_get) {
+      _and_3 = false;
+    } else {
+      EObject _eContainer = expr.eContainer();
+      _and_3 = (_eContainer instanceof XtendFunction);
+    }
+    if (!_and_3) {
+      _and_2 = false;
+    } else {
+      EList<XExpression> _expressions = expr.getExpressions();
+      int _size = _expressions.size();
+      boolean _lessEqualsThan = (_size <= 1);
+      _and_2 = _lessEqualsThan;
+    }
+    if (!_and_2) {
+      _and_1 = false;
+    } else {
+      boolean _isMultiline = this.isMultiline(expr, format);
+      boolean _not = (!_isMultiline);
+      _and_1 = _not;
+    }
+    if (!_and_1) {
+      _and = false;
+    } else {
+      boolean _or = false;
+      EList<XExpression> _expressions_1 = expr.getExpressions();
+      boolean _isEmpty = _expressions_1.isEmpty();
+      if (_isEmpty) {
+        _or = true;
+      } else {
+        EList<XExpression> _expressions_2 = expr.getExpressions();
+        XExpression _head = IterableExtensions.<XExpression>head(_expressions_2);
+        boolean _fitsIntoLine = this.fitsIntoLine(format, _head);
+        _or = _fitsIntoLine;
+      }
+      _and = _or;
+    }
+    return _and;
   }
   
   protected void format(final EObject anonymousClass, final FormattableDocument format) {
