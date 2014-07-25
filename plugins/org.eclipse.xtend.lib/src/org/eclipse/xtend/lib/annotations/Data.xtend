@@ -8,6 +8,8 @@ import org.eclipse.xtend.lib.macro.Active
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.Visibility
+import org.eclipse.xtend.lib.macro.declaration.Modifier
+import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
 
 /**
  * @since 2.7
@@ -30,6 +32,9 @@ class DataProcessor extends AbstractClassProcessor {
 		extension val requiredArgsUtil = new FinalFieldsConstructorProcessor.Util(context)
 
 		dataFields.forEach [
+			if ((primarySourceElement as FieldDeclaration).modifiers.contains(Modifier.VAR)){
+				addError("Cannot use the 'var' keyword on a data field")
+			}
 			final = true
 		]
 		if (needsFinalFieldConstructor) {

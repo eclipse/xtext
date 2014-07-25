@@ -1,6 +1,7 @@
 package org.eclipse.xtend.lib.annotations;
 
 import com.google.common.annotations.Beta;
+import java.util.Set;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.AccessorsProcessor;
 import org.eclipse.xtend.lib.annotations.EqualsHashCodeProcessor;
@@ -9,6 +10,9 @@ import org.eclipse.xtend.lib.annotations.ToStringConfiguration;
 import org.eclipse.xtend.lib.annotations.ToStringProcessor;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
+import org.eclipse.xtend.lib.macro.declaration.Element;
+import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.Modifier;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ResolvedConstructor;
@@ -78,6 +82,12 @@ public class DataProcessor extends AbstractClassProcessor {
     Iterable<? extends MutableFieldDeclaration> _dataFields = util.getDataFields(it);
     final Procedure1<MutableFieldDeclaration> _function = new Procedure1<MutableFieldDeclaration>() {
       public void apply(final MutableFieldDeclaration it) {
+        Element _primarySourceElement = context.getPrimarySourceElement(it);
+        Set<Modifier> _modifiers = ((FieldDeclaration) _primarySourceElement).getModifiers();
+        boolean _contains = _modifiers.contains(Modifier.VAR);
+        if (_contains) {
+          context.addError(it, "Cannot use the \'var\' keyword on a data field");
+        }
         it.setFinal(true);
       }
     };
