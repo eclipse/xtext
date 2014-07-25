@@ -72,9 +72,7 @@ public class FlexerBasedContentAssistParser extends XtendParser {
 	public Collection<FollowElement> getFollowElements(IParseResult parseResult, int offset, boolean strict) {
 		ICompositeNode entryPoint = entryPointFinder.findEntryPoint(parseResult, offset);
 		if (entryPoint != null) {
-			int entryPointOffset = entryPoint.getTotalOffset();
-			String text = parseResult.getRootNode().getText();
-			String parseMe = text.substring(entryPointOffset, offset);
+			String parseMe = getTextToParse(parseResult, entryPoint, offset);
 //	System.out.println("Parsing: >>>" + parseMe + "<<<");
 			TokenSource tokenSource = flexerFactory.createTokenSource(new StringReader(parseMe));
 			AbstractInternalContentAssistParser parser = createParser();
@@ -87,15 +85,24 @@ public class FlexerBasedContentAssistParser extends XtendParser {
 			helper.initializeWith(parser);
 			tokens.setListener(parser);
 			try {
-				return Lists.newArrayList(getFollowElements(parser, (AbstractElement) entryPoint.getGrammarElement()));
+				Collection<FollowElement> followElements = getFollowElements(parser, (AbstractElement) entryPoint.getGrammarElement());
+				return Lists.newArrayList(followElements);
 			} catch(InfiniteRecursion infinite) {
 				return Lists.newArrayList(parser.getFollowElements());
 			}
 		} else {
 			String text = parseResult.getRootNode().getText();
 			String parseMe = text.substring(0, offset);
-			return getFollowElements(parseMe, strict);
+			Collection<FollowElement> followElements = getFollowElements(parseMe, strict);
+			return followElements;
 		}
+	}
+
+	protected String getTextToParse(IParseResult parseResult, ICompositeNode entryPoint, int offset) {
+		int entryPointOffset = entryPoint.getTotalOffset();
+		String text = parseResult.getRootNode().getText();
+		String parseMe = text.substring(entryPointOffset, offset);
+		return parseMe;
 	}
 	
 	private Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser, AbstractElement entryPoint) {
