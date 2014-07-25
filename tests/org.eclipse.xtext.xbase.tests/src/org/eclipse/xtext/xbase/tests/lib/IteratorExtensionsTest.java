@@ -13,11 +13,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.google.common.collect.Iterators;
@@ -137,4 +140,169 @@ public class IteratorExtensionsTest extends BaseIterablesIteratorsTest<Iterator<
 		assertEquals(new Pair<Integer, String>(1, "bar"), result.next());
 		assertFalse(result.hasNext());
 	}
+	
+	@Test
+	public void testToMap() {
+		List<Pair<Integer, String>> pairs = new ArrayList<Pair<Integer, String>>();
+		pairs.add(new Pair<Integer, String>(1, "A"));
+		pairs.add(new Pair<Integer, String>(1, "a"));
+		pairs.add(new Pair<Integer, String>(2, "B"));
+		pairs.add(new Pair<Integer, String>(2, "b"));
+		Function1<Pair<Integer, String>, Integer> computeKeys = new Function1<Pair<Integer, String>, Integer>() {
+
+			public Integer apply(Pair<Integer, String> p) {
+				return p.getKey();
+			}
+		};
+		Map<Integer, Pair<Integer, String>> map = IteratorExtensions.toMap(pairs.iterator(), computeKeys);
+		Assert.assertEquals("Expected grouped map size", 2, map.size());
+		Assert.assertTrue("Contains 1 as key", map.keySet().contains(1));
+		Assert.assertEquals("Contains entry 1->a for key 1", map.get(1), new Pair<Integer, String>(1, "a"));
+		Assert.assertTrue("Contains 2 as key", map.keySet().contains(2));
+		Assert.assertEquals("Contains entry 2->b for key 2", map.get(2), new Pair<Integer, String>(2, "b"));
+	}
+
+	@Test
+	public void testToMap__WhenEmptyList() {
+		List<Pair<Integer, String>> pairs = new ArrayList<Pair<Integer, String>>();
+		Function1<Pair<Integer, String>, Integer> computeKeys = new Function1<Pair<Integer, String>, Integer>() {
+
+			public Integer apply(Pair<Integer, String> p) {
+				return p.getKey();
+			}
+		};
+		Map<Integer, Pair<Integer, String>> map = IteratorExtensions.toMap(pairs.iterator(), computeKeys);
+		Assert.assertEquals("Expected grouped map size", 0, map.size());
+	}
+
+	@Test
+	public void testToMap__WhenCalculatedKeyNull() {
+		List<String> names = new ArrayList<String>();
+		names.add("Mueller");
+		names.add("Schneider");
+		names.add("Schmidt");
+		names.add("Koch");
+		Function1<String, String> computeKeys = new Function1<String, String>() {
+
+			public String apply(String p) {
+				return p.contains("y") ? "y" : null;
+			}
+		};
+		Map<String, String> map = IteratorExtensions.toMap(names.iterator(), computeKeys);
+		Assert.assertEquals("Expected grouped map size", 1, map.size());
+		Assert.assertTrue("Contains null as key", map.keySet().contains(null));
+		Assert.assertEquals("Contains entry Koch for key null", "Koch", map.get(null));
+	}
+
+	@Test
+	public void testToMap__WhenNoValuesForKey() {
+		List<String> names = new ArrayList<String>();
+		names.add("Mueller");
+		names.add("Schneider");
+		names.add("Schmidt");
+		names.add("Koch");
+		Function1<String, Boolean> computeKeys = new Function1<String, Boolean>() {
+
+			public Boolean apply(String p) {
+				return p.contains("y");
+			}
+		};
+		Map<Boolean, String> map = IteratorExtensions.toMap(names.iterator(), computeKeys);
+		Assert.assertEquals("Expected grouped map size", 1, map.size());
+		Assert.assertTrue("Contains FALSE as key", map.keySet().contains(Boolean.FALSE));
+		Assert.assertTrue("Contains entry Mueller for key FALSE", map.get(Boolean.FALSE).equals("Koch"));
+		Assert.assertNull("Contains no entry for key Boolean.TRUE", map.get(Boolean.TRUE));
+	}
+
+	@Test(expected = NullPointerException.class)
+	public void testToMap__WhenFunctionNull() {
+		List<Pair<Integer, String>> pairs = new ArrayList<Pair<Integer, String>>();
+		Function1<Pair<Integer, String>, Integer> computeKeys = null;
+		IteratorExtensions.toMap(pairs.iterator(), computeKeys);
+	}	
+	
+	@Test
+	public void testGroupBy() {
+		List<Pair<Integer, String>> pairs = new ArrayList<Pair<Integer, String>>();
+		pairs.add(new Pair<Integer, String>(1, "A"));
+		pairs.add(new Pair<Integer, String>(1, "a"));
+		pairs.add(new Pair<Integer, String>(2, "B"));
+		pairs.add(new Pair<Integer, String>(2, "b"));
+		Function1<Pair<Integer, String>, Integer> computeKeys = new Function1<Pair<Integer, String>, Integer>() {
+
+			public Integer apply(Pair<Integer, String> p) {
+				return p.getKey();
+			}
+		};
+		Map<Integer, List<Pair<Integer, String>>> map = IteratorExtensions.groupBy(pairs.iterator(), computeKeys);
+		Assert.assertEquals("Expected grouped map size", 2, map.size());
+		Assert.assertTrue("Contains 1 as key", map.keySet().contains(1));
+		Assert.assertEquals("Contains 2 entries for key 1", 2, map.get(1).size());
+		Assert.assertEquals("Contains entry 1->A for key 1", new Pair<Integer, String>(1, "A"), map.get(1).get(0));
+		Assert.assertEquals("Contains entry 1->a for key 1", new Pair<Integer, String>(1, "a"), map.get(1).get(1));
+		Assert.assertTrue("Contains 2 as key", map.keySet().contains(2));
+		Assert.assertEquals("Contains 2 entries for key 2", 2, map.get(2).size());
+		Assert.assertEquals("Contains entry 2->B for key 2", new Pair<Integer, String>(2, "B"), map.get(2).get(0));
+		Assert.assertEquals("Contains entry 2->b for key 2", new Pair<Integer, String>(2, "b"), map.get(2).get(1));
+	}
+
+	@Test
+	public void testGroupBy__WhenEmptyList() {
+		List<Pair<Integer, String>> pairs = new ArrayList<Pair<Integer, String>>();
+		Function1<Pair<Integer, String>, Integer> computeKeys = new Function1<Pair<Integer, String>, Integer>() {
+
+			public Integer apply(Pair<Integer, String> p) {
+				return p.getKey();
+			}
+		};
+		Map<Integer, List<Pair<Integer, String>>> map = IteratorExtensions.groupBy(pairs.iterator(), computeKeys);
+		Assert.assertEquals("Expected grouped map size", 0, map.size());
+	}
+
+	@Test
+	public void testGroupBy__WhenCalculatedKeyNull() {
+		List<String> names = new ArrayList<String>();
+		names.add("Mueller");
+		names.add("Schneider");
+		names.add("Schmidt");
+		names.add("Koch");
+		Function1<String, String> computeKeys = new Function1<String, String>() {
+
+			public String apply(String p) {
+				return p.contains("y") ? "y" : null;
+			}
+		};
+		Map<String, List<String>> map = IteratorExtensions.groupBy(names.iterator(), computeKeys);
+		Assert.assertEquals("Expected grouped map size", 1, map.size());
+		Assert.assertTrue("Contains null as key", map.keySet().contains(null));
+		Assert.assertEquals("Contains 4 entries for key null", 4, map.get(null).size());
+	}
+
+	@Test
+	public void testGroupBy__WhenNoValuesForKey() {
+		List<String> names = new ArrayList<String>();
+		names.add("Mueller");
+		names.add("Schneider");
+		names.add("Schmidt");
+		names.add("Koch");
+		Function1<String, Boolean> computeKeys = new Function1<String, Boolean>() {
+
+			public Boolean apply(String p) {
+				return p.contains("y");
+			}
+		};
+		Map<Boolean, List<String>> map = IteratorExtensions.groupBy(names.iterator(), computeKeys);
+		Assert.assertEquals("Expected grouped map size", 1, map.size());
+		Assert.assertTrue("Contains FALSE as key", map.keySet().contains(Boolean.FALSE));
+		Assert.assertEquals("Contains 4 entries for key Boolean.FALSE", 4, map.get(Boolean.FALSE).size());
+		Assert.assertTrue("Contains entry Mueller for key FALSE", map.get(Boolean.FALSE).contains("Mueller"));
+		Assert.assertNull("Contains no entry for key Boolean.TRUE", map.get(Boolean.TRUE));
+	}
+
+	@Test(expected = NullPointerException.class)
+	public void testGroupBy__WhenFunctionNull() {
+		List<Pair<Integer, String>> pairs = new ArrayList<Pair<Integer, String>>();
+		Function1<Pair<Integer, String>, Integer> computeKeys = null;
+		IteratorExtensions.groupBy(pairs.iterator(), computeKeys);
+	}	
 }
