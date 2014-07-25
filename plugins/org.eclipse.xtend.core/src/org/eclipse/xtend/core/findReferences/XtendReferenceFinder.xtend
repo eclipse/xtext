@@ -43,7 +43,7 @@ class XtendReferenceFinder extends ReferenceFinder {
 	@Inject
 	Declarators declarators
 	
-	override findReferences(TargetURIs targetURIs, IResourceDescription resourceDescription, IResourceAccess resourceAccess, Acceptor acceptor, IProgressMonitor monitor) {
+	override findReferencesInDescription(TargetURIs targetURIs, IResourceDescription resourceDescription, IResourceAccess resourceAccess, Acceptor acceptor, IProgressMonitor monitor) {
 		val names = declarators.getDeclaratorData(targetURIs, resourceAccess).declaratorNames
 		if (monitor.canceled)
 			throw new OperationCanceledException
