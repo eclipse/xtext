@@ -4,19 +4,4 @@
 	<comment></comment>
 	<projects>
 	</projects>
-	<buildSpec>
-		<buildCommand>
-			<name>org.eclipse.ui.externaltools.ExternalToolBuilder</name>
-			<triggers>full,incremental,</triggers>
-			<arguments>
-				<dictionary>
-					<key>LaunchConfigHandle</key>
-					<value>&lt;project&gt;/.externalToolBuilders/org.eclipse.m2e.core.maven2Builder (4).launch</value>
-				</dictionary>
-			</arguments>
-		</buildCommand>
-	</buildSpec>
-	<natures>
-		<nature>org.eclipse.m2e.core.maven2Nature</nature>
-	</natures>
 </projectDescription>
