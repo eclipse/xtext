@@ -45,6 +45,9 @@ public class BlankLinesTab extends AbstractModifyDialogTab {
 		createNumberPref(cdGr, col, "Between methods:", blankLinesBetweenMethods);
 		createNumberPref(cdGr, col, "Between enum literals:", blankLinesBetweenEnumLiterals);
 		
+		Group exprGroup = createGroup(col, composite, "Blank lines in expressions");
+		createCheckboxPref(exprGroup, col, "Preserve one line methods:", preserveOneLineMethods);
+		
 		Group eblGroup = createGroup(col, composite, "Existing blank lines");
 		createNumberPref(eblGroup, col, "Number of empty lines to preserve:", preserveBlankLines);
 

@@ -2,6 +2,7 @@ package org.eclipse.xtend.core.formatting;
 
 import com.google.inject.Singleton;
 import org.eclipse.xtext.xbase.formatting.BlankLineKey;
+import org.eclipse.xtext.xbase.formatting.BooleanKey;
 import org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys;
 
 @Singleton
@@ -26,4 +27,6 @@ public class XtendFormatterPreferenceKeys extends XbaseFormatterPreferenceKeys {
   public final static BlankLineKey blankLinesBetweenMethods = new BlankLineKey("blank.lines.between.methods", Integer.valueOf(1));
   
   public final static BlankLineKey blankLinesBetweenEnumLiterals = new BlankLineKey("blank.lines.between.enum.literals", Integer.valueOf(0));
+  
+  public final static BooleanKey preserveOneLineMethods = new BooleanKey("preserve.one.line.methods", false);
 }

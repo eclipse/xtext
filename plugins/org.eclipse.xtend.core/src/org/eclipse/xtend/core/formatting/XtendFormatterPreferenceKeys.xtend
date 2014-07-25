@@ -3,6 +3,7 @@ package org.eclipse.xtend.core.formatting
 import org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys
 import org.eclipse.xtext.xbase.formatting.BlankLineKey
 import com.google.inject.Singleton
+import org.eclipse.xtext.xbase.formatting.BooleanKey
 
 @Singleton
 class XtendFormatterPreferenceKeys extends XbaseFormatterPreferenceKeys {
@@ -16,5 +17,7 @@ class XtendFormatterPreferenceKeys extends XbaseFormatterPreferenceKeys {
 	public static val blankLinesBetweenFieldsAndMethods = new BlankLineKey("blank.lines.between.fields.and.methods", 1)
 	public static val blankLinesBetweenMethods = new BlankLineKey("blank.lines.between.methods", 1)
 	public static val blankLinesBetweenEnumLiterals = new BlankLineKey("blank.lines.between.enum.literals", 0)
+	
+	public static val preserveOneLineMethods = new BooleanKey("preserve.one.line.methods", false)
 }
 
