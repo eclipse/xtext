@@ -1,15 +1,19 @@
 package org.eclipse.xtext.xbase.tests.formatting;
 
 import com.google.common.base.Objects;
+import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import org.eclipse.xtext.formatter.FormatterPreferenceKeys;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.junit4.formatter.FormatterTestRequest;
+import org.eclipse.xtext.junit4.formatter.FormatterTester;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys;
-import org.eclipse.xtext.xbase.junit.formatter.AssertingFormatterData;
-import org.eclipse.xtext.xbase.junit.formatter.FormatterTester;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -92,27 +96,34 @@ public abstract class AbstractXbaseFormatterTest {
   }
   
   public void assertFormatted(final Procedure1<? super MapBasedPreferenceValues> cfg, final CharSequence expectation, final CharSequence toBeFormatted, final String prefix, final String postfix, final boolean allowErrors) {
-    final Procedure1<AssertingFormatterData> _function = new Procedure1<AssertingFormatterData>() {
-      public void apply(final AssertingFormatterData it) {
-        MapBasedPreferenceValues _config = it.getConfig();
-        AbstractXbaseFormatterTest.this.initConfig(_config, cfg);
+    Preconditions.checkArgument((!allowErrors), "not supported for now");
+    final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      public void apply(final FormatterTestRequest it) {
+        Map<String, String> _initConfig = AbstractXbaseFormatterTest.this.initConfig(cfg);
+        it.setPreferences(_initConfig);
         it.setExpectation(expectation);
         it.setToBeFormatted(toBeFormatted);
         it.setPrefix(prefix);
         it.setPostfix(postfix);
-        it.setAllowErrors(allowErrors);
       }
     };
     this.tester.assertFormatted(_function);
   }
   
-  public void initConfig(final MapBasedPreferenceValues target, final Procedure1<? super MapBasedPreferenceValues> cfg) {
-    String _id = BasicFormatterPreferenceKeys.maxLineWidth.getId();
-    String _string = Integer.valueOf(80).toString();
-    target.put(_id, _string);
-    boolean _notEquals = (!Objects.equal(cfg, null));
-    if (_notEquals) {
-      cfg.apply(target);
+  public Map<String, String> initConfig(final Procedure1<? super MapBasedPreferenceValues> cfg) {
+    Map<String, String> _xblockexpression = null;
+    {
+      HashMap<String, String> _newHashMap = CollectionLiterals.<String, String>newHashMap();
+      final MapBasedPreferenceValues target = new MapBasedPreferenceValues(_newHashMap);
+      String _id = FormatterPreferenceKeys.maxLineWidth.getId();
+      String _string = Integer.valueOf(80).toString();
+      target.put(_id, _string);
+      boolean _notEquals = (!Objects.equal(cfg, null));
+      if (_notEquals) {
+        cfg.apply(target);
+      }
+      _xblockexpression = target.getValues();
     }
+    return _xblockexpression;
   }
 }
