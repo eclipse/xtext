@@ -1337,7 +1337,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.append("{");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("val y = 1");
+      _builder.append("val y = Integer.valueOf(\"1\")");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("switch x : org.eclipse.xtext.xbase.tests.validation.Color.RED {");
@@ -1679,7 +1679,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.append("{");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("for(val condition = true; condition;) {");
+      _builder.append("for(var condition = true; condition;) {");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("}");

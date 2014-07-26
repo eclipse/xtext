@@ -562,7 +562,7 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 	@Test def void testIncompleteCasesOnEnum_3() {
 		'''
 		{
-			val y = 1
+			val y = Integer.valueOf("1")
 			switch x : org.eclipse.xtext.xbase.tests.validation.Color.RED {
 				case RED: {
 					1
@@ -704,7 +704,7 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 	@Test def void testBasicForLoop_InvalidInnerExpression() {
 		'''
 		{
-			for(val condition = true; condition;) {
+			for(var condition = true; condition;) {
 			}
 		}
 		'''.expression.assertNoIssues
