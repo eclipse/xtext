@@ -24,6 +24,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	TypeConformanceValidatorTest.class,
 	ValidationTests.class,
 	CheckedExceptionTest.class,
-	EqualsWithNullTest.class
+	EqualsWithNullTest.class,
+	XbaseValidationTest.class
 })
 public class ValidationSuite {}
