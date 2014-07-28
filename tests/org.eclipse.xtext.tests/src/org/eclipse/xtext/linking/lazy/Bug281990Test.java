@@ -7,11 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.linking.lazy;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.junit4.logging.LoggingTester;
+import org.eclipse.xtext.linking.lazy.lazyLinking.Model;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Type;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Test;
 
 /**
@@ -22,7 +26,7 @@ public class Bug281990Test extends AbstractXtextTests {
 	public static class RecursiveScopeProvider extends LazyLinkingTestLanguageScopeProvider {
 		public IScope scope_Type_extends(Type t, EReference ref) {
 			t.getParentId();
-			return IScope.NULLSCOPE;
+			throw new AssertionError("Should never be thrown, because the call to ParentId will throw a CyclicLinkingException already.");
 		}
 	}
 
@@ -39,11 +43,17 @@ public class Bug281990Test extends AbstractXtextTests {
 	}
 
 	@Test public void testRecursionErrorMessage() throws Exception {
-		try {
-			getModel("type Foo extends Foo.bar { Foo foo; }");
-			fail("Exception expected.");
-		} catch (AssertionError e) {
-			assertTrue(e.getMessage().startsWith("Cyclic"));
-		}
+		int loggings = LoggingTester.countErrorLogging(LazyLinkingResource.class, new Runnable() {
+			public void run() {
+				try {
+					EObject model = getModelAndExpect("type Foo extends Foo.bar { Foo foo; }", 2);
+					assertTrue(((Model)model).getTypes().get(0).getParentId().eIsProxy());
+					assertTrue(model.eResource().getErrors().get(0).getMessage().contains("Couldn't"));
+				} catch (Exception e) {
+					throw Exceptions.sneakyThrow(e);
+				}
+			}
+		});
+		assertEquals(1, loggings);
 	}
 }
