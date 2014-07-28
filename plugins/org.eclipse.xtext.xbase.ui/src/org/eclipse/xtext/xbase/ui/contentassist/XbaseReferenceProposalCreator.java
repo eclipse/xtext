@@ -26,10 +26,10 @@ import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
-import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.xtext.ui.TypeAwareReferenceProposalCreator;
@@ -174,83 +174,140 @@ public class XbaseReferenceProposalCreator extends TypeAwareReferenceProposalCre
 		return !name.equals(IFeatureNames.THIS) && !name.equals(IFeatureNames.SUPER);
 	}
 	
+	protected static class MultiNameDescriptions {
+		private Kind kind;
+
+		enum Kind {
+			Shortest {
+				@Override
+				protected void apply(IIdentifiableElementDescription featureDescription, MultiNameDescriptions result) {
+					EObject feature = featureDescription.getEObjectOrProxy();
+					IIdentifiableElementDescription previous = (IIdentifiableElementDescription) result.descriptionsByEObject.get(feature);
+					if (previous != null) {
+						String previousName = result.nameConverter.toString(previous.getName());
+						String candidateName = result.nameConverter.toString(featureDescription.getName());
+						if (previousName.length() > candidateName.length() || (previousName.length() == candidateName.length() && previous.getNumberOfParameters() >= 1)) {
+							result.descriptionsByEObject.put(feature, featureDescription);	
+						}
+					} else {
+						result.descriptionsByEObject.put(feature, featureDescription);
+					}
+				}
+			},
+			Smart {
+				@Override
+				protected void apply(IIdentifiableElementDescription featureDescription, MultiNameDescriptions result) {
+					EObject feature = featureDescription.getEObjectOrProxy();
+					IEObjectDescription previous = result.descriptionsByEObject.get(feature);
+					if (previous != null) {
+						IIdentifiableElementDescription previousFeatureDescription = null;
+						MultiNameDescription multiNameDescription = null;
+						if (previous instanceof IIdentifiableElementDescription) {
+							previousFeatureDescription = (IIdentifiableElementDescription) previous;
+							multiNameDescription = new MultiNameDescription(previousFeatureDescription);
+							result.descriptionsByEObject.put(feature, multiNameDescription);
+						} else if (previous instanceof MultiNameDescription) {
+							multiNameDescription = (MultiNameDescription) previous;
+							previousFeatureDescription = (IIdentifiableElementDescription) multiNameDescription.getDelegate();
+						} else {
+							throw new IllegalStateException(String.valueOf(previousFeatureDescription));
+						}
+						if (result.isLongerThan(previousFeatureDescription, featureDescription)) {
+							multiNameDescription.addOtherName(previousFeatureDescription.getName());
+							multiNameDescription.setDelegate(featureDescription);
+						} else {
+							multiNameDescription.addOtherName(featureDescription.getName());
+						}
+					} else {
+						result.descriptionsByEObject.put(featureDescription.getEObjectOrProxy(), featureDescription);
+					}
+				}
+			},
+			Java {
+				@Override
+				protected void apply(IIdentifiableElementDescription featureDescription, MultiNameDescriptions result) {
+					JvmIdentifiableElement element = featureDescription.getElementOrProxy();
+					String firstSegment = featureDescription.getName().getFirstSegment();
+					if (element.getSimpleName().equals(firstSegment)) {
+						result.others.add(featureDescription);
+					}
+				}
+			},
+			All {
+				@Override
+				protected void apply(IIdentifiableElementDescription featureDescription, MultiNameDescriptions result) {
+					result.others.add(featureDescription);
+				}
+			};
+			
+			protected abstract void apply(IIdentifiableElementDescription featureDescription, MultiNameDescriptions result);
+		}
+		
+		List<IEObjectDescription> others;
+		Map<EObject, IEObjectDescription> descriptionsByEObject;
+		IQualifiedNameConverter nameConverter;
+		
+		MultiNameDescriptions(Kind kind, IQualifiedNameConverter nameConverter) {
+			this.kind = kind;
+			this.nameConverter = nameConverter;
+			this.others = Lists.newArrayList();
+			this.descriptionsByEObject = Maps.newLinkedHashMap();
+		}
+		
+		protected boolean isLongerThan(IIdentifiableElementDescription previous, IIdentifiableElementDescription next) {
+			String previousName = nameConverter.toString(previous.getName());
+			String candidateName = nameConverter.toString(next.getName());
+			if (previousName.length() > candidateName.length()) {
+				return true;
+			}
+			if (previousName.length() == candidateName.length()) {
+				if (previous.getNumberOfParameters() >= 1) {
+					return true;
+				}
+			}
+			return false;
+		}
+		
+		protected void apply(IEObjectDescription description) {
+			if (description instanceof IIdentifiableElementDescription) {
+				IIdentifiableElementDescription featureDescription = (IIdentifiableElementDescription) description;
+				kind.apply(featureDescription, this);
+			} else {
+				others.add(new SimpleIdentifiableElementDescription(description));
+			}
+		}
+		
+		protected Iterable<IEObjectDescription> getResult() {
+			if (!others.isEmpty())
+				return Iterables.concat(others, descriptionsByEObject.values()); 
+			return Collections.<IEObjectDescription>unmodifiableCollection(descriptionsByEObject.values());
+		}
+	}
+	
 	@Override
 	public Iterable<IEObjectDescription> queryScope(IScope scope, EObject model, EReference reference,
 			Predicate<IEObjectDescription> filter) {
 		if (reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE) {
-			Map<EObject, IEObjectDescription> filteredDescriptions = Maps.newLinkedHashMap();
-			List<IEObjectDescription> others = Lists.newArrayList();
+			MultiNameDescriptions.Kind kind;
+			if (isShowAllProposals()) {
+				kind = MultiNameDescriptions.Kind.All;	
+			} else if (isShowShortestSugar()) {
+				kind = MultiNameDescriptions.Kind.Shortest;
+			} else if (isShowSmartProposals()) {
+				kind = MultiNameDescriptions.Kind.Smart;
+			} else if (isShowJavaLikeProposals()) {
+				kind = MultiNameDescriptions.Kind.Java;
+			} else {
+				kind = MultiNameDescriptions.Kind.All;
+			}
+			MultiNameDescriptions proposals = new MultiNameDescriptions(kind, nameConverter);
 			Iterable<IEObjectDescription> allDescriptions =	super.queryScope(scope, model, reference, filter);
 			for(IEObjectDescription description: allDescriptions) {
 				if (filter.apply(description)) {
-					if (description instanceof IIdentifiableElementDescription) {
-						IIdentifiableElementDescription featureDescription = (IIdentifiableElementDescription) description;
-						if (filteredDescriptions.containsKey(featureDescription.getEObjectOrProxy())) {
-							if (isShowShortestSugar() || isShowSmartProposals()) {
-								IEObjectDescription previousDescription = filteredDescriptions.get(featureDescription.getEObjectOrProxy());
-								IIdentifiableElementDescription previousFeatureDescription = null;
-								MultiNameDescription multiNameDescription = null;
-								if (previousDescription instanceof IIdentifiableElementDescription) {
-									previousFeatureDescription = (IIdentifiableElementDescription) previousDescription;
-								} else if (previousDescription instanceof MultiNameDescription) {
-									multiNameDescription = (MultiNameDescription) previousDescription;
-									previousFeatureDescription = (IIdentifiableElementDescription) multiNameDescription.getDelegate();
-								}
-								if (previousFeatureDescription == null)
-									continue;
-								String previousName = nameConverter.toString(previousFeatureDescription.getName());
-								String candidateName = nameConverter.toString(featureDescription.getName());
-								if (previousName.length() > candidateName.length()) {
-									if (!isShowSmartProposals()) {
-										filteredDescriptions.put(featureDescription.getEObjectOrProxy(), featureDescription);
-										if (isShowAllProposals() && previousFeatureDescription.getShadowingKey().indexOf(')') >= 0)
-											others.add(previousFeatureDescription);
-									} else {
-										if (multiNameDescription == null) {
-											multiNameDescription = new MultiNameDescription(featureDescription);
-											multiNameDescription.addOtherName(previousFeatureDescription.getName());
-											filteredDescriptions.put(featureDescription.getEObjectOrProxy(), multiNameDescription);
-										} else {
-											multiNameDescription.addOtherName(previousFeatureDescription.getName());
-											multiNameDescription.setDelegate(featureDescription);
-										}
-									}
-								} else if (previousName.length() == candidateName.length()) {
-									if (previousFeatureDescription.getNumberOfParameters() >= 1) {
-										if (!isShowAllProposals()) {
-											if (!previousFeatureDescription.getEObjectOrProxy().eIsProxy() && previousFeatureDescription.getEObjectOrProxy() instanceof JvmExecutable) {
-												JvmExecutable exectuable = (JvmExecutable) previousFeatureDescription.getEObjectOrProxy();
-												if (!exectuable.isVarArgs()) {
-													filteredDescriptions.put(featureDescription.getEObjectOrProxy(), featureDescription);
-												}
-											} else {
-												filteredDescriptions.put(featureDescription.getEObjectOrProxy(), featureDescription);
-											}
-										}
-									}
-								} else {
-									if (isShowSmartProposals()) {
-										if (multiNameDescription == null) {
-											multiNameDescription = new MultiNameDescription(previousFeatureDescription);
-											multiNameDescription.addOtherName(featureDescription.getName());
-											filteredDescriptions.put(featureDescription.getEObjectOrProxy(), multiNameDescription);
-										} else {
-											multiNameDescription.addOtherName(featureDescription.getName());
-										}
-									}
-								}
-							}
-						} else {
-							filteredDescriptions.put(featureDescription.getEObjectOrProxy(), featureDescription);
-						}
-					} else {
-						others.add(new SimpleIdentifiableElementDescription(description));
-					}
+					proposals.apply(description);
 				}
 			}
-			if (!others.isEmpty())
-				return Iterables.concat(others, filteredDescriptions.values()); 
-			return Collections.<IEObjectDescription>unmodifiableCollection(filteredDescriptions.values());
+			return proposals.getResult();
 		}
 		return super.queryScope(scope, model, reference, filter);
 	}
