@@ -7,12 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.copyqualifiedname
 
+import com.google.inject.Inject
 import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.naming.QualifiedName
-import com.google.inject.Inject
 
 /**
  * @author Anton Kosyakov - Initial contribution and API

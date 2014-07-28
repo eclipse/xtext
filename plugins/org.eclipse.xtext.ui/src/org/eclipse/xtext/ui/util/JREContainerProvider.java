@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.util;
 
+import static org.eclipse.jdt.launching.JavaRuntime.*;
+
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
@@ -17,8 +19,6 @@ import org.eclipse.jdt.launching.IVMInstall;
 import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.jdt.launching.environments.IExecutionEnvironment;
 import org.eclipse.jdt.launching.environments.IExecutionEnvironmentsManager;
-
-import static org.eclipse.jdt.launching.JavaRuntime.*;
 
 /**
  * @author kosyakov - Initial contribution and API

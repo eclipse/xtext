@@ -9,9 +9,9 @@ package org.eclipse.xtext.ui.editor.model;
 
 import java.text.CharacterIterator;
 
-import com.ibm.icu.text.BreakIterator;
-
 import org.eclipse.core.runtime.Assert;
+
+import com.ibm.icu.text.BreakIterator;
 
 /**
  * Copied from <code>org.eclipse.jdt.internal.ui.text.JavaWordIterator</code>.

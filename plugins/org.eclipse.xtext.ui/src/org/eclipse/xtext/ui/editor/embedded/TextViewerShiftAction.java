@@ -2,13 +2,11 @@ package org.eclipse.xtext.ui.editor.embedded;
 
 import java.util.ResourceBundle;
 
+import org.eclipse.jface.text.ITextOperationTarget;
+import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.swt.custom.BusyIndicator;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-
-import org.eclipse.jface.text.ITextOperationTarget;
-import org.eclipse.jface.text.ITextViewer;
-
 import org.eclipse.ui.texteditor.IReadOnlyDependent;
 
 /**

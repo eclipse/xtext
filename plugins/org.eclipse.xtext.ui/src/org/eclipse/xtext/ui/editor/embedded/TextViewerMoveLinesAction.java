@@ -9,11 +9,7 @@ package org.eclipse.xtext.ui.editor.embedded;
 
 import java.util.ResourceBundle;
 
-import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.widgets.Event;
-
 import org.eclipse.core.runtime.Assert;
-
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
@@ -24,7 +20,8 @@ import org.eclipse.jface.text.ITextViewerExtension;
 import org.eclipse.jface.text.ITextViewerExtension5;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.text.TextUtilities;
-
+import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.ui.internal.texteditor.CompoundEditExitStrategy;
 import org.eclipse.ui.internal.texteditor.ICompoundEditListener;
 import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
