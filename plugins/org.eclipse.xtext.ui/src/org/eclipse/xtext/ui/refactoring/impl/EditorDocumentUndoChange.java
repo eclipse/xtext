@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.refactoring.impl;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentRewriteSession;
 import org.eclipse.jface.text.DocumentRewriteSessionType;
@@ -28,6 +27,8 @@ import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
 
+import com.google.common.base.Objects;
+
 /**
  * The reverse of an {@link EditorDocumentChange}.
  * 
@@ -36,7 +37,7 @@ import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
 public class EditorDocumentUndoChange extends Change {
 
 	private static final Logger LOG = Logger.getLogger(EditorDocumentUndoChange.class);
-	
+
 	private String name;
 	private UndoEdit undoEdit;
 	private String editorID;
@@ -62,16 +63,16 @@ public class EditorDocumentUndoChange extends Change {
 	protected ITextEditor getEditor() {
 		try {
 			IEditorPart editor = page.findEditor(editorInput);
-			if(editor != null && editor.getSite().getId() == editorID)
+			if (editor != null && Objects.equal(editor.getSite().getId(), editorID))
 				return (ITextEditor) editor;
-			else 
+			else
 				return (ITextEditor) page.openEditor(editorInput, editorID);
-		} catch(Exception exc) {
+		} catch (Exception exc) {
 			LOG.error("Error restoring editor", exc);
 			return null;
 		}
 	}
-	
+
 	@Override
 	public Object getModifiedElement() {
 		return null;
@@ -91,10 +92,10 @@ public class EditorDocumentUndoChange extends Change {
 		return new DisplayRunnableWithResult<Change>() {
 			@Override
 			protected Change run() throws Exception {
-				IDocument document= null;
+				IDocument document = null;
 				try {
-					document= acquireDocument(pm);
-					UndoEdit undo= performEdits(document);
+					document = acquireDocument(pm);
+					UndoEdit undo = performEdits(document);
 					commit(document, pm);
 					return createUndoChange(undo);
 				} catch (BadLocationException e) {
@@ -109,16 +110,15 @@ public class EditorDocumentUndoChange extends Change {
 	}
 
 	protected UndoEdit performEdits(IDocument document) throws BadLocationException, MalformedTreeException {
-		DocumentRewriteSession session= null;
+		DocumentRewriteSession session = null;
 		try {
 			if (document instanceof IDocumentExtension4) {
-				session= ((IDocumentExtension4)document).startRewriteSession(
-					DocumentRewriteSessionType.UNRESTRICTED);
+				session = ((IDocumentExtension4) document).startRewriteSession(DocumentRewriteSessionType.UNRESTRICTED);
 			}
 			return undoEdit.apply(document);
 		} finally {
 			if (session != null) {
-				((IDocumentExtension4)document).stopRewriteSession(session);
+				((IDocumentExtension4) document).stopRewriteSession(session);
 			}
 		}
 	}

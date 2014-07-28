@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.junit.refactoring;
 
+import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Display;
@@ -21,6 +23,23 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
  */
 public abstract class AbstractLinkedEditingIntegrationTest extends AbstractEditorTest {
 
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		closeWelcomePage();
+		closeEditors();
+		cleanWorkspace();
+		waitForAutoBuild();
+	}
+
+	@Override
+	protected void tearDown() throws Exception {
+		closeEditors();
+		cleanWorkspace();
+		waitForAutoBuild();
+		super.tearDown();
+	}
+
 	protected void waitForReconciler(final XtextEditor editor) {
 		editor.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
 			@Override
@@ -29,14 +48,14 @@ public abstract class AbstractLinkedEditingIntegrationTest extends AbstractEdito
 			}
 		});
 	}
-	
+
 	protected void waitForDisplay() {
-		while(Display.getDefault().readAndDispatch()) {
+		while (Display.getDefault().readAndDispatch()) {
 		}
 	}
-	
+
 	protected void pressKeys(XtextEditor editor, String string) throws Exception {
-		for(int i = 0; i < string.length(); i++) {
+		for (int i = 0; i < string.length(); i++) {
 			pressKey(editor, string.charAt(i));
 		}
 	}
