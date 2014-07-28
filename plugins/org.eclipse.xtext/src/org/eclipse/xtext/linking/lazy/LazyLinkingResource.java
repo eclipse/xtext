@@ -300,7 +300,7 @@ public class LazyLinkingResource extends XtextResource {
 	}
 
 	protected EObject handleCyclicResolution(Triple<EObject, EReference, INode> triple) throws AssertionError {
-		throw new CyclicLinkingException("Cyclic resolution of lazy links : " + getReferences(triple, resolving), triple);
+		throw new CyclicLinkingException("Cyclic resolution of lazy links : " + getReferences(triple, resolving) + " in resource '"+getURI()+"'.", triple);
 	}
 
 	protected String getReferences(Triple<EObject, EReference, INode> triple,
