@@ -151,7 +151,12 @@ public abstract class AbstractXbaseCompiler {
 	
 	public ITreeAppendable compileAsJavaExpression(XExpression obj, ITreeAppendable parentAppendable, LightweightTypeReference expectedType) {
 		ITreeAppendable appendable = parentAppendable.trace(obj, true);
-		
+		if (expectedType == null) {
+			expectedType = getLightweightReturnType(obj);
+			if (expectedType == null) {
+				expectedType = getLightweightType(obj);
+			}
+		}
 		final boolean isPrimitiveVoidExpected = expectedType.isPrimitiveVoid(); 
 		final boolean isPrimitiveVoid = isPrimitiveVoid(obj);
 		final boolean earlyExit = isEarlyExit(obj);
