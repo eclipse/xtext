@@ -31,7 +31,7 @@ public interface ICompletionProposalComparator extends Comparator<ICompletionPro
 					return res;
 				}
 			}
-			return o1.getDisplayString().compareTo(o2.getDisplayString());
+			return o1.getDisplayString().compareToIgnoreCase(o2.getDisplayString());
 		}
 
 		/**
