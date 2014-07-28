@@ -44,6 +44,19 @@ public class ReferenceFinder implements IReferenceFinder {
 	
 	protected static final int MONITOR_CHUNK_SIZE = 100;
 	
+	@Inject
+	public ReferenceFinder() {
+		super();
+	}
+	
+	protected ReferenceFinder(IResourceServiceProvider.Registry serviceProviderRegistry) {
+		this.serviceProviderRegistry = serviceProviderRegistry;
+	}
+	
+	protected IResourceServiceProvider.Registry getServiceProviderRegistry() {
+		return serviceProviderRegistry;
+	}
+	
 	public void findReferences(
 			TargetURIs targetURIs,
 			Set<URI> candidates,
