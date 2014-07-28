@@ -30,6 +30,13 @@ import org.eclipse.osgi.util.NLS;
 import org.osgi.service.prefs.BackingStoreException;
 
 /**
+ * COPIED FROM {@link org.eclipse.jdt.internal.ui.preferences.formatter.ProfileManager}
+ * It is a direct copy where all references to {@link org.eclipse.jdt.ui.JavaUI#ID_PLUGIN} are replaced by calls to {@link #getNodeId()}.
+ * 
+ * The initialization is a bit strange as there's so much going on in the super constructor.
+ * The super() call in the constructor will do a half baked initialization without any external side-effects (only private fields of the super class will be initialized).
+ * The real initialization is done in this class' constructor.
+ * 
  * The model for the set of profiles which are available in the workbench.
  */
 @SuppressWarnings({ "rawtypes", "unchecked" })
