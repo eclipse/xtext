@@ -771,15 +771,26 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 					}
 					OwnedConverter converter = getTypeConverter(contentAssistContext.getResource());
 					EObject objectOrProxy = myCandidate.getEObjectOrProxy();
-					StyledString displayString = objectOrProxy instanceof JvmFeature 
-							? getStyledDisplayString((JvmFeature)objectOrProxy,
-								!isEmpty(bracketInfo.brackets), insignificantParameters,
-								getQualifiedNameConverter().toString(myCandidate.getQualifiedName()),
-								getQualifiedNameConverter().toString(myCandidate.getName()),
-								converter)
-							: getStyledDisplayString(objectOrProxy, 
+					StyledString displayString;
+					if (objectOrProxy instanceof JvmFeature) {
+						if (bracketInfo.brackets.startsWith(" =")) {
+							displayString = getStyledDisplayString((JvmFeature)objectOrProxy,
+									false, insignificantParameters,
+									getQualifiedNameConverter().toString(myCandidate.getQualifiedName()),
+									getQualifiedNameConverter().toString(myCandidate.getName()) + bracketInfo.brackets,
+									converter);
+						} else {
+							displayString = getStyledDisplayString((JvmFeature)objectOrProxy,
+									!isEmpty(bracketInfo.brackets), insignificantParameters,
+									getQualifiedNameConverter().toString(myCandidate.getQualifiedName()),
+									getQualifiedNameConverter().toString(myCandidate.getName()),
+									converter);
+						}
+					} else {
+						displayString = getStyledDisplayString(objectOrProxy, 
 								getQualifiedNameConverter().toString(myCandidate.getQualifiedName()), 
-								getQualifiedNameConverter().toString(myCandidate.getName()));
+								getQualifiedNameConverter().toString(myCandidate.getName())); 
+					}
 					result = createCompletionProposal(proposal, displayString, null, myContentAssistContext);
 					if (result instanceof ConfigurableCompletionProposal) {
 						ConfigurableCompletionProposal casted = (ConfigurableCompletionProposal) result;
@@ -835,6 +846,12 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 			if(jvmFeature instanceof JvmExecutable) {
 				List<JvmFormalParameter> parameters = ((JvmExecutable) jvmFeature).getParameters();
 				if (jvmFeatureDescription.getNumberOfParameters() == 1) {
+					if (jvmFeature.getSimpleName().startsWith("set") && !proposedDescription.getName().getFirstSegment().startsWith("set")) {
+						info.brackets = " = value";
+						info.selectionOffset = -"value".length();
+						info.selectionLength = "value".length();
+						return info;
+					}
 					JvmTypeReference parameterType = parameters.get(parameters.size()-1).getParameterType();
 					LightweightTypeReference light = getTypeConverter(contentAssistContext.getResource()).apply(parameterType);
 					if(light.isFunctionType()) {
