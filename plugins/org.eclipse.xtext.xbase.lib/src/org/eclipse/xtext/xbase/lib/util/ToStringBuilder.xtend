@@ -15,6 +15,8 @@ import java.lang.reflect.Field
 import java.lang.reflect.Modifier
 import java.util.Arrays
 import java.util.IdentityHashMap
+import java.util.HashMap
+import java.util.Map
 
 /**
  * Helps with the construction of good {@link Object#toString()} representations. 
@@ -39,7 +41,7 @@ final class ToStringBuilder {
 			start = name.lastIndexOf('.')
 		}
 		val simpleName = name.substring(start + 1)
-		if(simpleName.empty) "Anonymous" else simpleName
+		return if(simpleName.empty) "Anonymous" else simpleName
 	}
 
 	val Object instance
@@ -67,7 +69,7 @@ final class ToStringBuilder {
 	 */
 	def singleLine() {
 		multiLine = false
-		this
+		return this
 	}
 
 	/**
@@ -76,7 +78,7 @@ final class ToStringBuilder {
 	 */
 	def skipNulls() {
 		skipNulls = true
-		this
+		return this
 	}
 
 	/**
@@ -85,7 +87,7 @@ final class ToStringBuilder {
 	 */
 	def hideFieldNames() {
 		showFieldNames = false
-		this
+		return this
 	}
 
 	/**
@@ -95,7 +97,7 @@ final class ToStringBuilder {
 	@GwtIncompatible("Class.getDeclaredFields")
 	def addDeclaredFields() {
 		instance.class.declaredFields.forEach[addField]
-		this
+		return this
 	}
 
 	/**
@@ -105,7 +107,7 @@ final class ToStringBuilder {
 	@GwtIncompatible("Class.getDeclaredFields")
 	def addAllFields() {
 		instance.class.allDeclaredFields.forEach[addField]
-		this
+		return this
 	}
 
 	/**
@@ -144,20 +146,20 @@ final class ToStringBuilder {
 	private def addPart() {
 		val p = new ToStringBuilder.Part
 		parts.add(p)
-		p
+		return p
 	}
 
 	private def addPart(Object value) {
 		val p = addPart
 		p.value = value
-		this
+		return this
 	}
 
 	private def addPart(String fieldName, Object value) {
 		val p = addPart
 		p.fieldName = fieldName
 		p.value = value
-		this
+		return this
 	}
 
 	/**
@@ -193,7 +195,7 @@ final class ToStringBuilder {
 				builder.decreaseIndent.newLine
 			}
 			builder.append("]")
-			builder.toString
+			return builder.toString
 		} finally {
 			instance.endProcessing
 		}
@@ -229,7 +231,7 @@ final class ToStringBuilder {
 		}
 	}
 
-	private def serializeIterable(Iterable<?> object, ToStringBuilder.IndentationAwareStringBuilder sb) {
+	private def void serializeIterable(Iterable<?> object, ToStringBuilder.IndentationAwareStringBuilder sb) {
 		val iterator = object.iterator
 		val simpleName = object.class.gwtCompatibleSimpleName
 		sb.append(simpleName).append(" (")
@@ -267,7 +269,7 @@ final class ToStringBuilder {
 			result += current.declaredFields
 			current = current.superclass
 		} while (current != null)
-		result
+		return result
 	}
 
 	@GwtCompatible
@@ -286,12 +288,12 @@ final class ToStringBuilder {
 
 		def increaseIndent() {
 			indentation++
-			this
+			return this
 		}
 
 		def decreaseIndent() {
 			indentation--
-			this
+			return this
 		}
 
 		def append(CharSequence string) {
@@ -302,12 +304,12 @@ final class ToStringBuilder {
 			} else {
 				builder.append(string)
 			}
-			this
+			return this
 		}
 
 		def newLine() {
 			builder.append(newLineString).append(Strings.repeat(indentationString, indentation))
-			this
+			return this
 		}
 
 		override String toString() {
