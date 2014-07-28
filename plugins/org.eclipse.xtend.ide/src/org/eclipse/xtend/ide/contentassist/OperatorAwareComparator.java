@@ -34,7 +34,7 @@ public class OperatorAwareComparator extends ICompletionProposalComparator.Natur
 		} else if (Character.isJavaIdentifierStart(displayString2.charAt(0))) {
 			return 1;
 		}
-		return displayString1.compareTo(displayString2);
+		return displayString1.compareToIgnoreCase(displayString2);
 	}
 	
 }
