@@ -106,15 +106,14 @@ public class SyncUtil {
 					if (editor != null) {
 						if (editor instanceof XtextEditor)
 							waitForReconciler((XtextEditor) editor);
-						if (editor.isDirty() && saveAll)
-							if (workbench != null) {
-								Display display = workbench.getDisplay();
-								display.syncExec(new Runnable() {
-									public void run() {
-										editor.doSave(monitor);
-									}
-								});
-							}
+						if (editor.isDirty() && saveAll) {
+							Display display = workbench.getDisplay();
+							display.syncExec(new Runnable() {
+								public void run() {
+									editor.doSave(monitor);
+								}
+							});
+						}
 					}
 				}
 			}
