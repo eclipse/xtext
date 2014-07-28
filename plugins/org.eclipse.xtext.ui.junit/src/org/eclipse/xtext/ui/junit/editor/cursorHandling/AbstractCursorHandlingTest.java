@@ -31,12 +31,14 @@ public abstract class AbstractCursorHandlingTest extends AbstractEditorTest {
 	
 	@Override
 	protected void setUp() throws Exception {
+		super.setUp();
 		closeWelcomePage();
 	}
 	@Override
 	protected void tearDown() throws Exception {
 		files.clear();
 		closeEditors();
+		super.tearDown();
 	}
 
 	protected XtextEditor openEditor(String content) throws Exception {

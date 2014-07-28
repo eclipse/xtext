@@ -45,6 +45,7 @@ public class ReferenceAcceptor implements org.eclipse.xtext.findReferences.IRefe
 			URI targetURI) {
 		if (currentResource == null || source.eResource() != currentResource) {
 			computeExportedObjectsMap(source);
+			currentResource = source.eResource();
 		}
 		accept(createReferenceDescription(sourceURI, targetURI, eReference, index, findExportedContainer(source)));
 	}

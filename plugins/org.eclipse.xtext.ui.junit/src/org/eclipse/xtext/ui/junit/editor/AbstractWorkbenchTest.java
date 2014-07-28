@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.junit.editor;
 
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
 import junit.framework.TestCase;
 
 import org.eclipse.swt.widgets.Display;
@@ -34,17 +33,10 @@ public abstract class AbstractWorkbenchTest extends TestCase {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		closeWelcomePage();
-		closeEditors();
-		cleanWorkspace();
-		waitForAutoBuild();
 	}
 	
 	@Override
 	protected void tearDown() throws Exception {
-		closeEditors();
-		cleanWorkspace();
-		waitForAutoBuild();
 		super.tearDown();
 	}
 	

@@ -53,7 +53,7 @@ public abstract class AbstractProfileManager extends org.eclipse.jdt.internal.ui
 	/**
 	 * The key of the preference where the selected profile is stored.
 	 */
-	private final String fProfileKey;
+	private String fProfileKey = null;
 
 	/**
 	 * The key of the preference where the version of the current settings is stored
@@ -78,7 +78,7 @@ public abstract class AbstractProfileManager extends org.eclipse.jdt.internal.ui
 	/**
 	 * The keys of the options to be saved with each profile
 	 */
-	private final KeySet[] fKeySets;
+	private KeySet[] fKeySets = null;
 
 	private final PreferencesAccess fPreferencesAccess;
 	private final IProfileVersioner fProfileVersioner;
