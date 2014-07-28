@@ -324,7 +324,7 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 						}
 					} else if (method.getParameterTypes().length == 1) {
 						if (methodName.startsWith("set") && methodName.length() > 3) {
-							String propertyName = Strings.toFirstLower(methodName.substring(3)) + "()";
+							String propertyName = Strings.toFirstLower(methodName.substring(3)) + " = value";
 							if (featuresOrTypes.add(propertyName + method.getSignature()))
 								list.add(propertyName);
 						} else {
