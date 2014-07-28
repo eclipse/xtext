@@ -8,3 +8,4 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Localization: plugin
 Bundle-Activator: org.eclipse.xtext.activities.Activator
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.5.0"
+Export-Package: org.eclipse.xtext.activities;x-internal:=true
