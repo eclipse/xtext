@@ -12,7 +12,6 @@ package org.eclipse.xtext.ui.editor.hover.html;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.jface.internal.text.html.BrowserInformationControlInput;
 import org.eclipse.jface.viewers.ILabelProvider;
 
