@@ -139,4 +139,46 @@ class CompilerBug440196Test extends AbstractXtendCompilerTest {
 			}
 		''')
 	}
+
+	@Test
+	def test_06() {
+		assertCompilesTo('''
+			class C {
+				def boolean bug() {
+					for (;;) return true;
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  public boolean bug() {
+			    for (;;) {
+			      return true;
+			    }
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def test_07() {
+		assertCompilesTo('''
+			class C {
+				def boolean bug() {
+					val b = true
+					for (;b;) return true;
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  public boolean bug() {
+			    final boolean b = true;
+			    for (; b;) {
+			      return true;
+			    }
+			  }
+			}
+		''')
+	}
 }
