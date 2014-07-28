@@ -12,6 +12,8 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.core.search.IJavaSearchConstants;
+import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.viewers.StyledString;
@@ -807,7 +809,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 							casted.setSimpleLinkedMode(myContentAssistContext.getViewer(), '\t', '\n', '\r');
 						}
 						if (objectOrProxy instanceof JvmExecutable) {
-							JvmExecutable executable = (JvmExecutable) objectOrProxy;
+							final JvmExecutable executable = (JvmExecutable) objectOrProxy;
 							StyledString parameterList = new StyledString();
 							appendParameters(parameterList, executable, insignificantParameters, converter);
 							// TODO how should we display overloaded methods were one variant does not take arguments? -> empty parentheses? '<no args>' ?
@@ -820,6 +822,22 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 								parameterData.addOverloaded(parameterList.toString(), executable.isVarArgs());
 								IContextInformation contextInformation = new ParameterContextInformation(parameterData, displayString.toString(), offset, offset);
 								casted.setContextInformation(contextInformation);
+							}
+							// If the user types 'is' as a prefix for boolean properties, we want to keep that after applying the proposal
+							if (executable.getSimpleName().startsWith("is") && executable.getSimpleName().length() > 2 && executable.getParameters().size() - insignificantParameters == 0) {
+								((ConfigurableCompletionProposal) result).setTextApplier(new ConfigurableCompletionProposal.IReplacementTextApplier() {
+									public void apply(IDocument document, ConfigurableCompletionProposal proposal) throws BadLocationException {
+										String replacementString = proposal.getReplacementString();
+										if (proposal.getReplacementLength() >= 2) {
+											String is = document.get(proposal.getReplacementOffset(), 2);
+											if ("is".equals(is)) {
+												replacementString = getValueConverter().toString(executable.getSimpleName(), ruleName);
+											}
+										}
+										proposal.setCursorPosition(replacementString.length());
+										document.replace(proposal.getReplacementOffset(), proposal.getReplacementLength(), replacementString);
+									}
+								});
 							}
 						}
 					}
