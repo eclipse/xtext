@@ -86,7 +86,7 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
 		}
 		return Collections.emptyList();
 	}
-
+	
 	protected Collection<ExitPoint> _exitPoints(XBasicForLoopExpression expression) {
 		for (XExpression initExpression: expression.getInitExpressions()) {
 			Collection<ExitPoint> exitPoints = getExitPoints(initExpression);
@@ -94,9 +94,21 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
 				return exitPoints;
 			}
 		}
-		Collection<ExitPoint> exitPoints = getExitPoints(expression.getExpression());
+		XExpression predicate = expression.getExpression();
+		Collection<ExitPoint> exitPoints = getExitPoints(predicate);
 		if (isNotEmpty(exitPoints)) {
 			return exitPoints;
+		}
+		if (predicate == null || isBooleanConstant(predicate, true)) {
+			exitPoints = getExitPoints(expression.getEachExpression());
+			if (isNotEmpty(exitPoints))
+				return exitPoints;
+			for(XExpression child: expression.getUpdateExpressions()) {
+				exitPoints = getExitPoints(child);
+				if (isNotEmpty(exitPoints))
+					return exitPoints;
+			}
+			return Collections.singletonList(new ExitPoint(expression, false));
 		}
 		return Collections.emptyList();
 	}
