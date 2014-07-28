@@ -1896,8 +1896,6 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.newLine();
       _builder_1.append("}");
       _builder_1.newLine();
-      _builder_1.append("return null;");
-      _builder_1.newLine();
       this.compilesTo(_builder, _builder_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -2011,8 +2009,6 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.newLine();
       _builder_1.append("}");
       _builder_1.newLine();
-      _builder_1.append("return null;");
-      _builder_1.newLine();
       this.compilesTo(_builder, _builder_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -2026,7 +2022,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder.append("{");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("for (val i = 1;;) {}");
+      _builder.append("for (var i = 1; i < 10;) {}");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("for (val i = 1;;) {}");
@@ -2034,7 +2030,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder.append("}");
       _builder.newLine();
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("for (final int i = 1;;) {");
+      _builder_1.append("for (int i = 1; (i < 10);) {");
       _builder_1.newLine();
       _builder_1.append("}");
       _builder_1.newLine();
@@ -2058,7 +2054,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder.append("{");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("for (val i = 1;;) {}");
+      _builder.append("for (var i = 1;i < 10;) {}");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("}");
@@ -2075,7 +2071,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder.append("}");
       _builder.newLine();
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("for (final int i = 1;;) {");
+      _builder_1.append("for (int i = 1; (i < 10);) {");
       _builder_1.newLine();
       _builder_1.append("}");
       _builder_1.newLine();

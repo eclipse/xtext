@@ -928,7 +928,6 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			    return Boolean.valueOf(true);
 			  }
 			}
-			return null;
 		'''
 		)
 	}
@@ -981,7 +980,6 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			for (final int i = 0; (i < 10);) {
 			  return Boolean.valueOf(true);
 			}
-			return null;
 		'''
 		)
 	}
@@ -989,12 +987,12 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 	@Test def void testBasicForLoop_4() {
 		'''
 			{
-				for (val i = 1;;) {}
+				for (var i = 1; i < 10;) {}
 				for (val i = 1;;) {}
 			}
 		'''.compilesTo(
 		'''
-			for (final int i = 1;;) {
+			for (int i = 1; (i < 10);) {
 			}
 			for (final int i = 1;;) {
 			}
@@ -1006,7 +1004,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		'''
 			{
 				{
-					for (val i = 1;;) {}
+					for (var i = 1;i < 10;) {}
 				}
 				{
 					for (val i = 1;;) {}
@@ -1014,7 +1012,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			}
 		'''.compilesTo(
 		'''
-			for (final int i = 1;;) {
+			for (int i = 1; (i < 10);) {
 			}
 			for (final int i = 1;;) {
 			}
