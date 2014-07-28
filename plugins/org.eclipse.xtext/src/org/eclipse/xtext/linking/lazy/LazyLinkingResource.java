@@ -54,6 +54,21 @@ import com.google.inject.Provider;
  * @author Holger Schill
  */
 public class LazyLinkingResource extends XtextResource {
+	
+	/**
+	 * @since 2.7
+	 */
+	@SuppressWarnings("serial")
+	public static final class CyclicLinkingException extends AssertionError {
+
+		private Triple<EObject, EReference, INode> triple;
+
+		private CyclicLinkingException(Object detailMessage, Triple<EObject,EReference,INode> triple) {
+			super(detailMessage);
+			this.triple = triple;
+		}
+		
+	}
 
 	private static Logger log = Logger.getLogger(LazyLinkingResource.class);
 	
@@ -229,35 +244,46 @@ public class LazyLinkingResource extends XtextResource {
 			if (unresolveableProxies.contains(uriFragment))
 				return null;
 			EReference reference = triple.getSecond();
-			List<EObject> linkedObjects = getLinkingService().getLinkedObjects(
-					triple.getFirst(), 
-					reference,
-					triple.getThird());
-
-			if (linkedObjects.isEmpty()) {
-				if (isUnresolveableProxyCacheable(triple))
-					unresolveableProxies.add(uriFragment);
-				createAndAddDiagnostic(triple);
-				return null;
+			try {
+				List<EObject> linkedObjects = getLinkingService().getLinkedObjects(
+						triple.getFirst(), 
+						reference,
+						triple.getThird());
+	
+				if (linkedObjects.isEmpty()) {
+					if (isUnresolveableProxyCacheable(triple))
+						unresolveableProxies.add(uriFragment);
+					createAndAddDiagnostic(triple);
+					return null;
+				}
+				if (linkedObjects.size() > 1)
+					throw new IllegalStateException("linkingService returned more than one object for fragment "
+							+ uriFragment);
+				EObject result = linkedObjects.get(0);
+				if (!EcoreUtil2.isAssignableFrom(reference.getEReferenceType(), result.eClass())) {
+					log.error("An element of type " + result.getClass().getName()
+							+ " is not assignable to the reference " + reference.getEContainingClass().getName()
+							+ "." + reference.getName());
+					if (isUnresolveableProxyCacheable(triple))
+						unresolveableProxies.add(uriFragment);
+					createAndAddDiagnostic(triple);
+					return null;
+				}
+				// remove previously added error markers, since everything should be fine now
+				unresolveableProxies.remove(uriFragment);
+				removeDiagnostic(triple);
+				return result;
+			} catch (CyclicLinkingException e) {
+				if (e.triple.equals(triple)) {
+					log.error(e.getMessage(), e);
+					if (isUnresolveableProxyCacheable(triple))
+						unresolveableProxies.add(uriFragment);
+					createAndAddDiagnostic(triple);
+					return null;
+				} else {
+					throw e;
+				}
 			}
-			if (linkedObjects.size() > 1)
-				throw new IllegalStateException("linkingService returned more than one object for fragment "
-						+ uriFragment);
-			EObject result = linkedObjects.get(0);
-			if (!EcoreUtil2.isAssignableFrom(reference.getEReferenceType(), result.eClass())) {
-				log.error("An element of type " + result.getClass().getName()
-						+ " is not assignable to the reference " + reference.getEContainingClass().getName()
-						+ "." + reference.getName());
-				if (isUnresolveableProxyCacheable(triple))
-					unresolveableProxies.add(uriFragment);
-				createAndAddDiagnostic(triple);
-				return null;
-			}
-
-			// remove previously added error markers, since everything should be fine now
-			unresolveableProxies.remove(uriFragment);
-			removeDiagnostic(triple);
-			return result;
 		} catch (IllegalNodeException ex) {
 			createAndAddDiagnostic(triple, ex);
 			return null;
@@ -274,7 +300,7 @@ public class LazyLinkingResource extends XtextResource {
 	}
 
 	protected EObject handleCyclicResolution(Triple<EObject, EReference, INode> triple) throws AssertionError {
-		throw new AssertionError("Cyclic resolution of lazy links : " + getReferences(triple, resolving));
+		throw new CyclicLinkingException("Cyclic resolution of lazy links : " + getReferences(triple, resolving), triple);
 	}
 
 	protected String getReferences(Triple<EObject, EReference, INode> triple,
