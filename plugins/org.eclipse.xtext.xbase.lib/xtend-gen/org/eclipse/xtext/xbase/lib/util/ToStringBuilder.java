@@ -59,49 +59,33 @@ public final class ToStringBuilder {
     private int indentation = 0;
     
     public IndentationAwareStringBuilder increaseIndent() {
-      IndentationAwareStringBuilder _xblockexpression = null;
-      {
-        this.indentation++;
-        _xblockexpression = this;
-      }
-      return _xblockexpression;
+      this.indentation++;
+      return this;
     }
     
     public IndentationAwareStringBuilder decreaseIndent() {
-      IndentationAwareStringBuilder _xblockexpression = null;
-      {
-        this.indentation--;
-        _xblockexpression = this;
-      }
-      return _xblockexpression;
+      this.indentation--;
+      return this;
     }
     
     public IndentationAwareStringBuilder append(final CharSequence string) {
-      IndentationAwareStringBuilder _xblockexpression = null;
-      {
-        if ((this.indentation > 0)) {
-          String _repeat = Strings.repeat(this.indentationString, this.indentation);
-          final String replacement = (this.newLineString + _repeat);
-          String _string = string.toString();
-          final String indented = _string.replace(this.newLineString, replacement);
-          this.builder.append(indented);
-        } else {
-          this.builder.append(string);
-        }
-        _xblockexpression = this;
+      if ((this.indentation > 0)) {
+        String _repeat = Strings.repeat(this.indentationString, this.indentation);
+        final String replacement = (this.newLineString + _repeat);
+        String _string = string.toString();
+        final String indented = _string.replace(this.newLineString, replacement);
+        this.builder.append(indented);
+      } else {
+        this.builder.append(string);
       }
-      return _xblockexpression;
+      return this;
     }
     
     public IndentationAwareStringBuilder newLine() {
-      IndentationAwareStringBuilder _xblockexpression = null;
-      {
-        StringBuilder _append = this.builder.append(this.newLineString);
-        String _repeat = Strings.repeat(this.indentationString, this.indentation);
-        _append.append(_repeat);
-        _xblockexpression = this;
-      }
-      return _xblockexpression;
+      StringBuilder _append = this.builder.append(this.newLineString);
+      String _repeat = Strings.repeat(this.indentationString, this.indentation);
+      _append.append(_repeat);
+      return this;
     }
     
     public String toString() {
@@ -113,26 +97,22 @@ public final class ToStringBuilder {
   private static ToStringContext _toStringContext = ToStringContext.instance();
   
   private static String gwtCompatibleSimpleName(final Class<?> clazz) {
-    String _xblockexpression = null;
-    {
-      String _name = clazz.getName();
-      String name = _name.replaceAll("\\$[0-9]+", "\\$");
-      int start = name.lastIndexOf("$");
-      if ((start == (-1))) {
-        int _lastIndexOf = name.lastIndexOf(".");
-        start = _lastIndexOf;
-      }
-      final String simpleName = name.substring((start + 1));
-      String _xifexpression = null;
-      boolean _isEmpty = simpleName.isEmpty();
-      if (_isEmpty) {
-        _xifexpression = "Anonymous";
-      } else {
-        _xifexpression = simpleName;
-      }
-      _xblockexpression = _xifexpression;
+    String _name = clazz.getName();
+    String name = _name.replaceAll("\\$[0-9]+", "\\$");
+    int start = name.lastIndexOf("$");
+    if ((start == (-1))) {
+      int _lastIndexOf = name.lastIndexOf(".");
+      start = _lastIndexOf;
     }
-    return _xblockexpression;
+    final String simpleName = name.substring((start + 1));
+    String _xifexpression = null;
+    boolean _isEmpty = simpleName.isEmpty();
+    if (_isEmpty) {
+      _xifexpression = "Anonymous";
+    } else {
+      _xifexpression = simpleName;
+    }
+    return _xifexpression;
   }
   
   private final Object instance;
@@ -165,12 +145,8 @@ public final class ToStringBuilder {
    * @return this
    */
   public ToStringBuilder singleLine() {
-    ToStringBuilder _xblockexpression = null;
-    {
-      this.multiLine = false;
-      _xblockexpression = this;
-    }
-    return _xblockexpression;
+    this.multiLine = false;
+    return this;
   }
   
   /**
@@ -178,12 +154,8 @@ public final class ToStringBuilder {
    * @return this
    */
   public ToStringBuilder skipNulls() {
-    ToStringBuilder _xblockexpression = null;
-    {
-      this.skipNulls = true;
-      _xblockexpression = this;
-    }
-    return _xblockexpression;
+    this.skipNulls = true;
+    return this;
   }
   
   /**
@@ -191,12 +163,8 @@ public final class ToStringBuilder {
    * @return this
    */
   public ToStringBuilder hideFieldNames() {
-    ToStringBuilder _xblockexpression = null;
-    {
-      this.showFieldNames = false;
-      _xblockexpression = this;
-    }
-    return _xblockexpression;
+    this.showFieldNames = false;
+    return this;
   }
   
   /**
@@ -205,19 +173,15 @@ public final class ToStringBuilder {
    */
   @GwtIncompatible("Class.getDeclaredFields")
   public ToStringBuilder addDeclaredFields() {
-    ToStringBuilder _xblockexpression = null;
-    {
-      Class<?> _class = this.instance.getClass();
-      Field[] _declaredFields = _class.getDeclaredFields();
-      final Procedure1<Field> _function = new Procedure1<Field>() {
-        public void apply(final Field it) {
-          ToStringBuilder.this.addField(it);
-        }
-      };
-      IterableExtensions.<Field>forEach(((Iterable<Field>)Conversions.doWrapArray(_declaredFields)), _function);
-      _xblockexpression = this;
-    }
-    return _xblockexpression;
+    Class<?> _class = this.instance.getClass();
+    Field[] _declaredFields = _class.getDeclaredFields();
+    final Procedure1<Field> _function = new Procedure1<Field>() {
+      public void apply(final Field it) {
+        ToStringBuilder.this.addField(it);
+      }
+    };
+    IterableExtensions.<Field>forEach(((Iterable<Field>)Conversions.doWrapArray(_declaredFields)), _function);
+    return this;
   }
   
   /**
@@ -226,19 +190,15 @@ public final class ToStringBuilder {
    */
   @GwtIncompatible("Class.getDeclaredFields")
   public ToStringBuilder addAllFields() {
-    ToStringBuilder _xblockexpression = null;
-    {
-      Class<?> _class = this.instance.getClass();
-      ArrayList<Field> _allDeclaredFields = this.getAllDeclaredFields(_class);
-      final Procedure1<Field> _function = new Procedure1<Field>() {
-        public void apply(final Field it) {
-          ToStringBuilder.this.addField(it);
-        }
-      };
-      IterableExtensions.<Field>forEach(_allDeclaredFields, _function);
-      _xblockexpression = this;
-    }
-    return _xblockexpression;
+    Class<?> _class = this.instance.getClass();
+    ArrayList<Field> _allDeclaredFields = this.getAllDeclaredFields(_class);
+    final Procedure1<Field> _function = new Procedure1<Field>() {
+      public void apply(final Field it) {
+        ToStringBuilder.this.addField(it);
+      }
+    };
+    IterableExtensions.<Field>forEach(_allDeclaredFields, _function);
+    return this;
   }
   
   /**
@@ -299,102 +259,80 @@ public final class ToStringBuilder {
   }
   
   private Part addPart() {
-    Part _xblockexpression = null;
-    {
-      final Part p = new Part();
-      this.parts.add(p);
-      _xblockexpression = p;
-    }
-    return _xblockexpression;
+    final Part p = new Part();
+    this.parts.add(p);
+    return p;
   }
   
   private ToStringBuilder addPart(final Object value) {
-    ToStringBuilder _xblockexpression = null;
-    {
-      final Part p = this.addPart();
-      p.value = value;
-      _xblockexpression = this;
-    }
-    return _xblockexpression;
+    final Part p = this.addPart();
+    p.value = value;
+    return this;
   }
   
   private ToStringBuilder addPart(final String fieldName, final Object value) {
-    ToStringBuilder _xblockexpression = null;
-    {
-      final Part p = this.addPart();
-      p.fieldName = fieldName;
-      p.value = value;
-      _xblockexpression = this;
-    }
-    return _xblockexpression;
+    final Part p = this.addPart();
+    p.fieldName = fieldName;
+    p.value = value;
+    return this;
   }
   
   /**
    * @return the String representation of the processed object
    */
   public String toString() {
-    String _xblockexpression = null;
-    {
-      boolean _startProcessing = ToStringBuilder._toStringContext.startProcessing(this.instance);
-      boolean _not = (!_startProcessing);
-      if (_not) {
-        return this.toSimpleReferenceString(this.instance);
-      }
-      String _xtrycatchfinallyexpression = null;
-      try {
-        String _xblockexpression_1 = null;
-        {
-          final IndentationAwareStringBuilder builder = new IndentationAwareStringBuilder();
-          IndentationAwareStringBuilder _append = builder.append(this.typeName);
-          _append.append(" ");
-          builder.append("[");
-          String nextSeparator = "";
-          if (this.multiLine) {
-            builder.increaseIndent();
-          }
-          for (final Part part : this.parts) {
-            boolean _or = false;
-            if ((!this.skipNulls)) {
-              _or = true;
-            } else {
-              boolean _tripleNotEquals = (part.value != null);
-              _or = _tripleNotEquals;
-            }
-            if (_or) {
-              if (this.multiLine) {
-                builder.newLine();
-              } else {
-                builder.append(nextSeparator);
-                nextSeparator = ", ";
-              }
-              boolean _and = false;
-              boolean _tripleNotEquals_1 = (part.fieldName != null);
-              if (!_tripleNotEquals_1) {
-                _and = false;
-              } else {
-                _and = this.showFieldNames;
-              }
-              if (_and) {
-                IndentationAwareStringBuilder _append_1 = builder.append(part.fieldName);
-                _append_1.append(" = ");
-              }
-              this.internalToString(part.value, builder);
-            }
-          }
-          if (this.multiLine) {
-            IndentationAwareStringBuilder _decreaseIndent = builder.decreaseIndent();
-            _decreaseIndent.newLine();
-          }
-          builder.append("]");
-          _xblockexpression_1 = builder.toString();
-        }
-        _xtrycatchfinallyexpression = _xblockexpression_1;
-      } finally {
-        ToStringBuilder._toStringContext.endProcessing(this.instance);
-      }
-      _xblockexpression = _xtrycatchfinallyexpression;
+    boolean _startProcessing = ToStringBuilder._toStringContext.startProcessing(this.instance);
+    boolean _not = (!_startProcessing);
+    if (_not) {
+      return this.toSimpleReferenceString(this.instance);
     }
-    return _xblockexpression;
+    try {
+      final IndentationAwareStringBuilder builder = new IndentationAwareStringBuilder();
+      IndentationAwareStringBuilder _append = builder.append(this.typeName);
+      _append.append(" ");
+      builder.append("[");
+      String nextSeparator = "";
+      if (this.multiLine) {
+        builder.increaseIndent();
+      }
+      for (final Part part : this.parts) {
+        boolean _or = false;
+        if ((!this.skipNulls)) {
+          _or = true;
+        } else {
+          boolean _tripleNotEquals = (part.value != null);
+          _or = _tripleNotEquals;
+        }
+        if (_or) {
+          if (this.multiLine) {
+            builder.newLine();
+          } else {
+            builder.append(nextSeparator);
+            nextSeparator = ", ";
+          }
+          boolean _and = false;
+          boolean _tripleNotEquals_1 = (part.fieldName != null);
+          if (!_tripleNotEquals_1) {
+            _and = false;
+          } else {
+            _and = this.showFieldNames;
+          }
+          if (_and) {
+            IndentationAwareStringBuilder _append_1 = builder.append(part.fieldName);
+            _append_1.append(" = ");
+          }
+          this.internalToString(part.value, builder);
+        }
+      }
+      if (this.multiLine) {
+        IndentationAwareStringBuilder _decreaseIndent = builder.decreaseIndent();
+        _decreaseIndent.newLine();
+      }
+      builder.append("]");
+      return builder.toString();
+    } finally {
+      ToStringBuilder._toStringContext.endProcessing(this.instance);
+    }
   }
   
   private void internalToString(final Object object, final IndentationAwareStringBuilder sb) {
@@ -465,47 +403,43 @@ public final class ToStringBuilder {
     }
   }
   
-  private IndentationAwareStringBuilder serializeIterable(final Iterable<?> object, final IndentationAwareStringBuilder sb) {
-    IndentationAwareStringBuilder _xblockexpression = null;
-    {
-      final Iterator<?> iterator = object.iterator();
-      Class<? extends Iterable> _class = object.getClass();
-      final String simpleName = ToStringBuilder.gwtCompatibleSimpleName(_class);
-      IndentationAwareStringBuilder _append = sb.append(simpleName);
-      _append.append(" (");
-      if (this.multiLine) {
-        sb.increaseIndent();
-      }
-      boolean wasEmpty = true;
-      while (iterator.hasNext()) {
-        {
-          wasEmpty = false;
-          if (this.multiLine) {
-            sb.newLine();
-          }
-          Object _next = iterator.next();
-          this.internalToString(_next, sb);
-          boolean _hasNext = iterator.hasNext();
-          if (_hasNext) {
-            sb.append(",");
-          }
+  private void serializeIterable(final Iterable<?> object, final IndentationAwareStringBuilder sb) {
+    final Iterator<?> iterator = object.iterator();
+    Class<? extends Iterable> _class = object.getClass();
+    final String simpleName = ToStringBuilder.gwtCompatibleSimpleName(_class);
+    IndentationAwareStringBuilder _append = sb.append(simpleName);
+    _append.append(" (");
+    if (this.multiLine) {
+      sb.increaseIndent();
+    }
+    boolean wasEmpty = true;
+    while (iterator.hasNext()) {
+      {
+        wasEmpty = false;
+        if (this.multiLine) {
+          sb.newLine();
+        }
+        Object _next = iterator.next();
+        this.internalToString(_next, sb);
+        boolean _hasNext = iterator.hasNext();
+        if (_hasNext) {
+          sb.append(",");
         }
       }
-      if (this.multiLine) {
-        sb.decreaseIndent();
-      }
-      boolean _and = false;
-      if (!(!wasEmpty)) {
-        _and = false;
-      } else {
-        _and = this.multiLine;
-      }
-      if (_and) {
-        sb.newLine();
-      }
-      _xblockexpression = sb.append(")");
     }
-    return _xblockexpression;
+    if (this.multiLine) {
+      sb.decreaseIndent();
+    }
+    boolean _and = false;
+    if (!(!wasEmpty)) {
+      _and = false;
+    } else {
+      _and = this.multiLine;
+    }
+    if (_and) {
+      sb.newLine();
+    }
+    sb.append(")");
   }
   
   private String toSimpleReferenceString(final Object obj) {
@@ -517,20 +451,16 @@ public final class ToStringBuilder {
   }
   
   private ArrayList<Field> getAllDeclaredFields(final Class<?> clazz) {
-    ArrayList<Field> _xblockexpression = null;
-    {
-      Class<?> current = clazz;
-      final ArrayList<Field> result = CollectionLiterals.<Field>newArrayList();
-      do {
-        {
-          Field[] _declaredFields = current.getDeclaredFields();
-          Iterables.<Field>addAll(result, ((Iterable<? extends Field>)Conversions.doWrapArray(_declaredFields)));
-          Class<?> _superclass = current.getSuperclass();
-          current = _superclass;
-        }
-      } while((!Objects.equal(current, null)));
-      _xblockexpression = result;
-    }
-    return _xblockexpression;
+    Class<?> current = clazz;
+    final ArrayList<Field> result = CollectionLiterals.<Field>newArrayList();
+    do {
+      {
+        Field[] _declaredFields = current.getDeclaredFields();
+        Iterables.<Field>addAll(result, ((Iterable<? extends Field>)Conversions.doWrapArray(_declaredFields)));
+        Class<?> _superclass = current.getSuperclass();
+        current = _superclass;
+      }
+    } while((!Objects.equal(current, null)));
+    return result;
   }
 }
