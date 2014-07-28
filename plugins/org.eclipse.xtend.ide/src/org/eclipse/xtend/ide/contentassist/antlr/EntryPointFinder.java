@@ -11,13 +11,11 @@ import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
-import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
 
@@ -62,18 +60,7 @@ public class EntryPointFinder {
 						if (remainingLookAhead == 0) {
 							if (shouldUseParent(result, offset, leaf)) {
 								ICompositeNode parent = result.getParent();
-								if (isUnassignedAction(parent)) {
-									INode firstChild = parent.getFirstChild();
-									if (firstChild instanceof ICompositeNode && firstChild.getGrammarElement() instanceof RuleCall) {
-										return (ICompositeNode) firstChild;
-									}
-								}
-							}
-							if (isUnassignedAction(result)) {
-								INode firstChild = result.getFirstChild();
-								if (firstChild instanceof ICompositeNode && firstChild.getGrammarElement() instanceof RuleCall) {
-									return (ICompositeNode) firstChild;
-								}
+								return parent;
 							}
 							return result;
 						}
@@ -83,14 +70,6 @@ public class EntryPointFinder {
 			result = getApplicableNode(result.getParent());
 		}
 		return result;
-	}
-
-	protected boolean isUnassignedAction(ICompositeNode parent) {
-		return parent.getGrammarElement() instanceof Action && ((Action) parent.getGrammarElement()).getFeature() == null;
-	}
-	
-	protected boolean isAssignedAction(ICompositeNode parent) {
-		return parent.getGrammarElement() instanceof Action && ((Action) parent.getGrammarElement()).getFeature() != null;
 	}
 
 	protected boolean shouldUseParent(ICompositeNode result, int offset, ILeafNode leaf) {
@@ -119,7 +98,7 @@ public class EntryPointFinder {
 	}
 
 	protected ICompositeNode getApplicableNode(ICompositeNode result) {
-		while (result != null && (result.getGrammarElement() == null || isAssignedAction(result))) {
+		while (result != null && (result.getGrammarElement() == null)) {
 			result = result.getParent();
 		}
 		return normalizeToParent(result);
