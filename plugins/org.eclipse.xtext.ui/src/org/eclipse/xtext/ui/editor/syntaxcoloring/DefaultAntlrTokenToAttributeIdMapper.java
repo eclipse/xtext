@@ -9,7 +9,6 @@ package org.eclipse.xtext.ui.editor.syntaxcoloring;
 
 import java.util.regex.Pattern;
 
-
 import com.google.inject.Singleton;
 
 /**

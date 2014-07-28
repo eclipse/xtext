@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.editor.model;
 import java.text.CharacterIterator;
 
 import org.eclipse.core.runtime.Assert;
+
 import com.ibm.icu.text.BreakIterator;
 
 /**
