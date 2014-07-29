@@ -12,3 +12,4 @@ Require-Bundle: org.eclipse.xtext.xbase.ui;bundle-version="2.7.0",
 Bundle-Vendor: %providerName
 Import-Package: org.apache.log4j;version="1.2.15",
  org.eclipse.ui.ide
+Export-Package: org.eclipse.xtext.common.types.shared.jdt38;x-internal:=true
