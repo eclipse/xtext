@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.interpreter
 import com.google.inject.Inject
 import java.util.Map
 import java.util.Set
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
@@ -32,7 +33,21 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
  */
 class AbstractConstantExpressionsInterpreter {
 	
+	@Accessors(PROTECTED_GETTER)
 	@Inject ConstantOperators constantOperators
+
+	def protected evaluate(XExpression expression, Context ctx) {
+		if (ctx.alreadyEvaluating.add(expression)) {
+			try {
+				internalEvaluate(expression, ctx)
+			} finally {
+				ctx.alreadyEvaluating.remove(expression)
+			}
+		} else {
+			throw notConstantExpression(expression)
+		}
+			
+	}
 
 	def dispatch Object internalEvaluate(XExpression expression, Context ctx) {
 		throw notConstantExpression(expression)
@@ -47,7 +62,7 @@ class AbstractConstantExpressionsInterpreter {
 	}
 	
 	def dispatch Object internalEvaluate(XCastedExpression expression, Context ctx) {
-		internalEvaluate(expression.target, ctx)
+		evaluate(expression.target, ctx)
 	}
 
 	def dispatch Object internalEvaluate(XStringLiteral it, Context ctx) {
@@ -83,8 +98,8 @@ class AbstractConstantExpressionsInterpreter {
 	def dispatch Object internalEvaluate(XBinaryOperation it, Context ctx) {
 		val context = if (ctx == null) null else ctx.cloneWithExpectation(null) 
 		 
-		val left = leftOperand.internalEvaluate(context) 
-		val right = rightOperand.internalEvaluate(context)
+		val left = leftOperand.evaluate(context) 
+		val right = rightOperand.evaluate(context)
 
 		evaluateBinaryOperation(it, left, right)
 	}
@@ -97,6 +112,11 @@ class AbstractConstantExpressionsInterpreter {
 			case '*': constantOperators.multiply(left, right)
 			case '/': constantOperators.divide(left, right)
 			case '%': constantOperators.modulo(left, right)
+			case '&&': constantOperators.and(left, right)
+			case '||': constantOperators.or(left, right)
+			case '<<': constantOperators.shiftLeft(left, right)
+			case '>>': constantOperators.shiftRight(left, right)
+			case '>>>': constantOperators.shiftRightUnsigned(left, right)
 			case '<': constantOperators.lessThan(left, right)
 			case '>': constantOperators.greaterThan(left, right)
 			case '<=': constantOperators.lessEquals(left, right)
@@ -110,7 +130,7 @@ class AbstractConstantExpressionsInterpreter {
 	}
 
 	def dispatch Object internalEvaluate(XUnaryOperation it, Context ctx) {
-		val value = operand.internalEvaluate(ctx)
+		val value = operand.evaluate(ctx)
 		val op = concreteSyntaxFeatureName
 		switch op {
 			case '-': constantOperators.minus(value)

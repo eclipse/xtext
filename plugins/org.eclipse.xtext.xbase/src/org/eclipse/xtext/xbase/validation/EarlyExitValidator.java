@@ -31,9 +31,11 @@ import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.controlflow.BooleanResult;
 import org.eclipse.xtext.xbase.controlflow.ConstantConditionsInterpreter;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 
+import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 
@@ -115,17 +117,27 @@ public class EarlyExitValidator extends AbstractDeclarativeValidator {
 	public void checkDeadCode(XWhileExpression loop) {
 		XExpression predicate = loop.getPredicate();
 		if (!earlyExitComputer.isEarlyExit(predicate)) {
-			Boolean constant = getBooleanConstantOrNull(predicate);
-			if (constant != null) {
-				if (constant.booleanValue()) {
-					addIssue("Constant condition is always " + constant, predicate, null, IssueCodes.CONSTANT_BOOLEAN_CONDITION);
-				} else {
+			Optional<BooleanResult> result = getBooleanResult(predicate);
+			if (result.isPresent()) {
+				BooleanResult booleanResult = result.get();
+				markConstantBooleanCondition(predicate, booleanResult);
+				if (booleanResult.isCompileTimeConstant() && !booleanResult.getValue().or(Boolean.TRUE)) {
 					markAsDeadCode(loop.getBody());
 				}
 			}
 		} else {
 			markAsDeadCode(loop.getBody());
 		}
+	}
+
+	protected void markConstantBooleanCondition(XExpression predicate, BooleanResult booleanResult) {
+		Optional<Boolean> value = booleanResult.getValue();
+		if (value.isPresent()) {
+			addIssue("Constant condition is always " + value.get() + ".", predicate, null, IssueCodes.CONSTANT_BOOLEAN_CONDITION);	
+		} else {
+			addIssue("Constant condition.", predicate, null, IssueCodes.CONSTANT_BOOLEAN_CONDITION);
+		}
+		
 	}
 
 	private boolean markAsDeadCode(List<XExpression> expressions) {
@@ -138,9 +150,9 @@ public class EarlyExitValidator extends AbstractDeclarativeValidator {
 	
 	private void validateCondition(XExpression expression) {
 		if (!isIgnored(IssueCodes.CONSTANT_BOOLEAN_CONDITION)) {
-			Boolean constant = getBooleanConstantOrNull(expression);
-			if (constant != null) {
-				addIssue("Constant condition is always " + constant, expression, null, IssueCodes.CONSTANT_BOOLEAN_CONDITION);
+			Optional<BooleanResult> result = getBooleanResult(expression);
+			if (result.isPresent()) {
+				markConstantBooleanCondition(expression, result.get());
 			}
 		}
 	}
@@ -172,6 +184,11 @@ public class EarlyExitValidator extends AbstractDeclarativeValidator {
 	public void checkDeadCode(XDoWhileExpression loop) {
 		if (earlyExitComputer.isEarlyExit(loop.getBody())) {
 			markAsDeadCode(loop.getPredicate());
+		} else {
+			XExpression predicate = loop.getPredicate();
+			if (!earlyExitComputer.isEarlyExit(predicate)) {
+				validateCondition(predicate);
+			}
 		}
 	}
 	
@@ -190,11 +207,11 @@ public class EarlyExitValidator extends AbstractDeclarativeValidator {
 	public void checkDeadCode(XBasicForLoopExpression loop) {
 		XExpression predicate = loop.getExpression();
 		if (!earlyExitComputer.isEarlyExit(predicate)) {
-			Boolean constant = getBooleanConstantOrNull(predicate);
-			if (constant != null) {
-				if (constant.booleanValue()) {
-					addIssue("Constant condition is always " + constant, predicate, null, IssueCodes.CONSTANT_BOOLEAN_CONDITION);
-				} else {
+			Optional<BooleanResult> result = getBooleanResult(predicate);
+			if (result.isPresent()) {
+				BooleanResult booleanResult = result.get();
+				markConstantBooleanCondition(predicate, booleanResult);
+				if (booleanResult.isCompileTimeConstant() && !booleanResult.getValue().or(Boolean.TRUE)) {
 					markAsDeadCode(loop.getEachExpression());
 					return;
 				}
@@ -209,10 +226,10 @@ public class EarlyExitValidator extends AbstractDeclarativeValidator {
 		}
 	}
 
-	protected Boolean getBooleanConstantOrNull(XExpression expression) {
+	protected Optional<BooleanResult> getBooleanResult(XExpression expression) {
 		if (expression == null)
-			return null;
-		return constantExpressionInterpreter.getBooleanConstantOrNull(expression);
+			return Optional.absent();
+		return Optional.fromNullable(constantExpressionInterpreter.getBooleanConstantOrNull(expression));
 	}
 	
 	@Check

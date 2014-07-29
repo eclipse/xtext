@@ -1157,6 +1157,35 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
+	@Test def void testWhileLoopWithConstantCondition_01() {
+		'''
+			while (newArrayList('').empty || 2 == (1 << 1)) {
+				return ''
+			}
+		'''.compilesTo(
+		'''
+			while ((org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList("").isEmpty() || (2 == (1 << 1)))) {
+			  return "";
+			}
+			return null;
+		'''
+		)
+	}
+	
+	@Test def void testWhileLoopWithConstantCondition_02() {
+		'''
+			while (2 == (1 << 1)) {
+				return ''
+			}
+		'''.compilesTo(
+		'''
+			while ((2 == (1 << 1))) {
+			  return "";
+			}
+		'''
+		)
+	}
+	
 	@Test def void testSynchronizedBlock_1() {
 		'''
 			{
@@ -1367,6 +1396,4 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			}
 		''')
 	}
-
 }
-
