@@ -1,48 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.6"?>
 
-<target name="developer-helios" sequenceNumber="1">
+<target name="developer-mars" sequenceNumber="4">
 <locations>
+<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
+<repository location="http://download.eclipse.org/modeling/emf/emf/updates/nightly/"/>
+</location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.xpand.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.emf.mwe2.language.sdk.feature.group" version="0.0.0"/>
-<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/nightly"/>
+<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/nightly/"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.emf.compare.sdk.feature.group" version="1.0.1.v200909161031"/>
-<repository location="http://download.eclipse.org/modeling/emf/updates"/>
+<unit id="org.eclipse.emf.compare.feature.group" version="0.0.0"/>
+<repository location="http://download.eclipse.org/modeling/emf/compare/updates/milestones/2.1/"/>
 </location>
-<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
-<repository location="http://download.eclipse.org/modeling/emf/emf/updates/nightly"/>
-</location>
-<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.jdt.feature.group" version="3.6.2.r362_v20101117-0800-7z8XFW6FLFlmjJcvz03jyeFBLS_F"/>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.jdt.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.pde.core" version="0.0.0"/>
 <unit id="org.eclipse.pde.ui" version="0.0.0"/>
-<unit id="org.junit4" version="0.0.0"/>
-<repository location="http://download.eclipse.org/eclipse/updates/3.6"/>
+<unit id="org.eclipse.pde.junit.runtime" version="0.0.0"/>
+<unit id="org.eclipse.platform.feature.group" version="0.0.0"/>
+<unit id="org.junit" version="0.0.0"/>
+<unit id="org.eclipse.core.databinding.beans" version="0.0.0"/>
+<repository location="http://download.eclipse.org/eclipse/updates/4.5-I-builds/"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="com.google.guava" version="0.0.0"/>
+<unit id="com.google.guava" version="15.0.0.v201403281430"/>
 <unit id="com.google.inject" version="0.0.0"/>
 <unit id="org.apache.log4j" version="0.0.0"/>
 <unit id="org.aopalliance" version="0.0.0"/>
 <unit id="org.easymock" version="0.0.0"/>
 <unit id="org.antlr.runtime" version="0.0.0"/>
-<unit id="org.junit" version="0.0.0"/>
-<unit id="javax.inject" version="0.0.0"/>
 <unit id="org.apache.ant" version="0.0.0"/>
+<unit id="javax.inject" version="0.0.0"/>
+<unit id="org.junit" version="3.8.2.v3_8_2_v20130308-0410"/>
 <unit id="org.objectweb.asm" version="0.0.0"/>
 <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.draw2d.feature.group" version="0.0.0"/>
-<repository location="http://download.eclipse.org/tools/gef/updates/releases"/>
+<repository location="http://download.eclipse.org/tools/gef/updates/milestones"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="de.itemis.xtext.antlr.sdk.feature.group" version="0.0.0"/>
-<repository location="http://download.itemis.com/updates/releases/2.1.0"/>
+<repository location="http://download.itemis.com/updates/releases/2.1.1"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.m2e.core" version="0.0.0"/>
