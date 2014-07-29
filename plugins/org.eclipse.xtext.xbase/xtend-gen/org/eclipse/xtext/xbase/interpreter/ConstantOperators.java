@@ -55,6 +55,82 @@ public class ConstantOperators {
     return (left + right);
   }
   
+  protected Object _shiftLeft(final Object operand, final Object bits) {
+    throw new ConstantExpressionEvaluationException((((("Unsupported operator \'<<\' for operands (" + operand) + ", ") + bits) + ")"));
+  }
+  
+  protected Object _shiftLeft(final Integer i, final Integer bits) {
+    int _intValue = i.intValue();
+    int _intValue_1 = bits.intValue();
+    return Integer.valueOf((_intValue << _intValue_1));
+  }
+  
+  protected Object _shiftLeft(final Long l, final Integer bits) {
+    long _longValue = l.longValue();
+    int _intValue = bits.intValue();
+    return Long.valueOf((_longValue << _intValue));
+  }
+  
+  protected Object _shiftRight(final Object operand, final Object bits) {
+    throw new ConstantExpressionEvaluationException((((("Unsupported operator \'>>\' for operands (" + operand) + ", ") + bits) + ")"));
+  }
+  
+  protected Object _shiftRight(final Integer i, final Integer bits) {
+    int _intValue = i.intValue();
+    int _intValue_1 = bits.intValue();
+    return Integer.valueOf((_intValue >> _intValue_1));
+  }
+  
+  protected Object _shiftRight(final Long l, final Integer bits) {
+    long _longValue = l.longValue();
+    int _intValue = bits.intValue();
+    return Long.valueOf((_longValue >> _intValue));
+  }
+  
+  protected Object _shiftRightUnsigned(final Object operand, final Object bits) {
+    throw new ConstantExpressionEvaluationException((((("Unsupported operator \'>>>\' for operands (" + operand) + ", ") + bits) + ")"));
+  }
+  
+  protected Object _shiftRightUnsigned(final Integer i, final Integer bits) {
+    int _intValue = i.intValue();
+    int _intValue_1 = bits.intValue();
+    return Integer.valueOf((_intValue >>> _intValue_1));
+  }
+  
+  protected Object _shiftRightUnsigned(final Long l, final Integer bits) {
+    long _longValue = l.longValue();
+    int _intValue = bits.intValue();
+    return Long.valueOf((_longValue >>> _intValue));
+  }
+  
+  protected boolean _and(final Object left, final Object right) {
+    throw new ConstantExpressionEvaluationException((((("Unsupported operator \'&&\' for operands (" + left) + ", ") + right) + ")"));
+  }
+  
+  protected boolean _and(final Boolean left, final Boolean right) {
+    boolean _and = false;
+    if (!(left).booleanValue()) {
+      _and = false;
+    } else {
+      _and = (right).booleanValue();
+    }
+    return _and;
+  }
+  
+  protected boolean _or(final Object left, final Object right) {
+    throw new ConstantExpressionEvaluationException((((("Unsupported operator \'||\' for operands (" + left) + ", ") + right) + ")"));
+  }
+  
+  protected boolean _or(final Boolean left, final Boolean right) {
+    boolean _or = false;
+    if ((left).booleanValue()) {
+      _or = true;
+    } else {
+      _or = (right).booleanValue();
+    }
+    return _or;
+  }
+  
   public static void main(final String[] args) {
     Pair<String, String> _mappedTo = Pair.<String, String>of("Integer", "intValue()");
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("Short", "shortValue()");
@@ -2694,6 +2770,80 @@ public class ConstantOperators {
     } else if (left != null
          && right != null) {
       return _plus(left, right);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(left, right).toString());
+    }
+  }
+  
+  public Object shiftLeft(final Object i, final Object bits) {
+    if (i instanceof Integer
+         && bits instanceof Integer) {
+      return _shiftLeft((Integer)i, (Integer)bits);
+    } else if (i instanceof Long
+         && bits instanceof Integer) {
+      return _shiftLeft((Long)i, (Integer)bits);
+    } else if (i != null
+         && bits != null) {
+      return _shiftLeft(i, bits);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(i, bits).toString());
+    }
+  }
+  
+  public Object shiftRight(final Object i, final Object bits) {
+    if (i instanceof Integer
+         && bits instanceof Integer) {
+      return _shiftRight((Integer)i, (Integer)bits);
+    } else if (i instanceof Long
+         && bits instanceof Integer) {
+      return _shiftRight((Long)i, (Integer)bits);
+    } else if (i != null
+         && bits != null) {
+      return _shiftRight(i, bits);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(i, bits).toString());
+    }
+  }
+  
+  public Object shiftRightUnsigned(final Object i, final Object bits) {
+    if (i instanceof Integer
+         && bits instanceof Integer) {
+      return _shiftRightUnsigned((Integer)i, (Integer)bits);
+    } else if (i instanceof Long
+         && bits instanceof Integer) {
+      return _shiftRightUnsigned((Long)i, (Integer)bits);
+    } else if (i != null
+         && bits != null) {
+      return _shiftRightUnsigned(i, bits);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(i, bits).toString());
+    }
+  }
+  
+  public boolean and(final Object left, final Object right) {
+    if (left instanceof Boolean
+         && right instanceof Boolean) {
+      return _and((Boolean)left, (Boolean)right);
+    } else if (left != null
+         && right != null) {
+      return _and(left, right);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(left, right).toString());
+    }
+  }
+  
+  public boolean or(final Object left, final Object right) {
+    if (left instanceof Boolean
+         && right instanceof Boolean) {
+      return _or((Boolean)left, (Boolean)right);
+    } else if (left != null
+         && right != null) {
+      return _or(left, right);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(left, right).toString());

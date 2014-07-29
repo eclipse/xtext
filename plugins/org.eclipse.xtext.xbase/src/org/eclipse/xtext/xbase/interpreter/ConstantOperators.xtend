@@ -26,14 +26,73 @@ class ConstantOperators {
 		left + right
 	}
 	
+	def dispatch Object shiftLeft(Object operand, Object bits) {
+		throw new ConstantExpressionEvaluationException("Unsupported operator '<<' for operands ("+operand+", "+bits+")");
+	}
+	def dispatch shiftLeft(Integer i, Integer bits) {
+		i.intValue << bits.intValue
+	}
+	def dispatch shiftLeft(Long l, Integer bits) {
+		l.longValue << bits.intValue
+	}
+	
+	def dispatch Object shiftRight(Object operand, Object bits) {
+		throw new ConstantExpressionEvaluationException("Unsupported operator '>>' for operands ("+operand+", "+bits+")");
+	}
+	def dispatch shiftRight(Integer i, Integer bits) {
+		i.intValue >> bits.intValue
+	}
+	def dispatch shiftRight(Long l, Integer bits) {
+		l.longValue >> bits.intValue
+	}
+	
+	def dispatch Object shiftRightUnsigned(Object operand, Object bits) {
+		throw new ConstantExpressionEvaluationException("Unsupported operator '>>>' for operands ("+operand+", "+bits+")");
+	}
+	def dispatch shiftRightUnsigned(Integer i, Integer bits) {
+		i.intValue >>> bits.intValue
+	}
+	def dispatch shiftRightUnsigned(Long l, Integer bits) {
+		l.longValue >>> bits.intValue
+	}
+	
+	def dispatch and(Object left, Object right) {
+		throw new ConstantExpressionEvaluationException("Unsupported operator '&&' for operands ("+left+", "+right+")");
+	}
+	def dispatch and(Boolean left, Boolean right) {
+		left && right
+	}
+	
+	def dispatch or(Object left, Object right) {
+		throw new ConstantExpressionEvaluationException("Unsupported operator '||' for operands ("+left+", "+right+")");
+	}
+	def dispatch or(Boolean left, Boolean right) {
+		left || right
+	}
+	
 	def static void main(String[] args) {
-		val types = #{'Integer'->'intValue()','Short'->'shortValue()','Long'->'longValue()','Float'->'floatValue()','Double'->'doubleValue()','Byte'->'byteValue()'}
-		val operators = #{
-			'plus'->'+','minus'->'-','divide'->'/','multiply'->'*','modulo'->'%',
-			'lessThan'->'<','greaterThan'->'>','lessEquals'->'<=','greaterEquals'->'>=',
-			'same'->'===', 'notSame'->'!=='				
+		val types = #{
+			'Integer' -> 'intValue()',
+			'Short' -> 'shortValue()',
+			'Long' -> 'longValue()',
+			'Float' -> 'floatValue()',
+			'Double' -> 'doubleValue()',
+			'Byte' -> 'byteValue()'
 		}
-		val booleanOps = #{'<','<=','>','>=','===','!=='}
+		val operators = #{
+			'plus' -> '+',
+			'minus' -> '-',
+			'divide' -> '/',
+			'multiply' -> '*',
+			'modulo' -> '%',
+			'lessThan' -> '<',
+			'greaterThan' -> '>',
+			'lessEquals' -> '<=',
+			'greaterEquals' -> '>=',
+			'same' -> '===',
+			'notSame' -> '!=='
+		}
+		val booleanOps = #{'<', '<=', '>', '>=', '===', '!=='}
 		for (op : operators.entrySet) {
 			val returnType = if (booleanOps.contains(op.value)) 'boolean ' else 'Object '
 			println('''

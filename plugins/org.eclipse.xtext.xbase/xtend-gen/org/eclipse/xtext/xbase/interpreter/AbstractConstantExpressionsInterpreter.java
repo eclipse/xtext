@@ -11,6 +11,8 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtend.lib.annotations.AccessorType;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
@@ -32,12 +34,14 @@ import org.eclipse.xtext.xbase.interpreter.Context;
 import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
  */
 @SuppressWarnings("all")
 public class AbstractConstantExpressionsInterpreter {
+  @Accessors(AccessorType.PROTECTED_GETTER)
   @Inject
   private ConstantOperators constantOperators;
   
@@ -160,6 +164,36 @@ public class AbstractConstantExpressionsInterpreter {
         if (Objects.equal(op, "%")) {
           _matched=true;
           _switchResult = this.constantOperators.modulo(left, right);
+        }
+      }
+      if (!_matched) {
+        if (Objects.equal(op, "&&")) {
+          _matched=true;
+          _switchResult = Boolean.valueOf(this.constantOperators.and(left, right));
+        }
+      }
+      if (!_matched) {
+        if (Objects.equal(op, "||")) {
+          _matched=true;
+          _switchResult = Boolean.valueOf(this.constantOperators.or(left, right));
+        }
+      }
+      if (!_matched) {
+        if (Objects.equal(op, "<<")) {
+          _matched=true;
+          _switchResult = this.constantOperators.shiftLeft(left, right);
+        }
+      }
+      if (!_matched) {
+        if (Objects.equal(op, ">>")) {
+          _matched=true;
+          _switchResult = this.constantOperators.shiftRight(left, right);
+        }
+      }
+      if (!_matched) {
+        if (Objects.equal(op, ">>>")) {
+          _matched=true;
+          _switchResult = this.constantOperators.shiftRightUnsigned(left, right);
         }
       }
       if (!_matched) {
@@ -296,5 +330,10 @@ public class AbstractConstantExpressionsInterpreter {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(it, ctx).toString());
     }
+  }
+  
+  @Pure
+  protected ConstantOperators getConstantOperators() {
+    return this.constantOperators;
   }
 }

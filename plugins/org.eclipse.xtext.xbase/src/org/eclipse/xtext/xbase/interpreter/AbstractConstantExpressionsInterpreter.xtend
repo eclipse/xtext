@@ -26,12 +26,14 @@ import org.eclipse.xtext.xbase.XStringLiteral
 import org.eclipse.xtext.xbase.XTypeLiteral
 import org.eclipse.xtext.xbase.XUnaryOperation
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
+import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
  */
 class AbstractConstantExpressionsInterpreter {
 	
+	@Accessors(PROTECTED_GETTER)
 	@Inject ConstantOperators constantOperators
 
 	def dispatch Object internalEvaluate(XExpression expression, Context ctx) {
@@ -97,6 +99,11 @@ class AbstractConstantExpressionsInterpreter {
 			case '*': constantOperators.multiply(left, right)
 			case '/': constantOperators.divide(left, right)
 			case '%': constantOperators.modulo(left, right)
+			case '&&': constantOperators.and(left, right)
+			case '||': constantOperators.or(left, right)
+			case '<<': constantOperators.shiftLeft(left, right)
+			case '>>': constantOperators.shiftRight(left, right)
+			case '>>>': constantOperators.shiftRightUnsigned(left, right)
 			case '<': constantOperators.lessThan(left, right)
 			case '>': constantOperators.greaterThan(left, right)
 			case '<=': constantOperators.lessEquals(left, right)
