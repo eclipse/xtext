@@ -78,7 +78,7 @@ public class FlexerBasedContentAssistParser extends XtendParser {
 		ICompositeNode entryPoint = entryPointFinder.findEntryPoint(parseResult, offset);
 		if (entryPoint != null) {
 			String parseMe = getTextToParse(parseResult, entryPoint, offset);
-	System.out.println("Parsing: >>>" + parseMe + "<<<");
+//	System.out.println("Parsing: >>>" + parseMe + "<<<");
 			TokenSource tokenSource = flexerFactory.createTokenSource(new StringReader(parseMe));
 			AbstractInternalContentAssistParser parser = createParser();
 			parser.setStrict(strict);
