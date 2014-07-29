@@ -2365,6 +2365,58 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
   }
   
   @Test
+  public void testWhileLoopWithConstantCondition_01() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("while (newArrayList(\'\').empty || 2 == (1 << 1)) {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("return \'\'");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("while ((org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList(\"\").isEmpty() || (2 == (1 << 1)))) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("return \"\";");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("return null;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testWhileLoopWithConstantCondition_02() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("while (2 == (1 << 1)) {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("return \'\'");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("while ((2 == (1 << 1))) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("return \"\";");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testSynchronizedBlock_1() {
     try {
       StringConcatenation _builder = new StringConcatenation();

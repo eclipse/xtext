@@ -10,7 +10,10 @@ package org.eclipse.xtext.xbase.interpreter;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
+import java.util.Set;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtend.lib.annotations.AccessorType;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
@@ -32,14 +35,35 @@ import org.eclipse.xtext.xbase.interpreter.Context;
 import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
  */
 @SuppressWarnings("all")
 public class AbstractConstantExpressionsInterpreter {
+  @Accessors(AccessorType.PROTECTED_GETTER)
   @Inject
   private ConstantOperators constantOperators;
+  
+  protected Object evaluate(final XExpression expression, final Context ctx) {
+    Object _xifexpression = null;
+    Set<XExpression> _alreadyEvaluating = ctx.getAlreadyEvaluating();
+    boolean _add = _alreadyEvaluating.add(expression);
+    if (_add) {
+      Object _xtrycatchfinallyexpression = null;
+      try {
+        _xtrycatchfinallyexpression = this.internalEvaluate(expression, ctx);
+      } finally {
+        Set<XExpression> _alreadyEvaluating_1 = ctx.getAlreadyEvaluating();
+        _alreadyEvaluating_1.remove(expression);
+      }
+      _xifexpression = _xtrycatchfinallyexpression;
+    } else {
+      throw this.notConstantExpression(expression);
+    }
+    return _xifexpression;
+  }
   
   protected Object _internalEvaluate(final XExpression expression, final Context ctx) {
     throw this.notConstantExpression(expression);
@@ -61,7 +85,7 @@ public class AbstractConstantExpressionsInterpreter {
   
   protected Object _internalEvaluate(final XCastedExpression expression, final Context ctx) {
     XExpression _target = expression.getTarget();
-    return this.internalEvaluate(_target, ctx);
+    return this.evaluate(_target, ctx);
   }
   
   protected Object _internalEvaluate(final XStringLiteral it, final Context ctx) {
@@ -118,9 +142,9 @@ public class AbstractConstantExpressionsInterpreter {
       }
       final Context context = _xifexpression;
       XExpression _leftOperand = it.getLeftOperand();
-      final Object left = this.internalEvaluate(_leftOperand, context);
+      final Object left = this.evaluate(_leftOperand, context);
       XExpression _rightOperand = it.getRightOperand();
-      final Object right = this.internalEvaluate(_rightOperand, context);
+      final Object right = this.evaluate(_rightOperand, context);
       _xblockexpression = this.evaluateBinaryOperation(it, left, right);
     }
     return _xblockexpression;
@@ -160,6 +184,36 @@ public class AbstractConstantExpressionsInterpreter {
         if (Objects.equal(op, "%")) {
           _matched=true;
           _switchResult = this.constantOperators.modulo(left, right);
+        }
+      }
+      if (!_matched) {
+        if (Objects.equal(op, "&&")) {
+          _matched=true;
+          _switchResult = Boolean.valueOf(this.constantOperators.and(left, right));
+        }
+      }
+      if (!_matched) {
+        if (Objects.equal(op, "||")) {
+          _matched=true;
+          _switchResult = Boolean.valueOf(this.constantOperators.or(left, right));
+        }
+      }
+      if (!_matched) {
+        if (Objects.equal(op, "<<")) {
+          _matched=true;
+          _switchResult = this.constantOperators.shiftLeft(left, right);
+        }
+      }
+      if (!_matched) {
+        if (Objects.equal(op, ">>")) {
+          _matched=true;
+          _switchResult = this.constantOperators.shiftRight(left, right);
+        }
+      }
+      if (!_matched) {
+        if (Objects.equal(op, ">>>")) {
+          _matched=true;
+          _switchResult = this.constantOperators.shiftRightUnsigned(left, right);
         }
       }
       if (!_matched) {
@@ -224,7 +278,7 @@ public class AbstractConstantExpressionsInterpreter {
     Object _xblockexpression = null;
     {
       XExpression _operand = it.getOperand();
-      final Object value = this.internalEvaluate(_operand, ctx);
+      final Object value = this.evaluate(_operand, ctx);
       final String op = it.getConcreteSyntaxFeatureName();
       Object _switchResult = null;
       boolean _matched = false;
@@ -296,5 +350,10 @@ public class AbstractConstantExpressionsInterpreter {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(it, ctx).toString());
     }
+  }
+  
+  @Pure
+  protected ConstantOperators getConstantOperators() {
+    return this.constantOperators;
   }
 }

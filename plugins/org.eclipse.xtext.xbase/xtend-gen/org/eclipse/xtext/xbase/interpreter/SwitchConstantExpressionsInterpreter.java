@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.interpreter;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
+import java.util.HashSet;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmField;
@@ -32,6 +33,7 @@ import org.eclipse.xtext.xbase.interpreter.AbstractConstantExpressionsInterprete
 import org.eclipse.xtext.xbase.interpreter.Context;
 import org.eclipse.xtext.xbase.interpreter.UnresolvableFeatureException;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
 
@@ -49,7 +51,9 @@ public class SwitchConstantExpressionsInterpreter extends AbstractConstantExpres
   private NumberLiterals numberLiterals;
   
   public Object evaluate(final XExpression it) {
-    return this.internalEvaluate(it, null);
+    HashSet<XExpression> _newHashSet = CollectionLiterals.<XExpression>newHashSet();
+    Context _context = new Context(null, null, null, _newHashSet);
+    return this.evaluate(it, _context);
   }
   
   protected Object _internalEvaluate(final XNumberLiteral it, final Context ctx) {
@@ -126,7 +130,7 @@ public class SwitchConstantExpressionsInterpreter extends AbstractConstantExpres
             if (_notEquals) {
               _matched_1=true;
               XExpression _switch_1 = ((XSwitchExpression)container).getSwitch();
-              return this.internalEvaluate(_switch_1, ctx);
+              return this.evaluate(_switch_1, ctx);
             }
           }
         }
@@ -151,7 +155,7 @@ public class SwitchConstantExpressionsInterpreter extends AbstractConstantExpres
       }
     }
     if (!_matched) {
-      _switchResult = this.internalEvaluate(it, ctx);
+      _switchResult = this.evaluate(it, ctx);
     }
     return _switchResult;
   }

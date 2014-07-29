@@ -15,10 +15,10 @@ import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XNumberLiteral
+import org.eclipse.xtext.xbase.XSwitchExpression
 import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals
-import org.eclipse.xtext.xbase.XSwitchExpression
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -30,7 +30,7 @@ class SwitchConstantExpressionsInterpreter extends AbstractConstantExpressionsIn
 	@Inject extension NumberLiterals numberLiterals
 
 	def Object evaluate(XExpression it) {
-		internalEvaluate(null)
+		evaluate(new Context(null, null, null, newHashSet))
 	}
 
 	def dispatch Object internalEvaluate(XNumberLiteral it, Context ctx) {
@@ -63,7 +63,7 @@ class SwitchConstantExpressionsInterpreter extends AbstractConstantExpressionsIn
 			JvmFormalParameter: {
 				switch container : feature.eContainer {
 					XSwitchExpression case container.^switch != null: {
-						return container.^switch.internalEvaluate(ctx)
+						return container.^switch.evaluate(ctx)
 					}
 				}
 			}
@@ -76,7 +76,7 @@ class SwitchConstantExpressionsInterpreter extends AbstractConstantExpressionsIn
 			XAbstractFeatureCall case feature instanceof JvmEnumerationLiteral: {
 				throw notConstantExpression
 			}
-			default: internalEvaluate(ctx)
+			default: evaluate(ctx)
 		}
 	}
 
