@@ -36,8 +36,6 @@ import org.eclipse.jdt.internal.ui.viewsupport.JavaElementImageProvider;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
@@ -45,7 +43,6 @@ import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.access.jdt.IJdtTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
 import org.eclipse.xtext.common.types.util.RawSuperTypes;
-import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
@@ -65,7 +62,6 @@ import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.ReplacementTextApplier;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 import com.google.common.base.CharMatcher;
 import com.google.common.collect.Sets;
@@ -257,11 +253,13 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 			public boolean isCandidateMatchingPrefix(String name, String prefix) {
 				if (original.isCandidateMatchingPrefix(name, prefix))
 					return true;
-				String withoutDollars = name.replace('$', '.');
+				String nameWithoutDollars = name.replace('$', '.');
 				String prefixWithoutDollars = prefix.replace('$', '.');
-				if ((withoutDollars != name || prefixWithoutDollars != prefix) && original.isCandidateMatchingPrefix(withoutDollars, prefixWithoutDollars))
+				final boolean nameOrPrefixHasDollars = (nameWithoutDollars != name) || (prefixWithoutDollars != prefix);
+				if (nameOrPrefixHasDollars
+						&& original.isCandidateMatchingPrefix(nameWithoutDollars, prefixWithoutDollars))
 					return true;
-				String sub = withoutDollars;
+				String sub = nameWithoutDollars;
 				int delimiter = sub.indexOf('.');
 				while(delimiter != -1) {
 					sub = sub.substring(delimiter + 1);

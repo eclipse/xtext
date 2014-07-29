@@ -22,6 +22,12 @@
 		<Method name="setToDefault" />
 		<Bug pattern="ES_COMPARING_STRINGS_WITH_EQ" />
 	</Match>
+	<Match>
+		<Class
+			name="org.eclipse.xtext.common.types.xtext.ui.JdtTypesProposalProvider$3" />
+		<Method name="isCandidateMatchingPrefix" />
+		<Bug pattern="ES_COMPARING_STRINGS_WITH_EQ" />
+	</Match>
 	<!-- "==" compare is desired -->
 	<Match>
 		<Class
