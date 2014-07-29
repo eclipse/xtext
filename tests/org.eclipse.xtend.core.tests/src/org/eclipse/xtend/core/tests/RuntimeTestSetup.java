@@ -72,9 +72,9 @@ public class RuntimeTestSetup extends XtendStandaloneSetup {
 			return SuspiciousOverloadIsErrorInTests.class;
 		}
 		
-		public Class<? extends FlexerFactory> bindFlexerFactory() {
-			return AssertingFlexerFactory.class;
-		}
+//		public Class<? extends FlexerFactory> bindFlexerFactory() {
+//			return AssertingFlexerFactory.class;
+//		}
 	}
 	
 	public static class AssertingFlexerFactory extends FlexerFactory {
