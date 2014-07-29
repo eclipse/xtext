@@ -464,10 +464,9 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertError(expression, XbasePackage.Literals.XTHROW_EXPRESSION, INVALID_EARLY_EXIT, "throw", "not allowed", "context");
 	}
 	
-	@Ignore("TODO To be implemented - should be a control flow problem")
 	@Test public void testInvalidEarlyExit_02() throws Exception {
 		XExpression expression = expression("if (throw new Exception()) {}");
-		helper.assertError(expression, XbasePackage.Literals.XTHROW_EXPRESSION, INCOMPATIBLE_TYPES, "void", "boolean");
+		helper.assertError(expression, XbasePackage.Literals.XBLOCK_EXPRESSION, UNREACHABLE_CODE);
 	}
 	
 	@Test public void testInvalidEarlyExit_03() throws Exception {
@@ -475,10 +474,9 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertError(expression, XbasePackage.Literals.XRETURN_EXPRESSION, INVALID_EARLY_EXIT, "return", "context");
 	}
 	
-	@Ignore("TODO To be implemented - should be a control flow problem")
 	@Test public void testInvalidEarlyExit_04() throws Exception {
 		XExpression expression = expression("if (return 1) {}");
-		helper.assertError(expression, XbasePackage.Literals.XRETURN_EXPRESSION, INCOMPATIBLE_TYPES, "void", "boolean");
+		helper.assertError(expression, XbasePackage.Literals.XBLOCK_EXPRESSION, UNREACHABLE_CODE);
 	}
 	
 	@Test public void testInvalidEarlyExit_05() throws Exception {
@@ -542,6 +540,105 @@ public class ValidationTests extends AbstractXbaseTestCase {
 				"	return 3" +
 				"}");
 		helper.assertError(expression, XbasePackage.Literals.XRETURN_EXPRESSION, UNREACHABLE_CODE);
+	}
+	
+	@Test public void testUnreachableCode_05() throws Exception {
+		XExpression expression = expression(
+				"for(; false; ) {}");
+		helper.assertError(expression, XbasePackage.Literals.XBLOCK_EXPRESSION, UNREACHABLE_CODE);
+	}
+	
+	@Test public void testUnreachableCode_06() throws Exception {
+		XExpression expression = expression(
+				"for(val x = false; x; ) {}");
+		helper.assertError(expression, XbasePackage.Literals.XBLOCK_EXPRESSION, UNREACHABLE_CODE);
+	}
+	
+	@Test public void testUnreachableCode_07() throws Exception {
+		XExpression expression = expression(
+				"for(; true; {}) return");
+		helper.assertError(expression, XbasePackage.Literals.XBLOCK_EXPRESSION, UNREACHABLE_CODE);
+	}
+
+	@Test public void testUnreachableCode_08() throws Exception {
+		XExpression expression = expression(
+				"{ while(true) return; 1 }");
+		helper.assertError(expression, XbasePackage.Literals.XNUMBER_LITERAL, UNREACHABLE_CODE);
+	}
+	
+	@Test public void testUnreachableCode_09() throws Exception {
+		XExpression expression = expression(
+				"while(false) return");
+		helper.assertError(expression, XbasePackage.Literals.XRETURN_EXPRESSION, UNREACHABLE_CODE);
+	}
+
+	@Test public void testConstantCondition_01() throws Exception {
+		XExpression expression = expression(
+				"while(false) return");
+		helper.assertWarning(expression, XbasePackage.Literals.XBOOLEAN_LITERAL, CONSTANT_BOOLEAN_CONDITION, "Constant condition is always false");
+	}
+	
+	@Test public void testConstantCondition_02() throws Exception {
+		XExpression expression = expression(
+				"while(1 == 0 + 1) return");
+		helper.assertWarning(expression, XbasePackage.Literals.XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION, "Constant condition is always true");
+	}
+	
+	@Test public void testConstantCondition_03() throws Exception {
+		XExpression expression = expression(
+				"if('' == null) return");
+		helper.assertWarning(expression, XbasePackage.Literals.XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION, "Constant condition is always false");
+	}
+	
+	@Test public void testConstantCondition_04() throws Exception {
+		XExpression expression = expression(
+				"{ val x = false if(!x) return");
+		helper.assertWarning(expression, XbasePackage.Literals.XUNARY_OPERATION, CONSTANT_BOOLEAN_CONDITION, "Constant condition is always true");
+	}
+	
+	@Test public void testConstantCondition_05() throws Exception {
+		XExpression expression = expression(
+				"for(val i = 1; i << 2 == 4;) return");
+		helper.assertWarning(expression, XbasePackage.Literals.XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION, "Constant condition is always true");
+	}
+	
+	@Test public void testConstantCondition_06() throws Exception {
+		XExpression expression = expression(
+				"do ''.toString while (String != null)");
+		helper.assertWarning(expression, XbasePackage.Literals.XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION, "Constant condition is always true");
+	}
+	
+	@Test public void testConstantCondition_07() throws Exception {
+		XExpression expression = expression(
+				"if (newArrayList.empty && false) {}");
+		helper.assertWarning(expression, XbasePackage.Literals.XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION, "Constant condition is always false");
+	}
+	
+	@Test public void testConstantCondition_08() throws Exception {
+		XExpression expression = expression(
+				"if (newArrayList('').empty || 2 == (1 << 1)) {}");
+		helper.assertWarning(expression, XbasePackage.Literals.XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION, "Constant condition is always true");
+	}
+	
+	@Test public void testConstantCondition_09() throws Exception {
+		XExpression expression = expression(
+				"while (newArrayList('').empty || 2 == (1 << 1)) {}");
+		helper.assertWarning(expression, XbasePackage.Literals.XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION, "Constant condition is always true");
+		helper.assertNoErrors(expression);
+	}
+	
+	@Test public void testConstantCondition_10() throws Exception {
+		XExpression expression = expression(
+				"if (String == typeof(String)) {}");
+		helper.assertWarning(expression, XbasePackage.Literals.XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION, "Constant condition is always true");
+		helper.assertNoErrors(expression);
+	}
+	
+	@Test public void testConstantCondition_11() throws Exception {
+		XExpression expression = expression(
+				"for(x: newArrayList('')) { val y = x if (x == y) {}}");
+		helper.assertWarning(expression, XbasePackage.Literals.XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION, "Constant condition is always true");
+		helper.assertNoErrors(expression);
 	}
 	
 	@Test public void testUnreachableCode421508_01() throws Exception {

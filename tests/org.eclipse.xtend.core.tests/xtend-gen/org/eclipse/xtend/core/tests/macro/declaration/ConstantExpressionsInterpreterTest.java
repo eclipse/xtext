@@ -421,6 +421,14 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
   public void testBooleanLiteral() {
     this.evaluatesTo("true", Boolean.valueOf(true));
     this.evaluatesTo("false", Boolean.valueOf(false));
+    this.evaluatesTo("true && true", Boolean.valueOf(true));
+    this.evaluatesTo("true && false", Boolean.valueOf(false));
+    this.evaluatesTo("false && true", Boolean.valueOf(false));
+    this.evaluatesTo("false && false", Boolean.valueOf(false));
+    this.evaluatesTo("true || true", Boolean.valueOf(true));
+    this.evaluatesTo("true || false", Boolean.valueOf(true));
+    this.evaluatesTo("false || true", Boolean.valueOf(true));
+    this.evaluatesTo("false || false", Boolean.valueOf(false));
     this.evaluatesTo("!true", Boolean.valueOf(false));
     this.evaluatesTo("!false", Boolean.valueOf(true));
     this.evaluatesTo("42 > 5", Boolean.valueOf(true));

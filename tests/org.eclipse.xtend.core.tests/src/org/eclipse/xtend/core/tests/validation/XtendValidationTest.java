@@ -2567,4 +2567,109 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				"Bounds mismatch: The type argument <Enum<?>> is not a valid substitute for the bounded type parameter <T extends Enum<T>> of the method valueOf(Class<T>, String)");
 	}
 	
+	@Test public void testConstantConditions_01() throws Exception {
+		XtendFile file = file(
+				"class Test {\n" + 
+				"	val x = \"a\"\n" + 
+				"	val y = x \n" + 
+				"	val z = y\n" + 
+				"	def m() {\n" + 
+				"		val a = z\n" + 
+				"		val b = a\n" + 
+				"		switch f: b {\n" + 
+				"			case (f == 'a'): {\n" + 
+				"			}\n" + 
+				"		}\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertWarning(file, XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION, "always true");
+	}
+	
+	@Test public void testConstantConditions_02() throws Exception {
+		XtendFile file = file(
+				"class Test {\n" + 
+				"	val x = \"a\"\n" + 
+				"	val y = x \n" + 
+				"	val z = y\n" + 
+				"	def m() {\n" + 
+				"		val a = z\n" + 
+				"		val b = a\n" + 
+				"		switch f: b {\n" + 
+				"			case (f == 'b'): {\n" + 
+				"			}\n" + 
+				"		}\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertWarning(file, XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION, "always false");
+	}
+
+	@Test public void testConstantConditions_03() throws Exception {
+		XtendFile file = file(
+				"class Test {\n" + 
+				"	val x = \"a\"\n" + 
+				"	var y = x \n" + 
+				"	val z = y\n" + 
+				"	def m() {\n" + 
+				"		val a = z\n" + 
+				"		val b = a\n" + 
+				"		switch f: b {\n" + 
+				"			case (f == 'b'): {\n" + 
+				"			}\n" + 
+				"		}\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertNoWarnings(file, XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION);
+	}
+	
+	@Test public void testConstantConditions_04() throws Exception {
+		XtendFile file = file(
+				"class Test {\n" + 
+				"	val x = y\n" + 
+				"	val y = x \n" + 
+				"	val z = y\n" + 
+				"	def m() {\n" + 
+				"		val a = z\n" + 
+				"		val b = a\n" + 
+				"		switch f: b {\n" + 
+				"			case (f == 'b'): {\n" + 
+				"			}\n" + 
+				"		}\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertNoWarnings(file, XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION);
+	}
+
+	@Test public void testConstantConditions_05() throws Exception {
+		XtendFile file = file(
+				"class Test {\n" + 
+				"	def m(String p) {\n" + 
+				"		if (p == null) {}\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertNoWarnings(file, XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION);
+	}
+	
+	@Test public void testConstantConditions_06() throws Exception {
+		XtendFile file = file(
+				"class Test {\n" + 
+				"	def m(String p) {\n" + 
+				"		val a = p\n" + 
+				"		val b = p\n" + 
+				"		if (a == b) {}\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertWarning(file, XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION, "always true");
+	}
+	
+	@Test public void testConstantConditions_07() throws Exception {
+		XtendFile file = file(
+				"class Test {\n" + 
+				"	def m(String p) {\n" + 
+				"		val a = p\n" + 
+				"		val b = p\n" + 
+				"		if (a == b && p != b) {}\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertWarning(file, XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION, "always false");
+	}
 }

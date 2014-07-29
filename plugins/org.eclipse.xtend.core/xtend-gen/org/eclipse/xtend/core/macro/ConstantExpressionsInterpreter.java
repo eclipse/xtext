@@ -121,7 +121,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
     ClassFinder _classFinder = new ClassFinder(classLoader);
     LinkedHashSet<XExpression> _newLinkedHashSet = CollectionLiterals.<XExpression>newLinkedHashSet();
     Context _context = new Context(_xifexpression, _classFinder, visibleFeatures, _newLinkedHashSet);
-    final Object result = this.internalEvaluate(expression, _context);
+    final Object result = this.evaluate(expression, _context);
     return result;
   }
   
@@ -279,7 +279,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
       final Function1<XExpression, Object> _function = new Function1<XExpression, Object>() {
         public Object apply(final XExpression it) {
           Context _cloneWithExpectation = ctx.cloneWithExpectation(expectedComponentType);
-          return ConstantExpressionsInterpreter.this.internalEvaluate(it, _cloneWithExpectation);
+          return ConstantExpressionsInterpreter.this.evaluate(it, _cloneWithExpectation);
         }
       };
       final List<Object> elements = ListExtensions.<XExpression, Object>map(_elements, _function);
@@ -554,7 +554,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
     final String featureName = it.getConcreteSyntaxFeatureName();
     try {
       XExpression _memberCallTarget = it.getMemberCallTarget();
-      final Object receiver = this.internalEvaluate(_memberCallTarget, ctx);
+      final Object receiver = this.evaluate(_memberCallTarget, ctx);
       boolean _matched_1 = false;
       if (!_matched_1) {
         if (receiver instanceof JvmTypeReference) {
@@ -673,7 +673,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
         JvmTypeReference _type = field.getType();
         ClassFinder _classFinder_1 = context.getClassFinder();
         final Context ctx = new Context(_type, _classFinder_1, visibleFeatures, set);
-        return this.internalEvaluate(expression, ctx);
+        return this.evaluate(expression, ctx);
       } catch (final Throwable _t) {
         if (_t instanceof ConstantExpressionEvaluationException) {
           final ConstantExpressionEvaluationException e = (ConstantExpressionEvaluationException)_t;

@@ -74,7 +74,7 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 	public def Object evaluate(XExpression expression, JvmTypeReference expectedType) {
 		val classLoader = classLoaderProvider.getClassLoader(expression)
 		val visibleFeatures = findVisibleFeatures(expression)
-		val result = internalEvaluate(expression, 
+		val result = evaluate(expression, 
 			new Context(
 				(if (expectedType instanceof XComputedTypeReference) null else expectedType), 
 				new ClassFinder(classLoader), visibleFeatures,
@@ -155,7 +155,7 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 			}
 		}
 		val elements = it.elements.map[
-			internalEvaluate(ctx.cloneWithExpectation(expectedComponentType))
+			evaluate(ctx.cloneWithExpectation(expectedComponentType))
 		]
 		val Class<?> componentType = if (expectedComponentType != null) {
 				expectedComponentType.type.getJavaType(ctx.classFinder)
@@ -261,7 +261,7 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 		}
 		val featureName = concreteSyntaxFeatureName
 		try {
-			val receiver = internalEvaluate(memberCallTarget, ctx)
+			val receiver = evaluate(memberCallTarget, ctx)
 			switch receiver {
 				JvmTypeReference : {
 					switch type : receiver.type {
@@ -324,7 +324,7 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 			val set = new LinkedHashSet<XExpression>(context.alreadyEvaluating)
 			set.add(expression)
 			val ctx = new Context(field.type, context.classFinder, visibleFeatures, set)
-			return internalEvaluate(expression, ctx)
+			return evaluate(expression, ctx)
 		} catch (ConstantExpressionEvaluationException e) {
 			throw new StackedConstantExpressionEvaluationException(call, field, e)
 		}
