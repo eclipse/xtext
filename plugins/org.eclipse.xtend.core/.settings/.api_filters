@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtend.core" version="2">
-    <resource path="META-INF/MANIFEST.MF">
-        <filter comment="Xtend is not API" id="923795461">
+    <resource path="src/org/eclipse/xtend/core/compiler/batch/XtendBatchCompiler.java" type="org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler">
+        <filter comment="Non-API type usage" id="643842064">
             <message_arguments>
-                <message_argument value="2.7.0"/>
-                <message_argument value="2.6.0"/>
+                <message_argument value="XtendFile"/>
+                <message_argument value="XtendBatchCompiler"/>
+                <message_argument value="getXtendFile(Resource)"/>
             </message_arguments>
         </filter>
     </resource>

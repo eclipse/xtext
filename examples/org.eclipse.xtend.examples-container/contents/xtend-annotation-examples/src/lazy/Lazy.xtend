@@ -38,6 +38,7 @@ class LazyProcessor extends AbstractFieldProcessor {
 			// reassign the initializer expression to be the init method's body
 			// this automatically removes the expression as the field's initializer
 			body = field.initializer
+			primarySourceElement = field
 		]
 
 		// add a getter method which lazily initializes the field
@@ -49,6 +50,7 @@ class LazyProcessor extends AbstractFieldProcessor {
 				  «field.simpleName» = _init«field.simpleName»();
 				return «field.simpleName»;
 			''']
+			primarySourceElement = field
 		]
 	}
 

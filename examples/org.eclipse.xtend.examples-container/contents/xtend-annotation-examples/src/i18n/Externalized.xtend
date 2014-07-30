@@ -62,6 +62,7 @@ class ExternalizedProcessor extends AbstractClassProcessor implements CodeGenera
 							return "«initializer»";
 						}
 					''']
+				primarySourceElement = field
 			]
 		}
 		annotatedClass.declaredFields.forEach[remove]
@@ -72,6 +73,7 @@ class ExternalizedProcessor extends AbstractClassProcessor implements CodeGenera
 			final = true
 			type = ResourceBundle.newTypeReference
 			initializer = ['''ResourceBundle.getBundle("«annotatedClass.qualifiedName»")''']
+			primarySourceElement = annotatedClass
 		]
 
 	}

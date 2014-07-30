@@ -11,7 +11,7 @@ class MyMessages {
 	def static void main(String[] args) {
 		println('''
 			«GREETING("World")»
-			«DATE_AND_LOCATION(new Date(), "Kiel")»			
+			«DATE_AND_LOCATION(new Date(), "Kiel")»
 		''')
 	}
 }
