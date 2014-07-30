@@ -135,15 +135,23 @@ class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
 	}
 	
 	override getPath(Resource res) {
-		val uri = res.resourceSet.URIConverter.normalize(res.URI)
-		if (uri.file) {
-			val workspacePath = new File(projectInformationProvider.get.absoluteFileSystemPath).toURI.path
-			val absolutefilePath = new File(uri.toFileString).toURI.path
-			if (!absolutefilePath.startsWith(workspacePath)) {
-				throw new IllegalStateException("Couldn't determine file path. The file ('"+absolutefilePath+"') doesn't seem to be contained in the workspace ('"+workspacePath+"')")
+		var resourceURI = res.URI
+		if (resourceURI.isRelative) {
+			var asString = resourceURI.toString
+			if (!asString.startsWith('/'))
+				asString = '/' + asString
+			return new Path(asString)
+		} else {
+			val uri = res.resourceSet.URIConverter.normalize(res.URI)
+			if (uri.file) {
+				val workspacePath = new File(projectInformationProvider.get.absoluteFileSystemPath).toURI.path
+				val absolutefilePath = new File(uri.toFileString).toURI.path
+				if (!absolutefilePath.startsWith(workspacePath)) {
+					throw new IllegalStateException("Couldn't determine file path. The file ('"+absolutefilePath+"') doesn't seem to be contained in the workspace ('"+workspacePath+"')")
+				}
+				val filePath = absolutefilePath.substring(workspacePath.length)
+				return new Path('/'+filePath.toString)
 			}
-			val filePath = absolutefilePath.substring(workspacePath.length)
-			return new Path('/'+filePath.toString)
 		}
 	}
 	
