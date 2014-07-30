@@ -36,6 +36,7 @@ public class SerializationErrorTest extends AbstractXtextTests {
 		with(SerializationErrorTestLanguageStandaloneSetup.class);
 	}
 
+	@SuppressWarnings("deprecation")
 	private TreeConstructionReport ser(EObject obj) throws IOException {
 		TokenStringBuffer b = new TokenStringBuffer();
 		TreeConstructionReport r;

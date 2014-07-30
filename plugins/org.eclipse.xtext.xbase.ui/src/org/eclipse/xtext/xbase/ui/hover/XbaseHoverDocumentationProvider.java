@@ -781,6 +781,7 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 		Object classpathURIContext = ((XtextResourceSet) context.eResource().getResourceSet()).getClasspathURIContext();
 		if (classpathURIContext instanceof IJavaProject) {
 			IJavaProject javaProject = (IJavaProject) classpathURIContext;
+			@SuppressWarnings("all")
 			ASTParser parser = ASTParser.newParser(AST.JLS3);
 			parser.setProject(javaProject);
 			@SuppressWarnings("unchecked")
