@@ -2768,4 +2768,27 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				"}");
 		helper.assertWarning(file, XBOOLEAN_LITERAL, CONSTANT_BOOLEAN_CONDITION, "always true");
 	}
+	
+	@Test public void testConstantConditions_17() throws Exception {
+		XtendFile file = file(
+				"class Test {\n" + 
+				"	enum E { VAL }\n" + 
+				"	def m(E e) {\n" + 
+				"		if (E.VAL == e) {}\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertNoWarnings(file, XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION);
+	}
+
+	@Test public void testConstantConditions_18() throws Exception {
+		XtendFile file = file(
+				"class Test {\n" + 
+				"	enum E { VAL }\n" + 
+				"	def m() {\n" + 
+				"		val E e = E.VAL\n" + 
+				"		if (E.VAL == e) {}\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertWarning(file, XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION, "always true");
+	}
 }
