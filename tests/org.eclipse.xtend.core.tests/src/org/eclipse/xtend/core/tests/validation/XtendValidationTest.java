@@ -2682,4 +2682,39 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				"}");
 		helper.assertNoWarnings(file, XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION);
 	}
+	
+	@Test public void testConstantConditions_09() throws Exception {
+		XtendFile file = file(
+				"class Test {\n" + 
+				"	val String state\n" + 
+				"	new() { this.state = null }\n" + 
+				"	def m() {\n" + 
+				"		if (state == null) {}\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertNoWarnings(file, XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION);
+	}
+	
+	@Test public void testConstantConditions_10() throws Exception {
+		XtendFile file = file(
+				"class Test {\n" + 
+						"	val String state\n" + 
+						"	new() { this.state = null }\n" + 
+						"	def m() {\n" + 
+						"		if (state == '') {}\n" + 
+						"	}\n" + 
+				"}");
+		helper.assertNoWarnings(file, XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION);
+	}
+	
+	@Test public void testConstantConditions_11() throws Exception {
+		XtendFile file = file(
+				"class Test {\n" + 
+						"	val String state = 'a'\n" + 
+						"	def m() {\n" + 
+						"		if (state == 'b') {}\n" + 
+						"	}\n" + 
+				"}");
+		helper.assertWarning(file, XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION, "always false");
+	}
 }
