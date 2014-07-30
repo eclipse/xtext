@@ -120,7 +120,7 @@ public class EarlyExitValidator extends AbstractDeclarativeValidator {
 			Optional<BooleanResult> result = getBooleanResult(predicate);
 			if (result.isPresent()) {
 				BooleanResult booleanResult = result.get();
-				markConstantBooleanCondition(predicate, booleanResult);
+				markConstantBooleanCondition(predicate, booleanResult, true);
 				if (booleanResult.isCompileTimeConstant() && !booleanResult.getValue().or(Boolean.TRUE)) {
 					markAsDeadCode(loop.getBody());
 				}
@@ -130,12 +130,14 @@ public class EarlyExitValidator extends AbstractDeclarativeValidator {
 		}
 	}
 
-	protected void markConstantBooleanCondition(XExpression predicate, BooleanResult booleanResult) {
-		Optional<Boolean> value = booleanResult.getValue();
-		if (value.isPresent()) {
-			addIssue("Constant condition is always " + value.get() + ".", predicate, null, IssueCodes.CONSTANT_BOOLEAN_CONDITION);	
-		} else {
-			addIssue("Constant condition.", predicate, null, IssueCodes.CONSTANT_BOOLEAN_CONDITION);
+	protected void markConstantBooleanCondition(XExpression predicate, BooleanResult booleanResult, boolean ignoreBooleanLiteral) {
+		if (!ignoreBooleanLiteral || predicate.eClass() != XbasePackage.Literals.XBOOLEAN_LITERAL) {
+			Optional<Boolean> value = booleanResult.getValue();
+			if (value.isPresent()) {
+				addIssue("Constant condition is always " + value.get() + ".", predicate, null, IssueCodes.CONSTANT_BOOLEAN_CONDITION);
+			} else {
+				addIssue("Constant condition.", predicate, null, IssueCodes.CONSTANT_BOOLEAN_CONDITION);
+			}
 		}
 		
 	}
@@ -148,11 +150,11 @@ public class EarlyExitValidator extends AbstractDeclarativeValidator {
 		return false;
 	}
 	
-	private void validateCondition(XExpression expression) {
+	private void validateCondition(XExpression expression, boolean ignoreBooleanLiteral) {
 		if (!isIgnored(IssueCodes.CONSTANT_BOOLEAN_CONDITION)) {
 			Optional<BooleanResult> result = getBooleanResult(expression);
 			if (result.isPresent()) {
-				markConstantBooleanCondition(expression, result.get());
+				markConstantBooleanCondition(expression, result.get(), ignoreBooleanLiteral);
 			}
 		}
 	}
@@ -187,7 +189,7 @@ public class EarlyExitValidator extends AbstractDeclarativeValidator {
 		} else {
 			XExpression predicate = loop.getPredicate();
 			if (!earlyExitComputer.isEarlyExit(predicate)) {
-				validateCondition(predicate);
+				validateCondition(predicate, true);
 			}
 		}
 	}
@@ -195,7 +197,7 @@ public class EarlyExitValidator extends AbstractDeclarativeValidator {
 	@Check
 	public void checkDeadCode(XIfExpression condition) {
 		if (!earlyExitComputer.isEarlyExit(condition.getIf())) {
-			validateCondition(condition.getIf());
+			validateCondition(condition.getIf(), false);
 		} else {
 			if (!markAsDeadCode(condition.getThen())) {
 				markAsDeadCode(condition.getElse());
@@ -210,7 +212,7 @@ public class EarlyExitValidator extends AbstractDeclarativeValidator {
 			Optional<BooleanResult> result = getBooleanResult(predicate);
 			if (result.isPresent()) {
 				BooleanResult booleanResult = result.get();
-				markConstantBooleanCondition(predicate, booleanResult);
+				markConstantBooleanCondition(predicate, booleanResult, false);
 				if (booleanResult.isCompileTimeConstant() && !booleanResult.getValue().or(Boolean.TRUE)) {
 					markAsDeadCode(loop.getEachExpression());
 					return;
@@ -239,7 +241,7 @@ public class EarlyExitValidator extends AbstractDeclarativeValidator {
 			XCasePart casePart = cases.get(i);
 			XExpression caseExpression = casePart.getCase();
 			if (!earlyExitComputer.isEarlyExit(caseExpression)) {
-				validateCondition(caseExpression);
+				validateCondition(caseExpression, false);
 			} else if (!markAsDeadCode(casePart.getThen())) {
 				if (casePart.getTypeGuard() == null) { 
 					i = markAsDeadCode(cases, casePart, i, size);

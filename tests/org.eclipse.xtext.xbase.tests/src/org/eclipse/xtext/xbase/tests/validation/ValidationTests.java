@@ -570,12 +570,13 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		XExpression expression = expression(
 				"while(false) return");
 		helper.assertError(expression, XbasePackage.Literals.XRETURN_EXPRESSION, UNREACHABLE_CODE);
+		helper.assertNoWarnings(expression, XbasePackage.Literals.XBOOLEAN_LITERAL, CONSTANT_BOOLEAN_CONDITION);
 	}
 
 	@Test public void testConstantCondition_01() throws Exception {
 		XExpression expression = expression(
-				"while(false) return");
-		helper.assertWarning(expression, XbasePackage.Literals.XBOOLEAN_LITERAL, CONSTANT_BOOLEAN_CONDITION, "Constant condition is always false");
+				"while(true && false) return");
+		helper.assertWarning(expression, XbasePackage.Literals.XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION, "Constant condition is always false");
 	}
 	
 	@Test public void testConstantCondition_02() throws Exception {
