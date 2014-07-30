@@ -5,7 +5,7 @@
         <cq:documentation xmlns="http://www.w3.org/1999/xhtml">fetch xpand/xtend from TP</cq:documentation>
     </cq:advisorNode>
     <cq:advisorNode namePattern="^org\.eclipse\.xtext\.releng$" useMaterialization="false" useWorkspace="false"/>
-    <cq:advisorNode namePattern="^com\.google\.guava$" filter="(ECLIPSE.TARGET.ALIAS=Latest)" componentType="osgi.bundle" versionOverride="15.0.0"/>
+    <cq:advisorNode namePattern="^com\.google\.guava$" filter="(ECLIPSE.TARGET.ALIAS=Latest)" componentType="osgi.bundle" versionOverride="15.9.9"/>
     <cq:advisorNode namePattern="^com\.google\.guava\.source$" filter="(ECLIPSE.TARGET.ALIAS=Latest)" skipComponent="true"/>
     <cq:advisorNode namePattern="^org\.eclipse\.xt.*$" useTargetPlatform="false"/>
 </cq:componentQuery>
