@@ -77,6 +77,8 @@ public class Validator {
 							case INFO:
 								issues.addInfo(issue.getMessage(), issue);
 								break;
+							case IGNORE:
+								break;
 						}
 					}
 				}

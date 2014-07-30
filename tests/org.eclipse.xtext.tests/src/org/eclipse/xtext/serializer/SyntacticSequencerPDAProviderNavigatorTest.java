@@ -69,9 +69,9 @@ public class SyntacticSequencerPDAProviderNavigatorTest extends AbstractXtextTes
 		for (ISynTransition trans : start.getOutTransitions()) {
 			if (fromMatches && trans.getTarget().toString().equals(toAbsorber))
 				return trans;
-			trans = findTransition(trans.getTarget(), fromAbsorber, toAbsorber, visited);
-			if (trans != null)
-				return trans;
+			ISynTransition result = findTransition(trans.getTarget(), fromAbsorber, toAbsorber, visited);
+			if (result != null)
+				return result;
 		}
 		return null;
 	}
