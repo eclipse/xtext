@@ -985,6 +985,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			JvmField field = (JvmField) container;
 			boolean staticField = field.isStatic();
 			JvmDeclaredType declaredType = field.getDeclaringType();
+			if (declaredType == null) {
+				return;
+			}
 			Collection<JvmField> illegalFields = Sets.newHashSet();
 			for(int i = declaredType.getMembers().size() - 1; i>=0; i--) {
 				JvmMember member = declaredType.getMembers().get(i);
