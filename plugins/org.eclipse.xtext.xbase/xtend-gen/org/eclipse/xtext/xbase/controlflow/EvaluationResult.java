@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.lib.annotations.Data;
+import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.XTypeLiteral;
@@ -99,6 +100,18 @@ class EvaluationResult {
     return Boolean.valueOf(Objects.equal(myValue, otherValue));
   }
   
+  private Object _equalValue(final JvmEnumerationLiteral myValue, final JvmIdentifiableElement otherValue) {
+    return EvaluationResult.NOT_A_CONSTANT.value;
+  }
+  
+  private Object _equalValue(final JvmIdentifiableElement myValue, final JvmEnumerationLiteral otherValue) {
+    return EvaluationResult.NOT_A_CONSTANT.value;
+  }
+  
+  private Object _equalValue(final JvmEnumerationLiteral myValue, final JvmEnumerationLiteral otherValue) {
+    return Boolean.valueOf(Objects.equal(myValue, otherValue));
+  }
+  
   private Object _equalValue(final JvmType myValue, final Void otherValue) {
     return Boolean.valueOf(false);
   }
@@ -147,67 +160,76 @@ class EvaluationResult {
     return Boolean.valueOf(_and);
   }
   
-  private Object equalValue(final Object myValue, final Object otherTypeLiteral) {
-    if (myValue instanceof JvmType
-         && otherTypeLiteral instanceof XTypeLiteral) {
-      return _equalValue((JvmType)myValue, (XTypeLiteral)otherTypeLiteral);
-    } else if (myValue instanceof XTypeLiteral
-         && otherTypeLiteral instanceof JvmType) {
-      return _equalValue((XTypeLiteral)myValue, (JvmType)otherTypeLiteral);
-    } else if (myValue instanceof XTypeLiteral
-         && otherTypeLiteral instanceof XTypeLiteral) {
-      return _equalValue((XTypeLiteral)myValue, (XTypeLiteral)otherTypeLiteral);
+  private Object equalValue(final Object myValue, final Object otherValue) {
+    if (myValue instanceof JvmEnumerationLiteral
+         && otherValue instanceof JvmEnumerationLiteral) {
+      return _equalValue((JvmEnumerationLiteral)myValue, (JvmEnumerationLiteral)otherValue);
+    } else if (myValue instanceof JvmEnumerationLiteral
+         && otherValue instanceof JvmIdentifiableElement) {
+      return _equalValue((JvmEnumerationLiteral)myValue, (JvmIdentifiableElement)otherValue);
     } else if (myValue instanceof JvmType
-         && otherTypeLiteral == null) {
+         && otherValue instanceof XTypeLiteral) {
+      return _equalValue((JvmType)myValue, (XTypeLiteral)otherValue);
+    } else if (myValue instanceof XTypeLiteral
+         && otherValue instanceof JvmType) {
+      return _equalValue((XTypeLiteral)myValue, (JvmType)otherValue);
+    } else if (myValue instanceof XTypeLiteral
+         && otherValue instanceof XTypeLiteral) {
+      return _equalValue((XTypeLiteral)myValue, (XTypeLiteral)otherValue);
+    } else if (myValue instanceof JvmType
+         && otherValue == null) {
       return _equalValue((JvmType)myValue, (Void)null);
-    } else if (myValue instanceof List
-         && otherTypeLiteral instanceof List) {
-      return _equalValue((List<?>)myValue, (List<?>)otherTypeLiteral);
     } else if (myValue instanceof JvmIdentifiableElement
-         && otherTypeLiteral instanceof JvmIdentifiableElement) {
-      return _equalValue((JvmIdentifiableElement)myValue, (JvmIdentifiableElement)otherTypeLiteral);
+         && otherValue instanceof JvmEnumerationLiteral) {
+      return _equalValue((JvmIdentifiableElement)myValue, (JvmEnumerationLiteral)otherValue);
     } else if (myValue instanceof List
-         && otherTypeLiteral == null) {
+         && otherValue instanceof List) {
+      return _equalValue((List<?>)myValue, (List<?>)otherValue);
+    } else if (myValue instanceof JvmIdentifiableElement
+         && otherValue instanceof JvmIdentifiableElement) {
+      return _equalValue((JvmIdentifiableElement)myValue, (JvmIdentifiableElement)otherValue);
+    } else if (myValue instanceof List
+         && otherValue == null) {
       return _equalValue((List<?>)myValue, (Void)null);
     } else if (myValue instanceof JvmIdentifiableElement
-         && otherTypeLiteral == null) {
+         && otherValue == null) {
       return _equalValue((JvmIdentifiableElement)myValue, (Void)null);
     } else if (myValue instanceof List
-         && otherTypeLiteral != null) {
-      return _equalValue((List<?>)myValue, otherTypeLiteral);
+         && otherValue != null) {
+      return _equalValue((List<?>)myValue, otherValue);
     } else if (myValue instanceof JvmIdentifiableElement
-         && otherTypeLiteral != null) {
-      return _equalValue((JvmIdentifiableElement)myValue, otherTypeLiteral);
+         && otherValue != null) {
+      return _equalValue((JvmIdentifiableElement)myValue, otherValue);
     } else if (myValue == null
-         && otherTypeLiteral instanceof JvmType) {
-      return _equalValue((Void)null, (JvmType)otherTypeLiteral);
+         && otherValue instanceof JvmType) {
+      return _equalValue((Void)null, (JvmType)otherValue);
     } else if (myValue == null
-         && otherTypeLiteral instanceof List) {
-      return _equalValue((Void)null, (List<?>)otherTypeLiteral);
+         && otherValue instanceof List) {
+      return _equalValue((Void)null, (List<?>)otherValue);
     } else if (myValue == null
-         && otherTypeLiteral instanceof JvmIdentifiableElement) {
-      return _equalValue((Void)null, (JvmIdentifiableElement)otherTypeLiteral);
+         && otherValue instanceof JvmIdentifiableElement) {
+      return _equalValue((Void)null, (JvmIdentifiableElement)otherValue);
     } else if (myValue == null
-         && otherTypeLiteral == null) {
+         && otherValue == null) {
       return _equalValue((Void)null, (Void)null);
     } else if (myValue == null
-         && otherTypeLiteral != null) {
-      return _equalValue((Void)null, otherTypeLiteral);
+         && otherValue != null) {
+      return _equalValue((Void)null, otherValue);
     } else if (myValue != null
-         && otherTypeLiteral instanceof List) {
-      return _equalValue(myValue, (List<?>)otherTypeLiteral);
+         && otherValue instanceof List) {
+      return _equalValue(myValue, (List<?>)otherValue);
     } else if (myValue != null
-         && otherTypeLiteral instanceof JvmIdentifiableElement) {
-      return _equalValue(myValue, (JvmIdentifiableElement)otherTypeLiteral);
+         && otherValue instanceof JvmIdentifiableElement) {
+      return _equalValue(myValue, (JvmIdentifiableElement)otherValue);
     } else if (myValue != null
-         && otherTypeLiteral == null) {
+         && otherValue == null) {
       return _equalValue(myValue, (Void)null);
     } else if (myValue != null
-         && otherTypeLiteral != null) {
-      return _equalValue(myValue, otherTypeLiteral);
+         && otherValue != null) {
+      return _equalValue(myValue, otherValue);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(myValue, otherTypeLiteral).toString());
+        Arrays.<Object>asList(myValue, otherValue).toString());
     }
   }
   
