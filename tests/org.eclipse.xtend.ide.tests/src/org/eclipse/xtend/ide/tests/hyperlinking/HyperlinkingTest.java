@@ -10,6 +10,7 @@ package org.eclipse.xtend.ide.tests.hyperlinking;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
+import org.eclipse.xtext.common.types.xtext.ui.JdtHyperlink;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.hyperlinking.XtextHyperlink;
@@ -37,13 +38,15 @@ public class HyperlinkingTest extends AbstractXtendUITestCase {
 				+ "}";
 		XtextResource resource = (XtextResource) testHelper.xtendFile("Foo", modelAsString).eResource();
 		IHyperlink[] hyperlinks = hyperlinkHelper.createHyperlinksByOffset(resource, modelAsString.indexOf("foo"), true);
-		assertEquals(3, hyperlinks.length);
+		assertEquals(4, hyperlinks.length);
 		assertEquals("foo(Number) : Object", hyperlinks[0].getHyperlinkText());
 		assertTrue(((XtextHyperlink)hyperlinks[0]).getURI().isPlatformResource());
 		assertEquals("foo(String) : Object", hyperlinks[1].getHyperlinkText());
 		assertTrue(((XtextHyperlink)hyperlinks[1]).getURI().isPlatformResource());
 		assertEquals("foo(Object) : Object", hyperlinks[2].getHyperlinkText());
 		assertTrue(((XtextHyperlink)hyperlinks[2]).getURI().isPlatformResource());
+		assertEquals("Open Return Type - Object", hyperlinks[3].getHyperlinkText());
+		assertEquals("Object", ((JdtHyperlink) hyperlinks[3]).getJavaElement().getElementName());
 	}
 	
 	@Test public void testPlainMethod() throws Exception {
@@ -53,9 +56,11 @@ public class HyperlinkingTest extends AbstractXtendUITestCase {
 				+ "}";
 		XtextResource resource = (XtextResource) testHelper.xtendFile("Foo", modelAsString).eResource();
 		IHyperlink[] hyperlinks = hyperlinkHelper.createHyperlinksByOffset(resource, modelAsString.indexOf("foo"), true);
-		assertEquals(1, hyperlinks.length);
+		assertEquals(2, hyperlinks.length);
 		assertEquals("foo() : Object", hyperlinks[0].getHyperlinkText());
-		assertTrue(((XtextHyperlink)hyperlinks[0]).getURI().isPlatformResource());
+		assertTrue(((XtextHyperlink) hyperlinks[0]).getURI().isPlatformResource());
+		assertEquals("Open Return Type - Object", hyperlinks[1].getHyperlinkText());
+		assertEquals("Object", ((JdtHyperlink) hyperlinks[1]).getJavaElement().getElementName());
 	}
 	
 	@Test public void testConstructor() throws Exception {
@@ -178,5 +183,40 @@ public class HyperlinkingTest extends AbstractXtendUITestCase {
 		assertEquals("String", hyperlinks[0].getHyperlinkText());
 		assertEquals(modelAsString.indexOf("java"), hyperlinks[0].getHyperlinkRegion().getOffset());
 		assertEquals("java::lang::String".length(), hyperlinks[0].getHyperlinkRegion().getLength());
+	}
+	
+	@Test public void testReturnTypeLabel() throws Exception {
+		String modelAsString = "class Baz {def Baz meth(Baz baz, String str) { var vv='' x = baz j = str vv=j x.meth(baz,str) } var x = new Baz var j = '' }";
+		XtextResource resource = (XtextResource) testHelper.xtendFile("Baz", modelAsString).eResource();
+		int indexOf_x_FieldRef = modelAsString.indexOf("x");
+		IHyperlink[] hyperlinks = hyperlinkHelper.createHyperlinksByOffset(resource, indexOf_x_FieldRef, true);
+		assertEquals(2, hyperlinks.length);
+		assertEquals("x : Baz", hyperlinks[0].getHyperlinkText());
+		assertEquals("Open Field Type - Baz", hyperlinks[1].getHyperlinkText());
+		
+		int indexOf_Baz_ParamRef = modelAsString.indexOf("baz", indexOf_x_FieldRef);
+		hyperlinks = hyperlinkHelper.createHyperlinksByOffset(resource, indexOf_Baz_ParamRef, true);
+		assertEquals(2, hyperlinks.length);
+		assertEquals("baz", hyperlinks[0].getHyperlinkText());
+		assertEquals("Open Parameter Type - Baz", hyperlinks[1].getHyperlinkText());
+		
+		int indexOf_j_FieldRef = modelAsString.indexOf("j", indexOf_Baz_ParamRef);
+		hyperlinks = hyperlinkHelper.createHyperlinksByOffset(resource, indexOf_j_FieldRef, true);
+		assertEquals(2, hyperlinks.length);
+		assertEquals("j : String", hyperlinks[0].getHyperlinkText());
+		assertEquals("Open Field Type - String", hyperlinks[1].getHyperlinkText());
+		assertEquals("String", ((JdtHyperlink) hyperlinks[1]).getJavaElement().getElementName());
+
+		int indexOf_vv_VarRef = modelAsString.indexOf("vv", indexOf_j_FieldRef);
+		hyperlinks = hyperlinkHelper.createHyperlinksByOffset(resource, indexOf_vv_VarRef, true);
+		assertEquals(2, hyperlinks.length);
+		assertEquals("String vv", hyperlinks[0].getHyperlinkText());
+		assertEquals("Open Variable Type - String", hyperlinks[1].getHyperlinkText());
+		
+		int indexOf_meth_MethodeCall = modelAsString.indexOf("meth", indexOf_vv_VarRef);
+		hyperlinks = hyperlinkHelper.createHyperlinksByOffset(resource, indexOf_meth_MethodeCall, true);
+		assertEquals(2, hyperlinks.length);
+		assertEquals("meth(Baz, String) : Baz", hyperlinks[0].getHyperlinkText());
+		assertEquals("Open Return Type - Baz", hyperlinks[1].getHyperlinkText());
 	}
 }
