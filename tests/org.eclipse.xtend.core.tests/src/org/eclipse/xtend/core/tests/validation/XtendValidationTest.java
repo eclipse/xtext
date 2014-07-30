@@ -2682,4 +2682,90 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				"}");
 		helper.assertNoWarnings(file, XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION);
 	}
+	
+	@Test public void testConstantConditions_09() throws Exception {
+		XtendFile file = file(
+				"class Test {\n" + 
+				"	val String state\n" + 
+				"	new() { this.state = null }\n" + 
+				"	def m() {\n" + 
+				"		if (state == null) {}\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertNoWarnings(file, XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION);
+	}
+	
+	@Test public void testConstantConditions_10() throws Exception {
+		XtendFile file = file(
+				"class Test {\n" + 
+				"	val String state\n" + 
+				"	new() { this.state = null }\n" + 
+				"	def m() {\n" + 
+				"		if (state == '') {}\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertNoWarnings(file, XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION);
+	}
+	
+	@Test public void testConstantConditions_11() throws Exception {
+		XtendFile file = file(
+				"class Test {\n" + 
+				"	val String state = 'a'\n" + 
+				"	def m() {\n" + 
+				"		if (state == 'b') {}\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertWarning(file, XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION, "always false");
+	}
+	
+	@Test public void testConstantConditions_12() throws Exception {
+		XtendFile file = file(
+				"class Test {\n" + 
+				"	val String state = 'a'\n" + 
+				"	def m(String p) {\n" + 
+				"		if (state == p) {}\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertNoWarnings(file, XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION);
+	}
+	
+	@Test public void testConstantConditions_13() throws Exception {
+		XtendFile file = file(
+				"class Test {\n" + 
+				"	def m() {\n" + 
+				"		while (true) { /* some code with exception control flow */ }\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertNoWarnings(file, XBOOLEAN_LITERAL, CONSTANT_BOOLEAN_CONDITION);
+	}
+	
+	@Test public void testConstantConditions_14() throws Exception {
+		XtendFile file = file(
+				"class Test {\n" + 
+				"	def m() {\n" + 
+				"		do {} while (true)\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertNoWarnings(file, XBOOLEAN_LITERAL, CONSTANT_BOOLEAN_CONDITION);
+	}
+
+	@Test public void testConstantConditions_15() throws Exception {
+		XtendFile file = file(
+				"class Test {\n" + 
+				"	def m() {\n" + 
+				"		for (;true;) {}\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertWarning(file, XBOOLEAN_LITERAL, CONSTANT_BOOLEAN_CONDITION, "always true");
+	}
+	
+	@Test public void testConstantConditions_16() throws Exception {
+		XtendFile file = file(
+				"class Test {\n" + 
+				"	def m() {\n" + 
+				"		if (true) {}\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertWarning(file, XBOOLEAN_LITERAL, CONSTANT_BOOLEAN_CONDITION, "always true");
+	}
 }
