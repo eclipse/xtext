@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.controlflow;
 
 import com.google.common.base.Objects;
 import java.util.Arrays;
+import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -42,15 +43,23 @@ class EvaluationResult {
     return Boolean.valueOf(Objects.equal(myValue, otherValue));
   }
   
-  private Object _equalValue(final Object myValue, final JvmIdentifiableElement otherValue) {
-    return EvaluationResult.NOT_A_CONSTANT.value;
-  }
-  
   private Object _equalValue(final Void myValue, final Object otherValue) {
     return Boolean.valueOf(false);
   }
   
+  private Object _equalValue(final Object myValue, final JvmIdentifiableElement otherValue) {
+    return EvaluationResult.NOT_A_CONSTANT.value;
+  }
+  
   private Object _equalValue(final Void myValue, final JvmIdentifiableElement otherValue) {
+    return EvaluationResult.NOT_A_CONSTANT.value;
+  }
+  
+  private Object _equalValue(final Object myValue, final List<?> otherValue) {
+    return EvaluationResult.NOT_A_CONSTANT.value;
+  }
+  
+  private Object _equalValue(final Void myValue, final List<?> otherValue) {
     return EvaluationResult.NOT_A_CONSTANT.value;
   }
   
@@ -72,6 +81,18 @@ class EvaluationResult {
   
   private Object _equalValue(final JvmIdentifiableElement myValue, final Object otherValue) {
     return EvaluationResult.NOT_A_CONSTANT.value;
+  }
+  
+  private Object _equalValue(final List<?> myValue, final Void otherValue) {
+    return EvaluationResult.NOT_A_CONSTANT.value;
+  }
+  
+  private Object _equalValue(final List<?> myValue, final Object otherValue) {
+    return EvaluationResult.NOT_A_CONSTANT.value;
+  }
+  
+  private Object _equalValue(final List<?> myValue, final List<?> otherValue) {
+    return Boolean.valueOf(Objects.equal(myValue, otherValue));
   }
   
   private Object _equalValue(final JvmIdentifiableElement myValue, final JvmIdentifiableElement otherValue) {
@@ -139,18 +160,30 @@ class EvaluationResult {
     } else if (myValue instanceof JvmType
          && otherTypeLiteral == null) {
       return _equalValue((JvmType)myValue, (Void)null);
+    } else if (myValue instanceof List
+         && otherTypeLiteral instanceof List) {
+      return _equalValue((List<?>)myValue, (List<?>)otherTypeLiteral);
     } else if (myValue instanceof JvmIdentifiableElement
          && otherTypeLiteral instanceof JvmIdentifiableElement) {
       return _equalValue((JvmIdentifiableElement)myValue, (JvmIdentifiableElement)otherTypeLiteral);
+    } else if (myValue instanceof List
+         && otherTypeLiteral == null) {
+      return _equalValue((List<?>)myValue, (Void)null);
     } else if (myValue instanceof JvmIdentifiableElement
          && otherTypeLiteral == null) {
       return _equalValue((JvmIdentifiableElement)myValue, (Void)null);
+    } else if (myValue instanceof List
+         && otherTypeLiteral != null) {
+      return _equalValue((List<?>)myValue, otherTypeLiteral);
     } else if (myValue instanceof JvmIdentifiableElement
          && otherTypeLiteral != null) {
       return _equalValue((JvmIdentifiableElement)myValue, otherTypeLiteral);
     } else if (myValue == null
          && otherTypeLiteral instanceof JvmType) {
       return _equalValue((Void)null, (JvmType)otherTypeLiteral);
+    } else if (myValue == null
+         && otherTypeLiteral instanceof List) {
+      return _equalValue((Void)null, (List<?>)otherTypeLiteral);
     } else if (myValue == null
          && otherTypeLiteral instanceof JvmIdentifiableElement) {
       return _equalValue((Void)null, (JvmIdentifiableElement)otherTypeLiteral);
@@ -160,6 +193,9 @@ class EvaluationResult {
     } else if (myValue == null
          && otherTypeLiteral != null) {
       return _equalValue((Void)null, otherTypeLiteral);
+    } else if (myValue != null
+         && otherTypeLiteral instanceof List) {
+      return _equalValue(myValue, (List<?>)otherTypeLiteral);
     } else if (myValue != null
          && otherTypeLiteral instanceof JvmIdentifiableElement) {
       return _equalValue(myValue, (JvmIdentifiableElement)otherTypeLiteral);
