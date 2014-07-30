@@ -1,10 +1,518 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtend.core" version="2">
+    <resource path="META-INF/MANIFEST.MF">
+        <filter comment="Xtend is not API" id="923795461">
+            <message_arguments>
+                <message_argument value="2.7.0"/>
+                <message_argument value="2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtend/core/parser/XtendNodeModelBuilder.java" type="org.eclipse.xtend.core.parser.XtendNodeModelBuilder">
         <filter comment="Customizing necessary" id="571473929">
             <message_arguments>
                 <message_argument value="NodeModelBuilder"/>
                 <message_argument value="XtendNodeModelBuilder"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/CodeGenerationContextImpl.java" type="org.eclipse.xtend.core.macro.CodeGenerationContextImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="CodeGenerationContext"/>
+                <message_argument value="CodeGenerationContextImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/RegisterGlobalsContextImpl.java" type="org.eclipse.xtend.core.macro.RegisterGlobalsContextImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="RegisterGlobalsContext"/>
+                <message_argument value="RegisterGlobalsContextImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/TransformationContextImpl.java" type="org.eclipse.xtend.core.macro.TransformationContextImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="TransformationContext"/>
+                <message_argument value="TransformationContextImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/ValidationContextImpl.java" type="org.eclipse.xtend.core.macro.ValidationContextImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="ValidationContext"/>
+                <message_argument value="ValidationContextImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/AbstractNamedElementImpl.java" type="org.eclipse.xtend.core.macro.declaration.AbstractNamedElementImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="NamedElement"/>
+                <message_argument value="AbstractNamedElementImpl&lt;T&gt;"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/AnnotationReferenceBuildContextImpl.java" type="org.eclipse.xtend.core.macro.declaration.AnnotationReferenceBuildContextImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="AnnotationReferenceBuildContext"/>
+                <message_argument value="AnnotationReferenceBuildContextImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/AnnotationReferenceProviderImpl.java" type="org.eclipse.xtend.core.macro.declaration.AnnotationReferenceProviderImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="AnnotationReferenceProvider"/>
+                <message_argument value="AnnotationReferenceProviderImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/AssociatorImpl.java" type="org.eclipse.xtend.core.macro.declaration.AssociatorImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="Associator"/>
+                <message_argument value="AssociatorImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/ChangeListenerAddingFileSystemSupport.java" type="org.eclipse.xtend.core.macro.declaration.ChangeListenerAddingFileSystemSupport">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="MutableFileSystemSupport"/>
+                <message_argument value="ChangeListenerAddingFileSystemSupport"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/CompilationUnitImpl.java" type="org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="CompilationUnit"/>
+                <message_argument value="CompilationUnitImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/ExpressionImpl.java" type="org.eclipse.xtend.core.macro.declaration.ExpressionImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="Expression"/>
+                <message_argument value="ExpressionImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/InferredTypeReferenceImpl.java" type="org.eclipse.xtend.core.macro.declaration.InferredTypeReferenceImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="TypeReference"/>
+                <message_argument value="InferredTypeReferenceImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/JvmAnnotationReferenceImpl.java" type="org.eclipse.xtend.core.macro.declaration.JvmAnnotationReferenceImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="AnnotationReference"/>
+                <message_argument value="JvmAnnotationReferenceImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/JvmAnnotationTypeDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.JvmAnnotationTypeDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="AnnotationTypeDeclaration"/>
+                <message_argument value="JvmAnnotationTypeDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/JvmAnnotationTypeElementDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.JvmAnnotationTypeElementDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="AnnotationTypeElementDeclaration"/>
+                <message_argument value="JvmAnnotationTypeElementDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/JvmClassDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.JvmClassDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="ClassDeclaration"/>
+                <message_argument value="JvmClassDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/JvmConstructorDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.JvmConstructorDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="ConstructorDeclaration"/>
+                <message_argument value="JvmConstructorDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/JvmEnumerationTypeDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.JvmEnumerationTypeDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="EnumerationTypeDeclaration"/>
+                <message_argument value="JvmEnumerationTypeDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/JvmEnumerationValueDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.JvmEnumerationValueDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="EnumerationValueDeclaration"/>
+                <message_argument value="JvmEnumerationValueDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/JvmFieldDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.JvmFieldDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="FieldDeclaration"/>
+                <message_argument value="JvmFieldDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/JvmInterfaceDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.JvmInterfaceDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="InterfaceDeclaration"/>
+                <message_argument value="JvmInterfaceDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/JvmMemberDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.JvmMemberDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="MemberDeclaration"/>
+                <message_argument value="JvmMemberDeclarationImpl&lt;T&gt;"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/JvmMethodDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.JvmMethodDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="MethodDeclaration"/>
+                <message_argument value="JvmMethodDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/JvmParameterDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.JvmParameterDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="ParameterDeclaration"/>
+                <message_argument value="JvmParameterDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/JvmTypeParameterDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.JvmTypeParameterDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="AnnotationTarget"/>
+                <message_argument value="JvmTypeParameterDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="TypeParameterDeclaration"/>
+                <message_argument value="JvmTypeParameterDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/MutableJvmAnnotationTypeDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.MutableJvmAnnotationTypeDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="MutableAnnotationTypeDeclaration"/>
+                <message_argument value="MutableJvmAnnotationTypeDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/MutableJvmAnnotationTypeElementDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.MutableJvmAnnotationTypeElementDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="MutableAnnotationTypeElementDeclaration"/>
+                <message_argument value="MutableJvmAnnotationTypeElementDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/MutableJvmClassDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.MutableJvmClassDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="MutableClassDeclaration"/>
+                <message_argument value="MutableJvmClassDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/MutableJvmConstructorDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.MutableJvmConstructorDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="MutableConstructorDeclaration"/>
+                <message_argument value="MutableJvmConstructorDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/MutableJvmEnumerationTypeDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.MutableJvmEnumerationTypeDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="MutableEnumerationTypeDeclaration"/>
+                <message_argument value="MutableJvmEnumerationTypeDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/MutableJvmEnumerationValueDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.MutableJvmEnumerationValueDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="MutableEnumerationValueDeclaration"/>
+                <message_argument value="MutableJvmEnumerationValueDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/MutableJvmFieldDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.MutableJvmFieldDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="MutableFieldDeclaration"/>
+                <message_argument value="MutableJvmFieldDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/MutableJvmInterfaceDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.MutableJvmInterfaceDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="MutableInterfaceDeclaration"/>
+                <message_argument value="MutableJvmInterfaceDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/MutableJvmMethodDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.MutableJvmMethodDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="MutableMethodDeclaration"/>
+                <message_argument value="MutableJvmMethodDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/MutableJvmParameterDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.MutableJvmParameterDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="MutableParameterDeclaration"/>
+                <message_argument value="MutableJvmParameterDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/MutableJvmTypeParameterDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.MutableJvmTypeParameterDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="MutableAnnotationTarget"/>
+                <message_argument value="MutableJvmTypeParameterDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="MutableTypeParameterDeclaration"/>
+                <message_argument value="MutableJvmTypeParameterDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/PrimitiveTypeImpl.java" type="org.eclipse.xtend.core.macro.declaration.PrimitiveTypeImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="PrimitiveType"/>
+                <message_argument value="PrimitiveTypeImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/ProblemImpl.java" type="org.eclipse.xtend.core.macro.declaration.ProblemImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="Problem"/>
+                <message_argument value="ProblemImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/ProblemSupportImpl.java" type="org.eclipse.xtend.core.macro.declaration.ProblemSupportImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="ProblemSupport"/>
+                <message_argument value="ProblemSupportImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/TracabilityImpl.java" type="org.eclipse.xtend.core.macro.declaration.TracabilityImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="Tracability"/>
+                <message_argument value="TracabilityImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/TypeLookupImpl.java" type="org.eclipse.xtend.core.macro.declaration.TypeLookupImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="TypeLookup"/>
+                <message_argument value="TypeLookupImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/TypeParameterDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.TypeParameterDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="TypeParameterDeclaration"/>
+                <message_argument value="TypeParameterDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/TypeReferenceImpl.java" type="org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="TypeReference"/>
+                <message_argument value="TypeReferenceImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/TypeReferenceProviderImpl.java" type="org.eclipse.xtend.core.macro.declaration.TypeReferenceProviderImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="TypeReferenceProvider"/>
+                <message_argument value="TypeReferenceProviderImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/UnknownType.java" type="org.eclipse.xtend.core.macro.declaration.UnknownType">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="Type"/>
+                <message_argument value="UnknownType"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/VoidTypeImpl.java" type="org.eclipse.xtend.core.macro.declaration.VoidTypeImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="VoidType"/>
+                <message_argument value="VoidTypeImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/XtendAnnotationReferenceImpl.java" type="org.eclipse.xtend.core.macro.declaration.XtendAnnotationReferenceImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="AnnotationReference"/>
+                <message_argument value="XtendAnnotationReferenceImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/XtendAnnotationTargetImpl.java" type="org.eclipse.xtend.core.macro.declaration.XtendAnnotationTargetImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="AnnotationTarget"/>
+                <message_argument value="XtendAnnotationTargetImpl&lt;T&gt;"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/XtendAnnotationTypeDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.XtendAnnotationTypeDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="AnnotationTypeDeclaration"/>
+                <message_argument value="XtendAnnotationTypeDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/XtendAnnotationTypeElementDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.XtendAnnotationTypeElementDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="AnnotationTypeElementDeclaration"/>
+                <message_argument value="XtendAnnotationTypeElementDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/XtendClassDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.XtendClassDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="ClassDeclaration"/>
+                <message_argument value="XtendClassDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/XtendConstructorDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.XtendConstructorDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="ConstructorDeclaration"/>
+                <message_argument value="XtendConstructorDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/XtendEnumerationDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.XtendEnumerationDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="EnumerationTypeDeclaration"/>
+                <message_argument value="XtendEnumerationDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/XtendEnumerationValueDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.XtendEnumerationValueDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="EnumerationValueDeclaration"/>
+                <message_argument value="XtendEnumerationValueDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/XtendFieldDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.XtendFieldDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="FieldDeclaration"/>
+                <message_argument value="XtendFieldDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/XtendInterfaceDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.XtendInterfaceDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="InterfaceDeclaration"/>
+                <message_argument value="XtendInterfaceDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/XtendMemberDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.XtendMemberDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="MemberDeclaration"/>
+                <message_argument value="XtendMemberDeclarationImpl&lt;T&gt;"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/XtendMethodDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.XtendMethodDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="MethodDeclaration"/>
+                <message_argument value="XtendMethodDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/XtendParameterDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.XtendParameterDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="ParameterDeclaration"/>
+                <message_argument value="XtendParameterDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/XtendTypeDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.XtendTypeDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="TypeDeclaration"/>
+                <message_argument value="XtendTypeDeclarationImpl&lt;T&gt;"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/XtendTypeParameterDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.XtendTypeParameterDeclarationImpl">
+        <filter comment="Non-API type reference" id="574619656">
+            <message_arguments>
+                <message_argument value="TypeParameterDeclaration"/>
+                <message_argument value="XtendTypeParameterDeclarationImpl"/>
             </message_arguments>
         </filter>
     </resource>

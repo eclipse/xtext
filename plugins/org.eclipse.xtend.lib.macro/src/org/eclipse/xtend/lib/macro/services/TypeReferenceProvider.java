@@ -74,7 +74,10 @@ public interface TypeReferenceProvider {
 	 *   this
 	 *  }
 	 * }
-	 * </pre> 
+	 * </pre>
+	 * 
+	 * @param typeDeclaration the raw type for the newly produced reference
+	 * @return a reference to the given type declaration
 	 * @since 2.7
 	 */
 	TypeReference newSelfTypeReference(Type typeDeclaration);

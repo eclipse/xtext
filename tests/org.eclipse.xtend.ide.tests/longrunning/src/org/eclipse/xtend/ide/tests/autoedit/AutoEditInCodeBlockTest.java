@@ -252,16 +252,16 @@ public class AutoEditInCodeBlockTest extends AutoEditTest {
 		assertState("{{foo}\n\t\t|{bar}\n\t}", editor);
 	}
 	
-	@Test public void testCurlyBracesBlock_19() throws Exception {
-		XtextEditor editor = openEditor("{\n\t|");
-		pressKey(editor, '\n');
-		assertState("{\n\t\n\t|\n\t}", editor); 
-	}
-	
 	@Test public void testCurlyBracesBlock_20() throws Exception {
 		XtextEditor editor = openEditor("{|\n}");
 		pressKey(editor, '\n');
 		assertState("{\n\t\t|\n}", editor);
+	}
+	
+	@Test public void testCurlyBracesBlock_21() throws Exception {
+		XtextEditor editor = openEditor("{\n\t|");
+		pressKey(editor, '\n');
+		assertState("{\n\t\n\t|\n\t}", editor); 
 	}
 	
 	@Override

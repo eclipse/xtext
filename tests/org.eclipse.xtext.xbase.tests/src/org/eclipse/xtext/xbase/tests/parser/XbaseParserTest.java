@@ -609,7 +609,6 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	@Test public void testTryCatchExpression_3() throws Exception {
 		XTryCatchFinallyExpression tryEx = (XTryCatchFinallyExpression) expression(
 				"try foo catch (java.lang.Exception) {}");
-		@SuppressWarnings("null")
 		Iterator<INode> iterator = ((XtextResource)tryEx.eResource()).getParseResult().getSyntaxErrors().iterator();
 		final INode errorNode = iterator.next();
 		assertEquals(")",errorNode.getText());

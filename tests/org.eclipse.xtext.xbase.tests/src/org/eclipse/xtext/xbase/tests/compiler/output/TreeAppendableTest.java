@@ -38,7 +38,6 @@ import com.google.common.collect.AbstractIterator;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("null")
 public class TreeAppendableTest extends Assert implements ILocationInFileProvider, IJvmModelAssociations, ITraceURIConverter {
 
 	private Iterator<ITextRegionWithLineInformation> expectedRegions;

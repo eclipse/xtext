@@ -61,6 +61,7 @@ public class WhitespacePreservingCallbackTest extends AbstractXtextTests {
 		return getSerializer().serialize(result, SaveOptions.defaultOptions());
 	}
 
+	@SuppressWarnings("deprecation")
 	private void failsWith(EObject o, Class<? extends RuntimeException> clazz) {
 		try {
 			get(Serializer.class).serialize(o);

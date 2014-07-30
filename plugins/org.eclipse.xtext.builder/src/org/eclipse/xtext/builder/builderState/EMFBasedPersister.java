@@ -103,6 +103,7 @@ public class EMFBasedPersister implements PersistedStateProvider {
 		return Collections.emptySet();
 	}
 
+	@SuppressWarnings("all")
 	protected void addSaveParticipant() throws CoreException {
 		workspace.addSaveParticipant(Activator.getDefault(), new ISaveParticipant() {
 

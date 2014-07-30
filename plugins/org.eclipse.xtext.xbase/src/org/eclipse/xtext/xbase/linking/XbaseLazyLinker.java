@@ -7,14 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.linking;
 
-import java.util.List;
-
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.linking.lazy.LazyLinker;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;

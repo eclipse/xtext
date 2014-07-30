@@ -23,7 +23,6 @@ var skipGenerate = false
 var backtrack = false
 var memoize = false
 var emfRuntimeVersion = "2.9"
-var lineDelimiter = '\n'
 
 CompositeGeneratorFragment {
 	fragment = ecore.EcoreGeneratorFragment auto-inject {}

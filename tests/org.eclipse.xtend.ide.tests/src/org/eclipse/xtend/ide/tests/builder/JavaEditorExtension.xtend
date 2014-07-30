@@ -20,7 +20,7 @@ import static org.junit.Assert.*
  */
 class JavaEditorExtension {
 
-	val static VERBOSE = false
+	val static VERBOSE = Boolean.FALSE
 
 	@Inject
 	extension WorkbenchTestHelper

@@ -79,6 +79,7 @@ public class PreferenceStoreWhitespaceInformationProvider implements IWhitespace
 			if (result != null)
 				return result;
 		}
+		@SuppressWarnings("all")
 		String result = getLineSeparatorPreference(new InstanceScope());
 		if (result != null)
 			return result;
