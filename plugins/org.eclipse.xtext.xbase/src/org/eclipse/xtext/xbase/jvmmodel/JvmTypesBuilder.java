@@ -65,7 +65,6 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 import org.eclipse.xtext.xbase.typesystem.InferredTypeIndicator;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.XtypeFactory;
@@ -791,12 +790,14 @@ public class JvmTypesBuilder {
 			public void apply(/* @Nullable */ ITreeAppendable p) {
 				if (p == null)
 					return;
-				JvmType type = JvmTypesBuilder.this.references.findDeclaredType(ToStringHelper.class, sourceElement);
+				@SuppressWarnings("deprecation")
+				Class<org.eclipse.xtext.xbase.lib.util.ToStringHelper> toStringHelper = org.eclipse.xtext.xbase.lib.util.ToStringHelper.class;
+				JvmType type = JvmTypesBuilder.this.references.findDeclaredType(toStringHelper, sourceElement);
 				p.append("String result = new ");
 				if (type != null) {
 					p.append(type);
 				} else {
-					p.append(ToStringHelper.class.getName());
+					p.append(toStringHelper.getName());
 				}
 				p.append("().toString(this);");
 				p.newLine().append("return result;");

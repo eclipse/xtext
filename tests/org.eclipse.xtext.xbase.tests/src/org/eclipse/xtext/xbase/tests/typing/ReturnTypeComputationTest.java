@@ -168,7 +168,6 @@ public class ReturnTypeComputationTest extends AbstractXbaseTestCase {
 		assertEquals(expected.toString(), actual.toString());
 	}
 		
-	@SuppressWarnings("null")
 	public void assertReturnTypeWithImplictReturnExpression(String expected, String expression) throws Exception {
 		final XExpression expr = expression(expression);
 		final LightweightTypeReference returnType = typeResolver.resolveTypes(expr).getReturnType(expr);
@@ -176,7 +175,6 @@ public class ReturnTypeComputationTest extends AbstractXbaseTestCase {
 		assertEquals(expected, returnType.getIdentifier());
 	}
 	
-	@SuppressWarnings("null")
 	public void assertReturnType(String expected, String expression) throws Exception {
 		final XExpression expr = expression(expression);
 		final LightweightTypeReference returnType = typeResolver.resolveTypes(expr).getReturnType(expr);

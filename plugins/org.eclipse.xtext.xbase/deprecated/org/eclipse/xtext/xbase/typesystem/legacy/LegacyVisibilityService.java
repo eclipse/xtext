@@ -21,7 +21,6 @@ import com.google.inject.Singleton;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
 @Singleton
 @Deprecated
 public class LegacyVisibilityService extends VisibilityService {

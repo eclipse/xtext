@@ -11,7 +11,6 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping
 
 import static org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping.*
 import org.eclipse.xtend2.lib.StringConcatenation
-import org.eclipse.xtend2.lib.StringConcatenationClient
 
 class ArithmeticExtensionGenerator {
 	def static void main(String[] args) {

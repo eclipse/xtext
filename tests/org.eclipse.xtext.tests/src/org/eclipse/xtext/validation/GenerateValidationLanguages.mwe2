@@ -16,7 +16,7 @@ var projectName = "org.eclipse.xtext.tests"
 var runtimeProject = "../${projectName}"
 var lineDelimiter = '\n'
 
-var generateDotDiagram = true
+//var generateDotDiagram = true
 //var graphvizCommand = "/opt/local/bin/dot -o %1.pdf -v -T pdf"
 
 Workflow {

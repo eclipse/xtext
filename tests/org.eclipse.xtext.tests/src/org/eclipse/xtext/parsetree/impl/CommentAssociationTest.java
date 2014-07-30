@@ -32,6 +32,7 @@ import com.google.common.collect.Multimap;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class CommentAssociationTest extends AbstractXtextTests {
 
 	@Override

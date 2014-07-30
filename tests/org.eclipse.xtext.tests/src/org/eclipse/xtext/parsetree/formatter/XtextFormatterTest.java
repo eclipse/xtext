@@ -18,6 +18,7 @@ import org.junit.Test;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
+@SuppressWarnings("deprecation")
 public class XtextFormatterTest extends AbstractXtextTests {
 
 	@Override
