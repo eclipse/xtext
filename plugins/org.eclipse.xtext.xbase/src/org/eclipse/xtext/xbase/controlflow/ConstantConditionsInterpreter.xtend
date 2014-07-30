@@ -366,13 +366,19 @@ package class EvaluationResult {
 	private def dispatch Object equalValue(Object myValue, Object otherValue) {
 		return myValue == otherValue
 	}
-	private def dispatch Object equalValue(Object myValue, JvmIdentifiableElement otherValue) {
-		return NOT_A_CONSTANT.value
-	}
 	private def dispatch Object equalValue(Void myValue, Object otherValue) {
 		return false
 	}
+	private def dispatch Object equalValue(Object myValue, JvmIdentifiableElement otherValue) {
+		return NOT_A_CONSTANT.value
+	}
 	private def dispatch Object equalValue(Void myValue, JvmIdentifiableElement otherValue) {
+		return NOT_A_CONSTANT.value
+	}
+	private def dispatch Object equalValue(Object myValue, List<?> otherValue) {
+		return NOT_A_CONSTANT.value
+	}
+	private def dispatch Object equalValue(Void myValue, List<?> otherValue) {
 		return NOT_A_CONSTANT.value
 	}
 	private def dispatch Object equalValue(Void myValue, JvmType otherValue) {
@@ -389,6 +395,15 @@ package class EvaluationResult {
 	}
 	private def dispatch Object equalValue(JvmIdentifiableElement myValue, Object otherValue) {
 		return NOT_A_CONSTANT.value
+	}
+	private def dispatch Object equalValue(List<?> myValue, Void otherValue) {
+		return NOT_A_CONSTANT.value
+	}
+	private def dispatch Object equalValue(List<?> myValue, Object otherValue) {
+		return NOT_A_CONSTANT.value
+	}
+	private def dispatch Object equalValue(List<?> myValue, List<?> otherValue) {
+		return myValue == otherValue
 	}
 	private def dispatch Object equalValue(JvmIdentifiableElement myValue, JvmIdentifiableElement otherValue) {
 		return myValue == otherValue
