@@ -28,7 +28,6 @@ Export-Package: org.eclipse.xtext.xbase;x-friends:="org.eclipse.xtext.xbase.juni
  org.eclipse.xtext.xbase.annotations.formatting;x-internal:=true,
  org.eclipse.xtext.xbase.annotations.parser.antlr;x-internal:=true,
  org.eclipse.xtext.xbase.annotations.parser.antlr.internal;x-internal:=true,
- org.eclipse.xtext.xbase.annotations.scoping;x-internal:=true,
  org.eclipse.xtext.xbase.annotations.serializer;x-internal:=true,
  org.eclipse.xtext.xbase.annotations.services;x-internal:=true,
  org.eclipse.xtext.xbase.annotations.typesystem;x-internal:=true,

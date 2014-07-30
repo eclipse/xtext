@@ -32,7 +32,6 @@ import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 /**
  * Navigates to the original source element if the selected Java type was generated
@@ -42,9 +41,6 @@ import com.google.inject.Provider;
  */
 public class LinkToOriginDetector extends AbstractHyperlinkDetector {
 
-	@Inject
-	private Provider<LinkToOrigin> hyperlinkProvider;
-	
 	@Inject
 	private ITraceForStorageProvider traceInformation;
 	

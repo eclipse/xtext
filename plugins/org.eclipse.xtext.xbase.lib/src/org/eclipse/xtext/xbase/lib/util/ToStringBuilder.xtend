@@ -15,8 +15,6 @@ import java.lang.reflect.Field
 import java.lang.reflect.Modifier
 import java.util.Arrays
 import java.util.IdentityHashMap
-import java.util.HashMap
-import java.util.Map
 
 /**
  * Helps with the construction of good {@link Object#toString()} representations. 

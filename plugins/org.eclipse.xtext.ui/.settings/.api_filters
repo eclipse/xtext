@@ -1,27 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.ui" version="2">
-    <resource path="META-INF/MANIFEST.MF">
-        <filter comment="Fixed typo" id="923795461">
-            <message_arguments>
-                <message_argument value="2.7.0"/>
-                <message_argument value="2.6.0"/>
-            </message_arguments>
-        </filter>
-        <filter comment="Added some protected fields" id="924844039">
-            <message_arguments>
-                <message_argument value="2.6.0"/>
-                <message_argument value="2.5.1"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.resource.IndexingOrderer">
-        <filter comment="Removed @Beta API" id="305422471">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.resource.IndexingOrderer"/>
-                <message_argument value="org.eclipse.xtext.ui_2.4.3"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="src/org/eclipse/xtext/ui/editor/XtextSourceViewer.java" type="org.eclipse.xtext.ui.editor.XtextSourceViewer">
         <filter comment="Intentional extends clause" id="571473929">
             <message_arguments>
@@ -148,10 +126,21 @@
             </message_arguments>
         </filter>
     </resource>
-    <resource path="src/org/eclipse/xtext/ui/resource/IStorage2UriMapperJdtExtensions.java" type="org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions">
-        <filter comment="Refactored towards greater extensibility" id="404791350">
+    <resource path="src/org/eclipse/xtext/ui/resource/DefaultResourceUIServiceProvider.java" type="org.eclipse.xtext.ui.resource.DefaultResourceUIServiceProvider">
+        <filter comment="Non-API type in signature" id="643842064">
             <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions"/>
+                <message_argument value="IReferenceUpdater"/>
+                <message_argument value="DefaultResourceUIServiceProvider"/>
+                <message_argument value="getReferenceUpdater()"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/resource/IResourceUIServiceProvider.java" type="org.eclipse.xtext.ui.resource.IResourceUIServiceProvider">
+        <filter comment="Non-API type in signature" id="643842064">
+            <message_arguments>
+                <message_argument value="IReferenceUpdater"/>
+                <message_argument value="IResourceUIServiceProvider"/>
+                <message_argument value="getReferenceUpdater()"/>
             </message_arguments>
         </filter>
     </resource>
@@ -168,23 +157,19 @@
             </message_arguments>
         </filter>
     </resource>
-    <resource path="src/org/eclipse/xtext/ui/resource/Storage2UriMapperJavaImpl.java" type="org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl">
-        <filter id="337682486">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl"/>
-            </message_arguments>
-        </filter>
-        <filter comment="Refactored towards better extensibility" id="338849923">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="src/org/eclipse/xtext/ui/validation/AbstractValidatorConfigurationBlock.java" type="org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock">
         <filter comment="Intention extends clause" id="576720909">
             <message_arguments>
                 <message_argument value="OptionsConfigurationBlock"/>
                 <message_argument value="AbstractValidatorConfigurationBlock"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/validation/ValidatorPreferencePage.java" type="org.eclipse.xtext.ui.validation.ValidatorPreferencePage">
+        <filter comment="Non-API type in signature" id="576720909">
+            <message_arguments>
+                <message_argument value="PropertyAndPreferencePage"/>
+                <message_argument value="ValidatorPreferencePage"/>
             </message_arguments>
         </filter>
     </resource>

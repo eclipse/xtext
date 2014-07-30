@@ -119,6 +119,7 @@ public class PreferenceStoreAccessor {
 		style.setStyle(preferenceStore.getInt(styleKey));
 	}
 
+	@SuppressWarnings("all")
 	private ChainedPreferenceStore getPluginCssPreferenceStore() {
 		return new ChainedPreferenceStore(new IPreferenceStore[] {
 				new FixedScopedPreferenceStore(new InstanceScope(), plugin.getBundle().getSymbolicName()),

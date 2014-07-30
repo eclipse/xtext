@@ -8,7 +8,6 @@ var grammarURI
 var backtrack = false
 var memoize = false
 var classSplitting = true
-var lineDelimiter = '\n'
 
 var parser = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
   	options = auto-inject {

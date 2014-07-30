@@ -74,6 +74,7 @@ public class FixedScopedPreferenceStore extends EventManager implements IPersist
 	 * The default context is the context where getDefault and setDefault
 	 * methods will search. This context is also used in the search.
 	 */
+	@SuppressWarnings("all")
 	private IScopeContext defaultContext = new DefaultScope();
 
 	/**

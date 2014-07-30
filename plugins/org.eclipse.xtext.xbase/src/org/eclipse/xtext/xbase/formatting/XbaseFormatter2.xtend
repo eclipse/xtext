@@ -47,7 +47,6 @@ import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
 import static org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys.*
 import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 import org.eclipse.xtext.xbase.XSynchronizedExpression
-import org.eclipse.xtext.xbase.XCasePart
 
 class XbaseFormatter2 extends AbstractFormatter {
 	@Inject extension NodeModelAccess

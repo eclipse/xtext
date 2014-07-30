@@ -336,6 +336,7 @@ public class TypeURIHelper implements URIHelperConstants {
 	}
 	
 	public URI getFullURI(IJavaElement javaElement) {
+		@SuppressWarnings("all")
 		ASTParser parser = ASTParser.newParser(AST.JLS3);
 		parser.setProject(javaElement.getJavaProject());
 		IBinding[] bindings = parser.createBindings(new IJavaElement[] { javaElement }, null);

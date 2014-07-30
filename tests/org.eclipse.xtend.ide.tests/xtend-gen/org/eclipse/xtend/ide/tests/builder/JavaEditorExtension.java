@@ -34,7 +34,7 @@ import org.junit.Assert;
  */
 @SuppressWarnings("all")
 public class JavaEditorExtension {
-  private final static boolean VERBOSE = false;
+  private final static Boolean VERBOSE = Boolean.FALSE;
   
   @Inject
   @Extension
@@ -129,7 +129,7 @@ public class JavaEditorExtension {
   public String waitForElementChangedEvent(final int eventMask, final Procedure0 producer) {
     String _xblockexpression = null;
     {
-      if (JavaEditorExtension.VERBOSE) {
+      if ((JavaEditorExtension.VERBOSE).booleanValue()) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("start waiting for an element changed event: ");
         _builder.append(eventMask, "");
@@ -143,7 +143,7 @@ public class JavaEditorExtension {
           boolean _not = (!(_head).booleanValue());
           if (_not) {
             changed.set(0, Boolean.valueOf(true));
-            if (JavaEditorExtension.VERBOSE) {
+            if ((JavaEditorExtension.VERBOSE).booleanValue()) {
               InputOutput.<ElementChangedEvent>println(it);
             }
           }
@@ -154,7 +154,7 @@ public class JavaEditorExtension {
       while ((!(IterableExtensions.<Boolean>head(changed)).booleanValue())) {
       }
       String _xifexpression = null;
-      if (JavaEditorExtension.VERBOSE) {
+      if ((JavaEditorExtension.VERBOSE).booleanValue()) {
         StringConcatenation _builder_1 = new StringConcatenation();
         _builder_1.append("end waiting for an element changed event: ");
         _builder_1.append(eventMask, "");

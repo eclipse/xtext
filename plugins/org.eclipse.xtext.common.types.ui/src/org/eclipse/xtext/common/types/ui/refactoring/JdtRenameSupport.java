@@ -59,8 +59,6 @@ public class JdtRenameSupport implements IRenameSupport {
 
 	private RenameSupport renameSupport;
 
-	private JdtRefactoringContext renameParticipantContext;
-
 	/**
 	 * @deprecated Use DI and {@link #initialize(JdtRefactoringContext, RenameJavaElementDescriptor)} instead.
 	 */
@@ -74,7 +72,6 @@ public class JdtRenameSupport implements IRenameSupport {
 
 	protected void initialize(JdtRefactoringContext renameParticipantContext,
 			RenameJavaElementDescriptor renameDescriptor) throws CoreException {
-		this.renameParticipantContext = renameParticipantContext;
 		renameSupport = RenameSupport.create(renameDescriptor);
 	}
 

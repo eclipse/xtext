@@ -85,7 +85,6 @@ import com.google.inject.Inject;
 /**
  * see http://www.eclipse.org/Xtext/documentation.html#contentAssist on how to customize content assistant
  */
-@SuppressWarnings("restriction")
 public class XtextProposalProvider extends AbstractXtextProposalProvider {
 
 	@Inject

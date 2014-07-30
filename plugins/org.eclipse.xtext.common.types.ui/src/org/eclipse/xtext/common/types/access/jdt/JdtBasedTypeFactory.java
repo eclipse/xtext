@@ -332,6 +332,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 	/**
 	 * A cached AST parser that's reused by top-level type {@link #createType(IType) creation}.
 	 */
+	@SuppressWarnings("all")
 	private final ASTParser parser = ASTParser.newParser(AST.JLS3);
 
 	/**

@@ -42,7 +42,7 @@ import com.google.inject.Binder;
 import com.google.inject.Module;
 import com.google.inject.name.Names;
 
-@SuppressWarnings({ "restriction", "deprecation" })
+@SuppressWarnings({ "restriction" })
 public class SharedCommonTypesModule implements Module {
 
 	public void configure(Binder binder) {

@@ -83,7 +83,6 @@ public class XbaseTypeConformanceTest extends AbstractXbaseTestCase {
 		return isConformantReturnTypes(leftExpression, rightExpression, false);
 	}
 	
-	@SuppressWarnings("null")
 	protected boolean isConformantReturnTypes(final String leftExpression, final String rightExpression, boolean ignoreGenerics)
 			throws Exception {
 		XExpression leftParse = parseHelper.parse(leftExpression);

@@ -22,7 +22,6 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@SuppressWarnings("null")
 public class XbaseIdentifiableTypeProviderTest extends AbstractXbaseTestCase {
 	
 	@Inject

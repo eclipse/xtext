@@ -14,5 +14,10 @@ import org.eclipse.xtend.lib.macro.Active;
 @Target({ ElementType.FIELD, ElementType.TYPE })
 @Active(AccessorsProcessor.class)
 public @interface Accessors {
+  /**
+   * Describes the access modifiers for generated accessors. Valid combinations
+   * include at most one type for getters and one for setters.
+   * Accessors may be suppressed by passing {@link AccessorType#NONE}.
+   */
   public AccessorType[] value() default { AccessorType.PUBLIC_GETTER, AccessorType.PUBLIC_SETTER };
 }

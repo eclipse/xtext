@@ -344,7 +344,7 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 											}
 										}
 									}
-									URI genModelURI = EcorePlugin.getEPackageNsURIToGenModelLocationMap().get(nsURI);
+									URI genModelURI = EcorePlugin.getEPackageNsURIToGenModelLocationMap(false).get(nsURI);
 									if (genModelURI != null) {
 										Resource genmodelResource = resourceSet.getResource(genModelURI, true);
 										GenModel genModel = (GenModel) genmodelResource.getContents().get(0);
@@ -398,7 +398,6 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 					});
 	}
 
-	@SuppressWarnings("restriction")
 	@Fix(XtextValidator.INVALID_TERMINALRULE_NAME)
 	public void fixTerminalRuleName(final Issue issue, IssueResolutionAcceptor acceptor){
 		if(issue.getData().length == 1){
