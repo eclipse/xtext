@@ -15,7 +15,6 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class PartialPureXbaseContentAssistParser extends PureXbaseParser implements IPartialContentAssistParser {
 
 	private AbstractRule rule;

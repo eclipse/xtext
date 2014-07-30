@@ -15,7 +15,6 @@ var generateDebugData = false
 var graphvizCommand = ""
 var srcGenOnly=true
 var emfRuntimeVersion = "2.9"
-var lineDelimiter = '\n'
 
 CompositeGeneratorFragment {
 	fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.xtext.xtext.ui" version="2">
+    <resource path="xtend-gen/org/eclipse/xtext/xtext/ui/wizard/project/DefaultProjectFactoryContributor.java" type="org.eclipse.xtext.xtext.ui.wizard.project.DefaultProjectFactoryContributor">
+        <filter comment="Non-API type usage" id="574619656">
+            <message_arguments>
+                <message_argument value="IProjectFactoryContributor"/>
+                <message_argument value="DefaultProjectFactoryContributor"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtext/xtext/ui/wizard/releng/templates/SiteSpexCreator.java" type="org.eclipse.xtext.xtext.ui.wizard.releng.templates.SiteSpexCreator">
+        <filter comment="Non-API type usage" id="574619656">
+            <message_arguments>
+                <message_argument value="IProjectFactoryContributor"/>
+                <message_argument value="SiteSpexCreator"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>

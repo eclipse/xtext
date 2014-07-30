@@ -169,12 +169,15 @@ public class TaskTagConfigurationBlock extends OptionsConfigurationBlock {
 		}
 
 		public void selectionChanged(ListDialogField field) {
+			@SuppressWarnings("unchecked")
 			List<TaskTag> selectedElements = field.getSelectedElements();
 			field.enableButton(IDX_EDIT, canEdit(selectedElements));
 		}
 
 		public void doubleClicked(ListDialogField field) {
-			if (canEdit(field.getSelectedElements())) {
+			@SuppressWarnings("unchecked")
+			List<TaskTag> selectedElements = field.getSelectedElements();
+			if (canEdit(selectedElements)) {
 				taskTagButtonPressed(IDX_EDIT);
 			}
 		}
@@ -192,6 +195,7 @@ public class TaskTagConfigurationBlock extends OptionsConfigurationBlock {
 
 	protected final void updateModel(DialogField field) {
 		if (field == taskTags) {
+			@SuppressWarnings("unchecked")
 			List<TaskTag> list = taskTags.getElements();
 			setValue(getTaskTagsKey(), serializeTags(list));
 			setValue(getTaskPrioritiesKey(), serializePriorities(list));
@@ -233,6 +237,7 @@ public class TaskTagConfigurationBlock extends OptionsConfigurationBlock {
 			edited = (TaskTag) taskTags.getSelectedElements().get(0);
 		}
 		if (index == IDX_ADD || index == IDX_EDIT) {
+			@SuppressWarnings("unchecked")
 			TaskTagInputDialog dialog = new TaskTagInputDialog(getShell(), edited, taskTags.getElements(),
 					languageName);
 			if (dialog.open() == Window.OK) {

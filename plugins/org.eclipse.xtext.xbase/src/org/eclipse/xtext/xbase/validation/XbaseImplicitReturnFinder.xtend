@@ -30,77 +30,77 @@ import org.eclipse.xtext.xbase.XTypeLiteral
  */
 class XbaseImplicitReturnFinder implements ImplicitReturnFinder {
 
-	def dispatch findImplicitReturns(Void expression, ImplicitReturnFinder.Acceptor acceptor) {
+	def dispatch void findImplicitReturns(Void expression, ImplicitReturnFinder.Acceptor acceptor) {
 	}
 
-	def dispatch findImplicitReturns(XExpression expression, ImplicitReturnFinder.Acceptor acceptor) {
+	def dispatch void findImplicitReturns(XExpression expression, ImplicitReturnFinder.Acceptor acceptor) {
 	}
 	
-	def dispatch findImplicitReturns(XNumberLiteral expression, ImplicitReturnFinder.Acceptor acceptor) {
+	def dispatch void findImplicitReturns(XNumberLiteral expression, ImplicitReturnFinder.Acceptor acceptor) {
 		acceptor.accept(expression)
 	}
 
-	def dispatch findImplicitReturns(XBooleanLiteral expression, ImplicitReturnFinder.Acceptor acceptor) {
+	def dispatch void findImplicitReturns(XBooleanLiteral expression, ImplicitReturnFinder.Acceptor acceptor) {
 		acceptor.accept(expression)
 	}
 
-	def dispatch findImplicitReturns(XCollectionLiteral expression, ImplicitReturnFinder.Acceptor acceptor) {
+	def dispatch void findImplicitReturns(XCollectionLiteral expression, ImplicitReturnFinder.Acceptor acceptor) {
 		acceptor.accept(expression)
 	}
 
-	def dispatch findImplicitReturns(XStringLiteral expression, ImplicitReturnFinder.Acceptor acceptor) {
+	def dispatch void findImplicitReturns(XStringLiteral expression, ImplicitReturnFinder.Acceptor acceptor) {
 		acceptor.accept(expression)
 	}
 
-	def dispatch findImplicitReturns(XNullLiteral expression, ImplicitReturnFinder.Acceptor acceptor) {
+	def dispatch void findImplicitReturns(XNullLiteral expression, ImplicitReturnFinder.Acceptor acceptor) {
 		acceptor.accept(expression)
 	}
 
-	def dispatch findImplicitReturns(XTypeLiteral expression, ImplicitReturnFinder.Acceptor acceptor) {
+	def dispatch void findImplicitReturns(XTypeLiteral expression, ImplicitReturnFinder.Acceptor acceptor) {
 		acceptor.accept(expression)
 	}
 
-	def dispatch findImplicitReturns(XClosure expression, ImplicitReturnFinder.Acceptor acceptor) {
+	def dispatch void findImplicitReturns(XClosure expression, ImplicitReturnFinder.Acceptor acceptor) {
 		acceptor.accept(expression)
 	}
 
-	def dispatch findImplicitReturns(XConstructorCall expression, ImplicitReturnFinder.Acceptor acceptor) {
+	def dispatch void findImplicitReturns(XConstructorCall expression, ImplicitReturnFinder.Acceptor acceptor) {
 		acceptor.accept(expression)
 	}
 
-	def dispatch findImplicitReturns(XAbstractFeatureCall expression, ImplicitReturnFinder.Acceptor acceptor) {
+	def dispatch void findImplicitReturns(XAbstractFeatureCall expression, ImplicitReturnFinder.Acceptor acceptor) {
 		acceptor.accept(expression)
 	}
 
-	def dispatch findImplicitReturns(XInstanceOfExpression expression, ImplicitReturnFinder.Acceptor acceptor) {
+	def dispatch void findImplicitReturns(XInstanceOfExpression expression, ImplicitReturnFinder.Acceptor acceptor) {
 		acceptor.accept(expression)
 	}
 
-	def dispatch findImplicitReturns(XCastedExpression expression, ImplicitReturnFinder.Acceptor acceptor) {
+	def dispatch void findImplicitReturns(XCastedExpression expression, ImplicitReturnFinder.Acceptor acceptor) {
 		acceptor.accept(expression)
 	}
 
-	def dispatch findImplicitReturns(XBlockExpression expression, ImplicitReturnFinder.Acceptor acceptor) {
+	def dispatch void findImplicitReturns(XBlockExpression expression, ImplicitReturnFinder.Acceptor acceptor) {
 		findImplicitReturns(expression.expressions.last, acceptor)
 	}
 
-	def dispatch findImplicitReturns(XSynchronizedExpression expression, ImplicitReturnFinder.Acceptor acceptor) {
+	def dispatch void findImplicitReturns(XSynchronizedExpression expression, ImplicitReturnFinder.Acceptor acceptor) {
 		findImplicitReturns(expression.expression, acceptor)
 	}
 
-	def dispatch findImplicitReturns(XIfExpression expression, ImplicitReturnFinder.Acceptor acceptor) {
+	def dispatch void findImplicitReturns(XIfExpression expression, ImplicitReturnFinder.Acceptor acceptor) {
 		findImplicitReturns(expression.then, acceptor)
 
 		//TODO this will not find the implicit "return null" when there is no "else"
 		findImplicitReturns(expression.^else, acceptor)
 	}
 
-	def dispatch findImplicitReturns(XTryCatchFinallyExpression expression, ImplicitReturnFinder.Acceptor acceptor) {
+	def dispatch void findImplicitReturns(XTryCatchFinallyExpression expression, ImplicitReturnFinder.Acceptor acceptor) {
 		findImplicitReturns(expression.expression, acceptor)
 		expression.catchClauses.forEach[findImplicitReturns(it.expression, acceptor)]
 	}
 
-	def dispatch findImplicitReturns(XSwitchExpression expression, ImplicitReturnFinder.Acceptor acceptor) {
+	def dispatch void findImplicitReturns(XSwitchExpression expression, ImplicitReturnFinder.Acceptor acceptor) {
 		expression.cases.forEach[findImplicitReturns(it.then, acceptor)]
 		findImplicitReturns(expression.^default, acceptor)
 	}

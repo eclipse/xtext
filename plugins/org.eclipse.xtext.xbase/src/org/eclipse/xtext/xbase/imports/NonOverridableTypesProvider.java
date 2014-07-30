@@ -19,7 +19,6 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.util.RawSuperTypes;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.typesystem.util.ContextualVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 
@@ -33,9 +32,6 @@ import com.google.inject.Inject;
  */
 public class NonOverridableTypesProvider {
 
-	@Inject
-	private TypeReferences typeReferences;
-	
 	@Inject
 	private IVisibilityHelper visibilityHelper;
 	

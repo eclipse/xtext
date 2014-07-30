@@ -7,8 +7,6 @@
  */
 package org.eclipse.xtext.common.types;
 
-import java.lang.Iterable;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Jvm Generic Type</b></em>'.
