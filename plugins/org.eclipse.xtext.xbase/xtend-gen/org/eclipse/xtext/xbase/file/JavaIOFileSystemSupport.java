@@ -197,31 +197,43 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
   }
   
   public Path getPath(final Resource res) {
-    ResourceSet _resourceSet = res.getResourceSet();
-    URIConverter _uRIConverter = _resourceSet.getURIConverter();
-    URI _uRI = res.getURI();
-    final URI uri = _uRIConverter.normalize(_uRI);
-    boolean _isFile = uri.isFile();
-    if (_isFile) {
-      WorkspaceConfig _get = this.projectInformationProvider.get();
-      String _absoluteFileSystemPath = _get.getAbsoluteFileSystemPath();
-      File _file = new File(_absoluteFileSystemPath);
-      java.net.URI _uRI_1 = _file.toURI();
-      final String workspacePath = _uRI_1.getPath();
-      String _fileString = uri.toFileString();
-      File _file_1 = new File(_fileString);
-      java.net.URI _uRI_2 = _file_1.toURI();
-      final String absolutefilePath = _uRI_2.getPath();
-      boolean _startsWith = absolutefilePath.startsWith(workspacePath);
+    URI resourceURI = res.getURI();
+    boolean _isRelative = resourceURI.isRelative();
+    if (_isRelative) {
+      String asString = resourceURI.toString();
+      boolean _startsWith = asString.startsWith("/");
       boolean _not = (!_startsWith);
       if (_not) {
-        throw new IllegalStateException((((("Couldn\'t determine file path. The file (\'" + absolutefilePath) + "\') doesn\'t seem to be contained in the workspace (\'") + workspacePath) + "\')"));
+        asString = ("/" + asString);
       }
-      int _length = workspacePath.length();
-      final String filePath = absolutefilePath.substring(_length);
-      String _string = filePath.toString();
-      String _plus = ("/" + _string);
-      return new Path(_plus);
+      return new Path(asString);
+    } else {
+      ResourceSet _resourceSet = res.getResourceSet();
+      URIConverter _uRIConverter = _resourceSet.getURIConverter();
+      URI _uRI = res.getURI();
+      final URI uri = _uRIConverter.normalize(_uRI);
+      boolean _isFile = uri.isFile();
+      if (_isFile) {
+        WorkspaceConfig _get = this.projectInformationProvider.get();
+        String _absoluteFileSystemPath = _get.getAbsoluteFileSystemPath();
+        File _file = new File(_absoluteFileSystemPath);
+        java.net.URI _uRI_1 = _file.toURI();
+        final String workspacePath = _uRI_1.getPath();
+        String _fileString = uri.toFileString();
+        File _file_1 = new File(_fileString);
+        java.net.URI _uRI_2 = _file_1.toURI();
+        final String absolutefilePath = _uRI_2.getPath();
+        boolean _startsWith_1 = absolutefilePath.startsWith(workspacePath);
+        boolean _not_1 = (!_startsWith_1);
+        if (_not_1) {
+          throw new IllegalStateException((((("Couldn\'t determine file path. The file (\'" + absolutefilePath) + "\') doesn\'t seem to be contained in the workspace (\'") + workspacePath) + "\')"));
+        }
+        int _length = workspacePath.length();
+        final String filePath = absolutefilePath.substring(_length);
+        String _string = filePath.toString();
+        String _plus = ("/" + _string);
+        return new Path(_plus);
+      }
     }
     return null;
   }
