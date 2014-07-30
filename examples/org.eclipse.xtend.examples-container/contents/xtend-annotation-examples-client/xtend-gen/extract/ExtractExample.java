@@ -22,6 +22,6 @@ public class ExtractExample implements ExtractExampleInterface {
   /**
    * This method is not extracted
    */
-  private void myPrivateMethod() {
+  protected void myPrivateMethod() {
   }
 }

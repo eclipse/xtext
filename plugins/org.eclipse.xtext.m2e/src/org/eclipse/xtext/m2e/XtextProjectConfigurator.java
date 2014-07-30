@@ -1,14 +1,25 @@
 package org.eclipse.xtext.m2e;
 
-import static org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.*;
-import static org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.*;
+import static org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.HIDE_LOCAL_SYNTHETIC_VARIABLES;
+import static org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.INSTALL_DSL_AS_PRIMARY_SOURCE;
+import static org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.OUTPUT_CLEANUP_DERIVED;
+import static org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.OUTPUT_CLEAN_DIRECTORY;
+import static org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.OUTPUT_CREATE_DIRECTORY;
+import static org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.OUTPUT_DERIVED;
+import static org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.OUTPUT_DESCRIPTION;
+import static org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.OUTPUT_DIRECTORY;
+import static org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.OUTPUT_KEEP_LOCAL_HISTORY;
+import static org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.OUTPUT_NAME;
+import static org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.OUTPUT_OVERRIDE;
+import static org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.USE_OUTPUT_PER_SOURCE_FOLDER;
+import static org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.PREF_AUTO_BUILDING;
+import static org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.getIgnoreSourceFolderKey;
+import static org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.getKey;
+import static org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.getOutputForSourceFolderKey;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.List;
 
 import org.apache.maven.plugin.MojoExecution;
-import org.codehaus.plexus.util.StringUtils;
 import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -18,7 +29,6 @@ import org.eclipse.m2e.core.project.configurator.ProjectConfigurationRequest;
 import org.eclipse.xtext.generator.OutputConfiguration.SourceMapping;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.preferences.OptionsConfigurationBlock;
-import org.eclipse.xtext.util.RuntimeIOException;
 import org.osgi.service.prefs.BackingStoreException;
 
 import com.google.common.base.CharMatcher;

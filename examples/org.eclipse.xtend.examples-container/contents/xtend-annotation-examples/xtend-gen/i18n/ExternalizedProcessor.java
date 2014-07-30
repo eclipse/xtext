@@ -156,6 +156,7 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
               }
             };
             it.setBody(_function_1);
+            context.setPrimarySourceElement(it, field);
           }
         };
         annotatedClass.addMethod(_simpleName, _function);
@@ -185,6 +186,7 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
           }
         };
         it.setInitializer(_function);
+        context.setPrimarySourceElement(it, annotatedClass);
       }
     };
     annotatedClass.addField("RESOURCE_BUNDLE", _function_1);

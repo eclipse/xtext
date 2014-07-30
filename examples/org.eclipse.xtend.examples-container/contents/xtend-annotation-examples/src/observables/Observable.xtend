@@ -36,17 +36,18 @@ class ObservableCompilationParticipant extends AbstractClassProcessor {
 
 			clazz.addMethod('get' + fieldName.toFirstUpper) [
 				returnType = fieldType
-				body = ['''return this.«fieldName»;''']
+				body = '''return this.«fieldName»;'''
+				primarySourceElement = f
 			]
 
 			clazz.addMethod('set' + fieldName.toFirstUpper) [
 				addParameter(fieldName, fieldType)
-				body = [
-					'''
-						«fieldType» _oldValue = this.«fieldName»;
-						this.«fieldName» = «fieldName»;
-						_propertyChangeSupport.firePropertyChange("«fieldName»", _oldValue, «fieldName»);
-					''']
+				body = '''
+					«fieldType» _oldValue = this.«fieldName»;
+					this.«fieldName» = «fieldName»;
+					_propertyChangeSupport.firePropertyChange("«fieldName»", _oldValue, «fieldName»);
+				'''
+				primarySourceElement = f
 			]
 			f.markAsRead
 		}
@@ -55,17 +56,20 @@ class ObservableCompilationParticipant extends AbstractClassProcessor {
 		val changeSupportType = PropertyChangeSupport.newTypeReference
 		clazz.addField("_propertyChangeSupport") [
 			type = changeSupportType
-			initializer = ['''new «toJavaCode(changeSupportType)»(this)''']
+			initializer = '''new «changeSupportType»(this)'''
+			primarySourceElement = clazz
 		]
 
 		val propertyChangeListener = PropertyChangeListener.newTypeReference
 		clazz.addMethod("addPropertyChangeListener") [
 			addParameter("listener", propertyChangeListener)
-			body = ['''this._propertyChangeSupport.addPropertyChangeListener(listener);''']
+			body = '''this._propertyChangeSupport.addPropertyChangeListener(listener);'''
+			primarySourceElement = clazz
 		]
 		clazz.addMethod("removePropertyChangeListener") [
 			addParameter("listener", propertyChangeListener)
-			body = ['''this._propertyChangeSupport.removePropertyChangeListener(listener);''']
+			body = '''this._propertyChangeSupport.removePropertyChangeListener(listener);'''
+			primarySourceElement = clazz
 		]
 	}
 }

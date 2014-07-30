@@ -10,7 +10,6 @@ package org.eclipse.xtend.caliper.tests.typesystem.newImpl;
 import org.eclipse.xtend.core.tests.typesystem.AssignabilityTest;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.junit.Ignore;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

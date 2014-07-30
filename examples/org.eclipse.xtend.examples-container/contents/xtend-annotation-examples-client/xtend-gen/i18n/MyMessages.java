@@ -19,7 +19,6 @@ public class MyMessages {
     Date _date = new Date();
     String _DATE_AND_LOCATION = MyMessages.DATE_AND_LOCATION(_date, "Kiel");
     _builder.append(_DATE_AND_LOCATION, "");
-    _builder.append("\t\t\t");
     _builder.newLineIfNotEmpty();
     InputOutput.<String>println(_builder.toString());
   }

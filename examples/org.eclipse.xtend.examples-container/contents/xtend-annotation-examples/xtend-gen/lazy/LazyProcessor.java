@@ -45,6 +45,7 @@ public class LazyProcessor extends AbstractFieldProcessor {
         it.setReturnType(_type);
         Expression _initializer = field.getInitializer();
         it.setBody(_initializer);
+        context.setPrimarySourceElement(it, field);
       }
     };
     _declaringType.addMethod(_plus, _function);
@@ -82,6 +83,7 @@ public class LazyProcessor extends AbstractFieldProcessor {
           }
         };
         it.setBody(_function);
+        context.setPrimarySourceElement(it, field);
       }
     };
     _declaringType_1.addMethod(_plus_1, _function_1);

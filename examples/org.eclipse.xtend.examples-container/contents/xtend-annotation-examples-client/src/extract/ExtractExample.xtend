@@ -19,7 +19,7 @@ class ExtractExample {
 	/**
 	 * This method is not extracted
 	 */
-	private def void myPrivateMethod() {
+	protected def void myPrivateMethod() {
 		
 	}
 }
