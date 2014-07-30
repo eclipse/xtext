@@ -23,6 +23,7 @@ import org.eclipse.xtext.ui.editor.preferences.PreferenceStoreAccessImpl;
  */
 public class XtendPreferenceStoreAccess extends PreferenceStoreAccessImpl {
 
+	@SuppressWarnings("all")
 	@Override
 	public IPreferenceStore getPreferenceStore() {
 		IPreferenceStore store = super.getPreferenceStore();
@@ -37,6 +38,7 @@ public class XtendPreferenceStoreAccess extends PreferenceStoreAccessImpl {
 		});
 	}
 	
+	@SuppressWarnings("all")
 	@Override
 	public IPreferenceStore getContextPreferenceStore(Object context) {
 		IProject project = getProject(context);
