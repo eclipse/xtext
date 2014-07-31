@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.util.Files
+import java.io.OutputStream
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -99,10 +100,34 @@ class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
 	override void setContentsAsStream(Path path, InputStream stream) {
 		path.parent.mkdir
 		try {
-			ByteStreams.copy(|stream) [| new BufferedOutputStream(new FileOutputStream(path.javaIOFile))]
+			copyAndCloseStreams(stream, new BufferedOutputStream(new FileOutputStream(path.javaIOFile)))
 		} catch (IOException exc) {
 			throw new IllegalArgumentException(exc.message, exc)
 		}
+	}
+	
+	def private copyAndCloseStreams(InputStream in, OutputStream out) throws IOException {
+		var IOException exception = null
+		try {
+			ByteStreams.copy(in, out)
+		} catch(IOException e) {
+			exception = e;
+		} finally {
+			try {
+				in.close
+			} catch(IOException e) {
+				if (exception == null)
+					exception = e
+			}
+			try {
+				out.close
+			} catch(IOException e) {
+				if (exception == null)
+					exception = e
+			}
+		}
+		if (exception != null)
+			throw exception
 	}
 	
 	override toURI(Path path) {

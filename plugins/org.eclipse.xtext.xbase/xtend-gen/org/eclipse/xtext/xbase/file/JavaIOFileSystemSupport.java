@@ -9,8 +9,6 @@ package org.eclipse.xtext.xbase.file;
 
 import com.google.common.base.Objects;
 import com.google.common.io.ByteStreams;
-import com.google.common.io.InputSupplier;
-import com.google.common.io.OutputSupplier;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.io.BufferedInputStream;
@@ -21,6 +19,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -167,19 +166,10 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
     Path _parent = path.getParent();
     this.mkdir(_parent);
     try {
-      final InputSupplier<InputStream> _function = new InputSupplier<InputStream>() {
-        public InputStream getInput() throws IOException {
-          return stream;
-        }
-      };
-      final OutputSupplier<BufferedOutputStream> _function_1 = new OutputSupplier<BufferedOutputStream>() {
-        public BufferedOutputStream getOutput() throws IOException {
-          File _javaIOFile = JavaIOFileSystemSupport.this.getJavaIOFile(path);
-          FileOutputStream _fileOutputStream = new FileOutputStream(_javaIOFile);
-          return new BufferedOutputStream(_fileOutputStream);
-        }
-      };
-      ByteStreams.copy(_function, _function_1);
+      File _javaIOFile = this.getJavaIOFile(path);
+      FileOutputStream _fileOutputStream = new FileOutputStream(_javaIOFile);
+      BufferedOutputStream _bufferedOutputStream = new BufferedOutputStream(_fileOutputStream);
+      this.copyAndCloseStreams(stream, _bufferedOutputStream);
     } catch (final Throwable _t) {
       if (_t instanceof IOException) {
         final IOException exc = (IOException)_t;
@@ -188,6 +178,51 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
+    }
+  }
+  
+  private void copyAndCloseStreams(final InputStream in, final OutputStream out) throws IOException {
+    IOException exception = null;
+    try {
+      ByteStreams.copy(in, out);
+    } catch (final Throwable _t) {
+      if (_t instanceof IOException) {
+        final IOException e = (IOException)_t;
+        exception = e;
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    } finally {
+      try {
+        in.close();
+      } catch (final Throwable _t_1) {
+        if (_t_1 instanceof IOException) {
+          final IOException e_1 = (IOException)_t_1;
+          boolean _equals = Objects.equal(exception, null);
+          if (_equals) {
+            exception = e_1;
+          }
+        } else {
+          throw Exceptions.sneakyThrow(_t_1);
+        }
+      }
+      try {
+        out.close();
+      } catch (final Throwable _t_2) {
+        if (_t_2 instanceof IOException) {
+          final IOException e_2 = (IOException)_t_2;
+          boolean _equals_1 = Objects.equal(exception, null);
+          if (_equals_1) {
+            exception = e_2;
+          }
+        } else {
+          throw Exceptions.sneakyThrow(_t_2);
+        }
+      }
+    }
+    boolean _notEquals = (!Objects.equal(exception, null));
+    if (_notEquals) {
+      throw exception;
     }
   }
   
