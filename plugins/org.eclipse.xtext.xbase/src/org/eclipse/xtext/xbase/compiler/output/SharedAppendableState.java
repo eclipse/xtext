@@ -111,6 +111,10 @@ public class SharedAppendableState {
 		return result;
 	}
 	
+	public String removeName(Object key) {
+		return scopes.removeName(key);
+	}
+	
 	public boolean hasName(Object key) {
 		return scopes.getName(key) != null;
 	}

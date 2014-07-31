@@ -54,6 +54,8 @@ public interface IAppendable extends ISourceAppender {
 
 	String getName(Object key);
 	
+	String removeName(Object key) throws IllegalStateException;
+	
 	boolean hasName(Object key);
 	
 	Object getObject(String name);
