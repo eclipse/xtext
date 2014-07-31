@@ -30,7 +30,7 @@ import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
 
-import com.google.common.collect.Iterators;
+import com.google.common.collect.ImmutableSet;
 import com.google.inject.Inject;
 
 /**
@@ -91,7 +91,7 @@ public class OverrideIndicatorRulerAction extends ResourceAction implements IAct
 		int lineOfLastMouseButtonActivity = verticalRuler.getLineOfLastMouseButtonActivity();
 		IAnnotationModelExtension2 annotationModel = (IAnnotationModelExtension2) verticalRuler.getModel();
 		if (annotationModel != null) {
-			Iterator<?> iterator = Iterators.emptyIterator();
+			Iterator<?> iterator = ImmutableSet.<Object>of().iterator();
 			try {
 				IRegion line = document.getLineInformation(lineOfLastMouseButtonActivity);
 				iterator = annotationModel.getAnnotationIterator(line.getOffset(), line.getLength() + 1, true, true);
