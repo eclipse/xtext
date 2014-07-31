@@ -29,6 +29,10 @@ Workflow {
 	component = DirectoryCleaner {
 		directory = "${runtimeProject}.ui/src-gen"
 	}
+	
+	component = DirectoryCleaner {
+		directory = "${runtimeProject}/model/generated"
+	}
 
 	component = Generator auto-inject {
 		pathRtProject = runtimeProject
@@ -44,7 +48,7 @@ Workflow {
 			fragment = grammarAccess.GrammarAccessFragment auto-inject {}
 
 			// generates Java API for the generated EPackages 
-			fragment = ecore.EcoreGeneratorFragment auto-inject {
+			fragment = ecore.EMFGeneratorFragment auto-inject {
 				emfRuntimeVersion = "2.9"
 			}
 
@@ -112,7 +116,9 @@ Workflow {
 				antlrParam = "${uiProject}/src-gen/org/eclipse/xtext/ui/codetemplates/ui/contentassist/antlr/lexer"
 			}
 			
-			fragment = templates.CodetemplatesGeneratorFragment {}
+			fragment = templates.CodetemplatesGeneratorFragment {
+				suppressRestriction = false
+			}
 			fragment = junit.Junit4Fragment {}
 		}
 		language = {
