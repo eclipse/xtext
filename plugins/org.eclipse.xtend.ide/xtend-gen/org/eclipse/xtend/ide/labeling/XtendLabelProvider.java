@@ -24,6 +24,7 @@ import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendInterface;
+import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.ide.labeling.XtendImages;
 import org.eclipse.xtend.ide.labeling.XtendJvmLabelProvider;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
@@ -266,6 +267,14 @@ public class XtendLabelProvider extends XtendJvmLabelProvider {
   
   protected String text(final XtendEnumLiteral element) {
     return element.getName();
+  }
+  
+  protected String text(final XtendParameter element) {
+    JvmTypeReference _parameterType = element.getParameterType();
+    String _simpleName = _parameterType.getSimpleName();
+    String _plus = (_simpleName + " ");
+    String _name = element.getName();
+    return (_plus + _name);
   }
   
   protected JvmTypeReference getDisplayedType(final XtendField field) {

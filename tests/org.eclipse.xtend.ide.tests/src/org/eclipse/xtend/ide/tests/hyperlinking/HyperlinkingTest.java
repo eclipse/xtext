@@ -197,7 +197,7 @@ public class HyperlinkingTest extends AbstractXtendUITestCase {
 		int indexOf_Baz_ParamRef = modelAsString.indexOf("baz", indexOf_x_FieldRef);
 		hyperlinks = hyperlinkHelper.createHyperlinksByOffset(resource, indexOf_Baz_ParamRef, true);
 		assertEquals(2, hyperlinks.length);
-		assertEquals("baz", hyperlinks[0].getHyperlinkText());
+		assertEquals("Baz baz", hyperlinks[0].getHyperlinkText());
 		assertEquals("Open Parameter Type - Baz", hyperlinks[1].getHyperlinkText());
 		
 		int indexOf_j_FieldRef = modelAsString.indexOf("j", indexOf_Baz_ParamRef);
