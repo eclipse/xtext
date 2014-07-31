@@ -135,6 +135,10 @@ public abstract class AbstractStringBuilderBasedAppendable implements IAppendabl
 	public void closeScope() {
 		scopes.closeScope();
 	}
+	
+	public String removeName(Object key) {
+		return scopes.removeName(key);
+	}
 
 	protected abstract void appendType(final JvmType type, StringBuilder builder);
 	

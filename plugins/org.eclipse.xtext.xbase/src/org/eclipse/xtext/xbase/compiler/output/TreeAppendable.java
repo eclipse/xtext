@@ -382,6 +382,10 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 	public String declareSyntheticVariable(Object key, String proposedName) {
 		return state.declareSyntheticVariable(key, proposedName);
 	}
+	
+	public String removeName(Object key) {
+		return state.removeName(key);
+	}
 
 	public String getName(Object key) {
 		return state.getName(key);

@@ -17,7 +17,6 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -187,9 +186,9 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		} else if ((isFunction(left) && isFunction(right) || isProcedure(left) && isProcedure(right)) && left.getType() == right.getType()) {
 			doCastConversion(left, appendable, expression);
 		} else if (isFunction(right) || (isFunction(left) && findImplementingOperation(right) != null)) {
-			convertFunctionType(left, right, appendable, expression, context);
+			convertFunctionType(left, right, appendable, expression);
 		} else if (isProcedure(right) || (isProcedure(left) && findImplementingOperation(right) != null)) {
-			convertFunctionType(left, right, appendable, expression, context);
+			convertFunctionType(left, right, appendable, expression);
 		} else if (mustInsertTypeCast(context, left)) {
 			doCastConversion(left, appendable, expression);
 		} else {
@@ -249,7 +248,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	}
 
 	private void convertFunctionType(LightweightTypeReference lightweightExpectedType, final LightweightTypeReference functionType,
-			ITreeAppendable appendable, Later expression, XExpression context) {
+			ITreeAppendable appendable, Later expression) {
 		if (lightweightExpectedType.isSynonym()) {
 			throw new IllegalStateException();
 		}
@@ -274,23 +273,22 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		FunctionTypeReference functionTypeReference = lightweightExpectedType.tryConvertToFunctionTypeReference(false);
 		if (functionTypeReference == null)
 			throw new IllegalStateException("Expected type does not seem to be a SAM type");
-		JvmTypeReference convertedExpectedType = functionTypeReference.toInstanceTypeReference().toTypeReference();
-		serialize(convertedExpectedType, context, appendable, false, false);
+		appendable.append(functionTypeReference.toInstanceTypeReference());
 		appendable.append("() {");
 		appendable.increaseIndentation().increaseIndentation();
 		appendable.newLine().append("public ");
 		LightweightTypeReference returnType = functionTypeReference.getReturnType();
 		if (returnType == null)
 			throw new IllegalStateException("Could not find return type");
-		serialize(returnType.toTypeReference(), context, appendable, false, false);
+		appendable.append(returnType);
 		appendable.append(" ").append(operation.getSimpleName()).append("(");
 		List<JvmFormalParameter> params = operation.getParameters();
 		for (int i = 0; i < params.size(); i++) {
 			if (i != 0)
-				appendable.append(",");
+				appendable.append(", ");
 			JvmFormalParameter p = params.get(i);
 			final String name = p.getName();
-			serialize(functionTypeReference.getParameterTypes().get(i).toTypeReference(), context, appendable, false, false);
+			appendable.append(functionTypeReference.getParameterTypes().get(i));
 			appendable.append(" ").append(name);
 		}
 		appendable.append(") {");
@@ -312,7 +310,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 				final String name = p.getName();
 				appendable.append(name);
 				if (iterator.hasNext())
-					appendable.append(",");
+					appendable.append(", ");
 			}
 			appendable.append(");");
 		} finally {
