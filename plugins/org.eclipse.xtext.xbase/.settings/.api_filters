@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.xbase" version="2">
+    <resource path="src/org/eclipse/xtext/xbase/GenerateXbase.java" type="org.eclipse.xtext.xbase.GenerateXbase">
+        <filter comment="Need to extend LanguageConfig" id="571519004">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.xbase.GenerateXbase.main(String[])"/>
+                <message_argument value="LanguageConfig"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="xtend-gen/org/eclipse/xtext/xbase/file/AbstractFileSystemSupport.java" type="org.eclipse.xtext.xbase.file.AbstractFileSystemSupport">
         <filter comment="Non-API type in signature" id="574619656">
             <message_arguments>
