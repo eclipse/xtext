@@ -11,6 +11,7 @@ import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Maps.*;
 import static com.google.common.collect.Sets.*;
 
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
@@ -66,6 +67,27 @@ public class ScopeStack {
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * @throws IllegalStateException if the referenced object does not have a name in the current scope.
+	 */
+	/* @NonNull */
+	public String removeName(Object referenced) throws IllegalStateException {
+		if (referenced == null)
+			throw new NullPointerException("referenced");
+		if (scopes.isEmpty())
+			throw new IllegalStateException("Cannot find referenced object in current scope");
+		Scope currentScope = scopes.get(scopes.size() - 1);
+		Iterator<Variable> iterator = currentScope.variables().iterator();
+		while(iterator.hasNext()) {
+			Variable v = iterator.next();
+			if (v.referenced.equals(referenced)) {
+				iterator.remove();
+				return v.name;
+			}
+		}
+		throw new IllegalStateException("Cannot find referenced object in current scope");
 	}
 	
 	/**
@@ -128,7 +150,7 @@ public class ScopeStack {
 		public void addVariable(String name, boolean synthetic, Object element) {
 			if (variables.containsKey(name))
 				throw new IllegalArgumentException("variable '"+name+"' already declared in scope.");
-			variables.put(name, new Variable(name, synthetic,element));
+			variables.put(name, new Variable(name, synthetic, element));
 		}
 		
 		public Set<String> variableNames() {
