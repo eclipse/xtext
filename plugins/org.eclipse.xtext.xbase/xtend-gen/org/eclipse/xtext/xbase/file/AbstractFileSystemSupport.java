@@ -1,7 +1,7 @@
 package org.eclipse.xtext.xbase.file;
 
+import com.google.common.base.Objects;
 import com.google.common.io.CharStreams;
-import com.google.common.io.InputSupplier;
 import com.google.inject.Inject;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,22 +24,51 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
   
   public CharSequence getContents(final Path path) {
     try {
-      final InputSupplier<InputStreamReader> _function = new InputSupplier<InputStreamReader>() {
-        public InputStreamReader getInput() throws IOException {
-          InputStream _contentsAsStream = AbstractFileSystemSupport.this.getContentsAsStream(path);
-          String _charset = AbstractFileSystemSupport.this.getCharset(path);
-          return new InputStreamReader(_contentsAsStream, _charset);
+      try {
+        InputStream _contentsAsStream = this.getContentsAsStream(path);
+        String _charset = this.getCharset(path);
+        final InputStreamReader reader = new InputStreamReader(_contentsAsStream, _charset);
+        IOException threw = null;
+        try {
+          return CharStreams.toString(reader);
+        } catch (final Throwable _t) {
+          if (_t instanceof IOException) {
+            final IOException e = (IOException)_t;
+            threw = e;
+          } else {
+            throw Exceptions.sneakyThrow(_t);
+          }
+        } finally {
+          try {
+            reader.close();
+          } catch (final Throwable _t_1) {
+            if (_t_1 instanceof IOException) {
+              final IOException e_1 = (IOException)_t_1;
+              boolean _equals = Objects.equal(threw, null);
+              if (_equals) {
+                threw = e_1;
+              }
+            } else {
+              throw Exceptions.sneakyThrow(_t_1);
+            }
+          }
         }
-      };
-      return CharStreams.<InputStreamReader>toString(_function);
-    } catch (final Throwable _t) {
-      if (_t instanceof IOException) {
-        final IOException exc = (IOException)_t;
-        String _message = exc.getMessage();
-        throw new IllegalArgumentException(_message, exc);
-      } else {
-        throw Exceptions.sneakyThrow(_t);
+        boolean _equals_1 = Objects.equal(threw, null);
+        if (_equals_1) {
+          throw new AssertionError("threw cannot be null here");
+        }
+        throw threw;
+      } catch (final Throwable _t_2) {
+        if (_t_2 instanceof IOException) {
+          final IOException exc = (IOException)_t_2;
+          String _message = exc.getMessage();
+          throw new IllegalArgumentException(_message, exc);
+        } else {
+          throw Exceptions.sneakyThrow(_t_2);
+        }
       }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   

@@ -25,7 +25,6 @@ import org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment;
 
 import com.google.common.collect.Lists;
 import com.google.common.io.CharStreams;
-import com.google.common.io.InputSupplier;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -117,12 +116,13 @@ public class JFlexGeneratorFragment extends AbstractGeneratorFragment {
 	private String read(final String path) {
 		if (path != null) {
 			try {
-				String patterns = CharStreams.toString(new InputSupplier<InputStreamReader>() {
-					public InputStreamReader getInput() throws IOException {
-						return new InputStreamReader(getClass().getResourceAsStream(path), "ISO-8859-1");
-					}
-				});
-				return patterns;	
+				InputStreamReader reader = new InputStreamReader(getClass().getResourceAsStream(path), "ISO-8859-1");
+				try {
+					String patterns = CharStreams.toString(reader);
+					return patterns;
+				} finally {
+					reader.close();
+				}
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}

@@ -37,6 +37,7 @@ import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.AbstractIterator;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -372,7 +373,7 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 			public Iterator<AbstractTraceRegion> iterator() {
 				AbstractTraceRegion root = getRootTraceRegion();
 				if (root == null)
-					return Iterators.emptyIterator();
+					return ImmutableSet.<AbstractTraceRegion>of().iterator();
 				final Iterator<AbstractTraceRegion> allLeafs = root.leafIterator();
 				Iterator<AbstractTraceRegion> result = new AbstractIterator<AbstractTraceRegion>() {
 					
@@ -419,7 +420,7 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 			public Iterator<AbstractTraceRegion> iterator() {
 				AbstractTraceRegion root = getRootTraceRegion();
 				if (root == null)
-					return Iterators.emptyIterator();
+					return ImmutableSet.<AbstractTraceRegion>of().iterator();
 				final Iterator<AbstractTraceRegion> result = root.leafIterator();
 				return result;
 			}

@@ -10,10 +10,10 @@ package org.eclipse.xtend.core.parser;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -25,8 +25,6 @@ import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent;
 import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowContext;
 
 import com.google.common.io.ByteStreams;
-import com.google.common.io.InputSupplier;
-import com.google.common.io.OutputSupplier;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -122,33 +120,30 @@ public class JFlexLoader implements IWorkflowComponent, JFlexMain {
 			}
 		}
 		log.info("downloading JFlex 1.4.3 from '"+DOWNLOAD_URL+"' ...");
-		ByteStreams.copy(new InputSupplier<InputStream>() {
-			public InputStream getInput() throws IOException {
-				return new BufferedInputStream(new URL(DOWNLOAD_URL).openStream());
-			}
-		}, new OutputSupplier<OutputStream>() {
-
-			public OutputStream getOutput() throws IOException {
-				return new BufferedOutputStream(new FileOutputStream(tempFile));
-			}
-		});
+		copyIntoFileAndCloseStream(new URL(DOWNLOAD_URL).openStream(), tempFile);
 		log.info("finished downloading. Now extracting to " + downloadTo);
 		final ZipFile zipFile = new ZipFile(tempFile);
 		try {
 			final ZipEntry entry = zipFile.getEntry("jflex/lib/JFlex.jar");
-			ByteStreams.copy(new InputSupplier<InputStream>() {
-				public InputStream getInput() throws IOException {
-					return zipFile.getInputStream(entry);
-				}
-			}, new OutputSupplier<OutputStream>() {
-				public OutputStream getOutput() throws IOException {
-					return new BufferedOutputStream(new FileOutputStream(jarFile));
-				}
-			});
+			copyIntoFileAndCloseStream(zipFile.getInputStream(entry), jarFile);
 		} finally {
 			zipFile.close();
 		}
 		return true;
+	}
+
+	protected void copyIntoFileAndCloseStream(InputStream content, final File file) throws FileNotFoundException, IOException {
+		BufferedInputStream inputStream = new BufferedInputStream(content);
+		try {
+			BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file));
+			try {
+				ByteStreams.copy(inputStream, outputStream);
+			} finally {
+				outputStream.close();
+			}
+		} finally {
+			inputStream.close();
+		}
 	}
 
 	public void invoke(IWorkflowContext ctx) {

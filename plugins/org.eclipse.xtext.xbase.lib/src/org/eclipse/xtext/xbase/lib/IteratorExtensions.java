@@ -27,6 +27,7 @@ import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicates;
 import com.google.common.collect.AbstractIterator;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -184,7 +185,7 @@ import com.google.common.collect.Sets;
 			throw new IllegalArgumentException("Cannot take a negative number of elements. Argument 'count' was: "
 					+ count);
 		if (count == 0)
-			return Iterators.emptyIterator();
+			return ImmutableSet.<T>of().iterator();
 		return new AbstractIterator<T>() {
 
 			private int remaining = count;
