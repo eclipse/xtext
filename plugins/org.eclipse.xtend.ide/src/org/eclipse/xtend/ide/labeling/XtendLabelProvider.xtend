@@ -21,6 +21,7 @@ import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping
 import org.eclipse.xtext.xbase.ui.labeling.XbaseImageAdornments
 import org.eclipse.xtext.xbase.validation.UIStrings
+import org.eclipse.xtend.core.xtend.XtendParameter
 
 /**
  * Provides labels for Xtend elements.
@@ -150,6 +151,10 @@ public class XtendLabelProvider extends XtendJvmLabelProvider {
 
 	protected def text(XtendEnumLiteral element) {
 		element.name
+	}
+	
+	protected def text(XtendParameter element) {
+		 element.parameterType.simpleName + " " + element.name
 	}
 
 	protected def JvmTypeReference getDisplayedType(XtendField field) {
