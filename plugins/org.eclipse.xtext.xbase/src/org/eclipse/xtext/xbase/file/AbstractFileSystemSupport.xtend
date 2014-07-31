@@ -18,7 +18,24 @@ abstract class AbstractFileSystemSupport implements MutableFileSystemSupport {
 	
 	override CharSequence getContents(Path path) {
 		try {
-			return CharStreams.toString [| new InputStreamReader(path.contentsAsStream, path.getCharset) ]
+			val reader = new InputStreamReader(path.contentsAsStream, path.getCharset)
+			var IOException threw = null
+			try {
+				return CharStreams.toString(reader)
+			} catch(IOException e) {
+				threw = e;
+			} finally {
+				try {
+					reader.close
+				} catch(IOException e) {
+					if (threw == null)
+						threw = e
+				}
+			}
+			if (threw == null) {
+				throw new AssertionError("threw cannot be null here")
+			}
+			throw threw
 		} catch (IOException exc) {
 			throw new IllegalArgumentException(exc.message, exc)	
 		}
