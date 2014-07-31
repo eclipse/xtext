@@ -27,6 +27,10 @@ Workflow {
 	component = DirectoryCleaner {
 		directory = "${runtimeProject}.ui/src-gen"
 	}
+	
+	component = DirectoryCleaner {
+		directory = "${runtimeProject}/model/generated"
+	}
 
 	component = Generator auto-inject {
 		pathRtProject = runtimeProject
@@ -41,7 +45,7 @@ Workflow {
 			fragment = grammarAccess.GrammarAccessFragment auto-inject {}
 
 			// generates Java API for the generated EPackages 
-			fragment = ecore.EcoreGeneratorFragment auto-inject {
+			fragment = ecore.EMFGeneratorFragment auto-inject {
 				emfRuntimeVersion = "2.9"
 			}
 
@@ -118,7 +122,9 @@ Workflow {
     		fragment = xbase.XbaseGeneratorFragment auto-inject {}
     
     		// provides a preference page for template proposals
-    		fragment = templates.CodetemplatesGeneratorFragment auto-inject {}
+    		fragment = templates.CodetemplatesGeneratorFragment auto-inject {
+    			suppressRestriction = false
+    		}
     
     		// provides a compare view
     		fragment = compare.CompareFragment auto-inject {}

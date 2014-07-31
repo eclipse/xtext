@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.generator.templates;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.xtext.Grammar;
@@ -24,6 +26,24 @@ import org.eclipse.xtext.generator.Naming;
  */
 public class CodetemplatesGeneratorFragment extends AbstractGeneratorFragment {
 	
+	private boolean suppressRestriction = true;
+
+	/**
+	 * Set this flag to <code>false</code> if you don't want to add the 
+	 * {@code @SuppressWarnings("restriction")} to the generated PartialContentAssistParser.  
+	 * @since 2.7
+	 */
+	public void setSuppressRestriction(boolean suppressRestriction) {
+		this.suppressRestriction = suppressRestriction;
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public boolean isSuppressRestriction() {
+		return suppressRestriction;
+	}
+	
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		return new BindFactory()
@@ -38,6 +58,11 @@ public class CodetemplatesGeneratorFragment extends AbstractGeneratorFragment {
 			.addTypeToType("org.eclipse.xtext.ui.codetemplates.ui.partialEditing.IPartialContentAssistParser",
 				getPartialContentAssistParser(grammar, getNaming()))
 			.getBindings();
+	}
+	
+	@Override
+	protected List<Object> getParameters(Grammar grammar) {
+		return Collections.<Object>singletonList(isSuppressRestriction());
 	}
 	
 	@Override

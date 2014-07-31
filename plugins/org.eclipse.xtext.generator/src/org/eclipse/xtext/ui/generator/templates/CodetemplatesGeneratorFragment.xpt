@@ -16,18 +16,18 @@
 «EXTENSION org::eclipse::xtext::generator::grammarAccess::GrammarAccess»
 
 
-«DEFINE addToPluginXmlRt FOR Grammar»«ENDDEFINE»
+«DEFINE addToPluginXmlRt(boolean restriction) FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToPluginXmlUi FOR Grammar»«ENDDEFINE»
+«DEFINE addToPluginXmlUi(boolean restriction) FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToStandaloneSetup FOR Grammar»«ENDDEFINE»
+«DEFINE addToStandaloneSetup(boolean restriction) FOR Grammar»«ENDDEFINE»
 
-«DEFINE generate FOR Grammar»
-	«EXPAND PartialContentAssistParser»
+«DEFINE generate(boolean restriction) FOR Grammar»
+	«EXPAND PartialContentAssistParser(restriction)»
 «ENDDEFINE»
 
 
-«DEFINE PartialContentAssistParser FOR Grammar»
+«DEFINE PartialContentAssistParser(boolean restriction) FOR Grammar»
 «FILE partialParser().asPath()+".java" SRC_GEN_UI-»
 /*
  «fileHeader()»
@@ -46,7 +46,9 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+«IF restriction-»
 @SuppressWarnings("restriction")
+«ENDIF-»
 public class «partialParser().toSimpleName()» extends «parser().toSimpleName()» implements IPartialContentAssistParser {
 
 	private AbstractRule rule;

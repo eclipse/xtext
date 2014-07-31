@@ -7,10 +7,9 @@
     <package 
        uri = "http://www.eclipse.org/xtext/purexbase/PureXbase" 
        class = "org.eclipse.xtext.purexbase.pureXbase.PureXbasePackage"
-       genModel = "org/eclipse/xtext/purexbase/PureXbase.genmodel" /> 
+       genModel = "model/generated/PureXbase.genmodel" /> 
 	
   </extension>
-
 
 
 
