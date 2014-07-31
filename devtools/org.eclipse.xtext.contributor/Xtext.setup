@@ -90,11 +90,19 @@
       </predicates>
     </sourceLocators>
   </setupTasks>
-  <setupTasks xsi:type="setup:TargletTask" name="Eclipse TP" activeRepositoryList="galileo">
+  <setupTasks xsi:type="setup:ContextVariableTask" documentation="Not used ATM" name="eclipse.tp.name" value="juno" label="Target Platform">
+    <choices value="galileo" label="Galileo - 3.5"/>
+    <choices value="helios" label="Helios - 3.6"/>
+    <choices value="indigo" label="Indigo - 3.7"/>
+    <choices value="juno" label="Juno - 4.2"/>
+    <choices value="kepler" label="Kepler - 4.3"/>
+    <choices value="luna" label="Luna - 4.4"/>
+  </setupTasks>
+  <setupTasks xsi:type="setup:TargletTask" name="Eclipse TP" activeRepositoryList="${eclipse.tp.name}">
     <roots id="org.junit4" versionRange="[4.6.0,5.0.0)"/>
-    <roots id="org.eclipse.jdt.feature.group" versionRange="[3.5.0,3.6.0)"/>
-    <roots id="org.eclipse.pde.feature.group" versionRange="[3.5.0,3.6.0)"/>
-    <roots id="org.eclipse.platform.feature.group" versionRange="[3.5.0,3.6.0)"/>
+    <roots id="org.eclipse.jdt.feature.group" versionRange="[3.5.0,3.9.0)"/>
+    <roots id="org.eclipse.pde.feature.group" versionRange="[3.5.0,3.9.0)"/>
+    <roots id="org.eclipse.platform.feature.group" versionRange="[3.5.0,3.9.0)"/>
     <roots id="org.eclipse.emf.sdk.feature.group" versionRange="2.9.0"/>
     <roots id="de.itemis.xtext.antlr.feature.feature.group" versionRange="2.0.0"/>
     <roots id="org.eclipse.draw2d.feature.group"/>
@@ -102,6 +110,16 @@
     <roots id="com.google.guava" versionRange="[15.0.0,16.0.0)"/>
     <roots id="org.objectweb.asm" versionRange="5.0.1"/>
     <roots id="org.junit"/>
+    <repositoryLists name="juno">
+      <p2Repositories url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
+      <p2Repositories url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
+      <p2Repositories url="${xtext.nightly.composite}"/>
+      <p2Repositories url="http://download.eclipse.org/technology/m2e/releases/1.0/"/>
+      <p2Repositories url="http://download.itemis.com/updates/releases/2.1.1/"/>
+      <p2Repositories url="http://download.eclipse.org/eclipse/updates/3.8/"/>
+      <p2Repositories url="http://download.eclipse.org/tools/gef/updates/milestones"/>
+      <p2Repositories url="${emf.update.site}"/>
+    </repositoryLists>
     <repositoryLists name="galileo">
       <p2Repositories url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
       <p2Repositories url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
@@ -111,12 +129,6 @@
       <p2Repositories url="http://download.eclipse.org/eclipse/updates/3.5/"/>
       <p2Repositories url="http://download.eclipse.org/tools/gef/updates/milestones"/>
       <p2Repositories url="${emf.update.site}"/>
-    </repositoryLists>
-  </setupTasks>
-  <setupTasks xsi:type="setup:TargletTask" name="junit4">
-    <roots id="org.junit4"/>
-    <repositoryLists name="juno">
-      <p2Repositories url="http://download.eclipse.org/eclipse/updates/3.8/"/>
     </repositoryLists>
   </setupTasks>
   <setupTasks xsi:type="setup:TargletTask" name="Project Import" activeRepositoryList="galileo">
@@ -241,14 +253,6 @@
         <operands xsi:type="predicates:NaturePredicate" nature="org.eclipse.pde.FeatureNature"/>
       </predicates>
     </workingSets>
-  </setupTasks>
-  <setupTasks xsi:type="setup:ContextVariableTask" documentation="Not used ATM" name="eclipse.tp.name" value="galileo" label="Target Platform">
-    <choices value="galileo" label="Galileo - 3.5"/>
-    <choices value="helios" label="Helios - 3.6"/>
-    <choices value="indigo" label="Indigo - 3.7"/>
-    <choices value="juno" label="Juno - 4.2"/>
-    <choices value="kepler" label="Kepler - 4.3"/>
-    <choices value="luna" label="Luna - 4.4"/>
   </setupTasks>
   <branches name="master">
     <setupTasks xsi:type="setup:ApiBaselineTask" documentation="Xtext 2.6 stream API" version="2.6" zipLocation="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.6.0/R201405210727/tmf-xtext-SDK-2.6.0.zip&amp;r=1"/>
