@@ -32,7 +32,6 @@ class XtendResourceSetBasedResourceDescriptionsTest extends AbstractXtendTestCas
 			'foo/ClassA.xtend'->'''package foo class ClassA extends bar.ClassB {}''',
 			'bar/ClassB.xtend'->'''package bar class ClassB { public foo.ClassA myField }'''
 		)
-		//TODO retry with new type system
 		val List<? extends Resource> resources = resourceSet.resources
 		for (Resource res : new ArrayList<Resource>(resources)) {
 			val issues = validator.validate(res, CheckMode::ALL, CancelIndicator::NullImpl)

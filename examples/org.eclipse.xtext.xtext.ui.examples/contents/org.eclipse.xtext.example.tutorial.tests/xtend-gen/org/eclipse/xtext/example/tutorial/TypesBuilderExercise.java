@@ -3,6 +3,7 @@ package org.eclipse.xtext.example.tutorial;
 import com.google.inject.Inject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.example.tutorial.TutorialInjectorProvider;
+import org.eclipse.xtext.example.tutorial.jvmmodel.TutorialJvmModelInferrer;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
@@ -71,6 +72,8 @@ public class TypesBuilderExercise {
       _builder_1.newLine();
       _builder_1.append(" ");
       _builder_1.append("*/");
+      _builder_1.newLine();
+      _builder_1.append("@SuppressWarnings(\"all\")");
       _builder_1.newLine();
       _builder_1.append("public class Person {");
       _builder_1.newLine();

@@ -28,6 +28,7 @@ import org.junit.Assert
 import org.junit.Before
 import testdata.Annotation1
 import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -38,12 +39,13 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 	@Inject protected IGeneratorConfigProvider generatorConfigProvider
 	@Inject protected IFilePostProcessor postProcessor
 	@Inject protected extension CompilationTestHelper compilationTestHelper
+	@Inject ProcessorInstanceForJvmTypeProvider processorProvider
 	
 	protected boolean useJavaCompiler = false
 	
 	@Before
 	public def setupCompiler() {
-		compilationTestHelper.setJavaCompilerClassPath(
+		val Class<?>[] classes = #[
 			getClass(),
 			Amount,
 			Data,
@@ -58,8 +60,9 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			EObject,
 			Matcher,
 			Is,
-			Assert
-		)
+			Assert]
+		compilationTestHelper.setJavaCompilerClassPath(classes)
+		processorProvider.classLoader = class.classLoader
 	}
 	
 	def assertCompilesTo(CharSequence input, CharSequence expected){
