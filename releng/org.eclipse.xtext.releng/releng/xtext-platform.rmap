@@ -165,7 +165,7 @@
   </rm:searchPath>
  
   <rm:searchPath name="platform">
-    <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(ECLIPSE.TARGET.ALIAS=Galileo)" readerType="p2" source="false" mutable="false">
+    <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(ECLIPSE.TARGET.ALIAS=Helios)" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
       <rm:uri format="{0}">

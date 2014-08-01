@@ -104,7 +104,7 @@
 				<sysproperty key="git.clone.dest" value="${git.clone.dest}" />
 				<sysproperty key="checkout.location" value="${checkout.location}" />
 				<sysproperty key="eclipse.download" value="${eclipse.download}" />
-				<sysproperty key="ECLIPSE.TARGET.ALIAS" value="Galileo" />
+				<sysproperty key="ECLIPSE.TARGET.ALIAS" value="Helios" />
 				<jvmarg line=" -Xmx1792m -XX:MaxPermSize=200M" />
 			</java>
 		</sequential>
