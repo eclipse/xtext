@@ -7,8 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.xtext.ui;
 
-import static com.google.common.collect.Sets.*;
-
+import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -23,6 +22,7 @@ import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.core.WorkingCopyOwner;
 import org.eclipse.jdt.core.compiler.IProblem;
 import org.eclipse.jdt.core.search.IJavaSearchConstants;
 import org.eclipse.jdt.core.search.IJavaSearchScope;
@@ -154,62 +154,97 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 		if (project == null)
 			return;
 		
-		String fqn = superType.getIdentifier();
+		final String superTypeIdentifier = superType.getIdentifier();
 		// java.lang.Object - no need to create hierarchy scope
-		if (Object.class.getName().equals(fqn)) {
+		if (Object.class.getName().equals(superTypeIdentifier)) {
 			createTypeProposals(project, proposalFactory, context, typeReference, filter, valueConverter, acceptor);
 			return;
 		} 
-		
-		final Collection<JvmType> superTypes = superTypeCollector.collect(superType);
-		final Set<String> superTypeNames = Sets.newHashSet();
-		for(JvmType collectedSuperType: superTypes) {
-			superTypeNames.add(collectedSuperType.getIdentifier());
-		}
-		superTypeNames.remove(fqn);
-		final IJdtTypeProvider provider = jdtTypeProviderFatory.createTypeProvider(superType.eResource().getResourceSet());
 		try {
-			IType type = project.findType(fqn);
-			if (type != null) {
-				IJavaSearchScope hierarchyScope = SearchEngine.createHierarchyScope(type);
-				IJavaSearchScope projectScope = SearchEngine.createJavaSearchScope(new IJavaElement[] { project });
-				IJavaSearchScope scope = new IntersectingJavaSearchScope(projectScope, hierarchyScope);
-				final Set<String> alreadyAccepted = newHashSet(); 
-				searchAndCreateProposals(scope, proposalFactory, context, typeReference, TypeMatchFilters.and(filter, new ITypesProposalProvider.Filter() {
-					public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
-							char[][] enclosingTypeNames, String path) {
-						StringBuilder fqName = new StringBuilder(packageName.length + simpleTypeName.length + 1);
-						if (packageName.length != 0) {
-							fqName.append(packageName);
-							fqName.append('.');
-						}
-						for(char[] enclosingType: enclosingTypeNames) {
-							fqName.append(enclosingType);
-							fqName.append('.');
-						}
-						fqName.append(simpleTypeName);
-						String fqNameAsString = fqName.toString();
-						// the dirty state proposals
-						if (!alreadyAccepted.contains(fqName) && !(path.endsWith(".class") || path.endsWith(".java"))) {
-							JvmType type = provider.findTypeByName(fqNameAsString);
-							return superTypeCollector.collect(type).contains(superType);
-						} else {
-							boolean b = !superTypeNames.contains(fqNameAsString);
-							if (b) {
-								alreadyAccepted.add(fqNameAsString);
-							}
-							return b;
-						}
-					}
-					
-					public int getSearchFor() {
-						return filter.getSearchFor();
-					}
-					
-				}), valueConverter, acceptor);
+			Iterable<IEObjectDescription> dirtyTypes = dirtyStateManager.getExportedObjectsByType(TypesPackage.Literals.JVM_TYPE);
+			final Set<String> dirtyNames = Sets.newHashSet();
+			for(IEObjectDescription description: dirtyTypes) {
+				dirtyNames.add(description.getQualifiedName().toString());
 			}
+			final Set<String> superTypeNames = Sets.newHashSet();
+			final IJdtTypeProvider provider = jdtTypeProviderFatory.createTypeProvider(superType.eResource().getResourceSet());
+			IJavaSearchScope scope = createSearchScope(project, superType, superTypeNames);
+			searchAndCreateProposals(scope, proposalFactory, context, typeReference, TypeMatchFilters.and(filter, new ITypesProposalProvider.Filter() {
+				public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
+						char[][] enclosingTypeNames, String path) {
+					if (path.endsWith(".class") || path.endsWith(".java")) { // Java index match
+						String identifier = getIdentifier(packageName, simpleTypeName, enclosingTypeNames);
+						if (dirtyNames.contains(identifier)) { // currently dirty, will be processed later (as path with another extension)
+							return false;
+						}
+						if (!superTypeNames.contains(identifier)) {
+							return true;
+						}
+						return false;
+					} else { // accept match from dirty state
+						String identifier = getIdentifier(packageName, simpleTypeName, enclosingTypeNames);
+						if (identifier.equals(superTypeIdentifier)) {
+							return true;
+						}
+						JvmType candidate = provider.findTypeByName(identifier, true);
+						if (superTypeCollector.collect(candidate).contains(superType)) {
+							return true;
+						}
+						return false;
+					}
+				}
+				
+				protected String getIdentifier(char[] packageName, char[] simpleTypeName, char[][] enclosingTypeNames) {
+					StringBuilder result = new StringBuilder(packageName.length + simpleTypeName.length + 1);
+					if (packageName.length != 0) {
+						result.append(packageName);
+						result.append('.');
+					}
+					for(char[] enclosingType: enclosingTypeNames) {
+						result.append(enclosingType);
+						result.append('$');
+					}
+					result.append(simpleTypeName);
+					return result.toString();
+				}
+				
+				public int getSearchFor() {
+					return filter.getSearchFor();
+				}
+				
+			}), valueConverter, acceptor);
 		} catch(JavaModelException ex) {
 			// ignore
+		}
+	}
+
+	/**
+	 * @param project the current Java project
+	 * 
+	 * @since 2.7
+	 */
+	protected IJavaSearchScope createSearchScope(IJavaProject project, JvmType superType, Set<String> superTypeNames) throws JavaModelException {
+		IType type = project.findType(superType.getIdentifier());
+		if (type == null) {
+			return new IntersectingJavaSearchScope(); // empty intersection
+		}
+		try {
+			// Method is available in JDT 3.6 or better
+			// more than twice as fast as the older alternative
+			Method method = SearchEngine.class.getMethod("createStrictHierarchyScope", IJavaProject.class, IType.class, Boolean.TYPE, Boolean.TYPE, WorkingCopyOwner.class);
+			method.setAccessible(true);
+			IJavaSearchScope result = (IJavaSearchScope) method.invoke(null, project, type, Boolean.TRUE, Boolean.TRUE, null);
+			return result;
+		} catch (Exception e) {
+			final Collection<JvmType> superTypes = superTypeCollector.collect(superType);
+			for(JvmType collectedSuperType: superTypes) {
+				superTypeNames.add(collectedSuperType.getIdentifier());
+			}
+			superTypeNames.remove(superType.getIdentifier());
+			IJavaSearchScope hierarchyScope = SearchEngine.createHierarchyScope(type);
+			IJavaSearchScope projectScope = SearchEngine.createJavaSearchScope(new IJavaElement[] { project });
+			IJavaSearchScope result = new IntersectingJavaSearchScope(projectScope, hierarchyScope);
+			return result;
 		}
 	}
 

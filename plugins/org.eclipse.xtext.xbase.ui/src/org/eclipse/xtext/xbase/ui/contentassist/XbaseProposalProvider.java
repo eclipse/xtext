@@ -914,7 +914,11 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	protected QualifiedNameValueConverter getQualifiedNameValueConverter() {
 		return qualifiedNameValueConverter;
 	}
-
+	
+	protected ITypesProposalProvider getTypesProposalProvider() {
+		return typeProposalProvider;
+	}
+	
 	protected boolean isIdRule(final String ruleName) {
 		return "IdOrSuper".equals(ruleName) || "ValidID".equals(ruleName) || "FeatureCallID".equals(ruleName); 
 	}
