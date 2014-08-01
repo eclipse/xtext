@@ -177,7 +177,19 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 		ResourceSet rs = forcedResourceSet != null ? forcedResourceSet : new XtextResourceSet();
 		for (String loadedResource : loadedResources) {
 			URI loadedResourceUri = URI.createURI(loadedResource);
-			if(equal(loadedResourceUri.fileExtension(), "ecore")) {
+			if(equal(loadedResourceUri.fileExtension(), "genmodel")) {
+				IResourceServiceProvider resourceServiceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResourceUri);
+				if(resourceServiceProvider == null) {
+					try {
+						Class<?> genModelSupport = Class.forName("org.eclipse.emf.codegen.ecore.xtext.GenModelSupport");
+						genModelSupport.getDeclaredMethod("createInjectorAndDoEMFRegistration").invoke(null);
+					} catch (ClassNotFoundException e) {
+						LOG.error("Couldn't initialize GenModel support. Is it on the classpath?");
+					} catch (Exception e) {
+						LOG.error("Couldn't initialize GenModel support.", e);
+					}
+				}
+			} else if(equal(loadedResourceUri.fileExtension(), "ecore")) {
 				IResourceServiceProvider resourceServiceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResourceUri);
 				if(resourceServiceProvider == null) {
 					EcoreSupportStandaloneSetup.setup();
