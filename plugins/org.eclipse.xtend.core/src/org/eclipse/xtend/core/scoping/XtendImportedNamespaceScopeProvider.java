@@ -25,6 +25,7 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
@@ -36,8 +37,12 @@ import org.eclipse.xtext.linking.impl.ImportedNamesAdapter;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.CompilerPhases;
+import org.eclipse.xtext.resource.EObjectDescription;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.ISelectable;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.ImportNormalizer;
+import org.eclipse.xtext.scoping.impl.MultimapBasedSelectable;
 import org.eclipse.xtext.scoping.impl.SelectableBasedScope;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.Strings;
@@ -324,4 +329,24 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 		return new TypeScopeWithWildcardImports(implicitImports, typeScope);
 	}
 
+	@Override
+	protected ISelectable internalGetAllDescriptions(final Resource resource) {
+		List<IEObjectDescription> descriptions = Lists.newArrayList();
+		for(EObject content: resource.getContents()) {
+			if (content instanceof JvmDeclaredType) {
+				doGetAllDescriptions((JvmDeclaredType) content, descriptions);
+			}
+		}
+		return new MultimapBasedSelectable(descriptions);
+	}
+
+	private void doGetAllDescriptions(JvmDeclaredType type, List<IEObjectDescription> descriptions) {
+		descriptions.add(EObjectDescription.create(getQualifiedNameConverter().toQualifiedName(type.getIdentifier()), type));
+		for(JvmMember member: type.getMembers()) {
+			if (member instanceof JvmDeclaredType) {
+				doGetAllDescriptions((JvmDeclaredType) member, descriptions);
+			}
+		}
+	}
+	
 }
