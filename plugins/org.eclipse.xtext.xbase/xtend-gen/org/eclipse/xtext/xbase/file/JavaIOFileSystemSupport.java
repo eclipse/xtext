@@ -257,8 +257,11 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
       String _string = filePath.toString();
       String _plus = ("/" + _string);
       return new Path(_plus);
+    } else {
+      String _path = uri.path();
+      String _plus_1 = ("/" + _path);
+      return new Path(_plus_1);
     }
-    return null;
   }
   
   @Pure

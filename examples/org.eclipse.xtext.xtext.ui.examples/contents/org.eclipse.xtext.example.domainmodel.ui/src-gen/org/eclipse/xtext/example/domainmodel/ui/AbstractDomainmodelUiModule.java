@@ -321,6 +321,11 @@ public abstract class AbstractDomainmodelUiModule extends DefaultUiModule {
 		return org.eclipse.xtext.xbase.ui.contentassist.ImportingTypesProposalProvider.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends  org.eclipse.xtext.ui.editor.templates.XtextTemplateContextType> bindXtextTemplateContextType() {
+		return org.eclipse.xtext.xbase.ui.templates.XbaseTemplateContextType.class;
+	}
+
 	// contributed by org.eclipse.xtext.generator.generator.GeneratorFragment
 	public Class<? extends org.eclipse.xtext.builder.IXtextBuilderParticipant> bindIXtextBuilderParticipant() {
 		return org.eclipse.xtext.builder.BuilderParticipant.class;

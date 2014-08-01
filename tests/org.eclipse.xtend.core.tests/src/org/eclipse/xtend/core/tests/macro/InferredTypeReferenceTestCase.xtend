@@ -37,13 +37,13 @@ class InferredTypeReferencesTestCase extends AbstractActiveAnnotationTest {
 			'''
 				MULTIPLE FILES WERE GENERATED
 				
-				File 1 : Bar.java
+				File 1 : /myProject/xtend-gen/Bar.java
 				
 				@SuppressWarnings("all")
 				public interface Bar<T> {
 				}
 				
-				File 2 : Foo.java
+				File 2 : /myProject/xtend-gen/Foo.java
 				
 				import org.eclipse.xtend.core.tests.macro.InferredTypeReferencesCheck;
 				

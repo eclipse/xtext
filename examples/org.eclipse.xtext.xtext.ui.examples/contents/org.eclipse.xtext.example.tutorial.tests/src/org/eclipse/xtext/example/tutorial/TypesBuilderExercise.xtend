@@ -1,14 +1,15 @@
 package org.eclipse.xtext.example.tutorial
 
-import org.junit.runner.RunWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.InjectWith
 import com.google.inject.Inject
+import org.eclipse.xtext.example.tutorial.jvmmodel.TutorialJvmModelInferrer
+import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
 import org.junit.Test
+import org.junit.runner.RunWith
 
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(TutorialInjectorProvider))
+@RunWith(XtextRunner)
+@InjectWith(TutorialInjectorProvider)
 class TypesBuilderExercise {
 	
 	/**
@@ -43,6 +44,7 @@ class TypesBuilderExercise {
 			/**
 			 * A simple entity to describe a Person
 			 */
+			@SuppressWarnings("all")
 			public class Person {
 			  private String firstName;
 			  
