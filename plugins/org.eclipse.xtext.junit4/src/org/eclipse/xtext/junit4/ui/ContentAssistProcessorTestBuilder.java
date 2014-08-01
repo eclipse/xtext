@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewer;
@@ -31,7 +32,10 @@ import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.junit4.internal.LineDelimiters;
 import org.eclipse.xtext.junit4.util.ResourceLoadHelper;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.IDirtyResource;
+import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.XtextSourceViewerConfiguration;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
@@ -61,7 +65,11 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 	private String suffix;
 	private int cursorPosition;
 	private Injector injector;
+	private boolean announceDirtyState;
 	private final ResourceLoadHelper loadHelper;
+	@Inject(optional = true)
+	private IDirtyStateManager dirtyStateManager;
+	private IDirtyResource dirtyResource;
 
 	public static class Factory {
 		private Injector injector;
@@ -72,18 +80,20 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 	    }
 
 	    public ContentAssistProcessorTestBuilder create(ResourceLoadHelper resourceLoadHelper) throws Exception {
-	    	return new ContentAssistProcessorTestBuilder(this.injector,resourceLoadHelper);
+	    	return new ContentAssistProcessorTestBuilder(this.injector, resourceLoadHelper);
 	    }
 	}
 
 	public ContentAssistProcessorTestBuilder(ISetup setupClazz, AbstractXtextTests tests) throws Exception {
 		tests.with(setupClazz);
 		injector = tests.getInjector();
+		this.injector.injectMembers(this);
 		this.loadHelper = tests;
 	}
 	
 	public ContentAssistProcessorTestBuilder(Injector injector, ResourceLoadHelper helper) throws Exception {
 		this.injector = injector;
+		this.injector.injectMembers(this);
 		this.loadHelper = helper;
 	}
 
@@ -429,8 +439,14 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 
 	public ICompletionProposal[] computeCompletionProposals(final String currentModelToParse, int cursorPosition)
 			throws Exception {
-		final IXtextDocument xtextDocument = getDocument(currentModelToParse);
-		return computeCompletionProposals(xtextDocument, cursorPosition);
+		try {
+			final IXtextDocument xtextDocument = getDocument(currentModelToParse);
+			return computeCompletionProposals(xtextDocument, cursorPosition);
+		} finally {
+			if (announceDirtyState) {
+				dirtyStateManager.discardDirtyState(dirtyResource);
+			}
+		}
 	}
 
 	protected ICompletionProposal[] computeCompletionProposals(final IXtextDocument xtextDocument, int cursorPosition)
@@ -460,9 +476,35 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 		}
 		return new ICompletionProposal[0];
 	}
+	
+	public ContentAssistProcessorTestBuilder withDirtyState() throws Exception {
+		ContentAssistProcessorTestBuilder result = clone(model, cursorPosition);
+		result.announceDirtyState = true;
+		return result;
+	}
 
 	protected IXtextDocument getDocument(final String currentModelToParse) {
 		final XtextResource xtextResource = loadHelper.getResourceFor(new StringInputStream(Strings.emptyIfNull(currentModelToParse)));
+		if (announceDirtyState) {
+			dirtyResource = new IDirtyResource() {
+				public String getContents() {
+					return currentModelToParse;
+				}
+
+				public String getActualContents() {
+					return currentModelToParse;
+				}
+
+				public IResourceDescription getDescription() {
+					return xtextResource.getResourceServiceProvider().getResourceDescriptionManager().getResourceDescription(xtextResource);
+				}
+
+				public URI getURI() {
+					return xtextResource.getURI();
+				}
+			};
+			dirtyStateManager.manageDirtyState(dirtyResource);
+		}
 		return getDocument(xtextResource, currentModelToParse);
 	}
 
@@ -533,6 +575,7 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 		builder.model = model;
 		builder.cursorPosition = offset;
 		builder.suffix = this.suffix;
+		builder.announceDirtyState = announceDirtyState;
 		return builder;
 	}
 	
@@ -541,6 +584,7 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 		builder.model = this.model;
 		builder.cursorPosition = this.cursorPosition;
 		builder.suffix = postFix;
+		builder.announceDirtyState = announceDirtyState;
 		return builder;
 	}
 
