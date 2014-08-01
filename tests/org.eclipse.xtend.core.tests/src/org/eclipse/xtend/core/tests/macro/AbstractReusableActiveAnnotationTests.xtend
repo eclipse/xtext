@@ -355,54 +355,50 @@ abstract class AbstractReusableActiveAnnotationTests {
 	
 	@Test
 	def void testNoMutationInValidationPhase() {
-		try {
-			assertProcessing(
-				'myannotation/EvilAnnotation.xtend' -> '''
-					package myannotation
+		assertProcessing(
+			'myannotation/EvilAnnotation.xtend' -> '''
+				package myannotation
+				
+				import java.util.List
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationParticipant
+				import org.eclipse.xtend.lib.macro.ValidationParticipant
+				import org.eclipse.xtend.lib.macro.ValidationContext
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				
+				@Active(EvilProcessor)
+				annotation EvilAnnotation {
 					
-					import java.util.List
-					import org.eclipse.xtend.lib.macro.Active
-					import org.eclipse.xtend.lib.macro.TransformationParticipant
-					import org.eclipse.xtend.lib.macro.ValidationParticipant
-					import org.eclipse.xtend.lib.macro.ValidationContext
-					import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
-					import org.eclipse.xtend.lib.macro.TransformationContext
+				}
+				
+				class EvilProcessor implements TransformationParticipant<MutableClassDeclaration>, ValidationParticipant<MutableClassDeclaration> {
 					
-					@Active(EvilProcessor)
-					annotation EvilAnnotation {
-						
+					override doTransform(List<? extends MutableClassDeclaration> classes, extension TransformationContext context) {
+						classes.forEach[
+							final = false
+						]
 					}
 					
-					class EvilProcessor implements TransformationParticipant<MutableClassDeclaration>, ValidationParticipant<MutableClassDeclaration> {
-						
-						override doTransform(List<? extends MutableClassDeclaration> classes, extension TransformationContext context) {
-							classes.forEach[
-								final = false
-							]
-						}
-						
-						override doValidate(List<? extends MutableClassDeclaration> classes, extension ValidationContext context) {
-							classes.forEach[
-								final = true
-							]
-						}
+					override doValidate(List<? extends MutableClassDeclaration> classes, extension ValidationContext context) {
+						classes.forEach[
+							final = true
+						]
 					}
-				''',
-				'myusercode/UserCode.xtend' -> '''
-					package myusercode
-					
-					import myannotation.*
-					
-					@EvilAnnotation
-					class Foo {
-					}
-				'''
-			)[]
-			fail
-		} catch (Throwable t) {
-			assertTrue(t.message,
-				t.message.contains('''cannot be modified'''))
-		}
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				import myannotation.*
+				
+				@EvilAnnotation
+				class Foo {
+				}
+			'''
+		)[
+			xtendFile.eResource.errors.exists[message.contains('cannot be modified')]
+		]
 	}
 	
 	@Test def void testDetectOrphanedElements() {
@@ -2477,53 +2473,48 @@ abstract class AbstractReusableActiveAnnotationTests {
 	}
 	
 	@Test def void testMarkReadAndInitialized2() {
-		try {
-			assertProcessing(
-				'myannotation/InitAnnotation.xtend' -> "
-					package myannotation
+		assertProcessing(
+			'myannotation/InitAnnotation.xtend' -> "
+				package myannotation
+				
+				import java.util.List
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.TransformationParticipant
+				import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+
+				@Active(InitProcessor)
+				annotation Init { }
+				class InitProcessor implements TransformationParticipant<MutableFieldDeclaration> {
 					
-					import java.util.List
-					import org.eclipse.xtend.lib.macro.Active
-					import org.eclipse.xtend.lib.macro.TransformationContext
-					import org.eclipse.xtend.lib.macro.TransformationParticipant
-					import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
-					import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
-	
-					@Active(InitProcessor)
-					annotation Init { }
-					class InitProcessor implements TransformationParticipant<MutableFieldDeclaration> {
-						
-						override doTransform(List<? extends MutableFieldDeclaration> annotatedTargetFields, extension TransformationContext context) {
-							val ctor = annotatedTargetFields.head.declaringType.addConstructor [
-								primarySourceElement = declaringType
-								body = ['''
-									«FOR f : annotatedTargetFields»
-										this.«f.simpleName» = \"foo\";
-									«ENDFOR»
-								''']
-							]
-							annotatedTargetFields.forEach [ field |
-								field.setFinal(true)
-							]
-						}
+					override doTransform(List<? extends MutableFieldDeclaration> annotatedTargetFields, extension TransformationContext context) {
+						val ctor = annotatedTargetFields.head.declaringType.addConstructor [
+							primarySourceElement = declaringType
+							body = ['''
+								«FOR f : annotatedTargetFields»
+									this.«f.simpleName» = \"foo\";
+								«ENDFOR»
+							''']
+						]
+						annotatedTargetFields.forEach [ field |
+							field.setFinal(true)
+						]
 					}
-				",
-				'myusercode/UserCode.xtend' -> '''
-					package myusercode
+				}
+			",
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				class MyClass {
 					
-					class MyClass {
-						
-						@myannotation.Init String myField
-					}
-				'''
-			) []
-			fail
-		} catch (Throwable t) {
-			assertTrue(t.message,
-				t.message.contains('''myField may not have been initialized'''))
-		}
+					@myannotation.Init String myField
+				}
+			'''
+		) [
+			xtendFile.eResource.errors.exists[message.contains('myField may not have been initialized')]
+		]
 	}
-	
 	
 
 	@Test def void testPropertyAnnotation() {
@@ -3028,11 +3019,9 @@ abstract class AbstractReusableActiveAnnotationTests {
 		]
 	}
 
-	def void assertProcessing(Pair<String, String> macroFile, Pair<String, String> clientFile,
-		(CompilationUnitImpl)=>void expectations)
+	def void assertProcessing(Pair<String, String> macroFile, Pair<String, String> clientFile, (CompilationUnitImpl)=>void expectations)
 		
-	def void assertGeneratedCode(Pair<String, String> macroFile, Pair<String, String> clientFile,
-		String... compiledClientFiles) {
+	def void assertGeneratedCode(Pair<String, String> macroFile, Pair<String, String> clientFile, String... compiledClientFiles) {
 		assertProcessing(macroFile, clientFile) [
 			val clientFilesAsSet = compiledClientFiles.map[LineDelimiters.toUnix(it)].toSet
 			assertEquals(clientFilesAsSet.size, compiledClientFiles.length)
