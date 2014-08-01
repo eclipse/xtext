@@ -134,6 +134,7 @@ public class ValidationJobScheduler implements IValidationJobScheduler {
 
 	/**
 	 * @noreference This method is not intended to be referenced by clients.
+	 * @since 2.7
 	 */
 	public void setBuilderStateProvider(Provider<IResourceDescriptions> provider) {
 		builderStateProvider = provider;
@@ -141,6 +142,7 @@ public class ValidationJobScheduler implements IValidationJobScheduler {
 	
 	/**
 	 * @noreference This method is not intended to be referenced by clients.
+	 * @since 2.7
 	 */
 	public void setResourceDescriptionManager(IResourceDescription.Manager resourceDescriptionManager) {
 		this.resourceDescriptionManager = resourceDescriptionManager;

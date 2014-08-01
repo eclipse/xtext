@@ -483,6 +483,7 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 	/**
 	 * Only for testing
 	 * @noreference This method is not intended to be referenced by clients.
+	 * @since 2.7
 	 */
 	public void setResourceServiceProviderRegistry(IResourceServiceProvider.Registry resourceServiceProviderRegistry) {
 		this.resourceServiceProviderRegistry = resourceServiceProviderRegistry;
