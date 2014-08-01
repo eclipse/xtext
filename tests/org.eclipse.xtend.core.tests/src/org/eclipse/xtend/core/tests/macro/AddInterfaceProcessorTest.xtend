@@ -14,7 +14,7 @@ class AddInterfaceProcessorTest extends AbstractActiveAnnotationTest {
 		'''.assertCompilesTo('''
 			MULTIPLE FILES WERE GENERATED
 			
-			File 1 : Foo.java
+			File 1 : /myProject/xtend-gen/Foo.java
 			
 			import org.eclipse.xtend.core.tests.macro.AddInterface;
 			
@@ -23,14 +23,14 @@ class AddInterfaceProcessorTest extends AbstractActiveAnnotationTest {
 			public class Foo {
 			}
 			
-			File 2 : de/test/Test.java
+			File 2 : /myProject/xtend-gen/de/test/Test.java
 			
 			package de.test;
 			
 			@SuppressWarnings("all")
 			public interface Test {
 			}
-			
+
 		''')
 	}
 }

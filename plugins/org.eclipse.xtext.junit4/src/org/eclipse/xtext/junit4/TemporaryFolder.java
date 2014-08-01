@@ -5,10 +5,11 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.junit4.internal;
+package org.eclipse.xtext.junit4;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintStream;
 
 import org.junit.rules.ExternalResource;
 
@@ -39,6 +40,10 @@ import com.google.inject.Singleton;
  * 	}
  * }
  * </pre>
+ * 
+ * @noextend This class is not intended to be subclassed by clients.
+ * 
+ * @since 2.7
  */
 @Singleton
 public class TemporaryFolder extends ExternalResource {
@@ -113,12 +118,29 @@ public class TemporaryFolder extends ExternalResource {
 	 */
 	public File newFolder() throws IOException {
 		try {
-			return createTempDir(getRoot());
+			File tempDir = createTempDir(getRoot());
+			addSourceInfo(tempDir);
+			return tempDir;
 		} catch (IllegalStateException e) {
 			throw new IOException(e.getMessage()); // IOException(e) not available prior to 1.6
 		}
 	}
 	
+	/**
+	 * generate '.createdBy' file with a stack trace so tests that leak temp folders can be identified later.
+	 */
+	protected void addSourceInfo(File tempDir) throws IOException {
+		PrintStream printStream = new PrintStream(new File(tempDir, ".createdBy"));
+		try {
+			printStream.append("This temp dir has been created from the stack below. If you want to make sure the temp folders are cleaned up after a test executed, you should add the following to your test class: \n\n");
+			printStream.append("     @Rule @Inject public TemporaryFolder temporaryFolder \n\n");
+			new Exception().printStackTrace(printStream);
+		} finally {
+			printStream.close();
+		}
+		
+	}
+
 	/**
 	 * Copied from Guava 10.x but added a base dir argument
 	 */

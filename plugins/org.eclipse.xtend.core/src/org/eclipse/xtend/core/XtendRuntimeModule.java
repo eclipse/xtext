@@ -269,20 +269,8 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 		binder.bind(IResourceDescriptions.class).to(EagerResourceSetBasedResourceDescriptions.class);
 	}
 
-	public Class<? extends MutableFileSystemSupport> bindFileHandleFactory() {
-		return AbstractFileSystemSupport.class;
-	}
-
 	public Class<? extends AbstractFileSystemSupport> bindAbstractFileSystemSupport() {
 		return JavaIOFileSystemSupport.class;
-	}
-
-	public void configureWorkspaceConfigContribution(Binder binder) {
-		binder.bind(WorkspaceConfig.class).toProvider(RuntimeWorkspaceConfigProvider.class);
-	}
-
-	public Class<? extends FileLocations> bindFileLocations() {
-		return FileLocationsImpl.class;
 	}
 
 	public Class<? extends IDValueConverter> bindIDValueConverter() {

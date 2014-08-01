@@ -128,7 +128,7 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 	IJavaProject macroProject
 	IJavaProject userProject
 	IFile sourceFile
-
+	
 	override assertProcessing(Pair<String, String> macroFile, Pair<String, String> clientFile,
 		(CompilationUnitImpl)=>void expectations) {
 		macroProject = JavaCore.create(createPluginProject("macroProject"))
@@ -144,14 +144,6 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 				"org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"))
 		sourceFile = userProject.newSource(clientFile.key, clientFile.value.toString)
 		waitForAutoBuild()
-		
-		val markers = macroProject.project.findMarkers(IMarker.PROBLEM,true,-1).filter[getAttribute(IMarker.SEVERITY) == IMarker.SEVERITY_ERROR]
-		assertEquals(markers.map['file'+resource.fullPath.lastSegment+" - "+getAttribute(IMarker.MESSAGE)].join(","), 0, markers.length)
-		
-		val markers2 = userProject.project.findMarkers(IMarker.PROBLEM,true,-1).filter[getAttribute(IMarker.SEVERITY) == IMarker.SEVERITY_ERROR]
-		val buffer = new StringBuilder()
-		markers2.map[resource].toSet.filter(IFile).forEach[CharStreams.copy([|new InputStreamReader(it.contents)], buffer)]
-		assertEquals(markers2.map['file'+resource.fullPath.lastSegment+" - "+getAttribute(IMarker.MESSAGE)].join("\n"), 0, markers2.length)
 		
 		val resourceSet = resourceSetProvider.get(userProject.project)
 		val resource = resourceSet.getResource(URI.createPlatformResourceURI(sourceFile.fullPath.toString, true), true)
