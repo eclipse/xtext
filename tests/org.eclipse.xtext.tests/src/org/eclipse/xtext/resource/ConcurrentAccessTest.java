@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.mwe.utils.StandaloneSetup;
-import org.eclipse.xtext.junit4.internal.TemporaryFolder;
+import org.eclipse.xtext.junit4.TemporaryFolder;
 import org.eclipse.xtext.util.concurrent.AbstractReadWriteAcces;
 import org.eclipse.xtext.util.concurrent.IReadAccess;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;

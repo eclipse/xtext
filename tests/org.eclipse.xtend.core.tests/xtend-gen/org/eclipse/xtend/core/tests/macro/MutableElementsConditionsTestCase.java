@@ -34,7 +34,7 @@ public class MutableElementsConditionsTestCase extends AbstractActiveAnnotationT
     _builder_1.append("MULTIPLE FILES WERE GENERATED");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("File 1 : Foo.java");
+    _builder_1.append("File 1 : /myProject/xtend-gen/Foo.java");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("import ");
@@ -54,7 +54,7 @@ public class MutableElementsConditionsTestCase extends AbstractActiveAnnotationT
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("File 2 : foo/Bar.java");
+    _builder_1.append("File 2 : /myProject/xtend-gen/foo/Bar.java");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("package foo;");
@@ -67,7 +67,7 @@ public class MutableElementsConditionsTestCase extends AbstractActiveAnnotationT
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("File 3 : foo/Bar2.java");
+    _builder_1.append("File 3 : /myProject/xtend-gen/foo/Bar2.java");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("package foo;");
@@ -78,7 +78,7 @@ public class MutableElementsConditionsTestCase extends AbstractActiveAnnotationT
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("File 4 : foo/Bar3.java");
+    _builder_1.append("File 4 : /myProject/xtend-gen/foo/Bar3.java");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("package foo;");
@@ -91,7 +91,7 @@ public class MutableElementsConditionsTestCase extends AbstractActiveAnnotationT
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("File 5 : foo/Bar4.java");
+    _builder_1.append("File 5 : /myProject/xtend-gen/foo/Bar4.java");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("package foo;");
