@@ -12,8 +12,8 @@ import static org.junit.Assert.*
 import org.eclipse.xtext.junit4.internal.TemporaryFolder
 import org.junit.Rule
 
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(InjectorProviderCustom))
+@RunWith(XtextRunner)
+@InjectWith(InjectorProviderCustom)
 class CompilerTest {
 	
 	@Rule

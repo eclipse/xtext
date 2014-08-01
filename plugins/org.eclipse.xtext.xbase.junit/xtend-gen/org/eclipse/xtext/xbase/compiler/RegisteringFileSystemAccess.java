@@ -1,0 +1,127 @@
+/**
+ * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
+package org.eclipse.xtext.xbase.compiler;
+
+import java.util.Set;
+import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtend.lib.annotations.Data;
+import org.eclipse.xtend.lib.macro.file.Path;
+import org.eclipse.xtext.generator.FileSystemSupportBasedFileSystemAccess;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
+
+/**
+ * @author Sven Efftinge - Initial contribution and API
+ */
+@SuppressWarnings("all")
+public class RegisteringFileSystemAccess extends FileSystemSupportBasedFileSystemAccess {
+  @Data
+  public static class GeneratedFile {
+    private final Path path;
+    
+    private final String javaClassName;
+    
+    private final CharSequence contents;
+    
+    public GeneratedFile(final Path path, final String javaClassName, final CharSequence contents) {
+      super();
+      this.path = path;
+      this.javaClassName = javaClassName;
+      this.contents = contents;
+    }
+    
+    @Override
+    @Pure
+    public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + ((this.path== null) ? 0 : this.path.hashCode());
+      result = prime * result + ((this.javaClassName== null) ? 0 : this.javaClassName.hashCode());
+      result = prime * result + ((this.contents== null) ? 0 : this.contents.hashCode());
+      return result;
+    }
+    
+    @Override
+    @Pure
+    public boolean equals(final Object obj) {
+      if (this == obj)
+        return true;
+      if (obj == null)
+        return false;
+      if (getClass() != obj.getClass())
+        return false;
+      RegisteringFileSystemAccess.GeneratedFile other = (RegisteringFileSystemAccess.GeneratedFile) obj;
+      if (this.path == null) {
+        if (other.path != null)
+          return false;
+      } else if (!this.path.equals(other.path))
+        return false;
+      if (this.javaClassName == null) {
+        if (other.javaClassName != null)
+          return false;
+      } else if (!this.javaClassName.equals(other.javaClassName))
+        return false;
+      if (this.contents == null) {
+        if (other.contents != null)
+          return false;
+      } else if (!this.contents.equals(other.contents))
+        return false;
+      return true;
+    }
+    
+    @Override
+    @Pure
+    public String toString() {
+      ToStringBuilder b = new ToStringBuilder(this);
+      b.add("path", this.path);
+      b.add("javaClassName", this.javaClassName);
+      b.add("contents", this.contents);
+      return b.toString();
+    }
+    
+    @Pure
+    public Path getPath() {
+      return this.path;
+    }
+    
+    @Pure
+    public String getJavaClassName() {
+      return this.javaClassName;
+    }
+    
+    @Pure
+    public CharSequence getContents() {
+      return this.contents;
+    }
+  }
+  
+  @Accessors
+  private final Set<RegisteringFileSystemAccess.GeneratedFile> textFiles = CollectionLiterals.<RegisteringFileSystemAccess.GeneratedFile>newHashSet();
+  
+  public void generateFile(final String fileName, final String outputConfigurationName, final CharSequence contents) {
+    super.generateFile(fileName, outputConfigurationName, contents);
+    final Path path = this.getPath(fileName, outputConfigurationName);
+    String _xifexpression = null;
+    boolean _endsWith = fileName.endsWith(".java");
+    if (_endsWith) {
+      int _length = fileName.length();
+      int _minus = (_length - 5);
+      String _substring = fileName.substring(0, _minus);
+      _xifexpression = _substring.replace("/", ".");
+    }
+    final String javaName = _xifexpression;
+    RegisteringFileSystemAccess.GeneratedFile _generatedFile = new RegisteringFileSystemAccess.GeneratedFile(path, javaName, contents);
+    this.textFiles.add(_generatedFile);
+  }
+  
+  @Pure
+  public Set<RegisteringFileSystemAccess.GeneratedFile> getTextFiles() {
+    return this.textFiles;
+  }
+}

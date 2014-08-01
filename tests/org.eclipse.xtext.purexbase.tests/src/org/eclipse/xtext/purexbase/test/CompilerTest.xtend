@@ -16,12 +16,11 @@ import org.junit.runner.RunWith
 import org.junit.Rule
 import org.eclipse.xtext.junit4.internal.TemporaryFolder
 
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(RuntimeInjectorProvider)) 
+@RunWith(XtextRunner)
+@InjectWith(RuntimeInjectorProvider) 
 class CompilerTest {
 	
-	@Rule
-	@Inject public TemporaryFolder temporaryFolder
+	@Rule @Inject public TemporaryFolder temporaryFolder
 	
 	@Inject extension CompilationTestHelper
 	

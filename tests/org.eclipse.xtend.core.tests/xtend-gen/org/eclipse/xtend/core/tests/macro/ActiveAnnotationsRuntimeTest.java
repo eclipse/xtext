@@ -26,7 +26,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.internal.TemporaryFolder;
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -39,6 +38,7 @@ import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -67,9 +67,6 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
   
   @Inject
   private ProcessorInstanceForJvmTypeProvider processorProvider;
-  
-  @Inject
-  private ValidationTestHelper validationTestHelper;
   
   @Inject
   private Provider<XtextResourceSet> resourceSetProvider;
@@ -147,24 +144,27 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
   }
   
   public void assertProcessing(final Pair<String, String> macroFile, final Pair<String, String> clientFile, final Procedure1<? super CompilationUnitImpl> expectations) {
-    final XtextResourceSet resourceSet = this.compileMacroResourceSet(macroFile, clientFile);
-    EList<Resource> _resources = resourceSet.getResources();
-    final Resource singleResource = IterableExtensions.<Resource>head(_resources);
-    final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
-      public void accept(final CompilationTestHelper.Result it) {
-        final CompilationUnitImpl unit = ActiveAnnotationsRuntimeTest.this.compilationUnitProvider.get();
-        EList<EObject> _contents = singleResource.getContents();
-        Iterable<XtendFile> _filter = Iterables.<XtendFile>filter(_contents, XtendFile.class);
-        final XtendFile xtendFile = IterableExtensions.<XtendFile>head(_filter);
-        ActiveAnnotationsRuntimeTest.this.validationTestHelper.assertNoErrors(xtendFile);
-        unit.setXtendFile(xtendFile);
-        expectations.apply(unit);
-        EList<Resource.Diagnostic> _errors = singleResource.getErrors();
-        boolean _isEmpty = _errors.isEmpty();
-        Assert.assertTrue(_isEmpty);
-      }
-    };
-    this.compiler.compile(resourceSet, _function);
+    try {
+      final XtextResourceSet resourceSet = this.compileMacroResourceSet(macroFile, clientFile);
+      EList<Resource> _resources = resourceSet.getResources();
+      final Resource singleResource = IterableExtensions.<Resource>head(_resources);
+      Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
+      singleResource.load(_emptyMap);
+      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        public void accept(final CompilationTestHelper.Result it) {
+          it.getGeneratedCode();
+          final CompilationUnitImpl unit = ActiveAnnotationsRuntimeTest.this.compilationUnitProvider.get();
+          EList<EObject> _contents = singleResource.getContents();
+          Iterable<XtendFile> _filter = Iterables.<XtendFile>filter(_contents, XtendFile.class);
+          final XtendFile xtendFile = IterableExtensions.<XtendFile>head(_filter);
+          unit.setXtendFile(xtendFile);
+          expectations.apply(unit);
+        }
+      };
+      this.compiler.compile(resourceSet, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   public void assertIssues(final Pair<String, String> macroFile, final Pair<String, String> clientFile, final Procedure1<? super List<Issue>> expectations) {

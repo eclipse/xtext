@@ -14,6 +14,7 @@ import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.tests.compiler.XtendCompilerTest;
 import org.eclipse.xtend.core.xtend.XtendFile;
@@ -57,26 +58,19 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
   @Extension
   protected CompilationTestHelper compilationTestHelper;
   
+  @Inject
+  private ProcessorInstanceForJvmTypeProvider processorProvider;
+  
   protected boolean useJavaCompiler = false;
   
   @Before
   public void setupCompiler() {
     Class<? extends AbstractXtendCompilerTest> _class = this.getClass();
-    this.compilationTestHelper.setJavaCompilerClassPath(_class, 
-      Amount.class, 
-      Data.class, 
-      Inject.class, 
-      CollectionLiterals.class, 
-      JvmTypeParameter.class, 
-      ITraceRegionProvider.class, 
-      XExpression.class, 
-      Object.class, 
-      Annotation1.class, 
-      Lists.class, 
-      EObject.class, 
-      Matcher.class, 
-      Is.class, 
-      Assert.class);
+    final Class<?>[] classes = new Class<?>[] { _class, Amount.class, Data.class, Inject.class, CollectionLiterals.class, JvmTypeParameter.class, ITraceRegionProvider.class, XExpression.class, Object.class, Annotation1.class, Lists.class, EObject.class, Matcher.class, Is.class, Assert.class };
+    this.compilationTestHelper.setJavaCompilerClassPath(classes);
+    Class<? extends AbstractXtendCompilerTest> _class_1 = this.getClass();
+    ClassLoader _classLoader = _class_1.getClassLoader();
+    this.processorProvider.setClassLoader(_classLoader);
   }
   
   public void assertCompilesTo(final CharSequence input, final CharSequence expected) {

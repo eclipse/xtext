@@ -53,7 +53,6 @@ import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -697,107 +696,102 @@ public abstract class AbstractReusableActiveAnnotationTests {
   
   @Test
   public void testNoMutationInValidationPhase() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("package myannotation");
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("import java.util.List");
-      _builder.newLine();
-      _builder.append("import org.eclipse.xtend.lib.macro.Active");
-      _builder.newLine();
-      _builder.append("import org.eclipse.xtend.lib.macro.TransformationParticipant");
-      _builder.newLine();
-      _builder.append("import org.eclipse.xtend.lib.macro.ValidationParticipant");
-      _builder.newLine();
-      _builder.append("import org.eclipse.xtend.lib.macro.ValidationContext");
-      _builder.newLine();
-      _builder.append("import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration");
-      _builder.newLine();
-      _builder.append("import org.eclipse.xtend.lib.macro.TransformationContext");
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("@Active(EvilProcessor)");
-      _builder.newLine();
-      _builder.append("annotation EvilAnnotation {");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("class EvilProcessor implements TransformationParticipant<MutableClassDeclaration>, ValidationParticipant<MutableClassDeclaration> {");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("override doTransform(List<? extends MutableClassDeclaration> classes, extension TransformationContext context) {");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("classes.forEach[");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("final = false");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("]");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("override doValidate(List<? extends MutableClassDeclaration> classes, extension ValidationContext context) {");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("classes.forEach[");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("final = true");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("]");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/EvilAnnotation.xtend", _builder.toString());
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("package myusercode");
-      _builder_1.newLine();
-      _builder_1.newLine();
-      _builder_1.append("import myannotation.*");
-      _builder_1.newLine();
-      _builder_1.newLine();
-      _builder_1.append("@EvilAnnotation");
-      _builder_1.newLine();
-      _builder_1.append("class Foo {");
-      _builder_1.newLine();
-      _builder_1.append("}");
-      _builder_1.newLine();
-      Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
-      final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
-        public void apply(final CompilationUnitImpl it) {
-        }
-      };
-      this.assertProcessing(_mappedTo, _mappedTo_1, _function);
-      Assert.fail();
-    } catch (final Throwable _t) {
-      if (_t instanceof Throwable) {
-        final Throwable t = (Throwable)_t;
-        String _message = t.getMessage();
-        String _message_1 = t.getMessage();
-        StringConcatenation _builder_2 = new StringConcatenation();
-        _builder_2.append("cannot be modified");
-        boolean _contains = _message_1.contains(_builder_2);
-        Assert.assertTrue(_message, _contains);
-      } else {
-        throw Exceptions.sneakyThrow(_t);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package myannotation");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.Active");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.TransformationParticipant");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.ValidationParticipant");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.ValidationContext");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.TransformationContext");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@Active(EvilProcessor)");
+    _builder.newLine();
+    _builder.append("annotation EvilAnnotation {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class EvilProcessor implements TransformationParticipant<MutableClassDeclaration>, ValidationParticipant<MutableClassDeclaration> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override doTransform(List<? extends MutableClassDeclaration> classes, extension TransformationContext context) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("classes.forEach[");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("final = false");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override doValidate(List<? extends MutableClassDeclaration> classes, extension ValidationContext context) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("classes.forEach[");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("final = true");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/EvilAnnotation.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package myusercode");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import myannotation.*");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@EvilAnnotation");
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      public void apply(final CompilationUnitImpl it) {
+        XtendFile _xtendFile = it.getXtendFile();
+        Resource _eResource = _xtendFile.eResource();
+        EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+        final Function1<Resource.Diagnostic, Boolean> _function = new Function1<Resource.Diagnostic, Boolean>() {
+          public Boolean apply(final Resource.Diagnostic it) {
+            String _message = it.getMessage();
+            return Boolean.valueOf(_message.contains("cannot be modified"));
+          }
+        };
+        IterableExtensions.<Resource.Diagnostic>exists(_errors, _function);
       }
-    }
+    };
+    this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
   
   @Test
@@ -5143,41 +5137,36 @@ public abstract class AbstractReusableActiveAnnotationTests {
   
   @Test
   public void testMarkReadAndInitialized2() {
-    try {
-      Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/InitAnnotation.xtend", "\n\t\t\t\t\tpackage myannotation\n\t\t\t\t\t\n\t\t\t\t\timport java.util.List\n\t\t\t\t\timport org.eclipse.xtend.lib.macro.Active\n\t\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationContext\n\t\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationParticipant\n\t\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration\n\t\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration\n\t\n\t\t\t\t\t@Active(InitProcessor)\n\t\t\t\t\tannotation Init { }\n\t\t\t\t\tclass InitProcessor implements TransformationParticipant<MutableFieldDeclaration> {\n\t\t\t\t\t\t\n\t\t\t\t\t\toverride doTransform(List<? extends MutableFieldDeclaration> annotatedTargetFields, extension TransformationContext context) {\n\t\t\t\t\t\t\tval ctor = annotatedTargetFields.head.declaringType.addConstructor [\n\t\t\t\t\t\t\t\tprimarySourceElement = declaringType\n\t\t\t\t\t\t\t\tbody = [\'\'\'\n\t\t\t\t\t\t\t\t\t«FOR f : annotatedTargetFields»\n\t\t\t\t\t\t\t\t\t\tthis.«f.simpleName» = \"foo\";\n\t\t\t\t\t\t\t\t\t«ENDFOR»\n\t\t\t\t\t\t\t\t\'\'\']\n\t\t\t\t\t\t\t]\n\t\t\t\t\t\t\tannotatedTargetFields.forEach [ field |\n\t\t\t\t\t\t\t\tfield.setFinal(true)\n\t\t\t\t\t\t\t]\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t");
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("package myusercode");
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("class MyClass {");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("@myannotation.Init String myField");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder.toString());
-      final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
-        public void apply(final CompilationUnitImpl it) {
-        }
-      };
-      this.assertProcessing(_mappedTo, _mappedTo_1, _function);
-      Assert.fail();
-    } catch (final Throwable _t) {
-      if (_t instanceof Throwable) {
-        final Throwable t = (Throwable)_t;
-        String _message = t.getMessage();
-        String _message_1 = t.getMessage();
-        StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("myField may not have been initialized");
-        boolean _contains = _message_1.contains(_builder_1);
-        Assert.assertTrue(_message, _contains);
-      } else {
-        throw Exceptions.sneakyThrow(_t);
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/InitAnnotation.xtend", "\n\t\t\t\tpackage myannotation\n\t\t\t\t\n\t\t\t\timport java.util.List\n\t\t\t\timport org.eclipse.xtend.lib.macro.Active\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationParticipant\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration\n\n\t\t\t\t@Active(InitProcessor)\n\t\t\t\tannotation Init { }\n\t\t\t\tclass InitProcessor implements TransformationParticipant<MutableFieldDeclaration> {\n\t\t\t\t\t\n\t\t\t\t\toverride doTransform(List<? extends MutableFieldDeclaration> annotatedTargetFields, extension TransformationContext context) {\n\t\t\t\t\t\tval ctor = annotatedTargetFields.head.declaringType.addConstructor [\n\t\t\t\t\t\t\tprimarySourceElement = declaringType\n\t\t\t\t\t\t\tbody = [\'\'\'\n\t\t\t\t\t\t\t\t«FOR f : annotatedTargetFields»\n\t\t\t\t\t\t\t\t\tthis.«f.simpleName» = \"foo\";\n\t\t\t\t\t\t\t\t«ENDFOR»\n\t\t\t\t\t\t\t\'\'\']\n\t\t\t\t\t\t]\n\t\t\t\t\t\tannotatedTargetFields.forEach [ field |\n\t\t\t\t\t\t\tfield.setFinal(true)\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package myusercode");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class MyClass {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@myannotation.Init String myField");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder.toString());
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      public void apply(final CompilationUnitImpl it) {
+        XtendFile _xtendFile = it.getXtendFile();
+        Resource _eResource = _xtendFile.eResource();
+        EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+        final Function1<Resource.Diagnostic, Boolean> _function = new Function1<Resource.Diagnostic, Boolean>() {
+          public Boolean apply(final Resource.Diagnostic it) {
+            String _message = it.getMessage();
+            return Boolean.valueOf(_message.contains("myField may not have been initialized"));
+          }
+        };
+        IterableExtensions.<Resource.Diagnostic>exists(_errors, _function);
       }
-    }
+    };
+    this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
   
   @Test

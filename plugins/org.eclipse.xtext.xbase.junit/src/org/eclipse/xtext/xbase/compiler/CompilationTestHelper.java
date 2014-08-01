@@ -7,36 +7,36 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
-import static com.google.common.collect.Lists.newArrayList;
-import static com.google.common.collect.Maps.newHashMap;
-import static java.util.Collections.emptyMap;
+import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Maps.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
-import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
-import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.generator.IGenerator;
-import org.eclipse.xtext.generator.InMemoryFileSystemAccess;
+import org.eclipse.xtext.generator.IOutputConfigurationProvider;
+import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.junit4.internal.TemporaryFolder;
 import org.eclipse.xtext.resource.FileExtensionProvider;
+import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.IAcceptor;
-import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.compiler.RegisteringFileSystemAccess.GeneratedFile;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
@@ -44,7 +44,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.junit.Assert;
 
-import com.google.common.base.Joiner;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -53,7 +52,7 @@ import com.google.inject.Provider;
  */
 public class CompilationTestHelper {
 	
-	private final static Logger log = Logger.getLogger(CompilationTestHelper.class);
+	public final static String PROJECT_NAME = "myProject";
 	
 	@Inject private TemporaryFolder temporaryFolder;
 	
@@ -63,24 +62,29 @@ public class CompilationTestHelper {
 	
 	@Inject private FileExtensionProvider extensionProvider;
 
-	@Inject private Provider<InMemoryFileSystemAccess> fileSystemAccessProvider;
+	@Inject private IOutputConfigurationProvider outputConfigurationProvider;
 	
-	@Inject private RuntimeWorkspaceConfigProvider configProvider;
-	
-	public void setJavaCompilerClassPath(Class<?> ...classes) {
-		javaCompiler.clearClassPath();
-		for (Class<?> clazz : classes) {
-			javaCompiler.addClassPathOfClass(clazz);
-		}
+	@Inject private Provider<Result> resultProvider;
+
+	private RuntimeWorkspaceConfigProvider configProvider;
+
+	@Inject
+	protected void setWorkspaceConfig(RuntimeWorkspaceConfigProvider configProvider) {
+		this.configProvider = configProvider;
+		configureFreshWorkspace();
 	}
 	
 	public void configureFreshWorkspace() {
 		File tempDir = createFreshTempDir();
 		WorkspaceConfig config = new WorkspaceConfig(tempDir.getAbsolutePath());
-		ProjectConfig projectConfig = new ProjectConfig("myProject");
-		projectConfig.addSourceFolderMapping("src", "xtend-gen");
+		ProjectConfig projectConfig = new ProjectConfig(PROJECT_NAME);
+		projectConfig.addSourceFolderMapping("src", "src-gen");
 		config.addProjectConfig(projectConfig);
-		configProvider.setWorkspaceConfig(config); 
+		configProvider.setWorkspaceConfig(config);
+	}
+	
+	protected String getSourceFolderPath() {
+		return "/"+PROJECT_NAME+"/src";
 	}
 	
 	protected File createFreshTempDir() {
@@ -88,6 +92,13 @@ public class CompilationTestHelper {
 			return temporaryFolder.newFolder();
 		} catch (IOException e) {
 			throw new AssertionError(e);
+		}
+	}
+	
+	public void setJavaCompilerClassPath(Class<?> ...classes) {
+		javaCompiler.clearClassPath();
+		for (Class<?> clazz : classes) {
+			javaCompiler.addClassPathOfClass(clazz);
 		}
 	}
 	
@@ -111,29 +122,6 @@ public class CompilationTestHelper {
 	}
 	
 	/**
-	 * A result contains information about various aspects of a compiled piece of code.
-	 *   
-	 */
-	public static interface Result {
-		
-		Map<String,String> getGeneratedCode();
-
-		String getGeneratedCode(String typeName);
-		
-		String getSingleGeneratedCode();
-
-		ResourceSet getResourceSet();
-
-		Class<?> getCompiledClass();
-		
-		Class<?> getCompiledClass(String className);
-		
-		ClassLoader getClassLoader();
-
-		Map<String, CharSequence> getAllGeneratedResources();
-	}
-	
-	/**
 	 * Parses, validates and compiles the given source. Calls the given acceptor for each
 	 * resource which is generated from the source.
 	 *  
@@ -143,18 +131,8 @@ public class CompilationTestHelper {
 	 */
 	@SuppressWarnings("unchecked")
 	public void compile(CharSequence source, IAcceptor<Result> acceptor) throws IOException {
-		String fileName = getSourceFolderPath()+"MyFile."+extensionProvider.getPrimaryFileExtension();
+		String fileName = "MyFile."+extensionProvider.getPrimaryFileExtension();
 		compile(resourceSet(new Pair<String, CharSequence>(fileName, source)), acceptor);
-	}
-	
-	protected String getSourceFolderPath() {
-		Map<String, ProjectConfig> projects = configProvider.get().getProjects();
-		if (!projects.isEmpty()) {
-			ProjectConfig next = projects.values().iterator().next();
-			if (!next.getSourceFolderMappings().isEmpty())
-				return next.getSourceFolderMappings().keySet().iterator().next().toString()+"/";
-		}
-		return "/";
 	}
 
 	/**
@@ -166,130 +144,22 @@ public class CompilationTestHelper {
 	 */
 	public void compile(final ResourceSet resourceSet, IAcceptor<Result> acceptor) {
 		try {
-			boolean hasErrors = false;
-			List<Issue> allErrors = newArrayList();
 			List<Resource> resourcesToCheck = newArrayList(resourceSet.getResources());
-			for (Resource resource : resourcesToCheck) {
-				if (resource instanceof XtextResource) {
-					XtextResource xtextResource = (XtextResource) resource;
-					if (!xtextResource.isLoaded()) {
-						xtextResource.load(resourceSet.getLoadOptions());
-					}
-					List<Issue> issues = xtextResource.getResourceServiceProvider().getResourceValidator().validate(xtextResource, CheckMode.ALL, CancelIndicator.NullImpl);
-					for (Issue issue : issues) {
-						if (issue.getSeverity() == Severity.ERROR) {
-							hasErrors = true;
-							log.error(issue);
-							allErrors.add(issue);
-						} else {
-							log.info(issue);
-						}
-					}
-				}
-			}
-			if (hasErrors) {
-				throw new IllegalStateException("One or more resources contained errors : "+Joiner.on(',').join(allErrors));
-			}
-			
-			final InMemoryFileSystemAccess access = fileSystemAccessProvider.get();
-			for (Resource resource : resourcesToCheck) {
-				if (resource instanceof XtextResource) {
-					XtextResource xtextResource = (XtextResource) resource;
-					IGenerator generator = xtextResource.getResourceServiceProvider().get(IGenerator.class);
-					if (generator != null)
-						generator.doGenerate(xtextResource, access);
-				}
-			}
-			acceptor.accept(new Result() {
-				
-				private ClassLoader classLoader;
-				private Map<String,Class<?>> compiledClasses;
-				private Map<String,String> generatedCode;
-				
-				public Map<String,Class<?>> getCompiledClasses() {
-					if (compiledClasses == null) {
-						compile();
-					}
-					return compiledClasses;
-				}
-				
-				private void compile() {
-					try {
-						org.eclipse.xtext.util.Pair<ClassLoader, Map<String, Class<?>>> compilationResult = javaCompiler.internalCompileToClasses(getGeneratedCode());
-						this.classLoader = compilationResult.getFirst();
-						this.compiledClasses = compilationResult.getSecond();
-					} catch (IllegalArgumentException e) {
-						throw new AssertionError(e);
-					}
-				}
-				
-				public ClassLoader getClassLoader() {
-					if (classLoader == null) {
-						compile();
-					}
-					return classLoader;
-				}
-				
-				public Map<String,String> getGeneratedCode() {
-					if (generatedCode == null) {
-						generatedCode = newHashMap();
-						for (final Entry<String, CharSequence> e : access.getTextFiles().entrySet()) {
-							String name = e.getKey().substring("DEFAULT_OUTPUT".length(), e.getKey().length() - ".java".length());
-							generatedCode.put(name.replace('/', '.'), e.getValue().toString());
-						}
-					}
-					return generatedCode;
-				}
-
-				public String getGeneratedCode(String typeName) {
-					return getGeneratedCode().get(typeName);
-				}
-				
-				public String getSingleGeneratedCode() {
-					if (access.getTextFiles().size() == 1)
-						return access.getTextFiles().values().iterator().next().toString();
-					String separator = System.getProperty("line.separator");
-					if (separator == null)
-						separator = "\n";
-					List<Entry<String,CharSequence>> files = newArrayList(access.getTextFiles().entrySet());
-					Collections.sort(files, new Comparator<Entry<String,CharSequence>>() {
-						public int compare(Entry<String, CharSequence> o1,
-								Entry<String, CharSequence> o2) {
-							return o1.getKey().compareTo(o2.getKey());
-						}
-					});
-					StringBuilder result = new StringBuilder("MULTIPLE FILES WERE GENERATED"+separator+separator);
-					int i = 1;
-					for (Entry<String,CharSequence> entry: files) {
-						result.append("File "+i+" : "+entry.getKey().replace("DEFAULT_OUTPUT", "")+separator+separator);
-						result.append(entry.getValue()).append(separator);
-						i++;
-					}
-					return result.toString();
-				}
-
-				public ResourceSet getResourceSet() {
-					return resourceSet;
-				}
-
-				public Class<?> getCompiledClass() {
-					return IterableExtensions.head(getCompiledClasses().values());
-				}
-				
-				public Class<?> getCompiledClass(String className) {
-					return getCompiledClasses().get(className);
-				}
-
-				public Map<String, CharSequence> getAllGeneratedResources() {
-					return access.getTextFiles();
-				}
-				
-			});
+			Result result = resultProvider.get();
+			result.setJavaCompiler(javaCompiler);
+			result.setResources(resourcesToCheck);
+			result.setResourceSet(resourceSet);
+			result.setOutputConfigurations(getOutputConfigurations());
+			acceptor.accept(result);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
 	
+	protected Iterable<? extends OutputConfiguration> getOutputConfigurations() {
+		return outputConfigurationProvider.getOutputConfigurations();
+	}
+
 	/**
 	 * creates a fresh resource set with the given resources
 	 * 
@@ -300,36 +170,237 @@ public class CompilationTestHelper {
 	public ResourceSet resourceSet(Pair<String,? extends CharSequence> ...resources ) throws IOException {
 		XtextResourceSet result = resourceSetProvider.get();
 		for (Pair<String, ? extends CharSequence> entry : resources) {
-			final URI uri = URI.createURI(entry.getKey());
+			URI uri = copyToWorkspace(getSourceFolderPath()+"/"+entry.getKey(), entry.getValue());
 			Resource resource = result.createResource(uri);
 			if (resource == null)
 				throw new IllegalStateException("Couldn't create resource for URI "+uri+". Resource.Factory not registered?");
-			resource.load(new StringInputStream(entry.getValue().toString()), emptyMap());
+			resource.load(newHashMap());
 		}
 		return result;
 	}
 	
+	public URI copyToWorkspace(String workspacefilePath, CharSequence contents) {
+		File workspaceRoot = new File(this.configProvider.getWorkspaceConfig().getAbsoluteFileSystemPath());
+		File fullPath = new File(workspaceRoot.getAbsolutePath()+"/"+workspacefilePath);
+		if (fullPath.exists()) {
+			fullPath.delete();
+		} else {
+			mkDir(fullPath.getParentFile());
+		}
+		URI uri = URI.createFileURI(fullPath.getAbsolutePath());
+		Files.writeStringIntoFile(uri.toFileString(), contents.toString());
+		return uri;
+	}
+	
+	private void mkDir(File file) {
+		if (!file.getParentFile().exists()) {
+			mkDir(file.getParentFile());
+		}
+		if (!file.exists()) {
+			file.mkdir();
+		}
+	}
+	
 	public ResourceSet unLoadedResourceSet(Pair<String,? extends CharSequence> ...resources ) throws IOException {
 		XtextResourceSet result = resourceSetProvider.get();
-		final Map<URI, CharSequence> uri2Content = newHashMap();
-		result.setURIConverter(new ExtensibleURIConverterImpl() {
-			@Override
-			public InputStream createInputStream(URI uri, Map<?, ?> options)
-					throws IOException {
-				CharSequence charSequence = uri2Content.get(uri);
-				if (charSequence != null)
-					return new StringInputStream(charSequence.toString());
-				return super.createInputStream(uri, options);
-			}
-		});
 		for (Pair<String, ? extends CharSequence> entry : resources) {
-			final URI uri = URI.createURI(entry.getKey());
+			URI uri = copyToWorkspace(getSourceFolderPath()+"/"+entry.getKey(), entry.getValue());
 			Resource resource = result.createResource(uri);
 			if (resource == null)
 				throw new IllegalStateException("Couldn't create resource for URI "+uri+". Resource.Factory not registered?");
-			uri2Content.put(uri, entry.getValue());
 		}
 		return result;
 	}
+	
+	/**
+	 * A result contains information about various aspects of a compiled piece of code.
+	 *   
+	 */
+	public static class Result {
+		
+		@Inject private IResourceServiceProvider.Registry serviceRegistry;
+		@Inject private Provider<RegisteringFileSystemAccess> fileSystemAccessProvider;
+		
+		private OnTheFlyJavaCompiler javaCompiler;
+		private ResourceSet resourceSet;
+		private List<Resource> sources;
+		private Map<String,OutputConfiguration> outputConfigurations;
+		
+		public void setResourceSet(ResourceSet resourceSet) {
+			this.resourceSet = resourceSet;
+		}
+		
+		public void setResources(List<Resource> sources) {
+			this.sources = sources;
+		}
+		
+		public void setJavaCompiler(OnTheFlyJavaCompiler javaCompiler) {
+			this.javaCompiler = javaCompiler;
+		}
+		
+		public void setOutputConfigurations(Iterable<? extends OutputConfiguration> outputConfiguration) {
+			this.outputConfigurations = newHashMap();
+			for (OutputConfiguration conf : outputConfiguration) {
+				outputConfigurations.put(conf.getName(), conf);
+			}
+		}
+		
+		private ClassLoader classLoader;
+		private Map<String,Class<?>> compiledClasses;
+		private Map<String,String> generatedCode;
+		private RegisteringFileSystemAccess access;
+		private ResourceDescriptionsData index;
+		private List<Issue> allErrorsAndWarnings;
+		
+		
+		public List<Issue> getErrorsAndWarnings() {
+			doValidation();
+			return allErrorsAndWarnings;
+		}
+
+		public Map<String,Class<?>> getCompiledClasses() {
+			doCompile();
+			return compiledClasses;
+		}
+		
+		public ClassLoader getClassLoader() {
+			doCompile();
+			return classLoader;
+		}
+		
+		public Map<String,String> getGeneratedCode() {
+			doGenerate();
+			return generatedCode;
+		}
+
+		public String getGeneratedCode(String typeName) {
+			return getGeneratedCode().get(typeName);
+		}
+		
+		public String getSingleGeneratedCode() {
+			doGenerate();
+			if (access.getTextFiles().size() == 1)
+				return access.getTextFiles().iterator().next().getContents().toString();
+			String separator = System.getProperty("line.separator");
+			if (separator == null)
+				separator = "\n";
+			List<GeneratedFile> files = newArrayList(access.getTextFiles());
+			Collections.sort(files, new Comparator<GeneratedFile>() {
+				public int compare(GeneratedFile o1,
+						GeneratedFile o2) {
+					return o1.getPath().toString().compareTo(o2.getPath().toString());
+				}
+			});
+			StringBuilder result = new StringBuilder("MULTIPLE FILES WERE GENERATED"+separator+separator);
+			int i = 1;
+			for (GeneratedFile file: files) {
+				result.append("File "+i+" : "+file.getPath().toString()+separator+separator);
+				result.append(file.getContents()).append(separator);
+				i++;
+			}
+			return result.toString();
+		}
+
+		public ResourceSet getResourceSet() {
+			return resourceSet;
+		}
+
+		public Class<?> getCompiledClass() {
+			return IterableExtensions.head(getCompiledClasses().values());
+		}
+		
+		public Class<?> getCompiledClass(String className) {
+			return getCompiledClasses().get(className);
+		}
+
+		public Map<String, CharSequence> getAllGeneratedResources() {
+			doGenerate();
+			Map<String,CharSequence> result = newHashMap();
+			for (GeneratedFile f: access.getTextFiles()) {
+				result.put(f.getPath().toString(), f.getContents());
+			}
+			return result;
+		}
+		
+		private void doIndex() {
+			if (index == null) {
+				// indexing
+				List<IResourceDescription> descriptions = newArrayList();
+				for (Resource resource : sources) {
+					IResourceServiceProvider serviceProvider = serviceRegistry.getResourceServiceProvider(resource.getURI());
+					IResourceDescription description = serviceProvider.getResourceDescriptionManager().getResourceDescription(resource);
+					descriptions.add(description);
+				}
+				index = new ResourceDescriptionsData(descriptions);
+				ResourceDescriptionsData.ResourceSetAdapter.installResourceDescriptionsData(resourceSet, index);
+			}
+		}
+		
+		private void doLinking() {
+			doIndex();
+			for (Resource resource : sources) {
+				EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl);
+			}
+		}
+		
+		private void doValidation() {
+			if (allErrorsAndWarnings == null) {
+				
+				doLinking();
+				
+				allErrorsAndWarnings = newArrayList();
+				// validation
+				for (Resource resource : sources) {
+					if (resource instanceof XtextResource) {
+						XtextResource xtextResource = (XtextResource) resource;
+						List<Issue> issues = xtextResource.getResourceServiceProvider().getResourceValidator().validate(xtextResource, CheckMode.ALL, CancelIndicator.NullImpl);
+						for (Issue issue : issues) {
+							allErrorsAndWarnings.add(issue);
+						}
+					}
+				}
+			}
+		}
+		
+		private void doGenerate() {
+			if (access == null) {
+				doValidation();
+				access = fileSystemAccessProvider.get();
+				access.setOutputConfigurations(outputConfigurations);
+				access.setCurrentSource("src");
+				access.setProjectName(PROJECT_NAME);
+				for (Resource resource : sources) {
+					if (resource instanceof XtextResource) {
+						XtextResource xtextResource = (XtextResource) resource;
+						IGenerator generator = xtextResource.getResourceServiceProvider().get(IGenerator.class);
+						if (generator != null) {
+							generator.doGenerate(xtextResource, access);
+						}
+					}
+				}
+				generatedCode = newHashMap();
+				for (final GeneratedFile e : access.getTextFiles()) {
+					if (e.getJavaClassName() != null) {
+						generatedCode.put(e.getJavaClassName(), e.getContents().toString());
+					}
+				}
+			}
+		}
+		
+		private void doCompile() {
+			if (compiledClasses == null || classLoader==null) {
+				doGenerate();
+				try {
+					org.eclipse.xtext.util.Pair<ClassLoader, Map<String, Class<?>>> compilationResult = javaCompiler.internalCompileToClasses(getGeneratedCode());
+					this.classLoader = compilationResult.getFirst();
+					this.compiledClasses = compilationResult.getSecond();
+				} catch (IllegalArgumentException e) {
+					throw new AssertionError(e);
+				}
+			}
+		}
+	}
+	
+
 	
 }

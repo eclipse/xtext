@@ -331,7 +331,8 @@ public class OnTheFlyJavaCompiler {
 					classPathAssembler.getClassLoader());
 			Map<String,Class<?>> result = newHashMap();
 			for (String name : sources.keySet()) {
-				Class<?> clazz = loader.loadClass(name.replace('/','.'));
+				String qname = name.replace('/','.');
+				Class<?> clazz = loader.loadClass(qname);
 				result.put(name, clazz);
 			}
 			return Tuples.<ClassLoader, Map<String,Class<?>>>create(loader, result);
