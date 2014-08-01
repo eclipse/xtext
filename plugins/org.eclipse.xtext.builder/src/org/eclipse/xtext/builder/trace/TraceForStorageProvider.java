@@ -14,7 +14,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
@@ -41,6 +43,7 @@ import org.eclipse.xtext.util.TextRegionWithLineInformation;
 import com.google.common.io.Closeables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -54,9 +57,6 @@ public class TraceForStorageProvider implements ITraceForStorageProvider {
 	public static final String TRACE_FILE_EXTENSION = TraceFileNameProvider.TRACE_FILE_EXTENSION;
 
 	private static final Logger log = Logger.getLogger(TraceForStorageProvider.class);
-	
-	@Inject
-	private TraceRegionSerializer traceRegionSerializer;
 	
 	@Inject
 	private Provider<StorageAwareTrace> traceToSourceProvider;
@@ -75,6 +75,90 @@ public class TraceForStorageProvider implements ITraceForStorageProvider {
 	
 	@Inject
 	private ITraceURIConverter traceURIConverter;
+	
+	@Inject
+	private CachedTraces cachedTraces;
+	
+	@Singleton
+	protected static class CachedTraces {
+		
+		private static class PathWithTimestamp {
+
+			private final IPath path;
+			private final long timestamp;
+
+			public PathWithTimestamp(IFile file) {
+				this.path = file.getFullPath();
+				this.timestamp = file.getModificationStamp();
+			}
+
+			@Override
+			public int hashCode() {
+				final int prime = 31;
+				int result = 1;
+				result = prime * result + ((path == null) ? 0 : path.hashCode());
+				result = prime * result + (int) (timestamp ^ (timestamp >>> 32));
+				return result;
+			}
+
+			@Override
+			public boolean equals(Object obj) {
+				if (this == obj)
+					return true;
+				if (obj == null)
+					return false;
+				if (getClass() != obj.getClass())
+					return false;
+				PathWithTimestamp other = (PathWithTimestamp) obj;
+				if (path == null) {
+					if (other.path != null)
+						return false;
+				} else if (!path.equals(other.path))
+					return false;
+				if (timestamp != other.timestamp)
+					return false;
+				return true;
+			}
+			
+		}
+		
+		@Inject
+		private TraceRegionSerializer traceRegionSerializer;
+		
+		private Map<PathWithTimestamp, AbstractTraceRegion> cache = new LinkedHashMap<PathWithTimestamp, AbstractTraceRegion>(32, 0.75f, true) {
+			private static final long serialVersionUID = 1L;
+			final int MAX_SIZE = 20;
+			@Override
+			protected boolean removeEldestEntry(Map.Entry<PathWithTimestamp, AbstractTraceRegion> eldest) {
+		        return size() > MAX_SIZE;
+		    }
+		};
+		
+		protected synchronized AbstractTraceRegion getTraceRegion(IFile file) throws TraceNotFoundException {
+			if (file.exists()) {
+				PathWithTimestamp key = new PathWithTimestamp(file);
+				AbstractTraceRegion result = cache.get(key);
+				if (result != null)
+					return result;
+				InputStream contents = null;
+				try {
+					contents = file.getContents();
+					result = traceRegionSerializer.readTraceRegionFrom(contents);
+					cache.put(key, result);
+					return result;
+				} catch (Exception e) {
+					log.error(e.getMessage(), e);
+				} finally {
+					try {
+						Closeables.close(contents, true);
+					} catch (IOException e) {
+						//never thrown, swallowed by Closeables.close
+					}
+				}
+			}
+			throw new TraceNotFoundException();
+		}
+	}
 
 	/* @Nullable */
 	public ITrace getTraceToSource(final IStorage derivedResource) {
@@ -86,20 +170,8 @@ public class TraceForStorageProvider implements ITraceForStorageProvider {
 				IStorage resource = derivedResource;
 				if (resource instanceof IFile) {
 					IStorage traceFile = getTraceFile(resource);
-					if (traceFile instanceof IFile && ((IFile)traceFile).exists()) {
-						InputStream contents = null;
-						try {
-							contents = traceFile.getContents();
-							return traceRegionSerializer.readTraceRegionFrom(contents);
-						} catch (Exception e) {
-							log.error(e.getMessage(), e);
-						} finally {
-							try {
-								Closeables.close(contents, true);
-							} catch (IOException e) {
-								//never thrown, swallowed by Closeables.close
-							}
-						}
+					if (traceFile instanceof IFile) {
+						return cachedTraces.getTraceRegion((IFile) traceFile);
 					}
 				}
 				throw new TraceNotFoundException();
@@ -124,28 +196,16 @@ public class TraceForStorageProvider implements ITraceForStorageProvider {
 							for (IPath tracePath : traceFiles) {
 								IFile traceFile = workspace.getRoot().getFile(tracePath);
 								if (traceFile.exists()) {
-									InputStream contents = null;
-									try {
-										contents = ((IStorage) traceFile).getContents();
-										AbstractTraceRegion traceRegion = traceRegionSerializer.readTraceRegionFrom(contents);
-										final IStorage generatedFileForTraceFile = getGeneratedFileForTraceFile(traceFile);
-										if (generatedFileForTraceFile == null)
-											throw new TraceNotFoundException();
-										IPath generatedFilePath = generatedFileForTraceFile.getFullPath();
-										URI generatedFileURI = URI.createPlatformResourceURI(generatedFilePath.toString(), true);
-										URI sourceUriForTrace = traceURIConverter.getURIForTrace(sourceFileURI);
-										URI generatedUriForTrace = traceURIConverter.getURIForTrace(generatedFileURI);
-										if(sourceUriForTrace != null && generatedUriForTrace != null)
-											result.addAll(traceRegion.invertFor(sourceUriForTrace, generatedUriForTrace));
-									} catch (Exception e) {
-										log.error(e.getMessage(), e);
-									} finally {
-										try {
-											Closeables.close(contents, true);
-										} catch (IOException e) {
-											//never thrown, swallowed by Closeables.close
-										}
-									}
+									final IStorage generatedFileForTraceFile = getGeneratedFileForTraceFile(traceFile);
+									if (generatedFileForTraceFile == null)
+										throw new TraceNotFoundException();
+									AbstractTraceRegion traceRegion = cachedTraces.getTraceRegion(traceFile);
+									IPath generatedFilePath = generatedFileForTraceFile.getFullPath();
+									URI generatedFileURI = URI.createPlatformResourceURI(generatedFilePath.toString(), true);
+									URI sourceUriForTrace = traceURIConverter.getURIForTrace(sourceFileURI);
+									URI generatedUriForTrace = traceURIConverter.getURIForTrace(generatedFileURI);
+									if(sourceUriForTrace != null && generatedUriForTrace != null)
+										result.addAll(traceRegion.invertFor(sourceUriForTrace, generatedUriForTrace));
 								}
 							}
 							if (!result.isEmpty()) {
