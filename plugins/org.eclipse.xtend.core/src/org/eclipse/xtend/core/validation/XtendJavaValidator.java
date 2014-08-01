@@ -1399,7 +1399,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		// java type with the same name. Also this then belongs to Xbase and should be defined on JvmDeclaredType
 		Set<String> names = newLinkedHashSet();
 		for (XtendTypeDeclaration clazz : file.getXtendTypes()) {	
-			if (!names.add(clazz.getName()))
+			if (clazz.getName() != null && !names.add(clazz.getName()))
 				error("The type "+clazz.getName()+" is already defined.", clazz, XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME, -1, IssueCodes.DUPLICATE_TYPE_NAME);
 		}
 	}
@@ -1615,6 +1615,8 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	@Check
 	public void checkFinalFieldInitialization(XtendInterface xtendInterface) {
 		JvmGenericType inferredType = associations.getInferredType(xtendInterface);
+		if (inferredType == null)
+			return;
 		super.checkFinalFieldInitialization(inferredType);
 	}
 	
