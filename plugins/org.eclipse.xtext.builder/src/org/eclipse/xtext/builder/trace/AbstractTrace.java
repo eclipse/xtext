@@ -235,6 +235,7 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 			return null;
 		}
 		outer: while(candidate != null) {
+			// TODO binary search?
 			List<? extends AbstractTraceRegion> children = candidate.getNestedRegions();
 			if (children.isEmpty()) {
 				return candidate;
