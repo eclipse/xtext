@@ -37,7 +37,7 @@ import org.eclipse.jdt.core.compiler.CompilationProgress;
 import org.eclipse.jdt.internal.compiler.batch.FileSystem;
 import org.eclipse.jdt.internal.compiler.batch.Main;
 import org.eclipse.jdt.internal.compiler.env.NameEnvironmentAnswer;
-import org.eclipse.xtext.junit4.internal.TemporaryFolder;
+import org.eclipse.xtext.junit4.TemporaryFolder;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.RuntimeIOException;
@@ -50,6 +50,10 @@ import com.google.inject.internal.MoreTypes;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @noextend This class is not intended to be subclassed by clients.
+ * @noreference This class is not intended to be referenced by clients.
+ * 
+ * @since 2.7
  */
 public class OnTheFlyJavaCompiler {
 
@@ -111,7 +115,12 @@ public class OnTheFlyJavaCompiler {
 		}
 	}
 
-	public static class PatchedFileSystem extends FileSystem {
+	/**
+	 * @noextend This class is not intended to be subclassed by clients.
+	 * @noreference This class is not intended to be referenced by clients.
+	 * @noinstantiate This class is not intended to be instantiated by clients. 
+	 */
+	static class PatchedFileSystem extends FileSystem {
 
 		private FileSystem delegate;
 
@@ -331,7 +340,8 @@ public class OnTheFlyJavaCompiler {
 					classPathAssembler.getClassLoader());
 			Map<String,Class<?>> result = newHashMap();
 			for (String name : sources.keySet()) {
-				Class<?> clazz = loader.loadClass(name.replace('/','.'));
+				String qname = name.replace('/','.');
+				Class<?> clazz = loader.loadClass(qname);
 				result.put(name, clazz);
 			}
 			return Tuples.<ClassLoader, Map<String,Class<?>>>create(loader, result);
