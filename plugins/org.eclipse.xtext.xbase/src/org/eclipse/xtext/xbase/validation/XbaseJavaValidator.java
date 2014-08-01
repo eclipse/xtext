@@ -1406,7 +1406,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	@Check
 	public void checkDuplicatedCases(XSwitchExpression switchExpression) {
 		LightweightTypeReference switchType = typeResolver.resolveTypes(switchExpression).getActualType(switchExpression.getSwitch());
-		if (switchType == null || switchType.isType(Boolean.TYPE)) {
+		if (switchType == null || switchType.isType(Boolean.TYPE) || switchType.isUnknown()) {
 			return;
 		}
 		Map<String, Multimap<Object, XCasePart>> typeGuards = Maps.newHashMap();

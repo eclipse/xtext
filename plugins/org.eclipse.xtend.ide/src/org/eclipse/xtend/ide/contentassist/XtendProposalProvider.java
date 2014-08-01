@@ -33,12 +33,14 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions;
 import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions.VariableType;
 import org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -74,6 +76,9 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	
 	@Inject
 	private OperatorMapping operatorMapping;
+	
+	@Inject
+	private TypeReferences typeReferences;
 
 	@Override
 	public void completeMember_Name(final EObject model, Assignment assignment, final ContentAssistContext context,
@@ -174,6 +179,33 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 							getQualifiedNameValueConverter(), createVisibilityFilter(context), acceptor);
 				}
 			}
+		}
+	}
+	
+	@Override
+	public void completeMember_Exceptions(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		if (getXbaseCrossReferenceProposalCreator().isShowSmartProposals()) {
+			INode lastCompleteNode = context.getLastCompleteNode();
+			if (lastCompleteNode instanceof ILeafNode && !((ILeafNode) lastCompleteNode).isHidden()) {
+				if (lastCompleteNode.getLength() > 0 && lastCompleteNode.getTotalEndOffset() == context.getOffset()) {
+					String text = lastCompleteNode.getText();
+					char lastChar = text.charAt(text.length() - 1);
+					if (Character.isJavaIdentifierPart(lastChar)) {
+						return;
+					}
+				}
+			}
+			getTypesProposalProvider().createSubTypeProposals(
+					typeReferences.findDeclaredType(Throwable.class, model),
+					this,
+					context,
+					TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE,
+					createVisibilityFilter(context, IJavaSearchConstants.CLASS),
+					getQualifiedNameValueConverter(),
+					acceptor);
+		} else {
+			super.completeJvmParameterizedTypeReference_Type(model, assignment, context, acceptor);
 		}
 	}
 	
