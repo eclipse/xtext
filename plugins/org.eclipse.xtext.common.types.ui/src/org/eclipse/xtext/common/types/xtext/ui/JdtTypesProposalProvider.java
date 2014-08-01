@@ -172,7 +172,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 			searchAndCreateProposals(scope, proposalFactory, context, typeReference, TypeMatchFilters.and(filter, new ITypesProposalProvider.Filter() {
 				public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
 						char[][] enclosingTypeNames, String path) {
-					if (path.endsWith(".class") || path.endsWith(".java")) { // Java index match
+					if (path == null || path.endsWith(".class") || path.endsWith(".java")) { // Java index match
 						String identifier = getIdentifier(packageName, simpleTypeName, enclosingTypeNames);
 						if (dirtyNames.contains(identifier)) { // currently dirty, will be processed later (as path with another extension)
 							return false;
