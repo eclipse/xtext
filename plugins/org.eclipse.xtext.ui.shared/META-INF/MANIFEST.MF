@@ -8,8 +8,8 @@ Bundle-Activator: org.eclipse.xtext.ui.shared.internal.Activator
 Bundle-Vendor: Eclipse Modeling Project
 Require-Bundle: org.eclipse.xtext.ui;bundle-version="2.7.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.xtext.builder;bundle-version="2.7.0";resolution:=optional;x-installation:=greedy,
- org.eclipse.jdt.core;bundle-version="3.5.2";resolution:=optional;x-installation:=greedy,
- org.eclipse.jdt.ui;bundle-version="3.5.0";resolution:=optional;x-installation:=greedy,
+ org.eclipse.jdt.core;bundle-version="3.6.0";resolution:=optional;x-installation:=greedy,
+ org.eclipse.jdt.ui;bundle-version="3.6.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.xtext.common.types.ui;bundle-version="2.7.0";resolution:=optional;x-installation:=greedy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
