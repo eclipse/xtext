@@ -11,7 +11,7 @@ import java.io.File
 import java.io.FileInputStream
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport
 import org.eclipse.xtend.lib.macro.file.Path
-import org.eclipse.xtext.junit4.internal.TemporaryFolder
+import org.eclipse.xtext.junit4.TemporaryFolder
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.xbase.file.JavaIOFileSystemSupport
 import org.eclipse.xtext.xbase.file.ProjectConfig
@@ -89,13 +89,14 @@ class JavaIoFileSystemTest {
 	}
 	
 	@Test def void testGetWorkspaceChildren() {
-		assertEquals(Path.ROOT.children.join('[', ', ', ']') [ it.segments.join('.') ], 1, Path.ROOT.children.size)
+		// in a temp folders we have a '.createdBy' file.
+		assertEquals(Path.ROOT.children.join('[', ', ', ']') [ it.segments.join('.') ], 2, Path.ROOT.children.size)
 		
 		val path = new Path("/bar")
 		path.mkdir
 		assertTrue(path.exists)
 		
-		assertEquals(2, Path.ROOT.children.size)
+		assertEquals(Path.ROOT.children.join('[', ', ', ']') [ it.segments.join('.') ], 3, Path.ROOT.children.size)
 	}
 	
 	@Test def void testGetProjectChildren() {

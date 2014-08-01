@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtend.lib.macro.file.Path;
-import org.eclipse.xtext.junit4.internal.TemporaryFolder;
+import org.eclipse.xtext.junit4.TemporaryFolder;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.xbase.file.JavaIOFileSystemSupport;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
@@ -163,14 +163,22 @@ public class JavaIoFileSystemTest {
     String _join = IterableExtensions.join(_children, "[", ", ", "]", _function);
     Iterable<? extends Path> _children_1 = this.fs.getChildren(Path.ROOT);
     int _size = IterableExtensions.size(_children_1);
-    Assert.assertEquals(_join, 1, _size);
+    Assert.assertEquals(_join, 2, _size);
     final Path path = new Path("/bar");
     this.fs.mkdir(path);
     boolean _exists = this.fs.exists(path);
     Assert.assertTrue(_exists);
     Iterable<? extends Path> _children_2 = this.fs.getChildren(Path.ROOT);
-    int _size_1 = IterableExtensions.size(_children_2);
-    Assert.assertEquals(2, _size_1);
+    final Function1<Path, String> _function_1 = new Function1<Path, String>() {
+      public String apply(final Path it) {
+        List<String> _segments = it.getSegments();
+        return IterableExtensions.join(_segments, ".");
+      }
+    };
+    String _join_1 = IterableExtensions.join(_children_2, "[", ", ", "]", _function_1);
+    Iterable<? extends Path> _children_3 = this.fs.getChildren(Path.ROOT);
+    int _size_1 = IterableExtensions.size(_children_3);
+    Assert.assertEquals(_join_1, 3, _size_1);
   }
   
   @Test

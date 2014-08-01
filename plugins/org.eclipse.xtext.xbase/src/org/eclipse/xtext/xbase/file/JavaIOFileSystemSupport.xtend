@@ -144,6 +144,8 @@ class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
 			}
 			val filePath = absolutefilePath.substring(workspacePath.length)
 			return new Path('/'+filePath.toString)
+		} else {
+			return new Path("/"+uri.path)
 		}
 	}
 	
