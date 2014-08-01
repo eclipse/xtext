@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.codegen.ecore.xtext.GenModelSupport;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -177,7 +178,12 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 		ResourceSet rs = forcedResourceSet != null ? forcedResourceSet : new XtextResourceSet();
 		for (String loadedResource : loadedResources) {
 			URI loadedResourceUri = URI.createURI(loadedResource);
-			if(equal(loadedResourceUri.fileExtension(), "ecore")) {
+			if(equal(loadedResourceUri.fileExtension(), "genmodel")) {
+				IResourceServiceProvider resourceServiceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResourceUri);
+				if(resourceServiceProvider == null) {
+					new GenModelSupport().createInjectorAndDoEMFRegistration();
+				}
+			} else if(equal(loadedResourceUri.fileExtension(), "ecore")) {
 				IResourceServiceProvider resourceServiceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResourceUri);
 				if(resourceServiceProvider == null) {
 					EcoreSupportStandaloneSetup.setup();
