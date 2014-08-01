@@ -3,8 +3,8 @@
   <mspec:property key="target.os" value="*"/>
   <mspec:property key="target.arch" value="*"/>
   <mspec:property key="target.ws" value="*"/>
-  <mspec:property key="eclipse.target.platform" mutable="true" value="${eclipse.download}/eclipse/updates/3.5"/>
+  <mspec:property key="eclipse.target.platform" mutable="true" value="${eclipse.download}/eclipse/updates/3.6"/>
   <mspec:property key="eclipse.stable.target.platform" mutable="true" value="${eclipse.download}/eclipse/updates/4.2"/>
-  <mspec:property key="eclipse.latest.target.platform" mutable="true" value="${eclipse.download}/eclipse/updates/4.4milestones"/>
+  <mspec:property key="eclipse.latest.target.platform" mutable="true" value="${eclipse.download}/eclipse/updates/4.4"/>
   <mspec:mspecNode materializer="workspace" filter="(buckminster.source=true)"/>
 </mspec:mspec>

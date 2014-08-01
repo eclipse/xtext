@@ -27,7 +27,7 @@
 	<property name="build.properties" location="${releng.project}/releng/xtext-build.properties" />
 	<property name="temp.commands.location" location="${ant.file}/.." />
 
-	<!-- Against which platform to build (Galileo,Stable,Latest)-->
+	<!-- Against which platform to build (Helios,Stable,Latest)-->
 	<property name="ECLIPSE.TARGET.ALIAS" value="Stable" />
 	<property name="WITH.MWE2" value="false" />
 	<property name="SWTBOT" value="false" />
