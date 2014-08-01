@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtend.lib.macro.file.Path;
-import org.eclipse.xtext.junit4.internal.TemporaryFolder;
+import org.eclipse.xtext.junit4.TemporaryFolder;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.xbase.file.JavaIOFileSystemSupport;
 import org.eclipse.xtext.xbase.file.ProjectConfig;

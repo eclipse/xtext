@@ -1,26 +1,18 @@
 package org.eclipse.xtend.ide.tests.macros;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
-import com.google.common.io.CharStreams;
-import com.google.common.io.InputSupplier;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.Set;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -259,101 +251,8 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
       IFile _newSource = this.newSource(this.userProject, _key_3, _string_1);
       this.sourceFile = _newSource;
       IResourcesSetupUtil.waitForAutoBuild();
-      IProject _project = this.macroProject.getProject();
-      IMarker[] _findMarkers = _project.findMarkers(IMarker.PROBLEM, true, (-1));
-      final Function1<IMarker, Boolean> _function = new Function1<IMarker, Boolean>() {
-        public Boolean apply(final IMarker it) {
-          try {
-            Object _attribute = it.getAttribute(IMarker.SEVERITY);
-            return Boolean.valueOf(Objects.equal(_attribute, Integer.valueOf(IMarker.SEVERITY_ERROR)));
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
-        }
-      };
-      final Iterable<IMarker> markers = IterableExtensions.<IMarker>filter(((Iterable<IMarker>)Conversions.doWrapArray(_findMarkers)), _function);
-      final Function1<IMarker, String> _function_1 = new Function1<IMarker, String>() {
-        public String apply(final IMarker it) {
-          try {
-            IResource _resource = it.getResource();
-            IPath _fullPath = _resource.getFullPath();
-            String _lastSegment = _fullPath.lastSegment();
-            String _plus = ("file" + _lastSegment);
-            String _plus_1 = (_plus + " - ");
-            Object _attribute = it.getAttribute(IMarker.MESSAGE);
-            return (_plus_1 + _attribute);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
-        }
-      };
-      Iterable<String> _map = IterableExtensions.<IMarker, String>map(markers, _function_1);
-      String _join = IterableExtensions.join(_map, ",");
-      int _length = ((Object[])Conversions.unwrapArray(markers, Object.class)).length;
-      Assert.assertEquals(_join, 0, _length);
-      IProject _project_1 = this.userProject.getProject();
-      IMarker[] _findMarkers_1 = _project_1.findMarkers(IMarker.PROBLEM, true, (-1));
-      final Function1<IMarker, Boolean> _function_2 = new Function1<IMarker, Boolean>() {
-        public Boolean apply(final IMarker it) {
-          try {
-            Object _attribute = it.getAttribute(IMarker.SEVERITY);
-            return Boolean.valueOf(Objects.equal(_attribute, Integer.valueOf(IMarker.SEVERITY_ERROR)));
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
-        }
-      };
-      final Iterable<IMarker> markers2 = IterableExtensions.<IMarker>filter(((Iterable<IMarker>)Conversions.doWrapArray(_findMarkers_1)), _function_2);
-      final StringBuilder buffer = new StringBuilder();
-      final Function1<IMarker, IResource> _function_3 = new Function1<IMarker, IResource>() {
-        public IResource apply(final IMarker it) {
-          return it.getResource();
-        }
-      };
-      Iterable<IResource> _map_1 = IterableExtensions.<IMarker, IResource>map(markers2, _function_3);
-      Set<IResource> _set = IterableExtensions.<IResource>toSet(_map_1);
-      Iterable<IFile> _filter = Iterables.<IFile>filter(_set, IFile.class);
-      final Procedure1<IFile> _function_4 = new Procedure1<IFile>() {
-        public void apply(final IFile it) {
-          try {
-            final InputSupplier<InputStreamReader> _function = new InputSupplier<InputStreamReader>() {
-              public InputStreamReader getInput() throws IOException {
-                try {
-                  InputStream _contents = it.getContents();
-                  return new InputStreamReader(_contents);
-                } catch (Throwable _e) {
-                  throw Exceptions.sneakyThrow(_e);
-                }
-              }
-            };
-            CharStreams.<InputStreamReader>copy(_function, buffer);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
-        }
-      };
-      IterableExtensions.<IFile>forEach(_filter, _function_4);
-      final Function1<IMarker, String> _function_5 = new Function1<IMarker, String>() {
-        public String apply(final IMarker it) {
-          try {
-            IResource _resource = it.getResource();
-            IPath _fullPath = _resource.getFullPath();
-            String _lastSegment = _fullPath.lastSegment();
-            String _plus = ("file" + _lastSegment);
-            String _plus_1 = (_plus + " - ");
-            Object _attribute = it.getAttribute(IMarker.MESSAGE);
-            return (_plus_1 + _attribute);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
-        }
-      };
-      Iterable<String> _map_2 = IterableExtensions.<IMarker, String>map(markers2, _function_5);
-      String _join_1 = IterableExtensions.join(_map_2, "\n");
-      int _length_1 = ((Object[])Conversions.unwrapArray(markers2, Object.class)).length;
-      Assert.assertEquals(_join_1, 0, _length_1);
-      IProject _project_2 = this.userProject.getProject();
-      final ResourceSet resourceSet = this.resourceSetProvider.get(_project_2);
+      IProject _project = this.userProject.getProject();
+      final ResourceSet resourceSet = this.resourceSetProvider.get(_project);
       IPath _fullPath = this.sourceFile.getFullPath();
       String _string_2 = _fullPath.toString();
       URI _createPlatformResourceURI = URI.createPlatformResourceURI(_string_2, true);
@@ -362,8 +261,8 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
       this.validator.validate(resource, CheckMode.FAST_ONLY, CancelIndicator.NullImpl);
       final CompilationUnitImpl unit = this.compilationUnitProvider.get();
       EList<EObject> _contents = resource.getContents();
-      Iterable<XtendFile> _filter_1 = Iterables.<XtendFile>filter(_contents, XtendFile.class);
-      XtendFile _head = IterableExtensions.<XtendFile>head(_filter_1);
+      Iterable<XtendFile> _filter = Iterables.<XtendFile>filter(_contents, XtendFile.class);
+      XtendFile _head = IterableExtensions.<XtendFile>head(_filter);
       unit.setXtendFile(_head);
       expectations.apply(unit);
     } catch (Throwable _e) {

@@ -76,7 +76,6 @@ import org.eclipse.xtend.ide.refactoring.XtendRenameElementProcessor;
 import org.eclipse.xtend.ide.refactoring.XtendRenameStrategy;
 import org.eclipse.xtend.ide.refactoring.XtendRenameStrategyProvider;
 import org.eclipse.xtend.ide.validator.preferences.XtendValidatorConfigurationBlock;
-import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.builder.EclipseSourceFolderProvider;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
@@ -458,10 +457,6 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	
 	public Class<? extends ICompletionProposalComparator> bindICompletionProposalComparator() {
 		return OperatorAwareComparator.class;
-	}
-	
-	public Class<? extends MutableFileSystemSupport> bindFileSystemSupport() {
-		return AbstractFileSystemSupport.class;
 	}
 	
 	public Class<? extends AbstractFileSystemSupport> bindAbstractFileSystemSupport() {

@@ -49,7 +49,7 @@ class MutableElementsConditionsTestCase extends AbstractActiveAnnotationTest {
 			'''
 				MULTIPLE FILES WERE GENERATED
 				
-				File 1 : Foo.java
+				File 1 : /myProject/xtend-gen/Foo.java
 				
 				import «CheckMutableClassDeclaration.name»;
 				
@@ -58,7 +58,7 @@ class MutableElementsConditionsTestCase extends AbstractActiveAnnotationTest {
 				public class Foo<foo> {
 				}
 				
-				File 2 : foo/Bar.java
+				File 2 : /myProject/xtend-gen/foo/Bar.java
 				
 				package foo;
 				
@@ -66,14 +66,14 @@ class MutableElementsConditionsTestCase extends AbstractActiveAnnotationTest {
 				public class Bar {
 				}
 				
-				File 3 : foo/Bar2.java
+				File 3 : /myProject/xtend-gen/foo/Bar2.java
 				
 				package foo;
 				
 				public @interface Bar2 {
 				}
 				
-				File 4 : foo/Bar3.java
+				File 4 : /myProject/xtend-gen/foo/Bar3.java
 				
 				package foo;
 				
@@ -81,7 +81,7 @@ class MutableElementsConditionsTestCase extends AbstractActiveAnnotationTest {
 				public enum Bar3 {
 				}
 				
-				File 5 : foo/Bar4.java
+				File 5 : /myProject/xtend-gen/foo/Bar4.java
 				
 				package foo;
 				

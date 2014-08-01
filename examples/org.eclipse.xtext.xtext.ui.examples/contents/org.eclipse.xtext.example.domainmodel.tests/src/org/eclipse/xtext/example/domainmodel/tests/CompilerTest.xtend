@@ -2,18 +2,18 @@ package org.eclipse.xtext.example.domainmodel.tests
 
 import com.google.inject.Inject
 import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.junit4.TemporaryFolder
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
-import org.eclipse.xtext.junit4.internal.TemporaryFolder
-import org.junit.Rule
 
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(InjectorProviderCustom))
+@RunWith(XtextRunner)
+@InjectWith(InjectorProviderCustom)
 class CompilerTest {
 	
 	@Rule

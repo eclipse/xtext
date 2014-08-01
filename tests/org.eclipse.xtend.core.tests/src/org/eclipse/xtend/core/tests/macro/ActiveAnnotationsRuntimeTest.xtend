@@ -16,8 +16,8 @@ import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport
 import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.junit4.TemporaryFolder
 import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.util.CancelIndicator
@@ -27,15 +27,12 @@ import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
 import org.eclipse.xtext.xbase.file.ProjectConfig
 import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider
 import org.eclipse.xtext.xbase.file.WorkspaceConfig
-import org.eclipse.xtext.xbase.lib.IterableExtensions
-import org.eclipse.xtext.xbase.lib.Pair
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
-import org.eclipse.xtext.junit4.internal.TemporaryFolder
-import org.junit.Rule
 
 @RunWith(XtextRunner)
 @InjectWith(RuntimeInjectorProvider)
@@ -47,7 +44,6 @@ class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests
 	@Inject CompilationTestHelper compiler
 	@Inject Provider<CompilationUnitImpl> compilationUnitProvider
 	@Inject ProcessorInstanceForJvmTypeProvider processorProvider
-	@Inject ValidationTestHelper validationTestHelper
 	@Inject Provider<XtextResourceSet> resourceSetProvider;
 	@Inject RuntimeWorkspaceConfigProvider configProvider
 	@Inject extension MutableFileSystemSupport fileSystemSupport
@@ -86,13 +82,13 @@ class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests
 	override assertProcessing(Pair<String, String> macroFile, Pair<String, String> clientFile, (CompilationUnitImpl)=>void expectations) {
 		val resourceSet = macroFile.compileMacroResourceSet(clientFile)
 		val singleResource = resourceSet.resources.head
+		singleResource.load(emptyMap)
 		compiler.compile(resourceSet) [
+			it.generatedCode // ensure everything is compiled
 			val unit = compilationUnitProvider.get
-			val xtendFile = singleResource.contents.filter(typeof(XtendFile)).head
-			validationTestHelper.assertNoErrors(xtendFile)
+			val xtendFile = singleResource.contents.filter(XtendFile).head
 			unit.setXtendFile(xtendFile)
 			expectations.apply(unit)
-			assertTrue(singleResource.errors.isEmpty)
 		]
 	}
 	

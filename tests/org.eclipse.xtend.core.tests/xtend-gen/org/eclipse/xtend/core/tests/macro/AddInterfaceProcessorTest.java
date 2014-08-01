@@ -15,7 +15,7 @@ public class AddInterfaceProcessorTest extends AbstractActiveAnnotationTest {
     _builder_1.append("MULTIPLE FILES WERE GENERATED");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("File 1 : Foo.java");
+    _builder_1.append("File 1 : /myProject/xtend-gen/Foo.java");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtend.core.tests.macro.AddInterface;");
@@ -30,7 +30,7 @@ public class AddInterfaceProcessorTest extends AbstractActiveAnnotationTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("File 2 : de/test/Test.java");
+    _builder_1.append("File 2 : /myProject/xtend-gen/de/test/Test.java");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("package de.test;");
