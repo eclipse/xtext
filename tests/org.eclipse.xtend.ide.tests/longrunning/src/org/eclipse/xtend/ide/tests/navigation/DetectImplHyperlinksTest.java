@@ -10,12 +10,12 @@ package org.eclipse.xtend.ide.tests.navigation;
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.util.Strings.*;
 
-import java.lang.reflect.Field;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
@@ -72,11 +72,9 @@ public class DetectImplHyperlinksTest extends AbstractEditorTest {
 		XbaseImplementatorsHyperlink casted = (XbaseImplementatorsHyperlink) hyperlink;
 		assertEquals(offset -1, casted.getHyperlinkRegion().getOffset());
 		assertEquals(3, casted.getHyperlinkRegion().getLength());
-		Field elementField = casted.getClass().getDeclaredField("element");
-		elementField.setAccessible(true);
-		Object element = elementField.get(casted);
+		IJavaElement element = ((XbaseImplementatorsHyperlink) hyperlink).getElement();
 		assertTrue(element instanceof IMethod);
-		assertEquals("bar",((IMethod)element).getElementName());
+		assertEquals("bar", element.getElementName());
 	}
 
 	@Test public void testComputeHyperlink_2() throws Exception {
@@ -85,15 +83,13 @@ public class DetectImplHyperlinksTest extends AbstractEditorTest {
 		int offset = content.indexOf("|");
 
 		IHyperlink[] detectHyperlinks = hyperlinkDetector.detectHyperlinks(xtextEditor.getInternalSourceViewer(), new Region(offset,1), true);
-		assertEquals(2, detectHyperlinks.length);
+		assertEquals(3, detectHyperlinks.length);
 		XbaseImplementatorsHyperlink hyperlink = Iterables.filter(Lists.newArrayList(detectHyperlinks),XbaseImplementatorsHyperlink.class).iterator().next();
 		assertEquals(offset -2, hyperlink.getHyperlinkRegion().getOffset());
 		assertEquals(3, hyperlink.getHyperlinkRegion().getLength());
-		Field elementField = hyperlink.getClass().getDeclaredField("element");
-		elementField.setAccessible(true);
-		Object element = elementField.get(hyperlink);
+		IJavaElement element = hyperlink.getElement();
 		assertTrue(element instanceof IMethod);
-		assertEquals("foo",((IMethod)element).getElementName());
+		assertEquals("foo", element.getElementName());
 	}
 
 	@Test public void testComputeHyperlink_3() throws Exception {

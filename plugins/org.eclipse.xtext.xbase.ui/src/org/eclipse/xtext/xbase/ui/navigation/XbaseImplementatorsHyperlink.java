@@ -45,6 +45,8 @@ public class XbaseImplementatorsHyperlink implements IHyperlink {
 		opener.openImplementations(element, textViewer, region);
 	}
 
-
+	public IJavaElement getElement() {
+		return element;
+	}
 
 }
