@@ -372,6 +372,59 @@ public class NewDataCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
+  public void testExistingGetter2() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Data");
+      _builder.newLine();
+      _builder.append("@Data class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("boolean foo");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def getFoo() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("true");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        public void accept(final CompilationTestHelper.Result it) {
+          try {
+            Class<?> _compiledClass = it.getCompiledClass();
+            Constructor<?> _declaredConstructor = _compiledClass.getDeclaredConstructor(boolean.class);
+            final Object instance = _declaredConstructor.newInstance(Boolean.valueOf(false));
+            Class<?> _compiledClass_1 = it.getCompiledClass();
+            final Method getFoo = _compiledClass_1.getDeclaredMethod("getFoo");
+            Object _invoke = getFoo.invoke(instance);
+            Assert.assertEquals(Boolean.valueOf(true), _invoke);
+            Class<?> _compiledClass_2 = it.getCompiledClass();
+            Method[] _declaredMethods = _compiledClass_2.getDeclaredMethods();
+            final Function1<Method, Boolean> _function = new Function1<Method, Boolean>() {
+              public Boolean apply(final Method it) {
+                String _name = it.getName();
+                return Boolean.valueOf(Objects.equal(_name, "isFoo"));
+              }
+            };
+            boolean _exists = IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods)), _function);
+            Assert.assertFalse(_exists);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      this.compilationTestHelper.compile(_builder, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testExistingToString() {
     try {
       StringConcatenation _builder = new StringConcatenation();
@@ -762,7 +815,7 @@ public class NewDataCompilerTest extends AbstractXtendCompilerTest {
               final Function1<Method, Boolean> _function_3 = new Function1<Method, Boolean>() {
                 public Boolean apply(final Method it) {
                   String _name = it.getName();
-                  return Boolean.valueOf(Objects.equal(_name, "isBar"));
+                  return Boolean.valueOf(Objects.equal(_name, "getBar"));
                 }
               };
               boolean _exists_3 = IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods_1)), _function_3);
