@@ -4,10 +4,12 @@ import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Objects;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.Data;
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructorProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.TransformationParticipant;
@@ -31,6 +33,7 @@ import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -104,10 +107,15 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
     }
     
     public boolean hasGetter(final FieldDeclaration it) {
-      TypeDeclaration _declaringType = it.getDeclaringType();
-      String _getterName = this.getGetterName(it);
-      MethodDeclaration _findDeclaredMethod = _declaringType.findDeclaredMethod(_getterName);
-      return (_findDeclaredMethod != null);
+      List<String> _possibleGetterNames = this.getPossibleGetterNames(it);
+      final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
+        public Boolean apply(final String name) {
+          TypeDeclaration _declaringType = it.getDeclaringType();
+          MethodDeclaration _findDeclaredMethod = _declaringType.findDeclaredMethod(name);
+          return Boolean.valueOf((_findDeclaredMethod != null));
+        }
+      };
+      return IterableExtensions.<String>exists(_possibleGetterNames, _function);
     }
     
     public boolean shouldAddGetter(final FieldDeclaration it) {
@@ -236,17 +244,27 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
     }
     
     public String getGetterName(final FieldDeclaration it) {
-      String _xifexpression = null;
+      List<String> _possibleGetterNames = this.getPossibleGetterNames(it);
+      return IterableExtensions.<String>head(_possibleGetterNames);
+    }
+    
+    public List<String> getPossibleGetterNames(final FieldDeclaration it) {
+      List<String> _xifexpression = null;
       TypeReference _type = it.getType();
       boolean _isBooleanType = this.isBooleanType(_type);
       if (_isBooleanType) {
-        _xifexpression = "is";
+        _xifexpression = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("is", "get"));
       } else {
-        _xifexpression = "get";
+        _xifexpression = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("get"));
       }
-      String _simpleName = it.getSimpleName();
-      String _firstUpper = StringExtensions.toFirstUpper(_simpleName);
-      return (_xifexpression + _firstUpper);
+      final Function1<String, String> _function = new Function1<String, String>() {
+        public String apply(final String prefix) {
+          String _simpleName = it.getSimpleName();
+          String _firstUpper = StringExtensions.toFirstUpper(_simpleName);
+          return (prefix + _firstUpper);
+        }
+      };
+      return ListExtensions.<String, String>map(_xifexpression, _function);
     }
     
     public boolean isBooleanType(final TypeReference it) {
@@ -256,19 +274,9 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
       if (!_not) {
         _and = false;
       } else {
-        boolean _or = false;
-        String _name = it.getName();
-        String _name_1 = Boolean.class.getName();
-        boolean _equals = Objects.equal(_name, _name_1);
-        if (_equals) {
-          _or = true;
-        } else {
-          String _name_2 = it.getName();
-          String _name_3 = Boolean.TYPE.getName();
-          boolean _equals_1 = Objects.equal(_name_2, _name_3);
-          _or = _equals_1;
-        }
-        _and = _or;
+        TypeReference _primitiveBoolean = this.context.getPrimitiveBoolean();
+        boolean _is = it.is(_primitiveBoolean);
+        _and = _is;
       }
       return _and;
     }
@@ -551,8 +559,17 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
     }
     @Extension
     final FinalFieldsConstructorProcessor.Util requiredArgsUtil = new FinalFieldsConstructorProcessor.Util(context);
+    boolean _or = false;
     boolean _needsFinalFieldConstructor = requiredArgsUtil.needsFinalFieldConstructor(it);
     if (_needsFinalFieldConstructor) {
+      _or = true;
+    } else {
+      Type _findTypeGlobally_1 = context.findTypeGlobally(FinalFieldsConstructor.class);
+      AnnotationReference _findAnnotation_1 = it.findAnnotation(_findTypeGlobally_1);
+      boolean _tripleNotEquals_1 = (_findAnnotation_1 != null);
+      _or = _tripleNotEquals_1;
+    }
+    if (_or) {
       requiredArgsUtil.addFinalFieldsConstructor(it);
     }
     Iterable<? extends MutableFieldDeclaration> _declaredFields = it.getDeclaredFields();

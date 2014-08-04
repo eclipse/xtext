@@ -37,7 +37,7 @@ class DataProcessor extends AbstractClassProcessor {
 			}
 			final = true
 		]
-		if (needsFinalFieldConstructor) {
+		if (needsFinalFieldConstructor || findAnnotation(FinalFieldsConstructor.findTypeGlobally) !== null) {
 			addFinalFieldsConstructor
 		}
 		if (!hasHashCode) {
