@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.validation;
 
-import org.eclipse.xtext.ui.editor.AbstractDirtyStateAwareEditorCallback;
+import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
 import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
@@ -19,12 +19,9 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Michael Clay
- * @deprecated This class seems to be a remainder of the old days, when validation was triggered
- *   by an IXtextEditorCallback. It's problematic as it introduces a second DirtyStateEditorSupport
- *   instance by means of its superclass. 
  */
-@Deprecated 
-public class ValidatingEditorCallback extends AbstractDirtyStateAwareEditorCallback {
+public class ValidatingEditorCallback extends IXtextEditorCallback.NullImpl {
+	
 	@Inject
 	private IResourceValidator resourceValidator;
 	
