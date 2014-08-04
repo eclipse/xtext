@@ -76,7 +76,12 @@ public class XtextDocument extends Document implements IXtextDocument {
 		if (validationJob != null) {
 			validationJob.cancel();
 		}
-		resource = null;
+		internalModify(new IUnitOfWork.Void<XtextResource>() {
+			@Override
+			public void process(XtextResource state) throws Exception {
+				resource = null;
+			}
+		});
 	}
 
 	private final XtextDocumentLocker stateAccess = createDocumentLocker();
