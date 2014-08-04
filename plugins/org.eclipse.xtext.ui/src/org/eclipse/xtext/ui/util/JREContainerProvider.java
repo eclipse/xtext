@@ -46,7 +46,7 @@ public class JREContainerProvider {
 				defaultVMInstall = getDefaultVMInstall();
 				defaultVMinitialized = true;
 			}
-			return newJRE15ContainerPath();
+			return newJRE16ContainerPath();
 		}
 		IExecutionEnvironmentsManager executionEnvironmentsManager = JavaRuntime.getExecutionEnvironmentsManager();
 		IExecutionEnvironment[] executionEnvironments = executionEnvironmentsManager.getExecutionEnvironments();
@@ -55,11 +55,18 @@ public class JREContainerProvider {
 				return newJREContainerPath(executionEnvironment);
 			}
 		}
-		return newJRE15ContainerPath();
+		return newJRE16ContainerPath();
 	}
 
 	protected static IPath newJRE15ContainerPath() {
 		return newJREContainerPath(StandardVMType.ID_STANDARD_VM_TYPE, "J2SE-1.5");
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	protected static IPath newJRE16ContainerPath() {
+		return newJREContainerPath(StandardVMType.ID_STANDARD_VM_TYPE, "JavaSE-1.6");
 	}
 
 	public static IClasspathEntry getJREContainerEntry(IJavaProject javaProject) throws JavaModelException {
