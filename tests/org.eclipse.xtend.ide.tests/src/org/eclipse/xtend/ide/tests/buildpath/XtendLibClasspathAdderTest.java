@@ -19,6 +19,7 @@ import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
+import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.ui.util.JavaProjectFactory;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.StringInputStream;
@@ -46,6 +47,12 @@ public class XtendLibClasspathAdderTest extends AbstractXtendUITestCase {
 		IResourcesSetupUtil.cleanWorkspace();
 	}
 
+	@Override
+	public void setUp() throws Exception {
+		super.setUp();
+		pluginProjectFactory.setBreeToUse(JREContainerProvider.PREFERRED_BREE);
+	}
+	
 	@Test
 	public void testAddToJavaProject() throws Exception {
 		javaProjectFactory.setProjectName("test");

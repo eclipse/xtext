@@ -18,6 +18,7 @@ import org.eclipse.xtext.junit4.ui.AbstractCStyleLanguageAutoEditTest;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.junit.Test;
 
@@ -80,6 +81,7 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 	protected IProject createPluginProject(String name) throws CoreException {
 		Injector injector = org.eclipse.xtext.ui.tests.Activator.getInstance().getInjector("org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguage");
 		PluginProjectFactory projectFactory = injector.getInstance(PluginProjectFactory.class);
+		projectFactory.setBreeToUse(JREContainerProvider.PREFERRED_BREE);
 		projectFactory.setProjectName(name);
 		projectFactory.addFolders(Collections.singletonList("src"));
 		projectFactory.addBuilderIds(XtextProjectHelper.BUILDER_ID);

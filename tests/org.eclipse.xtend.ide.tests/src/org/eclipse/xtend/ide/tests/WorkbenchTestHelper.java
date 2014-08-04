@@ -54,6 +54,7 @@ import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
+import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.StringInputStream;
 import org.junit.Assert;
@@ -241,6 +242,7 @@ public class WorkbenchTestHelper extends Assert {
 		Injector injector = XtendActivator.getInstance().getInjector("org.eclipse.xtend.core.Xtend");
 		PluginProjectFactory projectFactory = injector.getInstance(PluginProjectFactory.class);
 		projectFactory.setProjectName(name);
+		projectFactory.setBreeToUse(JREContainerProvider.PREFERRED_BREE);
 		projectFactory.addFolders(Collections.singletonList("src"));
 		projectFactory.addBuilderIds(XtextProjectHelper.BUILDER_ID, JavaCore.BUILDER_ID, "org.eclipse.pde.ManifestBuilder",
 				"org.eclipse.pde.SchemaBuilder");

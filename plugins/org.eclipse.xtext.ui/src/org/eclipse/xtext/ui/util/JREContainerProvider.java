@@ -26,8 +26,13 @@ import org.eclipse.jdt.launching.environments.IExecutionEnvironmentsManager;
  */
 public class JREContainerProvider {
 
+	/**
+	 * @since 2.7
+	 */
+	public static final String PREFERRED_BREE = "JavaSE-1.6";
 	private static IVMInstall defaultVMInstall = null;
 	private static boolean defaultVMinitialized = false;
+	
 
 	/**
 	 * @since 2.6
@@ -41,21 +46,25 @@ public class JREContainerProvider {
 	 * @since 2.6
 	 */
 	public static IPath getDefaultJREContainerPath() {
-		if (defaultVMInstall == null) {
-			if (!defaultVMinitialized) {
-				defaultVMInstall = getDefaultVMInstall();
-				defaultVMinitialized = true;
-			}
-			return newJRE16ContainerPath();
-		}
-		IExecutionEnvironmentsManager executionEnvironmentsManager = JavaRuntime.getExecutionEnvironmentsManager();
-		IExecutionEnvironment[] executionEnvironments = executionEnvironmentsManager.getExecutionEnvironments();
-		for (IExecutionEnvironment executionEnvironment : executionEnvironments) {
-			if (executionEnvironment.isStrictlyCompatible(defaultVMInstall)) {
-				return newJREContainerPath(executionEnvironment);
+		if (defaultVMInstall() != null) {
+			IExecutionEnvironmentsManager executionEnvironmentsManager = JavaRuntime.getExecutionEnvironmentsManager();
+			IExecutionEnvironment[] executionEnvironments = executionEnvironmentsManager.getExecutionEnvironments();
+			for (IExecutionEnvironment executionEnvironment : executionEnvironments) {
+				if (executionEnvironment.isStrictlyCompatible(defaultVMInstall())) {
+					return newJREContainerPath(executionEnvironment);
+				}
 			}
 		}
-		return newJRE16ContainerPath();
+		return newPrefferedContainerPath();
+	}
+
+	private static IVMInstall defaultVMInstall() {
+		if (!defaultVMinitialized) {
+			// remember result - getDefaultVMInstall() is very expensive operation
+			defaultVMInstall = getDefaultVMInstall();
+			defaultVMinitialized = true;
+		}
+		return defaultVMInstall;
 	}
 
 	protected static IPath newJRE15ContainerPath() {
@@ -65,8 +74,8 @@ public class JREContainerProvider {
 	/**
 	 * @since 2.7
 	 */
-	protected static IPath newJRE16ContainerPath() {
-		return newJREContainerPath(StandardVMType.ID_STANDARD_VM_TYPE, "JavaSE-1.6");
+	protected static IPath newPrefferedContainerPath() {
+		return newJREContainerPath(StandardVMType.ID_STANDARD_VM_TYPE, PREFERRED_BREE);
 	}
 
 	public static IClasspathEntry getJREContainerEntry(IJavaProject javaProject) throws JavaModelException {
@@ -81,5 +90,12 @@ public class JREContainerProvider {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	public static String getDefaultBREE() {
+		return getDefaultJREContainerPath().lastSegment();
 	}
 }

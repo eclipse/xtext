@@ -23,6 +23,7 @@ import org.eclipse.xtext.junit4.util.ResourceLoadHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.XtextProjectHelper;
+import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.XExpression;
@@ -97,6 +98,7 @@ public abstract class AbstractXbaseUITestCase extends Assert implements Resource
 		Injector injector = XtypeActivator.getInstance().getInjector("org.eclipse.xtext.xbase.Xbase");
 		PluginProjectFactory projectFactory = injector.getInstance(PluginProjectFactory.class);
 		projectFactory.setProjectName(name);
+		projectFactory.setBreeToUse(JREContainerProvider.PREFERRED_BREE);
 		projectFactory.addFolders(Collections.singletonList("src"));
 		projectFactory.addBuilderIds(
 			JavaCore.BUILDER_ID, 

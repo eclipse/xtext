@@ -21,6 +21,7 @@ import org.eclipse.xtext.junit4.ui.AbstractCStyleLanguageAutoEditTest;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.xtext.ui.internal.Activator;
 import org.junit.Test;
@@ -275,6 +276,7 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 	protected IProject createPluginProject(String name) throws CoreException {
 		Injector injector = Activator.getInstance().getInjector("org.eclipse.xtext.Xtext");
 		PluginProjectFactory projectFactory = injector.getInstance(PluginProjectFactory.class);
+		projectFactory.setBreeToUse(JREContainerProvider.PREFERRED_BREE);
 		projectFactory.setProjectName(name);
 		projectFactory.addFolders(Collections.singletonList("src"));
 		projectFactory.addBuilderIds(XtextProjectHelper.BUILDER_ID);
