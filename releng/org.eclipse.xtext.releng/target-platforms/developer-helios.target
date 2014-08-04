@@ -20,6 +20,7 @@
 <unit id="org.eclipse.jdt.feature.group" version="3.6.2.r362_v20101117-0800-7z8XFW6FLFlmjJcvz03jyeFBLS_F"/>
 <unit id="org.eclipse.pde.core" version="0.0.0"/>
 <unit id="org.eclipse.pde.ui" version="0.0.0"/>
+<unit id="org.eclipse.pde.junit.runtime" version="0.0.0"/>
 <unit id="org.junit4" version="0.0.0"/>
 <repository location="http://download.eclipse.org/eclipse/updates/3.6"/>
 </location>
