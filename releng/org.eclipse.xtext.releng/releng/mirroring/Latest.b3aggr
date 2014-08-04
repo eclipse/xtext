@@ -3,12 +3,12 @@
   <validationSets description="Most recent TP" label="Latest">
     <contributions href="xpand-mwe-orbit.b3aggrcon#/"/>
     <contributions label="Latest">
-      <repositories location="http://download.eclipse.org/eclipse/updates/4.4-I-builds/">
+      <repositories location="http://download.eclipse.org/eclipse/updates/4.4/">
         <bundles name="org.eclipse.pde.core"/>
         <bundles name="org.eclipse.pde.ui"/>
         <bundles name="org.eclipse.ui.cheatsheets"/>
         <bundles name="org.junit" versionRange="[4.10.0.v4_10_0_v20120426-0900]"/>
-        <bundles name="org.eclipse.jdt.annotation"  versionRange="[1.0,2.0)"/>
+        <bundles name="org.eclipse.jdt.annotation" versionRange="[1.0.0,2.0.0)"/>
         <features name="org.eclipse.jdt.feature.group"/>
         <features name="org.eclipse.platform.feature.group" versionRange="4.4.0"/>
       </repositories>

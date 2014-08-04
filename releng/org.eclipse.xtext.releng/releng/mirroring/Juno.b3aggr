@@ -2,7 +2,7 @@
 <aggregator:Aggregation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:aggregator="http://www.eclipse.org/b3/2011/aggregator/1.1.0" label="Juno" buildRoot="./Juno/" packedStrategy="SKIP">
   <validationSets description="Juno TP" label="Juno">
     <contributions href="xpand-mwe-orbit.b3aggrcon#/"/>
-    <contributions label="Latest">
+    <contributions label="Juno">
       <repositories location="http://download.eclipse.org/eclipse/updates/4.2/">
         <bundles name="org.eclipse.pde.core"/>
         <bundles name="org.eclipse.pde.ui"/>
@@ -14,9 +14,9 @@
       </repositories>
       <repositories location="http://download.eclipse.org/releases/juno/">
         <bundles name="org.eclipse.m2e.core"/>
-        <features name="org.eclipse.emf.compare.feature.group"/>
         <bundles name="org.eclipse.draw2d.feature.group"/>
         <bundles name="org.eclipse.egit.feature.group"/>
+        <features name="org.eclipse.emf.compare.feature.group"/>
       </repositories>
     </contributions>
   </validationSets>
