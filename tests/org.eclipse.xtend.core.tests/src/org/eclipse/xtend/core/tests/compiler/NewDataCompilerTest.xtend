@@ -146,6 +146,24 @@ class NewDataCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
+	def void testExistingGetter2() {
+		'''
+			import org.eclipse.xtend.lib.annotations.Data
+			@Data class Foo {
+				boolean foo
+				def getFoo() {
+					true
+				}
+			}
+		'''.compile[
+			val instance = compiledClass.getDeclaredConstructor(boolean).newInstance(false)
+			val getFoo = compiledClass.getDeclaredMethod("getFoo")
+			assertEquals(true, getFoo.invoke(instance))
+			assertFalse(compiledClass.declaredMethods.exists[name == "isFoo"])
+		]
+	}
+	
+	@Test
 	def void testExistingToString() {
 		'''
 			import org.eclipse.xtend.lib.annotations.Data
@@ -289,7 +307,7 @@ class NewDataCompilerTest extends AbstractXtendCompilerTest {
 				assertTrue(declaredFields.exists[name == "foo"])
 				assertTrue(declaredFields.exists[name == "bar"])
 				assertTrue(declaredMethods.exists[name == "isFoo"])
-				assertTrue(declaredMethods.exists[name == "isBar"])
+				assertTrue(declaredMethods.exists[name == "getBar"])
 			]
 		]
 	}

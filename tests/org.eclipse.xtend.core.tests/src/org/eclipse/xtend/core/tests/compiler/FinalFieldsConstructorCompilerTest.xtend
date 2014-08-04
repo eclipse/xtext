@@ -135,6 +135,27 @@ class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTest {
 		]
 	}
 	
+	@Test def testIntegrationWithData2() {
+		val source = '''
+			import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+			import org.eclipse.xtend.lib.annotations.Data
+			@FinalFieldsConstructor @Data class C {
+				val int a
+				val String b
+				new() {
+					a = 1
+					b = "Foo"
+				}
+			}
+		'''
+		source.clazz.assertNoErrors
+		source.compile[
+			assertTrue(compiledClass.declaredConstructors.exists[
+				parameterTypes.toList == #[int, String]
+			])
+		]
+	}
+	
 	@Test def testIntegrationWithAccessors() {
 		val source = '''
 			import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor

@@ -5,17 +5,20 @@ import java.util.Set;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.AccessorsProcessor;
 import org.eclipse.xtend.lib.annotations.EqualsHashCodeProcessor;
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructorProcessor;
 import org.eclipse.xtend.lib.annotations.ToStringConfiguration;
 import org.eclipse.xtend.lib.annotations.ToStringProcessor;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
+import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.Element;
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Modifier;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ResolvedConstructor;
+import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -92,8 +95,17 @@ public class DataProcessor extends AbstractClassProcessor {
       }
     };
     IterableExtensions.forEach(_dataFields, _function);
+    boolean _or = false;
     boolean _needsFinalFieldConstructor = requiredArgsUtil.needsFinalFieldConstructor(it);
     if (_needsFinalFieldConstructor) {
+      _or = true;
+    } else {
+      Type _findTypeGlobally = context.findTypeGlobally(FinalFieldsConstructor.class);
+      AnnotationReference _findAnnotation = it.findAnnotation(_findTypeGlobally);
+      boolean _tripleNotEquals = (_findAnnotation != null);
+      _or = _tripleNotEquals;
+    }
+    if (_or) {
       requiredArgsUtil.addFinalFieldsConstructor(it);
     }
     boolean _hasHashCode = ehUtil.hasHashCode(it);
@@ -101,16 +113,16 @@ public class DataProcessor extends AbstractClassProcessor {
     if (_not) {
       Iterable<? extends MutableFieldDeclaration> _dataFields_1 = util.getDataFields(it);
       ResolvedConstructor _superConstructor = requiredArgsUtil.getSuperConstructor(it);
-      boolean _tripleNotEquals = (_superConstructor != null);
-      ehUtil.addHashCode(it, _dataFields_1, _tripleNotEquals);
+      boolean _tripleNotEquals_1 = (_superConstructor != null);
+      ehUtil.addHashCode(it, _dataFields_1, _tripleNotEquals_1);
     }
     boolean _hasEquals = ehUtil.hasEquals(it);
     boolean _not_1 = (!_hasEquals);
     if (_not_1) {
       Iterable<? extends MutableFieldDeclaration> _dataFields_2 = util.getDataFields(it);
       ResolvedConstructor _superConstructor_1 = requiredArgsUtil.getSuperConstructor(it);
-      boolean _tripleNotEquals_1 = (_superConstructor_1 != null);
-      ehUtil.addEquals(it, _dataFields_2, _tripleNotEquals_1);
+      boolean _tripleNotEquals_2 = (_superConstructor_1 != null);
+      ehUtil.addEquals(it, _dataFields_2, _tripleNotEquals_2);
     }
     boolean _hasToString = toStringUtil.hasToString(it);
     boolean _not_2 = (!_hasToString);
