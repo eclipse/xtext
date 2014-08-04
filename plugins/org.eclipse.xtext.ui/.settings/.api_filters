@@ -118,6 +118,18 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/validation/ValidatingEditorCallback.java" type="org.eclipse.xtext.ui.editor.validation.ValidatingEditorCallback">
+        <filter comment="Avoid duplicate DirtyStateEditorSupport" id="337682486">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.validation.ValidatingEditorCallback"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Avoid duplicate DirtyStateEditorSupport" id="338849923">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.validation.ValidatingEditorCallback"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtext/ui/refactoring/impl/EditorDocumentChange.java" type="org.eclipse.xtext.ui.refactoring.impl.EditorDocumentChange">
         <filter comment="We have to extend some Change subtype" id="571473929">
             <message_arguments>
