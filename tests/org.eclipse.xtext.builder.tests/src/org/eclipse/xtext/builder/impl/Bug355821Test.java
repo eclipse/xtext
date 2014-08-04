@@ -18,6 +18,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.ui.XtextProjectHelper;
+import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.StringInputStream;
 import org.junit.Test;
@@ -61,6 +62,7 @@ public class Bug355821Test extends AbstractParticipatingBuilderTest {
 	private IProject createPluginProject(String name) throws CoreException {
 		PluginProjectFactory projectFactory = getInstance(PluginProjectFactory.class);
 		projectFactory.setProjectName(name);
+		projectFactory.setBreeToUse(JREContainerProvider.PREFERRED_BREE);
 		projectFactory.addFolders(Collections.singletonList("src"));
 		projectFactory.addBuilderIds(JavaCore.BUILDER_ID, "org.eclipse.pde.ManifestBuilder",
 				"org.eclipse.pde.SchemaBuilder", XtextProjectHelper.BUILDER_ID);

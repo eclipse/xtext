@@ -19,6 +19,7 @@ import org.eclipse.xtext.builder.clustering.CopiedResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.ui.XtextProjectHelper;
+import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.junit.Test;
 
@@ -67,6 +68,7 @@ public class Bug334456Test extends AbstractBuilderTest {
 	private IProject createPluginProject(String name) throws CoreException {
 		PluginProjectFactory projectFactory = getInstance(PluginProjectFactory.class);
 		projectFactory.setProjectName(name);
+		projectFactory.setBreeToUse(JREContainerProvider.PREFERRED_BREE);
 		projectFactory.addFolders(Collections.singletonList("src"));
 		projectFactory.addBuilderIds(
 			JavaCore.BUILDER_ID, 

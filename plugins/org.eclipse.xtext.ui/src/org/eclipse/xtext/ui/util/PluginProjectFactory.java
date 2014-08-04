@@ -33,6 +33,7 @@ public class PluginProjectFactory extends JavaProjectFactory {
 	protected List<String> exportedPackages;
 	protected List<String> importedPackages;
 	protected String activatorClassName;
+	private String breeToUse;
 	
 	public PluginProjectFactory addRequiredBundles(List<String> requiredBundles) {
 		if (this.requiredBundles == null)
@@ -108,8 +109,8 @@ public class PluginProjectFactory extends JavaProjectFactory {
 		addToContent(content, requiredBundles, "Require-Bundle");
 		addToContent(content, exportedPackages, "Export-Package");
 		addToContent(content, importedPackages, "Import-Package");
-
-		content.append("Bundle-RequiredExecutionEnvironment: J2SE-1.5\n");
+		content.append("Bundle-RequiredExecutionEnvironment: ");
+		content.append(getBreeToUse() + "\n");
 
 		final IFolder metaInf = project.getFolder("META-INF");
 		SubMonitor subMonitor = SubMonitor.convert(progressMonitor, 2);
@@ -123,6 +124,24 @@ public class PluginProjectFactory extends JavaProjectFactory {
 		}
 	}
 
+	private String getBreeToUse() {
+		if (breeToUse == null) {
+			return JREContainerProvider.getDefaultBREE();
+		}
+		return breeToUse;
+	}
+
+	/**
+	 * Use this method to set the Bundle-RequiredExecutionEnvironment (BREE).<br>
+	 * If not set, the compatible system default will be used. 
+	 * @see JREContainerProvider#getDefaultBREE()
+	 * @param breeToUse - BREE to use (e.g. JavaSE-1.6)
+	 * @since 2.7
+	 */
+	public void setBreeToUse(String breeToUse) {
+		this.breeToUse = breeToUse;
+	}
+	
 	protected void addToContent(final StringBuilder content, List<String> entries, String prefix) {
 		if (entries != null && !entries.isEmpty()) {
 			content.append(prefix).append(": ").append(entries.get(0));
