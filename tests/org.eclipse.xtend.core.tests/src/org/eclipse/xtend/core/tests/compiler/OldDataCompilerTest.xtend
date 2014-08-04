@@ -458,7 +458,7 @@ class OldDataCompilerTest extends AbstractXtendCompilerTest {
 				assertTrue(declaredFields.exists[name == "_foo"])
 				assertTrue(declaredFields.exists[name == "_bar"])
 				assertTrue(declaredMethods.exists[name == "isFoo"])
-				assertTrue(declaredMethods.exists[name == "isBar"])
+				assertTrue(declaredMethods.exists[name == "getBar"])
 			]
 		]
 	}
