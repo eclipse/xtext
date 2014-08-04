@@ -14,6 +14,28 @@ import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder
 
 /**
+ * Creates a default {@link Object#toString toString} implementation. 
+ * 
+ * <p>
+ * All non-static fields of this class and all of its superclasses are used.
+ * Reflection is used to access all fields if this class has a superclass. This may not work in restrictive environments. 
+ * For such cases use {@link ToStringBuilder} to write a non-reflective implementation.
+ * </p>
+ * The default format is:
+ * <pre>
+ *  ClassName [
+ *    field1 = "Foo"
+ *    field2 = 2
+ *    field3 = null
+ *  ]
+ * </pre>
+ * 
+ * The class name is hardcoded. Subclasses which inherit this class without overriding <code>toString</code> will show the same name.
+ * 
+ * </p>
+ * <p>
+ * For brevity there are options to hide field names, skip fields with null values and print everything on one line.
+ * </p>
  * @since 2.7
  */
 @Beta
@@ -21,8 +43,17 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder
 @Active(ToStringProcessor)
 @GwtCompatible
 annotation ToString {
+	/**
+	 * Fields with null values are not shown in the output.
+	 */
 	val skipNulls = false
+	/**
+	 * Seperate fields with a comma and a single space
+	 */
 	val singleLine = false
+	/**
+	 * Only list the values of the fields, not their names
+	 */
 	val hideFieldNames = false
 }
 
