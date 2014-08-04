@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<aggregator:Aggregation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:aggregator="http://www.eclipse.org/b3/2011/aggregator/1.1.0" label="Latest" buildRoot="./Kepler/" packedStrategy="SKIP">
+<aggregator:Aggregation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:aggregator="http://www.eclipse.org/b3/2011/aggregator/1.1.0" label="Kepler" buildRoot="./Kepler/" packedStrategy="SKIP">
   <validationSets description="Kepler 4.3 TP" label="Kepler">
     <contributions href="xpand-mwe-orbit.b3aggrcon#/"/>
     <contributions label="Latest">
       <repositories location="http://download.eclipse.org/eclipse/updates/4.3/">
-        <bundles name="org.eclipse.pde.core"/>
-        <bundles name="org.eclipse.pde.ui"/>
+        <bundles name="org.eclipse.pde.core" versionRange="[3.9.1,3.10.0)"/>
+        <bundles name="org.eclipse.pde.ui" versionRange="[3.8.0,3.9.0)"/>
         <bundles name="org.eclipse.ui.cheatsheets"/>
         <bundles name="org.junit" versionRange="[4.10.0.v4_10_0_v20120426-0900]"/>
         <bundles name="org.eclipse.jdt.annotation"/>
-        <features name="org.eclipse.jdt.feature.group"/>
+        <features name="org.eclipse.jdt.feature.group" versionRange="[3.9.2,3.10.0)"/>
       </repositories>
       <repositories location="http://download.eclipse.org/eclipse/updates/4.2/">
         <bundles name="org.junit4"/>
