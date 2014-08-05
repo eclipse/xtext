@@ -54,6 +54,7 @@ Workflow {
 				options = {
 					classSplitting = true
 				}
+				partialParsing = true
 			}
 			fragment = Ecore2XtextValueConverterServiceFragment {}
 		}

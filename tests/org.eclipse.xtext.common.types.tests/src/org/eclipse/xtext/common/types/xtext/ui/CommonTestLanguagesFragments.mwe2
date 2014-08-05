@@ -38,5 +38,6 @@ CompositeGeneratorFragment {
 	fragment = contentAssist.JavaBasedContentAssistFragment {}
 	fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {
 		options = auto-inject {}
+		partialParsing = true
 	}
 }

@@ -20,6 +20,7 @@ var contentAssist.parser = parser.antlr.XtextAntlrUiGeneratorFragment auto-injec
   		fieldsPerClass = "100"
   		methodsPerClass = "100"
   	}
+  	partialParsing = true
 }
 
 LanguageConfig {

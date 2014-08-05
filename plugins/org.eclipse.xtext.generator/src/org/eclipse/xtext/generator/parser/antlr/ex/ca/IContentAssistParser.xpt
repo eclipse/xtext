@@ -10,13 +10,15 @@
 «ENDREM»
 
 «IMPORT org::eclipse::xtext»
+«IMPORT org::eclipse::xtext::generator::parser::antlr»
 «IMPORT org::eclipse::xtext::generator::parser::antlr::ex::common»
 
 «EXTENSION org::eclipse::xtext::generator::Naming»
 «EXTENSION org::eclipse::xtext::generator::parser::antlr::AntlrGrammar»
+«EXTENSION org::eclipse::xtext::generator::parser::antlr::ContentAssistParser»
 «EXTENSION org::eclipse::xtext::generator::grammarAccess::GrammarAccess»
 
-«DEFINE parser(AntlrFragmentHelper helper) FOR Grammar»
+«DEFINE parser(boolean partialParsing, AntlrFragmentHelper helper) FOR Grammar»
 «FILE helper.getContentAssistParserClassName(this).asPath()+".java" SRC_GEN_UI-»
 /*
 «fileHeader()»
@@ -29,7 +31,7 @@ import java.util.HashMap;
 
 import org.antlr.runtime.RecognitionException;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.AbstractContentAssistParser;
+import «getParserSuperClassName(partialParsing)»;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
 
@@ -37,7 +39,7 @@ import com.google.inject.Inject;
 
 import «gaFQName()»;
 
-public class «helper.getContentAssistParserClassName(this).toSimpleName()» extends AbstractContentAssistParser {
+public class «helper.getContentAssistParserClassName(this).toSimpleName()» extends «getParserSuperClassName(partialParsing).toSimpleName()» {
 	
 	@Inject
 	private «gaSimpleName()» grammarAccess;

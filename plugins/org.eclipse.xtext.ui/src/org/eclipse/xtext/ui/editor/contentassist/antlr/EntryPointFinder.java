@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.ide.contentassist.antlr;
+package org.eclipse.xtext.ui.editor.contentassist.antlr;
 
 import java.util.Iterator;
 
@@ -20,10 +20,11 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
 
 /**
+ * Used by the {@link AbstractPartialContentAssistParser} to find the node at which to start parsing.
  * @author Sebastian Zarnekow
+ * @since 2.7
  */
 public class EntryPointFinder {
-
 	public ICompositeNode findEntryPoint(IParseResult parseResult, int offset) {
 		ICompositeNode rootNode = parseResult.getRootNode();
 		if (rootNode.getTotalLength() == offset) {
@@ -40,15 +41,15 @@ public class EntryPointFinder {
 		}
 		return null;
 	}
-	
-	private ICompositeNode findEntryPoint(ICompositeNode node, int offset) {
+
+	protected ICompositeNode findEntryPoint(ICompositeNode node, int offset) {
 		ICompositeNode result = node;
 		result = getApplicableNode(result);
-		while(result != null) {
+		while (result != null) {
 			int remainingLookAhead = result.getLookAhead();
 			if (remainingLookAhead != 0) {
 				Iterator<ILeafNode> leafNodes = result.getLeafNodes().iterator();
-				while(leafNodes.hasNext() && remainingLookAhead > 0) {
+				while (leafNodes.hasNext() && remainingLookAhead > 0) {
 					ILeafNode leaf = leafNodes.next();
 					if (leaf.getTotalOffset() >= offset) {
 						break;
@@ -79,18 +80,22 @@ public class EntryPointFinder {
 		if (result.getGrammarElement() instanceof RuleCall) {
 			RuleCall rc = (RuleCall) result.getGrammarElement();
 			Assignment assignment = GrammarUtil.containingAssignment(rc);
-			if (assignment != null && (GrammarUtil.isMultipleCardinality(assignment) || (assignment.eContainer() instanceof AbstractElement && GrammarUtil.isMultipleCardinality((AbstractElement) assignment.eContainer())))) {
+			if (assignment != null
+					&& (GrammarUtil.isMultipleCardinality(assignment) || (assignment.eContainer() instanceof AbstractElement && GrammarUtil
+							.isMultipleCardinality((AbstractElement) assignment.eContainer())))) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	private ICompositeNode normalizeToParent(ICompositeNode result) {
-		if (result == null)
+	protected ICompositeNode normalizeToParent(ICompositeNode result) {
+		if (result == null) {
 			return result;
+		}
 		ICompositeNode parent = result.getParent();
-		while (parent != null && parent.getFirstChild().equals(result) && parent.getLookAhead() == result.getLookAhead()) {
+		while (parent != null && parent.getFirstChild().equals(result)
+				&& parent.getLookAhead() == result.getLookAhead()) {
 			result = parent;
 			parent = result.getParent();
 		}
@@ -103,5 +108,4 @@ public class EntryPointFinder {
 		}
 		return normalizeToParent(result);
 	}
-
 }

@@ -72,7 +72,9 @@ LanguageConfig auto-inject {
 	fragment = contentAssist.ContentAssistFragment auto-inject {}
 
 	// generates a more lightweight Antlr parser and lexer tailored for content assist
-	fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}
+	fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {
+		partialParsing = true
+	}
 
 	// rename refactoring
 	fragment = refactoring.RefactorElementNameFragment auto-inject {}
