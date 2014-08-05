@@ -113,7 +113,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 	static final JvmType[] PRIMITIVE_PROXIES = new JvmType[TypeURIHelper.PRIMITIVE_URIS.length];
 	
 	private static JdtCompliance getComplianceLevel() {
-		if (isJdtGreaterOrEqual(new Version(3,6,0))) {
+		if (isJdtGreaterOrEqual(new Version(3,7,0))) {
 			if (isJdtGreaterOrEqual(new Version(3,10,0))) {
 				return JdtCompliance.LunaOrBetter;
 			}
