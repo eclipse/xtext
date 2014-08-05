@@ -1,6 +1,7 @@
 package org.eclipse.xtend.ide.tests.compiler;
 
 import com.google.inject.Inject;
+import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
@@ -12,7 +13,11 @@ import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -230,8 +235,16 @@ public class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase
       final IFile file = this.workbenchTestHelper.createFile("test/FooUser.xtend", _builder_2.toString());
       IResourcesSetupUtil.waitForAutoBuild();
       IMarker[] _findMarkers = file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
-      int _length = _findMarkers.length;
-      Assert.assertEquals(0, _length);
+      final Function1<IMarker, String> _function = new Function1<IMarker, String>() {
+        public String apply(final IMarker it) {
+          return MarkerUtilities.getMessage(it);
+        }
+      };
+      List<String> _map = ListExtensions.<IMarker, String>map(((List<IMarker>)Conversions.doWrapArray(_findMarkers)), _function);
+      String _join = IterableExtensions.join(_map, ",");
+      IMarker[] _findMarkers_1 = file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
+      int _length = _findMarkers_1.length;
+      Assert.assertEquals(_join, 0, _length);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -241,13 +254,23 @@ public class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase
     try {
       IWorkspace _workspace = ResourcesPlugin.getWorkspace();
       IWorkspaceRoot _root = _workspace.getRoot();
-      final IMarker[] findMarkers = _root.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
-      for (final IMarker iMarker : findMarkers) {
-        String _message = MarkerUtilities.getMessage(iMarker);
-        int _severity = MarkerUtilities.getSeverity(iMarker);
-        boolean _equals = (_severity == IMarker.SEVERITY_ERROR);
-        Assert.assertFalse(_message, _equals);
-      }
+      IMarker[] _findMarkers = _root.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
+      final Function1<IMarker, Boolean> _function = new Function1<IMarker, Boolean>() {
+        public Boolean apply(final IMarker it) {
+          int _severity = MarkerUtilities.getSeverity(it);
+          return Boolean.valueOf((_severity == IMarker.SEVERITY_ERROR));
+        }
+      };
+      final Iterable<IMarker> errorMarkers = IterableExtensions.<IMarker>filter(((Iterable<IMarker>)Conversions.doWrapArray(_findMarkers)), _function);
+      final Function1<IMarker, String> _function_1 = new Function1<IMarker, String>() {
+        public String apply(final IMarker it) {
+          return MarkerUtilities.getMessage(it);
+        }
+      };
+      Iterable<String> _map = IterableExtensions.<IMarker, String>map(errorMarkers, _function_1);
+      String _join = IterableExtensions.join(_map, ",");
+      boolean _isEmpty = IterableExtensions.isEmpty(errorMarkers);
+      Assert.assertTrue(_join, _isEmpty);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

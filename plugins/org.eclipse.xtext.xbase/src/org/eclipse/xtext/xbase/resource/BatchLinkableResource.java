@@ -20,7 +20,6 @@ import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IBatchLinkableResource;
@@ -145,9 +144,9 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 	 */
 	@Override
 	public void resolveLazyCrossReferences(CancelIndicator monitor) {
-		IParseResult parseResult = getParseResult();
-		if (parseResult != null) {
-			batchLinkingService.resolveBatched(parseResult.getRootASTElement(), monitor);
+		EList<EObject> contents = getContents();
+		if (contents != null && !contents.isEmpty()) {
+			batchLinkingService.resolveBatched(contents.get(0), monitor);
 		}
 		if (monitor == null || !monitor.isCanceled())
 			super.resolveLazyCrossReferences(monitor);

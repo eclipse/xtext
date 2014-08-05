@@ -82,13 +82,20 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 				exportedEObjects.add(eObjectDescription);
 			}
 		};
-		TreeIterator<EObject> allProperContents = EcoreUtil.getAllProperContents(getResource(), false);
+		TreeIterator<EObject> allProperContents = getAllPropertContents();
 		while (allProperContents.hasNext()) {
 			EObject content = allProperContents.next();
 			if (!strategy.createEObjectDescriptions(content, acceptor))
 				allProperContents.prune();
 		}
 		return exportedEObjects;
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	protected TreeIterator<EObject> getAllPropertContents() {
+		return EcoreUtil.getAllProperContents(getResource(), false);
 	}
 
 	public Iterable<QualifiedName> getImportedNames() {
@@ -128,7 +135,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 		};
 		EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl);
 		Map<EObject, IEObjectDescription> eObject2exportedEObjects = createEObject2ExportedEObjectsMap(getExportedObjects());
-		TreeIterator<EObject> contents = EcoreUtil.getAllProperContents(this.resource, true);
+		TreeIterator<EObject> contents = getAllPropertContents();
 		while (contents.hasNext()) {
 			EObject eObject = contents.next();
 			URI exportedContainerURI = findExportedContainerURI(eObject, eObject2exportedEObjects);

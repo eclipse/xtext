@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.resource.IResourceDescription.Delta
 import java.util.Collection
 import org.eclipse.xtext.resource.IResourceDescriptions
+import org.eclipse.xtext.resource.DerivedStateAwareResource
 
 class XtendResourceDescriptionManager extends DerivedStateAwareResourceDescriptionManager implements IResourceDescription.Manager.AllChangeAware {
 	
@@ -61,6 +62,11 @@ class XtendResourceDescription extends DefaultResourceDescription {
 		super(resource, strategy, cache)
 		this.typeResolver = typeResolver
 		this.nameConverter = nameConverter
+	}
+	
+	override protected getAllPropertContents() {
+		val contents = (resource as DerivedStateAwareResource).rawGetContents
+		return EcoreUtil.getAllProperContents(contents, false)
 	}
 
 	override protected getLookUp() {
