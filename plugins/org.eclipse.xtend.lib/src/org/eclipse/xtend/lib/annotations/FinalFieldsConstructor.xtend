@@ -15,6 +15,7 @@ import org.eclipse.xtend.lib.macro.declaration.MutableConstructorDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclarator
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration
+import org.eclipse.xtend.lib.macro.declaration.TypeReference
 
 /**
  * <p>Creates a constructor that takes a parameter for each final field of a class.</p>
@@ -142,7 +143,7 @@ class FinalFieldsConstructorProcessor implements TransformationParticipant<Mutab
 			val fieldToParameter = newHashMap
 			declaringType.finalFields.forEach [ p |
 				p.markAsInitializedBy(it)
-				val param = addParameter(p.simpleName, p.type)
+				val param = addParameter(p.simpleName, p.type.orObject)
 				fieldToParameter.put(p, param)
 			]
 			body = '''
@@ -161,6 +162,10 @@ class FinalFieldsConstructorProcessor implements TransformationParticipant<Mutab
 			} else {
 				return null
 			}
+		}
+		
+		private def orObject(TypeReference ref) {
+			if (ref === null) object else ref
 		}
 	}
 }
