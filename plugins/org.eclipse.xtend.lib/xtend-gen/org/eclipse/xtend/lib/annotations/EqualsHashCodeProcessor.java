@@ -186,7 +186,8 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
     public String contributeToEquals(final FieldDeclaration it) {
       String _switchResult = null;
       TypeReference _type = it.getType();
-      String _name = _type.getName();
+      TypeReference _orObject = this.orObject(_type);
+      String _name = _orObject.getName();
       boolean _matched = false;
       if (!_matched) {
         String _name_1 = Double.TYPE.getName();
@@ -355,7 +356,8 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
     public String contributeToHashCode(final FieldDeclaration it) {
       String _switchResult = null;
       TypeReference _type = it.getType();
-      String _name = _type.getName();
+      TypeReference _orObject = this.orObject(_type);
+      String _name = _orObject.getName();
       boolean _matched = false;
       if (!_matched) {
         String _name_1 = Double.TYPE.getName();
@@ -439,6 +441,17 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
           ".hashCode());");
       }
       return _switchResult;
+    }
+    
+    private TypeReference orObject(final TypeReference ref) {
+      TypeReference _xifexpression = null;
+      boolean _tripleEquals = (ref == null);
+      if (_tripleEquals) {
+        _xifexpression = this.context.getObject();
+      } else {
+        _xifexpression = ref;
+      }
+      return _xifexpression;
     }
   }
   

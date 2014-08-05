@@ -177,9 +177,17 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
     }
     
     public void validateGetter(final MutableFieldDeclaration field) {
+      boolean _or = false;
       TypeReference _type = field.getType();
-      boolean _isInferred = _type.isInferred();
-      if (_isInferred) {
+      boolean _tripleEquals = (_type == null);
+      if (_tripleEquals) {
+        _or = true;
+      } else {
+        TypeReference _type_1 = field.getType();
+        boolean _isInferred = _type_1.isInferred();
+        _or = _isInferred;
+      }
+      if (_or) {
         return;
       }
       MutableTypeDeclaration _declaringType = field.getDeclaringType();
@@ -219,8 +227,8 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
           this.context.addError(field, _builder.toString());
         }
         TypeReference _resolvedReturnType = overriddenGetter.getResolvedReturnType();
-        TypeReference _type_1 = field.getType();
-        boolean _isAssignableFrom = _resolvedReturnType.isAssignableFrom(_type_1);
+        TypeReference _type_2 = field.getType();
+        boolean _isAssignableFrom = _resolvedReturnType.isAssignableFrom(_type_2);
         boolean _not = (!_isAssignableFrom);
         if (_not) {
           StringConcatenation _builder_1 = new StringConcatenation();
@@ -234,8 +242,8 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
           _builder_1.append(", ");
           _builder_1.newLineIfNotEmpty();
           _builder_1.append("because its return type is incompatible with ");
-          TypeReference _type_2 = field.getType();
-          String _simpleName_2 = _type_2.getSimpleName();
+          TypeReference _type_3 = field.getType();
+          String _simpleName_2 = _type_3.getSimpleName();
           _builder_1.append(_simpleName_2, "");
           _builder_1.newLineIfNotEmpty();
           this.context.addError(field, _builder_1.toString());
@@ -251,7 +259,8 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
     public List<String> getPossibleGetterNames(final FieldDeclaration it) {
       List<String> _xifexpression = null;
       TypeReference _type = it.getType();
-      boolean _isBooleanType = this.isBooleanType(_type);
+      TypeReference _orObject = this.orObject(_type);
+      boolean _isBooleanType = this.isBooleanType(_orObject);
       if (_isBooleanType) {
         _xifexpression = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("is", "get"));
       } else {
@@ -293,7 +302,8 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
           AnnotationReference _newAnnotationReference = Util.this.context.newAnnotationReference(Pure.class);
           it.addAnnotation(_newAnnotationReference);
           TypeReference _type = field.getType();
-          it.setReturnType(_type);
+          TypeReference _orObject = Util.this.orObject(_type);
+          it.setReturnType(_orObject);
           StringConcatenationClient _client = new StringConcatenationClient() {
             @Override
             protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -370,7 +380,8 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
       TypeDeclaration _declaringType = it.getDeclaringType();
       String _setterName = this.getSetterName(it);
       TypeReference _type = it.getType();
-      MethodDeclaration _findDeclaredMethod = _declaringType.findDeclaredMethod(_setterName, _type);
+      TypeReference _orObject = this.orObject(_type);
+      MethodDeclaration _findDeclaredMethod = _declaringType.findDeclaredMethod(_setterName, _orObject);
       return (_findDeclaredMethod != null);
     }
     
@@ -407,9 +418,17 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
       if (_isFinal) {
         this.context.addError(field, "Cannot set a final field");
       }
+      boolean _or = false;
       TypeReference _type = field.getType();
-      boolean _isInferred = _type.isInferred();
-      if (_isInferred) {
+      boolean _tripleEquals = (_type == null);
+      if (_tripleEquals) {
+        _or = true;
+      } else {
+        TypeReference _type_1 = field.getType();
+        boolean _isInferred = _type_1.isInferred();
+        _or = _isInferred;
+      }
+      if (_or) {
         this.context.addError(field, "Type cannot be inferred.");
         return;
       }
@@ -491,15 +510,9 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
           TypeReference _primitiveVoid = Util.this.context.getPrimitiveVoid();
           it.setReturnType(_primitiveVoid);
           String _simpleName = field.getSimpleName();
-          TypeReference _xifexpression = null;
           TypeReference _type = field.getType();
-          boolean _isInferred = _type.isInferred();
-          if (_isInferred) {
-            _xifexpression = Util.this.context.getObject();
-          } else {
-            _xifexpression = field.getType();
-          }
-          final MutableParameterDeclaration param = it.addParameter(_simpleName, _xifexpression);
+          TypeReference _orObject = Util.this.orObject(_type);
+          final MutableParameterDeclaration param = it.addParameter(_simpleName, _orObject);
           StringConcatenationClient _client = new StringConcatenationClient() {
             @Override
             protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -521,6 +534,17 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
         }
       };
       _declaringType.addMethod(_setterName, _function);
+    }
+    
+    private TypeReference orObject(final TypeReference ref) {
+      TypeReference _xifexpression = null;
+      boolean _tripleEquals = (ref == null);
+      if (_tripleEquals) {
+        _xifexpression = this.context.getObject();
+      } else {
+        _xifexpression = ref;
+      }
+      return _xifexpression;
     }
   }
   
