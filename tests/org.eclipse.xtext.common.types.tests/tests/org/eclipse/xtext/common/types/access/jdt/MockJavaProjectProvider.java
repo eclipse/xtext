@@ -251,7 +251,7 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 		mainContent.append("Bundle-Version: 1.0.0\n");
 		mainContent.append("Bundle-SymbolicName: " + projectName.toLowerCase() + "; singleton:=true\n");
 		mainContent.append("Bundle-ActivationPolicy: lazy\n");
-		mainContent.append("Bundle-RequiredExecutionEnvironment: JavaSE-1.6\n");
+		mainContent.append("Bundle-RequiredExecutionEnvironment: " + JREContainerProvider.PREFERRED_BREE + "\n");
 		mainContent.append("Require-Bundle: com.google.guava\n");
 
 		final IFolder metaInf = project.getFolder("META-INF");
