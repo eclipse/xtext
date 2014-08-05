@@ -8,33 +8,16 @@
 package org.eclipse.xtend.ide.contentassist.antlr;
 
 import java.io.StringReader;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.Collection;
-import java.util.Set;
 
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.ide.contentassist.antlr.internal.ContentAssistFlexerFactory;
 import org.eclipse.xtend.ide.contentassist.antlr.internal.InternalXtendParser;
-import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.Action;
-import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.nodemodel.ILeafNode;
-import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
-import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.ObservableXtextTokenStream;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.InfiniteRecursion;
 import org.eclipse.xtext.xbase.XBlockExpression;
 
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
@@ -48,9 +31,6 @@ public class FlexerBasedContentAssistParser extends XtendParser {
 	@Inject
 	private ContentAssistFlexerFactory flexerFactory;
 	
-	@Inject
-	private EntryPointFinder entryPointFinder;
-	
 	@Override
 	protected InternalXtendParser createParser() {
 		FlexerBasedInternalContentAssistParser result = new FlexerBasedInternalContentAssistParser(tokenDefProvider);
@@ -63,93 +43,12 @@ public class FlexerBasedContentAssistParser extends XtendParser {
 		throw new UnsupportedOperationException();
 	}
 	
-	/**
-	 * @param node
-	 *            the root node of the model to parse
-	 * @param startOffset
-	 *            the start offset to consider
-	 * @param endOffset
-	 *            the exclusive end offset
-	 * @param strict
-	 *            if true the parser will not use error recovery on the very last token of the input.
-	 * @return a collection of follow elements.
-	 */
-	public Collection<FollowElement> getFollowElements(IParseResult parseResult, int offset, boolean strict) {
-		ICompositeNode entryPoint = entryPointFinder.findEntryPoint(parseResult, offset);
-		if (entryPoint != null) {
-			String parseMe = getTextToParse(parseResult, entryPoint, offset);
-//	System.out.println("Parsing: >>>" + parseMe + "<<<");
-			TokenSource tokenSource = flexerFactory.createTokenSource(new StringReader(parseMe));
-			AbstractInternalContentAssistParser parser = createParser();
-			parser.setStrict(strict);
-			ObservableXtextTokenStream tokens = new ObservableXtextTokenStream(tokenSource, parser);
-			tokens.setInitialHiddenTokens(getInitialHiddenTokens());
-			parser.setTokenStream(tokens);
-			IUnorderedGroupHelper helper = getUnorderedGroupHelper().get();
-			parser.setUnorderedGroupHelper(helper);
-			helper.initializeWith(parser);
-			tokens.setListener(parser);
-			try {
-				Collection<FollowElement> followElements = getFollowElements(parser, getEntryGrammarElement(entryPoint));
-				return Lists.newArrayList(followElements);
-			} catch(InfiniteRecursion infinite) {
-				return Lists.newArrayList(parser.getFollowElements());
-			}
-		} else {
-			String text = parseResult.getRootNode().getText();
-			String parseMe = text.substring(0, offset);
-			Collection<FollowElement> followElements = getFollowElements(parseMe, strict);
-			return followElements;
-		}
+	@Override
+	protected TokenSource createTokenSource(String input) {
+		return flexerFactory.createTokenSource(new StringReader(input));
 	}
-
-	protected AbstractElement getEntryGrammarElement(ICompositeNode entryPoint) {
-		AbstractElement result = (AbstractElement) entryPoint.getGrammarElement();
-		if (result instanceof Action) {
-			return getEntryGrammarElement((ICompositeNode) entryPoint.getFirstChild());
-		}
-		return result;
-	}
-	
-	protected String getTextToParse(IParseResult parseResult, ICompositeNode entryPoint, int offset) {
-		StringBuilder result = new StringBuilder(offset - entryPoint.getTotalOffset());
-		appendTextToParse(entryPoint, offset, false, result);
-		return result.toString();
-		
-	}
-	
-	protected boolean appendTextToParse(ICompositeNode node, int offset, boolean skipOptional, StringBuilder result) {
-		for(INode child: node.getChildren()) {
-			if (child instanceof ILeafNode) {
-				if (child.getTotalEndOffset() >= offset) {
-					String text = child.getText();
-					String sub = text.substring(0, offset - child.getTotalOffset());
-					result.append(sub);
-					return true;
-				} else {
-					result.append(child.getText());
-				}
-			} else {
-				if (!skipOptional) {
-					if (appendTextToParse((ICompositeNode) child, offset, skipOptional || child.getTotalEndOffset() < offset, result)) {
-						return true;
-					}
-				} else {
-					String skippedAs = getReplacement((ICompositeNode) child);
-					if (skippedAs != null) {
-						result.append(skippedAs);
-					} else {
-						if (appendTextToParse((ICompositeNode) child, offset, skipOptional || child.getTotalEndOffset() < offset, result)) {
-							return true;
-						}	
-					}
-				}
-			}
-		}
-		return false;
-	}
-	
-	private String getReplacement(ICompositeNode node) {
+	@Override
+	protected String getReplacement(ICompositeNode node) {
 		if (node.hasDirectSemanticElement()) {
 			EObject semanticElement = node.getSemanticElement();
 			if (semanticElement instanceof XBlockExpression) {
@@ -157,59 +56,5 @@ public class FlexerBasedContentAssistParser extends XtendParser {
 			}
 		}
 		return null;
-	}
-
-	private Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser, AbstractElement entryPoint) {
-		String ruleName = getRuleName(entryPoint);
-		if (ruleName == null) {
-			if (entryPoint instanceof RuleCall) {
-				RuleCall call = (RuleCall) entryPoint;
-				if (call.getRule() instanceof ParserRule)
-					ruleName = "rule" + call.getRule().getName();
-			}
-		}
-		if (ruleName == null) {
-			throw new IllegalStateException("entryPoint: " + entryPoint);
-		}
-		try {
-			Method method = parser.getClass().getMethod(ruleName);
-			method.setAccessible(true);
-			try {
-				method.invoke(parser);
-			} catch(InvocationTargetException targetException) {
-				if ((targetException.getCause() instanceof InfiniteRecursion))
-					throw (InfiniteRecursion) targetException.getCause();
-				throw new RuntimeException(targetException);
-			}
-			Set<FollowElement> result = parser.getFollowElements();
-			return result;
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e);
-		} catch (IllegalArgumentException e) {
-			throw new RuntimeException(e);
-		} catch (NoSuchMethodException e) {
-			throw new RuntimeException(e);
-		} catch (SecurityException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@Override
-	public Collection<FollowElement> getFollowElements(String input, boolean strict) {
-		TokenSource tokenSource = flexerFactory.createTokenSource(new StringReader(input));
-		AbstractInternalContentAssistParser parser = createParser();
-		parser.setStrict(strict);
-		ObservableXtextTokenStream tokens = new ObservableXtextTokenStream(tokenSource, parser);
-		tokens.setInitialHiddenTokens(getInitialHiddenTokens());
-		parser.setTokenStream(tokens);
-		IUnorderedGroupHelper helper = getUnorderedGroupHelper().get();
-		parser.setUnorderedGroupHelper(helper);
-		helper.initializeWith(parser);
-		tokens.setListener(parser);
-		try {
-			return Lists.newArrayList(getFollowElements(parser));
-		} catch(InfiniteRecursion infinite) {
-			return Lists.newArrayList(parser.getFollowElements());
-		}
 	}
 }

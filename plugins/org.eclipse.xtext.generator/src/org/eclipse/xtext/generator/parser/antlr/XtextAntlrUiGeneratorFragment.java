@@ -34,6 +34,7 @@ import org.eclipse.xtext.generator.parser.antlr.splitting.BacktrackingGuardRemov
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
+import com.google.common.collect.ImmutableList;
 
 /**
  * A {@link IGeneratorFragment} to generate a lightweight AntLR based parser used in content assist.
@@ -44,6 +45,22 @@ public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragmen
 	
 	private boolean removeBacktrackingGuards = false;
 	private int lookaheadThreshold = Integer.MAX_VALUE;
+	private boolean partialParsing;
+	
+	/**
+	 * Whether to use a partial parsing approach, improving performance for large files. 
+	 * This will generally not work for grammars containing unordered groups.
+	 * @since 2.7
+	 */
+	public void setPartialParsing(boolean partialParsing) {
+		this.partialParsing = partialParsing;
+	}
+	/**
+	 * @since 2.7
+	 */
+	public boolean isPartialParsing() {
+		return partialParsing;
+	}
 	
 	/**
 	 * @since 2.4
@@ -113,7 +130,7 @@ public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragmen
 
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
-		return new BindFactory()
+		BindFactory binder = new BindFactory()
 			.addTypeToType(
 					"org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext.Factory",
 					"org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory")
@@ -127,8 +144,13 @@ public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragmen
 					"binder.bind(org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.class)"+
 					".annotatedWith(com.google.inject.name.Names.named(" +
 					"org.eclipse.xtext.ui.LexerUIBindings.CONTENT_ASSIST" +
-					")).to(" + getInternalLexerClassName(grammar, getNaming()) +".class)")
-			.getBindings();
+					")).to(" + getInternalLexerClassName(grammar, getNaming()) +".class)");
+		if (partialParsing) {
+			binder.addTypeToType(
+				"org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory.StatefulFactory", 
+				"org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory.PartialStatefulFactory");
+		}
+		return binder.getBindings();
 	}
 
 	@Override
@@ -139,6 +161,11 @@ public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragmen
 	@Override
 	public String[] getExportedPackagesUi(Grammar grammar) {
 		return new String[] { getNaming().basePackageUi(grammar) + ".contentassist.antlr" };
+	}
+	
+	@Override
+	protected List<Object> getParameters(Grammar grammar) {
+		return ImmutableList.of(getOptions(), partialParsing);
 	}
 
 	public static String getParserClassName(Grammar g, Naming naming) {
@@ -158,7 +185,7 @@ public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragmen
 	public static String getGrammarFileName(Grammar g, Naming naming) {
 		return naming.basePackageUi(g) + ".contentassist.antlr.internal.Internal" + GrammarUtil.getName(g);
 	}
-
+	
 	public static Collection<Alternatives> getAllAlternatives(Grammar g) {
 		return getAllElementsByType(g, Alternatives.class);
 	}

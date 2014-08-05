@@ -94,7 +94,9 @@ Workflow {
 
 			// java-based API for content assistance 
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
-			fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}
+			fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {
+				partialParsing = true
+			}
 
 			fragment = builder.BuilderIntegrationFragment {}
 

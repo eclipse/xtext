@@ -105,7 +105,7 @@ import org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper;
 import org.eclipse.xtext.ui.editor.contentassist.ITemplateProposalProvider;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.IContentAssistParser;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory.StatefulFactory;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer;
 import org.eclipse.xtext.ui.editor.copyqualifiedname.CopyQualifiedNameService;
 import org.eclipse.xtext.ui.editor.doubleClicking.DoubleClickStrategyProvider;
@@ -492,10 +492,11 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 		binder.bind(Lexer.class).annotatedWith(Names.named(LexerUIBindings.CONTENT_ASSIST)).to(DisabledInternalLexer.class);
 	}
 	
-	public Class<? extends ParserBasedContentAssistContextFactory.StatefulFactory> bindStatefulFactoryCAContextFactory() {
+	@Override
+	public Class<? extends StatefulFactory> bindParserBasedContentAssistContextFactory$StatefulFactory() {
 		return FlexerBasedContentAssistContextFactory.class;
 	}
-	
+
 	@Override
 	public Class<? extends IProposalConflictHelper> bindIProposalConflictHelper() {
 		return FlexProposalConflictHelper.class;
