@@ -49,6 +49,14 @@ public class XtendResourceDescriptionStrategy extends XbaseResourceDescriptionSt
 	}
 	
 	@Override
+	public boolean createIndexingEObjectDescriptions(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {
+		boolean isJvmType = (eObject instanceof JvmType);
+		if (isJvmType)
+			super.createIndexingEObjectDescriptions(eObject, acceptor);
+		return isJvmType;
+	}
+	
+	@Override
 	public boolean createReferenceDescriptions(EObject from, URI exportedContainerURI,
 			IAcceptor<IReferenceDescription> acceptor) {
 		return false;
