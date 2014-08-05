@@ -10,9 +10,11 @@ package org.eclipse.xtend.core.macro;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +47,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
@@ -74,6 +77,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
 import org.eclipse.xtext.xbase.typesystem.util.PendingLinkingCandidateResolver;
@@ -90,6 +94,66 @@ import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
  */
 @SuppressWarnings("all")
 public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpreter {
+  /**
+   * The visible fields collector does not interfere with the local caches of JvmDeclaredTypes
+   * but only looks at the fields of those types.
+   */
+  public static class VisibleFieldsCollector {
+    public void collect(final JvmDeclaredType type, final Map<String, JvmIdentifiableElement> result) {
+      HashSet<JvmType> _newHashSet = CollectionLiterals.<JvmType>newHashSet();
+      this.collect(type, _newHashSet, result);
+    }
+    
+    private void collect(final JvmDeclaredType type, final Set<JvmType> seen, final Map<String, JvmIdentifiableElement> result) {
+      boolean _add = seen.add(type);
+      if (_add) {
+        EList<JvmMember> _members = type.getMembers();
+        for (final JvmMember member : _members) {
+          if ((member instanceof JvmField)) {
+            boolean _and = false;
+            boolean _isFinal = ((JvmField)member).isFinal();
+            if (!_isFinal) {
+              _and = false;
+            } else {
+              boolean _isStatic = ((JvmField)member).isStatic();
+              _and = _isStatic;
+            }
+            if (_and) {
+              String _simpleName = ((JvmField)member).getSimpleName();
+              final JvmIdentifiableElement existing = result.put(_simpleName, member);
+              boolean _notEquals = (!Objects.equal(existing, null));
+              if (_notEquals) {
+                String _simpleName_1 = existing.getSimpleName();
+                result.put(_simpleName_1, existing);
+              }
+            }
+          }
+        }
+        EList<JvmTypeReference> _superTypes = type.getSuperTypes();
+        for (final JvmTypeReference superType : _superTypes) {
+          {
+            JvmType _type = null;
+            if (superType!=null) {
+              _type=superType.getType();
+            }
+            final JvmType rawSuperType = _type;
+            boolean _and_1 = false;
+            if (!(rawSuperType instanceof JvmDeclaredType)) {
+              _and_1 = false;
+            } else {
+              boolean _eIsProxy = rawSuperType.eIsProxy();
+              boolean _not = (!_eIsProxy);
+              _and_1 = _not;
+            }
+            if (_and_1) {
+              this.collect(((JvmDeclaredType) rawSuperType), seen, result);
+            }
+          }
+        }
+      }
+    }
+  }
+  
   @Inject
   private ILogicalContainerProvider containerProvider;
   
@@ -108,6 +172,9 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
   
   @Inject
   private IQualifiedNameConverter qualifiedNameConverter;
+  
+  @Inject
+  private IResourceScopeCache cache;
   
   public Object evaluate(final XExpression expression, final JvmTypeReference expectedType) {
     final ClassLoader classLoader = this.classLoaderProvider.getClassLoader(expression);
@@ -130,99 +197,84 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
    * That essentially includes static imports and the fields declared in the containing types
    */
   protected Map<String, JvmIdentifiableElement> findVisibleFeatures(final XExpression expression) {
-    final HashMap<String, JvmIdentifiableElement> result = CollectionLiterals.<String, JvmIdentifiableElement>newHashMap();
-    Resource _eResource = expression.eResource();
-    final XImportSection section = this.importSectionLocator.getImportSection(((XtextResource) _eResource));
-    boolean _notEquals = (!Objects.equal(section, null));
-    if (_notEquals) {
-      EList<XImportDeclaration> _importDeclarations = section.getImportDeclarations();
-      for (final XImportDeclaration imp : _importDeclarations) {
-        boolean _isStatic = imp.isStatic();
-        if (_isStatic) {
-          String _importedTypeName = imp.getImportedTypeName();
-          final JvmType type = this.findTypeByName(imp, _importedTypeName);
-          boolean _matched = false;
-          if (!_matched) {
-            if (type instanceof JvmGenericType) {
-              _matched=true;
-              Iterable<JvmFeature> _allFeatures = ((JvmGenericType)type).getAllFeatures();
-              Iterable<JvmField> _filter = Iterables.<JvmField>filter(_allFeatures, JvmField.class);
-              final Function1<JvmField, Boolean> _function = new Function1<JvmField, Boolean>() {
-                public Boolean apply(final JvmField it) {
-                  boolean _and = false;
-                  boolean _isStatic = it.isStatic();
-                  if (!_isStatic) {
-                    _and = false;
-                  } else {
-                    boolean _isFinal = it.isFinal();
-                    _and = _isFinal;
+    HashMap<String, JvmIdentifiableElement> _xblockexpression = null;
+    {
+      JvmDeclaredType _switchResult = null;
+      JvmIdentifiableElement _nearestLogicalContainer = this.containerProvider.getNearestLogicalContainer(expression);
+      final JvmIdentifiableElement cont = _nearestLogicalContainer;
+      boolean _matched = false;
+      if (!_matched) {
+        if (cont instanceof JvmGenericType) {
+          _matched=true;
+          _switchResult = ((JvmGenericType)cont);
+        }
+      }
+      if (!_matched) {
+        if (cont instanceof JvmMember) {
+          _matched=true;
+          _switchResult = ((JvmMember)cont).getDeclaringType();
+        }
+      }
+      final JvmDeclaredType container = _switchResult;
+      Pair<String, JvmDeclaredType> _mappedTo = Pair.<String, JvmDeclaredType>of("visibleFeaturesForAnnotationValues", container);
+      Resource _eResource = expression.eResource();
+      final Provider<HashMap<String, JvmIdentifiableElement>> _function = new Provider<HashMap<String, JvmIdentifiableElement>>() {
+        public HashMap<String, JvmIdentifiableElement> get() {
+          final HashMap<String, JvmIdentifiableElement> result = CollectionLiterals.<String, JvmIdentifiableElement>newHashMap();
+          Resource _eResource = expression.eResource();
+          final XImportSection section = ConstantExpressionsInterpreter.this.importSectionLocator.getImportSection(((XtextResource) _eResource));
+          boolean _notEquals = (!Objects.equal(section, null));
+          if (_notEquals) {
+            EList<XImportDeclaration> _importDeclarations = section.getImportDeclarations();
+            for (final XImportDeclaration imp : _importDeclarations) {
+              boolean _isStatic = imp.isStatic();
+              if (_isStatic) {
+                String _importedTypeName = imp.getImportedTypeName();
+                final JvmType type = ConstantExpressionsInterpreter.this.findTypeByName(imp, _importedTypeName);
+                boolean _matched = false;
+                if (!_matched) {
+                  if (type instanceof JvmGenericType) {
+                    _matched=true;
+                    ConstantExpressionsInterpreter.this.collectAllVisibleFields(((JvmDeclaredType)type), result);
                   }
-                  return Boolean.valueOf(_and);
                 }
-              };
-              Iterable<JvmField> _filter_1 = IterableExtensions.<JvmField>filter(_filter, _function);
-              for (final JvmField feature : _filter_1) {
-                String _simpleName = feature.getSimpleName();
-                result.put(_simpleName, feature);
+                if (!_matched) {
+                  if (type instanceof JvmEnumerationType) {
+                    _matched=true;
+                    EList<JvmEnumerationLiteral> _literals = ((JvmEnumerationType)type).getLiterals();
+                    for (final JvmEnumerationLiteral feature : _literals) {
+                      String _simpleName = feature.getSimpleName();
+                      result.put(_simpleName, feature);
+                    }
+                  }
+                }
               }
             }
           }
-          if (!_matched) {
-            if (type instanceof JvmEnumerationType) {
-              _matched=true;
-              EList<JvmEnumerationLiteral> _literals = ((JvmEnumerationType)type).getLiterals();
-              for (final JvmEnumerationLiteral feature : _literals) {
-                String _simpleName = feature.getSimpleName();
-                result.put(_simpleName, feature);
-              }
-            }
-          }
+          ConstantExpressionsInterpreter.this.collectAllVisibleFields(container, result);
+          return result;
         }
-      }
+      };
+      _xblockexpression = this.cache.<HashMap<String, JvmIdentifiableElement>>get(_mappedTo, _eResource, _function);
     }
-    JvmDeclaredType _switchResult_1 = null;
-    JvmIdentifiableElement _nearestLogicalContainer = this.containerProvider.getNearestLogicalContainer(expression);
-    final JvmIdentifiableElement cont = _nearestLogicalContainer;
-    boolean _matched_1 = false;
-    if (!_matched_1) {
-      if (cont instanceof JvmGenericType) {
-        _matched_1=true;
-        _switchResult_1 = ((JvmGenericType)cont);
-      }
+    return _xblockexpression;
+  }
+  
+  protected void collectAllVisibleFields(final JvmDeclaredType type, final Map<String, JvmIdentifiableElement> result) {
+    boolean _equals = Objects.equal(type, null);
+    if (_equals) {
+      return;
     }
-    if (!_matched_1) {
-      if (cont instanceof JvmMember) {
-        _matched_1=true;
-        _switchResult_1 = ((JvmMember)cont).getDeclaringType();
-      }
-    }
-    JvmDeclaredType container = _switchResult_1;
-    while ((!Objects.equal(container, null))) {
-      {
-        Iterable<JvmFeature> _allFeatures = container.getAllFeatures();
-        Iterable<JvmField> _filter = Iterables.<JvmField>filter(_allFeatures, JvmField.class);
-        final Function1<JvmField, Boolean> _function = new Function1<JvmField, Boolean>() {
-          public Boolean apply(final JvmField it) {
-            boolean _and = false;
-            boolean _isStatic = it.isStatic();
-            if (!_isStatic) {
-              _and = false;
-            } else {
-              boolean _isFinal = it.isFinal();
-              _and = _isFinal;
-            }
-            return Boolean.valueOf(_and);
-          }
-        };
-        Iterable<JvmField> _filter_1 = IterableExtensions.<JvmField>filter(_filter, _function);
-        for (final JvmField feature : _filter_1) {
-          String _simpleName = feature.getSimpleName();
-          result.put(_simpleName, feature);
-        }
-        JvmDeclaredType _declaringType = container.getDeclaringType();
-        container = _declaringType;
-      }
-    }
+    JvmDeclaredType _declaringType = type.getDeclaringType();
+    this.collectAllVisibleFields(_declaringType, result);
+    HashMap<String, JvmIdentifiableElement> _allVisibleFields = this.getAllVisibleFields(type);
+    result.putAll(_allVisibleFields);
+  }
+  
+  protected HashMap<String, JvmIdentifiableElement> getAllVisibleFields(final JvmDeclaredType type) {
+    final HashMap<String, JvmIdentifiableElement> result = CollectionLiterals.<String, JvmIdentifiableElement>newHashMap();
+    ConstantExpressionsInterpreter.VisibleFieldsCollector _visibleFieldsCollector = new ConstantExpressionsInterpreter.VisibleFieldsCollector();
+    _visibleFieldsCollector.collect(type, result);
     return result;
   }
   
