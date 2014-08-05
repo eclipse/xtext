@@ -1187,7 +1187,7 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
               final Function1<Method, Boolean> _function_3 = new Function1<Method, Boolean>() {
                 public Boolean apply(final Method it) {
                   String _name = it.getName();
-                  return Boolean.valueOf(Objects.equal(_name, "isBar"));
+                  return Boolean.valueOf(Objects.equal(_name, "getBar"));
                 }
               };
               boolean _exists_3 = IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods_1)), _function_3);

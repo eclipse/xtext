@@ -74,7 +74,7 @@ class AccessorsProcessor implements TransformationParticipant<MutableMemberDecla
 			return
 		}
 		val extension requiredArgsUtil = new FinalFieldsConstructorProcessor.Util(context)
-		if (needsFinalFieldConstructor) {
+		if (needsFinalFieldConstructor || findAnnotation(FinalFieldsConstructor.findTypeGlobally) !== null) {
 			addFinalFieldsConstructor
 		}
 		declaredFields.filter[!static && thePrimaryGeneratedJavaElement].forEach[_transform(context)]
@@ -107,7 +107,7 @@ class AccessorsProcessor implements TransformationParticipant<MutableMemberDecla
 		}
 
 		def hasGetter(FieldDeclaration it) {
-			declaringType.findDeclaredMethod(getterName) !== null
+			possibleGetterNames.exists[name| declaringType.findDeclaredMethod(name) !== null]
 		}
 
 		def shouldAddGetter(FieldDeclaration it) {
@@ -156,11 +156,15 @@ class AccessorsProcessor implements TransformationParticipant<MutableMemberDecla
 		}
 
 		def getGetterName(FieldDeclaration it) {
-			(if(type.booleanType) "is" else "get") + simpleName.toFirstUpper
+			possibleGetterNames.head
+		}
+		
+		def getPossibleGetterNames(FieldDeclaration it) {
+			(if(type.booleanType) #["is", "get"] else #["get"]).map[prefix|prefix + simpleName.toFirstUpper]
 		}
 
 		def isBooleanType(TypeReference it) {
-			!inferred && (name == Boolean.name || name == Boolean.TYPE.name)
+			!inferred && is(primitiveBoolean)
 		}
 
 		def void addGetter(MutableFieldDeclaration field, Visibility visibility) {

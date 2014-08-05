@@ -311,6 +311,60 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
   }
   
   @Test
+  public void testIntegrationWithData2() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Data");
+      _builder.newLine();
+      _builder.append("@FinalFieldsConstructor @Data class C {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val int a");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val String b");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("new() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("a = 1");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("b = \"Foo\"");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final String source = _builder.toString();
+      XtendClass _clazz = this.clazz(source);
+      this._validationTestHelper.assertNoErrors(_clazz);
+      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        public void accept(final CompilationTestHelper.Result it) {
+          Class<?> _compiledClass = it.getCompiledClass();
+          Constructor<?>[] _declaredConstructors = _compiledClass.getDeclaredConstructors();
+          final Function1<Constructor<?>, Boolean> _function = new Function1<Constructor<?>, Boolean>() {
+            public Boolean apply(final Constructor<?> it) {
+              Class<?>[] _parameterTypes = it.getParameterTypes();
+              List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(_parameterTypes)));
+              return Boolean.valueOf(Objects.equal(_list, Collections.<Class<? extends Object>>unmodifiableList(CollectionLiterals.<Class<? extends Object>>newArrayList(int.class, String.class))));
+            }
+          };
+          boolean _exists = IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(_declaredConstructors)), _function);
+          Assert.assertTrue(_exists);
+        }
+      };
+      this.compilationTestHelper.compile(source, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testIntegrationWithAccessors() {
     try {
       StringConcatenation _builder = new StringConcatenation();
