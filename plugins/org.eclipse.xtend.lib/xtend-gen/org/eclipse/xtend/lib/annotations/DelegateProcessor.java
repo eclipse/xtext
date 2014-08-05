@@ -112,9 +112,17 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
     
     public boolean hasValidType(final MemberDeclaration it) {
       boolean _xifexpression = false;
+      boolean _or = false;
       TypeReference _type = this.getType(it);
-      boolean _isInferred = _type.isInferred();
-      if (_isInferred) {
+      boolean _equals = _type.operator_equals(null);
+      if (_equals) {
+        _or = true;
+      } else {
+        TypeReference _type_1 = this.getType(it);
+        boolean _isInferred = _type_1.isInferred();
+        _or = _isInferred;
+      }
+      if (_or) {
         boolean _xblockexpression = false;
         {
           this.context.addError(it, "Cannot use inferred types on delegates");
