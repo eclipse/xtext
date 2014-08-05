@@ -28,6 +28,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IDerivedStateComputer;
+import org.eclipse.xtext.resource.IDerivedStateComputerExtension;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
@@ -47,7 +48,7 @@ import com.google.inject.name.Named;
  * @author Sven Efftinge
  */
 @Singleton
-public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssociator, ILogicalContainerProvider, IDerivedStateComputer {
+public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssociator, ILogicalContainerProvider, IDerivedStateComputer, IDerivedStateComputerExtension {
 
 	private final static Logger LOG = Logger.getLogger(JvmModelAssociator.class);
 
@@ -60,9 +61,6 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 
 	@Inject
 	private IJvmModelInferrer inferrer;
-
-	@Inject
-	private JvmModelInferrerRegistry inferrerRegistry;
 
 	@Inject
 	private JvmModelCompleter completer;
@@ -289,7 +287,34 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 			return result.iterator().next();
 		return null;
 	}
+	
+	static class AfterIndexingInitialization extends AdapterImpl {
+		Runnable init;
+		public static void install(Resource resource, final Runnable runnable) {
+			if (findAdapter(resource) != null) {
+				throw new IllegalStateException("initialization adapter already installed");
+			}
+			AfterIndexingInitialization adapter = new AfterIndexingInitialization();
+			adapter.init = runnable;
+			resource.eAdapters().add(adapter);
+		}
+		
+		public static AfterIndexingInitialization findAdapter(Resource resource) {
+			for (org.eclipse.emf.common.notify.Adapter a : resource.eAdapters()) {
+				if (a instanceof AfterIndexingInitialization) {
+					return (AfterIndexingInitialization)a;
+				}
+			}
+			return null;
+		}
+		
+		public static void remove(Resource resource, org.eclipse.emf.common.notify.Adapter adapter) {
+			resource.eAdapters().remove(adapter);
+		}
 
+	}
+
+	@SuppressWarnings("deprecation")
 	public void installDerivedState(final DerivedStateAwareResource resource, boolean preIndexingPhase) {
 		if (resource.getContents().isEmpty())
 			return;
@@ -297,56 +322,63 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 
 		StoppedTask task = Stopwatches.forTask("primary JVM Model inference (JvmModelAssociator.installDerivedState)");
 		task.start();
-		// call primary inferrer
-		JvmDeclaredTypeAcceptor acceptor = new JvmDeclaredTypeAcceptor(resource);
+		AfterIndexingInitialization adapter = AfterIndexingInitialization.findAdapter(resource);
+		if (adapter != null) {
+			if (preIndexingPhase) {
+				throw new IllegalStateException("During preindexing no initialization adapter should be attached to a resource! uri : "+resource.getURI());
+			}
+			adapter.init.run();
+			AfterIndexingInitialization.remove(resource, adapter);
+			return;
+		}
+		final JvmDeclaredTypeAcceptor acceptor = new JvmDeclaredTypeAcceptor(resource);
 		try {
-			inferrer.infer(eObject, acceptor, preIndexingPhase);
+			if (inferrer instanceof AbstractModelInferrer) {
+				LOG.error("The class "+inferrer.getClass().getName()+" is using old API. It should implement IJvmModelInferrer#infer(EObject, IJvmDeclaredTypeAcceptor). This compatibility support will be removed in the next version.");
+				((AbstractModelInferrer)inferrer).infer(eObject, acceptor, preIndexingPhase);
+			} else {
+				inferrer.infer(eObject, acceptor);
+			}
 		} catch (RuntimeException e) {
 			LOG.error("Error calling inferrer", e);
 		}
-		if (!preIndexingPhase) {
-			for (Pair<JvmDeclaredType, Procedure1<? super JvmDeclaredType>> initializer : acceptor.later) {
-				try {
-					initializer.getValue().apply(initializer.getKey());
-				} catch (RuntimeException e) {
-					LOG.error("Error calling inferrer", e);
-				}
-			}
-		}
-		task.stop();
+		Runnable runnable = new Runnable() {
 
-		task = Stopwatches.forTask("secondary (i.e. Macros) JVM Model inference (JvmModelAssociator.installDerivedState)");
-		task.start();
-		// call secondary inferrers
-		final String fileExtension = resource.getURI().fileExtension();
-		List<? extends IJvmModelInferrer> secondaryInferrers = inferrerRegistry.getModelInferrer(fileExtension);
-		for (IJvmModelInferrer secondaryInferrer : secondaryInferrers) {
-			acceptor = new JvmDeclaredTypeAcceptor(resource);
-			try {
-				secondaryInferrer.infer(eObject, acceptor, preIndexingPhase);
-				if (!preIndexingPhase) {
-					for (Pair<JvmDeclaredType, Procedure1<? super JvmDeclaredType>> initializer : acceptor.later) {
+			public void run() {
+				for (Pair<JvmDeclaredType, Procedure1<? super JvmDeclaredType>> initializer : acceptor.later) {
+					try {
 						initializer.getValue().apply(initializer.getKey());
+					} catch (RuntimeException e) {
+						LOG.error("Error calling inferrer", e);
 					}
 				}
-			} catch (Exception e) {
-				inferrerRegistry.deregister(fileExtension, secondaryInferrer);
-				LOG.info("Removed errorneous model inferrer for *." + fileExtension + ". - " + secondaryInferrer, e);
-			}
+				for (Runnable runnable : acceptor.initializers) {
+					try {
+						runnable.run();
+					} catch (RuntimeException e) {
+						LOG.error("Error calling inferrer", e);
+					}
+				}
+				for (EObject object : resource.getContents()) {
+					if (object instanceof JvmIdentifiableElement) {
+						JvmIdentifiableElement element = (JvmIdentifiableElement) object;
+						completer.complete(element);
+					}
+				}
+			}};
+		if (preIndexingPhase && !(inferrer instanceof AbstractModelInferrer)) {
+			AfterIndexingInitialization.install(resource, runnable);
+		} else if (!preIndexingPhase) {
+			runnable.run();
 		}
 		task.stop();
-
-		if (!preIndexingPhase) {
-			for (EObject object : resource.getContents()) {
-				if (object instanceof JvmIdentifiableElement) {
-					JvmIdentifiableElement element = (JvmIdentifiableElement) object;
-					completer.complete(element);
-				}
-			}
-		}
 	}
 
 	public void discardDerivedState(DerivedStateAwareResource resource) {
+		AfterIndexingInitialization adapter = AfterIndexingInitialization.findAdapter(resource);
+		if (adapter != null) {
+			AfterIndexingInitialization.remove(resource, adapter);
+		}
 		cleanAssociationState(resource);
 	}
 
@@ -398,6 +430,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 
 	public static class JvmDeclaredTypeAcceptor implements IJvmDeclaredTypeAcceptor {
 		public List<Pair<JvmDeclaredType, Procedure1<? super JvmDeclaredType>>> later = Lists.newArrayList();
+		public List<Runnable> initializers = Lists.newArrayList();
 		private DerivedStateAwareResource resource;
 
 		public JvmDeclaredTypeAcceptor(DerivedStateAwareResource resource) {
@@ -424,7 +457,10 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 					later.add(new Pair<JvmDeclaredType, Procedure1<? super JvmDeclaredType>>(type, lateInitialization));
 				}
 			}
+		}
 
+		public void runAfterIndexing(Runnable runnable) {
+			initializers.add(runnable);
 		}
 
 	}
@@ -443,6 +479,11 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 			return jvmElement.equals(primaryJvmElement);
 		}
 		return false;
+	}
+
+	@SuppressWarnings("deprecation")
+	public boolean canReconcileState() {
+		return !(inferrer instanceof AbstractModelInferrer);
 	}
 
 }
