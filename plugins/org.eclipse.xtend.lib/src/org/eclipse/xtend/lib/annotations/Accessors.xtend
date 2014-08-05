@@ -156,7 +156,7 @@ class AccessorsProcessor implements TransformationParticipant<MutableMemberDecla
 			 * TODO move this to the new validation phase once everyone has the nightly
 			 * Then we don't need to skip inferred types
 			 */
-			if (field.type.inferred) {
+			if (field.type === null || field.type.inferred) {
 				return
 			}
 			val overriddenGetter = field.declaringType.newSelfTypeReference.allResolvedMethods.findFirst [
@@ -184,7 +184,7 @@ class AccessorsProcessor implements TransformationParticipant<MutableMemberDecla
 		}
 		
 		def getPossibleGetterNames(FieldDeclaration it) {
-			(if(type.booleanType) #["is", "get"] else #["get"]).map[prefix|prefix + simpleName.toFirstUpper]
+			(if(type.orObject.isBooleanType) #["is", "get"] else #["get"]).map[prefix|prefix + simpleName.toFirstUpper]
 		}
 
 		def isBooleanType(TypeReference it) {
@@ -197,7 +197,7 @@ class AccessorsProcessor implements TransformationParticipant<MutableMemberDecla
 			field.declaringType.addMethod(field.getterName) [
 				primarySourceElement = field.primarySourceElement
 				addAnnotation(newAnnotationReference(Pure))
-				returnType = field.type
+				returnType = field.type.orObject
 				body = '''return «field.fieldOwner».«field.simpleName»;'''
 				static = field.static
 				it.visibility = visibility
@@ -218,7 +218,7 @@ class AccessorsProcessor implements TransformationParticipant<MutableMemberDecla
 		}
 
 		def hasSetter(FieldDeclaration it) {
-			declaringType.findDeclaredMethod(setterName, type) !== null
+			declaringType.findDeclaredMethod(setterName, type.orObject) !== null
 		}
 
 		def getSetterName(FieldDeclaration it) {
@@ -233,7 +233,7 @@ class AccessorsProcessor implements TransformationParticipant<MutableMemberDecla
 			if (field.final) {
 				field.addError("Cannot set a final field")
 			}
-			if (field.type.inferred) {
+			if (field.type === null || field.type.inferred) {
 				field.addError("Type cannot be inferred.")
 				return
 			}
@@ -262,11 +262,15 @@ class AccessorsProcessor implements TransformationParticipant<MutableMemberDecla
 			field.declaringType.addMethod(field.setterName) [
 				primarySourceElement = field.primarySourceElement
 				returnType = primitiveVoid
-				val param = addParameter(field.simpleName, if (field.type.inferred) object else field.type)
+				val param = addParameter(field.simpleName, field.type.orObject)
 				body = '''«field.fieldOwner».«field.simpleName» = «param.simpleName»;'''
 				static = field.static
 				it.visibility = visibility
 			]
+		}
+		
+		private def orObject(TypeReference ref) {
+			if (ref === null) object else ref
 		}
 	}
 

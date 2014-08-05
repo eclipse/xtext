@@ -10,6 +10,7 @@ import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+import org.eclipse.xtend.lib.macro.declaration.TypeReference
 
 /**
  * Creates default implementations for {@link Object#equals(Object) equals} and {@link Object#hashCode hashCode}.
@@ -116,7 +117,7 @@ class EqualsHashCodeProcessor extends AbstractClassProcessor {
 		}
 
 		def contributeToEquals(FieldDeclaration it) {
-			return switch (type.name) {
+			return switch (type.orObject.name) {
 				case Double.TYPE.name: '''
 					if (Double.doubleToLongBits(other.«simpleName») != Double.doubleToLongBits(this.«simpleName»))
 					  return false; 
@@ -163,7 +164,7 @@ class EqualsHashCodeProcessor extends AbstractClassProcessor {
 		}
 
 		def contributeToHashCode(FieldDeclaration it) {
-			return switch (type.name) {
+			return switch (type.orObject.name) {
 				case Double.TYPE.name:
 					"result = prime * result + (int) (Double.doubleToLongBits(this." + simpleName +
 						") ^ (Double.doubleToLongBits(this." + simpleName + ") >>> 32));"
@@ -182,6 +183,10 @@ class EqualsHashCodeProcessor extends AbstractClassProcessor {
 					"result = prime * result + ((this." + simpleName + "== null) ? 0 : this." + simpleName +
 						".hashCode());"
 			}
+		}
+		
+		private def orObject(TypeReference ref) {
+			if (ref === null) object else ref
 		}
 	}
 }
