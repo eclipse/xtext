@@ -16,7 +16,7 @@
 «EXTENSION org::eclipse::xtext::generator::grammarAccess::GrammarAccess»
 «EXTENSION org::eclipse::xtext::generator::parser::antlr::ContentAssistParser»
 
-«DEFINE parser FOR Grammar»
+«DEFINE parser(AntlrOptions options, boolean partialParsing) FOR Grammar»
 «FILE getParserClassName().asPath()+".java" SRC_GEN_UI-»
 /*
 «fileHeader()»
@@ -29,7 +29,7 @@ import java.util.HashMap;
 
 import org.antlr.runtime.RecognitionException;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.AbstractContentAssistParser;
+import «getParserSuperClassName(partialParsing)»;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
 
@@ -37,7 +37,7 @@ import com.google.inject.Inject;
 
 import «gaFQName()»;
 
-public class «getParserClassName().toSimpleName()» extends AbstractContentAssistParser {
+public class «getParserClassName().toSimpleName()» extends «getParserSuperClassName(partialParsing).toSimpleName()» {
 	
 	@Inject
 	private «gaSimpleName()» grammarAccess;
