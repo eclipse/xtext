@@ -13,6 +13,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -52,8 +53,22 @@ public class EObjectDescription extends AbstractEObjectDescription {
 	public static IEObjectDescription create(QualifiedName qualifiedName, EObject element) {
 		return create(qualifiedName, element, Collections.<String,String>emptyMap());
 	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public static IEObjectDescription create(QualifiedName qualifiedName, EClass eClass, URI resourceURI, String fragment, Map<String,String> userData) {
+		return new DetachedEObjectDescription(qualifiedName, eClass, resourceURI, fragment, userData);
+	}
 
 	public EObject getEObjectOrProxy() {
+		Resource eResource = element.eResource();
+		// if the element is contained in a resource that is not yet fully initialized then initialize here.
+		if (eResource instanceof DerivedStateAwareResource) {
+			if (!((DerivedStateAwareResource) eResource).isFullyInitialized()) {
+				eResource.getContents();
+			}
+		}
 		return element;
 	}
 
