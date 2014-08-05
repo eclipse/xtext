@@ -23,7 +23,9 @@ import org.eclipse.xtext.util.IAcceptor;
  * see also {@link IJvmModelInferrer}
  * 
  * @author Sven Efftinge - Initial contribution and API
+ * @deprecated - Implement {@link IJvmModelInferrer}
  */
+@Deprecated
 public abstract class AbstractModelInferrer implements IJvmModelInferrer {
 	
 	private static Logger log = Logger.getLogger(AbstractModelInferrer.class);
@@ -71,5 +73,9 @@ public abstract class AbstractModelInferrer implements IJvmModelInferrer {
 		for (EObject child : e.eContents()) {
 			infer(child, acceptor, preIndexingPhase);
 		}
+	}
+	
+	public void infer(EObject e, IJvmDeclaredTypeAcceptor acceptor) {
+		throw new UnsupportedOperationException("This doesn't get called, because of some backwards compatibility code in JvmModelAssociator");
 	}
 }

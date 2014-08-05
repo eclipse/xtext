@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.jvmmodel;
 
-import static com.google.common.collect.Lists.*;
-
 import java.util.Iterator;
 import java.util.List;
 
@@ -135,13 +133,12 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	@Inject
 	private CompilerPhases compilerPhases;
 	
-	public void infer(/* @Nullable */ EObject object, final /* @NonNull */ IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase) {
+	public void infer(/* @Nullable */ EObject object, final /* @NonNull */ IJvmDeclaredTypeAcceptor acceptor) {
 		if (!(object instanceof XtendFile))
 			return;
-		XtendFile xtendFile = (XtendFile) object;
-		List<Runnable> doLater = newArrayList();
+		final XtendFile xtendFile = (XtendFile) object;
 		for (final XtendTypeDeclaration declaration: xtendFile.getXtendTypes()) {
-			inferTypeSceleton(declaration, acceptor, preIndexingPhase, xtendFile, doLater, null);
+			inferTypeSceleton(declaration, acceptor, xtendFile, null);
 		}
 		ActiveAnnotationContexts contexts = null;
 		BatchLinkableResource resource = (BatchLinkableResource)xtendFile.eResource();
@@ -169,29 +166,27 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			compilerPhases.setIndexing(xtendFile, false);
 			resource.getCache().clear(resource);
 		}
-		
-		if (!preIndexingPhase) {
-			for (Runnable runnable : doLater) {
-				runnable.run();
-			}
-			try {
-				contexts.before(ActiveAnnotationContexts.AnnotationCallback.INFERENCE);
-				for (ActiveAnnotationContext ctx : contexts.getContexts().values()) {
-					try {
-						annotationProcessor.inferencePhase(ctx, CancelIndicator.NullImpl);
-					} catch (Throwable t) {
-						ctx.handleProcessingError(xtendFile.eResource(), t);
+		final ActiveAnnotationContexts annotationContexts = contexts;
+		acceptor.runAfterIndexing(new Runnable() {
+			public void run() {
+				try {
+					annotationContexts.before(ActiveAnnotationContexts.AnnotationCallback.INFERENCE);
+					for (ActiveAnnotationContext ctx : annotationContexts.getContexts().values()) {
+						try {
+							annotationProcessor.inferencePhase(ctx, CancelIndicator.NullImpl);
+						} catch (Throwable t) {
+							ctx.handleProcessingError(xtendFile.eResource(), t);
+						}
 					}
+				} finally {
+					annotationContexts.after(ActiveAnnotationContexts.AnnotationCallback.INFERENCE);
 				}
-			} finally {
-				contexts.after(ActiveAnnotationContexts.AnnotationCallback.INFERENCE);
 			}
-		}
+		});
 	}
 
-	protected void inferTypeSceleton(final XtendTypeDeclaration declaration, final IJvmDeclaredTypeAcceptor acceptor, 
-			boolean preIndexingPhase, XtendFile xtendFile, List<Runnable> doLater, JvmDeclaredType containerSceleton) { 
-		JvmDeclaredType inferredSceleton = doInferTypeSceleton(declaration, acceptor, preIndexingPhase, xtendFile, doLater);
+	protected void inferTypeSceleton(final XtendTypeDeclaration declaration, final IJvmDeclaredTypeAcceptor acceptor, XtendFile xtendFile, JvmDeclaredType containerSceleton) { 
+		JvmDeclaredType inferredSceleton = doInferTypeSceleton(declaration, acceptor, xtendFile);
 		if(inferredSceleton != null) {
 			setNameAndAssociate(xtendFile, declaration, inferredSceleton);
 			if(containerSceleton != null)
@@ -199,59 +194,50 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			acceptor.accept(inferredSceleton);
 			for(XtendMember member: declaration.getMembers()) {
 				if(member instanceof XtendTypeDeclaration)
-					inferTypeSceleton((XtendTypeDeclaration) member, acceptor, preIndexingPhase, xtendFile, doLater, inferredSceleton);
+					inferTypeSceleton((XtendTypeDeclaration) member, acceptor, xtendFile, inferredSceleton);
 			}
 		}
 	}
 	
-	protected JvmDeclaredType doInferTypeSceleton(final XtendTypeDeclaration declaration, final IJvmDeclaredTypeAcceptor acceptor,
-			boolean preIndexingPhase, XtendFile xtendFile, List<Runnable> doLater) {
+	protected JvmDeclaredType doInferTypeSceleton(final XtendTypeDeclaration declaration, final IJvmDeclaredTypeAcceptor acceptor, XtendFile xtendFile) {
 		if (Strings.isEmpty(declaration.getName()))
 			return null;
 		
 		if (declaration instanceof XtendAnnotationType) {
 			final JvmAnnotationType annotation = typesFactory.createJvmAnnotationType();
-			if (!preIndexingPhase) {
-				doLater.add(new Runnable() {
+			acceptor.runAfterIndexing(new Runnable() {
 					public void run() {
 						initialize((XtendAnnotationType)declaration, annotation);
 					}
 				});
-			}
 			return annotation;
 		} else if (declaration instanceof XtendClass) {
 			XtendClass xtendClass = (XtendClass) declaration;
 			final JvmGenericType javaType = typesFactory.createJvmGenericType();
 			copyTypeParameters(xtendClass.getTypeParameters(), javaType);
-			if (!preIndexingPhase) {
-				doLater.add(new Runnable() {
-					public void run() {
-						initialize((XtendClass) declaration, javaType);
-					}
-				});
-			}
+			acceptor.runAfterIndexing(new Runnable() {
+				public void run() {
+					initialize((XtendClass) declaration, javaType);
+				}
+			});
 			return javaType;
 		} else if (declaration instanceof XtendInterface) {
 			XtendInterface xtendInterface = (XtendInterface) declaration;
 			final JvmGenericType javaType = typesFactory.createJvmGenericType();
 			copyTypeParameters(xtendInterface.getTypeParameters(), javaType);
-			if (!preIndexingPhase) {
-				doLater.add(new Runnable() {
-					public void run() {
-						initialize((XtendInterface) declaration, javaType);
-					}
-				});
-			}
+			acceptor.runAfterIndexing(new Runnable() {
+				public void run() {
+					initialize((XtendInterface) declaration, javaType);
+				}
+			});
 			return javaType;
 		} else if (declaration instanceof XtendEnum) {
 			final JvmEnumerationType javaType = typesFactory.createJvmEnumerationType();
-			if (!preIndexingPhase) {
-				doLater.add(new Runnable() {
-					public void run() {
-						initialize((XtendEnum) declaration, javaType);
-					}
-				});
-			}
+			acceptor.runAfterIndexing(new Runnable() {
+				public void run() {
+					initialize((XtendEnum) declaration, javaType);
+				}
+			});
 			return javaType;
 		} else {
 			return null;

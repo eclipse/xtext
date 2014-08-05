@@ -2,7 +2,6 @@
 <?eclipse version="3.0"?>
 
 <plugin>
-   <extension-point id="java_translation_participant" name="Java Translation Participant" schema="schema/java_translation_participant.exsd"/>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 

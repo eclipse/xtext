@@ -13,6 +13,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -54,6 +55,13 @@ public class EObjectDescription extends AbstractEObjectDescription {
 	}
 
 	public EObject getEObjectOrProxy() {
+		Resource eResource = element.eResource();
+		// if the element is contained in a resource that is not yet fully initialized then initialize here.
+		if (eResource instanceof DerivedStateAwareResource) {
+			if (!((DerivedStateAwareResource) eResource).isFullyInitialized()) {
+				eResource.getContents();
+			}
+		}
 		return element;
 	}
 
