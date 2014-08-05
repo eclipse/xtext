@@ -53,6 +53,13 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 	@Inject
 	private Provider<IUnorderedGroupHelper> unorderedGroupHelper;
 	
+	/**
+	 * @since 2.7
+	 */
+	protected TokenSource createTokenSource(String input) {
+		return createLexer(new ANTLRStringStream(input));
+	}
+	
 	protected TokenSource createLexer(CharStream stream) {
 		Lexer lexer = lexerProvider.get();
 		lexer.setCharStream(stream);
@@ -301,8 +308,7 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 	protected abstract String[] getInitialHiddenTokens();
 	
 	public Collection<FollowElement> getFollowElements(String input, boolean strict) {
-		CharStream stream = new ANTLRStringStream(input);
-		TokenSource tokenSource = createLexer(stream);
+		TokenSource tokenSource = createTokenSource(input);
 		AbstractInternalContentAssistParser parser = createParser();
 		parser.setStrict(strict);
 		ObservableXtextTokenStream tokens = new ObservableXtextTokenStream(tokenSource, parser);

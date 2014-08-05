@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 import org.antlr.runtime.RecognitionException;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.AbstractContentAssistParser;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.AbstractPartialContentAssistParser;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
 
@@ -17,7 +17,7 @@ import com.google.inject.Inject;
 
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
 
-public class XtendParser extends AbstractContentAssistParser {
+public class XtendParser extends AbstractPartialContentAssistParser {
 	
 	@Inject
 	private XtendGrammarAccess grammarAccess;

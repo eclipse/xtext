@@ -106,7 +106,9 @@ Workflow {
     		fragment = contentAssist.ContentAssistFragment auto-inject {}
     
     		// generates a more lightweight Antlr parser and lexer tailored for content assist
-    		fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}
+    		fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {
+    			partialParsing = true
+    		}
     
     		// generates junit test support classes into Generator#pathTestProject
 //    		fragment = junit.Junit4Fragment auto-inject {}
