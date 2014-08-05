@@ -10,10 +10,12 @@ package org.eclipse.xtend.core.macro
 import com.google.inject.Inject
 import java.util.HashMap
 import java.util.Map
+import java.util.Set
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.InternalEObject
 import org.eclipse.xtext.common.types.JvmAnnotationType
 import org.eclipse.xtext.common.types.JvmArrayType
+import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral
 import org.eclipse.xtext.common.types.JvmEnumerationType
 import org.eclipse.xtext.common.types.JvmField
@@ -29,6 +31,7 @@ import org.eclipse.xtext.common.types.access.impl.ClassFinder
 import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.scoping.IScopeProvider
+import org.eclipse.xtext.util.IResourceScopeCache
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XFeatureCall
@@ -70,6 +73,8 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 
 	@Inject IQualifiedNameConverter qualifiedNameConverter
 	
+	@Inject IResourceScopeCache cache
+	
 	public def Object evaluate(XExpression expression, JvmTypeReference expectedType) {
 		val classLoader = classLoaderProvider.getClassLoader(expression)
 		val visibleFeatures = findVisibleFeatures(expression)
@@ -88,34 +93,7 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 	 * That essentially includes static imports and the fields declared in the containing types
 	 */
 	protected def Map<String, JvmIdentifiableElement> findVisibleFeatures(XExpression expression) {
-		val result = newHashMap
-
-		val section = importSectionLocator.getImportSection(expression.eResource as XtextResource)
-		if(section != null) {
-			for (imp : section.importDeclarations) {
-				if(imp.static) {
-					val type = imp.findTypeByName(imp.importedTypeName)
-					switch type {
-						JvmGenericType: {
-
-							// add constant field
-							for (feature : type.allFeatures.filter(JvmField).filter[static && final]) {
-								result.put(feature.simpleName, feature)
-							}
-						}
-						JvmEnumerationType: {
-
-							// add enum values
-							for (feature : type.literals) {
-								result.put(feature.simpleName, feature)
-							}
-						}
-					}
-				}
-			}
-		}
-
-		var container = switch cont : containerProvider.getNearestLogicalContainer(expression) {
+		val container = switch cont : containerProvider.getNearestLogicalContainer(expression) {
 			JvmGenericType: {
 				cont
 			}
@@ -123,12 +101,75 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 				cont.declaringType
 			}
 		}
-		while (container != null) {
-			for (feature : container.allFeatures.filter(JvmField).filter[static && final]) {
-				result.put(feature.simpleName, feature)
+		cache.get('visibleFeaturesForAnnotationValues'->container, expression.eResource) [
+			val result = newHashMap
+			val section = importSectionLocator.getImportSection(expression.eResource as XtextResource)
+			if(section != null) {
+				for (imp : section.importDeclarations) {
+					if(imp.static) {
+						val type = imp.findTypeByName(imp.importedTypeName)
+						switch type {
+							JvmGenericType: {
+								// add constant fields
+								type.collectAllVisibleFields(result)
+							}
+							JvmEnumerationType: {
+	
+								// add enum values
+								for (feature : type.literals) {
+									result.put(feature.simpleName, feature)
+								}
+							}
+						}
+					}
+				}
 			}
-			container = container.declaringType
+			container.collectAllVisibleFields(result)
+			return result
+		]
+	}
+	
+	protected def void collectAllVisibleFields(JvmDeclaredType type, Map<String, JvmIdentifiableElement> result) {
+		if (type == null) {
+			return;
 		}
+		collectAllVisibleFields(type.declaringType, result)
+		result.putAll(type.allVisibleFields)
+	}
+	
+	/**
+	 * The visible fields collector does not interfere with the local caches of JvmDeclaredTypes
+	 * but only looks at the fields of those types.
+	 */
+	static class VisibleFieldsCollector {
+		def void collect(JvmDeclaredType type, Map<String, JvmIdentifiableElement> result) {
+			type.collect(newHashSet, result)
+		}
+		private def void collect(JvmDeclaredType type, Set<JvmType> seen, Map<String, JvmIdentifiableElement> result) {
+			if (seen.add(type)) {
+				for(member: type.members) {
+					if (member instanceof JvmField) {
+						if (member.final && member.static) {
+							val existing = result.put(member.simpleName, member)
+							if (existing != null) {
+								result.put(existing.simpleName, existing)
+							}
+						}
+					}
+				}
+				for(superType: type.superTypes) {
+					val rawSuperType = superType?.type
+					if (rawSuperType instanceof JvmDeclaredType && !rawSuperType.eIsProxy) {
+						collect(rawSuperType as JvmDeclaredType, seen, result)
+					}
+				}
+			}
+		}
+	}
+	
+	protected def getAllVisibleFields(JvmDeclaredType type) {
+		val result = newHashMap
+		new ConstantExpressionsInterpreter.VisibleFieldsCollector().collect(type, result)
 		return result
 	}
 	
