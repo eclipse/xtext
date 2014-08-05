@@ -13,8 +13,8 @@
 
 «EXTENSION org::eclipse::xtext::generator::Naming»
 
-«DEFINE generate(org::eclipse::xtext::generator::parser::antlr::AntlrOptions options, org::eclipse::xtext::generator::parser::antlr::ex::common::AntlrFragmentHelper helper) FOR Grammar»
-	«EXPAND IContentAssistParser::parser(helper)»
+«DEFINE generate(org::eclipse::xtext::generator::parser::antlr::AntlrOptions options, org::eclipse::xtext::generator::parser::antlr::ex::common::AntlrFragmentHelper helper, boolean partialParsing) FOR Grammar»
+	«EXPAND IContentAssistParser::parser(partialParsing, helper)»
 	«EXPAND LexerGrammar::grammar(options, helper)»
 	«EXPAND ParserGrammar::grammar(options, helper)»
 «ENDDEFINE»
