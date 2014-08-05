@@ -10,7 +10,11 @@ package org.eclipse.xtext.resource;
 import java.io.IOException;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
 import org.eclipse.xtext.resource.impl.EObjectDescriptionLookUp;
@@ -46,10 +50,12 @@ public class DerivedStateAwareResourceDescriptionManager extends DefaultResource
 				throw new RuntimeIOException(e);
 			}
 		}
-		boolean isInitialized = res.fullyInitialized || res.isInitializing;
+		boolean isInitialized = res.indexingStateInitialized || res.isInitializing;
+		boolean canReconcileState = res.canReconcileState();
 		try {
 			if (!isInitialized) {
-				res.eSetDeliver(false);
+				if (!canReconcileState)
+					res.eSetDeliver(false);
 				res.installDerivedState(true);
 			}
 			IResourceDescription description = createResourceDescription(resource, strategy);
@@ -61,7 +67,7 @@ public class DerivedStateAwareResourceDescriptionManager extends DefaultResource
 			}
 			return description;
 		} finally {
-			if (!isInitialized) {
+			if (!isInitialized && !canReconcileState) {
 				if (log.isDebugEnabled())
 					log.debug("Discarding inferred state for "+resource.getURI());
 				res.discardDerivedState();
@@ -77,6 +83,12 @@ public class DerivedStateAwareResourceDescriptionManager extends DefaultResource
 				if (lookup == null)
 					lookup = new EObjectDescriptionLookUp(computeExportedObjects());
 				return lookup;
+			}
+			
+			@Override
+			protected TreeIterator<EObject> getAllPropertContents() {
+				EList<EObject> contents = ((DerivedStateAwareResource)getResource()).doGetContents();
+				return EcoreUtil.getAllProperContents(contents, false);
 			}
 		};
 	}

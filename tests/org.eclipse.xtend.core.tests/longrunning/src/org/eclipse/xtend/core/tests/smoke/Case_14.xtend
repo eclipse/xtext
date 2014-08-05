@@ -24,7 +24,7 @@ class Case_14 extends AbstractXtendTestCase {
 
        @Test
        def void testInference() {
-               assoc.inferrer = [obj, acceptor, preIndexing|
+               assoc.inferrer = [obj, acceptor|
                        val firstType = obj.toClass('foo.Bar')
                        val secondType = obj.toClass('foo.Baz')
                        assertNull(secondType.eResource)

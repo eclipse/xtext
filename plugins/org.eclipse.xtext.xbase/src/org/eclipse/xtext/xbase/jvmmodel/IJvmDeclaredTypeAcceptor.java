@@ -13,9 +13,11 @@ import org.eclipse.xtext.xbase.lib.Procedures;
 
 /**
  * The acceptor is part of the {@link IJvmModelInferrer} API.
- * It's passed into {@link IJvmModelInferrer#infer(EObject, IJvmDeclaredTypeAcceptor, boolean) infer(..)} to accept 
+ * It's passed into {@link IJvmModelInferrer#infer(EObject, IJvmDeclaredTypeAcceptor) infer(..)} to accept 
  * created {@link JvmDeclaredType}. They will be added
  * to the {@link EObject}'s {@link org.eclipse.emf.ecore.resource.Resource} of the {@link EObject}.
+ * 
+ * @noextend This interface is not intended to be extended by clients.
  * 
  * @author Sven Efftinge - initial API
  */
@@ -27,10 +29,17 @@ public interface IJvmDeclaredTypeAcceptor {
 	 */
 	<T extends JvmDeclaredType> IJvmDeclaredTypeAcceptor.IPostIndexingInitializing<T> accept(T type);
 	
+	/**
+	 * Code that should be executed to complete the model inference and adds information not necessary for indexing.
+	 * Also only code executed in runnable might resolve some cross references, but not resolve any XExpressions as they require the full
+	 * JvmTypes to be computed.
+	 */
+	void runAfterIndexing(Runnable runnable);
 	
 	interface IPostIndexingInitializing<T extends JvmDeclaredType> {
+		
 		/**
-		 * The passed procedure will be executed only if in post-indexing phase, and it is executed after all {@link JvmDeclaredType} are created
+		 * The passed procedure will be executed in the post-indexing phase, and it is executed after all {@link JvmDeclaredType} are created
 		 * and attached to the {@link org.eclipse.emf.ecore.resource.Resource}.
 		 */
 		void initializeLater(Procedures.Procedure1<? super T> lateInitialization);
