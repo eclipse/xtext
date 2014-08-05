@@ -7,7 +7,6 @@ import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
-import org.eclipse.xtext.xbase.jvmmodel.JvmModelInferrerRegistry;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 import com.google.inject.Injector;
@@ -40,8 +39,6 @@ public class XtendStandaloneSetup extends XtendStandaloneSetupGenerated{
 		EPackage.Registry.INSTANCE.put(XAnnotationsPackage.eINSTANCE.getNsURI(),XAnnotationsPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(TypesPackage.eINSTANCE.getNsURI(), TypesPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(XtypePackage.eINSTANCE.getNsURI(), XtypePackage.eINSTANCE);
-		
-		JvmModelInferrerRegistry.INSTANCE.setUseRegistry(false);
 		
 		Injector injector = createInjector();
 		register(injector);
