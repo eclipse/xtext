@@ -242,7 +242,7 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 					exportedEObjects.add(eObjectDescription);
 				}
 			};
-			TreeIterator<EObject> allProperContents = getAllPropertContents();
+			TreeIterator<EObject> allProperContents = getAllProperContents();
 			if (strategy instanceof IDefaultResourceDescriptionStrategyExtension) {
 				IDefaultResourceDescriptionStrategyExtension strategyExtension = (IDefaultResourceDescriptionStrategyExtension) strategy;
 				while (allProperContents.hasNext()) {
