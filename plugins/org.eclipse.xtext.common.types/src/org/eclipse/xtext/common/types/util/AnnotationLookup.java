@@ -8,6 +8,7 @@
 package org.eclipse.xtext.common.types.util;
 
 import java.lang.annotation.Annotation;
+import java.util.Iterator;
 
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -90,6 +91,19 @@ public class AnnotationLookup {
 		} catch (RuntimeException e) {
 			return null;
 		}
+	}
+
+	/**
+	 * @return <code>true</code> if this annotation is annotated with Java8 Repeatable meta-annotation.
+	 */
+	public boolean isRepeatable(final JvmAnnotationType annotationType) {
+		for (Iterator<JvmAnnotationReference> iterator = annotationType.getAnnotations().iterator(); iterator.hasNext();) {
+			JvmAnnotationReference metaAnnotation = iterator.next();
+			if ("java.lang.annotation.Repeatable".equals(metaAnnotation.getAnnotation().getIdentifier())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
