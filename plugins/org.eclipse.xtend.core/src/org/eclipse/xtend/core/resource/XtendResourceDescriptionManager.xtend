@@ -64,7 +64,7 @@ class XtendResourceDescription extends DefaultResourceDescription {
 		this.nameConverter = nameConverter
 	}
 	
-	override protected getAllPropertContents() {
+	override protected getAllProperContents() {
 		val contents = (resource as DerivedStateAwareResource).rawGetContents
 		return EcoreUtil.getAllProperContents(contents, false)
 	}
