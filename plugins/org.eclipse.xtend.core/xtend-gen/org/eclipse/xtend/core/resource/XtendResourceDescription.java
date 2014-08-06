@@ -56,7 +56,7 @@ public class XtendResourceDescription extends DefaultResourceDescription {
     this.nameConverter = nameConverter;
   }
   
-  protected TreeIterator<EObject> getAllPropertContents() {
+  protected TreeIterator<EObject> getAllProperContents() {
     Resource _resource = this.getResource();
     final EList<EObject> contents = ((DerivedStateAwareResource) _resource).rawGetContents();
     return EcoreUtil.<EObject>getAllProperContents(contents, false);

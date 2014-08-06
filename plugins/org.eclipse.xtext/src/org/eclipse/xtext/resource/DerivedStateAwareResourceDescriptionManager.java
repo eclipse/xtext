@@ -85,7 +85,7 @@ public class DerivedStateAwareResourceDescriptionManager extends DefaultResource
 			}
 			
 			@Override
-			protected TreeIterator<EObject> getAllPropertContents() {
+			protected TreeIterator<EObject> getAllProperContents() {
 				EList<EObject> contents = ((DerivedStateAwareResource)getResource()).doGetContents();
 				return EcoreUtil.getAllProperContents(contents, false);
 			}
@@ -134,7 +134,7 @@ public class DerivedStateAwareResourceDescriptionManager extends DefaultResource
 	protected IResourceDescription createIndexingResourceDescription(Resource resource, IDefaultResourceDescriptionStrategy strategy) {
 		return new IndexingResourceDescription(resource, strategy) {
 			@Override
-			protected TreeIterator<EObject> getAllPropertContents() {
+			protected TreeIterator<EObject> getAllProperContents() {
 				EList<EObject> contents = ((DerivedStateAwareResource)getResource()).doGetContents();
 				return EcoreUtil.getAllProperContents(contents, false);
 			}

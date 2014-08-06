@@ -138,7 +138,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			return;
 		final XtendFile xtendFile = (XtendFile) object;
 		for (final XtendTypeDeclaration declaration: xtendFile.getXtendTypes()) {
-			inferTypeSceleton(declaration, acceptor, xtendFile, null);
+			inferTypeSkeleton(declaration, acceptor, xtendFile, null);
 		}
 		ActiveAnnotationContexts contexts = null;
 		BatchLinkableResource resource = (BatchLinkableResource)xtendFile.eResource();
@@ -185,21 +185,21 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		});
 	}
 
-	protected void inferTypeSceleton(final XtendTypeDeclaration declaration, final IJvmDeclaredTypeAcceptor acceptor, XtendFile xtendFile, JvmDeclaredType containerSceleton) { 
-		JvmDeclaredType inferredSceleton = doInferTypeSceleton(declaration, acceptor, xtendFile);
-		if(inferredSceleton != null) {
-			setNameAndAssociate(xtendFile, declaration, inferredSceleton);
-			if(containerSceleton != null)
-				containerSceleton.getMembers().add(inferredSceleton);
-			acceptor.accept(inferredSceleton);
+	protected void inferTypeSkeleton(final XtendTypeDeclaration declaration, final IJvmDeclaredTypeAcceptor acceptor, XtendFile xtendFile, JvmDeclaredType containerSkeleton) { 
+		JvmDeclaredType inferredSkeleton = doInferTypeSkeleton(declaration, acceptor, xtendFile);
+		if(inferredSkeleton != null) {
+			setNameAndAssociate(xtendFile, declaration, inferredSkeleton);
+			if(containerSkeleton != null)
+				containerSkeleton.getMembers().add(inferredSkeleton);
+			acceptor.accept(inferredSkeleton);
 			for(XtendMember member: declaration.getMembers()) {
 				if(member instanceof XtendTypeDeclaration)
-					inferTypeSceleton((XtendTypeDeclaration) member, acceptor, xtendFile, inferredSceleton);
+					inferTypeSkeleton((XtendTypeDeclaration) member, acceptor, xtendFile, inferredSkeleton);
 			}
 		}
 	}
 	
-	protected JvmDeclaredType doInferTypeSceleton(final XtendTypeDeclaration declaration, final IJvmDeclaredTypeAcceptor acceptor, XtendFile xtendFile) {
+	protected JvmDeclaredType doInferTypeSkeleton(final XtendTypeDeclaration declaration, final IJvmDeclaredTypeAcceptor acceptor, XtendFile xtendFile) {
 		if (Strings.isEmpty(declaration.getName()))
 			return null;
 		
