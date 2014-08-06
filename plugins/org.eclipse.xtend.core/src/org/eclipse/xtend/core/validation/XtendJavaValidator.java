@@ -74,6 +74,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.util.AnnotationLookup;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
@@ -101,6 +102,7 @@ import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.annotations.typing.XAnnotationUtil;
 import org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsJavaValidator;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.compiler.JavaKeywords;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
@@ -130,11 +132,14 @@ import org.eclipse.xtext.xtype.XComputedTypeReference;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableListMultimap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
@@ -203,6 +208,9 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	
 	@Inject
 	private ProxyAwareUIStrings proxyAwareUIStrings;
+	
+	@Inject
+	private AnnotationLookup annotationLookup;
 	
 	protected final Set<String> visibilityModifers = ImmutableSet.of("public", "private", "protected", "package");
 	protected final Multimap<Class<?>, ElementType> targetInfos;
@@ -349,6 +357,45 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				}
 			}
 		}
+	}
+	
+	@Check
+	public void checkMultipleAnnotations(final XtendAnnotationTarget annotationTarget) {
+		if (annotationTarget.getAnnotations().size() <= 1 || !isRelevantAnnotationTarget(annotationTarget)) {
+			return;
+		}
+		
+		ImmutableListMultimap<String, XAnnotation> groupByIdentifier = Multimaps.index(annotationTarget.getAnnotations(),
+				new Function<XAnnotation, String>() {
+					public String apply(XAnnotation input) {
+						return input.getAnnotationType().getIdentifier();
+					}
+				});
+
+		for (String qName : groupByIdentifier.keySet()) {
+			ImmutableList<XAnnotation> sameType = groupByIdentifier.get(qName);
+			if (sameType.size() > 1) {
+				JvmType type = sameType.get(0).getAnnotationType();
+				if (type instanceof JvmAnnotationType && !type.eIsProxy()
+						&& !annotationLookup.isRepeatable((JvmAnnotationType) type)) {
+					for (XAnnotation xAnnotation : sameType) {
+						error("Multiple annotations of non-repeatable type @"
+								+ xAnnotation.getAnnotationType().getSimpleName()
+								+ ". Only annotation types marked @Repeatable can be used multiple times at one target.",
+								xAnnotation, XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, INSIGNIFICANT_INDEX, ANNOTATION_MULTIPLE);
+					}
+				}
+			}
+		}
+	}
+
+
+	private boolean isRelevantAnnotationTarget(final XtendAnnotationTarget annotationTarget) {
+		return any(targetInfos.keySet(), new Predicate<Class<?>>() {
+			public boolean apply(Class<?> input) {
+				return input.isInstance(annotationTarget);
+			}
+		});
 	}
 
 	protected EObject getContainingAnnotationTarget(XAnnotation annotation) {
