@@ -104,7 +104,7 @@ class DelegateProcessor implements TransformationParticipant<MutableMemberDeclar
 		}
 
 		def hasValidType(MemberDeclaration it) {
-			if (type.inferred) {
+			if (type == null || type.inferred) {
 				addError("Cannot use inferred types on delegates")
 				false
 			} else {

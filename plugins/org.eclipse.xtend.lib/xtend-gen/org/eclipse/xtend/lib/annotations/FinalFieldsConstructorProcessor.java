@@ -254,7 +254,8 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
           p.markAsInitializedBy(it);
           String _simpleName = p.getSimpleName();
           TypeReference _type = p.getType();
-          final MutableParameterDeclaration param = it.addParameter(_simpleName, _type);
+          TypeReference _orObject = Util.this.orObject(_type);
+          final MutableParameterDeclaration param = it.addParameter(_simpleName, _orObject);
           fieldToParameter.put(p, param);
         }
       };
@@ -307,6 +308,17 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
       } else {
         return null;
       }
+    }
+    
+    private TypeReference orObject(final TypeReference ref) {
+      TypeReference _xifexpression = null;
+      boolean _tripleEquals = (ref == null);
+      if (_tripleEquals) {
+        _xifexpression = this.context.getObject();
+      } else {
+        _xifexpression = ref;
+      }
+      return _xifexpression;
     }
   }
   
