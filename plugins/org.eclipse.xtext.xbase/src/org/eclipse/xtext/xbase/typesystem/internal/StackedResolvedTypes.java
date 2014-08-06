@@ -17,7 +17,6 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
-import org.eclipse.xtext.validation.IssueSeverities;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -34,7 +33,9 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
+import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -43,10 +44,17 @@ import com.google.common.collect.Lists;
 public class StackedResolvedTypes extends ResolvedTypes {
 
 	private final ResolvedTypes parent;
+	private Optional<Map<JvmIdentifiableElement, LightweightTypeReference>> flattenedReassignedTypes;
 
 	protected StackedResolvedTypes(ResolvedTypes parent) {
-		super(parent.getResolver(), parent.getMonitor());
+		super(parent.shared);
 		this.parent = parent;
+	}
+	
+	@Override
+	protected void clear() {
+		flattenedReassignedTypes = null;
+		super.clear();
 	}
 	
 	protected ResolvedTypes getParent() {
@@ -199,11 +207,9 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	}
 	
 	@Override
-	public boolean isResolved(Object handle) {
-		if (super.isResolved(handle)) {
-			return true;
-		}
-		return parent.isResolved(handle);
+	protected boolean doIsResolved(Object handle) {
+		boolean result = super.doIsResolved(handle) || parent.doIsResolved(handle);
+		return result;
 	}
 
 	@Override
@@ -218,10 +224,10 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	
 	@Override
 	/* @Nullable */
-	protected LightweightTypeReference doGetActualType(JvmIdentifiableElement identifiable, boolean ignoreReassignedTypes) {
-		LightweightTypeReference result = super.doGetActualType(identifiable, ignoreReassignedTypes);
+	protected LightweightTypeReference doGetActualTypeNoDeclaration(JvmIdentifiableElement identifiable, boolean ignoreReassignedTypes) {
+		LightweightTypeReference result = super.doGetActualTypeNoDeclaration(identifiable, ignoreReassignedTypes);
 		if (result == null) {
-			result = parent.doGetActualType(identifiable, ignoreReassignedTypes);
+			result = parent.doGetActualTypeNoDeclaration(identifiable, ignoreReassignedTypes);
 		}
 		return result;
 	}
@@ -237,8 +243,6 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	@Override
 	/* @Nullable */
 	protected IApplicableCandidate doGetCandidate(/* @Nullable */ XExpression featureOrConstructorCall) {
-		if (featureOrConstructorCall == null)
-			return null;
 		IApplicableCandidate result = super.doGetCandidate(featureOrConstructorCall);
 		if (result != null)
 			return result;
@@ -248,8 +252,6 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	@Override
 	/* @Nullable */
 	protected JvmIdentifiableElement doGetLinkedFeature(/* @Nullable */ XExpression featureOrConstructorCall) {
-		if (featureOrConstructorCall == null)
-			return null;
 		JvmIdentifiableElement result = super.doGetLinkedFeature(featureOrConstructorCall);
 		if (result != null)
 			return result;
@@ -257,14 +259,14 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	}
 	
 	@Override
-	/* @Nullable */
-	protected LightweightTypeReference doGetDeclaredType(JvmIdentifiableElement identifiable) {
-		return null;
+	public List<LightweightTypeReference> getExpectedExceptions() {
+		return parent.getExpectedExceptions();
 	}
 	
 	@Override
-	public List<LightweightTypeReference> getExpectedExceptions() {
-		return parent.getExpectedExceptions();
+	/* @Nullable */
+	protected LightweightTypeReference doGetDeclaredType(JvmIdentifiableElement identifiable) {
+		return parent.doGetDeclaredType(identifiable);
 	}
 	
 	@Override
@@ -308,20 +310,20 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	
 	@Override
 	/* @Nullable */
-	public IFeatureLinkingCandidate getFeature(XAbstractFeatureCall featureCall) {
-		IFeatureLinkingCandidate result = super.getFeature(featureCall);
+	protected IFeatureLinkingCandidate doGetFeature(XAbstractFeatureCall featureCall) {
+		IFeatureLinkingCandidate result = super.doGetFeature(featureCall);
 		if (result == null) {
-			result = parent.getFeature(featureCall);
+			result = parent.doGetFeature(featureCall);
 		}
 		return result;
 	}
 	
 	@Override
 	/* @Nullable */
-	public IConstructorLinkingCandidate getConstructor(XConstructorCall constructorCall) {
-		IConstructorLinkingCandidate result = super.getConstructor(constructorCall);
+	protected IConstructorLinkingCandidate doGetConstructor(XConstructorCall constructorCall) {
+		IConstructorLinkingCandidate result = super.doGetConstructor(constructorCall);
 		if (result == null) {
-			result = parent.getConstructor(constructorCall);
+			result = parent.doGetConstructor(constructorCall);
 		}
 		return result;
 	}
@@ -427,21 +429,16 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	}
 
 	@Override
-	protected IssueSeverities getSeverities() {
-		return parent.getSeverities();
-	}
-	
-	@Override
-	protected IFeatureScopeTracker getFeatureScopeTracker() {
-		return parent.getFeatureScopeTracker();
-	}
-
-	@Override
+	/* @Nullable */
 	protected Map<JvmIdentifiableElement, LightweightTypeReference> getFlattenedReassignedTypes() {
+		if (flattenedReassignedTypes != null) {
+			return flattenedReassignedTypes.orNull();
+		}
 		Map<JvmIdentifiableElement, LightweightTypeReference> result = parent.getFlattenedReassignedTypes();
 		if (result == null)
-			return super.getFlattenedReassignedTypes();
+			return (flattenedReassignedTypes = Optional.fromNullable(super.getFlattenedReassignedTypes())).orNull();
+		result = Maps.newHashMap(result);
 		result.putAll(basicGetReassignedTypes());
-		return result;
+		return (flattenedReassignedTypes = Optional.fromNullable(result)).orNull();
 	}
 }
