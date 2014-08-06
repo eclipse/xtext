@@ -110,8 +110,9 @@ public abstract class AbstractStaticImportsScope extends AbstractSessionBasedExe
 
 			protected void processType(JvmType type, String simpleName, int order, TypeBucket bucket) {
 				if (type instanceof JvmDeclaredType) {
-					Iterable<JvmFeature> features = findAllFeaturesByName(type, simpleName, bucket.getResolvedFeaturesProvider());
-					for (JvmFeature feature : features) {
+					List<JvmFeature> features = findAllFeaturesByName(type, simpleName, bucket.getResolvedFeaturesProvider());
+					for(int i = 0, size = features.size(); i < size; i++) {
+						JvmFeature feature = features.get(i);
 						if (feature.isStatic() && (order == 1 || feature instanceof JvmOperation)) {
 							IIdentifiableElementDescription description = createDescription(name, feature, bucket);
 							if (description != null)

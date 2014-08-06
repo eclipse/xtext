@@ -18,6 +18,7 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XNullLiteral;
+import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -223,6 +224,43 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
           Iterable<TypeData> _filter_1 = IterableExtensions.<TypeData>filter(typesForMemberFeatureCall, _function_1);
           int _size_1 = IterableExtensions.size(_filter_1);
           Assert.assertEquals(_string_1, 1, _size_1);
+        }
+      };
+      IteratorExtensions.<EObject>forEach(_eAllContents, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testTypeOnlyRegisteredOnce_04() {
+    try {
+      XExpression _expression = this.expression("1");
+      final XNumberLiteral expression = ((XNumberLiteral) _expression);
+      this.resolver.initializeFrom(expression);
+      final PublicResolvedTypes resolution = new PublicResolvedTypes(this.resolver);
+      ITypeReferenceOwner _referenceOwner = resolution.getReferenceOwner();
+      final AnyTypeReference any = new AnyTypeReference(_referenceOwner);
+      IBatchScopeProvider _batchScopeProvider = this.resolver.getBatchScopeProvider();
+      Resource _eResource = expression.eResource();
+      IFeatureScopeSession _newSession = _batchScopeProvider.newSession(_eResource);
+      ExpressionBasedRootTypeComputationState _expressionBasedRootTypeComputationState = new ExpressionBasedRootTypeComputationState(resolution, _newSession, expression, any);
+      _expressionBasedRootTypeComputationState.computeTypes();
+      final Map<XExpression, List<TypeData>> expressionTypes = resolution.basicGetExpressionTypes();
+      TreeIterator<EObject> _eAllContents = expression.eAllContents();
+      final Procedure1<EObject> _function = new Procedure1<EObject>() {
+        public void apply(final EObject it) {
+          final List<TypeData> types = expressionTypes.get(((XExpression) it));
+          String _string = types.toString();
+          final Function1<TypeData, Boolean> _function = new Function1<TypeData, Boolean>() {
+            public Boolean apply(final TypeData it) {
+              boolean _isReturnType = it.isReturnType();
+              return Boolean.valueOf((!_isReturnType));
+            }
+          };
+          Iterable<TypeData> _filter = IterableExtensions.<TypeData>filter(types, _function);
+          int _size = IterableExtensions.size(_filter);
+          Assert.assertEquals(_string, 1, _size);
         }
       };
       IteratorExtensions.<EObject>forEach(_eAllContents, _function);
