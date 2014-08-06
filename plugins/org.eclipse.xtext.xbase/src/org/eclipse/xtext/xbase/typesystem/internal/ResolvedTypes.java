@@ -11,6 +11,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -81,6 +83,36 @@ import com.google.common.collect.Sets;
  */
 public abstract class ResolvedTypes implements IResolvedTypes {
 
+	protected static class SharedKeysAwareMap<K, V> extends LinkedHashMap<K, V> {
+		private static final long serialVersionUID = 1L;
+		private final Set<K> sharedKeys;
+
+		public SharedKeysAwareMap(Set<K> sharedKeys) {
+			this.sharedKeys = sharedKeys;
+		}
+		
+		@Override
+		public V put(K key, V value) {
+			sharedKeys.add(key);
+			return super.put(key, value);
+		}
+	}
+	
+	protected static class SharedKeysAwareSet<E> extends HashSet<E> {
+		private static final long serialVersionUID = 1L;
+		private final Set<E> sharedKeys;
+
+		public SharedKeysAwareSet(Set<E> sharedItems) {
+			this.sharedKeys = sharedItems;
+		}
+		
+		@Override
+		public boolean add(E e) {
+			sharedKeys.add(e);
+			return super.add(e);
+		}
+	}
+
 	protected class Owner implements ITypeReferenceOwner {
 
 		public CommonTypeComputationServices getServices() {
@@ -113,10 +145,37 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		}
 		
 	}
+
+	/**
+	 * Shared state accross all resolved types for a single run of the resolver.
+	 * 
+	 * Externalized to reduce pressure on the GC and make them immediately accessible
+	 * from all child resolvers.
+	 */
+	protected static class Shared {
+		final DefaultReentrantTypeResolver resolver;
+		final CancelIndicator monitor;
+		final IFeatureScopeTracker featureScopeTracker;
+		final IssueSeverities issueSeverities;
+		
+		final Set<JvmIdentifiableElement> allTypes = Sets.newHashSet();
+		final Set<JvmIdentifiableElement> allReassignedTypes = Sets.newHashSet();
+		final Set<XExpression> allExpressionTypes = Sets.newHashSet();
+		final Set<XExpression> allLinking = Sets.newHashSet();
+		final Set<Object> allResolvedTypeParameters = Sets.newHashSet();
+		
+		ResolvedTypes root;
+		
+		public Shared(DefaultReentrantTypeResolver resolver, CancelIndicator monitor) {
+			this.resolver = resolver;
+			this.monitor = monitor;
+			this.featureScopeTracker = resolver.createFeatureScopeTracker();
+			this.issueSeverities = resolver.getIssueSeverities();
+		}
+		
+	}
 	
 	private final OwnedConverter converter;
-
-	private final DefaultReentrantTypeResolver resolver;
 	
 	private Set<AbstractDiagnostic> diagnostics;
 	private Map<JvmIdentifiableElement, LightweightTypeReference> types;
@@ -129,19 +188,19 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	private Set<XExpression> refinedTypes;
 	private Set<XExpression> propagatedTypes;
 	private List<JvmTypeParameter> declaredTypeParameters;
-	private CancelIndicator monitor;
 	
-	protected ResolvedTypes(DefaultReentrantTypeResolver resolver, CancelIndicator monitor) {
-		this.resolver = resolver;
+	/* package */final Shared shared;
+	
+	protected ResolvedTypes(Shared shared) {
+		this.shared = shared;
 		this.converter = createConverter();
-		this.monitor = monitor;
 	}
 	
 	/**
 	 * @since 2.7
 	 */
 	protected CancelIndicator getMonitor() {
-		return monitor;
+		return shared.monitor;
 	}
 	
 	protected void clear() {
@@ -157,9 +216,13 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		refinedTypes = null;
 	}
 	
-	protected abstract IssueSeverities getSeverities();
+	protected IssueSeverities getSeverities() {
+		return shared.issueSeverities;
+	}
 	
-	protected abstract IFeatureScopeTracker getFeatureScopeTracker();
+	protected IFeatureScopeTracker getFeatureScopeTracker() {
+		return shared.featureScopeTracker;
+	}
 	
 	protected OwnedConverter getConverter() {
 		return converter;
@@ -174,11 +237,11 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 	
 	public ResourceSet getContextResourceSet() {
-		return resolver.getRoot().eResource().getResourceSet();
+		return shared.resolver.getRoot().eResource().getResourceSet();
 	}
 
 	public CommonTypeComputationServices getServices() {
-		return resolver.getServices();
+		return shared.resolver.getServices();
 	}
 
 	public Collection<AbstractDiagnostic> getQueuedDiagnostics() {
@@ -202,21 +265,33 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	
 	/* @Nullable */
 	public JvmIdentifiableElement getLinkedFeature(/* @Nullable */ XAbstractFeatureCall featureCall) {
+		if (!shared.allLinking.contains(featureCall)) {
+			return null;
+		}
 		return doGetLinkedFeature(featureCall);
 	}
 	
 	/* @Nullable */
 	public JvmIdentifiableElement getLinkedFeature(/* @Nullable */ XConstructorCall constructorCall) {
+		if (!shared.allLinking.contains(constructorCall)) {
+			return null;
+		}
 		return doGetLinkedFeature(constructorCall);
 	}
 	
 	/* @Nullable */
 	public IFeatureLinkingCandidate getLinkingCandidate(/* @Nullable */ XAbstractFeatureCall featureCall) {
+		if (!shared.allLinking.contains(featureCall)) {
+			return null;
+		}
 		return (IFeatureLinkingCandidate) doGetCandidate(featureCall);
 	}
 	
 	/* @Nullable */
 	public IConstructorLinkingCandidate getLinkingCandidate(/* @Nullable */ XConstructorCall constructorCall) {
+		if (!shared.allLinking.contains(constructorCall)) {
+			return null;
+		}
 		return (IConstructorLinkingCandidate) doGetCandidate(constructorCall);
 	}
 	
@@ -245,6 +320,9 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	
 	/* @Nullable */
 	protected TypeData getTypeData(XExpression expression, boolean returnType, boolean nullIfEmpty) {
+		if (!shared.allExpressionTypes.contains(expression)) {
+			return null;
+		}
 		List<TypeData> values = doGetTypeData(expression);
 		if (values == null) {
 			return null;
@@ -520,6 +598,9 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 	
 	public final List<LightweightTypeReference> getActualTypeArguments(XExpression expression) {
+		if (!shared.allLinking.contains(expression)) {
+			return Collections.emptyList();
+		}
 		List<LightweightTypeReference> result = doGetActualTypeArguments(expression);
 		if (result == null)
 			return Collections.emptyList();
@@ -606,18 +687,23 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		// this will resolve them to their type parameter constraints if any and no other thing is available
 		// mind the conformance hint
 		
-		TypeParameterSubstitutor<?> substitutor = new TypeParameterByUnboundSubstitutor(Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), referenceOwner) {
-			@Override
-			/* @Nullable */
-			protected UnboundTypeReference createUnboundTypeReference(JvmTypeParameter type) {
-				if (expression instanceof XAbstractFeatureCall || expression instanceof XConstructorCall || expression instanceof XClosure) {
-					return ResolvedTypes.this.createUnboundTypeReference(expression, type);
-				} else {
-					return null;
+		final LightweightTypeReference actualType;
+		if (type.getTypeArguments().isEmpty()) {
+			actualType = type.getUpperBoundSubstitute();
+		} else {
+			TypeParameterSubstitutor<?> substitutor = new TypeParameterByUnboundSubstitutor(Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), referenceOwner) {
+				@Override
+				/* @Nullable */
+				protected UnboundTypeReference createUnboundTypeReference(JvmTypeParameter type) {
+					if (expression instanceof XAbstractFeatureCall || expression instanceof XConstructorCall || expression instanceof XClosure) {
+						return ResolvedTypes.this.createUnboundTypeReference(expression, type);
+					} else {
+						return null;
+					}
 				}
-			}
-		};
-		LightweightTypeReference actualType = substitutor.substitute(type).getUpperBoundSubstitute();
+			};
+			actualType = substitutor.substitute(type).getUpperBoundSubstitute();
+		}
 		acceptType(expression, new TypeData(expression, expectation, actualType, EnumSet.copyOf(Arrays.asList(hints)), returnType));
 		return actualType;
 	}
@@ -661,7 +747,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	
 	private Map<JvmIdentifiableElement, LightweightTypeReference> ensureTypesMapExists() {
 		if (types == null) {
-			types = Maps.newLinkedHashMap();
+			types = new SharedKeysAwareMap<JvmIdentifiableElement, LightweightTypeReference>(shared.allTypes);
 		}
 		return types;
 	}
@@ -672,7 +758,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 
 	private Map<JvmIdentifiableElement, LightweightTypeReference> ensureReassignedTypesMapExists() {
 		if (reassignedTypes == null) {
-			reassignedTypes = Maps.newLinkedHashMap();
+			reassignedTypes = new SharedKeysAwareMap<JvmIdentifiableElement, LightweightTypeReference>(shared.allReassignedTypes);
 		}
 		return reassignedTypes;
 	}
@@ -683,7 +769,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	
 	private Map<XExpression, List<TypeData>> ensureExpressionTypesMapExists() {
 		if (expressionTypes == null) {
-			expressionTypes = Maps.newHashMap();
+			expressionTypes = new SharedKeysAwareMap<XExpression, List<TypeData>>(shared.allExpressionTypes); 
 		}
 		return expressionTypes;
 	}
@@ -712,7 +798,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 
 	private Map<XExpression, IApplicableCandidate> ensureLinkingMapExists() {
 		if (linkingMap == null) {
-			linkingMap = Maps.newLinkedHashMap();
+			linkingMap = new SharedKeysAwareMap<XExpression, IApplicableCandidate>(shared.allLinking); 
 		}
 		return linkingMap;
 	}
@@ -743,7 +829,22 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 
 	/* @Nullable */
-	protected LightweightTypeReference doGetActualType(JvmIdentifiableElement identifiable, boolean ignoreReassignedTypes) {
+	protected final LightweightTypeReference doGetActualType(JvmIdentifiableElement identifiable, boolean ignoreReassignedTypes) {
+		if (ignoreReassignedTypes) {
+			if (!shared.allTypes.contains(identifiable)) {
+				return doGetDeclaredType(identifiable);
+			}
+		} else if (!shared.allReassignedTypes.contains(identifiable) && !shared.allTypes.contains(identifiable)) {
+			return doGetDeclaredType(identifiable);
+		}
+		LightweightTypeReference result = doGetActualTypeNoDeclaration(identifiable, ignoreReassignedTypes);
+		if (result == null) {
+			return doGetDeclaredType(identifiable);
+		}
+		return result;
+	}
+
+	protected LightweightTypeReference doGetActualTypeNoDeclaration(JvmIdentifiableElement identifiable, boolean ignoreReassignedTypes) {
 		if (reassignedTypes != null && !ignoreReassignedTypes) {
 			LightweightTypeReference result = reassignedTypes.get(identifiable);
 			if (result != null) {
@@ -751,9 +852,6 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			}
 		}
 		LightweightTypeReference result = basicGetTypes().get(identifiable);
-		if (result == null) {
-			return doGetDeclaredType(identifiable);
-		}
 		return result;
 	}
 	
@@ -786,7 +884,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			return ((JvmField) identifiable).getType();
 		}
 		if (identifiable instanceof JvmConstructor) {
-			return resolver.getServices().getTypeReferences().createTypeRef(((JvmConstructor) identifiable).getDeclaringType());
+			return shared.resolver.getServices().getTypeReferences().createTypeRef(((JvmConstructor) identifiable).getDeclaringType());
 		}
 		if (identifiable instanceof JvmFormalParameter) {
 			JvmTypeReference parameterType = ((JvmFormalParameter) identifiable).getParameterType();
@@ -796,12 +894,26 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 	
 	/* @Nullable */
-	public IFeatureLinkingCandidate getFeature(XAbstractFeatureCall featureCall) {
+	public final IFeatureLinkingCandidate getFeature(XAbstractFeatureCall featureCall) {
+		if (!shared.allLinking.contains(featureCall)) {
+			return null;
+		}
+		return doGetFeature(featureCall);
+	}
+
+	protected IFeatureLinkingCandidate doGetFeature(XAbstractFeatureCall featureCall) {
 		return (IFeatureLinkingCandidate) basicGetLinkingMap().get(featureCall);
 	}
 	
 	/* @Nullable */
-	public IConstructorLinkingCandidate getConstructor(XConstructorCall constructorCall) {
+	public final IConstructorLinkingCandidate getConstructor(XConstructorCall constructorCall) {
+		if (!shared.allLinking.contains(constructorCall)) {
+			return null;
+		}
+		return doGetConstructor(constructorCall);
+	}
+
+	protected IConstructorLinkingCandidate doGetConstructor(XConstructorCall constructorCall) {
 		return (IConstructorLinkingCandidate) basicGetLinkingMap().get(constructorCall);
 	}
 	
@@ -820,7 +932,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 
 	protected DefaultReentrantTypeResolver getResolver() {
-		return resolver;
+		return shared.resolver;
 	}
 	
 	protected UnboundTypeReference getUnboundTypeReference(Object handle) {
@@ -914,7 +1026,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	public void acceptHint(Object handle, LightweightBoundTypeArgument boundTypeArgument) {
 		if (boundTypeArgument.getSource() == BoundTypeArgumentSource.RESOLVED) {
 			if (resolvedTypeParameters == null) {
-				resolvedTypeParameters = Sets.newHashSetWithExpectedSize(3);
+				resolvedTypeParameters = new SharedKeysAwareSet<Object>(shared.allResolvedTypeParameters);
 			}
 			if (resolvedTypeParameters.add(handle)) {
 				if (boundTypeArgument.getDeclaredVariance().mergeDeclaredWithActual(boundTypeArgument.getActualVariance()) == VarianceInfo.INVARIANT) {
@@ -1062,7 +1174,11 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		}
 	}
 	
-	public boolean isResolved(Object handle) {
+	public final boolean isResolved(Object handle) {
+		return shared.allResolvedTypeParameters.contains(handle) && doIsResolved(handle);
+	}
+
+	protected boolean doIsResolved(Object handle) {
 		return resolvedTypeParameters != null && resolvedTypeParameters.contains(handle);
 	}
 
@@ -1256,6 +1372,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return this;
 	}
 
+	/* @Nullable */
 	protected Map<JvmIdentifiableElement, LightweightTypeReference> getFlattenedReassignedTypes() {
 		return reassignedTypes == null ? null : Maps.newHashMap(reassignedTypes);
 	}

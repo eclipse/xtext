@@ -145,13 +145,6 @@ class ValidatingRootResolvedTypes extends RootResolvedTypes {
 		return result
 	}
 	
-	override doGetDeclaredType(JvmIdentifiableElement identifiable) {
-		val result = super.doGetDeclaredType(identifiable)
-		if (result != null && !result.isOwnedBy(getReferenceOwner()))
-			throw new IllegalArgumentException("result is not owned by this resolved types")
-		return result
-	}
-	
 	override getMergedType(List<LightweightTypeReference> types) {
 		types.forEach [
 			if (!isOwnedBy(getOwner()))
@@ -289,13 +282,6 @@ class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStackedResol
 		return result
 	}
 	
-	override doGetDeclaredType(JvmIdentifiableElement identifiable) {
-		val result = super.doGetDeclaredType(identifiable)
-		if (result != null && !result.isOwnedBy(getReferenceOwner()))
-			throw new IllegalArgumentException("result is not owned by this resolved types")
-		return result
-	}
-	
 	override getMergedType(List<LightweightTypeReference> types) {
 		types.forEach [
 			if (!isOwnedBy(getOwner()))
@@ -410,13 +396,6 @@ class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
 		return result
 	}
 	
-	override doGetDeclaredType(JvmIdentifiableElement identifiable) {
-		val result = super.doGetDeclaredType(identifiable)
-		if (result != null && !result.isOwnedBy(getReferenceOwner()))
-			throw new IllegalArgumentException("result is not owned by this resolved types")
-		return result
-	}
-	
 	override getMergedType(List<LightweightTypeReference> types) {
 		types.forEach [
 			if (!isOwnedBy(getOwner()))
@@ -526,13 +505,6 @@ class ValidatingReassigningResolvedTypes extends ReassigningStackedResolvedTypes
 	override getExpectedType(XExpression expression) {
 		val result = super.getExpectedType(expression)
 		if (!result.isOwnedBy(getReferenceOwner()))
-			throw new IllegalArgumentException("result is not owned by this resolved types")
-		return result
-	}
-	
-	override doGetDeclaredType(JvmIdentifiableElement identifiable) {
-		val result = super.doGetDeclaredType(identifiable)
-		if (result != null && !result.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("result is not owned by this resolved types")
 		return result
 	}
