@@ -20,6 +20,8 @@ public final class IssueCodes {
 	public static final String FEATURECALL_LINKING_DIAGNOSTIC = ISSUE_CODE_PREFIX + "feature_linking";
 	public static final String JAVA_DOC_LINKING_DIAGNOSTIC = ISSUE_CODE_PREFIX + "java_doc_linking";
 	public static final String ANNOTATION_WRONG_TARGET = ISSUE_CODE_PREFIX + "wrong_annotation_target";
+	public static final String ANNOTATION_MULTIPLE = ISSUE_CODE_PREFIX + "multiple_annotations_used";
+	
 	public static final String DISPATCH_FUNC_WITHOUT_PARAMS = ISSUE_CODE_PREFIX + "case_function_without_params";
 	public static final String DISPATCH_FUNC_WITH_TYPE_PARAMS = ISSUE_CODE_PREFIX + "case_function_with_type_params";
 	public static final String DISPATCH_FUNC_NAME_STARTS_WITH_UNDERSCORE = ISSUE_CODE_PREFIX
