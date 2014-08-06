@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.common.base.Objects;
-import java.util.Collection;
 import java.util.List;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XExpression;
@@ -252,7 +251,7 @@ public class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
     return result;
   }
   
-  public TypeData mergeTypeData(final XExpression expression, final Collection<TypeData> allValues, final boolean returnType, final boolean nullIfEmpty) {
+  public TypeData mergeTypeData(final XExpression expression, final List<TypeData> allValues, final boolean returnType, final boolean nullIfEmpty) {
     final Procedure1<TypeData> _function = new Procedure1<TypeData>() {
       public void apply(final TypeData it) {
         ITypeReferenceOwner _referenceOwner = ValidatingStackedResolvedTypes.this.getReferenceOwner();
