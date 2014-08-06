@@ -266,22 +266,38 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 			return null;
 		if (type.eClass() == TypesPackage.Literals.JVM_PRIMITIVE_TYPE) {
 			String name = type.getSimpleName();
-			if ("boolean".equals(name)) {
-				return Primitive.Boolean;
-			} else if ("int".equals(name)) {
-				return Primitive.Int;
-			} else if ("long".equals(name)) {
-				return Primitive.Long;
-			} else if ("double".equals(name)) {
-				return Primitive.Double;
-			} else if ("char".equals(name)) {
-				return Primitive.Char;
-			} else if ("byte".equals(name)) {
-				return Primitive.Byte;
-			} else if ("short".equals(name)) {
-				return Primitive.Short;
-			} else if ("float".equals(name)) {
-				return Primitive.Float;
+			switch (name.length()) {
+				case 3:
+					if ("int".equals(name)) {
+						return Primitive.Int;
+					}
+					break;
+				case 4:
+					if ("long".equals(name)) {
+						return Primitive.Long;
+					} else if ("char".equals(name)) {
+						return Primitive.Char;
+					} else if ("byte".equals(name)) {
+						return Primitive.Byte;
+					}
+					break;
+				case 5:
+					if ("short".equals(name)) {
+						return Primitive.Short;
+					} else if ("float".equals(name)) {
+						return Primitive.Float;
+					}
+					break;
+				case 6:
+					if ("double".equals(name)) {
+						return Primitive.Double;
+					}
+					break;
+				case 7:
+					if ("boolean".equals(name)) {
+						return Primitive.Boolean;
+					}
+					break;
 			}
 		} else if (type.eClass() == TypesPackage.Literals.JVM_VOID) {
 			return Primitive.Void;
@@ -340,24 +356,40 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 		if (type.eIsProxy())
 			return null;
 		String name = type.getIdentifier();
-		if ("java.lang.Boolean".equals(name)) {
-			return Primitive.Boolean;
-		} else if ("java.lang.Integer".equals(name)) {
-			return Primitive.Int;
-		} else if ("java.lang.Long".equals(name)) {
-			return Primitive.Long;
-		} else if ("java.lang.Double".equals(name)) {
-			return Primitive.Double;
-		} else if ("java.lang.Character".equals(name)) {
-			return Primitive.Char;
-		} else if ("java.lang.Byte".equals(name)) {
-			return Primitive.Byte;
-		} else if ("java.lang.Short".equals(name)) {
-			return Primitive.Short;
-		} else if ("java.lang.Float".equals(name)) {
-			return Primitive.Float;
-		} else if ("java.lang.Void".equals(name)) {
-			return Primitive.Void;
+		switch (name.length()) {
+			case 17:
+				if ("java.lang.Integer".equals(name)) {
+					return Primitive.Int;
+				} else if ("java.lang.Boolean".equals(name)) {
+					return Primitive.Boolean;
+				}
+				break;
+			case 14:
+				if ("java.lang.Long".equals(name)) {
+					return Primitive.Long;
+				} else if ("java.lang.Byte".equals(name)) {
+					return Primitive.Byte;
+				} else if ("java.lang.Void".equals(name)) {
+					return Primitive.Void;
+				}
+				break;
+			case 15:
+				if ("java.lang.Short".equals(name)) {
+					return Primitive.Short;
+				} else if ("java.lang.Float".equals(name)) {
+					return Primitive.Float;
+				}
+				break;
+			case 16:
+				if ("java.lang.Double".equals(name)) {
+					return Primitive.Double;
+				}
+				break;
+			case 19:
+				if ("java.lang.Character".equals(name)) {
+					return Primitive.Char;
+				}
+				break;
 		}
 		return null;
 	}
