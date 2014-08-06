@@ -234,7 +234,7 @@ class TimedStackedResolvedTypes extends StackedResolvedTypes {
 		return new TimedExpressionAwareResolvedTypes(this, context, times)
 	}
 	
-	override getFeature(XAbstractFeatureCall featureCall) {
+	override doGetFeature(XAbstractFeatureCall featureCall) {
 		try {
 			times.getFeatureTask.start
 			super.getFeature(featureCall)

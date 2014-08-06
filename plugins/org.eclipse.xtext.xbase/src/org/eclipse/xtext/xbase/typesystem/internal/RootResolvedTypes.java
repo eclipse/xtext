@@ -20,7 +20,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
-import org.eclipse.xtext.validation.IssueSeverities;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.typesystem.computation.IApplicableCandidate;
@@ -46,16 +45,11 @@ import com.google.common.collect.Sets;
  */
 public class RootResolvedTypes extends ResolvedTypes {
 
-	private final IFeatureScopeTracker featureScopeTracker;
-	
 	private Set<XExpression> toBeInferredRootExpressions;
-	
-	private IssueSeverities issueSeverities;
 
 	protected RootResolvedTypes(DefaultReentrantTypeResolver resolver, CancelIndicator monitor) {
-		super(resolver, monitor);
-		this.issueSeverities = resolver.getIssueSeverities();
-		this.featureScopeTracker = resolver.createFeatureScopeTracker(); 
+		super(new Shared(resolver, monitor));
+		this.shared.root = this;
 	}
 
 	public void resolveUnboundTypeParameters() {
@@ -216,16 +210,6 @@ public class RootResolvedTypes extends ResolvedTypes {
 		for(AbstractDiagnostic diagnostic: getQueuedDiagnostics()) {
 			acceptor.accept(diagnostic);
 		}
-	}
-	
-	@Override
-	protected IssueSeverities getSeverities() {
-		return issueSeverities;
-	}
-	
-	@Override
-	protected IFeatureScopeTracker getFeatureScopeTracker() {
-		return featureScopeTracker;
 	}
 	
 }

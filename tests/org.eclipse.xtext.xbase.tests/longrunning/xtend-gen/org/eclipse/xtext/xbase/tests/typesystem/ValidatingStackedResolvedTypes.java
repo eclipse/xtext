@@ -211,24 +211,6 @@ public class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
     return result;
   }
   
-  public LightweightTypeReference doGetDeclaredType(final JvmIdentifiableElement identifiable) {
-    final LightweightTypeReference result = super.doGetDeclaredType(identifiable);
-    boolean _and = false;
-    boolean _notEquals = (!Objects.equal(result, null));
-    if (!_notEquals) {
-      _and = false;
-    } else {
-      ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
-      boolean _isOwnedBy = result.isOwnedBy(_referenceOwner);
-      boolean _not = (!_isOwnedBy);
-      _and = _not;
-    }
-    if (_and) {
-      throw new IllegalArgumentException("result is not owned by this resolved types");
-    }
-    return result;
-  }
-  
   public LightweightTypeReference getMergedType(final List<LightweightTypeReference> types) {
     final Procedure1<LightweightTypeReference> _function = new Procedure1<LightweightTypeReference>() {
       public void apply(final LightweightTypeReference it) {
