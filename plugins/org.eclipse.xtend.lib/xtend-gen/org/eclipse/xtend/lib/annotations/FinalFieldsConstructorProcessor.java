@@ -13,6 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.Data;
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.TransformationParticipant;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
@@ -174,6 +175,16 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
     }
     
     public void addFinalFieldsConstructor(final MutableClassDeclaration it) {
+      ArrayList<TypeReference> _finalFieldsConstructorArgumentTypes = this.getFinalFieldsConstructorArgumentTypes(it);
+      boolean _isEmpty = _finalFieldsConstructorArgumentTypes.isEmpty();
+      if (_isEmpty) {
+        Type _findTypeGlobally = this.context.findTypeGlobally(FinalFieldsConstructor.class);
+        final AnnotationReference anno = it.findAnnotation(_findTypeGlobally);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("There are no final fields, this annotation has no effect");
+        this.context.addWarning(anno, _builder.toString());
+        return;
+      }
       boolean _hasFinalFieldsConstructor = this.hasFinalFieldsConstructor(it);
       if (_hasFinalFieldsConstructor) {
         String _constructorAlreadyExistsMessage = this.getConstructorAlreadyExistsMessage(it);
@@ -195,16 +206,27 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
     
     public void makeFinalFieldsConstructor(final MutableConstructorDeclaration it) {
       MutableTypeDeclaration _declaringType = it.getDeclaringType();
-      boolean _hasFinalFieldsConstructor = this.hasFinalFieldsConstructor(_declaringType);
+      ArrayList<TypeReference> _finalFieldsConstructorArgumentTypes = this.getFinalFieldsConstructorArgumentTypes(_declaringType);
+      boolean _isEmpty = _finalFieldsConstructorArgumentTypes.isEmpty();
+      if (_isEmpty) {
+        Type _findTypeGlobally = this.context.findTypeGlobally(FinalFieldsConstructor.class);
+        final AnnotationReference anno = it.findAnnotation(_findTypeGlobally);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("There are no final fields, this annotation has no effect");
+        this.context.addWarning(anno, _builder.toString());
+        return;
+      }
+      MutableTypeDeclaration _declaringType_1 = it.getDeclaringType();
+      boolean _hasFinalFieldsConstructor = this.hasFinalFieldsConstructor(_declaringType_1);
       if (_hasFinalFieldsConstructor) {
-        MutableTypeDeclaration _declaringType_1 = it.getDeclaringType();
-        String _constructorAlreadyExistsMessage = this.getConstructorAlreadyExistsMessage(_declaringType_1);
+        MutableTypeDeclaration _declaringType_2 = it.getDeclaringType();
+        String _constructorAlreadyExistsMessage = this.getConstructorAlreadyExistsMessage(_declaringType_2);
         this.context.addError(it, _constructorAlreadyExistsMessage);
         return;
       }
       Iterable<? extends MutableParameterDeclaration> _parameters = it.getParameters();
-      boolean _isEmpty = IterableExtensions.isEmpty(_parameters);
-      boolean _not = (!_isEmpty);
+      boolean _isEmpty_1 = IterableExtensions.isEmpty(_parameters);
+      boolean _not = (!_isEmpty_1);
       if (_not) {
         this.context.addError(it, "Parameter list must be empty");
       }
@@ -225,8 +247,8 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
         this.context.addError(it, "Body must be empty");
       }
       Iterable<? extends ResolvedParameter> _elvis = null;
-      MutableTypeDeclaration _declaringType_2 = it.getDeclaringType();
-      ResolvedConstructor _superConstructor = this.getSuperConstructor(_declaringType_2);
+      MutableTypeDeclaration _declaringType_3 = it.getDeclaringType();
+      ResolvedConstructor _superConstructor = this.getSuperConstructor(_declaringType_3);
       Iterable<? extends ResolvedParameter> _resolvedParameters = null;
       if (_superConstructor!=null) {
         _resolvedParameters=_superConstructor.getResolvedParameters();
@@ -247,8 +269,8 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
       };
       IterableExtensions.forEach(superParameters, _function);
       final HashMap<MutableFieldDeclaration, MutableParameterDeclaration> fieldToParameter = CollectionLiterals.<MutableFieldDeclaration, MutableParameterDeclaration>newHashMap();
-      MutableTypeDeclaration _declaringType_3 = it.getDeclaringType();
-      Iterable<? extends MutableFieldDeclaration> _finalFields = this.getFinalFields(_declaringType_3);
+      MutableTypeDeclaration _declaringType_4 = it.getDeclaringType();
+      Iterable<? extends MutableFieldDeclaration> _finalFields = this.getFinalFields(_declaringType_4);
       final Procedure1<MutableFieldDeclaration> _function_1 = new Procedure1<MutableFieldDeclaration>() {
         public void apply(final MutableFieldDeclaration p) {
           p.markAsInitializedBy(it);

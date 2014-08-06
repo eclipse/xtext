@@ -18,6 +18,7 @@ import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -401,6 +402,24 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
         }
       };
       this.compilationTestHelper.compile(source, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testNoFinalFields() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor");
+      _builder.newLine();
+      _builder.append("@FinalFieldsConstructor ");
+      _builder.newLine();
+      _builder.append("class Foo{}");
+      _builder.newLine();
+      final String source = _builder.toString();
+      XtendClass _clazz = this.clazz(source);
+      this._validationTestHelper.assertWarning(_clazz, XAnnotationsPackage.Literals.XANNOTATION, "user.issue", "no final fields");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

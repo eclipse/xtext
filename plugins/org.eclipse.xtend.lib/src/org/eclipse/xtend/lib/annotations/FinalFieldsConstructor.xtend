@@ -113,6 +113,11 @@ class FinalFieldsConstructorProcessor implements TransformationParticipant<Mutab
 		}
 
 		def addFinalFieldsConstructor(MutableClassDeclaration it) {
+			if (finalFieldsConstructorArgumentTypes.empty) {
+				val anno = findAnnotation(FinalFieldsConstructor.findTypeGlobally)
+				anno.addWarning('''There are no final fields, this annotation has no effect''')
+				return
+			}
 			if (hasFinalFieldsConstructor) {
 				addError(constructorAlreadyExistsMessage)
 				return
@@ -126,6 +131,11 @@ class FinalFieldsConstructorProcessor implements TransformationParticipant<Mutab
 		static val EMPTY_BODY = Pattern.compile("\\{\\s*\\}")
 
 		def makeFinalFieldsConstructor(MutableConstructorDeclaration it) {
+			if (declaringType.finalFieldsConstructorArgumentTypes.empty) {
+				val anno = findAnnotation(FinalFieldsConstructor.findTypeGlobally)
+				anno.addWarning('''There are no final fields, this annotation has no effect''')
+				return
+			}
 			if (declaringType.hasFinalFieldsConstructor) {
 				addError(declaringType.constructorAlreadyExistsMessage)
 				return
