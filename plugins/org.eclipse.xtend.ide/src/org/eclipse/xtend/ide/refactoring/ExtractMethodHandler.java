@@ -62,7 +62,7 @@ public class ExtractMethodHandler extends AbstractHandler {
 			if (editor != null) {
 				final ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
 				final IXtextDocument document = editor.getDocument();
-				document.readOnly(new IUnitOfWork.Void<XtextResource>() {
+				document.priorityReadOnly(new IUnitOfWork.Void<XtextResource>() {
 					@Override
 					public void process(XtextResource resource) throws Exception {
 						XtextResource copiedResource = resourceCopier.loadIntoNewResourceSet(resource);
