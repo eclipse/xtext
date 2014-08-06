@@ -197,6 +197,10 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 			throw new RuntimeException(e);
 		}
 	}
+	
+	public <T> T priorityReadOnly(IUnitOfWork<T, XtextResource> work) {
+		return readOnly(work);
+	}
 
 	public IResourceDescription getResourceDescription(Resource resource) {
 		assertSame(this.resource, resource);

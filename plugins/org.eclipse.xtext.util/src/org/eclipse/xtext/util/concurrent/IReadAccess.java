@@ -14,5 +14,16 @@ package org.eclipse.xtext.util.concurrent;
  */
 public interface IReadAccess<P> {
 	
-	public <T> T readOnly(IUnitOfWork<T,P> work);
+	<T> T readOnly(IUnitOfWork<T,P> work);
+	
+	/**
+	 * Cancels all cancelable readers before executing the {@link IUnitOfWork}.
+	 * For interactive jobs that need fastest possible execution.
+	 *   
+	 * @since 2.7
+	 * @see CancelableUnitOfWork
+	 */
+	interface Priority<P> {
+		<T> T priorityReadOnly(IUnitOfWork<T,P> work);
+	}
 }

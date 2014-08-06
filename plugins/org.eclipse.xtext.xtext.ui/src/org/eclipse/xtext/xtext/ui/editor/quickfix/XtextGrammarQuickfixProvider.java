@@ -199,7 +199,7 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 						public void apply(IModificationContext context) throws BadLocationException {
 							String replaceString = valueConverterService.toString(issue.getData()[0], "STRING");
 							IXtextDocument document = context.getXtextDocument();
-							final List<String> importedPackages = document.readOnly(new IUnitOfWork<List<String>, XtextResource>() {
+							final List<String> importedPackages = document.priorityReadOnly(new IUnitOfWork<List<String>, XtextResource>() {
 
 								public List<String> exec(XtextResource state) throws Exception {
 									IResourceDescriptions descriptions = resourceDescriptionsProvider.getResourceDescriptions(state);

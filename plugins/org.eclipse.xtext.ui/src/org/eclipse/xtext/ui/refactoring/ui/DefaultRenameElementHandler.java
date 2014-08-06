@@ -68,7 +68,7 @@ public class DefaultRenameElementHandler extends AbstractHandler implements IRen
 			if (editor != null) {
 				syncUtil.totalSync(preferences.isSaveAllBeforeRefactoring(), renameRefactoringController.getActiveLinkedMode() == null);
 				final ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
-				IRenameElementContext renameElementContext = editor.getDocument().readOnly(
+				IRenameElementContext renameElementContext = editor.getDocument().priorityReadOnly(
 						new IUnitOfWork<IRenameElementContext, XtextResource>() {
 							public IRenameElementContext exec(XtextResource resource) throws Exception {
 								EObject selectedElement = eObjectAtOffsetHelper.resolveElementAt(resource,

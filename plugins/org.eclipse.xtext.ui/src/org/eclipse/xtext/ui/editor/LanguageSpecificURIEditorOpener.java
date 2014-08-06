@@ -95,7 +95,7 @@ public class LanguageSpecificURIEditorOpener implements IURIEditorOpener {
 			final int indexInList, final boolean select) {
 		final XtextEditor xtextEditor = EditorUtils.getXtextEditor(openEditor);
 		if (xtextEditor != null) {
-			xtextEditor.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
+			xtextEditor.getDocument().priorityReadOnly(new IUnitOfWork.Void<XtextResource>() {
 				@Override
 				public void process(XtextResource resource) throws Exception {
 					if (resource != null) {

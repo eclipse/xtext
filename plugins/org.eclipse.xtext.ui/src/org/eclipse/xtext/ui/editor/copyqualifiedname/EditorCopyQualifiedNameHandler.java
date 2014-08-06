@@ -34,7 +34,7 @@ public class EditorCopyQualifiedNameHandler extends AbstractCopyQualifiedNameHan
 			return null;
 		}
 		final ITextSelection selection = getTextSelection(activeXtextEditor);
-		return activeXtextEditor.getDocument().readOnly(new IUnitOfWork<String, XtextResource>() {
+		return activeXtextEditor.getDocument().priorityReadOnly(new IUnitOfWork<String, XtextResource>() {
 
 			public String exec(XtextResource xTextResource) throws Exception {
 				EObject context = getContext(selection, xTextResource);

@@ -108,7 +108,7 @@ public class RepeatedContentAssistProcessor extends XtextContentAssistProcessor 
 		if (getContentProposalProvider() == null)
 			return null;
 		
-		ICompletionProposal[] result = document.readOnly(proposalComputer);
+		ICompletionProposal[] result = document.priorityReadOnly(proposalComputer);
 		Arrays.sort(result, getCompletionProposalComparator());
 		result = getCompletionProposalPostProcessor().postProcess(result);
 		return result;

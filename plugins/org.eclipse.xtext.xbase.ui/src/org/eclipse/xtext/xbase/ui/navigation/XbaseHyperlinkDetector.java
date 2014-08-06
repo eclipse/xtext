@@ -49,7 +49,7 @@ public class XbaseHyperlinkDetector extends DefaultHyperlinkDetector {
 		IHyperlink[] detectedHyperlinks = super.detectHyperlinks(textViewer, region, canShowMultipleHyperlinks);
 		IHyperlink  implementatorLink= null;
 		if(canShowMultipleHyperlinks) {
-			 implementatorLink =  ((IXtextDocument)textViewer.getDocument()).readOnly(new IUnitOfWork<IHyperlink ,XtextResource>() {
+			 implementatorLink =  ((IXtextDocument)textViewer.getDocument()).priorityReadOnly(new IUnitOfWork<IHyperlink ,XtextResource>() {
 				public IHyperlink  exec(XtextResource resource) throws Exception {
 					IRegion word = JavaWordFinder.findWord(textViewer.getDocument(), region.getOffset());
 					JvmIdentifiableElement jvmIdentifiableElement = jvmElementAtOffsetHelper.getJvmIdentifiableElement(resource, region.getOffset());

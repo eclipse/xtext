@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.AssertionFailedException;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -29,8 +30,10 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapperExtension;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.TerminalsTokenTypeToPartitionMapper;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegion;
+import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.common.collect.Sets;
@@ -46,6 +49,8 @@ public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 	
 	@Inject
 	private ILocationInFileProvider locationInFileProvider;
+	
+	private CancelIndicator cancelIndicator;
 	
 	/**
 	 * @since 2.4
@@ -64,11 +69,18 @@ public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 	}
 	
 	public Collection<FoldedPosition> getFoldingRegions(final IXtextDocument xtextDocument) {
-		return xtextDocument.readOnly(new IUnitOfWork<Collection<FoldedPosition>, XtextResource>() {
-			public Collection<FoldedPosition> exec(XtextResource xtextResource) throws Exception {
+		return xtextDocument.readOnly(new CancelableUnitOfWork<Collection<FoldedPosition>, XtextResource>() {
+			@Override
+			public Collection<FoldedPosition> exec(XtextResource xtextResource, CancelIndicator cancelIndicator)
+					throws Exception {
 				if (xtextResource == null)
 					return Collections.emptyList();
-				return doGetFoldingRegions(xtextDocument, xtextResource);
+				try {
+					DefaultFoldingRegionProvider.this.cancelIndicator = cancelIndicator;
+					return doGetFoldingRegions(xtextDocument, xtextResource);
+				} finally {
+					DefaultFoldingRegionProvider.this.cancelIndicator = null;
+				}
 			}
 		});
 	}
@@ -99,6 +111,8 @@ public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 			if(rootASTElement != null){
 				TreeIterator<EObject> allContents = rootASTElement.eAllContents();
 				while (allContents.hasNext()) {
+					if (cancelIndicator.isCanceled())
+						throw new OperationCanceledException();
 					EObject eObject = allContents.next();
 					if (isHandled(eObject)) {
 						computeObjectFolding(eObject, foldingRegionAcceptor);
@@ -133,6 +147,8 @@ public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 			ITypedRegion[] typedRegions = xtextDocument.computePartitioning(
 					IDocumentExtension3.DEFAULT_PARTITIONING, 0, xtextDocument.getLength(), false);
 			for (ITypedRegion typedRegion : typedRegions) {
+				if (cancelIndicator.isCanceled())
+					throw new OperationCanceledException();
 				if (tokenTypeToPartitionTypeMapperExtension.isMultiLineComment(typedRegion.getType())) {
 					int offset = typedRegion.getOffset();
 					int length = typedRegion.getLength();

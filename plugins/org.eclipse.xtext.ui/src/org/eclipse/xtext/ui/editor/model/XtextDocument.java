@@ -94,6 +94,13 @@ public class XtextDocument extends Document implements IXtextDocument {
 		return stateAccess.readOnly(work);
 	}
 	
+	/**
+	 * @since 2.7
+	 */
+	public <T> T priorityReadOnly(IUnitOfWork<T, XtextResource> work) {
+		return stateAccess.priorityReadOnly(work);
+	}
+	
 	private final static IUnitOfWork.Void<XtextResource> noWork = new IUnitOfWork.Void<XtextResource>() {
 		@Override
 		public void process(XtextResource state) throws Exception {}
@@ -198,7 +205,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		return false;
 	}
 	
-	private static class ReaderMonitor implements CancelIndicator {
+	private static class ReaderCancelIndicator implements CancelIndicator {
 
 		private boolean isCanceled = false;
 
@@ -211,7 +218,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		}
 	}
 
-	private volatile ReaderMonitor readerMonitor = new ReaderMonitor();
+	private volatile ReaderCancelIndicator readerCancelIndicator = new ReaderCancelIndicator();
 	
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
@@ -311,14 +318,14 @@ public class XtextDocument extends Document implements IXtextDocument {
 			if (validationJob!=null) {
 				validationJob.cancel();
 			}
-			readerMonitor.setCanceled(true);
+			readerCancelIndicator.setCanceled(true);
 			if (log.isTraceEnabled())
 				log.trace("Trying to acquire write lock...");
 			writeLock.lock();
 			if (log.isTraceEnabled())
 				log.trace("...write lock acquired.");
 			// next reader will get a fresh monitor instance
-			readerMonitor = new ReaderMonitor();
+			readerCancelIndicator = new ReaderCancelIndicator();
 		}
 
 		private void releaseWriteLock() {
@@ -357,6 +364,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 								ensureThatStateIsNotReturned(exec, work);
 								--potentialUpdaterCount;
 								if(potentialUpdaterCount == 0 && !(work instanceof ReconcilingUnitOfWork))
+									// changes of a ReconcilingUnitOfWork will be handled when the resulting document changes are applied   
 									notifyModelListeners(state);
 							} finally {
 								releaseReadLock();
@@ -378,14 +386,31 @@ public class XtextDocument extends Document implements IXtextDocument {
 		}
 		
 		/**
+		 * 
+		 * @since 2.7
+		 */
+		public <T> T priorityReadOnly(IUnitOfWork<T, XtextResource> work) {
+			return internalReadOnly(work, true);
+		}
+		
+		/**
 		 * @since 2.4
 		 */
 		public <T> T readOnly(IUnitOfWork<T, XtextResource> work) {
-			if(hasPendingUpdates()) 
-				readerMonitor.setCanceled(true);
+			return internalReadOnly(work, false);
+		}
+
+		/**
+		 * @since 2.7
+		 */
+		protected <T> T internalReadOnly(IUnitOfWork<T, XtextResource> work, boolean isCancelReaders) {
+			if(hasPendingUpdates() || isCancelReaders) 
+				readerCancelIndicator.setCanceled(true);
 			XtextResource state = getState();
 			synchronized (getResourceLock()) {
 				acquireReadLock();
+				if(hasPendingUpdates() || isCancelReaders)
+					readerCancelIndicator = new ReaderCancelIndicator();
 				try {
 					potentialUpdaterCount++;
 					if (log.isDebugEnabled())
@@ -396,7 +421,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 						hadUpdates |= updateContentBeforeRead();
 					}
 					if(work instanceof CancelableUnitOfWork) 
-						((CancelableUnitOfWork<?, XtextResource>) work).setCancelIndicator(readerMonitor);
+						((CancelableUnitOfWork<?, XtextResource>) work).setCancelIndicator(readerCancelIndicator);
 					T exec = work.exec(state);
 					ensureThatStateIsNotReturned(exec, work);
 					return  exec;
@@ -406,7 +431,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 					throw new WrappedException(e);
 				} finally {
 					--potentialUpdaterCount;
-					if(potentialUpdaterCount == 0 && hadUpdates) { 
+					if(potentialUpdaterCount == 0 && (hadUpdates || isCancelReaders)) { 
 						hadUpdates = false;	
 						notifyModelListeners(resource);
 					}
@@ -417,7 +442,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 	}
 	
 	/**
-	 * Introduced in 2.7 to allow read-only transactions to be cancelable. The default implementation disabled
+	 * Introduced in 2.7 to allow read-only transactions to be cancelable. The default implementation disables
 	 * concurrent reads on the model. To re-enable concurrent reads, return a new {@link Object} on each call.
 	 * 
 	 * Caveat: Concurrent read is problematic in EMF because proxy resolution and resource un-/loading are considered

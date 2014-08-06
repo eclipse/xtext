@@ -37,7 +37,7 @@ public abstract class AstSelectionAction extends Action {
 	public void run() {
 		ITextSelection selection = (ITextSelection) xtextEditor.getSelectionProvider().getSelection();
 		ITextRegion currentEditorSelection = new TextRegion(selection.getOffset(), selection.getLength());
-		ITextRegion nextSelection = xtextEditor.getDocument().readOnly(createTextSelectionWork(currentEditorSelection));
+		ITextRegion nextSelection = xtextEditor.getDocument().priorityReadOnly(createTextSelectionWork(currentEditorSelection));
 		if (nextSelection == null || nextSelection == ITextRegion.EMPTY_REGION
 				|| nextSelection.equals(currentEditorSelection)) {
 			return;

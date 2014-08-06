@@ -123,7 +123,7 @@ public class XtendFormatterPreview implements Observer {
 							return values;
 						}});
 			XtextDocument document = editorHandle.getDocument();
-			TextEdit textEdit = document.readOnly(unitOfWork);
+			TextEdit textEdit = document.priorityReadOnly(unitOfWork);
 			try {
 				textEdit.apply(document);
 			} catch (MalformedTreeException e) {

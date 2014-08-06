@@ -215,7 +215,7 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 	 */
 	public void scheduleRefresh() {
 		if (getTreeViewer() != null) {
-			IOutlineNode rootNode = document.readOnly(new IUnitOfWork<IOutlineNode, XtextResource>() {
+			IOutlineNode rootNode = document.priorityReadOnly(new IUnitOfWork<IOutlineNode, XtextResource>() {
 				public IOutlineNode exec(XtextResource state) throws Exception {
 					IOutlineNode rootNode = treeProvider.createRoot(document);
 					createChildrenRecursively(rootNode.getChildren());
