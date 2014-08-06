@@ -339,6 +339,10 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		}
 	}
 
+	public <T> T priorityReadOnly(IUnitOfWork<T, XtextResource> work) {
+		return readOnly(work);
+	}
+
 	public Shell getShell() {
 		fail("Unexpected call");
 		return null;

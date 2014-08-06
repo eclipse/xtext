@@ -102,7 +102,7 @@ public class GlobalURIEditorOpener implements IURIEditorOpener {
 		final XtextEditor xtextEditor = EditorUtils.getXtextEditor(openEditor);
 		if (xtextEditor != null) {
 			if (uri.fragment() != null) {
-				xtextEditor.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
+				xtextEditor.getDocument().priorityReadOnly(new IUnitOfWork.Void<XtextResource>() {
 					@Override
 					public void process(XtextResource resource) throws Exception {
 						if (resource != null) {

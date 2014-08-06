@@ -19,7 +19,7 @@ import org.eclipse.xtext.util.concurrent.IWriteAccess;
  * @author Sven Efftinge
  * @author Jan Koehnlein
  */
-public interface IXtextDocument extends IDocument, IDocumentExtension3, IReadAccess<XtextResource>, IWriteAccess<XtextResource> {
+public interface IXtextDocument extends IDocument, IDocumentExtension3, IReadAccess<XtextResource>, IReadAccess.Priority<XtextResource>, IWriteAccess<XtextResource> {
 
 	public <T> T getAdapter(Class<T> adapterType);
 	
