@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.editor.syntaxcoloring;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -30,6 +31,7 @@ import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.reconciler.XtextReconcilerDebugger;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
 /**
@@ -56,6 +58,43 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 	private final List<AttributedPosition> addedPositions = new ArrayList<AttributedPosition>();
 	/** Background job's removed highlighted positions */
 	private List<AttributedPosition> removedPositions = new ArrayList<AttributedPosition>();
+	
+	private static class PositionHandle {
+		private final int offset;
+		private final int length;
+		private final TextAttribute textAttribute;
+		private PositionHandle(int offset, int length, TextAttribute textAttribute) {
+			this.offset = offset;
+			this.length = length;
+			this.textAttribute = textAttribute;
+		}
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + length;
+			result = prime * result + offset;
+			result = prime * result + ((textAttribute == null) ? 0 : textAttribute.hashCode());
+			return result;
+		}
+		
+		/**
+		 * @see AttributedPosition#isEqual(int, int, TextAttribute)
+		 */
+		@Override
+		public boolean equals(Object obj) {
+			if (obj == null)
+				return false;
+			if (obj == this)
+				return true;
+			PositionHandle other = (PositionHandle) obj;
+			return offset == other.offset && length == other.length && textAttribute == other.textAttribute;
+		}
+		
+	}
+	
+	private Map<PositionHandle, Integer> handleToListIndex = Maps.newHashMap();
+	
 	/** Number of removed positions */
 	private int removedPositionCount;
 
@@ -78,6 +117,10 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 	private void startReconcilingPositions() {
 		presenter.addAllPositions(removedPositions);
 		removedPositionCount = removedPositions.size();
+		for(int i = 0; i < removedPositionCount; i++) {
+			AttributedPosition position = removedPositions.get(i);
+			handleToListIndex.put(new PositionHandle(position.getOffset(), position.getLength(), position.getHighlighting()), i);
+		}
 	}
 
 	/**
@@ -115,17 +158,17 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 		if (highlighting == null)
 			return;
 		boolean isExisting= false;
-		// TODO: use binary search
-		for (int i= 0, n= removedPositions.size(); i < n; i++) {
-			AttributedPosition position= removedPositions.get(i);
-			if (position == null)
-				continue;
-			if (position.isEqual(offset, length, highlighting)) {
-				isExisting= true;
-				removedPositions.set(i, null);
-				removedPositionCount--;
-				break;
+		
+		PositionHandle handle = new PositionHandle(offset, length, highlighting);
+		Integer index = handleToListIndex.remove(handle);
+		if (index != null) {
+			AttributedPosition position= removedPositions.get(index);
+			if (position == null || !position.isEqual(offset, length, highlighting)) {
+				throw new IllegalStateException();
 			}
+			isExisting = true;
+			removedPositions.set(index, null);
+			removedPositionCount--;
 		}
 
 		if (!isExisting && presenter != null) { // in case we have been uninstalled due to exceptions
@@ -181,6 +224,7 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 	private void stopReconcilingPositions() {
 		removedPositions.clear();
 		removedPositionCount = 0;
+		handleToListIndex.clear();
 		addedPositions.clear();
 	}
 
