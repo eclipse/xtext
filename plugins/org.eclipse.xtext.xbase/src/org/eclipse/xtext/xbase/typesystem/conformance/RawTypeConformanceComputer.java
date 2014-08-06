@@ -18,7 +18,9 @@ import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
@@ -33,6 +35,7 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
+import org.eclipse.xtext.xbase.typesystem.util.RecursionGuard;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
@@ -761,18 +764,18 @@ public class RawTypeConformanceComputer {
 			return flags;
 		}
 		if ((flags & (ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING)) != 0) {
-			Primitive leftPrimitiveKind = left.getPrimitiveKind();
-			if (leftPrimitiveKind != null) {
-				Primitive rightPrimitiveKind = right.getPrimitiveKind();
-				if (rightPrimitiveKind != null) {
+			int leftPrimitiveKind = internalGetPrimitiveKind(left);
+			if (leftPrimitiveKind != PRIMITIVE_NONE) {
+				int rightPrimitiveKind = internalGetPrimitiveKind(right);
+				if (rightPrimitiveKind != PRIMITIVE_NONE) {
 					if ((flags & ALLOW_PRIMITIVE_WIDENING) != 0) {
 						if (isWideningConversion(leftPrimitiveKind, rightPrimitiveKind)) {
 							return flags | SUCCESS | PRIMITIVE_WIDENING;
 						}
 					}
 				} else if ((flags & ALLOW_UNBOXING) != 0) {
-					rightPrimitiveKind = right.getPrimitiveKindIfWrapperType();
-					if (rightPrimitiveKind != null) {
+					rightPrimitiveKind = internalGetPrimitiveKindFromWrapper(right);
+					if (rightPrimitiveKind != PRIMITIVE_NONE) {
 						if (rightPrimitiveKind == leftPrimitiveKind || isWideningConversion(leftPrimitiveKind, rightPrimitiveKind)) {
 							return flags | SUCCESS | UNBOXING;
 						}
@@ -866,46 +869,189 @@ public class RawTypeConformanceComputer {
 		return flags;
 	}
 	
-	private boolean isWideningConversion(Primitive leftPrimitiveKind, Primitive rightPrimitiveKind) {
+	private static final int PRIMITIVE_NONE = -1;
+	private static final int PRIMITIVE_BOOLEAN = 0;
+	private static final int PRIMITIVE_INT = 1;
+	private static final int PRIMITIVE_LONG = 2;
+	private static final int PRIMITIVE_DOUBLE = 3;
+	private static final int PRIMITIVE_CHAR = 4;
+	private static final int PRIMITIVE_BYTE = 5;
+	private static final int PRIMITIVE_SHORT = 6;
+	private static final int PRIMITIVE_FLOAT = 7;
+	private static final int PRIMITIVE_VOID = 8;
+	
+	private int internalGetPrimitiveKind(ParameterizedTypeReference typeReference) {
+		JvmType type = typeReference.getType();
+		if (type.eIsProxy())
+			return PRIMITIVE_NONE;
+		if (type.eClass() == TypesPackage.Literals.JVM_PRIMITIVE_TYPE) {
+			String name = type.getSimpleName();
+			switch (name.length()) {
+				case 3:
+					if ("int".equals(name)) {
+						return PRIMITIVE_INT;
+					}
+					break;
+				case 4:
+					if ("long".equals(name)) {
+						return PRIMITIVE_LONG;
+					} else if ("char".equals(name)) {
+						return PRIMITIVE_CHAR;
+					} else if ("byte".equals(name)) {
+						return PRIMITIVE_BYTE;
+					}
+					break;
+				case 5:
+					if ("short".equals(name)) {
+						return PRIMITIVE_SHORT;
+					} else if ("float".equals(name)) {
+						return PRIMITIVE_FLOAT;
+					}
+					break;
+				case 6:
+					if ("double".equals(name)) {
+						return PRIMITIVE_DOUBLE;
+					}
+					break;
+				case 7:
+					if ("boolean".equals(name)) {
+						return PRIMITIVE_BOOLEAN;
+					}
+					break;
+			}
+		} else if (type.eClass() == TypesPackage.Literals.JVM_VOID) {
+			return PRIMITIVE_VOID;
+		}
+		return PRIMITIVE_NONE;
+	}
+	
+	private int internalGetPrimitiveKindFromWrapper(ParameterizedTypeReference typeReference) {
+		JvmType type = typeReference.getType();
+		if (type == null || type.eIsProxy()) {
+			return PRIMITIVE_NONE; 
+		}
+		if (type.eClass() != TypesPackage.Literals.JVM_GENERIC_TYPE) {
+			if (type.eClass() == TypesPackage.Literals.JVM_TYPE_PARAMETER) {
+				return internalGetPrimitiveKindFromWrapper((JvmTypeParameter)type, null);
+			}
+			return PRIMITIVE_NONE;
+		}
+		return internalGetPrimitiveKindFromWrapper((JvmGenericType)type);
+	}
+
+	protected int internalGetPrimitiveKindFromWrapper(JvmGenericType type) {
+		String name = type.getIdentifier();
+		switch (name.length()) {
+			case 17:
+				if ("java.lang.Integer".equals(name)) {
+					return PRIMITIVE_INT;
+				} else if ("java.lang.Boolean".equals(name)) {
+					return PRIMITIVE_BOOLEAN;
+				}
+				break;
+			case 14:
+				if ("java.lang.Long".equals(name)) {
+					return PRIMITIVE_LONG;
+				} else if ("java.lang.Byte".equals(name)) {
+					return PRIMITIVE_BYTE;
+				} else if ("java.lang.Void".equals(name)) {
+					return PRIMITIVE_VOID;
+				}
+				break;
+			case 15:
+				if ("java.lang.Short".equals(name)) {
+					return PRIMITIVE_SHORT;
+				} else if ("java.lang.Float".equals(name)) {
+					return PRIMITIVE_FLOAT;
+				}
+				break;
+			case 16:
+				if ("java.lang.Double".equals(name)) {
+					return PRIMITIVE_DOUBLE;
+				}
+				break;
+			case 19:
+				if ("java.lang.Character".equals(name)) {
+					return PRIMITIVE_CHAR;
+				}
+				break;
+		}
+		return PRIMITIVE_NONE;
+	}
+	
+	/* @Nullable */
+	private int internalGetPrimitiveKindFromWrapper(JvmTypeParameter type, /* @Nullable */ RecursionGuard<JvmTypeParameter> guard) {
+		if (type.eIsProxy())
+			return PRIMITIVE_NONE;
+		for(JvmTypeConstraint constraint: type.getConstraints()) {
+			if (constraint.eClass() == TypesPackage.Literals.JVM_UPPER_BOUND) {
+				JvmTypeReference upperBound = constraint.getTypeReference();
+				if (upperBound != null) {
+					JvmType upperBoundType = upperBound.getType();
+					if (upperBoundType.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
+						return internalGetPrimitiveKindFromWrapper((JvmGenericType) upperBoundType);
+					}
+					if (type == upperBoundType) {
+						return PRIMITIVE_NONE;
+					}
+					// guard against recursive deps
+					if (upperBoundType.eClass() == TypesPackage.Literals.JVM_TYPE_PARAMETER) {
+						JvmTypeParameter upperBoundTypeParameter = (JvmTypeParameter) upperBoundType;
+						if (guard == null) {
+							guard = new RecursionGuard<JvmTypeParameter>();
+							guard.tryNext(type);
+						}
+						if (guard.tryNext(upperBoundTypeParameter)) {
+							return internalGetPrimitiveKindFromWrapper(upperBoundTypeParameter, guard);
+						}
+						return PRIMITIVE_NONE;
+					}
+				}
+			}
+		}
+		return PRIMITIVE_NONE;
+	}
+	
+	private boolean isWideningConversion(int leftPrimitiveKind, int rightPrimitiveKind) {
 		switch (rightPrimitiveKind) {
-			case Byte :
+			case PRIMITIVE_BYTE :
 				switch (leftPrimitiveKind) { 
-					case Void:
-					case Byte:
+					case PRIMITIVE_VOID:
+					case PRIMITIVE_BYTE:
 						return false;
 					default:
 						return true;
 				}
-			case Short :
-			case Char :
+			case PRIMITIVE_SHORT :
+			case PRIMITIVE_CHAR :
 				switch (leftPrimitiveKind) { 
-					case Void:
-					case Byte:
-					case Short:
-					case Char:
+					case PRIMITIVE_VOID:
+					case PRIMITIVE_BYTE:
+					case PRIMITIVE_SHORT:
+					case PRIMITIVE_CHAR:
 						return false;
 					default:
 						return true;
 				}
-			case Int :
+			case PRIMITIVE_INT :
 				switch (leftPrimitiveKind) { 
-					case Long:
-					case Float:
-					case Double:
+					case PRIMITIVE_LONG:
+					case PRIMITIVE_FLOAT:
+					case PRIMITIVE_DOUBLE:
 						return true;
 					default:
 						return false;
 				}
-			case Long :
+			case PRIMITIVE_LONG :
 				switch (leftPrimitiveKind) { 
-					case Float:
-					case Double:
+					case PRIMITIVE_FLOAT:
+					case PRIMITIVE_DOUBLE:
 						return true;
 					default:
 						return false;
 				}
-			case Float :
-				return leftPrimitiveKind == Primitive.Double;
+			case PRIMITIVE_FLOAT :
+				return leftPrimitiveKind == PRIMITIVE_DOUBLE;
 			default :
 				return false;
 		}

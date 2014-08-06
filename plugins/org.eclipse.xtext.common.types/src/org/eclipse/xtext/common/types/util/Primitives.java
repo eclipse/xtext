@@ -37,7 +37,7 @@ public class Primitives {
 	private TypeReferences typeReferences;
 	
 	public static enum Primitive {
-		Byte,Short,Char,Int,Long,Float,Double,Void, Boolean
+		Byte, Short, Char, Int, Long, Float, Double, Void, Boolean
 	}
 	
 	public Primitive primitiveKind(JvmPrimitiveType primitiveType) {
