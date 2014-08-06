@@ -39,7 +39,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterators;
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
@@ -351,16 +350,40 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 	
 	public abstract IProject getLocalProject();
 	
-	protected Iterable<ILocationInResource> toLocations(Iterable<AbstractTraceRegion> allTraceRegions) {
-		List<ILocationInResource> result = Lists.newArrayList();
-		for (AbstractTraceRegion region : allTraceRegions) {
-			for (ILocationData locationData : region.getAssociatedLocations()) {
-				ILocationInResource locationInResource = createLocationInResourceFor(locationData, region);
-				if (locationInResource != null)
-					result.add(locationInResource);
+	protected Iterable<ILocationInResource> toLocations(final Iterable<AbstractTraceRegion> allTraceRegions) {
+		return new Iterable<ILocationInResource>() {
+
+			public Iterator<ILocationInResource> iterator() {
+				return new AbstractIterator<ILocationInResource>() {
+
+					private Iterator<AbstractTraceRegion> delegate = allTraceRegions.iterator();
+					private AbstractTraceRegion region;
+					private Iterator<ILocationData> locationDelegate;
+					
+					@Override
+					protected ILocationInResource computeNext() {
+						while(true) {
+							if (locationDelegate == null || !locationDelegate.hasNext()) {
+								if (delegate.hasNext()) {
+									region = delegate.next();
+									locationDelegate = region.getAssociatedLocations().iterator();
+								}
+							}
+							if (locationDelegate != null && locationDelegate.hasNext()) {
+								ILocationData locationData = locationDelegate.next();
+								ILocationInResource result = createLocationInResourceFor(locationData, region);
+								if (result != null) {
+									return result;
+								}
+								continue;
+							}
+							return endOfData();
+						}
+					}
+				};
 			}
-		}
-		return result;
+			
+		};
 	}
 
 	protected Iterable<AbstractTraceRegion> getAllTraceRegions(final ITextRegion localRegion) {
