@@ -45,7 +45,7 @@ public class TimedStackedResolvedTypes extends StackedResolvedTypes {
     return new TimedExpressionAwareResolvedTypes(this, context, this.times);
   }
   
-  public IFeatureLinkingCandidate getFeature(final XAbstractFeatureCall featureCall) {
+  public IFeatureLinkingCandidate doGetFeature(final XAbstractFeatureCall featureCall) {
     IFeatureLinkingCandidate _xtrycatchfinallyexpression = null;
     try {
       IFeatureLinkingCandidate _xblockexpression = null;
