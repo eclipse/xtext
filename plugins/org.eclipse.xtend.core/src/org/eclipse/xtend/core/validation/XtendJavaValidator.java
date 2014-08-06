@@ -20,6 +20,7 @@ import java.lang.annotation.ElementType;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -56,6 +57,7 @@ import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.core.xtend.XtendVariableDeclaration;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -130,11 +132,14 @@ import org.eclipse.xtext.xtype.XComputedTypeReference;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableListMultimap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
@@ -349,6 +354,57 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				}
 			}
 		}
+	}
+	
+	@Check
+	public void checkMultipleAnnotations(final XtendAnnotationTarget annotationTarget) {
+		if (annotationTarget.getAnnotations().size() == 0 || !isRelevantAnnotationTarget(annotationTarget)) {
+			return;
+		}
+		Iterable<XAnnotation> nonRepeatableAnnotations = filter(annotationTarget.getAnnotations(),
+				new Predicate<XAnnotation>() {
+					public boolean apply(XAnnotation input) {
+						JvmType annotationType = input.getAnnotationType();
+						if (annotationType instanceof JvmAnnotationType && !annotationType.eIsProxy()) {
+							for (Iterator<JvmAnnotationReference> iterator = ((JvmAnnotationType) annotationType)
+									.getAnnotations().iterator(); iterator.hasNext();) {
+								JvmAnnotationReference xAnnotation = iterator.next();
+								if ("java.lang.annotation.Repeatable".equals(xAnnotation.getAnnotation().getQualifiedName())){
+									return false;
+								}
+							}
+							return true;
+						}
+						return false;
+					}
+				});
+
+		ImmutableListMultimap<String, XAnnotation> groupByQualifiedName = Multimaps.index(nonRepeatableAnnotations,
+				new Function<XAnnotation, String>() {
+					public String apply(XAnnotation input) {
+						return input.getAnnotationType().getQualifiedName();
+					}
+				});
+
+		for (String qName : groupByQualifiedName.keySet()) {
+			ImmutableList<XAnnotation> sameType = groupByQualifiedName.get(qName);
+			if (sameType.size() > 1) {
+				for (XAnnotation xAnnotation : sameType) {
+					error("Multiple annotations of non-repeatable type @"
+							+ xAnnotation.getAnnotationType().getSimpleName()
+							+ ". Only annotation types marked @Repeatable can be used multiple times at one target.",
+							xAnnotation, null, INSIGNIFICANT_INDEX, ANNOTATION_MULTIPLE);
+				}
+			}
+		}
+	}
+
+	private boolean isRelevantAnnotationTarget(final XtendAnnotationTarget annotationTarget) {
+		return filter(targetInfos.keySet(), new Predicate<Class<?>>() {
+			public boolean apply(Class<?> input) {
+				return input.isInstance(annotationTarget);
+			}
+		}).size() > 0;
 	}
 
 	protected EObject getContainingAnnotationTarget(XAnnotation annotation) {
