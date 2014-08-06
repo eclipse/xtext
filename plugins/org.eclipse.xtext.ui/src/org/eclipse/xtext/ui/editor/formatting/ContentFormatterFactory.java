@@ -29,7 +29,7 @@ public class ContentFormatterFactory implements IContentFormatterFactory {
 	public class ContentFormatter implements IContentFormatter {
 		public void format(IDocument document, IRegion region) {
 			IXtextDocument doc = (IXtextDocument) document;
-			ReplaceRegion r = doc.readOnly(new FormattingUnitOfWork(region));
+			ReplaceRegion r = doc.priorityReadOnly(new FormattingUnitOfWork(region));
 			try {
 				if (r != null)
 					doc.replace(r.getOffset(), r.getLength(), r.getText());

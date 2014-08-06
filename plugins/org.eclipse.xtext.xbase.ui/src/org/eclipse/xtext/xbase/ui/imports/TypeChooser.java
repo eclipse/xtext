@@ -72,7 +72,7 @@ public class TypeChooser {
 	}
 
 	protected void revealInEditor(XtextEditor activeXtextEditor, Iterable<TypeUsage> usages, final XtextResource resource) {
-		boolean isRevealUsages = activeXtextEditor.getDocument().readOnly(new IUnitOfWork<Boolean, XtextResource>() {
+		boolean isRevealUsages = activeXtextEditor.getDocument().priorityReadOnly(new IUnitOfWork<Boolean, XtextResource>() {
 			public Boolean exec(XtextResource state) throws Exception {
 				return state.getURI().equals(resource.getURI());
 			}

@@ -37,7 +37,7 @@ public class XtendJavaDocContentAssistProcessor extends AbstractJavaDocContentAs
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
 		if(viewer instanceof XtextSourceViewer){
 			IXtextDocument document = (IXtextDocument) viewer.getDocument();
-			return document.readOnly(createCompletionProposalComputer(viewer, offset));
+			return document.priorityReadOnly(createCompletionProposalComputer(viewer, offset));
 		}
 		return new ICompletionProposal[0];
 	}

@@ -50,7 +50,7 @@ public class FormatterFactory implements IContentFormatterFactory {
 		public void format(IDocument document, IRegion region) {
 			IXtextDocument doc = (IXtextDocument) document;
 			
-			TextEdit r = doc.readOnly(new FormattingUnitOfWork(formatter, region, cfgProvider));
+			TextEdit r = doc.priorityReadOnly(new FormattingUnitOfWork(formatter, region, cfgProvider));
 			try {
 				if (r != null)
 					r.apply(document);

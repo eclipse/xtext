@@ -38,7 +38,7 @@ public abstract class AbstractJvmElementHandler extends AbstractHandler {
 		final XtextEditor editor = EditorUtils.getActiveXtextEditor(event);
 		if (editor != null) {
 			final ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
-			editor.getDocument().readOnly(new IUnitOfWork<Void, XtextResource>() {
+			editor.getDocument().priorityReadOnly(new IUnitOfWork<Void, XtextResource>() {
 				public java.lang.Void exec(XtextResource resource) throws Exception {
 					JvmIdentifiableElement jvmIdentifiable = jvmElementAtOffsetHelper.getJvmIdentifiableElement(resource, selection.getOffset());
 					if (jvmIdentifiable != null) {
