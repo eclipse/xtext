@@ -27,6 +27,6 @@ public class DeprecationUtil {
 	}
 
 	public static boolean isDeprecated(JvmAnnotationType jvmAnnotationType) {
-		return jvmAnnotationType.getQualifiedName().equals(Deprecated.class.getName());
+		return jvmAnnotationType.getIdentifier().equals(Deprecated.class.getName());
 	}
 }
