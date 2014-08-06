@@ -472,6 +472,16 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertError(clazz, XAnnotationsPackage.Literals.XANNOTATION, ANNOTATION_WRONG_TARGET);
 	}
 	
+	@Test public void testMultipleAnnotations_00() throws Exception {
+		XtendClass clazz = clazz("@testdata.Annotation4 @testdata.Annotation4  class X { }");
+		helper.assertError(clazz, XAnnotationsPackage.Literals.XANNOTATION, ANNOTATION_MULTIPLE, "@Annotation4");
+	}
+	
+	@Test public void testMultipleAnnotations_01() throws Exception {
+		XtendClass clazz = clazz("@testdata.Annotation1(value = true,children=#[@testdata.Annotation2('bar'), @testdata.Annotation2('foo')])  class X { }");
+		helper.assertNoErrors(clazz);
+	}
+
 	@Test public void testShadowingVariableNames_00() throws Exception {
 		XtendClass clazz = clazz("class X { def foo() { val this = 'foo' } }");
 		helper.assertError(clazz, XVARIABLE_DECLARATION, VARIABLE_NAME_DISALLOWED);
