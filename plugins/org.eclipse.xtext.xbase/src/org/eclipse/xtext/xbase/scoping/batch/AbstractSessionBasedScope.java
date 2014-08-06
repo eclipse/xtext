@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.scoping.batch;
 
 import java.beans.Introspector;
 import java.util.Collection;
+import java.util.List;
 import java.util.Locale;
 
 import org.eclipse.emf.common.util.URI;
@@ -66,7 +67,7 @@ public abstract class AbstractSessionBasedScope extends AbstractScope {
 		acceptor.accept(name.toString(), 1);
 	}
 	
-	protected Iterable<JvmFeature> findAllFeaturesByName(JvmType type, String simpleName, IResolvedFeatures.Provider resolvedFeaturesProvider) {
+	protected List<JvmFeature> findAllFeaturesByName(JvmType type, String simpleName, IResolvedFeatures.Provider resolvedFeaturesProvider) {
 		IResolvedFeatures resolvedFeatures = resolvedFeaturesProvider.getResolvedFeatures(type);
 		return resolvedFeatures.getAllFeatures(simpleName);
 	}

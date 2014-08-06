@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
@@ -31,7 +31,7 @@ public class ExpressionAwareStackedResolvedTypes extends StackedResolvedTypes {
 	}
 
 	protected void mergeLocalTypes() {
-		Collection<TypeData> result = basicGetExpressionTypes().get(expression);
+		List<TypeData> result = basicGetExpressionTypes().get(expression);
 		if (result != null && !result.isEmpty()) {
 			TypeData returnTypeData = mergeTypeData(expression, result, true, true);
 			TypeData actualTypeData = mergeTypeData(expression, result, false, true);

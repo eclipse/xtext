@@ -24,6 +24,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
 import org.junit.Ignore
 import org.junit.Test
+import org.eclipse.xtext.xbase.XNumberLiteral
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -75,7 +76,7 @@ class TypeComputationStateTest extends AbstractXbaseTestCase implements ITypeCom
 			assertEquals(types.toString, 1, types.filter[ !returnType ].size)
 		]
 	}
-	
+
 	@Ignore("TODO FixMe")
 	@Test
 	def void testTypeOnlyRegisteredOnce_03() {
@@ -89,6 +90,21 @@ class TypeComputationStateTest extends AbstractXbaseTestCase implements ITypeCom
 			val typesForMemberFeatureCall = expressionTypes.get(it as XExpression)
 			assertEquals(it + " " + typesForMemberFeatureCall.toString, 1, typesForMemberFeatureCall.filter[ returnType ].size)
 			assertEquals(typesForMemberFeatureCall.toString, 1, typesForMemberFeatureCall.filter[ !returnType ].size)
+		]
+	}
+	
+	@Test
+	def void testTypeOnlyRegisteredOnce_04() {
+		val expression = expression("1") as XNumberLiteral
+		resolver.initializeFrom(expression)
+		val resolution = new PublicResolvedTypes(resolver)
+		val any = new AnyTypeReference(resolution.getReferenceOwner())
+		new ExpressionBasedRootTypeComputationState(resolution, resolver.batchScopeProvider.newSession(expression.eResource), expression, any).computeTypes
+		val expressionTypes = resolution.basicGetExpressionTypes
+		expression.eAllContents.forEach [
+			val types = expressionTypes.get(it as XExpression)
+//			assertEquals(types.toString, 1, types.filter[ returnType ].size)
+			assertEquals(types.toString, 1, types.filter[ !returnType ].size)
 		]
 	}
 	
