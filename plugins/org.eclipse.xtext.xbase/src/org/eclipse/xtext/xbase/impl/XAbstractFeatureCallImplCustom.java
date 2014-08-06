@@ -29,6 +29,14 @@ import org.eclipse.xtext.xbase.XbasePackage;
  */
 public abstract class XAbstractFeatureCallImplCustom extends XAbstractFeatureCallImpl {
 	
+	private boolean isLinked = false;
+	
+	@Override
+	public void setFeature(JvmIdentifiableElement newFeature) {
+		isLinked = newFeature != null && !newFeature.eIsProxy();
+		super.setFeature(newFeature);
+	}
+	
 	@Override
 	public boolean isExplicitOperationCallOrBuilderSyntax() {
 		return true;
@@ -100,7 +108,10 @@ public abstract class XAbstractFeatureCallImplCustom extends XAbstractFeatureCal
 	 * Any features which rely on side effects done during linking of feature should call this method.
 	 */
 	protected void ensureFeatureLinked() {
-		// simply trigger linking
+		if (isLinked)
+			return;
+		
+		// simply trigger linking if not yet linked
 		getFeature();
 	}
 	
