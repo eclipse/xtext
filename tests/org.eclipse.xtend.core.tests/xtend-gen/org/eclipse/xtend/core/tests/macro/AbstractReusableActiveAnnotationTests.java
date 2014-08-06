@@ -39,6 +39,7 @@ import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclarator;
 import org.eclipse.xtend.lib.macro.declaration.Type;
+import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.services.Problem;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
@@ -73,6 +74,96 @@ public abstract class AbstractReusableActiveAnnotationTests {
   
   @Inject
   private ValidationTestHelper validator;
+  
+  @Test
+  public void testBug441081() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package bug441081");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.AbstractClassProcessor");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.Active");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.TransformationContext");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("interface GenericInterface {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def <T> T m()");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@Active(Bug441081Processor)");
+    _builder.newLine();
+    _builder.append("annotation Bug441081 {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Bug441081Processor extends AbstractClassProcessor {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("annotatedClass.implementedInterfaces = annotatedClass.implementedInterfaces + #[findTypeGlobally(GenericInterface).newTypeReference]");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("annotatedClass.addMethod(\"m\") [");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("returnType = addTypeParameter(\"T\", object).newTypeReference");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("body = \'");
+    _builder.append("\'\'return null;\'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("primarySourceElement = annotatedClass");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("bug441081/Bug441081.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import bug441081.Bug441081");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@Bug441081");
+    _builder_1.newLine();
+    _builder_1.append("class Bug441081Client {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("UserCode.xtend", _builder_1.toString());
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      public void apply(final CompilationUnitImpl it) {
+        TypeLookupImpl _typeLookup = it.getTypeLookup();
+        final MutableClassDeclaration c = _typeLookup.findClass("Bug441081Client");
+        MutableMethodDeclaration _findDeclaredMethod = c.findDeclaredMethod("m");
+        TypeReference _returnType = _findDeclaredMethod.getReturnType();
+        Type _type = _returnType.getType();
+        final TypeParameterDeclaration typeParam = ((TypeParameterDeclaration) _type);
+        Iterable<? extends TypeReference> _upperBounds = typeParam.getUpperBounds();
+        boolean _isEmpty = IterableExtensions.isEmpty(_upperBounds);
+        Assert.assertFalse(_isEmpty);
+        XtendFile _xtendFile = it.getXtendFile();
+        AbstractReusableActiveAnnotationTests.this.validator.assertNoIssues(_xtendFile);
+      }
+    };
+    this.assertProcessing(_mappedTo, _mappedTo_1, _function);
+  }
   
   @Test
   public void testInferredMethodReturnType() {

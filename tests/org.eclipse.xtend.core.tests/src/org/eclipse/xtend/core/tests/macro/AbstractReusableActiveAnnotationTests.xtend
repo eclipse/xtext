@@ -23,12 +23,57 @@ import static org.junit.Assert.*
 import org.eclipse.xtend.lib.macro.declaration.Element
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtend.core.macro.declaration.MutableJvmClassDeclarationImpl
+import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration
 
 abstract class AbstractReusableActiveAnnotationTests {
 	
 	@Inject XtendGenerator generator
 	@Inject IGeneratorConfigProvider generatorConfigProvider
 	@Inject ValidationTestHelper validator
+	
+	@Test def void testBug441081() {
+		assertProcessing(
+			'bug441081/Bug441081.xtend' -> '''
+				package bug441081
+
+				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+				
+				interface GenericInterface {
+				  def <T> T m()
+				}
+				
+				@Active(Bug441081Processor)
+				annotation Bug441081 {
+				}
+				
+				class Bug441081Processor extends AbstractClassProcessor {
+				  override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
+				    annotatedClass.implementedInterfaces = annotatedClass.implementedInterfaces + #[findTypeGlobally(GenericInterface).newTypeReference]
+				    annotatedClass.addMethod("m") [
+				      returnType = addTypeParameter("T", object).newTypeReference
+				      body = '«»''return null;'«»''
+				      primarySourceElement = annotatedClass
+				    ]
+				  }
+				}
+			''',
+			'UserCode.xtend' -> '''
+				import bug441081.Bug441081
+				
+				@Bug441081
+				class Bug441081Client {
+				}
+			'''
+		) [
+			val c = typeLookup.findClass("Bug441081Client")
+			val typeParam = c.findDeclaredMethod('m').returnType.type as TypeParameterDeclaration
+			assertFalse(typeParam.upperBounds.empty)
+			validator.assertNoIssues(xtendFile)
+		]
+	}
 	
 	@Test def void testInferredMethodReturnType() {
 		assertProcessing(
