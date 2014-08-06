@@ -115,8 +115,9 @@ public class StackedResolvedTypes extends ResolvedTypes {
 
 	protected void mergeExpressionTypesIntoParent(ResolvedTypes parent) {
 		for(Map.Entry<XExpression, List<TypeData>> entry: basicGetExpressionTypes().entrySet()) {
-			for(TypeData typeData: entry.getValue()) {
-				parent.acceptType(entry.getKey(), prepareMerge(typeData, parent.getReferenceOwner()));
+			List<TypeData> list = entry.getValue();
+			for (int i = 0, size = list.size(); i < size; i++) {
+				parent.acceptType(entry.getKey(), prepareMerge(list.get(i), parent.getReferenceOwner()));
 			}
 		}
 	}
@@ -207,8 +208,8 @@ public class StackedResolvedTypes extends ResolvedTypes {
 
 	@Override
 	/* @Nullable */
-	protected Collection<TypeData> doGetTypeData(XExpression expression) {
-		Collection<TypeData> result = super.doGetTypeData(expression);
+	protected List<TypeData> doGetTypeData(XExpression expression) {
+		List<TypeData> result = super.doGetTypeData(expression);
 		if (result == null) {
 			result = parent.doGetTypeData(expression);
 		}

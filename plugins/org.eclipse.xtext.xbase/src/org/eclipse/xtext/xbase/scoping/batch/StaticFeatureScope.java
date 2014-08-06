@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import static com.google.common.collect.Iterables.*;
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -16,8 +14,8 @@ import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
-import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -60,9 +58,17 @@ public class StaticFeatureScope extends AbstractSessionBasedExecutableScope {
 			public void accept(String simpleName, int order) {
 				for(JvmType type: bucket.getTypes()) {
 					if (type instanceof JvmDeclaredType) {
-						Iterable<JvmFeature> features = findAllFeaturesByName(type, simpleName, bucket.getResolvedFeaturesProvider());
-						Iterable<? extends JvmFeature> filtered = order == 1 ? features : filter(features, JvmOperation.class);
-						Iterables.addAll(allFeatures, filtered);
+						List<JvmFeature> features = findAllFeaturesByName(type, simpleName, bucket.getResolvedFeaturesProvider());
+						if (order == 1) {
+							allFeatures.addAll(features);
+						} else {
+							for(int i = 0, size = features.size(); i < size; i++) {
+								JvmFeature feature = features.get(i);
+								if (feature.eClass() == TypesPackage.Literals.JVM_OPERATION) {
+									allFeatures.add(feature);
+								}
+							}
+						}
 					}
 				}
 			}
