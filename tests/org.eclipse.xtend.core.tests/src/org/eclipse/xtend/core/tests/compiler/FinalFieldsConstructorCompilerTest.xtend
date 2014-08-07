@@ -11,6 +11,7 @@ import com.google.inject.Inject
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Test
 import org.eclipse.xtend.core.xtend.XtendPackage
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -171,5 +172,14 @@ class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTest {
 				parameterTypes.toList == #[int, String]
 			])
 		]
+	}
+	
+	@Test def testNoFinalFields() {
+		val source = '''
+			import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+			@FinalFieldsConstructor 
+			class Foo{}
+		'''
+		source.clazz.assertWarning(XAnnotationsPackage.Literals.XANNOTATION, "user.issue", "no final fields")
 	}
 }
