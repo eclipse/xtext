@@ -3797,66 +3797,116 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	
-	private FileElements pFile;
-	private TypeElements pType;
-	private JvmSuperTypeReferenceElements pJvmSuperTypeReference;
-	private XFunctionSuperTypeRefElements pXFunctionSuperTypeRef;
-	private AnnotationFieldElements pAnnotationField;
-	private MemberElements pMember;
-	private TypeReferenceNoTypeArgsElements pTypeReferenceNoTypeArgs;
-	private FunctionIDElements pFunctionID;
-	private OperatorsElements pOperators;
-	private XtendEnumLiteralElements pXtendEnumLiteral;
-	private CommonModifierElements pCommonModifier;
-	private FieldModifierElements pFieldModifier;
-	private MethodModifierElements pMethodModifier;
-	private CreateExtensionInfoElements pCreateExtensionInfo;
-	private ValidIDElements pValidID;
-	private FeatureCallIDElements pFeatureCallID;
-	private InnerVarIDElements pInnerVarID;
-	private ParameterElements pParameter;
-	private XVariableDeclarationElements pXVariableDeclaration;
-	private XConstructorCallElements pXConstructorCall;
-	private XbaseConstructorCallElements pXbaseConstructorCall;
-	private JvmFormalParameterElements pJvmFormalParameter;
-	private FullJvmFormalParameterElements pFullJvmFormalParameter;
-	private XStringLiteralElements pXStringLiteral;
-	private XSwitchExpressionElements pXSwitchExpression;
-	private XExpressionOrSimpleConstructorCallElements pXExpressionOrSimpleConstructorCall;
-	private SimpleStringLiteralElements pSimpleStringLiteral;
-	private RichStringElements pRichString;
-	private RichStringLiteralElements pRichStringLiteral;
-	private RichStringLiteralStartElements pRichStringLiteralStart;
-	private RichStringLiteralInbetweenElements pRichStringLiteralInbetween;
-	private RichStringLiteralEndElements pRichStringLiteralEnd;
-	private InternalRichStringElements pInternalRichString;
-	private RichStringPartElements pRichStringPart;
-	private RichStringForLoopElements pRichStringForLoop;
-	private RichStringIfElements pRichStringIf;
-	private RichStringElseIfElements pRichStringElseIf;
-	private TerminalRule tID;
-	private TerminalRule tHEX_DIGIT;
-	private TerminalRule tUNICODE_ESCAPE;
-	private TerminalRule tRICH_TEXT;
-	private TerminalRule tRICH_TEXT_START;
-	private TerminalRule tRICH_TEXT_END;
-	private TerminalRule tRICH_TEXT_INBETWEEN;
-	private TerminalRule tCOMMENT_RICH_TEXT_INBETWEEN;
-	private TerminalRule tCOMMENT_RICH_TEXT_END;
-	private TerminalRule tIN_RICH_STRING;
-	private TerminalRule tIDENTIFIER_START;
-	private TerminalRule tIDENTIFIER_PART;
-	private TerminalRule tIDENTIFIER_PART_IMPL;
+	private final FileElements pFile;
+	private final TypeElements pType;
+	private final JvmSuperTypeReferenceElements pJvmSuperTypeReference;
+	private final XFunctionSuperTypeRefElements pXFunctionSuperTypeRef;
+	private final AnnotationFieldElements pAnnotationField;
+	private final MemberElements pMember;
+	private final TypeReferenceNoTypeArgsElements pTypeReferenceNoTypeArgs;
+	private final FunctionIDElements pFunctionID;
+	private final OperatorsElements pOperators;
+	private final XtendEnumLiteralElements pXtendEnumLiteral;
+	private final CommonModifierElements pCommonModifier;
+	private final FieldModifierElements pFieldModifier;
+	private final MethodModifierElements pMethodModifier;
+	private final CreateExtensionInfoElements pCreateExtensionInfo;
+	private final ValidIDElements pValidID;
+	private final FeatureCallIDElements pFeatureCallID;
+	private final InnerVarIDElements pInnerVarID;
+	private final ParameterElements pParameter;
+	private final XVariableDeclarationElements pXVariableDeclaration;
+	private final XConstructorCallElements pXConstructorCall;
+	private final XbaseConstructorCallElements pXbaseConstructorCall;
+	private final JvmFormalParameterElements pJvmFormalParameter;
+	private final FullJvmFormalParameterElements pFullJvmFormalParameter;
+	private final XStringLiteralElements pXStringLiteral;
+	private final XSwitchExpressionElements pXSwitchExpression;
+	private final XExpressionOrSimpleConstructorCallElements pXExpressionOrSimpleConstructorCall;
+	private final SimpleStringLiteralElements pSimpleStringLiteral;
+	private final RichStringElements pRichString;
+	private final RichStringLiteralElements pRichStringLiteral;
+	private final RichStringLiteralStartElements pRichStringLiteralStart;
+	private final RichStringLiteralInbetweenElements pRichStringLiteralInbetween;
+	private final RichStringLiteralEndElements pRichStringLiteralEnd;
+	private final InternalRichStringElements pInternalRichString;
+	private final RichStringPartElements pRichStringPart;
+	private final RichStringForLoopElements pRichStringForLoop;
+	private final RichStringIfElements pRichStringIf;
+	private final RichStringElseIfElements pRichStringElseIf;
+	private final TerminalRule tID;
+	private final TerminalRule tHEX_DIGIT;
+	private final TerminalRule tUNICODE_ESCAPE;
+	private final TerminalRule tRICH_TEXT;
+	private final TerminalRule tRICH_TEXT_START;
+	private final TerminalRule tRICH_TEXT_END;
+	private final TerminalRule tRICH_TEXT_INBETWEEN;
+	private final TerminalRule tCOMMENT_RICH_TEXT_INBETWEEN;
+	private final TerminalRule tCOMMENT_RICH_TEXT_END;
+	private final TerminalRule tIN_RICH_STRING;
+	private final TerminalRule tIDENTIFIER_START;
+	private final TerminalRule tIDENTIFIER_PART;
+	private final TerminalRule tIDENTIFIER_PART_IMPL;
 	
 	private final Grammar grammar;
 
-	private XbaseWithAnnotationsGrammarAccess gaXbaseWithAnnotations;
+	private final XbaseWithAnnotationsGrammarAccess gaXbaseWithAnnotations;
 
 	@Inject
 	public XtendGrammarAccess(GrammarProvider grammarProvider,
 		XbaseWithAnnotationsGrammarAccess gaXbaseWithAnnotations) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaXbaseWithAnnotations = gaXbaseWithAnnotations;
+		this.pFile = new FileElements();
+		this.pType = new TypeElements();
+		this.pJvmSuperTypeReference = new JvmSuperTypeReferenceElements();
+		this.pXFunctionSuperTypeRef = new XFunctionSuperTypeRefElements();
+		this.pAnnotationField = new AnnotationFieldElements();
+		this.pMember = new MemberElements();
+		this.pTypeReferenceNoTypeArgs = new TypeReferenceNoTypeArgsElements();
+		this.pFunctionID = new FunctionIDElements();
+		this.pOperators = new OperatorsElements();
+		this.pXtendEnumLiteral = new XtendEnumLiteralElements();
+		this.pCommonModifier = new CommonModifierElements();
+		this.pFieldModifier = new FieldModifierElements();
+		this.pMethodModifier = new MethodModifierElements();
+		this.pCreateExtensionInfo = new CreateExtensionInfoElements();
+		this.pValidID = new ValidIDElements();
+		this.pFeatureCallID = new FeatureCallIDElements();
+		this.pInnerVarID = new InnerVarIDElements();
+		this.pParameter = new ParameterElements();
+		this.pXVariableDeclaration = new XVariableDeclarationElements();
+		this.pXConstructorCall = new XConstructorCallElements();
+		this.pXbaseConstructorCall = new XbaseConstructorCallElements();
+		this.pJvmFormalParameter = new JvmFormalParameterElements();
+		this.pFullJvmFormalParameter = new FullJvmFormalParameterElements();
+		this.pXStringLiteral = new XStringLiteralElements();
+		this.pXSwitchExpression = new XSwitchExpressionElements();
+		this.pXExpressionOrSimpleConstructorCall = new XExpressionOrSimpleConstructorCallElements();
+		this.pSimpleStringLiteral = new SimpleStringLiteralElements();
+		this.pRichString = new RichStringElements();
+		this.pRichStringLiteral = new RichStringLiteralElements();
+		this.pRichStringLiteralStart = new RichStringLiteralStartElements();
+		this.pRichStringLiteralInbetween = new RichStringLiteralInbetweenElements();
+		this.pRichStringLiteralEnd = new RichStringLiteralEndElements();
+		this.pInternalRichString = new InternalRichStringElements();
+		this.pRichStringPart = new RichStringPartElements();
+		this.pRichStringForLoop = new RichStringForLoopElements();
+		this.pRichStringIf = new RichStringIfElements();
+		this.pRichStringElseIf = new RichStringElseIfElements();
+		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID");
+		this.tHEX_DIGIT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "HEX_DIGIT");
+		this.tUNICODE_ESCAPE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "UNICODE_ESCAPE");
+		this.tRICH_TEXT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "RICH_TEXT");
+		this.tRICH_TEXT_START = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "RICH_TEXT_START");
+		this.tRICH_TEXT_END = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "RICH_TEXT_END");
+		this.tRICH_TEXT_INBETWEEN = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "RICH_TEXT_INBETWEEN");
+		this.tCOMMENT_RICH_TEXT_INBETWEEN = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "COMMENT_RICH_TEXT_INBETWEEN");
+		this.tCOMMENT_RICH_TEXT_END = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "COMMENT_RICH_TEXT_END");
+		this.tIN_RICH_STRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "IN_RICH_STRING");
+		this.tIDENTIFIER_START = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "IDENTIFIER_START");
+		this.tIDENTIFIER_PART = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "IDENTIFIER_PART");
+		this.tIDENTIFIER_PART_IMPL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "IDENTIFIER_PART_IMPL");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -3889,7 +3939,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//File returns XtendFile:
 	//	("package" package=QualifiedName ";"?)? importSection=XImportSection? xtendTypes+=Type*;
 	public FileElements getFileAccess() {
-		return (pFile != null) ? pFile : (pFile = new FileElements());
+		return pFile;
 	}
 	
 	public ParserRule getFileRule() {
@@ -3908,7 +3958,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//	"}" | {XtendAnnotationType.annotationInfo=current} modifiers+=CommonModifier* "annotation" name=ValidID "{"
 	//	members+=AnnotationField* "}");
 	public TypeElements getTypeAccess() {
-		return (pType != null) ? pType : (pType = new TypeElements());
+		return pType;
 	}
 	
 	public ParserRule getTypeRule() {
@@ -3918,7 +3968,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//JvmSuperTypeReference returns types::JvmTypeReference:
 	//	JvmParameterizedTypeReference | XFunctionSuperTypeRef;
 	public JvmSuperTypeReferenceElements getJvmSuperTypeReferenceAccess() {
-		return (pJvmSuperTypeReference != null) ? pJvmSuperTypeReference : (pJvmSuperTypeReference = new JvmSuperTypeReferenceElements());
+		return pJvmSuperTypeReference;
 	}
 	
 	public ParserRule getJvmSuperTypeReferenceRule() {
@@ -3929,7 +3979,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//	(instanceContext?="(" (paramTypes+=JvmTypeReference ("," paramTypes+=JvmTypeReference)*)? ")")? "=>"
 	//	returnType=JvmTypeReference;
 	public XFunctionSuperTypeRefElements getXFunctionSuperTypeRefAccess() {
-		return (pXFunctionSuperTypeRef != null) ? pXFunctionSuperTypeRef : (pXFunctionSuperTypeRef = new XFunctionSuperTypeRefElements());
+		return pXFunctionSuperTypeRef;
 	}
 	
 	public ParserRule getXFunctionSuperTypeRefRule() {
@@ -3951,7 +4001,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//	"}" | {XtendAnnotationType.annotationInfo=current} modifiers+=CommonModifier* "annotation" name=ValidID "{"
 	//	members+=AnnotationField* "}");
 	public AnnotationFieldElements getAnnotationFieldAccess() {
-		return (pAnnotationField != null) ? pAnnotationField : (pAnnotationField = new AnnotationFieldElements());
+		return pAnnotationField;
 	}
 	
 	public ParserRule getAnnotationFieldRule() {
@@ -3984,7 +4034,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//	"}" | {XtendAnnotationType.annotationInfo=current} modifiers+=CommonModifier* "annotation" name=ValidID "{"
 	//	members+=AnnotationField* "}");
 	public MemberElements getMemberAccess() {
-		return (pMember != null) ? pMember : (pMember = new MemberElements());
+		return pMember;
 	}
 	
 	public ParserRule getMemberRule() {
@@ -3994,7 +4044,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//TypeReferenceNoTypeArgs returns types::JvmParameterizedTypeReference:
 	//	type=[types::JvmType|QualifiedName];
 	public TypeReferenceNoTypeArgsElements getTypeReferenceNoTypeArgsAccess() {
-		return (pTypeReferenceNoTypeArgs != null) ? pTypeReferenceNoTypeArgs : (pTypeReferenceNoTypeArgs = new TypeReferenceNoTypeArgsElements());
+		return pTypeReferenceNoTypeArgs;
 	}
 	
 	public ParserRule getTypeReferenceNoTypeArgsRule() {
@@ -4004,7 +4054,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//FunctionID:
 	//	ValidID | Operators;
 	public FunctionIDElements getFunctionIDAccess() {
-		return (pFunctionID != null) ? pFunctionID : (pFunctionID = new FunctionIDElements());
+		return pFunctionID;
 	}
 	
 	public ParserRule getFunctionIDRule() {
@@ -4015,7 +4065,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//	OpMultiAssign //	| OpAdd completely contained in OpUnary
 	//	| OpOr | OpAnd | OpEquality | OpCompare | OpOther | OpMulti | OpUnary | OpPostfix;
 	public OperatorsElements getOperatorsAccess() {
-		return (pOperators != null) ? pOperators : (pOperators = new OperatorsElements());
+		return pOperators;
 	}
 	
 	public ParserRule getOperatorsRule() {
@@ -4025,7 +4075,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//XtendEnumLiteral:
 	//	name=ValidID;
 	public XtendEnumLiteralElements getXtendEnumLiteralAccess() {
-		return (pXtendEnumLiteral != null) ? pXtendEnumLiteral : (pXtendEnumLiteral = new XtendEnumLiteralElements());
+		return pXtendEnumLiteral;
 	}
 	
 	public ParserRule getXtendEnumLiteralRule() {
@@ -4036,7 +4086,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//	"public" | "private" | "protected" | "package" | "abstract" | "static" | "dispatch" | "final" | "strictfp" | "native"
 	//	| "volatile" | "synchronized" | "transient";
 	public CommonModifierElements getCommonModifierAccess() {
-		return (pCommonModifier != null) ? pCommonModifier : (pCommonModifier = new CommonModifierElements());
+		return pCommonModifier;
 	}
 	
 	public ParserRule getCommonModifierRule() {
@@ -4046,7 +4096,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//FieldModifier:
 	//	"val" | "var";
 	public FieldModifierElements getFieldModifierAccess() {
-		return (pFieldModifier != null) ? pFieldModifier : (pFieldModifier = new FieldModifierElements());
+		return pFieldModifier;
 	}
 	
 	public ParserRule getFieldModifierRule() {
@@ -4056,7 +4106,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//MethodModifier:
 	//	"def" | "override";
 	public MethodModifierElements getMethodModifierAccess() {
-		return (pMethodModifier != null) ? pMethodModifier : (pMethodModifier = new MethodModifierElements());
+		return pMethodModifier;
 	}
 	
 	public ParserRule getMethodModifierRule() {
@@ -4066,7 +4116,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//CreateExtensionInfo:
 	//	"create" (name=ValidID ":")? createExpression=XExpression;
 	public CreateExtensionInfoElements getCreateExtensionInfoAccess() {
-		return (pCreateExtensionInfo != null) ? pCreateExtensionInfo : (pCreateExtensionInfo = new CreateExtensionInfoElements());
+		return pCreateExtensionInfo;
 	}
 	
 	public ParserRule getCreateExtensionInfoRule() {
@@ -4076,7 +4126,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//ValidID:
 	//	ID | "create" | "annotation" | "AFTER" | "BEFORE" | "SEPARATOR";
 	public ValidIDElements getValidIDAccess() {
-		return (pValidID != null) ? pValidID : (pValidID = new ValidIDElements());
+		return pValidID;
 	}
 	
 	public ParserRule getValidIDRule() {
@@ -4087,7 +4137,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//FeatureCallID:
 	//	InnerVarID | "extension";
 	public FeatureCallIDElements getFeatureCallIDAccess() {
-		return (pFeatureCallID != null) ? pFeatureCallID : (pFeatureCallID = new FeatureCallIDElements());
+		return pFeatureCallID;
 	}
 	
 	public ParserRule getFeatureCallIDRule() {
@@ -4099,7 +4149,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//	| "import" | "interface" | "override" | "package" | "public" | "private" | "protected" | "static" | "throws" |
 	//	"strictfp" | "native" | "volatile" | "synchronized" | "transient" | "AFTER" | "BEFORE" | "SEPARATOR";
 	public InnerVarIDElements getInnerVarIDAccess() {
-		return (pInnerVarID != null) ? pInnerVarID : (pInnerVarID = new InnerVarIDElements());
+		return pInnerVarID;
 	}
 	
 	public ParserRule getInnerVarIDRule() {
@@ -4110,7 +4160,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//	annotations+=XAnnotation* (extension?="extension" annotations+=XAnnotation*)? parameterType=JvmTypeReference
 	//	varArg?="..."? name=ValidID;
 	public ParameterElements getParameterAccess() {
-		return (pParameter != null) ? pParameter : (pParameter = new ParameterElements());
+		return pParameter;
 	}
 	
 	public ParserRule getParameterRule() {
@@ -4121,7 +4171,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//	=> ({XtendVariableDeclaration} ((writeable?="var" | "val") extension?="extension"? | extension?="extension"
 	//	(writeable?="var" | "val"))) (=> (type=JvmTypeReference name=InnerVarID) | name=InnerVarID) ("=" right=XExpression)?;
 	public XVariableDeclarationElements getXVariableDeclarationAccess() {
-		return (pXVariableDeclaration != null) ? pXVariableDeclaration : (pXVariableDeclaration = new XVariableDeclarationElements());
+		return pXVariableDeclaration;
 	}
 	
 	public ParserRule getXVariableDeclarationRule() {
@@ -4131,7 +4181,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//XConstructorCall returns xbase::XExpression:
 	//	XbaseConstructorCall (=> ({AnonymousClass.constructorCall=current} "{") members+=Member* "}")?;
 	public XConstructorCallElements getXConstructorCallAccess() {
-		return (pXConstructorCall != null) ? pXConstructorCall : (pXConstructorCall = new XConstructorCallElements());
+		return pXConstructorCall;
 	}
 	
 	public ParserRule getXConstructorCallRule() {
@@ -4144,7 +4194,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//	explicitConstructorCall?="(" (arguments+=XShortClosure | arguments+=XExpression ("," arguments+=XExpression)*)? ")")?
 	//	arguments+=XClosure?;
 	public XbaseConstructorCallElements getXbaseConstructorCallAccess() {
-		return (pXbaseConstructorCall != null) ? pXbaseConstructorCall : (pXbaseConstructorCall = new XbaseConstructorCallElements());
+		return pXbaseConstructorCall;
 	}
 	
 	public ParserRule getXbaseConstructorCallRule() {
@@ -4154,7 +4204,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//JvmFormalParameter returns XtendFormalParameter:
 	//	extension?="extension"? parameterType=JvmTypeReference? name=InnerVarID;
 	public JvmFormalParameterElements getJvmFormalParameterAccess() {
-		return (pJvmFormalParameter != null) ? pJvmFormalParameter : (pJvmFormalParameter = new JvmFormalParameterElements());
+		return pJvmFormalParameter;
 	}
 	
 	public ParserRule getJvmFormalParameterRule() {
@@ -4164,7 +4214,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//FullJvmFormalParameter returns XtendFormalParameter:
 	//	extension?="extension"? parameterType=JvmTypeReference name=InnerVarID;
 	public FullJvmFormalParameterElements getFullJvmFormalParameterAccess() {
-		return (pFullJvmFormalParameter != null) ? pFullJvmFormalParameter : (pFullJvmFormalParameter = new FullJvmFormalParameterElements());
+		return pFullJvmFormalParameter;
 	}
 	
 	public ParserRule getFullJvmFormalParameterRule() {
@@ -4174,7 +4224,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//XStringLiteral returns xbase::XExpression:
 	//	SimpleStringLiteral | RichString;
 	public XStringLiteralElements getXStringLiteralAccess() {
-		return (pXStringLiteral != null) ? pXStringLiteral : (pXStringLiteral = new XStringLiteralElements());
+		return pXStringLiteral;
 	}
 	
 	public ParserRule getXStringLiteralRule() {
@@ -4186,7 +4236,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//	(declaredParam=JvmFormalParameter ":")? switch=XExpressionOrSimpleConstructorCall) "{" cases+=XCasePart* ("default"
 	//	":" default=XExpression)? "}";
 	public XSwitchExpressionElements getXSwitchExpressionAccess() {
-		return (pXSwitchExpression != null) ? pXSwitchExpression : (pXSwitchExpression = new XSwitchExpressionElements());
+		return pXSwitchExpression;
 	}
 	
 	public ParserRule getXSwitchExpressionRule() {
@@ -4196,7 +4246,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//XExpressionOrSimpleConstructorCall returns xbase::XExpression:
 	//	XbaseConstructorCall | XExpression;
 	public XExpressionOrSimpleConstructorCallElements getXExpressionOrSimpleConstructorCallAccess() {
-		return (pXExpressionOrSimpleConstructorCall != null) ? pXExpressionOrSimpleConstructorCall : (pXExpressionOrSimpleConstructorCall = new XExpressionOrSimpleConstructorCallElements());
+		return pXExpressionOrSimpleConstructorCall;
 	}
 	
 	public ParserRule getXExpressionOrSimpleConstructorCallRule() {
@@ -4206,7 +4256,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//SimpleStringLiteral returns xbase::XExpression:
 	//	{xbase::XStringLiteral} value=STRING;
 	public SimpleStringLiteralElements getSimpleStringLiteralAccess() {
-		return (pSimpleStringLiteral != null) ? pSimpleStringLiteral : (pSimpleStringLiteral = new SimpleStringLiteralElements());
+		return pSimpleStringLiteral;
 	}
 	
 	public ParserRule getSimpleStringLiteralRule() {
@@ -4217,7 +4267,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//	{RichString} (expressions+=RichStringLiteral | expressions+=RichStringLiteralStart expressions+=RichStringPart?
 	//	(expressions+=RichStringLiteralInbetween expressions+=RichStringPart?)* expressions+=RichStringLiteralEnd);
 	public RichStringElements getRichStringAccess() {
-		return (pRichString != null) ? pRichString : (pRichString = new RichStringElements());
+		return pRichString;
 	}
 	
 	public ParserRule getRichStringRule() {
@@ -4227,7 +4277,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//RichStringLiteral returns xbase::XExpression:
 	//	{RichStringLiteral} value=RICH_TEXT;
 	public RichStringLiteralElements getRichStringLiteralAccess() {
-		return (pRichStringLiteral != null) ? pRichStringLiteral : (pRichStringLiteral = new RichStringLiteralElements());
+		return pRichStringLiteral;
 	}
 	
 	public ParserRule getRichStringLiteralRule() {
@@ -4237,7 +4287,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//RichStringLiteralStart returns xbase::XExpression:
 	//	{RichStringLiteral} value=RICH_TEXT_START;
 	public RichStringLiteralStartElements getRichStringLiteralStartAccess() {
-		return (pRichStringLiteralStart != null) ? pRichStringLiteralStart : (pRichStringLiteralStart = new RichStringLiteralStartElements());
+		return pRichStringLiteralStart;
 	}
 	
 	public ParserRule getRichStringLiteralStartRule() {
@@ -4247,7 +4297,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//RichStringLiteralInbetween returns xbase::XExpression:
 	//	{RichStringLiteral} (value=RICH_TEXT_INBETWEEN | value=COMMENT_RICH_TEXT_INBETWEEN);
 	public RichStringLiteralInbetweenElements getRichStringLiteralInbetweenAccess() {
-		return (pRichStringLiteralInbetween != null) ? pRichStringLiteralInbetween : (pRichStringLiteralInbetween = new RichStringLiteralInbetweenElements());
+		return pRichStringLiteralInbetween;
 	}
 	
 	public ParserRule getRichStringLiteralInbetweenRule() {
@@ -4257,7 +4307,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//RichStringLiteralEnd returns xbase::XExpression:
 	//	{RichStringLiteral} (value=RICH_TEXT_END | value=COMMENT_RICH_TEXT_END);
 	public RichStringLiteralEndElements getRichStringLiteralEndAccess() {
-		return (pRichStringLiteralEnd != null) ? pRichStringLiteralEnd : (pRichStringLiteralEnd = new RichStringLiteralEndElements());
+		return pRichStringLiteralEnd;
 	}
 	
 	public ParserRule getRichStringLiteralEndRule() {
@@ -4268,7 +4318,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//	{RichString} (expressions+=RichStringLiteralInbetween (expressions+=RichStringPart?
 	//	expressions+=RichStringLiteralInbetween)*);
 	public InternalRichStringElements getInternalRichStringAccess() {
-		return (pInternalRichString != null) ? pInternalRichString : (pInternalRichString = new InternalRichStringElements());
+		return pInternalRichString;
 	}
 	
 	public ParserRule getInternalRichStringRule() {
@@ -4278,7 +4328,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//RichStringPart returns xbase::XExpression:
 	//	XExpressionOrVarDeclaration | RichStringForLoop | RichStringIf;
 	public RichStringPartElements getRichStringPartAccess() {
-		return (pRichStringPart != null) ? pRichStringPart : (pRichStringPart = new RichStringPartElements());
+		return pRichStringPart;
 	}
 	
 	public ParserRule getRichStringPartRule() {
@@ -4290,7 +4340,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//	before=XExpression)? ("SEPARATOR" separator=XExpression)? ("AFTER" after=XExpression)?
 	//	eachExpression=InternalRichString "ENDFOR";
 	public RichStringForLoopElements getRichStringForLoopAccess() {
-		return (pRichStringForLoop != null) ? pRichStringForLoop : (pRichStringForLoop = new RichStringForLoopElements());
+		return pRichStringForLoop;
 	}
 	
 	public ParserRule getRichStringForLoopRule() {
@@ -4301,7 +4351,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//	{RichStringIf} "IF" if=XExpression then=InternalRichString elseIfs+=RichStringElseIf* ("ELSE"
 	//	else=InternalRichString)? "ENDIF";
 	public RichStringIfElements getRichStringIfAccess() {
-		return (pRichStringIf != null) ? pRichStringIf : (pRichStringIf = new RichStringIfElements());
+		return pRichStringIf;
 	}
 	
 	public ParserRule getRichStringIfRule() {
@@ -4311,7 +4361,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//RichStringElseIf:
 	//	"ELSEIF" if=XExpression then=InternalRichString;
 	public RichStringElseIfElements getRichStringElseIfAccess() {
-		return (pRichStringElseIf != null) ? pRichStringElseIf : (pRichStringElseIf = new RichStringElseIfElements());
+		return pRichStringElseIf;
 	}
 	
 	public ParserRule getRichStringElseIfRule() {
@@ -4321,61 +4371,61 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//terminal ID:
 	//	"^"? (IDENTIFIER_START | UNICODE_ESCAPE) (IDENTIFIER_PART | UNICODE_ESCAPE)*;
 	public TerminalRule getIDRule() {
-		return (tID != null) ? tID : (tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
+		return tID;
 	} 
 
 	//terminal fragment HEX_DIGIT:
 	//	"0".."9" | "a".."f" | "A".."F";
 	public TerminalRule getHEX_DIGITRule() {
-		return (tHEX_DIGIT != null) ? tHEX_DIGIT : (tHEX_DIGIT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "HEX_DIGIT"));
+		return tHEX_DIGIT;
 	} 
 
 	//terminal fragment UNICODE_ESCAPE:
 	//	"\\" "u" (HEX_DIGIT (HEX_DIGIT (HEX_DIGIT HEX_DIGIT?)?)?)?;
 	public TerminalRule getUNICODE_ESCAPERule() {
-		return (tUNICODE_ESCAPE != null) ? tUNICODE_ESCAPE : (tUNICODE_ESCAPE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "UNICODE_ESCAPE"));
+		return tUNICODE_ESCAPE;
 	} 
 
 	//terminal RICH_TEXT:
 	//	"\'\'\'" IN_RICH_STRING* ("\'\'\'" | ("\'" "\'"?)? EOF);
 	public TerminalRule getRICH_TEXTRule() {
-		return (tRICH_TEXT != null) ? tRICH_TEXT : (tRICH_TEXT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "RICH_TEXT"));
+		return tRICH_TEXT;
 	} 
 
 	//terminal RICH_TEXT_START:
 	//	"\'\'\'" IN_RICH_STRING* ("\'" "\'"?)? "л";
 	public TerminalRule getRICH_TEXT_STARTRule() {
-		return (tRICH_TEXT_START != null) ? tRICH_TEXT_START : (tRICH_TEXT_START = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "RICH_TEXT_START"));
+		return tRICH_TEXT_START;
 	} 
 
 	//terminal RICH_TEXT_END:
 	//	"╗" IN_RICH_STRING* ("\'\'\'" | ("\'" "\'"?)? EOF);
 	public TerminalRule getRICH_TEXT_ENDRule() {
-		return (tRICH_TEXT_END != null) ? tRICH_TEXT_END : (tRICH_TEXT_END = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "RICH_TEXT_END"));
+		return tRICH_TEXT_END;
 	} 
 
 	//terminal RICH_TEXT_INBETWEEN:
 	//	"╗" IN_RICH_STRING* ("\'" "\'"?)? "л";
 	public TerminalRule getRICH_TEXT_INBETWEENRule() {
-		return (tRICH_TEXT_INBETWEEN != null) ? tRICH_TEXT_INBETWEEN : (tRICH_TEXT_INBETWEEN = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "RICH_TEXT_INBETWEEN"));
+		return tRICH_TEXT_INBETWEEN;
 	} 
 
 	//terminal COMMENT_RICH_TEXT_INBETWEEN:
 	//	"лл" !("\n" | "\r")* ("\r"? "\n" IN_RICH_STRING* ("\'" "\'"?)? "л")?;
 	public TerminalRule getCOMMENT_RICH_TEXT_INBETWEENRule() {
-		return (tCOMMENT_RICH_TEXT_INBETWEEN != null) ? tCOMMENT_RICH_TEXT_INBETWEEN : (tCOMMENT_RICH_TEXT_INBETWEEN = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "COMMENT_RICH_TEXT_INBETWEEN"));
+		return tCOMMENT_RICH_TEXT_INBETWEEN;
 	} 
 
 	//terminal COMMENT_RICH_TEXT_END:
 	//	"лл" !("\n" | "\r")* ("\r"? "\n" IN_RICH_STRING* ("\'\'\'" | ("\'" "\'"?)? EOF) | EOF);
 	public TerminalRule getCOMMENT_RICH_TEXT_ENDRule() {
-		return (tCOMMENT_RICH_TEXT_END != null) ? tCOMMENT_RICH_TEXT_END : (tCOMMENT_RICH_TEXT_END = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "COMMENT_RICH_TEXT_END"));
+		return tCOMMENT_RICH_TEXT_END;
 	} 
 
 	//terminal fragment IN_RICH_STRING:
 	//	"\'\'" !("л" | "\'") | "\'" !("л" | "\'") | !("л" | "\'");
 	public TerminalRule getIN_RICH_STRINGRule() {
-		return (tIN_RICH_STRING != null) ? tIN_RICH_STRING : (tIN_RICH_STRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "IN_RICH_STRING"));
+		return tIN_RICH_STRING;
 	} 
 
 	//terminal fragment IDENTIFIER_START:
@@ -4406,13 +4456,13 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//	"?".."?" | "?".."?" | "?" | "?".."?" | "?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" |
 	//	"?".."?" | "?".."?";
 	public TerminalRule getIDENTIFIER_STARTRule() {
-		return (tIDENTIFIER_START != null) ? tIDENTIFIER_START : (tIDENTIFIER_START = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "IDENTIFIER_START"));
+		return tIDENTIFIER_START;
 	} 
 
 	//terminal fragment IDENTIFIER_PART:
 	//	IDENTIFIER_START | IDENTIFIER_PART_IMPL;
 	public TerminalRule getIDENTIFIER_PARTRule() {
-		return (tIDENTIFIER_PART != null) ? tIDENTIFIER_PART : (tIDENTIFIER_PART = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "IDENTIFIER_PART"));
+		return tIDENTIFIER_PART;
 	} 
 
 	//terminal fragment IDENTIFIER_PART_IMPL:
@@ -4430,7 +4480,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//	"?".."?" | "?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?".."?" | "?" |
 	//	"?".."?" | "?".."?" | "?".."?" | "?" | "?".."?" | "?".."?" | "?" | "?".."?" | "?".."?";
 	public TerminalRule getIDENTIFIER_PART_IMPLRule() {
-		return (tIDENTIFIER_PART_IMPL != null) ? tIDENTIFIER_PART_IMPL : (tIDENTIFIER_PART_IMPL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "IDENTIFIER_PART_IMPL"));
+		return tIDENTIFIER_PART_IMPL;
 	} 
 
 	//XAnnotation:

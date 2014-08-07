@@ -110,7 +110,7 @@ String gaElementAccessMethodeName(AbstractElement element):
  * @param rule
  * @return the simple class name
  */	
-String gaRuleAccesorClassName(AbstractRule rule):
+String gaRuleAccessorClassName(AbstractRule rule):
 	rule.gaRuleIdentifyer() + "Elements";
 	
 /**

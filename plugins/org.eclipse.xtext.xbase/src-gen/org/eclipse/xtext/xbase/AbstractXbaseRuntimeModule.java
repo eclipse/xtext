@@ -263,7 +263,7 @@ public abstract class AbstractXbaseRuntimeModule extends DefaultRuntimeModule {
 	public Class<? extends com.google.inject.Provider<org.eclipse.xtext.xbase.file.WorkspaceConfig>> provideWorkspaceConfig() {
 		return org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider.class;
 	}
-	
+
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.resource.ILocationInFileProvider> bindILocationInFileProvider() {
 		return org.eclipse.xtext.xbase.resource.XbaseLocationInFileProvider.class;

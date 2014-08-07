@@ -630,35 +630,58 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	
-	private JvmTypeReferenceElements pJvmTypeReference;
-	private ArrayBracketsElements pArrayBrackets;
-	private XFunctionTypeRefElements pXFunctionTypeRef;
-	private JvmParameterizedTypeReferenceElements pJvmParameterizedTypeReference;
-	private JvmArgumentTypeReferenceElements pJvmArgumentTypeReference;
-	private JvmWildcardTypeReferenceElements pJvmWildcardTypeReference;
-	private JvmUpperBoundElements pJvmUpperBound;
-	private JvmUpperBoundAndedElements pJvmUpperBoundAnded;
-	private JvmLowerBoundElements pJvmLowerBound;
-	private JvmLowerBoundAndedElements pJvmLowerBoundAnded;
-	private JvmTypeParameterElements pJvmTypeParameter;
-	private QualifiedNameElements pQualifiedName;
-	private QualifiedNameWithWildcardElements pQualifiedNameWithWildcard;
-	private ValidIDElements pValidID;
-	private XImportSectionElements pXImportSection;
-	private XImportDeclarationElements pXImportDeclaration;
-	private QualifiedNameInStaticImportElements pQualifiedNameInStaticImport;
-	private TerminalRule tID;
-	private TerminalRule tSTRING;
-	private TerminalRule tML_COMMENT;
-	private TerminalRule tSL_COMMENT;
-	private TerminalRule tWS;
-	private TerminalRule tANY_OTHER;
+	private final JvmTypeReferenceElements pJvmTypeReference;
+	private final ArrayBracketsElements pArrayBrackets;
+	private final XFunctionTypeRefElements pXFunctionTypeRef;
+	private final JvmParameterizedTypeReferenceElements pJvmParameterizedTypeReference;
+	private final JvmArgumentTypeReferenceElements pJvmArgumentTypeReference;
+	private final JvmWildcardTypeReferenceElements pJvmWildcardTypeReference;
+	private final JvmUpperBoundElements pJvmUpperBound;
+	private final JvmUpperBoundAndedElements pJvmUpperBoundAnded;
+	private final JvmLowerBoundElements pJvmLowerBound;
+	private final JvmLowerBoundAndedElements pJvmLowerBoundAnded;
+	private final JvmTypeParameterElements pJvmTypeParameter;
+	private final QualifiedNameElements pQualifiedName;
+	private final QualifiedNameWithWildcardElements pQualifiedNameWithWildcard;
+	private final ValidIDElements pValidID;
+	private final XImportSectionElements pXImportSection;
+	private final XImportDeclarationElements pXImportDeclaration;
+	private final QualifiedNameInStaticImportElements pQualifiedNameInStaticImport;
+	private final TerminalRule tID;
+	private final TerminalRule tSTRING;
+	private final TerminalRule tML_COMMENT;
+	private final TerminalRule tSL_COMMENT;
+	private final TerminalRule tWS;
+	private final TerminalRule tANY_OTHER;
 	
 	private final Grammar grammar;
 
 	@Inject
 	public XtypeGrammarAccess(GrammarProvider grammarProvider) {
 		this.grammar = internalFindGrammar(grammarProvider);
+		this.pJvmTypeReference = new JvmTypeReferenceElements();
+		this.pArrayBrackets = new ArrayBracketsElements();
+		this.pXFunctionTypeRef = new XFunctionTypeRefElements();
+		this.pJvmParameterizedTypeReference = new JvmParameterizedTypeReferenceElements();
+		this.pJvmArgumentTypeReference = new JvmArgumentTypeReferenceElements();
+		this.pJvmWildcardTypeReference = new JvmWildcardTypeReferenceElements();
+		this.pJvmUpperBound = new JvmUpperBoundElements();
+		this.pJvmUpperBoundAnded = new JvmUpperBoundAndedElements();
+		this.pJvmLowerBound = new JvmLowerBoundElements();
+		this.pJvmLowerBoundAnded = new JvmLowerBoundAndedElements();
+		this.pJvmTypeParameter = new JvmTypeParameterElements();
+		this.pQualifiedName = new QualifiedNameElements();
+		this.pQualifiedNameWithWildcard = new QualifiedNameWithWildcardElements();
+		this.pValidID = new ValidIDElements();
+		this.pXImportSection = new XImportSectionElements();
+		this.pXImportDeclaration = new XImportDeclarationElements();
+		this.pQualifiedNameInStaticImport = new QualifiedNameInStaticImportElements();
+		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID");
+		this.tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "STRING");
+		this.tML_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT");
+		this.tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT");
+		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS");
+		this.tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -688,7 +711,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	//	JvmParameterizedTypeReference => ({JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)* |
 	//	XFunctionTypeRef;
 	public JvmTypeReferenceElements getJvmTypeReferenceAccess() {
-		return (pJvmTypeReference != null) ? pJvmTypeReference : (pJvmTypeReference = new JvmTypeReferenceElements());
+		return pJvmTypeReference;
 	}
 	
 	public ParserRule getJvmTypeReferenceRule() {
@@ -698,7 +721,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	//ArrayBrackets:
 	//	"[" "]";
 	public ArrayBracketsElements getArrayBracketsAccess() {
-		return (pArrayBrackets != null) ? pArrayBrackets : (pArrayBrackets = new ArrayBracketsElements());
+		return pArrayBrackets;
 	}
 	
 	public ParserRule getArrayBracketsRule() {
@@ -708,7 +731,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	//XFunctionTypeRef:
 	//	("(" (paramTypes+=JvmTypeReference ("," paramTypes+=JvmTypeReference)*)? ")")? "=>" returnType=JvmTypeReference;
 	public XFunctionTypeRefElements getXFunctionTypeRefAccess() {
-		return (pXFunctionTypeRef != null) ? pXFunctionTypeRef : (pXFunctionTypeRef = new XFunctionTypeRefElements());
+		return pXFunctionTypeRef;
 	}
 	
 	public ParserRule getXFunctionTypeRefRule() {
@@ -719,7 +742,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	//	type=[JvmType|QualifiedName] ("<" arguments+=JvmArgumentTypeReference ("," arguments+=JvmArgumentTypeReference)*
 	//	">")?;
 	public JvmParameterizedTypeReferenceElements getJvmParameterizedTypeReferenceAccess() {
-		return (pJvmParameterizedTypeReference != null) ? pJvmParameterizedTypeReference : (pJvmParameterizedTypeReference = new JvmParameterizedTypeReferenceElements());
+		return pJvmParameterizedTypeReference;
 	}
 	
 	public ParserRule getJvmParameterizedTypeReferenceRule() {
@@ -729,7 +752,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	//JvmArgumentTypeReference returns JvmTypeReference:
 	//	JvmTypeReference | JvmWildcardTypeReference;
 	public JvmArgumentTypeReferenceElements getJvmArgumentTypeReferenceAccess() {
-		return (pJvmArgumentTypeReference != null) ? pJvmArgumentTypeReference : (pJvmArgumentTypeReference = new JvmArgumentTypeReferenceElements());
+		return pJvmArgumentTypeReference;
 	}
 	
 	public ParserRule getJvmArgumentTypeReferenceRule() {
@@ -740,7 +763,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	//	{JvmWildcardTypeReference} "?" (constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded* |
 	//	constraints+=JvmLowerBound constraints+=JvmLowerBoundAnded*)?;
 	public JvmWildcardTypeReferenceElements getJvmWildcardTypeReferenceAccess() {
-		return (pJvmWildcardTypeReference != null) ? pJvmWildcardTypeReference : (pJvmWildcardTypeReference = new JvmWildcardTypeReferenceElements());
+		return pJvmWildcardTypeReference;
 	}
 	
 	public ParserRule getJvmWildcardTypeReferenceRule() {
@@ -750,7 +773,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	//JvmUpperBound:
 	//	"extends" typeReference=JvmTypeReference;
 	public JvmUpperBoundElements getJvmUpperBoundAccess() {
-		return (pJvmUpperBound != null) ? pJvmUpperBound : (pJvmUpperBound = new JvmUpperBoundElements());
+		return pJvmUpperBound;
 	}
 	
 	public ParserRule getJvmUpperBoundRule() {
@@ -760,7 +783,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	//JvmUpperBoundAnded returns JvmUpperBound:
 	//	"&" typeReference=JvmTypeReference;
 	public JvmUpperBoundAndedElements getJvmUpperBoundAndedAccess() {
-		return (pJvmUpperBoundAnded != null) ? pJvmUpperBoundAnded : (pJvmUpperBoundAnded = new JvmUpperBoundAndedElements());
+		return pJvmUpperBoundAnded;
 	}
 	
 	public ParserRule getJvmUpperBoundAndedRule() {
@@ -770,7 +793,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	//JvmLowerBound:
 	//	"super" typeReference=JvmTypeReference;
 	public JvmLowerBoundElements getJvmLowerBoundAccess() {
-		return (pJvmLowerBound != null) ? pJvmLowerBound : (pJvmLowerBound = new JvmLowerBoundElements());
+		return pJvmLowerBound;
 	}
 	
 	public ParserRule getJvmLowerBoundRule() {
@@ -780,7 +803,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	//JvmLowerBoundAnded returns JvmLowerBound:
 	//	"&" typeReference=JvmTypeReference;
 	public JvmLowerBoundAndedElements getJvmLowerBoundAndedAccess() {
-		return (pJvmLowerBoundAnded != null) ? pJvmLowerBoundAnded : (pJvmLowerBoundAnded = new JvmLowerBoundAndedElements());
+		return pJvmLowerBoundAnded;
 	}
 	
 	public ParserRule getJvmLowerBoundAndedRule() {
@@ -790,7 +813,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	//JvmTypeParameter:
 	//	name=ValidID (constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*)?;
 	public JvmTypeParameterElements getJvmTypeParameterAccess() {
-		return (pJvmTypeParameter != null) ? pJvmTypeParameter : (pJvmTypeParameter = new JvmTypeParameterElements());
+		return pJvmTypeParameter;
 	}
 	
 	public ParserRule getJvmTypeParameterRule() {
@@ -800,7 +823,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	//QualifiedName:
 	//	ValidID ("." ValidID)*;
 	public QualifiedNameElements getQualifiedNameAccess() {
-		return (pQualifiedName != null) ? pQualifiedName : (pQualifiedName = new QualifiedNameElements());
+		return pQualifiedName;
 	}
 	
 	public ParserRule getQualifiedNameRule() {
@@ -810,7 +833,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	//QualifiedNameWithWildcard:
 	//	QualifiedName "." "*";
 	public QualifiedNameWithWildcardElements getQualifiedNameWithWildcardAccess() {
-		return (pQualifiedNameWithWildcard != null) ? pQualifiedNameWithWildcard : (pQualifiedNameWithWildcard = new QualifiedNameWithWildcardElements());
+		return pQualifiedNameWithWildcard;
 	}
 	
 	public ParserRule getQualifiedNameWithWildcardRule() {
@@ -820,7 +843,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	//ValidID:
 	//	ID;
 	public ValidIDElements getValidIDAccess() {
-		return (pValidID != null) ? pValidID : (pValidID = new ValidIDElements());
+		return pValidID;
 	}
 	
 	public ParserRule getValidIDRule() {
@@ -830,7 +853,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	//XImportSection:
 	//	importDeclarations+=XImportDeclaration+;
 	public XImportSectionElements getXImportSectionAccess() {
-		return (pXImportSection != null) ? pXImportSection : (pXImportSection = new XImportSectionElements());
+		return pXImportSection;
 	}
 	
 	public ParserRule getXImportSectionRule() {
@@ -842,7 +865,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	//	(wildcard?="*" | memberName=ValidID) | importedType=[JvmDeclaredType|QualifiedName] |
 	//	importedNamespace=QualifiedNameWithWildcard) ";"?;
 	public XImportDeclarationElements getXImportDeclarationAccess() {
-		return (pXImportDeclaration != null) ? pXImportDeclaration : (pXImportDeclaration = new XImportDeclarationElements());
+		return pXImportDeclaration;
 	}
 	
 	public ParserRule getXImportDeclarationRule() {
@@ -852,7 +875,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	//QualifiedNameInStaticImport:
 	//	(ValidID ".")+;
 	public QualifiedNameInStaticImportElements getQualifiedNameInStaticImportAccess() {
-		return (pQualifiedNameInStaticImport != null) ? pQualifiedNameInStaticImport : (pQualifiedNameInStaticImport = new QualifiedNameInStaticImportElements());
+		return pQualifiedNameInStaticImport;
 	}
 	
 	public ParserRule getQualifiedNameInStaticImportRule() {
@@ -862,37 +885,37 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	//terminal ID:
 	//	"^"? ("a".."z" | "A".."Z" | "$" | "_") ("a".."z" | "A".."Z" | "$" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
-		return (tID != null) ? tID : (tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
+		return tID;
 	} 
 
 	//terminal STRING:
 	//	"\"" ("\\" . / * ('b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\') * / | !("\\" | "\""))* "\""? | "\'" ("\\" .
 	//	/ * ('b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\') * / | !("\\" | "\'"))* "\'"?;
 	public TerminalRule getSTRINGRule() {
-		return (tSTRING != null) ? tSTRING : (tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "STRING"));
+		return tSTRING;
 	} 
 
 	//terminal ML_COMMENT:
 	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
-		return (tML_COMMENT != null) ? tML_COMMENT : (tML_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT"));
+		return tML_COMMENT;
 	} 
 
 	//terminal SL_COMMENT:
 	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
-		return (tSL_COMMENT != null) ? tSL_COMMENT : (tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT"));
+		return tSL_COMMENT;
 	} 
 
 	//terminal WS:
 	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
-		return (tWS != null) ? tWS : (tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
+		return tWS;
 	} 
 
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
-		return (tANY_OTHER != null) ? tANY_OTHER : (tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER"));
+		return tANY_OTHER;
 	} 
 }

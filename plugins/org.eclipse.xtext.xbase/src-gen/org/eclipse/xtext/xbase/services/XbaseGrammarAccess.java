@@ -3295,81 +3295,146 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	
-	private XExpressionElements pXExpression;
-	private XAssignmentElements pXAssignment;
-	private OpSingleAssignElements pOpSingleAssign;
-	private OpMultiAssignElements pOpMultiAssign;
-	private XOrExpressionElements pXOrExpression;
-	private OpOrElements pOpOr;
-	private XAndExpressionElements pXAndExpression;
-	private OpAndElements pOpAnd;
-	private XEqualityExpressionElements pXEqualityExpression;
-	private OpEqualityElements pOpEquality;
-	private XRelationalExpressionElements pXRelationalExpression;
-	private OpCompareElements pOpCompare;
-	private XOtherOperatorExpressionElements pXOtherOperatorExpression;
-	private OpOtherElements pOpOther;
-	private XAdditiveExpressionElements pXAdditiveExpression;
-	private OpAddElements pOpAdd;
-	private XMultiplicativeExpressionElements pXMultiplicativeExpression;
-	private OpMultiElements pOpMulti;
-	private XUnaryOperationElements pXUnaryOperation;
-	private OpUnaryElements pOpUnary;
-	private XCastedExpressionElements pXCastedExpression;
-	private XPostfixOperationElements pXPostfixOperation;
-	private OpPostfixElements pOpPostfix;
-	private XMemberFeatureCallElements pXMemberFeatureCall;
-	private XPrimaryExpressionElements pXPrimaryExpression;
-	private XLiteralElements pXLiteral;
-	private XCollectionLiteralElements pXCollectionLiteral;
-	private XSetLiteralElements pXSetLiteral;
-	private XListLiteralElements pXListLiteral;
-	private XClosureElements pXClosure;
-	private XExpressionInClosureElements pXExpressionInClosure;
-	private XShortClosureElements pXShortClosure;
-	private XParenthesizedExpressionElements pXParenthesizedExpression;
-	private XIfExpressionElements pXIfExpression;
-	private XSwitchExpressionElements pXSwitchExpression;
-	private XCasePartElements pXCasePart;
-	private XForLoopExpressionElements pXForLoopExpression;
-	private XBasicForLoopExpressionElements pXBasicForLoopExpression;
-	private XWhileExpressionElements pXWhileExpression;
-	private XDoWhileExpressionElements pXDoWhileExpression;
-	private XBlockExpressionElements pXBlockExpression;
-	private XExpressionOrVarDeclarationElements pXExpressionOrVarDeclaration;
-	private XVariableDeclarationElements pXVariableDeclaration;
-	private JvmFormalParameterElements pJvmFormalParameter;
-	private FullJvmFormalParameterElements pFullJvmFormalParameter;
-	private XFeatureCallElements pXFeatureCall;
-	private FeatureCallIDElements pFeatureCallID;
-	private IdOrSuperElements pIdOrSuper;
-	private XConstructorCallElements pXConstructorCall;
-	private XBooleanLiteralElements pXBooleanLiteral;
-	private XNullLiteralElements pXNullLiteral;
-	private XNumberLiteralElements pXNumberLiteral;
-	private XStringLiteralElements pXStringLiteral;
-	private XTypeLiteralElements pXTypeLiteral;
-	private XThrowExpressionElements pXThrowExpression;
-	private XReturnExpressionElements pXReturnExpression;
-	private XTryCatchFinallyExpressionElements pXTryCatchFinallyExpression;
-	private XSynchronizedExpressionElements pXSynchronizedExpression;
-	private XCatchClauseElements pXCatchClause;
-	private QualifiedNameElements pQualifiedName;
-	private NumberElements pNumber;
-	private StaticQualifierElements pStaticQualifier;
-	private TerminalRule tHEX;
-	private TerminalRule tINT;
-	private TerminalRule tDECIMAL;
+	private final XExpressionElements pXExpression;
+	private final XAssignmentElements pXAssignment;
+	private final OpSingleAssignElements pOpSingleAssign;
+	private final OpMultiAssignElements pOpMultiAssign;
+	private final XOrExpressionElements pXOrExpression;
+	private final OpOrElements pOpOr;
+	private final XAndExpressionElements pXAndExpression;
+	private final OpAndElements pOpAnd;
+	private final XEqualityExpressionElements pXEqualityExpression;
+	private final OpEqualityElements pOpEquality;
+	private final XRelationalExpressionElements pXRelationalExpression;
+	private final OpCompareElements pOpCompare;
+	private final XOtherOperatorExpressionElements pXOtherOperatorExpression;
+	private final OpOtherElements pOpOther;
+	private final XAdditiveExpressionElements pXAdditiveExpression;
+	private final OpAddElements pOpAdd;
+	private final XMultiplicativeExpressionElements pXMultiplicativeExpression;
+	private final OpMultiElements pOpMulti;
+	private final XUnaryOperationElements pXUnaryOperation;
+	private final OpUnaryElements pOpUnary;
+	private final XCastedExpressionElements pXCastedExpression;
+	private final XPostfixOperationElements pXPostfixOperation;
+	private final OpPostfixElements pOpPostfix;
+	private final XMemberFeatureCallElements pXMemberFeatureCall;
+	private final XPrimaryExpressionElements pXPrimaryExpression;
+	private final XLiteralElements pXLiteral;
+	private final XCollectionLiteralElements pXCollectionLiteral;
+	private final XSetLiteralElements pXSetLiteral;
+	private final XListLiteralElements pXListLiteral;
+	private final XClosureElements pXClosure;
+	private final XExpressionInClosureElements pXExpressionInClosure;
+	private final XShortClosureElements pXShortClosure;
+	private final XParenthesizedExpressionElements pXParenthesizedExpression;
+	private final XIfExpressionElements pXIfExpression;
+	private final XSwitchExpressionElements pXSwitchExpression;
+	private final XCasePartElements pXCasePart;
+	private final XForLoopExpressionElements pXForLoopExpression;
+	private final XBasicForLoopExpressionElements pXBasicForLoopExpression;
+	private final XWhileExpressionElements pXWhileExpression;
+	private final XDoWhileExpressionElements pXDoWhileExpression;
+	private final XBlockExpressionElements pXBlockExpression;
+	private final XExpressionOrVarDeclarationElements pXExpressionOrVarDeclaration;
+	private final XVariableDeclarationElements pXVariableDeclaration;
+	private final JvmFormalParameterElements pJvmFormalParameter;
+	private final FullJvmFormalParameterElements pFullJvmFormalParameter;
+	private final XFeatureCallElements pXFeatureCall;
+	private final FeatureCallIDElements pFeatureCallID;
+	private final IdOrSuperElements pIdOrSuper;
+	private final XConstructorCallElements pXConstructorCall;
+	private final XBooleanLiteralElements pXBooleanLiteral;
+	private final XNullLiteralElements pXNullLiteral;
+	private final XNumberLiteralElements pXNumberLiteral;
+	private final XStringLiteralElements pXStringLiteral;
+	private final XTypeLiteralElements pXTypeLiteral;
+	private final XThrowExpressionElements pXThrowExpression;
+	private final XReturnExpressionElements pXReturnExpression;
+	private final XTryCatchFinallyExpressionElements pXTryCatchFinallyExpression;
+	private final XSynchronizedExpressionElements pXSynchronizedExpression;
+	private final XCatchClauseElements pXCatchClause;
+	private final QualifiedNameElements pQualifiedName;
+	private final NumberElements pNumber;
+	private final StaticQualifierElements pStaticQualifier;
+	private final TerminalRule tHEX;
+	private final TerminalRule tINT;
+	private final TerminalRule tDECIMAL;
 	
 	private final Grammar grammar;
 
-	private XtypeGrammarAccess gaXtype;
+	private final XtypeGrammarAccess gaXtype;
 
 	@Inject
 	public XbaseGrammarAccess(GrammarProvider grammarProvider,
 		XtypeGrammarAccess gaXtype) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaXtype = gaXtype;
+		this.pXExpression = new XExpressionElements();
+		this.pXAssignment = new XAssignmentElements();
+		this.pOpSingleAssign = new OpSingleAssignElements();
+		this.pOpMultiAssign = new OpMultiAssignElements();
+		this.pXOrExpression = new XOrExpressionElements();
+		this.pOpOr = new OpOrElements();
+		this.pXAndExpression = new XAndExpressionElements();
+		this.pOpAnd = new OpAndElements();
+		this.pXEqualityExpression = new XEqualityExpressionElements();
+		this.pOpEquality = new OpEqualityElements();
+		this.pXRelationalExpression = new XRelationalExpressionElements();
+		this.pOpCompare = new OpCompareElements();
+		this.pXOtherOperatorExpression = new XOtherOperatorExpressionElements();
+		this.pOpOther = new OpOtherElements();
+		this.pXAdditiveExpression = new XAdditiveExpressionElements();
+		this.pOpAdd = new OpAddElements();
+		this.pXMultiplicativeExpression = new XMultiplicativeExpressionElements();
+		this.pOpMulti = new OpMultiElements();
+		this.pXUnaryOperation = new XUnaryOperationElements();
+		this.pOpUnary = new OpUnaryElements();
+		this.pXCastedExpression = new XCastedExpressionElements();
+		this.pXPostfixOperation = new XPostfixOperationElements();
+		this.pOpPostfix = new OpPostfixElements();
+		this.pXMemberFeatureCall = new XMemberFeatureCallElements();
+		this.pXPrimaryExpression = new XPrimaryExpressionElements();
+		this.pXLiteral = new XLiteralElements();
+		this.pXCollectionLiteral = new XCollectionLiteralElements();
+		this.pXSetLiteral = new XSetLiteralElements();
+		this.pXListLiteral = new XListLiteralElements();
+		this.pXClosure = new XClosureElements();
+		this.pXExpressionInClosure = new XExpressionInClosureElements();
+		this.pXShortClosure = new XShortClosureElements();
+		this.pXParenthesizedExpression = new XParenthesizedExpressionElements();
+		this.pXIfExpression = new XIfExpressionElements();
+		this.pXSwitchExpression = new XSwitchExpressionElements();
+		this.pXCasePart = new XCasePartElements();
+		this.pXForLoopExpression = new XForLoopExpressionElements();
+		this.pXBasicForLoopExpression = new XBasicForLoopExpressionElements();
+		this.pXWhileExpression = new XWhileExpressionElements();
+		this.pXDoWhileExpression = new XDoWhileExpressionElements();
+		this.pXBlockExpression = new XBlockExpressionElements();
+		this.pXExpressionOrVarDeclaration = new XExpressionOrVarDeclarationElements();
+		this.pXVariableDeclaration = new XVariableDeclarationElements();
+		this.pJvmFormalParameter = new JvmFormalParameterElements();
+		this.pFullJvmFormalParameter = new FullJvmFormalParameterElements();
+		this.pXFeatureCall = new XFeatureCallElements();
+		this.pFeatureCallID = new FeatureCallIDElements();
+		this.pIdOrSuper = new IdOrSuperElements();
+		this.pXConstructorCall = new XConstructorCallElements();
+		this.pXBooleanLiteral = new XBooleanLiteralElements();
+		this.pXNullLiteral = new XNullLiteralElements();
+		this.pXNumberLiteral = new XNumberLiteralElements();
+		this.pXStringLiteral = new XStringLiteralElements();
+		this.pXTypeLiteral = new XTypeLiteralElements();
+		this.pXThrowExpression = new XThrowExpressionElements();
+		this.pXReturnExpression = new XReturnExpressionElements();
+		this.pXTryCatchFinallyExpression = new XTryCatchFinallyExpressionElements();
+		this.pXSynchronizedExpression = new XSynchronizedExpressionElements();
+		this.pXCatchClause = new XCatchClauseElements();
+		this.pQualifiedName = new QualifiedNameElements();
+		this.pNumber = new NumberElements();
+		this.pStaticQualifier = new StaticQualifierElements();
+		this.tHEX = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "HEX");
+		this.tINT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "INT");
+		this.tDECIMAL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "DECIMAL");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -3402,7 +3467,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//XExpression:
 	//	XAssignment;
 	public XExpressionElements getXExpressionAccess() {
-		return (pXExpression != null) ? pXExpression : (pXExpression = new XExpressionElements());
+		return pXExpression;
 	}
 	
 	public ParserRule getXExpressionRule() {
@@ -3414,7 +3479,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//	(=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign])
 	//	rightOperand=XAssignment)?;
 	public XAssignmentElements getXAssignmentAccess() {
-		return (pXAssignment != null) ? pXAssignment : (pXAssignment = new XAssignmentElements());
+		return pXAssignment;
 	}
 	
 	public ParserRule getXAssignmentRule() {
@@ -3424,7 +3489,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//OpSingleAssign:
 	//	"=";
 	public OpSingleAssignElements getOpSingleAssignAccess() {
-		return (pOpSingleAssign != null) ? pOpSingleAssign : (pOpSingleAssign = new OpSingleAssignElements());
+		return pOpSingleAssign;
 	}
 	
 	public ParserRule getOpSingleAssignRule() {
@@ -3434,7 +3499,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//OpMultiAssign:
 	//	"+=" | "-=" | "*=" | "/=" | "%=" | "<" "<" "=" | ">" ">"? ">=";
 	public OpMultiAssignElements getOpMultiAssignAccess() {
-		return (pOpMultiAssign != null) ? pOpMultiAssign : (pOpMultiAssign = new OpMultiAssignElements());
+		return pOpMultiAssign;
 	}
 	
 	public ParserRule getOpMultiAssignRule() {
@@ -3445,7 +3510,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//	XAndExpression (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpOr])
 	//	rightOperand=XAndExpression)*;
 	public XOrExpressionElements getXOrExpressionAccess() {
-		return (pXOrExpression != null) ? pXOrExpression : (pXOrExpression = new XOrExpressionElements());
+		return pXOrExpression;
 	}
 	
 	public ParserRule getXOrExpressionRule() {
@@ -3455,7 +3520,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//OpOr:
 	//	"||";
 	public OpOrElements getOpOrAccess() {
-		return (pOpOr != null) ? pOpOr : (pOpOr = new OpOrElements());
+		return pOpOr;
 	}
 	
 	public ParserRule getOpOrRule() {
@@ -3466,7 +3531,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//	XEqualityExpression (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpAnd])
 	//	rightOperand=XEqualityExpression)*;
 	public XAndExpressionElements getXAndExpressionAccess() {
-		return (pXAndExpression != null) ? pXAndExpression : (pXAndExpression = new XAndExpressionElements());
+		return pXAndExpression;
 	}
 	
 	public ParserRule getXAndExpressionRule() {
@@ -3476,7 +3541,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//OpAnd:
 	//	"&&";
 	public OpAndElements getOpAndAccess() {
-		return (pOpAnd != null) ? pOpAnd : (pOpAnd = new OpAndElements());
+		return pOpAnd;
 	}
 	
 	public ParserRule getOpAndRule() {
@@ -3487,7 +3552,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//	XRelationalExpression (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpEquality])
 	//	rightOperand=XRelationalExpression)*;
 	public XEqualityExpressionElements getXEqualityExpressionAccess() {
-		return (pXEqualityExpression != null) ? pXEqualityExpression : (pXEqualityExpression = new XEqualityExpressionElements());
+		return pXEqualityExpression;
 	}
 	
 	public ParserRule getXEqualityExpressionRule() {
@@ -3497,7 +3562,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//OpEquality:
 	//	"==" | "!=" | "===" | "!==";
 	public OpEqualityElements getOpEqualityAccess() {
-		return (pOpEquality != null) ? pOpEquality : (pOpEquality = new OpEqualityElements());
+		return pOpEquality;
 	}
 	
 	public ParserRule getOpEqualityRule() {
@@ -3509,7 +3574,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//	({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpCompare])
 	//	rightOperand=XOtherOperatorExpression)*;
 	public XRelationalExpressionElements getXRelationalExpressionAccess() {
-		return (pXRelationalExpression != null) ? pXRelationalExpression : (pXRelationalExpression = new XRelationalExpressionElements());
+		return pXRelationalExpression;
 	}
 	
 	public ParserRule getXRelationalExpressionRule() {
@@ -3519,7 +3584,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//OpCompare:
 	//	">=" | "<" "=" | ">" | "<";
 	public OpCompareElements getOpCompareAccess() {
-		return (pOpCompare != null) ? pOpCompare : (pOpCompare = new OpCompareElements());
+		return pOpCompare;
 	}
 	
 	public ParserRule getOpCompareRule() {
@@ -3530,7 +3595,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//	XAdditiveExpression (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpOther])
 	//	rightOperand=XAdditiveExpression)*;
 	public XOtherOperatorExpressionElements getXOtherOperatorExpressionAccess() {
-		return (pXOtherOperatorExpression != null) ? pXOtherOperatorExpression : (pXOtherOperatorExpression = new XOtherOperatorExpressionElements());
+		return pXOtherOperatorExpression;
 	}
 	
 	public ParserRule getXOtherOperatorExpressionRule() {
@@ -3540,7 +3605,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//OpOther:
 	//	"->" | "..<" | ">" ".." | ".." | "=>" | ">" (=> (">" ">") | ">") | "<" (=> ("<" "<") | "<" | "=>") | "<>" | "?:";
 	public OpOtherElements getOpOtherAccess() {
-		return (pOpOther != null) ? pOpOther : (pOpOther = new OpOtherElements());
+		return pOpOther;
 	}
 	
 	public ParserRule getOpOtherRule() {
@@ -3551,7 +3616,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//	XMultiplicativeExpression (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpAdd])
 	//	rightOperand=XMultiplicativeExpression)*;
 	public XAdditiveExpressionElements getXAdditiveExpressionAccess() {
-		return (pXAdditiveExpression != null) ? pXAdditiveExpression : (pXAdditiveExpression = new XAdditiveExpressionElements());
+		return pXAdditiveExpression;
 	}
 	
 	public ParserRule getXAdditiveExpressionRule() {
@@ -3561,7 +3626,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//OpAdd:
 	//	"+" | "-";
 	public OpAddElements getOpAddAccess() {
-		return (pOpAdd != null) ? pOpAdd : (pOpAdd = new OpAddElements());
+		return pOpAdd;
 	}
 	
 	public ParserRule getOpAddRule() {
@@ -3572,7 +3637,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//	XUnaryOperation (=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMulti])
 	//	rightOperand=XUnaryOperation)*;
 	public XMultiplicativeExpressionElements getXMultiplicativeExpressionAccess() {
-		return (pXMultiplicativeExpression != null) ? pXMultiplicativeExpression : (pXMultiplicativeExpression = new XMultiplicativeExpressionElements());
+		return pXMultiplicativeExpression;
 	}
 	
 	public ParserRule getXMultiplicativeExpressionRule() {
@@ -3582,7 +3647,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//OpMulti:
 	//	"*" | "**" | "/" | "%";
 	public OpMultiElements getOpMultiAccess() {
-		return (pOpMulti != null) ? pOpMulti : (pOpMulti = new OpMultiElements());
+		return pOpMulti;
 	}
 	
 	public ParserRule getOpMultiRule() {
@@ -3592,7 +3657,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//XUnaryOperation returns XExpression:
 	//	{XUnaryOperation} feature=[types::JvmIdentifiableElement|OpUnary] operand=XUnaryOperation | XCastedExpression;
 	public XUnaryOperationElements getXUnaryOperationAccess() {
-		return (pXUnaryOperation != null) ? pXUnaryOperation : (pXUnaryOperation = new XUnaryOperationElements());
+		return pXUnaryOperation;
 	}
 	
 	public ParserRule getXUnaryOperationRule() {
@@ -3602,7 +3667,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//OpUnary:
 	//	"!" | "-" | "+";
 	public OpUnaryElements getOpUnaryAccess() {
-		return (pOpUnary != null) ? pOpUnary : (pOpUnary = new OpUnaryElements());
+		return pOpUnary;
 	}
 	
 	public ParserRule getOpUnaryRule() {
@@ -3612,7 +3677,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//XCastedExpression returns XExpression:
 	//	XPostfixOperation (=> ({XCastedExpression.target=current} "as") type=JvmTypeReference)*;
 	public XCastedExpressionElements getXCastedExpressionAccess() {
-		return (pXCastedExpression != null) ? pXCastedExpression : (pXCastedExpression = new XCastedExpressionElements());
+		return pXCastedExpression;
 	}
 	
 	public ParserRule getXCastedExpressionRule() {
@@ -3622,7 +3687,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//XPostfixOperation returns XExpression:
 	//	XMemberFeatureCall => ({XPostfixOperation.operand=current} feature=[types::JvmIdentifiableElement|OpPostfix])?;
 	public XPostfixOperationElements getXPostfixOperationAccess() {
-		return (pXPostfixOperation != null) ? pXPostfixOperation : (pXPostfixOperation = new XPostfixOperationElements());
+		return pXPostfixOperation;
 	}
 	
 	public ParserRule getXPostfixOperationRule() {
@@ -3632,7 +3697,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//OpPostfix:
 	//	"++" | "--";
 	public OpPostfixElements getOpPostfixAccess() {
-		return (pOpPostfix != null) ? pOpPostfix : (pOpPostfix = new OpPostfixElements());
+		return pOpPostfix;
 	}
 	
 	public ParserRule getOpPostfixRule() {
@@ -3647,7 +3712,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//	feature=[types::JvmIdentifiableElement|IdOrSuper] (=> explicitOperationCall?="(" (memberCallArguments+=XShortClosure |
 	//	memberCallArguments+=XExpression ("," memberCallArguments+=XExpression)*)? ")")? memberCallArguments+=XClosure?)*;
 	public XMemberFeatureCallElements getXMemberFeatureCallAccess() {
-		return (pXMemberFeatureCall != null) ? pXMemberFeatureCall : (pXMemberFeatureCall = new XMemberFeatureCallElements());
+		return pXMemberFeatureCall;
 	}
 	
 	public ParserRule getXMemberFeatureCallRule() {
@@ -3659,7 +3724,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//	XIfExpression | XForLoopExpression | XBasicForLoopExpression | XWhileExpression | XDoWhileExpression |
 	//	XThrowExpression | XReturnExpression | XTryCatchFinallyExpression | XParenthesizedExpression;
 	public XPrimaryExpressionElements getXPrimaryExpressionAccess() {
-		return (pXPrimaryExpression != null) ? pXPrimaryExpression : (pXPrimaryExpression = new XPrimaryExpressionElements());
+		return pXPrimaryExpression;
 	}
 	
 	public ParserRule getXPrimaryExpressionRule() {
@@ -3669,7 +3734,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//XLiteral returns XExpression:
 	//	XCollectionLiteral | XClosure | XBooleanLiteral | XNumberLiteral | XNullLiteral | XStringLiteral | XTypeLiteral;
 	public XLiteralElements getXLiteralAccess() {
-		return (pXLiteral != null) ? pXLiteral : (pXLiteral = new XLiteralElements());
+		return pXLiteral;
 	}
 	
 	public ParserRule getXLiteralRule() {
@@ -3679,7 +3744,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//XCollectionLiteral:
 	//	XSetLiteral | XListLiteral;
 	public XCollectionLiteralElements getXCollectionLiteralAccess() {
-		return (pXCollectionLiteral != null) ? pXCollectionLiteral : (pXCollectionLiteral = new XCollectionLiteralElements());
+		return pXCollectionLiteral;
 	}
 	
 	public ParserRule getXCollectionLiteralRule() {
@@ -3689,7 +3754,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//XSetLiteral:
 	//	{XSetLiteral} "#" "{" (elements+=XExpression ("," elements+=XExpression)*)? "}";
 	public XSetLiteralElements getXSetLiteralAccess() {
-		return (pXSetLiteral != null) ? pXSetLiteral : (pXSetLiteral = new XSetLiteralElements());
+		return pXSetLiteral;
 	}
 	
 	public ParserRule getXSetLiteralRule() {
@@ -3699,7 +3764,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//XListLiteral:
 	//	{XListLiteral} "#" "[" (elements+=XExpression ("," elements+=XExpression)*)? "]";
 	public XListLiteralElements getXListLiteralAccess() {
-		return (pXListLiteral != null) ? pXListLiteral : (pXListLiteral = new XListLiteralElements());
+		return pXListLiteral;
 	}
 	
 	public ParserRule getXListLiteralRule() {
@@ -3710,7 +3775,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//	=> ({XClosure} "[") => ((declaredFormalParameters+=JvmFormalParameter (","
 	//	declaredFormalParameters+=JvmFormalParameter)*)? explicitSyntax?="|")? expression=XExpressionInClosure "]";
 	public XClosureElements getXClosureAccess() {
-		return (pXClosure != null) ? pXClosure : (pXClosure = new XClosureElements());
+		return pXClosure;
 	}
 	
 	public ParserRule getXClosureRule() {
@@ -3720,7 +3785,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//XExpressionInClosure returns XExpression:
 	//	{XBlockExpression} (expressions+=XExpressionOrVarDeclaration ";"?)*;
 	public XExpressionInClosureElements getXExpressionInClosureAccess() {
-		return (pXExpressionInClosure != null) ? pXExpressionInClosure : (pXExpressionInClosure = new XExpressionInClosureElements());
+		return pXExpressionInClosure;
 	}
 	
 	public ParserRule getXExpressionInClosureRule() {
@@ -3731,7 +3796,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//	=> ({XClosure} (declaredFormalParameters+=JvmFormalParameter ("," declaredFormalParameters+=JvmFormalParameter)*)?
 	//	explicitSyntax?="|") expression=XExpression;
 	public XShortClosureElements getXShortClosureAccess() {
-		return (pXShortClosure != null) ? pXShortClosure : (pXShortClosure = new XShortClosureElements());
+		return pXShortClosure;
 	}
 	
 	public ParserRule getXShortClosureRule() {
@@ -3741,7 +3806,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//XParenthesizedExpression returns XExpression:
 	//	"(" XExpression ")";
 	public XParenthesizedExpressionElements getXParenthesizedExpressionAccess() {
-		return (pXParenthesizedExpression != null) ? pXParenthesizedExpression : (pXParenthesizedExpression = new XParenthesizedExpressionElements());
+		return pXParenthesizedExpression;
 	}
 	
 	public ParserRule getXParenthesizedExpressionRule() {
@@ -3751,7 +3816,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//XIfExpression returns XExpression:
 	//	{XIfExpression} "if" "(" if=XExpression ")" then=XExpression ("else" else=XExpression)?;
 	public XIfExpressionElements getXIfExpressionAccess() {
-		return (pXIfExpression != null) ? pXIfExpression : (pXIfExpression = new XIfExpressionElements());
+		return pXIfExpression;
 	}
 	
 	public ParserRule getXIfExpressionRule() {
@@ -3763,7 +3828,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//	(declaredParam=JvmFormalParameter ":")? switch=XExpression) "{" cases+=XCasePart* ("default" ":" default=XExpression)?
 	//	"}";
 	public XSwitchExpressionElements getXSwitchExpressionAccess() {
-		return (pXSwitchExpression != null) ? pXSwitchExpression : (pXSwitchExpression = new XSwitchExpressionElements());
+		return pXSwitchExpression;
 	}
 	
 	public ParserRule getXSwitchExpressionRule() {
@@ -3773,7 +3838,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//XCasePart:
 	//	{XCasePart} typeGuard=JvmTypeReference? ("case" case=XExpression)? (":" then=XExpression | fallThrough?=",");
 	public XCasePartElements getXCasePartAccess() {
-		return (pXCasePart != null) ? pXCasePart : (pXCasePart = new XCasePartElements());
+		return pXCasePart;
 	}
 	
 	public ParserRule getXCasePartRule() {
@@ -3784,7 +3849,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//	=> ({XForLoopExpression} "for" "(" declaredParam=JvmFormalParameter ":") forExpression=XExpression ")"
 	//	eachExpression=XExpression;
 	public XForLoopExpressionElements getXForLoopExpressionAccess() {
-		return (pXForLoopExpression != null) ? pXForLoopExpression : (pXForLoopExpression = new XForLoopExpressionElements());
+		return pXForLoopExpression;
 	}
 	
 	public ParserRule getXForLoopExpressionRule() {
@@ -3796,7 +3861,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//	initExpressions+=XExpressionOrVarDeclaration)*)? ";" expression=XExpression? ";" (updateExpressions+=XExpression (","
 	//	updateExpressions+=XExpression)*)? ")" eachExpression=XExpression;
 	public XBasicForLoopExpressionElements getXBasicForLoopExpressionAccess() {
-		return (pXBasicForLoopExpression != null) ? pXBasicForLoopExpression : (pXBasicForLoopExpression = new XBasicForLoopExpressionElements());
+		return pXBasicForLoopExpression;
 	}
 	
 	public ParserRule getXBasicForLoopExpressionRule() {
@@ -3806,7 +3871,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//XWhileExpression returns XExpression:
 	//	{XWhileExpression} "while" "(" predicate=XExpression ")" body=XExpression;
 	public XWhileExpressionElements getXWhileExpressionAccess() {
-		return (pXWhileExpression != null) ? pXWhileExpression : (pXWhileExpression = new XWhileExpressionElements());
+		return pXWhileExpression;
 	}
 	
 	public ParserRule getXWhileExpressionRule() {
@@ -3816,7 +3881,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//XDoWhileExpression returns XExpression:
 	//	{XDoWhileExpression} "do" body=XExpression "while" "(" predicate=XExpression ")";
 	public XDoWhileExpressionElements getXDoWhileExpressionAccess() {
-		return (pXDoWhileExpression != null) ? pXDoWhileExpression : (pXDoWhileExpression = new XDoWhileExpressionElements());
+		return pXDoWhileExpression;
 	}
 	
 	public ParserRule getXDoWhileExpressionRule() {
@@ -3826,7 +3891,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//XBlockExpression returns XExpression:
 	//	{XBlockExpression} "{" (expressions+=XExpressionOrVarDeclaration ";"?)* "}";
 	public XBlockExpressionElements getXBlockExpressionAccess() {
-		return (pXBlockExpression != null) ? pXBlockExpression : (pXBlockExpression = new XBlockExpressionElements());
+		return pXBlockExpression;
 	}
 	
 	public ParserRule getXBlockExpressionRule() {
@@ -3836,7 +3901,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//XExpressionOrVarDeclaration returns XExpression:
 	//	XVariableDeclaration | XExpression;
 	public XExpressionOrVarDeclarationElements getXExpressionOrVarDeclarationAccess() {
-		return (pXExpressionOrVarDeclaration != null) ? pXExpressionOrVarDeclaration : (pXExpressionOrVarDeclaration = new XExpressionOrVarDeclarationElements());
+		return pXExpressionOrVarDeclaration;
 	}
 	
 	public ParserRule getXExpressionOrVarDeclarationRule() {
@@ -3847,7 +3912,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//	{XVariableDeclaration} (writeable?="var" | "val") (=> (type=JvmTypeReference name=ValidID) | name=ValidID) ("="
 	//	right=XExpression)?;
 	public XVariableDeclarationElements getXVariableDeclarationAccess() {
-		return (pXVariableDeclaration != null) ? pXVariableDeclaration : (pXVariableDeclaration = new XVariableDeclarationElements());
+		return pXVariableDeclaration;
 	}
 	
 	public ParserRule getXVariableDeclarationRule() {
@@ -3857,7 +3922,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//JvmFormalParameter returns types::JvmFormalParameter:
 	//	parameterType=JvmTypeReference? name=ValidID;
 	public JvmFormalParameterElements getJvmFormalParameterAccess() {
-		return (pJvmFormalParameter != null) ? pJvmFormalParameter : (pJvmFormalParameter = new JvmFormalParameterElements());
+		return pJvmFormalParameter;
 	}
 	
 	public ParserRule getJvmFormalParameterRule() {
@@ -3867,7 +3932,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//FullJvmFormalParameter returns types::JvmFormalParameter:
 	//	parameterType=JvmTypeReference name=ValidID;
 	public FullJvmFormalParameterElements getFullJvmFormalParameterAccess() {
-		return (pFullJvmFormalParameter != null) ? pFullJvmFormalParameter : (pFullJvmFormalParameter = new FullJvmFormalParameterElements());
+		return pFullJvmFormalParameter;
 	}
 	
 	public ParserRule getFullJvmFormalParameterRule() {
@@ -3879,7 +3944,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//	feature=[types::JvmIdentifiableElement|IdOrSuper] (=> explicitOperationCall?="(" (featureCallArguments+=XShortClosure
 	//	| featureCallArguments+=XExpression ("," featureCallArguments+=XExpression)*)? ")")? featureCallArguments+=XClosure?;
 	public XFeatureCallElements getXFeatureCallAccess() {
-		return (pXFeatureCall != null) ? pXFeatureCall : (pXFeatureCall = new XFeatureCallElements());
+		return pXFeatureCall;
 	}
 	
 	public ParserRule getXFeatureCallRule() {
@@ -3889,7 +3954,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//FeatureCallID:
 	//	ValidID | "extends" | "static" | "import" | "extension";
 	public FeatureCallIDElements getFeatureCallIDAccess() {
-		return (pFeatureCallID != null) ? pFeatureCallID : (pFeatureCallID = new FeatureCallIDElements());
+		return pFeatureCallID;
 	}
 	
 	public ParserRule getFeatureCallIDRule() {
@@ -3899,7 +3964,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//IdOrSuper:
 	//	FeatureCallID | "super";
 	public IdOrSuperElements getIdOrSuperAccess() {
-		return (pIdOrSuper != null) ? pIdOrSuper : (pIdOrSuper = new IdOrSuperElements());
+		return pIdOrSuper;
 	}
 	
 	public ParserRule getIdOrSuperRule() {
@@ -3912,7 +3977,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//	explicitConstructorCall?="(" (arguments+=XShortClosure | arguments+=XExpression ("," arguments+=XExpression)*)? ")")?
 	//	arguments+=XClosure?;
 	public XConstructorCallElements getXConstructorCallAccess() {
-		return (pXConstructorCall != null) ? pXConstructorCall : (pXConstructorCall = new XConstructorCallElements());
+		return pXConstructorCall;
 	}
 	
 	public ParserRule getXConstructorCallRule() {
@@ -3922,7 +3987,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//XBooleanLiteral returns XExpression:
 	//	{XBooleanLiteral} ("false" | isTrue?="true");
 	public XBooleanLiteralElements getXBooleanLiteralAccess() {
-		return (pXBooleanLiteral != null) ? pXBooleanLiteral : (pXBooleanLiteral = new XBooleanLiteralElements());
+		return pXBooleanLiteral;
 	}
 	
 	public ParserRule getXBooleanLiteralRule() {
@@ -3932,7 +3997,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//XNullLiteral returns XExpression:
 	//	{XNullLiteral} "null";
 	public XNullLiteralElements getXNullLiteralAccess() {
-		return (pXNullLiteral != null) ? pXNullLiteral : (pXNullLiteral = new XNullLiteralElements());
+		return pXNullLiteral;
 	}
 	
 	public ParserRule getXNullLiteralRule() {
@@ -3942,7 +4007,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//XNumberLiteral returns XExpression:
 	//	{XNumberLiteral} value=Number;
 	public XNumberLiteralElements getXNumberLiteralAccess() {
-		return (pXNumberLiteral != null) ? pXNumberLiteral : (pXNumberLiteral = new XNumberLiteralElements());
+		return pXNumberLiteral;
 	}
 	
 	public ParserRule getXNumberLiteralRule() {
@@ -3952,7 +4017,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//XStringLiteral returns XExpression:
 	//	{XStringLiteral} value=STRING;
 	public XStringLiteralElements getXStringLiteralAccess() {
-		return (pXStringLiteral != null) ? pXStringLiteral : (pXStringLiteral = new XStringLiteralElements());
+		return pXStringLiteral;
 	}
 	
 	public ParserRule getXStringLiteralRule() {
@@ -3962,7 +4027,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//XTypeLiteral returns XExpression:
 	//	{XTypeLiteral} "typeof" "(" type=[types::JvmType|QualifiedName] arrayDimensions+=ArrayBrackets* ")";
 	public XTypeLiteralElements getXTypeLiteralAccess() {
-		return (pXTypeLiteral != null) ? pXTypeLiteral : (pXTypeLiteral = new XTypeLiteralElements());
+		return pXTypeLiteral;
 	}
 	
 	public ParserRule getXTypeLiteralRule() {
@@ -3972,7 +4037,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//XThrowExpression returns XExpression:
 	//	{XThrowExpression} "throw" expression=XExpression;
 	public XThrowExpressionElements getXThrowExpressionAccess() {
-		return (pXThrowExpression != null) ? pXThrowExpression : (pXThrowExpression = new XThrowExpressionElements());
+		return pXThrowExpression;
 	}
 	
 	public ParserRule getXThrowExpressionRule() {
@@ -3982,7 +4047,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//XReturnExpression returns XExpression:
 	//	{XReturnExpression} "return" -> expression=XExpression?;
 	public XReturnExpressionElements getXReturnExpressionAccess() {
-		return (pXReturnExpression != null) ? pXReturnExpression : (pXReturnExpression = new XReturnExpressionElements());
+		return pXReturnExpression;
 	}
 	
 	public ParserRule getXReturnExpressionRule() {
@@ -3993,7 +4058,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//	{XTryCatchFinallyExpression} "try" expression=XExpression (catchClauses+=XCatchClause+ ("finally"
 	//	finallyExpression=XExpression)? | "finally" finallyExpression=XExpression);
 	public XTryCatchFinallyExpressionElements getXTryCatchFinallyExpressionAccess() {
-		return (pXTryCatchFinallyExpression != null) ? pXTryCatchFinallyExpression : (pXTryCatchFinallyExpression = new XTryCatchFinallyExpressionElements());
+		return pXTryCatchFinallyExpression;
 	}
 	
 	public ParserRule getXTryCatchFinallyExpressionRule() {
@@ -4003,7 +4068,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//XSynchronizedExpression returns XExpression:
 	//	=> ({XSynchronizedExpression} "synchronized" "(") param=XExpression ")" expression=XExpression;
 	public XSynchronizedExpressionElements getXSynchronizedExpressionAccess() {
-		return (pXSynchronizedExpression != null) ? pXSynchronizedExpression : (pXSynchronizedExpression = new XSynchronizedExpressionElements());
+		return pXSynchronizedExpression;
 	}
 	
 	public ParserRule getXSynchronizedExpressionRule() {
@@ -4013,7 +4078,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//XCatchClause:
 	//	"catch" "(" declaredParam=FullJvmFormalParameter ")" expression=XExpression;
 	public XCatchClauseElements getXCatchClauseAccess() {
-		return (pXCatchClause != null) ? pXCatchClause : (pXCatchClause = new XCatchClauseElements());
+		return pXCatchClause;
 	}
 	
 	public ParserRule getXCatchClauseRule() {
@@ -4023,7 +4088,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//QualifiedName:
 	//	ValidID ("." ValidID)*;
 	public QualifiedNameElements getQualifiedNameAccess() {
-		return (pQualifiedName != null) ? pQualifiedName : (pQualifiedName = new QualifiedNameElements());
+		return pQualifiedName;
 	}
 	
 	public ParserRule getQualifiedNameRule() {
@@ -4033,7 +4098,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//Number hidden():
 	//	HEX | (INT | DECIMAL) ("." (INT | DECIMAL))?;
 	public NumberElements getNumberAccess() {
-		return (pNumber != null) ? pNumber : (pNumber = new NumberElements());
+		return pNumber;
 	}
 	
 	public ParserRule getNumberRule() {
@@ -4046,7 +4111,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	// * / StaticQualifier:
 	//	(ValidID "::")+;
 	public StaticQualifierElements getStaticQualifierAccess() {
-		return (pStaticQualifier != null) ? pStaticQualifier : (pStaticQualifier = new StaticQualifierElements());
+		return pStaticQualifier;
 	}
 	
 	public ParserRule getStaticQualifierRule() {
@@ -4056,19 +4121,19 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//terminal HEX:
 	//	("0x" | "0X") ("0".."9" | "a".."f" | "A".."F" | "_")+ ("#" (("b" | "B") ("i" | "I") | ("l" | "L")))?;
 	public TerminalRule getHEXRule() {
-		return (tHEX != null) ? tHEX : (tHEX = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "HEX"));
+		return tHEX;
 	} 
 
 	//terminal INT returns ecore::EInt:
 	//	"0".."9" ("0".."9" | "_")*;
 	public TerminalRule getINTRule() {
-		return (tINT != null) ? tINT : (tINT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "INT"));
+		return tINT;
 	} 
 
 	//terminal DECIMAL:
 	//	INT (("e" | "E") ("+" | "-")? INT)? (("b" | "B") ("i" | "I" | "d" | "D") | ("l" | "L" | "d" | "D" | "f" | "F"))?;
 	public TerminalRule getDECIMALRule() {
-		return (tDECIMAL != null) ? tDECIMAL : (tDECIMAL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "DECIMAL"));
+		return tDECIMAL;
 	} 
 
 	//JvmTypeReference:

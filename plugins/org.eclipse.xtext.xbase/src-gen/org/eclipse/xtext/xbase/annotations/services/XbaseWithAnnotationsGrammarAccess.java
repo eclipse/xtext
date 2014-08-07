@@ -350,21 +350,26 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	}
 	
 	
-	private XAnnotationElements pXAnnotation;
-	private XAnnotationElementValuePairElements pXAnnotationElementValuePair;
-	private XAnnotationElementValueOrCommaListElements pXAnnotationElementValueOrCommaList;
-	private XAnnotationElementValueElements pXAnnotationElementValue;
-	private XAnnotationOrExpressionElements pXAnnotationOrExpression;
+	private final XAnnotationElements pXAnnotation;
+	private final XAnnotationElementValuePairElements pXAnnotationElementValuePair;
+	private final XAnnotationElementValueOrCommaListElements pXAnnotationElementValueOrCommaList;
+	private final XAnnotationElementValueElements pXAnnotationElementValue;
+	private final XAnnotationOrExpressionElements pXAnnotationOrExpression;
 	
 	private final Grammar grammar;
 
-	private XbaseGrammarAccess gaXbase;
+	private final XbaseGrammarAccess gaXbase;
 
 	@Inject
 	public XbaseWithAnnotationsGrammarAccess(GrammarProvider grammarProvider,
 		XbaseGrammarAccess gaXbase) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaXbase = gaXbase;
+		this.pXAnnotation = new XAnnotationElements();
+		this.pXAnnotationElementValuePair = new XAnnotationElementValuePairElements();
+		this.pXAnnotationElementValueOrCommaList = new XAnnotationElementValueOrCommaListElements();
+		this.pXAnnotationElementValue = new XAnnotationElementValueElements();
+		this.pXAnnotationOrExpression = new XAnnotationOrExpressionElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -399,7 +404,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	//	(elementValuePairs+=XAnnotationElementValuePair ("," elementValuePairs+=XAnnotationElementValuePair)* |
 	//	value=XAnnotationElementValueOrCommaList)? ")")?;
 	public XAnnotationElements getXAnnotationAccess() {
-		return (pXAnnotation != null) ? pXAnnotation : (pXAnnotation = new XAnnotationElements());
+		return pXAnnotation;
 	}
 	
 	public ParserRule getXAnnotationRule() {
@@ -409,7 +414,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	//XAnnotationElementValuePair:
 	//	=> (element=[types::JvmOperation|ValidID] "=") value=XAnnotationElementValue;
 	public XAnnotationElementValuePairElements getXAnnotationElementValuePairAccess() {
-		return (pXAnnotationElementValuePair != null) ? pXAnnotationElementValuePair : (pXAnnotationElementValuePair = new XAnnotationElementValuePairElements());
+		return pXAnnotationElementValuePair;
 	}
 	
 	public ParserRule getXAnnotationElementValuePairRule() {
@@ -420,7 +425,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	//	=> ({xbase::XListLiteral} "#" "[") (elements+=XAnnotationOrExpression ("," elements+=XAnnotationOrExpression)*)? "]" |
 	//	XAnnotationOrExpression ({xbase::XListLiteral.elements+=current} ("," elements+=XAnnotationOrExpression)+)?;
 	public XAnnotationElementValueOrCommaListElements getXAnnotationElementValueOrCommaListAccess() {
-		return (pXAnnotationElementValueOrCommaList != null) ? pXAnnotationElementValueOrCommaList : (pXAnnotationElementValueOrCommaList = new XAnnotationElementValueOrCommaListElements());
+		return pXAnnotationElementValueOrCommaList;
 	}
 	
 	public ParserRule getXAnnotationElementValueOrCommaListRule() {
@@ -431,7 +436,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	//	=> ({xbase::XListLiteral} "#" "[") (elements+=XAnnotationOrExpression ("," elements+=XAnnotationOrExpression)*)? "]" |
 	//	XAnnotationOrExpression;
 	public XAnnotationElementValueElements getXAnnotationElementValueAccess() {
-		return (pXAnnotationElementValue != null) ? pXAnnotationElementValue : (pXAnnotationElementValue = new XAnnotationElementValueElements());
+		return pXAnnotationElementValue;
 	}
 	
 	public ParserRule getXAnnotationElementValueRule() {
@@ -441,7 +446,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	//XAnnotationOrExpression returns xbase::XExpression:
 	//	XAnnotation | XExpression;
 	public XAnnotationOrExpressionElements getXAnnotationOrExpressionAccess() {
-		return (pXAnnotationOrExpression != null) ? pXAnnotationOrExpression : (pXAnnotationOrExpression = new XAnnotationOrExpressionElements());
+		return pXAnnotationOrExpression;
 	}
 	
 	public ParserRule getXAnnotationOrExpressionRule() {
