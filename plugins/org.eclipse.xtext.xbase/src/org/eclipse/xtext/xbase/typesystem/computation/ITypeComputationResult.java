@@ -7,11 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.computation;
 
-import java.util.EnumSet;
-
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -77,18 +74,32 @@ public interface ITypeComputationResult {
 	/* @Nullable */
 	XExpression getExpression();
 	
-	/**
-	 * Conformance information about the actual expression type and
-	 * the expectation.
-	 */
-	/* @NonNull */
-	EnumSet<ConformanceHint> getConformanceHints();
+//	/**
+//	 * Conformance information about the actual expression type and
+//	 * the expectation.
+//	 */
+//	/* @NonNull */
+//	EnumSet<ConformanceHint> getConformanceHints();
 	
 	/**
 	 * Conformance information about the actual expression type and
 	 * the expectation.
 	 */
 	/* @NonNull */
-	EnumSet<ConformanceHint> getCheckedConformanceHints();
+	int getConformanceFlags();
+	
+//	/**
+//	 * Conformance information about the actual expression type and
+//	 * the expectation.
+//	 */
+//	/* @NonNull */
+//	EnumSet<ConformanceHint> getCheckedConformanceHints();
+	
+	/**
+	 * Conformance information about the actual expression type and
+	 * the expectation.
+	 */
+	/* @NonNull */
+	int getCheckedConformanceFlags();
 	
 }

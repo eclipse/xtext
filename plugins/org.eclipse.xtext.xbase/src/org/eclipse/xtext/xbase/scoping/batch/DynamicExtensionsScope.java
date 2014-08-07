@@ -12,7 +12,6 @@ import static com.google.common.collect.Iterables.*;
 import java.beans.Introspector;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -30,7 +29,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHints;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -230,7 +229,7 @@ public class DynamicExtensionsScope extends AbstractSessionBasedExecutableScope 
 					receiver,
 					receiverType,
 					receiverTypeParameterMapping,
-					EnumSet.of(ConformanceHint.SUCCESS, ConformanceHint.CHECKED),
+					ConformanceHints.CHECKED_SUCCESS,
 					firstArgument,
 					argumentType,
 					getArgumentTypeParameterMapping(),
@@ -244,11 +243,11 @@ public class DynamicExtensionsScope extends AbstractSessionBasedExecutableScope 
 				receiver,
 				receiverType,
 				receiverTypeParameterMapping,
-				EnumSet.of(ConformanceHint.SUCCESS, ConformanceHint.CHECKED),
+				ConformanceHints.CHECKED_SUCCESS,
 				firstArgument,
 				argumentType,
 				getArgumentTypeParameterMapping(),
-				EnumSet.of(ConformanceHint.UNCHECKED),
+				ConformanceHints.UNCHECKED,
 				bucket.getId(),
 				getSession().isVisible(feature),
 				validStaticState);
@@ -262,7 +261,7 @@ public class DynamicExtensionsScope extends AbstractSessionBasedExecutableScope 
 				receiver,
 				receiverType, 
 				receiverTypeParameterMapping,
-				EnumSet.of(ConformanceHint.SUCCESS, ConformanceHint.CHECKED),
+				ConformanceHints.CHECKED_SUCCESS,
 				bucket.getId(),
 				getSession().isVisible(feature),
 				validStaticState);

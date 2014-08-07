@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.scoping.batch;
 
 import java.util.Collections;
-import java.util.EnumSet;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -31,7 +30,7 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHints;
 import org.eclipse.xtext.xbase.typesystem.internal.FeatureLinkHelper;
 import org.eclipse.xtext.xbase.typesystem.internal.ScopeProviderAccess;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
@@ -178,8 +177,9 @@ public class FeatureScopes implements IFeatureNames {
 			int id = 100;
 			
 			@Override
-			protected boolean accept(LightweightTypeReference synonymType, EnumSet<ConformanceHint> hints) {
+			protected boolean accept(LightweightTypeReference synonymType, int hints) {
 				List<JvmType> rawTypes = synonymType.getRawTypes();
+				ConformanceHints.checkAllHints(hints);
 				SynonymTypeBucket bucket = new SynonymTypeBucket(id++, rawTypes, resolvedFeaturesProvider, hints);
 				CompoundTypeReference compoundTypeReference = new CompoundTypeReference(synonymType.getOwner(), true);
 				compoundTypeReference.addComponent(featureDeclarator);

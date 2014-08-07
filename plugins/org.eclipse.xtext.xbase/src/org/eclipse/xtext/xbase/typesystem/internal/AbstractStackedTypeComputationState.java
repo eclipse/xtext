@@ -11,7 +11,6 @@ import java.util.List;
 
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -46,13 +45,13 @@ public abstract class AbstractStackedTypeComputationState extends AbstractTypeCo
 	
 	@Override
 	protected LightweightTypeReference acceptType(ResolvedTypes types, AbstractTypeExpectation expectation,
-			LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
+			LightweightTypeReference type, boolean returnType, int hints) {
 		return type;
 	}
 	
 	@Override
 	protected LightweightTypeReference acceptType(XExpression alreadyHandled, ResolvedTypes types, AbstractTypeExpectation expectation,
-			LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
+			LightweightTypeReference type, boolean returnType, int hints) {
 		return type;
 	}
 	

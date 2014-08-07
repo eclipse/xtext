@@ -31,7 +31,7 @@ import org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsTypeCo
 import org.eclipse.xtext.xbase.typesystem.LocalVariableCapturer;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHints;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 import com.google.inject.Inject;
@@ -88,20 +88,20 @@ public class XtendTypeComputer extends XbaseWithAnnotationsTypeComputer {
 		for(ITypeExpectation expectation: state.getExpectations()) {
 			LightweightTypeReference expectedType = expectation.getExpectedType();
 			if (expectedType != null && expectedType.isType(StringConcatenation.class)) {
-				expectation.acceptActualType(expectedType, ConformanceHint.SUCCESS, ConformanceHint.CHECKED, ConformanceHint.DEMAND_CONVERSION);
+				expectation.acceptActualType(expectedType, ConformanceHints.CHECKED_SUCCESS | ConformanceHints.DEMAND_CONVERSION);
 			} else if (expectedType != null && expectedType.isType(StringConcatenationClient.class)) {
-				expectation.acceptActualType(expectedType, ConformanceHint.SUCCESS, ConformanceHint.CHECKED, ConformanceHint.DEMAND_CONVERSION);
+				expectation.acceptActualType(expectedType, ConformanceHints.CHECKED_SUCCESS | ConformanceHints.DEMAND_CONVERSION);
 			} else if (expectedType != null && expectedType.isType(String.class)) {
-				expectation.acceptActualType(expectedType, ConformanceHint.SUCCESS, ConformanceHint.CHECKED, ConformanceHint.DEMAND_CONVERSION);
+				expectation.acceptActualType(expectedType, ConformanceHints.CHECKED_SUCCESS | ConformanceHints.DEMAND_CONVERSION);
 				// TODO this special treatment here should become obsolete as soon as the expectations are properly propagated
 			} else if (!(object.eContainer() instanceof XCastedExpression) && 
 					object.eContainingFeature() != XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET && 
 					(expectedType != null && !expectedType.isResolved() || expectedType == null && !expectation.isVoidTypeAllowed())) {
 				LightweightTypeReference type = getTypeForName(String.class, state);
-				expectation.acceptActualType(type, ConformanceHint.UNCHECKED, ConformanceHint.DEMAND_CONVERSION);
+				expectation.acceptActualType(type, ConformanceHints.UNCHECKED | ConformanceHints.DEMAND_CONVERSION);
 			} else {
 				LightweightTypeReference type = getTypeForName(CharSequence.class, state);
-				expectation.acceptActualType(type, ConformanceHint.UNCHECKED);
+				expectation.acceptActualType(type, ConformanceHints.UNCHECKED);
 			}
 		}
 	}

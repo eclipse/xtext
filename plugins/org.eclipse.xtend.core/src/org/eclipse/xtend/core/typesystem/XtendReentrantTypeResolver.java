@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -66,7 +65,7 @@ import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.InferredTypeIndicator;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHints;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
 import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareReentrantTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.OperationBodyComputationState;
@@ -580,9 +579,9 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 								LightweightTypeReference returnType = dispatchCaseResult.getReturnType();
 								if (returnType != null) {
 									if (returnType.isPrimitiveVoid()) {
-										Set<ConformanceHint> conformanceHints = dispatchCaseResult.getConformanceHints();
-										if (!conformanceHints.contains(ConformanceHint.THROWN_EXCEPTION)) {
-											if (conformanceHints.contains(ConformanceHint.NO_IMPLICIT_RETURN)) {
+										int conformanceHints = dispatchCaseResult.getConformanceFlags();
+										if ((conformanceHints & ConformanceHints.THROWN_EXCEPTION) == 0) {
+											if ((conformanceHints & ConformanceHints.NO_IMPLICIT_RETURN) != 0) {
 												dispatchCaseResults.add(returnType);
 											} else {
 												implicitVoid = returnType;

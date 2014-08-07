@@ -7,11 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import java.util.EnumSet;
-
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHints;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -23,18 +21,16 @@ public class TypeData {
 	private final XExpression expression;
 	private final ITypeExpectation expectation;
 	private final LightweightTypeReference type;
-	private final EnumSet<ConformanceHint> hints;
+	private int hints;
 	private final boolean returnType;
 
 	public TypeData(
 			XExpression expression, 
 			ITypeExpectation expectation, 
 			LightweightTypeReference type,
-			EnumSet<ConformanceHint> hints,
+			int hints,
 			boolean returnType) {
-		if (!hints.contains(ConformanceHint.CHECKED) && !hints.contains(ConformanceHint.UNCHECKED)) {
-			throw new IllegalArgumentException("Invalid hints: " + hints);
-		}
+		ConformanceHints.checkAllHints(hints);
 		this.expression = expression;
 		this.expectation = expectation;
 		this.type = type;
@@ -49,15 +45,20 @@ public class TypeData {
 	@Override
 	public String toString() {
 		return "TypeData [expectation=" + expectation + ", type=" + type
-				+ ", conformanceHint=" + hints + ", returnType=" + returnType + "]";
+				+ ", conformanceHint=" + ConformanceHints.toString(hints) + ", returnType=" + returnType + "]";
 	}
 	
 	public ITypeExpectation getExpectation() {
 		return expectation;
 	}
 	
-	public EnumSet<ConformanceHint> getConformanceHints() {
+	public int getConformanceHints() {
 		return hints;
+	}
+	
+	public void setConformanceHints(int conformanceHints) {
+		ConformanceHints.checkAllHints(conformanceHints);
+		this.hints = conformanceHints;
 	}
 	
 	public XExpression getExpression() {

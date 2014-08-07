@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.computation;
 import static com.google.common.collect.Lists.*;
 
 import java.util.Collections;
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -64,10 +63,9 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.Pair;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHints;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
-import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
@@ -202,12 +200,12 @@ public class XbaseTypeComputer implements ITypeComputer {
 		
 		public void process(ITypeComputationResult result) {
 			resultProcessed = true;
-			if (!result.getConformanceHints().isEmpty() /* equivalent to getActualExpressionType != null */) {
+			if (result.getConformanceFlags() != 0 /* equivalent to getActualExpressionType != null */) {
 				nonNullResultProcessed = true;
 			}
 			LightweightTypeReference expressionReturnType = result.getReturnType();
 			if (expressionReturnType != null) {
-				boolean isExit = result.getCheckedConformanceHints().contains(ConformanceHint.NO_IMPLICIT_RETURN);
+				boolean isExit = (result.getCheckedConformanceFlags() & ConformanceHints.NO_IMPLICIT_RETURN) != 0;
 				if (earlyExit && isExit && !expressionReturnType.isPrimitiveVoid()) {
 					earlyExit = false;
 				}
@@ -239,13 +237,13 @@ public class XbaseTypeComputer implements ITypeComputer {
 					if (earlyExit && allVoid) {
 						if (!expectation.isVoidTypeAllowed()) {
 							AnyTypeReference anyType = new AnyTypeReference(state.getReferenceOwner());
-							expectation.acceptActualType(anyType, ConformanceHint.UNCHECKED);
+							expectation.acceptActualType(anyType, ConformanceHints.UNCHECKED);
 							allPrimitive = false;
 						}
 					} else if (!expectation.isVoidTypeAllowed() && expectation.getExpectedType() == null) {
 						if (!allPrimitive || allVoid) {
 							AnyTypeReference anyType = new AnyTypeReference(state.getReferenceOwner());
-							expectation.acceptActualType(anyType, ConformanceHint.UNCHECKED);
+							expectation.acceptActualType(anyType, ConformanceHints.UNCHECKED);
 						}
 						allPrimitive = false;
 					}
@@ -473,9 +471,9 @@ public class XbaseTypeComputer implements ITypeComputer {
 			for (ITypeExpectation expectation: state.getExpectations()) {
 				LightweightTypeReference expectedType = expectation.getExpectedType();
 				if (expectedType != null && expectedType.isPrimitiveVoid()) {
-					expectation.acceptActualType(getPrimitiveVoid(state), ConformanceHint.CHECKED, ConformanceHint.SUCCESS);
+					expectation.acceptActualType(getPrimitiveVoid(state), ConformanceHints.CHECKED_SUCCESS);
 				} else {
-					expectation.acceptActualType(new AnyTypeReference(expectation.getReferenceOwner()), ConformanceHint.UNCHECKED);
+					expectation.acceptActualType(new AnyTypeReference(expectation.getReferenceOwner()), ConformanceHints.UNCHECKED);
 				}
 			}
 		} else {
@@ -497,7 +495,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 					if (lastExpression instanceof XVariableDeclaration) {
 						addLocalToCurrentScope((XVariableDeclaration)lastExpression, state);
 					}
-					expectation.acceptActualType(getPrimitiveVoid(state), ConformanceHint.CHECKED, ConformanceHint.SUCCESS);
+					expectation.acceptActualType(getPrimitiveVoid(state), ConformanceHints.CHECKED_SUCCESS);
 				} else {
 					state.computeTypes(lastExpression);
 					// add the last expression to the scope, too in order validate for duplicate names, even
@@ -631,14 +629,14 @@ public class XbaseTypeComputer implements ITypeComputer {
 				LightweightTypeReference expectedType = expectation.getExpectedType();
 				if (expectedType != null) {
 					if (expectedType.isType(Character.TYPE) || expectedType.isType(Character.class)) {
-						expectation.acceptActualType(expectedType, ConformanceHint.CHECKED, ConformanceHint.SUCCESS, ConformanceHint.DEMAND_CONVERSION, ConformanceHint.SEALED);
+						expectation.acceptActualType(expectedType, ConformanceHints.CHECKED_SUCCESS | ConformanceHints.DEMAND_CONVERSION | ConformanceHints.SEALED);
 					} else {
 						LightweightTypeReference type = getTypeForName(String.class, state);
-						expectation.acceptActualType(type, ConformanceHint.UNCHECKED);
+						expectation.acceptActualType(type, ConformanceHints.UNCHECKED);
 					}
 				} else {
 					LightweightTypeReference type = getTypeForName(String.class, state);
-					expectation.acceptActualType(type, ConformanceHint.UNCHECKED);
+					expectation.acceptActualType(type, ConformanceHints.UNCHECKED);
 				}
 			}
 		}
@@ -656,26 +654,22 @@ public class XbaseTypeComputer implements ITypeComputer {
 			if(expectedType != null) {
 				if(expectedType.isArray()) {
 					elementTypeExpectation = expectedType.getComponentType();
-					EnumSet<ConformanceHint> allHints = EnumSet.noneOf(ConformanceHint.class);
+					int allHints = 0;
 					for(XExpression element: literal.getElements()) {
 						ITypeComputationResult elementTypeResult = elementTypeExpectation != null
 								? state.withExpectation(elementTypeExpectation).computeTypes(element)
 								: state.withNonVoidExpectation().computeTypes(element);
-						EnumSet<ConformanceHint> hints = elementTypeResult.getCheckedConformanceHints();
-						allHints.addAll(hints);
+						allHints |= elementTypeResult.getCheckedConformanceFlags();
 					}
-					if (allHints.contains(ConformanceHint.INCOMPATIBLE)) {
-						allHints.remove(ConformanceHint.SUCCESS);
-						allHints.add(ConformanceHint.SEALED);
-						allHints.add(ConformanceHint.CHECKED);
-						allHints.add(ConformanceHint.PROPAGATED_TYPE);
-						expectation.acceptActualType(expectedType, allHints.toArray(new ConformanceHint[allHints.size()]));
-					} else if (allHints.contains(ConformanceHint.SUCCESS)) {
-						allHints.add(ConformanceHint.SEALED);
-						allHints.add(ConformanceHint.CHECKED);
-						expectation.acceptActualType(expectedType, allHints.toArray(new ConformanceHint[allHints.size()]));
+					if ((allHints & ConformanceHints.INCOMPATIBLE) != 0) {
+						allHints &= (~ConformanceHints.SUCCESS);
+						allHints |= ConformanceHints.SEALED | ConformanceHints.CHECKED | ConformanceHints.PROPAGATED_TYPE;
+						expectation.acceptActualType(expectedType, allHints);
+					} else if ((allHints & ConformanceHints.SUCCESS) != 0) {
+						allHints |= ConformanceHints.SEALED | ConformanceHints.CHECKED;
+						expectation.acceptActualType(expectedType, allHints);
 					} else {
-						expectation.acceptActualType(expectedType, ConformanceHint.SUCCESS, ConformanceHint.CHECKED, ConformanceHint.SEALED);
+						expectation.acceptActualType(expectedType, ConformanceHints.CHECKED_SUCCESS | ConformanceHints.SEALED);
 					}
 					return; 
 				} else {
@@ -686,14 +680,14 @@ public class XbaseTypeComputer implements ITypeComputer {
 			if(!listTypeCandidates.isEmpty()) {
 				LightweightTypeReference commonListType = services.getTypeConformanceComputer().getCommonSuperType(listTypeCandidates, state.getReferenceOwner());
 				if (commonListType != null) {
-					expectation.acceptActualType(commonListType, ConformanceHint.UNCHECKED);
+					expectation.acceptActualType(commonListType, ConformanceHints.UNCHECKED);
 					
 					LightweightTypeReference commonElementType = getElementOrComponentType(commonListType, state);
 					for (XExpression element : literal.getElements()) {
 						state.refineExpectedType(element, commonElementType);
 					}
 				} else {
-					expectation.acceptActualType(getTypeForName(Object.class, state), ConformanceHint.UNCHECKED);
+					expectation.acceptActualType(getTypeForName(Object.class, state), ConformanceHints.UNCHECKED);
 				}
 			} else {
 				ParameterizedTypeReference unboundCollectionType = new ParameterizedTypeReference(state.getReferenceOwner(), listType);
@@ -703,7 +697,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 					UnboundTypeReference unbound = expectation.createUnboundTypeReference(literal, listType.getTypeParameters().get(0));
 					unboundCollectionType.addTypeArgument(unbound);
 				}
-				expectation.acceptActualType(unboundCollectionType, ConformanceHint.UNCHECKED);
+				expectation.acceptActualType(unboundCollectionType, ConformanceHints.UNCHECKED);
 			}
 		}
 
@@ -734,9 +728,9 @@ public class XbaseTypeComputer implements ITypeComputer {
 					ParameterizedTypeReference boundMapType = new ParameterizedTypeReference(state.getReferenceOwner(), mapType);
 					boundMapType.addTypeArgument(typeParameterMapping.get(pairType.getTypeParameters().get(0)).getTypeReference().getInvariantBoundSubstitute());
 					boundMapType.addTypeArgument(typeParameterMapping.get(pairType.getTypeParameters().get(1)).getTypeReference().getInvariantBoundSubstitute());
-					expectation.acceptActualType(boundMapType, ConformanceHint.UNCHECKED);
+					expectation.acceptActualType(boundMapType, ConformanceHints.UNCHECKED);
 				} else {
-					expectation.acceptActualType(commonSetType, ConformanceHint.UNCHECKED);
+					expectation.acceptActualType(commonSetType, ConformanceHints.UNCHECKED);
 					for (XExpression element : literal.getElements()) {
 						state.refineExpectedType(element, commonElementType);
 					}
@@ -746,7 +740,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 					ParameterizedTypeReference unboundCollectionType = new ParameterizedTypeReference(state.getReferenceOwner(), mapType);
 					unboundCollectionType.addTypeArgument(expectation.createUnboundTypeReference(literal, mapType.getTypeParameters().get(0)));
 					unboundCollectionType.addTypeArgument(expectation.createUnboundTypeReference(literal, mapType.getTypeParameters().get(1)));
-					expectation.acceptActualType(unboundCollectionType, ConformanceHint.UNCHECKED);
+					expectation.acceptActualType(unboundCollectionType, ConformanceHints.UNCHECKED);
 				} else {
 					ParameterizedTypeReference unboundCollectionType = new ParameterizedTypeReference(state.getReferenceOwner(), setType);
 					if (elementTypeExpectation != null) {
@@ -754,7 +748,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 					} else {
 						unboundCollectionType.addTypeArgument(expectation.createUnboundTypeReference(literal, setType.getTypeParameters().get(0)));
 					}
-					expectation.acceptActualType(unboundCollectionType, ConformanceHint.UNCHECKED);
+					expectation.acceptActualType(unboundCollectionType, ConformanceHints.UNCHECKED);
 				}
 			}
 		}
@@ -883,8 +877,8 @@ public class XbaseTypeComputer implements ITypeComputer {
 				if (forExpressionType.isAny() || forExpressionType.isUnknown()) {
 					iterableState.refineExpectedType(object.getForExpression(), iterableOrArray);
 				} else if (forExpressionType.isResolved()) {
-					TypeConformanceResult assignability = iterableOrArray.internalIsAssignableFrom(forExpressionType, new TypeConformanceComputationArgument());
-					if (assignability.isConformant() && !assignability.getConformanceHints().contains(ConformanceHint.RAWTYPE_CONVERSION))
+					int assignability = iterableOrArray.internalIsAssignableFrom(forExpressionType, new TypeConformanceComputationArgument());
+					if ((assignability & ConformanceHints.SUCCESS) != 0 && (assignability & ConformanceHints.RAW_TYPE_CONVERSION) == 0)
 						iterableState.refineExpectedType(object.getForExpression(), forExpressionType);
 					else {
 						ArrayTypeReference array = forExpressionType.tryConvertToArray();
@@ -1040,10 +1034,10 @@ public class XbaseTypeComputer implements ITypeComputer {
 	 */
 	protected void _computeTypes(XDoWhileExpression object, ITypeComputationState state) {
 		ITypeComputationResult loopBodyResult = computeWhileLoopBody(object, state, false);
-		boolean noImplicitReturn = loopBodyResult.getConformanceHints().contains(ConformanceHint.NO_IMPLICIT_RETURN);
+		boolean noImplicitReturn = (loopBodyResult.getConformanceFlags() & ConformanceHints.NO_IMPLICIT_RETURN) != 0;
 		LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
 		if (noImplicitReturn)
-			state.acceptActualType(primitiveVoid, ConformanceHint.NO_IMPLICIT_RETURN, ConformanceHint.UNCHECKED);
+			state.acceptActualType(primitiveVoid, ConformanceHints.NO_IMPLICIT_RETURN | ConformanceHints.UNCHECKED);
 		else
 			state.acceptActualType(primitiveVoid);
 	}
@@ -1119,7 +1113,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 		ITypeComputationState expressionState = state.withExpectation(throwable);
 		ITypeComputationResult types = expressionState.computeTypes(object.getExpression());
 		LightweightTypeReference thrownException = types.getActualExpressionType();
-		state.acceptActualType(getPrimitiveVoid(state), ConformanceHint.NO_IMPLICIT_RETURN, ConformanceHint.THROWN_EXCEPTION);
+		state.acceptActualType(getPrimitiveVoid(state), ConformanceHints.NO_IMPLICIT_RETURN | ConformanceHints.THROWN_EXCEPTION);
 		
 		if (thrownException != null && !thrownException.isUnknown()) {
 			if (!state.isIgnored(IssueCodes.UNHANDLED_EXCEPTION) && thrownException.isSubtypeOf(Throwable.class)
@@ -1154,10 +1148,10 @@ public class XbaseTypeComputer implements ITypeComputer {
 		LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
 		if (returnValue != null) {
 			expressionState.computeTypes(returnValue);
-			state.acceptActualType(primitiveVoid, ConformanceHint.NO_IMPLICIT_RETURN);
+			state.acceptActualType(primitiveVoid, ConformanceHints.NO_IMPLICIT_RETURN);
 		} else {
-			state.acceptActualType(primitiveVoid, ConformanceHint.EXPLICIT_VOID_RETURN);
-			state.acceptActualType(primitiveVoid, ConformanceHint.NO_IMPLICIT_RETURN);
+			state.acceptActualType(primitiveVoid, ConformanceHints.EXPLICIT_VOID_RETURN);
+			state.acceptActualType(primitiveVoid, ConformanceHints.NO_IMPLICIT_RETURN);
 		}
 	}
 	

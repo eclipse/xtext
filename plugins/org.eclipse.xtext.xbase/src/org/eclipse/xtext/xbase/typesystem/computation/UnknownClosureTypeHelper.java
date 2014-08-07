@@ -15,7 +15,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHints;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnknownTypeReference;
@@ -37,7 +37,7 @@ public class UnknownClosureTypeHelper extends AbstractClosureTypeHelper {
 		ITypeComputationState closureBodyTypeComputationState = getClosureBodyTypeComputationState(typeAssigner);
 		closureBodyTypeComputationState.computeTypes(getClosure().getExpression());
 		
-		getExpectation().acceptActualType(new UnknownTypeReference(getExpectation().getReferenceOwner()), ConformanceHint.UNCHECKED);
+		getExpectation().acceptActualType(new UnknownTypeReference(getExpectation().getReferenceOwner()), ConformanceHints.UNCHECKED);
 	}
 
 	/* @Nullable */

@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +23,6 @@ import org.eclipse.xtext.xbase.typesystem.computation.IApplicableCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -137,7 +135,7 @@ public class StackedResolvedTypes extends ResolvedTypes {
 		if (typeReference instanceof UnboundTypeReference && super.isResolved(((UnboundTypeReference) typeReference).getHandle())) {
 			typeReference = typeReference.getUpperBoundSubstitute();
 		}
-		return new TypeData(typeData.getExpression(), typeData.getExpectation().copyInto(owner), typeReference.copyInto(owner), typeData.getConformanceHints().clone(), typeData.isReturnType());
+		return new TypeData(typeData.getExpression(), typeData.getExpectation().copyInto(owner), typeReference.copyInto(owner), typeData.getConformanceHints(), typeData.isReturnType());
 	}
 	
 	protected void mergeLinkingCandidatesIntoParent(ResolvedTypes parent) {
@@ -403,10 +401,11 @@ public class StackedResolvedTypes extends ResolvedTypes {
 		return withParentHints;
 	}
 	
-	protected EnumSet<ConformanceHint> getConformanceHints(XExpression expression, boolean recompute) {
+	protected int getConformanceHints(XExpression expression, boolean recompute) {
 		TypeData typeData = getTypeData(expression, false);
 		if (typeData == null) {
-			return EnumSet.of(ConformanceHint.EXCEPTION);
+			throw new IllegalStateException();
+			// return ConformanceHints.EXCEPTION;
 		}
 		return getConformanceHints(typeData, recompute);
 	}

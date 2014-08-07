@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.typesystem.computation;
 
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
@@ -20,7 +19,9 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
  */
 public interface ITypeExpectation {
 
-	void acceptActualType(LightweightTypeReference type, ConformanceHint... hint);
+//	void acceptActualType(LightweightTypeReference type, ConformanceHint... hint);
+	
+	void acceptActualType(LightweightTypeReference type, int hints);
 
 	OwnedConverter getConverter();
 	

@@ -7,14 +7,12 @@
  */
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import java.util.EnumSet;
 import java.util.List;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 import org.eclipse.xtext.xbase.scoping.batch.TypeBucket;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
 
 /**
@@ -26,9 +24,9 @@ import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
 @Data
 @SuppressWarnings("all")
 public class SynonymTypeBucket extends TypeBucket {
-  private final EnumSet<ConformanceHint> hints;
+  private final int hints;
   
-  public SynonymTypeBucket(final int id, final List<? extends JvmType> types, final IResolvedFeatures.Provider resolvedFeaturesProvider, final EnumSet<ConformanceHint> hints) {
+  public SynonymTypeBucket(final int id, final List<? extends JvmType> types, final IResolvedFeatures.Provider resolvedFeaturesProvider, final int hints) {
     super(id, types, resolvedFeaturesProvider);
     this.hints = hints;
   }
@@ -38,7 +36,7 @@ public class SynonymTypeBucket extends TypeBucket {
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
-    result = prime * result + ((this.hints== null) ? 0 : this.hints.hashCode());
+    result = prime * result + this.hints;
     return result;
   }
   
@@ -54,10 +52,7 @@ public class SynonymTypeBucket extends TypeBucket {
     if (!super.equals(obj))
       return false;
     SynonymTypeBucket other = (SynonymTypeBucket) obj;
-    if (this.hints == null) {
-      if (other.hints != null)
-        return false;
-    } else if (!this.hints.equals(other.hints))
+    if (other.hints != this.hints)
       return false;
     return true;
   }
@@ -72,7 +67,7 @@ public class SynonymTypeBucket extends TypeBucket {
   }
   
   @Pure
-  public EnumSet<ConformanceHint> getHints() {
+  public int getHints() {
     return this.hints;
   }
 }

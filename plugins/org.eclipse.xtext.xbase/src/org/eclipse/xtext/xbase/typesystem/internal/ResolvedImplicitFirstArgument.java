@@ -9,7 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHints;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -29,7 +29,7 @@ public class ResolvedImplicitFirstArgument extends ImplicitFirstArgument {
 		LightweightTypeReference actualType = resolvedTypes.getActualType(getFeature());
 		if (actualType == null)
 			throw new IllegalStateException("Cannot determine actual type of already resolved implicit first argument");
-		resolvedTypes.acceptType(getFeatureCall(), expectation, actualType.copyInto(resolvedTypes.getReferenceOwner()), false, ConformanceHint.UNCHECKED);
+		resolvedTypes.acceptType(getFeatureCall(), expectation, actualType.copyInto(resolvedTypes.getReferenceOwner()), false, ConformanceHints.UNCHECKED);
 		super.applyToComputationState();
 	}
 	

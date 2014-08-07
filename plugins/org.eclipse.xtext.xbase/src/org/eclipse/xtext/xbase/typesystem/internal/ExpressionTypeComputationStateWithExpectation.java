@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -27,7 +26,7 @@ public class ExpressionTypeComputationStateWithExpectation extends TypeComputati
 	@Override
 	protected LightweightTypeReference acceptType(XExpression alreadyHandled, ResolvedTypes types,
 			AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType,
-			ConformanceHint... hints) {
+			int hints) {
 		if (returnType) {
 			getParent().acceptType(alreadyHandled, types, expectation, type, returnType, hints);
 		}

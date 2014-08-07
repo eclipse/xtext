@@ -7,14 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import java.util.EnumSet;
 import java.util.Map;
 
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -38,7 +36,9 @@ public interface IIdentifiableElementDescription extends IEObjectDescription {
 	
 	Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getImplicitReceiverTypeParameterMapping();
 	
-	EnumSet<ConformanceHint> getImplicitReceiverConformanceHints();
+//	EnumSet<ConformanceHint> getImplicitReceiverConformanceHints();
+	
+	int getImplicitReceiverConformanceFlags();
 	
 	/* @Nullable */
 	LightweightTypeReference getSyntacticReceiverType();
@@ -50,7 +50,9 @@ public interface IIdentifiableElementDescription extends IEObjectDescription {
 	
 	Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getSyntacticReceiverTypeParameterMapping();
 	
-	EnumSet<ConformanceHint> getSyntacticReceiverConformanceHints();
+//	EnumSet<ConformanceHint> getSyntacticReceiverConformanceHints();
+	
+	int getSyntacticReceiverConformanceFlags();
 	
 	/* @Nullable */
 	XExpression getImplicitFirstArgument();

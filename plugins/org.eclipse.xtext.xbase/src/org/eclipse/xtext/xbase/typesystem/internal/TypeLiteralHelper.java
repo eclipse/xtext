@@ -13,7 +13,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHints;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
@@ -78,7 +78,7 @@ public class TypeLiteralHelper {
 	protected void applyPackageFragment(XMemberFeatureCall memberFeatureCall, JvmDeclaredType type) {
 		XExpression target = memberFeatureCall.getMemberCallTarget();
 		state.getResolvedTypes().acceptType(target, new NoExpectation(state, false), new ParameterizedTypeReference(state.getReferenceOwner(), type), false,
-				ConformanceHint.SUCCESS, ConformanceHint.CHECKED);
+				ConformanceHints.CHECKED_SUCCESS);
 		if (target instanceof XMemberFeatureCall) {
 			applyPackageFragment((XMemberFeatureCall) target, type);
 		}

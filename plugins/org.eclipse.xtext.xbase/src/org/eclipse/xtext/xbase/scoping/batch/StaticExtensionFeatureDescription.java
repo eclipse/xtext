@@ -7,12 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import java.util.EnumSet;
-
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHints;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -51,8 +49,8 @@ public class StaticExtensionFeatureDescription extends BucketedEObjectDescriptio
 	}
 	
 	@Override
-	public EnumSet<ConformanceHint> getSyntacticReceiverConformanceHints() {
-		return EnumSet.of(ConformanceHint.UNCHECKED);
+	public int getSyntacticReceiverConformanceFlags() {
+		return ConformanceHints.NONE;
 	}
 	
 	public boolean isExtension() {

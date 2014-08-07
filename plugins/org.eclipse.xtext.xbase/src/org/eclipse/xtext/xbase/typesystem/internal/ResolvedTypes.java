@@ -7,10 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -46,9 +44,8 @@ import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandida
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHints;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
-import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
@@ -343,7 +340,35 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		ITypeExpectation expectation = null;
 		boolean allNoImplicitReturn = true;
 		boolean allThrownException = true;
-		EnumSet<ConformanceHint> mergedHints = EnumSet.of(ConformanceHint.MERGED);
+		int mergedHints = ConformanceHints.MERGED;
+		
+		@Override
+		public String toString() {
+			StringBuilder builder = new StringBuilder();
+			builder.append("MergeData [");
+			if (references != null) {
+				builder.append("references=");
+				builder.append(references);
+				builder.append(", ");
+			}
+			builder.append("voidSeen=");
+			builder.append(voidSeen);
+			builder.append(", ");
+			if (expectation != null) {
+				builder.append("expectation=");
+				builder.append(expectation);
+				builder.append(", ");
+			}
+			builder.append("allNoImplicitReturn=");
+			builder.append(allNoImplicitReturn);
+			builder.append(", allThrownException=");
+			builder.append(allThrownException);
+			builder.append(", mergedHints=");
+			builder.append(ConformanceHints.toString(mergedHints));
+			builder.append("]");
+			return builder.toString();
+		}
+		
 	}
 	
 	/* @Nullable */
@@ -428,12 +453,12 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		for (int i = 0, size = values.size(); i < size; i++) {
 			TypeData value = values.get(i);
 			LightweightTypeReference reference = value.getActualType().getUpperBoundSubstitute();
+			int hints = value.getConformanceHints();
 			if (reference.isPrimitiveVoid()) {
-				if (value.getConformanceHints().contains(ConformanceHint.EXPLICIT_VOID_RETURN)) {
+				if ((hints & ConformanceHints.EXPLICIT_VOID_RETURN) != 0) {
 					mergeData.references.clear();
 					mergeData.references.add(reference);
-					mergeData.mergedHints.clear();
-					mergeData.mergedHints.addAll(value.getConformanceHints());
+					mergeData.mergedHints = hints;
 					mergeData.expectation = value.getExpectation();
 					mergeData.voidSeen = false;
 					return;
@@ -442,9 +467,9 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			} else {
 				mergeData.references.add(reference);
 			}
-			mergeData.allNoImplicitReturn = mergeData.allNoImplicitReturn && value.getConformanceHints().contains(ConformanceHint.NO_IMPLICIT_RETURN); 
-			mergeData.allThrownException = mergeData.allThrownException && value.getConformanceHints().contains(ConformanceHint.THROWN_EXCEPTION); 
-			mergeData.mergedHints.addAll(value.getConformanceHints());
+			mergeData.allNoImplicitReturn = mergeData.allNoImplicitReturn && (hints & ConformanceHints.NO_IMPLICIT_RETURN) != 0; 
+			mergeData.allThrownException = mergeData.allThrownException && (hints & ConformanceHints.THROWN_EXCEPTION) != 0;
+			mergeData.mergedHints |= hints;
 			if (mergeData.expectation == null) {
 				mergeData.expectation = value.getExpectation();
 			} else if (mergeData.expectation.getExpectedType() == null) {
@@ -455,10 +480,13 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			}
 		}
 		if (!mergeData.allNoImplicitReturn) {
-			mergeData.mergedHints.remove(ConformanceHint.NO_IMPLICIT_RETURN);
+			mergeData.mergedHints &= ~ConformanceHints.NO_IMPLICIT_RETURN;
 		}
 		if (!mergeData.allThrownException) {
-			mergeData.mergedHints.remove(ConformanceHint.THROWN_EXCEPTION);
+			mergeData.mergedHints &= ~ConformanceHints.THROWN_EXCEPTION;
+		}
+		if ((mergeData.mergedHints & (ConformanceHints.CHECKED | ConformanceHints.UNCHECKED)) == (ConformanceHints.CHECKED | ConformanceHints.UNCHECKED)) {
+			mergeData.mergedHints &= ~ConformanceHints.CHECKED;
 		}
 	}
 	
@@ -672,7 +700,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		ensureReassignedTypesMapExists().put(identifiable, reference);
 	}
 	
-	protected LightweightTypeReference acceptType(final XExpression expression, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
+	protected LightweightTypeReference acceptType(final XExpression expression, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, int hints) {
 		ITypeReferenceOwner referenceOwner = getReferenceOwner();
 		if (!type.isOwnedBy(referenceOwner)) {
 			throw new IllegalArgumentException("type is associated with an incompatible owner");
@@ -704,36 +732,36 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			};
 			actualType = substitutor.substitute(type).getUpperBoundSubstitute();
 		}
-		acceptType(expression, new TypeData(expression, expectation, actualType, EnumSet.copyOf(Arrays.asList(hints)), returnType));
+		acceptType(expression, new TypeData(expression, expectation, actualType, hints, returnType));
 		return actualType;
 	}
 	
-	protected EnumSet<ConformanceHint> getConformanceHints(TypeData typeData, boolean recompute) {
-		EnumSet<ConformanceHint> conformanceHints = typeData.getConformanceHints();
+	protected int getConformanceHints(TypeData typeData, boolean recompute) {
+		int conformanceHints = typeData.getConformanceHints();
 		if (recompute) {
-			if (conformanceHints.contains(ConformanceHint.SEALED)) {
+			if ((conformanceHints & ConformanceHints.SEALED) != 0) {
+				ConformanceHints.checkAllHints(conformanceHints);
 				return conformanceHints;
 			}
-			conformanceHints.add(ConformanceHint.UNCHECKED);
-			conformanceHints.remove(ConformanceHint.INCOMPATIBLE);
-			conformanceHints.remove(ConformanceHint.SUCCESS);
+			conformanceHints &= ~(ConformanceHints.INCOMPATIBLE | ConformanceHints.SUCCESS);
+			conformanceHints |= ConformanceHints.UNCHECKED;
 		}
-		if (conformanceHints.contains(ConformanceHint.UNCHECKED)) {
+		if ((conformanceHints & ConformanceHints.UNCHECKED) != 0) {
 			LightweightTypeReference actualType = typeData.getActualType();
 			ITypeExpectation expectation = typeData.getExpectation();
 			LightweightTypeReference expectedType = expectation.getExpectedType();
 			if (expectedType != null) {
-				TypeConformanceResult conformanceResult = expectedType.getUpperBoundSubstitute().internalIsAssignableFrom(
+				int conformanceResult = expectedType.getUpperBoundSubstitute().internalIsAssignableFrom(
 						actualType, new TypeConformanceComputationArgument());
-				conformanceHints.addAll(conformanceResult.getConformanceHints());
-				conformanceHints.remove(ConformanceHint.UNCHECKED);
-				conformanceHints.add(ConformanceHint.CHECKED);
+				conformanceHints |= conformanceResult | ConformanceHints.CHECKED;
+				conformanceHints &= ~ConformanceHints.UNCHECKED;
 			} else {
-				conformanceHints.remove(ConformanceHint.UNCHECKED);
-				conformanceHints.add(ConformanceHint.CHECKED);
-				conformanceHints.add(ConformanceHint.SUCCESS);
+				conformanceHints &= ~ConformanceHints.UNCHECKED;
+				conformanceHints |= ConformanceHints.CHECKED_SUCCESS; 
 			}
 		}
+		ConformanceHints.checkAllHints(conformanceHints);
+		typeData.setConformanceHints(conformanceHints);
 		return conformanceHints;
 	}
 	

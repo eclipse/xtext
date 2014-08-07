@@ -19,7 +19,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHints;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypes;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
@@ -62,7 +62,7 @@ public class ClosureWithoutExpectationHelper extends AbstractClosureTypeHelper {
 		ITypeComputationResult expressionResult = closureBodyTypeComputationState.computeTypes(getClosure().getExpression());
 		
 		FunctionTypeReference resultClosureType = processExpressionType(incompleteClosureType, expressionResult);
-		getExpectation().acceptActualType(resultClosureType, ConformanceHint.UNCHECKED);
+		getExpectation().acceptActualType(resultClosureType, ConformanceHints.UNCHECKED);
 	}
 	
 	@Override

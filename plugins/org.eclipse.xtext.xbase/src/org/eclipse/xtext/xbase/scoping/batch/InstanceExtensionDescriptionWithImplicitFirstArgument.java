@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.scoping.batch;
 
 import java.util.Collections;
-import java.util.EnumSet;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -16,7 +15,7 @@ import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHints;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -31,7 +30,7 @@ public class InstanceExtensionDescriptionWithImplicitFirstArgument extends Insta
 			XExpression receiver,
 			LightweightTypeReference receiverType,
 			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping,
-			EnumSet<ConformanceHint> receiverConformanceHints,
+			int receiverConformanceHints,
 			XExpression firstArgument,
 			LightweightTypeReference firstArgumentType,
 			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> firstArgumentTypeParameterMapping,
@@ -39,7 +38,7 @@ public class InstanceExtensionDescriptionWithImplicitFirstArgument extends Insta
 			boolean visible,
 			boolean validStaticState) {
 		super(qualifiedName, feature, receiver, receiverType, receiverTypeParameterMapping, receiverConformanceHints, EcoreUtil.copy(firstArgument), firstArgumentType,
-				firstArgumentTypeParameterMapping, EnumSet.noneOf(ConformanceHint.class), bucketId, visible, validStaticState);
+				firstArgumentTypeParameterMapping, ConformanceHints.NONE, bucketId, visible, validStaticState);
 	}
 
 	@Override
@@ -60,8 +59,8 @@ public class InstanceExtensionDescriptionWithImplicitFirstArgument extends Insta
 	}
 	
 	@Override
-	public EnumSet<ConformanceHint> getSyntacticReceiverConformanceHints() {
-		return EnumSet.noneOf(ConformanceHint.class);
+	public int getSyntacticReceiverConformanceFlags() {
+		return ConformanceHints.NONE;
 	}
 	
 	@Override

@@ -15,7 +15,7 @@ import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHints;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.UnknownTypeReference;
 
@@ -44,7 +44,7 @@ public abstract class AbstractUnresolvableReference implements ILinkingCandidate
 	}
 
 	protected void applyType() {
-		state.acceptActualType(new UnknownTypeReference(state.getReferenceOwner()),	ConformanceHint.CHECKED, ConformanceHint.SUCCESS);
+		state.acceptActualType(new UnknownTypeReference(state.getReferenceOwner()),	ConformanceHints.CHECKED_SUCCESS);
 	}
 	
 	protected ExpressionTypeComputationState getState() {

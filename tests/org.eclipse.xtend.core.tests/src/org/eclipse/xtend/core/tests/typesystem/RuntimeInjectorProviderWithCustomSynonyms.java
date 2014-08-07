@@ -14,7 +14,7 @@ import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
 import org.eclipse.xtend.core.tests.RuntimeTestSetup;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHints;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
@@ -57,7 +57,7 @@ public class RuntimeInjectorProviderWithCustomSynonyms extends RuntimeInjectorPr
 			JvmType bigDecimal = owner.getServices().getTypeReferences().findDeclaredType(BigDecimal.class, owner.getContextResourceSet());
 			if (bigDecimal != null) {
 				ParameterizedTypeReference result = new ParameterizedTypeReference(owner, bigDecimal);
-				return announceSynonym(result, ConformanceHint.DEMAND_CONVERSION, acceptor);
+				return announceSynonym(result, ConformanceHints.DEMAND_CONVERSION, acceptor);
 			}
 			return true;
 		}

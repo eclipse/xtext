@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.scoping.batch;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -27,7 +26,6 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -104,7 +102,7 @@ public class ReceiverFeatureScope extends AbstractSessionBasedExecutableScope im
 	}
 
 	protected IEObjectDescription createDescription(QualifiedName name, JvmFeature feature, TypeBucket bucket) {
-		EnumSet<ConformanceHint> conformanceHints = bucket.getHints();
+		int conformanceHints = bucket.getHints();
 		if (implicit) {
 			return new InstanceFeatureDescriptionWithImplicitReceiver(name, feature, receiver, receiverType, getReceiverTypeParameterMapping(), conformanceHints, bucket.getId(), isVisible(feature), validStaticState);
 		} else {

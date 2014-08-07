@@ -27,7 +27,6 @@ import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.scoping.batch.ITypeImporter;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
@@ -301,6 +300,15 @@ public interface ITypeComputationState {
 	 */
 	void acceptCandidate(XExpression expression, IApplicableCandidate candidate);
 	
+//	/**
+//	 * Annotates the currently considered expression(s) with the given type.
+//	 * It is assumed that the type does not depend on the expectation.
+//	 * 
+//	 * The conformance hints are used to decide which variant will be finally chosen, if more than
+//	 * one type was given.
+//	 */
+//	void acceptActualType(LightweightTypeReference type, ConformanceHint... hints);
+	
 	/**
 	 * Annotates the currently considered expression(s) with the given type.
 	 * It is assumed that the type does not depend on the expectation.
@@ -308,7 +316,7 @@ public interface ITypeComputationState {
 	 * The conformance hints are used to decide which variant will be finally chosen, if more than
 	 * one type was given.
 	 */
-	void acceptActualType(LightweightTypeReference type, ConformanceHint... hints);
+	void acceptActualType(LightweightTypeReference type, int hints);
 	
 	// TODO implement this better, especially for instanceof in conditions
 	/**

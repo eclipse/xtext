@@ -15,7 +15,6 @@ import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -108,7 +107,6 @@ import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
@@ -420,7 +418,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		final StringBuilder result = new StringBuilder(canonicalName(expectedType));
 		getServices().getSynonymTypesProvider().collectSynonymTypes(expectedType, new SynonymTypesProvider.Acceptor() {
 			@Override
-			protected boolean accept(LightweightTypeReference synonym, EnumSet<ConformanceHint> hints) {
+			protected boolean accept(LightweightTypeReference synonym, int hints) {
 				result.append(" or ").append(canonicalName(synonym));
 				return true;
 			}

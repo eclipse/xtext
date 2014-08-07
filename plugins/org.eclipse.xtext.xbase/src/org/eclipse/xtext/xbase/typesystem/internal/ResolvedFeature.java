@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.Collections;
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +26,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHints;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -79,7 +78,7 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 				throw new IllegalStateException("Cannot determine type of receiver "+ receiver);
 			}
 			TypeExpectation expectation = new TypeExpectation(null, getState(), false);
-			resolvedTypes.acceptType(receiver, expectation, receiverType.copyInto(resolvedTypes.getReferenceOwner()), false, ConformanceHint.UNCHECKED);
+			resolvedTypes.acceptType(receiver, expectation, receiverType.copyInto(resolvedTypes.getReferenceOwner()), false, ConformanceHints.UNCHECKED);
 		} 
 		getState().markAsRefinedTypeIfNecessary(this);
 		discardRefinementTypeIfReassigned();
@@ -101,7 +100,7 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 					SynonymTypesProvider synonymProvider = services.getSynonymTypesProvider();
 					synonymProvider.collectSynonymTypes(receiverType, new SynonymTypesProvider.Acceptor() {
 						@Override
-						protected boolean accept(LightweightTypeReference synonym, EnumSet<ConformanceHint> hints) {
+						protected boolean accept(LightweightTypeReference synonym, int hints) {
 							if (declaringTypeReference.isAssignableFrom(synonym, rawConformanceCheck)) {
 								expectedReceiverTypeWrapper.set(synonym);
 								return false;
@@ -180,7 +179,7 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 		TypeExpectation expectation = new TypeExpectation(copiedDeclaredType, castedArgumentState, false);
 		LightweightTypeReference copiedReceiverType = knownType.copyInto(resolvedTypes.getReferenceOwner());
 		// TODO should we use the result of #acceptType?
-		resolvedTypes.acceptType(argument, expectation, copiedReceiverType, false, ConformanceHint.UNCHECKED);
+		resolvedTypes.acceptType(argument, expectation, copiedReceiverType, false, ConformanceHints.UNCHECKED);
 		if (copiedDeclaredType != null)
 			resolveAgainstActualType(copiedDeclaredType, copiedReceiverType, castedArgumentState);
 	}
@@ -207,7 +206,7 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 					synonymProvider.collectSynonymTypes(receiverType, new SynonymTypesProvider.Acceptor() {
 						
 						@Override
-						protected boolean accept(LightweightTypeReference synonym, EnumSet<ConformanceHint> hints) {
+						protected boolean accept(LightweightTypeReference synonym, int hints) {
 							if (declaringTypeReference.isAssignableFrom(synonym, rawConformanceCheck)) {
 								receiverTypeParameterMapping.set(new DeclaratorTypeArgumentCollector().getTypeParameterMapping(synonym));
 								return false;
