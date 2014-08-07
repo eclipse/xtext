@@ -7,30 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.impl;
 
-import static com.google.common.collect.Lists.*;
-
-import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.DescriptionUtils;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
-import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategyExtension;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceDescriptions;
-import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.IResourceScopeCache;
 
 import com.google.common.collect.Sets;
@@ -47,7 +38,7 @@ import com.google.inject.Singleton;
  * @author Jan Koehnlein
  */
 @Singleton
-public class DefaultResourceDescriptionManager implements IResourceDescription.Manager, IResourceDescription.ManagerExtension {
+public class DefaultResourceDescriptionManager implements IResourceDescription.Manager {
 
 	@Inject
 	private IDefaultResourceDescriptionStrategy strategy;
@@ -184,80 +175,5 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 	
 	public void setStrategy(IDefaultResourceDescriptionStrategy strategy) {
 		this.strategy = strategy;
-	}
-
-	/**
-	 * @since 2.7
-	 */
-	public IResourceDescription getIndexingResourceDescription(Resource resource) {
-		return internalGetIndexingResourceDescription(resource, strategy);
-	}
-
-	/**
-	 * @since 2.7
-	 */
-	protected IResourceDescription internalGetIndexingResourceDescription(Resource resource, IDefaultResourceDescriptionStrategy strategy2) {
-		return new IndexingResourceDescription(resource, strategy);
-	}
-	
-	/**
-	 * @author Sven Efftinge - Initial contribution and API
-	 * @since 2.7
-	 * 
-	 */
-	public static class IndexingResourceDescription extends DefaultResourceDescription {
-		
-		private final static Logger log = Logger.getLogger(IndexingResourceDescription.class);
-		
-		private IDefaultResourceDescriptionStrategy strategy;
-
-		public IndexingResourceDescription(Resource resource, IDefaultResourceDescriptionStrategy strategy) {
-			super(resource, strategy);
-			this.strategy = strategy;
-		}
-
-		@Override
-		public Iterable<QualifiedName> getImportedNames() {
-			throw new UnsupportedOperationException("Should never be called, as this is an IndexingResourceDescription");
-		}
-
-		@Override
-		public Iterable<IReferenceDescription> getReferenceDescriptions() {
-			throw new UnsupportedOperationException("Should never be called, as this is an IndexingResourceDescription");
-		}
-
-		@Override
-		protected List<IEObjectDescription> computeExportedObjects() {
-			if (!getResource().isLoaded()) {
-				try {
-					getResource().load(null);
-				} catch (IOException e) {
-					log.error(e.getMessage(), e);
-					return Collections.<IEObjectDescription> emptyList();
-				}
-			}
-			final List<IEObjectDescription> exportedEObjects = newArrayList();
-			IAcceptor<IEObjectDescription> acceptor = new IAcceptor<IEObjectDescription>() {
-				public void accept(IEObjectDescription eObjectDescription) {
-					exportedEObjects.add(eObjectDescription);
-				}
-			};
-			TreeIterator<EObject> allProperContents = getAllProperContents();
-			if (strategy instanceof IDefaultResourceDescriptionStrategyExtension) {
-				IDefaultResourceDescriptionStrategyExtension strategyExtension = (IDefaultResourceDescriptionStrategyExtension) strategy;
-				while (allProperContents.hasNext()) {
-					EObject content = allProperContents.next();
-					if (!strategyExtension.createIndexingEObjectDescriptions(content, acceptor))
-						allProperContents.prune();
-				}
-			} else {
-				while (allProperContents.hasNext()) {
-					EObject content = allProperContents.next();
-					if (!strategy.createEObjectDescriptions(content, acceptor))
-						allProperContents.prune();
-				}
-			}
-			return exportedEObjects;
-		}
 	}
 }

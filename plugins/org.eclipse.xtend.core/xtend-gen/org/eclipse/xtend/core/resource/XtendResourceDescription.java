@@ -20,7 +20,6 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
@@ -54,12 +53,6 @@ public class XtendResourceDescription extends DefaultResourceDescription {
     super(resource, strategy, cache);
     this.typeResolver = typeResolver;
     this.nameConverter = nameConverter;
-  }
-  
-  protected TreeIterator<EObject> getAllProperContents() {
-    Resource _resource = this.getResource();
-    final EList<EObject> contents = ((DerivedStateAwareResource) _resource).rawGetContents();
-    return EcoreUtil.<EObject>getAllProperContents(contents, false);
   }
   
   protected EObjectDescriptionLookUp getLookUp() {

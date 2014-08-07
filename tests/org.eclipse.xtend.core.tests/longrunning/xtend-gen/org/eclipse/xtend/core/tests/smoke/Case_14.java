@@ -46,7 +46,7 @@ public class Case_14 extends AbstractXtendTestCase {
   @Test
   public void testInference() {
     final IJvmModelInferrer _function = new IJvmModelInferrer() {
-      public void infer(final EObject obj, final IJvmDeclaredTypeAcceptor acceptor) {
+      public void infer(final EObject obj, final IJvmDeclaredTypeAcceptor acceptor, final boolean preIndexing) {
         final JvmGenericType firstType = Case_14.this._jvmTypesBuilder.toClass(obj, "foo.Bar");
         final JvmGenericType secondType = Case_14.this._jvmTypesBuilder.toClass(obj, "foo.Baz");
         Resource _eResource = secondType.eResource();

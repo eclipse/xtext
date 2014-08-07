@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
-import java.util.List;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
@@ -33,10 +31,6 @@ public class DerivedStateAwareResource extends LazyLinkingResource {
 		this.derivedStateComputer = lateInitialization;
 	}
 	
-	/**
-	 * @since 2.7
-	 */
-	protected volatile boolean indexingStateInitialized = false;
 	protected volatile boolean fullyInitialized = false;
 	protected volatile boolean isInitializing = false;
 
@@ -45,13 +39,6 @@ public class DerivedStateAwareResource extends LazyLinkingResource {
 	 */
 	public boolean isFullyInitialized() {
 		return fullyInitialized;
-	}
-	
-	/**
-	 * @since 2.7
-	 */
-	public boolean isIndexingStateInitialized() {
-		return indexingStateInitialized;
 	}
 	
 	/**
@@ -64,7 +51,6 @@ public class DerivedStateAwareResource extends LazyLinkingResource {
 	public synchronized EList<EObject> getContents() {
 		if (isLoaded && !isLoading && !isInitializing && !isUpdating && !fullyInitialized) {
 			try {
-				//TODO no notifications here?
 				eSetDeliver(false);
 				installDerivedState(false);
 			} finally {
@@ -82,26 +68,21 @@ public class DerivedStateAwareResource extends LazyLinkingResource {
 	}
 	
 	/**
-	 * 
-	 * @return the current contents of this resource, without automatically initializing it.
-	 * @since 2.7
-	 */
-	public EList<EObject> rawGetContents() {
-		return doGetContents();
-	}
-	
-	/**
 	 * @since 2.4
 	 */
 	@Override
 	protected void clearInternalState() {
-		discardDerivedState();
+		if (fullyInitialized) {
+			discardDerivedState();
+		}
 		super.clearInternalState();
 	}
 	
 	@Override
 	protected void updateInternalState(IParseResult oldParseResult, IParseResult newParseResult) {
-		discardDerivedState();
+		if (fullyInitialized) {
+			discardDerivedState();
+		}
 		super.updateInternalState(oldParseResult, newParseResult);
 	}
 	
@@ -132,8 +113,7 @@ public class DerivedStateAwareResource extends LazyLinkingResource {
 				return "0"; 
 			}
 		}
-	    List<EObject> contents = unloadingContents != null ? unloadingContents : rawGetContents();
-	    return contents.size() > 1 ? Integer.toString(contents.indexOf(eObject)) : "";
+		return super.getURIFragmentRootSegment(eObject);
 	}
 	
 	/**
@@ -149,13 +129,12 @@ public class DerivedStateAwareResource extends LazyLinkingResource {
 	
 
 	public void discardDerivedState() {
-		if (isLoaded && indexingStateInitialized && !isInitializing) {
+		if (isLoaded && fullyInitialized && !isInitializing) {
 			try {
 				isInitializing = true;
 				if (derivedStateComputer != null)
 					derivedStateComputer.discardDerivedState(this);
 				fullyInitialized = false;
-				indexingStateInitialized = false;
 			} finally {
 				isInitializing = false;
 				getCache().clear(this);
@@ -166,34 +145,17 @@ public class DerivedStateAwareResource extends LazyLinkingResource {
 	public void installDerivedState(boolean preIndexingPhase) {
 		if (!isLoaded)
 			throw new IllegalStateException("The resource must be loaded, before installDerivedState can be called.");
-		if (isInitializing)
-			return;
-		if (!preIndexingPhase && fullyInitialized) {
-			return;
-		}
-		if (preIndexingPhase && indexingStateInitialized && canReconcileState()) {
-			return;
-		}
-		try {
-			isInitializing = true;
-			if (derivedStateComputer != null)
-				derivedStateComputer.installDerivedState(this, preIndexingPhase);
-			fullyInitialized = !preIndexingPhase;
-			indexingStateInitialized = true;
-		} finally {
-			isInitializing = false;
-			getCache().clear(this);
+		if (!fullyInitialized && !isInitializing) {
+			try {
+				isInitializing = true;
+				if (derivedStateComputer != null)
+					derivedStateComputer.installDerivedState(this, preIndexingPhase);
+				fullyInitialized = true;
+			} finally {
+				isInitializing = false;
+				getCache().clear(this);
+			}
 		}
 	}
 	
-	/**
-	 * @since 2.7
-	 */
-	public boolean canReconcileState() {
-		if (derivedStateComputer instanceof IDerivedStateComputerExtension) {
-			return ((IDerivedStateComputerExtension) derivedStateComputer).canReconcileState();
-		}
-		return false;
-	}
-
 }

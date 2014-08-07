@@ -57,23 +57,6 @@ public class JvmTypesResourceDescriptionStrategy extends DefaultResourceDescript
 		return true;
 	}
 	
-	@Override
-	public boolean createIndexingEObjectDescriptions(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {
-		if (getQualifiedNameProvider() == null)
-			return false;
-		try {
-			QualifiedName qualifiedName = getQualifiedNameProvider().getFullyQualifiedName(eObject);
-			if (qualifiedName != null) {
-				Builder<String, String> userData = ImmutableMap.builder();
-				createUserData(eObject, userData);
-				acceptor.accept(EObjectDescription.create(qualifiedName, eObject.eClass(), eObject.eResource().getURI(), eObject.eResource().getURIFragment(eObject), userData.build()));
-			}
-		} catch (Exception exc) {
-			LOG.error(exc.getMessage());
-		}
-		return true;
-	}
-	
 	protected Map<String, String> createLazyUserData(final EObject eObject) { 
 		return new ForwardingMap<String, String>() {
 			private Map<String,String> delegate; 
@@ -83,7 +66,6 @@ public class JvmTypesResourceDescriptionStrategy extends DefaultResourceDescript
 				if(delegate == null) {
 					Builder<String, String> userData = ImmutableMap.builder();
 					createUserData(eObject, userData);
-					createSignatureHash(eObject, userData);
 					delegate = userData.build();
 				} 
 				return delegate;
@@ -91,14 +73,9 @@ public class JvmTypesResourceDescriptionStrategy extends DefaultResourceDescript
 		};
 	}
 
-	protected void createSignatureHash(EObject eObject, Builder<String, String> userData) {
-		if (eObject instanceof JvmDeclaredType) {
-			userData.put(SIGNATURE_HASH_KEY, hashProvider.getHash((JvmDeclaredType) eObject));
-		}
-	}
-
 	protected void createUserData(EObject eObject, ImmutableMap.Builder<String, String> userData) {
 		if (eObject instanceof JvmDeclaredType) {
+			userData.put(SIGNATURE_HASH_KEY, hashProvider.getHash((JvmDeclaredType) eObject));
 			if (eObject.eContainer() != null) {
 				userData.put(IS_NESTED_TYPE, Boolean.TRUE.toString());
 			}

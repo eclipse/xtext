@@ -24,9 +24,7 @@ import org.junit.Test;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
 public class JvmModelInferrerTest {
-	
 	public static class MyOldInferrer extends AbstractModelInferrer {
 		public final List<EObject> other = newArrayList();
 
@@ -46,10 +44,6 @@ public class JvmModelInferrerTest {
 				inferrer.infer(clazz, new IJvmDeclaredTypeAcceptor() {
 					public <T extends JvmDeclaredType> IPostIndexingInitializing<T> accept(T type) {
 						return null;
-					}
-
-					public void runAfterIndexing(Runnable runnable) {
-						
 					}
 				}, false);
 			}

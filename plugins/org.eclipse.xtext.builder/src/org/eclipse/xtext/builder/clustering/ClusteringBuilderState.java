@@ -363,18 +363,12 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                     if (manager != null) {
                         // We don't care here about links, we really just want the exported objects so that we can link in the
                         // next phase.
-                        IResourceDescription description = null;
-                        if (manager instanceof IResourceDescription.ManagerExtension) {
-                        	description = ((IResourceDescription.ManagerExtension) manager).getIndexingResourceDescription(resource);
-                        } else {
-                        	description = manager.getResourceDescription(resource);
-                        }
+                        final IResourceDescription description = manager.getResourceDescription(resource);
                         final IResourceDescription copiedDescription = new CopiedResourceDescription(description);
                         // We also don't care what kind of Delta we get here; it's just a temporary transport vehicle. That interface
                         // could do with some clean-up, too, because all we actually want to do is register the new resource
                         // description, not the delta.
-                        DefaultResourceDescriptionDelta delta = new DefaultResourceDescriptionDelta(oldState.getResourceDescription(uri), copiedDescription);
-						newState.register(delta);
+                        newState.register(new DefaultResourceDescriptionDelta(oldState.getResourceDescription(uri), copiedDescription));
                         buildData.queueURI(uri);
                     }
                 } catch (final RuntimeException ex) {
