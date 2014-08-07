@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -24,7 +23,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.typesystem.computation.IApplicableCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.ExtendedEarlyExitComputer;
@@ -121,18 +120,19 @@ public class RootResolvedTypes extends ResolvedTypes {
 		if (typeData != null) {
 			LightweightTypeReference actualType = typeData.getActualType();
 			ITypeExpectation expectation = typeData.getExpectation();
-			if (!typeData.getConformanceHints().contains(ConformanceHint.NO_IMPLICIT_RETURN) && !typeData.getConformanceHints().contains(ConformanceHint.PROPAGATED_TYPE)) {
+			int knownFlags = typeData.getConformanceFlags();
+			if ((knownFlags & (ConformanceFlags.NO_IMPLICIT_RETURN | ConformanceFlags.PROPAGATED_TYPE)) == 0) {
 				if (actualType.isPrimitiveVoid() && isIntentionalEarlyExit(expression)) {
 					return;
 				}
 				LightweightTypeReference expectedType = expectation.getExpectedType();
 				if (expectedType != null) {
 					if (!expectedType.isPrimitiveVoid()) {
-						EnumSet<ConformanceHint> conformanceHints = getConformanceHints(typeData, false);
-						if (!isSuccess(conformanceHints)) {
+						int conformanceFlags = getConformanceFlags(typeData, false);
+						if (!((conformanceFlags & ConformanceFlags.SUCCESS) != 0)) {
 							AbstractDiagnostic diagnostic = createTypeDiagnostic(expression, actualType, expectedType);
 							if (diagnostic == null) {
-								typeData.getConformanceHints().add(ConformanceHint.UNCHECKED);
+//								knownFlags |= ConformanceFlags.UNCHECKED;
 							} else {
 								acceptor.accept(diagnostic);
 							}
@@ -189,16 +189,6 @@ public class RootResolvedTypes extends ResolvedTypes {
 		}
 	}
 
-	protected boolean isSuccess(EnumSet<ConformanceHint> conformanceHints) {
-		if (!conformanceHints.contains(ConformanceHint.SUCCESS)) {
-			return false;
-		}
-		if (conformanceHints.contains(ConformanceHint.NO_IMPLICIT_RETURN)) {
-			return true;
-		}
-		return true;
-	}
-	
 	protected void addLinkingDiagnostics(IAcceptor<? super AbstractDiagnostic> acceptor) {
 		Map<XExpression, IApplicableCandidate> candidates = basicGetLinkingMap();
 		for(IApplicableCandidate candidate: candidates.values()) {

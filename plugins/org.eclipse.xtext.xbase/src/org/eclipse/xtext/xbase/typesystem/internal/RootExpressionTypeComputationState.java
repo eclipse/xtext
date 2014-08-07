@@ -10,10 +10,9 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.xtext.util.Arrays;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -31,11 +30,11 @@ public class RootExpressionTypeComputationState extends ExpressionTypeComputatio
 		}
 
 		@Override
-		public void acceptActualType(LightweightTypeReference type, ConformanceHint... hints) {
-			if (Arrays.contains(hints, ConformanceHint.EXPLICIT_VOID_RETURN)) {
+		public void acceptActualType(LightweightTypeReference type, int flags) {
+			if ((flags & ConformanceFlags.EXPLICIT_VOID_RETURN) != 0) {
 				rootState.expectedReturnType = type;
 			}
-			super.acceptActualType(type, hints);
+			super.acceptActualType(type, flags);
 		}
 		
 		@Override

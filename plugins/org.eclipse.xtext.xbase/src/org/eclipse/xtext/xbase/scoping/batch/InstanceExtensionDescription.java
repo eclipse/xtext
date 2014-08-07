@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import java.util.EnumSet;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -15,7 +14,6 @@ import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -27,7 +25,7 @@ public class InstanceExtensionDescription extends InstanceFeatureDescription {
 	private final XExpression firstArgument;
 	private final LightweightTypeReference firstArgumentType;
 	private final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> firstArgumentTypeParameterMapping;
-	private final EnumSet<ConformanceHint> firstArgumentConformanceHints;
+	private final int firstArgumentConformanceFlags;
 	private final boolean validStaticState;
 
 	protected InstanceExtensionDescription(
@@ -36,19 +34,19 @@ public class InstanceExtensionDescription extends InstanceFeatureDescription {
 			XExpression receiver,
 			LightweightTypeReference receiverType,
 			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping,
-			EnumSet<ConformanceHint> receiverConformanceHints,
+			int receiverConformanceFlags,
 			XExpression firstArgument,
 			LightweightTypeReference firstArgumentType,
 			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> firstArgumentTypeParameterMapping,
-			EnumSet<ConformanceHint> firstArgumentConformanceHints,
+			int firstArgumentConformanceFlags,
 			int bucketId,
 			boolean visible,
 			boolean validStaticState) {
-		super(qualifiedName, feature, EcoreUtil.copy(receiver), receiverType, typeParameterMapping, receiverConformanceHints, bucketId, visible);
+		super(qualifiedName, feature, EcoreUtil.copy(receiver), receiverType, typeParameterMapping, receiverConformanceFlags, bucketId, visible);
 		this.firstArgument = firstArgument;
 		this.firstArgumentType = firstArgumentType;
 		this.firstArgumentTypeParameterMapping = firstArgumentTypeParameterMapping;
-		this.firstArgumentConformanceHints = firstArgumentConformanceHints;
+		this.firstArgumentConformanceFlags = firstArgumentConformanceFlags;
 		this.validStaticState = validStaticState;
 	}
 	
@@ -75,8 +73,8 @@ public class InstanceExtensionDescription extends InstanceFeatureDescription {
 	}
 	
 	@Override
-	public EnumSet<ConformanceHint> getImplicitReceiverConformanceHints() {
-		return super.getSyntacticReceiverConformanceHints();
+	public int getImplicitReceiverConformanceFlags() {
+		return super.getSyntacticReceiverConformanceFlags();
 	}
 	
 	@Override
@@ -97,8 +95,8 @@ public class InstanceExtensionDescription extends InstanceFeatureDescription {
 	}
 	
 	@Override
-	public EnumSet<ConformanceHint> getSyntacticReceiverConformanceHints() {
-		return firstArgumentConformanceHints;
+	public int getSyntacticReceiverConformanceFlags() {
+		return firstArgumentConformanceFlags;
 	}
 
 	@Override

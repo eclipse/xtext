@@ -7,10 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -46,9 +44,8 @@ import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandida
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
-import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
@@ -343,7 +340,35 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		ITypeExpectation expectation = null;
 		boolean allNoImplicitReturn = true;
 		boolean allThrownException = true;
-		EnumSet<ConformanceHint> mergedHints = EnumSet.of(ConformanceHint.MERGED);
+		int mergedFlags = ConformanceFlags.MERGED;
+		
+		@Override
+		public String toString() {
+			StringBuilder builder = new StringBuilder();
+			builder.append("MergeData [");
+			if (references != null) {
+				builder.append("references=");
+				builder.append(references);
+				builder.append(", ");
+			}
+			builder.append("voidSeen=");
+			builder.append(voidSeen);
+			builder.append(", ");
+			if (expectation != null) {
+				builder.append("expectation=");
+				builder.append(expectation);
+				builder.append(", ");
+			}
+			builder.append("allNoImplicitReturn=");
+			builder.append(allNoImplicitReturn);
+			builder.append(", allThrownException=");
+			builder.append(allThrownException);
+			builder.append(", mergedFlags=");
+			builder.append(ConformanceFlags.toString(mergedFlags));
+			builder.append("]");
+			return builder.toString();
+		}
+		
 	}
 	
 	/* @Nullable */
@@ -384,14 +409,14 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			throw new IllegalStateException("Expectation should never be null here");
 		}
 		mergedType = refineMergedType(mergeData, mergedType, returnType, nullIfEmpty);
-		TypeData result = new TypeData(expression, mergeData.expectation, mergedType, mergeData.mergedHints , returnType);
+		TypeData result = new TypeData(expression, mergeData.expectation, mergedType, mergeData.mergedFlags , returnType);
 		return result;
 	}
 
 	private TypeData getSingleMergeResult(TypeData typeData, final XExpression expression, boolean returnType) {
 		LightweightTypeReference upperBoundSubstitute = typeData.getActualType().getUpperBoundSubstitute();
 		if (upperBoundSubstitute != typeData.getActualType())
-			return new TypeData(expression, typeData.getExpectation(), upperBoundSubstitute, typeData.getConformanceHints(), returnType);
+			return new TypeData(expression, typeData.getExpectation(), upperBoundSubstitute, typeData.getConformanceFlags(), returnType);
 		return typeData;
 	}
 
@@ -420,7 +445,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 
 	/* @Nullable */
 	private LightweightTypeReference getMergedType(MergeData mergeData, List<TypeData> values) {
-		LightweightTypeReference mergedType = !mergeData.references.isEmpty() || !mergeData.voidSeen ? getMergedType(/*mergedHints, */mergeData.references) : values.get(0).getActualType();
+		LightweightTypeReference mergedType = !mergeData.references.isEmpty() || !mergeData.voidSeen ? getMergedType(/*mergedFlags, */mergeData.references) : values.get(0).getActualType();
 		return mergedType;
 	}
 
@@ -428,12 +453,12 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		for (int i = 0, size = values.size(); i < size; i++) {
 			TypeData value = values.get(i);
 			LightweightTypeReference reference = value.getActualType().getUpperBoundSubstitute();
+			int flags = value.getConformanceFlags();
 			if (reference.isPrimitiveVoid()) {
-				if (value.getConformanceHints().contains(ConformanceHint.EXPLICIT_VOID_RETURN)) {
+				if ((flags & ConformanceFlags.EXPLICIT_VOID_RETURN) != 0) {
 					mergeData.references.clear();
 					mergeData.references.add(reference);
-					mergeData.mergedHints.clear();
-					mergeData.mergedHints.addAll(value.getConformanceHints());
+					mergeData.mergedFlags = flags;
 					mergeData.expectation = value.getExpectation();
 					mergeData.voidSeen = false;
 					return;
@@ -442,9 +467,9 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			} else {
 				mergeData.references.add(reference);
 			}
-			mergeData.allNoImplicitReturn = mergeData.allNoImplicitReturn && value.getConformanceHints().contains(ConformanceHint.NO_IMPLICIT_RETURN); 
-			mergeData.allThrownException = mergeData.allThrownException && value.getConformanceHints().contains(ConformanceHint.THROWN_EXCEPTION); 
-			mergeData.mergedHints.addAll(value.getConformanceHints());
+			mergeData.allNoImplicitReturn = mergeData.allNoImplicitReturn && (flags & ConformanceFlags.NO_IMPLICIT_RETURN) != 0; 
+			mergeData.allThrownException = mergeData.allThrownException && (flags & ConformanceFlags.THROWN_EXCEPTION) != 0;
+			mergeData.mergedFlags |= flags;
 			if (mergeData.expectation == null) {
 				mergeData.expectation = value.getExpectation();
 			} else if (mergeData.expectation.getExpectedType() == null) {
@@ -455,10 +480,13 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			}
 		}
 		if (!mergeData.allNoImplicitReturn) {
-			mergeData.mergedHints.remove(ConformanceHint.NO_IMPLICIT_RETURN);
+			mergeData.mergedFlags &= ~ConformanceFlags.NO_IMPLICIT_RETURN;
 		}
 		if (!mergeData.allThrownException) {
-			mergeData.mergedHints.remove(ConformanceHint.THROWN_EXCEPTION);
+			mergeData.mergedFlags &= ~ConformanceFlags.THROWN_EXCEPTION;
+		}
+		if ((mergeData.mergedFlags & (ConformanceFlags.CHECKED | ConformanceFlags.UNCHECKED)) == (ConformanceFlags.CHECKED | ConformanceFlags.UNCHECKED)) {
+			mergeData.mergedFlags &= ~ConformanceFlags.CHECKED;
 		}
 	}
 	
@@ -672,7 +700,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		ensureReassignedTypesMapExists().put(identifiable, reference);
 	}
 	
-	protected LightweightTypeReference acceptType(final XExpression expression, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
+	protected LightweightTypeReference acceptType(final XExpression expression, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, int flags) {
 		ITypeReferenceOwner referenceOwner = getReferenceOwner();
 		if (!type.isOwnedBy(referenceOwner)) {
 			throw new IllegalArgumentException("type is associated with an incompatible owner");
@@ -704,37 +732,37 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			};
 			actualType = substitutor.substitute(type).getUpperBoundSubstitute();
 		}
-		acceptType(expression, new TypeData(expression, expectation, actualType, EnumSet.copyOf(Arrays.asList(hints)), returnType));
+		acceptType(expression, new TypeData(expression, expectation, actualType, flags, returnType));
 		return actualType;
 	}
 	
-	protected EnumSet<ConformanceHint> getConformanceHints(TypeData typeData, boolean recompute) {
-		EnumSet<ConformanceHint> conformanceHints = typeData.getConformanceHints();
+	protected int getConformanceFlags(TypeData typeData, boolean recompute) {
+		int flags = typeData.getConformanceFlags();
 		if (recompute) {
-			if (conformanceHints.contains(ConformanceHint.SEALED)) {
-				return conformanceHints;
+			if ((flags & ConformanceFlags.SEALED) != 0) {
+				ConformanceFlags.sanityCheck(flags);
+				return flags;
 			}
-			conformanceHints.add(ConformanceHint.UNCHECKED);
-			conformanceHints.remove(ConformanceHint.INCOMPATIBLE);
-			conformanceHints.remove(ConformanceHint.SUCCESS);
+			flags &= ~(ConformanceFlags.INCOMPATIBLE | ConformanceFlags.SUCCESS);
+			flags |= ConformanceFlags.UNCHECKED;
 		}
-		if (conformanceHints.contains(ConformanceHint.UNCHECKED)) {
+		if ((flags & ConformanceFlags.UNCHECKED) != 0) {
 			LightweightTypeReference actualType = typeData.getActualType();
 			ITypeExpectation expectation = typeData.getExpectation();
 			LightweightTypeReference expectedType = expectation.getExpectedType();
 			if (expectedType != null) {
-				TypeConformanceResult conformanceResult = expectedType.getUpperBoundSubstitute().internalIsAssignableFrom(
+				int conformanceResult = expectedType.getUpperBoundSubstitute().internalIsAssignableFrom(
 						actualType, new TypeConformanceComputationArgument());
-				conformanceHints.addAll(conformanceResult.getConformanceHints());
-				conformanceHints.remove(ConformanceHint.UNCHECKED);
-				conformanceHints.add(ConformanceHint.CHECKED);
+				flags |= conformanceResult | ConformanceFlags.CHECKED;
+				flags &= ~ConformanceFlags.UNCHECKED;
 			} else {
-				conformanceHints.remove(ConformanceHint.UNCHECKED);
-				conformanceHints.add(ConformanceHint.CHECKED);
-				conformanceHints.add(ConformanceHint.SUCCESS);
+				flags &= ~ConformanceFlags.UNCHECKED;
+				flags |= ConformanceFlags.CHECKED_SUCCESS; 
 			}
 		}
-		return conformanceHints;
+		ConformanceFlags.sanityCheck(flags);
+		typeData.setConformanceFlags(flags);
+		return flags;
 	}
 	
 	protected void acceptType(XExpression expression, TypeData typeData) {
@@ -779,7 +807,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		Collection<TypeData> typeData = ensureExpressionTypesMapExists().get(receiver);
 		List<TypeData> replaced = Lists.newArrayListWithCapacity(typeData.size());
 		for(TypeData existing: typeData) {
-			TypeData newTypeData = new TypeData(receiver, refinedExpectation, existing.getActualType(), existing.getConformanceHints(), existing.isReturnType());
+			TypeData newTypeData = new TypeData(receiver, refinedExpectation, existing.getActualType(), existing.getConformanceFlags(), existing.isReturnType());
 			replaced.add(newTypeData);
 		}
 		ensureExpressionTypesMapExists().put(receiver, replaced);

@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.computation;
 
+import java.util.EnumSet;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.scoping.batch.ITypeImporter;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -309,6 +311,26 @@ public interface ITypeComputationState {
 	 * one type was given.
 	 */
 	void acceptActualType(LightweightTypeReference type, ConformanceHint... hints);
+	
+	/**
+	 * Annotates the currently considered expression(s) with the given type.
+	 * It is assumed that the type does not depend on the expectation.
+	 * 
+	 * The conformance hints are used to decide which variant will be finally chosen, if more than
+	 * one type was given.
+	 */
+	void acceptActualType(LightweightTypeReference type, EnumSet<ConformanceHint> hints);
+	
+	/**
+	 * Annotates the currently considered expression(s) with the given type.
+	 * It is assumed that the type does not depend on the expectation.
+	 * 
+	 * The flags are used to decide which variant will be finally chosen, if more than
+	 * one type was given.
+	 * 
+	 * @see ConformanceFlags
+	 */
+	void acceptActualType(LightweightTypeReference type, int flags);
 	
 	// TODO implement this better, especially for instanceof in conditions
 	/**

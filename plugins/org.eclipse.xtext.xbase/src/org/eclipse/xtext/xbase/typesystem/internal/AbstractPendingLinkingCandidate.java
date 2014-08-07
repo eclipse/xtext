@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import static java.util.Collections.*;
 
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
@@ -39,11 +38,10 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.conformance.RawTypeConformanceComputer;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
-import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
@@ -759,10 +757,10 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		boolean invalid = false;
 		int upTo = Math.max(arguments.getArgumentCount(), right.arguments.getArgumentCount());
 		for(int leftIdx = hasReceiver() ? 0 : -1, rightIdx = right.hasReceiver() ? 0 : -1; leftIdx < upTo || rightIdx < upTo; leftIdx++, rightIdx++) {
-			EnumSet<ConformanceHint> leftConformance = getConformanceHints(leftIdx, recompute);
-			EnumSet<ConformanceHint> rightConformance = right.getConformanceHints(rightIdx, recompute);
-			CandidateCompareResult hintCompareResult = compareByArgumentTypes(right, leftIdx, rightIdx, leftConformance, rightConformance);
-			switch(hintCompareResult) {
+			int leftConformance = getConformanceFlags(leftIdx, recompute);
+			int rightConformance = right.getConformanceFlags(rightIdx, recompute);
+			CandidateCompareResult argumentCompareResult = compareByArgumentTypesFlags(right, leftIdx, rightIdx, leftConformance, rightConformance);
+			switch(argumentCompareResult) {
 				case SUSPICIOUS_OTHER:
 					throw new IllegalStateException();
 				case EQUALLY_INVALID:
@@ -770,35 +768,35 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 					break;
 				case OTHER:
 				case THIS:
-					return hintCompareResult;
+					return argumentCompareResult;
 				
 			}
-			if (!leftConformance.equals(rightConformance)) {
-				if (leftConformance.contains(ConformanceHint.VAR_ARG)) {
+			if (leftConformance != rightConformance) {
+				if ((leftConformance & ConformanceFlags.VAR_ARG) != 0) {
 					leftVarArgs++;
 				}
-				if (rightConformance.contains(ConformanceHint.VAR_ARG)) {
+				if ((rightConformance & ConformanceFlags.VAR_ARG) != 0) {
 					rightVarArgs++;
 				}
-				if (leftConformance.contains(ConformanceHint.DEMAND_CONVERSION)) {
+				if ((leftConformance & ConformanceFlags.DEMAND_CONVERSION) != 0) {
 					leftDemand++;
 				}
-				if (rightConformance.contains(ConformanceHint.DEMAND_CONVERSION)) {
+				if ((rightConformance & ConformanceFlags.DEMAND_CONVERSION) != 0) {
 					rightDemand++;
 				}
-				if (leftConformance.contains(ConformanceHint.BOXING) || leftConformance.contains(ConformanceHint.UNBOXING)) {
+				if ((leftConformance & (ConformanceFlags.BOXING | ConformanceFlags.UNBOXING)) != 0) {
 					leftBoxing++;
 				}
-				if (rightConformance.contains(ConformanceHint.BOXING) || rightConformance.contains(ConformanceHint.UNBOXING)) {
+				if ((rightConformance & (ConformanceFlags.BOXING | ConformanceFlags.UNBOXING)) != 0) {
 					rightBoxing++;
 				}
-				if (leftConformance.contains(ConformanceHint.UNKNOWN_TYPE_PARTICIPATED)) {
+				if ((leftConformance & ConformanceFlags.UNKNOWN_TYPE_PARTICIPATED) != 0) {
 					leftUnknown++;
 				}
-				if (rightConformance.contains(ConformanceHint.UNKNOWN_TYPE_PARTICIPATED)) {
+				if ((rightConformance & ConformanceFlags.UNKNOWN_TYPE_PARTICIPATED) != 0) {
 					rightUnknown++;
 				}
-			} else if (leftConformance.contains(ConformanceHint.UNKNOWN_TYPE_PARTICIPATED)) {
+			} else if ((leftConformance & ConformanceFlags.UNKNOWN_TYPE_PARTICIPATED) != 0) {
 				leftUnknown++;
 				rightUnknown++;
 			}
@@ -833,7 +831,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 				return result;
 		}
 	}
-
+	
 	/**
 	 * Compare this linking candidate with the given {@code other} candidate at {@code leftIdx} and  {@code rightIdx} respectively.
 	 * 
@@ -848,18 +846,18 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	 * @param leftConformance the computed conformance in this linking candidate
 	 * @param rightConformance the computed conformance if the other candidate was chosen  
 	 */
-	protected CandidateCompareResult compareByArgumentTypes(
+	protected CandidateCompareResult compareByArgumentTypesFlags(
 			AbstractPendingLinkingCandidate<?> other,
 			int leftIdx,
 			int rightIdx,
-			EnumSet<ConformanceHint> leftConformance,
-			EnumSet<ConformanceHint> rightConformance) {
-		int hintCompareResult = ConformanceHint.compareHints(leftConformance, rightConformance);
-		if (hintCompareResult == 0) {
-			if (leftConformance.contains(ConformanceHint.SUCCESS)) {
-				if (leftConformance.contains(ConformanceHint.PREFERRED_LAMBDA_SUGAR) == rightConformance.contains(ConformanceHint.PREFERRED_LAMBDA_SUGAR)) {
+			int leftConformance,
+			int rightConformance) {
+		int flagCompareResult = ConformanceFlags.compareFlags(leftConformance, rightConformance);
+		if (flagCompareResult == 0) {
+			if ((leftConformance & ConformanceFlags.SUCCESS) != 0) {
+				if ((leftConformance & ConformanceFlags.PREFERRED_LAMBDA_SUGAR) != 0 == ((rightConformance & ConformanceFlags.PREFERRED_LAMBDA_SUGAR) != 0)) {
 					return CandidateCompareResult.AMBIGUOUS;
-				} else if (leftConformance.contains(ConformanceHint.PREFERRED_LAMBDA_SUGAR)) {
+				} else if ((leftConformance & ConformanceFlags.PREFERRED_LAMBDA_SUGAR) != 0) {
 					return CandidateCompareResult.THIS;
 				} else {
 					return CandidateCompareResult.OTHER;
@@ -867,7 +865,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			} else {
 				return CandidateCompareResult.EQUALLY_INVALID;
 			}
-		} else if (hintCompareResult < 0) {
+		} else if (flagCompareResult < 0) {
 			return CandidateCompareResult.THIS;
 		} else {
 			return CandidateCompareResult.OTHER;
@@ -902,18 +900,18 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		return CandidateCompareResult.AMBIGUOUS;
 	}
 	
-	protected EnumSet<ConformanceHint> getConformanceHints(int idx, boolean recompute) {
+	protected int getConformanceFlags(int idx, boolean recompute) {
 		while(!arguments.isProcessed(idx)) {
 			computeArgumentType(arguments.getNextUnprocessedArgumentSlot());
 		}
 		if (idx >= arguments.getArgumentCount()) {
-			return EnumSet.of(ConformanceHint.SUCCESS, ConformanceHint.CHECKED); 
+			return ConformanceFlags.CHECKED_SUCCESS; 
 		}
 		XExpression argument = arguments.getArgument(idx);
 		if (argument == null) {
-			return EnumSet.of(ConformanceHint.INCOMPATIBLE);
+			return ConformanceFlags.INCOMPATIBLE;
 		}
-		return getState().getStackedResolvedTypes().getConformanceHints(argument, recompute);
+		return getState().getStackedResolvedTypes().getConformanceFlags(argument, recompute);
 	}
 
 	protected CandidateCompareResult compareExpectedArgumentTypes(AbstractPendingLinkingCandidate<?> right) {
@@ -953,16 +951,16 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	}
 
 	protected int compareDeclaredTypes(LightweightTypeReference left, LightweightTypeReference right, boolean leftResolved, boolean rightResolved) {
-		TypeConformanceResult rightToLeftConformance = left.internalIsAssignableFrom(right, new TypeConformanceComputationArgument());
-		if (rightToLeftConformance.isConformant()) {
+		int rightToLeftConformance = left.internalIsAssignableFrom(right, new TypeConformanceComputationArgument());
+		if ((rightToLeftConformance & ConformanceFlags.SUCCESS) != 0) {
 			if (!right.isAssignableFrom(left) && 
-					(!leftResolved || !rightResolved || !rightToLeftConformance.getConformanceHints().contains(ConformanceHint.RAWTYPE_CONVERSION))) {
+					(!leftResolved || !rightResolved || ((rightToLeftConformance & ConformanceFlags.RAW_TYPE_CONVERSION) == 0))) {
 				return 1;
 			}
 		} else {
-			TypeConformanceResult leftToRightConformance = right.internalIsAssignableFrom(left, new TypeConformanceComputationArgument());
-			if (leftToRightConformance.isConformant() && 
-					(!leftResolved || !rightResolved || !leftToRightConformance.getConformanceHints().contains(ConformanceHint.RAWTYPE_CONVERSION))) {
+			int leftToRightConformance = right.internalIsAssignableFrom(left, new TypeConformanceComputationArgument());
+			if ((leftToRightConformance & ConformanceFlags.SUCCESS) != 0 && 
+					(!leftResolved || !rightResolved || ((leftToRightConformance & ConformanceFlags.RAW_TYPE_CONVERSION) == 0))) {
 				return -1;
 			}
 		}

@@ -28,7 +28,6 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeAssigner;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
@@ -174,8 +173,8 @@ public abstract class ForwardingTypeComputationState implements ITypeComputation
 		delegate.acceptActualType(type);
 	}
 
-	public void acceptActualType(LightweightTypeReference type, ConformanceHint... hints) {
-		delegate.acceptActualType(type, hints);
+	public void acceptActualType(LightweightTypeReference type, int flags) {
+		delegate.acceptActualType(type, flags);
 	}
 
 	public void reassignType(JvmIdentifiableElement refinable, LightweightTypeReference type) {

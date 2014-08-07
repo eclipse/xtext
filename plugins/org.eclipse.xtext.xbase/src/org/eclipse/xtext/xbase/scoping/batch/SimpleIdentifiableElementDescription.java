@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -93,8 +94,13 @@ public class SimpleIdentifiableElementDescription implements IIdentifiableElemen
 		return Collections.emptyMap();
 	}
 	
+	/* @NonNull */
 	public EnumSet<ConformanceHint> getImplicitReceiverConformanceHints() {
 		return EnumSet.noneOf(ConformanceHint.class);
+	}
+	
+	public int getImplicitReceiverConformanceFlags() {
+		return ConformanceFlags.NONE;
 	}
 
 	/* @Nullable */
@@ -115,8 +121,13 @@ public class SimpleIdentifiableElementDescription implements IIdentifiableElemen
 		return Collections.emptyMap();
 	}
 	
+	/* @NonNull */
 	public EnumSet<ConformanceHint> getSyntacticReceiverConformanceHints() {
 		return EnumSet.noneOf(ConformanceHint.class);
+	}
+	
+	public int getSyntacticReceiverConformanceFlags() {
+		return ConformanceFlags.NONE;
 	}
 
 	/* @Nullable */

@@ -42,6 +42,7 @@ import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -322,6 +323,10 @@ public class ScopeProviderAccess {
 		public EnumSet<ConformanceHint> getImplicitReceiverConformanceHints() {
 			return EnumSet.noneOf(ConformanceHint.class);
 		}
+		
+		public int getImplicitReceiverConformanceFlags() {
+			return ConformanceFlags.NONE;
+		}
 
 		/* @Nullable */
 		public LightweightTypeReference getSyntacticReceiverType() {
@@ -343,8 +348,8 @@ public class ScopeProviderAccess {
 		}
 		
 		/* @NonNull */
-		public EnumSet<ConformanceHint> getSyntacticReceiverConformanceHints() {
-			return EnumSet.noneOf(ConformanceHint.class);
+		public int getSyntacticReceiverConformanceFlags() {
+			return ConformanceFlags.NONE;
 		}
 
 		/* @Nullable */
@@ -363,8 +368,12 @@ public class ScopeProviderAccess {
 		}
 		
 		/* @NonNull */
-		public EnumSet<ConformanceHint> getImplicitFirstArgumentConformanceHints() {
+		public EnumSet<ConformanceHint> getSyntacticReceiverConformanceHints() {
 			return EnumSet.noneOf(ConformanceHint.class);
+		}
+		
+		public int getImplicitFirstArgumentConformanceFlags() {
+			return ConformanceFlags.NONE;
 		}
 
 		public boolean isVisible() {

@@ -19,7 +19,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.internal.util.FeatureKinds;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
@@ -49,7 +49,7 @@ public class ImplicitReceiver extends AbstractImplicitFeature {
 				throw new IllegalStateException();
 			}
 			TypeExpectation expectation = new TypeExpectation(null, getState(), false);
-			resolvedTypes.acceptType(targetFeatureCall, expectation, targetType.copyInto(resolvedTypes.getReferenceOwner()), false, ConformanceHint.UNCHECKED);
+			resolvedTypes.acceptType(targetFeatureCall, expectation, targetType.copyInto(resolvedTypes.getReferenceOwner()), false, ConformanceFlags.UNCHECKED);
 		}
 	}
 

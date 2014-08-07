@@ -25,7 +25,7 @@ import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
@@ -97,18 +97,18 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 		ITypeComputationState closureBodyTypeComputationState = getClosureBodyTypeComputationState(typeAssigner);
 		ITypeComputationResult expressionResult = closureBodyTypeComputationState.computeTypes(getClosure().getExpression());
 
-		ConformanceHint hint = processExpressionType(expressionResult);
+		int flags = processExpressionType(expressionResult);
 
 		if (resultClosureType.getReturnType() == null)
 			throw new IllegalStateException("Closure has no return type assigned");
-		if (!validParameterTypes || hint == ConformanceHint.INCOMPATIBLE) {
-			if (hint == null)
+		if (!validParameterTypes || flags == ConformanceFlags.INCOMPATIBLE) {
+			if (flags == ConformanceFlags.NONE)
 				markIncompatibleParameterList();
 			else if (validParameterTypes)
 				markCompatibleParameterList();
 			else
 				markIncompatible();
-		} else if (hint == ConformanceHint.LAMBDA_RAW_COMPATIBLE) {
+		} else if (flags == ConformanceFlags.LAMBDA_RAW_COMPATIBLE) {
 			markRawCompatible();
 		} else {
 			markUncheckedValid();
@@ -117,45 +117,43 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 
 	protected void markUncheckedValid() {
 		if (preferredSugar) {
-			getExpectation().acceptActualType(resultClosureType, ConformanceHint.UNCHECKED, ConformanceHint.PREFERRED_LAMBDA_SUGAR);
+			getExpectation().acceptActualType(resultClosureType, ConformanceFlags.UNCHECKED | ConformanceFlags.PREFERRED_LAMBDA_SUGAR);
 		} else {
-			getExpectation().acceptActualType(resultClosureType, ConformanceHint.UNCHECKED);
+			getExpectation().acceptActualType(resultClosureType, ConformanceFlags.UNCHECKED);
 		}
 	}
 
 	protected void markIncompatibleParameterList() {
 		if (preferredSugar) {
-			getExpectation().acceptActualType(resultClosureType, ConformanceHint.CHECKED, ConformanceHint.INCOMPATIBLE, ConformanceHint.SEALED, ConformanceHint.PREFERRED_LAMBDA_SUGAR);
+			getExpectation().acceptActualType(resultClosureType, ConformanceFlags.CHECKED | ConformanceFlags.INCOMPATIBLE | ConformanceFlags.SEALED | ConformanceFlags.PREFERRED_LAMBDA_SUGAR);
 		} else {
-			getExpectation().acceptActualType(resultClosureType, ConformanceHint.CHECKED, ConformanceHint.INCOMPATIBLE, ConformanceHint.SEALED);
+			getExpectation().acceptActualType(resultClosureType, ConformanceFlags.CHECKED | ConformanceFlags.INCOMPATIBLE | ConformanceFlags.SEALED);
 		}
 	}
 
 	protected void markCompatibleParameterList() {
 		if (preferredSugar) {
-			getExpectation().acceptActualType(resultClosureType, ConformanceHint.CHECKED, ConformanceHint.LAMBDA_PARAMETER_COMPATIBLE, ConformanceHint.SEALED, ConformanceHint.PREFERRED_LAMBDA_SUGAR);
+			getExpectation().acceptActualType(resultClosureType, ConformanceFlags.CHECKED | ConformanceFlags.LAMBDA_PARAMETER_COMPATIBLE | ConformanceFlags.SEALED | ConformanceFlags.PREFERRED_LAMBDA_SUGAR);
 		} else {
-			getExpectation().acceptActualType(resultClosureType, ConformanceHint.CHECKED, ConformanceHint.LAMBDA_PARAMETER_COMPATIBLE, ConformanceHint.SEALED);
+			getExpectation().acceptActualType(resultClosureType, ConformanceFlags.CHECKED | ConformanceFlags.LAMBDA_PARAMETER_COMPATIBLE | ConformanceFlags.SEALED);
 		}
 	}
 
 	protected void markIncompatible() {
 		if (preferredSugar) {
-			getExpectation().acceptActualType(resultClosureType, ConformanceHint.CHECKED, ConformanceHint.INCOMPATIBLE, ConformanceHint.PROPAGATED_TYPE,
-					ConformanceHint.SEALED, ConformanceHint.PREFERRED_LAMBDA_SUGAR);
+			getExpectation().acceptActualType(resultClosureType, ConformanceFlags.CHECKED | ConformanceFlags.INCOMPATIBLE | ConformanceFlags.PROPAGATED_TYPE | ConformanceFlags.SEALED | ConformanceFlags.PREFERRED_LAMBDA_SUGAR);
 		} else {
-			getExpectation().acceptActualType(resultClosureType, ConformanceHint.CHECKED, ConformanceHint.INCOMPATIBLE, ConformanceHint.PROPAGATED_TYPE,
-					ConformanceHint.SEALED);
+			getExpectation().acceptActualType(resultClosureType, ConformanceFlags.CHECKED | ConformanceFlags.INCOMPATIBLE | ConformanceFlags.PROPAGATED_TYPE | ConformanceFlags.SEALED);
 		}
 	}
 
 	protected void markRawCompatible() {
 		if (preferredSugar) {
-			getExpectation().acceptActualType(resultClosureType, ConformanceHint.CHECKED, ConformanceHint.LAMBDA_RAW_COMPATIBLE,
-					ConformanceHint.PROPAGATED_TYPE, ConformanceHint.SEALED, ConformanceHint.PREFERRED_LAMBDA_SUGAR);
+			getExpectation().acceptActualType(resultClosureType, ConformanceFlags.CHECKED | ConformanceFlags.LAMBDA_RAW_COMPATIBLE |
+					ConformanceFlags.PROPAGATED_TYPE | ConformanceFlags.SEALED | ConformanceFlags.PREFERRED_LAMBDA_SUGAR);
 		} else {
-			getExpectation().acceptActualType(resultClosureType, ConformanceHint.CHECKED, ConformanceHint.LAMBDA_RAW_COMPATIBLE,
-					ConformanceHint.PROPAGATED_TYPE, ConformanceHint.SEALED);
+			getExpectation().acceptActualType(resultClosureType, ConformanceFlags.CHECKED | ConformanceFlags.LAMBDA_RAW_COMPATIBLE |
+					ConformanceFlags.PROPAGATED_TYPE | ConformanceFlags.SEALED);
 		}
 	}
 
@@ -369,9 +367,14 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 
 	/**
 	 * Returns an indicator how compatible the expression type result is to the expected type.
+	 * Either
+	 * <ul>
+	 * <li>{@link ConformanceFlags#NONE},</li>
+	 * <li>{@link ConformanceFlags#INCOMPATIBLE}, or</li>
+	 * <li>{@link ConformanceFlags#LAMBDA_RAW_COMPATIBLE}</li>
+	 * </ul>
 	 */
-	/* @Nullable */
-	protected ConformanceHint processExpressionType(ITypeComputationResult expressionResult) {
+	protected int processExpressionType(ITypeComputationResult expressionResult) {
 		LightweightTypeReference expressionResultType = expressionResult.getReturnType();
 		if (expressionResultType == null || expressionResultType instanceof AnyTypeReference) {
 			LightweightTypeReference returnType = expectedClosureType.getReturnType();
@@ -386,9 +389,9 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 				if (expectedReturnType.isPrimitiveVoid()) {
 					resultClosureType.setReturnType(expectedReturnType);
 					if (isImplicitReturn(expressionResult.getExpression())) {
-						return null;
+						return ConformanceFlags.NONE;
 					} else {
-						return ConformanceHint.INCOMPATIBLE;
+						return ConformanceFlags.INCOMPATIBLE;
 					}
 				} else {
 					deferredBindTypeArgument(expectedReturnType, expressionResultType, BoundTypeArgumentSource.INFERRED);
@@ -398,13 +401,13 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 				resultClosureType.setReturnType(expressionResultType);
 			} else if (expectedReturnType.isPrimitiveVoid()) {
 				resultClosureType.setReturnType(expectedReturnType);
-				return ConformanceHint.INCOMPATIBLE;
+				return ConformanceFlags.INCOMPATIBLE;
 			} else {
 				resultClosureType.setReturnType(expectedReturnType);
-				return ConformanceHint.LAMBDA_RAW_COMPATIBLE;
+				return ConformanceFlags.LAMBDA_RAW_COMPATIBLE;
 			}
 		}
-		return null;
+		return ConformanceFlags.NONE;
 	}
 
 	protected boolean isImplicitReturn(/* @Nullable */ XExpression expression) {
