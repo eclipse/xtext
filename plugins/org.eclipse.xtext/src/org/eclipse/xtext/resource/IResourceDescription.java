@@ -114,17 +114,6 @@ public interface IResourceDescription extends ISelectable {
 					throws IllegalArgumentException;
 		}
 	}
-	
-	/**
-	 * @since 2.7
-	 */
-	interface ManagerExtension {
-		/**
-		 * @return a resource description that only needs to contain {@link EObjectDescription}s with name, URI and eclass.
-		 * Reference descriptions, imported names and any user data used for change affection can be ignored.
-		 */
-		IResourceDescription getIndexingResourceDescription(Resource resource);
-	}
 
 	/**
 	 * A delta describing the differences between two versions of the same {@link IResourceDescription}. Instances have

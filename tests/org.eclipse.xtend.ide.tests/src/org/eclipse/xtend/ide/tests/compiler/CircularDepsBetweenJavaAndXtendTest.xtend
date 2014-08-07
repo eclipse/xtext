@@ -124,12 +124,14 @@ class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase {
 			}
 		''')
 		waitForAutoBuild
-		assertEquals(file.findMarkers(IMarker::PROBLEM, true, IResource::DEPTH_INFINITE).map[MarkerUtilities.getMessage(it)].join(',') ,0,file.findMarkers(IMarker::PROBLEM, true, IResource::DEPTH_INFINITE).length)
+		assertEquals(0,file.findMarkers(IMarker::PROBLEM, true, IResource::DEPTH_INFINITE).length)
 	}
 	
 	def void assertNoErrorsInWorkspace() {
-		val errorMarkers = ResourcesPlugin.workspace.root.findMarkers(IMarker::PROBLEM, true, IResource::DEPTH_INFINITE).filter[MarkerUtilities.getSeverity(it) == IMarker.SEVERITY_ERROR]
-		assertTrue(errorMarkers.map[MarkerUtilities::getMessage(it)].join(','), errorMarkers.empty)
+		val findMarkers = ResourcesPlugin::workspace.root.findMarkers(IMarker::PROBLEM, true, IResource::DEPTH_INFINITE)
+		for (iMarker : findMarkers) {
+			assertFalse(MarkerUtilities::getMessage(iMarker), MarkerUtilities::getSeverity(iMarker) == IMarker::SEVERITY_ERROR)
+		}
 	}
 	
 }

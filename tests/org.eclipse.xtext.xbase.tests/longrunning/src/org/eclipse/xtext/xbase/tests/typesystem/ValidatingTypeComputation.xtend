@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.tests.typesystem
 
 import com.google.inject.Inject
 import com.google.inject.Provider
-import java.util.Collection
 import java.util.List
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.xbase.XExpression
@@ -164,7 +163,7 @@ class ValidatingRootResolvedTypes extends RootResolvedTypes {
 		return result
 	}
 	
-	override mergeTypeData(XExpression expression, Collection<TypeData> allValues, boolean returnType, boolean nullIfEmpty) {
+	override mergeTypeData(XExpression expression, List<TypeData> allValues, boolean returnType, boolean nullIfEmpty) {
 		allValues.forEach [
 			if (!isOwnedBy(getReferenceOwner()))
 				throw new IllegalArgumentException("result is not owned by this resolved types")
@@ -308,7 +307,7 @@ class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStackedResol
 		return result
 	}
 	
-	override mergeTypeData(XExpression expression, Collection<TypeData> allValues, boolean returnType, boolean nullIfEmpty) {
+	override mergeTypeData(XExpression expression, List<TypeData> allValues, boolean returnType, boolean nullIfEmpty) {
 		allValues.forEach [
 			if (!isOwnedBy(getReferenceOwner()))
 				throw new IllegalArgumentException("result is not owned by this resolved types")
@@ -429,7 +428,7 @@ class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
 		return result
 	}
 	
-	override mergeTypeData(XExpression expression, Collection<TypeData> allValues, boolean returnType, boolean nullIfEmpty) {
+	override mergeTypeData(XExpression expression, List<TypeData> allValues, boolean returnType, boolean nullIfEmpty) {
 		allValues.forEach [
 			if (!isOwnedBy(getReferenceOwner()))
 				throw new IllegalArgumentException("result is not owned by this resolved types")
@@ -549,7 +548,7 @@ class ValidatingReassigningResolvedTypes extends ReassigningStackedResolvedTypes
 		return result
 	}
 	
-	override mergeTypeData(XExpression expression, Collection<TypeData> allValues, boolean returnType, boolean nullIfEmpty) {
+	override mergeTypeData(XExpression expression, List<TypeData> allValues, boolean returnType, boolean nullIfEmpty) {
 		allValues.forEach [
 			if (!isOwnedBy(getReferenceOwner()))
 				throw new IllegalArgumentException("result is not owned by this resolved types")

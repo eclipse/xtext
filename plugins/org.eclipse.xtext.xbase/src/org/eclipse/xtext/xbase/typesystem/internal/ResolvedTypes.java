@@ -245,7 +245,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	
 	/* @Nullable */
 	protected TypeData getTypeData(XExpression expression, boolean returnType, boolean nullIfEmpty) {
-		Collection<TypeData> values = doGetTypeData(expression);
+		List<TypeData> values = doGetTypeData(expression);
 		if (values == null) {
 			return null;
 		}
@@ -254,7 +254,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 	
 	/* @Nullable */
-	protected Collection<TypeData> doGetTypeData(XExpression expression) {
+	protected List<TypeData> doGetTypeData(XExpression expression) {
 		List<TypeData> result = basicGetExpressionTypes().get(expression);
 		return result;
 	}
@@ -269,22 +269,32 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 	
 	/* @Nullable */
-	protected TypeData mergeTypeData(final XExpression expression, Collection<TypeData> allValues, boolean returnType, boolean nullIfEmpty) {
-		List<TypeData> values = Lists.newArrayListWithCapacity(allValues.size());
-		collectValues(allValues, returnType, values);
-		if (values.isEmpty()) {
-			if (nullIfEmpty || allValues.isEmpty())
+	protected TypeData mergeTypeData(final XExpression expression, List<TypeData> allValues, boolean returnType, boolean nullIfEmpty) {
+		int allSize = allValues.size();
+		if (nullIfEmpty && allSize == 0) {
+			return null;
+		}
+		final List<TypeData> values;
+		if (allSize == 1) {
+			TypeData result = allValues.get(0);
+			if (result.isReturnType() == returnType) {
+				return getSingleMergeResult(result, expression, returnType);
+			}
+			if (nullIfEmpty)
 				return null;
 			if (returnType) {
-				values.addAll(allValues);
+				return getSingleMergeResult(result, expression, returnType);
 			}
+			values = Collections.emptyList();
+		} else {
+			values = collectValues(allValues, returnType);
+		}
+		if (nullIfEmpty && values.size() == 0) {
+			return null;
 		}
 		if (values.size() == 1) {
 			TypeData typeData = values.get(0);
-			LightweightTypeReference upperBoundSubstitute = typeData.getActualType().getUpperBoundSubstitute();
-			if (upperBoundSubstitute != typeData.getActualType())
-				return new TypeData(expression, typeData.getExpectation(), upperBoundSubstitute, typeData.getConformanceHints(), returnType);
-			return typeData;
+			return getSingleMergeResult(typeData, expression, returnType);
 		}
 		MergeData mergeData = new MergeData();
 		enhanceMergeData(values, mergeData);
@@ -298,6 +308,13 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		mergedType = refineMergedType(mergeData, mergedType, returnType, nullIfEmpty);
 		TypeData result = new TypeData(expression, mergeData.expectation, mergedType, mergeData.mergedHints , returnType);
 		return result;
+	}
+
+	private TypeData getSingleMergeResult(TypeData typeData, final XExpression expression, boolean returnType) {
+		LightweightTypeReference upperBoundSubstitute = typeData.getActualType().getUpperBoundSubstitute();
+		if (upperBoundSubstitute != typeData.getActualType())
+			return new TypeData(expression, typeData.getExpectation(), upperBoundSubstitute, typeData.getConformanceHints(), returnType);
+		return typeData;
 	}
 
 	private LightweightTypeReference refineMergedType(MergeData mergeData, LightweightTypeReference mergedType, boolean returnType, boolean useExpectation) {
@@ -330,7 +347,8 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 
 	private void enhanceMergeData(List<TypeData> values, MergeData mergeData) {
-		for (TypeData value : values) {
+		for (int i = 0, size = values.size(); i < size; i++) {
+			TypeData value = values.get(i);
 			LightweightTypeReference reference = value.getActualType().getUpperBoundSubstitute();
 			if (reference.isPrimitiveVoid()) {
 				if (value.getConformanceHints().contains(ConformanceHint.EXPLICIT_VOID_RETURN)) {
@@ -365,13 +383,28 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			mergeData.mergedHints.remove(ConformanceHint.THROWN_EXCEPTION);
 		}
 	}
-
-	private void collectValues(Collection<TypeData> allValues, boolean returnType, List<TypeData> result) {
-		for(TypeData value: allValues) {
-			if (returnType == value.isReturnType()) {
-				result.add(value);
+	
+	private List<TypeData> collectValues(List<TypeData> allValues, boolean returnType) {
+		for(int i = 0, size = allValues.size(); i < size; i++) {
+			TypeData value = allValues.get(i);
+			if (returnType != value.isReturnType()) {
+				List<TypeData> result = Lists.newArrayListWithCapacity(allValues.size());
+				if (i != 0) {
+					result.addAll(allValues.subList(0, i));
+				}
+				for(int j = i+1; j < size; j++) {
+					value = allValues.get(j);
+					if (returnType == value.isReturnType()) {
+						result.add(value);
+					}
+				}
+				if (result.isEmpty() && returnType) {
+					return allValues;
+				}
+				return result;
 			}
 		}
+		return allValues;
 	}
 
 	/* @Nullable */

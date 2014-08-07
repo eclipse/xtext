@@ -11,9 +11,12 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -28,6 +31,31 @@ import org.eclipse.xtext.xbase.XbasePackage;
  * @author Sven Efftinge - Initial contribution and API
  */
 public abstract class XAbstractFeatureCallImplCustom extends XAbstractFeatureCallImpl {
+	
+	private boolean isLinked = false;
+	
+	@Override
+	public void setFeature(JvmIdentifiableElement newFeature) {
+		isLinked = newFeature != null && !newFeature.eIsProxy();
+		super.setFeature(newFeature);
+	}
+	
+	@Override
+	public JvmIdentifiableElement getFeature() {
+		if (feature != null && feature.eIsProxy()) {
+			// body copied from super impl
+			InternalEObject oldFeature = (InternalEObject) feature;
+			feature = (JvmIdentifiableElement) eResolveProxy(oldFeature);
+			if (feature != oldFeature) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, XbasePackage.XABSTRACT_FEATURE_CALL__FEATURE, oldFeature, feature));
+			}
+			
+			// and additionally maintain #isLinked flag
+			isLinked = true;
+		}
+		return feature;
+	}
 	
 	@Override
 	public boolean isExplicitOperationCallOrBuilderSyntax() {
@@ -100,7 +128,10 @@ public abstract class XAbstractFeatureCallImplCustom extends XAbstractFeatureCal
 	 * Any features which rely on side effects done during linking of feature should call this method.
 	 */
 	protected void ensureFeatureLinked() {
-		// simply trigger linking
+		if (isLinked)
+			return;
+		
+		// simply trigger linking if not yet linked
 		getFeature();
 	}
 	

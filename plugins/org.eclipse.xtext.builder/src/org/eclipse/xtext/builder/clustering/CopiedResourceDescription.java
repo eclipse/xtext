@@ -16,7 +16,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.resource.DetachedEObjectDescription;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
@@ -45,9 +44,6 @@ public class CopiedResourceDescription extends AbstractResourceDescription {
         this.exported = ImmutableList.copyOf(Iterables.transform(original.getExportedObjects(),
                 new Function<IEObjectDescription, IEObjectDescription>() {
                     public IEObjectDescription apply(IEObjectDescription from) {
-                    	if (from instanceof DetachedEObjectDescription) {
-                    		return from;
-                    	}
                         if (from.getEObjectOrProxy().eIsProxy()) {
                             return from;
                         }

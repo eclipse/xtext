@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import static com.google.common.collect.Iterables.*;
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
@@ -20,9 +18,9 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
-import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -36,7 +34,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -75,9 +72,17 @@ public class ReceiverFeatureScope extends AbstractSessionBasedExecutableScope im
 			public void accept(String simpleName, int order) {
 				for(JvmType type: bucket.getTypes()) {
 					if (type instanceof JvmDeclaredType) {
-						Iterable<JvmFeature> features = findAllFeaturesByName(type, simpleName, bucket.getResolvedFeaturesProvider());
-						Iterable<? extends JvmFeature> filtered = order==1 ? features : filter(features, JvmOperation.class);
-						Iterables.addAll(allFeatures, filtered);
+						List<JvmFeature> features = findAllFeaturesByName(type, simpleName, bucket.getResolvedFeaturesProvider());
+						if (order == 1) {
+							allFeatures.addAll(features);
+						} else {
+							for(int i = 0, size = features.size(); i < size; i++) {
+								JvmFeature feature = features.get(i);
+								if (feature.eClass() == TypesPackage.Literals.JVM_OPERATION) {
+									allFeatures.add(feature);
+								}
+							}
+						}
 					}
 				}
 			}
@@ -93,7 +98,7 @@ public class ReceiverFeatureScope extends AbstractSessionBasedExecutableScope im
 	}
 	
 	@Override
-	protected Iterable<JvmFeature> findAllFeaturesByName(JvmType type, String simpleName, IResolvedFeatures.Provider resolvedFeaturesProvider) {
+	protected List<JvmFeature> findAllFeaturesByName(JvmType type, String simpleName, IResolvedFeatures.Provider resolvedFeaturesProvider) {
 		IResolvedFeatures resolvedFeatures = resolvedFeaturesProvider.getResolvedFeatures(type).getParameterizedView(receiverType);
 		return resolvedFeatures.getAllFeatures(simpleName);
 	}

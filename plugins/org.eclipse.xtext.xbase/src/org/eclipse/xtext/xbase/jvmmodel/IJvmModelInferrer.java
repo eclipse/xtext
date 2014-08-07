@@ -31,7 +31,7 @@ import com.google.inject.ImplementedBy;
  * Implementers should use the {@link JvmTypesBuilder} API to create a model of Jvm elements in a convenient way. 
  * </p>
  * <p>
- * Implementors have to traverse the given source object in {@link #infer(EObject, IJvmDeclaredTypeAcceptor) infer(..)} and decide which types to
+ * Implementors have to traverse the given source object in {@link #infer(EObject, IJvmDeclaredTypeAcceptor, boolean) infer(..)} and decide which types to
  * create according to the state of the model.
  * </p>
  * 
@@ -45,30 +45,40 @@ public interface IJvmModelInferrer {
 
 	/**
 	 * <p>
-	 * This method is called to compute the JvmTypes inferred from a model.
-	 * It is critical that only the creation of types and computation of their names is done directly
-	 * when called. All further computation should be done in runnables that are passed to {@link IJvmDeclaredTypeAcceptor}.
-	 * </p>
-	 * <p>
-	 * The framework will execute them after the indexing phase.
+	 * This method is called at two different times in a resource's life-cycle, reflected by whether {preIndexingPhase}
+	 * is set to <code>true</code> or <code>false</code>. When set to <code>true</code> everything is still in a
+	 * pre-indexing phase, that means linking hasn't been done yet. In this phase you just need to create the Jvm-elements
+	 * which should be indexed (i.e. found globally). For regular Xbase expressions only the JvmTypes with the correct
+	 * qualified name are needed at this point.
 	 * </p>
 	 * <p>
 	 * You must only infer Jvm elements which directly result from elements contained in the current resource!
+	 * </p>
+	 * <p>
+	 * When this method is called with preIndexingPhase set to <code>false</code>, you need to do the full inference
+	 * including setting all links. But still you have to it in a particular order. First you need to create the
+	 * complete tree structure and make sure you have passed the created JvmTypes to the acceptor. Only pass top level
+	 * {@link org.eclipse.xtext.common.types.JvmType}s to the acceptor. Only if the tree structure is created and its
+	 * root types have been passed to the acceptor, you are free to resolve any cross references.</li>
 	 * </p>
 	 * 
 	 * @param e
 	 *            the root element from the parse result
 	 * @param acceptor
 	 *            an acceptor awaiting derived root {@link JvmDeclaredType}s
+	 * @param preIndexingPhase
+	 *            whether the call is done in before indexing. During this phase clients may not rely on any global indexing information 
+	 *            and only need to to provide the information needed by the language's {@link org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy}.
+	 *            IF not implemented differently this is just the {@link JvmDeclaredType}s with their qualified name, but no members and no other data.
 	 */
-	void infer(EObject e, /* @NonNull */ IJvmDeclaredTypeAcceptor acceptor);
+	void infer(EObject e, /* @NonNull */ IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase);
 
 	/**
 	 * A null-implementation.
 	 */
 	public static class NullImpl implements IJvmModelInferrer {
 
-		public void infer(EObject e, /* @NonNull */ IJvmDeclaredTypeAcceptor acceptor) {
+		public void infer(EObject e, /* @NonNull */ IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase) {
 		}
 
 	}
