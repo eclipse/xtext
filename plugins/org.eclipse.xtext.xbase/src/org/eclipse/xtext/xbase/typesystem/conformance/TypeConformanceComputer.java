@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.conformance;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -55,50 +54,12 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 		return (isConformant(left, right, ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS | ALLOW_FUNCTION_CONVERSION | ALLOW_RAW_TYPE_CONVERSION) & SUCCESS) != 0;
 	}
 	
-	public TypeConformanceResult isConformant(LightweightTypeReference left, LightweightTypeReference right, TypeConformanceComputationArgument argument) {
+	public int isConformant(LightweightTypeReference left, LightweightTypeReference right, TypeConformanceComputationArgument argument) {
 		int flags = toFlags(argument);
 		int result = isConformant(left, right, flags);
-		EnumSet<ConformanceHint> resultFlags = toResult(result);
-		return new TypeConformanceResult(resultFlags);
+		return result;
 	}
-
-	protected EnumSet<ConformanceHint> toResult(int result) {
-		EnumSet<ConformanceHint> resultFlags = EnumSet.noneOf(ConformanceHint.class);
-		if ((result & SUCCESS) != 0) {
-			resultFlags.add(ConformanceHint.SUCCESS);
-		} else {
-			resultFlags.add(ConformanceHint.INCOMPATIBLE);
-		}
-		if ((result & DEMAND_CONVERSION) != 0) {
-			resultFlags.add(ConformanceHint.DEMAND_CONVERSION);
-		}
-		if ((result & SUBTYPE) != 0) {
-			resultFlags.add(ConformanceHint.SUBTYPE);
-		}
-		if ((result & PRIMITIVE_WIDENING) != 0) {
-			resultFlags.add(ConformanceHint.PRIMITIVE_WIDENING);
-		}
-		if ((result & UNBOXING) != 0) {
-			resultFlags.add(ConformanceHint.UNBOXING);
-		}
-		if ((result & BOXING) != 0) {
-			resultFlags.add(ConformanceHint.BOXING);
-		}
-		if ((result & RAW_TYPE_CONVERSION) != 0) {
-			resultFlags.add(ConformanceHint.RAWTYPE_CONVERSION);
-		}
-		if ((result & RAW_TYPE) != 0) {
-			resultFlags.add(ConformanceHint.RAW);
-		}
-		if ((result & SYNONYM) != 0) {
-			resultFlags.add(ConformanceHint.SYNONYM);
-		}
-		if ((result & UNKNOWN_TYPE_PARTICIPATED) != 0) {
-			resultFlags.add(ConformanceHint.UNKNOWN_TYPE_PARTICIPATED);
-		}
-		return resultFlags;
-	}
-
+	
 	protected int toFlags(TypeConformanceComputationArgument argument) {
 		int flags = ALLOW_RAW_TYPE_CONVERSION | ALLOW_FUNCTION_CONVERSION;
 		if (argument.allowPrimitiveConversion) {
@@ -138,7 +99,10 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 			return result;
 		}
 		int result = doIsConformant(left, right, flags);
-		return isSynonymConformant(result, left, right, flags);
+		result = isSynonymConformant(result, left, right, flags);
+		if ((result & SUCCESS) == 0)
+			result |= INCOMPATIBLE;
+		return result;
 	}
 	
 	@Override

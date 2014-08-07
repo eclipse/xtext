@@ -17,7 +17,6 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.typesystem.ValidatingExpressionAwareResolvedTypes;
 import org.eclipse.xtext.xbase.tests.typesystem.ValidatingReassigningResolvedTypes;
 import org.eclipse.xtext.xbase.tests.typesystem.ValidatingStackedResolvedTypes;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.internal.AbstractTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.ExpressionAwareStackedResolvedTypes;
@@ -121,7 +120,7 @@ public class ValidatingRootResolvedTypes extends RootResolvedTypes {
     return result;
   }
   
-  public LightweightTypeReference acceptType(final XExpression expression, final AbstractTypeExpectation expectation, final LightweightTypeReference type, final boolean returnType, final ConformanceHint... hints) {
+  public LightweightTypeReference acceptType(final XExpression expression, final AbstractTypeExpectation expectation, final LightweightTypeReference type, final boolean returnType, final int hints) {
     LightweightTypeReference _xblockexpression = null;
     {
       ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();

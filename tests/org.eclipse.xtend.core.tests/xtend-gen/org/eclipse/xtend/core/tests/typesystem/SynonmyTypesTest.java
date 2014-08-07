@@ -10,7 +10,6 @@ package org.eclipse.xtend.core.tests.typesystem;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Collection;
-import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
@@ -30,7 +29,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Assert;
@@ -96,7 +94,7 @@ public class SynonmyTypesTest extends AbstractTestingTypeReferenceOwner {
       final HashSet<String> actualSynonyms = CollectionLiterals.<String>newHashSet();
       final SynonymTypesProvider.Acceptor _function = new SynonymTypesProvider.Acceptor() {
         @Override
-        protected boolean accept(final LightweightTypeReference type, final EnumSet<ConformanceHint> conformance) {
+        protected boolean accept(final LightweightTypeReference type, final int conformance) {
           String _simpleName = type.getSimpleName();
           return actualSynonyms.add(_simpleName);
         }

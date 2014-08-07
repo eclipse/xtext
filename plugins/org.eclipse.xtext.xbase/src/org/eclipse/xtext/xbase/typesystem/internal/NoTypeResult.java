@@ -12,6 +12,7 @@ import java.util.EnumSet;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
@@ -54,13 +55,22 @@ public class NoTypeResult implements ITypeComputationResult {
 		throw new UnsupportedOperationException("TODO implement me");
 	}
 	
+	/* @NonNull */
 	public EnumSet<ConformanceHint> getConformanceHints() {
 		return EnumSet.noneOf(ConformanceHint.class);
+	}
+	
+	public int getConformanceFlags() {
+		return ConformanceFlags.NONE;
 	}
 	
 	/* @NonNull */
 	public EnumSet<ConformanceHint> getCheckedConformanceHints() {
 		return EnumSet.noneOf(ConformanceHint.class);
+	}
+	
+	public int getCheckedConformanceFlags() {
+		return ConformanceFlags.NONE;
 	}
 	
 	@Override

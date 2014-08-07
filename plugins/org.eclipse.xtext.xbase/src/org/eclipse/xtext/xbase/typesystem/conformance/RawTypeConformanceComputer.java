@@ -12,7 +12,6 @@ import static org.eclipse.xtext.xbase.typesystem.references.LightweightTypeRefer
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
@@ -72,7 +71,7 @@ public class RawTypeConformanceComputer {
 	 * Type arguments have to be an exact type, e.g. they are not allowed to be in
 	 * a subtype relationship, since {@code List<Object>} is not a supertype
 	 * of {@code List<String>}, e.g. if used as type argument, {@code String}
-	 * is not conformant to {@code Object}.
+	 * is not compatible to {@code Object}.
 	 */
 	public final static int AS_TYPE_ARGUMENT = RAW_TYPE << 1;
 	
@@ -80,7 +79,7 @@ public class RawTypeConformanceComputer {
 	 * Indicate whether raw type conformance has to be taken into account.
 	 * Raw type conformance may not be considered for type arguments, e.g.
 	 * {@code Class<? extends Map>} and {@code Class<? extends Map<String, String>>}
-	 * are not conformant. 
+	 * are not compatible. 
 	 */
 	public final static int ALLOW_RAW_TYPE_CONVERSION = AS_TYPE_ARGUMENT << 1;
 	
@@ -131,7 +130,7 @@ public class RawTypeConformanceComputer {
 	
 	/**
 	 * If the result has this bit set, a demand conversion had to be applied to make
-	 * both types conformant. This is especially interesting for function types. 
+	 * both types compatible. This is especially interesting for function types. 
 	 * Also a {@link #SYNONYM} may require a demand conversion.
 	 */
 	public final static int DEMAND_CONVERSION = SUCCESS << 1;
@@ -170,6 +169,8 @@ public class RawTypeConformanceComputer {
 	 * If one of the compared types was an unknown type, this bit is set in the result value.
 	 */
 	public final static int UNKNOWN_TYPE_PARTICIPATED = SYNONYM << 1;
+	
+	public final static int INCOMPATIBLE = UNKNOWN_TYPE_PARTICIPATED << 1;
 
 	private SynonymTypesProvider synonymTypesProvider;
 	/**
@@ -188,7 +189,10 @@ public class RawTypeConformanceComputer {
 		if (left == right && left != null) // TODO handle null
 			return flags | SUCCESS;
 		int result = doIsConformant(left, right, flags);
-		return isSynonymConformant(result, left, right, flags);
+		result = isSynonymConformant(result, left, right, flags);
+		if ((result & SUCCESS) == 0)
+			result |= INCOMPATIBLE;
+		return result;
 	}
 
 	protected int isSynonymConformant(int originalConformance, final LightweightTypeReference left, LightweightTypeReference right, final int flags) {
@@ -196,11 +200,11 @@ public class RawTypeConformanceComputer {
 			final int[] resultFromSynonyms = new int[] { originalConformance };
 			synonymTypesProvider.collectSynonymTypes(right, new SynonymTypesProvider.Acceptor() {
 				@Override
-				protected boolean accept(/* @NonNull */ LightweightTypeReference synonym, /* @NonNull */ EnumSet<ConformanceHint> hints) {
-					if (!(hints.contains(ConformanceHint.BOXING) || hints.contains(ConformanceHint.UNBOXING))) {
+				protected boolean accept(/* @NonNull */ LightweightTypeReference synonym, int synonymFlags) {
+					if ((synonymFlags & (ConformanceFlags.BOXING | ConformanceFlags.UNBOXING)) == 0) {
 						int synonymResult = isConformant(left, synonym, flags & ~ALLOW_SYNONYMS);
 						if ((synonymResult & SUCCESS) != 0) {
-							resultFromSynonyms[0] = synonymResult | toSynonymResult(hints);
+							resultFromSynonyms[0] = synonymResult | synonymFlags | ConformanceFlags.SYNONYM;
 							return false;
 						}
 					}
@@ -210,35 +214,6 @@ public class RawTypeConformanceComputer {
 			return resultFromSynonyms[0];
 		}
 		return originalConformance;
-	}
-	
-	protected int toSynonymResult(EnumSet<ConformanceHint> hints) {
-		int result = SYNONYM;
-		if (hints.contains(ConformanceHint.SUCCESS)) {
-			result |= SUCCESS;
-		}
-		if (hints.contains(ConformanceHint.DEMAND_CONVERSION)) {
-			result |= DEMAND_CONVERSION;
-		}
-		if (hints.contains(ConformanceHint.SUBTYPE)) {
-			result |= SUBTYPE;
-		}
-		if (hints.contains(ConformanceHint.PRIMITIVE_WIDENING)) {
-			result |= PRIMITIVE_WIDENING;
-		}
-		if (hints.contains(ConformanceHint.UNBOXING)) {
-			result |= UNBOXING;
-		}
-		if (hints.contains(ConformanceHint.BOXING)) {
-			result |= BOXING;
-		}
-		if (hints.contains(ConformanceHint.RAWTYPE_CONVERSION)) {
-			result |= RAW_TYPE_CONVERSION;
-		}
-		if (hints.contains(ConformanceHint.RAW)) {
-			result |= RAW_TYPE;
-		}
-		return result;
 	}
 	
 	protected int doIsConformant(LightweightTypeReference left, LightweightTypeReference right, int flags) {

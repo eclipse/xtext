@@ -11,6 +11,7 @@ import java.util.EnumSet;
 
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -55,18 +56,26 @@ public class ResolutionBasedComputationResult implements ITypeComputationResult 
 	
 	/* @NonNull */
 	public EnumSet<ConformanceHint> getConformanceHints() {
+		return ConformanceHint.fromFlags(getConformanceFlags());
+	}
+	
+	public int getConformanceFlags() {
 		TypeData typeData = resolution.getTypeData(expression, false);
 		if (typeData == null)
-			return EnumSet.noneOf(ConformanceHint.class);
-		return typeData.getConformanceHints();
+			return ConformanceFlags.NONE;
+		return typeData.getConformanceFlags();
 	}
 
 	/* @NonNull */
 	public EnumSet<ConformanceHint> getCheckedConformanceHints() {
+		return ConformanceHint.fromFlags(getCheckedConformanceFlags());
+	}
+	
+	public int getCheckedConformanceFlags() {
 		TypeData typeData = resolution.getTypeData(expression, false);
 		if (typeData == null)
-			return EnumSet.noneOf(ConformanceHint.class);
-		return resolution.getConformanceHints(typeData, false);
+			return ConformanceFlags.NONE;
+		return resolution.getConformanceFlags(typeData, false);
 	}
 	
 	@Override

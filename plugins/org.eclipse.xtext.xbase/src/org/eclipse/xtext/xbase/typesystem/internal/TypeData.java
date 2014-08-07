@@ -7,11 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import java.util.EnumSet;
-
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -23,22 +21,20 @@ public class TypeData {
 	private final XExpression expression;
 	private final ITypeExpectation expectation;
 	private final LightweightTypeReference type;
-	private final EnumSet<ConformanceHint> hints;
+	private int flags;
 	private final boolean returnType;
 
 	public TypeData(
 			XExpression expression, 
 			ITypeExpectation expectation, 
 			LightweightTypeReference type,
-			EnumSet<ConformanceHint> hints,
+			int flags,
 			boolean returnType) {
-		if (!hints.contains(ConformanceHint.CHECKED) && !hints.contains(ConformanceHint.UNCHECKED)) {
-			throw new IllegalArgumentException("Invalid hints: " + hints);
-		}
+		ConformanceFlags.sanityCheck(flags);
 		this.expression = expression;
 		this.expectation = expectation;
 		this.type = type;
-		this.hints = hints;
+		this.flags = flags;
 		this.returnType = returnType;
 	}
 	
@@ -49,15 +45,20 @@ public class TypeData {
 	@Override
 	public String toString() {
 		return "TypeData [expectation=" + expectation + ", type=" + type
-				+ ", conformanceHint=" + hints + ", returnType=" + returnType + "]";
+				+ ", flags=" + ConformanceFlags.toString(flags) + ", returnType=" + returnType + "]";
 	}
 	
 	public ITypeExpectation getExpectation() {
 		return expectation;
 	}
 	
-	public EnumSet<ConformanceHint> getConformanceHints() {
-		return hints;
+	public int getConformanceFlags() {
+		return flags;
+	}
+	
+	public void setConformanceFlags(int flags) {
+		ConformanceFlags.sanityCheck(flags);
+		this.flags = flags;
 	}
 	
 	public XExpression getExpression() {

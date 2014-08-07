@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.typing;
 
-import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
 
@@ -16,7 +15,6 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Test;
 
@@ -77,7 +75,7 @@ public class SynonymTypesProviderTest extends AbstractXbaseTestCase {
 		synonymTypeProvider.collectSynonymTypes(type, new SynonymTypesProvider.Acceptor() {
 			
 			@Override
-			protected boolean accept(/* @NonNull */ LightweightTypeReference synonym, /* @NonNull */ EnumSet<ConformanceHint> hints) {
+			protected boolean accept(/* @NonNull */ LightweightTypeReference synonym, int flags) {
 				synonyms.add(synonym);
 				return true;
 			}

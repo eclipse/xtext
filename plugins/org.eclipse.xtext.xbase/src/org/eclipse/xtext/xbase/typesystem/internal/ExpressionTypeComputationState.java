@@ -14,7 +14,6 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -77,20 +76,20 @@ public class ExpressionTypeComputationState extends AbstractStackedTypeComputati
 	}
 
 	@Override
-	protected LightweightTypeReference acceptType(ResolvedTypes resolvedTypes, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
-		LightweightTypeReference result = resolvedTypes.acceptType(expression, expectation, type, returnType, hints);
-		getParent().acceptType(expression, resolvedTypes, expectation, type, returnType, hints);
+	protected LightweightTypeReference acceptType(ResolvedTypes resolvedTypes, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, int flags) {
+		LightweightTypeReference result = resolvedTypes.acceptType(expression, expectation, type, returnType, flags);
+		getParent().acceptType(expression, resolvedTypes, expectation, type, returnType, flags);
 		return result;
 	}
 	
 	@Override
-	protected LightweightTypeReference acceptType(XExpression expression, ResolvedTypes resolvedTypes, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
+	protected LightweightTypeReference acceptType(XExpression expression, ResolvedTypes resolvedTypes, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, int flags) {
 		if (expression != this.expression) {
-			LightweightTypeReference result = resolvedTypes.acceptType(this.expression, expectation, type, returnType, hints);
-			getParent().acceptType(this.expression, resolvedTypes, expectation, type, returnType, hints);
+			LightweightTypeReference result = resolvedTypes.acceptType(this.expression, expectation, type, returnType, flags);
+			getParent().acceptType(this.expression, resolvedTypes, expectation, type, returnType, flags);
 			return result;
 		}
-		return getParent().acceptType(expression, resolvedTypes, expectation, type, returnType, hints);
+		return getParent().acceptType(expression, resolvedTypes, expectation, type, returnType, flags);
 	}
 	
 	@Override

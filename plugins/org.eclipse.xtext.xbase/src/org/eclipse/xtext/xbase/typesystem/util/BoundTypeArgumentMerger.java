@@ -11,10 +11,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
-import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
@@ -164,8 +163,8 @@ public class BoundTypeArgumentMerger {
 		}
 		switch(variance) {
 			case INVARIANT: {
-				TypeConformanceResult result = candidate.internalIsAssignableFrom(type, new TypeConformanceComputationArgument(false, true, true, true, false, false));
-				if (result.isConformant() && !result.getConformanceHints().contains(ConformanceHint.RAWTYPE_CONVERSION)) {
+				int result = candidate.internalIsAssignableFrom(type, new TypeConformanceComputationArgument(false, true, true, true, false, false));
+				if ((result & ConformanceFlags.SUCCESS) != 0 && (result & ConformanceFlags.RAW_TYPE_CONVERSION) == 0) {
 					return true;
 				}
 				return false;

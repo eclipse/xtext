@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -16,7 +15,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
 
 /**
@@ -36,8 +35,8 @@ public class TypeBucket {
   
   private final IResolvedFeatures.Provider resolvedFeaturesProvider;
   
-  public EnumSet<ConformanceHint> getHints() {
-    return EnumSet.<ConformanceHint>of(ConformanceHint.CHECKED, ConformanceHint.SUCCESS);
+  public int getFlags() {
+    return ConformanceFlags.CHECKED_SUCCESS;
   }
   
   public Map<? extends JvmType, ? extends Set<String>> getTypesToNames() {

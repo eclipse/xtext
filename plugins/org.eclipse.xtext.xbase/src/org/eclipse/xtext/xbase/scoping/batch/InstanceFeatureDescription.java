@@ -7,14 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import java.util.EnumSet;
 import java.util.Map;
 
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -26,7 +25,7 @@ public class InstanceFeatureDescription extends BucketedEObjectDescription {
 	private final XExpression receiver;
 	private final LightweightTypeReference receiverType;
 	private final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping;
-	private final EnumSet<ConformanceHint> receiverConformanceHints;
+	private final int receiverConformanceFlags;
 
 	protected InstanceFeatureDescription(
 			QualifiedName qualifiedName, 
@@ -34,20 +33,20 @@ public class InstanceFeatureDescription extends BucketedEObjectDescription {
 			XExpression receiver,
 			LightweightTypeReference receiverType,
 			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping,
-			EnumSet<ConformanceHint> receiverConformanceHints,
+			int receiverConformanceFlags,
 			int bucketId,
 			boolean visible) {
 		super(qualifiedName, feature, bucketId, visible);
 		if (feature.isStatic()) {
 			throw new IllegalArgumentException(String.valueOf(feature));
 		}
-		if (receiverConformanceHints.isEmpty()) {
-			throw new IllegalArgumentException(String.valueOf(receiverConformanceHints));
+		if (receiverConformanceFlags == ConformanceFlags.NONE) {
+			throw new IllegalArgumentException(String.valueOf(receiverConformanceFlags));
 		}
 		this.receiver = receiver;
 		this.receiverType = receiverType;
 		this.receiverTypeParameterMapping = receiverTypeParameterMapping;
-		this.receiverConformanceHints = receiverConformanceHints;
+		this.receiverConformanceFlags = receiverConformanceFlags;
 	}
 	
 	@Override
@@ -68,8 +67,8 @@ public class InstanceFeatureDescription extends BucketedEObjectDescription {
 	}
 	
 	@Override
-	public EnumSet<ConformanceHint> getSyntacticReceiverConformanceHints() {
-		return receiverConformanceHints;
+	public int getSyntacticReceiverConformanceFlags() {
+		return receiverConformanceFlags;
 	}
 	
 	public boolean isStatic() {

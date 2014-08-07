@@ -88,7 +88,19 @@ public interface ITypeComputationResult {
 	 * Conformance information about the actual expression type and
 	 * the expectation.
 	 */
+	int getConformanceFlags();
+	
+	/**
+	 * Conformance information about the actual expression type and
+	 * the expectation.
+	 */
 	/* @NonNull */
 	EnumSet<ConformanceHint> getCheckedConformanceHints();
+	
+	/**
+	 * Conformance information about the actual expression type and
+	 * the expectation.
+	 */
+	int getCheckedConformanceFlags();
 	
 }
