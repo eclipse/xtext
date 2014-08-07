@@ -17,10 +17,13 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider
+import org.junit.runner.RunWith
+import org.eclipse.xtext.junit4.XtextRunner
 
 /**
  * @author Stefan Oehme - Initial contribution and API
  */
+@RunWith(XtextRunner)
 class CodeStyleValidationTest extends AbstractXbaseTestCase {
 
 	@Inject

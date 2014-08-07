@@ -35,6 +35,7 @@ import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider.SingletonPreferenceValuesProvider;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
@@ -48,12 +49,14 @@ import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@RunWith(XtextRunner.class)
 public class XtendValidationTest extends AbstractXtendTestCase {
 
 	@Inject

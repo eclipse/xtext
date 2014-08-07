@@ -12,7 +12,7 @@ import java.io.IOException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.junit4.InjectWith;
-import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.junit4.ParallelXtextRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -27,7 +27,7 @@ import com.google.inject.Injector;
 /**
  * @author Sven Efftinge
  */
-@RunWith(XtextRunner.class)
+@RunWith(ParallelXtextRunner.class)
 @InjectWith(XbaseInjectorProvider.class)
 public abstract class AbstractXbaseTestCase extends Assert {
 

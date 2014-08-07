@@ -9,7 +9,10 @@ import org.junit.Rule
 import org.junit.Test
 
 import static org.eclipse.xtext.util.internal.Stopwatches.*
+import org.junit.runner.RunWith
+import org.eclipse.xtext.junit4.XtextRunner
 
+@RunWith(XtextRunner)
 class PerformanceTest extends AbstractXtendTestCase {
 	
 	@Inject XtendFileGenerator fileGenerator

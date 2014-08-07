@@ -1,6 +1,7 @@
 package org.eclipse.xtext.xbase.tests.jvmmodel;
 
 import com.google.inject.Inject;
+import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
@@ -12,7 +13,9 @@ import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+@RunWith(XtextRunner.class)
 @SuppressWarnings("all")
 public class CheckExceptionValidationTest extends AbstractJvmModelTest {
   @Inject

@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.common.types.util.TypeReferences
+import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.logging.LoggingTester
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.Wrapper
@@ -26,7 +27,9 @@ import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.junit.Test
+import org.junit.runner.RunWith
 
+@RunWith(XtextRunner)
 class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	
 	@Inject TypesFactory typesFactory

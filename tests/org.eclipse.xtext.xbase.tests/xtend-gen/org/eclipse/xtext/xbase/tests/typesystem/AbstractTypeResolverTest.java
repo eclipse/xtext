@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.junit4.ParallelXtextRunner;
 import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
 import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
 import org.eclipse.xtext.xbase.XExpression;
@@ -24,10 +25,12 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@RunWith(ParallelXtextRunner.class)
 @SuppressWarnings("all")
 public abstract class AbstractTypeResolverTest<Reference extends Object> extends AbstractXbaseTestCase {
   public abstract Reference resolvesTo(final String expression, final String type);

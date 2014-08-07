@@ -12,6 +12,7 @@ import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import java.util.List;
 
+import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider.SingletonPreferenceValuesProvider;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
@@ -21,6 +22,7 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import com.google.inject.Inject;
 
@@ -28,6 +30,7 @@ import com.google.inject.Inject;
  * @author Moritz Eysholdt - Initial contribution and API
  * @author Sebastian Zarnekow - Include feature calls in exception analysis
  */
+@RunWith(XtextRunner.class)
 public class CheckedExceptionTest extends AbstractXbaseTestCase {
 	
 	@Inject

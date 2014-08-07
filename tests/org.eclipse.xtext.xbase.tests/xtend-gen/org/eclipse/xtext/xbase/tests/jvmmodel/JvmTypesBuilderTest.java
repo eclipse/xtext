@@ -27,6 +27,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.logging.LoggingTester;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.Wrapper;
@@ -53,7 +54,9 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+@RunWith(XtextRunner.class)
 @SuppressWarnings("all")
 public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
   @Inject

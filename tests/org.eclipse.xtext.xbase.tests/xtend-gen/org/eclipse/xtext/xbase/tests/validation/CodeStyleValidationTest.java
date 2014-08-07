@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.tests.validation;
 
 import com.google.inject.Inject;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
@@ -21,10 +22,12 @@ import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * @author Stefan Oehme - Initial contribution and API
  */
+@RunWith(XtextRunner.class)
 @SuppressWarnings("all")
 public class CodeStyleValidationTest extends AbstractXbaseTestCase {
   @Inject

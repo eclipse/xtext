@@ -16,10 +16,13 @@ import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Ignore
 import org.junit.Test
+import org.eclipse.xtext.junit4.ParallelXtextRunner
+import org.junit.runner.RunWith
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@RunWith(ParallelXtextRunner)
 abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase {
 	
 	def Reference resolvesTo(String expression, String type)
