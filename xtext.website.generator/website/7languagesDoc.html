@@ -419,7 +419,8 @@ def bar(Baz baz) {
 							<pre class="prettyprint lang-xtend linenums">
 import static extension java.util.Collections.*
 ...
-val foo = singleton('foo') // calls Collections.&lt;String&gt;singleton('foo')</pre>
+val foo = singleton('foo') // normal static method call to Collections.&lt;String&gt;singleton('foo')
+val bar = 'bar'.singleton // the same with extension syntax</pre>
 							<p>
 						</p>
 						<p>
