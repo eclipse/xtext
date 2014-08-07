@@ -7,9 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.EnumSet;
+
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
@@ -35,6 +38,14 @@ public abstract class AbstractTypeExpectation implements ITypeExpectation {
 		return state.getReferenceOwner();
 	}
 
+	public void acceptActualType(LightweightTypeReference type, ConformanceHint... hints) {
+		acceptActualType(type, ConformanceHint.toFlags(hints));
+	}
+	
+	public void acceptActualType(LightweightTypeReference type, EnumSet<ConformanceHint> hints) {
+		acceptActualType(type, ConformanceHint.toFlags(hints));
+	}
+	
 	public boolean isVoidTypeAllowed() {
 		LightweightTypeReference expectedType = getExpectedType();
 		if (expectedType != null && expectedType.isType(Void.TYPE)) {

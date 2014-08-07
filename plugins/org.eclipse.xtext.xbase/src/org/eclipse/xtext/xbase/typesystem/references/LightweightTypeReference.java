@@ -25,10 +25,10 @@ import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Procedures;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.conformance.SuperTypeAcceptor;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
-import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.HumanReadableTypeNames;
@@ -485,13 +485,13 @@ public abstract class LightweightTypeReference {
 	}
 	
 	public boolean isAssignableFrom(LightweightTypeReference reference, TypeConformanceComputationArgument argument) {
-		TypeConformanceResult result = internalIsAssignableFrom(reference, argument);
-		return result.isConformant();
+		int result = internalIsAssignableFrom(reference, argument);
+		return (result & ConformanceFlags.INCOMPATIBLE) == 0;
 	}
 	
-	public TypeConformanceResult internalIsAssignableFrom(LightweightTypeReference reference, TypeConformanceComputationArgument argument) {
+	public int internalIsAssignableFrom(LightweightTypeReference reference, TypeConformanceComputationArgument argument) {
 		TypeConformanceComputer conformanceCompouter = getOwner().getServices().getTypeConformanceComputer();
-		TypeConformanceResult result = conformanceCompouter.isConformant(this, reference, argument);
+		int result = conformanceCompouter.isConformant(this, reference, argument);
 		return result;
 	}
 	

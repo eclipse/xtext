@@ -12,7 +12,6 @@ import com.google.inject.Provider
 import java.util.List
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.xbase.XExpression
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint
 import org.eclipse.xtext.xbase.typesystem.internal.AbstractTypeExpectation
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver
@@ -100,7 +99,7 @@ class ValidatingRootResolvedTypes extends RootResolvedTypes {
 		return result
 	}
 	
-	override acceptType(XExpression expression, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
+	override acceptType(XExpression expression, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, int hints) {
 		if (!expectation.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("expectation is not owned by this resolved types")
 		if (!type.isOwnedBy(getReferenceOwner()))
@@ -237,7 +236,7 @@ class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStackedResol
 		return result
 	}
 	
-	override acceptType(XExpression expression, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
+	override acceptType(XExpression expression, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, int hints) {
 		if (!expectation.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("expectation is not owned by this resolved types")
 		if (!type.isOwnedBy(getReferenceOwner()))
@@ -351,7 +350,7 @@ class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
 		return result
 	}
 	
-	override acceptType(XExpression expression, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
+	override acceptType(XExpression expression, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, int hints) {
 		if (!expectation.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("expectation is not owned by this resolved types")
 		if (!type.isOwnedBy(getReferenceOwner()))
@@ -464,7 +463,7 @@ class ValidatingReassigningResolvedTypes extends ReassigningStackedResolvedTypes
 		return result
 	}
 	
-	override acceptType(XExpression expression, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
+	override acceptType(XExpression expression, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, int hints) {
 		if (!expectation.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("expectation is not owned by this resolved types")
 		if (!type.isOwnedBy(getReferenceOwner()))

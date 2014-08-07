@@ -29,7 +29,7 @@ import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArguments;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
@@ -63,27 +63,27 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 	protected class ArgumentTypeComputationState extends AbstractStackedTypeComputationState {
 
 		private final LightweightTypeReference expectedType;
-		private final ConformanceHint defaultHint;
+		private final int defaultFlags;
 
 		public ArgumentTypeComputationState(AbstractTypeComputationState parent,
-				LightweightTypeReference expectedType, /* @Nullable */ ConformanceHint defaultHint) {
+				LightweightTypeReference expectedType, int defaultFlags) {
 			super(parent.getResolvedTypes(), parent.getFeatureScopeSession(), parent);
 			this.expectedType = expectedType;
-			this.defaultHint = defaultHint;
+			this.defaultFlags = defaultFlags;
 		}
 		
 		@Override
 		protected List<AbstractTypeExpectation> getExpectations(AbstractTypeComputationState actualState) {
-			AbstractTypeExpectation result = createTypeExpectation(expectedType, actualState, false, defaultHint);
+			AbstractTypeExpectation result = createTypeExpectation(expectedType, actualState, false, defaultFlags);
 			return Collections.singletonList(result);
 		}
 		
 		protected AbstractTypeExpectation createTypeExpectation(/* @Nullable */ LightweightTypeReference expectedType,
-				AbstractTypeComputationState actualState, boolean returnType, /* @Nullable */ ConformanceHint hint) {
+				AbstractTypeComputationState actualState, boolean returnType, int flags) {
 			AbstractTypeExpectation result = null;
 			if (expectedType != null) {
 				LightweightTypeReference copied = expectedType.copyInto(actualState.getReferenceOwner());
-				result = new ObservableTypeExpectation(copied, actualState, returnType, hint);
+				result = new ObservableTypeExpectation(copied, actualState, returnType, flags);
 			} else {
 				result = new NoExpectation(actualState, returnType);
 			}
@@ -91,8 +91,8 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		}
 		
 		/* @Nullable */
-		protected ConformanceHint getDefaultHint() {
-			return defaultHint;
+		protected int getDefaultFlags() {
+			return defaultFlags;
 		}
 		
 		protected LightweightTypeReference getExpectedType() {
@@ -103,23 +103,17 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 	
 	protected class ObservableTypeExpectation extends TypeExpectation {
 
-		private ConformanceHint conformanceHint;
+		private int flags;
 
-		public ObservableTypeExpectation(LightweightTypeReference expectedType, AbstractTypeComputationState state, boolean returnType, /* @Nullable */ ConformanceHint conformanceHint) {
+		public ObservableTypeExpectation(LightweightTypeReference expectedType, AbstractTypeComputationState state, boolean returnType, int flags) {
 			super(expectedType, state, returnType);
-			this.conformanceHint = conformanceHint;
+			this.flags = flags;
 		}
 		
 		@Override
-		public void acceptActualType(LightweightTypeReference type, ConformanceHint... hints) {
-			ConformanceHint[] actualHints = hints;
-			if (this.conformanceHint != null) {
-				actualHints = new ConformanceHint[hints.length + 1];
-				System.arraycopy(hints, 0, actualHints, 0, hints.length);
-				actualHints[hints.length] = conformanceHint;
-			}				
+		public void acceptActualType(LightweightTypeReference type, int flags) {
 			accept(this, type);
-			super.acceptActualType(type, actualHints);
+			super.acceptActualType(type, flags | this.flags);
 		}
 
 		@Override
@@ -127,7 +121,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 			LightweightTypeReference expectedType = getExpectedType();
 			if (expectedType == null || expectedType.isOwnedBy(referenceOwner))
 				return this;
-			return new ObservableTypeExpectation(expectedType.copyInto(referenceOwner), getState(), isReturnType(), conformanceHint);
+			return new ObservableTypeExpectation(expectedType.copyInto(referenceOwner), getState(), isReturnType(), flags);
 		}
 		
 	}
@@ -359,7 +353,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		if (!expectation.isNoTypeExpectation()) {
 			substitutedFeatureType = deferredBindTypeArgument(expectation, substitutedFeatureType);
 		}
-		expectation.acceptActualType(substitutedFeatureType, ConformanceHint.UNCHECKED);
+		expectation.acceptActualType(substitutedFeatureType, ConformanceFlags.UNCHECKED);
 		state.getStackedResolvedTypes().mergeIntoParent();
 	}
 	
@@ -544,11 +538,11 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 	}
 
 	protected ArgumentTypeComputationState createLinkingTypeComputationState(LightweightTypeReference expectedType) {
-		return new ArgumentTypeComputationState(state, expectedType.getLowerBoundSubstitute(), null);
+		return new ArgumentTypeComputationState(state, expectedType.getLowerBoundSubstitute(), ConformanceFlags.NONE);
 	}
 	
 	protected ArgumentTypeComputationState createVarArgTypeComputationState(LightweightTypeReference expectedType) {
-		return new ArgumentTypeComputationState(state, expectedType.getLowerBoundSubstitute(), ConformanceHint.VAR_ARG);
+		return new ArgumentTypeComputationState(state, expectedType.getLowerBoundSubstitute(), ConformanceFlags.VAR_ARG);
 	}
 	
 	protected void resolveAgainstActualType(LightweightTypeReference declaredType, LightweightTypeReference actualType, final AbstractTypeComputationState state) {

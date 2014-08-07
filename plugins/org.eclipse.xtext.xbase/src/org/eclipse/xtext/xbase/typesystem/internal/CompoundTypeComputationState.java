@@ -30,6 +30,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeAssigner;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -134,14 +135,14 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 			throw new IllegalArgumentException("XExpression may not be null");
 		}
 		StackedResolvedTypes resolvedTypes = components[0].doComputeTypes(expression);
-		EnumSet<ConformanceHint> conformanceHints = resolvedTypes.getConformanceHints(expression, false);
+		int flags = resolvedTypes.getConformanceFlags(expression, false);
 		for(int i = 1; i < components.length; i++) {
 			StackedResolvedTypes candidate = components[i].doComputeTypes(expression);
-			EnumSet<ConformanceHint> candidateHints = candidate.getConformanceHints(expression, false);
-			int compareResult = compareHints(conformanceHints, candidateHints);
+			int candidateFlags = candidate.getConformanceFlags(expression, false);
+			int compareResult = compareFlags(flags, candidateFlags);
 			if (compareResult == 1) {
 				resolvedTypes = candidate;
-				conformanceHints = candidateHints;
+				flags = candidateFlags;
 			}
 		}
 		resolvedTypes.performMergeIntoParent();
@@ -149,16 +150,13 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		return result;
 	}
 	
-	private int compareHints(EnumSet<ConformanceHint> leftConformance, EnumSet<ConformanceHint> rightConformance) {
-		if (leftConformance.equals(rightConformance)) {
-			return 0;
-		}
-		int result = ConformanceHint.compareHints(leftConformance, rightConformance);
+	private int compareFlags(int leftConformance, int rightConformance) {
+		int result = ConformanceFlags.compareFlags(leftConformance, rightConformance);
 		if (result != 0) {
 			return result;
 		}
-		if (leftConformance.contains(ConformanceHint.VAR_ARG) != rightConformance.contains(ConformanceHint.VAR_ARG)) {
-			if (leftConformance.contains(ConformanceHint.VAR_ARG))
+		if ((leftConformance & ConformanceFlags.VAR_ARG) != (rightConformance & ConformanceFlags.VAR_ARG)) {
+			if ((leftConformance & ConformanceFlags.VAR_ARG) != 0)
 				return 1;
 			return -1;
 		}
@@ -269,7 +267,19 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		}
 	}
 	
+	public void acceptActualType(LightweightTypeReference type, int flags) {
+		for (int i = 0; i < components.length; i++) {
+			components[i].acceptActualType(type, flags);
+		}
+	}
+	
 	public void acceptActualType(LightweightTypeReference type, ConformanceHint... hints) {
+		for (int i = 0; i < components.length; i++) {
+			components[i].acceptActualType(type, hints);
+		}
+	}
+	
+	public void acceptActualType(LightweightTypeReference type, EnumSet<ConformanceHint> hints) {
 		for (int i = 0; i < components.length; i++) {
 			components[i].acceptActualType(type, hints);
 		}

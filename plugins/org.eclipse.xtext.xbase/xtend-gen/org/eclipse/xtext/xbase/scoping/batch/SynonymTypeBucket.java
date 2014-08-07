@@ -7,30 +7,28 @@
  */
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import java.util.EnumSet;
 import java.util.List;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 import org.eclipse.xtext.xbase.scoping.batch.TypeBucket;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
 
 /**
  * A type bucket that was produced from the synonym of a type.
- * It tracks the conformance hints for a synonym, e.g. boxing or unboxing information.
+ * It tracks the conformance flags for a synonym, e.g. boxing or unboxing information.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @Data
 @SuppressWarnings("all")
 public class SynonymTypeBucket extends TypeBucket {
-  private final EnumSet<ConformanceHint> hints;
+  private final int flags;
   
-  public SynonymTypeBucket(final int id, final List<? extends JvmType> types, final IResolvedFeatures.Provider resolvedFeaturesProvider, final EnumSet<ConformanceHint> hints) {
+  public SynonymTypeBucket(final int id, final List<? extends JvmType> types, final IResolvedFeatures.Provider resolvedFeaturesProvider, final int flags) {
     super(id, types, resolvedFeaturesProvider);
-    this.hints = hints;
+    this.flags = flags;
   }
   
   @Override
@@ -38,7 +36,7 @@ public class SynonymTypeBucket extends TypeBucket {
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
-    result = prime * result + ((this.hints== null) ? 0 : this.hints.hashCode());
+    result = prime * result + this.flags;
     return result;
   }
   
@@ -54,10 +52,7 @@ public class SynonymTypeBucket extends TypeBucket {
     if (!super.equals(obj))
       return false;
     SynonymTypeBucket other = (SynonymTypeBucket) obj;
-    if (this.hints == null) {
-      if (other.hints != null)
-        return false;
-    } else if (!this.hints.equals(other.hints))
+    if (other.flags != this.flags)
       return false;
     return true;
   }
@@ -72,7 +67,7 @@ public class SynonymTypeBucket extends TypeBucket {
   }
   
   @Pure
-  public EnumSet<ConformanceHint> getHints() {
-    return this.hints;
+  public int getFlags() {
+    return this.flags;
   }
 }
