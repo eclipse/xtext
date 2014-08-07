@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.service;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextPackage;
@@ -58,6 +59,7 @@ public class GrammarProvider {
 					String fileWithoutExt = ClasspathUriUtil.CLASSPATH_SCHEME + ":/" + languageName.replace('.', '/');
 					try {
 						grammar = (Grammar) BaseEPackageAccess.loadGrammarFile(fileWithoutExt + ".xtextbin", resourceSet);
+						EcoreUtil.resolveAll(grammar.eResource());
 					} catch (RuntimeException e) {
 						Throwable cause = e;
 						while (cause.getCause() != null)
