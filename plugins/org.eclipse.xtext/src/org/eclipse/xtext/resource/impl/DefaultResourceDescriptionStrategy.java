@@ -20,7 +20,6 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
-import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategyExtension;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.util.IAcceptor;
@@ -34,7 +33,7 @@ import com.google.inject.Singleton;
  * @author Jan Koehnlein - Initial contribution and API
  */
 @Singleton
-public class DefaultResourceDescriptionStrategy implements IDefaultResourceDescriptionStrategy, IDefaultResourceDescriptionStrategyExtension {
+public class DefaultResourceDescriptionStrategy implements IDefaultResourceDescriptionStrategy {
 
 	private final static Logger LOG = Logger.getLogger(DefaultResourceDescriptionStrategy.class);
 
@@ -132,12 +131,5 @@ public class DefaultResourceDescriptionStrategy implements IDefaultResourceDescr
 		}
 		return !getLazyURIEncoder()
 				.isCrossLinkFragment(from.eResource(), ((InternalEObject) to).eProxyURI().fragment());
-	}
-
-	/**
-	 * @since 2.7
-	 */
-	public boolean createIndexingEObjectDescriptions(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {
-		return createEObjectDescriptions(eObject, acceptor);
 	}
 }
