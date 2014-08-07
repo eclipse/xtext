@@ -26,6 +26,10 @@
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<outputDirectory>\${project.build.directory}/xtend-gen/main</outputDirectory>
+					<testOutputDirectory>\${project.build.directory}/xtend-gen/test</testOutputDirectory>
+				</configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
