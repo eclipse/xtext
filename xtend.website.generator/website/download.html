@@ -289,6 +289,9 @@ mvn archetype:generate -DarchetypeGroupId=org.eclipse.xtend -DarchetypeArtifactI
             The Xtend plugin will then look for Eclipse settings instead. The folder specified in the settings dialog is interpreted as a path relative to
             the current source folder.
 					</p>
+          <p>
+            The xtend-maven-plugin is <a href="http://maven.apache.org/guides/mini/guide-using-toolchains.html">toolchain aware</a>, so you can build against different JDKs than the currently running one.
+          </p>
 					<p>
 						<div class="thumbnail">
 							<img src="images/configure-compiler-in-eclipse.png" alt="Configuring the compiler in Eclipse" width="680" height="330">
