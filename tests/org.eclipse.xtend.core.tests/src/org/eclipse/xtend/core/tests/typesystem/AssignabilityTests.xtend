@@ -11,7 +11,6 @@ import com.google.inject.Inject
 import java.util.Map
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference
@@ -20,6 +19,7 @@ import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference
 import org.junit.Ignore
 import org.junit.Test
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags
 
 /**
  * @author Sebastian Zarnekow
@@ -859,8 +859,8 @@ class AssignabilityTest extends CommonAssignabilityTest {
 	
 	override doIsAssignable(LightweightTypeReference lhs, LightweightTypeReference rhs) {
 		val result = lhs.internalIsAssignableFrom(rhs, new TypeConformanceComputationArgument(false, false, true, true, false, true))
-		assertFalse(result.conformanceHints.toString(), result.conformanceHints.contains(ConformanceHint::RAW))
-		return result.conformant
+		assertTrue(result.bitwiseAnd(ConformanceFlags.RAW_TYPE) == 0)
+		return result.bitwiseAnd(ConformanceFlags.SUCCESS) != 0;
 	}
 	
 	@Test 
@@ -1244,8 +1244,8 @@ class RawAssignabilityTest extends CommonAssignabilityTest {
 	
 	override boolean doIsAssignable(LightweightTypeReference lhs, LightweightTypeReference rhs) {
 		val result = lhs.internalIsAssignableFrom(rhs, new TypeConformanceComputationArgument(true, false, true, true, false, true))
-		assertTrue(result.conformanceHints.toString(), result.conformanceHints.contains(ConformanceHint::RAW))
-		return result.conformant
+		assertTrue(result.bitwiseAnd(ConformanceFlags.RAW_TYPE) != 0)
+		return result.bitwiseAnd(ConformanceFlags.SUCCESS) != 0;
 	}
 	
 	@Test 

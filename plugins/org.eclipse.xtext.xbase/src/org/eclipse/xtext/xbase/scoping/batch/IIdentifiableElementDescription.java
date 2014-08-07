@@ -40,6 +40,8 @@ public interface IIdentifiableElementDescription extends IEObjectDescription {
 	
 	EnumSet<ConformanceHint> getImplicitReceiverConformanceHints();
 	
+	int getImplicitReceiverConformanceFlags();
+	
 	/* @Nullable */
 	LightweightTypeReference getSyntacticReceiverType();
 	
@@ -51,6 +53,8 @@ public interface IIdentifiableElementDescription extends IEObjectDescription {
 	Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getSyntacticReceiverTypeParameterMapping();
 	
 	EnumSet<ConformanceHint> getSyntacticReceiverConformanceHints();
+	
+	int getSyntacticReceiverConformanceFlags();
 	
 	/* @Nullable */
 	XExpression getImplicitFirstArgument();

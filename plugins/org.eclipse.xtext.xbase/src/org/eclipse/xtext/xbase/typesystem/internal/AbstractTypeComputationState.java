@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
@@ -45,6 +44,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
@@ -99,8 +99,8 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		return reentrantTypeResolver;
 	}
 	
-	protected abstract LightweightTypeReference acceptType(ResolvedTypes types, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... conformanceHint);
-	protected abstract LightweightTypeReference acceptType(XExpression alreadyHandled, ResolvedTypes types, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... conformanceHint);
+	protected abstract LightweightTypeReference acceptType(ResolvedTypes types, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, int flags);
+	protected abstract LightweightTypeReference acceptType(XExpression alreadyHandled, ResolvedTypes types, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, int flags);
 	
 	public final ITypeComputationResult computeTypes(/* @Nullable */ XExpression expression) {
 		if(resolvedTypes.getMonitor().isCanceled())
@@ -324,18 +324,24 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	
 	public void acceptActualType(LightweightTypeReference type) {
 		for(ITypeExpectation expectation: getExpectations()) {
-			expectation.acceptActualType(type, ConformanceHint.UNCHECKED, ConformanceHint.EXPECTATION_INDEPENDENT);
+			expectation.acceptActualType(type, ConformanceFlags.UNCHECKED);
 		}
 	}
 	
 	public void acceptActualType(LightweightTypeReference type, ConformanceHint... hints) {
-		EnumSet<ConformanceHint> actualHints = EnumSet.copyOf(Arrays.asList(hints));
-		actualHints.add(ConformanceHint.UNCHECKED);
-		actualHints.add(ConformanceHint.EXPECTATION_INDEPENDENT);
-		ConformanceHint[] actualHintsAsArray = actualHints.toArray(new ConformanceHint[actualHints.size()]);
-		List<? extends ITypeExpectation> expectations = actualHints.contains(ConformanceHint.EXPLICIT_VOID_RETURN) ? getReturnExpectations() : getExpectations();
+		acceptActualType(type, ConformanceHint.toFlags(hints));
+	}
+	
+	public void acceptActualType(LightweightTypeReference type, EnumSet<ConformanceHint> hints) {
+		acceptActualType(type, ConformanceHint.toFlags(hints));
+	}
+	
+	public void acceptActualType(LightweightTypeReference type, int flags) {
+		if ((flags & ConformanceFlags.CHECKED) == 0)
+			flags |= ConformanceFlags.UNCHECKED;
+		List<? extends ITypeExpectation> expectations = (flags & ConformanceFlags.EXPLICIT_VOID_RETURN) != 0 ? getReturnExpectations() : getExpectations();
 		for(ITypeExpectation expectation: expectations) {
-			expectation.acceptActualType(type, actualHintsAsArray);
+			expectation.acceptActualType(type, flags);
 		}
 	}
 

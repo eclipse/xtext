@@ -37,7 +37,6 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.tests.typesystem.TypeResolutionTestData.ListFunction1;
 import org.eclipse.xtext.xbase.typesystem.computation.ClosureTypeComputer;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.internal.AbstractTypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.internal.AbstractTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes;
@@ -535,14 +534,14 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 
 		@Override
 		protected LightweightTypeReference acceptType(ResolvedTypes types, AbstractTypeExpectation expectation,
-				LightweightTypeReference type, boolean returnType, ConformanceHint... conformanceHint) {
+				LightweightTypeReference type, boolean returnType, int conformanceHint) {
 			throw new UnsupportedOperationException();
 		}
 		
 		@Override
 		protected LightweightTypeReference acceptType(XExpression alreadyHandled, ResolvedTypes types,
 				AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType,
-				ConformanceHint... conformanceHint) {
+				int conformanceHint) {
 			throw new UnsupportedOperationException();
 		}
 

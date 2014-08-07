@@ -9,7 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -33,7 +33,7 @@ public class ResolvedImplicitReceiver extends ImplicitReceiver {
 		if (expectedReceiverType != null)
 			expectedReceiverType = expectedReceiverType.copyInto(resolvedTypes.getReferenceOwner());
 		TypeExpectation expectation = new TypeExpectation(expectedReceiverType, getState(), false);
-		resolvedTypes.acceptType(getFeatureCall(), expectation, actualType.copyInto(resolvedTypes.getReferenceOwner()), false, ConformanceHint.UNCHECKED);
+		resolvedTypes.acceptType(getFeatureCall(), expectation, actualType.copyInto(resolvedTypes.getReferenceOwner()), false, ConformanceFlags.UNCHECKED);
 		super.applyToComputationState();
 	}
 	

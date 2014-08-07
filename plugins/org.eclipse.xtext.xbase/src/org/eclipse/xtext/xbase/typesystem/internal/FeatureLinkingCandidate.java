@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
@@ -43,7 +42,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.internal.util.FeatureKinds;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
@@ -429,23 +428,23 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	}
 	
 	@Override
-	protected EnumSet<ConformanceHint> getConformanceHints(int idx, boolean recompute) {
+	protected int getConformanceFlags(int idx, boolean recompute) {
 		if (isStatic()) {
 			if (idx == -1) {
-				return EnumSet.of(ConformanceHint.SUCCESS, ConformanceHint.CHECKED);	
+				return ConformanceFlags.CHECKED_SUCCESS;
 			}
 		}
 		if (idx == 0) {
 			if (getReceiver() != null) {
-				EnumSet<ConformanceHint> result = getReceiverConformanceHints();
+				int result = getReceiverConformanceFlags();
 				return result;
 			}
 		} else if (idx == 1) {
 			if (getExpression() instanceof XAssignment && getFeature() instanceof JvmField) {
-				return super.getConformanceHints(0, recompute);
+				return super.getConformanceFlags(0, recompute);
 			}
 		}
-		return super.getConformanceHints(idx, recompute);
+		return super.getConformanceFlags(idx, recompute);
 	}
 	
 	@Override
@@ -644,15 +643,15 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	}
 	
 	@Override
-	protected CandidateCompareResult compareByArgumentTypes(
+	protected CandidateCompareResult compareByArgumentTypesFlags(
 			AbstractPendingLinkingCandidate<?> right,
 			int leftIdx,
 			int rightIdx,
-			EnumSet<ConformanceHint> leftConformance,
-			EnumSet<ConformanceHint> rightConformance) {
-		CandidateCompareResult result = super.compareByArgumentTypes(right, leftIdx, rightIdx, leftConformance, rightConformance);
+			int leftConformance,
+			int rightConformance) {
+		CandidateCompareResult result = super.compareByArgumentTypesFlags(right, leftIdx, rightIdx, leftConformance, rightConformance);
 		if ((result != CandidateCompareResult.EQUALLY_INVALID && result != CandidateCompareResult.AMBIGUOUS) 
-				|| leftConformance.contains(ConformanceHint.SUCCESS) || !(right instanceof FeatureLinkingCandidate))
+				|| ((leftConformance & ConformanceFlags.SUCCESS) != 0) || !(right instanceof FeatureLinkingCandidate))
 			return result;
 		// both types do not match - pick the one which is not an extension
 		boolean firstArgumentMismatch = isFirstArgument(leftIdx);
@@ -767,7 +766,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 					receiverType = receiverType.getMultiTypeComponents().get(0);
 				}
 				TypeExpectation expectation = new TypeExpectation(expectedReceiverType, getState(), false);
-				resolvedTypes.acceptType(implicitReceiver, expectation, receiverType.copyInto(resolvedTypes.getReferenceOwner()), false, ConformanceHint.UNCHECKED);
+				resolvedTypes.acceptType(implicitReceiver, expectation, receiverType.copyInto(resolvedTypes.getReferenceOwner()), false, ConformanceFlags.UNCHECKED);
 				if (implicitReceiver instanceof XAbstractFeatureCall) {
 					new ImplicitReceiver(getFeatureCall(), (XAbstractFeatureCall) implicitReceiver, getState()).applyToComputationState();
 				} else {
@@ -823,11 +822,8 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		TypeExpectation expectation = new TypeExpectation(copiedDeclaredType, castedArgumentState, false);
 		LightweightTypeReference copiedReceiverType = knownType.copyInto(resolvedTypes.getReferenceOwner());
 		// TODO should we use the result of #acceptType?
-		ConformanceHint defaultHint = castedArgumentState.getDefaultHint();
-		if (defaultHint == null)
-			resolvedTypes.acceptType(argument, expectation, copiedReceiverType, false, ConformanceHint.UNCHECKED);
-		else
-			resolvedTypes.acceptType(argument, expectation, copiedReceiverType, false, ConformanceHint.UNCHECKED, defaultHint);
+		int defaultFlags = castedArgumentState.getDefaultFlags();
+		resolvedTypes.acceptType(argument, expectation, copiedReceiverType, false, ConformanceFlags.UNCHECKED | defaultFlags);
 		if (copiedDeclaredType != null)
 			resolveAgainstActualType(copiedDeclaredType, copiedReceiverType, castedArgumentState);
 	}
@@ -878,13 +874,13 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		return result;
 	}
 	
-	protected EnumSet<ConformanceHint> getReceiverConformanceHints() {
+	protected int getReceiverConformanceFlags() {
 		if (isStatic())
 			throw new IllegalStateException();
 		if (getImplicitReceiver() != null) {
-			return description.getImplicitReceiverConformanceHints();
+			return description.getImplicitReceiverConformanceFlags();
 		} else if (getSyntacticReceiverIfPossibleArgument() != null) {
-			return description.getSyntacticReceiverConformanceHints();
+			return description.getSyntacticReceiverConformanceFlags();
 		}
 		throw new IllegalStateException();
 	}
