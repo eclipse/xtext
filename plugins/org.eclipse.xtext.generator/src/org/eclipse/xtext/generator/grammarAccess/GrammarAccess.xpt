@@ -54,7 +54,7 @@ public class «gaSimpleName()» extends AbstractGrammarElementFinder {
 	private final Grammar grammar;
 «FOREACH usedGrammars AS g-»
 
-	private «g.gaSimpleName()» «g.gaGrammarAccessLocalVarName()»;
+	private final «g.gaSimpleName()» «g.gaGrammarAccessLocalVarName()»;
 «ENDFOREACH-»
 
 	@Inject
@@ -64,6 +64,7 @@ public class «gaSimpleName()» extends AbstractGrammarElementFinder {
 «FOREACH usedGrammars AS g-»
 		this.«g.gaGrammarAccessLocalVarName()» = «g.gaGrammarAccessLocalVarName()»;
 «ENDFOREACH-»
+		«EXPAND initializer FOREACH rules-»
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -102,7 +103,7 @@ public class «gaSimpleName()» extends AbstractGrammarElementFinder {
 
 
 «DEFINE parseRuleClasses(String lineDelimiter) FOR ParserRule»
-	public class «gaRuleAccesorClassName()» extends AbstractParserRuleElementFinder {
+	public class «gaRuleAccessorClassName()» extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "«name»");
 «FOREACH containedAbstractElements() AS e-»
 		private final «e.getClassName()» «e.gaElementAccessorLocalVarName()» = «e.loadElementStatement()»;
@@ -118,7 +119,7 @@ public class «gaSimpleName()» extends AbstractGrammarElementFinder {
 «ENDDEFINE»
 
 «DEFINE parseRuleClasses(String lineDelimiter) FOR EnumRule»
-	public class «gaRuleAccesorClassName()» extends AbstractEnumRuleElementFinder {
+	public class «gaRuleAccessorClassName()» extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "«name»");
 «FOREACH containedAbstractElements() AS e-»
 		private final «e.getClassName()» «e.gaElementAccessorLocalVarName()» = «e.loadElementStatement()»;
@@ -138,17 +139,32 @@ public class «gaSimpleName()» extends AbstractGrammarElementFinder {
 «ENDDEFINE»
 
 «DEFINE cache FOR ParserRule-»
-	private «gaRuleAccesorClassName()» «gaRuleAccessorLocalVarName()»;
+	private final «gaRuleAccessorClassName()» «gaRuleAccessorLocalVarName()»;
 «ENDDEFINE»
 
 «DEFINE cache FOR EnumRule-»
-	private «gaRuleAccesorClassName()» «gaRuleAccessorLocalVarName()»;
+	private final «gaRuleAccessorClassName()» «gaRuleAccessorLocalVarName()»;
 «ENDDEFINE»
 
 «DEFINE cache FOR TerminalRule-»
-	private TerminalRule «gaRuleAccessorLocalVarName()»;
+	private final TerminalRule «gaRuleAccessorLocalVarName()»;
 «ENDDEFINE»
 
+«DEFINE initializer FOR AbstractRule»
+«ERROR "unknown rule type " + metaType»
+«ENDDEFINE»
+
+«DEFINE initializer FOR ParserRule-»
+		this.«gaRuleAccessorLocalVarName()» = new «gaRuleAccessorClassName()»();
+«ENDDEFINE»
+
+«DEFINE initializer FOR EnumRule-»
+		this.«gaRuleAccessorLocalVarName()» = new «gaRuleAccessorClassName()»();
+«ENDDEFINE»
+
+«DEFINE initializer FOR TerminalRule-»
+		this.«gaRuleAccessorLocalVarName()» = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "«name»");
+«ENDDEFINE»
 
 «DEFINE getter(Grammar original, String lineDelimiter) FOR AbstractRule»
 «ERROR "unknown rule type " + metaType»
@@ -157,11 +173,11 @@ public class «gaSimpleName()» extends AbstractGrammarElementFinder {
 «DEFINE getter(Grammar original, String lineDelimiter) FOR ParserRule»
 «grammarFragmentToStr("	//", lineDelimiter)»
 «IF containingGrammar() == original-»
-	public «gaRuleAccesorClassName()» «gaElementsAccessor()» {
-		return («gaRuleAccessorLocalVarName()» != null) ? «gaRuleAccessorLocalVarName()» : («gaRuleAccessorLocalVarName()» = new «gaRuleAccesorClassName()»());
+	public «gaRuleAccessorClassName()» «gaElementsAccessor()» {
+		return «gaRuleAccessorLocalVarName()»;
 	}
 «ELSE-»	
-	public «containingGrammar().gaSimpleName()».«gaRuleAccesorClassName()» «gaElementsAccessor()» {
+	public «containingGrammar().gaSimpleName()».«gaRuleAccessorClassName()» «gaElementsAccessor()» {
 		return «usedGrammar(original).gaGrammarAccessLocalVarName()».«gaElementsAccessor()»;
 	}
 «ENDIF-»
@@ -174,11 +190,11 @@ public class «gaSimpleName()» extends AbstractGrammarElementFinder {
 «DEFINE getter(Grammar original, String lineDelimiter) FOR EnumRule»
 «grammarFragmentToStr("	//", lineDelimiter)»
 «IF containingGrammar() == original-»
-	public «gaRuleAccesorClassName()» «gaElementsAccessor()» {
-		return («gaRuleAccessorLocalVarName()» != null) ? «gaRuleAccessorLocalVarName()» : («gaRuleAccessorLocalVarName()» = new «gaRuleAccesorClassName()»());
+	public «gaRuleAccessorClassName()» «gaElementsAccessor()» {
+		return «gaRuleAccessorLocalVarName()»;
 	}
 «ELSE-»	
-	public «containingGrammar().gaSimpleName()».«gaRuleAccesorClassName()» «gaElementsAccessor()» {
+	public «containingGrammar().gaSimpleName()».«gaRuleAccessorClassName()» «gaElementsAccessor()» {
 		return «usedGrammar(original).gaGrammarAccessLocalVarName()».«gaElementsAccessor()»;
 	}
 «ENDIF-»
@@ -192,7 +208,7 @@ public class «gaSimpleName()» extends AbstractGrammarElementFinder {
 «grammarFragmentToStr("	//", lineDelimiter)»
 	public TerminalRule «gaRuleAccessor()» {
 «IF containingGrammar() == original-»
-		return («gaRuleAccessorLocalVarName()» != null) ? «gaRuleAccessorLocalVarName()» : («gaRuleAccessorLocalVarName()» = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "«name»"));
+		return «gaRuleAccessorLocalVarName()»;
 «ELSE-»
 		return «usedGrammar(original).gaGrammarAccessLocalVarName()».«gaRuleAccessor()»;
 «ENDIF-»
