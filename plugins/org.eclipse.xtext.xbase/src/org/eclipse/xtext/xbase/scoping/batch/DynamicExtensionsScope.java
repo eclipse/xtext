@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import static com.google.common.collect.Iterables.*;
-
 import java.beans.Introspector;
 import java.util.Collection;
 import java.util.Collections;
@@ -21,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -35,7 +34,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeA
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -94,8 +92,8 @@ public class DynamicExtensionsScope extends AbstractSessionBasedExecutableScope 
 				for (JvmType type : types) {
 					if (type instanceof JvmDeclaredType) {
 						IResolvedFeatures resolvedFeatures = bucket.getResolvedFeaturesProvider().getResolvedFeatures(type).getParameterizedView(extensionType);
-						Iterable<JvmFeature> features = resolvedFeatures.getAllFeatures();
-						Iterables.addAll(allFeatures, features);
+						List<JvmFeature> features = resolvedFeatures.getAllFeatures();
+						allFeatures.addAll(features);
 					}
 				}
 				if (!allFeatures.isEmpty()) {
@@ -171,9 +169,17 @@ public class DynamicExtensionsScope extends AbstractSessionBasedExecutableScope 
 						for(JvmType type: types) {
 							if (type instanceof JvmDeclaredType) {
 								IResolvedFeatures resolvedFeatures = bucket.getResolvedFeaturesProvider().getResolvedFeatures(type).getParameterizedView(extensionType);
-								Iterable<JvmFeature> features = resolvedFeatures.getAllFeatures(simpleName);
-								Iterable<? extends JvmFeature> filtered = order==1 ? features : filter(features, JvmOperation.class);
-								Iterables.addAll(allFeatures, filtered);
+								List<JvmFeature> features = resolvedFeatures.getAllFeatures(simpleName);
+								if (order == 1) {
+									allFeatures.addAll(features);
+								} else {
+									for(int i = 0, size = features.size(); i < size; i++) {
+										JvmFeature feature = features.get(i);
+										if (feature.eClass() == TypesPackage.Literals.JVM_OPERATION) {
+											allFeatures.add(feature);
+										}
+									}
+								}
 							}
 						}
 					}
