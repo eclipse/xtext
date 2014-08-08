@@ -19,8 +19,8 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.util.concurrent.IReadAccess;
-import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
@@ -72,13 +72,14 @@ public class ValidationJob extends Job {
 
 	public List<Issue> createIssues(final IProgressMonitor monitor) {
 		final List<Issue> issues = xtextDocument
-				.readOnly(new IUnitOfWork<List<Issue>, XtextResource>() {
-					public List<Issue> exec(XtextResource resource) throws Exception {
+				.readOnly(new CancelableUnitOfWork<List<Issue>, XtextResource>() {
+					@Override
+					public List<Issue> exec(XtextResource resource, final CancelIndicator outerIndicator) throws Exception {
 						if (resource == null || resource.isValidationDisabled())
 							return Collections.emptyList();
 						return resourceValidator.validate(resource, getCheckMode(), new CancelIndicator() {
 							public boolean isCanceled() {
-								return monitor.isCanceled();
+								return outerIndicator.isCanceled() || monitor.isCanceled();
 							}
 						});
 					}
