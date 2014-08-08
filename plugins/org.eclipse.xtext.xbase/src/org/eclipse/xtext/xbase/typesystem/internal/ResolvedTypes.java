@@ -39,6 +39,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.computation.IAmbiguousLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IApplicableCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
@@ -847,6 +848,21 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		});
 		@SuppressWarnings("unchecked") // cast is safe
 		Collection<ILinkingCandidate> result = (Collection<ILinkingCandidate>) rawResult;
+		return result;
+	}
+	
+	public Collection<IAmbiguousLinkingCandidate> getAmbiguousLinkingCandidates() {
+		Collection<?> rawResult = Collections2.filter(basicGetLinkingMap().values(), new Predicate<IApplicableCandidate>() {
+			public boolean apply(/* @Nullable */ IApplicableCandidate input) {
+				if (input == null)
+					throw new IllegalArgumentException();
+				if (input instanceof IAmbiguousLinkingCandidate)
+					return true;
+				return false;
+			}
+		});
+		@SuppressWarnings("unchecked") // cast is safe
+		Collection<IAmbiguousLinkingCandidate> result = (Collection<IAmbiguousLinkingCandidate>) rawResult;
 		return result;
 	}
 	

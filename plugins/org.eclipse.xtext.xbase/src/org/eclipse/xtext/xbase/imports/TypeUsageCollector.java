@@ -10,7 +10,9 @@ package org.eclipse.xtext.xbase.imports;
 import static com.google.common.collect.Iterables.*;
 import static org.eclipse.xtext.common.types.TypesPackage.Literals.*;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
@@ -65,14 +67,15 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.scoping.batch.ImplicitlyImportedFeatures;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IAmbiguousLinkingCandidate;
-import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.util.FeatureCallAsTypeLiteralHelper;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
 /**
@@ -169,6 +172,12 @@ public class TypeUsageCollector {
 	}
 
 	protected void collectAllReferences(EObject rootElement) {
+		IResolvedTypes resolvedTypes = batchTypeResolver.resolveTypes(rootElement);
+		Collection<IAmbiguousLinkingCandidate> ambiguousCandidates = resolvedTypes.getAmbiguousLinkingCandidates();
+		Map<XExpression, IAmbiguousLinkingCandidate> indexedAmbiguousCandidates = Maps.newHashMap();
+		for(IAmbiguousLinkingCandidate ambiguous: ambiguousCandidates) {
+			indexedAmbiguousCandidates.put(ambiguous.getAlternatives().get(0).getExpression(), ambiguous);
+		}
 		TreeIterator<EObject> contents = EcoreUtil.getAllContents(rootElement, true);
 		while (contents.hasNext()) {
 			EObject next = contents.next();
@@ -191,7 +200,7 @@ public class TypeUsageCollector {
 				} else if (featureCall.getFeature().eIsProxy()) {
 					acceptPreferredType(featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
 				} else {
-					collectStaticImportsFrom(featureCall);
+					collectStaticImportsFrom(featureCall, indexedAmbiguousCandidates.get(featureCall));
 				}
 			} else if (next instanceof XMemberFeatureCall) {
 				XMemberFeatureCall featureCall = (XMemberFeatureCall) next;
@@ -205,12 +214,12 @@ public class TypeUsageCollector {
 				if (!featureCall.isExplicitStatic()) {
 					XExpression target = featureCall.getMemberCallTarget();
 					if (!isTypeLiteral(target) || featureCall.isExtension()) {
-						collectStaticImportsFrom((XAbstractFeatureCall) next);
+						collectStaticImportsFrom(featureCall, indexedAmbiguousCandidates.get(featureCall));
 					}
 				} 
 			} else if ((next instanceof XAbstractFeatureCall && ((XAbstractFeatureCall) next).isOperation())
 					|| (next instanceof XAssignment && !contains(currentThisType.getAllFeatures(), ((XAssignment) next).getFeature()))) {
-				collectStaticImportsFrom((XAbstractFeatureCall) next);
+				collectStaticImportsFrom((XAbstractFeatureCall) next, indexedAmbiguousCandidates.get(next));
 			} else {
 				Set<EObject> elements = associations.getJvmElements(next);
 				if (!elements.isEmpty()) {
@@ -248,25 +257,26 @@ public class TypeUsageCollector {
 		return false;
 	}
 
-	private void collectStaticImportsFrom(final XAbstractFeatureCall featureCall) {
-		IFeatureLinkingCandidate featureLinkingCandidate = batchTypeResolver.resolveTypes(featureCall).getLinkingCandidate(featureCall);
-		if (featureLinkingCandidate instanceof IAmbiguousLinkingCandidate) {
-			IAmbiguousLinkingCandidate ambiguousLinkingCandidate = (IAmbiguousLinkingCandidate) featureLinkingCandidate;
-			for (ILinkingCandidate linkingCandidate : ambiguousLinkingCandidate.getAlternatives()) {
+	private void collectStaticImportsFrom(final XAbstractFeatureCall featureCall, IAmbiguousLinkingCandidate optionalAmbiguousCandidate) {
+		if (optionalAmbiguousCandidate != null) {
+			for (ILinkingCandidate linkingCandidate : optionalAmbiguousCandidate.getAlternatives()) {
 				collectStaticImportsFrom(linkingCandidate);
 			}
 		} else {
-			collectStaticImportsFrom(featureLinkingCandidate);
+			collectStaticImportsFrom(featureCall, featureCall.getFeature());
 		}
 	}
-
+	
 	protected void collectStaticImportsFrom(ILinkingCandidate linkingCandidate) {
 		if (linkingCandidate == null) {
 			return;
 		}
 		XExpression expression = linkingCandidate.getExpression();
+		collectStaticImportsFrom(expression, linkingCandidate.getFeature());
+	}
+
+	protected void collectStaticImportsFrom(XExpression expression, JvmIdentifiableElement feature) {
 		if (expression instanceof XAbstractFeatureCall) {
-			JvmIdentifiableElement feature = linkingCandidate.getFeature();
 			if (feature instanceof JvmEnumerationLiteral && expression instanceof XFeatureCall) {
 				if (isEnumLiteralImplicitelyImported(expression, (JvmEnumerationLiteral) feature)) {
 					return;
