@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.computation.IAmbiguousLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
@@ -107,6 +108,14 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 		List<ILinkingCandidate> result = Lists.newArrayList();
 		for(IResolvedTypes delegate: this) {
 			result.addAll(delegate.getFollowUpErrors());
+		}
+		return result;
+	}
+	
+	public Collection<IAmbiguousLinkingCandidate> getAmbiguousLinkingCandidates() {
+		List<IAmbiguousLinkingCandidate> result = Lists.newArrayList();
+		for(IResolvedTypes delegate: this) {
+			result.addAll(delegate.getAmbiguousLinkingCandidates());
 		}
 		return result;
 	}

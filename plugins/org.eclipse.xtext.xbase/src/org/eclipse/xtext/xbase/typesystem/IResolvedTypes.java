@@ -20,6 +20,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope.Anchor;
+import org.eclipse.xtext.xbase.typesystem.computation.IAmbiguousLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
@@ -51,6 +52,11 @@ public interface IResolvedTypes {
 	 * exposed to the users because they are follow up errors.
 	 */
 	Collection<ILinkingCandidate> getFollowUpErrors();
+	
+	/**
+	 * Returns all ambiguous linking candidates that have been encountered.
+	 */
+	Collection<IAmbiguousLinkingCandidate> getAmbiguousLinkingCandidates();
 	
 	/**
 	 * Returns the actually inferred type for the given expression or <code>null</code> if none.
@@ -191,6 +197,10 @@ public interface IResolvedTypes {
 		}
 		
 		public Collection<ILinkingCandidate> getFollowUpErrors() {
+			return Collections.emptyList();
+		}
+		
+		public Collection<IAmbiguousLinkingCandidate> getAmbiguousLinkingCandidates() {
 			return Collections.emptyList();
 		}
 		
