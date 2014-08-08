@@ -120,10 +120,13 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	}
 
 	protected void mergeExpressionTypesIntoParent(ResolvedTypes parent) {
-		for(Map.Entry<XExpression, List<TypeData>> entry: basicGetExpressionTypes().entrySet()) {
-			List<TypeData> list = entry.getValue();
-			for (int i = 0, size = list.size(); i < size; i++) {
-				parent.acceptType(entry.getKey(), prepareMerge(list.get(i), parent.getReferenceOwner()));
+		Map<XExpression, List<TypeData>> expressionTypes = basicGetExpressionTypes();
+		if (!expressionTypes.isEmpty()) {
+			for(Map.Entry<XExpression, List<TypeData>> entry: expressionTypes.entrySet()) {
+				List<TypeData> list = entry.getValue();
+				for (int i = 0, size = list.size(); i < size; i++) {
+					parent.acceptType(entry.getKey(), prepareMerge(list.get(i), parent.getReferenceOwner()));
+				}
 			}
 		}
 	}
@@ -432,13 +435,23 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	/* @Nullable */
 	protected Map<JvmIdentifiableElement, LightweightTypeReference> getFlattenedReassignedTypes() {
 		if (flattenedReassignedTypes != null) {
+			// already computed
 			return flattenedReassignedTypes.orNull();
 		}
 		Map<JvmIdentifiableElement, LightweightTypeReference> result = parent.getFlattenedReassignedTypes();
-		if (result == null)
+		if (result == null) {
+			// parent doesn't have reassigned types
+			// use only locally reassigned types
 			return (flattenedReassignedTypes = Optional.fromNullable(super.getFlattenedReassignedTypes())).orNull();
+		}
+		Map<JvmIdentifiableElement, LightweightTypeReference> myReassignedTypes = basicGetReassignedTypes();
+		if (myReassignedTypes.isEmpty()) {
+			// no locally reassigned types, use result from parent which was already checked for null
+			return (flattenedReassignedTypes = Optional.of(result)).orNull();
+		}
+		// merge parent's reassigned types and locally reassigned types
 		result = Maps.newHashMap(result);
-		result.putAll(basicGetReassignedTypes());
-		return (flattenedReassignedTypes = Optional.fromNullable(result)).orNull();
+		result.putAll(myReassignedTypes);
+		return (flattenedReassignedTypes = Optional.of(result)).orNull();
 	}
 }
