@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.util;
 
-import static com.google.common.collect.Iterables.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.ArrayList;
@@ -18,7 +17,6 @@ import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
-import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.util.TypeReferences;
@@ -249,19 +247,28 @@ public class XExpressionHelper {
 	}
 
 	public boolean isOperatorFromExtension(XAbstractFeatureCall featureCall, QualifiedName operatorSymbol, Class<?> definingExtensionClass) {
-		if(!equal(featureCall.getConcreteSyntaxFeatureName(), operatorSymbol.getLastSegment()))
+		return isOperatorFromExtension(featureCall, featureCall.getConcreteSyntaxFeatureName(), operatorSymbol, definingExtensionClass);
+	}
+
+	public boolean isOperatorFromExtension(XAbstractFeatureCall featureCall, String concreteSyntax, QualifiedName operatorSymbol, Class<?> definingExtensionClass) {
+		if(!equal(concreteSyntax, operatorSymbol.getLastSegment()))
 			return false;
 		List<QualifiedName> methodNames = getMethodNames(featureCall, operatorSymbol);
+		JvmDeclaredType definingJvmType = (JvmDeclaredType) typeReferences.findDeclaredType(definingExtensionClass, featureCall);
+		if (definingJvmType == null)
+			return false;
+		JvmIdentifiableElement feature = featureCall.getFeature();
+		if (definingJvmType != feature.eContainer()) {
+			return false;
+		}
 		for (QualifiedName methodName : methodNames) {
-			JvmDeclaredType definingJvmType = (JvmDeclaredType) typeReferences.findDeclaredType(definingExtensionClass, featureCall);
-			if (definingJvmType == null)
-				return false;
-			Iterable<JvmFeature> operatorImplementations = definingJvmType.findAllFeaturesByName(methodName.getLastSegment());
-			return contains(operatorImplementations, featureCall.getFeature());
+			if (methodName.getLastSegment().equals(feature.getSimpleName())) {
+				return true;
+			}
 		}
 		return false;
 	}
-
+	
 	protected List<QualifiedName> getMethodNames(XAbstractFeatureCall featureCall, QualifiedName operatorSymbol) {
 		List<QualifiedName> methodNames = new ArrayList<QualifiedName>();
 		methodNames.add(operatorMapping.getMethodName(operatorSymbol));
