@@ -19,17 +19,25 @@ import org.junit.Before
 import org.junit.Test
 
 import static org.junit.Assert.*
+import org.junit.After
+import java.util.Set
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 class EclipseFileSystemTest extends JavaIoFileSystemTest {
 
+	private Set<String> knownProjects = newHashSet
+
 	@Before override void setUp() {
+		for(p: ResourcesPlugin.workspace.root.projects) {
+			knownProjects.add(p.name)
+		}
+		
 		val root = ResourcesPlugin.workspace.root
 		val project = root.getProject('foo')
 		if (project.exists) {
-			project.delete(true, null)
+			fail("Project 'foo' should not exist yet")
 		}
 		project.create(null)
 		project.open(null)
@@ -38,10 +46,32 @@ class EclipseFileSystemTest extends JavaIoFileSystemTest {
 			encodingProvider = new IEncodingProvider.Runtime()
 		]
 	}
+	
+	@After def void tearDown() {
+		val root = ResourcesPlugin.workspace.root
+		for(p: root.projects) {
+			if (!knownProjects.remove(p.name)) {
+				p.delete(true, null)
+			}
+		}
+		assertTrue(knownProjects.empty)
+	}
 
 	// overridden to make the launch config work.
 	@Test override testMakeandDeleteFile() {
 		super.testMakeandDeleteFile()
+	}
+	
+	// in temp folders, there's .createdBy but not in Eclipse folders
+	@Test override void testGetWorkspaceChildren() {
+		// changed expectation from 2 to 1
+		assertEquals(Path.ROOT.children.join('[', ', ', ']') [ it.segments.join('.') ], 1, Path.ROOT.children.size)
+
+		val path = new Path("/bar")
+		path.mkdir
+		assertTrue(path.exists)
+		// changed expectation from 3 to 2		
+		assertEquals(Path.ROOT.children.join('[', ', ', ']') [ it.segments.join('.') ], 2, Path.ROOT.children.size)
 	}
 
 	@Test def void testGetURIForImportedProject() {
