@@ -24,10 +24,10 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
  */
 public class ExtensionScopeHelper {
 
-	private LightweightTypeReference argumentType;
+	private LightweightTypeReference rawArgumentType;
 
 	public ExtensionScopeHelper(LightweightTypeReference argumentType) {
-		this.argumentType = argumentType;
+		this.rawArgumentType = argumentType.getRawTypeReference();
 	}
 	
 	/**
@@ -55,17 +55,16 @@ public class ExtensionScopeHelper {
 		if (rawParameterType == null || rawParameterType.eIsProxy())
 			return false;
 		if (!(rawParameterType instanceof JvmTypeParameter)) {
-			LightweightTypeReference rawReceiverType = argumentType.getRawTypeReference();
-			if (rawReceiverType.isResolved()) {
+			if (rawArgumentType.isResolved()) {
 				// short circuit - limit extension scope entries to real candidates
-				LightweightTypeReference parameterTypeReference = new OwnedConverter(rawReceiverType.getOwner()).toRawLightweightReference(rawParameterType);
-				if (parameterTypeReference.isResolved() && !parameterTypeReference.isAssignableFrom(rawReceiverType)) {
+				LightweightTypeReference parameterTypeReference = new OwnedConverter(rawArgumentType.getOwner()).toRawLightweightReference(rawParameterType);
+				if (parameterTypeReference.isResolved() && !parameterTypeReference.isAssignableFrom(rawArgumentType)) {
 					return false;
 				}
-				if (parameterTypeReference.isArray() && !rawReceiverType.isArray() && !rawReceiverType.isSubtypeOf(Iterable.class)) {
+				if (parameterTypeReference.isArray() && !rawArgumentType.isArray() && !rawArgumentType.isSubtypeOf(Iterable.class)) {
 					return false;
 				}
-			} else if (isArrayTypeMismatch(rawReceiverType, rawParameterType)) {
+			} else if (isArrayTypeMismatch(rawArgumentType, rawParameterType)) {
 				return false;
 			}
 		}
