@@ -18,6 +18,7 @@ import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.computation.IAmbiguousLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
@@ -40,6 +41,10 @@ public abstract class ForwardingResolvedTypes extends ForwardingObject implement
 	
 	public Collection<ILinkingCandidate> getFollowUpErrors() {
 		return delegate().getFollowUpErrors();
+	}
+	
+	public Collection<IAmbiguousLinkingCandidate> getAmbiguousLinkingCandidates() {
+		return delegate().getAmbiguousLinkingCandidates();
 	}
 	
 	public boolean isRefinedType(XExpression expression) {
