@@ -1253,32 +1253,38 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		String operatorSymbol = binaryOperation.getConcreteSyntaxFeatureName();
 		XExpression left = binaryOperation.getLeftOperand();
 		XExpression right = binaryOperation.getRightOperand();
-		boolean equalsComparison = expressionHelper.isOperatorFromExtension(binaryOperation, OperatorMapping.EQUALS, ObjectExtensions.class)
-				|| expressionHelper.isOperatorFromExtension(binaryOperation, OperatorMapping.NOT_EQUALS, ObjectExtensions.class);
-		if(equalsComparison
-				|| expressionHelper.isOperatorFromExtension(binaryOperation, OperatorMapping.TRIPLE_NOT_EQUALS, ObjectExtensions.class)
-				|| expressionHelper.isOperatorFromExtension(binaryOperation, OperatorMapping.TRIPLE_EQUALS, ObjectExtensions.class)) {
-			if(right instanceof XNullLiteral) {
-				LightweightTypeReference leftType = typeResolver.resolveTypes(left).getActualType(left);
-				if(leftType != null) {
-					if (leftType.isPrimitive()) { 
-						error("The operator '" + operatorSymbol + "' is undefined for the argument types " + leftType.getHumanReadableName() + " and null", binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
-					} else if (equalsComparison) {
-						addIssue("The operator '" + operatorSymbol + "' should be replaced by '" + operatorSymbol + "=' when null is one of the arguments.", binaryOperation, EQUALS_WITH_NULL);
+		if (right.eClass() == XbasePackage.Literals.XNULL_LITERAL || left.eClass() == XbasePackage.Literals.XNULL_LITERAL) {
+			boolean equalsComparison = expressionHelper.isOperatorFromExtension(binaryOperation, operatorSymbol, OperatorMapping.EQUALS, ObjectExtensions.class)
+					|| expressionHelper.isOperatorFromExtension(binaryOperation, operatorSymbol, OperatorMapping.NOT_EQUALS, ObjectExtensions.class);
+			if(equalsComparison
+					|| expressionHelper.isOperatorFromExtension(binaryOperation, operatorSymbol, OperatorMapping.TRIPLE_NOT_EQUALS, ObjectExtensions.class)
+					|| expressionHelper.isOperatorFromExtension(binaryOperation, operatorSymbol, OperatorMapping.TRIPLE_EQUALS, ObjectExtensions.class)) {
+				if(right instanceof XNullLiteral) {
+					LightweightTypeReference leftType = typeResolver.resolveTypes(left).getActualType(left);
+					if(leftType != null) {
+						if (leftType.isPrimitive()) { 
+							error("The operator '" + operatorSymbol + "' is undefined for the argument types " + leftType.getHumanReadableName() + " and null", binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
+						} else if (equalsComparison) {
+							addIssue("The operator '" + operatorSymbol + "' should be replaced by '" + operatorSymbol + "=' when null is one of the arguments.", binaryOperation, EQUALS_WITH_NULL);
+						}
 					}
 				}
-			}
-			if(left instanceof XNullLiteral) {
-				LightweightTypeReference rightType = typeResolver.resolveTypes(right).getActualType(right);
-				if(rightType != null) {
-					if (rightType.isPrimitive()) { 
-						error("The operator '" + operatorSymbol + "' is undefined for the argument types null and " + rightType.getHumanReadableName(), binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
-					} else if (equalsComparison && !(right instanceof XNullLiteral)) {
-						addIssue("The operator '" + operatorSymbol + "' should be replaced by '" + operatorSymbol + "=' when null is one of the arguments.", binaryOperation, EQUALS_WITH_NULL);
+				if(left instanceof XNullLiteral) {
+					LightweightTypeReference rightType = typeResolver.resolveTypes(right).getActualType(right);
+					if(rightType != null) {
+						if (rightType.isPrimitive()) { 
+							error("The operator '" + operatorSymbol + "' is undefined for the argument types null and " + rightType.getHumanReadableName(), binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
+						} else if (equalsComparison && !(right instanceof XNullLiteral)) {
+							addIssue("The operator '" + operatorSymbol + "' should be replaced by '" + operatorSymbol + "=' when null is one of the arguments.", binaryOperation, EQUALS_WITH_NULL);
+						}
 					}
 				}
+			} else if(expressionHelper.isOperatorFromExtension(binaryOperation, operatorSymbol, OperatorMapping.ELVIS, ObjectExtensions.class)) {
+				LightweightTypeReference leftType = getActualType(left);
+				if(leftType.isPrimitive()) 
+					error("The operator '" + operatorSymbol + "' is undefined for arguments of type " + leftType.getHumanReadableName(), binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
 			}
-		} else if(expressionHelper.isOperatorFromExtension(binaryOperation, OperatorMapping.ELVIS, ObjectExtensions.class)) {
+		} else if(expressionHelper.isOperatorFromExtension(binaryOperation, operatorSymbol, OperatorMapping.ELVIS, ObjectExtensions.class)) {
 			LightweightTypeReference leftType = getActualType(left);
 			if(leftType.isPrimitive()) 
 				error("The operator '" + operatorSymbol + "' is undefined for arguments of type " + leftType.getHumanReadableName(), binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
