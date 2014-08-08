@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
@@ -784,18 +785,20 @@ public class RawTypeConformanceComputer {
 		}
 		JvmType leftType = left.getType();
 		JvmType rightType = right.getType();
-		if (leftType.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
+		EClass leftEClass = leftType.eClass();
+		if (leftEClass == TypesPackage.Literals.JVM_GENERIC_TYPE) {
 			JvmGenericType castedLeftType = (JvmGenericType) leftType;
+			EClass rightEClass = rightType.eClass();
 			if (castedLeftType.isFinal()) {
-				if (rightType.eClass() == TypesPackage.Literals.JVM_TYPE_PARAMETER && getSuperType(right, castedLeftType) != null) {
+				if (rightEClass == TypesPackage.Literals.JVM_TYPE_PARAMETER && getSuperType(right, castedLeftType) != null) {
 					return flags | SUCCESS | SUBTYPE;
 				}
 				return flags;
 			}
-			if (!castedLeftType.isInterface() && rightType.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE && ((JvmGenericType) rightType).isInterface()) {
+			if (!castedLeftType.isInterface() && rightEClass == TypesPackage.Literals.JVM_GENERIC_TYPE && ((JvmGenericType) rightType).isInterface()) {
 				return flags;
 			}
-		} else if (leftType.eClass() == TypesPackage.Literals.JVM_TYPE_PARAMETER) {
+		} else if (leftEClass == TypesPackage.Literals.JVM_TYPE_PARAMETER) {
 			if (rightType.eClass() == TypesPackage.Literals.JVM_TYPE_PARAMETER && getSuperType(right, leftType) != null) {
 				return flags | SUCCESS | SUBTYPE;
 			}
@@ -857,9 +860,10 @@ public class RawTypeConformanceComputer {
 	
 	private int internalGetPrimitiveKind(ParameterizedTypeReference typeReference) {
 		JvmType type = typeReference.getType();
-		if (type.eIsProxy())
-			return PRIMITIVE_NONE;
-		if (type.eClass() == TypesPackage.Literals.JVM_PRIMITIVE_TYPE) {
+		EClass eClass = type.eClass();
+		if (eClass == TypesPackage.Literals.JVM_PRIMITIVE_TYPE) {
+			if (type.eIsProxy())
+				return PRIMITIVE_NONE;
 			String name = type.getSimpleName();
 			switch (name.length()) {
 				case 3:
@@ -894,7 +898,9 @@ public class RawTypeConformanceComputer {
 					}
 					break;
 			}
-		} else if (type.eClass() == TypesPackage.Literals.JVM_VOID) {
+		} else if (eClass == TypesPackage.Literals.JVM_VOID) {
+			if (type.eIsProxy())
+				return PRIMITIVE_NONE;
 			return PRIMITIVE_VOID;
 		}
 		return PRIMITIVE_NONE;
@@ -905,8 +911,9 @@ public class RawTypeConformanceComputer {
 		if (type == null || type.eIsProxy()) {
 			return PRIMITIVE_NONE; 
 		}
-		if (type.eClass() != TypesPackage.Literals.JVM_GENERIC_TYPE) {
-			if (type.eClass() == TypesPackage.Literals.JVM_TYPE_PARAMETER) {
+		EClass eClass = type.eClass();
+		if (eClass != TypesPackage.Literals.JVM_GENERIC_TYPE) {
+			if (eClass == TypesPackage.Literals.JVM_TYPE_PARAMETER) {
 				return internalGetPrimitiveKindFromWrapper((JvmTypeParameter)type, null);
 			}
 			return PRIMITIVE_NONE;
@@ -963,14 +970,15 @@ public class RawTypeConformanceComputer {
 				JvmTypeReference upperBound = constraint.getTypeReference();
 				if (upperBound != null) {
 					JvmType upperBoundType = upperBound.getType();
-					if (upperBoundType.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
+					EClass eClass = upperBoundType.eClass();
+					if (eClass == TypesPackage.Literals.JVM_GENERIC_TYPE) {
 						return internalGetPrimitiveKindFromWrapper((JvmGenericType) upperBoundType);
 					}
 					if (type == upperBoundType) {
 						return PRIMITIVE_NONE;
 					}
 					// guard against recursive deps
-					if (upperBoundType.eClass() == TypesPackage.Literals.JVM_TYPE_PARAMETER) {
+					if (eClass == TypesPackage.Literals.JVM_TYPE_PARAMETER) {
 						JvmTypeParameter upperBoundTypeParameter = (JvmTypeParameter) upperBoundType;
 						if (guard == null) {
 							guard = new RecursionGuard<JvmTypeParameter>();

@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -277,9 +278,10 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 	}
 	
 	protected boolean isClass(JvmType type) {
-		if (type.eClass() == TypesPackage.Literals.JVM_ARRAY_TYPE)
+		EClass eClass = type.eClass();
+		if (eClass == TypesPackage.Literals.JVM_ARRAY_TYPE)
 			return isClass(((JvmArrayType) type).getComponentType());
-		return type.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE && !((JvmGenericType) type).isInterface();
+		return eClass == TypesPackage.Literals.JVM_GENERIC_TYPE && !((JvmGenericType) type).isInterface();
 	}
 	
 	/**
@@ -371,10 +373,12 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 			}
 
 			protected int compare(JvmType element1, JvmType element2) {
-				if (element1.eClass() == TypesPackage.Literals.JVM_ARRAY_TYPE && element2.eClass() == TypesPackage.Literals.JVM_ARRAY_TYPE) {
+				EClass element1EClass = element1.eClass();
+				EClass element2EClass = element2.eClass();
+				if (element1EClass == TypesPackage.Literals.JVM_ARRAY_TYPE && element2EClass == TypesPackage.Literals.JVM_ARRAY_TYPE) {
 					return compare(((JvmArrayType) element1).getComponentType(), ((JvmArrayType) element2).getComponentType());
 				}
-				if (element1.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE && element2.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
+				if (element1EClass == TypesPackage.Literals.JVM_GENERIC_TYPE && element2EClass == TypesPackage.Literals.JVM_GENERIC_TYPE) {
 					int result = Booleans.compare(((JvmGenericType) element1).isInterface(), ((JvmGenericType) element2).isInterface());
 					if (result != 0) {
 						return result;
