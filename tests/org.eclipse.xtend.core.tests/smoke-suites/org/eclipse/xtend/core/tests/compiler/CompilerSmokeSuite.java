@@ -5,23 +5,17 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.core.tests.typesystem;
+package org.eclipse.xtend.core.tests.compiler;
 
+import org.eclipse.xtext.junit4.smoketest.ProcessedBy;
+import org.eclipse.xtext.junit4.smoketest.XtextSmokeTestRunner;
+import org.eclipse.xtext.xbase.junit.typesystem.TypeSystemSmokeTester;
 import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@RunWith(Suite.class)
-@SuiteClasses({
-	SkipCharacterInBetweenCompilerBug410767SmokeTest.class,
-	SkipFirstCharactersCompilerBug410767SmokeTest.class,
-	SkipLastCharactersCompilerBug410767SmokeTest.class,
-	SkipNodesInBetweenCompilerBug410767SmokeTest.class,
-	SkipThreeCharactersInBetweenCompilerBug410767SmokeTest.class,
-	SkipTokensInBetweenCompilerBug410767SmokeTest.class,
-})
-public class CompilerBug410767SmokeSuite {
+@RunWith(XtextSmokeTestRunner.class)
+@ProcessedBy(value = TypeSystemSmokeTester.class, processInParallel = true)
+public class CompilerSmokeSuite extends CompilerSuite {
 }

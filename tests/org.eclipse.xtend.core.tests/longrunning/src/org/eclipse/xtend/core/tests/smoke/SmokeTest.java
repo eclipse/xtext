@@ -38,6 +38,8 @@ import org.eclipse.xtext.validation.IDiagnosticConverter;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.validation.ResourceValidatorImpl;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.junit.ComparisonFailure;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
@@ -51,6 +53,7 @@ import com.google.inject.Provider;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
+@Ignore("Resource update smoke scenarios have to be migrated to new smoke test infrastructure")
 public class SmokeTest extends AbstractSmokeTest {
 	
 	private static final Logger logger = Logger.getLogger(SmokeTest.class);
@@ -239,22 +242,24 @@ public class SmokeTest extends AbstractSmokeTest {
 					List<?> data = diagnostic.getData();
 					if (!data.isEmpty() && data.get(0) instanceof Throwable) {
 						Throwable t = (Throwable) data.get(0);
-						// the framework catches runtime exception
-						// and AssertionError does not take a throwable as argument
-						throw new Error(new RuntimeException("Input was: " + model, t));
+						throwError(t);
 					}
 					if (EObjectValidator.DIAGNOSTIC_SOURCE.equals(diagnostic.getSource()) && diagnostic.getCode() == EObjectValidator.EOBJECT__EVERY_REFERENCE_IS_CONTAINED) {
-						throw new Error(new RuntimeException("Dangling reference found. Input was: " + model));
+						throwError(new RuntimeException("Dangling reference found."));
 					}
 				}
+			}
+			
+			private void throwError(Throwable e) {
+				ComparisonFailure result = new ComparisonFailure(e.getMessage(), model, "");
+				result.setStackTrace(e.getStackTrace());
+				throw result;
 			}
 			
 			public void convertResourceDiagnostic(Diagnostic diagnostic, Severity severity, IAcceptor<Issue> acceptor) {
 				if (diagnostic instanceof ExceptionDiagnostic) {
 					Exception e = ((ExceptionDiagnostic) diagnostic).getException();
-					// the framework catches runtime exception
-					// and AssertionError does not take a throwable as argument
-					throw new Error(new RuntimeException("Input was: " + model, e));
+					throwError(e);
 				}
 			}
 		});
