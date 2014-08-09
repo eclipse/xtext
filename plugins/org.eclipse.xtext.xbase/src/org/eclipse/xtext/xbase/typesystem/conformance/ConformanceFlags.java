@@ -157,8 +157,14 @@ public final class ConformanceFlags {
 	 * Default flags to announce a successfully checked conformance.
 	 */
 	public static final int CHECKED_SUCCESS = CHECKED | SUCCESS;
-
+	
 	private static final int SUCCESS_OR_LAMBDA = SUCCESS | LAMBDA_RAW_COMPATIBLE | LAMBDA_PARAMETER_COMPATIBLE;
+	
+	/**
+	 * Flags that describe the result of a checked conformance, which can be
+	 * one of {@link #INCOMPATIBLE}, {@link #SUCCESS}, {@link #LAMBDA_RAW_COMPATIBLE}, or {@link #LAMBDA_PARAMETER_COMPATIBLE}.
+	 */
+	public static final int CHECK_RESULTS = ConformanceFlags.INCOMPATIBLE | ConformanceFlags.SUCCESS_OR_LAMBDA;
 
 	/**
 	 * Simple comparison of two flags. If both indicate compatibility, the one with the 
@@ -223,8 +229,8 @@ public final class ConformanceFlags {
 	public static boolean sanityCheck(int flags) {
 		doCheck(flags, ConformanceFlags.CHECKED | ConformanceFlags.UNCHECKED);
 		if ((flags & ConformanceFlags.UNCHECKED) == 0) {
-			doCheck(flags, ConformanceFlags.SUCCESS_OR_LAMBDA | ConformanceFlags.INCOMPATIBLE);
-		} else if ((flags & ConformanceFlags.SEALED) != 0) {
+			doCheck(flags, ConformanceFlags.CHECK_RESULTS);
+		} else if ((flags & (ConformanceFlags.SEALED | ConformanceFlags.CHECK_RESULTS)) != 0) {
 			throw new IllegalArgumentException("Invalid flags: " + toString(flags));
 		}
 		return true;

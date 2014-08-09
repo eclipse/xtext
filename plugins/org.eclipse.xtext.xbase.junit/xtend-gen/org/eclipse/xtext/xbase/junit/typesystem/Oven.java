@@ -60,6 +60,11 @@ public class Oven extends Assert {
   @Extension
   private ParseHelper<EObject> _parseHelper;
   
+  public void fireproof(final CharSequence input) throws Exception {
+    String _string = input.toString();
+    this.fireproof(_string);
+  }
+  
   public void fireproof(final String input) throws Exception {
     boolean _put = this.alreadyBaked.put(input);
     boolean _not = (!_put);

@@ -488,7 +488,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			mergeData.mergedFlags &= ~ConformanceFlags.THROWN_EXCEPTION;
 		}
 		if ((mergeData.mergedFlags & (ConformanceFlags.CHECKED | ConformanceFlags.UNCHECKED)) == (ConformanceFlags.CHECKED | ConformanceFlags.UNCHECKED)) {
-			mergeData.mergedFlags &= ~ConformanceFlags.CHECKED;
+			mergeData.mergedFlags &= ~(ConformanceFlags.CHECKED | ConformanceFlags.CHECK_RESULTS);
 		}
 	}
 	

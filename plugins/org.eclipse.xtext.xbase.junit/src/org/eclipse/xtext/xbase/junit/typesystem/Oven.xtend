@@ -43,6 +43,10 @@ class Oven extends Assert {
 	
 	@Inject extension ParseHelper<EObject>
 	
+	def void fireproof(CharSequence input) throws Exception {
+		input.toString.fireproof
+	}
+	
 	def void fireproof(String input) throws Exception {
 		if (!alreadyBaked.put(input))
 			return;

@@ -2760,7 +2760,7 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this._oven.fireproof(_builder.toString());
+    this._oven.fireproof(_builder);
   }
   
   @Test
@@ -2803,7 +2803,7 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
-    this._oven.fireproof(_builder.toString());
+    this._oven.fireproof(_builder);
   }
   
   @Test
@@ -2854,7 +2854,7 @@ public class ErrorTest extends AbstractXtendTestCase {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package bug411973 class Bug {val ()=>String init new() { this([|\"Hello World!\"]new(()=>String init) { this.init = init } @Override override toString() { init.apply } }");
     _builder.newLine();
-    this._oven.fireproof(_builder.toString());
+    this._oven.fireproof(_builder);
   }
   
   @Test
@@ -2871,7 +2871,7 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.append("  ");
     _builder.append("} else {    \'no string\'  }}}");
     _builder.newLine();
-    this._oven.fireproof(_builder.toString());
+    this._oven.fireproof(_builder);
   }
   
   @Test
@@ -2890,7 +2890,7 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this._oven.fireproof(_builder.toString());
+    this._oven.fireproof(_builder);
   }
   
   @Test
@@ -2929,7 +2929,7 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this._oven.fireproof(_builder.toString());
+    this._oven.fireproof(_builder);
   }
   
   @Test
@@ -2939,7 +2939,7 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this._oven.fireproof(_builder.toString());
+    this._oven.fireproof(_builder);
   }
   
   @Test
@@ -2949,7 +2949,7 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this._oven.fireproof(_builder.toString());
+    this._oven.fireproof(_builder);
   }
   
   @Test
@@ -2962,7 +2962,7 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this._oven.fireproof(_builder.toString());
+    this._oven.fireproof(_builder);
   }
   
   @Test
@@ -2975,7 +2975,7 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this._oven.fireproof(_builder.toString());
+    this._oven.fireproof(_builder);
   }
   
   @Test
@@ -2988,7 +2988,7 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this._oven.fireproof(_builder.toString());
+    this._oven.fireproof(_builder);
   }
   
   @Test
@@ -3001,7 +3001,7 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this._oven.fireproof(_builder.toString());
+    this._oven.fireproof(_builder);
   }
   
   @Test
@@ -3014,7 +3014,7 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this._oven.fireproof(_builder.toString());
+    this._oven.fireproof(_builder);
   }
   
   @Test
@@ -3044,7 +3044,7 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this._oven.fireproof(_builder.toString());
+    this._oven.fireproof(_builder);
   }
   
   @Test
