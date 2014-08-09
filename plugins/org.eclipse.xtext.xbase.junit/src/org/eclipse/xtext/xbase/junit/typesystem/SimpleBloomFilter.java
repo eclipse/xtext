@@ -31,7 +31,9 @@ import com.google.common.primitives.Ints;
  * 
  * @author Dimitris Andreou
  * @author Kevin Bourrillion
+ * @deprecated This trimmed down copy of Guava's real bloom filter will be removed in Xtext 2.8
  */
+@Deprecated
 @Beta
 public final class SimpleBloomFilter {
 

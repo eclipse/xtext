@@ -7,20 +7,29 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.typesystem;
 
+import org.eclipse.xtext.junit4.smoketest.ProcessedBy;
+import org.eclipse.xtext.junit4.smoketest.XtextSmokeTestRunner;
+import org.eclipse.xtext.xbase.junit.typesystem.TypeSystemSmokeTester;
+import org.eclipse.xtext.xbase.tests.linking.BatchLinkingTest;
+import org.eclipse.xtext.xbase.tests.typing.XbaseTypeProviderTest;
 import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@RunWith(Suite.class)
+@RunWith(XtextSmokeTestRunner.class)
 @SuiteClasses({
-	SkipLastCharacters.class,
-	SkipFirstCharacters.class,
-	SkipCharacterInBetween.class,
-	SkipTokensInBetween.class,
-	SkipNodesInBetween.class,
+	BatchTypeResolverTest.class,
+	BatchReturnTypeResolverTest.class,
+	BatchFeatureCallTypeTest.class,
+	BatchIdentifiableTypeTest.class,
+	BatchConstructorCallTypeTest.class,
+	StringLiteralTest.class,
+	ClosureTypeSystemSuite.class,
+	BatchLinkingTest.class,
+	ExpectationSuite.class,
+	XbaseTypeProviderTest.class
 })
-public class SmokeSuite {
-}
+@ProcessedBy(value=TypeSystemSmokeTester.class, processInParallel=true)
+public class SmokeSuite {}
