@@ -21,10 +21,8 @@ import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.junit.typesystem.SimpleBloomFilter;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -36,6 +34,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.internal.TypeData;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Assert;
+import org.junit.ComparisonFailure;
 
 /**
  * Utility to check a given expression for exceptions and integrity
@@ -49,8 +48,6 @@ import org.junit.Assert;
 public class Oven extends Assert {
   @Inject
   private IBatchTypeResolver typeResolver;
-  
-  private final SimpleBloomFilter alreadyBaked = SimpleBloomFilter.create(5000000);
   
   @Inject
   @Extension
@@ -66,75 +63,76 @@ public class Oven extends Assert {
   }
   
   public void fireproof(final String input) throws Exception {
-    boolean _put = this.alreadyBaked.put(input);
-    boolean _not = (!_put);
-    if (_not) {
-      return;
-    }
     try {
-      final EObject file = this._parseHelper.parse(input);
-      final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(file);
-      Assert.assertNotNull(resolvedTypes);
-      boolean _notEquals = (!Objects.equal(file, null));
-      if (_notEquals) {
-        TreeIterator<EObject> _eAllContents = file.eAllContents();
-        Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_eAllContents);
-        for (final EObject content : _iterable) {
-          boolean _matched = false;
-          if (!_matched) {
-            if (content instanceof XAbstractFeatureCall) {
-              _matched=true;
-              this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
-              XExpression _implicitReceiver = ((XAbstractFeatureCall)content).getImplicitReceiver();
-              boolean _notEquals_1 = (!Objects.equal(_implicitReceiver, null));
-              if (_notEquals_1) {
-                XExpression _implicitReceiver_1 = ((XAbstractFeatureCall)content).getImplicitReceiver();
-                this.assertExpressionTypeIsResolved(_implicitReceiver_1, resolvedTypes);
-              }
-              XExpression _implicitFirstArgument = ((XAbstractFeatureCall)content).getImplicitFirstArgument();
-              boolean _notEquals_2 = (!Objects.equal(_implicitFirstArgument, null));
-              if (_notEquals_2) {
-                XExpression _implicitFirstArgument_1 = ((XAbstractFeatureCall)content).getImplicitFirstArgument();
-                this.assertExpressionTypeIsResolved(_implicitFirstArgument_1, resolvedTypes);
-              }
-            }
-          }
-          if (!_matched) {
-            if (content instanceof XClosure) {
-              _matched=true;
-              this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
-              EList<JvmFormalParameter> _implicitFormalParameters = ((XClosure)content).getImplicitFormalParameters();
-              final Procedure1<JvmFormalParameter> _function = new Procedure1<JvmFormalParameter>() {
-                public void apply(final JvmFormalParameter it) {
-                  Oven.this.assertIdentifiableTypeIsResolved(it, resolvedTypes);
+      try {
+        final EObject file = this._parseHelper.parse(input);
+        final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(file);
+        Assert.assertNotNull(resolvedTypes);
+        boolean _notEquals = (!Objects.equal(file, null));
+        if (_notEquals) {
+          TreeIterator<EObject> _eAllContents = file.eAllContents();
+          Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_eAllContents);
+          for (final EObject content : _iterable) {
+            boolean _matched = false;
+            if (!_matched) {
+              if (content instanceof XAbstractFeatureCall) {
+                _matched=true;
+                this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
+                XExpression _implicitReceiver = ((XAbstractFeatureCall)content).getImplicitReceiver();
+                boolean _notEquals_1 = (!Objects.equal(_implicitReceiver, null));
+                if (_notEquals_1) {
+                  XExpression _implicitReceiver_1 = ((XAbstractFeatureCall)content).getImplicitReceiver();
+                  this.assertExpressionTypeIsResolved(_implicitReceiver_1, resolvedTypes);
                 }
-              };
-              IterableExtensions.<JvmFormalParameter>forEach(_implicitFormalParameters, _function);
+                XExpression _implicitFirstArgument = ((XAbstractFeatureCall)content).getImplicitFirstArgument();
+                boolean _notEquals_2 = (!Objects.equal(_implicitFirstArgument, null));
+                if (_notEquals_2) {
+                  XExpression _implicitFirstArgument_1 = ((XAbstractFeatureCall)content).getImplicitFirstArgument();
+                  this.assertExpressionTypeIsResolved(_implicitFirstArgument_1, resolvedTypes);
+                }
+              }
             }
-          }
-          if (!_matched) {
-            if (content instanceof XExpression) {
-              _matched=true;
-              this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
+            if (!_matched) {
+              if (content instanceof XClosure) {
+                _matched=true;
+                this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
+                EList<JvmFormalParameter> _implicitFormalParameters = ((XClosure)content).getImplicitFormalParameters();
+                final Procedure1<JvmFormalParameter> _function = new Procedure1<JvmFormalParameter>() {
+                  public void apply(final JvmFormalParameter it) {
+                    Oven.this.assertIdentifiableTypeIsResolved(it, resolvedTypes);
+                  }
+                };
+                IterableExtensions.<JvmFormalParameter>forEach(_implicitFormalParameters, _function);
+              }
             }
-          }
-          if (!_matched) {
-            if (content instanceof JvmIdentifiableElement) {
-              _matched=true;
-              this.assertIdentifiableTypeIsResolved(((JvmIdentifiableElement)content), resolvedTypes);
+            if (!_matched) {
+              if (content instanceof XExpression) {
+                _matched=true;
+                this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
+              }
+            }
+            if (!_matched) {
+              if (content instanceof JvmIdentifiableElement) {
+                _matched=true;
+                this.assertIdentifiableTypeIsResolved(((JvmIdentifiableElement)content), resolvedTypes);
+              }
             }
           }
         }
+      } catch (final Throwable _t) {
+        if (_t instanceof Throwable) {
+          final Throwable e = (Throwable)_t;
+          String _message = e.getMessage();
+          final ComparisonFailure error = new ComparisonFailure(_message, input, "");
+          StackTraceElement[] _stackTrace = e.getStackTrace();
+          error.setStackTrace(_stackTrace);
+          throw error;
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
       }
-    } catch (final Throwable _t) {
-      if (_t instanceof Throwable) {
-        final Throwable t = (Throwable)_t;
-        t.printStackTrace();
-        InputOutput.<String>println(input);
-        throw new RuntimeException((("Expression was: \'" + input) + "\'"), t);
-      } else {
-        throw Exceptions.sneakyThrow(_t);
-      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
