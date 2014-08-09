@@ -23,6 +23,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.CompoundReentrantTypeResolver
 import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.internal.TypeData
 import org.junit.Assert
+import org.junit.ComparisonFailure
 
 /**
  * Utility to check a given expression for exceptions and integrity
@@ -37,8 +38,6 @@ class Oven extends Assert {
 	@Inject
 	IBatchTypeResolver typeResolver
 	
-	val SimpleBloomFilter alreadyBaked = SimpleBloomFilter.create(5000000)
-	
 	@Inject extension ReflectExtensions
 	
 	@Inject extension ParseHelper<EObject>
@@ -48,8 +47,6 @@ class Oven extends Assert {
 	}
 	
 	def void fireproof(String input) throws Exception {
-		if (!alreadyBaked.put(input))
-			return;
 		try {
 			val file = input.parse
 			val resolvedTypes = typeResolver.resolveTypes(file)
@@ -81,11 +78,12 @@ class Oven extends Assert {
 					}
 				}
 			}
-		} catch(Throwable t) {
-			t.printStackTrace
-			println(input)
-			throw new RuntimeException("Expression was: '" + input + "'", t)
+		} catch(Throwable e) {
+			val error = new ComparisonFailure(e.getMessage(), input, '');
+			error.stackTrace = e.stackTrace
+			throw error
 		}
+		
 	}
 	
 	def void assertExpressionTypeIsResolved(XExpression expression, IResolvedTypes types) {
