@@ -24,6 +24,10 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
+ * Base class for smoke tests.
+ * 
+ * Clients may want to use the {@link XtextSmokeTestRunner} instead.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
  */

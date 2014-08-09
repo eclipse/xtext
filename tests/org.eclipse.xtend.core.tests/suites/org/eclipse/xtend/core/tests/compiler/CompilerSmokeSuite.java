@@ -5,21 +5,17 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.tests.annotations;
+package org.eclipse.xtend.core.tests.compiler;
 
 import org.eclipse.xtext.junit4.smoketest.ProcessedBy;
 import org.eclipse.xtext.junit4.smoketest.XtextSmokeTestRunner;
 import org.eclipse.xtext.xbase.junit.typesystem.TypeSystemSmokeTester;
 import org.junit.runner.RunWith;
-import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @RunWith(XtextSmokeTestRunner.class)
-@ProcessedBy(value=TypeSystemSmokeTester.class, processInParallel=true)
-@SuiteClasses({
-	AnnotationsValidatorTest.class,
-})
-public class AnnotationSmokeSuite {
+@ProcessedBy(value = TypeSystemSmokeTester.class, processInParallel = true)
+public class CompilerSmokeSuite extends CompilerSuite {
 }
