@@ -41,7 +41,7 @@ public class XtextRunner extends BlockJUnit4ClassRunner {
 		if (injectorProvider instanceof IRegistryConfigurator) {
 			final IRegistryConfigurator registryConfigurator = (IRegistryConfigurator) injectorProvider;
 			registryConfigurator.setupRegistry();
-			final Statement methodBlock = super.methodBlock(method);
+			final Statement methodBlock = superMethodBlock(method);
 			return new Statement() {
 				@Override
 				public void evaluate() throws Throwable {
@@ -53,8 +53,15 @@ public class XtextRunner extends BlockJUnit4ClassRunner {
 				}
 			};
 		}else{
-			return super.methodBlock(method);
+			return superMethodBlock(method);
 		}
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	protected Statement superMethodBlock(FrameworkMethod method) {
+		return super.methodBlock(method);
 	}
 
 	protected IInjectorProvider getOrCreateInjectorProvider() {

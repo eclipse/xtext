@@ -21,7 +21,6 @@ import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.junit.typesystem.SimpleBloomFilter;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.InputOutput;
@@ -50,8 +49,6 @@ public class Oven extends Assert {
   @Inject
   private IBatchTypeResolver typeResolver;
   
-  private final SimpleBloomFilter alreadyBaked = SimpleBloomFilter.create(5000000);
-  
   @Inject
   @Extension
   private ReflectExtensions _reflectExtensions;
@@ -66,11 +63,6 @@ public class Oven extends Assert {
   }
   
   public void fireproof(final String input) throws Exception {
-    boolean _put = this.alreadyBaked.put(input);
-    boolean _not = (!_put);
-    if (_not) {
-      return;
-    }
     try {
       final EObject file = this._parseHelper.parse(input);
       final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(file);

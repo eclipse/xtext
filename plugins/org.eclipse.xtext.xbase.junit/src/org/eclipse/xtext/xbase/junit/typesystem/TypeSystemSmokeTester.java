@@ -1,0 +1,53 @@
+/*******************************************************************************
+ * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.xbase.junit.typesystem;
+
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Set;
+import java.util.regex.Pattern;
+
+import org.eclipse.xtext.junit4.smoketest.ScenarioProcessor;
+import org.eclipse.xtext.xbase.junit.typesystem.Oven;
+
+import com.google.common.collect.Sets;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+@Singleton
+public class TypeSystemSmokeTester extends ScenarioProcessor {
+	@Inject
+	private Oven oven;
+	
+	private static final Pattern WS = Pattern.compile("\\s{2,}");
+	
+	private MessageDigest messageDigest;
+	private Set<BigInteger> seen;
+	
+	public TypeSystemSmokeTester() throws NoSuchAlgorithmException {
+		messageDigest = MessageDigest.getInstance("MD5");
+		seen = Sets.newHashSet();
+	}
+	
+	@Override
+	protected String preProcess(String data) {
+		return WS.matcher(data).replaceAll(" ");
+	}
+	
+	@Override
+	protected void processFile(String data) throws Exception {
+		byte[] hash = messageDigest.digest(data.getBytes("UTF-8"));
+		if (seen.add(new BigInteger(hash))) {
+			oven.fireproof(data);
+		}
+	}
+}

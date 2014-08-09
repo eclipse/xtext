@@ -15,6 +15,7 @@ Export-Package: org.eclipse.xtext.junit4,
  org.eclipse.xtext.junit4.util,
  org.eclipse.xtext.junit4.validation
 Import-Package: org.junit;version="4.5.0",
+ org.junit.internal.builders;version="4.10.0",
  org.junit.rules;version="4.7.0";resolution:=optional,
  org.junit.runner;version="4.5.0",
  org.junit.runner.manipulation;version="4.5.0",

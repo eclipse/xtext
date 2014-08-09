@@ -37,8 +37,6 @@ class Oven extends Assert {
 	@Inject
 	IBatchTypeResolver typeResolver
 	
-	val SimpleBloomFilter alreadyBaked = SimpleBloomFilter.create(5000000)
-	
 	@Inject extension ReflectExtensions
 	
 	@Inject extension ParseHelper<EObject>
@@ -48,8 +46,6 @@ class Oven extends Assert {
 	}
 	
 	def void fireproof(String input) throws Exception {
-		if (!alreadyBaked.put(input))
-			return;
 		try {
 			val file = input.parse
 			val resolvedTypes = typeResolver.resolveTypes(file)
