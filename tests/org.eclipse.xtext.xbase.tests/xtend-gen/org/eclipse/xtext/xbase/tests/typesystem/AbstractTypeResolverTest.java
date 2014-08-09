@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.junit4.smoketest.IgnoredBySmokeTest;
 import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
 import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
 import org.eclipse.xtext.xbase.XExpression;
@@ -1715,6 +1716,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("{val s = \'\' s}", "String");
   }
   
+  @IgnoredBySmokeTest("Do not run smoke test with 1000s of nested expressions")
   @Test
   public void testBlockExpression_03() throws Exception {
     String input = "{ val s1 = \'\'\n";
@@ -2313,6 +2315,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).map(e|e).head", "Integer");
   }
   
+  @IgnoredBySmokeTest("Pointless since the scenario is pretty much the same as above")
   @Test
   public void testFeatureCall_15_m() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(String s|1).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)\n\t\t.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)\n\t\t.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)\n\t\t.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)\n\t\t.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)\n\t\t.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)\n\t\t.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)\n\t\t).map(iterable|iterable.size()).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)\n\t\t.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)\n\t\t.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)\n\t\t.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)\n\t\t.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)\n\t\t.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)\n\t\t.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)\n\t\t.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).head", "Integer");
@@ -2457,16 +2460,19 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 * 5).map(b| b / 5 )", "List<Integer>");
   }
   
+  @IgnoredBySmokeTest("Same as testFeatureCall_25_a")
   @Test
   public void testFeatureCall_25_b() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 * 5).map(b| b / 5 ).head", "Integer");
   }
   
+  @IgnoredBySmokeTest("Same as testFeatureCall_25_a")
   @Test
   public void testFeatureCall_25_c() throws Exception {
     this.resolvesTo("newArrayList(\'\').map[ length + 1 * 5 ].map [ it / 5 ].head", "Integer");
   }
   
+  @IgnoredBySmokeTest("Same as testFeatureCall_25_a")
   @Test
   public void testFeatureCall_25_d() throws Exception {
     this.resolvesTo("newArrayList(\'\').map[ length + 1 * 5 - length + 1 * 5 ].map [ it / 5 + 1 / it ].head", "Integer");
