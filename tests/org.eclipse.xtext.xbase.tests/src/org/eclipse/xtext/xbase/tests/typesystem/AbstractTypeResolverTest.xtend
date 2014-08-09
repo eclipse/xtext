@@ -16,6 +16,7 @@ import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Ignore
 import org.junit.Test
+import org.eclipse.xtext.junit4.smoketest.IgnoredBySmokeTest
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -1600,6 +1601,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"{val s = '' s}".resolvesTo("String")
 	}
 	
+	@IgnoredBySmokeTest("Do not run smoke test with 1000s of nested expressions") 
 	@Test def void testBlockExpression_03() throws Exception {
 		var input = "{ val s1 = ''\n"
 		val max = 1000
@@ -2123,6 +2125,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).map(e|e).head".resolvesTo("Integer")
 	}
 	
+	@IgnoredBySmokeTest("Pointless since the scenario is pretty much the same as above")
 	@Test def void testFeatureCall_15_m() throws Exception {
 		("newArrayList(newArrayList('').map(String s|1).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)
 		.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)
@@ -2368,14 +2371,15 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	@Test def void testFeatureCall_25_a() throws Exception {
 		"newArrayList('').map(s|s.length + 1 * 5).map(b| b / 5 )".resolvesTo("List<Integer>")
 	}
+	@IgnoredBySmokeTest("Same as testFeatureCall_25_a")
 	@Test def void testFeatureCall_25_b() throws Exception {
 		"newArrayList('').map(s|s.length + 1 * 5).map(b| b / 5 ).head".resolvesTo("Integer")
 	}
-	
+	@IgnoredBySmokeTest("Same as testFeatureCall_25_a")
 	@Test def void testFeatureCall_25_c() throws Exception {
 		"newArrayList('').map[ length + 1 * 5 ].map [ it / 5 ].head".resolvesTo("Integer")
 	}
-	
+	@IgnoredBySmokeTest("Same as testFeatureCall_25_a")
 	@Test def void testFeatureCall_25_d() throws Exception {
 		"newArrayList('').map[ length + 1 * 5 - length + 1 * 5 ].map [ it / 5 + 1 / it ].head".resolvesTo("Integer")
 	}

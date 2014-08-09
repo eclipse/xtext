@@ -8,14 +8,14 @@
 package org.eclipse.xtext.common.types.access.impl;
 
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.binary.BinaryClass;
-
-import com.google.common.collect.Maps;
 
 /**
  * It caches the {@link JvmDeclaredType} per {@link Class}.
@@ -41,7 +41,9 @@ public class CachingDeclaredTypeFactory implements ITypeFactory<BinaryClass, Jvm
 
 	private final DeclaredTypeFactory delegate;
 
-	private final Map<String, JvmDeclaredType> typeCache = Maps.newHashMap();
+	private final Map<String, JvmDeclaredType> typeCache = new ConcurrentHashMap<String, JvmDeclaredType>();
+	
+	private final JvmDeclaredType nullValue = TypesFactory.eINSTANCE.createJvmGenericType();
 
 	public CachingDeclaredTypeFactory(DeclaredTypeFactory delegate) {
 		this.delegate = delegate;
@@ -69,7 +71,13 @@ public class CachingDeclaredTypeFactory implements ITypeFactory<BinaryClass, Jvm
 		JvmDeclaredType cachedResult = typeCache.get(name);
 		if (cachedResult == null) {
 			cachedResult = load(clazz);
-			typeCache.put(name, cachedResult);
+			if (cachedResult == null) {
+				typeCache.put(name, nullValue);
+			} else {
+				typeCache.put(name, cachedResult);
+			}
+		} else if (cachedResult == nullValue) {
+			return null;
 		}
 		return cachedResult;
 	}

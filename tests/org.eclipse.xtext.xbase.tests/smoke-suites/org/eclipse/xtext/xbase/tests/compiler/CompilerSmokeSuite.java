@@ -1,26 +1,21 @@
 /*******************************************************************************
- * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.tests.typesystem;
+package org.eclipse.xtext.xbase.tests.compiler;
 
+import org.eclipse.xtext.junit4.smoketest.ProcessedBy;
+import org.eclipse.xtext.junit4.smoketest.XtextSmokeTestRunner;
+import org.eclipse.xtext.xbase.junit.typesystem.TypeSystemSmokeTester;
 import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@RunWith(Suite.class)
-@SuiteClasses({
-	SkipLastCharacters.class,
-	SkipFirstCharacters.class,
-	SkipCharacterInBetween.class,
-	SkipTokensInBetween.class,
-	SkipNodesInBetween.class,
-})
-public class SmokeSuite {
+@RunWith(XtextSmokeTestRunner.class)
+@ProcessedBy(value=TypeSystemSmokeTester.class, processInParallel=true)
+public class CompilerSmokeSuite extends CompilerSuite {
 }

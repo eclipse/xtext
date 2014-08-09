@@ -7,20 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.annotations;
 
+import org.eclipse.xtext.junit4.smoketest.ProcessedBy;
+import org.eclipse.xtext.junit4.smoketest.XtextSmokeTestRunner;
+import org.eclipse.xtext.xbase.junit.typesystem.TypeSystemSmokeTester;
 import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@RunWith(Suite.class)
+@RunWith(XtextSmokeTestRunner.class)
+@ProcessedBy(value=TypeSystemSmokeTester.class, processInParallel=true)
 @SuiteClasses({
-	SkipLastCharacters.class,
-	SkipFirstCharacters.class,
-	SkipCharacterInBetween.class,
-	SkipTokensInBetween.class,
-	SkipNodesInBetween.class,
+	AnnotationsValidatorTest.class,
 })
 public class AnnotationSmokeSuite {
 }
