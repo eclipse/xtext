@@ -13,22 +13,24 @@ import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.junit4.smoketest.IgnoredBySmokeTest
 import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider
 import org.junit.After
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.eclipse.xtext.util.Files.*
 import static org.junit.Assert.*
-import org.junit.Ignore
 
 /**
  * Batch compiler tests.
- * @see org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler
+ * @see XtendBatchCompiler
  */
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(RuntimeInjectorProvider))
+@IgnoredBySmokeTest
 class TestBatchCompiler {
 
 	@Inject

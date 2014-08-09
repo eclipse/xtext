@@ -8,5 +8,6 @@
 	<classpathentry kind="src" path="longrunning/src"/>
 	<classpathentry kind="src" path="longrunning/xtend-gen"/>
 	<classpathentry kind="src" path="suites"/>
+	<classpathentry kind="src" path="smoke-suites"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
