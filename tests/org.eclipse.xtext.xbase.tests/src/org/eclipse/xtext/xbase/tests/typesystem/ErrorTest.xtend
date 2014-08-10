@@ -214,4 +214,32 @@ class ErrorTest extends AbstractXbaseTestCase {
 		'''.fireproof
 	}
 	
+	@Test
+	def void testErrorModel_28() throws Exception {
+		'''
+			{ val Iterable<Object> branch = if (true) [|<Object>newArrayList(terator] else newArrayList('a').toArray }
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_29() throws Exception {
+		'''
+			{ var java.io.FileFilter filter = (if (true) [return true] else [return
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_30() throws Exception {
+		'''
+			{ var java.io.FileFilter filter = (if (true) [return ] else [return false])
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_31() throws Exception {
+		'''
+			{ var java.io.FileFilter filter = (if (true) [return] else [return false])
+		'''.fireproof
+	}
+	
 }

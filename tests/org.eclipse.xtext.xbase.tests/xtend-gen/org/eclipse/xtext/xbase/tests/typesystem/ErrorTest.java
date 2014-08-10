@@ -319,4 +319,36 @@ public class ErrorTest extends AbstractXbaseTestCase {
     _builder.newLine();
     this._oven.fireproof(_builder);
   }
+  
+  @Test
+  public void testErrorModel_28() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{ val Iterable<Object> branch = if (true) [|<Object>newArrayList(terator] else newArrayList(\'a\').toArray }");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_29() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{ var java.io.FileFilter filter = (if (true) [return true] else [return");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_30() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{ var java.io.FileFilter filter = (if (true) [return ] else [return false])");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_31() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{ var java.io.FileFilter filter = (if (true) [return] else [return false])");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
 }
