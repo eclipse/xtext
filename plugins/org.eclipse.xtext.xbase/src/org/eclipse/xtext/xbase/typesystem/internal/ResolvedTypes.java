@@ -434,8 +434,11 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 							break;
 						}
 					}
-					if (valid)
+					if (valid) {
 						mergedType = expectedType; // branches have already been validated
+						mergeData.mergedFlags &= ~(ConformanceFlags.UNCHECKED | ConformanceFlags.INCOMPATIBLE | ConformanceFlags.LAMBDA_RAW_COMPATIBLE | ConformanceFlags.LAMBDA_PARAMETER_COMPATIBLE);
+						mergeData.mergedFlags |= ConformanceFlags.CHECKED_SUCCESS;
+					}
 				}
 			}
 		}
@@ -489,6 +492,9 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		}
 		if ((mergeData.mergedFlags & (ConformanceFlags.CHECKED | ConformanceFlags.UNCHECKED)) == (ConformanceFlags.CHECKED | ConformanceFlags.UNCHECKED)) {
 			mergeData.mergedFlags &= ~(ConformanceFlags.CHECKED | ConformanceFlags.CHECK_RESULTS);
+		}
+		if ((mergeData.mergedFlags & ConformanceFlags.UNCHECKED) != 0) {
+			mergeData.mergedFlags &= ~ConformanceFlags.SEALED;
 		}
 	}
 	
