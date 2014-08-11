@@ -3091,6 +3091,400 @@ public class ErrorTest extends AbstractXtendTestCase {
     this.processWithoutException(_builder);
   }
   
+  @Test
+  public void testErrorModel_114() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def m() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("new Runnable() { override run() {} }");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_115() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("valr = new Runnable() { override run() { println(x) } }");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public val x = 1");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_116() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("valbar = new Runnable() { override run() {} }");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_117() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val r = new Runnable() { override run() { println(x) } }");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public val x = 1");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_118() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def m(Iterable<String> iterable) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("iterable.flatMap[].sortBy [ length ]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <A,B extends Iterable<? extends B> flatMap(Iterable<? extends A> iterable, (A)=>B map) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return null");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_119() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def m(Iterable<String> iterable) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("iterable.flatMap[].sortBy [ length ]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <A,B extends Iterable<? extends B>> flatMap(Iterable<? extends A> iterable, (A)=>B map) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return null");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_120() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("StringRepository repository");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def m()\t{");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("var string = repository.findByStringId(1L)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("repository.save(string)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("public interface StringRepository extends GraphRepository<String> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def String findByStringId(Long id);");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface GraphRepository<T> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <U extends U save(U entity);");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <U extends T> Iterable<U> save(Iterable<U> entities);");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_121() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C { StringRepository repository def m()\t{ repository.save(#[]) }");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("public interface StringRepository extends GraphRepository<String> { def String findByStringId(Long id);");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface GraphRepository<T> { def <U extends U save(U entity); def <U extends T> Iterable<U> save(Iterable<U> entities);");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_122() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C { CharSeqRepository repository def m()\t{ repository.<String>save(newArrayList) }");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("public interface CharSeqRepository extends GraphRepository<CharSequence> {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface GraphRepository<T> { def <U extends U save(U entity); def <U extends T> Iterable<U> save(Iterable<U> entities);");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_123() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C { CharSeqRepository repository def m()\t{ repository.save(#[\'a\']) }");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("public interface CharSeqRepository extends GraphRepository<CharSequence> {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface GraphRepository<T> { def <U extends U save(U entity); def <U extends T> Iterable<U> save(Iterable<U> entities);");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_124() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import static com.google.common.base.Preconditions.*");
+    _builder.newLine();
+    _builder.append("class Test<JAVA_TYPE> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val Functions.Function0<JAVA_TYPE> constructor");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val list = new(Functions.Function0<JAVA_TYPE> theConstructor, Class<JAVA_TYPE> theType) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("constructor = if (theConstructor == null) new NoConstructor<JAVA_TYPE>(theType) else theConstructor");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def static test(){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("new Test(null, String)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class NoConstructor<JAVA_TYPE> implements Functions.Function0<JAVA_TYPE> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val String type");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new(String theTypeName) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("type = checkNotNull(theTypeName, \"theTypeName\")");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new(Class<JAVA_TYPE> theType) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("type = checkNotNull(theType, \"theType\").name");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override apply() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("throw new UnsupportedOperationException(\"Instances of type \"+type +\" cannot be created (without parameters?)\")");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_125() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static interface B {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("A a");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("B b");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("C c");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("D d");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("static class D {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("A a");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("B b =  A.B {}");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("C c = new C");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("D d = new B.C.D {}");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("A a");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("B b = new B {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("B.C c");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("B.C.D d");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_126() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.append("class Test {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def Object foo() throws Exception {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("val (java.util.List<String>,String)=>java.util.List<String> functionReturningList = [$");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_127() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo class Test {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def Object foo() throws Exception {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("val (java.util.List<String>,String)=>java.util.List<String> functionReturningList = [$ += $1 return $0 ]");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("#[\'foo\'].fold(newArrayList, functionReturningList)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
   public XtendFile processWithoutException(final CharSequence input) throws Exception {
     XtextResourceSet _resourceSet = this.getResourceSet();
     URI _createURI = URI.createURI("abcdefg.xtend");

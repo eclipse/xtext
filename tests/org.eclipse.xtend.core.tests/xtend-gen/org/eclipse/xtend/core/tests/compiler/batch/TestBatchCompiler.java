@@ -39,7 +39,7 @@ import org.junit.runner.RunWith;
 
 /**
  * Batch compiler tests.
- * @see org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler
+ * @see XtendBatchCompiler
  */
 @RunWith(XtextRunner.class)
 @InjectWith(RuntimeInjectorProvider.class)

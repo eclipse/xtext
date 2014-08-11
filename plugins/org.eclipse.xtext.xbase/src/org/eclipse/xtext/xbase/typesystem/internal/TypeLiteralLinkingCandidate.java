@@ -18,11 +18,11 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -35,7 +35,6 @@ import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.TypeLiteralLinkingCandidateResolver;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
@@ -240,7 +239,8 @@ public class TypeLiteralLinkingCandidate extends AbstractPendingLinkingCandidate
 				} else {
 					String queriedName = description.getName().toString(); // may be Map$Entry
 					String qualifiedName = declaredType.getIdentifier();
-					if (declaredType.getPackageName().length() + 1 + queriedName.length() == qualifiedName.length()) {
+					String packageName = Strings.emptyIfNull(declaredType.getPackageName());
+					if (packageName.length() + 1 + queriedName.length() == qualifiedName.length()) {
 						helper.applyPackageFragment((XMemberFeatureCall) expression, declaredType);
 					}
 				}

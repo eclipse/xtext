@@ -9,10 +9,16 @@ package org.eclipse.xtend.core.typesystem;
 
 import java.util.List;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareBatchTypeResolver;
 
 import com.google.common.collect.Lists;
@@ -26,14 +32,39 @@ public class TypeDeclarationAwareBatchTypeResolver extends LogicalContainerAware
 	protected List<EObject> getEntryPoints(EObject object) {
 		 List<EObject> result = super.getEntryPoints(object);
 		 EObject rootContainer = EcoreUtil.getRootContainer(object);
+		 Resource resource = rootContainer.eResource();
+		 if (resource instanceof XtextResource) {
+			 IParseResult parseResult = ((XtextResource) resource).getParseResult();
+			 if (!parseResult.hasSyntaxErrors()) {
+				 result = Lists.newArrayList(result);
+				 result.remove(rootContainer);
+				 return result;
+			 }
+		 }
 		 if (rootContainer instanceof XtendFile) {
-			 List<EObject> resultIncludingXtendTypes = Lists.newArrayList(result);
-			 resultIncludingXtendTypes.remove(rootContainer);
+			 result = Lists.newArrayList(result);
+			 result.remove(rootContainer);
 			 List<XtendTypeDeclaration> typeDeclarations = ((XtendFile) rootContainer).getXtendTypes();
-			 resultIncludingXtendTypes.addAll(typeDeclarations);
-			 return resultIncludingXtendTypes;
+			 for(XtendTypeDeclaration declaration: typeDeclarations) {
+				 addXtendTypes(declaration, result);
+			 }
+			 return result;
 		 }
 		 return result;
+	}
+
+	private void addXtendTypes(XtendTypeDeclaration declaration, List<EObject> result) {
+		result.add(declaration);
+		for(XtendMember member: declaration.getMembers()) {
+			TreeIterator<EObject> iterator = EcoreUtil2.eAll(member);
+			while(iterator.hasNext()) {
+				EObject next = iterator.next();
+				if (next instanceof XtendTypeDeclaration) {
+					addXtendTypes((XtendTypeDeclaration) next, result);
+					iterator.prune();
+				}
+			}
+		}
 	}
 	
 }

@@ -41,6 +41,7 @@ import org.eclipse.xtext.common.types.access.JvmTypeChangeDispatcher;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.common.types.util.RawTypeHelper.RawTypeReferenceImplementation;
+import org.eclipse.xtext.common.types.util.RawTypeReferenceComputer;
 import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -482,7 +483,7 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 				}
 			}
 		}
-		RawTypeReferenceImplementation strategy = new RawTypeReferenceImplementation(TypesFactory.eINSTANCE);
+		RawTypeReferenceComputer strategy = new RawTypeReferenceComputer(TypesFactory.eINSTANCE);
 		JvmTypeReference result = strategy.getRawTypeReference(reference, eResource());
 		if (result == null)
 			return null;
@@ -491,7 +492,7 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 	}
 
 	protected JvmType getRawType(JvmTypeReference reference) {
-		RawTypeReferenceImplementation strategy = new RawTypeReferenceImplementation(TypesFactory.eINSTANCE);
+		RawTypeReferenceComputer strategy = new RawTypeReferenceComputer(TypesFactory.eINSTANCE);
 		JvmTypeReference result = strategy.getRawTypeReference(reference, eResource());
 		return result == null ? null : result.getType();
 	}
