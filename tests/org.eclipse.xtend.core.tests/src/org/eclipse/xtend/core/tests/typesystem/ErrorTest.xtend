@@ -1652,6 +1652,209 @@ class ErrorTest extends AbstractXtendTestCase {
 		''')
 	}
 	
+	@Test
+	def void testErrorModel_114() throws Exception {
+		'''
+			class {
+				def m() {
+					new Runnable() { override run() {} }
+				}
+			}
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_115() throws Exception {
+		'''
+			class Bar {
+				valr = new Runnable() { override run() { println(x) } }
+				public val x = 1
+			}
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_116() throws Exception {
+		'''
+			class Foo {
+				valbar = new Runnable() { override run() {} }
+			}
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_117() throws Exception {
+		'''
+			class {
+				val r = new Runnable() { override run() { println(x) } }
+				public val x = 1
+			}
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_118() throws Exception {
+		'''
+			class C {
+				def m(Iterable<String> iterable) {
+					iterable.flatMap[].sortBy [ length ]
+				}
+				def <A,B extends Iterable<? extends B> flatMap(Iterable<? extends A> iterable, (A)=>B map) {
+					return null
+				}
+			}
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_119() throws Exception {
+		'''
+			class C {
+				def m(Iterable<String> iterable) {
+					iterable.flatMap[].sortBy [ length ]
+				}
+				def <A,B extends Iterable<? extends B>> flatMap(Iterable<? extends A> iterable, (A)=>B map) {
+					return null
+				}
+			}
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_120() throws Exception {
+		'''
+			class C {
+				StringRepository repository
+				def m()	{
+					var string = repository.findByStringId(1L)
+					repository.save(string)
+				}
+			}
+			public interface StringRepository extends GraphRepository<String> {
+				def String findByStringId(Long id);
+			}
+			interface GraphRepository<T> {
+				def <U extends U save(U entity);
+				def <U extends T> Iterable<U> save(Iterable<U> entities);
+			}
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_121() throws Exception {
+		'''
+			class C { StringRepository repository def m()	{ repository.save(#[]) }
+			}
+			public interface StringRepository extends GraphRepository<String> { def String findByStringId(Long id);
+			}
+			interface GraphRepository<T> { def <U extends U save(U entity); def <U extends T> Iterable<U> save(Iterable<U> entities);
+			}
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_122() throws Exception {
+		'''
+			class C { CharSeqRepository repository def m()	{ repository.<String>save(newArrayList) }
+			}
+			public interface CharSeqRepository extends GraphRepository<CharSequence> {
+			}
+			interface GraphRepository<T> { def <U extends U save(U entity); def <U extends T> Iterable<U> save(Iterable<U> entities);
+			}
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_123() throws Exception {
+		'''
+			class C { CharSeqRepository repository def m()	{ repository.save(#['a']) }
+			}
+			public interface CharSeqRepository extends GraphRepository<CharSequence> {
+			}
+			interface GraphRepository<T> { def <U extends U save(U entity); def <U extends T> Iterable<U> save(Iterable<U> entities);
+			}
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_124() throws Exception {
+		'''
+			import static com.google.common.base.Preconditions.*
+			class Test<JAVA_TYPE> {
+				val Functions.Function0<JAVA_TYPE> constructor
+				val list = new(Functions.Function0<JAVA_TYPE> theConstructor, Class<JAVA_TYPE> theType) {
+					constructor = if (theConstructor == null) new NoConstructor<JAVA_TYPE>(theType) else theConstructor
+				}
+				def static test(){
+					new Test(null, String)
+				}
+			}
+			class NoConstructor<JAVA_TYPE> implements Functions.Function0<JAVA_TYPE> {
+				val String type
+				new(String theTypeName) {
+					type = checkNotNull(theTypeName, "theTypeName")
+				}
+				new(Class<JAVA_TYPE> theType) {
+					type = checkNotNull(theType, "theType").name
+				}
+				override apply() {
+					throw new UnsupportedOperationException("Instances of type "+type +" cannot be created (without parameters?)")
+				}
+			}
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_125() throws Exception {
+		'''
+			class A {
+				static interface B {
+					class C {
+						A a
+						B b
+						C c
+						D d
+						static class D {
+							A a
+							B b =  A.B {}
+							C c = new C
+							D d = new B.C.D {}
+						}
+					}
+				}
+				A a
+				B b = new B {}
+				B.C c
+				B.C.D d
+			}
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_126() throws Exception {
+		'''
+			package foo
+			class Test {
+				def Object foo() throws Exception {
+					{
+						val (java.util.List<String>,String)=>java.util.List<String> functionReturningList = [$
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_127() throws Exception {
+		'''
+			package foo class Test {
+				def Object foo() throws Exception {
+					{
+						val (java.util.List<String>,String)=>java.util.List<String> functionReturningList = [$ += $1 return $0 ]
+						#['foo'].fold(newArrayList, functionReturningList)
+					}
+				}
+			}
+		'''.fireproof
+	}
+	
 	def processWithoutException(CharSequence input) throws Exception {
 		val resource = resourceSet.createResource(URI::createURI("abcdefg.xtend"))
 		resource.load(new StringInputStream(input.toString), null)
