@@ -350,13 +350,13 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 
 	@Override
 	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, EObject element) {
-		if (element instanceof XtendTypeDeclaration) {
+		if (element instanceof XtendTypeDeclaration && (element.eClass() != XtendPackage.Literals.ANONYMOUS_CLASS || element == getRoot())) {
 			XtendTypeDeclaration typeDeclaration = (XtendTypeDeclaration) element;
 			computeXtendAnnotationTypes(resolvedTypes, featureScopeSession, ((XtendTypeDeclaration) element).getAnnotations());
 			for (XtendMember member : typeDeclaration.getMembers()) {
 				computeTypes(resolvedTypes, featureScopeSession, member);
 			}
-		} else if (element instanceof XtendMember) {
+		} else if (element instanceof XtendMember && element.eClass() != XtendPackage.Literals.ANONYMOUS_CLASS) {
 			XtendMember member = (XtendMember) element;
 			XExpression expression = null;
 			if (member instanceof XtendFunction) {
@@ -401,12 +401,18 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 
 	@Override
 	protected boolean isHandled(XExpression expression) {
-		if (getRoot() instanceof XtendTypeDeclaration) {
+		EObject root = getRoot();
+		if (root instanceof XtendTypeDeclaration) {
 			XtendMember member = EcoreUtil2.getContainerOfType(expression, XtendMember.class);
 			if (member != null) {
+				if (member instanceof AnonymousClass) {
+					member = EcoreUtil2.getContainerOfType(member.eContainer(), XtendMember.class);
+				}
 				XExpression memberExpression = getExpression(member);
 				if (getLogicalContainerProvider().getLogicalContainer(memberExpression) == null) {
-					boolean result = EcoreUtil.isAncestor(getRoot(), expression);
+					if (member.eClass() == XtendPackage.Literals.XTEND_MEMBER)
+						member = (XtendMember) member.eContainer();
+					boolean result = member == root || member.eContainer() == root;
 					return result;
 				}
 				

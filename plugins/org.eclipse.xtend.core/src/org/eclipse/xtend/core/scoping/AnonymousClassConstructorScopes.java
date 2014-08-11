@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.AnonymousClass;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.scoping.batch.ConstructorScopes;
@@ -33,8 +34,10 @@ public class AnonymousClassConstructorScopes extends ConstructorScopes {
 		if (context instanceof XConstructorCall) {
 			EObject container = context.eContainer();
 			if (container instanceof AnonymousClass) {
-				return createAnonymousClassConstructorScope(
-						associations.getInferredType((AnonymousClass) container), context, session);
+				JvmGenericType inferredType = associations.getInferredType((AnonymousClass) container);
+				if (inferredType != null) {
+					return createAnonymousClassConstructorScope(inferredType, context, session);
+				}
 			}
 		}
 		return super.createConstructorScope(context, reference, session, resolvedTypes);
