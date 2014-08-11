@@ -28,6 +28,7 @@ public class TypeDeclarationAwareBatchTypeResolver extends LogicalContainerAware
 		 EObject rootContainer = EcoreUtil.getRootContainer(object);
 		 if (rootContainer instanceof XtendFile) {
 			 List<EObject> resultIncludingXtendTypes = Lists.newArrayList(result);
+			 resultIncludingXtendTypes.remove(rootContainer);
 			 List<XtendTypeDeclaration> typeDeclarations = ((XtendFile) rootContainer).getXtendTypes();
 			 resultIncludingXtendTypes.addAll(typeDeclarations);
 			 return resultIncludingXtendTypes;
