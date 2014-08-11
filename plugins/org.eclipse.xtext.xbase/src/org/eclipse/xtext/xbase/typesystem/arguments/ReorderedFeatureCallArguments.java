@@ -76,7 +76,7 @@ public class ReorderedFeatureCallArguments extends StandardFeatureCallArguments 
 			// too few args available
 			return shiftedArguments.get(idx - unshiftedArgumentSize);
 		}
-		return arguments.get(idx);
+		return super.internalGetArgument(idx);
 	}
 	
 	@Override

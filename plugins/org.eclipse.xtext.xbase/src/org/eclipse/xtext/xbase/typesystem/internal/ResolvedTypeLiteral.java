@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -101,7 +102,16 @@ public class ResolvedTypeLiteral extends AbstractResolvedReference<XAbstractFeat
 	
 	@Override
 	protected void preApply() {
-		helper.applyPackageFragment(getExpression(), getType());
+		JvmType type = getType();
+		XAbstractFeatureCall expression = getExpression();
+		if (expression instanceof XMemberFeatureCall) {
+			if (type instanceof JvmDeclaredType) {
+				JvmDeclaredType declaredType = (JvmDeclaredType) type;
+				if (declaredType.getDeclaringType() == null) {
+					helper.applyPackageFragment((XMemberFeatureCall) expression, declaredType);
+				}
+			}
+		}
 	}
 	
 	@Override

@@ -31,6 +31,9 @@ public class LogicalContainerAwareBatchTypeResolver extends DefaultBatchTypeReso
 				result.add(content);
 			}
 		}
+		if (result.isEmpty()) {
+			return super.getEntryPoints(object);
+		}
 		return result;
 	}
 

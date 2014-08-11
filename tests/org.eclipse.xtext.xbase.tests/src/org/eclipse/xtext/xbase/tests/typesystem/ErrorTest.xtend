@@ -242,4 +242,81 @@ class ErrorTest extends AbstractXbaseTestCase {
 		'''.fireproof
 	}
 	
+	@Test
+	def void testErrorModel_32() throws Exception {
+		'''
+			testdata::OuterClass$InnerClass
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_33() throws Exception {
+		'''
+			[testdata.OuterClass$InnerClass
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_34() throws Exception {
+		'''
+			testdata.OuterClass$InnerClass
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_35() throws Exception {
+		'''
+			testdata::OuterClass$InnerClass::SINGLETON
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_36() throws Exception {
+		'''
+			testdata.OuterClass$InnerClass param| param.toUpperCase('foo')].apply(new testdata.OuterClass$InnerClass())
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_37() throws Exception {
+		'''
+			testdata.OuterClass$InnerClass param| param.toUpperCase('foo')].apply(new testdata.OuterClass$InnerClass)
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_38() throws Exception {
+		'''
+			testdata.OuterClass$InnerClass::SINGLETON
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_39() throws Exception {
+		'''
+			ypeof(java.util.Map$Entry)
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_40() throws Exception {
+		'''
+			java.util.Map$Entry
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_41() throws Exception {
+		'''
+			org::eclipse::xtext::xbase::lib::ListExtensions::map(newArrayList()) [ it ]
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_42() throws Exception {
+		'''
+			new testdata.ClosureClient2([|'1'],2']) [|'3'].value
+		'''.fireproof
+	}
+	
 }

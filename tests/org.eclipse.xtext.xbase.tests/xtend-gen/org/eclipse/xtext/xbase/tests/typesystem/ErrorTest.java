@@ -351,4 +351,92 @@ public class ErrorTest extends AbstractXbaseTestCase {
     _builder.newLine();
     this._oven.fireproof(_builder);
   }
+  
+  @Test
+  public void testErrorModel_32() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("testdata::OuterClass$InnerClass");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_33() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("[testdata.OuterClass$InnerClass");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_34() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("testdata.OuterClass$InnerClass");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_35() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("testdata::OuterClass$InnerClass::SINGLETON");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_36() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("testdata.OuterClass$InnerClass param| param.toUpperCase(\'foo\')].apply(new testdata.OuterClass$InnerClass())");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_37() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("testdata.OuterClass$InnerClass param| param.toUpperCase(\'foo\')].apply(new testdata.OuterClass$InnerClass)");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_38() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("testdata.OuterClass$InnerClass::SINGLETON");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_39() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("ypeof(java.util.Map$Entry)");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_40() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("java.util.Map$Entry");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_41() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("org::eclipse::xtext::xbase::lib::ListExtensions::map(newArrayList()) [ it ]");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_42() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("new testdata.ClosureClient2([|\'1\'],2\']) [|\'3\'].value");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
 }
