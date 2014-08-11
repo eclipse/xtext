@@ -64,6 +64,10 @@ public class NestedTypeAwareImportNormalizerWithDotSeparator extends AbstractNes
 	protected QualifiedName resolveNonWildcard(QualifiedName relativeName) {
 		if (relativeName.getSegmentCount()==1) {
 			List<String> split = Strings.split(relativeName.getFirstSegment(), '$');
+			if (split.size() == 0) {
+				// relativeName may be just something like '$'
+				return internalResolve(relativeName);
+			}
 			return internalResolve(QualifiedName.create(split));
 		} else {
 			StringBuilder concatenated = new StringBuilder();
