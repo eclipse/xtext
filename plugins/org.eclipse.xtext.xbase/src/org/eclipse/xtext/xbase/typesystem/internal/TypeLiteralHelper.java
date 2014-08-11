@@ -64,17 +64,6 @@ public class TypeLiteralHelper {
 		throw new IllegalArgumentException(String.valueOf(feature));
 	}
 	
-	protected void applyPackageFragment(XAbstractFeatureCall expression, JvmType type) {
-		if (expression instanceof XMemberFeatureCall) {
-			if (type instanceof JvmDeclaredType) {
-				JvmDeclaredType declaredType = (JvmDeclaredType) type;
-				if (declaredType.getDeclaringType() == null) {
-					applyPackageFragment((XMemberFeatureCall) expression, declaredType);
-				}
-			}
-		}
-	}
-
 	protected void applyPackageFragment(XMemberFeatureCall memberFeatureCall, JvmDeclaredType type) {
 		XExpression target = memberFeatureCall.getMemberCallTarget();
 		state.getResolvedTypes().acceptType(target, new NoExpectation(state, false), new ParameterizedTypeReference(state.getReferenceOwner(), type), false,

@@ -16,6 +16,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.impl.AliasedEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
@@ -45,7 +46,8 @@ public class TypeLiteralScope extends AbstractSessionBasedScope {
 		if (typeDescription != null) {
 			EObject type = typeDescription.getEObjectOrProxy();
 			if (type instanceof JvmType)
-				return Collections.<IEObjectDescription>singletonList(new TypeLiteralDescription(typeDescription, isVisible((JvmType) type)));
+				return Collections.<IEObjectDescription>singletonList(new TypeLiteralDescription(
+						new AliasedEObjectDescription(name, typeDescription), isVisible((JvmType) type)));
 		}
 		return Collections.emptyList();
 	}

@@ -109,6 +109,8 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 			}
 			compile.apply();
 			fail("expected exception " + class1.getCanonicalName() + ". Java code was " + compileToJavaCode(string));
+		} catch (AssertionError e) {
+			throw e;
 		} catch (Throwable e) {
 			if (!class1.isInstance(e))
 				e.printStackTrace();

@@ -523,8 +523,13 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	
 	@Override
 	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession session) {
-		Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes = prepare(resolvedTypes, session);
-		computeTypes(preparedResolvedTypes, resolvedTypes, session, getRoot());
+		EObject root = getRoot();
+		if (root instanceof JvmType) {
+			Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes = prepare(resolvedTypes, session);
+			computeTypes(preparedResolvedTypes, resolvedTypes, session, root);
+		} else {
+			super.computeTypes(resolvedTypes, session);
+		}
 	}
 	
 	protected void computeTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, EObject element) {
