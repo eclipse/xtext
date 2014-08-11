@@ -20,6 +20,7 @@ import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.junit4.smoketest.IgnoredBySmokeTest;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider;
@@ -39,10 +40,11 @@ import org.junit.runner.RunWith;
 
 /**
  * Batch compiler tests.
- * @see org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler
+ * @see XtendBatchCompiler
  */
 @RunWith(XtextRunner.class)
 @InjectWith(RuntimeInjectorProvider.class)
+@IgnoredBySmokeTest
 @SuppressWarnings("all")
 public class TestBatchCompiler {
   @Inject

@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -134,14 +135,24 @@ public class DeferredTypeParameterHintCollector extends AbstractTypeReferencePai
 		return BoundTypeArgumentSource.INFERRED_LATER;
 	}
 
-	protected LightweightTypeReference getStricterConstraint(UnboundTypeReference typeParameter, LightweightTypeReference hint) {
-		JvmTypeParameter parameter = typeParameter.getTypeParameter();
+	protected LightweightTypeReference getStricterConstraint(final UnboundTypeReference typeParameter, LightweightTypeReference hint) {
+		final JvmTypeParameter parameter = typeParameter.getTypeParameter();
 		List<JvmTypeConstraint> constraints = parameter.getConstraints();
 		for(JvmTypeConstraint constraint: constraints) {
 			JvmTypeReference constraintReference = constraint.getTypeReference();
 			if (constraintReference != null) {
-				LightweightTypeReference lightweightReference = new OwnedConverter(hint.getOwner()).toLightweightReference(constraintReference);
-				if (hint.isAssignableFrom(lightweightReference)) {
+				final boolean[] recursive = new boolean[] { false };
+				LightweightTypeReference lightweightReference = new OwnedConverter(hint.getOwner()) {
+					@Override
+					public LightweightTypeReference doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference) {
+						JvmType type = reference.getType();
+						if (type == parameter) {// recursively bound
+							recursive[0] = true;
+						}
+						return super.doVisitParameterizedTypeReference(reference);
+					}
+				}.toLightweightReference(constraintReference);
+				if (!recursive[0] && hint.isAssignableFrom(lightweightReference)) {
 					hint = lightweightReference;
 				}
 			}
