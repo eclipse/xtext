@@ -128,7 +128,7 @@ public class DynamicExtensionsScope extends AbstractSessionBasedExecutableScope 
 			IEObjectDescription description = createReceiverDescription(featureName, feature, receiver, receiverType, receiverTypeParameterMapping, bucket, validStaticState);
 			if (description != null) {
 				result.add(description);
-				String propertyName = toProperty(simpleName, feature);
+				String propertyName = super.toProperty(simpleName, feature);
 				if (propertyName != null) {
 					result.add(createReceiverDescription(QualifiedName.create(propertyName), feature, receiver, receiverType, receiverTypeParameterMapping, bucket, validStaticState));
 				}
