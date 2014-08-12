@@ -475,8 +475,7 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"  int x = 0;\n" +
 				"  String _string = new String();\n" +
 				"  if (_string!=null) {\n" +
-				"    int _x = x = 2;\n" +
-				"    _string.substring(_x);\n" +
+				"    _string.substring(x = 2);\n" +
 				"  }\n" +
 				"  _xblockexpression = x;\n" +
 				"}\n" +

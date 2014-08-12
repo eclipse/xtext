@@ -337,8 +337,6 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	
 	@Override
 	protected boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b) {
-		if (expr instanceof XAssignment)
-			return true;
 		if (expr.eContainingFeature() == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET) {
 			if (((XMemberFeatureCall) expr.eContainer()).isNullSafe()) {
 				if (expr instanceof XFeatureCall) {
