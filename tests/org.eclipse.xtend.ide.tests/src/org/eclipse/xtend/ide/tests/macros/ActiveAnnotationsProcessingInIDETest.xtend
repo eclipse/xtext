@@ -1,16 +1,13 @@
 package org.eclipse.xtend.ide.tests.macros
 
-import com.google.common.io.CharStreams
 import com.google.inject.Inject
 import com.google.inject.Provider
 import java.io.BufferedInputStream
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
-import java.io.InputStreamReader
 import java.util.jar.Manifest
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IFolder
-import org.eclipse.core.resources.IMarker
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.jdt.core.IJavaProject
@@ -29,6 +26,8 @@ import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.StringInputStream
+import org.eclipse.xtext.validation.CheckMode
+import org.eclipse.xtext.validation.IResourceValidator
 import org.junit.After
 import org.junit.Rule
 import org.junit.Test
@@ -37,8 +36,6 @@ import org.junit.runner.RunWith
 import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import static org.junit.Assert.*
-import org.eclipse.xtext.validation.IResourceValidator
-import org.eclipse.xtext.validation.CheckMode
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XtendIDEInjectorProvider))
