@@ -40,7 +40,6 @@ import org.eclipse.xtext.common.types.access.IMirrorExtension;
 import org.eclipse.xtext.common.types.access.JvmTypeChangeDispatcher;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
-import org.eclipse.xtext.common.types.util.RawTypeHelper.RawTypeReferenceImplementation;
 import org.eclipse.xtext.common.types.util.RawTypeReferenceComputer;
 import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.util.Strings;
