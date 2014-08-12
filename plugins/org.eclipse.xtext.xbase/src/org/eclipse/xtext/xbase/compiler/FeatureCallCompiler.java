@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
@@ -789,6 +790,16 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				b.append(".");
 			appendFeatureCall(expr, b);
 		} else {
+			boolean isArgument = expr.eContainer() instanceof XAbstractFeatureCall;
+			if (isArgument) {
+				EStructuralFeature containingFeature = expr.eContainingFeature();
+				if (containingFeature == XbasePackage.Literals.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS 
+						|| containingFeature == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS) {
+					isArgument = false;
+				} else {
+					b.append("(");
+				}
+			}
 			if (feature instanceof JvmField) {
 				boolean appendReceiver = appendReceiver(expr, b, isExpressionContext);
 				if (appendReceiver)
@@ -800,6 +811,9 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			}
 			b.append(" = ");
 			internalToJavaExpression(expr.getValue(), b);
+			if (isArgument) {
+				b.append(")");
+			}
 		}
 	}
 
