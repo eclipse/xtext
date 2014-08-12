@@ -60,7 +60,7 @@ class CompilerBug441580Test extends AbstractXtendCompilerTest {
 			        out = _byteArrayOutputStream;
 			        byte[] buffer = new byte[2048];
 			        int size = 0;
-			        while ((size = in.read(buffer) != (-1))) {
+			        while (((size = in.read(buffer)) != (-1))) {
 			          out.write(buffer, 0, size);
 			        }
 			        out.flush();
@@ -76,6 +76,62 @@ class CompilerBug441580Test extends AbstractXtendCompilerTest {
 			    } catch (Throwable _e) {
 			      throw Exceptions.sneakyThrow(_e);
 			    }
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def test_02() {
+		assertCompilesTo('''
+			class C {
+				def m() {
+					var int i = 0
+					if ((i = i+1) < 10) {}
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  public Object m() {
+			    Object _xblockexpression = null;
+			    {
+			      int i = 0;
+			      Object _xifexpression = null;
+			      if (((i = (i + 1)) < 10)) {
+			        _xifexpression = null;
+			      }
+			      _xblockexpression = _xifexpression;
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def test_03() {
+		assertCompilesTo('''
+			class C {
+				def m() {
+					var int i = 0
+					if ((i = (i=i+1)) < (i=(i+1))) {}
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  public Object m() {
+			    Object _xblockexpression = null;
+			    {
+			      int i = 0;
+			      Object _xifexpression = null;
+			      if (((i = (i = (i + 1))) < (i = (i + 1)))) {
+			        _xifexpression = null;
+			      }
+			      _xblockexpression = _xifexpression;
+			    }
+			    return _xblockexpression;
 			  }
 			}
 		''')
