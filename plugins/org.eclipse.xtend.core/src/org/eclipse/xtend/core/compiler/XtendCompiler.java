@@ -552,7 +552,8 @@ public class XtendCompiler extends XbaseCompiler {
 			AnonymousClass anonymousClass = (AnonymousClass) expression;
 			JvmGenericType inferredLocalClass = associations.getInferredType(anonymousClass);
 			return inferredLocalClass.isAnonymous();
-		} else return super.internalCanCompileToJavaExpression(expression, appendable);
+		} else
+			return super.internalCanCompileToJavaExpression(expression, appendable);
 	}
 	
 	@Override
