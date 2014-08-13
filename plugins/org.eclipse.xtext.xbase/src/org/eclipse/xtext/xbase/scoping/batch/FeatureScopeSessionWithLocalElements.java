@@ -35,12 +35,29 @@ public class FeatureScopeSessionWithLocalElements extends AbstractNestedFeatureS
 			return EObjectDescription.create(name, result);
 		return super.getLocalElement(name);
 	}
-
+	
+	@Override
+	public IEObjectDescription getDeepLocalElement(QualifiedName name) {
+		JvmIdentifiableElement result = map.get(name);
+		if (result != null)
+			return EObjectDescription.create(name, result);
+		return super.getDeepLocalElement(name);
+	}
+	
 	@Override
 	protected void addLocalElements(List<IEObjectDescription> result) {
 		for(Map.Entry<QualifiedName, JvmIdentifiableElement> entry: map.entrySet()) {
 			result.add(EObjectDescription.create(entry.getKey(), entry.getValue()));
 		}
 		super.addLocalElements(result);
+	}
+	
+	@Override
+	protected void addDeepLocalElements(QualifiedName name, List<IEObjectDescription> result) {
+		super.addDeepLocalElements(name, result);
+		JvmIdentifiableElement candidate = map.get(name);
+		if (candidate != null) {
+			result.add(EObjectDescription.create(name, candidate));
+		}
 	}
 }

@@ -30,7 +30,7 @@ public class LocalVariableScope extends AbstractSessionBasedScope {
 	}
 	
 	@Override
-	protected Iterable<IEObjectDescription> getAllLocalElements() {
+	protected List<IEObjectDescription> getAllLocalElements() {
 		return getSession().getLocalElements();
 	}
 	

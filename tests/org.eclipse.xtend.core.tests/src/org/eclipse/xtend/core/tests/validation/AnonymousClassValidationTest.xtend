@@ -153,4 +153,65 @@ class AnonymousClassValidationTest extends AbstractXtendTestCase {
 			}
 		'''.parse.assertError(XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtend.core.validation.IssueCodes.INVALID_SUPER_CALL, 'Cannot call super of an anonymous class from a lambda expression.')
 	}
+	
+	@Test
+	def void testExtensions_01() {
+		'''
+			class Test {
+				def getRunnable() {
+					var extension Util u = null
+					new Runnable {
+						override run() {
+							sayHello
+						}
+					}
+				}
+				static class Util {
+					def sayHello() {
+						'Hello'
+					}
+				}
+			}
+		'''.parse.assertError(XbasePackage.Literals.XFEATURE_CALL, IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS, "Cannot implicitly refer to the non-final variable u inside a local class")
+	}
+	
+	@Test
+	def void testExtensions_02() {
+		'''
+			class Test {
+				extension Util = null
+				def getRunnable() {
+					var String it = null
+					new Runnable {
+						override run() {
+							sayHello
+						}
+					}
+				}
+				static class Util {
+					def void sayHello(String s) {}
+				}
+			}
+		'''.parse.assertError(XbasePackage.Literals.XFEATURE_CALL, IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS, "Cannot implicitly refer to the non-final variable it inside a local class")
+	}
+	
+	@Test
+	def void testExtensions_03() {
+		'''
+			import static extension Util.*
+			class Test {
+				def getRunnable() {
+					var String it = null
+					new Runnable {
+						override run() {
+							sayHello
+						}
+					}
+				}
+			}
+			class Util {
+				static def void sayHello(String s) {}
+			}
+		'''.parse.assertError(XbasePackage.Literals.XFEATURE_CALL, IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS, "Cannot implicitly refer to the non-final variable it inside a local class")
+	}
 }

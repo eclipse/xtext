@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -77,8 +77,13 @@ public class RootFeatureScopeSession extends AbstractFeatureScopeSession {
 		return null;
 	}
 	
+	/* @Nullable */
+	public IEObjectDescription getDeepLocalElement(QualifiedName name) {
+		return null;
+	}
+	
 	@Override
-	public Collection<IEObjectDescription> getLocalElements() {
+	public List<IEObjectDescription> getLocalElements() {
 		return Collections.emptyList();
 	}
 	

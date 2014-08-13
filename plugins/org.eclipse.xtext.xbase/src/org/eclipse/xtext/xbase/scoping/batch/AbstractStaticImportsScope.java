@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +34,7 @@ public abstract class AbstractStaticImportsScope extends AbstractSessionBasedExe
 	}
 
 	@Override
-	protected Iterable<IEObjectDescription> getAllLocalElements() {
+	protected List<IEObjectDescription> getAllLocalElements() {
 		List<TypeBucket> buckets = getBuckets();
 		if (buckets.isEmpty()) {
 			return Collections.emptyList();
@@ -85,7 +84,7 @@ public abstract class AbstractStaticImportsScope extends AbstractSessionBasedExe
 	protected abstract List<TypeBucket> getBuckets();
 
 	@Override
-	protected Collection<IEObjectDescription> getLocalElementsByName(final QualifiedName name) {
+	protected List<IEObjectDescription> getLocalElementsByName(final QualifiedName name) {
 		final List<TypeBucket> buckets = getBuckets();
 		if (buckets.isEmpty()) {
 			return Collections.emptyList();

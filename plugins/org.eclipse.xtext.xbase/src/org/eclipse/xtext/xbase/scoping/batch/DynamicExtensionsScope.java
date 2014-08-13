@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.scoping.batch;
 
 import java.beans.Introspector;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -77,7 +76,7 @@ public class DynamicExtensionsScope extends AbstractSessionBasedExecutableScope 
 	}
 
 	@Override
-	protected Iterable<IEObjectDescription> getAllLocalElements() {
+	protected List<IEObjectDescription> getAllLocalElements() {
 		List<ExpressionBucket> buckets = getBuckets();
 		if (buckets.isEmpty()) {
 			return Collections.emptyList();
@@ -149,7 +148,7 @@ public class DynamicExtensionsScope extends AbstractSessionBasedExecutableScope 
 	}
 	
 	@Override
-	protected Collection<IEObjectDescription> getLocalElementsByName(final QualifiedName name) {
+	protected List<IEObjectDescription> getLocalElementsByName(final QualifiedName name) {
 		final List<ExpressionBucket> buckets = getBuckets();
 		if (buckets.isEmpty()) {
 			return Collections.emptyList();

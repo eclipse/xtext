@@ -10,14 +10,20 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -56,6 +62,28 @@ public abstract class AbstractImplicitFeature implements IFeatureLinkingCandidat
 	}
 	
 	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
+		JvmIdentifiableElement implicitFeature = getFeature();
+		if (implicitFeature instanceof XVariableDeclaration) {
+			XVariableDeclaration casted = (XVariableDeclaration) implicitFeature;
+			if (casted.isWriteable()) {
+				String message = getState().getResolver().getInvalidWritableVariableAccessMessage(casted, getFeatureCall());
+				if (message != null) {
+					AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
+							IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS, message, getOwner(),
+							XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
+					result.accept(diagnostic);
+					return false;
+				}
+			}
+			if (EcoreUtil.isAncestor(casted, getFeatureCall())) {
+				String message = String.format("The implicitly referenced variable %s may not have been initialized", implicitFeature.getSimpleName());
+				AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
+						IssueCodes.ILLEGAL_FORWARD_REFERENCE, message, getOwner(),
+						XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
+				result.accept(diagnostic);
+				return false;
+			}
+		}
 		return true;
 	}
 
@@ -82,5 +110,6 @@ public abstract class AbstractImplicitFeature implements IFeatureLinkingCandidat
 	public boolean isExtension() {
 		return false;
 	}
+	
 
 }

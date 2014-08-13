@@ -20,7 +20,6 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 
-import com.google.common.collect.Lists;
 import com.google.inject.Singleton;
 
 /**

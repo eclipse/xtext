@@ -352,4 +352,157 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testExtensions_01() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Test {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def getRunnable() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("var extension Util u = null");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("new Runnable {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("override run() {");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("sayHello");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("static class Util {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("def sayHello() {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("\'Hello\'");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XtendFile _parse = this._parseHelper.parse(_builder);
+      this._validationTestHelper.assertError(_parse, XbasePackage.Literals.XFEATURE_CALL, IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS, "Cannot implicitly refer to the non-final variable u inside a local class");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testExtensions_02() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Test {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("extension Util = null");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def getRunnable() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("var String it = null");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("new Runnable {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("override run() {");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("sayHello");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("static class Util {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("def void sayHello(String s) {}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XtendFile _parse = this._parseHelper.parse(_builder);
+      this._validationTestHelper.assertError(_parse, XbasePackage.Literals.XFEATURE_CALL, IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS, "Cannot implicitly refer to the non-final variable it inside a local class");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testExtensions_03() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import static extension Util.*");
+      _builder.newLine();
+      _builder.append("class Test {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def getRunnable() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("var String it = null");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("new Runnable {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("override run() {");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("sayHello");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("class Util {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("static def void sayHello(String s) {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XtendFile _parse = this._parseHelper.parse(_builder);
+      this._validationTestHelper.assertError(_parse, XbasePackage.Literals.XFEATURE_CALL, IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS, "Cannot implicitly refer to the non-final variable it inside a local class");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
@@ -23,6 +24,7 @@ import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbaseFactory;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.FeatureScopes;
 import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
@@ -167,9 +169,17 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 		// TODO this should be part of a separate validation service
 		XClosure containingClosure = EcoreUtil2.getContainerOfType(featureCall, XClosure.class);
 		if (containingClosure != null && !EcoreUtil.isAncestor(containingClosure, variable)) {
-			return String.format("Cannot refer to the non-final variable %s inside a lambda expression", variable.getSimpleName());
+			return String.format("Cannot %srefer to the non-final variable %s inside a lambda expression", getImplicitlyMessagePart(featureCall), variable.getSimpleName());
 		}
 		return null;
+	}
+	
+	protected String getImplicitlyMessagePart(XAbstractFeatureCall featureCall) {
+		EStructuralFeature containingFeature = featureCall.eContainingFeature();
+		if (containingFeature == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT || containingFeature == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER) {
+			return "implicitly ";	
+		}
+		return "";
 	}
 	
 	protected boolean isShadowingAllowed(QualifiedName name) {

@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
@@ -44,7 +44,7 @@ public class StaticFeatureOnTypeLiteralScope extends StaticFeatureScope implemen
 	}
 	
 	@Override
-	protected Collection<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
+	protected List<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
 		if (THIS.equals(name)) {
 			ITypeReferenceOwner owner = getReceiverType().getOwner();
 			QualifiedThisOrSuperDescription description = new QualifiedThisOrSuperDescription(name, new ParameterizedTypeReference(owner, getTypeLiteral()), getBucket().getId(), true, getReceiver());

@@ -868,14 +868,20 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 	}
 	
 	@Override
-	protected String getInvalidWritableVariableAccessMessage(XVariableDeclaration variable,
-			XAbstractFeatureCall featureCall) {
+	protected String getInvalidWritableVariableAccessMessage(XVariableDeclaration variable, XAbstractFeatureCall featureCall) {
 		// TODO this should be part of a separate validation service
 		EObject containingStructure = getNearestClosureOrTypeDeclaration(featureCall);
 		if (containingStructure != null && !EcoreUtil.isAncestor(containingStructure, variable)) {
-			if (containingStructure instanceof XClosure)
-				return String.format("Cannot refer to the non-final variable %s inside a lambda expression", variable.getSimpleName());
-			return String.format("Cannot refer to the non-final variable %s inside a local class", variable.getSimpleName());
+			if (containingStructure instanceof XClosure) {
+				return String.format(
+						"Cannot %srefer to the non-final variable %s inside a lambda expression",
+						getImplicitlyMessagePart(featureCall),
+						variable.getSimpleName());
+			}
+			return String.format(
+					"Cannot %srefer to the non-final variable %s inside a local class",
+					getImplicitlyMessagePart(featureCall),
+					variable.getSimpleName());
 		}
 		return null;
 	}
