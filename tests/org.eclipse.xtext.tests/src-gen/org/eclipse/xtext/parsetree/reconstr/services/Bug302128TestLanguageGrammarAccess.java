@@ -99,21 +99,26 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
-	private ModelElements pModel;
-	private ElementElements pElement;
-	private VariableElements pVariable;
-	private TerminalRule tValue;
-	private TerminalRule tSL_COMMENT;
+	private final ModelElements pModel;
+	private final ElementElements pElement;
+	private final VariableElements pVariable;
+	private final TerminalRule tValue;
+	private final TerminalRule tSL_COMMENT;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug302128TestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pElement = new ElementElements();
+		this.pVariable = new VariableElements();
+		this.tValue = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Value");
+		this.tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -146,7 +151,7 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Model:
 	//	elements+=Element*;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -156,7 +161,7 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Element:
 	//	name=Variable value=Value?;
 	public ElementElements getElementAccess() {
-		return (pElement != null) ? pElement : (pElement = new ElementElements());
+		return pElement;
 	}
 	
 	public ParserRule getElementRule() {
@@ -166,7 +171,7 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Variable:
 	//	ID (("." | "-") ID)*;
 	public VariableElements getVariableAccess() {
-		return (pVariable != null) ? pVariable : (pVariable = new VariableElements());
+		return pVariable;
 	}
 	
 	public ParserRule getVariableRule() {
@@ -176,13 +181,13 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//terminal Value:
 	//	("=" | "+=" | "-=")->"\n";
 	public TerminalRule getValueRule() {
-		return (tValue != null) ? tValue : (tValue = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Value"));
+		return tValue;
 	} 
 
 	//terminal SL_COMMENT:
 	//	"#" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
-		return (tSL_COMMENT != null) ? tSL_COMMENT : (tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT"));
+		return tSL_COMMENT;
 	} 
 
 	//terminal ID:

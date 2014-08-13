@@ -87,18 +87,20 @@ public class TreeTestLanguageGrammarAccess extends AbstractGrammarElementFinder 
 	}
 	
 	
-	private ModelElements pModel;
-	private NodeElements pNode;
+	private final ModelElements pModel;
+	private final NodeElements pNode;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public TreeTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pNode = new NodeElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -131,7 +133,7 @@ public class TreeTestLanguageGrammarAccess extends AbstractGrammarElementFinder 
 	//Model:
 	//	children+=Node*;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -141,7 +143,7 @@ public class TreeTestLanguageGrammarAccess extends AbstractGrammarElementFinder 
 	//Node:
 	//	name=ID "(" attrib=STRING ")" "{" children+=Node* "};";
 	public NodeElements getNodeAccess() {
-		return (pNode != null) ? pNode : (pNode = new NodeElements());
+		return pNode;
 	}
 	
 	public ParserRule getNodeRule() {

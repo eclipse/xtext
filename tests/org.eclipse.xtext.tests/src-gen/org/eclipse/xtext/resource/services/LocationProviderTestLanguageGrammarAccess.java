@@ -375,25 +375,34 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 	}
 	
 	
-	private ModelElements pModel;
-	private ElementElements pElement;
-	private ComponentElements pComponent;
-	private BusElements pBus;
-	private ProcessorElements pProcessor;
-	private ModeElements pMode;
-	private TransitionElements pTransition;
-	private PortElements pPort;
-	private DataElements pData;
+	private final ModelElements pModel;
+	private final ElementElements pElement;
+	private final ComponentElements pComponent;
+	private final BusElements pBus;
+	private final ProcessorElements pProcessor;
+	private final ModeElements pMode;
+	private final TransitionElements pTransition;
+	private final PortElements pPort;
+	private final DataElements pData;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public LocationProviderTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pElement = new ElementElements();
+		this.pComponent = new ComponentElements();
+		this.pBus = new BusElements();
+		this.pProcessor = new ProcessorElements();
+		this.pMode = new ModeElements();
+		this.pTransition = new TransitionElements();
+		this.pPort = new PortElements();
+		this.pData = new DataElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -426,7 +435,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 	//Model:
 	//	elements+=Element* components+=Component*;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -436,7 +445,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 	//Element:
 	//	"element" name=ID ("singleref" singleref=[Element])? ("multiref" multirefs+=[Element])*;
 	public ElementElements getElementAccess() {
-		return (pElement != null) ? pElement : (pElement = new ElementElements());
+		return pElement;
 	}
 	
 	public ParserRule getElementRule() {
@@ -446,7 +455,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 	//Component:
 	//	(Bus | Processor) ("modes" (mode+=Mode | transition+=Transition)+)? "end" ";";
 	public ComponentElements getComponentAccess() {
-		return (pComponent != null) ? pComponent : (pComponent = new ComponentElements());
+		return pComponent;
 	}
 	
 	public ParserRule getComponentRule() {
@@ -456,7 +465,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 	//Bus:
 	//	"bus" name=ID port+=Port*;
 	public BusElements getBusAccess() {
-		return (pBus != null) ? pBus : (pBus = new BusElements());
+		return pBus;
 	}
 	
 	public ParserRule getBusRule() {
@@ -466,7 +475,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 	//Processor:
 	//	"processor" name=ID data+=Data*;
 	public ProcessorElements getProcessorAccess() {
-		return (pProcessor != null) ? pProcessor : (pProcessor = new ProcessorElements());
+		return pProcessor;
 	}
 	
 	public ParserRule getProcessorRule() {
@@ -476,7 +485,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 	//Mode:
 	//	"mode" name=ID ";";
 	public ModeElements getModeAccess() {
-		return (pMode != null) ? pMode : (pMode = new ModeElements());
+		return pMode;
 	}
 	
 	public ParserRule getModeRule() {
@@ -486,7 +495,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 	//Transition:
 	//	name=ID ":" source=[Mode] "->" destination=[Mode] ";";
 	public TransitionElements getTransitionAccess() {
-		return (pTransition != null) ? pTransition : (pTransition = new TransitionElements());
+		return pTransition;
 	}
 	
 	public ParserRule getTransitionRule() {
@@ -496,7 +505,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 	//Port:
 	//	"port" name=ID ";";
 	public PortElements getPortAccess() {
-		return (pPort != null) ? pPort : (pPort = new PortElements());
+		return pPort;
 	}
 	
 	public ParserRule getPortRule() {
@@ -506,7 +515,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 	//Data:
 	//	"data" name=ID ";";
 	public DataElements getDataAccess() {
-		return (pData != null) ? pData : (pData = new DataElements());
+		return pData;
 	}
 	
 	public ParserRule getDataRule() {

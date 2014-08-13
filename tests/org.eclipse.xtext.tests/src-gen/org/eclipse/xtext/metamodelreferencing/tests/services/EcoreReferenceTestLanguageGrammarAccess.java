@@ -863,27 +863,38 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 	
 	
-	private ModelElements pModel;
-	private ExtendsNsURIEObjectElements pExtendsNsURIEObject;
-	private MyEAttributeElements pMyEAttribute;
-	private EAttributeElements pEAttribute;
-	private ExtendsPluginEObjectElements pExtendsPluginEObject;
-	private Unused_01Elements pUnused_01;
-	private Unused_02Elements pUnused_02;
-	private Unused_03Elements pUnused_03;
-	private ExtendsResourceEObjectElements pExtendsResourceEObject;
-	private EObjectElements pEObject;
-	private ValidIDElements pValidID;
+	private final ModelElements pModel;
+	private final ExtendsNsURIEObjectElements pExtendsNsURIEObject;
+	private final MyEAttributeElements pMyEAttribute;
+	private final EAttributeElements pEAttribute;
+	private final ExtendsPluginEObjectElements pExtendsPluginEObject;
+	private final Unused_01Elements pUnused_01;
+	private final Unused_02Elements pUnused_02;
+	private final Unused_03Elements pUnused_03;
+	private final ExtendsResourceEObjectElements pExtendsResourceEObject;
+	private final EObjectElements pEObject;
+	private final ValidIDElements pValidID;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public EcoreReferenceTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pExtendsNsURIEObject = new ExtendsNsURIEObjectElements();
+		this.pMyEAttribute = new MyEAttributeElements();
+		this.pEAttribute = new EAttributeElements();
+		this.pExtendsPluginEObject = new ExtendsPluginEObjectElements();
+		this.pUnused_01 = new Unused_01Elements();
+		this.pUnused_02 = new Unused_02Elements();
+		this.pUnused_03 = new Unused_03Elements();
+		this.pExtendsResourceEObject = new ExtendsResourceEObjectElements();
+		this.pEObject = new EObjectElements();
+		this.pValidID = new ValidIDElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -916,7 +927,7 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Model:
 	//	extends+=ExtendsNsURIEObject extends+=ExtendsPluginEObject extends+=ExtendsResourceEObject;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -932,7 +943,7 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 	//	eObjectContainment+=ExtendsPluginEObject? eObjectContainment+=ExtendsResourceEObject? eObjectContainment+=EObject
 	//	eObjectContainment+=EAttribute eObjectContainment+=MyEAttribute)?;
 	public ExtendsNsURIEObjectElements getExtendsNsURIEObjectAccess() {
-		return (pExtendsNsURIEObject != null) ? pExtendsNsURIEObject : (pExtendsNsURIEObject = new ExtendsNsURIEObjectElements());
+		return pExtendsNsURIEObject;
 	}
 	
 	public ParserRule getExtendsNsURIEObjectRule() {
@@ -942,7 +953,7 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 	//MyEAttribute:
 	//	{MyEAttribute} "MyEAttribute";
 	public MyEAttributeElements getMyEAttributeAccess() {
-		return (pMyEAttribute != null) ? pMyEAttribute : (pMyEAttribute = new MyEAttributeElements());
+		return pMyEAttribute;
 	}
 	
 	public ParserRule getMyEAttributeRule() {
@@ -952,7 +963,7 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 	//EAttribute:
 	//	{EAttribute} "EAttribute";
 	public EAttributeElements getEAttributeAccess() {
-		return (pEAttribute != null) ? pEAttribute : (pEAttribute = new EAttributeElements());
+		return pEAttribute;
 	}
 	
 	public ParserRule getEAttributeRule() {
@@ -968,7 +979,7 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 	//	eObjectContainment+=ExtendsPluginEObject? eObjectContainment+=ExtendsResourceEObject? eObjectContainment+=EObject
 	//	eObjectContainment+=EAttribute eObjectContainment+=MyEAttribute)?;
 	public ExtendsPluginEObjectElements getExtendsPluginEObjectAccess() {
-		return (pExtendsPluginEObject != null) ? pExtendsPluginEObject : (pExtendsPluginEObject = new ExtendsPluginEObjectElements());
+		return pExtendsPluginEObject;
 	}
 	
 	public ParserRule getExtendsPluginEObjectRule() {
@@ -978,7 +989,7 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Unused_01 returns ExtendsNsURIEObject:
 	//	{MyNamedElement_01} name=ValidID;
 	public Unused_01Elements getUnused_01Access() {
-		return (pUnused_01 != null) ? pUnused_01 : (pUnused_01 = new Unused_01Elements());
+		return pUnused_01;
 	}
 	
 	public ParserRule getUnused_01Rule() {
@@ -988,7 +999,7 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Unused_02 returns ExtendsResourceEObject:
 	//	{MyNamedElement_02} name=ValidID;
 	public Unused_02Elements getUnused_02Access() {
-		return (pUnused_02 != null) ? pUnused_02 : (pUnused_02 = new Unused_02Elements());
+		return pUnused_02;
 	}
 	
 	public ParserRule getUnused_02Rule() {
@@ -998,7 +1009,7 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Unused_03 returns ExtendsPluginEObject:
 	//	{MyNamedElement_03} name=ValidID;
 	public Unused_03Elements getUnused_03Access() {
-		return (pUnused_03 != null) ? pUnused_03 : (pUnused_03 = new Unused_03Elements());
+		return pUnused_03;
 	}
 	
 	public ParserRule getUnused_03Rule() {
@@ -1014,7 +1025,7 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 	//	eObjectContainment+=ExtendsPluginEObject eObjectContainment+=ExtendsResourceEObject eObjectContainment+=EObject
 	//	eObjectContainment+=EAttribute eObjectContainment+=MyEAttribute)?;
 	public ExtendsResourceEObjectElements getExtendsResourceEObjectAccess() {
-		return (pExtendsResourceEObject != null) ? pExtendsResourceEObject : (pExtendsResourceEObject = new ExtendsResourceEObjectElements());
+		return pExtendsResourceEObject;
 	}
 	
 	public ParserRule getExtendsResourceEObjectRule() {
@@ -1024,7 +1035,7 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 	//EObject:
 	//	{EObject} "object";
 	public EObjectElements getEObjectAccess() {
-		return (pEObject != null) ? pEObject : (pEObject = new EObjectElements());
+		return pEObject;
 	}
 	
 	public ParserRule getEObjectRule() {
@@ -1034,7 +1045,7 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 	//ValidID returns EString:
 	//	ID;
 	public ValidIDElements getValidIDAccess() {
-		return (pValidID != null) ? pValidID : (pValidID = new ValidIDElements());
+		return pValidID;
 	}
 	
 	public ParserRule getValidIDRule() {

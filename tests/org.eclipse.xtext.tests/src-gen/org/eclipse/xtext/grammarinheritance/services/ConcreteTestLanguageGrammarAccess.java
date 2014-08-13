@@ -299,26 +299,36 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	}
 	
 	
-	private RootRuleElements pRootRule;
-	private ConcreteParserRuleElements pConcreteParserRule;
-	private OverridableParserRuleElements pOverridableParserRule;
-	private CallOverridenParserRuleElements pCallOverridenParserRule;
-	private OverridableParserRule2Elements pOverridableParserRule2;
-	private ExtendableParserRuleElements pExtendableParserRule;
-	private Subrule1Elements pSubrule1;
-	private Subrule2Elements pSubrule2;
-	private Subrule3Elements pSubrule3;
-	private CallExtendedParserRuleElements pCallExtendedParserRule;
+	private final RootRuleElements pRootRule;
+	private final ConcreteParserRuleElements pConcreteParserRule;
+	private final OverridableParserRuleElements pOverridableParserRule;
+	private final CallOverridenParserRuleElements pCallOverridenParserRule;
+	private final OverridableParserRule2Elements pOverridableParserRule2;
+	private final ExtendableParserRuleElements pExtendableParserRule;
+	private final Subrule1Elements pSubrule1;
+	private final Subrule2Elements pSubrule2;
+	private final Subrule3Elements pSubrule3;
+	private final CallExtendedParserRuleElements pCallExtendedParserRule;
 	
 	private final Grammar grammar;
 
-	private AbstractTestLanguageGrammarAccess gaAbstractTestLanguage;
+	private final AbstractTestLanguageGrammarAccess gaAbstractTestLanguage;
 
 	@Inject
 	public ConcreteTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		AbstractTestLanguageGrammarAccess gaAbstractTestLanguage) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaAbstractTestLanguage = gaAbstractTestLanguage;
+		this.pRootRule = new RootRuleElements();
+		this.pConcreteParserRule = new ConcreteParserRuleElements();
+		this.pOverridableParserRule = new OverridableParserRuleElements();
+		this.pCallOverridenParserRule = new CallOverridenParserRuleElements();
+		this.pOverridableParserRule2 = new OverridableParserRule2Elements();
+		this.pExtendableParserRule = new ExtendableParserRuleElements();
+		this.pSubrule1 = new Subrule1Elements();
+		this.pSubrule2 = new Subrule2Elements();
+		this.pSubrule3 = new Subrule3Elements();
+		this.pCallExtendedParserRule = new CallExtendedParserRuleElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -351,7 +361,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	//RootRule:
 	//	ConcreteParserRule | CallOverridenParserRule | CallExtendedParserRule | OverridableParserRule2;
 	public RootRuleElements getRootRuleAccess() {
-		return (pRootRule != null) ? pRootRule : (pRootRule = new RootRuleElements());
+		return pRootRule;
 	}
 	
 	public ParserRule getRootRuleRule() {
@@ -362,7 +372,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	//ConcreteParserRule:
 	//	"model" magicNumber=REAL ":" elements+=InheritedParserRule*;
 	public ConcreteParserRuleElements getConcreteParserRuleAccess() {
-		return (pConcreteParserRule != null) ? pConcreteParserRule : (pConcreteParserRule = new ConcreteParserRuleElements());
+		return pConcreteParserRule;
 	}
 	
 	public ParserRule getConcreteParserRuleRule() {
@@ -373,7 +383,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	//OverridableParserRule returns mm::AType:
 	//	"overriddenelement" name=ID;
 	public OverridableParserRuleElements getOverridableParserRuleAccess() {
-		return (pOverridableParserRule != null) ? pOverridableParserRule : (pOverridableParserRule = new OverridableParserRuleElements());
+		return pOverridableParserRule;
 	}
 	
 	public ParserRule getOverridableParserRuleRule() {
@@ -383,7 +393,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	//CallOverridenParserRule:
 	//	call=AbstractCallOverridenParserRule;
 	public CallOverridenParserRuleElements getCallOverridenParserRuleAccess() {
-		return (pCallOverridenParserRule != null) ? pCallOverridenParserRule : (pCallOverridenParserRule = new CallOverridenParserRuleElements());
+		return pCallOverridenParserRule;
 	}
 	
 	public ParserRule getCallOverridenParserRuleRule() {
@@ -394,7 +404,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	//OverridableParserRule2 returns AType2:
 	//	"overridden other element" name=ID "-" age=INT;
 	public OverridableParserRule2Elements getOverridableParserRule2Access() {
-		return (pOverridableParserRule2 != null) ? pOverridableParserRule2 : (pOverridableParserRule2 = new OverridableParserRule2Elements());
+		return pOverridableParserRule2;
 	}
 	
 	public ParserRule getOverridableParserRule2Rule() {
@@ -405,7 +415,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	//ExtendableParserRule returns mm::AType:
 	//	Subrule1 | Subrule2 | Subrule3;
 	public ExtendableParserRuleElements getExtendableParserRuleAccess() {
-		return (pExtendableParserRule != null) ? pExtendableParserRule : (pExtendableParserRule = new ExtendableParserRuleElements());
+		return pExtendableParserRule;
 	}
 	
 	public ParserRule getExtendableParserRuleRule() {
@@ -415,7 +425,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	//Subrule1:
 	//	"subrule1" name=ID sub1=ID;
 	public Subrule1Elements getSubrule1Access() {
-		return (pSubrule1 != null) ? pSubrule1 : (pSubrule1 = new Subrule1Elements());
+		return pSubrule1;
 	}
 	
 	public ParserRule getSubrule1Rule() {
@@ -425,7 +435,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	//Subrule2:
 	//	"subrule3" name=ID sub2=STRING;
 	public Subrule2Elements getSubrule2Access() {
-		return (pSubrule2 != null) ? pSubrule2 : (pSubrule2 = new Subrule2Elements());
+		return pSubrule2;
 	}
 	
 	public ParserRule getSubrule2Rule() {
@@ -435,7 +445,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	//Subrule3:
 	//	"subrule3" name=ID sub1=INT;
 	public Subrule3Elements getSubrule3Access() {
-		return (pSubrule3 != null) ? pSubrule3 : (pSubrule3 = new Subrule3Elements());
+		return pSubrule3;
 	}
 	
 	public ParserRule getSubrule3Rule() {
@@ -445,7 +455,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	//CallExtendedParserRule:
 	//	call=AbstractCallExtendedParserRule;
 	public CallExtendedParserRuleElements getCallExtendedParserRuleAccess() {
-		return (pCallExtendedParserRule != null) ? pCallExtendedParserRule : (pCallExtendedParserRule = new CallExtendedParserRuleElements());
+		return pCallExtendedParserRule;
 	}
 	
 	public ParserRule getCallExtendedParserRuleRule() {

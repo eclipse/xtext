@@ -591,29 +591,42 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 	
 	
-	private RootElements pRoot;
-	private OpElements pOp;
-	private TermElements pTerm;
-	private AtomElements pAtom;
-	private ParensElements pParens;
-	private TrickyBElements pTrickyB;
-	private TrickyCElements pTrickyC;
-	private TrickyDElements pTrickyD;
-	private TrickyEElements pTrickyE;
-	private TrickyFElements pTrickyF;
-	private TrickyGElements pTrickyG;
-	private TrickyG1Elements pTrickyG1;
-	private TrickyG2Elements pTrickyG2;
+	private final RootElements pRoot;
+	private final OpElements pOp;
+	private final TermElements pTerm;
+	private final AtomElements pAtom;
+	private final ParensElements pParens;
+	private final TrickyBElements pTrickyB;
+	private final TrickyCElements pTrickyC;
+	private final TrickyDElements pTrickyD;
+	private final TrickyEElements pTrickyE;
+	private final TrickyFElements pTrickyF;
+	private final TrickyGElements pTrickyG;
+	private final TrickyG1Elements pTrickyG1;
+	private final TrickyG2Elements pTrickyG2;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public ComplexReconstrTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pRoot = new RootElements();
+		this.pOp = new OpElements();
+		this.pTerm = new TermElements();
+		this.pAtom = new AtomElements();
+		this.pParens = new ParensElements();
+		this.pTrickyB = new TrickyBElements();
+		this.pTrickyC = new TrickyCElements();
+		this.pTrickyD = new TrickyDElements();
+		this.pTrickyE = new TrickyEElements();
+		this.pTrickyF = new TrickyFElements();
+		this.pTrickyG = new TrickyGElements();
+		this.pTrickyG1 = new TrickyG1Elements();
+		this.pTrickyG2 = new TrickyG2Elements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -646,7 +659,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	//Root:
 	//	Op | TrickyG;
 	public RootElements getRootAccess() {
-		return (pRoot != null) ? pRoot : (pRoot = new RootElements());
+		return pRoot;
 	}
 	
 	public ParserRule getRootRule() {
@@ -656,7 +669,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	//Op returns Expression:
 	//	Term ({Add.addOperands+=current} "+" addOperands+=Term | {Minus.minusOperands+=current} "-" minusOperands+=Term)*;
 	public OpElements getOpAccess() {
-		return (pOp != null) ? pOp : (pOp = new OpElements());
+		return pOp;
 	}
 	
 	public ParserRule getOpRule() {
@@ -666,7 +679,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	//Term returns Expression:
 	//	Atom | Parens;
 	public TermElements getTermAccess() {
-		return (pTerm != null) ? pTerm : (pTerm = new TermElements());
+		return pTerm;
 	}
 	
 	public ParserRule getTermRule() {
@@ -676,7 +689,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	//Atom:
 	//	name=ID;
 	public AtomElements getAtomAccess() {
-		return (pAtom != null) ? pAtom : (pAtom = new AtomElements());
+		return pAtom;
 	}
 	
 	public ParserRule getAtomRule() {
@@ -686,7 +699,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	//Parens returns Expression:
 	//	"(" Op ")" em="!"?;
 	public ParensElements getParensAccess() {
-		return (pParens != null) ? pParens : (pParens = new ParensElements());
+		return pParens;
 	}
 	
 	public ParserRule getParensRule() {
@@ -702,7 +715,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	//TrickyB:
 	//	"TB" (name=ID type+=INT)? type+=INT*;
 	public TrickyBElements getTrickyBAccess() {
-		return (pTrickyB != null) ? pTrickyB : (pTrickyB = new TrickyBElements());
+		return pTrickyB;
 	}
 	
 	public ParserRule getTrickyBRule() {
@@ -712,7 +725,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	//TrickyC:
 	//	"TC" name=ID ({C1.x=current} "x")? ({C2.y=current} "y")? ({C3.z=current} "z")?;
 	public TrickyCElements getTrickyCAccess() {
-		return (pTrickyC != null) ? pTrickyC : (pTrickyC = new TrickyCElements());
+		return pTrickyC;
 	}
 	
 	public ParserRule getTrickyCRule() {
@@ -722,7 +735,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	//TrickyD:
 	//	"TD" (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? type+=ID*;
 	public TrickyDElements getTrickyDAccess() {
-		return (pTrickyD != null) ? pTrickyD : (pTrickyD = new TrickyDElements());
+		return pTrickyD;
 	}
 	
 	public ParserRule getTrickyDRule() {
@@ -733,7 +746,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	//TrickyE:
 	//	"TE" (name+=INT foo+=STRING type+=ID)* "x" (name+=INT type+=ID)*;
 	public TrickyEElements getTrickyEAccess() {
-		return (pTrickyE != null) ? pTrickyE : (pTrickyE = new TrickyEElements());
+		return pTrickyE;
 	}
 	
 	public ParserRule getTrickyERule() {
@@ -744,7 +757,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	//TrickyF:
 	//	"TF" (name+=ID type+=INT)* (name+=ID | type+=INT);
 	public TrickyFElements getTrickyFAccess() {
-		return (pTrickyF != null) ? pTrickyF : (pTrickyF = new TrickyFElements());
+		return pTrickyF;
 	}
 	
 	public ParserRule getTrickyFRule() {
@@ -754,7 +767,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	//TrickyG:
 	//	"TG" tree=TrickyG1;
 	public TrickyGElements getTrickyGAccess() {
-		return (pTrickyG != null) ? pTrickyG : (pTrickyG = new TrickyGElements());
+		return pTrickyG;
 	}
 	
 	public ParserRule getTrickyGRule() {
@@ -764,7 +777,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	//TrickyG1:
 	//	"[" (vals+=TrickyG2 ("," vals+=TrickyG2)*)? "]";
 	public TrickyG1Elements getTrickyG1Access() {
-		return (pTrickyG1 != null) ? pTrickyG1 : (pTrickyG1 = new TrickyG1Elements());
+		return pTrickyG1;
 	}
 	
 	public ParserRule getTrickyG1Rule() {
@@ -779,7 +792,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	//// TrickyG4: val=INT {T.x=current} 'y'; TrickyG2:
 	//	TrickyG1 | val=INT;
 	public TrickyG2Elements getTrickyG2Access() {
-		return (pTrickyG2 != null) ? pTrickyG2 : (pTrickyG2 = new TrickyG2Elements());
+		return pTrickyG2;
 	}
 	
 	public ParserRule getTrickyG2Rule() {

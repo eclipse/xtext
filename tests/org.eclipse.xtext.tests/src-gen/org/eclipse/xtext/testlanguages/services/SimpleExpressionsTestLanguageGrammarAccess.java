@@ -207,22 +207,28 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 	}
 	
 	
-	private SequenceElements pSequence;
-	private AdditionElements pAddition;
-	private MultiplicationElements pMultiplication;
-	private TermElements pTerm;
-	private AtomElements pAtom;
-	private ParensElements pParens;
+	private final SequenceElements pSequence;
+	private final AdditionElements pAddition;
+	private final MultiplicationElements pMultiplication;
+	private final TermElements pTerm;
+	private final AtomElements pAtom;
+	private final ParensElements pParens;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public SimpleExpressionsTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pSequence = new SequenceElements();
+		this.pAddition = new AdditionElements();
+		this.pMultiplication = new MultiplicationElements();
+		this.pTerm = new TermElements();
+		this.pAtom = new AtomElements();
+		this.pParens = new ParensElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -255,7 +261,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 	//Sequence:
 	//	Addition ({Sequence.expressions+=current} expressions+=Addition)*;
 	public SequenceElements getSequenceAccess() {
-		return (pSequence != null) ? pSequence : (pSequence = new SequenceElements());
+		return pSequence;
 	}
 	
 	public ParserRule getSequenceRule() {
@@ -265,7 +271,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 	//Addition returns Expression:
 	//	Multiplication ({Op.values+=current} operator=("+" | "-") values+=Multiplication)*;
 	public AdditionElements getAdditionAccess() {
-		return (pAddition != null) ? pAddition : (pAddition = new AdditionElements());
+		return pAddition;
 	}
 	
 	public ParserRule getAdditionRule() {
@@ -275,7 +281,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 	//Multiplication returns Expression:
 	//	Term ({Op.values+=current} operator=("*" | "/") values+=Term)*;
 	public MultiplicationElements getMultiplicationAccess() {
-		return (pMultiplication != null) ? pMultiplication : (pMultiplication = new MultiplicationElements());
+		return pMultiplication;
 	}
 	
 	public ParserRule getMultiplicationRule() {
@@ -285,7 +291,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 	//Term returns Expression:
 	//	Atom | Parens;
 	public TermElements getTermAccess() {
-		return (pTerm != null) ? pTerm : (pTerm = new TermElements());
+		return pTerm;
 	}
 	
 	public ParserRule getTermRule() {
@@ -295,7 +301,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 	//Atom:
 	//	name=ID;
 	public AtomElements getAtomAccess() {
-		return (pAtom != null) ? pAtom : (pAtom = new AtomElements());
+		return pAtom;
 	}
 	
 	public ParserRule getAtomRule() {
@@ -305,7 +311,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 	//Parens returns Expression:
 	//	"(" Addition ")";
 	public ParensElements getParensAccess() {
-		return (pParens != null) ? pParens : (pParens = new ParensElements());
+		return pParens;
 	}
 	
 	public ParserRule getParensRule() {

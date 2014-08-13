@@ -1723,61 +1723,106 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		public Keyword getLit2Lit2Keyword_0() { return cLit2Lit2Keyword_0; }
 	}
 	
-	private OpElements pOp;
-	private TermElements pTerm;
-	private AtomElements pAtom;
-	private ParensElements pParens;
-	private TwoNumbersElements pTwoNumbers;
-	private ManyStringsElements pManyStrings;
-	private TypeElements pType;
-	private Ref2Elements pRef2;
-	private SpareElements pSpare;
-	private BooleanElements pBoolean;
-	private Transient1Elements pTransient1;
-	private Consumed1Elements pConsumed1;
-	private Consumed2Elements pConsumed2;
-	private Loop1Elements pLoop1;
-	private Loop2Elements pLoop2;
-	private Loop3Elements pLoop3;
-	private Loop4Elements pLoop4;
-	private LoopBug285452Elements pLoopBug285452;
-	private DuplicateBug284491Elements pDuplicateBug284491;
-	private EmptyObjectBug284850Elements pEmptyObjectBug284850;
-	private EmptyObjectItemsElements pEmptyObjectItems;
-	private EmptyObjectItemElements pEmptyObjectItem;
-	private MultiInheritanceBug280439Elements pMultiInheritanceBug280439;
-	private AbstractMulti1Elements pAbstractMulti1;
-	private AbstractMulti2Elements pAbstractMulti2;
-	private ConcreteMultiElements pConcreteMulti;
-	private EObjectRefElements pEObjectRef;
-	private EObjectElementElements pEObjectElement;
-	private TypeBug305577_1Elements pTypeBug305577_1;
-	private TypeBug305577_2Elements pTypeBug305577_2;
-	private TypeBug1AInhElements pTypeBug1AInh;
-	private TypeBug1AElements pTypeBug1A;
-	private TypeBug1BElements pTypeBug1B;
-	private TypeBug2AInhElements pTypeBug2AInh;
-	private TypeBug2AElements pTypeBug2A;
-	private TypeBug2BElements pTypeBug2B;
-	private Bug305171Elements pBug305171;
-	private Bug310435EnumElements pBug310435Enum;
-	private Bug310435ValElements pBug310435Val;
-	private EnumBug310435Lit1Elements unknownRuleEnumBug310435Lit1;
-	private EnumBug310435Lit2Elements unknownRuleEnumBug310435Lit2;
-	private CrossRefNameTestElements pCrossRefNameTest;
-	private CrossRefNamedElements pCrossRefNamed;
-	private TerminalRule tID1;
-	private TerminalRule tID2;
+	private final OpElements pOp;
+	private final TermElements pTerm;
+	private final AtomElements pAtom;
+	private final ParensElements pParens;
+	private final TwoNumbersElements pTwoNumbers;
+	private final ManyStringsElements pManyStrings;
+	private final TypeElements pType;
+	private final Ref2Elements pRef2;
+	private final SpareElements pSpare;
+	private final BooleanElements pBoolean;
+	private final Transient1Elements pTransient1;
+	private final Consumed1Elements pConsumed1;
+	private final Consumed2Elements pConsumed2;
+	private final Loop1Elements pLoop1;
+	private final Loop2Elements pLoop2;
+	private final Loop3Elements pLoop3;
+	private final Loop4Elements pLoop4;
+	private final LoopBug285452Elements pLoopBug285452;
+	private final DuplicateBug284491Elements pDuplicateBug284491;
+	private final EmptyObjectBug284850Elements pEmptyObjectBug284850;
+	private final EmptyObjectItemsElements pEmptyObjectItems;
+	private final EmptyObjectItemElements pEmptyObjectItem;
+	private final MultiInheritanceBug280439Elements pMultiInheritanceBug280439;
+	private final AbstractMulti1Elements pAbstractMulti1;
+	private final AbstractMulti2Elements pAbstractMulti2;
+	private final ConcreteMultiElements pConcreteMulti;
+	private final EObjectRefElements pEObjectRef;
+	private final EObjectElementElements pEObjectElement;
+	private final TypeBug305577_1Elements pTypeBug305577_1;
+	private final TypeBug305577_2Elements pTypeBug305577_2;
+	private final TypeBug1AInhElements pTypeBug1AInh;
+	private final TypeBug1AElements pTypeBug1A;
+	private final TypeBug1BElements pTypeBug1B;
+	private final TypeBug2AInhElements pTypeBug2AInh;
+	private final TypeBug2AElements pTypeBug2A;
+	private final TypeBug2BElements pTypeBug2B;
+	private final Bug305171Elements pBug305171;
+	private final Bug310435EnumElements pBug310435Enum;
+	private final Bug310435ValElements pBug310435Val;
+	private final EnumBug310435Lit1Elements unknownRuleEnumBug310435Lit1;
+	private final EnumBug310435Lit2Elements unknownRuleEnumBug310435Lit2;
+	private final CrossRefNameTestElements pCrossRefNameTest;
+	private final CrossRefNamedElements pCrossRefNamed;
+	private final TerminalRule tID1;
+	private final TerminalRule tID2;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public SimpleReconstrTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pOp = new OpElements();
+		this.pTerm = new TermElements();
+		this.pAtom = new AtomElements();
+		this.pParens = new ParensElements();
+		this.pTwoNumbers = new TwoNumbersElements();
+		this.pManyStrings = new ManyStringsElements();
+		this.pType = new TypeElements();
+		this.pRef2 = new Ref2Elements();
+		this.pSpare = new SpareElements();
+		this.pBoolean = new BooleanElements();
+		this.pTransient1 = new Transient1Elements();
+		this.pConsumed1 = new Consumed1Elements();
+		this.pConsumed2 = new Consumed2Elements();
+		this.pLoop1 = new Loop1Elements();
+		this.pLoop2 = new Loop2Elements();
+		this.pLoop3 = new Loop3Elements();
+		this.pLoop4 = new Loop4Elements();
+		this.pLoopBug285452 = new LoopBug285452Elements();
+		this.pDuplicateBug284491 = new DuplicateBug284491Elements();
+		this.pEmptyObjectBug284850 = new EmptyObjectBug284850Elements();
+		this.pEmptyObjectItems = new EmptyObjectItemsElements();
+		this.pEmptyObjectItem = new EmptyObjectItemElements();
+		this.pMultiInheritanceBug280439 = new MultiInheritanceBug280439Elements();
+		this.pAbstractMulti1 = new AbstractMulti1Elements();
+		this.pAbstractMulti2 = new AbstractMulti2Elements();
+		this.pConcreteMulti = new ConcreteMultiElements();
+		this.pEObjectRef = new EObjectRefElements();
+		this.pEObjectElement = new EObjectElementElements();
+		this.pTypeBug305577_1 = new TypeBug305577_1Elements();
+		this.pTypeBug305577_2 = new TypeBug305577_2Elements();
+		this.pTypeBug1AInh = new TypeBug1AInhElements();
+		this.pTypeBug1A = new TypeBug1AElements();
+		this.pTypeBug1B = new TypeBug1BElements();
+		this.pTypeBug2AInh = new TypeBug2AInhElements();
+		this.pTypeBug2A = new TypeBug2AElements();
+		this.pTypeBug2B = new TypeBug2BElements();
+		this.pBug305171 = new Bug305171Elements();
+		this.pBug310435Enum = new Bug310435EnumElements();
+		this.pBug310435Val = new Bug310435ValElements();
+		this.unknownRuleEnumBug310435Lit1 = new EnumBug310435Lit1Elements();
+		this.unknownRuleEnumBug310435Lit2 = new EnumBug310435Lit2Elements();
+		this.pCrossRefNameTest = new CrossRefNameTestElements();
+		this.pCrossRefNamed = new CrossRefNamedElements();
+		this.tID1 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID1");
+		this.tID2 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID2");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -1810,7 +1855,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Op returns Expression:
 	//	Term ({Op.values+=current} values+=Term)*;
 	public OpElements getOpAccess() {
-		return (pOp != null) ? pOp : (pOp = new OpElements());
+		return pOp;
 	}
 	
 	public ParserRule getOpRule() {
@@ -1822,7 +1867,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//	Loop3 | Loop4 | LoopBug285452 | DuplicateBug284491 | EmptyObjectBug284850 | MultiInheritanceBug280439 | EObjectRef |
 	//	TypeBug305577_1 | TypeBug305577_2 | Parens | Bug305171 | Bug310435Val | Bug310435Enum | CrossRefNameTest;
 	public TermElements getTermAccess() {
-		return (pTerm != null) ? pTerm : (pTerm = new TermElements());
+		return pTerm;
 	}
 	
 	public ParserRule getTermRule() {
@@ -1832,7 +1877,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Atom:
 	//	name=ID;
 	public AtomElements getAtomAccess() {
-		return (pAtom != null) ? pAtom : (pAtom = new AtomElements());
+		return pAtom;
 	}
 	
 	public ParserRule getAtomRule() {
@@ -1842,7 +1887,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Parens returns Expression:
 	//	"(" Op ")" em="!"?;
 	public ParensElements getParensAccess() {
-		return (pParens != null) ? pParens : (pParens = new ParensElements());
+		return pParens;
 	}
 	
 	public ParserRule getParensRule() {
@@ -1852,7 +1897,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//TwoNumbers:
 	//	num1=INT num2=INT ("#" num3+=INT)*;
 	public TwoNumbersElements getTwoNumbersAccess() {
-		return (pTwoNumbers != null) ? pTwoNumbers : (pTwoNumbers = new TwoNumbersElements());
+		return pTwoNumbers;
 	}
 	
 	public ParserRule getTwoNumbersRule() {
@@ -1862,7 +1907,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//ManyStrings:
 	//	"=" str1+=STRING* str2+=STRING;
 	public ManyStringsElements getManyStringsAccess() {
-		return (pManyStrings != null) ? pManyStrings : (pManyStrings = new ManyStringsElements());
+		return pManyStrings;
 	}
 	
 	public ParserRule getManyStringsRule() {
@@ -1872,7 +1917,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Type:
 	//	"type" name=ID "extends" extends=[Type];
 	public TypeElements getTypeAccess() {
-		return (pType != null) ? pType : (pType = new TypeElements());
+		return pType;
 	}
 	
 	public ParserRule getTypeRule() {
@@ -1882,7 +1927,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Ref2:
 	//	"#2" ref2=("mykeyword1" | STRING | "mykeyword2");
 	public Ref2Elements getRef2Access() {
-		return (pRef2 != null) ? pRef2 : (pRef2 = new Ref2Elements());
+		return pRef2;
 	}
 	
 	public ParserRule getRef2Rule() {
@@ -1892,7 +1937,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Spare:
 	//	"#3" id+=ID ("." id+=ID)*;
 	public SpareElements getSpareAccess() {
-		return (pSpare != null) ? pSpare : (pSpare = new SpareElements());
+		return pSpare;
 	}
 	
 	public ParserRule getSpareRule() {
@@ -1902,7 +1947,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Boolean:
 	//	"#4" bool?="myoption"? "kw" value=ID;
 	public BooleanElements getBooleanAccess() {
-		return (pBoolean != null) ? pBoolean : (pBoolean = new BooleanElements());
+		return pBoolean;
 	}
 	
 	public ParserRule getBooleanRule() {
@@ -1912,7 +1957,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Transient1:
 	//	"#5" (precStar?="*" | prec=INT) ("," (scaleStar?="*" | scale=INT))?;
 	public Transient1Elements getTransient1Access() {
-		return (pTransient1 != null) ? pTransient1 : (pTransient1 = new Transient1Elements());
+		return pTransient1;
 	}
 	
 	public ParserRule getTransient1Rule() {
@@ -1922,7 +1967,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Consumed1:
 	//	"#6" ("v1" v1+=INT* v2+=ID | "v2" v2+=ID* v1+=INT);
 	public Consumed1Elements getConsumed1Access() {
-		return (pConsumed1 != null) ? pConsumed1 : (pConsumed1 = new Consumed1Elements());
+		return pConsumed1;
 	}
 	
 	public ParserRule getConsumed1Rule() {
@@ -1932,7 +1977,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Consumed2:
 	//	"#7" child=Consumed1;
 	public Consumed2Elements getConsumed2Access() {
-		return (pConsumed2 != null) ? pConsumed2 : (pConsumed2 = new Consumed2Elements());
+		return pConsumed2;
 	}
 	
 	public ParserRule getConsumed2Rule() {
@@ -1942,7 +1987,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Loop1:
 	//	"kw0"? "#8" id+=ID "kw1"? id+=ID ("kw2"* "kw30")+;
 	public Loop1Elements getLoop1Access() {
-		return (pLoop1 != null) ? pLoop1 : (pLoop1 = new Loop1Elements());
+		return pLoop1;
 	}
 	
 	public ParserRule getLoop1Rule() {
@@ -1952,7 +1997,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Loop2:
 	//	"#9" id+=ID ("kw1" | id+=ID "kw2") ("kw3" | id+=ID "kw4")? ("kw5" | "kw6");
 	public Loop2Elements getLoop2Access() {
-		return (pLoop2 != null) ? pLoop2 : (pLoop2 = new Loop2Elements());
+		return pLoop2;
 	}
 	
 	public ParserRule getLoop2Rule() {
@@ -1962,7 +2007,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Loop3:
 	//	("kw1" | "kw2" | "kw3") "#10" id+=ID ("kw4" id+=ID "kw5")*;
 	public Loop3Elements getLoop3Access() {
-		return (pLoop3 != null) ? pLoop3 : (pLoop3 = new Loop3Elements());
+		return pLoop3;
 	}
 	
 	public ParserRule getLoop3Rule() {
@@ -1972,7 +2017,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Loop4:
 	//	"#11" ("kw1" | "kw2" | "kw3" "kw4") id+=ID ("kw5" ("kw6" "kw7"?)?)+;
 	public Loop4Elements getLoop4Access() {
-		return (pLoop4 != null) ? pLoop4 : (pLoop4 = new Loop4Elements());
+		return pLoop4;
 	}
 	
 	public ParserRule getLoop4Rule() {
@@ -1982,7 +2027,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//LoopBug285452:
 	//	"#12" (interface?="interface" | "class") name=ID;
 	public LoopBug285452Elements getLoopBug285452Access() {
-		return (pLoopBug285452 != null) ? pLoopBug285452 : (pLoopBug285452 = new LoopBug285452Elements());
+		return pLoopBug285452;
 	}
 	
 	public ParserRule getLoopBug285452Rule() {
@@ -1992,7 +2037,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//DuplicateBug284491:
 	//	"#13" (static?="static" | final?="final" | transient?="transient")*;
 	public DuplicateBug284491Elements getDuplicateBug284491Access() {
-		return (pDuplicateBug284491 != null) ? pDuplicateBug284491 : (pDuplicateBug284491 = new DuplicateBug284491Elements());
+		return pDuplicateBug284491;
 	}
 	
 	public ParserRule getDuplicateBug284491Rule() {
@@ -2002,7 +2047,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//EmptyObjectBug284850:
 	//	"#14" items=EmptyObjectItems;
 	public EmptyObjectBug284850Elements getEmptyObjectBug284850Access() {
-		return (pEmptyObjectBug284850 != null) ? pEmptyObjectBug284850 : (pEmptyObjectBug284850 = new EmptyObjectBug284850Elements());
+		return pEmptyObjectBug284850;
 	}
 	
 	public ParserRule getEmptyObjectBug284850Rule() {
@@ -2012,7 +2057,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//EmptyObjectItems:
 	//	list+=EmptyObjectItem*;
 	public EmptyObjectItemsElements getEmptyObjectItemsAccess() {
-		return (pEmptyObjectItems != null) ? pEmptyObjectItems : (pEmptyObjectItems = new EmptyObjectItemsElements());
+		return pEmptyObjectItems;
 	}
 	
 	public ParserRule getEmptyObjectItemsRule() {
@@ -2022,7 +2067,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//EmptyObjectItem:
 	//	"item" name=ID;
 	public EmptyObjectItemElements getEmptyObjectItemAccess() {
-		return (pEmptyObjectItem != null) ? pEmptyObjectItem : (pEmptyObjectItem = new EmptyObjectItemElements());
+		return pEmptyObjectItem;
 	}
 	
 	public ParserRule getEmptyObjectItemRule() {
@@ -2032,7 +2077,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//MultiInheritanceBug280439:
 	//	"#15" val=ConcreteMulti;
 	public MultiInheritanceBug280439Elements getMultiInheritanceBug280439Access() {
-		return (pMultiInheritanceBug280439 != null) ? pMultiInheritanceBug280439 : (pMultiInheritanceBug280439 = new MultiInheritanceBug280439Elements());
+		return pMultiInheritanceBug280439;
 	}
 	
 	public ParserRule getMultiInheritanceBug280439Rule() {
@@ -2042,7 +2087,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//AbstractMulti1:
 	//	ConcreteMulti | m1=ID;
 	public AbstractMulti1Elements getAbstractMulti1Access() {
-		return (pAbstractMulti1 != null) ? pAbstractMulti1 : (pAbstractMulti1 = new AbstractMulti1Elements());
+		return pAbstractMulti1;
 	}
 	
 	public ParserRule getAbstractMulti1Rule() {
@@ -2052,7 +2097,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//AbstractMulti2:
 	//	ConcreteMulti | m2=ID;
 	public AbstractMulti2Elements getAbstractMulti2Access() {
-		return (pAbstractMulti2 != null) ? pAbstractMulti2 : (pAbstractMulti2 = new AbstractMulti2Elements());
+		return pAbstractMulti2;
 	}
 	
 	public ParserRule getAbstractMulti2Rule() {
@@ -2062,7 +2107,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//ConcreteMulti:
 	//	m1=ID m2=ID;
 	public ConcreteMultiElements getConcreteMultiAccess() {
-		return (pConcreteMulti != null) ? pConcreteMulti : (pConcreteMulti = new ConcreteMultiElements());
+		return pConcreteMulti;
 	}
 	
 	public ParserRule getConcreteMultiRule() {
@@ -2072,7 +2117,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//EObjectRef:
 	//	"#16" obj=EObjectElement "refs" ref=[ecore::EObject];
 	public EObjectRefElements getEObjectRefAccess() {
-		return (pEObjectRef != null) ? pEObjectRef : (pEObjectRef = new EObjectRefElements());
+		return pEObjectRef;
 	}
 	
 	public ParserRule getEObjectRefRule() {
@@ -2082,7 +2127,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//EObjectElement:
 	//	name=ID;
 	public EObjectElementElements getEObjectElementAccess() {
-		return (pEObjectElement != null) ? pEObjectElement : (pEObjectElement = new EObjectElementElements());
+		return pEObjectElement;
 	}
 	
 	public ParserRule getEObjectElementRule() {
@@ -2092,7 +2137,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//TypeBug305577_1:
 	//	"#17" (TypeBug1A | TypeBug1B);
 	public TypeBug305577_1Elements getTypeBug305577_1Access() {
-		return (pTypeBug305577_1 != null) ? pTypeBug305577_1 : (pTypeBug305577_1 = new TypeBug305577_1Elements());
+		return pTypeBug305577_1;
 	}
 	
 	public ParserRule getTypeBug305577_1Rule() {
@@ -2102,7 +2147,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//TypeBug305577_2:
 	//	"#18" (TypeBug2B | TypeBug2A);
 	public TypeBug305577_2Elements getTypeBug305577_2Access() {
-		return (pTypeBug305577_2 != null) ? pTypeBug305577_2 : (pTypeBug305577_2 = new TypeBug305577_2Elements());
+		return pTypeBug305577_2;
 	}
 	
 	public ParserRule getTypeBug305577_2Rule() {
@@ -2112,7 +2157,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//TypeBug1AInh returns TypeBug1A:
 	//	TypeBug1B;
 	public TypeBug1AInhElements getTypeBug1AInhAccess() {
-		return (pTypeBug1AInh != null) ? pTypeBug1AInh : (pTypeBug1AInh = new TypeBug1AInhElements());
+		return pTypeBug1AInh;
 	}
 	
 	public ParserRule getTypeBug1AInhRule() {
@@ -2122,7 +2167,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//TypeBug1A:
 	//	{TypeBug1A} "ka" name=ID;
 	public TypeBug1AElements getTypeBug1AAccess() {
-		return (pTypeBug1A != null) ? pTypeBug1A : (pTypeBug1A = new TypeBug1AElements());
+		return pTypeBug1A;
 	}
 	
 	public ParserRule getTypeBug1ARule() {
@@ -2132,7 +2177,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//TypeBug1B:
 	//	{TypeBug1B} "kb" name=ID;
 	public TypeBug1BElements getTypeBug1BAccess() {
-		return (pTypeBug1B != null) ? pTypeBug1B : (pTypeBug1B = new TypeBug1BElements());
+		return pTypeBug1B;
 	}
 	
 	public ParserRule getTypeBug1BRule() {
@@ -2142,7 +2187,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//TypeBug2AInh returns TypeBug2A:
 	//	TypeBug2B;
 	public TypeBug2AInhElements getTypeBug2AInhAccess() {
-		return (pTypeBug2AInh != null) ? pTypeBug2AInh : (pTypeBug2AInh = new TypeBug2AInhElements());
+		return pTypeBug2AInh;
 	}
 	
 	public ParserRule getTypeBug2AInhRule() {
@@ -2152,7 +2197,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//TypeBug2A:
 	//	{TypeBug2A} "ka" name=ID;
 	public TypeBug2AElements getTypeBug2AAccess() {
-		return (pTypeBug2A != null) ? pTypeBug2A : (pTypeBug2A = new TypeBug2AElements());
+		return pTypeBug2A;
 	}
 	
 	public ParserRule getTypeBug2ARule() {
@@ -2162,7 +2207,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//TypeBug2B:
 	//	{TypeBug2B} "kb" name=ID;
 	public TypeBug2BElements getTypeBug2BAccess() {
-		return (pTypeBug2B != null) ? pTypeBug2B : (pTypeBug2B = new TypeBug2BElements());
+		return pTypeBug2B;
 	}
 	
 	public ParserRule getTypeBug2BRule() {
@@ -2172,7 +2217,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Bug305171:
 	//	"#19" (("kx" x+=ID ("," x+=ID)*)? (("ky" y+=ID ("," y+=ID)*)? ("kz" z+=ID ("," z+=ID)*)?)) name=ID;
 	public Bug305171Elements getBug305171Access() {
-		return (pBug305171 != null) ? pBug305171 : (pBug305171 = new Bug305171Elements());
+		return pBug305171;
 	}
 	
 	public ParserRule getBug305171Rule() {
@@ -2182,7 +2227,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Bug310435Enum:
 	//	"#20" ("kw1" lits+=EnumBug310435Lit1 | "kw2" lits+=EnumBug310435Lit2)*;
 	public Bug310435EnumElements getBug310435EnumAccess() {
-		return (pBug310435Enum != null) ? pBug310435Enum : (pBug310435Enum = new Bug310435EnumElements());
+		return pBug310435Enum;
 	}
 	
 	public ParserRule getBug310435EnumRule() {
@@ -2192,7 +2237,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Bug310435Val:
 	//	"#21" ("kw1" lits+=ID | "kw2" lits+=STRING)*;
 	public Bug310435ValElements getBug310435ValAccess() {
-		return (pBug310435Val != null) ? pBug310435Val : (pBug310435Val = new Bug310435ValElements());
+		return pBug310435Val;
 	}
 	
 	public ParserRule getBug310435ValRule() {
@@ -2202,7 +2247,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//enum EnumBug310435Lit1 returns EnumBug310435Enum:
 	//	lit1;
 	public EnumBug310435Lit1Elements getEnumBug310435Lit1Access() {
-		return (unknownRuleEnumBug310435Lit1 != null) ? unknownRuleEnumBug310435Lit1 : (unknownRuleEnumBug310435Lit1 = new EnumBug310435Lit1Elements());
+		return unknownRuleEnumBug310435Lit1;
 	}
 	
 	public EnumRule getEnumBug310435Lit1Rule() {
@@ -2212,7 +2257,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//enum EnumBug310435Lit2 returns EnumBug310435Enum:
 	//	lit2;
 	public EnumBug310435Lit2Elements getEnumBug310435Lit2Access() {
-		return (unknownRuleEnumBug310435Lit2 != null) ? unknownRuleEnumBug310435Lit2 : (unknownRuleEnumBug310435Lit2 = new EnumBug310435Lit2Elements());
+		return unknownRuleEnumBug310435Lit2;
 	}
 	
 	public EnumRule getEnumBug310435Lit2Rule() {
@@ -2222,7 +2267,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//CrossRefNameTest:
 	//	"#22" named+=CrossRefNamed* "kw1" ("kw2" ref+=[CrossRefNamed|ID1] | "kw3" ref+=[CrossRefNamed|ID2])*;
 	public CrossRefNameTestElements getCrossRefNameTestAccess() {
-		return (pCrossRefNameTest != null) ? pCrossRefNameTest : (pCrossRefNameTest = new CrossRefNameTestElements());
+		return pCrossRefNameTest;
 	}
 	
 	public ParserRule getCrossRefNameTestRule() {
@@ -2232,7 +2277,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//CrossRefNamed:
 	//	name=(ID1 | ID2);
 	public CrossRefNamedElements getCrossRefNamedAccess() {
-		return (pCrossRefNamed != null) ? pCrossRefNamed : (pCrossRefNamed = new CrossRefNamedElements());
+		return pCrossRefNamed;
 	}
 	
 	public ParserRule getCrossRefNamedRule() {
@@ -2242,13 +2287,13 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//terminal ID1:
 	//	"i" "d" "0".."9"*;
 	public TerminalRule getID1Rule() {
-		return (tID1 != null) ? tID1 : (tID1 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID1"));
+		return tID1;
 	} 
 
 	//terminal ID2:
 	//	"I" "D" "0".."9"*;
 	public TerminalRule getID2Rule() {
-		return (tID2 != null) ? tID2 : (tID2 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID2"));
+		return tID2;
 	} 
 
 	//terminal ID:

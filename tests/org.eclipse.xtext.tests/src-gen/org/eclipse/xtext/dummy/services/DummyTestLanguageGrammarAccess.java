@@ -79,18 +79,20 @@ public class DummyTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	}
 	
 	
-	private ModelElements pModel;
-	private ElementElements pElement;
+	private final ModelElements pModel;
+	private final ElementElements pElement;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public DummyTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pElement = new ElementElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -123,7 +125,7 @@ public class DummyTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	//Model:
 	//	elements+=Element*;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -133,7 +135,7 @@ public class DummyTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	//Element:
 	//	optional?="optional"? "element" name=ID descriptions+=STRING* ";";
 	public ElementElements getElementAccess() {
-		return (pElement != null) ? pElement : (pElement = new ElementElements());
+		return pElement;
 	}
 	
 	public ParserRule getElementRule() {

@@ -98,17 +98,22 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
-	private ModelElements pModel;
-	private NLElements pNL;
-	private TerminalRule tID;
-	private TerminalRule tWS;
-	private TerminalRule tANY_OTHER;
+	private final ModelElements pModel;
+	private final NLElements pNL;
+	private final TerminalRule tID;
+	private final TerminalRule tWS;
+	private final TerminalRule tANY_OTHER;
 	
 	private final Grammar grammar;
 
 	@Inject
 	public Bug301935TestLanguageGrammarAccess(GrammarProvider grammarProvider) {
 		this.grammar = internalFindGrammar(grammarProvider);
+		this.pModel = new ModelElements();
+		this.pNL = new NLElements();
+		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID");
+		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS");
+		this.tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -137,7 +142,7 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Model:
 	//	name=ID WS value=ID NL value2=ID WS;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -147,7 +152,7 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//NL:
 	//	WS* ("\r"? "\n") WS*;
 	public NLElements getNLAccess() {
-		return (pNL != null) ? pNL : (pNL = new NLElements());
+		return pNL;
 	}
 	
 	public ParserRule getNLRule() {
@@ -157,18 +162,18 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//terminal ID:
 	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
-		return (tID != null) ? tID : (tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
+		return tID;
 	} 
 
 	//terminal WS:
 	//	(" " | "\t")+;
 	public TerminalRule getWSRule() {
-		return (tWS != null) ? tWS : (tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
+		return tWS;
 	} 
 
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
-		return (tANY_OTHER != null) ? tANY_OTHER : (tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER"));
+		return tANY_OTHER;
 	} 
 }

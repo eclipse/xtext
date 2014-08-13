@@ -35,17 +35,18 @@ public class LiveContainerTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 	
 	
-	private ModelElements pModel;
+	private final ModelElements pModel;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public LiveContainerTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -78,7 +79,7 @@ public class LiveContainerTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//Model:
 	//	name=ID;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {

@@ -55,17 +55,18 @@ public class EcoreFragmentTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 	
 	
-	private SecondElements pSecond;
+	private final SecondElements pSecond;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public EcoreFragmentTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pSecond = new SecondElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -98,7 +99,7 @@ public class EcoreFragmentTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//Second returns second::Second:
 	//	name=ID "first" first=[first::First];
 	public SecondElements getSecondAccess() {
-		return (pSecond != null) ? pSecond : (pSecond = new SecondElements());
+		return pSecond;
 	}
 	
 	public ParserRule getSecondRule() {

@@ -31,17 +31,18 @@ public class Bug301935ExTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 	
 	
-	private DelegateModelElements pDelegateModel;
+	private final DelegateModelElements pDelegateModel;
 	
 	private final Grammar grammar;
 
-	private Bug301935TestLanguageGrammarAccess gaBug301935TestLanguage;
+	private final Bug301935TestLanguageGrammarAccess gaBug301935TestLanguage;
 
 	@Inject
 	public Bug301935ExTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		Bug301935TestLanguageGrammarAccess gaBug301935TestLanguage) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaBug301935TestLanguage = gaBug301935TestLanguage;
+		this.pDelegateModel = new DelegateModelElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -74,7 +75,7 @@ public class Bug301935ExTestLanguageGrammarAccess extends AbstractGrammarElement
 	//DelegateModel returns Model:
 	//	Model;
 	public DelegateModelElements getDelegateModelAccess() {
-		return (pDelegateModel != null) ? pDelegateModel : (pDelegateModel = new DelegateModelElements());
+		return pDelegateModel;
 	}
 	
 	public ParserRule getDelegateModelRule() {

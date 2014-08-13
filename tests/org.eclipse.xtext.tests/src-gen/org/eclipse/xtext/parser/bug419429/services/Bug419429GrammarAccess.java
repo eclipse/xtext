@@ -39,17 +39,18 @@ public class Bug419429GrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	
-	private EReferenceElements pEReference;
+	private final EReferenceElements pEReference;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug419429GrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pEReference = new EReferenceElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -82,7 +83,7 @@ public class Bug419429GrammarAccess extends AbstractGrammarElementFinder {
 	//EReference:
 	//	eType=[EClassifier];
 	public EReferenceElements getEReferenceAccess() {
-		return (pEReference != null) ? pEReference : (pEReference = new EReferenceElements());
+		return pEReference;
 	}
 	
 	public ParserRule getEReferenceRule() {

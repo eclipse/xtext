@@ -245,22 +245,28 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 	
 	
-	private ModelElements pModel;
-	private AbstractBarElements pAbstractBar;
-	private BarElements pBar;
-	private FooElements pFoo;
-	private QualifiedNameWithOtherDelimElements pQualifiedNameWithOtherDelim;
-	private QualifiedNameElements pQualifiedName;
+	private final ModelElements pModel;
+	private final AbstractBarElements pAbstractBar;
+	private final BarElements pBar;
+	private final FooElements pFoo;
+	private final QualifiedNameWithOtherDelimElements pQualifiedNameWithOtherDelim;
+	private final QualifiedNameElements pQualifiedName;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public EObjectAtOffsetTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pAbstractBar = new AbstractBarElements();
+		this.pBar = new BarElements();
+		this.pFoo = new FooElements();
+		this.pQualifiedNameWithOtherDelim = new QualifiedNameWithOtherDelimElements();
+		this.pQualifiedName = new QualifiedNameElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -293,7 +299,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 	//Model:
 	//	(foos+=Foo | bars+=AbstractBar)*;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -304,7 +310,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 	//	"zonk"? INT? Bar ({FooBar.bar=current} "foobar" foo+=[Foo|QualifiedNameWithOtherDelim])?
 	//	foo+=[Foo|QualifiedNameWithOtherDelim]?;
 	public AbstractBarElements getAbstractBarAccess() {
-		return (pAbstractBar != null) ? pAbstractBar : (pAbstractBar = new AbstractBarElements());
+		return pAbstractBar;
 	}
 	
 	public ParserRule getAbstractBarRule() {
@@ -314,7 +320,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 	//Bar:
 	//	"bar" name=ID foo+=[Foo|QualifiedNameWithOtherDelim] ("," foo+=[Foo|QualifiedNameWithOtherDelim])*;
 	public BarElements getBarAccess() {
-		return (pBar != null) ? pBar : (pBar = new BarElements());
+		return pBar;
 	}
 	
 	public ParserRule getBarRule() {
@@ -324,7 +330,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 	//Foo:
 	//	"foo" name=QualifiedNameWithOtherDelim;
 	public FooElements getFooAccess() {
-		return (pFoo != null) ? pFoo : (pFoo = new FooElements());
+		return pFoo;
 	}
 	
 	public ParserRule getFooRule() {
@@ -334,7 +340,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 	//QualifiedNameWithOtherDelim:
 	//	QualifiedName ("=" QualifiedName)*;
 	public QualifiedNameWithOtherDelimElements getQualifiedNameWithOtherDelimAccess() {
-		return (pQualifiedNameWithOtherDelim != null) ? pQualifiedNameWithOtherDelim : (pQualifiedNameWithOtherDelim = new QualifiedNameWithOtherDelimElements());
+		return pQualifiedNameWithOtherDelim;
 	}
 	
 	public ParserRule getQualifiedNameWithOtherDelimRule() {
@@ -344,7 +350,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 	//QualifiedName:
 	//	ID ("." ID)*;
 	public QualifiedNameElements getQualifiedNameAccess() {
-		return (pQualifiedName != null) ? pQualifiedName : (pQualifiedName = new QualifiedNameElements());
+		return pQualifiedName;
 	}
 	
 	public ParserRule getQualifiedNameRule() {

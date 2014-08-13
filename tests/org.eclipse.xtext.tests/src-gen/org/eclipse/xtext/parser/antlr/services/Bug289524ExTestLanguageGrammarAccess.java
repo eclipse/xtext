@@ -139,19 +139,22 @@ public class Bug289524ExTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 	
 	
-	private ModelElements pModel;
-	private ModelElementElements pModelElement;
-	private ContainedElements pContained;
+	private final ModelElements pModel;
+	private final ModelElementElements pModelElement;
+	private final ContainedElements pContained;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug289524ExTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pModelElement = new ModelElementElements();
+		this.pContained = new ContainedElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -184,7 +187,7 @@ public class Bug289524ExTestLanguageGrammarAccess extends AbstractGrammarElement
 	//Model:
 	//	{Model} "Model" refs+=ModelElement*;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -194,7 +197,7 @@ public class Bug289524ExTestLanguageGrammarAccess extends AbstractGrammarElement
 	//ModelElement:
 	//	{ModelElement} (containments+=Contained | "reference" refs+=[Contained] ("$" refs+=[Contained])*)+;
 	public ModelElementElements getModelElementAccess() {
-		return (pModelElement != null) ? pModelElement : (pModelElement = new ModelElementElements());
+		return pModelElement;
 	}
 	
 	public ParserRule getModelElementRule() {
@@ -204,7 +207,7 @@ public class Bug289524ExTestLanguageGrammarAccess extends AbstractGrammarElement
 	//Contained:
 	//	"containment" name=ID;
 	public ContainedElements getContainedAccess() {
-		return (pContained != null) ? pContained : (pContained = new ContainedElements());
+		return pContained;
 	}
 	
 	public ParserRule getContainedRule() {

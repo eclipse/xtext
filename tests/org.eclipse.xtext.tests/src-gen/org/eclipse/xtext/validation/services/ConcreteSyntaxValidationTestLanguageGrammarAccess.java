@@ -2072,51 +2072,86 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		public Keyword getLit2Lit2Keyword_1_0() { return cLit2Lit2Keyword_1_0; }
 	}
 	
-	private ModelElements pModel;
-	private SimpleGroupElements pSimpleGroup;
-	private SimpleAlternativeElements pSimpleAlternative;
-	private SimpleMultiplicitiesElements pSimpleMultiplicities;
-	private GroupMultiplicitiesElements pGroupMultiplicities;
-	private AlternativeMultiplicitiesElements pAlternativeMultiplicities;
-	private AssignedActionElements pAssignedAction;
-	private AssignedActionSecondElements pAssignedActionSecond;
-	private UnassignedAction1Elements pUnassignedAction1;
-	private UnassignedAction2Elements pUnassignedAction2;
-	private UnassignedAction3Elements pUnassignedAction3;
-	private UnassignedRuleCall1Elements pUnassignedRuleCall1;
-	private UnassignedRuleCall1SubElements pUnassignedRuleCall1Sub;
-	private UnassignedRuleCall2Elements pUnassignedRuleCall2;
-	private UnassignedRuleCall2SubElements pUnassignedRuleCall2Sub;
-	private Combination1Elements pCombination1;
-	private Combination2Elements pCombination2;
-	private Combination3Elements pCombination3;
-	private Combination4Elements pCombination4;
-	private List1Elements pList1;
-	private List2Elements pList2;
-	private List3Elements pList3;
-	private List4Elements pList4;
-	private List5Elements pList5;
-	private AltList1Elements pAltList1;
-	private AltList2Elements pAltList2;
-	private TransientObjectElements pTransientObject;
-	private TransientObjectSubElements pTransientObjectSub;
-	private TransientSerializeables1Elements pTransientSerializeables1;
-	private TransientSerializeables1EnumElements unknownRuleTransientSerializeables1Enum;
-	private StaticSimplificationElements pStaticSimplification;
-	private TwoVersionElements pTwoVersion;
-	private TwoVersionNo1Elements pTwoVersionNo1;
-	private TwoVersionNo2Elements pTwoVersionNo2;
-	private Heuristic1Elements pHeuristic1;
+	private final ModelElements pModel;
+	private final SimpleGroupElements pSimpleGroup;
+	private final SimpleAlternativeElements pSimpleAlternative;
+	private final SimpleMultiplicitiesElements pSimpleMultiplicities;
+	private final GroupMultiplicitiesElements pGroupMultiplicities;
+	private final AlternativeMultiplicitiesElements pAlternativeMultiplicities;
+	private final AssignedActionElements pAssignedAction;
+	private final AssignedActionSecondElements pAssignedActionSecond;
+	private final UnassignedAction1Elements pUnassignedAction1;
+	private final UnassignedAction2Elements pUnassignedAction2;
+	private final UnassignedAction3Elements pUnassignedAction3;
+	private final UnassignedRuleCall1Elements pUnassignedRuleCall1;
+	private final UnassignedRuleCall1SubElements pUnassignedRuleCall1Sub;
+	private final UnassignedRuleCall2Elements pUnassignedRuleCall2;
+	private final UnassignedRuleCall2SubElements pUnassignedRuleCall2Sub;
+	private final Combination1Elements pCombination1;
+	private final Combination2Elements pCombination2;
+	private final Combination3Elements pCombination3;
+	private final Combination4Elements pCombination4;
+	private final List1Elements pList1;
+	private final List2Elements pList2;
+	private final List3Elements pList3;
+	private final List4Elements pList4;
+	private final List5Elements pList5;
+	private final AltList1Elements pAltList1;
+	private final AltList2Elements pAltList2;
+	private final TransientObjectElements pTransientObject;
+	private final TransientObjectSubElements pTransientObjectSub;
+	private final TransientSerializeables1Elements pTransientSerializeables1;
+	private final TransientSerializeables1EnumElements unknownRuleTransientSerializeables1Enum;
+	private final StaticSimplificationElements pStaticSimplification;
+	private final TwoVersionElements pTwoVersion;
+	private final TwoVersionNo1Elements pTwoVersionNo1;
+	private final TwoVersionNo2Elements pTwoVersionNo2;
+	private final Heuristic1Elements pHeuristic1;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public ConcreteSyntaxValidationTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pSimpleGroup = new SimpleGroupElements();
+		this.pSimpleAlternative = new SimpleAlternativeElements();
+		this.pSimpleMultiplicities = new SimpleMultiplicitiesElements();
+		this.pGroupMultiplicities = new GroupMultiplicitiesElements();
+		this.pAlternativeMultiplicities = new AlternativeMultiplicitiesElements();
+		this.pAssignedAction = new AssignedActionElements();
+		this.pAssignedActionSecond = new AssignedActionSecondElements();
+		this.pUnassignedAction1 = new UnassignedAction1Elements();
+		this.pUnassignedAction2 = new UnassignedAction2Elements();
+		this.pUnassignedAction3 = new UnassignedAction3Elements();
+		this.pUnassignedRuleCall1 = new UnassignedRuleCall1Elements();
+		this.pUnassignedRuleCall1Sub = new UnassignedRuleCall1SubElements();
+		this.pUnassignedRuleCall2 = new UnassignedRuleCall2Elements();
+		this.pUnassignedRuleCall2Sub = new UnassignedRuleCall2SubElements();
+		this.pCombination1 = new Combination1Elements();
+		this.pCombination2 = new Combination2Elements();
+		this.pCombination3 = new Combination3Elements();
+		this.pCombination4 = new Combination4Elements();
+		this.pList1 = new List1Elements();
+		this.pList2 = new List2Elements();
+		this.pList3 = new List3Elements();
+		this.pList4 = new List4Elements();
+		this.pList5 = new List5Elements();
+		this.pAltList1 = new AltList1Elements();
+		this.pAltList2 = new AltList2Elements();
+		this.pTransientObject = new TransientObjectElements();
+		this.pTransientObjectSub = new TransientObjectSubElements();
+		this.pTransientSerializeables1 = new TransientSerializeables1Elements();
+		this.unknownRuleTransientSerializeables1Enum = new TransientSerializeables1EnumElements();
+		this.pStaticSimplification = new StaticSimplificationElements();
+		this.pTwoVersion = new TwoVersionElements();
+		this.pTwoVersionNo1 = new TwoVersionNo1Elements();
+		this.pTwoVersionNo2 = new TwoVersionNo2Elements();
+		this.pHeuristic1 = new Heuristic1Elements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -2154,7 +2189,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//	x22=AltList1 | x23=AltList2 | x24=TransientObject | x25=TransientSerializeables1 | x26=StaticSimplification |
 	//	x27=TwoVersion | x28=Heuristic1;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -2164,7 +2199,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//SimpleGroup:
 	//	"#1" val1=ID val2=ID;
 	public SimpleGroupElements getSimpleGroupAccess() {
-		return (pSimpleGroup != null) ? pSimpleGroup : (pSimpleGroup = new SimpleGroupElements());
+		return pSimpleGroup;
 	}
 	
 	public ParserRule getSimpleGroupRule() {
@@ -2174,7 +2209,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//SimpleAlternative:
 	//	"#2" ("kw1" val1=ID | "kw2" val2=ID);
 	public SimpleAlternativeElements getSimpleAlternativeAccess() {
-		return (pSimpleAlternative != null) ? pSimpleAlternative : (pSimpleAlternative = new SimpleAlternativeElements());
+		return pSimpleAlternative;
 	}
 	
 	public ParserRule getSimpleAlternativeRule() {
@@ -2184,7 +2219,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//SimpleMultiplicities:
 	//	"#3" val1=ID "kw1" val2=ID? "kw2" val3+=ID+ "kw3" val4+=ID*;
 	public SimpleMultiplicitiesElements getSimpleMultiplicitiesAccess() {
-		return (pSimpleMultiplicities != null) ? pSimpleMultiplicities : (pSimpleMultiplicities = new SimpleMultiplicitiesElements());
+		return pSimpleMultiplicities;
 	}
 	
 	public ParserRule getSimpleMultiplicitiesRule() {
@@ -2194,7 +2229,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//GroupMultiplicities:
 	//	"#4" val1=ID "kw1" (val2=ID val3=ID)? "kw2" (val4+=ID val5+=ID)+ "kw3" (val6+=ID val7+=ID)*;
 	public GroupMultiplicitiesElements getGroupMultiplicitiesAccess() {
-		return (pGroupMultiplicities != null) ? pGroupMultiplicities : (pGroupMultiplicities = new GroupMultiplicitiesElements());
+		return pGroupMultiplicities;
 	}
 	
 	public ParserRule getGroupMultiplicitiesRule() {
@@ -2204,7 +2239,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//AlternativeMultiplicities:
 	//	"#5" (val2=ID | "kw1" val3=ID)? "kw2" (val4+=ID | "kw3" val5+=ID)+ "kw4" (val6+=ID | "kw5" val7+=ID)*;
 	public AlternativeMultiplicitiesElements getAlternativeMultiplicitiesAccess() {
-		return (pAlternativeMultiplicities != null) ? pAlternativeMultiplicities : (pAlternativeMultiplicities = new AlternativeMultiplicitiesElements());
+		return pAlternativeMultiplicities;
 	}
 	
 	public ParserRule getAlternativeMultiplicitiesRule() {
@@ -2214,7 +2249,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//AssignedAction:
 	//	"#6" val1=ID ({AssignedAction.child=current} val1=ID)+;
 	public AssignedActionElements getAssignedActionAccess() {
-		return (pAssignedAction != null) ? pAssignedAction : (pAssignedAction = new AssignedActionElements());
+		return pAssignedAction;
 	}
 	
 	public ParserRule getAssignedActionRule() {
@@ -2224,7 +2259,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//AssignedActionSecond returns AssignedAction:
 	//	"#7" val1=ID "kw1" val2=ID;
 	public AssignedActionSecondElements getAssignedActionSecondAccess() {
-		return (pAssignedActionSecond != null) ? pAssignedActionSecond : (pAssignedActionSecond = new AssignedActionSecondElements());
+		return pAssignedActionSecond;
 	}
 	
 	public ParserRule getAssignedActionSecondRule() {
@@ -2234,7 +2269,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//UnassignedAction1:
 	//	{UnassignedAction1} "#8" val1=ID val2=ID?;
 	public UnassignedAction1Elements getUnassignedAction1Access() {
-		return (pUnassignedAction1 != null) ? pUnassignedAction1 : (pUnassignedAction1 = new UnassignedAction1Elements());
+		return pUnassignedAction1;
 	}
 	
 	public ParserRule getUnassignedAction1Rule() {
@@ -2244,7 +2279,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//UnassignedAction2:
 	//	{UnassignedAction2Sub} "#9" val1=ID val2=ID?;
 	public UnassignedAction2Elements getUnassignedAction2Access() {
-		return (pUnassignedAction2 != null) ? pUnassignedAction2 : (pUnassignedAction2 = new UnassignedAction2Elements());
+		return pUnassignedAction2;
 	}
 	
 	public ParserRule getUnassignedAction2Rule() {
@@ -2254,7 +2289,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//UnassignedAction3:
 	//	"#10" ("kw1" {UnassignedAction2Sub1} | "kw2" {UnassignedAction2Sub2}) val1=ID val2=ID?;
 	public UnassignedAction3Elements getUnassignedAction3Access() {
-		return (pUnassignedAction3 != null) ? pUnassignedAction3 : (pUnassignedAction3 = new UnassignedAction3Elements());
+		return pUnassignedAction3;
 	}
 	
 	public ParserRule getUnassignedAction3Rule() {
@@ -2264,7 +2299,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//UnassignedRuleCall1:
 	//	"#11" UnassignedRuleCall1Sub val2=ID;
 	public UnassignedRuleCall1Elements getUnassignedRuleCall1Access() {
-		return (pUnassignedRuleCall1 != null) ? pUnassignedRuleCall1 : (pUnassignedRuleCall1 = new UnassignedRuleCall1Elements());
+		return pUnassignedRuleCall1;
 	}
 	
 	public ParserRule getUnassignedRuleCall1Rule() {
@@ -2274,7 +2309,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//UnassignedRuleCall1Sub:
 	//	val1=ID;
 	public UnassignedRuleCall1SubElements getUnassignedRuleCall1SubAccess() {
-		return (pUnassignedRuleCall1Sub != null) ? pUnassignedRuleCall1Sub : (pUnassignedRuleCall1Sub = new UnassignedRuleCall1SubElements());
+		return pUnassignedRuleCall1Sub;
 	}
 	
 	public ParserRule getUnassignedRuleCall1SubRule() {
@@ -2284,7 +2319,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//UnassignedRuleCall2:
 	//	"#12" UnassignedRuleCall2Sub val2=ID;
 	public UnassignedRuleCall2Elements getUnassignedRuleCall2Access() {
-		return (pUnassignedRuleCall2 != null) ? pUnassignedRuleCall2 : (pUnassignedRuleCall2 = new UnassignedRuleCall2Elements());
+		return pUnassignedRuleCall2;
 	}
 	
 	public ParserRule getUnassignedRuleCall2Rule() {
@@ -2294,7 +2329,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//UnassignedRuleCall2Sub:
 	//	{UnassignedRuleCall2SubAction};
 	public UnassignedRuleCall2SubElements getUnassignedRuleCall2SubAccess() {
-		return (pUnassignedRuleCall2Sub != null) ? pUnassignedRuleCall2Sub : (pUnassignedRuleCall2Sub = new UnassignedRuleCall2SubElements());
+		return pUnassignedRuleCall2Sub;
 	}
 	
 	public ParserRule getUnassignedRuleCall2SubRule() {
@@ -2304,7 +2339,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//Combination1:
 	//	"#13" val1=ID ("kw1" val2=ID ("kw2" val3=ID | val4=ID))?;
 	public Combination1Elements getCombination1Access() {
-		return (pCombination1 != null) ? pCombination1 : (pCombination1 = new Combination1Elements());
+		return pCombination1;
 	}
 	
 	public ParserRule getCombination1Rule() {
@@ -2314,7 +2349,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//Combination2:
 	//	"#14" val1=ID ("kw1" val2=ID | (val3+=ID val4+=ID)*);
 	public Combination2Elements getCombination2Access() {
-		return (pCombination2 != null) ? pCombination2 : (pCombination2 = new Combination2Elements());
+		return pCombination2;
 	}
 	
 	public ParserRule getCombination2Rule() {
@@ -2324,7 +2359,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//Combination3:
 	//	"#15" (val1=ID | val2=INT | val3=STRING)*;
 	public Combination3Elements getCombination3Access() {
-		return (pCombination3 != null) ? pCombination3 : (pCombination3 = new Combination3Elements());
+		return pCombination3;
 	}
 	
 	public ParserRule getCombination3Rule() {
@@ -2334,7 +2369,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//Combination4:
 	//	"#16" ("group" val1+=ID val2+=ID val3+=ID)+;
 	public Combination4Elements getCombination4Access() {
-		return (pCombination4 != null) ? pCombination4 : (pCombination4 = new Combination4Elements());
+		return pCombination4;
 	}
 	
 	public ParserRule getCombination4Rule() {
@@ -2344,7 +2379,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//List1:
 	//	"#17" val1+=ID ("," val1+=ID)*;
 	public List1Elements getList1Access() {
-		return (pList1 != null) ? pList1 : (pList1 = new List1Elements());
+		return pList1;
 	}
 	
 	public ParserRule getList1Rule() {
@@ -2354,7 +2389,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//List2:
 	//	"#18" (val1+=ID ("," val1+=ID)*)?;
 	public List2Elements getList2Access() {
-		return (pList2 != null) ? pList2 : (pList2 = new List2Elements());
+		return pList2;
 	}
 	
 	public ParserRule getList2Rule() {
@@ -2364,7 +2399,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//List3:
 	//	"#19" (val1+=ID ("," val1+=ID)*) | "kw3" val2=ID;
 	public List3Elements getList3Access() {
-		return (pList3 != null) ? pList3 : (pList3 = new List3Elements());
+		return pList3;
 	}
 	
 	public ParserRule getList3Rule() {
@@ -2374,7 +2409,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//List4:
 	//	"#20" val1+=ID ("," val1+=ID)* "kw3" val2=ID;
 	public List4Elements getList4Access() {
-		return (pList4 != null) ? pList4 : (pList4 = new List4Elements());
+		return pList4;
 	}
 	
 	public ParserRule getList4Rule() {
@@ -2384,7 +2419,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//List5:
 	//	"#21" (val1+=ID ("," val1+=ID)* "kw3" val2=ID | val3=ID);
 	public List5Elements getList5Access() {
-		return (pList5 != null) ? pList5 : (pList5 = new List5Elements());
+		return pList5;
 	}
 	
 	public ParserRule getList5Rule() {
@@ -2394,7 +2429,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//AltList1:
 	//	"#22" (val1=ID val2=ID | "kw1" val1=ID val3=ID | "kw2" val1=ID val4=ID?);
 	public AltList1Elements getAltList1Access() {
-		return (pAltList1 != null) ? pAltList1 : (pAltList1 = new AltList1Elements());
+		return pAltList1;
 	}
 	
 	public ParserRule getAltList1Rule() {
@@ -2404,7 +2439,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//AltList2:
 	//	"#23" (val1+=ID val2=ID | "kw" val1+=ID ("," val1+=ID)* val3=ID);
 	public AltList2Elements getAltList2Access() {
-		return (pAltList2 != null) ? pAltList2 : (pAltList2 = new AltList2Elements());
+		return pAltList2;
 	}
 	
 	public ParserRule getAltList2Rule() {
@@ -2414,7 +2449,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//TransientObject:
 	//	"#24" (val1=ID nested=TransientObjectSub)?;
 	public TransientObjectElements getTransientObjectAccess() {
-		return (pTransientObject != null) ? pTransientObject : (pTransientObject = new TransientObjectElements());
+		return pTransientObject;
 	}
 	
 	public ParserRule getTransientObjectRule() {
@@ -2424,7 +2459,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//TransientObjectSub:
 	//	val2=ID val3=ID;
 	public TransientObjectSubElements getTransientObjectSubAccess() {
-		return (pTransientObjectSub != null) ? pTransientObjectSub : (pTransientObjectSub = new TransientObjectSubElements());
+		return pTransientObjectSub;
 	}
 	
 	public ParserRule getTransientObjectSubRule() {
@@ -2434,7 +2469,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//TransientSerializeables1:
 	//	"#25" (val1=ID enum1=TransientSerializeables1Enum)? (val2=ID int1=INT)?;
 	public TransientSerializeables1Elements getTransientSerializeables1Access() {
-		return (pTransientSerializeables1 != null) ? pTransientSerializeables1 : (pTransientSerializeables1 = new TransientSerializeables1Elements());
+		return pTransientSerializeables1;
 	}
 	
 	public ParserRule getTransientSerializeables1Rule() {
@@ -2444,7 +2479,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//enum TransientSerializeables1Enum:
 	//	lit1 | lit2;
 	public TransientSerializeables1EnumElements getTransientSerializeables1EnumAccess() {
-		return (unknownRuleTransientSerializeables1Enum != null) ? unknownRuleTransientSerializeables1Enum : (unknownRuleTransientSerializeables1Enum = new TransientSerializeables1EnumElements());
+		return unknownRuleTransientSerializeables1Enum;
 	}
 	
 	public EnumRule getTransientSerializeables1EnumRule() {
@@ -2454,7 +2489,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//StaticSimplification:
 	//	"#26" ("kw1" | {EmptyAlternativeSub} | val1=ID) ("kw2" | val2=ID) ("kw3" ("kw4" val3=ID+)?);
 	public StaticSimplificationElements getStaticSimplificationAccess() {
-		return (pStaticSimplification != null) ? pStaticSimplification : (pStaticSimplification = new StaticSimplificationElements());
+		return pStaticSimplification;
 	}
 	
 	public ParserRule getStaticSimplificationRule() {
@@ -2464,7 +2499,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//TwoVersion:
 	//	"#27" (TwoVersionNo1 | TwoVersionNo2);
 	public TwoVersionElements getTwoVersionAccess() {
-		return (pTwoVersion != null) ? pTwoVersion : (pTwoVersion = new TwoVersionElements());
+		return pTwoVersion;
 	}
 	
 	public ParserRule getTwoVersionRule() {
@@ -2474,7 +2509,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//TwoVersionNo1 returns TwoVersion:
 	//	shared1=ID? shared2=ID "short" (shared3+=ID shared3+=ID*)? "one" version1=ID?;
 	public TwoVersionNo1Elements getTwoVersionNo1Access() {
-		return (pTwoVersionNo1 != null) ? pTwoVersionNo1 : (pTwoVersionNo1 = new TwoVersionNo1Elements());
+		return pTwoVersionNo1;
 	}
 	
 	public ParserRule getTwoVersionNo1Rule() {
@@ -2484,7 +2519,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//TwoVersionNo2 returns TwoVersion:
 	//	shared1=ID? shared2=ID "long" (shared3+=ID shared3+=ID*)? "extra" extra1=ID? (extra2=ID extra3=ID | "two" extra4=ID)?;
 	public TwoVersionNo2Elements getTwoVersionNo2Access() {
-		return (pTwoVersionNo2 != null) ? pTwoVersionNo2 : (pTwoVersionNo2 = new TwoVersionNo2Elements());
+		return pTwoVersionNo2;
 	}
 	
 	public ParserRule getTwoVersionNo2Rule() {
@@ -2494,7 +2529,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//Heuristic1:
 	//	"#28" ("kw1" a+=ID b+=ID)* ("kw2" a+=ID c+=ID)* ("kw3" b+=ID c+=ID)*;
 	public Heuristic1Elements getHeuristic1Access() {
-		return (pHeuristic1 != null) ? pHeuristic1 : (pHeuristic1 = new Heuristic1Elements());
+		return pHeuristic1;
 	}
 	
 	public ParserRule getHeuristic1Rule() {

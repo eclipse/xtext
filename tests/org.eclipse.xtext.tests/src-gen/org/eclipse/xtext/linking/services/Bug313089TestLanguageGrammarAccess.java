@@ -139,19 +139,22 @@ public class Bug313089TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
-	private FooElements pFoo;
-	private BarElements pBar;
-	private BazElements pBaz;
+	private final FooElements pFoo;
+	private final BarElements pBar;
+	private final BazElements pBaz;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug313089TestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pFoo = new FooElements();
+		this.pBar = new BarElements();
+		this.pBaz = new BazElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -184,7 +187,7 @@ public class Bug313089TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Foo:
 	//	name=ID (bar=Bar | baz=Baz) ref=[Foo];
 	public FooElements getFooAccess() {
-		return (pFoo != null) ? pFoo : (pFoo = new FooElements());
+		return pFoo;
 	}
 	
 	public ParserRule getFooRule() {
@@ -194,7 +197,7 @@ public class Bug313089TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Bar:
 	//	{Bar} name=ID;
 	public BarElements getBarAccess() {
-		return (pBar != null) ? pBar : (pBar = new BarElements());
+		return pBar;
 	}
 	
 	public ParserRule getBarRule() {
@@ -204,7 +207,7 @@ public class Bug313089TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Baz:
 	//	"baz" name=ID ({Baz.child=current} "baz" name=ID)*;
 	public BazElements getBazAccess() {
-		return (pBaz != null) ? pBaz : (pBaz = new BazElements());
+		return pBaz;
 	}
 	
 	public ParserRule getBazRule() {

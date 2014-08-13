@@ -243,25 +243,34 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
-	private ModelElements pModel;
-	private ExpressionElements pExpression;
-	private PreopElements pPreop;
-	private PostopElements pPostop;
-	private VariableElements pVariable;
-	private DataTypeExpressionElements pDataTypeExpression;
-	private DataTypePreopElements pDataTypePreop;
-	private DataTypePostopElements pDataTypePostop;
-	private DataTypeVariableElements pDataTypeVariable;
+	private final ModelElements pModel;
+	private final ExpressionElements pExpression;
+	private final PreopElements pPreop;
+	private final PostopElements pPostop;
+	private final VariableElements pVariable;
+	private final DataTypeExpressionElements pDataTypeExpression;
+	private final DataTypePreopElements pDataTypePreop;
+	private final DataTypePostopElements pDataTypePostop;
+	private final DataTypeVariableElements pDataTypeVariable;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug296889TestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pExpression = new ExpressionElements();
+		this.pPreop = new PreopElements();
+		this.pPostop = new PostopElements();
+		this.pVariable = new VariableElements();
+		this.pDataTypeExpression = new DataTypeExpressionElements();
+		this.pDataTypePreop = new DataTypePreopElements();
+		this.pDataTypePostop = new DataTypePostopElements();
+		this.pDataTypeVariable = new DataTypeVariableElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -294,7 +303,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Model:
 	//	"Model" expressions+=Expression* | "DataType" values+=DataTypeExpression*;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -304,7 +313,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Expression:
 	//	Postop | Preop;
 	public ExpressionElements getExpressionAccess() {
-		return (pExpression != null) ? pExpression : (pExpression = new ExpressionElements());
+		return pExpression;
 	}
 	
 	public ParserRule getExpressionRule() {
@@ -314,7 +323,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Preop returns Expression:
 	//	{Preop} functionName="--" expr=Variable;
 	public PreopElements getPreopAccess() {
-		return (pPreop != null) ? pPreop : (pPreop = new PreopElements());
+		return pPreop;
 	}
 	
 	public ParserRule getPreopRule() {
@@ -324,7 +333,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Postop returns Expression:
 	//	Variable ({Postop.expr=current} functionName="--")?;
 	public PostopElements getPostopAccess() {
-		return (pPostop != null) ? pPostop : (pPostop = new PostopElements());
+		return pPostop;
 	}
 	
 	public ParserRule getPostopRule() {
@@ -334,7 +343,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Variable returns Expression:
 	//	{Variable} name=ID;
 	public VariableElements getVariableAccess() {
-		return (pVariable != null) ? pVariable : (pVariable = new VariableElements());
+		return pVariable;
 	}
 	
 	public ParserRule getVariableRule() {
@@ -344,7 +353,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//DataTypeExpression:
 	//	DataTypePostop | DataTypePreop;
 	public DataTypeExpressionElements getDataTypeExpressionAccess() {
-		return (pDataTypeExpression != null) ? pDataTypeExpression : (pDataTypeExpression = new DataTypeExpressionElements());
+		return pDataTypeExpression;
 	}
 	
 	public ParserRule getDataTypeExpressionRule() {
@@ -354,7 +363,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//DataTypePreop:
 	//	"--" DataTypeVariable;
 	public DataTypePreopElements getDataTypePreopAccess() {
-		return (pDataTypePreop != null) ? pDataTypePreop : (pDataTypePreop = new DataTypePreopElements());
+		return pDataTypePreop;
 	}
 	
 	public ParserRule getDataTypePreopRule() {
@@ -364,7 +373,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//DataTypePostop:
 	//	DataTypeVariable "--"?;
 	public DataTypePostopElements getDataTypePostopAccess() {
-		return (pDataTypePostop != null) ? pDataTypePostop : (pDataTypePostop = new DataTypePostopElements());
+		return pDataTypePostop;
 	}
 	
 	public ParserRule getDataTypePostopRule() {
@@ -374,7 +383,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//DataTypeVariable:
 	//	ID;
 	public DataTypeVariableElements getDataTypeVariableAccess() {
-		return (pDataTypeVariable != null) ? pDataTypeVariable : (pDataTypeVariable = new DataTypeVariableElements());
+		return pDataTypeVariable;
 	}
 	
 	public ParserRule getDataTypeVariableRule() {

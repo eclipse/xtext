@@ -175,25 +175,34 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
-	private ModelElements pModel;
-	private ExpressionElements pExpression;
-	private LiteralElements pLiteral;
-	private IntLiteralElements pIntLiteral;
-	private RealLiteralElements pRealLiteral;
-	private IntValueElements pIntValue;
-	private RealValueElements pRealValue;
-	private RealElements pReal;
-	private TerminalRule tEXT_INT;
+	private final ModelElements pModel;
+	private final ExpressionElements pExpression;
+	private final LiteralElements pLiteral;
+	private final IntLiteralElements pIntLiteral;
+	private final RealLiteralElements pRealLiteral;
+	private final IntValueElements pIntValue;
+	private final RealValueElements pRealValue;
+	private final RealElements pReal;
+	private final TerminalRule tEXT_INT;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug297105TestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pExpression = new ExpressionElements();
+		this.pLiteral = new LiteralElements();
+		this.pIntLiteral = new IntLiteralElements();
+		this.pRealLiteral = new RealLiteralElements();
+		this.pIntValue = new IntValueElements();
+		this.pRealValue = new RealValueElements();
+		this.pReal = new RealElements();
+		this.tEXT_INT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "EXT_INT");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -226,7 +235,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Model:
 	//	expressions+=Expression*;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -236,7 +245,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Expression:
 	//	left=Literal "+" right=Literal;
 	public ExpressionElements getExpressionAccess() {
-		return (pExpression != null) ? pExpression : (pExpression = new ExpressionElements());
+		return pExpression;
 	}
 	
 	public ParserRule getExpressionRule() {
@@ -246,7 +255,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Literal:
 	//	RealLiteral | IntLiteral;
 	public LiteralElements getLiteralAccess() {
-		return (pLiteral != null) ? pLiteral : (pLiteral = new LiteralElements());
+		return pLiteral;
 	}
 	
 	public ParserRule getLiteralRule() {
@@ -256,7 +265,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//IntLiteral:
 	//	value=IntValue;
 	public IntLiteralElements getIntLiteralAccess() {
-		return (pIntLiteral != null) ? pIntLiteral : (pIntLiteral = new IntLiteralElements());
+		return pIntLiteral;
 	}
 	
 	public ParserRule getIntLiteralRule() {
@@ -266,7 +275,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//RealLiteral:
 	//	value=RealValue;
 	public RealLiteralElements getRealLiteralAccess() {
-		return (pRealLiteral != null) ? pRealLiteral : (pRealLiteral = new RealLiteralElements());
+		return pRealLiteral;
 	}
 	
 	public ParserRule getRealLiteralRule() {
@@ -276,7 +285,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//IntValue:
 	//	INT;
 	public IntValueElements getIntValueAccess() {
-		return (pIntValue != null) ? pIntValue : (pIntValue = new IntValueElements());
+		return pIntValue;
 	}
 	
 	public ParserRule getIntValueRule() {
@@ -286,7 +295,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//RealValue:
 	//	Real;
 	public RealValueElements getRealValueAccess() {
-		return (pRealValue != null) ? pRealValue : (pRealValue = new RealValueElements());
+		return pRealValue;
 	}
 	
 	public ParserRule getRealValueRule() {
@@ -296,7 +305,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Real hidden():
 	//	INT? "." (EXT_INT | INT);
 	public RealElements getRealAccess() {
-		return (pReal != null) ? pReal : (pReal = new RealElements());
+		return pReal;
 	}
 	
 	public ParserRule getRealRule() {
@@ -306,7 +315,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//terminal EXT_INT:
 	//	INT ("e" | "E") ("-" | "+") INT;
 	public TerminalRule getEXT_INTRule() {
-		return (tEXT_INT != null) ? tEXT_INT : (tEXT_INT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "EXT_INT"));
+		return tEXT_INT;
 	} 
 
 	//terminal ID:

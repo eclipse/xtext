@@ -243,21 +243,26 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 	}
 	
 	
-	private ModelElements pModel;
-	private ElementElements pElement;
-	private DataTypeElements pDataType;
-	private ExpressionElements pExpression;
-	private SimpleTermElements pSimpleTerm;
+	private final ModelElements pModel;
+	private final ElementElements pElement;
+	private final DataTypeElements pDataType;
+	private final ExpressionElements pExpression;
+	private final SimpleTermElements pSimpleTerm;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public BacktrackingBug325745TestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pElement = new ElementElements();
+		this.pDataType = new DataTypeElements();
+		this.pExpression = new ExpressionElements();
+		this.pSimpleTerm = new SimpleTermElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -290,7 +295,7 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 	//Model:
 	//	{Model} fields+=Element+;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -300,7 +305,7 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 	//Element:
 	//	name=ID dataType=DataType? expression=Expression ".";
 	public ElementElements getElementAccess() {
-		return (pElement != null) ? pElement : (pElement = new ElementElements());
+		return pElement;
 	}
 	
 	public ParserRule getElementRule() {
@@ -310,7 +315,7 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 	//DataType:
 	//	baseType=ID (":=" defaultValue=STRING)?;
 	public DataTypeElements getDataTypeAccess() {
-		return (pDataType != null) ? pDataType : (pDataType = new DataTypeElements());
+		return pDataType;
 	}
 	
 	public ParserRule getDataTypeRule() {
@@ -320,7 +325,7 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 	//Expression:
 	//	{Expression} ("["? & prefix=STRING?) ("["? terms+=SimpleTerm "]"?)* ("]"? & postfix=STRING?);
 	public ExpressionElements getExpressionAccess() {
-		return (pExpression != null) ? pExpression : (pExpression = new ExpressionElements());
+		return pExpression;
 	}
 	
 	public ParserRule getExpressionRule() {
@@ -330,7 +335,7 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 	//SimpleTerm:
 	//	lineCount=INT "*"? charCount=INT? "!"? charSet=ID? | refChar=ID;
 	public SimpleTermElements getSimpleTermAccess() {
-		return (pSimpleTerm != null) ? pSimpleTerm : (pSimpleTerm = new SimpleTermElements());
+		return pSimpleTerm;
 	}
 	
 	public ParserRule getSimpleTermRule() {

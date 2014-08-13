@@ -328,22 +328,28 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	
-	private ProgramElements pProgram;
-	private DefineVariablesElements pDefineVariables;
-	private DefineVariableElements pDefineVariable;
-	private NVariableAccessElements pNVariableAccess;
-	private StatementElements pStatement;
-	private Expression_VariableNameElements pExpression_VariableName;
+	private final ProgramElements pProgram;
+	private final DefineVariablesElements pDefineVariables;
+	private final DefineVariableElements pDefineVariable;
+	private final NVariableAccessElements pNVariableAccess;
+	private final StatementElements pStatement;
+	private final Expression_VariableNameElements pExpression_VariableName;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug385636GrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pProgram = new ProgramElements();
+		this.pDefineVariables = new DefineVariablesElements();
+		this.pDefineVariable = new DefineVariableElements();
+		this.pNVariableAccess = new NVariableAccessElements();
+		this.pStatement = new StatementElements();
+		this.pExpression_VariableName = new Expression_VariableNameElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -376,7 +382,7 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 	//Program:
 	//	define=DefineVariables statements+=Statement* "END";
 	public ProgramElements getProgramAccess() {
-		return (pProgram != null) ? pProgram : (pProgram = new ProgramElements());
+		return pProgram;
 	}
 	
 	public ParserRule getProgramRule() {
@@ -386,7 +392,7 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 	//DefineVariables:
 	//	"VARIABLES" variables+=DefineVariable+ "ENDVARIABLES";
 	public DefineVariablesElements getDefineVariablesAccess() {
-		return (pDefineVariables != null) ? pDefineVariables : (pDefineVariables = new DefineVariablesElements());
+		return pDefineVariables;
 	}
 	
 	public ParserRule getDefineVariablesRule() {
@@ -396,7 +402,7 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 	//DefineVariable:
 	//	"NAME" name=ID;
 	public DefineVariableElements getDefineVariableAccess() {
-		return (pDefineVariable != null) ? pDefineVariable : (pDefineVariable = new DefineVariableElements());
+		return pDefineVariable;
 	}
 	
 	public ParserRule getDefineVariableRule() {
@@ -406,7 +412,7 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 	//NVariableAccess:
 	//	variable=[DefineVariable];
 	public NVariableAccessElements getNVariableAccessAccess() {
-		return (pNVariableAccess != null) ? pNVariableAccess : (pNVariableAccess = new NVariableAccessElements());
+		return pNVariableAccess;
 	}
 	
 	public ParserRule getNVariableAccessRule() {
@@ -421,7 +427,7 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 	//	{Expression_Not_Equal.left=current} right=Expression_VariableName | ("C6" "C7") {Expression_Not_Less.left=current}
 	//	right=Expression_VariableName | ("C6" "C8") {Expression_Not_Greater.left=current} right=Expression_VariableName)*;
 	public StatementElements getStatementAccess() {
-		return (pStatement != null) ? pStatement : (pStatement = new StatementElements());
+		return pStatement;
 	}
 	
 	public ParserRule getStatementRule() {
@@ -431,7 +437,7 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 	//Expression_VariableName:
 	//	variable=NVariableAccess;
 	public Expression_VariableNameElements getExpression_VariableNameAccess() {
-		return (pExpression_VariableName != null) ? pExpression_VariableName : (pExpression_VariableName = new Expression_VariableNameElements());
+		return pExpression_VariableName;
 	}
 	
 	public ParserRule getExpression_VariableNameRule() {

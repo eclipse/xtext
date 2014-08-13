@@ -83,18 +83,20 @@ public class QualifiedNameTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 	
 	
-	private ElementElements pElement;
-	private QualifiedNameElements pQualifiedName;
+	private final ElementElements pElement;
+	private final QualifiedNameElements pQualifiedName;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public QualifiedNameTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pElement = new ElementElements();
+		this.pQualifiedName = new QualifiedNameElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -127,7 +129,7 @@ public class QualifiedNameTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//Element:
 	//	"keyword" qualifiedName=QualifiedName;
 	public ElementElements getElementAccess() {
-		return (pElement != null) ? pElement : (pElement = new ElementElements());
+		return pElement;
 	}
 	
 	public ParserRule getElementRule() {
@@ -137,7 +139,7 @@ public class QualifiedNameTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//QualifiedName:
 	//	ID ("." ID)* ("." "*")?;
 	public QualifiedNameElements getQualifiedNameAccess() {
-		return (pQualifiedName != null) ? pQualifiedName : (pQualifiedName = new QualifiedNameElements());
+		return pQualifiedName;
 	}
 	
 	public ParserRule getQualifiedNameRule() {

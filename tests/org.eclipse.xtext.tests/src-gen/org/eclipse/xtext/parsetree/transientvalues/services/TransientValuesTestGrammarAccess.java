@@ -159,20 +159,24 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 	}
 	
 	
-	private RootElements pRoot;
-	private TestRequiredElements pTestRequired;
-	private TestOptionalElements pTestOptional;
-	private TestListElements pTestList;
+	private final RootElements pRoot;
+	private final TestRequiredElements pTestRequired;
+	private final TestOptionalElements pTestOptional;
+	private final TestListElements pTestList;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public TransientValuesTestGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pRoot = new RootElements();
+		this.pTestRequired = new TestRequiredElements();
+		this.pTestOptional = new TestOptionalElements();
+		this.pTestList = new TestListElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -205,7 +209,7 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 	//Root:
 	//	"test" (TestRequired | TestOptional | TestList);
 	public RootElements getRootAccess() {
-		return (pRoot != null) ? pRoot : (pRoot = new RootElements());
+		return pRoot;
 	}
 	
 	public ParserRule getRootRule() {
@@ -215,7 +219,7 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 	//TestRequired:
 	//	{TestRequired} "required" required1=INT required2=INT;
 	public TestRequiredElements getTestRequiredAccess() {
-		return (pTestRequired != null) ? pTestRequired : (pTestRequired = new TestRequiredElements());
+		return pTestRequired;
 	}
 	
 	public ParserRule getTestRequiredRule() {
@@ -225,7 +229,7 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 	//TestOptional:
 	//	{TestOptional} "optional" opt1=INT? (":" opt2=INT)?;
 	public TestOptionalElements getTestOptionalAccess() {
-		return (pTestOptional != null) ? pTestOptional : (pTestOptional = new TestOptionalElements());
+		return pTestOptional;
 	}
 	
 	public ParserRule getTestOptionalRule() {
@@ -235,7 +239,7 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 	//TestList:
 	//	{TestList} "list" item+=INT*;
 	public TestListElements getTestListAccess() {
-		return (pTestList != null) ? pTestList : (pTestList = new TestListElements());
+		return pTestList;
 	}
 	
 	public ParserRule getTestListRule() {

@@ -607,29 +607,42 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
-	private ModelElements pModel;
-	private BaseAttributeElements pBaseAttribute;
-	private AttributeElements pAttribute;
-	private MasterElements pMaster;
-	private ActionAttributeElements pActionAttribute;
-	private SimpleAttributeElements pSimpleAttribute;
-	private RuleCallAttributeElements pRuleCallAttribute;
-	private CallMeElements pCallMe;
-	private RuleCallAttribute2Elements pRuleCallAttribute2;
-	private CallMe2Elements pCallMe2;
-	private RuleCallAttribute3Elements pRuleCallAttribute3;
-	private CallMe3Elements pCallMe3;
-	private CallMe4Elements pCallMe4;
+	private final ModelElements pModel;
+	private final BaseAttributeElements pBaseAttribute;
+	private final AttributeElements pAttribute;
+	private final MasterElements pMaster;
+	private final ActionAttributeElements pActionAttribute;
+	private final SimpleAttributeElements pSimpleAttribute;
+	private final RuleCallAttributeElements pRuleCallAttribute;
+	private final CallMeElements pCallMe;
+	private final RuleCallAttribute2Elements pRuleCallAttribute2;
+	private final CallMe2Elements pCallMe2;
+	private final RuleCallAttribute3Elements pRuleCallAttribute3;
+	private final CallMe3Elements pCallMe3;
+	private final CallMe4Elements pCallMe4;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug287988TestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pBaseAttribute = new BaseAttributeElements();
+		this.pAttribute = new AttributeElements();
+		this.pMaster = new MasterElements();
+		this.pActionAttribute = new ActionAttributeElements();
+		this.pSimpleAttribute = new SimpleAttributeElements();
+		this.pRuleCallAttribute = new RuleCallAttributeElements();
+		this.pCallMe = new CallMeElements();
+		this.pRuleCallAttribute2 = new RuleCallAttribute2Elements();
+		this.pCallMe2 = new CallMe2Elements();
+		this.pRuleCallAttribute3 = new RuleCallAttribute3Elements();
+		this.pCallMe3 = new CallMe3Elements();
+		this.pCallMe4 = new CallMe4Elements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -664,7 +677,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	attributes+=RuleCallAttribute* | "rulecall2" attributes+=RuleCallAttribute2* | "rulecall3"
 	//	attributes+=RuleCallAttribute3* | "inlinedActions" attributes+=ActionAttribute*;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -674,7 +687,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//BaseAttribute:
 	//	(Attribute | Master) ("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";";
 	public BaseAttributeElements getBaseAttributeAccess() {
-		return (pBaseAttribute != null) ? pBaseAttribute : (pBaseAttribute = new BaseAttributeElements());
+		return pBaseAttribute;
 	}
 	
 	public ParserRule getBaseAttributeRule() {
@@ -684,7 +697,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Attribute:
 	//	{Attribute} "attribute";
 	public AttributeElements getAttributeAccess() {
-		return (pAttribute != null) ? pAttribute : (pAttribute = new AttributeElements());
+		return pAttribute;
 	}
 	
 	public ParserRule getAttributeRule() {
@@ -694,7 +707,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Master:
 	//	{Master} "master";
 	public MasterElements getMasterAccess() {
-		return (pMaster != null) ? pMaster : (pMaster = new MasterElements());
+		return pMaster;
 	}
 	
 	public ParserRule getMasterRule() {
@@ -704,7 +717,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//ActionAttribute returns BaseAttribute:
 	//	({Attribute} "attribute" | {Master} "master") ("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";";
 	public ActionAttributeElements getActionAttributeAccess() {
-		return (pActionAttribute != null) ? pActionAttribute : (pActionAttribute = new ActionAttributeElements());
+		return pActionAttribute;
 	}
 	
 	public ParserRule getActionAttributeRule() {
@@ -714,7 +727,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//SimpleAttribute returns Attribute:
 	//	("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";";
 	public SimpleAttributeElements getSimpleAttributeAccess() {
-		return (pSimpleAttribute != null) ? pSimpleAttribute : (pSimpleAttribute = new SimpleAttributeElements());
+		return pSimpleAttribute;
 	}
 	
 	public ParserRule getSimpleAttributeRule() {
@@ -724,7 +737,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//RuleCallAttribute returns Attribute:
 	//	CallMe name=ID ";";
 	public RuleCallAttributeElements getRuleCallAttributeAccess() {
-		return (pRuleCallAttribute != null) ? pRuleCallAttribute : (pRuleCallAttribute = new RuleCallAttributeElements());
+		return pRuleCallAttribute;
 	}
 	
 	public ParserRule getRuleCallAttributeRule() {
@@ -734,7 +747,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//CallMe returns Attribute:
 	//	"ref" typeRef=[BaseAttribute] | type=ID;
 	public CallMeElements getCallMeAccess() {
-		return (pCallMe != null) ? pCallMe : (pCallMe = new CallMeElements());
+		return pCallMe;
 	}
 	
 	public ParserRule getCallMeRule() {
@@ -744,7 +757,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//RuleCallAttribute2 returns Attribute:
 	//	CallMe2 ("ref" typeRef=[BaseAttribute] | type=ID) ";";
 	public RuleCallAttribute2Elements getRuleCallAttribute2Access() {
-		return (pRuleCallAttribute2 != null) ? pRuleCallAttribute2 : (pRuleCallAttribute2 = new RuleCallAttribute2Elements());
+		return pRuleCallAttribute2;
 	}
 	
 	public ParserRule getRuleCallAttribute2Rule() {
@@ -754,7 +767,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//CallMe2 returns Attribute:
 	//	name=ID;
 	public CallMe2Elements getCallMe2Access() {
-		return (pCallMe2 != null) ? pCallMe2 : (pCallMe2 = new CallMe2Elements());
+		return pCallMe2;
 	}
 	
 	public ParserRule getCallMe2Rule() {
@@ -764,7 +777,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//RuleCallAttribute3 returns Attribute:
 	//	CallMe3 ("ref" typeRef=[BaseAttribute] | type=ID) ";";
 	public RuleCallAttribute3Elements getRuleCallAttribute3Access() {
-		return (pRuleCallAttribute3 != null) ? pRuleCallAttribute3 : (pRuleCallAttribute3 = new RuleCallAttribute3Elements());
+		return pRuleCallAttribute3;
 	}
 	
 	public ParserRule getRuleCallAttribute3Rule() {
@@ -774,7 +787,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//CallMe3 returns Attribute:
 	//	"call" "me" CallMe4;
 	public CallMe3Elements getCallMe3Access() {
-		return (pCallMe3 != null) ? pCallMe3 : (pCallMe3 = new CallMe3Elements());
+		return pCallMe3;
 	}
 	
 	public ParserRule getCallMe3Rule() {
@@ -784,7 +797,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//CallMe4 returns Attribute:
 	//	name=ID;
 	public CallMe4Elements getCallMe4Access() {
-		return (pCallMe4 != null) ? pCallMe4 : (pCallMe4 = new CallMe4Elements());
+		return pCallMe4;
 	}
 	
 	public ParserRule getCallMe4Rule() {

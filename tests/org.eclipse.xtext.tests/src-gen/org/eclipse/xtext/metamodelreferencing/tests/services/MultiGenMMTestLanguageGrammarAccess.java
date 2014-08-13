@@ -63,18 +63,20 @@ public class MultiGenMMTestLanguageGrammarAccess extends AbstractGrammarElementF
 	}
 	
 	
-	private FooElements pFoo;
-	private NameRefElements pNameRef;
+	private final FooElements pFoo;
+	private final NameRefElements pNameRef;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public MultiGenMMTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pFoo = new FooElements();
+		this.pNameRef = new NameRefElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -107,7 +109,7 @@ public class MultiGenMMTestLanguageGrammarAccess extends AbstractGrammarElementF
 	//Foo:
 	//	name=ID nameRefs+=NameRef*;
 	public FooElements getFooAccess() {
-		return (pFoo != null) ? pFoo : (pFoo = new FooElements());
+		return pFoo;
 	}
 	
 	public ParserRule getFooRule() {
@@ -117,7 +119,7 @@ public class MultiGenMMTestLanguageGrammarAccess extends AbstractGrammarElementF
 	//NameRef returns other::FooBar:
 	//	name=STRING;
 	public NameRefElements getNameRefAccess() {
-		return (pNameRef != null) ? pNameRef : (pNameRef = new NameRefElements());
+		return pNameRef;
 	}
 	
 	public ParserRule getNameRefRule() {

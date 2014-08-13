@@ -67,18 +67,20 @@ public class ActionTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	}
 	
 	
-	private ModelElements pModel;
-	private ChildElements pChild;
+	private final ModelElements pModel;
+	private final ChildElements pChild;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public ActionTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pChild = new ChildElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -111,7 +113,7 @@ public class ActionTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	//Model:
 	//	Child ({Parent.left=current} right=Child)?;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -121,7 +123,7 @@ public class ActionTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	//Child:
 	//	name=ID;
 	public ChildElements getChildAccess() {
-		return (pChild != null) ? pChild : (pChild = new ChildElements());
+		return pChild;
 	}
 	
 	public ParserRule getChildRule() {

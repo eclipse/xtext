@@ -68,17 +68,18 @@ public class InheritanceTest2LanguageGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	
-	private ModelElements pModel;
+	private final ModelElements pModel;
 	
 	private final Grammar grammar;
 
-	private InheritanceTestLanguageGrammarAccess gaInheritanceTestLanguage;
+	private final InheritanceTestLanguageGrammarAccess gaInheritanceTestLanguage;
 
 	@Inject
 	public InheritanceTest2LanguageGrammarAccess(GrammarProvider grammarProvider,
 		InheritanceTestLanguageGrammarAccess gaInheritanceTestLanguage) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaInheritanceTestLanguage = gaInheritanceTestLanguage;
+		this.pModel = new ModelElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -111,7 +112,7 @@ public class InheritanceTest2LanguageGrammarAccess extends AbstractGrammarElemen
 	//Model:
 	//	"model" name=ID "{" elements+=Element* ids+=FQN "}";
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {

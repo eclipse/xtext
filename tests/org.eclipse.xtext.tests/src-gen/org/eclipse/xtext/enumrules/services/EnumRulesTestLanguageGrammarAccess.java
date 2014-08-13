@@ -143,19 +143,22 @@ public class EnumRulesTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		public Keyword getDifferentNameDifferentLiteralKeyword_1_0() { return cDifferentNameDifferentLiteralKeyword_1_0; }
 	}
 	
-	private ModelElements pModel;
-	private ExistingEnumElements unknownRuleExistingEnum;
-	private GeneratedEnumElements unknownRuleGeneratedEnum;
+	private final ModelElements pModel;
+	private final ExistingEnumElements unknownRuleExistingEnum;
+	private final GeneratedEnumElements unknownRuleGeneratedEnum;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public EnumRulesTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.unknownRuleExistingEnum = new ExistingEnumElements();
+		this.unknownRuleGeneratedEnum = new GeneratedEnumElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -188,7 +191,7 @@ public class EnumRulesTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Model:
 	//	"existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)? | "generated" generated=GeneratedEnum;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -198,7 +201,7 @@ public class EnumRulesTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum ExistingEnum:
 	//	SameName | OverriddenLiteral="overridden" | DifferentName="DifferentLiteral";
 	public ExistingEnumElements getExistingEnumAccess() {
-		return (unknownRuleExistingEnum != null) ? unknownRuleExistingEnum : (unknownRuleExistingEnum = new ExistingEnumElements());
+		return unknownRuleExistingEnum;
 	}
 	
 	public EnumRule getExistingEnumRule() {
@@ -208,7 +211,7 @@ public class EnumRulesTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum GeneratedEnum:
 	//	SameName | DifferentName="DifferentLiteral";
 	public GeneratedEnumElements getGeneratedEnumAccess() {
-		return (unknownRuleGeneratedEnum != null) ? unknownRuleGeneratedEnum : (unknownRuleGeneratedEnum = new GeneratedEnumElements());
+		return unknownRuleGeneratedEnum;
 	}
 	
 	public EnumRule getGeneratedEnumRule() {

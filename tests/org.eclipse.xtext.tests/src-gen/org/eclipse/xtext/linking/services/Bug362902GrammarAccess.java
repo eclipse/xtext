@@ -95,19 +95,22 @@ public class Bug362902GrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	
-	private ModelElements pModel;
-	private GreetingElements pGreeting;
-	private MyIdElements pMyId;
+	private final ModelElements pModel;
+	private final GreetingElements pGreeting;
+	private final MyIdElements pMyId;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug362902GrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pGreeting = new GreetingElements();
+		this.pMyId = new MyIdElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -140,7 +143,7 @@ public class Bug362902GrammarAccess extends AbstractGrammarElementFinder {
 	//Model:
 	//	greetings+=Greeting* "favourite" favourite=[Greeting|MyId];
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -150,7 +153,7 @@ public class Bug362902GrammarAccess extends AbstractGrammarElementFinder {
 	//Greeting:
 	//	"Hello" name=MyId "!";
 	public GreetingElements getGreetingAccess() {
-		return (pGreeting != null) ? pGreeting : (pGreeting = new GreetingElements());
+		return pGreeting;
 	}
 	
 	public ParserRule getGreetingRule() {
@@ -160,7 +163,7 @@ public class Bug362902GrammarAccess extends AbstractGrammarElementFinder {
 	//MyId returns ecore::EString:
 	//	ID;
 	public MyIdElements getMyIdAccess() {
-		return (pMyId != null) ? pMyId : (pMyId = new MyIdElements());
+		return pMyId;
 	}
 	
 	public ParserRule getMyIdRule() {

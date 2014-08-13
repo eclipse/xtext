@@ -175,21 +175,30 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
-	private ModelElements pModel;
-	private ErrorElements pError;
-	private FixElements pFix;
-	private ApostropheElements pApostrophe;
-	private TerminalRule tAPOSTROPHE_CHAR;
-	private RehideElements pRehide;
-	private GraphicalElements pGraphical;
-	private TerminalRule tCHAR;
-	private TerminalRule tWS;
+	private final ModelElements pModel;
+	private final ErrorElements pError;
+	private final FixElements pFix;
+	private final ApostropheElements pApostrophe;
+	private final TerminalRule tAPOSTROPHE_CHAR;
+	private final RehideElements pRehide;
+	private final GraphicalElements pGraphical;
+	private final TerminalRule tCHAR;
+	private final TerminalRule tWS;
 	
 	private final Grammar grammar;
 
 	@Inject
 	public Bug292245TestLanguageGrammarAccess(GrammarProvider grammarProvider) {
 		this.grammar = internalFindGrammar(grammarProvider);
+		this.pModel = new ModelElements();
+		this.pError = new ErrorElements();
+		this.pFix = new FixElements();
+		this.pApostrophe = new ApostropheElements();
+		this.tAPOSTROPHE_CHAR = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "APOSTROPHE_CHAR");
+		this.pRehide = new RehideElements();
+		this.pGraphical = new GraphicalElements();
+		this.tCHAR = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "CHAR");
+		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -218,7 +227,7 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Model hidden(WS):
 	//	("FIX" fix+=Fix+ | "ERROR" error+=Error+ | "TICK" tick+=Apostrophe+)*;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -228,7 +237,7 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Error hidden():
 	//	APOSTROPHE_CHAR Graphical APOSTROPHE_CHAR;
 	public ErrorElements getErrorAccess() {
-		return (pError != null) ? pError : (pError = new ErrorElements());
+		return pError;
 	}
 	
 	public ParserRule getErrorRule() {
@@ -238,7 +247,7 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Fix hidden():
 	//	APOSTROPHE_CHAR Graphical APOSTROPHE_CHAR Rehide;
 	public FixElements getFixAccess() {
-		return (pFix != null) ? pFix : (pFix = new FixElements());
+		return pFix;
 	}
 	
 	public ParserRule getFixRule() {
@@ -248,7 +257,7 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Apostrophe hidden(WS):
 	//	APOSTROPHE_CHAR;
 	public ApostropheElements getApostropheAccess() {
-		return (pApostrophe != null) ? pApostrophe : (pApostrophe = new ApostropheElements());
+		return pApostrophe;
 	}
 	
 	public ParserRule getApostropheRule() {
@@ -258,14 +267,14 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//terminal APOSTROPHE_CHAR:
 	//	"\'";
 	public TerminalRule getAPOSTROPHE_CHARRule() {
-		return (tAPOSTROPHE_CHAR != null) ? tAPOSTROPHE_CHAR : (tAPOSTROPHE_CHAR = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "APOSTROPHE_CHAR"));
+		return tAPOSTROPHE_CHAR;
 	} 
 
 	////some unused char
 	//Rehide hidden(WS):
 	//	"^"?;
 	public RehideElements getRehideAccess() {
-		return (pRehide != null) ? pRehide : (pRehide = new RehideElements());
+		return pRehide;
 	}
 	
 	public ParserRule getRehideRule() {
@@ -275,7 +284,7 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Graphical:
 	//	CHAR | WS;
 	public GraphicalElements getGraphicalAccess() {
-		return (pGraphical != null) ? pGraphical : (pGraphical = new GraphicalElements());
+		return pGraphical;
 	}
 	
 	public ParserRule getGraphicalRule() {
@@ -285,12 +294,12 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//terminal CHAR:
 	//	"A".."Z" | "0".."9";
 	public TerminalRule getCHARRule() {
-		return (tCHAR != null) ? tCHAR : (tCHAR = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "CHAR"));
+		return tCHAR;
 	} 
 
 	//terminal WS:
 	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
-		return (tWS != null) ? tWS : (tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
+		return tWS;
 	} 
 }

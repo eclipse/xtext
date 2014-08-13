@@ -131,20 +131,24 @@ public class Bug317840TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
-	private ModelElements pModel;
-	private ElementElements pElement;
-	private NamedElements pNamed;
-	private NAMEElements pNAME;
+	private final ModelElements pModel;
+	private final ElementElements pElement;
+	private final NamedElements pNamed;
+	private final NAMEElements pNAME;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug317840TestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pElement = new ElementElements();
+		this.pNamed = new NamedElements();
+		this.pNAME = new NAMEElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -177,7 +181,7 @@ public class Bug317840TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Model:
 	//	elements+=Element*;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -187,7 +191,7 @@ public class Bug317840TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Element:
 	//	"element" first=Named second=Named? (third+=Named forth+=Named)*;
 	public ElementElements getElementAccess() {
-		return (pElement != null) ? pElement : (pElement = new ElementElements());
+		return pElement;
 	}
 	
 	public ParserRule getElementRule() {
@@ -197,7 +201,7 @@ public class Bug317840TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Named:
 	//	name=NAME;
 	public NamedElements getNamedAccess() {
-		return (pNamed != null) ? pNamed : (pNamed = new NamedElements());
+		return pNamed;
 	}
 	
 	public ParserRule getNamedRule() {
@@ -207,7 +211,7 @@ public class Bug317840TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//NAME hidden():
 	//	ID ("." ID)*;
 	public NAMEElements getNAMEAccess() {
-		return (pNAME != null) ? pNAME : (pNAME = new NAMEElements());
+		return pNAME;
 	}
 	
 	public ParserRule getNAMERule() {

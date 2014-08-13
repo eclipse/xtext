@@ -371,23 +371,30 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 	}
 	
 	
-	private SpielplatzElements pSpielplatz;
-	private PersonElements pPerson;
-	private KindElements pKind;
-	private ErwachsenerElements pErwachsener;
-	private SpielzeugElements pSpielzeug;
-	private FarbeElements pFarbe;
-	private FamilieElements pFamilie;
+	private final SpielplatzElements pSpielplatz;
+	private final PersonElements pPerson;
+	private final KindElements pKind;
+	private final ErwachsenerElements pErwachsener;
+	private final SpielzeugElements pSpielzeug;
+	private final FarbeElements pFarbe;
+	private final FamilieElements pFamilie;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public ReferenceGrammarTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pSpielplatz = new SpielplatzElements();
+		this.pPerson = new PersonElements();
+		this.pKind = new KindElements();
+		this.pErwachsener = new ErwachsenerElements();
+		this.pSpielzeug = new SpielzeugElements();
+		this.pFarbe = new FarbeElements();
+		this.pFamilie = new FamilieElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -421,7 +428,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 	//	("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind | erzieher+=Erwachsener | spielzeuge+=Spielzeug |
 	//	familie+=Familie)* "}")?;
 	public SpielplatzElements getSpielplatzAccess() {
-		return (pSpielplatz != null) ? pSpielplatz : (pSpielplatz = new SpielplatzElements());
+		return pSpielplatz;
 	}
 	
 	public ParserRule getSpielplatzRule() {
@@ -431,7 +438,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 	//Person:
 	//	Kind | Erwachsener;
 	public PersonElements getPersonAccess() {
-		return (pPerson != null) ? pPerson : (pPerson = new PersonElements());
+		return pPerson;
 	}
 	
 	public ParserRule getPersonRule() {
@@ -441,7 +448,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 	//Kind:
 	//	"kind" "(" name=ID age=INT ")";
 	public KindElements getKindAccess() {
-		return (pKind != null) ? pKind : (pKind = new KindElements());
+		return pKind;
 	}
 	
 	public ParserRule getKindRule() {
@@ -451,7 +458,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 	//Erwachsener:
 	//	"erwachsener" "(" name=ID age=INT ")";
 	public ErwachsenerElements getErwachsenerAccess() {
-		return (pErwachsener != null) ? pErwachsener : (pErwachsener = new ErwachsenerElements());
+		return pErwachsener;
 	}
 	
 	public ParserRule getErwachsenerRule() {
@@ -461,7 +468,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 	//Spielzeug:
 	//	"spielzeug" "(" name=ID farbe=Farbe ")";
 	public SpielzeugElements getSpielzeugAccess() {
-		return (pSpielzeug != null) ? pSpielzeug : (pSpielzeug = new SpielzeugElements());
+		return pSpielzeug;
 	}
 	
 	public ParserRule getSpielzeugRule() {
@@ -471,7 +478,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 	//Farbe:
 	//	wert=("ROT" | "BLAU" | "GELB" | "GRÜN");
 	public FarbeElements getFarbeAccess() {
-		return (pFarbe != null) ? pFarbe : (pFarbe = new FarbeElements());
+		return pFarbe;
 	}
 	
 	public ParserRule getFarbeRule() {
@@ -482,7 +489,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 	//	"familie" "(" name=("keyword" | STRING | ID) mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] (","
 	//	kinder+=[Kind])* ")";
 	public FamilieElements getFamilieAccess() {
-		return (pFamilie != null) ? pFamilie : (pFamilie = new FamilieElements());
+		return pFamilie;
 	}
 	
 	public ParserRule getFamilieRule() {

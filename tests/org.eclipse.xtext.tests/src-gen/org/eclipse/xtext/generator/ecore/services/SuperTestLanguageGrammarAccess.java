@@ -67,18 +67,20 @@ public class SuperTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	}
 	
 	
-	private SuperMainElements pSuperMain;
-	private AnotherSuperMainElements pAnotherSuperMain;
+	private final SuperMainElements pSuperMain;
+	private final AnotherSuperMainElements pAnotherSuperMain;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public SuperTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pSuperMain = new SuperMainElements();
+		this.pAnotherSuperMain = new AnotherSuperMainElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -111,7 +113,7 @@ public class SuperTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	//SuperMain:
 	//	"super" name=ID;
 	public SuperMainElements getSuperMainAccess() {
-		return (pSuperMain != null) ? pSuperMain : (pSuperMain = new SuperMainElements());
+		return pSuperMain;
 	}
 	
 	public ParserRule getSuperMainRule() {
@@ -121,7 +123,7 @@ public class SuperTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	//AnotherSuperMain:
 	//	"another" name=ID;
 	public AnotherSuperMainElements getAnotherSuperMainAccess() {
-		return (pAnotherSuperMain != null) ? pAnotherSuperMain : (pAnotherSuperMain = new AnotherSuperMainElements());
+		return pAnotherSuperMain;
 	}
 	
 	public ParserRule getAnotherSuperMainRule() {

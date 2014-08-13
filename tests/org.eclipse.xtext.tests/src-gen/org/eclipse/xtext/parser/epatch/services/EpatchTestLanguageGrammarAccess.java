@@ -1499,42 +1499,68 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	}
 	
 	
-	private EPatchElements pEPatch;
-	private ImportElements pImport;
-	private ModelImportElements pModelImport;
-	private ResourceImportElements pResourceImport;
-	private EPackageImportElements pEPackageImport;
-	private JavaImportElements pJavaImport;
-	private ExtensionImportElements pExtensionImport;
-	private NamedResourceElements pNamedResource;
-	private NamedObjectElements pNamedObject;
-	private ObjectRefElements pObjectRef;
-	private AssignmentElements pAssignment;
-	private BiSingleAssignmentElements pBiSingleAssignment;
-	private BiListAssignmentElements pBiListAssignment;
-	private MonoSingleAssignmentElements pMonoSingleAssignment;
-	private MonoListAssignmentElements pMonoListAssignment;
-	private AssignmentValueElements pAssignmentValue;
-	private ListAssignmentValueElements pListAssignmentValue;
-	private SingleAssignmentValueElements pSingleAssignmentValue;
-	private CreatedObjectElements pCreatedObject;
-	private ObjectNewElements pObjectNew;
-	private ObjectCopyElements pObjectCopy;
-	private TerminalRule tFRAGMENT;
-	private MigrationElements pMigration;
-	private ExecutableElements pExecutable;
-	private JavaExecutableElements pJavaExecutable;
-	private ExpressionExecutableElements pExpressionExecutable;
+	private final EPatchElements pEPatch;
+	private final ImportElements pImport;
+	private final ModelImportElements pModelImport;
+	private final ResourceImportElements pResourceImport;
+	private final EPackageImportElements pEPackageImport;
+	private final JavaImportElements pJavaImport;
+	private final ExtensionImportElements pExtensionImport;
+	private final NamedResourceElements pNamedResource;
+	private final NamedObjectElements pNamedObject;
+	private final ObjectRefElements pObjectRef;
+	private final AssignmentElements pAssignment;
+	private final BiSingleAssignmentElements pBiSingleAssignment;
+	private final BiListAssignmentElements pBiListAssignment;
+	private final MonoSingleAssignmentElements pMonoSingleAssignment;
+	private final MonoListAssignmentElements pMonoListAssignment;
+	private final AssignmentValueElements pAssignmentValue;
+	private final ListAssignmentValueElements pListAssignmentValue;
+	private final SingleAssignmentValueElements pSingleAssignmentValue;
+	private final CreatedObjectElements pCreatedObject;
+	private final ObjectNewElements pObjectNew;
+	private final ObjectCopyElements pObjectCopy;
+	private final TerminalRule tFRAGMENT;
+	private final MigrationElements pMigration;
+	private final ExecutableElements pExecutable;
+	private final JavaExecutableElements pJavaExecutable;
+	private final ExpressionExecutableElements pExpressionExecutable;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public EpatchTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pEPatch = new EPatchElements();
+		this.pImport = new ImportElements();
+		this.pModelImport = new ModelImportElements();
+		this.pResourceImport = new ResourceImportElements();
+		this.pEPackageImport = new EPackageImportElements();
+		this.pJavaImport = new JavaImportElements();
+		this.pExtensionImport = new ExtensionImportElements();
+		this.pNamedResource = new NamedResourceElements();
+		this.pNamedObject = new NamedObjectElements();
+		this.pObjectRef = new ObjectRefElements();
+		this.pAssignment = new AssignmentElements();
+		this.pBiSingleAssignment = new BiSingleAssignmentElements();
+		this.pBiListAssignment = new BiListAssignmentElements();
+		this.pMonoSingleAssignment = new MonoSingleAssignmentElements();
+		this.pMonoListAssignment = new MonoListAssignmentElements();
+		this.pAssignmentValue = new AssignmentValueElements();
+		this.pListAssignmentValue = new ListAssignmentValueElements();
+		this.pSingleAssignmentValue = new SingleAssignmentValueElements();
+		this.pCreatedObject = new CreatedObjectElements();
+		this.pObjectNew = new ObjectNewElements();
+		this.pObjectCopy = new ObjectCopyElements();
+		this.tFRAGMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "FRAGMENT");
+		this.pMigration = new MigrationElements();
+		this.pExecutable = new ExecutableElements();
+		this.pJavaExecutable = new JavaExecutableElements();
+		this.pExpressionExecutable = new ExpressionExecutableElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -1567,7 +1593,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	//EPatch:
 	//	"epatch" name=ID "{" imports+=Import* resources+=NamedResource* objects+=ObjectRef* "}";
 	public EPatchElements getEPatchAccess() {
-		return (pEPatch != null) ? pEPatch : (pEPatch = new EPatchElements());
+		return pEPatch;
 	}
 	
 	public ParserRule getEPatchRule() {
@@ -1577,7 +1603,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	//Import:
 	//	ModelImport | JavaImport | ExtensionImport;
 	public ImportElements getImportAccess() {
-		return (pImport != null) ? pImport : (pImport = new ImportElements());
+		return pImport;
 	}
 	
 	public ParserRule getImportRule() {
@@ -1587,7 +1613,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	//ModelImport:
 	//	ResourceImport | EPackageImport;
 	public ModelImportElements getModelImportAccess() {
-		return (pModelImport != null) ? pModelImport : (pModelImport = new ModelImportElements());
+		return pModelImport;
 	}
 	
 	public ParserRule getModelImportRule() {
@@ -1597,7 +1623,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	//ResourceImport:
 	//	"import" name=ID "uri" uri=STRING;
 	public ResourceImportElements getResourceImportAccess() {
-		return (pResourceImport != null) ? pResourceImport : (pResourceImport = new ResourceImportElements());
+		return pResourceImport;
 	}
 	
 	public ParserRule getResourceImportRule() {
@@ -1607,7 +1633,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	//EPackageImport:
 	//	"import" name=ID "ns" nsURI=STRING;
 	public EPackageImportElements getEPackageImportAccess() {
-		return (pEPackageImport != null) ? pEPackageImport : (pEPackageImport = new EPackageImportElements());
+		return pEPackageImport;
 	}
 	
 	public ParserRule getEPackageImportRule() {
@@ -1617,7 +1643,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	//JavaImport:
 	//	"import" "java" path+=ID ("." path+=ID)*;
 	public JavaImportElements getJavaImportAccess() {
-		return (pJavaImport != null) ? pJavaImport : (pJavaImport = new JavaImportElements());
+		return pJavaImport;
 	}
 	
 	public ParserRule getJavaImportRule() {
@@ -1627,7 +1653,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	//ExtensionImport:
 	//	"import" "extension" path+=ID ("::" path+=ID)*;
 	public ExtensionImportElements getExtensionImportAccess() {
-		return (pExtensionImport != null) ? pExtensionImport : (pExtensionImport = new ExtensionImportElements());
+		return pExtensionImport;
 	}
 	
 	public ParserRule getExtensionImportRule() {
@@ -1638,7 +1664,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	//	"resource" name=ID "{" "left" ("uri" leftUri=STRING | leftRoot=CreatedObject) ";" "right" ("uri" rightUri=STRING |
 	//	rightRoot=CreatedObject) ";" "}";
 	public NamedResourceElements getNamedResourceAccess() {
-		return (pNamedResource != null) ? pNamedResource : (pNamedResource = new NamedResourceElements());
+		return pNamedResource;
 	}
 	
 	public ParserRule getNamedResourceRule() {
@@ -1648,7 +1674,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	//NamedObject:
 	//	ObjectRef | CreatedObject;
 	public NamedObjectElements getNamedObjectAccess() {
-		return (pNamedObject != null) ? pNamedObject : (pNamedObject = new NamedObjectElements());
+		return pNamedObject;
 	}
 	
 	public ParserRule getNamedObjectRule() {
@@ -1660,7 +1686,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	//	"right" rightRes=[NamedResource] rightFrag=FRAGMENT) ("{" (assignments+=BiSingleAssignment |
 	//	assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right" rightMig=Migration)? "}")?;
 	public ObjectRefElements getObjectRefAccess() {
-		return (pObjectRef != null) ? pObjectRef : (pObjectRef = new ObjectRefElements());
+		return pObjectRef;
 	}
 	
 	public ParserRule getObjectRefRule() {
@@ -1670,7 +1696,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	//Assignment:
 	//	BiSingleAssignment | BiListAssignment | MonoSingleAssignment | MonoListAssignment;
 	public AssignmentElements getAssignmentAccess() {
-		return (pAssignment != null) ? pAssignment : (pAssignment = new AssignmentElements());
+		return pAssignment;
 	}
 	
 	public ParserRule getAssignmentRule() {
@@ -1680,7 +1706,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	//BiSingleAssignment returns SingleAssignment:
 	//	feature=ID "=" leftValue=SingleAssignmentValue "|" rightValue=SingleAssignmentValue ";";
 	public BiSingleAssignmentElements getBiSingleAssignmentAccess() {
-		return (pBiSingleAssignment != null) ? pBiSingleAssignment : (pBiSingleAssignment = new BiSingleAssignmentElements());
+		return pBiSingleAssignment;
 	}
 	
 	public ParserRule getBiSingleAssignmentRule() {
@@ -1691,7 +1717,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	//	feature=ID "=" "[" (leftValues+=ListAssignmentValue ("," leftValues+=ListAssignmentValue)*)? "|"
 	//	(rightValues+=ListAssignmentValue ("," rightValues+=ListAssignmentValue)*)? "]" ";";
 	public BiListAssignmentElements getBiListAssignmentAccess() {
-		return (pBiListAssignment != null) ? pBiListAssignment : (pBiListAssignment = new BiListAssignmentElements());
+		return pBiListAssignment;
 	}
 	
 	public ParserRule getBiListAssignmentRule() {
@@ -1701,7 +1727,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	//MonoSingleAssignment returns SingleAssignment:
 	//	feature=ID "=" leftValue=SingleAssignmentValue ";";
 	public MonoSingleAssignmentElements getMonoSingleAssignmentAccess() {
-		return (pMonoSingleAssignment != null) ? pMonoSingleAssignment : (pMonoSingleAssignment = new MonoSingleAssignmentElements());
+		return pMonoSingleAssignment;
 	}
 	
 	public ParserRule getMonoSingleAssignmentRule() {
@@ -1711,7 +1737,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	//MonoListAssignment returns ListAssignment:
 	//	feature=ID "=" "[" (leftValues+=AssignmentValue ("," leftValues+=AssignmentValue)*)? "]" ";";
 	public MonoListAssignmentElements getMonoListAssignmentAccess() {
-		return (pMonoListAssignment != null) ? pMonoListAssignment : (pMonoListAssignment = new MonoListAssignmentElements());
+		return pMonoListAssignment;
 	}
 	
 	public ParserRule getMonoListAssignmentRule() {
@@ -1722,7 +1748,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	//	value=STRING | refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)? | newObject=CreatedObject |
 	//	^import=[Import] impFrag=FRAGMENT;
 	public AssignmentValueElements getAssignmentValueAccess() {
-		return (pAssignmentValue != null) ? pAssignmentValue : (pAssignmentValue = new AssignmentValueElements());
+		return pAssignmentValue;
 	}
 	
 	public ParserRule getAssignmentValueRule() {
@@ -1733,7 +1759,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	//	index=INT ":" ("[" refIndex=INT "]" | value=STRING | refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT
 	//	"]")?)? | newObject=CreatedObject | ^import=[Import] impFrag=FRAGMENT);
 	public ListAssignmentValueElements getListAssignmentValueAccess() {
-		return (pListAssignmentValue != null) ? pListAssignmentValue : (pListAssignmentValue = new ListAssignmentValueElements());
+		return pListAssignmentValue;
 	}
 	
 	public ParserRule getListAssignmentValueRule() {
@@ -1744,7 +1770,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	//	keyword="null" | value=STRING | refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)? |
 	//	newObject=CreatedObject | ^import=[Import] impFrag=FRAGMENT;
 	public SingleAssignmentValueElements getSingleAssignmentValueAccess() {
-		return (pSingleAssignmentValue != null) ? pSingleAssignmentValue : (pSingleAssignmentValue = new SingleAssignmentValueElements());
+		return pSingleAssignmentValue;
 	}
 	
 	public ParserRule getSingleAssignmentValueRule() {
@@ -1755,7 +1781,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	//	(ObjectNew | ObjectCopy) name=ID? ("{" (assignments+=MonoSingleAssignment | assignments+=MonoListAssignment)+
 	//	leftMig=Migration? "}")?;
 	public CreatedObjectElements getCreatedObjectAccess() {
-		return (pCreatedObject != null) ? pCreatedObject : (pCreatedObject = new CreatedObjectElements());
+		return pCreatedObject;
 	}
 	
 	public ParserRule getCreatedObjectRule() {
@@ -1765,7 +1791,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	//ObjectNew:
 	//	"new" ^import=[Import] impFrag=FRAGMENT;
 	public ObjectNewElements getObjectNewAccess() {
-		return (pObjectNew != null) ? pObjectNew : (pObjectNew = new ObjectNewElements());
+		return pObjectNew;
 	}
 	
 	public ParserRule getObjectNewRule() {
@@ -1775,7 +1801,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	//ObjectCopy:
 	//	"copy" resource=[NamedResource] ^fragment=FRAGMENT;
 	public ObjectCopyElements getObjectCopyAccess() {
-		return (pObjectCopy != null) ? pObjectCopy : (pObjectCopy = new ObjectCopyElements());
+		return pObjectCopy;
 	}
 	
 	public ParserRule getObjectCopyRule() {
@@ -1785,14 +1811,14 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	//terminal FRAGMENT:
 	//	"#" ("a".."z" | "A".."Z" | "0".."9" | "_" | "/" | "[" | "]" | "{" | "}" | "." | "@")+;
 	public TerminalRule getFRAGMENTRule() {
-		return (tFRAGMENT != null) ? tFRAGMENT : (tFRAGMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "FRAGMENT"));
+		return tFRAGMENT;
 	} 
 
 	//// ******************* migration *****************************
 	//Migration:
 	//	{Migration} "migrate" first=Executable? ("as" asOp=Executable | "each" eachOp=Executable)? ";";
 	public MigrationElements getMigrationAccess() {
-		return (pMigration != null) ? pMigration : (pMigration = new MigrationElements());
+		return pMigration;
 	}
 	
 	public ParserRule getMigrationRule() {
@@ -1802,7 +1828,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	//Executable:
 	//	JavaExecutable | ExpressionExecutable;
 	public ExecutableElements getExecutableAccess() {
-		return (pExecutable != null) ? pExecutable : (pExecutable = new ExecutableElements());
+		return pExecutable;
 	}
 	
 	public ParserRule getExecutableRule() {
@@ -1812,7 +1838,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	//JavaExecutable:
 	//	"java" method=ID "(" ")";
 	public JavaExecutableElements getJavaExecutableAccess() {
-		return (pJavaExecutable != null) ? pJavaExecutable : (pJavaExecutable = new JavaExecutableElements());
+		return pJavaExecutable;
 	}
 	
 	public ParserRule getJavaExecutableRule() {
@@ -1822,7 +1848,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	//ExpressionExecutable:
 	//	exprstr=STRING;
 	public ExpressionExecutableElements getExpressionExecutableAccess() {
-		return (pExpressionExecutable != null) ? pExpressionExecutable : (pExpressionExecutable = new ExpressionExecutableElements());
+		return pExpressionExecutable;
 	}
 	
 	public ParserRule getExpressionExecutableRule() {

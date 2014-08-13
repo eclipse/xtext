@@ -83,18 +83,20 @@ public class AbstractIgnoreCaseLinkingTestLanguageGrammarAccess extends Abstract
 	}
 	
 	
-	private ModelElements pModel;
-	private ElementElements pElement;
+	private final ModelElements pModel;
+	private final ElementElements pElement;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public AbstractIgnoreCaseLinkingTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pElement = new ElementElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -127,7 +129,7 @@ public class AbstractIgnoreCaseLinkingTestLanguageGrammarAccess extends Abstract
 	//Model:
 	//	elements+=Element+;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -137,7 +139,7 @@ public class AbstractIgnoreCaseLinkingTestLanguageGrammarAccess extends Abstract
 	//Element:
 	//	name=ID reference=[Element]? "{" elements+=Element* "}";
 	public ElementElements getElementAccess() {
-		return (pElement != null) ? pElement : (pElement = new ElementElements());
+		return pElement;
 	}
 	
 	public ParserRule getElementRule() {

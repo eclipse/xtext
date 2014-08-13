@@ -839,41 +839,66 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		public Keyword getLit3Lit3Keyword_2_0() { return cLit3Lit3Keyword_2_0; }
 	}
 	
-	private RootElements pRoot;
-	private LineElements pLine;
-	private DeclElements pDecl;
-	private AssignElements pAssign;
-	private MethElements pMeth;
-	private ParamElements pParam;
-	private SpaceElements pSpace;
-	private TestLinewrapElements pTestLinewrap;
-	private TestLinewrapMinMaxElements pTestLinewrapMinMax;
-	private TestIndentationElements pTestIndentation;
-	private FqnObjElements pFqnObj;
-	private FQNElements pFQN;
-	private FqnRefElements pFqnRef;
-	private EnumerationElements pEnumeration;
-	private Enum1Elements unknownRuleEnum1;
-	private SuppressedHiddenElements pSuppressedHidden;
-	private SuppressedHiddenSubElements pSuppressedHiddenSub;
-	private SuppressedHiddenSubSubElements pSuppressedHiddenSubSub;
-	private SuppressedHiddenSubIDElements pSuppressedHiddenSubID;
-	private Datatype1Elements pDatatype1;
-	private Datatype2Elements pDatatype2;
-	private Datatype3Elements pDatatype3;
-	private DatatypesElements pDatatypes;
-	private WrappingDataTypeTestElements pWrappingDataTypeTest;
-	private WrappingDataTypeElements pWrappingDataType;
+	private final RootElements pRoot;
+	private final LineElements pLine;
+	private final DeclElements pDecl;
+	private final AssignElements pAssign;
+	private final MethElements pMeth;
+	private final ParamElements pParam;
+	private final SpaceElements pSpace;
+	private final TestLinewrapElements pTestLinewrap;
+	private final TestLinewrapMinMaxElements pTestLinewrapMinMax;
+	private final TestIndentationElements pTestIndentation;
+	private final FqnObjElements pFqnObj;
+	private final FQNElements pFQN;
+	private final FqnRefElements pFqnRef;
+	private final EnumerationElements pEnumeration;
+	private final Enum1Elements unknownRuleEnum1;
+	private final SuppressedHiddenElements pSuppressedHidden;
+	private final SuppressedHiddenSubElements pSuppressedHiddenSub;
+	private final SuppressedHiddenSubSubElements pSuppressedHiddenSubSub;
+	private final SuppressedHiddenSubIDElements pSuppressedHiddenSubID;
+	private final Datatype1Elements pDatatype1;
+	private final Datatype2Elements pDatatype2;
+	private final Datatype3Elements pDatatype3;
+	private final DatatypesElements pDatatypes;
+	private final WrappingDataTypeTestElements pWrappingDataTypeTest;
+	private final WrappingDataTypeElements pWrappingDataType;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public FormatterTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pRoot = new RootElements();
+		this.pLine = new LineElements();
+		this.pDecl = new DeclElements();
+		this.pAssign = new AssignElements();
+		this.pMeth = new MethElements();
+		this.pParam = new ParamElements();
+		this.pSpace = new SpaceElements();
+		this.pTestLinewrap = new TestLinewrapElements();
+		this.pTestLinewrapMinMax = new TestLinewrapMinMaxElements();
+		this.pTestIndentation = new TestIndentationElements();
+		this.pFqnObj = new FqnObjElements();
+		this.pFQN = new FQNElements();
+		this.pFqnRef = new FqnRefElements();
+		this.pEnumeration = new EnumerationElements();
+		this.unknownRuleEnum1 = new Enum1Elements();
+		this.pSuppressedHidden = new SuppressedHiddenElements();
+		this.pSuppressedHiddenSub = new SuppressedHiddenSubElements();
+		this.pSuppressedHiddenSubSub = new SuppressedHiddenSubSubElements();
+		this.pSuppressedHiddenSubID = new SuppressedHiddenSubIDElements();
+		this.pDatatype1 = new Datatype1Elements();
+		this.pDatatype2 = new Datatype2Elements();
+		this.pDatatype3 = new Datatype3Elements();
+		this.pDatatypes = new DatatypesElements();
+		this.pWrappingDataTypeTest = new WrappingDataTypeTestElements();
+		this.pWrappingDataType = new WrappingDataTypeElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -906,7 +931,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Root:
 	//	"test" (TestLinewrap | TestIndentation | TestLinewrapMinMax | WrappingDataTypeTest);
 	public RootElements getRootAccess() {
-		return (pRoot != null) ? pRoot : (pRoot = new RootElements());
+		return pRoot;
 	}
 	
 	public ParserRule getRootRule() {
@@ -916,7 +941,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Line:
 	//	(Decl | Assign | Meth | FqnObj | FqnRef | Enumeration | SuppressedHidden "post" | Space | Datatypes) ";";
 	public LineElements getLineAccess() {
-		return (pLine != null) ? pLine : (pLine = new LineElements());
+		return pLine;
 	}
 	
 	public ParserRule getLineRule() {
@@ -926,7 +951,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Decl:
 	//	type+=ID name+=ID;
 	public DeclElements getDeclAccess() {
-		return (pDecl != null) ? pDecl : (pDecl = new DeclElements());
+		return pDecl;
 	}
 	
 	public ParserRule getDeclRule() {
@@ -936,7 +961,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Assign:
 	//	var=ID op=("=" | "+=") "[" (val+=INT ("," val+=INT)*)? "]";
 	public AssignElements getAssignAccess() {
-		return (pAssign != null) ? pAssign : (pAssign = new AssignElements());
+		return pAssign;
 	}
 	
 	public ParserRule getAssignRule() {
@@ -946,7 +971,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Meth:
 	//	"void" name=ID "(" (param+=Param ("," param+=Param)*)? ")";
 	public MethElements getMethAccess() {
-		return (pMeth != null) ? pMeth : (pMeth = new MethElements());
+		return pMeth;
 	}
 	
 	public ParserRule getMethRule() {
@@ -956,7 +981,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Param:
 	//	name+=ID ":" type+=ID;
 	public ParamElements getParamAccess() {
-		return (pParam != null) ? pParam : (pParam = new ParamElements());
+		return pParam;
 	}
 	
 	public ParserRule getParamRule() {
@@ -966,7 +991,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Space:
 	//	"space" val=ID;
 	public SpaceElements getSpaceAccess() {
-		return (pSpace != null) ? pSpace : (pSpace = new SpaceElements());
+		return pSpace;
 	}
 	
 	public ParserRule getSpaceRule() {
@@ -976,7 +1001,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//TestLinewrap:
 	//	{TestLinewrap} "linewrap" items+=Line*;
 	public TestLinewrapElements getTestLinewrapAccess() {
-		return (pTestLinewrap != null) ? pTestLinewrap : (pTestLinewrap = new TestLinewrapElements());
+		return pTestLinewrap;
 	}
 	
 	public ParserRule getTestLinewrapRule() {
@@ -986,7 +1011,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//TestLinewrapMinMax:
 	//	{TestLinewrapMinMax} "wrapminmax" items+=Line*;
 	public TestLinewrapMinMaxElements getTestLinewrapMinMaxAccess() {
-		return (pTestLinewrapMinMax != null) ? pTestLinewrapMinMax : (pTestLinewrapMinMax = new TestLinewrapMinMaxElements());
+		return pTestLinewrapMinMax;
 	}
 	
 	public ParserRule getTestLinewrapMinMaxRule() {
@@ -996,7 +1021,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//TestIndentation:
 	//	{TestIndentation} "indentation" "{" items+=(Line | TestIndentation)* "}" semi?=";"?;
 	public TestIndentationElements getTestIndentationAccess() {
-		return (pTestIndentation != null) ? pTestIndentation : (pTestIndentation = new TestIndentationElements());
+		return pTestIndentation;
 	}
 	
 	public ParserRule getTestIndentationRule() {
@@ -1006,7 +1031,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//FqnObj:
 	//	"fqn" name=FQN;
 	public FqnObjElements getFqnObjAccess() {
-		return (pFqnObj != null) ? pFqnObj : (pFqnObj = new FqnObjElements());
+		return pFqnObj;
 	}
 	
 	public ParserRule getFqnObjRule() {
@@ -1016,7 +1041,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//FQN:
 	//	ID ("." ID)*;
 	public FQNElements getFQNAccess() {
-		return (pFQN != null) ? pFQN : (pFQN = new FQNElements());
+		return pFQN;
 	}
 	
 	public ParserRule getFQNRule() {
@@ -1026,7 +1051,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//FqnRef:
 	//	"fqnref" ref=[FqnObj|FQN];
 	public FqnRefElements getFqnRefAccess() {
-		return (pFqnRef != null) ? pFqnRef : (pFqnRef = new FqnRefElements());
+		return pFqnRef;
 	}
 	
 	public ParserRule getFqnRefRule() {
@@ -1036,7 +1061,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Enumeration:
 	//	"enum" val+=Enum1+ ("," val+=Enum1)*;
 	public EnumerationElements getEnumerationAccess() {
-		return (pEnumeration != null) ? pEnumeration : (pEnumeration = new EnumerationElements());
+		return pEnumeration;
 	}
 	
 	public ParserRule getEnumerationRule() {
@@ -1046,7 +1071,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum Enum1:
 	//	lit1 | lit2 | lit3;
 	public Enum1Elements getEnum1Access() {
-		return (unknownRuleEnum1 != null) ? unknownRuleEnum1 : (unknownRuleEnum1 = new Enum1Elements());
+		return unknownRuleEnum1;
 	}
 	
 	public EnumRule getEnum1Rule() {
@@ -1056,7 +1081,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//SuppressedHidden hidden():
 	//	{SuppressedHidden} "`" (vals+=SuppressedHiddenSub ("%" vals+=SuppressedHiddenSub)*)? "`";
 	public SuppressedHiddenElements getSuppressedHiddenAccess() {
-		return (pSuppressedHidden != null) ? pSuppressedHidden : (pSuppressedHidden = new SuppressedHiddenElements());
+		return pSuppressedHidden;
 	}
 	
 	public ParserRule getSuppressedHiddenRule() {
@@ -1066,7 +1091,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//SuppressedHiddenSub:
 	//	SuppressedHiddenSubSub | SuppressedHiddenSubID;
 	public SuppressedHiddenSubElements getSuppressedHiddenSubAccess() {
-		return (pSuppressedHiddenSub != null) ? pSuppressedHiddenSub : (pSuppressedHiddenSub = new SuppressedHiddenSubElements());
+		return pSuppressedHiddenSub;
 	}
 	
 	public ParserRule getSuppressedHiddenSubRule() {
@@ -1076,7 +1101,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//SuppressedHiddenSubSub hidden(WS):
 	//	"<" idval=ID ">";
 	public SuppressedHiddenSubSubElements getSuppressedHiddenSubSubAccess() {
-		return (pSuppressedHiddenSubSub != null) ? pSuppressedHiddenSubSub : (pSuppressedHiddenSubSub = new SuppressedHiddenSubSubElements());
+		return pSuppressedHiddenSubSub;
 	}
 	
 	public ParserRule getSuppressedHiddenSubSubRule() {
@@ -1086,7 +1111,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//SuppressedHiddenSubID:
 	//	idval=ID;
 	public SuppressedHiddenSubIDElements getSuppressedHiddenSubIDAccess() {
-		return (pSuppressedHiddenSubID != null) ? pSuppressedHiddenSubID : (pSuppressedHiddenSubID = new SuppressedHiddenSubIDElements());
+		return pSuppressedHiddenSubID;
 	}
 	
 	public ParserRule getSuppressedHiddenSubIDRule() {
@@ -1096,7 +1121,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Datatype1:
 	//	FQN;
 	public Datatype1Elements getDatatype1Access() {
-		return (pDatatype1 != null) ? pDatatype1 : (pDatatype1 = new Datatype1Elements());
+		return pDatatype1;
 	}
 	
 	public ParserRule getDatatype1Rule() {
@@ -1106,7 +1131,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Datatype2:
 	//	FQN;
 	public Datatype2Elements getDatatype2Access() {
-		return (pDatatype2 != null) ? pDatatype2 : (pDatatype2 = new Datatype2Elements());
+		return pDatatype2;
 	}
 	
 	public ParserRule getDatatype2Rule() {
@@ -1116,7 +1141,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Datatype3:
 	//	FQN;
 	public Datatype3Elements getDatatype3Access() {
-		return (pDatatype3 != null) ? pDatatype3 : (pDatatype3 = new Datatype3Elements());
+		return pDatatype3;
 	}
 	
 	public ParserRule getDatatype3Rule() {
@@ -1126,7 +1151,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Datatypes:
 	//	"datatypes" val1=Datatype1 "kw1" val2=Datatype2 val3=Datatype3 "kw3";
 	public DatatypesElements getDatatypesAccess() {
-		return (pDatatypes != null) ? pDatatypes : (pDatatypes = new DatatypesElements());
+		return pDatatypes;
 	}
 	
 	public ParserRule getDatatypesRule() {
@@ -1136,7 +1161,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//WrappingDataTypeTest:
 	//	"wrappingdt" datatype=WrappingDataType "kw1";
 	public WrappingDataTypeTestElements getWrappingDataTypeTestAccess() {
-		return (pWrappingDataTypeTest != null) ? pWrappingDataTypeTest : (pWrappingDataTypeTest = new WrappingDataTypeTestElements());
+		return pWrappingDataTypeTest;
 	}
 	
 	public ParserRule getWrappingDataTypeTestRule() {
@@ -1146,7 +1171,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//WrappingDataType:
 	//	ID+;
 	public WrappingDataTypeElements getWrappingDataTypeAccess() {
-		return (pWrappingDataType != null) ? pWrappingDataType : (pWrappingDataType = new WrappingDataTypeElements());
+		return pWrappingDataType;
 	}
 	
 	public ParserRule getWrappingDataTypeRule() {

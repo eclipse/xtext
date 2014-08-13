@@ -78,17 +78,22 @@ public class EcoreTerminalsTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 	
 	
-	private ModelElements pModel;
-	private TerminalRule tEDOUBLE;
-	private TerminalRule tEDATE;
-	private TerminalRule tEINT;
-	private TerminalRule tWS;
+	private final ModelElements pModel;
+	private final TerminalRule tEDOUBLE;
+	private final TerminalRule tEDATE;
+	private final TerminalRule tEINT;
+	private final TerminalRule tWS;
 	
 	private final Grammar grammar;
 
 	@Inject
 	public EcoreTerminalsTestLanguageGrammarAccess(GrammarProvider grammarProvider) {
 		this.grammar = internalFindGrammar(grammarProvider);
+		this.pModel = new ModelElements();
+		this.tEDOUBLE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "EDOUBLE");
+		this.tEDATE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "EDATE");
+		this.tEINT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "EINT");
+		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -117,7 +122,7 @@ public class EcoreTerminalsTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Model:
 	//	("int" intValues+=EINT | "double" doubleValues+=EDOUBLE | "date" dateValues+=EDATE)*;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -127,7 +132,7 @@ public class EcoreTerminalsTestLanguageGrammarAccess extends AbstractGrammarElem
 	//terminal EDOUBLE returns ecore::EDouble:
 	//	("." "0".."9"+ | "0".."9"+ "." "0".."9"*) (("E" | "e") ("-" | "+"?) "0".."9"+)?;
 	public TerminalRule getEDOUBLERule() {
-		return (tEDOUBLE != null) ? tEDOUBLE : (tEDOUBLE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "EDOUBLE"));
+		return tEDOUBLE;
 	} 
 
 	//// the default ecore date format is  "yyyy-MM-dd'T'HH:mm:ss'.'SSSZ"
@@ -135,18 +140,18 @@ public class EcoreTerminalsTestLanguageGrammarAccess extends AbstractGrammarElem
 	//	"0".."9" "0".."9" "0".."9" "0".."9" "-" "0".."9" "0".."9" "-" "0".."9" "0".."9" "T" "0".."9" "0".."9" ":" "0".."9"
 	//	"0".."9" ":" "0".."9" "0".."9" "." "0".."9" "0".."9" "0".."9" ("+" | "-") "0".."9" "0".."9" "0".."9" "0".."9";
 	public TerminalRule getEDATERule() {
-		return (tEDATE != null) ? tEDATE : (tEDATE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "EDATE"));
+		return tEDATE;
 	} 
 
 	//terminal EINT returns ecore::EInt:
 	//	"-"? "0".."9"+;
 	public TerminalRule getEINTRule() {
-		return (tEINT != null) ? tEINT : (tEINT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "EINT"));
+		return tEINT;
 	} 
 
 	//terminal WS:
 	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
-		return (tWS != null) ? tWS : (tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
+		return tWS;
 	} 
 }
