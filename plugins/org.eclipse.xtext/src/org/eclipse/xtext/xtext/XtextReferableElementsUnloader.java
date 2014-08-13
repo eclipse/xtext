@@ -7,7 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.AbstractRule;
@@ -27,8 +29,12 @@ public class XtextReferableElementsUnloader implements IReferableElementsUnloade
 			caseGrammar((Grammar) root);
 		else if (root instanceof AbstractRule)
 			caseAbstractRule((AbstractRule) root);
+		else if (root instanceof EPackage) {
+			caseEPackage((EPackage) root);
+		}
 	}
 	
+
 	public void caseAbstractRule(AbstractRule object) {
 		unload(object);
 	}
@@ -38,7 +44,14 @@ public class XtextReferableElementsUnloader implements IReferableElementsUnloade
 			unload(rule);
 		unload(object);
 	}
-
+	
+	private void caseEPackage(EPackage ePackage) {
+		for (EClassifier classifier : ePackage.getEClassifiers()) {
+			unload(classifier);
+		}
+		unload(ePackage);
+	}
+	
 	protected void unload(EObject object) {
 		InternalEObject internalEObject = (InternalEObject) object;
 		Resource resource = object.eResource();
