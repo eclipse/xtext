@@ -22,7 +22,7 @@ NVariableAccess: variable=[DefineVariable];
 Statement returns Expression:
 	Expression_VariableName (
 		(('C1') {Expression_Larger_Equal.left=current} right=Expression_VariableName) |
-		(('C2')  {Expression_Smaller.left=current} right=Expression_VariableName) |
+		(('C2') {Expression_Smaller.left=current} right=Expression_VariableName) |
 		(('C3') {Expression_Smaller_Equal.left=current} right=Expression_VariableName) |
 		(('C4') {Expression_Equal.left=current} right=Expression_VariableName) |
 		(('C5') {Expression_Not_Equal.left=current} right=Expression_VariableName)|
