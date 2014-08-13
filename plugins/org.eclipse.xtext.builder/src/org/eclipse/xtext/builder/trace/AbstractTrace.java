@@ -367,6 +367,9 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 								if (delegate.hasNext()) {
 									region = delegate.next();
 									locationDelegate = region.getAssociatedLocations().iterator();
+									if (!locationDelegate.hasNext()) {
+										continue;
+									}
 								}
 							}
 							if (locationDelegate != null && locationDelegate.hasNext()) {
