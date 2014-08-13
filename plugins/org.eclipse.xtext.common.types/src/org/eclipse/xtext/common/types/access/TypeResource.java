@@ -29,6 +29,11 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
  */
 public class TypeResource extends ResourceImpl implements ISynchronizable<TypeResource>{
 
+	/**
+	 * @since 2.7
+	 */
+	public static final String OPTION_CLASSPATH_CONTEXT = "OPTION_CLASSPATH_CONTEXT";
+	
 	private IMirror mirror;
 	
 	private IndexedJvmTypeAccess indexedJvmTypeAccess;
@@ -110,7 +115,11 @@ public class TypeResource extends ResourceImpl implements ISynchronizable<TypeRe
 	protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
 		try {
 			if (getURI() != null && mirror != null) {
-				mirror.initialize(this);
+				if (mirror instanceof IMirrorOptionsAware) {
+					((IMirrorOptionsAware)mirror).initialize(this, options);
+				} else {
+					mirror.initialize(this);
+				}
 			}
 		} catch(Exception e) {
 			throw new CannotLoadTypeResourceException(e);

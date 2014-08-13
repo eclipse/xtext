@@ -7,7 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
+import java.util.Map;
+
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.access.TypeResource;
 
 /**
  * SPI to implement a custom type provider that produces
@@ -24,5 +27,16 @@ public interface ITypeFactory<TypeData, Type extends JvmType> {
 	 * {@code byte[]} or {@code org.eclipse.jdt.core.IType}.
 	 */
 	Type createType(TypeData arg);
+	
+	/**
+	 * A type factory that wants to explore additional information of the resource
+	 * or the options map may implement this extension interface.
+	 * 
+	 * @author Sebastian Zarnekow - Initial contribution and API
+	 * @since 2.7
+	 */
+	interface OptionsAware<TypeData, Type extends JvmType> extends ITypeFactory<TypeData, Type> {
+		Type createType(TypeData arg, TypeResource resource, Map<?, ?> options);
+	}
 	
 }
