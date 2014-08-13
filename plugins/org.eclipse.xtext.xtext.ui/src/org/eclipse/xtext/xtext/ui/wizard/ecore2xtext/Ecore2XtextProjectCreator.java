@@ -8,13 +8,12 @@
 package org.eclipse.xtext.xtext.ui.wizard.ecore2xtext;
 
 import java.util.Collection;
+import java.util.Set;
 
 import org.eclipse.xtext.ui.util.IProjectFactoryContributor;
 import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectCreator;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -31,12 +30,14 @@ public class Ecore2XtextProjectCreator extends XtextProjectCreator {
 	@Override
 	protected Collection<String> getAdditionalRequiredBundles() {
 		Ecore2XtextProjectInfo ecore2xtextProjectInfo = getXtextProjectInfo();
-		return Lists.newArrayList(Iterables.transform(ecore2xtextProjectInfo.getEPackageInfos(),
-				new Function<EPackageInfo, String>() {
-					public String apply(EPackageInfo from) {
-						return from.getBundleID();
-					}
-				}));
+		Set<String> result = Sets.newHashSet();
+		for (EPackageInfo packageInfo : ecore2xtextProjectInfo.getEPackageInfos()) {
+			result.add(packageInfo.getBundleID());
+			if (packageInfo.getGenmodelURI().fileExtension().equals("xcore")) {
+				result.add("org.eclipse.emf.ecore.xcore");
+			}
+		}
+		return result;
 	}
 
 	@Override
