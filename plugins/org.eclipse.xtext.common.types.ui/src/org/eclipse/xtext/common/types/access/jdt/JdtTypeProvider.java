@@ -8,6 +8,7 @@
 package org.eclipse.xtext.common.types.access.jdt;
 
 import java.io.IOException;
+import java.util.Collections;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IResource;
@@ -199,7 +200,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	private JvmType createResourceAndFindType(/* @NonNull */ URI resourceURI, /* @NonNull */ IType type, /* @NonNull */ String signature)
 			throws IOException {
 		TypeResource resource = createResource(resourceURI, type);
-		resource.load(null);
+		resource.load(Collections.singletonMap(TypeResource.OPTION_CLASSPATH_CONTEXT, javaProject));
 		return findTypeBySignature(signature, resource);
 	}
 
