@@ -24,6 +24,7 @@
       <repositories location="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit">
         <bundles name="org.junit" versionRange="[3.8.2.v3_8_2_v20100427-1100]"/>
       </repositories>
+      <repositories location="http://download.eclipse.org/modeling/emf/emf/updates/nightly/"/>
     </contributions>
   </validationSets>
   <configurations operatingSystem="macosx" windowSystem="cocoa" architecture="x86_64"/>

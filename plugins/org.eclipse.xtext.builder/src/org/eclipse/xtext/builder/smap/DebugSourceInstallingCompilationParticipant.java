@@ -68,6 +68,9 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 
 	@Inject
 	private ITraceForStorageProvider traceInformation;
+
+	@Inject
+	private DerivedResourceMarkerCopier markerReflector;
 	
 	protected OutputConfiguration findOutputConfiguration(URI dslSourceFile, IFile generatedJavaFile) {
 		IResourceServiceProvider serviceProvider = serviceProviderRegistry.getResourceServiceProvider(dslSourceFile);
@@ -90,7 +93,7 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 		log.error("Could not find output configuration for file " + generatedJavaFile.getFullPath());
 		return null;
 	}
-	
+
 	protected ITraceToBytecodeInstaller getInstaller(OutputConfiguration config) {
 		if (config.isInstallDslAsPrimarySource()) {
 			TraceAsPrimarySourceInstaller installer = traceAsPrimarySourceInstallerProvider.get();
@@ -128,9 +131,10 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 					IJavaElement element = JavaCore.create(generatedJavaFile);
 					if (element == null)
 						continue;
-					
+
 					deleteTaskMarkers(generatedJavaFile);
-					
+					markerReflector.reflectErrorMarkerInSource(generatedJavaFile);
+
 					ITraceToBytecodeInstaller installer = getInstaller(outputConfiguration);
 					installer.setTrace(generatedJavaFile.getName(), traceToSource);
 					for (IFile javaClassFile : findGeneratedJavaClassFiles(element)) {
@@ -154,7 +158,7 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 	}
 
 	/**
-	 * Deletes task markers in generated Java files, because they would duplicate the markers in the source file. 
+	 * Deletes task markers in generated Java files, because they would duplicate the markers in the source file.
 	 */
 	protected void deleteTaskMarkers(IFile generatedJavaFile) throws CoreException {
 		generatedJavaFile.deleteMarkers(IJavaModelMarker.TASK_MARKER, false, IResource.DEPTH_ZERO);
