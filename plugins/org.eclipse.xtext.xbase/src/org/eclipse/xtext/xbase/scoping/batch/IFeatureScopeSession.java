@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -170,10 +169,23 @@ public interface IFeatureScopeSession extends IVisibilityHelper {
 	/* @Nullable */ IEObjectDescription getLocalElement(QualifiedName name);
 	
 	/**
+	 * Find a local element with the given qualified name across all capture layers.
+	 * @return the known element or <code>null</code>.
+	 */
+	/* @Nullable */ IEObjectDescription getDeepLocalElement(QualifiedName name);
+	
+	/**
+	 * Find all local elements with the given qualified name across all capture layers.
+	 * The last element is the leaf, e.g. in the closest capture layer.
+	 * @return the list of known elements, possibly empty.
+	 */
+	/* @NonNull */ List<IEObjectDescription> getDeepLocalElements(QualifiedName name);
+	
+	/**
 	 * Return all local elements that are known in this session.
 	 * @return all local elements. Never <code>null</code>.
 	 */
-	Collection<IEObjectDescription> getLocalElements();
+	List<IEObjectDescription> getLocalElements();
 
 	/**
 	 * All statically imported types as type buckets. The list has usually two elements:

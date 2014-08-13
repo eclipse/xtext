@@ -314,6 +314,10 @@ public class FeatureScopes implements IFeatureNames {
 	}
 
 	protected IScope createStaticExtensionsScope(XExpression receiver, LightweightTypeReference receiverType, EObject featureCall, IScope parent, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
+		IFeatureScopeSession nextCaptureLayer = session.getNextCaptureLayer();
+		if (nextCaptureLayer != null) {
+			parent = createStaticExtensionsScope(receiver, receiverType, featureCall, parent, nextCaptureLayer, resolvedTypes);
+		}
 		IScope result = parent;
 		if (receiver == null) {
 			// 'this' is a valid implicit first argument, e.g. implementations of Iterable may use #filter on themselves
@@ -350,41 +354,78 @@ public class FeatureScopes implements IFeatureNames {
 	}
 	
 	protected IScope createDynamicExtensionsScope(XExpression firstArgument, LightweightTypeReference firstArgumentType, EObject featureCall, IScope parent, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
-		List<ExpressionBucket> extensionProviders = session.getExtensionProviders();
+		return createDynamicExtensionsScope(firstArgument, firstArgumentType, featureCall, parent, session, session, resolvedTypes);
+	}
+	
+	protected IScope createDynamicExtensionsScope(XExpression firstArgument, LightweightTypeReference firstArgumentType, EObject featureCall, IScope parent, IFeatureScopeSession captureLayer, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
+		IFeatureScopeSession nextCaptureLayer = captureLayer.getNextCaptureLayer();
+		if (nextCaptureLayer != null) {
+			parent = createDynamicExtensionsScope(firstArgument, firstArgumentType, featureCall, parent, nextCaptureLayer, session, resolvedTypes);
+		}
+		List<ExpressionBucket> extensionProviders = captureLayer.getExtensionProviders();
 		if (extensionProviders.isEmpty()) {
 			return parent;
 		}
 		IScope result = parent;
 		if (firstArgument == null) {
-			result = createDynamicExtensionsScope(THIS, featureCall, session, resolvedTypes, result);
-			result = createDynamicExtensionsScope(IT, featureCall, session, resolvedTypes, result);
+			result = createDynamicExtensionsScope(THIS, featureCall, captureLayer, session, resolvedTypes, result, true);
+			result = createDynamicExtensionsScope(IT, featureCall, captureLayer, session, resolvedTypes, result, false);
 			return result;
 		} else {
-			result = createDynamicExtensionsScope(firstArgument, firstArgumentType, false, featureCall, parent, session);
+			result = createDynamicExtensionsScope(firstArgument, firstArgumentType, false, featureCall, parent, captureLayer);
 		}
 		return result;
 	}
 	
 	protected IScope createDynamicExtensionsScope(QualifiedName implicitFirstArgumentName, EObject featureCall,
-			IFeatureScopeSession session, IResolvedTypes resolvedTypes, IScope parent) {
-		IEObjectDescription firstArgumentDescription = session.getLocalElement(implicitFirstArgumentName);
-		if (firstArgumentDescription != null) {
-			JvmIdentifiableElement feature = (JvmIdentifiableElement) firstArgumentDescription.getEObjectOrProxy();
-			if (feature instanceof JvmType && THIS.equals(implicitFirstArgumentName) && !session.isInstanceContext()) {
-				return parent;
+			IFeatureScopeSession captureLayer, IFeatureScopeSession session, IResolvedTypes resolvedTypes, IScope parent, boolean all) {
+		if (all) {
+			List<IEObjectDescription> firstArguments = session.getDeepLocalElements(implicitFirstArgumentName);
+			switch(firstArguments.size()) {
+				case 0:
+					return createDynamicExtensionsScope(null, null, true, featureCall, parent, captureLayer);
+				case 1:
+					return createDynamicExtensionsScope(implicitFirstArgumentName, firstArguments.get(0), featureCall, captureLayer, session, resolvedTypes,
+							parent);
+				default:
+					CompositeScope result = new CompositeScope(parent, session, asAbstractFeatureCall(featureCall));
+					for(IEObjectDescription firstArgumentDescription: firstArguments) {
+						IScope extensionsScope = createDynamicExtensionsScope(implicitFirstArgumentName, firstArgumentDescription, featureCall, captureLayer, session, resolvedTypes,
+								IScope.NULLSCOPE);
+						if (IScope.NULLSCOPE != extensionsScope) {
+							result.addDelegate((AbstractSessionBasedScope) extensionsScope);
+						}
+					}
+					if (result.hasDelegates())
+						return result;
+					return parent;
 			}
-			LightweightTypeReference type = resolvedTypes.getActualType(feature);
-			if (type != null && !type.isUnknown()) {
-				XFeatureCall implicitArgument = xbaseFactory.createXFeatureCall();
-				implicitArgument.setFeature(feature);
-				return createDynamicExtensionsScope(implicitArgument, type, true, featureCall, parent, session);
-			}
-			return parent;
 		} else {
-			return createDynamicExtensionsScope(null, null, true, featureCall, parent, session);
+			IEObjectDescription firstArgumentDescription = session.getDeepLocalElement(implicitFirstArgumentName);
+			if (firstArgumentDescription != null) {
+				return createDynamicExtensionsScope(implicitFirstArgumentName, firstArgumentDescription, featureCall, captureLayer, session, resolvedTypes,
+						parent);
+			} else {
+				return createDynamicExtensionsScope(null, null, true, featureCall, parent, captureLayer);
+			}
 		}
 	}
-	
+
+	protected IScope createDynamicExtensionsScope(QualifiedName implicitFirstArgumentName, IEObjectDescription firstArgumentDescription, EObject featureCall,
+			IFeatureScopeSession captureLayer, IFeatureScopeSession session, IResolvedTypes resolvedTypes, IScope parent) {
+		JvmIdentifiableElement feature = (JvmIdentifiableElement) firstArgumentDescription.getEObjectOrProxy();
+		if (feature instanceof JvmType && THIS.equals(implicitFirstArgumentName) && !session.isInstanceContext()) {
+			return parent;
+		}
+		LightweightTypeReference type = resolvedTypes.getActualType(feature);
+		if (type != null && !type.isUnknown()) {
+			XFeatureCall implicitArgument = xbaseFactory.createXFeatureCall();
+			implicitArgument.setFeature(feature);
+			return createDynamicExtensionsScope(implicitArgument, type, true, featureCall, parent, captureLayer);
+		}
+		return parent;
+	}
+
 	protected DynamicExtensionsScope createDynamicExtensionsScope(XExpression firstArgument,
 			LightweightTypeReference argumentType, boolean implicit, EObject featureCall, IScope parent, IFeatureScopeSession session) {
 		return new DynamicExtensionsScope(parent, session, firstArgument, argumentType, implicit, asAbstractFeatureCall(featureCall), operatorMapping);

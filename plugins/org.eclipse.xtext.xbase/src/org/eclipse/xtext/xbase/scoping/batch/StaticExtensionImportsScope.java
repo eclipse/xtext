@@ -53,7 +53,7 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 	}
 	
 	@Override
-	protected Iterable<IEObjectDescription> getAllLocalElements() {
+	protected List<IEObjectDescription> getAllLocalElements() {
 		List<TypeBucket> buckets = getBuckets();
 		if (buckets.isEmpty()) {
 			return Collections.emptyList();
