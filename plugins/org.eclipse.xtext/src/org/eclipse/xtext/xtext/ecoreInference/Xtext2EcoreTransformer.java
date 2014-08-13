@@ -443,15 +443,31 @@ public class Xtext2EcoreTransformer {
 					EClassifierInfo actionType = findOrCreateEClassifierInfo(actionTypeRef, null, true);
 					EClassifierInfo currentCompatibleType = context.getCurrentCompatibleType();
 					Xtext2EcoreInterpretationContext ctx = context.spawnContextWithReferencedType(actionType, object);
-					if (object.getFeature() != null)
+					if (object.getFeature() != null) {
 						ctx.addFeature(object.getFeature(), currentCompatibleType,
 								GrammarUtil.isMultipleAssignment(object), true, object);
+						if (isContainedInMultipleCardinality(object)) {
+							// if in a multiple group also add the action's type
+							ctx.addFeature(object.getFeature(), ctx.getCurrentCompatibleType(),
+									GrammarUtil.isMultipleAssignment(object), true, object);
+						}
+					}
 					return ctx;
 				}
 				catch (TransformationException e) {
 					reportError(e);
 				}
 				return context;
+			}
+			
+			private boolean isContainedInMultipleCardinality(AbstractElement element) {
+				if (GrammarUtil.isMultipleCardinality(element)) {
+					return true;
+				}
+				if (element.eContainer() instanceof AbstractElement) {
+					return isContainedInMultipleCardinality((AbstractElement) element.eContainer());
+				}
+				return false;
 			}
 
 			@Override

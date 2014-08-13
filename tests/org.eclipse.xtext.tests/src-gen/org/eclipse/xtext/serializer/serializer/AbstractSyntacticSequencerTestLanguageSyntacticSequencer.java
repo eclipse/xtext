@@ -155,13 +155,13 @@ public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer e
 	/**
 	 * Syntax:
 	 *     (
-	     'kw6' | 
-	     'kw3' | 
-	     'kw1' | 
-	     'kw5' | 
-	     'kw2' | 
 	     'kw7' | 
 	     'kw8' | 
+	     'kw3' | 
+	     'kw1' | 
+	     'kw6' | 
+	     'kw2' | 
+	     'kw5' | 
 	     'kw4'
 	 )*
 	 */
@@ -173,12 +173,12 @@ public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer e
 	 * Syntax:
 	 *     (
 	     (
-	         'kw6' | 
+	         'kw7' | 
 	         'kw3' | 
 	         'kw1' | 
-	         'kw5' | 
+	         'kw6' | 
 	         'kw2' | 
-	         'kw7' | 
+	         'kw5' | 
 	         'kw4'
 	     )* 
 	     'kw8'
@@ -192,12 +192,12 @@ public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer e
 	 * Syntax:
 	 *     (
 	     (
-	         'kw6' | 
+	         'kw8' | 
 	         'kw3' | 
 	         'kw1' | 
-	         'kw5' | 
+	         'kw6' | 
 	         'kw2' | 
-	         'kw8' | 
+	         'kw5' | 
 	         'kw4'
 	     )* 
 	     'kw7'
@@ -211,12 +211,12 @@ public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer e
 	 * Syntax:
 	 *     (
 	     (
-	         'kw3' | 
-	         'kw1' | 
-	         'kw5' | 
-	         'kw2' | 
 	         'kw7' | 
 	         'kw8' | 
+	         'kw3' | 
+	         'kw1' | 
+	         'kw2' | 
+	         'kw5' | 
 	         'kw4'
 	     )* 
 	     'kw6'
@@ -230,12 +230,12 @@ public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer e
 	 * Syntax:
 	 *     (
 	     (
-	         'kw6' | 
-	         'kw3' | 
-	         'kw1' | 
-	         'kw2' | 
 	         'kw7' | 
 	         'kw8' | 
+	         'kw3' | 
+	         'kw1' | 
+	         'kw6' | 
+	         'kw2' | 
 	         'kw4'
 	     )* 
 	     'kw5'
@@ -249,13 +249,13 @@ public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer e
 	 * Syntax:
 	 *     (
 	     (
-	         'kw6' | 
+	         'kw7' | 
+	         'kw8' | 
 	         'kw3' | 
 	         'kw1' | 
-	         'kw5' | 
+	         'kw6' | 
 	         'kw2' | 
-	         'kw7' | 
-	         'kw8'
+	         'kw5'
 	     )* 
 	     'kw4'
 	 )+
@@ -268,12 +268,12 @@ public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer e
 	 * Syntax:
 	 *     (
 	     (
-	         'kw6' | 
-	         'kw1' | 
-	         'kw5' | 
-	         'kw2' | 
 	         'kw7' | 
 	         'kw8' | 
+	         'kw1' | 
+	         'kw6' | 
+	         'kw2' | 
+	         'kw5' | 
 	         'kw4'
 	     )* 
 	     'kw3'
@@ -287,12 +287,12 @@ public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer e
 	 * Syntax:
 	 *     (
 	     (
-	         'kw6' | 
-	         'kw3' | 
-	         'kw1' | 
-	         'kw5' | 
 	         'kw7' | 
 	         'kw8' | 
+	         'kw3' | 
+	         'kw1' | 
+	         'kw6' | 
+	         'kw5' | 
 	         'kw4'
 	     )* 
 	     'kw2'
@@ -306,12 +306,12 @@ public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer e
 	 * Syntax:
 	 *     (
 	     (
-	         'kw6' | 
-	         'kw3' | 
-	         'kw5' | 
-	         'kw2' | 
 	         'kw7' | 
 	         'kw8' | 
+	         'kw3' | 
+	         'kw6' | 
+	         'kw2' | 
+	         'kw5' | 
 	         'kw4'
 	     )* 
 	     'kw1'
