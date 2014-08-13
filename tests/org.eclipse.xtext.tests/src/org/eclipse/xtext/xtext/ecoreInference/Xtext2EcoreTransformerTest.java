@@ -1994,4 +1994,50 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		EClassifier classifier = parserRule.getType().getClassifier();
 		assertTrue(parserRule.getName(), classifier instanceof EDataType);
 	}
+	
+	@Test
+	public void testBug390326() throws Exception {
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals";
+		grammar += " generate test 'http://test'";
+		grammar += " Model: A ({B.a = current} b = A)*;\n";
+		grammar += " A: value=ID;\n";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+		EClass clazz = (EClass) ePackage.getEClassifier("B");
+		EStructuralFeature feature = clazz.getEStructuralFeature("a");
+		assertEquals("Model", feature.getEType().getName());
+	}
+	
+	@Test
+	public void testBug390326_02() throws Exception {
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals";
+		grammar += " generate test 'http://test'";
+		grammar += " Model: A ({B.a = current} b = A {C.a=current} c = A)*;\n";
+		grammar += " C returns A: value='c';\n";
+		grammar += " A: value='a';\n";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+		EClass clazzB = (EClass) ePackage.getEClassifier("B");
+		EStructuralFeature feature = clazzB.getEStructuralFeature("a");
+		assertEquals("Model", feature.getEType().getName());
+		
+		EClass clazzC = (EClass) ePackage.getEClassifier("C");
+		EStructuralFeature featureC_A = clazzC.getEStructuralFeature("a");
+		assertEquals("B", featureC_A.getEType().getName());
+	}
+	
+	@Test
+	public void testBug390326_03() throws Exception {
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals";
+		grammar += " generate test 'http://test'";
+		grammar += " Model: Value (({A.a = current} 'a' )|\n";
+		grammar += "               ({B.a = current} 'b' ))*;\n";
+		grammar += " Value: value='a';\n";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+		EClass clazzA = (EClass) ePackage.getEClassifier("A");
+		EStructuralFeature featureA_a = clazzA.getEStructuralFeature("a");
+		assertEquals("Model", featureA_a.getEType().getName());
+		
+		EClass clazzB = (EClass) ePackage.getEClassifier("B");
+		EStructuralFeature featureB_a = clazzB.getEStructuralFeature("a");
+		assertEquals("Model", featureB_a.getEType().getName());
+	}
 }

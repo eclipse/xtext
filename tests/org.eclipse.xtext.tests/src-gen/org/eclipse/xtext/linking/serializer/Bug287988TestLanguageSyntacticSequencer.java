@@ -47,11 +47,11 @@ public class Bug287988TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	/**
 	 * Syntax:
 	 *     (
-	     'actions' | 
-	     'rulecall3' | 
+	     'rulecall2' | 
 	     'inlinedActions' | 
 	     'rulecall' | 
-	     'rulecall2' | 
+	     'actions' | 
+	     'rulecall3' | 
 	     'simple'
 	 )
 	 */

@@ -80,6 +80,11 @@ public abstract class EClassifierInfo {
 			this.generatedEPackageURIs = generatedEPackageURIs;
 			this.grammar = grammar;
 		}
+		
+		@Override
+		public String toString() {
+			return "ClassifierInfo : " + getEClass().getName();
+		}
 
 		@Override
 		public boolean isAssignableFrom(EClassifierInfo subTypeInfo) {

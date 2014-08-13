@@ -4,7 +4,7 @@
     nsPrefix="simpleExpressions">
   <eClassifiers xsi:type="ecore:EClass" name="Sequence">
     <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" upperBound="-1"
-        eType="#//Expression" containment="true"/>
+        eType="#//Sequence" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Expression" eSuperTypes="#//Sequence"/>
   <eClassifiers xsi:type="ecore:EClass" name="Atom" eSuperTypes="#//Expression">

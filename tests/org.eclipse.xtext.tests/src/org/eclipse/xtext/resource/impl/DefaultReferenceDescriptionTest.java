@@ -142,11 +142,11 @@ public class DefaultReferenceDescriptionTest extends AbstractXtextTests {
 
 		EObject object = ePackage.getEFactoryInstance().create(eClass);
 		object.eSet(EcorePackage.Literals.ENAMED_ELEMENT__NAME, "testname");
-		object.eSet(eReference1, EcorePackage.Literals.EPACKAGE);
+		object.eSet(eReference1, EcorePackage.eINSTANCE);
 		object.eSet(eReference2, ePackage.getEFactoryInstance().create(eClass));
-		object.eSet(eReference3, EcorePackage.Literals.EPACKAGE);
-		object.eSet(eReference4, EcorePackage.Literals.EPACKAGE);
-		object.eSet(eReference5, EcorePackage.Literals.EPACKAGE);
+		object.eSet(eReference3, EcorePackage.eINSTANCE);
+		object.eSet(eReference4, EcorePackage.eINSTANCE);
+		object.eSet(eReference5, EcorePackage.eINSTANCE);
 
 		Resource testResource = new XMIResourceImpl(URI.createPlatformResourceURI("test.ecore", true));
 		testResource.getContents().add(object);
@@ -156,7 +156,7 @@ public class DefaultReferenceDescriptionTest extends AbstractXtextTests {
 		assertEquals(-1, referenceDescription.getIndexInList());
 		assertEquals(EcoreUtil.getURI(object), referenceDescription.getSourceEObjectUri());
 		assertEquals(eReference1, referenceDescription.getEReference());
-		assertEquals(EcoreUtil.getURI(EcorePackage.Literals.EPACKAGE), referenceDescription.getTargetEObjectUri());
+		assertEquals(EcoreUtil.getURI(EcorePackage.eINSTANCE), referenceDescription.getTargetEObjectUri());
 		assertEquals(EcoreUtil.getURI(object), referenceDescription.getContainerEObjectURI());
 	}
 	

@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.xtext.resource.bug385636.Bug385636Package;
+import org.eclipse.xtext.resource.bug385636.Expression;
 import org.eclipse.xtext.resource.bug385636.Expression_Not_Less;
 import org.eclipse.xtext.resource.bug385636.Expression_VariableName;
 
@@ -38,7 +39,7 @@ public class Expression_Not_LessImpl extends ExpressionImpl implements Expressio
    * @generated
    * @ordered
    */
-  protected Expression_VariableName left;
+  protected Expression left;
 
   /**
    * The cached value of the '{@link #getRight() <em>Right</em>}' containment reference.
@@ -76,7 +77,7 @@ public class Expression_Not_LessImpl extends ExpressionImpl implements Expressio
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression_VariableName getLeft()
+  public Expression getLeft()
   {
     return left;
   }
@@ -86,9 +87,9 @@ public class Expression_Not_LessImpl extends ExpressionImpl implements Expressio
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetLeft(Expression_VariableName newLeft, NotificationChain msgs)
+  public NotificationChain basicSetLeft(Expression newLeft, NotificationChain msgs)
   {
-    Expression_VariableName oldLeft = left;
+    Expression oldLeft = left;
     left = newLeft;
     if (eNotificationRequired())
     {
@@ -103,7 +104,7 @@ public class Expression_Not_LessImpl extends ExpressionImpl implements Expressio
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setLeft(Expression_VariableName newLeft)
+  public void setLeft(Expression newLeft)
   {
     if (newLeft != left)
     {
@@ -214,7 +215,7 @@ public class Expression_Not_LessImpl extends ExpressionImpl implements Expressio
     switch (featureID)
     {
       case Bug385636Package.EXPRESSION_NOT_LESS__LEFT:
-        setLeft((Expression_VariableName)newValue);
+        setLeft((Expression)newValue);
         return;
       case Bug385636Package.EXPRESSION_NOT_LESS__RIGHT:
         setRight((Expression_VariableName)newValue);
@@ -234,7 +235,7 @@ public class Expression_Not_LessImpl extends ExpressionImpl implements Expressio
     switch (featureID)
     {
       case Bug385636Package.EXPRESSION_NOT_LESS__LEFT:
-        setLeft((Expression_VariableName)null);
+        setLeft((Expression)null);
         return;
       case Bug385636Package.EXPRESSION_NOT_LESS__RIGHT:
         setRight((Expression_VariableName)null);

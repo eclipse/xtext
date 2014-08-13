@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ecoreInference;
 
+import static com.google.common.collect.Lists.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -34,6 +36,7 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CompoundElement;
 import org.eclipse.xtext.EcoreUtil2;
@@ -411,8 +414,29 @@ public class Xtext2EcoreTransformer {
 			@Override
 			public Xtext2EcoreInterpretationContext caseGroup(Group object) {
 				Xtext2EcoreInterpretationContext result = deriveFeatures(context.spawnContextForGroup(), object.getElements());
+				if (GrammarUtil.isMultipleCardinality(object)) {
+					result = deriveFeatures(result.spawnContextForGroup(), object.getElements());
+				}
 				if (GrammarUtil.isOptionalCardinality(object)) {
 					result = result.mergeSpawnedContexts(Arrays.asList(context, result));
+				}
+				return result;
+			}
+			
+			@Override
+			public Xtext2EcoreInterpretationContext caseAlternatives(Alternatives object) {
+				List<Xtext2EcoreInterpretationContext> contexts = newArrayList();
+				if (GrammarUtil.isOptionalCardinality(object)) {
+					contexts.add(context);
+				}
+				for (AbstractElement alternative : object.getElements()) {
+					contexts.add(deriveFeatures(context.spawnContextForGroup(), alternative));
+				}
+				Xtext2EcoreInterpretationContext result = context.mergeSpawnedContexts(contexts);
+				if (GrammarUtil.isMultipleCardinality(object)) {
+					for (AbstractElement alternative : object.getElements()) {
+						deriveFeatures(result.spawnContextForGroup(), alternative);
+					}
 				}
 				return result;
 			}
@@ -443,9 +467,10 @@ public class Xtext2EcoreTransformer {
 					EClassifierInfo actionType = findOrCreateEClassifierInfo(actionTypeRef, null, true);
 					EClassifierInfo currentCompatibleType = context.getCurrentCompatibleType();
 					Xtext2EcoreInterpretationContext ctx = context.spawnContextWithReferencedType(actionType, object);
-					if (object.getFeature() != null)
+					if (object.getFeature() != null) {
 						ctx.addFeature(object.getFeature(), currentCompatibleType,
 								GrammarUtil.isMultipleAssignment(object), true, object);
+					}
 					return ctx;
 				}
 				catch (TransformationException e) {
@@ -453,7 +478,7 @@ public class Xtext2EcoreTransformer {
 				}
 				return context;
 			}
-
+			
 			@Override
 			public Xtext2EcoreInterpretationContext defaultCase(EObject object) {
 				return context;
