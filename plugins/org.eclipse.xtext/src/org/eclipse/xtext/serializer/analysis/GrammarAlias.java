@@ -8,6 +8,7 @@
 package org.eclipse.xtext.serializer.analysis;
 
 import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -63,13 +64,13 @@ public class GrammarAlias {
 
 		public AlternativeAlias(boolean many, boolean optional, AbstractElementAlias... children) {
 			super(many, optional);
-			this.children = Sets.newHashSet();
+			this.children = Sets.newLinkedHashSet();
 			addChildren(children);
 		}
 
 		public AlternativeAlias(boolean many, boolean optional, Iterable<AbstractElementAlias> children) {
 			super(many, optional);
-			this.children = Sets.newHashSet();
+			this.children = Sets.newLinkedHashSet();
 			addChildren(children);
 		}
 
@@ -244,13 +245,13 @@ public class GrammarAlias {
 
 		public UnorderedGroupAlias(boolean many, boolean optional, AbstractElementAlias... children) {
 			super(many, optional);
-			this.children = Sets.newHashSet();
+			this.children = Sets.newLinkedHashSet();
 			addChildren(children);
 		}
 
 		public UnorderedGroupAlias(boolean many, boolean optional, Iterable<AbstractElementAlias> children) {
 			super(many, optional);
-			this.children = Sets.newHashSet();
+			this.children = Sets.newLinkedHashSet();
 			addChildren(children);
 		}
 
