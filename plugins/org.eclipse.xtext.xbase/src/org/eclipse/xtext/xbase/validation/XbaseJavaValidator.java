@@ -1253,7 +1253,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		String operatorSymbol = binaryOperation.getConcreteSyntaxFeatureName();
 		XExpression left = binaryOperation.getLeftOperand();
 		XExpression right = binaryOperation.getRightOperand();
-		if (right.eClass() == XbasePackage.Literals.XNULL_LITERAL || left.eClass() == XbasePackage.Literals.XNULL_LITERAL) {
+		if (right != null && right.eClass() == XbasePackage.Literals.XNULL_LITERAL || left != null && left.eClass() == XbasePackage.Literals.XNULL_LITERAL) {
 			boolean equalsComparison = expressionHelper.isOperatorFromExtension(binaryOperation, operatorSymbol, OperatorMapping.EQUALS, ObjectExtensions.class)
 					|| expressionHelper.isOperatorFromExtension(binaryOperation, operatorSymbol, OperatorMapping.NOT_EQUALS, ObjectExtensions.class);
 			if(equalsComparison
