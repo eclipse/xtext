@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.SegmentSequence;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.core.BindingKey;
 import org.eclipse.jdt.core.IJavaElement;
@@ -75,9 +76,11 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
 import org.eclipse.xtext.common.types.impl.JvmExecutableImplCustom;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
@@ -96,8 +99,9 @@ import com.google.common.collect.Lists;
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @since 2.7
  */
-public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType> {
+public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>, ITypeFactory.OptionsAware<IType, JvmDeclaredType> {
 
 	private final static Logger log = Logger.getLogger(JdtBasedTypeFactory.class);
 
@@ -369,6 +373,15 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 	}
 
 	public JvmDeclaredType createType(IType jdtType) {
+		IJavaProject project = jdtType.getJavaProject();
+		
+		return createType(jdtType, project);
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	protected JvmDeclaredType createType(IType jdtType, IJavaProject javaProject) {
 		if (jdtType.getDeclaringType() != null)
 			throw new IllegalArgumentException("Cannot create type from non-toplevel-type: '"
 					+ jdtType.getFullyQualifiedName() + "'.");
@@ -377,11 +390,10 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 		parser.setWorkingCopyOwner(workingCopyOwner);
 		parser.setIgnoreMethodBodies(true);
 		
-		IJavaProject project = jdtType.getJavaProject();
-		parser.setProject(project);
+		parser.setProject(javaProject);
 		
 		@SuppressWarnings("unchecked")
-		Map<Object, Object> options = project.getOptions(true);
+		Map<Object, Object> options = javaProject.getOptions(true);
 		
 		options.put(JavaCore.COMPILER_DOC_COMMENT_SUPPORT, JavaCore.DISABLED);
 		parser.setCompilerOptions(options);
@@ -402,9 +414,33 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 			clearCache();
 			createType.stop();
 			return result;
-		} else
+		} else {
 			throw new IllegalStateException("Expected ITypeBinding for '" + jdtType.getFullyQualifiedName()
 					+ "', but got '" + binding.toString() + "'.");
+		}
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public JvmDeclaredType createType(IType type, TypeResource resource, Map<?, ?> options) {
+		if (resource == null) {
+			return createType(type);
+		}
+		if (options != null) {
+			IJavaProject javaProject = (IJavaProject) options.get(TypeResource.OPTION_CLASSPATH_CONTEXT);
+			if (javaProject != null) {
+				return createType(type, javaProject);
+			}
+		}
+		ResourceSet resourceSet = resource.getResourceSet();
+		if (resourceSet instanceof XtextResourceSet) {
+			Object project = ((XtextResourceSet) resourceSet).getClasspathURIContext();
+			if (project instanceof IJavaProject) {
+				return createType(type, (IJavaProject) project);
+			}
+		}
+		return createType(type);
 	}
 
 	private void clearCache() {

@@ -7,12 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.jdt;
 
+import java.util.Map;
+
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.access.IMirrorOptionsAware;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.AbstractClassMirror;
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
@@ -23,7 +26,7 @@ import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
  * 
  * TODO - remove Adapter interface, it's not used.
  */
-public class JdtTypeMirror extends AbstractClassMirror implements Adapter {
+public class JdtTypeMirror extends AbstractClassMirror implements Adapter, IMirrorOptionsAware {
 	
 	private final static Logger LOG = Logger.getLogger(JdtTypeMirror.class);
 
@@ -37,8 +40,20 @@ public class JdtTypeMirror extends AbstractClassMirror implements Adapter {
 	}
 	
 	public void initialize(TypeResource typeResource) {
+		initialize(typeResource, null);
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public void initialize(TypeResource typeResource, Map<?, ?> options) {
 		try {
-			typeResource.getContents().add(typeFactory.createType(mirroredType));
+			if (typeFactory instanceof ITypeFactory.OptionsAware<?, ?>) {
+				JvmDeclaredType jvmType = ((ITypeFactory.OptionsAware<IType, JvmDeclaredType>) typeFactory).createType(mirroredType, typeResource, options);
+				typeResource.getContents().add(jvmType);
+			} else {
+				typeResource.getContents().add(typeFactory.createType(mirroredType));
+			}
 		} catch (RuntimeException e) {
 			LOG.error("Error initializing type "+typeResource.getURI(), e);
 			throw e;
