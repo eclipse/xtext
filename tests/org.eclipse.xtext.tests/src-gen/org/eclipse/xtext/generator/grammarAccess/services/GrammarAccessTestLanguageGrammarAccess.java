@@ -95,20 +95,24 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 	
 	
-	private RootElements pRoot;
-	private TypeElements pType;
-	private ATypeElements pAType;
-	private AnotherTypeElements pAnotherType;
+	private final RootElements pRoot;
+	private final TypeElements pType;
+	private final ATypeElements pAType;
+	private final AnotherTypeElements pAnotherType;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public GrammarAccessTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pRoot = new RootElements();
+		this.pType = new TypeElements();
+		this.pAType = new ATypeElements();
+		this.pAnotherType = new AnotherTypeElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -141,7 +145,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//Root returns root::AModel:
 	//	elements+=Type*;
 	public RootElements getRootAccess() {
-		return (pRoot != null) ? pRoot : (pRoot = new RootElements());
+		return pRoot;
 	}
 	
 	public ParserRule getRootRule() {
@@ -151,7 +155,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//Type returns root::AType:
 	//	AType | AnotherType;
 	public TypeElements getTypeAccess() {
-		return (pType != null) ? pType : (pType = new TypeElements());
+		return pType;
 	}
 	
 	public ParserRule getTypeRule() {
@@ -161,7 +165,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//AType returns root::AType:
 	//	"foo" {root::AType};
 	public ATypeElements getATypeAccess() {
-		return (pAType != null) ? pAType : (pAType = new ATypeElements());
+		return pAType;
 	}
 	
 	public ParserRule getATypeRule() {
@@ -171,7 +175,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//AnotherType returns sub::AnotherType:
 	//	"bar" {sub::AnotherType};
 	public AnotherTypeElements getAnotherTypeAccess() {
-		return (pAnotherType != null) ? pAnotherType : (pAnotherType = new AnotherTypeElements());
+		return pAnotherType;
 	}
 	
 	public ParserRule getAnotherTypeRule() {

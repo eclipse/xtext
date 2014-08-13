@@ -91,19 +91,22 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractGramm
 	}
 	
 	
-	private ModelElements pModel;
-	private DomainModelElements pDomainModel;
-	private EntityElements pEntity;
+	private final ModelElements pModel;
+	private final DomainModelElements pDomainModel;
+	private final EntityElements pEntity;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public HiddenTokenSequencerTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pDomainModel = new DomainModelElements();
+		this.pEntity = new EntityElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -136,7 +139,7 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractGramm
 	//Model:
 	//	domainModel=DomainModel;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -146,7 +149,7 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractGramm
 	//DomainModel:
 	//	"entities" entities+=Entity* "end";
 	public DomainModelElements getDomainModelAccess() {
-		return (pDomainModel != null) ? pDomainModel : (pDomainModel = new DomainModelElements());
+		return pDomainModel;
 	}
 	
 	public ParserRule getDomainModelRule() {
@@ -156,7 +159,7 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractGramm
 	//Entity:
 	//	name=ID description=STRING;
 	public EntityElements getEntityAccess() {
-		return (pEntity != null) ? pEntity : (pEntity = new EntityElements());
+		return pEntity;
 	}
 	
 	public ParserRule getEntityRule() {

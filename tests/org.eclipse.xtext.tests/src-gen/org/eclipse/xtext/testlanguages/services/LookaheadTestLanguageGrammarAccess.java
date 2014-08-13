@@ -223,23 +223,30 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
-	private EntryElements pEntry;
-	private AltsElements pAlts;
-	private LookAhead0Elements pLookAhead0;
-	private LookAhead1Elements pLookAhead1;
-	private LookAhead2Elements pLookAhead2;
-	private LookAhead3Elements pLookAhead3;
-	private LookAhead4Elements pLookAhead4;
+	private final EntryElements pEntry;
+	private final AltsElements pAlts;
+	private final LookAhead0Elements pLookAhead0;
+	private final LookAhead1Elements pLookAhead1;
+	private final LookAhead2Elements pLookAhead2;
+	private final LookAhead3Elements pLookAhead3;
+	private final LookAhead4Elements pLookAhead4;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public LookaheadTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pEntry = new EntryElements();
+		this.pAlts = new AltsElements();
+		this.pLookAhead0 = new LookAhead0Elements();
+		this.pLookAhead1 = new LookAhead1Elements();
+		this.pLookAhead2 = new LookAhead2Elements();
+		this.pLookAhead3 = new LookAhead3Elements();
+		this.pLookAhead4 = new LookAhead4Elements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -272,7 +279,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Entry:
 	//	contents+=Alts*;
 	public EntryElements getEntryAccess() {
-		return (pEntry != null) ? pEntry : (pEntry = new EntryElements());
+		return pEntry;
 	}
 	
 	public ParserRule getEntryRule() {
@@ -282,7 +289,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Alts:
 	//	LookAhead0 | LookAhead1 | LookAhead3;
 	public AltsElements getAltsAccess() {
-		return (pAlts != null) ? pAlts : (pAlts = new AltsElements());
+		return pAlts;
 	}
 	
 	public ParserRule getAltsRule() {
@@ -292,7 +299,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//LookAhead0:
 	//	"bar" x="a";
 	public LookAhead0Elements getLookAhead0Access() {
-		return (pLookAhead0 != null) ? pLookAhead0 : (pLookAhead0 = new LookAhead0Elements());
+		return pLookAhead0;
 	}
 	
 	public ParserRule getLookAhead0Rule() {
@@ -302,7 +309,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//LookAhead1:
 	//	"foo" y=LookAhead2 x="b" z="d";
 	public LookAhead1Elements getLookAhead1Access() {
-		return (pLookAhead1 != null) ? pLookAhead1 : (pLookAhead1 = new LookAhead1Elements());
+		return pLookAhead1;
 	}
 	
 	public ParserRule getLookAhead1Rule() {
@@ -312,7 +319,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//LookAhead2:
 	//	(z="foo" | z="bar") "c";
 	public LookAhead2Elements getLookAhead2Access() {
-		return (pLookAhead2 != null) ? pLookAhead2 : (pLookAhead2 = new LookAhead2Elements());
+		return pLookAhead2;
 	}
 	
 	public ParserRule getLookAhead2Rule() {
@@ -322,7 +329,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//LookAhead3:
 	//	"foo" "bar" x="b" z=LookAhead4;
 	public LookAhead3Elements getLookAhead3Access() {
-		return (pLookAhead3 != null) ? pLookAhead3 : (pLookAhead3 = new LookAhead3Elements());
+		return pLookAhead3;
 	}
 	
 	public ParserRule getLookAhead3Rule() {
@@ -332,7 +339,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//LookAhead4:
 	//	x="c" | x="d";
 	public LookAhead4Elements getLookAhead4Access() {
-		return (pLookAhead4 != null) ? pLookAhead4 : (pLookAhead4 = new LookAhead4Elements());
+		return pLookAhead4;
 	}
 	
 	public ParserRule getLookAhead4Rule() {

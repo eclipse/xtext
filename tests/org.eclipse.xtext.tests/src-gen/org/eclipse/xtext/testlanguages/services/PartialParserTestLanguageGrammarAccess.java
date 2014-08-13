@@ -375,26 +375,36 @@ public class PartialParserTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 	
 	
-	private SomeContainerElements pSomeContainer;
-	private NestedElements pNested;
-	private ContentElements pContent;
-	private ChildrenElements pChildren;
-	private ChildElements pChild;
-	private AbstractChildrenElements pAbstractChildren;
-	private AbstractChildElements pAbstractChild;
-	private FirstConcreteElements pFirstConcrete;
-	private SecondConcreteElements pSecondConcrete;
-	private NamedElements pNamed;
+	private final SomeContainerElements pSomeContainer;
+	private final NestedElements pNested;
+	private final ContentElements pContent;
+	private final ChildrenElements pChildren;
+	private final ChildElements pChild;
+	private final AbstractChildrenElements pAbstractChildren;
+	private final AbstractChildElements pAbstractChild;
+	private final FirstConcreteElements pFirstConcrete;
+	private final SecondConcreteElements pSecondConcrete;
+	private final NamedElements pNamed;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public PartialParserTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pSomeContainer = new SomeContainerElements();
+		this.pNested = new NestedElements();
+		this.pContent = new ContentElements();
+		this.pChildren = new ChildrenElements();
+		this.pChild = new ChildElements();
+		this.pAbstractChildren = new AbstractChildrenElements();
+		this.pAbstractChild = new AbstractChildElements();
+		this.pFirstConcrete = new FirstConcreteElements();
+		this.pSecondConcrete = new SecondConcreteElements();
+		this.pNamed = new NamedElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -427,7 +437,7 @@ public class PartialParserTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//SomeContainer:
 	//	"container" name=ID "{" (nested+=Nested | content+=Content)* "}";
 	public SomeContainerElements getSomeContainerAccess() {
-		return (pSomeContainer != null) ? pSomeContainer : (pSomeContainer = new SomeContainerElements());
+		return pSomeContainer;
 	}
 	
 	public ParserRule getSomeContainerRule() {
@@ -437,7 +447,7 @@ public class PartialParserTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//Nested:
 	//	"nested" "{" nested+=SomeContainer+ "}";
 	public NestedElements getNestedAccess() {
-		return (pNested != null) ? pNested : (pNested = new NestedElements());
+		return pNested;
 	}
 	
 	public ParserRule getNestedRule() {
@@ -447,7 +457,7 @@ public class PartialParserTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//Content:
 	//	Children | AbstractChildren;
 	public ContentElements getContentAccess() {
-		return (pContent != null) ? pContent : (pContent = new ContentElements());
+		return pContent;
 	}
 	
 	public ParserRule getContentRule() {
@@ -457,7 +467,7 @@ public class PartialParserTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//Children:
 	//	"children" "{" children+=Child ("," children+=Child)* "}";
 	public ChildrenElements getChildrenAccess() {
-		return (pChildren != null) ? pChildren : (pChildren = new ChildrenElements());
+		return pChildren;
 	}
 	
 	public ParserRule getChildrenRule() {
@@ -467,7 +477,7 @@ public class PartialParserTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//Child:
 	//	"->" "C" "(" value=Named ")";
 	public ChildElements getChildAccess() {
-		return (pChild != null) ? pChild : (pChild = new ChildElements());
+		return pChild;
 	}
 	
 	public ParserRule getChildRule() {
@@ -477,7 +487,7 @@ public class PartialParserTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//AbstractChildren:
 	//	"abstract children" "{" abstractChildren+=AbstractChild+ "}";
 	public AbstractChildrenElements getAbstractChildrenAccess() {
-		return (pAbstractChildren != null) ? pAbstractChildren : (pAbstractChildren = new AbstractChildrenElements());
+		return pAbstractChildren;
 	}
 	
 	public ParserRule getAbstractChildrenRule() {
@@ -487,7 +497,7 @@ public class PartialParserTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//AbstractChild:
 	//	FirstConcrete | SecondConcrete;
 	public AbstractChildElements getAbstractChildAccess() {
-		return (pAbstractChild != null) ? pAbstractChild : (pAbstractChild = new AbstractChildElements());
+		return pAbstractChild;
 	}
 	
 	public ParserRule getAbstractChildRule() {
@@ -497,7 +507,7 @@ public class PartialParserTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//FirstConcrete:
 	//	"->" "F" "(" value=Named referencedContainer=[SomeContainer]? ")";
 	public FirstConcreteElements getFirstConcreteAccess() {
-		return (pFirstConcrete != null) ? pFirstConcrete : (pFirstConcrete = new FirstConcreteElements());
+		return pFirstConcrete;
 	}
 	
 	public ParserRule getFirstConcreteRule() {
@@ -507,7 +517,7 @@ public class PartialParserTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//SecondConcrete:
 	//	"->" "F" "S" "(" value=Named referencedChildren+=[Child]? ")";
 	public SecondConcreteElements getSecondConcreteAccess() {
-		return (pSecondConcrete != null) ? pSecondConcrete : (pSecondConcrete = new SecondConcreteElements());
+		return pSecondConcrete;
 	}
 	
 	public ParserRule getSecondConcreteRule() {
@@ -517,7 +527,7 @@ public class PartialParserTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//Named:
 	//	name=ID;
 	public NamedElements getNamedAccess() {
-		return (pNamed != null) ? pNamed : (pNamed = new NamedElements());
+		return pNamed;
 	}
 	
 	public ParserRule getNamedRule() {

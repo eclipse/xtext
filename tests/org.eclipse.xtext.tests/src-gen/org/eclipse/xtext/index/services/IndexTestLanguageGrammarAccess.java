@@ -283,26 +283,36 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	}
 	
 	
-	private FileElements pFile;
-	private ImportElements pImport;
-	private QualifiedNameWithWildCardElements pQualifiedNameWithWildCard;
-	private QualifiedNameElements pQualifiedName;
-	private NamespaceElements pNamespace;
-	private ElementElements pElement;
-	private TypeElements pType;
-	private EntityElements pEntity;
-	private DatatypeElements pDatatype;
-	private PropertyElements pProperty;
+	private final FileElements pFile;
+	private final ImportElements pImport;
+	private final QualifiedNameWithWildCardElements pQualifiedNameWithWildCard;
+	private final QualifiedNameElements pQualifiedName;
+	private final NamespaceElements pNamespace;
+	private final ElementElements pElement;
+	private final TypeElements pType;
+	private final EntityElements pEntity;
+	private final DatatypeElements pDatatype;
+	private final PropertyElements pProperty;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public IndexTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pFile = new FileElements();
+		this.pImport = new ImportElements();
+		this.pQualifiedNameWithWildCard = new QualifiedNameWithWildCardElements();
+		this.pQualifiedName = new QualifiedNameElements();
+		this.pNamespace = new NamespaceElements();
+		this.pElement = new ElementElements();
+		this.pType = new TypeElements();
+		this.pEntity = new EntityElements();
+		this.pDatatype = new DatatypeElements();
+		this.pProperty = new PropertyElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -335,7 +345,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	//File:
 	//	elements+=Element*;
 	public FileElements getFileAccess() {
-		return (pFile != null) ? pFile : (pFile = new FileElements());
+		return pFile;
 	}
 	
 	public ParserRule getFileRule() {
@@ -345,7 +355,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	//Import:
 	//	"import" importedNamespace=QualifiedNameWithWildCard;
 	public ImportElements getImportAccess() {
-		return (pImport != null) ? pImport : (pImport = new ImportElements());
+		return pImport;
 	}
 	
 	public ParserRule getImportRule() {
@@ -355,7 +365,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	//QualifiedNameWithWildCard:
 	//	QualifiedName ".*"?;
 	public QualifiedNameWithWildCardElements getQualifiedNameWithWildCardAccess() {
-		return (pQualifiedNameWithWildCard != null) ? pQualifiedNameWithWildCard : (pQualifiedNameWithWildCard = new QualifiedNameWithWildCardElements());
+		return pQualifiedNameWithWildCard;
 	}
 	
 	public ParserRule getQualifiedNameWithWildCardRule() {
@@ -365,7 +375,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	//QualifiedName:
 	//	ID ("." ID)*;
 	public QualifiedNameElements getQualifiedNameAccess() {
-		return (pQualifiedName != null) ? pQualifiedName : (pQualifiedName = new QualifiedNameElements());
+		return pQualifiedName;
 	}
 	
 	public ParserRule getQualifiedNameRule() {
@@ -375,7 +385,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	//Namespace:
 	//	name=QualifiedName "{" elements+=Element* "}";
 	public NamespaceElements getNamespaceAccess() {
-		return (pNamespace != null) ? pNamespace : (pNamespace = new NamespaceElements());
+		return pNamespace;
 	}
 	
 	public ParserRule getNamespaceRule() {
@@ -385,7 +395,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	//Element:
 	//	Namespace | Type | Import;
 	public ElementElements getElementAccess() {
-		return (pElement != null) ? pElement : (pElement = new ElementElements());
+		return pElement;
 	}
 	
 	public ParserRule getElementRule() {
@@ -395,7 +405,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	//Type:
 	//	Entity | Datatype;
 	public TypeElements getTypeAccess() {
-		return (pType != null) ? pType : (pType = new TypeElements());
+		return pType;
 	}
 	
 	public ParserRule getTypeRule() {
@@ -405,7 +415,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	//Entity:
 	//	"entity" name=ID "{" properties+=Property* "}";
 	public EntityElements getEntityAccess() {
-		return (pEntity != null) ? pEntity : (pEntity = new EntityElements());
+		return pEntity;
 	}
 	
 	public ParserRule getEntityRule() {
@@ -415,7 +425,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	//Datatype:
 	//	"datatype" name=ID;
 	public DatatypeElements getDatatypeAccess() {
-		return (pDatatype != null) ? pDatatype : (pDatatype = new DatatypeElements());
+		return pDatatype;
 	}
 	
 	public ParserRule getDatatypeRule() {
@@ -425,7 +435,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	//Property:
 	//	type=[Type|QualifiedName] name=ID;
 	public PropertyElements getPropertyAccess() {
-		return (pProperty != null) ? pProperty : (pProperty = new PropertyElements());
+		return pProperty;
 	}
 	
 	public ParserRule getPropertyRule() {

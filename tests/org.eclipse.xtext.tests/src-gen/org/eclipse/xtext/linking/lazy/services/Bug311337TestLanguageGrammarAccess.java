@@ -171,20 +171,24 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
-	private ModelElements pModel;
-	private DefinitionElements pDefinition;
-	private ChildElements pChild;
-	private ReferenceElements pReference;
+	private final ModelElements pModel;
+	private final DefinitionElements pDefinition;
+	private final ChildElements pChild;
+	private final ReferenceElements pReference;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug311337TestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pDefinition = new DefinitionElements();
+		this.pChild = new ChildElements();
+		this.pReference = new ReferenceElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -217,7 +221,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Model:
 	//	def+=Definition+;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -227,7 +231,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Definition:
 	//	"(def)" name=ID ":" child+=Child ref+=Reference?;
 	public DefinitionElements getDefinitionAccess() {
-		return (pDefinition != null) ? pDefinition : (pDefinition = new DefinitionElements());
+		return pDefinition;
 	}
 	
 	public ParserRule getDefinitionRule() {
@@ -237,7 +241,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Child:
 	//	"(child)" name=ID ":" link=[Definition]?;
 	public ChildElements getChildAccess() {
-		return (pChild != null) ? pChild : (pChild = new ChildElements());
+		return pChild;
 	}
 	
 	public ParserRule getChildRule() {
@@ -247,7 +251,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Reference:
 	//	"(ref)" refChild=[Child] (":" {NestedRef.left=current} refChild=[Child])*;
 	public ReferenceElements getReferenceAccess() {
-		return (pReference != null) ? pReference : (pReference = new ReferenceElements());
+		return pReference;
 	}
 	
 	public ParserRule getReferenceRule() {

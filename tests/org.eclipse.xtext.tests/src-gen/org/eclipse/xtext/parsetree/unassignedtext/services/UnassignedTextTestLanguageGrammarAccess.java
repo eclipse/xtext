@@ -239,28 +239,40 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 	
 	
-	private ModelElements pModel;
-	private CaseInsensitiveKeywordRuleElements pCaseInsensitiveKeywordRule;
-	private TerminalRule tCaseInsensitiveKeyword;
-	private PluralRuleElements pPluralRule;
-	private TerminalRule tPlural;
-	private MultiRuleElements pMultiRule;
-	private TerminalRule tMulti;
-	private TerminalRule tMulti2;
-	private DatatypeRuleElements pDatatypeRule;
-	private DatatypeElements pDatatype;
-	private Datatype2Elements pDatatype2;
-	private CommonTerminalsRuleElements pCommonTerminalsRule;
+	private final ModelElements pModel;
+	private final CaseInsensitiveKeywordRuleElements pCaseInsensitiveKeywordRule;
+	private final TerminalRule tCaseInsensitiveKeyword;
+	private final PluralRuleElements pPluralRule;
+	private final TerminalRule tPlural;
+	private final MultiRuleElements pMultiRule;
+	private final TerminalRule tMulti;
+	private final TerminalRule tMulti2;
+	private final DatatypeRuleElements pDatatypeRule;
+	private final DatatypeElements pDatatype;
+	private final Datatype2Elements pDatatype2;
+	private final CommonTerminalsRuleElements pCommonTerminalsRule;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public UnassignedTextTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pCaseInsensitiveKeywordRule = new CaseInsensitiveKeywordRuleElements();
+		this.tCaseInsensitiveKeyword = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "CaseInsensitiveKeyword");
+		this.pPluralRule = new PluralRuleElements();
+		this.tPlural = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Plural");
+		this.pMultiRule = new MultiRuleElements();
+		this.tMulti = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Multi");
+		this.tMulti2 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Multi2");
+		this.pDatatypeRule = new DatatypeRuleElements();
+		this.pDatatype = new DatatypeElements();
+		this.pDatatype2 = new Datatype2Elements();
+		this.pCommonTerminalsRule = new CommonTerminalsRuleElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -293,7 +305,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Model:
 	//	CaseInsensitiveKeywordRule | PluralRule | MultiRule | DatatypeRule | CommonTerminalsRule;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -303,7 +315,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	//CaseInsensitiveKeywordRule:
 	//	CaseInsensitiveKeyword val=INT;
 	public CaseInsensitiveKeywordRuleElements getCaseInsensitiveKeywordRuleAccess() {
-		return (pCaseInsensitiveKeywordRule != null) ? pCaseInsensitiveKeywordRule : (pCaseInsensitiveKeywordRule = new CaseInsensitiveKeywordRuleElements());
+		return pCaseInsensitiveKeywordRule;
 	}
 	
 	public ParserRule getCaseInsensitiveKeywordRuleRule() {
@@ -313,13 +325,13 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	//terminal CaseInsensitiveKeyword:
 	//	("k" | "K") ("e" | "E") ("y" | "Y") ("w" | "W") ("o" | "O") ("r" | "R") ("d" | "D");
 	public TerminalRule getCaseInsensitiveKeywordRule() {
-		return (tCaseInsensitiveKeyword != null) ? tCaseInsensitiveKeyword : (tCaseInsensitiveKeyword = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "CaseInsensitiveKeyword"));
+		return tCaseInsensitiveKeyword;
 	} 
 
 	//PluralRule:
 	//	"contents:" count=INT Plural;
 	public PluralRuleElements getPluralRuleAccess() {
-		return (pPluralRule != null) ? pPluralRule : (pPluralRule = new PluralRuleElements());
+		return pPluralRule;
 	}
 	
 	public ParserRule getPluralRuleRule() {
@@ -329,13 +341,13 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	//terminal Plural:
 	//	"item" | "items";
 	public TerminalRule getPluralRule() {
-		return (tPlural != null) ? tPlural : (tPlural = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Plural"));
+		return tPlural;
 	} 
 
 	//MultiRule:
 	//	"multi" val=INT Multi Multi Multi;
 	public MultiRuleElements getMultiRuleAccess() {
-		return (pMultiRule != null) ? pMultiRule : (pMultiRule = new MultiRuleElements());
+		return pMultiRule;
 	}
 	
 	public ParserRule getMultiRuleRule() {
@@ -345,19 +357,19 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	//terminal Multi:
 	//	"a" "b"? "c"+ "d"* ("e" | "f") (("g" | "h") | "i"+) Multi2 "0".."9" "0".."9"+;
 	public TerminalRule getMultiRule() {
-		return (tMulti != null) ? tMulti : (tMulti = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Multi"));
+		return tMulti;
 	} 
 
 	//terminal Multi2:
 	//	"j";
 	public TerminalRule getMulti2Rule() {
-		return (tMulti2 != null) ? tMulti2 : (tMulti2 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Multi2"));
+		return tMulti2;
 	} 
 
 	//DatatypeRule:
 	//	"datatype" val=INT Datatype;
 	public DatatypeRuleElements getDatatypeRuleAccess() {
-		return (pDatatypeRule != null) ? pDatatypeRule : (pDatatypeRule = new DatatypeRuleElements());
+		return pDatatypeRule;
 	}
 	
 	public ParserRule getDatatypeRuleRule() {
@@ -367,7 +379,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Datatype returns ecore::EString:
 	//	"str" | INT | Datatype2;
 	public DatatypeElements getDatatypeAccess() {
-		return (pDatatype != null) ? pDatatype : (pDatatype = new DatatypeElements());
+		return pDatatype;
 	}
 	
 	public ParserRule getDatatypeRule() {
@@ -377,7 +389,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Datatype2 returns ecore::EString:
 	//	STRING;
 	public Datatype2Elements getDatatype2Access() {
-		return (pDatatype2 != null) ? pDatatype2 : (pDatatype2 = new Datatype2Elements());
+		return pDatatype2;
 	}
 	
 	public ParserRule getDatatype2Rule() {
@@ -387,7 +399,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	//CommonTerminalsRule:
 	//	"terminals" ID INT STRING val=ID;
 	public CommonTerminalsRuleElements getCommonTerminalsRuleAccess() {
-		return (pCommonTerminalsRule != null) ? pCommonTerminalsRule : (pCommonTerminalsRule = new CommonTerminalsRuleElements());
+		return pCommonTerminalsRule;
 	}
 	
 	public ParserRule getCommonTerminalsRuleRule() {

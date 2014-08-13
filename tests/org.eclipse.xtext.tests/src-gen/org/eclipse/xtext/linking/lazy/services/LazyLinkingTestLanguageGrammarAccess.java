@@ -233,20 +233,24 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 	
 	
-	private ModelElements pModel;
-	private TypeElements pType;
-	private PropertyElements pProperty;
-	private UnresolvedProxyPropertyElements pUnresolvedProxyProperty;
+	private final ModelElements pModel;
+	private final TypeElements pType;
+	private final PropertyElements pProperty;
+	private final UnresolvedProxyPropertyElements pUnresolvedProxyProperty;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public LazyLinkingTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pType = new TypeElements();
+		this.pProperty = new PropertyElements();
+		this.pUnresolvedProxyProperty = new UnresolvedProxyPropertyElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -279,7 +283,7 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 	//Model:
 	//	types+=Type*;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -290,7 +294,7 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 	//	"type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])?
 	//	"{" properties+=Property* unresolvedProxyProperty+=UnresolvedProxyProperty* "}";
 	public TypeElements getTypeAccess() {
-		return (pType != null) ? pType : (pType = new TypeElements());
+		return pType;
 	}
 	
 	public ParserRule getTypeRule() {
@@ -300,7 +304,7 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 	//Property:
 	//	type+=[Type]+ name=ID ";";
 	public PropertyElements getPropertyAccess() {
-		return (pProperty != null) ? pProperty : (pProperty = new PropertyElements());
+		return pProperty;
 	}
 	
 	public ParserRule getPropertyRule() {
@@ -310,7 +314,7 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 	//UnresolvedProxyProperty:
 	//	"unresolved" type+=[Type]+ name=ID ";";
 	public UnresolvedProxyPropertyElements getUnresolvedProxyPropertyAccess() {
-		return (pUnresolvedProxyProperty != null) ? pUnresolvedProxyProperty : (pUnresolvedProxyProperty = new UnresolvedProxyPropertyElements());
+		return pUnresolvedProxyProperty;
 	}
 	
 	public ParserRule getUnresolvedProxyPropertyRule() {

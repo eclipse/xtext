@@ -139,18 +139,20 @@ public class Bug299395TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
-	private ModelElements pModel;
-	private SubModelElements pSubModel;
+	private final ModelElements pModel;
+	private final SubModelElements pSubModel;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug299395TestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pSubModel = new SubModelElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -183,7 +185,7 @@ public class Bug299395TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Model:
 	//	{Model} ("{" strings+=STRING? "}")* ("[" (keys+=STRING values+=STRING)* "]")* ("subModel" subModel=SubModel)?;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -193,7 +195,7 @@ public class Bug299395TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//SubModel:
 	//	{SubModel} ("1" "2" strings+=STRING?)*;
 	public SubModelElements getSubModelAccess() {
-		return (pSubModel != null) ? pSubModel : (pSubModel = new SubModelElements());
+		return pSubModel;
 	}
 	
 	public ParserRule getSubModelRule() {

@@ -91,18 +91,20 @@ public class EnumAndReferenceTestLanguageGrammarAccess extends AbstractGrammarEl
 		public Keyword getAnotherEnumLiteralAnotherEnumLiteralKeyword_1_0() { return cAnotherEnumLiteralAnotherEnumLiteralKeyword_1_0; }
 	}
 	
-	private EntityWithEnumAndReferenceElements pEntityWithEnumAndReference;
-	private KindOfKeywordElements unknownRuleKindOfKeyword;
+	private final EntityWithEnumAndReferenceElements pEntityWithEnumAndReference;
+	private final KindOfKeywordElements unknownRuleKindOfKeyword;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public EnumAndReferenceTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pEntityWithEnumAndReference = new EntityWithEnumAndReferenceElements();
+		this.unknownRuleKindOfKeyword = new KindOfKeywordElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -135,7 +137,7 @@ public class EnumAndReferenceTestLanguageGrammarAccess extends AbstractGrammarEl
 	//EntityWithEnumAndReference:
 	//	type=KindOfKeyword name=ID "reference" ref=[EntityWithEnumAndReference];
 	public EntityWithEnumAndReferenceElements getEntityWithEnumAndReferenceAccess() {
-		return (pEntityWithEnumAndReference != null) ? pEntityWithEnumAndReference : (pEntityWithEnumAndReference = new EntityWithEnumAndReferenceElements());
+		return pEntityWithEnumAndReference;
 	}
 	
 	public ParserRule getEntityWithEnumAndReferenceRule() {
@@ -145,7 +147,7 @@ public class EnumAndReferenceTestLanguageGrammarAccess extends AbstractGrammarEl
 	//enum KindOfKeyword:
 	//	kindOfKeyword | anotherEnumLiteral;
 	public KindOfKeywordElements getKindOfKeywordAccess() {
-		return (unknownRuleKindOfKeyword != null) ? unknownRuleKindOfKeyword : (unknownRuleKindOfKeyword = new KindOfKeywordElements());
+		return unknownRuleKindOfKeyword;
 	}
 	
 	public EnumRule getKindOfKeywordRule() {

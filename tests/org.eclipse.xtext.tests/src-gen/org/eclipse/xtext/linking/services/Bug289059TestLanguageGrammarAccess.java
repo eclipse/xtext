@@ -79,18 +79,20 @@ public class Bug289059TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
-	private ModelElements pModel;
-	private UnassignedActionElements pUnassignedAction;
+	private final ModelElements pModel;
+	private final UnassignedActionElements pUnassignedAction;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug289059TestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pUnassignedAction = new UnassignedActionElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -123,7 +125,7 @@ public class Bug289059TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Model:
 	//	name=ID enabled=UnassignedAction? reference=[Model]?;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -133,7 +135,7 @@ public class Bug289059TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//UnassignedAction:
 	//	{UnassignedAction} "enabled";
 	public UnassignedActionElements getUnassignedActionAccess() {
-		return (pUnassignedAction != null) ? pUnassignedAction : (pUnassignedAction = new UnassignedActionElements());
+		return pUnassignedAction;
 	}
 	
 	public ParserRule getUnassignedActionRule() {

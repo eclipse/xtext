@@ -87,21 +87,26 @@ public class UnicodeTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 	
 	
-	private ModelElements pModel;
-	private AbstractStringElements pAbstractString;
-	private GStringElements pGString;
-	private QuotedStringElements pQuotedString;
-	private TerminalRule tGERMAN_STRING;
+	private final ModelElements pModel;
+	private final AbstractStringElements pAbstractString;
+	private final GStringElements pGString;
+	private final QuotedStringElements pQuotedString;
+	private final TerminalRule tGERMAN_STRING;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public UnicodeTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pAbstractString = new AbstractStringElements();
+		this.pGString = new GStringElements();
+		this.pQuotedString = new QuotedStringElements();
+		this.tGERMAN_STRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "GERMAN_STRING");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -134,7 +139,7 @@ public class UnicodeTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	//Model:
 	//	strings+=AbstractString*;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -144,7 +149,7 @@ public class UnicodeTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	//AbstractString:
 	//	GString | QuotedString;
 	public AbstractStringElements getAbstractStringAccess() {
-		return (pAbstractString != null) ? pAbstractString : (pAbstractString = new AbstractStringElements());
+		return pAbstractString;
 	}
 	
 	public ParserRule getAbstractStringRule() {
@@ -154,7 +159,7 @@ public class UnicodeTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	//GString:
 	//	name=GERMAN_STRING;
 	public GStringElements getGStringAccess() {
-		return (pGString != null) ? pGString : (pGString = new GStringElements());
+		return pGString;
 	}
 	
 	public ParserRule getGStringRule() {
@@ -164,7 +169,7 @@ public class UnicodeTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	//QuotedString:
 	//	name=STRING;
 	public QuotedStringElements getQuotedStringAccess() {
-		return (pQuotedString != null) ? pQuotedString : (pQuotedString = new QuotedStringElements());
+		return pQuotedString;
 	}
 	
 	public ParserRule getQuotedStringRule() {
@@ -174,7 +179,7 @@ public class UnicodeTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	//terminal GERMAN_STRING:
 	//	("A".."Z" | "a".."z" | "Ä" | "Ö" | "Ü" | "ä" | "ö" | "ü" | "?")*;
 	public TerminalRule getGERMAN_STRINGRule() {
-		return (tGERMAN_STRING != null) ? tGERMAN_STRING : (tGERMAN_STRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "GERMAN_STRING"));
+		return tGERMAN_STRING;
 	} 
 
 	//terminal ID:

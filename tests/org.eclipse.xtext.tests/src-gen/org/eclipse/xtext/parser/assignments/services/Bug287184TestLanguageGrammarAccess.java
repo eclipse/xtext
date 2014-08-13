@@ -187,21 +187,26 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
-	private ModelElements pModel;
-	private AbstractDetailElements pAbstractDetail;
-	private DetailElements pDetail;
-	private AssociatedDetailElements pAssociatedDetail;
-	private FQNElements pFQN;
+	private final ModelElements pModel;
+	private final AbstractDetailElements pAbstractDetail;
+	private final DetailElements pDetail;
+	private final AssociatedDetailElements pAssociatedDetail;
+	private final FQNElements pFQN;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug287184TestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pAbstractDetail = new AbstractDetailElements();
+		this.pDetail = new DetailElements();
+		this.pAssociatedDetail = new AssociatedDetailElements();
+		this.pFQN = new FQNElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -234,7 +239,7 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Model:
 	//	"model" name=FQN detail+=(Detail | AssociatedDetail)+;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -244,7 +249,7 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//AbstractDetail:
 	//	Detail | AssociatedDetail;
 	public AbstractDetailElements getAbstractDetailAccess() {
-		return (pAbstractDetail != null) ? pAbstractDetail : (pAbstractDetail = new AbstractDetailElements());
+		return pAbstractDetail;
 	}
 	
 	public ParserRule getAbstractDetailRule() {
@@ -254,7 +259,7 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Detail:
 	//	"detail" visibility=("private" | "protected" | "public")? detailClass=[Model|FQN];
 	public DetailElements getDetailAccess() {
-		return (pDetail != null) ? pDetail : (pDetail = new DetailElements());
+		return pDetail;
 	}
 	
 	public ParserRule getDetailRule() {
@@ -264,7 +269,7 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//AssociatedDetail:
 	//	"associated" detailClass=[Model|FQN] ";";
 	public AssociatedDetailElements getAssociatedDetailAccess() {
-		return (pAssociatedDetail != null) ? pAssociatedDetail : (pAssociatedDetail = new AssociatedDetailElements());
+		return pAssociatedDetail;
 	}
 	
 	public ParserRule getAssociatedDetailRule() {
@@ -274,7 +279,7 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//FQN:
 	//	ID ("." ID)*;
 	public FQNElements getFQNAccess() {
-		return (pFQN != null) ? pFQN : (pFQN = new FQNElements());
+		return pFQN;
 	}
 	
 	public ParserRule getFQNRule() {

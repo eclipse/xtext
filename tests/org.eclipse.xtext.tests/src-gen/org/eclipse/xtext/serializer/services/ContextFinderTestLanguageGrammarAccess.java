@@ -825,42 +825,68 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		public Keyword getLit2Lit2Keyword_0() { return cLit2Lit2Keyword_0; }
 	}
 	
-	private ModelElements pModel;
-	private Model2Elements pModel2;
-	private AttributeExclusionTest1Elements pAttributeExclusionTest1;
-	private AttributeExclusionTest2Elements pAttributeExclusionTest2;
-	private NestedTypeTest1Elements pNestedTypeTest1;
-	private NestedTypeTest2Elements pNestedTypeTest2;
-	private NestedTypeChildElements pNestedTypeChild;
-	private NestedTypeChild1Elements pNestedTypeChild1;
-	private NestedTypeChild2Elements pNestedTypeChild2;
-	private NestedTypeRecursiveTest1Elements pNestedTypeRecursiveTest1;
-	private NestedTypeRecursiveTest2Elements pNestedTypeRecursiveTest2;
-	private ParentRefTest1Elements pParentRefTest1;
-	private ParentRefTest2Elements pParentRefTest2;
-	private ParentRefTestChild1Elements pParentRefTestChild1;
-	private ParentRefTestChild2Elements pParentRefTestChild2;
-	private QuantityExclusionTest1Elements pQuantityExclusionTest1;
-	private QuantityExclusionTest2Elements pQuantityExclusionTest2;
-	private ValueExclusionTest1Elements pValueExclusionTest1;
-	private ValueExclusionTest2Elements pValueExclusionTest2;
-	private ValueExclusionTestEn0Elements unknownRuleValueExclusionTestEn0;
-	private ValueExclusionTestEn1Elements unknownRuleValueExclusionTestEn1;
-	private ValueExclusionTestEn2Elements unknownRuleValueExclusionTestEn2;
-	private NodeExclusion1Elements pNodeExclusion1;
-	private NodeExclusion2Elements pNodeExclusion2;
-	private NodeExclusion1ListElements pNodeExclusion1List;
-	private NodeExclusion2ListElements pNodeExclusion2List;
+	private final ModelElements pModel;
+	private final Model2Elements pModel2;
+	private final AttributeExclusionTest1Elements pAttributeExclusionTest1;
+	private final AttributeExclusionTest2Elements pAttributeExclusionTest2;
+	private final NestedTypeTest1Elements pNestedTypeTest1;
+	private final NestedTypeTest2Elements pNestedTypeTest2;
+	private final NestedTypeChildElements pNestedTypeChild;
+	private final NestedTypeChild1Elements pNestedTypeChild1;
+	private final NestedTypeChild2Elements pNestedTypeChild2;
+	private final NestedTypeRecursiveTest1Elements pNestedTypeRecursiveTest1;
+	private final NestedTypeRecursiveTest2Elements pNestedTypeRecursiveTest2;
+	private final ParentRefTest1Elements pParentRefTest1;
+	private final ParentRefTest2Elements pParentRefTest2;
+	private final ParentRefTestChild1Elements pParentRefTestChild1;
+	private final ParentRefTestChild2Elements pParentRefTestChild2;
+	private final QuantityExclusionTest1Elements pQuantityExclusionTest1;
+	private final QuantityExclusionTest2Elements pQuantityExclusionTest2;
+	private final ValueExclusionTest1Elements pValueExclusionTest1;
+	private final ValueExclusionTest2Elements pValueExclusionTest2;
+	private final ValueExclusionTestEn0Elements unknownRuleValueExclusionTestEn0;
+	private final ValueExclusionTestEn1Elements unknownRuleValueExclusionTestEn1;
+	private final ValueExclusionTestEn2Elements unknownRuleValueExclusionTestEn2;
+	private final NodeExclusion1Elements pNodeExclusion1;
+	private final NodeExclusion2Elements pNodeExclusion2;
+	private final NodeExclusion1ListElements pNodeExclusion1List;
+	private final NodeExclusion2ListElements pNodeExclusion2List;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public ContextFinderTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pModel2 = new Model2Elements();
+		this.pAttributeExclusionTest1 = new AttributeExclusionTest1Elements();
+		this.pAttributeExclusionTest2 = new AttributeExclusionTest2Elements();
+		this.pNestedTypeTest1 = new NestedTypeTest1Elements();
+		this.pNestedTypeTest2 = new NestedTypeTest2Elements();
+		this.pNestedTypeChild = new NestedTypeChildElements();
+		this.pNestedTypeChild1 = new NestedTypeChild1Elements();
+		this.pNestedTypeChild2 = new NestedTypeChild2Elements();
+		this.pNestedTypeRecursiveTest1 = new NestedTypeRecursiveTest1Elements();
+		this.pNestedTypeRecursiveTest2 = new NestedTypeRecursiveTest2Elements();
+		this.pParentRefTest1 = new ParentRefTest1Elements();
+		this.pParentRefTest2 = new ParentRefTest2Elements();
+		this.pParentRefTestChild1 = new ParentRefTestChild1Elements();
+		this.pParentRefTestChild2 = new ParentRefTestChild2Elements();
+		this.pQuantityExclusionTest1 = new QuantityExclusionTest1Elements();
+		this.pQuantityExclusionTest2 = new QuantityExclusionTest2Elements();
+		this.pValueExclusionTest1 = new ValueExclusionTest1Elements();
+		this.pValueExclusionTest2 = new ValueExclusionTest2Elements();
+		this.unknownRuleValueExclusionTestEn0 = new ValueExclusionTestEn0Elements();
+		this.unknownRuleValueExclusionTestEn1 = new ValueExclusionTestEn1Elements();
+		this.unknownRuleValueExclusionTestEn2 = new ValueExclusionTestEn2Elements();
+		this.pNodeExclusion1 = new NodeExclusion1Elements();
+		this.pNodeExclusion2 = new NodeExclusion2Elements();
+		this.pNodeExclusion1List = new NodeExclusion1ListElements();
+		this.pNodeExclusion2List = new NodeExclusion2ListElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -898,7 +924,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//	ValueExclusionTest2) | "#7" name=STRING nodeExclusion=(NodeExclusion1 | NodeExclusion2) | "#8" name=STRING
 	//	nodeExclusionList=(NodeExclusion1List | NodeExclusion2List);
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -908,7 +934,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//Model2 returns Model:
 	//	{Model} "model";
 	public Model2Elements getModel2Access() {
-		return (pModel2 != null) ? pModel2 : (pModel2 = new Model2Elements());
+		return pModel2;
 	}
 	
 	public ParserRule getModel2Rule() {
@@ -918,7 +944,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//AttributeExclusionTest1 returns AttributeExclusionTest:
 	//	"kw1" attr1=ID;
 	public AttributeExclusionTest1Elements getAttributeExclusionTest1Access() {
-		return (pAttributeExclusionTest1 != null) ? pAttributeExclusionTest1 : (pAttributeExclusionTest1 = new AttributeExclusionTest1Elements());
+		return pAttributeExclusionTest1;
 	}
 	
 	public ParserRule getAttributeExclusionTest1Rule() {
@@ -928,7 +954,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//AttributeExclusionTest2 returns AttributeExclusionTest:
 	//	"kw2" attr2=ID;
 	public AttributeExclusionTest2Elements getAttributeExclusionTest2Access() {
-		return (pAttributeExclusionTest2 != null) ? pAttributeExclusionTest2 : (pAttributeExclusionTest2 = new AttributeExclusionTest2Elements());
+		return pAttributeExclusionTest2;
 	}
 	
 	public ParserRule getAttributeExclusionTest2Rule() {
@@ -938,7 +964,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//NestedTypeTest1 returns NestedTypeTest:
 	//	nested=NestedTypeChild1;
 	public NestedTypeTest1Elements getNestedTypeTest1Access() {
-		return (pNestedTypeTest1 != null) ? pNestedTypeTest1 : (pNestedTypeTest1 = new NestedTypeTest1Elements());
+		return pNestedTypeTest1;
 	}
 	
 	public ParserRule getNestedTypeTest1Rule() {
@@ -948,7 +974,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//NestedTypeTest2 returns NestedTypeTest:
 	//	nested=NestedTypeChild2;
 	public NestedTypeTest2Elements getNestedTypeTest2Access() {
-		return (pNestedTypeTest2 != null) ? pNestedTypeTest2 : (pNestedTypeTest2 = new NestedTypeTest2Elements());
+		return pNestedTypeTest2;
 	}
 	
 	public ParserRule getNestedTypeTest2Rule() {
@@ -958,7 +984,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//NestedTypeChild:
 	//	NestedTypeChild1 | NestedTypeChild2;
 	public NestedTypeChildElements getNestedTypeChildAccess() {
-		return (pNestedTypeChild != null) ? pNestedTypeChild : (pNestedTypeChild = new NestedTypeChildElements());
+		return pNestedTypeChild;
 	}
 	
 	public ParserRule getNestedTypeChildRule() {
@@ -968,7 +994,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//NestedTypeChild1:
 	//	"kw1" val=ID;
 	public NestedTypeChild1Elements getNestedTypeChild1Access() {
-		return (pNestedTypeChild1 != null) ? pNestedTypeChild1 : (pNestedTypeChild1 = new NestedTypeChild1Elements());
+		return pNestedTypeChild1;
 	}
 	
 	public ParserRule getNestedTypeChild1Rule() {
@@ -978,7 +1004,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//NestedTypeChild2:
 	//	"kw2" val=ID;
 	public NestedTypeChild2Elements getNestedTypeChild2Access() {
-		return (pNestedTypeChild2 != null) ? pNestedTypeChild2 : (pNestedTypeChild2 = new NestedTypeChild2Elements());
+		return pNestedTypeChild2;
 	}
 	
 	public ParserRule getNestedTypeChild2Rule() {
@@ -988,7 +1014,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//NestedTypeRecursiveTest1 returns NestedTypeRecursiveTest:
 	//	{NestedTypeRecursiveTest1} "kw1" ({NestedTypeRecursiveTest.left=current} ".")+;
 	public NestedTypeRecursiveTest1Elements getNestedTypeRecursiveTest1Access() {
-		return (pNestedTypeRecursiveTest1 != null) ? pNestedTypeRecursiveTest1 : (pNestedTypeRecursiveTest1 = new NestedTypeRecursiveTest1Elements());
+		return pNestedTypeRecursiveTest1;
 	}
 	
 	public ParserRule getNestedTypeRecursiveTest1Rule() {
@@ -998,7 +1024,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//NestedTypeRecursiveTest2 returns NestedTypeRecursiveTest:
 	//	{NestedTypeRecursiveTest2} "kw2" ({NestedTypeRecursiveTest.left=current} ".")+;
 	public NestedTypeRecursiveTest2Elements getNestedTypeRecursiveTest2Access() {
-		return (pNestedTypeRecursiveTest2 != null) ? pNestedTypeRecursiveTest2 : (pNestedTypeRecursiveTest2 = new NestedTypeRecursiveTest2Elements());
+		return pNestedTypeRecursiveTest2;
 	}
 	
 	public ParserRule getNestedTypeRecursiveTest2Rule() {
@@ -1008,7 +1034,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//ParentRefTest1:
 	//	"kw1" child1=ParentRefTestChild1;
 	public ParentRefTest1Elements getParentRefTest1Access() {
-		return (pParentRefTest1 != null) ? pParentRefTest1 : (pParentRefTest1 = new ParentRefTest1Elements());
+		return pParentRefTest1;
 	}
 	
 	public ParserRule getParentRefTest1Rule() {
@@ -1018,7 +1044,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//ParentRefTest2:
 	//	"kw2" child2=ParentRefTestChild2;
 	public ParentRefTest2Elements getParentRefTest2Access() {
-		return (pParentRefTest2 != null) ? pParentRefTest2 : (pParentRefTest2 = new ParentRefTest2Elements());
+		return pParentRefTest2;
 	}
 	
 	public ParserRule getParentRefTest2Rule() {
@@ -1028,7 +1054,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//ParentRefTestChild1 returns ParentRefTestChild:
 	//	{ParentRefTestChild} "foo" child=ParentRefTestChild1?;
 	public ParentRefTestChild1Elements getParentRefTestChild1Access() {
-		return (pParentRefTestChild1 != null) ? pParentRefTestChild1 : (pParentRefTestChild1 = new ParentRefTestChild1Elements());
+		return pParentRefTestChild1;
 	}
 	
 	public ParserRule getParentRefTestChild1Rule() {
@@ -1038,7 +1064,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//ParentRefTestChild2 returns ParentRefTestChild:
 	//	{ParentRefTestChild} "foo" child=ParentRefTestChild2?;
 	public ParentRefTestChild2Elements getParentRefTestChild2Access() {
-		return (pParentRefTestChild2 != null) ? pParentRefTestChild2 : (pParentRefTestChild2 = new ParentRefTestChild2Elements());
+		return pParentRefTestChild2;
 	}
 	
 	public ParserRule getParentRefTestChild2Rule() {
@@ -1048,7 +1074,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//QuantityExclusionTest1 returns QuantityExclusionTest:
 	//	"kw1" attr1=ID attr2=ID?;
 	public QuantityExclusionTest1Elements getQuantityExclusionTest1Access() {
-		return (pQuantityExclusionTest1 != null) ? pQuantityExclusionTest1 : (pQuantityExclusionTest1 = new QuantityExclusionTest1Elements());
+		return pQuantityExclusionTest1;
 	}
 	
 	public ParserRule getQuantityExclusionTest1Rule() {
@@ -1058,7 +1084,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//QuantityExclusionTest2 returns QuantityExclusionTest:
 	//	"kw2" attr1=ID? attr2=ID;
 	public QuantityExclusionTest2Elements getQuantityExclusionTest2Access() {
-		return (pQuantityExclusionTest2 != null) ? pQuantityExclusionTest2 : (pQuantityExclusionTest2 = new QuantityExclusionTest2Elements());
+		return pQuantityExclusionTest2;
 	}
 	
 	public ParserRule getQuantityExclusionTest2Rule() {
@@ -1068,7 +1094,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//ValueExclusionTest1 returns ValueExclusionTest:
 	//	val=ValueExclusionTestEn1;
 	public ValueExclusionTest1Elements getValueExclusionTest1Access() {
-		return (pValueExclusionTest1 != null) ? pValueExclusionTest1 : (pValueExclusionTest1 = new ValueExclusionTest1Elements());
+		return pValueExclusionTest1;
 	}
 	
 	public ParserRule getValueExclusionTest1Rule() {
@@ -1078,7 +1104,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//ValueExclusionTest2 returns ValueExclusionTest:
 	//	val=ValueExclusionTestEn2;
 	public ValueExclusionTest2Elements getValueExclusionTest2Access() {
-		return (pValueExclusionTest2 != null) ? pValueExclusionTest2 : (pValueExclusionTest2 = new ValueExclusionTest2Elements());
+		return pValueExclusionTest2;
 	}
 	
 	public ParserRule getValueExclusionTest2Rule() {
@@ -1088,7 +1114,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//enum ValueExclusionTestEn0 returns ValueExclusionTestEn:
 	//	lit0;
 	public ValueExclusionTestEn0Elements getValueExclusionTestEn0Access() {
-		return (unknownRuleValueExclusionTestEn0 != null) ? unknownRuleValueExclusionTestEn0 : (unknownRuleValueExclusionTestEn0 = new ValueExclusionTestEn0Elements());
+		return unknownRuleValueExclusionTestEn0;
 	}
 	
 	public EnumRule getValueExclusionTestEn0Rule() {
@@ -1098,7 +1124,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//enum ValueExclusionTestEn1 returns ValueExclusionTestEn:
 	//	lit1;
 	public ValueExclusionTestEn1Elements getValueExclusionTestEn1Access() {
-		return (unknownRuleValueExclusionTestEn1 != null) ? unknownRuleValueExclusionTestEn1 : (unknownRuleValueExclusionTestEn1 = new ValueExclusionTestEn1Elements());
+		return unknownRuleValueExclusionTestEn1;
 	}
 	
 	public EnumRule getValueExclusionTestEn1Rule() {
@@ -1108,7 +1134,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//enum ValueExclusionTestEn2 returns ValueExclusionTestEn:
 	//	lit2;
 	public ValueExclusionTestEn2Elements getValueExclusionTestEn2Access() {
-		return (unknownRuleValueExclusionTestEn2 != null) ? unknownRuleValueExclusionTestEn2 : (unknownRuleValueExclusionTestEn2 = new ValueExclusionTestEn2Elements());
+		return unknownRuleValueExclusionTestEn2;
 	}
 	
 	public EnumRule getValueExclusionTestEn2Rule() {
@@ -1118,7 +1144,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//NodeExclusion1 returns NodeExclusion:
 	//	ref=[Model];
 	public NodeExclusion1Elements getNodeExclusion1Access() {
-		return (pNodeExclusion1 != null) ? pNodeExclusion1 : (pNodeExclusion1 = new NodeExclusion1Elements());
+		return pNodeExclusion1;
 	}
 	
 	public ParserRule getNodeExclusion1Rule() {
@@ -1128,7 +1154,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//NodeExclusion2 returns NodeExclusion:
 	//	ref=[Model|STRING];
 	public NodeExclusion2Elements getNodeExclusion2Access() {
-		return (pNodeExclusion2 != null) ? pNodeExclusion2 : (pNodeExclusion2 = new NodeExclusion2Elements());
+		return pNodeExclusion2;
 	}
 	
 	public ParserRule getNodeExclusion2Rule() {
@@ -1138,7 +1164,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//NodeExclusion1List returns NodeExclusionList:
 	//	ref+=[Model]+;
 	public NodeExclusion1ListElements getNodeExclusion1ListAccess() {
-		return (pNodeExclusion1List != null) ? pNodeExclusion1List : (pNodeExclusion1List = new NodeExclusion1ListElements());
+		return pNodeExclusion1List;
 	}
 	
 	public ParserRule getNodeExclusion1ListRule() {
@@ -1148,7 +1174,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//NodeExclusion2List returns NodeExclusionList:
 	//	ref+=[Model|STRING]+;
 	public NodeExclusion2ListElements getNodeExclusion2ListAccess() {
-		return (pNodeExclusion2List != null) ? pNodeExclusion2List : (pNodeExclusion2List = new NodeExclusion2ListElements());
+		return pNodeExclusion2List;
 	}
 	
 	public ParserRule getNodeExclusion2ListRule() {

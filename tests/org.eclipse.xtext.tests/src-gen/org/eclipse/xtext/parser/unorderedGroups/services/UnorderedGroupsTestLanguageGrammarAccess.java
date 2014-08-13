@@ -1127,20 +1127,24 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 	
 	
-	private ModelElements pModel;
-	private NestedModelElements pNestedModel;
-	private UnorderedDatatypeElements pUnorderedDatatype;
-	private UnorderedSerializationElements pUnorderedSerialization;
+	private final ModelElements pModel;
+	private final NestedModelElements pNestedModel;
+	private final UnorderedDatatypeElements pUnorderedDatatype;
+	private final UnorderedSerializationElements pUnorderedSerialization;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public UnorderedGroupsTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pNestedModel = new NestedModelElements();
+		this.pUnorderedDatatype = new UnorderedDatatypeElements();
+		this.pUnorderedSerialization = new UnorderedSerializationElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -1180,7 +1184,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	//	secondAsList+="b") & (thirdAsList+="c" & forthAsList+="d"))+ | "datatypes" value=UnorderedDatatype | "serialization"
 	//	serialized=UnorderedSerialization | "bug302585" nestedModel+=NestedModel*);
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -1190,7 +1194,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	//NestedModel:
 	//	{NestedModel} (first?="a" & second?="b")? "nested";
 	public NestedModelElements getNestedModelAccess() {
-		return (pNestedModel != null) ? pNestedModel : (pNestedModel = new NestedModelElements());
+		return pNestedModel;
 	}
 	
 	public ParserRule getNestedModelRule() {
@@ -1202,7 +1206,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	//	"b"*) | "7" ("a"* & "b"+) | "8" ("a" "b" "c" & "a" "b" "d") | "9" ("a" & "b")+ | "10" ("a" & "b")* | "11" ("a" & "b")?
 	//	| "12" ("a" & "b") ("a" & "b") | "13" ("a" & "b")? "a" "b" | "14" (("a" & "b") & ("c" & "d"))+;
 	public UnorderedDatatypeElements getUnorderedDatatypeAccess() {
-		return (pUnorderedDatatype != null) ? pUnorderedDatatype : (pUnorderedDatatype = new UnorderedDatatypeElements());
+		return pUnorderedDatatype;
 	}
 	
 	public ParserRule getUnorderedDatatypeRule() {
@@ -1213,7 +1217,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	//	{UnorderedSerialization} ("1" first?="a"? & second?="b"? & third?="c"? & forth?="d"? | "2" (firstAsList+="a" &
 	//	secondAsList+="b")* | "3" (firstAsList+="a"+ & second?="b")*);
 	public UnorderedSerializationElements getUnorderedSerializationAccess() {
-		return (pUnorderedSerialization != null) ? pUnorderedSerialization : (pUnorderedSerialization = new UnorderedSerializationElements());
+		return pUnorderedSerialization;
 	}
 	
 	public ParserRule getUnorderedSerializationRule() {

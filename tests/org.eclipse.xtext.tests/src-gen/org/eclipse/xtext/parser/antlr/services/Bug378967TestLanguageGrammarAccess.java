@@ -311,27 +311,38 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		public Keyword getValueSKeyword_0() { return cValueSKeyword_0; }
 	}
 	
-	private RootElements pRoot;
-	private Rule1Elements pRule1;
-	private Rule2Elements pRule2;
-	private Rule3Elements pRule3;
-	private Rule4Elements pRule4;
-	private FirstEnumElements unknownRuleFirstEnum;
-	private SecondEnumElements unknownRuleSecondEnum;
-	private AfterObjElements pAfterObj;
-	private SObjElements pSObj;
-	private AfterElements pAfter;
-	private SElements pS;
+	private final RootElements pRoot;
+	private final Rule1Elements pRule1;
+	private final Rule2Elements pRule2;
+	private final Rule3Elements pRule3;
+	private final Rule4Elements pRule4;
+	private final FirstEnumElements unknownRuleFirstEnum;
+	private final SecondEnumElements unknownRuleSecondEnum;
+	private final AfterObjElements pAfterObj;
+	private final SObjElements pSObj;
+	private final AfterElements pAfter;
+	private final SElements pS;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug378967TestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pRoot = new RootElements();
+		this.pRule1 = new Rule1Elements();
+		this.pRule2 = new Rule2Elements();
+		this.pRule3 = new Rule3Elements();
+		this.pRule4 = new Rule4Elements();
+		this.unknownRuleFirstEnum = new FirstEnumElements();
+		this.unknownRuleSecondEnum = new SecondEnumElements();
+		this.pAfterObj = new AfterObjElements();
+		this.pSObj = new SObjElements();
+		this.pAfter = new AfterElements();
+		this.pS = new SElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -364,7 +375,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Root:
 	//	"1" element=Rule1 | "2" element=Rule2 | "3" element=Rule3 | "4" element=Rule4;
 	public RootElements getRootAccess() {
-		return (pRoot != null) ? pRoot : (pRoot = new RootElements());
+		return pRoot;
 	}
 	
 	public ParserRule getRootRule() {
@@ -374,7 +385,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Rule1:
 	//	type=FirstEnum value=INT unit=SecondEnum;
 	public Rule1Elements getRule1Access() {
-		return (pRule1 != null) ? pRule1 : (pRule1 = new Rule1Elements());
+		return pRule1;
 	}
 	
 	public ParserRule getRule1Rule() {
@@ -384,7 +395,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Rule2:
 	//	"after" value=INT "s";
 	public Rule2Elements getRule2Access() {
-		return (pRule2 != null) ? pRule2 : (pRule2 = new Rule2Elements());
+		return pRule2;
 	}
 	
 	public ParserRule getRule2Rule() {
@@ -394,7 +405,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Rule3:
 	//	After value=INT S;
 	public Rule3Elements getRule3Access() {
-		return (pRule3 != null) ? pRule3 : (pRule3 = new Rule3Elements());
+		return pRule3;
 	}
 	
 	public ParserRule getRule3Rule() {
@@ -404,7 +415,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Rule4:
 	//	after=AfterObj value=INT s=SObj;
 	public Rule4Elements getRule4Access() {
-		return (pRule4 != null) ? pRule4 : (pRule4 = new Rule4Elements());
+		return pRule4;
 	}
 	
 	public ParserRule getRule4Rule() {
@@ -414,7 +425,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum FirstEnum:
 	//	value="after";
 	public FirstEnumElements getFirstEnumAccess() {
-		return (unknownRuleFirstEnum != null) ? unknownRuleFirstEnum : (unknownRuleFirstEnum = new FirstEnumElements());
+		return unknownRuleFirstEnum;
 	}
 	
 	public EnumRule getFirstEnumRule() {
@@ -424,7 +435,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum SecondEnum:
 	//	value="s";
 	public SecondEnumElements getSecondEnumAccess() {
-		return (unknownRuleSecondEnum != null) ? unknownRuleSecondEnum : (unknownRuleSecondEnum = new SecondEnumElements());
+		return unknownRuleSecondEnum;
 	}
 	
 	public EnumRule getSecondEnumRule() {
@@ -434,7 +445,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//AfterObj:
 	//	value="after";
 	public AfterObjElements getAfterObjAccess() {
-		return (pAfterObj != null) ? pAfterObj : (pAfterObj = new AfterObjElements());
+		return pAfterObj;
 	}
 	
 	public ParserRule getAfterObjRule() {
@@ -444,7 +455,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//SObj:
 	//	value="s";
 	public SObjElements getSObjAccess() {
-		return (pSObj != null) ? pSObj : (pSObj = new SObjElements());
+		return pSObj;
 	}
 	
 	public ParserRule getSObjRule() {
@@ -454,7 +465,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//After:
 	//	"after";
 	public AfterElements getAfterAccess() {
-		return (pAfter != null) ? pAfter : (pAfter = new AfterElements());
+		return pAfter;
 	}
 	
 	public ParserRule getAfterRule() {
@@ -464,7 +475,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//S:
 	//	"s";
 	public SElements getSAccess() {
-		return (pS != null) ? pS : (pS = new SElements());
+		return pS;
 	}
 	
 	public ParserRule getSRule() {

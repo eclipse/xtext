@@ -110,19 +110,26 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractGrammarEl
 	}
 	
 	
-	private NodeListElements pNodeList;
-	private NodeElements pNode;
-	private StringElements pString;
-	private TerminalRule tNL;
-	private TerminalRule tBEGIN;
-	private TerminalRule tEND;
-	private TerminalRule tOTHER;
+	private final NodeListElements pNodeList;
+	private final NodeElements pNode;
+	private final StringElements pString;
+	private final TerminalRule tNL;
+	private final TerminalRule tBEGIN;
+	private final TerminalRule tEND;
+	private final TerminalRule tOTHER;
 	
 	private final Grammar grammar;
 
 	@Inject
 	public IndentationAwareTestLanguageGrammarAccess(GrammarProvider grammarProvider) {
 		this.grammar = internalFindGrammar(grammarProvider);
+		this.pNodeList = new NodeListElements();
+		this.pNode = new NodeElements();
+		this.pString = new StringElements();
+		this.tNL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "NL");
+		this.tBEGIN = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "BEGIN");
+		this.tEND = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "END");
+		this.tOTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "OTHER");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -151,7 +158,7 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractGrammarEl
 	//NodeList:
 	//	children+=Node (NL children+=Node)*;
 	public NodeListElements getNodeListAccess() {
-		return (pNodeList != null) ? pNodeList : (pNodeList = new NodeListElements());
+		return pNodeList;
 	}
 	
 	public ParserRule getNodeListRule() {
@@ -161,7 +168,7 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractGrammarEl
 	//Node:
 	//	name=String (NL BEGIN children=NodeList END)?;
 	public NodeElements getNodeAccess() {
-		return (pNode != null) ? pNode : (pNode = new NodeElements());
+		return pNode;
 	}
 	
 	public ParserRule getNodeRule() {
@@ -171,7 +178,7 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractGrammarEl
 	//String returns ecore::EString:
 	//	OTHER+;
 	public StringElements getStringAccess() {
-		return (pString != null) ? pString : (pString = new StringElements());
+		return pString;
 	}
 	
 	public ParserRule getStringRule() {
@@ -181,24 +188,24 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractGrammarEl
 	//terminal NL:
 	//	("\r" | "\n")+ "\t"*;
 	public TerminalRule getNLRule() {
-		return (tNL != null) ? tNL : (tNL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "NL"));
+		return tNL;
 	} 
 
 	//terminal BEGIN:
 	//	"{";
 	public TerminalRule getBEGINRule() {
-		return (tBEGIN != null) ? tBEGIN : (tBEGIN = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "BEGIN"));
+		return tBEGIN;
 	} 
 
 	//terminal END:
 	//	"}";
 	public TerminalRule getENDRule() {
-		return (tEND != null) ? tEND : (tEND = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "END"));
+		return tEND;
 	} 
 
 	//terminal OTHER:
 	//	.;
 	public TerminalRule getOTHERRule() {
-		return (tOTHER != null) ? tOTHER : (tOTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "OTHER"));
+		return tOTHER;
 	} 
 }

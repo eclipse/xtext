@@ -299,24 +299,32 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 	
 	
-	private CompositeModelElements pCompositeModel;
-	private ModelElements pModel;
-	private ModelIdElements pModelId;
-	private NestedModelIdElements pNestedModelId;
-	private FractionElements pFraction;
-	private VectorElements pVector;
-	private DotsElements pDots;
-	private DoubleElements pDouble;
+	private final CompositeModelElements pCompositeModel;
+	private final ModelElements pModel;
+	private final ModelIdElements pModelId;
+	private final NestedModelIdElements pNestedModelId;
+	private final FractionElements pFraction;
+	private final VectorElements pVector;
+	private final DotsElements pDots;
+	private final DoubleElements pDouble;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public DatatypeRulesTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pCompositeModel = new CompositeModelElements();
+		this.pModel = new ModelElements();
+		this.pModelId = new ModelIdElements();
+		this.pNestedModelId = new NestedModelIdElements();
+		this.pFraction = new FractionElements();
+		this.pVector = new VectorElements();
+		this.pDots = new DotsElements();
+		this.pDouble = new DoubleElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -349,7 +357,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//CompositeModel:
 	//	model+=Model+;
 	public CompositeModelElements getCompositeModelAccess() {
-		return (pCompositeModel != null) ? pCompositeModel : (pCompositeModel = new CompositeModelElements());
+		return pCompositeModel;
 	}
 	
 	public ParserRule getCompositeModelRule() {
@@ -359,7 +367,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//Model:
 	//	id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ("*" double=Double)? ";";
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -369,7 +377,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//ModelId returns ecore::EString:
 	//	ID "." ID;
 	public ModelIdElements getModelIdAccess() {
-		return (pModelId != null) ? pModelId : (pModelId = new ModelIdElements());
+		return pModelId;
 	}
 	
 	public ParserRule getModelIdRule() {
@@ -379,7 +387,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//NestedModelId:
 	//	ModelId "." ModelId;
 	public NestedModelIdElements getNestedModelIdAccess() {
-		return (pNestedModelId != null) ? pNestedModelId : (pNestedModelId = new NestedModelIdElements());
+		return pNestedModelId;
 	}
 	
 	public ParserRule getNestedModelIdRule() {
@@ -389,7 +397,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//Fraction returns ecore::EBigDecimal:
 	//	INT ("/" INT)?;
 	public FractionElements getFractionAccess() {
-		return (pFraction != null) ? pFraction : (pFraction = new FractionElements());
+		return pFraction;
 	}
 	
 	public ParserRule getFractionRule() {
@@ -399,7 +407,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//Vector:
 	//	"(" INT INT ")";
 	public VectorElements getVectorAccess() {
-		return (pVector != null) ? pVector : (pVector = new VectorElements());
+		return pVector;
 	}
 	
 	public ParserRule getVectorRule() {
@@ -409,7 +417,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//Dots returns ecore::EString:
 	//	"." "." | "..";
 	public DotsElements getDotsAccess() {
-		return (pDots != null) ? pDots : (pDots = new DotsElements());
+		return pDots;
 	}
 	
 	public ParserRule getDotsRule() {
@@ -419,7 +427,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//Double returns ecore::EDouble:
 	//	"-"? INT? "." INT ("E" "-"? INT)?;
 	public DoubleElements getDoubleAccess() {
-		return (pDouble != null) ? pDouble : (pDouble = new DoubleElements());
+		return pDouble;
 	}
 	
 	public ParserRule getDoubleRule() {

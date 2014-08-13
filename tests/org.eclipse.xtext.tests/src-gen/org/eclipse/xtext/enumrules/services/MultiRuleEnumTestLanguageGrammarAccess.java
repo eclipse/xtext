@@ -167,20 +167,24 @@ public class MultiRuleEnumTestLanguageGrammarAccess extends AbstractGrammarEleme
 		public Keyword getBBKeyword_2_0() { return cBBKeyword_2_0; }
 	}
 	
-	private ModelElements pModel;
-	private EnumRuleAElements unknownRuleEnumRuleA;
-	private EnumRuleBElements unknownRuleEnumRuleB;
-	private EnumRuleCElements unknownRuleEnumRuleC;
+	private final ModelElements pModel;
+	private final EnumRuleAElements unknownRuleEnumRuleA;
+	private final EnumRuleBElements unknownRuleEnumRuleB;
+	private final EnumRuleCElements unknownRuleEnumRuleC;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public MultiRuleEnumTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.unknownRuleEnumRuleA = new EnumRuleAElements();
+		this.unknownRuleEnumRuleB = new EnumRuleBElements();
+		this.unknownRuleEnumRuleC = new EnumRuleCElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -213,7 +217,7 @@ public class MultiRuleEnumTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//Model:
 	//	"someEnum" a=EnumRuleA b=EnumRuleB c=EnumRuleC;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -223,7 +227,7 @@ public class MultiRuleEnumTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//enum EnumRuleA returns MyEnum:
 	//	A | B | C;
 	public EnumRuleAElements getEnumRuleAAccess() {
-		return (unknownRuleEnumRuleA != null) ? unknownRuleEnumRuleA : (unknownRuleEnumRuleA = new EnumRuleAElements());
+		return unknownRuleEnumRuleA;
 	}
 	
 	public EnumRule getEnumRuleARule() {
@@ -233,7 +237,7 @@ public class MultiRuleEnumTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//enum EnumRuleB returns MyEnum:
 	//	C | D | E;
 	public EnumRuleBElements getEnumRuleBAccess() {
-		return (unknownRuleEnumRuleB != null) ? unknownRuleEnumRuleB : (unknownRuleEnumRuleB = new EnumRuleBElements());
+		return unknownRuleEnumRuleB;
 	}
 	
 	public EnumRule getEnumRuleBRule() {
@@ -243,7 +247,7 @@ public class MultiRuleEnumTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//enum EnumRuleC returns MyEnum:
 	//	A | D | B;
 	public EnumRuleCElements getEnumRuleCAccess() {
-		return (unknownRuleEnumRuleC != null) ? unknownRuleEnumRuleC : (unknownRuleEnumRuleC = new EnumRuleCElements());
+		return unknownRuleEnumRuleC;
 	}
 	
 	public EnumRule getEnumRuleCRule() {

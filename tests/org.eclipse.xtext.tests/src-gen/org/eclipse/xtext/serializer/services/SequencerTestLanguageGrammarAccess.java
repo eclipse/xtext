@@ -2216,66 +2216,116 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		public Keyword getKw3Kw3Keyword_0() { return cKw3Kw3Keyword_0; }
 	}
 	
-	private ModelElements pModel;
-	private SimpleGroupElements pSimpleGroup;
-	private SimpleAlternativeElements pSimpleAlternative;
-	private SimpleMultiplicitiesElements pSimpleMultiplicities;
-	private GroupMultiplicitiesElements pGroupMultiplicities;
-	private AlternativeMultiplicitiesElements pAlternativeMultiplicities;
-	private List1Elements pList1;
-	private List2Elements pList2;
-	private AltList1Elements pAltList1;
-	private AltList2Elements pAltList2;
-	private SingleKeywordsElements pSingleKeywords;
-	private SingleKeywordsOrIDElements pSingleKeywordsOrID;
-	private SingleTerminalsElements pSingleTerminals;
-	private TerminalRule tID1;
-	private TerminalRule tID2;
-	private TerminalRule tID3;
-	private SingleEnumElements pSingleEnum;
-	private DefEnum1Elements unknownRuleDefEnum1;
-	private DefEnum2Elements unknownRuleDefEnum2;
-	private DefEnum3Elements unknownRuleDefEnum3;
-	private SingleCrossReferenceElements pSingleCrossReference;
-	private SingleContainmentReferenceElements pSingleContainmentReference;
-	private SingleContainmentReferenceChild1Elements pSingleContainmentReferenceChild1;
-	private SingleContainmentReferenceChild2Elements pSingleContainmentReferenceChild2;
-	private SingleContainmentReferenceChild3Elements pSingleContainmentReferenceChild3;
-	private MultiKeywordsElements pMultiKeywords;
-	private MultiKeywordsOrIDElements pMultiKeywordsOrID;
-	private MultiTerminalsElements pMultiTerminals;
-	private DependentAlternative1Elements pDependentAlternative1;
-	private DependentAlternative2Elements pDependentAlternative2;
-	private OptionalElements pOptional;
-	private FloatElements pFloat;
-	private UnorderedAlternativeElements pUnorderedAlternative;
-	private UnorderedAlternativeValElements pUnorderedAlternativeVal;
-	private UnorderedAlternativeValDelegateElements pUnorderedAlternativeValDelegate;
-	private UnorderedAlternativeVal2Elements pUnorderedAlternativeVal2;
-	private UnorderedGroupElements pUnorderedGroup;
-	private UnorderedGroupValElements pUnorderedGroupVal;
-	private UnorderedGroupValDelegateElements pUnorderedGroupValDelegate;
-	private UnorderedGroupVal2Elements pUnorderedGroupVal2;
-	private UnorderedGroupOptionalElements pUnorderedGroupOptional;
-	private UnorderedGroupBooleanElements pUnorderedGroupBoolean;
-	private Complex1Elements pComplex1;
-	private OptionalDoubleElements pOptionalDouble;
-	private DOUBLEElements pDOUBLE;
-	private NullValueGeneratedElements pNullValueGenerated;
-	private NullValueInterpretedElements pNullValueInterpreted;
-	private NULL_STRINGElements pNULL_STRING;
-	private NullCrossRefGeneratedElements pNullCrossRefGenerated;
-	private NullCrossRefInterpretedElements pNullCrossRefInterpreted;
+	private final ModelElements pModel;
+	private final SimpleGroupElements pSimpleGroup;
+	private final SimpleAlternativeElements pSimpleAlternative;
+	private final SimpleMultiplicitiesElements pSimpleMultiplicities;
+	private final GroupMultiplicitiesElements pGroupMultiplicities;
+	private final AlternativeMultiplicitiesElements pAlternativeMultiplicities;
+	private final List1Elements pList1;
+	private final List2Elements pList2;
+	private final AltList1Elements pAltList1;
+	private final AltList2Elements pAltList2;
+	private final SingleKeywordsElements pSingleKeywords;
+	private final SingleKeywordsOrIDElements pSingleKeywordsOrID;
+	private final SingleTerminalsElements pSingleTerminals;
+	private final TerminalRule tID1;
+	private final TerminalRule tID2;
+	private final TerminalRule tID3;
+	private final SingleEnumElements pSingleEnum;
+	private final DefEnum1Elements unknownRuleDefEnum1;
+	private final DefEnum2Elements unknownRuleDefEnum2;
+	private final DefEnum3Elements unknownRuleDefEnum3;
+	private final SingleCrossReferenceElements pSingleCrossReference;
+	private final SingleContainmentReferenceElements pSingleContainmentReference;
+	private final SingleContainmentReferenceChild1Elements pSingleContainmentReferenceChild1;
+	private final SingleContainmentReferenceChild2Elements pSingleContainmentReferenceChild2;
+	private final SingleContainmentReferenceChild3Elements pSingleContainmentReferenceChild3;
+	private final MultiKeywordsElements pMultiKeywords;
+	private final MultiKeywordsOrIDElements pMultiKeywordsOrID;
+	private final MultiTerminalsElements pMultiTerminals;
+	private final DependentAlternative1Elements pDependentAlternative1;
+	private final DependentAlternative2Elements pDependentAlternative2;
+	private final OptionalElements pOptional;
+	private final FloatElements pFloat;
+	private final UnorderedAlternativeElements pUnorderedAlternative;
+	private final UnorderedAlternativeValElements pUnorderedAlternativeVal;
+	private final UnorderedAlternativeValDelegateElements pUnorderedAlternativeValDelegate;
+	private final UnorderedAlternativeVal2Elements pUnorderedAlternativeVal2;
+	private final UnorderedGroupElements pUnorderedGroup;
+	private final UnorderedGroupValElements pUnorderedGroupVal;
+	private final UnorderedGroupValDelegateElements pUnorderedGroupValDelegate;
+	private final UnorderedGroupVal2Elements pUnorderedGroupVal2;
+	private final UnorderedGroupOptionalElements pUnorderedGroupOptional;
+	private final UnorderedGroupBooleanElements pUnorderedGroupBoolean;
+	private final Complex1Elements pComplex1;
+	private final OptionalDoubleElements pOptionalDouble;
+	private final DOUBLEElements pDOUBLE;
+	private final NullValueGeneratedElements pNullValueGenerated;
+	private final NullValueInterpretedElements pNullValueInterpreted;
+	private final NULL_STRINGElements pNULL_STRING;
+	private final NullCrossRefGeneratedElements pNullCrossRefGenerated;
+	private final NullCrossRefInterpretedElements pNullCrossRefInterpreted;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public SequencerTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pSimpleGroup = new SimpleGroupElements();
+		this.pSimpleAlternative = new SimpleAlternativeElements();
+		this.pSimpleMultiplicities = new SimpleMultiplicitiesElements();
+		this.pGroupMultiplicities = new GroupMultiplicitiesElements();
+		this.pAlternativeMultiplicities = new AlternativeMultiplicitiesElements();
+		this.pList1 = new List1Elements();
+		this.pList2 = new List2Elements();
+		this.pAltList1 = new AltList1Elements();
+		this.pAltList2 = new AltList2Elements();
+		this.pSingleKeywords = new SingleKeywordsElements();
+		this.pSingleKeywordsOrID = new SingleKeywordsOrIDElements();
+		this.pSingleTerminals = new SingleTerminalsElements();
+		this.tID1 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID1");
+		this.tID2 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID2");
+		this.tID3 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID3");
+		this.pSingleEnum = new SingleEnumElements();
+		this.unknownRuleDefEnum1 = new DefEnum1Elements();
+		this.unknownRuleDefEnum2 = new DefEnum2Elements();
+		this.unknownRuleDefEnum3 = new DefEnum3Elements();
+		this.pSingleCrossReference = new SingleCrossReferenceElements();
+		this.pSingleContainmentReference = new SingleContainmentReferenceElements();
+		this.pSingleContainmentReferenceChild1 = new SingleContainmentReferenceChild1Elements();
+		this.pSingleContainmentReferenceChild2 = new SingleContainmentReferenceChild2Elements();
+		this.pSingleContainmentReferenceChild3 = new SingleContainmentReferenceChild3Elements();
+		this.pMultiKeywords = new MultiKeywordsElements();
+		this.pMultiKeywordsOrID = new MultiKeywordsOrIDElements();
+		this.pMultiTerminals = new MultiTerminalsElements();
+		this.pDependentAlternative1 = new DependentAlternative1Elements();
+		this.pDependentAlternative2 = new DependentAlternative2Elements();
+		this.pOptional = new OptionalElements();
+		this.pFloat = new FloatElements();
+		this.pUnorderedAlternative = new UnorderedAlternativeElements();
+		this.pUnorderedAlternativeVal = new UnorderedAlternativeValElements();
+		this.pUnorderedAlternativeValDelegate = new UnorderedAlternativeValDelegateElements();
+		this.pUnorderedAlternativeVal2 = new UnorderedAlternativeVal2Elements();
+		this.pUnorderedGroup = new UnorderedGroupElements();
+		this.pUnorderedGroupVal = new UnorderedGroupValElements();
+		this.pUnorderedGroupValDelegate = new UnorderedGroupValDelegateElements();
+		this.pUnorderedGroupVal2 = new UnorderedGroupVal2Elements();
+		this.pUnorderedGroupOptional = new UnorderedGroupOptionalElements();
+		this.pUnorderedGroupBoolean = new UnorderedGroupBooleanElements();
+		this.pComplex1 = new Complex1Elements();
+		this.pOptionalDouble = new OptionalDoubleElements();
+		this.pDOUBLE = new DOUBLEElements();
+		this.pNullValueGenerated = new NullValueGeneratedElements();
+		this.pNullValueInterpreted = new NullValueInterpretedElements();
+		this.pNULL_STRING = new NULL_STRINGElements();
+		this.pNullCrossRefGenerated = new NullCrossRefGeneratedElements();
+		this.pNullCrossRefInterpreted = new NullCrossRefInterpretedElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -2314,7 +2364,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	x25=UnorderedGroupOptional | x26=UnorderedGroupBoolean | x27=Complex1 | x28=OptionalDouble | x29=NullValueGenerated |
 	//	x30=NullValueInterpreted | x31=NullCrossRefGenerated | x32=NullCrossRefInterpreted;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -2324,7 +2374,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//SimpleGroup:
 	//	"#1" val1=ID val2=ID;
 	public SimpleGroupElements getSimpleGroupAccess() {
-		return (pSimpleGroup != null) ? pSimpleGroup : (pSimpleGroup = new SimpleGroupElements());
+		return pSimpleGroup;
 	}
 	
 	public ParserRule getSimpleGroupRule() {
@@ -2334,7 +2384,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//SimpleAlternative:
 	//	"#2" ("kw1" val1=ID | "kw2" val2=ID);
 	public SimpleAlternativeElements getSimpleAlternativeAccess() {
-		return (pSimpleAlternative != null) ? pSimpleAlternative : (pSimpleAlternative = new SimpleAlternativeElements());
+		return pSimpleAlternative;
 	}
 	
 	public ParserRule getSimpleAlternativeRule() {
@@ -2344,7 +2394,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//SimpleMultiplicities:
 	//	"#3" val1=ID "kw1" val2=ID? "kw2" val3+=ID+ "kw3" val4+=ID*;
 	public SimpleMultiplicitiesElements getSimpleMultiplicitiesAccess() {
-		return (pSimpleMultiplicities != null) ? pSimpleMultiplicities : (pSimpleMultiplicities = new SimpleMultiplicitiesElements());
+		return pSimpleMultiplicities;
 	}
 	
 	public ParserRule getSimpleMultiplicitiesRule() {
@@ -2354,7 +2404,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//GroupMultiplicities:
 	//	"#4" val1=ID "kw1" (val2=ID val3=ID)? "kw2" (val4+=ID val5+=ID)+ "kw3" (val6+=ID val7+=ID)*;
 	public GroupMultiplicitiesElements getGroupMultiplicitiesAccess() {
-		return (pGroupMultiplicities != null) ? pGroupMultiplicities : (pGroupMultiplicities = new GroupMultiplicitiesElements());
+		return pGroupMultiplicities;
 	}
 	
 	public ParserRule getGroupMultiplicitiesRule() {
@@ -2364,7 +2414,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//AlternativeMultiplicities:
 	//	"#5" (val2=ID | "kw1" val3=ID)? "kw2" (val4+=ID | "kw3" val5+=ID)+ "kw4" (val6+=ID | "kw5" val7+=ID)*;
 	public AlternativeMultiplicitiesElements getAlternativeMultiplicitiesAccess() {
-		return (pAlternativeMultiplicities != null) ? pAlternativeMultiplicities : (pAlternativeMultiplicities = new AlternativeMultiplicitiesElements());
+		return pAlternativeMultiplicities;
 	}
 	
 	public ParserRule getAlternativeMultiplicitiesRule() {
@@ -2374,7 +2424,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//List1:
 	//	"#6" val1+=ID ("," val1+=ID)*;
 	public List1Elements getList1Access() {
-		return (pList1 != null) ? pList1 : (pList1 = new List1Elements());
+		return pList1;
 	}
 	
 	public ParserRule getList1Rule() {
@@ -2384,7 +2434,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//List2:
 	//	"#7" {List2} (val1+=ID ("," val1+=ID)*)?;
 	public List2Elements getList2Access() {
-		return (pList2 != null) ? pList2 : (pList2 = new List2Elements());
+		return pList2;
 	}
 	
 	public ParserRule getList2Rule() {
@@ -2394,7 +2444,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//AltList1:
 	//	"#8" (val1=ID val2=ID | "kw1" val1=ID val3=ID | "kw2" val1=ID val4=ID?);
 	public AltList1Elements getAltList1Access() {
-		return (pAltList1 != null) ? pAltList1 : (pAltList1 = new AltList1Elements());
+		return pAltList1;
 	}
 	
 	public ParserRule getAltList1Rule() {
@@ -2404,7 +2454,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//AltList2:
 	//	"#9" (val1+=ID val2=ID | "kw" val1+=ID ("," val1+=ID)* val3=ID);
 	public AltList2Elements getAltList2Access() {
-		return (pAltList2 != null) ? pAltList2 : (pAltList2 = new AltList2Elements());
+		return pAltList2;
 	}
 	
 	public ParserRule getAltList2Rule() {
@@ -2414,7 +2464,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//SingleKeywords:
 	//	"#10" val=("kw1" | "kw2" | "kw3");
 	public SingleKeywordsElements getSingleKeywordsAccess() {
-		return (pSingleKeywords != null) ? pSingleKeywords : (pSingleKeywords = new SingleKeywordsElements());
+		return pSingleKeywords;
 	}
 	
 	public ParserRule getSingleKeywordsRule() {
@@ -2424,7 +2474,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//SingleKeywordsOrID:
 	//	"#11" val=("kw1" | "kw2" | "kw3" | ID);
 	public SingleKeywordsOrIDElements getSingleKeywordsOrIDAccess() {
-		return (pSingleKeywordsOrID != null) ? pSingleKeywordsOrID : (pSingleKeywordsOrID = new SingleKeywordsOrIDElements());
+		return pSingleKeywordsOrID;
 	}
 	
 	public ParserRule getSingleKeywordsOrIDRule() {
@@ -2434,7 +2484,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//SingleTerminals:
 	//	"#12" val=(ID1 | ID2);
 	public SingleTerminalsElements getSingleTerminalsAccess() {
-		return (pSingleTerminals != null) ? pSingleTerminals : (pSingleTerminals = new SingleTerminalsElements());
+		return pSingleTerminals;
 	}
 	
 	public ParserRule getSingleTerminalsRule() {
@@ -2444,25 +2494,25 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//terminal ID1:
 	//	"$1" ID;
 	public TerminalRule getID1Rule() {
-		return (tID1 != null) ? tID1 : (tID1 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID1"));
+		return tID1;
 	} 
 
 	//terminal ID2:
 	//	"$2" ID;
 	public TerminalRule getID2Rule() {
-		return (tID2 != null) ? tID2 : (tID2 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID2"));
+		return tID2;
 	} 
 
 	//terminal ID3:
 	//	"$3" ID;
 	public TerminalRule getID3Rule() {
-		return (tID3 != null) ? tID3 : (tID3 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID3"));
+		return tID3;
 	} 
 
 	//SingleEnum:
 	//	"#13" val=(DefEnum1 | DefEnum2 | DefEnum3);
 	public SingleEnumElements getSingleEnumAccess() {
-		return (pSingleEnum != null) ? pSingleEnum : (pSingleEnum = new SingleEnumElements());
+		return pSingleEnum;
 	}
 	
 	public ParserRule getSingleEnumRule() {
@@ -2472,7 +2522,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum DefEnum1 returns DefEnum:
 	//	kw1;
 	public DefEnum1Elements getDefEnum1Access() {
-		return (unknownRuleDefEnum1 != null) ? unknownRuleDefEnum1 : (unknownRuleDefEnum1 = new DefEnum1Elements());
+		return unknownRuleDefEnum1;
 	}
 	
 	public EnumRule getDefEnum1Rule() {
@@ -2482,7 +2532,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum DefEnum2 returns DefEnum:
 	//	kw2;
 	public DefEnum2Elements getDefEnum2Access() {
-		return (unknownRuleDefEnum2 != null) ? unknownRuleDefEnum2 : (unknownRuleDefEnum2 = new DefEnum2Elements());
+		return unknownRuleDefEnum2;
 	}
 	
 	public EnumRule getDefEnum2Rule() {
@@ -2492,7 +2542,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum DefEnum3 returns DefEnum:
 	//	kw3;
 	public DefEnum3Elements getDefEnum3Access() {
-		return (unknownRuleDefEnum3 != null) ? unknownRuleDefEnum3 : (unknownRuleDefEnum3 = new DefEnum3Elements());
+		return unknownRuleDefEnum3;
 	}
 	
 	public EnumRule getDefEnum3Rule() {
@@ -2503,7 +2553,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	"#14" name=(ID1 | ID2 | ID3) (ref=[SingleCrossReference|ID1] | ref=[SingleCrossReference|ID2] |
 	//	ref=[SingleCrossReference|ID3]);
 	public SingleCrossReferenceElements getSingleCrossReferenceAccess() {
-		return (pSingleCrossReference != null) ? pSingleCrossReference : (pSingleCrossReference = new SingleCrossReferenceElements());
+		return pSingleCrossReference;
 	}
 	
 	public ParserRule getSingleCrossReferenceRule() {
@@ -2513,7 +2563,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//SingleContainmentReference:
 	//	"#15" child=(SingleContainmentReferenceChild1 | SingleContainmentReferenceChild2 | SingleContainmentReferenceChild3);
 	public SingleContainmentReferenceElements getSingleContainmentReferenceAccess() {
-		return (pSingleContainmentReference != null) ? pSingleContainmentReference : (pSingleContainmentReference = new SingleContainmentReferenceElements());
+		return pSingleContainmentReference;
 	}
 	
 	public ParserRule getSingleContainmentReferenceRule() {
@@ -2523,7 +2573,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//SingleContainmentReferenceChild1:
 	//	val="kw1";
 	public SingleContainmentReferenceChild1Elements getSingleContainmentReferenceChild1Access() {
-		return (pSingleContainmentReferenceChild1 != null) ? pSingleContainmentReferenceChild1 : (pSingleContainmentReferenceChild1 = new SingleContainmentReferenceChild1Elements());
+		return pSingleContainmentReferenceChild1;
 	}
 	
 	public ParserRule getSingleContainmentReferenceChild1Rule() {
@@ -2533,7 +2583,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//SingleContainmentReferenceChild2:
 	//	val="kw2";
 	public SingleContainmentReferenceChild2Elements getSingleContainmentReferenceChild2Access() {
-		return (pSingleContainmentReferenceChild2 != null) ? pSingleContainmentReferenceChild2 : (pSingleContainmentReferenceChild2 = new SingleContainmentReferenceChild2Elements());
+		return pSingleContainmentReferenceChild2;
 	}
 	
 	public ParserRule getSingleContainmentReferenceChild2Rule() {
@@ -2543,7 +2593,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//SingleContainmentReferenceChild3:
 	//	val="kw3";
 	public SingleContainmentReferenceChild3Elements getSingleContainmentReferenceChild3Access() {
-		return (pSingleContainmentReferenceChild3 != null) ? pSingleContainmentReferenceChild3 : (pSingleContainmentReferenceChild3 = new SingleContainmentReferenceChild3Elements());
+		return pSingleContainmentReferenceChild3;
 	}
 	
 	public ParserRule getSingleContainmentReferenceChild3Rule() {
@@ -2553,7 +2603,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//MultiKeywords:
 	//	"#16" val+=("kw1" | "kw2" | "kw3");
 	public MultiKeywordsElements getMultiKeywordsAccess() {
-		return (pMultiKeywords != null) ? pMultiKeywords : (pMultiKeywords = new MultiKeywordsElements());
+		return pMultiKeywords;
 	}
 	
 	public ParserRule getMultiKeywordsRule() {
@@ -2563,7 +2613,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//MultiKeywordsOrID:
 	//	"#17" val+=("kw1" | "kw2" | "kw3" | ID);
 	public MultiKeywordsOrIDElements getMultiKeywordsOrIDAccess() {
-		return (pMultiKeywordsOrID != null) ? pMultiKeywordsOrID : (pMultiKeywordsOrID = new MultiKeywordsOrIDElements());
+		return pMultiKeywordsOrID;
 	}
 	
 	public ParserRule getMultiKeywordsOrIDRule() {
@@ -2573,7 +2623,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//MultiTerminals:
 	//	"#18" val+=(ID1 | ID2);
 	public MultiTerminalsElements getMultiTerminalsAccess() {
-		return (pMultiTerminals != null) ? pMultiTerminals : (pMultiTerminals = new MultiTerminalsElements());
+		return pMultiTerminals;
 	}
 	
 	public ParserRule getMultiTerminalsRule() {
@@ -2583,7 +2633,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//DependentAlternative1:
 	//	"#19" (val=ID | val=ID flag?="kw1");
 	public DependentAlternative1Elements getDependentAlternative1Access() {
-		return (pDependentAlternative1 != null) ? pDependentAlternative1 : (pDependentAlternative1 = new DependentAlternative1Elements());
+		return pDependentAlternative1;
 	}
 	
 	public ParserRule getDependentAlternative1Rule() {
@@ -2593,7 +2643,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//DependentAlternative2:
 	//	"#20" (val+=ID val+=ID+ | val+=ID+ flag?="kw1");
 	public DependentAlternative2Elements getDependentAlternative2Access() {
-		return (pDependentAlternative2 != null) ? pDependentAlternative2 : (pDependentAlternative2 = new DependentAlternative2Elements());
+		return pDependentAlternative2;
 	}
 	
 	public ParserRule getDependentAlternative2Rule() {
@@ -2603,7 +2653,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Optional:
 	//	"#21" int0=INT (int1=INT int2=INT)?;
 	public OptionalElements getOptionalAccess() {
-		return (pOptional != null) ? pOptional : (pOptional = new OptionalElements());
+		return pOptional;
 	}
 	
 	public ParserRule getOptionalRule() {
@@ -2613,7 +2663,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Float:
 	//	"#22" {Float} "Bye";
 	public FloatElements getFloatAccess() {
-		return (pFloat != null) ? pFloat : (pFloat = new FloatElements());
+		return pFloat;
 	}
 	
 	public ParserRule getFloatRule() {
@@ -2624,7 +2674,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	"#23" {UnorderedAlternative} (val1+=ID | val2+=INT | val3+=UnorderedAlternativeVal |
 	//	val4+=UnorderedAlternativeValDelegate)*;
 	public UnorderedAlternativeElements getUnorderedAlternativeAccess() {
-		return (pUnorderedAlternative != null) ? pUnorderedAlternative : (pUnorderedAlternative = new UnorderedAlternativeElements());
+		return pUnorderedAlternative;
 	}
 	
 	public ParserRule getUnorderedAlternativeRule() {
@@ -2634,7 +2684,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//UnorderedAlternativeVal:
 	//	"kw1" val=ID;
 	public UnorderedAlternativeValElements getUnorderedAlternativeValAccess() {
-		return (pUnorderedAlternativeVal != null) ? pUnorderedAlternativeVal : (pUnorderedAlternativeVal = new UnorderedAlternativeValElements());
+		return pUnorderedAlternativeVal;
 	}
 	
 	public ParserRule getUnorderedAlternativeValRule() {
@@ -2644,7 +2694,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//UnorderedAlternativeValDelegate:
 	//	UnorderedAlternativeVal2;
 	public UnorderedAlternativeValDelegateElements getUnorderedAlternativeValDelegateAccess() {
-		return (pUnorderedAlternativeValDelegate != null) ? pUnorderedAlternativeValDelegate : (pUnorderedAlternativeValDelegate = new UnorderedAlternativeValDelegateElements());
+		return pUnorderedAlternativeValDelegate;
 	}
 	
 	public ParserRule getUnorderedAlternativeValDelegateRule() {
@@ -2654,7 +2704,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//UnorderedAlternativeVal2:
 	//	"kw2" val=ID;
 	public UnorderedAlternativeVal2Elements getUnorderedAlternativeVal2Access() {
-		return (pUnorderedAlternativeVal2 != null) ? pUnorderedAlternativeVal2 : (pUnorderedAlternativeVal2 = new UnorderedAlternativeVal2Elements());
+		return pUnorderedAlternativeVal2;
 	}
 	
 	public ParserRule getUnorderedAlternativeVal2Rule() {
@@ -2664,7 +2714,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//UnorderedGroup:
 	//	"#24" (val1=ID & val2=INT & val3=UnorderedGroupVal & val4=UnorderedGroupValDelegate);
 	public UnorderedGroupElements getUnorderedGroupAccess() {
-		return (pUnorderedGroup != null) ? pUnorderedGroup : (pUnorderedGroup = new UnorderedGroupElements());
+		return pUnorderedGroup;
 	}
 	
 	public ParserRule getUnorderedGroupRule() {
@@ -2674,7 +2724,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//UnorderedGroupVal:
 	//	"kw1" val=ID;
 	public UnorderedGroupValElements getUnorderedGroupValAccess() {
-		return (pUnorderedGroupVal != null) ? pUnorderedGroupVal : (pUnorderedGroupVal = new UnorderedGroupValElements());
+		return pUnorderedGroupVal;
 	}
 	
 	public ParserRule getUnorderedGroupValRule() {
@@ -2684,7 +2734,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//UnorderedGroupValDelegate:
 	//	UnorderedGroupVal2;
 	public UnorderedGroupValDelegateElements getUnorderedGroupValDelegateAccess() {
-		return (pUnorderedGroupValDelegate != null) ? pUnorderedGroupValDelegate : (pUnorderedGroupValDelegate = new UnorderedGroupValDelegateElements());
+		return pUnorderedGroupValDelegate;
 	}
 	
 	public ParserRule getUnorderedGroupValDelegateRule() {
@@ -2694,7 +2744,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//UnorderedGroupVal2:
 	//	"kw2" val=ID;
 	public UnorderedGroupVal2Elements getUnorderedGroupVal2Access() {
-		return (pUnorderedGroupVal2 != null) ? pUnorderedGroupVal2 : (pUnorderedGroupVal2 = new UnorderedGroupVal2Elements());
+		return pUnorderedGroupVal2;
 	}
 	
 	public ParserRule getUnorderedGroupVal2Rule() {
@@ -2704,7 +2754,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//UnorderedGroupOptional:
 	//	"#25" {UnorderedGroupOptional} (("kw1" val1=ID)? & ("kw2" va2=ID)? & ("kw3" val3=ID)?);
 	public UnorderedGroupOptionalElements getUnorderedGroupOptionalAccess() {
-		return (pUnorderedGroupOptional != null) ? pUnorderedGroupOptional : (pUnorderedGroupOptional = new UnorderedGroupOptionalElements());
+		return pUnorderedGroupOptional;
 	}
 	
 	public ParserRule getUnorderedGroupOptionalRule() {
@@ -2714,7 +2764,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//UnorderedGroupBoolean:
 	//	"#26" {UnorderedGroupBoolean} (val1?="kw1"? & val2?="kw2"? & val3?="kw3"?);
 	public UnorderedGroupBooleanElements getUnorderedGroupBooleanAccess() {
-		return (pUnorderedGroupBoolean != null) ? pUnorderedGroupBoolean : (pUnorderedGroupBoolean = new UnorderedGroupBooleanElements());
+		return pUnorderedGroupBoolean;
 	}
 	
 	public ParserRule getUnorderedGroupBooleanRule() {
@@ -2725,7 +2775,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	"#27" {Complex1} ("kw1" val1=ID)? ("kw2" val2=ID)? ("kw3" val3+=ID | "kw4" val4+=ID | "kw5" val5+=ID | "kw6"
 	//	val6+=ID)*;
 	public Complex1Elements getComplex1Access() {
-		return (pComplex1 != null) ? pComplex1 : (pComplex1 = new Complex1Elements());
+		return pComplex1;
 	}
 	
 	public ParserRule getComplex1Rule() {
@@ -2735,7 +2785,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//OptionalDouble:
 	//	"#28" double0=DOUBLE (double1=DOUBLE double2=DOUBLE)?;
 	public OptionalDoubleElements getOptionalDoubleAccess() {
-		return (pOptionalDouble != null) ? pOptionalDouble : (pOptionalDouble = new OptionalDoubleElements());
+		return pOptionalDouble;
 	}
 	
 	public ParserRule getOptionalDoubleRule() {
@@ -2745,7 +2795,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//DOUBLE returns ecore::EDouble:
 	//	INT ("." INT)?;
 	public DOUBLEElements getDOUBLEAccess() {
-		return (pDOUBLE != null) ? pDOUBLE : (pDOUBLE = new DOUBLEElements());
+		return pDOUBLE;
 	}
 	
 	public ParserRule getDOUBLERule() {
@@ -2755,7 +2805,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//NullValueGenerated returns NullValue:
 	//	"#29" value=NULL_STRING;
 	public NullValueGeneratedElements getNullValueGeneratedAccess() {
-		return (pNullValueGenerated != null) ? pNullValueGenerated : (pNullValueGenerated = new NullValueGeneratedElements());
+		return pNullValueGenerated;
 	}
 	
 	public ParserRule getNullValueGeneratedRule() {
@@ -2765,7 +2815,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//NullValueInterpreted returns NullValue:
 	//	"#30" value=NULL_STRING foo=ID?;
 	public NullValueInterpretedElements getNullValueInterpretedAccess() {
-		return (pNullValueInterpreted != null) ? pNullValueInterpreted : (pNullValueInterpreted = new NullValueInterpretedElements());
+		return pNullValueInterpreted;
 	}
 	
 	public ParserRule getNullValueInterpretedRule() {
@@ -2775,7 +2825,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//NULL_STRING:
 	//	STRING;
 	public NULL_STRINGElements getNULL_STRINGAccess() {
-		return (pNULL_STRING != null) ? pNULL_STRING : (pNULL_STRING = new NULL_STRINGElements());
+		return pNULL_STRING;
 	}
 	
 	public ParserRule getNULL_STRINGRule() {
@@ -2785,7 +2835,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//NullCrossRefGenerated returns NullCrossRef:
 	//	"#31" ref=[ecore::EObject];
 	public NullCrossRefGeneratedElements getNullCrossRefGeneratedAccess() {
-		return (pNullCrossRefGenerated != null) ? pNullCrossRefGenerated : (pNullCrossRefGenerated = new NullCrossRefGeneratedElements());
+		return pNullCrossRefGenerated;
 	}
 	
 	public ParserRule getNullCrossRefGeneratedRule() {
@@ -2795,7 +2845,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//NullCrossRefInterpreted returns NullCrossRef:
 	//	"#32" ref=[ecore::EObject] foo=ID?;
 	public NullCrossRefInterpretedElements getNullCrossRefInterpretedAccess() {
-		return (pNullCrossRefInterpreted != null) ? pNullCrossRefInterpreted : (pNullCrossRefInterpreted = new NullCrossRefInterpretedElements());
+		return pNullCrossRefInterpreted;
 	}
 	
 	public ParserRule getNullCrossRefInterpretedRule() {

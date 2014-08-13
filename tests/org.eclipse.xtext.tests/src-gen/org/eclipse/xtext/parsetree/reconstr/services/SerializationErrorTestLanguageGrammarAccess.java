@@ -223,22 +223,28 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 	}
 	
 	
-	private ModelElements pModel;
-	private ParenthesisElements pParenthesis;
-	private TestElements pTest;
-	private TwoRequiredElements pTwoRequired;
-	private TwoOptionsElements pTwoOptions;
-	private IndentElements pIndent;
+	private final ModelElements pModel;
+	private final ParenthesisElements pParenthesis;
+	private final TestElements pTest;
+	private final TwoRequiredElements pTwoRequired;
+	private final TwoOptionsElements pTwoOptions;
+	private final IndentElements pIndent;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public SerializationErrorTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pParenthesis = new ParenthesisElements();
+		this.pTest = new TestElements();
+		this.pTwoRequired = new TwoRequiredElements();
+		this.pTwoOptions = new TwoOptionsElements();
+		this.pIndent = new IndentElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -271,7 +277,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 	//Model:
 	//	test=Test | test=Parenthesis;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -281,7 +287,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 	//Parenthesis returns Test:
 	//	"(" Test ")";
 	public ParenthesisElements getParenthesisAccess() {
-		return (pParenthesis != null) ? pParenthesis : (pParenthesis = new ParenthesisElements());
+		return pParenthesis;
 	}
 	
 	public ParserRule getParenthesisRule() {
@@ -291,7 +297,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 	//Test:
 	//	TwoRequired | TwoOptions | Indent;
 	public TestElements getTestAccess() {
-		return (pTest != null) ? pTest : (pTest = new TestElements());
+		return pTest;
 	}
 	
 	public ParserRule getTestRule() {
@@ -301,7 +307,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 	//TwoRequired:
 	//	"tworequired" one=ID two=ID;
 	public TwoRequiredElements getTwoRequiredAccess() {
-		return (pTwoRequired != null) ? pTwoRequired : (pTwoRequired = new TwoRequiredElements());
+		return pTwoRequired;
 	}
 	
 	public ParserRule getTwoRequiredRule() {
@@ -311,7 +317,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 	//TwoOptions:
 	//	"twooptions" ("one" one=ID | "two" two=ID);
 	public TwoOptionsElements getTwoOptionsAccess() {
-		return (pTwoOptions != null) ? pTwoOptions : (pTwoOptions = new TwoOptionsElements());
+		return pTwoOptions;
 	}
 	
 	public ParserRule getTwoOptionsRule() {
@@ -321,7 +327,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 	//Indent:
 	//	"{" req=TwoRequired? opt=TwoOptions? indent+=Indent* "}";
 	public IndentElements getIndentAccess() {
-		return (pIndent != null) ? pIndent : (pIndent = new IndentElements());
+		return pIndent;
 	}
 	
 	public ParserRule getIndentRule() {

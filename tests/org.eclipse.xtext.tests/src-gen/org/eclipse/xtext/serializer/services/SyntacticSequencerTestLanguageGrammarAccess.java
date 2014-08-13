@@ -1088,43 +1088,70 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 	
 	
-	private ModelElements pModel;
-	private MandatoryKeywordsElements pMandatoryKeywords;
-	private Exp0Elements pExp0;
-	private Addition0Elements pAddition0;
-	private Prim0Elements pPrim0;
-	private Exp1Elements pExp1;
-	private Addition1Elements pAddition1;
-	private Prim1Elements pPrim1;
-	private Exp2Elements pExp2;
-	private Addition2Elements pAddition2;
-	private Multiplication2Elements pMultiplication2;
-	private Prim2Elements pPrim2;
-	private TerminalRule tTERMINAL_ID;
-	private DatatypeIDElements pDatatypeID;
-	private SingleCrossReferenceElements pSingleCrossReference;
-	private BooleanAlternativeElements pBooleanAlternative;
-	private BooleanAlternativeLiteralElements pBooleanAlternativeLiteral;
-	private UnassignedDatatypeElements pUnassignedDatatype;
-	private KW1Elements pKW1;
-	private OptionalSingleTransitionElements pOptionalSingleTransition;
-	private OptionalManyTransitionElements pOptionalManyTransition;
-	private MandatoryManyTransitionElements pMandatoryManyTransition;
-	private AlternativeTransitionElements pAlternativeTransition;
-	private TerminalRule tBOOLEAN_TERMINAL_ID;
-	private BooleanDatatypeIDElements pBooleanDatatypeID;
-	private BooleanValuesElements pBooleanValues;
-	private LongAlternativeElements pLongAlternative;
+	private final ModelElements pModel;
+	private final MandatoryKeywordsElements pMandatoryKeywords;
+	private final Exp0Elements pExp0;
+	private final Addition0Elements pAddition0;
+	private final Prim0Elements pPrim0;
+	private final Exp1Elements pExp1;
+	private final Addition1Elements pAddition1;
+	private final Prim1Elements pPrim1;
+	private final Exp2Elements pExp2;
+	private final Addition2Elements pAddition2;
+	private final Multiplication2Elements pMultiplication2;
+	private final Prim2Elements pPrim2;
+	private final TerminalRule tTERMINAL_ID;
+	private final DatatypeIDElements pDatatypeID;
+	private final SingleCrossReferenceElements pSingleCrossReference;
+	private final BooleanAlternativeElements pBooleanAlternative;
+	private final BooleanAlternativeLiteralElements pBooleanAlternativeLiteral;
+	private final UnassignedDatatypeElements pUnassignedDatatype;
+	private final KW1Elements pKW1;
+	private final OptionalSingleTransitionElements pOptionalSingleTransition;
+	private final OptionalManyTransitionElements pOptionalManyTransition;
+	private final MandatoryManyTransitionElements pMandatoryManyTransition;
+	private final AlternativeTransitionElements pAlternativeTransition;
+	private final TerminalRule tBOOLEAN_TERMINAL_ID;
+	private final BooleanDatatypeIDElements pBooleanDatatypeID;
+	private final BooleanValuesElements pBooleanValues;
+	private final LongAlternativeElements pLongAlternative;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public SyntacticSequencerTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pMandatoryKeywords = new MandatoryKeywordsElements();
+		this.pExp0 = new Exp0Elements();
+		this.pAddition0 = new Addition0Elements();
+		this.pPrim0 = new Prim0Elements();
+		this.pExp1 = new Exp1Elements();
+		this.pAddition1 = new Addition1Elements();
+		this.pPrim1 = new Prim1Elements();
+		this.pExp2 = new Exp2Elements();
+		this.pAddition2 = new Addition2Elements();
+		this.pMultiplication2 = new Multiplication2Elements();
+		this.pPrim2 = new Prim2Elements();
+		this.tTERMINAL_ID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "TERMINAL_ID");
+		this.pDatatypeID = new DatatypeIDElements();
+		this.pSingleCrossReference = new SingleCrossReferenceElements();
+		this.pBooleanAlternative = new BooleanAlternativeElements();
+		this.pBooleanAlternativeLiteral = new BooleanAlternativeLiteralElements();
+		this.pUnassignedDatatype = new UnassignedDatatypeElements();
+		this.pKW1 = new KW1Elements();
+		this.pOptionalSingleTransition = new OptionalSingleTransitionElements();
+		this.pOptionalManyTransition = new OptionalManyTransitionElements();
+		this.pMandatoryManyTransition = new MandatoryManyTransitionElements();
+		this.pAlternativeTransition = new AlternativeTransitionElements();
+		this.tBOOLEAN_TERMINAL_ID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "BOOLEAN_TERMINAL_ID");
+		this.pBooleanDatatypeID = new BooleanDatatypeIDElements();
+		this.pBooleanValues = new BooleanValuesElements();
+		this.pLongAlternative = new LongAlternativeElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -1159,7 +1186,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	//	x7=UnassignedDatatype | x8=OptionalSingleTransition | x9=OptionalManyTransition | x10=MandatoryManyTransition |
 	//	x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -1169,7 +1196,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	//MandatoryKeywords:
 	//	"#1" val1=ID "kw1" val2=ID "kw2" "kw3" val3=ID "kw4";
 	public MandatoryKeywordsElements getMandatoryKeywordsAccess() {
-		return (pMandatoryKeywords != null) ? pMandatoryKeywords : (pMandatoryKeywords = new MandatoryKeywordsElements());
+		return pMandatoryKeywords;
 	}
 	
 	public ParserRule getMandatoryKeywordsRule() {
@@ -1179,7 +1206,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	//Exp0:
 	//	"#2" Addition0;
 	public Exp0Elements getExp0Access() {
-		return (pExp0 != null) ? pExp0 : (pExp0 = new Exp0Elements());
+		return pExp0;
 	}
 	
 	public ParserRule getExp0Rule() {
@@ -1189,7 +1216,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	//Addition0 returns Exp0:
 	//	Prim0 ({Add0.left=current} "+" right=Prim0)*;
 	public Addition0Elements getAddition0Access() {
-		return (pAddition0 != null) ? pAddition0 : (pAddition0 = new Addition0Elements());
+		return pAddition0;
 	}
 	
 	public ParserRule getAddition0Rule() {
@@ -1199,7 +1226,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	//Prim0 returns Exp0:
 	//	{Val0} name=ID;
 	public Prim0Elements getPrim0Access() {
-		return (pPrim0 != null) ? pPrim0 : (pPrim0 = new Prim0Elements());
+		return pPrim0;
 	}
 	
 	public ParserRule getPrim0Rule() {
@@ -1209,7 +1236,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	//Exp1:
 	//	"#3" Addition1;
 	public Exp1Elements getExp1Access() {
-		return (pExp1 != null) ? pExp1 : (pExp1 = new Exp1Elements());
+		return pExp1;
 	}
 	
 	public ParserRule getExp1Rule() {
@@ -1219,7 +1246,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	//Addition1 returns Exp1:
 	//	Prim1 ({Add1.left=current} "+" right=Prim1)*;
 	public Addition1Elements getAddition1Access() {
-		return (pAddition1 != null) ? pAddition1 : (pAddition1 = new Addition1Elements());
+		return pAddition1;
 	}
 	
 	public ParserRule getAddition1Rule() {
@@ -1229,7 +1256,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	//Prim1 returns Exp1:
 	//	{Val1} name=ID | "(" Addition1 ")";
 	public Prim1Elements getPrim1Access() {
-		return (pPrim1 != null) ? pPrim1 : (pPrim1 = new Prim1Elements());
+		return pPrim1;
 	}
 	
 	public ParserRule getPrim1Rule() {
@@ -1239,7 +1266,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	//Exp2:
 	//	"#4" Addition2;
 	public Exp2Elements getExp2Access() {
-		return (pExp2 != null) ? pExp2 : (pExp2 = new Exp2Elements());
+		return pExp2;
 	}
 	
 	public ParserRule getExp2Rule() {
@@ -1249,7 +1276,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	//Addition2 returns Exp2:
 	//	Multiplication2 ({Add2.left=current} "+" right=Multiplication2)*;
 	public Addition2Elements getAddition2Access() {
-		return (pAddition2 != null) ? pAddition2 : (pAddition2 = new Addition2Elements());
+		return pAddition2;
 	}
 	
 	public ParserRule getAddition2Rule() {
@@ -1259,7 +1286,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	//Multiplication2 returns Exp2:
 	//	Prim2 ({Mult2.left=current} "*" right=Prim2)*;
 	public Multiplication2Elements getMultiplication2Access() {
-		return (pMultiplication2 != null) ? pMultiplication2 : (pMultiplication2 = new Multiplication2Elements());
+		return pMultiplication2;
 	}
 	
 	public ParserRule getMultiplication2Rule() {
@@ -1269,7 +1296,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	//Prim2 returns Exp2:
 	//	{Val2} name=ID | "(" Addition2 ")";
 	public Prim2Elements getPrim2Access() {
-		return (pPrim2 != null) ? pPrim2 : (pPrim2 = new Prim2Elements());
+		return pPrim2;
 	}
 	
 	public ParserRule getPrim2Rule() {
@@ -1279,13 +1306,13 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	//terminal TERMINAL_ID:
 	//	"$1" ID;
 	public TerminalRule getTERMINAL_IDRule() {
-		return (tTERMINAL_ID != null) ? tTERMINAL_ID : (tTERMINAL_ID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "TERMINAL_ID"));
+		return tTERMINAL_ID;
 	} 
 
 	//DatatypeID:
 	//	ID;
 	public DatatypeIDElements getDatatypeIDAccess() {
-		return (pDatatypeID != null) ? pDatatypeID : (pDatatypeID = new DatatypeIDElements());
+		return pDatatypeID;
 	}
 	
 	public ParserRule getDatatypeIDRule() {
@@ -1296,7 +1323,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	//	"#5" name=(TERMINAL_ID | ID) ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])? ("kw2"
 	//	ref2=[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])?;
 	public SingleCrossReferenceElements getSingleCrossReferenceAccess() {
-		return (pSingleCrossReference != null) ? pSingleCrossReference : (pSingleCrossReference = new SingleCrossReferenceElements());
+		return pSingleCrossReference;
 	}
 	
 	public ParserRule getSingleCrossReferenceRule() {
@@ -1306,7 +1333,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	//BooleanAlternative:
 	//	"#6" bool=BooleanAlternativeLiteral;
 	public BooleanAlternativeElements getBooleanAlternativeAccess() {
-		return (pBooleanAlternative != null) ? pBooleanAlternative : (pBooleanAlternative = new BooleanAlternativeElements());
+		return pBooleanAlternative;
 	}
 	
 	public ParserRule getBooleanAlternativeRule() {
@@ -1316,7 +1343,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	//BooleanAlternativeLiteral:
 	//	{BooleanAlternativeLiteral} ("kw1" | isTrue?="kw2");
 	public BooleanAlternativeLiteralElements getBooleanAlternativeLiteralAccess() {
-		return (pBooleanAlternativeLiteral != null) ? pBooleanAlternativeLiteral : (pBooleanAlternativeLiteral = new BooleanAlternativeLiteralElements());
+		return pBooleanAlternativeLiteral;
 	}
 	
 	public ParserRule getBooleanAlternativeLiteralRule() {
@@ -1326,7 +1353,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	//UnassignedDatatype:
 	//	"#7" val=ID KW1;
 	public UnassignedDatatypeElements getUnassignedDatatypeAccess() {
-		return (pUnassignedDatatype != null) ? pUnassignedDatatype : (pUnassignedDatatype = new UnassignedDatatypeElements());
+		return pUnassignedDatatype;
 	}
 	
 	public ParserRule getUnassignedDatatypeRule() {
@@ -1336,7 +1363,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	//KW1:
 	//	"kw1" | "matched" INT?;
 	public KW1Elements getKW1Access() {
-		return (pKW1 != null) ? pKW1 : (pKW1 = new KW1Elements());
+		return pKW1;
 	}
 	
 	public ParserRule getKW1Rule() {
@@ -1346,7 +1373,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	//OptionalSingleTransition:
 	//	"#8" KW1? val=ID;
 	public OptionalSingleTransitionElements getOptionalSingleTransitionAccess() {
-		return (pOptionalSingleTransition != null) ? pOptionalSingleTransition : (pOptionalSingleTransition = new OptionalSingleTransitionElements());
+		return pOptionalSingleTransition;
 	}
 	
 	public ParserRule getOptionalSingleTransitionRule() {
@@ -1356,7 +1383,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	//OptionalManyTransition:
 	//	"#9" KW1* val=ID;
 	public OptionalManyTransitionElements getOptionalManyTransitionAccess() {
-		return (pOptionalManyTransition != null) ? pOptionalManyTransition : (pOptionalManyTransition = new OptionalManyTransitionElements());
+		return pOptionalManyTransition;
 	}
 	
 	public ParserRule getOptionalManyTransitionRule() {
@@ -1366,7 +1393,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	//MandatoryManyTransition:
 	//	"#10" KW1+ val=ID;
 	public MandatoryManyTransitionElements getMandatoryManyTransitionAccess() {
-		return (pMandatoryManyTransition != null) ? pMandatoryManyTransition : (pMandatoryManyTransition = new MandatoryManyTransitionElements());
+		return pMandatoryManyTransition;
 	}
 	
 	public ParserRule getMandatoryManyTransitionRule() {
@@ -1376,7 +1403,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	//AlternativeTransition:
 	//	"#11" (KW1 | "kw2") val=ID;
 	public AlternativeTransitionElements getAlternativeTransitionAccess() {
-		return (pAlternativeTransition != null) ? pAlternativeTransition : (pAlternativeTransition = new AlternativeTransitionElements());
+		return pAlternativeTransition;
 	}
 	
 	public ParserRule getAlternativeTransitionRule() {
@@ -1386,13 +1413,13 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	//terminal BOOLEAN_TERMINAL_ID:
 	//	"%1" ID;
 	public TerminalRule getBOOLEAN_TERMINAL_IDRule() {
-		return (tBOOLEAN_TERMINAL_ID != null) ? tBOOLEAN_TERMINAL_ID : (tBOOLEAN_TERMINAL_ID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "BOOLEAN_TERMINAL_ID"));
+		return tBOOLEAN_TERMINAL_ID;
 	} 
 
 	//BooleanDatatypeID:
 	//	ID;
 	public BooleanDatatypeIDElements getBooleanDatatypeIDAccess() {
-		return (pBooleanDatatypeID != null) ? pBooleanDatatypeID : (pBooleanDatatypeID = new BooleanDatatypeIDElements());
+		return pBooleanDatatypeID;
 	}
 	
 	public ParserRule getBooleanDatatypeIDRule() {
@@ -1402,7 +1429,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	//BooleanValues:
 	//	{BooleanValues} "#12" val1?="kw1"? val2?=BOOLEAN_TERMINAL_ID? val3?=BooleanDatatypeID?;
 	public BooleanValuesElements getBooleanValuesAccess() {
-		return (pBooleanValues != null) ? pBooleanValues : (pBooleanValues = new BooleanValuesElements());
+		return pBooleanValues;
 	}
 	
 	public ParserRule getBooleanValuesRule() {
@@ -1413,7 +1440,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	//	"#13" foo=ID ("kw1" val1+=ID? | "kw2" val2+=ID? | "kw3" val3+=ID? | "kw4" val4+=ID? | "kw5" val5+=ID? | "kw6"
 	//	val6+=ID? | "kw7" val7+=ID? | "kw8" val8+=ID?)* "!";
 	public LongAlternativeElements getLongAlternativeAccess() {
-		return (pLongAlternative != null) ? pLongAlternative : (pLongAlternative = new LongAlternativeElements());
+		return pLongAlternative;
 	}
 	
 	public ParserRule getLongAlternativeRule() {

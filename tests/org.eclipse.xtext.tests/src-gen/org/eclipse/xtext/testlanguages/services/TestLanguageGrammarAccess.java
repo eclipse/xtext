@@ -139,21 +139,26 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	
-	private EntryRuleElements pEntryRule;
-	private AbstractRuleElements pAbstractRule;
-	private ChoiceRuleElements pChoiceRule;
-	private ReducibleRuleElements pReducibleRule;
-	private TerminalRuleElements pTerminalRule;
+	private final EntryRuleElements pEntryRule;
+	private final AbstractRuleElements pAbstractRule;
+	private final ChoiceRuleElements pChoiceRule;
+	private final ReducibleRuleElements pReducibleRule;
+	private final TerminalRuleElements pTerminalRule;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public TestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pEntryRule = new EntryRuleElements();
+		this.pAbstractRule = new AbstractRuleElements();
+		this.pChoiceRule = new ChoiceRuleElements();
+		this.pReducibleRule = new ReducibleRuleElements();
+		this.pTerminalRule = new TerminalRuleElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -186,7 +191,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	//EntryRule returns Model:
 	//	multiFeature+=AbstractRule*;
 	public EntryRuleElements getEntryRuleAccess() {
-		return (pEntryRule != null) ? pEntryRule : (pEntryRule = new EntryRuleElements());
+		return pEntryRule;
 	}
 	
 	public ParserRule getEntryRuleRule() {
@@ -196,7 +201,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	//AbstractRule returns AbstractElement:
 	//	ChoiceRule | ReducibleRule;
 	public AbstractRuleElements getAbstractRuleAccess() {
-		return (pAbstractRule != null) ? pAbstractRule : (pAbstractRule = new AbstractRuleElements());
+		return pAbstractRule;
 	}
 	
 	public ParserRule getAbstractRuleRule() {
@@ -206,7 +211,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	//ChoiceRule returns ChoiceElement:
 	//	"choice" optionalKeyword?="optional"? name=ID;
 	public ChoiceRuleElements getChoiceRuleAccess() {
-		return (pChoiceRule != null) ? pChoiceRule : (pChoiceRule = new ChoiceRuleElements());
+		return pChoiceRule;
 	}
 	
 	public ParserRule getChoiceRuleRule() {
@@ -216,7 +221,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	//ReducibleRule returns ReducibleElement:
 	//	"reducible" TerminalRule ({ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?;
 	public ReducibleRuleElements getReducibleRuleAccess() {
-		return (pReducibleRule != null) ? pReducibleRule : (pReducibleRule = new ReducibleRuleElements());
+		return pReducibleRule;
 	}
 	
 	public ParserRule getReducibleRuleRule() {
@@ -226,7 +231,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	//TerminalRule returns TerminalElement:
 	//	stringFeature=STRING;
 	public TerminalRuleElements getTerminalRuleAccess() {
-		return (pTerminalRule != null) ? pTerminalRule : (pTerminalRule = new TerminalRuleElements());
+		return pTerminalRule;
 	}
 	
 	public ParserRule getTerminalRuleRule() {

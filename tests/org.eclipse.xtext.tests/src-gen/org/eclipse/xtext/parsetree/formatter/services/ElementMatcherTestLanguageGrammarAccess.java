@@ -851,40 +851,64 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 	
 	
-	private ModelElements pModel;
-	private SimpleElements pSimple;
-	private FQNElements pFQN;
-	private RuleCallsElements pRuleCalls;
-	private RuleCallsSubElements pRuleCallsSub;
-	private RuleCallsAss1Elements pRuleCallsAss1;
-	private RuleCallsAss2Elements pRuleCallsAss2;
-	private OptionalCallsElements pOptionalCalls;
-	private OptionalCallsSub1Elements pOptionalCallsSub1;
-	private OptionalCallsSub2Elements pOptionalCallsSub2;
-	private OptionalCallsSub3Elements pOptionalCallsSub3;
-	private RecursionElements pRecursion;
-	private RecursionSubElements pRecursionSub;
-	private LoopElements pLoop;
-	private ExpressionElements pExpression;
-	private AddElements pAdd;
-	private MultElements pMult;
-	private PrimElements pPrim;
-	private RuleCalls12Elements pRuleCalls12;
-	private ConstructorElements pConstructor;
-	private FieldElements pField;
-	private ParameterElements pParameter;
-	private NestedStartElements pNestedStart;
-	private NestedStartSubElements pNestedStartSub;
+	private final ModelElements pModel;
+	private final SimpleElements pSimple;
+	private final FQNElements pFQN;
+	private final RuleCallsElements pRuleCalls;
+	private final RuleCallsSubElements pRuleCallsSub;
+	private final RuleCallsAss1Elements pRuleCallsAss1;
+	private final RuleCallsAss2Elements pRuleCallsAss2;
+	private final OptionalCallsElements pOptionalCalls;
+	private final OptionalCallsSub1Elements pOptionalCallsSub1;
+	private final OptionalCallsSub2Elements pOptionalCallsSub2;
+	private final OptionalCallsSub3Elements pOptionalCallsSub3;
+	private final RecursionElements pRecursion;
+	private final RecursionSubElements pRecursionSub;
+	private final LoopElements pLoop;
+	private final ExpressionElements pExpression;
+	private final AddElements pAdd;
+	private final MultElements pMult;
+	private final PrimElements pPrim;
+	private final RuleCalls12Elements pRuleCalls12;
+	private final ConstructorElements pConstructor;
+	private final FieldElements pField;
+	private final ParameterElements pParameter;
+	private final NestedStartElements pNestedStart;
+	private final NestedStartSubElements pNestedStartSub;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public ElementMatcherTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pSimple = new SimpleElements();
+		this.pFQN = new FQNElements();
+		this.pRuleCalls = new RuleCallsElements();
+		this.pRuleCallsSub = new RuleCallsSubElements();
+		this.pRuleCallsAss1 = new RuleCallsAss1Elements();
+		this.pRuleCallsAss2 = new RuleCallsAss2Elements();
+		this.pOptionalCalls = new OptionalCallsElements();
+		this.pOptionalCallsSub1 = new OptionalCallsSub1Elements();
+		this.pOptionalCallsSub2 = new OptionalCallsSub2Elements();
+		this.pOptionalCallsSub3 = new OptionalCallsSub3Elements();
+		this.pRecursion = new RecursionElements();
+		this.pRecursionSub = new RecursionSubElements();
+		this.pLoop = new LoopElements();
+		this.pExpression = new ExpressionElements();
+		this.pAdd = new AddElements();
+		this.pMult = new MultElements();
+		this.pPrim = new PrimElements();
+		this.pRuleCalls12 = new RuleCalls12Elements();
+		this.pConstructor = new ConstructorElements();
+		this.pField = new FieldElements();
+		this.pParameter = new ParameterElements();
+		this.pNestedStart = new NestedStartElements();
+		this.pNestedStartSub = new NestedStartSubElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -917,7 +941,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Model:
 	//	Simple | RuleCalls | OptionalCalls | Recursion | Loop | Expression | RuleCalls12 | NestedStart;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -927,7 +951,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Simple:
 	//	"#1" name=ID ("kw1" optional=ID)? datatype=FQN;
 	public SimpleElements getSimpleAccess() {
-		return (pSimple != null) ? pSimple : (pSimple = new SimpleElements());
+		return pSimple;
 	}
 	
 	public ParserRule getSimpleRule() {
@@ -937,7 +961,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	//FQN:
 	//	ID ("." ID);
 	public FQNElements getFQNAccess() {
-		return (pFQN != null) ? pFQN : (pFQN = new FQNElements());
+		return pFQN;
 	}
 	
 	public ParserRule getFQNRule() {
@@ -947,7 +971,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	//RuleCalls:
 	//	"#2" RuleCallsSub name=ID call1=RuleCallsAss1? call2=RuleCallsAss2?;
 	public RuleCallsElements getRuleCallsAccess() {
-		return (pRuleCalls != null) ? pRuleCalls : (pRuleCalls = new RuleCallsElements());
+		return pRuleCalls;
 	}
 	
 	public ParserRule getRuleCallsRule() {
@@ -957,7 +981,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	//RuleCallsSub:
 	//	sub="sub";
 	public RuleCallsSubElements getRuleCallsSubAccess() {
-		return (pRuleCallsSub != null) ? pRuleCallsSub : (pRuleCallsSub = new RuleCallsSubElements());
+		return pRuleCallsSub;
 	}
 	
 	public ParserRule getRuleCallsSubRule() {
@@ -967,7 +991,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	//RuleCallsAss1:
 	//	"ass1" name=ID;
 	public RuleCallsAss1Elements getRuleCallsAss1Access() {
-		return (pRuleCallsAss1 != null) ? pRuleCallsAss1 : (pRuleCallsAss1 = new RuleCallsAss1Elements());
+		return pRuleCallsAss1;
 	}
 	
 	public ParserRule getRuleCallsAss1Rule() {
@@ -977,7 +1001,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	//RuleCallsAss2:
 	//	"ass2" name=ID;
 	public RuleCallsAss2Elements getRuleCallsAss2Access() {
-		return (pRuleCallsAss2 != null) ? pRuleCallsAss2 : (pRuleCallsAss2 = new RuleCallsAss2Elements());
+		return pRuleCallsAss2;
 	}
 	
 	public ParserRule getRuleCallsAss2Rule() {
@@ -987,7 +1011,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	//OptionalCalls:
 	//	"#3" {OptionalCalls} opt1=OptionalCallsSub1? name=ID;
 	public OptionalCallsElements getOptionalCallsAccess() {
-		return (pOptionalCalls != null) ? pOptionalCalls : (pOptionalCalls = new OptionalCallsElements());
+		return pOptionalCalls;
 	}
 	
 	public ParserRule getOptionalCallsRule() {
@@ -997,7 +1021,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	//OptionalCallsSub1:
 	//	{OptionalCallsSub1} opt2=OptionalCallsSub2? "sub" opt3=OptionalCallsSub3?;
 	public OptionalCallsSub1Elements getOptionalCallsSub1Access() {
-		return (pOptionalCallsSub1 != null) ? pOptionalCallsSub1 : (pOptionalCallsSub1 = new OptionalCallsSub1Elements());
+		return pOptionalCallsSub1;
 	}
 	
 	public ParserRule getOptionalCallsSub1Rule() {
@@ -1007,7 +1031,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	//OptionalCallsSub2:
 	//	"sub2" name=ID;
 	public OptionalCallsSub2Elements getOptionalCallsSub2Access() {
-		return (pOptionalCallsSub2 != null) ? pOptionalCallsSub2 : (pOptionalCallsSub2 = new OptionalCallsSub2Elements());
+		return pOptionalCallsSub2;
 	}
 	
 	public ParserRule getOptionalCallsSub2Rule() {
@@ -1017,7 +1041,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	//OptionalCallsSub3:
 	//	"sub3" name=ID;
 	public OptionalCallsSub3Elements getOptionalCallsSub3Access() {
-		return (pOptionalCallsSub3 != null) ? pOptionalCallsSub3 : (pOptionalCallsSub3 = new OptionalCallsSub3Elements());
+		return pOptionalCallsSub3;
 	}
 	
 	public ParserRule getOptionalCallsSub3Rule() {
@@ -1027,7 +1051,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Recursion:
 	//	"#4" RecursionSub;
 	public RecursionElements getRecursionAccess() {
-		return (pRecursion != null) ? pRecursion : (pRecursion = new RecursionElements());
+		return pRecursion;
 	}
 	
 	public ParserRule getRecursionRule() {
@@ -1037,7 +1061,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	//RecursionSub:
 	//	{RecursionSub} "{" (sub+=RecursionSub | vals+=ID)* "}" semi?=";"?;
 	public RecursionSubElements getRecursionSubAccess() {
-		return (pRecursionSub != null) ? pRecursionSub : (pRecursionSub = new RecursionSubElements());
+		return pRecursionSub;
 	}
 	
 	public ParserRule getRecursionSubRule() {
@@ -1047,7 +1071,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Loop:
 	//	"#5" names+=ID+ ("gr" gr+=ID)* (ints+=INT | strings+=STRING)*;
 	public LoopElements getLoopAccess() {
-		return (pLoop != null) ? pLoop : (pLoop = new LoopElements());
+		return pLoop;
 	}
 	
 	public ParserRule getLoopRule() {
@@ -1057,7 +1081,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Expression:
 	//	"#6" Add;
 	public ExpressionElements getExpressionAccess() {
-		return (pExpression != null) ? pExpression : (pExpression = new ExpressionElements());
+		return pExpression;
 	}
 	
 	public ParserRule getExpressionRule() {
@@ -1067,7 +1091,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Add returns Expression:
 	//	Mult ({Add.left=current} "+" right=Mult)*;
 	public AddElements getAddAccess() {
-		return (pAdd != null) ? pAdd : (pAdd = new AddElements());
+		return pAdd;
 	}
 	
 	public ParserRule getAddRule() {
@@ -1077,7 +1101,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Mult returns Expression:
 	//	Prim ({Mult.left=current} "*" right=Prim)*;
 	public MultElements getMultAccess() {
-		return (pMult != null) ? pMult : (pMult = new MultElements());
+		return pMult;
 	}
 	
 	public ParserRule getMultRule() {
@@ -1087,7 +1111,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Prim returns Expression:
 	//	{Value} val=INT | {Function} func=ID "(" param+=Add ("," param+=Add)* ")" | {Pointer} "=>" target=Prim | "(" Add ")";
 	public PrimElements getPrimAccess() {
-		return (pPrim != null) ? pPrim : (pPrim = new PrimElements());
+		return pPrim;
 	}
 	
 	public ParserRule getPrimRule() {
@@ -1097,7 +1121,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	//RuleCalls12:
 	//	"#7" constructor=Constructor fields+=Field "kw3";
 	public RuleCalls12Elements getRuleCalls12Access() {
-		return (pRuleCalls12 != null) ? pRuleCalls12 : (pRuleCalls12 = new RuleCalls12Elements());
+		return pRuleCalls12;
 	}
 	
 	public ParserRule getRuleCalls12Rule() {
@@ -1107,7 +1131,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Constructor:
 	//	{Constructor} kw1?="kw1"?;
 	public ConstructorElements getConstructorAccess() {
-		return (pConstructor != null) ? pConstructor : (pConstructor = new ConstructorElements());
+		return pConstructor;
 	}
 	
 	public ParserRule getConstructorRule() {
@@ -1117,7 +1141,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Field:
 	//	ID Parameter;
 	public FieldElements getFieldAccess() {
-		return (pField != null) ? pField : (pField = new FieldElements());
+		return pField;
 	}
 	
 	public ParserRule getFieldRule() {
@@ -1127,7 +1151,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Parameter:
 	//	{Parameter} kw2?="kw2"?;
 	public ParameterElements getParameterAccess() {
-		return (pParameter != null) ? pParameter : (pParameter = new ParameterElements());
+		return pParameter;
 	}
 	
 	public ParserRule getParameterRule() {
@@ -1137,7 +1161,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	//NestedStart:
 	//	NestedStartSub name=ID;
 	public NestedStartElements getNestedStartAccess() {
-		return (pNestedStart != null) ? pNestedStart : (pNestedStart = new NestedStartElements());
+		return pNestedStart;
 	}
 	
 	public ParserRule getNestedStartRule() {
@@ -1147,7 +1171,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	//NestedStartSub:
 	//	"#8" {NestedStartSub};
 	public NestedStartSubElements getNestedStartSubAccess() {
-		return (pNestedStartSub != null) ? pNestedStartSub : (pNestedStartSub = new NestedStartSubElements());
+		return pNestedStartSub;
 	}
 	
 	public ParserRule getNestedStartSubRule() {

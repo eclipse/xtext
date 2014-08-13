@@ -107,19 +107,22 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 	}
 	
 	
-	private ModelElements pModel;
-	private ModelFeaturesElements pModelFeatures;
-	private DataTypeRuleElements pDataTypeRule;
+	private final ModelElements pModel;
+	private final ModelFeaturesElements pModelFeatures;
+	private final DataTypeRuleElements pDataTypeRule;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public UnassignedRuleCallTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pModelFeatures = new ModelFeaturesElements();
+		this.pDataTypeRule = new DataTypeRuleElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -152,7 +155,7 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 	//Model:
 	//	"model" INT+ modelFeatures=ModelFeatures;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -162,7 +165,7 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 	//ModelFeatures:
 	//	"feature" name=ID DataTypeRule ";";
 	public ModelFeaturesElements getModelFeaturesAccess() {
-		return (pModelFeatures != null) ? pModelFeatures : (pModelFeatures = new ModelFeaturesElements());
+		return pModelFeatures;
 	}
 	
 	public ParserRule getModelFeaturesRule() {
@@ -172,7 +175,7 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 	//DataTypeRule:
 	//	INT "keyword" INT STRING?;
 	public DataTypeRuleElements getDataTypeRuleAccess() {
-		return (pDataTypeRule != null) ? pDataTypeRule : (pDataTypeRule = new DataTypeRuleElements());
+		return pDataTypeRule;
 	}
 	
 	public ParserRule getDataTypeRuleRule() {

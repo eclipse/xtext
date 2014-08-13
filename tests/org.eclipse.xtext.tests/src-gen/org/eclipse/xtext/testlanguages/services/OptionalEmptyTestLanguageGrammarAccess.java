@@ -59,18 +59,20 @@ public class OptionalEmptyTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 	
 	
-	private ModelElements pModel;
-	private GreetingElements pGreeting;
+	private final ModelElements pModel;
+	private final GreetingElements pGreeting;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public OptionalEmptyTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pGreeting = new GreetingElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -103,7 +105,7 @@ public class OptionalEmptyTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//Model:
 	//	child=Greeting?;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -113,7 +115,7 @@ public class OptionalEmptyTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//Greeting:
 	//	"hallo" name=ID;
 	public GreetingElements getGreetingAccess() {
-		return (pGreeting != null) ? pGreeting : (pGreeting = new GreetingElements());
+		return pGreeting;
 	}
 	
 	public ParserRule getGreetingRule() {

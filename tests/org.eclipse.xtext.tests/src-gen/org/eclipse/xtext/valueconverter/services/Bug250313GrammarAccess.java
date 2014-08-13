@@ -363,22 +363,28 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	
-	private ModelElements pModel;
-	private DatatypeElements pDatatype;
-	private NestedDatatypeElements pNestedDatatype;
-	private ChildElements pChild;
-	private Child1Elements pChild1;
-	private Child2Elements pChild2;
+	private final ModelElements pModel;
+	private final DatatypeElements pDatatype;
+	private final NestedDatatypeElements pNestedDatatype;
+	private final ChildElements pChild;
+	private final Child1Elements pChild1;
+	private final Child2Elements pChild2;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug250313GrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pDatatype = new DatatypeElements();
+		this.pNestedDatatype = new NestedDatatypeElements();
+		this.pChild = new ChildElements();
+		this.pChild1 = new Child1Elements();
+		this.pChild2 = new Child2Elements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -414,7 +420,7 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 	//	multiValue+=Datatype | "4" value=NestedDatatype | "4+" multiValue+=NestedDatatype | ("content" children=Child) ("ref"
 	//	ref=([Child1|STRING] | [Child2]))?;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -424,7 +430,7 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 	//Datatype:
 	//	ID "-" ID;
 	public DatatypeElements getDatatypeAccess() {
-		return (pDatatype != null) ? pDatatype : (pDatatype = new DatatypeElements());
+		return pDatatype;
 	}
 	
 	public ParserRule getDatatypeRule() {
@@ -434,7 +440,7 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 	//NestedDatatype:
 	//	ID "+" Datatype?;
 	public NestedDatatypeElements getNestedDatatypeAccess() {
-		return (pNestedDatatype != null) ? pNestedDatatype : (pNestedDatatype = new NestedDatatypeElements());
+		return pNestedDatatype;
 	}
 	
 	public ParserRule getNestedDatatypeRule() {
@@ -444,7 +450,7 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 	//Child:
 	//	Child1 | Child2;
 	public ChildElements getChildAccess() {
-		return (pChild != null) ? pChild : (pChild = new ChildElements());
+		return pChild;
 	}
 	
 	public ParserRule getChildRule() {
@@ -454,7 +460,7 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 	//Child1:
 	//	name=ID;
 	public Child1Elements getChild1Access() {
-		return (pChild1 != null) ? pChild1 : (pChild1 = new Child1Elements());
+		return pChild1;
 	}
 	
 	public ParserRule getChild1Rule() {
@@ -466,7 +472,7 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 	//Child2:
 	//	name=STRING;
 	public Child2Elements getChild2Access() {
-		return (pChild2 != null) ? pChild2 : (pChild2 = new Child2Elements());
+		return pChild2;
 	}
 	
 	public ParserRule getChild2Rule() {

@@ -647,36 +647,56 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 		public Keyword getLit3Lit3Keyword_0() { return cLit3Lit3Keyword_0; }
 	}
 	
-	private ModelElements pModel;
-	private KeywordValElements pKeywordVal;
-	private TerminalValElements pTerminalVal;
-	private TerminalRule tTerminal1;
-	private TerminalRule tTerminal2;
-	private EnumValElements pEnumVal;
-	private Enum1Elements unknownRuleEnum1;
-	private Enum2Elements unknownRuleEnum2;
-	private Enum3Elements unknownRuleEnum3;
-	private KeywordBoolElements pKeywordBool;
-	private TerminalBoolElements pTerminalBool;
-	private EnumBoolElements pEnumBool;
-	private MixedBoolElements pMixedBool;
-	private BooleanElements pBoolean;
-	private MixedValueElements pMixedValue;
-	private DatEnumElements pDatEnum;
-	private ContainmentRefElements pContainmentRef;
-	private ContainmentRef1Elements pContainmentRef1;
-	private ContainmentRef2Elements pContainmentRef2;
-	private CrossRefElements pCrossRef;
+	private final ModelElements pModel;
+	private final KeywordValElements pKeywordVal;
+	private final TerminalValElements pTerminalVal;
+	private final TerminalRule tTerminal1;
+	private final TerminalRule tTerminal2;
+	private final EnumValElements pEnumVal;
+	private final Enum1Elements unknownRuleEnum1;
+	private final Enum2Elements unknownRuleEnum2;
+	private final Enum3Elements unknownRuleEnum3;
+	private final KeywordBoolElements pKeywordBool;
+	private final TerminalBoolElements pTerminalBool;
+	private final EnumBoolElements pEnumBool;
+	private final MixedBoolElements pMixedBool;
+	private final BooleanElements pBoolean;
+	private final MixedValueElements pMixedValue;
+	private final DatEnumElements pDatEnum;
+	private final ContainmentRefElements pContainmentRef;
+	private final ContainmentRef1Elements pContainmentRef1;
+	private final ContainmentRef2Elements pContainmentRef2;
+	private final CrossRefElements pCrossRef;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public AssignmentFinderTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pKeywordVal = new KeywordValElements();
+		this.pTerminalVal = new TerminalValElements();
+		this.tTerminal1 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Terminal1");
+		this.tTerminal2 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Terminal2");
+		this.pEnumVal = new EnumValElements();
+		this.unknownRuleEnum1 = new Enum1Elements();
+		this.unknownRuleEnum2 = new Enum2Elements();
+		this.unknownRuleEnum3 = new Enum3Elements();
+		this.pKeywordBool = new KeywordBoolElements();
+		this.pTerminalBool = new TerminalBoolElements();
+		this.pEnumBool = new EnumBoolElements();
+		this.pMixedBool = new MixedBoolElements();
+		this.pBoolean = new BooleanElements();
+		this.pMixedValue = new MixedValueElements();
+		this.pDatEnum = new DatEnumElements();
+		this.pContainmentRef = new ContainmentRefElements();
+		this.pContainmentRef1 = new ContainmentRef1Elements();
+		this.pContainmentRef2 = new ContainmentRef2Elements();
+		this.pCrossRef = new CrossRefElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -711,7 +731,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 	//	"#04" terminalBool=TerminalBool | "#05" enumBool=EnumBool | "#06" mixedBool=MixedBool | "#07" mixedValue=MixedValue |
 	//	"#08" containmentRef=ContainmentRef | "#09" crossRef=CrossRef;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -721,7 +741,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 	//KeywordVal:
 	//	kw="kw1" | kw="kw2";
 	public KeywordValElements getKeywordValAccess() {
-		return (pKeywordVal != null) ? pKeywordVal : (pKeywordVal = new KeywordValElements());
+		return pKeywordVal;
 	}
 	
 	public ParserRule getKeywordValRule() {
@@ -731,7 +751,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 	//TerminalVal:
 	//	term=Terminal1 | term=Terminal2 | term="%foo";
 	public TerminalValElements getTerminalValAccess() {
-		return (pTerminalVal != null) ? pTerminalVal : (pTerminalVal = new TerminalValElements());
+		return pTerminalVal;
 	}
 	
 	public ParserRule getTerminalValRule() {
@@ -741,19 +761,19 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 	//terminal Terminal1:
 	//	"%" "A".."Z"*;
 	public TerminalRule getTerminal1Rule() {
-		return (tTerminal1 != null) ? tTerminal1 : (tTerminal1 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Terminal1"));
+		return tTerminal1;
 	} 
 
 	//terminal Terminal2:
 	//	"%" "a".."z"*;
 	public TerminalRule getTerminal2Rule() {
-		return (tTerminal2 != null) ? tTerminal2 : (tTerminal2 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Terminal2"));
+		return tTerminal2;
 	} 
 
 	//EnumVal:
 	//	en=Enum1 | en=Enum2;
 	public EnumValElements getEnumValAccess() {
-		return (pEnumVal != null) ? pEnumVal : (pEnumVal = new EnumValElements());
+		return pEnumVal;
 	}
 	
 	public ParserRule getEnumValRule() {
@@ -763,7 +783,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 	//enum Enum1 returns TestEnum:
 	//	lit1;
 	public Enum1Elements getEnum1Access() {
-		return (unknownRuleEnum1 != null) ? unknownRuleEnum1 : (unknownRuleEnum1 = new Enum1Elements());
+		return unknownRuleEnum1;
 	}
 	
 	public EnumRule getEnum1Rule() {
@@ -773,7 +793,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 	//enum Enum2 returns TestEnum:
 	//	lit2;
 	public Enum2Elements getEnum2Access() {
-		return (unknownRuleEnum2 != null) ? unknownRuleEnum2 : (unknownRuleEnum2 = new Enum2Elements());
+		return unknownRuleEnum2;
 	}
 	
 	public EnumRule getEnum2Rule() {
@@ -783,7 +803,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 	//enum Enum3 returns TestEnum:
 	//	lit3;
 	public Enum3Elements getEnum3Access() {
-		return (unknownRuleEnum3 != null) ? unknownRuleEnum3 : (unknownRuleEnum3 = new Enum3Elements());
+		return unknownRuleEnum3;
 	}
 	
 	public EnumRule getEnum3Rule() {
@@ -793,7 +813,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 	//KeywordBool:
 	//	kw?="kw1" | kw?="kw2";
 	public KeywordBoolElements getKeywordBoolAccess() {
-		return (pKeywordBool != null) ? pKeywordBool : (pKeywordBool = new KeywordBoolElements());
+		return pKeywordBool;
 	}
 	
 	public ParserRule getKeywordBoolRule() {
@@ -803,7 +823,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 	//TerminalBool:
 	//	term?=Terminal1 | term?=Terminal2 | term?="%foo";
 	public TerminalBoolElements getTerminalBoolAccess() {
-		return (pTerminalBool != null) ? pTerminalBool : (pTerminalBool = new TerminalBoolElements());
+		return pTerminalBool;
 	}
 	
 	public ParserRule getTerminalBoolRule() {
@@ -813,7 +833,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 	//EnumBool:
 	//	en?=Enum1 | en?=Enum2;
 	public EnumBoolElements getEnumBoolAccess() {
-		return (pEnumBool != null) ? pEnumBool : (pEnumBool = new EnumBoolElements());
+		return pEnumBool;
 	}
 	
 	public ParserRule getEnumBoolRule() {
@@ -823,7 +843,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 	//MixedBool:
 	//	val?="kw1" | val=Boolean;
 	public MixedBoolElements getMixedBoolAccess() {
-		return (pMixedBool != null) ? pMixedBool : (pMixedBool = new MixedBoolElements());
+		return pMixedBool;
 	}
 	
 	public ParserRule getMixedBoolRule() {
@@ -833,7 +853,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 	//Boolean returns ecore::EBoolean:
 	//	"true" | "false";
 	public BooleanElements getBooleanAccess() {
-		return (pBoolean != null) ? pBoolean : (pBoolean = new BooleanElements());
+		return pBoolean;
 	}
 	
 	public ParserRule getBooleanRule() {
@@ -843,7 +863,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 	//MixedValue:
 	//	val=Enum1 | val=DatEnum;
 	public MixedValueElements getMixedValueAccess() {
-		return (pMixedValue != null) ? pMixedValue : (pMixedValue = new MixedValueElements());
+		return pMixedValue;
 	}
 	
 	public ParserRule getMixedValueRule() {
@@ -853,7 +873,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 	//DatEnum returns TestEnum:
 	//	"lit3";
 	public DatEnumElements getDatEnumAccess() {
-		return (pDatEnum != null) ? pDatEnum : (pDatEnum = new DatEnumElements());
+		return pDatEnum;
 	}
 	
 	public ParserRule getDatEnumRule() {
@@ -863,7 +883,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 	//ContainmentRef:
 	//	ctx=ContainmentRef1 | ctx=ContainmentRef2;
 	public ContainmentRefElements getContainmentRefAccess() {
-		return (pContainmentRef != null) ? pContainmentRef : (pContainmentRef = new ContainmentRefElements());
+		return pContainmentRef;
 	}
 	
 	public ParserRule getContainmentRefRule() {
@@ -873,7 +893,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 	//ContainmentRef1 returns ContainmentRefN:
 	//	"kw1" val1=ID;
 	public ContainmentRef1Elements getContainmentRef1Access() {
-		return (pContainmentRef1 != null) ? pContainmentRef1 : (pContainmentRef1 = new ContainmentRef1Elements());
+		return pContainmentRef1;
 	}
 	
 	public ParserRule getContainmentRef1Rule() {
@@ -883,7 +903,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 	//ContainmentRef2 returns ContainmentRefN:
 	//	"kw2" val2=ID;
 	public ContainmentRef2Elements getContainmentRef2Access() {
-		return (pContainmentRef2 != null) ? pContainmentRef2 : (pContainmentRef2 = new ContainmentRef2Elements());
+		return pContainmentRef2;
 	}
 	
 	public ParserRule getContainmentRef2Rule() {
@@ -893,7 +913,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 	//CrossRef:
 	//	name=(Terminal1 | Terminal2) (crossRef=[CrossRef|Terminal1] | crossRef=[CrossRef|Terminal2]);
 	public CrossRefElements getCrossRefAccess() {
-		return (pCrossRef != null) ? pCrossRef : (pCrossRef = new CrossRefElements());
+		return pCrossRef;
 	}
 	
 	public ParserRule getCrossRefRule() {

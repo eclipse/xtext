@@ -35,17 +35,18 @@ public class MultiValueFeatureTestLanguageGrammarAccess extends AbstractGrammarE
 	}
 	
 	
-	private StartElements pStart;
+	private final StartElements pStart;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public MultiValueFeatureTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pStart = new StartElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -78,7 +79,7 @@ public class MultiValueFeatureTestLanguageGrammarAccess extends AbstractGrammarE
 	//Start:
 	//	featureA+=ID+;
 	public StartElements getStartAccess() {
-		return (pStart != null) ? pStart : (pStart = new StartElements());
+		return pStart;
 	}
 	
 	public ParserRule getStartRule() {

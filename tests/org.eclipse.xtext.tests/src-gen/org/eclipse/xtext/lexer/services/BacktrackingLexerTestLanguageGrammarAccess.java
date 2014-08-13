@@ -162,24 +162,36 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 		public Keyword getEfgEfgKeyword_1_0() { return cEfgEfgKeyword_1_0; }
 	}
 	
-	private ModelElements pModel;
-	private AbElements pAb;
-	private XbElements pXb;
-	private TerminalRule tCharA;
-	private TerminalRule tCharb;
-	private TerminalRule tCharX;
-	private TerminalRule tYc;
-	private TerminalRule tCharY;
-	private TerminalRule tCharC;
-	private EnumNameElements unknownRuleEnumName;
-	private TerminalRule tWS;
-	private TerminalRule tSL_COMMENT;
+	private final ModelElements pModel;
+	private final AbElements pAb;
+	private final XbElements pXb;
+	private final TerminalRule tCharA;
+	private final TerminalRule tCharb;
+	private final TerminalRule tCharX;
+	private final TerminalRule tYc;
+	private final TerminalRule tCharY;
+	private final TerminalRule tCharC;
+	private final EnumNameElements unknownRuleEnumName;
+	private final TerminalRule tWS;
+	private final TerminalRule tSL_COMMENT;
 	
 	private final Grammar grammar;
 
 	@Inject
 	public BacktrackingLexerTestLanguageGrammarAccess(GrammarProvider grammarProvider) {
 		this.grammar = internalFindGrammar(grammarProvider);
+		this.pModel = new ModelElements();
+		this.pAb = new AbElements();
+		this.pXb = new XbElements();
+		this.tCharA = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "CharA");
+		this.tCharb = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Charb");
+		this.tCharX = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "CharX");
+		this.tYc = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Yc");
+		this.tCharY = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "CharY");
+		this.tCharC = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "CharC");
+		this.unknownRuleEnumName = new EnumNameElements();
+		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS");
+		this.tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -208,7 +220,7 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 	//Model:
 	//	enums+=EnumName* ycs+=Yc* abs+=Ab* xbs+=Xb* ys+=CharY* ^as+=CharA*;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -218,7 +230,7 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 	//Ab:
 	//	x=CharA y=Charb;
 	public AbElements getAbAccess() {
-		return (pAb != null) ? pAb : (pAb = new AbElements());
+		return pAb;
 	}
 	
 	public ParserRule getAbRule() {
@@ -228,7 +240,7 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 	//Xb:
 	//	x=CharX y=Charb;
 	public XbElements getXbAccess() {
-		return (pXb != null) ? pXb : (pXb = new XbElements());
+		return pXb;
 	}
 	
 	public ParserRule getXbRule() {
@@ -238,43 +250,43 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 	//terminal CharA:
 	//	"A";
 	public TerminalRule getCharARule() {
-		return (tCharA != null) ? tCharA : (tCharA = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "CharA"));
+		return tCharA;
 	} 
 
 	//terminal Charb:
 	//	"b";
 	public TerminalRule getCharbRule() {
-		return (tCharb != null) ? tCharb : (tCharb = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Charb"));
+		return tCharb;
 	} 
 
 	//terminal CharX:
 	//	"X";
 	public TerminalRule getCharXRule() {
-		return (tCharX != null) ? tCharX : (tCharX = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "CharX"));
+		return tCharX;
 	} 
 
 	//terminal Yc:
 	//	CharY CharC;
 	public TerminalRule getYcRule() {
-		return (tYc != null) ? tYc : (tYc = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Yc"));
+		return tYc;
 	} 
 
 	//terminal CharY:
 	//	"Y";
 	public TerminalRule getCharYRule() {
-		return (tCharY != null) ? tCharY : (tCharY = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "CharY"));
+		return tCharY;
 	} 
 
 	//terminal CharC:
 	//	"c";
 	public TerminalRule getCharCRule() {
-		return (tCharC != null) ? tCharC : (tCharC = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "CharC"));
+		return tCharC;
 	} 
 
 	//enum EnumName:
 	//	abc="Abc" | efg="Efg";
 	public EnumNameElements getEnumNameAccess() {
-		return (unknownRuleEnumName != null) ? unknownRuleEnumName : (unknownRuleEnumName = new EnumNameElements());
+		return unknownRuleEnumName;
 	}
 	
 	public EnumRule getEnumNameRule() {
@@ -284,12 +296,12 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 	//terminal WS:
 	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
-		return (tWS != null) ? tWS : (tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
+		return tWS;
 	} 
 
 	//terminal SL_COMMENT:
 	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
-		return (tSL_COMMENT != null) ? tSL_COMMENT : (tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT"));
+		return tSL_COMMENT;
 	} 
 }

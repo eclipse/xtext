@@ -99,19 +99,22 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 	}
 	
 	
-	private ModelElements pModel;
-	private NodeRootElements pNodeRoot;
-	private NodeElements pNode;
+	private final ModelElements pModel;
+	private final NodeRootElements pNodeRoot;
+	private final NodeElements pNode;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public PartialSerializationTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pNodeRoot = new NodeRootElements();
+		this.pNode = new NodeElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -144,7 +147,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 	//Model:
 	//	NodeRoot;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -154,7 +157,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 	//NodeRoot:
 	//	"#1" node=Node;
 	public NodeRootElements getNodeRootAccess() {
-		return (pNodeRoot != null) ? pNodeRoot : (pNodeRoot = new NodeRootElements());
+		return pNodeRoot;
 	}
 	
 	public ParserRule getNodeRootRule() {
@@ -164,7 +167,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 	//Node:
 	//	"node" name=ID ("(" children+=Node+ ")")?;
 	public NodeElements getNodeAccess() {
-		return (pNode != null) ? pNode : (pNode = new NodeElements());
+		return pNode;
 	}
 	
 	public ParserRule getNodeRule() {

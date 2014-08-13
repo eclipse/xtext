@@ -79,17 +79,18 @@ public class SerializationBug269362TestLanguageGrammarAccess extends AbstractGra
 	}
 	
 	
-	private ModelElements pModel;
+	private final ModelElements pModel;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public SerializationBug269362TestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -122,7 +123,7 @@ public class SerializationBug269362TestLanguageGrammarAccess extends AbstractGra
 	//Model:
 	//	"foo" foo=ID ("bar" bar=ID)? | "bar" bar=ID;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {

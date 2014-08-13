@@ -409,23 +409,30 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 	
 	
-	private ModelElements pModel;
-	private SingleValueElements pSingleValue;
-	private MultiValueElements pMultiValue;
-	private SingleDatatypeElements pSingleDatatype;
-	private MultiDatatypeElements pMultiDatatype;
-	private IdDatatypeElements pIdDatatype;
-	private StringDatatypeElements pStringDatatype;
+	private final ModelElements pModel;
+	private final SingleValueElements pSingleValue;
+	private final MultiValueElements pMultiValue;
+	private final SingleDatatypeElements pSingleDatatype;
+	private final MultiDatatypeElements pMultiDatatype;
+	private final IdDatatypeElements pIdDatatype;
+	private final StringDatatypeElements pStringDatatype;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public AssignmentsTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pSingleValue = new SingleValueElements();
+		this.pMultiValue = new MultiValueElements();
+		this.pSingleDatatype = new SingleDatatypeElements();
+		this.pMultiDatatype = new MultiDatatypeElements();
+		this.pIdDatatype = new IdDatatypeElements();
+		this.pStringDatatype = new StringDatatypeElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -459,7 +466,7 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 	//	"simple" (single=SingleValue | multi=MultiValue | single=SingleDatatype | multi=MultiDatatype) | "complex"
 	//	object=(SingleValue | MultiValue | SingleDatatype | MultiDatatype);
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -469,7 +476,7 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 	//SingleValue:
 	//	"id" value=ID | "alternative" value=(ID | STRING) | "string" value=STRING;
 	public SingleValueElements getSingleValueAccess() {
-		return (pSingleValue != null) ? pSingleValue : (pSingleValue = new SingleValueElements());
+		return pSingleValue;
 	}
 	
 	public ParserRule getSingleValueRule() {
@@ -479,7 +486,7 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 	//MultiValue:
 	//	"ids" value+=ID | "alternatives" value+=(ID | STRING) | "strings" value+=STRING;
 	public MultiValueElements getMultiValueAccess() {
-		return (pMultiValue != null) ? pMultiValue : (pMultiValue = new MultiValueElements());
+		return pMultiValue;
 	}
 	
 	public ParserRule getMultiValueRule() {
@@ -490,7 +497,7 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 	//	"datatypeid" value=IdDatatype | "datatypealternative" value=(IdDatatype | StringDatatype) | "datatypestring"
 	//	value=StringDatatype;
 	public SingleDatatypeElements getSingleDatatypeAccess() {
-		return (pSingleDatatype != null) ? pSingleDatatype : (pSingleDatatype = new SingleDatatypeElements());
+		return pSingleDatatype;
 	}
 	
 	public ParserRule getSingleDatatypeRule() {
@@ -501,7 +508,7 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 	//	"datatypeids" value+=IdDatatype | "datatypealternatives" value+=(IdDatatype | StringDatatype) | "datatypestrings"
 	//	value+=StringDatatype;
 	public MultiDatatypeElements getMultiDatatypeAccess() {
-		return (pMultiDatatype != null) ? pMultiDatatype : (pMultiDatatype = new MultiDatatypeElements());
+		return pMultiDatatype;
 	}
 	
 	public ParserRule getMultiDatatypeRule() {
@@ -511,7 +518,7 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 	//IdDatatype:
 	//	ID;
 	public IdDatatypeElements getIdDatatypeAccess() {
-		return (pIdDatatype != null) ? pIdDatatype : (pIdDatatype = new IdDatatypeElements());
+		return pIdDatatype;
 	}
 	
 	public ParserRule getIdDatatypeRule() {
@@ -521,7 +528,7 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 	//StringDatatype:
 	//	STRING;
 	public StringDatatypeElements getStringDatatypeAccess() {
-		return (pStringDatatype != null) ? pStringDatatype : (pStringDatatype = new StringDatatypeElements());
+		return pStringDatatype;
 	}
 	
 	public ParserRule getStringDatatypeRule() {

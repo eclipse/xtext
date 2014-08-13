@@ -354,26 +354,40 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 	
 	
-	private ModelElements pModel;
-	private WithoutHiddensElements pWithoutHiddens;
-	private WithHiddensElements pWithHiddens;
-	private OverridingHiddensElements pOverridingHiddens;
-	private OverridingHiddensCallElements pOverridingHiddensCall;
-	private InheritingHiddensElements pInheritingHiddens;
-	private DatatypeHiddensElements pDatatypeHiddens;
-	private DatatypeRuleElements pDatatypeRule;
-	private HidingHiddensElements pHidingHiddens;
-	private InheritingHiddensCallElements pInheritingHiddensCall;
-	private TerminalRule tML_COMMENT;
-	private TerminalRule tSL_COMMENT;
-	private TerminalRule tWS;
-	private TerminalRule tANY_OTHER;
+	private final ModelElements pModel;
+	private final WithoutHiddensElements pWithoutHiddens;
+	private final WithHiddensElements pWithHiddens;
+	private final OverridingHiddensElements pOverridingHiddens;
+	private final OverridingHiddensCallElements pOverridingHiddensCall;
+	private final InheritingHiddensElements pInheritingHiddens;
+	private final DatatypeHiddensElements pDatatypeHiddens;
+	private final DatatypeRuleElements pDatatypeRule;
+	private final HidingHiddensElements pHidingHiddens;
+	private final InheritingHiddensCallElements pInheritingHiddensCall;
+	private final TerminalRule tML_COMMENT;
+	private final TerminalRule tSL_COMMENT;
+	private final TerminalRule tWS;
+	private final TerminalRule tANY_OTHER;
 	
 	private final Grammar grammar;
 
 	@Inject
 	public HiddenTerminalsTestLanguageGrammarAccess(GrammarProvider grammarProvider) {
 		this.grammar = internalFindGrammar(grammarProvider);
+		this.pModel = new ModelElements();
+		this.pWithoutHiddens = new WithoutHiddensElements();
+		this.pWithHiddens = new WithHiddensElements();
+		this.pOverridingHiddens = new OverridingHiddensElements();
+		this.pOverridingHiddensCall = new OverridingHiddensCallElements();
+		this.pInheritingHiddens = new InheritingHiddensElements();
+		this.pDatatypeHiddens = new DatatypeHiddensElements();
+		this.pDatatypeRule = new DatatypeRuleElements();
+		this.pHidingHiddens = new HidingHiddensElements();
+		this.pInheritingHiddensCall = new InheritingHiddensCallElements();
+		this.tML_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT");
+		this.tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT");
+		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS");
+		this.tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -402,7 +416,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 	//Model:
 	//	WithoutHiddens | WithHiddens | OverridingHiddens | InheritingHiddens | DatatypeHiddens;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -412,7 +426,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 	//WithoutHiddens:
 	//	"without" spaces+=WS "hiddens" spaces+=WS? valid?=";";
 	public WithoutHiddensElements getWithoutHiddensAccess() {
-		return (pWithoutHiddens != null) ? pWithoutHiddens : (pWithoutHiddens = new WithoutHiddensElements());
+		return pWithoutHiddens;
 	}
 	
 	public ParserRule getWithoutHiddensRule() {
@@ -422,7 +436,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 	//WithHiddens hidden(WS, ML_COMMENT, SL_COMMENT):
 	//	"with" "hiddens" valid?=";";
 	public WithHiddensElements getWithHiddensAccess() {
-		return (pWithHiddens != null) ? pWithHiddens : (pWithHiddens = new WithHiddensElements());
+		return pWithHiddens;
 	}
 	
 	public ParserRule getWithHiddensRule() {
@@ -432,7 +446,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 	//OverridingHiddens hidden(WS, ML_COMMENT, SL_COMMENT):
 	//	"overriding" "hiddens" "(" called=OverridingHiddensCall ")" valid?=";";
 	public OverridingHiddensElements getOverridingHiddensAccess() {
-		return (pOverridingHiddens != null) ? pOverridingHiddens : (pOverridingHiddens = new OverridingHiddensElements());
+		return pOverridingHiddens;
 	}
 	
 	public ParserRule getOverridingHiddensRule() {
@@ -442,7 +456,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 	//OverridingHiddensCall hidden():
 	//	"call" spaces+=WS? valid?=";";
 	public OverridingHiddensCallElements getOverridingHiddensCallAccess() {
-		return (pOverridingHiddensCall != null) ? pOverridingHiddensCall : (pOverridingHiddensCall = new OverridingHiddensCallElements());
+		return pOverridingHiddensCall;
 	}
 	
 	public ParserRule getOverridingHiddensCallRule() {
@@ -452,7 +466,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 	//InheritingHiddens hidden(WS, ML_COMMENT, SL_COMMENT):
 	//	"inheriting" "hiddens" "(" (called=InheritingHiddensCall | hidingCalled=HidingHiddens) ")" valid?=";";
 	public InheritingHiddensElements getInheritingHiddensAccess() {
-		return (pInheritingHiddens != null) ? pInheritingHiddens : (pInheritingHiddens = new InheritingHiddensElements());
+		return pInheritingHiddens;
 	}
 	
 	public ParserRule getInheritingHiddensRule() {
@@ -462,7 +476,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 	//DatatypeHiddens:
 	//	"datatype" valid?=DatatypeRule;
 	public DatatypeHiddensElements getDatatypeHiddensAccess() {
-		return (pDatatypeHiddens != null) ? pDatatypeHiddens : (pDatatypeHiddens = new DatatypeHiddensElements());
+		return pDatatypeHiddens;
 	}
 	
 	public ParserRule getDatatypeHiddensRule() {
@@ -472,7 +486,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 	//DatatypeRule returns ecore::EString hidden(WS):
 	//	"rule" ";";
 	public DatatypeRuleElements getDatatypeRuleAccess() {
-		return (pDatatypeRule != null) ? pDatatypeRule : (pDatatypeRule = new DatatypeRuleElements());
+		return pDatatypeRule;
 	}
 	
 	public ParserRule getDatatypeRuleRule() {
@@ -482,7 +496,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 	//HidingHiddens hidden():
 	//	"hiding" space=WS called=InheritingHiddensCall;
 	public HidingHiddensElements getHidingHiddensAccess() {
-		return (pHidingHiddens != null) ? pHidingHiddens : (pHidingHiddens = new HidingHiddensElements());
+		return pHidingHiddens;
 	}
 	
 	public ParserRule getHidingHiddensRule() {
@@ -492,7 +506,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 	//InheritingHiddensCall:
 	//	"call" valid?=";";
 	public InheritingHiddensCallElements getInheritingHiddensCallAccess() {
-		return (pInheritingHiddensCall != null) ? pInheritingHiddensCall : (pInheritingHiddensCall = new InheritingHiddensCallElements());
+		return pInheritingHiddensCall;
 	}
 	
 	public ParserRule getInheritingHiddensCallRule() {
@@ -502,24 +516,24 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 	//terminal ML_COMMENT:
 	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
-		return (tML_COMMENT != null) ? tML_COMMENT : (tML_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT"));
+		return tML_COMMENT;
 	} 
 
 	//terminal SL_COMMENT:
 	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
-		return (tSL_COMMENT != null) ? tSL_COMMENT : (tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT"));
+		return tSL_COMMENT;
 	} 
 
 	//terminal WS:
 	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
-		return (tWS != null) ? tWS : (tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
+		return tWS;
 	} 
 
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
-		return (tANY_OTHER != null) ? tANY_OTHER : (tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER"));
+		return tANY_OTHER;
 	} 
 }

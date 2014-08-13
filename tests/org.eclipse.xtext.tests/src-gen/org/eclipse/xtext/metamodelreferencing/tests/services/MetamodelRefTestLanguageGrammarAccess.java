@@ -83,19 +83,22 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	
-	private FooElements pFoo;
-	private NameRefElements pNameRef;
-	private MyRuleElements pMyRule;
+	private final FooElements pFoo;
+	private final NameRefElements pNameRef;
+	private final MyRuleElements pMyRule;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public MetamodelRefTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pFoo = new FooElements();
+		this.pNameRef = new NameRefElements();
+		this.pMyRule = new MyRuleElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -128,7 +131,7 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 	//Foo:
 	//	name=ID nameRefs+=NameRef*;
 	public FooElements getFooAccess() {
-		return (pFoo != null) ? pFoo : (pFoo = new FooElements());
+		return pFoo;
 	}
 	
 	public ParserRule getFooRule() {
@@ -138,7 +141,7 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 	//NameRef returns xtext::RuleCall:
 	//	rule=[xtext::ParserRule];
 	public NameRefElements getNameRefAccess() {
-		return (pNameRef != null) ? pNameRef : (pNameRef = new NameRefElements());
+		return pNameRef;
 	}
 	
 	public ParserRule getNameRefRule() {
@@ -148,7 +151,7 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 	//MyRule returns xtext::ParserRule:
 	//	name=ID;
 	public MyRuleElements getMyRuleAccess() {
-		return (pMyRule != null) ? pMyRule : (pMyRule = new MyRuleElements());
+		return pMyRule;
 	}
 	
 	public ParserRule getMyRuleRule() {

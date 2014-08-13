@@ -31,17 +31,18 @@ public class ExBacktrackingBug325745TestLanguageGrammarAccess extends AbstractGr
 	}
 	
 	
-	private DelegateModelElements pDelegateModel;
+	private final DelegateModelElements pDelegateModel;
 	
 	private final Grammar grammar;
 
-	private BacktrackingBug325745TestLanguageGrammarAccess gaBacktrackingBug325745TestLanguage;
+	private final BacktrackingBug325745TestLanguageGrammarAccess gaBacktrackingBug325745TestLanguage;
 
 	@Inject
 	public ExBacktrackingBug325745TestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		BacktrackingBug325745TestLanguageGrammarAccess gaBacktrackingBug325745TestLanguage) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaBacktrackingBug325745TestLanguage = gaBacktrackingBug325745TestLanguage;
+		this.pDelegateModel = new DelegateModelElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -74,7 +75,7 @@ public class ExBacktrackingBug325745TestLanguageGrammarAccess extends AbstractGr
 	//DelegateModel returns Model:
 	//	Model;
 	public DelegateModelElements getDelegateModelAccess() {
-		return (pDelegateModel != null) ? pDelegateModel : (pDelegateModel = new DelegateModelElements());
+		return pDelegateModel;
 	}
 	
 	public ParserRule getDelegateModelRule() {

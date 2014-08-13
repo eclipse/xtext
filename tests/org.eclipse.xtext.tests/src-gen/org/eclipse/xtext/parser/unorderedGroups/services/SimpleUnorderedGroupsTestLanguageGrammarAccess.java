@@ -31,17 +31,18 @@ public class SimpleUnorderedGroupsTestLanguageGrammarAccess extends AbstractGram
 	}
 	
 	
-	private DelegateModelElements pDelegateModel;
+	private final DelegateModelElements pDelegateModel;
 	
 	private final Grammar grammar;
 
-	private UnorderedGroupsTestLanguageGrammarAccess gaUnorderedGroupsTestLanguage;
+	private final UnorderedGroupsTestLanguageGrammarAccess gaUnorderedGroupsTestLanguage;
 
 	@Inject
 	public SimpleUnorderedGroupsTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		UnorderedGroupsTestLanguageGrammarAccess gaUnorderedGroupsTestLanguage) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaUnorderedGroupsTestLanguage = gaUnorderedGroupsTestLanguage;
+		this.pDelegateModel = new DelegateModelElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -74,7 +75,7 @@ public class SimpleUnorderedGroupsTestLanguageGrammarAccess extends AbstractGram
 	//DelegateModel returns Model:
 	//	Model;
 	public DelegateModelElements getDelegateModelAccess() {
-		return (pDelegateModel != null) ? pDelegateModel : (pDelegateModel = new DelegateModelElements());
+		return pDelegateModel;
 	}
 	
 	public ParserRule getDelegateModelRule() {

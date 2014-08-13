@@ -63,18 +63,20 @@ public class IgnoreCaseNamespacesTestLanguageGrammarAccess extends AbstractGramm
 	}
 	
 	
-	private ModelElements pModel;
-	private ImportElements pImport;
+	private final ModelElements pModel;
+	private final ImportElements pImport;
 	
 	private final Grammar grammar;
 
-	private AbstractIgnoreCaseLinkingTestLanguageGrammarAccess gaAbstractIgnoreCaseLinkingTestLanguage;
+	private final AbstractIgnoreCaseLinkingTestLanguageGrammarAccess gaAbstractIgnoreCaseLinkingTestLanguage;
 
 	@Inject
 	public IgnoreCaseNamespacesTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		AbstractIgnoreCaseLinkingTestLanguageGrammarAccess gaAbstractIgnoreCaseLinkingTestLanguage) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaAbstractIgnoreCaseLinkingTestLanguage = gaAbstractIgnoreCaseLinkingTestLanguage;
+		this.pModel = new ModelElements();
+		this.pImport = new ImportElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -107,7 +109,7 @@ public class IgnoreCaseNamespacesTestLanguageGrammarAccess extends AbstractGramm
 	//Model:
 	//	imports+=Import* elements+=Element+;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -117,7 +119,7 @@ public class IgnoreCaseNamespacesTestLanguageGrammarAccess extends AbstractGramm
 	//Import:
 	//	importedNamespace=STRING;
 	public ImportElements getImportAccess() {
-		return (pImport != null) ? pImport : (pImport = new ImportElements());
+		return pImport;
 	}
 	
 	public ParserRule getImportRule() {

@@ -524,32 +524,48 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		public Keyword getIteratorIteratorKeyword_3_0() { return cIteratorIteratorKeyword_3_0; }
 	}
 	
-	private ModelElements pModel;
-	private DatatypeBug286557Elements pDatatypeBug286557;
-	private FQNElements pFQN;
-	private EnumBugElements pEnumBug;
-	private EnumBugEnumElements unknownRuleEnumBugEnum;
-	private CommentableElements pCommentable;
-	private CommentableItemElements pCommentableItem;
-	private ValueListElements pValueList;
-	private RefListElements pRefList;
-	private RefObjElements pRefObj;
-	private SingleRefElements pSingleRef;
-	private AppendToFileEndElements pAppendToFileEnd;
-	private AppendToFileEndItemElements pAppendToFileEndItem;
-	private Action1Elements pAction1;
-	private Action1Sub1Elements pAction1Sub1;
-	private Action1Sub2Elements pAction1Sub2;
+	private final ModelElements pModel;
+	private final DatatypeBug286557Elements pDatatypeBug286557;
+	private final FQNElements pFQN;
+	private final EnumBugElements pEnumBug;
+	private final EnumBugEnumElements unknownRuleEnumBugEnum;
+	private final CommentableElements pCommentable;
+	private final CommentableItemElements pCommentableItem;
+	private final ValueListElements pValueList;
+	private final RefListElements pRefList;
+	private final RefObjElements pRefObj;
+	private final SingleRefElements pSingleRef;
+	private final AppendToFileEndElements pAppendToFileEnd;
+	private final AppendToFileEndItemElements pAppendToFileEndItem;
+	private final Action1Elements pAction1;
+	private final Action1Sub1Elements pAction1Sub1;
+	private final Action1Sub2Elements pAction1Sub2;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public HiddenTokensMergerTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pDatatypeBug286557 = new DatatypeBug286557Elements();
+		this.pFQN = new FQNElements();
+		this.pEnumBug = new EnumBugElements();
+		this.unknownRuleEnumBugEnum = new EnumBugEnumElements();
+		this.pCommentable = new CommentableElements();
+		this.pCommentableItem = new CommentableItemElements();
+		this.pValueList = new ValueListElements();
+		this.pRefList = new RefListElements();
+		this.pRefObj = new RefObjElements();
+		this.pSingleRef = new SingleRefElements();
+		this.pAppendToFileEnd = new AppendToFileEndElements();
+		this.pAppendToFileEndItem = new AppendToFileEndItemElements();
+		this.pAction1 = new Action1Elements();
+		this.pAction1Sub1 = new Action1Sub1Elements();
+		this.pAction1Sub2 = new Action1Sub2Elements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -582,7 +598,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	//Model:
 	//	DatatypeBug286557 | EnumBug | Commentable | ValueList | RefList | SingleRef | AppendToFileEnd | Action1;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -592,7 +608,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	//DatatypeBug286557:
 	//	"#1" name=FQN ("ref" ref=[DatatypeBug286557|FQN])? ";";
 	public DatatypeBug286557Elements getDatatypeBug286557Access() {
-		return (pDatatypeBug286557 != null) ? pDatatypeBug286557 : (pDatatypeBug286557 = new DatatypeBug286557Elements());
+		return pDatatypeBug286557;
 	}
 	
 	public ParserRule getDatatypeBug286557Rule() {
@@ -602,7 +618,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	//FQN:
 	//	ID ("." ID)*;
 	public FQNElements getFQNAccess() {
-		return (pFQN != null) ? pFQN : (pFQN = new FQNElements());
+		return pFQN;
 	}
 	
 	public ParserRule getFQNRule() {
@@ -612,7 +628,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	//EnumBug:
 	//	"#2" "kw1" return=EnumBugEnum name=ID;
 	public EnumBugElements getEnumBugAccess() {
-		return (pEnumBug != null) ? pEnumBug : (pEnumBug = new EnumBugElements());
+		return pEnumBug;
 	}
 	
 	public ParserRule getEnumBugRule() {
@@ -622,7 +638,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	//enum EnumBugEnum:
 	//	array | object | resultSet | iterator;
 	public EnumBugEnumElements getEnumBugEnumAccess() {
-		return (unknownRuleEnumBugEnum != null) ? unknownRuleEnumBugEnum : (unknownRuleEnumBugEnum = new EnumBugEnumElements());
+		return unknownRuleEnumBugEnum;
 	}
 	
 	public EnumRule getEnumBugEnumRule() {
@@ -632,7 +648,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	//Commentable:
 	//	"#3" item+=CommentableItem*;
 	public CommentableElements getCommentableAccess() {
-		return (pCommentable != null) ? pCommentable : (pCommentable = new CommentableElements());
+		return pCommentable;
 	}
 	
 	public ParserRule getCommentableRule() {
@@ -642,7 +658,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	//CommentableItem:
 	//	"item" id=ID;
 	public CommentableItemElements getCommentableItemAccess() {
-		return (pCommentableItem != null) ? pCommentableItem : (pCommentableItem = new CommentableItemElements());
+		return pCommentableItem;
 	}
 	
 	public ParserRule getCommentableItemRule() {
@@ -652,7 +668,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	//ValueList:
 	//	"#4" ids+=FQN*;
 	public ValueListElements getValueListAccess() {
-		return (pValueList != null) ? pValueList : (pValueList = new ValueListElements());
+		return pValueList;
 	}
 	
 	public ParserRule getValueListRule() {
@@ -662,7 +678,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	//RefList:
 	//	"#5" objs+=RefObj* "refs" refs+=[RefObj|FQN]*;
 	public RefListElements getRefListAccess() {
-		return (pRefList != null) ? pRefList : (pRefList = new RefListElements());
+		return pRefList;
 	}
 	
 	public ParserRule getRefListRule() {
@@ -672,7 +688,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	//RefObj:
 	//	name=FQN;
 	public RefObjElements getRefObjAccess() {
-		return (pRefObj != null) ? pRefObj : (pRefObj = new RefObjElements());
+		return pRefObj;
 	}
 	
 	public ParserRule getRefObjRule() {
@@ -682,7 +698,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	//SingleRef:
 	//	"#6" obj=RefObj "ref" ref=[RefObj|FQN];
 	public SingleRefElements getSingleRefAccess() {
-		return (pSingleRef != null) ? pSingleRef : (pSingleRef = new SingleRefElements());
+		return pSingleRef;
 	}
 	
 	public ParserRule getSingleRefRule() {
@@ -693,7 +709,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	//AppendToFileEnd:
 	//	"#7" items+=AppendToFileEndItem*;
 	public AppendToFileEndElements getAppendToFileEndAccess() {
-		return (pAppendToFileEnd != null) ? pAppendToFileEnd : (pAppendToFileEnd = new AppendToFileEndElements());
+		return pAppendToFileEnd;
 	}
 	
 	public ParserRule getAppendToFileEndRule() {
@@ -703,7 +719,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	//AppendToFileEndItem:
 	//	"class" name=ID "endclass";
 	public AppendToFileEndItemElements getAppendToFileEndItemAccess() {
-		return (pAppendToFileEndItem != null) ? pAppendToFileEndItem : (pAppendToFileEndItem = new AppendToFileEndItemElements());
+		return pAppendToFileEndItem;
 	}
 	
 	public ParserRule getAppendToFileEndItemRule() {
@@ -713,7 +729,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	//Action1:
 	//	"#8" {Action1} name=ID actions2+=Action1Sub1 actions2+=Action1Sub2;
 	public Action1Elements getAction1Access() {
-		return (pAction1 != null) ? pAction1 : (pAction1 = new Action1Elements());
+		return pAction1;
 	}
 	
 	public ParserRule getAction1Rule() {
@@ -723,7 +739,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	//Action1Sub1:
 	//	{Action1Sub} "sub1";
 	public Action1Sub1Elements getAction1Sub1Access() {
-		return (pAction1Sub1 != null) ? pAction1Sub1 : (pAction1Sub1 = new Action1Sub1Elements());
+		return pAction1Sub1;
 	}
 	
 	public ParserRule getAction1Sub1Rule() {
@@ -733,7 +749,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	//Action1Sub2:
 	//	{Action1SubClass} "sub2";
 	public Action1Sub2Elements getAction1Sub2Access() {
-		return (pAction1Sub2 != null) ? pAction1Sub2 : (pAction1Sub2 = new Action1Sub2Elements());
+		return pAction1Sub2;
 	}
 	
 	public ParserRule getAction1Sub2Rule() {

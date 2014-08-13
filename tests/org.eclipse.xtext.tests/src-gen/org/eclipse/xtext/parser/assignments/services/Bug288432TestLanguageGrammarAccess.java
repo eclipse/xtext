@@ -264,24 +264,32 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
-	private BodyElements pBody;
-	private FooElements pFoo;
-	private ContentElements pContent;
-	private MyElementElements pMyElement;
-	private ParameterObjectElements pParameterObject;
-	private ParameterElements pParameter;
-	private ParameterRefElements pParameterRef;
-	private MyIntElements pMyInt;
+	private final BodyElements pBody;
+	private final FooElements pFoo;
+	private final ContentElements pContent;
+	private final MyElementElements pMyElement;
+	private final ParameterObjectElements pParameterObject;
+	private final ParameterElements pParameter;
+	private final ParameterRefElements pParameterRef;
+	private final MyIntElements pMyInt;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug288432TestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pBody = new BodyElements();
+		this.pFoo = new FooElements();
+		this.pContent = new ContentElements();
+		this.pMyElement = new MyElementElements();
+		this.pParameterObject = new ParameterObjectElements();
+		this.pParameter = new ParameterElements();
+		this.pParameterRef = new ParameterRefElements();
+		this.pMyInt = new MyIntElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -315,7 +323,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	("(" parameter+=Parameter ("," parameter+=Parameter)* ")")? "body" content=(Content | ParameterRef) foo+=Foo+
 	//	"end body";
 	public BodyElements getBodyAccess() {
-		return (pBody != null) ? pBody : (pBody = new BodyElements());
+		return pBody;
 	}
 	
 	public ParserRule getBodyRule() {
@@ -325,7 +333,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Foo:
 	//	fooValue=STRING;
 	public FooElements getFooAccess() {
-		return (pFoo != null) ? pFoo : (pFoo = new FooElements());
+		return pFoo;
 	}
 	
 	public ParserRule getFooRule() {
@@ -335,7 +343,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Content:
 	//	"content" MyElement "end content";
 	public ContentElements getContentAccess() {
-		return (pContent != null) ? pContent : (pContent = new ContentElements());
+		return pContent;
 	}
 	
 	public ParserRule getContentRule() {
@@ -345,7 +353,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//MyElement:
 	//	"element" bar=(MyInt | ParameterRef);
 	public MyElementElements getMyElementAccess() {
-		return (pMyElement != null) ? pMyElement : (pMyElement = new MyElementElements());
+		return pMyElement;
 	}
 	
 	public ParserRule getMyElementRule() {
@@ -355,7 +363,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//ParameterObject:
 	//	MyInt | Content | ParameterRef;
 	public ParameterObjectElements getParameterObjectAccess() {
-		return (pParameterObject != null) ? pParameterObject : (pParameterObject = new ParameterObjectElements());
+		return pParameterObject;
 	}
 	
 	public ParserRule getParameterObjectRule() {
@@ -365,7 +373,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Parameter:
 	//	name=ID value=[ParameterObject]?;
 	public ParameterElements getParameterAccess() {
-		return (pParameter != null) ? pParameter : (pParameter = new ParameterElements());
+		return pParameter;
 	}
 	
 	public ParserRule getParameterRule() {
@@ -375,7 +383,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//ParameterRef:
 	//	parameter=[Parameter];
 	public ParameterRefElements getParameterRefAccess() {
-		return (pParameterRef != null) ? pParameterRef : (pParameterRef = new ParameterRefElements());
+		return pParameterRef;
 	}
 	
 	public ParserRule getParameterRefRule() {
@@ -385,7 +393,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//MyInt:
 	//	int=INT;
 	public MyIntElements getMyIntAccess() {
-		return (pMyInt != null) ? pMyInt : (pMyInt = new MyIntElements());
+		return pMyInt;
 	}
 	
 	public ParserRule getMyIntRule() {

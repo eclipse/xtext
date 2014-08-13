@@ -163,24 +163,32 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	}
 	
 	
-	private InheritedParserRuleElements pInheritedParserRule;
-	private AbstractCallOverridenParserRuleElements pAbstractCallOverridenParserRule;
-	private OverridableParserRuleElements pOverridableParserRule;
-	private OverridableParserRule2Elements pOverridableParserRule2;
-	private AbstractCallExtendedParserRuleElements pAbstractCallExtendedParserRule;
-	private ExtendableParserRuleElements pExtendableParserRule;
-	private TerminalRule tREAL;
-	private TerminalRule tID;
+	private final InheritedParserRuleElements pInheritedParserRule;
+	private final AbstractCallOverridenParserRuleElements pAbstractCallOverridenParserRule;
+	private final OverridableParserRuleElements pOverridableParserRule;
+	private final OverridableParserRule2Elements pOverridableParserRule2;
+	private final AbstractCallExtendedParserRuleElements pAbstractCallExtendedParserRule;
+	private final ExtendableParserRuleElements pExtendableParserRule;
+	private final TerminalRule tREAL;
+	private final TerminalRule tID;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public AbstractTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pInheritedParserRule = new InheritedParserRuleElements();
+		this.pAbstractCallOverridenParserRule = new AbstractCallOverridenParserRuleElements();
+		this.pOverridableParserRule = new OverridableParserRuleElements();
+		this.pOverridableParserRule2 = new OverridableParserRule2Elements();
+		this.pAbstractCallExtendedParserRule = new AbstractCallExtendedParserRuleElements();
+		this.pExtendableParserRule = new ExtendableParserRuleElements();
+		this.tREAL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "REAL");
+		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -213,7 +221,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	//InheritedParserRule returns mm::AType:
 	//	"element" name=ID;
 	public InheritedParserRuleElements getInheritedParserRuleAccess() {
-		return (pInheritedParserRule != null) ? pInheritedParserRule : (pInheritedParserRule = new InheritedParserRuleElements());
+		return pInheritedParserRule;
 	}
 	
 	public ParserRule getInheritedParserRuleRule() {
@@ -223,7 +231,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	//AbstractCallOverridenParserRule returns mm::AModel:
 	//	"overridemodel" elements+=OverridableParserRule*;
 	public AbstractCallOverridenParserRuleElements getAbstractCallOverridenParserRuleAccess() {
-		return (pAbstractCallOverridenParserRule != null) ? pAbstractCallOverridenParserRule : (pAbstractCallOverridenParserRule = new AbstractCallOverridenParserRuleElements());
+		return pAbstractCallOverridenParserRule;
 	}
 	
 	public ParserRule getAbstractCallOverridenParserRuleRule() {
@@ -233,7 +241,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	//OverridableParserRule returns mm::AType:
 	//	"element" name=ID;
 	public OverridableParserRuleElements getOverridableParserRuleAccess() {
-		return (pOverridableParserRule != null) ? pOverridableParserRule : (pOverridableParserRule = new OverridableParserRuleElements());
+		return pOverridableParserRule;
 	}
 	
 	public ParserRule getOverridableParserRuleRule() {
@@ -243,7 +251,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	//OverridableParserRule2 returns mm::AType:
 	//	"other element" name=STRING;
 	public OverridableParserRule2Elements getOverridableParserRule2Access() {
-		return (pOverridableParserRule2 != null) ? pOverridableParserRule2 : (pOverridableParserRule2 = new OverridableParserRule2Elements());
+		return pOverridableParserRule2;
 	}
 	
 	public ParserRule getOverridableParserRule2Rule() {
@@ -253,7 +261,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	//AbstractCallExtendedParserRule returns mm::AModel:
 	//	"extendedmodel" elements+=ExtendableParserRule*;
 	public AbstractCallExtendedParserRuleElements getAbstractCallExtendedParserRuleAccess() {
-		return (pAbstractCallExtendedParserRule != null) ? pAbstractCallExtendedParserRule : (pAbstractCallExtendedParserRule = new AbstractCallExtendedParserRuleElements());
+		return pAbstractCallExtendedParserRule;
 	}
 	
 	public ParserRule getAbstractCallExtendedParserRuleRule() {
@@ -263,7 +271,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	//ExtendableParserRule returns mm::AType:
 	//	"element" name=ID;
 	public ExtendableParserRuleElements getExtendableParserRuleAccess() {
-		return (pExtendableParserRule != null) ? pExtendableParserRule : (pExtendableParserRule = new ExtendableParserRuleElements());
+		return pExtendableParserRule;
 	}
 	
 	public ParserRule getExtendableParserRuleRule() {
@@ -273,13 +281,13 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	//terminal REAL returns ecore::EDouble:
 	//	INT "." INT;
 	public TerminalRule getREALRule() {
-		return (tREAL != null) ? tREAL : (tREAL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "REAL"));
+		return tREAL;
 	} 
 
 	//terminal ID:
 	//	"^"? ("a".."z" | "A".."Z" | "ö" | "ä" | "ü" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
-		return (tID != null) ? tID : (tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
+		return tID;
 	} 
 
 	//terminal INT returns ecore::EInt:
