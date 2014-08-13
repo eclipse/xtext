@@ -38,6 +38,417 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
+	def void testExtensions_01() {
+		'''
+			class Test {
+				extension Util
+				def getRunnable() {
+					new Runnable {
+						override run() {
+							sayHello
+						}
+					}
+				}
+				static class Util {
+					def sayHello() {
+						'Hello'
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Extension;
+			
+			@SuppressWarnings("all")
+			public class Test {
+			  public static class Util {
+			    public String sayHello() {
+			      return "Hello";
+			    }
+			  }
+			  
+			  @Extension
+			  private Test.Util _util;
+			  
+			  public Runnable getRunnable() {
+			    return new Runnable() {
+			      public void run() {
+			        Test.this._util.sayHello();
+			      }
+			    };
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testExtensions_02() {
+		'''
+			class Test {
+				def getRunnable() {
+					val extension Util u = null
+					new Runnable {
+						override run() {
+							sayHello
+						}
+					}
+				}
+				static class Util {
+					def sayHello() {
+						'Hello'
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Extension;
+			
+			@SuppressWarnings("all")
+			public class Test {
+			  public static class Util {
+			    public String sayHello() {
+			      return "Hello";
+			    }
+			  }
+			  
+			  public Runnable getRunnable() {
+			    Runnable _xblockexpression = null;
+			    {
+			      @Extension
+			      final Test.Util u = null;
+			      _xblockexpression = new Runnable() {
+			        public void run() {
+			          u.sayHello();
+			        }
+			      };
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testExtensions_03() {
+		'''
+			class Test {
+				def getRunnable() {
+					val Util it = null
+					new Runnable {
+						override run() {
+							it.sayHello
+						}
+						def void sayHello(Util u) {}
+					}
+				}
+				static class Util {}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class Test {
+			  public static class Util {
+			  }
+			  
+			  public Runnable getRunnable() {
+			    abstract class __Test_1 implements Runnable {
+			      public abstract void sayHello(final Test.Util u);
+			    }
+			    
+			    __Test_1 _xblockexpression = null;
+			    {
+			      final Test.Util it = null;
+			      _xblockexpression = new __Test_1() {
+			        public void run() {
+			          this.sayHello(it);
+			        }
+			        
+			        public void sayHello(final Test.Util u) {
+			        }
+			      };
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testExtensions_04() {
+		'''
+			class Test {
+				extension Util = null
+				def getRunnable() {
+					val String it = null
+					new Runnable {
+						override run() {
+							sayHello
+						}
+					}
+				}
+				static class Util {
+					def void sayHello(String s) {}
+				}
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Extension;
+			
+			@SuppressWarnings("all")
+			public class Test {
+			  public static class Util {
+			    public void sayHello(final String s) {
+			    }
+			  }
+			  
+			  @Extension
+			  private Test.Util _util = null;
+			  
+			  public Runnable getRunnable() {
+			    Runnable _xblockexpression = null;
+			    {
+			      final String it = null;
+			      _xblockexpression = new Runnable() {
+			        public void run() {
+			          Test.this._util.sayHello(it);
+			        }
+			      };
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testExtensions_05() {
+		'''
+			import static extension Util.*
+			class Test {
+				def getRunnable() {
+					val String it = null
+					new Runnable {
+						override run() {
+							sayHello
+						}
+					}
+				}
+			}
+			class Util {
+				static def void sayHello(String s) {}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class Test {
+			  public Runnable getRunnable() {
+			    Runnable _xblockexpression = null;
+			    {
+			      final String it = null;
+			      _xblockexpression = new Runnable() {
+			        public void run() {
+			          Util.sayHello(it);
+			        }
+			      };
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testExtensions_06() {
+		'''
+			import static extension Util.*
+			class Test {
+				def getRunnable() {
+					val String it = null
+					new Runnable {
+						override run() {
+							sayHello
+						}
+					}
+				}
+			}
+			class Util {
+				static def void sayHello(Runnable r) {}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class Test {
+			  public Runnable getRunnable() {
+			    Runnable _xblockexpression = null;
+			    {
+			      final String it = null;
+			      _xblockexpression = new Runnable() {
+			        public void run() {
+			          Util.sayHello(this);
+			        }
+			      };
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testExtensions_07() {
+		'''
+			import static extension Util.*
+			class Test {
+				def getRunnable() {
+					val String it = null
+					new Runnable {
+						override run() {
+							sayHello
+						}
+					}
+				}
+			}
+			class Util {
+				static def void sayHello(Test t) {}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class Test {
+			  public Runnable getRunnable() {
+			    Runnable _xblockexpression = null;
+			    {
+			      final String it = null;
+			      _xblockexpression = new Runnable() {
+			        public void run() {
+			          Util.sayHello(Test.this);
+			        }
+			      };
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testExtensions_08() {
+		'''
+			class Test {
+				extension Util u
+				def getRunnable() {
+					new Runnable {
+						override run() {
+							sayHello
+						}
+					}
+				}
+				static class Util {
+					def void sayHello(Runnable r) {}
+				}
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Extension;
+			
+			@SuppressWarnings("all")
+			public class Test {
+			  public static class Util {
+			    public void sayHello(final Runnable r) {
+			    }
+			  }
+			  
+			  @Extension
+			  private Test.Util u;
+			  
+			  public Runnable getRunnable() {
+			    return new Runnable() {
+			      public void run() {
+			        Test.this.u.sayHello(this);
+			      }
+			    };
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testExtensions_09() {
+		'''
+			class Test {
+				extension Util u
+				def getRunnable() {
+					new Runnable {
+						override run() {
+							Test.this.sayHello
+						}
+					}
+				}
+				static class Util {
+					def void sayHello(Runnable r) {}
+					def void sayHello(Test t) {}
+				}
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Extension;
+			
+			@SuppressWarnings("all")
+			public class Test {
+			  public static class Util {
+			    public void sayHello(final Runnable r) {
+			    }
+			    
+			    public void sayHello(final Test t) {
+			    }
+			  }
+			  
+			  @Extension
+			  private Test.Util u;
+			  
+			  public Runnable getRunnable() {
+			    return new Runnable() {
+			      public void run() {
+			        Test.this.u.sayHello(Test.this);
+			      }
+			    };
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testExtensions_10() {
+		'''
+			class Test {
+				extension Util u
+				def getRunnable() {
+					new Runnable {
+						override run() {
+							sayHello
+						}
+					}
+				}
+				static class Util {
+					def void sayHello(Test t) {}
+				}
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Extension;
+			
+			@SuppressWarnings("all")
+			public class Test {
+			  public static class Util {
+			    public void sayHello(final Test t) {
+			    }
+			  }
+			  
+			  @Extension
+			  private Test.Util u;
+			  
+			  public Runnable getRunnable() {
+			    return new Runnable() {
+			      public void run() {
+			        Test.this.u.sayHello(Test.this);
+			      }
+			    };
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def void testForwardFieldReference() {
 		'''
 			class Bar {
