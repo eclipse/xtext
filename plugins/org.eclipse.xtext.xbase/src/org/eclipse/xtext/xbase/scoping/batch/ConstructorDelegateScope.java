@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -40,7 +39,7 @@ public class ConstructorDelegateScope extends AbstractSessionBasedScope implemen
 	}
 	
 	@Override
-	protected Iterable<IEObjectDescription> getAllLocalElements() {
+	protected List<IEObjectDescription> getAllLocalElements() {
 		List<IEObjectDescription> result = Lists.newArrayList();
 		result.addAll(getLocalElementsByName(THIS));
 		result.addAll(getLocalElementsByName(SUPER));
@@ -48,7 +47,7 @@ public class ConstructorDelegateScope extends AbstractSessionBasedScope implemen
 	}
 	
 	@Override
-	protected Collection<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
+	protected List<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
 		if (THIS.equals(name) || SUPER.equals(name)) {
 			IEObjectDescription description = getSession().getLocalElement(name);
 			if (description != null) {
@@ -71,7 +70,7 @@ public class ConstructorDelegateScope extends AbstractSessionBasedScope implemen
 		return receiverTypeParameterMapping;
 	}
 	
-	protected Collection<IEObjectDescription> createConstructorDescriptions(QualifiedName name, JvmGenericType type, boolean superType) {
+	protected List<IEObjectDescription> createConstructorDescriptions(QualifiedName name, JvmGenericType type, boolean superType) {
 		Iterable<JvmConstructor> constructors = type.getDeclaredConstructors();
 		List<IEObjectDescription> result = Lists.newArrayListWithCapacity(3);
 		for(JvmConstructor constructor: constructors) {

@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -173,18 +172,31 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 		return getTypeScopes().createTypeScope(context, reference, this, resolvedTypes);
 	}
 	
-	public Collection<IEObjectDescription> getLocalElements() {
+	public List<IEObjectDescription> getLocalElements() {
 		List<IEObjectDescription> result = Lists.newArrayListWithCapacity(3);
 		addLocalElements(result);
 		return result;
 	}
-
+	
 	/**
 	 * @param result the list of all local elements. Shadowing semantics do not have to be applied. 
 	 */
 	protected void addLocalElements(List<IEObjectDescription> result) {
 	}
 	
+	public List<IEObjectDescription> getDeepLocalElements(QualifiedName name) {
+		List<IEObjectDescription> result = Lists.newArrayListWithCapacity(3);
+		addDeepLocalElements(name, result);
+		return result;
+	}
+	
+	/**
+	 * @param name the name of the local elements to collect 
+	 * @param result the list of all local elements with the given name
+	 */
+	protected void addDeepLocalElements(QualifiedName name, List<IEObjectDescription> result) {
+	}
+
 	public List<TypeBucket> getStaticallyImportedTypes() {
 		return Collections.emptyList();
 	}

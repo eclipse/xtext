@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -36,7 +36,7 @@ public class TypeLiteralScope extends AbstractSessionBasedScope {
 	}
 
 	@Override
-	protected Collection<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
+	protected List<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
 		XAbstractFeatureCall featureCall = getFeatureCall();
 		if (featureCall.isExplicitOperationCallOrBuilderSyntax())
 			return Collections.emptyList();
@@ -66,7 +66,7 @@ public class TypeLiteralScope extends AbstractSessionBasedScope {
 	}
 
 	@Override
-	protected Iterable<IEObjectDescription> getAllLocalElements() {
+	protected List<IEObjectDescription> getAllLocalElements() {
 		return Collections.emptyList();
 	}
 

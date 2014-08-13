@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -52,7 +51,7 @@ public class StaticFeatureScope extends AbstractSessionBasedExecutableScope {
 	}
 	
 	@Override
-	protected Collection<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
+	protected List<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
 		final Set<JvmFeature> allFeatures = Sets.newLinkedHashSet();
 		processFeatureNames(name, new NameAcceptor() {
 			public void accept(String simpleName, int order) {
@@ -105,7 +104,7 @@ public class StaticFeatureScope extends AbstractSessionBasedExecutableScope {
 	}
 
 	@Override
-	protected Iterable<IEObjectDescription> getAllLocalElements() {
+	protected List<IEObjectDescription> getAllLocalElements() {
 		Set<JvmFeature> allFeatures = Sets.newLinkedHashSet();
 		for(JvmType type: bucket.getTypes()) {
 			if (type instanceof JvmDeclaredType) {

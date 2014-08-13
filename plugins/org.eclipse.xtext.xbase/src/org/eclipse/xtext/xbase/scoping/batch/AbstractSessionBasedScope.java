@@ -53,7 +53,7 @@ public abstract class AbstractSessionBasedScope extends AbstractScope {
 	}
 	
 	@Override
-	protected abstract Iterable<IEObjectDescription> getAllLocalElements();
+	protected abstract List<IEObjectDescription> getAllLocalElements();
 	
 	protected IFeatureScopeSession getSession() {
 		return session;
@@ -141,7 +141,7 @@ public abstract class AbstractSessionBasedScope extends AbstractScope {
 	}
 	
 	@Override
-	protected abstract Collection<IEObjectDescription> getLocalElementsByName(QualifiedName name);
+	protected abstract List<IEObjectDescription> getLocalElementsByName(QualifiedName name);
 	
 	@Override
 	public Iterable<IEObjectDescription> getElements(final QualifiedName name) {
