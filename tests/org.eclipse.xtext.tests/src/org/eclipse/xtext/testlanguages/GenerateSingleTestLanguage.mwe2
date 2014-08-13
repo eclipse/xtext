@@ -1,0 +1,46 @@
+/*******************************************************************************
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+module org.eclipse.xtext.testlanguages.GenerateSingleTestLanguage
+
+import org.eclipse.emf.mwe2.runtime.workflow.Workflow
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.generator.*
+
+var projectName = "org.eclipse.xtext.tests"
+var runtimeProject = "../${projectName}"
+var lineDelimiter = '\n'
+
+Workflow {
+	bean = StandaloneSetup {
+		ignoreBrokenProjectFiles = true
+		platformUri = "${runtimeProject}/.."
+		platformUri = "${runtimeProject}/../../plugins"
+		scanClassPath = true
+		uriMap = {
+			from = "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore"
+			to = "platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore"
+		}
+		uriMap = {
+			from = "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel"
+			to = "platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel"
+		}
+		
+		registerGeneratedEPackage = "org.eclipse.xtext.XtextPackage"
+		registerGeneratedEPackage = "org.eclipse.emf.ecore.EcorePackage"
+	}
+	
+	component = Generator auto-inject {
+		mergeManifest = false
+		pathRtProject = runtimeProject
+		projectNameRt = projectName
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage2.xtext"
+			fragment = @org.eclipse.xtext.TestLanguagesFragments {}
+		}
+	}
+}

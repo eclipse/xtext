@@ -436,5 +436,6 @@ Export-Package: org.eclipse.xtext.generator.ecore,
  org.eclipse.xtext.resource.liveContainerBuilderIntegerationTestLanguage.util,
  org.eclipse.xtext.resource.bug385636,
  org.eclipse.xtext.resource.bug385636.impl,
- org.eclipse.xtext.resource.bug385636.util
+ org.eclipse.xtext.resource.bug385636.util,
+ org.eclipse.xtext.parsetree.formatter.serializer
 

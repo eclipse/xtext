@@ -674,6 +674,15 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://www.eclipse.org/2008/tmf/xtext/ActionLang2" 
+       class = "org.eclipse.xtext.testlanguages.actionLang2.ActionLang2Package"
+       genModel = "org/eclipse/xtext/testlanguages/ActionTestLanguage2.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://example.xtext.org/FowlerDslTestLanguage" 
        class = "org.eclipse.xtext.testlanguages.fowlerdsl.FowlerdslPackage"
        genModel = "org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.genmodel" /> 
