@@ -14,6 +14,7 @@ import java.util.Set;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.IJavaModelMarker;
@@ -64,7 +65,7 @@ public class DerivedResourceMarkerCopier {
 				cleanUpCreatedMarkers(javaFile, traceToSource);
 				return;
 			}
-			
+
 			// Copy marker otherwise
 			IWorkspace workspace = javaFile.getWorkspace();
 			Set<Triple<IFile, String, ILocationInResource>> markers = new HashSet<Triple<IFile, String, ILocationInResource>>();
@@ -79,7 +80,13 @@ public class DerivedResourceMarkerCopier {
 				ILocationInResource associatedLocation = traceToSource.getBestAssociatedLocation(new TextRegion(
 						charStart, charEnd - charStart));
 				if (associatedLocation != null) {
-					IFile srcFile = workspace.getRoot().getFile(associatedLocation.getStorage().getFullPath());
+					IStorage storage;
+					try {
+						storage = associatedLocation.getStorage();
+					} catch (IllegalStateException e) {
+						continue;
+					}
+					IFile srcFile = workspace.getRoot().getFile(storage.getFullPath());
 					if (!hasXtextErrorMarker(srcFile)) {
 						Triple<IFile, String, ILocationInResource> markerData = Tuples.create(srcFile, message,
 								associatedLocation);
@@ -102,7 +109,13 @@ public class DerivedResourceMarkerCopier {
 		if (iterator.hasNext()) {
 			ILocationInResource srcLocation = iterator.next();
 			IWorkspace workspace = javaFile.getWorkspace();
-			IFile srcFile = workspace.getRoot().getFile(srcLocation.getStorage().getFullPath());
+			IStorage storage;
+			try {
+				storage = srcLocation.getStorage();
+			} catch (IllegalStateException e) {
+				return;
+			}
+			IFile srcFile = workspace.getRoot().getFile(storage.getFullPath());
 			if (hasXtextErrorMarker(srcFile)) {
 				for (IMarker iMarker : srcFile.findMarkers(MarkerTypes.ANY_VALIDATION, true, IResource.DEPTH_ZERO)) {
 					if (javaFile.getFullPath().toString().equals(iMarker.getAttribute(COPIED_FROM_FILE, ""))) {
