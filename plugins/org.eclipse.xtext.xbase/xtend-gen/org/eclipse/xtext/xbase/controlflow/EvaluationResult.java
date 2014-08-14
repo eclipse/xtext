@@ -13,6 +13,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.XTypeLiteral;
@@ -100,6 +101,14 @@ class EvaluationResult {
     return Boolean.valueOf(Objects.equal(myValue, otherValue));
   }
   
+  private Object _equalValue(final JvmFormalParameter myValue, final JvmFormalParameter otherValue) {
+    boolean _equals = Objects.equal(myValue, otherValue);
+    if (_equals) {
+      return Boolean.TRUE;
+    }
+    return EvaluationResult.NOT_A_CONSTANT.value;
+  }
+  
   private Object _equalValue(final JvmEnumerationLiteral myValue, final JvmIdentifiableElement otherValue) {
     return EvaluationResult.NOT_A_CONSTANT.value;
   }
@@ -167,6 +176,9 @@ class EvaluationResult {
     } else if (myValue instanceof JvmEnumerationLiteral
          && otherValue instanceof JvmIdentifiableElement) {
       return _equalValue((JvmEnumerationLiteral)myValue, (JvmIdentifiableElement)otherValue);
+    } else if (myValue instanceof JvmFormalParameter
+         && otherValue instanceof JvmFormalParameter) {
+      return _equalValue((JvmFormalParameter)myValue, (JvmFormalParameter)otherValue);
     } else if (myValue instanceof JvmType
          && otherValue instanceof XTypeLiteral) {
       return _equalValue((JvmType)myValue, (XTypeLiteral)otherValue);
