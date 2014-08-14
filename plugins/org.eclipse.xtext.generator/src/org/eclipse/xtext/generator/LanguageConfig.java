@@ -207,6 +207,7 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 					}
 				}
 			}
+			rs.getResource(URI.createPlatformResourceURI("/org.eclipse.emf.ecore.xcore.lib/model/XcoreLang.xcore", true), true);
 			Resource res = rs.getResource(loadedResourceUri, true);
 			if (res == null || res.getContents().isEmpty())
 				LOG.error("Error loading '" + loadedResource + "'");
