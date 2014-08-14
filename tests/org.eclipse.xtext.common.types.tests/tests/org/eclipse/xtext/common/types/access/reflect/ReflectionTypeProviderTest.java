@@ -22,7 +22,6 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.AbstractRuntimeJvmTypeProvider;
@@ -83,6 +82,11 @@ public class ReflectionTypeProviderTest extends AbstractTypeProviderTest {
 	@Override
 	protected boolean isDefaultValueSupported() {
 		return false;
+	}
+	
+	@Override
+	protected void checkDeprecatedBitSet(JvmMember member) {
+		assertFalse(member.isSetDeprecated());
 	}
 
 	@Test
