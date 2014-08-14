@@ -74,8 +74,9 @@ import com.google.inject.Provider;
  * </code>
  * 
  * @author Sven Efftinge
- * 
  * @since 2.7
+ * 
+ * @noextend This class is not intended to be subclassed by clients.
  */
 public class CompilationTestHelper {
 	
@@ -101,6 +102,9 @@ public class CompilationTestHelper {
 		configureFreshWorkspace();
 	}
 	
+	/**
+	 * creates a fresh temp directory and sets it as the workspace root.
+	 */
 	public void configureFreshWorkspace() {
 		File tempDir = createFreshTempDir();
 		WorkspaceConfig config = new WorkspaceConfig(tempDir.getAbsolutePath());
@@ -122,6 +126,9 @@ public class CompilationTestHelper {
 		}
 	}
 	
+	/**
+	 * Add the class path entries of the given classes to the java compiler's class path.
+	 */
 	public void setJavaCompilerClassPath(Class<?> ...classes) {
 		javaCompiler.clearClassPath();
 		for (Class<?> clazz : classes) {
@@ -250,6 +257,9 @@ public class CompilationTestHelper {
 	
 	/**
 	 * A result contains information about various aspects of a compiled piece of code.
+	 * 
+	 * @noextend This class is not intended to be subclassed by clients.
+	 * @noinstantiate This class is not intended to be instantiated by clients.
 	 */
 	public static class Result {
 		
@@ -261,19 +271,19 @@ public class CompilationTestHelper {
 		private List<Resource> sources;
 		private Map<String,OutputConfiguration> outputConfigurations;
 		
-		public void setResourceSet(ResourceSet resourceSet) {
+		protected void setResourceSet(ResourceSet resourceSet) {
 			this.resourceSet = resourceSet;
 		}
 		
-		public void setResources(List<Resource> sources) {
+		protected void setResources(List<Resource> sources) {
 			this.sources = sources;
 		}
 		
-		public void setJavaCompiler(OnTheFlyJavaCompiler javaCompiler) {
+		protected void setJavaCompiler(OnTheFlyJavaCompiler javaCompiler) {
 			this.javaCompiler = javaCompiler;
 		}
 		
-		public void setOutputConfigurations(Iterable<? extends OutputConfiguration> outputConfiguration) {
+		protected void setOutputConfigurations(Iterable<? extends OutputConfiguration> outputConfiguration) {
 			this.outputConfigurations = newHashMap();
 			for (OutputConfiguration conf : outputConfiguration) {
 				outputConfigurations.put(conf.getName(), conf);
@@ -287,31 +297,56 @@ public class CompilationTestHelper {
 		private ResourceDescriptionsData index;
 		private List<Issue> allErrorsAndWarnings;
 		
-		
+		/**
+		 * Ensures validation has happened and returns any errors and warnings
+		 * 
+		 * @return errors and warnings contained in the currently processed sources
+		 */
 		public List<Issue> getErrorsAndWarnings() {
 			doValidation();
 			return allErrorsAndWarnings;
 		}
 
+		/**
+		 * Ensures compilation has happened and returns any generated and compiled Java classes.
+		 * 
+		 * @return the compiled Java classes
+		 */
 		public Map<String,Class<?>> getCompiledClasses() {
 			doCompile();
 			return compiledClasses;
 		}
 		
+		/**
+		 * Ensures compilation has happened and returns the class loader including compiled classes.
+		 * 
+		 * @return the class loader after the compilation happend
+		 */
 		public ClassLoader getClassLoader() {
 			doCompile();
 			return classLoader;
 		}
 		
+		/**
+		 * Ensures generation happened and returns a map of the generated Java source files.
+		 * 
+		 * @return a map of the generated Java source files, where the key is the qualified class name and the value the generated Java code.
+		 */
 		public Map<String,String> getGeneratedCode() {
 			doGenerate();
 			return generatedCode;
 		}
 
+		/**
+		 * convenience method. Same as getGeneratedCode().get(typeName)
+		 */
 		public String getGeneratedCode(String typeName) {
 			return getGeneratedCode().get(typeName);
 		}
 		
+		/**
+		 * Convenience method for the common case, that only one file is generated.
+		 */
 		public String getSingleGeneratedCode() {
 			doGenerate();
 			if (access.getTextFiles().size() == 1)
@@ -336,18 +371,30 @@ public class CompilationTestHelper {
 			return result.toString();
 		}
 
+		/**
+		 * @return the resource set used in this compilation process
+		 */
 		public ResourceSet getResourceSet() {
 			return resourceSet;
 		}
 
+		/**
+		 * Convenience method for single generated Java classes
+		 */
 		public Class<?> getCompiledClass() {
 			return IterableExtensions.head(getCompiledClasses().values());
 		}
 		
+		/**
+		 * Convenience method for single generated Java classes
+		 */
 		public Class<?> getCompiledClass(String className) {
 			return getCompiledClasses().get(className);
 		}
 
+		/**
+		 * @return all generated resources. the key is the file path and the value denotes the generated text. 
+		 */
 		public Map<String, CharSequence> getAllGeneratedResources() {
 			doGenerate();
 			Map<String,CharSequence> result = newHashMap();
