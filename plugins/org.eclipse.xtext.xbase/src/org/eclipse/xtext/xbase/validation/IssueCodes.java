@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011-14 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.validation;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Stéphane Galland - Add deprecated feature warning
  */
 public class IssueCodes {
 	
@@ -135,6 +136,10 @@ public class IssueCodes {
 	public static final String INVALID_TYPE_ARGUMENTS_ON_TYPE_LITERAL = ISSUE_CODE_PREFIX + "invalid_type_arguments_on_type_literal";
 
 	public static final String OPERATION_WITHOUT_PARENTHESES = ISSUE_CODE_PREFIX + "operation_without_parentheses";
+	
+	/** A deprecated feature is used.
+	 */
+	public static final String DEPRECATED_FEATURE = ISSUE_CODE_PREFIX + "deprecated_feature";
 	
 	private IssueCodes() {
 	}
