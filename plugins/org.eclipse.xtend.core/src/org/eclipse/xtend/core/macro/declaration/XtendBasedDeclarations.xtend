@@ -92,6 +92,10 @@ abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends XtendAn
 		delegate.modifiers.map[Modifier.valueOf(toUpperCase)].toSet
 	}
 	
+	override isDeprecated() {
+		delegate.annotations.exists[ Deprecated.name == annotationType?.identifier ]
+	}
+	
 }
 
 abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> extends XtendMemberDeclarationImpl<T> implements TypeDeclaration {

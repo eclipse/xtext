@@ -188,7 +188,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 
 	protected void highlightDeprecatedXtendAnnotationTarget(IHighlightedPositionAcceptor acceptor, XtendAnnotationTarget target, XAnnotation annotation){
 		JvmType annotationType = annotation.getAnnotationType();
-		if(annotationType != null && !annotationType.eIsProxy() && annotationType instanceof JvmAnnotationType && DeprecationUtil.isDeprecated((JvmAnnotationType) annotationType)){
+		if(annotationType instanceof JvmAnnotationType && DeprecationUtil.isDeprecatedAnnotation((JvmAnnotationType) annotationType)){
 			if (target instanceof XtendConstructor) {
 				ICompositeNode compositeNode = NodeModelUtils.getNode(target);
 				for(ILeafNode leaf: compositeNode.getLeafNodes()) {
