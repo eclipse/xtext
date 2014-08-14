@@ -408,6 +408,12 @@ package class EvaluationResult {
 	private def dispatch Object equalValue(JvmIdentifiableElement myValue, JvmIdentifiableElement otherValue) {
 		return myValue == otherValue
 	}
+	private def dispatch Object equalValue(JvmFormalParameter myValue, JvmFormalParameter otherValue) {
+		if (myValue == otherValue) {
+			return Boolean.TRUE
+		}
+		return NOT_A_CONSTANT.value
+	}
 	private def dispatch Object equalValue(JvmEnumerationLiteral myValue, JvmIdentifiableElement otherValue) {
 		return NOT_A_CONSTANT.value
 	}
