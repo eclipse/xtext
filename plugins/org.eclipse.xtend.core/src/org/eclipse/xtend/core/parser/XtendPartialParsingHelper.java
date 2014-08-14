@@ -67,7 +67,7 @@ public class XtendPartialParsingHelper implements IPartialParsingHelper {
 	private FlexerFactory flexerFactory;
 
 	public IParseResult reparse(IParser parser, IParseResult previousParseResult, ReplaceRegion changedRegion) {
-		if (isBrokenPreviousState(previousParseResult)) {
+		if (isBrokenPreviousState(previousParseResult, changedRegion.getOffset())) {
 			return fullyReparse(parser, previousParseResult, changedRegion);
 		}
 		ICompositeNode oldRootNode = previousParseResult.getRootNode();
@@ -128,7 +128,7 @@ public class XtendPartialParsingHelper implements IPartialParsingHelper {
 	 * where the class keyword is consumed as an invalid token in the import declaration and everything thereafter
 	 * is unrecoverable.
 	 */
-	private boolean isBrokenPreviousState(IParseResult previousParseResult) {
+	private boolean isBrokenPreviousState(IParseResult previousParseResult, int offset) {
 		if (previousParseResult.hasSyntaxErrors()) {
 			BidiTreeIterator<AbstractNode> iterator = ((AbstractNode) previousParseResult.getRootNode()).basicIterator();
 			while(iterator.hasPrevious()) {
@@ -136,7 +136,7 @@ public class XtendPartialParsingHelper implements IPartialParsingHelper {
 				if (previous.getGrammarElement() == null) {
 					return true;
 				}
-				if (previous instanceof ILeafNode) {
+				if (previous instanceof ILeafNode && previous.getOffset() <= offset) {
 					break;
 				}
 			}

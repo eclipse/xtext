@@ -48,6 +48,24 @@ public class PartialParserTest extends AbstractXtendTestCase {
 	@Inject
 	private Provider<ResourceValidatorImpl> resourceValidatorProvider;
 	
+	@Test public void testBug440633_01() throws Exception {
+		String model =
+				"class C {\n" + 
+				"	m(=>AB)\n" + 
+				"	private \n" + 
+				"}";
+		doTestUpdateAtOffset(model, model.indexOf("B"), 1, "", "C.xtend");
+	}
+	
+	@Test public void testBug440633_02() throws Exception {
+		String model =
+				"class C {\n" + 
+				"	m(=>AB)\n" + 
+				"	private \n" + 
+				"}";
+		doTestUpdateAtOffset(model, model.indexOf("B"), 0, "X", "C.xtend");
+	}
+	
 	@Test public void testBug434727_01() throws Exception {
 		String model =
 				"import static\n" + 
