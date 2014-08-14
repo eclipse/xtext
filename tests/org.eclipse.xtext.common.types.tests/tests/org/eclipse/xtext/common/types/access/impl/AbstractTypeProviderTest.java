@@ -81,6 +81,7 @@ import org.eclipse.xtext.common.types.testSetups.Bug427098;
 import org.eclipse.xtext.common.types.testSetups.Bug428340;
 import org.eclipse.xtext.common.types.testSetups.ClassContainingEnum;
 import org.eclipse.xtext.common.types.testSetups.ClassWithVarArgs;
+import org.eclipse.xtext.common.types.testSetups.DeprecatedMembers;
 import org.eclipse.xtext.common.types.testSetups.EmptyAbstractClass;
 import org.eclipse.xtext.common.types.testSetups.Fields;
 import org.eclipse.xtext.common.types.testSetups.InitializerWithConstructor;
@@ -190,12 +191,17 @@ public abstract class AbstractTypeProviderTest extends Assert {
 			String computed = member.getIdentifier();
 			assertNotNull(String.valueOf(member), computed);
 			assertEquals(identifier, computed);
+			checkDeprecatedBitSet(member);
 		}
 		Iterator<JvmFormalParameter> params = Iterators.filter(EcoreUtil.getAllContents(resource, false), JvmFormalParameter.class);
 		while(params.hasNext()) {
 			JvmFormalParameter parameter = params.next();
 			assertNotNull(parameter.eContainer().toString(), parameter.getName());
 		}
+	}
+	
+	protected void checkDeprecatedBitSet(JvmMember member) {
+		assertTrue(member.isSetDeprecated());
 	}
 
 	protected void getAndResolveAllFragments(Resource resource) {
@@ -3267,5 +3273,32 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	protected void assertTypeReference(String name, List<JvmTypeReference> references, int idx) {
 		JvmTypeReference typeReference = references.get(idx);
 		assertEquals(name, typeReference.getSimpleName());
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Test
+	public void testDeprecatedBit_01() {
+		String typeName = org.eclipse.xtext.common.types.testSetups.DeprecatedClass.class.getName();
+		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
+		assertTrue(type.isSetDeprecated());
+		assertTrue(type.isDeprecated());
+		
+		for(JvmMember member: type.getMembers()) {
+			assertTrue(member.isSetDeprecated());
+			assertFalse(member.isDeprecated());
+		}
+	}
+	
+	@Test
+	public void testDeprecatedBit_02() {
+		String typeName = DeprecatedMembers.class.getName();
+		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
+		assertTrue(type.isSetDeprecated());
+		assertFalse(type.isDeprecated());
+		
+		for(JvmMember member: type.getMembers()) {
+			assertTrue(member.isSetDeprecated());
+			assertTrue(member.isDeprecated());
+		}
 	}
 }

@@ -18,9 +18,11 @@ import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.AbstractRuntimeJvmTypeProvider;
@@ -32,6 +34,7 @@ import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.common.types.testSetups.AbstractMethods;
 import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParamsSuperSuper;
 import org.eclipse.xtext.common.types.testSetups.ClassWithVarArgs;
+import org.eclipse.xtext.common.types.testSetups.DeprecatedMembers;
 import org.eclipse.xtext.common.types.testSetups.TestConstants;
 import org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguageInjectorProvider;
 import org.eclipse.xtext.junit4.InjectWith;
@@ -377,5 +380,29 @@ public class ReflectionTypeProviderTest extends AbstractTypeProviderTest {
 		}
 		fail("Cannot find annotation value 'classArray'");
 		return null;
+	}
+
+	@Override
+	@Test
+	public void testDeprecatedBit_01() {
+		String typeName = org.eclipse.xtext.common.types.testSetups.DeprecatedClass.class.getName();
+		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
+		assertFalse(type.isSetDeprecated());
+		
+		for(JvmMember member: type.getMembers()) {
+			assertFalse(member.isSetDeprecated());
+		}
+	}
+	
+	@Override
+	@Test
+	public void testDeprecatedBit_02() {
+		String typeName = DeprecatedMembers.class.getName();
+		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
+		assertFalse(type.isSetDeprecated());
+		
+		for(JvmMember member: type.getMembers()) {
+			assertFalse(member.isSetDeprecated());
+		}
 	}
 }
