@@ -284,8 +284,8 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
         _and = false;
       } else {
         TypeReference _primitiveBoolean = this.context.getPrimitiveBoolean();
-        boolean _is = it.is(_primitiveBoolean);
-        _and = _is;
+        boolean _equals = Objects.equal(it, _primitiveBoolean);
+        _and = _equals;
       }
       return _and;
     }

@@ -738,7 +738,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.append("validateLater[ |");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("if (type.inferred && type.is(primitiveBoolean))");
+    _builder.append("if (type == primitiveBoolean)");
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("addWarning(\"The type was inferred and boolean\")");
@@ -6579,9 +6579,8 @@ public abstract class AbstractReusableActiveAnnotationTests {
   }
   
   public void assertSameType(final TypeReference first, final TypeReference second) {
-    boolean _is = first.is(second);
-    boolean _not = (!_is);
-    if (_not) {
+    boolean _notEquals = (!Objects.equal(first, second));
+    if (_notEquals) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append(first, "");
       _builder.append(" does not refer to the same type as ");

@@ -961,15 +961,19 @@ public class CompilationUnitImpl implements CompilationUnit {
       boolean _matched = false;
       if (!_matched) {
         if (delegate instanceof XComputedTypeReferenceImplCustom) {
-          _matched=true;
-          InferredTypeReferenceImpl _inferredTypeReferenceImpl = new InferredTypeReferenceImpl();
-          final Procedure1<InferredTypeReferenceImpl> _function = new Procedure1<InferredTypeReferenceImpl>() {
-            public void apply(final InferredTypeReferenceImpl it) {
-              it.setDelegate(((XComputedTypeReferenceImplCustom)delegate));
-              it.setCompilationUnit(CompilationUnitImpl.this);
-            }
-          };
-          _switchResult = ObjectExtensions.<InferredTypeReferenceImpl>operator_doubleArrow(_inferredTypeReferenceImpl, _function);
+          boolean _isEquivalentComputed = ((XComputedTypeReferenceImplCustom)delegate).isEquivalentComputed();
+          boolean _not = (!_isEquivalentComputed);
+          if (_not) {
+            _matched=true;
+            InferredTypeReferenceImpl _inferredTypeReferenceImpl = new InferredTypeReferenceImpl();
+            final Procedure1<InferredTypeReferenceImpl> _function = new Procedure1<InferredTypeReferenceImpl>() {
+              public void apply(final InferredTypeReferenceImpl it) {
+                it.setDelegate(((XComputedTypeReferenceImplCustom)delegate));
+                it.setCompilationUnit(CompilationUnitImpl.this);
+              }
+            };
+            _switchResult = ObjectExtensions.<InferredTypeReferenceImpl>operator_doubleArrow(_inferredTypeReferenceImpl, _function);
+          }
         }
       }
       if (!_matched) {

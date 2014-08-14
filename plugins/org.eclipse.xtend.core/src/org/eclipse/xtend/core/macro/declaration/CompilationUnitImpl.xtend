@@ -494,7 +494,7 @@ class CompilationUnitImpl implements CompilationUnit {
 		 * is associated with them
 		 */
 		switch delegate {
-			XComputedTypeReferenceImplCustom : {
+			XComputedTypeReferenceImplCustom case !delegate.equivalentComputed: {
 				new InferredTypeReferenceImpl => [
 					it.delegate = delegate
 					compilationUnit = this

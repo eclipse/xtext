@@ -188,7 +188,7 @@ class AccessorsProcessor implements TransformationParticipant<MutableMemberDecla
 		}
 
 		def isBooleanType(TypeReference it) {
-			!inferred && is(primitiveBoolean)
+			!inferred && it == primitiveBoolean
 		}
 
 		def void addGetter(MutableFieldDeclaration field, Visibility visibility) {

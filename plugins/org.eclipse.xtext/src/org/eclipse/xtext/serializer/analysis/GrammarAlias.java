@@ -8,15 +8,14 @@
 package org.eclipse.xtext.serializer.analysis;
 
 import java.util.Collection;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
-import org.eclipse.xtext.util.formallang.ProductionFormatter;
 import org.eclipse.xtext.util.formallang.Production;
 import org.eclipse.xtext.util.formallang.ProductionFactory;
+import org.eclipse.xtext.util.formallang.ProductionFormatter;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;

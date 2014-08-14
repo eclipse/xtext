@@ -32,7 +32,7 @@ class ExtractTest {
 			
 			interf.declaredMethods.head => [
 				assertEquals('doStuff', simpleName)
-				assertTrue(returnType.is(string))
+				assertEquals(string, returnType)
 				assertEquals(IllegalArgumentException.newTypeReference, exceptions.head)
 			]
 		]
