@@ -34,4 +34,12 @@ public interface MutableMemberDeclaration extends MutableDeclaration, MemberDecl
 	 * @return the type declaring this member
 	 */
 	public MutableTypeDeclaration getDeclaringType();
+	
+	/**
+	 * Set the deprecated flag of this member. It will add or remove the {@link Deprecated} annotation
+	 * if appropriate.
+	 * @param deprecated {@code true} if this member should be marked as deprecated.
+	 * @since 2.7
+	 */
+	void setDeprecated(boolean deprecated);
 }
