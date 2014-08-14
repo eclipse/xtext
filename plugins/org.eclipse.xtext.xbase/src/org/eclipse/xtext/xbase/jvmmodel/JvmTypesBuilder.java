@@ -813,7 +813,7 @@ public class JvmTypesBuilder {
 	}
 	
 	public /* @Nullable */ JvmOperation toHashCodeMethod(/* @Nullable */ final EObject sourceElement, final boolean extendsSomethingWithProperHashCode, final JvmField ...jvmFields) {
-		if (sourceElement == null)
+		if (sourceElement == null)
 			return null;
 		JvmOperation result = toMethod(sourceElement, "hashCode", this.references.getTypeForName(Integer.TYPE, sourceElement), null);
 		if (result == null)
