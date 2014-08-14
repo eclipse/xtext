@@ -54,7 +54,6 @@ import com.google.inject.Provider;
 public class DebugSourceInstallingCompilationParticipant extends CompilationParticipant {
 
 	private static final Logger log = Logger.getLogger(DebugSourceInstallingCompilationParticipant.class);
-
 	private List<BuildContext> files;
 
 	@Inject
@@ -71,7 +70,7 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 
 	@Inject
 	private DerivedResourceMarkerCopier markerReflector;
-	
+
 	protected OutputConfiguration findOutputConfiguration(URI dslSourceFile, IFile generatedJavaFile) {
 		IResourceServiceProvider serviceProvider = serviceProviderRegistry.getResourceServiceProvider(dslSourceFile);
 		if (serviceProvider == null)
@@ -118,10 +117,15 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 					IFile generatedJavaFile = ctx.getFile();
 
 					// This may fail if there is no trace file.
-					AbstractTraceRegion traceToSource = findRootTraceRegion(generatedJavaFile);
-					if (traceToSource == null)
+					ITrace traceToSource = traceInformation.getTraceToSource(generatedJavaFile);
+					if (traceToSource == null) {
 						continue;
-					URI dslSourceFile = traceToSource.getAssociatedPath();
+					}
+					AbstractTraceRegion rootTraceRegion = findRootTraceRegion(traceToSource);
+					if (rootTraceRegion == null)
+						continue;
+
+					URI dslSourceFile = rootTraceRegion.getAssociatedPath();
 
 					// OutputConfigurations are only available for folders targeted by Xtext's code generation.
 					OutputConfiguration outputConfiguration = findOutputConfiguration(dslSourceFile, generatedJavaFile);
@@ -133,10 +137,10 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 						continue;
 
 					deleteTaskMarkers(generatedJavaFile);
-					markerReflector.reflectErrorMarkerInSource(generatedJavaFile);
+					markerReflector.reflectErrorMarkerInSource(generatedJavaFile, traceToSource);
 
 					ITraceToBytecodeInstaller installer = getInstaller(outputConfiguration);
-					installer.setTrace(generatedJavaFile.getName(), traceToSource);
+					installer.setTrace(generatedJavaFile.getName(), rootTraceRegion);
 					for (IFile javaClassFile : findGeneratedJavaClassFiles(element)) {
 						InputStream contents = javaClassFile.getContents();
 						try {
@@ -183,8 +187,7 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 		return result;
 	}
 
-	protected AbstractTraceRegion findRootTraceRegion(IFile javaFile) {
-		ITrace traceToSource = traceInformation.getTraceToSource(javaFile);
+	protected AbstractTraceRegion findRootTraceRegion(ITrace traceToSource) {
 		if (!(traceToSource instanceof AbstractTrace))
 			return null;
 		return ((AbstractTrace) traceToSource).getRootTraceRegion();

@@ -22,8 +22,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 
 /**
- * Extensible trace implementation that uses {@link IStorageAwareTraceContribution contributions}
- * to resolve trace URIs. 
+ * Extensible trace implementation that uses {@link IStorageAwareTraceContribution contributions} to resolve trace URIs.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -34,7 +33,7 @@ public class StorageAwareTrace extends AbstractTrace {
 	private String projectName;
 
 	private ImmutableList<? extends IStorageAwareTraceContribution> contributions = ImmutableList.of();
-	
+
 	@Inject
 	private void initializeContributions(ISharedStateContributionRegistry registry) {
 		contributions = registry.getContributedInstances(IStorageAwareTraceContribution.class);
@@ -43,7 +42,7 @@ public class StorageAwareTrace extends AbstractTrace {
 	public IStorage getLocalStorage() {
 		return localStorage;
 	}
-	
+
 	@Override
 	public URI getLocalURI() {
 		IStorage localStorage = getLocalStorage();
@@ -54,7 +53,7 @@ public class StorageAwareTrace extends AbstractTrace {
 	public IProject getLocalProject() {
 		return findProject(projectName);
 	}
-	
+
 	/**
 	 * Resolve the given path in the context of the known {@link #getLocalStorage() local storage}.
 	 * 
@@ -87,29 +86,30 @@ public class StorageAwareTrace extends AbstractTrace {
 			return URI.createPlatformResourceURI(project.getFullPath() + "/" + path, true);
 		return path;
 	}
-	
+
 	protected void setLocalStorage(IStorage derivedResource) {
 		this.localStorage = derivedResource;
 		if (derivedResource instanceof IResource) {
 			this.projectName = ((IResource) derivedResource).getProject().getName();
 		}
 	}
-	
+
 	@Override
 	protected IStorage findStorage(URI uri, IProject project) {
-		Iterable<Pair<IStorage, IProject>> allStorages = getStorage2uriMapper().getStorages(resolvePath(uri));
-		for(Pair<IStorage, IProject> storage: allStorages) {
+		URI resolvePath = resolvePath(uri);
+		Iterable<Pair<IStorage, IProject>> allStorages = getStorage2uriMapper().getStorages(resolvePath);
+		for (Pair<IStorage, IProject> storage : allStorages) {
 			if (project.equals(storage.getSecond())) {
 				return storage.getFirst();
 			}
 		}
-		throw new IllegalStateException("No storage found for given path: " + uri);
+		throw new IllegalStateException("No storage found for given path: " + uri + " for project " + project.getName()
+				+ " resolved to: " + resolvePath);
 	}
 
 	@Override
 	protected InputStream getContents(URI uri, IProject project) throws CoreException {
 		return findStorage(uri, project).getContents();
 	}
-
 
 }
