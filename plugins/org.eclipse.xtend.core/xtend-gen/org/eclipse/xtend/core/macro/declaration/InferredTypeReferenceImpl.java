@@ -60,7 +60,7 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
     TypeReference _xblockexpression = null;
     {
       TypeReference _equivalent = this.getEquivalent();
-      boolean _equals = _equivalent.operator_equals(null);
+      boolean _equals = Objects.equal(_equivalent, null);
       if (_equals) {
         String _message = this.message(methodName);
         throw new IllegalStateException(_message);
@@ -95,10 +95,6 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
   public int hashCode() {
     XComputedTypeReferenceImplCustom _delegate = this.getDelegate();
     return _delegate.hashCode();
-  }
-  
-  public boolean operator_equals(final Object other) {
-    return Objects.equal(this, other);
   }
   
   public void setEquivalent(final TypeReference equivalent) {

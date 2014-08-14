@@ -243,10 +243,6 @@ public class TypeReferenceImpl extends AbstractDelegator<LightweightTypeReferenc
     return false;
   }
   
-  public boolean operator_equals(final Object other) {
-    return Objects.equal(this, other);
-  }
-  
   public boolean equals(final Object obj) {
     if ((obj instanceof TypeReferenceImpl)) {
       LightweightTypeReference _delegate = this.getDelegate();

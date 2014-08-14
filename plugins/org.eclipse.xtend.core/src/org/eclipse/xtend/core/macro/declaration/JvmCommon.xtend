@@ -249,10 +249,6 @@ class TypeReferenceImpl extends AbstractDelegator<LightweightTypeReference> impl
 		return false
 	}
 	
-	override operator_equals(Object other) {
-		ObjectExtensions.operator_equals(this, other)
-	}
-	
 	override equals(Object obj) {
 		if (obj instanceof TypeReferenceImpl) {
 			return delegate.identifier == obj.delegate.identifier
@@ -315,10 +311,6 @@ class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedTypeReferen
 	
 	override hashCode() {
 		delegate.hashCode
-	}
-	
-	override operator_equals(Object other) {
-		ObjectExtensions.operator_equals(this, other)
 	}
 	
 }
