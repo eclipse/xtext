@@ -36,15 +36,11 @@ public class TypeDeclarationAwareBatchTypeResolver extends LogicalContainerAware
 		 if (resource instanceof XtextResource) {
 			 IParseResult parseResult = ((XtextResource) resource).getParseResult();
 			 if (!parseResult.hasSyntaxErrors()) {
-				 result = Lists.newArrayList(result);
-				 EObject xtendFile = resource.getContents().get(0);
-				 result.remove(xtendFile);
 				 return result;
 			 }
 		 }
 		 if (rootContainer instanceof XtendFile) {
 			 result = Lists.newArrayList(result);
-			 result.remove(rootContainer);
 			 List<XtendTypeDeclaration> typeDeclarations = ((XtendFile) rootContainer).getXtendTypes();
 			 for(XtendTypeDeclaration declaration: typeDeclarations) {
 				 addXtendTypes(declaration, result);
