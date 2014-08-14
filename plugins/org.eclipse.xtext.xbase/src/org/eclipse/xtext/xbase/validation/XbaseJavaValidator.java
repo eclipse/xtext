@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012-14 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -46,6 +46,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.util.DeprecationUtil;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
@@ -142,6 +143,7 @@ import com.google.inject.Provider;
  * validations that will be superseded by immediate error annotations during type resolution.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Stéphane Galland
  */
 @ComposedChecks(validators = { EarlyExitValidator.class })
 public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
@@ -1714,4 +1716,135 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	protected ILogicalContainerProvider getLogicalContainerProvider() {
 		return logicalContainerProvider;
 	}
+
+	@Check
+	public void checkDeprecated(JvmTypeReference type) {
+		if (!isIgnored(DEPRECATED_FEATURE) && type.getType() != null) {
+			if (DeprecationUtil.isDeprecated(type.getType())) {
+				addIssue(String.format("Deprecated type: %s. Please consider its replacement.",
+						type.getIdentifier()),
+						type,
+						null,
+						ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+						DEPRECATED_FEATURE);
+			}
+			else if (DeprecationUtil.isContainerDeprecated(type.getType())) {
+				addIssue(String.format("The type %s is defined inside a deprecated type. Please consider its replacement.",
+						type.getIdentifier()),
+						type,
+						null,
+						ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+						DEPRECATED_FEATURE);
+			}
+		}
+	}
+
+	@Check
+	public void checkDeprecated(XImportDeclaration decl) {
+		if (!isIgnored(DEPRECATED_FEATURE) && decl.getImportedType() != null) {
+			if (DeprecationUtil.isDeprecated(decl.getImportedType())) {
+				addIssue(String.format("Deprecated type: %s. Please consider its replacement.",
+						decl.getImportedType().getIdentifier()),
+						decl,
+						XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE,
+						ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+						DEPRECATED_FEATURE);
+			}
+			else if (DeprecationUtil.isContainerDeprecated(decl.getImportedType())) {
+				addIssue(String.format("The type %s is defined inside a deprecated type. Please consider its replacement.",
+						decl.getImportedType().getIdentifier()),
+						decl,
+						XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE,
+						ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+						DEPRECATED_FEATURE);
+			}
+		}
+	}
+
+	@Check
+	public void checkDeprecated(XFeatureCall expression) {
+		if (!isIgnored(DEPRECATED_FEATURE)) {
+			if (DeprecationUtil.isDeprecated(expression.getFeature())) {
+				addIssue(String.format("Deprecated element: %s. Please consider its replacement.",
+						expression.getFeature().getIdentifier()),
+						expression,
+						null,
+						ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+						DEPRECATED_FEATURE);
+			}
+			else if (DeprecationUtil.isContainerDeprecated(expression.getFeature())) {
+				addIssue(String.format("The element %s is defined inside a deprecated type. Please consider its replacement.",
+						expression.getFeature().getIdentifier()),
+						expression,
+						null,
+						ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+						DEPRECATED_FEATURE);
+			}
+		}
+	}
+
+	@Check
+	public void checkDeprecated(XMemberFeatureCall expression) {
+		if (!isIgnored(DEPRECATED_FEATURE)) {
+			if (DeprecationUtil.isDeprecated(expression.getFeature())) {
+				addIssue(String.format("Deprecated element: %s. Please consider its replacement.",
+						expression.getFeature().getIdentifier()),
+						expression,
+						XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE,
+						ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+						DEPRECATED_FEATURE);
+			}
+			else if (DeprecationUtil.isContainerDeprecated(expression.getFeature())) {
+				addIssue(String.format("This element is defined inside a deprecated type. Please consider its replacement.",
+						expression.getFeature().getIdentifier()),
+						expression,
+						XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE,
+						ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+						DEPRECATED_FEATURE);
+			}
+		}
+	}
+
+	@Check
+	public void checkDeprecated(XConstructorCall expression) {
+		if (!isIgnored(DEPRECATED_FEATURE)) {
+			if (DeprecationUtil.isDeprecated(expression.getConstructor())) {
+				addIssue("Deprecated constructor. Please consider its replacement.",
+						expression,
+						XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR,
+						ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+						DEPRECATED_FEATURE);
+			}
+			else if (DeprecationUtil.isContainerDeprecated(expression.getConstructor())) {
+				addIssue("This constructor is defined inside a deprecated type. Please consider its replacement.",
+						expression,
+						XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR,
+						ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+						DEPRECATED_FEATURE);
+			}
+		}
+	}
+
+	@Check
+	public void checkDeprecated(XTypeLiteral expression) {
+		if (!isIgnored(DEPRECATED_FEATURE)) {
+			if (DeprecationUtil.isDeprecated(expression.getType())) {
+				addIssue(String.format("Deprecated type: %s. Please consider its replacement.",
+						expression.getType().getIdentifier()),
+						expression,
+						XbasePackage.Literals.XTYPE_LITERAL__TYPE,
+						ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+						DEPRECATED_FEATURE);
+			}
+			else if (DeprecationUtil.isContainerDeprecated(expression.getType())) {
+				addIssue(String.format("This type %s is defined inside a deprecated type. Please consider its replacement.",
+						expression.getType().getIdentifier()),
+						expression,
+						XbasePackage.Literals.XTYPE_LITERAL__TYPE,
+						ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+						DEPRECATED_FEATURE);
+			}
+		}
+	}
+
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012-14 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -25,6 +25,7 @@ import com.google.inject.Singleton;
  * 
  * @author Sven Efftinge - Initial contribution and API
  * @author Dennis Huebner
+ * @author Stéphane Galland
  */
 @Singleton
 public class XbaseConfigurableIssueCodes extends ConfigurableIssueCodesProvider {
@@ -75,6 +76,8 @@ public class XbaseConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 		iAcceptor.accept(create(IssueCodes.UNREACHABLE_IF_BLOCK, SeverityConverter.SEVERITY_ERROR));
 		iAcceptor.accept(create(IssueCodes.INCOMPLETE_CASES_ON_ENUM, SeverityConverter.SEVERITY_WARNING));
 		iAcceptor.accept(create(IssueCodes.OPERATION_WITHOUT_PARENTHESES, SeverityConverter.SEVERITY_IGNORE));
+
+		iAcceptor.accept(create(IssueCodes.DEPRECATED_FEATURE, SeverityConverter.SEVERITY_WARNING));
 	}
 
 	protected final PreferenceKey create(String id, String defaultValue) {
