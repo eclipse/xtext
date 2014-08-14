@@ -67,7 +67,11 @@ public class DefaultBatchTypeResolver extends AbstractBatchTypeResolver {
 	}
 	
 	protected List<EObject> getEntryPoints(EObject object) {
-		return Collections.singletonList(EcoreUtil.getRootContainer(object));
+		EObject rootContainer = EcoreUtil.getRootContainer(object);
+		if (rootContainer instanceof XExpression) {
+			return Collections.singletonList(rootContainer);	
+		}
+		return Collections.emptyList();
 	}
 	
 	protected AbstractRootedReentrantTypeResolver getOrCreateResolver(EObject root) {
