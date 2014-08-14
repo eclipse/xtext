@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
+import com.google.common.base.Objects;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
@@ -20,8 +21,10 @@ import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Modifier;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -72,5 +75,22 @@ public abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends 
     };
     List<Modifier> _map = ListExtensions.<String, Modifier>map(_modifiers, _function);
     return IterableExtensions.<Modifier>toSet(_map);
+  }
+  
+  public boolean isDeprecated() {
+    T _delegate = this.getDelegate();
+    EList<XAnnotation> _annotations = _delegate.getAnnotations();
+    final Function1<XAnnotation, Boolean> _function = new Function1<XAnnotation, Boolean>() {
+      public Boolean apply(final XAnnotation it) {
+        String _name = Deprecated.class.getName();
+        JvmType _annotationType = it.getAnnotationType();
+        String _identifier = null;
+        if (_annotationType!=null) {
+          _identifier=_annotationType.getIdentifier();
+        }
+        return Boolean.valueOf(Objects.equal(_name, _identifier));
+      }
+    };
+    return IterableExtensions.<XAnnotation>exists(_annotations, _function);
   }
 }

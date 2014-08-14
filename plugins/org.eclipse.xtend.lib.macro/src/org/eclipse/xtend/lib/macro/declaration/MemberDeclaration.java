@@ -46,4 +46,11 @@ public interface MemberDeclaration extends Declaration {
 	 * @since 2.7
 	 */
 	Set<Modifier> getModifiers();
+	
+	/**
+	 * Returns {@code true} if this member is marked as deprecated.
+	 * @return {@code true} if this member is marked as deprecated.
+	 * @since 2.7
+	 */
+	boolean isDeprecated();
 }

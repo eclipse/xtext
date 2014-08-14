@@ -7,26 +7,49 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.util;
 
+import java.util.List;
+
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
+import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmType;
 
 /**
  * @author Holger Schill - Initial contribution and API
+ * @author Sebastian Zarnekow - Use explicit deprecated bit if available
  */
 public class DeprecationUtil {
 	public static boolean isDeprecated(JvmAnnotationTarget jvmAnnotationTarget) {
-		for (JvmAnnotationReference ref : jvmAnnotationTarget.getAnnotations()) {
-			if (ref != null && !ref.eIsProxy()) {
-				JvmAnnotationType annotation = ref.getAnnotation();
-				if(annotation != null && !annotation.eIsProxy() && isDeprecated(annotation))
-					return true;
-			}
+		if (jvmAnnotationTarget instanceof JvmMember) {
+			return isDeprecatedMember((JvmMember) jvmAnnotationTarget);
 		}
 		return false;
 	}
 
-	public static boolean isDeprecated(JvmAnnotationType jvmAnnotationType) {
-		return jvmAnnotationType.getIdentifier().equals(Deprecated.class.getName());
+	public static boolean isDeprecatedAnnotation(JvmAnnotationType jvmAnnotationType) {
+		return !jvmAnnotationType.eIsProxy() && Deprecated.class.getName().equals(jvmAnnotationType.getIdentifier());
 	}
+	
+	public static boolean isDeprecated(JvmType type) {
+		if (type instanceof JvmMember) {
+			return isDeprecatedMember((JvmMember) type);
+		}
+		return false;
+	}
+	
+	public static boolean isDeprecatedMember(JvmMember member) {
+		if (member.isSetDeprecated()) {
+			return member.isDeprecated();
+		}
+		List<JvmAnnotationReference> annotations = member.getAnnotations();
+		for(JvmAnnotationReference annotation: annotations) {
+			JvmAnnotationType annotationType = annotation.getAnnotation();
+			if (annotationType != null && Deprecated.class.getName().equals(annotationType.getIdentifier())) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 }

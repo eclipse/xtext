@@ -29,8 +29,8 @@ public class XbaseImageAdornments {
     int _or_1 = this.or(_or, _isFinal, JavaElementImageDescriptor.FINAL);
     boolean _isStatic = it.isStatic();
     int _or_2 = this.or(_or_1, _isStatic, JavaElementImageDescriptor.STATIC);
-    boolean _isDeprecated = DeprecationUtil.isDeprecated(it);
-    return this.or(_or_2, _isDeprecated, JavaElementImageDescriptor.DEPRECATED);
+    boolean _isDeprecatedMember = DeprecationUtil.isDeprecatedMember(it);
+    return this.or(_or_2, _isDeprecatedMember, JavaElementImageDescriptor.DEPRECATED);
   }
   
   protected int _get(final JvmField it) {
@@ -38,8 +38,8 @@ public class XbaseImageAdornments {
     int _or = this.or(0, _isFinal, JavaElementImageDescriptor.FINAL);
     boolean _isStatic = it.isStatic();
     int _or_1 = this.or(_or, _isStatic, JavaElementImageDescriptor.STATIC);
-    boolean _isDeprecated = DeprecationUtil.isDeprecated(it);
-    int _or_2 = this.or(_or_1, _isDeprecated, JavaElementImageDescriptor.DEPRECATED);
+    boolean _isDeprecatedMember = DeprecationUtil.isDeprecatedMember(it);
+    int _or_2 = this.or(_or_1, _isDeprecatedMember, JavaElementImageDescriptor.DEPRECATED);
     boolean _isVolatile = it.isVolatile();
     int _or_3 = this.or(_or_2, _isVolatile, JavaElementImageDescriptor.VOLATILE);
     boolean _isTransient = it.isTransient();
@@ -47,8 +47,8 @@ public class XbaseImageAdornments {
   }
   
   protected int _get(final JvmConstructor it) {
-    boolean _isDeprecated = DeprecationUtil.isDeprecated(it);
-    return this.or(JavaElementImageDescriptor.CONSTRUCTOR, _isDeprecated, JavaElementImageDescriptor.DEPRECATED);
+    boolean _isDeprecatedMember = DeprecationUtil.isDeprecatedMember(it);
+    return this.or(JavaElementImageDescriptor.CONSTRUCTOR, _isDeprecatedMember, JavaElementImageDescriptor.DEPRECATED);
   }
   
   protected int _get(final JvmOperation it) {
@@ -60,8 +60,8 @@ public class XbaseImageAdornments {
     int _or_2 = this.or(_or_1, _isSynchronized, JavaElementImageDescriptor.SYNCHRONIZED);
     boolean _isStatic = it.isStatic();
     int _or_3 = this.or(_or_2, _isStatic, JavaElementImageDescriptor.STATIC);
-    boolean _isDeprecated = DeprecationUtil.isDeprecated(it);
-    int _or_4 = this.or(_or_3, _isDeprecated, JavaElementImageDescriptor.DEPRECATED);
+    boolean _isDeprecatedMember = DeprecationUtil.isDeprecatedMember(it);
+    int _or_4 = this.or(_or_3, _isDeprecatedMember, JavaElementImageDescriptor.DEPRECATED);
     boolean _isNative = it.isNative();
     final int adornment = this.or(_or_4, _isNative, 0x4000);
     Resource _eResource = it.eResource();

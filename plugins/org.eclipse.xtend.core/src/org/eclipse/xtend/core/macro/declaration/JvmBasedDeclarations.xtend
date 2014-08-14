@@ -71,6 +71,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1
 import static org.eclipse.xtend.core.macro.ConditionUtils.*
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import org.eclipse.xtend.core.macro.ActiveAnnotationContexts.AnnotationCallback
+import org.eclipse.xtext.common.types.util.DeprecationUtil
 
 abstract class JvmElementImpl<T extends EObject> extends AbstractElementImpl<T> {
 	
@@ -181,6 +182,24 @@ abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotati
 	
 	override getModifiers() {
 		#{}
+	}
+	
+	override isDeprecated() {
+		return DeprecationUtil.isDeprecatedMember(delegate)
+	}
+	
+	def void setDeprecated(boolean deprecated) {
+		checkMutable
+		if (deprecated) {
+			delegate.deprecated = true
+			addAnnotation(compilationUnit.annotationReferenceProvider.newAnnotationReference(Deprecated))
+		} else {
+			delegate.deprecated = false
+			val existingReference = annotations.findFirst[ Deprecated.name == it.annotationTypeDeclaration.qualifiedName ]
+			if (existingReference != null) {
+				removeAnnotation(existingReference)
+			}
+		}
 	}
 	
 }

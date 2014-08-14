@@ -1050,6 +1050,16 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getJvmMember_Deprecated()
+	{
+		return (EAttribute)jvmMemberEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getJvmFeature()
 	{
 		return jvmFeatureEClass;
@@ -1899,6 +1909,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		createEAttribute(jvmMemberEClass, JVM_MEMBER__VISIBILITY);
 		createEAttribute(jvmMemberEClass, JVM_MEMBER__SIMPLE_NAME);
 		createEAttribute(jvmMemberEClass, JVM_MEMBER__IDENTIFIER);
+		createEAttribute(jvmMemberEClass, JVM_MEMBER__DEPRECATED);
 
 		jvmFeatureEClass = createEClass(JVM_FEATURE);
 		createEReference(jvmFeatureEClass, JVM_FEATURE__LOCAL_CLASSES);
@@ -2281,6 +2292,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		initEAttribute(getJvmMember_Visibility(), this.getJvmVisibility(), "visibility", null, 0, 1, JvmMember.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getJvmMember_SimpleName(), ecorePackage.getEString(), "simpleName", null, 0, 1, JvmMember.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getJvmMember_Identifier(), ecorePackage.getEString(), "identifier", null, 0, 1, JvmMember.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getJvmMember_Deprecated(), ecorePackage.getEBoolean(), "deprecated", null, 0, 1, JvmMember.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(jvmMemberEClass, null, "internalSetIdentifier", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "identifier", 0, 1, IS_UNIQUE, IS_ORDERED);

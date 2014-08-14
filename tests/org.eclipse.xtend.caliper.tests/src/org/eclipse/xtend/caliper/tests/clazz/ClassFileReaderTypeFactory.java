@@ -580,6 +580,7 @@ class ClassFileReaderTypeFactory implements ITypeFactory<BinaryClass, JvmDeclare
 	protected void setTypeModifiers(int accessFlags, JvmDeclaredType result) {
 		result.setAbstract((accessFlags & ClassFileConstants.AccAbstract) != 0);
 		result.setStatic((accessFlags & ClassFileConstants.AccStatic) != 0);
+		result.setDeprecated((accessFlags & ClassFileConstants.AccDeprecated) != 0);
 		if (result.eClass() != TypesPackage.Literals.JVM_ENUMERATION_TYPE) {
 			result.setFinal((accessFlags & ClassFileConstants.AccFinal) != 0);
 		} else {
@@ -953,6 +954,7 @@ class ClassFileReaderTypeFactory implements ITypeFactory<BinaryClass, JvmDeclare
 		result.setStatic((modifiers & AccStatic) != 0);
 		result.setTransient((modifiers & AccTransient) != 0);
 		result.setVolatile((modifiers & AccVolatile) != 0);
+		result.setDeprecated((modifiers & AccDeprecated) != 0);
 		setVisibility(modifiers, result);
 		char[] fieldType = field.getGenericSignature();
 		if (fieldType == null) {
@@ -1044,6 +1046,7 @@ class ClassFileReaderTypeFactory implements ITypeFactory<BinaryClass, JvmDeclare
 		result.internalSetIdentifier(fqName.toString());
 		setVisibility(modifier, result);
 		result.setVarArgs((modifier & AccVarargs) != 0);
+		result.setDeprecated((modifier & AccDeprecated) != 0);
 
 		List<BinaryGenericTypeSignature> exceptions = binarySignature.getExceptionTypes();
 		if (exceptions.size() == 0) {

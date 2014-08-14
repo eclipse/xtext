@@ -20,6 +20,7 @@ package org.eclipse.xtext.common.types;
  *   <li>{@link org.eclipse.xtext.common.types.JvmMember#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmMember#getSimpleName <em>Simple Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmMember#getIdentifier <em>Identifier</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.JvmMember#isDeprecated <em>Deprecated</em>}</li>
  * </ul>
  * </p>
  *
@@ -127,6 +128,63 @@ public interface JvmMember extends JvmAnnotationTarget
 	 * @generated
 	 */
 	String getIdentifier();
+
+	/**
+	 * Returns the value of the '<em><b>Deprecated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Deprecated</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Deprecated</em>' attribute.
+	 * @see #isSetDeprecated()
+	 * @see #unsetDeprecated()
+	 * @see #setDeprecated(boolean)
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmMember_Deprecated()
+	 * @model unsettable="true"
+	 * @generated
+	 * @since 2.7
+	 */
+	boolean isDeprecated();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.JvmMember#isDeprecated <em>Deprecated</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Deprecated</em>' attribute.
+	 * @see #isSetDeprecated()
+	 * @see #unsetDeprecated()
+	 * @see #isDeprecated()
+	 * @generated
+	 * @since 2.7
+	 */
+	void setDeprecated(boolean value);
+
+	/**
+	 * Unsets the value of the '{@link org.eclipse.xtext.common.types.JvmMember#isDeprecated <em>Deprecated</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSetDeprecated()
+	 * @see #isDeprecated()
+	 * @see #setDeprecated(boolean)
+	 * @generated
+	 * @since 2.7
+	 */
+	void unsetDeprecated();
+
+	/**
+	 * Returns whether the value of the '{@link org.eclipse.xtext.common.types.JvmMember#isDeprecated <em>Deprecated</em>}' attribute is set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return whether the value of the '<em>Deprecated</em>' attribute is set.
+	 * @see #unsetDeprecated()
+	 * @see #isDeprecated()
+	 * @see #setDeprecated(boolean)
+	 * @generated
+	 * @since 2.7
+	 */
+	boolean isSetDeprecated();
 
 	/**
 	 * <!-- begin-user-doc -->

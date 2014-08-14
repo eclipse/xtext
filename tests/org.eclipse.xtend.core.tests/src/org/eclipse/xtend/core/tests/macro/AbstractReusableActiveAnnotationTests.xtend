@@ -1677,6 +1677,89 @@ abstract class AbstractReusableActiveAnnotationTests {
 			assertEquals("make me lower case!", clazz.docComment)
 		]
 	}
+	
+	@Test def void testMarkAsDeprecated() {
+		assertGeneratedCode(
+			'myannotation/AddDispatchCaseAnnotation.xtend' -> '''
+				package myannotation
+				
+				import java.util.List
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+				import org.eclipse.xtend.lib.macro.declaration.Visibility
+				
+				@Active(MarkAsDeprecatedProcessor)
+				annotation MarkAsDeprecated{ }
+				class MarkAsDeprecatedProcessor extends AbstractClassProcessor {
+					
+					override doTransform(MutableClassDeclaration clazz, extension TransformationContext context) {
+						clazz.deprecated = true
+					}
+					
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				@myannotation.MarkAsDeprecated class MyClass {
+				}
+			''',
+			'''
+				package myusercode;
+				
+				import myannotation.MarkAsDeprecated;
+				
+				@MarkAsDeprecated
+				@Deprecated
+				@SuppressWarnings("all")
+				public class MyClass {
+				}
+			'''
+		)
+	}
+	
+	@Test def void testMarkAsDeprecated_02() {
+		assertGeneratedCode(
+			'myannotation/AddDispatchCaseAnnotation.xtend' -> '''
+				package myannotation
+				
+				import java.util.List
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+				import org.eclipse.xtend.lib.macro.declaration.Visibility
+				
+				@Active(UnmarkDeprecatedProcessor)
+				annotation UnmarkDeprecated{ }
+				class UnmarkDeprecatedProcessor extends AbstractClassProcessor {
+					
+					override doTransform(MutableClassDeclaration clazz, extension TransformationContext context) {
+						clazz.deprecated = false
+					}
+					
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				@myannotation.UnmarkDeprecated @Deprecated class MyClass {
+				}
+			''',
+			'''
+				package myusercode;
+				
+				import myannotation.UnmarkDeprecated;
+				
+				@UnmarkDeprecated
+				@SuppressWarnings("all")
+				public class MyClass {
+				}
+			'''
+		)
+	}
 
 	@Test def void testAddDispatchCase() {
 		assertGeneratedCode(

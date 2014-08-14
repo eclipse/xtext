@@ -501,6 +501,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 		//
 		int modifiers = typeBinding.getModifiers();
 		setTypeModifiers(result, modifiers);
+		result.setDeprecated(typeBinding.isDeprecated());
 		setVisibility(result, modifiers);
 
 		// Determine the simple name and compose the fully qualified name and path, remembering the fqn length and path size so we can reset them.
@@ -1198,6 +1199,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 		result.setStatic(Modifier.isStatic(modifiers));
 		result.setTransient(Modifier.isTransient(modifiers));
 		result.setVolatile(Modifier.isVolatile(modifiers));
+		result.setDeprecated(field.isDeprecated());
 		setVisibility(result, modifiers);
 		result.setType(createTypeReference(field.getType()));
 		createAnnotationValues(field, result);
@@ -1243,7 +1245,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 		result.internalSetIdentifier(fqn.toString());
 		result.setSimpleName(name);
 		setVisibility(result, method.getModifiers());
-
+		result.setDeprecated(method.isDeprecated());
 		if (parameterTypes.length > 0) {
 			result.setVarArgs(method.isVarargs());
 			String[] parameterNames = null;

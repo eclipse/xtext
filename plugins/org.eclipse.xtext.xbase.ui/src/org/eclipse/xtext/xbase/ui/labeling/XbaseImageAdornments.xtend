@@ -22,21 +22,21 @@ class XbaseImageAdornments {
 			.or(abstract, ABSTRACT)
 			.or(final, FINAL) 
 			.or(static, STATIC)
-			.or(deprecated, DEPRECATED)
+			.or(deprecatedMember, DEPRECATED)
 	}
 	
 	def dispatch get(JvmField it) {
 		0	
 			.or(final, FINAL) 
 			.or(static, STATIC) 
-			.or(deprecated, DEPRECATED)
+			.or(deprecatedMember, DEPRECATED)
 			.or(volatile, VOLATILE)
 			.or(transient, TRANSIENT)
 	}
 	
 	def dispatch get(JvmConstructor it) {
 		CONSTRUCTOR	
-			.or(deprecated, DEPRECATED)
+			.or(deprecatedMember, DEPRECATED)
 	}
 	
 	def dispatch get(JvmOperation it) {
@@ -45,7 +45,7 @@ class XbaseImageAdornments {
 			.or(final, FINAL) 
 			.or(synchronized, SYNCHRONIZED) 
 			.or(static, STATIC) 
-			.or(deprecated, DEPRECATED)
+			.or(deprecatedMember, DEPRECATED)
 			.or(native, 0x4000) // JavaElementImageDescription.NATIVE not available before 3.7
 			
 		if(eResource?.resourceSet != null) {

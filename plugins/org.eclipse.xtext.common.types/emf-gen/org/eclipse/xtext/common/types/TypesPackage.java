@@ -308,13 +308,23 @@ public interface TypesPackage extends EPackage
 	int JVM_MEMBER__IDENTIFIER = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Deprecated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.7
+	 */
+	int JVM_MEMBER__DEPRECATED = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Jvm Member</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_MEMBER_FEATURE_COUNT = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 4;
+	int JVM_MEMBER_FEATURE_COUNT = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImpl <em>Jvm Declared Type</em>}' class.
@@ -370,6 +380,16 @@ public interface TypesPackage extends EPackage
 	 * @ordered
 	 */
 	int JVM_DECLARED_TYPE__IDENTIFIER = JVM_MEMBER__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Deprecated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.7
+	 */
+	int JVM_DECLARED_TYPE__DEPRECATED = JVM_MEMBER__DEPRECATED;
 
 	/**
 	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
@@ -721,6 +741,15 @@ public interface TypesPackage extends EPackage
 	int JVM_ANNOTATION_TYPE__IDENTIFIER = JVM_DECLARED_TYPE__IDENTIFIER;
 
 	/**
+	 * The feature id for the '<em><b>Deprecated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ANNOTATION_TYPE__DEPRECATED = JVM_DECLARED_TYPE__DEPRECATED;
+
+	/**
 	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -846,6 +875,15 @@ public interface TypesPackage extends EPackage
 	 * @ordered
 	 */
 	int JVM_ENUMERATION_TYPE__IDENTIFIER = JVM_DECLARED_TYPE__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Deprecated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ENUMERATION_TYPE__DEPRECATED = JVM_DECLARED_TYPE__DEPRECATED;
 
 	/**
 	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
@@ -984,6 +1022,15 @@ public interface TypesPackage extends EPackage
 	int JVM_FEATURE__IDENTIFIER = JVM_MEMBER__IDENTIFIER;
 
 	/**
+	 * The feature id for the '<em><b>Deprecated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_FEATURE__DEPRECATED = JVM_MEMBER__DEPRECATED;
+
+	/**
 	 * The feature id for the '<em><b>Local Classes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1056,6 +1103,15 @@ public interface TypesPackage extends EPackage
 	 * @ordered
 	 */
 	int JVM_FIELD__IDENTIFIER = JVM_FEATURE__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Deprecated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_FIELD__DEPRECATED = JVM_FEATURE__DEPRECATED;
 
 	/**
 	 * The feature id for the '<em><b>Local Classes</b></em>' containment reference list.
@@ -1199,6 +1255,15 @@ public interface TypesPackage extends EPackage
 	int JVM_ENUMERATION_LITERAL__IDENTIFIER = JVM_FIELD__IDENTIFIER;
 
 	/**
+	 * The feature id for the '<em><b>Deprecated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ENUMERATION_LITERAL__DEPRECATED = JVM_FIELD__DEPRECATED;
+
+	/**
 	 * The feature id for the '<em><b>Local Classes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1337,6 +1402,15 @@ public interface TypesPackage extends EPackage
 	 * @ordered
 	 */
 	int JVM_GENERIC_TYPE__IDENTIFIER = JVM_DECLARED_TYPE__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Deprecated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_GENERIC_TYPE__DEPRECATED = JVM_DECLARED_TYPE__DEPRECATED;
 
 	/**
 	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
@@ -1729,6 +1803,15 @@ public interface TypesPackage extends EPackage
 	int JVM_EXECUTABLE__IDENTIFIER = JVM_FEATURE__IDENTIFIER;
 
 	/**
+	 * The feature id for the '<em><b>Deprecated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_EXECUTABLE__DEPRECATED = JVM_FEATURE__DEPRECATED;
+
+	/**
 	 * The feature id for the '<em><b>Local Classes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1839,6 +1922,15 @@ public interface TypesPackage extends EPackage
 	int JVM_CONSTRUCTOR__IDENTIFIER = JVM_EXECUTABLE__IDENTIFIER;
 
 	/**
+	 * The feature id for the '<em><b>Deprecated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_CONSTRUCTOR__DEPRECATED = JVM_EXECUTABLE__DEPRECATED;
+
+	/**
 	 * The feature id for the '<em><b>Local Classes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1947,6 +2039,15 @@ public interface TypesPackage extends EPackage
 	 * @ordered
 	 */
 	int JVM_OPERATION__IDENTIFIER = JVM_EXECUTABLE__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Deprecated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_OPERATION__DEPRECATED = JVM_EXECUTABLE__DEPRECATED;
 
 	/**
 	 * The feature id for the '<em><b>Local Classes</b></em>' containment reference list.
@@ -3425,6 +3526,18 @@ public interface TypesPackage extends EPackage
 	EAttribute getJvmMember_Identifier();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmMember#isDeprecated <em>Deprecated</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Deprecated</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmMember#isDeprecated()
+	 * @see #getJvmMember()
+	 * @generated
+	 * @since 2.7
+	 */
+	EAttribute getJvmMember_Deprecated();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmFeature <em>Jvm Feature</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4728,6 +4841,14 @@ public interface TypesPackage extends EPackage
 		 * @generated
 		 */
 		EAttribute JVM_MEMBER__IDENTIFIER = eINSTANCE.getJvmMember_Identifier();
+
+		/**
+		 * The meta object literal for the '<em><b>Deprecated</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JVM_MEMBER__DEPRECATED = eINSTANCE.getJvmMember_Deprecated();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmFeatureImpl <em>Jvm Feature</em>}' class.
