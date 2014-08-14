@@ -29,11 +29,6 @@ public class FeatureScopeSessionWithoutLocalElements extends AbstractNestedFeatu
 	}
 	
 	@Override
-	protected void addDeepLocalElements(QualifiedName name, List<IEObjectDescription> result) {
-		// don't add any local elements from the parent
-	}
-	
-	@Override
 	protected void addExtensionProviders(List<ExpressionBucket> result) {
 		// don't add any extension providers
 	}
@@ -41,11 +36,6 @@ public class FeatureScopeSessionWithoutLocalElements extends AbstractNestedFeatu
 	@Override
 	/* @Nullable */
 	public IEObjectDescription getLocalElement(QualifiedName name) {
-		return null;
-	}
-	
-	@Override
-	public IEObjectDescription getDeepLocalElement(QualifiedName name) {
 		return null;
 	}
 	

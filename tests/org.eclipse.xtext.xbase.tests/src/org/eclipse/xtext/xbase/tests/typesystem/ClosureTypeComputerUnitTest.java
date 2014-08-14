@@ -592,10 +592,6 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 			throw new UnsupportedOperationException();
 		}
 		
-		public IEObjectDescription getDeepLocalElement(QualifiedName name) {
-			return null;
-		}
-
 		@Override
 		protected FeatureScopes getFeatureScopes() {
 			throw new UnsupportedOperationException();
