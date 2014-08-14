@@ -40,6 +40,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.util.FeatureCallAsTypeLiteralHelper;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -380,7 +381,7 @@ public class FeatureScopes implements IFeatureNames {
 	protected IScope createDynamicExtensionsScope(QualifiedName implicitFirstArgumentName, EObject featureCall,
 			IFeatureScopeSession captureLayer, IFeatureScopeSession session, IResolvedTypes resolvedTypes, IScope parent, boolean all) {
 		if (all) {
-			List<IEObjectDescription> firstArguments = session.getDeepLocalElements(implicitFirstArgumentName);
+			List<IEObjectDescription> firstArguments = getDeepLocalElements(session, implicitFirstArgumentName);
 			switch(firstArguments.size()) {
 				case 0:
 					return createDynamicExtensionsScope(null, null, true, featureCall, parent, captureLayer);
@@ -401,7 +402,7 @@ public class FeatureScopes implements IFeatureNames {
 					return parent;
 			}
 		} else {
-			IEObjectDescription firstArgumentDescription = session.getDeepLocalElement(implicitFirstArgumentName);
+			IEObjectDescription firstArgumentDescription = getDeepLocalElement(session, implicitFirstArgumentName);
 			if (firstArgumentDescription != null) {
 				return createDynamicExtensionsScope(implicitFirstArgumentName, firstArgumentDescription, featureCall, captureLayer, session, resolvedTypes,
 						parent);
@@ -409,6 +410,29 @@ public class FeatureScopes implements IFeatureNames {
 				return createDynamicExtensionsScope(null, null, true, featureCall, parent, captureLayer);
 			}
 		}
+	}
+	
+	protected IEObjectDescription getDeepLocalElement(IFeatureScopeSession session, QualifiedName name) {
+		while(session != null) {
+			IEObjectDescription element = session.getLocalElement(name);
+			if (element != null) {
+				return element;
+			}
+			session = session.getNextCaptureLayer();
+		}
+		return null;
+	}
+	
+	protected List<IEObjectDescription> getDeepLocalElements(IFeatureScopeSession session, QualifiedName name) {
+		List<IEObjectDescription> result = Lists.newArrayList();
+		while(session != null) {
+			IEObjectDescription element = session.getLocalElement(name);
+			if (element != null) {
+				result.add(element);
+			}
+			session = session.getNextCaptureLayer();
+		}
+		return result;
 	}
 
 	protected IScope createDynamicExtensionsScope(QualifiedName implicitFirstArgumentName, IEObjectDescription firstArgumentDescription, EObject featureCall,

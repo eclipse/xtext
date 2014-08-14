@@ -77,11 +77,6 @@ public class RootFeatureScopeSession extends AbstractFeatureScopeSession {
 		return null;
 	}
 	
-	/* @Nullable */
-	public IEObjectDescription getDeepLocalElement(QualifiedName name) {
-		return null;
-	}
-	
 	@Override
 	public List<IEObjectDescription> getLocalElements() {
 		return Collections.emptyList();

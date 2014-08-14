@@ -94,15 +94,6 @@ public abstract class AbstractNestedFeatureScopeSession extends AbstractFeatureS
 		return parent.getLocalElement(name);
 	}
 	
-	public IEObjectDescription getDeepLocalElement(QualifiedName name) {
-		return parent.getDeepLocalElement(name);
-	}
-	
-	@Override
-	protected void addDeepLocalElements(QualifiedName name, List<IEObjectDescription> result) {
-		parent.addDeepLocalElements(name, result);
-	}
-	
 	@Override
 	protected void addLocalElements(List<IEObjectDescription> result) {
 		parent.addLocalElements(result);
