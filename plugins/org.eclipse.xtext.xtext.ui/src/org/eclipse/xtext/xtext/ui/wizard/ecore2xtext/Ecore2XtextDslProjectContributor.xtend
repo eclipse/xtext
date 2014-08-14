@@ -53,10 +53,10 @@ class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContributor 
 			bean = StandaloneSetup {
 				scanClassPath  = true
 				platformUri = "${runtimeProject}/.."
-				«FOR ePackageInfo : projectInfo.EPackageInfos.map[EPackageJavaFQN].filterNull»
+				«FOR ePackageInfo : projectInfo.EPackageInfos.filter[genmodelURI.fileExtension != "xcore"].map[EPackageJavaFQN].filterNull»
 					registerGeneratedEPackage = "«ePackageInfo»"
 				«ENDFOR»
-				«FOR genmodelURI : projectInfo.EPackageInfos.map[genmodelURI.toString].toSet»
+				«FOR genmodelURI : projectInfo.EPackageInfos.filter[genmodelURI.fileExtension != "xcore"].map[genmodelURI.toString].toSet»
 					registerGenModelFile = "«genmodelURI»"
 				«ENDFOR»
 			}
@@ -76,6 +76,9 @@ class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContributor 
 				projectNameRt = projectName
 				projectNameUi = "${projectName}.ui"
 				language = auto-inject {
+					«FOR genmodelURI : projectInfo.EPackageInfos.filter[genmodelURI.fileExtension == "xcore"].map[genmodelURI.toString].toSet»
+						loadedResource = "«genmodelURI»"
+					«ENDFOR»
 					uri = grammarURI
 		
 					// Java API to access grammar elements (required by several other fragments)
