@@ -177,6 +177,7 @@ public class CompilationTestHelper {
 			result.setResources(resourcesToCheck);
 			result.setResourceSet(resourceSet);
 			result.setOutputConfigurations(getOutputConfigurations());
+			result.doGenerate();
 			acceptor.accept(result);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -356,7 +357,7 @@ public class CompilationTestHelper {
 			return result;
 		}
 		
-		private void doIndex() {
+		protected void doIndex() {
 			if (index == null) {
 				// indexing
 				List<IResourceDescription> descriptions = newArrayList();
@@ -370,14 +371,14 @@ public class CompilationTestHelper {
 			}
 		}
 		
-		private void doLinking() {
+		protected void doLinking() {
 			doIndex();
 			for (Resource resource : sources) {
 				EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl);
 			}
 		}
 		
-		private void doValidation() {
+		protected void doValidation() {
 			if (allErrorsAndWarnings == null) {
 				
 				doLinking();
@@ -396,7 +397,7 @@ public class CompilationTestHelper {
 			}
 		}
 		
-		private void doGenerate() {
+		protected void doGenerate() {
 			if (access == null) {
 				doValidation();
 				access = fileSystemAccessProvider.get();
@@ -421,7 +422,7 @@ public class CompilationTestHelper {
 			}
 		}
 		
-		private void doCompile() {
+		protected void doCompile() {
 			if (compiledClasses == null || classLoader==null) {
 				doGenerate();
 				try {
