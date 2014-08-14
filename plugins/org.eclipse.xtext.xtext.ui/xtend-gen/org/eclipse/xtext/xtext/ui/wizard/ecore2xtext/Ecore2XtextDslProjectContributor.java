@@ -1,5 +1,6 @@
 package org.eclipse.xtext.xtext.ui.wizard.ecore2xtext;
 
+import com.google.common.base.Objects;
 import java.util.Collection;
 import java.util.Set;
 import org.eclipse.core.resources.IFile;
@@ -111,12 +112,20 @@ public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContr
     _builder.newLine();
     {
       Collection<EPackageInfo> _ePackageInfos = this.projectInfo.getEPackageInfos();
-      final Function1<EPackageInfo, String> _function = new Function1<EPackageInfo, String>() {
+      final Function1<EPackageInfo, Boolean> _function = new Function1<EPackageInfo, Boolean>() {
+        public Boolean apply(final EPackageInfo it) {
+          URI _genmodelURI = it.getGenmodelURI();
+          String _fileExtension = _genmodelURI.fileExtension();
+          return Boolean.valueOf((!Objects.equal(_fileExtension, "xcore")));
+        }
+      };
+      Iterable<EPackageInfo> _filter = IterableExtensions.<EPackageInfo>filter(_ePackageInfos, _function);
+      final Function1<EPackageInfo, String> _function_1 = new Function1<EPackageInfo, String>() {
         public String apply(final EPackageInfo it) {
           return it.getEPackageJavaFQN();
         }
       };
-      Iterable<String> _map = IterableExtensions.<EPackageInfo, String>map(_ePackageInfos, _function);
+      Iterable<String> _map = IterableExtensions.<EPackageInfo, String>map(_filter, _function_1);
       Iterable<String> _filterNull = IterableExtensions.<String>filterNull(_map);
       for(final String ePackageInfo : _filterNull) {
         _builder.append("\t\t");
@@ -128,13 +137,21 @@ public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContr
     }
     {
       Collection<EPackageInfo> _ePackageInfos_1 = this.projectInfo.getEPackageInfos();
-      final Function1<EPackageInfo, String> _function_1 = new Function1<EPackageInfo, String>() {
+      final Function1<EPackageInfo, Boolean> _function_2 = new Function1<EPackageInfo, Boolean>() {
+        public Boolean apply(final EPackageInfo it) {
+          URI _genmodelURI = it.getGenmodelURI();
+          String _fileExtension = _genmodelURI.fileExtension();
+          return Boolean.valueOf((!Objects.equal(_fileExtension, "xcore")));
+        }
+      };
+      Iterable<EPackageInfo> _filter_1 = IterableExtensions.<EPackageInfo>filter(_ePackageInfos_1, _function_2);
+      final Function1<EPackageInfo, String> _function_3 = new Function1<EPackageInfo, String>() {
         public String apply(final EPackageInfo it) {
           URI _genmodelURI = it.getGenmodelURI();
           return _genmodelURI.toString();
         }
       };
-      Iterable<String> _map_1 = IterableExtensions.<EPackageInfo, String>map(_ePackageInfos_1, _function_1);
+      Iterable<String> _map_1 = IterableExtensions.<EPackageInfo, String>map(_filter_1, _function_3);
       Set<String> _set = IterableExtensions.<String>toSet(_map_1);
       for(final String genmodelURI : _set) {
         _builder.append("\t\t");
@@ -189,6 +206,32 @@ public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContr
     _builder.append("\t\t");
     _builder.append("language = auto-inject {");
     _builder.newLine();
+    {
+      Collection<EPackageInfo> _ePackageInfos_2 = this.projectInfo.getEPackageInfos();
+      final Function1<EPackageInfo, Boolean> _function_4 = new Function1<EPackageInfo, Boolean>() {
+        public Boolean apply(final EPackageInfo it) {
+          URI _genmodelURI = it.getGenmodelURI();
+          String _fileExtension = _genmodelURI.fileExtension();
+          return Boolean.valueOf(Objects.equal(_fileExtension, "xcore"));
+        }
+      };
+      Iterable<EPackageInfo> _filter_2 = IterableExtensions.<EPackageInfo>filter(_ePackageInfos_2, _function_4);
+      final Function1<EPackageInfo, String> _function_5 = new Function1<EPackageInfo, String>() {
+        public String apply(final EPackageInfo it) {
+          URI _genmodelURI = it.getGenmodelURI();
+          return _genmodelURI.toString();
+        }
+      };
+      Iterable<String> _map_2 = IterableExtensions.<EPackageInfo, String>map(_filter_2, _function_5);
+      Set<String> _set_1 = IterableExtensions.<String>toSet(_map_2);
+      for(final String genmodelURI_1 : _set_1) {
+        _builder.append("\t\t\t");
+        _builder.append("loadedResource = \"");
+        _builder.append(genmodelURI_1, "\t\t\t");
+        _builder.append("\"");
+        _builder.newLineIfNotEmpty();
+      }
+    }
     _builder.append("\t\t\t");
     _builder.append("uri = grammarURI");
     _builder.newLine();
