@@ -40,12 +40,10 @@ import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.LazyStringInputStream;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.TextRegion;
-import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator.IDiagnosticAcceptor;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.google.inject.name.Named;
 
 /**
@@ -321,16 +319,12 @@ public class XtextResource extends ResourceImpl {
 
 	@Override
 	public String getURIFragment(final EObject object) {
-		return cache.get(Tuples.pair(object, "fragment"), this, new Provider<String>() {
-			public String get() {
-				if (fragmentProvider != null) {
-					String result = fragmentProvider.getFragment(object, fragmentProviderFallback);
-					return result;
-				}
-				String result = XtextResource.super.getURIFragment(object);
-				return result;
-			}
-		});
+		if (fragmentProvider != null) {
+			String result = fragmentProvider.getFragment(object, fragmentProviderFallback);
+			return result;
+		}
+		String result = XtextResource.super.getURIFragment(object);
+		return result;
 	}
 
 	@Override
