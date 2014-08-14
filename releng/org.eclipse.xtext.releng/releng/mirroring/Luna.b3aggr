@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<aggregator:Aggregation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:aggregator="http://www.eclipse.org/b3/2011/aggregator/1.1.0" label="Latest" buildRoot="./Latest/" packedStrategy="SKIP">
-  <validationSets description="Most recent TP" label="Latest">
+<aggregator:Aggregation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:aggregator="http://www.eclipse.org/b3/2011/aggregator/1.1.0" label="Luna" buildRoot="./Luna/" packedStrategy="SKIP">
+  <validationSets description="Most recent TP" label="Luna">
     <contributions href="xpand-mwe-orbit.b3aggrcon#/"/>
-    <contributions label="Latest">
-      <repositories location="http://download.eclipse.org/eclipse/updates/4.5-I-builds/">
+    <contributions label="Luna">
+      <repositories location="http://download.eclipse.org/eclipse/updates/4.4/">
         <bundles name="org.eclipse.pde.core"/>
         <bundles name="org.eclipse.pde.ui"/>
         <bundles name="org.eclipse.ui.cheatsheets"/>
@@ -23,10 +23,6 @@
       </repositories>
       <repositories location="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit">
         <bundles name="org.junit" versionRange="[3.8.2.v3_8_2_v20100427-1100]"/>
-      </repositories>
-      <repositories location="http://download.eclipse.org/modeling/emf/emf/updates/nightly/">
-        <features name="org.eclipse.emf.feature.group" versionRange="2.11.0"/>
-        <features name="org.eclipse.emf.source.feature.group" versionRange="2.11.0"/>
       </repositories>
     </contributions>
   </validationSets>
