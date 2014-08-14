@@ -73,15 +73,15 @@ class ImmutableProcessor implements TransformationParticipant<MutableClassDeclar
 						int result = 1;
 					«ENDIF»
 					«FOR f : fields»
-						«IF f.type.is(primitiveBoolean)»
+						«IF f.type == primitiveBoolean»
 							result = prime * result + («f.simpleName» ? 1231 : 1237);
 						«ELSEIF #{primitiveInt, primitiveChar, primitiveByte, primitiveShort}.contains(f.type)»
 							result = prime * result + «f.simpleName»;
-						«ELSEIF primitiveLong.is(f.type)»
+						«ELSEIF primitiveLong == f.type»
 							result = prime * result + (int) («f.simpleName» ^ («f.simpleName» >>> 32));
-						«ELSEIF primitiveFloat.is(f.type)»
+						«ELSEIF primitiveFloat == f.type»
 							result = prime * result + Float.floatToIntBits(«f.simpleName»);
-						«ELSEIF primitiveDouble.is(f.type)»
+						«ELSEIF primitiveDouble == f.type»
 							result = prime * result + (int) (Double.doubleToLongBits(«f.simpleName») ^ (Double.doubleToLongBits(«f.simpleName») >>> 32));
 						«ELSE»
 							result = prime * result + ((«f.simpleName»== null) ? 0 : «f.simpleName».hashCode());

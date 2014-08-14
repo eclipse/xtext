@@ -375,7 +375,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 				
 					override doTransform(MutableFieldDeclaration it, extension TransformationContext context) {
 						validateLater[ |
-							if (type.inferred && type.is(primitiveBoolean))
+							if (type == primitiveBoolean)
 								addWarning("The type was inferred and boolean")
 						]
 					}
@@ -3293,7 +3293,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 	}
 	
 	def void assertSameType(TypeReference first, TypeReference second) {
-		if (!first.is(second)) {
+		if (first != second) {
 			fail('''«first» does not refer to the same type as «second»''')
 		}
 	}
