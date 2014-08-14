@@ -171,25 +171,29 @@ public interface TypeReference extends Element {
 	 */
 	Iterable<? extends ResolvedMethod> getAllResolvedMethods();
 	
+//	/**
+//	 * Checks whether this {@link TypeReference} refers to the same type as the other one.
+//	 * @param other the type to test equivalence against
+//	 * @return true if this type and the given type are equivalent
+//	 * @since 2.7
+//	 */
+//	boolean is(TypeReference other);
+
 	/**
-	 * Checks whether this {@link TypeReference} refers to the same type as the other one.
-	 * @param other the type to test equivalence against
-	 * @return true if this type and the given type are equivalent
+	 * Checks whether this type reference equals the given type reference.
+	 * 
+	 * For type References where {@link #isInferred()} is <code>true</code>, the implementation is based on
+	 * identity of the underlying AST.
+	 *  
+	 * @param obj
+	 * @return whether the given obj is the same instance
 	 * @since 2.7
 	 */
-	boolean is(TypeReference other);
+	public boolean equals(Object obj);
 	
 	/**
-	 * Note that {@link TypeReference#isInferred() inferred} {@link TypeReference}s will never
-	 * be equal to explicit ones. During the validation and code generation phases however, 
-	 * you can use {@link #is(TypeReference)} to see whether an inferred type reference refers 
-	 * to the same type as another {@link TypeReference}
-	 * 
-	 * @param other the object to test equality against
-	 * @return whether the two objects are equal according to {@link Object#equals(Object)}
+	 * Value-based for all {@link TypeReference}s where {@link #isInferred()} is <code>false</code>.
 	 * @since 2.7
-	 * @deprecated use #is(TypeReference)
 	 */
-	@Deprecated
-	boolean operator_equals(Object other);
+	public int hashCode();
 }

@@ -243,10 +243,6 @@ public class TypeReferenceImpl extends AbstractDelegator<LightweightTypeReferenc
     return false;
   }
   
-  public boolean operator_equals(final Object other) {
-    return Objects.equal(this, other);
-  }
-  
   public boolean equals(final Object obj) {
     if ((obj instanceof TypeReferenceImpl)) {
       LightweightTypeReference _delegate = this.getDelegate();
@@ -262,12 +258,6 @@ public class TypeReferenceImpl extends AbstractDelegator<LightweightTypeReferenc
     LightweightTypeReference _delegate = this.getDelegate();
     String _identifier = _delegate.getIdentifier();
     return _identifier.hashCode();
-  }
-  
-  public boolean is(final TypeReference other) {
-    String _name = this.getName();
-    String _name_1 = other.getName();
-    return Objects.equal(_name, _name_1);
   }
   
   @Pure

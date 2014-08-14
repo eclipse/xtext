@@ -249,10 +249,6 @@ class TypeReferenceImpl extends AbstractDelegator<LightweightTypeReference> impl
 		return false
 	}
 	
-	override operator_equals(Object other) {
-		ObjectExtensions.operator_equals(this, other)
-	}
-	
 	override equals(Object obj) {
 		if (obj instanceof TypeReferenceImpl) {
 			return delegate.identifier == obj.delegate.identifier
@@ -264,34 +260,17 @@ class TypeReferenceImpl extends AbstractDelegator<LightweightTypeReference> impl
 		delegate.identifier.hashCode
 	}
 	
-	override is(TypeReference other) {
-		name == other.name
-	}
-	
 }
 
 class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedTypeReferenceImplCustom> implements TypeReference {
-	@Accessors TypeReference equivalent
 	LightweightTypeReference lightweightTypeReference
 	
 	def LightweightTypeReference getLightweightTypeReference() {
 		lightweightTypeReference
 	}
 	
-	def TypeReference getEquivalent() {
-		if (equivalent === null) {
-			if (delegate.equivalentComputed) {
-				lightweightTypeReference = compilationUnit.typeRefConverter.toLightweightReference(delegate)
-				equivalent = 	compilationUnit.toTypeReference(lightweightTypeReference)
-			}
-		}
-		equivalent
-	}
-	
-	@Delegate def TypeReference getEquivalent(String methodName) {
-		if (getEquivalent == null)
-			throw new IllegalStateException(methodName.message)
-		getEquivalent
+	@Delegate def TypeReference throwInferredTypeException(String methodName) {
+		throw new IllegalStateException(methodName.message)
 	}
 	
 	private def String message(String methodName) {
@@ -315,10 +294,6 @@ class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedTypeReferen
 	
 	override hashCode() {
 		delegate.hashCode
-	}
-	
-	override operator_equals(Object other) {
-		ObjectExtensions.operator_equals(this, other)
 	}
 	
 }

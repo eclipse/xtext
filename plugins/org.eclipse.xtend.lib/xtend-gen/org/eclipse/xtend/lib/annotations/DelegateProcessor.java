@@ -114,7 +114,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       boolean _xifexpression = false;
       boolean _or = false;
       TypeReference _type = this.getType(it);
-      boolean _equals = _type.operator_equals(null);
+      boolean _equals = Objects.equal(_type, null);
       if (_equals) {
         _or = true;
       } else {
