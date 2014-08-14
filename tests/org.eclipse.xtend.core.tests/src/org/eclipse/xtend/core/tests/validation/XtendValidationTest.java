@@ -2801,4 +2801,46 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				"}");
 		helper.assertWarning(file, XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION, "always true");
 	}
+	
+	@Test public void testConstantConditions_19() throws Exception {
+		XtendFile file = file(
+				"class Test {\n" + 
+				"	def m(String a) {\n" + 
+				"		if (a == a) {}\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertWarning(file, XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION, "always true");
+	}
+	
+	@Test public void testConstantConditions_20() throws Exception {
+		XtendFile file = file(
+				"class Test {\n" + 
+				"	def m(String a) {\n" + 
+				"		val b = a\n" + 
+				"		if (a != b) {}\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertWarning(file, XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION, "always false");
+	}
+	
+	@Test public void testConstantConditions_21() throws Exception {
+		XtendFile file = file(
+				"class Test {\n" + 
+				"	def m(String a, String b) {\n" + 
+				"		if (a == b) {}\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertNoIssues(file);
+	}
+	
+	@Test public void testConstantConditions_22() throws Exception {
+		XtendFile file = file(
+				"class Test {\n" + 
+				"	def m(String a, String b) {\n" + 
+				"		val c = b\n" + 
+				"		if (a == c) {}\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertNoIssues(file);
+	}
 }
