@@ -79,6 +79,7 @@ public class JvmFieldBuilder extends FieldVisitor implements Opcodes {
 		result.setStatic((access & ACC_STATIC) != 0);
 		result.setTransient((access & ACC_TRANSIENT) != 0);
 		result.setVolatile((access & ACC_VOLATILE) != 0);
+		result.setDeprecated((access & ACC_DEPRECATED) != 0);
 		proxies.setVisibility(access, result);
 		result.setType(proxies.createTypeReference(BinarySignatures.createTypeSignature(signature != null ? signature : desc), typeParameters));
     }

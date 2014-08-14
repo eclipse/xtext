@@ -14,6 +14,8 @@ Bug438740.java.txt
 ClassContainingEnum.java.txt
 ClassWithVarArgs.java.txt
 Concrete.java.txt
+DeprecatedClass.java.txt
+DeprecatedMembers.java.txt
 EmptyAbstractClass.java.txt
 Fields.java.txt
 GenericSuperClass.java.txt

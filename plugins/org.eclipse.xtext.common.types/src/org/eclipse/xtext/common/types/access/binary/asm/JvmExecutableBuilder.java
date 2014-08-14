@@ -117,6 +117,7 @@ public class JvmExecutableBuilder extends MethodVisitor implements Opcodes {
 		result.internalSetIdentifier(fqName.toString());
 		proxies.setVisibility(access, result);
 		result.setVarArgs((access & ACC_VARARGS) != 0);
+		result.setDeprecated((access & ACC_DEPRECATED) != 0);
 
 		List<BinaryGenericTypeSignature> exceptionSignatures = binarySignature.getExceptionTypes();
 		if (exceptionSignatures.size() == 0) {

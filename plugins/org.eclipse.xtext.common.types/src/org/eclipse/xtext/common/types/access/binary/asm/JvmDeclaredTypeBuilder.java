@@ -184,6 +184,7 @@ public class JvmDeclaredTypeBuilder extends ClassVisitor implements Opcodes {
     protected void setTypeModifiers(int accessFlags) {
 		result.setAbstract((accessFlags & ACC_ABSTRACT) != 0);
 		result.setStatic((accessFlags & ACC_STATIC) != 0);
+		result.setDeprecated((accessFlags & ACC_DEPRECATED) != 0);
 		if (result.eClass() != TypesPackage.Literals.JVM_ENUMERATION_TYPE) {
 			if (result.isStatic()) {
 				offset = 0;
