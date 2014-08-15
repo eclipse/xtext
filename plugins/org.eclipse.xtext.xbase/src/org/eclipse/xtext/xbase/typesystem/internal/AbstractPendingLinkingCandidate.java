@@ -42,10 +42,9 @@ import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.conformance.RawTypeConformanceComputer;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.PendingLinkingCandidateResolver;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
@@ -142,13 +141,13 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	 */
 	protected String getFeatureParameterTypesAsString() {
 		if(getFeature() instanceof JvmExecutable) {
-			OwnedConverter ownedConverter = new OwnedConverter(getState().getReferenceOwner());
+			ITypeReferenceOwner referenceOwner = getState().getReferenceOwner();
 			List<JvmFormalParameter> parameters = ((JvmExecutable) getFeature()).getParameters();
 			StringBuilder b = new StringBuilder();
 			b.append("(");
 			for(int i=0; i<parameters.size(); ++i) {
 				JvmTypeReference parameterType = parameters.get(i).getParameterType();
-				LightweightTypeReference typeReference = ownedConverter.toLightweightReference(parameterType);
+				LightweightTypeReference typeReference = referenceOwner.toLightweightTypeReference(parameterType);
 				b.append(typeReference.getHumanReadableName());
 				if(i < parameters.size()-1)
 					b.append(", ");
@@ -191,11 +190,11 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	protected String getTypeParameterAsString(JvmTypeParameter typeParameter) {
 		StringBuilder b = new StringBuilder();
 		b.append(typeParameter.getName());
-		OwnedConverter ownedConverter = new OwnedConverter(getState().getReferenceOwner());
+		ITypeReferenceOwner referenceOwner = getState().getReferenceOwner();
 		if(!typeParameter.getConstraints().isEmpty()) {
 			for(int j=0; j<typeParameter.getConstraints().size(); ++j) {
 				JvmTypeConstraint constraint = typeParameter.getConstraints().get(j);
-				LightweightTypeReference typeRef = ownedConverter.apply(constraint.getTypeReference());
+				LightweightTypeReference typeRef = referenceOwner.toLightweightTypeReference(constraint.getTypeReference());
 				if(constraint instanceof JvmUpperBound) {
 					if(typeRef.isType(Object.class))
 						continue;
@@ -384,8 +383,9 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		TypeParameterSubstitutor<?> substitutor = createArgumentTypeSubstitutor();
 		List<LightweightTypeReference> unhandledExceptions = null;
 		List<LightweightTypeReference> expectedExceptions = getState().getExpectedExceptions();
+		ITypeReferenceOwner referenceOwner = getState().getReferenceOwner();
 		outer: for(JvmTypeReference typeReference: executable.getExceptions()) {
-			LightweightTypeReference exception = getState().getConverter().toLightweightReference(typeReference);
+			LightweightTypeReference exception = referenceOwner.toLightweightTypeReference(typeReference);
 			LightweightTypeReference resolvedException = substitutor.substitute(exception);
 			if (resolvedException.isSubtypeOf(Throwable.class) && !resolvedException.isSubtypeOf(RuntimeException.class)) {
 				for (LightweightTypeReference expectedException : expectedExceptions) {
@@ -713,7 +713,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			JvmTypeParameter declaration = typeParameters.get(i);
 			TypeConformanceComputer conformanceComputer = argument.getOwner().getServices().getTypeConformanceComputer();
 			if (argument.getType() != declaration) {
-				LightweightTypeReference reference = new ParameterizedTypeReference(argument.getOwner(), declaration);
+				LightweightTypeReference reference = argument.getOwner().newParameterizedTypeReference(declaration);
 				for(LightweightTypeReference superType: reference.getSuperTypes()) {
 					LightweightTypeReference substitutedSuperType = substitutor.substitute(superType);
 					if ((conformanceComputer.isConformant(substitutedSuperType, argument, 
@@ -973,13 +973,13 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			List<JvmFormalParameter> rightParameters = ((JvmExecutable) right.getFeature()).getParameters();
 			if (parameters.size() == rightParameters.size()) {
 				int result = 0;
-				OwnedConverter converter = new OwnedConverter(getState().getReferenceOwner());
-				OwnedConverter rightConverter = new OwnedConverter(right.getState().getReferenceOwner());
-				TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(getDeclaratorParameterMapping(), getState().getReferenceOwner());
+				ITypeReferenceOwner leftReferenceOwner = getState().getReferenceOwner();
+				ITypeReferenceOwner rightReferenceOwner = right.getState().getReferenceOwner();
+				TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(getDeclaratorParameterMapping(), leftReferenceOwner);
 				TypeParameterByConstraintSubstitutor rightSubstitutor = new TypeParameterByConstraintSubstitutor(right.getDeclaratorParameterMapping(), right.getState().getReferenceOwner());
 				for(int i = 0; i < parameters.size(); i++) {
-					LightweightTypeReference parameterType = converter.toLightweightReference(parameters.get(i).getParameterType());
-					LightweightTypeReference rightParameterType = rightConverter.toLightweightReference(rightParameters.get(i).getParameterType());
+					LightweightTypeReference parameterType = leftReferenceOwner.toLightweightTypeReference(parameters.get(i).getParameterType());
+					LightweightTypeReference rightParameterType = rightReferenceOwner.toLightweightTypeReference(rightParameters.get(i).getParameterType());
 					if (!parameterType.isResolved() || !rightParameterType.isResolved()) {
 						result += compareDeclaredTypes(
 								substitutor.substitute(parameterType),

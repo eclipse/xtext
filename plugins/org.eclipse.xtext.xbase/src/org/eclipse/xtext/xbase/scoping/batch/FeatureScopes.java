@@ -182,7 +182,7 @@ public class FeatureScopes implements IFeatureNames {
 				List<JvmType> rawTypes = synonymType.getRawTypes();
 				ConformanceFlags.sanityCheck(flags);
 				SynonymTypeBucket bucket = new SynonymTypeBucket(id++, rawTypes, resolvedFeaturesProvider, flags);
-				CompoundTypeReference compoundTypeReference = new CompoundTypeReference(synonymType.getOwner(), true);
+				CompoundTypeReference compoundTypeReference = synonymType.getOwner().newCompoundTypeReference(true);
 				compoundTypeReference.addComponent(featureDeclarator);
 				compoundTypeReference.addComponent(synonymType);
 				wrapper.set(new ReceiverFeatureScope(wrapper.get(), session, receiver, compoundTypeReference, implicit, asAbstractFeatureCall(featureCall), bucket, receiverFeature, operatorMapping, validStaticScope));

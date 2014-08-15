@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmInnerTypeReference;
 import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -35,9 +36,8 @@ import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 import com.google.inject.Inject;
@@ -132,6 +132,13 @@ public class TypeReferenceSerializer {
 		} else if (type instanceof JvmGenericArrayTypeReference) {
 			serialize(((JvmGenericArrayTypeReference) type).getComponentType(), context, tracedAppendable, withoutConstraints, paramsToWildcard, paramsToObject, true);
 			tracedAppendable.append("[]");
+		} else if (type instanceof JvmInnerTypeReference) {
+			JvmInnerTypeReference casted = (JvmInnerTypeReference) type;
+			JvmParameterizedTypeReference outer = casted.getOuter();
+			serialize(outer, context, tracedAppendable, withoutConstraints, paramsToWildcard, paramsToObject, true);
+			tracedAppendable.append(".");
+			tracedAppendable.append(type.getType().getSimpleName());
+			serializeTypeArguments(casted, context, tracedAppendable, withoutConstraints, paramsToWildcard, paramsToObject);
 		} else if (type instanceof JvmParameterizedTypeReference) {
 			JvmParameterizedTypeReference parameterized = (JvmParameterizedTypeReference) type;
 			if ((paramsToWildcard || paramsToObject) && parameterized.getType() instanceof JvmTypeParameter) {
@@ -155,16 +162,7 @@ public class TypeReferenceSerializer {
 			} else {
 				tracedAppendable.append(jvmType);
 			}
-			if (!parameterized.getArguments().isEmpty()) {
-				tracedAppendable.append("<");
-				for(int i = 0; i < parameterized.getArguments().size(); i++) {
-					if (i != 0) {
-						tracedAppendable.append(", ");
-					}
-					serialize(parameterized.getArguments().get(i), context, tracedAppendable, withoutConstraints, paramsToWildcard, paramsToObject, false);
-				}
-				tracedAppendable.append(">");
-			}
+			serializeTypeArguments(parameterized, context, tracedAppendable, withoutConstraints, paramsToWildcard, paramsToObject);
 		} else if (type instanceof JvmAnyTypeReference) {
 			tracedAppendable.append("Object");
 		} else if (type instanceof JvmMultiTypeReference) {
@@ -187,9 +185,23 @@ public class TypeReferenceSerializer {
 			throw new IllegalArgumentException(String.valueOf(type));
 		}
 	}
+
+	private void serializeTypeArguments(JvmParameterizedTypeReference reference, EObject context, IAppendable tracedAppendable, boolean withoutConstraints,
+			boolean paramsToWildcard, boolean paramsToObject) {
+		if (!reference.getArguments().isEmpty()) {
+			tracedAppendable.append("<");
+			for(int i = 0; i < reference.getArguments().size(); i++) {
+				if (i != 0) {
+					tracedAppendable.append(", ");
+				}
+				serialize(reference.getArguments().get(i), context, tracedAppendable, withoutConstraints, paramsToWildcard, paramsToObject, false);
+			}
+			tracedAppendable.append(">");
+		}
+	}
 	
 	public JvmTypeReference resolveMultiType(JvmTypeReference reference, EObject context) {
 		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, context.eResource().getResourceSet());
-		return new OwnedConverter(owner).toLightweightReference(reference).toJavaCompliantTypeReference();
+		return owner.toLightweightTypeReference(reference).toJavaCompliantTypeReference();
 	}
 }

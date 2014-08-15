@@ -25,7 +25,6 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XPostfixOperation;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 
 import com.google.common.collect.Lists;
 
@@ -108,7 +107,7 @@ public class FeatureLinkHelper {
 	/* @Nullable */
 	public LightweightTypeReference getExpectedReceiverType(JvmIdentifiableElement linkedFeature, LightweightTypeReference receiverType) {
 		if (receiverType.isMultiType() && linkedFeature instanceof JvmMember) {
-			ParameterizedTypeReference declaratorReference = new ParameterizedTypeReference(receiverType.getOwner(), ((JvmMember) linkedFeature).getDeclaringType());
+			LightweightTypeReference declaratorReference = receiverType.getOwner().newParameterizedTypeReference(((JvmMember) linkedFeature).getDeclaringType());
 			if (!declaratorReference.isAssignableFrom(receiverType.toJavaType())) {
 				for(LightweightTypeReference multiTypeComponent: receiverType.getMultiTypeComponents()) {
 					if (declaratorReference.isAssignableFrom(multiTypeComponent)) {

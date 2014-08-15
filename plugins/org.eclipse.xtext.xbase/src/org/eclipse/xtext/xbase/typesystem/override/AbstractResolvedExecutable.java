@@ -20,8 +20,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.ConstraintVisitingInfo;
 import org.eclipse.xtext.xbase.typesystem.util.RawTypeSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
@@ -124,10 +122,10 @@ public abstract class AbstractResolvedExecutable implements IResolvedExecutable 
 		if (unresolved == null) {
 			ITypeReferenceOwner owner = getContextType().getOwner();
 			JvmType objectType = owner.getServices().getTypeReferences().findDeclaredType(Object.class, owner.getContextResourceSet());
-			return new ParameterizedTypeReference(owner, objectType);
+			return owner.newParameterizedTypeReference(objectType);
 		}
-		OwnedConverter converter = new OwnedConverter(getContextType().getOwner());
-		LightweightTypeReference unresolvedLightweight = converter.toLightweightReference(unresolved);
+		ITypeReferenceOwner owner = getContextType().getOwner();
+		LightweightTypeReference unresolvedLightweight = owner.toLightweightTypeReference(unresolved);
 		if (unresolvedLightweight.isPrimitive() || unresolvedLightweight.isPrimitiveVoid())
 			return unresolvedLightweight;
 		TypeParameterSubstitutor<?> substitutor = getSubstitutor();
@@ -164,8 +162,16 @@ public abstract class AbstractResolvedExecutable implements IResolvedExecutable 
 	}
 	
 	protected boolean isResolvedTypeParameter(LightweightTypeReference typeReference, JvmTypeParameter typeParameter) {
-		for (LightweightTypeReference typeArgument : typeReference.getTypeArguments()) {
+		List<LightweightTypeReference> typeArguments = typeReference.getTypeArguments();
+		for(int i = 0, size = typeArguments.size(); i < size; i++) {
+			LightweightTypeReference typeArgument = typeArguments.get(i);
 			if (typeParameter.equals(typeArgument.getType()) || isResolvedTypeParameter(typeArgument, typeParameter)) {
+				return true;
+			}
+		}
+		LightweightTypeReference outer = typeReference.getOuter();
+		if (outer != null) {
+			if (isResolvedTypeParameter(outer, typeParameter)) {
 				return true;
 			}
 		}

@@ -48,6 +48,7 @@ import org.eclipse.xtext.common.types.JvmFloatAnnotationValue;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmInnerTypeReference;
 import org.eclipse.xtext.common.types.JvmIntAnnotationValue;
 import org.eclipse.xtext.common.types.JvmLongAnnotationValue;
 import org.eclipse.xtext.common.types.JvmLowerBound;
@@ -636,7 +637,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		String typeName = ParameterizedTypes.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		int methodCount = ParameterizedTypes.class.getDeclaredMethods().length;
-		assertEquals(5, methodCount);
+		assertEquals(7, methodCount);
 		int constructorCount = ParameterizedTypes.class.getDeclaredConstructors().length;
 		assertEquals(1, constructorCount); // default constructor
 		int nestedTypesCount = ParameterizedTypes.class.getClasses().length;
@@ -1397,7 +1398,34 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertFalse(secondUpperBound.getTypeReference().toString(), secondUpperBound.getTypeReference().eIsProxy());
 		assertEquals("java.io.Serializable", secondUpperBound.getTypeReference().getIdentifier());
 	}
+	
+	@Test public void test_ParameterizedTypes_inner_param_01() {
+		String typeName = ParameterizedTypes.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		JvmOperation operation = getMethodFromType(type, ParameterizedTypes.class, "plainInner(org.eclipse.xtext.common.types.testSetups.ParameterizedTypes$Inner)");
+		JvmTypeReference parameterType = operation.getParameters().get(0).getParameterType();
+		assertTrue(parameterType.getIdentifier(), parameterType instanceof JvmInnerTypeReference);
+		assertEquals("ParameterizedTypes<S, T, U, V, W>$Inner<W, List<W>, List<W>>", parameterType.getSimpleName());
+	}
+	
+	@Test public void test_ParameterizedTypes_inner_return_01() {
+		String typeName = ParameterizedTypes.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		JvmOperation operation = getMethodFromType(type, ParameterizedTypes.class, "plainInner(org.eclipse.xtext.common.types.testSetups.ParameterizedTypes$Inner)");
+		JvmTypeReference returnType = operation.getReturnType();
+		assertTrue(returnType.getIdentifier(), returnType instanceof JvmInnerTypeReference);
+		assertEquals("ParameterizedTypes<S, T, U, V, W>$Inner<W, List<W>, List<W>>", returnType.getSimpleName());
+	}
 
+	@Test public void test_ParameterizedTypes_inner_return_02() {
+		String typeName = ParameterizedTypes.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		JvmOperation operation = getMethodFromType(type, ParameterizedTypes.class, "concreteInner()");
+		JvmTypeReference returnType = operation.getReturnType();
+		assertTrue(returnType.getIdentifier(), returnType instanceof JvmInnerTypeReference);
+		assertEquals("ParameterizedTypes<String, String, List<String>, V, String>$Inner<String, List<String>, List<String>>", returnType.getSimpleName());
+	}
+	
 	@Test public void test_ParameterizedTypes_Inner_01() {
 		String typeName = ParameterizedTypes.Inner.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);

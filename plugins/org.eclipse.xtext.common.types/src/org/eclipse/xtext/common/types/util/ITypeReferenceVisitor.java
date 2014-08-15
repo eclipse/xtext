@@ -11,6 +11,7 @@ import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmCompoundTypeReference;
 import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
+import org.eclipse.xtext.common.types.JvmInnerTypeReference;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
@@ -30,6 +31,7 @@ public interface ITypeReferenceVisitor<Result> {
 	Result doVisitAnyTypeReference(JvmAnyTypeReference reference);
 	Result doVisitCompoundTypeReference(JvmCompoundTypeReference reference);
 	Result doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference);
+	Result doVisitInnerTypeReference(JvmInnerTypeReference reference);
 	Result doVisitGenericArrayTypeReference(JvmGenericArrayTypeReference reference);
 	Result doVisitWildcardTypeReference(JvmWildcardTypeReference reference);
 	Result doVisitMultiTypeReference(JvmMultiTypeReference reference);
