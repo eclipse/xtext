@@ -12,6 +12,7 @@ import java.util.List;
 import org.eclipse.xtend.core.tests.typesystem.AbstractSuperTypesTest;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -99,5 +100,26 @@ public class AllSuperTypesTest extends AbstractSuperTypesTest {
   public void testTypeParameterArray() {
     Pair<String, String> _mappedTo = Pair.<String, String>of("T", "T extends Object[]");
     this.assertSuperTypes(_mappedTo, "Object[]", "Cloneable", "Serializable", "Object");
+  }
+  
+  @Test
+  public void testParameterizedInnerTypes_01() {
+    this.assertSuperTypes("test.InnerClasses.SubString<Number>.SubInner<CharSequence>", "InnerClasses$Super<String>$Inner<CharSequence>", "Object");
+  }
+  
+  @Test
+  public void testParameterizedInnerTypes_02() {
+    this.assertSuperTypes("test.InnerClasses.Sub<Number>.SubInner2<CharSequence>", "InnerClasses$Super<Number>$Inner<Number>", "Object");
+  }
+  
+  @Test
+  @Ignore
+  public void testParameterizedInnerTypes_03() {
+    this.assertSuperTypes("test.InnerClasses.Sub3.Inner2<Number>", "InnerClasses$Super3<String>$Inner<Number>");
+  }
+  
+  @Test
+  public void testParameterizedInnerTypes_04() {
+    this.assertSuperTypes("test.InnerClasses.Sub4<Number>.Inner3<CharSequence>", "InnerClasses$Super3<String>$Inner2<Number>", "InnerClasses$Super3<String>$Inner<Number>", "Object");
   }
 }

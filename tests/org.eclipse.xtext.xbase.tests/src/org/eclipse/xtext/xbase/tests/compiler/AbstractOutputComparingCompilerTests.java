@@ -15,9 +15,9 @@ import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 import com.google.inject.Inject;
@@ -53,7 +53,8 @@ public abstract class AbstractOutputComparingCompilerTests extends AbstractXbase
 		XbaseCompiler compiler = get(XbaseCompiler.class);
 		ITreeAppendable tracing = new FakeTreeAppendable();
 		JvmType voidType = typeReferences.findDeclaredType(Void.TYPE, model);
-		ParameterizedTypeReference voidRef = new ParameterizedTypeReference(new StandardTypeReferenceOwner(services, model), voidType);
+		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, model);
+		ParameterizedTypeReference voidRef = owner.newParameterizedTypeReference(voidType);
 		compiler.compile(model, tracing, voidRef);
 		assertEquals(expectedJavaCode, tracing.getContent());
 	}

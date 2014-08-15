@@ -11,9 +11,8 @@ import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
@@ -57,11 +56,13 @@ class AbstractBuilderTest extends AbstractXtendUITestCase {
 	}
 	
 	def protected LightweightTypeReference createTypeRef(JvmType type) {
-		new ParameterizedTypeReference(new StandardTypeReferenceOwner(services, type), type)
+		val owner = new StandardTypeReferenceOwner(services, type)
+		owner.newParameterizedTypeReference(type)
 	}
 	
 	def protected LightweightTypeReference createTypeRef(Class<?> clazz, EObject context) {
-		new ParameterizedTypeReference(new StandardTypeReferenceOwner(services, context), clazz.findDeclaredType(context))
+		val owner = new StandardTypeReferenceOwner(services, context)
+		owner.newParameterizedTypeReference(clazz.findDeclaredType(context))
 	}
 	
 	def protected assertBuilds(ICodeBuilder builder, String expectedCode) {

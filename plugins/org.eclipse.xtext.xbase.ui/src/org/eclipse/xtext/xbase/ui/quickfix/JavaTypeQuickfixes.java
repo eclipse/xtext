@@ -53,8 +53,8 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.ContextualVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
@@ -356,7 +356,8 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 	}
 
 	protected ContextualVisibilityHelper getVisibilityHelper(final JvmDeclaredType contextType) {
-		final ParameterizedTypeReference contextTypeRef = new ParameterizedTypeReference(new StandardTypeReferenceOwner(services, contextType), contextType);
+		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, contextType);
+		final ParameterizedTypeReference contextTypeRef =  owner.newParameterizedTypeReference(contextType);
 		final ContextualVisibilityHelper visibilityHelper = new ContextualVisibilityHelper(contextTypeRef);
 		return visibilityHelper;
 	}

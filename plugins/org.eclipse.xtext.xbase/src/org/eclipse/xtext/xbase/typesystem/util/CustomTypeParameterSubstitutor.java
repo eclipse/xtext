@@ -18,7 +18,6 @@ import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
@@ -64,13 +63,12 @@ public abstract class CustomTypeParameterSubstitutor extends TypeParameterSubsti
 					if (boundTypeArgument != null && boundTypeArgument.getTypeReference() != reference) {
 						LightweightTypeReference result = boundTypeArgument.getTypeReference().accept(this, visiting);
 						if (boundTypeArgument.getVariance() == VarianceInfo.OUT) {
-							WildcardTypeReference wildcard = new WildcardTypeReference(getOwner());
+							WildcardTypeReference wildcard = getOwner().newWildcardTypeReference();
 							wildcard.addUpperBound(result);
 							result = wildcard;
 						} else if (boundTypeArgument.getVariance() == VarianceInfo.IN) {
-							WildcardTypeReference wildcard = new WildcardTypeReference(getOwner());
-							JvmType objectType = getOwner().getServices().getTypeReferences().findDeclaredType(Object.class, type);
-							wildcard.addUpperBound(new ParameterizedTypeReference(getOwner(), objectType));
+							WildcardTypeReference wildcard = getOwner().newWildcardTypeReference();
+							wildcard.addUpperBound(getObjectReference());
 							wildcard.setLowerBound(result);
 							result = wildcard;
 						}
@@ -91,10 +89,9 @@ public abstract class CustomTypeParameterSubstitutor extends TypeParameterSubsti
 	}
 
 	@Override
-	protected LightweightTypeReference doVisitParameterizedTypeReference(ParameterizedTypeReference reference, JvmType type, ConstraintVisitingInfo visiting) {
-		ParameterizedTypeReference result = new ParameterizedTypeReference(getOwner(), type);
-		for(int i = 0; i < reference.getTypeArguments().size(); i++) {
-			LightweightTypeReference argument = reference.getTypeArguments().get(i);
+	protected LightweightTypeReference enhanceParameterizedTypeReference(ParameterizedTypeReference origin, JvmType type, ParameterizedTypeReference result, ConstraintVisitingInfo visiting) {
+		for(int i = 0; i < origin.getTypeArguments().size(); i++) {
+			LightweightTypeReference argument = origin.getTypeArguments().get(i);
 			visiting.pushInfo(type instanceof JvmTypeParameterDeclarator ? (JvmTypeParameterDeclarator) type : null, i);
 			LightweightTypeReference visitedArgument = visitTypeArgument(argument, visiting);
 			result.addTypeArgument(visitedArgument);
@@ -129,8 +126,9 @@ public abstract class CustomTypeParameterSubstitutor extends TypeParameterSubsti
 	}
 
 	protected LightweightTypeReference getObjectReference() {
-		JvmType objectType = getOwner().getServices().getTypeReferences().findDeclaredType(Object.class, getOwner().getContextResourceSet());
-		return new ParameterizedTypeReference(getOwner(), objectType);
+		ITypeReferenceOwner owner = getOwner();
+		JvmType objectType = owner.getServices().getTypeReferences().findDeclaredType(Object.class, owner.getContextResourceSet());
+		return owner.newParameterizedTypeReference(objectType);
 	}
 
 	/* @Nullable */
@@ -138,11 +136,11 @@ public abstract class CustomTypeParameterSubstitutor extends TypeParameterSubsti
 		if (!typeParameter.getConstraints().isEmpty()) {
 			JvmTypeConstraint constraint = typeParameter.getConstraints().get(0);
 			if (constraint instanceof JvmUpperBound) {
-				LightweightTypeReference reference = new OwnedConverter(getOwner()).toLightweightReference(constraint.getTypeReference());
+				LightweightTypeReference reference = getOwner().toLightweightTypeReference(constraint.getTypeReference());
 				if (visiting.getCurrentDeclarator() != reference.getType()) {
 					return visitTypeArgument(reference, visiting);
 				}
-				WildcardTypeReference result = new WildcardTypeReference(getOwner());
+				WildcardTypeReference result = getOwner().newWildcardTypeReference();
 				result.addUpperBound(getObjectReference());
 				return result;
 			}
@@ -156,7 +154,7 @@ public abstract class CustomTypeParameterSubstitutor extends TypeParameterSubsti
 			LightweightTypeReference componentType = original.getComponentType();
 			if (componentType instanceof UnboundTypeReference) {
 				LightweightTypeReference substitutedComponentType = substitute(componentType);
-				return new ArrayTypeReference(getOwner(), substitutedComponentType);
+				return getOwner().newArrayTypeReference(substitutedComponentType);
 			}
 		}
 		if (original instanceof UnboundTypeReference) {

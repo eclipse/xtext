@@ -59,10 +59,10 @@ import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.LocalTypeSubstitutor;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
@@ -207,10 +207,10 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 		XExpression actualReceiver = featureCall.getActualReceiver();
 		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, featureCall);
 		if(actualReceiver == null) {
-			return new ParameterizedTypeReference(owner, getCallersType(featureCall));
+			return owner.newParameterizedTypeReference(getCallersType(featureCall));
 		} else if (actualReceiver instanceof XAbstractFeatureCall && ((XAbstractFeatureCall) actualReceiver).isTypeLiteral()) {
 			JvmType type = (JvmType) ((XAbstractFeatureCall) actualReceiver).getFeature();
-			ParameterizedTypeReference reference = new ParameterizedTypeReference(owner, type);
+			ParameterizedTypeReference reference = owner.newParameterizedTypeReference(type);
 			return reference;
 		} else {
 			LightweightTypeReference typeRef = typeResolver.resolveTypes(featureCall).getActualType(actualReceiver);
@@ -458,7 +458,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 			LightweightTypeReference resolved = resolvedTypes.getActualType(argument);
 			if(resolved == null) {
 				StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, context);
-				argumentTypes.add(new ParameterizedTypeReference(owner, services.getTypeReferences().findDeclaredType(Object.class, context)));
+				argumentTypes.add(owner.newParameterizedTypeReference(services.getTypeReferences().findDeclaredType(Object.class, context)));
 			} else {
 				LocalTypeSubstitutor substitutor = new LocalTypeSubstitutor(resolved.getOwner(), logicalContainer);
 				argumentTypes.add(substitutor.withoutLocalTypes(resolved));

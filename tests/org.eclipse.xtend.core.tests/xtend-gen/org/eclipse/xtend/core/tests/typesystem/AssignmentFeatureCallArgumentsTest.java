@@ -26,7 +26,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.typesystem.arguments.AssignmentFeatureCallArguments;
 import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArgumentSlot;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -108,9 +107,8 @@ public class AssignmentFeatureCallArgumentsTest extends AbstractTestingTypeRefer
       final JvmTypeReference declaredType = _parameterType;
       boolean _tripleNotEquals = (declaredType != null);
       if (_tripleNotEquals) {
-        final OwnedConverter converter = new OwnedConverter(this);
-        LightweightTypeReference _lightweightReference = converter.toLightweightReference(declaredType);
-        return new AssignmentFeatureCallArguments(value, _lightweightReference);
+        LightweightTypeReference _lightweightTypeReference = this.toLightweightTypeReference(declaredType);
+        return new AssignmentFeatureCallArguments(value, _lightweightTypeReference);
       } else {
         return new AssignmentFeatureCallArguments(value, null);
       }

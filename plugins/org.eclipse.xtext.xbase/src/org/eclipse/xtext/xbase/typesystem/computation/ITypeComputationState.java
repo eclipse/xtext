@@ -32,7 +32,6 @@ import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.validation.FeatureNameValidator;
 
@@ -371,11 +370,6 @@ public interface ITypeComputationState {
 	 */
 	ITypeReferenceOwner getReferenceOwner();
 	
-	/**
-	 * Provides access to a configured {@link OwnedConverter converter}.
-	 */
-	OwnedConverter getConverter();
-
 	/**
 	 * Create a new, managed {@link UnboundTypeReference} for the given type parameter which was
 	 * first encountered for the given expression.
