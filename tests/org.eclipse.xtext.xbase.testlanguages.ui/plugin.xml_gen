@@ -489,17 +489,29 @@
    </extension>
    <extension point="org.eclipse.ui.popupMenus">
       <viewerContribution
-         targetID="example.rulerContextMenuId"
+         targetID="org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLang.ide.rulerContextMenu"
          id="org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLang.ide.RulerPopupActions">
          <action
             label="Toggle Breakpoint"
             class="org.eclipse.xtext.xbase.testlanguages.ui.XImportSectionTestLangExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
-            menubarPath="additions"
+            menubarPath="debug"
             id="org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLang.ide.rulerContextMenu.toggleBreakpointAction">
+         </action>
+         <action
+            label="Not used"
+            class="org.eclipse.xtext.xbase.testlanguages.ui.XImportSectionTestLangExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerEnableDisableBreakpointActionDelegate"
+            menubarPath="debug"
+            id="org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLang.ide.rulerContextMenu.enableDisableBreakpointAction">
+         </action>
+         <action
+           label="Breakpoint Properties"
+           helpContextId="breakpoint_properties_action_context"
+           class="org.eclipse.xtext.xbase.testlanguages.ui.XImportSectionTestLangExecutableExtensionFactory:org.eclipse.jdt.debug.ui.actions.JavaBreakpointPropertiesRulerActionDelegate"
+           menubarPath="group.properties"
+           id="org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLang.ide.rulerContextMenu.openBreapointPropertiesAction">
          </action>
       </viewerContribution>
    </extension>
-   
     <!-- Introduce Local Variable Refactoring -->
 	<extension point="org.eclipse.ui.handlers">
 		<handler 
