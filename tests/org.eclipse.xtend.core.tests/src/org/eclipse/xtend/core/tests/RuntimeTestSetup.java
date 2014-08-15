@@ -69,7 +69,7 @@ public class RuntimeTestSetup extends XtendStandaloneSetup {
 
 		@Override
 		public Class<? extends ConfigurableIssueCodesProvider> bindConfigurableIssueCodesProvider() {
-			return SuspiciousOverloadIsErrorInTests.class;
+			return StricterIssueCodesInTests.class;
 		}
 		
 //		public Class<? extends FlexerFactory> bindFlexerFactory() {
@@ -126,11 +126,12 @@ public class RuntimeTestSetup extends XtendStandaloneSetup {
 	}
 	
 	@Singleton
-	public static class SuspiciousOverloadIsErrorInTests extends XtendConfigurableIssueCodes {
+	public static class StricterIssueCodesInTests extends XtendConfigurableIssueCodes {
 		@Override
 		protected void initialize(IAcceptor<PreferenceKey> iAcceptor) {
 			super.initialize(iAcceptor);
 			iAcceptor.accept(create(IssueCodes.SUSPICIOUSLY_OVERLOADED_FEATURE, SeverityConverter.SEVERITY_ERROR));
+			iAcceptor.accept(create(org.eclipse.xtend.core.validation.IssueCodes.ORPHAN_ELMENT, SeverityConverter.SEVERITY_WARNING));
 		}
 	}
 

@@ -22,11 +22,13 @@ import org.eclipse.xtext.common.types.JvmConstructor
 import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmExecutable
+import org.eclipse.xtext.validation.IssueSeveritiesProvider
 
 class CachingResourceValidatorImpl extends DerivedStateAwareResourceValidator {
 
 	@Inject OnChangeEvictingCache cache
 	@Inject AnnotationProcessor annotationProcessor
+	@Inject IssueSeveritiesProvider issueSeveritiesProvider
 	@Inject extension IJvmModelAssociations
 	@Inject extension JvmTypeExtensions 
 
@@ -46,7 +48,7 @@ class CachingResourceValidatorImpl extends DerivedStateAwareResourceValidator {
 
 	override protected collectResourceDiagnostics(Resource resource, CancelIndicator monitor, IAcceptor<Issue> acceptor) {
 		runActiveAnnotationValidation(resource, monitor)
-		addWarningsForOrphanedJvmElements(resource, monitor)
+		addWarningsForOrphanedJvmElements(resource, monitor, acceptor)
 		super.collectResourceDiagnostics(resource, monitor, acceptor)
 	}
 	
@@ -72,7 +74,7 @@ class CachingResourceValidatorImpl extends DerivedStateAwareResourceValidator {
 		}
 	}
 
-	private def addWarningsForOrphanedJvmElements(Resource resource, CancelIndicator monitor) {
+	private def addWarningsForOrphanedJvmElements(Resource resource, CancelIndicator monitor, IAcceptor<Issue> acceptor) {
 		for (jvmType : resource.contents.tail.filter(JvmDeclaredType)) {
 			for (jvmMember : jvmType.eAllContents.filter(JvmMember).filter[!synthetic].toIterable) {
 				if (monitor.isCanceled) {
@@ -80,21 +82,24 @@ class CachingResourceValidatorImpl extends DerivedStateAwareResourceValidator {
 				}
 				val sourceElement = jvmMember.primarySourceElement
 				if (sourceElement === null) {
-					addWarningForOrphanedJvmElement(resource, jvmMember)
+					addWarningForOrphanedJvmElement(resource, jvmMember, acceptor)
 				}
 			}
 		}
 	}
 
-	private def addWarningForOrphanedJvmElement(Resource resource, JvmMember jvmElement) {
-		resource.warnings.add(
+	private def addWarningForOrphanedJvmElement(Resource resource, JvmMember jvmElement, IAcceptor<Issue> acceptor) {
+			val issueSeverities = issueSeveritiesProvider.getIssueSeverities(resource)
+			val severity = issueSeverities.getSeverity(IssueCodes.ORPHAN_ELMENT)
+			if (severity == Severity.IGNORE)
+				return;
 			new DiagnosticOnFirstKeyword(
-				Severity.WARNING,
+				severity,
 				IssueCodes.ORPHAN_ELMENT,
 				'''The generated «jvmElement.uiString» is not associated with a source element. The producing active annotation should use 'setPrimarySourceElement'.''',
 				resource.contents.head,
 				null
-			))
+			).issueFromXtextResourceDiagnostic(severity ,acceptor)
 	}
 	
 	private def getUiString(JvmMember member) {
