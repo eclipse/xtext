@@ -143,6 +143,12 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
   }
   
   private void addWarningsForOrphanedJvmElements(final Resource resource, final CancelIndicator monitor, final IAcceptor<Issue> acceptor) {
+    final IssueSeverities issueSeverities = this.issueSeveritiesProvider.getIssueSeverities(resource);
+    final Severity severity = issueSeverities.getSeverity(IssueCodes.ORPHAN_ELMENT);
+    boolean _equals = Objects.equal(severity, Severity.IGNORE);
+    if (_equals) {
+      return;
+    }
     EList<EObject> _contents = resource.getContents();
     Iterable<EObject> _tail = IterableExtensions.<EObject>tail(_contents);
     Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_tail, JvmDeclaredType.class);
@@ -166,20 +172,14 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
           final EObject sourceElement = this._iJvmModelAssociations.getPrimarySourceElement(jvmMember);
           boolean _tripleEquals = (sourceElement == null);
           if (_tripleEquals) {
-            this.addWarningForOrphanedJvmElement(resource, jvmMember, acceptor);
+            this.addWarningForOrphanedJvmElement(resource, jvmMember, severity, acceptor);
           }
         }
       }
     }
   }
   
-  private void addWarningForOrphanedJvmElement(final Resource resource, final JvmMember jvmElement, final IAcceptor<Issue> acceptor) {
-    final IssueSeverities issueSeverities = this.issueSeveritiesProvider.getIssueSeverities(resource);
-    final Severity severity = issueSeverities.getSeverity(IssueCodes.ORPHAN_ELMENT);
-    boolean _equals = Objects.equal(severity, Severity.IGNORE);
-    if (_equals) {
-      return;
-    }
+  private void addWarningForOrphanedJvmElement(final Resource resource, final JvmMember jvmElement, final Severity severity, final IAcceptor<Issue> acceptor) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("The generated ");
     String _uiString = this.getUiString(jvmElement);
