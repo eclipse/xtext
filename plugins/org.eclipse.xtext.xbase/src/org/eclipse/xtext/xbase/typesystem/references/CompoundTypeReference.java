@@ -93,7 +93,7 @@ public class CompoundTypeReference extends LightweightTypeReference {
 		// TODO common type?
 		return super.getTypeArguments();
 	}
-
+	
 	@Override
 	public boolean isRawType() {
 		for(LightweightTypeReference component: expose(components)) {
@@ -184,7 +184,7 @@ public class CompoundTypeReference extends LightweightTypeReference {
 		if (isAllRawType()) {
 			return this;
 		}
-		CompoundTypeReference result = new CompoundTypeReference(getOwner(), isSynonym());
+		CompoundTypeReference result = getOwner().newCompoundTypeReference(isSynonym());
 		for(LightweightTypeReference component: expose(components)) {
 			result.addComponent(component.getRawTypeReference());
 		}
@@ -282,7 +282,7 @@ public class CompoundTypeReference extends LightweightTypeReference {
 	
 	@Override
 	protected LightweightTypeReference doCopyInto(ITypeReferenceOwner owner) {
-		CompoundTypeReference result = new CompoundTypeReference(owner, synonym);
+		CompoundTypeReference result = owner.newCompoundTypeReference(synonym);
 		if (components != null && !components.isEmpty()) {
 			for(LightweightTypeReference typeArgument: components) {
 				result.addComponent(typeArgument.copyInto(owner));
@@ -370,22 +370,6 @@ public class CompoundTypeReference extends LightweightTypeReference {
 			return visitor.doVisitSynonymTypeReference(this, param);
 		else
 			return visitor.doVisitMultiTypeReference(this, param);
-	}
-	
-	@Override
-	public CompoundTypeReference toMultiType(LightweightTypeReference reference) {
-		if (!isSynonym()) {
-			if (reference == null) {
-				throw new NullPointerException("reference may not be null");
-			}
-			CompoundTypeReference result = new CompoundTypeReference(getOwner(), false);
-			for(LightweightTypeReference component: getMultiTypeComponents()) {
-				result.addComponent(component);
-			}
-			result.addComponent(reference);
-			return result;
-		}
-		return super.toMultiType(reference);
 	}
 	
 	@Override

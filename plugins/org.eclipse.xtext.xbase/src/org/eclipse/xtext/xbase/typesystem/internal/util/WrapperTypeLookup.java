@@ -16,7 +16,6 @@ import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -37,7 +36,7 @@ public class WrapperTypeLookup {
 		JvmType type = (JvmType) contents.get(0);
 		if (type == null)
 			return null;
-		return new ParameterizedTypeReference(owner, type);
+		return owner.newParameterizedTypeReference(type);
 	}
 	
 	/* @Nullable */

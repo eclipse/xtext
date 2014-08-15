@@ -37,7 +37,7 @@ public class UnknownClosureTypeHelper extends AbstractClosureTypeHelper {
 		ITypeComputationState closureBodyTypeComputationState = getClosureBodyTypeComputationState(typeAssigner);
 		closureBodyTypeComputationState.computeTypes(getClosure().getExpression());
 		
-		getExpectation().acceptActualType(new UnknownTypeReference(getExpectation().getReferenceOwner()), ConformanceFlags.UNCHECKED);
+		getExpectation().acceptActualType(getExpectation().getReferenceOwner().newUnknownTypeReference(), ConformanceFlags.UNCHECKED);
 	}
 
 	/* @Nullable */
@@ -80,7 +80,7 @@ public class UnknownClosureTypeHelper extends AbstractClosureTypeHelper {
 					final LightweightTypeReference closureParameterType = typeAssigner.toLightweightTypeReference(closureParameter.getParameterType());
 					typeAssigner.assignType(closureParameter, closureParameterType);
 				} else {
-					UnknownTypeReference unknownType = new UnknownTypeReference(typeAssigner.getReferenceOwner());
+					UnknownTypeReference unknownType = typeAssigner.getReferenceOwner().newUnknownTypeReference();
 					typeAssigner.assignType(closureParameter, unknownType);
 				}
 			}
@@ -90,7 +90,7 @@ public class UnknownClosureTypeHelper extends AbstractClosureTypeHelper {
 			JvmFormalParameter implicitParameter = TypesFactory.eINSTANCE.createJvmFormalParameter();
 			implicitParameter.setName(IFeatureNames.IT.getFirstSegment());
 			implicitParameters = Collections.singletonList(implicitParameter);
-			typeAssigner.assignType(implicitParameter, new UnknownTypeReference(typeAssigner.getReferenceOwner()));
+			typeAssigner.assignType(implicitParameter, typeAssigner.getReferenceOwner().newUnknownTypeReference());
 			ITypeComputationState result = typeAssigner.getForkedState();
 			return result;
 		}

@@ -21,17 +21,14 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
-import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.IMirrorExtension;
 import org.eclipse.xtext.common.types.access.JvmTypeChangeDispatcher;
 import org.eclipse.xtext.common.types.access.TypeResource;
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 import com.google.common.collect.ArrayListMultimap;
@@ -110,15 +107,9 @@ public class RawResolvedFeatures extends AbstractResolvedFeatures implements Ada
 	 * Static helper method that is used from within the super call in the constructor of
 	 * {@link RawResolvedFeatures}.
 	 */
-	private static LightweightTypeReference createTypeReference(JvmType type, CommonTypeComputationServices services) {
+	private static LightweightTypeReference createTypeReference(JvmDeclaredType type, CommonTypeComputationServices services) {
 		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, type);
-		ParameterizedTypeReference result = new ParameterizedTypeReference(owner, type);
-		if (type instanceof JvmGenericType) {
-			for(JvmTypeParameter typeParameter: ((JvmGenericType) type).getTypeParameters()) {
-				result.addTypeArgument(new ParameterizedTypeReference(owner, typeParameter));
-			}
-		}
-		return result;
+		return owner.newParameterizedTypeReference(type);
 	}
 	
 	/**
@@ -129,7 +120,7 @@ public class RawResolvedFeatures extends AbstractResolvedFeatures implements Ada
 	
 	private boolean allFeaturesComputed = false;
 	
-	protected RawResolvedFeatures(JvmType type, CommonTypeComputationServices services) {
+	protected RawResolvedFeatures(JvmDeclaredType type, CommonTypeComputationServices services) {
 		this(createTypeReference(type, services), new OverrideTester());
 	}
 	

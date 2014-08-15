@@ -10,11 +10,11 @@ package org.eclipse.xtend.core.tests.typesystem
 import com.google.inject.Inject
 import java.util.ArrayList
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
-import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
 import org.junit.Test
+import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
 
 /**
  * @author Sebastian Zarnekow
@@ -34,16 +34,16 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 			FOR type: types SEPARATOR ', '»«type.fixup» t«ENDFOR») {}'''
 		val function = function(signature.toString)
 		val operation = function.directlyInferredOperation
-		val typeReferences = new ArrayList(operation.parameters.map [ parameterType.toLightweightReference ])
-		val conformanceComputer = services.typeConformanceComputer 
-		var computedSuperType = conformanceComputer.getCommonSuperType(typeReferences, this)
+		val typeReferences = new ArrayList(operation.parameters.map [ parameterType.toLightweightTypeReference ])
+		val conformanceComputer = getServices.typeConformanceComputer 
+		var computedSuperType = conformanceComputer.getCommonSuperType(typeReferences, owner)
 		assertEquals(superTypeAndParam.key, computedSuperType?.simpleName)
-		computedSuperType = services.typeConformanceComputer.getCommonSuperType((typeReferences + typeReferences).toList, this)
+		computedSuperType = getServices.typeConformanceComputer.getCommonSuperType((typeReferences + typeReferences).toList, owner)
 		assertEquals(superTypeAndParam.key, computedSuperType?.simpleName)
-		computedSuperType = services.typeConformanceComputer.getCommonSuperType(typeReferences.reverseView, this)
+		computedSuperType = getServices.typeConformanceComputer.getCommonSuperType(typeReferences.reverseView, owner)
 		assertEquals(superTypeAndParam.key, computedSuperType?.simpleName)
 		if (!(computedSuperType?.primitiveVoid || computedSuperType?.primitive)) {
-			computedSuperType = services.typeConformanceComputer.getCommonSuperType((typeReferences + newImmutableList(new AnyTypeReference(this), new AnyTypeReference(this))).toList, this)
+			computedSuperType = getServices.typeConformanceComputer.getCommonSuperType((typeReferences + newImmutableList(owner.newAnyTypeReference, owner.newAnyTypeReference)).toList, owner)
 			assertEquals(superTypeAndParam.key, computedSuperType?.simpleName)
 		}
 		if (computedSuperType != null) {
@@ -194,8 +194,10 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Test
 	def void testCommonSuperType_23() {
-		val types = <LightweightTypeReference>newImmutableList(new AnyTypeReference(this), new AnyTypeReference(this))
-		val superType = services.typeConformanceComputer.getCommonSuperType(types, this)
+		// dummy to init the owner
+		function('def void m() {}')
+		val types = <LightweightTypeReference>newImmutableList(new AnyTypeReference(owner), new AnyTypeReference(owner))
+		val superType = getServices.typeConformanceComputer.getCommonSuperType(types, owner)
 		assertEquals("null", superType.simpleName)
 	}
 	
@@ -336,7 +338,7 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Test
 	def void testCommonSuperType_51() {
-		"()=>Number & Comparable<?>".isSuperTypeOf("()=>int", "()=>long").isFunctionAndEquivalentTo("Function0<? extends Number & Comparable<?>>")
+		"()=>long".isSuperTypeOf("()=>int", "()=>long").isFunctionAndEquivalentTo("Function0<? extends Long>")
 	}
 	
 	@Test
@@ -460,48 +462,4 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	}
 }
 
-///**
-// * @author Sebastian Zarnekow
-// */
-//@RunWith(typeof(XtextRunner))
-//@InjectWith(typeof(RuntimeInjectorProvider))
-//class OldAPICommonSuperTypeTest extends CommonSuperTypeTest {
-//	
-//	@Inject
-//	extension IXtendJvmAssociations
-//	
-//	@Inject
-//	TypeConformanceComputer typeConformanceComputer
-//	
-//	@Inject
-//	extension TypeReferences
-//	
-//	@Inject
-//	extension Primitives
-//	
-//	override isSuperTypeOf(Pair<String, String> superTypeAndParam, String... types) {
-//		// TODO synthesize unique variable names as soon as the function should be validated
-//		val signature = '''def «IF !superTypeAndParam.value.nullOrEmpty»<«superTypeAndParam.value»> «ENDIF»void method(«
-//			FOR type: types SEPARATOR ', '»«type.fixup» t«ENDFOR») {}'''
-//		val function = function(signature.toString)
-//		val operation = function.directlyInferredOperation
-//		val typeReferences = new ArrayList(operation.parameters.map [ parameterType ])
-//		var computedSuperType = typeConformanceComputer.getCommonSuperType(typeReferences)
-//		assertEquals(superTypeAndParam.key, computedSuperType?.simpleName)
-//		computedSuperType = typeConformanceComputer.getCommonSuperType((typeReferences + typeReferences).toList)
-//		assertEquals(superTypeAndParam.key, computedSuperType?.simpleName)
-//		computedSuperType = typeConformanceComputer.getCommonSuperType(typeReferences.reverseView)
-//		assertEquals(superTypeAndParam.key, computedSuperType?.simpleName)
-//		if (!(computedSuperType?.is(Void::TYPE) || computedSuperType?.primitive)) {
-//			computedSuperType = typeConformanceComputer.getCommonSuperType((typeReferences + newImmutableList(TypesFactory::eINSTANCE.createJvmAnyTypeReference, TypesFactory::eINSTANCE.createJvmAnyTypeReference)).toList)
-//			assertEquals(superTypeAndParam.key, computedSuperType?.simpleName)
-//		}
-//		return computedSuperType
-//	}
-//	
-//	override void isFunctionAndEquivalentTo(Object reference, String type) {
-//		assertTrue(reference instanceof XFunctionTypeRef)
-//		assertEquals(type, (reference as XFunctionTypeRef).equivalent.simpleName)
-//	}
-//	
-//}
+

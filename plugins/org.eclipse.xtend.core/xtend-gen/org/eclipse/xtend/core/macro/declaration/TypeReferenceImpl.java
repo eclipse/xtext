@@ -178,7 +178,7 @@ public class TypeReferenceImpl extends AbstractDelegator<LightweightTypeReferenc
     return _delegate.isWrapper();
   }
   
-  public LightweightTypeReference getLightWeightTypeReference() {
+  public LightweightTypeReference getLightweightTypeReference() {
     return this.getDelegate();
   }
   

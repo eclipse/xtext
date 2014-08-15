@@ -22,7 +22,7 @@ import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceFactory;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
@@ -142,7 +142,7 @@ public class DeferredTypeParameterHintCollector extends AbstractTypeReferencePai
 			JvmTypeReference constraintReference = constraint.getTypeReference();
 			if (constraintReference != null) {
 				final boolean[] recursive = new boolean[] { false };
-				LightweightTypeReference lightweightReference = new OwnedConverter(hint.getOwner()) {
+				LightweightTypeReferenceFactory factory = new LightweightTypeReferenceFactory(hint.getOwner()) {
 					@Override
 					public LightweightTypeReference doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference) {
 						JvmType type = reference.getType();
@@ -151,7 +151,8 @@ public class DeferredTypeParameterHintCollector extends AbstractTypeReferencePai
 						}
 						return super.doVisitParameterizedTypeReference(reference);
 					}
-				}.toLightweightReference(constraintReference);
+				};
+				LightweightTypeReference lightweightReference = factory.toLightweightReference(constraintReference);
 				if (!recursive[0] && hint.isAssignableFrom(lightweightReference)) {
 					hint = lightweightReference;
 				}

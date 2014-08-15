@@ -30,6 +30,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -76,7 +77,7 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
         public void apply(final JvmFormalParameter p, final Integer i) {
           final Triple<String, VarianceInfo, VarianceInfo> input = mergeUs[(i).intValue()];
           JvmTypeReference _parameterType = p.getParameterType();
-          LightweightTypeReference _lightweightReference = BoundTypeArgumentMergerTest.this.toLightweightReference(_parameterType);
+          LightweightTypeReference _lightweightTypeReference = BoundTypeArgumentMergerTest.this.toLightweightTypeReference(_parameterType);
           Object _elvis = null;
           if (source != null) {
             _elvis = source;
@@ -86,12 +87,13 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
           }
           VarianceInfo _second = input.getSecond();
           VarianceInfo _third = input.getThird();
-          LightweightBoundTypeArgument _lightweightBoundTypeArgument = new LightweightBoundTypeArgument(_lightweightReference, null, _elvis, _second, _third);
+          LightweightBoundTypeArgument _lightweightBoundTypeArgument = new LightweightBoundTypeArgument(_lightweightTypeReference, null, _elvis, _second, _third);
           mergable.add(_lightweightBoundTypeArgument);
         }
       };
       IterableExtensions.<JvmFormalParameter>forEach(_parameters, _function_1);
-      return this.merger.merge(mergable, this);
+      ITypeReferenceOwner _owner = this.getOwner();
+      return this.merger.merge(mergable, _owner);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -122,11 +124,11 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
         public void apply(final JvmFormalParameter p, final Integer i) {
           final Triple<String, VarianceInfo, VarianceInfo> input = mergeUs[(i).intValue()];
           JvmTypeReference _parameterType = p.getParameterType();
-          LightweightTypeReference _lightweightReference = BoundTypeArgumentMergerTest.this.toLightweightReference(_parameterType);
+          LightweightTypeReference _lightweightTypeReference = BoundTypeArgumentMergerTest.this.toLightweightTypeReference(_parameterType);
           Object _object = new Object();
           VarianceInfo _second = input.getSecond();
           VarianceInfo _third = input.getThird();
-          LightweightBoundTypeArgument _lightweightBoundTypeArgument = new LightweightBoundTypeArgument(_lightweightReference, null, _object, _second, _third);
+          LightweightBoundTypeArgument _lightweightBoundTypeArgument = new LightweightBoundTypeArgument(_lightweightTypeReference, null, _object, _second, _third);
           mergable.add(_lightweightBoundTypeArgument);
         }
       };
@@ -134,7 +136,8 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
       final Iterator<LightweightBoundTypeArgument> iterator = mergable.iterator();
       LightweightBoundTypeArgument first = iterator.next();
       LightweightBoundTypeArgument second = iterator.next();
-      LightweightMergedBoundTypeArgument merged = this.merger.merge(Collections.<LightweightBoundTypeArgument>unmodifiableList(CollectionLiterals.<LightweightBoundTypeArgument>newArrayList(first, second)), this);
+      ITypeReferenceOwner _owner = this.getOwner();
+      LightweightMergedBoundTypeArgument merged = this.merger.merge(Collections.<LightweightBoundTypeArgument>unmodifiableList(CollectionLiterals.<LightweightBoundTypeArgument>newArrayList(first, second)), _owner);
       while (iterator.hasNext()) {
         {
           LightweightTypeReference _typeReference = merged.getTypeReference();
@@ -145,7 +148,8 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
           first = _lightweightBoundTypeArgument;
           LightweightBoundTypeArgument _next = iterator.next();
           second = _next;
-          LightweightMergedBoundTypeArgument _merge = this.merger.merge(Collections.<LightweightBoundTypeArgument>unmodifiableList(CollectionLiterals.<LightweightBoundTypeArgument>newArrayList(first, second)), this);
+          ITypeReferenceOwner _owner_1 = this.getOwner();
+          LightweightMergedBoundTypeArgument _merge = this.merger.merge(Collections.<LightweightBoundTypeArgument>unmodifiableList(CollectionLiterals.<LightweightBoundTypeArgument>newArrayList(first, second)), _owner_1);
           merged = _merge;
         }
       }

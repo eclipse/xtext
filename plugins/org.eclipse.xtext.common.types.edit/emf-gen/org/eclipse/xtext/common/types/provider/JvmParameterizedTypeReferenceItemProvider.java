@@ -211,6 +211,11 @@ public class JvmParameterizedTypeReferenceItemProvider extends JvmTypeReferenceI
 			(createChildParameter
 				(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__ARGUMENTS,
 				 TypesFactory.eINSTANCE.createJvmUnknownTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__ARGUMENTS,
+				 TypesFactory.eINSTANCE.createJvmInnerTypeReference()));
 	}
 
 }

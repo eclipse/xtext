@@ -26,10 +26,10 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 import com.google.inject.Inject;
@@ -67,9 +67,9 @@ public class CacheMethodCompileStrategy implements Procedures.Procedure1<ITreeAp
 				.getLogicalContainer(createExtensionInfo.getCreateExpression());
 		JvmDeclaredType containerType = cacheMethod.getDeclaringType();
 		IResolvedTypes resolvedTypes = typeResolver.resolveTypes(containerType);
-		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, containerType);
-		ParameterizedTypeReference listType = new ParameterizedTypeReference(owner, typeReferences.findDeclaredType(ArrayList.class, containerType));
-		listType.addTypeArgument(new WildcardTypeReference(owner));
+		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, containerType);
+		ParameterizedTypeReference listType = owner.newParameterizedTypeReference(typeReferences.findDeclaredType(ArrayList.class, containerType));
+		listType.addTypeArgument(owner.newWildcardTypeReference());
 		JvmType collectonLiterals = typeReferences.findDeclaredType(CollectionLiterals.class, containerType);
 
 		String cacheVarName = cacheField.getSimpleName();

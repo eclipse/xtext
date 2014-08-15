@@ -35,6 +35,8 @@ class ResolvedTypesTest extends AbstractXbaseTestCase {
 	
 	@Before
 	def void initResolvedTypes() {
+		val expression = expression('null')
+		resolver.initializeFrom(expression)
 		testMe = new PublicResolvedTypes(resolver)
 	}
 	

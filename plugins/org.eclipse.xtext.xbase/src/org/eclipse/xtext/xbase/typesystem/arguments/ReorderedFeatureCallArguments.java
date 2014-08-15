@@ -12,8 +12,8 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 
 /**
  * Returns all arguments first, that match the given parameters.
@@ -30,8 +30,8 @@ public class ReorderedFeatureCallArguments extends StandardFeatureCallArguments 
 	public ReorderedFeatureCallArguments(
 			List<XExpression> arguments, List<JvmFormalParameter> parameters,
 			List<XExpression> shiftedArguments, List<JvmFormalParameter> shiftedParameters,
-			boolean hasReceiver, OwnedConverter converter) {
-		super(arguments, parameters, hasReceiver, converter);
+			boolean hasReceiver, ITypeReferenceOwner owner) {
+		super(arguments, parameters, hasReceiver, owner);
 		this.shiftedArguments = shiftedArguments;
 		this.shiftedParameters = shiftedParameters;
 	}
