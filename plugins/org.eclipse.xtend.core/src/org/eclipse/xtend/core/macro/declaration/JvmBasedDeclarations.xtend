@@ -195,7 +195,7 @@ abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotati
 			addAnnotation(compilationUnit.annotationReferenceProvider.newAnnotationReference(Deprecated))
 		} else {
 			delegate.deprecated = false
-			val existingReference = annotations.findFirst[ Deprecated.name == it.annotationTypeDeclaration.qualifiedName ]
+			val existingReference = findAnnotation(compilationUnit.typeLookup.findTypeGlobally(Deprecated))
 			if (existingReference != null) {
 				removeAnnotation(existingReference)
 			}
