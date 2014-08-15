@@ -127,9 +127,9 @@ ruleMember :
 				ruleJvmTypeReference ruleCreateExtensionInfo ruleValidID '('
 			) ) |
 			( (
-			ruleJvmTypeReference ruleFunctionID '('
+			ruleTypeReferenceWithTypeArgs ruleFunctionID '('
 			) => (
-				ruleJvmTypeReference ruleFunctionID '('
+				ruleTypeReferenceWithTypeArgs ruleFunctionID '('
 			) ) |
 			( (
 			ruleTypeReferenceNoTypeArgs ruleFunctionID '('
@@ -200,6 +200,36 @@ ruleMember :
 // Rule TypeReferenceNoTypeArgs
 ruleTypeReferenceNoTypeArgs :
 	ruleQualifiedName
+;
+
+// Rule TypeReferenceWithTypeArgs
+ruleTypeReferenceWithTypeArgs :
+	ruleParameterizedTypeReferenceWithTypeArgs ( (
+	ruleArrayBrackets
+	) => ruleArrayBrackets )* |
+	ruleTypeReferenceNoTypeArgs ( (
+	ruleArrayBrackets
+	) => ruleArrayBrackets )+ |
+	ruleXFunctionTypeRef
+;
+
+// Rule ParameterizedTypeReferenceWithTypeArgs
+ruleParameterizedTypeReferenceWithTypeArgs :
+	ruleQualifiedName (
+		'<' ruleJvmArgumentTypeReference (
+			',' ruleJvmArgumentTypeReference
+		)* '>' (
+			( (
+			'.'
+			) => '.' ) ruleValidID (
+				( (
+				'<'
+				) => '<' ) ruleJvmArgumentTypeReference (
+					',' ruleJvmArgumentTypeReference
+				)* '>'
+			)?
+		)*
+	)
 ;
 
 // Rule FunctionID
@@ -1198,7 +1228,17 @@ ruleJvmParameterizedTypeReference :
 		'<'
 		) => '<' ) ruleJvmArgumentTypeReference (
 			',' ruleJvmArgumentTypeReference
-		)* '>'
+		)* '>' (
+			( (
+			'.'
+			) => '.' ) ruleValidID (
+				( (
+				'<'
+				) => '<' ) ruleJvmArgumentTypeReference (
+					',' ruleJvmArgumentTypeReference
+				)* '>'
+			)?
+		)*
 	)?
 ;
 

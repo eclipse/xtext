@@ -29,7 +29,6 @@ import org.eclipse.xtext.xbase.typesystem.computation.XbaseTypeComputer;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 import com.google.common.collect.Iterables;
@@ -88,7 +87,7 @@ public class XbaseWithAnnotationsTypeComputer extends XbaseTypeComputer {
 						-1, null));
 				computeChildTypesForUnknownAnnotation(object, state);	
 			}
-			state.acceptActualType(new ParameterizedTypeReference(state.getReferenceOwner(), annotationType));
+			state.acceptActualType(state.getReferenceOwner().newParameterizedTypeReference(annotationType));
 		} else {
 			computeChildTypesForUnknownAnnotation(object, state);
 		}
@@ -111,7 +110,7 @@ public class XbaseWithAnnotationsTypeComputer extends XbaseTypeComputer {
 	 */
 	protected void computeTypes(XAnnotation annotation, /* @Nullable */ JvmOperation operation, XExpression value,
 			ITypeComputationState state) {
-		LightweightTypeReference expectation = operation == null || operation.eIsProxy() ? null : state.getConverter().toLightweightReference(operation.getReturnType());
+		LightweightTypeReference expectation = operation == null || operation.eIsProxy() ? null : state.getReferenceOwner().toLightweightTypeReference(operation.getReturnType());
 		if (expectation != null && expectation.isArray()) {
 			LightweightTypeReference componentType = expectation.getComponentType();
 			if (componentType == null) {
@@ -128,7 +127,7 @@ public class XbaseWithAnnotationsTypeComputer extends XbaseTypeComputer {
 					// our children are incompatible so let's mark the array itself as compatible.
 					state.refineExpectedType(value, resultType);
 				} else {
-					CompoundTypeReference bothExpectations = new CompoundTypeReference(state.getReferenceOwner(), true);
+					CompoundTypeReference bothExpectations = state.getReferenceOwner().newCompoundTypeReference(true);
 					bothExpectations.addComponent(componentType);
 					bothExpectations.addComponent(expectation);
 					state.refineExpectedType(value, bothExpectations);
@@ -152,7 +151,7 @@ public class XbaseWithAnnotationsTypeComputer extends XbaseTypeComputer {
 								value, 
 								null, 
 								-1, null));
-						state.refineExpectedType(value, new ArrayTypeReference(array.getOwner(), primitiveComponentType));
+						state.refineExpectedType(value, array.getOwner().newArrayTypeReference(primitiveComponentType));
 					}
 				}
 			}

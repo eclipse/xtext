@@ -13,18 +13,15 @@ import java.util.Map;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.typesystem.InferredTypeIndicator;
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.ContextualVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
@@ -78,12 +75,11 @@ public class OverrideHelper {
 		if (operation.getVisibility() == JvmVisibility.PRIVATE || !InferredTypeIndicator.isInferred(operation.getReturnType())) {
 			return null;
 		}
-		LightweightTypeReference declaringType = new ParameterizedTypeReference(owner, operation.getDeclaringType());
+		LightweightTypeReference declaringType = owner.newParameterizedTypeReference(operation.getDeclaringType());
 		TypeParameterSubstitutor<?> substitutor = createSubstitutor(owner, declaringType);
-		OwnedConverter converter = new OwnedConverter(owner);
-		JvmOperation overriddenOperation = findOverriddenOperation(operation, declaringType, substitutor, converter, visibilityHelper);
+		JvmOperation overriddenOperation = findOverriddenOperation(operation, declaringType, substitutor, owner, visibilityHelper);
 		if (overriddenOperation != null) {
-			return substitutor.substitute(converter.toLightweightReference(overriddenOperation.getReturnType()));
+			return substitutor.substitute(owner.toLightweightTypeReference(overriddenOperation.getReturnType()));
 		}
 		return null;
 	}
@@ -124,7 +120,7 @@ public class OverrideHelper {
 
 	/* @Nullable */
 	protected JvmOperation findOverriddenOperation(JvmOperation operation, LightweightTypeReference declaringType,
-			TypeParameterSubstitutor<?> substitutor, OwnedConverter converter, IVisibilityHelper visibilityHelper) {
+			TypeParameterSubstitutor<?> substitutor, ITypeReferenceOwner owner, IVisibilityHelper visibilityHelper) {
 		int parameterSize = operation.getParameters().size();
 		List<LightweightTypeReference> superTypes = declaringType.getSuperTypes();
 		for(LightweightTypeReference superType: superTypes) {
@@ -142,7 +138,7 @@ public class OverrideHelper {
 									String identifier = parameter.getParameterType().getIdentifier();
 									JvmFormalParameter candidateParameter = candidate.getParameters().get(i);
 									LightweightTypeReference candidateParameterType =
-											substitutor.substitute(converter.toLightweightReference(candidateParameter.getParameterType()));
+											substitutor.substitute(owner.toLightweightTypeReference(candidateParameter.getParameterType()));
 									if (!identifier.equals(candidateParameterType.getJavaIdentifier())) {
 										matchesSignature = false;
 									}
@@ -172,16 +168,9 @@ public class OverrideHelper {
 			return null;
 		}
 		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, operation.eResource().getResourceSet());
-		ParameterizedTypeReference declaringType = new ParameterizedTypeReference(owner, operation.getDeclaringType());
-		if (declaringType.isRawType()) {
-			JvmGenericType genericType = (JvmGenericType) declaringType.getType();
-			for(JvmTypeParameter typeParameter: genericType.getTypeParameters()) {
-				declaringType.addTypeArgument(new ParameterizedTypeReference(owner, typeParameter));
-			}
-		}
+		LightweightTypeReference declaringType = owner.toLightweightTypeReference(operation.getDeclaringType());
 		TypeParameterSubstitutor<?> substitutor = createSubstitutor(owner, declaringType);
-		OwnedConverter converter = new OwnedConverter(owner);
-		return findOverriddenOperation(operation, declaringType, substitutor, converter, new ContextualVisibilityHelper(visibilityHelper, declaringType));
+		return findOverriddenOperation(operation, declaringType, substitutor, owner, new ContextualVisibilityHelper(visibilityHelper, declaringType));
 	}
 
 	/**
@@ -192,12 +181,7 @@ public class OverrideHelper {
 	 */
 	public ResolvedOperations getResolvedOperations(JvmDeclaredType type) {
 		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, type.eResource().getResourceSet());
-		ParameterizedTypeReference contextType = new ParameterizedTypeReference(owner, type);
-		if (type instanceof JvmGenericType) {
-			for(JvmTypeParameter typeParameter: ((JvmGenericType) type).getTypeParameters()) {
-				contextType.addTypeArgument(new ParameterizedTypeReference(owner, typeParameter));
-			}
-		}
+		LightweightTypeReference contextType = owner.toLightweightTypeReference(type);
 		return getResolvedOperations(contextType);
 	}
 	
@@ -209,7 +193,7 @@ public class OverrideHelper {
 	 */
 	public ResolvedOperations getResolvedOperations(JvmTypeReference contextType) {
 		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, contextType.eResource().getResourceSet());
-		return getResolvedOperations(new OwnedConverter(owner).toLightweightReference(contextType));
+		return getResolvedOperations(owner.toLightweightTypeReference(contextType));
 	}
 
 	/**

@@ -141,7 +141,7 @@ public class SynonymTypesProvider {
 				LightweightTypeReference componentType = arrayType.getComponentType();
 				LightweightTypeReference primitiveComponentType = componentType.getPrimitiveIfWrapperType();
 				if (primitiveComponentType != componentType) {
-					ArrayTypeReference primitiveArray = new ArrayTypeReference(type.getOwner(), primitiveComponentType);
+					ArrayTypeReference primitiveArray = type.getOwner().newArrayTypeReference(primitiveComponentType);
 					if (!acceptor.accept(primitiveArray, ConformanceFlags.CHECKED_SUCCESS | ConformanceFlags.DEMAND_CONVERSION | ConformanceFlags.UNBOXING)) {
 						return false;
 					}

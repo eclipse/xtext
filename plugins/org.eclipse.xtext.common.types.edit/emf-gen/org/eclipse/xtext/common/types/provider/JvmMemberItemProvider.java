@@ -55,6 +55,7 @@ public class JvmMemberItemProvider extends JvmAnnotationTargetItemProvider
 			addVisibilityPropertyDescriptor(object);
 			addSimpleNamePropertyDescriptor(object);
 			addIdentifierPropertyDescriptor(object);
+			addDeprecatedPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -129,6 +130,30 @@ public class JvmMemberItemProvider extends JvmAnnotationTargetItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Deprecated feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @since 2.7
+	 */
+	protected void addDeprecatedPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_JvmMember_deprecated_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_JvmMember_deprecated_feature", "_UI_JvmMember_type"),
+				 TypesPackage.Literals.JVM_MEMBER__DEPRECATED,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -161,6 +186,7 @@ public class JvmMemberItemProvider extends JvmAnnotationTargetItemProvider
 			case TypesPackage.JVM_MEMBER__VISIBILITY:
 			case TypesPackage.JVM_MEMBER__SIMPLE_NAME:
 			case TypesPackage.JVM_MEMBER__IDENTIFIER:
+			case TypesPackage.JVM_MEMBER__DEPRECATED:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

@@ -78,9 +78,6 @@ import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.UnknownTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.util.XSwitchExpressions;
@@ -136,13 +133,13 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				throw new IllegalStateException();
 			return result;
 		}
-		else if(type.isSubtypeOf(Collection.class) && !type.getTypeArguments().isEmpty()) 
+		else if(type.isSubtypeOf(Collection.class) && type.hasTypeArguments()) 
 			return type.getTypeArguments().get(0).getInvariantBoundSubstitute();
 		JvmType objectType = findKnownTopLevelType(Object.class, literal);
 		if (objectType == null) {
-			return new UnknownTypeReference(type.getOwner(), "Object");
+			return type.getOwner().newUnknownTypeReference("Object");
 		}
-		return new ParameterizedTypeReference(type.getOwner(), objectType);
+		return type.getOwner().newParameterizedTypeReference(objectType);
 	}
 
 	protected void _toJavaExpression(XListLiteral literal, ITreeAppendable b) {
@@ -218,7 +215,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		ITypeReferenceOwner owner = collectionElementType.getOwner();
 		JvmType collectionsClass = findKnownTopLevelType(Collections.class, literal);
 		JvmType guavaHelperType = findKnownTopLevelType(guavaHelper, literal);
-		LightweightTypeReference guavaClass = guavaHelperType == null ? new UnknownTypeReference(owner, guavaHelper.getName()) :new ParameterizedTypeReference(owner, guavaHelperType);
+		LightweightTypeReference guavaClass = guavaHelperType == null ? owner.newUnknownTypeReference(guavaHelper.getName()) : owner.newParameterizedTypeReference(guavaHelperType);
 		if (collectionsClass != null) {
 			b.append(collectionsClass);
 		} else {
@@ -1571,17 +1568,15 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	protected LightweightTypeReference getClosureOperationParameterType(LightweightTypeReference closureType, JvmOperation operation, int i) {
 		ITypeReferenceOwner owner = newTypeReferenceOwner(operation);
-		OwnedConverter converter = new OwnedConverter(newTypeReferenceOwner(operation));
 		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(closureType);
-		LightweightTypeReference parameterType = converter.toLightweightReference(operation.getParameters().get(i).getParameterType());
+		LightweightTypeReference parameterType = owner.toLightweightTypeReference(operation.getParameters().get(i).getParameterType());
 		return new StandardTypeParameterSubstitutor(mapping, owner).substitute(parameterType);
 	}
 
 	protected LightweightTypeReference getClosureOperationReturnType(LightweightTypeReference closureType, JvmOperation operation) {
 		ITypeReferenceOwner owner = newTypeReferenceOwner(operation);
-		OwnedConverter converter = new OwnedConverter(owner);
 		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(closureType);
-		LightweightTypeReference parameterType = converter.toLightweightReference(operation.getReturnType());
+		LightweightTypeReference parameterType = owner.toLightweightTypeReference(operation.getReturnType());
 		return new StandardTypeParameterSubstitutor(mapping, owner).substitute(parameterType);
 	}
 	

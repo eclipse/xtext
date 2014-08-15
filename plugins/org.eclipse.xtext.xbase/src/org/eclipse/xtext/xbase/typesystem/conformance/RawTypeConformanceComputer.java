@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
@@ -27,6 +29,8 @@ import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.typesystem.internal.util.WrapperTypeLookup;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.InnerFunctionTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.InnerTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -256,25 +260,54 @@ public class RawTypeConformanceComputer {
 				case KIND_UNKNOWN_TYPE_REFERENCE: {
 					return flags | SUCCESS | UNKNOWN_TYPE_PARTICIPATED;
 				}
+				case KIND_INNER_FUNCTION_TYPE_REFERENCE: {
+					switch(rightKind) {
+						case KIND_INNER_TYPE_REFERENCE:
+							return doIsConformant((InnerFunctionTypeReference)left, (InnerTypeReference)right, flags);
+						case KIND_INNER_FUNCTION_TYPE_REFERENCE:
+							return doIsConformant((InnerFunctionTypeReference)left, (InnerFunctionTypeReference)right, flags);
+					}
+					// missing break is intentional
+				}
 				case KIND_FUNCTION_TYPE_REFERENCE: {
 					switch(rightKind) {
 						case KIND_FUNCTION_TYPE_REFERENCE: {
 							return doIsConformant((FunctionTypeReference)left, (FunctionTypeReference)right, flags);
 						}
+						case KIND_INNER_TYPE_REFERENCE:
 						case KIND_PARAMETERIZED_TYPE_REFERENCE: {
 							return doIsConformant((FunctionTypeReference)left, (ParameterizedTypeReference)right, flags);
 						}
+						case KIND_ARRAY_TYPE_REFERENCE: {
+							return doIsConformant((ParameterizedTypeReference)left, (ArrayTypeReference)right, flags);
+						}
+						case KIND_ANY_TYPE_REFERENCE: {
+							return doIsConformantToAnyType((ParameterizedTypeReference)left, flags);
+						}
+						case KIND_WILDCARD_TYPE_REFERENCE: {
+							return doIsConformant(left, (WildcardTypeReference) right, flags);
+						}
 					}
-					// missing break is intentional
+					return flags;
+				}
+				case KIND_INNER_TYPE_REFERENCE: {
+					switch(rightKind) {
+						case KIND_INNER_TYPE_REFERENCE:
+							return doIsConformant((InnerTypeReference)left, (InnerTypeReference)right, flags);
+						case KIND_INNER_FUNCTION_TYPE_REFERENCE:
+							return doIsConformant((InnerTypeReference)left, (InnerFunctionTypeReference)right, flags);
+					}
 				}
 				case KIND_PARAMETERIZED_TYPE_REFERENCE: {
 					switch(rightKind) {
 						case KIND_ARRAY_TYPE_REFERENCE: {
 							return doIsConformant((ParameterizedTypeReference)left, (ArrayTypeReference)right, flags);
 						}
+						case KIND_INNER_FUNCTION_TYPE_REFERENCE:
 						case KIND_FUNCTION_TYPE_REFERENCE: {
 							return doIsConformant((ParameterizedTypeReference)left, (FunctionTypeReference)right, flags);
 						}
+						case KIND_INNER_TYPE_REFERENCE:
 						case KIND_PARAMETERIZED_TYPE_REFERENCE: {
 							return doIsConformant((ParameterizedTypeReference)left, (ParameterizedTypeReference)right, flags);
 						}
@@ -732,6 +765,47 @@ public class RawTypeConformanceComputer {
 		return doIsConformant((ParameterizedTypeReference) left, right, flags);
 	}
 	
+	protected int doIsConformant(InnerFunctionTypeReference left, InnerFunctionTypeReference right, int flags) {
+		int result = doIsConformant((FunctionTypeReference) left, (FunctionTypeReference) right, flags);
+		return doIsConformantOuter(left, right, result, flags);
+	}
+	
+	protected int doIsConformant(InnerFunctionTypeReference left, InnerTypeReference right, int flags) {
+		int result = doIsConformant((FunctionTypeReference) left, (ParameterizedTypeReference) right, flags);
+		return doIsConformantOuter(left, right, result, flags);
+	}
+
+	protected int doIsConformant(InnerTypeReference left, InnerFunctionTypeReference right, int flags) {
+		int result = doIsConformant((ParameterizedTypeReference) left, (FunctionTypeReference) right, flags);
+		return doIsConformantOuter(left, right, result, flags);
+	}
+	
+	protected int doIsConformant(InnerTypeReference left, InnerTypeReference right, int flags) {
+		int result = doIsConformant((ParameterizedTypeReference) left, (ParameterizedTypeReference) right, flags);
+		return doIsConformantOuter(left, right, result, flags);
+	}
+	
+	protected int doIsConformantOuter(LightweightTypeReference left, LightweightTypeReference right, int nestedResult, int flags) {
+		if ((nestedResult & SUCCESS) != 0) {
+			JvmType leftType = left.getType();
+			EObject leftDeclarator = leftType.eContainer();
+			if (leftDeclarator instanceof JvmDeclaredType) {
+				JvmDeclaredType castedLeftDeclarator = (JvmDeclaredType) leftDeclarator;
+				LightweightTypeReference leftOuter = left.getOuter().getSuperType(castedLeftDeclarator);
+				if (leftOuter != null) {
+					LightweightTypeReference rightOuter = right.getOuter().getSuperType(castedLeftDeclarator);
+					if (rightOuter != null) {
+						int outerResult = doIsConformant(leftOuter, rightOuter, flags);
+						if ((outerResult & SUCCESS) == 0) {
+							return outerResult;
+						}
+					}
+				}
+			}
+		}
+		return nestedResult;
+	}
+	
 	protected int doIsConformant(ParameterizedTypeReference left, ParameterizedTypeReference right, int flags) {
 		if (left.getType() == right.getType()) {
 			return doIsConformantTypeArguments(left, right, flags);
@@ -1043,7 +1117,7 @@ public class RawTypeConformanceComputer {
 	/**
 	 * This is a hook for the {@link TypeConformanceComputer} to implement the type argument check.
 	 */
-	protected int doIsConformantTypeArguments(ParameterizedTypeReference left, ParameterizedTypeReference right, int flags) {
+	protected int doIsConformantTypeArguments(LightweightTypeReference left, LightweightTypeReference right, int flags) {
 		if (left.isRawType() != right.isRawType()) {
 			return flags | SUCCESS | RAW_TYPE_CONVERSION;	
 		}

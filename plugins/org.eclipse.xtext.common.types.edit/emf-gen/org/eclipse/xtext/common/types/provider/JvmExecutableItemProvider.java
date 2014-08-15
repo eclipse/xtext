@@ -220,6 +220,11 @@ public class JvmExecutableItemProvider extends JvmFeatureItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.JVM_EXECUTABLE__EXCEPTIONS,
 				 TypesFactory.eINSTANCE.createJvmUnknownTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_EXECUTABLE__EXCEPTIONS,
+				 TypesFactory.eINSTANCE.createJvmInnerTypeReference()));
 	}
 
 }

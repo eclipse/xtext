@@ -395,4 +395,8 @@
         upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"
         transient="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmInnerTypeReference" eSuperTypes="#//JvmParameterizedTypeReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outer" eType="#//JvmParameterizedTypeReference"
+        containment="true" resolveProxies="false"/>
+  </eClassifiers>
 </ecore:EPackage>

@@ -14,6 +14,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
@@ -79,6 +80,11 @@ public class ResolvedTypeLiteral extends AbstractResolvedReference<XAbstractFeat
 	}
 	
 	@Override
+	protected List<JvmTypeReference> getPlainSyntacticTypeArguments() {
+		return Collections.emptyList();
+	}
+	
+	@Override
 	protected List<JvmTypeParameter> getDeclaredTypeParameters() {
 		return Collections.emptyList();
 	}
@@ -87,11 +93,6 @@ public class ResolvedTypeLiteral extends AbstractResolvedReference<XAbstractFeat
 		return this;
 	}
 
-	@Override
-	protected List<LightweightTypeReference> getSyntacticTypeArguments() {
-		return Collections.emptyList();
-	}
-	
 	@Override
 	public void applyToComputationState() {
 		if (isPackageFragment()) {

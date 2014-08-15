@@ -94,16 +94,17 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	@Override
 	protected List<LightweightTypeReference> getSuperTypes(TypeParameterSubstitutor<?> substitutor) {
 		List<LightweightTypeReference> componentSuperTypes = component.getSuperTypes(substitutor);
+		ITypeReferenceOwner owner = getOwner();
 		if (!componentSuperTypes.isEmpty()) {
 			List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(componentSuperTypes.size());
 			for(LightweightTypeReference componentSuperType: componentSuperTypes) {
-				result.add(new ArrayTypeReference(getOwner(), componentSuperType));
+				result.add(owner.newArrayTypeReference(componentSuperType));
 			}
 			return result;
 		}
 		List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(2);
-		result.add(new ParameterizedTypeReference(getOwner(), findNonNullType(Cloneable.class)));
-		result.add(new ParameterizedTypeReference(getOwner(), findNonNullType(Serializable.class)));
+		result.add(owner.newParameterizedTypeReference(findNonNullType(Cloneable.class)));
+		result.add(owner.newParameterizedTypeReference(findNonNullType(Serializable.class)));
 		return result;
 	}
 	
@@ -118,13 +119,13 @@ public class ArrayTypeReference extends LightweightTypeReference {
 			}
 			if (result == component)
 				return this;
-			return new ArrayTypeReference(getOwner(), result);
+			return getOwner().newArrayTypeReference(result);
 		} else if (rawType.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
 			String identifier = rawType.getIdentifier();
 			if (Object.class.getName().equals(identifier)
 					|| Cloneable.class.getName().equals(identifier)
 					|| Serializable.class.getName().equals(identifier)) {
-				return new ParameterizedTypeReference(getOwner(), rawType);
+				return getOwner().newParameterizedTypeReference(rawType);
 			}
 		}
 		return null;
@@ -147,7 +148,7 @@ public class ArrayTypeReference extends LightweightTypeReference {
 		if (resultComponent == null) {
 			return null;
 		}
-		return new ArrayTypeReference(getOwner(), resultComponent);
+		return getOwner().newArrayTypeReference(resultComponent);
 	}
 
 	@Override
@@ -168,7 +169,7 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	@Override
 	public LightweightTypeReference getNamedType() {
 		if (isAnonymous()) {
-			return new ArrayTypeReference(getOwner(), component.getNamedType());
+			return getOwner().newArrayTypeReference(component.getNamedType());
 		}
 		return super.getNamedType();
 	}
@@ -179,7 +180,7 @@ public class ArrayTypeReference extends LightweightTypeReference {
 		if (rawComponent == component) {
 			return this;
 		}
-		return new ArrayTypeReference(getOwner(), rawComponent);
+		return getOwner().newArrayTypeReference(rawComponent);
 	}
 	
 	@Override
@@ -207,7 +208,7 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	@Override
 	protected LightweightTypeReference doCopyInto(ITypeReferenceOwner owner) {
 		LightweightTypeReference copiedComponent = component.copyInto(owner);
-		return new ArrayTypeReference(owner, copiedComponent);
+		return owner.newArrayTypeReference(copiedComponent);
 	}
 	
 	@Override
