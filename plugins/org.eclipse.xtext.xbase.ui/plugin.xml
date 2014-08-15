@@ -129,4 +129,27 @@
             contextId="org.eclipse.xtext.ui.XtextEditorScope"
             platform="gtk"/>
     </extension>
+    <extension
+         point="org.eclipse.core.expressions.propertyTesters">
+      <propertyTester
+            class="org.eclipse.xtext.xbase.ui.debug.XbaseBreakpointPropertyTester"
+            id="org.eclipse.xtext.xbase.ui.debug.XbaseBreakpointPropertyTester"
+            namespace="org.eclipse.xtext.xbase.ui.debug"
+            properties="isXbaseBreakPoint"
+            type="java.lang.Object">
+    </propertyTester>
+   </extension>
+   <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            name="Condition"
+            class="org.eclipse.xtext.xbase.ui.XbaseExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.debug.ConditionPage"
+            id="org.eclipse.xtext.xbase.ui.propertypages.BreakpointCondition">
+         <enabledWhen>
+            <test
+                  property="org.eclipse.xtext.xbase.ui.debug.isXbaseBreakPoint">
+            </test>
+         </enabledWhen>
+      </page>
+    </extension>
 </plugin>
