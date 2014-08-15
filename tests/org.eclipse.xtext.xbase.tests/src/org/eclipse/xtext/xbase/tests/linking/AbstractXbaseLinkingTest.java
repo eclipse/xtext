@@ -16,6 +16,7 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
@@ -45,6 +46,22 @@ import testdata.OverloadedMethods;
  * @author Sebastian Zarnekow - Refinements to linking / shadowing
  */
 public abstract class AbstractXbaseLinkingTest extends AbstractXbaseTestCase {
+	
+	@Test public void testParameterizedInnerTypes_01() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ val nested.ParameterizedInnerTypes<String>.Inner x = null }", true);
+		XVariableDeclaration variableDecl = (XVariableDeclaration) block.getExpressions().get(0);
+		JvmType type = variableDecl.getType().getType();
+		assertEquals("nested.ParameterizedInnerTypes$Inner", type.getIdentifier());
+		assertEquals("nested.ParameterizedInnerTypes<java.lang.String>$Inner", variableDecl.getType().getIdentifier());
+	}
+	
+	@Test public void testParameterizedInnerTypes_02() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ val nested.ParameterizedInnerTypes.Sub<String>.Inner x = null }", true);
+		XVariableDeclaration variableDecl = (XVariableDeclaration) block.getExpressions().get(0);
+		JvmType type = variableDecl.getType().getType();
+		assertEquals("nested.ParameterizedInnerTypes$Inner", type.getIdentifier());
+		assertEquals("nested.ParameterizedInnerTypes$Sub<java.lang.String>$Inner", variableDecl.getType().getIdentifier());
+	}
 	
 	@Test public void testIdentifierAsTypeLiteral_01() throws Exception {
 		XFeatureCall featureCall = (XFeatureCall) expression("String", true);

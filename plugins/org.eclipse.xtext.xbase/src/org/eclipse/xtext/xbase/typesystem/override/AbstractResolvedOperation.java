@@ -134,7 +134,7 @@ public abstract class AbstractResolvedOperation extends AbstractResolvedExecutab
 			return overrideCandidates;
 		// here we are only interested in the raw type thus the declarator is not substituted
 		// the found operation will be put in the right context by clients, e.g. #getOverriddenAndImplementedMethods
-		ParameterizedTypeReference currentDeclarator = new ParameterizedTypeReference(getContextType().getOwner(), declaration.getDeclaringType());
+		ParameterizedTypeReference currentDeclarator = getContextType().getOwner().newParameterizedTypeReference(declaration.getDeclaringType());
 		List<LightweightTypeReference> superTypes = currentDeclarator.getSuperTypes();
 		List<JvmOperation> result = Lists.newArrayListWithCapacity(5);
 		for(LightweightTypeReference superType: superTypes) {

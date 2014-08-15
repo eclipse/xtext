@@ -15,7 +15,6 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 /**
@@ -28,10 +27,6 @@ public abstract class AbstractTypeExpectation implements ITypeExpectation {
 
 	protected AbstractTypeExpectation(AbstractTypeComputationState state) {
 		this.state = state;
-	}
-	
-	public OwnedConverter getConverter() {
-		return state.getConverter();
 	}
 	
 	public ITypeReferenceOwner getReferenceOwner() {

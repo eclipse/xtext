@@ -20,10 +20,11 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.InnerTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTraversalData;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceFactory;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithParameterAndResult;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
@@ -78,10 +79,18 @@ public class DeclaratorTypeArgumentCollector extends TypeReferenceVisitorWithPar
 		return Boolean.FALSE;
 	}
 	
+	@Override
+	protected Boolean doVisitInnerTypeReference(InnerTypeReference reference, LightweightTraversalData data) {
+		if (!reference.getOuter().accept(this, data)) {
+			return doVisitParameterizedTypeReference(reference, data);
+		}
+		return Boolean.TRUE;
+	}
+	
 	protected Boolean addConstraintMapping(final JvmTypeParameter typeParameter, ITypeReferenceOwner owner, LightweightTraversalData data) {
 		List<JvmTypeConstraint> constraints = typeParameter.getConstraints();
 		List<LightweightTypeReference> upperBounds = Lists.newArrayList();
-		OwnedConverter converter = new OwnedConverter(owner) {
+		LightweightTypeReferenceFactory factory = new LightweightTypeReferenceFactory(owner) {
 			@Override
 			protected JvmType getType(JvmTypeReference reference) {
 				// guard against raw type references where the declarator is recursively defined, e.g.
@@ -95,13 +104,13 @@ public class DeclaratorTypeArgumentCollector extends TypeReferenceVisitorWithPar
 		};
 		for(JvmTypeConstraint constraint: constraints) {
 			if (constraint instanceof JvmUpperBound && constraint.getTypeReference() != null) {
-				LightweightTypeReference upperBound = converter.toLightweightReference(constraint.getTypeReference());
+				LightweightTypeReference upperBound = factory.toLightweightReference(constraint.getTypeReference());
 				upperBound.accept(this, data);
 				upperBounds.add(upperBound);
 			}
 		}
 		if (upperBounds.size() > 1) {
-			CompoundTypeReference result = new CompoundTypeReference(owner, false);
+			CompoundTypeReference result = owner.newCompoundTypeReference(false);
 			for(LightweightTypeReference upperBound: upperBounds) {
 				result.addComponent(upperBound);
 			}
@@ -136,10 +145,9 @@ public class DeclaratorTypeArgumentCollector extends TypeReferenceVisitorWithPar
 		}
 		if (type instanceof JvmDeclaredType) {
 			ITypeReferenceOwner owner = reference.getOwner();
-			OwnedConverter converter = new OwnedConverter(owner);
 			List<JvmTypeReference> superTypes = ((JvmDeclaredType) type).getSuperTypes();
 			for(JvmTypeReference superType: superTypes) {
-				LightweightTypeReference lightweightSuperType = converter.toLightweightReference(superType);
+				LightweightTypeReference lightweightSuperType = owner.toLightweightTypeReference(superType);
 				Boolean recursion = lightweightSuperType.accept(this, data);
 				if (recursion != null && recursion.booleanValue()) {
 					return Boolean.TRUE;
@@ -147,12 +155,11 @@ public class DeclaratorTypeArgumentCollector extends TypeReferenceVisitorWithPar
 			}
 		} else if (type instanceof JvmTypeParameter) {
 			ITypeReferenceOwner owner = reference.getOwner();
-			OwnedConverter converter = new OwnedConverter(owner);
 			List<JvmTypeConstraint> constraints = ((JvmTypeParameter) type).getConstraints();
 			for(JvmTypeConstraint constraint: constraints) {
 				JvmTypeReference constraintReference = constraint.getTypeReference();
 				if (constraintReference != null) {
-					LightweightTypeReference lightweightSuperType = converter.toLightweightReference(constraintReference);
+					LightweightTypeReference lightweightSuperType = owner.toLightweightTypeReference(constraintReference);
 					Boolean recursion = lightweightSuperType.accept(this, data);
 					if (recursion != null && recursion.booleanValue()) {
 						return Boolean.TRUE;

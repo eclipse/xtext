@@ -10,6 +10,7 @@ import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.InnerTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitor;
@@ -78,6 +79,24 @@ public class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
         this.appendCommaSeparated(_typeArguments_1);
         this.appender.append(">");
       }
+    }
+  }
+  
+  protected void doVisitInnerTypeReference(final InnerTypeReference reference) {
+    LightweightTypeReference _outer = reference.getOuter();
+    _outer.accept(this);
+    this.appender.append(".");
+    JvmType _type = reference.getType();
+    String _simpleName = _type.getSimpleName();
+    this.appender.append(_simpleName);
+    List<LightweightTypeReference> _typeArguments = reference.getTypeArguments();
+    boolean _isEmpty = _typeArguments.isEmpty();
+    boolean _not = (!_isEmpty);
+    if (_not) {
+      this.appender.append("<");
+      List<LightweightTypeReference> _typeArguments_1 = reference.getTypeArguments();
+      this.appendCommaSeparated(_typeArguments_1);
+      this.appender.append(">");
     }
   }
   

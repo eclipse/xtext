@@ -66,7 +66,7 @@ import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceFactory;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 import com.google.common.base.Function;
@@ -771,7 +771,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 						IIdentifiableElementDescription casted = (IIdentifiableElementDescription) myCandidate;
 						insignificantParameters = casted.getNumberOfIrrelevantParameters();
 					}
-					OwnedConverter converter = getTypeConverter(contentAssistContext.getResource());
+					LightweightTypeReferenceFactory converter = getTypeConverter(contentAssistContext.getResource());
 					EObject objectOrProxy = myCandidate.getEObjectOrProxy();
 					StyledString displayString;
 					if (objectOrProxy instanceof JvmFeature) {
@@ -871,7 +871,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 						return info;
 					}
 					JvmTypeReference parameterType = parameters.get(parameters.size()-1).getParameterType();
-					LightweightTypeReference light = getTypeConverter(contentAssistContext.getResource()).apply(parameterType);
+					LightweightTypeReference light = getTypeConverter(contentAssistContext.getResource()).toLightweightReference(parameterType);
 					if(light.isFunctionType()) {
 						int numParameters = light.getAsFunctionTypeReference().getParameterTypes().size();
 						if(numParameters == 1) {

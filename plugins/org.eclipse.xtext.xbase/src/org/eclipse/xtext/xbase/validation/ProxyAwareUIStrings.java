@@ -13,6 +13,7 @@ import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmCompoundTypeReference;
 import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
+import org.eclipse.xtext.common.types.JvmInnerTypeReference;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
@@ -155,6 +156,18 @@ public class ProxyAwareUIStrings implements XtypeReferenceVisitorWithParameter<S
 		}
 		param.append(">");
 		return param;
+	}
+	
+	public StringBuilder doVisitInnerTypeReference(JvmInnerTypeReference reference, StringBuilder param) {
+		JvmType type = reference.getType();
+		if (type == null || type.eIsProxy()) {
+			return null;
+		}
+		param = reference.getOuter().accept(this, param);
+		if (param == null)
+			return null;
+		param.append(".");
+		return doVisitParameterizedTypeReference(reference, param);
 	}
 	
 	public StringBuilder doVisitSpecializedTypeReference(JvmSpecializedTypeReference reference, StringBuilder param) {

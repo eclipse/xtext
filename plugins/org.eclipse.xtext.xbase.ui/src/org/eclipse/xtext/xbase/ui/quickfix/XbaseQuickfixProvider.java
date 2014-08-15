@@ -37,9 +37,9 @@ import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
 import org.eclipse.xtext.xbase.ui.imports.OrganizeImportsHandler;
@@ -234,8 +234,8 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 				if (switchExpression == null) {
 					return;
 				}
-				OwnedConverter converter = new OwnedConverter(new StandardTypeReferenceOwner(services, switchExpression));
-				LightweightTypeReference actualTypeReference = converter.toLightweightReference(casePart.getTypeGuard());
+				ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, switchExpression);
+				LightweightTypeReference actualTypeReference = owner.toLightweightTypeReference(casePart.getTypeGuard());
 				for (XCasePart previousCasePart : switchExpression.getCases()) {
 					if (previousCasePart == casePart) {
 						return;
@@ -244,7 +244,7 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 					if (typeGuard == null || previousCasePart.getCase() != null) {
 						continue;
 					}
-					LightweightTypeReference previousTypeReference = converter.toLightweightReference(typeGuard);
+					LightweightTypeReference previousTypeReference = owner.toLightweightTypeReference(typeGuard);
 					if (typesOrderUtil.isHandled(actualTypeReference, previousTypeReference)) {
 						ICompositeNode previousCaseNode = NodeModelUtils.findActualNodeFor(previousCasePart);
 						if (previousCaseNode == null) {
@@ -283,13 +283,13 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 				if (tryCatchFinallyExpression == null) {
 					return;
 				}
-				OwnedConverter converter = new OwnedConverter(new StandardTypeReferenceOwner(services, tryCatchFinallyExpression));
-				LightweightTypeReference actualTypeReference = converter.toLightweightReference(catchClause.getDeclaredParam().getParameterType());
+				ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, tryCatchFinallyExpression);
+				LightweightTypeReference actualTypeReference = owner.toLightweightTypeReference(catchClause.getDeclaredParam().getParameterType());
 				for (XCatchClause previousCatchClause : tryCatchFinallyExpression.getCatchClauses()) {
 					if (previousCatchClause == catchClause) {
 						return;
 					}
-					LightweightTypeReference previousTypeReference = converter.toLightweightReference(previousCatchClause.getDeclaredParam().getParameterType());
+					LightweightTypeReference previousTypeReference = owner.toLightweightTypeReference(previousCatchClause.getDeclaredParam().getParameterType());
 					if (typesOrderUtil.isHandled(actualTypeReference, previousTypeReference)) {
 						ICompositeNode previousNode = NodeModelUtils.findActualNodeFor(previousCatchClause);
 						if (previousNode == null) {
@@ -340,8 +340,8 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 				XInstanceOfExpression actualIfPart = (XInstanceOfExpression) ifExpression.getIf();
 				XAbstractFeatureCall actualFeatureCall = (XAbstractFeatureCall) actualIfPart.getExpression();
 				JvmIdentifiableElement actualFeature = actualFeatureCall.getFeature();
-				OwnedConverter converter = new OwnedConverter(new StandardTypeReferenceOwner(services, firstIfExpression));
-				LightweightTypeReference actualTypeReference = converter.toLightweightReference(actualIfPart.getType());
+				ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, firstIfExpression);
+				LightweightTypeReference actualTypeReference = owner.toLightweightTypeReference(actualIfPart.getType());
 				List<XExpression> ifParts = collectIfParts(firstIfExpression, new ArrayList<XExpression>());
 				for (XExpression previousIfPart : ifParts) {
 					if (actualIfPart == previousIfPart) {
@@ -358,7 +358,7 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 					if (previousFeatureCall.getFeature() != actualFeature) {
 						continue;
 					}
-					LightweightTypeReference previousTypeReference = converter.toLightweightReference(instanceOfExpression.getType());
+					LightweightTypeReference previousTypeReference = owner.toLightweightTypeReference(instanceOfExpression.getType());
 					if (typesOrderUtil.isHandled(actualTypeReference, previousTypeReference)) {
 						ICompositeNode previousNode = NodeModelUtils.findActualNodeFor(instanceOfExpression.eContainer());
 						if (previousNode == null) {

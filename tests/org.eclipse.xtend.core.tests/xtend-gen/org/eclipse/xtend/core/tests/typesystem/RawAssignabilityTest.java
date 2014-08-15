@@ -416,4 +416,42 @@ public class RawAssignabilityTest extends CommonAssignabilityTest {
     this.isAssignableFrom("java.lang.Class<? super java.util.Map<String, Integer>>", "java.lang.Class<? super java.util.Map>");
     this.isAssignableFrom("java.lang.Class<? super java.util.Map<?, ?>>", "java.lang.Class<? super java.util.Map>");
   }
+  
+  @Test
+  public void testInnerClasses_03() {
+    this.isAssignableFrom("test.InnerClasses.SubString<Number>.Inner<Number>", "test.InnerClasses.Super<String>.Inner<Integer>");
+    this.isAssignableFrom("test.InnerClasses.Super<String>.Inner<Integer>", "test.InnerClasses.SubString<Number>.Inner<Number>");
+  }
+  
+  @Test
+  public void testInnerClasses_04() {
+    this.isAssignableFrom("test.InnerClasses.SubString<Number>.Inner<? extends Number>", "test.InnerClasses.Super<String>.Inner<Integer>");
+    this.isAssignableFrom("test.InnerClasses.Super<String>.Inner<Integer>", "test.InnerClasses.SubString<Number>.Inner<? extends Number>");
+  }
+  
+  @Test
+  public void testInnerClasses_07() {
+    this.isAssignableFrom("test.InnerClasses.Super<Number>.Inner<Number>", "test.InnerClasses.Super<String>.Inner<Number>");
+    this.isAssignableFrom("test.InnerClasses.Super<String>.Inner<Number>", "test.InnerClasses.Super<Number>.Inner<Number>");
+  }
+  
+  @Test
+  public void testInnerClasses_11() {
+    this.isAssignableFrom("test.InnerClasses.Super<String>.Inner<String>", "test.InnerClasses.Sub<String>.SubInner2<Number>");
+    this.isAssignableFrom("test.InnerClasses.Super<String>.Inner<String>", "test.InnerClasses.Sub<Number>.SubInner2<Number>");
+  }
+  
+  @Test
+  public void testInnerClasses_12() {
+    this.isAssignableFrom("test.InnerClasses.Super<String>.Inner<String>", "test.InnerClasses.Sub<String>.SubInner2<Number>");
+    this.isAssignableFrom("test.InnerClasses.Super<String>.Inner<String>", "test.InnerClasses.Sub<Number>.SubInner2<Number>");
+    this.isAssignableFrom("test.InnerClasses.Super<String>.Inner<Number>", "test.InnerClasses.Sub<Number>.SubInner2<Number>");
+  }
+  
+  @Test
+  public void testInnerClasses_13() {
+    this.isAssignableFrom("test.InnerClasses.Super<String>.Inner<Number>", "test.InnerClasses.Sub<String>.SubInner<Number>");
+    this.isNotAssignableFrom("test.InnerClasses.Super<String>.SubInner<Number>", "test.InnerClasses.Sub<String>.SubInner2<Number>");
+    this.isAssignableFrom("test.InnerClasses.Super<String>.Inner<String>", "test.InnerClasses.Sub<Number>.SubInner<Number>");
+  }
 }

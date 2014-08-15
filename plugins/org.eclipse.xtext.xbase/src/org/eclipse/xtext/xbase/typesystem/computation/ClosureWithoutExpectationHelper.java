@@ -25,7 +25,6 @@ import org.eclipse.xtext.xbase.typesystem.references.FunctionTypes;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
@@ -107,19 +106,19 @@ public class ClosureWithoutExpectationHelper extends AbstractClosureTypeHelper {
 			}
 		};
 		JvmGenericType type = (JvmGenericType) result.getType();
-		List<JvmTypeParameter> parameters = type.getTypeParameters();
+		List<JvmTypeParameter> typeParameters = type.getTypeParameters();
 		int max = type.getTypeParameters().size();
 		if (!isProcedure)
 			max--;
 		for(int i = 0; i < max; i++) {
-			JvmTypeParameter parameter = parameters.get(i);
-			LightweightTypeReference parameterType = new ParameterizedTypeReference(owner, parameter);
+			JvmTypeParameter typeParameter = typeParameters.get(i);
+			LightweightTypeReference parameterType = owner.newParameterizedTypeReference(typeParameter);
 			LightweightTypeReference substituted = substitutor.substitute(parameterType);
 			result.addTypeArgument(substituted);
 		}
 		if (!isProcedure) {
-			JvmTypeParameter parameter = parameters.get(max);
-			LightweightTypeReference parameterType = new ParameterizedTypeReference(owner, parameter);
+			JvmTypeParameter typeParameter = typeParameters.get(max);
+			LightweightTypeReference parameterType = owner.toLightweightTypeReference(typeParameter);
 			LightweightTypeReference substituted = substitutor.substitute(parameterType);
 			result.addTypeArgument(substituted);
 		}
@@ -213,7 +212,7 @@ public class ClosureWithoutExpectationHelper extends AbstractClosureTypeHelper {
 				deferredBindTypeArgument(expectedReturnType, expressionResultType, BoundTypeArgumentSource.INFERRED);
 			} else {
 				JvmType objectType = getServices().getTypeReferences().findDeclaredType(Object.class, incompleteClosureType.getType());
-				ParameterizedTypeReference objectTypeReference = new ParameterizedTypeReference(incompleteClosureType.getOwner(), objectType);
+				LightweightTypeReference objectTypeReference = incompleteClosureType.getOwner().newParameterizedTypeReference(objectType);
 				result.setReturnType(objectTypeReference);
 				deferredBindTypeArgument(expectedReturnType, objectTypeReference, BoundTypeArgumentSource.INFERRED);
 			}

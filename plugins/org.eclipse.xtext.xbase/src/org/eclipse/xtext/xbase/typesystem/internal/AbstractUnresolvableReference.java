@@ -16,8 +16,6 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
-import org.eclipse.xtext.xbase.typesystem.references.UnknownTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -44,7 +42,7 @@ public abstract class AbstractUnresolvableReference implements ILinkingCandidate
 	}
 
 	protected void applyType() {
-		state.acceptActualType(new UnknownTypeReference(state.getReferenceOwner()), ConformanceFlags.CHECKED_SUCCESS);
+		state.acceptActualType(state.getReferenceOwner().newUnknownTypeReference(), ConformanceFlags.CHECKED_SUCCESS);
 	}
 	
 	protected ExpressionTypeComputationState getState() {
@@ -85,8 +83,4 @@ public abstract class AbstractUnresolvableReference implements ILinkingCandidate
 		return expression;
 	}
 	
-	protected OwnedConverter getConverter() {
-		return state.getConverter();
-	}
-
 }

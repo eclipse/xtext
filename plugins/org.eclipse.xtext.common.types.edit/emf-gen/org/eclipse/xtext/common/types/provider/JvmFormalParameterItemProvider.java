@@ -218,6 +218,11 @@ public class JvmFormalParameterItemProvider extends JvmAnnotationTargetItemProvi
 			(createChildParameter
 				(TypesPackage.Literals.JVM_FORMAL_PARAMETER__PARAMETER_TYPE,
 				 TypesFactory.eINSTANCE.createJvmUnknownTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_FORMAL_PARAMETER__PARAMETER_TYPE,
+				 TypesFactory.eINSTANCE.createJvmInnerTypeReference()));
 	}
 
 }
