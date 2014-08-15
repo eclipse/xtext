@@ -3,27 +3,27 @@ package org.eclipse.xtend.core.tests.macro
 import com.google.inject.Inject
 import org.eclipse.xtend.core.compiler.XtendGenerator
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
+import org.eclipse.xtend.core.macro.declaration.MutableJvmClassDeclarationImpl
 import org.eclipse.xtend.core.macro.declaration.MutableJvmFieldDeclarationImpl
 import org.eclipse.xtend.core.macro.declaration.MutableJvmMethodDeclarationImpl
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
+import org.eclipse.xtend.lib.macro.declaration.Element
 import org.eclipse.xtend.lib.macro.declaration.EnumerationTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration
 import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclarator
+import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.junit4.internal.LineDelimiters
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider
 import org.junit.Ignore
 import org.junit.Test
 
 import static org.junit.Assert.*
-import org.eclipse.xtend.lib.macro.declaration.Element
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper
-import org.eclipse.xtend.core.macro.declaration.MutableJvmClassDeclarationImpl
-import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration
 
 abstract class AbstractReusableActiveAnnotationTests {
 	
@@ -444,117 +444,6 @@ abstract class AbstractReusableActiveAnnotationTests {
 		)[
 			xtendFile.eResource.errors.exists[message.contains('cannot be modified')]
 		]
-	}
-	
-	@Test def void testDetectOrphanedElements() {
-		assertProcessing(
-				'myannotation/EvilAnnotation.xtend' -> '''
-					package myannotation
-					
-					import java.util.List
-					import org.eclipse.xtend.lib.macro.Active
-					import org.eclipse.xtend.lib.macro.AbstractClassProcessor
-					import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
-					import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
-					import org.eclipse.xtend.lib.macro.TransformationContext
-					import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
-					
-					@Active(EvilProcessor)
-					annotation EvilAnnotation {
-						
-					}
-					
-					class EvilProcessor extends AbstractClassProcessor {
-						
-						override doRegisterGlobals(List<? extends ClassDeclaration> classes, extension RegisterGlobalsContext context) {
-							classes.forEach[
-								registerClass(qualifiedName+'.Inner')
-							]
-						}
-						
-						override doTransform(List<? extends MutableClassDeclaration> classes, extension TransformationContext context) {
-							classes.forEach[
-								addField("foo")[
-									type = object
-									markAsRead
-								]
-								addMethod("foo")[
-									returnType = object
-									body = ["return null;"]
-									addParameter("x", Integer.newTypeReference)
-								]
-							]
-						}
-					}
-				''',
-				'myusercode/UserCode.xtend' -> '''
-					package myusercode
-					
-					import myannotation.EvilAnnotation
-					
-					@EvilAnnotation
-					class Foo {
-					}
-				'''
-			)[
-				assertTrue(xtendFile.eResource.warnings.exists[
-					message.contains("The generated field 'myusercode.Foo.foo' is not associated with a source element.")
-					&& line == 1
-				])
-				assertTrue(xtendFile.eResource.warnings.exists[
-					message.contains("The generated method 'myusercode.Foo.foo(Integer)' is not associated with a source element.")
-					&& line == 1
-				])
-				assertTrue(xtendFile.eResource.warnings.exists[
-					message.contains("The generated type 'myusercode.Foo.Inner' is not associated with a source element.")
-					&& line == 1
-				])
-				assertEquals(3, xtendFile.eResource.warnings.size)
-			]
-	}
-	
-	@Test def void testDetectOrphanedElements2() {
-		assertProcessing(
-				'myannotation/EvilAnnotation.xtend' -> '''
-					package myannotation
-					
-					import java.util.List
-					import org.eclipse.xtend.lib.macro.Active
-					import org.eclipse.xtend.lib.macro.AbstractClassProcessor
-					import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
-					import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
-					import org.eclipse.xtend.lib.macro.TransformationContext
-					import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
-					
-					@Active(EvilProcessor)
-					annotation EvilAnnotation {}
-					
-					class EvilProcessor extends AbstractClassProcessor {
-						
-						override doRegisterGlobals(ClassDeclaration clazz, extension RegisterGlobalsContext context) {
-							registerClass(clazz.qualifiedName+'.Inner')
-						}
-						
-						override doTransform(MutableClassDeclaration clazz, extension TransformationContext context) {
-							findClass(clazz.qualifiedName+'.Inner').primarySourceElement = clazz
-						}
-					}
-				''',
-				'myusercode/UserCode.xtend' -> '''
-					package myusercode
-					
-					import myannotation.EvilAnnotation
-					
-					@EvilAnnotation
-					class Foo {
-						Comparable<String> p = new Comparable<String>() {
-							override compareTo(String other) { 42 }
-						}
-					}
-				'''
-			)[
-				assertTrue(xtendFile.eResource.warnings.empty)
-			]
 	}
 	
 	@Test def void testSetEmptyListAsAnnotationValue() {
