@@ -24,6 +24,8 @@ public class XtendValidatorConfigurationBlock extends XbaseValidationConfigurati
 				defaultIndent));
 		fillJavaDocSection(new ComboBoxBuilder(this,createSection("Javadoc", composite, nColumns),
 				defaultIndent));
+		fillActiveAnnotationSection(new ComboBoxBuilder(this,createSection("Active Annotations", composite, nColumns),
+				defaultIndent));
 	}
 
 	protected void fillDispatchSection(ComboBoxBuilder builder) {
@@ -36,7 +38,11 @@ public class XtendValidatorConfigurationBlock extends XbaseValidationConfigurati
 	protected void fillJavaDocSection(ComboBoxBuilder builder) {
 		builder.addJavaDelegatingComboBox(JAVA_DOC_LINKING_DIAGNOSTIC, "Unresolved references");
 	}
-
+	
+	protected void fillActiveAnnotationSection(ComboBoxBuilder builder) {
+		builder.addComboBox(ORPHAN_ELMENT, "JVM element without source element:");
+	}
+	
 	@Override
 	protected void fillUnusedCodeSection(ComboBoxBuilder builder) {
 		super.fillUnusedCodeSection(builder);

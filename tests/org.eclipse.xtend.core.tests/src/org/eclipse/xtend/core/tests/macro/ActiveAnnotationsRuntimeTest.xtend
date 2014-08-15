@@ -33,6 +33,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
+import org.eclipse.xtend.core.xtend.XtendPackage
+import org.eclipse.xtext.diagnostics.Severity
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 
 @RunWith(XtextRunner)
 @InjectWith(RuntimeInjectorProvider)
@@ -47,6 +50,7 @@ class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests
 	@Inject Provider<XtextResourceSet> resourceSetProvider;
 	@Inject RuntimeWorkspaceConfigProvider configProvider
 	@Inject extension MutableFileSystemSupport fileSystemSupport
+	@Inject ValidationTestHelper validator
 	
 	val macroProject = "macroProject"
 	val clientProject = "userProject"
@@ -162,6 +166,110 @@ class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests
 			assertTrue(error.message.contains(IllegalStateException.name))
 			assertFalse(error.message.contains(AnnotationProcessor.name))
 		]
+	}
+	
+	@Test def void testDetectOrphanedElements() {
+		assertProcessing(
+				'myannotation/EvilAnnotation.xtend' -> '''
+					package myannotation
+					
+					import java.util.List
+					import org.eclipse.xtend.lib.macro.Active
+					import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+					import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
+					import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+					import org.eclipse.xtend.lib.macro.TransformationContext
+					import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
+					
+					@Active(EvilProcessor)
+					annotation EvilAnnotation {
+						
+					}
+					
+					class EvilProcessor extends AbstractClassProcessor {
+						
+						override doRegisterGlobals(List<? extends ClassDeclaration> classes, extension RegisterGlobalsContext context) {
+							classes.forEach[
+								registerClass(qualifiedName+'.Inner')
+							]
+						}
+						
+						override doTransform(List<? extends MutableClassDeclaration> classes, extension TransformationContext context) {
+							classes.forEach[
+								addField("foo")[
+									type = object
+									markAsRead
+								]
+								addMethod("foo")[
+									returnType = object
+									body = ["return null;"]
+									addParameter("x", Integer.newTypeReference)
+								]
+							]
+						}
+					}
+				''',
+				'myusercode/UserCode.xtend' -> '''
+					package myusercode
+					
+					import myannotation.EvilAnnotation
+					
+					@EvilAnnotation
+					class Foo {
+					}
+				'''
+			)[
+				validator.assertIssue(xtendFile, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT, Severity.WARNING, 
+					"The generated field 'myusercode.Foo.foo' is not associated with a source element.")
+				validator.assertIssue(xtendFile, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT, Severity.WARNING, 
+					"The generated method 'myusercode.Foo.foo(Integer)' is not associated with a source element.")
+				validator.assertIssue(xtendFile, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT, Severity.WARNING, 
+					"The generated type 'myusercode.Foo.Inner' is not associated with a source element.")
+			]
+	}
+	
+	@Test def void testDetectOrphanedElements2() {
+		assertProcessing(
+				'myannotation/EvilAnnotation.xtend' -> '''
+					package myannotation
+					
+					import java.util.List
+					import org.eclipse.xtend.lib.macro.Active
+					import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+					import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
+					import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+					import org.eclipse.xtend.lib.macro.TransformationContext
+					import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
+					
+					@Active(EvilProcessor)
+					annotation EvilAnnotation {}
+					
+					class EvilProcessor extends AbstractClassProcessor {
+						
+						override doRegisterGlobals(ClassDeclaration clazz, extension RegisterGlobalsContext context) {
+							registerClass(clazz.qualifiedName+'.Inner')
+						}
+						
+						override doTransform(MutableClassDeclaration clazz, extension TransformationContext context) {
+							findClass(clazz.qualifiedName+'.Inner').primarySourceElement = clazz
+						}
+					}
+				''',
+				'myusercode/UserCode.xtend' -> '''
+					package myusercode
+					
+					import myannotation.EvilAnnotation
+					
+					@EvilAnnotation
+					class Foo {
+						Comparable<String> p = new Comparable<String>() {
+							override compareTo(String other) { 42 }
+						}
+					}
+				'''
+			)[
+				validator.assertNoWarnings(xtendFile, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT)
+			]
 	}
 
 }
