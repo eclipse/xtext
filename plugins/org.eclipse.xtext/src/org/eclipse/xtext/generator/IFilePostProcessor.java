@@ -19,7 +19,7 @@ import com.google.inject.ImplementedBy;
  * additional information for implementors which is the target encoding of the file.
  * 
  * @see LineSeparatorHarmonizer
- * @see IFilePostProcessorExtension (since 2.4)
+ * @see IFilePostProcessorExtension IFilePostProcessorExtension (since 2.4)
  * 
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.3

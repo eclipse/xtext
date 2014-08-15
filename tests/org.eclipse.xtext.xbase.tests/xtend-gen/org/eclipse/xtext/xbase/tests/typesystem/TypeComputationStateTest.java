@@ -62,9 +62,10 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
     try {
       this.resolver.setTypeComputer(this);
       final XExpression expression = this.expression("{ null }");
+      this.resolver.initializeFrom(expression);
       final PublicResolvedTypes resolution = new PublicResolvedTypes(this.resolver);
       ITypeReferenceOwner _referenceOwner = resolution.getReferenceOwner();
-      final AnyTypeReference any = new AnyTypeReference(_referenceOwner);
+      final AnyTypeReference any = _referenceOwner.newAnyTypeReference();
       IBatchScopeProvider _batchScopeProvider = this.resolver.getBatchScopeProvider();
       Resource _eResource = expression.eResource();
       IFeatureScopeSession _newSession = _batchScopeProvider.newSession(_eResource);
@@ -90,9 +91,10 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
     try {
       this.resolver.setTypeComputer(this);
       final XExpression expression = this.expression("{ null }");
+      this.resolver.initializeFrom(expression);
       final PublicResolvedTypes resolution = new PublicResolvedTypes(this.resolver);
       ITypeReferenceOwner _referenceOwner = resolution.getReferenceOwner();
-      final AnyTypeReference any = new AnyTypeReference(_referenceOwner);
+      final AnyTypeReference any = _referenceOwner.newAnyTypeReference();
       IBatchScopeProvider _batchScopeProvider = this.resolver.getBatchScopeProvider();
       Resource _eResource = expression.eResource();
       IFeatureScopeSession _newSession = _batchScopeProvider.newSession(_eResource);
@@ -154,7 +156,7 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       this.resolver.initializeFrom(expression);
       final PublicResolvedTypes resolution = new PublicResolvedTypes(this.resolver);
       ITypeReferenceOwner _referenceOwner = resolution.getReferenceOwner();
-      final AnyTypeReference any = new AnyTypeReference(_referenceOwner);
+      final AnyTypeReference any = _referenceOwner.newAnyTypeReference();
       IBatchScopeProvider _batchScopeProvider = this.resolver.getBatchScopeProvider();
       Resource _eResource = expression.eResource();
       IFeatureScopeSession _newSession = _batchScopeProvider.newSession(_eResource);
@@ -192,7 +194,7 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       this.resolver.initializeFrom(expression);
       final PublicResolvedTypes resolution = new PublicResolvedTypes(this.resolver);
       ITypeReferenceOwner _referenceOwner = resolution.getReferenceOwner();
-      final AnyTypeReference any = new AnyTypeReference(_referenceOwner);
+      final AnyTypeReference any = _referenceOwner.newAnyTypeReference();
       IBatchScopeProvider _batchScopeProvider = this.resolver.getBatchScopeProvider();
       Resource _eResource = expression.eResource();
       IFeatureScopeSession _newSession = _batchScopeProvider.newSession(_eResource);
@@ -240,7 +242,7 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       this.resolver.initializeFrom(expression);
       final PublicResolvedTypes resolution = new PublicResolvedTypes(this.resolver);
       ITypeReferenceOwner _referenceOwner = resolution.getReferenceOwner();
-      final AnyTypeReference any = new AnyTypeReference(_referenceOwner);
+      final AnyTypeReference any = _referenceOwner.newAnyTypeReference();
       IBatchScopeProvider _batchScopeProvider = this.resolver.getBatchScopeProvider();
       Resource _eResource = expression.eResource();
       IFeatureScopeSession _newSession = _batchScopeProvider.newSession(_eResource);

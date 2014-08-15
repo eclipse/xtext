@@ -50,6 +50,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmInnerTypeReference;
 import org.eclipse.xtext.common.types.JvmIntAnnotationValue;
 import org.eclipse.xtext.common.types.JvmLongAnnotationValue;
 import org.eclipse.xtext.common.types.JvmLowerBound;
@@ -443,6 +444,13 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * @generated
 	 */
 	private EClass jvmCustomAnnotationValueEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass jvmInnerTypeReferenceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1770,6 +1778,26 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getJvmInnerTypeReference()
+	{
+		return jvmInnerTypeReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getJvmInnerTypeReference_Outer()
+	{
+		return (EReference)jvmInnerTypeReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getJvmVisibility()
 	{
 		return jvmVisibilityEEnum;
@@ -2009,6 +2037,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		jvmCustomAnnotationValueEClass = createEClass(JVM_CUSTOM_ANNOTATION_VALUE);
 		createEAttribute(jvmCustomAnnotationValueEClass, JVM_CUSTOM_ANNOTATION_VALUE__VALUES);
 
+		jvmInnerTypeReferenceEClass = createEClass(JVM_INNER_TYPE_REFERENCE);
+		createEReference(jvmInnerTypeReferenceEClass, JVM_INNER_TYPE_REFERENCE__OUTER);
+
 		// Create enums
 		jvmVisibilityEEnum = createEEnum(JVM_VISIBILITY);
 
@@ -2100,6 +2131,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		jvmUnknownTypeReferenceEClass.getESuperTypes().add(this.getJvmTypeReference());
 		jvmCompoundTypeReferenceEClass.getESuperTypes().add(this.getJvmTypeReference());
 		jvmCustomAnnotationValueEClass.getESuperTypes().add(this.getJvmAnnotationValue());
+		jvmInnerTypeReferenceEClass.getESuperTypes().add(this.getJvmParameterizedTypeReference());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(jvmIdentifiableElementEClass, JvmIdentifiableElement.class, "JvmIdentifiableElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2418,6 +2450,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 
 		initEClass(jvmCustomAnnotationValueEClass, JvmCustomAnnotationValue.class, "JvmCustomAnnotationValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getJvmCustomAnnotationValue_Values(), ecorePackage.getEJavaObject(), "values", null, 0, -1, JvmCustomAnnotationValue.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(jvmInnerTypeReferenceEClass, JvmInnerTypeReference.class, "JvmInnerTypeReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getJvmInnerTypeReference_Outer(), this.getJvmParameterizedTypeReference(), null, "outer", null, 0, 1, JvmInnerTypeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(jvmVisibilityEEnum, JvmVisibility.class, "JvmVisibility");

@@ -11,6 +11,7 @@ import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmCompoundTypeReference;
 import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
+import org.eclipse.xtext.common.types.JvmInnerTypeReference;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
@@ -63,6 +64,10 @@ public abstract class AbstractTypeReferenceVisitor<Result> implements ITypeRefer
 
 		public Result doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference) {
 			return doVisitTypeReference(reference);
+		}
+		
+		public Result doVisitInnerTypeReference(JvmInnerTypeReference reference) {
+			return doVisitParameterizedTypeReference(reference);
 		}
 
 		public Result doVisitGenericArrayTypeReference(JvmGenericArrayTypeReference reference) {

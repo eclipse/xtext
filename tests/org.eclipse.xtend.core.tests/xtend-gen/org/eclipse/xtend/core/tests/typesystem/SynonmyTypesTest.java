@@ -11,7 +11,6 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.typesystem.AbstractTestingTypeReferenceOwner;
@@ -19,7 +18,6 @@ import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -29,7 +27,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
-import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Assert;
 import org.junit.Test;
@@ -46,10 +44,6 @@ public class SynonmyTypesTest extends AbstractTestingTypeReferenceOwner {
   @Inject
   @Extension
   private SynonymTypesProvider _synonymTypesProvider;
-  
-  public List<JvmTypeParameter> getDeclaredTypeParameters() {
-    return CollectionLiterals.<JvmTypeParameter>emptyList();
-  }
   
   public void hasSynonyms(final String type, final String... expectedSynonyms) {
     Pair<String, String> _mappedTo = Pair.<String, String>of(type, null);
@@ -86,9 +80,10 @@ public class SynonmyTypesTest extends AbstractTestingTypeReferenceOwner {
         EList<JvmFormalParameter> _parameters = operation.getParameters();
         JvmFormalParameter _head = IterableExtensions.<JvmFormalParameter>head(_parameters);
         JvmTypeReference _parameterType = _head.getParameterType();
-        _xifexpression = this.toLightweightReference(_parameterType);
+        _xifexpression = this.toLightweightTypeReference(_parameterType);
       } else {
-        _xifexpression = new AnyTypeReference(this);
+        ITypeReferenceOwner _owner = this.getOwner();
+        _xifexpression = _owner.newAnyTypeReference();
       }
       final LightweightTypeReference primary = _xifexpression;
       final HashSet<String> actualSynonyms = CollectionLiterals.<String>newHashSet();

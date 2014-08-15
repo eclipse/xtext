@@ -22,8 +22,8 @@ import org.eclipse.xtext.xbase.typesystem.arguments.ReorderedFeatureCallArgument
 import org.eclipse.xtext.xbase.typesystem.arguments.ReorderedVarArgFeatureCallArguments;
 import org.eclipse.xtext.xbase.typesystem.arguments.StandardFeatureCallArguments;
 import org.eclipse.xtext.xbase.typesystem.arguments.VarArgFeatureCallArguments;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 
 import com.google.common.collect.Lists;
 
@@ -37,19 +37,19 @@ public class ExpressionArgumentFactory {
 		JvmIdentifiableElement feature = candidate.getFeature();
 		if (feature instanceof JvmExecutable) {
 			JvmExecutable executable = (JvmExecutable) feature;
-			return createArgumentsForExecutable(executable.isVarArgs(), candidate.getArguments(), executable.getParameters(), candidate.hasReceiver(), candidate.getState().getConverter());
+			return createArgumentsForExecutable(executable.isVarArgs(), candidate.getArguments(), executable.getParameters(), candidate.hasReceiver(), candidate.getState().getReferenceOwner());
 		} else {
 			if (expression instanceof XAssignment) {
 				XAssignment assignment = (XAssignment) expression;
 				LightweightTypeReference featureType = candidate.getActualType(candidate.getFeature(), true);
 				return new AssignmentFeatureCallArguments(assignment.getValue(), featureType);
 			} else {
-				return new StandardFeatureCallArguments(candidate.getArguments(), Collections.<JvmFormalParameter>emptyList(), candidate.hasReceiver(), candidate.getState().getConverter());
+				return new StandardFeatureCallArguments(candidate.getArguments(), Collections.<JvmFormalParameter>emptyList(), candidate.hasReceiver(), candidate.getState().getReferenceOwner());
 			}
 		}
 	}
 
-	protected IFeatureCallArguments createArgumentsForExecutable(boolean varArgs, List<XExpression> arguments, List<JvmFormalParameter> parameters, boolean hasReceiver, OwnedConverter converter) {
+	protected IFeatureCallArguments createArgumentsForExecutable(boolean varArgs, List<XExpression> arguments, List<JvmFormalParameter> parameters, boolean hasReceiver, ITypeReferenceOwner owner) {
 		if (!varArgs) {
 			if (requiresReordering(arguments, parameters.size())) {
 				List<XExpression> copiedArgumentList = Lists.newArrayList(arguments);
@@ -57,9 +57,9 @@ public class ExpressionArgumentFactory {
 				List<XExpression> shiftedArgumentList = Lists.newArrayListWithCapacity(2);
 				List<JvmFormalParameter> shiftedParameterList = Lists.newArrayListWithCapacity(2);
 				reorder(varArgs, copiedArgumentList, copiedParameterList, shiftedArgumentList, shiftedParameterList);
-				return new ReorderedFeatureCallArguments(copiedArgumentList, copiedParameterList, shiftedArgumentList, shiftedParameterList, hasReceiver, converter);
+				return new ReorderedFeatureCallArguments(copiedArgumentList, copiedParameterList, shiftedArgumentList, shiftedParameterList, hasReceiver, owner);
 			}
-			return new StandardFeatureCallArguments(arguments, parameters, hasReceiver, converter);
+			return new StandardFeatureCallArguments(arguments, parameters, hasReceiver, owner);
 		} else {
 			if (requiresReordering(arguments, parameters.size())) {
 				List<XExpression> copiedArgumentList = Lists.newArrayList(arguments);
@@ -67,9 +67,9 @@ public class ExpressionArgumentFactory {
 				List<XExpression> shiftedArgumentList = Lists.newArrayListWithCapacity(2);
 				List<JvmFormalParameter> shiftedParameterList = Lists.newArrayListWithCapacity(2);
 				reorder(varArgs, copiedArgumentList, copiedParameterList, shiftedArgumentList, shiftedParameterList);
-				return new ReorderedVarArgFeatureCallArguments(copiedArgumentList, copiedParameterList, shiftedArgumentList, shiftedParameterList, hasReceiver, converter);
+				return new ReorderedVarArgFeatureCallArguments(copiedArgumentList, copiedParameterList, shiftedArgumentList, shiftedParameterList, hasReceiver, owner);
 			}
-			return new VarArgFeatureCallArguments(arguments, parameters, hasReceiver, converter);
+			return new VarArgFeatureCallArguments(arguments, parameters, hasReceiver, owner);
 		}
 	}
 

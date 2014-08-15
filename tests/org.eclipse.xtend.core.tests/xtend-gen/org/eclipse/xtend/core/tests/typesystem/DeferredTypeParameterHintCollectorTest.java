@@ -10,10 +10,14 @@ package org.eclipse.xtend.core.tests.typesystem;
 import com.google.common.base.Objects;
 import com.google.common.collect.ListMultimap;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.typesystem.AbstractTestingTypeReferenceOwner;
 import org.eclipse.xtend.core.tests.typesystem.MockTypeParameterSubstitutor;
@@ -35,11 +39,14 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.Multimaps2;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
@@ -56,7 +63,7 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
   private IXtendJvmAssociations _iXtendJvmAssociations;
   
   @Inject
-  private DefaultReentrantTypeResolver resolver;
+  private Provider<DefaultReentrantTypeResolver> resolverProvider;
   
   private ListMultimap<Object, LightweightBoundTypeArgument> hints = Multimaps2.<Object, LightweightBoundTypeArgument>newLinkedHashListMultimap();
   
@@ -82,18 +89,23 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
   
   public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> in(final String typeParameters, final String expectedType, final String actualType) {
     final JvmOperation operation = this.operation(typeParameters, expectedType, actualType);
-    final DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(this);
-    PublicResolvedTypes _publicResolvedTypes = new PublicResolvedTypes(this.resolver);
-    final MockTypeParameterSubstitutor substitutor = new MockTypeParameterSubstitutor(this, _publicResolvedTypes);
+    ITypeReferenceOwner _owner = this.getOwner();
+    final DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(_owner);
+    final DefaultReentrantTypeResolver resolver = this.resolverProvider.get();
+    EObject _rootContainer = EcoreUtil.getRootContainer(operation);
+    resolver.initializeFrom(_rootContainer);
+    ITypeReferenceOwner _owner_1 = this.getOwner();
+    PublicResolvedTypes _publicResolvedTypes = new PublicResolvedTypes(resolver);
+    final MockTypeParameterSubstitutor substitutor = new MockTypeParameterSubstitutor(_owner_1, _publicResolvedTypes);
     EList<JvmFormalParameter> _parameters = operation.getParameters();
     JvmFormalParameter _head = IterableExtensions.<JvmFormalParameter>head(_parameters);
     JvmTypeReference _parameterType = _head.getParameterType();
-    LightweightTypeReference _lightweightReference = this.toLightweightReference(_parameterType);
-    final LightweightTypeReference hasUnbounds = substitutor.substitute(_lightweightReference);
+    LightweightTypeReference _lightweightTypeReference = this.toLightweightTypeReference(_parameterType);
+    final LightweightTypeReference hasUnbounds = substitutor.substitute(_lightweightTypeReference);
     EList<JvmFormalParameter> _parameters_1 = operation.getParameters();
     JvmFormalParameter _last = IterableExtensions.<JvmFormalParameter>last(_parameters_1);
     JvmTypeReference _parameterType_1 = _last.getParameterType();
-    final LightweightTypeReference isActual = this.toLightweightReference(_parameterType_1);
+    final LightweightTypeReference isActual = this.toLightweightTypeReference(_parameterType_1);
     collector.processPairedReferences(hasUnbounds, isActual);
     return substitutor.getTypeParameterMapping();
   }
@@ -205,16 +217,22 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
     return mappingData;
   }
   
-  public void acceptHint(final Object handle, final LightweightBoundTypeArgument boundTypeArgument) {
-    this.hints.put(handle, boundTypeArgument);
-  }
-  
-  public List<LightweightBoundTypeArgument> getAllHints(final Object handle) {
-    return this.hints.get(handle);
-  }
-  
-  public boolean isResolved(final Object handle) {
-    return false;
+  protected StandardTypeReferenceOwner createOwner() {
+    CommonTypeComputationServices _services = this.getServices();
+    ResourceSet _contextResourceSet = this.getContextResourceSet();
+    return new StandardTypeReferenceOwner(_services, _contextResourceSet) {
+      public void acceptHint(final Object handle, final LightweightBoundTypeArgument boundTypeArgument) {
+        DeferredTypeParameterHintCollectorTest.this.hints.put(handle, boundTypeArgument);
+      }
+      
+      public List<LightweightBoundTypeArgument> getAllHints(final Object handle) {
+        return DeferredTypeParameterHintCollectorTest.this.hints.get(handle);
+      }
+      
+      public boolean isResolved(final Object handle) {
+        return false;
+      }
+    };
   }
   
   public Triple<String, VarianceInfo, VarianceInfo> operator_mappedTo(final Pair<String, VarianceInfo> pair, final VarianceInfo third) {

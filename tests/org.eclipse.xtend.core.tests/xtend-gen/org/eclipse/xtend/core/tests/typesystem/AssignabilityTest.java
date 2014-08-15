@@ -248,6 +248,12 @@ public class AssignabilityTest extends CommonAssignabilityTest {
   public void testFunctionTypes_08() {
     this.isNotAssignableFrom("()=>long", "()=>int");
     this.isNotAssignableFrom("()=>int", "()=>long");
+    this.isAssignableFrom("()=>long", "$Function0<? extends java.lang.Integer>");
+    this.isNotAssignableFrom("()=>int", "$Function0<? extends java.lang.Long>");
+    this.isNotAssignableFrom("$Function0<? extends java.lang.Long>", "$Function0<? extends java.lang.Integer>");
+    this.isNotAssignableFrom("$Function0<? extends java.lang.Integer>", "$Function0<? extends java.lang.Long>");
+    this.isNotAssignableFrom("$Function0<? extends java.lang.Long>", "()=>int");
+    this.isNotAssignableFrom("$Function0<? extends java.lang.Integer>", "()=>long");
   }
   
   @Test

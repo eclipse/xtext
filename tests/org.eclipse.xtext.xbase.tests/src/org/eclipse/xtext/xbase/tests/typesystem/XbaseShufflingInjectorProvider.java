@@ -19,7 +19,7 @@ import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider;
 import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArguments;
 import org.eclipse.xtext.xbase.typesystem.computation.XbaseTypeComputer;
 import org.eclipse.xtext.xbase.typesystem.internal.ExpressionArgumentFactory;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Guice;
@@ -85,15 +85,15 @@ public class XbaseShufflingInjectorProvider extends XbaseInjectorProvider {
 		
 		@Override
 		protected IFeatureCallArguments createArgumentsForExecutable(boolean varArgs, List<XExpression> arguments,
-				List<JvmFormalParameter> parameters, boolean hasReceiver, OwnedConverter converter) {
+				List<JvmFormalParameter> parameters, boolean hasReceiver, ITypeReferenceOwner owner) {
 			if (varArgs) {
 				List<JvmFormalParameter> reversedParameters = Lists.newArrayList(Lists.reverse(parameters.subList(0, parameters.size() - 1)));
 				reversedParameters.add(parameters.get(parameters.size() - 1));
 				List<XExpression> reversedArgumetns = Lists.newArrayList(Lists.reverse(arguments.subList(0, parameters.size() - 1)));
 				reversedArgumetns.addAll(Lists.reverse(arguments.subList(parameters.size() - 1, arguments.size())));
-				return super.createArgumentsForExecutable(varArgs, reversedArgumetns, reversedParameters, hasReceiver, converter);
+				return super.createArgumentsForExecutable(varArgs, reversedArgumetns, reversedParameters, hasReceiver, owner);
 			}
-			return super.createArgumentsForExecutable(varArgs, Lists.reverse(arguments), Lists.reverse(parameters), hasReceiver, converter);
+			return super.createArgumentsForExecutable(varArgs, Lists.reverse(arguments), Lists.reverse(parameters), hasReceiver, owner);
 		}
 		
 	}

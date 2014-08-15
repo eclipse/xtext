@@ -222,7 +222,7 @@ class TypeReferenceImpl extends AbstractDelegator<LightweightTypeReference> impl
 		delegate.wrapper
 	}
 	
-	def LightweightTypeReference getLightWeightTypeReference() {
+	def LightweightTypeReference getLightweightTypeReference() {
 		delegate
 	}
 	

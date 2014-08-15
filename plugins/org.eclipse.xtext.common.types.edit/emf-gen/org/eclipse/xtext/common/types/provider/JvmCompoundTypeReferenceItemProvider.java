@@ -199,6 +199,11 @@ public class JvmCompoundTypeReferenceItemProvider extends JvmTypeReferenceItemPr
 			(createChildParameter
 				(TypesPackage.Literals.JVM_COMPOUND_TYPE_REFERENCE__REFERENCES,
 				 TypesFactory.eINSTANCE.createJvmUnknownTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_COMPOUND_TYPE_REFERENCE__REFERENCES,
+				 TypesFactory.eINSTANCE.createJvmInnerTypeReference()));
 	}
 
 }

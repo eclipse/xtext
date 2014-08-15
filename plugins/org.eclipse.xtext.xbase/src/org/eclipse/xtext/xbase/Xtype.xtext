@@ -24,7 +24,10 @@ XFunctionTypeRef:
   ('(' (paramTypes+=JvmTypeReference (',' paramTypes+=JvmTypeReference)*)? ')')? '=>' returnType=JvmTypeReference;
 
 JvmParameterizedTypeReference:
-  type=[JvmType|QualifiedName] (=>'<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>')?;
+  type=[JvmType|QualifiedName] (
+  	=>'<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>'
+  	(=>({JvmInnerTypeReference.outer=current} '.') type=[JvmType|ValidID] (=>'<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>')?)*
+  )?;
 
 JvmArgumentTypeReference returns JvmTypeReference:
 	JvmTypeReference | JvmWildcardTypeReference;

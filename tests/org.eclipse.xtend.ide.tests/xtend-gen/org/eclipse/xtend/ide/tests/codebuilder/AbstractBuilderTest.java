@@ -22,9 +22,9 @@ import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.junit.Assert;
 
@@ -103,14 +103,22 @@ public class AbstractBuilderTest extends AbstractXtendUITestCase {
   }
   
   protected LightweightTypeReference createTypeRef(final JvmType type) {
-    StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, type);
-    return new ParameterizedTypeReference(_standardTypeReferenceOwner, type);
+    ParameterizedTypeReference _xblockexpression = null;
+    {
+      final StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(this.services, type);
+      _xblockexpression = owner.newParameterizedTypeReference(type);
+    }
+    return _xblockexpression;
   }
   
   protected LightweightTypeReference createTypeRef(final Class<?> clazz, final EObject context) {
-    StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, context);
-    JvmType _findDeclaredType = this._typeReferences.findDeclaredType(clazz, context);
-    return new ParameterizedTypeReference(_standardTypeReferenceOwner, _findDeclaredType);
+    ParameterizedTypeReference _xblockexpression = null;
+    {
+      final StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(this.services, context);
+      JvmType _findDeclaredType = this._typeReferences.findDeclaredType(clazz, context);
+      _xblockexpression = owner.newParameterizedTypeReference(_findDeclaredType);
+    }
+    return _xblockexpression;
   }
   
   protected void assertBuilds(final ICodeBuilder builder, final String expectedCode) {

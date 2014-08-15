@@ -39,9 +39,9 @@ class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwner {
 		val signature = '''def «IF !typeParameters.nullOrEmpty»<«typeParameters»>«ENDIF» void method(«alternatingTypeReferences.join(null, ' p, ', ' p') [it]») {}'''
 		val function = function(signature.toString)
 		val operation = function.directlyInferredOperation
-		val collector = new ActualTypeArgumentCollector(operation.typeParameters, BoundTypeArgumentSource::INFERRED, this)
+		val collector = new ActualTypeArgumentCollector(operation.typeParameters, BoundTypeArgumentSource::INFERRED, owner)
 		for(i: (0..alternatingTypeReferences.size-1).withStep(2)) {
-			collector.populateTypeParameterMapping(operation.parameters.get(i).parameterType.toLightweightReference, operation.parameters.get(i+1).parameterType.toLightweightReference)
+			collector.populateTypeParameterMapping(operation.parameters.get(i).parameterType.toLightweightTypeReference, operation.parameters.get(i+1).parameterType.toLightweightTypeReference)
 		}
 		return collector.typeParameterMapping
 	}
@@ -51,7 +51,7 @@ class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwner {
 		for(key: allKeys) {
 			if (key.simpleName == typeParamName) {
 				val mappingData = mapping.get(key)
-				return mapping->merger.merge(mappingData, this)
+				return mapping->merger.merge(mappingData, owner)
 			}
 		}
 		fail('''No mapping for «typeParamName» in «mapping.keySet.map[simpleName]»'''.toString)
@@ -65,10 +65,6 @@ class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwner {
 			assertEquals(variance, merged.value.variance)
 		}
 		merged.key
-	}
-	
-	override getDeclaredTypeParameters() {
-		emptyList
 	}
 	
 	@Test def void testUnusedParam() {

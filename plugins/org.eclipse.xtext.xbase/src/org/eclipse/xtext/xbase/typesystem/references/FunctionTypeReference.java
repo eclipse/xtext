@@ -43,15 +43,21 @@ public class FunctionTypeReference extends ParameterizedTypeReference {
 	protected FunctionTypeReference doCopyInto(ITypeReferenceOwner owner) {
 		FunctionTypeReference result = new FunctionTypeReference(owner, getType());
 		copyTypeArguments(result, owner);
+		return result;
+	}
+	
+	@Override
+	protected void copyTypeArguments(ParameterizedTypeReference result, ITypeReferenceOwner owner) {
+		super.copyTypeArguments(result, owner);
+		FunctionTypeReference casted = (FunctionTypeReference) result;
 		if (parameterTypes != null && !parameterTypes.isEmpty()) {
 			for(LightweightTypeReference typeArgument: parameterTypes) {
-				result.addParameterType(typeArgument.copyInto(owner));
+				casted.addParameterType(typeArgument.copyInto(owner));
 			}
 		}
 		if (returnType != null) {
-			result.setReturnType(returnType.copyInto(owner));
+			casted.setReturnType(returnType.copyInto(owner));
 		}
-		return result;
 	}
 	
 	public List<LightweightTypeReference> getParameterTypes() {
@@ -102,7 +108,7 @@ public class FunctionTypeReference extends ParameterizedTypeReference {
 	public JvmTypeReference toTypeReference() {
 		XFunctionTypeRef result = getOwner().getServices().getXtypeFactory().createXFunctionTypeRef();
 		result.setType(getType());
-		result.setEquivalent(super.toTypeReference());
+		result.setEquivalent(getEquivalentTypeReference());
 		if (parameterTypes != null) {
 			for(LightweightTypeReference parameterType: parameterTypes) {
 				result.getParamTypes().add(parameterType.toTypeReference());
@@ -112,6 +118,10 @@ public class FunctionTypeReference extends ParameterizedTypeReference {
 			result.setReturnType(returnType.toTypeReference());
 		}
 		return result;
+	}
+
+	protected JvmTypeReference getEquivalentTypeReference() {
+		return super.toTypeReference();
 	}
 	
 	public void addParameterType(LightweightTypeReference parameterType) {
@@ -147,7 +157,11 @@ public class FunctionTypeReference extends ParameterizedTypeReference {
 	
 	@Override
 	public String getJavaIdentifier() {
-		return super.getAsString(getType().getIdentifier(), JavaIdentifierFunction.INSTANCE);
+		return getAsStringNoFunctionType(getType().getIdentifier(), JavaIdentifierFunction.INSTANCE);
+	}
+
+	protected String getAsStringNoFunctionType(String type, Function<LightweightTypeReference,String> format) {
+		return super.getAsString(type, format);
 	}
 	
 	@Override

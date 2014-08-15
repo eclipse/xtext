@@ -35,7 +35,6 @@ import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.Maps2;
 
 import com.google.common.collect.Lists;
@@ -366,7 +365,7 @@ public class ExpressionScope implements IExpressionScope {
 			JvmType type = parameterType.getType();
 			if (type == null)
 				return null;
-			return new OwnedConverter(owner).toRawLightweightReference(type).getRawTypeReference();
+			return owner.toPlainTypeReference(type).getRawTypeReference();
 		}
 
 		protected List<IIdentifiableElementDescription> getFilteredExtensionDescriptions(Map<String, List<IIdentifiableElementDescription>> extensionSignatures) {

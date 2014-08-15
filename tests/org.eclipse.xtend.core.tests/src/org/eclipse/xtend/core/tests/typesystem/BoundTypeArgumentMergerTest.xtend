@@ -42,9 +42,9 @@ class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwner {
 		val mergable = <LightweightBoundTypeArgument>newArrayList
 		operation.parameters.forEach[ p, i |
 			val input = mergeUs.get(i)
-			mergable += new LightweightBoundTypeArgument(p.parameterType.toLightweightReference, null, source ?: new Object, input.second, input.third)
+			mergable += new LightweightBoundTypeArgument(p.parameterType.toLightweightTypeReference, null, source ?: new Object, input.second, input.third)
 		]
-		return merger.merge(mergable, this)
+		return merger.merge(mergable, owner)
 	}
 	
 	def mergeSuccessive(Triple<String,VarianceInfo,VarianceInfo>... mergeUs) {
@@ -56,16 +56,16 @@ class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwner {
 		val mergable = <LightweightBoundTypeArgument>newArrayList
 		operation.parameters.forEach[ p, i |
 			val input = mergeUs.get(i)
-			mergable += new LightweightBoundTypeArgument(p.parameterType.toLightweightReference, null, new Object, input.second, input.third)
+			mergable += new LightweightBoundTypeArgument(p.parameterType.toLightweightTypeReference, null, new Object, input.second, input.third)
 		]
 		val iterator = mergable.iterator
 		var first = iterator.next
 		var second = iterator.next
-		var merged = merger.merge(#[first, second], this)
+		var merged = merger.merge(#[first, second], owner)
 		while(iterator.hasNext) {
 			first = new LightweightBoundTypeArgument(merged.typeReference, null, new Object, merged.variance, merged.variance)
 			second = iterator.next
-			merged = merger.merge(#[first, second], this)
+			merged = merger.merge(#[first, second], owner)
 		}
 		return merged
 	}

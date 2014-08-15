@@ -13,7 +13,7 @@ import java.util.NoSuchElementException;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 
 /**
  * A representation of {@link IFeatureCallArguments} that does not handle
@@ -23,8 +23,8 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
  */
 public class VarArgFeatureCallArguments extends StandardFeatureCallArguments {
 
-	public VarArgFeatureCallArguments(List<XExpression> arguments, List<JvmFormalParameter> parameters, boolean hasReceiver, OwnedConverter converter) {
-		super(arguments, parameters, hasReceiver, converter);
+	public VarArgFeatureCallArguments(List<XExpression> arguments, List<JvmFormalParameter> parameters, boolean hasReceiver, ITypeReferenceOwner owner) {
+		super(arguments, parameters, hasReceiver, owner);
 	}
 	
 	@Override

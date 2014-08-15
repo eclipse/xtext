@@ -27,9 +27,9 @@ import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 import com.google.caliper.Param;
@@ -346,77 +346,77 @@ public class ParameterizedTypeReferenceBenchmark extends SimpleBenchmark {
 			@Override
 			ParameterizedTypeReference getReference(IJvmTypeProvider typeProvider, ITypeReferenceOwner owner) {
 				JvmType type = typeProvider.findTypeByName("java.lang.Object");
-				return new ParameterizedTypeReference(owner, type);
+				return owner.newParameterizedTypeReference(type);
 			}
 		},
 		CLONEABLE {
 			@Override
 			ParameterizedTypeReference getReference(IJvmTypeProvider typeProvider, ITypeReferenceOwner owner) {
 				JvmType type = typeProvider.findTypeByName("java.lang.Cloneable");
-				return new ParameterizedTypeReference(owner, type);
+				return owner.newParameterizedTypeReference(type);
 			}
 		},
 		RESOURCE_FACTORY_REGISTRY {
 			@Override
 			ParameterizedTypeReference getReference(IJvmTypeProvider typeProvider, ITypeReferenceOwner owner) {
 				JvmType type = typeProvider.findTypeByName("org.eclipse.emf.ecore.resource.Resource$Factory$Registry");
-				return new ParameterizedTypeReference(owner, type);
+				return owner.newParameterizedTypeReference(type);
 			}
 		},
 		OVERRIDE {
 			@Override
 			ParameterizedTypeReference getReference(IJvmTypeProvider typeProvider, ITypeReferenceOwner owner) {
 				JvmType type = typeProvider.findTypeByName("java.lang.Override");
-				return new ParameterizedTypeReference(owner, type);
+				return owner.newParameterizedTypeReference(type);
 			}
 		},
 		ELEMENT_TYPE {
 			@Override
 			ParameterizedTypeReference getReference(IJvmTypeProvider typeProvider, ITypeReferenceOwner owner) {
 				JvmType type = typeProvider.findTypeByName("java.lang.annotation.ElementType");
-				return new ParameterizedTypeReference(owner, type);
+				return owner.newParameterizedTypeReference(type);
 			}
 		},
 		ARRAY_LIST {
 			@Override
 			ParameterizedTypeReference getReference(IJvmTypeProvider typeProvider, ITypeReferenceOwner owner) {
 				JvmType type = typeProvider.findTypeByName("java.util.ArrayList");
-				return new ParameterizedTypeReference(owner, type);
+				return owner.newParameterizedTypeReference(type);
 			}
 		},
 		INT {
 			@Override
 			ParameterizedTypeReference getReference(IJvmTypeProvider typeProvider, ITypeReferenceOwner owner) {
 				JvmType type = typeProvider.findTypeByName("int");
-				return new ParameterizedTypeReference(owner, type);
+				return owner.newParameterizedTypeReference(type);
 			}
 		},
 		BOOLEAN_WRAPPER {
 			@Override
 			ParameterizedTypeReference getReference(IJvmTypeProvider typeProvider, ITypeReferenceOwner owner) {
 				JvmType type = typeProvider.findTypeByName("java.lang.Boolean");
-				return new ParameterizedTypeReference(owner, type);
+				return owner.newParameterizedTypeReference(type);
 			}
 		},
 		VOID {
 			@Override
 			ParameterizedTypeReference getReference(IJvmTypeProvider typeProvider, ITypeReferenceOwner owner) {
 				JvmType type = typeProvider.findTypeByName("void");
-				return new ParameterizedTypeReference(owner, type);
+				return owner.newParameterizedTypeReference(type);
 			}
 		},
 		VOID_WRAPPER {
 			@Override
 			ParameterizedTypeReference getReference(IJvmTypeProvider typeProvider, ITypeReferenceOwner owner) {
 				JvmType type = typeProvider.findTypeByName("java.lang.Void");
-				return new ParameterizedTypeReference(owner, type);
+				return owner.newParameterizedTypeReference(type);
 			}
 		},
 		SHORT {
 			@Override
 			ParameterizedTypeReference getReference(IJvmTypeProvider typeProvider, ITypeReferenceOwner owner) {
 				JvmType type = typeProvider.findTypeByName("short");
-				return new ParameterizedTypeReference(owner, type);
+				return owner.newParameterizedTypeReference(type);
 			}
 		},
 		;
