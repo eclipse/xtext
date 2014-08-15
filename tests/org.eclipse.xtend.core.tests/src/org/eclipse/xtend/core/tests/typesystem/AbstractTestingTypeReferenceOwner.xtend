@@ -10,10 +10,9 @@ package org.eclipse.xtend.core.tests.typesystem
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
-import org.eclipse.xtext.common.types.JvmTypeReference
+import org.eclipse.xtend.lib.annotations.Delegate
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner
-import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.junit.After
 
@@ -27,12 +26,9 @@ abstract class AbstractTestingTypeReferenceOwner extends AbstractXtendTestCase i
 	
 	ResourceSet contextResourceSet
 	
-	OwnedConverter owner = new OwnedConverter(this)
+	@Delegate
+	ITypeReferenceOwner owner
 	
-	def toLightweightReference(JvmTypeReference reference) {
-		return owner.toLightweightReference(reference)
-	}
-
 	@After
 	def void tearDown() {
 		contextResourceSet = null
@@ -41,29 +37,10 @@ abstract class AbstractTestingTypeReferenceOwner extends AbstractXtendTestCase i
 	override protected function(String string) throws Exception {
 		val result = super.function(string)
 		contextResourceSet = result.eResource.resourceSet
+		owner = new StandardTypeReferenceOwner(services, contextResourceSet)
 		return result
 	}
 
-	override acceptHint(Object handle, LightweightBoundTypeArgument boundTypeArgument) {
-		throw new UnsupportedOperationException("Auto-generated function stub")
-	}
-	
-	override getAllHints(Object handle) {
-		throw new UnsupportedOperationException("Auto-generated function stub")
-	}
-	
-	override getDeclaredTypeParameters() {
-		return emptyList
-	}
-	
-	override getContextResourceSet() {
-		contextResourceSet
-	}
-	
-	override getServices() {
-		services
-	}
-	
 	override isResolved(Object handle) {
 		throw new UnsupportedOperationException("Auto-generated function stub")
 	}

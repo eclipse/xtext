@@ -357,6 +357,16 @@ public interface TypesFactory extends EFactory
 	JvmCustomAnnotationValue createJvmCustomAnnotationValue();
 
 	/**
+	 * Returns a new object of class '<em>Jvm Inner Type Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Jvm Inner Type Reference</em>'.
+	 * @generated
+	 * @since 2.7
+	 */
+	JvmInnerTypeReference createJvmInnerTypeReference();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

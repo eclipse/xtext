@@ -437,6 +437,14 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public boolean hasTypeArguments() {
+		if (internalIsResolved()) {
+			return resolvedTo.hasTypeArguments();
+		}
+		return super.hasTypeArguments();
+	}
+	
+	@Override
 	public boolean isArray() {
 		if (internalIsResolved()) {
 			return resolvedTo.isArray();

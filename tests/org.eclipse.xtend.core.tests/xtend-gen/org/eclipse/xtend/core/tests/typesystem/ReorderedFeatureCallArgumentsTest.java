@@ -32,7 +32,6 @@ import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArgumentSlot;
 import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArguments;
 import org.eclipse.xtext.xbase.typesystem.arguments.ReorderedFeatureCallArguments;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -253,8 +252,7 @@ public class ReorderedFeatureCallArgumentsTest extends AbstractTestingTypeRefere
       final EList<XExpression> arguments = featureCall.getFeatureCallArguments();
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
       EList<JvmFormalParameter> _parameters = operation.getParameters();
-      OwnedConverter _ownedConverter = new OwnedConverter(this);
-      final IFeatureCallArguments result = this.factory.createStandardArguments(arguments, _parameters, receiver, _ownedConverter);
+      final IFeatureCallArguments result = this.factory.createStandardArguments(arguments, _parameters, receiver, this);
       Class<? extends IFeatureCallArguments> _class = result.getClass();
       boolean _equals = Objects.equal(_class, ReorderedFeatureCallArguments.class);
       Assert.assertTrue(_equals);

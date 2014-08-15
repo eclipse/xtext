@@ -88,12 +88,12 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
     EList<JvmFormalParameter> _parameters = operation.getParameters();
     JvmFormalParameter _head = IterableExtensions.<JvmFormalParameter>head(_parameters);
     JvmTypeReference _parameterType = _head.getParameterType();
-    LightweightTypeReference _lightweightReference = this.toLightweightReference(_parameterType);
-    final LightweightTypeReference hasUnbounds = substitutor.substitute(_lightweightReference);
+    LightweightTypeReference _lightweightTypeReference = this.toLightweightTypeReference(_parameterType);
+    final LightweightTypeReference hasUnbounds = substitutor.substitute(_lightweightTypeReference);
     EList<JvmFormalParameter> _parameters_1 = operation.getParameters();
     JvmFormalParameter _last = IterableExtensions.<JvmFormalParameter>last(_parameters_1);
     JvmTypeReference _parameterType_1 = _last.getParameterType();
-    final LightweightTypeReference isActual = this.toLightweightReference(_parameterType_1);
+    final LightweightTypeReference isActual = this.toLightweightTypeReference(_parameterType_1);
     collector.processPairedReferences(hasUnbounds, isActual);
     return substitutor.getTypeParameterMapping();
   }

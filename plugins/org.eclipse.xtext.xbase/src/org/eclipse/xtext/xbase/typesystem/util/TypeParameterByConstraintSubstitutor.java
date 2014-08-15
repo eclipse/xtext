@@ -19,7 +19,6 @@ import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTraversalData;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
@@ -87,9 +86,9 @@ public class TypeParameterByConstraintSubstitutor extends CustomTypeParameterSub
 				// but 
 				// Comparable<?>
 				if (!visiting.canVisit(typeParameter)) {
-					WildcardTypeReference result = new WildcardTypeReference(reference.getOwner());
+					WildcardTypeReference result = getOwner().newWildcardTypeReference();
 					JvmType objectType = getOwner().getServices().getTypeReferences().findDeclaredType(Object.class, getOwner().getContextResourceSet());
-					result.addUpperBound(new ParameterizedTypeReference(getOwner(), objectType));
+					result.addUpperBound(getOwner().newParameterizedTypeReference(objectType));
 					return result;
 				}
 			}
@@ -105,11 +104,11 @@ public class TypeParameterByConstraintSubstitutor extends CustomTypeParameterSub
 			try {
 				JvmTypeConstraint constraint = typeParameter.getConstraints().get(0);
 				if (constraint instanceof JvmUpperBound) {
-					LightweightTypeReference reference = new OwnedConverter(getOwner()).toLightweightReference(constraint.getTypeReference());
+					LightweightTypeReference reference = getOwner().toLightweightTypeReference(constraint.getTypeReference());
 					if (visiting.getCurrentDeclarator() != reference.getType()) {
 						return reference.accept(this, visiting);
 					}
-					WildcardTypeReference result = new WildcardTypeReference(getOwner());
+					WildcardTypeReference result = getOwner().newWildcardTypeReference();
 					result.addUpperBound(getObjectReference());
 					return result;
 				}
@@ -126,7 +125,7 @@ public class TypeParameterByConstraintSubstitutor extends CustomTypeParameterSub
 	}
 	
 	public LightweightTypeReference substitute(JvmTypeParameter original) {
-		return substitute(new ParameterizedTypeReference(getOwner(), original));
+		return substitute(getOwner().newParameterizedTypeReference(original));
 	}
 	
 	@Override

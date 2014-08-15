@@ -20,10 +20,9 @@ import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
 import org.junit.Test;
@@ -133,8 +132,7 @@ public class ReplacingAppendableTest extends AbstractXtendUITestCase {
 			public void process(XtextResource state) throws Exception {
 				ReplacingAppendable a = appendableFactory.create(document, state, cursorPosition, 1);
 				ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, context);
-				OwnedConverter converter = new OwnedConverter(owner);
-				LightweightTypeReference typeRef = converter.apply(services.getTypeReferences().getTypeForName(List.class, context, typesFactory.createJvmWildcardTypeReference()));
+				LightweightTypeReference typeRef = owner.toLightweightTypeReference(services.getTypeReferences().getTypeForName(List.class, context, typesFactory.createJvmWildcardTypeReference()));
 				a.append(typeRef);
 				a.append(" ").append(fieldName);
 				a.commitChanges();

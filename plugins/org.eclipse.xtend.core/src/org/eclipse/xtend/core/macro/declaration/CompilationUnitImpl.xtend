@@ -116,16 +116,16 @@ import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.^override.IResolvedConstructor
 import org.eclipse.xtext.xbase.typesystem.^override.IResolvedOperation
 import org.eclipse.xtext.xbase.typesystem.^override.OverrideHelper
-import org.eclipse.xtext.xbase.typesystem.references.IndexingOwnedConverter
+import org.eclipse.xtext.xbase.typesystem.references.IndexingLightweightTypeReferenceFactory
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceFactory
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -199,7 +199,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	@Accessors val AssociatorImpl associator = new AssociatorImpl(this)
 	
 	Map<Object, Object> identityCache = newHashMap
-	@Accessors(PUBLIC_GETTER) OwnedConverter typeRefConverter
+	@Accessors(PUBLIC_GETTER) LightweightTypeReferenceFactory typeRefFactory
 	
 	MutableFileSystemSupport decoratedFileSystemSupport
 	
@@ -221,16 +221,16 @@ class CompilationUnitImpl implements CompilationUnit {
 	def void setXtendFile(XtendFile xtendFile) {
 		this.xtendFile = xtendFile
 		// maintain invariants - CU should be usable without any further ado, e.g. before/after callback
-		this.typeRefConverter = new OwnedConverter(new StandardTypeReferenceOwner(services, xtendFile))
+		this.typeRefFactory = new LightweightTypeReferenceFactory(new StandardTypeReferenceOwner(services, xtendFile))
 	}
 	
 	def void before(AnnotationCallback phase) {
 		lastPhase = phase
 		val standardTypeReferenceOwner = new StandardTypeReferenceOwner(services, xtendFile)
 		if (AnnotationCallback.INDEXING == phase) {
-			this.typeRefConverter = new IndexingOwnedConverter(standardTypeReferenceOwner)	
+			this.typeRefFactory = new IndexingLightweightTypeReferenceFactory(standardTypeReferenceOwner)	
 		} else {
-			this.typeRefConverter = new OwnedConverter(standardTypeReferenceOwner)
+			this.typeRefFactory = new LightweightTypeReferenceFactory(standardTypeReferenceOwner)
 		}
 		if (AnnotationCallback.VALIDATION == phase) {
 			problemSupport.validationPhaseStarted
@@ -500,7 +500,7 @@ class CompilationUnitImpl implements CompilationUnit {
 					compilationUnit = this
 				]
 			}
-			default : toTypeReference(typeRefConverter.toLightweightReference(delegate), delegate)
+			default : toTypeReference(typeRefFactory.toLightweightReference(delegate), delegate)
 		}
 	}
 

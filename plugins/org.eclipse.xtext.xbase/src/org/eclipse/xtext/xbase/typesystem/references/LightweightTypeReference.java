@@ -69,6 +69,8 @@ public abstract class LightweightTypeReference {
 	public static final int KIND_UNKNOWN_TYPE_REFERENCE = 7;
 	public static final int KIND_WILDCARD_TYPE_REFERENCE = 8;
 	public static final int KIND_FUNCTION_TYPE_REFERENCE = 9;
+	public static final int KIND_INNER_TYPE_REFERENCE = 10;
+	public static final int KIND_INNER_FUNCTION_TYPE_REFERENCE = 11;
 	
 	/**
 	 * Subclasses <em>must</em> override this method.
@@ -150,6 +152,14 @@ public abstract class LightweightTypeReference {
 	 */
 	public List<LightweightTypeReference> getTypeArguments() {
 		return Collections.emptyList();
+	}
+	
+	public LightweightTypeReference getOuter() {
+		return null;
+	}
+	
+	public boolean hasTypeArguments() {
+		return !getTypeArguments().isEmpty();
 	}
 	
 	public boolean isResolved() {
@@ -551,8 +561,7 @@ public abstract class LightweightTypeReference {
 		// TODO interfaces don't inherit from non-interfaces, primitives, arrays, object
 		// A final type does not have any subtypes
 		// check for type == this.type
-		OwnedConverter converter = new OwnedConverter(getOwner());
-		LightweightTypeReference other = converter.toRawLightweightReference(type);
+		LightweightTypeReference other = owner.toPlainTypeReference(type);
 		boolean result = other.isAssignableFrom(this);
 		return result;
 	}
@@ -660,30 +669,14 @@ public abstract class LightweightTypeReference {
 		visitor.doVisitTypeReference(this, param);
 	}
 	
-	/* @Nullable */
 	public <Result> Result accept(TypeReferenceVisitorWithResult<Result> visitor) {
 		return visitor.doVisitTypeReference(this);
 	}
 	
-	/* @Nullable */
 	public <Param, Result> Result accept(TypeReferenceVisitorWithParameterAndResult<Param, Result> visitor, Param param) {
 		return visitor.doVisitTypeReference(this, param);
 	}
 	
-	public <Result> Result accept(TypeReferenceVisitorWithNonNullResult<Result> visitor) {
-		Result result = accept((TypeReferenceVisitorWithResult<Result>)visitor);
-		if (result == null)
-			throw new IllegalStateException("result may not be null");
-		return result;
-	}
-	
-	public <Param, Result> Result accept(TypeReferenceVisitorWithParameterAndNonNullResult<Param, Result> visitor, Param param) {
-		Result result = accept((TypeReferenceVisitorWithParameterAndResult<Param, Result>)visitor, param);
-		if (result == null)
-			throw new IllegalStateException("result may not be null");
-		return result;
-	}
-
 	// TODO move to utility / factory
 	public CompoundTypeReference toMultiType(LightweightTypeReference reference) {
 		if (reference == null) {

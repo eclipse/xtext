@@ -93,7 +93,7 @@ public class CompoundTypeReference extends LightweightTypeReference {
 		// TODO common type?
 		return super.getTypeArguments();
 	}
-
+	
 	@Override
 	public boolean isRawType() {
 		for(LightweightTypeReference component: expose(components)) {

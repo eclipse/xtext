@@ -37,7 +37,6 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -96,7 +95,7 @@ public class TypeReferenceAssignabilityTest extends AssignabilityTest {
             TypeReference _newTypeReference = TypeReferenceAssignabilityTest.this.newTypeReference(_parameterType, unit);
             _xifexpression = unit.toLightweightTypeReference(_newTypeReference);
           } else {
-            _xifexpression = new AnyTypeReference(TypeReferenceAssignabilityTest.this);
+            _xifexpression = TypeReferenceAssignabilityTest.this.newAnyTypeReference();
           }
           final LightweightTypeReference lhsType = _xifexpression;
           LightweightTypeReference _xifexpression_1 = null;
@@ -108,7 +107,7 @@ public class TypeReferenceAssignabilityTest extends AssignabilityTest {
             TypeReference _newTypeReference_1 = TypeReferenceAssignabilityTest.this.newTypeReference(_parameterType_1, unit);
             _xifexpression_1 = unit.toLightweightTypeReference(_newTypeReference_1);
           } else {
-            _xifexpression_1 = new AnyTypeReference(TypeReferenceAssignabilityTest.this);
+            _xifexpression_1 = TypeReferenceAssignabilityTest.this.newAnyTypeReference();
           }
           final LightweightTypeReference rhsType = _xifexpression_1;
           String _simpleName = lhsType.getSimpleName();
@@ -151,25 +150,25 @@ public class TypeReferenceAssignabilityTest extends AssignabilityTest {
     boolean _doIsAssignable = this.doIsAssignable(lhs, lhs);
     Assert.assertTrue(_doIsAssignable);
     JvmTypeReference _typeReference = lhs.toTypeReference();
-    LightweightTypeReference _lightweightReference = this.toLightweightReference(_typeReference);
-    boolean _doIsAssignable_1 = this.doIsAssignable(lhs, _lightweightReference);
+    LightweightTypeReference _lightweightTypeReference = this.toLightweightTypeReference(_typeReference);
+    boolean _doIsAssignable_1 = this.doIsAssignable(lhs, _lightweightTypeReference);
     Assert.assertTrue(_doIsAssignable_1);
     JvmTypeReference _typeReference_1 = rhs.toTypeReference();
-    LightweightTypeReference _lightweightReference_1 = this.toLightweightReference(_typeReference_1);
-    boolean _doIsAssignable_2 = this.doIsAssignable(rhs, _lightweightReference_1);
+    LightweightTypeReference _lightweightTypeReference_1 = this.toLightweightTypeReference(_typeReference_1);
+    boolean _doIsAssignable_2 = this.doIsAssignable(rhs, _lightweightTypeReference_1);
     Assert.assertTrue(_doIsAssignable_2);
     final boolean result = this.doIsAssignable(lhs, rhs);
     boolean _isPrimitiveVoid = rhs.isPrimitiveVoid();
     boolean _not = (!_isPrimitiveVoid);
     if (_not) {
       ITypeReferenceOwner _owner = rhs.getOwner();
-      final WildcardTypeReference wcRhs = new WildcardTypeReference(_owner);
+      final WildcardTypeReference wcRhs = _owner.newWildcardTypeReference();
       LightweightTypeReference _wrapperTypeIfPrimitive = rhs.getWrapperTypeIfPrimitive();
       wcRhs.addUpperBound(_wrapperTypeIfPrimitive);
       boolean _doIsAssignable_3 = this.doIsAssignable(lhs, wcRhs);
       Assert.assertEquals(Boolean.valueOf(result), Boolean.valueOf(_doIsAssignable_3));
       ITypeReferenceOwner _owner_1 = rhs.getOwner();
-      final CompoundTypeReference compoundRhs = new CompoundTypeReference(_owner_1, true);
+      final CompoundTypeReference compoundRhs = _owner_1.newCompoundTypeReference(true);
       compoundRhs.addComponent(rhs);
       ITypeReferenceOwner _owner_2 = rhs.getOwner();
       CommonTypeComputationServices _services = _owner_2.getServices();
@@ -178,8 +177,8 @@ public class TypeReferenceAssignabilityTest extends AssignabilityTest {
       ResourceSet _contextResourceSet = _owner_3.getContextResourceSet();
       final JvmType object = _typeReferences.findDeclaredType(Object.class, _contextResourceSet);
       ITypeReferenceOwner _owner_4 = rhs.getOwner();
-      ParameterizedTypeReference _parameterizedTypeReference = new ParameterizedTypeReference(_owner_4, object);
-      compoundRhs.addComponent(_parameterizedTypeReference);
+      ParameterizedTypeReference _newParameterizedTypeReference = _owner_4.newParameterizedTypeReference(object);
+      compoundRhs.addComponent(_newParameterizedTypeReference);
       String _plus = (lhs + " := ");
       String _string = compoundRhs.toString();
       String _plus_1 = (_plus + _string);

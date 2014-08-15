@@ -34,7 +34,6 @@ import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 import com.google.common.collect.Lists;
@@ -227,12 +226,8 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		return owner;
 	}
 	
-	public OwnedConverter getConverter() {
-		return new OwnedConverter(owner);
-	}
-
 	public LightweightTypeReference toLightweightTypeReference(JvmTypeReference reference) {
-		return new OwnedConverter(owner).toLightweightReference(reference);
+		return owner.toLightweightTypeReference(reference);
 	}
 
 	public void addLocalToCurrentScope(JvmIdentifiableElement element) {

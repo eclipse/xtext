@@ -94,7 +94,7 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
       final Function1<JvmFormalParameter, LightweightTypeReference> _function = new Function1<JvmFormalParameter, LightweightTypeReference>() {
         public LightweightTypeReference apply(final JvmFormalParameter it) {
           JvmTypeReference _parameterType = it.getParameterType();
-          return CommonSuperTypeTest.this.toLightweightReference(_parameterType);
+          return CommonSuperTypeTest.this.toLightweightTypeReference(_parameterType);
         }
       };
       List<LightweightTypeReference> _map = ListExtensions.<JvmFormalParameter, LightweightTypeReference>map(_parameters, _function);
@@ -149,9 +149,9 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
       if (_not_1) {
         CommonTypeComputationServices _services_3 = this.getServices();
         TypeConformanceComputer _typeConformanceComputer_2 = _services_3.getTypeConformanceComputer();
-        AnyTypeReference _anyTypeReference = new AnyTypeReference(this);
-        AnyTypeReference _anyTypeReference_1 = new AnyTypeReference(this);
-        List<AnyTypeReference> _newImmutableList = CollectionLiterals.<AnyTypeReference>newImmutableList(_anyTypeReference, _anyTypeReference_1);
+        AnyTypeReference _newAnyTypeReference = this.newAnyTypeReference();
+        AnyTypeReference _newAnyTypeReference_1 = this.newAnyTypeReference();
+        List<AnyTypeReference> _newImmutableList = CollectionLiterals.<AnyTypeReference>newImmutableList(_newAnyTypeReference, _newAnyTypeReference_1);
         Iterable<LightweightTypeReference> _plus_1 = Iterables.<LightweightTypeReference>concat(typeReferences, _newImmutableList);
         List<LightweightTypeReference> _list_1 = IterableExtensions.<LightweightTypeReference>toList(_plus_1);
         LightweightTypeReference _commonSuperType_2 = _typeConformanceComputer_2.getCommonSuperType(_list_1, this);
@@ -382,9 +382,9 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   
   @Test
   public void testCommonSuperType_23() {
-    AnyTypeReference _anyTypeReference = new AnyTypeReference(this);
-    AnyTypeReference _anyTypeReference_1 = new AnyTypeReference(this);
-    final List<LightweightTypeReference> types = CollectionLiterals.<LightweightTypeReference>newImmutableList(_anyTypeReference, _anyTypeReference_1);
+    AnyTypeReference _newAnyTypeReference = this.newAnyTypeReference();
+    AnyTypeReference _newAnyTypeReference_1 = this.newAnyTypeReference();
+    final List<LightweightTypeReference> types = CollectionLiterals.<LightweightTypeReference>newImmutableList(_newAnyTypeReference, _newAnyTypeReference_1);
     CommonTypeComputationServices _services = this.getServices();
     TypeConformanceComputer _typeConformanceComputer = _services.getTypeConformanceComputer();
     final LightweightTypeReference superType = _typeConformanceComputer.getCommonSuperType(types, this);

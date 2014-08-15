@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
@@ -27,6 +29,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.typesystem.internal.util.WrapperTypeLookup;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.InnerTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -267,6 +270,11 @@ public class RawTypeConformanceComputer {
 					}
 					// missing break is intentional
 				}
+				case KIND_INNER_TYPE_REFERENCE: {
+					if (rightKind == KIND_INNER_TYPE_REFERENCE) {
+						return doIsConformant((InnerTypeReference)left, (InnerTypeReference)right, flags);
+					}
+				}
 				case KIND_PARAMETERIZED_TYPE_REFERENCE: {
 					switch(rightKind) {
 						case KIND_ARRAY_TYPE_REFERENCE: {
@@ -275,6 +283,7 @@ public class RawTypeConformanceComputer {
 						case KIND_FUNCTION_TYPE_REFERENCE: {
 							return doIsConformant((ParameterizedTypeReference)left, (FunctionTypeReference)right, flags);
 						}
+						case KIND_INNER_TYPE_REFERENCE:
 						case KIND_PARAMETERIZED_TYPE_REFERENCE: {
 							return doIsConformant((ParameterizedTypeReference)left, (ParameterizedTypeReference)right, flags);
 						}
@@ -730,6 +739,28 @@ public class RawTypeConformanceComputer {
 			}
 		}
 		return doIsConformant((ParameterizedTypeReference) left, right, flags);
+	}
+	
+	protected int doIsConformant(InnerTypeReference left, InnerTypeReference right, int flags) {
+		int result = doIsConformant((ParameterizedTypeReference) left, (ParameterizedTypeReference) right, flags);
+		if ((result & SUCCESS) != 0) {
+			JvmType leftType = left.getType();
+			EObject leftDeclarator = leftType.eContainer();
+			if (leftDeclarator instanceof JvmDeclaredType) {
+				JvmDeclaredType castedLeftDeclarator = (JvmDeclaredType) leftDeclarator;
+				LightweightTypeReference leftOuter = left.getOuter().getSuperType(castedLeftDeclarator);
+				if (leftOuter != null) {
+					LightweightTypeReference rightOuter = right.getOuter().getSuperType(castedLeftDeclarator);
+					if (rightOuter != null) {
+						int outerResult = doIsConformant(leftOuter, rightOuter, flags);
+						if ((outerResult & SUCCESS) == 0) {
+							return outerResult;
+						}
+					}
+				}
+			}
+		}
+		return result;
 	}
 	
 	protected int doIsConformant(ParameterizedTypeReference left, ParameterizedTypeReference right, int flags) {

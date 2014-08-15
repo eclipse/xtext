@@ -260,22 +260,22 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             if ( (LA2_0==KW_Package) ) {
                 int LA2_1 = input.LA(2);
 
-                if ( (LA2_1==KW_Create||(LA2_1>=KW_AFTER && LA2_1<=KW_SEPARATOR)||LA2_1==RULE_ID) ) {
-                    alt2=1;
-                }
-                else if ( (LA2_1==KW_Annotation) ) {
-                    int LA2_4 = input.LA(3);
+                if ( (LA2_1==KW_Annotation) ) {
+                    int LA2_3 = input.LA(3);
 
-                    if ( (LA2_4==KW_Annotation) ) {
+                    if ( (LA2_3==EOF||(LA2_3>=KW_Package && LA2_3<=KW_Class)||(LA2_3>=KW_Interface && LA2_3<=KW_Enum)||(LA2_3>=KW_Public && LA2_3<=KW_Transient)||LA2_3==KW_Import||LA2_3==KW_CommercialAt||LA2_3==KW_FullStop) ) {
+                        alt2=1;
+                    }
+                    else if ( (LA2_3==KW_Annotation) ) {
                         int LA2_5 = input.LA(4);
 
                         if ( (LA2_5==KW_Annotation||LA2_5==KW_Create||(LA2_5>=KW_AFTER && LA2_5<=KW_SEPARATOR)||LA2_5==RULE_ID) ) {
                             alt2=1;
                         }
                     }
-                    else if ( (LA2_4==EOF||(LA2_4>=KW_Package && LA2_4<=KW_Class)||(LA2_4>=KW_Interface && LA2_4<=KW_Enum)||(LA2_4>=KW_Public && LA2_4<=KW_Transient)||LA2_4==KW_Import||LA2_4==KW_CommercialAt||LA2_4==KW_FullStop) ) {
-                        alt2=1;
-                    }
+                }
+                else if ( (LA2_1==KW_Create||(LA2_1>=KW_AFTER && LA2_1<=KW_SEPARATOR)||LA2_1==RULE_ID) ) {
+                    alt2=1;
                 }
             }
             switch (alt2) {
@@ -24155,11 +24155,11 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             if ( (LA203_0==KW_NumberSign) ) {
                 int LA203_1 = input.LA(2);
 
-                if ( (LA203_1==KW_LeftSquareBracket) ) {
-                    alt203=2;
-                }
-                else if ( (LA203_1==KW_LeftCurlyBracket) ) {
+                if ( (LA203_1==KW_LeftCurlyBracket) ) {
                     alt203=1;
+                }
+                else if ( (LA203_1==KW_LeftSquareBracket) ) {
+                    alt203=2;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return current;}
@@ -27496,6 +27496,44 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             }
             else if ( (LA226_0==KW_Extension) ) {
                 switch ( input.LA(2) ) {
+                case KW_Var:
+                    {
+                    int LA226_5 = input.LA(3);
+
+                    if ( (synpred47_InternalXtend()) ) {
+                        alt226=1;
+                    }
+                    else if ( (true) ) {
+                        alt226=2;
+                    }
+                    else {
+                        if (state.backtracking>0) {state.failed=true; return current;}
+                        NoViableAltException nvae =
+                            new NoViableAltException("", 226, 5, input);
+
+                        throw nvae;
+                    }
+                    }
+                    break;
+                case KW_Val:
+                    {
+                    int LA226_6 = input.LA(3);
+
+                    if ( (synpred47_InternalXtend()) ) {
+                        alt226=1;
+                    }
+                    else if ( (true) ) {
+                        alt226=2;
+                    }
+                    else {
+                        if (state.backtracking>0) {state.failed=true; return current;}
+                        NoViableAltException nvae =
+                            new NoViableAltException("", 226, 6, input);
+
+                        throw nvae;
+                    }
+                    }
+                    break;
                 case EOF:
                 case KW_Package:
                 case KW_Semicolon:
@@ -27595,44 +27633,6 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                 case RULE_DECIMAL:
                     {
                     alt226=2;
-                    }
-                    break;
-                case KW_Var:
-                    {
-                    int LA226_5 = input.LA(3);
-
-                    if ( (synpred47_InternalXtend()) ) {
-                        alt226=1;
-                    }
-                    else if ( (true) ) {
-                        alt226=2;
-                    }
-                    else {
-                        if (state.backtracking>0) {state.failed=true; return current;}
-                        NoViableAltException nvae =
-                            new NoViableAltException("", 226, 5, input);
-
-                        throw nvae;
-                    }
-                    }
-                    break;
-                case KW_Val:
-                    {
-                    int LA226_6 = input.LA(3);
-
-                    if ( (synpred47_InternalXtend()) ) {
-                        alt226=1;
-                    }
-                    else if ( (true) ) {
-                        alt226=2;
-                    }
-                    else {
-                        if (state.backtracking>0) {state.failed=true; return current;}
-                        NoViableAltException nvae =
-                            new NoViableAltException("", 226, 6, input);
-
-                        throw nvae;
-                    }
                     }
                     break;
                 default:
@@ -31022,26 +31022,34 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleJvmParameterizedTypeReference"
-    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:10999:1: ruleJvmParameterizedTypeReference returns [EObject current=null] : ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ) ;
+    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:10999:1: ruleJvmParameterizedTypeReference returns [EObject current=null] : ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )? ) ;
     public final EObject ruleJvmParameterizedTypeReference() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
         Token otherlv_3=null;
         Token otherlv_5=null;
+        Token otherlv_7=null;
+        Token otherlv_9=null;
+        Token otherlv_11=null;
+        Token otherlv_13=null;
         EObject lv_arguments_2_0 = null;
 
         EObject lv_arguments_4_0 = null;
+
+        EObject lv_arguments_10_0 = null;
+
+        EObject lv_arguments_12_0 = null;
 
 
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11002:28: ( ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ) )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11003:1: ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11002:28: ( ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )? ) )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11003:1: ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )? )
             {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11003:1: ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11003:2: ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )?
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11003:1: ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )? )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11003:2: ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )?
             {
             // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11003:2: ( ( ruleQualifiedName ) )
             // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11004:1: ( ruleQualifiedName )
@@ -31077,12 +31085,12 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11018:2: ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )?
-            int alt251=2;
-            alt251 = dfa251.predict(input);
-            switch (alt251) {
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11018:2: ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )?
+            int alt254=2;
+            alt254 = dfa254.predict(input);
+            switch (alt254) {
                 case 1 :
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11018:3: ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>'
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11018:3: ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )*
                     {
                     // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11018:3: ( ( '<' )=>otherlv_1= '<' )
                     // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11018:4: ( '<' )=>otherlv_1= '<'
@@ -31202,6 +31210,220 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                           	newLeafNode(otherlv_5, grammarAccess.getJvmParameterizedTypeReferenceAccess().getGreaterThanSignKeyword_1_3());
                           
                     }
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11067:1: ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )*
+                    loop253:
+                    do {
+                        int alt253=2;
+                        alt253 = dfa253.predict(input);
+                        switch (alt253) {
+                    	case 1 :
+                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11067:2: ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )?
+                    	    {
+                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11067:2: ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) )
+                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11067:3: ( ( () '.' ) )=> ( () otherlv_7= '.' )
+                    	    {
+                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11069:5: ( () otherlv_7= '.' )
+                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11069:6: () otherlv_7= '.'
+                    	    {
+                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11069:6: ()
+                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11070:5: 
+                    	    {
+                    	    if ( state.backtracking==0 ) {
+
+                    	              current = forceCreateModelElementAndSet(
+                    	                  grammarAccess.getJvmParameterizedTypeReferenceAccess().getJvmInnerTypeReferenceOuterAction_1_4_0_0_0(),
+                    	                  current);
+                    	          
+                    	    }
+
+                    	    }
+
+                    	    otherlv_7=(Token)match(input,KW_FullStop,FOLLOW_KW_FullStop_in_ruleJvmParameterizedTypeReference25208); if (state.failed) return current;
+                    	    if ( state.backtracking==0 ) {
+
+                    	          	newLeafNode(otherlv_7, grammarAccess.getJvmParameterizedTypeReferenceAccess().getFullStopKeyword_1_4_0_0_1());
+                    	          
+                    	    }
+
+                    	    }
+
+
+                    	    }
+
+                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11079:3: ( ( ruleValidID ) )
+                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11080:1: ( ruleValidID )
+                    	    {
+                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11080:1: ( ruleValidID )
+                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11081:3: ruleValidID
+                    	    {
+                    	    if ( state.backtracking==0 ) {
+
+                    	      			if (current==null) {
+                    	      	            current = createModelElement(grammarAccess.getJvmParameterizedTypeReferenceRule());
+                    	      	        }
+                    	              
+                    	    }
+                    	    if ( state.backtracking==0 ) {
+                    	       
+                    	      	        newCompositeNode(grammarAccess.getJvmParameterizedTypeReferenceAccess().getTypeJvmTypeCrossReference_1_4_1_0()); 
+                    	      	    
+                    	    }
+                    	    pushFollow(FOLLOW_ruleValidID_in_ruleJvmParameterizedTypeReference25233);
+                    	    ruleValidID();
+
+                    	    state._fsp--;
+                    	    if (state.failed) return current;
+                    	    if ( state.backtracking==0 ) {
+                    	       
+                    	      	        afterParserOrEnumRuleCall();
+                    	      	    
+                    	    }
+
+                    	    }
+
+
+                    	    }
+
+                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11094:2: ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )?
+                    	    int alt252=2;
+                    	    alt252 = dfa252.predict(input);
+                    	    switch (alt252) {
+                    	        case 1 :
+                    	            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11094:3: ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>'
+                    	            {
+                    	            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11094:3: ( ( '<' )=>otherlv_9= '<' )
+                    	            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11094:4: ( '<' )=>otherlv_9= '<'
+                    	            {
+                    	            otherlv_9=(Token)match(input,KW_LessThanSign,FOLLOW_KW_LessThanSign_in_ruleJvmParameterizedTypeReference25254); if (state.failed) return current;
+                    	            if ( state.backtracking==0 ) {
+
+                    	                  	newLeafNode(otherlv_9, grammarAccess.getJvmParameterizedTypeReferenceAccess().getLessThanSignKeyword_1_4_2_0());
+                    	                  
+                    	            }
+
+                    	            }
+
+                    	            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11099:2: ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) )
+                    	            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11100:1: (lv_arguments_10_0= ruleJvmArgumentTypeReference )
+                    	            {
+                    	            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11100:1: (lv_arguments_10_0= ruleJvmArgumentTypeReference )
+                    	            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11101:3: lv_arguments_10_0= ruleJvmArgumentTypeReference
+                    	            {
+                    	            if ( state.backtracking==0 ) {
+                    	               
+                    	              	        newCompositeNode(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_4_2_1_0()); 
+                    	              	    
+                    	            }
+                    	            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_ruleJvmParameterizedTypeReference25276);
+                    	            lv_arguments_10_0=ruleJvmArgumentTypeReference();
+
+                    	            state._fsp--;
+                    	            if (state.failed) return current;
+                    	            if ( state.backtracking==0 ) {
+
+                    	              	        if (current==null) {
+                    	              	            current = createModelElementForParent(grammarAccess.getJvmParameterizedTypeReferenceRule());
+                    	              	        }
+                    	                     		add(
+                    	                     			current, 
+                    	                     			"arguments",
+                    	                      		lv_arguments_10_0, 
+                    	                      		"JvmArgumentTypeReference");
+                    	              	        afterParserOrEnumRuleCall();
+                    	              	    
+                    	            }
+
+                    	            }
+
+
+                    	            }
+
+                    	            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11117:2: (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )*
+                    	            loop251:
+                    	            do {
+                    	                int alt251=2;
+                    	                int LA251_0 = input.LA(1);
+
+                    	                if ( (LA251_0==KW_Comma) ) {
+                    	                    alt251=1;
+                    	                }
+
+
+                    	                switch (alt251) {
+                    	            	case 1 :
+                    	            	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11117:4: otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) )
+                    	            	    {
+                    	            	    otherlv_11=(Token)match(input,KW_Comma,FOLLOW_KW_Comma_in_ruleJvmParameterizedTypeReference25289); if (state.failed) return current;
+                    	            	    if ( state.backtracking==0 ) {
+
+                    	            	          	newLeafNode(otherlv_11, grammarAccess.getJvmParameterizedTypeReferenceAccess().getCommaKeyword_1_4_2_2_0());
+                    	            	          
+                    	            	    }
+                    	            	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11121:1: ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) )
+                    	            	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11122:1: (lv_arguments_12_0= ruleJvmArgumentTypeReference )
+                    	            	    {
+                    	            	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11122:1: (lv_arguments_12_0= ruleJvmArgumentTypeReference )
+                    	            	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11123:3: lv_arguments_12_0= ruleJvmArgumentTypeReference
+                    	            	    {
+                    	            	    if ( state.backtracking==0 ) {
+                    	            	       
+                    	            	      	        newCompositeNode(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_4_2_2_1_0()); 
+                    	            	      	    
+                    	            	    }
+                    	            	    pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_ruleJvmParameterizedTypeReference25310);
+                    	            	    lv_arguments_12_0=ruleJvmArgumentTypeReference();
+
+                    	            	    state._fsp--;
+                    	            	    if (state.failed) return current;
+                    	            	    if ( state.backtracking==0 ) {
+
+                    	            	      	        if (current==null) {
+                    	            	      	            current = createModelElementForParent(grammarAccess.getJvmParameterizedTypeReferenceRule());
+                    	            	      	        }
+                    	            	             		add(
+                    	            	             			current, 
+                    	            	             			"arguments",
+                    	            	              		lv_arguments_12_0, 
+                    	            	              		"JvmArgumentTypeReference");
+                    	            	      	        afterParserOrEnumRuleCall();
+                    	            	      	    
+                    	            	    }
+
+                    	            	    }
+
+
+                    	            	    }
+
+
+                    	            	    }
+                    	            	    break;
+
+                    	            	default :
+                    	            	    break loop251;
+                    	                }
+                    	            } while (true);
+
+                    	            otherlv_13=(Token)match(input,KW_GreaterThanSign,FOLLOW_KW_GreaterThanSign_in_ruleJvmParameterizedTypeReference25324); if (state.failed) return current;
+                    	            if ( state.backtracking==0 ) {
+
+                    	                  	newLeafNode(otherlv_13, grammarAccess.getJvmParameterizedTypeReferenceAccess().getGreaterThanSignKeyword_1_4_2_3());
+                    	                  
+                    	            }
+
+                    	            }
+                    	            break;
+
+                    	    }
+
+
+                    	    }
+                    	    break;
+
+                    	default :
+                    	    break loop253;
+                        }
+                    } while (true);
+
 
                     }
                     break;
@@ -31231,7 +31453,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleJvmArgumentTypeReference"
-    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11075:1: entryRuleJvmArgumentTypeReference returns [EObject current=null] : iv_ruleJvmArgumentTypeReference= ruleJvmArgumentTypeReference EOF ;
+    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11151:1: entryRuleJvmArgumentTypeReference returns [EObject current=null] : iv_ruleJvmArgumentTypeReference= ruleJvmArgumentTypeReference EOF ;
     public final EObject entryRuleJvmArgumentTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -31239,13 +31461,13 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11076:2: (iv_ruleJvmArgumentTypeReference= ruleJvmArgumentTypeReference EOF )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11077:2: iv_ruleJvmArgumentTypeReference= ruleJvmArgumentTypeReference EOF
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11152:2: (iv_ruleJvmArgumentTypeReference= ruleJvmArgumentTypeReference EOF )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11153:2: iv_ruleJvmArgumentTypeReference= ruleJvmArgumentTypeReference EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmArgumentTypeReferenceRule()); 
             }
-            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_entryRuleJvmArgumentTypeReference25210);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_entryRuleJvmArgumentTypeReference25366);
             iv_ruleJvmArgumentTypeReference=ruleJvmArgumentTypeReference();
 
             state._fsp--;
@@ -31253,7 +31475,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleJvmArgumentTypeReference; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmArgumentTypeReference25220); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmArgumentTypeReference25376); if (state.failed) return current;
 
             }
 
@@ -31271,7 +31493,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleJvmArgumentTypeReference"
-    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11084:1: ruleJvmArgumentTypeReference returns [EObject current=null] : (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference ) ;
+    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11160:1: ruleJvmArgumentTypeReference returns [EObject current=null] : (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference ) ;
     public final EObject ruleJvmArgumentTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -31283,36 +31505,36 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11087:28: ( (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference ) )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11088:1: (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11163:28: ( (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference ) )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11164:1: (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference )
             {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11088:1: (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference )
-            int alt252=2;
-            int LA252_0 = input.LA(1);
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11164:1: (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference )
+            int alt255=2;
+            int LA255_0 = input.LA(1);
 
-            if ( ((LA252_0>=KW_Annotation && LA252_0<=KW_LeftParenthesis)||LA252_0==KW_EqualsSignGreaterThanSign||LA252_0==KW_Create||(LA252_0>=KW_AFTER && LA252_0<=KW_SEPARATOR)||LA252_0==RULE_ID) ) {
-                alt252=1;
+            if ( ((LA255_0>=KW_Annotation && LA255_0<=KW_LeftParenthesis)||LA255_0==KW_EqualsSignGreaterThanSign||LA255_0==KW_Create||(LA255_0>=KW_AFTER && LA255_0<=KW_SEPARATOR)||LA255_0==RULE_ID) ) {
+                alt255=1;
             }
-            else if ( (LA252_0==KW_QuestionMark) ) {
-                alt252=2;
+            else if ( (LA255_0==KW_QuestionMark) ) {
+                alt255=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 252, 0, input);
+                    new NoViableAltException("", 255, 0, input);
 
                 throw nvae;
             }
-            switch (alt252) {
+            switch (alt255) {
                 case 1 :
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11089:5: this_JvmTypeReference_0= ruleJvmTypeReference
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11165:5: this_JvmTypeReference_0= ruleJvmTypeReference
                     {
                     if ( state.backtracking==0 ) {
                        
                               newCompositeNode(grammarAccess.getJvmArgumentTypeReferenceAccess().getJvmTypeReferenceParserRuleCall_0()); 
                           
                     }
-                    pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmArgumentTypeReference25267);
+                    pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmArgumentTypeReference25423);
                     this_JvmTypeReference_0=ruleJvmTypeReference();
 
                     state._fsp--;
@@ -31327,14 +31549,14 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11099:5: this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11175:5: this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference
                     {
                     if ( state.backtracking==0 ) {
                        
                               newCompositeNode(grammarAccess.getJvmArgumentTypeReferenceAccess().getJvmWildcardTypeReferenceParserRuleCall_1()); 
                           
                     }
-                    pushFollow(FOLLOW_ruleJvmWildcardTypeReference_in_ruleJvmArgumentTypeReference25294);
+                    pushFollow(FOLLOW_ruleJvmWildcardTypeReference_in_ruleJvmArgumentTypeReference25450);
                     this_JvmWildcardTypeReference_1=ruleJvmWildcardTypeReference();
 
                     state._fsp--;
@@ -31371,7 +31593,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleJvmWildcardTypeReference"
-    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11115:1: entryRuleJvmWildcardTypeReference returns [EObject current=null] : iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF ;
+    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11191:1: entryRuleJvmWildcardTypeReference returns [EObject current=null] : iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF ;
     public final EObject entryRuleJvmWildcardTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -31379,13 +31601,13 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11116:2: (iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11117:2: iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11192:2: (iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11193:2: iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmWildcardTypeReferenceRule()); 
             }
-            pushFollow(FOLLOW_ruleJvmWildcardTypeReference_in_entryRuleJvmWildcardTypeReference25329);
+            pushFollow(FOLLOW_ruleJvmWildcardTypeReference_in_entryRuleJvmWildcardTypeReference25485);
             iv_ruleJvmWildcardTypeReference=ruleJvmWildcardTypeReference();
 
             state._fsp--;
@@ -31393,7 +31615,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleJvmWildcardTypeReference; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmWildcardTypeReference25339); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmWildcardTypeReference25495); if (state.failed) return current;
 
             }
 
@@ -31411,7 +31633,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleJvmWildcardTypeReference"
-    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11124:1: ruleJvmWildcardTypeReference returns [EObject current=null] : ( () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )? ) ;
+    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11200:1: ruleJvmWildcardTypeReference returns [EObject current=null] : ( () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )? ) ;
     public final EObject ruleJvmWildcardTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -31428,14 +31650,14 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11127:28: ( ( () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )? ) )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11128:1: ( () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )? )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11203:28: ( ( () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )? ) )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11204:1: ( () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )? )
             {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11128:1: ( () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )? )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11128:2: () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )?
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11204:1: ( () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )? )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11204:2: () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )?
             {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11128:2: ()
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11129:5: 
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11204:2: ()
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11205:5: 
             {
             if ( state.backtracking==0 ) {
 
@@ -31447,41 +31669,41 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,KW_QuestionMark,FOLLOW_KW_QuestionMark_in_ruleJvmWildcardTypeReference25385); if (state.failed) return current;
+            otherlv_1=(Token)match(input,KW_QuestionMark,FOLLOW_KW_QuestionMark_in_ruleJvmWildcardTypeReference25541); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getJvmWildcardTypeReferenceAccess().getQuestionMarkKeyword_1());
                   
             }
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11138:1: ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )?
-            int alt255=3;
-            int LA255_0 = input.LA(1);
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11214:1: ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )?
+            int alt258=3;
+            int LA258_0 = input.LA(1);
 
-            if ( (LA255_0==KW_Extends) ) {
-                alt255=1;
+            if ( (LA258_0==KW_Extends) ) {
+                alt258=1;
             }
-            else if ( (LA255_0==KW_Super) ) {
-                alt255=2;
+            else if ( (LA258_0==KW_Super) ) {
+                alt258=2;
             }
-            switch (alt255) {
+            switch (alt258) {
                 case 1 :
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11138:2: ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11214:2: ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* )
                     {
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11138:2: ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* )
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11138:3: ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )*
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11214:2: ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11214:3: ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )*
                     {
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11138:3: ( (lv_constraints_2_0= ruleJvmUpperBound ) )
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11139:1: (lv_constraints_2_0= ruleJvmUpperBound )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11214:3: ( (lv_constraints_2_0= ruleJvmUpperBound ) )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11215:1: (lv_constraints_2_0= ruleJvmUpperBound )
                     {
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11139:1: (lv_constraints_2_0= ruleJvmUpperBound )
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11140:3: lv_constraints_2_0= ruleJvmUpperBound
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11215:1: (lv_constraints_2_0= ruleJvmUpperBound )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11216:3: lv_constraints_2_0= ruleJvmUpperBound
                     {
                     if ( state.backtracking==0 ) {
                        
                       	        newCompositeNode(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsJvmUpperBoundParserRuleCall_2_0_0_0()); 
                       	    
                     }
-                    pushFollow(FOLLOW_ruleJvmUpperBound_in_ruleJvmWildcardTypeReference25408);
+                    pushFollow(FOLLOW_ruleJvmUpperBound_in_ruleJvmWildcardTypeReference25564);
                     lv_constraints_2_0=ruleJvmUpperBound();
 
                     state._fsp--;
@@ -31505,30 +31727,30 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11156:2: ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )*
-                    loop253:
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11232:2: ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )*
+                    loop256:
                     do {
-                        int alt253=2;
-                        int LA253_0 = input.LA(1);
+                        int alt256=2;
+                        int LA256_0 = input.LA(1);
 
-                        if ( (LA253_0==KW_Ampersand) ) {
-                            alt253=1;
+                        if ( (LA256_0==KW_Ampersand) ) {
+                            alt256=1;
                         }
 
 
-                        switch (alt253) {
+                        switch (alt256) {
                     	case 1 :
-                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11157:1: (lv_constraints_3_0= ruleJvmUpperBoundAnded )
+                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11233:1: (lv_constraints_3_0= ruleJvmUpperBoundAnded )
                     	    {
-                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11157:1: (lv_constraints_3_0= ruleJvmUpperBoundAnded )
-                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11158:3: lv_constraints_3_0= ruleJvmUpperBoundAnded
+                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11233:1: (lv_constraints_3_0= ruleJvmUpperBoundAnded )
+                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11234:3: lv_constraints_3_0= ruleJvmUpperBoundAnded
                     	    {
                     	    if ( state.backtracking==0 ) {
                     	       
                     	      	        newCompositeNode(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsJvmUpperBoundAndedParserRuleCall_2_0_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FOLLOW_ruleJvmUpperBoundAnded_in_ruleJvmWildcardTypeReference25429);
+                    	    pushFollow(FOLLOW_ruleJvmUpperBoundAnded_in_ruleJvmWildcardTypeReference25585);
                     	    lv_constraints_3_0=ruleJvmUpperBoundAnded();
 
                     	    state._fsp--;
@@ -31554,7 +31776,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop253;
+                    	    break loop256;
                         }
                     } while (true);
 
@@ -31565,23 +31787,23 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11175:6: ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11251:6: ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* )
                     {
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11175:6: ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* )
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11175:7: ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )*
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11251:6: ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11251:7: ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )*
                     {
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11175:7: ( (lv_constraints_4_0= ruleJvmLowerBound ) )
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11176:1: (lv_constraints_4_0= ruleJvmLowerBound )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11251:7: ( (lv_constraints_4_0= ruleJvmLowerBound ) )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11252:1: (lv_constraints_4_0= ruleJvmLowerBound )
                     {
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11176:1: (lv_constraints_4_0= ruleJvmLowerBound )
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11177:3: lv_constraints_4_0= ruleJvmLowerBound
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11252:1: (lv_constraints_4_0= ruleJvmLowerBound )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11253:3: lv_constraints_4_0= ruleJvmLowerBound
                     {
                     if ( state.backtracking==0 ) {
                        
                       	        newCompositeNode(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsJvmLowerBoundParserRuleCall_2_1_0_0()); 
                       	    
                     }
-                    pushFollow(FOLLOW_ruleJvmLowerBound_in_ruleJvmWildcardTypeReference25459);
+                    pushFollow(FOLLOW_ruleJvmLowerBound_in_ruleJvmWildcardTypeReference25615);
                     lv_constraints_4_0=ruleJvmLowerBound();
 
                     state._fsp--;
@@ -31605,30 +31827,30 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11193:2: ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )*
-                    loop254:
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11269:2: ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )*
+                    loop257:
                     do {
-                        int alt254=2;
-                        int LA254_0 = input.LA(1);
+                        int alt257=2;
+                        int LA257_0 = input.LA(1);
 
-                        if ( (LA254_0==KW_Ampersand) ) {
-                            alt254=1;
+                        if ( (LA257_0==KW_Ampersand) ) {
+                            alt257=1;
                         }
 
 
-                        switch (alt254) {
+                        switch (alt257) {
                     	case 1 :
-                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11194:1: (lv_constraints_5_0= ruleJvmLowerBoundAnded )
+                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11270:1: (lv_constraints_5_0= ruleJvmLowerBoundAnded )
                     	    {
-                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11194:1: (lv_constraints_5_0= ruleJvmLowerBoundAnded )
-                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11195:3: lv_constraints_5_0= ruleJvmLowerBoundAnded
+                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11270:1: (lv_constraints_5_0= ruleJvmLowerBoundAnded )
+                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11271:3: lv_constraints_5_0= ruleJvmLowerBoundAnded
                     	    {
                     	    if ( state.backtracking==0 ) {
                     	       
                     	      	        newCompositeNode(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsJvmLowerBoundAndedParserRuleCall_2_1_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FOLLOW_ruleJvmLowerBoundAnded_in_ruleJvmWildcardTypeReference25480);
+                    	    pushFollow(FOLLOW_ruleJvmLowerBoundAnded_in_ruleJvmWildcardTypeReference25636);
                     	    lv_constraints_5_0=ruleJvmLowerBoundAnded();
 
                     	    state._fsp--;
@@ -31654,7 +31876,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop254;
+                    	    break loop257;
                         }
                     } while (true);
 
@@ -31690,7 +31912,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleJvmUpperBound"
-    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11219:1: entryRuleJvmUpperBound returns [EObject current=null] : iv_ruleJvmUpperBound= ruleJvmUpperBound EOF ;
+    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11295:1: entryRuleJvmUpperBound returns [EObject current=null] : iv_ruleJvmUpperBound= ruleJvmUpperBound EOF ;
     public final EObject entryRuleJvmUpperBound() throws RecognitionException {
         EObject current = null;
 
@@ -31698,13 +31920,13 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11220:2: (iv_ruleJvmUpperBound= ruleJvmUpperBound EOF )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11221:2: iv_ruleJvmUpperBound= ruleJvmUpperBound EOF
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11296:2: (iv_ruleJvmUpperBound= ruleJvmUpperBound EOF )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11297:2: iv_ruleJvmUpperBound= ruleJvmUpperBound EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmUpperBoundRule()); 
             }
-            pushFollow(FOLLOW_ruleJvmUpperBound_in_entryRuleJvmUpperBound25520);
+            pushFollow(FOLLOW_ruleJvmUpperBound_in_entryRuleJvmUpperBound25676);
             iv_ruleJvmUpperBound=ruleJvmUpperBound();
 
             state._fsp--;
@@ -31712,7 +31934,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleJvmUpperBound; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmUpperBound25530); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmUpperBound25686); if (state.failed) return current;
 
             }
 
@@ -31730,7 +31952,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleJvmUpperBound"
-    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11228:1: ruleJvmUpperBound returns [EObject current=null] : (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
+    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11304:1: ruleJvmUpperBound returns [EObject current=null] : (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
     public final EObject ruleJvmUpperBound() throws RecognitionException {
         EObject current = null;
 
@@ -31741,30 +31963,30 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11231:28: ( (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11232:1: (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11307:28: ( (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11308:1: (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
             {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11232:1: (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11232:3: otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11308:1: (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11308:3: otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
             {
-            otherlv_0=(Token)match(input,KW_Extends,FOLLOW_KW_Extends_in_ruleJvmUpperBound25567); if (state.failed) return current;
+            otherlv_0=(Token)match(input,KW_Extends,FOLLOW_KW_Extends_in_ruleJvmUpperBound25723); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getJvmUpperBoundAccess().getExtendsKeyword_0());
                   
             }
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11236:1: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11237:1: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11312:1: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11313:1: (lv_typeReference_1_0= ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11237:1: (lv_typeReference_1_0= ruleJvmTypeReference )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11238:3: lv_typeReference_1_0= ruleJvmTypeReference
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11313:1: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11314:3: lv_typeReference_1_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                
               	        newCompositeNode(grammarAccess.getJvmUpperBoundAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0()); 
               	    
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmUpperBound25588);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmUpperBound25744);
             lv_typeReference_1_0=ruleJvmTypeReference();
 
             state._fsp--;
@@ -31811,7 +32033,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleJvmUpperBoundAnded"
-    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11262:1: entryRuleJvmUpperBoundAnded returns [EObject current=null] : iv_ruleJvmUpperBoundAnded= ruleJvmUpperBoundAnded EOF ;
+    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11338:1: entryRuleJvmUpperBoundAnded returns [EObject current=null] : iv_ruleJvmUpperBoundAnded= ruleJvmUpperBoundAnded EOF ;
     public final EObject entryRuleJvmUpperBoundAnded() throws RecognitionException {
         EObject current = null;
 
@@ -31819,13 +32041,13 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11263:2: (iv_ruleJvmUpperBoundAnded= ruleJvmUpperBoundAnded EOF )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11264:2: iv_ruleJvmUpperBoundAnded= ruleJvmUpperBoundAnded EOF
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11339:2: (iv_ruleJvmUpperBoundAnded= ruleJvmUpperBoundAnded EOF )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11340:2: iv_ruleJvmUpperBoundAnded= ruleJvmUpperBoundAnded EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmUpperBoundAndedRule()); 
             }
-            pushFollow(FOLLOW_ruleJvmUpperBoundAnded_in_entryRuleJvmUpperBoundAnded25624);
+            pushFollow(FOLLOW_ruleJvmUpperBoundAnded_in_entryRuleJvmUpperBoundAnded25780);
             iv_ruleJvmUpperBoundAnded=ruleJvmUpperBoundAnded();
 
             state._fsp--;
@@ -31833,7 +32055,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleJvmUpperBoundAnded; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmUpperBoundAnded25634); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmUpperBoundAnded25790); if (state.failed) return current;
 
             }
 
@@ -31851,7 +32073,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleJvmUpperBoundAnded"
-    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11271:1: ruleJvmUpperBoundAnded returns [EObject current=null] : (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
+    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11347:1: ruleJvmUpperBoundAnded returns [EObject current=null] : (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
     public final EObject ruleJvmUpperBoundAnded() throws RecognitionException {
         EObject current = null;
 
@@ -31862,30 +32084,30 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11274:28: ( (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11275:1: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11350:28: ( (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11351:1: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
             {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11275:1: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11275:3: otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11351:1: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11351:3: otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
             {
-            otherlv_0=(Token)match(input,KW_Ampersand,FOLLOW_KW_Ampersand_in_ruleJvmUpperBoundAnded25671); if (state.failed) return current;
+            otherlv_0=(Token)match(input,KW_Ampersand,FOLLOW_KW_Ampersand_in_ruleJvmUpperBoundAnded25827); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getJvmUpperBoundAndedAccess().getAmpersandKeyword_0());
                   
             }
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11279:1: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11280:1: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11355:1: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11356:1: (lv_typeReference_1_0= ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11280:1: (lv_typeReference_1_0= ruleJvmTypeReference )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11281:3: lv_typeReference_1_0= ruleJvmTypeReference
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11356:1: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11357:3: lv_typeReference_1_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                
               	        newCompositeNode(grammarAccess.getJvmUpperBoundAndedAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0()); 
               	    
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmUpperBoundAnded25692);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmUpperBoundAnded25848);
             lv_typeReference_1_0=ruleJvmTypeReference();
 
             state._fsp--;
@@ -31932,7 +32154,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleJvmLowerBound"
-    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11305:1: entryRuleJvmLowerBound returns [EObject current=null] : iv_ruleJvmLowerBound= ruleJvmLowerBound EOF ;
+    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11381:1: entryRuleJvmLowerBound returns [EObject current=null] : iv_ruleJvmLowerBound= ruleJvmLowerBound EOF ;
     public final EObject entryRuleJvmLowerBound() throws RecognitionException {
         EObject current = null;
 
@@ -31940,13 +32162,13 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11306:2: (iv_ruleJvmLowerBound= ruleJvmLowerBound EOF )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11307:2: iv_ruleJvmLowerBound= ruleJvmLowerBound EOF
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11382:2: (iv_ruleJvmLowerBound= ruleJvmLowerBound EOF )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11383:2: iv_ruleJvmLowerBound= ruleJvmLowerBound EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmLowerBoundRule()); 
             }
-            pushFollow(FOLLOW_ruleJvmLowerBound_in_entryRuleJvmLowerBound25728);
+            pushFollow(FOLLOW_ruleJvmLowerBound_in_entryRuleJvmLowerBound25884);
             iv_ruleJvmLowerBound=ruleJvmLowerBound();
 
             state._fsp--;
@@ -31954,7 +32176,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleJvmLowerBound; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmLowerBound25738); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmLowerBound25894); if (state.failed) return current;
 
             }
 
@@ -31972,7 +32194,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleJvmLowerBound"
-    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11314:1: ruleJvmLowerBound returns [EObject current=null] : (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
+    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11390:1: ruleJvmLowerBound returns [EObject current=null] : (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
     public final EObject ruleJvmLowerBound() throws RecognitionException {
         EObject current = null;
 
@@ -31983,30 +32205,30 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11317:28: ( (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11318:1: (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11393:28: ( (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11394:1: (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
             {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11318:1: (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11318:3: otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11394:1: (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11394:3: otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
             {
-            otherlv_0=(Token)match(input,KW_Super,FOLLOW_KW_Super_in_ruleJvmLowerBound25775); if (state.failed) return current;
+            otherlv_0=(Token)match(input,KW_Super,FOLLOW_KW_Super_in_ruleJvmLowerBound25931); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getJvmLowerBoundAccess().getSuperKeyword_0());
                   
             }
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11322:1: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11323:1: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11398:1: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11399:1: (lv_typeReference_1_0= ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11323:1: (lv_typeReference_1_0= ruleJvmTypeReference )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11324:3: lv_typeReference_1_0= ruleJvmTypeReference
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11399:1: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11400:3: lv_typeReference_1_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                
               	        newCompositeNode(grammarAccess.getJvmLowerBoundAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0()); 
               	    
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmLowerBound25796);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmLowerBound25952);
             lv_typeReference_1_0=ruleJvmTypeReference();
 
             state._fsp--;
@@ -32053,7 +32275,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleJvmLowerBoundAnded"
-    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11348:1: entryRuleJvmLowerBoundAnded returns [EObject current=null] : iv_ruleJvmLowerBoundAnded= ruleJvmLowerBoundAnded EOF ;
+    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11424:1: entryRuleJvmLowerBoundAnded returns [EObject current=null] : iv_ruleJvmLowerBoundAnded= ruleJvmLowerBoundAnded EOF ;
     public final EObject entryRuleJvmLowerBoundAnded() throws RecognitionException {
         EObject current = null;
 
@@ -32061,13 +32283,13 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11349:2: (iv_ruleJvmLowerBoundAnded= ruleJvmLowerBoundAnded EOF )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11350:2: iv_ruleJvmLowerBoundAnded= ruleJvmLowerBoundAnded EOF
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11425:2: (iv_ruleJvmLowerBoundAnded= ruleJvmLowerBoundAnded EOF )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11426:2: iv_ruleJvmLowerBoundAnded= ruleJvmLowerBoundAnded EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmLowerBoundAndedRule()); 
             }
-            pushFollow(FOLLOW_ruleJvmLowerBoundAnded_in_entryRuleJvmLowerBoundAnded25832);
+            pushFollow(FOLLOW_ruleJvmLowerBoundAnded_in_entryRuleJvmLowerBoundAnded25988);
             iv_ruleJvmLowerBoundAnded=ruleJvmLowerBoundAnded();
 
             state._fsp--;
@@ -32075,7 +32297,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleJvmLowerBoundAnded; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmLowerBoundAnded25842); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmLowerBoundAnded25998); if (state.failed) return current;
 
             }
 
@@ -32093,7 +32315,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleJvmLowerBoundAnded"
-    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11357:1: ruleJvmLowerBoundAnded returns [EObject current=null] : (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
+    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11433:1: ruleJvmLowerBoundAnded returns [EObject current=null] : (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
     public final EObject ruleJvmLowerBoundAnded() throws RecognitionException {
         EObject current = null;
 
@@ -32104,30 +32326,30 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11360:28: ( (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11361:1: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11436:28: ( (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11437:1: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
             {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11361:1: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11361:3: otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11437:1: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11437:3: otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
             {
-            otherlv_0=(Token)match(input,KW_Ampersand,FOLLOW_KW_Ampersand_in_ruleJvmLowerBoundAnded25879); if (state.failed) return current;
+            otherlv_0=(Token)match(input,KW_Ampersand,FOLLOW_KW_Ampersand_in_ruleJvmLowerBoundAnded26035); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getJvmLowerBoundAndedAccess().getAmpersandKeyword_0());
                   
             }
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11365:1: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11366:1: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11441:1: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11442:1: (lv_typeReference_1_0= ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11366:1: (lv_typeReference_1_0= ruleJvmTypeReference )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11367:3: lv_typeReference_1_0= ruleJvmTypeReference
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11442:1: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11443:3: lv_typeReference_1_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                
               	        newCompositeNode(grammarAccess.getJvmLowerBoundAndedAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0()); 
               	    
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmLowerBoundAnded25900);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmLowerBoundAnded26056);
             lv_typeReference_1_0=ruleJvmTypeReference();
 
             state._fsp--;
@@ -32174,7 +32396,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleJvmTypeParameter"
-    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11391:1: entryRuleJvmTypeParameter returns [EObject current=null] : iv_ruleJvmTypeParameter= ruleJvmTypeParameter EOF ;
+    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11467:1: entryRuleJvmTypeParameter returns [EObject current=null] : iv_ruleJvmTypeParameter= ruleJvmTypeParameter EOF ;
     public final EObject entryRuleJvmTypeParameter() throws RecognitionException {
         EObject current = null;
 
@@ -32182,13 +32404,13 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11392:2: (iv_ruleJvmTypeParameter= ruleJvmTypeParameter EOF )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11393:2: iv_ruleJvmTypeParameter= ruleJvmTypeParameter EOF
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11468:2: (iv_ruleJvmTypeParameter= ruleJvmTypeParameter EOF )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11469:2: iv_ruleJvmTypeParameter= ruleJvmTypeParameter EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmTypeParameterRule()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeParameter_in_entryRuleJvmTypeParameter25936);
+            pushFollow(FOLLOW_ruleJvmTypeParameter_in_entryRuleJvmTypeParameter26092);
             iv_ruleJvmTypeParameter=ruleJvmTypeParameter();
 
             state._fsp--;
@@ -32196,7 +32418,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleJvmTypeParameter; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmTypeParameter25946); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmTypeParameter26102); if (state.failed) return current;
 
             }
 
@@ -32214,7 +32436,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleJvmTypeParameter"
-    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11400:1: ruleJvmTypeParameter returns [EObject current=null] : ( ( (lv_name_0_0= ruleValidID ) ) ( ( (lv_constraints_1_0= ruleJvmUpperBound ) ) ( (lv_constraints_2_0= ruleJvmUpperBoundAnded ) )* )? ) ;
+    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11476:1: ruleJvmTypeParameter returns [EObject current=null] : ( ( (lv_name_0_0= ruleValidID ) ) ( ( (lv_constraints_1_0= ruleJvmUpperBound ) ) ( (lv_constraints_2_0= ruleJvmUpperBoundAnded ) )* )? ) ;
     public final EObject ruleJvmTypeParameter() throws RecognitionException {
         EObject current = null;
 
@@ -32228,24 +32450,24 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11403:28: ( ( ( (lv_name_0_0= ruleValidID ) ) ( ( (lv_constraints_1_0= ruleJvmUpperBound ) ) ( (lv_constraints_2_0= ruleJvmUpperBoundAnded ) )* )? ) )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11404:1: ( ( (lv_name_0_0= ruleValidID ) ) ( ( (lv_constraints_1_0= ruleJvmUpperBound ) ) ( (lv_constraints_2_0= ruleJvmUpperBoundAnded ) )* )? )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11479:28: ( ( ( (lv_name_0_0= ruleValidID ) ) ( ( (lv_constraints_1_0= ruleJvmUpperBound ) ) ( (lv_constraints_2_0= ruleJvmUpperBoundAnded ) )* )? ) )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11480:1: ( ( (lv_name_0_0= ruleValidID ) ) ( ( (lv_constraints_1_0= ruleJvmUpperBound ) ) ( (lv_constraints_2_0= ruleJvmUpperBoundAnded ) )* )? )
             {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11404:1: ( ( (lv_name_0_0= ruleValidID ) ) ( ( (lv_constraints_1_0= ruleJvmUpperBound ) ) ( (lv_constraints_2_0= ruleJvmUpperBoundAnded ) )* )? )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11404:2: ( (lv_name_0_0= ruleValidID ) ) ( ( (lv_constraints_1_0= ruleJvmUpperBound ) ) ( (lv_constraints_2_0= ruleJvmUpperBoundAnded ) )* )?
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11480:1: ( ( (lv_name_0_0= ruleValidID ) ) ( ( (lv_constraints_1_0= ruleJvmUpperBound ) ) ( (lv_constraints_2_0= ruleJvmUpperBoundAnded ) )* )? )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11480:2: ( (lv_name_0_0= ruleValidID ) ) ( ( (lv_constraints_1_0= ruleJvmUpperBound ) ) ( (lv_constraints_2_0= ruleJvmUpperBoundAnded ) )* )?
             {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11404:2: ( (lv_name_0_0= ruleValidID ) )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11405:1: (lv_name_0_0= ruleValidID )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11480:2: ( (lv_name_0_0= ruleValidID ) )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11481:1: (lv_name_0_0= ruleValidID )
             {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11405:1: (lv_name_0_0= ruleValidID )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11406:3: lv_name_0_0= ruleValidID
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11481:1: (lv_name_0_0= ruleValidID )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11482:3: lv_name_0_0= ruleValidID
             {
             if ( state.backtracking==0 ) {
                
               	        newCompositeNode(grammarAccess.getJvmTypeParameterAccess().getNameValidIDParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FOLLOW_ruleValidID_in_ruleJvmTypeParameter25992);
+            pushFollow(FOLLOW_ruleValidID_in_ruleJvmTypeParameter26148);
             lv_name_0_0=ruleValidID();
 
             state._fsp--;
@@ -32269,29 +32491,29 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11422:2: ( ( (lv_constraints_1_0= ruleJvmUpperBound ) ) ( (lv_constraints_2_0= ruleJvmUpperBoundAnded ) )* )?
-            int alt257=2;
-            int LA257_0 = input.LA(1);
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11498:2: ( ( (lv_constraints_1_0= ruleJvmUpperBound ) ) ( (lv_constraints_2_0= ruleJvmUpperBoundAnded ) )* )?
+            int alt260=2;
+            int LA260_0 = input.LA(1);
 
-            if ( (LA257_0==KW_Extends) ) {
-                alt257=1;
+            if ( (LA260_0==KW_Extends) ) {
+                alt260=1;
             }
-            switch (alt257) {
+            switch (alt260) {
                 case 1 :
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11422:3: ( (lv_constraints_1_0= ruleJvmUpperBound ) ) ( (lv_constraints_2_0= ruleJvmUpperBoundAnded ) )*
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11498:3: ( (lv_constraints_1_0= ruleJvmUpperBound ) ) ( (lv_constraints_2_0= ruleJvmUpperBoundAnded ) )*
                     {
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11422:3: ( (lv_constraints_1_0= ruleJvmUpperBound ) )
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11423:1: (lv_constraints_1_0= ruleJvmUpperBound )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11498:3: ( (lv_constraints_1_0= ruleJvmUpperBound ) )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11499:1: (lv_constraints_1_0= ruleJvmUpperBound )
                     {
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11423:1: (lv_constraints_1_0= ruleJvmUpperBound )
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11424:3: lv_constraints_1_0= ruleJvmUpperBound
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11499:1: (lv_constraints_1_0= ruleJvmUpperBound )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11500:3: lv_constraints_1_0= ruleJvmUpperBound
                     {
                     if ( state.backtracking==0 ) {
                        
                       	        newCompositeNode(grammarAccess.getJvmTypeParameterAccess().getConstraintsJvmUpperBoundParserRuleCall_1_0_0()); 
                       	    
                     }
-                    pushFollow(FOLLOW_ruleJvmUpperBound_in_ruleJvmTypeParameter26014);
+                    pushFollow(FOLLOW_ruleJvmUpperBound_in_ruleJvmTypeParameter26170);
                     lv_constraints_1_0=ruleJvmUpperBound();
 
                     state._fsp--;
@@ -32315,30 +32537,30 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11440:2: ( (lv_constraints_2_0= ruleJvmUpperBoundAnded ) )*
-                    loop256:
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11516:2: ( (lv_constraints_2_0= ruleJvmUpperBoundAnded ) )*
+                    loop259:
                     do {
-                        int alt256=2;
-                        int LA256_0 = input.LA(1);
+                        int alt259=2;
+                        int LA259_0 = input.LA(1);
 
-                        if ( (LA256_0==KW_Ampersand) ) {
-                            alt256=1;
+                        if ( (LA259_0==KW_Ampersand) ) {
+                            alt259=1;
                         }
 
 
-                        switch (alt256) {
+                        switch (alt259) {
                     	case 1 :
-                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11441:1: (lv_constraints_2_0= ruleJvmUpperBoundAnded )
+                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11517:1: (lv_constraints_2_0= ruleJvmUpperBoundAnded )
                     	    {
-                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11441:1: (lv_constraints_2_0= ruleJvmUpperBoundAnded )
-                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11442:3: lv_constraints_2_0= ruleJvmUpperBoundAnded
+                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11517:1: (lv_constraints_2_0= ruleJvmUpperBoundAnded )
+                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11518:3: lv_constraints_2_0= ruleJvmUpperBoundAnded
                     	    {
                     	    if ( state.backtracking==0 ) {
                     	       
                     	      	        newCompositeNode(grammarAccess.getJvmTypeParameterAccess().getConstraintsJvmUpperBoundAndedParserRuleCall_1_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FOLLOW_ruleJvmUpperBoundAnded_in_ruleJvmTypeParameter26035);
+                    	    pushFollow(FOLLOW_ruleJvmUpperBoundAnded_in_ruleJvmTypeParameter26191);
                     	    lv_constraints_2_0=ruleJvmUpperBoundAnded();
 
                     	    state._fsp--;
@@ -32364,7 +32586,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop256;
+                    	    break loop259;
                         }
                     } while (true);
 
@@ -32397,7 +32619,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleQualifiedNameWithWildcard"
-    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11466:1: entryRuleQualifiedNameWithWildcard returns [String current=null] : iv_ruleQualifiedNameWithWildcard= ruleQualifiedNameWithWildcard EOF ;
+    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11542:1: entryRuleQualifiedNameWithWildcard returns [String current=null] : iv_ruleQualifiedNameWithWildcard= ruleQualifiedNameWithWildcard EOF ;
     public final String entryRuleQualifiedNameWithWildcard() throws RecognitionException {
         String current = null;
 
@@ -32405,13 +32627,13 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11467:2: (iv_ruleQualifiedNameWithWildcard= ruleQualifiedNameWithWildcard EOF )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11468:2: iv_ruleQualifiedNameWithWildcard= ruleQualifiedNameWithWildcard EOF
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11543:2: (iv_ruleQualifiedNameWithWildcard= ruleQualifiedNameWithWildcard EOF )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11544:2: iv_ruleQualifiedNameWithWildcard= ruleQualifiedNameWithWildcard EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getQualifiedNameWithWildcardRule()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedNameWithWildcard_in_entryRuleQualifiedNameWithWildcard26075);
+            pushFollow(FOLLOW_ruleQualifiedNameWithWildcard_in_entryRuleQualifiedNameWithWildcard26231);
             iv_ruleQualifiedNameWithWildcard=ruleQualifiedNameWithWildcard();
 
             state._fsp--;
@@ -32419,7 +32641,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleQualifiedNameWithWildcard.getText(); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleQualifiedNameWithWildcard26086); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleQualifiedNameWithWildcard26242); if (state.failed) return current;
 
             }
 
@@ -32437,7 +32659,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleQualifiedNameWithWildcard"
-    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11475:1: ruleQualifiedNameWithWildcard returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_QualifiedName_0= ruleQualifiedName kw= '.' kw= '*' ) ;
+    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11551:1: ruleQualifiedNameWithWildcard returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_QualifiedName_0= ruleQualifiedName kw= '.' kw= '*' ) ;
     public final AntlrDatatypeRuleToken ruleQualifiedNameWithWildcard() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -32448,18 +32670,18 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11478:28: ( (this_QualifiedName_0= ruleQualifiedName kw= '.' kw= '*' ) )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11479:1: (this_QualifiedName_0= ruleQualifiedName kw= '.' kw= '*' )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11554:28: ( (this_QualifiedName_0= ruleQualifiedName kw= '.' kw= '*' ) )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11555:1: (this_QualifiedName_0= ruleQualifiedName kw= '.' kw= '*' )
             {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11479:1: (this_QualifiedName_0= ruleQualifiedName kw= '.' kw= '*' )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11480:5: this_QualifiedName_0= ruleQualifiedName kw= '.' kw= '*'
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11555:1: (this_QualifiedName_0= ruleQualifiedName kw= '.' kw= '*' )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11556:5: this_QualifiedName_0= ruleQualifiedName kw= '.' kw= '*'
             {
             if ( state.backtracking==0 ) {
                
                       newCompositeNode(grammarAccess.getQualifiedNameWithWildcardAccess().getQualifiedNameParserRuleCall_0()); 
                   
             }
-            pushFollow(FOLLOW_ruleQualifiedName_in_ruleQualifiedNameWithWildcard26133);
+            pushFollow(FOLLOW_ruleQualifiedName_in_ruleQualifiedNameWithWildcard26289);
             this_QualifiedName_0=ruleQualifiedName();
 
             state._fsp--;
@@ -32474,14 +32696,14 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                       afterParserOrEnumRuleCall();
                   
             }
-            kw=(Token)match(input,KW_FullStop,FOLLOW_KW_FullStop_in_ruleQualifiedNameWithWildcard26151); if (state.failed) return current;
+            kw=(Token)match(input,KW_FullStop,FOLLOW_KW_FullStop_in_ruleQualifiedNameWithWildcard26307); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                       current.merge(kw);
                       newLeafNode(kw, grammarAccess.getQualifiedNameWithWildcardAccess().getFullStopKeyword_1()); 
                   
             }
-            kw=(Token)match(input,KW_Asterisk,FOLLOW_KW_Asterisk_in_ruleQualifiedNameWithWildcard26164); if (state.failed) return current;
+            kw=(Token)match(input,KW_Asterisk,FOLLOW_KW_Asterisk_in_ruleQualifiedNameWithWildcard26320); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                       current.merge(kw);
@@ -32511,7 +32733,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleXImportSection"
-    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11510:1: entryRuleXImportSection returns [EObject current=null] : iv_ruleXImportSection= ruleXImportSection EOF ;
+    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11586:1: entryRuleXImportSection returns [EObject current=null] : iv_ruleXImportSection= ruleXImportSection EOF ;
     public final EObject entryRuleXImportSection() throws RecognitionException {
         EObject current = null;
 
@@ -32519,13 +32741,13 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11511:2: (iv_ruleXImportSection= ruleXImportSection EOF )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11512:2: iv_ruleXImportSection= ruleXImportSection EOF
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11587:2: (iv_ruleXImportSection= ruleXImportSection EOF )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11588:2: iv_ruleXImportSection= ruleXImportSection EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXImportSectionRule()); 
             }
-            pushFollow(FOLLOW_ruleXImportSection_in_entryRuleXImportSection26204);
+            pushFollow(FOLLOW_ruleXImportSection_in_entryRuleXImportSection26360);
             iv_ruleXImportSection=ruleXImportSection();
 
             state._fsp--;
@@ -32533,7 +32755,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleXImportSection; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleXImportSection26214); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleXImportSection26370); if (state.failed) return current;
 
             }
 
@@ -32551,7 +32773,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleXImportSection"
-    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11519:1: ruleXImportSection returns [EObject current=null] : ( (lv_importDeclarations_0_0= ruleXImportDeclaration ) )+ ;
+    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11595:1: ruleXImportSection returns [EObject current=null] : ( (lv_importDeclarations_0_0= ruleXImportDeclaration ) )+ ;
     public final EObject ruleXImportSection() throws RecognitionException {
         EObject current = null;
 
@@ -32561,34 +32783,34 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11522:28: ( ( (lv_importDeclarations_0_0= ruleXImportDeclaration ) )+ )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11523:1: ( (lv_importDeclarations_0_0= ruleXImportDeclaration ) )+
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11598:28: ( ( (lv_importDeclarations_0_0= ruleXImportDeclaration ) )+ )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11599:1: ( (lv_importDeclarations_0_0= ruleXImportDeclaration ) )+
             {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11523:1: ( (lv_importDeclarations_0_0= ruleXImportDeclaration ) )+
-            int cnt258=0;
-            loop258:
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11599:1: ( (lv_importDeclarations_0_0= ruleXImportDeclaration ) )+
+            int cnt261=0;
+            loop261:
             do {
-                int alt258=2;
-                int LA258_0 = input.LA(1);
+                int alt261=2;
+                int LA261_0 = input.LA(1);
 
-                if ( (LA258_0==KW_Import) ) {
-                    alt258=1;
+                if ( (LA261_0==KW_Import) ) {
+                    alt261=1;
                 }
 
 
-                switch (alt258) {
+                switch (alt261) {
             	case 1 :
-            	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11524:1: (lv_importDeclarations_0_0= ruleXImportDeclaration )
+            	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11600:1: (lv_importDeclarations_0_0= ruleXImportDeclaration )
             	    {
-            	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11524:1: (lv_importDeclarations_0_0= ruleXImportDeclaration )
-            	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11525:3: lv_importDeclarations_0_0= ruleXImportDeclaration
+            	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11600:1: (lv_importDeclarations_0_0= ruleXImportDeclaration )
+            	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11601:3: lv_importDeclarations_0_0= ruleXImportDeclaration
             	    {
             	    if ( state.backtracking==0 ) {
             	       
             	      	        newCompositeNode(grammarAccess.getXImportSectionAccess().getImportDeclarationsXImportDeclarationParserRuleCall_0()); 
             	      	    
             	    }
-            	    pushFollow(FOLLOW_ruleXImportDeclaration_in_ruleXImportSection26259);
+            	    pushFollow(FOLLOW_ruleXImportDeclaration_in_ruleXImportSection26415);
             	    lv_importDeclarations_0_0=ruleXImportDeclaration();
 
             	    state._fsp--;
@@ -32614,13 +32836,13 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt258 >= 1 ) break loop258;
+            	    if ( cnt261 >= 1 ) break loop261;
             	    if (state.backtracking>0) {state.failed=true; return current;}
                         EarlyExitException eee =
-                            new EarlyExitException(258, input);
+                            new EarlyExitException(261, input);
                         throw eee;
                 }
-                cnt258++;
+                cnt261++;
             } while (true);
 
 
@@ -32643,7 +32865,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleXImportDeclaration"
-    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11549:1: entryRuleXImportDeclaration returns [EObject current=null] : iv_ruleXImportDeclaration= ruleXImportDeclaration EOF ;
+    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11625:1: entryRuleXImportDeclaration returns [EObject current=null] : iv_ruleXImportDeclaration= ruleXImportDeclaration EOF ;
     public final EObject entryRuleXImportDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -32651,13 +32873,13 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11550:2: (iv_ruleXImportDeclaration= ruleXImportDeclaration EOF )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11551:2: iv_ruleXImportDeclaration= ruleXImportDeclaration EOF
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11626:2: (iv_ruleXImportDeclaration= ruleXImportDeclaration EOF )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11627:2: iv_ruleXImportDeclaration= ruleXImportDeclaration EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXImportDeclarationRule()); 
             }
-            pushFollow(FOLLOW_ruleXImportDeclaration_in_entryRuleXImportDeclaration26295);
+            pushFollow(FOLLOW_ruleXImportDeclaration_in_entryRuleXImportDeclaration26451);
             iv_ruleXImportDeclaration=ruleXImportDeclaration();
 
             state._fsp--;
@@ -32665,7 +32887,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleXImportDeclaration; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleXImportDeclaration26305); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleXImportDeclaration26461); if (state.failed) return current;
 
             }
 
@@ -32683,7 +32905,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleXImportDeclaration"
-    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11558:1: ruleXImportDeclaration returns [EObject current=null] : (otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )? ) ;
+    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11634:1: ruleXImportDeclaration returns [EObject current=null] : (otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )? ) ;
     public final EObject ruleXImportDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -32700,35 +32922,35 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11561:28: ( (otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )? ) )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11562:1: (otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )? )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11637:28: ( (otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )? ) )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11638:1: (otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )? )
             {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11562:1: (otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )? )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11562:3: otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )?
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11638:1: (otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )? )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11638:3: otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )?
             {
-            otherlv_0=(Token)match(input,KW_Import,FOLLOW_KW_Import_in_ruleXImportDeclaration26342); if (state.failed) return current;
+            otherlv_0=(Token)match(input,KW_Import,FOLLOW_KW_Import_in_ruleXImportDeclaration26498); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getXImportDeclarationAccess().getImportKeyword_0());
                   
             }
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11566:1: ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) )
-            int alt261=3;
-            alt261 = dfa261.predict(input);
-            switch (alt261) {
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11642:1: ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) )
+            int alt264=3;
+            alt264 = dfa264.predict(input);
+            switch (alt264) {
                 case 1 :
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11566:2: ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11642:2: ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) )
                     {
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11566:2: ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) )
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11566:3: ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11642:2: ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11642:3: ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) )
                     {
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11566:3: ( (lv_static_1_0= 'static' ) )
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11567:1: (lv_static_1_0= 'static' )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11642:3: ( (lv_static_1_0= 'static' ) )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11643:1: (lv_static_1_0= 'static' )
                     {
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11567:1: (lv_static_1_0= 'static' )
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11568:3: lv_static_1_0= 'static'
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11643:1: (lv_static_1_0= 'static' )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11644:3: lv_static_1_0= 'static'
                     {
-                    lv_static_1_0=(Token)match(input,KW_Static,FOLLOW_KW_Static_in_ruleXImportDeclaration26362); if (state.failed) return current;
+                    lv_static_1_0=(Token)match(input,KW_Static,FOLLOW_KW_Static_in_ruleXImportDeclaration26518); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               newLeafNode(lv_static_1_0, grammarAccess.getXImportDeclarationAccess().getStaticStaticKeyword_1_0_0_0());
@@ -32748,21 +32970,21 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11581:2: ( (lv_extension_2_0= 'extension' ) )?
-                    int alt259=2;
-                    int LA259_0 = input.LA(1);
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11657:2: ( (lv_extension_2_0= 'extension' ) )?
+                    int alt262=2;
+                    int LA262_0 = input.LA(1);
 
-                    if ( (LA259_0==KW_Extension) ) {
-                        alt259=1;
+                    if ( (LA262_0==KW_Extension) ) {
+                        alt262=1;
                     }
-                    switch (alt259) {
+                    switch (alt262) {
                         case 1 :
-                            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11582:1: (lv_extension_2_0= 'extension' )
+                            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11658:1: (lv_extension_2_0= 'extension' )
                             {
-                            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11582:1: (lv_extension_2_0= 'extension' )
-                            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11583:3: lv_extension_2_0= 'extension'
+                            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11658:1: (lv_extension_2_0= 'extension' )
+                            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11659:3: lv_extension_2_0= 'extension'
                             {
-                            lv_extension_2_0=(Token)match(input,KW_Extension,FOLLOW_KW_Extension_in_ruleXImportDeclaration26393); if (state.failed) return current;
+                            lv_extension_2_0=(Token)match(input,KW_Extension,FOLLOW_KW_Extension_in_ruleXImportDeclaration26549); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                       newLeafNode(lv_extension_2_0, grammarAccess.getXImportDeclarationAccess().getExtensionExtensionKeyword_1_0_1_0());
@@ -32785,11 +33007,11 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11596:3: ( ( ruleQualifiedNameInStaticImport ) )
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11597:1: ( ruleQualifiedNameInStaticImport )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11672:3: ( ( ruleQualifiedNameInStaticImport ) )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11673:1: ( ruleQualifiedNameInStaticImport )
                     {
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11597:1: ( ruleQualifiedNameInStaticImport )
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11598:3: ruleQualifiedNameInStaticImport
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11673:1: ( ruleQualifiedNameInStaticImport )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11674:3: ruleQualifiedNameInStaticImport
                     {
                     if ( state.backtracking==0 ) {
 
@@ -32803,7 +33025,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getXImportDeclarationAccess().getImportedTypeJvmDeclaredTypeCrossReference_1_0_2_0()); 
                       	    
                     }
-                    pushFollow(FOLLOW_ruleQualifiedNameInStaticImport_in_ruleXImportDeclaration26430);
+                    pushFollow(FOLLOW_ruleQualifiedNameInStaticImport_in_ruleXImportDeclaration26586);
                     ruleQualifiedNameInStaticImport();
 
                     state._fsp--;
@@ -32819,34 +33041,34 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11611:2: ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) )
-                    int alt260=2;
-                    int LA260_0 = input.LA(1);
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11687:2: ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) )
+                    int alt263=2;
+                    int LA263_0 = input.LA(1);
 
-                    if ( (LA260_0==KW_Asterisk) ) {
-                        alt260=1;
+                    if ( (LA263_0==KW_Asterisk) ) {
+                        alt263=1;
                     }
-                    else if ( (LA260_0==KW_Annotation||LA260_0==KW_Create||(LA260_0>=KW_AFTER && LA260_0<=KW_SEPARATOR)||LA260_0==RULE_ID) ) {
-                        alt260=2;
+                    else if ( (LA263_0==KW_Annotation||LA263_0==KW_Create||(LA263_0>=KW_AFTER && LA263_0<=KW_SEPARATOR)||LA263_0==RULE_ID) ) {
+                        alt263=2;
                     }
                     else {
                         if (state.backtracking>0) {state.failed=true; return current;}
                         NoViableAltException nvae =
-                            new NoViableAltException("", 260, 0, input);
+                            new NoViableAltException("", 263, 0, input);
 
                         throw nvae;
                     }
-                    switch (alt260) {
+                    switch (alt263) {
                         case 1 :
-                            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11611:3: ( (lv_wildcard_4_0= '*' ) )
+                            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11687:3: ( (lv_wildcard_4_0= '*' ) )
                             {
-                            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11611:3: ( (lv_wildcard_4_0= '*' ) )
-                            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11612:1: (lv_wildcard_4_0= '*' )
+                            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11687:3: ( (lv_wildcard_4_0= '*' ) )
+                            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11688:1: (lv_wildcard_4_0= '*' )
                             {
-                            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11612:1: (lv_wildcard_4_0= '*' )
-                            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11613:3: lv_wildcard_4_0= '*'
+                            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11688:1: (lv_wildcard_4_0= '*' )
+                            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11689:3: lv_wildcard_4_0= '*'
                             {
-                            lv_wildcard_4_0=(Token)match(input,KW_Asterisk,FOLLOW_KW_Asterisk_in_ruleXImportDeclaration26449); if (state.failed) return current;
+                            lv_wildcard_4_0=(Token)match(input,KW_Asterisk,FOLLOW_KW_Asterisk_in_ruleXImportDeclaration26605); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                       newLeafNode(lv_wildcard_4_0, grammarAccess.getXImportDeclarationAccess().getWildcardAsteriskKeyword_1_0_3_0_0());
@@ -32870,20 +33092,20 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11627:6: ( (lv_memberName_5_0= ruleValidID ) )
+                            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11703:6: ( (lv_memberName_5_0= ruleValidID ) )
                             {
-                            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11627:6: ( (lv_memberName_5_0= ruleValidID ) )
-                            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11628:1: (lv_memberName_5_0= ruleValidID )
+                            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11703:6: ( (lv_memberName_5_0= ruleValidID ) )
+                            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11704:1: (lv_memberName_5_0= ruleValidID )
                             {
-                            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11628:1: (lv_memberName_5_0= ruleValidID )
-                            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11629:3: lv_memberName_5_0= ruleValidID
+                            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11704:1: (lv_memberName_5_0= ruleValidID )
+                            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11705:3: lv_memberName_5_0= ruleValidID
                             {
                             if ( state.backtracking==0 ) {
                                
                               	        newCompositeNode(grammarAccess.getXImportDeclarationAccess().getMemberNameValidIDParserRuleCall_1_0_3_1_0()); 
                               	    
                             }
-                            pushFollow(FOLLOW_ruleValidID_in_ruleXImportDeclaration26489);
+                            pushFollow(FOLLOW_ruleValidID_in_ruleXImportDeclaration26645);
                             lv_memberName_5_0=ruleValidID();
 
                             state._fsp--;
@@ -32920,13 +33142,13 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11646:6: ( ( ruleQualifiedName ) )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11722:6: ( ( ruleQualifiedName ) )
                     {
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11646:6: ( ( ruleQualifiedName ) )
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11647:1: ( ruleQualifiedName )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11722:6: ( ( ruleQualifiedName ) )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11723:1: ( ruleQualifiedName )
                     {
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11647:1: ( ruleQualifiedName )
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11648:3: ruleQualifiedName
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11723:1: ( ruleQualifiedName )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11724:3: ruleQualifiedName
                     {
                     if ( state.backtracking==0 ) {
 
@@ -32940,7 +33162,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getXImportDeclarationAccess().getImportedTypeJvmDeclaredTypeCrossReference_1_1_0()); 
                       	    
                     }
-                    pushFollow(FOLLOW_ruleQualifiedName_in_ruleXImportDeclaration26520);
+                    pushFollow(FOLLOW_ruleQualifiedName_in_ruleXImportDeclaration26676);
                     ruleQualifiedName();
 
                     state._fsp--;
@@ -32960,20 +33182,20 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11662:6: ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11738:6: ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) )
                     {
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11662:6: ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) )
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11663:1: (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11738:6: ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11739:1: (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard )
                     {
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11663:1: (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard )
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11664:3: lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11739:1: (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11740:3: lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard
                     {
                     if ( state.backtracking==0 ) {
                        
                       	        newCompositeNode(grammarAccess.getXImportDeclarationAccess().getImportedNamespaceQualifiedNameWithWildcardParserRuleCall_1_2_0()); 
                       	    
                     }
-                    pushFollow(FOLLOW_ruleQualifiedNameWithWildcard_in_ruleXImportDeclaration26547);
+                    pushFollow(FOLLOW_ruleQualifiedNameWithWildcard_in_ruleXImportDeclaration26703);
                     lv_importedNamespace_7_0=ruleQualifiedNameWithWildcard();
 
                     state._fsp--;
@@ -33003,18 +33225,18 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11680:3: (otherlv_8= ';' )?
-            int alt262=2;
-            int LA262_0 = input.LA(1);
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11756:3: (otherlv_8= ';' )?
+            int alt265=2;
+            int LA265_0 = input.LA(1);
 
-            if ( (LA262_0==KW_Semicolon) ) {
-                alt262=1;
+            if ( (LA265_0==KW_Semicolon) ) {
+                alt265=1;
             }
-            switch (alt262) {
+            switch (alt265) {
                 case 1 :
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11680:5: otherlv_8= ';'
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11756:5: otherlv_8= ';'
                     {
-                    otherlv_8=(Token)match(input,KW_Semicolon,FOLLOW_KW_Semicolon_in_ruleXImportDeclaration26561); if (state.failed) return current;
+                    otherlv_8=(Token)match(input,KW_Semicolon,FOLLOW_KW_Semicolon_in_ruleXImportDeclaration26717); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_8, grammarAccess.getXImportDeclarationAccess().getSemicolonKeyword_2());
@@ -33049,7 +33271,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleQualifiedNameInStaticImport"
-    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11692:1: entryRuleQualifiedNameInStaticImport returns [String current=null] : iv_ruleQualifiedNameInStaticImport= ruleQualifiedNameInStaticImport EOF ;
+    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11768:1: entryRuleQualifiedNameInStaticImport returns [String current=null] : iv_ruleQualifiedNameInStaticImport= ruleQualifiedNameInStaticImport EOF ;
     public final String entryRuleQualifiedNameInStaticImport() throws RecognitionException {
         String current = null;
 
@@ -33057,13 +33279,13 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11693:2: (iv_ruleQualifiedNameInStaticImport= ruleQualifiedNameInStaticImport EOF )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11694:2: iv_ruleQualifiedNameInStaticImport= ruleQualifiedNameInStaticImport EOF
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11769:2: (iv_ruleQualifiedNameInStaticImport= ruleQualifiedNameInStaticImport EOF )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11770:2: iv_ruleQualifiedNameInStaticImport= ruleQualifiedNameInStaticImport EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getQualifiedNameInStaticImportRule()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedNameInStaticImport_in_entryRuleQualifiedNameInStaticImport26600);
+            pushFollow(FOLLOW_ruleQualifiedNameInStaticImport_in_entryRuleQualifiedNameInStaticImport26756);
             iv_ruleQualifiedNameInStaticImport=ruleQualifiedNameInStaticImport();
 
             state._fsp--;
@@ -33071,7 +33293,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleQualifiedNameInStaticImport.getText(); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleQualifiedNameInStaticImport26611); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleQualifiedNameInStaticImport26767); if (state.failed) return current;
 
             }
 
@@ -33089,7 +33311,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleQualifiedNameInStaticImport"
-    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11701:1: ruleQualifiedNameInStaticImport returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ValidID_0= ruleValidID kw= '.' )+ ;
+    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11777:1: ruleQualifiedNameInStaticImport returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ValidID_0= ruleValidID kw= '.' )+ ;
     public final AntlrDatatypeRuleToken ruleQualifiedNameInStaticImport() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -33100,21 +33322,21 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11704:28: ( (this_ValidID_0= ruleValidID kw= '.' )+ )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11705:1: (this_ValidID_0= ruleValidID kw= '.' )+
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11780:28: ( (this_ValidID_0= ruleValidID kw= '.' )+ )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11781:1: (this_ValidID_0= ruleValidID kw= '.' )+
             {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11705:1: (this_ValidID_0= ruleValidID kw= '.' )+
-            int cnt263=0;
-            loop263:
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11781:1: (this_ValidID_0= ruleValidID kw= '.' )+
+            int cnt266=0;
+            loop266:
             do {
-                int alt263=2;
+                int alt266=2;
                 switch ( input.LA(1) ) {
                 case RULE_ID:
                     {
-                    int LA263_2 = input.LA(2);
+                    int LA266_2 = input.LA(2);
 
-                    if ( (LA263_2==KW_FullStop) ) {
-                        alt263=1;
+                    if ( (LA266_2==KW_FullStop) ) {
+                        alt266=1;
                     }
 
 
@@ -33122,10 +33344,10 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                     break;
                 case KW_Create:
                     {
-                    int LA263_3 = input.LA(2);
+                    int LA266_3 = input.LA(2);
 
-                    if ( (LA263_3==KW_FullStop) ) {
-                        alt263=1;
+                    if ( (LA266_3==KW_FullStop) ) {
+                        alt266=1;
                     }
 
 
@@ -33133,10 +33355,10 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                     break;
                 case KW_Annotation:
                     {
-                    int LA263_4 = input.LA(2);
+                    int LA266_4 = input.LA(2);
 
-                    if ( (LA263_4==KW_FullStop) ) {
-                        alt263=1;
+                    if ( (LA266_4==KW_FullStop) ) {
+                        alt266=1;
                     }
 
 
@@ -33144,10 +33366,10 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                     break;
                 case KW_AFTER:
                     {
-                    int LA263_5 = input.LA(2);
+                    int LA266_5 = input.LA(2);
 
-                    if ( (LA263_5==KW_FullStop) ) {
-                        alt263=1;
+                    if ( (LA266_5==KW_FullStop) ) {
+                        alt266=1;
                     }
 
 
@@ -33155,10 +33377,10 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                     break;
                 case KW_BEFORE:
                     {
-                    int LA263_6 = input.LA(2);
+                    int LA266_6 = input.LA(2);
 
-                    if ( (LA263_6==KW_FullStop) ) {
-                        alt263=1;
+                    if ( (LA266_6==KW_FullStop) ) {
+                        alt266=1;
                     }
 
 
@@ -33166,10 +33388,10 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                     break;
                 case KW_SEPARATOR:
                     {
-                    int LA263_7 = input.LA(2);
+                    int LA266_7 = input.LA(2);
 
-                    if ( (LA263_7==KW_FullStop) ) {
-                        alt263=1;
+                    if ( (LA266_7==KW_FullStop) ) {
+                        alt266=1;
                     }
 
 
@@ -33178,16 +33400,16 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
                 }
 
-                switch (alt263) {
+                switch (alt266) {
             	case 1 :
-            	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11706:5: this_ValidID_0= ruleValidID kw= '.'
+            	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11782:5: this_ValidID_0= ruleValidID kw= '.'
             	    {
             	    if ( state.backtracking==0 ) {
             	       
             	              newCompositeNode(grammarAccess.getQualifiedNameInStaticImportAccess().getValidIDParserRuleCall_0()); 
             	          
             	    }
-            	    pushFollow(FOLLOW_ruleValidID_in_ruleQualifiedNameInStaticImport26658);
+            	    pushFollow(FOLLOW_ruleValidID_in_ruleQualifiedNameInStaticImport26814);
             	    this_ValidID_0=ruleValidID();
 
             	    state._fsp--;
@@ -33202,7 +33424,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             	              afterParserOrEnumRuleCall();
             	          
             	    }
-            	    kw=(Token)match(input,KW_FullStop,FOLLOW_KW_FullStop_in_ruleQualifiedNameInStaticImport26676); if (state.failed) return current;
+            	    kw=(Token)match(input,KW_FullStop,FOLLOW_KW_FullStop_in_ruleQualifiedNameInStaticImport26832); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	              current.merge(kw);
@@ -33214,13 +33436,13 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt263 >= 1 ) break loop263;
+            	    if ( cnt266 >= 1 ) break loop266;
             	    if (state.backtracking>0) {state.failed=true; return current;}
                         EarlyExitException eee =
-                            new EarlyExitException(263, input);
+                            new EarlyExitException(266, input);
                         throw eee;
                 }
-                cnt263++;
+                cnt266++;
             } while (true);
 
 
@@ -33576,13 +33798,13 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
         }
 
         // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:4650:2: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
-        int alt269=2;
-        int LA269_0 = input.LA(1);
+        int alt272=2;
+        int LA272_0 = input.LA(1);
 
-        if ( (LA269_0==KW_Package||LA269_0==KW_Class||(LA269_0>=KW_Extends && LA269_0<=KW_Implements)||(LA269_0>=KW_Interface && LA269_0<=KW_LeftParenthesis)||LA269_0==KW_EqualsSignGreaterThanSign||(LA269_0>=KW_Extension && LA269_0<=KW_Throws)||(LA269_0>=KW_Public && LA269_0<=KW_Transient)||(LA269_0>=KW_Def && LA269_0<=KW_Create)||(LA269_0>=KW_AFTER && LA269_0<=KW_Import)||LA269_0==RULE_ID) ) {
-            alt269=1;
+        if ( (LA272_0==KW_Package||LA272_0==KW_Class||(LA272_0>=KW_Extends && LA272_0<=KW_Implements)||(LA272_0>=KW_Interface && LA272_0<=KW_LeftParenthesis)||LA272_0==KW_EqualsSignGreaterThanSign||(LA272_0>=KW_Extension && LA272_0<=KW_Throws)||(LA272_0>=KW_Public && LA272_0<=KW_Transient)||(LA272_0>=KW_Def && LA272_0<=KW_Create)||(LA272_0>=KW_AFTER && LA272_0<=KW_Import)||LA272_0==RULE_ID) ) {
+            alt272=1;
         }
-        switch (alt269) {
+        switch (alt272) {
             case 1 :
                 // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:4650:3: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 {
@@ -33604,17 +33826,17 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                 }
 
                 // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:4654:2: ( ',' ( ( ruleJvmFormalParameter ) ) )*
-                loop268:
+                loop271:
                 do {
-                    int alt268=2;
-                    int LA268_0 = input.LA(1);
+                    int alt271=2;
+                    int LA271_0 = input.LA(1);
 
-                    if ( (LA268_0==KW_Comma) ) {
-                        alt268=1;
+                    if ( (LA271_0==KW_Comma) ) {
+                        alt271=1;
                     }
 
 
-                    switch (alt268) {
+                    switch (alt271) {
                 	case 1 :
                 	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:4654:4: ',' ( ( ruleJvmFormalParameter ) )
                 	    {
@@ -33641,7 +33863,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                 	    break;
 
                 	default :
-                	    break loop268;
+                	    break loop271;
                     }
                 } while (true);
 
@@ -34301,23 +34523,23 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
         }
 
         // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:7949:2: ( '.' | ( ( '::' ) ) )
-        int alt270=2;
-        int LA270_0 = input.LA(1);
+        int alt273=2;
+        int LA273_0 = input.LA(1);
 
-        if ( (LA270_0==KW_FullStop) ) {
-            alt270=1;
+        if ( (LA273_0==KW_FullStop) ) {
+            alt273=1;
         }
-        else if ( (LA270_0==KW_ColonColon) ) {
-            alt270=2;
+        else if ( (LA273_0==KW_ColonColon) ) {
+            alt273=2;
         }
         else {
             if (state.backtracking>0) {state.failed=true; return ;}
             NoViableAltException nvae =
-                new NoViableAltException("", 270, 0, input);
+                new NoViableAltException("", 273, 0, input);
 
             throw nvae;
         }
-        switch (alt270) {
+        switch (alt273) {
             case 1 :
                 // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:7949:4: '.'
                 {
@@ -34391,32 +34613,32 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
         }
 
         // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:8030:2: ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) )
-        int alt271=3;
+        int alt274=3;
         switch ( input.LA(1) ) {
         case KW_FullStop:
             {
-            alt271=1;
+            alt274=1;
             }
             break;
         case KW_QuestionMarkFullStop:
             {
-            alt271=2;
+            alt274=2;
             }
             break;
         case KW_ColonColon:
             {
-            alt271=3;
+            alt274=3;
             }
             break;
         default:
             if (state.backtracking>0) {state.failed=true; return ;}
             NoViableAltException nvae =
-                new NoViableAltException("", 271, 0, input);
+                new NoViableAltException("", 274, 0, input);
 
             throw nvae;
         }
 
-        switch (alt271) {
+        switch (alt274) {
             case 1 :
                 // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:8030:4: '.'
                 {
@@ -34504,13 +34726,13 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
         }
 
         // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:8172:2: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
-        int alt273=2;
-        int LA273_0 = input.LA(1);
+        int alt276=2;
+        int LA276_0 = input.LA(1);
 
-        if ( (LA273_0==KW_Package||LA273_0==KW_Class||(LA273_0>=KW_Extends && LA273_0<=KW_Implements)||(LA273_0>=KW_Interface && LA273_0<=KW_LeftParenthesis)||LA273_0==KW_EqualsSignGreaterThanSign||(LA273_0>=KW_Extension && LA273_0<=KW_Throws)||(LA273_0>=KW_Public && LA273_0<=KW_Transient)||(LA273_0>=KW_Def && LA273_0<=KW_Create)||(LA273_0>=KW_AFTER && LA273_0<=KW_Import)||LA273_0==RULE_ID) ) {
-            alt273=1;
+        if ( (LA276_0==KW_Package||LA276_0==KW_Class||(LA276_0>=KW_Extends && LA276_0<=KW_Implements)||(LA276_0>=KW_Interface && LA276_0<=KW_LeftParenthesis)||LA276_0==KW_EqualsSignGreaterThanSign||(LA276_0>=KW_Extension && LA276_0<=KW_Throws)||(LA276_0>=KW_Public && LA276_0<=KW_Transient)||(LA276_0>=KW_Def && LA276_0<=KW_Create)||(LA276_0>=KW_AFTER && LA276_0<=KW_Import)||LA276_0==RULE_ID) ) {
+            alt276=1;
         }
-        switch (alt273) {
+        switch (alt276) {
             case 1 :
                 // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:8172:3: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 {
@@ -34532,17 +34754,17 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                 }
 
                 // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:8176:2: ( ',' ( ( ruleJvmFormalParameter ) ) )*
-                loop272:
+                loop275:
                 do {
-                    int alt272=2;
-                    int LA272_0 = input.LA(1);
+                    int alt275=2;
+                    int LA275_0 = input.LA(1);
 
-                    if ( (LA272_0==KW_Comma) ) {
-                        alt272=1;
+                    if ( (LA275_0==KW_Comma) ) {
+                        alt275=1;
                     }
 
 
-                    switch (alt272) {
+                    switch (alt275) {
                 	case 1 :
                 	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:8176:4: ',' ( ( ruleJvmFormalParameter ) )
                 	    {
@@ -34569,7 +34791,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                 	    break;
 
                 	default :
-                	    break loop272;
+                	    break loop275;
                     }
                 } while (true);
 
@@ -34717,13 +34939,13 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
         // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:8774:6: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) )
         {
         // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:8774:6: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
-        int alt275=2;
-        int LA275_0 = input.LA(1);
+        int alt278=2;
+        int LA278_0 = input.LA(1);
 
-        if ( (LA275_0==KW_Package||LA275_0==KW_Class||(LA275_0>=KW_Extends && LA275_0<=KW_Implements)||(LA275_0>=KW_Interface && LA275_0<=KW_LeftParenthesis)||LA275_0==KW_EqualsSignGreaterThanSign||(LA275_0>=KW_Extension && LA275_0<=KW_Throws)||(LA275_0>=KW_Public && LA275_0<=KW_Transient)||(LA275_0>=KW_Def && LA275_0<=KW_Create)||(LA275_0>=KW_AFTER && LA275_0<=KW_Import)||LA275_0==RULE_ID) ) {
-            alt275=1;
+        if ( (LA278_0==KW_Package||LA278_0==KW_Class||(LA278_0>=KW_Extends && LA278_0<=KW_Implements)||(LA278_0>=KW_Interface && LA278_0<=KW_LeftParenthesis)||LA278_0==KW_EqualsSignGreaterThanSign||(LA278_0>=KW_Extension && LA278_0<=KW_Throws)||(LA278_0>=KW_Public && LA278_0<=KW_Transient)||(LA278_0>=KW_Def && LA278_0<=KW_Create)||(LA278_0>=KW_AFTER && LA278_0<=KW_Import)||LA278_0==RULE_ID) ) {
+            alt278=1;
         }
-        switch (alt275) {
+        switch (alt278) {
             case 1 :
                 // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:8774:7: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 {
@@ -34745,17 +34967,17 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                 }
 
                 // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:8778:2: ( ',' ( ( ruleJvmFormalParameter ) ) )*
-                loop274:
+                loop277:
                 do {
-                    int alt274=2;
-                    int LA274_0 = input.LA(1);
+                    int alt277=2;
+                    int LA277_0 = input.LA(1);
 
-                    if ( (LA274_0==KW_Comma) ) {
-                        alt274=1;
+                    if ( (LA277_0==KW_Comma) ) {
+                        alt277=1;
                     }
 
 
-                    switch (alt274) {
+                    switch (alt277) {
                 	case 1 :
                 	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:8778:4: ',' ( ( ruleJvmFormalParameter ) )
                 	    {
@@ -34782,7 +35004,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                 	    break;
 
                 	default :
-                	    break loop274;
+                	    break loop277;
                     }
                 } while (true);
 
@@ -34838,23 +35060,23 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
         }
 
         // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:9773:2: ( ( ( ( ( 'var' ) ) | 'val' ) ( ( 'extension' ) )? ) | ( ( ( 'extension' ) ) ( ( ( 'var' ) ) | 'val' ) ) )
-        int alt281=2;
-        int LA281_0 = input.LA(1);
+        int alt284=2;
+        int LA284_0 = input.LA(1);
 
-        if ( ((LA281_0>=KW_Val && LA281_0<=KW_Var)) ) {
-            alt281=1;
+        if ( ((LA284_0>=KW_Val && LA284_0<=KW_Var)) ) {
+            alt284=1;
         }
-        else if ( (LA281_0==KW_Extension) ) {
-            alt281=2;
+        else if ( (LA284_0==KW_Extension) ) {
+            alt284=2;
         }
         else {
             if (state.backtracking>0) {state.failed=true; return ;}
             NoViableAltException nvae =
-                new NoViableAltException("", 281, 0, input);
+                new NoViableAltException("", 284, 0, input);
 
             throw nvae;
         }
-        switch (alt281) {
+        switch (alt284) {
             case 1 :
                 // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:9773:3: ( ( ( ( 'var' ) ) | 'val' ) ( ( 'extension' ) )? )
                 {
@@ -34862,23 +35084,23 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                 // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:9773:4: ( ( ( 'var' ) ) | 'val' ) ( ( 'extension' ) )?
                 {
                 // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:9773:4: ( ( ( 'var' ) ) | 'val' )
-                int alt278=2;
-                int LA278_0 = input.LA(1);
+                int alt281=2;
+                int LA281_0 = input.LA(1);
 
-                if ( (LA278_0==KW_Var) ) {
-                    alt278=1;
+                if ( (LA281_0==KW_Var) ) {
+                    alt281=1;
                 }
-                else if ( (LA278_0==KW_Val) ) {
-                    alt278=2;
+                else if ( (LA281_0==KW_Val) ) {
+                    alt281=2;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
                     NoViableAltException nvae =
-                        new NoViableAltException("", 278, 0, input);
+                        new NoViableAltException("", 281, 0, input);
 
                     throw nvae;
                 }
-                switch (alt278) {
+                switch (alt281) {
                     case 1 :
                         // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:9773:5: ( ( 'var' ) )
                         {
@@ -34909,13 +35131,13 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                 }
 
                 // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:9781:2: ( ( 'extension' ) )?
-                int alt279=2;
-                int LA279_0 = input.LA(1);
+                int alt282=2;
+                int LA282_0 = input.LA(1);
 
-                if ( (LA279_0==KW_Extension) ) {
-                    alt279=1;
+                if ( (LA282_0==KW_Extension) ) {
+                    alt282=1;
                 }
-                switch (alt279) {
+                switch (alt282) {
                     case 1 :
                         // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:9782:1: ( 'extension' )
                         {
@@ -34958,23 +35180,23 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                 }
 
                 // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:9794:2: ( ( ( 'var' ) ) | 'val' )
-                int alt280=2;
-                int LA280_0 = input.LA(1);
+                int alt283=2;
+                int LA283_0 = input.LA(1);
 
-                if ( (LA280_0==KW_Var) ) {
-                    alt280=1;
+                if ( (LA283_0==KW_Var) ) {
+                    alt283=1;
                 }
-                else if ( (LA280_0==KW_Val) ) {
-                    alt280=2;
+                else if ( (LA283_0==KW_Val) ) {
+                    alt283=2;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
                     NoViableAltException nvae =
-                        new NoViableAltException("", 280, 0, input);
+                        new NoViableAltException("", 283, 0, input);
 
                     throw nvae;
                 }
-                switch (alt280) {
+                switch (alt283) {
                     case 1 :
                         // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:9794:3: ( ( 'var' ) )
                         {
@@ -35052,13 +35274,13 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
         }
 
         // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:9933:2: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
-        int alt283=2;
-        int LA283_0 = input.LA(1);
+        int alt286=2;
+        int LA286_0 = input.LA(1);
 
-        if ( (LA283_0==KW_Package||LA283_0==KW_Class||(LA283_0>=KW_Extends && LA283_0<=KW_Implements)||(LA283_0>=KW_Interface && LA283_0<=KW_LeftParenthesis)||LA283_0==KW_EqualsSignGreaterThanSign||(LA283_0>=KW_Extension && LA283_0<=KW_Throws)||(LA283_0>=KW_Public && LA283_0<=KW_Transient)||(LA283_0>=KW_Def && LA283_0<=KW_Create)||(LA283_0>=KW_AFTER && LA283_0<=KW_Import)||LA283_0==RULE_ID) ) {
-            alt283=1;
+        if ( (LA286_0==KW_Package||LA286_0==KW_Class||(LA286_0>=KW_Extends && LA286_0<=KW_Implements)||(LA286_0>=KW_Interface && LA286_0<=KW_LeftParenthesis)||LA286_0==KW_EqualsSignGreaterThanSign||(LA286_0>=KW_Extension && LA286_0<=KW_Throws)||(LA286_0>=KW_Public && LA286_0<=KW_Transient)||(LA286_0>=KW_Def && LA286_0<=KW_Create)||(LA286_0>=KW_AFTER && LA286_0<=KW_Import)||LA286_0==RULE_ID) ) {
+            alt286=1;
         }
-        switch (alt283) {
+        switch (alt286) {
             case 1 :
                 // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:9933:3: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 {
@@ -35080,17 +35302,17 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                 }
 
                 // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:9937:2: ( ',' ( ( ruleJvmFormalParameter ) ) )*
-                loop282:
+                loop285:
                 do {
-                    int alt282=2;
-                    int LA282_0 = input.LA(1);
+                    int alt285=2;
+                    int LA285_0 = input.LA(1);
 
-                    if ( (LA282_0==KW_Comma) ) {
-                        alt282=1;
+                    if ( (LA285_0==KW_Comma) ) {
+                        alt285=1;
                     }
 
 
-                    switch (alt282) {
+                    switch (alt285) {
                 	case 1 :
                 	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:9937:4: ',' ( ( ruleJvmFormalParameter ) )
                 	    {
@@ -35117,7 +35339,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                 	    break;
 
                 	default :
-                	    break loop282;
+                	    break loop285;
                     }
                 } while (true);
 
@@ -35260,6 +35482,39 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
     }
     // $ANTLR end synpred58_InternalXtend
 
+    // $ANTLR start synpred59_InternalXtend
+    public final void synpred59_InternalXtend_fragment() throws RecognitionException {   
+        // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11067:3: ( ( () '.' ) )
+        // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11067:4: ( () '.' )
+        {
+        // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11067:4: ( () '.' )
+        // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11067:5: () '.'
+        {
+        // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11067:5: ()
+        // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11068:1: 
+        {
+        }
+
+        match(input,KW_FullStop,FOLLOW_KW_FullStop_in_synpred59_InternalXtend25189); if (state.failed) return ;
+
+        }
+
+
+        }
+    }
+    // $ANTLR end synpred59_InternalXtend
+
+    // $ANTLR start synpred60_InternalXtend
+    public final void synpred60_InternalXtend_fragment() throws RecognitionException {   
+        // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11094:4: ( '<' )
+        // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:11094:6: '<'
+        {
+        match(input,KW_LessThanSign,FOLLOW_KW_LessThanSign_in_synpred60_InternalXtend25246); if (state.failed) return ;
+
+        }
+    }
+    // $ANTLR end synpred60_InternalXtend
+
     // Delegated rules
 
     public final boolean synpred7_InternalXtend() {
@@ -35332,6 +35587,20 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
         state.failed=false;
         return success;
     }
+    public final boolean synpred59_InternalXtend() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred59_InternalXtend_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
     public final boolean synpred10_InternalXtend() {
         state.backtracking++;
         int start = input.mark();
@@ -35379,6 +35648,20 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
         int start = input.mark();
         try {
             synpred3_InternalXtend_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred60_InternalXtend() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred60_InternalXtend_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -36002,8 +36285,10 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
     protected DFA232 dfa232 = new DFA232(this);
     protected DFA236 dfa236 = new DFA236(this);
     protected DFA240 dfa240 = new DFA240(this);
-    protected DFA251 dfa251 = new DFA251(this);
-    protected DFA261 dfa261 = new DFA261(this);
+    protected DFA254 dfa254 = new DFA254(this);
+    protected DFA253 dfa253 = new DFA253(this);
+    protected DFA252 dfa252 = new DFA252(this);
+    protected DFA264 dfa264 = new DFA264(this);
     static final String DFA25_eotS =
         "\22\uffff";
     static final String DFA25_eofS =
@@ -36211,55 +36496,55 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
     static final String DFA33_eotS =
         "\47\uffff";
     static final String DFA33_eofS =
-        "\1\uffff\6\16\1\uffff\6\7\31\uffff";
+        "\1\uffff\6\10\2\uffff\6\7\30\uffff";
     static final String DFA33_minS =
-        "\1\20\6\4\1\uffff\6\4\1\uffff\30\4";
+        "\1\20\6\4\2\uffff\36\4";
     static final String DFA33_maxS =
-        "\7\155\1\uffff\6\155\1\uffff\30\155";
+        "\7\155\2\uffff\36\155";
     static final String DFA33_acceptS =
-        "\7\uffff\1\1\6\uffff\1\2\30\uffff";
+        "\7\uffff\1\1\1\2\36\uffff";
     static final String DFA33_specialS =
         "\47\uffff}>";
     static final String[] DFA33_transitionS = {
             "\1\3\1\7\1\uffff\1\7\24\uffff\1\2\1\uffff\1\4\1\5\1\6\100\uffff\1\1",
-            "\3\16\1\7\5\uffff\3\16\1\12\1\16\1\uffff\2\16\3\uffff\16\16\2\uffff\1\11\1\uffff\1\13\1\14\1\15\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\10",
-            "\3\16\1\7\5\uffff\3\16\1\12\1\16\1\uffff\2\16\3\uffff\16\16\2\uffff\1\11\1\uffff\1\13\1\14\1\15\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\10",
-            "\3\16\1\7\5\uffff\3\16\1\12\1\16\1\uffff\2\16\3\uffff\16\16\2\uffff\1\11\1\uffff\1\13\1\14\1\15\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\10",
-            "\3\16\1\7\5\uffff\3\16\1\12\1\16\1\uffff\2\16\3\uffff\16\16\2\uffff\1\11\1\uffff\1\13\1\14\1\15\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\10",
-            "\3\16\1\7\5\uffff\3\16\1\12\1\16\1\uffff\2\16\3\uffff\16\16\2\uffff\1\11\1\uffff\1\13\1\14\1\15\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\10",
-            "\3\16\1\7\5\uffff\3\16\1\12\1\16\1\uffff\2\16\3\uffff\16\16\2\uffff\1\11\1\uffff\1\13\1\14\1\15\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\10",
+            "\3\10\1\7\5\uffff\3\10\1\13\1\10\1\uffff\2\10\3\uffff\16\10\2\uffff\1\12\1\uffff\1\14\1\15\1\16\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\11",
+            "\3\10\1\7\5\uffff\3\10\1\13\1\10\1\uffff\2\10\3\uffff\16\10\2\uffff\1\12\1\uffff\1\14\1\15\1\16\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\11",
+            "\3\10\1\7\5\uffff\3\10\1\13\1\10\1\uffff\2\10\3\uffff\16\10\2\uffff\1\12\1\uffff\1\14\1\15\1\16\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\11",
+            "\3\10\1\7\5\uffff\3\10\1\13\1\10\1\uffff\2\10\3\uffff\16\10\2\uffff\1\12\1\uffff\1\14\1\15\1\16\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\11",
+            "\3\10\1\7\5\uffff\3\10\1\13\1\10\1\uffff\2\10\3\uffff\16\10\2\uffff\1\12\1\uffff\1\14\1\15\1\16\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\11",
+            "\3\10\1\7\5\uffff\3\10\1\13\1\10\1\uffff\2\10\3\uffff\16\10\2\uffff\1\12\1\uffff\1\14\1\15\1\16\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\11",
             "",
-            "\3\7\1\16\5\uffff\3\7\1\21\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\7\1\uffff\1\16\35\uffff\1\16\25\uffff\1\17",
-            "\3\7\1\16\5\uffff\3\7\1\21\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\7\1\uffff\1\16\35\uffff\1\16\25\uffff\1\17",
-            "\3\7\1\16\5\uffff\3\7\1\27\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\26\1\uffff\1\30\1\31\1\32\12\uffff\1\7\1\uffff\1\16\35\uffff\1\16\25\uffff\1\25",
-            "\3\7\1\16\5\uffff\3\7\1\21\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\7\1\uffff\1\16\35\uffff\1\16\25\uffff\1\17",
-            "\3\7\1\16\5\uffff\3\7\1\21\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\7\1\uffff\1\16\35\uffff\1\16\25\uffff\1\17",
-            "\3\7\1\16\5\uffff\3\7\1\21\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\7\1\uffff\1\16\35\uffff\1\16\25\uffff\1\17",
             "",
-            "\3\16\1\7\5\uffff\3\16\1\35\1\16\1\uffff\2\16\3\uffff\16\16\2\uffff\1\34\1\uffff\1\36\1\37\1\40\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\33",
-            "\3\16\1\7\5\uffff\3\16\1\35\1\16\1\uffff\2\16\3\uffff\16\16\2\uffff\1\34\1\uffff\1\36\1\37\1\40\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\33",
-            "\3\16\1\7\5\uffff\3\16\1\43\1\16\1\uffff\2\16\3\uffff\16\16\2\uffff\1\42\1\uffff\1\44\1\45\1\46\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\41",
-            "\3\16\1\7\5\uffff\3\16\1\35\1\16\1\uffff\2\16\3\uffff\16\16\2\uffff\1\34\1\uffff\1\36\1\37\1\40\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\33",
-            "\3\16\1\7\5\uffff\3\16\1\35\1\16\1\uffff\2\16\3\uffff\16\16\2\uffff\1\34\1\uffff\1\36\1\37\1\40\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\33",
-            "\3\16\1\7\5\uffff\3\16\1\35\1\16\1\uffff\2\16\3\uffff\16\16\2\uffff\1\34\1\uffff\1\36\1\37\1\40\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\33",
-            "\3\16\1\7\4\uffff\4\16\1\35\1\16\1\uffff\2\16\3\uffff\16\16\2\uffff\1\34\1\uffff\1\36\1\37\1\40\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\33",
-            "\3\16\1\7\4\uffff\4\16\1\35\1\16\1\uffff\2\16\3\uffff\16\16\2\uffff\1\34\1\uffff\1\36\1\37\1\40\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\33",
-            "\3\16\1\7\4\uffff\4\16\1\43\1\16\1\uffff\2\16\3\uffff\16\16\2\uffff\1\42\1\uffff\1\44\1\45\1\46\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\41",
-            "\3\16\1\7\4\uffff\4\16\1\35\1\16\1\uffff\2\16\3\uffff\16\16\2\uffff\1\34\1\uffff\1\36\1\37\1\40\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\33",
-            "\3\16\1\7\4\uffff\4\16\1\35\1\16\1\uffff\2\16\3\uffff\16\16\2\uffff\1\34\1\uffff\1\36\1\37\1\40\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\33",
-            "\3\16\1\7\4\uffff\4\16\1\35\1\16\1\uffff\2\16\3\uffff\16\16\2\uffff\1\34\1\uffff\1\36\1\37\1\40\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\33",
-            "\3\7\1\16\5\uffff\3\7\1\21\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\7\1\uffff\1\16\35\uffff\1\16\25\uffff\1\17",
-            "\3\7\1\16\5\uffff\3\7\1\21\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\7\1\uffff\1\16\35\uffff\1\16\25\uffff\1\17",
-            "\3\7\1\16\5\uffff\3\7\1\27\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\26\1\uffff\1\30\1\31\1\32\12\uffff\1\7\1\uffff\1\16\35\uffff\1\16\25\uffff\1\25",
-            "\3\7\1\16\5\uffff\3\7\1\21\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\7\1\uffff\1\16\35\uffff\1\16\25\uffff\1\17",
-            "\3\7\1\16\5\uffff\3\7\1\21\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\7\1\uffff\1\16\35\uffff\1\16\25\uffff\1\17",
-            "\3\7\1\16\5\uffff\3\7\1\21\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\7\1\uffff\1\16\35\uffff\1\16\25\uffff\1\17",
-            "\3\7\1\16\4\uffff\4\7\1\21\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\7\1\uffff\1\16\35\uffff\1\16\25\uffff\1\17",
-            "\3\7\1\16\4\uffff\4\7\1\21\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\7\1\uffff\1\16\35\uffff\1\16\25\uffff\1\17",
-            "\3\7\1\16\4\uffff\4\7\1\27\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\26\1\uffff\1\30\1\31\1\32\12\uffff\1\7\1\uffff\1\16\35\uffff\1\16\25\uffff\1\25",
-            "\3\7\1\16\4\uffff\4\7\1\21\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\7\1\uffff\1\16\35\uffff\1\16\25\uffff\1\17",
-            "\3\7\1\16\4\uffff\4\7\1\21\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\7\1\uffff\1\16\35\uffff\1\16\25\uffff\1\17",
-            "\3\7\1\16\4\uffff\4\7\1\21\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\7\1\uffff\1\16\35\uffff\1\16\25\uffff\1\17"
+            "\3\7\1\10\5\uffff\3\7\1\21\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\7\1\uffff\1\10\35\uffff\1\10\25\uffff\1\17",
+            "\3\7\1\10\5\uffff\3\7\1\21\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\7\1\uffff\1\10\35\uffff\1\10\25\uffff\1\17",
+            "\3\7\1\10\5\uffff\3\7\1\27\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\26\1\uffff\1\30\1\31\1\32\12\uffff\1\7\1\uffff\1\10\35\uffff\1\10\25\uffff\1\25",
+            "\3\7\1\10\5\uffff\3\7\1\21\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\7\1\uffff\1\10\35\uffff\1\10\25\uffff\1\17",
+            "\3\7\1\10\5\uffff\3\7\1\21\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\7\1\uffff\1\10\35\uffff\1\10\25\uffff\1\17",
+            "\3\7\1\10\5\uffff\3\7\1\21\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\7\1\uffff\1\10\35\uffff\1\10\25\uffff\1\17",
+            "\3\10\1\7\5\uffff\3\10\1\35\1\10\1\uffff\2\10\3\uffff\16\10\2\uffff\1\34\1\uffff\1\36\1\37\1\40\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\33",
+            "\3\10\1\7\5\uffff\3\10\1\35\1\10\1\uffff\2\10\3\uffff\16\10\2\uffff\1\34\1\uffff\1\36\1\37\1\40\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\33",
+            "\3\10\1\7\5\uffff\3\10\1\43\1\10\1\uffff\2\10\3\uffff\16\10\2\uffff\1\42\1\uffff\1\44\1\45\1\46\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\41",
+            "\3\10\1\7\5\uffff\3\10\1\35\1\10\1\uffff\2\10\3\uffff\16\10\2\uffff\1\34\1\uffff\1\36\1\37\1\40\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\33",
+            "\3\10\1\7\5\uffff\3\10\1\35\1\10\1\uffff\2\10\3\uffff\16\10\2\uffff\1\34\1\uffff\1\36\1\37\1\40\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\33",
+            "\3\10\1\7\5\uffff\3\10\1\35\1\10\1\uffff\2\10\3\uffff\16\10\2\uffff\1\34\1\uffff\1\36\1\37\1\40\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\33",
+            "\3\10\1\7\4\uffff\4\10\1\35\1\10\1\uffff\2\10\3\uffff\16\10\2\uffff\1\34\1\uffff\1\36\1\37\1\40\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\33",
+            "\3\10\1\7\4\uffff\4\10\1\35\1\10\1\uffff\2\10\3\uffff\16\10\2\uffff\1\34\1\uffff\1\36\1\37\1\40\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\33",
+            "\3\10\1\7\4\uffff\4\10\1\43\1\10\1\uffff\2\10\3\uffff\16\10\2\uffff\1\42\1\uffff\1\44\1\45\1\46\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\41",
+            "\3\10\1\7\4\uffff\4\10\1\35\1\10\1\uffff\2\10\3\uffff\16\10\2\uffff\1\34\1\uffff\1\36\1\37\1\40\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\33",
+            "\3\10\1\7\4\uffff\4\10\1\35\1\10\1\uffff\2\10\3\uffff\16\10\2\uffff\1\34\1\uffff\1\36\1\37\1\40\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\33",
+            "\3\10\1\7\4\uffff\4\10\1\35\1\10\1\uffff\2\10\3\uffff\16\10\2\uffff\1\34\1\uffff\1\36\1\37\1\40\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\33",
+            "\3\7\1\10\5\uffff\3\7\1\21\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\7\1\uffff\1\10\35\uffff\1\10\25\uffff\1\17",
+            "\3\7\1\10\5\uffff\3\7\1\21\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\7\1\uffff\1\10\35\uffff\1\10\25\uffff\1\17",
+            "\3\7\1\10\5\uffff\3\7\1\27\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\26\1\uffff\1\30\1\31\1\32\12\uffff\1\7\1\uffff\1\10\35\uffff\1\10\25\uffff\1\25",
+            "\3\7\1\10\5\uffff\3\7\1\21\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\7\1\uffff\1\10\35\uffff\1\10\25\uffff\1\17",
+            "\3\7\1\10\5\uffff\3\7\1\21\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\7\1\uffff\1\10\35\uffff\1\10\25\uffff\1\17",
+            "\3\7\1\10\5\uffff\3\7\1\21\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\7\1\uffff\1\10\35\uffff\1\10\25\uffff\1\17",
+            "\3\7\1\10\4\uffff\4\7\1\21\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\7\1\uffff\1\10\35\uffff\1\10\25\uffff\1\17",
+            "\3\7\1\10\4\uffff\4\7\1\21\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\7\1\uffff\1\10\35\uffff\1\10\25\uffff\1\17",
+            "\3\7\1\10\4\uffff\4\7\1\27\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\26\1\uffff\1\30\1\31\1\32\12\uffff\1\7\1\uffff\1\10\35\uffff\1\10\25\uffff\1\25",
+            "\3\7\1\10\4\uffff\4\7\1\21\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\7\1\uffff\1\10\35\uffff\1\10\25\uffff\1\17",
+            "\3\7\1\10\4\uffff\4\7\1\21\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\7\1\uffff\1\10\35\uffff\1\10\25\uffff\1\17",
+            "\3\7\1\10\4\uffff\4\7\1\21\1\7\1\uffff\2\7\3\uffff\16\7\2\uffff\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\7\1\uffff\1\10\35\uffff\1\10\25\uffff\1\17"
     };
 
     static final short[] DFA33_eot = DFA.unpackEncodedString(DFA33_eotS);
@@ -36380,28 +36665,28 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
     static final String DFA67_maxS =
         "\3\155\2\uffff\15\155\2\uffff";
     static final String DFA67_acceptS =
-        "\3\uffff\1\2\1\4\15\uffff\1\3\1\1";
+        "\3\uffff\1\2\1\4\15\uffff\1\1\1\3";
     static final String DFA67_specialS =
         "\24\uffff}>";
     static final String[] DFA67_transitionS = {
             "\2\4\1\uffff\1\4\1\uffff\1\3\16\uffff\1\1\1\2\2\uffff\1\4\1\uffff\3\4\100\uffff\1\4",
-            "\1\10\13\uffff\2\23\1\uffff\1\23\1\uffff\1\22\2\uffff\1\5\1\6\1\7\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\4\uffff\1\23\1\uffff\3\23\100\uffff\1\23",
-            "\1\10\13\uffff\2\23\1\uffff\1\23\1\uffff\1\22\2\uffff\1\5\1\6\1\7\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\4\uffff\1\23\1\uffff\3\23\100\uffff\1\23",
+            "\1\10\13\uffff\2\22\1\uffff\1\22\1\uffff\1\23\2\uffff\1\5\1\6\1\7\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\4\uffff\1\22\1\uffff\3\22\100\uffff\1\22",
+            "\1\10\13\uffff\2\22\1\uffff\1\22\1\uffff\1\23\2\uffff\1\5\1\6\1\7\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\4\uffff\1\22\1\uffff\3\22\100\uffff\1\22",
             "",
             "",
-            "\1\10\13\uffff\2\23\1\uffff\1\23\1\uffff\1\22\2\uffff\1\5\1\6\1\7\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\4\uffff\1\23\1\uffff\3\23\100\uffff\1\23",
-            "\1\10\13\uffff\2\23\1\uffff\1\23\1\uffff\1\22\2\uffff\1\5\1\6\1\7\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\4\uffff\1\23\1\uffff\3\23\100\uffff\1\23",
-            "\1\10\13\uffff\2\23\1\uffff\1\23\1\uffff\1\22\2\uffff\1\5\1\6\1\7\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\4\uffff\1\23\1\uffff\3\23\100\uffff\1\23",
-            "\1\10\13\uffff\2\23\1\uffff\1\23\1\uffff\1\22\2\uffff\1\5\1\6\1\7\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\4\uffff\1\23\1\uffff\3\23\100\uffff\1\23",
-            "\1\10\13\uffff\2\23\1\uffff\1\23\1\uffff\1\22\2\uffff\1\5\1\6\1\7\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\4\uffff\1\23\1\uffff\3\23\100\uffff\1\23",
-            "\1\10\13\uffff\2\23\1\uffff\1\23\1\uffff\1\22\2\uffff\1\5\1\6\1\7\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\4\uffff\1\23\1\uffff\3\23\100\uffff\1\23",
-            "\1\10\13\uffff\2\23\1\uffff\1\23\1\uffff\1\22\2\uffff\1\5\1\6\1\7\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\4\uffff\1\23\1\uffff\3\23\100\uffff\1\23",
-            "\1\10\13\uffff\2\23\1\uffff\1\23\1\uffff\1\22\2\uffff\1\5\1\6\1\7\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\4\uffff\1\23\1\uffff\3\23\100\uffff\1\23",
-            "\1\10\13\uffff\2\23\1\uffff\1\23\1\uffff\1\22\2\uffff\1\5\1\6\1\7\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\4\uffff\1\23\1\uffff\3\23\100\uffff\1\23",
-            "\1\10\13\uffff\2\23\1\uffff\1\23\1\uffff\1\22\2\uffff\1\5\1\6\1\7\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\4\uffff\1\23\1\uffff\3\23\100\uffff\1\23",
-            "\1\10\13\uffff\2\23\1\uffff\1\23\1\uffff\1\22\2\uffff\1\5\1\6\1\7\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\4\uffff\1\23\1\uffff\3\23\100\uffff\1\23",
-            "\1\10\13\uffff\2\23\1\uffff\1\23\1\uffff\1\22\2\uffff\1\5\1\6\1\7\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\4\uffff\1\23\1\uffff\3\23\100\uffff\1\23",
-            "\1\10\13\uffff\2\23\1\uffff\1\23\1\uffff\1\22\2\uffff\1\5\1\6\1\7\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\4\uffff\1\23\1\uffff\3\23\100\uffff\1\23",
+            "\1\10\13\uffff\2\22\1\uffff\1\22\1\uffff\1\23\2\uffff\1\5\1\6\1\7\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\4\uffff\1\22\1\uffff\3\22\100\uffff\1\22",
+            "\1\10\13\uffff\2\22\1\uffff\1\22\1\uffff\1\23\2\uffff\1\5\1\6\1\7\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\4\uffff\1\22\1\uffff\3\22\100\uffff\1\22",
+            "\1\10\13\uffff\2\22\1\uffff\1\22\1\uffff\1\23\2\uffff\1\5\1\6\1\7\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\4\uffff\1\22\1\uffff\3\22\100\uffff\1\22",
+            "\1\10\13\uffff\2\22\1\uffff\1\22\1\uffff\1\23\2\uffff\1\5\1\6\1\7\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\4\uffff\1\22\1\uffff\3\22\100\uffff\1\22",
+            "\1\10\13\uffff\2\22\1\uffff\1\22\1\uffff\1\23\2\uffff\1\5\1\6\1\7\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\4\uffff\1\22\1\uffff\3\22\100\uffff\1\22",
+            "\1\10\13\uffff\2\22\1\uffff\1\22\1\uffff\1\23\2\uffff\1\5\1\6\1\7\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\4\uffff\1\22\1\uffff\3\22\100\uffff\1\22",
+            "\1\10\13\uffff\2\22\1\uffff\1\22\1\uffff\1\23\2\uffff\1\5\1\6\1\7\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\4\uffff\1\22\1\uffff\3\22\100\uffff\1\22",
+            "\1\10\13\uffff\2\22\1\uffff\1\22\1\uffff\1\23\2\uffff\1\5\1\6\1\7\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\4\uffff\1\22\1\uffff\3\22\100\uffff\1\22",
+            "\1\10\13\uffff\2\22\1\uffff\1\22\1\uffff\1\23\2\uffff\1\5\1\6\1\7\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\4\uffff\1\22\1\uffff\3\22\100\uffff\1\22",
+            "\1\10\13\uffff\2\22\1\uffff\1\22\1\uffff\1\23\2\uffff\1\5\1\6\1\7\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\4\uffff\1\22\1\uffff\3\22\100\uffff\1\22",
+            "\1\10\13\uffff\2\22\1\uffff\1\22\1\uffff\1\23\2\uffff\1\5\1\6\1\7\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\4\uffff\1\22\1\uffff\3\22\100\uffff\1\22",
+            "\1\10\13\uffff\2\22\1\uffff\1\22\1\uffff\1\23\2\uffff\1\5\1\6\1\7\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\4\uffff\1\22\1\uffff\3\22\100\uffff\1\22",
+            "\1\10\13\uffff\2\22\1\uffff\1\22\1\uffff\1\23\2\uffff\1\5\1\6\1\7\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\4\uffff\1\22\1\uffff\3\22\100\uffff\1\22",
             "",
             ""
     };
@@ -36610,49 +36895,49 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
     static final String DFA66_eotS =
         "\41\uffff";
     static final String DFA66_eofS =
-        "\1\7\6\16\32\uffff";
+        "\1\7\6\10\32\uffff";
     static final String DFA66_minS =
-        "\7\4\1\uffff\6\4\1\uffff\22\4";
+        "\7\4\2\uffff\30\4";
     static final String DFA66_maxS =
-        "\7\155\1\uffff\6\155\1\uffff\22\155";
+        "\7\155\2\uffff\30\155";
     static final String DFA66_acceptS =
-        "\7\uffff\1\2\6\uffff\1\1\22\uffff";
+        "\7\uffff\1\2\1\1\30\uffff";
     static final String DFA66_specialS =
         "\41\uffff}>";
     static final String[] DFA66_transitionS = {
             "\3\7\6\uffff\3\7\1\3\1\7\1\uffff\3\7\1\uffff\21\7\1\2\1\uffff\1\4\1\5\1\6\12\uffff\1\7\65\uffff\1\1",
-            "\3\16\1\7\5\uffff\3\16\1\12\1\16\1\uffff\3\16\1\uffff\21\16\1\11\1\uffff\1\13\1\14\1\15\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\10",
-            "\3\16\1\7\5\uffff\3\16\1\12\1\16\1\uffff\3\16\1\uffff\21\16\1\11\1\uffff\1\13\1\14\1\15\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\10",
-            "\3\16\1\7\5\uffff\3\16\1\21\1\16\1\uffff\3\16\1\uffff\21\16\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\17",
-            "\3\16\1\7\5\uffff\3\16\1\12\1\16\1\uffff\3\16\1\uffff\21\16\1\11\1\uffff\1\13\1\14\1\15\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\10",
-            "\3\16\1\7\5\uffff\3\16\1\12\1\16\1\uffff\3\16\1\uffff\21\16\1\11\1\uffff\1\13\1\14\1\15\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\10",
-            "\3\16\1\7\5\uffff\3\16\1\12\1\16\1\uffff\3\16\1\uffff\21\16\1\11\1\uffff\1\13\1\14\1\15\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\10",
+            "\3\10\1\7\5\uffff\3\10\1\13\1\10\1\uffff\3\10\1\uffff\21\10\1\12\1\uffff\1\14\1\15\1\16\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\11",
+            "\3\10\1\7\5\uffff\3\10\1\13\1\10\1\uffff\3\10\1\uffff\21\10\1\12\1\uffff\1\14\1\15\1\16\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\11",
+            "\3\10\1\7\5\uffff\3\10\1\21\1\10\1\uffff\3\10\1\uffff\21\10\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\17",
+            "\3\10\1\7\5\uffff\3\10\1\13\1\10\1\uffff\3\10\1\uffff\21\10\1\12\1\uffff\1\14\1\15\1\16\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\11",
+            "\3\10\1\7\5\uffff\3\10\1\13\1\10\1\uffff\3\10\1\uffff\21\10\1\12\1\uffff\1\14\1\15\1\16\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\11",
+            "\3\10\1\7\5\uffff\3\10\1\13\1\10\1\uffff\3\10\1\uffff\21\10\1\12\1\uffff\1\14\1\15\1\16\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\11",
             "",
-            "\3\7\1\16\5\uffff\3\7\1\27\1\7\1\uffff\3\7\1\uffff\21\7\1\26\1\uffff\1\30\1\31\1\32\12\uffff\1\7\1\uffff\1\16\35\uffff\1\16\25\uffff\1\25",
-            "\3\7\1\16\5\uffff\3\7\1\27\1\7\1\uffff\3\7\1\uffff\21\7\1\26\1\uffff\1\30\1\31\1\32\12\uffff\1\7\1\uffff\1\16\35\uffff\1\16\25\uffff\1\25",
-            "\3\7\1\16\5\uffff\3\7\1\35\1\7\1\uffff\3\7\1\uffff\21\7\1\34\1\uffff\1\36\1\37\1\40\12\uffff\1\7\1\uffff\1\16\35\uffff\1\16\25\uffff\1\33",
-            "\3\7\1\16\5\uffff\3\7\1\27\1\7\1\uffff\3\7\1\uffff\21\7\1\26\1\uffff\1\30\1\31\1\32\12\uffff\1\7\1\uffff\1\16\35\uffff\1\16\25\uffff\1\25",
-            "\3\7\1\16\5\uffff\3\7\1\27\1\7\1\uffff\3\7\1\uffff\21\7\1\26\1\uffff\1\30\1\31\1\32\12\uffff\1\7\1\uffff\1\16\35\uffff\1\16\25\uffff\1\25",
-            "\3\7\1\16\5\uffff\3\7\1\27\1\7\1\uffff\3\7\1\uffff\21\7\1\26\1\uffff\1\30\1\31\1\32\12\uffff\1\7\1\uffff\1\16\35\uffff\1\16\25\uffff\1\25",
             "",
-            "\3\7\1\16\4\uffff\4\7\1\27\1\7\1\uffff\3\7\1\uffff\21\7\1\26\1\uffff\1\30\1\31\1\32\12\uffff\1\7\1\uffff\1\16\35\uffff\1\16\25\uffff\1\25",
-            "\3\7\1\16\4\uffff\4\7\1\27\1\7\1\uffff\3\7\1\uffff\21\7\1\26\1\uffff\1\30\1\31\1\32\12\uffff\1\7\1\uffff\1\16\35\uffff\1\16\25\uffff\1\25",
-            "\3\7\1\16\4\uffff\4\7\1\35\1\7\1\uffff\3\7\1\uffff\21\7\1\34\1\uffff\1\36\1\37\1\40\12\uffff\1\7\1\uffff\1\16\35\uffff\1\16\25\uffff\1\33",
-            "\3\7\1\16\4\uffff\4\7\1\27\1\7\1\uffff\3\7\1\uffff\21\7\1\26\1\uffff\1\30\1\31\1\32\12\uffff\1\7\1\uffff\1\16\35\uffff\1\16\25\uffff\1\25",
-            "\3\7\1\16\4\uffff\4\7\1\27\1\7\1\uffff\3\7\1\uffff\21\7\1\26\1\uffff\1\30\1\31\1\32\12\uffff\1\7\1\uffff\1\16\35\uffff\1\16\25\uffff\1\25",
-            "\3\7\1\16\4\uffff\4\7\1\27\1\7\1\uffff\3\7\1\uffff\21\7\1\26\1\uffff\1\30\1\31\1\32\12\uffff\1\7\1\uffff\1\16\35\uffff\1\16\25\uffff\1\25",
-            "\3\16\1\7\5\uffff\3\16\1\12\1\16\1\uffff\3\16\1\uffff\21\16\1\11\1\uffff\1\13\1\14\1\15\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\10",
-            "\3\16\1\7\5\uffff\3\16\1\12\1\16\1\uffff\3\16\1\uffff\21\16\1\11\1\uffff\1\13\1\14\1\15\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\10",
-            "\3\16\1\7\5\uffff\3\16\1\21\1\16\1\uffff\3\16\1\uffff\21\16\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\17",
-            "\3\16\1\7\5\uffff\3\16\1\12\1\16\1\uffff\3\16\1\uffff\21\16\1\11\1\uffff\1\13\1\14\1\15\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\10",
-            "\3\16\1\7\5\uffff\3\16\1\12\1\16\1\uffff\3\16\1\uffff\21\16\1\11\1\uffff\1\13\1\14\1\15\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\10",
-            "\3\16\1\7\5\uffff\3\16\1\12\1\16\1\uffff\3\16\1\uffff\21\16\1\11\1\uffff\1\13\1\14\1\15\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\10",
-            "\3\16\1\7\4\uffff\4\16\1\12\1\16\1\uffff\3\16\1\uffff\21\16\1\11\1\uffff\1\13\1\14\1\15\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\10",
-            "\3\16\1\7\4\uffff\4\16\1\12\1\16\1\uffff\3\16\1\uffff\21\16\1\11\1\uffff\1\13\1\14\1\15\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\10",
-            "\3\16\1\7\4\uffff\4\16\1\21\1\16\1\uffff\3\16\1\uffff\21\16\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\17",
-            "\3\16\1\7\4\uffff\4\16\1\12\1\16\1\uffff\3\16\1\uffff\21\16\1\11\1\uffff\1\13\1\14\1\15\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\10",
-            "\3\16\1\7\4\uffff\4\16\1\12\1\16\1\uffff\3\16\1\uffff\21\16\1\11\1\uffff\1\13\1\14\1\15\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\10",
-            "\3\16\1\7\4\uffff\4\16\1\12\1\16\1\uffff\3\16\1\uffff\21\16\1\11\1\uffff\1\13\1\14\1\15\12\uffff\1\16\1\uffff\1\7\35\uffff\1\7\25\uffff\1\10"
+            "\3\7\1\10\5\uffff\3\7\1\27\1\7\1\uffff\3\7\1\uffff\21\7\1\26\1\uffff\1\30\1\31\1\32\12\uffff\1\7\1\uffff\1\10\35\uffff\1\10\25\uffff\1\25",
+            "\3\7\1\10\5\uffff\3\7\1\27\1\7\1\uffff\3\7\1\uffff\21\7\1\26\1\uffff\1\30\1\31\1\32\12\uffff\1\7\1\uffff\1\10\35\uffff\1\10\25\uffff\1\25",
+            "\3\7\1\10\5\uffff\3\7\1\35\1\7\1\uffff\3\7\1\uffff\21\7\1\34\1\uffff\1\36\1\37\1\40\12\uffff\1\7\1\uffff\1\10\35\uffff\1\10\25\uffff\1\33",
+            "\3\7\1\10\5\uffff\3\7\1\27\1\7\1\uffff\3\7\1\uffff\21\7\1\26\1\uffff\1\30\1\31\1\32\12\uffff\1\7\1\uffff\1\10\35\uffff\1\10\25\uffff\1\25",
+            "\3\7\1\10\5\uffff\3\7\1\27\1\7\1\uffff\3\7\1\uffff\21\7\1\26\1\uffff\1\30\1\31\1\32\12\uffff\1\7\1\uffff\1\10\35\uffff\1\10\25\uffff\1\25",
+            "\3\7\1\10\5\uffff\3\7\1\27\1\7\1\uffff\3\7\1\uffff\21\7\1\26\1\uffff\1\30\1\31\1\32\12\uffff\1\7\1\uffff\1\10\35\uffff\1\10\25\uffff\1\25",
+            "\3\7\1\10\4\uffff\4\7\1\27\1\7\1\uffff\3\7\1\uffff\21\7\1\26\1\uffff\1\30\1\31\1\32\12\uffff\1\7\1\uffff\1\10\35\uffff\1\10\25\uffff\1\25",
+            "\3\7\1\10\4\uffff\4\7\1\27\1\7\1\uffff\3\7\1\uffff\21\7\1\26\1\uffff\1\30\1\31\1\32\12\uffff\1\7\1\uffff\1\10\35\uffff\1\10\25\uffff\1\25",
+            "\3\7\1\10\4\uffff\4\7\1\35\1\7\1\uffff\3\7\1\uffff\21\7\1\34\1\uffff\1\36\1\37\1\40\12\uffff\1\7\1\uffff\1\10\35\uffff\1\10\25\uffff\1\33",
+            "\3\7\1\10\4\uffff\4\7\1\27\1\7\1\uffff\3\7\1\uffff\21\7\1\26\1\uffff\1\30\1\31\1\32\12\uffff\1\7\1\uffff\1\10\35\uffff\1\10\25\uffff\1\25",
+            "\3\7\1\10\4\uffff\4\7\1\27\1\7\1\uffff\3\7\1\uffff\21\7\1\26\1\uffff\1\30\1\31\1\32\12\uffff\1\7\1\uffff\1\10\35\uffff\1\10\25\uffff\1\25",
+            "\3\7\1\10\4\uffff\4\7\1\27\1\7\1\uffff\3\7\1\uffff\21\7\1\26\1\uffff\1\30\1\31\1\32\12\uffff\1\7\1\uffff\1\10\35\uffff\1\10\25\uffff\1\25",
+            "\3\10\1\7\5\uffff\3\10\1\13\1\10\1\uffff\3\10\1\uffff\21\10\1\12\1\uffff\1\14\1\15\1\16\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\11",
+            "\3\10\1\7\5\uffff\3\10\1\13\1\10\1\uffff\3\10\1\uffff\21\10\1\12\1\uffff\1\14\1\15\1\16\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\11",
+            "\3\10\1\7\5\uffff\3\10\1\21\1\10\1\uffff\3\10\1\uffff\21\10\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\17",
+            "\3\10\1\7\5\uffff\3\10\1\13\1\10\1\uffff\3\10\1\uffff\21\10\1\12\1\uffff\1\14\1\15\1\16\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\11",
+            "\3\10\1\7\5\uffff\3\10\1\13\1\10\1\uffff\3\10\1\uffff\21\10\1\12\1\uffff\1\14\1\15\1\16\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\11",
+            "\3\10\1\7\5\uffff\3\10\1\13\1\10\1\uffff\3\10\1\uffff\21\10\1\12\1\uffff\1\14\1\15\1\16\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\11",
+            "\3\10\1\7\4\uffff\4\10\1\13\1\10\1\uffff\3\10\1\uffff\21\10\1\12\1\uffff\1\14\1\15\1\16\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\11",
+            "\3\10\1\7\4\uffff\4\10\1\13\1\10\1\uffff\3\10\1\uffff\21\10\1\12\1\uffff\1\14\1\15\1\16\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\11",
+            "\3\10\1\7\4\uffff\4\10\1\21\1\10\1\uffff\3\10\1\uffff\21\10\1\20\1\uffff\1\22\1\23\1\24\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\17",
+            "\3\10\1\7\4\uffff\4\10\1\13\1\10\1\uffff\3\10\1\uffff\21\10\1\12\1\uffff\1\14\1\15\1\16\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\11",
+            "\3\10\1\7\4\uffff\4\10\1\13\1\10\1\uffff\3\10\1\uffff\21\10\1\12\1\uffff\1\14\1\15\1\16\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\11",
+            "\3\10\1\7\4\uffff\4\10\1\13\1\10\1\uffff\3\10\1\uffff\21\10\1\12\1\uffff\1\14\1\15\1\16\12\uffff\1\10\1\uffff\1\7\35\uffff\1\7\25\uffff\1\11"
     };
 
     static final short[] DFA66_eot = DFA.unpackEncodedString(DFA66_eotS);
@@ -39372,7 +39657,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
     static final String DFA142_acceptS =
         "\2\uffff\1\2\6\uffff\1\1";
     static final String DFA142_specialS =
-        "\3\uffff\1\2\1\5\1\4\1\3\1\1\1\0\1\uffff}>";
+        "\3\uffff\1\0\1\3\1\2\1\5\1\4\1\1\1\uffff}>";
     static final String[] DFA142_transitionS = {
             "\1\2\1\uffff\2\2\2\uffff\3\2\1\uffff\4\2\3\uffff\2\2\1\1\14\2\2\uffff\3\2\1\uffff\4\2\1\uffff\1\2\10\uffff\2\2\23\uffff\2\2\4\uffff\1\2\7\uffff\1\2\2\uffff\13\2\4\uffff\4\2\4\uffff\3\2",
             "\1\5\27\uffff\1\4\1\uffff\1\6\1\7\1\10\100\uffff\1\3",
@@ -39423,36 +39708,6 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA142_8 = input.LA(1);
-
-                         
-                        int index142_8 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred14_InternalXtend()) ) {s = 9;}
-
-                        else if ( (true) ) {s = 2;}
-
-                         
-                        input.seek(index142_8);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
-                        int LA142_7 = input.LA(1);
-
-                         
-                        int index142_7 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred14_InternalXtend()) ) {s = 9;}
-
-                        else if ( (true) ) {s = 2;}
-
-                         
-                        input.seek(index142_7);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
                         int LA142_3 = input.LA(1);
 
                          
@@ -39467,11 +39722,11 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                         input.seek(index142_3);
                         if ( s>=0 ) return s;
                         break;
-                    case 3 : 
-                        int LA142_6 = input.LA(1);
+                    case 1 : 
+                        int LA142_8 = input.LA(1);
 
                          
-                        int index142_6 = input.index();
+                        int index142_8 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred14_InternalXtend()) ) {s = 9;}
@@ -39479,10 +39734,10 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 2;}
 
                          
-                        input.seek(index142_6);
+                        input.seek(index142_8);
                         if ( s>=0 ) return s;
                         break;
-                    case 4 : 
+                    case 2 : 
                         int LA142_5 = input.LA(1);
 
                          
@@ -39497,7 +39752,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                         input.seek(index142_5);
                         if ( s>=0 ) return s;
                         break;
-                    case 5 : 
+                    case 3 : 
                         int LA142_4 = input.LA(1);
 
                          
@@ -39510,6 +39765,36 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
                          
                         input.seek(index142_4);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 4 : 
+                        int LA142_7 = input.LA(1);
+
+                         
+                        int index142_7 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred14_InternalXtend()) ) {s = 9;}
+
+                        else if ( (true) ) {s = 2;}
+
+                         
+                        input.seek(index142_7);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 5 : 
+                        int LA142_6 = input.LA(1);
+
+                         
+                        int index142_6 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred14_InternalXtend()) ) {s = 9;}
+
+                        else if ( (true) ) {s = 2;}
+
+                         
+                        input.seek(index142_6);
                         if ( s>=0 ) return s;
                         break;
             }
@@ -40202,7 +40487,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
     static final String DFA169_acceptS =
         "\10\uffff\1\2\1\1";
     static final String DFA169_specialS =
-        "\1\uffff\1\2\1\6\1\4\1\3\1\5\1\1\1\0\2\uffff}>";
+        "\1\uffff\1\2\1\4\1\6\1\5\1\3\1\0\1\1\2\uffff}>";
     static final String[] DFA169_transitionS = {
             "\3\10\1\6\1\10\1\7\12\10\1\uffff\31\10\1\uffff\2\10\6\uffff\4\10\1\1\1\2\1\3\1\4\1\5\32\10\1\uffff\20\10\2\uffff\13\10",
             "\1\uffff",
@@ -40253,21 +40538,6 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA169_7 = input.LA(1);
-
-                         
-                        int index169_7 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred21_InternalXtend()) ) {s = 9;}
-
-                        else if ( (true) ) {s = 8;}
-
-                         
-                        input.seek(index169_7);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
                         int LA169_6 = input.LA(1);
 
                          
@@ -40280,6 +40550,21 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
                          
                         input.seek(index169_6);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
+                        int LA169_7 = input.LA(1);
+
+                         
+                        int index169_7 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred21_InternalXtend()) ) {s = 9;}
+
+                        else if ( (true) ) {s = 8;}
+
+                         
+                        input.seek(index169_7);
                         if ( s>=0 ) return s;
                         break;
                     case 2 : 
@@ -40298,36 +40583,6 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                         if ( s>=0 ) return s;
                         break;
                     case 3 : 
-                        int LA169_4 = input.LA(1);
-
-                         
-                        int index169_4 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred21_InternalXtend()) ) {s = 9;}
-
-                        else if ( (true) ) {s = 8;}
-
-                         
-                        input.seek(index169_4);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 4 : 
-                        int LA169_3 = input.LA(1);
-
-                         
-                        int index169_3 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred21_InternalXtend()) ) {s = 9;}
-
-                        else if ( (true) ) {s = 8;}
-
-                         
-                        input.seek(index169_3);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 5 : 
                         int LA169_5 = input.LA(1);
 
                          
@@ -40342,7 +40597,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                         input.seek(index169_5);
                         if ( s>=0 ) return s;
                         break;
-                    case 6 : 
+                    case 4 : 
                         int LA169_2 = input.LA(1);
 
                          
@@ -40355,6 +40610,36 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
                          
                         input.seek(index169_2);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 5 : 
+                        int LA169_4 = input.LA(1);
+
+                         
+                        int index169_4 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred21_InternalXtend()) ) {s = 9;}
+
+                        else if ( (true) ) {s = 8;}
+
+                         
+                        input.seek(index169_4);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 6 : 
+                        int LA169_3 = input.LA(1);
+
+                         
+                        int index169_3 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred21_InternalXtend()) ) {s = 9;}
+
+                        else if ( (true) ) {s = 8;}
+
+                         
+                        input.seek(index169_3);
                         if ( s>=0 ) return s;
                         break;
             }
@@ -40376,7 +40661,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
     static final String DFA179_acceptS =
         "\1\uffff\1\2\10\uffff\1\1";
     static final String DFA179_specialS =
-        "\2\uffff\1\4\1\5\1\1\1\7\1\6\1\0\1\3\1\2\1\uffff}>";
+        "\2\uffff\1\0\1\6\1\1\1\5\1\7\1\4\1\2\1\3\1\uffff}>";
     static final String[] DFA179_transitionS = {
             "\3\1\1\2\1\1\1\3\11\1\1\4\1\uffff\31\1\1\uffff\2\1\6\uffff\21\1\1\5\1\6\1\7\1\10\1\11\15\1\1\uffff\20\1\2\uffff\13\1",
             "",
@@ -40428,10 +40713,10 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA179_7 = input.LA(1);
+                        int LA179_2 = input.LA(1);
 
                          
-                        int index179_7 = input.index();
+                        int index179_2 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred27_InternalXtend()) ) {s = 10;}
@@ -40439,7 +40724,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 1;}
 
                          
-                        input.seek(index179_7);
+                        input.seek(index179_2);
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
@@ -40458,21 +40743,6 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                         if ( s>=0 ) return s;
                         break;
                     case 2 : 
-                        int LA179_9 = input.LA(1);
-
-                         
-                        int index179_9 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred27_InternalXtend()) ) {s = 10;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index179_9);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 3 : 
                         int LA179_8 = input.LA(1);
 
                          
@@ -40487,11 +40757,11 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                         input.seek(index179_8);
                         if ( s>=0 ) return s;
                         break;
-                    case 4 : 
-                        int LA179_2 = input.LA(1);
+                    case 3 : 
+                        int LA179_9 = input.LA(1);
 
                          
-                        int index179_2 = input.index();
+                        int index179_9 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred27_InternalXtend()) ) {s = 10;}
@@ -40499,10 +40769,40 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 1;}
 
                          
-                        input.seek(index179_2);
+                        input.seek(index179_9);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 4 : 
+                        int LA179_7 = input.LA(1);
+
+                         
+                        int index179_7 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred27_InternalXtend()) ) {s = 10;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index179_7);
                         if ( s>=0 ) return s;
                         break;
                     case 5 : 
+                        int LA179_5 = input.LA(1);
+
+                         
+                        int index179_5 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred27_InternalXtend()) ) {s = 10;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index179_5);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 6 : 
                         int LA179_3 = input.LA(1);
 
                          
@@ -40517,7 +40817,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                         input.seek(index179_3);
                         if ( s>=0 ) return s;
                         break;
-                    case 6 : 
+                    case 7 : 
                         int LA179_6 = input.LA(1);
 
                          
@@ -40530,21 +40830,6 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
                          
                         input.seek(index179_6);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 7 : 
-                        int LA179_5 = input.LA(1);
-
-                         
-                        int index179_5 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred27_InternalXtend()) ) {s = 10;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index179_5);
                         if ( s>=0 ) return s;
                         break;
             }
@@ -44469,11 +44754,11 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
     static final String DFA240_acceptS =
         "\1\uffff\1\2\7\uffff\1\1";
     static final String DFA240_specialS =
-        "\3\uffff\1\3\1\1\1\4\1\0\1\2\1\5\1\uffff}>";
+        "\3\uffff\1\4\1\5\1\1\1\2\1\0\1\3\1\uffff}>";
     static final String[] DFA240_transitionS = {
             "\55\1\6\uffff\40\1\1\2\2\1\1\uffff\20\1\1\uffff\14\1",
             "",
-            "\1\1\1\uffff\2\1\2\uffff\2\1\2\uffff\2\1\1\5\4\uffff\2\1\1\uffff\14\1\2\uffff\2\1\1\4\1\uffff\1\6\1\7\1\10\1\1\41\uffff\1\1\21\uffff\1\1\13\uffff\1\3",
+            "\1\1\1\uffff\2\1\2\uffff\2\1\2\uffff\2\1\1\4\4\uffff\2\1\1\uffff\14\1\2\uffff\2\1\1\5\1\uffff\1\6\1\7\1\10\1\1\41\uffff\1\1\21\uffff\1\1\13\uffff\1\3",
             "\1\uffff",
             "\1\uffff",
             "\1\uffff",
@@ -44520,36 +44805,6 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA240_6 = input.LA(1);
-
-                         
-                        int index240_6 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred56_InternalXtend()) ) {s = 9;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index240_6);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
-                        int LA240_4 = input.LA(1);
-
-                         
-                        int index240_4 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred56_InternalXtend()) ) {s = 9;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index240_4);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
                         int LA240_7 = input.LA(1);
 
                          
@@ -44564,22 +44819,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                         input.seek(index240_7);
                         if ( s>=0 ) return s;
                         break;
-                    case 3 : 
-                        int LA240_3 = input.LA(1);
-
-                         
-                        int index240_3 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred56_InternalXtend()) ) {s = 9;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index240_3);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 4 : 
+                    case 1 : 
                         int LA240_5 = input.LA(1);
 
                          
@@ -44594,7 +44834,22 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                         input.seek(index240_5);
                         if ( s>=0 ) return s;
                         break;
-                    case 5 : 
+                    case 2 : 
+                        int LA240_6 = input.LA(1);
+
+                         
+                        int index240_6 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred56_InternalXtend()) ) {s = 9;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index240_6);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 3 : 
                         int LA240_8 = input.LA(1);
 
                          
@@ -44609,6 +44864,36 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                         input.seek(index240_8);
                         if ( s>=0 ) return s;
                         break;
+                    case 4 : 
+                        int LA240_3 = input.LA(1);
+
+                         
+                        int index240_3 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred56_InternalXtend()) ) {s = 9;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index240_3);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 5 : 
+                        int LA240_4 = input.LA(1);
+
+                         
+                        int index240_4 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred56_InternalXtend()) ) {s = 9;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index240_4);
+                        if ( s>=0 ) return s;
+                        break;
             }
             if (state.backtracking>0) {state.failed=true; return -1;}
             NoViableAltException nvae =
@@ -44617,19 +44902,19 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             throw nvae;
         }
     }
-    static final String DFA251_eotS =
+    static final String DFA254_eotS =
         "\157\uffff";
-    static final String DFA251_eofS =
+    static final String DFA254_eofS =
         "\1\2\156\uffff";
-    static final String DFA251_minS =
+    static final String DFA254_minS =
         "\1\4\1\0\155\uffff";
-    static final String DFA251_maxS =
+    static final String DFA254_maxS =
         "\1\167\1\0\155\uffff";
-    static final String DFA251_acceptS =
+    static final String DFA254_acceptS =
         "\2\uffff\1\2\153\uffff\1\1";
-    static final String DFA251_specialS =
+    static final String DFA254_specialS =
         "\1\uffff\1\0\155\uffff}>";
-    static final String[] DFA251_transitionS = {
+    static final String[] DFA254_transitionS = {
             "\3\2\1\1\51\2\6\uffff\43\2\1\uffff\20\2\1\uffff\14\2",
             "\1\uffff",
             "",
@@ -44743,47 +45028,47 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             ""
     };
 
-    static final short[] DFA251_eot = DFA.unpackEncodedString(DFA251_eotS);
-    static final short[] DFA251_eof = DFA.unpackEncodedString(DFA251_eofS);
-    static final char[] DFA251_min = DFA.unpackEncodedStringToUnsignedChars(DFA251_minS);
-    static final char[] DFA251_max = DFA.unpackEncodedStringToUnsignedChars(DFA251_maxS);
-    static final short[] DFA251_accept = DFA.unpackEncodedString(DFA251_acceptS);
-    static final short[] DFA251_special = DFA.unpackEncodedString(DFA251_specialS);
-    static final short[][] DFA251_transition;
+    static final short[] DFA254_eot = DFA.unpackEncodedString(DFA254_eotS);
+    static final short[] DFA254_eof = DFA.unpackEncodedString(DFA254_eofS);
+    static final char[] DFA254_min = DFA.unpackEncodedStringToUnsignedChars(DFA254_minS);
+    static final char[] DFA254_max = DFA.unpackEncodedStringToUnsignedChars(DFA254_maxS);
+    static final short[] DFA254_accept = DFA.unpackEncodedString(DFA254_acceptS);
+    static final short[] DFA254_special = DFA.unpackEncodedString(DFA254_specialS);
+    static final short[][] DFA254_transition;
 
     static {
-        int numStates = DFA251_transitionS.length;
-        DFA251_transition = new short[numStates][];
+        int numStates = DFA254_transitionS.length;
+        DFA254_transition = new short[numStates][];
         for (int i=0; i<numStates; i++) {
-            DFA251_transition[i] = DFA.unpackEncodedString(DFA251_transitionS[i]);
+            DFA254_transition[i] = DFA.unpackEncodedString(DFA254_transitionS[i]);
         }
     }
 
-    class DFA251 extends DFA {
+    class DFA254 extends DFA {
 
-        public DFA251(BaseRecognizer recognizer) {
+        public DFA254(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 251;
-            this.eot = DFA251_eot;
-            this.eof = DFA251_eof;
-            this.min = DFA251_min;
-            this.max = DFA251_max;
-            this.accept = DFA251_accept;
-            this.special = DFA251_special;
-            this.transition = DFA251_transition;
+            this.decisionNumber = 254;
+            this.eot = DFA254_eot;
+            this.eof = DFA254_eof;
+            this.min = DFA254_min;
+            this.max = DFA254_max;
+            this.accept = DFA254_accept;
+            this.special = DFA254_special;
+            this.transition = DFA254_transition;
         }
         public String getDescription() {
-            return "11018:2: ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )?";
+            return "11018:2: ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA251_1 = input.LA(1);
+                        int LA254_1 = input.LA(1);
 
                          
-                        int index251_1 = input.index();
+                        int index254_1 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred58_InternalXtend()) ) {s = 110;}
@@ -44791,30 +45076,374 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 2;}
 
                          
-                        input.seek(index251_1);
+                        input.seek(index254_1);
                         if ( s>=0 ) return s;
                         break;
             }
             if (state.backtracking>0) {state.failed=true; return -1;}
             NoViableAltException nvae =
-                new NoViableAltException(getDescription(), 251, _s, input);
+                new NoViableAltException(getDescription(), 254, _s, input);
             error(nvae);
             throw nvae;
         }
     }
-    static final String DFA261_eotS =
+    static final String DFA253_eotS =
+        "\12\uffff";
+    static final String DFA253_eofS =
+        "\1\1\11\uffff";
+    static final String DFA253_minS =
+        "\1\4\1\uffff\1\4\6\0\1\uffff";
+    static final String DFA253_maxS =
+        "\1\167\1\uffff\1\155\6\0\1\uffff";
+    static final String DFA253_acceptS =
+        "\1\uffff\1\2\7\uffff\1\1";
+    static final String DFA253_specialS =
+        "\3\uffff\1\5\1\0\1\2\1\4\1\3\1\1\1\uffff}>";
+    static final String[] DFA253_transitionS = {
+            "\55\1\6\uffff\40\1\1\2\2\1\1\uffff\20\1\1\uffff\14\1",
+            "",
+            "\1\1\1\uffff\2\1\2\uffff\2\1\2\uffff\2\1\1\4\4\uffff\2\1\1\uffff\14\1\2\uffff\2\1\1\5\1\uffff\1\6\1\7\1\10\1\1\63\uffff\1\1\13\uffff\1\3",
+            "\1\uffff",
+            "\1\uffff",
+            "\1\uffff",
+            "\1\uffff",
+            "\1\uffff",
+            "\1\uffff",
+            ""
+    };
+
+    static final short[] DFA253_eot = DFA.unpackEncodedString(DFA253_eotS);
+    static final short[] DFA253_eof = DFA.unpackEncodedString(DFA253_eofS);
+    static final char[] DFA253_min = DFA.unpackEncodedStringToUnsignedChars(DFA253_minS);
+    static final char[] DFA253_max = DFA.unpackEncodedStringToUnsignedChars(DFA253_maxS);
+    static final short[] DFA253_accept = DFA.unpackEncodedString(DFA253_acceptS);
+    static final short[] DFA253_special = DFA.unpackEncodedString(DFA253_specialS);
+    static final short[][] DFA253_transition;
+
+    static {
+        int numStates = DFA253_transitionS.length;
+        DFA253_transition = new short[numStates][];
+        for (int i=0; i<numStates; i++) {
+            DFA253_transition[i] = DFA.unpackEncodedString(DFA253_transitionS[i]);
+        }
+    }
+
+    class DFA253 extends DFA {
+
+        public DFA253(BaseRecognizer recognizer) {
+            this.recognizer = recognizer;
+            this.decisionNumber = 253;
+            this.eot = DFA253_eot;
+            this.eof = DFA253_eof;
+            this.min = DFA253_min;
+            this.max = DFA253_max;
+            this.accept = DFA253_accept;
+            this.special = DFA253_special;
+            this.transition = DFA253_transition;
+        }
+        public String getDescription() {
+            return "()* loopback of 11067:1: ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )*";
+        }
+        public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
+            TokenStream input = (TokenStream)_input;
+        	int _s = s;
+            switch ( s ) {
+                    case 0 : 
+                        int LA253_4 = input.LA(1);
+
+                         
+                        int index253_4 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred59_InternalXtend()) ) {s = 9;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index253_4);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
+                        int LA253_8 = input.LA(1);
+
+                         
+                        int index253_8 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred59_InternalXtend()) ) {s = 9;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index253_8);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
+                        int LA253_5 = input.LA(1);
+
+                         
+                        int index253_5 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred59_InternalXtend()) ) {s = 9;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index253_5);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 3 : 
+                        int LA253_7 = input.LA(1);
+
+                         
+                        int index253_7 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred59_InternalXtend()) ) {s = 9;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index253_7);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 4 : 
+                        int LA253_6 = input.LA(1);
+
+                         
+                        int index253_6 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred59_InternalXtend()) ) {s = 9;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index253_6);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 5 : 
+                        int LA253_3 = input.LA(1);
+
+                         
+                        int index253_3 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred59_InternalXtend()) ) {s = 9;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index253_3);
+                        if ( s>=0 ) return s;
+                        break;
+            }
+            if (state.backtracking>0) {state.failed=true; return -1;}
+            NoViableAltException nvae =
+                new NoViableAltException(getDescription(), 253, _s, input);
+            error(nvae);
+            throw nvae;
+        }
+    }
+    static final String DFA252_eotS =
+        "\157\uffff";
+    static final String DFA252_eofS =
+        "\1\2\156\uffff";
+    static final String DFA252_minS =
+        "\1\4\1\0\155\uffff";
+    static final String DFA252_maxS =
+        "\1\167\1\0\155\uffff";
+    static final String DFA252_acceptS =
+        "\2\uffff\1\2\153\uffff\1\1";
+    static final String DFA252_specialS =
+        "\1\uffff\1\0\155\uffff}>";
+    static final String[] DFA252_transitionS = {
+            "\3\2\1\1\51\2\6\uffff\43\2\1\uffff\20\2\1\uffff\14\2",
+            "\1\uffff",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+    };
+
+    static final short[] DFA252_eot = DFA.unpackEncodedString(DFA252_eotS);
+    static final short[] DFA252_eof = DFA.unpackEncodedString(DFA252_eofS);
+    static final char[] DFA252_min = DFA.unpackEncodedStringToUnsignedChars(DFA252_minS);
+    static final char[] DFA252_max = DFA.unpackEncodedStringToUnsignedChars(DFA252_maxS);
+    static final short[] DFA252_accept = DFA.unpackEncodedString(DFA252_acceptS);
+    static final short[] DFA252_special = DFA.unpackEncodedString(DFA252_specialS);
+    static final short[][] DFA252_transition;
+
+    static {
+        int numStates = DFA252_transitionS.length;
+        DFA252_transition = new short[numStates][];
+        for (int i=0; i<numStates; i++) {
+            DFA252_transition[i] = DFA.unpackEncodedString(DFA252_transitionS[i]);
+        }
+    }
+
+    class DFA252 extends DFA {
+
+        public DFA252(BaseRecognizer recognizer) {
+            this.recognizer = recognizer;
+            this.decisionNumber = 252;
+            this.eot = DFA252_eot;
+            this.eof = DFA252_eof;
+            this.min = DFA252_min;
+            this.max = DFA252_max;
+            this.accept = DFA252_accept;
+            this.special = DFA252_special;
+            this.transition = DFA252_transition;
+        }
+        public String getDescription() {
+            return "11094:2: ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )?";
+        }
+        public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
+            TokenStream input = (TokenStream)_input;
+        	int _s = s;
+            switch ( s ) {
+                    case 0 : 
+                        int LA252_1 = input.LA(1);
+
+                         
+                        int index252_1 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred60_InternalXtend()) ) {s = 110;}
+
+                        else if ( (true) ) {s = 2;}
+
+                         
+                        input.seek(index252_1);
+                        if ( s>=0 ) return s;
+                        break;
+            }
+            if (state.backtracking>0) {state.failed=true; return -1;}
+            NoViableAltException nvae =
+                new NoViableAltException(getDescription(), 252, _s, input);
+            error(nvae);
+            throw nvae;
+        }
+    }
+    static final String DFA264_eotS =
         "\21\uffff";
-    static final String DFA261_eofS =
-        "\2\uffff\6\11\3\uffff\6\11";
-    static final String DFA261_minS =
-        "\1\20\1\uffff\6\4\1\20\2\uffff\6\4";
-    static final String DFA261_maxS =
-        "\1\155\1\uffff\6\127\1\155\2\uffff\6\127";
-    static final String DFA261_acceptS =
-        "\1\uffff\1\1\7\uffff\1\2\1\3\6\uffff";
-    static final String DFA261_specialS =
+    static final String DFA264_eofS =
+        "\2\uffff\6\11\2\uffff\6\11\1\uffff";
+    static final String DFA264_minS =
+        "\1\20\1\uffff\6\4\1\20\1\uffff\6\4\1\uffff";
+    static final String DFA264_maxS =
+        "\1\155\1\uffff\6\127\1\155\1\uffff\6\127\1\uffff";
+    static final String DFA264_acceptS =
+        "\1\uffff\1\1\7\uffff\1\2\6\uffff\1\3";
+    static final String DFA264_specialS =
         "\21\uffff}>";
-    static final String[] DFA261_transitionS = {
+    static final String[] DFA264_transitionS = {
             "\1\4\13\uffff\1\1\13\uffff\1\3\1\uffff\1\5\1\6\1\7\100\uffff\1\2",
             "",
             "\3\11\7\uffff\3\11\7\uffff\14\11\11\uffff\1\11\11\uffff\1\11\37\uffff\1\10",
@@ -44823,48 +45452,48 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             "\3\11\7\uffff\3\11\7\uffff\14\11\11\uffff\1\11\11\uffff\1\11\37\uffff\1\10",
             "\3\11\7\uffff\3\11\7\uffff\14\11\11\uffff\1\11\11\uffff\1\11\37\uffff\1\10",
             "\3\11\7\uffff\3\11\7\uffff\14\11\11\uffff\1\11\11\uffff\1\11\37\uffff\1\10",
-            "\1\15\27\uffff\1\14\1\uffff\1\16\1\17\1\20\42\uffff\1\12\35\uffff\1\13",
+            "\1\14\27\uffff\1\13\1\uffff\1\15\1\16\1\17\42\uffff\1\20\35\uffff\1\12",
             "",
-            "",
             "\3\11\7\uffff\3\11\7\uffff\14\11\11\uffff\1\11\11\uffff\1\11\37\uffff\1\10",
             "\3\11\7\uffff\3\11\7\uffff\14\11\11\uffff\1\11\11\uffff\1\11\37\uffff\1\10",
             "\3\11\7\uffff\3\11\7\uffff\14\11\11\uffff\1\11\11\uffff\1\11\37\uffff\1\10",
             "\3\11\7\uffff\3\11\7\uffff\14\11\11\uffff\1\11\11\uffff\1\11\37\uffff\1\10",
             "\3\11\7\uffff\3\11\7\uffff\14\11\11\uffff\1\11\11\uffff\1\11\37\uffff\1\10",
-            "\3\11\7\uffff\3\11\7\uffff\14\11\11\uffff\1\11\11\uffff\1\11\37\uffff\1\10"
+            "\3\11\7\uffff\3\11\7\uffff\14\11\11\uffff\1\11\11\uffff\1\11\37\uffff\1\10",
+            ""
     };
 
-    static final short[] DFA261_eot = DFA.unpackEncodedString(DFA261_eotS);
-    static final short[] DFA261_eof = DFA.unpackEncodedString(DFA261_eofS);
-    static final char[] DFA261_min = DFA.unpackEncodedStringToUnsignedChars(DFA261_minS);
-    static final char[] DFA261_max = DFA.unpackEncodedStringToUnsignedChars(DFA261_maxS);
-    static final short[] DFA261_accept = DFA.unpackEncodedString(DFA261_acceptS);
-    static final short[] DFA261_special = DFA.unpackEncodedString(DFA261_specialS);
-    static final short[][] DFA261_transition;
+    static final short[] DFA264_eot = DFA.unpackEncodedString(DFA264_eotS);
+    static final short[] DFA264_eof = DFA.unpackEncodedString(DFA264_eofS);
+    static final char[] DFA264_min = DFA.unpackEncodedStringToUnsignedChars(DFA264_minS);
+    static final char[] DFA264_max = DFA.unpackEncodedStringToUnsignedChars(DFA264_maxS);
+    static final short[] DFA264_accept = DFA.unpackEncodedString(DFA264_acceptS);
+    static final short[] DFA264_special = DFA.unpackEncodedString(DFA264_specialS);
+    static final short[][] DFA264_transition;
 
     static {
-        int numStates = DFA261_transitionS.length;
-        DFA261_transition = new short[numStates][];
+        int numStates = DFA264_transitionS.length;
+        DFA264_transition = new short[numStates][];
         for (int i=0; i<numStates; i++) {
-            DFA261_transition[i] = DFA.unpackEncodedString(DFA261_transitionS[i]);
+            DFA264_transition[i] = DFA.unpackEncodedString(DFA264_transitionS[i]);
         }
     }
 
-    class DFA261 extends DFA {
+    class DFA264 extends DFA {
 
-        public DFA261(BaseRecognizer recognizer) {
+        public DFA264(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 261;
-            this.eot = DFA261_eot;
-            this.eof = DFA261_eof;
-            this.min = DFA261_min;
-            this.max = DFA261_max;
-            this.accept = DFA261_accept;
-            this.special = DFA261_special;
-            this.transition = DFA261_transition;
+            this.decisionNumber = 264;
+            this.eot = DFA264_eot;
+            this.eof = DFA264_eof;
+            this.min = DFA264_min;
+            this.max = DFA264_max;
+            this.accept = DFA264_accept;
+            this.special = DFA264_special;
+            this.transition = DFA264_transition;
         }
         public String getDescription() {
-            return "11566:1: ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) )";
+            return "11642:1: ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) )";
         }
     }
  
@@ -45796,62 +46425,69 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleJvmParameterizedTypeReference25124 = new BitSet(new long[]{0x0000000000000300L});
     public static final BitSet FOLLOW_KW_Comma_in_ruleJvmParameterizedTypeReference25137 = new BitSet(new long[]{0x00001D3FFF2B0010L,0x0000280000000000L});
     public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleJvmParameterizedTypeReference25158 = new BitSet(new long[]{0x0000000000000300L});
-    public static final BitSet FOLLOW_KW_GreaterThanSign_in_ruleJvmParameterizedTypeReference25172 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_entryRuleJvmArgumentTypeReference25210 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleJvmArgumentTypeReference25220 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmArgumentTypeReference25267 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmWildcardTypeReference_in_ruleJvmArgumentTypeReference25294 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmWildcardTypeReference_in_entryRuleJvmWildcardTypeReference25329 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleJvmWildcardTypeReference25339 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KW_QuestionMark_in_ruleJvmWildcardTypeReference25385 = new BitSet(new long[]{0x0000000000000402L,0x0000000200000000L});
-    public static final BitSet FOLLOW_ruleJvmUpperBound_in_ruleJvmWildcardTypeReference25408 = new BitSet(new long[]{0x0000000000000002L,0x0000100000000000L});
-    public static final BitSet FOLLOW_ruleJvmUpperBoundAnded_in_ruleJvmWildcardTypeReference25429 = new BitSet(new long[]{0x0000000000000002L,0x0000100000000000L});
-    public static final BitSet FOLLOW_ruleJvmLowerBound_in_ruleJvmWildcardTypeReference25459 = new BitSet(new long[]{0x0000000000000002L,0x0000100000000000L});
-    public static final BitSet FOLLOW_ruleJvmLowerBoundAnded_in_ruleJvmWildcardTypeReference25480 = new BitSet(new long[]{0x0000000000000002L,0x0000100000000000L});
-    public static final BitSet FOLLOW_ruleJvmUpperBound_in_entryRuleJvmUpperBound25520 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleJvmUpperBound25530 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KW_Extends_in_ruleJvmUpperBound25567 = new BitSet(new long[]{0x00001D3FFF2B0010L,0x0000200000000000L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmUpperBound25588 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmUpperBoundAnded_in_entryRuleJvmUpperBoundAnded25624 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleJvmUpperBoundAnded25634 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KW_Ampersand_in_ruleJvmUpperBoundAnded25671 = new BitSet(new long[]{0x00001D3FFF2B0010L,0x0000200000000000L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmUpperBoundAnded25692 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmLowerBound_in_entryRuleJvmLowerBound25728 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleJvmLowerBound25738 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KW_Super_in_ruleJvmLowerBound25775 = new BitSet(new long[]{0x00001D3FFF2B0010L,0x0000200000000000L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmLowerBound25796 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmLowerBoundAnded_in_entryRuleJvmLowerBoundAnded25832 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleJvmLowerBoundAnded25842 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KW_Ampersand_in_ruleJvmLowerBoundAnded25879 = new BitSet(new long[]{0x00001D3FFF2B0010L,0x0000200000000000L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmLowerBoundAnded25900 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeParameter_in_entryRuleJvmTypeParameter25936 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleJvmTypeParameter25946 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_ruleJvmTypeParameter25992 = new BitSet(new long[]{0x0000000000000402L});
-    public static final BitSet FOLLOW_ruleJvmUpperBound_in_ruleJvmTypeParameter26014 = new BitSet(new long[]{0x0000000000000002L,0x0000100000000000L});
-    public static final BitSet FOLLOW_ruleJvmUpperBoundAnded_in_ruleJvmTypeParameter26035 = new BitSet(new long[]{0x0000000000000002L,0x0000100000000000L});
-    public static final BitSet FOLLOW_ruleQualifiedNameWithWildcard_in_entryRuleQualifiedNameWithWildcard26075 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleQualifiedNameWithWildcard26086 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_ruleQualifiedNameWithWildcard26133 = new BitSet(new long[]{0x0000000000000000L,0x0000000000800000L});
-    public static final BitSet FOLLOW_KW_FullStop_in_ruleQualifiedNameWithWildcard26151 = new BitSet(new long[]{0x0000000000000000L,0x0000000000008000L});
-    public static final BitSet FOLLOW_KW_Asterisk_in_ruleQualifiedNameWithWildcard26164 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXImportSection_in_entryRuleXImportSection26204 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleXImportSection26214 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXImportDeclaration_in_ruleXImportSection26259 = new BitSet(new long[]{0x0000200000000002L});
-    public static final BitSet FOLLOW_ruleXImportDeclaration_in_entryRuleXImportDeclaration26295 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleXImportDeclaration26305 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KW_Import_in_ruleXImportDeclaration26342 = new BitSet(new long[]{0x00001D0010010000L,0x0000200000000000L});
-    public static final BitSet FOLLOW_KW_Static_in_ruleXImportDeclaration26362 = new BitSet(new long[]{0x00001D0000210000L,0x0000200000000000L});
-    public static final BitSet FOLLOW_KW_Extension_in_ruleXImportDeclaration26393 = new BitSet(new long[]{0x00001D0000210000L,0x0000200000000000L});
-    public static final BitSet FOLLOW_ruleQualifiedNameInStaticImport_in_ruleXImportDeclaration26430 = new BitSet(new long[]{0x00001D0000010000L,0x0000200000008000L});
-    public static final BitSet FOLLOW_KW_Asterisk_in_ruleXImportDeclaration26449 = new BitSet(new long[]{0x0000000000000022L});
-    public static final BitSet FOLLOW_ruleValidID_in_ruleXImportDeclaration26489 = new BitSet(new long[]{0x0000000000000022L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_ruleXImportDeclaration26520 = new BitSet(new long[]{0x0000000000000022L});
-    public static final BitSet FOLLOW_ruleQualifiedNameWithWildcard_in_ruleXImportDeclaration26547 = new BitSet(new long[]{0x0000000000000022L});
-    public static final BitSet FOLLOW_KW_Semicolon_in_ruleXImportDeclaration26561 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedNameInStaticImport_in_entryRuleQualifiedNameInStaticImport26600 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleQualifiedNameInStaticImport26611 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_ruleQualifiedNameInStaticImport26658 = new BitSet(new long[]{0x0000000000000000L,0x0000000000800000L});
-    public static final BitSet FOLLOW_KW_FullStop_in_ruleQualifiedNameInStaticImport26676 = new BitSet(new long[]{0x00001D0000010002L,0x0000200000000000L});
+    public static final BitSet FOLLOW_KW_GreaterThanSign_in_ruleJvmParameterizedTypeReference25172 = new BitSet(new long[]{0x0000000000000002L,0x0000000000800000L});
+    public static final BitSet FOLLOW_KW_FullStop_in_ruleJvmParameterizedTypeReference25208 = new BitSet(new long[]{0x00001D0000010000L,0x0000200000000000L});
+    public static final BitSet FOLLOW_ruleValidID_in_ruleJvmParameterizedTypeReference25233 = new BitSet(new long[]{0x0000000000000082L,0x0000000000800000L});
+    public static final BitSet FOLLOW_KW_LessThanSign_in_ruleJvmParameterizedTypeReference25254 = new BitSet(new long[]{0x00001D3FFF2B0010L,0x0000280000000000L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleJvmParameterizedTypeReference25276 = new BitSet(new long[]{0x0000000000000300L});
+    public static final BitSet FOLLOW_KW_Comma_in_ruleJvmParameterizedTypeReference25289 = new BitSet(new long[]{0x00001D3FFF2B0010L,0x0000280000000000L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleJvmParameterizedTypeReference25310 = new BitSet(new long[]{0x0000000000000300L});
+    public static final BitSet FOLLOW_KW_GreaterThanSign_in_ruleJvmParameterizedTypeReference25324 = new BitSet(new long[]{0x0000000000000002L,0x0000000000800000L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_entryRuleJvmArgumentTypeReference25366 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleJvmArgumentTypeReference25376 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmArgumentTypeReference25423 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmWildcardTypeReference_in_ruleJvmArgumentTypeReference25450 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmWildcardTypeReference_in_entryRuleJvmWildcardTypeReference25485 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleJvmWildcardTypeReference25495 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_KW_QuestionMark_in_ruleJvmWildcardTypeReference25541 = new BitSet(new long[]{0x0000000000000402L,0x0000000200000000L});
+    public static final BitSet FOLLOW_ruleJvmUpperBound_in_ruleJvmWildcardTypeReference25564 = new BitSet(new long[]{0x0000000000000002L,0x0000100000000000L});
+    public static final BitSet FOLLOW_ruleJvmUpperBoundAnded_in_ruleJvmWildcardTypeReference25585 = new BitSet(new long[]{0x0000000000000002L,0x0000100000000000L});
+    public static final BitSet FOLLOW_ruleJvmLowerBound_in_ruleJvmWildcardTypeReference25615 = new BitSet(new long[]{0x0000000000000002L,0x0000100000000000L});
+    public static final BitSet FOLLOW_ruleJvmLowerBoundAnded_in_ruleJvmWildcardTypeReference25636 = new BitSet(new long[]{0x0000000000000002L,0x0000100000000000L});
+    public static final BitSet FOLLOW_ruleJvmUpperBound_in_entryRuleJvmUpperBound25676 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleJvmUpperBound25686 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_KW_Extends_in_ruleJvmUpperBound25723 = new BitSet(new long[]{0x00001D3FFF2B0010L,0x0000200000000000L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmUpperBound25744 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmUpperBoundAnded_in_entryRuleJvmUpperBoundAnded25780 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleJvmUpperBoundAnded25790 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_KW_Ampersand_in_ruleJvmUpperBoundAnded25827 = new BitSet(new long[]{0x00001D3FFF2B0010L,0x0000200000000000L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmUpperBoundAnded25848 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmLowerBound_in_entryRuleJvmLowerBound25884 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleJvmLowerBound25894 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_KW_Super_in_ruleJvmLowerBound25931 = new BitSet(new long[]{0x00001D3FFF2B0010L,0x0000200000000000L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmLowerBound25952 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmLowerBoundAnded_in_entryRuleJvmLowerBoundAnded25988 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleJvmLowerBoundAnded25998 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_KW_Ampersand_in_ruleJvmLowerBoundAnded26035 = new BitSet(new long[]{0x00001D3FFF2B0010L,0x0000200000000000L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmLowerBoundAnded26056 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeParameter_in_entryRuleJvmTypeParameter26092 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleJvmTypeParameter26102 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_ruleJvmTypeParameter26148 = new BitSet(new long[]{0x0000000000000402L});
+    public static final BitSet FOLLOW_ruleJvmUpperBound_in_ruleJvmTypeParameter26170 = new BitSet(new long[]{0x0000000000000002L,0x0000100000000000L});
+    public static final BitSet FOLLOW_ruleJvmUpperBoundAnded_in_ruleJvmTypeParameter26191 = new BitSet(new long[]{0x0000000000000002L,0x0000100000000000L});
+    public static final BitSet FOLLOW_ruleQualifiedNameWithWildcard_in_entryRuleQualifiedNameWithWildcard26231 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleQualifiedNameWithWildcard26242 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_ruleQualifiedNameWithWildcard26289 = new BitSet(new long[]{0x0000000000000000L,0x0000000000800000L});
+    public static final BitSet FOLLOW_KW_FullStop_in_ruleQualifiedNameWithWildcard26307 = new BitSet(new long[]{0x0000000000000000L,0x0000000000008000L});
+    public static final BitSet FOLLOW_KW_Asterisk_in_ruleQualifiedNameWithWildcard26320 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXImportSection_in_entryRuleXImportSection26360 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleXImportSection26370 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXImportDeclaration_in_ruleXImportSection26415 = new BitSet(new long[]{0x0000200000000002L});
+    public static final BitSet FOLLOW_ruleXImportDeclaration_in_entryRuleXImportDeclaration26451 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleXImportDeclaration26461 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_KW_Import_in_ruleXImportDeclaration26498 = new BitSet(new long[]{0x00001D0010010000L,0x0000200000000000L});
+    public static final BitSet FOLLOW_KW_Static_in_ruleXImportDeclaration26518 = new BitSet(new long[]{0x00001D0000210000L,0x0000200000000000L});
+    public static final BitSet FOLLOW_KW_Extension_in_ruleXImportDeclaration26549 = new BitSet(new long[]{0x00001D0000210000L,0x0000200000000000L});
+    public static final BitSet FOLLOW_ruleQualifiedNameInStaticImport_in_ruleXImportDeclaration26586 = new BitSet(new long[]{0x00001D0000010000L,0x0000200000008000L});
+    public static final BitSet FOLLOW_KW_Asterisk_in_ruleXImportDeclaration26605 = new BitSet(new long[]{0x0000000000000022L});
+    public static final BitSet FOLLOW_ruleValidID_in_ruleXImportDeclaration26645 = new BitSet(new long[]{0x0000000000000022L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_ruleXImportDeclaration26676 = new BitSet(new long[]{0x0000000000000022L});
+    public static final BitSet FOLLOW_ruleQualifiedNameWithWildcard_in_ruleXImportDeclaration26703 = new BitSet(new long[]{0x0000000000000022L});
+    public static final BitSet FOLLOW_KW_Semicolon_in_ruleXImportDeclaration26717 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedNameInStaticImport_in_entryRuleQualifiedNameInStaticImport26756 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleQualifiedNameInStaticImport26767 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_ruleQualifiedNameInStaticImport26814 = new BitSet(new long[]{0x0000000000000000L,0x0000000000800000L});
+    public static final BitSet FOLLOW_KW_FullStop_in_ruleQualifiedNameInStaticImport26832 = new BitSet(new long[]{0x00001D0000010002L,0x0000200000000000L});
     public static final BitSet FOLLOW_ruleJvmTypeReference_in_synpred1_InternalXtend4608 = new BitSet(new long[]{0x0000010000000000L});
     public static final BitSet FOLLOW_ruleCreateExtensionInfo_in_synpred1_InternalXtend4617 = new BitSet(new long[]{0x00001D0000010000L,0x0000200000000000L});
     public static final BitSet FOLLOW_ruleValidID_in_synpred1_InternalXtend4626 = new BitSet(new long[]{0x0000000000020000L});
@@ -45946,5 +46582,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_KW_FullStop_in_synpred56_InternalXtend24257 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleArrayBrackets_in_synpred57_InternalXtend24642 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_KW_LessThanSign_in_synpred58_InternalXtend25094 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_KW_FullStop_in_synpred59_InternalXtend25189 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_KW_LessThanSign_in_synpred60_InternalXtend25246 = new BitSet(new long[]{0x0000000000000002L});
 
 }

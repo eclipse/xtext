@@ -125,6 +125,10 @@ public class BinaryTypeSignature extends AbstractBinarySignature {
 	public List<BinaryTypeArgumentSignature> getTypeArguments() {
 		return Collections.emptyList();
 	}
+	
+	public BinaryTypeSignature getOuter() {
+		return null;
+	}
 
 	public BinaryTypeSignature getTypeErasure() {
 		return this;

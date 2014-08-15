@@ -42,14 +42,19 @@ import org.eclipse.xtext.xbase.typesystem.internal.AbstractTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.internal.TypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
+import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.InnerFunctionTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.InnerTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.UnknownTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.junit.After;
@@ -78,7 +83,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 	
 	private ResourceSet contextResourceSet;
 	
-	private OwnedConverter owner = new OwnedConverter(this);
+	private ITypeReferenceOwner owner;
 	
 	interface IntFunction {
 		int apply(int i, int j);
@@ -91,12 +96,15 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 	interface ListIteratorIterable<E> extends Iterable<E> {
 		ListIterator<E> iterator();
 	}
+	class IterableContainer<E> {
+		abstract class Iter implements Iterable<E> {}
+	}
 	
 	@Test
 	public void testPrepareComputation_01() throws Exception {
 		JvmType iterableType = getTypeForName(Iterable.class, state);
 		JvmTypeParameter typeParameter = createTypeParameter("ELEMENT", state);
-		ParameterizedTypeReference iterableTypeReference = new ParameterizedTypeReference(this, iterableType);
+		ParameterizedTypeReference iterableTypeReference = newParameterizedTypeReference(iterableType);
 		iterableTypeReference.addTypeArgument(createTypeReference(typeParameter, state));
 		assertFalse(iterableTypeReference.isResolved());
 		
@@ -112,7 +120,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 	@Test
 	public void testPrepareComputation_02() throws Exception {
 		JvmType iterableType = getTypeForName(StringIterable.class, state);
-		ParameterizedTypeReference iterableTypeReference = new ParameterizedTypeReference(this, iterableType);
+		ParameterizedTypeReference iterableTypeReference = newParameterizedTypeReference(iterableType);
 		assertTrue(iterableTypeReference.isResolved());
 		
 		TypeExpectation expectation = new TypeExpectation(iterableTypeReference, state, false);
@@ -128,7 +136,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 	public void testPrepareComputation_03() throws Exception {
 		JvmType iterableType = getTypeForName(CharSequenceIterable.class, state);
 		JvmTypeParameter typeParameter = createTypeParameter("STRING", state);
-		ParameterizedTypeReference iterableTypeReference = new ParameterizedTypeReference(this, iterableType);
+		ParameterizedTypeReference iterableTypeReference = newParameterizedTypeReference(iterableType);
 		iterableTypeReference.addTypeArgument(createTypeReference(typeParameter, state));
 		assertFalse(iterableTypeReference.isResolved());
 		
@@ -145,7 +153,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 	public void testPrepareComputation_04() throws Exception {
 		JvmType iterableType = getTypeForName(ListIteratorIterable.class, state);
 		JvmTypeParameter typeParameter = createTypeParameter("STRING", state);
-		ParameterizedTypeReference iterableTypeReference = new ParameterizedTypeReference(this, iterableType);
+		ParameterizedTypeReference iterableTypeReference = newParameterizedTypeReference(iterableType);
 		iterableTypeReference.addTypeArgument(createTypeReference(typeParameter, state));
 		assertFalse(iterableTypeReference.isResolved());
 		
@@ -162,8 +170,8 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 	public void testPrepareComputation_05() throws Exception {
 		JvmType iterableType = getTypeForName(Iterable.class, state);
 		JvmType elementType = getTypeForName(String.class, state);
-		ParameterizedTypeReference iterableTypeReference = new ParameterizedTypeReference(this, iterableType);
-		iterableTypeReference.addTypeArgument(new ParameterizedTypeReference(this, elementType));
+		ParameterizedTypeReference iterableTypeReference = newParameterizedTypeReference(iterableType);
+		iterableTypeReference.addTypeArgument(newParameterizedTypeReference(elementType));
 		assertTrue(iterableTypeReference.isResolved());
 		
 		TypeExpectation expectation = new TypeExpectation(iterableTypeReference, state, false);
@@ -178,7 +186,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 	@Test
 	public void testPrepareComputation_06() throws Exception {
 		JvmType stringType = getTypeForName(String.class, state);
-		ParameterizedTypeReference stringTypeReference = new ParameterizedTypeReference(this, stringType);
+		ParameterizedTypeReference stringTypeReference = newParameterizedTypeReference(stringType);
 		assertTrue(stringTypeReference.isResolved());
 		
 		TypeExpectation expectation = new TypeExpectation(stringTypeReference, state, false);
@@ -203,7 +211,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 	public void testPrepareComputation_08() throws Exception {
 		JvmType iterableType = getTypeForName(Iterable.class, state);
 		JvmTypeParameter typeParameter = createTypeParameter("ELEMENT", state);
-		ParameterizedTypeReference iterableTypeReference = new ParameterizedTypeReference(this, iterableType);
+		ParameterizedTypeReference iterableTypeReference = newParameterizedTypeReference(iterableType);
 		iterableTypeReference.addTypeArgument(createTypeReference(typeParameter, state));
 		assertFalse(iterableTypeReference.isResolved());
 		
@@ -219,7 +227,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 	@Test
 	public void testPrepareComputation_09() throws Exception {
 		JvmType runnableType = getTypeForName(Runnable.class, state);
-		ParameterizedTypeReference runnableTypeReference = new ParameterizedTypeReference(this, runnableType);
+		ParameterizedTypeReference runnableTypeReference = newParameterizedTypeReference(runnableType);
 		assertTrue(runnableTypeReference.isResolved());
 		
 		TypeExpectation expectation = new TypeExpectation(runnableTypeReference, state, false);
@@ -236,7 +244,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		JvmType runnableType = getTypeForName(Runnable.class, state);
 		// type with illegal type parameters
 		JvmTypeParameter typeParameter = createTypeParameter("ILLEGAL", state);
-		ParameterizedTypeReference runnableTypeReference = new ParameterizedTypeReference(this, runnableType);
+		ParameterizedTypeReference runnableTypeReference = newParameterizedTypeReference(runnableType);
 		runnableTypeReference.addTypeArgument(createTypeReference(typeParameter, state));
 		assertFalse(runnableTypeReference.isResolved());
 		
@@ -254,7 +262,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		JvmType listFunctionType = getTypeForName(ListFunction1.class, state);
 		// type with illegal type parameters
 		JvmTypeParameter singleTypeParameter = createTypeParameter("InAndOut", state);
-		ParameterizedTypeReference listFunctionTypeReference = new ParameterizedTypeReference(this, listFunctionType);
+		ParameterizedTypeReference listFunctionTypeReference = newParameterizedTypeReference(listFunctionType);
 		listFunctionTypeReference.addTypeArgument(createTypeReference(singleTypeParameter, state));
 		assertFalse(listFunctionTypeReference.isResolved());
 		
@@ -272,7 +280,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		JvmType comparatorType = getTypeForName(Comparator.class, state);
 		// type with illegal type parameters
 		JvmTypeParameter typeParameter = createTypeParameter("COMPARABLE", state);
-		ParameterizedTypeReference comparatorTypeReference = new ParameterizedTypeReference(this, comparatorType);
+		ParameterizedTypeReference comparatorTypeReference = newParameterizedTypeReference(comparatorType);
 		comparatorTypeReference.addTypeArgument(createTypeReference(typeParameter, state));
 		assertFalse(comparatorTypeReference.isResolved());
 		
@@ -288,7 +296,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 	@Test
 	public void testPrepareComputation_13() throws Exception {
 		JvmType functionType = getTypeForName(IntFunction.class, state);
-		ParameterizedTypeReference functionTypeReference = new ParameterizedTypeReference(this, functionType);
+		ParameterizedTypeReference functionTypeReference = newParameterizedTypeReference(functionType);
 		assertTrue(functionTypeReference.isResolved());
 		
 		TypeExpectation expectation = new TypeExpectation(functionTypeReference, state, false);
@@ -304,9 +312,9 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 	public void testPrepareComputation_14() throws Exception {
 		JvmType iterableType = getTypeForName(Iterable.class, state);
 		JvmType elementType = getTypeForName(String.class, state);
-		ParameterizedTypeReference iterableTypeReference = new ParameterizedTypeReference(this, iterableType);
-		WildcardTypeReference wildcard = new WildcardTypeReference(this);
-		wildcard.addUpperBound(new ParameterizedTypeReference(this, elementType));
+		ParameterizedTypeReference iterableTypeReference = newParameterizedTypeReference(iterableType);
+		WildcardTypeReference wildcard = newWildcardTypeReference();
+		wildcard.addUpperBound(newParameterizedTypeReference(elementType));
 		iterableTypeReference.addTypeArgument(wildcard);
 		assertTrue(iterableTypeReference.isResolved());
 		
@@ -322,7 +330,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 	@Test
 	public void testPrepareComputation_15() throws Exception {
 		JvmType runnableType = getTypeForName(Runnable.class, state);
-		ParameterizedTypeReference runnableTypeReference = new ParameterizedTypeReference(this, runnableType);
+		ParameterizedTypeReference runnableTypeReference = newParameterizedTypeReference(runnableType);
 		assertTrue(runnableTypeReference.isResolved());
 		
 		TypeExpectation expectation = new TypeExpectation(runnableTypeReference, state, false);
@@ -338,7 +346,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 	public void testPrepareComputation_16() throws Exception {
 		JvmType iterableType = getTypeForName(Iterable.class, state);
 		JvmTypeParameter typeParameter = createTypeParameter("ELEMENT", state);
-		ParameterizedTypeReference iterableTypeReference = new ParameterizedTypeReference(this, iterableType);
+		ParameterizedTypeReference iterableTypeReference = newParameterizedTypeReference(iterableType);
 		iterableTypeReference.addTypeArgument(createTypeReference(typeParameter, state));
 		assertFalse(iterableTypeReference.isResolved());
 		
@@ -355,7 +363,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 	public void testHintsAfterPrepareComputation_01() throws Exception {
 		JvmType iterableType = getTypeForName(Iterable.class, state);
 		JvmTypeParameter typeParameter = createTypeParameter("ELEMENT", state);
-		ParameterizedTypeReference iterableTypeReference = new ParameterizedTypeReference(this, iterableType);
+		ParameterizedTypeReference iterableTypeReference = newParameterizedTypeReference(iterableType);
 		UnboundTypeReference elementReference = (UnboundTypeReference) createTypeReference(typeParameter, state);
 		iterableTypeReference.addTypeArgument(elementReference);
 
@@ -379,10 +387,10 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		JvmType iterableType = getTypeForName(Iterable.class, state);
 		JvmType appendableType = getTypeForName(Appendable.class, state);
 		JvmType charSequenceType = getTypeForName(CharSequence.class, state);
-		ParameterizedTypeReference iterableTypeReference = new ParameterizedTypeReference(this, iterableType);
-		CompoundTypeReference typeArgument = new CompoundTypeReference(this, false);
-		typeArgument.addComponent(new ParameterizedTypeReference(this, appendableType));
-		typeArgument.addComponent(new ParameterizedTypeReference(this, charSequenceType));
+		ParameterizedTypeReference iterableTypeReference = newParameterizedTypeReference(iterableType);
+		CompoundTypeReference typeArgument = newCompoundTypeReference(false);
+		typeArgument.addComponent(newParameterizedTypeReference(appendableType));
+		typeArgument.addComponent(newParameterizedTypeReference(charSequenceType));
 		iterableTypeReference.addTypeArgument(typeArgument);
 		
 		TypeExpectation expectation = new TypeExpectation(iterableTypeReference, state, false);
@@ -403,10 +411,10 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		JvmType iterableType = getTypeForName(Iterable.class, state);
 		JvmType appendableType = getTypeForName(Appendable.class, state);
 		JvmType charSequenceType = getTypeForName(CharSequence.class, state);
-		ParameterizedTypeReference iterableTypeReference = new ParameterizedTypeReference(this, iterableType);
-		WildcardTypeReference typeArgument = new WildcardTypeReference(this);
-		typeArgument.addUpperBound(new ParameterizedTypeReference(this, appendableType));
-		typeArgument.addUpperBound(new ParameterizedTypeReference(this, charSequenceType));
+		ParameterizedTypeReference iterableTypeReference = newParameterizedTypeReference(iterableType);
+		WildcardTypeReference typeArgument = newWildcardTypeReference();
+		typeArgument.addUpperBound(newParameterizedTypeReference(appendableType));
+		typeArgument.addUpperBound(newParameterizedTypeReference(charSequenceType));
 		iterableTypeReference.addTypeArgument(typeArgument);
 		
 		TypeExpectation expectation = new TypeExpectation(iterableTypeReference, state, false);
@@ -440,7 +448,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		if (type instanceof JvmTypeParameter) {
 			return this.state.createUnboundTypeReference((JvmTypeParameter) type);
 		}
-		return new ParameterizedTypeReference(state.getReferenceOwner(), type);
+		return state.getReferenceOwner().newParameterizedTypeReference(type);
 	}
 	
 	@Before
@@ -491,10 +499,6 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		return result;
 	}
 	
-	public LightweightTypeReference toLightweightReference(JvmTypeReference reference) {
-		return owner.toLightweightReference(reference);
-	}
-
 	@Before
 	public void obtainResourceSet() throws Exception {
 		expression("null");
@@ -504,11 +508,13 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 	@After
 	public void tearDown() {
 		contextResourceSet = null;
+		owner = null;
 	}
 	
 	protected XExpression expression(String string) throws Exception {
 		XExpression result = super.expression(string);
 		contextResourceSet = result.eResource().getResourceSet();
+		owner = new StandardTypeReferenceOwner(services, contextResourceSet);
 		return result;
 	}
 	
@@ -516,12 +522,10 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		return parseHelper.parse(string, resourceSet);
 	}
 
-	/* @NonNull */ 
 	public ResourceSet getContextResourceSet() {
 		return contextResourceSet;
 	}
 	
-	/* @NonNull */ 
 	public CommonTypeComputationServices getServices() {
 		return services;
 	}
@@ -631,5 +635,62 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		}
 		
 	}
+
+	public CompoundTypeReference newCompoundTypeReference(boolean synonym) {
+		return owner.newCompoundTypeReference(synonym);
+	}
+
+	public ArrayTypeReference newArrayTypeReference(LightweightTypeReference componentTypeReference) {
+		return owner.newArrayTypeReference(componentTypeReference);
+	}
+
+	public WildcardTypeReference newWildcardTypeReference() {
+		return owner.newWildcardTypeReference();
+	}
+
+	public ParameterizedTypeReference newParameterizedTypeReference(JvmType type) {
+		return owner.newParameterizedTypeReference(type);
+	}
+
+	public InnerTypeReference newParameterizedTypeReference(LightweightTypeReference outer, JvmType type) {
+		return owner.newParameterizedTypeReference(outer, type);
+	}
+
+	public FunctionTypeReference newFunctionTypeReference(JvmType type) {
+		return owner.newFunctionTypeReference(type);
+	}
+
+	public InnerFunctionTypeReference newFunctionTypeReference(LightweightTypeReference outer, JvmType type) {
+		return owner.newFunctionTypeReference(outer, type);
+	}
+
+	public LightweightTypeReference toPlainTypeReference(JvmType type) {
+		return owner.toPlainTypeReference(type);
+	}
+
+	public LightweightTypeReference toPlainTypeReference(JvmTypeReference type) {
+		return owner.toPlainTypeReference(type);
+	}
+
+	public LightweightTypeReference toLightweightTypeReference(JvmType type) {
+		return owner.toLightweightTypeReference(type);
+	}
+
+	public LightweightTypeReference toLightweightTypeReference(JvmTypeReference type) {
+		return owner.toLightweightTypeReference(type);
+	}
+
+	public UnknownTypeReference newUnknownTypeReference() {
+		return owner.newUnknownTypeReference();
+	}
+
+	public UnknownTypeReference newUnknownTypeReference(String name) {
+		return owner.newUnknownTypeReference(name);
+	}
+
+	public AnyTypeReference newAnyTypeReference() {
+		return owner.newAnyTypeReference();
+	}
+
 	
 }

@@ -28,7 +28,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -137,9 +136,9 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
         EList<JvmFormalParameter> _parameters = operation.getParameters();
         JvmFormalParameter _head = IterableExtensions.<JvmFormalParameter>head(_parameters);
         JvmTypeReference _parameterType = _head.getParameterType();
-        _xifexpression = this.toLightweightReference(_parameterType);
+        _xifexpression = this.toLightweightTypeReference(_parameterType);
       } else {
-        _xifexpression = new AnyTypeReference(this);
+        _xifexpression = this.newAnyTypeReference();
       }
       final LightweightTypeReference lhsType = _xifexpression;
       LightweightTypeReference _xifexpression_1 = null;
@@ -148,9 +147,9 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
         EList<JvmFormalParameter> _parameters_1 = operation.getParameters();
         JvmFormalParameter _last = IterableExtensions.<JvmFormalParameter>last(_parameters_1);
         JvmTypeReference _parameterType_1 = _last.getParameterType();
-        _xifexpression_1 = this.toLightweightReference(_parameterType_1);
+        _xifexpression_1 = this.toLightweightTypeReference(_parameterType_1);
       } else {
-        _xifexpression_1 = new AnyTypeReference(this);
+        _xifexpression_1 = this.newAnyTypeReference();
       }
       final LightweightTypeReference rhsType = _xifexpression_1;
       String _simpleName = lhsType.getSimpleName();
@@ -224,23 +223,23 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
     boolean _doIsAssignable = this.doIsAssignable(lhs, lhs);
     Assert.assertTrue(_doIsAssignable);
     JvmTypeReference _typeReference = lhs.toTypeReference();
-    LightweightTypeReference _lightweightReference = this.toLightweightReference(_typeReference);
-    boolean _doIsAssignable_1 = this.doIsAssignable(lhs, _lightweightReference);
+    LightweightTypeReference _lightweightTypeReference = this.toLightweightTypeReference(_typeReference);
+    boolean _doIsAssignable_1 = this.doIsAssignable(lhs, _lightweightTypeReference);
     Assert.assertTrue(_doIsAssignable_1);
     JvmTypeReference _typeReference_1 = rhs.toTypeReference();
-    LightweightTypeReference _lightweightReference_1 = this.toLightweightReference(_typeReference_1);
-    boolean _doIsAssignable_2 = this.doIsAssignable(rhs, _lightweightReference_1);
+    LightweightTypeReference _lightweightTypeReference_1 = this.toLightweightTypeReference(_typeReference_1);
+    boolean _doIsAssignable_2 = this.doIsAssignable(rhs, _lightweightTypeReference_1);
     Assert.assertTrue(_doIsAssignable_2);
     final boolean result = this.doIsAssignable(lhs, rhs);
     boolean _isPrimitiveVoid = rhs.isPrimitiveVoid();
     boolean _not = (!_isPrimitiveVoid);
     if (_not) {
-      final WildcardTypeReference wcRhs = new WildcardTypeReference(this);
+      final WildcardTypeReference wcRhs = this.newWildcardTypeReference();
       LightweightTypeReference _wrapperTypeIfPrimitive = rhs.getWrapperTypeIfPrimitive();
       wcRhs.addUpperBound(_wrapperTypeIfPrimitive);
       boolean _doIsAssignable_3 = this.doIsAssignable(lhs, wcRhs);
       Assert.assertEquals(Boolean.valueOf(result), Boolean.valueOf(_doIsAssignable_3));
-      final CompoundTypeReference compoundRhs = new CompoundTypeReference(this, true);
+      final CompoundTypeReference compoundRhs = this.newCompoundTypeReference(true);
       compoundRhs.addComponent(rhs);
       ITypeReferenceOwner _owner = rhs.getOwner();
       CommonTypeComputationServices _services = _owner.getServices();
@@ -249,8 +248,8 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
       ResourceSet _contextResourceSet = _owner_1.getContextResourceSet();
       final JvmType object = _typeReferences.findDeclaredType(Object.class, _contextResourceSet);
       ITypeReferenceOwner _owner_2 = rhs.getOwner();
-      ParameterizedTypeReference _parameterizedTypeReference = new ParameterizedTypeReference(_owner_2, object);
-      compoundRhs.addComponent(_parameterizedTypeReference);
+      ParameterizedTypeReference _newParameterizedTypeReference = _owner_2.newParameterizedTypeReference(object);
+      compoundRhs.addComponent(_newParameterizedTypeReference);
       String _plus = (lhs + " := ");
       String _string = compoundRhs.toString();
       String _plus_1 = (_plus + _string);

@@ -10,7 +10,6 @@ package org.eclipse.xtend.core.tests.typesystem
 import com.google.inject.Inject
 import java.util.ArrayList
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
-import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
@@ -34,16 +33,16 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 			FOR type: types SEPARATOR ', '»«type.fixup» t«ENDFOR») {}'''
 		val function = function(signature.toString)
 		val operation = function.directlyInferredOperation
-		val typeReferences = new ArrayList(operation.parameters.map [ parameterType.toLightweightReference ])
-		val conformanceComputer = services.typeConformanceComputer 
+		val typeReferences = new ArrayList(operation.parameters.map [ parameterType.toLightweightTypeReference ])
+		val conformanceComputer = getServices.typeConformanceComputer 
 		var computedSuperType = conformanceComputer.getCommonSuperType(typeReferences, this)
 		assertEquals(superTypeAndParam.key, computedSuperType?.simpleName)
-		computedSuperType = services.typeConformanceComputer.getCommonSuperType((typeReferences + typeReferences).toList, this)
+		computedSuperType = getServices.typeConformanceComputer.getCommonSuperType((typeReferences + typeReferences).toList, this)
 		assertEquals(superTypeAndParam.key, computedSuperType?.simpleName)
-		computedSuperType = services.typeConformanceComputer.getCommonSuperType(typeReferences.reverseView, this)
+		computedSuperType = getServices.typeConformanceComputer.getCommonSuperType(typeReferences.reverseView, this)
 		assertEquals(superTypeAndParam.key, computedSuperType?.simpleName)
 		if (!(computedSuperType?.primitiveVoid || computedSuperType?.primitive)) {
-			computedSuperType = services.typeConformanceComputer.getCommonSuperType((typeReferences + newImmutableList(new AnyTypeReference(this), new AnyTypeReference(this))).toList, this)
+			computedSuperType = getServices.typeConformanceComputer.getCommonSuperType((typeReferences + newImmutableList(newAnyTypeReference, newAnyTypeReference)).toList, this)
 			assertEquals(superTypeAndParam.key, computedSuperType?.simpleName)
 		}
 		if (computedSuperType != null) {
@@ -194,8 +193,8 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Test
 	def void testCommonSuperType_23() {
-		val types = <LightweightTypeReference>newImmutableList(new AnyTypeReference(this), new AnyTypeReference(this))
-		val superType = services.typeConformanceComputer.getCommonSuperType(types, this)
+		val types = <LightweightTypeReference>newImmutableList(newAnyTypeReference, newAnyTypeReference)
+		val superType = getServices.typeConformanceComputer.getCommonSuperType(types, this)
 		assertEquals("null", superType.simpleName)
 	}
 	

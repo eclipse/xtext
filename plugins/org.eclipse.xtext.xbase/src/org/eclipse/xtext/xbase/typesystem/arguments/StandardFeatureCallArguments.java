@@ -14,8 +14,8 @@ import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 
 /**
  * A representation of {@link IFeatureCallArguments} that does not handle
@@ -28,15 +28,15 @@ public class StandardFeatureCallArguments implements IFeatureCallArguments {
 	protected final List<JvmFormalParameter> parameters;
 	protected final int receiverFixup;
 	protected final List<XExpression> arguments;
-	protected final OwnedConverter converter;
+	protected final ITypeReferenceOwner owner;
 	
 	protected int nextUnprocessedArgument = 0;
 
-	public StandardFeatureCallArguments(List<XExpression> arguments, List<JvmFormalParameter> parameters, boolean hasReceiver, OwnedConverter converter) {
+	public StandardFeatureCallArguments(List<XExpression> arguments, List<JvmFormalParameter> parameters, boolean hasReceiver, ITypeReferenceOwner owner) {
 		this.parameters = parameters;
 		this.receiverFixup = hasReceiver ? 1 : 0;
 		this.arguments = arguments;
-		this.converter = converter;
+		this.owner = owner;
 	}
 	
 	public boolean hasUnprocessedArguments() {
@@ -99,7 +99,7 @@ public class StandardFeatureCallArguments implements IFeatureCallArguments {
 		if (parameterType == null) {
 			return null;
 		}
-		LightweightTypeReference result = converter.toLightweightReference(parameterType);
+		LightweightTypeReference result = owner.toLightweightTypeReference(parameterType);
 		return result;
 	}
 	

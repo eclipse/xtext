@@ -15,7 +15,6 @@ import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.XNumberLiteral
 import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArguments
 import org.eclipse.xtext.xbase.typesystem.arguments.ReorderedFeatureCallArguments
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.junit.Test
 
 /**
@@ -162,7 +161,7 @@ class ReorderedFeatureCallArgumentsTest extends AbstractTestingTypeReferenceOwne
 		val featureCall = body.expressions.head as XFeatureCall
 		val arguments = featureCall.featureCallArguments
 		val operation = function.directlyInferredOperation
-		val result = factory.createStandardArguments(arguments, operation.parameters, receiver, new OwnedConverter(this))
+		val result = factory.createStandardArguments(arguments, operation.parameters, receiver, this)
 		assertTrue(result.class == ReorderedFeatureCallArguments)
 		return result
 	}

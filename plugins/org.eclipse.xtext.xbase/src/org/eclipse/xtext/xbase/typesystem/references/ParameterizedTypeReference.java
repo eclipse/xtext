@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -55,11 +56,23 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 		if (type instanceof JvmArrayType) {
 			throw new IllegalArgumentException("type may not be an array type");
 		}
+		if (type.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
+			EObject container = type.eContainer();
+			if (container instanceof JvmDeclaredType) {
+				checkStaticFlag((JvmDeclaredType)type);
+			}
+		}
 		this.type = type;
 		// TODO check against owner or specialized representation of the owner
 		this.resolved = !(type instanceof JvmTypeParameter);
 	}
 	
+	protected void checkStaticFlag(JvmDeclaredType type) {
+		if (!type.isStatic()) {
+			throw new IllegalArgumentException("type may not be an inner class");
+		}
+	}
+
 	/**
 	 * Subclasses <em>must</em> override this method.
 	 */
@@ -454,11 +467,11 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 		if (type instanceof JvmDeclaredType) {
 			List<JvmTypeReference> superTypes = ((JvmDeclaredType) type).getSuperTypes();
 			if (!superTypes.isEmpty()) {
-				OwnedConverter converter = new OwnedConverter(getOwner());
+				ITypeReferenceOwner owner = getOwner();
 				List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(superTypes.size());
 				boolean isRawType = isRawType();
 				for (JvmTypeReference superType : superTypes) {
-					LightweightTypeReference lightweightSuperType = converter.toLightweightReference(superType);
+					LightweightTypeReference lightweightSuperType = owner.toLightweightTypeReference(superType);
 					if (!lightweightSuperType.isType(Object.class) || superTypes.size() == 1) {
 						if (!lightweightSuperType.isUnknown()) {
 							if (!isRawType) {
@@ -478,11 +491,11 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 		} else if (type instanceof JvmTypeParameter) {
 			List<JvmTypeConstraint> constraints = ((JvmTypeParameter) type).getConstraints();
 			if (!constraints.isEmpty()) {
+				ITypeReferenceOwner owner = getOwner();
 				List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(constraints.size());
-				OwnedConverter converter = new OwnedConverter(getOwner());
 				for(JvmTypeConstraint constraint: constraints) {
 					if (constraint instanceof JvmUpperBound && constraint.getTypeReference() != null) {
-						LightweightTypeReference upperBound = converter.toLightweightReference(constraint.getTypeReference());
+						LightweightTypeReference upperBound = owner.toLightweightTypeReference(constraint.getTypeReference());
 						result.add(substitutor.substitute(upperBound));
 					}
 				}
@@ -531,16 +544,14 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 		if (superType != null) {
 			JvmType rawType = superType.getType();
 			if (isRawType()) {
-				return new ParameterizedTypeReference(getOwner(), rawType);
+				return createRawTypeReference(rawType);
 			}
-			if (superType instanceof JvmParameterizedTypeReference) {
+			if (superType.eClass() == TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE) {
 				if (((JvmParameterizedTypeReference) superType).getArguments().isEmpty()) {
 					return new ParameterizedTypeReference(getOwner(), rawType);
 				}
 			}
-			JvmParameterizedTypeReference plainSuperType = getServices().getTypeReferences().createTypeRef(rawType);
-			OwnedConverter converter = new OwnedConverter(getOwner());
-			LightweightTypeReference unresolved = converter.toLightweightReference(plainSuperType);
+			LightweightTypeReference unresolved = getOwner().toLightweightTypeReference(rawType);
 			TypeParameterSubstitutor<?> substitutor = createSubstitutor();
 			LightweightTypeReference result = substitutor.substitute(unresolved);
 			return result;
@@ -605,16 +616,15 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 		} else if (rawResult != null) {
 			JvmTypeReference superType = (JvmTypeReference) rawResult;
 			if (isRawType()) {
-				return new ParameterizedTypeReference(getOwner(), rawType);
+				return createRawTypeReference(rawType);
 			}
-			if (superType instanceof JvmParameterizedTypeReference) {
+			if (superType.eClass() == TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE) {
 				if (((JvmParameterizedTypeReference) superType).getArguments().isEmpty()) {
 					return new ParameterizedTypeReference(getOwner(), rawType);
 				}
 			}
 			JvmParameterizedTypeReference plainSuperType = getServices().getTypeReferences().createTypeRef(rawType);
-			OwnedConverter converter = new OwnedConverter(getOwner());
-			LightweightTypeReference unresolved = converter.toLightweightReference(plainSuperType);
+			LightweightTypeReference unresolved = getOwner().toLightweightTypeReference(plainSuperType);
 			TypeParameterSubstitutor<?> substitutor = createSubstitutor();
 			LightweightTypeReference result = substitutor.substitute(unresolved);
 			return result;
@@ -628,9 +638,29 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 		if (result instanceof ParameterizedTypeReference) {
 			return (LightweightTypeReference) result;
 		} else if (result != null) {
-			return new ParameterizedTypeReference(getOwner(), rawType);
+			return createRawTypeReference(rawType);
 		}
 		return null;
+	}
+	
+	protected LightweightTypeReference createRawTypeReference(JvmType rawType) {
+		if (rawType instanceof JvmArrayType) {
+			throw new IllegalArgumentException();
+		}
+		if (isInner(rawType)) {
+			LightweightTypeReference outer = createRawTypeReference((JvmType) rawType.eContainer());
+			return new InnerTypeReference(getOwner(), outer, rawType);
+		}
+		return new ParameterizedTypeReference(getOwner(), rawType);
+	}
+	
+	protected boolean isInner(JvmType type) {
+		if (type.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
+			if (type.eContainer() instanceof JvmDeclaredType) {
+				return !((JvmGenericType) type).isStatic();
+			}
+		}
+		return false;
 	}
 	
 	/**

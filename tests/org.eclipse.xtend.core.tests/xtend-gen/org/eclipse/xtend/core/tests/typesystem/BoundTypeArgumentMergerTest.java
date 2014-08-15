@@ -76,7 +76,7 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
         public void apply(final JvmFormalParameter p, final Integer i) {
           final Triple<String, VarianceInfo, VarianceInfo> input = mergeUs[(i).intValue()];
           JvmTypeReference _parameterType = p.getParameterType();
-          LightweightTypeReference _lightweightReference = BoundTypeArgumentMergerTest.this.toLightweightReference(_parameterType);
+          LightweightTypeReference _lightweightTypeReference = BoundTypeArgumentMergerTest.this.toLightweightTypeReference(_parameterType);
           Object _elvis = null;
           if (source != null) {
             _elvis = source;
@@ -86,7 +86,7 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
           }
           VarianceInfo _second = input.getSecond();
           VarianceInfo _third = input.getThird();
-          LightweightBoundTypeArgument _lightweightBoundTypeArgument = new LightweightBoundTypeArgument(_lightweightReference, null, _elvis, _second, _third);
+          LightweightBoundTypeArgument _lightweightBoundTypeArgument = new LightweightBoundTypeArgument(_lightweightTypeReference, null, _elvis, _second, _third);
           mergable.add(_lightweightBoundTypeArgument);
         }
       };
@@ -122,11 +122,11 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
         public void apply(final JvmFormalParameter p, final Integer i) {
           final Triple<String, VarianceInfo, VarianceInfo> input = mergeUs[(i).intValue()];
           JvmTypeReference _parameterType = p.getParameterType();
-          LightweightTypeReference _lightweightReference = BoundTypeArgumentMergerTest.this.toLightweightReference(_parameterType);
+          LightweightTypeReference _lightweightTypeReference = BoundTypeArgumentMergerTest.this.toLightweightTypeReference(_parameterType);
           Object _object = new Object();
           VarianceInfo _second = input.getSecond();
           VarianceInfo _third = input.getThird();
-          LightweightBoundTypeArgument _lightweightBoundTypeArgument = new LightweightBoundTypeArgument(_lightweightReference, null, _object, _second, _third);
+          LightweightBoundTypeArgument _lightweightBoundTypeArgument = new LightweightBoundTypeArgument(_lightweightTypeReference, null, _object, _second, _third);
           mergable.add(_lightweightBoundTypeArgument);
         }
       };

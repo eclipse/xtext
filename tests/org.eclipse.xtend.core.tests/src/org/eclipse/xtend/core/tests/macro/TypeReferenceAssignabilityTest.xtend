@@ -9,18 +9,13 @@ package org.eclipse.xtend.core.tests.macro
 
 import com.google.inject.Inject
 import com.google.inject.Provider
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
 import org.eclipse.xtend.core.tests.typesystem.AssignabilityTest
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtext.common.types.JvmTypeReference
-import org.eclipse.xtext.xbase.lib.Pair
-import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
-import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
-import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference
-import org.eclipse.emf.ecore.util.EcoreUtil
 import org.junit.Ignore
 
 /**
@@ -41,11 +36,11 @@ class TypeReferenceAssignabilityTest extends AssignabilityTest {
 			val lhsType = if (lhsAndParams.key != null)
 					operation.parameters.head.parameterType.newTypeReference(unit).toLightweightTypeReference
 				else
-					new AnyTypeReference(this)
+					newAnyTypeReference
 			val rhsType = if (rhs != null)
 					operation.parameters.last.parameterType.newTypeReference(unit).toLightweightTypeReference
 				else
-					new AnyTypeReference(this)
+					newAnyTypeReference
 			assertEquals(lhsType.simpleName + " := " + rhsType.simpleName, expectation,
 				lhsType.testIsAssignable(rhsType))
 			if (expectation) {
@@ -59,17 +54,17 @@ class TypeReferenceAssignabilityTest extends AssignabilityTest {
 
 	override testIsAssignable(LightweightTypeReference lhs, LightweightTypeReference rhs) {
 		assertTrue(lhs.doIsAssignable(lhs))
-		assertTrue(lhs.doIsAssignable(lhs.toTypeReference.toLightweightReference))
-		assertTrue(rhs.doIsAssignable(rhs.toTypeReference.toLightweightReference))
+		assertTrue(lhs.doIsAssignable(lhs.toTypeReference.toLightweightTypeReference))
+		assertTrue(rhs.doIsAssignable(rhs.toTypeReference.toLightweightTypeReference))
 		val boolean result = lhs.doIsAssignable(rhs)
 		if (!rhs.primitiveVoid) {
-			val wcRhs = new WildcardTypeReference(rhs.owner)
+			val wcRhs = rhs.owner.newWildcardTypeReference()
 			wcRhs.addUpperBound(rhs.wrapperTypeIfPrimitive)
 			assertEquals(result, lhs.doIsAssignable(wcRhs))
-			val compoundRhs = new CompoundTypeReference(rhs.owner, true)
+			val compoundRhs = rhs.owner.newCompoundTypeReference(true)
 			compoundRhs.addComponent(rhs)
 			val object = rhs.owner.services.typeReferences.findDeclaredType(Object, rhs.owner.contextResourceSet)
-			compoundRhs.addComponent(new ParameterizedTypeReference(rhs.owner, object))
+			compoundRhs.addComponent(rhs.owner.newParameterizedTypeReference(object))
 			assertEquals(lhs + ' := ' + compoundRhs.toString, result, lhs.doIsAssignable(compoundRhs))
 		}
 		return result

@@ -293,6 +293,11 @@ public class JvmDeclaredTypeItemProvider extends JvmMemberItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(TypesPackage.Literals.JVM_DECLARED_TYPE__SUPER_TYPES,
+				 TypesFactory.eINSTANCE.createJvmInnerTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(TypesPackage.Literals.JVM_DECLARED_TYPE__MEMBERS,
 				 TypesFactory.eINSTANCE.createJvmAnnotationType()));
 

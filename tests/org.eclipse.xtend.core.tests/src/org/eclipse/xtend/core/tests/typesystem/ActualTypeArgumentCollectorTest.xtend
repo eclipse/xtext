@@ -35,7 +35,7 @@ class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenceOwner 
 		val operation = operation(typeParameters, alternatingTypeReferences)
 		val collector = new ActualTypeArgumentCollector(operation.typeParameters, BoundTypeArgumentSource::INFERRED, this)
 		for(i: (0..alternatingTypeReferences.size-1).withStep(2)) {
-			collector.populateTypeParameterMapping(operation.parameters.get(i).parameterType.toLightweightReference, operation.parameters.get(i+1).parameterType.toLightweightReference)
+			collector.populateTypeParameterMapping(operation.parameters.get(i).parameterType.toLightweightTypeReference, operation.parameters.get(i+1).parameterType.toLightweightTypeReference)
 		}
 		return collector.typeParameterMapping
 	}

@@ -42,7 +42,7 @@ class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwner {
 		val mergable = <LightweightBoundTypeArgument>newArrayList
 		operation.parameters.forEach[ p, i |
 			val input = mergeUs.get(i)
-			mergable += new LightweightBoundTypeArgument(p.parameterType.toLightweightReference, null, source ?: new Object, input.second, input.third)
+			mergable += new LightweightBoundTypeArgument(p.parameterType.toLightweightTypeReference, null, source ?: new Object, input.second, input.third)
 		]
 		return merger.merge(mergable, this)
 	}
@@ -56,7 +56,7 @@ class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwner {
 		val mergable = <LightweightBoundTypeArgument>newArrayList
 		operation.parameters.forEach[ p, i |
 			val input = mergeUs.get(i)
-			mergable += new LightweightBoundTypeArgument(p.parameterType.toLightweightReference, null, new Object, input.second, input.third)
+			mergable += new LightweightBoundTypeArgument(p.parameterType.toLightweightTypeReference, null, new Object, input.second, input.third)
 		]
 		val iterator = mergable.iterator
 		var first = iterator.next

@@ -45,6 +45,7 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmInnerTypeReference;
 import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -522,17 +523,21 @@ public class ReflectionTypeFactory implements ITypeFactory<Class<?>, JvmDeclared
 			return createArrayTypeReference(componentType);
 		} else if (type instanceof ParameterizedType) {
 			ParameterizedType parameterizedType = (ParameterizedType) type;
-			JvmParameterizedTypeReference result = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
-			result.setType(createProxy(parameterizedType.getRawType()));
-			Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
-			if (actualTypeArguments.length != 0) {
-				InternalEList<JvmTypeReference> arguments = (InternalEList<JvmTypeReference>)result.getArguments();
-				for (Type actualTypeArgument : actualTypeArguments) {
-					JvmTypeReference argument = createTypeArgument(actualTypeArgument);
-					arguments.addUnique(argument);
+			Type ownerType = parameterizedType.getOwnerType();
+			if (ownerType instanceof ParameterizedType) {
+				JvmTypeReference ownerTypeReference = createTypeReference(ownerType);
+				if (ownerTypeReference instanceof JvmParameterizedTypeReference) {
+					JvmInnerTypeReference result = TypesFactory.eINSTANCE.createJvmInnerTypeReference();
+					result.setOuter((JvmParameterizedTypeReference) ownerTypeReference);
+					return enhanceTypeReference(parameterizedType, result);
+				} else {
+					JvmParameterizedTypeReference result = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
+					return enhanceTypeReference(parameterizedType, result);
 				}
+			} else {
+				JvmParameterizedTypeReference result = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
+				return enhanceTypeReference(parameterizedType, result);
 			}
-			return result;
 		} else if (type instanceof Class<?> && ((Class<?>) type).isArray()) {
 			Class<?> arrayType = (Class<?>) type;
 			Type componentType = arrayType.getComponentType();
@@ -542,6 +547,20 @@ public class ReflectionTypeFactory implements ITypeFactory<Class<?>, JvmDeclared
 			result.setType(createProxy(type));
 			return result;
 		}
+	}
+
+	private JvmTypeReference enhanceTypeReference(ParameterizedType parameterizedType,
+			JvmParameterizedTypeReference result) {
+		result.setType(createProxy(parameterizedType.getRawType()));
+		Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
+		if (actualTypeArguments.length != 0) {
+			InternalEList<JvmTypeReference> arguments = (InternalEList<JvmTypeReference>)result.getArguments();
+			for (Type actualTypeArgument : actualTypeArguments) {
+				JvmTypeReference argument = createTypeArgument(actualTypeArgument);
+				arguments.addUnique(argument);
+			}
+		}
+		return result;
 	}
 
 	protected JvmTypeReference createArrayTypeReference(Type componentType) {

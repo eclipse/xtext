@@ -13,7 +13,6 @@ import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XNullLiteral
 import org.eclipse.xtext.xbase.XStringLiteral
 import org.eclipse.xtext.xbase.typesystem.arguments.AssignmentFeatureCallArguments
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.junit.Test
 
 /**
@@ -61,8 +60,7 @@ class AssignmentFeatureCallArgumentsTest extends AbstractTestingTypeReferenceOwn
 		val value = body.expressions.head
 		val declaredType = function.directlyInferredOperation.parameters.head?.parameterType
 		if (declaredType !== null) {
-			val converter = new OwnedConverter(this)
-			return new AssignmentFeatureCallArguments(value, converter.toLightweightReference(declaredType))		
+			return new AssignmentFeatureCallArguments(value, toLightweightTypeReference(declaredType))		
 		} else {
 			return new AssignmentFeatureCallArguments(value, null)
 		}

@@ -29,7 +29,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
-import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Assert;
 import org.junit.Test;
@@ -86,9 +85,9 @@ public class SynonmyTypesTest extends AbstractTestingTypeReferenceOwner {
         EList<JvmFormalParameter> _parameters = operation.getParameters();
         JvmFormalParameter _head = IterableExtensions.<JvmFormalParameter>head(_parameters);
         JvmTypeReference _parameterType = _head.getParameterType();
-        _xifexpression = this.toLightweightReference(_parameterType);
+        _xifexpression = this.toLightweightTypeReference(_parameterType);
       } else {
-        _xifexpression = new AnyTypeReference(this);
+        _xifexpression = this.newAnyTypeReference();
       }
       final LightweightTypeReference primary = _xifexpression;
       final HashSet<String> actualSynonyms = CollectionLiterals.<String>newHashSet();

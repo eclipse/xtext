@@ -25,6 +25,7 @@ import org.eclipse.xtext.common.types.JvmDoubleAnnotationValue;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmFloatAnnotationValue;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
+import org.eclipse.xtext.common.types.JvmInnerTypeReference;
 import org.eclipse.xtext.common.types.JvmIntAnnotationValue;
 import org.eclipse.xtext.common.types.JvmLongAnnotationValue;
 import org.eclipse.xtext.common.types.JvmLowerBound;
@@ -85,14 +86,20 @@ class Proxies {
 			}
 			return result;
 		}
+		BinaryTypeSignature outer = type.getOuter();
+		JvmParameterizedTypeReference result = null;
+		if (outer == null) {
+			result = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
+		} else {
+			JvmParameterizedTypeReference outerReference = (JvmParameterizedTypeReference) createTypeReference(outer, typeParameters);
+			result = TypesFactory.eINSTANCE.createJvmInnerTypeReference();
+			((JvmInnerTypeReference) result).setOuter(outerReference);
+		}
+		result.setType(createProxy(type.getTypeErasure(), typeParameters));
 		List<BinaryTypeArgumentSignature> typeArguments = type.getTypeArguments();
 		if (typeArguments.size() == 0) {
-			JvmParameterizedTypeReference result = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
-			result.setType(createProxy(type.getTypeErasure(), typeParameters));
 			return result;
 		} else {
-			JvmParameterizedTypeReference result = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
-			result.setType(createProxy(type.getTypeErasure(), typeParameters));
 			InternalEList<JvmTypeReference> arguments = (InternalEList<JvmTypeReference>) result.getArguments();
 			for (int i = 0; i < typeArguments.size(); i++) {
 				JvmTypeReference argument = createTypeArgument(typeArguments.get(i), typeParameters);

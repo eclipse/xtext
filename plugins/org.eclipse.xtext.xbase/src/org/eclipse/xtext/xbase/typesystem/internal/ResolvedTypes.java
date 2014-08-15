@@ -27,7 +27,6 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -53,8 +52,8 @@ import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
@@ -112,28 +111,28 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		}
 	}
 
-	protected class Owner implements ITypeReferenceOwner {
+	protected class Owner extends StandardTypeReferenceOwner {
 
-		public CommonTypeComputationServices getServices() {
-			return ResolvedTypes.this.getServices();
+		public Owner(CommonTypeComputationServices services, ResourceSet context) {
+			super(services, context);
 		}
 
-		public ResourceSet getContextResourceSet() {
-			return ResolvedTypes.this.getContextResourceSet();
-		}
-
+		@Override
 		public void acceptHint(Object handle, LightweightBoundTypeArgument boundTypeArgument) {
 			ResolvedTypes.this.acceptHint(handle, boundTypeArgument);
 		}
 
+		@Override
 		public List<LightweightBoundTypeArgument> getAllHints(Object handle) {
 			return ResolvedTypes.this.getAllHints(handle);
 		}
 
+		@Override
 		public boolean isResolved(Object handle) {
 			return ResolvedTypes.this.isResolved(handle);
 		}
 		
+		@Override
 		public List<JvmTypeParameter> getDeclaredTypeParameters() {
 			return ResolvedTypes.this.getDeclaredTypeParameters();
 		}
@@ -173,8 +172,8 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		}
 		
 	}
-	
-	private final OwnedConverter converter;
+
+	private final Owner owner;
 	
 	private Set<AbstractDiagnostic> diagnostics;
 	private Map<JvmIdentifiableElement, LightweightTypeReference> types;
@@ -192,7 +191,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	
 	protected ResolvedTypes(Shared shared) {
 		this.shared = shared;
-		this.converter = createConverter();
+		this.owner = new Owner(shared.resolver.getServices(), shared.resolver.getRoot().eResource().getResourceSet());
 	}
 	
 	/**
@@ -223,24 +222,16 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return shared.featureScopeTracker;
 	}
 	
-	protected OwnedConverter getConverter() {
-		return converter;
-	}
-	
 	public ITypeReferenceOwner getReferenceOwner() {
-		return getConverter().getOwner();
-	}
-	
-	protected OwnedConverter createConverter() {
-		return new OwnedConverter(new Owner());
+		return owner;
 	}
 	
 	public ResourceSet getContextResourceSet() {
-		return shared.resolver.getRoot().eResource().getResourceSet();
+		return owner.getContextResourceSet();
 	}
 
 	public CommonTypeComputationServices getServices() {
-		return shared.resolver.getServices();
+		return owner.getServices();
 	}
 
 	public Collection<AbstractDiagnostic> getQueuedDiagnostics() {
@@ -599,7 +590,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			return this;
 		List<LightweightTypeReference> exceptions = Lists.newArrayListWithCapacity(executablesExceptions.size());
 		for(JvmTypeReference exception: executablesExceptions) {
-			exceptions.add(getConverter().toLightweightReference(exception));
+			exceptions.add(getReferenceOwner().toLightweightTypeReference(exception));
 		}
 		return pushExpectedExceptions(exceptions);
 	}
@@ -724,7 +715,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		// mind the conformance hint
 		
 		final LightweightTypeReference actualType;
-		if (type.getTypeArguments().isEmpty()) {
+		if (!type.hasTypeArguments()) {
 			actualType = type.getUpperBoundSubstitute();
 		} else {
 			TypeParameterSubstitutor<?> substitutor = new TypeParameterByUnboundSubstitutor(Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), referenceOwner) {
@@ -909,18 +900,14 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	/* @Nullable */
 	protected LightweightTypeReference doGetDeclaredType(JvmIdentifiableElement identifiable) {
 		if (identifiable instanceof JvmType) {
-			ITypeReferenceOwner owner = getConverter().getOwner();
-			ParameterizedTypeReference result = new ParameterizedTypeReference(owner, (JvmType) identifiable);
-			if (identifiable instanceof JvmTypeParameterDeclarator) {
-				for(JvmTypeParameter param: ((JvmTypeParameterDeclarator) identifiable).getTypeParameters()) {
-					result.addTypeArgument(new ParameterizedTypeReference(owner, param));
-				}
-			}
+			ITypeReferenceOwner owner = getReferenceOwner();
+			LightweightTypeReference result = owner.toLightweightTypeReference((JvmType) identifiable);
 			return result;
 		}
 		JvmTypeReference type = getDeclaredType(identifiable);
 		if (type != null) {
-			LightweightTypeReference result = getConverter().toLightweightReference(type);
+			ITypeReferenceOwner owner = getReferenceOwner();
+			LightweightTypeReference result = owner.toLightweightTypeReference(type);
 			return result;
 		}
 		return null;
@@ -1173,7 +1160,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 				LightweightTypeReference lowerBound = reference.getLowerBound();
 				if (lowerBound instanceof UnboundTypeReference) {
 					if (!handles.add(((UnboundTypeReference) lowerBound).getHandle())) {
-						WildcardTypeReference result = new WildcardTypeReference(getOwner());
+						WildcardTypeReference result = getOwner().newWildcardTypeReference();
 						for(LightweightTypeReference upperBound: reference.getUpperBounds()) {
 							result.addUpperBound(visitTypeArgument(upperBound, visiting));
 						}

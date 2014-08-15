@@ -10,9 +10,7 @@ package org.eclipse.xtend.core.tests.typesystem
 import com.google.inject.Inject
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.xbase.lib.Pair
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider
-import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
 import org.junit.Test
 
 /**
@@ -39,7 +37,7 @@ class SynonmyTypesTest extends AbstractTestingTypeReferenceOwner {
 			typeAndTypeParams.key» p) {}'''
 		val function = function(signature.toString)
 		val operation = function.directlyInferredOperation
-		val primary = if (typeAndTypeParams.key != null) operation.parameters.head.parameterType.toLightweightReference else new AnyTypeReference(this)
+		val primary = if (typeAndTypeParams.key != null) operation.parameters.head.parameterType.toLightweightTypeReference else newAnyTypeReference
 		val actualSynonyms = newHashSet
 		primary.collectSynonymTypes [ type, conformance | actualSynonyms.add(type.simpleName) ]
 		assertEquals(actualSynonyms.toString, expectedSynonyms.length, actualSynonyms.size)

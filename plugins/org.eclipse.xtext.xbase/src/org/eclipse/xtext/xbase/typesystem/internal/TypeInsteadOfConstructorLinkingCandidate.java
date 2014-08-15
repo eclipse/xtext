@@ -72,7 +72,7 @@ public class TypeInsteadOfConstructorLinkingCandidate extends AbstractUnresolvab
 			throw new IllegalStateException();
 		}
 		ITypeReferenceOwner referenceOwner = getResolvedTypes().getReferenceOwner();
-		ParameterizedTypeReference result = new ParameterizedTypeReference(referenceOwner, type);
+		ParameterizedTypeReference result = referenceOwner.newParameterizedTypeReference(type);
 		for(LightweightTypeReference typeArgument: getTypeArguments()) {
 			result.addTypeArgument(typeArgument);
 		}
@@ -153,7 +153,7 @@ public class TypeInsteadOfConstructorLinkingCandidate extends AbstractUnresolvab
 			return Collections.emptyList();
 		List<LightweightTypeReference> result = Lists.newArrayList();
 		for(JvmTypeReference typeArgument: typeArguments) {
-			result.add(getConverter().toLightweightReference(typeArgument));
+			result.add(getState().getReferenceOwner().toLightweightTypeReference(typeArgument));
 		}
 		return result;
 	}

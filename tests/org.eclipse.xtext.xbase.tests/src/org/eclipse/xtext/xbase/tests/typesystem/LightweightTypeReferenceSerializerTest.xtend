@@ -2,28 +2,20 @@ package org.eclipse.xtext.xbase.tests.typesystem
 
 import com.google.inject.Inject
 import java.io.Serializable
+import java.nio.CharBuffer
+import java.util.Iterator
 import java.util.List
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.xbase.compiler.AbstractStringBuilderBasedAppendable
-import org.eclipse.xtext.xbase.lib.Functions
-import org.eclipse.xtext.xbase.lib.Procedures
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
-import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
-import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference
-import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceSerializer
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference
-import org.eclipse.xtext.xbase.typesystem.references.UnknownTypeReference
-import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.junit.Ignore
 import org.junit.Test
-import java.nio.CharBuffer
-import java.util.Iterator
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner
 
 class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCase {
 	
@@ -44,14 +36,14 @@ class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCase {
 	@Test
 	def void testListWildcard() {
 		(List.typeRef => [
-			addTypeArgument(new WildcardTypeReference(owner))
+			addTypeArgument(owner.newWildcardTypeReference)
 		]).assertInXtendAndJava("java.util.List<?>")
 	}
 
 	@Test
 	def void testListUpperBound() {
 		(List.typeRef => [
-			addTypeArgument(new WildcardTypeReference(owner) => [
+			addTypeArgument(owner.newWildcardTypeReference => [
 				addUpperBound(CharSequence.typeRef)
 			])
 		]).assertInXtendAndJava("java.util.List<? extends java.lang.CharSequence>")
@@ -60,7 +52,7 @@ class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCase {
 	@Test
 	def void testListUpperBoundObject() {
 		(List.typeRef => [
-			addTypeArgument(new WildcardTypeReference(owner) => [
+			addTypeArgument(owner.newWildcardTypeReference => [
 				addUpperBound(Object.typeRef)
 			])
 		]).assertInXtendAndJava("java.util.List<?>")
@@ -69,7 +61,7 @@ class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCase {
 	@Test
 	def void testListUpperBounds() {
 		(List.typeRef => [
-			addTypeArgument(new WildcardTypeReference(owner) => [
+			addTypeArgument(owner.newWildcardTypeReference => [
 				addUpperBound(CharSequence.typeRef)
 				addUpperBound(Serializable.typeRef)
 			])
@@ -79,7 +71,7 @@ class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCase {
 	@Test
 	def void testListUpperBoundsIncludingObject() {
 		(List.typeRef => [
-			addTypeArgument(new WildcardTypeReference(owner) => [
+			addTypeArgument(owner.newWildcardTypeReference => [
 				addUpperBound(CharSequence.typeRef)
 				addUpperBound(Object.typeRef)
 				addUpperBound(Serializable.typeRef)
@@ -90,7 +82,7 @@ class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCase {
 	@Test
 	def void testListLowerBound() {
 		(List.typeRef => [
-			addTypeArgument(new WildcardTypeReference(owner) => [
+			addTypeArgument(owner.newWildcardTypeReference => [
 				lowerBound = CharSequence.typeRef
 			])
 		]).assertInXtendAndJava("java.util.List<? super java.lang.CharSequence>")
@@ -99,7 +91,7 @@ class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCase {
 	@Test
 	def void testListLowerAndUpperBound() {
 		(List.typeRef => [
-			addTypeArgument(new WildcardTypeReference(owner) => [
+			addTypeArgument(owner.newWildcardTypeReference => [
 				lowerBound = CharSequence.typeRef
 				addUpperBound(Serializable.typeRef)
 			])
@@ -108,20 +100,20 @@ class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCase {
 
 	@Test
 	def void testArray() {
-		new ArrayTypeReference(owner, Object.typeRef)
+		owner.newArrayTypeReference(Object.typeRef)
 			.assertInXtendAndJava("java.lang.Object[]")
 	}
 
 	@Test
 	def void testArray2() {
-		new ArrayTypeReference(owner, new ArrayTypeReference(owner, Object.typeRef))
+		owner.newArrayTypeReference(owner.newArrayTypeReference(Object.typeRef))
 			.assertInXtendAndJava("java.lang.Object[][]")
 	}
 
 	@Test
 	def void testArrayGeneric() {
-		new ArrayTypeReference(owner, List.typeRef => [
-			addTypeArgument(new WildcardTypeReference(owner) => [
+		owner.newArrayTypeReference(List.typeRef => [
+			addTypeArgument(owner.newWildcardTypeReference => [
 				lowerBound = CharSequence.typeRef
 			])
 		]).assertInXtendAndJava("java.util.List<? super java.lang.CharSequence>[]")
@@ -129,19 +121,19 @@ class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCase {
 
 	@Test
 	def void testAnyType() {
-		new AnyTypeReference(owner).assertInXtendAndJava("java.lang.Object")
+		owner.newAnyTypeReference.assertInXtendAndJava("java.lang.Object")
 	}
 
 	@Test
 	def void testFunctionType() {
-		new FunctionTypeReference(owner, Functions.Function0.type)
+		owner.newFunctionTypeReference(Functions.Function0.type)
 			.assertInXtend("()=>void")
 			.assertInJava("org.eclipse.xtext.xbase.lib.Functions$Function0")
 	}
 
 	@Test
 	def void testFunctionType1() {
-		(new FunctionTypeReference(owner, Functions.Function0.type) => [
+		(owner.newFunctionTypeReference(Functions.Function0.type) => [
 			returnType = String.typeRef
 			addTypeArgument(String.typeRef)
 		])
@@ -151,7 +143,7 @@ class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCase {
 
 	@Test
 	def void testFunctionType2() {
-		(new FunctionTypeReference(owner, Functions.Function1.type) => [
+		(owner.newFunctionTypeReference(Functions.Function1.type) => [
 			addParameterType(String.typeRef)
 			addTypeArgument(Void.typeRef)
 			addTypeArgument(String.typeRef)
@@ -162,7 +154,7 @@ class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCase {
 
 	@Test
 	def void testFunctionType3() {
-		(new FunctionTypeReference(owner, Functions.Function1.type) => [
+		(owner.newFunctionTypeReference(Functions.Function1.type) => [
 			returnType = Object.typeRef
 			addTypeArgument(Object.typeRef)
 			addParameterType(String.typeRef)
@@ -174,19 +166,19 @@ class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCase {
 
 	@Test
 	def void testFunctionType4() {
-		(new FunctionTypeReference(owner, Functions.Function3.type) => [
+		(owner.newFunctionTypeReference(Functions.Function3.type) => [
 			returnType = Object.typeRef
 			addTypeArgument(Object.typeRef)
 			addParameterType(String.typeRef)
 			addTypeArgument(String.typeRef)
 			val listOfCharSequence = List.typeRef => [
-				addTypeArgument(new WildcardTypeReference(owner) => [
+				addTypeArgument(owner.newWildcardTypeReference => [
 					lowerBound = CharSequence.typeRef
 				])
 			]
 			addParameterType(listOfCharSequence)
 			addTypeArgument(listOfCharSequence)
-			val arrayOfObject = new ArrayTypeReference(owner, Object.typeRef)
+			val arrayOfObject = owner.newArrayTypeReference(Object.typeRef)
 			addParameterType(arrayOfObject)
 			addTypeArgument(arrayOfObject)
 		])
@@ -196,14 +188,14 @@ class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCase {
 
 	@Test
 	def void testFunctionType5() {
-		new FunctionTypeReference(owner, Procedures.Procedure0.type)
+		owner.newFunctionTypeReference(Procedures.Procedure0.type)
 			.assertInXtend("()=>void")
 			.assertInJava("org.eclipse.xtext.xbase.lib.Procedures$Procedure0")
 	}
 
 	@Test
 	def void testFunctionType6() {
-		(new FunctionTypeReference(owner, Procedures.Procedure1.type) => [
+		(owner.newFunctionTypeReference(Procedures.Procedure1.type) => [
 			addParameterType(String.typeRef)
 			addTypeArgument(String.typeRef)
 		])
@@ -213,17 +205,17 @@ class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCase {
 
 	@Test
 	def void testFunctionType7() {
-		(new FunctionTypeReference(owner, Procedures.Procedure3.type) => [
+		(owner.newFunctionTypeReference(Procedures.Procedure3.type) => [
 			addParameterType(String.typeRef)
 			addTypeArgument(String.typeRef)
 			val listOfCharSequence = List.typeRef => [
-				addTypeArgument(new WildcardTypeReference(owner) => [
+				addTypeArgument(owner.newWildcardTypeReference => [
 					lowerBound = CharSequence.typeRef
 				])
 			]
 			addParameterType(listOfCharSequence)
 			addTypeArgument(listOfCharSequence)
-			val arrayOfObject = new ArrayTypeReference(owner, Object.typeRef)
+			val arrayOfObject = owner.newArrayTypeReference(Object.typeRef)
 			addParameterType(arrayOfObject)
 			addTypeArgument(arrayOfObject)
 		])
@@ -233,14 +225,14 @@ class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCase {
 	
 	@Test
 	def void testFunctionType8() {
-		new FunctionTypeReference(owner, Runnable.type) 
+		owner.newFunctionTypeReference(Runnable.type) 
 			.assertInXtend("()=>void")
 			.assertInJava("java.lang.Runnable")
 	}
 	
 	@Test
 	def void testFunctionType9() {
-		(new FunctionTypeReference(owner, Readable.type) => [
+		(owner.newFunctionTypeReference(Readable.type) => [
 			addParameterType(CharBuffer.typeRef)
 			returnType = Integer.TYPE.typeRef
 		]) 
@@ -250,7 +242,7 @@ class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCase {
 	
 	@Test
 	def void testFunctionType10() {
-		(new FunctionTypeReference(owner, Iterable.type) => [
+		(owner.newFunctionTypeReference(Iterable.type) => [
 			addTypeArgument(String.typeRef)
 			returnType = Iterator.typeRef => [
 				addTypeArgument(String.typeRef)
@@ -268,12 +260,12 @@ class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCase {
 
 	@Test
 	def void testUnknownTypeReference() {
-		new UnknownTypeReference(owner, 'Foo').assertInXtendAndJava('Foo')
+		owner.newUnknownTypeReference('Foo').assertInXtendAndJava('Foo')
 	}
 
 	@Test
 	def void testUnknownTypeReference1() {
-		new UnknownTypeReference(owner).assertInXtendAndJava('Object')
+		owner.newUnknownTypeReference().assertInXtendAndJava('Object')
 	}
 
 
@@ -282,7 +274,7 @@ class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCase {
 	}	
 	
 	protected def typeRef(Class<?> type) {
-		new ParameterizedTypeReference(owner, type.type)
+		owner.newParameterizedTypeReference(type.type)
 	}
 	
 	protected def type(Class<?> type) {
@@ -302,7 +294,7 @@ class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCase {
 		assertIn(ref, expectation, true)
 	}
 	
-	protected def assertIn(LightweightTypeReference ref, java.lang.String expectation, boolean isJava) {
+	protected def assertIn(LightweightTypeReference ref, String expectation, boolean isJava) {
 		val appender = new TestAppender(isJava)
 		val serializer = new LightweightTypeReferenceSerializer(appender)
 		ref.accept(serializer)
