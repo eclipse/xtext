@@ -59,7 +59,7 @@ public class UnresolvableConstructorCall extends AbstractUnresolvableReferenceWi
 			return Collections.emptyList();
 		List<LightweightTypeReference> result = Lists.newArrayList();
 		for(JvmTypeReference typeArgument: typeArguments) {
-			result.add(getConverter().toLightweightReference(typeArgument));
+			result.add(getState().getReferenceOwner().toLightweightTypeReference(typeArgument));
 		}
 		return result;
 	}

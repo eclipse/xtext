@@ -14,11 +14,13 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -45,8 +47,14 @@ public class ResolvedTypesTest extends AbstractXbaseTestCase {
   
   @Before
   public void initResolvedTypes() {
-    PublicResolvedTypes _publicResolvedTypes = new PublicResolvedTypes(this.resolver);
-    this.testMe = _publicResolvedTypes;
+    try {
+      final XExpression expression = this.expression("null");
+      this.resolver.initializeFrom(expression);
+      PublicResolvedTypes _publicResolvedTypes = new PublicResolvedTypes(this.resolver);
+      this.testMe = _publicResolvedTypes;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test

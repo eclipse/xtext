@@ -20,6 +20,8 @@ import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.InnerFunctionTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.InnerTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
@@ -196,6 +198,18 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 					&& !declaration.getTypeArguments().isEmpty()) {
 				doVisitMatchingTypeParameters(reference, declaration);
 			}
+		}
+		
+		@Override
+		protected void doVisitInnerTypeReference(InnerTypeReference reference, ParameterizedTypeReference declaration) {
+			super.doVisitInnerTypeReference(reference, declaration);
+			outerVisit(declaration, reference.getOuter());
+		}
+		
+		@Override
+		protected void doVisitInnerFunctionTypeReference(InnerFunctionTypeReference reference, ParameterizedTypeReference declaration) {
+			super.doVisitInnerFunctionTypeReference(reference, declaration);
+			outerVisit(declaration, reference.getOuter());
 		}
 
 		@Override

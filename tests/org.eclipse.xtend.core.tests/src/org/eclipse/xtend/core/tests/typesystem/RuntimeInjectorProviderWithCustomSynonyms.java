@@ -56,7 +56,7 @@ public class RuntimeInjectorProviderWithCustomSynonyms extends RuntimeInjectorPr
 			ITypeReferenceOwner owner = bigInteger.getOwner();
 			JvmType bigDecimal = owner.getServices().getTypeReferences().findDeclaredType(BigDecimal.class, owner.getContextResourceSet());
 			if (bigDecimal != null) {
-				ParameterizedTypeReference result = new ParameterizedTypeReference(owner, bigDecimal);
+				ParameterizedTypeReference result = owner.newParameterizedTypeReference(bigDecimal);
 				return announceSynonym(result, ConformanceFlags.DEMAND_CONVERSION, acceptor);
 			}
 			return true;

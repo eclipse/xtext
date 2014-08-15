@@ -50,5 +50,38 @@ class CompilerBug437365Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
+	@Test
+	def test_02() {
+		assertCompilesTo('''
+			class Test {
+			    def static void main(String[] args) {
+			        val arrayOfList = newArrayOfSize(4);
+			        arrayOfList.set(0, new java.util.LinkedList())
+			        arrayOfList.get(0).add(new String())
+			        val String a = arrayOfList.get(0).get(0)
+			        println(a)
+			    }	
+			}
+		''', '''
+			import java.util.LinkedList;
+			import org.eclipse.xtext.xbase.lib.InputOutput;
+			
+			@SuppressWarnings("all")
+			public class Test {
+			  public static void main(final String[] args) {
+			    final LinkedList<String>[] arrayOfList = new LinkedList[4];
+			    LinkedList<String> _linkedList = new LinkedList<String>();
+			    arrayOfList[0] = _linkedList;
+			    LinkedList<String> _get = arrayOfList[0];
+			    String _string = new String();
+			    _get.add(_string);
+			    LinkedList<String> _get_1 = arrayOfList[0];
+			    final String a = _get_1.get(0);
+			    InputOutput.<String>println(a);
+			  }
+			}
+		''')
+	}
+	
 	
 }

@@ -88,11 +88,11 @@ public class ArrayTypes {
 			if (parameterizedIterable.isRawType()) {
 				// return Object[]
 				LightweightTypeReference objectType = parameterizedIterable.getSuperTypes().get(0);
-				ArrayTypeReference array = new ArrayTypeReference(owner, objectType);
+				ArrayTypeReference array = owner.newArrayTypeReference(objectType);
 				return array;
 			} else {
 				LightweightTypeReference componentType = parameterizedIterable.getTypeArguments().get(0).getUpperBoundSubstitute();
-				ArrayTypeReference array = new ArrayTypeReference(owner, componentType);
+				ArrayTypeReference array = owner.newArrayTypeReference(componentType);
 				return array;
 			}
 		}
@@ -102,11 +102,12 @@ public class ArrayTypes {
 	public LightweightTypeReference convertToList(ArrayTypeReference type) {
 		LightweightTypeReference componentType = type.getComponentType();
 		LightweightTypeReference wrapper = componentType.getWrapperTypeIfPrimitive();
-		JvmType listType = type.getServices().getTypeReferences().findDeclaredType(List.class, type.getOwner().getContextResourceSet());
+		ITypeReferenceOwner owner = type.getOwner();
+		JvmType listType = type.getServices().getTypeReferences().findDeclaredType(List.class, owner.getContextResourceSet());
 		if (listType == null) {
-			return new UnknownTypeReference(type.getOwner(), List.class.getName());
+			return owner.newUnknownTypeReference(List.class.getName());
 		}
-		ParameterizedTypeReference result = new ParameterizedTypeReference(type.getOwner(), listType);
+		ParameterizedTypeReference result = owner.newParameterizedTypeReference(listType);
 		result.addTypeArgument(wrapper);
 		return result;
 	}

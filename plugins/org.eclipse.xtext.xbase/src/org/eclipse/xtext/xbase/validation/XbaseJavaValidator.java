@@ -108,12 +108,15 @@ import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.InnerFunctionTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.InnerTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceFactory;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithNonNullResult;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithResult;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.util.TypesOrderUtil;
@@ -373,8 +376,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	}
 	
 	protected LightweightTypeReference toLightweightTypeReference(JvmTypeReference typeRef, boolean keepUnboundWildcardInformation) {
-		OwnedConverter converter = new OwnedConverter(new StandardTypeReferenceOwner(getServices(), typeRef), keepUnboundWildcardInformation);
-		LightweightTypeReference reference = converter.toLightweightReference(typeRef);
+		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(getServices(), typeRef);
+		LightweightTypeReferenceFactory factory = new LightweightTypeReferenceFactory(owner, keepUnboundWildcardInformation);
+		LightweightTypeReference reference = factory.toLightweightReference(typeRef);
 		return reference;
 	}
 	
@@ -844,7 +848,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	}
 
 	protected boolean containsTypeArgs(LightweightTypeReference instanceOfType) {
-		return instanceOfType.accept(new TypeReferenceVisitorWithNonNullResult<Boolean>() {
+		return instanceOfType.accept(new TypeReferenceVisitorWithResult<Boolean>() {
 			@Override
 			protected Boolean doVisitTypeReference(LightweightTypeReference reference) {
 				return Boolean.FALSE;
@@ -863,6 +867,19 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 				}
 				return Boolean.FALSE;
 			}
+			
+			@Override
+			protected Boolean doVisitInnerTypeReference(InnerTypeReference reference) {
+				Boolean result = reference.getOuter().accept(this) && doVisitParameterizedTypeReference(reference);
+				return result;
+			}
+			
+			@Override
+			protected Boolean doVisitInnerFunctionTypeReference(InnerFunctionTypeReference reference) {
+				Boolean result = reference.getOuter().accept(this) && doVisitParameterizedTypeReference(reference);
+				return result;
+			}
+			
 			@Override
 			protected Boolean doVisitArrayTypeReference(ArrayTypeReference reference) {
 				return reference.getComponentType().accept(this);
@@ -1457,14 +1474,14 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		if (isIgnored(IssueCodes.UNREACHABLE_CASE)) {
 			return;
 		}
-		OwnedConverter converter = new OwnedConverter(new StandardTypeReferenceOwner(getServices(), expression));
+		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(getServices(), expression);
 		List<LightweightTypeReference> previousTypeReferences = new ArrayList<LightweightTypeReference>();
 		for (XCasePart casePart : expression.getCases()) {
 			JvmTypeReference typeGuard = casePart.getTypeGuard();
 			if (typeGuard == null) {
 				continue;
 			}
-			LightweightTypeReference actualType = converter.toLightweightReference(typeGuard);
+			LightweightTypeReference actualType = owner.toLightweightTypeReference(typeGuard);
 			if (actualType == null) {
 				continue;
 			}
@@ -1490,7 +1507,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			}
 		}
 		List<XExpression> ifParts = collectIfParts(expression, new ArrayList<XExpression>());
-		OwnedConverter converter = new OwnedConverter(new StandardTypeReferenceOwner(getServices(), expression));
+		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(getServices(), expression);
 		Multimap<JvmIdentifiableElement, LightweightTypeReference> previousTypeReferences = HashMultimap.create();
 		for (XExpression ifPart : ifParts) {
 			if (!(ifPart instanceof XInstanceOfExpression)) {
@@ -1508,7 +1525,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 				continue;
 			}
 			JvmTypeReference type = instanceOfExpression.getType();
-			LightweightTypeReference actualType = converter.toLightweightReference(type);
+			LightweightTypeReference actualType = owner.toLightweightTypeReference(type);
 			if (actualType == null) {
 				continue;
 			}
@@ -1530,10 +1547,10 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Check
 	public void checkCatchClausesOrder(XTryCatchFinallyExpression expression) {
-		OwnedConverter converter = new OwnedConverter(new StandardTypeReferenceOwner(getServices(), expression));
+		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(getServices(), expression);
 		List<LightweightTypeReference> previousTypeReferences = new ArrayList<LightweightTypeReference>();
 		for (XCatchClause catchClause : expression.getCatchClauses()) {
-			LightweightTypeReference actualTypeReference = converter.toLightweightReference(catchClause.getDeclaredParam().getParameterType());
+			LightweightTypeReference actualTypeReference = owner.toLightweightTypeReference(catchClause.getDeclaredParam().getParameterType());
 			if (actualTypeReference == null) {
 				continue;
 			}

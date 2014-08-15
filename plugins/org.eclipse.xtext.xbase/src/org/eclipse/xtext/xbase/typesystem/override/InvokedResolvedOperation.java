@@ -19,11 +19,10 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
@@ -62,7 +61,7 @@ public class InvokedResolvedOperation extends BottomResolvedOperation {
 				// static feature call
 				JvmOperation operation = (JvmOperation) featureCall.getFeature();
 				JvmDeclaredType declaringType = operation.getDeclaringType();
-				return new ParameterizedTypeReference(owner, declaringType);
+				return owner.newParameterizedTypeReference(declaringType);
 			}
 			return resolvedTypes.getActualType(receiver);
 		}

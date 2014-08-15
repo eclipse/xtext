@@ -17,7 +17,6 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -57,7 +56,7 @@ public class ExtensionScopeHelper {
 		if (!(rawParameterType instanceof JvmTypeParameter)) {
 			if (rawArgumentType.isResolved()) {
 				// short circuit - limit extension scope entries to real candidates
-				LightweightTypeReference parameterTypeReference = new OwnedConverter(rawArgumentType.getOwner()).toRawLightweightReference(rawParameterType);
+				LightweightTypeReference parameterTypeReference = rawArgumentType.getOwner().toPlainTypeReference(rawParameterType);
 				if (parameterTypeReference.isResolved() && !parameterTypeReference.isAssignableFrom(rawArgumentType)) {
 					return false;
 				}
@@ -73,7 +72,7 @@ public class ExtensionScopeHelper {
 	
 	private boolean isArrayTypeMismatch(LightweightTypeReference rawReceiverType, JvmType rawParameterType) {
 		if (rawReceiverType.isArray()) {
-			LightweightTypeReference parameterTypeReference = new OwnedConverter(rawReceiverType.getOwner()).toRawLightweightReference(rawParameterType);
+			LightweightTypeReference parameterTypeReference = rawReceiverType.getOwner().toPlainTypeReference(rawParameterType);
 			if (parameterTypeReference.getSuperType(Iterable.class) == null && isArrayTypeMismatch(rawReceiverType, parameterTypeReference)) {
 				return true;
 			}

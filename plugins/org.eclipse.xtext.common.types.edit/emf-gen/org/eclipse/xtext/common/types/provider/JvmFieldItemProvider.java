@@ -347,6 +347,11 @@ public class JvmFieldItemProvider extends JvmFeatureItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.JVM_FIELD__TYPE,
 				 TypesFactory.eINSTANCE.createJvmUnknownTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_FIELD__TYPE,
+				 TypesFactory.eINSTANCE.createJvmInnerTypeReference()));
 	}
 
 }

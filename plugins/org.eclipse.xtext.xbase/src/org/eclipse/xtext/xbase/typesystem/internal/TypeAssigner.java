@@ -10,10 +10,8 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeAssigner;
-import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -40,21 +38,17 @@ public class TypeAssigner implements ITypeAssigner {
 		if (actualType != null) {
 			state.getResolvedTypes().setType(element, actualType);
 		} else {
-			state.getResolvedTypes().setType(element, new AnyTypeReference(state.getReferenceOwner()));
+			state.getResolvedTypes().setType(element, state.getReferenceOwner().newAnyTypeReference());
 		}
 		if (addToChildScope)
 			state.addLocalToCurrentScope(element);
 	}
 
-	protected OwnedConverter getConverter() {
-		return state.getResolvedTypes().getConverter();
-	}
-	
 	public ITypeReferenceOwner getReferenceOwner() {
 		return state.getReferenceOwner();
 	}
 
 	public LightweightTypeReference toLightweightTypeReference(JvmTypeReference reference) {
-		return getConverter().toLightweightReference(reference);
+		return getReferenceOwner().toLightweightTypeReference(reference);
 	}
 }

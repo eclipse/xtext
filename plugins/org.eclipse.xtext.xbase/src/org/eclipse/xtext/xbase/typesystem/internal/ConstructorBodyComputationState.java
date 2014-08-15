@@ -38,7 +38,7 @@ public class ConstructorBodyComputationState extends AbstractLogicalContainerAwa
 	
 	@Override
 	protected LightweightTypeReference getExpectedType() {
-		return getResolvedTypes().getConverter().toLightweightReference(getTypeReferences().getTypeForName(Void.TYPE, getMember()));
+		return getResolvedTypes().getReferenceOwner().toLightweightTypeReference(getTypeReferences().getTypeForName(Void.TYPE, getMember()));
 	}
 	
 	@Override

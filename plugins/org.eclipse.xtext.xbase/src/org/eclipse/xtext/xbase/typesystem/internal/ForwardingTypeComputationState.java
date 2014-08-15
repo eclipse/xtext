@@ -30,7 +30,6 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 /**
@@ -187,10 +186,6 @@ public abstract class ForwardingTypeComputationState implements ITypeComputation
 
 	public ITypeReferenceOwner getReferenceOwner() {
 		return delegate.getReferenceOwner();
-	}
-
-	public OwnedConverter getConverter() {
-		return delegate.getConverter();
 	}
 
 	public UnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter typeParameter) {

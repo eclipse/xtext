@@ -689,7 +689,17 @@ ruleJvmParameterizedTypeReference :
 		'<'
 		) => '<' ) ruleJvmArgumentTypeReference (
 			',' ruleJvmArgumentTypeReference
-		)* '>'
+		)* '>' (
+			( (
+			'.'
+			) => '.' ) ruleValidID (
+				( (
+				'<'
+				) => '<' ) ruleJvmArgumentTypeReference (
+					',' ruleJvmArgumentTypeReference
+				)* '>'
+			)?
+		)*
 	)?
 ;
 

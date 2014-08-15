@@ -12,8 +12,8 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -22,8 +22,8 @@ public class ReorderedVarArgFeatureCallArguments extends ReorderedFeatureCallArg
 
 	public ReorderedVarArgFeatureCallArguments(List<XExpression> arguments, List<JvmFormalParameter> parameters,
 			List<XExpression> shiftedArguments, List<JvmFormalParameter> shiftedParameters, boolean hasReceiver,
-			OwnedConverter converter) {
-		super(arguments, parameters, shiftedArguments, shiftedParameters, hasReceiver, converter);
+			ITypeReferenceOwner owner) {
+		super(arguments, parameters, shiftedArguments, shiftedParameters, hasReceiver, owner);
 	}
 	
 	@Override
