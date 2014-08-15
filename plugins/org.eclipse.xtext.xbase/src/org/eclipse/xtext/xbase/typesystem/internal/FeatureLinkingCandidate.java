@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -99,7 +100,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	protected void initializeMapping(JvmTypeParameter typeParameter, Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> result) {
 		ITypeReferenceOwner owner = getState().getReferenceOwner();
 		if (typeParameter.getDeclarator() instanceof JvmType && owner.getDeclaredTypeParameters().contains(typeParameter)) {
-			ParameterizedTypeReference typeReference = new ParameterizedTypeReference(owner, typeParameter);
+			LightweightTypeReference typeReference = owner.newParameterizedTypeReference(typeParameter);
 			result.put(typeParameter, new LightweightMergedBoundTypeArgument(typeReference, VarianceInfo.INVARIANT));
 		} else {
 			super.initializeMapping(typeParameter, result);
@@ -779,7 +780,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	@Override
 	protected void resolveAgainstActualType(LightweightTypeReference declaredType, LightweightTypeReference actualType, final AbstractTypeComputationState state) {
 		super.resolveAgainstActualType(declaredType, actualType, state);
-		if (!isStatic() || ((!actualType.getTypeArguments().isEmpty() || actualType.isArray()) && getDeclaredTypeParameters().isEmpty())) {
+		if (!isStatic() || ((actualType.hasTypeArguments() || actualType.isArray()) && getDeclaredTypeParameters().isEmpty())) {
 			DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(state.getReferenceOwner());
 			collector.processPairedReferences(declaredType, actualType);
 		}
@@ -790,8 +791,8 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	}
 	
 	@Override
-	protected List<LightweightTypeReference> getSyntacticTypeArguments() {
-		return Lists.transform(getFeatureCall().getTypeArguments(), getState().getResolvedTypes().getConverter());
+	protected List<JvmTypeReference> getPlainSyntacticTypeArguments() {
+		return getFeatureCall().getTypeArguments();
 	}
 	
 	@Override
@@ -955,7 +956,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	@Override
 	protected LightweightTypeReference getDeclaredType(JvmIdentifiableElement feature) {
 		if (feature instanceof JvmConstructor) {
-			return getState().getConverter().toLightweightReference(getState().getTypeReferences().getTypeForName(Void.TYPE, feature));
+			return getState().getReferenceOwner().toLightweightTypeReference(getState().getTypeReferences().getTypeForName(Void.TYPE, feature));
 		}
 		/*
 		 * The actual result type is Class<? extends |X|> where |X| is the erasure of 
@@ -973,9 +974,10 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 			if (rawTypes.isEmpty()) {
 				return super.getDeclaredType(feature);
 			}
-			ParameterizedTypeReference result = new ParameterizedTypeReference(receiverType.getOwner(), ((JvmOperation) feature).getReturnType().getType());
-			WildcardTypeReference wildcard = new WildcardTypeReference(receiverType.getOwner());
-			wildcard.addUpperBound(new ParameterizedTypeReference(receiverType.getOwner(), rawTypes.get(0)));
+			ITypeReferenceOwner owner = receiverType.getOwner();
+			ParameterizedTypeReference result = owner.newParameterizedTypeReference(((JvmOperation) feature).getReturnType().getType());
+			WildcardTypeReference wildcard = owner.newWildcardTypeReference();
+			wildcard.addUpperBound(owner.toPlainTypeReference(rawTypes.get(0)));
 			result.addTypeArgument(wildcard);
 			return result;
 		}

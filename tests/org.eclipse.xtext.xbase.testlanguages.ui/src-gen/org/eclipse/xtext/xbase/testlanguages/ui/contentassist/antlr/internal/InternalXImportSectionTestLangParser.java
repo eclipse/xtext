@@ -6770,11 +6770,11 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
                 {
                 int LA3_1 = input.LA(2);
 
-                if ( (LA3_1==13) ) {
-                    alt3=1;
-                }
-                else if ( (LA3_1==EOF||(LA3_1>=RULE_ID && LA3_1<=RULE_STRING)||(LA3_1>=14 && LA3_1<=50)||(LA3_1>=53 && LA3_1<=81)||(LA3_1>=84 && LA3_1<=85)||(LA3_1>=87 && LA3_1<=88)) ) {
+                if ( (LA3_1==EOF||(LA3_1>=RULE_ID && LA3_1<=RULE_STRING)||(LA3_1>=14 && LA3_1<=50)||(LA3_1>=53 && LA3_1<=81)||(LA3_1>=84 && LA3_1<=85)||(LA3_1>=87 && LA3_1<=88)) ) {
                     alt3=2;
+                }
+                else if ( (LA3_1==13) ) {
+                    alt3=1;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
@@ -6789,11 +6789,11 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
                 {
                 int LA3_2 = input.LA(2);
 
-                if ( (LA3_2==13) ) {
-                    alt3=1;
-                }
-                else if ( (LA3_2==EOF||(LA3_2>=RULE_ID && LA3_2<=RULE_STRING)||(LA3_2>=14 && LA3_2<=50)||(LA3_2>=53 && LA3_2<=81)||(LA3_2>=84 && LA3_2<=85)||(LA3_2>=87 && LA3_2<=88)) ) {
+                if ( (LA3_2==EOF||(LA3_2>=RULE_ID && LA3_2<=RULE_STRING)||(LA3_2>=14 && LA3_2<=50)||(LA3_2>=53 && LA3_2<=81)||(LA3_2>=84 && LA3_2<=85)||(LA3_2>=87 && LA3_2<=88)) ) {
                     alt3=2;
+                }
+                else if ( (LA3_2==13) ) {
+                    alt3=1;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
@@ -6827,11 +6827,11 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
                 {
                 int LA3_4 = input.LA(2);
 
-                if ( (LA3_4==EOF||(LA3_4>=RULE_ID && LA3_4<=RULE_STRING)||(LA3_4>=14 && LA3_4<=50)||(LA3_4>=53 && LA3_4<=81)||(LA3_4>=84 && LA3_4<=85)||(LA3_4>=87 && LA3_4<=88)) ) {
-                    alt3=2;
-                }
-                else if ( (LA3_4==13) ) {
+                if ( (LA3_4==13) ) {
                     alt3=1;
+                }
+                else if ( (LA3_4==EOF||(LA3_4>=RULE_ID && LA3_4<=RULE_STRING)||(LA3_4>=14 && LA3_4<=50)||(LA3_4>=53 && LA3_4<=81)||(LA3_4>=84 && LA3_4<=85)||(LA3_4>=87 && LA3_4<=88)) ) {
+                    alt3=2;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
@@ -9560,11 +9560,11 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
             if ( (LA22_0==57) ) {
                 int LA22_1 = input.LA(2);
 
-                if ( (LA22_1==60) ) {
-                    alt22=2;
-                }
-                else if ( (LA22_1==58) ) {
+                if ( (LA22_1==58) ) {
                     alt22=1;
+                }
+                else if ( (LA22_1==60) ) {
+                    alt22=2;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
@@ -45076,17 +45076,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1__3"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15719:1: rule__JvmParameterizedTypeReference__Group_1__3 : rule__JvmParameterizedTypeReference__Group_1__3__Impl ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15719:1: rule__JvmParameterizedTypeReference__Group_1__3 : rule__JvmParameterizedTypeReference__Group_1__3__Impl rule__JvmParameterizedTypeReference__Group_1__4 ;
     public final void rule__JvmParameterizedTypeReference__Group_1__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15723:1: ( rule__JvmParameterizedTypeReference__Group_1__3__Impl )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15724:2: rule__JvmParameterizedTypeReference__Group_1__3__Impl
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15723:1: ( rule__JvmParameterizedTypeReference__Group_1__3__Impl rule__JvmParameterizedTypeReference__Group_1__4 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15724:2: rule__JvmParameterizedTypeReference__Group_1__3__Impl rule__JvmParameterizedTypeReference__Group_1__4
             {
             pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__3__Impl_in_rule__JvmParameterizedTypeReference__Group_1__331668);
             rule__JvmParameterizedTypeReference__Group_1__3__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__4_in_rule__JvmParameterizedTypeReference__Group_1__331671);
+            rule__JvmParameterizedTypeReference__Group_1__4();
 
             state._fsp--;
             if (state.failed) return ;
@@ -45109,22 +45114,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1__3__Impl"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15730:1: rule__JvmParameterizedTypeReference__Group_1__3__Impl : ( '>' ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15731:1: rule__JvmParameterizedTypeReference__Group_1__3__Impl : ( '>' ) ;
     public final void rule__JvmParameterizedTypeReference__Group_1__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15734:1: ( ( '>' ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15735:1: ( '>' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15735:1: ( ( '>' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15736:1: ( '>' )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15735:1: ( '>' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15736:1: '>'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15736:1: ( '>' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15737:1: '>'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getGreaterThanSignKeyword_1_3()); 
             }
-            match(input,26,FOLLOW_26_in_rule__JvmParameterizedTypeReference__Group_1__3__Impl31696); if (state.failed) return ;
+            match(input,26,FOLLOW_26_in_rule__JvmParameterizedTypeReference__Group_1__3__Impl31699); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getJvmParameterizedTypeReferenceAccess().getGreaterThanSignKeyword_1_3()); 
             }
@@ -45149,22 +45154,136 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
     // $ANTLR end "rule__JvmParameterizedTypeReference__Group_1__3__Impl"
 
 
+    // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1__4"
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15750:1: rule__JvmParameterizedTypeReference__Group_1__4 : rule__JvmParameterizedTypeReference__Group_1__4__Impl ;
+    public final void rule__JvmParameterizedTypeReference__Group_1__4() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15754:1: ( rule__JvmParameterizedTypeReference__Group_1__4__Impl )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15755:2: rule__JvmParameterizedTypeReference__Group_1__4__Impl
+            {
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__4__Impl_in_rule__JvmParameterizedTypeReference__Group_1__431730);
+            rule__JvmParameterizedTypeReference__Group_1__4__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__JvmParameterizedTypeReference__Group_1__4"
+
+
+    // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1__4__Impl"
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15761:1: rule__JvmParameterizedTypeReference__Group_1__4__Impl : ( ( rule__JvmParameterizedTypeReference__Group_1_4__0 )* ) ;
+    public final void rule__JvmParameterizedTypeReference__Group_1__4__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15765:1: ( ( ( rule__JvmParameterizedTypeReference__Group_1_4__0 )* ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15766:1: ( ( rule__JvmParameterizedTypeReference__Group_1_4__0 )* )
+            {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15766:1: ( ( rule__JvmParameterizedTypeReference__Group_1_4__0 )* )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15767:1: ( rule__JvmParameterizedTypeReference__Group_1_4__0 )*
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getGroup_1_4()); 
+            }
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15768:1: ( rule__JvmParameterizedTypeReference__Group_1_4__0 )*
+            loop110:
+            do {
+                int alt110=2;
+                int LA110_0 = input.LA(1);
+
+                if ( (LA110_0==43) ) {
+                    int LA110_2 = input.LA(2);
+
+                    if ( (LA110_2==RULE_ID) ) {
+                        int LA110_3 = input.LA(3);
+
+                        if ( (synpred153_InternalXImportSectionTestLang()) ) {
+                            alt110=1;
+                        }
+
+
+                    }
+
+
+                }
+
+
+                switch (alt110) {
+            	case 1 :
+            	    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15768:2: rule__JvmParameterizedTypeReference__Group_1_4__0
+            	    {
+            	    pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4__0_in_rule__JvmParameterizedTypeReference__Group_1__4__Impl31757);
+            	    rule__JvmParameterizedTypeReference__Group_1_4__0();
+
+            	    state._fsp--;
+            	    if (state.failed) return ;
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop110;
+                }
+            } while (true);
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getJvmParameterizedTypeReferenceAccess().getGroup_1_4()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__JvmParameterizedTypeReference__Group_1__4__Impl"
+
+
     // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_2__0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15757:1: rule__JvmParameterizedTypeReference__Group_1_2__0 : rule__JvmParameterizedTypeReference__Group_1_2__0__Impl rule__JvmParameterizedTypeReference__Group_1_2__1 ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15788:1: rule__JvmParameterizedTypeReference__Group_1_2__0 : rule__JvmParameterizedTypeReference__Group_1_2__0__Impl rule__JvmParameterizedTypeReference__Group_1_2__1 ;
     public final void rule__JvmParameterizedTypeReference__Group_1_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15761:1: ( rule__JvmParameterizedTypeReference__Group_1_2__0__Impl rule__JvmParameterizedTypeReference__Group_1_2__1 )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15762:2: rule__JvmParameterizedTypeReference__Group_1_2__0__Impl rule__JvmParameterizedTypeReference__Group_1_2__1
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15792:1: ( rule__JvmParameterizedTypeReference__Group_1_2__0__Impl rule__JvmParameterizedTypeReference__Group_1_2__1 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15793:2: rule__JvmParameterizedTypeReference__Group_1_2__0__Impl rule__JvmParameterizedTypeReference__Group_1_2__1
             {
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__0__Impl_in_rule__JvmParameterizedTypeReference__Group_1_2__031735);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__0__Impl_in_rule__JvmParameterizedTypeReference__Group_1_2__031798);
             rule__JvmParameterizedTypeReference__Group_1_2__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__1_in_rule__JvmParameterizedTypeReference__Group_1_2__031738);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__1_in_rule__JvmParameterizedTypeReference__Group_1_2__031801);
             rule__JvmParameterizedTypeReference__Group_1_2__1();
 
             state._fsp--;
@@ -45188,22 +45307,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_2__0__Impl"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15769:1: rule__JvmParameterizedTypeReference__Group_1_2__0__Impl : ( ',' ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15800:1: rule__JvmParameterizedTypeReference__Group_1_2__0__Impl : ( ',' ) ;
     public final void rule__JvmParameterizedTypeReference__Group_1_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15773:1: ( ( ',' ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15774:1: ( ',' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15804:1: ( ( ',' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15805:1: ( ',' )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15774:1: ( ',' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15775:1: ','
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15805:1: ( ',' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15806:1: ','
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getCommaKeyword_1_2_0()); 
             }
-            match(input,55,FOLLOW_55_in_rule__JvmParameterizedTypeReference__Group_1_2__0__Impl31766); if (state.failed) return ;
+            match(input,55,FOLLOW_55_in_rule__JvmParameterizedTypeReference__Group_1_2__0__Impl31829); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getJvmParameterizedTypeReferenceAccess().getCommaKeyword_1_2_0()); 
             }
@@ -45229,16 +45348,16 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_2__1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15788:1: rule__JvmParameterizedTypeReference__Group_1_2__1 : rule__JvmParameterizedTypeReference__Group_1_2__1__Impl ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15819:1: rule__JvmParameterizedTypeReference__Group_1_2__1 : rule__JvmParameterizedTypeReference__Group_1_2__1__Impl ;
     public final void rule__JvmParameterizedTypeReference__Group_1_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15792:1: ( rule__JvmParameterizedTypeReference__Group_1_2__1__Impl )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15793:2: rule__JvmParameterizedTypeReference__Group_1_2__1__Impl
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15823:1: ( rule__JvmParameterizedTypeReference__Group_1_2__1__Impl )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15824:2: rule__JvmParameterizedTypeReference__Group_1_2__1__Impl
             {
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__1__Impl_in_rule__JvmParameterizedTypeReference__Group_1_2__131797);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__1__Impl_in_rule__JvmParameterizedTypeReference__Group_1_2__131860);
             rule__JvmParameterizedTypeReference__Group_1_2__1__Impl();
 
             state._fsp--;
@@ -45262,25 +45381,25 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_2__1__Impl"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15799:1: rule__JvmParameterizedTypeReference__Group_1_2__1__Impl : ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1 ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15830:1: rule__JvmParameterizedTypeReference__Group_1_2__1__Impl : ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1 ) ) ;
     public final void rule__JvmParameterizedTypeReference__Group_1_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15803:1: ( ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1 ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15804:1: ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1 ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15834:1: ( ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1 ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15835:1: ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1 ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15804:1: ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1 ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15805:1: ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15835:1: ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1 ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15836:1: ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsAssignment_1_2_1()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15806:1: ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1 )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15806:2: rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15837:1: ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15837:2: rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1
             {
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1_in_rule__JvmParameterizedTypeReference__Group_1_2__1__Impl31824);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1_in_rule__JvmParameterizedTypeReference__Group_1_2__1__Impl31887);
             rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1();
 
             state._fsp--;
@@ -45312,22 +45431,1046 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
     // $ANTLR end "rule__JvmParameterizedTypeReference__Group_1_2__1__Impl"
 
 
+    // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_4__0"
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15851:1: rule__JvmParameterizedTypeReference__Group_1_4__0 : rule__JvmParameterizedTypeReference__Group_1_4__0__Impl rule__JvmParameterizedTypeReference__Group_1_4__1 ;
+    public final void rule__JvmParameterizedTypeReference__Group_1_4__0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15855:1: ( rule__JvmParameterizedTypeReference__Group_1_4__0__Impl rule__JvmParameterizedTypeReference__Group_1_4__1 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15856:2: rule__JvmParameterizedTypeReference__Group_1_4__0__Impl rule__JvmParameterizedTypeReference__Group_1_4__1
+            {
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4__0__Impl_in_rule__JvmParameterizedTypeReference__Group_1_4__031921);
+            rule__JvmParameterizedTypeReference__Group_1_4__0__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4__1_in_rule__JvmParameterizedTypeReference__Group_1_4__031924);
+            rule__JvmParameterizedTypeReference__Group_1_4__1();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__JvmParameterizedTypeReference__Group_1_4__0"
+
+
+    // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_4__0__Impl"
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15863:1: rule__JvmParameterizedTypeReference__Group_1_4__0__Impl : ( ( rule__JvmParameterizedTypeReference__Group_1_4_0__0 ) ) ;
+    public final void rule__JvmParameterizedTypeReference__Group_1_4__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15867:1: ( ( ( rule__JvmParameterizedTypeReference__Group_1_4_0__0 ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15868:1: ( ( rule__JvmParameterizedTypeReference__Group_1_4_0__0 ) )
+            {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15868:1: ( ( rule__JvmParameterizedTypeReference__Group_1_4_0__0 ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15869:1: ( rule__JvmParameterizedTypeReference__Group_1_4_0__0 )
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getGroup_1_4_0()); 
+            }
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15870:1: ( rule__JvmParameterizedTypeReference__Group_1_4_0__0 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15870:2: rule__JvmParameterizedTypeReference__Group_1_4_0__0
+            {
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_0__0_in_rule__JvmParameterizedTypeReference__Group_1_4__0__Impl31951);
+            rule__JvmParameterizedTypeReference__Group_1_4_0__0();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getJvmParameterizedTypeReferenceAccess().getGroup_1_4_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__JvmParameterizedTypeReference__Group_1_4__0__Impl"
+
+
+    // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_4__1"
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15880:1: rule__JvmParameterizedTypeReference__Group_1_4__1 : rule__JvmParameterizedTypeReference__Group_1_4__1__Impl rule__JvmParameterizedTypeReference__Group_1_4__2 ;
+    public final void rule__JvmParameterizedTypeReference__Group_1_4__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15884:1: ( rule__JvmParameterizedTypeReference__Group_1_4__1__Impl rule__JvmParameterizedTypeReference__Group_1_4__2 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15885:2: rule__JvmParameterizedTypeReference__Group_1_4__1__Impl rule__JvmParameterizedTypeReference__Group_1_4__2
+            {
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4__1__Impl_in_rule__JvmParameterizedTypeReference__Group_1_4__131981);
+            rule__JvmParameterizedTypeReference__Group_1_4__1__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4__2_in_rule__JvmParameterizedTypeReference__Group_1_4__131984);
+            rule__JvmParameterizedTypeReference__Group_1_4__2();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__JvmParameterizedTypeReference__Group_1_4__1"
+
+
+    // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_4__1__Impl"
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15892:1: rule__JvmParameterizedTypeReference__Group_1_4__1__Impl : ( ( rule__JvmParameterizedTypeReference__TypeAssignment_1_4_1 ) ) ;
+    public final void rule__JvmParameterizedTypeReference__Group_1_4__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15896:1: ( ( ( rule__JvmParameterizedTypeReference__TypeAssignment_1_4_1 ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15897:1: ( ( rule__JvmParameterizedTypeReference__TypeAssignment_1_4_1 ) )
+            {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15897:1: ( ( rule__JvmParameterizedTypeReference__TypeAssignment_1_4_1 ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15898:1: ( rule__JvmParameterizedTypeReference__TypeAssignment_1_4_1 )
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getTypeAssignment_1_4_1()); 
+            }
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15899:1: ( rule__JvmParameterizedTypeReference__TypeAssignment_1_4_1 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15899:2: rule__JvmParameterizedTypeReference__TypeAssignment_1_4_1
+            {
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__TypeAssignment_1_4_1_in_rule__JvmParameterizedTypeReference__Group_1_4__1__Impl32011);
+            rule__JvmParameterizedTypeReference__TypeAssignment_1_4_1();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getJvmParameterizedTypeReferenceAccess().getTypeAssignment_1_4_1()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__JvmParameterizedTypeReference__Group_1_4__1__Impl"
+
+
+    // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_4__2"
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15909:1: rule__JvmParameterizedTypeReference__Group_1_4__2 : rule__JvmParameterizedTypeReference__Group_1_4__2__Impl ;
+    public final void rule__JvmParameterizedTypeReference__Group_1_4__2() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15913:1: ( rule__JvmParameterizedTypeReference__Group_1_4__2__Impl )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15914:2: rule__JvmParameterizedTypeReference__Group_1_4__2__Impl
+            {
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4__2__Impl_in_rule__JvmParameterizedTypeReference__Group_1_4__232041);
+            rule__JvmParameterizedTypeReference__Group_1_4__2__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__JvmParameterizedTypeReference__Group_1_4__2"
+
+
+    // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_4__2__Impl"
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15920:1: rule__JvmParameterizedTypeReference__Group_1_4__2__Impl : ( ( rule__JvmParameterizedTypeReference__Group_1_4_2__0 )? ) ;
+    public final void rule__JvmParameterizedTypeReference__Group_1_4__2__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15924:1: ( ( ( rule__JvmParameterizedTypeReference__Group_1_4_2__0 )? ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15925:1: ( ( rule__JvmParameterizedTypeReference__Group_1_4_2__0 )? )
+            {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15925:1: ( ( rule__JvmParameterizedTypeReference__Group_1_4_2__0 )? )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15926:1: ( rule__JvmParameterizedTypeReference__Group_1_4_2__0 )?
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getGroup_1_4_2()); 
+            }
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15927:1: ( rule__JvmParameterizedTypeReference__Group_1_4_2__0 )?
+            int alt111=2;
+            alt111 = dfa111.predict(input);
+            switch (alt111) {
+                case 1 :
+                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15927:2: rule__JvmParameterizedTypeReference__Group_1_4_2__0
+                    {
+                    pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_2__0_in_rule__JvmParameterizedTypeReference__Group_1_4__2__Impl32068);
+                    rule__JvmParameterizedTypeReference__Group_1_4_2__0();
+
+                    state._fsp--;
+                    if (state.failed) return ;
+
+                    }
+                    break;
+
+            }
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getJvmParameterizedTypeReferenceAccess().getGroup_1_4_2()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__JvmParameterizedTypeReference__Group_1_4__2__Impl"
+
+
+    // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_4_0__0"
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15943:1: rule__JvmParameterizedTypeReference__Group_1_4_0__0 : rule__JvmParameterizedTypeReference__Group_1_4_0__0__Impl ;
+    public final void rule__JvmParameterizedTypeReference__Group_1_4_0__0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15947:1: ( rule__JvmParameterizedTypeReference__Group_1_4_0__0__Impl )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15948:2: rule__JvmParameterizedTypeReference__Group_1_4_0__0__Impl
+            {
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_0__0__Impl_in_rule__JvmParameterizedTypeReference__Group_1_4_0__032105);
+            rule__JvmParameterizedTypeReference__Group_1_4_0__0__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__JvmParameterizedTypeReference__Group_1_4_0__0"
+
+
+    // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_4_0__0__Impl"
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15954:1: rule__JvmParameterizedTypeReference__Group_1_4_0__0__Impl : ( ( rule__JvmParameterizedTypeReference__Group_1_4_0_0__0 ) ) ;
+    public final void rule__JvmParameterizedTypeReference__Group_1_4_0__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15958:1: ( ( ( rule__JvmParameterizedTypeReference__Group_1_4_0_0__0 ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15959:1: ( ( rule__JvmParameterizedTypeReference__Group_1_4_0_0__0 ) )
+            {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15959:1: ( ( rule__JvmParameterizedTypeReference__Group_1_4_0_0__0 ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15960:1: ( rule__JvmParameterizedTypeReference__Group_1_4_0_0__0 )
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getGroup_1_4_0_0()); 
+            }
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15961:1: ( rule__JvmParameterizedTypeReference__Group_1_4_0_0__0 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15961:2: rule__JvmParameterizedTypeReference__Group_1_4_0_0__0
+            {
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_0_0__0_in_rule__JvmParameterizedTypeReference__Group_1_4_0__0__Impl32132);
+            rule__JvmParameterizedTypeReference__Group_1_4_0_0__0();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getJvmParameterizedTypeReferenceAccess().getGroup_1_4_0_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__JvmParameterizedTypeReference__Group_1_4_0__0__Impl"
+
+
+    // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_4_0_0__0"
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15973:1: rule__JvmParameterizedTypeReference__Group_1_4_0_0__0 : rule__JvmParameterizedTypeReference__Group_1_4_0_0__0__Impl rule__JvmParameterizedTypeReference__Group_1_4_0_0__1 ;
+    public final void rule__JvmParameterizedTypeReference__Group_1_4_0_0__0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15977:1: ( rule__JvmParameterizedTypeReference__Group_1_4_0_0__0__Impl rule__JvmParameterizedTypeReference__Group_1_4_0_0__1 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15978:2: rule__JvmParameterizedTypeReference__Group_1_4_0_0__0__Impl rule__JvmParameterizedTypeReference__Group_1_4_0_0__1
+            {
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_0_0__0__Impl_in_rule__JvmParameterizedTypeReference__Group_1_4_0_0__032164);
+            rule__JvmParameterizedTypeReference__Group_1_4_0_0__0__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_0_0__1_in_rule__JvmParameterizedTypeReference__Group_1_4_0_0__032167);
+            rule__JvmParameterizedTypeReference__Group_1_4_0_0__1();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__JvmParameterizedTypeReference__Group_1_4_0_0__0"
+
+
+    // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_4_0_0__0__Impl"
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15985:1: rule__JvmParameterizedTypeReference__Group_1_4_0_0__0__Impl : ( () ) ;
+    public final void rule__JvmParameterizedTypeReference__Group_1_4_0_0__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15989:1: ( ( () ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15990:1: ( () )
+            {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15990:1: ( () )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15991:1: ()
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getJvmInnerTypeReferenceOuterAction_1_4_0_0_0()); 
+            }
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15992:1: ()
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15994:1: 
+            {
+            }
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getJvmParameterizedTypeReferenceAccess().getJvmInnerTypeReferenceOuterAction_1_4_0_0_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__JvmParameterizedTypeReference__Group_1_4_0_0__0__Impl"
+
+
+    // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_4_0_0__1"
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16004:1: rule__JvmParameterizedTypeReference__Group_1_4_0_0__1 : rule__JvmParameterizedTypeReference__Group_1_4_0_0__1__Impl ;
+    public final void rule__JvmParameterizedTypeReference__Group_1_4_0_0__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16008:1: ( rule__JvmParameterizedTypeReference__Group_1_4_0_0__1__Impl )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16009:2: rule__JvmParameterizedTypeReference__Group_1_4_0_0__1__Impl
+            {
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_0_0__1__Impl_in_rule__JvmParameterizedTypeReference__Group_1_4_0_0__132225);
+            rule__JvmParameterizedTypeReference__Group_1_4_0_0__1__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__JvmParameterizedTypeReference__Group_1_4_0_0__1"
+
+
+    // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_4_0_0__1__Impl"
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16015:1: rule__JvmParameterizedTypeReference__Group_1_4_0_0__1__Impl : ( '.' ) ;
+    public final void rule__JvmParameterizedTypeReference__Group_1_4_0_0__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16019:1: ( ( '.' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16020:1: ( '.' )
+            {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16020:1: ( '.' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16021:1: '.'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getFullStopKeyword_1_4_0_0_1()); 
+            }
+            match(input,43,FOLLOW_43_in_rule__JvmParameterizedTypeReference__Group_1_4_0_0__1__Impl32253); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getJvmParameterizedTypeReferenceAccess().getFullStopKeyword_1_4_0_0_1()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__JvmParameterizedTypeReference__Group_1_4_0_0__1__Impl"
+
+
+    // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_4_2__0"
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16038:1: rule__JvmParameterizedTypeReference__Group_1_4_2__0 : rule__JvmParameterizedTypeReference__Group_1_4_2__0__Impl rule__JvmParameterizedTypeReference__Group_1_4_2__1 ;
+    public final void rule__JvmParameterizedTypeReference__Group_1_4_2__0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16042:1: ( rule__JvmParameterizedTypeReference__Group_1_4_2__0__Impl rule__JvmParameterizedTypeReference__Group_1_4_2__1 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16043:2: rule__JvmParameterizedTypeReference__Group_1_4_2__0__Impl rule__JvmParameterizedTypeReference__Group_1_4_2__1
+            {
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_2__0__Impl_in_rule__JvmParameterizedTypeReference__Group_1_4_2__032288);
+            rule__JvmParameterizedTypeReference__Group_1_4_2__0__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_2__1_in_rule__JvmParameterizedTypeReference__Group_1_4_2__032291);
+            rule__JvmParameterizedTypeReference__Group_1_4_2__1();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__JvmParameterizedTypeReference__Group_1_4_2__0"
+
+
+    // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_4_2__0__Impl"
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16050:1: rule__JvmParameterizedTypeReference__Group_1_4_2__0__Impl : ( ( '<' ) ) ;
+    public final void rule__JvmParameterizedTypeReference__Group_1_4_2__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16054:1: ( ( ( '<' ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16055:1: ( ( '<' ) )
+            {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16055:1: ( ( '<' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16056:1: ( '<' )
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getLessThanSignKeyword_1_4_2_0()); 
+            }
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16057:1: ( '<' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16058:2: '<'
+            {
+            match(input,27,FOLLOW_27_in_rule__JvmParameterizedTypeReference__Group_1_4_2__0__Impl32320); if (state.failed) return ;
+
+            }
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getJvmParameterizedTypeReferenceAccess().getLessThanSignKeyword_1_4_2_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__JvmParameterizedTypeReference__Group_1_4_2__0__Impl"
+
+
+    // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_4_2__1"
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16069:1: rule__JvmParameterizedTypeReference__Group_1_4_2__1 : rule__JvmParameterizedTypeReference__Group_1_4_2__1__Impl rule__JvmParameterizedTypeReference__Group_1_4_2__2 ;
+    public final void rule__JvmParameterizedTypeReference__Group_1_4_2__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16073:1: ( rule__JvmParameterizedTypeReference__Group_1_4_2__1__Impl rule__JvmParameterizedTypeReference__Group_1_4_2__2 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16074:2: rule__JvmParameterizedTypeReference__Group_1_4_2__1__Impl rule__JvmParameterizedTypeReference__Group_1_4_2__2
+            {
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_2__1__Impl_in_rule__JvmParameterizedTypeReference__Group_1_4_2__132352);
+            rule__JvmParameterizedTypeReference__Group_1_4_2__1__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_2__2_in_rule__JvmParameterizedTypeReference__Group_1_4_2__132355);
+            rule__JvmParameterizedTypeReference__Group_1_4_2__2();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__JvmParameterizedTypeReference__Group_1_4_2__1"
+
+
+    // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_4_2__1__Impl"
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16081:1: rule__JvmParameterizedTypeReference__Group_1_4_2__1__Impl : ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_1 ) ) ;
+    public final void rule__JvmParameterizedTypeReference__Group_1_4_2__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16085:1: ( ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_1 ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16086:1: ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_1 ) )
+            {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16086:1: ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_1 ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16087:1: ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_1 )
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsAssignment_1_4_2_1()); 
+            }
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16088:1: ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_1 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16088:2: rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_1
+            {
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_1_in_rule__JvmParameterizedTypeReference__Group_1_4_2__1__Impl32382);
+            rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_1();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsAssignment_1_4_2_1()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__JvmParameterizedTypeReference__Group_1_4_2__1__Impl"
+
+
+    // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_4_2__2"
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16098:1: rule__JvmParameterizedTypeReference__Group_1_4_2__2 : rule__JvmParameterizedTypeReference__Group_1_4_2__2__Impl rule__JvmParameterizedTypeReference__Group_1_4_2__3 ;
+    public final void rule__JvmParameterizedTypeReference__Group_1_4_2__2() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16102:1: ( rule__JvmParameterizedTypeReference__Group_1_4_2__2__Impl rule__JvmParameterizedTypeReference__Group_1_4_2__3 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16103:2: rule__JvmParameterizedTypeReference__Group_1_4_2__2__Impl rule__JvmParameterizedTypeReference__Group_1_4_2__3
+            {
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_2__2__Impl_in_rule__JvmParameterizedTypeReference__Group_1_4_2__232412);
+            rule__JvmParameterizedTypeReference__Group_1_4_2__2__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_2__3_in_rule__JvmParameterizedTypeReference__Group_1_4_2__232415);
+            rule__JvmParameterizedTypeReference__Group_1_4_2__3();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__JvmParameterizedTypeReference__Group_1_4_2__2"
+
+
+    // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_4_2__2__Impl"
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16110:1: rule__JvmParameterizedTypeReference__Group_1_4_2__2__Impl : ( ( rule__JvmParameterizedTypeReference__Group_1_4_2_2__0 )* ) ;
+    public final void rule__JvmParameterizedTypeReference__Group_1_4_2__2__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16114:1: ( ( ( rule__JvmParameterizedTypeReference__Group_1_4_2_2__0 )* ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16115:1: ( ( rule__JvmParameterizedTypeReference__Group_1_4_2_2__0 )* )
+            {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16115:1: ( ( rule__JvmParameterizedTypeReference__Group_1_4_2_2__0 )* )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16116:1: ( rule__JvmParameterizedTypeReference__Group_1_4_2_2__0 )*
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getGroup_1_4_2_2()); 
+            }
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16117:1: ( rule__JvmParameterizedTypeReference__Group_1_4_2_2__0 )*
+            loop112:
+            do {
+                int alt112=2;
+                int LA112_0 = input.LA(1);
+
+                if ( (LA112_0==55) ) {
+                    alt112=1;
+                }
+
+
+                switch (alt112) {
+            	case 1 :
+            	    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16117:2: rule__JvmParameterizedTypeReference__Group_1_4_2_2__0
+            	    {
+            	    pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_2_2__0_in_rule__JvmParameterizedTypeReference__Group_1_4_2__2__Impl32442);
+            	    rule__JvmParameterizedTypeReference__Group_1_4_2_2__0();
+
+            	    state._fsp--;
+            	    if (state.failed) return ;
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop112;
+                }
+            } while (true);
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getJvmParameterizedTypeReferenceAccess().getGroup_1_4_2_2()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__JvmParameterizedTypeReference__Group_1_4_2__2__Impl"
+
+
+    // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_4_2__3"
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16127:1: rule__JvmParameterizedTypeReference__Group_1_4_2__3 : rule__JvmParameterizedTypeReference__Group_1_4_2__3__Impl ;
+    public final void rule__JvmParameterizedTypeReference__Group_1_4_2__3() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16131:1: ( rule__JvmParameterizedTypeReference__Group_1_4_2__3__Impl )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16132:2: rule__JvmParameterizedTypeReference__Group_1_4_2__3__Impl
+            {
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_2__3__Impl_in_rule__JvmParameterizedTypeReference__Group_1_4_2__332473);
+            rule__JvmParameterizedTypeReference__Group_1_4_2__3__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__JvmParameterizedTypeReference__Group_1_4_2__3"
+
+
+    // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_4_2__3__Impl"
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16138:1: rule__JvmParameterizedTypeReference__Group_1_4_2__3__Impl : ( '>' ) ;
+    public final void rule__JvmParameterizedTypeReference__Group_1_4_2__3__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16142:1: ( ( '>' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16143:1: ( '>' )
+            {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16143:1: ( '>' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16144:1: '>'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getGreaterThanSignKeyword_1_4_2_3()); 
+            }
+            match(input,26,FOLLOW_26_in_rule__JvmParameterizedTypeReference__Group_1_4_2__3__Impl32501); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getJvmParameterizedTypeReferenceAccess().getGreaterThanSignKeyword_1_4_2_3()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__JvmParameterizedTypeReference__Group_1_4_2__3__Impl"
+
+
+    // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_4_2_2__0"
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16165:1: rule__JvmParameterizedTypeReference__Group_1_4_2_2__0 : rule__JvmParameterizedTypeReference__Group_1_4_2_2__0__Impl rule__JvmParameterizedTypeReference__Group_1_4_2_2__1 ;
+    public final void rule__JvmParameterizedTypeReference__Group_1_4_2_2__0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16169:1: ( rule__JvmParameterizedTypeReference__Group_1_4_2_2__0__Impl rule__JvmParameterizedTypeReference__Group_1_4_2_2__1 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16170:2: rule__JvmParameterizedTypeReference__Group_1_4_2_2__0__Impl rule__JvmParameterizedTypeReference__Group_1_4_2_2__1
+            {
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_2_2__0__Impl_in_rule__JvmParameterizedTypeReference__Group_1_4_2_2__032540);
+            rule__JvmParameterizedTypeReference__Group_1_4_2_2__0__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_2_2__1_in_rule__JvmParameterizedTypeReference__Group_1_4_2_2__032543);
+            rule__JvmParameterizedTypeReference__Group_1_4_2_2__1();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__JvmParameterizedTypeReference__Group_1_4_2_2__0"
+
+
+    // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_4_2_2__0__Impl"
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16177:1: rule__JvmParameterizedTypeReference__Group_1_4_2_2__0__Impl : ( ',' ) ;
+    public final void rule__JvmParameterizedTypeReference__Group_1_4_2_2__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16181:1: ( ( ',' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16182:1: ( ',' )
+            {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16182:1: ( ',' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16183:1: ','
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getCommaKeyword_1_4_2_2_0()); 
+            }
+            match(input,55,FOLLOW_55_in_rule__JvmParameterizedTypeReference__Group_1_4_2_2__0__Impl32571); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getJvmParameterizedTypeReferenceAccess().getCommaKeyword_1_4_2_2_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__JvmParameterizedTypeReference__Group_1_4_2_2__0__Impl"
+
+
+    // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_4_2_2__1"
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16196:1: rule__JvmParameterizedTypeReference__Group_1_4_2_2__1 : rule__JvmParameterizedTypeReference__Group_1_4_2_2__1__Impl ;
+    public final void rule__JvmParameterizedTypeReference__Group_1_4_2_2__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16200:1: ( rule__JvmParameterizedTypeReference__Group_1_4_2_2__1__Impl )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16201:2: rule__JvmParameterizedTypeReference__Group_1_4_2_2__1__Impl
+            {
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_2_2__1__Impl_in_rule__JvmParameterizedTypeReference__Group_1_4_2_2__132602);
+            rule__JvmParameterizedTypeReference__Group_1_4_2_2__1__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__JvmParameterizedTypeReference__Group_1_4_2_2__1"
+
+
+    // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_4_2_2__1__Impl"
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16207:1: rule__JvmParameterizedTypeReference__Group_1_4_2_2__1__Impl : ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_2_1 ) ) ;
+    public final void rule__JvmParameterizedTypeReference__Group_1_4_2_2__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16211:1: ( ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_2_1 ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16212:1: ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_2_1 ) )
+            {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16212:1: ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_2_1 ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16213:1: ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_2_1 )
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsAssignment_1_4_2_2_1()); 
+            }
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16214:1: ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_2_1 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16214:2: rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_2_1
+            {
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_2_1_in_rule__JvmParameterizedTypeReference__Group_1_4_2_2__1__Impl32629);
+            rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_2_1();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsAssignment_1_4_2_2_1()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__JvmParameterizedTypeReference__Group_1_4_2_2__1__Impl"
+
+
     // $ANTLR start "rule__JvmWildcardTypeReference__Group__0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15820:1: rule__JvmWildcardTypeReference__Group__0 : rule__JvmWildcardTypeReference__Group__0__Impl rule__JvmWildcardTypeReference__Group__1 ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16228:1: rule__JvmWildcardTypeReference__Group__0 : rule__JvmWildcardTypeReference__Group__0__Impl rule__JvmWildcardTypeReference__Group__1 ;
     public final void rule__JvmWildcardTypeReference__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15824:1: ( rule__JvmWildcardTypeReference__Group__0__Impl rule__JvmWildcardTypeReference__Group__1 )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15825:2: rule__JvmWildcardTypeReference__Group__0__Impl rule__JvmWildcardTypeReference__Group__1
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16232:1: ( rule__JvmWildcardTypeReference__Group__0__Impl rule__JvmWildcardTypeReference__Group__1 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16233:2: rule__JvmWildcardTypeReference__Group__0__Impl rule__JvmWildcardTypeReference__Group__1
             {
-            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__0__Impl_in_rule__JvmWildcardTypeReference__Group__031858);
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__0__Impl_in_rule__JvmWildcardTypeReference__Group__032663);
             rule__JvmWildcardTypeReference__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__1_in_rule__JvmWildcardTypeReference__Group__031861);
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__1_in_rule__JvmWildcardTypeReference__Group__032666);
             rule__JvmWildcardTypeReference__Group__1();
 
             state._fsp--;
@@ -45351,23 +46494,23 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmWildcardTypeReference__Group__0__Impl"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15832:1: rule__JvmWildcardTypeReference__Group__0__Impl : ( () ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16240:1: rule__JvmWildcardTypeReference__Group__0__Impl : ( () ) ;
     public final void rule__JvmWildcardTypeReference__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15836:1: ( ( () ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15837:1: ( () )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16244:1: ( ( () ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16245:1: ( () )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15837:1: ( () )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15838:1: ()
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16245:1: ( () )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16246:1: ()
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmWildcardTypeReferenceAccess().getJvmWildcardTypeReferenceAction_0()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15839:1: ()
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15841:1: 
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16247:1: ()
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16249:1: 
             {
             }
 
@@ -45392,21 +46535,21 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmWildcardTypeReference__Group__1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15851:1: rule__JvmWildcardTypeReference__Group__1 : rule__JvmWildcardTypeReference__Group__1__Impl rule__JvmWildcardTypeReference__Group__2 ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16259:1: rule__JvmWildcardTypeReference__Group__1 : rule__JvmWildcardTypeReference__Group__1__Impl rule__JvmWildcardTypeReference__Group__2 ;
     public final void rule__JvmWildcardTypeReference__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15855:1: ( rule__JvmWildcardTypeReference__Group__1__Impl rule__JvmWildcardTypeReference__Group__2 )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15856:2: rule__JvmWildcardTypeReference__Group__1__Impl rule__JvmWildcardTypeReference__Group__2
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16263:1: ( rule__JvmWildcardTypeReference__Group__1__Impl rule__JvmWildcardTypeReference__Group__2 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16264:2: rule__JvmWildcardTypeReference__Group__1__Impl rule__JvmWildcardTypeReference__Group__2
             {
-            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__1__Impl_in_rule__JvmWildcardTypeReference__Group__131919);
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__1__Impl_in_rule__JvmWildcardTypeReference__Group__132724);
             rule__JvmWildcardTypeReference__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__2_in_rule__JvmWildcardTypeReference__Group__131922);
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__2_in_rule__JvmWildcardTypeReference__Group__132727);
             rule__JvmWildcardTypeReference__Group__2();
 
             state._fsp--;
@@ -45430,22 +46573,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmWildcardTypeReference__Group__1__Impl"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15863:1: rule__JvmWildcardTypeReference__Group__1__Impl : ( '?' ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16271:1: rule__JvmWildcardTypeReference__Group__1__Impl : ( '?' ) ;
     public final void rule__JvmWildcardTypeReference__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15867:1: ( ( '?' ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15868:1: ( '?' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16275:1: ( ( '?' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16276:1: ( '?' )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15868:1: ( '?' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15869:1: '?'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16276:1: ( '?' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16277:1: '?'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmWildcardTypeReferenceAccess().getQuestionMarkKeyword_1()); 
             }
-            match(input,82,FOLLOW_82_in_rule__JvmWildcardTypeReference__Group__1__Impl31950); if (state.failed) return ;
+            match(input,82,FOLLOW_82_in_rule__JvmWildcardTypeReference__Group__1__Impl32755); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getJvmWildcardTypeReferenceAccess().getQuestionMarkKeyword_1()); 
             }
@@ -45471,16 +46614,16 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmWildcardTypeReference__Group__2"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15882:1: rule__JvmWildcardTypeReference__Group__2 : rule__JvmWildcardTypeReference__Group__2__Impl ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16290:1: rule__JvmWildcardTypeReference__Group__2 : rule__JvmWildcardTypeReference__Group__2__Impl ;
     public final void rule__JvmWildcardTypeReference__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15886:1: ( rule__JvmWildcardTypeReference__Group__2__Impl )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15887:2: rule__JvmWildcardTypeReference__Group__2__Impl
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16294:1: ( rule__JvmWildcardTypeReference__Group__2__Impl )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16295:2: rule__JvmWildcardTypeReference__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__2__Impl_in_rule__JvmWildcardTypeReference__Group__231981);
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__2__Impl_in_rule__JvmWildcardTypeReference__Group__232786);
             rule__JvmWildcardTypeReference__Group__2__Impl();
 
             state._fsp--;
@@ -45504,33 +46647,33 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmWildcardTypeReference__Group__2__Impl"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15893:1: rule__JvmWildcardTypeReference__Group__2__Impl : ( ( rule__JvmWildcardTypeReference__Alternatives_2 )? ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16301:1: rule__JvmWildcardTypeReference__Group__2__Impl : ( ( rule__JvmWildcardTypeReference__Alternatives_2 )? ) ;
     public final void rule__JvmWildcardTypeReference__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15897:1: ( ( ( rule__JvmWildcardTypeReference__Alternatives_2 )? ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15898:1: ( ( rule__JvmWildcardTypeReference__Alternatives_2 )? )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16305:1: ( ( ( rule__JvmWildcardTypeReference__Alternatives_2 )? ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16306:1: ( ( rule__JvmWildcardTypeReference__Alternatives_2 )? )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15898:1: ( ( rule__JvmWildcardTypeReference__Alternatives_2 )? )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15899:1: ( rule__JvmWildcardTypeReference__Alternatives_2 )?
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16306:1: ( ( rule__JvmWildcardTypeReference__Alternatives_2 )? )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16307:1: ( rule__JvmWildcardTypeReference__Alternatives_2 )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmWildcardTypeReferenceAccess().getAlternatives_2()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15900:1: ( rule__JvmWildcardTypeReference__Alternatives_2 )?
-            int alt110=2;
-            int LA110_0 = input.LA(1);
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16308:1: ( rule__JvmWildcardTypeReference__Alternatives_2 )?
+            int alt113=2;
+            int LA113_0 = input.LA(1);
 
-            if ( (LA110_0==45||LA110_0==49) ) {
-                alt110=1;
+            if ( (LA113_0==45||LA113_0==49) ) {
+                alt113=1;
             }
-            switch (alt110) {
+            switch (alt113) {
                 case 1 :
-                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15900:2: rule__JvmWildcardTypeReference__Alternatives_2
+                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16308:2: rule__JvmWildcardTypeReference__Alternatives_2
                     {
-                    pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Alternatives_2_in_rule__JvmWildcardTypeReference__Group__2__Impl32008);
+                    pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Alternatives_2_in_rule__JvmWildcardTypeReference__Group__2__Impl32813);
                     rule__JvmWildcardTypeReference__Alternatives_2();
 
                     state._fsp--;
@@ -45566,21 +46709,21 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmWildcardTypeReference__Group_2_0__0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15916:1: rule__JvmWildcardTypeReference__Group_2_0__0 : rule__JvmWildcardTypeReference__Group_2_0__0__Impl rule__JvmWildcardTypeReference__Group_2_0__1 ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16324:1: rule__JvmWildcardTypeReference__Group_2_0__0 : rule__JvmWildcardTypeReference__Group_2_0__0__Impl rule__JvmWildcardTypeReference__Group_2_0__1 ;
     public final void rule__JvmWildcardTypeReference__Group_2_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15920:1: ( rule__JvmWildcardTypeReference__Group_2_0__0__Impl rule__JvmWildcardTypeReference__Group_2_0__1 )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15921:2: rule__JvmWildcardTypeReference__Group_2_0__0__Impl rule__JvmWildcardTypeReference__Group_2_0__1
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16328:1: ( rule__JvmWildcardTypeReference__Group_2_0__0__Impl rule__JvmWildcardTypeReference__Group_2_0__1 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16329:2: rule__JvmWildcardTypeReference__Group_2_0__0__Impl rule__JvmWildcardTypeReference__Group_2_0__1
             {
-            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group_2_0__0__Impl_in_rule__JvmWildcardTypeReference__Group_2_0__032045);
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group_2_0__0__Impl_in_rule__JvmWildcardTypeReference__Group_2_0__032850);
             rule__JvmWildcardTypeReference__Group_2_0__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group_2_0__1_in_rule__JvmWildcardTypeReference__Group_2_0__032048);
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group_2_0__1_in_rule__JvmWildcardTypeReference__Group_2_0__032853);
             rule__JvmWildcardTypeReference__Group_2_0__1();
 
             state._fsp--;
@@ -45604,25 +46747,25 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmWildcardTypeReference__Group_2_0__0__Impl"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15928:1: rule__JvmWildcardTypeReference__Group_2_0__0__Impl : ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_0 ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16336:1: rule__JvmWildcardTypeReference__Group_2_0__0__Impl : ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_0 ) ) ;
     public final void rule__JvmWildcardTypeReference__Group_2_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15932:1: ( ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_0 ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15933:1: ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_0 ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16340:1: ( ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_0 ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16341:1: ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_0 ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15933:1: ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_0 ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15934:1: ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_0 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16341:1: ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_0 ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16342:1: ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsAssignment_2_0_0()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15935:1: ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_0 )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15935:2: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_0
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16343:1: ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_0 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16343:2: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_0
             {
-            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_0_in_rule__JvmWildcardTypeReference__Group_2_0__0__Impl32075);
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_0_in_rule__JvmWildcardTypeReference__Group_2_0__0__Impl32880);
             rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_0();
 
             state._fsp--;
@@ -45655,16 +46798,16 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmWildcardTypeReference__Group_2_0__1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15945:1: rule__JvmWildcardTypeReference__Group_2_0__1 : rule__JvmWildcardTypeReference__Group_2_0__1__Impl ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16353:1: rule__JvmWildcardTypeReference__Group_2_0__1 : rule__JvmWildcardTypeReference__Group_2_0__1__Impl ;
     public final void rule__JvmWildcardTypeReference__Group_2_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15949:1: ( rule__JvmWildcardTypeReference__Group_2_0__1__Impl )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15950:2: rule__JvmWildcardTypeReference__Group_2_0__1__Impl
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16357:1: ( rule__JvmWildcardTypeReference__Group_2_0__1__Impl )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16358:2: rule__JvmWildcardTypeReference__Group_2_0__1__Impl
             {
-            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group_2_0__1__Impl_in_rule__JvmWildcardTypeReference__Group_2_0__132105);
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group_2_0__1__Impl_in_rule__JvmWildcardTypeReference__Group_2_0__132910);
             rule__JvmWildcardTypeReference__Group_2_0__1__Impl();
 
             state._fsp--;
@@ -45688,37 +46831,37 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmWildcardTypeReference__Group_2_0__1__Impl"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15956:1: rule__JvmWildcardTypeReference__Group_2_0__1__Impl : ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_1 )* ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16364:1: rule__JvmWildcardTypeReference__Group_2_0__1__Impl : ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_1 )* ) ;
     public final void rule__JvmWildcardTypeReference__Group_2_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15960:1: ( ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_1 )* ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15961:1: ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_1 )* )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16368:1: ( ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_1 )* ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16369:1: ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_1 )* )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15961:1: ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_1 )* )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15962:1: ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_1 )*
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16369:1: ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_1 )* )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16370:1: ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_1 )*
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsAssignment_2_0_1()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15963:1: ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_1 )*
-            loop111:
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16371:1: ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_1 )*
+            loop114:
             do {
-                int alt111=2;
-                int LA111_0 = input.LA(1);
+                int alt114=2;
+                int LA114_0 = input.LA(1);
 
-                if ( (LA111_0==83) ) {
-                    alt111=1;
+                if ( (LA114_0==83) ) {
+                    alt114=1;
                 }
 
 
-                switch (alt111) {
+                switch (alt114) {
             	case 1 :
-            	    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15963:2: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_1
+            	    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16371:2: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_1
             	    {
-            	    pushFollow(FOLLOW_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_1_in_rule__JvmWildcardTypeReference__Group_2_0__1__Impl32132);
+            	    pushFollow(FOLLOW_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_1_in_rule__JvmWildcardTypeReference__Group_2_0__1__Impl32937);
             	    rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_1();
 
             	    state._fsp--;
@@ -45728,7 +46871,7 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
             	    break;
 
             	default :
-            	    break loop111;
+            	    break loop114;
                 }
             } while (true);
 
@@ -45757,21 +46900,21 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmWildcardTypeReference__Group_2_1__0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15977:1: rule__JvmWildcardTypeReference__Group_2_1__0 : rule__JvmWildcardTypeReference__Group_2_1__0__Impl rule__JvmWildcardTypeReference__Group_2_1__1 ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16385:1: rule__JvmWildcardTypeReference__Group_2_1__0 : rule__JvmWildcardTypeReference__Group_2_1__0__Impl rule__JvmWildcardTypeReference__Group_2_1__1 ;
     public final void rule__JvmWildcardTypeReference__Group_2_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15981:1: ( rule__JvmWildcardTypeReference__Group_2_1__0__Impl rule__JvmWildcardTypeReference__Group_2_1__1 )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15982:2: rule__JvmWildcardTypeReference__Group_2_1__0__Impl rule__JvmWildcardTypeReference__Group_2_1__1
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16389:1: ( rule__JvmWildcardTypeReference__Group_2_1__0__Impl rule__JvmWildcardTypeReference__Group_2_1__1 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16390:2: rule__JvmWildcardTypeReference__Group_2_1__0__Impl rule__JvmWildcardTypeReference__Group_2_1__1
             {
-            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group_2_1__0__Impl_in_rule__JvmWildcardTypeReference__Group_2_1__032167);
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group_2_1__0__Impl_in_rule__JvmWildcardTypeReference__Group_2_1__032972);
             rule__JvmWildcardTypeReference__Group_2_1__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group_2_1__1_in_rule__JvmWildcardTypeReference__Group_2_1__032170);
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group_2_1__1_in_rule__JvmWildcardTypeReference__Group_2_1__032975);
             rule__JvmWildcardTypeReference__Group_2_1__1();
 
             state._fsp--;
@@ -45795,25 +46938,25 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmWildcardTypeReference__Group_2_1__0__Impl"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15989:1: rule__JvmWildcardTypeReference__Group_2_1__0__Impl : ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_0 ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16397:1: rule__JvmWildcardTypeReference__Group_2_1__0__Impl : ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_0 ) ) ;
     public final void rule__JvmWildcardTypeReference__Group_2_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15993:1: ( ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_0 ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15994:1: ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_0 ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16401:1: ( ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_0 ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16402:1: ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_0 ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15994:1: ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_0 ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15995:1: ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_0 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16402:1: ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_0 ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16403:1: ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsAssignment_2_1_0()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15996:1: ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_0 )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15996:2: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_0
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16404:1: ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_0 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16404:2: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_0
             {
-            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_0_in_rule__JvmWildcardTypeReference__Group_2_1__0__Impl32197);
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_0_in_rule__JvmWildcardTypeReference__Group_2_1__0__Impl33002);
             rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_0();
 
             state._fsp--;
@@ -45846,16 +46989,16 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmWildcardTypeReference__Group_2_1__1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16006:1: rule__JvmWildcardTypeReference__Group_2_1__1 : rule__JvmWildcardTypeReference__Group_2_1__1__Impl ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16414:1: rule__JvmWildcardTypeReference__Group_2_1__1 : rule__JvmWildcardTypeReference__Group_2_1__1__Impl ;
     public final void rule__JvmWildcardTypeReference__Group_2_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16010:1: ( rule__JvmWildcardTypeReference__Group_2_1__1__Impl )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16011:2: rule__JvmWildcardTypeReference__Group_2_1__1__Impl
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16418:1: ( rule__JvmWildcardTypeReference__Group_2_1__1__Impl )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16419:2: rule__JvmWildcardTypeReference__Group_2_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group_2_1__1__Impl_in_rule__JvmWildcardTypeReference__Group_2_1__132227);
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group_2_1__1__Impl_in_rule__JvmWildcardTypeReference__Group_2_1__133032);
             rule__JvmWildcardTypeReference__Group_2_1__1__Impl();
 
             state._fsp--;
@@ -45879,37 +47022,37 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmWildcardTypeReference__Group_2_1__1__Impl"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16017:1: rule__JvmWildcardTypeReference__Group_2_1__1__Impl : ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_1 )* ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16425:1: rule__JvmWildcardTypeReference__Group_2_1__1__Impl : ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_1 )* ) ;
     public final void rule__JvmWildcardTypeReference__Group_2_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16021:1: ( ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_1 )* ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16022:1: ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_1 )* )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16429:1: ( ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_1 )* ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16430:1: ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_1 )* )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16022:1: ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_1 )* )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16023:1: ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_1 )*
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16430:1: ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_1 )* )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16431:1: ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_1 )*
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsAssignment_2_1_1()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16024:1: ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_1 )*
-            loop112:
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16432:1: ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_1 )*
+            loop115:
             do {
-                int alt112=2;
-                int LA112_0 = input.LA(1);
+                int alt115=2;
+                int LA115_0 = input.LA(1);
 
-                if ( (LA112_0==83) ) {
-                    alt112=1;
+                if ( (LA115_0==83) ) {
+                    alt115=1;
                 }
 
 
-                switch (alt112) {
+                switch (alt115) {
             	case 1 :
-            	    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16024:2: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_1
+            	    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16432:2: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_1
             	    {
-            	    pushFollow(FOLLOW_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_1_in_rule__JvmWildcardTypeReference__Group_2_1__1__Impl32254);
+            	    pushFollow(FOLLOW_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_1_in_rule__JvmWildcardTypeReference__Group_2_1__1__Impl33059);
             	    rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_1();
 
             	    state._fsp--;
@@ -45919,7 +47062,7 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
             	    break;
 
             	default :
-            	    break loop112;
+            	    break loop115;
                 }
             } while (true);
 
@@ -45948,21 +47091,21 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmUpperBound__Group__0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16038:1: rule__JvmUpperBound__Group__0 : rule__JvmUpperBound__Group__0__Impl rule__JvmUpperBound__Group__1 ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16446:1: rule__JvmUpperBound__Group__0 : rule__JvmUpperBound__Group__0__Impl rule__JvmUpperBound__Group__1 ;
     public final void rule__JvmUpperBound__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16042:1: ( rule__JvmUpperBound__Group__0__Impl rule__JvmUpperBound__Group__1 )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16043:2: rule__JvmUpperBound__Group__0__Impl rule__JvmUpperBound__Group__1
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16450:1: ( rule__JvmUpperBound__Group__0__Impl rule__JvmUpperBound__Group__1 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16451:2: rule__JvmUpperBound__Group__0__Impl rule__JvmUpperBound__Group__1
             {
-            pushFollow(FOLLOW_rule__JvmUpperBound__Group__0__Impl_in_rule__JvmUpperBound__Group__032289);
+            pushFollow(FOLLOW_rule__JvmUpperBound__Group__0__Impl_in_rule__JvmUpperBound__Group__033094);
             rule__JvmUpperBound__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmUpperBound__Group__1_in_rule__JvmUpperBound__Group__032292);
+            pushFollow(FOLLOW_rule__JvmUpperBound__Group__1_in_rule__JvmUpperBound__Group__033097);
             rule__JvmUpperBound__Group__1();
 
             state._fsp--;
@@ -45986,22 +47129,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmUpperBound__Group__0__Impl"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16050:1: rule__JvmUpperBound__Group__0__Impl : ( 'extends' ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16458:1: rule__JvmUpperBound__Group__0__Impl : ( 'extends' ) ;
     public final void rule__JvmUpperBound__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16054:1: ( ( 'extends' ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16055:1: ( 'extends' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16462:1: ( ( 'extends' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16463:1: ( 'extends' )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16055:1: ( 'extends' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16056:1: 'extends'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16463:1: ( 'extends' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16464:1: 'extends'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmUpperBoundAccess().getExtendsKeyword_0()); 
             }
-            match(input,45,FOLLOW_45_in_rule__JvmUpperBound__Group__0__Impl32320); if (state.failed) return ;
+            match(input,45,FOLLOW_45_in_rule__JvmUpperBound__Group__0__Impl33125); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getJvmUpperBoundAccess().getExtendsKeyword_0()); 
             }
@@ -46027,16 +47170,16 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmUpperBound__Group__1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16069:1: rule__JvmUpperBound__Group__1 : rule__JvmUpperBound__Group__1__Impl ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16477:1: rule__JvmUpperBound__Group__1 : rule__JvmUpperBound__Group__1__Impl ;
     public final void rule__JvmUpperBound__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16073:1: ( rule__JvmUpperBound__Group__1__Impl )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16074:2: rule__JvmUpperBound__Group__1__Impl
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16481:1: ( rule__JvmUpperBound__Group__1__Impl )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16482:2: rule__JvmUpperBound__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__JvmUpperBound__Group__1__Impl_in_rule__JvmUpperBound__Group__132351);
+            pushFollow(FOLLOW_rule__JvmUpperBound__Group__1__Impl_in_rule__JvmUpperBound__Group__133156);
             rule__JvmUpperBound__Group__1__Impl();
 
             state._fsp--;
@@ -46060,25 +47203,25 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmUpperBound__Group__1__Impl"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16080:1: rule__JvmUpperBound__Group__1__Impl : ( ( rule__JvmUpperBound__TypeReferenceAssignment_1 ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16488:1: rule__JvmUpperBound__Group__1__Impl : ( ( rule__JvmUpperBound__TypeReferenceAssignment_1 ) ) ;
     public final void rule__JvmUpperBound__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16084:1: ( ( ( rule__JvmUpperBound__TypeReferenceAssignment_1 ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16085:1: ( ( rule__JvmUpperBound__TypeReferenceAssignment_1 ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16492:1: ( ( ( rule__JvmUpperBound__TypeReferenceAssignment_1 ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16493:1: ( ( rule__JvmUpperBound__TypeReferenceAssignment_1 ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16085:1: ( ( rule__JvmUpperBound__TypeReferenceAssignment_1 ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16086:1: ( rule__JvmUpperBound__TypeReferenceAssignment_1 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16493:1: ( ( rule__JvmUpperBound__TypeReferenceAssignment_1 ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16494:1: ( rule__JvmUpperBound__TypeReferenceAssignment_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmUpperBoundAccess().getTypeReferenceAssignment_1()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16087:1: ( rule__JvmUpperBound__TypeReferenceAssignment_1 )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16087:2: rule__JvmUpperBound__TypeReferenceAssignment_1
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16495:1: ( rule__JvmUpperBound__TypeReferenceAssignment_1 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16495:2: rule__JvmUpperBound__TypeReferenceAssignment_1
             {
-            pushFollow(FOLLOW_rule__JvmUpperBound__TypeReferenceAssignment_1_in_rule__JvmUpperBound__Group__1__Impl32378);
+            pushFollow(FOLLOW_rule__JvmUpperBound__TypeReferenceAssignment_1_in_rule__JvmUpperBound__Group__1__Impl33183);
             rule__JvmUpperBound__TypeReferenceAssignment_1();
 
             state._fsp--;
@@ -46111,21 +47254,21 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmUpperBoundAnded__Group__0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16101:1: rule__JvmUpperBoundAnded__Group__0 : rule__JvmUpperBoundAnded__Group__0__Impl rule__JvmUpperBoundAnded__Group__1 ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16509:1: rule__JvmUpperBoundAnded__Group__0 : rule__JvmUpperBoundAnded__Group__0__Impl rule__JvmUpperBoundAnded__Group__1 ;
     public final void rule__JvmUpperBoundAnded__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16105:1: ( rule__JvmUpperBoundAnded__Group__0__Impl rule__JvmUpperBoundAnded__Group__1 )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16106:2: rule__JvmUpperBoundAnded__Group__0__Impl rule__JvmUpperBoundAnded__Group__1
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16513:1: ( rule__JvmUpperBoundAnded__Group__0__Impl rule__JvmUpperBoundAnded__Group__1 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16514:2: rule__JvmUpperBoundAnded__Group__0__Impl rule__JvmUpperBoundAnded__Group__1
             {
-            pushFollow(FOLLOW_rule__JvmUpperBoundAnded__Group__0__Impl_in_rule__JvmUpperBoundAnded__Group__032412);
+            pushFollow(FOLLOW_rule__JvmUpperBoundAnded__Group__0__Impl_in_rule__JvmUpperBoundAnded__Group__033217);
             rule__JvmUpperBoundAnded__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmUpperBoundAnded__Group__1_in_rule__JvmUpperBoundAnded__Group__032415);
+            pushFollow(FOLLOW_rule__JvmUpperBoundAnded__Group__1_in_rule__JvmUpperBoundAnded__Group__033220);
             rule__JvmUpperBoundAnded__Group__1();
 
             state._fsp--;
@@ -46149,22 +47292,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmUpperBoundAnded__Group__0__Impl"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16113:1: rule__JvmUpperBoundAnded__Group__0__Impl : ( '&' ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16521:1: rule__JvmUpperBoundAnded__Group__0__Impl : ( '&' ) ;
     public final void rule__JvmUpperBoundAnded__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16117:1: ( ( '&' ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16118:1: ( '&' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16525:1: ( ( '&' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16526:1: ( '&' )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16118:1: ( '&' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16119:1: '&'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16526:1: ( '&' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16527:1: '&'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmUpperBoundAndedAccess().getAmpersandKeyword_0()); 
             }
-            match(input,83,FOLLOW_83_in_rule__JvmUpperBoundAnded__Group__0__Impl32443); if (state.failed) return ;
+            match(input,83,FOLLOW_83_in_rule__JvmUpperBoundAnded__Group__0__Impl33248); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getJvmUpperBoundAndedAccess().getAmpersandKeyword_0()); 
             }
@@ -46190,16 +47333,16 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmUpperBoundAnded__Group__1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16132:1: rule__JvmUpperBoundAnded__Group__1 : rule__JvmUpperBoundAnded__Group__1__Impl ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16540:1: rule__JvmUpperBoundAnded__Group__1 : rule__JvmUpperBoundAnded__Group__1__Impl ;
     public final void rule__JvmUpperBoundAnded__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16136:1: ( rule__JvmUpperBoundAnded__Group__1__Impl )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16137:2: rule__JvmUpperBoundAnded__Group__1__Impl
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16544:1: ( rule__JvmUpperBoundAnded__Group__1__Impl )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16545:2: rule__JvmUpperBoundAnded__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__JvmUpperBoundAnded__Group__1__Impl_in_rule__JvmUpperBoundAnded__Group__132474);
+            pushFollow(FOLLOW_rule__JvmUpperBoundAnded__Group__1__Impl_in_rule__JvmUpperBoundAnded__Group__133279);
             rule__JvmUpperBoundAnded__Group__1__Impl();
 
             state._fsp--;
@@ -46223,25 +47366,25 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmUpperBoundAnded__Group__1__Impl"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16143:1: rule__JvmUpperBoundAnded__Group__1__Impl : ( ( rule__JvmUpperBoundAnded__TypeReferenceAssignment_1 ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16551:1: rule__JvmUpperBoundAnded__Group__1__Impl : ( ( rule__JvmUpperBoundAnded__TypeReferenceAssignment_1 ) ) ;
     public final void rule__JvmUpperBoundAnded__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16147:1: ( ( ( rule__JvmUpperBoundAnded__TypeReferenceAssignment_1 ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16148:1: ( ( rule__JvmUpperBoundAnded__TypeReferenceAssignment_1 ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16555:1: ( ( ( rule__JvmUpperBoundAnded__TypeReferenceAssignment_1 ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16556:1: ( ( rule__JvmUpperBoundAnded__TypeReferenceAssignment_1 ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16148:1: ( ( rule__JvmUpperBoundAnded__TypeReferenceAssignment_1 ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16149:1: ( rule__JvmUpperBoundAnded__TypeReferenceAssignment_1 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16556:1: ( ( rule__JvmUpperBoundAnded__TypeReferenceAssignment_1 ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16557:1: ( rule__JvmUpperBoundAnded__TypeReferenceAssignment_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmUpperBoundAndedAccess().getTypeReferenceAssignment_1()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16150:1: ( rule__JvmUpperBoundAnded__TypeReferenceAssignment_1 )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16150:2: rule__JvmUpperBoundAnded__TypeReferenceAssignment_1
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16558:1: ( rule__JvmUpperBoundAnded__TypeReferenceAssignment_1 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16558:2: rule__JvmUpperBoundAnded__TypeReferenceAssignment_1
             {
-            pushFollow(FOLLOW_rule__JvmUpperBoundAnded__TypeReferenceAssignment_1_in_rule__JvmUpperBoundAnded__Group__1__Impl32501);
+            pushFollow(FOLLOW_rule__JvmUpperBoundAnded__TypeReferenceAssignment_1_in_rule__JvmUpperBoundAnded__Group__1__Impl33306);
             rule__JvmUpperBoundAnded__TypeReferenceAssignment_1();
 
             state._fsp--;
@@ -46274,21 +47417,21 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmLowerBound__Group__0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16164:1: rule__JvmLowerBound__Group__0 : rule__JvmLowerBound__Group__0__Impl rule__JvmLowerBound__Group__1 ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16572:1: rule__JvmLowerBound__Group__0 : rule__JvmLowerBound__Group__0__Impl rule__JvmLowerBound__Group__1 ;
     public final void rule__JvmLowerBound__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16168:1: ( rule__JvmLowerBound__Group__0__Impl rule__JvmLowerBound__Group__1 )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16169:2: rule__JvmLowerBound__Group__0__Impl rule__JvmLowerBound__Group__1
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16576:1: ( rule__JvmLowerBound__Group__0__Impl rule__JvmLowerBound__Group__1 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16577:2: rule__JvmLowerBound__Group__0__Impl rule__JvmLowerBound__Group__1
             {
-            pushFollow(FOLLOW_rule__JvmLowerBound__Group__0__Impl_in_rule__JvmLowerBound__Group__032535);
+            pushFollow(FOLLOW_rule__JvmLowerBound__Group__0__Impl_in_rule__JvmLowerBound__Group__033340);
             rule__JvmLowerBound__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmLowerBound__Group__1_in_rule__JvmLowerBound__Group__032538);
+            pushFollow(FOLLOW_rule__JvmLowerBound__Group__1_in_rule__JvmLowerBound__Group__033343);
             rule__JvmLowerBound__Group__1();
 
             state._fsp--;
@@ -46312,22 +47455,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmLowerBound__Group__0__Impl"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16176:1: rule__JvmLowerBound__Group__0__Impl : ( 'super' ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16584:1: rule__JvmLowerBound__Group__0__Impl : ( 'super' ) ;
     public final void rule__JvmLowerBound__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16180:1: ( ( 'super' ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16181:1: ( 'super' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16588:1: ( ( 'super' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16589:1: ( 'super' )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16181:1: ( 'super' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16182:1: 'super'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16589:1: ( 'super' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16590:1: 'super'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmLowerBoundAccess().getSuperKeyword_0()); 
             }
-            match(input,49,FOLLOW_49_in_rule__JvmLowerBound__Group__0__Impl32566); if (state.failed) return ;
+            match(input,49,FOLLOW_49_in_rule__JvmLowerBound__Group__0__Impl33371); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getJvmLowerBoundAccess().getSuperKeyword_0()); 
             }
@@ -46353,16 +47496,16 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmLowerBound__Group__1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16195:1: rule__JvmLowerBound__Group__1 : rule__JvmLowerBound__Group__1__Impl ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16603:1: rule__JvmLowerBound__Group__1 : rule__JvmLowerBound__Group__1__Impl ;
     public final void rule__JvmLowerBound__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16199:1: ( rule__JvmLowerBound__Group__1__Impl )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16200:2: rule__JvmLowerBound__Group__1__Impl
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16607:1: ( rule__JvmLowerBound__Group__1__Impl )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16608:2: rule__JvmLowerBound__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__JvmLowerBound__Group__1__Impl_in_rule__JvmLowerBound__Group__132597);
+            pushFollow(FOLLOW_rule__JvmLowerBound__Group__1__Impl_in_rule__JvmLowerBound__Group__133402);
             rule__JvmLowerBound__Group__1__Impl();
 
             state._fsp--;
@@ -46386,25 +47529,25 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmLowerBound__Group__1__Impl"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16206:1: rule__JvmLowerBound__Group__1__Impl : ( ( rule__JvmLowerBound__TypeReferenceAssignment_1 ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16614:1: rule__JvmLowerBound__Group__1__Impl : ( ( rule__JvmLowerBound__TypeReferenceAssignment_1 ) ) ;
     public final void rule__JvmLowerBound__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16210:1: ( ( ( rule__JvmLowerBound__TypeReferenceAssignment_1 ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16211:1: ( ( rule__JvmLowerBound__TypeReferenceAssignment_1 ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16618:1: ( ( ( rule__JvmLowerBound__TypeReferenceAssignment_1 ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16619:1: ( ( rule__JvmLowerBound__TypeReferenceAssignment_1 ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16211:1: ( ( rule__JvmLowerBound__TypeReferenceAssignment_1 ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16212:1: ( rule__JvmLowerBound__TypeReferenceAssignment_1 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16619:1: ( ( rule__JvmLowerBound__TypeReferenceAssignment_1 ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16620:1: ( rule__JvmLowerBound__TypeReferenceAssignment_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmLowerBoundAccess().getTypeReferenceAssignment_1()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16213:1: ( rule__JvmLowerBound__TypeReferenceAssignment_1 )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16213:2: rule__JvmLowerBound__TypeReferenceAssignment_1
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16621:1: ( rule__JvmLowerBound__TypeReferenceAssignment_1 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16621:2: rule__JvmLowerBound__TypeReferenceAssignment_1
             {
-            pushFollow(FOLLOW_rule__JvmLowerBound__TypeReferenceAssignment_1_in_rule__JvmLowerBound__Group__1__Impl32624);
+            pushFollow(FOLLOW_rule__JvmLowerBound__TypeReferenceAssignment_1_in_rule__JvmLowerBound__Group__1__Impl33429);
             rule__JvmLowerBound__TypeReferenceAssignment_1();
 
             state._fsp--;
@@ -46437,21 +47580,21 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmLowerBoundAnded__Group__0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16227:1: rule__JvmLowerBoundAnded__Group__0 : rule__JvmLowerBoundAnded__Group__0__Impl rule__JvmLowerBoundAnded__Group__1 ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16635:1: rule__JvmLowerBoundAnded__Group__0 : rule__JvmLowerBoundAnded__Group__0__Impl rule__JvmLowerBoundAnded__Group__1 ;
     public final void rule__JvmLowerBoundAnded__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16231:1: ( rule__JvmLowerBoundAnded__Group__0__Impl rule__JvmLowerBoundAnded__Group__1 )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16232:2: rule__JvmLowerBoundAnded__Group__0__Impl rule__JvmLowerBoundAnded__Group__1
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16639:1: ( rule__JvmLowerBoundAnded__Group__0__Impl rule__JvmLowerBoundAnded__Group__1 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16640:2: rule__JvmLowerBoundAnded__Group__0__Impl rule__JvmLowerBoundAnded__Group__1
             {
-            pushFollow(FOLLOW_rule__JvmLowerBoundAnded__Group__0__Impl_in_rule__JvmLowerBoundAnded__Group__032658);
+            pushFollow(FOLLOW_rule__JvmLowerBoundAnded__Group__0__Impl_in_rule__JvmLowerBoundAnded__Group__033463);
             rule__JvmLowerBoundAnded__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmLowerBoundAnded__Group__1_in_rule__JvmLowerBoundAnded__Group__032661);
+            pushFollow(FOLLOW_rule__JvmLowerBoundAnded__Group__1_in_rule__JvmLowerBoundAnded__Group__033466);
             rule__JvmLowerBoundAnded__Group__1();
 
             state._fsp--;
@@ -46475,22 +47618,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmLowerBoundAnded__Group__0__Impl"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16239:1: rule__JvmLowerBoundAnded__Group__0__Impl : ( '&' ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16647:1: rule__JvmLowerBoundAnded__Group__0__Impl : ( '&' ) ;
     public final void rule__JvmLowerBoundAnded__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16243:1: ( ( '&' ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16244:1: ( '&' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16651:1: ( ( '&' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16652:1: ( '&' )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16244:1: ( '&' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16245:1: '&'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16652:1: ( '&' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16653:1: '&'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmLowerBoundAndedAccess().getAmpersandKeyword_0()); 
             }
-            match(input,83,FOLLOW_83_in_rule__JvmLowerBoundAnded__Group__0__Impl32689); if (state.failed) return ;
+            match(input,83,FOLLOW_83_in_rule__JvmLowerBoundAnded__Group__0__Impl33494); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getJvmLowerBoundAndedAccess().getAmpersandKeyword_0()); 
             }
@@ -46516,16 +47659,16 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmLowerBoundAnded__Group__1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16258:1: rule__JvmLowerBoundAnded__Group__1 : rule__JvmLowerBoundAnded__Group__1__Impl ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16666:1: rule__JvmLowerBoundAnded__Group__1 : rule__JvmLowerBoundAnded__Group__1__Impl ;
     public final void rule__JvmLowerBoundAnded__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16262:1: ( rule__JvmLowerBoundAnded__Group__1__Impl )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16263:2: rule__JvmLowerBoundAnded__Group__1__Impl
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16670:1: ( rule__JvmLowerBoundAnded__Group__1__Impl )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16671:2: rule__JvmLowerBoundAnded__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__JvmLowerBoundAnded__Group__1__Impl_in_rule__JvmLowerBoundAnded__Group__132720);
+            pushFollow(FOLLOW_rule__JvmLowerBoundAnded__Group__1__Impl_in_rule__JvmLowerBoundAnded__Group__133525);
             rule__JvmLowerBoundAnded__Group__1__Impl();
 
             state._fsp--;
@@ -46549,25 +47692,25 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmLowerBoundAnded__Group__1__Impl"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16269:1: rule__JvmLowerBoundAnded__Group__1__Impl : ( ( rule__JvmLowerBoundAnded__TypeReferenceAssignment_1 ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16677:1: rule__JvmLowerBoundAnded__Group__1__Impl : ( ( rule__JvmLowerBoundAnded__TypeReferenceAssignment_1 ) ) ;
     public final void rule__JvmLowerBoundAnded__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16273:1: ( ( ( rule__JvmLowerBoundAnded__TypeReferenceAssignment_1 ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16274:1: ( ( rule__JvmLowerBoundAnded__TypeReferenceAssignment_1 ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16681:1: ( ( ( rule__JvmLowerBoundAnded__TypeReferenceAssignment_1 ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16682:1: ( ( rule__JvmLowerBoundAnded__TypeReferenceAssignment_1 ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16274:1: ( ( rule__JvmLowerBoundAnded__TypeReferenceAssignment_1 ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16275:1: ( rule__JvmLowerBoundAnded__TypeReferenceAssignment_1 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16682:1: ( ( rule__JvmLowerBoundAnded__TypeReferenceAssignment_1 ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16683:1: ( rule__JvmLowerBoundAnded__TypeReferenceAssignment_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmLowerBoundAndedAccess().getTypeReferenceAssignment_1()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16276:1: ( rule__JvmLowerBoundAnded__TypeReferenceAssignment_1 )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16276:2: rule__JvmLowerBoundAnded__TypeReferenceAssignment_1
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16684:1: ( rule__JvmLowerBoundAnded__TypeReferenceAssignment_1 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16684:2: rule__JvmLowerBoundAnded__TypeReferenceAssignment_1
             {
-            pushFollow(FOLLOW_rule__JvmLowerBoundAnded__TypeReferenceAssignment_1_in_rule__JvmLowerBoundAnded__Group__1__Impl32747);
+            pushFollow(FOLLOW_rule__JvmLowerBoundAnded__TypeReferenceAssignment_1_in_rule__JvmLowerBoundAnded__Group__1__Impl33552);
             rule__JvmLowerBoundAnded__TypeReferenceAssignment_1();
 
             state._fsp--;
@@ -46600,21 +47743,21 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__QualifiedNameWithWildcard__Group__0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16292:1: rule__QualifiedNameWithWildcard__Group__0 : rule__QualifiedNameWithWildcard__Group__0__Impl rule__QualifiedNameWithWildcard__Group__1 ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16700:1: rule__QualifiedNameWithWildcard__Group__0 : rule__QualifiedNameWithWildcard__Group__0__Impl rule__QualifiedNameWithWildcard__Group__1 ;
     public final void rule__QualifiedNameWithWildcard__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16296:1: ( rule__QualifiedNameWithWildcard__Group__0__Impl rule__QualifiedNameWithWildcard__Group__1 )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16297:2: rule__QualifiedNameWithWildcard__Group__0__Impl rule__QualifiedNameWithWildcard__Group__1
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16704:1: ( rule__QualifiedNameWithWildcard__Group__0__Impl rule__QualifiedNameWithWildcard__Group__1 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16705:2: rule__QualifiedNameWithWildcard__Group__0__Impl rule__QualifiedNameWithWildcard__Group__1
             {
-            pushFollow(FOLLOW_rule__QualifiedNameWithWildcard__Group__0__Impl_in_rule__QualifiedNameWithWildcard__Group__032783);
+            pushFollow(FOLLOW_rule__QualifiedNameWithWildcard__Group__0__Impl_in_rule__QualifiedNameWithWildcard__Group__033588);
             rule__QualifiedNameWithWildcard__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__QualifiedNameWithWildcard__Group__1_in_rule__QualifiedNameWithWildcard__Group__032786);
+            pushFollow(FOLLOW_rule__QualifiedNameWithWildcard__Group__1_in_rule__QualifiedNameWithWildcard__Group__033591);
             rule__QualifiedNameWithWildcard__Group__1();
 
             state._fsp--;
@@ -46638,22 +47781,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__QualifiedNameWithWildcard__Group__0__Impl"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16304:1: rule__QualifiedNameWithWildcard__Group__0__Impl : ( ruleQualifiedName ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16712:1: rule__QualifiedNameWithWildcard__Group__0__Impl : ( ruleQualifiedName ) ;
     public final void rule__QualifiedNameWithWildcard__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16308:1: ( ( ruleQualifiedName ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16309:1: ( ruleQualifiedName )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16716:1: ( ( ruleQualifiedName ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16717:1: ( ruleQualifiedName )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16309:1: ( ruleQualifiedName )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16310:1: ruleQualifiedName
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16717:1: ( ruleQualifiedName )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16718:1: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedNameWithWildcardAccess().getQualifiedNameParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__QualifiedNameWithWildcard__Group__0__Impl32813);
+            pushFollow(FOLLOW_ruleQualifiedName_in_rule__QualifiedNameWithWildcard__Group__0__Impl33618);
             ruleQualifiedName();
 
             state._fsp--;
@@ -46683,21 +47826,21 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__QualifiedNameWithWildcard__Group__1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16321:1: rule__QualifiedNameWithWildcard__Group__1 : rule__QualifiedNameWithWildcard__Group__1__Impl rule__QualifiedNameWithWildcard__Group__2 ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16729:1: rule__QualifiedNameWithWildcard__Group__1 : rule__QualifiedNameWithWildcard__Group__1__Impl rule__QualifiedNameWithWildcard__Group__2 ;
     public final void rule__QualifiedNameWithWildcard__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16325:1: ( rule__QualifiedNameWithWildcard__Group__1__Impl rule__QualifiedNameWithWildcard__Group__2 )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16326:2: rule__QualifiedNameWithWildcard__Group__1__Impl rule__QualifiedNameWithWildcard__Group__2
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16733:1: ( rule__QualifiedNameWithWildcard__Group__1__Impl rule__QualifiedNameWithWildcard__Group__2 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16734:2: rule__QualifiedNameWithWildcard__Group__1__Impl rule__QualifiedNameWithWildcard__Group__2
             {
-            pushFollow(FOLLOW_rule__QualifiedNameWithWildcard__Group__1__Impl_in_rule__QualifiedNameWithWildcard__Group__132842);
+            pushFollow(FOLLOW_rule__QualifiedNameWithWildcard__Group__1__Impl_in_rule__QualifiedNameWithWildcard__Group__133647);
             rule__QualifiedNameWithWildcard__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__QualifiedNameWithWildcard__Group__2_in_rule__QualifiedNameWithWildcard__Group__132845);
+            pushFollow(FOLLOW_rule__QualifiedNameWithWildcard__Group__2_in_rule__QualifiedNameWithWildcard__Group__133650);
             rule__QualifiedNameWithWildcard__Group__2();
 
             state._fsp--;
@@ -46721,22 +47864,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__QualifiedNameWithWildcard__Group__1__Impl"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16333:1: rule__QualifiedNameWithWildcard__Group__1__Impl : ( '.' ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16741:1: rule__QualifiedNameWithWildcard__Group__1__Impl : ( '.' ) ;
     public final void rule__QualifiedNameWithWildcard__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16337:1: ( ( '.' ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16338:1: ( '.' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16745:1: ( ( '.' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16746:1: ( '.' )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16338:1: ( '.' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16339:1: '.'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16746:1: ( '.' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16747:1: '.'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedNameWithWildcardAccess().getFullStopKeyword_1()); 
             }
-            match(input,43,FOLLOW_43_in_rule__QualifiedNameWithWildcard__Group__1__Impl32873); if (state.failed) return ;
+            match(input,43,FOLLOW_43_in_rule__QualifiedNameWithWildcard__Group__1__Impl33678); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getQualifiedNameWithWildcardAccess().getFullStopKeyword_1()); 
             }
@@ -46762,16 +47905,16 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__QualifiedNameWithWildcard__Group__2"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16352:1: rule__QualifiedNameWithWildcard__Group__2 : rule__QualifiedNameWithWildcard__Group__2__Impl ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16760:1: rule__QualifiedNameWithWildcard__Group__2 : rule__QualifiedNameWithWildcard__Group__2__Impl ;
     public final void rule__QualifiedNameWithWildcard__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16356:1: ( rule__QualifiedNameWithWildcard__Group__2__Impl )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16357:2: rule__QualifiedNameWithWildcard__Group__2__Impl
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16764:1: ( rule__QualifiedNameWithWildcard__Group__2__Impl )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16765:2: rule__QualifiedNameWithWildcard__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__QualifiedNameWithWildcard__Group__2__Impl_in_rule__QualifiedNameWithWildcard__Group__232904);
+            pushFollow(FOLLOW_rule__QualifiedNameWithWildcard__Group__2__Impl_in_rule__QualifiedNameWithWildcard__Group__233709);
             rule__QualifiedNameWithWildcard__Group__2__Impl();
 
             state._fsp--;
@@ -46795,22 +47938,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__QualifiedNameWithWildcard__Group__2__Impl"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16363:1: rule__QualifiedNameWithWildcard__Group__2__Impl : ( '*' ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16771:1: rule__QualifiedNameWithWildcard__Group__2__Impl : ( '*' ) ;
     public final void rule__QualifiedNameWithWildcard__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16367:1: ( ( '*' ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16368:1: ( '*' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16775:1: ( ( '*' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16776:1: ( '*' )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16368:1: ( '*' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16369:1: '*'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16776:1: ( '*' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16777:1: '*'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedNameWithWildcardAccess().getAsteriskKeyword_2()); 
             }
-            match(input,36,FOLLOW_36_in_rule__QualifiedNameWithWildcard__Group__2__Impl32932); if (state.failed) return ;
+            match(input,36,FOLLOW_36_in_rule__QualifiedNameWithWildcard__Group__2__Impl33737); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getQualifiedNameWithWildcardAccess().getAsteriskKeyword_2()); 
             }
@@ -46836,21 +47979,21 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XImportDeclaration__Group__0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16388:1: rule__XImportDeclaration__Group__0 : rule__XImportDeclaration__Group__0__Impl rule__XImportDeclaration__Group__1 ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16796:1: rule__XImportDeclaration__Group__0 : rule__XImportDeclaration__Group__0__Impl rule__XImportDeclaration__Group__1 ;
     public final void rule__XImportDeclaration__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16392:1: ( rule__XImportDeclaration__Group__0__Impl rule__XImportDeclaration__Group__1 )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16393:2: rule__XImportDeclaration__Group__0__Impl rule__XImportDeclaration__Group__1
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16800:1: ( rule__XImportDeclaration__Group__0__Impl rule__XImportDeclaration__Group__1 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16801:2: rule__XImportDeclaration__Group__0__Impl rule__XImportDeclaration__Group__1
             {
-            pushFollow(FOLLOW_rule__XImportDeclaration__Group__0__Impl_in_rule__XImportDeclaration__Group__032969);
+            pushFollow(FOLLOW_rule__XImportDeclaration__Group__0__Impl_in_rule__XImportDeclaration__Group__033774);
             rule__XImportDeclaration__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XImportDeclaration__Group__1_in_rule__XImportDeclaration__Group__032972);
+            pushFollow(FOLLOW_rule__XImportDeclaration__Group__1_in_rule__XImportDeclaration__Group__033777);
             rule__XImportDeclaration__Group__1();
 
             state._fsp--;
@@ -46874,22 +48017,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XImportDeclaration__Group__0__Impl"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16400:1: rule__XImportDeclaration__Group__0__Impl : ( 'import' ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16808:1: rule__XImportDeclaration__Group__0__Impl : ( 'import' ) ;
     public final void rule__XImportDeclaration__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16404:1: ( ( 'import' ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16405:1: ( 'import' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16812:1: ( ( 'import' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16813:1: ( 'import' )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16405:1: ( 'import' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16406:1: 'import'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16813:1: ( 'import' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16814:1: 'import'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXImportDeclarationAccess().getImportKeyword_0()); 
             }
-            match(input,47,FOLLOW_47_in_rule__XImportDeclaration__Group__0__Impl33000); if (state.failed) return ;
+            match(input,47,FOLLOW_47_in_rule__XImportDeclaration__Group__0__Impl33805); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXImportDeclarationAccess().getImportKeyword_0()); 
             }
@@ -46915,21 +48058,21 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XImportDeclaration__Group__1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16419:1: rule__XImportDeclaration__Group__1 : rule__XImportDeclaration__Group__1__Impl rule__XImportDeclaration__Group__2 ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16827:1: rule__XImportDeclaration__Group__1 : rule__XImportDeclaration__Group__1__Impl rule__XImportDeclaration__Group__2 ;
     public final void rule__XImportDeclaration__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16423:1: ( rule__XImportDeclaration__Group__1__Impl rule__XImportDeclaration__Group__2 )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16424:2: rule__XImportDeclaration__Group__1__Impl rule__XImportDeclaration__Group__2
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16831:1: ( rule__XImportDeclaration__Group__1__Impl rule__XImportDeclaration__Group__2 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16832:2: rule__XImportDeclaration__Group__1__Impl rule__XImportDeclaration__Group__2
             {
-            pushFollow(FOLLOW_rule__XImportDeclaration__Group__1__Impl_in_rule__XImportDeclaration__Group__133031);
+            pushFollow(FOLLOW_rule__XImportDeclaration__Group__1__Impl_in_rule__XImportDeclaration__Group__133836);
             rule__XImportDeclaration__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XImportDeclaration__Group__2_in_rule__XImportDeclaration__Group__133034);
+            pushFollow(FOLLOW_rule__XImportDeclaration__Group__2_in_rule__XImportDeclaration__Group__133839);
             rule__XImportDeclaration__Group__2();
 
             state._fsp--;
@@ -46953,25 +48096,25 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XImportDeclaration__Group__1__Impl"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16431:1: rule__XImportDeclaration__Group__1__Impl : ( ( rule__XImportDeclaration__Alternatives_1 ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16839:1: rule__XImportDeclaration__Group__1__Impl : ( ( rule__XImportDeclaration__Alternatives_1 ) ) ;
     public final void rule__XImportDeclaration__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16435:1: ( ( ( rule__XImportDeclaration__Alternatives_1 ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16436:1: ( ( rule__XImportDeclaration__Alternatives_1 ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16843:1: ( ( ( rule__XImportDeclaration__Alternatives_1 ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16844:1: ( ( rule__XImportDeclaration__Alternatives_1 ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16436:1: ( ( rule__XImportDeclaration__Alternatives_1 ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16437:1: ( rule__XImportDeclaration__Alternatives_1 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16844:1: ( ( rule__XImportDeclaration__Alternatives_1 ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16845:1: ( rule__XImportDeclaration__Alternatives_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXImportDeclarationAccess().getAlternatives_1()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16438:1: ( rule__XImportDeclaration__Alternatives_1 )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16438:2: rule__XImportDeclaration__Alternatives_1
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16846:1: ( rule__XImportDeclaration__Alternatives_1 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16846:2: rule__XImportDeclaration__Alternatives_1
             {
-            pushFollow(FOLLOW_rule__XImportDeclaration__Alternatives_1_in_rule__XImportDeclaration__Group__1__Impl33061);
+            pushFollow(FOLLOW_rule__XImportDeclaration__Alternatives_1_in_rule__XImportDeclaration__Group__1__Impl33866);
             rule__XImportDeclaration__Alternatives_1();
 
             state._fsp--;
@@ -47004,16 +48147,16 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XImportDeclaration__Group__2"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16448:1: rule__XImportDeclaration__Group__2 : rule__XImportDeclaration__Group__2__Impl ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16856:1: rule__XImportDeclaration__Group__2 : rule__XImportDeclaration__Group__2__Impl ;
     public final void rule__XImportDeclaration__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16452:1: ( rule__XImportDeclaration__Group__2__Impl )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16453:2: rule__XImportDeclaration__Group__2__Impl
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16860:1: ( rule__XImportDeclaration__Group__2__Impl )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16861:2: rule__XImportDeclaration__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__XImportDeclaration__Group__2__Impl_in_rule__XImportDeclaration__Group__233091);
+            pushFollow(FOLLOW_rule__XImportDeclaration__Group__2__Impl_in_rule__XImportDeclaration__Group__233896);
             rule__XImportDeclaration__Group__2__Impl();
 
             state._fsp--;
@@ -47037,33 +48180,33 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XImportDeclaration__Group__2__Impl"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16459:1: rule__XImportDeclaration__Group__2__Impl : ( ( ';' )? ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16867:1: rule__XImportDeclaration__Group__2__Impl : ( ( ';' )? ) ;
     public final void rule__XImportDeclaration__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16463:1: ( ( ( ';' )? ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16464:1: ( ( ';' )? )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16871:1: ( ( ( ';' )? ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16872:1: ( ( ';' )? )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16464:1: ( ( ';' )? )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16465:1: ( ';' )?
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16872:1: ( ( ';' )? )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16873:1: ( ';' )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXImportDeclarationAccess().getSemicolonKeyword_2()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16466:1: ( ';' )?
-            int alt113=2;
-            int LA113_0 = input.LA(1);
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16874:1: ( ';' )?
+            int alt116=2;
+            int LA116_0 = input.LA(1);
 
-            if ( (LA113_0==62) ) {
-                alt113=1;
+            if ( (LA116_0==62) ) {
+                alt116=1;
             }
-            switch (alt113) {
+            switch (alt116) {
                 case 1 :
-                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16467:2: ';'
+                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16875:2: ';'
                     {
-                    match(input,62,FOLLOW_62_in_rule__XImportDeclaration__Group__2__Impl33120); if (state.failed) return ;
+                    match(input,62,FOLLOW_62_in_rule__XImportDeclaration__Group__2__Impl33925); if (state.failed) return ;
 
                     }
                     break;
@@ -47095,21 +48238,21 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XImportDeclaration__Group_1_0__0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16484:1: rule__XImportDeclaration__Group_1_0__0 : rule__XImportDeclaration__Group_1_0__0__Impl rule__XImportDeclaration__Group_1_0__1 ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16892:1: rule__XImportDeclaration__Group_1_0__0 : rule__XImportDeclaration__Group_1_0__0__Impl rule__XImportDeclaration__Group_1_0__1 ;
     public final void rule__XImportDeclaration__Group_1_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16488:1: ( rule__XImportDeclaration__Group_1_0__0__Impl rule__XImportDeclaration__Group_1_0__1 )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16489:2: rule__XImportDeclaration__Group_1_0__0__Impl rule__XImportDeclaration__Group_1_0__1
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16896:1: ( rule__XImportDeclaration__Group_1_0__0__Impl rule__XImportDeclaration__Group_1_0__1 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16897:2: rule__XImportDeclaration__Group_1_0__0__Impl rule__XImportDeclaration__Group_1_0__1
             {
-            pushFollow(FOLLOW_rule__XImportDeclaration__Group_1_0__0__Impl_in_rule__XImportDeclaration__Group_1_0__033159);
+            pushFollow(FOLLOW_rule__XImportDeclaration__Group_1_0__0__Impl_in_rule__XImportDeclaration__Group_1_0__033964);
             rule__XImportDeclaration__Group_1_0__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XImportDeclaration__Group_1_0__1_in_rule__XImportDeclaration__Group_1_0__033162);
+            pushFollow(FOLLOW_rule__XImportDeclaration__Group_1_0__1_in_rule__XImportDeclaration__Group_1_0__033967);
             rule__XImportDeclaration__Group_1_0__1();
 
             state._fsp--;
@@ -47133,25 +48276,25 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XImportDeclaration__Group_1_0__0__Impl"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16496:1: rule__XImportDeclaration__Group_1_0__0__Impl : ( ( rule__XImportDeclaration__StaticAssignment_1_0_0 ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16904:1: rule__XImportDeclaration__Group_1_0__0__Impl : ( ( rule__XImportDeclaration__StaticAssignment_1_0_0 ) ) ;
     public final void rule__XImportDeclaration__Group_1_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16500:1: ( ( ( rule__XImportDeclaration__StaticAssignment_1_0_0 ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16501:1: ( ( rule__XImportDeclaration__StaticAssignment_1_0_0 ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16908:1: ( ( ( rule__XImportDeclaration__StaticAssignment_1_0_0 ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16909:1: ( ( rule__XImportDeclaration__StaticAssignment_1_0_0 ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16501:1: ( ( rule__XImportDeclaration__StaticAssignment_1_0_0 ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16502:1: ( rule__XImportDeclaration__StaticAssignment_1_0_0 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16909:1: ( ( rule__XImportDeclaration__StaticAssignment_1_0_0 ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16910:1: ( rule__XImportDeclaration__StaticAssignment_1_0_0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXImportDeclarationAccess().getStaticAssignment_1_0_0()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16503:1: ( rule__XImportDeclaration__StaticAssignment_1_0_0 )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16503:2: rule__XImportDeclaration__StaticAssignment_1_0_0
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16911:1: ( rule__XImportDeclaration__StaticAssignment_1_0_0 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16911:2: rule__XImportDeclaration__StaticAssignment_1_0_0
             {
-            pushFollow(FOLLOW_rule__XImportDeclaration__StaticAssignment_1_0_0_in_rule__XImportDeclaration__Group_1_0__0__Impl33189);
+            pushFollow(FOLLOW_rule__XImportDeclaration__StaticAssignment_1_0_0_in_rule__XImportDeclaration__Group_1_0__0__Impl33994);
             rule__XImportDeclaration__StaticAssignment_1_0_0();
 
             state._fsp--;
@@ -47184,21 +48327,21 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XImportDeclaration__Group_1_0__1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16513:1: rule__XImportDeclaration__Group_1_0__1 : rule__XImportDeclaration__Group_1_0__1__Impl rule__XImportDeclaration__Group_1_0__2 ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16921:1: rule__XImportDeclaration__Group_1_0__1 : rule__XImportDeclaration__Group_1_0__1__Impl rule__XImportDeclaration__Group_1_0__2 ;
     public final void rule__XImportDeclaration__Group_1_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16517:1: ( rule__XImportDeclaration__Group_1_0__1__Impl rule__XImportDeclaration__Group_1_0__2 )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16518:2: rule__XImportDeclaration__Group_1_0__1__Impl rule__XImportDeclaration__Group_1_0__2
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16925:1: ( rule__XImportDeclaration__Group_1_0__1__Impl rule__XImportDeclaration__Group_1_0__2 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16926:2: rule__XImportDeclaration__Group_1_0__1__Impl rule__XImportDeclaration__Group_1_0__2
             {
-            pushFollow(FOLLOW_rule__XImportDeclaration__Group_1_0__1__Impl_in_rule__XImportDeclaration__Group_1_0__133219);
+            pushFollow(FOLLOW_rule__XImportDeclaration__Group_1_0__1__Impl_in_rule__XImportDeclaration__Group_1_0__134024);
             rule__XImportDeclaration__Group_1_0__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XImportDeclaration__Group_1_0__2_in_rule__XImportDeclaration__Group_1_0__133222);
+            pushFollow(FOLLOW_rule__XImportDeclaration__Group_1_0__2_in_rule__XImportDeclaration__Group_1_0__134027);
             rule__XImportDeclaration__Group_1_0__2();
 
             state._fsp--;
@@ -47222,33 +48365,33 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XImportDeclaration__Group_1_0__1__Impl"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16525:1: rule__XImportDeclaration__Group_1_0__1__Impl : ( ( rule__XImportDeclaration__ExtensionAssignment_1_0_1 )? ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16933:1: rule__XImportDeclaration__Group_1_0__1__Impl : ( ( rule__XImportDeclaration__ExtensionAssignment_1_0_1 )? ) ;
     public final void rule__XImportDeclaration__Group_1_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16529:1: ( ( ( rule__XImportDeclaration__ExtensionAssignment_1_0_1 )? ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16530:1: ( ( rule__XImportDeclaration__ExtensionAssignment_1_0_1 )? )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16937:1: ( ( ( rule__XImportDeclaration__ExtensionAssignment_1_0_1 )? ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16938:1: ( ( rule__XImportDeclaration__ExtensionAssignment_1_0_1 )? )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16530:1: ( ( rule__XImportDeclaration__ExtensionAssignment_1_0_1 )? )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16531:1: ( rule__XImportDeclaration__ExtensionAssignment_1_0_1 )?
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16938:1: ( ( rule__XImportDeclaration__ExtensionAssignment_1_0_1 )? )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16939:1: ( rule__XImportDeclaration__ExtensionAssignment_1_0_1 )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXImportDeclarationAccess().getExtensionAssignment_1_0_1()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16532:1: ( rule__XImportDeclaration__ExtensionAssignment_1_0_1 )?
-            int alt114=2;
-            int LA114_0 = input.LA(1);
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16940:1: ( rule__XImportDeclaration__ExtensionAssignment_1_0_1 )?
+            int alt117=2;
+            int LA117_0 = input.LA(1);
 
-            if ( (LA114_0==48) ) {
-                alt114=1;
+            if ( (LA117_0==48) ) {
+                alt117=1;
             }
-            switch (alt114) {
+            switch (alt117) {
                 case 1 :
-                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16532:2: rule__XImportDeclaration__ExtensionAssignment_1_0_1
+                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16940:2: rule__XImportDeclaration__ExtensionAssignment_1_0_1
                     {
-                    pushFollow(FOLLOW_rule__XImportDeclaration__ExtensionAssignment_1_0_1_in_rule__XImportDeclaration__Group_1_0__1__Impl33249);
+                    pushFollow(FOLLOW_rule__XImportDeclaration__ExtensionAssignment_1_0_1_in_rule__XImportDeclaration__Group_1_0__1__Impl34054);
                     rule__XImportDeclaration__ExtensionAssignment_1_0_1();
 
                     state._fsp--;
@@ -47284,21 +48427,21 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XImportDeclaration__Group_1_0__2"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16542:1: rule__XImportDeclaration__Group_1_0__2 : rule__XImportDeclaration__Group_1_0__2__Impl rule__XImportDeclaration__Group_1_0__3 ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16950:1: rule__XImportDeclaration__Group_1_0__2 : rule__XImportDeclaration__Group_1_0__2__Impl rule__XImportDeclaration__Group_1_0__3 ;
     public final void rule__XImportDeclaration__Group_1_0__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16546:1: ( rule__XImportDeclaration__Group_1_0__2__Impl rule__XImportDeclaration__Group_1_0__3 )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16547:2: rule__XImportDeclaration__Group_1_0__2__Impl rule__XImportDeclaration__Group_1_0__3
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16954:1: ( rule__XImportDeclaration__Group_1_0__2__Impl rule__XImportDeclaration__Group_1_0__3 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16955:2: rule__XImportDeclaration__Group_1_0__2__Impl rule__XImportDeclaration__Group_1_0__3
             {
-            pushFollow(FOLLOW_rule__XImportDeclaration__Group_1_0__2__Impl_in_rule__XImportDeclaration__Group_1_0__233280);
+            pushFollow(FOLLOW_rule__XImportDeclaration__Group_1_0__2__Impl_in_rule__XImportDeclaration__Group_1_0__234085);
             rule__XImportDeclaration__Group_1_0__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XImportDeclaration__Group_1_0__3_in_rule__XImportDeclaration__Group_1_0__233283);
+            pushFollow(FOLLOW_rule__XImportDeclaration__Group_1_0__3_in_rule__XImportDeclaration__Group_1_0__234088);
             rule__XImportDeclaration__Group_1_0__3();
 
             state._fsp--;
@@ -47322,25 +48465,25 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XImportDeclaration__Group_1_0__2__Impl"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16554:1: rule__XImportDeclaration__Group_1_0__2__Impl : ( ( rule__XImportDeclaration__ImportedTypeAssignment_1_0_2 ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16962:1: rule__XImportDeclaration__Group_1_0__2__Impl : ( ( rule__XImportDeclaration__ImportedTypeAssignment_1_0_2 ) ) ;
     public final void rule__XImportDeclaration__Group_1_0__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16558:1: ( ( ( rule__XImportDeclaration__ImportedTypeAssignment_1_0_2 ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16559:1: ( ( rule__XImportDeclaration__ImportedTypeAssignment_1_0_2 ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16966:1: ( ( ( rule__XImportDeclaration__ImportedTypeAssignment_1_0_2 ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16967:1: ( ( rule__XImportDeclaration__ImportedTypeAssignment_1_0_2 ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16559:1: ( ( rule__XImportDeclaration__ImportedTypeAssignment_1_0_2 ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16560:1: ( rule__XImportDeclaration__ImportedTypeAssignment_1_0_2 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16967:1: ( ( rule__XImportDeclaration__ImportedTypeAssignment_1_0_2 ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16968:1: ( rule__XImportDeclaration__ImportedTypeAssignment_1_0_2 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXImportDeclarationAccess().getImportedTypeAssignment_1_0_2()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16561:1: ( rule__XImportDeclaration__ImportedTypeAssignment_1_0_2 )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16561:2: rule__XImportDeclaration__ImportedTypeAssignment_1_0_2
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16969:1: ( rule__XImportDeclaration__ImportedTypeAssignment_1_0_2 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16969:2: rule__XImportDeclaration__ImportedTypeAssignment_1_0_2
             {
-            pushFollow(FOLLOW_rule__XImportDeclaration__ImportedTypeAssignment_1_0_2_in_rule__XImportDeclaration__Group_1_0__2__Impl33310);
+            pushFollow(FOLLOW_rule__XImportDeclaration__ImportedTypeAssignment_1_0_2_in_rule__XImportDeclaration__Group_1_0__2__Impl34115);
             rule__XImportDeclaration__ImportedTypeAssignment_1_0_2();
 
             state._fsp--;
@@ -47373,16 +48516,16 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XImportDeclaration__Group_1_0__3"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16571:1: rule__XImportDeclaration__Group_1_0__3 : rule__XImportDeclaration__Group_1_0__3__Impl ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16979:1: rule__XImportDeclaration__Group_1_0__3 : rule__XImportDeclaration__Group_1_0__3__Impl ;
     public final void rule__XImportDeclaration__Group_1_0__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16575:1: ( rule__XImportDeclaration__Group_1_0__3__Impl )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16576:2: rule__XImportDeclaration__Group_1_0__3__Impl
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16983:1: ( rule__XImportDeclaration__Group_1_0__3__Impl )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16984:2: rule__XImportDeclaration__Group_1_0__3__Impl
             {
-            pushFollow(FOLLOW_rule__XImportDeclaration__Group_1_0__3__Impl_in_rule__XImportDeclaration__Group_1_0__333340);
+            pushFollow(FOLLOW_rule__XImportDeclaration__Group_1_0__3__Impl_in_rule__XImportDeclaration__Group_1_0__334145);
             rule__XImportDeclaration__Group_1_0__3__Impl();
 
             state._fsp--;
@@ -47406,25 +48549,25 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XImportDeclaration__Group_1_0__3__Impl"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16582:1: rule__XImportDeclaration__Group_1_0__3__Impl : ( ( rule__XImportDeclaration__Alternatives_1_0_3 ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16990:1: rule__XImportDeclaration__Group_1_0__3__Impl : ( ( rule__XImportDeclaration__Alternatives_1_0_3 ) ) ;
     public final void rule__XImportDeclaration__Group_1_0__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16586:1: ( ( ( rule__XImportDeclaration__Alternatives_1_0_3 ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16587:1: ( ( rule__XImportDeclaration__Alternatives_1_0_3 ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16994:1: ( ( ( rule__XImportDeclaration__Alternatives_1_0_3 ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16995:1: ( ( rule__XImportDeclaration__Alternatives_1_0_3 ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16587:1: ( ( rule__XImportDeclaration__Alternatives_1_0_3 ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16588:1: ( rule__XImportDeclaration__Alternatives_1_0_3 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16995:1: ( ( rule__XImportDeclaration__Alternatives_1_0_3 ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16996:1: ( rule__XImportDeclaration__Alternatives_1_0_3 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXImportDeclarationAccess().getAlternatives_1_0_3()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16589:1: ( rule__XImportDeclaration__Alternatives_1_0_3 )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16589:2: rule__XImportDeclaration__Alternatives_1_0_3
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16997:1: ( rule__XImportDeclaration__Alternatives_1_0_3 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16997:2: rule__XImportDeclaration__Alternatives_1_0_3
             {
-            pushFollow(FOLLOW_rule__XImportDeclaration__Alternatives_1_0_3_in_rule__XImportDeclaration__Group_1_0__3__Impl33367);
+            pushFollow(FOLLOW_rule__XImportDeclaration__Alternatives_1_0_3_in_rule__XImportDeclaration__Group_1_0__3__Impl34172);
             rule__XImportDeclaration__Alternatives_1_0_3();
 
             state._fsp--;
@@ -47457,21 +48600,21 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__QualifiedNameInStaticImport__Group__0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16607:1: rule__QualifiedNameInStaticImport__Group__0 : rule__QualifiedNameInStaticImport__Group__0__Impl rule__QualifiedNameInStaticImport__Group__1 ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17015:1: rule__QualifiedNameInStaticImport__Group__0 : rule__QualifiedNameInStaticImport__Group__0__Impl rule__QualifiedNameInStaticImport__Group__1 ;
     public final void rule__QualifiedNameInStaticImport__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16611:1: ( rule__QualifiedNameInStaticImport__Group__0__Impl rule__QualifiedNameInStaticImport__Group__1 )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16612:2: rule__QualifiedNameInStaticImport__Group__0__Impl rule__QualifiedNameInStaticImport__Group__1
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17019:1: ( rule__QualifiedNameInStaticImport__Group__0__Impl rule__QualifiedNameInStaticImport__Group__1 )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17020:2: rule__QualifiedNameInStaticImport__Group__0__Impl rule__QualifiedNameInStaticImport__Group__1
             {
-            pushFollow(FOLLOW_rule__QualifiedNameInStaticImport__Group__0__Impl_in_rule__QualifiedNameInStaticImport__Group__033405);
+            pushFollow(FOLLOW_rule__QualifiedNameInStaticImport__Group__0__Impl_in_rule__QualifiedNameInStaticImport__Group__034210);
             rule__QualifiedNameInStaticImport__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__QualifiedNameInStaticImport__Group__1_in_rule__QualifiedNameInStaticImport__Group__033408);
+            pushFollow(FOLLOW_rule__QualifiedNameInStaticImport__Group__1_in_rule__QualifiedNameInStaticImport__Group__034213);
             rule__QualifiedNameInStaticImport__Group__1();
 
             state._fsp--;
@@ -47495,22 +48638,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__QualifiedNameInStaticImport__Group__0__Impl"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16619:1: rule__QualifiedNameInStaticImport__Group__0__Impl : ( ruleValidID ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17027:1: rule__QualifiedNameInStaticImport__Group__0__Impl : ( ruleValidID ) ;
     public final void rule__QualifiedNameInStaticImport__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16623:1: ( ( ruleValidID ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16624:1: ( ruleValidID )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17031:1: ( ( ruleValidID ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17032:1: ( ruleValidID )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16624:1: ( ruleValidID )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16625:1: ruleValidID
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17032:1: ( ruleValidID )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17033:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedNameInStaticImportAccess().getValidIDParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__QualifiedNameInStaticImport__Group__0__Impl33435);
+            pushFollow(FOLLOW_ruleValidID_in_rule__QualifiedNameInStaticImport__Group__0__Impl34240);
             ruleValidID();
 
             state._fsp--;
@@ -47540,16 +48683,16 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__QualifiedNameInStaticImport__Group__1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16636:1: rule__QualifiedNameInStaticImport__Group__1 : rule__QualifiedNameInStaticImport__Group__1__Impl ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17044:1: rule__QualifiedNameInStaticImport__Group__1 : rule__QualifiedNameInStaticImport__Group__1__Impl ;
     public final void rule__QualifiedNameInStaticImport__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16640:1: ( rule__QualifiedNameInStaticImport__Group__1__Impl )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16641:2: rule__QualifiedNameInStaticImport__Group__1__Impl
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17048:1: ( rule__QualifiedNameInStaticImport__Group__1__Impl )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17049:2: rule__QualifiedNameInStaticImport__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__QualifiedNameInStaticImport__Group__1__Impl_in_rule__QualifiedNameInStaticImport__Group__133464);
+            pushFollow(FOLLOW_rule__QualifiedNameInStaticImport__Group__1__Impl_in_rule__QualifiedNameInStaticImport__Group__134269);
             rule__QualifiedNameInStaticImport__Group__1__Impl();
 
             state._fsp--;
@@ -47573,22 +48716,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__QualifiedNameInStaticImport__Group__1__Impl"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16647:1: rule__QualifiedNameInStaticImport__Group__1__Impl : ( '.' ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17055:1: rule__QualifiedNameInStaticImport__Group__1__Impl : ( '.' ) ;
     public final void rule__QualifiedNameInStaticImport__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16651:1: ( ( '.' ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16652:1: ( '.' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17059:1: ( ( '.' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17060:1: ( '.' )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16652:1: ( '.' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16653:1: '.'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17060:1: ( '.' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17061:1: '.'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedNameInStaticImportAccess().getFullStopKeyword_1()); 
             }
-            match(input,43,FOLLOW_43_in_rule__QualifiedNameInStaticImport__Group__1__Impl33492); if (state.failed) return ;
+            match(input,43,FOLLOW_43_in_rule__QualifiedNameInStaticImport__Group__1__Impl34297); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getQualifiedNameInStaticImportAccess().getFullStopKeyword_1()); 
             }
@@ -47614,22 +48757,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__ImportSectionTestLanguageRoot__ImportSectionAssignment_2"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16671:1: rule__ImportSectionTestLanguageRoot__ImportSectionAssignment_2 : ( ruleXImportSection ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17079:1: rule__ImportSectionTestLanguageRoot__ImportSectionAssignment_2 : ( ruleXImportSection ) ;
     public final void rule__ImportSectionTestLanguageRoot__ImportSectionAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16675:1: ( ( ruleXImportSection ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16676:1: ( ruleXImportSection )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17083:1: ( ( ruleXImportSection ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17084:1: ( ruleXImportSection )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16676:1: ( ruleXImportSection )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16677:1: ruleXImportSection
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17084:1: ( ruleXImportSection )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17085:1: ruleXImportSection
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getImportSectionTestLanguageRootAccess().getImportSectionXImportSectionParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXImportSection_in_rule__ImportSectionTestLanguageRoot__ImportSectionAssignment_233532);
+            pushFollow(FOLLOW_ruleXImportSection_in_rule__ImportSectionTestLanguageRoot__ImportSectionAssignment_234337);
             ruleXImportSection();
 
             state._fsp--;
@@ -47659,28 +48802,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XAssignment__FeatureAssignment_0_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16686:1: rule__XAssignment__FeatureAssignment_0_1 : ( ( ruleFeatureCallID ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17094:1: rule__XAssignment__FeatureAssignment_0_1 : ( ( ruleFeatureCallID ) ) ;
     public final void rule__XAssignment__FeatureAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16690:1: ( ( ( ruleFeatureCallID ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16691:1: ( ( ruleFeatureCallID ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17098:1: ( ( ( ruleFeatureCallID ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17099:1: ( ( ruleFeatureCallID ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16691:1: ( ( ruleFeatureCallID ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16692:1: ( ruleFeatureCallID )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17099:1: ( ( ruleFeatureCallID ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17100:1: ( ruleFeatureCallID )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAssignmentAccess().getFeatureJvmIdentifiableElementCrossReference_0_1_0()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16693:1: ( ruleFeatureCallID )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16694:1: ruleFeatureCallID
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17101:1: ( ruleFeatureCallID )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17102:1: ruleFeatureCallID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAssignmentAccess().getFeatureJvmIdentifiableElementFeatureCallIDParserRuleCall_0_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleFeatureCallID_in_rule__XAssignment__FeatureAssignment_0_133567);
+            pushFollow(FOLLOW_ruleFeatureCallID_in_rule__XAssignment__FeatureAssignment_0_134372);
             ruleFeatureCallID();
 
             state._fsp--;
@@ -47716,22 +48859,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XAssignment__ValueAssignment_0_3"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16705:1: rule__XAssignment__ValueAssignment_0_3 : ( ruleXAssignment ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17113:1: rule__XAssignment__ValueAssignment_0_3 : ( ruleXAssignment ) ;
     public final void rule__XAssignment__ValueAssignment_0_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16709:1: ( ( ruleXAssignment ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16710:1: ( ruleXAssignment )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17117:1: ( ( ruleXAssignment ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17118:1: ( ruleXAssignment )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16710:1: ( ruleXAssignment )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16711:1: ruleXAssignment
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17118:1: ( ruleXAssignment )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17119:1: ruleXAssignment
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAssignmentAccess().getValueXAssignmentParserRuleCall_0_3_0()); 
             }
-            pushFollow(FOLLOW_ruleXAssignment_in_rule__XAssignment__ValueAssignment_0_333602);
+            pushFollow(FOLLOW_ruleXAssignment_in_rule__XAssignment__ValueAssignment_0_334407);
             ruleXAssignment();
 
             state._fsp--;
@@ -47761,28 +48904,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XAssignment__FeatureAssignment_1_1_0_0_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16720:1: rule__XAssignment__FeatureAssignment_1_1_0_0_1 : ( ( ruleOpMultiAssign ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17128:1: rule__XAssignment__FeatureAssignment_1_1_0_0_1 : ( ( ruleOpMultiAssign ) ) ;
     public final void rule__XAssignment__FeatureAssignment_1_1_0_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16724:1: ( ( ( ruleOpMultiAssign ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16725:1: ( ( ruleOpMultiAssign ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17132:1: ( ( ( ruleOpMultiAssign ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17133:1: ( ( ruleOpMultiAssign ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16725:1: ( ( ruleOpMultiAssign ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16726:1: ( ruleOpMultiAssign )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17133:1: ( ( ruleOpMultiAssign ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17134:1: ( ruleOpMultiAssign )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAssignmentAccess().getFeatureJvmIdentifiableElementCrossReference_1_1_0_0_1_0()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16727:1: ( ruleOpMultiAssign )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16728:1: ruleOpMultiAssign
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17135:1: ( ruleOpMultiAssign )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17136:1: ruleOpMultiAssign
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAssignmentAccess().getFeatureJvmIdentifiableElementOpMultiAssignParserRuleCall_1_1_0_0_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpMultiAssign_in_rule__XAssignment__FeatureAssignment_1_1_0_0_133637);
+            pushFollow(FOLLOW_ruleOpMultiAssign_in_rule__XAssignment__FeatureAssignment_1_1_0_0_134442);
             ruleOpMultiAssign();
 
             state._fsp--;
@@ -47818,22 +48961,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XAssignment__RightOperandAssignment_1_1_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16739:1: rule__XAssignment__RightOperandAssignment_1_1_1 : ( ruleXAssignment ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17147:1: rule__XAssignment__RightOperandAssignment_1_1_1 : ( ruleXAssignment ) ;
     public final void rule__XAssignment__RightOperandAssignment_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16743:1: ( ( ruleXAssignment ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16744:1: ( ruleXAssignment )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17151:1: ( ( ruleXAssignment ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17152:1: ( ruleXAssignment )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16744:1: ( ruleXAssignment )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16745:1: ruleXAssignment
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17152:1: ( ruleXAssignment )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17153:1: ruleXAssignment
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAssignmentAccess().getRightOperandXAssignmentParserRuleCall_1_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXAssignment_in_rule__XAssignment__RightOperandAssignment_1_1_133672);
+            pushFollow(FOLLOW_ruleXAssignment_in_rule__XAssignment__RightOperandAssignment_1_1_134477);
             ruleXAssignment();
 
             state._fsp--;
@@ -47863,28 +49006,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XOrExpression__FeatureAssignment_1_0_0_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16754:1: rule__XOrExpression__FeatureAssignment_1_0_0_1 : ( ( ruleOpOr ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17162:1: rule__XOrExpression__FeatureAssignment_1_0_0_1 : ( ( ruleOpOr ) ) ;
     public final void rule__XOrExpression__FeatureAssignment_1_0_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16758:1: ( ( ( ruleOpOr ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16759:1: ( ( ruleOpOr ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17166:1: ( ( ( ruleOpOr ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17167:1: ( ( ruleOpOr ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16759:1: ( ( ruleOpOr ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16760:1: ( ruleOpOr )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17167:1: ( ( ruleOpOr ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17168:1: ( ruleOpOr )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXOrExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16761:1: ( ruleOpOr )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16762:1: ruleOpOr
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17169:1: ( ruleOpOr )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17170:1: ruleOpOr
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXOrExpressionAccess().getFeatureJvmIdentifiableElementOpOrParserRuleCall_1_0_0_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpOr_in_rule__XOrExpression__FeatureAssignment_1_0_0_133707);
+            pushFollow(FOLLOW_ruleOpOr_in_rule__XOrExpression__FeatureAssignment_1_0_0_134512);
             ruleOpOr();
 
             state._fsp--;
@@ -47920,22 +49063,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XOrExpression__RightOperandAssignment_1_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16773:1: rule__XOrExpression__RightOperandAssignment_1_1 : ( ruleXAndExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17181:1: rule__XOrExpression__RightOperandAssignment_1_1 : ( ruleXAndExpression ) ;
     public final void rule__XOrExpression__RightOperandAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16777:1: ( ( ruleXAndExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16778:1: ( ruleXAndExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17185:1: ( ( ruleXAndExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17186:1: ( ruleXAndExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16778:1: ( ruleXAndExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16779:1: ruleXAndExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17186:1: ( ruleXAndExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17187:1: ruleXAndExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXOrExpressionAccess().getRightOperandXAndExpressionParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXAndExpression_in_rule__XOrExpression__RightOperandAssignment_1_133742);
+            pushFollow(FOLLOW_ruleXAndExpression_in_rule__XOrExpression__RightOperandAssignment_1_134547);
             ruleXAndExpression();
 
             state._fsp--;
@@ -47965,28 +49108,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XAndExpression__FeatureAssignment_1_0_0_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16788:1: rule__XAndExpression__FeatureAssignment_1_0_0_1 : ( ( ruleOpAnd ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17196:1: rule__XAndExpression__FeatureAssignment_1_0_0_1 : ( ( ruleOpAnd ) ) ;
     public final void rule__XAndExpression__FeatureAssignment_1_0_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16792:1: ( ( ( ruleOpAnd ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16793:1: ( ( ruleOpAnd ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17200:1: ( ( ( ruleOpAnd ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17201:1: ( ( ruleOpAnd ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16793:1: ( ( ruleOpAnd ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16794:1: ( ruleOpAnd )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17201:1: ( ( ruleOpAnd ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17202:1: ( ruleOpAnd )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAndExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16795:1: ( ruleOpAnd )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16796:1: ruleOpAnd
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17203:1: ( ruleOpAnd )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17204:1: ruleOpAnd
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAndExpressionAccess().getFeatureJvmIdentifiableElementOpAndParserRuleCall_1_0_0_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpAnd_in_rule__XAndExpression__FeatureAssignment_1_0_0_133777);
+            pushFollow(FOLLOW_ruleOpAnd_in_rule__XAndExpression__FeatureAssignment_1_0_0_134582);
             ruleOpAnd();
 
             state._fsp--;
@@ -48022,22 +49165,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XAndExpression__RightOperandAssignment_1_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16807:1: rule__XAndExpression__RightOperandAssignment_1_1 : ( ruleXEqualityExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17215:1: rule__XAndExpression__RightOperandAssignment_1_1 : ( ruleXEqualityExpression ) ;
     public final void rule__XAndExpression__RightOperandAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16811:1: ( ( ruleXEqualityExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16812:1: ( ruleXEqualityExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17219:1: ( ( ruleXEqualityExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17220:1: ( ruleXEqualityExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16812:1: ( ruleXEqualityExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16813:1: ruleXEqualityExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17220:1: ( ruleXEqualityExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17221:1: ruleXEqualityExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAndExpressionAccess().getRightOperandXEqualityExpressionParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXEqualityExpression_in_rule__XAndExpression__RightOperandAssignment_1_133812);
+            pushFollow(FOLLOW_ruleXEqualityExpression_in_rule__XAndExpression__RightOperandAssignment_1_134617);
             ruleXEqualityExpression();
 
             state._fsp--;
@@ -48067,28 +49210,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XEqualityExpression__FeatureAssignment_1_0_0_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16822:1: rule__XEqualityExpression__FeatureAssignment_1_0_0_1 : ( ( ruleOpEquality ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17230:1: rule__XEqualityExpression__FeatureAssignment_1_0_0_1 : ( ( ruleOpEquality ) ) ;
     public final void rule__XEqualityExpression__FeatureAssignment_1_0_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16826:1: ( ( ( ruleOpEquality ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16827:1: ( ( ruleOpEquality ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17234:1: ( ( ( ruleOpEquality ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17235:1: ( ( ruleOpEquality ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16827:1: ( ( ruleOpEquality ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16828:1: ( ruleOpEquality )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17235:1: ( ( ruleOpEquality ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17236:1: ( ruleOpEquality )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXEqualityExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16829:1: ( ruleOpEquality )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16830:1: ruleOpEquality
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17237:1: ( ruleOpEquality )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17238:1: ruleOpEquality
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXEqualityExpressionAccess().getFeatureJvmIdentifiableElementOpEqualityParserRuleCall_1_0_0_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpEquality_in_rule__XEqualityExpression__FeatureAssignment_1_0_0_133847);
+            pushFollow(FOLLOW_ruleOpEquality_in_rule__XEqualityExpression__FeatureAssignment_1_0_0_134652);
             ruleOpEquality();
 
             state._fsp--;
@@ -48124,22 +49267,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XEqualityExpression__RightOperandAssignment_1_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16841:1: rule__XEqualityExpression__RightOperandAssignment_1_1 : ( ruleXRelationalExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17249:1: rule__XEqualityExpression__RightOperandAssignment_1_1 : ( ruleXRelationalExpression ) ;
     public final void rule__XEqualityExpression__RightOperandAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16845:1: ( ( ruleXRelationalExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16846:1: ( ruleXRelationalExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17253:1: ( ( ruleXRelationalExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17254:1: ( ruleXRelationalExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16846:1: ( ruleXRelationalExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16847:1: ruleXRelationalExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17254:1: ( ruleXRelationalExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17255:1: ruleXRelationalExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXEqualityExpressionAccess().getRightOperandXRelationalExpressionParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXRelationalExpression_in_rule__XEqualityExpression__RightOperandAssignment_1_133882);
+            pushFollow(FOLLOW_ruleXRelationalExpression_in_rule__XEqualityExpression__RightOperandAssignment_1_134687);
             ruleXRelationalExpression();
 
             state._fsp--;
@@ -48169,22 +49312,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XRelationalExpression__TypeAssignment_1_0_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16856:1: rule__XRelationalExpression__TypeAssignment_1_0_1 : ( ruleJvmTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17264:1: rule__XRelationalExpression__TypeAssignment_1_0_1 : ( ruleJvmTypeReference ) ;
     public final void rule__XRelationalExpression__TypeAssignment_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16860:1: ( ( ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16861:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17268:1: ( ( ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17269:1: ( ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16861:1: ( ruleJvmTypeReference )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16862:1: ruleJvmTypeReference
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17269:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17270:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXRelationalExpressionAccess().getTypeJvmTypeReferenceParserRuleCall_1_0_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XRelationalExpression__TypeAssignment_1_0_133913);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XRelationalExpression__TypeAssignment_1_0_134718);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -48214,28 +49357,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XRelationalExpression__FeatureAssignment_1_1_0_0_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16871:1: rule__XRelationalExpression__FeatureAssignment_1_1_0_0_1 : ( ( ruleOpCompare ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17279:1: rule__XRelationalExpression__FeatureAssignment_1_1_0_0_1 : ( ( ruleOpCompare ) ) ;
     public final void rule__XRelationalExpression__FeatureAssignment_1_1_0_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16875:1: ( ( ( ruleOpCompare ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16876:1: ( ( ruleOpCompare ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17283:1: ( ( ( ruleOpCompare ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17284:1: ( ( ruleOpCompare ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16876:1: ( ( ruleOpCompare ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16877:1: ( ruleOpCompare )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17284:1: ( ( ruleOpCompare ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17285:1: ( ruleOpCompare )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXRelationalExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_1_0_0_1_0()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16878:1: ( ruleOpCompare )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16879:1: ruleOpCompare
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17286:1: ( ruleOpCompare )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17287:1: ruleOpCompare
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXRelationalExpressionAccess().getFeatureJvmIdentifiableElementOpCompareParserRuleCall_1_1_0_0_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpCompare_in_rule__XRelationalExpression__FeatureAssignment_1_1_0_0_133948);
+            pushFollow(FOLLOW_ruleOpCompare_in_rule__XRelationalExpression__FeatureAssignment_1_1_0_0_134753);
             ruleOpCompare();
 
             state._fsp--;
@@ -48271,22 +49414,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XRelationalExpression__RightOperandAssignment_1_1_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16890:1: rule__XRelationalExpression__RightOperandAssignment_1_1_1 : ( ruleXOtherOperatorExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17298:1: rule__XRelationalExpression__RightOperandAssignment_1_1_1 : ( ruleXOtherOperatorExpression ) ;
     public final void rule__XRelationalExpression__RightOperandAssignment_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16894:1: ( ( ruleXOtherOperatorExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16895:1: ( ruleXOtherOperatorExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17302:1: ( ( ruleXOtherOperatorExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17303:1: ( ruleXOtherOperatorExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16895:1: ( ruleXOtherOperatorExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16896:1: ruleXOtherOperatorExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17303:1: ( ruleXOtherOperatorExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17304:1: ruleXOtherOperatorExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXRelationalExpressionAccess().getRightOperandXOtherOperatorExpressionParserRuleCall_1_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXOtherOperatorExpression_in_rule__XRelationalExpression__RightOperandAssignment_1_1_133983);
+            pushFollow(FOLLOW_ruleXOtherOperatorExpression_in_rule__XRelationalExpression__RightOperandAssignment_1_1_134788);
             ruleXOtherOperatorExpression();
 
             state._fsp--;
@@ -48316,28 +49459,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XOtherOperatorExpression__FeatureAssignment_1_0_0_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16905:1: rule__XOtherOperatorExpression__FeatureAssignment_1_0_0_1 : ( ( ruleOpOther ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17313:1: rule__XOtherOperatorExpression__FeatureAssignment_1_0_0_1 : ( ( ruleOpOther ) ) ;
     public final void rule__XOtherOperatorExpression__FeatureAssignment_1_0_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16909:1: ( ( ( ruleOpOther ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16910:1: ( ( ruleOpOther ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17317:1: ( ( ( ruleOpOther ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17318:1: ( ( ruleOpOther ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16910:1: ( ( ruleOpOther ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16911:1: ( ruleOpOther )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17318:1: ( ( ruleOpOther ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17319:1: ( ruleOpOther )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXOtherOperatorExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16912:1: ( ruleOpOther )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16913:1: ruleOpOther
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17320:1: ( ruleOpOther )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17321:1: ruleOpOther
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXOtherOperatorExpressionAccess().getFeatureJvmIdentifiableElementOpOtherParserRuleCall_1_0_0_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpOther_in_rule__XOtherOperatorExpression__FeatureAssignment_1_0_0_134018);
+            pushFollow(FOLLOW_ruleOpOther_in_rule__XOtherOperatorExpression__FeatureAssignment_1_0_0_134823);
             ruleOpOther();
 
             state._fsp--;
@@ -48373,22 +49516,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XOtherOperatorExpression__RightOperandAssignment_1_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16924:1: rule__XOtherOperatorExpression__RightOperandAssignment_1_1 : ( ruleXAdditiveExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17332:1: rule__XOtherOperatorExpression__RightOperandAssignment_1_1 : ( ruleXAdditiveExpression ) ;
     public final void rule__XOtherOperatorExpression__RightOperandAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16928:1: ( ( ruleXAdditiveExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16929:1: ( ruleXAdditiveExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17336:1: ( ( ruleXAdditiveExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17337:1: ( ruleXAdditiveExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16929:1: ( ruleXAdditiveExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16930:1: ruleXAdditiveExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17337:1: ( ruleXAdditiveExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17338:1: ruleXAdditiveExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXOtherOperatorExpressionAccess().getRightOperandXAdditiveExpressionParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXAdditiveExpression_in_rule__XOtherOperatorExpression__RightOperandAssignment_1_134053);
+            pushFollow(FOLLOW_ruleXAdditiveExpression_in_rule__XOtherOperatorExpression__RightOperandAssignment_1_134858);
             ruleXAdditiveExpression();
 
             state._fsp--;
@@ -48418,28 +49561,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XAdditiveExpression__FeatureAssignment_1_0_0_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16939:1: rule__XAdditiveExpression__FeatureAssignment_1_0_0_1 : ( ( ruleOpAdd ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17347:1: rule__XAdditiveExpression__FeatureAssignment_1_0_0_1 : ( ( ruleOpAdd ) ) ;
     public final void rule__XAdditiveExpression__FeatureAssignment_1_0_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16943:1: ( ( ( ruleOpAdd ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16944:1: ( ( ruleOpAdd ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17351:1: ( ( ( ruleOpAdd ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17352:1: ( ( ruleOpAdd ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16944:1: ( ( ruleOpAdd ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16945:1: ( ruleOpAdd )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17352:1: ( ( ruleOpAdd ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17353:1: ( ruleOpAdd )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAdditiveExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16946:1: ( ruleOpAdd )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16947:1: ruleOpAdd
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17354:1: ( ruleOpAdd )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17355:1: ruleOpAdd
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAdditiveExpressionAccess().getFeatureJvmIdentifiableElementOpAddParserRuleCall_1_0_0_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpAdd_in_rule__XAdditiveExpression__FeatureAssignment_1_0_0_134088);
+            pushFollow(FOLLOW_ruleOpAdd_in_rule__XAdditiveExpression__FeatureAssignment_1_0_0_134893);
             ruleOpAdd();
 
             state._fsp--;
@@ -48475,22 +49618,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XAdditiveExpression__RightOperandAssignment_1_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16958:1: rule__XAdditiveExpression__RightOperandAssignment_1_1 : ( ruleXMultiplicativeExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17366:1: rule__XAdditiveExpression__RightOperandAssignment_1_1 : ( ruleXMultiplicativeExpression ) ;
     public final void rule__XAdditiveExpression__RightOperandAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16962:1: ( ( ruleXMultiplicativeExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16963:1: ( ruleXMultiplicativeExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17370:1: ( ( ruleXMultiplicativeExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17371:1: ( ruleXMultiplicativeExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16963:1: ( ruleXMultiplicativeExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16964:1: ruleXMultiplicativeExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17371:1: ( ruleXMultiplicativeExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17372:1: ruleXMultiplicativeExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAdditiveExpressionAccess().getRightOperandXMultiplicativeExpressionParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXMultiplicativeExpression_in_rule__XAdditiveExpression__RightOperandAssignment_1_134123);
+            pushFollow(FOLLOW_ruleXMultiplicativeExpression_in_rule__XAdditiveExpression__RightOperandAssignment_1_134928);
             ruleXMultiplicativeExpression();
 
             state._fsp--;
@@ -48520,28 +49663,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XMultiplicativeExpression__FeatureAssignment_1_0_0_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16973:1: rule__XMultiplicativeExpression__FeatureAssignment_1_0_0_1 : ( ( ruleOpMulti ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17381:1: rule__XMultiplicativeExpression__FeatureAssignment_1_0_0_1 : ( ( ruleOpMulti ) ) ;
     public final void rule__XMultiplicativeExpression__FeatureAssignment_1_0_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16977:1: ( ( ( ruleOpMulti ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16978:1: ( ( ruleOpMulti ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17385:1: ( ( ( ruleOpMulti ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17386:1: ( ( ruleOpMulti ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16978:1: ( ( ruleOpMulti ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16979:1: ( ruleOpMulti )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17386:1: ( ( ruleOpMulti ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17387:1: ( ruleOpMulti )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMultiplicativeExpressionAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16980:1: ( ruleOpMulti )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16981:1: ruleOpMulti
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17388:1: ( ruleOpMulti )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17389:1: ruleOpMulti
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMultiplicativeExpressionAccess().getFeatureJvmIdentifiableElementOpMultiParserRuleCall_1_0_0_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpMulti_in_rule__XMultiplicativeExpression__FeatureAssignment_1_0_0_134158);
+            pushFollow(FOLLOW_ruleOpMulti_in_rule__XMultiplicativeExpression__FeatureAssignment_1_0_0_134963);
             ruleOpMulti();
 
             state._fsp--;
@@ -48577,22 +49720,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XMultiplicativeExpression__RightOperandAssignment_1_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16992:1: rule__XMultiplicativeExpression__RightOperandAssignment_1_1 : ( ruleXUnaryOperation ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17400:1: rule__XMultiplicativeExpression__RightOperandAssignment_1_1 : ( ruleXUnaryOperation ) ;
     public final void rule__XMultiplicativeExpression__RightOperandAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16996:1: ( ( ruleXUnaryOperation ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16997:1: ( ruleXUnaryOperation )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17404:1: ( ( ruleXUnaryOperation ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17405:1: ( ruleXUnaryOperation )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16997:1: ( ruleXUnaryOperation )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16998:1: ruleXUnaryOperation
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17405:1: ( ruleXUnaryOperation )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17406:1: ruleXUnaryOperation
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMultiplicativeExpressionAccess().getRightOperandXUnaryOperationParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXUnaryOperation_in_rule__XMultiplicativeExpression__RightOperandAssignment_1_134193);
+            pushFollow(FOLLOW_ruleXUnaryOperation_in_rule__XMultiplicativeExpression__RightOperandAssignment_1_134998);
             ruleXUnaryOperation();
 
             state._fsp--;
@@ -48622,28 +49765,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XUnaryOperation__FeatureAssignment_0_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17007:1: rule__XUnaryOperation__FeatureAssignment_0_1 : ( ( ruleOpUnary ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17415:1: rule__XUnaryOperation__FeatureAssignment_0_1 : ( ( ruleOpUnary ) ) ;
     public final void rule__XUnaryOperation__FeatureAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17011:1: ( ( ( ruleOpUnary ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17012:1: ( ( ruleOpUnary ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17419:1: ( ( ( ruleOpUnary ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17420:1: ( ( ruleOpUnary ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17012:1: ( ( ruleOpUnary ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17013:1: ( ruleOpUnary )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17420:1: ( ( ruleOpUnary ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17421:1: ( ruleOpUnary )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXUnaryOperationAccess().getFeatureJvmIdentifiableElementCrossReference_0_1_0()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17014:1: ( ruleOpUnary )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17015:1: ruleOpUnary
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17422:1: ( ruleOpUnary )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17423:1: ruleOpUnary
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXUnaryOperationAccess().getFeatureJvmIdentifiableElementOpUnaryParserRuleCall_0_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpUnary_in_rule__XUnaryOperation__FeatureAssignment_0_134228);
+            pushFollow(FOLLOW_ruleOpUnary_in_rule__XUnaryOperation__FeatureAssignment_0_135033);
             ruleOpUnary();
 
             state._fsp--;
@@ -48679,22 +49822,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XUnaryOperation__OperandAssignment_0_2"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17026:1: rule__XUnaryOperation__OperandAssignment_0_2 : ( ruleXUnaryOperation ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17434:1: rule__XUnaryOperation__OperandAssignment_0_2 : ( ruleXUnaryOperation ) ;
     public final void rule__XUnaryOperation__OperandAssignment_0_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17030:1: ( ( ruleXUnaryOperation ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17031:1: ( ruleXUnaryOperation )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17438:1: ( ( ruleXUnaryOperation ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17439:1: ( ruleXUnaryOperation )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17031:1: ( ruleXUnaryOperation )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17032:1: ruleXUnaryOperation
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17439:1: ( ruleXUnaryOperation )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17440:1: ruleXUnaryOperation
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXUnaryOperationAccess().getOperandXUnaryOperationParserRuleCall_0_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXUnaryOperation_in_rule__XUnaryOperation__OperandAssignment_0_234263);
+            pushFollow(FOLLOW_ruleXUnaryOperation_in_rule__XUnaryOperation__OperandAssignment_0_235068);
             ruleXUnaryOperation();
 
             state._fsp--;
@@ -48724,22 +49867,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XCastedExpression__TypeAssignment_1_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17041:1: rule__XCastedExpression__TypeAssignment_1_1 : ( ruleJvmTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17449:1: rule__XCastedExpression__TypeAssignment_1_1 : ( ruleJvmTypeReference ) ;
     public final void rule__XCastedExpression__TypeAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17045:1: ( ( ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17046:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17453:1: ( ( ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17454:1: ( ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17046:1: ( ruleJvmTypeReference )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17047:1: ruleJvmTypeReference
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17454:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17455:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCastedExpressionAccess().getTypeJvmTypeReferenceParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XCastedExpression__TypeAssignment_1_134294);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XCastedExpression__TypeAssignment_1_135099);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -48769,28 +49912,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XPostfixOperation__FeatureAssignment_1_0_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17056:1: rule__XPostfixOperation__FeatureAssignment_1_0_1 : ( ( ruleOpPostfix ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17464:1: rule__XPostfixOperation__FeatureAssignment_1_0_1 : ( ( ruleOpPostfix ) ) ;
     public final void rule__XPostfixOperation__FeatureAssignment_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17060:1: ( ( ( ruleOpPostfix ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17061:1: ( ( ruleOpPostfix ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17468:1: ( ( ( ruleOpPostfix ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17469:1: ( ( ruleOpPostfix ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17061:1: ( ( ruleOpPostfix ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17062:1: ( ruleOpPostfix )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17469:1: ( ( ruleOpPostfix ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17470:1: ( ruleOpPostfix )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXPostfixOperationAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_1_0()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17063:1: ( ruleOpPostfix )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17064:1: ruleOpPostfix
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17471:1: ( ruleOpPostfix )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17472:1: ruleOpPostfix
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXPostfixOperationAccess().getFeatureJvmIdentifiableElementOpPostfixParserRuleCall_1_0_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpPostfix_in_rule__XPostfixOperation__FeatureAssignment_1_0_134329);
+            pushFollow(FOLLOW_ruleOpPostfix_in_rule__XPostfixOperation__FeatureAssignment_1_0_135134);
             ruleOpPostfix();
 
             state._fsp--;
@@ -48826,28 +49969,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XMemberFeatureCall__ExplicitStaticAssignment_1_0_0_0_1_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17075:1: rule__XMemberFeatureCall__ExplicitStaticAssignment_1_0_0_0_1_1 : ( ( '::' ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17483:1: rule__XMemberFeatureCall__ExplicitStaticAssignment_1_0_0_0_1_1 : ( ( '::' ) ) ;
     public final void rule__XMemberFeatureCall__ExplicitStaticAssignment_1_0_0_0_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17079:1: ( ( ( '::' ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17080:1: ( ( '::' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17487:1: ( ( ( '::' ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17488:1: ( ( '::' ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17080:1: ( ( '::' ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17081:1: ( '::' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getXMemberFeatureCallAccess().getExplicitStaticColonColonKeyword_1_0_0_0_1_1_0()); 
-            }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17082:1: ( '::' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17083:1: '::'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17488:1: ( ( '::' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17489:1: ( '::' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getExplicitStaticColonColonKeyword_1_0_0_0_1_1_0()); 
             }
-            match(input,84,FOLLOW_84_in_rule__XMemberFeatureCall__ExplicitStaticAssignment_1_0_0_0_1_134369); if (state.failed) return ;
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17490:1: ( '::' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17491:1: '::'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXMemberFeatureCallAccess().getExplicitStaticColonColonKeyword_1_0_0_0_1_1_0()); 
+            }
+            match(input,84,FOLLOW_84_in_rule__XMemberFeatureCall__ExplicitStaticAssignment_1_0_0_0_1_135174); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXMemberFeatureCallAccess().getExplicitStaticColonColonKeyword_1_0_0_0_1_1_0()); 
             }
@@ -48879,28 +50022,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XMemberFeatureCall__FeatureAssignment_1_0_0_0_2"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17098:1: rule__XMemberFeatureCall__FeatureAssignment_1_0_0_0_2 : ( ( ruleFeatureCallID ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17506:1: rule__XMemberFeatureCall__FeatureAssignment_1_0_0_0_2 : ( ( ruleFeatureCallID ) ) ;
     public final void rule__XMemberFeatureCall__FeatureAssignment_1_0_0_0_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17102:1: ( ( ( ruleFeatureCallID ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17103:1: ( ( ruleFeatureCallID ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17510:1: ( ( ( ruleFeatureCallID ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17511:1: ( ( ruleFeatureCallID ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17103:1: ( ( ruleFeatureCallID ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17104:1: ( ruleFeatureCallID )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17511:1: ( ( ruleFeatureCallID ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17512:1: ( ruleFeatureCallID )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_0_2_0()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17105:1: ( ruleFeatureCallID )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17106:1: ruleFeatureCallID
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17513:1: ( ruleFeatureCallID )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17514:1: ruleFeatureCallID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getFeatureJvmIdentifiableElementFeatureCallIDParserRuleCall_1_0_0_0_2_0_1()); 
             }
-            pushFollow(FOLLOW_ruleFeatureCallID_in_rule__XMemberFeatureCall__FeatureAssignment_1_0_0_0_234412);
+            pushFollow(FOLLOW_ruleFeatureCallID_in_rule__XMemberFeatureCall__FeatureAssignment_1_0_0_0_235217);
             ruleFeatureCallID();
 
             state._fsp--;
@@ -48936,22 +50079,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XMemberFeatureCall__ValueAssignment_1_0_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17117:1: rule__XMemberFeatureCall__ValueAssignment_1_0_1 : ( ruleXAssignment ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17525:1: rule__XMemberFeatureCall__ValueAssignment_1_0_1 : ( ruleXAssignment ) ;
     public final void rule__XMemberFeatureCall__ValueAssignment_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17121:1: ( ( ruleXAssignment ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17122:1: ( ruleXAssignment )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17529:1: ( ( ruleXAssignment ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17530:1: ( ruleXAssignment )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17122:1: ( ruleXAssignment )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17123:1: ruleXAssignment
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17530:1: ( ruleXAssignment )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17531:1: ruleXAssignment
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getValueXAssignmentParserRuleCall_1_0_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXAssignment_in_rule__XMemberFeatureCall__ValueAssignment_1_0_134447);
+            pushFollow(FOLLOW_ruleXAssignment_in_rule__XMemberFeatureCall__ValueAssignment_1_0_135252);
             ruleXAssignment();
 
             state._fsp--;
@@ -48981,28 +50124,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XMemberFeatureCall__NullSafeAssignment_1_1_0_0_1_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17132:1: rule__XMemberFeatureCall__NullSafeAssignment_1_1_0_0_1_1 : ( ( '?.' ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17540:1: rule__XMemberFeatureCall__NullSafeAssignment_1_1_0_0_1_1 : ( ( '?.' ) ) ;
     public final void rule__XMemberFeatureCall__NullSafeAssignment_1_1_0_0_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17136:1: ( ( ( '?.' ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17137:1: ( ( '?.' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17544:1: ( ( ( '?.' ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17545:1: ( ( '?.' ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17137:1: ( ( '?.' ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17138:1: ( '?.' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getXMemberFeatureCallAccess().getNullSafeQuestionMarkFullStopKeyword_1_1_0_0_1_1_0()); 
-            }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17139:1: ( '?.' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17140:1: '?.'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17545:1: ( ( '?.' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17546:1: ( '?.' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getNullSafeQuestionMarkFullStopKeyword_1_1_0_0_1_1_0()); 
             }
-            match(input,85,FOLLOW_85_in_rule__XMemberFeatureCall__NullSafeAssignment_1_1_0_0_1_134483); if (state.failed) return ;
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17547:1: ( '?.' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17548:1: '?.'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXMemberFeatureCallAccess().getNullSafeQuestionMarkFullStopKeyword_1_1_0_0_1_1_0()); 
+            }
+            match(input,85,FOLLOW_85_in_rule__XMemberFeatureCall__NullSafeAssignment_1_1_0_0_1_135288); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXMemberFeatureCallAccess().getNullSafeQuestionMarkFullStopKeyword_1_1_0_0_1_1_0()); 
             }
@@ -49034,28 +50177,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XMemberFeatureCall__ExplicitStaticAssignment_1_1_0_0_1_2"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17155:1: rule__XMemberFeatureCall__ExplicitStaticAssignment_1_1_0_0_1_2 : ( ( '::' ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17563:1: rule__XMemberFeatureCall__ExplicitStaticAssignment_1_1_0_0_1_2 : ( ( '::' ) ) ;
     public final void rule__XMemberFeatureCall__ExplicitStaticAssignment_1_1_0_0_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17159:1: ( ( ( '::' ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17160:1: ( ( '::' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17567:1: ( ( ( '::' ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17568:1: ( ( '::' ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17160:1: ( ( '::' ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17161:1: ( '::' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getXMemberFeatureCallAccess().getExplicitStaticColonColonKeyword_1_1_0_0_1_2_0()); 
-            }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17162:1: ( '::' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17163:1: '::'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17568:1: ( ( '::' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17569:1: ( '::' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getExplicitStaticColonColonKeyword_1_1_0_0_1_2_0()); 
             }
-            match(input,84,FOLLOW_84_in_rule__XMemberFeatureCall__ExplicitStaticAssignment_1_1_0_0_1_234527); if (state.failed) return ;
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17570:1: ( '::' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17571:1: '::'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXMemberFeatureCallAccess().getExplicitStaticColonColonKeyword_1_1_0_0_1_2_0()); 
+            }
+            match(input,84,FOLLOW_84_in_rule__XMemberFeatureCall__ExplicitStaticAssignment_1_1_0_0_1_235332); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXMemberFeatureCallAccess().getExplicitStaticColonColonKeyword_1_1_0_0_1_2_0()); 
             }
@@ -49087,22 +50230,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17178:1: rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_1 : ( ruleJvmArgumentTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17586:1: rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_1 : ( ruleJvmArgumentTypeReference ) ;
     public final void rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17182:1: ( ( ruleJvmArgumentTypeReference ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17183:1: ( ruleJvmArgumentTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17590:1: ( ( ruleJvmArgumentTypeReference ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17591:1: ( ruleJvmArgumentTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17183:1: ( ruleJvmArgumentTypeReference )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17184:1: ruleJvmArgumentTypeReference
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17591:1: ( ruleJvmArgumentTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17592:1: ruleJvmArgumentTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_134566);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_135371);
             ruleJvmArgumentTypeReference();
 
             state._fsp--;
@@ -49132,22 +50275,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_2_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17193:1: rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_2_1 : ( ruleJvmArgumentTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17601:1: rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_2_1 : ( ruleJvmArgumentTypeReference ) ;
     public final void rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17197:1: ( ( ruleJvmArgumentTypeReference ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17198:1: ( ruleJvmArgumentTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17605:1: ( ( ruleJvmArgumentTypeReference ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17606:1: ( ruleJvmArgumentTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17198:1: ( ruleJvmArgumentTypeReference )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17199:1: ruleJvmArgumentTypeReference
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17606:1: ( ruleJvmArgumentTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17607:1: ruleJvmArgumentTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_1_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_2_134597);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_2_135402);
             ruleJvmArgumentTypeReference();
 
             state._fsp--;
@@ -49177,28 +50320,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XMemberFeatureCall__FeatureAssignment_1_1_2"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17208:1: rule__XMemberFeatureCall__FeatureAssignment_1_1_2 : ( ( ruleIdOrSuper ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17616:1: rule__XMemberFeatureCall__FeatureAssignment_1_1_2 : ( ( ruleIdOrSuper ) ) ;
     public final void rule__XMemberFeatureCall__FeatureAssignment_1_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17212:1: ( ( ( ruleIdOrSuper ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17213:1: ( ( ruleIdOrSuper ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17620:1: ( ( ( ruleIdOrSuper ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17621:1: ( ( ruleIdOrSuper ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17213:1: ( ( ruleIdOrSuper ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17214:1: ( ruleIdOrSuper )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17621:1: ( ( ruleIdOrSuper ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17622:1: ( ruleIdOrSuper )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getFeatureJvmIdentifiableElementCrossReference_1_1_2_0()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17215:1: ( ruleIdOrSuper )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17216:1: ruleIdOrSuper
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17623:1: ( ruleIdOrSuper )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17624:1: ruleIdOrSuper
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getFeatureJvmIdentifiableElementIdOrSuperParserRuleCall_1_1_2_0_1()); 
             }
-            pushFollow(FOLLOW_ruleIdOrSuper_in_rule__XMemberFeatureCall__FeatureAssignment_1_1_234632);
+            pushFollow(FOLLOW_ruleIdOrSuper_in_rule__XMemberFeatureCall__FeatureAssignment_1_1_235437);
             ruleIdOrSuper();
 
             state._fsp--;
@@ -49234,28 +50377,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XMemberFeatureCall__ExplicitOperationCallAssignment_1_1_3_0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17227:1: rule__XMemberFeatureCall__ExplicitOperationCallAssignment_1_1_3_0 : ( ( '(' ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17635:1: rule__XMemberFeatureCall__ExplicitOperationCallAssignment_1_1_3_0 : ( ( '(' ) ) ;
     public final void rule__XMemberFeatureCall__ExplicitOperationCallAssignment_1_1_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17231:1: ( ( ( '(' ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17232:1: ( ( '(' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17639:1: ( ( ( '(' ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17640:1: ( ( '(' ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17232:1: ( ( '(' ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17233:1: ( '(' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getXMemberFeatureCallAccess().getExplicitOperationCallLeftParenthesisKeyword_1_1_3_0_0()); 
-            }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17234:1: ( '(' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17235:1: '('
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17640:1: ( ( '(' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17641:1: ( '(' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getExplicitOperationCallLeftParenthesisKeyword_1_1_3_0_0()); 
             }
-            match(input,63,FOLLOW_63_in_rule__XMemberFeatureCall__ExplicitOperationCallAssignment_1_1_3_034672); if (state.failed) return ;
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17642:1: ( '(' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17643:1: '('
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXMemberFeatureCallAccess().getExplicitOperationCallLeftParenthesisKeyword_1_1_3_0_0()); 
+            }
+            match(input,63,FOLLOW_63_in_rule__XMemberFeatureCall__ExplicitOperationCallAssignment_1_1_3_035477); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXMemberFeatureCallAccess().getExplicitOperationCallLeftParenthesisKeyword_1_1_3_0_0()); 
             }
@@ -49287,22 +50430,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17250:1: rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_0 : ( ruleXShortClosure ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17658:1: rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_0 : ( ruleXShortClosure ) ;
     public final void rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17254:1: ( ( ruleXShortClosure ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17255:1: ( ruleXShortClosure )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17662:1: ( ( ruleXShortClosure ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17663:1: ( ruleXShortClosure )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17255:1: ( ruleXShortClosure )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17256:1: ruleXShortClosure
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17663:1: ( ruleXShortClosure )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17664:1: ruleXShortClosure
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getMemberCallArgumentsXShortClosureParserRuleCall_1_1_3_1_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXShortClosure_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_034711);
+            pushFollow(FOLLOW_ruleXShortClosure_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_035516);
             ruleXShortClosure();
 
             state._fsp--;
@@ -49332,22 +50475,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17265:1: rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_0 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17673:1: rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_0 : ( ruleXExpression ) ;
     public final void rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17269:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17270:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17677:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17678:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17270:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17271:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17678:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17679:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getMemberCallArgumentsXExpressionParserRuleCall_1_1_3_1_1_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_034742);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_035547);
             ruleXExpression();
 
             state._fsp--;
@@ -49377,22 +50520,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_1_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17280:1: rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_1_1 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17688:1: rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_1_1 : ( ruleXExpression ) ;
     public final void rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17284:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17285:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17692:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17693:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17285:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17286:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17693:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17694:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getMemberCallArgumentsXExpressionParserRuleCall_1_1_3_1_1_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_1_134773);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_1_135578);
             ruleXExpression();
 
             state._fsp--;
@@ -49422,22 +50565,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_4"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17295:1: rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_4 : ( ruleXClosure ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17703:1: rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_4 : ( ruleXClosure ) ;
     public final void rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17299:1: ( ( ruleXClosure ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17300:1: ( ruleXClosure )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17707:1: ( ( ruleXClosure ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17708:1: ( ruleXClosure )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17300:1: ( ruleXClosure )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17301:1: ruleXClosure
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17708:1: ( ruleXClosure )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17709:1: ruleXClosure
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getMemberCallArgumentsXClosureParserRuleCall_1_1_4_0()); 
             }
-            pushFollow(FOLLOW_ruleXClosure_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_434804);
+            pushFollow(FOLLOW_ruleXClosure_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_435609);
             ruleXClosure();
 
             state._fsp--;
@@ -49467,22 +50610,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XSetLiteral__ElementsAssignment_3_0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17310:1: rule__XSetLiteral__ElementsAssignment_3_0 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17718:1: rule__XSetLiteral__ElementsAssignment_3_0 : ( ruleXExpression ) ;
     public final void rule__XSetLiteral__ElementsAssignment_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17314:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17315:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17722:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17723:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17315:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17316:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17723:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17724:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXSetLiteralAccess().getElementsXExpressionParserRuleCall_3_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XSetLiteral__ElementsAssignment_3_034835);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XSetLiteral__ElementsAssignment_3_035640);
             ruleXExpression();
 
             state._fsp--;
@@ -49512,22 +50655,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XSetLiteral__ElementsAssignment_3_1_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17325:1: rule__XSetLiteral__ElementsAssignment_3_1_1 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17733:1: rule__XSetLiteral__ElementsAssignment_3_1_1 : ( ruleXExpression ) ;
     public final void rule__XSetLiteral__ElementsAssignment_3_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17329:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17330:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17737:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17738:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17330:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17331:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17738:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17739:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXSetLiteralAccess().getElementsXExpressionParserRuleCall_3_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XSetLiteral__ElementsAssignment_3_1_134866);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XSetLiteral__ElementsAssignment_3_1_135671);
             ruleXExpression();
 
             state._fsp--;
@@ -49557,22 +50700,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XListLiteral__ElementsAssignment_3_0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17340:1: rule__XListLiteral__ElementsAssignment_3_0 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17748:1: rule__XListLiteral__ElementsAssignment_3_0 : ( ruleXExpression ) ;
     public final void rule__XListLiteral__ElementsAssignment_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17344:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17345:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17752:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17753:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17345:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17346:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17753:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17754:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXListLiteralAccess().getElementsXExpressionParserRuleCall_3_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XListLiteral__ElementsAssignment_3_034897);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XListLiteral__ElementsAssignment_3_035702);
             ruleXExpression();
 
             state._fsp--;
@@ -49602,22 +50745,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XListLiteral__ElementsAssignment_3_1_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17355:1: rule__XListLiteral__ElementsAssignment_3_1_1 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17763:1: rule__XListLiteral__ElementsAssignment_3_1_1 : ( ruleXExpression ) ;
     public final void rule__XListLiteral__ElementsAssignment_3_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17359:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17360:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17767:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17768:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17360:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17361:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17768:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17769:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXListLiteralAccess().getElementsXExpressionParserRuleCall_3_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XListLiteral__ElementsAssignment_3_1_134928);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XListLiteral__ElementsAssignment_3_1_135733);
             ruleXExpression();
 
             state._fsp--;
@@ -49647,22 +50790,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17370:1: rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_0 : ( ruleJvmFormalParameter ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17778:1: rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_0 : ( ruleJvmFormalParameter ) ;
     public final void rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17374:1: ( ( ruleJvmFormalParameter ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17375:1: ( ruleJvmFormalParameter )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17782:1: ( ( ruleJvmFormalParameter ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17783:1: ( ruleJvmFormalParameter )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17375:1: ( ruleJvmFormalParameter )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17376:1: ruleJvmFormalParameter
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17783:1: ( ruleJvmFormalParameter )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17784:1: ruleJvmFormalParameter
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXClosureAccess().getDeclaredFormalParametersJvmFormalParameterParserRuleCall_1_0_0_0_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_034959);
+            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_035764);
             ruleJvmFormalParameter();
 
             state._fsp--;
@@ -49692,22 +50835,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_1_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17385:1: rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_1_1 : ( ruleJvmFormalParameter ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17793:1: rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_1_1 : ( ruleJvmFormalParameter ) ;
     public final void rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17389:1: ( ( ruleJvmFormalParameter ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17390:1: ( ruleJvmFormalParameter )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17797:1: ( ( ruleJvmFormalParameter ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17798:1: ( ruleJvmFormalParameter )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17390:1: ( ruleJvmFormalParameter )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17391:1: ruleJvmFormalParameter
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17798:1: ( ruleJvmFormalParameter )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17799:1: ruleJvmFormalParameter
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXClosureAccess().getDeclaredFormalParametersJvmFormalParameterParserRuleCall_1_0_0_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_1_134990);
+            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_1_135795);
             ruleJvmFormalParameter();
 
             state._fsp--;
@@ -49737,28 +50880,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XClosure__ExplicitSyntaxAssignment_1_0_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17400:1: rule__XClosure__ExplicitSyntaxAssignment_1_0_1 : ( ( '|' ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17808:1: rule__XClosure__ExplicitSyntaxAssignment_1_0_1 : ( ( '|' ) ) ;
     public final void rule__XClosure__ExplicitSyntaxAssignment_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17404:1: ( ( ( '|' ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17405:1: ( ( '|' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17812:1: ( ( ( '|' ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17813:1: ( ( '|' ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17405:1: ( ( '|' ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17406:1: ( '|' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getXClosureAccess().getExplicitSyntaxVerticalLineKeyword_1_0_1_0()); 
-            }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17407:1: ( '|' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17408:1: '|'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17813:1: ( ( '|' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17814:1: ( '|' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXClosureAccess().getExplicitSyntaxVerticalLineKeyword_1_0_1_0()); 
             }
-            match(input,86,FOLLOW_86_in_rule__XClosure__ExplicitSyntaxAssignment_1_0_135026); if (state.failed) return ;
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17815:1: ( '|' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17816:1: '|'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXClosureAccess().getExplicitSyntaxVerticalLineKeyword_1_0_1_0()); 
+            }
+            match(input,86,FOLLOW_86_in_rule__XClosure__ExplicitSyntaxAssignment_1_0_135831); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXClosureAccess().getExplicitSyntaxVerticalLineKeyword_1_0_1_0()); 
             }
@@ -49790,22 +50933,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XClosure__ExpressionAssignment_2"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17423:1: rule__XClosure__ExpressionAssignment_2 : ( ruleXExpressionInClosure ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17831:1: rule__XClosure__ExpressionAssignment_2 : ( ruleXExpressionInClosure ) ;
     public final void rule__XClosure__ExpressionAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17427:1: ( ( ruleXExpressionInClosure ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17428:1: ( ruleXExpressionInClosure )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17835:1: ( ( ruleXExpressionInClosure ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17836:1: ( ruleXExpressionInClosure )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17428:1: ( ruleXExpressionInClosure )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17429:1: ruleXExpressionInClosure
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17836:1: ( ruleXExpressionInClosure )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17837:1: ruleXExpressionInClosure
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXClosureAccess().getExpressionXExpressionInClosureParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpressionInClosure_in_rule__XClosure__ExpressionAssignment_235065);
+            pushFollow(FOLLOW_ruleXExpressionInClosure_in_rule__XClosure__ExpressionAssignment_235870);
             ruleXExpressionInClosure();
 
             state._fsp--;
@@ -49835,22 +50978,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XExpressionInClosure__ExpressionsAssignment_1_0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17438:1: rule__XExpressionInClosure__ExpressionsAssignment_1_0 : ( ruleXExpressionOrVarDeclaration ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17846:1: rule__XExpressionInClosure__ExpressionsAssignment_1_0 : ( ruleXExpressionOrVarDeclaration ) ;
     public final void rule__XExpressionInClosure__ExpressionsAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17442:1: ( ( ruleXExpressionOrVarDeclaration ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17443:1: ( ruleXExpressionOrVarDeclaration )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17850:1: ( ( ruleXExpressionOrVarDeclaration ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17851:1: ( ruleXExpressionOrVarDeclaration )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17443:1: ( ruleXExpressionOrVarDeclaration )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17444:1: ruleXExpressionOrVarDeclaration
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17851:1: ( ruleXExpressionOrVarDeclaration )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17852:1: ruleXExpressionOrVarDeclaration
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXExpressionInClosureAccess().getExpressionsXExpressionOrVarDeclarationParserRuleCall_1_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpressionOrVarDeclaration_in_rule__XExpressionInClosure__ExpressionsAssignment_1_035096);
+            pushFollow(FOLLOW_ruleXExpressionOrVarDeclaration_in_rule__XExpressionInClosure__ExpressionsAssignment_1_035901);
             ruleXExpressionOrVarDeclaration();
 
             state._fsp--;
@@ -49880,22 +51023,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17453:1: rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_0 : ( ruleJvmFormalParameter ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17861:1: rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_0 : ( ruleJvmFormalParameter ) ;
     public final void rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17457:1: ( ( ruleJvmFormalParameter ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17458:1: ( ruleJvmFormalParameter )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17865:1: ( ( ruleJvmFormalParameter ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17866:1: ( ruleJvmFormalParameter )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17458:1: ( ruleJvmFormalParameter )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17459:1: ruleJvmFormalParameter
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17866:1: ( ruleJvmFormalParameter )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17867:1: ruleJvmFormalParameter
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXShortClosureAccess().getDeclaredFormalParametersJvmFormalParameterParserRuleCall_0_0_1_0_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_035127);
+            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_035932);
             ruleJvmFormalParameter();
 
             state._fsp--;
@@ -49925,22 +51068,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_1_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17468:1: rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_1_1 : ( ruleJvmFormalParameter ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17876:1: rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_1_1 : ( ruleJvmFormalParameter ) ;
     public final void rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17472:1: ( ( ruleJvmFormalParameter ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17473:1: ( ruleJvmFormalParameter )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17880:1: ( ( ruleJvmFormalParameter ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17881:1: ( ruleJvmFormalParameter )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17473:1: ( ruleJvmFormalParameter )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17474:1: ruleJvmFormalParameter
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17881:1: ( ruleJvmFormalParameter )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17882:1: ruleJvmFormalParameter
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXShortClosureAccess().getDeclaredFormalParametersJvmFormalParameterParserRuleCall_0_0_1_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_1_135158);
+            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_1_135963);
             ruleJvmFormalParameter();
 
             state._fsp--;
@@ -49970,28 +51113,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XShortClosure__ExplicitSyntaxAssignment_0_0_2"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17483:1: rule__XShortClosure__ExplicitSyntaxAssignment_0_0_2 : ( ( '|' ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17891:1: rule__XShortClosure__ExplicitSyntaxAssignment_0_0_2 : ( ( '|' ) ) ;
     public final void rule__XShortClosure__ExplicitSyntaxAssignment_0_0_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17487:1: ( ( ( '|' ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17488:1: ( ( '|' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17895:1: ( ( ( '|' ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17896:1: ( ( '|' ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17488:1: ( ( '|' ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17489:1: ( '|' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getXShortClosureAccess().getExplicitSyntaxVerticalLineKeyword_0_0_2_0()); 
-            }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17490:1: ( '|' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17491:1: '|'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17896:1: ( ( '|' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17897:1: ( '|' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXShortClosureAccess().getExplicitSyntaxVerticalLineKeyword_0_0_2_0()); 
             }
-            match(input,86,FOLLOW_86_in_rule__XShortClosure__ExplicitSyntaxAssignment_0_0_235194); if (state.failed) return ;
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17898:1: ( '|' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17899:1: '|'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXShortClosureAccess().getExplicitSyntaxVerticalLineKeyword_0_0_2_0()); 
+            }
+            match(input,86,FOLLOW_86_in_rule__XShortClosure__ExplicitSyntaxAssignment_0_0_235999); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXShortClosureAccess().getExplicitSyntaxVerticalLineKeyword_0_0_2_0()); 
             }
@@ -50023,22 +51166,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XShortClosure__ExpressionAssignment_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17506:1: rule__XShortClosure__ExpressionAssignment_1 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17914:1: rule__XShortClosure__ExpressionAssignment_1 : ( ruleXExpression ) ;
     public final void rule__XShortClosure__ExpressionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17510:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17511:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17918:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17919:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17511:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17512:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17919:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17920:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXShortClosureAccess().getExpressionXExpressionParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XShortClosure__ExpressionAssignment_135233);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XShortClosure__ExpressionAssignment_136038);
             ruleXExpression();
 
             state._fsp--;
@@ -50068,22 +51211,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XIfExpression__IfAssignment_3"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17521:1: rule__XIfExpression__IfAssignment_3 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17929:1: rule__XIfExpression__IfAssignment_3 : ( ruleXExpression ) ;
     public final void rule__XIfExpression__IfAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17525:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17526:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17933:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17934:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17526:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17527:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17934:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17935:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXIfExpressionAccess().getIfXExpressionParserRuleCall_3_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XIfExpression__IfAssignment_335264);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XIfExpression__IfAssignment_336069);
             ruleXExpression();
 
             state._fsp--;
@@ -50113,22 +51256,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XIfExpression__ThenAssignment_5"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17536:1: rule__XIfExpression__ThenAssignment_5 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17944:1: rule__XIfExpression__ThenAssignment_5 : ( ruleXExpression ) ;
     public final void rule__XIfExpression__ThenAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17540:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17541:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17948:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17949:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17541:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17542:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17949:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17950:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXIfExpressionAccess().getThenXExpressionParserRuleCall_5_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XIfExpression__ThenAssignment_535295);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XIfExpression__ThenAssignment_536100);
             ruleXExpression();
 
             state._fsp--;
@@ -50158,22 +51301,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XIfExpression__ElseAssignment_6_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17551:1: rule__XIfExpression__ElseAssignment_6_1 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17959:1: rule__XIfExpression__ElseAssignment_6_1 : ( ruleXExpression ) ;
     public final void rule__XIfExpression__ElseAssignment_6_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17555:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17556:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17963:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17964:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17556:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17557:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17964:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17965:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXIfExpressionAccess().getElseXExpressionParserRuleCall_6_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XIfExpression__ElseAssignment_6_135326);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XIfExpression__ElseAssignment_6_136131);
             ruleXExpression();
 
             state._fsp--;
@@ -50203,22 +51346,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XSwitchExpression__DeclaredParamAssignment_2_0_0_0_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17566:1: rule__XSwitchExpression__DeclaredParamAssignment_2_0_0_0_1 : ( ruleJvmFormalParameter ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17974:1: rule__XSwitchExpression__DeclaredParamAssignment_2_0_0_0_1 : ( ruleJvmFormalParameter ) ;
     public final void rule__XSwitchExpression__DeclaredParamAssignment_2_0_0_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17570:1: ( ( ruleJvmFormalParameter ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17571:1: ( ruleJvmFormalParameter )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17978:1: ( ( ruleJvmFormalParameter ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17979:1: ( ruleJvmFormalParameter )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17571:1: ( ruleJvmFormalParameter )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17572:1: ruleJvmFormalParameter
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17979:1: ( ruleJvmFormalParameter )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17980:1: ruleJvmFormalParameter
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXSwitchExpressionAccess().getDeclaredParamJvmFormalParameterParserRuleCall_2_0_0_0_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XSwitchExpression__DeclaredParamAssignment_2_0_0_0_135357);
+            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XSwitchExpression__DeclaredParamAssignment_2_0_0_0_136162);
             ruleJvmFormalParameter();
 
             state._fsp--;
@@ -50248,22 +51391,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XSwitchExpression__SwitchAssignment_2_0_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17581:1: rule__XSwitchExpression__SwitchAssignment_2_0_1 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17989:1: rule__XSwitchExpression__SwitchAssignment_2_0_1 : ( ruleXExpression ) ;
     public final void rule__XSwitchExpression__SwitchAssignment_2_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17585:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17586:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17993:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17994:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17586:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17587:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17994:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17995:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXSwitchExpressionAccess().getSwitchXExpressionParserRuleCall_2_0_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XSwitchExpression__SwitchAssignment_2_0_135388);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XSwitchExpression__SwitchAssignment_2_0_136193);
             ruleXExpression();
 
             state._fsp--;
@@ -50293,22 +51436,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XSwitchExpression__DeclaredParamAssignment_2_1_0_0_0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17596:1: rule__XSwitchExpression__DeclaredParamAssignment_2_1_0_0_0 : ( ruleJvmFormalParameter ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18004:1: rule__XSwitchExpression__DeclaredParamAssignment_2_1_0_0_0 : ( ruleJvmFormalParameter ) ;
     public final void rule__XSwitchExpression__DeclaredParamAssignment_2_1_0_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17600:1: ( ( ruleJvmFormalParameter ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17601:1: ( ruleJvmFormalParameter )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18008:1: ( ( ruleJvmFormalParameter ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18009:1: ( ruleJvmFormalParameter )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17601:1: ( ruleJvmFormalParameter )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17602:1: ruleJvmFormalParameter
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18009:1: ( ruleJvmFormalParameter )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18010:1: ruleJvmFormalParameter
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXSwitchExpressionAccess().getDeclaredParamJvmFormalParameterParserRuleCall_2_1_0_0_0_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XSwitchExpression__DeclaredParamAssignment_2_1_0_0_035419);
+            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XSwitchExpression__DeclaredParamAssignment_2_1_0_0_036224);
             ruleJvmFormalParameter();
 
             state._fsp--;
@@ -50338,22 +51481,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XSwitchExpression__SwitchAssignment_2_1_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17611:1: rule__XSwitchExpression__SwitchAssignment_2_1_1 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18019:1: rule__XSwitchExpression__SwitchAssignment_2_1_1 : ( ruleXExpression ) ;
     public final void rule__XSwitchExpression__SwitchAssignment_2_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17615:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17616:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18023:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18024:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17616:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17617:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18024:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18025:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXSwitchExpressionAccess().getSwitchXExpressionParserRuleCall_2_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XSwitchExpression__SwitchAssignment_2_1_135450);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XSwitchExpression__SwitchAssignment_2_1_136255);
             ruleXExpression();
 
             state._fsp--;
@@ -50383,22 +51526,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XSwitchExpression__CasesAssignment_4"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17626:1: rule__XSwitchExpression__CasesAssignment_4 : ( ruleXCasePart ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18034:1: rule__XSwitchExpression__CasesAssignment_4 : ( ruleXCasePart ) ;
     public final void rule__XSwitchExpression__CasesAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17630:1: ( ( ruleXCasePart ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17631:1: ( ruleXCasePart )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18038:1: ( ( ruleXCasePart ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18039:1: ( ruleXCasePart )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17631:1: ( ruleXCasePart )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17632:1: ruleXCasePart
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18039:1: ( ruleXCasePart )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18040:1: ruleXCasePart
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXSwitchExpressionAccess().getCasesXCasePartParserRuleCall_4_0()); 
             }
-            pushFollow(FOLLOW_ruleXCasePart_in_rule__XSwitchExpression__CasesAssignment_435481);
+            pushFollow(FOLLOW_ruleXCasePart_in_rule__XSwitchExpression__CasesAssignment_436286);
             ruleXCasePart();
 
             state._fsp--;
@@ -50428,22 +51571,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XSwitchExpression__DefaultAssignment_5_2"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17641:1: rule__XSwitchExpression__DefaultAssignment_5_2 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18049:1: rule__XSwitchExpression__DefaultAssignment_5_2 : ( ruleXExpression ) ;
     public final void rule__XSwitchExpression__DefaultAssignment_5_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17645:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17646:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18053:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18054:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17646:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17647:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18054:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18055:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXSwitchExpressionAccess().getDefaultXExpressionParserRuleCall_5_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XSwitchExpression__DefaultAssignment_5_235512);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XSwitchExpression__DefaultAssignment_5_236317);
             ruleXExpression();
 
             state._fsp--;
@@ -50473,22 +51616,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XCasePart__TypeGuardAssignment_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17656:1: rule__XCasePart__TypeGuardAssignment_1 : ( ruleJvmTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18064:1: rule__XCasePart__TypeGuardAssignment_1 : ( ruleJvmTypeReference ) ;
     public final void rule__XCasePart__TypeGuardAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17660:1: ( ( ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17661:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18068:1: ( ( ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18069:1: ( ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17661:1: ( ruleJvmTypeReference )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17662:1: ruleJvmTypeReference
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18069:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18070:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCasePartAccess().getTypeGuardJvmTypeReferenceParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XCasePart__TypeGuardAssignment_135543);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XCasePart__TypeGuardAssignment_136348);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -50518,22 +51661,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XCasePart__CaseAssignment_2_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17671:1: rule__XCasePart__CaseAssignment_2_1 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18079:1: rule__XCasePart__CaseAssignment_2_1 : ( ruleXExpression ) ;
     public final void rule__XCasePart__CaseAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17675:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17676:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18083:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18084:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17676:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17677:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18084:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18085:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCasePartAccess().getCaseXExpressionParserRuleCall_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XCasePart__CaseAssignment_2_135574);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XCasePart__CaseAssignment_2_136379);
             ruleXExpression();
 
             state._fsp--;
@@ -50563,22 +51706,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XCasePart__ThenAssignment_3_0_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17686:1: rule__XCasePart__ThenAssignment_3_0_1 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18094:1: rule__XCasePart__ThenAssignment_3_0_1 : ( ruleXExpression ) ;
     public final void rule__XCasePart__ThenAssignment_3_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17690:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17691:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18098:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18099:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17691:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17692:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18099:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18100:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCasePartAccess().getThenXExpressionParserRuleCall_3_0_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XCasePart__ThenAssignment_3_0_135605);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XCasePart__ThenAssignment_3_0_136410);
             ruleXExpression();
 
             state._fsp--;
@@ -50608,28 +51751,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XCasePart__FallThroughAssignment_3_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17701:1: rule__XCasePart__FallThroughAssignment_3_1 : ( ( ',' ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18109:1: rule__XCasePart__FallThroughAssignment_3_1 : ( ( ',' ) ) ;
     public final void rule__XCasePart__FallThroughAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17705:1: ( ( ( ',' ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17706:1: ( ( ',' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18113:1: ( ( ( ',' ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18114:1: ( ( ',' ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17706:1: ( ( ',' ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17707:1: ( ',' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getXCasePartAccess().getFallThroughCommaKeyword_3_1_0()); 
-            }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17708:1: ( ',' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17709:1: ','
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18114:1: ( ( ',' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18115:1: ( ',' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCasePartAccess().getFallThroughCommaKeyword_3_1_0()); 
             }
-            match(input,55,FOLLOW_55_in_rule__XCasePart__FallThroughAssignment_3_135641); if (state.failed) return ;
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18116:1: ( ',' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18117:1: ','
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXCasePartAccess().getFallThroughCommaKeyword_3_1_0()); 
+            }
+            match(input,55,FOLLOW_55_in_rule__XCasePart__FallThroughAssignment_3_136446); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXCasePartAccess().getFallThroughCommaKeyword_3_1_0()); 
             }
@@ -50661,22 +51804,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XForLoopExpression__DeclaredParamAssignment_0_0_3"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17724:1: rule__XForLoopExpression__DeclaredParamAssignment_0_0_3 : ( ruleJvmFormalParameter ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18132:1: rule__XForLoopExpression__DeclaredParamAssignment_0_0_3 : ( ruleJvmFormalParameter ) ;
     public final void rule__XForLoopExpression__DeclaredParamAssignment_0_0_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17728:1: ( ( ruleJvmFormalParameter ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17729:1: ( ruleJvmFormalParameter )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18136:1: ( ( ruleJvmFormalParameter ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18137:1: ( ruleJvmFormalParameter )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17729:1: ( ruleJvmFormalParameter )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17730:1: ruleJvmFormalParameter
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18137:1: ( ruleJvmFormalParameter )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18138:1: ruleJvmFormalParameter
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXForLoopExpressionAccess().getDeclaredParamJvmFormalParameterParserRuleCall_0_0_3_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XForLoopExpression__DeclaredParamAssignment_0_0_335680);
+            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XForLoopExpression__DeclaredParamAssignment_0_0_336485);
             ruleJvmFormalParameter();
 
             state._fsp--;
@@ -50706,22 +51849,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XForLoopExpression__ForExpressionAssignment_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17739:1: rule__XForLoopExpression__ForExpressionAssignment_1 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18147:1: rule__XForLoopExpression__ForExpressionAssignment_1 : ( ruleXExpression ) ;
     public final void rule__XForLoopExpression__ForExpressionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17743:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17744:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18151:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18152:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17744:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17745:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18152:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18153:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXForLoopExpressionAccess().getForExpressionXExpressionParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XForLoopExpression__ForExpressionAssignment_135711);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XForLoopExpression__ForExpressionAssignment_136516);
             ruleXExpression();
 
             state._fsp--;
@@ -50751,22 +51894,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XForLoopExpression__EachExpressionAssignment_3"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17754:1: rule__XForLoopExpression__EachExpressionAssignment_3 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18162:1: rule__XForLoopExpression__EachExpressionAssignment_3 : ( ruleXExpression ) ;
     public final void rule__XForLoopExpression__EachExpressionAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17758:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17759:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18166:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18167:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17759:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17760:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18167:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18168:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXForLoopExpressionAccess().getEachExpressionXExpressionParserRuleCall_3_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XForLoopExpression__EachExpressionAssignment_335742);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XForLoopExpression__EachExpressionAssignment_336547);
             ruleXExpression();
 
             state._fsp--;
@@ -50796,22 +51939,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XBasicForLoopExpression__InitExpressionsAssignment_3_0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17769:1: rule__XBasicForLoopExpression__InitExpressionsAssignment_3_0 : ( ruleXExpressionOrVarDeclaration ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18177:1: rule__XBasicForLoopExpression__InitExpressionsAssignment_3_0 : ( ruleXExpressionOrVarDeclaration ) ;
     public final void rule__XBasicForLoopExpression__InitExpressionsAssignment_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17773:1: ( ( ruleXExpressionOrVarDeclaration ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17774:1: ( ruleXExpressionOrVarDeclaration )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18181:1: ( ( ruleXExpressionOrVarDeclaration ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18182:1: ( ruleXExpressionOrVarDeclaration )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17774:1: ( ruleXExpressionOrVarDeclaration )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17775:1: ruleXExpressionOrVarDeclaration
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18182:1: ( ruleXExpressionOrVarDeclaration )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18183:1: ruleXExpressionOrVarDeclaration
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXBasicForLoopExpressionAccess().getInitExpressionsXExpressionOrVarDeclarationParserRuleCall_3_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpressionOrVarDeclaration_in_rule__XBasicForLoopExpression__InitExpressionsAssignment_3_035773);
+            pushFollow(FOLLOW_ruleXExpressionOrVarDeclaration_in_rule__XBasicForLoopExpression__InitExpressionsAssignment_3_036578);
             ruleXExpressionOrVarDeclaration();
 
             state._fsp--;
@@ -50841,22 +51984,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XBasicForLoopExpression__InitExpressionsAssignment_3_1_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17784:1: rule__XBasicForLoopExpression__InitExpressionsAssignment_3_1_1 : ( ruleXExpressionOrVarDeclaration ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18192:1: rule__XBasicForLoopExpression__InitExpressionsAssignment_3_1_1 : ( ruleXExpressionOrVarDeclaration ) ;
     public final void rule__XBasicForLoopExpression__InitExpressionsAssignment_3_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17788:1: ( ( ruleXExpressionOrVarDeclaration ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17789:1: ( ruleXExpressionOrVarDeclaration )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18196:1: ( ( ruleXExpressionOrVarDeclaration ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18197:1: ( ruleXExpressionOrVarDeclaration )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17789:1: ( ruleXExpressionOrVarDeclaration )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17790:1: ruleXExpressionOrVarDeclaration
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18197:1: ( ruleXExpressionOrVarDeclaration )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18198:1: ruleXExpressionOrVarDeclaration
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXBasicForLoopExpressionAccess().getInitExpressionsXExpressionOrVarDeclarationParserRuleCall_3_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpressionOrVarDeclaration_in_rule__XBasicForLoopExpression__InitExpressionsAssignment_3_1_135804);
+            pushFollow(FOLLOW_ruleXExpressionOrVarDeclaration_in_rule__XBasicForLoopExpression__InitExpressionsAssignment_3_1_136609);
             ruleXExpressionOrVarDeclaration();
 
             state._fsp--;
@@ -50886,22 +52029,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XBasicForLoopExpression__ExpressionAssignment_5"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17799:1: rule__XBasicForLoopExpression__ExpressionAssignment_5 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18207:1: rule__XBasicForLoopExpression__ExpressionAssignment_5 : ( ruleXExpression ) ;
     public final void rule__XBasicForLoopExpression__ExpressionAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17803:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17804:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18211:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18212:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17804:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17805:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18212:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18213:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXBasicForLoopExpressionAccess().getExpressionXExpressionParserRuleCall_5_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XBasicForLoopExpression__ExpressionAssignment_535835);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XBasicForLoopExpression__ExpressionAssignment_536640);
             ruleXExpression();
 
             state._fsp--;
@@ -50931,22 +52074,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XBasicForLoopExpression__UpdateExpressionsAssignment_7_0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17814:1: rule__XBasicForLoopExpression__UpdateExpressionsAssignment_7_0 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18222:1: rule__XBasicForLoopExpression__UpdateExpressionsAssignment_7_0 : ( ruleXExpression ) ;
     public final void rule__XBasicForLoopExpression__UpdateExpressionsAssignment_7_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17818:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17819:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18226:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18227:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17819:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17820:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18227:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18228:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXBasicForLoopExpressionAccess().getUpdateExpressionsXExpressionParserRuleCall_7_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XBasicForLoopExpression__UpdateExpressionsAssignment_7_035866);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XBasicForLoopExpression__UpdateExpressionsAssignment_7_036671);
             ruleXExpression();
 
             state._fsp--;
@@ -50976,22 +52119,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XBasicForLoopExpression__UpdateExpressionsAssignment_7_1_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17829:1: rule__XBasicForLoopExpression__UpdateExpressionsAssignment_7_1_1 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18237:1: rule__XBasicForLoopExpression__UpdateExpressionsAssignment_7_1_1 : ( ruleXExpression ) ;
     public final void rule__XBasicForLoopExpression__UpdateExpressionsAssignment_7_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17833:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17834:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18241:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18242:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17834:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17835:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18242:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18243:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXBasicForLoopExpressionAccess().getUpdateExpressionsXExpressionParserRuleCall_7_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XBasicForLoopExpression__UpdateExpressionsAssignment_7_1_135897);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XBasicForLoopExpression__UpdateExpressionsAssignment_7_1_136702);
             ruleXExpression();
 
             state._fsp--;
@@ -51021,22 +52164,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XBasicForLoopExpression__EachExpressionAssignment_9"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17844:1: rule__XBasicForLoopExpression__EachExpressionAssignment_9 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18252:1: rule__XBasicForLoopExpression__EachExpressionAssignment_9 : ( ruleXExpression ) ;
     public final void rule__XBasicForLoopExpression__EachExpressionAssignment_9() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17848:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17849:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18256:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18257:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17849:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17850:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18257:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18258:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXBasicForLoopExpressionAccess().getEachExpressionXExpressionParserRuleCall_9_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XBasicForLoopExpression__EachExpressionAssignment_935928);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XBasicForLoopExpression__EachExpressionAssignment_936733);
             ruleXExpression();
 
             state._fsp--;
@@ -51066,22 +52209,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XWhileExpression__PredicateAssignment_3"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17859:1: rule__XWhileExpression__PredicateAssignment_3 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18267:1: rule__XWhileExpression__PredicateAssignment_3 : ( ruleXExpression ) ;
     public final void rule__XWhileExpression__PredicateAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17863:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17864:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18271:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18272:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17864:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17865:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18272:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18273:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXWhileExpressionAccess().getPredicateXExpressionParserRuleCall_3_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XWhileExpression__PredicateAssignment_335959);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XWhileExpression__PredicateAssignment_336764);
             ruleXExpression();
 
             state._fsp--;
@@ -51111,22 +52254,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XWhileExpression__BodyAssignment_5"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17874:1: rule__XWhileExpression__BodyAssignment_5 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18282:1: rule__XWhileExpression__BodyAssignment_5 : ( ruleXExpression ) ;
     public final void rule__XWhileExpression__BodyAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17878:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17879:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18286:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18287:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17879:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17880:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18287:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18288:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXWhileExpressionAccess().getBodyXExpressionParserRuleCall_5_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XWhileExpression__BodyAssignment_535990);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XWhileExpression__BodyAssignment_536795);
             ruleXExpression();
 
             state._fsp--;
@@ -51156,22 +52299,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XDoWhileExpression__BodyAssignment_2"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17889:1: rule__XDoWhileExpression__BodyAssignment_2 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18297:1: rule__XDoWhileExpression__BodyAssignment_2 : ( ruleXExpression ) ;
     public final void rule__XDoWhileExpression__BodyAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17893:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17894:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18301:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18302:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17894:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17895:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18302:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18303:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXDoWhileExpressionAccess().getBodyXExpressionParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__BodyAssignment_236021);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__BodyAssignment_236826);
             ruleXExpression();
 
             state._fsp--;
@@ -51201,22 +52344,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XDoWhileExpression__PredicateAssignment_5"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17904:1: rule__XDoWhileExpression__PredicateAssignment_5 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18312:1: rule__XDoWhileExpression__PredicateAssignment_5 : ( ruleXExpression ) ;
     public final void rule__XDoWhileExpression__PredicateAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17908:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17909:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18316:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18317:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17909:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17910:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18317:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18318:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXDoWhileExpressionAccess().getPredicateXExpressionParserRuleCall_5_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__PredicateAssignment_536052);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__PredicateAssignment_536857);
             ruleXExpression();
 
             state._fsp--;
@@ -51246,22 +52389,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XBlockExpression__ExpressionsAssignment_2_0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17919:1: rule__XBlockExpression__ExpressionsAssignment_2_0 : ( ruleXExpressionOrVarDeclaration ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18327:1: rule__XBlockExpression__ExpressionsAssignment_2_0 : ( ruleXExpressionOrVarDeclaration ) ;
     public final void rule__XBlockExpression__ExpressionsAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17923:1: ( ( ruleXExpressionOrVarDeclaration ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17924:1: ( ruleXExpressionOrVarDeclaration )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18331:1: ( ( ruleXExpressionOrVarDeclaration ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18332:1: ( ruleXExpressionOrVarDeclaration )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17924:1: ( ruleXExpressionOrVarDeclaration )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17925:1: ruleXExpressionOrVarDeclaration
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18332:1: ( ruleXExpressionOrVarDeclaration )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18333:1: ruleXExpressionOrVarDeclaration
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXBlockExpressionAccess().getExpressionsXExpressionOrVarDeclarationParserRuleCall_2_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpressionOrVarDeclaration_in_rule__XBlockExpression__ExpressionsAssignment_2_036083);
+            pushFollow(FOLLOW_ruleXExpressionOrVarDeclaration_in_rule__XBlockExpression__ExpressionsAssignment_2_036888);
             ruleXExpressionOrVarDeclaration();
 
             state._fsp--;
@@ -51291,28 +52434,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XVariableDeclaration__WriteableAssignment_1_0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17934:1: rule__XVariableDeclaration__WriteableAssignment_1_0 : ( ( 'var' ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18342:1: rule__XVariableDeclaration__WriteableAssignment_1_0 : ( ( 'var' ) ) ;
     public final void rule__XVariableDeclaration__WriteableAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17938:1: ( ( ( 'var' ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17939:1: ( ( 'var' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18346:1: ( ( ( 'var' ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18347:1: ( ( 'var' ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17939:1: ( ( 'var' ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17940:1: ( 'var' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getXVariableDeclarationAccess().getWriteableVarKeyword_1_0_0()); 
-            }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17941:1: ( 'var' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17942:1: 'var'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18347:1: ( ( 'var' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18348:1: ( 'var' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXVariableDeclarationAccess().getWriteableVarKeyword_1_0_0()); 
             }
-            match(input,87,FOLLOW_87_in_rule__XVariableDeclaration__WriteableAssignment_1_036119); if (state.failed) return ;
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18349:1: ( 'var' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18350:1: 'var'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXVariableDeclarationAccess().getWriteableVarKeyword_1_0_0()); 
+            }
+            match(input,87,FOLLOW_87_in_rule__XVariableDeclaration__WriteableAssignment_1_036924); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXVariableDeclarationAccess().getWriteableVarKeyword_1_0_0()); 
             }
@@ -51344,22 +52487,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XVariableDeclaration__TypeAssignment_2_0_0_0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17957:1: rule__XVariableDeclaration__TypeAssignment_2_0_0_0 : ( ruleJvmTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18365:1: rule__XVariableDeclaration__TypeAssignment_2_0_0_0 : ( ruleJvmTypeReference ) ;
     public final void rule__XVariableDeclaration__TypeAssignment_2_0_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17961:1: ( ( ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17962:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18369:1: ( ( ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18370:1: ( ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17962:1: ( ruleJvmTypeReference )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17963:1: ruleJvmTypeReference
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18370:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18371:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXVariableDeclarationAccess().getTypeJvmTypeReferenceParserRuleCall_2_0_0_0_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XVariableDeclaration__TypeAssignment_2_0_0_036158);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XVariableDeclaration__TypeAssignment_2_0_0_036963);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -51389,22 +52532,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XVariableDeclaration__NameAssignment_2_0_0_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17972:1: rule__XVariableDeclaration__NameAssignment_2_0_0_1 : ( ruleValidID ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18380:1: rule__XVariableDeclaration__NameAssignment_2_0_0_1 : ( ruleValidID ) ;
     public final void rule__XVariableDeclaration__NameAssignment_2_0_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17976:1: ( ( ruleValidID ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17977:1: ( ruleValidID )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18384:1: ( ( ruleValidID ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18385:1: ( ruleValidID )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17977:1: ( ruleValidID )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17978:1: ruleValidID
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18385:1: ( ruleValidID )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18386:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXVariableDeclarationAccess().getNameValidIDParserRuleCall_2_0_0_1_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__XVariableDeclaration__NameAssignment_2_0_0_136189);
+            pushFollow(FOLLOW_ruleValidID_in_rule__XVariableDeclaration__NameAssignment_2_0_0_136994);
             ruleValidID();
 
             state._fsp--;
@@ -51434,22 +52577,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XVariableDeclaration__NameAssignment_2_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17987:1: rule__XVariableDeclaration__NameAssignment_2_1 : ( ruleValidID ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18395:1: rule__XVariableDeclaration__NameAssignment_2_1 : ( ruleValidID ) ;
     public final void rule__XVariableDeclaration__NameAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17991:1: ( ( ruleValidID ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17992:1: ( ruleValidID )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18399:1: ( ( ruleValidID ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18400:1: ( ruleValidID )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17992:1: ( ruleValidID )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17993:1: ruleValidID
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18400:1: ( ruleValidID )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18401:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXVariableDeclarationAccess().getNameValidIDParserRuleCall_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__XVariableDeclaration__NameAssignment_2_136220);
+            pushFollow(FOLLOW_ruleValidID_in_rule__XVariableDeclaration__NameAssignment_2_137025);
             ruleValidID();
 
             state._fsp--;
@@ -51479,22 +52622,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XVariableDeclaration__RightAssignment_3_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18002:1: rule__XVariableDeclaration__RightAssignment_3_1 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18410:1: rule__XVariableDeclaration__RightAssignment_3_1 : ( ruleXExpression ) ;
     public final void rule__XVariableDeclaration__RightAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18006:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18007:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18414:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18415:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18007:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18008:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18415:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18416:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXVariableDeclarationAccess().getRightXExpressionParserRuleCall_3_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XVariableDeclaration__RightAssignment_3_136251);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XVariableDeclaration__RightAssignment_3_137056);
             ruleXExpression();
 
             state._fsp--;
@@ -51524,22 +52667,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmFormalParameter__ParameterTypeAssignment_0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18017:1: rule__JvmFormalParameter__ParameterTypeAssignment_0 : ( ruleJvmTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18425:1: rule__JvmFormalParameter__ParameterTypeAssignment_0 : ( ruleJvmTypeReference ) ;
     public final void rule__JvmFormalParameter__ParameterTypeAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18021:1: ( ( ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18022:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18429:1: ( ( ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18430:1: ( ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18022:1: ( ruleJvmTypeReference )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18023:1: ruleJvmTypeReference
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18430:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18431:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmFormalParameterAccess().getParameterTypeJvmTypeReferenceParserRuleCall_0_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmFormalParameter__ParameterTypeAssignment_036282);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmFormalParameter__ParameterTypeAssignment_037087);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -51569,22 +52712,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmFormalParameter__NameAssignment_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18032:1: rule__JvmFormalParameter__NameAssignment_1 : ( ruleValidID ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18440:1: rule__JvmFormalParameter__NameAssignment_1 : ( ruleValidID ) ;
     public final void rule__JvmFormalParameter__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18036:1: ( ( ruleValidID ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18037:1: ( ruleValidID )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18444:1: ( ( ruleValidID ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18445:1: ( ruleValidID )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18037:1: ( ruleValidID )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18038:1: ruleValidID
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18445:1: ( ruleValidID )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18446:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmFormalParameterAccess().getNameValidIDParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__JvmFormalParameter__NameAssignment_136313);
+            pushFollow(FOLLOW_ruleValidID_in_rule__JvmFormalParameter__NameAssignment_137118);
             ruleValidID();
 
             state._fsp--;
@@ -51614,22 +52757,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__FullJvmFormalParameter__ParameterTypeAssignment_0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18047:1: rule__FullJvmFormalParameter__ParameterTypeAssignment_0 : ( ruleJvmTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18455:1: rule__FullJvmFormalParameter__ParameterTypeAssignment_0 : ( ruleJvmTypeReference ) ;
     public final void rule__FullJvmFormalParameter__ParameterTypeAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18051:1: ( ( ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18052:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18459:1: ( ( ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18460:1: ( ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18052:1: ( ruleJvmTypeReference )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18053:1: ruleJvmTypeReference
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18460:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18461:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFullJvmFormalParameterAccess().getParameterTypeJvmTypeReferenceParserRuleCall_0_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__FullJvmFormalParameter__ParameterTypeAssignment_036344);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__FullJvmFormalParameter__ParameterTypeAssignment_037149);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -51659,22 +52802,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__FullJvmFormalParameter__NameAssignment_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18062:1: rule__FullJvmFormalParameter__NameAssignment_1 : ( ruleValidID ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18470:1: rule__FullJvmFormalParameter__NameAssignment_1 : ( ruleValidID ) ;
     public final void rule__FullJvmFormalParameter__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18066:1: ( ( ruleValidID ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18067:1: ( ruleValidID )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18474:1: ( ( ruleValidID ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18475:1: ( ruleValidID )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18067:1: ( ruleValidID )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18068:1: ruleValidID
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18475:1: ( ruleValidID )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18476:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFullJvmFormalParameterAccess().getNameValidIDParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__FullJvmFormalParameter__NameAssignment_136375);
+            pushFollow(FOLLOW_ruleValidID_in_rule__FullJvmFormalParameter__NameAssignment_137180);
             ruleValidID();
 
             state._fsp--;
@@ -51704,22 +52847,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XFeatureCall__TypeArgumentsAssignment_1_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18077:1: rule__XFeatureCall__TypeArgumentsAssignment_1_1 : ( ruleJvmArgumentTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18485:1: rule__XFeatureCall__TypeArgumentsAssignment_1_1 : ( ruleJvmArgumentTypeReference ) ;
     public final void rule__XFeatureCall__TypeArgumentsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18081:1: ( ( ruleJvmArgumentTypeReference ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18082:1: ( ruleJvmArgumentTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18489:1: ( ( ruleJvmArgumentTypeReference ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18490:1: ( ruleJvmArgumentTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18082:1: ( ruleJvmArgumentTypeReference )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18083:1: ruleJvmArgumentTypeReference
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18490:1: ( ruleJvmArgumentTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18491:1: ruleJvmArgumentTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_1_136406);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_1_137211);
             ruleJvmArgumentTypeReference();
 
             state._fsp--;
@@ -51749,22 +52892,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XFeatureCall__TypeArgumentsAssignment_1_2_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18092:1: rule__XFeatureCall__TypeArgumentsAssignment_1_2_1 : ( ruleJvmArgumentTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18500:1: rule__XFeatureCall__TypeArgumentsAssignment_1_2_1 : ( ruleJvmArgumentTypeReference ) ;
     public final void rule__XFeatureCall__TypeArgumentsAssignment_1_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18096:1: ( ( ruleJvmArgumentTypeReference ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18097:1: ( ruleJvmArgumentTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18504:1: ( ( ruleJvmArgumentTypeReference ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18505:1: ( ruleJvmArgumentTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18097:1: ( ruleJvmArgumentTypeReference )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18098:1: ruleJvmArgumentTypeReference
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18505:1: ( ruleJvmArgumentTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18506:1: ruleJvmArgumentTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_1_2_136437);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_1_2_137242);
             ruleJvmArgumentTypeReference();
 
             state._fsp--;
@@ -51794,28 +52937,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XFeatureCall__FeatureAssignment_2"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18107:1: rule__XFeatureCall__FeatureAssignment_2 : ( ( ruleIdOrSuper ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18515:1: rule__XFeatureCall__FeatureAssignment_2 : ( ( ruleIdOrSuper ) ) ;
     public final void rule__XFeatureCall__FeatureAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18111:1: ( ( ( ruleIdOrSuper ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18112:1: ( ( ruleIdOrSuper ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18519:1: ( ( ( ruleIdOrSuper ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18520:1: ( ( ruleIdOrSuper ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18112:1: ( ( ruleIdOrSuper ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18113:1: ( ruleIdOrSuper )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18520:1: ( ( ruleIdOrSuper ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18521:1: ( ruleIdOrSuper )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getFeatureJvmIdentifiableElementCrossReference_2_0()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18114:1: ( ruleIdOrSuper )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18115:1: ruleIdOrSuper
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18522:1: ( ruleIdOrSuper )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18523:1: ruleIdOrSuper
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getFeatureJvmIdentifiableElementIdOrSuperParserRuleCall_2_0_1()); 
             }
-            pushFollow(FOLLOW_ruleIdOrSuper_in_rule__XFeatureCall__FeatureAssignment_236472);
+            pushFollow(FOLLOW_ruleIdOrSuper_in_rule__XFeatureCall__FeatureAssignment_237277);
             ruleIdOrSuper();
 
             state._fsp--;
@@ -51851,28 +52994,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XFeatureCall__ExplicitOperationCallAssignment_3_0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18126:1: rule__XFeatureCall__ExplicitOperationCallAssignment_3_0 : ( ( '(' ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18534:1: rule__XFeatureCall__ExplicitOperationCallAssignment_3_0 : ( ( '(' ) ) ;
     public final void rule__XFeatureCall__ExplicitOperationCallAssignment_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18130:1: ( ( ( '(' ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18131:1: ( ( '(' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18538:1: ( ( ( '(' ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18539:1: ( ( '(' ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18131:1: ( ( '(' ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18132:1: ( '(' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getXFeatureCallAccess().getExplicitOperationCallLeftParenthesisKeyword_3_0_0()); 
-            }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18133:1: ( '(' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18134:1: '('
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18539:1: ( ( '(' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18540:1: ( '(' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getExplicitOperationCallLeftParenthesisKeyword_3_0_0()); 
             }
-            match(input,63,FOLLOW_63_in_rule__XFeatureCall__ExplicitOperationCallAssignment_3_036512); if (state.failed) return ;
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18541:1: ( '(' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18542:1: '('
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXFeatureCallAccess().getExplicitOperationCallLeftParenthesisKeyword_3_0_0()); 
+            }
+            match(input,63,FOLLOW_63_in_rule__XFeatureCall__ExplicitOperationCallAssignment_3_037317); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXFeatureCallAccess().getExplicitOperationCallLeftParenthesisKeyword_3_0_0()); 
             }
@@ -51904,22 +53047,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18149:1: rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_0 : ( ruleXShortClosure ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18557:1: rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_0 : ( ruleXShortClosure ) ;
     public final void rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18153:1: ( ( ruleXShortClosure ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18154:1: ( ruleXShortClosure )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18561:1: ( ( ruleXShortClosure ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18562:1: ( ruleXShortClosure )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18154:1: ( ruleXShortClosure )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18155:1: ruleXShortClosure
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18562:1: ( ruleXShortClosure )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18563:1: ruleXShortClosure
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getFeatureCallArgumentsXShortClosureParserRuleCall_3_1_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXShortClosure_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_036551);
+            pushFollow(FOLLOW_ruleXShortClosure_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_037356);
             ruleXShortClosure();
 
             state._fsp--;
@@ -51949,22 +53092,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18164:1: rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_0 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18572:1: rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_0 : ( ruleXExpression ) ;
     public final void rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18168:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18169:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18576:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18577:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18169:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18170:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18577:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18578:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getFeatureCallArgumentsXExpressionParserRuleCall_3_1_1_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_036582);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_037387);
             ruleXExpression();
 
             state._fsp--;
@@ -51994,22 +53137,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_1_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18179:1: rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_1_1 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18587:1: rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_1_1 : ( ruleXExpression ) ;
     public final void rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18183:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18184:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18591:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18592:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18184:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18185:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18592:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18593:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getFeatureCallArgumentsXExpressionParserRuleCall_3_1_1_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_1_136613);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_1_137418);
             ruleXExpression();
 
             state._fsp--;
@@ -52039,22 +53182,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XFeatureCall__FeatureCallArgumentsAssignment_4"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18194:1: rule__XFeatureCall__FeatureCallArgumentsAssignment_4 : ( ruleXClosure ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18602:1: rule__XFeatureCall__FeatureCallArgumentsAssignment_4 : ( ruleXClosure ) ;
     public final void rule__XFeatureCall__FeatureCallArgumentsAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18198:1: ( ( ruleXClosure ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18199:1: ( ruleXClosure )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18606:1: ( ( ruleXClosure ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18607:1: ( ruleXClosure )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18199:1: ( ruleXClosure )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18200:1: ruleXClosure
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18607:1: ( ruleXClosure )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18608:1: ruleXClosure
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getFeatureCallArgumentsXClosureParserRuleCall_4_0()); 
             }
-            pushFollow(FOLLOW_ruleXClosure_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_436644);
+            pushFollow(FOLLOW_ruleXClosure_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_437449);
             ruleXClosure();
 
             state._fsp--;
@@ -52084,28 +53227,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XConstructorCall__ConstructorAssignment_2"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18209:1: rule__XConstructorCall__ConstructorAssignment_2 : ( ( ruleQualifiedName ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18617:1: rule__XConstructorCall__ConstructorAssignment_2 : ( ( ruleQualifiedName ) ) ;
     public final void rule__XConstructorCall__ConstructorAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18213:1: ( ( ( ruleQualifiedName ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18214:1: ( ( ruleQualifiedName ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18621:1: ( ( ( ruleQualifiedName ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18622:1: ( ( ruleQualifiedName ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18214:1: ( ( ruleQualifiedName ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18215:1: ( ruleQualifiedName )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18622:1: ( ( ruleQualifiedName ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18623:1: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXConstructorCallAccess().getConstructorJvmConstructorCrossReference_2_0()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18216:1: ( ruleQualifiedName )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18217:1: ruleQualifiedName
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18624:1: ( ruleQualifiedName )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18625:1: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXConstructorCallAccess().getConstructorJvmConstructorQualifiedNameParserRuleCall_2_0_1()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__XConstructorCall__ConstructorAssignment_236679);
+            pushFollow(FOLLOW_ruleQualifiedName_in_rule__XConstructorCall__ConstructorAssignment_237484);
             ruleQualifiedName();
 
             state._fsp--;
@@ -52141,22 +53284,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XConstructorCall__TypeArgumentsAssignment_3_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18228:1: rule__XConstructorCall__TypeArgumentsAssignment_3_1 : ( ruleJvmArgumentTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18636:1: rule__XConstructorCall__TypeArgumentsAssignment_3_1 : ( ruleJvmArgumentTypeReference ) ;
     public final void rule__XConstructorCall__TypeArgumentsAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18232:1: ( ( ruleJvmArgumentTypeReference ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18233:1: ( ruleJvmArgumentTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18640:1: ( ( ruleJvmArgumentTypeReference ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18641:1: ( ruleJvmArgumentTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18233:1: ( ruleJvmArgumentTypeReference )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18234:1: ruleJvmArgumentTypeReference
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18641:1: ( ruleJvmArgumentTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18642:1: ruleJvmArgumentTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXConstructorCallAccess().getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_3_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XConstructorCall__TypeArgumentsAssignment_3_136714);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XConstructorCall__TypeArgumentsAssignment_3_137519);
             ruleJvmArgumentTypeReference();
 
             state._fsp--;
@@ -52186,22 +53329,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XConstructorCall__TypeArgumentsAssignment_3_2_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18243:1: rule__XConstructorCall__TypeArgumentsAssignment_3_2_1 : ( ruleJvmArgumentTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18651:1: rule__XConstructorCall__TypeArgumentsAssignment_3_2_1 : ( ruleJvmArgumentTypeReference ) ;
     public final void rule__XConstructorCall__TypeArgumentsAssignment_3_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18247:1: ( ( ruleJvmArgumentTypeReference ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18248:1: ( ruleJvmArgumentTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18655:1: ( ( ruleJvmArgumentTypeReference ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18656:1: ( ruleJvmArgumentTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18248:1: ( ruleJvmArgumentTypeReference )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18249:1: ruleJvmArgumentTypeReference
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18656:1: ( ruleJvmArgumentTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18657:1: ruleJvmArgumentTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXConstructorCallAccess().getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_3_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XConstructorCall__TypeArgumentsAssignment_3_2_136745);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XConstructorCall__TypeArgumentsAssignment_3_2_137550);
             ruleJvmArgumentTypeReference();
 
             state._fsp--;
@@ -52231,28 +53374,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XConstructorCall__ExplicitConstructorCallAssignment_4_0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18258:1: rule__XConstructorCall__ExplicitConstructorCallAssignment_4_0 : ( ( '(' ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18666:1: rule__XConstructorCall__ExplicitConstructorCallAssignment_4_0 : ( ( '(' ) ) ;
     public final void rule__XConstructorCall__ExplicitConstructorCallAssignment_4_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18262:1: ( ( ( '(' ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18263:1: ( ( '(' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18670:1: ( ( ( '(' ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18671:1: ( ( '(' ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18263:1: ( ( '(' ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18264:1: ( '(' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getXConstructorCallAccess().getExplicitConstructorCallLeftParenthesisKeyword_4_0_0()); 
-            }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18265:1: ( '(' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18266:1: '('
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18671:1: ( ( '(' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18672:1: ( '(' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXConstructorCallAccess().getExplicitConstructorCallLeftParenthesisKeyword_4_0_0()); 
             }
-            match(input,63,FOLLOW_63_in_rule__XConstructorCall__ExplicitConstructorCallAssignment_4_036781); if (state.failed) return ;
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18673:1: ( '(' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18674:1: '('
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXConstructorCallAccess().getExplicitConstructorCallLeftParenthesisKeyword_4_0_0()); 
+            }
+            match(input,63,FOLLOW_63_in_rule__XConstructorCall__ExplicitConstructorCallAssignment_4_037586); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXConstructorCallAccess().getExplicitConstructorCallLeftParenthesisKeyword_4_0_0()); 
             }
@@ -52284,22 +53427,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XConstructorCall__ArgumentsAssignment_4_1_0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18281:1: rule__XConstructorCall__ArgumentsAssignment_4_1_0 : ( ruleXShortClosure ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18689:1: rule__XConstructorCall__ArgumentsAssignment_4_1_0 : ( ruleXShortClosure ) ;
     public final void rule__XConstructorCall__ArgumentsAssignment_4_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18285:1: ( ( ruleXShortClosure ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18286:1: ( ruleXShortClosure )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18693:1: ( ( ruleXShortClosure ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18694:1: ( ruleXShortClosure )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18286:1: ( ruleXShortClosure )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18287:1: ruleXShortClosure
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18694:1: ( ruleXShortClosure )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18695:1: ruleXShortClosure
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXConstructorCallAccess().getArgumentsXShortClosureParserRuleCall_4_1_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXShortClosure_in_rule__XConstructorCall__ArgumentsAssignment_4_1_036820);
+            pushFollow(FOLLOW_ruleXShortClosure_in_rule__XConstructorCall__ArgumentsAssignment_4_1_037625);
             ruleXShortClosure();
 
             state._fsp--;
@@ -52329,22 +53472,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XConstructorCall__ArgumentsAssignment_4_1_1_0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18296:1: rule__XConstructorCall__ArgumentsAssignment_4_1_1_0 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18704:1: rule__XConstructorCall__ArgumentsAssignment_4_1_1_0 : ( ruleXExpression ) ;
     public final void rule__XConstructorCall__ArgumentsAssignment_4_1_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18300:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18301:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18708:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18709:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18301:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18302:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18709:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18710:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXConstructorCallAccess().getArgumentsXExpressionParserRuleCall_4_1_1_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_4_1_1_036851);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_4_1_1_037656);
             ruleXExpression();
 
             state._fsp--;
@@ -52374,22 +53517,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XConstructorCall__ArgumentsAssignment_4_1_1_1_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18311:1: rule__XConstructorCall__ArgumentsAssignment_4_1_1_1_1 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18719:1: rule__XConstructorCall__ArgumentsAssignment_4_1_1_1_1 : ( ruleXExpression ) ;
     public final void rule__XConstructorCall__ArgumentsAssignment_4_1_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18315:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18316:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18723:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18724:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18316:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18317:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18724:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18725:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXConstructorCallAccess().getArgumentsXExpressionParserRuleCall_4_1_1_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_4_1_1_1_136882);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_4_1_1_1_137687);
             ruleXExpression();
 
             state._fsp--;
@@ -52419,22 +53562,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XConstructorCall__ArgumentsAssignment_5"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18326:1: rule__XConstructorCall__ArgumentsAssignment_5 : ( ruleXClosure ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18734:1: rule__XConstructorCall__ArgumentsAssignment_5 : ( ruleXClosure ) ;
     public final void rule__XConstructorCall__ArgumentsAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18330:1: ( ( ruleXClosure ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18331:1: ( ruleXClosure )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18738:1: ( ( ruleXClosure ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18739:1: ( ruleXClosure )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18331:1: ( ruleXClosure )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18332:1: ruleXClosure
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18739:1: ( ruleXClosure )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18740:1: ruleXClosure
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXConstructorCallAccess().getArgumentsXClosureParserRuleCall_5_0()); 
             }
-            pushFollow(FOLLOW_ruleXClosure_in_rule__XConstructorCall__ArgumentsAssignment_536913);
+            pushFollow(FOLLOW_ruleXClosure_in_rule__XConstructorCall__ArgumentsAssignment_537718);
             ruleXClosure();
 
             state._fsp--;
@@ -52464,28 +53607,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XBooleanLiteral__IsTrueAssignment_1_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18341:1: rule__XBooleanLiteral__IsTrueAssignment_1_1 : ( ( 'true' ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18749:1: rule__XBooleanLiteral__IsTrueAssignment_1_1 : ( ( 'true' ) ) ;
     public final void rule__XBooleanLiteral__IsTrueAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18345:1: ( ( ( 'true' ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18346:1: ( ( 'true' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18753:1: ( ( ( 'true' ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18754:1: ( ( 'true' ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18346:1: ( ( 'true' ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18347:1: ( 'true' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getXBooleanLiteralAccess().getIsTrueTrueKeyword_1_1_0()); 
-            }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18348:1: ( 'true' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18349:1: 'true'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18754:1: ( ( 'true' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18755:1: ( 'true' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXBooleanLiteralAccess().getIsTrueTrueKeyword_1_1_0()); 
             }
-            match(input,88,FOLLOW_88_in_rule__XBooleanLiteral__IsTrueAssignment_1_136949); if (state.failed) return ;
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18756:1: ( 'true' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18757:1: 'true'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXBooleanLiteralAccess().getIsTrueTrueKeyword_1_1_0()); 
+            }
+            match(input,88,FOLLOW_88_in_rule__XBooleanLiteral__IsTrueAssignment_1_137754); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXBooleanLiteralAccess().getIsTrueTrueKeyword_1_1_0()); 
             }
@@ -52517,22 +53660,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XNumberLiteral__ValueAssignment_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18364:1: rule__XNumberLiteral__ValueAssignment_1 : ( ruleNumber ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18772:1: rule__XNumberLiteral__ValueAssignment_1 : ( ruleNumber ) ;
     public final void rule__XNumberLiteral__ValueAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18368:1: ( ( ruleNumber ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18369:1: ( ruleNumber )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18776:1: ( ( ruleNumber ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18777:1: ( ruleNumber )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18369:1: ( ruleNumber )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18370:1: ruleNumber
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18777:1: ( ruleNumber )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18778:1: ruleNumber
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXNumberLiteralAccess().getValueNumberParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleNumber_in_rule__XNumberLiteral__ValueAssignment_136988);
+            pushFollow(FOLLOW_ruleNumber_in_rule__XNumberLiteral__ValueAssignment_137793);
             ruleNumber();
 
             state._fsp--;
@@ -52562,22 +53705,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XStringLiteral__ValueAssignment_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18379:1: rule__XStringLiteral__ValueAssignment_1 : ( RULE_STRING ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18787:1: rule__XStringLiteral__ValueAssignment_1 : ( RULE_STRING ) ;
     public final void rule__XStringLiteral__ValueAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18383:1: ( ( RULE_STRING ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18384:1: ( RULE_STRING )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18791:1: ( ( RULE_STRING ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18792:1: ( RULE_STRING )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18384:1: ( RULE_STRING )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18385:1: RULE_STRING
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18792:1: ( RULE_STRING )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18793:1: RULE_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXStringLiteralAccess().getValueSTRINGTerminalRuleCall_1_0()); 
             }
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__XStringLiteral__ValueAssignment_137019); if (state.failed) return ;
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__XStringLiteral__ValueAssignment_137824); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXStringLiteralAccess().getValueSTRINGTerminalRuleCall_1_0()); 
             }
@@ -52603,28 +53746,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XTypeLiteral__TypeAssignment_3"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18394:1: rule__XTypeLiteral__TypeAssignment_3 : ( ( ruleQualifiedName ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18802:1: rule__XTypeLiteral__TypeAssignment_3 : ( ( ruleQualifiedName ) ) ;
     public final void rule__XTypeLiteral__TypeAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18398:1: ( ( ( ruleQualifiedName ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18399:1: ( ( ruleQualifiedName ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18806:1: ( ( ( ruleQualifiedName ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18807:1: ( ( ruleQualifiedName ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18399:1: ( ( ruleQualifiedName ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18400:1: ( ruleQualifiedName )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18807:1: ( ( ruleQualifiedName ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18808:1: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTypeLiteralAccess().getTypeJvmTypeCrossReference_3_0()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18401:1: ( ruleQualifiedName )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18402:1: ruleQualifiedName
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18809:1: ( ruleQualifiedName )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18810:1: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTypeLiteralAccess().getTypeJvmTypeQualifiedNameParserRuleCall_3_0_1()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__XTypeLiteral__TypeAssignment_337054);
+            pushFollow(FOLLOW_ruleQualifiedName_in_rule__XTypeLiteral__TypeAssignment_337859);
             ruleQualifiedName();
 
             state._fsp--;
@@ -52660,22 +53803,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XTypeLiteral__ArrayDimensionsAssignment_4"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18413:1: rule__XTypeLiteral__ArrayDimensionsAssignment_4 : ( ruleArrayBrackets ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18821:1: rule__XTypeLiteral__ArrayDimensionsAssignment_4 : ( ruleArrayBrackets ) ;
     public final void rule__XTypeLiteral__ArrayDimensionsAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18417:1: ( ( ruleArrayBrackets ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18418:1: ( ruleArrayBrackets )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18825:1: ( ( ruleArrayBrackets ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18826:1: ( ruleArrayBrackets )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18418:1: ( ruleArrayBrackets )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18419:1: ruleArrayBrackets
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18826:1: ( ruleArrayBrackets )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18827:1: ruleArrayBrackets
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTypeLiteralAccess().getArrayDimensionsArrayBracketsParserRuleCall_4_0()); 
             }
-            pushFollow(FOLLOW_ruleArrayBrackets_in_rule__XTypeLiteral__ArrayDimensionsAssignment_437089);
+            pushFollow(FOLLOW_ruleArrayBrackets_in_rule__XTypeLiteral__ArrayDimensionsAssignment_437894);
             ruleArrayBrackets();
 
             state._fsp--;
@@ -52705,22 +53848,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XThrowExpression__ExpressionAssignment_2"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18428:1: rule__XThrowExpression__ExpressionAssignment_2 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18836:1: rule__XThrowExpression__ExpressionAssignment_2 : ( ruleXExpression ) ;
     public final void rule__XThrowExpression__ExpressionAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18432:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18433:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18840:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18841:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18433:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18434:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18841:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18842:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXThrowExpressionAccess().getExpressionXExpressionParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XThrowExpression__ExpressionAssignment_237120);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XThrowExpression__ExpressionAssignment_237925);
             ruleXExpression();
 
             state._fsp--;
@@ -52750,22 +53893,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XReturnExpression__ExpressionAssignment_2"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18443:1: rule__XReturnExpression__ExpressionAssignment_2 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18851:1: rule__XReturnExpression__ExpressionAssignment_2 : ( ruleXExpression ) ;
     public final void rule__XReturnExpression__ExpressionAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18447:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18448:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18855:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18856:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18448:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18449:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18856:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18857:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXReturnExpressionAccess().getExpressionXExpressionParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XReturnExpression__ExpressionAssignment_237151);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XReturnExpression__ExpressionAssignment_237956);
             ruleXExpression();
 
             state._fsp--;
@@ -52795,22 +53938,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XTryCatchFinallyExpression__ExpressionAssignment_2"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18458:1: rule__XTryCatchFinallyExpression__ExpressionAssignment_2 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18866:1: rule__XTryCatchFinallyExpression__ExpressionAssignment_2 : ( ruleXExpression ) ;
     public final void rule__XTryCatchFinallyExpression__ExpressionAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18462:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18463:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18870:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18871:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18463:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18464:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18871:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18872:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTryCatchFinallyExpressionAccess().getExpressionXExpressionParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__ExpressionAssignment_237182);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__ExpressionAssignment_237987);
             ruleXExpression();
 
             state._fsp--;
@@ -52840,22 +53983,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XTryCatchFinallyExpression__CatchClausesAssignment_3_0_0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18473:1: rule__XTryCatchFinallyExpression__CatchClausesAssignment_3_0_0 : ( ruleXCatchClause ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18881:1: rule__XTryCatchFinallyExpression__CatchClausesAssignment_3_0_0 : ( ruleXCatchClause ) ;
     public final void rule__XTryCatchFinallyExpression__CatchClausesAssignment_3_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18477:1: ( ( ruleXCatchClause ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18478:1: ( ruleXCatchClause )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18885:1: ( ( ruleXCatchClause ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18886:1: ( ruleXCatchClause )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18478:1: ( ruleXCatchClause )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18479:1: ruleXCatchClause
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18886:1: ( ruleXCatchClause )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18887:1: ruleXCatchClause
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTryCatchFinallyExpressionAccess().getCatchClausesXCatchClauseParserRuleCall_3_0_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXCatchClause_in_rule__XTryCatchFinallyExpression__CatchClausesAssignment_3_0_037213);
+            pushFollow(FOLLOW_ruleXCatchClause_in_rule__XTryCatchFinallyExpression__CatchClausesAssignment_3_0_038018);
             ruleXCatchClause();
 
             state._fsp--;
@@ -52885,22 +54028,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_0_1_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18488:1: rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_0_1_1 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18896:1: rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_0_1_1 : ( ruleXExpression ) ;
     public final void rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_0_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18492:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18493:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18900:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18901:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18493:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18494:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18901:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18902:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyExpressionXExpressionParserRuleCall_3_0_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_0_1_137244);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_0_1_138049);
             ruleXExpression();
 
             state._fsp--;
@@ -52930,22 +54073,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_1_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18503:1: rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_1_1 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18911:1: rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_1_1 : ( ruleXExpression ) ;
     public final void rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18507:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18508:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18915:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18916:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18508:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18509:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18916:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18917:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyExpressionXExpressionParserRuleCall_3_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_1_137275);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_1_138080);
             ruleXExpression();
 
             state._fsp--;
@@ -52975,22 +54118,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XSynchronizedExpression__ParamAssignment_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18518:1: rule__XSynchronizedExpression__ParamAssignment_1 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18926:1: rule__XSynchronizedExpression__ParamAssignment_1 : ( ruleXExpression ) ;
     public final void rule__XSynchronizedExpression__ParamAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18522:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18523:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18930:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18931:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18523:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18524:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18931:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18932:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXSynchronizedExpressionAccess().getParamXExpressionParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XSynchronizedExpression__ParamAssignment_137306);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XSynchronizedExpression__ParamAssignment_138111);
             ruleXExpression();
 
             state._fsp--;
@@ -53020,22 +54163,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XSynchronizedExpression__ExpressionAssignment_3"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18533:1: rule__XSynchronizedExpression__ExpressionAssignment_3 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18941:1: rule__XSynchronizedExpression__ExpressionAssignment_3 : ( ruleXExpression ) ;
     public final void rule__XSynchronizedExpression__ExpressionAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18537:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18538:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18945:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18946:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18538:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18539:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18946:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18947:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXSynchronizedExpressionAccess().getExpressionXExpressionParserRuleCall_3_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XSynchronizedExpression__ExpressionAssignment_337337);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XSynchronizedExpression__ExpressionAssignment_338142);
             ruleXExpression();
 
             state._fsp--;
@@ -53065,22 +54208,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XCatchClause__DeclaredParamAssignment_2"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18548:1: rule__XCatchClause__DeclaredParamAssignment_2 : ( ruleFullJvmFormalParameter ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18956:1: rule__XCatchClause__DeclaredParamAssignment_2 : ( ruleFullJvmFormalParameter ) ;
     public final void rule__XCatchClause__DeclaredParamAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18552:1: ( ( ruleFullJvmFormalParameter ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18553:1: ( ruleFullJvmFormalParameter )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18960:1: ( ( ruleFullJvmFormalParameter ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18961:1: ( ruleFullJvmFormalParameter )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18553:1: ( ruleFullJvmFormalParameter )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18554:1: ruleFullJvmFormalParameter
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18961:1: ( ruleFullJvmFormalParameter )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18962:1: ruleFullJvmFormalParameter
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCatchClauseAccess().getDeclaredParamFullJvmFormalParameterParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleFullJvmFormalParameter_in_rule__XCatchClause__DeclaredParamAssignment_237368);
+            pushFollow(FOLLOW_ruleFullJvmFormalParameter_in_rule__XCatchClause__DeclaredParamAssignment_238173);
             ruleFullJvmFormalParameter();
 
             state._fsp--;
@@ -53110,22 +54253,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XCatchClause__ExpressionAssignment_4"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18563:1: rule__XCatchClause__ExpressionAssignment_4 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18971:1: rule__XCatchClause__ExpressionAssignment_4 : ( ruleXExpression ) ;
     public final void rule__XCatchClause__ExpressionAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18567:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18568:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18975:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18976:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18568:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18569:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18976:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18977:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCatchClauseAccess().getExpressionXExpressionParserRuleCall_4_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XCatchClause__ExpressionAssignment_437399);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XCatchClause__ExpressionAssignment_438204);
             ruleXExpression();
 
             state._fsp--;
@@ -53155,22 +54298,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XFunctionTypeRef__ParamTypesAssignment_0_1_0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18578:1: rule__XFunctionTypeRef__ParamTypesAssignment_0_1_0 : ( ruleJvmTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18986:1: rule__XFunctionTypeRef__ParamTypesAssignment_0_1_0 : ( ruleJvmTypeReference ) ;
     public final void rule__XFunctionTypeRef__ParamTypesAssignment_0_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18582:1: ( ( ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18583:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18990:1: ( ( ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18991:1: ( ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18583:1: ( ruleJvmTypeReference )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18584:1: ruleJvmTypeReference
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18991:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18992:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFunctionTypeRefAccess().getParamTypesJvmTypeReferenceParserRuleCall_0_1_0_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_1_037430);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_1_038235);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -53200,22 +54343,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XFunctionTypeRef__ParamTypesAssignment_0_1_1_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18593:1: rule__XFunctionTypeRef__ParamTypesAssignment_0_1_1_1 : ( ruleJvmTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19001:1: rule__XFunctionTypeRef__ParamTypesAssignment_0_1_1_1 : ( ruleJvmTypeReference ) ;
     public final void rule__XFunctionTypeRef__ParamTypesAssignment_0_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18597:1: ( ( ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18598:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19005:1: ( ( ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19006:1: ( ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18598:1: ( ruleJvmTypeReference )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18599:1: ruleJvmTypeReference
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19006:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19007:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFunctionTypeRefAccess().getParamTypesJvmTypeReferenceParserRuleCall_0_1_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_1_1_137461);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_1_1_138266);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -53245,22 +54388,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XFunctionTypeRef__ReturnTypeAssignment_2"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18608:1: rule__XFunctionTypeRef__ReturnTypeAssignment_2 : ( ruleJvmTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19016:1: rule__XFunctionTypeRef__ReturnTypeAssignment_2 : ( ruleJvmTypeReference ) ;
     public final void rule__XFunctionTypeRef__ReturnTypeAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18612:1: ( ( ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18613:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19020:1: ( ( ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19021:1: ( ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18613:1: ( ruleJvmTypeReference )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18614:1: ruleJvmTypeReference
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19021:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19022:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFunctionTypeRefAccess().getReturnTypeJvmTypeReferenceParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ReturnTypeAssignment_237492);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ReturnTypeAssignment_238297);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -53290,28 +54433,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmParameterizedTypeReference__TypeAssignment_0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18623:1: rule__JvmParameterizedTypeReference__TypeAssignment_0 : ( ( ruleQualifiedName ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19031:1: rule__JvmParameterizedTypeReference__TypeAssignment_0 : ( ( ruleQualifiedName ) ) ;
     public final void rule__JvmParameterizedTypeReference__TypeAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18627:1: ( ( ( ruleQualifiedName ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18628:1: ( ( ruleQualifiedName ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19035:1: ( ( ( ruleQualifiedName ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19036:1: ( ( ruleQualifiedName ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18628:1: ( ( ruleQualifiedName ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18629:1: ( ruleQualifiedName )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19036:1: ( ( ruleQualifiedName ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19037:1: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getTypeJvmTypeCrossReference_0_0()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18630:1: ( ruleQualifiedName )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18631:1: ruleQualifiedName
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19038:1: ( ruleQualifiedName )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19039:1: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getTypeJvmTypeQualifiedNameParserRuleCall_0_0_1()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__JvmParameterizedTypeReference__TypeAssignment_037527);
+            pushFollow(FOLLOW_ruleQualifiedName_in_rule__JvmParameterizedTypeReference__TypeAssignment_038332);
             ruleQualifiedName();
 
             state._fsp--;
@@ -53347,22 +54490,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18642:1: rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1 : ( ruleJvmArgumentTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19050:1: rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1 : ( ruleJvmArgumentTypeReference ) ;
     public final void rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18646:1: ( ( ruleJvmArgumentTypeReference ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18647:1: ( ruleJvmArgumentTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19054:1: ( ( ruleJvmArgumentTypeReference ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19055:1: ( ruleJvmArgumentTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18647:1: ( ruleJvmArgumentTypeReference )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18648:1: ruleJvmArgumentTypeReference
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19055:1: ( ruleJvmArgumentTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19056:1: ruleJvmArgumentTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_137562);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_138367);
             ruleJvmArgumentTypeReference();
 
             state._fsp--;
@@ -53392,22 +54535,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18657:1: rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1 : ( ruleJvmArgumentTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19065:1: rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1 : ( ruleJvmArgumentTypeReference ) ;
     public final void rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18661:1: ( ( ruleJvmArgumentTypeReference ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18662:1: ( ruleJvmArgumentTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19069:1: ( ( ruleJvmArgumentTypeReference ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19070:1: ( ruleJvmArgumentTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18662:1: ( ruleJvmArgumentTypeReference )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18663:1: ruleJvmArgumentTypeReference
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19070:1: ( ruleJvmArgumentTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19071:1: ruleJvmArgumentTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_137593);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_138398);
             ruleJvmArgumentTypeReference();
 
             state._fsp--;
@@ -53436,23 +54579,170 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
     // $ANTLR end "rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1"
 
 
+    // $ANTLR start "rule__JvmParameterizedTypeReference__TypeAssignment_1_4_1"
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19080:1: rule__JvmParameterizedTypeReference__TypeAssignment_1_4_1 : ( ( ruleValidID ) ) ;
+    public final void rule__JvmParameterizedTypeReference__TypeAssignment_1_4_1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19084:1: ( ( ( ruleValidID ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19085:1: ( ( ruleValidID ) )
+            {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19085:1: ( ( ruleValidID ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19086:1: ( ruleValidID )
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getTypeJvmTypeCrossReference_1_4_1_0()); 
+            }
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19087:1: ( ruleValidID )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19088:1: ruleValidID
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getTypeJvmTypeValidIDParserRuleCall_1_4_1_0_1()); 
+            }
+            pushFollow(FOLLOW_ruleValidID_in_rule__JvmParameterizedTypeReference__TypeAssignment_1_4_138433);
+            ruleValidID();
+
+            state._fsp--;
+            if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getJvmParameterizedTypeReferenceAccess().getTypeJvmTypeValidIDParserRuleCall_1_4_1_0_1()); 
+            }
+
+            }
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getJvmParameterizedTypeReferenceAccess().getTypeJvmTypeCrossReference_1_4_1_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__JvmParameterizedTypeReference__TypeAssignment_1_4_1"
+
+
+    // $ANTLR start "rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_1"
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19099:1: rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_1 : ( ruleJvmArgumentTypeReference ) ;
+    public final void rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19103:1: ( ( ruleJvmArgumentTypeReference ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19104:1: ( ruleJvmArgumentTypeReference )
+            {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19104:1: ( ruleJvmArgumentTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19105:1: ruleJvmArgumentTypeReference
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_4_2_1_0()); 
+            }
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_138468);
+            ruleJvmArgumentTypeReference();
+
+            state._fsp--;
+            if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_4_2_1_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_1"
+
+
+    // $ANTLR start "rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_2_1"
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19114:1: rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_2_1 : ( ruleJvmArgumentTypeReference ) ;
+    public final void rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_2_1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19118:1: ( ( ruleJvmArgumentTypeReference ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19119:1: ( ruleJvmArgumentTypeReference )
+            {
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19119:1: ( ruleJvmArgumentTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19120:1: ruleJvmArgumentTypeReference
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_4_2_2_1_0()); 
+            }
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_2_138499);
+            ruleJvmArgumentTypeReference();
+
+            state._fsp--;
+            if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_4_2_2_1_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_2_1"
+
+
     // $ANTLR start "rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18672:1: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_0 : ( ruleJvmUpperBound ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19129:1: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_0 : ( ruleJvmUpperBound ) ;
     public final void rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18676:1: ( ( ruleJvmUpperBound ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18677:1: ( ruleJvmUpperBound )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19133:1: ( ( ruleJvmUpperBound ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19134:1: ( ruleJvmUpperBound )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18677:1: ( ruleJvmUpperBound )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18678:1: ruleJvmUpperBound
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19134:1: ( ruleJvmUpperBound )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19135:1: ruleJvmUpperBound
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsJvmUpperBoundParserRuleCall_2_0_0_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmUpperBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_037624);
+            pushFollow(FOLLOW_ruleJvmUpperBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_038530);
             ruleJvmUpperBound();
 
             state._fsp--;
@@ -53482,22 +54772,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18687:1: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_1 : ( ruleJvmUpperBoundAnded ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19144:1: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_1 : ( ruleJvmUpperBoundAnded ) ;
     public final void rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18691:1: ( ( ruleJvmUpperBoundAnded ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18692:1: ( ruleJvmUpperBoundAnded )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19148:1: ( ( ruleJvmUpperBoundAnded ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19149:1: ( ruleJvmUpperBoundAnded )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18692:1: ( ruleJvmUpperBoundAnded )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18693:1: ruleJvmUpperBoundAnded
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19149:1: ( ruleJvmUpperBoundAnded )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19150:1: ruleJvmUpperBoundAnded
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsJvmUpperBoundAndedParserRuleCall_2_0_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmUpperBoundAnded_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_137655);
+            pushFollow(FOLLOW_ruleJvmUpperBoundAnded_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_138561);
             ruleJvmUpperBoundAnded();
 
             state._fsp--;
@@ -53527,22 +54817,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18702:1: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_0 : ( ruleJvmLowerBound ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19159:1: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_0 : ( ruleJvmLowerBound ) ;
     public final void rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18706:1: ( ( ruleJvmLowerBound ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18707:1: ( ruleJvmLowerBound )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19163:1: ( ( ruleJvmLowerBound ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19164:1: ( ruleJvmLowerBound )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18707:1: ( ruleJvmLowerBound )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18708:1: ruleJvmLowerBound
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19164:1: ( ruleJvmLowerBound )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19165:1: ruleJvmLowerBound
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsJvmLowerBoundParserRuleCall_2_1_0_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmLowerBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_037686);
+            pushFollow(FOLLOW_ruleJvmLowerBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_038592);
             ruleJvmLowerBound();
 
             state._fsp--;
@@ -53572,22 +54862,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18717:1: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_1 : ( ruleJvmLowerBoundAnded ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19174:1: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_1 : ( ruleJvmLowerBoundAnded ) ;
     public final void rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18721:1: ( ( ruleJvmLowerBoundAnded ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18722:1: ( ruleJvmLowerBoundAnded )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19178:1: ( ( ruleJvmLowerBoundAnded ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19179:1: ( ruleJvmLowerBoundAnded )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18722:1: ( ruleJvmLowerBoundAnded )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18723:1: ruleJvmLowerBoundAnded
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19179:1: ( ruleJvmLowerBoundAnded )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19180:1: ruleJvmLowerBoundAnded
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsJvmLowerBoundAndedParserRuleCall_2_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmLowerBoundAnded_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_137717);
+            pushFollow(FOLLOW_ruleJvmLowerBoundAnded_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_138623);
             ruleJvmLowerBoundAnded();
 
             state._fsp--;
@@ -53617,22 +54907,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmUpperBound__TypeReferenceAssignment_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18732:1: rule__JvmUpperBound__TypeReferenceAssignment_1 : ( ruleJvmTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19189:1: rule__JvmUpperBound__TypeReferenceAssignment_1 : ( ruleJvmTypeReference ) ;
     public final void rule__JvmUpperBound__TypeReferenceAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18736:1: ( ( ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18737:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19193:1: ( ( ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19194:1: ( ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18737:1: ( ruleJvmTypeReference )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18738:1: ruleJvmTypeReference
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19194:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19195:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmUpperBoundAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBound__TypeReferenceAssignment_137748);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBound__TypeReferenceAssignment_138654);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -53662,22 +54952,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmUpperBoundAnded__TypeReferenceAssignment_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18747:1: rule__JvmUpperBoundAnded__TypeReferenceAssignment_1 : ( ruleJvmTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19204:1: rule__JvmUpperBoundAnded__TypeReferenceAssignment_1 : ( ruleJvmTypeReference ) ;
     public final void rule__JvmUpperBoundAnded__TypeReferenceAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18751:1: ( ( ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18752:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19208:1: ( ( ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19209:1: ( ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18752:1: ( ruleJvmTypeReference )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18753:1: ruleJvmTypeReference
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19209:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19210:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmUpperBoundAndedAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBoundAnded__TypeReferenceAssignment_137779);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBoundAnded__TypeReferenceAssignment_138685);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -53707,22 +54997,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmLowerBound__TypeReferenceAssignment_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18762:1: rule__JvmLowerBound__TypeReferenceAssignment_1 : ( ruleJvmTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19219:1: rule__JvmLowerBound__TypeReferenceAssignment_1 : ( ruleJvmTypeReference ) ;
     public final void rule__JvmLowerBound__TypeReferenceAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18766:1: ( ( ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18767:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19223:1: ( ( ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19224:1: ( ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18767:1: ( ruleJvmTypeReference )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18768:1: ruleJvmTypeReference
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19224:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19225:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmLowerBoundAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmLowerBound__TypeReferenceAssignment_137810);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmLowerBound__TypeReferenceAssignment_138716);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -53752,22 +55042,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__JvmLowerBoundAnded__TypeReferenceAssignment_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18777:1: rule__JvmLowerBoundAnded__TypeReferenceAssignment_1 : ( ruleJvmTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19234:1: rule__JvmLowerBoundAnded__TypeReferenceAssignment_1 : ( ruleJvmTypeReference ) ;
     public final void rule__JvmLowerBoundAnded__TypeReferenceAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18781:1: ( ( ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18782:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19238:1: ( ( ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19239:1: ( ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18782:1: ( ruleJvmTypeReference )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18783:1: ruleJvmTypeReference
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19239:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19240:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmLowerBoundAndedAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmLowerBoundAnded__TypeReferenceAssignment_137841);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmLowerBoundAnded__TypeReferenceAssignment_138747);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -53797,22 +55087,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XImportSection__ImportDeclarationsAssignment"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18795:1: rule__XImportSection__ImportDeclarationsAssignment : ( ruleXImportDeclaration ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19252:1: rule__XImportSection__ImportDeclarationsAssignment : ( ruleXImportDeclaration ) ;
     public final void rule__XImportSection__ImportDeclarationsAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18799:1: ( ( ruleXImportDeclaration ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18800:1: ( ruleXImportDeclaration )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19256:1: ( ( ruleXImportDeclaration ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19257:1: ( ruleXImportDeclaration )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18800:1: ( ruleXImportDeclaration )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18801:1: ruleXImportDeclaration
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19257:1: ( ruleXImportDeclaration )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19258:1: ruleXImportDeclaration
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXImportSectionAccess().getImportDeclarationsXImportDeclarationParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_ruleXImportDeclaration_in_rule__XImportSection__ImportDeclarationsAssignment37875);
+            pushFollow(FOLLOW_ruleXImportDeclaration_in_rule__XImportSection__ImportDeclarationsAssignment38781);
             ruleXImportDeclaration();
 
             state._fsp--;
@@ -53842,28 +55132,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XImportDeclaration__StaticAssignment_1_0_0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18810:1: rule__XImportDeclaration__StaticAssignment_1_0_0 : ( ( 'static' ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19267:1: rule__XImportDeclaration__StaticAssignment_1_0_0 : ( ( 'static' ) ) ;
     public final void rule__XImportDeclaration__StaticAssignment_1_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18814:1: ( ( ( 'static' ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18815:1: ( ( 'static' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19271:1: ( ( ( 'static' ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19272:1: ( ( 'static' ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18815:1: ( ( 'static' ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18816:1: ( 'static' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getXImportDeclarationAccess().getStaticStaticKeyword_1_0_0_0()); 
-            }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18817:1: ( 'static' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18818:1: 'static'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19272:1: ( ( 'static' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19273:1: ( 'static' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXImportDeclarationAccess().getStaticStaticKeyword_1_0_0_0()); 
             }
-            match(input,46,FOLLOW_46_in_rule__XImportDeclaration__StaticAssignment_1_0_037911); if (state.failed) return ;
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19274:1: ( 'static' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19275:1: 'static'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXImportDeclarationAccess().getStaticStaticKeyword_1_0_0_0()); 
+            }
+            match(input,46,FOLLOW_46_in_rule__XImportDeclaration__StaticAssignment_1_0_038817); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXImportDeclarationAccess().getStaticStaticKeyword_1_0_0_0()); 
             }
@@ -53895,28 +55185,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XImportDeclaration__ExtensionAssignment_1_0_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18833:1: rule__XImportDeclaration__ExtensionAssignment_1_0_1 : ( ( 'extension' ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19290:1: rule__XImportDeclaration__ExtensionAssignment_1_0_1 : ( ( 'extension' ) ) ;
     public final void rule__XImportDeclaration__ExtensionAssignment_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18837:1: ( ( ( 'extension' ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18838:1: ( ( 'extension' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19294:1: ( ( ( 'extension' ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19295:1: ( ( 'extension' ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18838:1: ( ( 'extension' ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18839:1: ( 'extension' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getXImportDeclarationAccess().getExtensionExtensionKeyword_1_0_1_0()); 
-            }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18840:1: ( 'extension' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18841:1: 'extension'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19295:1: ( ( 'extension' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19296:1: ( 'extension' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXImportDeclarationAccess().getExtensionExtensionKeyword_1_0_1_0()); 
             }
-            match(input,48,FOLLOW_48_in_rule__XImportDeclaration__ExtensionAssignment_1_0_137955); if (state.failed) return ;
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19297:1: ( 'extension' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19298:1: 'extension'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXImportDeclarationAccess().getExtensionExtensionKeyword_1_0_1_0()); 
+            }
+            match(input,48,FOLLOW_48_in_rule__XImportDeclaration__ExtensionAssignment_1_0_138861); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXImportDeclarationAccess().getExtensionExtensionKeyword_1_0_1_0()); 
             }
@@ -53948,28 +55238,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XImportDeclaration__ImportedTypeAssignment_1_0_2"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18856:1: rule__XImportDeclaration__ImportedTypeAssignment_1_0_2 : ( ( ruleQualifiedNameInStaticImport ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19313:1: rule__XImportDeclaration__ImportedTypeAssignment_1_0_2 : ( ( ruleQualifiedNameInStaticImport ) ) ;
     public final void rule__XImportDeclaration__ImportedTypeAssignment_1_0_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18860:1: ( ( ( ruleQualifiedNameInStaticImport ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18861:1: ( ( ruleQualifiedNameInStaticImport ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19317:1: ( ( ( ruleQualifiedNameInStaticImport ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19318:1: ( ( ruleQualifiedNameInStaticImport ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18861:1: ( ( ruleQualifiedNameInStaticImport ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18862:1: ( ruleQualifiedNameInStaticImport )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19318:1: ( ( ruleQualifiedNameInStaticImport ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19319:1: ( ruleQualifiedNameInStaticImport )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXImportDeclarationAccess().getImportedTypeJvmDeclaredTypeCrossReference_1_0_2_0()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18863:1: ( ruleQualifiedNameInStaticImport )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18864:1: ruleQualifiedNameInStaticImport
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19320:1: ( ruleQualifiedNameInStaticImport )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19321:1: ruleQualifiedNameInStaticImport
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXImportDeclarationAccess().getImportedTypeJvmDeclaredTypeQualifiedNameInStaticImportParserRuleCall_1_0_2_0_1()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedNameInStaticImport_in_rule__XImportDeclaration__ImportedTypeAssignment_1_0_237998);
+            pushFollow(FOLLOW_ruleQualifiedNameInStaticImport_in_rule__XImportDeclaration__ImportedTypeAssignment_1_0_238904);
             ruleQualifiedNameInStaticImport();
 
             state._fsp--;
@@ -54005,28 +55295,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XImportDeclaration__WildcardAssignment_1_0_3_0"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18875:1: rule__XImportDeclaration__WildcardAssignment_1_0_3_0 : ( ( '*' ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19332:1: rule__XImportDeclaration__WildcardAssignment_1_0_3_0 : ( ( '*' ) ) ;
     public final void rule__XImportDeclaration__WildcardAssignment_1_0_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18879:1: ( ( ( '*' ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18880:1: ( ( '*' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19336:1: ( ( ( '*' ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19337:1: ( ( '*' ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18880:1: ( ( '*' ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18881:1: ( '*' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getXImportDeclarationAccess().getWildcardAsteriskKeyword_1_0_3_0_0()); 
-            }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18882:1: ( '*' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18883:1: '*'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19337:1: ( ( '*' ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19338:1: ( '*' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXImportDeclarationAccess().getWildcardAsteriskKeyword_1_0_3_0_0()); 
             }
-            match(input,36,FOLLOW_36_in_rule__XImportDeclaration__WildcardAssignment_1_0_3_038038); if (state.failed) return ;
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19339:1: ( '*' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19340:1: '*'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXImportDeclarationAccess().getWildcardAsteriskKeyword_1_0_3_0_0()); 
+            }
+            match(input,36,FOLLOW_36_in_rule__XImportDeclaration__WildcardAssignment_1_0_3_038944); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXImportDeclarationAccess().getWildcardAsteriskKeyword_1_0_3_0_0()); 
             }
@@ -54058,22 +55348,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XImportDeclaration__MemberNameAssignment_1_0_3_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18898:1: rule__XImportDeclaration__MemberNameAssignment_1_0_3_1 : ( ruleValidID ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19355:1: rule__XImportDeclaration__MemberNameAssignment_1_0_3_1 : ( ruleValidID ) ;
     public final void rule__XImportDeclaration__MemberNameAssignment_1_0_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18902:1: ( ( ruleValidID ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18903:1: ( ruleValidID )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19359:1: ( ( ruleValidID ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19360:1: ( ruleValidID )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18903:1: ( ruleValidID )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18904:1: ruleValidID
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19360:1: ( ruleValidID )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19361:1: ruleValidID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXImportDeclarationAccess().getMemberNameValidIDParserRuleCall_1_0_3_1_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__XImportDeclaration__MemberNameAssignment_1_0_3_138077);
+            pushFollow(FOLLOW_ruleValidID_in_rule__XImportDeclaration__MemberNameAssignment_1_0_3_138983);
             ruleValidID();
 
             state._fsp--;
@@ -54103,28 +55393,28 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XImportDeclaration__ImportedTypeAssignment_1_1"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18913:1: rule__XImportDeclaration__ImportedTypeAssignment_1_1 : ( ( ruleQualifiedName ) ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19370:1: rule__XImportDeclaration__ImportedTypeAssignment_1_1 : ( ( ruleQualifiedName ) ) ;
     public final void rule__XImportDeclaration__ImportedTypeAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18917:1: ( ( ( ruleQualifiedName ) ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18918:1: ( ( ruleQualifiedName ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19374:1: ( ( ( ruleQualifiedName ) ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19375:1: ( ( ruleQualifiedName ) )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18918:1: ( ( ruleQualifiedName ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18919:1: ( ruleQualifiedName )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19375:1: ( ( ruleQualifiedName ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19376:1: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXImportDeclarationAccess().getImportedTypeJvmDeclaredTypeCrossReference_1_1_0()); 
             }
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18920:1: ( ruleQualifiedName )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18921:1: ruleQualifiedName
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19377:1: ( ruleQualifiedName )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19378:1: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXImportDeclarationAccess().getImportedTypeJvmDeclaredTypeQualifiedNameParserRuleCall_1_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__XImportDeclaration__ImportedTypeAssignment_1_138112);
+            pushFollow(FOLLOW_ruleQualifiedName_in_rule__XImportDeclaration__ImportedTypeAssignment_1_139018);
             ruleQualifiedName();
 
             state._fsp--;
@@ -54160,22 +55450,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__XImportDeclaration__ImportedNamespaceAssignment_1_2"
-    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18932:1: rule__XImportDeclaration__ImportedNamespaceAssignment_1_2 : ( ruleQualifiedNameWithWildcard ) ;
+    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19389:1: rule__XImportDeclaration__ImportedNamespaceAssignment_1_2 : ( ruleQualifiedNameWithWildcard ) ;
     public final void rule__XImportDeclaration__ImportedNamespaceAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18936:1: ( ( ruleQualifiedNameWithWildcard ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18937:1: ( ruleQualifiedNameWithWildcard )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19393:1: ( ( ruleQualifiedNameWithWildcard ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19394:1: ( ruleQualifiedNameWithWildcard )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18937:1: ( ruleQualifiedNameWithWildcard )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18938:1: ruleQualifiedNameWithWildcard
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19394:1: ( ruleQualifiedNameWithWildcard )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19395:1: ruleQualifiedNameWithWildcard
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXImportDeclarationAccess().getImportedNamespaceQualifiedNameWithWildcardParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedNameWithWildcard_in_rule__XImportDeclaration__ImportedNamespaceAssignment_1_238147);
+            pushFollow(FOLLOW_ruleQualifiedNameWithWildcard_in_rule__XImportDeclaration__ImportedNamespaceAssignment_1_239053);
             ruleQualifiedNameWithWildcard();
 
             state._fsp--;
@@ -54862,6 +56152,36 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
     }
     // $ANTLR end synpred151_InternalXImportSectionTestLang
 
+    // $ANTLR start synpred153_InternalXImportSectionTestLang
+    public final void synpred153_InternalXImportSectionTestLang_fragment() throws RecognitionException {   
+        // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15768:2: ( rule__JvmParameterizedTypeReference__Group_1_4__0 )
+        // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15768:2: rule__JvmParameterizedTypeReference__Group_1_4__0
+        {
+        pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4__0_in_synpred153_InternalXImportSectionTestLang31757);
+        rule__JvmParameterizedTypeReference__Group_1_4__0();
+
+        state._fsp--;
+        if (state.failed) return ;
+
+        }
+    }
+    // $ANTLR end synpred153_InternalXImportSectionTestLang
+
+    // $ANTLR start synpred154_InternalXImportSectionTestLang
+    public final void synpred154_InternalXImportSectionTestLang_fragment() throws RecognitionException {   
+        // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15927:2: ( rule__JvmParameterizedTypeReference__Group_1_4_2__0 )
+        // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15927:2: rule__JvmParameterizedTypeReference__Group_1_4_2__0
+        {
+        pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_2__0_in_synpred154_InternalXImportSectionTestLang32068);
+        rule__JvmParameterizedTypeReference__Group_1_4_2__0();
+
+        state._fsp--;
+        if (state.failed) return ;
+
+        }
+    }
+    // $ANTLR end synpred154_InternalXImportSectionTestLang
+
     // Delegated rules
 
     public final boolean synpred88_InternalXImportSectionTestLang() {
@@ -54883,6 +56203,20 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
         int start = input.mark();
         try {
             synpred40_InternalXImportSectionTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred154_InternalXImportSectionTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred154_InternalXImportSectionTestLang_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -55270,6 +56604,20 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
         state.failed=false;
         return success;
     }
+    public final boolean synpred153_InternalXImportSectionTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred153_InternalXImportSectionTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
     public final boolean synpred99_InternalXImportSectionTestLang() {
         state.backtracking++;
         int start = input.mark();
@@ -55391,6 +56739,7 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
     protected DFA94 dfa94 = new DFA94(this);
     protected DFA99 dfa99 = new DFA99(this);
     protected DFA108 dfa108 = new DFA108(this);
+    protected DFA111 dfa111 = new DFA111(this);
     static final String DFA8_eotS =
         "\13\uffff";
     static final String DFA8_eofS =
@@ -55400,14 +56749,14 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
     static final String DFA8_maxS =
         "\1\41\2\uffff\1\36\7\uffff";
     static final String DFA8_acceptS =
-        "\1\uffff\1\1\1\2\1\uffff\1\4\1\5\1\7\1\10\1\11\1\6\1\3";
+        "\1\uffff\1\1\1\2\1\uffff\1\4\1\5\1\7\1\10\1\11\1\3\1\6";
     static final String DFA8_specialS =
         "\13\uffff}>";
     static final String[] DFA8_transitionS = {
             "\1\3\1\6\1\1\1\2\1\4\1\5\1\7\1\10",
             "",
             "",
-            "\1\11\3\uffff\1\12",
+            "\1\12\3\uffff\1\11",
             "",
             "",
             "",
@@ -55521,9 +56870,7 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
     static final String DFA19_specialS =
         "\1\uffff\1\0\1\1\40\uffff}>";
     static final String[] DFA19_transitionS = {
-            "\1\1\4\5\22\uffff\1\5\3\uffff\1\3\2\uffff\2\5\4\uffff\1\5\4"+
-            "\uffff\6\5\6\uffff\2\5\1\uffff\1\5\2\uffff\1\2\1\5\1\uffff\1"+
-            "\5\3\uffff\11\5\1\uffff\1\5\5\uffff\1\3\1\uffff\1\5",
+            "\1\1\4\5\22\uffff\1\5\3\uffff\1\3\2\uffff\2\5\4\uffff\1\5\4\uffff\6\5\6\uffff\2\5\1\uffff\1\5\2\uffff\1\2\1\5\1\uffff\1\5\3\uffff\11\5\1\uffff\1\5\5\uffff\1\3\1\uffff\1\5",
             "\1\uffff",
             "\1\uffff",
             "",
@@ -55643,14 +56990,11 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
     static final String DFA20_maxS =
         "\1\130\26\uffff\1\0\10\uffff";
     static final String DFA20_acceptS =
-        "\1\uffff\1\1\1\2\1\3\1\4\1\5\6\uffff\1\6\11\uffff\1\7\1\uffff\1"+
-        "\12\1\13\1\14\1\15\1\16\1\17\1\10\1\11";
+        "\1\uffff\1\1\1\2\1\3\1\4\1\5\6\uffff\1\6\11\uffff\1\7\1\uffff\1\12\1\13\1\14\1\15\1\16\1\17\1\10\1\11";
     static final String DFA20_specialS =
         "\27\uffff\1\0\10\uffff}>";
     static final String[] DFA20_transitionS = {
-            "\1\5\4\14\22\uffff\1\5\21\uffff\5\5\1\14\6\uffff\1\14\1\2\1"+
-            "\uffff\1\14\2\uffff\1\35\1\26\1\uffff\1\3\3\uffff\1\27\1\30"+
-            "\1\31\1\1\2\14\1\32\1\33\1\34\1\uffff\1\4\7\uffff\1\14",
+            "\1\5\4\14\22\uffff\1\5\21\uffff\5\5\1\14\6\uffff\1\14\1\2\1\uffff\1\14\2\uffff\1\35\1\26\1\uffff\1\3\3\uffff\1\27\1\30\1\31\1\1\2\14\1\32\1\33\1\34\1\uffff\1\4\7\uffff\1\14",
             "",
             "",
             "",
@@ -55756,9 +57100,7 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
     static final String DFA23_specialS =
         "\1\uffff\1\0\41\uffff}>";
     static final String[] DFA23_transitionS = {
-            "\5\2\22\uffff\1\2\3\uffff\1\2\2\uffff\2\2\4\uffff\1\2\4\uffff"+
-            "\6\2\6\uffff\2\2\1\uffff\1\2\2\uffff\1\1\1\2\1\uffff\1\2\3\uffff"+
-            "\11\2\1\uffff\1\2\7\uffff\1\2",
+            "\5\2\22\uffff\1\2\3\uffff\1\2\2\uffff\2\2\4\uffff\1\2\4\uffff\6\2\6\uffff\2\2\1\uffff\1\2\2\uffff\1\1\1\2\1\uffff\1\2\3\uffff\11\2\1\uffff\1\2\7\uffff\1\2",
             "\1\uffff",
             "",
             "",
@@ -55867,9 +57209,7 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
     static final String DFA28_specialS =
         "\1\uffff\1\0\1\1\40\uffff}>";
     static final String[] DFA28_transitionS = {
-            "\1\1\4\5\22\uffff\1\5\3\uffff\1\3\2\uffff\2\5\4\uffff\1\5\4"+
-            "\uffff\6\5\6\uffff\2\5\1\uffff\1\5\2\uffff\1\2\1\5\1\uffff\1"+
-            "\5\3\uffff\11\5\1\uffff\1\5\5\uffff\1\3\1\uffff\1\5",
+            "\1\1\4\5\22\uffff\1\5\3\uffff\1\3\2\uffff\2\5\4\uffff\1\5\4\uffff\6\5\6\uffff\2\5\1\uffff\1\5\2\uffff\1\2\1\5\1\uffff\1\5\3\uffff\11\5\1\uffff\1\5\5\uffff\1\3\1\uffff\1\5",
             "\1\uffff",
             "\1\uffff",
             "",
@@ -55993,9 +57333,7 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
     static final String DFA31_specialS =
         "\1\uffff\1\0\1\1\40\uffff}>";
     static final String[] DFA31_transitionS = {
-            "\1\1\4\5\22\uffff\1\5\3\uffff\1\3\2\uffff\2\5\4\uffff\1\5\4"+
-            "\uffff\6\5\6\uffff\2\5\1\uffff\1\5\2\uffff\1\2\1\5\1\uffff\1"+
-            "\5\3\uffff\11\5\1\uffff\1\5\5\uffff\1\3\1\uffff\1\5",
+            "\1\1\4\5\22\uffff\1\5\3\uffff\1\3\2\uffff\2\5\4\uffff\1\5\4\uffff\6\5\6\uffff\2\5\1\uffff\1\5\2\uffff\1\2\1\5\1\uffff\1\5\3\uffff\11\5\1\uffff\1\5\5\uffff\1\3\1\uffff\1\5",
             "\1\uffff",
             "\1\uffff",
             "",
@@ -56109,23 +57447,23 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
     static final String DFA40_eotS =
         "\7\uffff";
     static final String DFA40_eofS =
-        "\2\uffff\1\4\2\uffff\1\4\1\uffff";
+        "\2\uffff\1\4\3\uffff\1\4";
     static final String DFA40_minS =
-        "\1\4\1\uffff\1\53\1\4\1\uffff\1\53\1\uffff";
+        "\1\4\1\uffff\1\53\1\4\2\uffff\1\53";
     static final String DFA40_maxS =
-        "\1\56\1\uffff\1\76\1\44\1\uffff\1\76\1\uffff";
+        "\1\56\1\uffff\1\76\1\44\2\uffff\1\76";
     static final String DFA40_acceptS =
-        "\1\uffff\1\1\2\uffff\1\2\1\uffff\1\3";
+        "\1\uffff\1\1\2\uffff\1\2\1\3\1\uffff";
     static final String DFA40_specialS =
         "\7\uffff}>";
     static final String[] DFA40_transitionS = {
             "\1\2\51\uffff\1\1",
             "",
             "\1\3\3\uffff\1\4\16\uffff\1\4",
-            "\1\5\37\uffff\1\6",
+            "\1\6\37\uffff\1\5",
             "",
-            "\1\3\3\uffff\1\4\16\uffff\1\4",
-            ""
+            "",
+            "\1\3\3\uffff\1\4\16\uffff\1\4"
     };
 
     static final short[] DFA40_eot = DFA.unpackEncodedString(DFA40_eotS);
@@ -56172,10 +57510,9 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
     static final String DFA42_acceptS =
         "\10\uffff\1\2\1\1";
     static final String DFA42_specialS =
-        "\1\uffff\1\5\1\2\1\3\1\1\1\0\1\4\1\6\2\uffff}>";
+        "\1\uffff\1\6\1\3\1\5\1\2\1\1\1\0\1\4\2\uffff}>";
     static final String[] DFA42_transitionS = {
-            "\5\10\5\uffff\2\10\1\1\1\2\1\3\1\4\1\5\5\10\1\7\1\6\27\10\2"+
-            "\uffff\35\10\2\uffff\2\10\1\uffff\2\10",
+            "\5\10\5\uffff\2\10\1\1\1\2\1\3\1\4\1\5\5\10\1\7\1\6\27\10\2\uffff\35\10\2\uffff\2\10\1\uffff\2\10",
             "\1\uffff",
             "\1\uffff",
             "\1\uffff",
@@ -56224,66 +57561,6 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA42_5 = input.LA(1);
-
-                         
-                        int index42_5 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred85_InternalXImportSectionTestLang()) ) {s = 9;}
-
-                        else if ( (true) ) {s = 8;}
-
-                         
-                        input.seek(index42_5);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
-                        int LA42_4 = input.LA(1);
-
-                         
-                        int index42_4 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred85_InternalXImportSectionTestLang()) ) {s = 9;}
-
-                        else if ( (true) ) {s = 8;}
-
-                         
-                        input.seek(index42_4);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA42_2 = input.LA(1);
-
-                         
-                        int index42_2 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred85_InternalXImportSectionTestLang()) ) {s = 9;}
-
-                        else if ( (true) ) {s = 8;}
-
-                         
-                        input.seek(index42_2);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 3 : 
-                        int LA42_3 = input.LA(1);
-
-                         
-                        int index42_3 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred85_InternalXImportSectionTestLang()) ) {s = 9;}
-
-                        else if ( (true) ) {s = 8;}
-
-                         
-                        input.seek(index42_3);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 4 : 
                         int LA42_6 = input.LA(1);
 
                          
@@ -56298,11 +57575,11 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
                         input.seek(index42_6);
                         if ( s>=0 ) return s;
                         break;
-                    case 5 : 
-                        int LA42_1 = input.LA(1);
+                    case 1 : 
+                        int LA42_5 = input.LA(1);
 
                          
-                        int index42_1 = input.index();
+                        int index42_5 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred85_InternalXImportSectionTestLang()) ) {s = 9;}
@@ -56310,10 +57587,40 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
                         else if ( (true) ) {s = 8;}
 
                          
-                        input.seek(index42_1);
+                        input.seek(index42_5);
                         if ( s>=0 ) return s;
                         break;
-                    case 6 : 
+                    case 2 : 
+                        int LA42_4 = input.LA(1);
+
+                         
+                        int index42_4 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred85_InternalXImportSectionTestLang()) ) {s = 9;}
+
+                        else if ( (true) ) {s = 8;}
+
+                         
+                        input.seek(index42_4);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 3 : 
+                        int LA42_2 = input.LA(1);
+
+                         
+                        int index42_2 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred85_InternalXImportSectionTestLang()) ) {s = 9;}
+
+                        else if ( (true) ) {s = 8;}
+
+                         
+                        input.seek(index42_2);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 4 : 
                         int LA42_7 = input.LA(1);
 
                          
@@ -56326,6 +57633,36 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
                          
                         input.seek(index42_7);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 5 : 
+                        int LA42_3 = input.LA(1);
+
+                         
+                        int index42_3 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred85_InternalXImportSectionTestLang()) ) {s = 9;}
+
+                        else if ( (true) ) {s = 8;}
+
+                         
+                        input.seek(index42_3);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 6 : 
+                        int LA42_1 = input.LA(1);
+
+                         
+                        int index42_1 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred85_InternalXImportSectionTestLang()) ) {s = 9;}
+
+                        else if ( (true) ) {s = 8;}
+
+                         
+                        input.seek(index42_1);
                         if ( s>=0 ) return s;
                         break;
             }
@@ -56347,10 +57684,9 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
     static final String DFA48_acceptS =
         "\1\uffff\1\2\10\uffff\1\1";
     static final String DFA48_specialS =
-        "\2\uffff\1\4\1\5\1\7\1\0\1\1\1\2\1\6\1\3\1\uffff}>";
+        "\2\uffff\1\7\1\3\1\4\1\0\1\2\1\6\1\1\1\5\1\uffff}>";
     static final String[] DFA48_transitionS = {
-            "\5\1\5\uffff\14\1\1\3\1\2\1\4\1\5\1\6\1\7\1\10\1\11\21\1\2\uffff"+
-            "\35\1\2\uffff\2\1\1\uffff\2\1",
+            "\5\1\5\uffff\14\1\1\3\1\2\1\4\1\5\1\6\1\7\1\10\1\11\21\1\2\uffff\35\1\2\uffff\2\1\1\uffff\2\1",
             "",
             "\1\uffff",
             "\1\uffff",
@@ -56415,81 +57751,6 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA48_6 = input.LA(1);
-
-                         
-                        int index48_6 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred91_InternalXImportSectionTestLang()) ) {s = 10;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index48_6);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA48_7 = input.LA(1);
-
-                         
-                        int index48_7 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred91_InternalXImportSectionTestLang()) ) {s = 10;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index48_7);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 3 : 
-                        int LA48_9 = input.LA(1);
-
-                         
-                        int index48_9 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred91_InternalXImportSectionTestLang()) ) {s = 10;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index48_9);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 4 : 
-                        int LA48_2 = input.LA(1);
-
-                         
-                        int index48_2 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred91_InternalXImportSectionTestLang()) ) {s = 10;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index48_2);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 5 : 
-                        int LA48_3 = input.LA(1);
-
-                         
-                        int index48_3 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred91_InternalXImportSectionTestLang()) ) {s = 10;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index48_3);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 6 : 
                         int LA48_8 = input.LA(1);
 
                          
@@ -56504,7 +57765,37 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
                         input.seek(index48_8);
                         if ( s>=0 ) return s;
                         break;
-                    case 7 : 
+                    case 2 : 
+                        int LA48_6 = input.LA(1);
+
+                         
+                        int index48_6 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred91_InternalXImportSectionTestLang()) ) {s = 10;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index48_6);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 3 : 
+                        int LA48_3 = input.LA(1);
+
+                         
+                        int index48_3 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred91_InternalXImportSectionTestLang()) ) {s = 10;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index48_3);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 4 : 
                         int LA48_4 = input.LA(1);
 
                          
@@ -56517,6 +57808,51 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
 
                          
                         input.seek(index48_4);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 5 : 
+                        int LA48_9 = input.LA(1);
+
+                         
+                        int index48_9 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred91_InternalXImportSectionTestLang()) ) {s = 10;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index48_9);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 6 : 
+                        int LA48_7 = input.LA(1);
+
+                         
+                        int index48_7 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred91_InternalXImportSectionTestLang()) ) {s = 10;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index48_7);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 7 : 
+                        int LA48_2 = input.LA(1);
+
+                         
+                        int index48_2 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred91_InternalXImportSectionTestLang()) ) {s = 10;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index48_2);
                         if ( s>=0 ) return s;
                         break;
             }
@@ -56540,8 +57876,7 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
     static final String DFA55_specialS =
         "\1\uffff\1\0\114\uffff}>";
     static final String[] DFA55_transitionS = {
-            "\5\2\5\uffff\45\2\2\uffff\12\2\1\1\22\2\2\uffff\2\2\1\uffff"+
-            "\2\2",
+            "\5\2\5\uffff\45\2\2\uffff\12\2\1\1\22\2\2\uffff\2\2\1\uffff\2\2",
             "\1\uffff",
             "",
             "",
@@ -56693,8 +58028,7 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
     static final String DFA56_specialS =
         "\1\uffff\1\0\114\uffff}>";
     static final String[] DFA56_transitionS = {
-            "\5\2\5\uffff\45\2\2\uffff\7\2\1\1\25\2\2\uffff\2\2\1\uffff\2"+
-            "\2",
+            "\5\2\5\uffff\45\2\2\uffff\7\2\1\1\25\2\2\uffff\2\2\1\uffff\2\2",
             "\1\uffff",
             "",
             "",
@@ -56846,9 +58180,7 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
     static final String DFA64_specialS =
         "\1\uffff\1\0\1\1\43\uffff}>";
     static final String[] DFA64_transitionS = {
-            "\1\1\4\5\22\uffff\1\5\3\uffff\1\3\2\uffff\2\5\4\uffff\1\5\3"+
-            "\uffff\7\5\6\uffff\2\5\1\uffff\2\5\1\uffff\1\2\1\5\1\uffff\1"+
-            "\5\3\uffff\11\5\1\uffff\1\5\5\uffff\1\3\2\5",
+            "\1\1\4\5\22\uffff\1\5\3\uffff\1\3\2\uffff\2\5\4\uffff\1\5\3\uffff\7\5\6\uffff\2\5\1\uffff\2\5\1\uffff\1\2\1\5\1\uffff\1\5\3\uffff\11\5\1\uffff\1\5\5\uffff\1\3\2\5",
             "\1\uffff",
             "\1\uffff",
             "",
@@ -56975,9 +58307,7 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
     static final String DFA74_specialS =
         "\1\uffff\1\0\1\1\37\uffff}>";
     static final String[] DFA74_transitionS = {
-            "\1\1\4\4\22\uffff\1\4\3\uffff\1\3\2\uffff\2\4\4\uffff\1\4\4"+
-            "\uffff\6\4\6\uffff\2\4\1\uffff\1\4\2\uffff\1\2\1\4\1\uffff\1"+
-            "\4\3\uffff\11\4\1\uffff\1\4\7\uffff\1\4",
+            "\1\1\4\4\22\uffff\1\4\3\uffff\1\3\2\uffff\2\4\4\uffff\1\4\4\uffff\6\4\6\uffff\2\4\1\uffff\1\4\2\uffff\1\2\1\4\1\uffff\1\4\3\uffff\11\4\1\uffff\1\4\7\uffff\1\4",
             "\1\uffff",
             "\1\uffff",
             "",
@@ -57100,8 +58430,7 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
     static final String DFA87_specialS =
         "\1\uffff\1\0\114\uffff}>";
     static final String[] DFA87_transitionS = {
-            "\5\2\5\uffff\45\2\2\uffff\12\2\1\1\22\2\2\uffff\2\2\1\uffff"+
-            "\2\2",
+            "\5\2\5\uffff\45\2\2\uffff\12\2\1\1\22\2\2\uffff\2\2\1\uffff\2\2",
             "\1\uffff",
             "",
             "",
@@ -57253,8 +58582,7 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
     static final String DFA88_specialS =
         "\1\uffff\1\0\114\uffff}>";
     static final String[] DFA88_transitionS = {
-            "\5\2\5\uffff\45\2\2\uffff\7\2\1\1\25\2\2\uffff\2\2\1\uffff\2"+
-            "\2",
+            "\5\2\5\uffff\45\2\2\uffff\7\2\1\1\25\2\2\uffff\2\2\1\uffff\2\2",
             "\1\uffff",
             "",
             "",
@@ -57406,8 +58734,7 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
     static final String DFA92_specialS =
         "\1\uffff\1\0\114\uffff}>";
     static final String[] DFA92_transitionS = {
-            "\5\2\5\uffff\15\2\1\1\27\2\2\uffff\35\2\2\uffff\2\2\1\uffff"+
-            "\2\2",
+            "\5\2\5\uffff\15\2\1\1\27\2\2\uffff\35\2\2\uffff\2\2\1\uffff\2\2",
             "\1\uffff",
             "",
             "",
@@ -57559,8 +58886,7 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
     static final String DFA93_specialS =
         "\1\uffff\1\0\114\uffff}>";
     static final String[] DFA93_transitionS = {
-            "\5\2\5\uffff\45\2\2\uffff\12\2\1\1\22\2\2\uffff\2\2\1\uffff"+
-            "\2\2",
+            "\5\2\5\uffff\45\2\2\uffff\12\2\1\1\22\2\2\uffff\2\2\1\uffff\2\2",
             "\1\uffff",
             "",
             "",
@@ -57712,8 +59038,7 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
     static final String DFA94_specialS =
         "\1\uffff\1\0\114\uffff}>";
     static final String[] DFA94_transitionS = {
-            "\5\2\5\uffff\45\2\2\uffff\7\2\1\1\25\2\2\uffff\2\2\1\uffff\2"+
-            "\2",
+            "\5\2\5\uffff\45\2\2\uffff\7\2\1\1\25\2\2\uffff\2\2\1\uffff\2\2",
             "\1\uffff",
             "",
             "",
@@ -57863,15 +59188,9 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
     static final String DFA99_acceptS =
         "\41\uffff\1\2\53\uffff\1\1";
     static final String DFA99_specialS =
-        "\1\uffff\1\0\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14"+
-        "\1\15\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\26\1\27\1\30\1\31"+
-        "\1\32\1\33\1\34\1\35\1\36\1\37\55\uffff}>";
+        "\1\uffff\1\0\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\26\1\27\1\30\1\31\1\32\1\33\1\34\1\35\1\36\1\37\55\uffff}>";
     static final String[] DFA99_transitionS = {
-            "\1\1\1\23\1\24\1\25\1\27\5\uffff\15\41\1\15\6\41\1\10\1\7\4"+
-            "\41\1\6\4\41\1\2\1\3\1\4\1\5\1\16\1\21\2\uffff\4\41\1\17\1\12"+
-            "\1\41\1\20\2\41\1\40\1\31\1\41\1\13\3\41\1\32\1\33\1\34\1\11"+
-            "\1\26\1\30\1\35\1\36\1\37\1\41\1\14\1\41\2\uffff\2\41\1\uffff"+
-            "\1\41\1\22",
+            "\1\1\1\23\1\24\1\25\1\27\5\uffff\15\41\1\15\6\41\1\10\1\7\4\41\1\6\4\41\1\2\1\3\1\4\1\5\1\16\1\21\2\uffff\4\41\1\17\1\12\1\41\1\20\2\41\1\40\1\31\1\41\1\13\3\41\1\32\1\33\1\34\1\11\1\26\1\30\1\35\1\36\1\37\1\41\1\14\1\41\2\uffff\2\41\1\uffff\1\41\1\22",
             "\1\uffff",
             "\1\uffff",
             "\1\uffff",
@@ -58488,8 +59807,7 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
     static final String DFA108_specialS =
         "\1\uffff\1\0\115\uffff}>";
     static final String[] DFA108_transitionS = {
-            "\5\2\5\uffff\15\2\1\1\27\2\2\uffff\35\2\1\uffff\3\2\1\uffff"+
-            "\2\2",
+            "\5\2\5\uffff\15\2\1\1\27\2\2\uffff\35\2\1\uffff\3\2\1\uffff\2\2",
             "\1\uffff",
             "",
             "",
@@ -58625,6 +59943,159 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
             if (state.backtracking>0) {state.failed=true; return -1;}
             NoViableAltException nvae =
                 new NoViableAltException(getDescription(), 108, _s, input);
+            error(nvae);
+            throw nvae;
+        }
+    }
+    static final String DFA111_eotS =
+        "\117\uffff";
+    static final String DFA111_eofS =
+        "\1\2\116\uffff";
+    static final String DFA111_minS =
+        "\1\4\1\0\115\uffff";
+    static final String DFA111_maxS =
+        "\1\130\1\0\115\uffff";
+    static final String DFA111_acceptS =
+        "\2\uffff\1\2\113\uffff\1\1";
+    static final String DFA111_specialS =
+        "\1\uffff\1\0\115\uffff}>";
+    static final String[] DFA111_transitionS = {
+            "\5\2\5\uffff\15\2\1\1\27\2\2\uffff\35\2\1\uffff\3\2\1\uffff\2\2",
+            "\1\uffff",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+    };
+
+    static final short[] DFA111_eot = DFA.unpackEncodedString(DFA111_eotS);
+    static final short[] DFA111_eof = DFA.unpackEncodedString(DFA111_eofS);
+    static final char[] DFA111_min = DFA.unpackEncodedStringToUnsignedChars(DFA111_minS);
+    static final char[] DFA111_max = DFA.unpackEncodedStringToUnsignedChars(DFA111_maxS);
+    static final short[] DFA111_accept = DFA.unpackEncodedString(DFA111_acceptS);
+    static final short[] DFA111_special = DFA.unpackEncodedString(DFA111_specialS);
+    static final short[][] DFA111_transition;
+
+    static {
+        int numStates = DFA111_transitionS.length;
+        DFA111_transition = new short[numStates][];
+        for (int i=0; i<numStates; i++) {
+            DFA111_transition[i] = DFA.unpackEncodedString(DFA111_transitionS[i]);
+        }
+    }
+
+    class DFA111 extends DFA {
+
+        public DFA111(BaseRecognizer recognizer) {
+            this.recognizer = recognizer;
+            this.decisionNumber = 111;
+            this.eot = DFA111_eot;
+            this.eof = DFA111_eof;
+            this.min = DFA111_min;
+            this.max = DFA111_max;
+            this.accept = DFA111_accept;
+            this.special = DFA111_special;
+            this.transition = DFA111_transition;
+        }
+        public String getDescription() {
+            return "15927:1: ( rule__JvmParameterizedTypeReference__Group_1_4_2__0 )?";
+        }
+        public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
+            TokenStream input = (TokenStream)_input;
+        	int _s = s;
+            switch ( s ) {
+                    case 0 : 
+                        int LA111_1 = input.LA(1);
+
+                         
+                        int index111_1 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred154_InternalXImportSectionTestLang()) ) {s = 78;}
+
+                        else if ( (true) ) {s = 2;}
+
+                         
+                        input.seek(index111_1);
+                        if ( s>=0 ) return s;
+                        break;
+            }
+            if (state.backtracking>0) {state.failed=true; return -1;}
+            NoViableAltException nvae =
+                new NoViableAltException(getDescription(), 111, _s, input);
             error(nvae);
             throw nvae;
         }
@@ -59959,221 +61430,257 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
     public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__2__Impl_in_rule__JvmParameterizedTypeReference__Group_1__231607 = new BitSet(new long[]{0x0080000004000000L});
     public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__3_in_rule__JvmParameterizedTypeReference__Group_1__231610 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__0_in_rule__JvmParameterizedTypeReference__Group_1__2__Impl31637 = new BitSet(new long[]{0x0080000000000002L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__3__Impl_in_rule__JvmParameterizedTypeReference__Group_1__331668 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_26_in_rule__JvmParameterizedTypeReference__Group_1__3__Impl31696 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__0__Impl_in_rule__JvmParameterizedTypeReference__Group_1_2__031735 = new BitSet(new long[]{0x8000000080000010L,0x0000000000040000L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__1_in_rule__JvmParameterizedTypeReference__Group_1_2__031738 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_55_in_rule__JvmParameterizedTypeReference__Group_1_2__0__Impl31766 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__1__Impl_in_rule__JvmParameterizedTypeReference__Group_1_2__131797 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1_in_rule__JvmParameterizedTypeReference__Group_1_2__1__Impl31824 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__0__Impl_in_rule__JvmWildcardTypeReference__Group__031858 = new BitSet(new long[]{0x8000000080000010L,0x0000000000040000L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__1_in_rule__JvmWildcardTypeReference__Group__031861 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__1__Impl_in_rule__JvmWildcardTypeReference__Group__131919 = new BitSet(new long[]{0x0002200000000000L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__2_in_rule__JvmWildcardTypeReference__Group__131922 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_82_in_rule__JvmWildcardTypeReference__Group__1__Impl31950 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__2__Impl_in_rule__JvmWildcardTypeReference__Group__231981 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Alternatives_2_in_rule__JvmWildcardTypeReference__Group__2__Impl32008 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group_2_0__0__Impl_in_rule__JvmWildcardTypeReference__Group_2_0__032045 = new BitSet(new long[]{0x0000000000000000L,0x0000000000080000L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group_2_0__1_in_rule__JvmWildcardTypeReference__Group_2_0__032048 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_0_in_rule__JvmWildcardTypeReference__Group_2_0__0__Impl32075 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group_2_0__1__Impl_in_rule__JvmWildcardTypeReference__Group_2_0__132105 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_1_in_rule__JvmWildcardTypeReference__Group_2_0__1__Impl32132 = new BitSet(new long[]{0x0000000000000002L,0x0000000000080000L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group_2_1__0__Impl_in_rule__JvmWildcardTypeReference__Group_2_1__032167 = new BitSet(new long[]{0x0000000000000000L,0x0000000000080000L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group_2_1__1_in_rule__JvmWildcardTypeReference__Group_2_1__032170 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_0_in_rule__JvmWildcardTypeReference__Group_2_1__0__Impl32197 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group_2_1__1__Impl_in_rule__JvmWildcardTypeReference__Group_2_1__132227 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_1_in_rule__JvmWildcardTypeReference__Group_2_1__1__Impl32254 = new BitSet(new long[]{0x0000000000000002L,0x0000000000080000L});
-    public static final BitSet FOLLOW_rule__JvmUpperBound__Group__0__Impl_in_rule__JvmUpperBound__Group__032289 = new BitSet(new long[]{0x8000000080000010L});
-    public static final BitSet FOLLOW_rule__JvmUpperBound__Group__1_in_rule__JvmUpperBound__Group__032292 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_45_in_rule__JvmUpperBound__Group__0__Impl32320 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmUpperBound__Group__1__Impl_in_rule__JvmUpperBound__Group__132351 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmUpperBound__TypeReferenceAssignment_1_in_rule__JvmUpperBound__Group__1__Impl32378 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmUpperBoundAnded__Group__0__Impl_in_rule__JvmUpperBoundAnded__Group__032412 = new BitSet(new long[]{0x8000000080000010L});
-    public static final BitSet FOLLOW_rule__JvmUpperBoundAnded__Group__1_in_rule__JvmUpperBoundAnded__Group__032415 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_83_in_rule__JvmUpperBoundAnded__Group__0__Impl32443 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmUpperBoundAnded__Group__1__Impl_in_rule__JvmUpperBoundAnded__Group__132474 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmUpperBoundAnded__TypeReferenceAssignment_1_in_rule__JvmUpperBoundAnded__Group__1__Impl32501 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmLowerBound__Group__0__Impl_in_rule__JvmLowerBound__Group__032535 = new BitSet(new long[]{0x8000000080000010L});
-    public static final BitSet FOLLOW_rule__JvmLowerBound__Group__1_in_rule__JvmLowerBound__Group__032538 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_49_in_rule__JvmLowerBound__Group__0__Impl32566 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmLowerBound__Group__1__Impl_in_rule__JvmLowerBound__Group__132597 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmLowerBound__TypeReferenceAssignment_1_in_rule__JvmLowerBound__Group__1__Impl32624 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmLowerBoundAnded__Group__0__Impl_in_rule__JvmLowerBoundAnded__Group__032658 = new BitSet(new long[]{0x8000000080000010L});
-    public static final BitSet FOLLOW_rule__JvmLowerBoundAnded__Group__1_in_rule__JvmLowerBoundAnded__Group__032661 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_83_in_rule__JvmLowerBoundAnded__Group__0__Impl32689 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmLowerBoundAnded__Group__1__Impl_in_rule__JvmLowerBoundAnded__Group__132720 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmLowerBoundAnded__TypeReferenceAssignment_1_in_rule__JvmLowerBoundAnded__Group__1__Impl32747 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedNameWithWildcard__Group__0__Impl_in_rule__QualifiedNameWithWildcard__Group__032783 = new BitSet(new long[]{0x0000080000000000L});
-    public static final BitSet FOLLOW_rule__QualifiedNameWithWildcard__Group__1_in_rule__QualifiedNameWithWildcard__Group__032786 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__QualifiedNameWithWildcard__Group__0__Impl32813 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedNameWithWildcard__Group__1__Impl_in_rule__QualifiedNameWithWildcard__Group__132842 = new BitSet(new long[]{0x0000001000000000L});
-    public static final BitSet FOLLOW_rule__QualifiedNameWithWildcard__Group__2_in_rule__QualifiedNameWithWildcard__Group__132845 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_43_in_rule__QualifiedNameWithWildcard__Group__1__Impl32873 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedNameWithWildcard__Group__2__Impl_in_rule__QualifiedNameWithWildcard__Group__232904 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_36_in_rule__QualifiedNameWithWildcard__Group__2__Impl32932 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XImportDeclaration__Group__0__Impl_in_rule__XImportDeclaration__Group__032969 = new BitSet(new long[]{0x0000400000000010L});
-    public static final BitSet FOLLOW_rule__XImportDeclaration__Group__1_in_rule__XImportDeclaration__Group__032972 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_47_in_rule__XImportDeclaration__Group__0__Impl33000 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XImportDeclaration__Group__1__Impl_in_rule__XImportDeclaration__Group__133031 = new BitSet(new long[]{0x4000000000000000L});
-    public static final BitSet FOLLOW_rule__XImportDeclaration__Group__2_in_rule__XImportDeclaration__Group__133034 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XImportDeclaration__Alternatives_1_in_rule__XImportDeclaration__Group__1__Impl33061 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XImportDeclaration__Group__2__Impl_in_rule__XImportDeclaration__Group__233091 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_62_in_rule__XImportDeclaration__Group__2__Impl33120 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XImportDeclaration__Group_1_0__0__Impl_in_rule__XImportDeclaration__Group_1_0__033159 = new BitSet(new long[]{0x0001000000000010L});
-    public static final BitSet FOLLOW_rule__XImportDeclaration__Group_1_0__1_in_rule__XImportDeclaration__Group_1_0__033162 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XImportDeclaration__StaticAssignment_1_0_0_in_rule__XImportDeclaration__Group_1_0__0__Impl33189 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XImportDeclaration__Group_1_0__1__Impl_in_rule__XImportDeclaration__Group_1_0__133219 = new BitSet(new long[]{0x0001000000000010L});
-    public static final BitSet FOLLOW_rule__XImportDeclaration__Group_1_0__2_in_rule__XImportDeclaration__Group_1_0__133222 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XImportDeclaration__ExtensionAssignment_1_0_1_in_rule__XImportDeclaration__Group_1_0__1__Impl33249 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XImportDeclaration__Group_1_0__2__Impl_in_rule__XImportDeclaration__Group_1_0__233280 = new BitSet(new long[]{0x0000001000000010L});
-    public static final BitSet FOLLOW_rule__XImportDeclaration__Group_1_0__3_in_rule__XImportDeclaration__Group_1_0__233283 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XImportDeclaration__ImportedTypeAssignment_1_0_2_in_rule__XImportDeclaration__Group_1_0__2__Impl33310 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XImportDeclaration__Group_1_0__3__Impl_in_rule__XImportDeclaration__Group_1_0__333340 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XImportDeclaration__Alternatives_1_0_3_in_rule__XImportDeclaration__Group_1_0__3__Impl33367 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedNameInStaticImport__Group__0__Impl_in_rule__QualifiedNameInStaticImport__Group__033405 = new BitSet(new long[]{0x0000080000000000L});
-    public static final BitSet FOLLOW_rule__QualifiedNameInStaticImport__Group__1_in_rule__QualifiedNameInStaticImport__Group__033408 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__QualifiedNameInStaticImport__Group__0__Impl33435 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedNameInStaticImport__Group__1__Impl_in_rule__QualifiedNameInStaticImport__Group__133464 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_43_in_rule__QualifiedNameInStaticImport__Group__1__Impl33492 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXImportSection_in_rule__ImportSectionTestLanguageRoot__ImportSectionAssignment_233532 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFeatureCallID_in_rule__XAssignment__FeatureAssignment_0_133567 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXAssignment_in_rule__XAssignment__ValueAssignment_0_333602 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpMultiAssign_in_rule__XAssignment__FeatureAssignment_1_1_0_0_133637 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXAssignment_in_rule__XAssignment__RightOperandAssignment_1_1_133672 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpOr_in_rule__XOrExpression__FeatureAssignment_1_0_0_133707 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXAndExpression_in_rule__XOrExpression__RightOperandAssignment_1_133742 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpAnd_in_rule__XAndExpression__FeatureAssignment_1_0_0_133777 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXEqualityExpression_in_rule__XAndExpression__RightOperandAssignment_1_133812 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpEquality_in_rule__XEqualityExpression__FeatureAssignment_1_0_0_133847 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXRelationalExpression_in_rule__XEqualityExpression__RightOperandAssignment_1_133882 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XRelationalExpression__TypeAssignment_1_0_133913 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpCompare_in_rule__XRelationalExpression__FeatureAssignment_1_1_0_0_133948 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXOtherOperatorExpression_in_rule__XRelationalExpression__RightOperandAssignment_1_1_133983 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpOther_in_rule__XOtherOperatorExpression__FeatureAssignment_1_0_0_134018 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXAdditiveExpression_in_rule__XOtherOperatorExpression__RightOperandAssignment_1_134053 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpAdd_in_rule__XAdditiveExpression__FeatureAssignment_1_0_0_134088 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXMultiplicativeExpression_in_rule__XAdditiveExpression__RightOperandAssignment_1_134123 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpMulti_in_rule__XMultiplicativeExpression__FeatureAssignment_1_0_0_134158 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXUnaryOperation_in_rule__XMultiplicativeExpression__RightOperandAssignment_1_134193 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpUnary_in_rule__XUnaryOperation__FeatureAssignment_0_134228 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXUnaryOperation_in_rule__XUnaryOperation__OperandAssignment_0_234263 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XCastedExpression__TypeAssignment_1_134294 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpPostfix_in_rule__XPostfixOperation__FeatureAssignment_1_0_134329 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_84_in_rule__XMemberFeatureCall__ExplicitStaticAssignment_1_0_0_0_1_134369 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFeatureCallID_in_rule__XMemberFeatureCall__FeatureAssignment_1_0_0_0_234412 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXAssignment_in_rule__XMemberFeatureCall__ValueAssignment_1_0_134447 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_85_in_rule__XMemberFeatureCall__NullSafeAssignment_1_1_0_0_1_134483 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_84_in_rule__XMemberFeatureCall__ExplicitStaticAssignment_1_1_0_0_1_234527 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_134566 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_2_134597 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleIdOrSuper_in_rule__XMemberFeatureCall__FeatureAssignment_1_1_234632 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_63_in_rule__XMemberFeatureCall__ExplicitOperationCallAssignment_1_1_3_034672 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXShortClosure_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_034711 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_034742 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_1_134773 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXClosure_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_434804 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XSetLiteral__ElementsAssignment_3_034835 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XSetLiteral__ElementsAssignment_3_1_134866 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XListLiteral__ElementsAssignment_3_034897 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XListLiteral__ElementsAssignment_3_1_134928 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_034959 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_1_134990 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_86_in_rule__XClosure__ExplicitSyntaxAssignment_1_0_135026 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpressionInClosure_in_rule__XClosure__ExpressionAssignment_235065 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpressionOrVarDeclaration_in_rule__XExpressionInClosure__ExpressionsAssignment_1_035096 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_035127 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_1_135158 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_86_in_rule__XShortClosure__ExplicitSyntaxAssignment_0_0_235194 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XShortClosure__ExpressionAssignment_135233 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XIfExpression__IfAssignment_335264 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XIfExpression__ThenAssignment_535295 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XIfExpression__ElseAssignment_6_135326 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XSwitchExpression__DeclaredParamAssignment_2_0_0_0_135357 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XSwitchExpression__SwitchAssignment_2_0_135388 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XSwitchExpression__DeclaredParamAssignment_2_1_0_0_035419 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XSwitchExpression__SwitchAssignment_2_1_135450 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXCasePart_in_rule__XSwitchExpression__CasesAssignment_435481 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XSwitchExpression__DefaultAssignment_5_235512 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XCasePart__TypeGuardAssignment_135543 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XCasePart__CaseAssignment_2_135574 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XCasePart__ThenAssignment_3_0_135605 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_55_in_rule__XCasePart__FallThroughAssignment_3_135641 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XForLoopExpression__DeclaredParamAssignment_0_0_335680 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XForLoopExpression__ForExpressionAssignment_135711 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XForLoopExpression__EachExpressionAssignment_335742 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpressionOrVarDeclaration_in_rule__XBasicForLoopExpression__InitExpressionsAssignment_3_035773 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpressionOrVarDeclaration_in_rule__XBasicForLoopExpression__InitExpressionsAssignment_3_1_135804 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XBasicForLoopExpression__ExpressionAssignment_535835 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XBasicForLoopExpression__UpdateExpressionsAssignment_7_035866 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XBasicForLoopExpression__UpdateExpressionsAssignment_7_1_135897 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XBasicForLoopExpression__EachExpressionAssignment_935928 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XWhileExpression__PredicateAssignment_335959 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XWhileExpression__BodyAssignment_535990 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__BodyAssignment_236021 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__PredicateAssignment_536052 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpressionOrVarDeclaration_in_rule__XBlockExpression__ExpressionsAssignment_2_036083 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_87_in_rule__XVariableDeclaration__WriteableAssignment_1_036119 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XVariableDeclaration__TypeAssignment_2_0_0_036158 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__XVariableDeclaration__NameAssignment_2_0_0_136189 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__XVariableDeclaration__NameAssignment_2_136220 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XVariableDeclaration__RightAssignment_3_136251 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmFormalParameter__ParameterTypeAssignment_036282 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__JvmFormalParameter__NameAssignment_136313 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__FullJvmFormalParameter__ParameterTypeAssignment_036344 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__FullJvmFormalParameter__NameAssignment_136375 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_1_136406 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_1_2_136437 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleIdOrSuper_in_rule__XFeatureCall__FeatureAssignment_236472 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_63_in_rule__XFeatureCall__ExplicitOperationCallAssignment_3_036512 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXShortClosure_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_036551 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_036582 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_1_136613 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXClosure_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_436644 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__XConstructorCall__ConstructorAssignment_236679 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XConstructorCall__TypeArgumentsAssignment_3_136714 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XConstructorCall__TypeArgumentsAssignment_3_2_136745 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_63_in_rule__XConstructorCall__ExplicitConstructorCallAssignment_4_036781 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXShortClosure_in_rule__XConstructorCall__ArgumentsAssignment_4_1_036820 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_4_1_1_036851 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_4_1_1_1_136882 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXClosure_in_rule__XConstructorCall__ArgumentsAssignment_536913 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_88_in_rule__XBooleanLiteral__IsTrueAssignment_1_136949 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNumber_in_rule__XNumberLiteral__ValueAssignment_136988 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__XStringLiteral__ValueAssignment_137019 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__XTypeLiteral__TypeAssignment_337054 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleArrayBrackets_in_rule__XTypeLiteral__ArrayDimensionsAssignment_437089 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XThrowExpression__ExpressionAssignment_237120 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XReturnExpression__ExpressionAssignment_237151 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__ExpressionAssignment_237182 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXCatchClause_in_rule__XTryCatchFinallyExpression__CatchClausesAssignment_3_0_037213 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_0_1_137244 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_1_137275 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XSynchronizedExpression__ParamAssignment_137306 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XSynchronizedExpression__ExpressionAssignment_337337 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFullJvmFormalParameter_in_rule__XCatchClause__DeclaredParamAssignment_237368 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XCatchClause__ExpressionAssignment_437399 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_1_037430 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_1_1_137461 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ReturnTypeAssignment_237492 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__JvmParameterizedTypeReference__TypeAssignment_037527 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_137562 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_137593 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmUpperBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_037624 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmUpperBoundAnded_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_137655 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmLowerBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_037686 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmLowerBoundAnded_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_137717 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBound__TypeReferenceAssignment_137748 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBoundAnded__TypeReferenceAssignment_137779 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmLowerBound__TypeReferenceAssignment_137810 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmLowerBoundAnded__TypeReferenceAssignment_137841 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXImportDeclaration_in_rule__XImportSection__ImportDeclarationsAssignment37875 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_46_in_rule__XImportDeclaration__StaticAssignment_1_0_037911 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_48_in_rule__XImportDeclaration__ExtensionAssignment_1_0_137955 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedNameInStaticImport_in_rule__XImportDeclaration__ImportedTypeAssignment_1_0_237998 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_36_in_rule__XImportDeclaration__WildcardAssignment_1_0_3_038038 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__XImportDeclaration__MemberNameAssignment_1_0_3_138077 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__XImportDeclaration__ImportedTypeAssignment_1_138112 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedNameWithWildcard_in_rule__XImportDeclaration__ImportedNamespaceAssignment_1_238147 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__3__Impl_in_rule__JvmParameterizedTypeReference__Group_1__331668 = new BitSet(new long[]{0x0000080000000000L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__4_in_rule__JvmParameterizedTypeReference__Group_1__331671 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_26_in_rule__JvmParameterizedTypeReference__Group_1__3__Impl31699 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__4__Impl_in_rule__JvmParameterizedTypeReference__Group_1__431730 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4__0_in_rule__JvmParameterizedTypeReference__Group_1__4__Impl31757 = new BitSet(new long[]{0x0000080000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__0__Impl_in_rule__JvmParameterizedTypeReference__Group_1_2__031798 = new BitSet(new long[]{0x8000000080000010L,0x0000000000040000L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__1_in_rule__JvmParameterizedTypeReference__Group_1_2__031801 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_55_in_rule__JvmParameterizedTypeReference__Group_1_2__0__Impl31829 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__1__Impl_in_rule__JvmParameterizedTypeReference__Group_1_2__131860 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1_in_rule__JvmParameterizedTypeReference__Group_1_2__1__Impl31887 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4__0__Impl_in_rule__JvmParameterizedTypeReference__Group_1_4__031921 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4__1_in_rule__JvmParameterizedTypeReference__Group_1_4__031924 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_0__0_in_rule__JvmParameterizedTypeReference__Group_1_4__0__Impl31951 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4__1__Impl_in_rule__JvmParameterizedTypeReference__Group_1_4__131981 = new BitSet(new long[]{0x0000000008000000L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4__2_in_rule__JvmParameterizedTypeReference__Group_1_4__131984 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__TypeAssignment_1_4_1_in_rule__JvmParameterizedTypeReference__Group_1_4__1__Impl32011 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4__2__Impl_in_rule__JvmParameterizedTypeReference__Group_1_4__232041 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_2__0_in_rule__JvmParameterizedTypeReference__Group_1_4__2__Impl32068 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_0__0__Impl_in_rule__JvmParameterizedTypeReference__Group_1_4_0__032105 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_0_0__0_in_rule__JvmParameterizedTypeReference__Group_1_4_0__0__Impl32132 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_0_0__0__Impl_in_rule__JvmParameterizedTypeReference__Group_1_4_0_0__032164 = new BitSet(new long[]{0x0000080000000000L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_0_0__1_in_rule__JvmParameterizedTypeReference__Group_1_4_0_0__032167 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_0_0__1__Impl_in_rule__JvmParameterizedTypeReference__Group_1_4_0_0__132225 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_43_in_rule__JvmParameterizedTypeReference__Group_1_4_0_0__1__Impl32253 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_2__0__Impl_in_rule__JvmParameterizedTypeReference__Group_1_4_2__032288 = new BitSet(new long[]{0x8000000080000010L,0x0000000000040000L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_2__1_in_rule__JvmParameterizedTypeReference__Group_1_4_2__032291 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_27_in_rule__JvmParameterizedTypeReference__Group_1_4_2__0__Impl32320 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_2__1__Impl_in_rule__JvmParameterizedTypeReference__Group_1_4_2__132352 = new BitSet(new long[]{0x0080000004000000L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_2__2_in_rule__JvmParameterizedTypeReference__Group_1_4_2__132355 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_1_in_rule__JvmParameterizedTypeReference__Group_1_4_2__1__Impl32382 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_2__2__Impl_in_rule__JvmParameterizedTypeReference__Group_1_4_2__232412 = new BitSet(new long[]{0x0080000004000000L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_2__3_in_rule__JvmParameterizedTypeReference__Group_1_4_2__232415 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_2_2__0_in_rule__JvmParameterizedTypeReference__Group_1_4_2__2__Impl32442 = new BitSet(new long[]{0x0080000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_2__3__Impl_in_rule__JvmParameterizedTypeReference__Group_1_4_2__332473 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_26_in_rule__JvmParameterizedTypeReference__Group_1_4_2__3__Impl32501 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_2_2__0__Impl_in_rule__JvmParameterizedTypeReference__Group_1_4_2_2__032540 = new BitSet(new long[]{0x8000000080000010L,0x0000000000040000L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_2_2__1_in_rule__JvmParameterizedTypeReference__Group_1_4_2_2__032543 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_55_in_rule__JvmParameterizedTypeReference__Group_1_4_2_2__0__Impl32571 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_2_2__1__Impl_in_rule__JvmParameterizedTypeReference__Group_1_4_2_2__132602 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_2_1_in_rule__JvmParameterizedTypeReference__Group_1_4_2_2__1__Impl32629 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__0__Impl_in_rule__JvmWildcardTypeReference__Group__032663 = new BitSet(new long[]{0x8000000080000010L,0x0000000000040000L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__1_in_rule__JvmWildcardTypeReference__Group__032666 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__1__Impl_in_rule__JvmWildcardTypeReference__Group__132724 = new BitSet(new long[]{0x0002200000000000L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__2_in_rule__JvmWildcardTypeReference__Group__132727 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_82_in_rule__JvmWildcardTypeReference__Group__1__Impl32755 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__2__Impl_in_rule__JvmWildcardTypeReference__Group__232786 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Alternatives_2_in_rule__JvmWildcardTypeReference__Group__2__Impl32813 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group_2_0__0__Impl_in_rule__JvmWildcardTypeReference__Group_2_0__032850 = new BitSet(new long[]{0x0000000000000000L,0x0000000000080000L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group_2_0__1_in_rule__JvmWildcardTypeReference__Group_2_0__032853 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_0_in_rule__JvmWildcardTypeReference__Group_2_0__0__Impl32880 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group_2_0__1__Impl_in_rule__JvmWildcardTypeReference__Group_2_0__132910 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_1_in_rule__JvmWildcardTypeReference__Group_2_0__1__Impl32937 = new BitSet(new long[]{0x0000000000000002L,0x0000000000080000L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group_2_1__0__Impl_in_rule__JvmWildcardTypeReference__Group_2_1__032972 = new BitSet(new long[]{0x0000000000000000L,0x0000000000080000L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group_2_1__1_in_rule__JvmWildcardTypeReference__Group_2_1__032975 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_0_in_rule__JvmWildcardTypeReference__Group_2_1__0__Impl33002 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group_2_1__1__Impl_in_rule__JvmWildcardTypeReference__Group_2_1__133032 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_1_in_rule__JvmWildcardTypeReference__Group_2_1__1__Impl33059 = new BitSet(new long[]{0x0000000000000002L,0x0000000000080000L});
+    public static final BitSet FOLLOW_rule__JvmUpperBound__Group__0__Impl_in_rule__JvmUpperBound__Group__033094 = new BitSet(new long[]{0x8000000080000010L});
+    public static final BitSet FOLLOW_rule__JvmUpperBound__Group__1_in_rule__JvmUpperBound__Group__033097 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_45_in_rule__JvmUpperBound__Group__0__Impl33125 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmUpperBound__Group__1__Impl_in_rule__JvmUpperBound__Group__133156 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmUpperBound__TypeReferenceAssignment_1_in_rule__JvmUpperBound__Group__1__Impl33183 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmUpperBoundAnded__Group__0__Impl_in_rule__JvmUpperBoundAnded__Group__033217 = new BitSet(new long[]{0x8000000080000010L});
+    public static final BitSet FOLLOW_rule__JvmUpperBoundAnded__Group__1_in_rule__JvmUpperBoundAnded__Group__033220 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_83_in_rule__JvmUpperBoundAnded__Group__0__Impl33248 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmUpperBoundAnded__Group__1__Impl_in_rule__JvmUpperBoundAnded__Group__133279 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmUpperBoundAnded__TypeReferenceAssignment_1_in_rule__JvmUpperBoundAnded__Group__1__Impl33306 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmLowerBound__Group__0__Impl_in_rule__JvmLowerBound__Group__033340 = new BitSet(new long[]{0x8000000080000010L});
+    public static final BitSet FOLLOW_rule__JvmLowerBound__Group__1_in_rule__JvmLowerBound__Group__033343 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_49_in_rule__JvmLowerBound__Group__0__Impl33371 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmLowerBound__Group__1__Impl_in_rule__JvmLowerBound__Group__133402 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmLowerBound__TypeReferenceAssignment_1_in_rule__JvmLowerBound__Group__1__Impl33429 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmLowerBoundAnded__Group__0__Impl_in_rule__JvmLowerBoundAnded__Group__033463 = new BitSet(new long[]{0x8000000080000010L});
+    public static final BitSet FOLLOW_rule__JvmLowerBoundAnded__Group__1_in_rule__JvmLowerBoundAnded__Group__033466 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_83_in_rule__JvmLowerBoundAnded__Group__0__Impl33494 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmLowerBoundAnded__Group__1__Impl_in_rule__JvmLowerBoundAnded__Group__133525 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmLowerBoundAnded__TypeReferenceAssignment_1_in_rule__JvmLowerBoundAnded__Group__1__Impl33552 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedNameWithWildcard__Group__0__Impl_in_rule__QualifiedNameWithWildcard__Group__033588 = new BitSet(new long[]{0x0000080000000000L});
+    public static final BitSet FOLLOW_rule__QualifiedNameWithWildcard__Group__1_in_rule__QualifiedNameWithWildcard__Group__033591 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__QualifiedNameWithWildcard__Group__0__Impl33618 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedNameWithWildcard__Group__1__Impl_in_rule__QualifiedNameWithWildcard__Group__133647 = new BitSet(new long[]{0x0000001000000000L});
+    public static final BitSet FOLLOW_rule__QualifiedNameWithWildcard__Group__2_in_rule__QualifiedNameWithWildcard__Group__133650 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_43_in_rule__QualifiedNameWithWildcard__Group__1__Impl33678 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedNameWithWildcard__Group__2__Impl_in_rule__QualifiedNameWithWildcard__Group__233709 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_36_in_rule__QualifiedNameWithWildcard__Group__2__Impl33737 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XImportDeclaration__Group__0__Impl_in_rule__XImportDeclaration__Group__033774 = new BitSet(new long[]{0x0000400000000010L});
+    public static final BitSet FOLLOW_rule__XImportDeclaration__Group__1_in_rule__XImportDeclaration__Group__033777 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_47_in_rule__XImportDeclaration__Group__0__Impl33805 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XImportDeclaration__Group__1__Impl_in_rule__XImportDeclaration__Group__133836 = new BitSet(new long[]{0x4000000000000000L});
+    public static final BitSet FOLLOW_rule__XImportDeclaration__Group__2_in_rule__XImportDeclaration__Group__133839 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XImportDeclaration__Alternatives_1_in_rule__XImportDeclaration__Group__1__Impl33866 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XImportDeclaration__Group__2__Impl_in_rule__XImportDeclaration__Group__233896 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_62_in_rule__XImportDeclaration__Group__2__Impl33925 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XImportDeclaration__Group_1_0__0__Impl_in_rule__XImportDeclaration__Group_1_0__033964 = new BitSet(new long[]{0x0001000000000010L});
+    public static final BitSet FOLLOW_rule__XImportDeclaration__Group_1_0__1_in_rule__XImportDeclaration__Group_1_0__033967 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XImportDeclaration__StaticAssignment_1_0_0_in_rule__XImportDeclaration__Group_1_0__0__Impl33994 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XImportDeclaration__Group_1_0__1__Impl_in_rule__XImportDeclaration__Group_1_0__134024 = new BitSet(new long[]{0x0001000000000010L});
+    public static final BitSet FOLLOW_rule__XImportDeclaration__Group_1_0__2_in_rule__XImportDeclaration__Group_1_0__134027 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XImportDeclaration__ExtensionAssignment_1_0_1_in_rule__XImportDeclaration__Group_1_0__1__Impl34054 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XImportDeclaration__Group_1_0__2__Impl_in_rule__XImportDeclaration__Group_1_0__234085 = new BitSet(new long[]{0x0000001000000010L});
+    public static final BitSet FOLLOW_rule__XImportDeclaration__Group_1_0__3_in_rule__XImportDeclaration__Group_1_0__234088 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XImportDeclaration__ImportedTypeAssignment_1_0_2_in_rule__XImportDeclaration__Group_1_0__2__Impl34115 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XImportDeclaration__Group_1_0__3__Impl_in_rule__XImportDeclaration__Group_1_0__334145 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XImportDeclaration__Alternatives_1_0_3_in_rule__XImportDeclaration__Group_1_0__3__Impl34172 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedNameInStaticImport__Group__0__Impl_in_rule__QualifiedNameInStaticImport__Group__034210 = new BitSet(new long[]{0x0000080000000000L});
+    public static final BitSet FOLLOW_rule__QualifiedNameInStaticImport__Group__1_in_rule__QualifiedNameInStaticImport__Group__034213 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__QualifiedNameInStaticImport__Group__0__Impl34240 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedNameInStaticImport__Group__1__Impl_in_rule__QualifiedNameInStaticImport__Group__134269 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_43_in_rule__QualifiedNameInStaticImport__Group__1__Impl34297 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXImportSection_in_rule__ImportSectionTestLanguageRoot__ImportSectionAssignment_234337 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFeatureCallID_in_rule__XAssignment__FeatureAssignment_0_134372 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXAssignment_in_rule__XAssignment__ValueAssignment_0_334407 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpMultiAssign_in_rule__XAssignment__FeatureAssignment_1_1_0_0_134442 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXAssignment_in_rule__XAssignment__RightOperandAssignment_1_1_134477 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpOr_in_rule__XOrExpression__FeatureAssignment_1_0_0_134512 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXAndExpression_in_rule__XOrExpression__RightOperandAssignment_1_134547 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpAnd_in_rule__XAndExpression__FeatureAssignment_1_0_0_134582 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXEqualityExpression_in_rule__XAndExpression__RightOperandAssignment_1_134617 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpEquality_in_rule__XEqualityExpression__FeatureAssignment_1_0_0_134652 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXRelationalExpression_in_rule__XEqualityExpression__RightOperandAssignment_1_134687 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XRelationalExpression__TypeAssignment_1_0_134718 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpCompare_in_rule__XRelationalExpression__FeatureAssignment_1_1_0_0_134753 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXOtherOperatorExpression_in_rule__XRelationalExpression__RightOperandAssignment_1_1_134788 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpOther_in_rule__XOtherOperatorExpression__FeatureAssignment_1_0_0_134823 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXAdditiveExpression_in_rule__XOtherOperatorExpression__RightOperandAssignment_1_134858 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpAdd_in_rule__XAdditiveExpression__FeatureAssignment_1_0_0_134893 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXMultiplicativeExpression_in_rule__XAdditiveExpression__RightOperandAssignment_1_134928 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpMulti_in_rule__XMultiplicativeExpression__FeatureAssignment_1_0_0_134963 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXUnaryOperation_in_rule__XMultiplicativeExpression__RightOperandAssignment_1_134998 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpUnary_in_rule__XUnaryOperation__FeatureAssignment_0_135033 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXUnaryOperation_in_rule__XUnaryOperation__OperandAssignment_0_235068 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XCastedExpression__TypeAssignment_1_135099 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpPostfix_in_rule__XPostfixOperation__FeatureAssignment_1_0_135134 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_84_in_rule__XMemberFeatureCall__ExplicitStaticAssignment_1_0_0_0_1_135174 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFeatureCallID_in_rule__XMemberFeatureCall__FeatureAssignment_1_0_0_0_235217 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXAssignment_in_rule__XMemberFeatureCall__ValueAssignment_1_0_135252 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_85_in_rule__XMemberFeatureCall__NullSafeAssignment_1_1_0_0_1_135288 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_84_in_rule__XMemberFeatureCall__ExplicitStaticAssignment_1_1_0_0_1_235332 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_135371 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_1_1_2_135402 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleIdOrSuper_in_rule__XMemberFeatureCall__FeatureAssignment_1_1_235437 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_63_in_rule__XMemberFeatureCall__ExplicitOperationCallAssignment_1_1_3_035477 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXShortClosure_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_035516 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_035547 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_1_1_135578 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXClosure_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_435609 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XSetLiteral__ElementsAssignment_3_035640 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XSetLiteral__ElementsAssignment_3_1_135671 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XListLiteral__ElementsAssignment_3_035702 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XListLiteral__ElementsAssignment_3_1_135733 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_035764 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__DeclaredFormalParametersAssignment_1_0_0_1_135795 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_86_in_rule__XClosure__ExplicitSyntaxAssignment_1_0_135831 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpressionInClosure_in_rule__XClosure__ExpressionAssignment_235870 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpressionOrVarDeclaration_in_rule__XExpressionInClosure__ExpressionsAssignment_1_035901 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_035932 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XShortClosure__DeclaredFormalParametersAssignment_0_0_1_1_135963 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_86_in_rule__XShortClosure__ExplicitSyntaxAssignment_0_0_235999 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XShortClosure__ExpressionAssignment_136038 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XIfExpression__IfAssignment_336069 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XIfExpression__ThenAssignment_536100 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XIfExpression__ElseAssignment_6_136131 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XSwitchExpression__DeclaredParamAssignment_2_0_0_0_136162 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XSwitchExpression__SwitchAssignment_2_0_136193 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XSwitchExpression__DeclaredParamAssignment_2_1_0_0_036224 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XSwitchExpression__SwitchAssignment_2_1_136255 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXCasePart_in_rule__XSwitchExpression__CasesAssignment_436286 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XSwitchExpression__DefaultAssignment_5_236317 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XCasePart__TypeGuardAssignment_136348 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XCasePart__CaseAssignment_2_136379 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XCasePart__ThenAssignment_3_0_136410 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_55_in_rule__XCasePart__FallThroughAssignment_3_136446 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XForLoopExpression__DeclaredParamAssignment_0_0_336485 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XForLoopExpression__ForExpressionAssignment_136516 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XForLoopExpression__EachExpressionAssignment_336547 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpressionOrVarDeclaration_in_rule__XBasicForLoopExpression__InitExpressionsAssignment_3_036578 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpressionOrVarDeclaration_in_rule__XBasicForLoopExpression__InitExpressionsAssignment_3_1_136609 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XBasicForLoopExpression__ExpressionAssignment_536640 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XBasicForLoopExpression__UpdateExpressionsAssignment_7_036671 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XBasicForLoopExpression__UpdateExpressionsAssignment_7_1_136702 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XBasicForLoopExpression__EachExpressionAssignment_936733 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XWhileExpression__PredicateAssignment_336764 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XWhileExpression__BodyAssignment_536795 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__BodyAssignment_236826 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__PredicateAssignment_536857 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpressionOrVarDeclaration_in_rule__XBlockExpression__ExpressionsAssignment_2_036888 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_87_in_rule__XVariableDeclaration__WriteableAssignment_1_036924 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XVariableDeclaration__TypeAssignment_2_0_0_036963 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__XVariableDeclaration__NameAssignment_2_0_0_136994 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__XVariableDeclaration__NameAssignment_2_137025 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XVariableDeclaration__RightAssignment_3_137056 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmFormalParameter__ParameterTypeAssignment_037087 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__JvmFormalParameter__NameAssignment_137118 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__FullJvmFormalParameter__ParameterTypeAssignment_037149 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__FullJvmFormalParameter__NameAssignment_137180 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_1_137211 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_1_2_137242 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleIdOrSuper_in_rule__XFeatureCall__FeatureAssignment_237277 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_63_in_rule__XFeatureCall__ExplicitOperationCallAssignment_3_037317 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXShortClosure_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_037356 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_037387 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_1_1_137418 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXClosure_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_437449 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__XConstructorCall__ConstructorAssignment_237484 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XConstructorCall__TypeArgumentsAssignment_3_137519 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XConstructorCall__TypeArgumentsAssignment_3_2_137550 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_63_in_rule__XConstructorCall__ExplicitConstructorCallAssignment_4_037586 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXShortClosure_in_rule__XConstructorCall__ArgumentsAssignment_4_1_037625 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_4_1_1_037656 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_4_1_1_1_137687 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXClosure_in_rule__XConstructorCall__ArgumentsAssignment_537718 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_88_in_rule__XBooleanLiteral__IsTrueAssignment_1_137754 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNumber_in_rule__XNumberLiteral__ValueAssignment_137793 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_rule__XStringLiteral__ValueAssignment_137824 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__XTypeLiteral__TypeAssignment_337859 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleArrayBrackets_in_rule__XTypeLiteral__ArrayDimensionsAssignment_437894 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XThrowExpression__ExpressionAssignment_237925 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XReturnExpression__ExpressionAssignment_237956 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__ExpressionAssignment_237987 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXCatchClause_in_rule__XTryCatchFinallyExpression__CatchClausesAssignment_3_0_038018 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_0_1_138049 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_1_138080 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XSynchronizedExpression__ParamAssignment_138111 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XSynchronizedExpression__ExpressionAssignment_338142 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFullJvmFormalParameter_in_rule__XCatchClause__DeclaredParamAssignment_238173 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XCatchClause__ExpressionAssignment_438204 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_1_038235 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_1_1_138266 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ReturnTypeAssignment_238297 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__JvmParameterizedTypeReference__TypeAssignment_038332 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_138367 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_138398 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__JvmParameterizedTypeReference__TypeAssignment_1_4_138433 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_138468 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_4_2_2_138499 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmUpperBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_038530 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmUpperBoundAnded_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_138561 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmLowerBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_038592 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmLowerBoundAnded_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_138623 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBound__TypeReferenceAssignment_138654 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBoundAnded__TypeReferenceAssignment_138685 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmLowerBound__TypeReferenceAssignment_138716 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmLowerBoundAnded__TypeReferenceAssignment_138747 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXImportDeclaration_in_rule__XImportSection__ImportDeclarationsAssignment38781 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_46_in_rule__XImportDeclaration__StaticAssignment_1_0_038817 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_48_in_rule__XImportDeclaration__ExtensionAssignment_1_0_138861 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedNameInStaticImport_in_rule__XImportDeclaration__ImportedTypeAssignment_1_0_238904 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_36_in_rule__XImportDeclaration__WildcardAssignment_1_0_3_038944 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_rule__XImportDeclaration__MemberNameAssignment_1_0_3_138983 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__XImportDeclaration__ImportedTypeAssignment_1_139018 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedNameWithWildcard_in_rule__XImportDeclaration__ImportedNamespaceAssignment_1_239053 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__OpOther__Group_6_1_0__0_in_synpred26_InternalXImportSectionTestLang5430 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_27_in_synpred27_InternalXImportSectionTestLang5449 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_0_in_synpred40_InternalXImportSectionTestLang6008 = new BitSet(new long[]{0x0000000000000002L});
@@ -60210,5 +61717,7 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalConten
     public static final BitSet FOLLOW_rule__QualifiedName__Group_1__0_in_synpred145_InternalXImportSectionTestLang29911 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__JvmTypeReference__Group_0_1__0_in_synpred147_InternalXImportSectionTestLang30402 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__0_in_synpred151_InternalXImportSectionTestLang31448 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4__0_in_synpred153_InternalXImportSectionTestLang31757 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_4_2__0_in_synpred154_InternalXImportSectionTestLang32068 = new BitSet(new long[]{0x0000000000000002L});
 
 }

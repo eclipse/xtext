@@ -26,9 +26,9 @@ import org.eclipse.xtext.xbase.compiler.TreeAppendableUtil;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 import com.google.inject.Inject;
@@ -72,16 +72,15 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 				}
 			}
 		}
-		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, dispatchOperation);
-		OwnedConverter converter = new OwnedConverter(owner);
+		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, dispatchOperation);
 		for (JvmOperation operation : sortedDispatchOperations) {
 			ITreeAppendable operationAppendable = treeAppendableUtil.traceSignificant(a, operation, true);
 			final List<Later> laters = newArrayList();
 			for (int i = 0; i < parameterCount; i++) {
 				final JvmFormalParameter dispatchParam = dispatchOperation.getParameters().get(i);
-				final LightweightTypeReference dispatchParamType = converter.toLightweightReference(dispatchParam.getParameterType());
+				final LightweightTypeReference dispatchParamType = owner.toLightweightTypeReference(dispatchParam.getParameterType());
 				final JvmFormalParameter caseParam = operation.getParameters().get(i);
-				final LightweightTypeReference caseParamType = converter.toLightweightReference(caseParam.getParameterType());
+				final LightweightTypeReference caseParamType = owner.toLightweightTypeReference(caseParam.getParameterType());
 				final String name = getVarName(dispatchParam, operationAppendable);
 				if (caseParamType.isType(Void.class)) {
 					laters.add(new Later() {
@@ -134,16 +133,16 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 			final boolean isCurrentVoid = typeReferences.is(operation.getReturnType(), Void.TYPE);
 			final boolean isDispatchVoid = typeReferences.is(dispatchOperation.getReturnType(), Void.TYPE);
 			if (isDispatchVoid) {
-				generateActualDispatchCall(dispatchOperation, operation, operationAppendable, converter);
+				generateActualDispatchCall(dispatchOperation, operation, operationAppendable, owner);
 				// we generate a redundant return statement here to get a better debugging experience
 				operationAppendable.append(";").newLine().append("return;");
 			} else {
 				if (isCurrentVoid) {
-					generateActualDispatchCall(dispatchOperation, operation, operationAppendable, converter);
+					generateActualDispatchCall(dispatchOperation, operation, operationAppendable, owner);
 					operationAppendable.append(";").newLine().append("return null");
 				} else {
 					operationAppendable.append("return ");
-					generateActualDispatchCall(dispatchOperation, operation, operationAppendable, converter);
+					generateActualDispatchCall(dispatchOperation, operation, operationAppendable, owner);
 				}
 				operationAppendable.append(";");
 			}
@@ -180,14 +179,14 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 	}
 
 	protected void generateActualDispatchCall(JvmOperation dispatchOperation, JvmOperation actualOperationToCall,
-			ITreeAppendable a, OwnedConverter converter) {
+			ITreeAppendable a, ITypeReferenceOwner owner) {
 		a.append(actualOperationToCall.getSimpleName()).append("(");
 		Iterator<JvmFormalParameter> iter1 = dispatchOperation.getParameters().iterator();
 		for (Iterator<JvmFormalParameter> iter2 = actualOperationToCall.getParameters().iterator(); iter2.hasNext();) {
 			JvmFormalParameter p1 = iter1.next();
 			JvmFormalParameter p2 = iter2.next();
-			LightweightTypeReference type1 = converter.toLightweightReference(p1.getParameterType());
-			LightweightTypeReference type2 = converter.toLightweightReference(p2.getParameterType());
+			LightweightTypeReference type1 = owner.toLightweightTypeReference(p1.getParameterType());
+			LightweightTypeReference type2 = owner.toLightweightTypeReference(p2.getParameterType());
 			if (!type2.isAssignableFrom(type1, new TypeConformanceComputationArgument(true, false, true, true, false, false))) {
 				a.append("(").append(type2.getWrapperTypeIfPrimitive()).append(")");
 			}

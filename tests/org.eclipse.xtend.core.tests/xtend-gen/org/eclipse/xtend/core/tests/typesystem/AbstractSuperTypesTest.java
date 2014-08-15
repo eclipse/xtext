@@ -76,7 +76,7 @@ public abstract class AbstractSuperTypesTest extends AbstractTestingTypeReferenc
       EList<JvmFormalParameter> _parameters = operation.getParameters();
       JvmFormalParameter _head = IterableExtensions.<JvmFormalParameter>head(_parameters);
       JvmTypeReference _parameterType = _head.getParameterType();
-      final LightweightTypeReference subtype = this.toLightweightReference(_parameterType);
+      final LightweightTypeReference subtype = this.toLightweightTypeReference(_parameterType);
       List<String> _list = IterableExtensions.<String>toList(((Iterable<String>)Conversions.doWrapArray(superTypes)));
       Iterable<LightweightTypeReference> _collectSuperTypes = this.collectSuperTypes(subtype);
       final Function1<LightweightTypeReference, String> _function = new Function1<LightweightTypeReference, String>() {
@@ -153,4 +153,16 @@ public abstract class AbstractSuperTypesTest extends AbstractTestingTypeReferenc
     Pair<String, String> _mappedTo = Pair.<String, String>of("T", "T");
     this.assertSuperTypes(_mappedTo, "Object");
   }
+  
+  @Test
+  public abstract void testParameterizedInnerTypes_01();
+  
+  @Test
+  public abstract void testParameterizedInnerTypes_02();
+  
+  @Test
+  public abstract void testParameterizedInnerTypes_03();
+  
+  @Test
+  public abstract void testParameterizedInnerTypes_04();
 }

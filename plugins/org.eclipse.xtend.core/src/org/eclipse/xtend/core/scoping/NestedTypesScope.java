@@ -128,6 +128,9 @@ public class NestedTypesScope extends AbstractKnownTypesScope {
 			}
 		}
 		JvmDeclaredType superType = typeScopeProvider.getSuperTypeOfLocalTypeNonResolving(localType);
+		if (superType == null) {
+			return null;
+		}
 		return doGetSingleElement(superType, name, firstSegment, dollarIndex);
 	}
 

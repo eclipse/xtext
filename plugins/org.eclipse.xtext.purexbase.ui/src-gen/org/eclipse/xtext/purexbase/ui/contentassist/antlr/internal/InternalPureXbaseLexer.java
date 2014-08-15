@@ -14,8 +14,8 @@ import java.util.ArrayList;
 public class InternalPureXbaseLexer extends Lexer {
     public static final int T__68=68;
     public static final int T__69=69;
-    public static final int RULE_ID=4;
     public static final int T__66=66;
+    public static final int RULE_ID=4;
     public static final int T__67=67;
     public static final int T__29=29;
     public static final int T__64=64;
@@ -43,8 +43,8 @@ public class InternalPureXbaseLexer extends Lexer {
     public static final int T__58=58;
     public static final int T__16=16;
     public static final int T__51=51;
-    public static final int T__15=15;
     public static final int T__52=52;
+    public static final int T__15=15;
     public static final int T__53=53;
     public static final int T__18=18;
     public static final int T__54=54;
@@ -1646,10 +1646,10 @@ public class InternalPureXbaseLexer extends Lexer {
         try {
             int _type = RULE_HEX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19049:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
-            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19049:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19506:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
+            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19506:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             {
-            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19049:12: ( '0x' | '0X' )
+            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19506:12: ( '0x' | '0X' )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -1677,7 +1677,7 @@ public class InternalPureXbaseLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19049:13: '0x'
+                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19506:13: '0x'
                     {
                     match("0x"); 
 
@@ -1685,7 +1685,7 @@ public class InternalPureXbaseLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19049:18: '0X'
+                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19506:18: '0X'
                     {
                     match("0X"); 
 
@@ -1695,7 +1695,7 @@ public class InternalPureXbaseLexer extends Lexer {
 
             }
 
-            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19049:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
+            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19506:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
             int cnt2=0;
             loop2:
             do {
@@ -1733,7 +1733,7 @@ public class InternalPureXbaseLexer extends Lexer {
                 cnt2++;
             } while (true);
 
-            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19049:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19506:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -1742,10 +1742,10 @@ public class InternalPureXbaseLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19049:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19506:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     {
                     match('#'); 
-                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19049:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19506:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
@@ -1763,7 +1763,7 @@ public class InternalPureXbaseLexer extends Lexer {
                     }
                     switch (alt3) {
                         case 1 :
-                            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19049:64: ( 'b' | 'B' ) ( 'i' | 'I' )
+                            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19506:64: ( 'b' | 'B' ) ( 'i' | 'I' )
                             {
                             if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                                 input.consume();
@@ -1787,7 +1787,7 @@ public class InternalPureXbaseLexer extends Lexer {
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19049:84: ( 'l' | 'L' )
+                            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19506:84: ( 'l' | 'L' )
                             {
                             if ( input.LA(1)=='L'||input.LA(1)=='l' ) {
                                 input.consume();
@@ -1826,11 +1826,11 @@ public class InternalPureXbaseLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19051:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
-            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19051:12: '0' .. '9' ( '0' .. '9' | '_' )*
+            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19508:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
+            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19508:12: '0' .. '9' ( '0' .. '9' | '_' )*
             {
             matchRange('0','9'); 
-            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19051:21: ( '0' .. '9' | '_' )*
+            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19508:21: ( '0' .. '9' | '_' )*
             loop5:
             do {
                 int alt5=2;
@@ -1879,11 +1879,11 @@ public class InternalPureXbaseLexer extends Lexer {
         try {
             int _type = RULE_DECIMAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19053:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
-            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19053:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19510:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
+            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19510:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             {
             mRULE_INT(); 
-            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19053:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
+            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19510:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1892,7 +1892,7 @@ public class InternalPureXbaseLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19053:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
+                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19510:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
                     {
                     if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
                         input.consume();
@@ -1903,7 +1903,7 @@ public class InternalPureXbaseLexer extends Lexer {
                         recover(mse);
                         throw mse;}
 
-                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19053:36: ( '+' | '-' )?
+                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19510:36: ( '+' | '-' )?
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -1936,7 +1936,7 @@ public class InternalPureXbaseLexer extends Lexer {
 
             }
 
-            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19053:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19510:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             int alt8=3;
             int LA8_0 = input.LA(1);
 
@@ -1948,7 +1948,7 @@ public class InternalPureXbaseLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19053:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
+                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19510:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
                     {
                     if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                         input.consume();
@@ -1972,7 +1972,7 @@ public class InternalPureXbaseLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19053:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
+                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19510:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
                     {
                     if ( input.LA(1)=='D'||input.LA(1)=='F'||input.LA(1)=='L'||input.LA(1)=='d'||input.LA(1)=='f'||input.LA(1)=='l' ) {
                         input.consume();
@@ -2005,10 +2005,10 @@ public class InternalPureXbaseLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19055:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19055:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19512:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
+            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19512:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19055:11: ( '^' )?
+            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19512:11: ( '^' )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -2017,7 +2017,7 @@ public class InternalPureXbaseLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19055:11: '^'
+                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19512:11: '^'
                     {
                     match('^'); 
 
@@ -2035,7 +2035,7 @@ public class InternalPureXbaseLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19055:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19512:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             loop10:
             do {
                 int alt10=2;
@@ -2084,10 +2084,10 @@ public class InternalPureXbaseLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19057:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? ) )
-            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19057:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
+            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19514:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? ) )
+            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19514:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
             {
-            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19057:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
+            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19514:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -2105,10 +2105,10 @@ public class InternalPureXbaseLexer extends Lexer {
             }
             switch (alt15) {
                 case 1 :
-                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19057:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )?
+                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19514:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )?
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19057:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19514:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop11:
                     do {
                         int alt11=3;
@@ -2124,7 +2124,7 @@ public class InternalPureXbaseLexer extends Lexer {
 
                         switch (alt11) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19057:21: '\\\\' .
+                    	    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19514:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -2132,7 +2132,7 @@ public class InternalPureXbaseLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19057:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19514:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2152,7 +2152,7 @@ public class InternalPureXbaseLexer extends Lexer {
                         }
                     } while (true);
 
-                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19057:44: ( '\"' )?
+                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19514:44: ( '\"' )?
                     int alt12=2;
                     int LA12_0 = input.LA(1);
 
@@ -2161,7 +2161,7 @@ public class InternalPureXbaseLexer extends Lexer {
                     }
                     switch (alt12) {
                         case 1 :
-                            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19057:44: '\"'
+                            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19514:44: '\"'
                             {
                             match('\"'); 
 
@@ -2174,10 +2174,10 @@ public class InternalPureXbaseLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19057:49: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )?
+                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19514:49: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )?
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19057:54: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19514:54: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop13:
                     do {
                         int alt13=3;
@@ -2193,7 +2193,7 @@ public class InternalPureXbaseLexer extends Lexer {
 
                         switch (alt13) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19057:55: '\\\\' .
+                    	    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19514:55: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -2201,7 +2201,7 @@ public class InternalPureXbaseLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19057:62: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19514:62: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2221,7 +2221,7 @@ public class InternalPureXbaseLexer extends Lexer {
                         }
                     } while (true);
 
-                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19057:79: ( '\\'' )?
+                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19514:79: ( '\\'' )?
                     int alt14=2;
                     int LA14_0 = input.LA(1);
 
@@ -2230,7 +2230,7 @@ public class InternalPureXbaseLexer extends Lexer {
                     }
                     switch (alt14) {
                         case 1 :
-                            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19057:79: '\\''
+                            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19514:79: '\\''
                             {
                             match('\''); 
 
@@ -2261,12 +2261,12 @@ public class InternalPureXbaseLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19059:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19059:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19516:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19516:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19059:24: ( options {greedy=false; } : . )*
+            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19516:24: ( options {greedy=false; } : . )*
             loop16:
             do {
                 int alt16=2;
@@ -2291,7 +2291,7 @@ public class InternalPureXbaseLexer extends Lexer {
 
                 switch (alt16) {
             	case 1 :
-            	    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19059:52: .
+            	    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19516:52: .
             	    {
             	    matchAny(); 
 
@@ -2321,12 +2321,12 @@ public class InternalPureXbaseLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19061:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19061:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19518:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19518:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19061:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19518:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop17:
             do {
                 int alt17=2;
@@ -2339,7 +2339,7 @@ public class InternalPureXbaseLexer extends Lexer {
 
                 switch (alt17) {
             	case 1 :
-            	    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19061:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19518:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2359,7 +2359,7 @@ public class InternalPureXbaseLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19061:40: ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19518:40: ( ( '\\r' )? '\\n' )?
             int alt19=2;
             int LA19_0 = input.LA(1);
 
@@ -2368,9 +2368,9 @@ public class InternalPureXbaseLexer extends Lexer {
             }
             switch (alt19) {
                 case 1 :
-                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19061:41: ( '\\r' )? '\\n'
+                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19518:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19061:41: ( '\\r' )?
+                    // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19518:41: ( '\\r' )?
                     int alt18=2;
                     int LA18_0 = input.LA(1);
 
@@ -2379,7 +2379,7 @@ public class InternalPureXbaseLexer extends Lexer {
                     }
                     switch (alt18) {
                         case 1 :
-                            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19061:41: '\\r'
+                            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19518:41: '\\r'
                             {
                             match('\r'); 
 
@@ -2411,10 +2411,10 @@ public class InternalPureXbaseLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19063:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19063:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19520:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19520:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19063:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19520:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt20=0;
             loop20:
             do {
@@ -2468,8 +2468,8 @@ public class InternalPureXbaseLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19065:16: ( . )
-            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19065:18: .
+            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19522:16: ( . )
+            // ../org.eclipse.xtext.purexbase.ui/src-gen/org/eclipse/xtext/purexbase/ui/contentassist/antlr/internal/InternalPureXbase.g:19522:18: .
             {
             matchAny(); 
 

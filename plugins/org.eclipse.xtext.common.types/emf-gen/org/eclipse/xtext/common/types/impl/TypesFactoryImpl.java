@@ -108,6 +108,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 			case TypesPackage.JVM_SYNONYM_TYPE_REFERENCE: return createJvmSynonymTypeReference();
 			case TypesPackage.JVM_UNKNOWN_TYPE_REFERENCE: return createJvmUnknownTypeReference();
 			case TypesPackage.JVM_CUSTOM_ANNOTATION_VALUE: return createJvmCustomAnnotationValue();
+			case TypesPackage.JVM_INNER_TYPE_REFERENCE: return createJvmInnerTypeReference();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -545,6 +546,17 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	{
 		JvmCustomAnnotationValueImpl jvmCustomAnnotationValue = new JvmCustomAnnotationValueImpl();
 		return jvmCustomAnnotationValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmInnerTypeReference createJvmInnerTypeReference()
+	{
+		JvmInnerTypeReferenceImplCustom jvmInnerTypeReference = new JvmInnerTypeReferenceImplCustom();
+		return jvmInnerTypeReference;
 	}
 
 	/**

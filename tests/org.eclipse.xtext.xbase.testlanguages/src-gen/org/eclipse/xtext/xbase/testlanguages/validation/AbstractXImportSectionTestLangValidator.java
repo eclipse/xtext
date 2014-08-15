@@ -11,7 +11,7 @@ public class AbstractXImportSectionTestLangValidator extends org.eclipse.xtext.x
 
 	@Override
 	protected List<EPackage> getEPackages() {
-	    List<EPackage> result = new ArrayList<EPackage>();
+	    List<EPackage> result = new ArrayList<EPackage>(super.getEPackages());
 	    result.add(org.eclipse.xtext.xbase.testlanguages.xImportSectionTestLang.XImportSectionTestLangPackage.eINSTANCE);
 	    result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.eclipse.org/xtext/xbase/Xbase"));
 	    result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.eclipse.org/xtext/common/JavaVMTypes"));

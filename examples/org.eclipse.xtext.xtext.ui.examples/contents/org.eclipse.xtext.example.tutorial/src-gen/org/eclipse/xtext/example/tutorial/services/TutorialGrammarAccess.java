@@ -192,20 +192,24 @@ public class TutorialGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	
-	private DomainModelFileElements pDomainModelFile;
-	private ImportElements pImport;
-	private EntityElements pEntity;
-	private PropertyElements pProperty;
+	private final DomainModelFileElements pDomainModelFile;
+	private final ImportElements pImport;
+	private final EntityElements pEntity;
+	private final PropertyElements pProperty;
 	
 	private final Grammar grammar;
 
-	private XbaseGrammarAccess gaXbase;
+	private final XbaseGrammarAccess gaXbase;
 
 	@Inject
 	public TutorialGrammarAccess(GrammarProvider grammarProvider,
 		XbaseGrammarAccess gaXbase) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaXbase = gaXbase;
+		this.pDomainModelFile = new DomainModelFileElements();
+		this.pImport = new ImportElements();
+		this.pEntity = new EntityElements();
+		this.pProperty = new PropertyElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -243,7 +247,7 @@ public class TutorialGrammarAccess extends AbstractGrammarElementFinder {
 	//	imports+=Import* // followed by any number of Entity declarations
 	//	entities+=Entity*;
 	public DomainModelFileElements getDomainModelFileAccess() {
-		return (pDomainModelFile != null) ? pDomainModelFile : (pDomainModelFile = new DomainModelFileElements());
+		return pDomainModelFile;
 	}
 	
 	public ParserRule getDomainModelFileRule() {
@@ -255,7 +259,7 @@ public class TutorialGrammarAccess extends AbstractGrammarElementFinder {
 	// * / Import:
 	//	"import" importedNamespace=QualifiedName;
 	public ImportElements getImportAccess() {
-		return (pImport != null) ? pImport : (pImport = new ImportElements());
+		return pImport;
 	}
 	
 	public ParserRule getImportRule() {
@@ -267,7 +271,7 @@ public class TutorialGrammarAccess extends AbstractGrammarElementFinder {
 	// * / Entity:
 	//	"entity" name=ValidID ("extends" superType=JvmTypeReference)? "{" features+=Property* "}";
 	public EntityElements getEntityAccess() {
-		return (pEntity != null) ? pEntity : (pEntity = new EntityElements());
+		return pEntity;
 	}
 	
 	public ParserRule getEntityRule() {
@@ -279,7 +283,7 @@ public class TutorialGrammarAccess extends AbstractGrammarElementFinder {
 	// * / Property:
 	//	name=ValidID ":" type=JvmTypeReference;
 	public PropertyElements getPropertyAccess() {
-		return (pProperty != null) ? pProperty : (pProperty = new PropertyElements());
+		return pProperty;
 	}
 	
 	public ParserRule getPropertyRule() {
@@ -990,8 +994,9 @@ public class TutorialGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//JvmParameterizedTypeReference:
-	//	type=[JvmType|QualifiedName] ("<" arguments+=JvmArgumentTypeReference ("," arguments+=JvmArgumentTypeReference)*
-	//	">")?;
+	//	type=[JvmType|QualifiedName] ("<" arguments+=JvmArgumentTypeReference ("," arguments+=JvmArgumentTypeReference)* ">"
+	//	(=> ({JvmInnerTypeReference.outer=current} ".") type=[JvmType|ValidID] ("<" arguments+=JvmArgumentTypeReference (","
+	//	arguments+=JvmArgumentTypeReference)* ">")?)*)?;
 	public XtypeGrammarAccess.JvmParameterizedTypeReferenceElements getJvmParameterizedTypeReferenceAccess() {
 		return gaXbase.getJvmParameterizedTypeReferenceAccess();
 	}

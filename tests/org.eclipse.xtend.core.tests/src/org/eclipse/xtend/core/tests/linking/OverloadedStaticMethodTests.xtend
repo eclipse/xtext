@@ -7,17 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.linking
 
+import com.google.inject.Inject
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendFunction
-import org.eclipse.xtext.xbase.XBlockExpression
-import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.common.types.JvmOperation
+import org.eclipse.xtext.xbase.XAbstractFeatureCall
+import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.typesystem.^override.BottomResolvedOperation
 import org.eclipse.xtext.xbase.typesystem.^override.OverrideTester
-import com.google.inject.Inject
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.junit.Test
 
@@ -39,7 +38,7 @@ abstract class AbstractOverloadedStaticMethodTest extends AbstractXtendTestCase 
 		val featureCall = body.expressions.last as XAbstractFeatureCall
 		val operation = featureCall.feature as JvmOperation
 		val owner = new StandardTypeReferenceOwner(services, file)
-		val declaration = new ParameterizedTypeReference(owner, operation.declaringType)
+		val declaration = owner.newParameterizedTypeReference(operation.declaringType)
 		val resolved = new BottomResolvedOperation(operation, declaration, overrideTester)
 		assertEquals(method, resolved.simpleSignature)
 		assertTrue(file.eResource.errors.join("\n"), file.eResource.errors.empty)

@@ -5852,7 +5852,83 @@ ruleJvmParameterizedTypeReference returns [EObject current=null]
     {
     	newLeafNode(otherlv_5, grammarAccess.getJvmParameterizedTypeReferenceAccess().getGreaterThanSignKeyword_1_3());
     }
-)?)
+(((((
+)	'.' 
+))=>((
+    {
+        $current = forceCreateModelElementAndSet(
+            grammarAccess.getJvmParameterizedTypeReferenceAccess().getJvmInnerTypeReferenceOuterAction_1_4_0_0_0(),
+            $current);
+    }
+)	otherlv_7='.' 
+    {
+    	newLeafNode(otherlv_7, grammarAccess.getJvmParameterizedTypeReferenceAccess().getFullStopKeyword_1_4_0_0_1());
+    }
+))(
+(
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getJvmParameterizedTypeReferenceRule());
+	        }
+        }
+		{ 
+	        newCompositeNode(grammarAccess.getJvmParameterizedTypeReferenceAccess().getTypeJvmTypeCrossReference_1_4_1_0()); 
+	    }
+		ruleValidID		{ 
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(((	'<' 
+)=>	otherlv_9='<' 
+    {
+    	newLeafNode(otherlv_9, grammarAccess.getJvmParameterizedTypeReferenceAccess().getLessThanSignKeyword_1_4_2_0());
+    }
+)(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_4_2_1_0()); 
+	    }
+		lv_arguments_10_0=ruleJvmArgumentTypeReference		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getJvmParameterizedTypeReferenceRule());
+	        }
+       		add(
+       			$current, 
+       			"arguments",
+        		lv_arguments_10_0, 
+        		"JvmArgumentTypeReference");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(	otherlv_11=',' 
+    {
+    	newLeafNode(otherlv_11, grammarAccess.getJvmParameterizedTypeReferenceAccess().getCommaKeyword_1_4_2_2_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_4_2_2_1_0()); 
+	    }
+		lv_arguments_12_0=ruleJvmArgumentTypeReference		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getJvmParameterizedTypeReferenceRule());
+	        }
+       		add(
+       			$current, 
+       			"arguments",
+        		lv_arguments_12_0, 
+        		"JvmArgumentTypeReference");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))*	otherlv_13='>' 
+    {
+    	newLeafNode(otherlv_13, grammarAccess.getJvmParameterizedTypeReferenceAccess().getGreaterThanSignKeyword_1_4_2_3());
+    }
+)?)*)?)
 ;
 
 

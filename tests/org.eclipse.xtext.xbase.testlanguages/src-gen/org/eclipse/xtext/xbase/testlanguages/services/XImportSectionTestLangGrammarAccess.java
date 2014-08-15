@@ -48,17 +48,18 @@ public class XImportSectionTestLangGrammarAccess extends AbstractGrammarElementF
 	}
 	
 	
-	private ImportSectionTestLanguageRootElements pImportSectionTestLanguageRoot;
+	private final ImportSectionTestLanguageRootElements pImportSectionTestLanguageRoot;
 	
 	private final Grammar grammar;
 
-	private XbaseGrammarAccess gaXbase;
+	private final XbaseGrammarAccess gaXbase;
 
 	@Inject
 	public XImportSectionTestLangGrammarAccess(GrammarProvider grammarProvider,
 		XbaseGrammarAccess gaXbase) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaXbase = gaXbase;
+		this.pImportSectionTestLanguageRoot = new ImportSectionTestLanguageRootElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -91,7 +92,7 @@ public class XImportSectionTestLangGrammarAccess extends AbstractGrammarElementF
 	//ImportSectionTestLanguageRoot:
 	//	"some" "token" importSection=XImportSection;
 	public ImportSectionTestLanguageRootElements getImportSectionTestLanguageRootAccess() {
-		return (pImportSectionTestLanguageRoot != null) ? pImportSectionTestLanguageRoot : (pImportSectionTestLanguageRoot = new ImportSectionTestLanguageRootElements());
+		return pImportSectionTestLanguageRoot;
 	}
 	
 	public ParserRule getImportSectionTestLanguageRootRule() {
@@ -802,8 +803,9 @@ public class XImportSectionTestLangGrammarAccess extends AbstractGrammarElementF
 	}
 
 	//JvmParameterizedTypeReference:
-	//	type=[JvmType|QualifiedName] ("<" arguments+=JvmArgumentTypeReference ("," arguments+=JvmArgumentTypeReference)*
-	//	">")?;
+	//	type=[JvmType|QualifiedName] ("<" arguments+=JvmArgumentTypeReference ("," arguments+=JvmArgumentTypeReference)* ">"
+	//	(=> ({JvmInnerTypeReference.outer=current} ".") type=[JvmType|ValidID] ("<" arguments+=JvmArgumentTypeReference (","
+	//	arguments+=JvmArgumentTypeReference)* ">")?)*)?;
 	public XtypeGrammarAccess.JvmParameterizedTypeReferenceElements getJvmParameterizedTypeReferenceAccess() {
 		return gaXbase.getJvmParameterizedTypeReferenceAccess();
 	}

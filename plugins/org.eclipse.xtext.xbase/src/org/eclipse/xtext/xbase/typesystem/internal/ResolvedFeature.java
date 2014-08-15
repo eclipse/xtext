@@ -18,6 +18,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.util.Wrapper;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -28,6 +29,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
@@ -35,8 +37,6 @@ import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
-
-import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -92,7 +92,7 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 			JvmIdentifiableElement feature = getFeature();
 			if (feature instanceof JvmFeature) {
 				JvmDeclaredType declaringType = ((JvmFeature) feature).getDeclaringType();
-				final ParameterizedTypeReference declaringTypeReference = new ParameterizedTypeReference(receiverType.getOwner(), declaringType);
+				final LightweightTypeReference declaringTypeReference = receiverType.getOwner().newParameterizedTypeReference(declaringType);
 				final TypeConformanceComputationArgument rawConformanceCheck = new TypeConformanceComputationArgument(true, false, false, false, false, false);
 				if (!declaringTypeReference.isAssignableFrom(receiverType, rawConformanceCheck)) {
 					final Wrapper<LightweightTypeReference> expectedReceiverTypeWrapper = Wrapper.wrap(null); 
@@ -146,8 +146,8 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 	}
 	
 	@Override
-	protected List<LightweightTypeReference> getSyntacticTypeArguments() {
-		return Lists.transform(getFeatureCall().getTypeArguments(), getState().getResolvedTypes().getConverter());
+	protected List<JvmTypeReference> getPlainSyntacticTypeArguments() {
+		return getFeatureCall().getTypeArguments();
 	}
 	
 	@Override
@@ -196,7 +196,7 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 			JvmIdentifiableElement feature = getFeature();
 			if (feature instanceof JvmFeature) {
 				JvmDeclaredType declaringType = ((JvmFeature) feature).getDeclaringType();
-				final ParameterizedTypeReference declaringTypeReference = new ParameterizedTypeReference(receiverType.getOwner(), declaringType);
+				final LightweightTypeReference declaringTypeReference = receiverType.getOwner().newParameterizedTypeReference(declaringType);
 				final TypeConformanceComputationArgument rawConformanceCheck = new TypeConformanceComputationArgument(true, false, false, false, false, false);
 				if (declaringTypeReference.isAssignableFrom(receiverType, rawConformanceCheck)) {
 					receiverTypeParameterMapping.set(new DeclaratorTypeArgumentCollector().getTypeParameterMapping(receiverType));
@@ -226,7 +226,7 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 	@Override
 	protected LightweightTypeReference getDeclaredType(JvmIdentifiableElement feature) {
 		if (feature instanceof JvmConstructor) {
-			return getState().getConverter().toLightweightReference(getState().getTypeReferences().getTypeForName(Void.TYPE, feature));
+			return getState().getReferenceOwner().toPlainTypeReference(getState().getTypeReferences().findDeclaredType(Void.TYPE, feature));
 		}
 		/*
 		 * The actual result type is Class<? extends |X|> where |X| is the erasure of 
@@ -246,9 +246,10 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 				if (rawTypes.isEmpty()) {
 					return super.getDeclaredType(feature);
 				}
-				ParameterizedTypeReference result = new ParameterizedTypeReference(receiverType.getOwner(), getClassOperation.getReturnType().getType());
-				WildcardTypeReference wildcard = new WildcardTypeReference(receiverType.getOwner());
-				wildcard.addUpperBound(new ParameterizedTypeReference(receiverType.getOwner(), rawTypes.get(0)));
+				ITypeReferenceOwner owner = receiverType.getOwner();
+				ParameterizedTypeReference result = owner.newParameterizedTypeReference(((JvmOperation) feature).getReturnType().getType());
+				WildcardTypeReference wildcard = owner.newWildcardTypeReference();
+				wildcard.addUpperBound(owner.toPlainTypeReference(rawTypes.get(0)));
 				result.addTypeArgument(wildcard);
 				return result;
 			}

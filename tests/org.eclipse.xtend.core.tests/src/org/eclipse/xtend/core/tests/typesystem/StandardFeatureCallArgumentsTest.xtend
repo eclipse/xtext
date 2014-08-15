@@ -8,15 +8,14 @@
 package org.eclipse.xtend.core.tests.typesystem
 
 import com.google.inject.Inject
+import java.util.NoSuchElementException
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XFeatureCall
-import org.eclipse.xtext.xbase.typesystem.arguments.StandardFeatureCallArguments
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
-import org.junit.Test
-import java.util.NoSuchElementException
-import org.eclipse.xtext.xbase.XStringLiteral
 import org.eclipse.xtext.xbase.XNumberLiteral
+import org.eclipse.xtext.xbase.XStringLiteral
+import org.eclipse.xtext.xbase.typesystem.arguments.StandardFeatureCallArguments
+import org.junit.Test
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -210,7 +209,7 @@ class StandardFeatureCallArgumentsTest extends AbstractTestingTypeReferenceOwner
 		val featureCall = body.expressions.head as XFeatureCall
 		val arguments = featureCall.featureCallArguments
 		val operation = function.directlyInferredOperation
-		val result = factory.createStandardArguments(arguments, operation.parameters, receiver, new OwnedConverter(this))
+		val result = factory.createStandardArguments(arguments, operation.parameters, receiver, owner)
 		assertTrue(result.class == StandardFeatureCallArguments)
 		return result
 	}

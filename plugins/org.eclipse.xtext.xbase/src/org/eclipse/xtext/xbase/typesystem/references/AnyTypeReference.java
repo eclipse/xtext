@@ -124,5 +124,5 @@ public class AnyTypeReference extends LightweightTypeReference {
 	@Override
 	public LightweightTypeReference toJavaType() {
 		JvmType objectType = getServices().getTypeReferences().findDeclaredType(Object.class, getOwner().getContextResourceSet());
-		return new ParameterizedTypeReference(getOwner(), objectType);
+		return getOwner().newParameterizedTypeReference(objectType);
 	}}

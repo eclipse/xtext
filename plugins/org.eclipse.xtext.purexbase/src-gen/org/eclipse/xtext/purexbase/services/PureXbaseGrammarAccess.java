@@ -92,19 +92,22 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	
-	private ModelElements pModel;
-	private SpecialBlockExpressionElements pSpecialBlockExpression;
-	private FeatureCallIDElements pFeatureCallID;
+	private final ModelElements pModel;
+	private final SpecialBlockExpressionElements pSpecialBlockExpression;
+	private final FeatureCallIDElements pFeatureCallID;
 	
 	private final Grammar grammar;
 
-	private XbaseGrammarAccess gaXbase;
+	private final XbaseGrammarAccess gaXbase;
 
 	@Inject
 	public PureXbaseGrammarAccess(GrammarProvider grammarProvider,
 		XbaseGrammarAccess gaXbase) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaXbase = gaXbase;
+		this.pModel = new ModelElements();
+		this.pSpecialBlockExpression = new SpecialBlockExpressionElements();
+		this.pFeatureCallID = new FeatureCallIDElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -137,7 +140,7 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//Model:
 	//	importSection=XImportSection? block=SpecialBlockExpression;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -147,7 +150,7 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//SpecialBlockExpression returns xbase::XBlockExpression:
 	//	{xbase::XBlockExpression} (expressions+=XExpressionOrVarDeclaration ";"?)*;
 	public SpecialBlockExpressionElements getSpecialBlockExpressionAccess() {
-		return (pSpecialBlockExpression != null) ? pSpecialBlockExpression : (pSpecialBlockExpression = new SpecialBlockExpressionElements());
+		return pSpecialBlockExpression;
 	}
 	
 	public ParserRule getSpecialBlockExpressionRule() {
@@ -157,7 +160,7 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//FeatureCallID:
 	//	ValidID;
 	public FeatureCallIDElements getFeatureCallIDAccess() {
-		return (pFeatureCallID != null) ? pFeatureCallID : (pFeatureCallID = new FeatureCallIDElements());
+		return pFeatureCallID;
 	}
 	
 	public ParserRule getFeatureCallIDRule() {
@@ -858,8 +861,9 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//JvmParameterizedTypeReference:
-	//	type=[JvmType|QualifiedName] ("<" arguments+=JvmArgumentTypeReference ("," arguments+=JvmArgumentTypeReference)*
-	//	">")?;
+	//	type=[JvmType|QualifiedName] ("<" arguments+=JvmArgumentTypeReference ("," arguments+=JvmArgumentTypeReference)* ">"
+	//	(=> ({JvmInnerTypeReference.outer=current} ".") type=[JvmType|ValidID] ("<" arguments+=JvmArgumentTypeReference (","
+	//	arguments+=JvmArgumentTypeReference)* ">")?)*)?;
 	public XtypeGrammarAccess.JvmParameterizedTypeReferenceElements getJvmParameterizedTypeReferenceAccess() {
 		return gaXbase.getJvmParameterizedTypeReferenceAccess();
 	}

@@ -24,10 +24,10 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.xbase.imports.StaticallyImportedMemberProvider;
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceFactory;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 
@@ -50,7 +50,7 @@ public class XtypeProposalProvider extends AbstractXtypeProposalProvider {
 			XImportDeclaration importDeclaration = (XImportDeclaration) model;
 			for (JvmFeature feature : staticallyImportedMemberProvider.findAllFeatures(importDeclaration)) {
 				Image image = getImage(feature);
-				OwnedConverter typeConverter = getTypeConverter(context.getResource());
+				LightweightTypeReferenceFactory typeConverter = getTypeConverter(context.getResource());
 				StyledString displayString = getStyledDisplayString(feature, false, 0, feature.getQualifiedName(), feature.getSimpleName(), typeConverter);
 				acceptor.accept(createCompletionProposal(feature.getSimpleName(), displayString, image, context));
 			}
@@ -58,7 +58,7 @@ public class XtypeProposalProvider extends AbstractXtypeProposalProvider {
 	}
 
 	protected StyledString getStyledDisplayString(JvmFeature feature, boolean withParenths, int insignificantParameters, String qualifiedNameAsString, String shortName,
-			OwnedConverter converter) {
+			LightweightTypeReferenceFactory converter) {
 				StyledString result = new StyledString(shortName);
 				if (feature instanceof JvmOperation) {
 					JvmOperation operation = (JvmOperation) feature;
@@ -70,10 +70,10 @@ public class XtypeProposalProvider extends AbstractXtypeProposalProvider {
 					JvmTypeReference returnType = operation.getReturnType();
 					if (returnType != null && returnType.getSimpleName() != null) {
 						result.append(" : ");
-						result.append(converter.apply(returnType).getHumanReadableName());
+						result.append(converter.toLightweightReference(returnType).getHumanReadableName());
 					}
 					result.append(" - ", StyledString.QUALIFIER_STYLER);
-					result.append(converter.toRawLightweightReference(feature.getDeclaringType()).getHumanReadableName(), StyledString.QUALIFIER_STYLER);
+					result.append(converter.toPlainTypeReference(feature.getDeclaringType()).getHumanReadableName(), StyledString.QUALIFIER_STYLER);
 					if (!withParenths) {
 						result.append(".", StyledString.QUALIFIER_STYLER);
 						result.append(feature.getSimpleName(), StyledString.QUALIFIER_STYLER);
@@ -83,12 +83,12 @@ public class XtypeProposalProvider extends AbstractXtypeProposalProvider {
 					JvmField field = (JvmField) feature;
 					result.append(" : ");
 					if (field.getType() != null) {
-						String fieldType = converter.apply(field.getType()).getHumanReadableName();
+						String fieldType = converter.toLightweightReference(field.getType()).getHumanReadableName();
 						if (fieldType != null)
 							result.append(fieldType);
 					}
 					result.append(" - ", StyledString.QUALIFIER_STYLER);
-					result.append(converter.toRawLightweightReference(feature.getDeclaringType()).getHumanReadableName(), StyledString.QUALIFIER_STYLER);
+					result.append(converter.toPlainTypeReference(feature.getDeclaringType()).getHumanReadableName(), StyledString.QUALIFIER_STYLER);
 				} else if (feature instanceof JvmConstructor) {
 					if (withParenths) {
 						result.append('(');
@@ -99,7 +99,7 @@ public class XtypeProposalProvider extends AbstractXtypeProposalProvider {
 				return result;
 			}
 
-	protected void appendParameters(StyledString result, JvmExecutable executable, int insignificantParameters, OwnedConverter ownedConverter) {
+	protected void appendParameters(StyledString result, JvmExecutable executable, int insignificantParameters, LightweightTypeReferenceFactory ownedConverter) {
 		List<JvmFormalParameter> declaredParameters = executable.getParameters();
 		List<JvmFormalParameter> relevantParameters = declaredParameters.subList(Math.min(insignificantParameters, declaredParameters.size()), declaredParameters.size());
 		for(int i = 0; i < relevantParameters.size(); i++) {
@@ -108,11 +108,11 @@ public class XtypeProposalProvider extends AbstractXtypeProposalProvider {
 				result.append(", ");
 			if (i == relevantParameters.size() - 1 && executable.isVarArgs() && parameter.getParameterType() instanceof JvmGenericArrayTypeReference) {
 				JvmGenericArrayTypeReference parameterType = (JvmGenericArrayTypeReference) parameter.getParameterType();
-				result.append(ownedConverter.apply(parameterType.getComponentType()).getHumanReadableName());
+				result.append(ownedConverter.toLightweightReference(parameterType.getComponentType()).getHumanReadableName());
 				result.append("...");
 			} else {
 				if (parameter.getParameterType()!= null) {
-					String simpleName = ownedConverter.apply(parameter.getParameterType()).getHumanReadableName();
+					String simpleName = ownedConverter.toLightweightReference(parameter.getParameterType()).getHumanReadableName();
 					if (simpleName != null) // is null if the file is not on the class path
 						result.append(simpleName);
 				}
@@ -122,8 +122,8 @@ public class XtypeProposalProvider extends AbstractXtypeProposalProvider {
 		}
 	}
 
-	protected OwnedConverter getTypeConverter(XtextResource context) {
-		return new OwnedConverter(new StandardTypeReferenceOwner(services, context)) {
+	protected LightweightTypeReferenceFactory getTypeConverter(XtextResource context) {
+		return new LightweightTypeReferenceFactory(new StandardTypeReferenceOwner(services, context)) {
 			@Override
 			public LightweightTypeReference doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference) {
 				LightweightTypeReference result = super.doVisitParameterizedTypeReference(reference);

@@ -33,7 +33,7 @@ public class ParameterizedResolvedFeatures implements IResolvedFeatures {
 	
 	public List<JvmFeature> getAllFeatures(String simpleName) {
 		List<JvmFeature> result = parent.getAllFeatures(simpleName);
-		if (type.getTypeArguments().isEmpty() || result.size() <= 1) {
+		if (result.size() <= 1 || !type.hasTypeArguments()) {
 			return result;
 		}
 		return computeAllFeatures(result);
@@ -41,7 +41,7 @@ public class ParameterizedResolvedFeatures implements IResolvedFeatures {
 	
 	public List<JvmFeature> getAllFeatures() {
 		List<JvmFeature> result = parent.getAllFeatures();
-		if (type.getTypeArguments().isEmpty() || result.size() <= 1) {
+		if (result.size() <= 1 || !type.hasTypeArguments()) {
 			return result;
 		}
 		return computeAllFeatures(result);

@@ -174,6 +174,11 @@ public class JvmSpecializedTypeReferenceItemProvider extends JvmTypeReferenceIte
 			(createChildParameter
 				(TypesPackage.Literals.JVM_SPECIALIZED_TYPE_REFERENCE__EQUIVALENT,
 				 TypesFactory.eINSTANCE.createJvmUnknownTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_SPECIALIZED_TYPE_REFERENCE__EQUIVALENT,
+				 TypesFactory.eINSTANCE.createJvmInnerTypeReference()));
 	}
 
 }
