@@ -32,6 +32,9 @@ import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo
 import org.junit.Test
 
 import static org.eclipse.xtext.xbase.typesystem.util.VarianceInfo.*
+import com.google.inject.Provider
+import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner
 
 /**
  * @author Sebastian Zarnekow
@@ -42,7 +45,7 @@ class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeReferenc
 	extension IXtendJvmAssociations
 	
 	@Inject
-	DefaultReentrantTypeResolver resolver
+	Provider<DefaultReentrantTypeResolver> resolverProvider
 	
 	ListMultimap<Object, LightweightBoundTypeArgument> hints = Multimaps2::newLinkedHashListMultimap
 	
@@ -56,10 +59,12 @@ class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeReferenc
 	
 	def in(String typeParameters, String expectedType, String actualType) {
 		val operation = operation(typeParameters, expectedType, actualType)
-		val collector = new DeferredTypeParameterHintCollector(this)
-		val substitutor = new MockTypeParameterSubstitutor(this, new PublicResolvedTypes(resolver))
-		val hasUnbounds = substitutor.substitute(operation.parameters.head.parameterType.toLightweightReference)
-		val isActual = operation.parameters.last.parameterType.toLightweightReference
+		val collector = new DeferredTypeParameterHintCollector(owner)
+		val resolver = resolverProvider.get
+		resolver.initializeFrom(EcoreUtil.getRootContainer(operation))
+		val substitutor = new MockTypeParameterSubstitutor(owner, new PublicResolvedTypes(resolver))
+		val hasUnbounds = substitutor.substitute(operation.parameters.head.parameterType.toLightweightTypeReference)
+		val isActual = operation.parameters.last.parameterType.toLightweightTypeReference
 		collector.processPairedReferences(hasUnbounds, isActual)
 		return substitutor.typeParameterMapping
 	}
@@ -93,19 +98,23 @@ class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeReferenc
 		assertEquals(mappedTypes.toList as Object, mappingData.map[ Tuples::create(typeReference.toString, declaredVariance, actualVariance) ].toList)
 		return mappingData
 	}
+	
+	override protected createOwner() {
+		new StandardTypeReferenceOwner(services, contextResourceSet) {
+			override acceptHint(Object handle, LightweightBoundTypeArgument boundTypeArgument) {
+				hints.put(handle, boundTypeArgument)
+			}
+			
+			override getAllHints(Object handle) {
+				hints.get(handle)
+			}
+			
+			override isResolved(Object handle) {
+				return false
+			}
+		}
+	}
 
-	override acceptHint(Object handle, LightweightBoundTypeArgument boundTypeArgument) {
-		hints.put(handle, boundTypeArgument)
-	}
-	
-	override getAllHints(Object handle) {
-		hints.get(handle)
-	}
-	
-	override isResolved(Object handle) {
-		return false
-	}
-	
 	def operator_mappedTo(Pair<String, VarianceInfo> pair, VarianceInfo third) {
 		Tuples::create(pair.key, pair.value, third)
 	}

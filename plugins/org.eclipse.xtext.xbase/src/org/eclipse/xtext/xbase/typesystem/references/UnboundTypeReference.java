@@ -273,7 +273,7 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	protected void resolveAgainstConstraints() {
 		TypeParameterByConstraintSubstitutor unboundSubstitutor = new TypeParameterByConstraintSubstitutor(
 				Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), getOwner(), true);
-		LightweightTypeReference substitute = unboundSubstitutor.substitute(new ParameterizedTypeReference(getOwner(), typeParameter));
+		LightweightTypeReference substitute = unboundSubstitutor.substitute(getOwner().newParameterizedTypeReference(typeParameter));
 		getOwner().acceptHint(getHandle(), new LightweightBoundTypeArgument(substitute, BoundTypeArgumentSource.RESOLVED, this, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT));
 		resolvedTo = substitute;
 	}
@@ -336,7 +336,7 @@ public class UnboundTypeReference extends LightweightTypeReference {
 				} else if (varianceHints.isEmpty() && typeArgument.getVariance() == VarianceInfo.OUT && allHints.size() == 1) {
 					LightweightBoundTypeArgument singleHint = allHints.get(0);
 					if (singleHint.getDeclaredVariance() == VarianceInfo.INVARIANT && singleHint.getSource() == BoundTypeArgumentSource.INFERRED_LATER) {
-						WildcardTypeReference wildcard = new WildcardTypeReference(resolvedTo.getOwner());
+						WildcardTypeReference wildcard = resolvedTo.getOwner().newWildcardTypeReference();
 						wildcard.addUpperBound(resolvedTo);
 						resolvedTo = wildcard;
 					}
@@ -434,6 +434,14 @@ public class UnboundTypeReference extends LightweightTypeReference {
 			return resolvedTo.getTypeArguments();
 		}
 		return super.getTypeArguments();
+	}
+	
+	@Override
+	public boolean hasTypeArguments() {
+		if (internalIsResolved()) {
+			return resolvedTo.hasTypeArguments();
+		}
+		return super.hasTypeArguments();
 	}
 	
 	@Override

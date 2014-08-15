@@ -36,7 +36,6 @@ import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
@@ -307,7 +306,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 								if (!typeParameter.getConstraints().isEmpty()) {
 									JvmTypeConstraint constraint = typeParameter.getConstraints().get(0);
 									if (constraint instanceof JvmUpperBound) {
-										LightweightTypeReference reference = new OwnedConverter(getOwner()).toLightweightReference(constraint.getTypeReference());
+										LightweightTypeReference reference = getOwner().toLightweightTypeReference(constraint.getTypeReference());
 										return new LightweightMergedBoundTypeArgument(reference, VarianceInfo.OUT);
 									}
 								}
@@ -321,10 +320,9 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 				}
 				
 				@Override
-				protected LightweightTypeReference doVisitParameterizedTypeReference(ParameterizedTypeReference reference, JvmType type,
-						ConstraintVisitingInfo visiting) {
+				protected LightweightTypeReference enhanceParameterizedTypeReference(ParameterizedTypeReference reference, JvmType type,
+						ParameterizedTypeReference result, ConstraintVisitingInfo visiting) {
 					boolean convertToWildcard = false;
-					ParameterizedTypeReference result = new ParameterizedTypeReference(getOwner(), type);
 					for(int i = 0; i < reference.getTypeArguments().size(); i++) {
 						wasCapturedWildcard = false;
 						LightweightTypeReference argument = reference.getTypeArguments().get(i);
@@ -336,7 +334,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 						result.addTypeArgument(visitedArgument);
 					}
 					if (convertToWildcard) {
-						WildcardTypeReference wildcard = new WildcardTypeReference(result.getOwner());
+						WildcardTypeReference wildcard = result.getOwner().newWildcardTypeReference();
 						wildcard.addUpperBound(result);
 						return wildcard;
 					}
@@ -450,7 +448,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		if (!substitutedComponentType.isAny()) {
 			if (arguments.size() == 1) {
 				ArgumentTypeComputationState first = createVarArgTypeComputationState(substitutedComponentType);
-				ArrayTypeReference arrayTypeReference = new ArrayTypeReference(substitutedComponentType.getOwner(), substitutedComponentType);
+				ArrayTypeReference arrayTypeReference = substitutedComponentType.getOwner().newArrayTypeReference(substitutedComponentType);
 				ArgumentTypeComputationState second = createLinkingTypeComputationState(arrayTypeReference);
 				argumentState = new CompoundTypeComputationState(substitutedComponentType.getOwner(), first, second);
 			} else {
@@ -488,7 +486,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 				protected LightweightTypeReference doVisitWildcardTypeReference(WildcardTypeReference reference, Set<JvmTypeParameter> visiting) {
 					if (reference.isResolved() && reference.isOwnedBy(getOwner()))
 						return reference;
-					WildcardTypeReference result = new WildcardTypeReference(getOwner());
+					WildcardTypeReference result = getOwner().newWildcardTypeReference();
 					LightweightTypeReference lowerBound = reference.getLowerBound();
 					if (lowerBound != null) {
 						LightweightTypeReference visited = visitTypeArgument(lowerBound, visiting, true);
@@ -566,7 +564,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 	protected LightweightTypeReference getDeclaredType(JvmIdentifiableElement feature) {
 		LightweightTypeReference result = state.getResolvedTypes().getActualType(feature);
 		if (result == null) {
-			return new AnyTypeReference(getState().getReferenceOwner());
+			return getState().getReferenceOwner().newAnyTypeReference();
 		}
 		return result;
 	}
@@ -620,13 +618,25 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		if (expectedType != null) {
 			// don't use UnboundTypeReference.getRawTypeReference since that would potentially resolve the unbound candidate
 			if (expectedType instanceof UnboundTypeReference) {
-				expectedType = new ParameterizedTypeReference(expectedType.getOwner(), ((UnboundTypeReference) expectedType).getTypeParameter());
+				JvmTypeParameter typeParameter = ((UnboundTypeReference) expectedType).getTypeParameter();
+				expectedType = expectedType.getOwner().newParameterizedTypeReference(typeParameter);
 			}
 		}
 		return expectedType;
 	}
 
-	protected abstract List<LightweightTypeReference> getSyntacticTypeArguments();
+	protected List<LightweightTypeReference> getSyntacticTypeArguments() {
+		List<LightweightTypeReference> result = Lists.newArrayList();
+		List<JvmTypeReference> typeArguments = getPlainSyntacticTypeArguments();
+		ITypeReferenceOwner referenceOwner = getState().getReferenceOwner();
+		for(int i = 0, size = typeArguments.size(); i < size; i++) {
+			LightweightTypeReference typeArgument = referenceOwner.toLightweightTypeReference(typeArguments.get(i));
+			result.add(typeArgument);
+		}
+		return result;
+	}
+	
+	protected abstract List<JvmTypeReference> getPlainSyntacticTypeArguments();
 	
 	public abstract JvmIdentifiableElement getFeature();
 	

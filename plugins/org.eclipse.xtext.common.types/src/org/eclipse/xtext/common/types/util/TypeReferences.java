@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmInnerTypeReference;
 import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -99,8 +100,10 @@ public class TypeReferences {
 				typeReferences.add(EcoreUtil2.cloneIfContained(jvmTypeReference));
 			}
 		}
+		JvmParameterizedTypeReference reference;
 		if (type instanceof JvmGenericType) {
-			List<JvmTypeParameter> list = ((JvmGenericType) type).getTypeParameters();
+			JvmGenericType casted = (JvmGenericType) type;
+			List<JvmTypeParameter> list = casted.getTypeParameters();
 			if (!typeReferences.isEmpty() && list.size() != typeReferences.size()) {
 				throw new IllegalArgumentException("The type " + type.getIdentifier() + " expects " + list.size()
 						+ " type arguments, but was " + typeReferences.size()
@@ -113,8 +116,16 @@ public class TypeReferences {
 					typeReferences.add(createTypeRef(typeParameter));
 				}
 			}
+			if (!casted.isStatic() && casted.eContainer() instanceof JvmType) {
+				JvmParameterizedTypeReference outer = createTypeRef((JvmType)casted.eContainer());
+				reference = factory.createJvmInnerTypeReference();
+				((JvmInnerTypeReference) reference).setOuter(outer);
+			} else {
+				reference = factory.createJvmParameterizedTypeReference();	
+			}
+		} else {
+			reference = factory.createJvmParameterizedTypeReference();
 		}
-		JvmParameterizedTypeReference reference = factory.createJvmParameterizedTypeReference();
 		reference.setType(type);
 		if (!typeReferences.isEmpty())
 			reference.getArguments().addAll(typeReferences);

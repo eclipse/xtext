@@ -15,7 +15,6 @@ import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.XNumberLiteral
 import org.eclipse.xtext.xbase.XStringLiteral
 import org.eclipse.xtext.xbase.typesystem.arguments.VarArgFeatureCallArguments
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.junit.Test
 
 /**
@@ -204,7 +203,7 @@ class VarArgFeatureCallArgumentsTest extends AbstractTestingTypeReferenceOwner {
 		val featureCall = body.expressions.head as XFeatureCall
 		val arguments = featureCall.featureCallArguments
 		val operation = function.directlyInferredOperation
-		val result = factory.createVarArgArguments(arguments, operation.parameters, receiver, new OwnedConverter(this))
+		val result = factory.createVarArgArguments(arguments, operation.parameters, receiver, owner)
 		assertTrue(result.class == VarArgFeatureCallArguments)
 		return result
 	}

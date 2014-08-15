@@ -15,15 +15,17 @@ import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.InnerFunctionTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.InnerTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithParameterAndNonNullResult;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithParameterAndResult;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class LocalTypeSubstitutor extends TypeReferenceVisitorWithParameterAndNonNullResult<VarianceInfo, LocalTypeSubstitutor.SubstitutionResult> {
+public class LocalTypeSubstitutor extends TypeReferenceVisitorWithParameterAndResult<VarianceInfo, LocalTypeSubstitutor.SubstitutionResult> {
 	
 	static class SubstitutionResult {
 		final LightweightTypeReference typeReference;
@@ -48,8 +50,12 @@ public class LocalTypeSubstitutor extends TypeReferenceVisitorWithParameterAndNo
 	
 	@Override
 	protected LocalTypeSubstitutor.SubstitutionResult doVisitFunctionTypeReference(FunctionTypeReference reference, VarianceInfo varianceInfo) {
-		FunctionTypeReference result = new FunctionTypeReference(getOwner(), reference.getType());
-		boolean didSubstitute = false;
+		FunctionTypeReference result = owner.newFunctionTypeReference(reference.getType());
+		return doSubstituteFunctionType(reference, result, false);
+	}
+
+	protected LocalTypeSubstitutor.SubstitutionResult doSubstituteFunctionType(FunctionTypeReference reference, FunctionTypeReference result,
+			boolean didSubstitute) {
 		for(LightweightTypeReference parameterType: reference.getParameterTypes()) {
 			SubstitutionResult visited = visitTypeArgument(parameterType, VarianceInfo.IN);
 			didSubstitute = didSubstitute || visited.didSubstitute;
@@ -68,6 +74,13 @@ public class LocalTypeSubstitutor extends TypeReferenceVisitorWithParameterAndNo
 		}
 		return new SubstitutionResult(result, didSubstitute);
 	}
+	
+	@Override
+	protected SubstitutionResult doVisitInnerFunctionTypeReference(InnerFunctionTypeReference reference, VarianceInfo varianceInfo) {
+		SubstitutionResult visitedOuter = reference.getOuter().accept(this, varianceInfo);
+		InnerFunctionTypeReference result = owner.newFunctionTypeReference(visitedOuter.typeReference, reference.getType());
+		return doSubstituteFunctionType(reference, result, visitedOuter.didSubstitute);
+	}
 
 	protected LocalTypeSubstitutor.SubstitutionResult visitTypeArgument(LightweightTypeReference reference, VarianceInfo varianceInfo) {
 		return reference.accept(this, varianceInfo);
@@ -83,7 +96,7 @@ public class LocalTypeSubstitutor extends TypeReferenceVisitorWithParameterAndNo
 				case OUT:
 					return new SubstitutionResult(visited.typeReference, true);
 				case INVARIANT:
-					WildcardTypeReference wc = new WildcardTypeReference(owner);
+					WildcardTypeReference wc = owner.newWildcardTypeReference();
 					wc.addUpperBound(visited.typeReference);
 					return new SubstitutionResult(wc, true);
 				default:
@@ -91,7 +104,7 @@ public class LocalTypeSubstitutor extends TypeReferenceVisitorWithParameterAndNo
 				
 			}
 		}
-		ParameterizedTypeReference result = new ParameterizedTypeReference(getOwner(), reference.getType());
+		ParameterizedTypeReference result = owner.newParameterizedTypeReference(reference.getType());
 		boolean didSubstitute = false;
 		for(LightweightTypeReference argument: reference.getTypeArguments()) {
 			SubstitutionResult visited = visitTypeArgument(argument, VarianceInfo.INVARIANT);
@@ -104,7 +117,7 @@ public class LocalTypeSubstitutor extends TypeReferenceVisitorWithParameterAndNo
 				case OUT:
 					return new SubstitutionResult(result, true);
 				case INVARIANT:
-					WildcardTypeReference wc = new WildcardTypeReference(owner);
+					WildcardTypeReference wc = owner.newWildcardTypeReference();
 					wc.addUpperBound(result);
 					return new SubstitutionResult(wc, true);
 				default:
@@ -117,7 +130,7 @@ public class LocalTypeSubstitutor extends TypeReferenceVisitorWithParameterAndNo
 	
 	@Override
 	protected LocalTypeSubstitutor.SubstitutionResult doVisitWildcardTypeReference(WildcardTypeReference reference, VarianceInfo varianceInfo) {
-		WildcardTypeReference result = new WildcardTypeReference(getOwner());
+		WildcardTypeReference result = owner.newWildcardTypeReference();
 		LightweightTypeReference lowerBound = reference.getLowerBound();
 		boolean didSubstitute = false;
 		if (lowerBound != null) {
@@ -137,10 +150,54 @@ public class LocalTypeSubstitutor extends TypeReferenceVisitorWithParameterAndNo
 	}
 	
 	@Override
+	protected SubstitutionResult doVisitInnerTypeReference(InnerTypeReference reference, VarianceInfo varianceInfo) {
+		JvmType type = reference.getType();
+		if (!(type instanceof JvmTypeParameter) && EcoreUtil.isAncestor(boundary, type)) {
+			SubstitutionResult visited = reference.getSuperTypes().get(0).accept(this, varianceInfo);
+			switch(varianceInfo) {
+				case IN:
+				case OUT:
+					return new SubstitutionResult(visited.typeReference, true);
+				case INVARIANT:
+					WildcardTypeReference wc = owner.newWildcardTypeReference();
+					wc.addUpperBound(visited.typeReference);
+					return new SubstitutionResult(wc, true);
+				default:
+					throw new IllegalStateException();
+				
+			}
+		}
+		
+		SubstitutionResult visitedOuter = reference.getOuter().accept(this, varianceInfo);
+		InnerTypeReference result = owner.newParameterizedTypeReference(visitedOuter.typeReference, reference.getType());
+		boolean didSubstitute = visitedOuter.didSubstitute;
+		for(LightweightTypeReference argument: reference.getTypeArguments()) {
+			SubstitutionResult visited = visitTypeArgument(argument, VarianceInfo.INVARIANT);
+			result.addTypeArgument(visited.typeReference);
+			didSubstitute = didSubstitute || visited.didSubstitute;
+		}
+		if (didSubstitute) {
+			switch(varianceInfo) {
+				case IN:
+				case OUT:
+					return new SubstitutionResult(result, true);
+				case INVARIANT:
+					WildcardTypeReference wc = owner.newWildcardTypeReference();
+					wc.addUpperBound(result);
+					return new SubstitutionResult(wc, true);
+				default:
+					throw new IllegalStateException();
+				
+			}
+		}
+		return new SubstitutionResult(reference, false);
+	}
+	
+	@Override
 	protected LocalTypeSubstitutor.SubstitutionResult doVisitArrayTypeReference(ArrayTypeReference reference, VarianceInfo varianceInfo) {
 		SubstitutionResult visited = reference.getComponentType().accept(this, varianceInfo);
 		if (visited.didSubstitute) {
-			new SubstitutionResult(new ArrayTypeReference(getOwner(), visited.typeReference), true);
+			return new SubstitutionResult(owner.newArrayTypeReference(visited.typeReference), true);
 		}
 		return new SubstitutionResult(reference, false);
 	}
@@ -152,7 +209,7 @@ public class LocalTypeSubstitutor extends TypeReferenceVisitorWithParameterAndNo
 	
 	@Override
 	protected LocalTypeSubstitutor.SubstitutionResult doVisitCompoundTypeReference(CompoundTypeReference reference, VarianceInfo varianceInfo) {
-		CompoundTypeReference result = new CompoundTypeReference(getOwner(), reference.isSynonym());
+		CompoundTypeReference result = owner.newCompoundTypeReference(reference.isSynonym());
 		boolean didSubstitute = false;
 		for(LightweightTypeReference component: reference.getMultiTypeComponents()) {
 			SubstitutionResult visited = visitTypeArgument(component, varianceInfo);

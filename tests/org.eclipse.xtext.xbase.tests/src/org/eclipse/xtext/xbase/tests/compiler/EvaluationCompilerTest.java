@@ -24,8 +24,8 @@ import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider;
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -135,7 +135,8 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 			model = expression(xtendCode, true);
 			XbaseCompiler compiler = compilerProvider.get();
 			JvmType objectType = typeReferences.findDeclaredType(Object.class, model);
-			ParameterizedTypeReference objectRef = new ParameterizedTypeReference(new StandardTypeReferenceOwner(services, model), objectType);
+			StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, model);
+			ParameterizedTypeReference objectRef = owner.newParameterizedTypeReference(objectType);
 			compiler.compile(model, appendable, objectRef);
 		} catch (Exception e) {
 			throw new RuntimeException("Xtend compilation failed", e);

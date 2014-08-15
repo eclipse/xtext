@@ -32,8 +32,6 @@ import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
@@ -174,7 +172,7 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 	}
 
 	protected void prepareResultType() {
-		resultClosureType = new FunctionTypeReference(expectedClosureType.getOwner(), expectedClosureType.getType());
+		resultClosureType = expectedClosureType.getOwner().newFunctionTypeReference(expectedClosureType.getType());
 		for (LightweightTypeReference argument : expectedClosureType.getTypeArguments()) {
 			resultClosureType.addTypeArgument(argument);
 		}
@@ -182,8 +180,7 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 
 	protected FunctionTypeReference initKnownClosureType(JvmType type, JvmOperation operation) {
 		ITypeReferenceOwner owner = getExpectation().getReferenceOwner();
-		FunctionTypeReference result = new FunctionTypeReference(owner, type);
-		OwnedConverter converter = new OwnedConverter(owner);
+		FunctionTypeReference result = owner.newFunctionTypeReference(type);
 		TypeParameterByUnboundSubstitutor substitutor = new TypeParameterByUnboundSubstitutor(
 				Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument> emptyMap(), owner) {
 			@Override
@@ -195,16 +192,16 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 		if (type instanceof JvmTypeParameterDeclarator) {
 			List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) type).getTypeParameters();
 			for (JvmTypeParameter typeParameter : typeParameters) {
-				ParameterizedTypeReference parameterReference = new ParameterizedTypeReference(owner, typeParameter);
-				LightweightTypeReference substituted = substitutor.substitute(parameterReference);
+				LightweightTypeReference typeParameterReference = owner.newParameterizedTypeReference(typeParameter);
+				LightweightTypeReference substituted = substitutor.substitute(typeParameterReference);
 				result.addTypeArgument(substituted);
 			}
 			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> definedMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(result);
 			substitutor.enhanceMapping(definedMapping);
 		}
-		LightweightTypeReference declaredReturnType = converter.toLightweightReference(operation.getReturnType());
+		LightweightTypeReference declaredReturnType = owner.toLightweightTypeReference(operation.getReturnType());
 		for (JvmFormalParameter parameter : operation.getParameters()) {
-			LightweightTypeReference lightweight = converter.toLightweightReference(parameter.getParameterType());
+			LightweightTypeReference lightweight = owner.toLightweightTypeReference(parameter.getParameterType());
 			LightweightTypeReference lowerBound = lightweight.getLowerBoundSubstitute();
 			LightweightTypeReference substituted = substitutor.substitute(lowerBound);
 			result.addParameterType(substituted);
@@ -301,7 +298,7 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 					protected void addHint(UnboundTypeReference typeParameter, LightweightTypeReference reference) {
 						LightweightTypeReference wrapped = reference.getWrapperTypeIfPrimitive();
 						typeParameter.acceptHint(wrapped, BoundTypeArgumentSource.RESOLVED, getOrigin(), getExpectedVariance(), getActualVariance());
-						ParameterizedTypeReference typeParameterReference = new ParameterizedTypeReference(reference.getOwner(), typeParameter.getTypeParameter());
+						LightweightTypeReference typeParameterReference = reference.getOwner().newParameterizedTypeReference(typeParameter.getTypeParameter());
 						if (validParameterTypes && !typeParameterReference.getRawTypeReference().isAssignableFrom(reference)) {
 							validParameterTypes = false;
 						}

@@ -91,7 +91,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 		if ((flags & RAW_TYPE) != 0 || ((left.isRawType() || right.isRawType()) && (flags & ALLOW_RAW_TYPE_CONVERSION) != 0)) {
 			int result = rawTypeConformanceComputer.isConformant(left, right, flags);
 			if ((result & SUCCESS) != 0) {
-				if (left.isRawType() != right.isRawType() && left.getTypeArguments().isEmpty() != right.getTypeArguments().isEmpty()) {
+				if (left.isRawType() != right.isRawType() && left.hasTypeArguments() != right.hasTypeArguments()) {
 					result |= RAW_TYPE_CONVERSION;
 				}
 			} else {
@@ -112,7 +112,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 	}
 	
 	@Override
-	protected int doIsConformantTypeArguments(ParameterizedTypeReference left, ParameterizedTypeReference right, int flags) {
+	protected int doIsConformantTypeArguments(LightweightTypeReference left, LightweightTypeReference right, int flags) {
 		List<LightweightTypeReference> leftTypeArguments = left.getTypeArguments();
 		List<LightweightTypeReference> rightTypeArguments = right.getTypeArguments();
 		int size = leftTypeArguments.size();
@@ -129,6 +129,38 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 			}
 		} else {
 			return flags;
+		}
+		return doIsConformantOuterType(left, right, flags);
+	}
+
+	protected int doIsConformantOuterType(LightweightTypeReference left, LightweightTypeReference right, int flags) {
+		LightweightTypeReference leftOuter = left.getOuter();
+		LightweightTypeReference rightOuter = right.getOuter();
+		if (leftOuter != null) {
+			JvmType rawLeftOuter = (JvmType) left.getType().eContainer();
+			if (rightOuter != null) {
+				JvmType rawRightOuter = (JvmType) right.getType().eContainer();
+				if (rawLeftOuter != rawRightOuter) {
+					throw new IllegalStateException("References must point to same raw types: " + left + " / " + right);
+				}
+				if (leftOuter.getType() != rawLeftOuter) {
+					leftOuter = leftOuter.getSuperType(rawLeftOuter);
+					if (leftOuter == null) {
+						return flags;
+					}
+				}
+				if (rightOuter.getType() != rawRightOuter) {
+					rightOuter = rightOuter.getSuperType(rawRightOuter);
+					if (rightOuter == null) {
+						return flags;
+					}
+				}
+				return doIsConformantTypeArguments(leftOuter, rightOuter, flags);
+			} else {
+				throw new IllegalStateException("References must point to same raw types: " + left + " / " + right);
+			}
+		} else if (rightOuter != null) {
+			throw new IllegalStateException("References must point to same raw types: " + left + " / " + right);
 		}
 		return flags | SUCCESS;
 	}
@@ -268,7 +300,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 		if (referencesWithSameDistance.size() == 1) {
 			return referencesWithSameDistance.get(0);
 		} else if (referencesWithSameDistance.size() > 1) {
-			CompoundTypeReference result = new CompoundTypeReference(owner, false);
+			CompoundTypeReference result = owner.newCompoundTypeReference(false);
 			for(LightweightTypeReference reference: referencesWithSameDistance) {
 				result.addComponent(reference);
 			}
@@ -422,61 +454,24 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 			JvmType rawType, 
 			ITypeReferenceOwner owner,
 			List<LightweightTypeReference> initiallyRequested) {
-		if (rawType instanceof JvmTypeParameterDeclarator) {
-			List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) rawType).getTypeParameters();
+		EClass rawTypeClass = rawType.eClass();
+		if (rawTypeClass == TypesPackage.Literals.JVM_GENERIC_TYPE) {
 			// if we do not declare any parameters it is safe to return the first candidate
-			if (typeParameters.isEmpty()) {
+			JvmGenericType castedRawType = (JvmGenericType) rawType;
+			if (!hasTypeParameters(castedRawType)) {
 				return getFirstForRawType(all, rawType); 
 			}
-			List<LightweightTypeReference> parameterSuperTypes = Lists.newArrayListWithCapacity(typeParameters.size());
-			for(int i = 0; i < typeParameters.size(); i++) {
-				List<LightweightTypeReference> parameterReferences = Lists.newArrayListWithCapacity(typeParameters.size());
-				for(LightweightTypeReference reference: all.get(rawType)) {
-					if (reference instanceof ParameterizedTypeReference) {
-						ParameterizedTypeReference parameterized = (ParameterizedTypeReference) reference;
-						if (parameterized.getTypeArguments().isEmpty()) { // raw type candidate - best result
-							return parameterized;
-						}
-						LightweightTypeReference parameterReference = parameterized.getTypeArguments().get(i);
-						if (parameterized instanceof FunctionTypeReference && !(parameterReference instanceof WildcardTypeReference)) {
-							FunctionTypeReference functionType = (FunctionTypeReference) parameterized;
-							if (i == typeParameters.size() - 1 && parameterReference.equals(functionType.getReturnType())) { 
-								WildcardTypeReference wildcard = new WildcardTypeReference(owner);
-								wildcard.addUpperBound(parameterReference);
-								parameterReferences.add(wildcard);
-							} else if (functionType.getParameterTypes().contains(parameterReference)) {
-								WildcardTypeReference wildcard = createObjectWildcardReference(owner);
-								wildcard.setLowerBound(parameterReference);
-								parameterReferences.add(wildcard);
-							} else {
-								parameterReferences.add(parameterReference);	
-							}
-						} else {
-							parameterReferences.add(parameterReference);
-						}
-					} else {
-						return null;
-					}
-				}
-				LightweightTypeReference parameterSuperType = getCommonParameterSuperType(parameterReferences, initiallyRequested, owner);
-				if (parameterSuperType == null) {
-					return null;
-				} else {
-					parameterSuperTypes.add(parameterSuperType);
-				}
-			}
-			
-			ParameterizedTypeReference result = new ParameterizedTypeReference(owner, rawType);
-			for(LightweightTypeReference parameterSuperType: parameterSuperTypes) {
-				result.addTypeArgument(parameterSuperType.copyInto(owner));
+			ParameterizedTypeReference result = owner.newParameterizedTypeReference(rawType);
+			if (!enhanceSuperType(Lists.newArrayList(all.get(rawType)), initiallyRequested, result)) {
+				return null;
 			}
 			FunctionTypeReference resultAsFunctionType = result.getAsFunctionTypeReference();
 			if (resultAsFunctionType != null)
 				return resultAsFunctionType;
 			return result;
-		} else if (rawType.eClass() == TypesPackage.Literals.JVM_ARRAY_TYPE) {
+		} else if (rawTypeClass == TypesPackage.Literals.JVM_ARRAY_TYPE) {
 			JvmComponentType componentType = ((JvmArrayType) rawType).getComponentType();
-			Multimap<JvmType,LightweightTypeReference> copiedMultimap = LinkedHashMultimap.create(all);
+			Multimap<JvmType, LightweightTypeReference> copiedMultimap = LinkedHashMultimap.create(all);
 			Collection<LightweightTypeReference> originalReferences = all.get(rawType);
 			List<LightweightTypeReference> componentReferences = Lists.newArrayListWithCapacity(originalReferences.size());
 			for(LightweightTypeReference originalReference: originalReferences) {
@@ -493,12 +488,79 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 					owner,
 					componentRequests);
 			if (componentTypeReference != null) {
-				return new ArrayTypeReference(owner, componentTypeReference);
+				return owner.newArrayTypeReference(componentTypeReference);
 			}
 		}
 		return null;
 	}
+
+	protected boolean enhanceSuperType(List<LightweightTypeReference> superTypes, List<LightweightTypeReference> initiallyRequested,
+			ParameterizedTypeReference result) {
+		JvmType rawType = result.getType();
+		ITypeReferenceOwner owner = result.getOwner();
+		List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) rawType).getTypeParameters();
+		List<LightweightTypeReference> parameterSuperTypes = Lists.newArrayListWithCapacity(superTypes.size());
+		for(int i = 0, size = typeParameters.size(); i < size; i++) {
+			List<LightweightTypeReference> parameterReferences = Lists.newArrayListWithCapacity(typeParameters.size());
+			for(int j = 0, superTypesSize = superTypes.size(); j < superTypesSize; j++) {
+				LightweightTypeReference reference = superTypes.get(j);
+				if (reference instanceof ParameterizedTypeReference) {
+					ParameterizedTypeReference parameterized = (ParameterizedTypeReference) reference;
+					if (!parameterized.hasTypeArguments()) { // raw type candidate - best result
+						return true;
+					}
+					LightweightTypeReference parameterReference = parameterized.getTypeArguments().get(i);
+					if (parameterized instanceof FunctionTypeReference && !(parameterReference instanceof WildcardTypeReference)) {
+						FunctionTypeReference functionType = (FunctionTypeReference) parameterized;
+						if (i == typeParameters.size() - 1 && parameterReference.equals(functionType.getReturnType())) { 
+							WildcardTypeReference wildcard = owner.newWildcardTypeReference();
+							wildcard.addUpperBound(parameterReference);
+							parameterReferences.add(wildcard);
+						} else if (functionType.getParameterTypes().contains(parameterReference)) {
+							WildcardTypeReference wildcard = createObjectWildcardReference(owner);
+							wildcard.setLowerBound(parameterReference);
+							parameterReferences.add(wildcard);
+						} else {
+							parameterReferences.add(parameterReference);	
+						}
+					} else {
+						parameterReferences.add(parameterReference);
+					}
+				} else {
+					return false;
+				}
+			}
+			LightweightTypeReference parameterSuperType = getCommonParameterSuperType(parameterReferences, initiallyRequested, owner);
+			if (parameterSuperType == null) {
+				return false;
+			} else {
+				parameterSuperTypes.add(parameterSuperType);
+			}
+		}
+		for(LightweightTypeReference parameterSuperType: parameterSuperTypes) {
+			result.addTypeArgument(parameterSuperType.copyInto(owner));
+		}
+		LightweightTypeReference outer = result.getOuter();
+		if (outer != null) {
+			List<LightweightTypeReference> outerSuperTypes = Lists.newArrayListWithCapacity(superTypes.size());
+			for(int i = 0, size = superTypes.size(); i < size; i++) {
+				outerSuperTypes.add(superTypes.get(i).getOuter());
+			}
+			enhanceSuperType(outerSuperTypes, initiallyRequested, (ParameterizedTypeReference) outer);
+		}
+		return true;
+	}
 	
+	private boolean hasTypeParameters(JvmGenericType type) {
+		if (!type.getTypeParameters().isEmpty()) {
+			return true;
+		}
+		if (type.eContainer() instanceof JvmGenericType && !type.isStatic()) {
+			return hasTypeParameters((JvmGenericType) type.eContainer());
+		}
+		return false;
+	}
+
 	public LightweightTypeReference getCommonParameterSuperType(List<LightweightTypeReference> types, List<LightweightTypeReference> initiallyRequested, ITypeReferenceOwner owner) {
 		LightweightTypeReference mostSpecialTypeIfAllWildcards = getMostSpecialTypeIfAllWildcards(types, owner);
 		if (mostSpecialTypeIfAllWildcards != null) {
@@ -544,7 +606,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 				return superType;
 			}
 		}
-		WildcardTypeReference result = new WildcardTypeReference(owner);
+		WildcardTypeReference result = owner.newWildcardTypeReference();
 		result.addUpperBound(superType.copyInto(owner));
 		return result;
 	}
@@ -622,8 +684,8 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 
 	protected WildcardTypeReference createObjectWildcardReference(ITypeReferenceOwner owner) {
 		JvmType objectType = owner.getServices().getTypeReferences().findDeclaredType(Object.class, owner.getContextResourceSet());
-		ParameterizedTypeReference objectReference = new ParameterizedTypeReference(owner, objectType);
-		WildcardTypeReference result = new WildcardTypeReference(owner);
+		LightweightTypeReference objectReference = owner.newParameterizedTypeReference(objectType);
+		WildcardTypeReference result = owner.newWildcardTypeReference();
 		result.addUpperBound(objectReference);
 		return result;
 	}

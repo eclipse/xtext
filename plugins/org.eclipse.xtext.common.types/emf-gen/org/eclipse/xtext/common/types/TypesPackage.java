@@ -2937,6 +2937,57 @@ public interface TypesPackage extends EPackage
 	int JVM_CUSTOM_ANNOTATION_VALUE_FEATURE_COUNT = JVM_ANNOTATION_VALUE_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmInnerTypeReferenceImpl <em>Jvm Inner Type Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmInnerTypeReferenceImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmInnerTypeReference()
+	 * @generated
+	 * @since 2.7
+	 */
+	int JVM_INNER_TYPE_REFERENCE = 51;
+
+	/**
+	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.7
+	 */
+	int JVM_INNER_TYPE_REFERENCE__ARGUMENTS = JVM_PARAMETERIZED_TYPE_REFERENCE__ARGUMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.7
+	 */
+	int JVM_INNER_TYPE_REFERENCE__TYPE = JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Outer</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.7
+	 */
+	int JVM_INNER_TYPE_REFERENCE__OUTER = JVM_PARAMETERIZED_TYPE_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Inner Type Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.7
+	 */
+	int JVM_INNER_TYPE_REFERENCE_FEATURE_COUNT = JVM_PARAMETERIZED_TYPE_REFERENCE_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.JvmVisibility <em>Jvm Visibility</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2946,7 +2997,7 @@ public interface TypesPackage extends EPackage
 	 * @since 2.1
 	 * @noreference This field is not intended to be referenced by clients.
 	 */
-	int JVM_VISIBILITY = 51;
+	int JVM_VISIBILITY = 52;
 
 	/**
 	 * The meta object id for the '<em>Iterable</em>' data type.
@@ -2958,7 +3009,7 @@ public interface TypesPackage extends EPackage
 	 * @since 2.1
 	 * @noreference This field is not intended to be referenced by clients.
 	 */
-	int ITERABLE = 52;
+	int ITERABLE = 53;
 
 	/**
 	 * The meta object id for the '<em>IType Reference Visitor</em>' data type.
@@ -2970,7 +3021,7 @@ public interface TypesPackage extends EPackage
 	 * @since 2.1
 	 * @noreference This field is not intended to be referenced by clients.
 	 */
-	int ITYPE_REFERENCE_VISITOR = 53;
+	int ITYPE_REFERENCE_VISITOR = 54;
 
 	/**
 	 * The meta object id for the '<em>IType Reference Visitor With Parameter</em>' data type.
@@ -2982,7 +3033,7 @@ public interface TypesPackage extends EPackage
 	 * @since 2.1
 	 * @noreference This field is not intended to be referenced by clients.
 	 */
-	int ITYPE_REFERENCE_VISITOR_WITH_PARAMETER = 54;
+	int ITYPE_REFERENCE_VISITOR_WITH_PARAMETER = 55;
 
 
 	/**
@@ -4314,6 +4365,29 @@ public interface TypesPackage extends EPackage
 	EAttribute getJvmCustomAnnotationValue_Values();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmInnerTypeReference <em>Jvm Inner Type Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Jvm Inner Type Reference</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmInnerTypeReference
+	 * @generated
+	 * @since 2.7
+	 */
+	EClass getJvmInnerTypeReference();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.JvmInnerTypeReference#getOuter <em>Outer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Outer</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmInnerTypeReference#getOuter()
+	 * @see #getJvmInnerTypeReference()
+	 * @generated
+	 * @since 2.7
+	 */
+	EReference getJvmInnerTypeReference_Outer();
+
+	/**
 	 * Returns the meta object for enum '{@link org.eclipse.xtext.common.types.JvmVisibility <em>Jvm Visibility</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5493,6 +5567,26 @@ public interface TypesPackage extends EPackage
 		 * @since 2.1
 		 */
 		EAttribute JVM_CUSTOM_ANNOTATION_VALUE__VALUES = eINSTANCE.getJvmCustomAnnotationValue_Values();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmInnerTypeReferenceImpl <em>Jvm Inner Type Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.impl.JvmInnerTypeReferenceImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmInnerTypeReference()
+		 * @generated
+		 * @since 2.7
+		 */
+		EClass JVM_INNER_TYPE_REFERENCE = eINSTANCE.getJvmInnerTypeReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Outer</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 * @since 2.7
+		 */
+		EReference JVM_INNER_TYPE_REFERENCE__OUTER = eINSTANCE.getJvmInnerTypeReference_Outer();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.JvmVisibility <em>Jvm Visibility</em>}' enum.

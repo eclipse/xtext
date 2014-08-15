@@ -16,7 +16,6 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.RawTypeSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
@@ -76,7 +75,7 @@ public class ResolvedOperationInHierarchy extends AbstractResolvedOperation {
 			ITypeReferenceOwner owner = getContextType().getOwner();
 			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> additionalMapping = Maps.newHashMapWithExpectedSize(max);
 			for(int i = 0; i < max; i++) {
-				ParameterizedTypeReference localReference = new ParameterizedTypeReference(owner, resolvedTypeParameters.get(i));
+				LightweightTypeReference localReference = owner.newParameterizedTypeReference(resolvedTypeParameters.get(i));
 				additionalMapping.put(typeParameters.get(i), new LightweightMergedBoundTypeArgument(localReference, VarianceInfo.INVARIANT));
 			}
 			result.enhanceMapping(additionalMapping);

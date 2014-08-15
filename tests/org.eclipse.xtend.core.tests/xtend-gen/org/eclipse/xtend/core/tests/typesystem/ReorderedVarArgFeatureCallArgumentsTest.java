@@ -32,8 +32,8 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArgumentSlot;
 import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArguments;
 import org.eclipse.xtext.xbase.typesystem.arguments.ReorderedVarArgFeatureCallArguments;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -261,8 +261,8 @@ public class ReorderedVarArgFeatureCallArgumentsTest extends AbstractTestingType
       final EList<XExpression> arguments = featureCall.getFeatureCallArguments();
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
       EList<JvmFormalParameter> _parameters = operation.getParameters();
-      OwnedConverter _ownedConverter = new OwnedConverter(this);
-      final IFeatureCallArguments result = this.factory.createVarArgArguments(arguments, _parameters, receiver, _ownedConverter);
+      ITypeReferenceOwner _owner = this.getOwner();
+      final IFeatureCallArguments result = this.factory.createVarArgArguments(arguments, _parameters, receiver, _owner);
       Class<? extends IFeatureCallArguments> _class = result.getClass();
       boolean _equals = Objects.equal(_class, ReorderedVarArgFeatureCallArguments.class);
       Assert.assertTrue(_equals);

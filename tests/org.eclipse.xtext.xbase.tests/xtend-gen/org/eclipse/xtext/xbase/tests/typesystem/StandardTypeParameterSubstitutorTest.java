@@ -74,14 +74,13 @@ public class StandardTypeParameterSubstitutorTest extends AbstractXbaseTestCase 
     LightweightTypeReference _typeReference = boundArgument.getTypeReference();
     String _simpleName = _typeReference.getSimpleName();
     Assert.assertEquals(componentType, _simpleName);
-    ITypeReferenceOwner _owner = typeReference.getOwner();
-    ITypeReferenceOwner _owner_1 = typeReference.getOwner();
-    ParameterizedTypeReference _parameterizedTypeReference = new ParameterizedTypeReference(_owner_1, typeParameter);
-    final ArrayTypeReference originalArray = new ArrayTypeReference(_owner, _parameterizedTypeReference);
+    final ITypeReferenceOwner owner = typeReference.getOwner();
+    ParameterizedTypeReference _newParameterizedTypeReference = owner.newParameterizedTypeReference(typeParameter);
+    final ArrayTypeReference originalArray = owner.newArrayTypeReference(_newParameterizedTypeReference);
     String _simpleName_1 = originalArray.getSimpleName();
     Assert.assertEquals("T[]", _simpleName_1);
-    ITypeReferenceOwner _owner_2 = typeReference.getOwner();
-    StandardTypeParameterSubstitutor _standardTypeParameterSubstitutor = new StandardTypeParameterSubstitutor(mapping, _owner_2);
+    ITypeReferenceOwner _owner = typeReference.getOwner();
+    StandardTypeParameterSubstitutor _standardTypeParameterSubstitutor = new StandardTypeParameterSubstitutor(mapping, _owner);
     final LightweightTypeReference substitutedArray = _standardTypeParameterSubstitutor.substitute(originalArray);
     return substitutedArray;
   }
