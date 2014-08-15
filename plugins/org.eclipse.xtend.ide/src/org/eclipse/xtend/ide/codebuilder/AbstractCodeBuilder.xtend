@@ -22,10 +22,9 @@ import org.eclipse.xtext.xbase.compiler.ISourceAppender
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.common.types.JvmUpperBound
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner
 
 /** 
  * @author Jan Koehnlein
@@ -85,12 +84,11 @@ abstract class AbstractCodeBuilder implements ICodeBuilder {
 					appendable.append(" extends ");
 					var isFirst = true
 					val owner = new StandardTypeReferenceOwner(services, context)
-					val converter = new OwnedConverter(owner) 
 					for(upperBound: upperBounds) {
 						if(!isFirst)
 							appendable.append(" & ")
 						isFirst = false
-						appendable.appendType(converter.apply(upperBound.typeReference), "Object")
+						appendable.appendType(owner.toLightweightTypeReference(upperBound.typeReference), "Object")
 					}
 				}
 				if (iterator.hasNext())

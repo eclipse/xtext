@@ -27,9 +27,8 @@ import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.ContextualVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
@@ -246,7 +245,7 @@ public class DispatchHelper {
 		DispatchSignature dispatchSignature = new DispatchSignature(dispatcherOperation.getSimpleName(), dispatcherOperation.getParameters().size());
 		JvmDeclaredType type = dispatcherOperation.getDeclaringType();
 		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, type);
-		ContextualVisibilityHelper contextualVisibilityHelper = new ContextualVisibilityHelper(visibilityHelper, new ParameterizedTypeReference(owner, type));
+		ContextualVisibilityHelper contextualVisibilityHelper = new ContextualVisibilityHelper(visibilityHelper, owner.newParameterizedTypeReference(type));
 		return getAllDispatchMethods(dispatchSignature, type, contextualVisibilityHelper);
 	}
 	
@@ -270,7 +269,7 @@ public class DispatchHelper {
 		ListMultimap<DispatchSignature, JvmOperation> result = Multimaps2.newLinkedHashListMultimap(2,4);
 		Iterable<JvmOperation> operations = type.getDeclaredOperations();
 		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, type);
-		ContextualVisibilityHelper contextualVisibilityHelper = new ContextualVisibilityHelper(visibilityHelper, new ParameterizedTypeReference(owner, type));
+		ContextualVisibilityHelper contextualVisibilityHelper = new ContextualVisibilityHelper(visibilityHelper, owner.newParameterizedTypeReference(type));
 		for(JvmOperation operation: operations) {
 			if (isDispatchFunction(operation)) {
 				DispatchSignature signature = new DispatchSignature(operation.getSimpleName().substring(1), operation.getParameters().size());

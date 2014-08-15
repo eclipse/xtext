@@ -31,8 +31,8 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDeclarativeHoverSignatureProvider;
 
@@ -115,8 +115,8 @@ public class XtendHoverSignatureProvider extends XbaseDeclarativeHoverSignatureP
 	protected String getTypeName(JvmTypeReference typeReference) {
 		JvmType type = typeReference.getType();
 		if (type instanceof JvmDeclaredType) {
-			OwnedConverter converter = new OwnedConverter(new StandardTypeReferenceOwner(services, type));
-			return converter.toLightweightReference(typeReference).getHumanReadableName();
+			ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, type);
+			return owner.toLightweightTypeReference(typeReference).getHumanReadableName();
 		}
 		return typeReference.getSimpleName();
 	}

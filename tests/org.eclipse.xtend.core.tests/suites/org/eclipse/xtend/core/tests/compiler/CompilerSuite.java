@@ -88,6 +88,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	NestedClassCompilerTest.class,
 	OverloadedExtensionCompilerTest.class,
 	ParameterizedTypeCompilerTest.class,
+	ParameterizedInnerTypesCompilerTest.class,
 	PostfixOperatorCompilerTest.class,
 	PropertyCompilerTest.class,
 	TestBatchCompiler.class,
