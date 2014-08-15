@@ -334,7 +334,7 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 	public String[] getRequiredBundlesUi(Grammar grammar) {
 		if (!usesXbaseGrammar(grammar))
 			return new String[0];
-		return new String[] { "org.eclipse.xtext.xbase.ui" };
+		return new String[] { "org.eclipse.xtext.xbase.ui", "org.eclipse.jdt.debug.ui"};
 	}
 
 	@Override

@@ -129,4 +129,14 @@
             contextId="org.eclipse.xtext.ui.XtextEditorScope"
             platform="gtk"/>
     </extension>
+    <extension
+         point="org.eclipse.core.expressions.propertyTesters">
+      <propertyTester
+            class="org.eclipse.xtext.xbase.ui.debug.XbaseBreakpointPropertyTester"
+            id="org.eclipse.xtext.xbase.ui.debug.XbaseBreakpointPropertyTester"
+            namespace="org.eclipse.xtext.xbase.ui.debug"
+            properties="isStratumBreakpointForLanguage"
+            type="java.lang.Object">
+    </propertyTester>
+   </extension>
 </plugin>

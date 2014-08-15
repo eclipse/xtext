@@ -59,6 +59,7 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 	private final static Logger log = Logger.getLogger(StratumBreakpointAdapterFactory.class);
 
 	private static final String ORG_ECLIPSE_JDT_DEBUG_CORE_SOURCE_NAME = "org.eclipse.jdt.debug.core.sourceName";
+	public static final String ORG_ECLIPSE_XTEXT_XBASE_LANGUAGE_NAME = "org.eclipse.xtext.xbase.language.name";
 
 	@Inject
 	private IResourceServiceProvider.Registry providerRegistry;
@@ -135,6 +136,7 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 			if (uri != null)
 				attributes.put(JarFileMarkerAnnotationModel.MARKER_URI, uri.toString());
 			attributes.put(ORG_ECLIPSE_JDT_DEBUG_CORE_SOURCE_NAME, data.name);
+			attributes.put(ORG_ECLIPSE_XTEXT_XBASE_LANGUAGE_NAME, data.lang.getLanguageName());
 
 			final IJavaStratumLineBreakpoint breakpoint = JDIDebugModel.createStratumBreakpoint(res, shortName, null,
 					null, data.types, line, charStart, charEnd, 0, true, attributes);
