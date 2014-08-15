@@ -13,7 +13,6 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeAssigner;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -43,7 +42,7 @@ public class CompoundTypeAssigner implements ITypeAssigner {
 	}
 
 	public LightweightTypeReference toLightweightTypeReference(JvmTypeReference reference) {
-		return new OwnedConverter(owner).toLightweightReference(reference);
+		return owner.toLightweightTypeReference(reference);
 	}
 	
 	public ITypeReferenceOwner getReferenceOwner() {

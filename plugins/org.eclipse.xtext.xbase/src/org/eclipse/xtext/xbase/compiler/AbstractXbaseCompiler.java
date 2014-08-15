@@ -48,10 +48,9 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.conformance.RawTypeConformanceComputer;
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 import com.google.inject.Inject;
@@ -133,7 +132,7 @@ public abstract class AbstractXbaseCompiler {
 	}
 	
 	protected LightweightTypeReference toLightweight(JvmTypeReference reference, EObject context) {
-		return new OwnedConverter(newTypeReferenceOwner(context)).apply(reference);
+		return newTypeReferenceOwner(context).toLightweightTypeReference(reference);
 	}
 	
 	public ITreeAppendable compile(XExpression obj, ITreeAppendable appendable, LightweightTypeReference expectedReturnType) {
@@ -144,7 +143,7 @@ public abstract class AbstractXbaseCompiler {
 	public ITreeAppendable compileAsJavaExpression(XExpression obj, ITreeAppendable parentAppendable, JvmTypeReference expectedType) {
 		LightweightTypeReference converted = null;
 		if (expectedType != null) {
-			converted = new OwnedConverter(new StandardTypeReferenceOwner(getTypeComputationServices(), obj)).toLightweightReference(expectedType);
+			converted = newTypeReferenceOwner(obj).toLightweightTypeReference(expectedType);
 		}
 		return compileAsJavaExpression(obj, parentAppendable, converted);
 	}
@@ -270,7 +269,7 @@ public abstract class AbstractXbaseCompiler {
 	public ITreeAppendable compile(XExpression obj, ITreeAppendable parentAppendable, /* @Nullable */ JvmTypeReference expectedReturnType, /* @Nullable */ Set<JvmTypeReference> declaredExceptions) {
 		LightweightTypeReference converted = null;
 		if (expectedReturnType != null) {
-			converted = new OwnedConverter(new StandardTypeReferenceOwner(getTypeComputationServices(), obj)).toLightweightReference(expectedReturnType);
+			converted = newTypeReferenceOwner(obj).toLightweightTypeReference(expectedReturnType);
 		}
 		return compile(obj, parentAppendable, converted, declaredExceptions);
 	}

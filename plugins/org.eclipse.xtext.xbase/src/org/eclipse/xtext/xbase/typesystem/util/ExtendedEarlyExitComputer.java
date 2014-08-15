@@ -32,7 +32,6 @@ import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -177,7 +176,7 @@ public class ExtendedEarlyExitComputer {
 		}
 
 		public LightweightTypeReference toLightweightReference(JvmTypeReference exception) {
-			return new OwnedConverter(owner).toLightweightReference(exception);
+			return owner.toLightweightTypeReference(exception);
 		}
 
 		public void accept(LightweightTypeReference type) {

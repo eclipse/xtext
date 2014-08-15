@@ -26,7 +26,6 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
@@ -175,7 +174,7 @@ public class StackedResolvedTypes extends ResolvedTypes {
 						if (unbound.getExpression() instanceof XConstructorCall) {
 							unbound.resolve(); // resolve against constraints 
 						} else {
-							unbound.acceptHint(new ParameterizedTypeReference(unbound.getOwner(), unbound.getTypeParameter()), 
+							unbound.acceptHint(unbound.getOwner().newParameterizedTypeReference(unbound.getTypeParameter()), 
 									BoundTypeArgumentSource.RESOLVED, unbound, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
 						}
 					}

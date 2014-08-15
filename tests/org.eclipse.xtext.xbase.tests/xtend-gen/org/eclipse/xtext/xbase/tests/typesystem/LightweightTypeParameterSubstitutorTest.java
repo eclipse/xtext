@@ -8,18 +8,15 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.inject.Inject;
-import java.util.List;
 import java.util.Map;
-import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.tests.typesystem.AbstractTypeParameterSubstitutorTest;
-import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
@@ -28,44 +25,20 @@ import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
  * @author Sebastian Zarnekow
  */
 @SuppressWarnings("all")
-public class LightweightTypeParameterSubstitutorTest extends AbstractTypeParameterSubstitutorTest implements ITypeReferenceOwner {
+public class LightweightTypeParameterSubstitutorTest extends AbstractTypeParameterSubstitutorTest {
   @Inject
   private CommonTypeComputationServices services;
   
-  @Extension
-  private OwnedConverter _ownedConverter = new OwnedConverter(this);
-  
   public String resolve(final JvmTypeReference declaration, final JvmTypeReference reference) {
+    JvmType _type = declaration.getType();
+    @Extension
+    final StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(this.services, _type);
     DeclaratorTypeArgumentCollector _declaratorTypeArgumentCollector = new DeclaratorTypeArgumentCollector();
-    LightweightTypeReference _lightweightReference = this._ownedConverter.toLightweightReference(declaration);
-    final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = _declaratorTypeArgumentCollector.getTypeParameterMapping(_lightweightReference);
-    StandardTypeParameterSubstitutor _standardTypeParameterSubstitutor = new StandardTypeParameterSubstitutor(mapping, this);
-    LightweightTypeReference _lightweightReference_1 = this._ownedConverter.toLightweightReference(reference);
-    LightweightTypeReference _substitute = _standardTypeParameterSubstitutor.substitute(_lightweightReference_1);
+    LightweightTypeReference _lightweightTypeReference = owner.toLightweightTypeReference(declaration);
+    final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = _declaratorTypeArgumentCollector.getTypeParameterMapping(_lightweightTypeReference);
+    StandardTypeParameterSubstitutor _standardTypeParameterSubstitutor = new StandardTypeParameterSubstitutor(mapping, owner);
+    LightweightTypeReference _lightweightTypeReference_1 = owner.toLightweightTypeReference(reference);
+    LightweightTypeReference _substitute = _standardTypeParameterSubstitutor.substitute(_lightweightTypeReference_1);
     return _substitute.toString();
-  }
-  
-  public CommonTypeComputationServices getServices() {
-    return this.services;
-  }
-  
-  public void acceptHint(final Object reference, final LightweightBoundTypeArgument boundTypeArgument) {
-    throw new UnsupportedOperationException("Should not be invoked");
-  }
-  
-  public List<LightweightBoundTypeArgument> getAllHints(final Object reference) {
-    throw new UnsupportedOperationException("Should not be invoked");
-  }
-  
-  public List<JvmTypeParameter> getDeclaredTypeParameters() {
-    throw new UnsupportedOperationException("Should not be invoked");
-  }
-  
-  public ResourceSet getContextResourceSet() {
-    return this.getContextResourceSet();
-  }
-  
-  public boolean isResolved(final Object handle) {
-    throw new UnsupportedOperationException("Should not be invoked");
   }
 }

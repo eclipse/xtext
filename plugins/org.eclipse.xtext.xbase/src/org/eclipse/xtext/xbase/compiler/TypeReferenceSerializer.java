@@ -35,9 +35,8 @@ import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 import com.google.inject.Inject;
@@ -190,6 +189,6 @@ public class TypeReferenceSerializer {
 	
 	public JvmTypeReference resolveMultiType(JvmTypeReference reference, EObject context) {
 		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, context.eResource().getResourceSet());
-		return new OwnedConverter(owner).toLightweightReference(reference).toJavaCompliantTypeReference();
+		return owner.toLightweightTypeReference(reference).toJavaCompliantTypeReference();
 	}
 }

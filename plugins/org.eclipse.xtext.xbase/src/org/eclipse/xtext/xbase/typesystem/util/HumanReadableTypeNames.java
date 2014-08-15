@@ -13,6 +13,7 @@ import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.InnerTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithParameter;
@@ -72,6 +73,13 @@ public class HumanReadableTypeNames extends TypeReferenceVisitorWithParameter<St
 			}
 			param.append(">");
 		}
+	}
+	
+	@Override
+	protected void doVisitInnerTypeReference(InnerTypeReference reference, StringBuilder param) {
+		reference.getOuter().accept(this, param);
+		param.append(".");
+		doVisitParameterizedTypeReference(reference, param);
 	}
 	
 	@Override

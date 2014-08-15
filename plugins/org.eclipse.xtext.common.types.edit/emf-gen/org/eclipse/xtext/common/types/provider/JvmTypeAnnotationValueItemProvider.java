@@ -186,6 +186,11 @@ public class JvmTypeAnnotationValueItemProvider extends JvmAnnotationValueItemPr
 			(createChildParameter
 				(TypesPackage.Literals.JVM_TYPE_ANNOTATION_VALUE__VALUES,
 				 TypesFactory.eINSTANCE.createJvmUnknownTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_TYPE_ANNOTATION_VALUE__VALUES,
+				 TypesFactory.eINSTANCE.createJvmInnerTypeReference()));
 	}
 
 }
