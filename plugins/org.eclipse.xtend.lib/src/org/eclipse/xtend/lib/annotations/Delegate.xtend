@@ -64,6 +64,9 @@ import java.util.Map
 @Target(ElementType.FIELD, ElementType.METHOD)
 @Active(DelegateProcessor)
 annotation Delegate {
+	/**
+	 * Specifies which interfaces of the delegate to use for creating methods. By default, all its interfaces are used.
+	 */
 	Class<?>[] value = #[]
 }
 
