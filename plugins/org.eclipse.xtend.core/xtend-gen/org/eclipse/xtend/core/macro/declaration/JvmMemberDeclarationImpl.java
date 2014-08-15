@@ -16,10 +16,11 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationTargetImpl;
+import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
-import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Modifier;
+import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtend.lib.macro.services.AnnotationReferenceProvider;
@@ -30,8 +31,6 @@ import org.eclipse.xtext.common.types.impl.JvmMemberImplCustom;
 import org.eclipse.xtext.common.types.util.DeprecationUtil;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotationTargetImpl<T> implements MemberDeclaration {
@@ -140,16 +139,10 @@ public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmA
     } else {
       T _delegate_1 = this.getDelegate();
       _delegate_1.setDeprecated(false);
-      Iterable<? extends AnnotationReference> _annotations = this.getAnnotations();
-      final Function1<AnnotationReference, Boolean> _function = new Function1<AnnotationReference, Boolean>() {
-        public Boolean apply(final AnnotationReference it) {
-          String _name = Deprecated.class.getName();
-          AnnotationTypeDeclaration _annotationTypeDeclaration = it.getAnnotationTypeDeclaration();
-          String _qualifiedName = _annotationTypeDeclaration.getQualifiedName();
-          return Boolean.valueOf(Objects.equal(_name, _qualifiedName));
-        }
-      };
-      final AnnotationReference existingReference = IterableExtensions.findFirst(_annotations, _function);
+      CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
+      TypeLookupImpl _typeLookup = _compilationUnit_1.getTypeLookup();
+      Type _findTypeGlobally = _typeLookup.findTypeGlobally(Deprecated.class);
+      final AnnotationReference existingReference = this.findAnnotation(_findTypeGlobally);
       boolean _notEquals = (!Objects.equal(existingReference, null));
       if (_notEquals) {
         this.removeAnnotation(existingReference);
