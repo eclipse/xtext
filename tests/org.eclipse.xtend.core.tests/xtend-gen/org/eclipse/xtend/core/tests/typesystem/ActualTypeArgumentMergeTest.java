@@ -21,7 +21,6 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -30,6 +29,7 @@ import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -79,7 +79,8 @@ public class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwn
       final XtendFunction function = this.function(_string);
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
       EList<JvmTypeParameter> _typeParameters = operation.getTypeParameters();
-      final ActualTypeArgumentCollector collector = new ActualTypeArgumentCollector(_typeParameters, BoundTypeArgumentSource.INFERRED, this);
+      ITypeReferenceOwner _owner = this.getOwner();
+      final ActualTypeArgumentCollector collector = new ActualTypeArgumentCollector(_typeParameters, BoundTypeArgumentSource.INFERRED, _owner);
       int _size = ((List<String>)Conversions.doWrapArray(alternatingTypeReferences)).size();
       int _minus = (_size - 1);
       IntegerRange _upTo = new IntegerRange(0, _minus);
@@ -88,12 +89,12 @@ public class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwn
         EList<JvmFormalParameter> _parameters = operation.getParameters();
         JvmFormalParameter _get = _parameters.get((i).intValue());
         JvmTypeReference _parameterType = _get.getParameterType();
-        LightweightTypeReference _lightweightReference = this.toLightweightReference(_parameterType);
+        LightweightTypeReference _lightweightTypeReference = this.toLightweightTypeReference(_parameterType);
         EList<JvmFormalParameter> _parameters_1 = operation.getParameters();
         JvmFormalParameter _get_1 = _parameters_1.get(((i).intValue() + 1));
         JvmTypeReference _parameterType_1 = _get_1.getParameterType();
-        LightweightTypeReference _lightweightReference_1 = this.toLightweightReference(_parameterType_1);
-        collector.populateTypeParameterMapping(_lightweightReference, _lightweightReference_1);
+        LightweightTypeReference _lightweightTypeReference_1 = this.toLightweightTypeReference(_parameterType_1);
+        collector.populateTypeParameterMapping(_lightweightTypeReference, _lightweightTypeReference_1);
       }
       return collector.getTypeParameterMapping();
     } catch (Throwable _e) {
@@ -108,7 +109,8 @@ public class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwn
       boolean _equals = Objects.equal(_simpleName, typeParamName);
       if (_equals) {
         final List<LightweightBoundTypeArgument> mappingData = mapping.get(key);
-        LightweightMergedBoundTypeArgument _merge = this.merger.merge(mappingData, this);
+        ITypeReferenceOwner _owner = this.getOwner();
+        LightweightMergedBoundTypeArgument _merge = this.merger.merge(mappingData, _owner);
         return Pair.<Map<JvmTypeParameter, List<LightweightBoundTypeArgument>>, LightweightMergedBoundTypeArgument>of(mapping, _merge);
       }
     }
@@ -148,10 +150,6 @@ public class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwn
       _xblockexpression = merged.getKey();
     }
     return _xblockexpression;
-  }
-  
-  public List<JvmTypeParameter> getDeclaredTypeParameters() {
-    return CollectionLiterals.<JvmTypeParameter>emptyList();
   }
   
   @Test

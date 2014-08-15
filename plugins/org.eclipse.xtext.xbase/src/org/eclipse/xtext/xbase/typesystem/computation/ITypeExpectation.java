@@ -14,7 +14,6 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 /**
@@ -28,8 +27,6 @@ public interface ITypeExpectation {
 	
 	void acceptActualType(LightweightTypeReference type, int flags);
 
-	OwnedConverter getConverter();
-	
 	ITypeReferenceOwner getReferenceOwner();
 	
 	/**

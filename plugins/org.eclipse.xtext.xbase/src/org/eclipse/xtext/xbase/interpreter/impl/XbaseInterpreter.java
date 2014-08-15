@@ -92,9 +92,8 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 import org.eclipse.xtext.xbase.util.XSwitchExpressions;
@@ -505,7 +504,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	protected Object _doEvaluate(XCastedExpression castedExpression, IEvaluationContext context, CancelIndicator indicator) {
 		Object result = internalEvaluate(castedExpression.getTarget(), context, indicator);
 		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, castedExpression);
-		LightweightTypeReference targetType = new OwnedConverter(owner).toLightweightReference(castedExpression.getType());
+		LightweightTypeReference targetType = owner.toLightweightTypeReference(castedExpression.getType());
 		result = wrapOrUnwrapArray(result, targetType);
 		result = coerceArgumentType(result, castedExpression.getType());
 		JvmType castType = castedExpression.getType().getType();

@@ -13,7 +13,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArguments;
 import org.eclipse.xtext.xbase.typesystem.internal.ExpressionArgumentFactory;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -21,11 +21,11 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 public class TestableExpressionArgumentFactory extends ExpressionArgumentFactory {
 	
 	public IFeatureCallArguments createStandardArguments(List<XExpression> arguments,
-			List<JvmFormalParameter> parameters, boolean hasReceiver, OwnedConverter converter) {
-		return createArgumentsForExecutable(false, arguments, parameters, hasReceiver, converter);
+			List<JvmFormalParameter> parameters, boolean hasReceiver, ITypeReferenceOwner owner) {
+		return createArgumentsForExecutable(false, arguments, parameters, hasReceiver, owner);
 	}
 	public IFeatureCallArguments createVarArgArguments(List<XExpression> arguments,
-			List<JvmFormalParameter> parameters, boolean hasReceiver, OwnedConverter converter) {
-		return createArgumentsForExecutable(true, arguments, parameters, hasReceiver, converter);
+			List<JvmFormalParameter> parameters, boolean hasReceiver, ITypeReferenceOwner owner) {
+		return createArgumentsForExecutable(true, arguments, parameters, hasReceiver, owner);
 	}
 }

@@ -9,19 +9,11 @@ package org.eclipse.xtend.core.tests.macro
 
 import com.google.inject.Inject
 import com.google.inject.Provider
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
 import org.eclipse.xtend.core.tests.typesystem.AssignabilityTest
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
-import org.eclipse.xtext.common.types.JvmTypeReference
-import org.eclipse.xtext.xbase.lib.Pair
-import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
-import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
-import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference
-import org.eclipse.emf.ecore.util.EcoreUtil
-import org.junit.Ignore
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -35,44 +27,43 @@ class TypeReferenceAssignabilityTest extends AssignabilityTest {
 			key.fixup» lhs, «rhs.fixup» rhs) {}'''
 		val function = function(signature.toString)
 		val operation = function.directlyInferredOperation
-		
 		val xtendFile = EcoreUtil.getRootContainer(function) as XtendFile
-		xtendFile.asCompilationUnit [ extension unit |
+		xtendFile.asCompilationUnit [ it |
 			val lhsType = if (lhsAndParams.key != null)
-					operation.parameters.head.parameterType.newTypeReference(unit).toLightweightTypeReference
+					toTypeReference(operation.parameters.head.parameterType)
 				else
-					new AnyTypeReference(this)
+					toTypeReference(owner.newAnyTypeReference)
 			val rhsType = if (rhs != null)
-					operation.parameters.last.parameterType.newTypeReference(unit).toLightweightTypeReference
+					toTypeReference(operation.parameters.last.parameterType)
 				else
-					new AnyTypeReference(this)
+					toTypeReference(owner.newAnyTypeReference)
 			assertEquals(lhsType.simpleName + " := " + rhsType.simpleName, expectation,
-				lhsType.testIsAssignable(rhsType))
+				testIsAssignable(lhsType, rhsType))
 			if (expectation) {
-				for (superType : lhsType.allSuperTypes) {
+				for (superType : lhsType.declaredSuperTypes) {
 					if (superType.array == lhsType.array || lhsType.array == rhsType.array)
-						assertEquals(superType.toString, expectation, superType.testIsAssignable(rhsType))
+						assertEquals(superType.toString, expectation, testIsAssignable(superType, rhsType))
 				}
 			}
 		]
 	}
-
-	override testIsAssignable(LightweightTypeReference lhs, LightweightTypeReference rhs) {
+	
+	def boolean testIsAssignable(CompilationUnitImpl unit, TypeReference lhs, TypeReference rhs) { 
 		assertTrue(lhs.doIsAssignable(lhs))
-		assertTrue(lhs.doIsAssignable(lhs.toTypeReference.toLightweightReference))
-		assertTrue(rhs.doIsAssignable(rhs.toTypeReference.toLightweightReference))
+		assertTrue(rhs.doIsAssignable(rhs))
 		val boolean result = lhs.doIsAssignable(rhs)
-		if (!rhs.primitiveVoid) {
-			val wcRhs = new WildcardTypeReference(rhs.owner)
-			wcRhs.addUpperBound(rhs.wrapperTypeIfPrimitive)
-			assertEquals(result, lhs.doIsAssignable(wcRhs))
-			val compoundRhs = new CompoundTypeReference(rhs.owner, true)
-			compoundRhs.addComponent(rhs)
-			val object = rhs.owner.services.typeReferences.findDeclaredType(Object, rhs.owner.contextResourceSet)
-			compoundRhs.addComponent(new ParameterizedTypeReference(rhs.owner, object))
-			assertEquals(lhs + ' := ' + compoundRhs.toString, result, lhs.doIsAssignable(compoundRhs))
-		}
+		
+		// TODO cannot use this variation since newWildcardTypeReference is lossy with the rhs
+		// e.g. it is not exactly the RHS that is passed to the method 
+//		if (!rhs.isVoid) {
+//			val wcRhs = unit.typeReferenceProvider.newWildcardTypeReference(rhs.wrapperIfPrimitive)
+//			assertEquals(result, lhs.doIsAssignable(wcRhs))
+//		}
 		return result
+	}
+	
+	def boolean doIsAssignable(TypeReference lhs, TypeReference rhs) {
+		return lhs.isAssignableFrom(rhs)
 	}
 
 	def asCompilationUnit(XtendFile file, (CompilationUnitImpl)=>void block) {
@@ -80,50 +71,5 @@ class TypeReferenceAssignabilityTest extends AssignabilityTest {
 		compilationUnit.xtendFile = file
 		block.apply(compilationUnit)
 	}
-
-	def newTypeReference(JvmTypeReference reference, extension CompilationUnitImpl unit) {
-		reference.toTypeReference.toLightweightTypeReference.newTypeReference(unit)
-	}
-
-	def TypeReference newTypeReference(LightweightTypeReference reference, extension CompilationUnitImpl unit) {
-		extension val typeReferenceProvider = unit.typeReferenceProvider
-		val typeArguments = reference.typeArguments.map[newTypeReference(unit)]
-		val invariantBoundSubstitute = reference.invariantBoundSubstitute
-		var depth = 0
-		var LightweightTypeReference componentType = invariantBoundSubstitute
-		while (componentType.array) {
-			componentType = componentType.componentType
-			depth = depth + 1
-		}
-		var typeReference = componentType.type.toType.newTypeReference(typeArguments)
-		if (reference.wildcard) {
-			if (reference.lowerBoundSubstitute == invariantBoundSubstitute) {
-				typeReference = typeReference.newWildcardTypeReferenceWithLowerBound
-			} else {
-				typeReference = typeReference.newWildcardTypeReference
-			}
-		}
-		var i = 0
-		while (i < depth) {
-			i = i + 1
-			typeReference = typeReference.newArrayTypeReference
-		}
-		typeReference
-	}
 	
-	@Ignore
-	override testFunctionTypeAsParameterized_01() {}
-	
-	@Ignore
-	override testFunctionTypeAsParameterized_02() {}
-	
-	@Ignore
-	override testFunctionTypeAsParameterized_03() {}
-	
-	@Ignore
-	override testFunctionTypeAsParameterized_05() {}
-	
-	@Ignore
-	override testFunctionTypeAsParameterized_06() {}
-
 }

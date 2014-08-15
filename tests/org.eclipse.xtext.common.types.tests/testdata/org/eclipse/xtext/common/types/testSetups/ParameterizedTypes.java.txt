@@ -50,4 +50,8 @@ public abstract class ParameterizedTypes<
 	
 	abstract <Z> Z methodMap(Map<? super Z, ? extends S> map);
 	
+	abstract Inner<W, List<W>, List<W>> plainInner(Inner<W, List<W>, List<W>> p);
+	
+	abstract ParameterizedTypes<String, String, List<String>, V, String>.Inner<String, List<String>, List<String>> concreteInner();
+	
 }

@@ -194,13 +194,13 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
-import org.eclipse.xtext.xbase.typesystem.references.IndexingOwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.IndexingLightweightTypeReferenceFactory;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceFactory;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
@@ -350,7 +350,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   private Map<Object, Object> identityCache = CollectionLiterals.<Object, Object>newHashMap();
   
   @Accessors(AccessorType.PUBLIC_GETTER)
-  private OwnedConverter typeRefConverter;
+  private LightweightTypeReferenceFactory typeRefFactory;
   
   private MutableFileSystemSupport decoratedFileSystemSupport;
   
@@ -387,8 +387,8 @@ public class CompilationUnitImpl implements CompilationUnit {
   public void setXtendFile(final XtendFile xtendFile) {
     this.xtendFile = xtendFile;
     StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, xtendFile);
-    OwnedConverter _ownedConverter = new OwnedConverter(_standardTypeReferenceOwner);
-    this.typeRefConverter = _ownedConverter;
+    LightweightTypeReferenceFactory _lightweightTypeReferenceFactory = new LightweightTypeReferenceFactory(_standardTypeReferenceOwner);
+    this.typeRefFactory = _lightweightTypeReferenceFactory;
   }
   
   public void before(final ActiveAnnotationContexts.AnnotationCallback phase) {
@@ -396,11 +396,11 @@ public class CompilationUnitImpl implements CompilationUnit {
     final StandardTypeReferenceOwner standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, this.xtendFile);
     boolean _equals = Objects.equal(ActiveAnnotationContexts.AnnotationCallback.INDEXING, phase);
     if (_equals) {
-      IndexingOwnedConverter _indexingOwnedConverter = new IndexingOwnedConverter(standardTypeReferenceOwner);
-      this.typeRefConverter = _indexingOwnedConverter;
+      IndexingLightweightTypeReferenceFactory _indexingLightweightTypeReferenceFactory = new IndexingLightweightTypeReferenceFactory(standardTypeReferenceOwner);
+      this.typeRefFactory = _indexingLightweightTypeReferenceFactory;
     } else {
-      OwnedConverter _ownedConverter = new OwnedConverter(standardTypeReferenceOwner);
-      this.typeRefConverter = _ownedConverter;
+      LightweightTypeReferenceFactory _lightweightTypeReferenceFactory = new LightweightTypeReferenceFactory(standardTypeReferenceOwner);
+      this.typeRefFactory = _lightweightTypeReferenceFactory;
     }
     boolean _equals_1 = Objects.equal(ActiveAnnotationContexts.AnnotationCallback.VALIDATION, phase);
     if (_equals_1) {
@@ -977,7 +977,7 @@ public class CompilationUnitImpl implements CompilationUnit {
         }
       }
       if (!_matched) {
-        LightweightTypeReference _lightweightReference = this.typeRefConverter.toLightweightReference(delegate);
+        LightweightTypeReference _lightweightReference = this.typeRefFactory.toLightweightReference(delegate);
         _switchResult = this.toTypeReference(_lightweightReference, delegate);
       }
       _xblockexpression = _switchResult;
@@ -1245,8 +1245,8 @@ public class CompilationUnitImpl implements CompilationUnit {
     if (!_matched) {
       if (typeRef instanceof TypeReferenceImpl) {
         _matched=true;
-        LightweightTypeReference _lightWeightTypeReference = ((TypeReferenceImpl)typeRef).getLightWeightTypeReference();
-        _switchResult = _lightWeightTypeReference.toJavaCompliantTypeReference();
+        LightweightTypeReference _lightweightTypeReference = ((TypeReferenceImpl)typeRef).getLightweightTypeReference();
+        _switchResult = _lightweightTypeReference.toJavaCompliantTypeReference();
       }
     }
     if (!_matched) {
@@ -1266,7 +1266,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     if (!_matched) {
       if (typeRef instanceof TypeReferenceImpl) {
         _matched=true;
-        _switchResult = ((TypeReferenceImpl)typeRef).getLightWeightTypeReference();
+        _switchResult = ((TypeReferenceImpl)typeRef).getLightweightTypeReference();
       }
     }
     if (!_matched) {
@@ -1999,7 +1999,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   @Pure
-  public OwnedConverter getTypeRefConverter() {
-    return this.typeRefConverter;
+  public LightweightTypeReferenceFactory getTypeRefFactory() {
+    return this.typeRefFactory;
   }
 }

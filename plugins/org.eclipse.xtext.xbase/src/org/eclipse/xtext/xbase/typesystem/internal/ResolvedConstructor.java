@@ -7,19 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-
-import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -56,11 +53,8 @@ public class ResolvedConstructor extends AbstractResolvedReference<XConstructorC
 	}
 	
 	@Override
-	protected List<LightweightTypeReference> getSyntacticTypeArguments() {
-		if (isAnonymousClassConstructorCall()) {
-			return Collections.emptyList();
-		}
-		return Lists.transform(getConstructorCall().getTypeArguments(), getState().getResolvedTypes().getConverter());
+	protected List<JvmTypeReference> getPlainSyntacticTypeArguments() {
+		return getConstructorCall().getTypeArguments();
 	}
 	
 	@Override

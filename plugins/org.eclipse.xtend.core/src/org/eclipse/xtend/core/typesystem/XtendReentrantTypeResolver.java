@@ -76,7 +76,6 @@ import org.eclipse.xtext.xbase.typesystem.override.OverrideTester;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.AbstractReentrantTypeReferenceProvider;
@@ -159,7 +158,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 					null,
 					-1,
 					null));
-			AnyTypeReference result = new AnyTypeReference(resolvedTypes.getReferenceOwner());
+			AnyTypeReference result = resolvedTypes.getReferenceOwner().newAnyTypeReference();
 			return typeResolver.toJavaCompliantTypeReference(result, session);
 		}
 	}
@@ -307,15 +306,15 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 			TypeReferences typeReferences = resolvedTypes.getServices().getTypeReferences();
 			ITypeReferenceOwner owner = resolvedTypes.getReferenceOwner();
 			JvmType arrayList = typeReferences.findDeclaredType(ArrayList.class, createOperation);
-			ParameterizedTypeReference arrayListReference = new ParameterizedTypeReference(owner, arrayList);
+			ParameterizedTypeReference arrayListReference = owner.newParameterizedTypeReference(arrayList);
 			JvmType objectType = typeReferences.findDeclaredType(Object.class, createOperation);
-			WildcardTypeReference wildcard = new WildcardTypeReference(owner);
-			wildcard.addUpperBound(new ParameterizedTypeReference(owner, objectType));
+			WildcardTypeReference wildcard = owner.newWildcardTypeReference();
+			wildcard.addUpperBound(owner.newParameterizedTypeReference(objectType));
 			arrayListReference.addTypeArgument(wildcard);
 			JvmType hashMap = typeReferences.findDeclaredType(HashMap.class, createOperation);
-			ParameterizedTypeReference hashMapReference = new ParameterizedTypeReference(owner, hashMap);
+			ParameterizedTypeReference hashMapReference = owner.newParameterizedTypeReference(hashMap);
 			hashMapReference.addTypeArgument(arrayListReference);
-			hashMapReference.addTypeArgument(new OwnedConverter(owner).toLightweightReference(declaredReturnType));
+			hashMapReference.addTypeArgument(owner.toLightweightTypeReference(declaredReturnType));
 			return toJavaCompliantTypeReference(hashMapReference, session);
 		}
 	}

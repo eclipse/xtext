@@ -1197,7 +1197,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup_2_1_5_1 = (Group)cAlternatives_2_1_5.eContents().get(1);
 		private final Group cGroup_2_1_5_1_0 = (Group)cGroup_2_1_5_1.eContents().get(0);
 		private final Assignment cReturnTypeAssignment_2_1_5_1_0_0 = (Assignment)cGroup_2_1_5_1_0.eContents().get(0);
-		private final RuleCall cReturnTypeJvmTypeReferenceParserRuleCall_2_1_5_1_0_0_0 = (RuleCall)cReturnTypeAssignment_2_1_5_1_0_0.eContents().get(0);
+		private final RuleCall cReturnTypeTypeReferenceWithTypeArgsParserRuleCall_2_1_5_1_0_0_0 = (RuleCall)cReturnTypeAssignment_2_1_5_1_0_0.eContents().get(0);
 		private final Assignment cNameAssignment_2_1_5_1_0_1 = (Assignment)cGroup_2_1_5_1_0.eContents().get(1);
 		private final RuleCall cNameFunctionIDParserRuleCall_2_1_5_1_0_1_0 = (RuleCall)cNameAssignment_2_1_5_1_0_1.eContents().get(0);
 		private final Keyword cLeftParenthesisKeyword_2_1_5_1_0_2 = (Keyword)cGroup_2_1_5_1_0.eContents().get(2);
@@ -1371,9 +1371,9 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//	type=JvmTypeReference name=ValidID) ("=" initialValue=XExpression)? ";"? | {XtendFunction.annotationInfo=current}
 		//	modifiers+=CommonModifier* modifiers+=MethodModifier (modifiers+=CommonModifier | modifiers+=MethodModifier)* ("<"
 		//	typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")? (=> (returnType=JvmTypeReference
-		//	createExtensionInfo=CreateExtensionInfo name=ValidID "(") | => (returnType=JvmTypeReference name=FunctionID "(") | =>
-		//	(returnType=TypeReferenceNoTypeArgs name=FunctionID "(") | => (createExtensionInfo=CreateExtensionInfo name=ValidID
-		//	"(") | name=FunctionID "(") (parameters+=Parameter ("," parameters+=Parameter)*)? ")" ("throws"
+		//	createExtensionInfo=CreateExtensionInfo name=ValidID "(") | => (returnType=TypeReferenceWithTypeArgs name=FunctionID
+		//	"(") | => (returnType=TypeReferenceNoTypeArgs name=FunctionID "(") | => (createExtensionInfo=CreateExtensionInfo
+		//	name=ValidID "(") | name=FunctionID "(") (parameters+=Parameter ("," parameters+=Parameter)*)? ")" ("throws"
 		//	exceptions+=JvmTypeReference ("," exceptions+=JvmTypeReference)*)? (expression=XBlockExpression |
 		//	expression=RichString | ";")? | {XtendConstructor.annotationInfo=current} modifiers+=CommonModifier* "new" ("<"
 		//	typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")? "(" (parameters+=Parameter (","
@@ -1397,9 +1397,9 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//type=JvmTypeReference name=ValidID) ("=" initialValue=XExpression)? ";"? | {XtendFunction.annotationInfo=current}
 		//modifiers+=CommonModifier* modifiers+=MethodModifier (modifiers+=CommonModifier | modifiers+=MethodModifier)* ("<"
 		//typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")? (=> (returnType=JvmTypeReference
-		//createExtensionInfo=CreateExtensionInfo name=ValidID "(") | => (returnType=JvmTypeReference name=FunctionID "(") | =>
-		//(returnType=TypeReferenceNoTypeArgs name=FunctionID "(") | => (createExtensionInfo=CreateExtensionInfo name=ValidID
-		//"(") | name=FunctionID "(") (parameters+=Parameter ("," parameters+=Parameter)*)? ")" ("throws"
+		//createExtensionInfo=CreateExtensionInfo name=ValidID "(") | => (returnType=TypeReferenceWithTypeArgs name=FunctionID
+		//"(") | => (returnType=TypeReferenceNoTypeArgs name=FunctionID "(") | => (createExtensionInfo=CreateExtensionInfo
+		//name=ValidID "(") | name=FunctionID "(") (parameters+=Parameter ("," parameters+=Parameter)*)? ")" ("throws"
 		//exceptions+=JvmTypeReference ("," exceptions+=JvmTypeReference)*)? (expression=XBlockExpression | expression=RichString
 		//| ";")? | {XtendConstructor.annotationInfo=current} modifiers+=CommonModifier* "new" ("<"
 		//typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")? "(" (parameters+=Parameter (","
@@ -1432,9 +1432,9 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//initialValue=XExpression)? ";"? | {XtendFunction.annotationInfo=current} modifiers+=CommonModifier*
 		//modifiers+=MethodModifier (modifiers+=CommonModifier | modifiers+=MethodModifier)* ("<"
 		//typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")? (=> (returnType=JvmTypeReference
-		//createExtensionInfo=CreateExtensionInfo name=ValidID "(") | => (returnType=JvmTypeReference name=FunctionID "(") | =>
-		//(returnType=TypeReferenceNoTypeArgs name=FunctionID "(") | => (createExtensionInfo=CreateExtensionInfo name=ValidID
-		//"(") | name=FunctionID "(") (parameters+=Parameter ("," parameters+=Parameter)*)? ")" ("throws"
+		//createExtensionInfo=CreateExtensionInfo name=ValidID "(") | => (returnType=TypeReferenceWithTypeArgs name=FunctionID
+		//"(") | => (returnType=TypeReferenceNoTypeArgs name=FunctionID "(") | => (createExtensionInfo=CreateExtensionInfo
+		//name=ValidID "(") | name=FunctionID "(") (parameters+=Parameter ("," parameters+=Parameter)*)? ")" ("throws"
 		//exceptions+=JvmTypeReference ("," exceptions+=JvmTypeReference)*)? (expression=XBlockExpression | expression=RichString
 		//| ";")? | {XtendConstructor.annotationInfo=current} modifiers+=CommonModifier* "new" ("<"
 		//typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")? "(" (parameters+=Parameter (","
@@ -1609,8 +1609,8 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//{XtendFunction.annotationInfo=current} modifiers+=CommonModifier* modifiers+=MethodModifier (modifiers+=CommonModifier |
 		//modifiers+=MethodModifier)* ("<" typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")? (=>
 		//(returnType=JvmTypeReference createExtensionInfo=CreateExtensionInfo name=ValidID "(") | =>
-		//(returnType=JvmTypeReference name=FunctionID "(") | => (returnType=TypeReferenceNoTypeArgs name=FunctionID "(") | =>
-		//(createExtensionInfo=CreateExtensionInfo name=ValidID "(") | name=FunctionID "(") (parameters+=Parameter (","
+		//(returnType=TypeReferenceWithTypeArgs name=FunctionID "(") | => (returnType=TypeReferenceNoTypeArgs name=FunctionID
+		//"(") | => (createExtensionInfo=CreateExtensionInfo name=ValidID "(") | name=FunctionID "(") (parameters+=Parameter (","
 		//parameters+=Parameter)*)? ")" ("throws" exceptions+=JvmTypeReference ("," exceptions+=JvmTypeReference)*)?
 		//(expression=XBlockExpression | expression=RichString | ";")?
 		public Group getGroup_2_1() { return cGroup_2_1; }
@@ -1673,8 +1673,8 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getGreaterThanSignKeyword_2_1_4_3() { return cGreaterThanSignKeyword_2_1_4_3; }
 
 		//=> (returnType=JvmTypeReference createExtensionInfo=CreateExtensionInfo name=ValidID "(") | =>
-		//(returnType=JvmTypeReference name=FunctionID "(") | => (returnType=TypeReferenceNoTypeArgs name=FunctionID "(") | =>
-		//(createExtensionInfo=CreateExtensionInfo name=ValidID "(") | name=FunctionID "("
+		//(returnType=TypeReferenceWithTypeArgs name=FunctionID "(") | => (returnType=TypeReferenceNoTypeArgs name=FunctionID
+		//"(") | => (createExtensionInfo=CreateExtensionInfo name=ValidID "(") | name=FunctionID "("
 		public Alternatives getAlternatives_2_1_5() { return cAlternatives_2_1_5; }
 
 		//=> (returnType=JvmTypeReference createExtensionInfo=CreateExtensionInfo name=ValidID "(")
@@ -1704,17 +1704,17 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//"("
 		public Keyword getLeftParenthesisKeyword_2_1_5_0_0_3() { return cLeftParenthesisKeyword_2_1_5_0_0_3; }
 
-		//=> (returnType=JvmTypeReference name=FunctionID "(")
+		//=> (returnType=TypeReferenceWithTypeArgs name=FunctionID "(")
 		public Group getGroup_2_1_5_1() { return cGroup_2_1_5_1; }
 
-		//returnType=JvmTypeReference name=FunctionID "("
+		//returnType=TypeReferenceWithTypeArgs name=FunctionID "("
 		public Group getGroup_2_1_5_1_0() { return cGroup_2_1_5_1_0; }
 
-		//returnType=JvmTypeReference
+		//returnType=TypeReferenceWithTypeArgs
 		public Assignment getReturnTypeAssignment_2_1_5_1_0_0() { return cReturnTypeAssignment_2_1_5_1_0_0; }
 
-		//JvmTypeReference
-		public RuleCall getReturnTypeJvmTypeReferenceParserRuleCall_2_1_5_1_0_0_0() { return cReturnTypeJvmTypeReferenceParserRuleCall_2_1_5_1_0_0_0; }
+		//TypeReferenceWithTypeArgs
+		public RuleCall getReturnTypeTypeReferenceWithTypeArgsParserRuleCall_2_1_5_1_0_0_0() { return cReturnTypeTypeReferenceWithTypeArgsParserRuleCall_2_1_5_1_0_0_0; }
 
 		//name=FunctionID
 		public Assignment getNameAssignment_2_1_5_1_0_1() { return cNameAssignment_2_1_5_1_0_1; }
@@ -2238,13 +2238,225 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getTypeJvmTypeQualifiedNameParserRuleCall_0_1() { return cTypeJvmTypeQualifiedNameParserRuleCall_0_1; }
 	}
 
+	public class TypeReferenceWithTypeArgsElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypeReferenceWithTypeArgs");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final RuleCall cParameterizedTypeReferenceWithTypeArgsParserRuleCall_0_0 = (RuleCall)cGroup_0.eContents().get(0);
+		private final Group cGroup_0_1 = (Group)cGroup_0.eContents().get(1);
+		private final Group cGroup_0_1_0 = (Group)cGroup_0_1.eContents().get(0);
+		private final Action cJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0 = (Action)cGroup_0_1_0.eContents().get(0);
+		private final RuleCall cArrayBracketsParserRuleCall_0_1_0_1 = (RuleCall)cGroup_0_1_0.eContents().get(1);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final RuleCall cTypeReferenceNoTypeArgsParserRuleCall_1_0 = (RuleCall)cGroup_1.eContents().get(0);
+		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
+		private final Group cGroup_1_1_0 = (Group)cGroup_1_1.eContents().get(0);
+		private final Action cJvmGenericArrayTypeReferenceComponentTypeAction_1_1_0_0 = (Action)cGroup_1_1_0.eContents().get(0);
+		private final RuleCall cArrayBracketsParserRuleCall_1_1_0_1 = (RuleCall)cGroup_1_1_0.eContents().get(1);
+		private final RuleCall cXFunctionTypeRefParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		
+		/// *** The following two rules are a workaround for a limitation in serialization logic
+		// *
+		// * Apparently we choose the shortest possible path to create the sequence of unassigned
+		// * tokens between two assigned values. This doesn't work well with Antlr predicates which
+		// * may have lead to another decision path - not necessarily the shortest one in the sense
+		// * of the serializer. That's why we make the type arguments mandatory here so that we
+		// * do no longer have two equally short path's from method identifier to block expression
+		// ************************************************************************************** / TypeReferenceWithTypeArgs
+		//returns types::JvmTypeReference:
+		//	ParameterizedTypeReferenceWithTypeArgs => ({types::JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)*
+		//	| TypeReferenceNoTypeArgs => ({types::JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)+ |
+		//	XFunctionTypeRef;
+		public ParserRule getRule() { return rule; }
+
+		//ParameterizedTypeReferenceWithTypeArgs => ({types::JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)* |
+		//TypeReferenceNoTypeArgs => ({types::JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)+ |
+		//XFunctionTypeRef
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//ParameterizedTypeReferenceWithTypeArgs => ({types::JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)*
+		public Group getGroup_0() { return cGroup_0; }
+
+		//ParameterizedTypeReferenceWithTypeArgs
+		public RuleCall getParameterizedTypeReferenceWithTypeArgsParserRuleCall_0_0() { return cParameterizedTypeReferenceWithTypeArgsParserRuleCall_0_0; }
+
+		//=> ({types::JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)*
+		public Group getGroup_0_1() { return cGroup_0_1; }
+
+		//{types::JvmGenericArrayTypeReference.componentType=current} ArrayBrackets
+		public Group getGroup_0_1_0() { return cGroup_0_1_0; }
+
+		//{types::JvmGenericArrayTypeReference.componentType=current}
+		public Action getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0() { return cJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0; }
+
+		//ArrayBrackets
+		public RuleCall getArrayBracketsParserRuleCall_0_1_0_1() { return cArrayBracketsParserRuleCall_0_1_0_1; }
+
+		//TypeReferenceNoTypeArgs => ({types::JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)+
+		public Group getGroup_1() { return cGroup_1; }
+
+		//TypeReferenceNoTypeArgs
+		public RuleCall getTypeReferenceNoTypeArgsParserRuleCall_1_0() { return cTypeReferenceNoTypeArgsParserRuleCall_1_0; }
+
+		//=> ({types::JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)+
+		public Group getGroup_1_1() { return cGroup_1_1; }
+
+		//{types::JvmGenericArrayTypeReference.componentType=current} ArrayBrackets
+		public Group getGroup_1_1_0() { return cGroup_1_1_0; }
+
+		//{types::JvmGenericArrayTypeReference.componentType=current}
+		public Action getJvmGenericArrayTypeReferenceComponentTypeAction_1_1_0_0() { return cJvmGenericArrayTypeReferenceComponentTypeAction_1_1_0_0; }
+
+		//ArrayBrackets
+		public RuleCall getArrayBracketsParserRuleCall_1_1_0_1() { return cArrayBracketsParserRuleCall_1_1_0_1; }
+
+		//XFunctionTypeRef
+		public RuleCall getXFunctionTypeRefParserRuleCall_2() { return cXFunctionTypeRefParserRuleCall_2; }
+	}
+
+	public class ParameterizedTypeReferenceWithTypeArgsElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ParameterizedTypeReferenceWithTypeArgs");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final CrossReference cTypeJvmTypeCrossReference_0_0 = (CrossReference)cTypeAssignment_0.eContents().get(0);
+		private final RuleCall cTypeJvmTypeQualifiedNameParserRuleCall_0_0_1 = (RuleCall)cTypeJvmTypeCrossReference_0_0.eContents().get(1);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cLessThanSignKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cArgumentsAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_0 = (RuleCall)cArgumentsAssignment_1_1.eContents().get(0);
+		private final Group cGroup_1_2 = (Group)cGroup_1.eContents().get(2);
+		private final Keyword cCommaKeyword_1_2_0 = (Keyword)cGroup_1_2.eContents().get(0);
+		private final Assignment cArgumentsAssignment_1_2_1 = (Assignment)cGroup_1_2.eContents().get(1);
+		private final RuleCall cArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0 = (RuleCall)cArgumentsAssignment_1_2_1.eContents().get(0);
+		private final Keyword cGreaterThanSignKeyword_1_3 = (Keyword)cGroup_1.eContents().get(3);
+		private final Group cGroup_1_4 = (Group)cGroup_1.eContents().get(4);
+		private final Group cGroup_1_4_0 = (Group)cGroup_1_4.eContents().get(0);
+		private final Group cGroup_1_4_0_0 = (Group)cGroup_1_4_0.eContents().get(0);
+		private final Action cJvmInnerTypeReferenceOuterAction_1_4_0_0_0 = (Action)cGroup_1_4_0_0.eContents().get(0);
+		private final Keyword cFullStopKeyword_1_4_0_0_1 = (Keyword)cGroup_1_4_0_0.eContents().get(1);
+		private final Assignment cTypeAssignment_1_4_1 = (Assignment)cGroup_1_4.eContents().get(1);
+		private final CrossReference cTypeJvmTypeCrossReference_1_4_1_0 = (CrossReference)cTypeAssignment_1_4_1.eContents().get(0);
+		private final RuleCall cTypeJvmTypeValidIDParserRuleCall_1_4_1_0_1 = (RuleCall)cTypeJvmTypeCrossReference_1_4_1_0.eContents().get(1);
+		private final Group cGroup_1_4_2 = (Group)cGroup_1_4.eContents().get(2);
+		private final Keyword cLessThanSignKeyword_1_4_2_0 = (Keyword)cGroup_1_4_2.eContents().get(0);
+		private final Assignment cArgumentsAssignment_1_4_2_1 = (Assignment)cGroup_1_4_2.eContents().get(1);
+		private final RuleCall cArgumentsJvmArgumentTypeReferenceParserRuleCall_1_4_2_1_0 = (RuleCall)cArgumentsAssignment_1_4_2_1.eContents().get(0);
+		private final Group cGroup_1_4_2_2 = (Group)cGroup_1_4_2.eContents().get(2);
+		private final Keyword cCommaKeyword_1_4_2_2_0 = (Keyword)cGroup_1_4_2_2.eContents().get(0);
+		private final Assignment cArgumentsAssignment_1_4_2_2_1 = (Assignment)cGroup_1_4_2_2.eContents().get(1);
+		private final RuleCall cArgumentsJvmArgumentTypeReferenceParserRuleCall_1_4_2_2_1_0 = (RuleCall)cArgumentsAssignment_1_4_2_2_1.eContents().get(0);
+		private final Keyword cGreaterThanSignKeyword_1_4_2_3 = (Keyword)cGroup_1_4_2.eContents().get(3);
+		
+		//ParameterizedTypeReferenceWithTypeArgs returns types::JvmParameterizedTypeReference:
+		//	type=[types::JvmType|QualifiedName] ("<" arguments+=JvmArgumentTypeReference (","
+		//	arguments+=JvmArgumentTypeReference)* ">" (=> ({types::JvmInnerTypeReference.outer=current} ".")
+		//	type=[types::JvmType|ValidID] ("<" arguments+=JvmArgumentTypeReference ("," arguments+=JvmArgumentTypeReference)*
+		//	">")?)*);
+		public ParserRule getRule() { return rule; }
+
+		//type=[types::JvmType|QualifiedName] ("<" arguments+=JvmArgumentTypeReference ("," arguments+=JvmArgumentTypeReference)*
+		//">" (=> ({types::JvmInnerTypeReference.outer=current} ".") type=[types::JvmType|ValidID] ("<"
+		//arguments+=JvmArgumentTypeReference ("," arguments+=JvmArgumentTypeReference)* ">")?)*)
+		public Group getGroup() { return cGroup; }
+
+		//type=[types::JvmType|QualifiedName]
+		public Assignment getTypeAssignment_0() { return cTypeAssignment_0; }
+
+		//[types::JvmType|QualifiedName]
+		public CrossReference getTypeJvmTypeCrossReference_0_0() { return cTypeJvmTypeCrossReference_0_0; }
+
+		//QualifiedName
+		public RuleCall getTypeJvmTypeQualifiedNameParserRuleCall_0_0_1() { return cTypeJvmTypeQualifiedNameParserRuleCall_0_0_1; }
+
+		//"<" arguments+=JvmArgumentTypeReference ("," arguments+=JvmArgumentTypeReference)* ">" (=>
+		//({types::JvmInnerTypeReference.outer=current} ".") type=[types::JvmType|ValidID] ("<"
+		//arguments+=JvmArgumentTypeReference ("," arguments+=JvmArgumentTypeReference)* ">")?)*
+		public Group getGroup_1() { return cGroup_1; }
+
+		//"<"
+		public Keyword getLessThanSignKeyword_1_0() { return cLessThanSignKeyword_1_0; }
+
+		//arguments+=JvmArgumentTypeReference
+		public Assignment getArgumentsAssignment_1_1() { return cArgumentsAssignment_1_1; }
+
+		//JvmArgumentTypeReference
+		public RuleCall getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_0() { return cArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_0; }
+
+		//("," arguments+=JvmArgumentTypeReference)*
+		public Group getGroup_1_2() { return cGroup_1_2; }
+
+		//","
+		public Keyword getCommaKeyword_1_2_0() { return cCommaKeyword_1_2_0; }
+
+		//arguments+=JvmArgumentTypeReference
+		public Assignment getArgumentsAssignment_1_2_1() { return cArgumentsAssignment_1_2_1; }
+
+		//JvmArgumentTypeReference
+		public RuleCall getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0() { return cArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0; }
+
+		//">"
+		public Keyword getGreaterThanSignKeyword_1_3() { return cGreaterThanSignKeyword_1_3; }
+
+		//(=> ({types::JvmInnerTypeReference.outer=current} ".") type=[types::JvmType|ValidID] ("<"
+		//arguments+=JvmArgumentTypeReference ("," arguments+=JvmArgumentTypeReference)* ">")?)*
+		public Group getGroup_1_4() { return cGroup_1_4; }
+
+		//=> ({types::JvmInnerTypeReference.outer=current} ".")
+		public Group getGroup_1_4_0() { return cGroup_1_4_0; }
+
+		//{types::JvmInnerTypeReference.outer=current} "."
+		public Group getGroup_1_4_0_0() { return cGroup_1_4_0_0; }
+
+		//{types::JvmInnerTypeReference.outer=current}
+		public Action getJvmInnerTypeReferenceOuterAction_1_4_0_0_0() { return cJvmInnerTypeReferenceOuterAction_1_4_0_0_0; }
+
+		//"."
+		public Keyword getFullStopKeyword_1_4_0_0_1() { return cFullStopKeyword_1_4_0_0_1; }
+
+		//type=[types::JvmType|ValidID]
+		public Assignment getTypeAssignment_1_4_1() { return cTypeAssignment_1_4_1; }
+
+		//[types::JvmType|ValidID]
+		public CrossReference getTypeJvmTypeCrossReference_1_4_1_0() { return cTypeJvmTypeCrossReference_1_4_1_0; }
+
+		//ValidID
+		public RuleCall getTypeJvmTypeValidIDParserRuleCall_1_4_1_0_1() { return cTypeJvmTypeValidIDParserRuleCall_1_4_1_0_1; }
+
+		//(=> "<" arguments+=JvmArgumentTypeReference ("," arguments+=JvmArgumentTypeReference)* ">")?
+		public Group getGroup_1_4_2() { return cGroup_1_4_2; }
+
+		//=> "<"
+		public Keyword getLessThanSignKeyword_1_4_2_0() { return cLessThanSignKeyword_1_4_2_0; }
+
+		//arguments+=JvmArgumentTypeReference
+		public Assignment getArgumentsAssignment_1_4_2_1() { return cArgumentsAssignment_1_4_2_1; }
+
+		//JvmArgumentTypeReference
+		public RuleCall getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_4_2_1_0() { return cArgumentsJvmArgumentTypeReferenceParserRuleCall_1_4_2_1_0; }
+
+		//("," arguments+=JvmArgumentTypeReference)*
+		public Group getGroup_1_4_2_2() { return cGroup_1_4_2_2; }
+
+		//","
+		public Keyword getCommaKeyword_1_4_2_2_0() { return cCommaKeyword_1_4_2_2_0; }
+
+		//arguments+=JvmArgumentTypeReference
+		public Assignment getArgumentsAssignment_1_4_2_2_1() { return cArgumentsAssignment_1_4_2_2_1; }
+
+		//JvmArgumentTypeReference
+		public RuleCall getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_4_2_2_1_0() { return cArgumentsJvmArgumentTypeReferenceParserRuleCall_1_4_2_2_1_0; }
+
+		//">"
+		public Keyword getGreaterThanSignKeyword_1_4_2_3() { return cGreaterThanSignKeyword_1_4_2_3; }
+	}
+
 	public class FunctionIDElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FunctionID");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cValidIDParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cOperatorsParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//FunctionID:
+		/// *** The following two rules are a workaround for a limitation in serialiation logic * / FunctionID:
 		//	ValidID | Operators;
 		public ParserRule getRule() { return rule; }
 
@@ -3804,6 +4016,8 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	private final AnnotationFieldElements pAnnotationField;
 	private final MemberElements pMember;
 	private final TypeReferenceNoTypeArgsElements pTypeReferenceNoTypeArgs;
+	private final TypeReferenceWithTypeArgsElements pTypeReferenceWithTypeArgs;
+	private final ParameterizedTypeReferenceWithTypeArgsElements pParameterizedTypeReferenceWithTypeArgs;
 	private final FunctionIDElements pFunctionID;
 	private final OperatorsElements pOperators;
 	private final XtendEnumLiteralElements pXtendEnumLiteral;
@@ -3864,6 +4078,8 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		this.pAnnotationField = new AnnotationFieldElements();
 		this.pMember = new MemberElements();
 		this.pTypeReferenceNoTypeArgs = new TypeReferenceNoTypeArgsElements();
+		this.pTypeReferenceWithTypeArgs = new TypeReferenceWithTypeArgsElements();
+		this.pParameterizedTypeReferenceWithTypeArgs = new ParameterizedTypeReferenceWithTypeArgsElements();
 		this.pFunctionID = new FunctionIDElements();
 		this.pOperators = new OperatorsElements();
 		this.pXtendEnumLiteral = new XtendEnumLiteralElements();
@@ -4016,9 +4232,9 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//	type=JvmTypeReference name=ValidID) ("=" initialValue=XExpression)? ";"? | {XtendFunction.annotationInfo=current}
 	//	modifiers+=CommonModifier* modifiers+=MethodModifier (modifiers+=CommonModifier | modifiers+=MethodModifier)* ("<"
 	//	typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")? (=> (returnType=JvmTypeReference
-	//	createExtensionInfo=CreateExtensionInfo name=ValidID "(") | => (returnType=JvmTypeReference name=FunctionID "(") | =>
-	//	(returnType=TypeReferenceNoTypeArgs name=FunctionID "(") | => (createExtensionInfo=CreateExtensionInfo name=ValidID
-	//	"(") | name=FunctionID "(") (parameters+=Parameter ("," parameters+=Parameter)*)? ")" ("throws"
+	//	createExtensionInfo=CreateExtensionInfo name=ValidID "(") | => (returnType=TypeReferenceWithTypeArgs name=FunctionID
+	//	"(") | => (returnType=TypeReferenceNoTypeArgs name=FunctionID "(") | => (createExtensionInfo=CreateExtensionInfo
+	//	name=ValidID "(") | name=FunctionID "(") (parameters+=Parameter ("," parameters+=Parameter)*)? ")" ("throws"
 	//	exceptions+=JvmTypeReference ("," exceptions+=JvmTypeReference)*)? (expression=XBlockExpression |
 	//	expression=RichString | ";")? | {XtendConstructor.annotationInfo=current} modifiers+=CommonModifier* "new" ("<"
 	//	typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")? "(" (parameters+=Parameter (","
@@ -4051,7 +4267,40 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		return getTypeReferenceNoTypeArgsAccess().getRule();
 	}
 
-	//FunctionID:
+	/// *** The following two rules are a workaround for a limitation in serialization logic
+	// *
+	// * Apparently we choose the shortest possible path to create the sequence of unassigned
+	// * tokens between two assigned values. This doesn't work well with Antlr predicates which
+	// * may have lead to another decision path - not necessarily the shortest one in the sense
+	// * of the serializer. That's why we make the type arguments mandatory here so that we
+	// * do no longer have two equally short path's from method identifier to block expression
+	// ************************************************************************************** / TypeReferenceWithTypeArgs
+	//returns types::JvmTypeReference:
+	//	ParameterizedTypeReferenceWithTypeArgs => ({types::JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)*
+	//	| TypeReferenceNoTypeArgs => ({types::JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)+ |
+	//	XFunctionTypeRef;
+	public TypeReferenceWithTypeArgsElements getTypeReferenceWithTypeArgsAccess() {
+		return pTypeReferenceWithTypeArgs;
+	}
+	
+	public ParserRule getTypeReferenceWithTypeArgsRule() {
+		return getTypeReferenceWithTypeArgsAccess().getRule();
+	}
+
+	//ParameterizedTypeReferenceWithTypeArgs returns types::JvmParameterizedTypeReference:
+	//	type=[types::JvmType|QualifiedName] ("<" arguments+=JvmArgumentTypeReference (","
+	//	arguments+=JvmArgumentTypeReference)* ">" (=> ({types::JvmInnerTypeReference.outer=current} ".")
+	//	type=[types::JvmType|ValidID] ("<" arguments+=JvmArgumentTypeReference ("," arguments+=JvmArgumentTypeReference)*
+	//	">")?)*);
+	public ParameterizedTypeReferenceWithTypeArgsElements getParameterizedTypeReferenceWithTypeArgsAccess() {
+		return pParameterizedTypeReferenceWithTypeArgs;
+	}
+	
+	public ParserRule getParameterizedTypeReferenceWithTypeArgsRule() {
+		return getParameterizedTypeReferenceWithTypeArgsAccess().getRule();
+	}
+
+	/// *** The following two rules are a workaround for a limitation in serialiation logic * / FunctionID:
 	//	ValidID | Operators;
 	public FunctionIDElements getFunctionIDAccess() {
 		return pFunctionID;
@@ -5165,8 +5414,9 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//JvmParameterizedTypeReference:
-	//	type=[JvmType|QualifiedName] ("<" arguments+=JvmArgumentTypeReference ("," arguments+=JvmArgumentTypeReference)*
-	//	">")?;
+	//	type=[JvmType|QualifiedName] ("<" arguments+=JvmArgumentTypeReference ("," arguments+=JvmArgumentTypeReference)* ">"
+	//	(=> ({JvmInnerTypeReference.outer=current} ".") type=[JvmType|ValidID] ("<" arguments+=JvmArgumentTypeReference (","
+	//	arguments+=JvmArgumentTypeReference)* ">")?)*)?;
 	public XtypeGrammarAccess.JvmParameterizedTypeReferenceElements getJvmParameterizedTypeReferenceAccess() {
 		return gaXbaseWithAnnotations.getJvmParameterizedTypeReferenceAccess();
 	}

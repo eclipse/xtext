@@ -37,6 +37,27 @@ class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
 				reference.returnType.accept(this)
 		}
 	}
+	
+	override protected doVisitInnerFunctionTypeReference(InnerFunctionTypeReference reference) {
+		if(appender.isJava) {
+			reference.outer.accept(this)
+			appender.append('.')
+			appender.append(reference.type.simpleName)
+			if(!reference.typeArguments.empty) {
+				appender.append('<')
+				appendCommaSeparated(reference.typeArguments)
+				appender.append('>')
+			}
+		} else {
+			appender.append('(')
+			appendCommaSeparated(reference.parameterTypes)
+			appender.append(')=>')
+			if(reference.returnType == null)
+				appender.append('void')
+			else
+				reference.returnType.accept(this)
+		}
+	}
 
 	override protected doVisitParameterizedTypeReference(/* @NonNull */ ParameterizedTypeReference reference) {
 		if (reference.anonymous) {
@@ -48,6 +69,17 @@ class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
 				appendCommaSeparated(reference.typeArguments)
 				appender.append('>')
 			}
+		}
+	}
+	
+	override protected doVisitInnerTypeReference(/* @NonNull */ InnerTypeReference reference) {
+		reference.outer.accept(this)
+		appender.append('.')
+		appender.append(reference.type.simpleName)
+		if(!reference.typeArguments.empty) {
+			appender.append('<')
+			appendCommaSeparated(reference.typeArguments)
+			appender.append('>')
 		}
 	}
 	

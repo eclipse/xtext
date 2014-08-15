@@ -23,7 +23,6 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.override.BottomResolvedOperation;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideTester;
@@ -31,6 +30,7 @@ import org.eclipse.xtext.xbase.typesystem.override.ResolvedConstructor;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.junit.Before;
 import org.junit.Test;
@@ -179,9 +179,9 @@ public class SuperMemberImplementorTest extends AbstractXtendUITestCase {
 	protected LightweightTypeReference getContextType() {
 		JvmGenericType inferredType = associations.getInferredType(xtendClass);
 		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, inferredType);
-		ParameterizedTypeReference contextType = new ParameterizedTypeReference(owner, inferredType);
+		ParameterizedTypeReference contextType = owner.newParameterizedTypeReference(inferredType);
 		for(JvmTypeParameter typeParamter: inferredType.getTypeParameters()) {
-			contextType.addTypeArgument(new ParameterizedTypeReference(owner, typeParamter));
+			contextType.addTypeArgument(owner.newParameterizedTypeReference(typeParamter));
 		}
 		return contextType;
 	}

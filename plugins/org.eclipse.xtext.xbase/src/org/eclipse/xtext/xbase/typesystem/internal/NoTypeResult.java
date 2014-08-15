@@ -14,7 +14,6 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
-import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -33,7 +32,7 @@ public class NoTypeResult implements ITypeComputationResult {
 	}
 	
 	public LightweightTypeReference getReturnType() {
-		return new AnyTypeReference(owner);
+		return owner.newAnyTypeReference();
 	}
 	
 	/* @Nullable */
