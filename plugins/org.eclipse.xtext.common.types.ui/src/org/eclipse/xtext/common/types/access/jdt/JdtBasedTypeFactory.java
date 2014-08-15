@@ -57,6 +57,7 @@ import org.eclipse.xtext.common.types.JvmFloatAnnotationValue;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmInnerTypeReference;
 import org.eclipse.xtext.common.types.JvmIntAnnotationValue;
 import org.eclipse.xtext.common.types.JvmLongAnnotationValue;
 import org.eclipse.xtext.common.types.JvmLowerBound;
@@ -1123,8 +1124,19 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 			typeReference.setComponentType(componentTypeReference);
 			return typeReference;
 		}
+		ITypeBinding outer = null;
+		if (typeBinding.isMember()) {
+			outer = typeBinding.getDeclaringClass();
+		}
+		JvmParameterizedTypeReference result;
+		if (outer != null) {
+			JvmParameterizedTypeReference outerReference = (JvmParameterizedTypeReference) createTypeReference(outer);
+			result = TypesFactory.eINSTANCE.createJvmInnerTypeReference();
+			((JvmInnerTypeReference) result).setOuter(outerReference);
+		} else {
+			result = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
+		}
 		ITypeBinding[] typeArguments = typeBinding.getTypeArguments();
-		JvmParameterizedTypeReference result = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
 		if (typeArguments.length != 0) {
 			ITypeBinding erasure = typeBinding.getErasure();
 			result.setType(createProxy(erasure));

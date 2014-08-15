@@ -16,17 +16,19 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
+import org.eclipse.xtext.common.types.JvmInnerTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.xtext.common.types.JvmTypeAnnotationValue} object.
+ * This is the item provider adapter for a {@link org.eclipse.xtext.common.types.JvmInnerTypeReference} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
+ * @noextend This class is not intended to be subclassed by clients.
+ * @since 2.7
  */
-public class JvmTypeAnnotationValueItemProvider extends JvmAnnotationValueItemProvider
+public class JvmInnerTypeReferenceItemProvider extends JvmParameterizedTypeReferenceItemProvider
 {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -34,7 +36,7 @@ public class JvmTypeAnnotationValueItemProvider extends JvmAnnotationValueItemPr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JvmTypeAnnotationValueItemProvider(AdapterFactory adapterFactory)
+	public JvmInnerTypeReferenceItemProvider(AdapterFactory adapterFactory)
 	{
 		super(adapterFactory);
 	}
@@ -70,7 +72,7 @@ public class JvmTypeAnnotationValueItemProvider extends JvmAnnotationValueItemPr
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TypesPackage.Literals.JVM_TYPE_ANNOTATION_VALUE__VALUES);
+			childrenFeatures.add(TypesPackage.Literals.JVM_INNER_TYPE_REFERENCE__OUTER);
 		}
 		return childrenFeatures;
 	}
@@ -90,7 +92,7 @@ public class JvmTypeAnnotationValueItemProvider extends JvmAnnotationValueItemPr
 	}
 
 	/**
-	 * This returns JvmTypeAnnotationValue.gif.
+	 * This returns JvmInnerTypeReference.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -98,7 +100,7 @@ public class JvmTypeAnnotationValueItemProvider extends JvmAnnotationValueItemPr
 	@Override
 	public Object getImage(Object object)
 	{
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/JvmTypeAnnotationValue"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/JvmInnerTypeReference"));
 	}
 
 	/**
@@ -110,7 +112,7 @@ public class JvmTypeAnnotationValueItemProvider extends JvmAnnotationValueItemPr
 	@Override
 	public String getText(Object object)
 	{
-		return getString("_UI_JvmTypeAnnotationValue_type");
+		return getString("_UI_JvmInnerTypeReference_type");
 	}
 	
 
@@ -126,9 +128,9 @@ public class JvmTypeAnnotationValueItemProvider extends JvmAnnotationValueItemPr
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(JvmTypeAnnotationValue.class))
+		switch (notification.getFeatureID(JvmInnerTypeReference.class))
 		{
-			case TypesPackage.JVM_TYPE_ANNOTATION_VALUE__VALUES:
+			case TypesPackage.JVM_INNER_TYPE_REFERENCE__OUTER:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -149,48 +151,38 @@ public class JvmTypeAnnotationValueItemProvider extends JvmAnnotationValueItemPr
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.JVM_TYPE_ANNOTATION_VALUE__VALUES,
+				(TypesPackage.Literals.JVM_INNER_TYPE_REFERENCE__OUTER,
 				 TypesFactory.eINSTANCE.createJvmParameterizedTypeReference()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.JVM_TYPE_ANNOTATION_VALUE__VALUES,
-				 TypesFactory.eINSTANCE.createJvmGenericArrayTypeReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.JVM_TYPE_ANNOTATION_VALUE__VALUES,
-				 TypesFactory.eINSTANCE.createJvmWildcardTypeReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.JVM_TYPE_ANNOTATION_VALUE__VALUES,
-				 TypesFactory.eINSTANCE.createJvmAnyTypeReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.JVM_TYPE_ANNOTATION_VALUE__VALUES,
-				 TypesFactory.eINSTANCE.createJvmMultiTypeReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.JVM_TYPE_ANNOTATION_VALUE__VALUES,
-				 TypesFactory.eINSTANCE.createJvmDelegateTypeReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.JVM_TYPE_ANNOTATION_VALUE__VALUES,
-				 TypesFactory.eINSTANCE.createJvmSynonymTypeReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.JVM_TYPE_ANNOTATION_VALUE__VALUES,
-				 TypesFactory.eINSTANCE.createJvmUnknownTypeReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.JVM_TYPE_ANNOTATION_VALUE__VALUES,
+				(TypesPackage.Literals.JVM_INNER_TYPE_REFERENCE__OUTER,
 				 TypesFactory.eINSTANCE.createJvmInnerTypeReference()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection)
+	{
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__ARGUMENTS ||
+			childFeature == TypesPackage.Literals.JVM_INNER_TYPE_REFERENCE__OUTER;
+
+		if (qualify)
+		{
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }
