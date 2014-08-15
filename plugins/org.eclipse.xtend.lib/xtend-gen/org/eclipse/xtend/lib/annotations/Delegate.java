@@ -51,5 +51,8 @@ import org.eclipse.xtend.lib.macro.Active;
 @Target({ ElementType.FIELD, ElementType.METHOD })
 @Active(DelegateProcessor.class)
 public @interface Delegate {
+  /**
+   * Specifies which interfaces of the delegate to use for creating methods. By default, all its interfaces are used.
+   */
   public Class<?>[] value() default {};
 }
