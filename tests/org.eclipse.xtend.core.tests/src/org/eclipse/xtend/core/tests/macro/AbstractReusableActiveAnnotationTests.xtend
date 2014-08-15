@@ -24,6 +24,9 @@ import org.eclipse.xtend.lib.macro.declaration.Element
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtend.core.macro.declaration.MutableJvmClassDeclarationImpl
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration
+import org.eclipse.xtend.core.xtend.XtendPackage
+import org.eclipse.xtend.core.validation.IssueCodes
+import org.eclipse.xtext.diagnostics.Severity
 
 abstract class AbstractReusableActiveAnnotationTests {
 	
@@ -497,19 +500,12 @@ abstract class AbstractReusableActiveAnnotationTests {
 					}
 				'''
 			)[
-				assertTrue(xtendFile.eResource.warnings.exists[
-					message.contains("The generated field 'myusercode.Foo.foo' is not associated with a source element.")
-					&& line == 1
-				])
-				assertTrue(xtendFile.eResource.warnings.exists[
-					message.contains("The generated method 'myusercode.Foo.foo(Integer)' is not associated with a source element.")
-					&& line == 1
-				])
-				assertTrue(xtendFile.eResource.warnings.exists[
-					message.contains("The generated type 'myusercode.Foo.Inner' is not associated with a source element.")
-					&& line == 1
-				])
-				assertEquals(3, xtendFile.eResource.warnings.size)
+				validator.assertIssue(xtendFile, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT, Severity.IGNORE, 
+					"The generated field 'myusercode.Foo.foo' is not associated with a source element.")
+				validator.assertIssue(xtendFile, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT, Severity.IGNORE, 
+					"The generated method 'myusercode.Foo.foo(Integer)' is not associated with a source element.")
+				validator.assertIssue(xtendFile, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT, Severity.IGNORE, 
+					"The generated type 'myusercode.Foo.Inner' is not associated with a source element.")
 			]
 	}
 	

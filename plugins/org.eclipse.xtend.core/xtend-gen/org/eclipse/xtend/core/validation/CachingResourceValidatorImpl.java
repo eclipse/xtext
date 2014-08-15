@@ -34,6 +34,8 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.validation.IssueSeverities;
+import org.eclipse.xtext.validation.IssueSeveritiesProvider;
 import org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
@@ -52,6 +54,9 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
   
   @Inject
   private AnnotationProcessor annotationProcessor;
+  
+  @Inject
+  private IssueSeveritiesProvider issueSeveritiesProvider;
   
   @Inject
   @Extension
@@ -100,7 +105,7 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
   
   protected void collectResourceDiagnostics(final Resource resource, final CancelIndicator monitor, final IAcceptor<Issue> acceptor) {
     this.runActiveAnnotationValidation(resource, monitor);
-    this.addWarningsForOrphanedJvmElements(resource, monitor);
+    this.addWarningsForOrphanedJvmElements(resource, monitor, acceptor);
     super.collectResourceDiagnostics(resource, monitor, acceptor);
   }
   
@@ -137,7 +142,7 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
     }
   }
   
-  private void addWarningsForOrphanedJvmElements(final Resource resource, final CancelIndicator monitor) {
+  private void addWarningsForOrphanedJvmElements(final Resource resource, final CancelIndicator monitor, final IAcceptor<Issue> acceptor) {
     EList<EObject> _contents = resource.getContents();
     Iterable<EObject> _tail = IterableExtensions.<EObject>tail(_contents);
     Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_tail, JvmDeclaredType.class);
@@ -161,15 +166,16 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
           final EObject sourceElement = this._iJvmModelAssociations.getPrimarySourceElement(jvmMember);
           boolean _tripleEquals = (sourceElement == null);
           if (_tripleEquals) {
-            this.addWarningForOrphanedJvmElement(resource, jvmMember);
+            this.addWarningForOrphanedJvmElement(resource, jvmMember, acceptor);
           }
         }
       }
     }
   }
   
-  private boolean addWarningForOrphanedJvmElement(final Resource resource, final JvmMember jvmElement) {
-    EList<Resource.Diagnostic> _warnings = resource.getWarnings();
+  private void addWarningForOrphanedJvmElement(final Resource resource, final JvmMember jvmElement, final IAcceptor<Issue> acceptor) {
+    final IssueSeverities issueSeverities = this.issueSeveritiesProvider.getIssueSeverities(resource);
+    final Severity severity = issueSeverities.getSeverity(IssueCodes.ORPHAN_ELMENT);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("The generated ");
     String _uiString = this.getUiString(jvmElement);
@@ -177,11 +183,10 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
     _builder.append(" is not associated with a source element. The producing active annotation should use \'setPrimarySourceElement\'.");
     EList<EObject> _contents = resource.getContents();
     EObject _head = IterableExtensions.<EObject>head(_contents);
-    DiagnosticOnFirstKeyword _diagnosticOnFirstKeyword = new DiagnosticOnFirstKeyword(
-      Severity.WARNING, 
+    DiagnosticOnFirstKeyword _diagnosticOnFirstKeyword = new DiagnosticOnFirstKeyword(severity, 
       IssueCodes.ORPHAN_ELMENT, _builder.toString(), _head, 
       null);
-    return _warnings.add(_diagnosticOnFirstKeyword);
+    this.issueFromXtextResourceDiagnostic(_diagnosticOnFirstKeyword, severity, acceptor);
   }
   
   private String getUiString(final JvmMember member) {

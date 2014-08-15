@@ -18,7 +18,9 @@ import org.eclipse.xtend.core.macro.declaration.MutableJvmMethodDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.ProblemSupportImpl;
 import org.eclipse.xtend.core.macro.declaration.TracabilityImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
+import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
@@ -48,6 +50,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.junit4.internal.LineDelimiters;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
@@ -995,70 +998,14 @@ public abstract class AbstractReusableActiveAnnotationTests {
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         XtendFile _xtendFile = it.getXtendFile();
-        Resource _eResource = _xtendFile.eResource();
-        EList<Resource.Diagnostic> _warnings = _eResource.getWarnings();
-        final Function1<Resource.Diagnostic, Boolean> _function = new Function1<Resource.Diagnostic, Boolean>() {
-          public Boolean apply(final Resource.Diagnostic it) {
-            boolean _and = false;
-            String _message = it.getMessage();
-            boolean _contains = _message.contains("The generated field \'myusercode.Foo.foo\' is not associated with a source element.");
-            if (!_contains) {
-              _and = false;
-            } else {
-              int _line = it.getLine();
-              boolean _equals = (_line == 1);
-              _and = _equals;
-            }
-            return Boolean.valueOf(_and);
-          }
-        };
-        boolean _exists = IterableExtensions.<Resource.Diagnostic>exists(_warnings, _function);
-        Assert.assertTrue(_exists);
+        AbstractReusableActiveAnnotationTests.this.validator.assertIssue(_xtendFile, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT, Severity.IGNORE, 
+          "The generated field \'myusercode.Foo.foo\' is not associated with a source element.");
         XtendFile _xtendFile_1 = it.getXtendFile();
-        Resource _eResource_1 = _xtendFile_1.eResource();
-        EList<Resource.Diagnostic> _warnings_1 = _eResource_1.getWarnings();
-        final Function1<Resource.Diagnostic, Boolean> _function_1 = new Function1<Resource.Diagnostic, Boolean>() {
-          public Boolean apply(final Resource.Diagnostic it) {
-            boolean _and = false;
-            String _message = it.getMessage();
-            boolean _contains = _message.contains("The generated method \'myusercode.Foo.foo(Integer)\' is not associated with a source element.");
-            if (!_contains) {
-              _and = false;
-            } else {
-              int _line = it.getLine();
-              boolean _equals = (_line == 1);
-              _and = _equals;
-            }
-            return Boolean.valueOf(_and);
-          }
-        };
-        boolean _exists_1 = IterableExtensions.<Resource.Diagnostic>exists(_warnings_1, _function_1);
-        Assert.assertTrue(_exists_1);
+        AbstractReusableActiveAnnotationTests.this.validator.assertIssue(_xtendFile_1, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT, Severity.IGNORE, 
+          "The generated method \'myusercode.Foo.foo(Integer)\' is not associated with a source element.");
         XtendFile _xtendFile_2 = it.getXtendFile();
-        Resource _eResource_2 = _xtendFile_2.eResource();
-        EList<Resource.Diagnostic> _warnings_2 = _eResource_2.getWarnings();
-        final Function1<Resource.Diagnostic, Boolean> _function_2 = new Function1<Resource.Diagnostic, Boolean>() {
-          public Boolean apply(final Resource.Diagnostic it) {
-            boolean _and = false;
-            String _message = it.getMessage();
-            boolean _contains = _message.contains("The generated type \'myusercode.Foo.Inner\' is not associated with a source element.");
-            if (!_contains) {
-              _and = false;
-            } else {
-              int _line = it.getLine();
-              boolean _equals = (_line == 1);
-              _and = _equals;
-            }
-            return Boolean.valueOf(_and);
-          }
-        };
-        boolean _exists_2 = IterableExtensions.<Resource.Diagnostic>exists(_warnings_2, _function_2);
-        Assert.assertTrue(_exists_2);
-        XtendFile _xtendFile_3 = it.getXtendFile();
-        Resource _eResource_3 = _xtendFile_3.eResource();
-        EList<Resource.Diagnostic> _warnings_3 = _eResource_3.getWarnings();
-        int _size = _warnings_3.size();
-        Assert.assertEquals(3, _size);
+        AbstractReusableActiveAnnotationTests.this.validator.assertIssue(_xtendFile_2, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT, Severity.IGNORE, 
+          "The generated type \'myusercode.Foo.Inner\' is not associated with a source element.");
       }
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
