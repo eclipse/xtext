@@ -36,8 +36,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeA
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
-import com.google.common.collect.Lists;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
@@ -74,7 +72,7 @@ public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate
 	protected LightweightTypeReference deferredBindTypeArgument(ITypeExpectation expectation, LightweightTypeReference type) {
 		LightweightTypeReference result = super.deferredBindTypeArgument(expectation, type);
 		LightweightTypeReference expectedType = expectation.getExpectedType();
-		if (expectedType != null && getSyntacticTypeArguments().isEmpty() && !result.isRawType() && !getDeclaredTypeParameters().isEmpty()) {
+		if (expectedType != null && getConstructorCall().getTypeArguments().isEmpty() && !result.isRawType() && !getDeclaredTypeParameters().isEmpty()) {
 			if (!expectedType.isAssignableFrom(result, new TypeConformanceComputationArgument())) {
 				LightweightTypeReference rawFeatureType = result.getRawTypeReference();
 				if (expectedType.isAssignableFrom(rawFeatureType)) {
@@ -135,8 +133,8 @@ public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate
 	}
 	
 	@Override
-	protected List<LightweightTypeReference> getSyntacticTypeArguments() {
-		return Lists.transform(getConstructorCall().getTypeArguments(), getState().getResolvedTypes().getConverter());
+	protected List<JvmTypeReference> getPlainSyntacticTypeArguments() {
+		return getConstructorCall().getTypeArguments();
 	}
 	
 	public void applyToModel(IResolvedTypes resolvedTypes) {

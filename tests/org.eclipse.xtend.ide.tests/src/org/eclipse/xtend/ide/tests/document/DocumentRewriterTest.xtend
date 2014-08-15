@@ -6,22 +6,21 @@ import java.io.Serializable
 import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.core.parser.antlr.XtendAntlrTokenFileProvider
+import org.eclipse.xtend.core.parser.antlr.internal.FlexerFactory
 import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer
 import org.eclipse.xtend.ide.editor.model.XtendDocumentTokenSource
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
+import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider
 import org.eclipse.xtext.parser.antlr.Lexer
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.ui.editor.model.XtextDocument
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtext.xbase.ui.document.DocumentRewriter
 import org.eclipse.xtext.xbase.ui.imports.ReplaceConverter
 import org.junit.Test
-import org.eclipse.xtext.common.types.TypesFactory
-import org.eclipse.xtend.core.parser.antlr.internal.FlexerFactory
 
 class DocumentRewriterTest extends AbstractXtendUITestCase {
 
@@ -150,10 +149,9 @@ class DocumentRewriterTest extends AbstractXtendUITestCase {
 				val beforeFoo = newSection(model.indexOf('foo'), 0)
 				val beforeBar = newSection(model.indexOf('bar'), 0)
 				val owner = new StandardTypeReferenceOwner(services, r)
-				val converter = new OwnedConverter(owner)
 				val list = typeReferences.getTypeForName(List, r, createJvmWildcardTypeReference)
-				beforeFoo.append(converter.apply(list))
-				beforeBar.append(converter.apply(typeReferences.getTypeForName(File, r)))
+				beforeFoo.append(owner.toLightweightTypeReference(list))
+				beforeBar.append(owner.toLightweightTypeReference(typeReferences.getTypeForName(File, r)))
 				beforeFoo.append(' ') 
 				beforeBar.append(' ')
 
@@ -187,9 +185,8 @@ class DocumentRewriterTest extends AbstractXtendUITestCase {
 				val beforeFoo = newSection(model.indexOf('foo'), 0)
 				val beforeBar = newSection(model.indexOf('bar'), 0)
 				val owner = new StandardTypeReferenceOwner(services, r)
-				val converter = new OwnedConverter(owner)
-				beforeFoo.append(converter.apply(typeReferences.getTypeForName(List, r, typeReferences.getTypeForName(String, r))))
-				beforeBar.append(converter.apply(typeReferences.getTypeForName(List, r, typeReferences.getTypeForName(File, r))))
+				beforeFoo.append(owner.toLightweightTypeReference(typeReferences.getTypeForName(List, r, typeReferences.getTypeForName(String, r))))
+				beforeBar.append(owner.toLightweightTypeReference(typeReferences.getTypeForName(List, r, typeReferences.getTypeForName(File, r))))
 				beforeFoo.append(' ') 
 				beforeBar.append(' ')
 			]

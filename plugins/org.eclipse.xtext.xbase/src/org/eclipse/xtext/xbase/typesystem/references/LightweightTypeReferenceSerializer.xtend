@@ -51,6 +51,17 @@ class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
 		}
 	}
 	
+	override protected doVisitInnerTypeReference(/* @NonNull */ InnerTypeReference reference) {
+		reference.outer.accept(this)
+		appender.append('.')
+		appender.append(reference.type.simpleName)
+		if(!reference.typeArguments.empty) {
+			appender.append('<')
+			appendCommaSeparated(reference.typeArguments)
+			appender.append('>')
+		}
+	}
+	
 	override protected doVisitUnboundTypeReference(/* @NonNull */ UnboundTypeReference reference) {
 		reference.toJavaType.accept(this)
 	}

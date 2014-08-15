@@ -108,6 +108,36 @@ public class BinaryGenericTypeSignature extends BinaryTypeSignature {
 			p = end + 1;
 		}
 	}
+	
+	@Override
+	public BinaryTypeSignature getOuter() {
+		int startFrom = offset;
+		int end = -1;
+		while(true) {
+			int typeArgsIdx = chars.indexOf('<', startFrom);
+			if (typeArgsIdx == -1 || typeArgsIdx > offset + length) {
+				if (end == -1)
+					return null;
+				return new BinaryGenericTypeSignature(chars, offset, end - offset + 2);
+			}
+			int count = 1; // start to count generic start/end peers
+			int i = typeArgsIdx;
+			while (count > 0) {
+				switch (chars.charAt(++i)) {
+					case '<':
+						count++;
+						break;
+					case '>':
+						count--;
+						break;
+				}
+			}
+			if (i != offset + length - 2) {
+				end = i;
+			}
+			startFrom = i;
+		}
+	}
 
 	@Override
 	public BinaryGenericTypeSignature getTypeErasure() {

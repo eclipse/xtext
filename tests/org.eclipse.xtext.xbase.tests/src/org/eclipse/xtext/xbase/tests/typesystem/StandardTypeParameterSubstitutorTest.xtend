@@ -13,10 +13,8 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector
-import org.junit.Test
-import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
 import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor
+import org.junit.Test
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -52,7 +50,8 @@ class StandardTypeParameterSubstitutorTest extends AbstractXbaseTestCase {
 		val typeParameter = mapping.keySet.head
 		val boundArgument = mapping.get(typeParameter)
 		assertEquals(componentType, boundArgument.typeReference.simpleName)
-		val originalArray = new ArrayTypeReference(typeReference.owner, new ParameterizedTypeReference(typeReference.owner, typeParameter))
+		val owner = typeReference.owner
+		val originalArray = owner.newArrayTypeReference(owner.newParameterizedTypeReference(typeParameter))
 		assertEquals('T[]', originalArray.simpleName)
 		val substitutedArray = new StandardTypeParameterSubstitutor(mapping, typeReference.owner).substitute(originalArray)
 		return substitutedArray

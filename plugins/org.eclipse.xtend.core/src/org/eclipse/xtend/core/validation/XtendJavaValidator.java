@@ -112,7 +112,6 @@ import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.override.IOverrideCheckResult.OverrideCheckDetails;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedExecutable;
@@ -121,7 +120,7 @@ import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
 import org.eclipse.xtext.xbase.typesystem.override.ResolvedOperations;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.ContextualVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xbase.validation.ImplicitReturnFinder;
@@ -1583,7 +1582,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			return;
 		}
 		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(getServices(), context);
-		LightweightTypeReference throwableReference = new OwnedConverter(owner).toLightweightReference(throwableType);
+		LightweightTypeReference throwableReference = owner.toLightweightTypeReference(throwableType);
 		for(int i = 0; i < exceptions.size(); i++) {
 			JvmTypeReference exception = exceptions.get(i);
 			// throwables may not carry generics thus the raw comparison is sufficient

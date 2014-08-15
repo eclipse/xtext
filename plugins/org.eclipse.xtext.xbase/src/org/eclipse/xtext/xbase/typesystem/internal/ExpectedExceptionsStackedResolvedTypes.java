@@ -15,9 +15,9 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.IApplicableCandidate;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 import com.google.common.collect.Lists;
@@ -53,10 +53,10 @@ public class ExpectedExceptionsStackedResolvedTypes extends StackedResolvedTypes
 	protected void acceptCandidate(XExpression expression, IApplicableCandidate candidate) {
 		getParent().acceptCandidate(expression, candidate);
 	}
-
+	
 	@Override
-	protected OwnedConverter getConverter() {
-		return getParent().getConverter();
+	public ITypeReferenceOwner getReferenceOwner() {
+		return getParent().getReferenceOwner();
 	}
 
 	@Override

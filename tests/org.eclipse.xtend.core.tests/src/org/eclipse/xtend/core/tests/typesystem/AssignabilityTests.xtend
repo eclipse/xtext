@@ -11,15 +11,11 @@ import com.google.inject.Inject
 import java.util.Map
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument
-import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
-import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
-import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference
 import org.junit.Ignore
 import org.junit.Test
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags
 
 /**
  * @author Sebastian Zarnekow
@@ -28,10 +24,6 @@ abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwn
 	
 	@Inject
 	protected extension IXtendJvmAssociations
-	
-	override getDeclaredTypeParameters() {
-		emptyList
-	}
 	
 	def isAssignableFrom(Class<?> lhs, String rhs) {
 		(lhs.canonicalName->null).isAssignableFrom(rhs, true)
@@ -80,8 +72,8 @@ abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwn
 			rhs.fixup» rhs) {}'''
 		val function = function(signature.toString)
 		val operation = function.directlyInferredOperation
-		val lhsType = if (lhsAndParams.key != null) operation.parameters.head.parameterType.toLightweightReference else new AnyTypeReference(this)
-		val rhsType = if (rhs != null) operation.parameters.last.parameterType.toLightweightReference else new AnyTypeReference(this)
+		val lhsType = if (lhsAndParams.key != null) operation.parameters.head.parameterType.toLightweightTypeReference else owner.newAnyTypeReference
+		val rhsType = if (rhs != null) operation.parameters.last.parameterType.toLightweightTypeReference else owner.newAnyTypeReference
 		assertEquals(lhsType.simpleName + " := " + rhsType.simpleName, expectation, lhsType.testIsAssignable(rhsType))
 		if (expectation) {
 			for(superType: lhsType.allSuperTypes) {
@@ -103,17 +95,17 @@ abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwn
 	
 	def boolean testIsAssignable(LightweightTypeReference lhs, LightweightTypeReference rhs) { 
 		assertTrue(lhs.doIsAssignable(lhs))
-		assertTrue(lhs.doIsAssignable(lhs.toTypeReference.toLightweightReference))
-		assertTrue(rhs.doIsAssignable(rhs.toTypeReference.toLightweightReference))
+		assertTrue(lhs.doIsAssignable(lhs.toTypeReference.toLightweightTypeReference))
+		assertTrue(rhs.doIsAssignable(rhs.toTypeReference.toLightweightTypeReference))
 		val boolean result = lhs.doIsAssignable(rhs)
 		if (!rhs.primitiveVoid) {
-			val wcRhs = new WildcardTypeReference(this)
+			val wcRhs = owner.newWildcardTypeReference
 			wcRhs.addUpperBound(rhs.wrapperTypeIfPrimitive)
 			assertEquals(result, lhs.doIsAssignable(wcRhs))
-			val compoundRhs = new CompoundTypeReference(this, true)
+			val compoundRhs = owner.newCompoundTypeReference(true)
 			compoundRhs.addComponent(rhs)
 			val object = rhs.owner.services.typeReferences.findDeclaredType(Object, rhs.owner.contextResourceSet)
-			compoundRhs.addComponent(new ParameterizedTypeReference(rhs.owner, object))
+			compoundRhs.addComponent(rhs.owner.newParameterizedTypeReference(object))
 			assertEquals(lhs + ' := ' + compoundRhs.toString, result, lhs.doIsAssignable(compoundRhs))
 		}
 		return result
@@ -850,6 +842,106 @@ abstract class CommonAssignabilityTest extends AbstractAssignabilityTest {
 	private def String strangeIterable(String typeParam) {
 		'''org.eclipse.xtend.core.tests.typesystem.StrangeIterable<«typeParam»>'''
 	}
+	
+	@Test
+	def void testInnerClasses_01() {
+		"test.InnerClasses.Super<Number>.Inner<Number>".isAssignableFrom("test.InnerClasses.Super<Number>.Inner<Number>")
+		"test.InnerClasses.Super<Number>.Inner<Number>".isAssignableFrom("test.InnerClasses.Super<Number>.SubInner<Number>")
+		"test.InnerClasses.Super<Number>.Inner<Number>".isAssignableFrom("test.InnerClasses.Sub<Number>.Inner<Number>")
+		"test.InnerClasses.Sub<Number>.Inner<Number>".isAssignableFrom("test.InnerClasses.Super<Number>.Inner<Number>")
+		"test.InnerClasses.Super<Number>.Inner<Number>".isAssignableFrom("test.InnerClasses.Sub<Number>.SubInner<Number>")
+		"test.InnerClasses.Sub<Number>.Inner<Number>".isAssignableFrom("test.InnerClasses.Super<Number>.SubInner<Number>")
+	}
+	
+	@Test
+	def void testInnerClasses_02() {
+		"test.InnerClasses.SubString<Number>.Inner<Number>".isAssignableFrom("test.InnerClasses.Super<String>.Inner<Number>")
+		"test.InnerClasses.Super<String>.Inner<Number>".isAssignableFrom("test.InnerClasses.SubString<Number>.Inner<Number>")
+	}
+
+	@Test
+	def void testInnerClasses_03() {
+		"test.InnerClasses.SubString<Number>.Inner<Number>".isNotAssignableFrom("test.InnerClasses.Super<String>.Inner<Integer>")
+		"test.InnerClasses.Super<String>.Inner<Integer>".isNotAssignableFrom("test.InnerClasses.SubString<Number>.Inner<Number>")
+	}
+	
+	@Test
+	def void testInnerClasses_04() {
+		"test.InnerClasses.SubString<Number>.Inner<? extends Number>".isAssignableFrom("test.InnerClasses.Super<String>.Inner<Integer>")
+		"test.InnerClasses.Super<String>.Inner<Integer>".isNotAssignableFrom("test.InnerClasses.SubString<Number>.Inner<? extends Number>")
+	}
+	
+	@Test
+	def void testInnerClasses_05() {
+		"test.InnerClasses.SubString<String>.Inner<Number>".isAssignableFrom("test.InnerClasses.Super<String>.Inner<Number>")
+		"test.InnerClasses.Super<String>.Inner<Number>".isAssignableFrom("test.InnerClasses.SubString<String>.Inner<Number>")
+	}
+	
+	@Test
+	def void testInnerClasses_06() {
+		"test.InnerClasses.SubString<Number>.Inner<Number>".isAssignableFrom("test.InnerClasses.SubString<String>.Inner<Number>")
+		"test.InnerClasses.SubString<String>.Inner<Number>".isAssignableFrom("test.InnerClasses.SubString<Number>.Inner<Number>")
+	}
+	
+	@Test
+	def void testInnerClasses_07() {
+		"test.InnerClasses.Super<Number>.Inner<Number>".isNotAssignableFrom("test.InnerClasses.Super<String>.Inner<Number>")
+		"test.InnerClasses.Super<String>.Inner<Number>".isNotAssignableFrom("test.InnerClasses.Super<Number>.Inner<Number>")
+	}
+	
+	@Test
+	def void testInnerClasses_08() {
+		"test.InnerClasses.Super<String>.Inner<String>".isAssignableFrom("test.InnerClasses.Super<String>.SubInner<String>")
+		"test.InnerClasses.Super<String>.SubInner<String>".isNotAssignableFrom("test.InnerClasses.Super<String>.Inner<String>")
+	}
+	
+	@Test
+	def void testInnerClasses_09() {
+		"test.InnerClasses.Sub<String>.Inner<String>".isAssignableFrom("test.InnerClasses.Sub<String>.SubInner<String>")
+		"test.InnerClasses.Sub<String>.SubInner<String>".isNotAssignableFrom("test.InnerClasses.Sub<String>.Inner<String>")
+	}
+	
+	@Test
+	def void testInnerClasses_10() {
+		"test.InnerClasses.Sub<String>.Inner<String>".isAssignableFrom("test.InnerClasses.Super<String>.Inner<String>")
+		"test.InnerClasses.Super<String>.Inner<String>".isAssignableFrom("test.InnerClasses.Sub<String>.Inner<String>")
+	}
+	
+	@Test
+	def void testInnerClasses_11() {
+		"test.InnerClasses.Super<String>.Inner<String>".isAssignableFrom("test.InnerClasses.Sub<String>.SubInner2<Number>")
+		"test.InnerClasses.Super<String>.Inner<String>".isNotAssignableFrom("test.InnerClasses.Sub<Number>.SubInner2<Number>")
+	}
+	
+	@Test
+	def void testInnerClasses_12() {
+		"test.InnerClasses.Super<String>.Inner<String>".isAssignableFrom("test.InnerClasses.Sub<String>.SubInner2<Number>")
+		"test.InnerClasses.Super<String>.Inner<String>".isNotAssignableFrom("test.InnerClasses.Sub<Number>.SubInner2<Number>")
+		"test.InnerClasses.Super<String>.Inner<Number>".isNotAssignableFrom("test.InnerClasses.Sub<Number>.SubInner2<Number>")
+	}
+	
+	@Test
+	def void testInnerClasses_13() {
+		"test.InnerClasses.Super<String>.Inner<Number>".isAssignableFrom("test.InnerClasses.Sub<String>.SubInner<Number>")
+		"test.InnerClasses.Super<String>.SubInner<Number>".isNotAssignableFrom("test.InnerClasses.Sub<String>.SubInner2<Number>")
+		"test.InnerClasses.Super<String>.Inner<String>".isNotAssignableFrom("test.InnerClasses.Sub<Number>.SubInner<Number>")
+	}
+	
+	@Test
+	def void testInnerClasses_14() {
+		"test.InnerClasses.Super2<String>.Inner<String>".isAssignableFrom("test.InnerClasses.Sub2.SubInner")
+		"test.InnerClasses.Sub2.Inner<String>".isAssignableFrom("test.InnerClasses.Sub2.SubInner")
+		"test.InnerClasses.Sub2.Inner<? extends CharSequence>".isAssignableFrom("test.InnerClasses.Sub2.SubInner")
+		"test.InnerClasses.Sub2.SubInner".isNotAssignableFrom("test.InnerClasses.Super2<String>.Inner<String>")
+		"test.InnerClasses.Sub2.SubInner".isNotAssignableFrom("test.InnerClasses.Sub2.Inner<String>")
+	}
+	
+	@Test
+	def void testInnerClasses_15() {
+		"test.InnerClasses.Super3<String>.Inner<Number>".isAssignableFrom("test.InnerClasses.Sub5<Number>")
+		"test.InnerClasses.Super3<String>.Inner<String>".isNotAssignableFrom("test.InnerClasses.Sub5<Number>")
+		"test.InnerClasses.Super3<Number>.Inner<Number>".isNotAssignableFrom("test.InnerClasses.Sub5<Number>")
+	}
 }
 
 /**
@@ -1064,8 +1156,14 @@ class AssignabilityTest extends CommonAssignabilityTest {
 	
 	@Test
 	override void testFunctionTypes_08() {
-		("()=>long").isNotAssignableFrom("()=>int")
+		("()=>long").isAssignableFrom("()=>int")
 		("()=>int").isNotAssignableFrom("()=>long")
+		("()=>long").isAssignableFrom("$Function0<? extends java.lang.Integer>")
+		("()=>int").isNotAssignableFrom("$Function0<? extends java.lang.Long>")
+		("$Function0<? extends java.lang.Long>").isNotAssignableFrom("$Function0<? extends java.lang.Integer>")
+		("$Function0<? extends java.lang.Integer>").isNotAssignableFrom("$Function0<? extends java.lang.Long>")
+		("$Function0<? extends java.lang.Long>").isNotAssignableFrom("()=>int")
+		("$Function0<? extends java.lang.Integer>").isNotAssignableFrom("()=>long")
 	}
 	
 	@Test
@@ -1209,33 +1307,6 @@ class AssignabilityTest extends CommonAssignabilityTest {
 	}
 	
 }
-
-///**
-// * @author Sebastian Zarnekow
-// */
-//@RunWith(typeof(XtextRunner))
-//@InjectWith(typeof(RuntimeInjectorProvider))
-//class OldAPIAssignabilityTest extends AssignabilityTest {
-//	
-//	@Inject
-//	extension IXtendJvmAssociations
-//	
-//	@Inject
-//	TypeConformanceComputer conformanceComputer
-//	
-//	override isAssignableFrom(Pair<String, String> lhsAndParams, String rhs, boolean expectation) {
-//		// TODO synthesize unique variable names as soon as the function should be validated
-//		val signature = '''def «IF !lhsAndParams.value.nullOrEmpty»<«lhsAndParams.value»> «ENDIF»void method(«
-//			lhsAndParams.key.fixup» lhs, «
-//			rhs.fixup» rhs) {}'''
-//		val function = function(signature.toString)
-//		val operation = function.directlyInferredOperation
-//		val lhsType = if (lhsAndParams.key != null) operation.parameters.head.parameterType else TypesFactory::eINSTANCE.createJvmAnyTypeReference
-//		val rhsType = if (rhs != null) operation.parameters.last.parameterType else TypesFactory::eINSTANCE.createJvmAnyTypeReference
-//		assertEquals(expectation, conformanceComputer.isConformant(lhsType, rhsType))
-//	}
-//	
-//}
 
 /**
  * @author Sebastian Zarnekow
@@ -1611,6 +1682,50 @@ class RawAssignabilityTest extends CommonAssignabilityTest {
 		"java.lang.Class<? super java.util.Map<?, ?>>".isAssignableFrom("java.lang.Class<? super java.util.Map>")
 	}
 	
+	@Test
+	override void testInnerClasses_03() {
+		"test.InnerClasses.SubString<Number>.Inner<Number>".isAssignableFrom("test.InnerClasses.Super<String>.Inner<Integer>")
+		"test.InnerClasses.Super<String>.Inner<Integer>".isAssignableFrom("test.InnerClasses.SubString<Number>.Inner<Number>")
+	}
+	
+	@Test
+	override void testInnerClasses_04() {
+		"test.InnerClasses.SubString<Number>.Inner<? extends Number>".isAssignableFrom("test.InnerClasses.Super<String>.Inner<Integer>")
+		"test.InnerClasses.Super<String>.Inner<Integer>".isAssignableFrom("test.InnerClasses.SubString<Number>.Inner<? extends Number>")
+	}
+	
+	@Test
+	override void testInnerClasses_07() {
+		"test.InnerClasses.Super<Number>.Inner<Number>".isAssignableFrom("test.InnerClasses.Super<String>.Inner<Number>")
+		"test.InnerClasses.Super<String>.Inner<Number>".isAssignableFrom("test.InnerClasses.Super<Number>.Inner<Number>")
+	}
+	
+	@Test
+	override void testInnerClasses_11() {
+		"test.InnerClasses.Super<String>.Inner<String>".isAssignableFrom("test.InnerClasses.Sub<String>.SubInner2<Number>")
+		"test.InnerClasses.Super<String>.Inner<String>".isAssignableFrom("test.InnerClasses.Sub<Number>.SubInner2<Number>")
+	}
+	
+	@Test
+	override void testInnerClasses_12() {
+		"test.InnerClasses.Super<String>.Inner<String>".isAssignableFrom("test.InnerClasses.Sub<String>.SubInner2<Number>")
+		"test.InnerClasses.Super<String>.Inner<String>".isAssignableFrom("test.InnerClasses.Sub<Number>.SubInner2<Number>")
+		"test.InnerClasses.Super<String>.Inner<Number>".isAssignableFrom("test.InnerClasses.Sub<Number>.SubInner2<Number>")
+	}
+	
+	@Test
+	override void testInnerClasses_13() {
+		"test.InnerClasses.Super<String>.Inner<Number>".isAssignableFrom("test.InnerClasses.Sub<String>.SubInner<Number>")
+		"test.InnerClasses.Super<String>.SubInner<Number>".isNotAssignableFrom("test.InnerClasses.Sub<String>.SubInner2<Number>")
+		"test.InnerClasses.Super<String>.Inner<String>".isAssignableFrom("test.InnerClasses.Sub<Number>.SubInner<Number>")
+	}
+	
+	@Test
+	override void testInnerClasses_15() {
+		"test.InnerClasses.Super3<String>.Inner<Number>".isAssignableFrom("test.InnerClasses.Sub5<Number>")
+		"test.InnerClasses.Super3<String>.Inner<String>".isAssignableFrom("test.InnerClasses.Sub5<Number>")
+		"test.InnerClasses.Super3<Number>.Inner<Number>".isAssignableFrom("test.InnerClasses.Sub5<Number>")
+	}
 }
 
 @InjectWith(RuntimeInjectorProviderWithCustomSynonyms)

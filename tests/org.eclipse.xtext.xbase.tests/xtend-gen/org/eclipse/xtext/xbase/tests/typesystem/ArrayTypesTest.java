@@ -108,6 +108,14 @@ public class ArrayTypesTest extends AbstractXbaseTestCase {
     Assert.assertEquals("String[]", _simpleName);
   }
   
+  @Test
+  public void testTryConvertToArray_11() {
+    final LightweightTypeReference typeReference = this.toTypeReference("org.eclipse.xtext.xbase.tests.typesystem.ClosureTypeComputerUnitTest.IterableContainer<String>.Iter");
+    final ArrayTypeReference arrayType = typeReference.tryConvertToArray();
+    String _simpleName = arrayType.getSimpleName();
+    Assert.assertEquals("String[]", _simpleName);
+  }
+  
   protected LightweightTypeReference toTypeReference(final String reference) {
     try {
       StringConcatenation _builder = new StringConcatenation();

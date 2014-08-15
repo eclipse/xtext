@@ -10,42 +10,26 @@ package org.eclipse.xtend.core.tests.macro;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.tests.typesystem.AssignabilityTest;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
-import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
-import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.junit.Assert;
-import org.junit.Ignore;
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -85,41 +69,43 @@ public class TypeReferenceAssignabilityTest extends AssignabilityTest {
       EObject _rootContainer = EcoreUtil.getRootContainer(function);
       final XtendFile xtendFile = ((XtendFile) _rootContainer);
       final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
-        public void apply(@Extension final CompilationUnitImpl unit) {
-          LightweightTypeReference _xifexpression = null;
+        public void apply(final CompilationUnitImpl it) {
+          TypeReference _xifexpression = null;
           String _key = lhsAndParams.getKey();
           boolean _notEquals = (!Objects.equal(_key, null));
           if (_notEquals) {
             EList<JvmFormalParameter> _parameters = operation.getParameters();
             JvmFormalParameter _head = IterableExtensions.<JvmFormalParameter>head(_parameters);
             JvmTypeReference _parameterType = _head.getParameterType();
-            TypeReference _newTypeReference = TypeReferenceAssignabilityTest.this.newTypeReference(_parameterType, unit);
-            _xifexpression = unit.toLightweightTypeReference(_newTypeReference);
+            _xifexpression = it.toTypeReference(_parameterType);
           } else {
-            _xifexpression = new AnyTypeReference(TypeReferenceAssignabilityTest.this);
+            ITypeReferenceOwner _owner = TypeReferenceAssignabilityTest.this.getOwner();
+            AnyTypeReference _newAnyTypeReference = _owner.newAnyTypeReference();
+            _xifexpression = it.toTypeReference(_newAnyTypeReference);
           }
-          final LightweightTypeReference lhsType = _xifexpression;
-          LightweightTypeReference _xifexpression_1 = null;
+          final TypeReference lhsType = _xifexpression;
+          TypeReference _xifexpression_1 = null;
           boolean _notEquals_1 = (!Objects.equal(rhs, null));
           if (_notEquals_1) {
             EList<JvmFormalParameter> _parameters_1 = operation.getParameters();
             JvmFormalParameter _last = IterableExtensions.<JvmFormalParameter>last(_parameters_1);
             JvmTypeReference _parameterType_1 = _last.getParameterType();
-            TypeReference _newTypeReference_1 = TypeReferenceAssignabilityTest.this.newTypeReference(_parameterType_1, unit);
-            _xifexpression_1 = unit.toLightweightTypeReference(_newTypeReference_1);
+            _xifexpression_1 = it.toTypeReference(_parameterType_1);
           } else {
-            _xifexpression_1 = new AnyTypeReference(TypeReferenceAssignabilityTest.this);
+            ITypeReferenceOwner _owner_1 = TypeReferenceAssignabilityTest.this.getOwner();
+            AnyTypeReference _newAnyTypeReference_1 = _owner_1.newAnyTypeReference();
+            _xifexpression_1 = it.toTypeReference(_newAnyTypeReference_1);
           }
-          final LightweightTypeReference rhsType = _xifexpression_1;
+          final TypeReference rhsType = _xifexpression_1;
           String _simpleName = lhsType.getSimpleName();
           String _plus = (_simpleName + " := ");
           String _simpleName_1 = rhsType.getSimpleName();
           String _plus_1 = (_plus + _simpleName_1);
-          boolean _testIsAssignable = TypeReferenceAssignabilityTest.this.testIsAssignable(lhsType, rhsType);
+          boolean _testIsAssignable = TypeReferenceAssignabilityTest.this.testIsAssignable(it, lhsType, rhsType);
           Assert.assertEquals(_plus_1, Boolean.valueOf(expectation), Boolean.valueOf(_testIsAssignable));
           if (expectation) {
-            List<LightweightTypeReference> _allSuperTypes = lhsType.getAllSuperTypes();
-            for (final LightweightTypeReference superType : _allSuperTypes) {
+            Iterable<? extends TypeReference> _declaredSuperTypes = lhsType.getDeclaredSuperTypes();
+            for (final TypeReference superType : _declaredSuperTypes) {
               boolean _or = false;
               boolean _isArray = superType.isArray();
               boolean _isArray_1 = lhsType.isArray();
@@ -134,7 +120,7 @@ public class TypeReferenceAssignabilityTest extends AssignabilityTest {
               }
               if (_or) {
                 String _string = superType.toString();
-                boolean _testIsAssignable_1 = TypeReferenceAssignabilityTest.this.testIsAssignable(superType, rhsType);
+                boolean _testIsAssignable_1 = TypeReferenceAssignabilityTest.this.testIsAssignable(it, superType, rhsType);
                 Assert.assertEquals(_string, Boolean.valueOf(expectation), Boolean.valueOf(_testIsAssignable_1));
               }
             }
@@ -147,127 +133,22 @@ public class TypeReferenceAssignabilityTest extends AssignabilityTest {
     }
   }
   
-  public boolean testIsAssignable(final LightweightTypeReference lhs, final LightweightTypeReference rhs) {
+  public boolean testIsAssignable(final CompilationUnitImpl unit, final TypeReference lhs, final TypeReference rhs) {
     boolean _doIsAssignable = this.doIsAssignable(lhs, lhs);
     Assert.assertTrue(_doIsAssignable);
-    JvmTypeReference _typeReference = lhs.toTypeReference();
-    LightweightTypeReference _lightweightReference = this.toLightweightReference(_typeReference);
-    boolean _doIsAssignable_1 = this.doIsAssignable(lhs, _lightweightReference);
+    boolean _doIsAssignable_1 = this.doIsAssignable(rhs, rhs);
     Assert.assertTrue(_doIsAssignable_1);
-    JvmTypeReference _typeReference_1 = rhs.toTypeReference();
-    LightweightTypeReference _lightweightReference_1 = this.toLightweightReference(_typeReference_1);
-    boolean _doIsAssignable_2 = this.doIsAssignable(rhs, _lightweightReference_1);
-    Assert.assertTrue(_doIsAssignable_2);
     final boolean result = this.doIsAssignable(lhs, rhs);
-    boolean _isPrimitiveVoid = rhs.isPrimitiveVoid();
-    boolean _not = (!_isPrimitiveVoid);
-    if (_not) {
-      ITypeReferenceOwner _owner = rhs.getOwner();
-      final WildcardTypeReference wcRhs = new WildcardTypeReference(_owner);
-      LightweightTypeReference _wrapperTypeIfPrimitive = rhs.getWrapperTypeIfPrimitive();
-      wcRhs.addUpperBound(_wrapperTypeIfPrimitive);
-      boolean _doIsAssignable_3 = this.doIsAssignable(lhs, wcRhs);
-      Assert.assertEquals(Boolean.valueOf(result), Boolean.valueOf(_doIsAssignable_3));
-      ITypeReferenceOwner _owner_1 = rhs.getOwner();
-      final CompoundTypeReference compoundRhs = new CompoundTypeReference(_owner_1, true);
-      compoundRhs.addComponent(rhs);
-      ITypeReferenceOwner _owner_2 = rhs.getOwner();
-      CommonTypeComputationServices _services = _owner_2.getServices();
-      TypeReferences _typeReferences = _services.getTypeReferences();
-      ITypeReferenceOwner _owner_3 = rhs.getOwner();
-      ResourceSet _contextResourceSet = _owner_3.getContextResourceSet();
-      final JvmType object = _typeReferences.findDeclaredType(Object.class, _contextResourceSet);
-      ITypeReferenceOwner _owner_4 = rhs.getOwner();
-      ParameterizedTypeReference _parameterizedTypeReference = new ParameterizedTypeReference(_owner_4, object);
-      compoundRhs.addComponent(_parameterizedTypeReference);
-      String _plus = (lhs + " := ");
-      String _string = compoundRhs.toString();
-      String _plus_1 = (_plus + _string);
-      boolean _doIsAssignable_4 = this.doIsAssignable(lhs, compoundRhs);
-      Assert.assertEquals(_plus_1, Boolean.valueOf(result), Boolean.valueOf(_doIsAssignable_4));
-    }
     return result;
+  }
+  
+  public boolean doIsAssignable(final TypeReference lhs, final TypeReference rhs) {
+    return lhs.isAssignableFrom(rhs);
   }
   
   public void asCompilationUnit(final XtendFile file, final Procedure1<? super CompilationUnitImpl> block) {
     final CompilationUnitImpl compilationUnit = this.compilationUnitProvider.get();
     compilationUnit.setXtendFile(file);
     block.apply(compilationUnit);
-  }
-  
-  public TypeReference newTypeReference(final JvmTypeReference reference, @Extension final CompilationUnitImpl unit) {
-    TypeReference _typeReference = unit.toTypeReference(reference);
-    LightweightTypeReference _lightweightTypeReference = unit.toLightweightTypeReference(_typeReference);
-    return this.newTypeReference(_lightweightTypeReference, unit);
-  }
-  
-  public TypeReference newTypeReference(final LightweightTypeReference reference, @Extension final CompilationUnitImpl unit) {
-    TypeReference _xblockexpression = null;
-    {
-      @Extension
-      final TypeReferenceProvider typeReferenceProvider = unit.getTypeReferenceProvider();
-      List<LightweightTypeReference> _typeArguments = reference.getTypeArguments();
-      final Function1<LightweightTypeReference, TypeReference> _function = new Function1<LightweightTypeReference, TypeReference>() {
-        public TypeReference apply(final LightweightTypeReference it) {
-          return TypeReferenceAssignabilityTest.this.newTypeReference(it, unit);
-        }
-      };
-      final List<TypeReference> typeArguments = ListExtensions.<LightweightTypeReference, TypeReference>map(_typeArguments, _function);
-      final LightweightTypeReference invariantBoundSubstitute = reference.getInvariantBoundSubstitute();
-      int depth = 0;
-      LightweightTypeReference componentType = invariantBoundSubstitute;
-      while (componentType.isArray()) {
-        {
-          LightweightTypeReference _componentType = componentType.getComponentType();
-          componentType = _componentType;
-          depth = (depth + 1);
-        }
-      }
-      JvmType _type = componentType.getType();
-      Type _type_1 = unit.toType(_type);
-      TypeReference typeReference = typeReferenceProvider.newTypeReference(_type_1, ((TypeReference[])Conversions.unwrapArray(typeArguments, TypeReference.class)));
-      boolean _isWildcard = reference.isWildcard();
-      if (_isWildcard) {
-        LightweightTypeReference _lowerBoundSubstitute = reference.getLowerBoundSubstitute();
-        boolean _equals = Objects.equal(_lowerBoundSubstitute, invariantBoundSubstitute);
-        if (_equals) {
-          TypeReference _newWildcardTypeReferenceWithLowerBound = typeReferenceProvider.newWildcardTypeReferenceWithLowerBound(typeReference);
-          typeReference = _newWildcardTypeReferenceWithLowerBound;
-        } else {
-          TypeReference _newWildcardTypeReference = typeReferenceProvider.newWildcardTypeReference(typeReference);
-          typeReference = _newWildcardTypeReference;
-        }
-      }
-      int i = 0;
-      while ((i < depth)) {
-        {
-          i = (i + 1);
-          TypeReference _newArrayTypeReference = typeReferenceProvider.newArrayTypeReference(typeReference);
-          typeReference = _newArrayTypeReference;
-        }
-      }
-      _xblockexpression = typeReference;
-    }
-    return _xblockexpression;
-  }
-  
-  @Ignore
-  public void testFunctionTypeAsParameterized_01() {
-  }
-  
-  @Ignore
-  public void testFunctionTypeAsParameterized_02() {
-  }
-  
-  @Ignore
-  public void testFunctionTypeAsParameterized_03() {
-  }
-  
-  @Ignore
-  public void testFunctionTypeAsParameterized_05() {
-  }
-  
-  @Ignore
-  public void testFunctionTypeAsParameterized_06() {
   }
 }

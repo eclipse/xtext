@@ -46,10 +46,8 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
-import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.Maps2;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
@@ -124,7 +122,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		getResolver().getTypeComputer().computeTypes(expression, state);
 		stackedResolvedTypes.prepareMergeIntoParent();
 		if (stackedResolvedTypes.doGetTypeData(expression) == null) {
-			state.acceptActualType(new AnyTypeReference(stackedResolvedTypes.getReferenceOwner()));
+			state.acceptActualType(stackedResolvedTypes.getReferenceOwner().newAnyTypeReference());
 		}
 		stackedResolvedTypes.addExpressionScope(expression, getFeatureScopeSession(), IExpressionScope.Anchor.AFTER);
 		return stackedResolvedTypes;
@@ -554,10 +552,6 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	
 	public UnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter typeParameter) {
 		return getResolvedTypes().createUnboundTypeReference(expression, typeParameter);
-	}
-	
-	public OwnedConverter getConverter() {
-		return new OwnedConverter(getReferenceOwner());
 	}
 	
 	public List<LightweightTypeReference> getExpectedExceptions() {
