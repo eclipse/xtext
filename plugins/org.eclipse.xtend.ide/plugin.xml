@@ -188,6 +188,17 @@
                  id="org.eclipse.jdt.ui.formatter">
            </keywordReference>
         </page>
+        <page
+            name="Condition"
+            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.debug.ConditionPage"
+            id="org.eclipse.xtend.ide.propertypages.BreakpointCondition">
+         <enabledWhen>
+            <test
+                  property="org.eclipse.xtext.xbase.ui.debug.isStratumBreakpointForLanguage" 
+                  value="org.eclipse.xtend.core.Xtend">
+            </test>
+         </enabledWhen>
+      </page>
     </extension>
     <extension
         point="org.eclipse.ui.keywords">
@@ -526,12 +537,25 @@
    </extension>
    <extension point="org.eclipse.ui.popupMenus">
       <viewerContribution
-         targetID="example.rulerContextMenuId"
+         targetID="org.eclipse.xtend.core.Xtend.RulerContext"
          id="org.eclipse.xtend.core.Xtend.ide.RulerPopupActions">
+         <action
+               label="Breakpoint Properties"
+               helpContextId="breakpoint_properties_action_context"
+               class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.jdt.debug.ui.actions.JavaBreakpointPropertiesRulerActionDelegate"
+               menubarPath="group.properties"
+               id="org.eclipse.xtend.core.Xtend.ide.rulerContextMenu.openBreapointPropertiesAction">
+         </action>
+         <action
+            label="Not used"
+            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerEnableDisableBreakpointActionDelegate"
+            menubarPath="debug"
+            id="org.eclipse.xtend.core.Xtend.ide.rulerContextMenu.enableDisableBreakpointAction">
+         </action>
          <action
             label="Toggle Breakpoint"
             class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
-            menubarPath="additions"
+            menubarPath="debug"
             id="org.eclipse.xtend.core.Xtend.ide.rulerContextMenu.toggleBreakpointAction">
          </action>
       </viewerContribution>

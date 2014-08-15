@@ -26,7 +26,9 @@ Require-Bundle: org.eclipse.xtext.xbase;bundle-version="2.7.0";visibility:=reexp
  org.eclipse.search;bundle-version="3.6.0",
  org.eclipse.ltk.ui.refactoring;bundle-version="3.4.0";resolution:=optional;x-installation:=greedy,
  org.apache.commons.lang;bundle-version="2.1.0",
- org.eclipse.core.filesystem;bundle-version="1.2.1"
+ org.eclipse.core.filesystem;bundle-version="1.2.1",
+ org.eclipse.jdt.debug;bundle-version="3.6.0",
+ org.eclipse.core.expressions;bundle-version="3.4"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Activator: org.eclipse.xtext.xbase.ui.internal.XtypeActivator
 Import-Package: org.apache.log4j;version="1.2.15"
@@ -44,6 +46,7 @@ Export-Package: org.eclipse.xtext.xbase.annotations.ui;x-internal:=true,
  org.eclipse.xtext.xbase.ui.document;x-internal:=true,
  org.eclipse.xtext.xbase.ui.editor;x-internal:=true,
  org.eclipse.xtext.xbase.ui.editor.copyqualifiedname;x-internal:=true,
+ org.eclipse.xtext.xbase.ui.debug;x-internal:=true,
  org.eclipse.xtext.xbase.ui.file;x-internal:=true,
  org.eclipse.xtext.xbase.ui.hierarchy;x-internal:=true,
  org.eclipse.xtext.xbase.ui.highlighting;x-internal:=true,
