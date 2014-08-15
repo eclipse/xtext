@@ -16,6 +16,7 @@ import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtext.xbase.lib.Pair
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.junit.Test
+import org.junit.Ignore
 
 /**
  * @author Sebastian Zarnekow
@@ -38,7 +39,7 @@ abstract class AbstractSuperTypesTest extends AbstractTestingTypeReferenceOwner 
 		val signature = '''def «IF !type.value.nullOrEmpty»<«type.value»> «ENDIF»void method(«type.key» type) {}'''
 		val function = function(signature.toString)
 		val operation = function.directlyInferredOperation
-		val subtype = operation.parameters.head.parameterType.toLightweightReference
+		val subtype = operation.parameters.head.parameterType.toLightweightTypeReference
 		assertEquals(superTypes.toList, subtype.collectSuperTypes.map[ simpleName ].toList)
 	}
 	
@@ -103,6 +104,17 @@ abstract class AbstractSuperTypesTest extends AbstractTestingTypeReferenceOwner 
 		("T"->"T").assertSuperTypes("Object")
 	}
 	
+	@Test
+	def void testParameterizedInnerTypes_01()
+	
+	@Test
+	def void testParameterizedInnerTypes_02()
+	
+	@Test
+	def void testParameterizedInnerTypes_03()
+	
+	@Test
+	def void testParameterizedInnerTypes_04()
 }
 
 /**
@@ -182,6 +194,27 @@ class SuperTypesTest extends AbstractSuperTypesTest {
 	@Test
 	override testDependentTypeParametersWithBounds() {
 		("T"->"V extends CharSequence, T extends V").assertSuperTypes("V")
+	}
+	
+	@Test
+	override testParameterizedInnerTypes_01() {
+		"test.InnerClasses.SubString<Number>.SubInner<CharSequence>".assertSuperTypes("InnerClasses$Super<String>$Inner<CharSequence>")
+	}
+	
+	@Test
+	override testParameterizedInnerTypes_02() {
+		"test.InnerClasses.Sub<Number>.SubInner2<CharSequence>".assertSuperTypes("InnerClasses$Super<Number>$Inner<Number>")
+	}
+	
+	@Test
+	@Ignore
+	override testParameterizedInnerTypes_03() {
+		"test.InnerClasses.Sub3.Inner2<Number>".assertSuperTypes("InnerClasses$Super3<String>$Inner<Number>")
+	}
+	
+	@Test
+	override testParameterizedInnerTypes_04() {
+		"test.InnerClasses.Sub4<Number>.Inner3<CharSequence>".assertSuperTypes("InnerClasses$Super3<String>$Inner2<Number>")
 	}
 	
 }
@@ -269,59 +302,24 @@ class AllSuperTypesTest extends AbstractSuperTypesTest {
 		("T"->"T extends Object[]").assertSuperTypes("Object[]", "Cloneable", "Serializable", "Object")
 	}
 	
+	@Test
+	override testParameterizedInnerTypes_01() {
+		"test.InnerClasses.SubString<Number>.SubInner<CharSequence>".assertSuperTypes("InnerClasses$Super<String>$Inner<CharSequence>", "Object")
+	}
+	
+	@Test
+	override testParameterizedInnerTypes_02() {
+		"test.InnerClasses.Sub<Number>.SubInner2<CharSequence>".assertSuperTypes("InnerClasses$Super<Number>$Inner<Number>", "Object")
+	}
+	
+	@Test
+	@Ignore
+	override testParameterizedInnerTypes_03() {
+		"test.InnerClasses.Sub3.Inner2<Number>".assertSuperTypes("InnerClasses$Super3<String>$Inner<Number>")
+	}
+	
+	@Test
+	override testParameterizedInnerTypes_04() {
+		"test.InnerClasses.Sub4<Number>.Inner3<CharSequence>".assertSuperTypes("InnerClasses$Super3<String>$Inner2<Number>", "InnerClasses$Super3<String>$Inner<Number>", "Object")
+	}
 }
-
-///**
-// * @author Sebastian Zarnekow
-// */
-//class OldAPIAllSuperTypeTest extends AllSuperTypesTest {
-//
-//	@Inject
-//	extension IXtendJvmAssociations
-//	
-//	@Inject
-//	SuperTypeCollector superTypeCollector
-//
-//	override assertSuperTypes(Pair<String, String> type, String... superTypes) {
-//		// TODO synthesize unique variable names as soon as the function should be validated
-//		val signature = '''def «IF !type.value.nullOrEmpty»<«type.value»> «ENDIF»void method(«type.key» type) {}'''
-//		val function = function(signature.toString)
-//		val operation = function.directlyInferredOperation
-//		val subtype = operation.parameters.head.parameterType
-//		val computedSuperTypes = superTypeCollector.collectSuperTypes(subtype)
-//		val Set<String> expectedSupertypesAsSet = superTypes.<String>toSet
-//		val Set<String> actualSupertypesAsSet = computedSuperTypes.map[ simpleName ].<String>toSet
-//		assertEquals(expectedSupertypesAsSet, actualSupertypesAsSet as Object)
-//	}
-//	
-//	@Ignore("Old API does not support this properly")
-//	@Test
-//	override testRawCollection() {
-//		fail("Old API does not support this properly")
-//	}
-//	
-//	@Ignore("Old API does not support this properly")
-//	@Test
-//	override testStringCollection() {
-//		fail("Old API does not support this properly")
-//	}
-//	
-//	@Ignore("Old API does not support this properly")
-//	@Test
-//	override testRawList() {
-//		fail("Old API does not support this properly")
-//	}
-//	
-//	@Ignore("Old API does not support this properly")
-//	@Test
-//	override testStringList() {
-//		fail("Old API does not support this properly")
-//	}
-//	
-//	@Ignore("Old API does not support this properly")
-//	@Test
-//	override testStringArrayArrayList() {
-//		fail("Old API does not support this properly")
-//	}
-//	
-//}

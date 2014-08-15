@@ -51,9 +51,17 @@ public abstract class TypeReferenceVisitor {
 	protected void doVisitFunctionTypeReference(FunctionTypeReference reference) {
 		doVisitParameterizedTypeReference(reference);
 	}
+	
+	protected void doVisitInnerFunctionTypeReference(InnerFunctionTypeReference reference) {
+		doVisitFunctionTypeReference(reference);
+	}
 
 	protected void doVisitParameterizedTypeReference(ParameterizedTypeReference reference) {
 		doVisitTypeReference(reference);
+	}
+	
+	protected void doVisitInnerTypeReference(InnerTypeReference reference) {
+		doVisitParameterizedTypeReference(reference);
 	}
 
 	protected void doVisitUnboundTypeReference(UnboundTypeReference reference) {

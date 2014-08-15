@@ -41,7 +41,7 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceFactory;
 
 import com.google.inject.Inject;
 
@@ -67,7 +67,7 @@ public class ParameterContextInformationProvider implements IContextInformationP
 
 	public void getContextInformation(ContentAssistContext context, IContextInformationAcceptor acceptor) {
 		XExpression containerCall = getContainerCall(eObjectAtOffsetHelper.resolveContainedElementAt(context.getResource(), context.getOffset()));
-		OwnedConverter converter = proposalProvider.getTypeConverter(context.getResource());
+		LightweightTypeReferenceFactory factory = proposalProvider.getTypeConverter(context.getResource());
 		if (containerCall != null) {
 			ICompositeNode containerCallNode = NodeModelUtils.findActualNodeFor(containerCall);
 			ITextRegion containerCallRegion = containerCallNode.getTextRegion();
@@ -91,7 +91,7 @@ public class ParameterContextInformationProvider implements IContextInformationP
 							if(!executable.getParameters().isEmpty()) {
 								StyledString styledString = new StyledString();
 								proposalProvider.appendParameters(styledString, executable,
-										featureDescription.getNumberOfIrrelevantParameters(), converter);
+										featureDescription.getNumberOfIrrelevantParameters(), factory);
 								parameterData.addOverloaded(styledString.toString(), executable.isVarArgs());
 								candidatesFound = true;
 							}
@@ -101,7 +101,7 @@ public class ParameterContextInformationProvider implements IContextInformationP
 				if (candidatesFound) {
 					StyledString displayString = proposalProvider.getStyledDisplayString((JvmExecutable) calledFeature, true, 0, 
 							qualifiedNameConverter.toString(qualifiedNameProvider.getFullyQualifiedName(calledFeature)), 
-							calledFeature.getSimpleName(), converter);
+							calledFeature.getSimpleName(), factory);
 					ParameterContextInformation parameterContextInformation = new ParameterContextInformation(
 							parameterData, displayString.toString(), getParameterListOffset(containerCall), context.getOffset());
 					acceptor.accept(parameterContextInformation);

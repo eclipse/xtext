@@ -47,6 +47,9 @@ public class XbaseBatchScopeProvider implements IBatchScopeProvider , IDelegatin
 	private FeatureScopes featureScopes;
 	
 	@Inject
+	private TypeScopes typeScopes;
+	
+	@Inject
 	@Named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)
 	private IScopeProvider delegate;
 	
@@ -92,6 +95,9 @@ public class XbaseBatchScopeProvider implements IBatchScopeProvider , IDelegatin
 			}
 			IExpressionScope expressionScope = typeResolver.resolveTypes(context).getExpressionScope(context, anchor);
 			return expressionScope.getFeatureScope();
+		}
+		if (isTypeScope(reference)) {
+			return typeScopes.createTypeScope(context, reference);
 		}
 		return delegateGetScope(context, reference);
 	}

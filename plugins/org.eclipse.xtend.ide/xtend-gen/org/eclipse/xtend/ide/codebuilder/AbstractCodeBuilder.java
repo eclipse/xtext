@@ -34,9 +34,8 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 /**
@@ -187,7 +186,6 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
               appendable.append(" extends ");
               boolean isFirst = true;
               final StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(this.services, this.context);
-              final OwnedConverter converter = new OwnedConverter(owner);
               for (final JvmUpperBound upperBound : upperBounds) {
                 {
                   if ((!isFirst)) {
@@ -195,8 +193,8 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
                   }
                   isFirst = false;
                   JvmTypeReference _typeReference = upperBound.getTypeReference();
-                  LightweightTypeReference _apply = converter.apply(_typeReference);
-                  this.appendType(appendable, _apply, "Object");
+                  LightweightTypeReference _lightweightTypeReference = owner.toLightweightTypeReference(_typeReference);
+                  this.appendType(appendable, _lightweightTypeReference, "Object");
                 }
               }
             }

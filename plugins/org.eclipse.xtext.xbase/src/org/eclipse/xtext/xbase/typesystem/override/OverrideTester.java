@@ -19,7 +19,6 @@ import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputation
 import org.eclipse.xtext.xbase.typesystem.override.IOverrideCheckResult.OverrideCheckDetails;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.ContextualVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
@@ -62,10 +61,12 @@ public class OverrideTester {
 		if (overridden.getDeclaringType() == declaration.getDeclaringType()) {
 			return new LazyOverrideCheckResult(overriding, overridden, OverrideCheckDetails.SAME_DECLARATOR);
 		}
+		ITypeReferenceOwner owner = overriding.getContextType().getOwner();
+		LightweightTypeReference currentDeclarator = null;
 		if (checkInheritance) {
 			// here we use the raw types intentionally since there is no need to resolve
 			// declarators to concrete bounds to determine the override relationship of types
-			ParameterizedTypeReference currentDeclarator = new ParameterizedTypeReference(overriding.getContextType().getOwner(), declaration.getDeclaringType());
+			currentDeclarator = owner.newParameterizedTypeReference(declaration.getDeclaringType());
 			if (!currentDeclarator.isSubtypeOf(overridden.getDeclaringType())) {
 				return new LazyOverrideCheckResult(overriding, overridden, OverrideCheckDetails.NO_INHERITANCE);	
 			}
@@ -77,7 +78,10 @@ public class OverrideTester {
 		if (parameterCount != declaration.getParameters().size()) {
 			return new LazyOverrideCheckResult(overriding, overridden, OverrideCheckDetails.ARITY_MISMATCH);
 		}
-		if (!(new ContextualVisibilityHelper(visibilityHelper, new ParameterizedTypeReference(overriding.getContextType().getOwner(), declaration.getDeclaringType())).isVisible(overridden))) {
+		if (currentDeclarator == null) {
+			currentDeclarator = owner.newParameterizedTypeReference(declaration.getDeclaringType());
+		}
+		if (!(new ContextualVisibilityHelper(visibilityHelper, currentDeclarator).isVisible(overridden))) {
 			return new LazyOverrideCheckResult(overriding, overridden, OverrideCheckDetails.NOT_VISIBLE);
 		}
 		if (declaration.isStatic() != overridden.isStatic()) {
@@ -276,7 +280,7 @@ public class OverrideTester {
 		int overridingTypeParameterCount = overriding.getTypeParameters().size();
 		if (overridingTypeParameterCount != overridden.getTypeParameters().size()) {
 			for(LightweightTypeReference overridingParameterType: overriding.getResolvedParameterTypes()) {
-				if (!overridingParameterType.getTypeArguments().isEmpty())
+				if (overridingParameterType.hasTypeArguments())
 					return false;
 			}
 			return overridingTypeParameterCount == 0;
@@ -286,8 +290,8 @@ public class OverrideTester {
 		for(int i = 0; i < overridingTypeParameterCount; i++) {
 			JvmTypeParameter overridingTypeParameter = overriding.getTypeParameters().get(i);
 			JvmTypeParameter overriddenTypeParameter = overridden.getTypeParameters().get(i);
-			List<LightweightTypeReference> overridingSuperTypes = new ParameterizedTypeReference(owner, overridingTypeParameter).getSuperTypes();
-			List<LightweightTypeReference> overriddenSuperTypes = new ParameterizedTypeReference(owner, overriddenTypeParameter).getSuperTypes();
+			List<LightweightTypeReference> overridingSuperTypes = owner.newParameterizedTypeReference(overridingTypeParameter).getSuperTypes();
+			List<LightweightTypeReference> overriddenSuperTypes = owner.newParameterizedTypeReference(overriddenTypeParameter).getSuperTypes();
 			if (overridingSuperTypes.size() != overriddenSuperTypes.size()) {
 				return false;
 			}

@@ -61,6 +61,16 @@ public class WildcardTypeReference extends LightweightTypeReference {
 		}
 		return super.getTypeArguments();
 	}
+
+	@Override
+	public boolean hasTypeArguments() {
+		if (lowerBound != null)
+			return lowerBound.hasTypeArguments();
+		if (upperBounds != null && upperBounds.size() == 1) {
+			return upperBounds.get(0).hasTypeArguments();
+		}
+		return super.hasTypeArguments();
+	}
 	
 	public List<LightweightTypeReference> getUpperBounds() {
 		return expose(upperBounds);
@@ -100,7 +110,7 @@ public class WildcardTypeReference extends LightweightTypeReference {
 
 	@Override
 	protected WildcardTypeReference doCopyInto(ITypeReferenceOwner owner) {
-		WildcardTypeReference result = new WildcardTypeReference(owner);
+		WildcardTypeReference result = owner.newWildcardTypeReference();
 		if (upperBounds != null && !upperBounds.isEmpty()) {
 			for(LightweightTypeReference upperBound: upperBounds) {
 				LightweightTypeReference copiedUpperBound = upperBound.copyInto(owner).getInvariantBoundSubstitute();
@@ -127,14 +137,14 @@ public class WildcardTypeReference extends LightweightTypeReference {
 	public LightweightTypeReference getUpperBoundSubstitute() {
 		if (isUnbounded()) {
 			JvmType object = getOwner().getServices().getTypeReferences().findDeclaredType(Object.class, getOwner().getContextResourceSet());
-			return new ParameterizedTypeReference(getOwner(), object);
+			return getOwner().newParameterizedTypeReference(object);
 		}
 		List<LightweightTypeReference> upperBounds = getUpperBounds();
 		if (upperBounds.size() == 1) {
 			LightweightTypeReference result = upperBounds.get(0);
 			return result;
 		}
-		CompoundTypeReference result = new CompoundTypeReference(getOwner(), false);
+		CompoundTypeReference result = getOwner().newCompoundTypeReference(false);
 		for(LightweightTypeReference upperBound: upperBounds) {
 			result.addComponent(upperBound);
 		}
@@ -145,7 +155,7 @@ public class WildcardTypeReference extends LightweightTypeReference {
 	public LightweightTypeReference getLowerBoundSubstitute() {
 		if (lowerBound != null)
 			return lowerBound;
-		return new AnyTypeReference(getOwner());
+		return getOwner().newAnyTypeReference();
 	}
 	
 	@Override
@@ -173,7 +183,7 @@ public class WildcardTypeReference extends LightweightTypeReference {
 	public LightweightTypeReference getSuperType(JvmType rawType) {
 		if (isUnbounded()) {
 			if (Object.class.getName().equals(rawType.getIdentifier())) {
-				return new ParameterizedTypeReference(getOwner(), rawType);
+				return getOwner().newParameterizedTypeReference(rawType);
 			}
 			return null;
 		}

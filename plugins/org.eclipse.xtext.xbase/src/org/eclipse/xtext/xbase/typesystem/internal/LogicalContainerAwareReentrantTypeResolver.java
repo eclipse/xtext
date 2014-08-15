@@ -29,7 +29,6 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -228,7 +227,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 					feature, 
 					-1, 
 					null));
-			AnyTypeReference result = new AnyTypeReference(resolvedTypes.getReferenceOwner());
+			AnyTypeReference result = resolvedTypes.getReferenceOwner().newAnyTypeReference();
 			return toJavaCompliantTypeReference(result, session);
 		}
 		
@@ -347,8 +346,9 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		StackedResolvedTypes childResolvedTypes = declareTypeParameters(resolvedTypes, type, resolvedTypesByType);
 		
 		JvmTypeReference superType = getExtendedClass(type);
+		ITypeReferenceOwner referenceOwner = childResolvedTypes.getReferenceOwner();
 		if (superType != null) {
-			LightweightTypeReference lightweightSuperType = resolvedTypes.getConverter().toLightweightReference(superType);
+			LightweightTypeReference lightweightSuperType = referenceOwner.toLightweightTypeReference(superType);
 			childResolvedTypes.reassignTypeWithoutMerge(superType.getType(), lightweightSuperType);
 			/* 
 			 * We use reassignType to make sure that the following works:
@@ -360,8 +360,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			 * }
 			 */
 		}
-		JvmParameterizedTypeReference thisType = getServices().getTypeReferences().createTypeRef(type);
-		LightweightTypeReference lightweightThisType = resolvedTypes.getConverter().toLightweightReference(thisType);
+		LightweightTypeReference lightweightThisType = referenceOwner.toLightweightTypeReference(type);
 		childResolvedTypes.reassignTypeWithoutMerge(type, lightweightThisType);
 		
 		List<JvmMember> members = type.getMembers();
@@ -405,7 +404,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			JvmTypeReference reference = createComputedTypeReference(resolvedTypesByContext, childResolvedTypes, featureScopeSession, field, (InferredTypeIndicator) casted.getTypeProvider(), false);
 			casted.setEquivalent(reference);
 		} else if (knownType != null) {
-			LightweightTypeReference lightweightReference = childResolvedTypes.getConverter().toLightweightReference(knownType);
+			LightweightTypeReference lightweightReference = childResolvedTypes.getReferenceOwner().toLightweightTypeReference(knownType);
 			childResolvedTypes.setType(field, lightweightReference);
 		} else {
 			JvmTypeReference reference = createComputedTypeReference(resolvedTypesByContext, childResolvedTypes, featureScopeSession, field, null, false);
@@ -447,8 +446,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		StackedResolvedTypes childResolvedTypes = declareTypeParameters(resolvedTypes, constructor, resolvedTypesByContext);
 		
 		JvmDeclaredType producedType = constructor.getDeclaringType();
-		JvmParameterizedTypeReference asReference = getServices().getTypeReferences().createTypeRef(producedType);
-		LightweightTypeReference lightweightReference = childResolvedTypes.getConverter().toLightweightReference(asReference);
+		LightweightTypeReference lightweightReference = childResolvedTypes.getReferenceOwner().toLightweightTypeReference(producedType);
 		childResolvedTypes.setType(constructor, lightweightReference);
 	}
 	
@@ -462,7 +460,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 					resolvedTypesByContext, childResolvedTypes, featureScopeSession, operation, (InferredTypeIndicator) casted.getTypeProvider(), true);
 			casted.setEquivalent(reference);
 		} else if (knownType != null) {
-			LightweightTypeReference lightweightReference = childResolvedTypes.getConverter().toLightweightReference(knownType);
+			LightweightTypeReference lightweightReference = childResolvedTypes.getReferenceOwner().toLightweightTypeReference(knownType);
 			childResolvedTypes.setType(operation, lightweightReference);
 		} else {
 			JvmTypeReference reference = createComputedTypeReference(resolvedTypesByContext, childResolvedTypes, featureScopeSession, operation, null, true);

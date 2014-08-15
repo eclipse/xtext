@@ -16,7 +16,7 @@ import org.junit.Test;
  */
 public class JvmParameterizedTypeReferenceTest extends Assert {
 
-	private JvmParameterizedTypeReference parameterizedType;
+	protected JvmParameterizedTypeReference parameterizedType;
 
 	@Before
 	public void setUp() throws Exception {

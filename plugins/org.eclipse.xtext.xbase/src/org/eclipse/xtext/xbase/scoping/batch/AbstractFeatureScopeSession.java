@@ -25,7 +25,6 @@ import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 
 import com.google.common.collect.Lists;
 
@@ -145,13 +144,13 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 					IEObjectDescription thisDescription = getLocalElement(IFeatureNames.THIS);
 					if (thisDescription != null && thisDescription.getEObjectOrProxy() instanceof JvmDeclaredType) {
 						JvmDeclaredType thisType = (JvmDeclaredType) thisDescription.getEObjectOrProxy();
-						LightweightTypeReference context = new ParameterizedTypeReference(owner, (JvmType) associatedWithThis);
+						LightweightTypeReference context = owner.toPlainTypeReference((JvmType) associatedWithThis);
 						FeatureScopeSessionWithContext contextSession = new FeatureScopeSessionWithContext(this, context, thisType.getPackageName());
 						AbstractNestedFeatureScopeSession result = new FeatureScopeSessionWithLocalElements(contextSession, elements);
 						return result;
 					}
 				}
-				LightweightTypeReference context = new ParameterizedTypeReference(owner, (JvmType) associatedWithThis);
+				LightweightTypeReference context = owner.toPlainTypeReference((JvmType) associatedWithThis);
 				FeatureScopeSessionWithContext contextSession = new FeatureScopeSessionWithContext(this, context);
 				AbstractNestedFeatureScopeSession result = new FeatureScopeSessionWithLocalElements(contextSession, elements);
 				return result;

@@ -17,11 +17,12 @@ import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.InnerFunctionTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.InnerTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithParameterAndNonNullResult;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithParameterAndResult;
 import org.eclipse.xtext.xbase.typesystem.references.UnknownTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 
@@ -32,7 +33,7 @@ import com.google.common.collect.Maps;
  * TODO JavaDoc, toString
  * TODO implement as member function on LightweightTypeReference
  */
-public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVisitorWithParameterAndNonNullResult<Visiting, LightweightTypeReference> {
+public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVisitorWithParameterAndResult<Visiting, LightweightTypeReference> {
 		
 	private final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping;
 	private final ITypeReferenceOwner owner;
@@ -58,7 +59,12 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 	protected LightweightTypeReference doVisitFunctionTypeReference(FunctionTypeReference reference, Visiting visiting) {
 		if (reference.isResolved() && reference.isOwnedBy(getOwner()))
 			return reference;
-		FunctionTypeReference result = new FunctionTypeReference(getOwner(), reference.getType());
+		FunctionTypeReference result = getOwner().newFunctionTypeReference(reference.getType());
+		enhanceFunctionType(reference, result, visiting);
+		return result;
+	}
+
+	protected void enhanceFunctionType(FunctionTypeReference reference, FunctionTypeReference result, Visiting visiting) {
 		for(LightweightTypeReference parameterType: reference.getParameterTypes()) {
 			result.addParameterType(visitTypeArgument(parameterType, visiting));
 		}
@@ -69,6 +75,15 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 		if (returnType != null) {
 			result.setReturnType(visitTypeArgument(returnType, visiting));
 		}
+	}
+	
+	@Override
+	protected LightweightTypeReference doVisitInnerFunctionTypeReference(InnerFunctionTypeReference reference, Visiting visiting) {
+		if (reference.isResolved() && reference.isOwnedBy(getOwner()))
+			return reference;
+		LightweightTypeReference outer = reference.getOuter().accept(this, visiting);
+		InnerFunctionTypeReference result = getOwner().newFunctionTypeReference(outer, reference.getType());
+		enhanceFunctionType(reference, result, visiting);
 		return result;
 	}
 
@@ -101,9 +116,29 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 		return doVisitParameterizedTypeReference(reference, type, visiting);
 	}
 	
-	protected LightweightTypeReference doVisitParameterizedTypeReference(ParameterizedTypeReference reference, JvmType type, Visiting visiting) {
-		ParameterizedTypeReference result = new ParameterizedTypeReference(getOwner(), type);
+	@Override
+	protected LightweightTypeReference doVisitInnerTypeReference(InnerTypeReference reference, Visiting visiting) {
+		if (reference.isResolved() && reference.isOwnedBy(getOwner()))
+			return reference;
+		
+		LightweightTypeReference outer = reference.getOuter().accept(this, visiting);
+		ParameterizedTypeReference result = getOwner().newParameterizedTypeReference(outer, reference.getType());
 		for(LightweightTypeReference argument: reference.getTypeArguments()) {
+			result.addTypeArgument(visitTypeArgument(argument, visiting));
+		}
+		return result;
+	}
+	
+	protected LightweightTypeReference doVisitParameterizedTypeReference(ParameterizedTypeReference reference, JvmType type, Visiting visiting) {
+		ParameterizedTypeReference result = getOwner().newParameterizedTypeReference(type);
+		return enhanceParameterizedTypeReference(reference, type, result, visiting);
+	}
+
+	/**
+	 * @param type the type of the reference. May be used by subtypes. 
+	 */
+	protected LightweightTypeReference enhanceParameterizedTypeReference(ParameterizedTypeReference origin, JvmType type, ParameterizedTypeReference result, Visiting visiting) {
+		for(LightweightTypeReference argument: origin.getTypeArguments()) {
 			result.addTypeArgument(visitTypeArgument(argument, visiting));
 		}
 		return result;
@@ -126,7 +161,7 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 	protected LightweightTypeReference doVisitWildcardTypeReference(WildcardTypeReference reference, Visiting visiting) {
 		if (reference.isResolved() && reference.isOwnedBy(getOwner()))
 			return reference;
-		WildcardTypeReference result = new WildcardTypeReference(getOwner());
+		WildcardTypeReference result = getOwner().newWildcardTypeReference();
 		LightweightTypeReference lowerBound = reference.getLowerBound();
 		if (lowerBound != null) {
 			LightweightTypeReference visited = visitTypeArgument(lowerBound, visiting, true);
@@ -134,7 +169,7 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 				LightweightTypeReference lowerBoundSubstitute = visited.getLowerBoundSubstitute();
 				if (lowerBoundSubstitute.isAny()) {
 					JvmType objectType = getOwner().getServices().getTypeReferences().findDeclaredType(Object.class, getOwner().getContextResourceSet());
-					result.addUpperBound(new ParameterizedTypeReference(getOwner(), objectType));
+					result.addUpperBound(getOwner().newParameterizedTypeReference(objectType));
 					return result;
 				} else {
 					result.setLowerBound(lowerBoundSubstitute);
@@ -160,7 +195,7 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 			return reference;
 		LightweightTypeReference component = visitTypeArgument(reference.getComponentType(), visiting);
 		component = component.getUpperBoundSubstitute();
-		return new ArrayTypeReference(getOwner(), component);
+		return getOwner().newArrayTypeReference(component);
 	}
 	
 	@Override
@@ -177,7 +212,7 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 	protected LightweightTypeReference doVisitCompoundTypeReference(CompoundTypeReference reference, Visiting visiting) {
 		if (reference.isResolved() && reference.isOwnedBy(getOwner()))
 			return reference;
-		CompoundTypeReference result = new CompoundTypeReference(getOwner(), reference.isSynonym());
+		CompoundTypeReference result = getOwner().newCompoundTypeReference(reference.isSynonym());
 		for(LightweightTypeReference component: reference.getMultiTypeComponents()) {
 			result.addComponent(visitTypeArgument(component, visiting));
 		}
@@ -191,7 +226,7 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 	}
 	
 	public LightweightTypeReference substitute(JvmTypeReference original) {
-		LightweightTypeReference lightweightReference = new OwnedConverter(getOwner()).toLightweightReference(original);
+		LightweightTypeReference lightweightReference = getOwner().toLightweightTypeReference(original);
 		return substitute(lightweightReference);
 	}
 	

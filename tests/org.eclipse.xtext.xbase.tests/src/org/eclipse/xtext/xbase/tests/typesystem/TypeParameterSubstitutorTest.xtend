@@ -9,9 +9,7 @@ package org.eclipse.xtext.xbase.tests.typesystem
 
 import com.google.inject.Inject
 import org.eclipse.xtext.common.types.JvmTypeReference
-import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner
-import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector
 import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor
@@ -19,39 +17,14 @@ import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor
 /**
  * @author Sebastian Zarnekow
  */
-class LightweightTypeParameterSubstitutorTest extends AbstractTypeParameterSubstitutorTest implements ITypeReferenceOwner {
+class LightweightTypeParameterSubstitutorTest extends AbstractTypeParameterSubstitutorTest {
 	
 	@Inject CommonTypeComputationServices services
 	
-	extension OwnedConverter = new OwnedConverter(this)
-	
 	override resolve(JvmTypeReference declaration, JvmTypeReference reference) {
-		val mapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(declaration.toLightweightReference)
-		return new StandardTypeParameterSubstitutor(mapping, this).substitute(reference.toLightweightReference).toString
+		extension val owner = new StandardTypeReferenceOwner(services, declaration.type)
+		val mapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(declaration.toLightweightTypeReference)
+		return new StandardTypeParameterSubstitutor(mapping, owner).substitute(reference.toLightweightTypeReference).toString
 	}
 
-	override getServices() {
-		return services
-	}
-	
-	override acceptHint(Object reference, LightweightBoundTypeArgument boundTypeArgument) {
-		throw new UnsupportedOperationException("Should not be invoked")
-	}
-	
-	override getAllHints(Object reference) {
-		throw new UnsupportedOperationException("Should not be invoked")
-	}
-	
-	override getDeclaredTypeParameters() {
-		throw new UnsupportedOperationException("Should not be invoked")
-	}
-	
-	override getContextResourceSet() {
-		return contextResourceSet
-	}
-	
-	override isResolved(Object handle) {
-		throw new UnsupportedOperationException("Should not be invoked")
-	}
-	
 }

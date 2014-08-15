@@ -977,6 +977,33 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmInnerTypeReference} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @since 2.7
+	 */
+	protected JvmInnerTypeReferenceItemProvider jvmInnerTypeReferenceItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmInnerTypeReference}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @since 2.7
+	 */
+	@Override
+	public Adapter createJvmInnerTypeReferenceAdapter()
+	{
+		if (jvmInnerTypeReferenceItemProvider == null)
+		{
+			jvmInnerTypeReferenceItemProvider = new JvmInnerTypeReferenceItemProvider(this);
+		}
+
+		return jvmInnerTypeReferenceItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1123,6 +1150,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 		if (jvmSynonymTypeReferenceItemProvider != null) jvmSynonymTypeReferenceItemProvider.dispose();
 		if (jvmUnknownTypeReferenceItemProvider != null) jvmUnknownTypeReferenceItemProvider.dispose();
 		if (jvmCustomAnnotationValueItemProvider != null) jvmCustomAnnotationValueItemProvider.dispose();
+		if (jvmInnerTypeReferenceItemProvider != null) jvmInnerTypeReferenceItemProvider.dispose();
 	}
 
 }

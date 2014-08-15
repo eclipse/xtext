@@ -377,6 +377,11 @@ public class JvmOperationItemProvider extends JvmExecutableItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(TypesPackage.Literals.JVM_OPERATION__RETURN_TYPE,
+				 TypesFactory.eINSTANCE.createJvmInnerTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(TypesPackage.Literals.JVM_OPERATION__DEFAULT_VALUE,
 				 TypesFactory.eINSTANCE.createJvmIntAnnotationValue()));
 
