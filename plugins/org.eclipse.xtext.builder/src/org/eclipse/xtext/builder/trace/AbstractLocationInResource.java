@@ -46,7 +46,7 @@ public abstract class AbstractLocationInResource implements ILocationInResource 
 	protected abstract int getLineNumber();
 	protected abstract int getEndLineNumber();
 	
-	/* @NonNull */
+	/* @Nullable */
 	public IStorage getStorage() {
 		IStorage result = trace.findStorage(getSrcRelativeResourceURI(), getProject());
 		return result;
