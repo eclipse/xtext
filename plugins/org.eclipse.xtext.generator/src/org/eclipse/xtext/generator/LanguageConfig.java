@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EValidator;
@@ -206,8 +207,15 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 						LOG.error("Couldn't initialize Xcore support.", e);
 					}
 				}
+				URI xcoreLangURI = URI.createPlatformResourceURI("/org.eclipse.emf.ecore.xcore.lib/model/XcoreLang.xcore", true);
+				try {
+					rs.getResource(xcoreLangURI, true);
+				} catch(WrappedException e) {
+					LOG.error("Could not load XcoreLang.xcore.", e);
+					Resource brokenResource = rs.getResource(xcoreLangURI, false);
+					rs.getResources().remove(brokenResource);
+				}
 			}
-			rs.getResource(URI.createPlatformResourceURI("/org.eclipse.emf.ecore.xcore.lib/model/XcoreLang.xcore", true), true);
 			Resource res = rs.getResource(loadedResourceUri, true);
 			if (res == null || res.getContents().isEmpty())
 				LOG.error("Error loading '" + loadedResource + "'");
