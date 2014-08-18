@@ -21,6 +21,7 @@ import org.junit.Rule
 import org.junit.Test
 
 import static org.junit.Assert.*
+import org.eclipse.xtext.util.Strings
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -41,6 +42,7 @@ class JavaIoFileSystemTest {
 				])
 			]]
 			encodingProvider = new IEncodingProvider.Runtime()
+			postProcessor = [$1.toString.replaceAll('\r?\n', Strings.newLine)]
 		]
 		new Path("/foo").mkdir
 	}

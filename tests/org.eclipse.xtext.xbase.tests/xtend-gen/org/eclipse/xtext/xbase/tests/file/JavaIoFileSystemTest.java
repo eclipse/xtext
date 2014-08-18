@@ -10,13 +10,15 @@ package org.eclipse.xtext.xbase.tests.file;
 import com.google.inject.Provider;
 import java.io.File;
 import java.io.FileInputStream;
-import java.net.URI;
 import java.util.List;
 import java.util.Map;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtend.lib.macro.file.Path;
+import org.eclipse.xtext.generator.IFilePostProcessor;
 import org.eclipse.xtext.junit4.TemporaryFolder;
 import org.eclipse.xtext.parser.IEncodingProvider;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.file.JavaIOFileSystemSupport;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
@@ -74,6 +76,14 @@ public class JavaIoFileSystemTest {
           it.setProjectInformationProvider(_function);
           IEncodingProvider.Runtime _runtime = new IEncodingProvider.Runtime();
           it.setEncodingProvider(_runtime);
+          final IFilePostProcessor _function_1 = new IFilePostProcessor() {
+            public CharSequence postProcess(final URI $0, final CharSequence $1) {
+              String _string = $1.toString();
+              String _newLine = Strings.newLine();
+              return _string.replaceAll("\r?\n", _newLine);
+            }
+          };
+          it.setPostProcessor(_function_1);
         }
       };
       JavaIOFileSystemSupport _doubleArrow = ObjectExtensions.<JavaIOFileSystemSupport>operator_doubleArrow(_javaIOFileSystemSupport, _function);
@@ -236,14 +246,14 @@ public class JavaIoFileSystemTest {
       final Path file = new Path("/foo/bar/Foo.text");
       boolean _exists = this.fs.exists(file);
       Assert.assertFalse(_exists);
-      URI _uRI = this.fs.toURI(file);
+      java.net.URI _uRI = this.fs.toURI(file);
       Assert.assertNotNull(_uRI);
       this.fs.setContents(file, "Hello Foo");
       boolean _exists_1 = this.fs.exists(file);
       Assert.assertTrue(_exists_1);
-      URI _uRI_1 = this.fs.toURI(file);
+      java.net.URI _uRI_1 = this.fs.toURI(file);
       Assert.assertNotNull(_uRI_1);
-      URI _uRI_2 = this.fs.toURI(file);
+      java.net.URI _uRI_2 = this.fs.toURI(file);
       final File javaIoFile = new File(_uRI_2);
       boolean _exists_2 = javaIoFile.exists();
       Assert.assertTrue(_exists_2);
