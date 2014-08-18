@@ -75,6 +75,10 @@ class CachingResourceValidatorImpl extends DerivedStateAwareResourceValidator {
 	}
 
 	private def addWarningsForOrphanedJvmElements(Resource resource, CancelIndicator monitor, IAcceptor<Issue> acceptor) {
+		val issueSeverities = issueSeveritiesProvider.getIssueSeverities(resource)
+		val severity = issueSeverities.getSeverity(IssueCodes.ORPHAN_ELMENT)
+		if (severity == Severity.IGNORE)
+			return;
 		for (jvmType : resource.contents.tail.filter(JvmDeclaredType)) {
 			for (jvmMember : jvmType.eAllContents.filter(JvmMember).filter[!synthetic].toIterable) {
 				if (monitor.isCanceled) {
@@ -82,17 +86,13 @@ class CachingResourceValidatorImpl extends DerivedStateAwareResourceValidator {
 				}
 				val sourceElement = jvmMember.primarySourceElement
 				if (sourceElement === null) {
-					addWarningForOrphanedJvmElement(resource, jvmMember, acceptor)
+					addWarningForOrphanedJvmElement(resource, jvmMember, severity, acceptor)
 				}
 			}
 		}
 	}
 
-	private def addWarningForOrphanedJvmElement(Resource resource, JvmMember jvmElement, IAcceptor<Issue> acceptor) {
-			val issueSeverities = issueSeveritiesProvider.getIssueSeverities(resource)
-			val severity = issueSeverities.getSeverity(IssueCodes.ORPHAN_ELMENT)
-			if (severity == Severity.IGNORE)
-				return;
+	private def addWarningForOrphanedJvmElement(Resource resource, JvmMember jvmElement, Severity severity, IAcceptor<Issue> acceptor) {
 			new DiagnosticOnFirstKeyword(
 				severity,
 				IssueCodes.ORPHAN_ELMENT,
