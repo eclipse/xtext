@@ -9,57 +9,101 @@ package org.eclipse.xtend.ide.validator.preferences;
 
 import static org.eclipse.xtend.core.validation.IssueCodes.*;
 
+import org.eclipse.jface.dialogs.IDialogSettings;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.xtext.validation.SeverityConverter;
 import org.eclipse.xtext.xbase.ui.validation.XbaseValidationConfigurationBlock;
+import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
 public class XtendValidatorConfigurationBlock extends XbaseValidationConfigurationBlock {
+	private static final String SETTINGS_SECTION_NAME = "XtendValidatorConfigurationBlock"; //$NON-NLS-1$
 
 	@Override
 	protected void fillSettingsPage(Composite composite, int nColumns, int defaultIndent) {
 		super.fillSettingsPage(composite, nColumns, defaultIndent);
 		fillDispatchSection(new ComboBoxBuilder(this, createSection("Dispatch methods", composite, nColumns),
 				defaultIndent));
-		fillJavaDocSection(new ComboBoxBuilder(this,createSection("Javadoc", composite, nColumns),
-				defaultIndent));
-		fillActiveAnnotationSection(new ComboBoxBuilder(this,createSection("Active Annotations", composite, nColumns),
+		fillJavaDocSection(new ComboBoxBuilder(this, createSection("Javadoc", composite, nColumns), defaultIndent));
+		fillActiveAnnotationSection(new ComboBoxBuilder(this, createSection("Active Annotations", composite, nColumns),
 				defaultIndent));
 	}
 
 	protected void fillDispatchSection(ComboBoxBuilder builder) {
-		builder.addComboBox(DISPATCH_PLAIN_FUNCTION_NAME_CLASH, "Dispatch and non-dispatch method name clash:").addComboBox(
-				SINGLE_DISPATCH_FUNCTION, "Single dispatch method:");
+		builder.addComboBox(DISPATCH_PLAIN_FUNCTION_NAME_CLASH, "Dispatch and non-dispatch method name clash:")
+				.addComboBox(SINGLE_DISPATCH_FUNCTION, "Single dispatch method:");
 	}
+
 	/**
 	 * @see org.eclipse.xtend.core.validation.XtendConfigurableIssueCodes
 	 */
 	protected void fillJavaDocSection(ComboBoxBuilder builder) {
 		builder.addJavaDelegatingComboBox(JAVA_DOC_LINKING_DIAGNOSTIC, "Unresolved references");
 	}
-	
+
 	protected void fillActiveAnnotationSection(ComboBoxBuilder builder) {
 		builder.addComboBox(ORPHAN_ELMENT, "JVM element without source element:");
 	}
-	
+
 	@Override
 	protected void fillUnusedCodeSection(ComboBoxBuilder builder) {
 		super.fillUnusedCodeSection(builder);
 		builder.addJavaDelegatingComboBox(UNUSED_PRIVATE_MEMBER, "Unused private member:");
 	}
-	
+
 	@Override
 	protected void fillPotentialProgrammingProblemsSection(ComboBoxBuilder builder) {
 		super.fillPotentialProgrammingProblemsSection(builder);
 		builder.addComboBox(INVALID_OPERATOR_SIGNATURE, "Unexpected operator declaration:");
 	}
-	
+
 	@Override
 	protected void fillCodingStyleSection(ComboBoxBuilder builder) {
 		super.fillCodingStyleSection(builder);
-		builder.addComboBox(API_TYPE_INFERENCE, "Type inference for API methods/fields:");
-		builder.addComboBox(IMPLICIT_RETURN, "Implicit return:");
+		builder.addComboBox(API_TYPE_INFERENCE, "Type inference for API methods/fields:")
+				.addComboBox(IMPLICIT_RETURN, "Implicit return:");
 	}
 
+	@Override
+	protected void addAdditionalComponentsToSettingsPage(Composite settingsPage, int nColumns, int defaultIndent) {
+		super.addAdditionalComponentsToSettingsPage(settingsPage, nColumns, defaultIndent);
+		createHorizontalLine(settingsPage, nColumns);
+		String[] values = new String[] { SeverityConverter.SEVERITY_ERROR, SeverityConverter.SEVERITY_WARNING,
+				SeverityConverter.SEVERITY_IGNORE };
+		String[] valueLabels = new String[] { "Errors only",
+				"All", "None" };
+		Composite composite = new Composite(settingsPage, SWT.NONE);
+		GridLayout layout = new GridLayout(nColumns, false);
+		layout.marginHeight = 0;
+		composite.setLayoutData(new GridData(GridData.FILL, GridData.CENTER, true, false, nColumns, 1));
+		composite.setLayout(layout);
+		addComboBox(composite, "Display Java Problems in Xtend", IssueCodes.COPY_JAVA_PROBLEMS, defaultIndent, values, valueLabels);
+	}
+
+	private void createHorizontalLine(Composite settingsPage, int nColumns) {
+		Label horizontalLine = new Label(settingsPage, SWT.SEPARATOR | SWT.HORIZONTAL);
+		horizontalLine.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true, false, nColumns, 1));
+		horizontalLine.setFont(settingsPage.getFont());
+	}
+	
+	@Override
+	public void dispose() {
+		storeSectionExpansionStates(getDialogSettings());
+		super.dispose();
+	}
+	@Override
+	protected IDialogSettings getDialogSettings() {
+		IDialogSettings dialogSettings = super.getDialogSettings();
+		IDialogSettings section = dialogSettings.getSection(SETTINGS_SECTION_NAME);
+		if(section==null) {
+			return dialogSettings.addNewSection(SETTINGS_SECTION_NAME);
+		}
+		return section;
+	}
 }
