@@ -13,6 +13,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
+import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -157,7 +158,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_FIELD, "user.issue", "final", "Fizz", "getFoo");
+      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_FIELD, IssueCodes.OVERRIDDEN_FINAL, "final", "getFoo");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -185,7 +186,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_FIELD, "user.issue", "incompatible", "Foo", "getFoo");
+      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_FIELD, org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_RETURN_TYPE, "incompatible", "getFoo");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -368,7 +369,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_FIELD, "user.issue", "final", "Foo", "setFoo(String)");
+      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_FIELD, IssueCodes.OVERRIDDEN_FINAL, "setFoo(String)", "final");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -396,7 +397,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_FIELD, "user.issue", "not void", "Foo", "setFoo(String)");
+      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_FIELD, org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_RETURN_TYPE, "setFoo(String)", "incompatible");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
