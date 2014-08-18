@@ -7,10 +7,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtend.lib.macro.file.Path;
+import org.eclipse.xtext.generator.IFilePostProcessor;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -21,6 +23,10 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
   @Inject
   @Accessors
   private IEncodingProvider encodingProvider;
+  
+  @Inject(optional = true)
+  @Accessors
+  private IFilePostProcessor postProcessor;
   
   public CharSequence getContents(final Path path) {
     try {
@@ -73,12 +79,25 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
   }
   
   public void setContents(final Path path, final CharSequence contents) {
+    CharSequence _elvis = null;
+    CharSequence _postProcess = null;
+    if (this.postProcessor!=null) {
+      String _string = path.toString();
+      URI _createFileURI = URI.createFileURI(_string);
+      _postProcess=this.postProcessor.postProcess(_createFileURI, contents);
+    }
+    if (_postProcess != null) {
+      _elvis = _postProcess;
+    } else {
+      _elvis = contents;
+    }
+    final CharSequence processedContents = _elvis;
     Path _parent = path.getParent();
     this.mkdir(_parent);
     try {
-      String _string = contents.toString();
+      String _string_1 = processedContents.toString();
       String _charset = this.getCharset(path);
-      StringInputStream _stringInputStream = new StringInputStream(_string, _charset);
+      StringInputStream _stringInputStream = new StringInputStream(_string_1, _charset);
       this.setContentsAsStream(path, _stringInputStream);
     } catch (final Throwable _t) {
       if (_t instanceof UnsupportedEncodingException) {
@@ -100,5 +119,14 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
   
   public void setEncodingProvider(final IEncodingProvider encodingProvider) {
     this.encodingProvider = encodingProvider;
+  }
+  
+  @Pure
+  public IFilePostProcessor getPostProcessor() {
+    return this.postProcessor;
+  }
+  
+  public void setPostProcessor(final IFilePostProcessor postProcessor) {
+    this.postProcessor = postProcessor;
   }
 }
