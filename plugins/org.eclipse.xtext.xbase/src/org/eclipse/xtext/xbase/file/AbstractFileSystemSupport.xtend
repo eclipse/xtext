@@ -11,10 +11,13 @@ import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport
 import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.util.StringInputStream
+import org.eclipse.xtext.generator.IFilePostProcessor
+import org.eclipse.emf.common.util.URI
 
 abstract class AbstractFileSystemSupport implements MutableFileSystemSupport {
 
 	@Inject @Accessors IEncodingProvider encodingProvider
+	@Inject IFilePostProcessor postProcessor
 	
 	override CharSequence getContents(Path path) {
 		try {
@@ -42,9 +45,10 @@ abstract class AbstractFileSystemSupport implements MutableFileSystemSupport {
 	}
 	
 	override void setContents(Path path, CharSequence contents) {
+		val processedContents = postProcessor.postProcess(URI.createFileURI(path.toString), contents)
 		path.parent.mkdir
 		try {
-			path.setContentsAsStream(new StringInputStream(contents.toString, path.getCharset))
+			path.setContentsAsStream(new StringInputStream(processedContents.toString, path.getCharset))
 		} catch (UnsupportedEncodingException exc) {
 			throw new IllegalArgumentException(exc.message, exc)
 		}
