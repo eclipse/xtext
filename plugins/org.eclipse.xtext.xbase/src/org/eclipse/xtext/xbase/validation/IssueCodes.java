@@ -135,6 +135,9 @@ public class IssueCodes {
 	public static final String INVALID_TYPE_ARGUMENTS_ON_TYPE_LITERAL = ISSUE_CODE_PREFIX + "invalid_type_arguments_on_type_literal";
 
 	public static final String OPERATION_WITHOUT_PARENTHESES = ISSUE_CODE_PREFIX + "operation_without_parentheses";
+	// IssueCode to control DerivedResourceMarkerCopier
+	// See org.eclipse.xtext.builder.smap.DerivedResourceMarkerCopier 
+	public static final String COPY_JAVA_PROBLEMS = "org.eclipse.xtext.builder.copyJavaProblems";
 	
 	private IssueCodes() {
 	}

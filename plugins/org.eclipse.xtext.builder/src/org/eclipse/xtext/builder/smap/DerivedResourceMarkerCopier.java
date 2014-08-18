@@ -20,8 +20,10 @@ import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.jdt.core.IJavaModelMarker;
 import org.eclipse.ui.texteditor.MarkerUtilities;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -31,6 +33,7 @@ import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.validation.IssueSeveritiesProvider;
 
 import com.google.inject.Inject;
 
@@ -41,8 +44,10 @@ import com.google.inject.Inject;
  */
 public class DerivedResourceMarkerCopier {
 	private static final Logger LOG = Logger.getLogger(DerivedResourceMarkerCopier.class);
-
 	public static final String COPIED_FROM_FILE = "fromFile";
+
+	// Preference key to control copier behavior. Defined in org.eclipse.xtext.xbase.validation.IssueCodes
+	public static final String COPY_JAVA_PROBLEMS_ISSUECODE = "org.eclipse.xtext.builder.copyJavaProblems";
 
 	@Inject
 	private IResourceServiceProvider.Registry serviceProviderRegistry;
@@ -57,13 +62,12 @@ public class DerivedResourceMarkerCopier {
 	 *            - trace information to use. Points to the source file.
 	 */
 	public void reflectErrorMarkerInSource(IFile javaFile, ITrace traceToSource) throws CoreException {
-		//TODO use preference store
-		int maxSeverity = IMarker.SEVERITY_ERROR;
-
 		IFile srcFile = findSourceFile(traceToSource, javaFile.getWorkspace());
 		if (srcFile == null) {
 			return;
 		}
+		int maxSeverity = getMaxSeverity(srcFile);
+
 		// clean up marker in source file derived from this java file
 		cleanUpCreatedMarkers(javaFile, srcFile);
 
@@ -78,6 +82,28 @@ public class DerivedResourceMarkerCopier {
 			copyProblemMarker(javaFile, traceToSource, problemsInJava, srcFile);
 		}
 
+	}
+
+	private int getMaxSeverity(IFile srcFile) {
+		URI resourceURI = URI.createPlatformResourceURI(srcFile.getFullPath().toString(), true);
+		IResourceServiceProvider serviceProvider = serviceProviderRegistry.getResourceServiceProvider(resourceURI);
+		if (serviceProvider == null)
+			return Integer.MAX_VALUE;
+		IssueSeveritiesProvider severitiesProvider = serviceProvider.get(IssueSeveritiesProvider.class);
+		Severity severity = severitiesProvider.getIssueSeverities(new ResourceImpl(resourceURI)).getSeverity(
+				COPY_JAVA_PROBLEMS_ISSUECODE);
+		switch (severity) {
+			case WARNING:
+				return IMarker.SEVERITY_WARNING;
+			case ERROR:
+				return IMarker.SEVERITY_ERROR;
+			case INFO:
+			case IGNORE:
+				return Integer.MAX_VALUE;
+			default:
+				break;
+		}
+		return Integer.MAX_VALUE;
 	}
 
 	private void copyProblemMarker(IFile javaFile, ITrace traceToSource, Set<IMarker> problemsInJava, IFile srcFile)
