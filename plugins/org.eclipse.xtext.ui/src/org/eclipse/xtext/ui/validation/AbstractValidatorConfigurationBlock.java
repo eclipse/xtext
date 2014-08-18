@@ -34,7 +34,7 @@ import com.google.inject.name.Named;
  */
 public abstract class AbstractValidatorConfigurationBlock extends OptionsConfigurationBlock {
 	@Inject
-	private IDialogSettings section;
+	private IDialogSettings dialogSettings;
 	private PixelConverter fPixelConverter;
 	@Inject
 	@Named(Constants.LANGUAGE_NAME)
@@ -81,16 +81,26 @@ public abstract class AbstractValidatorConfigurationBlock extends OptionsConfigu
 				+ " compiler problems:");
 		description.setLayoutData(new GridData(GridData.BEGINNING, GridData.CENTER, true, false, nColumns - 1, 1));
 
-		int indentStep = fPixelConverter.convertWidthInCharsToPixels(1);
-
-		int defaultIndent = indentStep * 0;
-
-		fillSettingsPage(composite, nColumns, defaultIndent);
+		fillSettingsPage(composite, nColumns, 0);
+		addAdditionalComponentsToSettingsPage(composite, nColumns, 0);
 
 		new Label(composite, SWT.NONE); // TODO what's this?
-		restoreSectionExpansionStates(section);
+		restoreSectionExpansionStates(getDialogSettings());
 		return sc1;
 
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	protected IDialogSettings getDialogSettings() {
+		return this.dialogSettings;
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	protected void addAdditionalComponentsToSettingsPage(Composite settingsPage, int nColumns, int defaultIndent) {
 	}
 
 	/**
