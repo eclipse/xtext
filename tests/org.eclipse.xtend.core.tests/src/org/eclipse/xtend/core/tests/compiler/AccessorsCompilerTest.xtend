@@ -6,11 +6,13 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.compiler
+
 import com.google.inject.Inject
+import java.lang.reflect.Modifier
+import org.eclipse.xtend.core.xtend.XtendPackage
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Test
-import org.eclipse.xtend.core.xtend.XtendPackage
-import java.lang.reflect.Modifier
+import org.eclipse.xtend.core.validation.IssueCodes
 
 class AccessorsCompilerTest extends AbstractXtendCompilerTest {
 	@Inject
@@ -68,7 +70,7 @@ class AccessorsCompilerTest extends AbstractXtendCompilerTest {
 			class Buzz extends Fizz {
 				@Accessors String foo
 			}
-		''').assertError(XtendPackage.Literals.XTEND_FIELD, "user.issue", "final","Fizz", "getFoo")
+		''').assertError(XtendPackage.Literals.XTEND_FIELD, IssueCodes.OVERRIDDEN_FINAL, "final", "getFoo")
 	}
 	
 	@Test
@@ -82,7 +84,7 @@ class AccessorsCompilerTest extends AbstractXtendCompilerTest {
 			class Bar extends Foo {
 				@Accessors int foo
 			}
-		''').assertError(XtendPackage.Literals.XTEND_FIELD, "user.issue", "incompatible","Foo", "getFoo")
+		''').assertError(XtendPackage.Literals.XTEND_FIELD, org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_RETURN_TYPE, "incompatible", "getFoo")
 	}
 	
 	@Test
@@ -164,7 +166,7 @@ class AccessorsCompilerTest extends AbstractXtendCompilerTest {
 			class Bar extends Foo {
 				@Accessors String foo
 			}
-		''').assertError(XtendPackage.Literals.XTEND_FIELD, "user.issue", "final", "Foo", "setFoo(String)")
+		''').assertError(XtendPackage.Literals.XTEND_FIELD, IssueCodes.OVERRIDDEN_FINAL, "setFoo(String)", "final")
 	}
 
 	@Test
@@ -178,7 +180,7 @@ class AccessorsCompilerTest extends AbstractXtendCompilerTest {
 			class Bar extends Foo {
 				@Accessors String foo
 			}
-		''').assertError(XtendPackage.Literals.XTEND_FIELD, "user.issue", "not void", "Foo", "setFoo(String)")
+		''').assertError(XtendPackage.Literals.XTEND_FIELD, org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_RETURN_TYPE, "setFoo(String)", "incompatible")
 	}
 
 	@Test
