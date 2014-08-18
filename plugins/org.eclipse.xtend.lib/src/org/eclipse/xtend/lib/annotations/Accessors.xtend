@@ -152,31 +152,6 @@ class AccessorsProcessor implements TransformationParticipant<MutableMemberDecla
 		}
 
 		def validateGetter(MutableFieldDeclaration field) {
-			/*
-			 * TODO move this to the new validation phase once everyone has the nightly
-			 * Then we don't need to skip inferred types
-			 */
-			if (field.type === null || field.type.inferred) {
-				return
-			}
-			val overriddenGetter = field.declaringType.newSelfTypeReference.allResolvedMethods.findFirst [
-				declaration.simpleName == field.getterName && resolvedParameters.empty
-			]
-			if (overriddenGetter !== null) {
-				val overriddenDeclaration = overriddenGetter.declaration
-				if (overriddenDeclaration.final) {
-					field.addError(
-						'''Cannot override the final method «overriddenGetter.simpleSignature» in «overriddenDeclaration.
-							declaringType.simpleName»''')
-				}
-				if (!overriddenGetter.resolvedReturnType.isAssignableFrom(field.type)) {
-					field.addError(
-						'''
-							Cannot override the method «overriddenGetter.simpleSignature» in «overriddenDeclaration.declaringType.simpleName», 
-							because its return type is incompatible with «field.type.simpleName»
-						''')
-				}
-			}
 		}
 
 		def getGetterName(FieldDeclaration it) {
@@ -236,24 +211,6 @@ class AccessorsProcessor implements TransformationParticipant<MutableMemberDecla
 			if (field.type === null || field.type.inferred) {
 				field.addError("Type cannot be inferred.")
 				return
-			}
-			val overriddenSetter = field.declaringType.newSelfTypeReference.allResolvedMethods.findFirst [
-				declaration.simpleName == field.setterName && resolvedParameters.size == 1 &&
-					field.type.isAssignableFrom(resolvedParameters.head.resolvedType)
-			]
-			if (overriddenSetter !== null) {
-				val overriddenDeclaration = overriddenSetter.declaration
-				if (overriddenDeclaration.final) {
-					field.addError(
-						'''Cannot override the final method «overriddenSetter.simpleSignature» in «overriddenDeclaration.
-							declaringType.simpleName»''')
-				}
-				if (!overriddenSetter.resolvedReturnType.isVoid) {
-					field.addError(
-						'''
-							Cannot override the method «overriddenSetter.simpleSignature» in «overriddenDeclaration.declaringType.simpleName», because its return type is not void»
-						''')
-				}
 			}
 		}
 

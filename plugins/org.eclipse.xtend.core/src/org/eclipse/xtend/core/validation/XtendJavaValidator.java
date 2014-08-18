@@ -45,6 +45,7 @@ import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendEnum;
+import org.eclipse.xtend.core.xtend.XtendExecutable;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFormalParameter;
@@ -761,6 +762,19 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			return null;
 	}
 	
+	protected EStructuralFeature exceptionsFeature(EObject member) {
+		if (member instanceof XtendExecutable) 
+			return XTEND_EXECUTABLE__EXCEPTIONS;
+		else
+			return null;
+	}
+	
+	protected EStructuralFeature returnTypeFeature(EObject member) {
+		if (member instanceof XtendFunction) 
+			return XTEND_FUNCTION__RETURN_TYPE;
+		else
+			return null;
+	}
 	
 	protected void doCheckOverriddenMethods(XtendTypeDeclaration xtendType, JvmGenericType inferredType,
 			ResolvedOperations resolvedOperations, Set<EObject> flaggedOperations) {
@@ -780,7 +794,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 							resolvedOperations.getDeclaredOperations(operation.getResolvedErasureSignature());
 					for(IResolvedOperation localOperation: declaredOperationsWithSameErasure) {
 						if (!localOperation.isOverridingOrImplementing(operation.getDeclaration()).isOverridingOrImplementing()) {
-							XtendFunction source = findXtendFunction(localOperation);
+							EObject source = findPrimarySourceElement(localOperation);
 							if (flaggedOperations.add(source)) {
 								error("Name clash: The method "
 										+ localOperation.getSimpleSignature() + " of type "
@@ -791,7 +805,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 										// due to name transformations in JVM model inference
 										operation.getSimpleSignature() + " of type "
 										+ getDeclaratorName(operation.getDeclaration()) + " but does not override it.",
-										source, XTEND_FUNCTION__NAME, DUPLICATE_METHOD);
+										source, nameFeature(source), DUPLICATE_METHOD);
 							}
 						}
 					}
@@ -846,21 +860,24 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	}
 
 	protected void doCheckFunctionOverrides(IResolvedOperation operation, Set<EObject> flaggedOperations) {
-		XtendFunction function = findXtendFunction(operation);
-		if (function != null && flaggedOperations.add(function)) {
+		EObject sourceElement = findPrimarySourceElement(operation);
+		if (sourceElement != null) {
 			List<IResolvedOperation> allInherited = operation.getOverriddenAndImplementedMethods();
 			if (allInherited.isEmpty()) {
-				if (function.isOverride()) {
-					error("The method "+ operation.getSimpleSignature() +" of type "+getDeclaratorName(operation.getDeclaration())+" must override a superclass method.", 
-							function, XTEND_MEMBER__MODIFIERS, function.getModifiers().indexOf("override"), OBSOLETE_OVERRIDE);
+				if (sourceElement instanceof XtendFunction) {
+					XtendFunction function = (XtendFunction) sourceElement;
+					if (function.isOverride() && flaggedOperations.add(sourceElement)) {
+						error("The method "+ operation.getSimpleSignature() +" of type "+getDeclaratorName(operation.getDeclaration())+" must override a superclass method.", 
+								function, XTEND_MEMBER__MODIFIERS, function.getModifiers().indexOf("override"), OBSOLETE_OVERRIDE);
+					}
 				}
 			} else {
-				doCheckFunctionOverrides(function, operation, allInherited);
+				doCheckFunctionOverrides(sourceElement, operation, allInherited);
 			}
 		}
 	}
 
-	protected void doCheckFunctionOverrides(XtendFunction function, IResolvedOperation resolved,
+	protected void doCheckFunctionOverrides(EObject sourceElement, IResolvedOperation resolved,
 			List<IResolvedOperation> allInherited) {
 		boolean overrideProblems = false;
 		List<IResolvedOperation> exceptionMismatch = null;
@@ -869,34 +886,37 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				overrideProblems = true;
 				EnumSet<OverrideCheckDetails> details = inherited.getOverrideCheckResult().getDetails();
 				if (details.contains(OverrideCheckDetails.IS_FINAL)) {
-					error("Attempt to override final method " + inherited.getSimpleSignature(), function,
-							XTEND_FUNCTION__NAME, OVERRIDDEN_FINAL);
+					error("Attempt to override final method " + inherited.getSimpleSignature(), sourceElement,
+							nameFeature(sourceElement), OVERRIDDEN_FINAL);
 				} else if (details.contains(OverrideCheckDetails.REDUCED_VISIBILITY)) {
 					error("Cannot reduce the visibility of the overridden method " + inherited.getSimpleSignature(),
-							function, XTEND_FUNCTION__NAME, OVERRIDE_REDUCES_VISIBILITY);
+							sourceElement, nameFeature(sourceElement), OVERRIDE_REDUCES_VISIBILITY);
 				} else if (details.contains(OverrideCheckDetails.EXCEPTION_MISMATCH)) {
 					if (exceptionMismatch == null)
 						exceptionMismatch = Lists.newArrayListWithCapacity(allInherited.size());
 					exceptionMismatch.add(inherited);
 				} else if (details.contains(OverrideCheckDetails.RETURN_MISMATCH)) {
-					error("The return type is incompatible with " + inherited.getSimpleSignature(), function,
-							XTEND_FUNCTION__RETURN_TYPE, INCOMPATIBLE_RETURN_TYPE);
+					error("The return type is incompatible with " + inherited.getSimpleSignature(), sourceElement,
+							returnTypeFeature(sourceElement), INCOMPATIBLE_RETURN_TYPE);
 				}
 			}
 		}
 		if (exceptionMismatch != null) {
-			createExceptionMismatchError(resolved, function, exceptionMismatch);
+			createExceptionMismatchError(resolved, sourceElement, exceptionMismatch);
 		}
-		if (!overrideProblems && !function.isOverride() && !function.isStatic()) {
-			error("The method " + resolved.getSimpleSignature() + " of type " + getDeclaratorName(resolved) +
-					" must use override keyword since it actually overrides a supertype method.", function,
-					XTEND_FUNCTION__NAME, MISSING_OVERRIDE);
-		} 
-		if (!overrideProblems && function.isOverride() && function.isStatic()) {
-			for(IResolvedOperation inherited: allInherited) {
-				error("The method " + resolved.getSimpleSignature() + " of type " + getDeclaratorName(resolved) + 
-					" shadows the method " + resolved.getSimpleSignature() + " of type " + getDeclaratorName(inherited) + 
-					", but does not override it.", function, XTEND_FUNCTION__NAME, function.getModifiers().indexOf("override"), OBSOLETE_OVERRIDE);
+		if (sourceElement instanceof XtendFunction) {
+			XtendFunction function = (XtendFunction) sourceElement;
+			if (!overrideProblems && !function.isOverride() && !function.isStatic()) {
+				error("The method " + resolved.getSimpleSignature() + " of type " + getDeclaratorName(resolved) +
+						" must use override keyword since it actually overrides a supertype method.", function,
+						XTEND_FUNCTION__NAME, MISSING_OVERRIDE);
+			} 
+			if (!overrideProblems && function.isOverride() && function.isStatic()) {
+				for(IResolvedOperation inherited: allInherited) {
+					error("The method " + resolved.getSimpleSignature() + " of type " + getDeclaratorName(resolved) + 
+							" shadows the method " + resolved.getSimpleSignature() + " of type " + getDeclaratorName(inherited) + 
+							", but does not override it.", function, XTEND_FUNCTION__NAME, function.getModifiers().indexOf("override"), OBSOLETE_OVERRIDE);
+				}
 			}
 		}
 	}
@@ -905,7 +925,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		return getDeclaratorName(resolved.getDeclaration());
 	}
 	
-	protected void createExceptionMismatchError(IResolvedOperation operation, XtendFunction function,
+	protected void createExceptionMismatchError(IResolvedOperation operation, EObject sourceElement,
 			List<IResolvedOperation> exceptionMismatch) {
 		List<LightweightTypeReference> exceptions = operation.getIllegallyDeclaredExceptions();
 		StringBuilder message = new StringBuilder(100);
@@ -941,15 +961,11 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			message.append('.');
 			message.append(exceptionMismatch.get(i).getSimpleSignature());
 		}
-		error(message.toString(), function, XTEND_EXECUTABLE__EXCEPTIONS, INCOMPATIBLE_THROWS_CLAUSE);
+		error(message.toString(), sourceElement, exceptionsFeature(sourceElement), INCOMPATIBLE_THROWS_CLAUSE);
 	}
 
-	/* @Nullable */
-	protected XtendFunction findXtendFunction(IResolvedOperation operation) {
-		EObject sourceElement = associations.getPrimarySourceElement(operation.getDeclaration());
-		if (sourceElement instanceof XtendFunction)
-			return (XtendFunction) sourceElement;
-		return null;
+	protected EObject findPrimarySourceElement(IResolvedOperation operation) {
+		return associations.getPrimarySourceElement(operation.getDeclaration());
 	}
 	
 	protected boolean isMorePrivateThan(JvmVisibility o1, JvmVisibility o2) {
@@ -1001,10 +1017,10 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 						if (expression instanceof XBlockExpression) {
 							List<XExpression> expressions = ((XBlockExpression) expression).getExpressions();
 							if(expressions.isEmpty() || !isDelegatConstructorCall(expressions.get(0))) {
-								XtendConstructor xtendConstructor = associations.getXtendConstructor(constructor);
+								EObject source = associations.getPrimarySourceElement(constructor);
 								error("No default constructor in super type " + superType.getSimpleName() 
 										+ ". Another constructor must be invoked explicitly.",
-										xtendConstructor, null, MUST_INVOKE_SUPER_CONSTRUCTOR);
+										source, null, MUST_INVOKE_SUPER_CONSTRUCTOR);
 							}
 						}
 					}
