@@ -10,6 +10,7 @@ import org.eclipse.xtend.lib.macro.Active
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
 import org.eclipse.xtend.lib.macro.declaration.Visibility
+import java.lang.annotation.Documented
 
 /**
  * Creates a getter and setter method for the annotated field.
@@ -22,6 +23,7 @@ import org.eclipse.xtend.lib.macro.declaration.Visibility
 @Target(ElementType.FIELD)
 @Active(PropertyProcessor)
 @Deprecated
+@Documented
 annotation Property {
 }
 

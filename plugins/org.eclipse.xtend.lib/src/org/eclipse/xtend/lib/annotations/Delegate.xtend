@@ -19,6 +19,7 @@ import org.eclipse.xtend.lib.macro.declaration.ResolvedMethod
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import java.util.Map
+import java.lang.annotation.Documented
 
 /**
  * Implements interfaces by forwarding method calls to an annotated field or method.
@@ -63,9 +64,12 @@ import java.util.Map
 @GwtCompatible
 @Target(ElementType.FIELD, ElementType.METHOD)
 @Active(DelegateProcessor)
+@Documented
 annotation Delegate {
 	/**
-	 * Specifies which interfaces of the delegate to use for creating methods. By default, all its interfaces are used.
+	 * Optional list of interfaces that this delegate is restricted to.
+	 * Defaults to the common interfaces of the context type and the annotated
+	 * element.
 	 */
 	Class<?>[] value = #[]
 }

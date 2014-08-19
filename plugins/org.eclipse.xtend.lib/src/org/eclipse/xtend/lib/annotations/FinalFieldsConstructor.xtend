@@ -16,6 +16,7 @@ import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclarator
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
+import java.lang.annotation.Documented
 
 /**
  * <p>Creates a constructor that takes a parameter for each final field of a class.</p>
@@ -40,6 +41,7 @@ import org.eclipse.xtend.lib.macro.declaration.TypeReference
 @GwtCompatible
 @Beta
 @Active(FinalFieldsConstructorProcessor)
+@Documented
 annotation FinalFieldsConstructor {
 }
 
