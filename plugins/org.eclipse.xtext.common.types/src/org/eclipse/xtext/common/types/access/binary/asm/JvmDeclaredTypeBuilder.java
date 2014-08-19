@@ -216,15 +216,19 @@ public class JvmDeclaredTypeBuilder extends ClassVisitor implements Opcodes {
     {
     	if (outerName != null && innerName != null && outerName.replace('/', '.').equals(result.getIdentifier())) {
     		BinaryClass binaryClass = new BinaryClass(name, classLoader);
-    		NestedJvmDeclaredTypeBuilder builder = new NestedJvmDeclaredTypeBuilder(
+    		boolean isStatic = (access & ACC_STATIC) != 0;
+			NestedJvmDeclaredTypeBuilder builder = new NestedJvmDeclaredTypeBuilder(
     				innerName,
-    				((access & ACC_STATIC) == 0)? 1 : 0, 
+    				!isStatic? 1 : 0, 
     				binaryClass,
     				bytesAccess,
     				classLoader,
     				typeParameters,
     				proxies);
     		JvmDeclaredType nestedType = builder.buildType();
+    		if (isStatic) {
+    			nestedType.setStatic(isStatic);
+    		}
     		proxies.setVisibility(access, nestedType);
     		result.getMembers().add(nestedType);
     	}

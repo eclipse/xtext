@@ -1058,6 +1058,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertTrue(typeName + " endsWith " + expectedSuffix, typeName.endsWith(expectedSuffix));
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		assertNotNull(type);
+		assertFalse(type.isStatic());
 		assertEquals(typeName, type.getIdentifier());
 		JvmType outerType = (JvmType) type.eContainer();
 		assertEquals(NestedTypes.class.getName(), outerType.getIdentifier());
@@ -1126,6 +1127,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertTrue(typeName + " endsWith " + expectedSuffix, typeName.endsWith(expectedSuffix));
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		assertNotNull(type);
+		assertTrue(type.isStatic());
 		assertEquals(typeName, type.getIdentifier());
 		JvmType outerType = (JvmType) type.eContainer();
 		assertEquals(StaticNestedTypes.class.getName(), outerType.getIdentifier());
