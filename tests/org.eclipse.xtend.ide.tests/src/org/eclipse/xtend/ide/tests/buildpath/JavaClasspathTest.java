@@ -8,7 +8,9 @@
 package org.eclipse.xtend.ide.tests.buildpath;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
@@ -26,7 +28,7 @@ import com.google.inject.Inject;
  * @author Dennis Huebner - Initial contribution and API
  */
 public class JavaClasspathTest extends AbstractXtendUITestCase {
-	private static final String TEST_CLAZZ = "import org.eclipse.xtend.lib.Property class Foo { @Property int bar }";
+	private static final String TEST_CLAZZ = "import org.eclipse.xtend.lib.annotations.Accessors class Foo { @Accessors int bar }";
 
 	@Inject
 	private MarkerAssertions markerAssert;
@@ -61,7 +63,9 @@ public class JavaClasspathTest extends AbstractXtendUITestCase {
 		IProject project = testHelper.getProject();
 
 		// create a fake java.util.List without type param
-		IFile list = project.getFile("src/java.util.List.xtend");
+		IFolder folder = project.getFolder(new Path("src/java/util"));
+		IResourcesSetupUtil.createFolder(folder.getFullPath());
+		IFile list = folder.getFile("List.xtend");
 		list.create(new StringInputStream("package java.util; class List {}"), true, null);
 
 		IFile file = project.getFile("src/Foo.xtend");
