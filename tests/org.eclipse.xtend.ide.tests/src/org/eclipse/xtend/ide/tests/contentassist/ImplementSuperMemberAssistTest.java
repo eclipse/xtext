@@ -38,7 +38,7 @@ public class ImplementSuperMemberAssistTest extends AbstractXtendContentAssistBu
 	
 	@Test public void testAbstractMethod() throws Exception {
 		newBuilder().append("class Foo implements Comparable<String> { co").assertText(
-				getOverridingFunctionCode("compareTo(String o)"));
+				getOverridingFunctionCode("compareTo(String arg0)"));
 	}
 
 	@Test public void testNonAbstractMethod() throws Exception {

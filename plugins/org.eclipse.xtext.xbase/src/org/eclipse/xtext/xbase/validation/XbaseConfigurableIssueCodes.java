@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012-14 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -25,6 +25,7 @@ import com.google.inject.Singleton;
  * 
  * @author Sven Efftinge - Initial contribution and API
  * @author Dennis Huebner
+ * @author Stéphane Galland - Add the "deprecation" warning. 
  */
 @Singleton
 public class XbaseConfigurableIssueCodes extends ConfigurableIssueCodesProvider {
@@ -35,6 +36,7 @@ public class XbaseConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 	public static final String COMPILER_PB_UNNECESSARY_TYPE_CHECK = JDT_CORE_PLUGIN_ID + ".compiler.problem.unnecessaryTypeCheck"; //$NON-NLS-1$
 	public static final String COMPILER_PB_UNUSED_IMPORT = JDT_CORE_PLUGIN_ID + ".compiler.problem.unusedImport"; //$NON-NLS-1$
 	public static final String COMPILER_PB_UNUSED_LOCAL = JDT_CORE_PLUGIN_ID + ".compiler.problem.unusedLocal"; //$NON-NLS-1$
+	public static final String COMPILER_PB_DEPRECATION = JDT_CORE_PLUGIN_ID + ".compiler.problem.deprecation"; //$NON-NLS-1$ 
 
 	private Map<String, PreferenceKey> issueCodes;
 
@@ -76,6 +78,7 @@ public class XbaseConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 		iAcceptor.accept(create(IssueCodes.INCOMPLETE_CASES_ON_ENUM, SeverityConverter.SEVERITY_WARNING));
 		iAcceptor.accept(create(IssueCodes.OPERATION_WITHOUT_PARENTHESES, SeverityConverter.SEVERITY_IGNORE));
 		iAcceptor.accept(create(IssueCodes.COPY_JAVA_PROBLEMS, SeverityConverter.SEVERITY_IGNORE));
+		iAcceptor.accept(createDelegate(IssueCodes.DEPRECATED_FEATURE, COMPILER_PB_DEPRECATION));
 	}
 
 	protected final PreferenceKey create(String id, String defaultValue) {
