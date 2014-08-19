@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtend.core.tests.performance
 
 import com.google.inject.Inject
@@ -9,7 +16,12 @@ import org.junit.Rule
 import org.junit.Test
 
 import static org.eclipse.xtext.util.internal.Stopwatches.*
+import org.eclipse.xtext.xbase.validation.IssueCodes
 
+/**
+ * @author Sven Efftinge - Initial contribution and API
+ * @author Stéphane Galland - Avoid failure on the use of deprecated features.
+ */
 class PerformanceTest extends AbstractXtendTestCase {
 	
 	@Inject XtendFileGenerator fileGenerator
@@ -491,7 +503,9 @@ class PerformanceTest extends AbstractXtendTestCase {
 		}
 		val task = forTask("PerformanceTest.doCompile")
 		task.start
-		files(true, files as String[])
+		files(	true,
+				[ it.code != IssueCodes::DEPRECATED_FEATURE ],
+				files as String[])
 		task.stop
 	}
 	

@@ -1,5 +1,14 @@
+/**
+ * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtend.core.tests.performance;
 
+import com.google.common.base.Objects;
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.Collection;
@@ -10,16 +19,22 @@ import org.eclipse.xtend.core.tests.performance.GeneratorConfig;
 import org.eclipse.xtend.core.tests.performance.XtendFileGenerator;
 import org.eclipse.xtext.junit4.internal.StopwatchRule;
 import org.eclipse.xtext.util.internal.Stopwatches;
+import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
+/**
+ * @author Sven Efftinge - Initial contribution and API
+ * @author Stéphane Galland - Avoid failure on the use of deprecated features.
+ */
 @SuppressWarnings("all")
 public class PerformanceTest extends AbstractXtendTestCase {
   @Inject
@@ -517,7 +532,14 @@ public class PerformanceTest extends AbstractXtendTestCase {
       }
       final Stopwatches.StoppedTask task = Stopwatches.forTask("PerformanceTest.doCompile");
       task.start();
-      this.files(true, ((String[]) ((String[])Conversions.unwrapArray(files, String.class))));
+      final Predicate<Issue> _function_1 = new Predicate<Issue>() {
+        public boolean apply(final Issue it) {
+          String _code = it.getCode();
+          return (!Objects.equal(_code, IssueCodes.DEPRECATED_FEATURE));
+        }
+      };
+      this.files(true, _function_1, 
+        ((String[]) ((String[])Conversions.unwrapArray(files, String.class))));
       task.stop();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
