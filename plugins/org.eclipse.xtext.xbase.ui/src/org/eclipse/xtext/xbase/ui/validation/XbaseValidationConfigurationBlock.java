@@ -90,6 +90,8 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 
 	protected void fillRestrictedApiSection(ComboBoxBuilder comboBoxBuilder) {
 		comboBoxBuilder
+				.addJavaDelegatingComboBox(IssueCodes.DEPRECATED_MEMBER_REFERENCE,
+						Messages.XbaseValidationConfigurationBlock_deprecated_ref_label)
 				.addJavaDelegatingComboBox(IssueCodes.FORBIDDEN_REFERENCE,
 						Messages.XbaseValidationConfigurationBlock_forbidden_ref_label)
 				.addJavaDelegatingComboBox(IssueCodes.DISCOURAGED_REFERENCE,

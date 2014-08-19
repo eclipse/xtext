@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
@@ -40,7 +41,6 @@ import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
-import com.google.common.base.Function;
 import com.google.inject.Inject;
 
 /**
@@ -210,13 +210,33 @@ public class UIStrings {
 		}
 		return reference.getHumanReadableName();
 	}
-
-	protected String parameterTypes(Iterable<JvmFormalParameter> parameters, @SuppressWarnings("unused") boolean isVarArgs) {
-		return referencesToString(transform(parameters, new Function<JvmFormalParameter, JvmTypeReference>() {
-			public JvmTypeReference apply(JvmFormalParameter from) {
-				return from.getParameterType();
+	
+	protected String parametersToString(Iterable<? extends JvmFormalParameter> elements, boolean isVarArgs, boolean includeName) {
+		StringBuilder result = new StringBuilder();
+		boolean needsSeparator = false;
+		Iterator<? extends JvmFormalParameter> iterator = elements.iterator();
+		while (iterator.hasNext()) {
+			JvmFormalParameter parameter = iterator.next();
+			if (needsSeparator)
+				result.append(", ");
+			needsSeparator = true;
+			JvmTypeReference typeRef = parameter.getParameterType();
+			if (isVarArgs && !iterator.hasNext() && typeRef instanceof JvmGenericArrayTypeReference) {
+				typeRef = ((JvmGenericArrayTypeReference) typeRef).getComponentType();
+				result.append(referenceToString(typeRef, "[null]"));
+				result.append("...");
+			} else {
+				result.append(referenceToString(typeRef, "[null]"));
 			}
-		}));
+			if (includeName) {
+				result.append(" " + parameter.getName());
+			}
+		}
+		return result.toString();
+	}
+
+	protected String parameterTypes(Iterable<JvmFormalParameter> parameters, boolean isVarArgs) {
+		return parametersToString(parameters, isVarArgs, false);
 	}
 
 }

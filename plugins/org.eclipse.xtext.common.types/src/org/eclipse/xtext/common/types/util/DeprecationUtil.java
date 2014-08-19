@@ -9,6 +9,7 @@ package org.eclipse.xtext.common.types.util;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
@@ -48,6 +49,22 @@ public class DeprecationUtil {
 			if (annotationType != null && Deprecated.class.getName().equals(annotationType.getIdentifier())) {
 				return true;
 			}
+		}
+		return false;
+	}
+	
+	/**
+	 * Returns {@code true} if the given member is contained in a deprecated member.
+	 * @param member the member to be checked
+	 * @param strict if set to {@code true}, the member itself will not be checked but only its containers.
+	 */
+	public static boolean isContainedInDeprecatedMember(JvmMember member, boolean strict) {
+		EObject container = strict ? member.eContainer() : member;
+		while(container instanceof JvmMember) {
+			if (isDeprecatedMember((JvmMember) container)) {
+				return true;
+			}
+			container = container.eContainer();
 		}
 		return false;
 	}
