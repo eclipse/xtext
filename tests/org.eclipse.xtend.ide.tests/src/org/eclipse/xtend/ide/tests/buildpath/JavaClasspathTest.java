@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -24,6 +24,7 @@ import com.google.inject.Inject;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
+ * @author Stéphane Galland - fixing for supporting "deprecated feature use" warning.
  */
 public class JavaClasspathTest extends AbstractXtendUITestCase {
 	private static final String TEST_CLAZZ = "import org.eclipse.xtend.lib.Property class Foo { @Property int bar }";
@@ -53,7 +54,9 @@ public class JavaClasspathTest extends AbstractXtendUITestCase {
 
 		JavaProjectSetupUtil.addToClasspath(javaProject, jrePath); // add JRE back
 		IResourcesSetupUtil.waitForAutoBuild();
-		markerAssert.assertNoErrorMarker(file);
+		MarkerAssertions markers = markerAssert.createCollection();
+		markers.assertErrorMarker(file, org.eclipse.xtext.xbase.validation.IssueCodes.DEPRECATED_FEATURE);
+		markers.assertNoErrorMarker(file);
 	}
 
 	@Test
@@ -75,6 +78,8 @@ public class JavaClasspathTest extends AbstractXtendUITestCase {
 		list.delete(true, null);
 		IResourcesSetupUtil.cleanBuild();
 		IResourcesSetupUtil.waitForAutoBuild();
-		markerAssert.assertNoErrorMarker(file);
+		MarkerAssertions markers = markerAssert.createCollection();
+		markers.assertErrorMarker(file, org.eclipse.xtext.xbase.validation.IssueCodes.DEPRECATED_FEATURE);
+		markers.assertNoErrorMarker(file);
 	}
 }
