@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -29,6 +29,7 @@ import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Stéphane Galland - fixing for supporting "deprecated feature use" warning.
  */
 public class XtendLibClasspathAdderTest extends AbstractXtendUITestCase {
 	@Inject
@@ -69,7 +70,9 @@ public class XtendLibClasspathAdderTest extends AbstractXtendUITestCase {
 		markerAssert.assertErrorMarker(file, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		adder.addLibsToClasspath(javaProject, null);
 		IResourcesSetupUtil.waitForAutoBuild();
-		markerAssert.assertNoErrorMarker(file);
+		MarkerAssertions markers = markerAssert.createCollection();
+		markers.assertErrorMarker(file, org.eclipse.xtext.xbase.validation.IssueCodes.DEPRECATED_FEATURE);
+		markers.assertNoErrorMarker(file);
 	}
 
 	@Test
@@ -90,7 +93,9 @@ public class XtendLibClasspathAdderTest extends AbstractXtendUITestCase {
 		markerAssert.assertErrorMarker(file, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		adder.addLibsToClasspath(javaProject, null);
 		IResourcesSetupUtil.waitForAutoBuild();
-		markerAssert.assertNoErrorMarker(file);
+		MarkerAssertions markers = markerAssert.createCollection();
+		markers.assertErrorMarker(file, org.eclipse.xtext.xbase.validation.IssueCodes.DEPRECATED_FEATURE);
+		markers.assertNoErrorMarker(file);
 	}
 
 	@Test
@@ -112,7 +117,9 @@ public class XtendLibClasspathAdderTest extends AbstractXtendUITestCase {
 		markerAssert.assertErrorMarker(file, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		adder.addLibsToClasspath(javaProject, null);
 		IResourcesSetupUtil.waitForAutoBuild();
-		markerAssert.assertNoErrorMarker(file);
+		MarkerAssertions markers = markerAssert.createCollection();
+		markers.assertErrorMarker(file, org.eclipse.xtext.xbase.validation.IssueCodes.DEPRECATED_FEATURE);
+		markers.assertNoErrorMarker(file);
 	}
 
 }
