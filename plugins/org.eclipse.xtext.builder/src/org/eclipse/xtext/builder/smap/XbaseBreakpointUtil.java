@@ -97,7 +97,7 @@ public class XbaseBreakpointUtil {
 					}
 				}
 			} catch (CoreException e) {
-				logger.error(e);
+				logger.error("Error finding breakpoint URI", e);
 				return null;
 			}
 		} else if (input instanceof IClassFileEditorInput) {

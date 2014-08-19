@@ -214,7 +214,7 @@ class JavaBuilderState {
 			return defaultValue
 		} catch (Exception e) {
 			if (LOG.isEnabledFor(Level.ERROR)) {
-				LOG.error(e);
+				LOG.error(e.message, e);
 			}
 			return defaultValue;
 		}
