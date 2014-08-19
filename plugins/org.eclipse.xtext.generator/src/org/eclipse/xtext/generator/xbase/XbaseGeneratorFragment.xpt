@@ -225,7 +225,7 @@ class «getJvmModelInferrerName().toSimpleName()» extends AbstractModelInferrer {
             menubarPath="debug"
             id="«name».ide.rulerContextMenu.enableDisableBreakpointAction">
          </action>
-         <action>
+         <action
            label="Breakpoint Properties"
            helpContextId="breakpoint_properties_action_context"
            class="«executableExtensionFactory()»:org.eclipse.jdt.debug.ui.actions.JavaBreakpointPropertiesRulerActionDelegate"
