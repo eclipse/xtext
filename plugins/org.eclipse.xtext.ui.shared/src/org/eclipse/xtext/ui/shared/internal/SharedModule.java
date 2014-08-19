@@ -26,12 +26,17 @@ import org.eclipse.xtext.builder.impl.ToBeBuiltComputer;
 import org.eclipse.xtext.builder.impl.XtextBuilder;
 import org.eclipse.xtext.builder.resourceloader.IResourceLoader;
 import org.eclipse.xtext.builder.resourceloader.ResourceLoaderProviders;
+import org.eclipse.xtext.builder.smap.DebugSourceInstallingCompilationParticipant;
+import org.eclipse.xtext.builder.smap.DerivedResourceMarkerCopier;
 import org.eclipse.xtext.builder.trace.StorageAwareTrace;
 import org.eclipse.xtext.builder.trace.TraceForStorageProvider;
 import org.eclipse.xtext.builder.trace.TraceMarkers;
 import org.eclipse.xtext.generator.trace.DefaultTraceURIConverter;
 import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.generator.trace.ITraceURIConverter;
+import org.eclipse.xtext.generator.trace.LineMappingProvider;
+import org.eclipse.xtext.generator.trace.TraceAsPrimarySourceInstaller;
+import org.eclipse.xtext.generator.trace.TraceAsSmapInstaller;
 import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.eclipse.xtext.resource.CompilerPhases;
@@ -84,8 +89,7 @@ public class SharedModule extends AbstractModule {
 
 	@Override
 	protected void configure() {
-		// TODO enable for 2.6 - https://bugs.eclipse.org/bugs/show_bug.cgi?id=423184
-//		binder().requireExplicitBindings();
+		binder().requireExplicitBindings();
 		if (context != null)
 			bind(BundleContext.class).toInstance(context);
 		
@@ -118,6 +122,7 @@ public class SharedModule extends AbstractModule {
 			@Override
 			protected void configure() {
 				bind(ITraceForStorageProvider.class).to(TraceForStorageProvider.class);
+				bind(TraceForStorageProvider.CachedTraces.class);
 				bind(ITraceURIConverter.class).to(DefaultTraceURIConverter.class);
 				bind(DefaultTraceURIConverter.class).to(ExtensibleTraceURIConverter.class);
 				
@@ -153,6 +158,12 @@ public class SharedModule extends AbstractModule {
 		bind(QueuedBuildData.class);
 		bind(UriValidator.class);
 		bind(ISharedStateContributionRegistry.class).to(SharedStateContributionRegistryImpl.class);
+		
+		bind(DebugSourceInstallingCompilationParticipant.class);
+		bind(TraceAsSmapInstaller.class);
+		bind(TraceAsPrimarySourceInstaller.class);
+		bind(DerivedResourceMarkerCopier.class);
+		bind(LineMappingProvider.class);
 
 		boolean parallel = false;
 		if (parallel) {

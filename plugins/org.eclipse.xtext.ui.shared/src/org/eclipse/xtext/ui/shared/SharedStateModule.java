@@ -23,7 +23,6 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
-import org.eclipse.xtext.ui.generator.trace.ExtensibleTraceURIConverter;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions;
@@ -61,7 +60,7 @@ public class SharedStateModule extends AbstractGenericModule {
 	 * @since 2.4
 	 */
 	public Provider<ITraceURIConverter> provideDefaultTraceURIConverter() {
-		return Access.<ITraceURIConverter>provider(ExtensibleTraceURIConverter.class);
+		return Access.<ITraceURIConverter>provider(ITraceURIConverter.class);
 	}
 
 	public Provider<IStateChangeEventBroker> provideIStateChangeEventBroker() {

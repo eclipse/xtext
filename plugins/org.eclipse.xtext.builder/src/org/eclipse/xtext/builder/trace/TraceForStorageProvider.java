@@ -79,8 +79,12 @@ public class TraceForStorageProvider implements ITraceForStorageProvider {
 	@Inject
 	private CachedTraces cachedTraces;
 	
+	/**
+	 * @noextend This class is not intended to be subclassed by clients.
+	 * @noinstantiate This class is not intended to be instantiated by clients.
+	 */
 	@Singleton
-	protected static class CachedTraces {
+	public static class CachedTraces {
 		
 		private static class PathWithTimestamp {
 
