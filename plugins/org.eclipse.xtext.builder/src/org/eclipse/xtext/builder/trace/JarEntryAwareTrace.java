@@ -59,7 +59,7 @@ public class JarEntryAwareTrace implements IStorageAwareTraceContribution {
 					return URI.createURI(first + "/" + path);
 			}
 		} catch (JavaModelException e) {
-			log.error(e);
+			log.error("Error resolving path", e);
 		}
 		return path;
 	}
@@ -77,7 +77,7 @@ public class JarEntryAwareTrace implements IStorageAwareTraceContribution {
 					}
 				}
 		} catch (JavaModelException e) {
-			log.error(e);
+			log.error("Error resolving path", e);
 		}
 		return null;
 	}

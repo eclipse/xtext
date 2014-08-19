@@ -60,7 +60,7 @@ public class JavaProjectPreferencesInitializer {
 		try {
 			dnode.flush();
 		} catch (BackingStoreException e) {
-			log.error(e);
+			log.error("Error saving preferences", e);
 		}
 	}
 
