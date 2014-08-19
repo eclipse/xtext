@@ -15,6 +15,7 @@ import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 
 @SuppressWarnings("all")
@@ -53,5 +54,13 @@ public class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> 
     JvmField _delegate = this.getDelegate();
     JvmTypeReference _type = _delegate.getType();
     return _compilationUnit.toTypeReference(_type);
+  }
+  
+  public void remove() {
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    IJvmModelAssociator _jvmModelAssociator = _compilationUnit.getJvmModelAssociator();
+    JvmField _delegate = this.getDelegate();
+    _jvmModelAssociator.removeLogicalChildAssociation(_delegate);
+    super.remove();
   }
 }

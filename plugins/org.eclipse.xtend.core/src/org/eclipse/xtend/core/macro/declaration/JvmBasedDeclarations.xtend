@@ -861,6 +861,11 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 		return compilationUnit.toParameterDeclaration(param) as MutableParameterDeclaration 
 	}
 	
+	override remove() {
+		compilationUnit.jvmModelAssociator.removeLogicalChildAssociation(delegate)
+		super.remove()
+	}
+	
 }
 
 class MutableJvmParameterDeclarationImpl extends JvmParameterDeclarationImpl implements MutableParameterDeclaration {
@@ -1152,6 +1157,11 @@ class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> impleme
 	
 	override getType() {
 		compilationUnit.toTypeReference(delegate.type)
+	}
+	
+	override remove() {
+		compilationUnit.jvmModelAssociator.removeLogicalChildAssociation(delegate)
+		super.remove()
 	}
 	
 }

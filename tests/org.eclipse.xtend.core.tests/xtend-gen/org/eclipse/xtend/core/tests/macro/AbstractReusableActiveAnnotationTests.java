@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.compiler.XtendGenerator;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
+import org.eclipse.xtend.core.macro.declaration.ExpressionImpl;
 import org.eclipse.xtend.core.macro.declaration.MutableJvmClassDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.MutableJvmFieldDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.MutableJvmMethodDeclarationImpl;
@@ -26,6 +27,7 @@ import org.eclipse.xtend.lib.macro.declaration.Element;
 import org.eclipse.xtend.lib.macro.declaration.EnumerationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableConstructorDeclaration;
@@ -41,17 +43,21 @@ import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclarator;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
+import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtend.lib.macro.services.Problem;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.junit4.internal.LineDelimiters;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
+import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
@@ -74,6 +80,9 @@ public abstract class AbstractReusableActiveAnnotationTests {
   
   @Inject
   private ValidationTestHelper validator;
+  
+  @Inject
+  private ILogicalContainerProvider logicalContainerProvider;
   
   @Test
   public void testBug441081() {
@@ -6444,6 +6453,13 @@ public abstract class AbstractReusableActiveAnnotationTests {
         Iterable<? extends MutableMemberDeclaration> _declaredMembers_6 = annotation.getDeclaredMembers();
         int _size_7 = IterableExtensions.size(_declaredMembers_6);
         Assert.assertEquals(0, _size_7);
+        TracabilityImpl _tracability = it.getTracability();
+        Element _primarySourceElement = _tracability.getPrimarySourceElement(clazz);
+        final MethodDeclaration removedMethod = ((ClassDeclaration) _primarySourceElement).findDeclaredMethod("methodToRemove");
+        Expression _body = removedMethod.getBody();
+        final XExpression expression = ((ExpressionImpl) _body).getDelegate();
+        JvmIdentifiableElement _logicalContainer = AbstractReusableActiveAnnotationTests.this.logicalContainerProvider.getLogicalContainer(expression);
+        Assert.assertNull(_logicalContainer);
       }
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
