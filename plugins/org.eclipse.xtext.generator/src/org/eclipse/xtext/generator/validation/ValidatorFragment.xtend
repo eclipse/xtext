@@ -83,7 +83,7 @@ class ValidatorFragment extends Xtend2GeneratorFragment implements IInheriting, 
 			
 				@Override
 				protected List<EPackage> getEPackages() {
-				    List<EPackage> result = new ArrayList<EPackage>();
+				    List<EPackage> result = new ArrayList<EPackage>(super.getEPackages());
 				    «FOR e: generatedPackagesToValidate»
 				    result.add(«e.generatedEPackageName».eINSTANCE);
 				    «ENDFOR»
