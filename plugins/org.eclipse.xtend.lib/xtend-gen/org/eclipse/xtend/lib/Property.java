@@ -1,6 +1,7 @@
 package org.eclipse.xtend.lib;
 
 import com.google.common.annotations.GwtCompatible;
+import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 import org.eclipse.xtend.lib.PropertyProcessor;
@@ -18,5 +19,6 @@ import org.eclipse.xtend.lib.macro.Active;
 @Target(ElementType.FIELD)
 @Active(PropertyProcessor.class)
 @Deprecated
+@Documented
 public @interface Property {
 }

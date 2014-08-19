@@ -13,6 +13,7 @@ import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.Visibility
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper
+import java.lang.annotation.Documented
 
 /**
  * This annotation is used by the Xtend compiler.
@@ -30,6 +31,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringHelper
 @Target(ElementType.TYPE)
 @Active(DataProcessor)
 @Deprecated
+@Documented
 annotation Data {
 }
 

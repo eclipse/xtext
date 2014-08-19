@@ -15,6 +15,7 @@ import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtend.lib.macro.declaration.Visibility
+import java.lang.annotation.Documented
 
 /**
  * Creates getters and setters for annotated fields or for all fields in an annotated class.
@@ -46,6 +47,7 @@ import org.eclipse.xtend.lib.macro.declaration.Visibility
 @GwtCompatible
 @Target(ElementType.FIELD, ElementType.TYPE)
 @Active(AccessorsProcessor)
+@Documented
 annotation Accessors {
 	/**
 	 * Describes the access modifiers for generated accessors. Valid combinations

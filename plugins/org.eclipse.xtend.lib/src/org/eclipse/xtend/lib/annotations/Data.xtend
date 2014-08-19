@@ -10,6 +10,7 @@ import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.Visibility
 import org.eclipse.xtend.lib.macro.declaration.Modifier
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
+import java.lang.annotation.Documented
 
 /**
  * Turns this class into a read-only Data object. 
@@ -28,6 +29,7 @@ import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
  */
 @Target(ElementType.TYPE)
 @Active(DataProcessor)
+@Documented
 annotation Data {
 }
 

@@ -2,6 +2,7 @@ package org.eclipse.xtend.lib.annotations;
 
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
+import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 import org.eclipse.xtend.lib.annotations.DelegateProcessor;
@@ -50,9 +51,12 @@ import org.eclipse.xtend.lib.macro.Active;
 @GwtCompatible
 @Target({ ElementType.FIELD, ElementType.METHOD })
 @Active(DelegateProcessor.class)
+@Documented
 public @interface Delegate {
   /**
-   * Specifies which interfaces of the delegate to use for creating methods. By default, all its interfaces are used.
+   * Optional list of interfaces that this delegate is restricted to.
+   * Defaults to the common interfaces of the context type and the annotated
+   * element.
    */
   public Class<?>[] value() default {};
 }
