@@ -104,7 +104,7 @@ public class EcoreGeneratorFragment extends EMFGeneratorFragment {
 						result.add(genPackage);
 					}
 				} catch (Exception e) {
-					log.error("Couldn't find genmodel for uri '" + uri + "'");
+					log.error("Couldn't find genmodel for uri '" + uri + "'", e);
 					throw new WrappedException(e);
 				}
 			}

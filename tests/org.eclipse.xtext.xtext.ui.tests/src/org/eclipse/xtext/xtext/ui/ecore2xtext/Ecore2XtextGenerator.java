@@ -90,7 +90,7 @@ public class Ecore2XtextGenerator extends AbstractWorkflowComponent2 {
 					Files.write(chars, new File(genPath, fileName), Charset.defaultCharset());
 				} catch (IOException e) {
 					String message = "Can't create grammar file";
-					log.error(message);
+					log.error(message, e);
 					issues.addError(Ecore2XtextGenerator.this, message, this, e, null);
 				}
 				return null;

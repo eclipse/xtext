@@ -56,12 +56,12 @@ public class Files {
 					}
 					log.debug("Copied " + copy);
 				} catch (IOException e) {
-					log.error(e);
+					log.error(e.getMessage() ,e);
 				} finally {
 					try {
 						is.close();
 					} catch (IOException e) {
-						log.error(e);
+						log.error(e.getMessage(), e);
 					}
 				}
 			}

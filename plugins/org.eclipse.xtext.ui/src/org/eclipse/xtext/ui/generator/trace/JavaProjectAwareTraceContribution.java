@@ -53,7 +53,7 @@ public class JavaProjectAwareTraceContribution implements ITraceURIConverterCont
 		try {
 			return computeTraceURI(context.getURI(), javaProject);
 		} catch (JavaModelException e) {
-			LOG.error(e);
+			LOG.error(e.getMessage(), e);
 		}
 		return null;
 	}
@@ -74,9 +74,9 @@ public class JavaProjectAwareTraceContribution implements ITraceURIConverterCont
 						}
 					}
 				} catch (JavaModelException e) {
-					LOG.error(e);
+					LOG.error(e.getMessage(), e);
 				} catch (CoreException e) {
-					LOG.error(e);
+					LOG.error(e.getMessage(), e);
 				}
 			}
 		}

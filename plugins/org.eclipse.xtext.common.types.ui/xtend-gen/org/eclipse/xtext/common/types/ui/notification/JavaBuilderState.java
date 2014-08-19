@@ -377,7 +377,8 @@ public class JavaBuilderState {
         final Exception e = (Exception)_t;
         boolean _isEnabledFor = JavaBuilderState.LOG.isEnabledFor(Level.ERROR);
         if (_isEnabledFor) {
-          JavaBuilderState.LOG.error(e);
+          String _message = e.getMessage();
+          JavaBuilderState.LOG.error(_message, e);
         }
         return defaultValue;
       } else {

@@ -78,7 +78,7 @@ public class ToggleXtextNatureAction implements IObjectActionDelegate {
 			description.setNatureIds(newNatures);
 			project.setDescription(description, null);
 		} catch (CoreException e) {
-			log.error(e);
+			log.error("Error toggling Xtext nature", e);
 		}
 	}
 

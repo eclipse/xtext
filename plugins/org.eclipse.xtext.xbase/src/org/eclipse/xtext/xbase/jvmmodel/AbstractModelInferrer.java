@@ -51,14 +51,14 @@ public abstract class AbstractModelInferrer implements IJvmModelInferrer {
 					}
 				}, preIndexingPhase);
 			} catch (IllegalArgumentException e1) {
-				log.error(e1);
+				log.error(e1.getMessage(), e1);
 			} catch (IllegalAccessException e1) {
-				log.error(e1);
+				log.error(e1.getMessage(), e1);
 			} catch (InvocationTargetException e1) {
 				if (e1.getTargetException() instanceof IllegalArgumentException) {
 					_infer(e, acceptor, preIndexingPhase);
 				} else {
-					log.error(e1.getTargetException());
+					log.error(e1.getTargetException().getMessage(), e1.getTargetException());
 				}
 			}
 		} else {
