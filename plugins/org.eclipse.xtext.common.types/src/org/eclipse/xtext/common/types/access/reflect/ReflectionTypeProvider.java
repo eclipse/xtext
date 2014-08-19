@@ -7,11 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.reflect;
 
+import java.util.List;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeResource;
@@ -19,6 +22,7 @@ import org.eclipse.xtext.common.types.access.impl.AbstractRuntimeJvmTypeProvider
 import org.eclipse.xtext.common.types.access.impl.ClassFinder;
 import org.eclipse.xtext.common.types.access.impl.ClassMirror;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -103,6 +107,15 @@ public class ReflectionTypeProvider extends AbstractRuntimeJvmTypeProvider {
 			// since dollar signs are a quite good indicator but not necessarily the best
 			Class<?> clazz = findClassByName(name);
 			return findTypeByClass(clazz);
+		} catch (ClassNotFoundExceptionWithBaseName e) {
+			String outerName = e.getBaseName();
+			JvmType outer = doFindTypeByName(outerName);
+			if (outer instanceof JvmDeclaredType) {
+				String nestedNames = name.substring(outerName.length() + 1);
+				List<String> segments = Strings.split(nestedNames, ".");
+				return findNestedType((JvmDeclaredType) outer, segments, 0);
+			}
+			return null;
 		} catch (ClassNotFoundException e) {
 			return tryFindTypeInIndex(name, false);
 		} catch (NoClassDefFoundError e) { 
@@ -143,8 +156,14 @@ public class ReflectionTypeProvider extends AbstractRuntimeJvmTypeProvider {
 			} catch (ClassNotFoundException baseNameException) {
 				throw exception;
 			}
-			Class<?> clazz = classFinder.forName(baseName + '$' + name.substring(index + 1));
-			return clazz;
+			final String validBaseName = baseName;
+			try {
+				String binaryName = baseName + '$' + name.substring(index + 1);
+				Class<?> clazz = classFinder.forName(binaryName);
+				return clazz;
+			} catch(ClassNotFoundException e) {
+				throw new ClassNotFoundExceptionWithBaseName(validBaseName);
+			}
 		}
 	}
 

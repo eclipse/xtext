@@ -9,6 +9,7 @@ package org.eclipse.xtext.common.types.access.jdt;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IResource;
@@ -23,6 +24,7 @@ import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jdt.core.WorkingCopyOwner;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeResource;
@@ -89,6 +91,10 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 
 	@Override
 	public JvmType findTypeByName(String name) {
+		return doFindTypeByName(name, false);
+	}
+	
+	private JvmType doFindTypeByName(String name, boolean traverseNestedTypes) {
 		String signature = getSignature(name);
 		if (signature == null)
 			return null;
@@ -96,7 +102,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		if (resourceURI.segment(0) == PRIMITIVES) {
 			return findPrimitiveType(signature, resourceURI);
 		} else {
-			return findObjectType(signature, resourceURI);
+			return findObjectType(signature, resourceURI, traverseNestedTypes);
 		}
 	}
 
@@ -105,14 +111,14 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	 */
 	@Override
 	public JvmType findTypeByName(String name, boolean binaryNestedTypeDelimiter) {
-		JvmType result = findTypeByName(name);
+		JvmType result = doFindTypeByName(name, false);
 		if (result != null || isBinaryNestedTypeDelimiter(name, binaryNestedTypeDelimiter)) {
 			return result;
 		}
 		ClassNameVariants nameVariants = new ClassNameVariants(name);
 		while (result == null && nameVariants.hasNext()) {
 			String nextVariant = nameVariants.next();
-			result = findTypeByName(nextVariant);
+			result = doFindTypeByName(nextVariant, true);
 		}
 		return result;
 	}
@@ -131,20 +137,20 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	}
 
 	/* @Nullable */
-	private JvmType findObjectType(/* @NonNull */ String signature, /* @NonNull */ URI resourceURI) {
+	private JvmType findObjectType(/* @NonNull */ String signature, /* @NonNull */ URI resourceURI, boolean traverseNestedTypes) {
 		ResourceSet resourceSet = getResourceSet();
 		if (resourceSet instanceof SynchronizedXtextResourceSet) {
 			synchronized (((SynchronizedXtextResourceSet) resourceSet).getLock()) {
-				return doFindObjectType(signature, resourceURI);		
+				return doFindObjectType(signature, resourceURI, traverseNestedTypes);		
 			}
 		}
-		return doFindObjectType(signature, resourceURI);
+		return doFindObjectType(signature, resourceURI, traverseNestedTypes);
 	}
 
-	private JvmType doFindObjectType(String signature, URI resourceURI) {
+	private JvmType doFindObjectType(String signature, URI resourceURI, boolean traverseNestedTypes) {
 		TypeResource resource = getLoadedResourceForJavaURI(resourceURI);
 		try {
-			JvmType result = findLoadedOrDerivedObjectType(signature, resourceURI, resource);
+			JvmType result = findLoadedOrDerivedObjectType(signature, resourceURI, resource, traverseNestedTypes);
 			if (result != null || resource != null) {
 				if (result != null && !canLink(result.getQualifiedName())) {
 					return null;
@@ -152,7 +158,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 				return result;
 			}
 			try {
-				return findObjectTypeInJavaProject(signature, resourceURI);
+				return findObjectTypeInJavaProject(signature, resourceURI, traverseNestedTypes);
 			} catch (JavaModelException e) {
 				return null;
 			} catch (NullPointerException e) { // JDT throws NPEs see https://bugs.eclipse.org/bugs/show_bug.cgi?id=369391
@@ -165,8 +171,8 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 
 	/* @Nullable */
 	private JvmType findLoadedOrDerivedObjectType(/* @NonNull */ String signature, /* @NonNull */ URI resourceURI,
-			/* @Nullable */ TypeResource resource) {
-		JvmType result = resource != null ? findTypeBySignature(signature, resource) : null;
+			/* @Nullable */ TypeResource resource, boolean traverseNestedTypes) {
+		JvmType result = resource != null ? findTypeBySignature(signature, resource, traverseNestedTypes) : null;
 		if (result != null) {
 			return result;
 		}
@@ -178,12 +184,12 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	}
 
 	/* @Nullable */
-	private JvmType findObjectTypeInJavaProject(/* @NonNull */ String signature, /* @NonNull */ URI resourceURI)
+	private JvmType findObjectTypeInJavaProject(/* @NonNull */ String signature, /* @NonNull */ URI resourceURI, boolean traverseNestedTypes)
 			throws JavaModelException {
 		IType type = findObjectTypeInJavaProject(resourceURI);
 		if (type != null) {
 			try {
-				return createResourceAndFindType(resourceURI, type, signature);
+				return createResourceAndFindType(resourceURI, type, signature, traverseNestedTypes);
 			} catch (IOException ioe) {
 				return null;
 			} catch (WrappedException wrapped) {
@@ -197,11 +203,11 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	}
 
 	/* @Nullable */
-	private JvmType createResourceAndFindType(/* @NonNull */ URI resourceURI, /* @NonNull */ IType type, /* @NonNull */ String signature)
+	private JvmType createResourceAndFindType(/* @NonNull */ URI resourceURI, /* @NonNull */ IType type, /* @NonNull */ String signature, boolean traverseNestedTypes)
 			throws IOException {
 		TypeResource resource = createResource(resourceURI, type);
 		resource.load(Collections.singletonMap(TypeResource.OPTION_CLASSPATH_CONTEXT, javaProject));
-		return findTypeBySignature(signature, resource);
+		return findTypeBySignature(signature, resource, traverseNestedTypes);
 	}
 
 	private TypeResource createResource(URI resourceURI, IType type) {
@@ -284,7 +290,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 
 	private JvmType findPrimitiveType(/* @NonNull */ String signature, /* @NonNull */ URI resourceURI) {
 		TypeResource resource = (TypeResource) getResourceForJavaURI(resourceURI, true);
-		JvmType result = findTypeBySignature(signature, resource);
+		JvmType result = findTypeBySignature(signature, resource, false);
 		return result;
 	}
 
@@ -300,9 +306,31 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	public JvmType findTypeBySignature(String signature, TypeResource resource) {
+		return findTypeBySignature(signature, resource, false);
+	}
+	
+	/**
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	private JvmType findTypeBySignature(String signature, TypeResource resource, boolean traverseNestedTypes) {
 		// TODO: Maybe iterate the resource without computing a fragment
 		String fragment = typeUriHelper.getFragment(signature);
-		return (JvmType) resource.getEObject(fragment);
+		JvmType result = (JvmType) resource.getEObject(fragment);
+		if (result != null || !traverseNestedTypes)
+			return result;
+		List<EObject> contents = resource.getContents();
+		if (contents.isEmpty()) {
+			return null;
+		}
+		String rootTypeName = resource.getURI().segment(1);
+		String nestedTypeName = fragment.substring(rootTypeName.length() + 1);
+		List<String> segments = Strings.split(nestedTypeName, "$");
+		EObject rootType = contents.get(0);
+		if (rootType instanceof JvmDeclaredType) {
+			result = findNestedType((JvmDeclaredType) rootType, segments, 0);
+		}
+		return result;
 	}
 
 	/**

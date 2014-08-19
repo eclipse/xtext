@@ -24,6 +24,7 @@ InitializerWithoutConstructor.java.txt
 Methods.java.txt
 NestedInterfaces.java.txt
 NestedParameterizedTypes.java.txt
+NestedTypeInheritance.java.txt
 NestedTypes.java.txt
 ParameterizedMethods.java.txt
 ParameterizedTypes.java.txt

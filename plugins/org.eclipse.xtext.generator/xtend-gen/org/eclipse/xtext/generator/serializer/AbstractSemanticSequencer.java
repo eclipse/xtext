@@ -279,9 +279,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       for(final EPackage pkg : _accessedPackages) {
         _builder.append("\t");
         {
-          int _pkgi = pkgi = (pkgi + 1);
-          boolean _greaterThan = (_pkgi > 1);
-          if (_greaterThan) {
+          if (((pkgi = (pkgi + 1)) > 1)) {
             _builder.append("else ");
           }
         }
@@ -320,9 +318,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
                 _builder.append("\t");
                 _builder.append("\t");
                 {
-                  int _ctxi = ctxi = (ctxi + 1);
-                  boolean _greaterThan_1 = (_ctxi > 1);
-                  if (_greaterThan_1) {
+                  if (((ctxi = (ctxi + 1)) > 1)) {
                     _builder.append("else ");
                   }
                 }
