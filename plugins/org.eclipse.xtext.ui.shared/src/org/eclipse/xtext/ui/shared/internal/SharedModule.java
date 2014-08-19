@@ -84,8 +84,7 @@ public class SharedModule extends AbstractModule {
 
 	@Override
 	protected void configure() {
-		// TODO enable for 2.6 - https://bugs.eclipse.org/bugs/show_bug.cgi?id=423184
-//		binder().requireExplicitBindings();
+		binder().requireExplicitBindings();
 		if (context != null)
 			bind(BundleContext.class).toInstance(context);
 		
