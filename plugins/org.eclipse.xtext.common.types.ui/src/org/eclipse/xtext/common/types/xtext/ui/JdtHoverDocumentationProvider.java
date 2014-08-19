@@ -37,7 +37,7 @@ public class JdtHoverDocumentationProvider implements IEObjectHoverDocumentation
 				try {
 					return JavadocContentAccess2.getHTMLContent((IMember) element, true);
 				} catch (JavaModelException e) {
-					log.error(e);
+					log.error(e.getMessage(), e);
 				}
 		}  
 		return "";

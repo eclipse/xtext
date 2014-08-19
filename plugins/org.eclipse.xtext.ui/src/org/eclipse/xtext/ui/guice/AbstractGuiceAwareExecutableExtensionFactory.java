@@ -53,7 +53,7 @@ public abstract class AbstractGuiceAwareExecutableExtensionFactory implements IE
 			return result;
 		}
 		catch (Exception e) {
-			log.error(e);
+			log.error(e.getMessage(), e);
 			throw new CoreException(new Status(IStatus.ERROR, getBundle().getSymbolicName(), e.getMessage() + " ExtensionFactory: "+ getClass().getName(), e));
 		}
 	}
