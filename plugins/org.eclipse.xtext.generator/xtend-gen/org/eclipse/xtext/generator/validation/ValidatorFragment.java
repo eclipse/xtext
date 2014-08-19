@@ -159,7 +159,7 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
     _builder.append("protected List<EPackage> getEPackages() {");
     _builder.newLine();
     _builder.append("\t    ");
-    _builder.append("List<EPackage> result = new ArrayList<EPackage>();");
+    _builder.append("List<EPackage> result = new ArrayList<EPackage>(super.getEPackages());");
     _builder.newLine();
     {
       Iterable<EPackage> _generatedPackagesToValidate = this.getGeneratedPackagesToValidate();
