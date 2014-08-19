@@ -127,9 +127,9 @@ public class XtendFormatterPreview implements Observer {
 			try {
 				textEdit.apply(document);
 			} catch (MalformedTreeException e) {
-				log.error(e);
+				log.error("Error applying text edits", e);
 			} catch (BadLocationException e) {
-				log.error(e);
+				log.error("Error applying text edits", e);
 			}
 			editorHandle.getViewer().setSelection(null); // reset selection, otherwise the whole new content will be selected
 		} finally {
