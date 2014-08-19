@@ -368,9 +368,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       for(final AbstractRule rule : _unassignedCalledTokenRules) {
         _builder.append("\t");
         {
-          int _i = i = (i + 1);
-          boolean _greaterThan = (_i > 1);
-          if (_greaterThan) {
+          if (((i = (i + 1)) > 1)) {
             _builder.append("else ");
           }
         }
@@ -504,9 +502,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       for(final Pair<String, GrammarAlias.AbstractElementAlias> group : _allAmbiguousTransitionsBySyntax) {
         _builder.append("\t\t");
         {
-          int _i = i = (i + 1);
-          boolean _greaterThan = (_i > 1);
-          if (_greaterThan) {
+          if (((i = (i + 1)) > 1)) {
             _builder.append("else ");
           }
         }

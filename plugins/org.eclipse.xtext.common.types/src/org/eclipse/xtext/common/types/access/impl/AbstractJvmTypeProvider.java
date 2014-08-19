@@ -7,9 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
+import java.util.List;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.IMirror;
@@ -120,5 +123,19 @@ public abstract class AbstractJvmTypeProvider implements IJvmTypeProvider, Resou
 
 	protected IndexedJvmTypeAccess getIndexedJvmTypeAccess() {
 		return indexedJvmTypeAccess;
+	}
+	
+	protected JvmType findNestedType(JvmDeclaredType outer, List<String> segments, int i) {
+		Iterable<JvmDeclaredType> nestedTypesByName = outer.findAllNestedTypesByName(segments.get(i));
+		for(JvmDeclaredType nestedType: nestedTypesByName) {
+			if (i == segments.size() - 1) {
+				return nestedType;
+			}
+			JvmType result = findNestedType(nestedType, segments, i + 1);
+			if (result != null) {
+				return result;
+			}
+		}
+		return null;
 	}
 }

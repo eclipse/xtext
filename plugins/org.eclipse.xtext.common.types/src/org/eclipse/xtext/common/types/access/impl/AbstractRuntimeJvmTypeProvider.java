@@ -51,6 +51,20 @@ public abstract class AbstractRuntimeJvmTypeProvider extends AbstractJvmTypeProv
 		
 	}
 	
+	protected static class ClassNotFoundExceptionWithBaseName extends ClassNotFoundException {
+
+		private static final long serialVersionUID = 1L;
+		private String baseName;
+		
+		public ClassNotFoundExceptionWithBaseName(String baseName) {
+			this.baseName = baseName;
+		}
+		
+		public String getBaseName() {
+			return baseName;
+		}
+	}
+	
 	@Override
 	protected void registerProtocol(ResourceSet resourceSet) {
 		super.registerProtocol(resourceSet);
