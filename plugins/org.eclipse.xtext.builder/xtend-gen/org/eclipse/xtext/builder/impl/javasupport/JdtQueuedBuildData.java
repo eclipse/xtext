@@ -64,9 +64,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
           boolean _equals = Objects.equal(state, null);
           if (_equals) {
             String _name_1 = project.getName();
-            JavaBuilderState _lastBuiltState = JavaBuilderState.getLastBuiltState(project);
-            JavaBuilderState _state = state = _lastBuiltState;
-            this.javaBuildState.put(_name_1, _state);
+            this.javaBuildState.put(_name_1, state = JavaBuilderState.getLastBuiltState(project));
           }
           Integer _buildNumber = state.getBuildNumber();
           ((UnconfirmedStructuralChangesDelta)delta).setBuildNumber((_buildNumber).intValue());

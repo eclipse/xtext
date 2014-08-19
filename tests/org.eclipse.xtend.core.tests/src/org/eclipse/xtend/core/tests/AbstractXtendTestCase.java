@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -46,6 +46,8 @@ import com.google.inject.Provider;
 
 /**
  * Abstract base for Xtend tests.
+ * 
+ * @author Stéphane Galland - add the Predicate parameter to the function files()
  */
 @RunWith(XtextRunner.class)
 @InjectWith(RuntimeInjectorProvider.class)
@@ -90,6 +92,10 @@ public abstract class AbstractXtendTestCase extends Assert {
 	}
 	
 	protected Iterable<XtendFile> files(boolean validate, String ... contents) throws Exception {
+		return files(validate, null, contents);
+	}
+
+	protected Iterable<XtendFile> files(boolean validate, Predicate<Issue> filteringIssuePredicate, String ... contents) throws Exception {
 		XtextResourceSet set = getResourceSet();
 		List<XtendFile> result = newArrayList();
 		for (String string : contents) {
@@ -106,6 +112,9 @@ public abstract class AbstractXtendTestCase extends Assert {
 			for (XtendFile file : result) {
 				List<Issue> issues = ((XtextResource) file.eResource()).getResourceServiceProvider().getResourceValidator()
 						.validate(file.eResource(), CheckMode.ALL, CancelIndicator.NullImpl);
+				if (filteringIssuePredicate != null) {
+					issues = Lists.newArrayList(Iterables.filter(issues, filteringIssuePredicate));
+				}
 				assertTrue("Resource contained errors : " + issues.toString(), issues.isEmpty());
 			}
 		}
