@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.formatting.RichStringFormatter;
 import org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys;
+import org.eclipse.xtend.core.services.XtendGrammarAccess;
 import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
@@ -30,6 +31,7 @@ import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -37,6 +39,7 @@ import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.preferences.PreferenceKey;
@@ -79,6 +82,7 @@ import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
+import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
@@ -97,6 +101,10 @@ public class XtendFormatter extends XbaseFormatter2 {
   @Inject
   @Extension
   private FormattingDataFactory _formattingDataFactory;
+  
+  @Inject
+  @Extension
+  private XtendGrammarAccess _xtendGrammarAccess;
   
   @Inject
   private RichStringFormatter richStringFormatter;
@@ -1016,6 +1024,50 @@ public class XtendFormatter extends XbaseFormatter2 {
       _and = _or;
     }
     return _and;
+  }
+  
+  protected XClosure builder(final List<XExpression> params) {
+    XClosure _xifexpression = null;
+    XExpression _last = IterableExtensions.<XExpression>last(params);
+    boolean _notEquals = (!Objects.equal(_last, null));
+    if (_notEquals) {
+      XClosure _xblockexpression = null;
+      {
+        XExpression _last_1 = IterableExtensions.<XExpression>last(params);
+        INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(_last_1);
+        INode _firstChild = ((ICompositeNode) _nodeForEObject).getFirstChild();
+        final EObject grammarElement = _firstChild.getGrammarElement();
+        XClosure _xifexpression_1 = null;
+        boolean _or = false;
+        boolean _or_1 = false;
+        XbaseGrammarAccess.XMemberFeatureCallElements _xMemberFeatureCallAccess = this._xtendGrammarAccess.getXMemberFeatureCallAccess();
+        RuleCall _memberCallArgumentsXClosureParserRuleCall_1_1_4_0 = _xMemberFeatureCallAccess.getMemberCallArgumentsXClosureParserRuleCall_1_1_4_0();
+        boolean _equals = Objects.equal(grammarElement, _memberCallArgumentsXClosureParserRuleCall_1_1_4_0);
+        if (_equals) {
+          _or_1 = true;
+        } else {
+          XbaseGrammarAccess.XFeatureCallElements _xFeatureCallAccess = this._xtendGrammarAccess.getXFeatureCallAccess();
+          RuleCall _featureCallArgumentsXClosureParserRuleCall_4_0 = _xFeatureCallAccess.getFeatureCallArgumentsXClosureParserRuleCall_4_0();
+          boolean _equals_1 = Objects.equal(grammarElement, _featureCallArgumentsXClosureParserRuleCall_4_0);
+          _or_1 = _equals_1;
+        }
+        if (_or_1) {
+          _or = true;
+        } else {
+          XtendGrammarAccess.XbaseConstructorCallElements _xbaseConstructorCallAccess = this._xtendGrammarAccess.getXbaseConstructorCallAccess();
+          RuleCall _argumentsXClosureParserRuleCall_5_0 = _xbaseConstructorCallAccess.getArgumentsXClosureParserRuleCall_5_0();
+          boolean _equals_2 = Objects.equal(grammarElement, _argumentsXClosureParserRuleCall_5_0);
+          _or = _equals_2;
+        }
+        if (_or) {
+          XExpression _last_2 = IterableExtensions.<XExpression>last(params);
+          _xifexpression_1 = ((XClosure) _last_2);
+        }
+        _xblockexpression = _xifexpression_1;
+      }
+      _xifexpression = _xblockexpression;
+    }
+    return _xifexpression;
   }
   
   protected void format(final EObject anonymousClass, final FormattableDocument format) {
