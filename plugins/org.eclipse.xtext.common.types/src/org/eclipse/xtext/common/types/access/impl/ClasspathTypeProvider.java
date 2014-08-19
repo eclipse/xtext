@@ -10,6 +10,7 @@ package org.eclipse.xtext.common.types.access.impl;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
@@ -29,6 +30,7 @@ import org.eclipse.xtext.common.types.access.binary.BinaryClass;
 import org.eclipse.xtext.common.types.access.binary.BinaryClassFinder;
 import org.eclipse.xtext.common.types.access.binary.BinaryClassMirror;
 import org.eclipse.xtext.common.types.access.binary.asm.ClassFileBytesAccess;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -195,6 +197,15 @@ public class ClasspathTypeProvider extends AbstractRuntimeJvmTypeProvider {
 			// since dollar signs are a quite good indicator but not necessarily the best
 			BinaryClass clazz = findClassByName(name);
 			return findTypeByClass(clazz);
+		} catch (ClassNotFoundExceptionWithBaseName e) {
+			String outerName = e.getBaseName();
+			JvmType outer = doFindTypeByName(outerName);
+			if (outer instanceof JvmDeclaredType) {
+				String nestedNames = name.substring(outerName.length() + 1);
+				List<String> segments = Strings.split(nestedNames, ".");
+				return findNestedType((JvmDeclaredType) outer, segments, 0);
+			}
+			return null;
 		} catch (ClassNotFoundException e) {
 			return tryFindTypeInIndex(name, false);
 		}
@@ -212,7 +223,7 @@ public class ClasspathTypeProvider extends AbstractRuntimeJvmTypeProvider {
 		TypeResource result = (TypeResource) getResourceSet().getResource(resourceURI, true);
 		return findTypeByClass(clazz, result);
 	}
-
+	
 	private BinaryClass findClassByName(String name) throws ClassNotFoundException {
 		try {
 			BinaryClass clazz = classFinder.forName(name);
@@ -229,8 +240,14 @@ public class ClasspathTypeProvider extends AbstractRuntimeJvmTypeProvider {
 			} catch (ClassNotFoundException baseNameException) {
 				throw exception;
 			}
-			BinaryClass clazz = classFinder.forName(baseName + '$' + name.substring(index + 1));
-			return clazz;
+			final String validBaseName = baseName;
+			try {
+				String binaryName = baseName + '$' + name.substring(index + 1);
+				BinaryClass clazz = classFinder.forName(binaryName);
+				return clazz;
+			} catch(ClassNotFoundException e) {
+				throw new ClassNotFoundExceptionWithBaseName(validBaseName);
+			}
 		}
 	}
 

@@ -3135,6 +3135,21 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	}
 	
 	@Test
+	public void testFindTypeByName_NestedTypeQualifiedWithSubType_01() {
+		String typeName = "org.eclipse.xtext.common.types.testSetups.NestedTypeInheritance.Sub.Inner";
+		String identifier = "org.eclipse.xtext.common.types.testSetups.NestedTypeInheritance$Super$Inner";
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName, false);
+		assertEquals(identifier, type.getIdentifier());
+	}
+	
+	@Test
+	public void testFindTypeByName_NestedTypeQualifiedWithSubType_02() {
+		String typeName = "org.eclipse.xtext.common.types.testSetups.NestedTypeInheritance$Sub$Inner";
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName, true);
+		assertNull(type);
+	}
+	
+	@Test
 	public void testTypeParamEndsWithDollar_01() {
 		String typeName = "org.eclipse.xtext.common.types.testSetups.TypeParamEndsWithDollar";
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
