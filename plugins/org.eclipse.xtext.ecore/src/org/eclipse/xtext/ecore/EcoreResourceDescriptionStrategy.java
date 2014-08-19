@@ -54,7 +54,7 @@ public class EcoreResourceDescriptionStrategy extends DefaultResourceDescription
 				return true;
 			}
 		} catch (Exception exc) {
-			LOG.error(exc.getMessage());
+			LOG.error(exc.getMessage(), exc);
 		}
 		return false;
 	}

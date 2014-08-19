@@ -52,7 +52,7 @@ public class JvmTypesResourceDescriptionStrategy extends DefaultResourceDescript
 				acceptor.accept(EObjectDescription.create(qualifiedName, eObject, createLazyUserData(eObject)));
 			}
 		} catch (Exception exc) {
-			LOG.error(exc.getMessage());
+			LOG.error(exc.getMessage(), exc);
 		}
 		return true;
 	}

@@ -185,7 +185,7 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 						Class<?> genModelSupport = Class.forName("org.eclipse.emf.codegen.ecore.xtext.GenModelSupport");
 						genModelSupport.getDeclaredMethod("createInjectorAndDoEMFRegistration").invoke(null);
 					} catch (ClassNotFoundException e) {
-						LOG.error("Couldn't initialize GenModel support. Is it on the classpath?");
+						LOG.error("Couldn't initialize GenModel support. Is it on the classpath?", e);
 					} catch (Exception e) {
 						LOG.error("Couldn't initialize GenModel support.", e);
 					}
@@ -202,7 +202,7 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 						Class<?> xcore = Class.forName("org.eclipse.emf.ecore.xcore.XcoreStandaloneSetup");
 						xcore.getDeclaredMethod("doSetup", new Class[0]).invoke(null);
 					} catch (ClassNotFoundException e) {
-						LOG.error("Couldn't initialize Xcore support. Is it on the classpath?");
+						LOG.error("Couldn't initialize Xcore support. Is it on the classpath?", e);
 					} catch (Exception e) {
 						LOG.error("Couldn't initialize Xcore support.", e);
 					}
