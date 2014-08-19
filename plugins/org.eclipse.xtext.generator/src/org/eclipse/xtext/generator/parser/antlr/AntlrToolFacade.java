@@ -73,7 +73,7 @@ public class AntlrToolFacade {
 						Thread.currentThread().setContextClassLoader(contextClassLoader);
 					}
 				} catch (MalformedURLException e1) {
-					log.error(e1.getMessage());
+					log.error(e1.getMessage(), e1);
 				} catch (ClassNotFoundException e1) {
 					log.error(e1.getMessage(),e1);
 				}
