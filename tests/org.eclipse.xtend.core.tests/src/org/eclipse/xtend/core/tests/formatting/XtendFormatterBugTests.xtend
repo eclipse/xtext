@@ -46,6 +46,17 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 			}
 		'''.decode)
 	}
+
+	@Test
+	def testBug434976(){
+		assertFormatted('''
+			class Foo {
+				def bar() {
+					new Baz[]
+				}
+			}
+		''')
+	}
 	
 	@Test
 	def testBug398625(){
