@@ -10,6 +10,7 @@ package org.eclipse.xtend.core.formatting
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtend.core.xtend.AnonymousClass
 import org.eclipse.xtend.core.xtend.RichString
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget
 import org.eclipse.xtend.core.xtend.XtendAnnotationType
@@ -24,7 +25,11 @@ import org.eclipse.xtend.core.xtend.XtendMember
 import org.eclipse.xtend.core.xtend.XtendParameter
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 import org.eclipse.xtext.common.types.JvmTypeParameter
+import org.eclipse.xtext.nodemodel.ICompositeNode
 import org.eclipse.xtext.preferences.PreferenceKey
+import org.eclipse.xtext.xbase.XBlockExpression
+import org.eclipse.xtext.xbase.XClosure
+import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.formatting.FormattableDocument
 import org.eclipse.xtext.xbase.formatting.FormattingDataFactory
 import org.eclipse.xtext.xbase.formatting.HiddenLeafAccess
@@ -35,9 +40,9 @@ import org.eclipse.xtext.xtype.XImportSection
 
 import static org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys.*
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*
+import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 import static org.eclipse.xtext.xtype.XtypePackage.Literals.*
-import org.eclipse.xtend.core.xtend.AnonymousClass
-import org.eclipse.xtext.xbase.XBlockExpression
+import org.eclipse.xtend.core.services.XtendGrammarAccess
 
 @SuppressWarnings("restriction")
 public class XtendFormatter extends XbaseFormatter2 {
@@ -45,6 +50,7 @@ public class XtendFormatter extends XbaseFormatter2 {
 	@Inject extension NodeModelAccess
 	@Inject extension HiddenLeafAccess
 	@Inject extension FormattingDataFactory
+	@Inject extension XtendGrammarAccess
 
 	@Inject RichStringFormatter richStringFormatter
 
@@ -294,6 +300,17 @@ public class XtendFormatter extends XbaseFormatter2 {
 			&& expr.expressions.size <= 1
 		    && !expr.isMultiline(format) 
 			&& (expr.expressions.empty ||format.fitsIntoLine(expr.expressions.head))
+	}
+	
+	override protected builder(List<XExpression> params) {
+		if (params.last != null){
+			val grammarElement = (params.last.nodeForEObject as ICompositeNode).firstChild.grammarElement
+			if(grammarElement == XMemberFeatureCallAccess.memberCallArgumentsXClosureParserRuleCall_1_1_4_0 || 
+				grammarElement == XFeatureCallAccess.featureCallArgumentsXClosureParserRuleCall_4_0 ||
+				grammarElement == xbaseConstructorCallAccess.argumentsXClosureParserRuleCall_5_0
+			)
+				params.last as XClosure
+		}
 	}
 	
 }
