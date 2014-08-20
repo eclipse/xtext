@@ -724,6 +724,17 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 	public CompoundXtextEditorCallback getXtextEditorCallback() {
 		return callback;
 	}
+	
+	@Override
+	protected boolean isNavigationTarget(Annotation annotation) {
+		boolean result = super.isNavigationTarget(annotation);
+		if (result) {
+			if (annotation.isMarkedDeleted()) {
+				return false;
+			}
+		}
+		return result;
+	}
 
 	/**
 	 * Copied from {@link org.eclipse.ui.texteditor.AbstractTextEditor#selectAndReveal(int, int)}  and removed selection
