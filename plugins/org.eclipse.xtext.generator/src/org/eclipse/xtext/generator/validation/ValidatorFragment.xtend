@@ -23,7 +23,7 @@ import org.eclipse.xtext.generator.Xtend2GeneratorFragment
 
 import static org.eclipse.xtext.GrammarUtil.*
 import org.eclipse.xtend.lib.annotations.Accessors
-
+import static extension org.eclipse.xtext.generator.IInheriting.Util.*
 /**
  * Generates an Xtend-based model validator.
  * 
@@ -83,7 +83,7 @@ class ValidatorFragment extends Xtend2GeneratorFragment implements IInheriting, 
 			
 				@Override
 				protected List<EPackage> getEPackages() {
-				    List<EPackage> result = new ArrayList<EPackage>();
+				    List<EPackage> result = new ArrayList<EPackage>(«IF isInheritImplementation && grammar.nonTerminalsSuperGrammar !== null»super.getEPackages()«ENDIF»);
 				    «FOR e: generatedPackagesToValidate»
 				    result.add(«e.generatedEPackageName».eINSTANCE);
 				    «ENDFOR»
