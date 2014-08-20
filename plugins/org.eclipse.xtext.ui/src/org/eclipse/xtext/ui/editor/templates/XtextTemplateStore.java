@@ -68,7 +68,7 @@ public class XtextTemplateStore extends TemplateStore {
 				openStream.close();
 			}
 		} catch (IOException e) {
-			log.error(e);
+			log.error(e.getMessage(), e);
 		}
 	}
 

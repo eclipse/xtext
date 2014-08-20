@@ -147,7 +147,7 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 			if (resource instanceof IStorage)
 				return traceForStorageProvider.getTraceToSource((IStorage) resource);
 		} catch (JavaModelException e) {
-			log.error(e);
+			log.error("Error finding trace to source", e);
 		}
 		return null;
 	}
@@ -187,9 +187,9 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 							contents.close();
 						}
 				} catch (CoreException e) {
-					log.error(e);
+					log.error("Error finding trace region", e);
 				} catch (IOException e) {
-					log.error(e);
+					log.error("Error finding trace region", e);
 				}
 				return null;
 			}

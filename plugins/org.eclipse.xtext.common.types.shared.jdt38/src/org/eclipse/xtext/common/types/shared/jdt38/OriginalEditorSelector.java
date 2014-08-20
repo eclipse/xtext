@@ -195,7 +195,7 @@ public class OriginalEditorSelector implements IEditorAssociationOverride {
 					}, IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, // wait for the jdt index to be ready
 					new NullProgressMonitor());
 		} catch (JavaModelException e) {
-			logger.error(e);
+			logger.error(e.getMessage(), e);
 		}
 		if (decisions.isJavaStackTraceHyperlink())
 			return foundLocalType[0] != null ? foundLocalType[0] : foundLibraryType[0];
