@@ -23,6 +23,8 @@ import org.eclipse.xtext.resource.impl.AliasedEObjectDescription;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.typesystem.InferredTypeIndicator;
 
+import com.google.common.collect.Iterables;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -93,7 +95,7 @@ public class NestedTypesScope extends AbstractKnownTypesScope {
 		
 	protected IEObjectDescription doGetSingleElement(JvmDeclaredType declarator, QualifiedName name, String firstSegment, int dollarIndex) {
 		if (declarator.isLocal()) {
-			JvmTypeReference superTypeReference = declarator.getSuperTypes().get(0);
+			JvmTypeReference superTypeReference = Iterables.getLast(declarator.getSuperTypes());
 			if (InferredTypeIndicator.isInferred(superTypeReference))
 				return findNestedTypeInLocalTypeNonResolving(declarator, name, firstSegment, dollarIndex);
 		}

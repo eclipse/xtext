@@ -86,6 +86,7 @@ import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.util.XSwitchExpressions;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
@@ -948,7 +949,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	protected void appendConstructedTypeName(XConstructorCall constructorCall, ITreeAppendable typeAppendable) {
 		JvmDeclaredType type = constructorCall.getConstructor().getDeclaringType();
 		if (type instanceof JvmGenericType && ((JvmGenericType) type).isAnonymous()) {
-			typeAppendable.append(type.getSuperTypes().get(0).getType());
+			typeAppendable.append(Iterables.getLast(type.getSuperTypes()).getType());
 		} else {
 			typeAppendable.append(constructorCall.getConstructor().getDeclaringType());
 		}
