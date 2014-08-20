@@ -22,6 +22,8 @@ public class TestDataUIUtil {
 		private URI uri;
 
 		protected IFile findFile() {
+			if (filename == null)
+				return null;
 			IResource resource = javaProject.getProject().findMember(filename);
 			if (resource == null || !resource.exists())
 				throw new IllegalStateException("File " + filename + " does not exist.");
@@ -38,6 +40,10 @@ public class TestDataUIUtil {
 			if (file == null)
 				file = findFile();
 			return file;
+		}
+		
+		public String getFilename() {
+			return filename;
 		}
 
 		public IJavaProject getJavaProject() {
