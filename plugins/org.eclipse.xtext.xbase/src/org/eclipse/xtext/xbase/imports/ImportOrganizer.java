@@ -13,6 +13,8 @@ import static org.eclipse.xtext.util.Strings.*;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.resource.XtextResource;
@@ -110,12 +112,33 @@ public class ImportOrganizer {
 		// if the resource contains two types with the same simple name, we don't add any import
 		// but we can still use the package local name within the same package.
 		if(equal(usage.getContextPackageName(), type.getPackageName())) {
-			if(importSection.getImportedTypes(packageLocalName) == null) {
+			if (type.eContainer() != null) {
+				String declarationLocalName = getLocalName(type, usage.getContext());
+				nameToUse = declarationLocalName;
+			} else if(importSection.getImportedTypes(packageLocalName) == null) {
 				nameToUse = packageLocalName;
 			}
 		}
 		String textToUse = getConcreteSyntax(nameToUse, type, usage);
 		return new ReplaceRegion(usage.getTextRegion(), textToUse);
+	}
+
+	private String getLocalName(JvmDeclaredType type, JvmMember context) {
+		JvmMember containerCandidate = context; 
+		while(containerCandidate != null) {
+			if (EcoreUtil.isAncestor(containerCandidate, type)) {
+				String contextName = containerCandidate.getQualifiedName('.');
+				String typeName = type.getQualifiedName('.');
+				return typeName.substring(contextName.length() + 1);
+			}
+			EObject container = containerCandidate.eContainer();
+			if (container instanceof JvmMember) {
+				containerCandidate = (JvmMember) container;
+			} else {
+				return null;
+			}
+		}
+		return null;
 	}
 
 	private String getConcreteSyntax(String name, JvmDeclaredType importedType, TypeUsage usage) {

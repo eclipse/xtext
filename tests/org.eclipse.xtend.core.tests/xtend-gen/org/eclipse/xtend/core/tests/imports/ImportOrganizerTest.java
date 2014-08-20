@@ -1064,6 +1064,159 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testInnerClasses_13() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package inner");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static class Bar {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def m() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("new Bar");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package inner");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("static class Bar {}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def m() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("new Bar");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1, false);
+  }
+  
+  @Test
+  public void testInnerClasses_14() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Test {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def baz(Bar bar) {}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("interface Bar {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Test {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def baz(Bar bar) {}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("interface Bar {}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1, false);
+  }
+  
+  @Test
+  public void testInnerClasses_15() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package p");
+    _builder.newLine();
+    _builder.append("class Test {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def baz(Bar bar) {}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("interface Bar {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package p");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Test {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def baz(Bar bar) {}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("interface Bar {}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1, false);
+  }
+  
+  @Test
+  public void testInnerClasses_16() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package p");
+    _builder.newLine();
+    _builder.append("class Test {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def baz(Bar.XYZ x) {}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("interface Bar {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("class XYZ {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package p");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Test {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def baz(Bar.XYZ x) {}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("interface Bar {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("class XYZ {}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1, false);
+  }
+  
+  @Test
   public void testNameClashSameFileWins_1() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
