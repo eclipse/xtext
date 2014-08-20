@@ -159,20 +159,22 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 			if (dirtyStateEditorSupport != null)
 				dirtyStateEditorSupport.announceDirtyState(resource);
 		}
+		CancelIndicator cancelIndicator = new CancelIndicator() {
+			public boolean isCanceled() {
+				return monitor.isCanceled();
+			}
+		};
 		try {
 			if (resource instanceof DerivedStateAwareResource) 
 				((DerivedStateAwareResource) resource).installDerivedState(false);
 			if (resource instanceof IBatchLinkableResource) {
-				((IBatchLinkableResource) resource).linkBatched(new CancelIndicator() {
-					public boolean isCanceled() {
-						return monitor.isCanceled();
-					}
-				});
+				((IBatchLinkableResource) resource).linkBatched(cancelIndicator);
 			}
 		} catch (OperationCanceledException exc) {
-			// ignore
+			resource.getCache().clear(resource);
 		} catch (RuntimeException exc) {
 			log.error("Error post-processing reosurce", exc);
 		}
 	}
+	
 }

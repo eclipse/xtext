@@ -27,8 +27,10 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.IXtextModelListener;
+import org.eclipse.xtext.ui.editor.model.IXtextModelListenerExtension;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.reconciler.XtextReconcilerDebugger;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.common.collect.Maps;
@@ -39,7 +41,7 @@ import com.google.inject.Inject;
  * Initially copied from org.eclipse.jdt.internal.ui.javaeditor.SemanticHighlightingReconciler
  * @author Sebastian Zarnekow
  */
-public class HighlightingReconciler implements ITextInputListener, IXtextModelListener, IHighlightedPositionAcceptor {
+public class HighlightingReconciler implements ITextInputListener, IXtextModelListener, IXtextModelListenerExtension, IHighlightedPositionAcceptor {
 
 	@Inject(optional=true)
 	private ISemanticHighlightingCalculator calculator;
@@ -315,6 +317,13 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 	}
 
 	public void modelChanged(XtextResource resource) {
+		modelChanged(resource, CancelIndicator.NullImpl);
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public void modelChanged(XtextResource resource, CancelIndicator cancelIndicator) {
 		// ensure at most one thread can be reconciling at any time
 		synchronized (fReconcileLock) {
 			if (reconciling)
@@ -326,14 +335,14 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 			if (highlightingPresenter == null)
 				return;
 
-			highlightingPresenter.setCanceled(false);
+			highlightingPresenter.setCanceled(cancelIndicator.isCanceled());
 			
 			if (highlightingPresenter.isCanceled())
 				return;
 
 			startReconcilingPositions();
 
-			if (!highlightingPresenter.isCanceled()) {
+			if (!highlightingPresenter.isCanceled() && !cancelIndicator.isCanceled()) {
 				reconcilePositions(resource);
 			}
 
@@ -342,12 +351,11 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 				textPresentation[0] = highlightingPresenter.createPresentation(addedPositions, removedPositions);
 			}
 
-			if (!highlightingPresenter.isCanceled())
+			if (!highlightingPresenter.isCanceled() && !cancelIndicator.isCanceled())
 				updatePresentation(textPresentation[0], addedPositions, removedPositions);
 
+		} finally {
 			stopReconcilingPositions();
-		}
-		finally {
 			synchronized (fReconcileLock) {
 				reconciling = false;
 			}
