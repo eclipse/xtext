@@ -16,6 +16,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.HumanReadableTypeNames;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
@@ -33,7 +34,7 @@ public class LocalClassAwareTypeNames extends HumanReadableTypeNames {
 			boolean local = ((JvmDeclaredType) type).isLocal();
 			if (local) {
 				param.append("new ");
-				reference.getSuperTypes().get(0).accept(this, param);
+				Iterables.getLast(reference.getSuperTypes()).accept(this, param);
 				param.append("(){}");
 				return;
 			}
