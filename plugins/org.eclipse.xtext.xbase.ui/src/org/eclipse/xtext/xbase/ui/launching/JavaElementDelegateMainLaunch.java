@@ -39,7 +39,7 @@ public class JavaElementDelegateMainLaunch extends JavaElementDelegate {
 				}
 			}
 		} catch (JavaModelException e) {
-			log.error(e);
+			log.error(e.getMessage(), e);
 		}
 		return super.containsElementsSearchedFor(file);
 	}

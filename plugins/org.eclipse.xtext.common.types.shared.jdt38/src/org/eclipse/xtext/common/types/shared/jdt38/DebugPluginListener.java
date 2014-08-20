@@ -71,7 +71,7 @@ public class DebugPluginListener implements IDebugEventSetListener {
 							return jsf.getSourceName();
 					}
 			} catch (DebugException e) {
-				log.error(e);
+				log.error(e.getMessage(), e);
 			}
 			return null;
 		}

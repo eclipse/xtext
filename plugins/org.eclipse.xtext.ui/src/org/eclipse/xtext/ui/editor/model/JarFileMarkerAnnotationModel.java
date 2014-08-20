@@ -33,7 +33,7 @@ public class JarFileMarkerAnnotationModel extends ResourceMarkerAnnotationModel 
 			markerURI = marker.getAttribute(MARKER_URI);
 			return markerURI != null && markerURI.equals(fullURI.toString());
 		} catch (CoreException e) {
-			log.error(e);
+			log.error(e.getMessage(), e);
 			return false;
 		}
 	}

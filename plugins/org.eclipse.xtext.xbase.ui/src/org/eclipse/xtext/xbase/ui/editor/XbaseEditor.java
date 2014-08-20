@@ -229,7 +229,7 @@ public class XbaseEditor extends XtextEditor {
 														super.selectAndReveal(lineInfo.getOffset(), lineInfo.getLength(), lineInfo.getOffset(), lineInfo.getLength());
 														return;
 													} catch (BadLocationException e) {
-														log.error(e);
+														log.error(e.getMessage(), e);
 													}
 												}
 											}
