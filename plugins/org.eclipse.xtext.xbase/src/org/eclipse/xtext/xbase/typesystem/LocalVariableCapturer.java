@@ -7,14 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem;
 
-import java.util.List;
-
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
+
+import com.google.common.collect.Iterables;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -29,11 +29,11 @@ public abstract class LocalVariableCapturer implements IJvmTypeReferenceProvider
 	}
 	
 	protected static <R extends LocalVariableCapturer> R findLocalClassSupertype(JvmDeclaredType type) {
-		List<JvmTypeReference> superTypes = type.getSuperTypes();
-		if (superTypes.size() != 1) {
+		JvmTypeReference superType = Iterables.getLast(type.getSuperTypes());
+		if (superType == null) {
 			return null;
 		}
-		return findLocalClassSupertype(superTypes.get(0));
+		return findLocalClassSupertype(superType);
 	}
 
 	protected static <R extends LocalVariableCapturer> R findLocalClassSupertype(JvmTypeReference typeReference) {
@@ -53,7 +53,7 @@ public abstract class LocalVariableCapturer implements IJvmTypeReferenceProvider
 	}
 	
 	public static void captureLocalVariables(JvmDeclaredType localType, ITypeComputationState state) {
-		captureLocalVariables(localType.getSuperTypes().get(0), state);
+		captureLocalVariables(Iterables.getLast(localType.getSuperTypes()), state);
 	}
 	
 	public static void captureLocalVariables(JvmTypeReference typeReference, ITypeComputationState state) {

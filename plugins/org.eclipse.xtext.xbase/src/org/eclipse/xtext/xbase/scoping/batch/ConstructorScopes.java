@@ -29,6 +29,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
@@ -87,7 +88,7 @@ public class ConstructorScopes {
 			}
 			@Override
 			public Iterable<IEObjectDescription> getElements(QualifiedName name) {
-				JvmTypeReference superType = anonymousType.getSuperTypes().get(0);
+				JvmTypeReference superType = Iterables.getLast(anonymousType.getSuperTypes());
 				if (superType == null)
 					return Collections.emptyList();
 				JvmType type = superType.getType();

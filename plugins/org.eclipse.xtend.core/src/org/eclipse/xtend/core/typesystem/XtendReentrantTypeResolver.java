@@ -781,6 +781,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 						casted.setEquivalent(capturingTypeReference);
 						IFeatureScopeSession mySession = addThisAndSuper(nestedSession, resolvedTypes.getReferenceOwner(), localClass, superTypeReference, false);
 						if(type.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE && ((JvmGenericType) type).isInterface()) {
+							localClass.getSuperTypes().add(0, typesBuilder.newTypeRef(localClass, Object.class));
 							inferAnonymousClassConstructor(anonymousClass, localClass, type);
 						} else {
 							for(JvmMember superMember: type.getMembers()) {

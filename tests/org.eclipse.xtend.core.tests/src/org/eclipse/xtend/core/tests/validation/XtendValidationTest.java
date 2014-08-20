@@ -2843,4 +2843,17 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				"}");
 		helper.assertNoIssues(file);
 	}
+	
+	@Test public void testAnonymousClassNotOverridingEquals() throws Exception {
+		XtendFile file = file(
+			"public interface Foo {"+
+			"	override equals(Object obj);"+
+			"}"+
+			"class Bar{"+
+			"	def bar() {"+
+			"		new Foo {}"+
+			"	}"+
+			"}");
+		helper.assertNoIssues(file);
+	}
 }

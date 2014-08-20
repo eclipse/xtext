@@ -615,8 +615,8 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	@Check
 	public void checkSuperTypes(AnonymousClass anonymousClass) {
 		JvmGenericType inferredType = associations.getInferredType(anonymousClass);
-		if (inferredType != null && !inferredType.getSuperTypes().isEmpty()) {
-			JvmTypeReference superTypeRef = inferredType.getSuperTypes().get(0);
+		if (inferredType != null) {
+			JvmTypeReference superTypeRef = Iterables.getLast(inferredType.getSuperTypes());
 			JvmType superType = superTypeRef.getType();
 			if(superType instanceof JvmGenericType && ((JvmGenericType) superType).isFinal())
 				error("Attempt to override final class", anonymousClass.getConstructorCall(), XCONSTRUCTOR_CALL__CONSTRUCTOR, INSIGNIFICANT_INDEX, OVERRIDDEN_FINAL);
@@ -821,7 +821,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		StringBuilder errorMsg = new StringBuilder();
 		String name = xtendClass.getName();
 		if (xtendClass.isAnonymous()) {
-			JvmTypeReference superType = inferredType.getSuperTypes().get(0);
+			JvmTypeReference superType = Iterables.getLast(inferredType.getSuperTypes());
 			errorMsg.append("The anonymous subclass of ").append(superType.getSimpleName());
 			errorMsg.append(" does not implement ");
 		} else {
@@ -1521,7 +1521,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	protected String getDeclaratorName(JvmFeature feature) {
 		JvmDeclaredType declarator = feature.getDeclaringType();
 		if (declarator.isLocal()) {
-			return "new " + declarator.getSuperTypes().get(0).getType().getSimpleName()+ "(){}";
+			return "new " + Iterables.getLast(declarator.getSuperTypes()).getType().getSimpleName()+ "(){}";
 		} else {
 			return declarator.getSimpleName();
 		}
