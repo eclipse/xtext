@@ -51,13 +51,14 @@ public class ActiveAnnotationContext {
       if ((t instanceof VirtualMachineError)) {
         throw t;
       }
-      final String msg = this.getMessageWithStackTrace(t);
       ActiveAnnotationContexts.AnnotationCallback _lastPhase = this.compilationUnit.getLastPhase();
       boolean _equals = Objects.equal(_lastPhase, ActiveAnnotationContexts.AnnotationCallback.GENERATION);
       if (_equals) {
         Throwables.propagateIfPossible(t);
-        throw new RuntimeException("Error during code generation phase", t);
+        String _messageWithoutStackTrace = this.getMessageWithoutStackTrace(t);
+        throw new RuntimeException(_messageWithoutStackTrace, t);
       }
+      final String msg = this.getMessageWithStackTrace(t);
       final EList<Resource.Diagnostic> errors = resource.getErrors();
       final List<? extends EObject> sourceElements = this.getAnnotatedSourceElements();
       for (final EObject target : sourceElements) {
@@ -87,6 +88,24 @@ public class ActiveAnnotationContext {
     }
   }
   
+  public String getMessageWithoutStackTrace(final Throwable t) {
+    String _xifexpression = null;
+    boolean _and = false;
+    if (!(t instanceof IncompatibleClassChangeError)) {
+      _and = false;
+    } else {
+      String _message = t.getMessage();
+      boolean _contains = _message.contains("org.eclipse.xtend.lib.macro");
+      _and = _contains;
+    }
+    if (_and) {
+      _xifexpression = "An active annotation used in this file was compiled against a different version of Xtend than the one that is currently installed.";
+    } else {
+      _xifexpression = "Error during annotation processing:";
+    }
+    return _xifexpression;
+  }
+  
   public String getMessageWithStackTrace(final Throwable t) {
     final Function1<Throwable, String> _function = new Function1<Throwable, String>() {
       public String apply(final Throwable it) {
@@ -98,7 +117,8 @@ public class ActiveAnnotationContext {
               PrintWriter _printWriter = new PrintWriter(it);
               final Procedure1<PrintWriter> _function = new Procedure1<PrintWriter>() {
                 public void apply(final PrintWriter it) {
-                  it.println("Error during annotation processing:");
+                  String _messageWithoutStackTrace = ActiveAnnotationContext.this.getMessageWithoutStackTrace(t);
+                  it.println(_messageWithoutStackTrace);
                   t.printStackTrace(it);
                   it.flush();
                 }
