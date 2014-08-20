@@ -40,6 +40,10 @@
 							<artifactId>org.eclipse.xtext.example.arithmetics.xpect.tests</artifactId>
 							<groupId>org.eclipse.xtext.example.arithmetics</groupId>
 						</dependency>
+						<dependency>
+							<type>eclipse-plugin</type>
+							<artifactId>org.eclipse.xtext.logging</artifactId>
+						</dependency>
 					</dependencies>
 				</configuration>
 			</plugin>

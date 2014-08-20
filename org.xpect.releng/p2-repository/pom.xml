@@ -29,34 +29,44 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<groupId>org.eclipse.tycho.extras</groupId>
-				<artifactId>tycho-p2-extras-plugin</artifactId>
-				<version>${tycho-version}</version>
-				<executions>
-					<execution>
-						<id>mirror</id>
-						<phase>install</phase>
-						<goals>
-							<goal>mirror</goal>
-						</goals>
-						<configuration>
-							<source>
-								<!-- source repositories to mirror from -->
-								<repository>
-									<url>${project.build.directory}/repository</url>
-									<layout>p2</layout>
-								</repository>
-							</source>
-
-							<destination>${basedir}/../../../Xpect_pages/updatesite/nightly/local</destination>
-
-							<!-- whether to append to the target repository content -->
-							<append>true</append>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 		</plugins>
 	</build>
+	<profiles>
+		<profile>
+			<activation>
+				<property>
+					<name>target_p2_repository</name>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.eclipse.tycho.extras</groupId>
+						<artifactId>tycho-p2-extras-plugin</artifactId>
+						<version>${tycho-version}</version>
+						<executions>
+							<execution>
+								<id>mirror</id>
+								<phase>install</phase>
+								<goals>
+									<goal>mirror</goal>
+								</goals>
+								<configuration>
+									<source>
+										<repository>
+											<url>${project.build.directory}/repository</url>
+											<layout>p2</layout>
+										</repository>
+									</source>
+									<destination>${basedir}${target_p2_repository}</destination>
+									<append>true</append>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 </project>
