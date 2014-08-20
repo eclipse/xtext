@@ -31,6 +31,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -197,5 +198,13 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
     ParameterDeclaration _parameterDeclaration = _compilationUnit_1.toParameterDeclaration(param);
     return ((MutableParameterDeclaration) _parameterDeclaration);
+  }
+  
+  public void remove() {
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    IJvmModelAssociator _jvmModelAssociator = _compilationUnit.getJvmModelAssociator();
+    T _delegate = this.getDelegate();
+    _jvmModelAssociator.removeLogicalChildAssociation(_delegate);
+    super.remove();
   }
 }

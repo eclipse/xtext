@@ -24,12 +24,15 @@ import org.junit.Ignore
 import org.junit.Test
 
 import static org.junit.Assert.*
+import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
+import org.eclipse.xtend.core.macro.declaration.ExpressionImpl
 
 abstract class AbstractReusableActiveAnnotationTests {
 	
 	@Inject XtendGenerator generator
 	@Inject IGeneratorConfigProvider generatorConfigProvider
 	@Inject ValidationTestHelper validator
+	@Inject ILogicalContainerProvider logicalContainerProvider
 	
 	@Test def void testBug441081() {
 		assertProcessing(
@@ -3261,6 +3264,10 @@ abstract class AbstractReusableActiveAnnotationTests {
 			val annotation = typeLookup.findAnnotationType('myusercode.UserAnnotation')
 			assertNotNull(annotation)
 			assertEquals(0, annotation.declaredMembers.size)
+			
+			val removedMethod= (tracability.getPrimarySourceElement(clazz) as ClassDeclaration).findDeclaredMethod('methodToRemove')
+			val expression = (removedMethod.body as ExpressionImpl).delegate
+			assertNull(logicalContainerProvider.getLogicalContainer(expression))
 		]
 	}
 	
