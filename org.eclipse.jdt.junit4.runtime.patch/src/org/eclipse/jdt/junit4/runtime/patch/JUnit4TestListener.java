@@ -14,14 +14,15 @@ package org.eclipse.jdt.junit4.runtime.patch;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.junit.runner.Description;
-import org.junit.runner.notification.Failure;
-import org.junit.runner.notification.RunListener;
 import org.eclipse.jdt.internal.junit.runner.FailedComparison;
 import org.eclipse.jdt.internal.junit.runner.IListensToTestExecutions;
 import org.eclipse.jdt.internal.junit.runner.ITestIdentifier;
 import org.eclipse.jdt.internal.junit.runner.MessageIds;
 import org.eclipse.jdt.internal.junit.runner.TestReferenceFailure;
+import org.eclipse.jdt.internal.junit4.runner.JUnit4Identifier;
+import org.junit.runner.Description;
+import org.junit.runner.notification.Failure;
+import org.junit.runner.notification.RunListener;
 
 @SuppressWarnings("restriction")
 public class JUnit4TestListener extends RunListener {

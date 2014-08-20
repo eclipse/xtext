@@ -26,7 +26,7 @@ import org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference;
 @SuppressWarnings("restriction")
 public class JUnit4TestLoader implements ITestLoader {
 
-	public ITestReference[] loadTests(Class[] testClasses, String testName, String[] failureNames, RemoteTestRunner listener) {
+	public ITestReference[] loadTests(@SuppressWarnings("rawtypes") Class[] testClasses, String testName, String[] failureNames, RemoteTestRunner listener) {
 
 		ITestReference[] refs = new ITestReference[testClasses.length];
 		for (int i = 0; i < testClasses.length; i++) {

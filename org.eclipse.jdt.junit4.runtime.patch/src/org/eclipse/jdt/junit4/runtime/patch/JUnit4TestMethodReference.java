@@ -12,35 +12,59 @@
 
 package org.eclipse.jdt.junit4.runtime.patch;
 
-import org.junit.runner.Description;
-import org.junit.runner.Request;
 import org.eclipse.jdt.internal.junit.runner.ITestIdentifier;
 import org.eclipse.jdt.internal.junit.runner.IVisitsTestTrees;
+import org.eclipse.jdt.internal.junit4.runner.JUnit4Identifier;
+import org.junit.runner.Description;
+import org.junit.runner.Request;
 
 @SuppressWarnings("restriction")
 public class JUnit4TestMethodReference extends JUnit4TestReference {
 	private final Description fDescription;
 
 	public JUnit4TestMethodReference(Class<?> clazz, String methodName, String[] failureNames) {
-		super(createRequest(clazz, methodName), failureNames);
-		fDescription = Description.createTestDescription(clazz, methodName);
-	}
-
-	private static Request createRequest(final Class<?> clazz, String methodName) {
-		Description method = Description.createTestDescription(clazz, methodName);
-		return Request.classWithoutSuiteMethod(clazz).filterWith(method);
-	}
-
-	public int countTestCases() {
-		return 1;
-	}
-
-	public void sendTree(IVisitsTestTrees notified) {
-		notified.visitTreeEntry(getIdentifier(), false, 1);
+		Request request = Request.classWithoutSuiteMethod(clazz);
+		Description desc = findDescriptionInTree(request.getRunner().getDescription(), clazz.getName(), methodName);
+		if (desc != null) {
+			this.fDescription = desc;
+			request = request.filterWith(new SetBasedFilter(desc));
+		} else {
+			this.fDescription = desc;
+		}
+		if (failureNames != null) {
+			request = request.sortWith(new FailuresFirstSorter(failureNames));
+		}
+		this.fRunner = request.getRunner();
 	}
 
 	public String getName() {
 		return fDescription.toString();
+	}
+
+	public void sendTree(final IVisitsTestTrees notified) {
+		sendDescriptionTree(notified, fDescription);
+	}
+
+	private Description findDescriptionInTree(Description desc, String expectClass, String expectedName) {
+		if (expectedName.equals(desc.getDisplayName()) || (expectedName.equals(desc.getMethodName()) && expectClass.equals(desc.getClassName())))
+			return desc;
+		for (Description child : desc.getChildren()) {
+			Description result = findDescriptionInTree(child, expectClass, expectedName);
+			if (result != null)
+				return result;
+		}
+		return null;
+	}
+
+	private void sendDescriptionTree(final IVisitsTestTrees notified, org.junit.runner.Description description) {
+		if (description.isTest()) {
+			notified.visitTreeEntry(new JUnit4Identifier(description), false, 1);
+		} else {
+			notified.visitTreeEntry(new JUnit4Identifier(description), true, description.getChildren().size());
+			for (Description child : description.getChildren()) {
+				sendDescriptionTree(notified, child);
+			}
+		}
 	}
 
 	@Override
@@ -64,5 +88,10 @@ public class JUnit4TestMethodReference extends JUnit4TestReference {
 
 	public ITestIdentifier getIdentifier() {
 		return new JUnit4Identifier(fDescription);
+	}
+
+	@Override
+	public int countTestCases() {
+		return 1;
 	}
 }

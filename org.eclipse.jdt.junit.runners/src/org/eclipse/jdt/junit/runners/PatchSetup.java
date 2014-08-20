@@ -1,23 +1,33 @@
 package org.eclipse.jdt.junit.runners;
 
+import static org.eclipse.debug.core.ILaunchManager.DEBUG_MODE;
+import static org.eclipse.debug.core.ILaunchManager.RUN_MODE;
+import static org.eclipse.jdt.internal.junit.ui.JUnitMessages.RerunAction_label_debug;
+import static org.eclipse.jdt.internal.junit.ui.JUnitMessages.RerunAction_label_run;
 import static org.eclipse.jdt.junit.runners.ReflectionUtil.getParentObject;
 import static org.eclipse.jdt.junit.runners.ReflectionUtil.readField;
 
 import java.util.ArrayList;
 
 import org.eclipse.core.runtime.ListenerList;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.IType;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.junit.model.TestCaseElement;
 import org.eclipse.jdt.internal.junit.model.TestElement;
 import org.eclipse.jdt.internal.junit.model.TestSuiteElement;
 import org.eclipse.jdt.internal.junit.ui.OpenTestActionCustom;
+import org.eclipse.jdt.internal.junit.ui.RerunAction;
 import org.eclipse.jdt.internal.junit.ui.TestRunnerViewPart;
 import org.eclipse.jdt.internal.junit.ui.TestSessionLabelProviderCustom;
 import org.eclipse.jdt.internal.junit.ui.TestViewer;
 import org.eclipse.jdt.internal.ui.viewsupport.ColoringLabelProvider;
 import org.eclipse.jdt.internal.ui.viewsupport.SelectionProviderMediator;
+import org.eclipse.jdt.junit.model.ITestSuiteElement;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -192,6 +202,35 @@ public class PatchSetup implements IStartup {
 			IRunnerUIHandler uiHandler = RunnerUIHandlerRegistry.getHandler(testElement);
 			if (uiHandler != null)
 				uiHandler.contextMenuAboutToShow(fTestRunnerPart, testElement, manager);
+
+			// we add the run/debug actions for cases where
+			// org.eclipse.jdt.internal.junit.ui.TestViewer.handleMenuAboutToShow(IMenuManager)
+			// doesn't do it.
+			if (testElement instanceof TestSuiteElement && !testClassExists(testElement.getClassName())) {
+				IType type = TypeUtil.findType(testElement);
+				if (type != null) {
+					String className = type.getFullyQualifiedName();
+					String id = testElement.getId();
+					String testName = ((ITestSuiteElement) testElement).getSuiteTypeName();
+					manager.add(new Separator());
+					manager.add(new RerunAction(RerunAction_label_run, fTestRunnerPart, id, className, testName, RUN_MODE));
+					manager.add(new RerunAction(RerunAction_label_debug, fTestRunnerPart, id, className, testName, DEBUG_MODE));
+					manager.add(new Separator());
+				}
+			}
+		}
+
+		private boolean testClassExists(String className) {
+			IJavaProject project = fTestRunnerPart.getLaunchedProject();
+			if (project == null)
+				return false;
+			try {
+				IType type = project.findType(className);
+				return type != null;
+			} catch (JavaModelException e) {
+				// fall through
+			}
+			return false;
 		}
 
 	}

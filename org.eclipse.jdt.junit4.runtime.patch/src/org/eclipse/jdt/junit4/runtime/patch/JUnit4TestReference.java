@@ -12,26 +12,18 @@
 
 package org.eclipse.jdt.junit4.runtime.patch;
 
-import org.junit.runner.Request;
+import org.eclipse.jdt.internal.junit.runner.IStopListener;
+import org.eclipse.jdt.internal.junit.runner.ITestReference;
+import org.eclipse.jdt.internal.junit.runner.TestExecution;
 import org.junit.runner.Result;
 import org.junit.runner.Runner;
 import org.junit.runner.notification.RunListener;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runner.notification.StoppedByUserException;
 
-import org.eclipse.jdt.internal.junit.runner.IStopListener;
-import org.eclipse.jdt.internal.junit.runner.ITestReference;
-import org.eclipse.jdt.internal.junit.runner.TestExecution;
-
+@SuppressWarnings("restriction")
 public abstract class JUnit4TestReference implements ITestReference {
 	protected Runner fRunner;
-
-	public JUnit4TestReference(Request request, String[] failureNames) {
-		if (failureNames != null) {
-			request = request.sortWith(new FailuresFirstSorter(failureNames));
-		}
-		fRunner = request.getRunner();
-	}
 
 	public void run(TestExecution execution) {
 		final RunNotifier notifier = new RunNotifier();

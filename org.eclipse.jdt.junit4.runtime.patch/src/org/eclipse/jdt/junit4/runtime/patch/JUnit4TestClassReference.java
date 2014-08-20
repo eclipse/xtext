@@ -12,17 +12,23 @@
 
 package org.eclipse.jdt.junit4.runtime.patch;
 
-import org.junit.runner.Description;
-import org.junit.runner.Request;
 import org.eclipse.jdt.internal.junit.runner.ITestIdentifier;
 import org.eclipse.jdt.internal.junit.runner.IVisitsTestTrees;
+import org.eclipse.jdt.internal.junit4.runner.JUnit4Identifier;
+import org.junit.runner.Description;
+import org.junit.runner.Request;
 
 @SuppressWarnings("restriction")
 public class JUnit4TestClassReference extends JUnit4TestReference {
 	protected final Class<?> fClass;
 
 	public JUnit4TestClassReference(Class<?> clazz, String[] failureNames) {
-		super(Request.aClass(clazz), failureNames);
+		Request request = Request.aClass(clazz);
+		if (failureNames != null) {
+			request = request.sortWith(new FailuresFirstSorter(failureNames));
+		}
+		fRunner = request.getRunner();
+
 		fClass = clazz;
 	}
 
