@@ -159,8 +159,23 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
     _builder.append("protected List<EPackage> getEPackages() {");
     _builder.newLine();
     _builder.append("\t    ");
-    _builder.append("List<EPackage> result = new ArrayList<EPackage>(super.getEPackages());");
-    _builder.newLine();
+    _builder.append("List<EPackage> result = new ArrayList<EPackage>(");
+    {
+      boolean _and = false;
+      boolean _isInheritImplementation_1 = this.isInheritImplementation();
+      if (!_isInheritImplementation_1) {
+        _and = false;
+      } else {
+        Grammar _nonTerminalsSuperGrammar = IInheriting.Util.getNonTerminalsSuperGrammar(this.grammar);
+        boolean _tripleNotEquals = (_nonTerminalsSuperGrammar != null);
+        _and = _tripleNotEquals;
+      }
+      if (_and) {
+        _builder.append("super.getEPackages()");
+      }
+    }
+    _builder.append(");");
+    _builder.newLineIfNotEmpty();
     {
       Iterable<EPackage> _generatedPackagesToValidate = this.getGeneratedPackagesToValidate();
       for(final EPackage e : _generatedPackagesToValidate) {
