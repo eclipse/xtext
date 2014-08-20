@@ -28,6 +28,7 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 
@@ -76,11 +77,9 @@ public class AnonymousClassUtil {
 		JvmConstructor constructor = anonymousClass.getConstructorCall().getConstructor();
 		if(constructor != null && ! constructor.eIsProxy()) {
 			JvmDeclaredType declaringType = constructor.getDeclaringType();
-			if(!declaringType.getSuperTypes().isEmpty()) {
-				JvmType superType = declaringType.getSuperTypes().get(0).getType();
-				if(superType instanceof JvmGenericType)
-					return (JvmGenericType) superType;
-			}
+			JvmType superType = Iterables.getLast(declaringType.getSuperTypes()).getType();
+			if(superType instanceof JvmGenericType)
+				return (JvmGenericType) superType;
 		}
 		return null;
 	}

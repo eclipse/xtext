@@ -36,6 +36,7 @@ import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDeclarativeHoverSignatureProvider;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
@@ -58,7 +59,7 @@ public class XtendHoverSignatureProvider extends XbaseDeclarativeHoverSignatureP
 	@Override
 	protected String _signature(JvmGenericType clazz, boolean typeAtEnd) {
 		if (clazz.isLocal()) {
-			String rawName = clazz.getSuperTypes().get(0).getType().getSimpleName();
+			String rawName = Iterables.getLast(clazz.getSuperTypes()).getType().getSimpleName();
 			return "new " + rawName + "(){}";
 		}
 		return super._signature(clazz, typeAtEnd);
@@ -68,7 +69,7 @@ public class XtendHoverSignatureProvider extends XbaseDeclarativeHoverSignatureP
 	protected String getDeclaratorName(JvmMember member) {
 		JvmDeclaredType declaringType = member.getDeclaringType();
 		if (declaringType.isLocal()) {
-			String rawName = declaringType.getSuperTypes().get(0).getType().getSimpleName();
+			String rawName = Iterables.getLast(declaringType.getSuperTypes()).getType().getSimpleName();
 			return "new " + rawName + "(){}";
 		} else {
 			return super.getDeclaratorName(member);
