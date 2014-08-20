@@ -9,8 +9,6 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.jdt.core.IAnnotation;
-import org.eclipse.jdt.core.ICompilationUnit;
-import org.eclipse.jdt.core.IImportDeclaration;
 import org.eclipse.jdt.core.IJavaModel;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMemberValuePair;
@@ -31,36 +29,50 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("restriction")
 public class TypeUtil {
 
-	private static String getFQN(ICompilationUnit cu, String name) {
-		if (name.contains("."))
-			return name;
-		try {
-			String dotname = "." + name;
-			for (IImportDeclaration imp : cu.getImports()) {
-				String fqn = imp.getElementName();
-				if (fqn.endsWith(dotname))
-					return fqn;
+	private static IType resolveToType(IType baseType, String refTypeName) throws JavaModelException {
+		if (baseType == null)
+			return null;
+		String[][] resolvedNames = baseType.resolveType(refTypeName);
+		IJavaProject javaProject = baseType.getJavaProject();
+		if (resolvedNames != null && resolvedNames.length > 0) {
+			return javaProject.findType(resolvedNames[0][0], resolvedNames[0][1].replace('$', '.'), (IProgressMonitor) null);
+		} else if (baseType.isBinary()) {
+			IType type = javaProject.findType(refTypeName, (IProgressMonitor) null);
+			if (type == null) {
+				type = javaProject.findType(baseType.getPackageFragment().getElementName() + '.' + refTypeName, (IProgressMonitor) null);
 			}
-		} catch (JavaModelException e) {
-			e.printStackTrace();
+			return type;
+		} else {
 			return null;
 		}
-		return null;
 	}
 
-	public static String findRunner(IType testClass) {
-		IAnnotation annotation = testClass.getAnnotation(RunWith.class.getSimpleName());
-		if (annotation == null || !annotation.exists())
-			annotation = testClass.getAnnotation(RunWith.class.getName());
-		if (annotation != null && annotation.exists()) {
-			try {
-				for (IMemberValuePair pair : annotation.getMemberValuePairs())
+	private static String resolveToQName(IType baseType, String refTypeName) throws JavaModelException {
+		String[][] resolvedNames = baseType.resolveType(refTypeName);
+		if (resolvedNames != null && resolvedNames.length > 0) {
+			return resolvedNames[0][0] + "." + resolvedNames[0][1].replace('$', '.');
+		} else {
+			return null;
+		}
+	}
+
+	public static String findRunner(IType type) {
+		try {
+			for (IAnnotation candidate : type.getAnnotations()) {
+				String elementName = candidate.getElementName();
+				if (!elementName.endsWith(RunWith.class.getSimpleName()))
+					continue;
+				if (!RunWith.class.getName().equals(resolveToQName(type, elementName)))
+					continue;
+				for (IMemberValuePair pair : candidate.getMemberValuePairs())
 					if ("value".equals(pair.getMemberName()) && pair.getValue() instanceof String)
-						return getFQN(testClass.getCompilationUnit(), (String) pair.getValue());
-			} catch (JavaModelException e) {
-				e.printStackTrace();
-				return null;
+						return resolveToQName(type, (String) pair.getValue());
 			}
+			IType superClass = resolveToType(type, type.getSuperclassName());
+			if (superClass != null)
+				return findRunner(superClass);
+		} catch (JavaModelException e) {
+			e.printStackTrace();
 		}
 		return null;
 	}
@@ -96,11 +108,6 @@ public class TypeUtil {
 		final String dottedName = className.replace('$', '.'); // for nested
 																// classes...
 		try {
-			// PlatformUI.getWorkbench().getProgressService().busyCursorWhile(new
-			// IRunnableWithProgress() {
-			// public void run(IProgressMonitor monitor) throws
-			// InvocationTargetException, InterruptedException {
-			// try {
 			if (project != null) {
 				result[0] = internalFindType(project, dottedName, new HashSet<IJavaProject>(), new NullProgressMonitor());
 			}
@@ -118,15 +125,6 @@ public class TypeUtil {
 						IJavaSearchConstants.TYPE, SearchEngine.createWorkspaceScope(), nameMatchRequestor,
 						IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, new NullProgressMonitor());
 			}
-			// } catch (JavaModelException e) {
-			// throw new InvocationTargetException(e);
-			// }
-			// }
-			// });
-			// } catch (InvocationTargetException e) {
-			// JUnitPlugin.log(e);
-			// } catch (InterruptedException e) {
-			// user cancelled
 		} catch (JavaModelException e) {
 			JUnitPlugin.log(e);
 		}
