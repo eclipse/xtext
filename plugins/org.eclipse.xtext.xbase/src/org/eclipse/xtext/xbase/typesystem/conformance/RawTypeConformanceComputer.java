@@ -1044,6 +1044,9 @@ public class RawTypeConformanceComputer {
 				JvmTypeReference upperBound = constraint.getTypeReference();
 				if (upperBound != null) {
 					JvmType upperBoundType = upperBound.getType();
+					if (upperBoundType == null) {
+						return PRIMITIVE_NONE;
+					}
 					EClass eClass = upperBoundType.eClass();
 					if (eClass == TypesPackage.Literals.JVM_GENERIC_TYPE) {
 						return internalGetPrimitiveKindFromWrapper((JvmGenericType) upperBoundType);

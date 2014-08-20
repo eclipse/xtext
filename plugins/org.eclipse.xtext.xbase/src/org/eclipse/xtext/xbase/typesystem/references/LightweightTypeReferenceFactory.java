@@ -280,6 +280,9 @@ public class LightweightTypeReferenceFactory extends AbstractXtypeReferenceVisit
 	@Override
 	public LightweightTypeReference doVisitFunctionTypeReference(XFunctionTypeRef reference) {
 		JvmTypeReference equivalent = reference.getEquivalent();
+		if (equivalent == null) {
+			return super.doVisitFunctionTypeReference(reference);
+		}
 		FunctionTypeReference result;
 		if (equivalent.eClass() == TypesPackage.Literals.JVM_INNER_TYPE_REFERENCE) {
 			JvmParameterizedTypeReference outer = ((JvmInnerTypeReference) equivalent).getOuter();

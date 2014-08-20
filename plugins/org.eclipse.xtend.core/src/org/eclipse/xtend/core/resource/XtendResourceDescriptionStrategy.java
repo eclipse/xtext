@@ -98,8 +98,11 @@ public class XtendResourceDescriptionStrategy extends XbaseResourceDescriptionSt
 	
 	protected boolean isActiveAnnotation(JvmAnnotationType annotationType) {
 		for (JvmAnnotationReference anno : annotationType.getAnnotations()) {
-			if (anno.getAnnotation().getQualifiedName().equals("org.eclipse.xtend.lib.macro.Active")) {
-				return true;
+			JvmAnnotationType annotation = anno.getAnnotation();
+			if (annotation != null && !annotation.eIsProxy()) {
+				if ("org.eclipse.xtend.lib.macro.Active".equals(annotation.getIdentifier())) {
+					return true;
+				}
 			}
 		}
 		return false;
