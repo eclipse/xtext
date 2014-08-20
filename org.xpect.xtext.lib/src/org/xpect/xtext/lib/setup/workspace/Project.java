@@ -16,6 +16,10 @@ public class Project extends Container<IProject> implements IResourceFactory<IPr
 
 	private final ProjectDescription description;
 
+	public Project() {
+		this("general_project");
+	}
+
 	public Project(String name) {
 		super();
 		this.description = createDescription();
