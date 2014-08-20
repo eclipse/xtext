@@ -186,6 +186,7 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 						genModelSupport.getDeclaredMethod("createInjectorAndDoEMFRegistration").invoke(null);
 					} catch (ClassNotFoundException e) {
 						LOG.error("Couldn't initialize GenModel support. Is it on the classpath?");
+						LOG.debug(e.getMessage(), e);
 					} catch (Exception e) {
 						LOG.error("Couldn't initialize GenModel support.", e);
 					}
@@ -203,6 +204,7 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 						xcore.getDeclaredMethod("doSetup", new Class[0]).invoke(null);
 					} catch (ClassNotFoundException e) {
 						LOG.error("Couldn't initialize Xcore support. Is it on the classpath?");
+						LOG.debug(e.getMessage(), e);
 					} catch (Exception e) {
 						LOG.error("Couldn't initialize Xcore support.", e);
 					}
