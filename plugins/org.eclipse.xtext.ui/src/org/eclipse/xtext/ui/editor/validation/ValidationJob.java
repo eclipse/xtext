@@ -75,7 +75,7 @@ public class ValidationJob extends Job {
 				.readOnly(new CancelableUnitOfWork<List<Issue>, XtextResource>() {
 					@Override
 					public List<Issue> exec(XtextResource resource, final CancelIndicator outerIndicator) throws Exception {
-						if (resource == null || resource.isValidationDisabled())
+						if (resource == null || resource.isValidationDisabled() || outerIndicator.isCanceled())
 							return Collections.emptyList();
 						return resourceValidator.validate(resource, getCheckMode(), new CancelIndicator() {
 							public boolean isCanceled() {

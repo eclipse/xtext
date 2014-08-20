@@ -53,48 +53,52 @@ class DocumentLockerTest extends AbstractXtextDocumentTest {
 		assertEquals(1, s.size)
 	}
 
-	@Test def void testModifyCancelsReaders() {
+	@Test def void testModifySetsOutdatedFalse() {
 		val document = new XtextDocument(createTokenSource, createTextEditComposer)
-		document.input = new XtextResource
-		val cancelIndicators = newArrayList
-		document.addReaderCancelationListener(cancelIndicators)
-		assertTrue(cancelIndicators.empty)
+		val resource = new XtextResource
+		document.input = resource
 		document.internalModify[
-			assertTrue(cancelIndicators.empty)
+			assertFalse(document.isOutdated())
 			null
 		]
-		assertEquals(1, cancelIndicators.size)
-		assertFalse(cancelIndicators.head.isCanceled)
-		document.internalModify[
-			assertEquals(1, cancelIndicators.size)
-			assertTrue(cancelIndicators.head.isCanceled)
+		assertFalse(document.isOutdated())
+		document.set("fupp");
+		assertTrue(document.isOutdated())
+		document.internalModify [
+			assertFalse(document.isOutdated())
 			null
 		]
-		assertEquals(2, cancelIndicators.size)
-		assertTrue(cancelIndicators.head.isCanceled)
-		assertFalse(cancelIndicators.last.isCanceled)
 	}
 	
 	@Test def void testPriorityReadOnlyCancelsReaders() {
 		val document = new XtextDocument(createTokenSource(), null)
 		document.input = new XtextResource
-		val cancelIndicators = newArrayList
-		document.addReaderCancelationListener(cancelIndicators)
-		assertTrue(cancelIndicators.empty)
+		val boolean[] check = newBooleanArrayOfSize(1) 
+		val thread = new Thread([
+			document.readOnly(new CancelableUnitOfWork<Object, XtextResource>() {
+				override Object exec(XtextResource state, CancelIndicator cancelIndicator) throws Exception {
+					check.set(0,true)
+					val wait = 4000;
+					var i = 0;
+					while (!cancelIndicator.isCanceled) {
+						Thread.sleep(10l)
+						if (i > wait)
+							throw new InterruptedException();
+						i = i + 1;
+					}
+					return null;
+				}
+				
+			})
+		])
+		thread.start
+		while (!check.get(0)) {
+			Thread.sleep(1)
+		}
 		document.priorityReadOnly[
-			assertTrue(cancelIndicators.empty)
 			null
 		]
-		assertEquals(1, cancelIndicators.size)
-		assertFalse(cancelIndicators.head.isCanceled)
-		document.priorityReadOnly[
-			assertEquals(1, cancelIndicators.size)
-			assertTrue(cancelIndicators.head.isCanceled)
-			null	
-		]
-		assertEquals(2, cancelIndicators.size)
-		assertTrue(cancelIndicators.head.isCanceled)
-		assertFalse(cancelIndicators.last.isCanceled)
+		assertFalse(thread.interrupted)
 	}
 	
 	@Test def void testReadOnlyDoesntCancelReaders() {
@@ -107,42 +111,6 @@ class DocumentLockerTest extends AbstractXtextDocumentTest {
 		assertTrue(cancelIndicators.empty)
 		document.readOnly[]
 		assertTrue(cancelIndicators.empty)
-	}
-	
-	@Test def void testReadOnlyCancelsReadersIfChangesArePending() {
-		val documentWithPermanentlyPendingChanges = new XtextDocument(createTokenSource(), null) {
-			XtextDocumentLocker locker
-	
-			override protected updateContentBeforeRead() {
-				locker.process[true] // shortcut for what the reconciler usually does
-			}
-			
-			override protected hasPendingUpdates() {
-				true
-			}
-			
-			override protected createDocumentLocker() {
-				locker = super.createDocumentLocker()
-				locker
-			}
-		}
-		documentWithPermanentlyPendingChanges.input = new XtextResource
-		val cancelIndicators = newArrayList
-		documentWithPermanentlyPendingChanges.addReaderCancelationListener(cancelIndicators)
-		documentWithPermanentlyPendingChanges.readOnly [
-			assertTrue(cancelIndicators.empty)
-			null
-		]
-		assertEquals(1, cancelIndicators.size)
-		assertFalse(cancelIndicators.head.isCanceled)
-		documentWithPermanentlyPendingChanges.readOnly [
-			assertEquals(1, cancelIndicators.size)
-			assertTrue(cancelIndicators.head.isCanceled)
-			null
-		]
-		assertEquals(2, cancelIndicators.size)
-		assertTrue(cancelIndicators.head.isCanceled)
-		assertFalse(cancelIndicators.last.isCanceled)
 	}
 	
 	private def DocumentTokenSource createTokenSource() {
