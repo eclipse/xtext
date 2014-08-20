@@ -50,11 +50,11 @@ import org.eclipse.emf.common.notify.Notification
 	def void handleProcessingError(Resource resource, Throwable t) {
 		if (t instanceof VirtualMachineError)
 			throw t;
-		val msg = t.messageWithStackTrace
 		if (compilationUnit.lastPhase == ActiveAnnotationContexts.AnnotationCallback.GENERATION) {
 			Throwables.propagateIfPossible(t)
-			throw new RuntimeException("Error during code generation phase", t)
+			throw new RuntimeException(t.messageWithoutStackTrace, t)
 		}
+		val msg = t.messageWithStackTrace
 		val errors = resource.errors
 		val List<? extends EObject> sourceElements = getAnnotatedSourceElements();
 		for (EObject target : sourceElements) {
@@ -70,11 +70,19 @@ import org.eclipse.emf.common.notify.Notification
 		}
 	}
 	
+	def getMessageWithoutStackTrace(Throwable t) {
+		if (t instanceof IncompatibleClassChangeError && t.message.contains("org.eclipse.xtend.lib.macro")) {
+			"An active annotation used in this file was compiled against a different version of Xtend than the one that is currently installed."
+		} else {
+			"Error during annotation processing:"
+		}
+	}
+	
 	def getMessageWithStackTrace(Throwable t) {
 		t.getMessageWithReducedStackTrace [
 			val writer = new StringWriter => [
 				new PrintWriter(it) => [
-					println("Error during annotation processing:")
+					println(t.messageWithoutStackTrace)
 					t.printStackTrace(it)
 					flush
 				]
