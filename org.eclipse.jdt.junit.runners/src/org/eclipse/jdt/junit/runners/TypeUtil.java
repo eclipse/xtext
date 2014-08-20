@@ -3,9 +3,11 @@ package org.eclipse.jdt.junit.runners;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.debug.core.ILaunch;
 import org.eclipse.jdt.core.IAnnotation;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IImportDeclaration;
@@ -19,6 +21,7 @@ import org.eclipse.jdt.core.search.SearchEngine;
 import org.eclipse.jdt.core.search.SearchPattern;
 import org.eclipse.jdt.core.search.TypeNameMatch;
 import org.eclipse.jdt.core.search.TypeNameMatchRequestor;
+import org.eclipse.jdt.internal.junit.model.TestRunSession;
 import org.eclipse.jdt.internal.junit.ui.JUnitPlugin;
 import org.eclipse.jdt.junit.model.ITestCaseElement;
 import org.eclipse.jdt.junit.model.ITestElement;
@@ -68,6 +71,14 @@ public class TypeUtil {
 			className = ((ITestCaseElement) element).getTestClassName();
 		else if (element instanceof ITestSuiteElement)
 			className = ((ITestSuiteElement) element).getSuiteTypeName();
+		else if (element instanceof TestRunSession) {
+			ILaunch launch = ((TestRunSession) element).getLaunch();
+			try {
+				className = launch.getLaunchConfiguration().getAttribute("org.eclipse.jdt.launching.MAIN_TYPE", (String) null);
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
+		}
 		IType type = null;
 		if (className != null)
 			type = findType(element.getTestRunSession().getLaunchedProject(), className);
