@@ -35,6 +35,7 @@ import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
+import com.google.common.collect.Iterables;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -147,7 +148,7 @@ public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate
 	protected List<JvmTypeParameter> getDeclaredTypeParameters() {
 		if (isAnonymousClassConstructorCall()) {
 			JvmDeclaredType anonymousType = getConstructor().getDeclaringType();
-			JvmTypeReference superType = anonymousType.getSuperTypes().get(0);
+			JvmTypeReference superType = Iterables.getLast(anonymousType.getSuperTypes());
 			JvmType rawSuperType = superType.getType();
 			if (rawSuperType instanceof JvmTypeParameterDeclarator) {
 				return ((JvmTypeParameterDeclarator) rawSuperType).getTypeParameters();
