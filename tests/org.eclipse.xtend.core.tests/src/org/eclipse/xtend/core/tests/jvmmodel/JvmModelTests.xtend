@@ -201,8 +201,8 @@ class JvmModelTests extends AbstractXtendTestCase {
 		assertTrue(anonymous.local)
 		assertFalse(anonymous.anonymous) // additional member -> named local class
 		assertEquals(JvmVisibility.DEFAULT, anonymous.visibility)
-		assertEquals(1, anonymous.superTypes.size)
-		assertEquals('java.lang.Runnable', anonymous.superTypes.head.qualifiedName)
+		assertEquals(2, anonymous.superTypes.size)
+		assertEquals('java.lang.Runnable', anonymous.superTypes.last.qualifiedName)
 		assertEquals(3, anonymous.members.size)
 		val constructor = anonymous.members.last
 		assertTrue(constructor instanceof JvmConstructor)
@@ -229,8 +229,8 @@ class JvmModelTests extends AbstractXtendTestCase {
 		assertTrue(anonymous.local)
 		assertTrue(anonymous.anonymous)
 		assertEquals(JvmVisibility.DEFAULT, anonymous.visibility)
-		assertEquals(1, anonymous.superTypes.size)
-		assertEquals('java.lang.Runnable', anonymous.superTypes.head.qualifiedName)
+		assertEquals(2, anonymous.superTypes.size)
+		assertEquals('java.lang.Runnable', anonymous.superTypes.last.qualifiedName)
 		assertEquals(2, anonymous.members.size)
 		val constructor = anonymous.members.last
 		assertTrue(constructor instanceof JvmConstructor)
@@ -257,8 +257,8 @@ class JvmModelTests extends AbstractXtendTestCase {
 		assertTrue(anonymous.anonymous)
 		assertEquals(0, anonymous.typeParameters.size)
 		assertEquals(JvmVisibility.DEFAULT, anonymous.visibility)
-		assertEquals(1, anonymous.superTypes.size)
-		assertEquals('java.lang.Iterable<T>', anonymous.superTypes.head.qualifiedName)
+		assertEquals(2, anonymous.superTypes.size)
+		assertEquals('java.lang.Iterable<T>', anonymous.superTypes.last.qualifiedName)
 		assertEquals(2, anonymous.members.size)
 		val constructor = anonymous.members.last
 		assertTrue(constructor instanceof JvmConstructor)
