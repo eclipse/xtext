@@ -25,7 +25,7 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -78,108 +78,88 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
   }
   
   @Test
-  public void testModifyCancelsReaders() {
+  public void testModifySetsOutdatedFalse() {
     DocumentTokenSource _createTokenSource = this.createTokenSource();
     ITextEditComposer _createTextEditComposer = this.createTextEditComposer();
     final XtextDocument document = new XtextDocument(_createTokenSource, _createTextEditComposer);
-    XtextResource _xtextResource = new XtextResource();
-    document.setInput(_xtextResource);
-    final ArrayList<CancelIndicator> cancelIndicators = CollectionLiterals.<CancelIndicator>newArrayList();
-    this.addReaderCancelationListener(document, cancelIndicators);
-    boolean _isEmpty = cancelIndicators.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    final XtextResource resource = new XtextResource();
+    document.setInput(resource);
     final IUnitOfWork<Object, XtextResource> _function = new IUnitOfWork<Object, XtextResource>() {
       public Object exec(final XtextResource it) throws Exception {
         Object _xblockexpression = null;
         {
-          boolean _isEmpty = cancelIndicators.isEmpty();
-          Assert.assertTrue(_isEmpty);
+          boolean _isOutdated = XtextDocument.isOutdated(it);
+          Assert.assertFalse(_isOutdated);
           _xblockexpression = null;
         }
         return _xblockexpression;
       }
     };
     document.<Object>internalModify(_function);
-    int _size = cancelIndicators.size();
-    Assert.assertEquals(1, _size);
-    CancelIndicator _head = IterableExtensions.<CancelIndicator>head(cancelIndicators);
-    boolean _isCanceled = _head.isCanceled();
-    Assert.assertFalse(_isCanceled);
+    boolean _isOutdated = XtextDocument.isOutdated(resource);
+    Assert.assertFalse(_isOutdated);
+    document.set("fupp");
+    boolean _isOutdated_1 = XtextDocument.isOutdated(resource);
+    Assert.assertTrue(_isOutdated_1);
     final IUnitOfWork<Object, XtextResource> _function_1 = new IUnitOfWork<Object, XtextResource>() {
       public Object exec(final XtextResource it) throws Exception {
         Object _xblockexpression = null;
         {
-          int _size = cancelIndicators.size();
-          Assert.assertEquals(1, _size);
-          CancelIndicator _head = IterableExtensions.<CancelIndicator>head(cancelIndicators);
-          boolean _isCanceled = _head.isCanceled();
-          Assert.assertTrue(_isCanceled);
+          boolean _isOutdated = XtextDocument.isOutdated(it);
+          Assert.assertFalse(_isOutdated);
           _xblockexpression = null;
         }
         return _xblockexpression;
       }
     };
     document.<Object>internalModify(_function_1);
-    int _size_1 = cancelIndicators.size();
-    Assert.assertEquals(2, _size_1);
-    CancelIndicator _head_1 = IterableExtensions.<CancelIndicator>head(cancelIndicators);
-    boolean _isCanceled_1 = _head_1.isCanceled();
-    Assert.assertTrue(_isCanceled_1);
-    CancelIndicator _last = IterableExtensions.<CancelIndicator>last(cancelIndicators);
-    boolean _isCanceled_2 = _last.isCanceled();
-    Assert.assertFalse(_isCanceled_2);
   }
   
   @Test
   public void testPriorityReadOnlyCancelsReaders() {
-    DocumentTokenSource _createTokenSource = this.createTokenSource();
-    final XtextDocument document = new XtextDocument(_createTokenSource, null);
-    XtextResource _xtextResource = new XtextResource();
-    document.setInput(_xtextResource);
-    final ArrayList<CancelIndicator> cancelIndicators = CollectionLiterals.<CancelIndicator>newArrayList();
-    this.addReaderCancelationListener(document, cancelIndicators);
-    boolean _isEmpty = cancelIndicators.isEmpty();
-    Assert.assertTrue(_isEmpty);
-    final IUnitOfWork<Object, XtextResource> _function = new IUnitOfWork<Object, XtextResource>() {
-      public Object exec(final XtextResource it) throws Exception {
-        Object _xblockexpression = null;
-        {
-          boolean _isEmpty = cancelIndicators.isEmpty();
-          Assert.assertTrue(_isEmpty);
-          _xblockexpression = null;
+    try {
+      DocumentTokenSource _createTokenSource = this.createTokenSource();
+      final XtextDocument document = new XtextDocument(_createTokenSource, null);
+      XtextResource _xtextResource = new XtextResource();
+      document.setInput(_xtextResource);
+      final boolean[] check = new boolean[1];
+      final Runnable _function = new Runnable() {
+        public void run() {
+          document.<Object>readOnly(new CancelableUnitOfWork<Object, XtextResource>() {
+            public Object exec(final XtextResource state, final CancelIndicator cancelIndicator) throws Exception {
+              check[0] = true;
+              final int wait = 4000;
+              int i = 0;
+              while ((!cancelIndicator.isCanceled())) {
+                {
+                  Thread.sleep(10l);
+                  if ((i > wait)) {
+                    throw new InterruptedException();
+                  }
+                  i = (i + 1);
+                }
+              }
+              return null;
+            }
+          });
         }
-        return _xblockexpression;
+      };
+      final Thread thread = new Thread(_function);
+      thread.start();
+      while ((!check[0])) {
+        Thread.sleep(1);
       }
-    };
-    document.<Object>priorityReadOnly(_function);
-    int _size = cancelIndicators.size();
-    Assert.assertEquals(1, _size);
-    CancelIndicator _head = IterableExtensions.<CancelIndicator>head(cancelIndicators);
-    boolean _isCanceled = _head.isCanceled();
-    Assert.assertFalse(_isCanceled);
-    final IUnitOfWork<Object, XtextResource> _function_1 = new IUnitOfWork<Object, XtextResource>() {
-      public Object exec(final XtextResource it) throws Exception {
-        Object _xblockexpression = null;
-        {
-          int _size = cancelIndicators.size();
-          Assert.assertEquals(1, _size);
-          CancelIndicator _head = IterableExtensions.<CancelIndicator>head(cancelIndicators);
-          boolean _isCanceled = _head.isCanceled();
-          Assert.assertTrue(_isCanceled);
-          _xblockexpression = null;
+      final IUnitOfWork<Object, XtextResource> _function_1 = new IUnitOfWork<Object, XtextResource>() {
+        public Object exec(final XtextResource it) throws Exception {
+          return null;
         }
-        return _xblockexpression;
-      }
-    };
-    document.<Object>priorityReadOnly(_function_1);
-    int _size_1 = cancelIndicators.size();
-    Assert.assertEquals(2, _size_1);
-    CancelIndicator _head_1 = IterableExtensions.<CancelIndicator>head(cancelIndicators);
-    boolean _isCanceled_1 = _head_1.isCanceled();
-    Assert.assertTrue(_isCanceled_1);
-    CancelIndicator _last = IterableExtensions.<CancelIndicator>last(cancelIndicators);
-    boolean _isCanceled_2 = _last.isCanceled();
-    Assert.assertFalse(_isCanceled_2);
+      };
+      document.<Object>priorityReadOnly(_function_1);
+      boolean _isInterrupted = thread.isInterrupted();
+      Assert.assertFalse(_isInterrupted);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
@@ -208,87 +188,6 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
     document.<Object>readOnly(_function_1);
     boolean _isEmpty_2 = cancelIndicators.isEmpty();
     Assert.assertTrue(_isEmpty_2);
-  }
-  
-  @Test
-  public void testReadOnlyCancelsReadersIfChangesArePending() {
-    abstract class __DocumentLockerTest_2 extends XtextDocument {
-      __DocumentLockerTest_2(final DocumentTokenSource tokenSource, final ITextEditComposer composer) {
-        super(tokenSource, composer);
-      }
-      
-      XtextDocument.XtextDocumentLocker locker;
-    }
-    
-    DocumentTokenSource _createTokenSource = this.createTokenSource();
-    final __DocumentLockerTest_2 documentWithPermanentlyPendingChanges = new __DocumentLockerTest_2(_createTokenSource, null) {
-      protected boolean updateContentBeforeRead() {
-        final IUnitOfWork<Boolean, XtextResource> _function = new IUnitOfWork<Boolean, XtextResource>() {
-          public Boolean exec(final XtextResource it) throws Exception {
-            return Boolean.valueOf(true);
-          }
-        };
-        return (this.locker.<Boolean>process(_function)).booleanValue();
-      }
-      
-      protected boolean hasPendingUpdates() {
-        return true;
-      }
-      
-      protected XtextDocument.XtextDocumentLocker createDocumentLocker() {
-        XtextDocument.XtextDocumentLocker _xblockexpression = null;
-        {
-          XtextDocument.XtextDocumentLocker _createDocumentLocker = super.createDocumentLocker();
-          this.locker = _createDocumentLocker;
-          _xblockexpression = this.locker;
-        }
-        return _xblockexpression;
-      }
-    };
-    XtextResource _xtextResource = new XtextResource();
-    documentWithPermanentlyPendingChanges.setInput(_xtextResource);
-    final ArrayList<CancelIndicator> cancelIndicators = CollectionLiterals.<CancelIndicator>newArrayList();
-    this.addReaderCancelationListener(documentWithPermanentlyPendingChanges, cancelIndicators);
-    final IUnitOfWork<Object, XtextResource> _function = new IUnitOfWork<Object, XtextResource>() {
-      public Object exec(final XtextResource it) throws Exception {
-        Object _xblockexpression = null;
-        {
-          boolean _isEmpty = cancelIndicators.isEmpty();
-          Assert.assertTrue(_isEmpty);
-          _xblockexpression = null;
-        }
-        return _xblockexpression;
-      }
-    };
-    documentWithPermanentlyPendingChanges.<Object>readOnly(_function);
-    int _size = cancelIndicators.size();
-    Assert.assertEquals(1, _size);
-    CancelIndicator _head = IterableExtensions.<CancelIndicator>head(cancelIndicators);
-    boolean _isCanceled = _head.isCanceled();
-    Assert.assertFalse(_isCanceled);
-    final IUnitOfWork<Object, XtextResource> _function_1 = new IUnitOfWork<Object, XtextResource>() {
-      public Object exec(final XtextResource it) throws Exception {
-        Object _xblockexpression = null;
-        {
-          int _size = cancelIndicators.size();
-          Assert.assertEquals(1, _size);
-          CancelIndicator _head = IterableExtensions.<CancelIndicator>head(cancelIndicators);
-          boolean _isCanceled = _head.isCanceled();
-          Assert.assertTrue(_isCanceled);
-          _xblockexpression = null;
-        }
-        return _xblockexpression;
-      }
-    };
-    documentWithPermanentlyPendingChanges.<Object>readOnly(_function_1);
-    int _size_1 = cancelIndicators.size();
-    Assert.assertEquals(2, _size_1);
-    CancelIndicator _head_1 = IterableExtensions.<CancelIndicator>head(cancelIndicators);
-    boolean _isCanceled_1 = _head_1.isCanceled();
-    Assert.assertTrue(_isCanceled_1);
-    CancelIndicator _last = IterableExtensions.<CancelIndicator>last(cancelIndicators);
-    boolean _isCanceled_2 = _last.isCanceled();
-    Assert.assertFalse(_isCanceled_2);
   }
   
   private DocumentTokenSource createTokenSource() {

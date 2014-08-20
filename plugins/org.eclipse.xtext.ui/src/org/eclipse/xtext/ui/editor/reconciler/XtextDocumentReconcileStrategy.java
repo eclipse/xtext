@@ -17,6 +17,7 @@ import org.eclipse.jface.text.reconciler.DirtyRegion;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategyExtension;
 import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IBatchLinkableResource;
 import org.eclipse.xtext.resource.XtextResource;
@@ -159,20 +160,23 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 			if (dirtyStateEditorSupport != null)
 				dirtyStateEditorSupport.announceDirtyState(resource);
 		}
+		CancelIndicator cancelIndicator = new CancelIndicator() {
+			public boolean isCanceled() {
+				return monitor.isCanceled();
+			}
+		};
 		try {
 			if (resource instanceof DerivedStateAwareResource) 
 				((DerivedStateAwareResource) resource).installDerivedState(false);
 			if (resource instanceof IBatchLinkableResource) {
-				((IBatchLinkableResource) resource).linkBatched(new CancelIndicator() {
-					public boolean isCanceled() {
-						return monitor.isCanceled();
-					}
-				});
+				((IBatchLinkableResource) resource).linkBatched(cancelIndicator);
 			}
+			EcoreUtil2.resolveLazyCrossReferences(resource, cancelIndicator);
 		} catch (OperationCanceledException exc) {
 			// ignore
 		} catch (RuntimeException exc) {
 			log.error("Error post-processing reosurce", exc);
 		}
 	}
+	
 }

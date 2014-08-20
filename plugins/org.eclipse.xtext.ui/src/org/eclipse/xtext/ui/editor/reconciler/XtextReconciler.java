@@ -15,7 +15,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.text.DocumentEvent;
@@ -40,6 +39,7 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.IXtextDocumentContentObserver;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.DiffUtil;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -385,26 +385,40 @@ public class XtextReconciler extends Job implements IReconciler {
 	 * 
 	 * @since 2.4
 	 */
-	private boolean doRun(XtextResource state, /* @Nullable */ final IProgressMonitor monitor) {
+	private boolean doRun(final XtextResource state, /* @Nullable */ final IProgressMonitor monitor) {
 		if (log.isDebugEnabled()) {
 			log.debug("Preparing reconciliation."); //$NON-NLS-1$
 		}
 		final ReconcilerReplaceRegion replaceRegionToBeProcessed = getMergedReplaceRegion(state);
 		if (replaceRegionToBeProcessed != null) {
-			if (strategy instanceof IReconcilingStrategyExtension) {
-				((IReconcilingStrategyExtension) strategy).setProgressMonitor(monitor != null ? monitor
-						: new NullProgressMonitor());
-			}
-			if (strategy instanceof XtextDocumentReconcileStrategy) {
-				XtextDocumentReconcileStrategy xtextDocumentReconcileStrategy = (XtextDocumentReconcileStrategy) strategy;
-				xtextDocumentReconcileStrategy.setResource(state);
-				xtextDocumentReconcileStrategy.setEditor(editor);
-			}
-			strategy.reconcile(replaceRegionToBeProcessed);
-			if (log.isDebugEnabled()) { 
-				debugger.assertModelInSyncWithDocument(replaceRegionToBeProcessed.getDocumentEvents().get(0).getDocument(), 
-						state, replaceRegionToBeProcessed);
-				debugger.assertResouceParsedCorrectly(state, replaceRegionToBeProcessed);
+			try {
+				if (strategy instanceof IReconcilingStrategyExtension) {
+					((IReconcilingStrategyExtension) strategy).setProgressMonitor(new CancelIndicatorBasedProgressMonitor(new CancelIndicator() {
+						public boolean isCanceled() {
+							return XtextDocument.isOutdated(state);
+						}
+					}));
+				}
+				if (strategy instanceof XtextDocumentReconcileStrategy) {
+					XtextDocumentReconcileStrategy xtextDocumentReconcileStrategy = (XtextDocumentReconcileStrategy) strategy;
+					xtextDocumentReconcileStrategy.setResource(state);
+					xtextDocumentReconcileStrategy.setEditor(editor);
+				}
+				strategy.reconcile(replaceRegionToBeProcessed);
+				if (log.isDebugEnabled()) { 
+					debugger.assertModelInSyncWithDocument(replaceRegionToBeProcessed.getDocumentEvents().get(0).getDocument(), 
+							state, replaceRegionToBeProcessed);
+					debugger.assertResouceParsedCorrectly(state, replaceRegionToBeProcessed);
+				}
+			} finally {
+				if (strategy instanceof IReconcilingStrategyExtension) {
+					((IReconcilingStrategyExtension) strategy).setProgressMonitor(null);
+				}
+				if (strategy instanceof XtextDocumentReconcileStrategy) {
+					XtextDocumentReconcileStrategy xtextDocumentReconcileStrategy = (XtextDocumentReconcileStrategy) strategy;
+					xtextDocumentReconcileStrategy.setResource(null);
+					xtextDocumentReconcileStrategy.setEditor(null);
+				}
 			}
 			return true;
 		}
