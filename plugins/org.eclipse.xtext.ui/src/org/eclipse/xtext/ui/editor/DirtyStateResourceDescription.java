@@ -79,15 +79,12 @@ public class DirtyStateResourceDescription extends AbstractResourceDescription {
 		}
 
 		protected List<IEObjectDescription> computeTypes(Resource resource) {
-			IResourceDescription delegateDescriptions = delegate.getResourceDescription(resource);
+			IResourceDescription delegateDescription = delegate.getResourceDescription(resource);
 			List<IEObjectDescription> result = newArrayList();
 			String hash = getTextHash(resource);
-			ImmutableMap.Builder<String, String> builder = ImmutableMap.builder();
-			builder.put(TEXT_HASH, hash);
-			ImmutableMap<String, String> userData = builder.build();
-			for (IEObjectDescription delegateDescription : delegateDescriptions.getExportedObjects()) {
-				result.add(new EObjectDescription(delegateDescription.getQualifiedName(), delegateDescription
-						.getEObjectOrProxy(), userData));
+			ImmutableMap<String, String> userData = ImmutableMap.of(TEXT_HASH, hash);
+			for (IEObjectDescription eObjectDescription : delegateDescription.getExportedObjects()) {
+				result.add(new EObjectDescription(eObjectDescription.getQualifiedName(), eObjectDescription.getEObjectOrProxy(), userData));
 			}
 			return result;
 		}

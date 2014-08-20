@@ -353,7 +353,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 				QualifiedName qualifiedName = description.getQualifiedName();
 				if (filter.accept(Flags.AccPublic, qualifiedName.skipLast(1).toString().toCharArray(), qualifiedName.getLastSegment().toCharArray(), new char[0][0], description.getEObjectURI().toPlatformString(true))) {
 					String fqName = description.getQualifiedName().toString();
-					createTypeProposal(fqName, Flags.AccPublic, false, proposalFactory, myContext, scopeAware, jvmTypeProvider, valueConverter);
+					createTypeProposal(fqName, Flags.AccPublic, fqName.indexOf('$') > 0, proposalFactory, myContext, scopeAware, jvmTypeProvider, valueConverter);
 				}
 			}
 		}

@@ -191,7 +191,7 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 	 * Xbase - modification added detailPane
 	 */
 	public void setInput(Object input) {
-		Assert.isLegal(input == null || input instanceof String || input instanceof XtextBrowserInformationControlInput);
+		Assert.isLegal(input == null || input instanceof String || input instanceof XtextBrowserInformationControlInput, String.valueOf(input));
 
 		if (input instanceof String) {
 			setInformation((String) input);
