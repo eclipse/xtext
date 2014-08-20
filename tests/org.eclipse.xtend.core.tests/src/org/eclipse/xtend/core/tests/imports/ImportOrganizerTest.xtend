@@ -545,6 +545,85 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			}
 		''', false)
 	}
+	
+	@Test def testInnerClasses_13() {
+		'''
+			package inner
+			class Foo {
+				static class Bar {}
+				def m() {
+					new Bar
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			package inner
+			
+			class Foo {
+				static class Bar {}
+				def m() {
+					new Bar
+				}
+			}
+		''', false)
+	}
+	
+	@Test def testInnerClasses_14() {
+		'''
+			class Test {
+				def baz(Bar bar) {}
+			
+				interface Bar {}
+			}
+		'''.assertIsOrganizedTo('''
+			class Test {
+				def baz(Bar bar) {}
+			
+				interface Bar {}
+			}
+		''', false)
+	}
+	
+	@Test def testInnerClasses_15() {
+		'''
+			package p
+			class Test {
+				def baz(Bar bar) {}
+			
+				interface Bar {}
+			}
+		'''.assertIsOrganizedTo('''
+			package p
+			
+			class Test {
+				def baz(Bar bar) {}
+			
+				interface Bar {}
+			}
+		''', false)
+	}
+	
+	@Test def testInnerClasses_16() {
+		'''
+			package p
+			class Test {
+				def baz(Bar.XYZ x) {}
+			
+				interface Bar {
+					class XYZ {}
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			package p
+			
+			class Test {
+				def baz(Bar.XYZ x) {}
+			
+				interface Bar {
+					class XYZ {}
+				}
+			}
+		''', false)
+	}
 
 	@Test def testNameClashSameFileWins_1() {
 		'''
