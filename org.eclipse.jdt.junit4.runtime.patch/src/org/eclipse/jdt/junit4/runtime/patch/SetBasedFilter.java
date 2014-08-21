@@ -10,7 +10,7 @@ public class SetBasedFilter extends Filter {
 	private Set<Description> shouldRun;
 
 	public SetBasedFilter(Description rootDescription) {
-		this.shouldRun = new LinkedHashSet<>();
+		this.shouldRun = new LinkedHashSet<Description>();
 		collectDescriptions(rootDescription);
 	}
 
