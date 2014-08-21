@@ -18,6 +18,10 @@ import org.eclipse.xtext.xbase.lib.Procedures;
  * to the {@link EObject}'s {@link org.eclipse.emf.ecore.resource.Resource} of the {@link EObject}.
  * 
  * @author Sven Efftinge - initial API
+ * 
+ * @noimplement This interface is not intended to be implemented by clients.
+ * 
+ * @since 2.7
  */
 public interface IJvmDeclaredTypeAcceptor {
 	
