@@ -20,7 +20,6 @@ import org.junit.runners.Suite.SuiteClasses;
 	JvmTypesBuilderTest.class,
 	TypeSignatureHashTest.class,
 	JvmModelTest.class,
-	JvmModelInferrerTest.class,
 	CheckExceptionValidationTest.class
 })
 public class JvmModelSuite {}

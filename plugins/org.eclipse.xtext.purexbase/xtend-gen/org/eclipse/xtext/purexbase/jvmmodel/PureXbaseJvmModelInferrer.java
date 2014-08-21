@@ -38,7 +38,6 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
     Resource _eResource = e.eResource();
     String _name = this.name(_eResource);
     JvmGenericType _class = this._jvmTypesBuilder.toClass(e, _name);
-    IJvmDeclaredTypeAcceptor.IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(_class);
     final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
       public void apply(final JvmGenericType it) {
         EList<JvmMember> _members = it.getMembers();
@@ -46,8 +45,8 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
         final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
           public void apply(final JvmOperation it) {
             EList<JvmTypeReference> _exceptions = it.getExceptions();
-            JvmTypeReference _newTypeRef = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(e, Throwable.class);
-            PureXbaseJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_exceptions, _newTypeRef);
+            JvmTypeReference _typeRef = PureXbaseJvmModelInferrer.this._typeReferenceBuilder.typeRef(Throwable.class);
+            PureXbaseJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_exceptions, _typeRef);
             PureXbaseJvmModelInferrer.this._jvmTypesBuilder.setBody(it, e);
           }
         };
@@ -55,7 +54,7 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
         PureXbaseJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _method);
       }
     };
-    _accept.initializeLater(_function);
+    acceptor.<JvmGenericType>accept(_class, _function);
   }
   
   public String name(final Resource res) {

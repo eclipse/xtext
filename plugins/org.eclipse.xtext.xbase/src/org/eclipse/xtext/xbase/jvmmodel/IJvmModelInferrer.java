@@ -39,6 +39,10 @@ import com.google.inject.ImplementedBy;
  * @see IJvmModelAssociator
  * @author Jan Koehnlein - Initial contribution and API
  * @author Sven Efftinge
+ * 
+ * @since 2.7
+ * 
+ * @noimplement This interface should not be implemented directly. Clients should subclass {@link AbstractModelInferrer} instead.
  */
 @ImplementedBy(IJvmModelInferrer.NullImpl.class)
 public interface IJvmModelInferrer {

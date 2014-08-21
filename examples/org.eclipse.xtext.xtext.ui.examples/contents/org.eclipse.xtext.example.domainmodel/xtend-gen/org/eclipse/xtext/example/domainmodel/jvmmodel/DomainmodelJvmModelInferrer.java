@@ -2,7 +2,6 @@ package org.eclipse.xtext.example.domainmodel.jvmmodel;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
-import java.util.ArrayList;
 import java.util.Arrays;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -25,7 +24,6 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -39,10 +37,9 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
   @Extension
   private IQualifiedNameProvider _iQualifiedNameProvider;
   
-  protected void _infer(final Entity entity, final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
+  protected void _infer(final Entity entity, @Extension final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
     QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(entity);
     JvmGenericType _class = this._jvmTypesBuilder.toClass(entity, _fullyQualifiedName);
-    IJvmDeclaredTypeAcceptor.IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(_class);
     final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
       public void apply(final JvmGenericType it) {
         String _documentation = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(entity);
@@ -55,8 +52,6 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
           JvmTypeReference _cloneWithProxies = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.cloneWithProxies(_superType_1);
           DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_superTypes, _cloneWithProxies);
         }
-        JvmTypeReference _newTypeRef = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(it);
-        final JvmTypeReference procedure = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(entity, Procedure1.class, _newTypeRef);
         EList<JvmMember> _members = it.getMembers();
         final Procedure1<JvmConstructor> _function = new Procedure1<JvmConstructor>() {
           public void apply(final JvmConstructor it) {
@@ -64,16 +59,19 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
         };
         JvmConstructor _constructor = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toConstructor(entity, _function);
         DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmConstructor>operator_add(_members, _constructor);
+        JvmTypeReference _typeRef = DomainmodelJvmModelInferrer.this._typeReferenceBuilder.typeRef(it);
+        final JvmTypeReference procedureType = DomainmodelJvmModelInferrer.this._typeReferenceBuilder.typeRef(Procedure1.class, _typeRef);
         EList<JvmMember> _members_1 = it.getMembers();
         final Procedure1<JvmConstructor> _function_1 = new Procedure1<JvmConstructor>() {
           public void apply(final JvmConstructor it) {
             EList<JvmFormalParameter> _parameters = it.getParameters();
-            JvmFormalParameter _parameter = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toParameter(entity, "initializer", procedure);
+            JvmFormalParameter _parameter = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toParameter(entity, "initializer", procedureType);
             DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _parameter);
             StringConcatenationClient _client = new StringConcatenationClient() {
               @Override
               protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
                 _builder.append("initializer.apply(this);");
+                _builder.newLine();
               }
             };
             DomainmodelJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _client);
@@ -81,7 +79,6 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
         };
         JvmConstructor _constructor_1 = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toConstructor(entity, _function_1);
         DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmConstructor>operator_add(_members_1, _constructor_1);
-        final ArrayList<JvmField> fields = CollectionLiterals.<JvmField>newArrayList();
         EList<Feature> _features = entity.getFeatures();
         for (final Feature f : _features) {
           boolean _matched = false;
@@ -91,7 +88,6 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
               String _name = ((Property)f).getName();
               JvmTypeReference _type = ((Property)f).getType();
               final JvmField field = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toField(f, _name, _type);
-              fields.add(field);
               EList<JvmMember> _members_2 = it.getMembers();
               DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmField>operator_add(_members_2, field);
               EList<JvmMember> _members_3 = it.getMembers();
@@ -145,7 +141,7 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
         DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members_2, _toStringMethod);
       }
     };
-    _accept.initializeLater(_function);
+    acceptor.<JvmGenericType>accept(_class, _function);
   }
   
   public void infer(final EObject entity, final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
