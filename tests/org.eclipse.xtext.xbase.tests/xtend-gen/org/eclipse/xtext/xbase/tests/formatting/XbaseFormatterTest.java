@@ -1248,6 +1248,45 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   }
   
   @Test
+  public void formatSwitchDefault2MLFallThrough() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("switch \'x\' {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("case \'x\',");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("case \'y\':");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("println(\'y\')");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("default:");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("println(\'z\')");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("switch \'x\'  {   ");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("case \'x\'  ,   case   \'y\':    println(\'y\')     ");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("default  :    ");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("println(\'z\')");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
   public void formatSwitchMLBlock() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
       public void apply(final MapBasedPreferenceValues it) {

@@ -883,7 +883,7 @@ class XbaseFormatter2 extends AbstractFormatter {
 				format += open.append[increaseIndentation]	
 			}
 			for (c : expr.cases) {
-				val cnode = c.then.nodeForEObject
+				val cnode = c.then.nodeForEObject?:c.nodeForFeature(XCASE_PART__FALL_THROUGH)
 				if (c.then instanceof XBlockExpression) {
 					format += cnode.prepend[cfg(bracesInNewLine)]
 					if (expr.^default != null || c != expr.cases.last)
@@ -891,7 +891,11 @@ class XbaseFormatter2 extends AbstractFormatter {
 					else
 						format += cnode.append[newLine; decreaseIndentation]
 				} else {
-					format += cnode.prepend[newLine; increaseIndentation]
+					if (c.isFallThrough) {
+						format += cnode.append[increaseIndentation]
+					} else {
+						format += cnode.prepend[newLine; increaseIndentation]
+					}
 					if (expr.^default != null || c != expr.cases.last)
 						format += cnode.append[newLine; decreaseIndentation]
 					else
