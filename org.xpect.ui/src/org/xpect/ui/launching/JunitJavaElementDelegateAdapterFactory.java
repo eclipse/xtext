@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.xpect.ui.launching;
 
-import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
@@ -25,8 +25,8 @@ public class JunitJavaElementDelegateAdapterFactory implements IAdapterFactory {
 
 		if (adaptableObject instanceof IFileEditorInput)
 			return new JUnitJavaElementDelegate((IFileEditorInput) adaptableObject);
-		if (adaptableObject instanceof IResource)
-			return new JUnitJavaElementDelegate((IResource) adaptableObject);
+		if (adaptableObject instanceof IFile)
+			return new JUnitJavaElementDelegate((IFile) adaptableObject);
 		if (adaptableObject instanceof IEditorPart)
 			return new JUnitJavaElementDelegate((IEditorPart) adaptableObject);
 		return null;

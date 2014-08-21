@@ -13,8 +13,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.junit.runner.Description;
 import org.xpect.XjmMethod;
 import org.xpect.XjmXpectMethod;
@@ -88,12 +86,8 @@ public class XpectTestRunner extends AbstractTestRunner {
 	public Description createDescription() {
 		XpectRunner runner = getUriRunner().getRunner();
 		Class<?> javaClass = runner.getTestClass().getJavaClass();
-		URI uri = runner.getUriProvider().deresolveToProject(EcoreUtil.getURI(invocation));
-		String title = getTitle();
-		if (title != null)
-			return Description.createTestDescription(javaClass, uri.toString() + ": " + title);
-		else
-			return Description.createTestDescription(javaClass, uri.toString());
+		Description description = DescriptionFactory.createTestDescription(javaClass, runner.getUriProvider(), invocation);
+		return description;
 	}
 
 	protected Object[] createParameterValues(List<IParameterProvider> proposedParameters) {
@@ -113,10 +107,6 @@ public class XpectTestRunner extends AbstractTestRunner {
 
 	public XjmXpectMethod getMethod() {
 		return invocation.getMethod();
-	}
-
-	protected String getTitle() {
-		return new XpectTestTitleProvider().getTitle(invocation);
 	}
 
 	@Override

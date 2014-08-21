@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.xpect.runner;
 
+import static org.xpect.runner.DescriptionFactory.createFileDescription;
+import static org.xpect.runner.DescriptionFactory.createFileDescriptionForError;
+
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
@@ -44,8 +47,8 @@ import org.xpect.XpectTest;
 import org.xpect.services.XpectGrammarAccess;
 import org.xpect.setup.ISetupInitializer;
 import org.xpect.setup.SetupInitializer;
-import org.xpect.state.ResolvedConfiguration;
 import org.xpect.state.Configuration;
+import org.xpect.state.ResolvedConfiguration;
 import org.xpect.state.StateContainer;
 import org.xpect.text.CharSequences;
 import org.xpect.text.IReplacement;
@@ -114,14 +117,13 @@ public class XpectFileRunner implements Filterable, Sortable {
 	}
 
 	protected Description createDescription() {
-		String title = getFullName();
 		if (error == null) {
-			Description result = Description.createSuiteDescription(title);
+			Description result = createFileDescription(runner.getTestClass().getJavaClass(), runner.getUriProvider(), getUri());
 			for (AbstractTestRunner child : getChildren())
 				result.addChild(child.getDescription());
 			return result;
 		} else {
-			return Description.createTestDescription(runner.getTestClass().getJavaClass(), title);
+			return createFileDescriptionForError(runner.getTestClass().getJavaClass(), runner.getUriProvider(), getUri());
 		}
 	}
 
@@ -187,11 +189,6 @@ public class XpectFileRunner implements Filterable, Sortable {
 
 	public Throwable getError() {
 		return error;
-	}
-
-	protected String getFullName() {
-		URI deresolved = runner.getUriProvider().deresolveToProject(getUri());
-		return deresolved.lastSegment() + ": " + deresolved.trimSegments(1).toString();
 	}
 
 	public XpectRunner getRunner() {

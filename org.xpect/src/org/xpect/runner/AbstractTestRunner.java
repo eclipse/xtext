@@ -46,8 +46,6 @@ public abstract class AbstractTestRunner {
 
 	public abstract XjmMethod getMethod();
 
-	protected abstract String getTitle();
-
 	public XpectFileRunner getUriRunner() {
 		return uriRunner;
 	}

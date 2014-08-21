@@ -16,6 +16,7 @@ import org.eclipse.jface.viewers.StructuredSelection;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class LaunchShortcutUtil {
+
 	public static IStructuredSelection replaceWithJavaElementDelegates(IStructuredSelection sel) {
 		Object[] selection = sel.toArray();
 		Object[] result = new Object[selection.length];

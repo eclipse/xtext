@@ -45,7 +45,8 @@ public class TestRunner extends AbstractTestRunner {
 
 	public Description createDescription() {
 		Class<?> javaClass = getUriRunner().getRunner().getTestClass().getJavaClass();
-		return Description.createTestDescription(javaClass, getTitle());
+		String name = method.getName();
+		return Description.createTestDescription(javaClass, name);
 	}
 
 	public XjmTestMethod getMethod() {
@@ -55,11 +56,6 @@ public class TestRunner extends AbstractTestRunner {
 	@Override
 	public StateContainer getState() {
 		return state;
-	}
-
-	@Override
-	protected String getTitle() {
-		return method.getName();
 	}
 
 	@Override

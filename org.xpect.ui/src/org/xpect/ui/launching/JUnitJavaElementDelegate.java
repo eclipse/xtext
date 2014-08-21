@@ -7,8 +7,10 @@
  *******************************************************************************/
 package org.xpect.ui.launching;
 
+import static org.xpect.runner.DescriptionFactory.createFileDescription;
+import static org.xpect.runner.DescriptionFactory.createTestDescription;
+
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IJavaElement;
@@ -24,8 +26,12 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.junit.runner.Description;
 import org.xpect.XpectFile;
+import org.xpect.XpectInvocation;
 import org.xpect.XpectTest;
 import org.xpect.ui.util.ContentTypeUtil;
 import org.xpect.ui.util.ContentTypeUtil.XpectContentType;
@@ -37,53 +43,59 @@ import org.xpect.ui.util.XpectUtil;
  */
 public class JUnitJavaElementDelegate implements IAdaptable {
 
-	private final IEditorPart editorPart;
-
-	private final IFileEditorInput fileEditorInput;
-
-	private final IResource resource;
+	private final Description description;
+	private final IJavaElement javaElement;
 
 	public JUnitJavaElementDelegate(IEditorPart editorPart) {
-		this.editorPart = editorPart;
-		this.fileEditorInput = null;
-		this.resource = null;
+		Pair<IJavaElement, Description> pair = getJavaElementForXtextEditor(editorPart);
+		if (pair != null) {
+			this.javaElement = pair.getFirst();
+			this.description = pair.getSecond();
+		} else {
+			this.javaElement = null;
+			this.description = null;
+		}
+	}
+
+	public JUnitJavaElementDelegate(IFile file) {
+		if (new ContentTypeUtil().getContentType(file) == XpectContentType.XPECT) {
+			XpectFile xpectFile = XpectUtil.loadFile(file);
+			if (xpectFile != null) {
+				this.javaElement = getTestClassJavaElement(xpectFile);
+				this.description = createFileDescription(xpectFile);
+			} else {
+				this.javaElement = null;
+				this.description = null;
+			}
+		} else {
+			this.javaElement = null;
+			this.description = null;
+		}
 	}
 
 	public JUnitJavaElementDelegate(IFileEditorInput fileEditorInput) {
-		this.fileEditorInput = fileEditorInput;
-		this.resource = null;
-		this.editorPart = null;
-	}
-
-	public JUnitJavaElementDelegate(IResource resource) {
-		this.resource = resource;
-		this.fileEditorInput = null;
-		this.editorPart = null;
+		this(fileEditorInput.getFile());
 	}
 
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
 		if (getClass().equals(adapter))
 			return this;
-		if (!(IJavaElement.class.equals(adapter)))
-			return null;
-		if (editorPart != null)
-			return getJavaElementForXtextEditor(editorPart);
-		else if (resource instanceof IFile)
-			return getTestClassJavaElement((IFile) resource);
-		else if (fileEditorInput != null)
-			return getTestClassJavaElement(fileEditorInput.getFile());
+		if (IJavaElement.class.equals(adapter))
+			return javaElement;
+		if (Description.class.equals(adapter))
+			return description;
 		return null;
 	}
 
-	public IEditorPart getEditorPart() {
-		return editorPart;
+	public Description getDescription() {
+		return description;
 	}
 
-	public IFileEditorInput getFileEditorInput() {
-		return fileEditorInput;
+	public IJavaElement getJavaElement() {
+		return javaElement;
 	}
 
-	protected IJavaElement getJavaElementForXtextEditor(IEditorPart editor) {
+	private Pair<IJavaElement, Description> getJavaElementForXtextEditor(IEditorPart editor) {
 		if (!(editor instanceof XtextEditor))
 			return null;
 		IJavaProject jp = null;
@@ -101,47 +113,27 @@ public class JUnitJavaElementDelegate implements IAdaptable {
 		if (!(selection instanceof ITextSelection))
 			return null;
 		final int offset = ((ITextSelection) selection).getOffset();
-		IJavaElement func = xtextEditor.getDocument().readOnly(new IUnitOfWork<IJavaElement, XtextResource>() {
-			public IJavaElement exec(XtextResource state) throws Exception {
-				XtextResource xpectResource = XpectFileAccess.getXpectResource(state);
-				INode node = NodeModelUtils.findLeafNodeAtOffset(xpectResource.getParseResult().getRootNode(), offset);
+		Pair<IJavaElement, Description> result = xtextEditor.getDocument().readOnly(new IUnitOfWork<Pair<IJavaElement, Description>, XtextResource>() {
+			public Pair<IJavaElement, Description> exec(XtextResource state) throws Exception {
+				XpectFile xpectFile = XpectFileAccess.getXpectFile(state);
+				IJavaElement javaElement = getTestClassJavaElement(xpectFile);
+				XtextResource resource = (XtextResource) xpectFile.eResource();
+				INode node = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset);
 				if (node != null) {
 					EObject obj = node.getSemanticElement();
-					EObject current = obj;
-					while (current != null) {
-						// if (current instanceof XpectInvocation) {
-						// XpectInvocation inv = (XpectInvocation) current;
-						// JvmOperation operation = inv.getElement();
-						// if (operation != null && !operation.eIsProxy())
-						// return finder.findElementFor(operation);
-						// return null;
-						// } else
-						if (current instanceof XpectFile)
-							return getTestClassJavaElement((XpectFile) current);
-						current = current.eContainer();
+					if (obj instanceof XpectInvocation) {
+						Description desc = createTestDescription((XpectInvocation) obj);
+						return Tuples.create(javaElement, desc);
 					}
 				}
-				return null;
+				Description desc = createFileDescription(xpectFile);
+				return Tuples.create(javaElement, desc);
 			}
-
 		});
-		return func;
+		return result;
 	}
 
-	public IResource getResource() {
-		return resource;
-	}
-
-	private IJavaElement getTestClassJavaElement(IFile iFile) {
-		if (new ContentTypeUtil().getContentType(iFile) != XpectContentType.XPECT)
-			return null;
-		XpectFile xpectFile = XpectUtil.loadFile(iFile);
-		if (xpectFile != null)
-			return getTestClassJavaElement(xpectFile);
-		return null;
-	}
-
-	protected IJavaElement getTestClassJavaElement(XpectFile file) {
+	private IJavaElement getTestClassJavaElement(XpectFile file) {
 		XpectTest test = file.getTest();
 		if (test != null) {
 			IJavaElementFinder finder = ((XtextResource) test.eResource()).getResourceServiceProvider().get(IJavaElementFinder.class);
