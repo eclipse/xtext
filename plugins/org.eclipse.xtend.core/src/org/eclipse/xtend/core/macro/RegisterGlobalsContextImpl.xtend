@@ -21,6 +21,8 @@ import org.eclipse.xtend.lib.annotations.Delegate
 import org.eclipse.xtend.lib.macro.file.FileLocations
 import org.eclipse.xtend.lib.macro.file.FileSystemSupport
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.macro.services.TypeLookup
+import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl
 
 class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
 	
@@ -111,4 +113,7 @@ class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
 		compilationUnit.fileLocations
 	}
 	
+	@Delegate def TypeLookupImpl getTypeLookup() {
+		compilationUnit.typeLookup
+	}
 }
