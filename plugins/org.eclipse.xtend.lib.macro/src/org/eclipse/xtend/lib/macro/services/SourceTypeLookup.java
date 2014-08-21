@@ -7,77 +7,58 @@
  *******************************************************************************/
 package org.eclipse.xtend.lib.macro.services;
 
+import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
-import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTypeDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationTypeDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableInterfaceDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.Type;
+import org.eclipse.xtend.lib.macro.declaration.EnumerationTypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration;
 
 import com.google.common.annotations.Beta;
 
 /**
- * Facilities to lookup Java type declarations generated within the currently
- * processed {@link CompilationUnit} as well as in upstream dependencies of that <code>CompilationUnit</code>.
+ * Facilities to lookup Xtend type declarations declared within the currently
+ * processed {@link CompilationUnit}.
  * 
- * @author Sven Efftinge
  * @noimplement This interface is not intended to be implemented by clients.
  */
 @Beta
-public interface TypeLookup extends UpstreamTypeLookup, SourceTypeLookup {
+public interface SourceTypeLookup {
 
 	/**
 	 * @param qualifiedName
 	 *            the qualified name of the type to look up. Nested class delimiter is expected to be the '.' (dot).
-	 * @return the <code>MutableClassDeclaration</code> with given qualified
+	 * @return the <code>ClassDeclaration</code> with given qualified
 	 *         name, or <code>null</code> if no such class declaration is
 	 *         contained in the currently processed <code>CompilationUnit</code>
 	 */
-	MutableClassDeclaration findClass(String qualifiedName);
+	ClassDeclaration findSourceClass(String qualifiedName);
 
 	/**
 	 * @param qualifiedName
 	 *            the qualified name of the type to look up. Nested class delimiter is expected to be the '.' (dot).
-	 * @return the <code>MutableInterfaceDeclaration</code> with given qualified
+	 * @return the <code>InterfaceDeclaration</code> with given qualified
 	 *         name, or <code>null</code> if no such interface declaration is
 	 *         contained in the currently processed <code>CompilationUnit</code>
 	 */
-	MutableInterfaceDeclaration findInterface(String qualifiedName);
+	InterfaceDeclaration findSourceInterface(String qualifiedName);
 
 	/**
 	 * @param qualifiedName
 	 *            the qualified name of the type to look up. Nested class delimiter is expected to be the '.' (dot).
-	 * @return the <code>MutableEnumerationTypeDeclaration</code> with given
+	 * @return the <code>EnumerationTypeDeclaration</code> with given
 	 *         qualified name, or <code>null</code> if no such class declaration
 	 *         is contained in the currently processed
 	 *         <code>CompilationUnit</code>
 	 */
-	MutableEnumerationTypeDeclaration findEnumerationType(String qualifiedName);
+	EnumerationTypeDeclaration findSourceEnumerationType(String qualifiedName);
 
 	/**
 	 * @param qualifiedName
 	 *            the qualified name of the type to look up. Nested class delimiter is expected to be the '.' (dot).
-	 * @return the <code>MutableAnnotationTypeDeclaration</code> with given
+	 * @return the <code>AnnotationTypeDeclaration</code> with given
 	 *         qualified name, or <code>null</code> if no such class declaration
 	 *         is contained in the currently processed
 	 *         <code>CompilationUnit</code>
 	 */
-	MutableAnnotationTypeDeclaration findAnnotationType(String qualifiedName);
-
-	/**
-	 * @param clazz
-	 *            the clazz representing the type to look up
-	 * @return the type with the same qualified name as the given
-	 *         <code>Class</code> object, or <code>null</code> if that type
-	 *         couldn't be found on the compilation units classpath.
-	 */
-	Type findTypeGlobally(Class<?> clazz);
-
-	/**
-	 * @param typeName
-	 *            the qualified name of the type to look up. Nested class delimiter is expected to be the '.' (dot).
-	 * @return the type with the given qualified name, or <code>null</code> if such a type
-	 *         couldn't be found on the compilation units classpath.
-	 */
-	Type findTypeGlobally(String typeName);
+	AnnotationTypeDeclaration findSourceAnnotationType(String qualifiedName);
 }
