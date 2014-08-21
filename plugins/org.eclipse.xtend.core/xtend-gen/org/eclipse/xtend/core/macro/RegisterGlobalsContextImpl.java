@@ -21,9 +21,15 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.Delegate;
 import org.eclipse.xtend.lib.macro.RegisterGlobalsContext;
+import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.EnumerationTypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.file.FileLocations;
 import org.eclipse.xtend.lib.macro.file.FileSystemSupport;
 import org.eclipse.xtend.lib.macro.file.Path;
+import org.eclipse.xtend.lib.macro.services.TypeLookup;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -169,6 +175,11 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
     return this.compilationUnit.getFileLocations();
   }
   
+  @Delegate
+  public TypeLookup getTypeLookup() {
+    return this.compilationUnit.getTypeLookup();
+  }
+  
   @Pure
   public IJvmDeclaredTypeAcceptor getAcceptor() {
     return this.acceptor;
@@ -233,5 +244,29 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
   
   public Path getTargetFolder(final Path sourceFolder) {
     return this.getFileLocations().getTargetFolder(sourceFolder);
+  }
+  
+  public Type findUpstreamType(final Class<?> clazz) {
+    return this.getTypeLookup().findUpstreamType(clazz);
+  }
+  
+  public Type findUpstreamType(final String typeName) {
+    return this.getTypeLookup().findUpstreamType(typeName);
+  }
+  
+  public AnnotationTypeDeclaration findSourceAnnotationType(final String qualifiedName) {
+    return this.getTypeLookup().findSourceAnnotationType(qualifiedName);
+  }
+  
+  public ClassDeclaration findSourceClass(final String qualifiedName) {
+    return this.getTypeLookup().findSourceClass(qualifiedName);
+  }
+  
+  public EnumerationTypeDeclaration findSourceEnumerationType(final String qualifiedName) {
+    return this.getTypeLookup().findSourceEnumerationType(qualifiedName);
+  }
+  
+  public InterfaceDeclaration findSourceInterface(final String qualifiedName) {
+    return this.getTypeLookup().findSourceInterface(qualifiedName);
   }
 }

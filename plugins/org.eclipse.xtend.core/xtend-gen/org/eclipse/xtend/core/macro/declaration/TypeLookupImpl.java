@@ -7,7 +7,14 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
+import org.eclipse.xtend.core.macro.declaration.XtendTypeDeclarationImpl;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.core.xtend.XtendMember;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.EnumerationTypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationTypeDeclaration;
@@ -19,11 +26,14 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 @SuppressWarnings("all")
@@ -92,7 +102,18 @@ public class TypeLookupImpl implements TypeLookup {
     Resource _eResource = _xtendFile.eResource();
     EList<EObject> _contents = _eResource.getContents();
     Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_contents, JvmDeclaredType.class);
-    final JvmDeclaredType result = this.recursiveFindType(qualifiedName, _filter);
+    final Function1<JvmDeclaredType, String> _function = new Function1<JvmDeclaredType, String>() {
+      public String apply(final JvmDeclaredType type) {
+        return type.getQualifiedName('.');
+      }
+    };
+    final Function1<JvmDeclaredType, Iterable<JvmDeclaredType>> _function_1 = new Function1<JvmDeclaredType, Iterable<JvmDeclaredType>>() {
+      public Iterable<JvmDeclaredType> apply(final JvmDeclaredType type) {
+        EList<JvmMember> _members = type.getMembers();
+        return Iterables.<JvmDeclaredType>filter(_members, JvmDeclaredType.class);
+      }
+    };
+    final JvmDeclaredType result = this.<JvmDeclaredType>recursiveFindType(qualifiedName, _filter, _function, _function_1);
     Type _xifexpression = null;
     boolean _notEquals = (!Objects.equal(result, null));
     if (_notEquals) {
@@ -101,11 +122,92 @@ public class TypeLookupImpl implements TypeLookup {
     return _xifexpression;
   }
   
-  private JvmDeclaredType recursiveFindType(final String qualifiedName, final Iterable<? extends JvmDeclaredType> typeDeclarations) {
+  public ClassDeclaration findSourceClass(final String qualifiedName) {
+    final XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> type = this.findSourceType(qualifiedName);
+    XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> _switchResult = null;
+    boolean _matched = false;
+    if (!_matched) {
+      if (type instanceof ClassDeclaration) {
+        _matched=true;
+        _switchResult = ((XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>)type);
+      }
+    }
+    return ((ClassDeclaration)_switchResult);
+  }
+  
+  public InterfaceDeclaration findSourceInterface(final String qualifiedName) {
+    final XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> type = this.findSourceType(qualifiedName);
+    XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> _switchResult = null;
+    boolean _matched = false;
+    if (!_matched) {
+      if (type instanceof InterfaceDeclaration) {
+        _matched=true;
+        _switchResult = ((XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>)type);
+      }
+    }
+    return ((InterfaceDeclaration)_switchResult);
+  }
+  
+  public EnumerationTypeDeclaration findSourceEnumerationType(final String qualifiedName) {
+    final XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> type = this.findSourceType(qualifiedName);
+    XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> _switchResult = null;
+    boolean _matched = false;
+    if (!_matched) {
+      if (type instanceof EnumerationTypeDeclaration) {
+        _matched=true;
+        _switchResult = ((XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>)type);
+      }
+    }
+    return ((EnumerationTypeDeclaration)_switchResult);
+  }
+  
+  public AnnotationTypeDeclaration findSourceAnnotationType(final String qualifiedName) {
+    final XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> type = this.findSourceType(qualifiedName);
+    XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> _switchResult = null;
+    boolean _matched = false;
+    if (!_matched) {
+      if (type instanceof AnnotationTypeDeclaration) {
+        _matched=true;
+        _switchResult = ((XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>)type);
+      }
+    }
+    return ((AnnotationTypeDeclaration)_switchResult);
+  }
+  
+  private XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> findSourceType(final String qualifiedName) {
+    XtendFile _xtendFile = this.compilationUnit.getXtendFile();
+    Resource _eResource = _xtendFile.eResource();
+    EList<EObject> _contents = _eResource.getContents();
+    EObject _head = IterableExtensions.<EObject>head(_contents);
+    EList<XtendTypeDeclaration> _xtendTypes = ((XtendFile) _head).getXtendTypes();
+    final Function1<XtendTypeDeclaration, String> _function = new Function1<XtendTypeDeclaration, String>() {
+      public String apply(final XtendTypeDeclaration type) {
+        IQualifiedNameConverter _qualifiedNameConverter = TypeLookupImpl.this.compilationUnit.getQualifiedNameConverter();
+        IQualifiedNameProvider _qualifiedNameProvider = TypeLookupImpl.this.compilationUnit.getQualifiedNameProvider();
+        QualifiedName _fullyQualifiedName = _qualifiedNameProvider.getFullyQualifiedName(type);
+        return _qualifiedNameConverter.toString(_fullyQualifiedName);
+      }
+    };
+    final Function1<XtendTypeDeclaration, Iterable<XtendTypeDeclaration>> _function_1 = new Function1<XtendTypeDeclaration, Iterable<XtendTypeDeclaration>>() {
+      public Iterable<XtendTypeDeclaration> apply(final XtendTypeDeclaration type) {
+        EList<XtendMember> _members = type.getMembers();
+        return Iterables.<XtendTypeDeclaration>filter(_members, XtendTypeDeclaration.class);
+      }
+    };
+    final XtendTypeDeclaration result = this.<XtendTypeDeclaration>recursiveFindType(qualifiedName, _xtendTypes, _function, _function_1);
+    XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> _xifexpression = null;
+    boolean _notEquals = (!Objects.equal(result, null));
+    if (_notEquals) {
+      _xifexpression = this.compilationUnit.toXtendTypeDeclaration(result);
+    }
+    return _xifexpression;
+  }
+  
+  private <T extends Object> T recursiveFindType(final String qualifiedName, final Iterable<? extends T> typeDeclarations, final Function1<? super T, ? extends String> qualifiedNameProvider, final Function1<? super T, ? extends Iterable<? extends T>> subTypeProvider) {
     final char dot = '.';
-    for (final JvmDeclaredType type : typeDeclarations) {
+    for (final T type : typeDeclarations) {
       {
-        final String name = type.getQualifiedName('.');
+        final String name = qualifiedNameProvider.apply(type);
         boolean _equals = Objects.equal(qualifiedName, name);
         if (_equals) {
           return type;
@@ -121,9 +223,8 @@ public class TypeLookupImpl implements TypeLookup {
           _and = _equals_1;
         }
         if (_and) {
-          EList<JvmMember> _members = type.getMembers();
-          Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_members, JvmDeclaredType.class);
-          return this.recursiveFindType(qualifiedName, _filter);
+          Iterable<? extends T> _apply = subTypeProvider.apply(type);
+          return this.<T>recursiveFindType(qualifiedName, _apply, qualifiedNameProvider, subTypeProvider);
         }
       }
     }
@@ -141,34 +242,41 @@ public class TypeLookupImpl implements TypeLookup {
     if (_findType != null) {
       _elvis = _findType;
     } else {
-      Type _xblockexpression = null;
-      {
-        IQualifiedNameConverter _qualifiedNameConverter = this.compilationUnit.getQualifiedNameConverter();
-        final QualifiedName qualifiedName = _qualifiedNameConverter.toQualifiedName(typeName);
-        IScopeProvider _scopeProvider = this.compilationUnit.getScopeProvider();
-        XtendFile _xtendFile = this.compilationUnit.getXtendFile();
-        IScope _scope = _scopeProvider.getScope(_xtendFile, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE);
-        final IEObjectDescription result = _scope.getSingleElement(qualifiedName);
-        Type _xifexpression = null;
-        boolean _and = false;
-        boolean _tripleNotEquals = (result != null);
-        if (!_tripleNotEquals) {
-          _and = false;
-        } else {
-          EClass _eClass = result.getEClass();
-          boolean _isSuperTypeOf = TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(_eClass);
-          _and = _isSuperTypeOf;
-        }
-        if (_and) {
-          EObject _eObjectOrProxy = result.getEObjectOrProxy();
-          _xifexpression = this.compilationUnit.toType(((JvmType) _eObjectOrProxy));
-        } else {
-          _xifexpression = null;
-        }
-        _xblockexpression = _xifexpression;
-      }
-      _elvis = _xblockexpression;
+      Type _findTypeOnScope = this.findTypeOnScope(typeName);
+      _elvis = _findTypeOnScope;
     }
     return _elvis;
+  }
+  
+  public Type findUpstreamType(final Class<?> clazz) {
+    String _canonicalName = clazz.getCanonicalName();
+    return this.findUpstreamType(_canonicalName);
+  }
+  
+  public Type findUpstreamType(final String typeName) {
+    return this.findTypeOnScope(typeName);
+  }
+  
+  private Type findTypeOnScope(final String typeName) {
+    IQualifiedNameConverter _qualifiedNameConverter = this.compilationUnit.getQualifiedNameConverter();
+    final QualifiedName qualifiedName = _qualifiedNameConverter.toQualifiedName(typeName);
+    IScopeProvider _scopeProvider = this.compilationUnit.getScopeProvider();
+    XtendFile _xtendFile = this.compilationUnit.getXtendFile();
+    IScope _scope = _scopeProvider.getScope(_xtendFile, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE);
+    final IEObjectDescription result = _scope.getSingleElement(qualifiedName);
+    boolean _and = false;
+    boolean _tripleNotEquals = (result != null);
+    if (!_tripleNotEquals) {
+      _and = false;
+    } else {
+      EClass _eClass = result.getEClass();
+      boolean _isSuperTypeOf = TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(_eClass);
+      _and = _isSuperTypeOf;
+    }
+    if (_and) {
+      EObject _eObjectOrProxy = result.getEObjectOrProxy();
+      return this.compilationUnit.toType(((JvmType) _eObjectOrProxy));
+    }
+    return null;
   }
 }

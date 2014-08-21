@@ -169,6 +169,7 @@ import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.documentation.IFileHeaderProvider;
 import org.eclipse.xtext.generator.FileSystemAccessQueue;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.util.Strings;
@@ -328,6 +329,10 @@ public class CompilationUnitImpl implements CompilationUnit {
   @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
   private IQualifiedNameConverter qualifiedNameConverter;
+  
+  @Accessors(AccessorType.PUBLIC_GETTER)
+  @Inject
+  private IQualifiedNameProvider qualifiedNameProvider;
   
   @Accessors
   private final ProblemSupportImpl problemSupport = new ProblemSupportImpl(this);
@@ -1966,6 +1971,11 @@ public class CompilationUnitImpl implements CompilationUnit {
   @Pure
   public IQualifiedNameConverter getQualifiedNameConverter() {
     return this.qualifiedNameConverter;
+  }
+  
+  @Pure
+  public IQualifiedNameProvider getQualifiedNameProvider() {
+    return this.qualifiedNameProvider;
   }
   
   @Pure

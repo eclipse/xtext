@@ -15,7 +15,11 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.Delegate;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
+import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Element;
+import org.eclipse.xtend.lib.macro.declaration.EnumerationTypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableElement;
@@ -130,6 +134,30 @@ public class TransformationContextImpl implements TransformationContext {
   
   public Type findTypeGlobally(final String typeName) {
     return this.getTypeLookup().findTypeGlobally(typeName);
+  }
+  
+  public Type findUpstreamType(final Class<?> clazz) {
+    return this.getTypeLookup().findUpstreamType(clazz);
+  }
+  
+  public Type findUpstreamType(final String typeName) {
+    return this.getTypeLookup().findUpstreamType(typeName);
+  }
+  
+  public AnnotationTypeDeclaration findSourceAnnotationType(final String qualifiedName) {
+    return this.getTypeLookup().findSourceAnnotationType(qualifiedName);
+  }
+  
+  public ClassDeclaration findSourceClass(final String qualifiedName) {
+    return this.getTypeLookup().findSourceClass(qualifiedName);
+  }
+  
+  public EnumerationTypeDeclaration findSourceEnumerationType(final String qualifiedName) {
+    return this.getTypeLookup().findSourceEnumerationType(qualifiedName);
+  }
+  
+  public InterfaceDeclaration findSourceInterface(final String qualifiedName) {
+    return this.getTypeLookup().findSourceInterface(qualifiedName);
   }
   
   public TypeReference getAnyType() {
