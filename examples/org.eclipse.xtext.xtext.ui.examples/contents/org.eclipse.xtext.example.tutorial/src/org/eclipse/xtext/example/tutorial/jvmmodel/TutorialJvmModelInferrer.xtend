@@ -21,7 +21,7 @@ class TutorialJvmModelInferrer extends AbstractModelInferrer {
 	def dispatch infer(Entity entity, IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase) {
 		// the acceptor can accept any number of Java classes.
 		// the full initialization of the inferred Java class is done in a second step.
-		acceptor.accept(entity.toClass(entity.fullyQualifiedName)).initializeLater [
+		acceptor.accept(entity.toClass(entity.fullyQualifiedName)) [
 			// first we copy over the documentation
 			it.documentation = entity.documentation
 			// Iterate over all features and proper JavaBeans properties.
