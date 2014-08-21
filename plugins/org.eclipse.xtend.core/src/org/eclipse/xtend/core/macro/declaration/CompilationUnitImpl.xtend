@@ -126,6 +126,7 @@ import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom
 import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceFactory
+import org.eclipse.xtext.naming.IQualifiedNameProvider
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -190,6 +191,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	@Accessors(PUBLIC_GETTER) @Inject ReadAndWriteTracking readAndWriteTracking
 	@Accessors(PUBLIC_GETTER) @Inject IScopeProvider scopeProvider
 	@Accessors(PUBLIC_GETTER) @Inject IQualifiedNameConverter qualifiedNameConverter
+	@Accessors(PUBLIC_GETTER) @Inject IQualifiedNameProvider qualifiedNameProvider
 	
 	@Accessors val ProblemSupportImpl problemSupport= new ProblemSupportImpl(this)
 	@Accessors val TypeReferenceProvider typeReferenceProvider = new TypeReferenceProviderImpl(this)
