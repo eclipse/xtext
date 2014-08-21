@@ -130,7 +130,7 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-<!-- 
+
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-surefire-plugin</artifactId>
@@ -140,8 +140,14 @@
 					<useUIHarness>true</useUIHarness>
 					<useUIThread>false</useUIThread>
 					<argLine>${memory-settings} ${os-jvm-flags}</argLine>
+					<dependencies>
+						<dependency>
+							<type>eclipse-plugin</type>
+							<artifactId>org.eclipse.xtext.logging</artifactId>
+						</dependency>
+					</dependencies>
 				</configuration>
-			</plugin> -->
+			</plugin>
 		</plugins>
 	</build>
 </project>
