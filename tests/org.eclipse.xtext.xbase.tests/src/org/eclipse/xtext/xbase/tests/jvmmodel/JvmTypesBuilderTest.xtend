@@ -134,7 +134,7 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	def void testInterfaceCreation() {
 		val e = expression("'foo'")
 		val anno = e.toInterface("foo.bar.MyAnnotation") [
-			superTypes += e.newTypeRef(typeof(Iterable))
+			superTypes += newTypeRef(typeof(Iterable))
 		]
 		assertTrue(anno.isInterface)
 		assertEquals("foo.bar", anno.packageName)

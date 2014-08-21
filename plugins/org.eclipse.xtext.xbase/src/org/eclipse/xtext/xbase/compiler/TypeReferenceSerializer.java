@@ -66,7 +66,7 @@ public class TypeReferenceSerializer {
 			return false;
 		if (context instanceof JvmDeclaredType && ((JvmDeclaredType) context).isStatic())
 			return false;
-		JvmIdentifiableElement jvmElement = contextProvider.getLogicalContainer(context);
+		JvmIdentifiableElement jvmElement = contextProvider.getNearestLogicalContainer(context);
 		if (jvmElement != null) {
 			return isLocalTypeParameter(jvmElement, parameter);
 		}

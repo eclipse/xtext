@@ -45,6 +45,12 @@ import com.google.inject.name.Named;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @author Sven Efftinge
+ * 
+ * @noextend This class is not intended to be subclassed by clients.
+ * @noinstantiate This class is not intended to be instantiated by clients.
+ * @noreference This class is not intended to be referenced by clients.
+ * 
+ * @since 2.7
  */
 @Singleton
 public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssociator, ILogicalContainerProvider, IDerivedStateComputer {
@@ -60,9 +66,6 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 
 	@Inject
 	private IJvmModelInferrer inferrer;
-
-	@Inject
-	private JvmModelInferrerRegistry inferrerRegistry;
 
 	@Inject
 	private JvmModelCompleter completer;
@@ -116,7 +119,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		return null;
 	}
 
-	public JvmIdentifiableElement getLogicalContainer(EObject context) {
+	public JvmIdentifiableElement getLogicalContainer(XExpression context) {
 		return getLogicalContainer(context, false);
 	}
 
@@ -152,7 +155,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		return null;
 	}
 
-	public void associateLogicalContainer(EObject logicalChild, JvmIdentifiableElement element) {
+	public void associateLogicalContainer(XExpression logicalChild, JvmIdentifiableElement element) {
 		if (logicalChild == null)
 			return;
 		final Map<EObject, JvmIdentifiableElement> mapping = getLogicalContainerMapping(logicalChild.eResource());
@@ -295,11 +298,13 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 			return;
 		EObject eObject = resource.getContents().get(0);
 
-		StoppedTask task = Stopwatches.forTask("primary JVM Model inference (JvmModelAssociator.installDerivedState)");
+		StoppedTask task = Stopwatches.forTask("JVM Model inference (JvmModelAssociator.installDerivedState)");
 		task.start();
-		// call primary inferrer
 		JvmDeclaredTypeAcceptor acceptor = new JvmDeclaredTypeAcceptor(resource);
 		try {
+			if (inferrer instanceof AbstractModelInferrer) {
+				((AbstractModelInferrer) inferrer).setContext(resource);
+			}
 			inferrer.infer(eObject, acceptor, preIndexingPhase);
 		} catch (RuntimeException e) {
 			LOG.error("Error calling inferrer", e);
@@ -311,27 +316,6 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 				} catch (RuntimeException e) {
 					LOG.error("Error calling inferrer", e);
 				}
-			}
-		}
-		task.stop();
-
-		task = Stopwatches.forTask("secondary (i.e. Macros) JVM Model inference (JvmModelAssociator.installDerivedState)");
-		task.start();
-		// call secondary inferrers
-		final String fileExtension = resource.getURI().fileExtension();
-		List<? extends IJvmModelInferrer> secondaryInferrers = inferrerRegistry.getModelInferrer(fileExtension);
-		for (IJvmModelInferrer secondaryInferrer : secondaryInferrers) {
-			acceptor = new JvmDeclaredTypeAcceptor(resource);
-			try {
-				secondaryInferrer.infer(eObject, acceptor, preIndexingPhase);
-				if (!preIndexingPhase) {
-					for (Pair<JvmDeclaredType, Procedure1<? super JvmDeclaredType>> initializer : acceptor.later) {
-						initializer.getValue().apply(initializer.getKey());
-					}
-				}
-			} catch (Exception e) {
-				inferrerRegistry.deregister(fileExtension, secondaryInferrer);
-				LOG.info("Removed errorneous model inferrer for *." + fileExtension + ". - " + secondaryInferrer, e);
 			}
 		}
 		task.stop();
@@ -425,6 +409,15 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 				}
 			}
 
+		}
+
+		@SuppressWarnings("unchecked")
+		public <T extends JvmDeclaredType> void accept(T type, Procedure1<? super T> lateInitialization) {
+			if (type != null && type.eContainer() == null)
+				resource.getContents().add(type);
+			if (lateInitialization != null && type != null) {
+				later.add(new Pair<JvmDeclaredType, Procedure1<? super JvmDeclaredType>>(type, (Procedure1<? super JvmDeclaredType>) lateInitialization));
+			}
 		}
 
 	}

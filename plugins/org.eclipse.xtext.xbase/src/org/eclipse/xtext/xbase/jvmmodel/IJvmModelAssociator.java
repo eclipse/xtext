@@ -8,23 +8,59 @@
 package org.eclipse.xtext.xbase.jvmmodel;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.xbase.XExpression;
 
 import com.google.inject.ImplementedBy;
 
 /**
+ * Used by clients to establish associations between source elements and inferred JVM elements.
+ * 
+ * @see IJvmModelAssociations
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  * @author Sven Efftinge
+ * 
+ * @noimplement This interface is not intended to be implemented by clients.
+ * 
+ * @since 2.7
  */
 @ImplementedBy(JvmModelAssociator.class)
 public interface IJvmModelAssociator {
 
+	/**
+	 * Associated the given source element with the given jvmElement.
+	 * @param sourceElement the source EObject
+	 * @param jvmElement the inferred EObject
+	 */
 	void associate(EObject sourceElement, EObject jvmElement);
 
+	/**
+	 * Associated the given source element with the given jvmElement and marks the association as primary
+	 * on both sides.
+	 * 
+	 * @param sourceElement the source EObject
+	 * @param jvmElement the inferred EObject
+	 */
 	void associatePrimary(EObject sourceElement, EObject jvmElement);
 	
-	void associateLogicalContainer(EObject logicalChild, JvmIdentifiableElement logicalContainer);
+	/**
+	 * Sets the given {@link JvmIdentifiableElement} as the logical container of the given {@link XExpression}.
+	 * The container must be an instanceof {@link JvmExecutable} or {@link JvmField}.
+	 * The logical container is used to scope and link the given expression.
+	 * 
+	 * Associating the logical container of an expression, automatically removes any previously logical containers for the given expression.
+	 * 
+	 *  @param expression the expression that is put into a scope
+	 *  @param logicalContainer a method, constructor or field that should act as the logical container of the given expression
+	 */
+	void associateLogicalContainer(XExpression expression, JvmIdentifiableElement logicalContainer);
 	
+	/**
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
 	void removeLogicalChildAssociation(JvmIdentifiableElement logicalContainer);
 	
 	/**

@@ -17,7 +17,10 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
+ *
  * @author Jan Koehnlein - Initial contribution and API
+ *
+ * @since 2.7
  */
 @Singleton
 public class JvmLocationInFileProvider extends XbaseLocationInFileProvider {
