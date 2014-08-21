@@ -71,6 +71,7 @@ import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.internal.FeatureLinkHelper;
@@ -1296,8 +1297,16 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 	}
 
-	protected void _toJavaIfStatement(XCasePart casePart, List<XCasePart> fallThroughCases, XSwitchExpression expr, XExpression then,
-			ITreeAppendable b, boolean isReferenced, String switchResultName, String matchedVariable, String variableName) {
+	protected void _toJavaIfStatement(
+			XCasePart casePart,
+			List<XCasePart> fallThroughCases,
+			XSwitchExpression expr,
+			XExpression then,
+			ITreeAppendable b,
+			boolean isReferenced,
+			String switchResultName,
+			String matchedVariable,
+			String variableName) {
 		ITreeAppendable caseAppendable = b;
 		if (!fallThroughCases.isEmpty()) {
 			boolean first = true;
@@ -1356,10 +1365,20 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			if (convertedType.isType(Boolean.TYPE) || convertedType.isType(Boolean.class)) {
 				internalToJavaExpression(casePart.getCase(), conditionAppendable);
 			} else {
-				conditionAppendable.append(Objects.class);
-				conditionAppendable.append(".equal(").append(variableName).append(", ");
-				internalToJavaExpression(casePart.getCase(), conditionAppendable);
-				conditionAppendable.append(")");
+				JvmType objectsType = findKnownType(Objects.class, casePart);
+				if (objectsType != null) {
+					conditionAppendable.append(objectsType);
+					conditionAppendable.append(".equal(").append(variableName).append(", ");
+					internalToJavaExpression(casePart.getCase(), conditionAppendable);
+					conditionAppendable.append(")");
+				} else {
+					// use ObjectExtensions rather than a == b || a != null && a.equals(b) since
+					// that won't work with primitive types and other incompatible conditional operands
+					conditionAppendable.append(ObjectExtensions.class);
+					conditionAppendable.append(".operator_equals(").append(variableName).append(", ");
+					internalToJavaExpression(casePart.getCase(), conditionAppendable);
+					conditionAppendable.append(")");
+				}
 			}
 			conditionAppendable.append(")");
 			caseAppendable.append(" {");

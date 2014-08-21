@@ -218,7 +218,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 			if (feature instanceof XVariableDeclaration) {
 				XVariableDeclaration casted = (XVariableDeclaration) feature;
 				if (casted.isWriteable()) {
-					String message = getState().getResolver().getInvalidWritableVariableAccessMessage(casted, getFeatureCall());
+					String message = getState().getResolver().getInvalidWritableVariableAccessMessage(casted, getFeatureCall(), getState().getResolvedTypes());
 					if (message != null) {
 						AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
 								IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS, message, getExpression(),
