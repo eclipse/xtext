@@ -36,6 +36,10 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * 
  * @noextend This class is not intended to be subclassed by clients.
+ * @noinstantiate This class is not intended to be instantiated by clients.
+ * @noreference This class is not intended to be referenced by clients.
+ * 
+ * @since 2.7
  */
 public class JvmModelCompleter {
 	

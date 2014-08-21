@@ -51,7 +51,6 @@ public class Case_14 extends AbstractXtendTestCase {
         final JvmGenericType secondType = Case_14.this._jvmTypesBuilder.toClass(obj, "foo.Baz");
         Resource _eResource = secondType.eResource();
         Assert.assertNull(_eResource);
-        IJvmDeclaredTypeAcceptor.IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(firstType);
         final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
           public void apply(final JvmGenericType it) {
             it.setAbstract(true);
@@ -61,8 +60,7 @@ public class Case_14 extends AbstractXtendTestCase {
             Assert.assertNotNull(_eResource_1);
           }
         };
-        _accept.initializeLater(_function);
-        IJvmDeclaredTypeAcceptor.IPostIndexingInitializing<JvmGenericType> _accept_1 = acceptor.<JvmGenericType>accept(secondType);
+        acceptor.<JvmGenericType>accept(firstType, _function);
         final Procedure1<JvmGenericType> _function_1 = new Procedure1<JvmGenericType>() {
           public void apply(final JvmGenericType it) {
             it.setAbstract(true);
@@ -70,7 +68,7 @@ public class Case_14 extends AbstractXtendTestCase {
             Assert.assertNotNull(_eResource);
           }
         };
-        _accept_1.initializeLater(_function_1);
+        acceptor.<JvmGenericType>accept(secondType, _function_1);
       }
     };
     this.assoc.setInferrer(_function);

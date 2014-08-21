@@ -22,9 +22,9 @@ class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
 
    	def dispatch void infer(Model m, /* @NonNull */ IJvmDeclaredTypeAcceptor acceptor, boolean prelinkingPhase) {
    		val e  = m.block
-   		acceptor.accept(e.toClass(e.eResource.name)).initializeLater [
+   		acceptor.accept(e.toClass(e.eResource.name)) [
    			members += e.toMethod("myMethod", inferredType) [
-   				exceptions += e.newTypeRef(Throwable)
+   				exceptions += typeRef(Throwable)
    				body = e
    			]
    		]

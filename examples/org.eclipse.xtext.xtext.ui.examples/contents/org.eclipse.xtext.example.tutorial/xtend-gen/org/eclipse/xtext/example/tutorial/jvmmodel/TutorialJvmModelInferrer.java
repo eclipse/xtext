@@ -36,7 +36,6 @@ public class TutorialJvmModelInferrer extends AbstractModelInferrer {
   protected void _infer(final Entity entity, final IJvmDeclaredTypeAcceptor acceptor, final boolean preIndexingPhase) {
     QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(entity);
     JvmGenericType _class = this._jvmTypesBuilder.toClass(entity, _fullyQualifiedName);
-    IJvmDeclaredTypeAcceptor.IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(_class);
     final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
       public void apply(final JvmGenericType it) {
         String _documentation = TutorialJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(entity);
@@ -47,7 +46,7 @@ public class TutorialJvmModelInferrer extends AbstractModelInferrer {
         }
       }
     };
-    _accept.initializeLater(_function);
+    acceptor.<JvmGenericType>accept(_class, _function);
   }
   
   /**

@@ -14,7 +14,7 @@ class SimpleJvmModelInferrer implements IJvmModelInferrer {
 	@Inject TypeReferences references
 	
 	override void infer(EObject e, IJvmDeclaredTypeAcceptor acceptor, boolean prelinkingPhase) {
-		acceptor.accept((e as XExpression).toClass("Test")).initializeLater [
+		acceptor.accept((e as XExpression).toClass("Test")) [
 			members += e.toMethod("doStuff", references.getTypeForName(typeof(String), e)) [
 				parameters += e.toParameter("s", references.getTypeForName(typeof(String), e))
 				setBody(e as XExpression)

@@ -27,7 +27,6 @@ public class SimpleJvmModelInferrer implements IJvmModelInferrer {
   
   public void infer(final EObject e, final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
     JvmGenericType _class = this._jvmTypesBuilder.toClass(((XExpression) e), "Test");
-    IJvmDeclaredTypeAcceptor.IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(_class);
     final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
       public void apply(final JvmGenericType it) {
         EList<JvmMember> _members = it.getMembers();
@@ -45,6 +44,6 @@ public class SimpleJvmModelInferrer implements IJvmModelInferrer {
         SimpleJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _method);
       }
     };
-    _accept.initializeLater(_function);
+    acceptor.<JvmGenericType>accept(_class, _function);
   }
 }

@@ -28,12 +28,12 @@ class Case_14 extends AbstractXtendTestCase {
                        val firstType = obj.toClass('foo.Bar')
                        val secondType = obj.toClass('foo.Baz')
                        assertNull(secondType.eResource)
-                       acceptor.accept(firstType).initializeLater[
+                       acceptor.accept (firstType) [
                                ^abstract = true
                                assertNotNull(firstType.eResource)
                                assertNotNull(secondType.eResource)
                        ]
-                       acceptor.accept(secondType).initializeLater[
+                       acceptor.accept (secondType) [
                                ^abstract = true
                                assertNotNull(firstType.eResource)
                        ]

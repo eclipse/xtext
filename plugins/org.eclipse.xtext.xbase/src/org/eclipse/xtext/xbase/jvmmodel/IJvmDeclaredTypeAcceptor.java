@@ -18,21 +18,42 @@ import org.eclipse.xtext.xbase.lib.Procedures;
  * to the {@link EObject}'s {@link org.eclipse.emf.ecore.resource.Resource} of the {@link EObject}.
  * 
  * @author Sven Efftinge - initial API
+ * 
+ * @noimplement This interface is not intended to be implemented by clients.
+ * 
+ * @since 2.7
  */
 public interface IJvmDeclaredTypeAcceptor {
 	
 	/**
 	 * Accepts a {@link JvmDeclaredType} with no container, to be added to the contents list of a {@link org.eclipse.emf.ecore.resource.Resource}.
-	 * @return a {@link IPostIndexingInitializing} to provide a post-indexing initialization of the given type.
+	 * @return don't reference. the return type is deprecated
 	 */
 	<T extends JvmDeclaredType> IJvmDeclaredTypeAcceptor.IPostIndexingInitializing<T> accept(T type);
 	
+	/**
+	 * Accepts a {@link JvmDeclaredType} with no container, to be added to the contents list of a {@link org.eclipse.emf.ecore.resource.Resource}.
+	 * The second parameter is a lazy initializer that is never executed during <i>preIndexingPhase</i>. 
+	 * 
+	 * @see IJvmModelInferrer#infer(EObject, IJvmDeclaredTypeAcceptor, boolean)
+	 * 
+	 * @param type the type to
+	 * @param lateInitialization the initializer
+	 */
+	<T extends JvmDeclaredType> void accept(T type, Procedures.Procedure1<? super T> lateInitialization);
 	
+	/**
+	 * @deprecated use {@link #accept(JvmDeclaredType, org.eclipse.xtext.xbase.lib.Procedures.Procedure1)} instead
+	 */
+	@Deprecated
 	interface IPostIndexingInitializing<T extends JvmDeclaredType> {
 		/**
 		 * The passed procedure will be executed only if in post-indexing phase, and it is executed after all {@link JvmDeclaredType} are created
 		 * and attached to the {@link org.eclipse.emf.ecore.resource.Resource}.
+		 * 
+		 * @deprecated use {@link #accept(JvmDeclaredType, org.eclipse.xtext.xbase.lib.Procedures.Procedure1)} instead
 		 */
+		@Deprecated
 		void initializeLater(Procedures.Procedure1<? super T> lateInitialization);
 	}
 }
