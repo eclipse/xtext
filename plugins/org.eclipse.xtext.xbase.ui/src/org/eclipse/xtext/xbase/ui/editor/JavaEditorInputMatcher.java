@@ -63,8 +63,8 @@ public class JavaEditorInputMatcher implements IEditorMatchingStrategy {
 							((XbaseEditor)existingEditor).markNextSelectionAsJavaOffset(newTypeRoot);
 						}
 					}
+					return true;
 				}
-				return true;
 			}
 			if (decisions.decideAccordingToCaller() == Decision.FORCE_JAVA)
 				return false;
