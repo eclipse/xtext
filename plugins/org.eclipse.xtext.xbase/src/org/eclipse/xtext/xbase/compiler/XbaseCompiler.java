@@ -120,10 +120,15 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	/* @Nullable */
 	protected LightweightTypeReference resolveType(XExpression element, Class<?> clazz) {
-		LightweightTypeReference elementType = batchTypeResolver.resolveTypes(element).getActualType(element);
+		LightweightTypeReference elementType = resolveType(element);
 		return elementType != null && elementType.isType(clazz) ? elementType : null;
 	}
 	
+	/* @Nullable */
+	protected LightweightTypeReference resolveType(XExpression element) {
+		return batchTypeResolver.resolveTypes(element).getActualType(element);
+	}
+
 	protected LightweightTypeReference getCollectionElementType(XCollectionLiteral literal) {
 		LightweightTypeReference type = getLightweightType(literal);
 		if (type == null)
@@ -539,8 +544,35 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	protected void _toJavaExpression(XInstanceOfExpression expr, ITreeAppendable b) {
+		//
+		// NOTE FOR IMPROVING THE PERFORMANCES OF THE GENERATED CODE
+		// (delayed since needing major changes in the unit tests):
+		//
+		// if (instanceOfExprType isSubTypeOf exprType) then
+		//      the instanceOf operator is always evaluated true
+		//      generate "true"
+		// else if (not instanceOfExprType isSubTypeOf exprType) then
+		//      the instanceOf operator is always evaluated false
+		//      generate "false"
+		// else
+		//      generate the Java expression "A instanceof B"
+		//
 		b.append("(");
-		internalToJavaExpression(expr.getExpression(), b);
+		// For avoid Java compilation error (bug 420959),
+		// we should retrieve the operand types.
+		XExpression instanceOfExpr =  expr.getExpression();
+		LightweightTypeReference instanceOfExprType = resolveType(instanceOfExpr);
+		LightweightTypeReference exprType = batchTypeResolver.resolveTypes(expr).getActualType(expr.getType().getType());
+		if (!instanceOfExprType.isSubtypeOf(exprType.getType())
+			&& !exprType.isSubtypeOf(instanceOfExprType.getType())) {
+			// For avoid Java compilation error (bug 420959),
+			// we force the left operand to be considered as an Object.
+			b.append("((Object) ");  
+			internalToJavaExpression(expr.getExpression(), b);
+			b.append(")");  
+		} else {
+			internalToJavaExpression(expr.getExpression(), b);
+		}
 		b.append(" instanceof ");
 		serialize(expr.getType(), expr, b);
 		b.append(")");
@@ -550,7 +582,15 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	 * @param isReferenced unused in this context but necessary for dispatch signature 
 	 */
 	protected void _toJavaStatement(XInstanceOfExpression expr, ITreeAppendable b, boolean isReferenced) {
-		internalToJavaStatement(expr.getExpression(), b, true);
+		// For avoid Java compilation error (bug 420959),
+		// we should retrieve the operand types.
+		XExpression instanceOfExpr =  expr.getExpression();
+		LightweightTypeReference instanceOfExprType = resolveType(instanceOfExpr);
+		LightweightTypeReference exprType = batchTypeResolver.resolveTypes(expr).getActualType(expr.getType().getType());
+		if (instanceOfExprType.isSubtypeOf(exprType.getType())
+			|| exprType.isSubtypeOf(instanceOfExprType.getType())) {
+			internalToJavaStatement(instanceOfExpr, b, true);
+		}
 	}
 
 	/**

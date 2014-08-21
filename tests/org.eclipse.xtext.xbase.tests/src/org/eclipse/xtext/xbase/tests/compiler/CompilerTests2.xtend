@@ -34,7 +34,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			while (treeIt.hasNext()) {
 			  {
 			    final CharSequence o = treeIt.next();
-			    if ((o instanceof java.util.List<?>)) {
+			    if ((((Object) o) instanceof java.util.List<?>)) {
 			      return o;
 			    } else {
 			      return o;

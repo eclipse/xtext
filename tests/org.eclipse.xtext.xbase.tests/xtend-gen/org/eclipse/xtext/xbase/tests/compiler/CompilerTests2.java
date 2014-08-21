@@ -68,7 +68,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
     _builder_1.append("final CharSequence o = treeIt.next();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("if ((o instanceof java.util.List<?>)) {");
+    _builder_1.append("if ((((Object) o) instanceof java.util.List<?>)) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("return o;");
