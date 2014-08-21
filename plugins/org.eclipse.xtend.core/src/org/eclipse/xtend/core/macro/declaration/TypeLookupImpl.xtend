@@ -9,6 +9,14 @@ import org.eclipse.xtend.lib.macro.declaration.MutableInterfaceDeclaration
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.xtype.XtypePackage
 import org.eclipse.xtext.common.types.TypesPackage
+import org.eclipse.xtext.common.types.access.impl.URIHelperConstants
+import org.eclipse.xtext.resource.IEObjectDescription
+import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
+import org.eclipse.xtend.core.xtend.XtendFile
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
+import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration
+import org.eclipse.xtend.lib.macro.declaration.EnumerationTypeDeclaration
+import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration
 
 class TypeLookupImpl implements TypeLookup {
 	
@@ -47,21 +55,66 @@ class TypeLookupImpl implements TypeLookup {
 	}
 	
 	private def findType(String qualifiedName) {
-		val result = recursiveFindType(qualifiedName, compilationUnit.xtendFile.eResource.contents.filter(JvmDeclaredType))
+		val result = recursiveFindType(
+			qualifiedName, 
+			compilationUnit.xtendFile.eResource.contents.filter(JvmDeclaredType),
+			[type|type.getQualifiedName('.')],
+			[type|type.members.filter(JvmDeclaredType)]
+		)
 		return if (result != null) {
 			compilationUnit.toType(result)
 		}
 	}
 	
-	private def JvmDeclaredType recursiveFindType(String qualifiedName, Iterable<? extends JvmDeclaredType> typeDeclarations) {
+	override findSourceClass(String qualifiedName) {
+		val type = findSourceType(qualifiedName)
+		return switch type {
+			ClassDeclaration : type
+		}
+	}
+	
+	override findSourceInterface(String qualifiedName) {
+		val type = findSourceType(qualifiedName)
+		return switch type {
+			InterfaceDeclaration : type
+		}
+	}
+	
+	override findSourceEnumerationType(String qualifiedName) {
+		val type = findSourceType(qualifiedName)
+		return switch type {
+			EnumerationTypeDeclaration : type
+		}
+	}
+	
+	override findSourceAnnotationType(String qualifiedName) {
+		val type = findSourceType(qualifiedName)
+		return switch type {
+			AnnotationTypeDeclaration : type
+		}
+	}
+	
+	private def findSourceType(String qualifiedName) {
+		val result = recursiveFindType(
+			qualifiedName, 
+			(compilationUnit.xtendFile.eResource.contents.head as XtendFile).xtendTypes,
+			[type|compilationUnit.qualifiedNameConverter.toString(compilationUnit.qualifiedNameProvider.getFullyQualifiedName(type))],
+			[type|type.members.filter(XtendTypeDeclaration)]
+		)
+		return if (result != null) {
+			compilationUnit.toXtendTypeDeclaration(result)
+		}
+	}
+	
+	private def <T> T recursiveFindType(String qualifiedName, Iterable<? extends T> typeDeclarations, (T)=>String qualifiedNameProvider, (T)=>Iterable<? extends T> subTypeProvider) {
 		val char dot = '.'
 		for (type : typeDeclarations) {
-			val name = type.getQualifiedName('.')
+			val name = qualifiedNameProvider.apply(type)
 			if (qualifiedName == name) {
 				return type
 			}
 			if (qualifiedName.startsWith(name) && qualifiedName.charAt(name.length) == dot) {
-				return recursiveFindType(qualifiedName, type.members.filter(JvmDeclaredType))
+				return recursiveFindType(qualifiedName, subTypeProvider.apply(type), qualifiedNameProvider, subTypeProvider)
 			}
 		}
 		return null
@@ -72,15 +125,25 @@ class TypeLookupImpl implements TypeLookup {
 	}
 	
 	override findTypeGlobally(String typeName) {
-		findType(typeName) ?: {
-			val qualifiedName = compilationUnit.qualifiedNameConverter.toQualifiedName(typeName)
-			val result = compilationUnit.scopeProvider
-				.getScope(compilationUnit.xtendFile, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE)
-				.getSingleElement(qualifiedName)
-			if (result !== null && TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(result.EClass))
-				compilationUnit.toType(result.EObjectOrProxy as JvmType)
-			else null
-		} 
+		findType(typeName) ?: findTypeOnScope(typeName)[true]
 	}
 	
+	override findUpstreamType(Class<?> clazz) {
+		findUpstreamType(clazz.canonicalName)
+	}
+	
+	override findUpstreamType(String typeName) {
+		findTypeOnScope(typeName)[EObjectURI.scheme == URIHelperConstants.PROTOCOL]
+	}
+	
+	private def findTypeOnScope(String typeName, (IEObjectDescription)=>boolean filter) {
+		val qualifiedName = compilationUnit.qualifiedNameConverter.toQualifiedName(typeName)
+		val result = compilationUnit.scopeProvider
+			.getScope(compilationUnit.xtendFile, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE)
+			.getSingleElement(qualifiedName)
+		if (result !== null && TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(result.EClass) && filter.apply(result)) {
+			return compilationUnit.toType(result.EObjectOrProxy as JvmType)
+		}
+		return null
+	}
 }

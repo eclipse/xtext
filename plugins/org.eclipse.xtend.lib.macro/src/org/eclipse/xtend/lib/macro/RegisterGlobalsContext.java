@@ -9,6 +9,8 @@ package org.eclipse.xtend.lib.macro;
 
 import org.eclipse.xtend.lib.macro.file.FileLocations;
 import org.eclipse.xtend.lib.macro.file.FileSystemSupport;
+import org.eclipse.xtend.lib.macro.services.SourceTypeLookup;
+import org.eclipse.xtend.lib.macro.services.UpstreamTypeLookup;
 
 import com.google.common.annotations.Beta;
 
@@ -21,7 +23,7 @@ import com.google.common.annotations.Beta;
  * @noimplement This interface is not intended to be implemented by clients.
  */
 @Beta
-public interface RegisterGlobalsContext extends FileSystemSupport, FileLocations {
+public interface RegisterGlobalsContext extends FileSystemSupport, FileLocations, UpstreamTypeLookup, SourceTypeLookup {
 	
 	/**
 	 * Registers and creates an empty Java class with given qualified name

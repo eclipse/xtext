@@ -52,6 +52,38 @@ class TypeLookupImplTest extends AbstractXtendTestCase {
 			assertNotNull(typeLookup.findAnnotationType('foo.MyClass.NestedAnnotationType'))
 		]
 	}
+	
+	@Test def void testFindUpstreamType() {
+		validFile('''
+			package foo
+			
+			class MyClass {}
+		''').asCompilationUnit [
+			assertNull(typeLookup.findUpstreamType('foo.MyClass'))
+			assertNotNull(typeLookup.findUpstreamType('java.lang.String'))
+		]
+	}
+	
+	@Test def void testFindSourceType() {
+		validFile('''
+			package foo
+			import org.eclipse.xtend.core.tests.macro.declaration.AddNestedTypes
+			
+			@AddNestedTypes class MyClass {}
+			@AddNestedTypes enum MyEnum {}
+			@AddNestedTypes interface MyInterface {}
+			@AddNestedTypes annotation MyAnnotation {}
+		''').asCompilationUnit [
+			assertNotNull(typeLookup.findSourceClass('foo.MyClass'))
+			assertNotNull(typeLookup.findSourceInterface('foo.MyInterface'))
+			assertNotNull(typeLookup.findSourceEnumerationType('foo.MyEnum'))
+			assertNotNull(typeLookup.findSourceAnnotationType('foo.MyAnnotation'))
+			assertNull(typeLookup.findSourceClass('foo.MyClass.NestedClass'))
+			assertNull(typeLookup.findSourceInterface('foo.MyClass.NestedInterface'))
+			assertNull(typeLookup.findSourceEnumerationType('foo.MyClass.NestedEnumerationType'))
+			assertNull(typeLookup.findSourceAnnotationType('foo.MyClass.NestedAnnotationType'))
+		]
+	}
 
 	@Inject Provider<CompilationUnitImpl> compilationUnitProvider
 	@Inject ProcessorInstanceForJvmTypeProvider instanceForJvmTypeProvider
