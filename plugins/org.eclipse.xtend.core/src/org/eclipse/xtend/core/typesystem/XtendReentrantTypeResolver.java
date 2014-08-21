@@ -22,6 +22,7 @@ import org.eclipse.xtend.core.jvmmodel.DispatchHelper;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
+import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendExecutable;
 import org.eclipse.xtend.core.xtend.XtendField;
@@ -30,6 +31,7 @@ import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
+import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -63,6 +65,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.InferredTypeIndicator;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
@@ -868,13 +871,20 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 	}
 	
 	@Override
-	protected String getInvalidWritableVariableAccessMessage(XVariableDeclaration variable, XAbstractFeatureCall featureCall) {
+	protected String getInvalidWritableVariableAccessMessage(XVariableDeclaration variable, XAbstractFeatureCall featureCall, IResolvedTypes resolvedTypes) {
 		// TODO this should be part of a separate validation service
-		EObject containingStructure = getNearestClosureOrTypeDeclaration(featureCall);
+		EObject containingStructure = getNearestClosureOrTypeDeclaration(featureCall, resolvedTypes);
 		if (containingStructure != null && !EcoreUtil.isAncestor(containingStructure, variable)) {
 			if (containingStructure instanceof XClosure) {
 				return String.format(
 						"Cannot %srefer to the non-final variable %s inside a lambda expression",
+						getImplicitlyMessagePart(featureCall),
+						variable.getSimpleName());
+			}
+			if (containingStructure instanceof RichString) {
+				return String.format(
+						"Cannot %srefer to the non-final variable %s inside this template.\n" +
+						"This template compiles to an anonymous subclass of StringConcatenationClient because of its target type.",
 						getImplicitlyMessagePart(featureCall),
 						variable.getSimpleName());
 			}
@@ -918,13 +928,19 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 		return null;
 	}
 	
-	private EObject getNearestClosureOrTypeDeclaration(EObject object) {
+	private EObject getNearestClosureOrTypeDeclaration(EObject object, IResolvedTypes resolvedTypes) {
 		while(object != null) {
 			if (object instanceof XClosure) {
 				return object;
 			}
 			if (object instanceof XtendTypeDeclaration) {
 				return object;
+			}
+			if (object instanceof RichString) {
+				LightweightTypeReference type = resolvedTypes.getActualType((RichString)object);
+				if (type != null && type.isType(StringConcatenationClient.class)) {
+					return object;
+				}
 			}
 			object = object.eContainer();
 		}

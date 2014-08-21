@@ -79,6 +79,44 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		preferences.clear();
 	}
 	
+	@Test public void testTemplateCompilesToStringConcatenation_01() throws Exception {
+		XtendClass clazz = clazz(
+				  "import org.eclipse.xtend2.lib.StringConcatenationClient\n"
+				+ "class Z {"
+				+ "  def StringConcatenationClient m() {"
+				+ "    var myVar = null"
+				+ "    return '''«myVar»'''"
+				+ "  }"
+				+ "}");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, INVALID_MUTABLE_VARIABLE_ACCESS, 
+				"Cannot refer to the non-final variable myVar inside this template.",
+				"This template compiles to an anonymous subclass of StringConcatenationClient because of its target type.");
+	}
+	
+	@Test public void testTemplateCompilesToStringConcatenation_02() throws Exception {
+		XtendClass clazz = clazz(
+				  "import org.eclipse.xtend2.lib.StringConcatenationClient\n"
+				+ "class Z {"
+				+ "  def StringConcatenationClient m() {"
+				+ "    val myVar = null"
+				+ "    return '''«myVar»'''"
+				+ "  }"
+				+ "}");
+		helper.assertNoErrors(clazz);
+	}
+
+	@Test public void testTemplateCompilesToStringConcatenation_03() throws Exception {
+		XtendClass clazz = clazz(
+				  "import org.eclipse.xtend2.lib.StringConcatenationClient\n"
+				+ "class Z {"
+				+ "  def m() {"
+				+ "    val myVar = null"
+				+ "    return '''«myVar»'''"
+				+ "  }"
+				+ "}");
+		helper.assertNoErrors(clazz);
+	}
+	
 	@Test public void testExtensionMayNotBePrimitive_01() throws Exception {
 		XtendClass clazz = clazz("class Z { extension int x = 1 }");
 		helper.assertError(clazz, XTEND_FIELD, INVALID_EXTENSION_TYPE);
