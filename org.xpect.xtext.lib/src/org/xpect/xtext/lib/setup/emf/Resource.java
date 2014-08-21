@@ -33,7 +33,7 @@ public class Resource implements ResourceFactory {
 	}
 
 	public org.eclipse.emf.ecore.resource.Resource create(FileSetupContext ctx, ResourceSet resourceSet) throws IOException {
-		URI resourceURI = ctx.resolve(delegate.getLocalURI(ctx).lastSegment());
+		URI resourceURI = ctx.resolve(delegate.getLocalURI(ctx).toString());
 		return ctx.load(resourceSet, resourceURI, delegate.getContents(ctx));
 	}
 
