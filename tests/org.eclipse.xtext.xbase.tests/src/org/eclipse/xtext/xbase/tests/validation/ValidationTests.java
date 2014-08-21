@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -33,6 +33,7 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @author Sven Efftinge
+ * @author Stephane Galland
  */
 public class ValidationTests extends AbstractXbaseTestCase {
 
@@ -805,6 +806,114 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertNoError(expression, OBSOLETE_INSTANCEOF);
 	}
 	
+	@Test public void testInstanceOf_15() throws Exception {
+		XExpression expression = expression("new testdata.ClassA instanceof testdata.ClassA");
+		helper.assertNoError(expression, INVALID_INSTANCEOF);
+		helper.assertWarning(expression, XINSTANCE_OF_EXPRESSION, OBSOLETE_INSTANCEOF, "already", "ClassA");
+	}
+
+	@Test public void testInstanceOf_16() throws Exception {
+		XExpression expression = expression("{ var testdata.ClassA foo = new testdata.ClassA() (foo instanceof testdata.ClassA) }");
+		helper.assertNoError(expression, INVALID_INSTANCEOF);
+		helper.assertWarning(expression, XINSTANCE_OF_EXPRESSION, OBSOLETE_INSTANCEOF, "already", "ClassA");
+	}
+
+	@Test public void testInstanceOf_17() throws Exception {
+		XExpression expression = expression("new testdata.ClassC instanceof testdata.ClassA");
+		helper.assertNoError(expression, INVALID_INSTANCEOF);
+		helper.assertWarning(expression, XINSTANCE_OF_EXPRESSION, OBSOLETE_INSTANCEOF, "already", "ClassA");
+	}
+
+	@Test public void testInstanceOf_18() throws Exception {
+		XExpression expression = expression("{ var testdata.ClassC foo = new testdata.ClassC() (foo instanceof testdata.ClassA) }");
+		helper.assertNoError(expression, INVALID_INSTANCEOF);
+		helper.assertWarning(expression, XINSTANCE_OF_EXPRESSION, OBSOLETE_INSTANCEOF, "already", "ClassA");
+	}
+
+	@Test public void testInstanceOf_19() throws Exception {
+		XExpression expression = expression("new testdata.ClassB instanceof testdata.ClassA");
+		helper.assertNoError(expression, INVALID_INSTANCEOF);
+		helper.assertWarning(expression, XINSTANCE_OF_EXPRESSION, OBSOLETE_INSTANCEOF, "cannot", "ClassA");
+	}
+
+	@Test public void testInstanceOf_20() throws Exception {
+		XExpression expression = expression("{ var testdata.ClassB foo = new testdata.ClassB() (foo instanceof testdata.ClassA) }");
+		helper.assertNoError(expression, INVALID_INSTANCEOF);
+		helper.assertWarning(expression, XINSTANCE_OF_EXPRESSION, OBSOLETE_INSTANCEOF, "cannot", "ClassA");
+	}
+
+	@Test public void testInstanceOf_21() throws Exception {
+		XExpression expression = expression("new testdata.ClassA instanceof testdata.ClassC");
+		helper.assertNoError(expression, INVALID_INSTANCEOF);
+		helper.assertNoError(expression, OBSOLETE_INSTANCEOF);
+	}
+
+	@Test public void testInstanceOf_22() throws Exception {
+		XExpression expression = expression("{ var testdata.ClassA foo = new testdata.ClassA() (foo instanceof testdata.ClassC) }");
+		helper.assertNoError(expression, INVALID_INSTANCEOF);
+		helper.assertNoError(expression, OBSOLETE_INSTANCEOF);
+	}
+
+	@Test public void testInstanceOf_23() throws Exception {
+		XExpression expression = expression("new testdata.ClassC instanceof testdata.ClassC");
+		helper.assertNoError(expression, INVALID_INSTANCEOF);
+		helper.assertWarning(expression, XINSTANCE_OF_EXPRESSION, OBSOLETE_INSTANCEOF, "already", "ClassC");
+	}
+
+	@Test public void testInstanceOf_24() throws Exception {
+		XExpression expression = expression("{ var testdata.ClassC foo = new testdata.ClassC() (foo instanceof testdata.ClassC) }");
+		helper.assertNoError(expression, INVALID_INSTANCEOF);
+		helper.assertWarning(expression, XINSTANCE_OF_EXPRESSION, OBSOLETE_INSTANCEOF, "already", "ClassC");
+	}
+
+	@Test public void testInstanceOf_25() throws Exception {
+		XExpression expression = expression("new testdata.ClassB instanceof testdata.ClassC");
+		helper.assertNoError(expression, INVALID_INSTANCEOF);
+		helper.assertWarning(expression, XINSTANCE_OF_EXPRESSION, OBSOLETE_INSTANCEOF, "cannot", "ClassC");
+	}
+
+	@Test public void testInstanceOf_26() throws Exception {
+		XExpression expression = expression("{ var testdata.ClassB foo = new testdata.ClassB() (foo instanceof testdata.ClassC) }");
+		helper.assertNoError(expression, INVALID_INSTANCEOF);
+		helper.assertWarning(expression, XINSTANCE_OF_EXPRESSION, OBSOLETE_INSTANCEOF, "cannot", "ClassC");
+	}
+
+	@Test public void testInstanceOf_27() throws Exception {
+		XExpression expression = expression("new testdata.ClassA instanceof testdata.ClassB");
+		helper.assertNoError(expression, INVALID_INSTANCEOF);
+		helper.assertWarning(expression, XINSTANCE_OF_EXPRESSION, OBSOLETE_INSTANCEOF, "cannot", "ClassB");
+	}
+
+	@Test public void testInstanceOf_28() throws Exception {
+		XExpression expression = expression("{ var testdata.ClassA foo = new testdata.ClassA() (foo instanceof testdata.ClassB) }");
+		helper.assertNoError(expression, INVALID_INSTANCEOF);
+		helper.assertWarning(expression, XINSTANCE_OF_EXPRESSION, OBSOLETE_INSTANCEOF, "cannot", "ClassB");
+	}
+
+	@Test public void testInstanceOf_29() throws Exception {
+		XExpression expression = expression("new testdata.ClassC instanceof testdata.ClassB");
+		helper.assertNoError(expression, INVALID_INSTANCEOF);
+		helper.assertWarning(expression, XINSTANCE_OF_EXPRESSION, OBSOLETE_INSTANCEOF, "cannot", "ClassB");
+	}
+
+	@Test public void testInstanceOf_30() throws Exception {
+		XExpression expression = expression("{ var testdata.ClassC foo = new testdata.ClassC() (foo instanceof testdata.ClassB) }");
+		helper.assertNoError(expression, INVALID_INSTANCEOF);
+		helper.assertWarning(expression, XINSTANCE_OF_EXPRESSION, OBSOLETE_INSTANCEOF, "cannot", "ClassB");
+	}
+
+	@Test public void testInstanceOf_31() throws Exception {
+		XExpression expression = expression("new testdata.ClassB instanceof testdata.ClassB");
+		helper.assertNoError(expression, INVALID_INSTANCEOF);
+		helper.assertWarning(expression, XINSTANCE_OF_EXPRESSION, OBSOLETE_INSTANCEOF, "already", "ClassB");
+	}
+
+	@Test public void testInstanceOf_32() throws Exception {
+		XExpression expression = expression("{ var testdata.ClassB foo = new testdata.ClassB() (foo instanceof testdata.ClassB) }");
+		helper.assertNoError(expression, INVALID_INSTANCEOF);
+		helper.assertWarning(expression, XINSTANCE_OF_EXPRESSION, OBSOLETE_INSTANCEOF, "already", "ClassB");
+	}
+
 	@Test public void testPrimitiveAsTypeGuard() throws Exception {
 		XCasePart expression = ((XSwitchExpression) expression("switch(new Object()) { int: 1 }")).getCases().get(0);
 		helper.assertError(expression, XCASE_PART, INVALID_USE_OF_TYPE, "primitive", "not", "allowed", "type", "guard");

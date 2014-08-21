@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -145,6 +145,7 @@ import com.google.inject.Provider;
  * validations that will be superseded by immediate error annotations during type resolution.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Stephane Galland 
  */
 @ComposedChecks(validators = { EarlyExitValidator.class })
 public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
@@ -820,26 +821,80 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			return;
 		}
 		if (containsTypeArgs(rightType)) {
-			error("Cannot perform instanceof check against parameterized type " + getNameOfTypes(rightType), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_INSTANCEOF);
+			error(String.format("Cannot perform instanceof check against parameterized type %s.",
+					getNameOfTypes(rightType)),
+					null,
+					ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+					INVALID_INSTANCEOF);
 			return;
 		}
 		if (leftType.isAny() || leftType.isUnknown()) {
 			return; // null / unknown is ok
 		}
 		if (rightType.isPrimitive()) {
-			error("Cannot perform instanceof check against primitive type " + this.getNameOfTypes(rightType), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_INSTANCEOF);
+			error(String.format("Cannot perform instanceof check against primitive type %s.",
+					getNameOfTypes(rightType)),
+				null,
+				ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+				INVALID_INSTANCEOF);
 			return;
 		}
 		if (leftType.isPrimitive() 
-			|| rightType.isArray() && !(leftType.isArray() || leftType.isType(Object.class) || leftType.isType(Cloneable.class) || leftType.isType(Serializable.class))
-			|| isFinal(rightType) && !memberOfTypeHierarchy(rightType, leftType)
-			|| isFinal(leftType) && !memberOfTypeHierarchy(leftType, rightType)) {
-			error("Incompatible conditional operand types " + this.getNameOfTypes(leftType)+" and "+this.getNameOfTypes(rightType), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_INSTANCEOF);
+			|| (rightType.isArray() && !(leftType.isArray() || leftType.isType(Object.class) || leftType.isType(Cloneable.class) || leftType.isType(Serializable.class)))) {
+			error(String.format("Incompatible conditional operand types %s and %s.",
+					getNameOfTypes(leftType),
+					getNameOfTypes(rightType)),
+					null,
+					ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+					INVALID_INSTANCEOF);
 			return;
 		}
+		// Do separate tests for the same error in order to be more efficient
+		boolean isLeftFinal = isFinal(leftType);
+		boolean isRightFinal = isFinal(rightType);
+		Boolean isNotMemberLR = null;
+		if (isLeftFinal) {
+			isNotMemberLR = !memberOfTypeHierarchy(leftType, rightType);
+			if (isNotMemberLR.booleanValue()) {
+				error(String.format("Incompatible conditional operand types %s and %s.",
+						getNameOfTypes(leftType),
+						getNameOfTypes(rightType)),
+					null,
+					ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+					INVALID_INSTANCEOF);
+				return;
+			}
+		}
+		if (isRightFinal) {
+			if (!memberOfTypeHierarchy(rightType, leftType)) {
+				error(String.format("Incompatible conditional operand types %s and %s.",
+						getNameOfTypes(leftType),
+						getNameOfTypes(rightType)),
+						null,
+						ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+						INVALID_INSTANCEOF);
+				return;
+			}
+		}
+		else if (!isLeftFinal && !memberOfTypeHierarchy(rightType, leftType)) {
+			if (isNotMemberLR == null) {
+				isNotMemberLR = !memberOfTypeHierarchy(leftType, rightType);
+			}
+			if (isNotMemberLR.booleanValue()) {
+				addIssueToState(OBSOLETE_INSTANCEOF,
+						String.format("The expression of type %s cannot be of type %s.",
+								getNameOfTypes(leftType),
+								canonicalName(rightType)),
+						null);
+				return;
+			}
+		}
 		if (!isIgnored(OBSOLETE_INSTANCEOF) && rightType.isAssignableFrom(leftType, new TypeConformanceComputationArgument(false, false, true, true, false, false))) {
-			addIssueToState(OBSOLETE_INSTANCEOF, "The expression of type " + getNameOfTypes(leftType)
-					+ " is already of type " + canonicalName(rightType), null);
+			addIssueToState(OBSOLETE_INSTANCEOF,
+					String.format("The expression of type %s is already of type %s.",
+							getNameOfTypes(leftType),
+							canonicalName(rightType)),
+					null);
 		}
 	}
 

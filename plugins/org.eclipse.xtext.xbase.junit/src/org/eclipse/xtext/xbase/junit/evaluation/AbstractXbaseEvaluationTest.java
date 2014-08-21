@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -40,6 +40,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
+ * @author Stephane Galland
  */
 public abstract class AbstractXbaseEvaluationTest extends Assert {
 	
@@ -2784,6 +2785,78 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo("0", "{ val Object x = new StringBuilder; if (x instanceof Appendable) if (x instanceof CharSequence) x.append(x.length().toString()) x.toString }");
 	}
 	
+	@Test public void testInstanceOf_15() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, "new testdata.ClassA instanceof testdata.ClassA");
+	}
+
+	@Test public void testInstanceOf_16() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, "{ var testdata.ClassA foo = new testdata.ClassA() (foo instanceof testdata.ClassA) }");
+	}
+
+	@Test public void testInstanceOf_17() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, "new testdata.ClassC instanceof testdata.ClassA");
+	}
+
+	@Test public void testInstanceOf_18() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, "{ var testdata.ClassC foo = new testdata.ClassC() (foo instanceof testdata.ClassA) }");
+	}
+
+	@Test public void testInstanceOf_19() throws Exception {
+		assertEvaluatesTo(Boolean.FALSE, "new testdata.ClassB instanceof testdata.ClassA");
+	}
+
+	@Test public void testInstanceOf_20() throws Exception {
+		assertEvaluatesTo(Boolean.FALSE, "{ var testdata.ClassB foo = new testdata.ClassB() (foo instanceof testdata.ClassA) }");
+	}
+
+	@Test public void testInstanceOf_21() throws Exception {
+		assertEvaluatesTo(Boolean.FALSE, "new testdata.ClassA instanceof testdata.ClassC");
+	}
+
+	@Test public void testInstanceOf_22() throws Exception {
+		assertEvaluatesTo(Boolean.FALSE, "{ var testdata.ClassA foo = new testdata.ClassA() (foo instanceof testdata.ClassC) }");
+	}
+
+	@Test public void testInstanceOf_23() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, "new testdata.ClassC instanceof testdata.ClassC");
+	}
+
+	@Test public void testInstanceOf_24() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, "{ var testdata.ClassC foo = new testdata.ClassC() (foo instanceof testdata.ClassC) }");
+	}
+
+	@Test public void testInstanceOf_25() throws Exception {
+		assertEvaluatesTo(Boolean.FALSE, "new testdata.ClassB instanceof testdata.ClassC");
+	}
+
+	@Test public void testInstanceOf_26() throws Exception {
+		assertEvaluatesTo(Boolean.FALSE, "{ var testdata.ClassB foo = new testdata.ClassB() (foo instanceof testdata.ClassC) }");
+	}
+
+	@Test public void testInstanceOf_27() throws Exception {
+		assertEvaluatesTo(Boolean.FALSE, "new testdata.ClassA instanceof testdata.ClassB");
+	}
+
+	@Test public void testInstanceOf_28() throws Exception {
+		assertEvaluatesTo(Boolean.FALSE, "{ var testdata.ClassA foo = new testdata.ClassA() (foo instanceof testdata.ClassB) }");
+	}
+
+	@Test public void testInstanceOf_29() throws Exception {
+		assertEvaluatesTo(Boolean.FALSE, "new testdata.ClassC instanceof testdata.ClassB");
+	}
+
+	@Test public void testInstanceOf_30() throws Exception {
+		assertEvaluatesTo(Boolean.FALSE, "{ var testdata.ClassC foo = new testdata.ClassC() (foo instanceof testdata.ClassB) }");
+	}
+
+	@Test public void testInstanceOf_31() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, "new testdata.ClassB instanceof testdata.ClassB");
+	}
+
+	@Test public void testInstanceOf_32() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, "{ var testdata.ClassB foo = new testdata.ClassB() (foo instanceof testdata.ClassB) }");
+	}
+
 	@Test public void testClosure_01() throws Exception {
 		assertEvaluatesTo("literal", "new testdata.ClosureClient().invoke0(|'literal')");
 	}
