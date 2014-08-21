@@ -12,6 +12,8 @@
 
 package org.eclipse.jdt.junit4.runtime.patch;
 
+import java.util.List;
+
 import org.eclipse.jdt.internal.junit.runner.ITestIdentifier;
 import org.eclipse.jdt.internal.junit.runner.IVisitsTestTrees;
 import org.eclipse.jdt.internal.junit4.runner.JUnit4Identifier;
@@ -24,17 +26,33 @@ public class JUnit4TestMethodReference extends JUnit4TestReference {
 
 	public JUnit4TestMethodReference(Class<?> clazz, String methodName, String[] failureNames) {
 		Request request = Request.classWithoutSuiteMethod(clazz);
-		Description desc = findDescriptionInTree(request.getRunner().getDescription(), clazz.getName(), methodName);
+		Description rootDesc = request.getRunner().getDescription();
+		Description desc = findDescriptionInTree(rootDesc, clazz.getName(), methodName);
 		if (desc != null) {
 			this.fDescription = desc;
 			request = request.filterWith(new SetBasedFilter(desc));
 		} else {
-			this.fDescription = desc;
+			System.err.println("Could not find \nclass:" + clazz.getName() + " \ntest:" + methodName + "\ninside:\n" + toString(rootDesc));
+			this.fDescription = rootDesc;
 		}
 		if (failureNames != null) {
 			request = request.sortWith(new FailuresFirstSorter(failureNames));
 		}
 		this.fRunner = request.getRunner();
+	}
+
+	private String toString(Description desc) {
+		StringBuilder builder = new StringBuilder(desc.toString());
+		List<Description> children = desc.getChildren();
+		if (!children.isEmpty()) {
+			builder.append(" {");
+			for (Description obj : children) {
+				builder.append("\n  ");
+				builder.append(toString(obj).replace("\n", "\n  "));
+			}
+			builder.append("\n}");
+		}
+		return builder.toString();
 	}
 
 	public String getName() {
