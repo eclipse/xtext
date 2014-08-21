@@ -91,16 +91,24 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 	}
 
 	protected Adapter getOrInstall(Resource resource) {
-		if (!(resource instanceof XtextResource))
-			return new Adapter();
-		if (!languageName.equals(((XtextResource) resource).getLanguageName()))
-			return new Adapter();
+		if (!(resource instanceof XtextResource)) {
+			return handleIllegalArgument("Associations are only tracked on XtextResources");
+		}
+		String resourceLanguageName = ((XtextResource) resource).getLanguageName();
+		if (!languageName.equals(resourceLanguageName)){
+			return handleIllegalArgument("JvmModelAssociator of language '"+languageName+"' used to obtain adapter from resource of language '"+resourceLanguageName+"'.");
+		}
 		Adapter adapter = (Adapter) EcoreUtil.getAdapter(resource.eAdapters(), Adapter.class);
 		if (adapter == null) {
 			adapter = new Adapter();
 			resource.eAdapters().add(adapter);
 		}
 		return adapter;
+	}
+
+	protected Adapter handleIllegalArgument(String msg) {
+		LOG.error(msg, new IllegalStateException());
+		return new Adapter();
 	}
 
 	protected Map<EObject, JvmIdentifiableElement> getLogicalContainerMapping(Resource resource) {
