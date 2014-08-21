@@ -63,7 +63,7 @@ public class XtendLibClasspathAdderTest extends AbstractXtendUITestCase {
 		IJavaProject javaProject = JavaCore.create(project);
 		JavaProjectSetupUtil.makeJava5Compliant(javaProject);
 		IFile file = project.getFile("src/Foo.xtend");
-		file.create(new StringInputStream("import org.eclipse.xtend.lib.Property class Foo { @Property int bar }"),
+		file.create(new StringInputStream("import org.eclipse.xtend.lib.annotations.Accessors class Foo { @Accessors int bar }"),
 				true, null);
 		IResourcesSetupUtil.waitForAutoBuild();
 		markerAssert.assertErrorMarker(file, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
@@ -84,7 +84,7 @@ public class XtendLibClasspathAdderTest extends AbstractXtendUITestCase {
 		IJavaProject javaProject = JavaCore.create(project);
 		JavaProjectSetupUtil.makeJava5Compliant(javaProject);
 		IFile file = project.getFile("src/Foo.xtend");
-		file.create(new StringInputStream("import org.eclipse.xtend.lib.Property class Foo { @Property int bar }"),
+		file.create(new StringInputStream("import org.eclipse.xtend.lib.annotations.Accessors class Foo { @Accessors int bar }"),
 				true, null);
 		IResourcesSetupUtil.waitForAutoBuild();
 		markerAssert.assertErrorMarker(file, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
@@ -106,7 +106,7 @@ public class XtendLibClasspathAdderTest extends AbstractXtendUITestCase {
 		JavaProjectSetupUtil.makeJava5Compliant(javaProject);
 		project.findMember("META-INF").delete(true, null);
 		IFile file = project.getFile("src/Foo.xtend");
-		file.create(new StringInputStream("import org.eclipse.xtend.lib.Property class Foo { @Property int bar }"),
+		file.create(new StringInputStream("import org.eclipse.xtend.lib.annotations.Accessors class Foo { @Accessors int bar }"),
 				true, null);
 		IResourcesSetupUtil.waitForAutoBuild();
 		markerAssert.assertErrorMarker(file, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);

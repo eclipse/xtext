@@ -46,6 +46,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.util.DeprecationUtil;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
@@ -108,6 +109,7 @@ import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
+import org.eclipse.xtext.xbase.typesystem.internal.util.FeatureKinds;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.InnerFunctionTypeReference;
@@ -196,7 +198,10 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	private Primitives primitives;
 	
 	@Inject
-	private JvmTypeExtensions jvmTypeExtensions; 
+	private JvmTypeExtensions jvmTypeExtensions;
+	
+	@Inject
+	private UIStrings uiStrings;
 	
 	protected CommonTypeComputationServices getServices() {
 		return services;
@@ -1785,5 +1790,117 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	
 	protected ILogicalContainerProvider getLogicalContainerProvider() {
 		return logicalContainerProvider;
+	}
+	
+	private String getQualifiedSimpleName(JvmIdentifiableElement element) {
+		if (element.eContainer() instanceof JvmType) {
+			return getQualifiedSimpleName((JvmIdentifiableElement) element.eContainer()) + "." + element.getSimpleName();
+		}
+		return element.getSimpleName();
+	}
+	
+	protected void checkDeprecated(
+			JvmIdentifiableElement object,
+			EObject source,
+			EStructuralFeature structuralFeature) {
+		if (object instanceof JvmMember && object.eResource() != source.eResource()) {
+			JvmMember member = (JvmMember) object;
+			if (DeprecationUtil.isTransitivelyDeprecatedMember(member)) {
+				JvmIdentifiableElement logicalContainer = getLogicalContainerProvider().getNearestLogicalContainer(source);
+				if (logicalContainer != null) {
+					JvmMember containingMember = EcoreUtil2.getContainerOfType(logicalContainer, JvmMember.class);
+					if (DeprecationUtil.isTransitivelyDeprecatedMember(containingMember)) {
+						return;
+					}
+				}
+				
+				String message = null;
+				if (member instanceof JvmOperation) {
+					JvmIdentifiableElement container = (JvmIdentifiableElement) member.eContainer();
+					// "The method m(Arg, Arg2) from the type C is deprecated"
+					message = String.format("The %s %s%s from the %s %s is deprecated", 
+							FeatureKinds.getTypeName(member),
+							object.getSimpleName(),
+							uiStrings.parameters(member),
+							FeatureKinds.getTypeName(container),
+							getQualifiedSimpleName(container));
+				} else if (member instanceof JvmField) {
+					JvmIdentifiableElement container = (JvmIdentifiableElement) member.eContainer();
+					// "The field C.f is deprecated"
+					// "The enum literal E.lit is deprecated"
+					message = String.format("The %s %s.%s is deprecated", 
+							FeatureKinds.getTypeName(member),
+							getQualifiedSimpleName(container),
+							object.getSimpleName());
+				} else if (member instanceof JvmConstructor) {
+					// "The constructor C(Arg) is deprecated."
+					message = String.format("The %s %s%s is deprecated", FeatureKinds.getTypeName(member), getQualifiedSimpleName(member.getDeclaringType()), uiStrings.parameters(member));
+				} else {
+					// "The type C is deprecated."
+					message = String.format("The %s %s is deprecated", FeatureKinds.getTypeName(member), getQualifiedSimpleName(object));
+				}
+				addIssue(
+						message,
+						source,
+						structuralFeature,
+						ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+						DEPRECATED_MEMBER_REFERENCE);
+			}
+		}
+	}
+
+	@Check
+	public void checkDeprecated(JvmParameterizedTypeReference type) {
+		if (!isIgnored(DEPRECATED_MEMBER_REFERENCE)) {
+			JvmType jvmType = type.getType();
+			checkDeprecated(
+					jvmType,
+					type,
+					TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
+		}
+	}
+
+	@Check
+	public void checkDeprecated(XImportDeclaration decl) {
+		if (!isIgnored(DEPRECATED_MEMBER_REFERENCE)) {
+			JvmType jvmType = decl.getImportedType();
+			checkDeprecated(
+					jvmType,
+					decl,
+					XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE);
+		}
+	}
+
+	@Check
+	public void checkDeprecated(XAbstractFeatureCall expression) {
+		if (!isIgnored(DEPRECATED_MEMBER_REFERENCE)) {
+			JvmIdentifiableElement feature = expression.getFeature();
+			checkDeprecated(
+					feature,
+					expression,
+					XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
+		}
+	}
+
+	@Check
+	public void checkDeprecated(XConstructorCall expression) {
+		if (!isIgnored(DEPRECATED_MEMBER_REFERENCE)) {
+			JvmConstructor constructor = expression.getConstructor();
+			checkDeprecated(
+					constructor,
+					expression,
+					XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR);
+		}
+	}
+
+	@Check
+	public void checkDeprecated(XTypeLiteral expression) {
+		if (!isIgnored(DEPRECATED_MEMBER_REFERENCE)) {
+			JvmType jvmType = expression.getType();
+			checkDeprecated(
+					jvmType,
+					expression,
+					XbasePackage.Literals.XTYPE_LITERAL__TYPE);
+		}
 	}
 }

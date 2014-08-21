@@ -18,6 +18,7 @@ public class Messages extends NLS {
 	public static String XbaseValidationConfigurationBlock_build_dailog_ws_message;
 	public static String XbaseValidationConfigurationBlock_build_dialog_title;
 	public static String XbaseValidationConfigurationBlock_build_job_title;
+	public static String XbaseValidationConfigurationBlock_deprecated_ref_label;
 	public static String XbaseValidationConfigurationBlock_discouraged_ref_label;
 	public static String XbaseValidationConfigurationBlock_error;
 	public static String XbaseValidationConfigurationBlock_forbidden_ref_label;

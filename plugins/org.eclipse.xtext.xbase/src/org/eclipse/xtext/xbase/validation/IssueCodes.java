@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.validation;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Stéphane Galland - Add the "deprecation" warning.
  */
 public class IssueCodes {
 	
@@ -135,9 +136,15 @@ public class IssueCodes {
 	public static final String INVALID_TYPE_ARGUMENTS_ON_TYPE_LITERAL = ISSUE_CODE_PREFIX + "invalid_type_arguments_on_type_literal";
 
 	public static final String OPERATION_WITHOUT_PARENTHESES = ISSUE_CODE_PREFIX + "operation_without_parentheses";
-	// IssueCode to control DerivedResourceMarkerCopier
-	// See org.eclipse.xtext.builder.smap.DerivedResourceMarkerCopier 
+	/**
+	 * IssueCode to control DerivedResourceMarkerCopier
+	 */
+	// @see org.eclipse.xtext.builder.smap.DerivedResourceMarkerCopier
 	public static final String COPY_JAVA_PROBLEMS = "org.eclipse.xtext.builder.copyJavaProblems";
+	/**
+	 * A deprecated feature is used.
+	 */
+	public static final String DEPRECATED_MEMBER_REFERENCE = ISSUE_CODE_PREFIX + "deprecated_member_reference";
 	
 	private IssueCodes() {
 	}

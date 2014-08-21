@@ -22,7 +22,7 @@ import org.eclipse.xtext.util.Strings;
 import com.google.inject.Inject;
 
 /**
- * @author dhuebner - Initial contribution and API
+ * @author Dennis Huebner - Initial contribution and API
  */
 public class MarkerAssertions {
 
