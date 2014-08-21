@@ -165,8 +165,8 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 		Integer index = handleToListIndex.remove(handle);
 		if (index != null) {
 			AttributedPosition position= removedPositions.get(index);
-			if (position == null || !position.isEqual(offset, length, highlighting)) {
-				throw new IllegalStateException();
+			if (position == null) {
+				throw new IllegalStateException("Position may not be null if the handle is still present.");
 			}
 			isExisting = true;
 			removedPositions.set(index, null);
