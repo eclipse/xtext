@@ -165,7 +165,14 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 		state.computeTypes();
 	}
 	
-	protected String getInvalidWritableVariableAccessMessage(XVariableDeclaration variable, XAbstractFeatureCall featureCall) {
+	/**
+	 * Provide the error message for mutable variables that may not be captured in lambdas.
+	 * 
+	 * @param variable the writable variable declaration
+	 * @param featureCall the reference to the variable
+	 * @param resolvedTypes type information
+	 */
+	protected String getInvalidWritableVariableAccessMessage(XVariableDeclaration variable, XAbstractFeatureCall featureCall, IResolvedTypes resolvedTypes) {
 		// TODO this should be part of a separate validation service
 		XClosure containingClosure = EcoreUtil2.getContainerOfType(featureCall, XClosure.class);
 		if (containingClosure != null && !EcoreUtil.isAncestor(containingClosure, variable)) {
