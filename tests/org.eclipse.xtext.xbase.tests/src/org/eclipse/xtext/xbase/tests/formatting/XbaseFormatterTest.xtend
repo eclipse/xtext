@@ -713,6 +713,24 @@ class XbaseFormatterTest extends AbstractXbaseFormatterTest {
 		''')	
 	}
 	
+	@Test def formatSwitchDefault2MLFallThrough() {
+		assertFormattedExpression('''
+			switch 'x' {
+				case 'x',
+				case 'y':
+					println('y')
+				default:
+					println('z')
+			}
+		''', '''
+			switch 'x'  {   
+				case 'x'  ,   case   'y':    println('y')     
+				default  :    
+					println('z')
+			}
+		''')	
+	}
+	
 	@Test def formatSwitchMLBlock() {
 		assertFormattedExpression([
 			it.put(bracesInNewLine, false)
