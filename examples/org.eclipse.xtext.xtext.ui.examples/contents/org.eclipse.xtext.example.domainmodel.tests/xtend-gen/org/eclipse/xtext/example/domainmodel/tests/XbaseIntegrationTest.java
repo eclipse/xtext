@@ -21,8 +21,6 @@ import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
@@ -82,16 +80,6 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
         _xblockexpression = method.invoke(foo);
       }
       return _xblockexpression;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
-  @Test
-  @Ignore
-  public void testImplicitOneArgClosure_01() {
-    try {
-      super.testImplicitOneArgClosure_01();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
