@@ -14,8 +14,6 @@ import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler$EclipseRuntimeDepen
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest
 import org.eclipse.xtext.xbase.lib.Functions
 import org.junit.Before
-import org.junit.Ignore
-import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
@@ -28,8 +26,8 @@ import org.junit.runner.RunWith
  * 
  * @author Sven Efftinge
  */
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(InjectorProviderCustom))
+@RunWith(XtextRunner)
+@InjectWith(InjectorProviderCustom)
 public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 
 	@Inject EclipseRuntimeDependentJavaCompiler javaCompiler
@@ -43,11 +41,11 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 	@Before
 	def void initializeClassPath(){
 		javaCompiler.addClassPathOfClass(getClass()) // this bundle
-		javaCompiler.addClassPathOfClass(typeof(AbstractXbaseEvaluationTest)) // xbase.junit
-		javaCompiler.addClassPathOfClass(typeof(Functions)) // xbase.lib
-		javaCompiler.addClassPathOfClass(typeof(Provider))  // google guice
-		javaCompiler.addClassPathOfClass(typeof(Supplier))  // google collect
-		javaCompiler.addClassPathOfClass(typeof(javax.inject.Inject))  // javax inject
+		javaCompiler.addClassPathOfClass(AbstractXbaseEvaluationTest) // xbase.junit
+		javaCompiler.addClassPathOfClass(Functions) // xbase.lib
+		javaCompiler.addClassPathOfClass(Provider)  // google guice
+		javaCompiler.addClassPathOfClass(Supplier)  // google collect
+		javaCompiler.addClassPathOfClass(javax.inject.Inject)  // javax inject
 	}
 
 	protected override invokeXbaseExpression(String expression) {
@@ -60,12 +58,6 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 		val foo = clazz.newInstance()
 		val method = clazz.getDeclaredMethod("doStuff")
 		method.invoke(foo)
-	}
-	
-	@Test
-	@Ignore
-	override testImplicitOneArgClosure_01() {
-		super.testImplicitOneArgClosure_01()
 	}
 	
 }
