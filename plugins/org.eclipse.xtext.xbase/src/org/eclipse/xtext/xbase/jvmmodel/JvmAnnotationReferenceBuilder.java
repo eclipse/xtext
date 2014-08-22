@@ -23,12 +23,12 @@ import com.google.inject.Provider;
  * 
  * @since 2.7
  */
-public class JvmAnnotationTypesBuilder {
+public class JvmAnnotationReferenceBuilder {
 	
 	public static class Factory {
-		@Inject Provider<JvmAnnotationTypesBuilder> builderProvider;
-		public JvmAnnotationTypesBuilder create(Resource context) {
-			JvmAnnotationTypesBuilder result = builderProvider.get();
+		@Inject Provider<JvmAnnotationReferenceBuilder> builderProvider;
+		public JvmAnnotationReferenceBuilder create(Resource context) {
+			JvmAnnotationReferenceBuilder result = builderProvider.get();
 			result.context = context;
 			return result;
 		}
