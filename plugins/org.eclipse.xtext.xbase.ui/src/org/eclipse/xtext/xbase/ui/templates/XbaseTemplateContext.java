@@ -79,7 +79,7 @@ public class XbaseTemplateContext extends XtextTemplateContext {
 
 		Position position = new Position(getCompletionOffset(), 0);
 		List<ReplaceRegion> rewrite = createImports(imports, xDocument);
-		if (rewrite.size() > 0) {
+		if (rewrite.size() > 0 && !isReadOnly()) {
 			// Remember the completion offset before performing doc changes
 			final String category = "__template_position_import_section" + System.currentTimeMillis(); //$NON-NLS-1$
 			IPositionUpdater updater = new DefaultPositionUpdater(category);
@@ -121,12 +121,36 @@ public class XbaseTemplateContext extends XtextTemplateContext {
 		});
 	}
 
+	private boolean checkImports(final List<String> types, XtextDocument document) {
+		return document.priorityReadOnly(new IUnitOfWork<Boolean, XtextResource>() {
+			public Boolean exec(XtextResource state) throws Exception {
+				for (String fqName : types) {
+					JvmDeclaredType jvmType = findJvmDeclaredType(fqName, state.getResourceSet());
+					if (jvmType == null) {
+						return false;
+					}
+				}
+				return true;
+			}
+		});
+	}
+
 	private JvmDeclaredType findJvmDeclaredType(String fqName, ResourceSet resourceSet) {
 		JvmType typeByName = jvmTypeProviderfactory.findTypeProvider(resourceSet).findTypeByName(fqName);
 		if (typeByName instanceof JvmDeclaredType) {
 			return (JvmDeclaredType) typeByName;
 		}
 		return null;
+	}
+
+	@Override
+	public boolean canEvaluate(Template template) {
+		boolean canEvaluate = super.canEvaluate(template);
+		if (canEvaluate && !imports.isEmpty()) {
+			XtextDocument xDocument = (XtextDocument) getDocument();
+			return checkImports(imports, xDocument);
+		}
+		return canEvaluate;
 	}
 
 	public void addImport(String typeName) {
