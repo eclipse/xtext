@@ -55,8 +55,7 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
 							}
 							// here the body is implemented using a user expression.
 							// Note that by doing this we set the expression into the context of this method, 
-							// Therefore the expression will be scoped like it. You'll automatically see the 
-							// parameters, 'this' and all the members of this. 
+							// The parameters, 'this' and all the members of this method will be visible for the expression. 
 							body = f.body
 						]
 					}
