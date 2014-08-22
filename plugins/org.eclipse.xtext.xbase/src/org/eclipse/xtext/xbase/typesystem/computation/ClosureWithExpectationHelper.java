@@ -108,6 +108,8 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 				markIncompatible();
 		} else if (flags == ConformanceFlags.LAMBDA_RAW_COMPATIBLE) {
 			markRawCompatible();
+		} else if (flags == ConformanceFlags.LAMBDA_VOID_COMPATIBLE) {
+			markVoidCompatible();
 		} else {
 			markUncheckedValid();
 		}
@@ -155,6 +157,16 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 		}
 	}
 
+	protected void markVoidCompatible() {
+		if (preferredSugar) {
+			getExpectation().acceptActualType(resultClosureType, ConformanceFlags.CHECKED_SUCCESS | ConformanceFlags.LAMBDA_VOID_COMPATIBLE |
+					ConformanceFlags.PROPAGATED_TYPE | ConformanceFlags.SEALED | ConformanceFlags.PREFERRED_LAMBDA_SUGAR);
+		} else {
+			getExpectation().acceptActualType(resultClosureType, ConformanceFlags.CHECKED_SUCCESS | ConformanceFlags.LAMBDA_VOID_COMPATIBLE |
+					ConformanceFlags.PROPAGATED_TYPE | ConformanceFlags.SEALED);
+		}
+	}
+	
 	/**
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
@@ -369,6 +381,7 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 	 * <li>{@link ConformanceFlags#NONE},</li>
 	 * <li>{@link ConformanceFlags#INCOMPATIBLE}, or</li>
 	 * <li>{@link ConformanceFlags#LAMBDA_RAW_COMPATIBLE}</li>
+	 * <li>{@link ConformanceFlags#LAMBDA_VOID_COMPATIBLE}</li>
 	 * </ul>
 	 */
 	protected int processExpressionType(ITypeComputationResult expressionResult) {
@@ -378,6 +391,9 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 			if (returnType == null)
 				throw new IllegalStateException("return type shall not be null");
 			resultClosureType.setReturnType(returnType);
+			if (validParameterTypes && returnType.isPrimitiveVoid()) {
+				return ConformanceFlags.INCOMPATIBLE;
+			}
 		} else {
 			LightweightTypeReference expectedReturnType = expectedClosureType.getReturnType();
 			if (expectedReturnType == null)
@@ -385,7 +401,7 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 			if (!expressionResultType.isPrimitiveVoid()) {
 				if (expectedReturnType.isPrimitiveVoid()) {
 					resultClosureType.setReturnType(expectedReturnType);
-					if (isImplicitReturn(expressionResult.getExpression())) {
+					if (isImplicitReturn(expressionResult)) {
 						return ConformanceFlags.NONE;
 					} else {
 						return ConformanceFlags.INCOMPATIBLE;
@@ -393,6 +409,12 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 				} else {
 					deferredBindTypeArgument(expectedReturnType, expressionResultType, BoundTypeArgumentSource.INFERRED);
 				}
+			} else if (expectedReturnType.isPrimitiveVoid()) {
+				resultClosureType.setReturnType(expressionResultType);
+				if (validParameterTypes && isImplicitReturn(expressionResult)) {
+					return ConformanceFlags.LAMBDA_VOID_COMPATIBLE;
+				}
+				return ConformanceFlags.NONE;
 			}
 			if (expectedReturnType.isAssignableFrom(expressionResultType)) {
 				resultClosureType.setReturnType(expressionResultType);
@@ -407,7 +429,12 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 		return ConformanceFlags.NONE;
 	}
 
-	protected boolean isImplicitReturn(/* @Nullable */ XExpression expression) {
+	protected boolean isImplicitReturn(ITypeComputationResult expressionResult) {
+		int flags = expressionResult.getConformanceFlags();
+		if ((ConformanceFlags.NO_IMPLICIT_RETURN & flags) != 0) {
+			return false;
+		}
+		XExpression expression = expressionResult.getExpression();
 		if (expression == null) {
 			return true;
 		}
