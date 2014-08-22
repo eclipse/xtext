@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.ui.debug;
 
 import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
@@ -56,7 +57,8 @@ public class ConditionPage extends JavaBreakpointPage {
 			IJavaBreakpoint breakpoint = getBreakpoint();
 			IMarker marker = breakpoint.getMarker();
 			String type = marker.getType();
-			if ("org.eclipse.jdt.debug.javaStratumLineBreakpointMarker".equals(type)) {
+			IResource resource = marker.getResource();
+			if ("org.eclipse.jdt.debug.javaStratumLineBreakpointMarker".equals(type) && resource instanceof IStorage) {
 				setTitle("Condition");
 				editor = new JavaBreakpointConditionEditor();
 				editor.createControl(parent);
@@ -74,7 +76,7 @@ public class ConditionPage extends JavaBreakpointPage {
 						}
 					}
 				});
-				URI uri = storage2UriMapper.getUri((IStorage) marker.getResource());
+				URI uri = storage2UriMapper.getUri((IStorage) resource);
 				JavaBreakPointProvider breakPointProvider = registry.getResourceServiceProvider(uri).get(JavaBreakPointProvider.class);
 				editor.setInput(breakPointProvider.getBreakpointWithJavaLocation((IJavaStratumLineBreakpoint) breakpoint));
 			} else {
