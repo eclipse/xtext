@@ -134,7 +134,7 @@ public final class Path {
 	 */
 	public Path getParent() {
 		if (!isAbsolute())
-			throw new IllegalStateException("path is not absolute");
+			throw new IllegalStateException("path is not absolute: " + toString());
 		if (segments.isEmpty())
 			return null;
 		return new Path(segments.subList(0, segments.size()-1), true);
@@ -167,7 +167,7 @@ public final class Path {
 	 */
 	public Path getAbsolutePath(Path relativePath) {
 		if (relativePath.isAbsolute()) {
-			throw new IllegalArgumentException("The given path'"+relativePath+"' is not relative.");
+			throw new IllegalArgumentException("The given path '"+relativePath+"' is not relative.");
 		}
 		List<String> result = newArrayList(getSegments());
 		for (String segment : relativePath.getSegments()) {
@@ -215,7 +215,7 @@ public final class Path {
     */
 	public Path relativize(Path other) {
 		if (other.isAbsolute() != isAbsolute())
-			throw new IllegalArgumentException("This path and the given path are not both absolute or both relative.");
+			throw new IllegalArgumentException("This path and the given path are not both absolute or both relative: " + toString() + " | " + other.toString());
 		if (startsWith(other)) {
 			return internalRelativize(this, other);
 		} else if (other.startsWith(this)) {
