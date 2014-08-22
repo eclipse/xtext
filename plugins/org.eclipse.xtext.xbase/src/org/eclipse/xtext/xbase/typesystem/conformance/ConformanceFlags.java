@@ -146,8 +146,11 @@ public final class ConformanceFlags {
 	 * sugar version.
 	 */
 	public static final int PREFERRED_LAMBDA_SUGAR = THROWN_EXCEPTION << 1;
-
-	// one slot left for lambda void vs non-void (void compatibility)
+	
+	/**
+	 * A lambda's last expression has a non-void implicit type but void was expected.
+	 */
+	public static final int LAMBDA_VOID_COMPATIBLE = PREFERRED_LAMBDA_SUGAR << 1;
 
 	// Additional flags have to start from RAW_TYPE << 1 again since SUCCESS is used from RawTypeConformanceComputer#SUCCESS which does not start at 1
 

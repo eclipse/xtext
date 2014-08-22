@@ -16,6 +16,143 @@ import org.junit.Ignore
 class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 	
 	@Test
+	def testBug438461_01() {
+		assertCompilesTo('''
+			import java.util.concurrent.ExecutorService
+			class Bug {
+				def void m(ExecutorService service) {
+					service.submit [ /* Callable /w null */ ]
+				}
+			}
+		''', '''
+			import java.util.concurrent.Callable;
+			import java.util.concurrent.ExecutorService;
+			
+			@SuppressWarnings("all")
+			public class Bug {
+			  public void m(final ExecutorService service) {
+			    final Callable<Object> _function = new Callable<Object>() {
+			      public Object call() throws Exception {
+			        return null;
+			      }
+			    };
+			    service.<Object>submit(_function);
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testBug438461_02() {
+		assertCompilesTo('''
+			import java.util.concurrent.ExecutorService
+			class Bug {
+				def void m(ExecutorService service) {
+					service.submit [ return /* Runnable */ ]
+				}
+			}
+		''', '''
+			import java.util.concurrent.ExecutorService;
+			
+			@SuppressWarnings("all")
+			public class Bug {
+			  public void m(final ExecutorService service) {
+			    final Runnable _function = new Runnable() {
+			      public void run() {
+			        return;
+			      }
+			    };
+			    service.submit(_function);
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testBug438461_03() {
+		assertCompilesTo('''
+			import java.util.concurrent.ExecutorService
+			class Bug {
+				def void m(ExecutorService service) {
+					service.submit [ return '' /* Callable */ ]
+				}
+			}
+		''', '''
+			import java.util.concurrent.Callable;
+			import java.util.concurrent.ExecutorService;
+			
+			@SuppressWarnings("all")
+			public class Bug {
+			  public void m(final ExecutorService service) {
+			    final Callable<String> _function = new Callable<String>() {
+			      public String call() throws Exception {
+			        return "";
+			      }
+			    };
+			    service.<String>submit(_function);
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testBug438461_04() {
+		assertCompilesTo('''
+			import java.util.concurrent.ExecutorService
+			class Bug {
+				def void m(ExecutorService service) {
+					service.submit [ '' /* Callable */ ]
+				}
+			}
+		''', '''
+			import java.util.concurrent.Callable;
+			import java.util.concurrent.ExecutorService;
+			
+			@SuppressWarnings("all")
+			public class Bug {
+			  public void m(final ExecutorService service) {
+			    final Callable<String> _function = new Callable<String>() {
+			      public String call() throws Exception {
+			        return "";
+			      }
+			    };
+			    service.<String>submit(_function);
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testBug438461_05() {
+		assertCompilesTo('''
+			import java.util.concurrent.ExecutorService
+			class Bug {
+				def void m() {}
+				def void m(ExecutorService service) {
+					service.submit [ m() /* Runnable */ ]
+				}
+			}
+		''', '''
+			import java.util.concurrent.ExecutorService;
+			
+			@SuppressWarnings("all")
+			public class Bug {
+			  public void m() {
+			  }
+			  
+			  public void m(final ExecutorService service) {
+			    final Runnable _function = new Runnable() {
+			      public void run() {
+			        Bug.this.m();
+			      }
+			    };
+			    service.submit(_function);
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def test_01() {
 		assertCompilesTo('''
 			import java.util.List
@@ -451,5 +588,3 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 	}	
 	
 }
-
-

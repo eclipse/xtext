@@ -29,6 +29,7 @@ import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
@@ -449,6 +450,19 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	}
 	
 	@Override
+	protected boolean isLambdaExpression(int argumentIdx) {
+		if (isStatic() && argumentIdx == -1) {
+			return false;
+		}
+		if (argumentIdx == 0) {
+			if (getReceiver() != null) {
+				return getReceiver() instanceof XClosure;
+			}
+		}
+		return super.isLambdaExpression(argumentIdx);
+	}
+	
+	@Override
 	/* @Nullable */
 	protected LightweightTypeReference getSubstitutedExpectedType(int idx) {
 		if (idx == -1) {
@@ -685,15 +699,6 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 			return compareByArgumentTypes(casted, leftBoxing, rightBoxing);
 		}
 		return compareByBoxing(leftBoxing, rightBoxing);
-	}
-
-	protected CandidateCompareResult compareByBoxing(int leftBoxing, int rightBoxing) {
-		if (leftBoxing != rightBoxing) {
-			if (leftBoxing < rightBoxing)
-				return CandidateCompareResult.THIS;
-			return CandidateCompareResult.OTHER;
-		}
-		return CandidateCompareResult.AMBIGUOUS;
 	}
 
 	protected CandidateCompareResult compareByArgumentTypes(FeatureLinkingCandidate right, int leftBoxing, int rightBoxing) {
