@@ -21,6 +21,9 @@
 					<exclude>**/*.java</exclude>
 				</excludes>
 			</resource>
+			<resource>
+				<directory>model</directory>
+			</resource>
 		</resources>
 		<sourceDirectory>src</sourceDirectory>
 
