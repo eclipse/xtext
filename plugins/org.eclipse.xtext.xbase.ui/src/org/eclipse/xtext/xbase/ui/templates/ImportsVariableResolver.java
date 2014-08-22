@@ -47,7 +47,7 @@ public class ImportsVariableResolver extends AbstractTemplateVariableResolver im
 		if (xtextTemplateContext instanceof XbaseTemplateContext) {
 			XbaseTemplateContext xbaseCtx = (XbaseTemplateContext) xtextTemplateContext;
 			List<?> params = variable.getVariableType().getParams();
-			if (params.size() > 0 && !xtextTemplateContext.isReadOnly()) {
+			if (params.size() > 0) {
 				for (Iterator<?> iterator = params.iterator(); iterator.hasNext();) {
 					String typeName = (String) iterator.next();
 					xbaseCtx.addImport(typeName);
