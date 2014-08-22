@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.templates;
 
+import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.templates.Template;
 import org.eclipse.jface.text.templates.TemplateContext;
@@ -110,8 +111,19 @@ public abstract class AbstractTemplateProposalProvider implements ITemplatePropo
 	protected boolean validate(Template template, TemplateContext context) {
 		try {
 			context.getContextType().validate(template.getPattern());
-		} catch(TemplateException e) {
+		} catch (TemplateException e) {
 			return false;
+		}
+		if (context instanceof XtextTemplateContext) {
+			try {
+				//pre-fill context state and check. 
+				((XtextTemplateContext) context).evaluateForDisplay(template);
+				return context.canEvaluate(template);
+			} catch (BadLocationException e) {
+				return false;
+			} catch (TemplateException e) {
+				return false;
+			}
 		}
 		return true;
 	}
