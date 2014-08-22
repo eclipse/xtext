@@ -13,6 +13,7 @@ import java.lang.reflect.Proxy;
 import java.util.List;
 
 import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
@@ -25,6 +26,7 @@ import org.eclipse.jdt.debug.core.IJavaLineBreakpoint;
 import org.eclipse.jdt.debug.core.IJavaStratumLineBreakpoint;
 import org.eclipse.jdt.internal.debug.ui.JDIDebugUIPlugin;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.builder.smap.StratumBreakpointAdapterFactory;
 import org.eclipse.xtext.builder.trace.AbstractTrace;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
@@ -38,9 +40,11 @@ import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
+import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 public class JavaBreakPointProvider {
@@ -85,9 +89,10 @@ public class JavaBreakPointProvider {
 	}
 
 	private String getHandleId(final IJavaStratumLineBreakpoint breakpoint) throws CoreException {
-		IResource storage = breakpoint.getMarker().getResource();
+		IMarker marker = breakpoint.getMarker();
+		IResource storage = marker.getResource();
 		ResourceSet resourceSet = resourceSetProvider.get(storage.getProject());
-		URI uri = storage2UriMapper.getUri((IStorage) storage);
+		URI uri = URI.createURI((String) marker.getAttribute(StratumBreakpointAdapterFactory.ORG_ECLIPSE_XTEXT_XBASE_SOURCE_URI));
 		Resource resource = resourceSet.getResource(uri, true);
 		resource.getContents();
 		EObject sourceObject = eObjectAtOffsetHelper.resolveContainedElementAt((XtextResource) resource, breakpoint.getCharStart());
@@ -102,8 +107,11 @@ public class JavaBreakPointProvider {
 	}
 	
 	private int getJavaLineNumber(final IJavaStratumLineBreakpoint breakpoint) throws CoreException {
-		IResource storage = breakpoint.getMarker().getResource();
-		ITrace javaTrace = traceForStorageProvider.getTraceToTarget((IStorage) storage);
+		URI uri = URI.createURI((String) breakpoint.getMarker().getAttribute(StratumBreakpointAdapterFactory.ORG_ECLIPSE_XTEXT_XBASE_SOURCE_URI));
+		Pair<IStorage, IProject> storage = Iterables.getFirst(storage2UriMapper.getStorages(uri), null);
+		if (storage == null)
+			return -1;
+		ITrace javaTrace = traceForStorageProvider.getTraceToTarget(storage.getFirst());
 		if (javaTrace == null)
 			return -1;
 		TextRegion textRegion = new TextRegion(breakpoint.getCharStart(), 0);
