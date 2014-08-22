@@ -61,17 +61,17 @@ class JvmTypeReferenceBuilderTest extends AbstractJvmModelTest {
 	}
 	
 	@Test def void testWildcard_01() {
-		assertEquals("java.lang.Object", (wildCard as JvmWildcardTypeReference).constraints.head.typeReference.identifier)
+		assertEquals("java.lang.Object", (wildcard as JvmWildcardTypeReference).constraints.head.typeReference.identifier)
 	}
 	
 	@Test def void testWildcard_02() {
-		val constraints = (wildCardExtends(typeRef(CharSequence)) as JvmWildcardTypeReference).constraints
+		val constraints = (wildcardExtends(typeRef(CharSequence)) as JvmWildcardTypeReference).constraints
 		assertEquals(1, constraints.size)
 		assertEquals("java.lang.CharSequence", (constraints).filter(JvmUpperBound).head.typeReference.identifier)
 	}
 	
 	@Test def void testWildcard_03() {
-		val constraints = (wildCardSuper(typeRef(CharSequence)) as JvmWildcardTypeReference).constraints
+		val constraints = (wildcardSuper(typeRef(CharSequence)) as JvmWildcardTypeReference).constraints
 		assertEquals(2, constraints.size)
 		assertEquals("java.lang.CharSequence", (constraints).filter(JvmLowerBound).head.typeReference.identifier)
 	}
