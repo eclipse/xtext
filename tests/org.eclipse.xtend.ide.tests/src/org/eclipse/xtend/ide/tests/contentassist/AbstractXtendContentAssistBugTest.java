@@ -16,10 +16,12 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
+import org.eclipse.xtext.junit4.Flaky;
 import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.junit4.util.ResourceLoadHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.junit.Rule;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -33,6 +35,9 @@ public abstract class AbstractXtendContentAssistBugTest extends AbstractXtendUIT
 	
 	@Inject
 	private WorkbenchTestHelper testHelper;
+	
+	@Rule
+	public Flaky.Rule testRule = new Flaky.Rule();
 	
 	@Override
 	public void tearDown() throws Exception {
