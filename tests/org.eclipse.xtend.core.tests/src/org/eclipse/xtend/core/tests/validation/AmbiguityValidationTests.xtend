@@ -1199,25 +1199,6 @@ class AmbiguousGenericFeatureCallTest extends AmbiguityValidationTest {
 	@Test
 	def void testAmbiguousMethods_11() {
 		'''
-			import java.util.concurrent.*
-			class C {
-				def void n() {
-					m [| '' ]
-				}
-				def void m(Runnable r) {}
-				def void m(Callable<String> c) {}
-			}
-		'''.assertAmbiguous('''
-			Ambiguous feature call.
-			The methods
-				m(Runnable) in C and
-				m(Callable<String>) in C
-			both match.''')
-	}
-	
-	@Test
-	def void testAmbiguousMethods_12() {
-		'''
 			import java.util.*
 			class C {
 				def void n(List<Integer> list) {
@@ -1484,7 +1465,20 @@ class AmbiguousGenericFeatureCallTest extends AmbiguityValidationTest {
 			}
 		'''.assertUnambiguous
 	}
-	
+
+	@Test
+	def void testUnambiguousMethods_16() {
+		'''
+			import java.util.concurrent.*
+			class C {
+				def void n() {
+					m [| '' ]
+				}
+				def void m(Runnable r) {}
+				def void m(Callable<String> c) {}
+			}
+		'''.assertUnambiguous
+	}	
 }
 
 /**
@@ -1534,5 +1528,6 @@ class AmbiguousRawFeatureCallTest extends AmbiguityValidationTest {
 				new(Object s) {}
 			}
 		'''.assertUnambiguous
-	}		
+	}
+	
 }
