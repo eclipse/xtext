@@ -14,7 +14,6 @@ import java.util.List;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
@@ -89,10 +88,11 @@ public class JavaBreakPointProvider {
 	}
 
 	private String getHandleId(final IJavaStratumLineBreakpoint breakpoint) throws CoreException {
-		IMarker marker = breakpoint.getMarker();
-		IResource storage = marker.getResource();
-		ResourceSet resourceSet = resourceSetProvider.get(storage.getProject());
-		URI uri = URI.createURI((String) marker.getAttribute(StratumBreakpointAdapterFactory.ORG_ECLIPSE_XTEXT_XBASE_SOURCE_URI));
+		URI uri = URI.createURI((String) breakpoint.getMarker().getAttribute(StratumBreakpointAdapterFactory.ORG_ECLIPSE_XTEXT_XBASE_SOURCE_URI));
+		Pair<IStorage, IProject> storage = Iterables.getFirst(storage2UriMapper.getStorages(uri), null);
+		if (storage == null)
+			return null;
+		ResourceSet resourceSet = resourceSetProvider.get(storage.getSecond());
 		Resource resource = resourceSet.getResource(uri, true);
 		resource.getContents();
 		EObject sourceObject = eObjectAtOffsetHelper.resolveContainedElementAt((XtextResource) resource, breakpoint.getCharStart());
