@@ -967,7 +967,7 @@ public class JvmTypesBuilder {
 	 * 
 	 * @see #toAnnotation(EObject, Class, Object)
 	 * 
-	 * @deprecated use {@link JvmAnnotationTypesBuilder#annotationRef(Class, String...)} instead
+	 * @deprecated use {@link JvmAnnotationReferenceBuilder#annotationRef(Class, String...)} instead
 	 */
 	/* @Nullable */
 	@Deprecated
@@ -980,7 +980,7 @@ public class JvmTypesBuilder {
 	 * 
 	 * @see #toAnnotation(EObject, String, Object)
 	 * 
-	 * @deprecated use {@link JvmAnnotationTypesBuilder#annotationRef(String, String...)} instead
+	 * @deprecated use {@link JvmAnnotationReferenceBuilder#annotationRef(String, String...)} instead
 	 */
 	/* @Nullable */ 
 	@Deprecated
@@ -1001,7 +1001,7 @@ public class JvmTypesBuilder {
 	 * @return a result representing an annotation reference to the given annotation type, <code>null<code> if 
 	 * 		sourceElement or annotationType are <code>null</code>.  
 	 * 
-	 * @deprecated use {@link JvmAnnotationTypesBuilder#annotationRef(Class, String...)} instead
+	 * @deprecated use {@link JvmAnnotationReferenceBuilder#annotationRef(Class, String...)} instead
 	 */
 	/* @Nullable */
 	@Deprecated
@@ -1024,7 +1024,7 @@ public class JvmTypesBuilder {
 	 * @return a result representing an annotation reference to the given annotation type, <code>null<code> if 
 	 * 		sourceElement or annotationType are <code>null</code>.
 	 * 
-	 * @deprecated use {@link JvmAnnotationTypesBuilder#annotationRef(String, String...)} instead
+	 * @deprecated use {@link JvmAnnotationReferenceBuilder#annotationRef(String, String...)} instead
 	 */
 	//TODO Move up the code used in Xtend's CompilationUnitImpl so we can reuse it here.
 	/* @Nullable */ 

@@ -26,10 +26,10 @@ import com.google.inject.Inject;
  */
 public abstract class AbstractModelInferrer implements IJvmModelInferrer {
 	
-	private @Inject JvmAnnotationTypesBuilder.Factory annotationRefBuilderFactory;
+	private @Inject JvmAnnotationReferenceBuilder.Factory annotationRefBuilderFactory;
 	private @Inject JvmTypeReferenceBuilder.Factory typeRefBuilderFactory;
 	
-	protected @Extension JvmAnnotationTypesBuilder _annotationTypesBuilder;
+	protected @Extension JvmAnnotationReferenceBuilder _annotationTypesBuilder;
 	protected @Extension JvmTypeReferenceBuilder _typeReferenceBuilder;
 	
 	/**
