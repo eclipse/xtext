@@ -72,7 +72,7 @@ class JvmTypeReferenceBuilderTest extends AbstractJvmModelTest {
 	
 	@Test def void testWildcard_03() {
 		val constraints = (wildCardSuper(typeRef(CharSequence)) as JvmWildcardTypeReference).constraints
-		assertEquals(1, constraints.size)
+		assertEquals(2, constraints.size)
 		assertEquals("java.lang.CharSequence", (constraints).filter(JvmLowerBound).head.typeReference.identifier)
 	}
 	
