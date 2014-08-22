@@ -9,6 +9,7 @@ package org.eclipse.xtend.ide.tests.contentassist;
 
 import org.eclipse.xtend.ide.tests.contentassist.AbstractXtendContentAssistBugTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.junit4.Flaky;
 import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 import org.junit.Test;
 
@@ -17,6 +18,7 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class Bug437678Test extends AbstractXtendContentAssistBugTest {
+  @Flaky
   @Test
   public void test_01() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -105,6 +107,7 @@ public class Bug437678Test extends AbstractXtendContentAssistBugTest {
     _append.assertTextAtCursorPosition("ethod|", "methodA", "main");
   }
   
+  @Flaky
   @Test
   public void test_03() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -193,6 +196,7 @@ public class Bug437678Test extends AbstractXtendContentAssistBugTest {
     _append.assertTextAtCursorPosition("ethod|", "main()");
   }
   
+  @Flaky
   @Test
   public void test_05() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();

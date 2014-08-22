@@ -19,12 +19,17 @@ import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
+import org.eclipse.xtext.junit4.Flaky;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.TextFile;
 import org.eclipse.xtext.ui.resource.JarEntryLocator;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl;
 import org.eclipse.xtext.ui.resource.UriValidator;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -32,6 +37,16 @@ import org.junit.Test;
  */
 public class Storage2UriMapperJdtImplTest extends Assert {
 	
+	@Rule
+	public Flaky.Rule flakyRule = new Flaky.Rule();
+	
+	@Before
+	@After
+	public void cleanWorkspace() throws Exception {
+		IResourcesSetupUtil.cleanWorkspace();
+	}
+	
+	@Flaky
 	@Test public void testResourceInJar() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		IFile file = project.getProject().getFile("foo.jar");
