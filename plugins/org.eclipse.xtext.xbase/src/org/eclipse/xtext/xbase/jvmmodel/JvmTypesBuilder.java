@@ -1124,7 +1124,8 @@ public class JvmTypesBuilder {
 			protected EObject createCopy(/* @Nullable */ EObject eObject) {
 				EObject result = super.createCopy(eObject);
 				if (result != null && eObject != null && !eObject.eIsProxy()) {
-					associator.associatePrimary(eObject, result);
+					if (eObject.eResource() != null)
+						associator.associatePrimary(eObject, result);
 				}
 				return result;
 			}
