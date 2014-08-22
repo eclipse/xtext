@@ -7,11 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.jvmmodel;
 
-import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -23,16 +29,21 @@ import com.google.inject.Provider;
  */
 public class JvmTypeReferenceBuilder {
 
+
 	public static class Factory {
 		@Inject Provider<JvmTypeReferenceBuilder> builderProvider;
-		public JvmTypeReferenceBuilder create(Resource context) {
+		@Inject CommonTypeComputationServices services;
+		public JvmTypeReferenceBuilder create(ResourceSet context) {
 			JvmTypeReferenceBuilder result = builderProvider.get();
 			result.context = context;
+			result.typeReferenceOwner = new StandardTypeReferenceOwner(services, context);
 			return result;
 		}
 	}
 	
-	private Resource context;
+	private StandardTypeReferenceOwner typeReferenceOwner;
+	
+	private ResourceSet context;
 	
 	@Inject
 	private TypeReferences references;
@@ -48,7 +59,8 @@ public class JvmTypeReferenceBuilder {
 	 * @return the newly created {@link JvmTypeReference}
 	 */
 	public JvmTypeReference typeRef(Class<?> clazz, JvmTypeReference... typeArgs) {
-		return references.getTypeForName(clazz, context, typeArgs);
+		JvmType type = references.findDeclaredType(clazz, context);
+		return typeRef(type, typeArgs);
 	}
 
 	/**
@@ -61,7 +73,8 @@ public class JvmTypeReferenceBuilder {
 	 * @return the newly created {@link JvmTypeReference}
 	 */
 	public JvmTypeReference typeRef(String typeName, JvmTypeReference... typeArgs) {
-		return references.getTypeForName(typeName, context, typeArgs);
+		JvmType type = references.findDeclaredType(typeName, context);
+		return typeRef(type, typeArgs);
 	}
 	
 	/**
@@ -74,7 +87,18 @@ public class JvmTypeReferenceBuilder {
 	 * @return the newly created {@link JvmTypeReference}
 	 */
 	public JvmTypeReference typeRef(JvmType type, JvmTypeReference... typeArgs) {
-		return references.createTypeRef(type, typeArgs);
+		int typeParams = 0;
+		if (type instanceof JvmGenericType) {
+			typeParams = ((JvmGenericType) type).getTypeParameters().size();
+		}
+		if (typeParams < typeArgs.length) {
+			throw new IllegalArgumentException("The type "+type.getIdentifier()+" only declares "+typeParams+" type parameters. You passed "+typeArgs.length+".");
+		}
+		LightweightTypeReference reference = typeReferenceOwner.toPlainTypeReference(type);
+		for (JvmTypeReference jvmTypeReference : typeArgs) {
+			((ParameterizedTypeReference)reference).addTypeArgument(typeReferenceOwner.toLightweightTypeReference(jvmTypeReference));
+		}
+		return reference.toJavaCompliantTypeReference();
 	}
 	
 	/**
@@ -85,18 +109,22 @@ public class JvmTypeReferenceBuilder {
 	 * @return the newly created {@link JvmWildcardTypeReference}
 	 */
 	public JvmTypeReference wildCardExtends(JvmTypeReference extendsBound) {
-		return references.wildCardExtends(extendsBound);
+		WildcardTypeReference wildcardTypeReference = typeReferenceOwner.newWildcardTypeReference();
+		wildcardTypeReference.addUpperBound(typeReferenceOwner.toLightweightTypeReference(extendsBound));
+		return wildcardTypeReference.toTypeReference();
 	}
 	
 	/**
 	 * Creates a new {@link JvmWildcardTypeReference} with the given type as the super (IN) bound.
 	 * 
-	 * @param extendsBound
-	 *            the extends bound of the wildcard
+	 * @param superBound
+	 *            the super bound of the wildcard
 	 * @return the newly created {@link JvmWildcardTypeReference}
 	 */
-	public JvmTypeReference wildCardSuper(JvmTypeReference extendsBound) {
-		return references.wildCardSuper(extendsBound);
+	public JvmTypeReference wildCardSuper(JvmTypeReference superBound) {
+		WildcardTypeReference wildcardTypeReference = typeReferenceOwner.newWildcardTypeReference();
+		wildcardTypeReference.setLowerBound(typeReferenceOwner.toLightweightTypeReference(superBound));
+		return wildcardTypeReference.toTypeReference();
 	}
 	
 	/**
@@ -105,7 +133,7 @@ public class JvmTypeReferenceBuilder {
 	 * @return the newly created {@link JvmWildcardTypeReference}
 	 */
 	public JvmTypeReference wildCard() {
-		return references.wildCard();
+		return wildCardExtends(typeRef(Object.class));
 	}
 
 }
