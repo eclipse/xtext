@@ -37,8 +37,8 @@ public abstract class AbstractModelInferrer implements IJvmModelInferrer {
 	 * @nooverride
 	 */
 	void setContext(Resource resource) {
-		_annotationTypesBuilder = annotationRefBuilderFactory.create(resource);
-		_typeReferenceBuilder = typeRefBuilderFactory.create(resource);
+		_annotationTypesBuilder = annotationRefBuilderFactory.create(resource.getResourceSet());
+		_typeReferenceBuilder = typeRefBuilderFactory.create(resource.getResourceSet());
 	}
 	
 	public void infer(EObject e, final /* @NonNull */ IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase) {

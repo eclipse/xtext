@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.jvmmodel;
 
-import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmStringAnnotationValue;
@@ -27,14 +27,14 @@ public class JvmAnnotationReferenceBuilder {
 	
 	public static class Factory {
 		@Inject Provider<JvmAnnotationReferenceBuilder> builderProvider;
-		public JvmAnnotationReferenceBuilder create(Resource context) {
+		public JvmAnnotationReferenceBuilder create(ResourceSet context) {
 			JvmAnnotationReferenceBuilder result = builderProvider.get();
 			result.context = context;
 			return result;
 		}
 	}
 	
-	private Resource context;
+	private ResourceSet context;
 	
 	@Inject
 	private TypeReferences references;
