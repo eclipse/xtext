@@ -12,7 +12,11 @@ import java.util.Iterator;
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.jdt.core.ITypeRoot;
+import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.internal.ui.IResourceLocator;
+import org.eclipse.jdt.internal.ui.javaeditor.IClassFileEditorInput;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorMatchingStrategy;
 import org.eclipse.ui.IEditorPart;
@@ -72,7 +76,7 @@ public class JavaEditorInputMatcher implements IEditorMatchingStrategy {
 			if (newTypeRoot == null) {
 				return false;
 			}
-			IResource currentResource = ResourceUtil.getResource(currentInput);
+			IResource currentResource = getResource(currentInput);
 			if (currentResource == null) {
 				return false;
 			}
@@ -91,6 +95,19 @@ public class JavaEditorInputMatcher implements IEditorMatchingStrategy {
 			logger.error(e.getMessage(), e);
 		}
 		return false;
+	}
+
+	private IResource getResource(IEditorInput currentInput) throws JavaModelException {
+		IResource resource = ResourceUtil.getResource(currentInput);
+		if (resource == null) {
+			if (currentInput instanceof IClassFileEditorInput) {
+				IClassFile classFile= ((IClassFileEditorInput) currentInput).getClassFile();
+				IResourceLocator locator= (IResourceLocator) classFile.getAdapter(IResourceLocator.class);
+				if (locator != null)
+					resource= locator.getContainingResource(classFile);
+			}
+		}
+		return resource;
 	}
 
 	protected boolean isCurrentResource(IResource currentResource, ITrace traceToSource) {
