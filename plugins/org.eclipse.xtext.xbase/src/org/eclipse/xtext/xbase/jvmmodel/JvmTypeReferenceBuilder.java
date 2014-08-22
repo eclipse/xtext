@@ -102,26 +102,27 @@ public class JvmTypeReferenceBuilder {
 	}
 	
 	/**
-	 * Creates a new {@link JvmWildcardTypeReference} with the given type as the extends bound.
+	 * Creates a new wildcard type reference with the given type as the upper bound.
 	 * For example: 
-	 * <pre>wildCardExtends(typeRef(CharSequence))</pre> 
+	 * <pre>wildcardExtends(typeRef(CharSequence))</pre> 
 	 * would create a type reference representing 
 	 * <pre>? extends CharSequence</pre> 
 	 * 
 	 * @param extendsBound
-	 *            the extends bound of the wildcard
+	 *            the upper bound of the wildcard
 	 * @return the newly created wildcard type reference
 	 */
-	public JvmTypeReference wildCardExtends(JvmTypeReference extendsBound) {
+	public JvmTypeReference wildcardExtends(JvmTypeReference extendsBound) {
 		WildcardTypeReference wildcardTypeReference = typeReferenceOwner.newWildcardTypeReference();
 		wildcardTypeReference.addUpperBound(typeReferenceOwner.toLightweightTypeReference(extendsBound));
 		return wildcardTypeReference.toTypeReference();
 	}
 	
 	/**
-	 * Creates a new {@link JvmWildcardTypeReference} with the given type as the super bound.
+	 * Creates a new wildcard type reference with the given type as the lower bound and {@link Object} as upper bound.
+	 * 
 	 * For example: 
-	 * <pre>wildCardSuper(typeRef(CharSequence))</pre> 
+	 * <pre>wildcardSuper(typeRef(CharSequence))</pre> 
 	 * would create a type reference representing 
 	 * <pre>? super CharSequence</pre> 
 	 *  
@@ -129,7 +130,7 @@ public class JvmTypeReferenceBuilder {
 	 *            the super bound of the wildcard
 	 * @return the newly created wildcard type reference
 	 */
-	public JvmTypeReference wildCardSuper(JvmTypeReference superBound) {
+	public JvmTypeReference wildcardSuper(JvmTypeReference superBound) {
 		WildcardTypeReference wildcardTypeReference = typeReferenceOwner.newWildcardTypeReference();
 		wildcardTypeReference.addUpperBound(typeReferenceOwner.toLightweightTypeReference(typeRef(Object.class)));
 		wildcardTypeReference.setLowerBound(typeReferenceOwner.toLightweightTypeReference(superBound));
@@ -137,13 +138,13 @@ public class JvmTypeReferenceBuilder {
 	}
 	
 	/**
-	 * Creates a new {@link JvmWildcardTypeReference} with extend bound {@link Object}.
+	 * Creates a new wildcard type reference with upper bound {@link Object}.
 	 * I.e. <pre>? extends Object</pre>
 	 * 
 	 * @return the newly created wildcard type reference
 	 */
-	public JvmTypeReference wildCard() {
-		return wildCardExtends(typeRef(Object.class));
+	public JvmTypeReference wildcard() {
+		return wildcardExtends(typeRef(Object.class));
 	}
 
 }

@@ -100,8 +100,8 @@ public class JvmTypeReferenceBuilderTest extends AbstractJvmModelTest {
   
   @Test
   public void testWildcard_01() {
-    JvmTypeReference _wildCard = this.typeReferenceBuilder.wildCard();
-    EList<JvmTypeConstraint> _constraints = ((JvmWildcardTypeReference) _wildCard).getConstraints();
+    JvmTypeReference _wildcard = this.typeReferenceBuilder.wildcard();
+    EList<JvmTypeConstraint> _constraints = ((JvmWildcardTypeReference) _wildcard).getConstraints();
     JvmTypeConstraint _head = IterableExtensions.<JvmTypeConstraint>head(_constraints);
     JvmTypeReference _typeReference = _head.getTypeReference();
     String _identifier = _typeReference.getIdentifier();
@@ -111,8 +111,8 @@ public class JvmTypeReferenceBuilderTest extends AbstractJvmModelTest {
   @Test
   public void testWildcard_02() {
     JvmTypeReference _typeRef = this.typeReferenceBuilder.typeRef(CharSequence.class);
-    JvmTypeReference _wildCardExtends = this.typeReferenceBuilder.wildCardExtends(_typeRef);
-    final EList<JvmTypeConstraint> constraints = ((JvmWildcardTypeReference) _wildCardExtends).getConstraints();
+    JvmTypeReference _wildcardExtends = this.typeReferenceBuilder.wildcardExtends(_typeRef);
+    final EList<JvmTypeConstraint> constraints = ((JvmWildcardTypeReference) _wildcardExtends).getConstraints();
     int _size = constraints.size();
     Assert.assertEquals(1, _size);
     Iterable<JvmUpperBound> _filter = Iterables.<JvmUpperBound>filter(constraints, JvmUpperBound.class);
@@ -125,8 +125,8 @@ public class JvmTypeReferenceBuilderTest extends AbstractJvmModelTest {
   @Test
   public void testWildcard_03() {
     JvmTypeReference _typeRef = this.typeReferenceBuilder.typeRef(CharSequence.class);
-    JvmTypeReference _wildCardSuper = this.typeReferenceBuilder.wildCardSuper(_typeRef);
-    final EList<JvmTypeConstraint> constraints = ((JvmWildcardTypeReference) _wildCardSuper).getConstraints();
+    JvmTypeReference _wildcardSuper = this.typeReferenceBuilder.wildcardSuper(_typeRef);
+    final EList<JvmTypeConstraint> constraints = ((JvmWildcardTypeReference) _wildcardSuper).getConstraints();
     int _size = constraints.size();
     Assert.assertEquals(2, _size);
     Iterable<JvmLowerBound> _filter = Iterables.<JvmLowerBound>filter(constraints, JvmLowerBound.class);
