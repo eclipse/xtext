@@ -8,12 +8,14 @@
 package org.eclipse.xtend.ide.tests.contentassist
 
 import org.junit.Test
+import org.eclipse.xtext.junit4.Flaky
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 class Bug440069Test extends AbstractXtendContentAssistBugTest {
 	
+	@Flaky
 	@Test def void test_01() throws Exception {
 		newBuilder.append('''
 			class MyExtension {
@@ -48,6 +50,7 @@ class Bug440069Test extends AbstractXtendContentAssistBugTest {
 			.assertProposalAtCursor('xyzManager')
 	}
 	
+	@Flaky
 	@Test def void test_03() throws Exception {
 		newBuilder.append('''
 			class MyExtension {
