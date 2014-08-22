@@ -36,6 +36,7 @@ public enum ConformanceHint {
 	
 	RAW(ConformanceFlags.RAW_TYPE), // only raw conformance computed
 	LAMBDA_RAW_COMPATIBLE(ConformanceFlags.LAMBDA_RAW_COMPATIBLE), // incompatible but raw types are compatible
+	LAMBDA_VOID_COMPATIBLE(ConformanceFlags.LAMBDA_VOID_COMPATIBLE), // compatible but could also be compatible to non-void expectation
 	LAMBDA_PARAMETER_COMPATIBLE(ConformanceFlags.LAMBDA_PARAMETER_COMPATIBLE), // incompatible but parameter list is compatible
 	MERGED(ConformanceFlags.MERGED), // merged from different conformance sets
 	
