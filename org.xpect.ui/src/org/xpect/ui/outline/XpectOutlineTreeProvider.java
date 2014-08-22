@@ -15,7 +15,6 @@ import org.xpect.XjmTest;
 import org.xpect.XpectFile;
 import org.xpect.XpectInvocation;
 import org.xpect.XpectJavaModel;
-import org.xpect.XpectTest;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -31,16 +30,13 @@ public class XpectOutlineTreeProvider extends DefaultOutlineTreeProvider {
 
 	public String _text(XpectFile file) {
 		String filename = file.eResource().getURI().lastSegment();
-		XpectTest test = file.getTest();
-		if (test != null && !test.eIsProxy()) {
-			XpectJavaModel model = test.getTestClassOrSuite();
-			if (model != null && !model.eIsProxy()) {
-				XjmTest suite = model.getTestOrSuite();
-				if (suite != null && !suite.eIsProxy()) {
-					JvmDeclaredType jvmClass = suite.getJvmClass();
-					if (jvmClass != null && !jvmClass.eIsProxy())
-						return filename + " - " + jvmClass.getSimpleName();
-				}
+		XpectJavaModel model = file.getJavaModel();
+		if (model != null && !model.eIsProxy()) {
+			XjmTest suite = model.getTestOrSuite();
+			if (suite != null && !suite.eIsProxy()) {
+				JvmDeclaredType jvmClass = suite.getJvmClass();
+				if (jvmClass != null && !jvmClass.eIsProxy())
+					return filename + " - " + jvmClass.getSimpleName();
 			}
 		}
 		return filename;

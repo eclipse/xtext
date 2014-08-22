@@ -12,9 +12,12 @@ import org.xpect.registry.DelegatingExtensionInfoRegistry;
 import org.xpect.registry.DelegatingLanguageRegistry;
 import org.xpect.registry.IExtensionInfo;
 import org.xpect.registry.ILanguageInfo;
+import org.xpect.registry.ITestSuiteInfo;
+import org.xpect.registry.TestSuiteInfoRegistry;
 import org.xpect.ui.internal.XpectActivator;
 import org.xpect.ui.registry.UIExtensionInfoRegistry;
 import org.xpect.ui.registry.UILanugageRegistry;
+import org.xpect.ui.registry.UITestSuiteInfoRegistry;
 import org.xpect.ui.util.UIBundleInfoRegistry;
 import org.xpect.ui.util.UIJavaReflectAccess;
 import org.xpect.ui.util.UIXtInjectorProvider;
@@ -39,6 +42,7 @@ public class XpectPluginActivator extends XpectActivator {
 		((IXtInjectorProvider.Delegate) IXtInjectorProvider.INSTANCE).setDelegate(new UIXtInjectorProvider());
 		((IJavaReflectAccess.Delegate) IJavaReflectAccess.INSTANCE).setDelegate(new UIJavaReflectAccess());
 		((IBundleInfo.Delegate) IBundleInfo.Registry.INSTANCE).setDelegate(new UIBundleInfoRegistry());
+		((TestSuiteInfoRegistry.Delegate) ITestSuiteInfo.Registry.INSTANCE).setDelegate(new UITestSuiteInfoRegistry());
 	}
 
 }

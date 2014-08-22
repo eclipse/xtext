@@ -49,7 +49,7 @@ public class DescriptionFactory {
 	public static Description createTestDescription(XpectInvocation invocation) {
 		URI uri = EcoreUtil.getURI(invocation);
 		Preconditions.checkArgument(uri.isPlatform());
-		String className = invocation.getFile().getTest().getTestClassOrSuite().getTestOrSuite().getJvmClass().getQualifiedName();
+		String className = invocation.getFile().getJavaModel().getTestOrSuite().getJvmClass().getQualifiedName();
 		String text = Joiner.on('/').join(uri.segmentsList().subList(2, uri.segmentCount())) + "#" + uri.fragment();
 		String title = new XpectTestTitleProvider().getTitle(invocation);
 		if (title != null)

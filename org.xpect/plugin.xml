@@ -3,6 +3,15 @@
 
 <plugin>
    <extension-point id="fileExtensions" name="fileExtensions" schema="schema/fileExtensions.exsd"/>
+   <extension-point id="testSuite" name="testSuite" schema="schema/testSuite.exsd"/>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Xpect -->
+      <package
+            uri="http://www.eclipse.org/xpect/Xpect"
+            class="org.xpect.XpectPackage"
+            genModel="model/Xpect.genmodel"/>
+   </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated Xpect -->

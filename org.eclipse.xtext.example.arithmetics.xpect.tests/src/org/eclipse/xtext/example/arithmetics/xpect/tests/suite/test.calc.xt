@@ -1,7 +1,4 @@
-// XPECT_SETUP org.eclipse.xtext.example.arithmetics.xpect.tests.suite.ArithmeticsXtextTests END_SETUP
-
 module foo
-
 
 def const: 1;
 

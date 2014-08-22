@@ -22,12 +22,10 @@ import com.google.common.base.Predicate;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class XpectProposalProvider extends AbstractXpectProposalProvider {
-
-	protected void lookupCrossReference(EObject model, EReference reference, ICompletionProposalAcceptor acceptor,
-			Predicate<IEObjectDescription> filter, Function<IEObjectDescription, ICompletionProposal> proposalFactory) {
-		if (reference == XpectPackage.Literals.XPECT_TEST__TEST_CLASS_OR_SUITE)
+	protected void lookupCrossReference(EObject model, EReference reference, ICompletionProposalAcceptor acceptor, Predicate<IEObjectDescription> filter,
+			Function<IEObjectDescription, ICompletionProposal> proposalFactory) {
+		if (reference == XpectPackage.Literals.XPECT_TEST__DECLARED_SUITE)
 			reference = XpectJavaModelPackage.Literals.XJM_CLASS__JVM_CLASS;
 		super.lookupCrossReference(model, reference, acceptor, filter, proposalFactory);
 	}
-
 }

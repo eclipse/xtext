@@ -74,7 +74,7 @@ public class XpectScopeProvider extends AbstractScopeProvider {
 	}
 
 	public IScope getScope(EObject context, EReference reference) {
-		if (reference == XpectPackage.Literals.XPECT_TEST__TEST_CLASS_OR_SUITE)
+		if (reference == XpectPackage.Literals.XPECT_TEST__DECLARED_SUITE)
 			return getScopeForTestClassOrSuite(EcoreUtil2.getContainerOfType(context, XpectFile.class));
 		if (reference == XpectPackage.Literals.XPECT_INVOCATION__METHOD)
 			return getScopeForXpectInvocationTestMethod(EcoreUtil2.getContainerOfType(context, XpectFile.class));
@@ -88,7 +88,7 @@ public class XpectScopeProvider extends AbstractScopeProvider {
 
 	private IScope getScopeForTestClassOrSuite(XpectFile xpectFile) {
 		ResourceSet resourceSet = xpectFile.eResource().getResourceSet();
-		return new XpectJavaModelScope(resourceSet, typeProviderFactory.findOrCreateTypeProvider(resourceSet));
+		return new SimpleTypeScope(typeProviderFactory.findOrCreateTypeProvider(resourceSet));
 	}
 
 	private IScope getScopeForAssignmentTarget(AbstractComponent owner) {
@@ -96,7 +96,7 @@ public class XpectScopeProvider extends AbstractScopeProvider {
 		if (owner instanceof Component)
 			types.add(((Component) owner).getComponentClass());
 		else if (owner instanceof XpectTest) {
-			XpectJavaModel model = ((XpectTest) owner).getTestClassOrSuite();
+			XpectJavaModel model = ((XpectTest) owner).getFile().getJavaModel();
 			if (model != null && !model.eIsProxy())
 				for (XjmSetup setup : model.getSetups())
 					types.add(setup.getInitializer());
@@ -126,7 +126,7 @@ public class XpectScopeProvider extends AbstractScopeProvider {
 						packages.add(componentClass.getPackageName());
 					current = ((Component) current).getAssignment().getInstance();
 				} else if (current instanceof XpectTest) {
-					XpectJavaModel model = ((XpectTest) current).getTestClassOrSuite();
+					XpectJavaModel model = ((XpectTest) current).getFile().getJavaModel();
 					if (model != null && !model.eIsProxy())
 						for (XjmSetup setup : model.getSetups()) {
 							JvmDeclaredType jvmClass = setup.getJvmClass();
@@ -155,10 +155,7 @@ public class XpectScopeProvider extends AbstractScopeProvider {
 	}
 
 	private IScope getScopeForXpectInvocationTestMethod(XpectFile file) {
-		XpectTest test = file.getTest();
-		if (test == null)
-			return IScope.NULLSCOPE;
-		XpectJavaModel model = test.getTestClassOrSuite();
+		XpectJavaModel model = file.getJavaModel();
 		if (model == null || model.eIsProxy())
 			return IScope.NULLSCOPE;
 		List<IEObjectDescription> descs = Lists.newArrayList();

@@ -13,6 +13,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.util.Strings;
 import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
@@ -24,10 +25,12 @@ import org.xpect.XjmTest;
 import org.xpect.XjmXpectMethod;
 import org.xpect.XpectJavaModel;
 import org.xpect.XpectStandaloneSetup;
+import org.xpect.runner.XpectTestFiles.Builder;
+import org.xpect.runner.XpectTestFiles.FileRoot;
 import org.xpect.setup.ThisRootTestClass;
 import org.xpect.setup.ThisTestObject.TestObjectSetup;
-import org.xpect.state.ResolvedConfiguration;
 import org.xpect.state.Configuration;
+import org.xpect.state.ResolvedConfiguration;
 import org.xpect.state.StateContainer;
 import org.xpect.util.AnnotationUtil;
 import org.xpect.util.XpectJavaModelFactory;
@@ -119,10 +122,25 @@ public class XpectRunner extends ParentRunner<XpectFileRunner> {
 	}
 
 	protected IXpectURIProvider findUriProvider(Class<?> clazz) throws InitializationError {
+		String baseDir = System.getProperty("xpectBaseDir");
+		String files = System.getProperty("xpectFiles");
+		if (!Strings.isEmpty(baseDir) || !Strings.isEmpty(files)) {
+			Builder builder = new XpectTestFiles.Builder().relativeTo(FileRoot.PROJECT);
+			if (!Strings.isEmpty(baseDir))
+				builder.withBaseDir(baseDir);
+			if (files != null)
+				for (String file : files.split(";")) {
+					String trimmed = file.trim();
+					if (!"".equals(trimmed))
+						builder.addFile(trimmed);
+				}
+			return builder.create(clazz);
+
+		}
 		IXpectURIProvider provider = AnnotationUtil.newInstanceViaMetaAnnotation(clazz, XpectURIProvider.class, IXpectURIProvider.class);
-		if (provider == null)
-			provider = XpectTestFiles.Default.create(clazz);
-		return provider;
+		if (provider != null)
+			return provider;
+		return new XpectTestFiles.Builder().relativeTo(FileRoot.CLASS).create(clazz);
 	}
 
 	@Override
@@ -157,28 +175,10 @@ public class XpectRunner extends ParentRunner<XpectFileRunner> {
 
 	@Override
 	protected void runChild(XpectFileRunner child, RunNotifier notifier) {
-		// IXpectRunnerSetup<Object, Object, Object, Object> setup =
-		// createSetup();
-		// SetupContext ctx = createSetupContext(setup);
-		// ctx.setXpectJavaModel(xpectJavaModel);?
-		// ctx.setAllFiles(getFiles());
-		// ctx.setTestClass(getTestClass().getJavaClass());
-		// ctx.setUriProvider(uriProvider);
 		try {
-			// if (setup != null)
-			// setup.beforeClass(ctx);
-			// child.run(notifier, setup, ctx);
 			child.run(notifier);
 		} catch (Throwable t) {
 			notifier.fireTestFailure(new Failure(child.getDescription(), t));
 		}
-		// finally {
-		// try {
-		// if (setup != null)
-		// setup.afterClass(ctx, ctx.getUserClassCtx());
-		// } catch (Throwable t) {
-		// notifier.fireTestFailure(new Failure(getDescription(), t));
-		// }
-		// }
 	}
 }

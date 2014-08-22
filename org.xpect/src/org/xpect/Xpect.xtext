@@ -19,7 +19,7 @@ Text:
 ;
 	
 Lexicalspace_Setup returns XpectTest hidden(WS, ML_COMMENT, SL_COMMENT):
-	{XpectTest} "XPECT_SETUP" testClassOrSuite=[xjm::XpectJavaModel|QualifiedName] 
+	{XpectTest} "XPECT_SETUP" declaredSuite=[types::JvmDeclaredType|QualifiedName]? 
 	assignments+=Assignment*
 	"END_SETUP"
 ;

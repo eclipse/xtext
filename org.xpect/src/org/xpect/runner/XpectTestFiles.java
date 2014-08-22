@@ -8,6 +8,7 @@
 package org.xpect.runner;
 
 import java.io.File;
+import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
@@ -37,11 +38,49 @@ import com.google.common.collect.Lists;
 @XpectURIProvider(XpectTestFileCollector.class)
 public @interface XpectTestFiles {
 
-	@XpectTestFiles(fileExtensions = "xt")
-	public static class Default {
-		public static XpectTestFileCollector create(Class<?> owner) {
-			XpectTestFiles annotation = Default.class.getAnnotation(XpectTestFiles.class);
-			return new XpectTestFileCollector(owner, annotation);
+	static class Builder implements XpectTestFiles {
+
+		private String baseDir = "";
+		private List<String> files = Lists.newArrayList();
+		private FileRoot relativeTo = FileRoot.CLASS;
+
+		public Builder addFile(String file) {
+			this.files.add(file);
+			return this;
+		}
+
+		public Class<? extends Annotation> annotationType() {
+			return XpectTestFiles.class;
+		}
+
+		public String baseDir() {
+			return baseDir;
+		}
+
+		public IXpectURIProvider create(Class<?> owner) {
+			return new XpectTestFileCollector(owner, this);
+		}
+
+		public String[] fileExtensions() {
+			return new String[] { "xt" };
+		}
+
+		public String[] files() {
+			return files.toArray(new String[files.size()]);
+		}
+
+		public FileRoot relativeTo() {
+			return relativeTo;
+		}
+
+		public Builder relativeTo(FileRoot relativeTo) {
+			this.relativeTo = relativeTo;
+			return this;
+		}
+
+		public Builder withBaseDir(String baseDir) {
+			this.baseDir = baseDir;
+			return this;
 		}
 	}
 
@@ -55,15 +94,9 @@ public @interface XpectTestFiles {
 		protected final Class<?> owner;
 		protected IBundleInfo project;
 
-		public XpectTestFileCollector(Class<?> owner, XpectTestFiles ctx) {
+		protected XpectTestFileCollector(Class<?> owner, XpectTestFiles ctx) {
 			this.owner = owner;
 			this.ctx = ctx;
-		}
-
-		protected IBundleInfo getProject() {
-			if (project == null)
-				project = IBundleInfo.Registry.INSTANCE.getBundle(owner);
-			return project;
 		}
 
 		protected URI createURI(File file) {
@@ -117,6 +150,12 @@ public @interface XpectTestFiles {
 			if (!Strings.isNullOrEmpty(ctx.baseDir()))
 				Collections.addAll(segments, ctx.baseDir().split("/"));
 			return Joiner.on('/').join(segments);
+		}
+
+		protected IBundleInfo getProject() {
+			if (project == null)
+				project = IBundleInfo.Registry.INSTANCE.getBundle(owner);
+			return project;
 		}
 
 		protected URI resolvePlatformResourceURI(URI uri) {

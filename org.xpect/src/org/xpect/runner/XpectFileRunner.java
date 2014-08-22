@@ -37,13 +37,13 @@ import org.junit.runner.manipulation.Sorter;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 import org.xpect.XjmMethod;
-import org.xpect.XjmTest;
 import org.xpect.XjmTestMethod;
 import org.xpect.XpectFile;
 import org.xpect.XpectInvocation;
 import org.xpect.XpectJavaModel;
 import org.xpect.XpectPackage;
 import org.xpect.XpectTest;
+import org.xpect.registry.ITestSuiteInfo;
 import org.xpect.services.XpectGrammarAccess;
 import org.xpect.setup.ISetupInitializer;
 import org.xpect.setup.SetupInitializer;
@@ -53,11 +53,9 @@ import org.xpect.state.StateContainer;
 import org.xpect.text.CharSequences;
 import org.xpect.text.IReplacement;
 import org.xpect.text.Replacement;
-import org.xpect.text.Text;
 import org.xpect.util.IssueVisualizer;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -103,13 +101,10 @@ public class XpectFileRunner implements Filterable, Sortable {
 	protected List<AbstractTestRunner> createChildren() {
 		List<AbstractTestRunner> children = Lists.newArrayList();
 		if (xpectFile != null) {
-			XpectTest test = xpectFile.getTest();
-			if (test != null && !test.eIsProxy()) {
-				XpectJavaModel xjm = test.getTestClassOrSuite();
-				for (XjmMethod method : xjm.getMethods().values())
-					if (method instanceof XjmTestMethod)
-						children.add(createTestRunner(method));
-			}
+			XpectJavaModel xjm = xpectFile.getJavaModel();
+			for (XjmMethod method : xjm.getMethods().values())
+				if (method instanceof XjmTestMethod)
+					children.add(createTestRunner(method));
 			for (XpectInvocation inv : xpectFile.getInvocations())
 				children.add(createTestRunner(inv));
 		}
@@ -161,7 +156,7 @@ public class XpectFileRunner implements Filterable, Sortable {
 
 	protected IReplacement getClassOrSuiteFix(XpectTest test, Set<String> allTests) {
 		String defaultTest = getRunner().getXpectJavaModel().getTestOrSuite().getJavaClass().getName();
-		for (INode node : NodeModelUtils.findNodesForFeature(test, XpectPackage.Literals.XPECT_TEST__TEST_CLASS_OR_SUITE)) {
+		for (INode node : NodeModelUtils.findNodesForFeature(test, XpectPackage.Literals.XPECT_TEST__DECLARED_SUITE)) {
 			StringBuilder result = new StringBuilder();
 			for (ILeafNode leaf : node.getLeafNodes())
 				if (!leaf.isHidden()) {
@@ -205,16 +200,20 @@ public class XpectFileRunner implements Filterable, Sortable {
 
 	protected XpectFile loadXpectFile(XtextResource res) throws IOException {
 		XpectFile file = !res.getContents().isEmpty() ? (XpectFile) res.getContents().get(0) : null;
-		if (file != null) {
-			validate(res, file);
-			XpectTest test = file.getTest();
-			if (test != null)
-				validate(res, test);
-		}
-		validate(res);
 		if (file == null)
 			throw new IllegalStateException("Resource for " + res.getURI() + " is empty.");
+		validate(file);
+		validate(res);
 		return file;
+	}
+
+	protected void validate(XpectFile file) {
+		XpectJavaModel model = file.getJavaModel();
+		if (model == null || model.eIsProxy()) {
+			String fileName = file.eResource().getURI().lastSegment();
+			String registry = ITestSuiteInfo.Registry.INSTANCE.toString();
+			throw new IllegalStateException("Could not find test suite for " + fileName + ". Registry:\n" + registry);
+		}
 	}
 
 	protected XtextResource loadXpectResource(URI uri) throws IOException {
@@ -228,21 +227,14 @@ public class XpectFileRunner implements Filterable, Sortable {
 		try {
 			if (error != null) {
 				notifier.fireTestFailure(new Failure(getDescription(), error));
-			} else if (xpectFile.getTest() == null) {
-				notifier.fireTestIgnored(getDescription());
 			} else {
 				state.get(ValidatingSetup.class).get().validate();
-				// ctx.setXpectFile(xpectFile);
-				// if (setup != null)
-				// ctx.setUserFileCtx(setup.beforeFile(ctx,
-				// ctx.getUserClassCtx(), createSetupInitializer()));
 				if (getChildren().isEmpty()) {
 					notifier.fireTestStarted(getDescription());
 					notifier.fireTestFinished(getDescription());
 				} else
 					for (AbstractTestRunner child : getChildren())
 						try {
-							// child.run(notifier, setup, ctx);
 							child.run(notifier);
 						} catch (Throwable t) {
 							notifier.fireTestFailure(new Failure(getDescription(), t));
@@ -256,12 +248,6 @@ public class XpectFileRunner implements Filterable, Sortable {
 			} catch (Throwable t) {
 				notifier.fireTestFailure(new Failure(getDescription(), t));
 			}
-			// try {
-			// if (setup != null)
-			// setup.afterFile(ctx, ctx.getUserFileCtx());
-			// } catch (Throwable t) {
-			// notifier.fireTestFailure(new Failure(getDescription(), t));
-			// }
 		}
 	}
 
@@ -281,32 +267,6 @@ public class XpectFileRunner implements Filterable, Sortable {
 			String document = res.getParseResult().getRootNode().getText();
 			String errors = new IssueVisualizer().visualize(document, issues);
 			throw new ComparisonFailure("Errors in " + res.getURI(), document.trim(), errors.trim());
-		}
-	}
-
-	protected void validate(XtextResource res, XpectFile file) throws ComparisonFailure {
-		if (file.getTest() == null) {
-			String document = res.getParseResult().getRootNode().getText();
-			String setup = "XPECT_SETUP " + runner.getXpectJavaModel().getTestOrSuite().getJavaClass().getName() + " END_SETUP";
-			// FIXME: https://github.com/meysholdt/Xpect/issues/45
-			throw new ComparisonFailure("XPECT_SETUP missing in " + res.getURI(), document, setup + "\n" + document);
-		}
-	}
-
-	protected void validate(XtextResource res, XpectTest test) {
-		Set<String> allTests = Sets.newLinkedHashSet();
-		for (XjmTest xjmt : getRunner().getXpectJavaModel().getTests())
-			allTests.add(xjmt.getJavaClass().getName());
-		if (test.getTestClassOrSuite() == null || test.getTestClassOrSuite().eIsProxy()) {
-			IReplacement fix = getClassOrSuiteFix(test, allTests);
-			Text document = new Text(res.getParseResult().getRootNode().getText());
-			String msg = "Java Test or Suite Class not found in " + res.getURI();
-			throw new ComparisonFailure(msg, document.toString(), document.with(fix));
-		} else if (!allTests.contains(test.getTestClassOrSuite().getTestOrSuite().getJavaClass().getName())) {
-			IReplacement fix = getClassOrSuiteFix(test, allTests);
-			Text doc = new Text(res.getParseResult().getRootNode().getText());
-			String msg = "Java Test class from " + res.getURI() + " is not among the executed test classes. All Tests:" + allTests;
-			throw new ComparisonFailure(msg, doc.toString(), doc.with(fix));
 		}
 	}
 

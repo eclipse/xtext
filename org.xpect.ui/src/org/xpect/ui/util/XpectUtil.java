@@ -23,7 +23,6 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.util.JdtClasspathUriResolver;
 import org.xpect.XpectFile;
 import org.xpect.XpectJavaModel;
-import org.xpect.XpectTest;
 import org.xpect.runner.XpectRunner;
 import org.xpect.ui.internal.XpectActivator;
 
@@ -62,12 +61,8 @@ public class XpectUtil {
 
 	public static XpectJavaModel loadJavaModel(IFile file) {
 		XpectFile xpectFile = XpectUtil.loadFile(file);
-		if (xpectFile != null) {
-			XpectTest xpectTest = xpectFile.getTest();
-			if (xpectTest != null && !xpectTest.eIsProxy()) {
-				return xpectTest.getTestClassOrSuite();
-			}
-		}
+		if (xpectFile != null)
+			return xpectFile.getJavaModel();
 		return null;
 	}
 

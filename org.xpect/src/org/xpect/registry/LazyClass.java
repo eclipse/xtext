@@ -14,24 +14,22 @@ public class LazyClass<T> {
 		return null;
 	}
 
-	public static <T> LazyClass<T> create(Class<T> expectedType, String name, IExtensionInfo trace) {
-		if (name != null)
-			return new LazyClass<T>(expectedType, name, trace.getClassLoader(), trace);
-		return null;
-	}
-
 	public static <T> LazyClass<T> create(Class<T> expectedType, String name, Function<String, Class<?>> loader) {
 		if (name != null)
 			return new LazyClass<T>(expectedType, name, loader, null);
 		return null;
 	}
 
+	public static <T> LazyClass<T> create(Class<T> expectedType, String name, IExtensionInfo trace) {
+		if (name != null)
+			return new LazyClass<T>(expectedType, name, trace.getClassLoader(), trace);
+		return null;
+	}
+
 	private final Class<T> expectedType;
 	private final String factory;
 	private final Function<String, Class<?>> loader;
-
 	private final String name;
-
 	private final IExtensionInfo trace;
 
 	protected LazyClass(Class<T> expectedType, String name, Function<String, Class<?>> loader, IExtensionInfo trace) {
@@ -70,6 +68,11 @@ public class LazyClass<T> {
 
 	public IExtensionInfo getTrace() {
 		return trace;
+	}
+
+	@Override
+	public int hashCode() {
+		return name.hashCode();
 	}
 
 	@SuppressWarnings("unchecked")

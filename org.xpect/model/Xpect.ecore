@@ -13,11 +13,12 @@
       <eParameters name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eOperations name="getDocument" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="getJavaModel" eType="ecore:EClass XpectJavaModel.ecore#//XpectJavaModel"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
         eType="#//Member" containment="true" eOpposite="#//Member/file"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XpectTest" eSuperTypes="#//Member #//AbstractComponent">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="testClassOrSuite" eType="ecore:EClass XpectJavaModel.ecore#//XpectJavaModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="declaredSuite" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmDeclaredType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XpectIgnore" eSuperTypes="#//Member"/>
   <eClassifiers xsi:type="ecore:EClass" name="XpectInvocation" eSuperTypes="#//Member">

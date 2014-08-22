@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Tests
-Bundle-SymbolicName: org.eclipse.xtext.example.arithmetics.xpect.tests
+Bundle-SymbolicName: org.eclipse.xtext.example.arithmetics.xpect.tests;singleton:=true
 Bundle-Version: 0.1.0.qualifier
 Fragment-Host: org.eclipse.xtext.example.arithmetics.ui 
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7

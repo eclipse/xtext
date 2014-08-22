@@ -152,7 +152,7 @@ public class StandaloneExtensionRegistry implements IExtensionInfo.Registry {
 		Multimap<String, IExtensionInfo> result = HashMultimap.create();
 		try {
 			XMLReader reader = XMLReaderFactory.createXMLReader();
-			for (URL url : ClasspathUtil.findResources("plugin.xml")) {
+			for (URL url : ClasspathUtil.findResources("plugin.xml", "fragment.xml")) {
 				reader.setContentHandler(new PluginXMLContentHandler(url, result));
 				InputStream openStream = null;
 				try {

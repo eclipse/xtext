@@ -53,7 +53,7 @@ public class XpectJavaValidator extends AbstractXpectJavaValidator {
 
 	protected void validateClassIsOnClasspath(Class<?> cls, Notifier ctx) {
 		if (typeReferences.findDeclaredType(cls, ctx) == null) {
-			error("The class " + cls.getName() + " is not on the classpath", XpectPackage.Literals.XPECT_TEST__TEST_CLASS_OR_SUITE);
+			error("The class " + cls.getName() + " is not on the classpath", XpectPackage.Literals.XPECT_TEST__DECLARED_SUITE);
 		}
 	}
 

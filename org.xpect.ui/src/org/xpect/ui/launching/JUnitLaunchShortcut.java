@@ -10,7 +10,6 @@ package org.xpect.ui.launching;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.jdt.core.IJavaElement;
-import org.eclipse.jdt.internal.junit.launcher.JUnitLaunchConfigurationConstants;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -19,24 +18,25 @@ import org.eclipse.ui.IEditorPart;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class JUnitLaunchShortcut extends org.eclipse.jdt.junit.launcher.JUnitLaunchShortcut {
 
 	private JUnitJavaElementDelegate delegate;
 
 	@Override
 	protected ILaunchConfigurationWorkingCopy createLaunchConfiguration(IJavaElement element) throws CoreException {
-		ILaunchConfigurationWorkingCopy wc = super.createLaunchConfiguration(element);
-		if (delegate != null)
-			wc.setAttribute(JUnitLaunchConfigurationConstants.ATTR_TEST_METHOD_NAME, delegate.getDescription().getDisplayName());
+		ILaunchConfigurationWorkingCopy wc;
+		if (delegate != null && element.getElementType() == IJavaElement.TYPE)
+			wc = LaunchShortcutUtil.createXpectLaunchConfiguration(delegate, getLaunchConfigurationTypeId());
+		else
+			wc = super.createLaunchConfiguration(element);
 		return wc;
 	}
 
 	@Override
 	public void launch(IEditorPart editor, String mode) {
 		try {
-			delegate = new JUnitJavaElementDelegate(editor);
-			if (delegate.getJavaElement() != null)
+			delegate = new JunitJavaElementDelegateAdapterFactory().create(editor);
+			if (delegate != null)
 				super.launch(new StructuredSelection(delegate), mode);
 			else
 				super.launch(editor, mode);
