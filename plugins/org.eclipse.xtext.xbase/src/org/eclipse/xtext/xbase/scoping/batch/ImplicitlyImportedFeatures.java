@@ -54,7 +54,6 @@ import com.google.inject.Singleton;
  */
 @SuppressWarnings("all" /* deprecation */)
 @Singleton
-@ImplementedBy(ImplicitlyImportedTypes.class)
 public class ImplicitlyImportedFeatures {
 	
 	@Inject
