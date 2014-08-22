@@ -52,4 +52,16 @@ public class TypeComputationStateWithRootExpectation extends TypeComputationStat
 		return createTypeAssigner(state);
 	}
 	
+	@Override
+	protected AbstractTypeExpectation createTypeExpectation(/* @Nullable */ LightweightTypeReference expectedType, AbstractTypeComputationState actualState, boolean returnType) {
+		LightweightTypeReference type = expectedType != null ? expectedType.copyInto(actualState.getReferenceOwner()) : null;
+		AbstractTypeExpectation result;
+		if (type != null) {
+			result = returnType ? new TypeExpectation(type, actualState, returnType) : new RootTypeExpectation(type, actualState);
+		} else {
+			result = returnType ? new NoExpectation(actualState, returnType) : new RootNoExpectation(actualState, true);
+		}
+		return result;
+	}
+	
 }

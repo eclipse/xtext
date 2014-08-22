@@ -470,7 +470,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 			for (ITypeExpectation expectation: state.getExpectations()) {
 				LightweightTypeReference expectedType = expectation.getExpectedType();
 				if (expectedType != null && expectedType.isPrimitiveVoid()) {
-					expectation.acceptActualType(getPrimitiveVoid(state), ConformanceFlags.CHECKED_SUCCESS);
+					expectation.acceptActualType(expectedType, ConformanceFlags.CHECKED_SUCCESS);
 				} else {
 					expectation.acceptActualType(expectation.getReferenceOwner().newAnyTypeReference(), ConformanceFlags.UNCHECKED);
 				}
