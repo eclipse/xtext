@@ -829,7 +829,7 @@ public class JvmTypesBuilder {
 				} else {
 					p.append(toStringBuilder.getName());
 				}
-				p.append("(this).addAllFields().toString()");
+				p.append("(this).addAllFields().toString();");
 				p.newLine().append("return result;");
 			}
 		});
