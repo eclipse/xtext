@@ -19,7 +19,9 @@ import org.eclipse.xtext.builder.trace.TraceMarkers;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
+import org.eclipse.xtext.junit4.Flaky;
 import org.eclipse.xtext.util.TextRegion;
+import org.junit.Rule;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -38,7 +40,10 @@ public class XtendTraceTests extends AbstractXtendUITestCase {
 	@Inject
 	private ITraceForStorageProvider traceInformation;
 
+	@Rule
+	public Flaky.Rule flakyRule = new Flaky.Rule();
 
+	@Flaky
 	@Test
 	public void testMarkerForTraceIsInstalled() throws Exception {
 		IFile file = testHelper.createFile("test/Test", "package test\nclass Test {}");

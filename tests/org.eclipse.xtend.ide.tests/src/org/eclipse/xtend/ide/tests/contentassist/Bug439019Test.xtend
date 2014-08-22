@@ -8,12 +8,14 @@
 package org.eclipse.xtend.ide.tests.contentassist
 
 import org.junit.Test
+import org.eclipse.xtext.junit4.Flaky
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 class Bug439019Test extends AbstractXtendContentAssistBugTest {
 	
+	@Flaky
 	@Test def void test_01() throws Exception {
 		newBuilder.append('''
 			class C {
