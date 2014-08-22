@@ -30,6 +30,7 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
@@ -855,13 +856,24 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		int flagCompareResult = ConformanceFlags.compareFlags(leftConformance, rightConformance);
 		if (flagCompareResult == 0) {
 			if ((leftConformance & ConformanceFlags.SUCCESS) != 0) {
-				if ((leftConformance & ConformanceFlags.PREFERRED_LAMBDA_SUGAR) != 0 == ((rightConformance & ConformanceFlags.PREFERRED_LAMBDA_SUGAR) != 0)) {
-					return CandidateCompareResult.AMBIGUOUS;
-				} else if ((leftConformance & ConformanceFlags.PREFERRED_LAMBDA_SUGAR) != 0) {
-					return CandidateCompareResult.THIS;
-				} else {
-					return CandidateCompareResult.OTHER;
+				if (((leftConformance ^ rightConformance) & (ConformanceFlags.LAMBDA_VOID_COMPATIBLE | ConformanceFlags.PREFERRED_LAMBDA_SUGAR)) != 0 
+						&& isLambdaExpression(leftIdx) && other.isLambdaExpression(rightIdx)) {
+					if ((leftConformance & ConformanceFlags.LAMBDA_VOID_COMPATIBLE) != 0) {
+						if ((rightConformance & ConformanceFlags.LAMBDA_VOID_COMPATIBLE) == 0) {
+							return CandidateCompareResult.OTHER;
+						}
+					} else if ((rightConformance & ConformanceFlags.LAMBDA_VOID_COMPATIBLE) != 0) {
+						return CandidateCompareResult.THIS;
+					}
+					if ((leftConformance & ConformanceFlags.PREFERRED_LAMBDA_SUGAR) != 0) {
+						if ((rightConformance & ConformanceFlags.PREFERRED_LAMBDA_SUGAR) == 0) {
+							return CandidateCompareResult.THIS;
+						}
+					} else if ((rightConformance & ConformanceFlags.PREFERRED_LAMBDA_SUGAR) != 0) {
+						return CandidateCompareResult.OTHER;
+					}
 				}
+				return CandidateCompareResult.AMBIGUOUS;
 			} else {
 				return CandidateCompareResult.EQUALLY_INVALID;
 			}
@@ -912,6 +924,14 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			return ConformanceFlags.INCOMPATIBLE;
 		}
 		return getState().getStackedResolvedTypes().getConformanceFlags(argument, recompute);
+	}
+	
+	protected boolean isLambdaExpression(int argumentIdx) {
+		if (argumentIdx >= arguments.getArgumentCount()) {
+			return false;
+		}
+		XExpression argument = arguments.getArgument(argumentIdx);
+		return argument != null && argument instanceof XClosure;
 	}
 
 	protected CandidateCompareResult compareExpectedArgumentTypes(AbstractPendingLinkingCandidate<?> right) {

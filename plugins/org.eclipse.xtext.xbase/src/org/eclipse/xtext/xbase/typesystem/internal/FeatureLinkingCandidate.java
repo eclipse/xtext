@@ -29,6 +29,7 @@ import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
@@ -446,6 +447,19 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 			}
 		}
 		return super.getConformanceFlags(idx, recompute);
+	}
+	
+	@Override
+	protected boolean isLambdaExpression(int argumentIdx) {
+		if (isStatic()) {
+			return false;
+		}
+		if (argumentIdx == 0) {
+			if (getReceiver() != null) {
+				return getReceiver() instanceof XClosure;
+			}
+		}
+		return super.isLambdaExpression(argumentIdx);
 	}
 	
 	@Override
