@@ -52,7 +52,7 @@ public class JavaEditorInputMatcher implements IEditorMatchingStrategy {
 			if (!editorInfo.getEditorId().equals(editorRef.getId())) {
 				return false;
 			}
-			IEditorInput newInput = editorInputRedirector.findOriginalSource(inputToCheck);
+			IEditorInput newInput = editorInputRedirector.findOriginalSourceForOuputFolderCopy(inputToCheck);
 			IEditorInput currentInput = editorRef.getEditorInput();
 			if (newInput.equals(currentInput)) {
 				if (decisions.decideAccordingToCaller() != Decision.FORCE_JAVA) {
