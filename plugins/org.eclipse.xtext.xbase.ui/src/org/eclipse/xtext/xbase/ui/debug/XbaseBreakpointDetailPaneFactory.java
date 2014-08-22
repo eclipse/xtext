@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.ui.debug;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.ui.IDetailPane;
@@ -23,7 +22,6 @@ import org.eclipse.jdt.internal.debug.ui.breakpoints.LineBreakpointDetailPane;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.xtext.builder.smap.StratumBreakpointAdapterFactory;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 
 import com.google.inject.Inject;
 
@@ -32,8 +30,6 @@ public class XbaseBreakpointDetailPaneFactory extends BreakpointDetailPaneFactor
 
 	@Inject
 	private XbaseDetailPanePrioritizer prioritizer;
-	@Inject
-	private IStorage2UriMapper storage2UriMapper;
 	@Inject
 	private IResourceServiceProvider.Registry registry;
 	
@@ -68,7 +64,7 @@ public class XbaseBreakpointDetailPaneFactory extends BreakpointDetailPaneFactor
 					try {
 						if (input instanceof IJavaStratumLineBreakpoint) {
 							IJavaStratumLineBreakpoint stratumBreakpoint = (IJavaStratumLineBreakpoint) input;
-							URI uri = storage2UriMapper.getUri((IStorage) stratumBreakpoint.getMarker().getResource());
+							URI uri = URI.createURI((String) stratumBreakpoint.getMarker().getAttribute(StratumBreakpointAdapterFactory.ORG_ECLIPSE_XTEXT_XBASE_SOURCE_URI));
 							JavaBreakPointProvider javaBreakPointProvider = registry.getResourceServiceProvider(uri).get(JavaBreakPointProvider.class);
 							input = javaBreakPointProvider.getBreakpointWithJavaLocation(stratumBreakpoint);
 						}

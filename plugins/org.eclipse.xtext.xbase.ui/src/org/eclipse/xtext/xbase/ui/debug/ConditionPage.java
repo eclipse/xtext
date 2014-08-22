@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.ui.debug;
 
 import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.debug.internal.ui.SWTFactory;
@@ -21,14 +20,12 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.IPropertyListener;
+import org.eclipse.xtext.builder.smap.StratumBreakpointAdapterFactory;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 
 import com.google.inject.Inject;
 
 public class ConditionPage extends JavaBreakpointPage {
-	@Inject
-	private IStorage2UriMapper storage2UriMapper;
 	@Inject
 	private IResourceServiceProvider.Registry registry;
 	
@@ -55,8 +52,8 @@ public class ConditionPage extends JavaBreakpointPage {
 		try {
 			IJavaBreakpoint breakpoint = getBreakpoint();
 			IMarker marker = breakpoint.getMarker();
-			String type = marker.getType();
-			if ("org.eclipse.jdt.debug.javaStratumLineBreakpointMarker".equals(type)) {
+			Object languageName = marker.getAttribute(StratumBreakpointAdapterFactory.ORG_ECLIPSE_XTEXT_XBASE_LANGUAGE_NAME);
+			if (languageName != null) {
 				setTitle("Condition");
 				editor = new JavaBreakpointConditionEditor();
 				editor.createControl(parent);
@@ -74,11 +71,9 @@ public class ConditionPage extends JavaBreakpointPage {
 						}
 					}
 				});
-				URI uri = storage2UriMapper.getUri((IStorage) marker.getResource());
+				URI uri = URI.createURI((String) marker.getAttribute(StratumBreakpointAdapterFactory.ORG_ECLIPSE_XTEXT_XBASE_SOURCE_URI));
 				JavaBreakPointProvider breakPointProvider = registry.getResourceServiceProvider(uri).get(JavaBreakPointProvider.class);
 				editor.setInput(breakPointProvider.getBreakpointWithJavaLocation((IJavaStratumLineBreakpoint) breakpoint));
-			} else {
-				super.createTypeSpecificEditors(parent);
 			}
 		} catch (CoreException e) {
 			setErrorMessage(e.getMessage());
