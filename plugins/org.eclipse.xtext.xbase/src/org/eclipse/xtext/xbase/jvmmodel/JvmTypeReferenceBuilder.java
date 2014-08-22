@@ -102,11 +102,15 @@ public class JvmTypeReferenceBuilder {
 	}
 	
 	/**
-	 * Creates a new {@link JvmWildcardTypeReference} with the given type as the extends (OUT) bound.
+	 * Creates a new {@link JvmWildcardTypeReference} with the given type as the extends bound.
+	 * For example: 
+	 * <pre>wildCardExtends(typeRef(CharSequence))</pre> 
+	 * would create a type reference representing 
+	 * <pre>? extends CharSequence</pre> 
 	 * 
 	 * @param extendsBound
 	 *            the extends bound of the wildcard
-	 * @return the newly created {@link JvmWildcardTypeReference}
+	 * @return the newly created wildcard type reference
 	 */
 	public JvmTypeReference wildCardExtends(JvmTypeReference extendsBound) {
 		WildcardTypeReference wildcardTypeReference = typeReferenceOwner.newWildcardTypeReference();
@@ -115,22 +119,28 @@ public class JvmTypeReferenceBuilder {
 	}
 	
 	/**
-	 * Creates a new {@link JvmWildcardTypeReference} with the given type as the super (IN) bound.
-	 * 
+	 * Creates a new {@link JvmWildcardTypeReference} with the given type as the super bound.
+	 * For example: 
+	 * <pre>wildCardSuper(typeRef(CharSequence))</pre> 
+	 * would create a type reference representing 
+	 * <pre>? super CharSequence</pre> 
+	 *  
 	 * @param superBound
 	 *            the super bound of the wildcard
-	 * @return the newly created {@link JvmWildcardTypeReference}
+	 * @return the newly created wildcard type reference
 	 */
 	public JvmTypeReference wildCardSuper(JvmTypeReference superBound) {
 		WildcardTypeReference wildcardTypeReference = typeReferenceOwner.newWildcardTypeReference();
+		wildcardTypeReference.addUpperBound(typeReferenceOwner.toLightweightTypeReference(typeRef(Object.class)));
 		wildcardTypeReference.setLowerBound(typeReferenceOwner.toLightweightTypeReference(superBound));
 		return wildcardTypeReference.toTypeReference();
 	}
 	
 	/**
-	 * Creates a new {@link JvmWildcardTypeReference}.
+	 * Creates a new {@link JvmWildcardTypeReference} with extend bound {@link Object}.
+	 * I.e. <pre>? extends Object</pre>
 	 * 
-	 * @return the newly created {@link JvmWildcardTypeReference}
+	 * @return the newly created wildcard type reference
 	 */
 	public JvmTypeReference wildCard() {
 		return wildCardExtends(typeRef(Object.class));

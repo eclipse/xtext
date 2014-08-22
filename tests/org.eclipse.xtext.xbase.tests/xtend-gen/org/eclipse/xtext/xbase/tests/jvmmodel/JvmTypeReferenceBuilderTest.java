@@ -128,7 +128,7 @@ public class JvmTypeReferenceBuilderTest extends AbstractJvmModelTest {
     JvmTypeReference _wildCardSuper = this.typeReferenceBuilder.wildCardSuper(_typeRef);
     final EList<JvmTypeConstraint> constraints = ((JvmWildcardTypeReference) _wildCardSuper).getConstraints();
     int _size = constraints.size();
-    Assert.assertEquals(1, _size);
+    Assert.assertEquals(2, _size);
     Iterable<JvmLowerBound> _filter = Iterables.<JvmLowerBound>filter(constraints, JvmLowerBound.class);
     JvmLowerBound _head = IterableExtensions.<JvmLowerBound>head(_filter);
     JvmTypeReference _typeReference = _head.getTypeReference();
