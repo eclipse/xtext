@@ -92,11 +92,11 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 
 	protected Adapter getOrInstall(Resource resource) {
 		if (!(resource instanceof XtextResource)) {
-			return handleIllegalArgument("Associations are only tracked on XtextResources");
+			return new Adapter();
 		}
 		String resourceLanguageName = ((XtextResource) resource).getLanguageName();
 		if (!languageName.equals(resourceLanguageName)){
-			return handleIllegalArgument("JvmModelAssociator of language '"+languageName+"' used to obtain adapter from resource of language '"+resourceLanguageName+"'.");
+			return new Adapter();
 		}
 		Adapter adapter = (Adapter) EcoreUtil.getAdapter(resource.eAdapters(), Adapter.class);
 		if (adapter == null) {
@@ -104,11 +104,6 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 			resource.eAdapters().add(adapter);
 		}
 		return adapter;
-	}
-
-	protected Adapter handleIllegalArgument(String msg) {
-		LOG.error(msg, new IllegalStateException());
-		return new Adapter();
 	}
 
 	protected Map<EObject, JvmIdentifiableElement> getLogicalContainerMapping(Resource resource) {
@@ -206,6 +201,11 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 
 	public void associate(EObject sourceElement, EObject jvmElement) {
 		if (sourceElement != null) {
+			checkLanguageResource(sourceElement.eResource());
+			if (jvmElement != null && jvmElement.eResource() != null) {
+				checkLanguageResource(jvmElement.eResource());
+				checkSameResource(sourceElement.eResource(), jvmElement.eResource());
+			}
 			Resource resource = sourceElement.eResource();
 			Map<EObject, Set<EObject>> sourceToTargetMap = sourceToTargetMap(resource);
 			putIntoSmallSetMap(sourceElement, jvmElement, sourceToTargetMap);
@@ -214,8 +214,30 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		}
 	}
 
+	protected void checkLanguageResource(Resource eResource) {
+		if (eResource instanceof XtextResource) {
+			String resourceLanguageName = ((XtextResource) eResource).getLanguageName();
+			if (!resourceLanguageName.equals(languageName)) {
+				LOG.error("Expected language "+languageName+", but was "+resourceLanguageName);
+			}
+		} else {
+			LOG.error("Expected instanceof XtextResource, but was "+eResource);
+		}
+	}
+	
+	protected void checkSameResource(Resource eResource, Resource eResource2) {
+		if (eResource != eResource2 && eResource2 != null) {
+			throw new IllegalArgumentException("Cross resource associations are not supported (resources were "+eResource.getURI()+" and "+eResource2.getURI());
+		}
+	}
+
 	public void associatePrimary(EObject sourceElement, EObject jvmElement) {
 		if (sourceElement != null) {
+			checkLanguageResource(sourceElement.eResource());
+			if (jvmElement != null && jvmElement.eResource() != null) {
+				checkLanguageResource(jvmElement.eResource());
+				checkSameResource(sourceElement.eResource(), jvmElement.eResource());
+			}
 			Resource resource = sourceElement.eResource();
 			Map<EObject, Set<EObject>> sourceToTargetMap = sourceToTargetMap(resource);
 			putIntoSmallSetMap(sourceElement, jvmElement, sourceToTargetMap, true);
@@ -223,6 +245,8 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 			putIntoSmallSetMap(jvmElement, sourceElement, targetToSourceMap, true);
 		}
 	}
+
+
 
 	public static <K, V> void putIntoSmallSetMap(K key, V value, Map<? super K, Set<V>> map) {
 		Set<V> set = map.get(key);
@@ -343,6 +367,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 	}
 
 	public void cleanAssociationState(Resource resource) {
+		checkLanguageResource(resource);
 		List<EObject> derived = Lists.newArrayList();
 		EList<EObject> resourcesContentsList = resource.getContents();
 		for (int i = 1; i < resourcesContentsList.size(); i++) {
@@ -363,6 +388,9 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		Resource resource = jvmElement.eResource();
 		Preconditions.checkArgument(resource != null, "jvm element cannot be dangling");
 		Preconditions.checkArgument(resource == sourceElement.eResource(), "source and jvm elements should belong to the same resource");
+		checkLanguageResource(sourceElement.eResource());
+		checkLanguageResource(jvmElement.eResource());
+		checkSameResource(sourceElement.eResource(), jvmElement.eResource());
 		
 		Set<EObject> sources = targetToSourceMap(resource).get(jvmElement);
 		if (sources != null && sources.remove(sourceElement)) {
@@ -376,6 +404,8 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		
 		Resource resource = jvmElement.eResource();
 		Preconditions.checkArgument(resource != null, "jvm element cannot be dangling");
+		
+		checkLanguageResource(resource);
 		
 		Set<EObject> sources = targetToSourceMap(resource).remove(jvmElement);
 		if (sources == null || sources.isEmpty()) {
