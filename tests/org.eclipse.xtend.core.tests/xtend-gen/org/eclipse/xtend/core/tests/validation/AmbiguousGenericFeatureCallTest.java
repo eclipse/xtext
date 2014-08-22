@@ -390,45 +390,6 @@ public class AmbiguousGenericFeatureCallTest extends AmbiguityValidationTest {
   @Test
   public void testAmbiguousMethods_11() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import java.util.concurrent.*");
-    _builder.newLine();
-    _builder.append("class C {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def void n() {");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("m [| \'\' ]");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def void m(Runnable r) {}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def void m(Callable<String> c) {}");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Ambiguous feature call.");
-    _builder_1.newLine();
-    _builder_1.append("The methods");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("m(Runnable) in C and");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("m(Callable<String>) in C");
-    _builder_1.newLine();
-    _builder_1.append("both match.");
-    this.assertAmbiguous(_builder, _builder_1.toString());
-  }
-  
-  @Test
-  public void testAmbiguousMethods_12() {
-    StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.*");
     _builder.newLine();
     _builder.append("class C {");
@@ -960,6 +921,33 @@ public class AmbiguousGenericFeatureCallTest extends AmbiguityValidationTest {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("def void m(Callable<Integer> c) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertUnambiguous(_builder);
+  }
+  
+  @Test
+  public void testUnambiguousMethods_16() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.concurrent.*");
+    _builder.newLine();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void n() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m [| \'\' ]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(Runnable r) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(Callable<String> c) {}");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();

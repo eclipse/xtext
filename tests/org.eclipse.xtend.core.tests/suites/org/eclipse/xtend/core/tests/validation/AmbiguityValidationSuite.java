@@ -24,8 +24,8 @@ import org.junit.runners.Suite.SuiteClasses;
 	AmbiguityBug421831Test.class,
 	AmbiguityBug426779Test.class,
 	AmbiguityBug427352Test.class,
-	AmbiguityBug429623Test.class
+	AmbiguityBug429623Test.class,
+	AmbiguityBug438461Test.class
 })
 public class AmbiguityValidationSuite {
-
 }

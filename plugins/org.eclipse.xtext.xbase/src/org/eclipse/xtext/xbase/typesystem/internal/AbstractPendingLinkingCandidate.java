@@ -30,6 +30,7 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
@@ -912,6 +913,14 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			return ConformanceFlags.INCOMPATIBLE;
 		}
 		return getState().getStackedResolvedTypes().getConformanceFlags(argument, recompute);
+	}
+	
+	protected boolean isLambdaExpression(int argumentIdx) {
+		if (argumentIdx >= arguments.getArgumentCount()) {
+			return false;
+		}
+		XExpression argument = arguments.getArgument(argumentIdx);
+		return argument != null && argument instanceof XClosure;
 	}
 
 	protected CandidateCompareResult compareExpectedArgumentTypes(AbstractPendingLinkingCandidate<?> right) {

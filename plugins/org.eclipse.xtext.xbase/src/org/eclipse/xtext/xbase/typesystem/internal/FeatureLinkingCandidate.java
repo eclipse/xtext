@@ -29,6 +29,7 @@ import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
@@ -449,6 +450,19 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	}
 	
 	@Override
+	protected boolean isLambdaExpression(int argumentIdx) {
+		if (isStatic()) {
+			return false;
+		}
+		if (argumentIdx == 0) {
+			if (getReceiver() != null) {
+				return getReceiver() instanceof XClosure;
+			}
+		}
+		return super.isLambdaExpression(argumentIdx);
+	}
+	
+	@Override
 	/* @Nullable */
 	protected LightweightTypeReference getSubstitutedExpectedType(int idx) {
 		if (idx == -1) {
@@ -650,7 +664,14 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 			int rightIdx,
 			int leftConformance,
 			int rightConformance) {
-		CandidateCompareResult result = super.compareByArgumentTypesFlags(right, leftIdx, rightIdx, leftConformance, rightConformance);
+		CandidateCompareResult result;
+		if (((leftConformance ^ rightConformance) & ConformanceFlags.LAMBDA_VOID_COMPATIBLE) != 0 &&
+				!(isLambdaExpression(leftIdx) && right.isLambdaExpression(rightIdx))) {
+			result = super.compareByArgumentTypesFlags(right, leftIdx, rightIdx, 
+					leftConformance & ~ConformanceFlags.LAMBDA_VOID_COMPATIBLE, rightConformance & ~ConformanceFlags.LAMBDA_VOID_COMPATIBLE);
+		} else {
+			result = super.compareByArgumentTypesFlags(right, leftIdx, rightIdx, leftConformance, rightConformance);
+		}
 		if ((result != CandidateCompareResult.EQUALLY_INVALID && result != CandidateCompareResult.AMBIGUOUS) 
 				|| ((leftConformance & ConformanceFlags.SUCCESS) != 0) || !(right instanceof FeatureLinkingCandidate))
 			return result;
