@@ -147,7 +147,7 @@ public class CompilerTest {
           _builder.append("public String toString() {");
           _builder.newLine();
           _builder.append("    ");
-          _builder.append("String result = new ToStringHelper().toString(this);");
+          _builder.append("String result = new ToStringBuilder(this).addAllFields().toString();");
           _builder.newLine();
           _builder.append("    ");
           _builder.append("return result;");

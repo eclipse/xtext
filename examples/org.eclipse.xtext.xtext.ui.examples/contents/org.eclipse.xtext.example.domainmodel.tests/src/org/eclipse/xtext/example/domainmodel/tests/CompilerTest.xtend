@@ -68,7 +68,7 @@ class CompilerTest {
 			  
 			  @Override
 			  public String toString() {
-			    String result = new ToStringHelper().toString(this);
+			    String result = new ToStringBuilder(this).addAllFields().toString();
 			    return result;
 			  }
 			}
