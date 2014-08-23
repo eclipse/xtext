@@ -87,7 +87,7 @@ public class CompilerTest {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;");
           _builder.newLine();
-          _builder.append("import org.eclipse.xtext.xbase.lib.util.ToStringHelper;");
+          _builder.append("import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;");
           _builder.newLine();
           _builder.newLine();
           _builder.append("@SuppressWarnings(\"all\")");
