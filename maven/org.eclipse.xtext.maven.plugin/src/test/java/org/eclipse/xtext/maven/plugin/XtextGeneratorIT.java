@@ -85,6 +85,7 @@ public class XtextGeneratorIT {
 			return;
 		}
 		Verifier verifier = verifyErrorFreeLog(ROOT + "/xcore-lang");
+		verifier.addCliOption("-U");
 		verifier.assertFilePresent(verifier.getBasedir() + "/src-gen/org/eclipse/xcoretest/MyClass2.java");
 		verifier.assertFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/org/eclipse/xcoretest/MyClass2.class");
 	}
