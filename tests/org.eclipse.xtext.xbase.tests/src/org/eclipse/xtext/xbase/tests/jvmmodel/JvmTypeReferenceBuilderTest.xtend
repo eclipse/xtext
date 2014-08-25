@@ -18,6 +18,7 @@ import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeReferenceBuilder
 import org.junit.Before
 import org.junit.Test
+import org.eclipse.xtext.common.types.JvmUnknownTypeReference
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -58,6 +59,12 @@ class JvmTypeReferenceBuilderTest extends AbstractJvmModelTest {
 			fail();	
 		} catch (IllegalArgumentException e) {
 		}
+	}
+	
+	@Test def void testTypeRef_05() {
+		val typeRef = typeRef("hubble.Fubble", typeRef(String))
+		assertTrue(typeRef instanceof JvmUnknownTypeReference)
+		assertEquals('hubble.Fubble', typeRef.qualifiedName)
 	}
 	
 	@Test def void testWildcard_01() {
