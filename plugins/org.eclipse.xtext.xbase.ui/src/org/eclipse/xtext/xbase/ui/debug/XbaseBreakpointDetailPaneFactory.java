@@ -40,8 +40,8 @@ public class XbaseBreakpointDetailPaneFactory extends BreakpointDetailPaneFactor
 		if (selection.size() == 1) {
 			IBreakpoint b = (IBreakpoint) selection.getFirstElement();
 			try {
-				Object languageName = b.getMarker().getAttribute(StratumBreakpointAdapterFactory.ORG_ECLIPSE_XTEXT_XBASE_LANGUAGE_NAME);
-				if (languageName != null) {
+				Object sourceUri = b.getMarker().getAttribute(StratumBreakpointAdapterFactory.ORG_ECLIPSE_XTEXT_XBASE_SOURCE_URI);
+				if (sourceUri != null) {
 					paneTypes.add(XBASE_DETAIL_PANE);
 				}
 			} catch (CoreException e) {}
