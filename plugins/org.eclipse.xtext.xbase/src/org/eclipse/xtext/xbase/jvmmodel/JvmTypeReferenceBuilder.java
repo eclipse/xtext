@@ -11,7 +11,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
+import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
@@ -60,7 +61,16 @@ public class JvmTypeReferenceBuilder {
 	 */
 	public JvmTypeReference typeRef(Class<?> clazz, JvmTypeReference... typeArgs) {
 		JvmType type = references.findDeclaredType(clazz, context);
+		if (type == null) {
+			return createUnknownTypeRefer(clazz.getName());
+		}
 		return typeRef(type, typeArgs);
+	}
+
+	private JvmTypeReference createUnknownTypeRefer(String name) {
+		JvmUnknownTypeReference reference = TypesFactory.eINSTANCE.createJvmUnknownTypeReference();
+		reference.setQualifiedName(name);
+		return reference;
 	}
 
 	/**
@@ -74,6 +84,9 @@ public class JvmTypeReferenceBuilder {
 	 */
 	public JvmTypeReference typeRef(String typeName, JvmTypeReference... typeArgs) {
 		JvmType type = references.findDeclaredType(typeName, context);
+		if (type == null) {
+			return createUnknownTypeRefer(typeName);
+		}
 		return typeRef(type, typeArgs);
 	}
 	

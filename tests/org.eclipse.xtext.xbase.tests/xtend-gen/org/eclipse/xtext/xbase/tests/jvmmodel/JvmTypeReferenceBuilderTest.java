@@ -16,6 +16,7 @@ import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -96,6 +97,15 @@ public class JvmTypeReferenceBuilderTest extends AbstractJvmModelTest {
         throw Exceptions.sneakyThrow(_t);
       }
     }
+  }
+  
+  @Test
+  public void testTypeRef_05() {
+    JvmTypeReference _typeRef = this.typeReferenceBuilder.typeRef(String.class);
+    final JvmTypeReference typeRef = this.typeReferenceBuilder.typeRef("hubble.Fubble", _typeRef);
+    Assert.assertTrue((typeRef instanceof JvmUnknownTypeReference));
+    String _qualifiedName = typeRef.getQualifiedName();
+    Assert.assertEquals("hubble.Fubble", _qualifiedName);
   }
   
   @Test
