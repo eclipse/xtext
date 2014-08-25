@@ -65,6 +65,7 @@ import org.eclipse.xtend.ide.outline.SwitchOutlineModeContribution;
 import org.eclipse.xtend.ide.outline.XtendOutlineNodeComparator;
 import org.eclipse.xtend.ide.outline.XtendOutlineNodeFactory;
 import org.eclipse.xtend.ide.outline.XtendOutlinePage;
+import org.eclipse.xtend.ide.outline.XtendOutlineWithEditorLinker;
 import org.eclipse.xtend.ide.outline.XtendQuickOutlineFilterAndSorter;
 import org.eclipse.xtend.ide.preferences.XtendPreferenceStoreAccess;
 import org.eclipse.xtend.ide.quickfix.TypeLiteralAwareJavaTypeQuickfixes;
@@ -126,6 +127,7 @@ import org.eclipse.xtext.ui.editor.model.TerminalsTokenTypeToPartitionMapper;
 import org.eclipse.xtext.ui.editor.occurrences.IOccurrenceComputer;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.actions.IOutlineContribution;
+import org.eclipse.xtext.ui.editor.outline.actions.OutlineWithEditorLinker;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter.IComparator;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeFactory;
 import org.eclipse.xtext.ui.editor.outline.quickoutline.IQuickOutlineContribution;
@@ -551,5 +553,9 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 
 	public Class<? extends ILinker> bindILinker() {
 		return Linker.class;
+	}
+	
+	public Class<? extends OutlineWithEditorLinker> bindOutlineWithEditorLinker() {
+		return XtendOutlineWithEditorLinker.class;
 	}
 }
