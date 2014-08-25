@@ -9,6 +9,7 @@ package org.eclipse.xtend.ide.outline;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
@@ -31,6 +32,9 @@ public class XtendOutlineNodeFactory extends OutlineNodeFactory {
 
 	@Inject
 	private XtendImages images;
+	
+	@Inject
+	private IXtendJvmAssociations associations;
 
 	public XtendFeatureNode createXtendFeatureNode(IOutlineNode parentNode, EObject modelElement,
 			ImageDescriptor imageDescriptor, Object text, boolean isLeaf, boolean synthetic, int inheritanceDepth) {
@@ -49,11 +53,12 @@ public class XtendOutlineNodeFactory extends OutlineNodeFactory {
 
 	private void configureNode(IOutlineNode parentNode, EObject modelElement, int inheritanceDepth,
 			XtendEObjectNode featureNode) {
-		ICompositeNode parserNode = NodeModelUtils.getNode(modelElement);
+		EObject primarySourceElement = associations.getPrimarySourceElement(modelElement);
+		ICompositeNode parserNode = NodeModelUtils.getNode(primarySourceElement==null?modelElement:primarySourceElement);
 		if (parserNode != null)
 			featureNode.setTextRegion(parserNode.getTextRegion());
 		if (isLocalElement(parentNode, modelElement))
-			featureNode.setShortTextRegion(getLocationInFileProvider().getSignificantTextRegion(modelElement));
+			featureNode.setShortTextRegion(getLocationInFileProvider().getSignificantTextRegion(primarySourceElement==null?modelElement:primarySourceElement));
 		featureNode.setStatic(isStatic(modelElement));
 		featureNode.setInheritanceDepth(inheritanceDepth);
 	}
