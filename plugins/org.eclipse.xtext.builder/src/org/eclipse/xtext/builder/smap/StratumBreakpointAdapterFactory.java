@@ -35,6 +35,8 @@ import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IStorageEditorInput;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -95,14 +97,15 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 		}
 		try {
 			final XtextEditor xtextEditor = (XtextEditor) part;
-			if (!(xtextEditor.getResource() instanceof IStorage)) {
+			IEditorInput editorInput = xtextEditor.getEditorInput();
+			if (!(editorInput instanceof IStorageEditorInput)) {
 				return;
 			}
-			final IResource breakpointResource = breakpointUtil.getBreakpointResource(xtextEditor.getEditorInput());
-			final URI breakpointUri = breakpointUtil.getBreakpointURI(xtextEditor.getEditorInput());
+			final IResource breakpointResource = breakpointUtil.getBreakpointResource(editorInput);
+			final URI breakpointUri = breakpointUtil.getBreakpointURI(editorInput);
 			final int offset = ((TextSelection) selection).getOffset();
 			final int line = xtextEditor.getDocument().getLineOfOffset(offset) + 1;
-			final URI sourceUri = uriMapper.getUri((IStorage)xtextEditor.getResource());
+			final URI sourceUri = uriMapper.getUri(((IStorageEditorInput)editorInput).getStorage());
 			
 			Data data = xtextEditor.getDocument().readOnly(new IUnitOfWork<Data, XtextResource>() {
 				public Data exec(XtextResource state) throws Exception {
