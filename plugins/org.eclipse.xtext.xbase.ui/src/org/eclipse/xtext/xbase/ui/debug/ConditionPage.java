@@ -52,8 +52,8 @@ public class ConditionPage extends JavaBreakpointPage {
 		try {
 			IJavaBreakpoint breakpoint = getBreakpoint();
 			IMarker marker = breakpoint.getMarker();
-			Object languageName = marker.getAttribute(StratumBreakpointAdapterFactory.ORG_ECLIPSE_XTEXT_XBASE_LANGUAGE_NAME);
-			if (languageName != null) {
+			Object sourceUri = marker.getAttribute(StratumBreakpointAdapterFactory.ORG_ECLIPSE_XTEXT_XBASE_SOURCE_URI);
+			if (sourceUri != null) {
 				setTitle("Condition");
 				editor = new JavaBreakpointConditionEditor();
 				editor.createControl(parent);
