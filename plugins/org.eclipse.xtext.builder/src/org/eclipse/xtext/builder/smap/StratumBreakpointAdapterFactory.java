@@ -59,7 +59,6 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 	private final static Logger log = Logger.getLogger(StratumBreakpointAdapterFactory.class);
 
 	private static final String ORG_ECLIPSE_JDT_DEBUG_CORE_SOURCE_NAME = "org.eclipse.jdt.debug.core.sourceName";
-	public static final String ORG_ECLIPSE_XTEXT_XBASE_LANGUAGE_NAME = "org.eclipse.xtext.xbase.language.name";
 	public static final String ORG_ECLIPSE_XTEXT_XBASE_SOURCE_URI = "org.eclipse.xtext.xbase.source.uri";
 
 	@Inject
@@ -88,7 +87,6 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 		protected String types;
 		protected boolean valid;
 		protected LanguageInfo lang;
-		protected String uri;
 	}
 
 	public void toggleBreakpoints(IWorkbenchPart part, ISelection selection) throws CoreException {
@@ -97,18 +95,22 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 		}
 		try {
 			final XtextEditor xtextEditor = (XtextEditor) part;
-			final IResource res = breakpointUtil.getBreakpointResource(xtextEditor.getEditorInput());
-			final URI uri = breakpointUtil.getBreakpointURI(xtextEditor.getEditorInput());
+			if (!(xtextEditor.getResource() instanceof IStorage)) {
+				return;
+			}
+			final IResource breakpointResource = breakpointUtil.getBreakpointResource(xtextEditor.getEditorInput());
+			final URI breakpointUri = breakpointUtil.getBreakpointURI(xtextEditor.getEditorInput());
 			final int offset = ((TextSelection) selection).getOffset();
 			final int line = xtextEditor.getDocument().getLineOfOffset(offset) + 1;
-
+			final URI sourceUri = uriMapper.getUri((IStorage)xtextEditor.getResource());
+			
 			Data data = xtextEditor.getDocument().readOnly(new IUnitOfWork<Data, XtextResource>() {
 				public Data exec(XtextResource state) throws Exception {
 					IResourceServiceProvider provider = state.getResourceServiceProvider();
+					
 					IStratumBreakpointSupport breakpointSupport = provider.get(IStratumBreakpointSupport.class);
 					Data result = new Data();
 					result.name = state.getURI().lastSegment();
-					result.uri = state.getURI().toString();
 					result.valid = breakpointSupport != null && breakpointSupport.isValidLineForBreakPoint(state, line);
 					result.types = getClassNamePattern(state);
 					result.lang = provider.get(LanguageInfo.class);
@@ -116,7 +118,7 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 				}
 			});
 
-			IJavaStratumLineBreakpoint existingBreakpoint = findExistingBreakpoint(res, uri, line);
+			IJavaStratumLineBreakpoint existingBreakpoint = findExistingBreakpoint(breakpointResource, breakpointUri, line);
 
 			if (existingBreakpoint != null) {
 				existingBreakpoint.delete();
@@ -136,13 +138,12 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 			final String shortName = data.lang.getShortName();
 
 			Map<String, Object> attributes = Maps.newHashMap();
-			if (uri != null)
-				attributes.put(JarFileMarkerAnnotationModel.MARKER_URI, uri.toString());
+			if (breakpointUri != null)
+				attributes.put(JarFileMarkerAnnotationModel.MARKER_URI, breakpointUri.toString());
 			attributes.put(ORG_ECLIPSE_JDT_DEBUG_CORE_SOURCE_NAME, data.name);
-			attributes.put(ORG_ECLIPSE_XTEXT_XBASE_LANGUAGE_NAME, data.lang.getLanguageName());
-			attributes.put(ORG_ECLIPSE_XTEXT_XBASE_SOURCE_URI, data.uri);
+			attributes.put(ORG_ECLIPSE_XTEXT_XBASE_SOURCE_URI, sourceUri.toString());
 
-			final IJavaStratumLineBreakpoint breakpoint = JDIDebugModel.createStratumBreakpoint(res, shortName, null,
+			final IJavaStratumLineBreakpoint breakpoint = JDIDebugModel.createStratumBreakpoint(breakpointResource, shortName, null,
 					null, data.types, line, charStart, charEnd, 0, true, attributes);
 
 			// make sure the class name pattern gets updated on change

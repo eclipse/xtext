@@ -20,8 +20,8 @@ public class XbaseBreakpointPropertyTester extends PropertyTester {
 		if (receiver instanceof IJavaStratumLineBreakpoint) {
 			IJavaStratumLineBreakpoint breakpoint = (IJavaStratumLineBreakpoint) receiver;
 			try {
-				Object languageName = breakpoint.getMarker().getAttribute(StratumBreakpointAdapterFactory.ORG_ECLIPSE_XTEXT_XBASE_LANGUAGE_NAME);
-				return languageName != null;
+				Object sourceUri = breakpoint.getMarker().getAttribute(StratumBreakpointAdapterFactory.ORG_ECLIPSE_XTEXT_XBASE_SOURCE_URI);
+				return sourceUri != null;
 			} catch (CoreException e) {
 				logger.debug("Could not read breakpoint attributes", e);
 			}
