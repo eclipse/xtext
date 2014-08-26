@@ -153,6 +153,228 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
+	def testBug438461_06() {
+		assertCompilesTo('''
+			class Bug {
+				def void m(I... i) {}
+				def void m(Iterable<I> i) {
+					m [ run ]
+				}
+				interface I {
+					def void bind(Runnable r)
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class Bug {
+			  public interface I {
+			    public abstract void bind(final Runnable r);
+			  }
+			  
+			  public void m(final Bug.I... i) {
+			  }
+			  
+			  public void m(final Iterable<Bug.I> i) {
+			    final Bug.I _function = new Bug.I() {
+			      public void bind(final Runnable it) {
+			        it.run();
+			      }
+			    };
+			    this.m(_function);
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testBug438461_07() {
+		assertCompilesTo('''
+			class Bug {
+				def void m(I i) {}
+				def void m(Iterable<I> i) {
+					m [ run ]
+				}
+				interface I {
+					def void bind(Runnable r)
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class Bug {
+			  public interface I {
+			    public abstract void bind(final Runnable r);
+			  }
+			  
+			  public void m(final Bug.I i) {
+			  }
+			  
+			  public void m(final Iterable<Bug.I> i) {
+			    final Bug.I _function = new Bug.I() {
+			      public void bind(final Runnable it) {
+			        it.run();
+			      }
+			    };
+			    this.m(_function);
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testBug438461_08() {
+		assertCompilesTo('''
+			class Bug {
+				def void m(I... i) {}
+				def void m(Iterable<I>... i) {
+					m [ run ]
+				}
+				interface I {
+					def void bind(Runnable r)
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class Bug {
+			  public interface I {
+			    public abstract void bind(final Runnable r);
+			  }
+			  
+			  public void m(final Bug.I... i) {
+			  }
+			  
+			  public void m(final Iterable<Bug.I>... i) {
+			    final Bug.I _function = new Bug.I() {
+			      public void bind(final Runnable it) {
+			        it.run();
+			      }
+			    };
+			    this.m(_function);
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testBug438461_09() {
+		assertCompilesTo('''
+			class Bug {
+				def void m((String, String)=>void f) {}
+				def void m(()=>String f) {
+					m [ '' ]
+				}
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Functions.Function0;
+			import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
+			
+			@SuppressWarnings("all")
+			public class Bug {
+			  public void m(final Procedure2<? super String, ? super String> f) {
+			  }
+			  
+			  public void m(final Function0<? extends String> f) {
+			    final Function0<String> _function = new Function0<String>() {
+			      public String apply() {
+			        return "";
+			      }
+			    };
+			    this.m(_function);
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testBug438461_10() {
+		assertCompilesTo('''
+			class Bug {
+				def void m((String, String)=>String f) {}
+				def void m(()=>void f) {
+					m [ $0 + $1 ]
+				}
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Functions.Function2;
+			import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
+			
+			@SuppressWarnings("all")
+			public class Bug {
+			  public void m(final Function2<? super String, ? super String, ? extends String> f) {
+			  }
+			  
+			  public void m(final Procedure0 f) {
+			    final Function2<String, String, String> _function = new Function2<String, String, String>() {
+			      public String apply(final String $0, final String $1) {
+			        return ($0 + $1);
+			      }
+			    };
+			    this.m(_function);
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testBug438461_11() {
+		assertCompilesTo('''
+			class Bug {
+				def void m((String, String)=>void f) {}
+				def void m(()=>String... f) {
+					m [ '' ]
+				}
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Functions.Function0;
+			import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
+			
+			@SuppressWarnings("all")
+			public class Bug {
+			  public void m(final Procedure2<? super String, ? super String> f) {
+			  }
+			  
+			  public void m(final Function0<? extends String>... f) {
+			    final Function0<String> _function = new Function0<String>() {
+			      public String apply() {
+			        return "";
+			      }
+			    };
+			    this.m(_function);
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testBug438461_12() {
+		assertCompilesTo('''
+			class Bug {
+				def void m((String, String)=>String... f) {}
+				def void m(()=>void f) {
+					m [ $0 + $1 ]
+				}
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Functions.Function2;
+			import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
+			
+			@SuppressWarnings("all")
+			public class Bug {
+			  public void m(final Function2<? super String, ? super String, ? extends String>... f) {
+			  }
+			  
+			  public void m(final Procedure0 f) {
+			    final Function2<String, String, String> _function = new Function2<String, String, String>() {
+			      public String apply(final String $0, final String $1) {
+			        return ($0 + $1);
+			      }
+			    };
+			    this.m(_function);
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def test_01() {
 		assertCompilesTo('''
 			import java.util.List
