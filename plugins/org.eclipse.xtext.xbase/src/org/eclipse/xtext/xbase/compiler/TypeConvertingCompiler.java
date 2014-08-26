@@ -49,7 +49,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	}
 
 	@Override
-	protected final void internalToConvertedExpression(final XExpression obj, ITreeAppendable appendable,
+	protected void internalToConvertedExpression(final XExpression obj, ITreeAppendable appendable,
 			/* @Nullable */ LightweightTypeReference toBeConvertedTo) {
 		if (toBeConvertedTo != null) {
 			LightweightTypeReference actualType = getLightweightType(obj);
@@ -161,7 +161,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		super.internalToJavaExpression(obj, appendable);
 	}
 
-	private void doConversion(final LightweightTypeReference left, final LightweightTypeReference right,
+	protected void doConversion(final LightweightTypeReference left, final LightweightTypeReference right,
 			final ITreeAppendable appendable, XExpression context, final Later expression) {
 		if(left.isPrimitive() && !right.isPrimitive()) {
 			if (right.isAny()) {
