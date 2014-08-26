@@ -13,6 +13,7 @@ import static com.google.common.collect.Lists.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -286,7 +287,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 	 */
 	protected class XtextDocumentLocker implements Processor {
 		
-		private volatile int potentialUpdaterCount = 0;
+		private volatile AtomicInteger potentialUpdaterCount = new AtomicInteger(0);
 		
 		private volatile boolean hadUpdates;
 		
@@ -311,7 +312,10 @@ public class XtextDocument extends Document implements IXtextDocument {
 		 * @since 2.7
 		 */
 		public <T> T process(IUnitOfWork<T,XtextResource> transaction) {
-			releaseReadLock();
+			int readHoldCount = getReadHoldCount();
+			for (int i = 0;i < readHoldCount; i++) {
+				releaseReadLock();
+			}
 			// lock upgrade followed by downgrade as described in
 			// java.util.concurrent.locks.ReentrantReadWriteLock
 			// 
@@ -324,7 +328,9 @@ public class XtextDocument extends Document implements IXtextDocument {
 			} finally {
 				if (log.isTraceEnabled())
 					log.trace("Downgrading from write lock to read lock...");
-				acquireReadLock();
+				for (int i = 0;i < readHoldCount; i++) {
+					acquireReadLock();
+				}
 				releaseWriteLock();
 			}
 		}
@@ -406,7 +412,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 						acquireWriteLock();
 						T exec = null;
 						try {
-							potentialUpdaterCount++;
+							potentialUpdaterCount.incrementAndGet();
 							state = getState();
 							if (log.isDebugEnabled())
 								log.debug("write - " + Thread.currentThread().getName());
@@ -422,8 +428,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 								acquireReadLock();
 								releaseWriteLock();
 								ensureThatStateIsNotReturned(exec, work);
-								--potentialUpdaterCount;
-								if(potentialUpdaterCount == 0 && !(work instanceof ReconcilingUnitOfWork)) {
+								if(potentialUpdaterCount.decrementAndGet() == 0 && !(work instanceof ReconcilingUnitOfWork)) {
 									// changes of a ReconcilingUnitOfWork will be handled when the resulting document changes are applied
 									notifyModelListeners(state);
 								}
@@ -470,36 +475,38 @@ public class XtextDocument extends Document implements IXtextDocument {
 			XtextResource state = getState();
 			synchronized (getResourceLock()) {
 				acquireReadLock();
-				if(isCancelReaders) 
-					setOutdated(false); 
 				try {
-					potentialUpdaterCount++;
-					if (log.isDebugEnabled())
-						log.debug("read - " + Thread.currentThread().getName());
-					// Don't updateContent on write lock request. Reentrant read doesn't matter as 
-					// updateContentBeforeRead() is cheap when the pending event queue is swept
-					if (getReadHoldCount() == 1 && getWriteHoldCount() == 0) {
-						hadUpdates |= updateContentBeforeRead();
+					if(isCancelReaders) 
+						setOutdated(false); 
+					try {
+						potentialUpdaterCount.incrementAndGet();
+						if (log.isDebugEnabled())
+							log.debug("read - " + Thread.currentThread().getName());
+						// Don't updateContent on write lock request. Reentrant read doesn't matter as 
+						// updateContentBeforeRead() is cheap when the pending event queue is swept
+						if (getReadHoldCount() == 1 && getWriteHoldCount() == 0) {
+							hadUpdates |= updateContentBeforeRead();
+						}
+						if(work instanceof CancelableUnitOfWork) 
+							((CancelableUnitOfWork<?, XtextResource>) work).setCancelIndicator(new CancelIndicator() {
+								public boolean isCanceled() {
+									return isOutdated();
+								}
+							});
+						T exec = work.exec(state);
+						ensureThatStateIsNotReturned(exec, work);
+						return  exec;
+					} catch (RuntimeException e) {
+						throw e;
+					} catch (Exception e) {
+						throw new WrappedException(e);
+					} finally {
+						if(potentialUpdaterCount.decrementAndGet() == 0 && (hadUpdates || isCancelReaders)) { 
+							hadUpdates = false;	
+							notifyModelListeners(resource);
+						}
 					}
-					if(work instanceof CancelableUnitOfWork) 
-						((CancelableUnitOfWork<?, XtextResource>) work).setCancelIndicator(new CancelIndicator() {
-							public boolean isCanceled() {
-								return isOutdated();
-							}
-						});
-					T exec = work.exec(state);
-					ensureThatStateIsNotReturned(exec, work);
-					return  exec;
-				} catch (RuntimeException e) {
-					throw e;
-				} catch (Exception e) {
-					throw new WrappedException(e);
 				} finally {
-					--potentialUpdaterCount;
-					if(potentialUpdaterCount == 0 && (hadUpdates || isCancelReaders)) { 
-						hadUpdates = false;	
-						notifyModelListeners(resource);
-					}
 					releaseReadLock();
 				}
 			}
