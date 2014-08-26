@@ -63,7 +63,7 @@ public class FolderAwareTrace extends AbstractTrace {
 		if (files != null) {
 			for (File child : files) {
 				if (child.isFile()) {
-					if (child.getAbsolutePath().endsWith(candiadate))
+					if (child.getAbsolutePath().replace("\\", "/").endsWith(candiadate))
 						return child;
 				} else if (child.isDirectory()) {
 					File result = findFile(child, candiadate);
