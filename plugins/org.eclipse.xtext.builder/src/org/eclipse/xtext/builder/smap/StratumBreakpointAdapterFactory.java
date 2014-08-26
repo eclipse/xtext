@@ -28,15 +28,16 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.jdt.debug.core.IJavaStratumLineBreakpoint;
 import org.eclipse.jdt.debug.core.JDIDebugModel;
+import org.eclipse.jdt.internal.ui.javaeditor.IClassFileEditorInput;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.IStorageEditorInput;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -62,6 +63,7 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 
 	private static final String ORG_ECLIPSE_JDT_DEBUG_CORE_SOURCE_NAME = "org.eclipse.jdt.debug.core.sourceName";
 	public static final String ORG_ECLIPSE_XTEXT_XBASE_SOURCE_URI = "org.eclipse.xtext.xbase.source.uri";
+	public static final String ORG_ECLIPSE_XTEXT_XBASE_CLASS_HANDLE = "org.eclipse.xtext.xbase.class.handle";
 
 	@Inject
 	private IResourceServiceProvider.Registry providerRegistry;
@@ -89,6 +91,8 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 		protected String types;
 		protected boolean valid;
 		protected LanguageInfo lang;
+		protected URI sourceUri;
+		protected String classHandle;
 	}
 
 	public void toggleBreakpoints(IWorkbenchPart part, ISelection selection) throws CoreException {
@@ -97,26 +101,26 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 		}
 		try {
 			final XtextEditor xtextEditor = (XtextEditor) part;
-			IEditorInput editorInput = xtextEditor.getEditorInput();
-			if (!(editorInput instanceof IStorageEditorInput)) {
-				return;
-			}
+			final IEditorInput editorInput = xtextEditor.getEditorInput();
 			final IResource breakpointResource = breakpointUtil.getBreakpointResource(editorInput);
 			final URI breakpointUri = breakpointUtil.getBreakpointURI(editorInput);
 			final int offset = ((TextSelection) selection).getOffset();
 			final int line = xtextEditor.getDocument().getLineOfOffset(offset) + 1;
-			final URI sourceUri = uriMapper.getUri(((IStorageEditorInput)editorInput).getStorage());
 			
 			Data data = xtextEditor.getDocument().readOnly(new IUnitOfWork<Data, XtextResource>() {
 				public Data exec(XtextResource state) throws Exception {
 					IResourceServiceProvider provider = state.getResourceServiceProvider();
-					
 					IStratumBreakpointSupport breakpointSupport = provider.get(IStratumBreakpointSupport.class);
 					Data result = new Data();
 					result.name = state.getURI().lastSegment();
 					result.valid = breakpointSupport != null && breakpointSupport.isValidLineForBreakPoint(state, line);
 					result.types = getClassNamePattern(state);
 					result.lang = provider.get(LanguageInfo.class);
+					result.sourceUri = state.getURI();
+					if (editorInput instanceof IClassFileEditorInput) {
+						IClassFile classFile = ((IClassFileEditorInput) editorInput).getClassFile();
+						result.classHandle = classFile.getHandleIdentifier();
+					}
 					return result;
 				}
 			});
@@ -144,7 +148,9 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 			if (breakpointUri != null)
 				attributes.put(JarFileMarkerAnnotationModel.MARKER_URI, breakpointUri.toString());
 			attributes.put(ORG_ECLIPSE_JDT_DEBUG_CORE_SOURCE_NAME, data.name);
-			attributes.put(ORG_ECLIPSE_XTEXT_XBASE_SOURCE_URI, sourceUri.toString());
+			attributes.put(ORG_ECLIPSE_XTEXT_XBASE_SOURCE_URI, data.sourceUri.toString());
+			if (data.classHandle != null)
+				attributes.put(ORG_ECLIPSE_XTEXT_XBASE_CLASS_HANDLE, data.classHandle);
 
 			final IJavaStratumLineBreakpoint breakpoint = JDIDebugModel.createStratumBreakpoint(breakpointResource, shortName, null,
 					null, data.types, line, charStart, charEnd, 0, true, attributes);
