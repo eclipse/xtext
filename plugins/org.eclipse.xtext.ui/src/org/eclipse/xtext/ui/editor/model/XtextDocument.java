@@ -311,6 +311,10 @@ public class XtextDocument extends Document implements IXtextDocument {
 		 * @since 2.7
 		 */
 		public <T> T process(IUnitOfWork<T,XtextResource> transaction) {
+			if (getReadHoldCount() != 1 || getWriteHoldCount() != 0) {
+				throw new IllegalStateException(
+						"Exactly one read lock and no write locks expected! But was read: "+getReadHoldCount()+", write:"+getWriteHoldCount());
+			}
 			releaseReadLock();
 			// lock upgrade followed by downgrade as described in
 			// java.util.concurrent.locks.ReentrantReadWriteLock
