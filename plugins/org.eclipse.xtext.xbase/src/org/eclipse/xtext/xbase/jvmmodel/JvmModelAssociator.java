@@ -218,10 +218,12 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		if (eResource instanceof XtextResource) {
 			String resourceLanguageName = ((XtextResource) eResource).getLanguageName();
 			if (!resourceLanguageName.equals(languageName)) {
-				LOG.error("Expected language "+languageName+", but was "+resourceLanguageName);
+				IllegalArgumentException e = new IllegalArgumentException("Expected language "+languageName+", but was "+resourceLanguageName);
+				LOG.error(e.getMessage(), e);
 			}
 		} else {
-			LOG.error("Expected instanceof XtextResource, but was "+eResource);
+			IllegalArgumentException e = new IllegalArgumentException("Expected instanceof XtextResource, but was "+eResource);
+			LOG.error(e.getMessage(), e);
 		}
 	}
 	
