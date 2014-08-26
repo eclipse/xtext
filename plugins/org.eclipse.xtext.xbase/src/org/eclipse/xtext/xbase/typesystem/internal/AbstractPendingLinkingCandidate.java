@@ -858,19 +858,19 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			if ((leftConformance & ConformanceFlags.SUCCESS) != 0) {
 				if (((leftConformance ^ rightConformance) & (ConformanceFlags.LAMBDA_VOID_COMPATIBLE | ConformanceFlags.PREFERRED_LAMBDA_SUGAR)) != 0 
 						&& isLambdaExpression(leftIdx) && other.isLambdaExpression(rightIdx)) {
-					if ((leftConformance & ConformanceFlags.LAMBDA_VOID_COMPATIBLE) != 0) {
-						if ((rightConformance & ConformanceFlags.LAMBDA_VOID_COMPATIBLE) == 0) {
-							return CandidateCompareResult.OTHER;
-						}
-					} else if ((rightConformance & ConformanceFlags.LAMBDA_VOID_COMPATIBLE) != 0) {
-						return CandidateCompareResult.THIS;
-					}
 					if ((leftConformance & ConformanceFlags.PREFERRED_LAMBDA_SUGAR) != 0) {
 						if ((rightConformance & ConformanceFlags.PREFERRED_LAMBDA_SUGAR) == 0) {
 							return CandidateCompareResult.THIS;
 						}
 					} else if ((rightConformance & ConformanceFlags.PREFERRED_LAMBDA_SUGAR) != 0) {
 						return CandidateCompareResult.OTHER;
+					}
+					if ((leftConformance & ConformanceFlags.LAMBDA_VOID_COMPATIBLE) != 0) {
+						if ((rightConformance & ConformanceFlags.LAMBDA_VOID_COMPATIBLE) == 0) {
+							return CandidateCompareResult.OTHER;
+						}
+					} else if ((rightConformance & ConformanceFlags.LAMBDA_VOID_COMPATIBLE) != 0) {
+						return CandidateCompareResult.THIS;
 					}
 				}
 				return CandidateCompareResult.AMBIGUOUS;
