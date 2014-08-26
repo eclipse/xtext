@@ -85,10 +85,11 @@ public class JavaBreakPointProvider {
 		if (classFile != null)
 			return classFile.getType().getHandleIdentifier();
 		ILocationInResource javaLocation = getJavaLocation(breakpoint);
-		IStorage javaResource = javaLocation.getStorage();
-		if (!(javaResource instanceof IFile)) {
+		if (javaLocation == null)
 			return null;
-		}
+		IStorage javaResource = javaLocation.getStorage();
+		if (!(javaResource instanceof IFile))
+			return null;
 		ICompilationUnit compilationUnit = (ICompilationUnit) JavaCore.create((IFile) javaResource);
 		IJavaElement element = compilationUnit.getElementAt(javaLocation.getTextRegion().getOffset());
 		return element == null ? null : element.getHandleIdentifier();
