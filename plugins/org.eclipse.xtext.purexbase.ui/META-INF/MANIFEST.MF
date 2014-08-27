@@ -17,7 +17,7 @@ Require-Bundle: org.eclipse.xtext.purexbase;visibility:=reexport,
  org.eclipse.xtext.xbase.ui,
  org.eclipse.jdt.core;bundle-version="3.6.0",
  org.eclipse.xtext.ui.codetemplates.ui,
- org.eclipse.compare,
+ org.eclipse.compare;bundle-version="3.4.0",
  org.eclipse.xtext.xbase.lib,
  org.eclipse.jdt.debug.ui;bundle-version="3.5.2"
 Import-Package: org.apache.log4j;version="1.2.15",
