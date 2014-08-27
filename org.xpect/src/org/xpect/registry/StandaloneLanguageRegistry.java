@@ -8,20 +8,19 @@
 package org.xpect.registry;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.util.Modules2;
-import org.xpect.registry.StandalonePluginXMLParser.EMFExtensionParserInfo;
-import org.xpect.registry.StandalonePluginXMLParser.EMFGeneratedPackageInfo;
-import org.xpect.registry.StandalonePluginXMLParser.EditorInfo;
-import org.xpect.registry.StandalonePluginXMLParser.ExtensionInfo;
 import org.xpect.XpectConstants;
 import org.xpect.registry.IEmfFileExtensionInfo.IXtextFileExtensionInfo;
 import org.xpect.services.XtResourceServiceProviderProvider;
 
+import com.google.common.base.Joiner;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -95,7 +94,6 @@ public class StandaloneLanguageRegistry implements ILanguageInfo.Registry {
 					ext2language.put(ext, infoImpl);
 			}
 		}
-<<<<<<< Upstream, based on ab758eabcbd837e460cbeb6f775e18e54587191d
 	}
 
 	protected ILanguageInfo registerEFactoryWithInjector(String uiName, Collection<EditorInfo> editors,
@@ -129,8 +127,5 @@ public class StandaloneLanguageRegistry implements ILanguageInfo.Registry {
 		else {
 			LOG.warn("No GenModel found for EPackage " + info.getUri());
 		}
-=======
-		registerRSPProviderForXt();
->>>>>>> 719c471 improved detection of installed Xtext languages
 	}
 }
