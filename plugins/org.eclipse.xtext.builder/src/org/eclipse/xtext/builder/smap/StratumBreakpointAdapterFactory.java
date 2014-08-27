@@ -152,8 +152,7 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 			if (data.classHandle != null)
 				attributes.put(ORG_ECLIPSE_XTEXT_XBASE_CLASS_HANDLE, data.classHandle);
 
-			final IJavaStratumLineBreakpoint breakpoint = JDIDebugModel.createStratumBreakpoint(breakpointResource, shortName, null,
-					null, data.types, line, charStart, charEnd, 0, true, attributes);
+			final IJavaStratumLineBreakpoint breakpoint = new XbaseLineBreakpoint(breakpointResource, shortName, data.types, line, charStart, charEnd, attributes);
 
 			// make sure the class name pattern gets updated on change
 			final IMarker marker = breakpoint.getMarker();

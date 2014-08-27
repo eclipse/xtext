@@ -172,4 +172,37 @@
         </enablement>
       </detailFactories>
     </extension>
+    
+    <extension
+         point="org.eclipse.debug.core.breakpoints">
+      <breakpoint
+            markerType="org.eclipse.xtext.xbase.ui.xbaseLineBreakpointMarker"
+            class="org.eclipse.xtext.builder.smap.XbaseLineBreakpoint"
+            id="xbaseLineBreakpointMarker"
+            name="Xbase Breakpoint">
+      </breakpoint>
+   </extension>
+   <extension
+         id="xbaseLineBreakpointMarker"
+         name="Xbase Breakpoint"
+         point="org.eclipse.core.resources.markers">
+      <super
+            type="org.eclipse.jdt.debug.javaStratumLineBreakpointMarker">
+      </super>
+      <persistent
+            value="true">
+      </persistent>
+   </extension>
+   <extension
+       point="org.eclipse.ui.ide.markerSupport">
+    <markerAttributeGrouping
+          defaultGroupingEntry="org.eclipse.jdt.ui.category.buildpath"
+          markerType="org.eclipse.jdt.launching.jreContainerMarker"/>
+    <markerTypeCategory
+          name="Java Line Breakpoints">
+       <markerTypeReference
+             id="org.eclipse.xtext.xbase.ui.xbaseLineBreakpointMarker">
+       </markerTypeReference>
+    </markerTypeCategory>
+ </extension>
 </plugin>
