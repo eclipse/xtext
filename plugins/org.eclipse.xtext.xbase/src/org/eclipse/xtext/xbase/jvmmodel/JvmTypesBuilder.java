@@ -16,6 +16,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
@@ -622,16 +623,15 @@ public class JvmTypesBuilder {
 	}
 	
 	protected boolean isValidSource(EObject sourceElement) {
-		if (sourceElement.eResource() == null) {
+		EObject rootElement = EcoreUtil.getRootContainer(sourceElement);
+		Resource resource = rootElement.eResource();
+		if (resource == null) {
 			IllegalArgumentException exception = new IllegalArgumentException("The source element must be contained in a resource");
 			LOG.error(exception.getMessage(), exception);
 			return false;
 		}
 		// check that this element is from the source tree
-		while (sourceElement.eContainer() != null) {
-			sourceElement = sourceElement.eContainer();
-		}
-		if (sourceElement.eResource().getContents().get(0) != sourceElement) {
+		if (resource.getContents().get(0) != rootElement) {
 			IllegalArgumentException exception = new IllegalArgumentException("The source element must be part of the source tree.");
 			LOG.error(exception.getMessage(), exception);
 			return false;
