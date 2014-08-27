@@ -30,11 +30,13 @@ import com.google.inject.Provider;
  */
 public class JvmTypeReferenceBuilder {
 
-
 	public static class Factory {
 		@Inject Provider<JvmTypeReferenceBuilder> builderProvider;
 		@Inject CommonTypeComputationServices services;
 		public JvmTypeReferenceBuilder create(ResourceSet context) {
+			if (context == null) {
+				throw new NullPointerException("'context' cannot be null.");
+			}
 			JvmTypeReferenceBuilder result = builderProvider.get();
 			result.context = context;
 			result.typeReferenceOwner = new StandardTypeReferenceOwner(services, context);
