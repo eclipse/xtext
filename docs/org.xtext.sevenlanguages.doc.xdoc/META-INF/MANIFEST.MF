@@ -23,8 +23,5 @@ Require-Bundle: org.eclipse.orbit.mongodb;bundle-version="2.6.3",
  org.eclipse.debug.ui;bundle-version="3.5.0",
  org.eclipse.jdt.launching;bundle-version="3.5.0",
  org.xtext.guicemodules;bundle-version="1.0.0",
- org.xtext.httprouting.examples;bundle-version="1.0.0",
  org.xtext.template;bundle-version="1.0.0",
- org.xtext.template.examples;bundle-version="1.0.0",
  org.xtext.template.ui;bundle-version="1.0.0"
-

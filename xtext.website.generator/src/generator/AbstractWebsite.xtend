@@ -156,12 +156,11 @@ abstract class AbstractWebsite implements Resource {
 							<li «IF path == key»class="active"«ENDIF»><a href="«key»">«value»</a></li>
 							«ENDFOR»
 						</ul>
+				        <div class="btn-group pull-right">
+				          <g:plusone href="«plusoneURL»"></g:plusone>
+				        </div>
 					</div>
 					<!--/.nav-collapse -->
-			        <div class="btn-group pull-right">
-			          <g:plusone href="«plusoneURL»"></g:plusone>
-			        </div>
-		
 				</div>
 			</div>
 		</div>

@@ -1,54 +1,65 @@
 package generator.xtend;
 
+import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.xbase.lib.Pure;
+
 @SuppressWarnings("all")
 public class Article {
-  private String _title;
+  @Accessors
+  private String title;
   
-  public String getTitle() {
-    return this._title;
-  }
+  @Accessors
+  private boolean article;
   
-  public void setTitle(final String title) {
-    this._title = title;
-  }
+  @Accessors
+  private String href;
   
-  private boolean _article;
-  
-  public boolean isArticle() {
-    return this._article;
-  }
-  
-  public void setArticle(final boolean article) {
-    this._article = article;
-  }
-  
-  private String _href;
-  
-  public String getHref() {
-    return this._href;
-  }
-  
-  public void setHref(final String href) {
-    this._href = href;
-  }
-  
-  private String _img;
-  
-  public String getImg() {
-    return this._img;
-  }
-  
-  public void setImg(final String img) {
-    this._img = img;
-  }
+  @Accessors
+  private String img;
   
   public void setArticle(final String aTitle) {
-    this.setArticle(true);
-    this.setTitle(aTitle);
+    this.article = true;
+    this.title = aTitle;
   }
   
   public void setBlog(final String aTitle) {
-    this.setArticle(false);
-    this.setTitle(aTitle);
+    this.article = false;
+    this.title = aTitle;
+  }
+  
+  @Pure
+  public String getTitle() {
+    return this.title;
+  }
+  
+  public void setTitle(final String title) {
+    this.title = title;
+  }
+  
+  @Pure
+  public boolean isArticle() {
+    return this.article;
+  }
+  
+  public void setArticle(final boolean article) {
+    this.article = article;
+  }
+  
+  @Pure
+  public String getHref() {
+    return this.href;
+  }
+  
+  public void setHref(final String href) {
+    this.href = href;
+  }
+  
+  @Pure
+  public String getImg() {
+    return this.img;
+  }
+  
+  public void setImg(final String img) {
+    this.img = img;
   }
 }

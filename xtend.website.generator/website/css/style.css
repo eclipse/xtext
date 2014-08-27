@@ -13,12 +13,13 @@ a {
 }
 
 body { 
-	background: url(../images/pattern1.jpg) repeat #ffffff;
 	font-family: 'Lato', sans-serif;
 	font-size: 14px;
 	font-weight: 300;
 	color: #717576;
 	line-height: 1.5em;
+	background: url(../images/header_background.jpg) #010211;
+	background-repeat: no-repeat;
 /* 	background: url('../images/noise.png') #005580; */
 }
 
@@ -146,13 +147,12 @@ td.code pre {
 }
 
 #header_wrapper {
-	padding-bottom: 5px;
+	padding-bottom: 50px;
 	color: white;
 	height: auto;
 	border: none;
 	overflow: hidden;
-	background-color: rgb(34,34,34);
-	padding-top : 40pt;
+	padding-top : 80pt;
 }
 
 @media (max-width: 767px) {
@@ -338,7 +338,7 @@ a:hover .onhover-red {
 
 a.onhover-red {
 	text-decoration: none;
-	color: #333;
+	color: #010220;
 }
 
 ul.team_info {
@@ -424,7 +424,7 @@ ul.textlist li {
 }
 
 .pricing thead th {
-	background: #333;
+	background: #010220;
 	width: 84.3%;
 	padding: 13px 8%;
 	font-family: 'Lato', sans-serif;
@@ -467,7 +467,7 @@ tfoot td {
 }
 
 .pricing td.focus {
-	background: #333;
+	background: #010220;
 	width: 84.3%;
 	padding: 25px 8%;
 	font-family: 'Lato', sans-serif;
@@ -518,6 +518,12 @@ tfoot td {
 
 .inner {
 	padding: 10px 0px;
+	background: url(../images/pattern1.jpg) repeat #ebebeb;
+}
+
+.inner-footer {
+	padding: 10px 0px;
+	background: url(../images/pattern1.jpg) repeat #ebebeb;
 }
 
 .logo {
@@ -674,14 +680,13 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 }
 
 #extra {
-	border-top: 1px solid #fff;
-	background-color: #222;
-	margin-top:20pt;
+	background-color: #010211;
+	padding-top:20pt;
 }
 
 #extra .inner {
 	color: #fff;
-	border-top: 1px solid #000;
+	border-top: 1px solid #010211;
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-weight: 400;
 	line-height: 1.3em;
@@ -761,7 +766,7 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 	width: 100%;
 	z-index: 1030;
 	background-image: none;
-	background-color: #222;
+	background-color: #010211;
 }
 
 .navbar .container {
@@ -837,7 +842,7 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 /* 		rgba(235, 235, 235, 1) 100% ); W3C */
 /* 	filter: progid:DXImageTransform.Microsoft.gradient(  startColorstr='#ffffff', */
 /* 		endColorstr='#ebebeb', GradientType=0 ); IE6-8 */
-	border-top: 1px solid #000;
+	border-top: 1px solid #010211;
 	padding-top:50pt;
 }
 
@@ -849,7 +854,7 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 
 #page h1 {
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	color: #222222;
+	color: #333333;
 	font-weight: 400;
 	line-height: 1.3em;
 	font-style: normal;
@@ -869,7 +874,7 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 
 #page-heading {
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	color: #222222;
+	color: #010211;
 	text-align: center;
 }
 
@@ -909,7 +914,7 @@ ul.list3 li {
 	margin-left: 10px;
 	overflow: hidden;
 	line-height: 600px;
-	color: #333;
+	color: #010220;
 	background: url(../images/logo.png) no-repeat 0 0;
 }
 
@@ -921,7 +926,7 @@ ul.list3 li {
 }
 
 #intro {
-	background: url('../images/bg-footer.png');
+	background-color: rgba(1,2,22,.6);
 	padding-top: 10px;
 	color: #fff;
 	text-align: center;

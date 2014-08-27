@@ -45,6 +45,9 @@ public class Index extends AbstractWebsite {
     _builder.append("working parser and linker but also first class Eclipse support.</p>");
     _builder.newLine();
     _builder.append("\t\t\t");
+    _builder.append("<p><strong>New Release Soon! <a href=\"releasenotes.html\">Read More</a></p>");
+    _builder.newLine();
+    _builder.append("\t\t\t");
     _builder.append("<a href=\"download.html\" class=\"btn_download\"></a>");
     _builder.newLine();
     _builder.append("\t\t");

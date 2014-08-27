@@ -6,13 +6,15 @@ URL : http://uexel.com
  #A00
  -> 
 */
-body { /*	background: url(../images/pattern1.jpg) repeat #ffffff;*/
+body { 
+/*	background: url(../images/pattern1.jpg) repeat #ffffff;*/
 	font-family: 'Lato', sans-serif;
 	font-size: 14px;
 	font-weight: 300;
 	color: #717576;
 	line-height: 1.5em;
-	background: url('../images/noise.png') #A00;
+	background: url('../images/header_background.jpg') #9e1f01;
+	background-repeat : no-repeat;
 }
 
 p {
@@ -123,6 +125,16 @@ strong {
 	border: none;
 	overflow: hidden;
 	min-height:60px;
+}
+
+#header_wrapper a {
+	color: white;
+	text-decoration: underline;
+}
+
+#header_wrapper a .visited {
+	color: grey;
+	text-decoration: underline;
 }
 
 @media (max-width: 979px) {

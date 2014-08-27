@@ -104,7 +104,7 @@ public class News extends AbstractWebsite {
     _builder.append("<div class=\"container clearfix\" id=\"feed\">");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("<h1>Loading Latest News...</h1>");
+    _builder.append("<h1>Loading Latest News...<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></h1>");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("</div>");

@@ -92,12 +92,11 @@
 						<li ><a href="http://xtend-lang.org">Xtend</a></li>
 						<li ><a href="http://www.eclipse.org">Eclipse.org</a></li>
 					</ul>
+			        <div class="btn-group pull-right">
+			          <g:plusone href="http://www.xtext.org"></g:plusone>
+			        </div>
 				</div>
 				<!--/.nav-collapse -->
-		        <div class="btn-group pull-right">
-		          <g:plusone href="http://www.xtext.org"></g:plusone>
-		        </div>
-	
 			</div>
 		</div>
 	</div>
@@ -140,9 +139,6 @@
 		<li><a href="#mongo_running">Running the Example</a></li>
 		<li><a href="#mongo_grammar">Grammar</a></li>
 		<li><a href="#mongo_inferrer">Translation to Java</a></li>
-		<li><a href="#mongo_nameProvider">Qualified Name Provider</a></li>
-		<li><a href="#mongo_validation">Validation</a></li>
-		<li><a href="#mongo_visual">IDE Enhancements</a></li>
 	</ul>	</li>
 		<li><a href="#guice">DSL for Guice</a>
 	<ul>	<li><a href="#guice_solution">Overview</a></li>
@@ -174,7 +170,6 @@
 		<li><a href="#tortoise_grammar">Grammar</a></li>
 		<li><a href="#tortoise_inferrer">Translation to Java</a></li>
 		<li><a href="#tortoise_interpreter">Interpreter</a></li>
-		<li><a href="#tortoise_additons">Literal Classes</a></li>
 	</ul>	</li>
 	</ul>
 </div>
@@ -256,17 +251,15 @@
 							viewpoint. It is meant to give you an idea of what is possible without being a complete practical solution.
 							Yet the languages are flexible and come with powerful core abstractions.
 							We also covered different technical aspects of customizing to the language infrastructure. Some languages
-							have special syntax coloring, others provide customized outline views or content assist.
-							The new API for JVM languages does not mean that anything is hidden away and not customizable.
+							have special syntax coloring, others provide customized outline views or content assist. All aspects of a language are still fully customizable when using Xbase.
 						</p>
 						</section>
 						<!--  section -->
 						<section id="provisional_API" style="padding-top: 68px; margin-top: -68px;">
 						<h2 style="padding-top: 15px;">CAUTION: This is Provisional API</h2>
 						<p>
-							<strong>Please be aware that most of the new API covered in this document is not yet finalized and will 
-							likely be improved in future releases in incompatible ways. The projects in these examples are configured 
-							to suppress the corresponding warnings for references to provisional API.</strong>
+							<strong>Please be aware that some of the new API covered in this document is not yet finalized and will 
+							likely be improved in future releases in incompatible ways. Usages of such API are marked with a warning.</strong>
 						</p>
 						</section>
 					</div>
@@ -281,9 +274,9 @@
 						</h1>
 						<hr style="margin-top: 5px; margin-bottom: 5px;">
 						<p>
-							To run any of the examples, you will need <a href="http://www.eclipse.org/downloads">Eclipse 3.5 or better</a>
+							To run any of the examples, you will need <a href="http://www.eclipse.org/downloads">Eclipse 3.6 or better</a>
 							for your platform. In addition, you have to install <a href="http://www.eclipse.org/xtend/download.html">Xtend</a>
-							and of course <a href="http://www.eclipse.org/Xtext/download.html">Xtext 2.5</a>.
+							and of course <a href="http://www.eclipse.org/Xtext/download.html">Xtext 2.7</a>.
 						</p>
 						<p>
 							If you prefer a simple all-inclusive installation, consider downloading the latest
@@ -407,10 +400,10 @@ def foo() {  // equivalent to  def int foo()...
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
 // assume the class Foo defines a method foo(Baz)
-extension Foo
+extension Foo theFoo
 
 def bar(Baz baz) {
-  baz.foo  // calls _foo.foo(baz)
+  baz.foo  // calls theFoo.foo(baz)
 }</pre>
 							<p>
 							
@@ -419,8 +412,7 @@ def bar(Baz baz) {
 							<pre class="prettyprint lang-xtend linenums">
 import static extension java.util.Collections.*
 ...
-val foo = singleton('foo') // normal static method call to Collections.&lt;String&gt;singleton('foo')
-val bar = 'bar'.singleton // the same with extension syntax</pre>
+val foo = singleton('foo') // calls Collections.&lt;String&gt;singleton('foo')</pre>
 							<p>
 						</p>
 						<p>
@@ -432,7 +424,7 @@ val bar = 'bar'.singleton // the same with extension syntax</pre>
 							<pre class="prettyprint lang-xtend linenums">
 class Foo {
   def foo(Bar it) {
-    foo // will call it.foo() or if it doesn't exist this.foo()
+    foo // will call it.foo() or if that doesn't exist this.foo()
   }
 }</pre>
 							<p>
@@ -474,7 +466,7 @@ list.sortBy[ length ]
 							
 							Also noteworthy is the template expression, which allows defining interpolated multi-line string literals.
 							In addition, the template expressions has intelligent whitespace handling and supports a special <code class="prettyprint lang-xtend">FOR</code> and 
-							<code class="prettyprint lang-xtend">IF</code> construct, which is far better readable in this context.
+							<code class="prettyprint lang-xtend">IF</code> construct, which is far better readable in this context. In model inferrers, the template expressions are enhanced further to support type literals, automatically adding an import to the generated Java file.
 						</p>
 						<p>
 							We most often use this expression in the examples to generate some synthetic Java boilerplate code. Here is
@@ -487,7 +479,8 @@ list.sortBy[ length ]
   String url =  request.getRequestURL().toString();
   &laquo;FOR route : routes&raquo;
     {
-      java.util.regex.Matcher _matcher = _pattern&laquo;route.index&raquo;.matcher(url);
+      //java.util.regex.Matcher will be imported in the generated Java file
+      &laquo;Matcher&raquo; _matcher = _pattern&laquo;route.index&raquo;.matcher(url);
       if (_matcher.find()) {
         &laquo;FOR variable : route.url.variables&raquo;
             String &laquo;variable.name&raquo; = _matcher.group(&laquo;variable.index + 1&raquo;);
@@ -648,11 +641,10 @@ class ScriptingJvmModelInferrer extends AbstractModelInferrer {
                           IJvmDeclaredTypeAcceptor acceptor, 
                           boolean isPreIndexingPhase) {
     val className = script.eResource.URI.trimFileExtension.lastSegment
-   	acceptor.accept(script.toClass(className)).initializeLater [
+   	acceptor.accept(script.toClass(className))[
       // the class gets one main method
-      members += script.toMethod('main', script.newTypeRef(Void.TYPE)) [
-   	    parameters += script.toParameter("args", 
-   	        script.newTypeRef(String).addArrayTypeDimension)
+      members += script.toMethod('main', typeRef(Void.TYPE)) [
+   	    parameters += script.toParameter("args",  typeRef(String).addArrayTypeDimension)
    	    static = true
         varArgs = true
         // Associate the script as the body of the main method
@@ -714,7 +706,7 @@ for (arg : args)
 						</p>
 						<p>
 							This build language combines the declarative approach of defining tasks and dependencies with the full power of a 
-							modern expression language. It is a bit similar to Gradle but statically typed and with very good IDE support.
+							modern expression language. It is a bit similar to Ant but statically typed and with very good IDE support.
 						</p>
 						<!--  section -->
 						<section id="builddsl_solution" style="padding-top: 68px; margin-top: -68px;">
@@ -731,8 +723,8 @@ for (arg : args)
 						<p>
 							We have put most functionality of the language in the runtime library: Detecting the order of execution,
 							parsing parameters, etc. The language itself focusses on the structural parts, and leaves the actions
-							to Xbase. With this approach, it has proven beneficial to allow additional library methods to be added
-							via the extension method mechanism. So we do not ship a library of tasks as e.g. Ant does.
+							to Xbase. This allows both us and future users to add new tasks as library methods instead of hard-coding them 
+							in the language.
 						</p>
 						</section>
 						<!--  section -->
@@ -789,7 +781,7 @@ Task:
 						<h2 style="padding-top: 15px;">Translation to Java</h2>
 						<p>
 							For each <strong>BuildFile</strong> we create a Java class that extends the library class 
-							<abbr title="org.xtext.builddsl.lib.BuildScript">BuildScript</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/BuildScript.xtend">(src)</a>. We generate a main method allowing to execute the script as
+							<abbr title="org.xtext.builddsl.lib.BuildScript">BuildScript</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/BuildScript.java">(src)</a>. We generate a main method allowing to execute the script as
 							a Java application with command line parameters. The use of <code class="prettyprint lang-java">System.exit</code> allows to return error codes
 							to the caller.
 						</p>
@@ -830,36 +822,34 @@ public class SimpleBuild extends BuildScript {
 class BuildDSLJvmModelInferrer extends AbstractModelInferrer {
 
   @Inject extension JvmTypesBuilder
-  @Inject ITypeProvider typeProvider
 
   def dispatch void infer(BuildFile file, 
-                          IJvmDeclaredTypeAcceptor acceptor, 
+                          extension IJvmDeclaredTypeAcceptor acceptor, 
                           boolean isPreIndexingPhase) {
-    val fqn = file.javaClassName
-    val scriptName = Strings.lastToken(fqn, ".")
-    acceptor.accept(file.toClass(fqn)).initializeLater [
-      superTypes += file.newTypeRef(BuildScript)
+    val qualifiedName = file.javaClassName
+    val simpleName = Strings.lastToken(qualifiedName, ".")
+    accept(file.toClass(fqn))[
+      superTypes += typeRef(BuildScript)
 ...      
-      val stringArray = 
-          file.newTypeRef(String).addArrayTypeDimension
-      members += file.toMethod("main", file.newTypeRef(Void.TYPE)) [
-        parameters += toParameter("args", stringArray)
+      val stringArray = typeRef(String).addArrayTypeDimension
+      members += file.toMethod("main", typeRef(void)) [
+        parameters += file.toParameter("args", stringArray)
         varArgs = true
         static = true
-        body = [ append('''
+        body = '''
           &laquo;scriptName&raquo; script = new &laquo;scriptName&raquo;();
           if (script.showHelp(args)) {
             System.exit(HELP);
           }
           System.exit(script.doBuild(args));
-        ''') ]
+        '''
       ]
     ]
 ...</pre>
 							<p>
 						</p>
 						<p>
-							Each <strong>Task</strong> becomes a method in the Java class. A <abbr title="org.xtext.builddsl.lib.DependsOn">@DependsOn</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/DependsOn.xtend">(src)</a> annotation
+							Each <strong>Task</strong> becomes a method in the Java class. A <abbr title="org.xtext.builddsl.lib.DependsOn">@DependsOn</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/DependsOn.java">(src)</a> annotation
 							communicates the dependencies to the runtime. The superclass will scan for such annotations and execute
 							the dependencies in the right order.
 						</p>
@@ -892,19 +882,16 @@ protected void print() {
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
 // a method for the actual task body
-members += file.tasks.map[ task | toMethod(task.methodName, task.newTypeRef(Void.TYPE)) [
+members += file.tasks.map[ task | toMethod(task.methodName, typeRef(Void.TYPE)) [
   visibility = JvmVisibility.PROTECTED
-  annotations += task.toAnnotation(DependsOn) =&gt; [
-    values += createJvmStringAnnotationValue =&gt; [
-      values += task.depends.map[name]
-    ]
-  ]
+  annotations += annotationRef(DependsOn, task.depends.map[name])
   body = task.action
-]]</pre>
+  ]
+]</pre>
 							<p>
 						</p>
 						<p>
-							Finally, we create a field with the <abbr title="org.xtext.builddsl.lib.Param">@Param</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/Param.xtend">(src)</a> annotation from each <strong>Parameter</strong>. 
+							Finally, we create a field with the <abbr title="org.xtext.builddsl.lib.Param">@Param</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/Param.java">(src)</a> annotation from each <strong>Parameter</strong>. 
 							The superclass will make the so marked fields initializable from command line arguments.
 						</p>
 						<p>
@@ -939,7 +926,7 @@ public String name = "World";</pre>
 ...
 val type = declaredParameter.type 
 	?: declaredParameter?.init?.inferredType
-	?: file.newTypeRef(String)</pre>
+	?: typeRef(String)</pre>
 							<p>
 						</p>
 						</section>
@@ -985,12 +972,12 @@ class BuildDSLValidator extends XbaseJavaValidator {
 						<p>
 							We ship some predefined extension classes to enhance the Java classes <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/io/File.html"><abbr title="java.io.File">File</abbr></a>
 							and <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Class.html"><abbr title="java.lang.Class">Class</abbr></a>. These are always put onto the extension scope by a customized 
-							<abbr title="">@</abbr> <a href="broken-link in JvmAnnotationType:  (eProxyURI: file:/Volumes/Macintosh%20HD%202/eclipse-dev/xtext/master/git/xtext/xtext.website.generator/../docs/org.xtext.sevenlanguages.doc.xdoc/xdoc/BuildDsl.xdoc#xtextLink_::0.0.3.5.2.1.0.5::0::/2)">(src)</a>:
+							<abbr title="org.xtext.builddsl.scoping.BuildDSLImplicitlyImportedTypes">BuildDSLImplicitlyImportedTypes</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl/src/org/xtext/builddsl/scoping/BuildDSLImplicitImports.xtend">(src)</a>:
 						</p>
 						<p>
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
-class BuildDSLImplicitlyImportedTypes extends ImplicitlyImportedTypes {
+class BuildDSLImplicitlyImportedTypes extends ImplicitlyImportedFeatures {
 	/**
 	 * Add methods from {@link FileExtensions} and {@link ClassExtensions} to the extension scope.
 	 */
@@ -1010,8 +997,8 @@ class BuildDSLImplicitlyImportedTypes extends ImplicitlyImportedTypes {
 public class BuildDSLRuntimeModule 
     extends org.xtext.builddsl.AbstractBuildDSLRuntimeModule {
 ...
-  public Class&lt;? extends ImplicitlyImportedTypes&gt; 
-      bindImplicitlyImportedTypes() {
+  public Class&lt;? extends ImplicitlyImportedFeatures&gt; 
+      bindImplicitlyImportedFeatures() {
     return BuildDSLImplicitlyImportedTypes.class;
   }
 }</pre>
@@ -1124,7 +1111,7 @@ package org.musicdb {
         String name    // single valued property
         Album* albums  // array property
         // an operation
-        Iterable&lt;Track&gt; getOevre() {
+        Iterable&lt;Track&gt; getOeuvre() {
             albums.map[track].flatten
         }
     }
@@ -1184,8 +1171,8 @@ album.setTitle("A Love Supreme");
 john.getAlbums().add(album);
 Track...  // create some tracks and add them to the album
  
-System.out.println(john.getName() + "'s Oevre");
-for(Track track: john.getOevre()) 
+System.out.println(john.getName() + "'s Oeuvre");
+for(Track track: john.getOeuvre()) 
   System.out.println(track.getTitle());
 
 DBCollection dbCollection = ... // standard mongoDB driver code
@@ -1306,391 +1293,16 @@ def dispatch void infer(MongoFile file,
                         IJvmDeclaredTypeAcceptor acceptor, 
                         boolean isPreIndexingPhase) {
   for(bean : file.eAllOfType(MongoBean)) {
-       acceptor.accept(bean.toClass(bean.fullyQualifiedName))
-         .initializeLater([
-           documentation = bean.documentation
-           superTypes += newTypeRef(bean, 'org.xtext.mongobeans.IMongoBean')
-... // calling various methods to create Java members
-    // from the AbstractFeatures
-         ])
-  }
-}</pre>
+       acceptor.accept(bean.toClass(bean.fullyQualifiedName))</pre>
 							<p>
-						</p>
-						<p>
-							First, it finds all elements of type <strong>MongoBean</strong> in the given <strong>MongoFile</strong>. For each of these, it creates a new 
-							Java class. Then the documentation is copied and the interface <abbr title="org.xtext.mongobeans.lib.IMongoBean">IMongoBean</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans.lib/src/org/xtext/mongobeans/lib/IMongoBean.xtend">(src)</a>
-							is added to the list of supertypes. This will also insert a Java import at the appropriate location.
-						</p>
-						<p>
-							Each <strong>MongoBean</strong> wraps a <a href="http://api.mongodb.org/java/2.6/com/mongodb/DBObject.html"><abbr title="com.mongodb.DBObject">DBObject</abbr></a>, which is represented as a Java field with a 
-							getter. There are two constructors, one for a given <a href="http://api.mongodb.org/java/2.6/com/mongodb/DBObject.html"><abbr title="com.mongodb.DBObject">DBObject</abbr></a> and one that 
-							creates a new one. We have to store the class name in the DB object, if we want to be able to restore
-							JavaBeans from query results.
-						</p>
-						<p>
-							</p>
-							<table class="table table-bordered table-condensed">
-							<tr><td>DSL</td>
-							<td></p>
-							<pre class="prettyprint lang-mongobeans linenums">
-Artist { ...</pre>
-							<p></td>
-							</tr>
-							<tr><td>Java</td>
-							<td></p>
-							<pre class="prettyprint lang-java linenums">
-public class Artist implements IMongoBean { 
-  private DBObject _dbObject;
-  
-  public DBObject getDbObject() {
-    return this._dbObject;
-  }
-
-  public Artist(final DBObject dbObject) {
-    this._dbObject = dbObject;
-  }
-  
-  public Artist() {
-    _dbObject = new BasicDBObject();
-    _dbObject.put(JAVA_CLASS_KEY, "org.musicdb.Artist");
-  }
-...</pre>
-							<p></td>
-							</tr>
-							</table>
-							<p>
-						</p>
-						<p>
-							The inferrer code does this in two separate methods: One for the property <code class="prettyprint lang-xtend">_dbObject</code> and another
-							for the constructors.
-						</p>
-						<p>
-							</p>
-							<pre class="prettyprint lang-xtend linenums">
-def protected addDbObjectProperty(JvmDeclaredType 
-                                  inferredType, 
-                                  MongoBean bean) {
-  inferredType.members += bean.toField('_dbObject', 
-      newTypeRef(bean, 'com.mongodb.DBObject'))
-  inferredType.members += bean.toGetter('dbObject', '_dbObject',
-      newTypeRef(bean, 'com.mongodb.DBObject'))
-}
-
-def protected addConstructors(JvmDeclaredType inferredType, 
-                              MongoBean bean) {
-  inferredType.members += bean.toConstructor [
-    documentation = '''...'''
-    parameters += toParameter("dbObject", 
-        newTypeRef(bean, 'com.mongodb.DBObject'))
-    body = [
-      append('''
-        this._dbObject = dbObject;
-      ''')
-    ]
-  ]
-  inferredType.members += bean.toConstructor [
-    documentation = '''...'''
-    body = [
-      append('''
-        _dbObject = new com.mongodb.BasicDBObject();
-        _dbObject.put(JAVA_CLASS_KEY, "&laquo;inferredType.identifier&raquo;");
-      ''')
-    ]
-  ]
-}</pre>
-							<p>
-						</p>
-						<p>
-							Next on our list are the getters and setters delegating to the <code class="prettyprint lang-xtend">_dbObject</code>. We have to handle four
-							cases: Properties with a type that can be handled by the mongoDB Java-driver directly (most primitive types,
-							<a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html"><abbr title="java.lang.String">String</abbr></a>, <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/Date.html"><abbr title="java.util.Date">Date</abbr></a>, etc.), <abbr title="org.xtext.mongobeans.lib.IMongoBean">IMongoBean</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans.lib/src/org/xtext/mongobeans/lib/IMongoBean.xtend">(src)</a>
-							properties, and their respective multi-valued counterparts:
-						</p>
-						<p>
-							</p>
-							<table class="table table-bordered table-condensed">
-							<tr><td>DSL</td>
-							<td></p>
-							<pre class="prettyprint lang-mongobeans linenums">
-...
-  String name     // primitive property
-  Artist friend   // bean-type property
-  String* aliases // multi-valued primitive property
-  Album* albums   // multi-valued bean-type property
-...</pre>
-							<p></td>
-							</tr>
-							<tr><td>Java</td>
-							<td></p>
-							<pre class="prettyprint lang-java linenums">
-...
-  public String getName() {
-    return (String) _dbObject.get("name");
-  }
-  public void setName(final String name) {
-     _dbObject.put("name", name);
-  }
-  
-  public Artist getFriend() {
-    return WrappingUtil.wrapAndCast(
-        (DBObject) _dbObject.get("friend"));
-  }
-  public void setFriend(final Artist friend) {
-     _dbObject.put("friend", WrappingUtil.unwrap(friend));
-  }
-  
-  public List&lt;String&gt; getAliases() {
-    return (List&lt;String&gt;) _dbObject.get("aliases");
-  }
-  
-  private MongoBeanList&lt;Album&gt; _albums;
-  public List&lt;Album&gt; getAlbums() {
-    if(_albums==null)
-      _albums = new MongoBeanList&lt;Album&gt;(_dbObject, "albums");
-    return _albums;
-  }
-...</pre>
-							<p></td>
-							</tr>
-							</table>
-							<p>
-						</p>
-						<p>
-							The runtime helper class <abbr title="org.xtext.mongobeans.lib.WrappingUtil">WrappingUtil</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans.lib/src/org/xtext/mongobeans/lib/WrappingUtil.xtend">(src)</a> does the conversion between 
-							<a href="http://api.mongodb.org/java/2.6/com/mongodb/DBObject.html"><abbr title="com.mongodb.DBObject">DBObject</abbr></a> and <abbr title="org.xtext.mongobeans.lib.IMongoBean">IMongoBean</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans.lib/src/org/xtext/mongobeans/lib/IMongoBean.xtend">(src)</a>. For multi-valued <strong>MongoProperties</strong>
-							we need getters only. If they have a primitive type, they can be handled by the Java-driver directly. Multi-valued 
-							<strong>MongoBean</strong> typed properties require a special <abbr title="org.xtext.mongobeans.lib.MongoBeanList">MongoBeanList</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans.lib/src/org/xtext/mongobeans/lib/MongoBeanList.xtend">(src)</a> to automatically 
-							wrap/unwrap the elements.
-						</p>
-						<p>
-							The corresponding inferrer code does not show anything particularly new so we skip most of it for brevity. To detect 
-							whether a type is an <abbr title="org.xtext.mongobeans.lib.IMongoBean">IMongoBean</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans.lib/src/org/xtext/mongobeans/lib/IMongoBean.xtend">(src)</a> or a primitive mongoDB type, we use the last helper 
-							class <abbr title="org.xtext.mongobeans.jvmmodel.MongoTypes">MongoTypes</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans/src/org/xtext/mongobeans/jvmmodel/MongoTypes.java">(src)</a>. The following snippet shows the inference of the getter for
-							multi-valued properties:
-						</p>
-						<p>
-							</p>
-							<pre class="prettyprint lang-xtend linenums">
-def protected addListAccessor(JvmDeclaredType inferredType,
-                              MongoProperty property) {
-  val propertyType = property.jvmType.asWrapperTypeIfPrimitive
-  if(propertyType.isMongoPrimitiveType) {
-    inferredType.members += property.toMethod(
-      'get' + property.name.toFirstUpper, 
-       newTypeRef(property, 'java.util.List', propertyType)
-    ) [
-...
-    ]    
-  } else {
-    inferredType.members += property.toField(
-      '_' + property.name, newTypeRef(property,
-        'org.xtext.mongobeans.MongoBeanList', propertyType))
-    inferredType.members += property.toMethod(
-      'get' + property.name.toFirstUpper,
-      newTypeRef(property, 'java.util.List', propertyType)
-    ) [
- ...</pre>
-							<p>
-						</p>
-						<p>
-							Last but not least, we infer Java methods for <strong>MongoOperations</strong>.
-						</p>
-						<p>
-							</p>
-							<table class="table table-bordered table-condensed">
-							<tr><td>DSL</td>
-							<td></p>
-							<pre class="prettyprint lang-mongobeans linenums">
-...
-  Iterable&lt;Track&gt; getOevre() {
-      albums.map[tracks].flatten
-  }
-...</pre>
-							<p></td>
-							</tr>
-							<tr><td>Java</td>
-							<td></p>
-							<pre class="prettyprint lang-java linenums">
-...
-  public Iterable&lt;Track&gt; getOevre() {
-    // some java code you really don't care about 
-    // but it should just do the right thing
-  }
-...</pre>
-							<p></td>
-							</tr>
-							</table>
-							<p>
-						</p>
-						<p>
-							The inferrer code for this particular task is surprisingly simple, as we can directly associate the
-							body of the <strong>MongoOperation</strong>  to the generated Java method. The Xbase compiler will automatically 
-							transform that to Java.
-						</p>
-						<p>
-							</p>
-							<pre class="prettyprint lang-xtend linenums">
-def protected addMethod(JvmDeclaredType inferredType, 
-                        MongoOperation operation) {
-  inferredType.members += operation.toMethod(operation.name, 
-      operation.returnType) [
-    documentation = operation.documentation
-    for(parameter: operation.parameters)
-      parameters += parameter.toParameter(parameter.name, 
-          parameter.parameterType)
-    body = operation.body
-  ]
-}</pre>
-							<p>
-						</p>
-						</section>
-						<!--  section -->
-						<section id="mongo_nameProvider" style="padding-top: 68px; margin-top: -68px;">
-						<h2 style="padding-top: 15px;">Qualified Name Provider</h2>
-						<p>
-							By default, the qualified name of an element is calculated by joining all the simple names of its 
-							containers with a dot. In our example, the <strong>MongoBean</strong> <code class="prettyprint lang-xtend">Track</code> would consequently be named 
-							<code class="prettyprint lang-xtend">org.musicdb.Album.track.Track</code>. To ignore properties and beans on the path, we implemented our own
-							<abbr title="org.xtext.mongobeans.scoping.MongoQualifiedNameProvider">MongoQualifiedNameProvider</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans/src/org/xtext/mongobeans/scoping/MongoQualifiedNameProvider.xtend">(src)</a>.
-						</p>
-						<p>
-							</p>
-							<pre class="prettyprint lang-xtend linenums">
-class MongoQualifiedNameProvider extends XbaseQualifiedNameProvider {
-  
-  def qualifiedName(MongoBean mongoBean) {
-    val packageDeclaration = 
-      mongoBean.getContainerOfType(PackageDeclaration)
-    if(packageDeclaration != null) 
-      packageDeclaration.fullyQualifiedName.append(mongoBean.name)
-    else
-      return QualifiedName.create(mongoBean.name)
-  }
-}</pre>
-							<p>
-						</p>
-						<p>
-							To make the framework pick up our customization, we have to add a binding in the respective 
-							Guice module <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans/src/org/xtext/mongobeans/MongoBeansRuntimeModule.java">(src)</a>.
-						</p>
-						<p>
-							</p>
-							<pre class="prettyprint lang-java linenums">
-@Override
-public Class&lt;? extends IQualifiedNameProvider&gt; bindIQualifiedNameProvider() {
-  return MongoQualifiedNameProvider.class;
-}</pre>
-							<p>
-						</p>
-						<p>
-							See the <a href="http://www.eclipse.org/Xtext/documentation.html">Xtext documentation</a> to learn more about Xtext's 
-							dependency injection.
-						</p>
-						</section>
-						<!--  section -->
-						<section id="mongo_validation" style="padding-top: 68px; margin-top: -68px;">
-						<h2 style="padding-top: 15px;">Validation</h2>
-						<p>
-							The Java driver for mongoDB cannot map all Java types to mongoDB types. To enforce that constraint, 
-							we have added the <abbr title="org.xtext.mongobeans.validation.MongoBeansValidator">MongoBeansValidator</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans/src/org/xtext/mongobeans/validation/MongoBeansValidator.java">(src)</a>. It also checks for missing types 
-							and avoids name collisions in the generated code with the implicitly defined property <code class="prettyprint lang-xtend">dbObject</code>.
-						</p>
-						<p>
-							</p>
-							<pre class="prettyprint lang-xtend linenums">
-class MongoBeansValidator extends XbaseJavaValidator {
-...
-  @Inject extension MongoTypes mongoTypes
-  
-  @Check def checkMongoProperty(MongoProperty it) {
-    if (name == 'dbObject') 
-      error("Illegal property name 'dbObject'", 
-            ABSTRACT_FEATURE__NAME, 
-            ILLEGAL_PROPERTY_NAME, 
-            '_' + name)
-    if (type != null) {
-      if (!type.isMongoType)
-        error('Only MongoBeans and mappable types are allowed',
-              MONGO_PROPERTY__TYPE, ILLEGAL_TYPE)
-    } else if (inlineType == null) {
-      error('Type must be set', ABSTRACT_FEATURE__NAME, MISSING_TYPE)
-    }
-  }
-...</pre>
-							<p>
-						</p>
-						</section>
-						<!--  section -->
-						<section id="mongo_visual" style="padding-top: 68px; margin-top: -68px;">
-						<h2 style="padding-top: 15px;">IDE Enhancements</h2>
-						<p>
-							The validator from the previous section raises an error <code class="prettyprint lang-xtend">ILLEGAL_PROPERTY_NAME</code> when a property is named <strong>dbObject</strong>.
-							We have implemented a quick fix to replace the invalid name:
-						</p>
-						<p>
-							</p>
-							<pre class="prettyprint lang-xtend linenums">
-class MongoBeansQuickfixProvider extends XbaseWithAnnotationsQuickfixProvider {
-
-  @Fix(MongoBeansValidator.ILLEGAL_PROPERTY_NAME)
-  def void capitalizeName(Issue issue, IssueResolutionAcceptor acceptor) {
-    acceptor.accept(issue, 
-        'Rename to ' + issue.data.head, 
-        '''Rename property to &laquo;issue.data.head&raquo;.''', 
-        null) [
-      xtextDocument.replace(issue.offset, issue.length, issue.data.head)
-    ]
-  }
-}</pre>
-							<p>
-						</p>
-						<p>
-							To improve the language IDE visually, we have tuned the 
-							outline <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans.ui/src/org/xtext/mongobeans/ui/outline/MongoBeansOutlineTreeProvider.xtend">(src)</a> a bit
-						</p>
-						<p>
-							</p>
-							<pre class="prettyprint lang-xtend linenums">
-class MongoBeansOutlineTreeProvider extends DefaultOutlineTreeProvider {
-  // don't show children of operations
-  def _isLeaf(MongoOperation operation) {
-    true
-  }
-  
-  // show inline declared MongoBeans
-  def _createChildren(IOutlineNode parentNode, MongoProperty property) {
-    if(property.inlineType != null)
-      parentNode.createNode(property.inlineType)
-  }
-  
-  def _isLeaf(MongoProperty property) {
-    property.inlineType == null
-  }
-}</pre>
-							<p>
-						</p>
-						<p>
-							and the label provider <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.mongobeans.ui/src/org/xtext/mongobeans/ui/labeling/MongoBeansLabelProvider.xtend">(src)</a> as well:
-						</p>
-						<p>
-							</p>
-							<pre class="prettyprint lang-xtend linenums">
-class MongoBeansLabelProvider extends XbaseLabelProvider {
-...  
-  override image(Object element) {
-    // icons are stored in the 'icons' folder of this project
-    switch element {
-      MongoBean: 'Letter-B-blue-icon.png'
-      MongoProperty: 'Letter-P-orange-icon.png'
-      MongoOperation: 'Letter-O-red-icon.png'
-      Import: 'imp_obj.gif'
-      PackageDeclaration: 'package_obj.gif'
-      default:
-        super.image(element)
-    }
-  }</pre>
-							<p>
+							
+							           documentation = bean.documentation
+							           superTypes += typeRef(IMongoBean)
+							... // calling various methods to create Java members
+							    // from the AbstractFeatures
+							      ]
+							  }
+							}
 						</p>
 						</section>
 					</div>
@@ -1797,7 +1409,7 @@ com.acme.RuntimeModule {
 }
 
 com.acme.TestModule mixin RuntimeModule {
-  bind DataProvider to-instance [| 'dummy-data' ]
+  bind DataProvider to-instance ['dummy-data' ]
   bind LoggingService to BufferedLoggingService
 }</pre>
 							<p>
@@ -1910,27 +1522,23 @@ public class MyModule implements Module {
 						<p>
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
-acceptor.accept(module.toClass(module.fullyQualifiedName))
-  .initializeLater [
+accept(module.toClass(module.fullyQualifiedName))[
 ...      
   // declare a field for each mixed-in module
   for (mixin : module.mixins) {
     if (!mixin.eIsProxy)
       members += mixin.toField( mixin.simpleName, 
-          newTypeRef(mixin.fullyQualifiedName.toString)) [
-        setInitializer [
-          append('''new &laquo;mixin.name&raquo;()''')
-        ]
+        typeRef(mixin.fullyQualifiedName.toString)) [
+        initializer = '''new &laquo;mixin.name&raquo;()'''
       ]
   }
   
   // and later when declaring the configure method
-  members+= module.toMethod("configure", voidType.createTypeRef) [
+  members+= module.toMethod("configure", typeRef(void)) [
     documentation = 'Registers bindings for keys not present in ...'
-    parameters += module.toParameter("bind", binderType.createTypeRef)
-    parameters += module.toParameter("usedKeys", setType.createTypeRef( 
-        keyType.createTypeRef(wildCard)))
-    body = [append('''
+    parameters += module.toParameter("bind", typeRef(Binder))
+    parameters += module.toParameter("usedKeys", typeRef(Set, typeRef(Key, wildcard)))
+    body = '''
       try {
         ...some other code
         &laquo;FOR mix : module.mixins&raquo;
@@ -1939,7 +1547,7 @@ acceptor.accept(module.toClass(module.fullyQualifiedName))
       } catch (Exception e) {
         throw new RuntimeException(e);
       }
-    ''')]
+    '''
   ]</pre>
 							<p>
 						</p>
@@ -2006,14 +1614,14 @@ for (binding : module.bindings) {
   // annotation via reflection later.
   if (binding.to?.annotation != null) {
     members += binding.toField(binding.to.syntheticName, binding.to.type) [
-      newHashSet(binding.to.annotation).translateAnnotationsTo(it)
+      addAnnotation(binding.to.annotation)
       visibility = JvmVisibility.PRIVATE
     ]
   }
   if (binding.from.annotation != null) {
     members += binding.toField(binding.from.syntheticName, 
         binding.from.type) [
-      newHashSet(binding.from.annotation).translateAnnotationsTo(it)
+      addAnnotation(binding.from.annotation)
       visibility = JvmVisibility.PRIVATE
     ]
   }
@@ -2021,7 +1629,7 @@ for (binding : module.bindings) {
 
 // and the following method
 def guiceKey(KeyAST it) '''
-  Key.get(new TypeLiteral&lt;&laquo;type.identifier&raquo;&gt;(){}&laquo;
+  Key.get(new TypeLiteral&lt;&laquo;type&gt;(){}&laquo;
   IF annotation != null
   &raquo;, getClass().getDeclaredField("&laquo;syntheticName&raquo;").getAnnotations()[0]&laquo;
   ENDIF&raquo;)'''</pre>
@@ -2208,8 +1816,8 @@ Variable :
 // translate the dependencies to fields annotated with @Inject
 for (field : model.declarations.filter(Dependency)) {
   members += field.toField(field.name, field.type) [
-    annotations += field.toAnnotation(Inject)
-    field.annotations.translateAnnotationsTo(it)
+    annotations += annotationRef(Inject)
+		addAnnotations(field.annotations)
   ]
 }</pre>
 							<p>
@@ -2275,7 +1883,7 @@ public class NumberGuessing extends HttpServlet {
                     final HttpServletResponse response) {
     String url =  request.getRequestURL().toString();
     {
-      java.util.regex.Matcher _matcher = _pattern2.matcher(url);
+      Matcher _matcher = _pattern2.matcher(url);
       if (_matcher.find()) {
         String theGuess = _matcher.group(1);
         _doGet2(request, response, theGuess);
@@ -2300,14 +1908,11 @@ public class NumberGuessing extends HttpServlet {
  * Gives scope and live to the expression.
  */
 def protected toRouteCallMethod(Route route) {
-  route.toMethod(route.nameOfRouteMethod, route.newTypeRef(Void.TYPE)) [
-    parameters += route.toParameter("request",  
-        route.newTypeRef(HTTP_REQUEST))
-    parameters += route.toParameter("response", 
-        route.newTypeRef(HTTP_RESPONSE))
+  route.toMethod(route.nameOfRouteMethod, typeRef(Void.TYPE)) [
+    parameters += route.toParameter("request",  typeRef(HTTP_REQUEST))
+    parameters += route.toParameter("response", typeRef(HTTP_RESPONSE))
     for (variable : route.url.variables) {
-      parameters += variable.toParameter(variable.name, 
-        route.newTypeRef(String))
+      parameters += variable.toParameter(variable.name, typeRef(String))
     }
     body = route.call
   ]
@@ -2479,9 +2084,9 @@ public class MyWebsite {
       init.apply(this);
     String result = generate().toString();
     // remove leading --&gt;
-    result = result.replaceAll("^--&gt;\\n","");
+    result = result.replaceAll("^--&gt;\\r?\\n","");
     // trim multi-newline to single newline
-    result = result.replaceAll("\\n\\s*\\n","\n");
+    result = result.replaceAll("\\r?\\n\\s*\\r\\n?", System.getProperty("line.separator"));
     return result;
     
   }
@@ -2508,28 +2113,23 @@ class TemplateJvmModelInferrer extends AbstractModelInferrer {
          else 
            simpleName
     val javaClass = element.toClass(qualifiedName)
-       acceptor.accept(javaClass).initializeLater [
+       acceptor.accept(javaClass)[
 ...
       // generate a method accepting an initializer lambda expression
-      members += element.toMethod("generate", 
-          element.newTypeRef(String)) [
+      members += element.toMethod("generate", typeRef(String)) [
         parameters += element.toParameter(
-          "init", 
-          element.newTypeRef(Procedures.Procedure1, 
-              newTypeRef(javaClass))
+          "init", typeRef(Procedures.Procedure1, typeRef(javaClass))
         )
-        body = [
-          append('''
-            if (init != null)
-              init.apply(this);
-            String result = generate().toString();
-            // remove leading --&gt;
-            result = result.replaceAll("^--&gt;\\n","");
-            // trim multi-newline to single newline
-            result = result.replaceAll("\\n\\s*\\n","\n");
-            return result;
-          ''')
-        ]
+        body = '''
+          if (init != null)
+            init.apply(this);
+          String result = generate().toString();
+          // remove leading --&gt;
+          result = result.replaceAll("^--&gt;\\r?\\n","");
+          // trim multi-newline to single newline
+          result = result.replaceAll("\\r?\\n\\s*\\r?\\n",System.getProperty("line.separator"));
+          return result;
+        '''
 ...</pre>
 							<p>
 						</p>
@@ -2572,7 +2172,7 @@ public String getTitle() {
 for (param : element.params) {
   val type = param.type 
     ?: param.defaultexp?.inferredType 
-    ?: element.newTypeRef(String)
+    ?: typeRef(String)
   members += param.toField(param.name, type) [
     if (param.defaultexp != null)
       initializer = param.defaultexp
@@ -2747,22 +2347,12 @@ override protected internalToConvertedExpression(XExpression obj,
 							<pre class="prettyprint lang-xtend linenums">
 class TemplateTypeComputer extends XbaseWithAnnotationsTypeComputer {
 	
-	override computeTypes(XExpression expression, ITypeComputationState state) {
-		if(expression instanceof RichString) {
-			_computeTypes(expression as RichString, state);
-		} else if(expression instanceof RichStringForLoop) {
-			_computeTypes(expression as RichStringForLoop, state);
-		} else {
-			super.computeTypes(expression, state)
-		}
-	}
-	
-	protected def _computeTypes(RichString expression, ITypeComputationState state) {
+	def dispatch computeTypes(RichString expression, ITypeComputationState state) {
 		super._computeTypes(expression as XBlockExpression, state)
 		state.acceptActualType(getTypeForName(StringBuilder, state))
 	}
 	 
-	protected def _computeTypes(RichStringForLoop expression, ITypeComputationState state) {
+	def dispatch computeTypes(RichStringForLoop expression, ITypeComputationState state) {
 		super._computeTypes(expression as XForLoopExpression, state)
 		state.acceptActualType(getTypeForName(StringBuilder, state))
 	}
@@ -2904,11 +2494,11 @@ class Tortoise {
   double angle
   double x
   double y
-  @Property int delay = 200
+  @Accessors int delay = 200
 
   boolean isPaint = true
-  @Property int lineWidth
-  @Property Color lineColor
+  @Accessors int lineWidth
+  @Accessors Color lineColor
 
   List&lt;ITortoiseEvent.Listener&gt; listeners = newArrayList()
 ...</pre>
@@ -2996,11 +2586,10 @@ class TortoiseShellJvmModelInferrer extends AbstractModelInferrer {
   def dispatch void infer(Program program, 
                           IJvmDeclaredTypeAcceptor acceptor, 
                           boolean isPreIndexingPhase) {
-    acceptor.accept(program.toClass(INFERRED_CLASS_NAME)).initializeLater [
-      superTypes += program.newTypeRef(Tortoise)
+    acceptor.accept(program.toClass(INFERRED_CLASS_NAME))[
+      superTypes += typeRef(Tortoise)
       if(program.body != null)
-        members += program.toMethod("main", 
-            program.newTypeRef(Void.TYPE)) [
+        members += program.toMethod("main", typeRef(Void.TYPE)) [
           body = program.body
         ]
       for(subProgram: program.subPrograms)
@@ -3047,95 +2636,11 @@ override protected invokeOperation(JvmOperation operation,
   val executable = operation.sourceElements.head
   if (executable instanceof Executable) {
     val context = createContext
-    context.newValue(XbaseScopeProvider.THIS, tortoise)
-    var index = 0
-    for (param : operation.parameters) {
-      context.newValue(QualifiedName.create(param.name), 
-          argumentValues.get(index))
-      index = index + 1  
-    }
-    val result = evaluate((executable as Executable).body, 
-        context, CancelIndicator.NullImpl)
-    if(result.exception != null)
-      throw result.exception
-    result.result
-  } else {
-    super.invokeOperation(operation, receiver, argumentValues)
-  }
-}</pre>
+    context.newValue(QualifiedName.create("this"), tortoise)
+    operation.parameters.forEach</pre>
 							<p>
-						</p>
-						<p>
-							One thing you have to know about the Java inferrence is that when creating Java elements using the
-							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder">JvmTypesBuilder</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">(src)</a>, the infrastructure stores the information which 
-							elements have been inferred from which source elements. To navigate these traces, we use the Xbase service
-							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations">IJvmModelAssociations</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.java">(src)</a>. So to detect whether a 
-							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/common/types/JvmOperation.html"><abbr title="org.eclipse.xtext.common.types.JvmOperation">JvmOperation</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmOperation.java">(src)</a> is inferred, we check whether it has a source element.
-							If so, we have to setup an execution context binding <code class="prettyprint lang-xtend">this</code> and the parameters as local variables and then 
-							execute the method's body using the interpreter.
-						</p>
-						<p>
-							To start the interpretation we have to do almost the same: Setup the execution context and then evaluate
-							the <strong>Program's</strong> body. The respective code is
-						</p>
-						<p>
-							</p>
-							<pre class="prettyprint lang-xtend linenums">
-override run(Tortoise tortoise, EObject program, int stopAtLine) {
-  if(tortoise != null &amp;&amp; program != null) {
-    this.tortoise = tortoise
-    this.stopAtLine = stopAtLine
-    try {
-      program.jvmElements.filter(JvmOperation).head
-        ?.invokeOperation(null, Collections.emptyList)
-    } catch (StopLineReachedException exc) {
-      // ignore
-    }
-  }
-}</pre>
-							<p>
-						</p>
-						<p>
-							The <abbr title="org.xtext.tortoiseshell.interpreter.StopLineReachedException">StopLineReachedException</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.tortoiseshell/src/org/xtext/tortoiseshell/interpreter/TortoiseShellInterpeter.xtend">(src)</a> is part of the <strong>Step Mode</strong>.
-							It is thrown when the execution reaches the line <code class="prettyprint lang-xtend">stopAtLine</code>, thus terminating the current execution.
-							The throwing code is
-						</p>
-						<p>
-							</p>
-							<pre class="prettyprint lang-xtend linenums">
-override protected internalEvaluate(XExpression expression, 
-                                    IEvaluationContext context, 
-                                    CancelIndicator indicator) {
-  val line = NodeModelUtils.findActualNodeFor(expression)?.startLine
-  if(line-1 == stopAtLine)
-    throw new StopLineReachedException
-  super.internalEvaluate(expression, context, indicator)
-}</pre>
-							<p>
-						</p>
-						</section>
-						<!--  section -->
-						<section id="tortoise_additons" style="padding-top: 68px; margin-top: -68px;">
-						<h2 style="padding-top: 15px;">Literal Classes</h2>
-						<p>
-							To make the static methods and fields of <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Math.html"><abbr title="java.lang.Math">Math</abbr></a> and <a href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/draw2d/ColorConstants.html"><abbr title="org.eclipse.draw2d.ColorConstants">ColorConstants</abbr></a>
-							callable directly, we provided the <abbr title="org.xtext.tortoiseshell.scoping.TortoiseShellImplicitlyImportedTypes">TortoiseShellImplicitlyImportedTypes</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.tortoiseshell/src/org/xtext/tortoiseshell/scoping/TortoiseShellImplicitlyImportedTypes.xtend">(src)</a>:
-						</p>
-						<p>
-							</p>
-							<pre class="prettyprint lang-xtend linenums">
-class TortoiseShellImplicitlyImportedTypes extends ImplicitlyImportedTypes {
-  override protected getStaticImportClasses() {
-    (super.getStaticImportClasses() + #[Math, ColorConstants])
-      .toList
-	}
-  }
-}</pre>
-							<p>
-						</p>
-						<p>
-							To overcome a small issue in the interpreter we also had to implement the 
-							<abbr title="org.xtext.tortoiseshell.scoping.TortoiseShellIdentifiableSimpleNameProvider">TortoiseShellIdentifiableSimpleNameProvider</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.tortoiseshell/src/org/xtext/tortoiseshell/scoping/TortoiseShellIdentifiableSimpleNameProvider.xtend">(src)</a>.
+							p, i|
+							        context.newValue(QualifiedName.create(p.name), argumentValues.get(i))
 						</p>
 						</section>
 					</div>

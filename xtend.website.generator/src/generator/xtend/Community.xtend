@@ -1,5 +1,7 @@
 package generator.xtend
 
+import org.eclipse.xtend.lib.annotations.Accessors
+
 class Community extends AbstractXtendWebsite {
 
 	override path() {
@@ -8,6 +10,7 @@ class Community extends AbstractXtendWebsite {
 	
 	override contents() '''
 		<div id="page">
+		  <div class="inner">
 			<div id="team" class="container clearfix"> 
 				<h2>Resources</h2>
 		        <hr>
@@ -55,6 +58,7 @@ class Community extends AbstractXtendWebsite {
 			<br/><br/>
 			<br/><br/>
 			«printArticles»
+		  </div>
 		</div>
 	'''
 	def printArticles() '''
@@ -157,10 +161,10 @@ class Community extends AbstractXtendWebsite {
 
 class Article {
 	
-	@Property String title
-	@Property boolean article
-	@Property String href
-	@Property String img
+	@Accessors String title
+	@Accessors boolean article
+	@Accessors String href
+	@Accessors String img
 	
 	def void setArticle(String aTitle) {
 		article = true

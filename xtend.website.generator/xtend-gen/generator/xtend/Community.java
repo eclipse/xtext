@@ -21,6 +21,9 @@ public class Community extends AbstractXtendWebsite {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<div id=\"page\">");
     _builder.newLine();
+    _builder.append("  ");
+    _builder.append("<div class=\"inner\">");
+    _builder.newLine();
     _builder.append("\t");
     _builder.append("<div id=\"team\" class=\"container clearfix\"> ");
     _builder.newLine();
@@ -115,6 +118,9 @@ public class Community extends AbstractXtendWebsite {
     CharSequence _printArticles = this.printArticles();
     _builder.append(_printArticles, "\t");
     _builder.newLineIfNotEmpty();
+    _builder.append("  ");
+    _builder.append("</div>");
+    _builder.newLine();
     _builder.append("</div>");
     _builder.newLine();
     return _builder;

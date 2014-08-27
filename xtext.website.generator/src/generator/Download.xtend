@@ -31,7 +31,7 @@ class Download extends AbstractWebsite {
 				<div class="container clearfix">
 					<h2>Download Options</h2>
 					<p>
-				      <strong>Check the <a href="releasenotes.html">release notes</a>.
+				      <strong>New Release Soon! <a href="releasenotes.html">Read more</a>
 				      </strong>
 				    </p>
 					<hr>

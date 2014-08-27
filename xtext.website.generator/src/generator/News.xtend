@@ -49,7 +49,7 @@ class News extends AbstractWebsite {
 		<div id="page">
 			<div class="inner">
 				<div class="container clearfix" id="feed">
-					<h1>Loading Latest News...</h1>
+					<h1>Loading Latest News...<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></h1>
 				</div>
 			</div>
 		</div>

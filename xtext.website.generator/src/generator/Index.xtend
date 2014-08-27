@@ -19,6 +19,7 @@ class Index  extends AbstractWebsite {
 				<p>Building your own domain-specific languages has never been so
 					easy. Just put your grammar in place and you not only get the
 					working parser and linker but also first class Eclipse support.</p>
+				<p><strong>New Release Soon! <a href="releasenotes.html">Read More</a></p>
 				<a href="download.html" class="btn_download"></a>
 			</div>
 			<div class="span6">
