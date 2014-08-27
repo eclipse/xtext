@@ -61,6 +61,7 @@ public class XtendCompile extends AbstractXtendCompilerMojo {
 
 	private void compileSources(XtendBatchCompiler xtend2BatchCompiler) throws MojoExecutionException {
 		List<String> compileSourceRoots = Lists.newArrayList(project.getCompileSourceRoots());
+		compileSourceRoots.remove(outputDirectory);
 		String classPath = concat(File.pathSeparator, getClassPath());
 		project.addCompileSourceRoot(outputDirectory);
 		compile(xtend2BatchCompiler, classPath, compileSourceRoots, outputDirectory);
