@@ -29,10 +29,12 @@ class XtendOutlineWithEditorLinker extends OutlineWithEditorLinker {
 			if (input instanceof IOutlineNode) {
 				val List<IOutlineNode> matchingNodes = newArrayList()
 				findNodesInRange(input, selectedTextRegion, matchingNodes);
-				val smallestMatch = matchingNodes.map[fullTextRegion.length].min
-				val nodesToBeSelected = matchingNodes.filter[fullTextRegion.length == smallestMatch]
-				if (!nodesToBeSelected.isEmpty)
-					treeViewer.setSelection(new StructuredSelection(nodesToBeSelected.toList.toArray));
+				if (!matchingNodes.isEmpty) {
+					val smallestMatch = matchingNodes.map[fullTextRegion.length].min
+					val nodesToBeSelected = matchingNodes.filter[fullTextRegion.length == smallestMatch]
+					if (!nodesToBeSelected.isEmpty)
+						treeViewer.setSelection(new StructuredSelection(nodesToBeSelected.toList.toArray));
+				}
 			}
 		}
 	}
