@@ -60,6 +60,7 @@ public class XtendTestCompile extends AbstractXtendCompilerMojo {
 
 	protected void compileTestSources(XtendBatchCompiler xtend2BatchCompiler) throws MojoExecutionException {
 		List<String> testCompileSourceRoots = Lists.newArrayList(project.getTestCompileSourceRoots());
+		testCompileSourceRoots.remove(testOutputDirectory);
 		String testClassPath = concat(File.pathSeparator, getTestClassPath());
 		project.addTestCompileSourceRoot(testOutputDirectory);
 		compile(xtend2BatchCompiler, testClassPath, testCompileSourceRoots, testOutputDirectory);
