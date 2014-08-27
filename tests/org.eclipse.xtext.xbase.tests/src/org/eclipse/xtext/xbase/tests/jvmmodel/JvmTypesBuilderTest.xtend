@@ -17,12 +17,14 @@ import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.junit4.logging.LoggingTester
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.util.Wrapper
 import org.eclipse.xtext.xbase.XNumberLiteral
 import org.eclipse.xtext.xbase.XStringLiteral
 import org.eclipse.xtext.xbase.XbaseFactory
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsFactory
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypeReferenceBuilder
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.junit.Test
@@ -34,32 +36,41 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	@Inject TypeReferences references
 	
 	@Inject extension JvmTypesBuilder
-	
+		
 	@Inject ILogicalContainerProvider containerProvider
+	
+	extension JvmTypeReferenceBuilder
+	
+	XtextResourceSet resourceSet
+	
+	@Inject def setJvmTypeReferenceBuilder(JvmTypeReferenceBuilder.Factory factory, XtextResourceSet resourceSet) {
+		this.resourceSet = resourceSet
+		this._jvmTypeReferenceBuilder = factory.create(resourceSet)
+	}
 	
 	@Test
 	def void testEmptyAnnotation() {
-		val f = XAnnotationsFactory::eINSTANCE
+		val f = XAnnotationsFactory.eINSTANCE
 		val e = expression("'Foo'");
 		
 		val anno = f.createXAnnotation;
 		anno.annotationType = references.findDeclaredType(typeof(Inject), e) as JvmAnnotationType
 		val type = typesFactory.createJvmGenericType
-		newArrayList(anno).translateAnnotationsTo(type)
+		type.addAnnotations(#[anno])
 		
 		assertEquals(anno.annotationType, type.annotations.head.annotation)
 	}
 	
 	@Test
 	def void testStringAnnotation() {
-		val f = XAnnotationsFactory::eINSTANCE
+		val f = XAnnotationsFactory.eINSTANCE
 		val e = expression("'Foo'");
 		
 		val anno = f.createXAnnotation;
 		anno.annotationType = references.findDeclaredType(typeof(Inject), e) as JvmAnnotationType
 		anno.value = e
 		val type = typesFactory.createJvmGenericType
-		newArrayList(anno).translateAnnotationsTo(type)
+		type.addAnnotation(anno)
 		
 		assertEquals(anno.annotationType, type.annotations.head.annotation)
 		assertTrue((type.annotations.head.values.head as JvmCustomAnnotationValue).values.head instanceof XStringLiteral)
@@ -67,14 +78,14 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	
 	@Test
 	def void testAnnotationDefaultValue() {
-		val f = XAnnotationsFactory::eINSTANCE
+		val f = XAnnotationsFactory.eINSTANCE
 		val e = expression("'Foo'");
 		
 		val anno = f.createXAnnotation;
 		anno.annotationType = references.findDeclaredType(typeof(Named), e) as JvmAnnotationType
 		anno.value = e
 		val type = typesFactory.createJvmGenericType
-		newArrayList(anno).translateAnnotationsTo(type)
+		type.addAnnotation(anno)
 		
 		assertEquals(anno.annotationType, type.annotations.head.annotation)
 		assertTrue((type.annotations.head.values.head as JvmCustomAnnotationValue).values.head instanceof XStringLiteral)
@@ -83,7 +94,7 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	
 	@Test
 	def void testStringAnnotationWithNullExpression() {
-		val f = XAnnotationsFactory::eINSTANCE
+		val f = XAnnotationsFactory.eINSTANCE
 		val context = expression("'Foo'");
 		
 		val anno = f.createXAnnotation;
@@ -91,7 +102,7 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		val pair = f.createXAnnotationElementValuePair
 		anno.elementValuePairs += pair
 		val type = typesFactory.createJvmGenericType
-		newArrayList(anno).translateAnnotationsTo(type)
+		type.addAnnotation(anno)
 		
 		assertEquals(anno.annotationType, type.annotations.head.annotation)
 		assertTrue(type.annotations.head.explicitValues.empty)
@@ -100,7 +111,7 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	
 	@Test
 	def void testIntegerAnnotation(){
-		val f = XAnnotationsFactory::eINSTANCE
+		val f = XAnnotationsFactory.eINSTANCE
 		val e = expression("'Foo'")
 
 		val anno = f.createXAnnotation;
@@ -111,7 +122,7 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		pair.value = expression("10")
 		anno.elementValuePairs += pair
 		val type = typesFactory.createJvmGenericType
-		newArrayList(anno).translateAnnotationsTo(type)
+		type.addAnnotation(anno)
 
 		assertEquals(anno.annotationType, type.annotations.head.annotation)
 		assertEquals(1,type.annotations.head.values.size)
@@ -134,7 +145,7 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	def void testInterfaceCreation() {
 		val e = expression("'foo'")
 		val anno = e.toInterface("foo.bar.MyAnnotation") [
-			superTypes += newTypeRef(typeof(Iterable))
+			superTypes += typeRef(Iterable)
 		]
 		assertTrue(anno.isInterface)
 		assertEquals("foo.bar", anno.packageName)
@@ -166,7 +177,7 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	
 	@Test
 	def void testSetBody_02() {
-		val expr = XbaseFactory::eINSTANCE.createXNullLiteral;
+		val expr = XbaseFactory.eINSTANCE.createXNullLiteral;
 		val res = new XtextResource()
 		res.languageName = 'org.eclipse.xtext.xbase.Xbase'
 		val op = typesFactory.createJvmOperation
@@ -192,7 +203,7 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	
 	@Test
 	def void testSetBody_04() {
-		val expr = XbaseFactory::eINSTANCE.createXNullLiteral;
+		val expr = XbaseFactory.eINSTANCE.createXNullLiteral;
 		val res = new XtextResource()
 		res.languageName = 'org.eclipse.xtext.xbase.Xbase'
 		val op = typesFactory.createJvmOperation
@@ -233,7 +244,7 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	
 	@Test
 	def void testInitializeSafely_0() {
-		expectErrorLogging [
+		expectErrorLogging(2) [
 			genericTestInitializeSafely([EObject expr, String name, (JvmGenericType)=>void init 
 				| expr.toClass(name, init)
 			])
@@ -242,7 +253,7 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	
 	@Test
 	def void testInitializeSafely_1() {
-		expectErrorLogging [
+		expectErrorLogging(2) [
 			genericTestInitializeSafely([EObject expr, String name, (JvmConstructor)=>void init 
 				| expr.toConstructor(init)
 			])
@@ -251,7 +262,7 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	
 	@Test
 	def void testInitializeSafely_2() {
-		expectErrorLogging [
+		expectErrorLogging(2) [
 			genericTestInitializeSafely([EObject expr, String name, (JvmField)=>void init 
 				| expr.toField(name, null, init)
 			])
@@ -260,7 +271,7 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	
 	@Test
 	def void testInitializeSafely_3() {
-		expectErrorLogging [
+		expectErrorLogging(2) [
 			genericTestInitializeSafely([EObject expr, String name, (JvmOperation)=>void init 
 				| expr.toMethod(name, null, init)
 			])
@@ -269,7 +280,7 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	
 	@Test
 	def void testInitializeSafely_4() {
-		expectErrorLogging [
+		expectErrorLogging(2) [
 			genericTestInitializeSafely([EObject expr, String name, (JvmAnnotationType)=>void init 
 				| expr.toAnnotationType(name, init)
 			])
@@ -278,7 +289,7 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	
 	@Test
 	def void testInitializeSafely_5() {
-		expectErrorLogging [
+		expectErrorLogging(2) [
 			genericTestInitializeSafely([EObject expr, String name, (JvmEnumerationType)=>void init 
 				| expr.toEnumerationType(name, init)
 			])
@@ -286,15 +297,33 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	}
 	
 	def protected <T> genericTestInitializeSafely((EObject, String, (T)=>void)=>EObject create) {
-		val expr = XbaseFactory::eINSTANCE.createXNullLiteral;
+		val expr = XbaseFactory.eINSTANCE.createXNullLiteral;
 		val Wrapper<Boolean> initialized = new Wrapper(false)
 		val element = create.apply(expr, "foo", [T it| initialized.set(true) throw new RuntimeException();]);
 		assertTrue(initialized.get())
 		assertNotNull(element);
 	}
 	
-	def protected expectErrorLogging((Object)=>void block) {
-		val loggings = LoggingTester::countErrorLogging(typeof(JvmTypesBuilder), [|block.apply(null)])
-		assertEquals("Unexpected amount of error logging.",1, loggings) 
+	def protected expectErrorLogging(Runnable block) {
+		expectErrorLogging(1,block) 
+	}
+	
+	def protected expectErrorLogging(int numberOfloggings, Runnable block) {
+		val loggings = LoggingTester.countErrorLogging(JvmTypesBuilder, block)
+		assertEquals("Unexpected amount of error logging.",numberOfloggings, loggings) 
+	}
+	
+	@Test def void testErrorLogging_01() throws Exception {
+		expectErrorLogging [
+			val source = typesFactory.createJvmGenericType
+			source.toClass("foo.bar")
+		]
+	}
+	
+	@Test def void testErrorLogging_02() throws Exception {
+		expectErrorLogging [
+			val source = typesFactory.createJvmGenericType
+			source.toClass("foo.bar")
+		]
 	}
 }

@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import foo.TestAnnotation3;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.BasicEList;
@@ -29,6 +30,7 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.junit4.logging.LoggingTester;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.Wrapper;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XNullLiteral;
@@ -40,6 +42,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueP
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsFactory;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypeReferenceBuilder;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -69,6 +72,22 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
   @Inject
   private ILogicalContainerProvider containerProvider;
   
+  @Extension
+  private JvmTypeReferenceBuilder _jvmTypeReferenceBuilder;
+  
+  private XtextResourceSet resourceSet;
+  
+  @Inject
+  public JvmTypeReferenceBuilder setJvmTypeReferenceBuilder(final JvmTypeReferenceBuilder.Factory factory, final XtextResourceSet resourceSet) {
+    JvmTypeReferenceBuilder _xblockexpression = null;
+    {
+      this.resourceSet = resourceSet;
+      JvmTypeReferenceBuilder _create = factory.create(resourceSet);
+      _xblockexpression = this._jvmTypeReferenceBuilder = _create;
+    }
+    return _xblockexpression;
+  }
+  
   @Test
   public void testEmptyAnnotation() {
     try {
@@ -78,8 +97,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       JvmType _findDeclaredType = this.references.findDeclaredType(Inject.class, e);
       anno.setAnnotationType(((JvmAnnotationType) _findDeclaredType));
       final JvmGenericType type = this.typesFactory.createJvmGenericType();
-      ArrayList<XAnnotation> _newArrayList = CollectionLiterals.<XAnnotation>newArrayList(anno);
-      this._jvmTypesBuilder.translateAnnotationsTo(_newArrayList, type);
+      this._jvmTypesBuilder.addAnnotations(type, Collections.<XAnnotation>unmodifiableList(CollectionLiterals.<XAnnotation>newArrayList(anno)));
       JvmType _annotationType = anno.getAnnotationType();
       EList<JvmAnnotationReference> _annotations = type.getAnnotations();
       JvmAnnotationReference _head = IterableExtensions.<JvmAnnotationReference>head(_annotations);
@@ -100,8 +118,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       anno.setAnnotationType(((JvmAnnotationType) _findDeclaredType));
       anno.setValue(e);
       final JvmGenericType type = this.typesFactory.createJvmGenericType();
-      ArrayList<XAnnotation> _newArrayList = CollectionLiterals.<XAnnotation>newArrayList(anno);
-      this._jvmTypesBuilder.translateAnnotationsTo(_newArrayList, type);
+      this._jvmTypesBuilder.addAnnotation(type, anno);
       JvmType _annotationType = anno.getAnnotationType();
       EList<JvmAnnotationReference> _annotations = type.getAnnotations();
       JvmAnnotationReference _head = IterableExtensions.<JvmAnnotationReference>head(_annotations);
@@ -129,8 +146,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       anno.setAnnotationType(((JvmAnnotationType) _findDeclaredType));
       anno.setValue(e);
       final JvmGenericType type = this.typesFactory.createJvmGenericType();
-      ArrayList<XAnnotation> _newArrayList = CollectionLiterals.<XAnnotation>newArrayList(anno);
-      this._jvmTypesBuilder.translateAnnotationsTo(_newArrayList, type);
+      this._jvmTypesBuilder.addAnnotation(type, anno);
       JvmType _annotationType = anno.getAnnotationType();
       EList<JvmAnnotationReference> _annotations = type.getAnnotations();
       JvmAnnotationReference _head = IterableExtensions.<JvmAnnotationReference>head(_annotations);
@@ -166,8 +182,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       EList<XAnnotationElementValuePair> _elementValuePairs = anno.getElementValuePairs();
       this._jvmTypesBuilder.<XAnnotationElementValuePair>operator_add(_elementValuePairs, pair);
       final JvmGenericType type = this.typesFactory.createJvmGenericType();
-      ArrayList<XAnnotation> _newArrayList = CollectionLiterals.<XAnnotation>newArrayList(anno);
-      this._jvmTypesBuilder.translateAnnotationsTo(_newArrayList, type);
+      this._jvmTypesBuilder.addAnnotation(type, anno);
       JvmType _annotationType = anno.getAnnotationType();
       EList<JvmAnnotationReference> _annotations = type.getAnnotations();
       JvmAnnotationReference _head = IterableExtensions.<JvmAnnotationReference>head(_annotations);
@@ -206,8 +221,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       EList<XAnnotationElementValuePair> _elementValuePairs = anno.getElementValuePairs();
       this._jvmTypesBuilder.<XAnnotationElementValuePair>operator_add(_elementValuePairs, pair);
       final JvmGenericType type = this.typesFactory.createJvmGenericType();
-      ArrayList<XAnnotation> _newArrayList = CollectionLiterals.<XAnnotation>newArrayList(anno);
-      this._jvmTypesBuilder.translateAnnotationsTo(_newArrayList, type);
+      this._jvmTypesBuilder.addAnnotation(type, anno);
       JvmType _annotationType = anno.getAnnotationType();
       EList<JvmAnnotationReference> _annotations = type.getAnnotations();
       JvmAnnotationReference _head_1 = IterableExtensions.<JvmAnnotationReference>head(_annotations);
@@ -259,8 +273,8 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
         public void apply(final JvmGenericType it) {
           EList<JvmTypeReference> _superTypes = it.getSuperTypes();
-          JvmTypeReference _newTypeRef = JvmTypesBuilderTest.this._jvmTypesBuilder.newTypeRef(it, Iterable.class);
-          JvmTypesBuilderTest.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_superTypes, _newTypeRef);
+          JvmTypeReference _typeRef = JvmTypesBuilderTest.this._jvmTypeReferenceBuilder.typeRef(Iterable.class);
+          JvmTypesBuilderTest.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_superTypes, _typeRef);
         }
       };
       final JvmGenericType anno = this._jvmTypesBuilder.toInterface(e, "foo.bar.MyAnnotation", _function);
@@ -470,8 +484,8 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
   
   @Test
   public void testInitializeSafely_0() {
-    final Procedure1<Object> _function = new Procedure1<Object>() {
-      public void apply(final Object it) {
+    final Runnable _function = new Runnable() {
+      public void run() {
         final Function3<EObject, String, Procedure1<? super JvmGenericType>, JvmGenericType> _function = new Function3<EObject, String, Procedure1<? super JvmGenericType>, JvmGenericType>() {
           public JvmGenericType apply(final EObject expr, final String name, final Procedure1<? super JvmGenericType> init) {
             return JvmTypesBuilderTest.this._jvmTypesBuilder.toClass(expr, name, init);
@@ -480,13 +494,13 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
         JvmTypesBuilderTest.this.<JvmGenericType>genericTestInitializeSafely(_function);
       }
     };
-    this.expectErrorLogging(_function);
+    this.expectErrorLogging(2, _function);
   }
   
   @Test
   public void testInitializeSafely_1() {
-    final Procedure1<Object> _function = new Procedure1<Object>() {
-      public void apply(final Object it) {
+    final Runnable _function = new Runnable() {
+      public void run() {
         final Function3<EObject, String, Procedure1<? super JvmConstructor>, JvmConstructor> _function = new Function3<EObject, String, Procedure1<? super JvmConstructor>, JvmConstructor>() {
           public JvmConstructor apply(final EObject expr, final String name, final Procedure1<? super JvmConstructor> init) {
             return JvmTypesBuilderTest.this._jvmTypesBuilder.toConstructor(expr, init);
@@ -495,13 +509,13 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
         JvmTypesBuilderTest.this.<JvmConstructor>genericTestInitializeSafely(_function);
       }
     };
-    this.expectErrorLogging(_function);
+    this.expectErrorLogging(2, _function);
   }
   
   @Test
   public void testInitializeSafely_2() {
-    final Procedure1<Object> _function = new Procedure1<Object>() {
-      public void apply(final Object it) {
+    final Runnable _function = new Runnable() {
+      public void run() {
         final Function3<EObject, String, Procedure1<? super JvmField>, JvmField> _function = new Function3<EObject, String, Procedure1<? super JvmField>, JvmField>() {
           public JvmField apply(final EObject expr, final String name, final Procedure1<? super JvmField> init) {
             return JvmTypesBuilderTest.this._jvmTypesBuilder.toField(expr, name, null, init);
@@ -510,13 +524,13 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
         JvmTypesBuilderTest.this.<JvmField>genericTestInitializeSafely(_function);
       }
     };
-    this.expectErrorLogging(_function);
+    this.expectErrorLogging(2, _function);
   }
   
   @Test
   public void testInitializeSafely_3() {
-    final Procedure1<Object> _function = new Procedure1<Object>() {
-      public void apply(final Object it) {
+    final Runnable _function = new Runnable() {
+      public void run() {
         final Function3<EObject, String, Procedure1<? super JvmOperation>, JvmOperation> _function = new Function3<EObject, String, Procedure1<? super JvmOperation>, JvmOperation>() {
           public JvmOperation apply(final EObject expr, final String name, final Procedure1<? super JvmOperation> init) {
             return JvmTypesBuilderTest.this._jvmTypesBuilder.toMethod(expr, name, null, init);
@@ -525,13 +539,13 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
         JvmTypesBuilderTest.this.<JvmOperation>genericTestInitializeSafely(_function);
       }
     };
-    this.expectErrorLogging(_function);
+    this.expectErrorLogging(2, _function);
   }
   
   @Test
   public void testInitializeSafely_4() {
-    final Procedure1<Object> _function = new Procedure1<Object>() {
-      public void apply(final Object it) {
+    final Runnable _function = new Runnable() {
+      public void run() {
         final Function3<EObject, String, Procedure1<? super JvmAnnotationType>, JvmAnnotationType> _function = new Function3<EObject, String, Procedure1<? super JvmAnnotationType>, JvmAnnotationType>() {
           public JvmAnnotationType apply(final EObject expr, final String name, final Procedure1<? super JvmAnnotationType> init) {
             return JvmTypesBuilderTest.this._jvmTypesBuilder.toAnnotationType(expr, name, init);
@@ -540,13 +554,13 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
         JvmTypesBuilderTest.this.<JvmAnnotationType>genericTestInitializeSafely(_function);
       }
     };
-    this.expectErrorLogging(_function);
+    this.expectErrorLogging(2, _function);
   }
   
   @Test
   public void testInitializeSafely_5() {
-    final Procedure1<Object> _function = new Procedure1<Object>() {
-      public void apply(final Object it) {
+    final Runnable _function = new Runnable() {
+      public void run() {
         final Function3<EObject, String, Procedure1<? super JvmEnumerationType>, JvmEnumerationType> _function = new Function3<EObject, String, Procedure1<? super JvmEnumerationType>, JvmEnumerationType>() {
           public JvmEnumerationType apply(final EObject expr, final String name, final Procedure1<? super JvmEnumerationType> init) {
             return JvmTypesBuilderTest.this._jvmTypesBuilder.toEnumerationType(expr, name, init);
@@ -555,7 +569,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
         JvmTypesBuilderTest.this.<JvmEnumerationType>genericTestInitializeSafely(_function);
       }
     };
-    this.expectErrorLogging(_function);
+    this.expectErrorLogging(2, _function);
   }
   
   protected <T extends Object> void genericTestInitializeSafely(final Function3<? super EObject, ? super String, ? super Procedure1<? super T>, ? extends EObject> create) {
@@ -573,13 +587,34 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
     Assert.assertNotNull(element);
   }
   
-  protected void expectErrorLogging(final Procedure1<? super Object> block) {
+  protected void expectErrorLogging(final Runnable block) {
+    this.expectErrorLogging(1, block);
+  }
+  
+  protected void expectErrorLogging(final int numberOfloggings, final Runnable block) {
+    final int loggings = LoggingTester.countErrorLogging(JvmTypesBuilder.class, block);
+    Assert.assertEquals("Unexpected amount of error logging.", numberOfloggings, loggings);
+  }
+  
+  @Test
+  public void testErrorLogging_01() throws Exception {
     final Runnable _function = new Runnable() {
       public void run() {
-        block.apply(null);
+        final JvmGenericType source = JvmTypesBuilderTest.this.typesFactory.createJvmGenericType();
+        JvmTypesBuilderTest.this._jvmTypesBuilder.toClass(source, "foo.bar");
       }
     };
-    final int loggings = LoggingTester.countErrorLogging(JvmTypesBuilder.class, _function);
-    Assert.assertEquals("Unexpected amount of error logging.", 1, loggings);
+    this.expectErrorLogging(_function);
+  }
+  
+  @Test
+  public void testErrorLogging_02() throws Exception {
+    final Runnable _function = new Runnable() {
+      public void run() {
+        final JvmGenericType source = JvmTypesBuilderTest.this.typesFactory.createJvmGenericType();
+        JvmTypesBuilderTest.this._jvmTypesBuilder.toClass(source, "foo.bar");
+      }
+    };
+    this.expectErrorLogging(_function);
   }
 }

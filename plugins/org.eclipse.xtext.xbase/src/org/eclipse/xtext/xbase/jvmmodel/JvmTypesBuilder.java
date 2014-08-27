@@ -616,9 +616,27 @@ public class JvmTypesBuilder {
 	 */
 	/* @Nullable */
 	public <T extends EObject> T associate(/* @Nullable */ EObject sourceElement, /* @Nullable */ T target) {
-		if(sourceElement != null && target != null)
+		if(sourceElement != null && target != null && isValidSource(sourceElement))
 			associator.associate(sourceElement, target);
 		return target;
+	}
+	
+	protected boolean isValidSource(EObject sourceElement) {
+		if (sourceElement.eResource() == null) {
+			IllegalArgumentException exception = new IllegalArgumentException("The source element must be contained in a resource");
+			LOG.error(exception.getMessage(), exception);
+			return false;
+		}
+		// check that this element is from the source tree
+		while (sourceElement.eContainer() != null) {
+			sourceElement = sourceElement.eContainer();
+		}
+		if (sourceElement.eResource().getContents().get(0) != sourceElement) {
+			IllegalArgumentException exception = new IllegalArgumentException("The source element must be part of the source tree.");
+			LOG.error(exception.getMessage(), exception);
+			return false;
+		}
+		return true;
 	}
 
 	/**
