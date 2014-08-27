@@ -40,6 +40,13 @@ public class DerivedStateAwareResource extends LazyLinkingResource {
 	public boolean isFullyInitialized() {
 		return fullyInitialized;
 	}
+
+	/**
+	 * @since 2.7
+	 */
+	public boolean isInitializing() {
+		return isInitializing;
+	}
 	
 	/**
 	 * {@inheritDoc}
