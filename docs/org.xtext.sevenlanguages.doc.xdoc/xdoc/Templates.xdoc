@@ -118,9 +118,9 @@ public class MyWebsite {
       init.apply(this);
     String result = generate().toString();
     // remove leading -->
-    result = result.replaceAll("^-->\\n","");
+    result = result.replaceAll("^-->\\r?\\n","");
     // trim multi-newline to single newline
-    result = result.replaceAll("\\n\\s*\\n","\n");
+    result = result.replaceAll("\\r?\\n\\s*\\r\\n?", System.getProperty("line.separator"));
     return result;
     
   }
@@ -142,28 +142,23 @@ class TemplateJvmModelInferrer extends AbstractModelInferrer {
          else 
            simpleName
     val javaClass = element.toClass(qualifiedName)
-       acceptor.accept(javaClass).initializeLater \[
+       acceptor.accept(javaClass)\[
 ...
       // generate a method accepting an initializer lambda expression
-      members += element.toMethod("generate", 
-          element.newTypeRef(String)) \[
+      members += element.toMethod("generate", typeRef(String)) \[
         parameters += element.toParameter(
-          "init", 
-          element.newTypeRef(Procedures.Procedure1, 
-              newTypeRef(javaClass))
+          "init", typeRef(Procedures.Procedure1, typeRef(javaClass))
         )
-        body = \[
-          append('''
-            if (init != null)
-              init.apply(this);
-            String result = generate().toString();
-            // remove leading -->
-            result = result.replaceAll("^-->\\n","");
-            // trim multi-newline to single newline
-            result = result.replaceAll("\\n\\s*\\n","\n");
-            return result;
-          ''')
-        \]
+        body = '''
+          if (init != null)
+            init.apply(this);
+          String result = generate().toString();
+          // remove leading -->
+          result = result.replaceAll("^-->\\r?\\n","");
+          // trim multi-newline to single newline
+          result = result.replaceAll("\\r?\\n\\s*\\r?\\n",System.getProperty("line.separator"));
+          return result;
+        '''
 ...]
 
 Each e[Parameter] becomes a Java property, i.e. a field with a getter and a setter. 
@@ -192,7 +187,7 @@ code[Xtend][
 for (param : element.params) {
   val type = param.type 
     ?: param.defaultexp?.inferredType 
-    ?: element.newTypeRef(String)
+    ?: typeRef(String)
   members += param.toField(param.name, type) \[
     if (param.defaultexp != null)
       initializer = param.defaultexp
@@ -336,22 +331,12 @@ must be concatenatable, which is different from Xbase's for-loop.
 code[Xtend][
 class TemplateTypeComputer extends XbaseWithAnnotationsTypeComputer {
 	
-	override computeTypes(XExpression expression, ITypeComputationState state) {
-		if(expression instanceof RichString) {
-			_computeTypes(expression as RichString, state);
-		} else if(expression instanceof RichStringForLoop) {
-			_computeTypes(expression as RichStringForLoop, state);
-		} else {
-			super.computeTypes(expression, state)
-		}
-	}
-	
-	protected def _computeTypes(RichString expression, ITypeComputationState state) {
+	def dispatch computeTypes(RichString expression, ITypeComputationState state) {
 		super._computeTypes(expression as XBlockExpression, state)
 		state.acceptActualType(getTypeForName(StringBuilder, state))
 	}
 	 
-	protected def _computeTypes(RichStringForLoop expression, ITypeComputationState state) {
+	def dispatch computeTypes(RichStringForLoop expression, ITypeComputationState state) {
 		super._computeTypes(expression as XForLoopExpression, state)
 		state.acceptActualType(getTypeForName(StringBuilder, state))
 	}

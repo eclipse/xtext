@@ -105,8 +105,8 @@ code[Xtend][
 // translate the dependencies to fields annotated with @Inject
 for (field : model.declarations.filter(Dependency)) {
   members += field.toField(field.name, field.type) \[
-    annotations += field.toAnnotation(Inject)
-    field.annotations.translateAnnotationsTo(it)
+    annotations += annotationRef(Inject)
+		addAnnotations(field.annotations)
   \]
 }
 ]
@@ -164,7 +164,7 @@ public class NumberGuessing extends HttpServlet {
                     final HttpServletResponse response) {
     String url =  request.getRequestURL().toString();
     {
-      java.util.regex.Matcher _matcher = _pattern2.matcher(url);
+      Matcher _matcher = _pattern2.matcher(url);
       if (_matcher.find()) {
         String theGuess = _matcher.group(1);
         _doGet2(request, response, theGuess);
@@ -183,14 +183,11 @@ code[Xtend][
    * Gives scope and live to the expression.
    */
   def protected toRouteCallMethod(Route route) {
-    route.toMethod(route.nameOfRouteMethod, route.newTypeRef(Void.TYPE)) \[
-      parameters += route.toParameter("request",  
-          route.newTypeRef(HTTP_REQUEST))
-      parameters += route.toParameter("response", 
-          route.newTypeRef(HTTP_RESPONSE))
+    route.toMethod(route.nameOfRouteMethod, typeRef(Void.TYPE)) \[
+      parameters += route.toParameter("request",  typeRef(HTTP_REQUEST))
+      parameters += route.toParameter("response", typeRef(HTTP_RESPONSE))
       for (variable : route.url.variables) {
-        parameters += variable.toParameter(variable.name, 
-          route.newTypeRef(String))
+        parameters += variable.toParameter(variable.name, typeRef(String))
       }
       body = route.call
     \]
