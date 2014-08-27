@@ -70,12 +70,18 @@ public class CacheMethodCompileStrategy implements Procedures.Procedure1<ITreeAp
 		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, containerType);
 		ParameterizedTypeReference listType = owner.newParameterizedTypeReference(typeReferences.findDeclaredType(ArrayList.class, containerType));
 		listType.addTypeArgument(owner.newWildcardTypeReference());
-		JvmType collectonLiterals = typeReferences.findDeclaredType(CollectionLiterals.class, containerType);
+		JvmType collectionLiterals = typeReferences.findDeclaredType(CollectionLiterals.class, containerType);
+		LightweightTypeReference collectionLiteralsTypeRef = null;
+		if (collectionLiterals == null) {
+			collectionLiteralsTypeRef = owner.newUnknownTypeReference(CollectionLiterals.class.getName());
+		} else {
+			collectionLiteralsTypeRef = owner.newParameterizedTypeReference(collectionLiterals);
+		}
 
 		String cacheVarName = cacheField.getSimpleName();
 		String cacheKeyVarName = appendable.declareSyntheticVariable("CacheKey", "_cacheKey");
 		appendable.append("final ").append(listType).append(" ").append(cacheKeyVarName)
-			.append(" = ").append(collectonLiterals).append(".newArrayList(");
+			.append(" = ").append(collectionLiteralsTypeRef).append(".newArrayList(");
 		EList<JvmFormalParameter> list = cacheMethod.getParameters();
 		for (Iterator<JvmFormalParameter> iterator = list.iterator(); iterator.hasNext();) {
 			JvmFormalParameter jvmFormalParameter = iterator.next();
