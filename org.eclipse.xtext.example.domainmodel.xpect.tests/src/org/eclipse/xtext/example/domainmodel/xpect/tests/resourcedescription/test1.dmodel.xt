@@ -23,7 +23,7 @@ XPECT exportedObjects ---
 
 /*
 these names have been imported from other files 
-XPECT importedNames ---
+XPECT !importedNames ---
 int
 java.lang.int
 java.lang.string
