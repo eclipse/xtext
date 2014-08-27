@@ -59,11 +59,11 @@ class Tortoise {
   double angle
   double x
   double y
-  @Property int delay = 200
+  @Accessors int delay = 200
 
   boolean isPaint = true
-  @Property int lineWidth
-  @Property Color lineColor
+  @Accessors int lineWidth
+  @Accessors Color lineColor
 
   List<ITortoiseEvent.Listener> listeners = newArrayList()
 ...
@@ -132,11 +132,10 @@ class TortoiseShellJvmModelInferrer extends AbstractModelInferrer {
   def dispatch void infer(Program program, 
                           IJvmDeclaredTypeAcceptor acceptor, 
                           boolean isPreIndexingPhase) {
-    acceptor.accept(program.toClass(INFERRED_CLASS_NAME)).initializeLater \[
-      superTypes += program.newTypeRef(Tortoise)
+    acceptor.accept(program.toClass(INFERRED_CLASS_NAME))\[
+      superTypes += typeRef(Tortoise)
       if(program.body != null)
-        members += program.toMethod("main", 
-            program.newTypeRef(Void.TYPE)) \[
+        members += program.toMethod("main", typeRef(Void.TYPE)) \[
           body = program.body
         \]
       for(subProgram: program.subPrograms)
@@ -175,15 +174,11 @@ code[Xtend][
     val executable = operation.sourceElements.head
     if (executable instanceof Executable) {
       val context = createContext
-      context.newValue(XbaseScopeProvider.THIS, tortoise)
-      var index = 0
-      for (param : operation.parameters) {
-        context.newValue(QualifiedName.create(param.name), 
-            argumentValues.get(index))
-        index = index + 1  
-      }
-      val result = evaluate((executable as Executable).body, 
-          context, CancelIndicator.NullImpl)
+      context.newValue(QualifiedName.create("this"), tortoise)
+      operation.parameters.forEach[p, i|
+        context.newValue(QualifiedName.create(p.name), argumentValues.get(i))
+      ]
+      val result = evaluate(executable.body, context, CancelIndicator.NullImpl)
       if(result.exception != null)
         throw result.exception
       result.result
@@ -211,7 +206,7 @@ code[Xtend][
       this.stopAtLine = stopAtLine
       try {
         program.jvmElements.filter(JvmOperation).head
-          ?.invokeOperation(null, Collections.emptyList)
+          ?.invokeOperation(null, #[])
       } catch (StopLineReachedException exc) {
         // ignore
       }
@@ -240,7 +235,7 @@ To make the static methods and fields of codeRef[java.lang.Math] and codeRef[org
 callable directly, we provided the codeRef[org.xtext.tortoiseshell.scoping.TortoiseShellImplicitlyImportedTypes]:
 
 code[Xtend][
-class TortoiseShellImplicitlyImportedTypes extends ImplicitlyImportedTypes {
+class TortoiseShellImplicitlyImportedTypes extends ImplicitlyImportedFeatures {
   override protected getStaticImportClasses() {
     (super.getStaticImportClasses() + #\[Math, ColorConstants\])
       .toList

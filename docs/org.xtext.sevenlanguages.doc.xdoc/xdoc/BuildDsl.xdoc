@@ -7,7 +7,7 @@ the dependencies of the defined tasks.
 img[images/builddsl_screenshot.png][][][]
 
 This build language combines the declarative approach of defining tasks and dependencies with the full power of a 
-modern expression language. It is a bit similar to Gradle but statically typed and with very good IDE support.
+modern expression language. It is a bit similar to Ant but statically typed and with very good IDE support.
 
 section:builddsl_solution[Overview]
 
@@ -20,8 +20,8 @@ code[myscript --<paramName> <value>].
 
 We have put most functionality of the language in the runtime library: Detecting the order of execution,
 parsing parameters, etc. The language itself focusses on the structural parts, and leaves the actions
-to Xbase. With this approach, it has proven beneficial to allow additional library methods to be added
-via the extension method mechanism. So we do not ship a library of tasks as e.g. Ant does. 
+to Xbase. This allows both us and future users to add new tasks as library methods instead of hard-coding them 
+in the language.
 
 section:builddsl_running[Running the Example]
 
@@ -97,29 +97,27 @@ code[Xtend][
 class BuildDSLJvmModelInferrer extends AbstractModelInferrer {
 
   @Inject extension JvmTypesBuilder
-  @Inject ITypeProvider typeProvider
 
   def dispatch void infer(BuildFile file, 
-                          IJvmDeclaredTypeAcceptor acceptor, 
+                          extension IJvmDeclaredTypeAcceptor acceptor, 
                           boolean isPreIndexingPhase) {
-    val fqn = file.javaClassName
-    val scriptName = Strings.lastToken(fqn, ".")
-    acceptor.accept(file.toClass(fqn)).initializeLater \[
-      superTypes += file.newTypeRef(BuildScript)
+    val qualifiedName = file.javaClassName
+    val simpleName = Strings.lastToken(qualifiedName, ".")
+    accept(file.toClass(fqn))\[
+      superTypes += typeRef(BuildScript)
 ...      
-      val stringArray = 
-          file.newTypeRef(String).addArrayTypeDimension
-      members += file.toMethod("main", file.newTypeRef(Void.TYPE)) \[
-        parameters += toParameter("args", stringArray)
+      val stringArray = typeRef(String).addArrayTypeDimension
+      members += file.toMethod("main", typeRef(void)) \[
+        parameters += file.toParameter("args", stringArray)
         varArgs = true
         static = true
-        body = \[ append('''
+        body = '''
           «scriptName» script = new «scriptName»();
           if (script.showHelp(args)) {
             System.exit(HELP);
           }
           System.exit(script.doBuild(args));
-        ''') \]
+        '''
       \]
     \]
 ...]
@@ -146,15 +144,12 @@ The annotation part may be interesting, so here is the snippet from the inferrer
  
 code[Xtend][
 // a method for the actual task body
-members += file.tasks.map\[ task | toMethod(task.methodName, task.newTypeRef(Void.TYPE)) \[
+members += file.tasks.map\[ task | toMethod(task.methodName, typeRef(Void.TYPE)) \[
   visibility = JvmVisibility.PROTECTED
-  annotations += task.toAnnotation(DependsOn) => \[
-    values += createJvmStringAnnotationValue => \[
-      values += task.depends.map\[name\]
-    \]
-  \]
+  annotations += annotationRef(DependsOn, task.depends.map\[name\])
   body = task.action
-\]\]
+  \]
+\]
 ]
 
 Finally, we create a field with the codeRef[org.xtext.builddsl.lib.Param] annotation from each e[Parameter]. 
@@ -180,7 +175,7 @@ code[Xtend][
 ...
 val type = declaredParameter.type 
 	?: declaredParameter?.init?.inferredType
-	?: file.newTypeRef(String)
+	?: typeRef(String)
 ]
 
 section:builddsl_validation[Validation]
@@ -219,7 +214,7 @@ and codeRef[java.lang.Class]. These are always put onto the extension scope by a
 codeRef[org.xtext.builddsl.scoping.BuildDSLImplicitlyImportedTypes]:
 
 code[Xtend][
-class BuildDSLImplicitlyImportedTypes extends ImplicitlyImportedTypes {
+class BuildDSLImplicitlyImportedTypes extends ImplicitlyImportedFeatures {
 	/**
 	 * Add methods from {@link FileExtensions} and {@link ClassExtensions} to the extension scope.
 	 */
@@ -236,8 +231,8 @@ code[Java][
 public class BuildDSLRuntimeModule 
     extends org.xtext.builddsl.AbstractBuildDSLRuntimeModule {
 ...
-  public Class<? extends ImplicitlyImportedTypes> 
-      bindImplicitlyImportedTypes() {
+  public Class<? extends ImplicitlyImportedFeatures> 
+      bindImplicitlyImportedFeatures() {
     return BuildDSLImplicitlyImportedTypes.class;
   }
 }

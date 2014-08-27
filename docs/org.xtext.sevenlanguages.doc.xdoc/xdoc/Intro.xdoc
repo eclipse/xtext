@@ -55,20 +55,18 @@ Each language is very simple and focuses on the value a DSL can add to the respe
 viewpoint. It is meant to give you an idea of what is possible without being a complete practical solution.
 Yet the languages are flexible and come with powerful core abstractions.
 We also covered different technical aspects of customizing to the language infrastructure. Some languages
-have special syntax coloring, others provide customized outline views or content assist.
-The new API for JVM languages does not mean that anything is hidden away and not customizable.
+have special syntax coloring, others provide customized outline views or content assist. All aspects of a language are still fully customizable when using Xbase.
 
 section:provisional_API[CAUTION: This is Provisional API]
 
-e[Please be aware that most of the new API covered in this document is not yet finalized and will 
-likely be improved in future releases in incompatible ways. The projects in these examples are configured 
-to suppress the corresponding warnings for references to provisional API.]
+e[Please be aware that some of the new API covered in this document is not yet finalized and will 
+likely be improved in future releases in incompatible ways. Usages of such API are marked with a warning.]
 
 chapter:common_requirements[Common Requirements]
 
-To run any of the examples, you will need link[http://www.eclipse.org/downloads][Eclipse 3.5 or better]
+To run any of the examples, you will need link[http://www.eclipse.org/downloads][Eclipse 3.6 or better]
 for your platform. In addition, you have to install link[http://www.eclipse.org/xtend/download.html][Xtend]
-and of course link[http://www.eclipse.org/Xtext/download.html][Xtext 2.5].
+and of course link[http://www.eclipse.org/Xtext/download.html][Xtext 2.7].
 
 If you prefer a simple all-inclusive installation, consider downloading the latest
 link[http://www.eclipse.org/Xtext/download.html][Xtext distribution].
@@ -147,10 +145,10 @@ The methods of fields marked as code[Xtend][extension] are callable in extension
 you can put the first argument in front as if it were the receiver of the call, e.g.
 code[Xtend][
 // assume the class Foo defines a method foo(Baz)
-extension Foo
+extension Foo theFoo
 
 def bar(Baz baz) {
-  baz.foo  // calls _foo.foo(baz)
+  baz.foo  // calls theFoo.foo(baz)
 }
 ]
 Static methods can be put on the extension scope with a code[Xtend][static extension] import, e.g.
@@ -166,7 +164,7 @@ As with code[Xtend][this], you can omit code[Xtend][it] in feature calls, i.e.
 code[Xtend][
 class Foo {
   def foo(Bar it) {
-    foo // will call it.foo() or if it doesn't exist this.foo()
+    foo // will call it.foo() or if that doesn't exist this.foo()
   }
 }
 ]
@@ -197,7 +195,7 @@ list.sortBy\[ length \]
 a[xtend_templates]
 Also noteworthy is the template expression, which allows defining interpolated multi-line string literals.
 In addition, the template expressions has intelligent whitespace handling and supports a special code[Xtend][FOR] and 
-code[Xtend][IF] construct, which is far better readable in this context.
+code[Xtend][IF] construct, which is far better readable in this context. In model inferrers, the template expressions are enhanced further to support type literals, automatically adding an import to the generated Java file.
 
 We most often use this expression in the examples to generate some synthetic Java boilerplate code. Here is
 an example from the ref:httpRouting[http routing language]:
@@ -207,7 +205,8 @@ code[Xtend][
   String url =  request.getRequestURL().toString();
   «FOR route : routes»
     {
-      java.util.regex.Matcher _matcher = _pattern«route.index».matcher(url);
+      //java.util.regex.Matcher will be imported in the generated Java file
+      «Matcher» _matcher = _pattern«route.index».matcher(url);
       if (_matcher.find()) {
         «FOR variable : route.url.variables»
             String «variable.name» = _matcher.group(«variable.index + 1»);
