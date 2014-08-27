@@ -8,7 +8,7 @@ Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.7.0";visibility:=r
  com.google.guava;bundle-version="[10.0.1,19.0.0)";visibility:=reexport,
  com.google.inject;bundle-version="3.0.0";visibility:=reexport,
  org.eclipse.core.resources;bundle-version="3.6.0";resolution:=optional;visibility:=reexport;x-installation:=greedy,
- org.eclipse.emf.ecore;bundle-version="2.9.0";resolution:=optional;visibility:=reexport;x-installation:=greedy,
+ org.eclipse.emf.ecore;bundle-version="2.10.0";resolution:=optional;visibility:=reexport;x-installation:=greedy,
  org.eclipse.xtext;bundle-version="2.7.0";resolution:=optional;visibility:=reexport;x-installation:=greedy,
  org.eclipse.xtext.ui;bundle-version="2.7.0";resolution:=optional;visibility:=reexport;x-installation:=greedy,
  org.eclipse.xtext.xbase;bundle-version="2.7.0";resolution:=optional;visibility:=reexport;x-installation:=greedy,
