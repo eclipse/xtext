@@ -221,6 +221,9 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 				IllegalArgumentException e = new IllegalArgumentException("Expected language "+languageName+", but was "+resourceLanguageName);
 				LOG.error(e.getMessage(), e);
 			}
+		} else if (eResource == null) {
+			IllegalArgumentException e = new IllegalArgumentException("You tried to associate an element to a source element, that was not contained in a resource.");
+			LOG.error(e.getMessage(), e);
 		} else {
 			IllegalArgumentException e = new IllegalArgumentException("Expected instanceof XtextResource, but was "+eResource);
 			LOG.error(e.getMessage(), e);
