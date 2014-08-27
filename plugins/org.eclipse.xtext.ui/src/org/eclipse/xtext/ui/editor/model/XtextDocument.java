@@ -13,6 +13,7 @@ import static com.google.common.collect.Lists.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -286,7 +287,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 	 */
 	protected class XtextDocumentLocker implements Processor {
 		
-		private volatile int potentialUpdaterCount = 0;
+		private AtomicInteger potentialUpdaterCount = new AtomicInteger(0);
 		
 		private volatile boolean hadUpdates;
 		
@@ -410,7 +411,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 						acquireWriteLock();
 						T exec = null;
 						try {
-							potentialUpdaterCount++;
+							potentialUpdaterCount.incrementAndGet();
 							state = getState();
 							if (log.isDebugEnabled())
 								log.debug("write - " + Thread.currentThread().getName());
@@ -426,8 +427,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 								acquireReadLock();
 								releaseWriteLock();
 								ensureThatStateIsNotReturned(exec, work);
-								--potentialUpdaterCount;
-								if(potentialUpdaterCount == 0 && !(work instanceof ReconcilingUnitOfWork)) {
+								if(potentialUpdaterCount.decrementAndGet() == 0 && !(work instanceof ReconcilingUnitOfWork)) {
 									// changes of a ReconcilingUnitOfWork will be handled when the resulting document changes are applied
 									notifyModelListeners(state);
 								}
@@ -477,7 +477,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 				if(isCancelReaders) 
 					setOutdated(false); 
 				try {
-					potentialUpdaterCount++;
+					potentialUpdaterCount.incrementAndGet();
 					if (log.isDebugEnabled())
 						log.debug("read - " + Thread.currentThread().getName());
 					// Don't updateContent on write lock request. Reentrant read doesn't matter as 
@@ -499,8 +499,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 				} catch (Exception e) {
 					throw new WrappedException(e);
 				} finally {
-					--potentialUpdaterCount;
-					if(potentialUpdaterCount == 0 && (hadUpdates || isCancelReaders)) { 
+					if(potentialUpdaterCount.decrementAndGet() == 0 && (hadUpdates || isCancelReaders)) { 
 						hadUpdates = false;	
 						notifyModelListeners(resource);
 					}
