@@ -5,8 +5,12 @@
     <cq:property key="target.ws" value="*"/>
     <cq:advisorNode namePattern="^org\.eclipse\.xtext$" skipComponent="true" filter="(WITH.MWE2=true)"/>
     <cq:advisorNode namePattern="^org\.eclipse\.xtext\.util$" skipComponent="true" filter="(WITH.MWE2=true)"/>
-   	<cq:advisorNode namePattern="^org\.eclipse\.emf\.common$" filter="(ECLIPSE.TARGET.ALIAS=Latest)" componentType="osgi.bundle" useTargetPlatform="false" versionOverride="2.9.0"/>
-    <cq:advisorNode namePattern="^org\.eclipse\.emf\.common$" filter="(!(ECLIPSE.TARGET.ALIAS=Latest))" componentType="osgi.bundle" useTargetPlatform="false" versionOverride="[2.9.0,2.11.0)"/>
+    <!-- Latest Job -->
+   	<cq:advisorNode namePattern="^org\.eclipse\.emf\.common$" filter="(ECLIPSE.TARGET.ALIAS=Latest)" componentType="osgi.bundle" useTargetPlatform="false" versionOverride="2.11.0"/>
+   	<!-- Gerrit and other -->
+    <!--  Production Hudson xtext-xtend Job-->
+    <cq:advisorNode namePattern="^org\.eclipse\.emf\.common$" filter="(!(ECLIPSE.TARGET.ALIAS=Latest))" componentType="osgi.bundle" useTargetPlatform="false" versionOverride="[2.10.0,2.11.0)"/>
+   	
     <cq:advisorNode namePattern="^com\.google\.guava(?:\..+)?$" filter="(ECLIPSE.TARGET.ALIAS=Helios)" componentType="osgi.bundle" useTargetPlatform="false" versionOverride="[10.0.1,11.0.0)"/>
     <cq:advisorNode namePattern="^com\.google\.guava(?:\..+)?$" filter="(!(ECLIPSE.TARGET.ALIAS=Helios))" componentType="osgi.bundle" useTargetPlatform="false" versionOverride="[10.0.1,19.0.0)"/>
     <cq:advisorNode namePattern="^" useTargetPlatform="false"/>
