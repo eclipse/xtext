@@ -69,7 +69,7 @@ com.acme.RuntimeModule {
 }
 
 com.acme.TestModule mixin RuntimeModule {
-  bind DataProvider to-instance \[| 'dummy-data' \]
+  bind DataProvider to-instance \['dummy-data' \]
   bind LoggingService to BufferedLoggingService
 }
 ]
@@ -161,27 +161,23 @@ of Guice's codeRef[com.google.inject.Key] to implement the override semantics of
 The corresponding parts in codeRef[org.xtext.guicemodules.jvmmodel.GuiceModulesJvmModelInferrer] are:
 
 code[Xtend][
-acceptor.accept(module.toClass(module.fullyQualifiedName))
-  .initializeLater \[
+accept(module.toClass(module.fullyQualifiedName))\[
 ...      
   // declare a field for each mixed-in module
   for (mixin : module.mixins) {
     if (!mixin.eIsProxy)
       members += mixin.toField( mixin.simpleName, 
-          newTypeRef(mixin.fullyQualifiedName.toString)) \[
-        setInitializer \[
-          append('''new «mixin.name»()''')
-        \]
+        typeRef(mixin.fullyQualifiedName.toString)) \[
+        initializer = '''new «mixin.name»()'''
       \]
   }
   
   // and later when declaring the configure method
-  members+= module.toMethod("configure", voidType.createTypeRef) \[
+  members+= module.toMethod("configure", typeRef(voidType)) \[
     documentation = 'Registers bindings for keys not present in ...'
-    parameters += module.toParameter("bind", binderType.createTypeRef)
-    parameters += module.toParameter("usedKeys", setType.createTypeRef( 
-        keyType.createTypeRef(wildCard)))
-    body = \[append('''
+    parameters += module.toParameter("bind", typeRef(Binder))
+    parameters += module.toParameter("usedKeys", typeRef(Set, typeRef(Key, wildcard)))
+    body = '''
       try {
         ...some other code
         «FOR mix : module.mixins»
@@ -190,7 +186,7 @@ acceptor.accept(module.toClass(module.fullyQualifiedName))
       } catch (Exception e) {
         throw new RuntimeException(e);
       }
-    ''')\]
+    '''
   \]
 ]
 
@@ -244,14 +240,14 @@ for (binding : module.bindings) {
   // annotation via reflection later.
   if (binding.to?.annotation != null) {
     members += binding.toField(binding.to.syntheticName, binding.to.type) \[
-      newHashSet(binding.to.annotation).translateAnnotationsTo(it)
+      addAnnotation(binding.to.annotation)
       visibility = JvmVisibility.PRIVATE
     \]
   }
   if (binding.from.annotation != null) {
     members += binding.toField(binding.from.syntheticName, 
         binding.from.type) \[
-      newHashSet(binding.from.annotation).translateAnnotationsTo(it)
+      addAnnotation(binding.from.annotation)
       visibility = JvmVisibility.PRIVATE
     \]
   }
@@ -259,7 +255,7 @@ for (binding : module.bindings) {
 
 // and the following method
 def guiceKey(KeyAST it) '''
-  Key.get(new TypeLiteral<«type.identifier»>(){}«
+  Key.get(new TypeLiteral<«type>(){}«
   IF annotation != null
   », getClass().getDeclaredField("«syntheticName»").getAnnotations()\[0\]«
   ENDIF»)'''

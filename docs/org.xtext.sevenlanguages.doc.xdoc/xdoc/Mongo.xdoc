@@ -31,7 +31,7 @@ package org.musicdb {
         String name    // single valued property
         Album* albums  // array property
         // an operation
-        Iterable<Track> getOevre() {
+        Iterable<Track> getOeuvre() {
             albums.map\[track\].flatten
         }
     }
@@ -86,7 +86,7 @@ john.getAlbums().add(album);
 Track...  // create some tracks and add them to the album
  
 System.out.println(john.getName() + "'s Oevre");
-for(Track track: john.getOevre()) 
+for(Track track: john.getOeuvre()) 
   System.out.println(track.getTitle());
 
 DBCollection dbCollection = ... // standard mongoDB driver code
@@ -184,13 +184,12 @@ def dispatch void infer(MongoFile file,
                         IJvmDeclaredTypeAcceptor acceptor, 
                         boolean isPreIndexingPhase) {
   for(bean : file.eAllOfType(MongoBean)) {
-       acceptor.accept(bean.toClass(bean.fullyQualifiedName))
-         .initializeLater(\[
+       acceptor.accept(bean.toClass(bean.fullyQualifiedName))[
            documentation = bean.documentation
-           superTypes += newTypeRef(bean, 'org.xtext.mongobeans.IMongoBean')
+           superTypes += typeRef(IMongoBean)
 ... // calling various methods to create Java members
     // from the AbstractFeatures
-         \])
+      \]
   }
 }
 ]
@@ -238,32 +237,25 @@ code[Xtend][
 def protected addDbObjectProperty(JvmDeclaredType 
                                   inferredType, 
                                   MongoBean bean) {
-  inferredType.members += bean.toField('_dbObject', 
-      newTypeRef(bean, 'com.mongodb.DBObject'))
-  inferredType.members += bean.toGetter('dbObject', '_dbObject',
-      newTypeRef(bean, 'com.mongodb.DBObject'))
+  inferredType.members += bean.toField('_dbObject', typeRef(DBObject))
+  inferredType.members += bean.toGetter('dbObject', '_dbObject', typeRef(DBObject))
 }
 
 def protected addConstructors(JvmDeclaredType inferredType, 
                               MongoBean bean) {
   inferredType.members += bean.toConstructor \[
     documentation = '''...'''
-    parameters += toParameter("dbObject", 
-        newTypeRef(bean, 'com.mongodb.DBObject'))
-    body = \[
-      append('''
-        this._dbObject = dbObject;
-      ''')
-    \]
+    parameters += bean.toParameter("dbObject", typeRef(DBObject))
+    body = '''
+      this._dbObject = dbObject;
+    '''
   \]
   inferredType.members += bean.toConstructor \[
     documentation = '''...'''
-    body = \[
-      append('''
-        _dbObject = new com.mongodb.BasicDBObject();
-        _dbObject.put(JAVA_CLASS_KEY, "«inferredType.identifier»");
-      ''')
-    \]
+    body = '''
+      _dbObject = new com.mongodb.BasicDBObject();
+      _dbObject.put(JAVA_CLASS_KEY, "«inferredType.identifier»");
+    '''
   \]
 }
 ]
@@ -333,17 +325,15 @@ def protected addListAccessor(JvmDeclaredType inferredType,
   if(propertyType.isMongoPrimitiveType) {
     inferredType.members += property.toMethod(
       'get' + property.name.toFirstUpper, 
-       newTypeRef(property, 'java.util.List', propertyType)
+       typeRef(List, propertyType)
     ) \[
 ...
     \]    
   } else {
     inferredType.members += property.toField(
-      '_' + property.name, newTypeRef(property,
-        'org.xtext.mongobeans.MongoBeanList', propertyType))
+      '_' + property.name, typeRef(MongoBeanList, propertyType))
     inferredType.members += property.toMethod(
-      'get' + property.name.toFirstUpper,
-      newTypeRef(property, 'java.util.List', propertyType)
+      'get' + property.name.toFirstUpper, typeRef(List, propertyType)
     ) \[
  ...
 ]
