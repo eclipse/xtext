@@ -32,7 +32,6 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
 
-@SuppressWarnings("restriction")
 @XpectParameterAdapter(XtextOffsetAdapter.class)
 @XpectSetup({ XtextTargetSyntaxSupport.class, XtextTestObjectSetup.class, InjectorSetup.class, XtextValidatingSetup.class })
 public class XtextStandaloneSetup {
@@ -52,7 +51,7 @@ public class XtextStandaloneSetup {
 		super();
 		this.resourceSetConfig = resourceSet;
 		this.ctx = ctx;
-		JvmModelInferrerRegistry.INSTANCE.setUseRegistry(false);
+		JvmModelInferrerRegistryFix.apply();
 		injector.injectMembers(this);
 	}
 
