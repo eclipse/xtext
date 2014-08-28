@@ -38,8 +38,4 @@ class TaskTags implements Iterable<TaskTag> {
 		taskTags.iterator
 	}
 
-	def getTaskTags() {
-		taskTags
-	}
-
 }
