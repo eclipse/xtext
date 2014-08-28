@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="Xpect Target Definition (Eclipse 3.8 - Juno)" sequenceNumber="29">
+<?pde version="3.8"?><target name="Xpect Target Definition (Eclipse 3.8 - Juno)" sequenceNumber="30">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.xtext.sdk.feature.group" version="2.6.0.v201405210727"/>
+<unit id="org.eclipse.xtext.sdk.feature.group" version="2.6.2.v201407030533"/>
 <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -14,9 +14,9 @@
 <repository location="http://meysholdt.github.io/xtext_stateful_lexer/updatesite/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.xtext.example.arithmetics.sdk.feature.group" version="2.6.0.201408271000"/>
-<unit id="org.eclipse.xtext.example.domainmodel.sdk.feature.group" version="2.6.0.201408271000"/>
-<repository location="http://meysholdt.github.io/xtext_examples/repositories/generated-with-xtext_2_6_0/"/>
+<unit id="org.eclipse.xtext.example.arithmetics.sdk.feature.group" version="2.6.2.201408271013"/>
+<unit id="org.eclipse.xtext.example.domainmodel.sdk.feature.group" version="2.6.2.201408271013"/>
+<repository location="http://meysholdt.github.io/xtext_examples/repositories/generated-with-xtext_2_6_2/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.gef.sdk.feature.group" version="3.9.100.201405261516"/>

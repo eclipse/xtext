@@ -27,8 +27,8 @@
 <repository location="http://meysholdt.github.io/xtext_stateful_lexer/updatesite/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.xtext.example.arithmetics.sdk.feature.group" version="2.4.0.201406020956"/>
-<unit id="org.eclipse.xtext.example.domainmodel.sdk.feature.group" version="2.4.0.201406020956"/>
+<unit id="org.eclipse.xtext.example.arithmetics.sdk.feature.group" version="2.4.0.201408270933"/>
+<unit id="org.eclipse.xtext.example.domainmodel.sdk.feature.group" version="2.4.0.201408270933"/>
 <repository location="http://meysholdt.github.io/xtext_examples/repositories/generated-with-xtext_2_4_0/"/>
 </location>
 </locations>
