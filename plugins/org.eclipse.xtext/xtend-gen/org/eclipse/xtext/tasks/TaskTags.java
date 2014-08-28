@@ -29,10 +29,6 @@ public class TaskTags implements Iterable<TaskTag> {
     return this.taskTags.iterator();
   }
   
-  public List<TaskTag> getTaskTags() {
-    return this.taskTags;
-  }
-  
   @Pure
   public boolean isCaseSensitive() {
     return this.caseSensitive;
@@ -40,5 +36,10 @@ public class TaskTags implements Iterable<TaskTag> {
   
   public void setCaseSensitive(final boolean caseSensitive) {
     this.caseSensitive = caseSensitive;
+  }
+  
+  @Pure
+  public List<TaskTag> getTaskTags() {
+    return this.taskTags;
   }
 }
