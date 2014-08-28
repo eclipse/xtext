@@ -41,7 +41,9 @@ public class IssueOverlapsRangePredicate implements Predicate<Issue> {
 	public boolean apply(Issue issue) {
 		if (severity != null && severity != issue.getSeverity())
 			return false;
-		if (issue.getOffset() < end && issue.getOffset() + issue.getLength() > start)
+		Integer offset = issue.getOffset();
+		Integer length = issue.getLength();
+		if (offset != null && length != null && offset < end && offset + length > start)
 			return true;
 		return false;
 	}
