@@ -46,29 +46,33 @@ public class XtendOutlineWithEditorLinker extends OutlineWithEditorLinker {
       if ((input instanceof IOutlineNode)) {
         final List<IOutlineNode> matchingNodes = CollectionLiterals.<IOutlineNode>newArrayList();
         this.findNodesInRange(((IOutlineNode)input), selectedTextRegion, matchingNodes);
-        final Function1<IOutlineNode, Integer> _function = new Function1<IOutlineNode, Integer>() {
-          public Integer apply(final IOutlineNode it) {
-            ITextRegion _fullTextRegion = it.getFullTextRegion();
-            return Integer.valueOf(_fullTextRegion.getLength());
-          }
-        };
-        List<Integer> _map = ListExtensions.<IOutlineNode, Integer>map(matchingNodes, _function);
-        final Integer smallestMatch = IterableExtensions.<Integer>min(_map);
-        final Function1<IOutlineNode, Boolean> _function_1 = new Function1<IOutlineNode, Boolean>() {
-          public Boolean apply(final IOutlineNode it) {
-            ITextRegion _fullTextRegion = it.getFullTextRegion();
-            int _length = _fullTextRegion.getLength();
-            return Boolean.valueOf((_length == (smallestMatch).intValue()));
-          }
-        };
-        final Iterable<IOutlineNode> nodesToBeSelected = IterableExtensions.<IOutlineNode>filter(matchingNodes, _function_1);
-        boolean _isEmpty = IterableExtensions.isEmpty(nodesToBeSelected);
+        boolean _isEmpty = matchingNodes.isEmpty();
         boolean _not_1 = (!_isEmpty);
         if (_not_1) {
-          List<IOutlineNode> _list = IterableExtensions.<IOutlineNode>toList(nodesToBeSelected);
-          Object[] _array = _list.toArray();
-          StructuredSelection _structuredSelection = new StructuredSelection(_array);
-          this.treeViewer.setSelection(_structuredSelection);
+          final Function1<IOutlineNode, Integer> _function = new Function1<IOutlineNode, Integer>() {
+            public Integer apply(final IOutlineNode it) {
+              ITextRegion _fullTextRegion = it.getFullTextRegion();
+              return Integer.valueOf(_fullTextRegion.getLength());
+            }
+          };
+          List<Integer> _map = ListExtensions.<IOutlineNode, Integer>map(matchingNodes, _function);
+          final Integer smallestMatch = IterableExtensions.<Integer>min(_map);
+          final Function1<IOutlineNode, Boolean> _function_1 = new Function1<IOutlineNode, Boolean>() {
+            public Boolean apply(final IOutlineNode it) {
+              ITextRegion _fullTextRegion = it.getFullTextRegion();
+              int _length = _fullTextRegion.getLength();
+              return Boolean.valueOf((_length == (smallestMatch).intValue()));
+            }
+          };
+          final Iterable<IOutlineNode> nodesToBeSelected = IterableExtensions.<IOutlineNode>filter(matchingNodes, _function_1);
+          boolean _isEmpty_1 = IterableExtensions.isEmpty(nodesToBeSelected);
+          boolean _not_2 = (!_isEmpty_1);
+          if (_not_2) {
+            List<IOutlineNode> _list = IterableExtensions.<IOutlineNode>toList(nodesToBeSelected);
+            Object[] _array = _list.toArray();
+            StructuredSelection _structuredSelection = new StructuredSelection(_array);
+            this.treeViewer.setSelection(_structuredSelection);
+          }
         }
       }
     }
