@@ -24,7 +24,8 @@ public class AnnotationUtil {
 	public static <T> T newInstance(Class<T> type, Class<?> declarator, Annotation annotation) throws IllegalAccessException {
 		if (declarator != null)
 			try {
-				Constructor<?> c = type.getConstructor(declarator.getClass(), annotation.annotationType());
+				Constructor<?> c = type.getDeclaredConstructor(declarator.getClass(), annotation.annotationType());
+				c.setAccessible(true);
 				if (c != null)
 					return (T) c.newInstance(declarator, annotation);
 			} catch (SecurityException e) {
@@ -56,8 +57,7 @@ public class AnnotationUtil {
 		return null;
 	}
 
-	public static <T> List<T> newInstancesViaMetaAnnotation(Class<?> declarator, Class<? extends Annotation> metaAnnotationClass,
-			Class<T> expected) {
+	public static <T> List<T> newInstancesViaMetaAnnotation(Class<?> declarator, Class<? extends Annotation> metaAnnotationClass, Class<T> expected) {
 		List<T> result = Lists.newArrayList();
 		for (Annotation annotation : declarator.getAnnotations()) {
 			Annotation metaAnnotation = annotation.annotationType().getAnnotation(metaAnnotationClass);
@@ -68,8 +68,7 @@ public class AnnotationUtil {
 		return result;
 	}
 
-	public static <T> List<T> newInstancesViaMetaAnnotation(Method declarator, Class<? extends Annotation> metaAnnotationClass,
-			Class<T> expected) {
+	public static <T> List<T> newInstancesViaMetaAnnotation(Method declarator, Class<? extends Annotation> metaAnnotationClass, Class<T> expected) {
 		List<T> result = Lists.newArrayList();
 		for (Annotation annotation : declarator.getAnnotations()) {
 			Annotation metaAnnotation = annotation.annotationType().getAnnotation(metaAnnotationClass);
@@ -80,8 +79,7 @@ public class AnnotationUtil {
 		return result;
 	}
 
-	public static <T> List<T> newInstancesViaMetaAnnotation(Method declarator, int paramIndex,
-			Class<? extends Annotation> metaAnnotationClass, Class<T> expected) {
+	public static <T> List<T> newInstancesViaMetaAnnotation(Method declarator, int paramIndex, Class<? extends Annotation> metaAnnotationClass, Class<T> expected) {
 		List<T> result = Lists.newArrayList();
 		Annotation[][] annotations = declarator.getParameterAnnotations();
 		if (paramIndex >= 0 && paramIndex < annotations.length)
