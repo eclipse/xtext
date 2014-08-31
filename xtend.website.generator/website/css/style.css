@@ -766,7 +766,7 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 	width: 100%;
 	z-index: 1030;
 	background-image: none;
-	background-color: #010211;
+	background-color: rgba(01,02,11,0.7);
 }
 
 .navbar .container {
@@ -794,7 +794,7 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 }
 
 .navbar .nav > li > a:hover {
-	background-color: #444;
+	background-color: rgba(256,256,256,0.1);
 	color: #999;
 	text-decoration: none;
 }
