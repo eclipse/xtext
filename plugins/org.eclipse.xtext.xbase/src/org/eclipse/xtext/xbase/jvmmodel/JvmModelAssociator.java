@@ -215,24 +215,29 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 	}
 
 	protected void checkLanguageResource(Resource eResource) {
+		if (!LOG.isDebugEnabled())
+			return;
 		if (eResource instanceof XtextResource) {
 			String resourceLanguageName = ((XtextResource) eResource).getLanguageName();
 			if (!resourceLanguageName.equals(languageName)) {
 				IllegalArgumentException e = new IllegalArgumentException("Expected language "+languageName+", but was "+resourceLanguageName);
-				LOG.error(e.getMessage(), e);
+				LOG.debug(e.getMessage(), e);
 			}
 		} else if (eResource == null) {
 			IllegalArgumentException e = new IllegalArgumentException("You tried to associate an element to a source element, that was not contained in a resource.");
-			LOG.error(e.getMessage(), e);
+			LOG.debug(e.getMessage(), e);
 		} else {
 			IllegalArgumentException e = new IllegalArgumentException("Expected instanceof XtextResource, but was "+eResource);
-			LOG.error(e.getMessage(), e);
+			LOG.debug(e.getMessage(), e);
 		}
 	}
 	
 	protected void checkSameResource(Resource eResource, Resource eResource2) {
+		if (!LOG.isDebugEnabled())
+			return;
 		if (eResource != eResource2 && eResource2 != null) {
-			throw new IllegalArgumentException("Cross resource associations are not supported (resources were "+eResource.getURI()+" and "+eResource2.getURI());
+			IllegalArgumentException e = new IllegalArgumentException("Cross resource associations are not supported (resources were "+eResource.getURI()+" and "+eResource2.getURI());
+			LOG.debug(e.getMessage(), e);
 		}
 	}
 
