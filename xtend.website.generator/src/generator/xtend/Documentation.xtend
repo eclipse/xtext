@@ -57,7 +57,7 @@ class Documentation extends AbstractXtendWebsite {
 	@Inject extension HtmlExtensions
 	@Inject PostProcessor processor
 	
-	val currentVersion = "2.6.0"
+	val currentVersion = "2.7.0"
 	
 	override website() {
 		processor.postProcess(super.website())
@@ -69,8 +69,8 @@ class Documentation extends AbstractXtendWebsite {
 	}
 	
 	def copyImages(Document doc, File targetDir) {
-		val iter = EcoreUtil::getAllContents(doc.eResource.resourceSet, true)
-		iter.filter(typeof(ImageRef)).forEach[
+		val iter = EcoreUtil.getAllContents(doc.eResource.resourceSet, true)
+		iter.filter(ImageRef).forEach[
 			val source = new File(eResource.URI.trimSegments(1).toFileString, it.path)
 			if (!source.exists)
 				throw new IllegalStateException("Referenced Image "+source.canonicalPath+" does not exist in "+eResource.URI.lastSegment+" line "+NodeModelUtils::getNode(it).startLine)
@@ -124,11 +124,11 @@ class DocumentationSetup extends XdocStandaloneSetup implements Module {
 	
 	override createInjector() {
 		val module = new XdocRuntimeModule
-		Guice::createInjector(module, this)
+		Guice.createInjector(module, this)
 	}
 	
 	override configure(Binder binder) {
-		binder.bind(typeof(Body)).to(typeof(DocumentationBody))
+		binder.bind(Body).to(DocumentationBody)
 	}
 }
 

@@ -40,20 +40,19 @@
 			feed.load(function(result) {
 				if (!result.error) {
 					var container = document.getElementById("feed");
-					var html = '<h1>Latest News</h1><hr><div class="inner">'
+					var html = '<h1>Latest News</h1><hr>'
 					for (var i = 0; i < result.feed.entries.length; i++) {
 						var entry = result.feed.entries[i];
 						var div = document.createElement("div");
 						div.appendChild(document.createTextNode(entry.title));
 						container.appendChild(div);
 						var stringEntry = '<div class="container">'
-										+ '<div class="span1">&nbsp;</div><div class="span10">'
 										+ '<h2>'+entry.title+' <small>published '+new Date(entry.publishedDate).toDateString()+' by '+ entry.author+'</small></h2>'
+										+ '<div class="span1">&nbsp;</div><div class="span10">'
 				        				+ '<p>' + entry.content+'</p>'
 				        				+ '</div><div class="span1">&nbsp;</div></div>'
-						html = html + stringEntry
+						var html = html + stringEntry
 					}
-					html = html + '</div>'
 					container.innerHTML = html
 				}
 			});
@@ -125,13 +124,13 @@
 		</div>
 	</div>
 	<!-- Navbar End -->
-	<div id="page">
-		<div class="inner">
-			<div class="container clearfix" id="feed">
-				<h1>Loading Latest News...<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></h1>
-			</div>
+<div id="page">
+	<div class="inner">
+		<div class="container clearfix" id="feed">
+			<h1>Loading Latest News...<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></h1>
 		</div>
 	</div>
+</div>
 	<div id="extra">
 		<div class="container">
 			<div class="row">

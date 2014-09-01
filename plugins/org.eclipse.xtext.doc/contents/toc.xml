@@ -296,6 +296,14 @@
 				<topic href="contents/050-heading-runtime.html#encoding_10" label="Encoding of Xtext Source Code" >
 				</topic>
 			</topic>
+			<topic href="contents/050-heading-runtime.html#testing" label="Unit Testing the Language" >
+				<topic href="contents/050-heading-runtime.html#testing_3" label="Creating a simple test class" >
+				</topic>
+				<topic href="contents/050-heading-runtime.html#testing_4" label="Writing a parser test" >
+				</topic>
+				<topic href="contents/050-heading-runtime.html#testing_5" label="How to write tests that includes multiple different languages" >
+				</topic>
+			</topic>
 		</topic>
 		<topic href="contents/120-heading-UI.html#ide_concepts" label="IDE Concepts" >
 			<topic href="contents/120-heading-UI.html#labelProvider" label="Label Provider" >

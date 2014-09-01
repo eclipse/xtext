@@ -114,18 +114,18 @@ That is called local type inference and is supported everywhere in Xtend.
 We want the field to be final, so we declare it as a value using the keyword <span class="inlinecode"><span class="keyword">val</span></span>.
 </p>
 <p>
-The initialization on the right hand side first creates a new <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/io/FileReader.html" title="View JavaDoc"><abbr title="java.io.FileReader" >FileReader</abbr></a>.
+The initialization on the right hand side first creates a new <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/io/FileReader.html" title="View JavaDoc"><abbr title="java.io.FileReader" >FileReader</abbr></a>.
 Then the method <span class="inlinecode">readLines()</span> is invoked on that instance. But if you have a look at <span class="inlinecode">FileReader</span> you will not find
-such a method. In fact <span class="inlinecode">readLines()</span> is a static method from Google Guava&apos;s <a class="jdoc" href="http://guava-libraries.googlecode.com/svn/tags/release09/javadoc/com/google/common/io/CharStreams.html" title="View JavaDoc"><abbr title="com.google.common.io.CharStreams" >CharStreams</abbr></a> which was imported 
+such a method. In fact <span class="inlinecode">readLines()</span> is a static method from Google Guava&apos;s <a class="jdoc" href="http://docs.guava-libraries.googlecode.com/git-history/v17.0/javadoc/com/google/common/io/CharStreams.html" title="View JavaDoc"><abbr title="com.google.common.io.CharStreams" >CharStreams</abbr></a> which was imported 
 as an <a href="20-classes-and-functions.html#extensionImports" title="Go to &quot;Extension Imports&quot;">extension</a>. Extensions allow us to use this readable syntax.
 </p>
 <p>
 <span class="inlinecode"><span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;com.google.common.io.CharStreams.*</span>
 </p>
 <p>
-<a class="jdoc" href="http://guava-libraries.googlecode.com/svn/tags/release09/javadoc/com/google/common/io/CharStreams.html" title="View JavaDoc"><abbr title="com.google.common.io.CharStreams" ><span class="inlinecode">CharStreams.readLines(Reader)</span></abbr></a> returns a <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/List.html" title="View JavaDoc"><abbr title="java.util.List" ><span class="inlinecode">List&lt;String&gt;</span></abbr></a> on 
+<a class="jdoc" href="http://docs.guava-libraries.googlecode.com/git-history/v17.0/javadoc/com/google/common/io/CharStreams.html" title="View JavaDoc"><abbr title="com.google.common.io.CharStreams" ><span class="inlinecode">CharStreams.readLines(Reader)</span></abbr></a> returns a <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html" title="View JavaDoc"><abbr title="java.util.List" ><span class="inlinecode">List&lt;String&gt;</span></abbr></a> on 
 which we call another extension method <span class="inlinecode">map</span>.
-This one is defined in the runtime library (<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/xbase/lib/ListExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.ListExtensions" >ListExtensions.map(...)</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ListExtensions.java" title="View Source Code" >(src)</a>) and is automatically imported and
+This one is defined in the runtime library (<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/lib/ListExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.ListExtensions" >ListExtensions.map(...)</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ListExtensions.java" title="View Source Code" >(src)</a>) and is automatically imported and
 therefore available on all lists. The <span class="inlinecode">map</span> extension expects a function as a parameter.
 It basically invokes that function for each value in the list and returns another list containing the results of the function invocations. Actually
 this mapping is performed lazily so if you never access the values of the result list, the mapping function is never executed.
@@ -134,9 +134,9 @@ this mapping is performed lazily so if you never access the values of the result
 Function objects are created using <a href="30-expressions.html#lambdas" title="Go to &quot;Lambda Expressions&quot;">lambda expressions</a> (the code in squared brackets).
 Within the lambda we process a single line from the text file and turn it into a movie by splitting the string using 
 two whitespace characters as the separator. On the result of the split operation, the method <span class="inlinecode">iterator()</span> is invoked. 
-As you might know <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >String.split(String)</abbr></a>
+As you might know <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >String.split(String)</abbr></a>
 returns a string array (<span class="inlinecode">String[]</span>), which Xtend <a href="15-types.html#conversionRules" title="Go to &quot;Conversion Rules&quot;">auto-converts to a list</a> when we 
-call <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Iterable.html" title="View JavaDoc"><abbr title="java.lang.Iterable" ><span class="inlinecode">Iterable.iterator()</span></abbr></a> on it.
+call <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html" title="View JavaDoc"><abbr title="java.lang.Iterable" ><span class="inlinecode">Iterable.iterator()</span></abbr></a> on it.
 </p>
 <p>
 <span class="inlinecode"><span class="keyword">val</span>&nbsp;segments&nbsp;=&nbsp;line.split(<span class="string">&apos;&nbsp;&nbsp;&apos;</span>).iterator</span>
@@ -144,8 +144,8 @@ call <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java
 <p>
 Now we use the iterator to create an instance of <span class="inlinecode">Movie</span> for each String that it yields.
 The data type conversion (e.g. <span class="inlinecode">String</span> to <span class="inlinecode"><span class="keyword">int</span></span>) is done by calling <a href="30-expressions.html#staticAccess" title="Go to &quot;Static Access&quot;">static methods</a> from the wrapper types. 
-The rest of the <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Iterable.html" title="View JavaDoc"><abbr title="java.lang.Iterable" >Iterable</abbr></a> is turned into a set of categories. Therefore, the extension method 
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/xbase/lib/IteratorExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IteratorExtensions" ><span class="inlinecode">IteratorExtensions.toSet(Iterator&lt;T&gt;)</span></abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IteratorExtensions.java" title="View Source Code" >(src)</a>
+The rest of the <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html" title="View JavaDoc"><abbr title="java.lang.Iterable" >Iterable</abbr></a> is turned into a set of categories. Therefore, the extension method 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/lib/IteratorExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IteratorExtensions" ><span class="inlinecode">IteratorExtensions.toSet(Iterator&lt;T&gt;)</span></abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IteratorExtensions.java" title="View Source Code" >(src)</a>
 is invoked on the iterator to consume its remaining values.
 </p>
 <p>
@@ -200,7 +200,7 @@ or even more compact
 </p>
 <p>
 Eventually we call <span class="inlinecode">size</span> on the resulting iterable which is an extension method, too. It is defined in the utility class 
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/xbase/lib/IterableExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IterableExtensions" >IterableExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java" title="View Source Code" >(src)</a>.
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/lib/IterableExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IterableExtensions" >IterableExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java" title="View Source Code" >(src)</a>.
 </p>
 <a name="moviesExample_4_3"></a>
 <h3>Question 2 : What Is The Year The Best Movie From The 80's Was Released?</h3>
@@ -218,11 +218,11 @@ Eventually we call <span class="inlinecode">size</span> on the resulting iterabl
 </p>
 <p>
 Here we <span class="inlinecode">filter</span> for all movies whose year is included in the range from 1980 to 1989 (the 80&apos;s).
-The <span class="inlinecode">..</span> operator is again an extension defined in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/xbase/lib/IntegerExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IntegerExtensions" >IntegerExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerExtensions.java" title="View Source Code" >(src)</a> and returns an instance of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/xbase/lib/IntegerRange.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IntegerRange" >IntegerRange</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerRange.java" title="View Source Code" >(src)</a>.
+The <span class="inlinecode">..</span> operator is again an extension defined in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/lib/IntegerExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IntegerExtensions" >IntegerExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerExtensions.java" title="View Source Code" >(src)</a> and returns an instance of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/lib/IntegerRange.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IntegerRange" >IntegerRange</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerRange.java" title="View Source Code" >(src)</a>.
 Operator overloading is explained in <a href="30-expressions.html#operators" title="Go to &quot;Infix Operators and Operator Overloading&quot;">section</a>.
 </p>
 <p>
-The resulting iterable is sorted (<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/xbase/lib/IterableExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IterableExtensions" ><span class="inlinecode">IterableExtensions.sortBy</span></abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java" title="View Source Code" >(src)</a>) by the <span class="inlinecode">rating</span> of the movies. 
+The resulting iterable is sorted (<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/lib/IterableExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IterableExtensions" ><span class="inlinecode">IterableExtensions.sortBy</span></abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java" title="View Source Code" >(src)</a>) by the <span class="inlinecode">rating</span> of the movies. 
 Since it is sorted in ascending order, we take the last movie from the list and return its <span class="inlinecode">year</span>. 
 </p>
 <p>
@@ -258,7 +258,7 @@ The calls to <span class="inlinecode">movie.year</span> as well as <span class="
 </p>
 <p>
 First the movies are sorted by rating, then we take the best two. Next the list of movies is turned into a list of their <span class="inlinecode">numberOfVotes</span> using the <span class="inlinecode">map</span> function. 
-Now we have a <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/List.html" title="View JavaDoc"><abbr title="java.util.List" ><span class="inlinecode">List&lt;Long&gt;</span></abbr></a> which can be reduced to a single <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Long.html" title="View JavaDoc"><abbr title="java.lang.Long" >Long</abbr></a> by adding the values.
+Now we have a <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html" title="View JavaDoc"><abbr title="java.util.List" ><span class="inlinecode">List&lt;Long&gt;</span></abbr></a> which can be reduced to a single <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/lang/Long.html" title="View JavaDoc"><abbr title="java.lang.Long" >Long</abbr></a> by adding the values.
 </p>
 <p>
 You could also use <span class="inlinecode">reduce</span> instead of <span class="inlinecode">map</span> and <span class="inlinecode">reduce</span>. Do you know how?

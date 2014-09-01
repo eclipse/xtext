@@ -2222,5 +2222,141 @@ The source code of the Xtext framework itself is completely encoded in <em>ISO 8
 to make the Xpand templates work everywhere (they use french quotation markup). That encoding is hard 
 coded into the Xtext generator code. You are likely never going to change that. 
 </p>
+<a name="testing"></a>
+<h2>Unit Testing the Language</h2>
+<p>
+Automated tests are crucial for the maintainability and the quality of a software product. That is why
+it is strongly recommended to write unit tests for your language, too. The Xtext project wizard creates
+a test project for that purpose. It simplifies the setup procedure both for the Eclipse agnostic tests and the UI
+tests for Junit4.
+</p>
+<p>
+The following is about testing the parser and the linker for the <em>Domainmodel</em> language from the tutorial. It leverages Xtend to
+write the test case.
+</p>
+<a name="testing_3"></a>
+<h3>Creating a simple test class</h3>
+<p>
+First of all, a new Xtend class has to be created. Therefore, choose the src folder of the test 
+plugin, and select <em>New -&gt; Xtend Class</em> from the context menu. Provide a meaningful name and
+enter the package before you hit finish.
+</p>
+<p>
+The core of the test infrastructure is the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/junit4/XtextRunner.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.junit4.XtextRunner" >XtextRunner</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/XtextRunner.java" title="View Source Code" >(src)</a> and
+the language specific <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/junit4/IInjectorProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.junit4.IInjectorProvider" >IInjectorProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/IInjectorProvider.java" title="View Source Code" >(src)</a>. Both have to be provided
+by means of class annotations:
+ 
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">import</span>&nbsp;org.eclipse.xtext.junit4.XtextRunner<br/>
+<span class="keyword">import</span>&nbsp;org.example.domainmodel.DomainmodelInjectorProvider<br/>
+<br/>
+@InjectWith(DomainmodelInjectorProvider)<br/>
+@RunWith(XtextRunner)<br/>
+<span class="keyword">class</span>&nbsp;ParserTest&nbsp;{<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+This configuration will make sure that you can use dependency injection in your test class, and that the global EMF registries
+are properly populated and cleaned up before respectively after each test. 
+</p>
+<a name="testing_4"></a>
+<h3>Writing a parser test</h3>
+<p>
+The class <em>org.eclipse.xtext.junit4.util.ParseHelper</em> allows to parse an arbitrary string into an
+AST model. The AST model itself can be traversed and checked afterwards. A static import of
+<a class="jdoc" href="http://junit.sourceforge.net/javadoc/org/junit/Assert.html" title="View JavaDoc"><abbr title="org.junit.Assert" >Assert</abbr></a> leads to concise and readable test cases.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">import</span>&nbsp;org.eclipse.xtext.junit4.util.ParseHelper<br/>
+<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;org.junit.Assert.*<br/>
+<br/>
+...<br/>
+&nbsp;@Inject<br/>
+ParseHelper&lt;Domainmodel&gt;&nbsp;parser<br/>
+<br/>
+@Test&nbsp;<br/>
+<span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;parseDomainmodel()&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;model&nbsp;=&nbsp;parser.parse(<span class="string">&apos;&apos;&apos;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;entity&nbsp;MyEntity&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent:&nbsp;MyEntity<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&apos;&apos;&apos;</span>)<br/>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;entity&nbsp;=&nbsp;model.elements.head&nbsp;<span class="keyword">as</span>&nbsp;Entity<br/>
+&nbsp;&nbsp;assertSame(entity,&nbsp;entity.features.head.type)<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<a name="testing_5"></a>
+<h3>How to write tests that includes multiple different languages</h3>
+<p>
+If in addition to the main language your tests require using other languages for references from/to your main language,
+you&apos;ll have to parse and load dependant resources into the same ResourceSet first for cross reference resolution to work.
+</p>
+<p>
+As your main language&apos;s default generated <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/junit4/IInjectorProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.junit4.IInjectorProvider" >IInjectorProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/IInjectorProvider.java" title="View Source Code" >(src)</a> (e.g. DomainmodelInjectorProvider) does not know about
+any other such dependant languages, they must be initialized explicitly. The recommended pattern for this is to
+create a new subclass of the generated <em>MyLanguageInjectorProvider</em> in your <em>*.test</em> project and make sure the dependenant 
+language is intizialized properly. You can and then use this new injector provider instead of the original one in your test&apos;s <em>@InjectWith</em>:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">class</span>&nbsp;MyLanguageWithDependenciesInjectorProvider&nbsp;<span class="keyword">extends</span>&nbsp;MyLanguageInjectorProvider&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;internalCreateInjector()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;MyOtherLangLanguageStandaloneSetup.doSetup<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">super</span>.internalCreateInjector<br/>
+&nbsp;&nbsp;}<br/>
+}<br/>
+<br/>
+@RunWith(XtextRunner)<br/>
+@InjectWith(MyLanguageWithDependenciesInjectorProvider)<br/>
+<span class="keyword">class</span>&nbsp;YourTest&nbsp;{<br/>
+&nbsp;&nbsp;...<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+You should not put injector creation for referenced languages in your standalone setup. Note that for the headless code generation use case,
+the Maven plug-in is configured with multiple setups, so usually there is no problem there.
+</p>
+<p>
+You may also need to initialize &apos;import&apos;-ed ecore models that are not generated by your Xtext language. This should be done by using
+an explicit <em>MyModelPackage.eINSTANCE.getName();</em> in the <em>doSetup()</em> method of your respective language&apos;s StandaloneSetup class. 
+Note that it is strongly recommended to follow this pattern instead of just using <em>@Before</em> methods in your
+*Test class, as due to internal technical reasons that won&apos;t work anymore as soon as you have more than just one <em>@Test</em>.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">class</span>&nbsp;MyLanguageStandaloneSetup&nbsp;<span class="keyword">extends</span>&nbsp;MyLanguageStandaloneSetupGenerated&nbsp;{<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;doSetup()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;MyPackageImpl.init<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">new</span>&nbsp;MyLanguageStandaloneSetup().createInjectorAndDoEMFRegistration<br/>
+&nbsp;&nbsp;}<br/>
+<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+This only applies to referencing dependencies to &apos;import&apos;-ed Ecore models and languages based on them which may be used in the test.
+The inherited dependencies from mixed-in grammars are automatically listed in the generated super class already, and nothing needs to be done for those.
+</p>
 </body>
 </html>

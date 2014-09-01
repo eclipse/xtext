@@ -33,10 +33,10 @@ just like Java, you rarely have to write types down because they can be computed
 <h2>Conversion Rules</h2>
 <p>
 In addition to Java&apos;s autoboxing to convert primitives to their corresponding wrapper types (e.g. <span class="inlinecode"><span class="keyword">int</span></span>
-is automatically converted to <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Integer.html" title="View JavaDoc"><abbr title="java.lang.Integer" >Integer</abbr></a> when needed), there are additional conversion rules in Xtend.
+is automatically converted to <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/lang/Integer.html" title="View JavaDoc"><abbr title="java.lang.Integer" >Integer</abbr></a> when needed), there are additional conversion rules in Xtend.
 </p>
 <p>
-Arrays are automatically converted to <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/List.html" title="View JavaDoc"><abbr title="java.util.List" ><span class="inlinecode">List&lt;ComponentType&gt;</span></abbr></a> and vice versa. That is you can
+Arrays are automatically converted to <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html" title="View JavaDoc"><abbr title="java.util.List" ><span class="inlinecode">List&lt;ComponentType&gt;</span></abbr></a> and vice versa. That is you can
 write the following:
 </p>
 <p>
@@ -56,13 +56,13 @@ Subsequent changes to the array are reflected by the list and vice versa. Arrays
 lists of their respective wrapper types.
 </p>
 <p>
-The conversion works the other way round, too. In fact, all subtypes of <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Iterable.html" title="View JavaDoc"><abbr title="java.lang.Iterable" >Iterable</abbr></a> are automatically
+The conversion works the other way round, too. In fact, all subtypes of <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html" title="View JavaDoc"><abbr title="java.lang.Iterable" >Iterable</abbr></a> are automatically
 converted to arrays on demand.
 </p>
 <p>
 Another very useful conversion applies to lambda expressions. A lambda expression
-usually is of one of the types declared in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/xbase/lib/Functions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.Functions" >Functions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java" title="View Source Code" >(src)</a>
-or <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/xbase/lib/Procedures.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.Procedures" >Procedures</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java" title="View Source Code" >(src)</a>. However, if the expected type is an interface or a class with a single 
+usually is of one of the types declared in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/lib/Functions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.Functions" >Functions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java" title="View Source Code" >(src)</a>
+or <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/lib/Procedures.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.Procedures" >Procedures</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java" title="View Source Code" >(src)</a>. However, if the expected type is an interface or a class with a single 
 abstract method declaration, a lambda expression is automatically converted to that
 type. This allows to use lambda expressions with many existing Java libraries. See <a href="30-expressions.html#closureTypes" title="Go to &quot;Typing&quot;" >section closureTypes</a>
 for more details. 
