@@ -242,7 +242,7 @@ public class ReleaseNotes extends AbstractWebsite {
     _builder.newLine();
     _builder.append("<pre class=\"prettyprint lang-xtend linenums\">");
     _builder.newLine();
-    _builder.append("Option<T>.Some");
+    _builder.append("Option&LT;T&GT;.Some");
     _builder.newLine();
     _builder.append("</pre>");
     _builder.newLine();
