@@ -53,7 +53,7 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 		validationHelper.assertNoErrors(parse)
 		val fsa = new InMemoryFileSystemAccess()
 		generator.doGenerate(parse.eResource(), fsa)
-		val concatenation = fsa.getFiles().values().iterator().next()
+		val concatenation = fsa.getTextFiles().values().iterator().next()
 		val clazz = javaCompiler.compileToClass("Foo", concatenation.toString())
 		val foo = clazz.newInstance()
 		val method = clazz.getDeclaredMethod("doStuff")
