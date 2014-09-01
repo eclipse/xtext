@@ -2506,6 +2506,17 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				" }");
 	}
 	
+	@Test public void testSwitchExpressionOverEnum_6() throws Exception {
+		assertEvaluatesTo(null, 
+				"{\n" + 
+				"  val Enum<?> e = null\n" + 
+				"  switch(e) {\n" + 
+				"    java.lang.annotation.RetentionPolicy: e.toString\n" + 
+				"    java.lang.annotation.ElementType: e.toString\n" + 
+				"  }\n" + 
+				"}");
+	}
+	
 	@Test public void testSwitchExpressionOverInteger() throws Exception {
 		assertEvaluatesTo(1, 
 				"{\n" +
