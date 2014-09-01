@@ -79,7 +79,8 @@ public class BasicExpressions {
     boolean _equals = (_length == 4);
     if (_equals) {
       int _xifexpression = (int) 0;
-      boolean _notEquals = (!Objects.equal("foo", "bar"));
+      String _lowerCase = "BAR".toLowerCase();
+      boolean _notEquals = (!Objects.equal("foo", _lowerCase));
       if (_notEquals) {
         _xifexpression = 42;
       } else {
