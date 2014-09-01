@@ -1584,7 +1584,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		if (switchType == null || switchType.isUnknown()) {
 			return;
 		}
-		if (!switchType.isSubtypeOf(Enum.class)) {
+		if (!switchType.isSubtypeOf(Enum.class) || !(switchType.getType() instanceof JvmEnumerationType)) {
 			return;
 		}
 		JvmEnumerationType enumerationType = (JvmEnumerationType) switchType.getType();

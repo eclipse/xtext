@@ -647,6 +647,18 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 		'''.expression.assertNoIssues
 	}
 	
+	@Test def void testIncompleteCasesOnEnum_11() {
+		'''
+		{
+			val Enum<?> e = null
+			switch(e) {
+				java.lang.annotation.RetentionPolicy: e.toString
+				java.lang.annotation.ElementType: e.toString
+			}
+		}
+		'''.expression.assertNoIssues
+	}
+	
 	@Test def void testSwitchDeclaredParameter() {
 		'''
 		{
