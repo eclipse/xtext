@@ -30,7 +30,7 @@ import org.junit.runner.RunWith;
 public class TypeUtil {
 
 	private static IType resolveToType(IType baseType, String refTypeName) throws JavaModelException {
-		if (baseType == null)
+		if (baseType == null || refTypeName == null)
 			return null;
 		String[][] resolvedNames = baseType.resolveType(refTypeName);
 		IJavaProject javaProject = baseType.getJavaProject();
