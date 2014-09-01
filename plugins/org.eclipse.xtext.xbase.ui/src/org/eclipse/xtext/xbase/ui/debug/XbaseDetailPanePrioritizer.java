@@ -25,6 +25,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Singleton;
 
+@SuppressWarnings("restriction")
 @Singleton
 public class XbaseDetailPanePrioritizer {
 	private static final Logger logger = Logger.getLogger(XbaseDetailPanePrioritizer.class);

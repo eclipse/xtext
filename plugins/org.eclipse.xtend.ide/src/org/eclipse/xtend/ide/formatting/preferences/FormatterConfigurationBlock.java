@@ -39,6 +39,7 @@ import com.google.inject.name.Named;
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public abstract class FormatterConfigurationBlock extends ProfileConfigurationBlock {
 
 

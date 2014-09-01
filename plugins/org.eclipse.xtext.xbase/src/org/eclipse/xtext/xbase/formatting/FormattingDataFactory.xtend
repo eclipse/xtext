@@ -2,10 +2,10 @@ package org.eclipse.xtext.xbase.formatting
 
 import com.google.inject.Inject
 import org.eclipse.xtext.nodemodel.INode
-import org.eclipse.xtext.xbase.lib.util.ToStringHelper
 
 import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 import org.eclipse.xtext.preferences.PreferenceKey
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder
 
 class FormattingDataFactory {
 
@@ -237,6 +237,6 @@ class FormattingDataInit {
 	}
 
 	override String toString() {
-		new ToStringHelper().toString(this)
+		new ToStringBuilder(this).addAllFields.toString()
 	}
 }

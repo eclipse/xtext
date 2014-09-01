@@ -16,6 +16,9 @@ import com.google.inject.Singleton;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * 
+ * @noextend This class is not intended to be subclassed by clients.
+ * @since 2.7
  */
 @Singleton
 public class XbaseQualifiedNameConverter extends org.eclipse.xtext.naming.IQualifiedNameConverter.DefaultImpl {

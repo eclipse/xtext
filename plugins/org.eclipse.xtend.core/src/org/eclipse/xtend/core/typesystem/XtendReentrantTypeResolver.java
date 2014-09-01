@@ -779,6 +779,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 				}
 				final JvmParameterizedTypeReference superTypeReference = createSuperTypeReference(type, constructorCall);
 				requestCapturedLocalVariables(superTypeReference, localClass, resolvedTypes, resolvedTypesByContext, new IAcceptor<JvmTypeReference>() {
+					@SuppressWarnings("deprecation")
 					public void accept(JvmTypeReference capturingTypeReference) {
 						casted.setEquivalent(capturingTypeReference);
 						IFeatureScopeSession mySession = addThisAndSuper(nestedSession, resolvedTypes.getReferenceOwner(), localClass, superTypeReference, false);

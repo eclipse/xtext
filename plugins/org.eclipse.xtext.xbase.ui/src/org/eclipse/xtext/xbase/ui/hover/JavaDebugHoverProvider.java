@@ -25,6 +25,7 @@ import com.google.inject.Injector;
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class JavaDebugHoverProvider {
 
 	@Inject

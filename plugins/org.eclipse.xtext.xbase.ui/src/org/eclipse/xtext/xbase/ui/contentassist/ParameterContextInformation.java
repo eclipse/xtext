@@ -35,6 +35,7 @@ import com.google.common.collect.Lists;
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
+@SuppressWarnings("restriction")
 public class ParameterContextInformation implements ISmartContextInformation {
 
 	private final ParameterData data;

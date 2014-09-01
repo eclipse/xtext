@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.xbase.ui" version="2">
+    <resource path="src-gen/org/eclipse/xtext/xbase/ui/internal/XtypeActivator.java" type="org.eclipse.xtext.xbase.ui.internal.XtypeActivator">
+        <filter id="640708718">
+            <message_arguments>
+                <message_argument value="XbaseRuntimeModule()"/>
+                <message_argument value="XtypeActivator"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtext/xbase/ui/hover/XbaseHoverProvider.java" type="org.eclipse.xtext.xbase.ui.hover.XbaseHoverProvider">
         <filter comment="Non-API type in signature" id="640712815">
             <message_arguments>

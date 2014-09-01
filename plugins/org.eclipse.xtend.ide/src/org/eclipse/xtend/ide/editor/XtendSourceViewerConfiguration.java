@@ -21,6 +21,7 @@ import org.eclipse.xtext.ui.editor.XtextSourceViewerConfiguration;
 /**
  * @author Holger Schill - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class XtendSourceViewerConfiguration extends XtextSourceViewerConfiguration {
 	@Override
 	public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceViewer) {

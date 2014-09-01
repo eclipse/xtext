@@ -21,6 +21,7 @@ import com.google.inject.MembersInjector;
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class FormatterModifyDialog extends ModifyDialog {
 
 	public static class Factory {

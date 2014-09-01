@@ -46,6 +46,7 @@ import com.google.inject.Inject;
  * @author Holger Schill - Initial contribution and API
  * @author Anton Kosyakov - https://bugs.eclipse.org/bugs/show_bug.cgi?id=379220
  */
+@SuppressWarnings("restriction")
 public abstract class AbstractNewXtendElementWizardPage extends NewTypeWizardPage {
 
 	protected static final int COLS = 4;

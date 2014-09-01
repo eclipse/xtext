@@ -23,7 +23,7 @@ import org.eclipse.jface.text.templates.TemplateContextType;
 import org.eclipse.jface.text.templates.TemplateException;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
@@ -55,7 +55,7 @@ public class XbaseTemplateContext extends XtextTemplateContext {
 	}
 
 	@Inject
-	private IJvmTypeProvider.Factory jvmTypeProviderfactory;
+	private TypeReferences typeReferences;
 
 	@Inject
 	private RewritableImportSection.Factory importSectionFactory;
@@ -136,7 +136,7 @@ public class XbaseTemplateContext extends XtextTemplateContext {
 	}
 
 	private JvmDeclaredType findJvmDeclaredType(String fqName, ResourceSet resourceSet) {
-		JvmType typeByName = jvmTypeProviderfactory.findTypeProvider(resourceSet).findTypeByName(fqName);
+		JvmType typeByName = typeReferences.findDeclaredType(fqName, resourceSet);
 		if (typeByName instanceof JvmDeclaredType) {
 			return (JvmDeclaredType) typeByName;
 		}

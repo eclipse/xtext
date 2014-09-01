@@ -428,6 +428,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public static class JvmDeclaredTypeAcceptor implements IJvmDeclaredTypeAcceptor {
 		public List<Pair<JvmDeclaredType, Procedure1<? super JvmDeclaredType>>> later = Lists.newArrayList();
 		private DerivedStateAwareResource resource;

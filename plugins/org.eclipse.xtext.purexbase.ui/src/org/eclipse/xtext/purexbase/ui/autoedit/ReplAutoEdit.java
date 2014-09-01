@@ -42,6 +42,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+@SuppressWarnings("restriction")
 public class ReplAutoEdit implements IAutoEditStrategy {
 
 	@Inject

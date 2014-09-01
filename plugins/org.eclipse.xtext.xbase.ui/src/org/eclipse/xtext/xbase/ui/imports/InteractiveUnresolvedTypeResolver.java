@@ -47,6 +47,7 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class InteractiveUnresolvedTypeResolver implements IUnresolvedTypeResolver {
 
 	private static final Logger LOG = Logger.getLogger(InteractiveUnresolvedTypeResolver.class);

@@ -24,6 +24,7 @@ import org.eclipse.xtext.common.types.JvmVisibility;
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.4.2
  */
+@SuppressWarnings("restriction")
 public class XbaseImages2 {
 
 	public ImageDescriptor forImportContainer() {

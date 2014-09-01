@@ -24,7 +24,6 @@ import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.debug.core.IJavaLineBreakpoint;
 import org.eclipse.jdt.debug.core.IJavaStratumLineBreakpoint;
-import org.eclipse.jdt.internal.debug.ui.JDIDebugUIPlugin;
 import org.eclipse.xtext.builder.smap.StratumBreakpointAdapterFactory;
 import org.eclipse.xtext.builder.trace.AbstractTrace;
 import org.eclipse.xtext.builder.trace.ITraceForTypeRootProvider;
@@ -60,9 +59,12 @@ public class JavaBreakPointProvider {
 						if (method.getName().equals("getAttribute")) {
 							if (args[0].equals(IMarker.LINE_NUMBER)) {
 								return getJavaLineNumber(breakpoint);
-							} else if (args[0].equals(JDIDebugUIPlugin.getUniqueIdentifier()
-									+ ".JAVA_ELEMENT_HANDLE_ID")) {
-								return getHandleId(breakpoint);
+							} else {
+								@SuppressWarnings("restriction")
+								String elementHandleID = org.eclipse.jdt.internal.debug.ui.JDIDebugUIPlugin.getUniqueIdentifier() 	+ ".JAVA_ELEMENT_HANDLE_ID";
+								if (args[0].equals(elementHandleID)) {
+									return getHandleId(breakpoint);
+								}
 							}
 						}
 						return method.invoke(marker, args);

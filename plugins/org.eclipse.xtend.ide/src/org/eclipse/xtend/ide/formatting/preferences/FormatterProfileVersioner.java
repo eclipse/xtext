@@ -13,6 +13,7 @@ import org.eclipse.jdt.internal.ui.preferences.formatter.ProfileManager.CustomPr
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class FormatterProfileVersioner implements IProfileVersioner {
 	public static String PREFIX = "org.eclipse.xtend.formatter";
 

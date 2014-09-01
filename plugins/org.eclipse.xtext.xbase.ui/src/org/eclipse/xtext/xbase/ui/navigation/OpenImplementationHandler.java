@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.ui.navigation;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IJavaElement;
-import org.eclipse.jdt.internal.ui.text.JavaWordFinder;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -29,7 +28,8 @@ public class OpenImplementationHandler extends AbstractJvmElementHandler {
 	protected void openPresentation(XtextEditor editor, IJavaElement javaElement, EObject selectedElement) {
 		if (editor != null) {
 			final ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
-			IRegion region = JavaWordFinder.findWord(editor.getDocument(), selection.getOffset());
+			@SuppressWarnings("restriction")
+			IRegion region = org.eclipse.jdt.internal.ui.text.JavaWordFinder.findWord(editor.getDocument(), selection.getOffset());
 			opener.openImplementations(javaElement, editor.getInternalSourceViewer(), region);
 		}
 	}

@@ -12,6 +12,9 @@ import com.google.inject.Injector;
 
 /**
  * Generated from StandaloneSetup.xpt!
+ * 
+ * @noreference This class is not intended to be referenced by clients.
+ * @since 2.7
  */
 @SuppressWarnings("all")
 public class XtypeStandaloneSetupGenerated implements ISetup {

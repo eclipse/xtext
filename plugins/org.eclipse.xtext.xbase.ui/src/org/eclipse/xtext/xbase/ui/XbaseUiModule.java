@@ -24,6 +24,7 @@ import com.google.inject.Binder;
 /**
  * Use this class to register components to be used within the IDE.
  */
+@SuppressWarnings("restriction")
 public class XbaseUiModule extends org.eclipse.xtext.xbase.ui.AbstractXbaseUiModule {
 
 	public XbaseUiModule(AbstractUIPlugin plugin) {

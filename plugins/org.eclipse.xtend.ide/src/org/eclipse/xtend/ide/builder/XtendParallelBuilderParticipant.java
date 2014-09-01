@@ -30,7 +30,6 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.jdt.internal.core.JavaProject;
 import org.eclipse.xtext.builder.ParallelBuilderParticipant;
 import org.eclipse.xtext.generator.FileSystemAccessQueue;
 import org.eclipse.xtext.generator.IFileSystemAccess;
@@ -147,10 +146,11 @@ public class XtendParallelBuilderParticipant extends ParallelBuilderParticipant 
 	/**
 	 * @since 2.4
 	 */
+	@SuppressWarnings("restriction")
 	protected List<IPath> getSourceFolderPathes(IProject project) {
 		List<IPath> sourceFolder = Lists.newArrayList();
 		try {
-			if (project.isOpen() && JavaProject.hasJavaNature(project)) {
+			if (project.isOpen() && org.eclipse.jdt.internal.core.JavaProject.hasJavaNature(project)) {
 				IJavaProject javaProject = JavaCore.create(project);
 				List<IPackageFragmentRoot> packageFragmentRoots = Arrays.asList(javaProject.getPackageFragmentRoots());
 				for (IPackageFragmentRoot packageFragmentRoot : packageFragmentRoots) {

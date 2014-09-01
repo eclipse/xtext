@@ -40,7 +40,6 @@ import org.eclipse.jdt.core.dom.Name;
 import org.eclipse.jdt.core.dom.SimpleName;
 import org.eclipse.jdt.core.dom.TagElement;
 import org.eclipse.jdt.core.dom.TextElement;
-import org.eclipse.jdt.internal.corext.dom.ASTNodes;
 import org.eclipse.jdt.ui.JavaElementLabels;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
@@ -171,7 +170,8 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 				if (fragments.size() > 0) {
 					Object first = fragments.get(0);
 					if (first instanceof Name) {
-						String name = ASTNodes.getSimpleNameIdentifier((Name) first);
+						@SuppressWarnings("restriction")
+						String name = org.eclipse.jdt.internal.corext.dom.ASTNodes.getSimpleNameIdentifier((Name) first);
 						if (exceptionNamesToURI.containsKey(name)) {
 							exceptionNamesToURI.put(name, null);
 						}
