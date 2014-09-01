@@ -196,8 +196,8 @@ public class XtextLinker extends Linker {
 			// unload generated metamodels as they will be recreated during linking 
 			for (AbstractMetamodelDeclaration metamodelDeclaration : ((Grammar) root).getMetamodelDeclarations()) {
 				if (metamodelDeclaration instanceof GeneratedMetamodel) {
-					EPackage ePackage = ((GeneratedMetamodel) metamodelDeclaration).getEPackage();
-					if (ePackage != null) {
+					EPackage ePackage = (EPackage) metamodelDeclaration.eGet(XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE, false);
+					if (ePackage != null && !ePackage.eIsProxy()) {
 						Resource resource = ePackage.eResource();
 						if (resource != null && resource.getResourceSet() != null) {
 							if (unloader != null) {
