@@ -1547,6 +1547,36 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testIncompleteCasesOnEnum_11() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val Enum<?> e = null");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("switch(e) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("java.lang.annotation.RetentionPolicy: e.toString");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("java.lang.annotation.ElementType: e.toString");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoIssues(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testSwitchDeclaredParameter() {
     try {
       StringConcatenation _builder = new StringConcatenation();
