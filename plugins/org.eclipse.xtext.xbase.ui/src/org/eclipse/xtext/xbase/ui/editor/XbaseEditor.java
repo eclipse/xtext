@@ -294,6 +294,9 @@ public class XbaseEditor extends XtextEditor {
 	protected boolean isCompiledWithJSR45() {
 		//TODO the information whether this was compiled with JSR-45, needs to be done on a per resource base, since a project might 
 		// have a different configuration than its jars. Storing it in the trace file (together with other compilation options and version information) seems appropriate.
+		// is this editor is not based on a resource it doesn't live in a project. We don't know whether it was compiled with JSR-45.
+		if (getResource()==null)
+			return true;
 		Set<OutputConfiguration> configurations = outputConfigurationProvider.getOutputConfigurations(getResource().getProject());
 		for (OutputConfiguration config : configurations) {
 			if (config.isInstallDslAsPrimarySource()) {
