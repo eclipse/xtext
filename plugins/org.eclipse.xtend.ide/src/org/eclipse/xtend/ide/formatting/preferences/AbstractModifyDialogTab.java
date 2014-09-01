@@ -25,6 +25,7 @@ import com.google.inject.Inject;
  * 
  * @author Dennis Huebner - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 
 	protected static final String GENERAL_SETTINGS = "General settings";

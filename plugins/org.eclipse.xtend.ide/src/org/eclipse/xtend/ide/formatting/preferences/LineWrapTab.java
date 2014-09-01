@@ -14,6 +14,7 @@ import java.util.Observer;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
+
 import static org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys.*;
 
 import com.google.common.collect.Maps;
@@ -22,6 +23,7 @@ import com.google.inject.Inject;
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class LineWrapTab extends AbstractModifyDialogTab {
 	private Map<String, String> fPreviewPreferences;
 	private static final String DEFAULT_PREVIEW_LINE_WRAP = "40";

@@ -22,6 +22,7 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  * @author Holger Schill
  */
+@SuppressWarnings("restriction")
 public class XtendImages extends XbaseImages2 {
 
 	@Inject

@@ -40,6 +40,7 @@ import org.eclipse.xtext.xbase.formatting.IBasicFormatter;
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("restriction")
 public class XtendFormatterPreview implements Observer {
 	
 	private final static Logger log = Logger.getLogger(XtendFormatterPreview.class);

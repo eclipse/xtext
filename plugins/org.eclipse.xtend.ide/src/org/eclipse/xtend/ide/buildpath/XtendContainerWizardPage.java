@@ -9,7 +9,6 @@ package org.eclipse.xtend.ide.buildpath;
 
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.internal.ui.JavaPluginImages;
 import org.eclipse.jdt.ui.wizards.IClasspathContainerPage;
 import org.eclipse.jdt.ui.wizards.NewElementWizardPage;
 import org.eclipse.osgi.util.NLS;
@@ -25,10 +24,11 @@ public class XtendContainerWizardPage extends NewElementWizardPage implements IC
 
 	private IClasspathEntry containerEntry;
 
+	@SuppressWarnings("restriction")
 	public XtendContainerWizardPage() {
 		super("XtendClassPathContainer"); //$NON-NLS-1$
 		setTitle(Messages.XtendClasspathContainer_Description);
-		setImageDescriptor(JavaPluginImages.DESC_WIZBAN_ADD_LIBRARY);
+		setImageDescriptor(org.eclipse.jdt.internal.ui.JavaPluginImages.DESC_WIZBAN_ADD_LIBRARY);
 		setDescription(Messages.XtendContainerWizardPage_Desc);
 		this.containerEntry = JavaCore.newContainerEntry(XtendContainerInitializer.XTEND_LIBRARY_PATH);
 	}

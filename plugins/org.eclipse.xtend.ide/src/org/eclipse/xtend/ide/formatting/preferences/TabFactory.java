@@ -8,6 +8,7 @@ import org.eclipse.jdt.internal.ui.preferences.formatter.IModifyDialogTabPage.IM
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
+@SuppressWarnings("restriction")
 public class TabFactory {
 
 	@Inject

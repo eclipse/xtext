@@ -17,6 +17,7 @@ import com.google.inject.Inject;
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class FormatterPreferencePage extends ProfilePreferencePage {
 	private static final String PREF_PAGE_ID = "org.eclipse.xtend.core.Xtend.formatter";
 	private static final String PROP_PAGE_ID = PREF_PAGE_ID + ".propertyPage";

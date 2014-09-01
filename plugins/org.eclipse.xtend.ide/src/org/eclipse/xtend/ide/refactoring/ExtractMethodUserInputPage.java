@@ -46,6 +46,7 @@ import com.google.inject.Inject;
  * 
  * @author Jan Koehnlein
  */
+@SuppressWarnings("restriction")
 public class ExtractMethodUserInputPage extends UserInputWizardPage {
 
 	@Inject

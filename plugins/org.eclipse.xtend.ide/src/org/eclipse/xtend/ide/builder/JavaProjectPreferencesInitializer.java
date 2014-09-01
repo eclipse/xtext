@@ -14,7 +14,6 @@ import org.eclipse.core.runtime.preferences.DefaultScope;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.core.runtime.preferences.IScopeContext;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.internal.launching.LaunchingPlugin;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.osgi.service.prefs.BackingStoreException;
 
@@ -34,6 +33,7 @@ public class JavaProjectPreferencesInitializer {
 
 	private static Logger log = Logger.getLogger(JavaProjectPreferencesInitializer.class);
 
+	@SuppressWarnings("restriction")
 	@Inject
 	public void addOwnFileExtensionsToJavaBuildResourceCopyFilter(FileExtensionProvider extensionProvider) {
 		@SuppressWarnings("deprecation")
@@ -43,7 +43,7 @@ public class JavaProjectPreferencesInitializer {
 		// of replacing all RESOURCE_COPY_FILTERs with its own filter. Calling getNode(LaunchingPlugin.ID_PLUGIN) 
 		// causes LaunchingPreferenceInitializer to be executed that afterwards we can append our filters safely.    
 		// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=395366
-		defaultScope.getNode(LaunchingPlugin.ID_PLUGIN);
+		defaultScope.getNode(org.eclipse.jdt.internal.launching.LaunchingPlugin.ID_PLUGIN);
 
 		IEclipsePreferences dnode = defaultScope.getNode(JavaCore.PLUGIN_ID);
 		if (dnode == null)

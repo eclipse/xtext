@@ -44,6 +44,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class XtendBuilderParticipant extends BuilderParticipant {
 
 	private static Logger LOGGER = Logger.getLogger(XtendBuilderParticipant.class);

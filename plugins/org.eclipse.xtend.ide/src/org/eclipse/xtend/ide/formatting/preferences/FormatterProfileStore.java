@@ -22,6 +22,7 @@ import org.eclipse.jdt.internal.ui.preferences.formatter.ProfileStore;
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class FormatterProfileStore extends ProfileStore {
 
 	public static final String XTEND_PROFILES_KEY = "XtendFormatterProfile";

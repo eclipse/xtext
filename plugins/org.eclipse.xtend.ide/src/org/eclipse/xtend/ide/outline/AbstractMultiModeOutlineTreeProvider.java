@@ -43,6 +43,7 @@ import com.google.inject.Inject;
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOutlineTreeProvider {
 
 	@Inject

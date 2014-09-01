@@ -11,12 +11,14 @@ import java.util.Map;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
+
 import static org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys.*;
 
 
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class WhiteSpaceTab extends AbstractModifyDialogTab {
 
 	public WhiteSpaceTab(IModificationListener modifyListener, Map<String, String> workingValues) {

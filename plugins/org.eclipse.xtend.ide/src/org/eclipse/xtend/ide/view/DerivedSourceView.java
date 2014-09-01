@@ -86,6 +86,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * @author Michael Clay
  */
+@SuppressWarnings("restriction")
 public class DerivedSourceView extends AbstractSourceView implements IResourceChangeListener {
 	protected static final int VERTICAL_RULER_WIDTH = 12;
 	protected static final int OVERVIEW_RULER_WIDTH = 12;

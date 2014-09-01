@@ -28,6 +28,7 @@ import org.eclipse.xtext.ui.IImageHelper.IImageDescriptorHelper;
 /**
  * @author Holger Schill - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class AbstractNewXtendElementWizard extends NewElementWizard {
 
 	private AbstractNewXtendElementWizardPage page;
