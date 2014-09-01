@@ -15,6 +15,33 @@ import org.junit.Test
 class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 	
 	@Test
+	def testDeprecatedSort() {
+		assertCompilesTo('''
+			class C {
+				def m(Iterable<String> it) {
+					it.sort [ $0.compareTo($1) ]
+				}
+			}
+		''', '''
+			import java.util.Comparator;
+			import java.util.List;
+			import org.eclipse.xtext.xbase.lib.IterableExtensions;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public List<String> m(final Iterable<String> it) {
+			    final Comparator<String> _function = new Comparator<String>() {
+			      public int compare(final String $0, final String $1) {
+			        return $0.compareTo($1);
+			      }
+			    };
+			    return IterableExtensions.<String>sortWith(it, _function);
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def testExtensionImportVsDefaultExtensions_01() {
 		assertCompilesTo('''
 			import static extension D.*

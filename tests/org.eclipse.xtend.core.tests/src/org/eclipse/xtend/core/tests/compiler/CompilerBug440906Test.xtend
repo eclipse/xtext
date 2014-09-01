@@ -48,7 +48,7 @@ class CompilerBug440906Test extends AbstractXtendCompilerTest {
 			  public List<Object> m2() {
 			    Function2<Object, Object, Integer> _m = this.m();
 			    final Function2<Object, Object, Integer> _final_m = _m;
-			    return IterableExtensions.<Object>sort(Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList()), new Comparator<Object>() {
+			    return IterableExtensions.<Object>sortWith(Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList()), new Comparator<Object>() {
 			        public int compare(Object arg0, Object arg1) {
 			          return _final_m.apply(arg0, arg1);
 			        }
@@ -96,7 +96,7 @@ class CompilerBug440906Test extends AbstractXtendCompilerTest {
 			      _xblockexpression = this.m();
 			    }
 			    final Function2<Object, Object, Integer> _final_xblockexpression = _xblockexpression;
-			    return IterableExtensions.<Object>sort(Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList()), new Comparator<Object>() {
+			    return IterableExtensions.<Object>sortWith(Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList()), new Comparator<Object>() {
 			        public int compare(Object arg0, Object arg1) {
 			          return _final_xblockexpression.apply(arg0, arg1);
 			        }
