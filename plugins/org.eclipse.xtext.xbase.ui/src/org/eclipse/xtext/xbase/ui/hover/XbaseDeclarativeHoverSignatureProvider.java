@@ -15,7 +15,6 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.internal.ui.JavaPlugin;
 import org.eclipse.jdt.ui.JavaElementLabels;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ILabelProvider;
@@ -373,8 +372,9 @@ public class XbaseDeclarativeHoverSignatureProvider {
 		return "";
 	}
 
+	@SuppressWarnings("restriction")
 	protected URL getURL(ImageDescriptor descriptor) {
-		return JavaPlugin.getDefault().getImagesOnFSRegistry().getImageURL(descriptor);
+		return org.eclipse.jdt.internal.ui.JavaPlugin.getDefault().getImagesOnFSRegistry().getImageURL(descriptor);
 	}
 
 	protected String getLabel(EObject object) {

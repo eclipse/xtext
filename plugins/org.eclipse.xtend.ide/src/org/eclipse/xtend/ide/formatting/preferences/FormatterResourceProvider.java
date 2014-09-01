@@ -10,7 +10,6 @@ package org.eclipse.xtend.ide.formatting.preferences;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.codetemplates.ui.preferences.TemplateResourceProvider;
 import org.eclipse.xtext.ui.editor.embedded.IEditedResourceProvider;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 
@@ -26,8 +25,9 @@ public class FormatterResourceProvider implements IEditedResourceProvider {
 	
 	public XtextResource createResource() {
 		ResourceSet resourceSet = resourceSetProvider.get(null);
+		@SuppressWarnings("restriction")
 		XtextResource result = (XtextResource) resourceSet.createResource(URI
-				.createURI(TemplateResourceProvider.SYNTHETIC_SCHEME + ":/" + "FormatterPreview.xtend"));
+				.createURI(org.eclipse.xtext.ui.codetemplates.ui.preferences.TemplateResourceProvider.SYNTHETIC_SCHEME + ":/" + "FormatterPreview.xtend"));
 		result.setValidationDisabled(true);
 		return result;
 	}

@@ -19,8 +19,8 @@ import org.eclipse.xtext.xbase.compiler.output.SharedAppendableState;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceFactory;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceSerializer;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 
 /**
  * A specialized {@link StringConcatenation} that will properly convert instances of
@@ -52,8 +52,8 @@ public class ImportingStringConcatenation extends StringConcatenation {
   }
   
   protected String _getStringRepresentation(final JvmTypeReference object) {
-    OwnedConverter _ownedConverter = new OwnedConverter(this.typeReferenceOwner, true);
-    final LightweightTypeReference reference = _ownedConverter.toLightweightReference(object);
+    LightweightTypeReferenceFactory _lightweightTypeReferenceFactory = new LightweightTypeReferenceFactory(this.typeReferenceOwner, true);
+    final LightweightTypeReference reference = _lightweightTypeReferenceFactory.toLightweightReference(object);
     return this._getStringRepresentation(reference);
   }
   

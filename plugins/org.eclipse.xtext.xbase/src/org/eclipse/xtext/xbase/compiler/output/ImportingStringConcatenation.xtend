@@ -14,8 +14,8 @@ import org.eclipse.xtext.xbase.compiler.ImportManager
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceFactory
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceSerializer
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 
 /**
  * A specialized {@link StringConcatenation} that will properly convert instances of 
@@ -42,7 +42,7 @@ class ImportingStringConcatenation extends StringConcatenation {
 		return importManager.serialize(object).toString()
 	}
 	def dispatch protected String getStringRepresentation(JvmTypeReference object) {
-		val reference = new OwnedConverter(typeReferenceOwner, true).toLightweightReference(object)
+		val reference = new LightweightTypeReferenceFactory(typeReferenceOwner, true).toLightweightReference(object)
 		return _getStringRepresentation(reference)
 	}
 	def dispatch protected String getStringRepresentation(LightweightTypeReference object) {

@@ -68,6 +68,7 @@ import com.google.common.collect.Lists;
 /**
  * @author Holger Schill - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class JvmImplementationOpener {
 
 	private final static Logger log = Logger.getLogger(JvmImplementationOpener.class);

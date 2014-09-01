@@ -54,6 +54,7 @@ import com.google.inject.Singleton;
  * 
  * @author Dennis Huebner (dhuebner) - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 @Singleton
 public class MultiOrganizeImportsHandler extends AbstractHandler {
 	@Inject

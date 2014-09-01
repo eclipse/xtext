@@ -81,7 +81,9 @@ public class NewFeatureNameUtil {
 			status.addError("Discouraged name '" + newFeatureName + "'. Name should start with a lowercase letter. ");
 		if (isKeyword(newFeatureName)) 
 			status.addFatalError("'" + newFeatureName + "' is keyword.");
-		if(org.eclipse.xtext.common.types.access.impl.Primitives.forName(newFeatureName) != null) 
+		@SuppressWarnings("restriction")
+		Class<?> asPrimitive = org.eclipse.xtext.common.types.access.impl.Primitives.forName(newFeatureName);
+		if(asPrimitive != null) 
 			status.addFatalError("'" + newFeatureName + "' is reserved.");
 		if (isLookupInScope && featureCallScope != null && isAlreadyDefined(newFeatureName)) 
 			status.addError("The name '" + newFeatureName + "' is already defined in this scope.");

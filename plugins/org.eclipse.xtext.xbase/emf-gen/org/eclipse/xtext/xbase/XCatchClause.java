@@ -16,6 +16,12 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
  * A representation of the model object '<em><b>XCatch Clause</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * @since 2.7
+ * @noextend This interface is not intended to be extended by clients.
+ * @noimplement This interface is not intended to be implemented by clients.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

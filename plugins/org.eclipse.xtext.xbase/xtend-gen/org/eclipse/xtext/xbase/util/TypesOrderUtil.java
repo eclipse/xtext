@@ -16,6 +16,9 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 /**
+ * Small utilitiy class that allows to check whether a given type was already handled in a chain
+ * of instanceof checks, e.g to validate catch-clauses or switch expressions.
+ * 
  * @author Anton Kosyakov - Initial contribution and API
  */
 @SuppressWarnings("all")

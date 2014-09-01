@@ -9,6 +9,9 @@ package org.eclipse.xtext.xbase;
 
 /**
  * Use this class to register components to be used without the IDE.
+ * 
+ * @noreference This class is not intended to be referenced by clients.
+ * @since 2.7
  */
 public class XbaseRuntimeModule extends AbstractXbaseRuntimeModule {
 	

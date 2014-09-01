@@ -22,6 +22,7 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Shell;
 
+@SuppressWarnings("restriction")
 public class HierarchyInformationPresenter extends InformationPresenter {
 	private final ISourceViewer sourceViewer;
 	private final IJavaElement javaElement;

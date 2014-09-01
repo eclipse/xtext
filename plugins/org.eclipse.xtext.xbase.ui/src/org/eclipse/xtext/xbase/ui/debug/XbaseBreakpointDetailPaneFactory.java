@@ -25,6 +25,7 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("restriction")
 public class XbaseBreakpointDetailPaneFactory extends BreakpointDetailPaneFactory {
 	public static final String XBASE_DETAIL_PANE = "org.eclipse.xtext.xbase.debug.DetailPane";
 

@@ -74,8 +74,8 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 
 import static org.eclipse.xtext.common.types.TypesPackage.Literals.*

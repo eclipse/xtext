@@ -39,7 +39,7 @@ import org.osgi.service.prefs.BackingStoreException;
  * 
  * The model for the set of profiles which are available in the workbench.
  */
-@SuppressWarnings({ "rawtypes", "unchecked" })
+@SuppressWarnings({ "rawtypes", "unchecked", "restriction" })
 public abstract class AbstractProfileManager extends org.eclipse.jdt.internal.ui.preferences.formatter.ProfileManager {
 
 	/**

@@ -26,9 +26,6 @@ import org.eclipse.jdt.core.search.IJavaSearchScope;
 import org.eclipse.jdt.core.search.SearchEngine;
 import org.eclipse.jdt.core.search.SearchPattern;
 import org.eclipse.jdt.core.search.TypeNameRequestor;
-import org.eclipse.jdt.internal.compiler.env.AccessRestriction;
-import org.eclipse.jdt.internal.core.search.BasicSearchEngine;
-import org.eclipse.jdt.internal.core.search.IRestrictedAccessTypeRequestor;
 import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
@@ -309,20 +306,21 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 		return fqNameAsString;
 	}
 
+	@SuppressWarnings("restriction")
 	protected void createImportProposals(final JvmDeclaredType contextType, final Issue issue, String typeName, IJavaSearchScope searchScope,
 			final IssueResolutionAcceptor acceptor) throws JavaModelException {
 		if(contextType != null) {
 			final IVisibilityHelper visibilityHelper = getVisibilityHelper(contextType);
 			final Pair<String, String> packageAndType = typeNameGuesser.guessPackageAndTypeName(contextType, typeName);
 			final String wantedPackageName = packageAndType.getFirst();
-			BasicSearchEngine searchEngine = new BasicSearchEngine();
+			org.eclipse.jdt.internal.core.search.BasicSearchEngine searchEngine = new org.eclipse.jdt.internal.core.search.BasicSearchEngine();
 			final char[] wantedPackageChars = (isEmpty(wantedPackageName)) ? null : wantedPackageName.toCharArray();
 			final String wantedTypeName = packageAndType.getSecond();
 			searchEngine.searchAllTypeNames(wantedPackageChars, SearchPattern.R_EXACT_MATCH, wantedTypeName.toCharArray(),
-					SearchPattern.R_EXACT_MATCH, IJavaSearchConstants.TYPE, searchScope, new IRestrictedAccessTypeRequestor() {
+					SearchPattern.R_EXACT_MATCH, IJavaSearchConstants.TYPE, searchScope, new org.eclipse.jdt.internal.core.search.IRestrictedAccessTypeRequestor() {
 						
 						public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName, char[][] enclosingTypeNames,
-								String path, AccessRestriction access) {
+								String path, org.eclipse.jdt.internal.compiler.env.AccessRestriction access) {
 							final String qualifiedTypeName = getQualifiedTypeName(packageName, enclosingTypeNames,
 									simpleTypeName);
 							if(access == null || (access.getProblemId() != IProblem.ForbiddenReference && !access.ignoreIfBetter())){
@@ -362,6 +360,7 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 		return visibilityHelper;
 	}
 	
+	@SuppressWarnings("restriction")
 	protected boolean createConstructorProposals(final JvmDeclaredType contextType, final Issue issue, String typeName,
 			IJavaSearchScope searchScope, final IssueResolutionAcceptor acceptor) throws JavaModelException {
 		final boolean[] result = new boolean[] { false };
@@ -373,13 +372,13 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 			if (typeName.endsWith(wantedTypeName)) {
 				return false;
 			}
-			BasicSearchEngine searchEngine = new BasicSearchEngine();
+			org.eclipse.jdt.internal.core.search.BasicSearchEngine searchEngine = new org.eclipse.jdt.internal.core.search.BasicSearchEngine();
 			final char[] wantedPackageChars = (isEmpty(wantedPackageName)) ? null : wantedPackageName.toCharArray();
 			searchEngine.searchAllTypeNames(wantedPackageChars, SearchPattern.R_EXACT_MATCH, wantedTypeName.toCharArray(),
-					SearchPattern.R_EXACT_MATCH, IJavaSearchConstants.TYPE, searchScope, new IRestrictedAccessTypeRequestor() {
+					SearchPattern.R_EXACT_MATCH, IJavaSearchConstants.TYPE, searchScope, new org.eclipse.jdt.internal.core.search.IRestrictedAccessTypeRequestor() {
 						
 						public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName, char[][] enclosingTypeNames,
-								String path, AccessRestriction access) {
+								String path, org.eclipse.jdt.internal.compiler.env.AccessRestriction access) {
 							final String qualifiedTypeName = getQualifiedTypeName(packageName, enclosingTypeNames,
 									simpleTypeName);
 							if(access == null || (access.getProblemId() != IProblem.ForbiddenReference && !access.ignoreIfBetter())){

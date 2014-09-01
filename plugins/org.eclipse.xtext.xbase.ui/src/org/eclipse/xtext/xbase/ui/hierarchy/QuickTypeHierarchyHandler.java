@@ -28,6 +28,7 @@ import com.google.inject.Inject;
 /**
  * @author Holger Schill - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class QuickTypeHierarchyHandler extends AbstractJvmElementHandler {
 
 	@Inject

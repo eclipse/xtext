@@ -15,6 +15,7 @@ import org.eclipse.swt.widgets.Group;
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class IndentationTab extends AbstractModifyDialogTab {
 	
 	public IndentationTab(IModificationListener modifyListener, Map<String, String> workingValues) {

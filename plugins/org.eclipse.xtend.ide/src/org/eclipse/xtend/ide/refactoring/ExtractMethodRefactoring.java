@@ -88,6 +88,7 @@ import com.google.inject.Provider;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class ExtractMethodRefactoring extends Refactoring {
 
 	public static final Logger LOG = Logger.getLogger(ExtractMethodRefactoring.class);

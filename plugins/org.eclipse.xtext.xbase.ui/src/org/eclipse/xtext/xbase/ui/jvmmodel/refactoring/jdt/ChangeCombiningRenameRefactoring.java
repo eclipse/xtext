@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.ui.refactoring.participant.TextChangeCombi
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class ChangeCombiningRenameRefactoring extends ProcessorBasedRefactoring {
 	
 	private TextChangeCombiner textChangeCombiner;

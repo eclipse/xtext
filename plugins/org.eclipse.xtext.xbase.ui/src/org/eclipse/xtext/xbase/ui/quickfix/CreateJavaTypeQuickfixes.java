@@ -56,6 +56,7 @@ import com.google.inject.Inject;
  *
  * @author Jan Koehnlein - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class CreateJavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 
 	private static final Logger LOG = Logger.getLogger(CreateJavaTypeQuickfixes.class);

@@ -10,8 +10,8 @@ package org.eclipse.xtext.xbase.ui.validation;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.internal.core.JavaProject;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
@@ -158,8 +158,9 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 	protected String javaValue(final String javaIssueCode) {
 		String delegatedValue;
 		String decodedDelegateKey = XbaseSeverityConverter.decodeDelegationKey(javaIssueCode).getFirst();
-		if (getProject() != null && getProject().isOpen() && JavaProject.hasJavaNature(getProject())) {
-			delegatedValue = JavaCore.create(getProject()).getOption(decodedDelegateKey, true);
+		IJavaProject javaProject = JavaCore.create(getProject());
+		if (javaProject != null && javaProject.exists() && javaProject.getProject().isAccessible()) {
+			delegatedValue = javaProject.getOption(decodedDelegateKey, true);
 		} else {
 			delegatedValue = JavaCore.getOption(decodedDelegateKey);
 		}

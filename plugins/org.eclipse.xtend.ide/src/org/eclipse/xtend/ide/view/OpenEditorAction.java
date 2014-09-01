@@ -23,6 +23,7 @@ import org.eclipse.xtext.util.ITextRegion;
 /**
  * @author Michael Clay - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class OpenEditorAction extends Action {
 	private static final String COMPILATION_UNIT_EDITOR_ID = "org.eclipse.jdt.ui.CompilationUnitEditor";
 	private DerivedSourceView derivedSourceView;

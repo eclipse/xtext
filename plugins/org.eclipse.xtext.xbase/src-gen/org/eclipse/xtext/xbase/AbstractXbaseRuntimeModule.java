@@ -13,6 +13,9 @@ import com.google.inject.name.Names;
 
 /**
  * Manual modifications go to {org.eclipse.xtext.xbase.XbaseRuntimeModule}
+ * 
+ * @noreference This class is not intended to be referenced by clients.
+ * @since 2.7
  */
  @SuppressWarnings("all")
 public abstract class AbstractXbaseRuntimeModule extends DefaultRuntimeModule {

@@ -1,5 +1,71 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtend.core" version="2">
+    <resource path="emf-gen/org/eclipse/xtend/core/xtend/AnonymousClass.java" type="org.eclipse.xtend.core.xtend.AnonymousClass">
+        <filter comment="Xtend impl" id="571473929">
+            <message_arguments>
+                <message_argument value="XExpression"/>
+                <message_argument value="AnonymousClass"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtend/core/xtend/RichString.java" type="org.eclipse.xtend.core.xtend.RichString">
+        <filter comment="Xtend impl" id="571473929">
+            <message_arguments>
+                <message_argument value="XBlockExpression"/>
+                <message_argument value="RichString"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtend/core/xtend/RichStringForLoop.java" type="org.eclipse.xtend.core.xtend.RichStringForLoop">
+        <filter comment="Xtend impl" id="571473929">
+            <message_arguments>
+                <message_argument value="XForLoopExpression"/>
+                <message_argument value="RichStringForLoop"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtend/core/xtend/RichStringIf.java" type="org.eclipse.xtend.core.xtend.RichStringIf">
+        <filter comment="Xtend impl" id="571473929">
+            <message_arguments>
+                <message_argument value="XExpression"/>
+                <message_argument value="RichStringIf"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtend/core/xtend/RichStringLiteral.java" type="org.eclipse.xtend.core.xtend.RichStringLiteral">
+        <filter comment="Xtend impl" id="571473929">
+            <message_arguments>
+                <message_argument value="XStringLiteral"/>
+                <message_argument value="RichStringLiteral"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtend/core/xtend/XtendVariableDeclaration.java" type="org.eclipse.xtend.core.xtend.XtendVariableDeclaration">
+        <filter comment="Xtend impl" id="571473929">
+            <message_arguments>
+                <message_argument value="XVariableDeclaration"/>
+                <message_argument value="XtendVariableDeclaration"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src-gen/org/eclipse/xtend/core/AbstractXtendRuntimeModule.java" type="org.eclipse.xtend.core.AbstractXtendRuntimeModule">
+        <filter comment="Xtend impl" id="623939596">
+            <message_arguments>
+                <message_argument value="XtypeFactory"/>
+                <message_argument value="AbstractXtendRuntimeModule"/>
+                <message_argument value="eINSTANCE"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtend/core/XtendRuntimeModule.java" type="org.eclipse.xtend.core.XtendRuntimeModule">
+        <filter comment="Xtend impl" id="623939596">
+            <message_arguments>
+                <message_argument value="XbaseFactory"/>
+                <message_argument value="XtendRuntimeModule"/>
+                <message_argument value="eINSTANCE"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtend/core/compiler/batch/XtendBatchCompiler.java" type="org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler">
         <filter comment="Non-API type usage" id="643842064">
             <message_arguments>
@@ -9,11 +75,36 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtend/core/jvmmodel/IXtendJvmAssociations.java" type="org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations$Impl">
+        <filter comment="Xtend im" id="571473929">
+            <message_arguments>
+                <message_argument value="JvmModelAssociator"/>
+                <message_argument value="Impl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtend/core/jvmmodel/XtendJvmModelInferrer.java" type="org.eclipse.xtend.core.jvmmodel.XtendJvmModelInferrer">
+        <filter comment="Xtend impl" id="574619656">
+            <message_arguments>
+                <message_argument value="IJvmModelInferrer"/>
+                <message_argument value="XtendJvmModelInferrer"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtend/core/parser/XtendNodeModelBuilder.java" type="org.eclipse.xtend.core.parser.XtendNodeModelBuilder">
         <filter comment="Customizing necessary" id="571473929">
             <message_arguments>
                 <message_argument value="NodeModelBuilder"/>
                 <message_argument value="XtendNodeModelBuilder"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtend/core/typesystem/XtendReentrantTypeResolver.java" type="org.eclipse.xtend.core.typesystem.XtendReentrantTypeResolver">
+        <filter comment="Xtend impl" id="640712815">
+            <message_arguments>
+                <message_argument value="XtypeFactory"/>
+                <message_argument value="XtendReentrantTypeResolver"/>
+                <message_argument value="createXComputedTypeReference()"/>
             </message_arguments>
         </filter>
     </resource>
@@ -350,9 +441,21 @@
         </filter>
     </resource>
     <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/TypeLookupImpl.java" type="org.eclipse.xtend.core.macro.declaration.TypeLookupImpl">
+        <filter comment="Xtend impl" id="574619656">
+            <message_arguments>
+                <message_argument value="SourceTypeLookup"/>
+                <message_argument value="TypeLookupImpl"/>
+            </message_arguments>
+        </filter>
         <filter comment="Non-API type reference" id="574619656">
             <message_arguments>
                 <message_argument value="TypeLookup"/>
+                <message_argument value="TypeLookupImpl"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Xtend impl" id="574619656">
+            <message_arguments>
+                <message_argument value="UpstreamTypeLookup"/>
                 <message_argument value="TypeLookupImpl"/>
             </message_arguments>
         </filter>

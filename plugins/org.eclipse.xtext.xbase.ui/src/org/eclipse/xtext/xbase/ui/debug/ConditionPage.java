@@ -25,6 +25,7 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("restriction")
 public class ConditionPage extends JavaBreakpointPage {
 	@Inject
 	private IResourceServiceProvider.Registry registry;

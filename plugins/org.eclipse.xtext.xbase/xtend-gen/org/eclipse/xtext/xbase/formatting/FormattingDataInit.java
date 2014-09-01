@@ -1,7 +1,7 @@
 package org.eclipse.xtext.xbase.formatting;
 
 import org.eclipse.xtext.preferences.PreferenceKey;
-import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @SuppressWarnings("all")
 public class FormattingDataInit {
@@ -40,7 +40,8 @@ public class FormattingDataInit {
   }
   
   public String toString() {
-    ToStringHelper _toStringHelper = new ToStringHelper();
-    return _toStringHelper.toString(this);
+    ToStringBuilder _toStringBuilder = new ToStringBuilder(this);
+    ToStringBuilder _addAllFields = _toStringBuilder.addAllFields();
+    return _addAllFields.toString();
   }
 }

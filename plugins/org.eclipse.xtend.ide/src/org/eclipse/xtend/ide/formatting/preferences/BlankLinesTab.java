@@ -16,6 +16,7 @@ import org.eclipse.swt.widgets.Group;
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class BlankLinesTab extends AbstractModifyDialogTab {
 
 	public BlankLinesTab(IModificationListener modifyListener, Map<String, String> workingValues) {

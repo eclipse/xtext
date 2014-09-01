@@ -24,5 +24,5 @@ Export-Package: org.eclipse.xtext.common.types,
  org.eclipse.xtext.common.types.access.reflect;x-internal:=true,
  org.eclipse.xtext.common.types.descriptions;x-internal:=true,
  org.eclipse.xtext.common.types.impl;x-internal:=true,
- org.eclipse.xtext.common.types.util;x-friends:="org.eclipse.xtext.common.types.edit",
+ org.eclipse.xtext.common.types.util;x-friends:="org.eclipse.xtext.common.types.edit,org.eclipse.xtext.xbase.ui,org.eclipse.xtend.ide",
  org.eclipse.xtext.common.types.xtext;x-internal:=true
