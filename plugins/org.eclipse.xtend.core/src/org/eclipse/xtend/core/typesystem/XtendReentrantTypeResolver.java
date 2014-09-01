@@ -45,6 +45,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -240,7 +241,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 				}
 				LightweightTypeReference parameterType = conformanceComputer.getCommonSuperType(parameterTypes, resolvedTypes.getReferenceOwner());
 				if (parameterType == null) {
-					throw new IllegalStateException("TODO: handle broken models properly");
+					return resolvedTypes.getReferenceOwner().newUnknownTypeReference().toJavaCompliantTypeReference();
 				}
 				return typeResolver.toJavaCompliantTypeReference(parameterType, session);
 			} finally {
@@ -775,29 +776,35 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 				IScope typeScope = featureScopeSession.getScope(constructorCall, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, resolvedTypes);
 				final JvmDeclaredType type = anonymousClassUtil.getSuperTypeNonResolving(anonymousClass, typeScope);
 				if (type == null) {
-					break;
-				}
-				final JvmParameterizedTypeReference superTypeReference = createSuperTypeReference(type, constructorCall);
-				requestCapturedLocalVariables(superTypeReference, localClass, resolvedTypes, resolvedTypesByContext, new IAcceptor<JvmTypeReference>() {
-					@SuppressWarnings("deprecation")
-					public void accept(JvmTypeReference capturingTypeReference) {
-						casted.setEquivalent(capturingTypeReference);
-						IFeatureScopeSession mySession = addThisAndSuper(nestedSession, resolvedTypes.getReferenceOwner(), localClass, superTypeReference, false);
-						if(type.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE && ((JvmGenericType) type).isInterface()) {
-							localClass.getSuperTypes().add(0, typesBuilder.newTypeRef(localClass, Object.class));
-							inferAnonymousClassConstructor(anonymousClass, localClass, type);
-						} else {
-							for(JvmMember superMember: type.getMembers()) {
-								if (superMember instanceof JvmConstructor) {
-									JvmConstructor superTypeConstructor = (JvmConstructor) superMember;
-									boolean visible = mySession.isVisible(superTypeConstructor);
-									inferAnonymousClassConstructor(anonymousClass, localClass, superTypeConstructor, visible);
+					JvmUnknownTypeReference superTypeReference = TypesFactory.eINSTANCE.createJvmUnknownTypeReference();
+					requestCapturedLocalVariables(superTypeReference, localClass, resolvedTypes, resolvedTypesByContext, new IAcceptor<JvmTypeReference>() {
+						public void accept(JvmTypeReference capturingTypeReference) {
+							casted.setEquivalent(capturingTypeReference);
+							inferAnonymousClassConstructor(anonymousClass, localClass);
+						}
+					});
+				} else {
+					final JvmParameterizedTypeReference superTypeReference = createSuperTypeReference(type, constructorCall);
+					requestCapturedLocalVariables(superTypeReference, localClass, resolvedTypes, resolvedTypesByContext, new IAcceptor<JvmTypeReference>() {
+						@SuppressWarnings("deprecation")
+						public void accept(JvmTypeReference capturingTypeReference) {
+							casted.setEquivalent(capturingTypeReference);
+							IFeatureScopeSession mySession = addThisAndSuper(nestedSession, resolvedTypes.getReferenceOwner(), localClass, superTypeReference, false);
+							if(type.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE && ((JvmGenericType) type).isInterface()) {
+								localClass.getSuperTypes().add(0, typesBuilder.newTypeRef(localClass, Object.class));
+								inferAnonymousClassConstructor(anonymousClass, localClass);
+							} else {
+								for(JvmMember superMember: type.getMembers()) {
+									if (superMember instanceof JvmConstructor) {
+										JvmConstructor superTypeConstructor = (JvmConstructor) superMember;
+										boolean visible = mySession.isVisible(superTypeConstructor);
+										inferAnonymousClassConstructor(anonymousClass, localClass, superTypeConstructor, visible);
+									}
 								}
 							}
 						}
-					}
-				});
-				
+					});
+				}
 			}
 		}
 	}
@@ -845,7 +852,16 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 		return constructor;
 	}
 
+	/**
+	 * @deprecated use {@link #inferAnonymousClassConstructor(AnonymousClass, JvmGenericType)} instead.
+	 */
+	@Deprecated
 	protected JvmConstructor inferAnonymousClassConstructor(AnonymousClass anonymousClass, JvmGenericType inferredLocalClass, JvmDeclaredType superInterface) {
+		return inferAnonymousClassConstructor(anonymousClass, inferredLocalClass);
+	}
+
+	protected JvmConstructor inferAnonymousClassConstructor(AnonymousClass anonymousClass,
+			JvmGenericType inferredLocalClass) {
 		XConstructorCall constructorCall = anonymousClass.getConstructorCall();
 		JvmConstructor constructor = TypesFactory.eINSTANCE.createJvmConstructor();
 		inferredLocalClass.getMembers().add(constructor);
