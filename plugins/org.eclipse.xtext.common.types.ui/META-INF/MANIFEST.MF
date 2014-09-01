@@ -26,11 +26,11 @@ Require-Bundle: org.eclipse.xtext.common.types;bundle-version="2.7.0";visibility
 Import-Package: org.apache.log4j;version="1.2.15"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.common.types.access.jdt,
- org.eclipse.xtext.common.types.ui.navigation;x-internal:=true,
+ org.eclipse.xtext.common.types.ui.navigation;x-friends:="org.eclipse.xtext.xbase.ui",
  org.eclipse.xtext.common.types.ui.notification,
  org.eclipse.xtext.common.types.ui.query,
- org.eclipse.xtext.common.types.ui.refactoring;x-internal:=true,
- org.eclipse.xtext.common.types.ui.refactoring.participant;x-internal:=true,
+ org.eclipse.xtext.common.types.ui.refactoring;x-friends:="org.eclipse.xtext.xbase.ui,org.eclipse.xtend.ide",
+ org.eclipse.xtext.common.types.ui.refactoring.participant;x-friends:="org.eclipse.xtext.xbase.ui,org.eclipse.xtend.ide",
  org.eclipse.xtext.common.types.util.jdt,
  org.eclipse.xtext.common.types.xtext.ui
 Bundle-Localization: plugin

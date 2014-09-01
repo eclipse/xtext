@@ -26,6 +26,7 @@ import org.eclipse.xtext.xbase.ui.internal.XtypeActivator;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class CompositeSearchQuery extends JavaSearchQuery {
 
 	private List<ISearchQuery> children = newArrayList();

@@ -25,6 +25,7 @@ import org.eclipse.search.ui.text.RemoveAllEvent;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class CompositeSearchResult extends JavaSearchResult {
 	
 	private CompositeSearchQuery query;

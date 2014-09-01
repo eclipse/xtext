@@ -32,6 +32,7 @@ import com.google.inject.Inject;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class XbaseDocumentProvider extends XtextDocumentProvider {
 
 	protected class ClassFileInfo extends ElementInfo {

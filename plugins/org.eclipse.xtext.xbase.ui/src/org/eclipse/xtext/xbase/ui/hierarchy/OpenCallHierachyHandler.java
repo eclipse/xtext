@@ -18,6 +18,7 @@ import org.eclipse.xtext.xbase.ui.editor.AbstractJvmElementHandler;
 /**
  * @author Holger Schill - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class OpenCallHierachyHandler extends AbstractJvmElementHandler {
 
 	@Override

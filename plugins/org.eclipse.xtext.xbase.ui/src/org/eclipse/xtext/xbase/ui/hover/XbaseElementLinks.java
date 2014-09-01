@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.ui.hover;
 import java.net.URI;
 
 import org.eclipse.jdt.core.IJavaElement;
-import org.eclipse.jdt.internal.ui.viewsupport.JavaElementLinks;
 import org.eclipse.swt.browser.LocationEvent;
 import org.eclipse.swt.browser.LocationListener;
 import org.eclipse.xtext.ui.editor.hover.html.XtextElementLinks;
@@ -42,14 +41,15 @@ public class XbaseElementLinks extends XtextElementLinks {
 			this.handler = handler;
 		}
 		
+		@SuppressWarnings("restriction")
 		@Override
 		public void changing(LocationEvent event) {
 			URI uri = initURI(event);
 			if(uri == null)
 				return;
 			String scheme= uri.getScheme();
-			if (JavaElementLinks.JAVADOC_SCHEME.equals(scheme)) {
-				IJavaElement linkTarget= JavaElementLinks.parseURI(uri);
+			if (org.eclipse.jdt.internal.ui.viewsupport.JavaElementLinks.JAVADOC_SCHEME.equals(scheme)) {
+				IJavaElement linkTarget= org.eclipse.jdt.internal.ui.viewsupport.JavaElementLinks.parseURI(uri);
 				if (linkTarget == null)
 					return;
 				handler.handleInlineJavadocLink(linkTarget);

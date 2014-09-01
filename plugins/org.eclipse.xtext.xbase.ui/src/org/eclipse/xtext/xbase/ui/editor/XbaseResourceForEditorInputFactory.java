@@ -31,6 +31,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * @author Moritz Eysholdt
  */
+@SuppressWarnings("restriction")
 public class XbaseResourceForEditorInputFactory extends JavaClassPathResourceForIEditorInputFactory {
 	
 	@Inject
