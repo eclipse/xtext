@@ -278,9 +278,10 @@ public class XtextLinkingService extends DefaultLinkingService {
 		generatedEPackage.setNsPrefix(generatedMetamodel.getName());
 		generatedEPackage.setNsURI(nsURI);
 		final Resource generatedPackageResource = new EcoreResourceFactoryImpl().createResource(uri);
-		try {
+		XtextResourceSet resourceSet = (XtextResourceSet) generatedMetamodel.eResource().getResourceSet();
+		if (!resourceSet.getURIResourceMap().containsKey(generatedPackageResource.getURI())) {
 			generatedMetamodel.eResource().getResourceSet().getResources().add(generatedPackageResource);
-		} catch (IllegalStateException exception) {
+		} else {
 			generatedPackageResource.setURI(URI.createURI(nsURI+"_"+generatedMetamodel.hashCode()));
 			generatedMetamodel.eResource().getResourceSet().getResources().add(generatedPackageResource);
 		}
