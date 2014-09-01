@@ -127,12 +127,12 @@ strong {
 	min-height:60px;
 }
 
-#header_wrapper a {
+.flexslider a {
 	color: white;
 	text-decoration: underline;
 }
 
-#header_wrapper a .visited {
+.flexslider a .visited {
 	color: grey;
 	text-decoration: underline;
 }

@@ -89,7 +89,7 @@ override contents() '''
 </pre>
 				Type inference for parameterized inner classes was improved and supports types like
 <pre class="prettyprint lang-xtend linenums">
-Option<T>.Some
+Option&LT;T&GT;.Some
 </pre>
 				The validator will now detect use of deprecated API and is much better at finding dead code. Would you have spotted the following?
 				</p>
