@@ -732,7 +732,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 				childSession = childSession.captureLocalElements();
 			}
 		}
-		if (superType != null) {
+		if (superType != null && superType.getType() != null) {
 			ImmutableMap.Builder<QualifiedName, JvmIdentifiableElement> builder = ImmutableMap.builder();
 			builder.put(IFeatureNames.THIS, thisType);
 			builder.put(IFeatureNames.SUPER, superType.getType());
