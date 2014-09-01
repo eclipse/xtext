@@ -121,7 +121,11 @@ public class Xtext2EcoreTransformer {
 				Iterables.filter(grammar.getMetamodelDeclarations(), GeneratedMetamodel.class),
 				new Function<AbstractMetamodelDeclaration, EPackage>() {
 					public EPackage apply(AbstractMetamodelDeclaration param) {
-						return param.getEPackage();
+						EPackage pack = (EPackage) param.eGet(XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE, false);
+						if (pack != null && !pack.eIsProxy()) {
+							return pack;
+						}
+						return null;
 					}
 				}), Predicates.notNull()));
 		return getPackagesSortedByName(result);
