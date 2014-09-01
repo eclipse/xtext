@@ -42,6 +42,8 @@ public class JUnit4TestListener extends RunListener {
 	}
 
 	private static class AssumptionFailedTestIdentifier extends JUnit4Identifier {
+		public static final String ASSUMPTION_FAILED_TEST_PREFIX = "@AssumptionFailure: "; //$NON-NLS-1$
+
 		public AssumptionFailedTestIdentifier(Description description) {
 			super(description);
 		}
@@ -50,7 +52,7 @@ public class JUnit4TestListener extends RunListener {
 		public String getName() {
 			String name = super.getName();
 			if (name != null)
-				return MessageIds.ASSUMPTION_FAILED_TEST_PREFIX + name;
+				return ASSUMPTION_FAILED_TEST_PREFIX + name;
 			return null;
 		}
 	}
