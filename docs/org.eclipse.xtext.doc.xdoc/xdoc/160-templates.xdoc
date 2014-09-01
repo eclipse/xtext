@@ -41,6 +41,9 @@ template variable is called e[CrossReference] and its syntax is as follows:
 
 code[XML][${<displayText>:CrossReference(\[<MyPackageName>.\]<MyType>.<myRef>)}]
 
+Where "displayText" is the initial value that is shown in the editor. It is also the identifier for a place holder 
+so that multiple place holders with the same name will be updated at once by the user using linked editing.
+
 This small example yields the text e[event => state] and allows selecting any events and states using a drop down:
 
 code[XML][
