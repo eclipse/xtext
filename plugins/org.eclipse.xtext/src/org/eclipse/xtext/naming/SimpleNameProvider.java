@@ -23,7 +23,7 @@ public class SimpleNameProvider extends IQualifiedNameProvider.AbstractImpl {
 	
 	public QualifiedName getFullyQualifiedName(EObject obj) {
 		String name = SimpleAttributeResolver.NAME_RESOLVER.apply(obj);
-		if(name == null)
+		if(name == null || name.length() == 0)
 			return null;
 		return qualifiedNameConverter.toQualifiedName(name);
 	}
