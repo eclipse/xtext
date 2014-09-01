@@ -182,7 +182,7 @@ public class LightweightTypeReferenceFactory extends AbstractXtypeReferenceVisit
 	}
 
 	protected boolean isInner(JvmType type) {
-		if (type.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
+		if (type != null && type.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
 			if (type.eContainer() instanceof JvmDeclaredType) {
 				return !((JvmGenericType) type).isStatic();
 			}
