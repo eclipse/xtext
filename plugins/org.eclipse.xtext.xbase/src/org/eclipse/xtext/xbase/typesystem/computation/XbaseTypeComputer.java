@@ -644,6 +644,9 @@ public class XbaseTypeComputer implements ITypeComputer {
 	protected void _computeTypes(XListLiteral literal, ITypeComputationState state) {
 		JvmGenericType listType = (JvmGenericType) services.getTypeReferences().findDeclaredType(List.class, literal);
 		if (listType == null) {
+			for(XExpression element: literal.getElements()) {
+				state.withNonVoidExpectation().computeTypes(element);
+			}
 			state.acceptActualType(state.getReferenceOwner().newUnknownTypeReference(List.class.getName()));
 			return;
 		}
@@ -944,19 +947,21 @@ public class XbaseTypeComputer implements ITypeComputer {
 		} else {
 			addAsArrayComponentAndIterable = parameterType;
 		}
-		ParameterizedTypeReference reference = owner.newParameterizedTypeReference(iterableType);
-		WildcardTypeReference wildcard = owner.newWildcardTypeReference();
-		wildcard.addUpperBound(addAsArrayComponentAndIterable);
-		reference.addTypeArgument(wildcard);
-		compoundResult.addComponent(reference);
-		if (iterableOrArray == null) {
-			iterableOrArray = reference;
-			LightweightTypeReference potentialPrimitive = addAsArrayComponentAndIterable.getPrimitiveIfWrapperType();
-			if (potentialPrimitive != addAsArrayComponentAndIterable) {
-				compoundResult.addComponent(owner.newArrayTypeReference( potentialPrimitive));
+		if (iterableType != null) {
+			ParameterizedTypeReference reference = owner.newParameterizedTypeReference(iterableType);
+			WildcardTypeReference wildcard = owner.newWildcardTypeReference();
+			wildcard.addUpperBound(addAsArrayComponentAndIterable);
+			reference.addTypeArgument(wildcard);
+			compoundResult.addComponent(reference);
+			if (iterableOrArray == null) {
+				iterableOrArray = reference;
+				LightweightTypeReference potentialPrimitive = addAsArrayComponentAndIterable.getPrimitiveIfWrapperType();
+				if (potentialPrimitive != addAsArrayComponentAndIterable) {
+					compoundResult.addComponent(owner.newArrayTypeReference(potentialPrimitive));
+				}
 			}
+			compoundResult.addComponent(owner.newArrayTypeReference(addAsArrayComponentAndIterable));
 		}
-		compoundResult.addComponent(owner.newArrayTypeReference(addAsArrayComponentAndIterable));
 		return iterableOrArray;
 	}
 

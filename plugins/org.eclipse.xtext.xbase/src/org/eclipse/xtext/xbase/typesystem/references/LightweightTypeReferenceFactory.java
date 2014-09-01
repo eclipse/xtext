@@ -182,7 +182,7 @@ public class LightweightTypeReferenceFactory extends AbstractXtypeReferenceVisit
 	}
 
 	protected boolean isInner(JvmType type) {
-		if (type.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
+		if (type != null && type.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
 			if (type.eContainer() instanceof JvmDeclaredType) {
 				return !((JvmGenericType) type).isStatic();
 			}
@@ -262,7 +262,7 @@ public class LightweightTypeReferenceFactory extends AbstractXtypeReferenceVisit
 		}
 		if (!keepUnboundWildcards) {
 			if (!upperBoundSeen) {
-				ParameterizedTypeReference upperBound = getObjectReference();
+				LightweightTypeReference upperBound = getObjectReference();
 				result.addUpperBound(upperBound);
 			}
 			if (result.getUpperBounds().isEmpty()) {
@@ -270,7 +270,7 @@ public class LightweightTypeReferenceFactory extends AbstractXtypeReferenceVisit
 			}
 		} else {
 			if (!upperBoundSeen && result.getLowerBound() != null) {
-				ParameterizedTypeReference upperBound = getObjectReference();
+				LightweightTypeReference upperBound = getObjectReference();
 				result.addUpperBound(upperBound);
 			}
 		}
@@ -317,8 +317,11 @@ public class LightweightTypeReferenceFactory extends AbstractXtypeReferenceVisit
 		return new UnknownTypeReference(getOwner());
 	}
 
-	protected ParameterizedTypeReference getObjectReference() {
+	protected LightweightTypeReference getObjectReference() {
 		JvmType objectType = getObjectType();
+		if (objectType == null) {
+			return owner.newUnknownTypeReference("Object");
+		}
 		ParameterizedTypeReference result = owner.newParameterizedTypeReference(objectType);
 		return result;
 	}
