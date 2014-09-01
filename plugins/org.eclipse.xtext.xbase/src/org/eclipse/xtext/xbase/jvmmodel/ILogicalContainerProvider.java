@@ -37,8 +37,6 @@ public interface ILogicalContainerProvider {
 	 * @return the JvmIdentifiableElement that contains the given expression or any of its containers 
 	 * 	and therefore defines its scope. 
 	 *   <code>null</code> if this expression doesn't live in such a context.
-	 *   
-	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	public JvmIdentifiableElement getNearestLogicalContainer(EObject expr);
 	

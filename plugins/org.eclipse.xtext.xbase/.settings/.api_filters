@@ -8,6 +8,14 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/xbase/jvmmodel/JvmModelTargetURICollector.java" type="org.eclipse.xtext.xbase.jvmmodel.JvmModelTargetURICollector">
+        <filter comment="Uses newly introduced FindReferences API" id="576720909">
+            <message_arguments>
+                <message_argument value="TargetURICollector"/>
+                <message_argument value="JvmModelTargetURICollector"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="xtend-gen/org/eclipse/xtext/xbase/file/AbstractFileSystemSupport.java" type="org.eclipse.xtext.xbase.file.AbstractFileSystemSupport">
         <filter comment="Non-API type in signature" id="574619656">
             <message_arguments>

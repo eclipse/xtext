@@ -59,7 +59,7 @@ public interface IJvmModelAssociator {
 	void associateLogicalContainer(XExpression expression, JvmIdentifiableElement logicalContainer);
 	
 	/**
-	 * @noreference This method is not intended to be referenced by clients.
+	 * Removes the logically contained child of the given identifiable.
 	 */
 	void removeLogicalChildAssociation(JvmIdentifiableElement logicalContainer);
 	
