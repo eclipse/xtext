@@ -58,7 +58,7 @@ class BasicExpressions {
 		// 'if' looks like in Java
 		if ('text'.length == 4) {
 			// but it's an expression so it can be used in more flexible ways:
-			assertEquals( 42 , if ('foo' != 'bar') 42 else -24 )
+			assertEquals( 42 , if ('foo' != 'BAR'.toLowerCase) 42 else -24 )
 		} else {
 			fail('Never happens!')
 		}

@@ -4,7 +4,7 @@ import extract.Extract
 import org.eclipse.xtend.core.compiler.batch.XtendCompilerTester
 import org.junit.Test
 
-import static junit.framework.Assert.*
+import static org.junit.Assert.assertEquals
 
 class ExternalizedTest {
 	
