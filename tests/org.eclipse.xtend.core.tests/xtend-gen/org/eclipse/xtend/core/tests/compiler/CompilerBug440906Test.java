@@ -97,7 +97,7 @@ public class CompilerBug440906Test extends AbstractXtendCompilerTest {
     _builder_1.append("final Function2<Object, Object, Integer> _final_m = _m;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("return IterableExtensions.<Object>sort(Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList()), new Comparator<Object>() {");
+    _builder_1.append("return IterableExtensions.<Object>sortWith(Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList()), new Comparator<Object>() {");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("public int compare(Object arg0, Object arg1) {");
@@ -212,7 +212,7 @@ public class CompilerBug440906Test extends AbstractXtendCompilerTest {
     _builder_1.append("final Function2<Object, Object, Integer> _final_xblockexpression = _xblockexpression;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("return IterableExtensions.<Object>sort(Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList()), new Comparator<Object>() {");
+    _builder_1.append("return IterableExtensions.<Object>sortWith(Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList()), new Comparator<Object>() {");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("public int compare(Object arg0, Object arg1) {");

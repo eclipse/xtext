@@ -17,6 +17,63 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
   @Test
+  public void testDeprecatedSort() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def m(Iterable<String> it) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("it.sort [ $0.compareTo($1) ]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.Comparator;");
+    _builder_1.newLine();
+    _builder_1.append("import java.util.List;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.IterableExtensions;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public List<String> m(final Iterable<String> it) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("final Comparator<String> _function = new Comparator<String>() {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("public int compare(final String $0, final String $1) {");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("return $0.compareTo($1);");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("};");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return IterableExtensions.<String>sortWith(it, _function);");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testExtensionImportVsDefaultExtensions_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import static extension D.*");

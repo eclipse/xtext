@@ -28,22 +28,35 @@ import com.google.common.annotations.GwtCompatible;
 public @interface Inline {
 
 	/**
+	 * <p>
 	 * The inline format string. Placeholders like {@code $1, $2} etc can be used where the {@code 1..n} parameters of
 	 * the inlined method are used for {@code $1} to {@code $n} and the {@link #imported()} types are used for
 	 * subsequent indices. The next index {@code $n} can be used to insert all type parameters of the original
 	 * declaration. And finally the last indices refer to the upper bound substitute of the type parameters
 	 * individually.
-	 * 
+	 * </p>
+	 * <p>
 	 * So the order is arguments, imports, all type parameters at once incl. brackets and upper bounds of the individual
 	 * type parameters without brackets
-	 * 
-	 * Example:
-	 * 
-	 * For the following signatures <code>
-	 * 
-	 * @Inline(value=".." imported = BigDecimal.class) public void <T1, T2> myMethod(String p1, String p2) { ... }
-	 *                    </code> $1 refers to p1 $2 refers to p2 $3 refers to BigDecimal $4 refers to <T1, T2> $5
-	 *                    refers to the upper bound of T1 $6 refers to the upper bound of T2
+	 * </p>
+	 * <p>
+	 * For the following signature <br/>
+	 * {@code @Inline(value=".." imported = BigDecimal.class) public void <T1, T2> myMethod(String p1, String p2)}
+	 * </p>
+	 * <ul>
+	 * <li>
+	 * {@code $1} refers to {@code p1}</li>
+	 * <li>
+	 * {@code $2} refers to {@code p2}</li>
+	 * <li>
+	 * {@code $3} refers to {@code BigDecimal}</li>
+	 * <li>
+	 * {@code $4} refers to {@code <T1, T2>}</li>
+	 * <li>
+	 * {@code $5} refers to the upper bound of {@code T1}</li>
+	 * <li>
+	 * {@code $6} refers to the upper bound of {@code T2}</li>
+	 * </ul>
 	 * 
 	 */
 	String value();
@@ -54,7 +67,7 @@ public @interface Inline {
 	Class<?>[] imported() default {};
 
 	/**
-	 * whether the inlined expression is a statement expression (see <a
+	 * Whether the inlined expression is a statement expression (see <a
 	 * href="http://docs.oracle.com/javase/specs/jls/se5.0/html/statements.html#14.8">14.8 - Statement Expressions in
 	 * Java Language Specification, Third Edition</a> )
 	 */

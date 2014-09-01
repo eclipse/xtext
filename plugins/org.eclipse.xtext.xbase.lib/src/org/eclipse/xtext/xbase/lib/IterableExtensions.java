@@ -641,6 +641,27 @@ public class IterableExtensions {
 	}
 
 	/**
+	 * This method is deprecated in favor of {@link #sortWith(Iterable, Comparator)}.
+	 * 
+	 * Creates a sorted list that contains the items of the given iterable. The resulting list is sorted according to
+	 * the order induced by the specified comparator.
+	 * 
+	 * @param iterable
+	 *            the items to be sorted. May not be <code>null</code>.
+	 * @param comparator
+	 *            the comparator to be used. May be <code>null</code> to indicate that the natural ordering of the
+	 *            elements should be used.
+	 * @return a sorted list as a shallow copy of the given iterable.
+	 * @see IterableExtensions#sortWith(Iterable, Comparator)
+	 * @deprecated Use {@link #sortWith(Iterable, Comparator)} instead.
+	 */
+	@Deprecated
+	@Inline(value="$3.$4sortWith($1, $2)", imported=IterableExtensions.class)
+	public static <T> List<T> sort(Iterable<T> iterable, Comparator<? super T> comparator) {
+		return sortWith(iterable, comparator);
+	}
+	
+	/**
 	 * Creates a sorted list that contains the items of the given iterable. The resulting list is sorted according to
 	 * the order induced by the specified comparator.
 	 * 
@@ -654,8 +675,9 @@ public class IterableExtensions {
 	 * @see #sort(Iterable)
 	 * @see #sortBy(Iterable, Function1)
 	 * @see ListExtensions#sortInplace(List, Comparator)
+	 * @since 2.7
 	 */
-	public static <T> List<T> sort(Iterable<T> iterable, Comparator<? super T> comparator) {
+	public static <T> List<T> sortWith(Iterable<T> iterable, Comparator<? super T> comparator) {
 		return ListExtensions.sortInplace(Lists.newArrayList(iterable), comparator);
 	}
 
