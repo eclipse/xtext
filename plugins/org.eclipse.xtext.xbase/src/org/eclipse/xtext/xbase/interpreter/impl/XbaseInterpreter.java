@@ -479,7 +479,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 					throw new EvaluationException(new NoClassDefFoundError(typeName));
 				}
 			}
-			if (expectedType != null && conditionResult == null)
+			if (expectedType != null && switchExpression.getSwitch() == null)
 				throw new IllegalStateException("Switch without expression or implicit 'this' may not use type guards");
 			if (expectedType == null || expectedType.isInstance(conditionResult)) {
 				if (casePart.getCase() != null) {
