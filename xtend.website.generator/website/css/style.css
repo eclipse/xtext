@@ -825,7 +825,7 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 	width: 100%;
 	z-index: 1030;
 	background-image: none;
-	background-color: rgba(01,02,11,0.7);
+	background-color: rgba(01,02,11,0.4);
 }
 
 .navbar .container {
@@ -849,12 +849,19 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 
 .navbar .nav .active > a, .navbar .nav .active > a:hover {
 	color: white;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.navbar .nav > li > a {
+	color: white;
 	text-decoration: none;
 }
 
 .navbar .nav > li > a:hover {
-	background-color: rgba(256,256,256,0.1);
-	color: #999;
+	background-color: rgba(01,02,11,0.6);
+	color: white;
+	font-weight: bold;
 	text-decoration: none;
 }
 
