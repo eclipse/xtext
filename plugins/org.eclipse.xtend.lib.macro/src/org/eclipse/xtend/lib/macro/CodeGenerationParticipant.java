@@ -16,7 +16,7 @@ import com.google.common.annotations.Beta;
 
 /**
  * Annotation processors implementing this interface will be called in the code generation phase, which is called 
- * when Xtend's actualö Java code is generated and written to the file system.
+ * when Xtend's actual Java code is generated and written to the file system.
  * 
  * During this phase it is permitted to write to the file system.
  * 

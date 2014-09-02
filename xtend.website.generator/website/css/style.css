@@ -189,7 +189,7 @@ td.code pre {
 	padding-top: 10px;
 }
 
-#features h1 {
+.feature h1 {
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	color: #6B6B6B;
 	font-weight: 400;
@@ -200,7 +200,7 @@ td.code pre {
 	font-size: 32px;
 }
 
-#features h4 {
+.feature h4 {
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	color: #6B6B6B;
 	font-weight: 400;
@@ -212,7 +212,7 @@ td.code pre {
 	margin-top: 10pt;
 }
 
-#features p {
+.feature p {
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	color: #6B6B6B;
 	font-weight: 200;
@@ -517,7 +517,7 @@ tfoot td {
 }
 
 .inner {
-	padding: 10px 0px;
+	padding: 10px 0px 0px 50px;
 	background: url(../images/pattern1.jpg) repeat #ebebeb;
 }
 
@@ -597,66 +597,125 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 
 .team {
 /* 	background: #f4f4f4; */
-	background: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(235, 235, 235, 1) 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255, 255, 255, 1)), color-stop(100%,rgba(235, 235, 235, 1)));
-	background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%,rgba(235, 235, 235, 1) 100%);
-	background: -o-linear-gradient(top, rgba(255, 255, 255, 1) 0%,rgba(235, 235, 235, 1) 100%);
-	background: -ms-linear-gradient(top, rgba(255, 255, 255, 1) 0%,rgba(235, 235, 235, 1) 100%);
-	background: linear-gradient(top, rgba(255, 255, 255, 1) 0%,rgba(235, 235, 235, 1) 100%);
+	background: rgba(0, 0, 10, 0.4);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='white', endColorstr='#EBEBEB',GradientType=0 );
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
-	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .25), inset 0 1px 0 rgba(0, 0, 0, .1);
-	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, .25), inset 0 1px 0 rgba(0, 0, 0, .1);
-	box-shadow: 0 1px 3px rgba(0, 0, 0, .25), inset 0 1px 0 rgba(0, 0, 0, .1);
-	padding: 10px;
-	margin-bottom: 15px;
-	height: 80px;
+	-webkit-box-shadow: 0 1px 3px rgba(180,256,256, .25), inset 0 2px 0 rgba(180,256,256, .1);
+	-moz-box-shadow: 0 1px 3px rgba(180,256,256, .25), inset 0 2px 0 rgba(180,256,256, .1);
+	box-shadow: 0 1px 3px rgba(180,256,256, .25), inset 0 2px 0 rgba(180,256,256, .1);
+	padding: 20px;
+	margin-bottom: 0px;
+	margin-top: 10px;
+	margin-left: 60px;
 	position: relative;
 }
 
 .team h3 {
-	margin: 20px;
+	font-size:24px;
+	margin-top:20px;
+	padding-top:0px;
 }
+
 @media (max-width: 979px) {
   .team h3 {
-		margin: 10px;
+		
 	}
 }
 @media (max-width: 767px) {
   .team h3 {
-		margin: 5px;
-	}
+	font-size:24px;
+	margin-top:8px;
+	padding-top:0px;
+   }
 }
 
 @media (min-width: 1200px) {
   .team {
-    height: 80px;
+    height: 70px;
+    margin-top: 10px;
+	margin-left: 80px;
   }
 }
 @media (max-width: 979px) {
   .team {
-    height: 80px;
+    height: 70px;
+	padding: 10px;
+	margin-top: 10px;
+	margin-left: 40px;
   }
 }
 @media (max-width: 767px) {
   .team {
-    height: 110px;
+    height: 70px;
+	padding: 10px;
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+  }
+}
+
+.feature {
+	height : 220px;
+}
+
+@media (min-width: 1200px) {
+  .feature {
+    height: 70px;
+  }
+}
+@media (max-width: 979px) {
+  .feature {
+    height: 280px;
+  }
+}
+@media (max-width: 767px) {
+  .feature {
+    height: 70px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+@media (max-width: 767px) {
+  .feature img {
+    height: 70px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .feature h4 {
+    text-align: center;
+  }
+}
+
+@media (max-width: 767px) {
+  .feature p {
+    text-align: center;
   }
 }
 
 .image_left {
 	float: left;
-	height: 80px;
+	vertical-align: center;
 	margin-right: 10px;
 }
 
 @media (max-width: 767px) {
   .image_left {
-/*     height: 80px; */
-/*     margin-right: 10px; */
+     float: left;
+     height: 80px; 
+	 vertical-align: center;
+     margin-right: 10px; 
   }
+}
+
+.newsticker a {
+	text-decoration: italic;
+	font-size: 24;
 }
 
 .anchor-in-div {
@@ -671,12 +730,12 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 }
 
 .team :hover {
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-  -webkit-box-shadow: 0 0 5px #74C0CF;
-  -moz-box-shadow: 0 0 5px #74C0CF;
-  box-shadow: 0 0 5px #74C0CF;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 0 8px #74C0CF;
+  -moz-box-shadow: 0 0 8px #74C0CF;
+  box-shadow: 0 0 8px #74C0CF;
 }
 
 #extra {

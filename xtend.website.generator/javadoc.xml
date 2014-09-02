@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+	<property name="repositoryLocation" value="/Users/svenefftinge/Documents/eclipse-dev/xtext/master/git/xtext"/>
+	<property name="pathToGuava" value="${user.home}/.p2/pool/plugins/com.google.guava_15.0.0.v201403281430.jar"/>
+	<property name="destdir" value="website/api/2.7.0"/>
+
+	<target name="clean">
+		<delete>
+			<fileset dir="${destdir}">
+			    <include name="**/**"/>
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="javadoc" depends="clean">
+		<javadoc access="public" author="true" 
+			classpath="${pathToGuava}:${repositoryLocation}/plugins/org.eclipse.xtend.lib/bin:${repositoryLocation}/plugins/org.eclipse.xtend.lib.macro/bin:${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/bin" 
+			destdir="${destdir}" 
+			doctitle="Xtend Library API" 
+			nodeprecated="false" 
+			nodeprecatedlist="false" 
+			noindex="false" 
+			nonavbar="false" 
+			notree="false" 
+			packagenames="org.eclipse.xtend.lib.macro.expression,org.eclipse.xtext.xbase.lib.util,org.eclipse.xtext.xbase.lib.internal,org.eclipse.xtend.lib.macro.declaration,org.eclipse.xtend.lib.macro.file,org.eclipse.xtend.lib.macro.services,org.eclipse.xtend2.lib,org.eclipse.xtend.lib.macro" 
+			source="1.7" 
+			sourcefiles="${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ReassignFirstArgument.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Pure.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/FloatExtensions.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ComparableExtensions.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ObjectExtensions.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ArrayExtensions.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Inline.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Pair.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/CollectionLiterals.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/LongExtensions.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerRange.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BooleanExtensions.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ShortExtensions.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/CharacterExtensions.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/StringExtensions.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/CollectionExtensions.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/InputOutput.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ArrayLiterals.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BigDecimalExtensions.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IteratorExtensions.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ListExtensions.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ByteExtensions.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/DoubleExtensions.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/FunctionExtensions.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerExtensions.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ExclusiveRange.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BigIntegerExtensions.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Exceptions.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/HardcodedInInterpreterException.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/MapExtensions.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ProcedureExtensions.java,
+${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Extension.java,
+${repositoryLocation}/plugins/org.eclipse.xtend.lib/xtend-gen/org/eclipse/xtend/lib/annotations/FinalFieldsConstructor.java,
+${repositoryLocation}/plugins/org.eclipse.xtend.lib/xtend-gen/org/eclipse/xtend/lib/annotations/Accessors.java,
+${repositoryLocation}/plugins/org.eclipse.xtend.lib/xtend-gen/org/eclipse/xtend/lib/annotations/AccessorType.java,
+${repositoryLocation}/plugins/org.eclipse.xtend.lib/xtend-gen/org/eclipse/xtend/lib/Property.java,
+${repositoryLocation}/plugins/org.eclipse.xtend.lib/xtend-gen/org/eclipse/xtend/lib/annotations/EqualsHashCode.java,
+${repositoryLocation}/plugins/org.eclipse.xtend.lib/xtend-gen/org/eclipse/xtend/lib/annotations/ToString.java,
+${repositoryLocation}/plugins/org.eclipse.xtend.lib/xtend-gen/org/eclipse/xtend/lib/annotations/Data.java,
+${repositoryLocation}/plugins/org.eclipse.xtend.lib/xtend-gen/org/eclipse/xtend/lib/annotations/Delegate.java" sourcepath="${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src:${repositoryLocation}/plugins/org.eclipse.xtend.lib/src:${repositoryLocation}/plugins/org.eclipse.xtend.lib/xtend-gen:${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/xtend-gen:${repositoryLocation}/plugins/org.eclipse.xtend.lib.macro/src" splitindex="true" use="true" version="true">
+			
+			<link href="http://docs.guava-libraries.googlecode.com/git-history/v18.0/javadoc/" />
+			<link href="http://docs.oracle.com/javase/7/docs/api/" />
+		</javadoc>
+	</target>
+</project>

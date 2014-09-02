@@ -85,7 +85,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @param distance 
 	 *            the number of times to shift.
 	 * @return <code>a&lt;&lt;distance</code>
-	 * @deprecated use {@link #operator_doubleLessThan(long, int)} instead.
+	 * @deprecated use {@link #operator_doubleLessThan(long, int)} instead.
 	 */
 	@Deprecated
 	@Pure
@@ -119,7 +119,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @param distance 
 	 *            the number of times to shift.
 	 * @return <code>a&gt;&gt;distance</code>
-	 * @deprecated use {@link #operator_doubleGreaterThan(long, int)} instead.
+	 * @deprecated use {@link #operator_doubleGreaterThan(long, int)} instead.
 	 */
 	@Deprecated
 	@Pure
@@ -153,7 +153,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @param distance
 	 *            the number of times to shift.
 	 * @return <code>a&gt;&gt;&gt;distance</code>
-	 * @deprecated use {@link #operator_tripleGreaterThan(long, int)} instead.
+	 * @deprecated use {@link #operator_tripleGreaterThan(long, int)} instead.
 	 */
 	@Deprecated
 	@Pure

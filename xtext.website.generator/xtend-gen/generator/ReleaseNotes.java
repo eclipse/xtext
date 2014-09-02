@@ -41,9 +41,6 @@ public class ReleaseNotes extends AbstractWebsite {
     _builder.append("<div class=\"span9\">");
     _builder.newLine();
     _builder.append("            ");
-    _builder.append("<b>Not yet released, but you can try the latest <a href=\"download.html\">\"Bleeding Edge\" builds</a></b> ");
-    _builder.newLine();
-    _builder.append("            ");
     _builder.append("<p>");
     _builder.newLine();
     _builder.append("              ");

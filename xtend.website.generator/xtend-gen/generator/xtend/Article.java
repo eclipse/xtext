@@ -5,11 +5,19 @@ import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class Article {
+  public enum Kind {
+    Video,
+    
+    Blog,
+    
+    Article;
+  }
+  
   @Accessors
   private String title;
   
   @Accessors
-  private boolean article;
+  private Article.Kind kind;
   
   @Accessors
   private String href;
@@ -18,12 +26,17 @@ public class Article {
   private String img;
   
   public void setArticle(final String aTitle) {
-    this.article = true;
+    this.kind = Article.Kind.Article;
     this.title = aTitle;
   }
   
   public void setBlog(final String aTitle) {
-    this.article = false;
+    this.kind = Article.Kind.Blog;
+    this.title = aTitle;
+  }
+  
+  public void setVideo(final String aTitle) {
+    this.kind = Article.Kind.Video;
     this.title = aTitle;
   }
   
@@ -37,12 +50,12 @@ public class Article {
   }
   
   @Pure
-  public boolean isArticle() {
-    return this.article;
+  public Article.Kind getKind() {
+    return this.kind;
   }
   
-  public void setArticle(final boolean article) {
-    this.article = article;
+  public void setKind(final Article.Kind kind) {
+    this.kind = kind;
   }
   
   @Pure
