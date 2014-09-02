@@ -20,14 +20,15 @@ import com.google.common.annotations.Beta;
  * 
  *  They allow for enhancing and changing how Xtend code is translated to Java.
  *  
- *  There are two compiler phases in which an active annotation can participate, each with different possibilities and constraints:
+ *  There are four compiler phases in which an active annotation can participate, each with different possibilities and constraints:
  *  <ul>
  *  	<li>Phase 1: Register Globals {@link RegisterGlobalsParticipant}</li>
  *  	<li>Phase 2: Transformation {@link TransformationParticipant}</li>
- *  	<li>Phase 3: Generate Code {@link CodeGenerationParticipant}</li>
+ *  	<li>Phase 3: Validate Code {@link ValidationParticipant}</li>
+ *  	<li>Phase 4: Generate Code {@link CodeGenerationParticipant}</li>
  *  </ul>
  *  
- *  Note, that in the IDE phase one and two are executed in the editor as you type, while phase 3 (code generation) only gets executed when 
+ *  Note, that in the IDE phase one, two and three are executed in the editor as you type, while phase 4 (code generation) only gets executed when 
  *  the editor's contents gets saved to disk.
  * 
  * @author Sven Efftinge
