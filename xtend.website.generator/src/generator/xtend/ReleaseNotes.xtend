@@ -14,7 +14,189 @@ class ReleaseNotes extends AbstractXtendWebsite {
         «headline('Release Notes')»
         <div id="page">
       <div class="inner">
-            <div class="container clearfix">
+      <div class="container clearfix">
+	    <h2>Xtend 2.7.0 Release Notes (September 2nd, 2014)</h2>
+        <hr>
+        <div class="span1">&nbsp;</div>
+          <div class="span9">
+            <p>
+              Version 2.7 got many new features, bug fixes and performance improvements (<a href="https://bugs.eclipse.org/bugs/buglist.cgi?bug_status=RESOLVED&bug_status=VERIFIED&bug_status=CLOSED&status_whiteboard=v2.7">full bugzilla list</a>). The most noteworthy changes are :
+            </p>
+            <section id="xtend_language_2_7" style="padding-top: 68px; margin-top: -68px;">
+				<h2>
+				   Language
+				</h2>
+			</section>
+			<section style="padding-top: 68px; margin-top: -68px;">
+				<h3>
+				   Sugared Lambdas With Zero And More Than Two Arguments
+				</h3>
+				<p>
+				   It is now allowed to leave out parameter declarations for all lambda expressions using a positional syntax, similar to Apple's Swift:
+<pre class="prettyprint lang-xtend linenums">
+#[1, 2, 3].reduce[$0 + $1]
+</pre>
+			</section>
+			<section style="padding-top: 68px; margin-top: -68px;">
+				<h3>
+				   Unqualified Enum Usage
+				</h3>
+				Enum constants in annotations and switch expressions can be referenced without their type name.
+<pre class="prettyprint lang-xtend linenums">
+@Retention(RUNTIME)
+</pre>
+			</section>
+			<section style="padding-top: 68px; margin-top: -68px;">
+				<h3>
+				   Inner Type of Parameterized Types
+				</h3>
+				Type inference for parameterized inner classes was improved and supports types like
+<pre class="prettyprint lang-xtend linenums">
+OuterType&LT;T&GT;.InnerType
+</pre>
+			</section>
+			<section style="padding-top: 68px; margin-top: -68px;">
+				<h3>
+				   Deprecated and Dead Code Analysis
+				</h3>
+				The validator will now detect use of deprecated API and is much better at finding dead code. Would you have spotted the following?
+				</p>
+				<img class="image_between_p" src="images/releasenotes/2_7_xtend-dead-code-analysis.png"/>
+				<img>
+			</section>
+			<section id="xtend_library_2_7" style="padding-top: 68px; margin-top: -68px;">
+				<h2>
+				   Library
+				</h2>
+				</section>
+			<section style="padding-top: 68px; margin-top: -68px;">
+				<h3>
+				   New Extension Methods on Iterables
+				</h3>
+				<p>
+				   The standard library has new extension methods for <code>Iterables</code>, including <code>min</code>/<code>max</code>, <code>groupBy</code> and <code>indexed</code>.
+				</p>
+<pre class="prettyprint lang-xtend linenums">
+#["Xtend", "Java", "Eclipse"].maxBy[length]
+</pre>
+
+			</section>
+			<section style="padding-top: 68px; margin-top: -68px;">
+				<h3>
+				   New Active Annotations
+				</h3>
+				<p>New Active Annotations have been added to free you of some repetitive tasks. The new <code>@Accessors</code> generates getters and setters, with fine grained control and even for all fields of a class if you want. The <code>@Delegate</code> annotation automatically implements the delegation pattern for you, so you only need to concentrate on methods that you actually want to implement differently than just delegating. Here is an example:</p>
+<pre class="prettyprint lang-xtend linenums">
+interface I {
+   def void m1()
+   def void m2()
+   def void m3()
+}
+class A implements I {
+   override m1() {}
+   override m2() {}
+   override m3() {}
+}
+class B implements I {
+   //all methods automatically implemented
+   @Delegate A delegate = new A
+}
+</pre>
+				<p>Other additions include <code>@ToString</code>, <code>@EqualsHashCode</code>, <code>@FinalFieldsConstructor</code> and a new <code>@Data</code> (the old one is now deprecated as well as <code>@Property</code>).</p>
+				</section>
+			<section style="padding-top: 68px; margin-top: -68px;">
+				<h3>
+				   Active Annotations API Improvements
+				</h3>
+				<p>The active annotation API integrates even deeper with the IDE. Every generated element can (and should) now declare its source element. This tracing information is used in places like the outline view. A separate validation phase has been added, so the end result after running all transformations can be validated. Also, changes to classes and even arbitrary resources that the annotation processor requested are detected and lead to automatic rebuilds.</p>
+			</section>
+			<section style="padding-top: 68px; margin-top: -68px;">
+			<h2>IDE Features</h2>
+			</section>
+			<section id="xtend_debugging_2_7" style="padding-top: 68px; margin-top: -68px;">
+				<h3>
+				   Debugging
+				</h3>
+				<p>
+				   Xtend breakpoints can now have conditions. Conditions are written in Java, so you get full access even to synthetic variables inserted by the Xtend compiler. Of course you also get content assist in the condition editor.
+				</p>
+				<img class="image_between_p" src="images/releasenotes/2_7_xtend-conditional-breakpoint.png"/>
+				<p>
+				   Breakpoints can now be toggled, enabled/disabled and inspected via the ruler context menu.
+				</p>
+				<img class="image_between_p" src="images/releasenotes/2_7_xtext-breakpoint-toggle.png"/>
+			</section>
+			<section style="padding-top: 68px; margin-top: -68px;">
+				<h3>
+				   Content Assist
+				</h3>
+				<p>
+				   Content Assist has become a lot faster and more accurate at the same time. It will now also retain the "is"-prefix of boolean properties.
+				</p>
+			</section>
+			<section style="padding-top: 68px; margin-top: -68px;">
+				<h3>
+				   Performance Improvements
+				</h3>
+				<p>
+				   Performance has reached a new level with big improvements to Content Assist, parallel code generation and lots of fine tuning. Also, Xtend will now cancel jobs (like outline refreshing) when you start typing again, making the editor much more responsive.
+				</p>
+			</section>
+			<section style="padding-top: 68px; margin-top: -68px;">
+				<h3>
+				   Outline with Java-Mode
+				</h3>
+				<p>
+				   The outline view now supports two modes: One shows the original Xtend AST, the other one shows the resulting Java AST. This is very useful in the presence of Active Annotations that add a lot of new members to a class.
+				</p>
+				<img class="image_between_p" src="images/releasenotes/2_7_xtend-outline-normal.png"/>
+				<img class="image_between_p" src="images/releasenotes/2_7_xtend-outline-jvm.png"/>
+			</section>
+			<section style="padding-top: 68px; margin-top: -68px;">
+				<h3>
+				   Organize imports on packages
+				</h3>
+				<p>
+				   You can now use "Organize Xtend Imports" on whole packages via the "Source" context menu.
+				</p>
+				<img class="image_between_p" src="images/releasenotes/2_7_xtend-organize-imports.png"/>
+			</section>
+			<section style="padding-top: 68px; margin-top: -68px;">
+				<h3>
+				   Template proposals support import
+				</h3>
+				<p>
+				   A new type of template variable was added. It adds an import to an Xtend file when the template is inserted. This greatly reduces the need for qualified type names in templates.
+				</p>
+				<img class="image_between_p" src="images/releasenotes/2_7_xtend-templates-import.png"/>
+			</section>
+			<section style="padding-top: 68px; margin-top: -68px;">
+				<h3>
+				   Open return type
+				</h3>
+				<p>
+				   Ever wondered what you can do with the type of a variable or the return type of a method? You can now CTRL-Click on feature calls and open the declaration of the return type of that call.
+				</p>
+			</section>
+			<section style="padding-top: 68px; margin-top: -68px;">
+				<h3>
+				   Show errors from derived Java files
+				</h3>
+				<p>
+				   By using black box Java code within active annotations the generated Java source could sometimes have errors while the Xtend code is fine. In those cases, the errors are now shown at the appropriate locations in Xtend as well.
+				</p>
+			</section>
+			<section style="padding-top: 68px; margin-top: -68px;">
+				<h3>Maven and Java 8</h3>
+				<p>
+				   The Xtend Maven plugin is now toolchain-aware. Using this, you can for instance run Maven on Java 8, but compile against a JDK 6.
+				</p>
+			</section>
+		</div>
+		</div>
+		</div>
+		<div class="inner">
+        <div class="container clearfix">
         <h2>Xtend 2.6.0 Release Notes (May 21th, 2014)</h2>
         <hr>
         <div class="span1">&nbsp;</div>
@@ -210,6 +392,7 @@ For people who find that tedious and want to work with a reduced lib from the ge
 <p>The library can be <a href="http://search.maven.org/#search%7Cga%7C1%7Corg.eclipse.xtext.xbase.lib.slim">downloaded from maven central</a>.</p>
             
          </div>
+      </div>
       </div>
       <div class="inner">
             <div class="container clearfix">
