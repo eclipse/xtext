@@ -47,11 +47,11 @@ public class Calculator {
 		return invoke;
 	}
 	
-	protected BigDecimal internalEvaluate(Expression e, @SuppressWarnings("unused") ImmutableMap<String,BigDecimal> values) { 
+	protected BigDecimal internalEvaluate(Expression e, ImmutableMap<String,BigDecimal> values) { 
 		throw new UnsupportedOperationException(e.toString());
 	}
 	
-	protected BigDecimal internalEvaluate(NumberLiteral e, @SuppressWarnings("unused")  ImmutableMap<String,BigDecimal> values) { 
+	protected BigDecimal internalEvaluate(NumberLiteral e, ImmutableMap<String,BigDecimal> values) { 
 		return e.getValue();
 	}
 	
