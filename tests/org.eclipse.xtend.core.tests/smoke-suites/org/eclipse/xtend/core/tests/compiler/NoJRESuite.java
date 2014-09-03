@@ -11,7 +11,6 @@ import org.eclipse.xtext.junit4.smoketest.ProcessedBy;
 import org.eclipse.xtext.junit4.smoketest.XtextSmokeTestRunner;
 import org.eclipse.xtext.xbase.junit.typesystem.NoJRESmokeTester;
 import org.junit.runner.RunWith;
-import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
