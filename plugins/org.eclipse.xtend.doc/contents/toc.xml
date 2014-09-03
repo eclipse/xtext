@@ -199,7 +199,9 @@
 				</topic>
 				<topic href="contents/40-annotations.html#active_annotations_transformation_phase" label="Phase 2: Transformation" >
 				</topic>
-				<topic href="contents/40-annotations.html#active_annotations_code_generation" label="Phase 3: Code Generation" >
+				<topic href="contents/40-annotations.html#active_annotations_validation_phase" label="Phase 3: Validation" >
+				</topic>
+				<topic href="contents/40-annotations.html#active_annotations_code_generation" label="Phase 4: Code Generation" >
 				</topic>
 			</topic>
 			<topic href="contents/40-annotations.html#active_annotations_expression" label="On Expressions and Statements" >
@@ -213,14 +215,16 @@
 			<topic href="contents/40-annotations.html#active_annotation_classpath" label="Class Path Setup and Testing" >
 				<topic href="contents/40-annotations.html#active_annotation_CompilerTester" label="Testing" >
 				</topic>
-				<topic href="contents/40-annotations.html#active_annotation_classpath_7" label="Wrap Up" >
+				<topic href="contents/40-annotations.html#active_annotation_classpath_8" label="Wrap Up" >
 				</topic>
 			</topic>
 			<topic href="contents/40-annotations.html#activeAnnotations_10" label="Existing Active Annotations" >
 			</topic>
-			<topic href="contents/40-annotations.html#propertyAnnotation" label="@Property" >
+			<topic href="contents/40-annotations.html#propertyAnnotation" label="@Accessors" >
 			</topic>
 			<topic href="contents/40-annotations.html#dataAnnotation" label="@Data" >
+			</topic>
+			<topic href="contents/40-annotations.html#delegateAnnotation" label="@Delegate" >
 			</topic>
 		</topic>
 	</topic>

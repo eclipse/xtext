@@ -711,24 +711,27 @@ the context:
 
 code[Xtend][
   textField.addActionListener(\[ e |
-    textField.text = "Something happened!"
+    textField.text = "The command '" + e.actionCommand + "' happened!"
   \])
 ]
 
-Also as lambdas with one parameter are a common case, there is a special short hand notation for them,
-which is to leave the declaration including the vertical bar out. The name of the ref:implicitVariables[single variable]
-will be code[Xtend][it] in that case:
+Also you do not need to speficy the argument names. If you leave them out a single argument will be named code[Xtend][it], if the lambda has more arguments
+the names will be code[Xtend][$1,$2,...,$n] depending on the numnber of arguments of course. Here's an example with a single argument named code[it].
 
 code[Xtend][
   textField.addActionListener(\[
-    textField.text = "Something happened!"
+    textField.text = "The command '" + actionCommand + "' happened!"
   \])
 ]
 
-A lambda expression with zero arguments is written like this (note the bar after the opening bracket):
+A lambda expression with zero arguments can be written with or without the bar.
+They are both the same.
 
 code[Xtend][
-  val Runnable runnable = \[ |
+  val Runnable aBar = \[|
+    println("Hello I'm executed!")
+  \]
+  val Runnable noBar = \[
     println("Hello I'm executed!")
   \]
 ]
