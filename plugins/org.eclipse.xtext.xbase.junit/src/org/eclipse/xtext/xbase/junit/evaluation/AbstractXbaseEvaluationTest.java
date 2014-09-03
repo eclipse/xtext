@@ -2511,8 +2511,8 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"{\n" + 
 				"  val Enum<?> e = null\n" + 
 				"  switch(e) {\n" + 
-				"    java.lang.annotation.RetentionPolicy: e.toString\n" + 
-				"    java.lang.annotation.ElementType: e.toString\n" + 
+				"    java.lang.^annotation.RetentionPolicy: e.toString\n" + 
+				"    java.lang.^annotation.ElementType: e.toString\n" + 
 				"  }\n" + 
 				"}");
 	}
