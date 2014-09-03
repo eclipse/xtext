@@ -61,7 +61,7 @@ public class EPackageInfoRegistry implements IEPackageInfo.Registry {
 			String key = info.getNamespaceURI();
 			IEPackageInfo conflict = result.get(key);
 			if (conflict != null) {
-				String loc1 = ((EPackageInfo) ext).getSource().getLocation();
+				String loc1 = ((EPackageInfo) conflict).getSource().getLocation();
 				String loc2 = info.getSource().getLocation();
 				LOG.warn("namespaceURI " + key + " is already registered. File1: " + loc1 + " File2: " + loc2);
 			} else
