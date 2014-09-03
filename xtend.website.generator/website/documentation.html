@@ -3938,11 +3938,11 @@ public void setName(final String name) {
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
 @Accessors class Person {
-										  String name
-										  String firstName
-										  @Accessors(PUBLIC_GETTER, PROTECTED_SETTER) int age
-										  @Accessors(NONE) String internalField
-										}</pre>
+  String name
+  String firstName
+  @Accessors(PUBLIC_GETTER, PROTECTED_SETTER) int age
+  @Accessors(NONE) String internalField
+}</pre>
 							<p>
 						</p>
 						<p>
@@ -3952,35 +3952,35 @@ public void setName(final String name) {
 							</p>
 							<pre class="prettyprint lang-java linenums">
 @Accessors public class Person {
-										  private String name
-										  private String firstName
-										  @Accessors(PUBLIC_GETTER, PROTECTED_SETTER) private int age
-										  @Accessors(NONE) private String internalField
-										  
-										  public String getName() {
-										    return this.name;
-										  }
-										  
-										  public void setName(final String name) {
-										    this.name = name;
-										  }
-										  
-										  public String getFirstName() {
-										    return this.firstName;
-										  }
-										  
-										  public void setFirstName(final String firstName) {
-										    this.firstName = firstName;
-										  }
-										  
-										  public int getAge() {
-										    return this.age;
-										  }
-										  
-										  protected void setAge(final int age) {
-										    this.age = age;
-										  }
-										}</pre>
+  private String name
+  private String firstName
+  @Accessors(PUBLIC_GETTER, PROTECTED_SETTER) private int age
+  @Accessors(NONE) private String internalField
+  
+  public String getName() {
+    return this.name;
+  }
+  
+  public void setName(final String name) {
+    this.name = name;
+  }
+  
+  public String getFirstName() {
+    return this.firstName;
+  }
+  
+  public void setFirstName(final String firstName) {
+    this.firstName = firstName;
+  }
+  
+  public int getAge() {
+    return this.age;
+  }
+  
+  protected void setAge(final int age) {
+    this.age = age;
+  }
+}</pre>
 							<p>
 						</p>
 						</section>

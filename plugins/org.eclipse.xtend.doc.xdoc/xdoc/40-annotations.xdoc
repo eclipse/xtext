@@ -416,20 +416,18 @@ want one or the other and to change the visibility. this is done by means of cod
 Here is a more complex example, that shows how it works:
 
 code[Xtend][
-
 @Accessors class Person {
   String name
   String firstName
   @Accessors(PUBLIC_GETTER, PROTECTED_SETTER) int age
   @Accessors(NONE) String internalField
 }
-  
+
 ]
 
 will compile to the Java code
 
 code[Java][
-
 @Accessors public class Person {
   private String name
   private String firstName
