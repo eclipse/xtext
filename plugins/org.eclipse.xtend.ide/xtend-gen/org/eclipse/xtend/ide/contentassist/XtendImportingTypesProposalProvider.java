@@ -26,17 +26,13 @@ import org.eclipse.xtext.xbase.ui.contentassist.ImportingTypesProposalProvider;
 @SuppressWarnings("all")
 public class XtendImportingTypesProposalProvider extends ImportingTypesProposalProvider {
   protected ConfigurableCompletionProposal.IReplacementTextApplier createTextApplier(final ContentAssistContext context, final IScope typeScope, final IQualifiedNameConverter qualifiedNameConverter, final IValueConverter<String> valueConverter) {
-    ConfigurableCompletionProposal.IReplacementTextApplier _xblockexpression = null;
-    {
-      final Predicate<IEObjectDescription> _function = new Predicate<IEObjectDescription>() {
-        public boolean apply(final IEObjectDescription it) {
-          QualifiedName _name = it.getName();
-          return (!Objects.equal(_name, XtendImportedNamespaceScopeProvider.OLD_DATA_ANNOTATION));
-        }
-      };
-      final FilteringScope scope = new FilteringScope(typeScope, _function);
-      _xblockexpression = super.createTextApplier(context, scope, qualifiedNameConverter, valueConverter);
-    }
-    return _xblockexpression;
+    final Predicate<IEObjectDescription> _function = new Predicate<IEObjectDescription>() {
+      public boolean apply(final IEObjectDescription it) {
+        QualifiedName _name = it.getName();
+        return (!Objects.equal(_name, XtendImportedNamespaceScopeProvider.OLD_DATA_ANNOTATION));
+      }
+    };
+    final FilteringScope scope = new FilteringScope(typeScope, _function);
+    return super.createTextApplier(context, scope, qualifiedNameConverter, valueConverter);
   }
 }

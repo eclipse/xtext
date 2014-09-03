@@ -272,7 +272,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 			typeScope = scopeProvider.getScope(context.getCurrentModel(), typeReference);
 		}
 		final IReplacementTextApplier textApplier = createTextApplier(context, typeScope, qualifiedNameConverter, valueConverter);
-		final ICompletionProposalAcceptor scopeAware = new ICompletionProposalAcceptor.Delegate(acceptor) {
+		final ICompletionProposalAcceptor scopeAware = textApplier != null ? new ICompletionProposalAcceptor.Delegate(acceptor) {
 			@Override
 			public void accept(ICompletionProposal proposal) {
 				if (proposal instanceof ConfigurableCompletionProposal) {
@@ -280,7 +280,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 				}
 				super.accept(proposal);
 			}
-		};
+		} : acceptor;
 		Builder contextBuilder = context.copy();
 		final PrefixMatcher original = context.getMatcher();
 		contextBuilder.setMatcher(new PrefixMatcher() {

@@ -27,6 +27,7 @@ import org.eclipse.swt.custom.StyledText;
 import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.xtext.ui.JdtTypesProposalProvider;
 import org.eclipse.xtext.conversion.IValueConverter;
@@ -41,7 +42,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.xbase.imports.RewritableImportSection;
 import org.eclipse.xtext.xbase.ui.imports.ReplaceConverter;
-import org.eclipse.xtext.xtype.XImportDeclaration;
+import org.eclipse.xtext.xtype.XImportSection;
 
 import com.google.inject.Inject;
 
@@ -60,8 +61,8 @@ public class ImportingTypesProposalProvider extends JdtTypesProposalProvider {
 	@Override
 	protected IReplacementTextApplier createTextApplier(ContentAssistContext context, IScope typeScope,
 			IQualifiedNameConverter qualifiedNameConverter, IValueConverter<String> valueConverter) {
-		if (context.getCurrentModel() instanceof XImportDeclaration)
-			return super.createTextApplier(context, typeScope, qualifiedNameConverter, valueConverter);
+		if (EcoreUtil2.getContainerOfType(context.getCurrentModel(), XImportSection.class) != null)
+			return null;
 		return new FQNImporter(context.getResource(), context.getViewer(), typeScope, qualifiedNameConverter,
 				valueConverter, importSectionFactory, replaceConverter);
 	}
