@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -63,9 +64,13 @@ public abstract class AbstractPartialContentAssistParser extends AbstractContent
 	protected AbstractElement getEntryGrammarElement(ICompositeNode entryPoint) {
 		EObject grammarElement = entryPoint.getGrammarElement();
 		if (grammarElement instanceof RuleCall) {
-			grammarElement = ((RuleCall) grammarElement).getRule();
-		}
-		if (grammarElement instanceof ParserRule) {
+			AbstractRule rule = ((RuleCall) grammarElement).getRule();
+			if (rule instanceof ParserRule) {
+				if (!GrammarUtil.isMultipleCardinality(rule.getAlternatives())) {
+					grammarElement = rule.getAlternatives();
+				}
+			}
+		} else if (grammarElement instanceof ParserRule) {
 			grammarElement = ((ParserRule) grammarElement).getAlternatives();
 		}
 		AbstractElement result = (AbstractElement) grammarElement;
