@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
+import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
@@ -93,6 +94,9 @@ public class JvmTypesBuilder {
 	
 	@Inject
 	private IJvmModelAssociator associator;
+	
+	@Inject
+	private LanguageInfo languageInfo;
 	
 	@Inject
 	private ILogicalContainerProvider logicalContainerProvider;
@@ -1109,14 +1113,15 @@ public class JvmTypesBuilder {
 	 * @return a clone of tree rooted in original associated with the original, <code>null</code> if original is <code>null</code>. 
 	 */
 	protected <T extends EObject> T cloneAndAssociate(T original) {
+		final boolean canAssociate = languageInfo.isLanguage(original.eResource());
 		EcoreUtil.Copier copier = new EcoreUtil.Copier(false) {
 			private static final long serialVersionUID = 1L;
 
 			@Override/* @Nullable */ 
 			protected EObject createCopy(/* @Nullable */ EObject eObject) {
 				EObject result = super.createCopy(eObject);
-				if (result != null && eObject != null && !eObject.eIsProxy()) {
-					associator.associatePrimary(eObject, result);
+				if (canAssociate && result != null && eObject != null && !eObject.eIsProxy()) {
+					associator.associate(eObject, result);
 				}
 				return result;
 			}
@@ -1135,6 +1140,7 @@ public class JvmTypesBuilder {
 	 * @return a clone of tree rooted in original associated with the original, <code>null</code> if original is <code>null</code>. 
 	 */
 	protected <T extends JvmTypeReference> T cloneAndAssociate(T original) {
+		final boolean canAssociate = languageInfo.isLanguage(original.eResource());
 		EcoreUtil.Copier copier = new EcoreUtil.Copier(false) {
 			private static final long serialVersionUID = 1L;
 
@@ -1142,8 +1148,8 @@ public class JvmTypesBuilder {
 			protected EObject createCopy(/* @Nullable */ EObject eObject) {
 				EObject result = super.createCopy(eObject);
 				if (result != null && eObject != null && !eObject.eIsProxy()) {
-					if (eObject.eResource() != null)
-						associator.associatePrimary(eObject, result);
+					if (canAssociate)
+						associator.associate(eObject, result);
 				}
 				return result;
 			}
