@@ -16,7 +16,7 @@
 	<macrodef name="zip_example">
 		<attribute name="name" default="default" />
 		<attribute name="target" default="${target_xtend}" />
-		<attribute name="excludes" default="bin,bin/**,**/*._trace,.antlr-generator*.jar" />
+		<attribute name="excludes" default="bin,bin/**,**/*._trace,.antlr-generator*.jar,component.def" />
 		<sequential>
 			<delete file="@{target}/@{name}.zip" />
 			<zip destfile="@{target}/@{name}.zip" basedir="${source}/@{name}" excludes="@{excludes}"  />
