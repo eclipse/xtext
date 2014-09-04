@@ -29,7 +29,7 @@ import org.eclipse.xtext.serializer.tokens.IEnumLiteralSerializer;
 import org.eclipse.xtext.serializer.tokens.IKeywordSerializer;
 import org.eclipse.xtext.serializer.tokens.IValueSerializer;
 
-import com.google.common.collect.HashMultimap;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
@@ -77,13 +77,13 @@ public class AssignmentFinder implements IAssignmentFinder {
 
 	protected Iterable<AbstractElement> findValidAssignmentsForContainmentRef(EObject semanticObj,
 			Iterable<AbstractElement> assignedElements, EObject value) {
-		Multimap<EObject, AbstractElement> candidates = HashMultimap.create();
+		Multimap<EObject, AbstractElement> candidates = LinkedHashMultimap.create();
 		for (AbstractElement ass : assignedElements)
 			if (ass instanceof RuleCall)
 				candidates.put(((RuleCall) ass).getRule(), ass);
 			else if (ass instanceof Action)
 				candidates.put(ass, ass);
-		Iterable<EObject> contexts = Sets.newHashSet(contextFinder.findContextsByContents(value, candidates.keySet()));
+		Iterable<EObject> contexts = Sets.newLinkedHashSet(contextFinder.findContextsByContents(value, candidates.keySet()));
 		List<AbstractElement> result = Lists.newArrayList();
 		for (EObject ctx : contexts)
 			result.addAll(candidates.get(ctx));

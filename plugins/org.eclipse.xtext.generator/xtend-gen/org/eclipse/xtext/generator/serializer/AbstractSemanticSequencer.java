@@ -12,7 +12,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -78,7 +78,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
         return _name.compareTo(_name_1);
       }
     };
-    return IterableExtensions.<T>sort(iterable, _function);
+    return IterableExtensions.<T>sortWith(iterable, _function);
   }
   
   public Iterable<EPackage> getAccessedPackages() {
@@ -243,9 +243,9 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   }
   
   public <K extends Object, V extends Object> Map<K, V> toMap(final Iterable<Pair<K, V>> items) {
-    HashMap<K, V> _xblockexpression = null;
+    LinkedHashMap<K, V> _xblockexpression = null;
     {
-      final HashMap<K, V> result = CollectionLiterals.<K, V>newHashMap();
+      final LinkedHashMap<K, V> result = CollectionLiterals.<K, V>newLinkedHashMap();
       for (final Pair<K, V> i : items) {
         K _key = i.getKey();
         V _value = i.getValue();

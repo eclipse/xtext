@@ -45,7 +45,7 @@ public class SemanticSequencerUtil {
 	protected IGrammarConstraintProvider gcp;
 
 	public Map<IConstraint, List<EObject>> getGrammarConstraints(Grammar grammar, EClass clazz) {
-		Map<IConstraint, List<EObject>> result = Maps.newHashMap();
+		Map<IConstraint, List<EObject>> result = Maps.newLinkedHashMap();
 		for (IConstraintContext ctx : gcp.getConstraints(grammar))
 			for (IConstraint c : ctx.getConstraints())
 				if (c.getType() == clazz) {
