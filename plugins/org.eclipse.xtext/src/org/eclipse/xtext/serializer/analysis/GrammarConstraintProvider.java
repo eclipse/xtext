@@ -1270,9 +1270,9 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 	}
 
 	protected String findBestConstraintName(Collection<IConstraint> equalConstraints) {
-		Set<ParserRule> relevantRules = Sets.newHashSet();
-		Set<Action> relevantActions = Sets.newHashSet();
-		Set<ParserRule> contextRules = Sets.newHashSet();
+		Set<ParserRule> relevantRules = Sets.newLinkedHashSet();
+		Set<Action> relevantActions = Sets.newLinkedHashSet();
+		Set<ParserRule> contextRules = Sets.newLinkedHashSet();
 		for (IConstraint c : equalConstraints)
 			for (EObject ctx : ((Constraint) c).getAllContext())
 				if (ctx instanceof ParserRule)
@@ -1381,7 +1381,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				Constraint constraint = new ActionConstraint(context, null, null, this);
 				result.addConstraint(constraint);
 			} else {
-				ConstraintElement ce = createConstraintElement(context, start, type, false, Sets.newHashSet());
+				ConstraintElement ce = createConstraintElement(context, start, type, false, Sets.newLinkedHashSet());
 				if (ce == TYPEMATCH) {
 					Constraint constraint = new ActionConstraint(context, type, null, this);
 					result.addConstraint(constraint);
@@ -1422,7 +1422,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				Constraint constraint = new RuleConstraint(context, null, null, this);
 				result.addConstraint(constraint);
 			} else {
-				ConstraintElement ce = createConstraintElement(context, type, Sets.newHashSet());
+				ConstraintElement ce = createConstraintElement(context, type, Sets.newLinkedHashSet());
 				if (ce == TYPEMATCH) {
 					Constraint constraint = new RuleConstraint(context, type, null, this);
 					result.addConstraint(constraint);
