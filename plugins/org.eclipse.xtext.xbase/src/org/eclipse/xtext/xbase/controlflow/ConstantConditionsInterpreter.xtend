@@ -105,6 +105,9 @@ class ConstantConditionsInterpreter {
 			return EvaluationResult.NOT_A_CONSTANT
 		}
 		switch feature {
+			JvmType case !typeLiteral: {
+				return new EvaluationResult(new ThisReference(feature), false)
+			}
 			JvmType,
 			JvmEnumerationLiteral: {
 				return new EvaluationResult(feature, true)
@@ -123,11 +126,14 @@ class ConstantConditionsInterpreter {
 						val associatedExpression = feature.associatedExpression
 						if (associatedExpression != null) {
 							val result = associatedExpression.evaluateAssociatedExpression(context)
+							if (result.value instanceof ThisReference)
+								return EvaluationResult.NOT_A_CONSTANT
 							return new EvaluationResult(result.value, false)
 						} else {
 							val list = switch v: receiver.value {
-								JvmIdentifiableElement: newArrayList(v)
-								List<JvmIdentifiableElement>: new ArrayList(v)
+								JvmIdentifiableElement,
+								ThisReference: <Object>newArrayList(v)
+								List<Object>: new ArrayList(v)
 							}
 							list.add(feature)
 							return new EvaluationResult(list, false)
@@ -344,6 +350,11 @@ class EvaluationContext {
 }
 
 @Data
+class ThisReference {
+	JvmType type
+}
+
+@Data
 package class EvaluationResult {
 	
 	protected static final EvaluationResult NOT_A_CONSTANT = new EvaluationResult(new Object(), false) {
@@ -371,6 +382,15 @@ package class EvaluationResult {
 	}
 	private def dispatch Object equalValue(Object myValue, JvmIdentifiableElement otherValue) {
 		return NOT_A_CONSTANT.value
+	}
+	private def dispatch Object equalValue(Object myValue, ThisReference otherValue) {
+		return NOT_A_CONSTANT.value
+	}
+	private def dispatch Object equalValue(ThisReference myValue, Object otherValue) {
+		return NOT_A_CONSTANT.value
+	}
+	private def dispatch Object equalValue(ThisReference myValue, ThisReference otherValue) {
+		return myValue == otherValue
 	}
 	private def dispatch Object equalValue(Void myValue, JvmIdentifiableElement otherValue) {
 		return NOT_A_CONSTANT.value
@@ -434,6 +454,18 @@ package class EvaluationResult {
 	}
 	private def dispatch Object equalValue(XTypeLiteral myValue, JvmType otherType) {
 		return myValue.type == otherType && myValue.arrayDimensions.empty
+	}
+	private def dispatch Object equalValue(JvmType myValue, ThisReference otherValue) {
+		return false
+	}
+	private def dispatch Object equalValue(ThisReference myValue, JvmType otherValue) {
+		return false
+	}
+	private def dispatch Object equalValue(XTypeLiteral myValue, ThisReference otherType) {
+		return false
+	}
+	private def dispatch Object equalValue(ThisReference myValue, XTypeLiteral otherType) {
+		return false
 	}
 }
 
