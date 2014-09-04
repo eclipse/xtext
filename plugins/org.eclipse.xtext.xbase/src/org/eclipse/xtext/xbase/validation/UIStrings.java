@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -47,6 +47,7 @@ import com.google.inject.Inject;
  * UI presentable string representation of Xbase elements.
  * 
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Stéphane Galland 
  */
 public class UIStrings {
 
@@ -167,6 +168,14 @@ public class UIStrings {
 							String text = node.getRootNode().getText();
 							ITextRegion textRegion = node.getTextRegion();
 							String result = text.substring(textRegion.getOffset(), textRegion.getLength() + textRegion.getOffset());
+							
+							if (result != null) {
+								int pointIndex = result.lastIndexOf('.');
+								if (pointIndex >= 0 && pointIndex < (result.length() - 1)) {
+									return result.substring(pointIndex + 1);
+								}
+							}
+							
 							return result;
 						} else {
 							return defaultLabel;
