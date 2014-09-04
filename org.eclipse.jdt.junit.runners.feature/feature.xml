@@ -19,6 +19,8 @@
       http://www.eclipse.org/legal/epl-v10.html
    </license>
 
+   <includes id="org.eclipse.jdt.junit.runners.feature.source" version="0.0.0"/>
+
    <requires>
       <import feature="org.eclipse.jdt" version="3.8.0.v20120525-1249-8-8nFqlFNOfwKDRGz-pXJdG0GW83"/>
    </requires>
