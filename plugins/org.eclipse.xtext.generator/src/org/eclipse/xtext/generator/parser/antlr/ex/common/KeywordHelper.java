@@ -110,7 +110,7 @@ public class KeywordHelper implements Adapter {
 		BiMap<CharSequence, String> result = HashBiMap.create();
 		for(String s: treeSet) {
 			CharSequence key = createKey(s);
-			String readableName = GrammarAccessUtil.toJavaIdentifier(s, Boolean.TRUE);
+			String readableName = toAntlrTokenIdentifier(s);
 			if (result.containsValue(readableName)) {
 				int i = 1;
 				String next = readableName + "_" + i;
@@ -121,6 +121,14 @@ public class KeywordHelper implements Adapter {
 				readableName = next;
 			}
 			result.put(key, readableName);
+		}
+		return result;
+	}
+
+	private String toAntlrTokenIdentifier(String s) {
+		String result = GrammarAccessUtil.toJavaIdentifier(s, Boolean.TRUE);
+		if (result.charAt(0) == '_') {
+			result = "KW_" + result;
 		}
 		return result;
 	}

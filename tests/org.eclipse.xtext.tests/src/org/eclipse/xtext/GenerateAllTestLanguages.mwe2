@@ -271,6 +271,10 @@ Workflow {
 				ignoreCase = true
 			}
 		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug443221TestLanguage.xtext"
+			fragment = @TestLanguagesFragmentsEx {}
+		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parser/assignments/AssignmentsTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}

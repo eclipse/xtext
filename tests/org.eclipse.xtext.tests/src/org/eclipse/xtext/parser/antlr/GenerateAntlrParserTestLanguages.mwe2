@@ -71,5 +71,9 @@ Workflow {
 			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug378967TestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug443221TestLanguage.xtext"
+			fragment = @TestLanguagesFragmentsEx {}
+		}
 	}
 }
