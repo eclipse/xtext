@@ -345,6 +345,15 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://eclipse.org/xtext/Bug443221TestLanguage" 
+       class = "org.eclipse.xtext.parser.antlr.bug443221Test.Bug443221TestPackage"
+       genModel = "org/eclipse/xtext/parser/antlr/Bug443221TestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://www.eclipse.org/2008/tmf/xtext/AssignmentsTest" 
        class = "org.eclipse.xtext.parser.assignments.assignmentsTestLanguage.AssignmentsTestLanguagePackage"
        genModel = "org/eclipse/xtext/parser/assignments/AssignmentsTestLanguage.genmodel" /> 
