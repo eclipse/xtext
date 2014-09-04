@@ -5,8 +5,8 @@
     <features name="org.eclipse.emf.mwe2.runtime.sdk.feature.group"/>
     <features name="org.eclipse.emf.mwe2.language.sdk.feature.group"/>
   </repositories>
-  <repositories location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/maintenance/R201407030533">
-    <features name="org.eclipse.xtext.sdk.feature.group" versionRange="2.6.0"/>
+  <repositories location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/">
+    <features name="org.eclipse.xtext.sdk.feature.group" versionRange="2.7.0"/>
     <features name="org.eclipse.xtend.sdk.feature.group"/>
     <features name="org.eclipse.xtend.gwt.feature.group"/>
   </repositories>
