@@ -135,7 +135,7 @@ public class ResourceAccess {
 			for (URI uri : find(context)) {
 				File parent = new File(uri.toFileString());
 				if (new File(parent, fileName).exists())
-					return URI.createURI(fileName).resolve(uri);
+					return URI.createURI(fileName).resolve(uri.hasTrailingPathSeparator() ? uri : uri.appendSegment(""));
 			}
 			return null;
 		}
