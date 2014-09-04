@@ -8,11 +8,4 @@
             class="org.eclipse.jdt.junit.runners.PatchSetup">
       </startup>
    </extension>
-   <extension
-         point="org.eclipse.jdt.junit.testRunListeners">
-      <testRunListener
-            class="org.eclipse.jdt.junit.runners.RegistryTestRunListener">
-      </testRunListener>
-   </extension>
-
 </plugin>

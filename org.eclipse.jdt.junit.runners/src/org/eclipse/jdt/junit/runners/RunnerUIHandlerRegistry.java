@@ -6,9 +6,7 @@ import java.util.Map;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.junit.model.ITestElement;
-
 
 public class RunnerUIHandlerRegistry {
 
@@ -19,12 +17,9 @@ public class RunnerUIHandlerRegistry {
 	private static Map<String, IRunnerUIHandler> handlers = new HashMap<String, IRunnerUIHandler>();
 
 	public static IRunnerUIHandler getHandler(ITestElement element) {
-		IType type = TypeUtil.findType(element);
-		if (type != null) {
-			String runner = TypeUtil.findRunner(type);
-			if (runner != null)
-				return RunnerUIHandlerRegistry.getHandler(runner);
-		}
+		String runner = RunnerFinder.getRunner(element);
+		if (runner != null)
+			return RunnerUIHandlerRegistry.getHandler(runner);
 		return null;
 	}
 

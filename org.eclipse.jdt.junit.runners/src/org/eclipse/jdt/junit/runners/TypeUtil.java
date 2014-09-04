@@ -3,15 +3,15 @@ package org.eclipse.jdt.junit.runners;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.lang.model.SourceVersion;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.debug.core.ILaunch;
-import org.eclipse.jdt.core.IAnnotation;
 import org.eclipse.jdt.core.IJavaModel;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.IMemberValuePair;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.search.IJavaSearchConstants;
@@ -24,60 +24,11 @@ import org.eclipse.jdt.internal.junit.ui.JUnitPlugin;
 import org.eclipse.jdt.junit.model.ITestCaseElement;
 import org.eclipse.jdt.junit.model.ITestElement;
 import org.eclipse.jdt.junit.model.ITestSuiteElement;
-import org.junit.runner.RunWith;
 
 @SuppressWarnings("restriction")
 public class TypeUtil {
 
-	private static IType resolveToType(IType baseType, String refTypeName) throws JavaModelException {
-		if (baseType == null || refTypeName == null)
-			return null;
-		String[][] resolvedNames = baseType.resolveType(refTypeName);
-		IJavaProject javaProject = baseType.getJavaProject();
-		if (resolvedNames != null && resolvedNames.length > 0) {
-			return javaProject.findType(resolvedNames[0][0], resolvedNames[0][1].replace('$', '.'), (IProgressMonitor) null);
-		} else if (baseType.isBinary()) {
-			IType type = javaProject.findType(refTypeName, (IProgressMonitor) null);
-			if (type == null) {
-				type = javaProject.findType(baseType.getPackageFragment().getElementName() + '.' + refTypeName, (IProgressMonitor) null);
-			}
-			return type;
-		} else {
-			return null;
-		}
-	}
-
-	private static String resolveToQName(IType baseType, String refTypeName) throws JavaModelException {
-		String[][] resolvedNames = baseType.resolveType(refTypeName);
-		if (resolvedNames != null && resolvedNames.length > 0) {
-			return resolvedNames[0][0] + "." + resolvedNames[0][1].replace('$', '.');
-		} else {
-			return null;
-		}
-	}
-
-	public static String findRunner(IType type) {
-		try {
-			for (IAnnotation candidate : type.getAnnotations()) {
-				String elementName = candidate.getElementName();
-				if (!elementName.endsWith(RunWith.class.getSimpleName()))
-					continue;
-				if (!RunWith.class.getName().equals(resolveToQName(type, elementName)))
-					continue;
-				for (IMemberValuePair pair : candidate.getMemberValuePairs())
-					if ("value".equals(pair.getMemberName()) && pair.getValue() instanceof String)
-						return resolveToQName(type, (String) pair.getValue());
-			}
-			IType superClass = resolveToType(type, type.getSuperclassName());
-			if (superClass != null)
-				return findRunner(superClass);
-		} catch (JavaModelException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	public static IType findType(ITestElement element) {
+	public static String getTypeName(ITestElement element) {
 		String className = null;
 		if (element instanceof ITestCaseElement)
 			className = ((ITestCaseElement) element).getTestClassName();
@@ -91,6 +42,13 @@ public class TypeUtil {
 				e.printStackTrace();
 			}
 		}
+		if (className != null && SourceVersion.isName(className))
+			return className;
+		return null;
+	}
+
+	public static IType findType(ITestElement element) {
+		String className = getTypeName(element);
 		IType type = null;
 		if (className != null)
 			type = findType(element.getTestRunSession().getLaunchedProject(), className);
@@ -103,7 +61,6 @@ public class TypeUtil {
 	// org.eclipse.jdt.internal.junit.ui.OpenEditorAction.findType(IJavaProject,
 	// String)
 	public static IType findType(final IJavaProject project, String className) {
-
 		final IType[] result = { null };
 		final String dottedName = className.replace('$', '.'); // for nested
 																// classes...
