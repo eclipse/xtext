@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext;
 
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.resource.XtextResource;
+
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.inject.name.Named;
@@ -46,6 +49,16 @@ public class LanguageInfo {
 		if (lastIndex == -1)
 			return getLanguageName();
 		return getLanguageName().substring(lastIndex+1);
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public boolean isLanguage(Resource resource) {
+		if (resource instanceof XtextResource) {
+			return languageName.equals(((XtextResource) resource).getLanguageName());
+		}
+		return false;
 	}
 
 	@Override
