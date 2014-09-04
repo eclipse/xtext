@@ -886,7 +886,7 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 
 	protected void initConstraints() {
 		if (constraintContexts == null) {
-			constraints = Maps.newHashMap();
+			constraints = Maps.newLinkedHashMap();
 			constraintContexts = grammarConstraintProvider.getConstraints(grammarAccess.getGrammar());
 			//			System.out.println(Joiner.on("\n").join(constraintContexts));
 			for (IConstraintContext ctx : constraintContexts)

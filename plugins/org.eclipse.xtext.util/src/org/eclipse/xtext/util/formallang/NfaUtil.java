@@ -95,7 +95,7 @@ public class NfaUtil {
 	public static class NFAFactory<S> implements NfaFactory<Nfa<S>, S, S> {
 
 		public Nfa<S> create(S start, S stop) {
-			return new NFAImpl<S>(start, stop, Maps.<S, List<S>> newHashMap());
+			return new NFAImpl<S>(start, stop, Maps.<S, List<S>> newLinkedHashMap());
 		}
 
 		public S createState(Nfa<S> nfa, S token) {
@@ -169,7 +169,7 @@ public class NfaUtil {
 	}
 
 	public <S> Set<S> collect(Nfa<S> nfa) {
-		Set<S> result = Sets.newHashSet();
+		Set<S> result = Sets.newLinkedHashSet();
 		collect(nfa, nfa.getStart(), result);
 		return result;
 	}
@@ -234,7 +234,7 @@ public class NfaUtil {
 
 	public <SRCSTATE, DSTSTATE, P extends Nfa<DSTSTATE>> P create(Nfa<SRCSTATE> source,
 			NfaFactory<P, DSTSTATE, SRCSTATE> factory) {
-		Map<SRCSTATE, DSTSTATE> src2dst = Maps.newHashMap();
+		Map<SRCSTATE, DSTSTATE> src2dst = Maps.newLinkedHashMap();
 		P result = factory.create(source.getStart(), source.getStop());
 		src2dst.put(source.getStop(), result.getStop());
 		src2dst.put(source.getStart(), result.getStart());
@@ -256,7 +256,7 @@ public class NfaUtil {
 
 	public <S, E, T1, T2, P extends Nfa<S>> P create(Production<E, T1> production, FollowerFunction<E> ff,
 			Function<E, T2> tokenFunc, NfaFactory<P, S, ? super T2> factory, T2 start, T2 stop) {
-		Map<E, S> states = Maps.newHashMap();
+		Map<E, S> states = Maps.newLinkedHashMap();
 		P nfa = factory.create(start, stop);
 		states.put(null, nfa.getStop());
 		create(production, nfa, nfa.getStart(), ff.getStarts(production.getRoot()), ff, tokenFunc, factory, states);
@@ -360,7 +360,7 @@ public class NfaUtil {
 	}
 
 	public <S> Set<S> filterFollowers(Nfa<S> nfa, Iterable<S> followers, Predicate<S> filter) {
-		Set<S> result = Sets.newHashSet();
+		Set<S> result = Sets.newLinkedHashSet();
 		for (S follower : followers)
 			collectFollowers(nfa, follower, result, Sets.<S> newHashSet(), filter);
 		return result;
@@ -440,10 +440,10 @@ public class NfaUtil {
 	}
 
 	public <S> Set<S> findFirst(Nfa<S> nfa, Iterable<S> starts, Predicate<S> match) {
-		Set<S> current = Sets.newHashSet(starts);
-		Set<S> visited = Sets.newHashSet();
+		Set<S> current = Sets.newLinkedHashSet(starts);
+		Set<S> visited = Sets.newLinkedHashSet();
 		while (!current.isEmpty()) {
-			Set<S> result = Sets.newHashSet();
+			Set<S> result = Sets.newLinkedHashSet();
 			for (S s : current) {
 				if (match.apply(s))
 					result.add(s);
@@ -451,7 +451,7 @@ public class NfaUtil {
 			if (!result.isEmpty())
 				return result;
 			visited.addAll(current);
-			Set<S> newCurrent = Sets.newHashSet();
+			Set<S> newCurrent = Sets.newLinkedHashSet();
 			for (S s : current)
 				Iterables.addAll(newCurrent, nfa.getFollowers(s));
 			newCurrent.removeAll(visited);
@@ -461,7 +461,7 @@ public class NfaUtil {
 	}
 
 	public <S> Nfa<S> inverse(Nfa<S> nfa) {
-		Map<S, List<S>> inverseMap = Maps.newHashMap();
+		Map<S, List<S>> inverseMap = Maps.newLinkedHashMap();
 		collectedInverseMap(nfa, nfa.getStart(), inverseMap, Sets.<S> newHashSet());
 		return new NFAImpl<S>(nfa.getStop(), nfa.getStart(), inverseMap);
 	}
@@ -477,7 +477,7 @@ public class NfaUtil {
 	}
 
 	public <S extends Comparable<S>> Nfa<S> sort(Nfa<S> nfa) {
-		Map<S, List<S>> followerMap = Maps.newHashMap();
+		Map<S, List<S>> followerMap = Maps.newLinkedHashMap();
 		for (S state : new NfaUtil().collect(nfa)) {
 			ArrayList<S> followers = Lists.newArrayList(nfa.getFollowers(state));
 			Collections.sort(followers);
@@ -487,7 +487,7 @@ public class NfaUtil {
 	}
 
 	public <S> Nfa<S> sort(Nfa<S> nfa, Comparator<S> comparator) {
-		Map<S, List<S>> followerMap = Maps.newHashMap();
+		Map<S, List<S>> followerMap = Maps.newLinkedHashMap();
 		for (S state : new NfaUtil().collect(nfa)) {
 			ArrayList<S> followers = Lists.newArrayList(nfa.getFollowers(state));
 			Collections.sort(followers, comparator);

@@ -106,7 +106,7 @@ class AbstractSemanticSequencer extends GeneratedFile {
 	}
 	
 	def <K, V> Map<K, V> toMap(Iterable<Pair<K, V>> items) {
-		val result = <K, V>newHashMap()
+		val result = <K, V>newLinkedHashMap()
 		for(i:items) 
 			result.put(i.key, i.value)
 		result

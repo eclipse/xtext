@@ -75,7 +75,7 @@ public class SyntacticSequencerUtil {
 	}
 
 	protected Set<ISynTransition> getAllAmbiguousTransitions() {
-		Set<ISynTransition> result = Sets.newHashSet();
+		Set<ISynTransition> result = Sets.newLinkedHashSet();
 		for (ISynAbsorberState start : getAllPDAs())
 			collectAllAmbiguousTransitions(start, result, Sets.newHashSet());
 		return result;

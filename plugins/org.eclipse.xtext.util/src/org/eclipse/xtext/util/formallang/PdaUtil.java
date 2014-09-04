@@ -25,7 +25,6 @@ import com.google.common.base.Functions;
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -296,7 +295,7 @@ public class PdaUtil {
 		D result = fact.create(tokens.apply(pda.getStart()), tokens.apply(pda.getStop()));
 		Identity<S> identity = new Identity<S>();
 		Map<S, S> idstates = Maps.newIdentityHashMap();
-		Multimap<S, S> followers = HashMultimap.create();
+		Multimap<S, S> followers = LinkedHashMultimap.create();
 		for (S s_old : nfaUtil.collect(pda)) {
 			S s_new = idstates.get(s_old);
 			if (s_new == null) {
@@ -324,7 +323,7 @@ public class PdaUtil {
 			}
 		}
 		for (Map.Entry<S, Collection<S>> entry : followers.asMap().entrySet()) {
-			Set<S> f = Sets.newHashSet();
+			Set<S> f = Sets.newLinkedHashSet();
 			for (S s : entry.getValue())
 				f.add(idstates.get(s));
 			fact.setFollowers(result, entry.getKey(), f);
@@ -396,8 +395,8 @@ public class PdaUtil {
 	public <S, P, E, T1, T2, D extends Pda<S, P>> D create(Cfg<E, T1> cfg, FollowerFunction<E> ff,
 			Function<E, T2> element2token, PdaFactory<D, S, P, ? super T2> fact) {
 		D pda = fact.create(null, null);
-		Map<E, S> states = Maps.newHashMap();
-		Map<E, S> stops = Maps.newHashMap();
+		Map<E, S> states = Maps.newLinkedHashMap();
+		Map<E, S> stops = Maps.newLinkedHashMap();
 		Multimap<E, E> callers = new CfgUtil().getCallers(cfg);
 		create(cfg, pda, pda.getStart(), cfg.getRoot(), ff.getStarts(cfg.getRoot()), true, ff, element2token, fact,
 				states, stops, callers);
@@ -428,8 +427,8 @@ public class PdaUtil {
 		MappedComparator<S, Integer> distanceComp = new MappedComparator<S, Integer>(distances);
 		trace.push(newItem(pda, distanceComp, distances, pda.getStart(), previous));
 		Multimap<S, S> edges = LinkedHashMultimap.create();
-		HashSet<S> states = Sets.newHashSet();
-		HashSet<Pair<S, R>> success = Sets.newHashSet();
+		HashSet<S> states = Sets.newLinkedHashSet();
+		HashSet<Pair<S, R>> success = Sets.newLinkedHashSet();
 		states.add(pda.getStart());
 		states.add(pda.getStop());
 		ROOT: while (!trace.isEmpty()) {
@@ -458,7 +457,7 @@ public class PdaUtil {
 			trace.pop();
 		}
 		D result = factory.create(pda.getStart(), pda.getStop());
-		Map<S, S> old2new = Maps.newHashMap();
+		Map<S, S> old2new = Maps.newLinkedHashMap();
 		old2new.put(pda.getStart(), result.getStart());
 		old2new.put(pda.getStop(), result.getStop());
 		for (S old : states) {
@@ -481,7 +480,7 @@ public class PdaUtil {
 	}
 
 	public <S, P> Nfa<S> filterUnambiguousPaths(Pda<S, P> pda) {
-		Map<S, List<S>> followers = Maps.newHashMap();
+		Map<S, List<S>> followers = Maps.newLinkedHashMap();
 		Map<S, Integer> distanceMap = nfaUtil.distanceToFinalStateMap(pda);
 		filterUnambiguousPaths(pda, pda.getStart(), distanceMap, followers);
 		return new NfaUtil.NFAImpl<S>(pda.getStart(), pda.getStop(), followers);
@@ -595,7 +594,7 @@ public class PdaUtil {
 			Predicate<S> canPass) {
 		StackItem<P> stackItem = createStack(stack);
 		List<TraceItem<S, P>> current = Lists.newArrayList();
-		Set<S> visited = Sets.newHashSet(starts);
+		Set<S> visited = Sets.newLinkedHashSet(starts);
 		for (S start : starts) {
 			//			if (matches.apply(start))
 			//				return new TraceItem<S, P>(null, start, stackItem);
@@ -636,7 +635,7 @@ public class PdaUtil {
 			Predicate<S> matches, Predicate<S> canPass) {
 		StackItem<P> stackItem = createStack(stack);
 		List<TraceItem<S, P>> current = Lists.newArrayList();
-		Set<S> visited = Sets.newHashSet(starts);
+		Set<S> visited = Sets.newLinkedHashSet(starts);
 		TraceItem<S, P> result = null;
 		for (S start : starts) {
 			TraceItem<S, P> item = new TraceItem<S, P>(null, start, stackItem);
@@ -693,11 +692,11 @@ public class PdaUtil {
 	//	public  IPdaAdapter<String, String, String> parse(String pda) {
 	//		Pattern node = Pattern.compile("([a-z-A-Z0-9]*)\\[([a-z-A-Z0-9,= ]*)\\]");
 	//		Pattern transition = Pattern.compile("([a-z-A-Z0-9]*) -> ([a-z-A-Z0-9]*)");
-	//		final Set<String> starts = Sets.newHashSet();
-	//		final Set<String> finals = Sets.newHashSet();
+	//		final Set<String> starts = Sets.newLinkedHashSet();
+	//		final Set<String> finals = Sets.newLinkedHashSet();
 	//		final Multimap<String, String> followers = HashMultimap.create();
-	//		final Map<String, String> pushs = Maps.newHashMap();
-	//		final Map<String, String> pops = Maps.newHashMap();
+	//		final Map<String, String> pushs = Maps.newLinkedHashMap();
+	//		final Map<String, String> pops = Maps.newLinkedHashMap();
 	//		for (String line : pda.split("\\n")) {
 	//			line = line.trim();
 	//			Matcher nodeMatcher = node.matcher(line);
