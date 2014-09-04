@@ -17,6 +17,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.XTypeLiteral;
+import org.eclipse.xtext.xbase.controlflow.ThisReference;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
@@ -51,6 +52,18 @@ class EvaluationResult {
   
   private Object _equalValue(final Object myValue, final JvmIdentifiableElement otherValue) {
     return EvaluationResult.NOT_A_CONSTANT.value;
+  }
+  
+  private Object _equalValue(final Object myValue, final ThisReference otherValue) {
+    return EvaluationResult.NOT_A_CONSTANT.value;
+  }
+  
+  private Object _equalValue(final ThisReference myValue, final Object otherValue) {
+    return EvaluationResult.NOT_A_CONSTANT.value;
+  }
+  
+  private Object _equalValue(final ThisReference myValue, final ThisReference otherValue) {
+    return Boolean.valueOf(Objects.equal(myValue, otherValue));
   }
   
   private Object _equalValue(final Void myValue, final JvmIdentifiableElement otherValue) {
@@ -169,6 +182,22 @@ class EvaluationResult {
     return Boolean.valueOf(_and);
   }
   
+  private Object _equalValue(final JvmType myValue, final ThisReference otherValue) {
+    return Boolean.valueOf(false);
+  }
+  
+  private Object _equalValue(final ThisReference myValue, final JvmType otherValue) {
+    return Boolean.valueOf(false);
+  }
+  
+  private Object _equalValue(final XTypeLiteral myValue, final ThisReference otherType) {
+    return Boolean.valueOf(false);
+  }
+  
+  private Object _equalValue(final ThisReference myValue, final XTypeLiteral otherType) {
+    return Boolean.valueOf(false);
+  }
+  
   private Object equalValue(final Object myValue, final Object otherValue) {
     if (myValue instanceof JvmEnumerationLiteral
          && otherValue instanceof JvmEnumerationLiteral) {
@@ -191,6 +220,12 @@ class EvaluationResult {
     } else if (myValue instanceof JvmType
          && otherValue == null) {
       return _equalValue((JvmType)myValue, (Void)null);
+    } else if (myValue instanceof JvmType
+         && otherValue instanceof ThisReference) {
+      return _equalValue((JvmType)myValue, (ThisReference)otherValue);
+    } else if (myValue instanceof XTypeLiteral
+         && otherValue instanceof ThisReference) {
+      return _equalValue((XTypeLiteral)myValue, (ThisReference)otherValue);
     } else if (myValue instanceof JvmIdentifiableElement
          && otherValue instanceof JvmEnumerationLiteral) {
       return _equalValue((JvmIdentifiableElement)myValue, (JvmEnumerationLiteral)otherValue);
@@ -215,6 +250,12 @@ class EvaluationResult {
     } else if (myValue == null
          && otherValue instanceof JvmType) {
       return _equalValue((Void)null, (JvmType)otherValue);
+    } else if (myValue instanceof ThisReference
+         && otherValue instanceof JvmType) {
+      return _equalValue((ThisReference)myValue, (JvmType)otherValue);
+    } else if (myValue instanceof ThisReference
+         && otherValue instanceof XTypeLiteral) {
+      return _equalValue((ThisReference)myValue, (XTypeLiteral)otherValue);
     } else if (myValue == null
          && otherValue instanceof List) {
       return _equalValue((Void)null, (List<?>)otherValue);
@@ -224,9 +265,15 @@ class EvaluationResult {
     } else if (myValue == null
          && otherValue == null) {
       return _equalValue((Void)null, (Void)null);
+    } else if (myValue instanceof ThisReference
+         && otherValue instanceof ThisReference) {
+      return _equalValue((ThisReference)myValue, (ThisReference)otherValue);
     } else if (myValue == null
          && otherValue != null) {
       return _equalValue((Void)null, otherValue);
+    } else if (myValue instanceof ThisReference
+         && otherValue != null) {
+      return _equalValue((ThisReference)myValue, otherValue);
     } else if (myValue != null
          && otherValue instanceof List) {
       return _equalValue(myValue, (List<?>)otherValue);
@@ -236,6 +283,9 @@ class EvaluationResult {
     } else if (myValue != null
          && otherValue == null) {
       return _equalValue(myValue, (Void)null);
+    } else if (myValue != null
+         && otherValue instanceof ThisReference) {
+      return _equalValue(myValue, (ThisReference)otherValue);
     } else if (myValue != null
          && otherValue != null) {
       return _equalValue(myValue, otherValue);

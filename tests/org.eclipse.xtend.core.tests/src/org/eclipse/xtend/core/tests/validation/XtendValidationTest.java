@@ -2882,6 +2882,71 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertNoIssues(file);
 	}
 	
+	@Test public void testConstantConditions_23() throws Exception {
+		XtendFile file = file(
+				"class Test {\n" + 
+				"	def m(String a) {\n" + 
+				"		if (this == a) return\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertNoIssues(file);
+	}
+	
+	@Test public void testConstantConditions_24() throws Exception {
+		XtendFile file = file(
+				"class Test {\n" + 
+				"	def m() {\n" + 
+				"		if (this == String) return\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertWarning(file, XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION, "always false");
+	}
+	
+	@Test public void testConstantConditions_25() throws Exception {
+		XtendFile file = file(
+				"class Test {\n" + 
+				"	val t = this" + 
+				"	def m() {\n" + 
+				"		if (this == t) return\n" + 
+				"	}\n" + 
+				"}");
+		// TODO could actually be smth like this, but it would require more thorough instance / flow tracking
+//		helper.assertWarning(file, XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION, "always true");
+		helper.assertNoIssues(file);
+	}
+
+	@Test public void testConstantConditions_26() throws Exception {
+		XtendFile file = file(
+				"class Test {\n" + 
+				"	val t = this" + 
+				"	def m(Test other) {\n" + 
+				"		if (this == other.t) return\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertNoIssues(file);
+	}
+
+	@Test public void testConstantConditions_27() throws Exception {
+		XtendFile file = file(
+				"class Test {\n" + 
+				"	def m() {\n" + 
+				"		if (this == null) return\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertWarning(file, XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION, "always false");
+	}
+
+	@Test public void testConstantConditions_28() throws Exception {
+		XtendFile file = file(
+				"class Test {\n" + 
+				"	def m() {\n" + 
+				"		val t = this" + 
+				"		if (this == t) return\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertWarning(file, XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION, "always true");
+	}
+	
 	@Test public void testAnonymousClassNotOverridingEquals() throws Exception {
 		XtendFile file = file(
 			"public interface Foo {"+

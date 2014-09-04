@@ -38,6 +38,7 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.controlflow.BooleanResult;
 import org.eclipse.xtext.xbase.controlflow.EvaluationContext;
 import org.eclipse.xtext.xbase.controlflow.EvaluationResult;
+import org.eclipse.xtext.xbase.controlflow.ThisReference;
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException;
 import org.eclipse.xtext.xbase.interpreter.ConstantOperators;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
@@ -142,6 +143,17 @@ public class ConstantConditionsInterpreter {
     boolean _matched = false;
     if (!_matched) {
       if (feature instanceof JvmType) {
+        boolean _isTypeLiteral = it.isTypeLiteral();
+        boolean _not = (!_isTypeLiteral);
+        if (_not) {
+          _matched=true;
+          ThisReference _thisReference = new ThisReference(((JvmType)feature));
+          return new EvaluationResult(_thisReference, false);
+        }
+      }
+    }
+    if (!_matched) {
+      if (feature instanceof JvmType) {
         _matched=true;
       }
       if (!_matched) {
@@ -180,25 +192,36 @@ public class ConstantConditionsInterpreter {
               if (_notEquals_1) {
                 final EvaluationResult result = this.evaluateAssociatedExpression(associatedExpression, context);
                 Object _value = result.getValue();
-                return new EvaluationResult(_value, false);
+                if ((_value instanceof ThisReference)) {
+                  return EvaluationResult.NOT_A_CONSTANT;
+                }
+                Object _value_1 = result.getValue();
+                return new EvaluationResult(_value_1, false);
               } else {
-                ArrayList<JvmIdentifiableElement> _switchResult_1 = null;
-                Object _value_1 = receiver.getValue();
-                final Object v = _value_1;
+                ArrayList<Object> _switchResult_1 = null;
+                Object _value_2 = receiver.getValue();
+                final Object v = _value_2;
                 boolean _matched_1 = false;
                 if (!_matched_1) {
                   if (v instanceof JvmIdentifiableElement) {
                     _matched_1=true;
-                    _switchResult_1 = CollectionLiterals.<JvmIdentifiableElement>newArrayList(((JvmIdentifiableElement)v));
+                  }
+                  if (!_matched_1) {
+                    if (v instanceof ThisReference) {
+                      _matched_1=true;
+                    }
+                  }
+                  if (_matched_1) {
+                    _switchResult_1 = CollectionLiterals.<Object>newArrayList(v);
                   }
                 }
                 if (!_matched_1) {
                   if (v instanceof List) {
                     _matched_1=true;
-                    _switchResult_1 = new ArrayList<JvmIdentifiableElement>(((Collection<? extends JvmIdentifiableElement>)v));
+                    _switchResult_1 = new ArrayList<Object>(((Collection<?>)v));
                   }
                 }
-                final ArrayList<JvmIdentifiableElement> list = _switchResult_1;
+                final ArrayList<Object> list = _switchResult_1;
                 list.add(feature);
                 return new EvaluationResult(list, false);
               }
@@ -207,8 +230,8 @@ public class ConstantConditionsInterpreter {
               boolean _notEquals_2 = (!Objects.equal(associatedExpression_1, null));
               if (_notEquals_2) {
                 final EvaluationResult result_1 = this.evaluateAssociatedExpression(associatedExpression_1, context);
-                Object _value_2 = result_1.getValue();
-                return new EvaluationResult(_value_2, false);
+                Object _value_3 = result_1.getValue();
+                return new EvaluationResult(_value_3, false);
               } else {
                 ArrayList<JvmField> _newArrayList = CollectionLiterals.<JvmField>newArrayList(((JvmField)feature));
                 return new EvaluationResult(_newArrayList, false);
