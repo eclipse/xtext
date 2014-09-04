@@ -162,13 +162,18 @@ public class XpectRunner extends ParentRunner<XpectFileRunner> {
 
 	@Override
 	public void run(RunNotifier notifier) {
-		try {
-			super.run(notifier);
-		} finally {
+		if (getChildren().isEmpty()) {
+			notifier.fireTestRunStarted(getDescription());
+			notifier.fireTestFailure(new Failure(getDescription(), new RuntimeException("No Tests found via " + getUriProvider())));
+		} else {
 			try {
-				state.invalidate();
-			} catch (Throwable t) {
-				notifier.fireTestFailure(new Failure(getDescription(), t));
+				super.run(notifier);
+			} finally {
+				try {
+					state.invalidate();
+				} catch (Throwable t) {
+					notifier.fireTestFailure(new Failure(getDescription(), t));
+				}
 			}
 		}
 	}

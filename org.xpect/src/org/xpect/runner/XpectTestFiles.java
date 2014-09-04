@@ -185,6 +185,17 @@ public @interface XpectTestFiles {
 			return uri.resolve(base);
 		}
 
+		@Override
+		public String toString() {
+			List<String> items = Lists.newArrayList();
+			items.add("relativeTo=" + ctx.relativeTo().name());
+			if (ctx.files().length > 0)
+				items.add("files=" + Joiner.on(",").join(ctx.files()));
+			if (!Strings.isNullOrEmpty(ctx.baseDir()))
+				items.add("baseDir=" + ctx.baseDir());
+			items.add("fileExtensions=" + Joiner.on(",").join(ctx.fileExtensions()));
+			return "@" + XpectTestFiles.class.getSimpleName() + "(" + Joiner.on(", ").join(items) + ")";
+		}
 	}
 
 	String baseDir() default "";
