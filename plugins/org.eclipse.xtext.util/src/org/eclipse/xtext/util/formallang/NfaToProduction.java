@@ -21,9 +21,9 @@ import org.eclipse.xtext.util.Tuples;
 import com.google.common.base.Function;
 import com.google.common.base.Functions;
 import com.google.common.base.Predicates;
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
@@ -120,7 +120,7 @@ public class NfaToProduction {
 	}
 
 	protected static class AlternativeAlias<T> extends AbstractElementAlias<T> {
-		protected Set<AbstractElementAlias<T>> children = Sets.newHashSet();
+		protected Set<AbstractElementAlias<T>> children = Sets.newLinkedHashSet();
 
 		public AlternativeAlias() {
 			super();
@@ -208,8 +208,8 @@ public class NfaToProduction {
 
 	protected static class StateAlias<TOKEN> {
 		protected AbstractElementAlias<TOKEN> element;
-		protected Set<StateAlias<TOKEN>> incoming = Sets.newHashSet();
-		protected Set<StateAlias<TOKEN>> outgoing = Sets.newHashSet();
+		protected Set<StateAlias<TOKEN>> incoming = Sets.newLinkedHashSet();
+		protected Set<StateAlias<TOKEN>> outgoing = Sets.newLinkedHashSet();
 
 		protected StateAlias(AbstractElementAlias<TOKEN> element) {
 			super();
@@ -315,7 +315,7 @@ public class NfaToProduction {
 
 	protected <T> boolean createAlternative(StateAliasNfa<T> states) {
 		boolean created = false;
-		Multimap<Pair<Set<StateAlias<T>>, Set<StateAlias<T>>>, StateAlias<T>> alternative = HashMultimap.create();
+		Multimap<Pair<Set<StateAlias<T>>, Set<StateAlias<T>>>, StateAlias<T>> alternative = LinkedHashMultimap.create();
 
 		for (StateAlias<T> candidate : new NfaUtil().collect(states))
 			if (!candidate.getIncoming().isEmpty() && !candidate.getOutgoing().isEmpty())
@@ -538,7 +538,7 @@ public class NfaToProduction {
 	}
 
 	protected <STATE, TOKEN> StateAliasNfa<TOKEN> createNfa(Nfa<STATE> nfa, Function<STATE, TOKEN> state2token) {
-		HashMap<STATE, StateAlias<TOKEN>> cache = Maps.<STATE, StateAlias<TOKEN>> newHashMap();
+		HashMap<STATE, StateAlias<TOKEN>> cache = Maps.<STATE, StateAlias<TOKEN>> newLinkedHashMap();
 		StateAlias<TOKEN> stop = null;
 		if (nfa.getStart() != nfa.getStop()) {
 			stop = new StateAlias<TOKEN>(new ElementAlias<TOKEN>(state2token.apply(nfa.getStop())));

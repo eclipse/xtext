@@ -99,8 +99,8 @@ public class StringPda extends StringNfa implements Pda<String, String> {
 
 	}
 
-	protected final Map<String, String> pops = Maps.newHashMap();
-	protected final Map<String, String> pushs = Maps.newHashMap();
+	protected final Map<String, String> pops = Maps.newLinkedHashMap();
+	protected final Map<String, String> pushs = Maps.newLinkedHashMap();
 
 	public StringPda(String start, String stop) {
 		super(start, stop);

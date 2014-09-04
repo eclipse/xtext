@@ -32,8 +32,8 @@ import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransi
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
@@ -72,7 +72,7 @@ public class ContextFinder implements IContextFinder {
 	protected Iterable<AbstractElement> findAssignedElements(EObject obj, EStructuralFeature feature,
 			Iterable<AbstractElement> candidates) {
 		if (feature.isMany()) {
-			Set<AbstractElement> r = Sets.newHashSet();
+			Set<AbstractElement> r = Sets.newLinkedHashSet();
 			INodesForEObjectProvider nodes = nodesProvider.getNodesForSemanticObject(obj, null);
 			switch (transientValues.isListTransient(obj, feature)) {
 				case SOME:
@@ -114,7 +114,7 @@ public class ContextFinder implements IContextFinder {
 			return contextCandidates;
 		Map<IConstraint, List<EObject>> containerConstraints = getConstraints(semanticObject.eContainer().eClass());
 		int refID = semanticObject.eContainer().eClass().getFeatureID(ref);
-		Set<EObject> childContexts = Sets.newHashSet();
+		Set<EObject> childContexts = Sets.newLinkedHashSet();
 		for (IConstraint constraint : Lists.newArrayList(containerConstraints.keySet()))
 			if (constraint.getFeatures()[refID] == null)
 				containerConstraints.remove(constraint);
@@ -123,7 +123,7 @@ public class ContextFinder implements IContextFinder {
 
 		Set<EObject> result;
 		if (contextCandidates != null) {
-			result = Sets.newHashSet(contextCandidates);
+			result = Sets.newLinkedHashSet(contextCandidates);
 			result.retainAll(childContexts);
 		} else
 			result = childContexts;
@@ -131,7 +131,7 @@ public class ContextFinder implements IContextFinder {
 			return result;
 		Iterable<EObject> filteredContexts = findContextsByContainer(semanticObject.eContainer(),
 				Iterables.concat(containerConstraints.values()));
-		childContexts = Sets.newHashSet();
+		childContexts = Sets.newLinkedHashSet();
 		for (Map.Entry<IConstraint, List<EObject>> e : Lists.newArrayList(containerConstraints.entrySet()))
 			if (intersect(filteredContexts, e.getValue()))
 				childContexts.addAll(e.getKey().getFeatures()[refID].getCalledContexts());
@@ -181,7 +181,7 @@ public class ContextFinder implements IContextFinder {
 
 	protected Collection<IConstraint> findContextsByValue(EObject semanicObj, EStructuralFeature feature,
 			Iterable<IConstraint> constraints) {
-		Multimap<IConstraint, AbstractElement> contexts = HashMultimap.create();
+		Multimap<IConstraint, AbstractElement> contexts = LinkedHashMultimap.create();
 		int refID = semanicObj.eClass().getFeatureID(feature);
 		for (IConstraint constraint : constraints)
 			for (IConstraintElement ass : constraint.getFeatures()[refID].getAssignments())
@@ -194,7 +194,7 @@ public class ContextFinder implements IContextFinder {
 	}
 
 	protected Map<IConstraint, List<EObject>> getConstraints(EClass cls) {
-		Map<IConstraint, List<EObject>> result = Maps.newHashMap();
+		Map<IConstraint, List<EObject>> result = Maps.newLinkedHashMap();
 		for (IConstraintContext cc : constraintContexts)
 			for (IConstraint constraint : cc.getConstraints())
 				if (constraint.getType() == cls) {
@@ -207,7 +207,7 @@ public class ContextFinder implements IContextFinder {
 	}
 
 	protected Map<IConstraint, List<EObject>> getConstraints(EObject semanticObject, Iterable<EObject> contextCandidates) {
-		Map<IConstraint, List<EObject>> result = Maps.newHashMap();
+		Map<IConstraint, List<EObject>> result = Maps.newLinkedHashMap();
 		for (EObject ctx : contextCandidates) {
 			IConstraint constraint = constraints.get(Tuples.create(ctx, semanticObject.eClass()));
 			if (ctx == null)
@@ -229,7 +229,7 @@ public class ContextFinder implements IContextFinder {
 
 	protected void initConstraints() {
 		if (constraintContexts == null) {
-			constraints = Maps.newHashMap();
+			constraints = Maps.newLinkedHashMap();
 			constraintContexts = grammarConstraintProvider.getConstraints(grammar.getGrammar());
 			//			System.out.println(Joiner.on("\n").join(constraintContexts));
 			for (IConstraintContext ctx : constraintContexts)
