@@ -64,6 +64,7 @@ public class Storage2UriMapperJdtImplTest extends Assert {
 		assertTrue(rootData.isEmpty());
 	}
 	
+	@Flaky
 	@Test public void testJaredBundle() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		IFile file = project.getProject().getFile("foo.jar");
