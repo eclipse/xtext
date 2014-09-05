@@ -240,15 +240,15 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
     if (_isFile) {
       WorkspaceConfig _get = this.projectInformationProvider.get();
       String _absoluteFileSystemPath = _get.getAbsoluteFileSystemPath();
-      File _file = new File(_absoluteFileSystemPath);
-      java.net.URI _uRI_1 = _file.toURI();
-      final String workspacePath = _uRI_1.getPath();
+      final File workspacePathAsFile = new File(_absoluteFileSystemPath);
       String _fileString = uri.toFileString();
-      File _file_1 = new File(_fileString);
-      java.net.URI _uRI_2 = _file_1.toURI();
+      final File absoluteFilePathAsFile = new File(_fileString);
+      java.net.URI _uRI_1 = workspacePathAsFile.toURI();
+      final String workspacePath = _uRI_1.getPath();
+      java.net.URI _uRI_2 = absoluteFilePathAsFile.toURI();
       final String absolutefilePath = _uRI_2.getPath();
-      boolean _startsWith = absolutefilePath.startsWith(workspacePath);
-      boolean _not = (!_startsWith);
+      boolean _isChildOf = this.isChildOf(absoluteFilePathAsFile, workspacePathAsFile);
+      boolean _not = (!_isChildOf);
       if (_not) {
         throw new IllegalStateException((((("Couldn\'t determine file path. The file (\'" + absolutefilePath) + "\') doesn\'t seem to be contained in the workspace (\'") + workspacePath) + "\')"));
       }
@@ -262,6 +262,21 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
       String _plus_1 = ("/" + _path);
       return new Path(_plus_1);
     }
+  }
+  
+  private boolean isChildOf(final File child, final File parent) {
+    File currentChild = child;
+    while ((!Objects.equal(currentChild, null))) {
+      {
+        boolean _equals = currentChild.equals(parent);
+        if (_equals) {
+          return true;
+        }
+        File _parentFile = currentChild.getParentFile();
+        currentChild = _parentFile;
+      }
+    }
+    return false;
   }
   
   @Pure
