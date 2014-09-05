@@ -9,7 +9,7 @@
 	<groupId>org.eclipse.xtext</groupId>
 	<artifactId>org.eclipse.xtext.parent</artifactId>
 	<packaging>pom</packaging>
-	<version>2.7.0-SNAPSHOT</version>
+	<version>2.7.1-SNAPSHOT</version>
 	<modules>
 		<module>../../plugins/org.eclipse.xtext.util</module>
 		<module>../../plugins/org.eclipse.xtext.xbase.lib</module>
@@ -97,7 +97,7 @@
 				<version>1.4</version>
 				<configuration>
 					<executable>/usr/local/bin/gpg</executable>
-					<skip>true</skip>
+					<skip>false</skip>
 				</configuration>
 				<executions>
 					<execution>
