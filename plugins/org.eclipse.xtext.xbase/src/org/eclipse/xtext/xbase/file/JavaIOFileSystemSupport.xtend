@@ -18,12 +18,12 @@ import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import java.io.IOException
 import java.io.InputStream
+import java.io.OutputStream
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.util.Files
-import java.io.OutputStream
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -137,9 +137,11 @@ class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
 	override getPath(Resource res) {
 		val uri = res.resourceSet.URIConverter.normalize(res.URI)
 		if (uri.file) {
-			val workspacePath = new File(projectInformationProvider.get.absoluteFileSystemPath).toURI.path
-			val absolutefilePath = new File(uri.toFileString).toURI.path
-			if (!absolutefilePath.startsWith(workspacePath)) {
+			val workspacePathAsFile = new File(projectInformationProvider.get.absoluteFileSystemPath)
+			val absoluteFilePathAsFile = new File(uri.toFileString)
+			val workspacePath = workspacePathAsFile.toURI.path
+			val absolutefilePath = absoluteFilePathAsFile.toURI.path
+			if (!absoluteFilePathAsFile.isChildOf(workspacePathAsFile)) {
 				throw new IllegalStateException("Couldn't determine file path. The file ('"+absolutefilePath+"') doesn't seem to be contained in the workspace ('"+workspacePath+"')")
 			}
 			val filePath = absolutefilePath.substring(workspacePath.length)
@@ -147,6 +149,17 @@ class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
 		} else {
 			return new Path("/"+uri.path)
 		}
+	}
+	
+	private def boolean isChildOf(File child, File parent) {
+		var currentChild = child;
+		while (currentChild != null) {
+			if (currentChild.equals(parent)) {
+				return true;
+			}
+			currentChild = currentChild.parentFile
+		}
+		return false;
 	}
 	
 }
