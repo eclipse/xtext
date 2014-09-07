@@ -410,7 +410,13 @@ package class EvaluationResult {
 	private def dispatch Object equalValue(Object myValue, Void otherValue) {
 		return false
 	}
+	private def dispatch Object equalValue(JvmType myValue, JvmIdentifiableElement otherValue) {
+		return NOT_A_CONSTANT.value
+	}
 	private def dispatch Object equalValue(JvmIdentifiableElement myValue, Void otherValue) {
+		return NOT_A_CONSTANT.value
+	}
+	private def dispatch Object equalValue(JvmIdentifiableElement myValue, JvmType otherValue) {
 		return NOT_A_CONSTANT.value
 	}
 	private def dispatch Object equalValue(JvmIdentifiableElement myValue, Object otherValue) {

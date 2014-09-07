@@ -2947,6 +2947,17 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertWarning(file, XBINARY_OPERATION, CONSTANT_BOOLEAN_CONDITION, "always true");
 	}
 	
+	@Test public void testConstantConditions_29() throws Exception {
+		XtendFile file = file(
+				"import java.util.Date\n" + 
+				"class Test {\n" + 
+				"	def <T> m(Class<T> c) {\n" + 
+				"		if (c == Date) return\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertNoIssues(file);
+	}
+	
 	@Test public void testAnonymousClassNotOverridingEquals() throws Exception {
 		XtendFile file = file(
 			"public interface Foo {"+

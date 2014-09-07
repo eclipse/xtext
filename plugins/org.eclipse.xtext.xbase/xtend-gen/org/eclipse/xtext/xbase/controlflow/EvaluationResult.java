@@ -90,7 +90,15 @@ class EvaluationResult {
     return Boolean.valueOf(false);
   }
   
+  private Object _equalValue(final JvmType myValue, final JvmIdentifiableElement otherValue) {
+    return EvaluationResult.NOT_A_CONSTANT.value;
+  }
+  
   private Object _equalValue(final JvmIdentifiableElement myValue, final Void otherValue) {
+    return EvaluationResult.NOT_A_CONSTANT.value;
+  }
+  
+  private Object _equalValue(final JvmIdentifiableElement myValue, final JvmType otherValue) {
     return EvaluationResult.NOT_A_CONSTANT.value;
   }
   
@@ -218,6 +226,9 @@ class EvaluationResult {
          && otherValue instanceof XTypeLiteral) {
       return _equalValue((XTypeLiteral)myValue, (XTypeLiteral)otherValue);
     } else if (myValue instanceof JvmType
+         && otherValue instanceof JvmIdentifiableElement) {
+      return _equalValue((JvmType)myValue, (JvmIdentifiableElement)otherValue);
+    } else if (myValue instanceof JvmType
          && otherValue == null) {
       return _equalValue((JvmType)myValue, (Void)null);
     } else if (myValue instanceof JvmType
@@ -229,6 +240,9 @@ class EvaluationResult {
     } else if (myValue instanceof JvmIdentifiableElement
          && otherValue instanceof JvmEnumerationLiteral) {
       return _equalValue((JvmIdentifiableElement)myValue, (JvmEnumerationLiteral)otherValue);
+    } else if (myValue instanceof JvmIdentifiableElement
+         && otherValue instanceof JvmType) {
+      return _equalValue((JvmIdentifiableElement)myValue, (JvmType)otherValue);
     } else if (myValue instanceof List
          && otherValue instanceof List) {
       return _equalValue((List<?>)myValue, (List<?>)otherValue);
