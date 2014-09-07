@@ -1855,6 +1855,120 @@ class ErrorTest extends AbstractXtendTestCase {
 		'''.fireproof
 	}
 	
+	@Test
+	def void testErrorModel_128() throws Exception {
+		'''
+			class Test {
+				extension Util
+				def getRunnable() {
+					new Runnable {
+						override ru {
+							sayHello
+						}
+					}
+				} 
+				static class Util {
+					def sayHello() {
+						'Hello'
+					}
+				}
+			}
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_129() throws Exception {
+		'''
+			class Test {
+				def getRunnable() {
+					val extension Util u = null
+					new Runnable {
+						override ru {
+							sayHello
+						}
+					}
+				}
+				static class Util {
+					def sayHello() {
+						'Hello'
+					}
+				}
+			}
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_130() throws Exception {
+		'''
+			import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+			class C {
+				val int a
+				val String b
+				@FinalFieldsConstructor new()
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_131() throws Exception {
+		'''
+			import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+			class C {
+				val int a
+				val String b
+				@FinalFieldsConstructor new() {}
+			}
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_132() throws Exception {
+		'''
+			import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+			@FinalFieldsConstructor
+			class C {
+				val int a
+				@FinalFieldsConstructor new
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_133() throws Exception {
+		'''
+			import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+			class C {
+				val int a
+				@FinalFieldsConstructor new() {
+				FinalFieldsConstructor new() {}
+			}
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_134() throws Exception {
+		'''
+			class A {
+				static interface B {
+					class C {
+						static class D {
+						}
+					}
+				} 
+				B b = B.C 
+				c B.C
+			}
+		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_135() throws Exception {
+		'''
+			import .eclipse.xtend.lib.annotations.ToString
+			import org.eclipse.xtend.lib.annotations.Data
+			@ToString(hideFieldNames=true) @Data class Foo { String b = "Bar"
+			}
+		'''.fireproof
+	}
+	
 	def processWithoutException(CharSequence input) throws Exception {
 		val resource = resourceSet.createResource(URI::createURI("abcdefg.xtend"))
 		resource.load(new StringInputStream(input.toString), null)
