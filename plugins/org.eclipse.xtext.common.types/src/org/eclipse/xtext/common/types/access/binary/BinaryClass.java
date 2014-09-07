@@ -184,7 +184,8 @@ public class BinaryClass {
 	@SuppressWarnings("serial")
 	public static BinaryClass forName(String clazzName, ClassLoader classLoader) throws ClassNotFoundException {
 		int i = 0;
-		while (clazzName.charAt(i) == '[') {
+		int length = clazzName.length();
+		while (i < length - 1 && clazzName.charAt(i) == '[') {
 			i++;
 		}
 		if (i != 0) {
@@ -216,8 +217,9 @@ public class BinaryClass {
 			return new BinaryClass(clazzName, classLoader);
 		}
 		throw new ClassNotFoundException(clazzName) {
+			@SuppressWarnings("sync-override")
 			@Override
-			public synchronized Throwable fillInStackTrace() {
+			public Throwable fillInStackTrace() {
 				// don't care
 				return this;
 			}

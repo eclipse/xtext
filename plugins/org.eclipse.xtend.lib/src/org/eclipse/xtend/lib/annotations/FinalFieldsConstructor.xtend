@@ -130,7 +130,7 @@ class FinalFieldsConstructorProcessor implements TransformationParticipant<Mutab
 			]
 		}
 		
-		static val EMPTY_BODY = Pattern.compile("\\{\\s*\\}")
+		static val EMPTY_BODY = Pattern.compile("(\\{(\\s*\\})?)?")
 
 		def makeFinalFieldsConstructor(MutableConstructorDeclaration it) {
 			if (declaringType.finalFieldsConstructorArgumentTypes.empty) {
