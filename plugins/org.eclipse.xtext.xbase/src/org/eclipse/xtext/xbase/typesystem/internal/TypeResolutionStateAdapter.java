@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.Set;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
@@ -58,6 +60,11 @@ public class TypeResolutionStateAdapter extends AbstractRootedReentrantTypeResol
 	@Override
 	protected boolean isHandled(EObject context) {
 		return this.context.isHandled(context);
+	}
+	
+	@Override
+	protected void setAllRootedExpressions(Set<EObject> allRootedExpressions) {
+		context.setAllRootedExpressions(allRootedExpressions);
 	}
 	
 	public void initializeFrom(EObject root) {
