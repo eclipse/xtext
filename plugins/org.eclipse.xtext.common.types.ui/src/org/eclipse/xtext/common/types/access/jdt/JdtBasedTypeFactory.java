@@ -386,24 +386,20 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 		if (jdtType.getDeclaringType() != null)
 			throw new IllegalArgumentException("Cannot create type from non-toplevel-type: '"
 					+ jdtType.getFullyQualifiedName() + "'.");
-		resolveBinding.start();
-
-		parser.setWorkingCopyOwner(workingCopyOwner);
-		parser.setIgnoreMethodBodies(true);
-		
-		parser.setProject(javaProject);
-		
-		@SuppressWarnings("unchecked")
-		Map<Object, Object> options = javaProject.getOptions(true);
-		
-		options.put(JavaCore.COMPILER_DOC_COMMENT_SUPPORT, JavaCore.DISABLED);
-		parser.setCompilerOptions(options);
-
-		IBinding[] bindings = parser.createBindings(new IJavaElement[] { jdtType }, null);
-		resolveBinding.stop();
-		if (bindings[0] == null)
-			throw new IllegalStateException("Could not create binding for '" + jdtType.getFullyQualifiedName() + "'.");
-		IBinding binding = bindings[0];
+		IBinding binding = resolveBindings(jdtType, javaProject);
+		if (binding == null) {
+			IJavaProject fallbackProject = jdtType.getJavaProject();
+			// fallback to the project of the given jdtType if it is different from the explicitly given project
+			if (!fallbackProject.equals(javaProject)) {
+				binding = resolveBindings(jdtType, fallbackProject);
+				if (binding == null) {
+					throw new IllegalStateException("Could not create binding for '" + jdtType.getFullyQualifiedName() + 
+							"' in context of projects '" + javaProject.getElementName() + "' and '" + fallbackProject.getElementName() + "'.");
+				}
+			} else {
+				throw new IllegalStateException("Could not create binding for '" + jdtType.getFullyQualifiedName() + "' in context of project '" + javaProject.getElementName() + "'.");
+			}
+		}
 		if (binding instanceof ITypeBinding) {
 			createType.start();
 			ITypeBinding typeBinding = (ITypeBinding) binding;
@@ -419,6 +415,25 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 			throw new IllegalStateException("Expected ITypeBinding for '" + jdtType.getFullyQualifiedName()
 					+ "', but got '" + binding.toString() + "'.");
 		}
+	}
+
+	private IBinding resolveBindings(IType jdtType, IJavaProject javaProject) {
+		resolveBinding.start();
+
+		parser.setWorkingCopyOwner(workingCopyOwner);
+		parser.setIgnoreMethodBodies(true);
+		
+		parser.setProject(javaProject);
+		
+		@SuppressWarnings("unchecked")
+		Map<Object, Object> options = javaProject.getOptions(true);
+		
+		options.put(JavaCore.COMPILER_DOC_COMMENT_SUPPORT, JavaCore.DISABLED);
+		parser.setCompilerOptions(options);
+
+		IBinding[] bindings = parser.createBindings(new IJavaElement[] { jdtType }, null);
+		resolveBinding.stop();
+		return bindings[0];
 	}
 	
 	/**
