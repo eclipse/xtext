@@ -8,18 +8,18 @@
 package org.eclipse.xtext.xbase.ui.file
 
 import com.google.inject.Inject
-import javax.inject.Provider
+import com.google.inject.Provider
+import org.eclipse.core.resources.IContainer
+import org.eclipse.core.resources.IFolder
 import org.eclipse.core.resources.IProject
+import org.eclipse.core.resources.IWorkspaceRoot
+import org.eclipse.jdt.core.IPackageFragmentRoot
+import org.eclipse.jdt.core.JavaCore
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider
 import org.eclipse.xtext.xbase.file.ProjectConfig
 import org.eclipse.xtext.xbase.file.WorkspaceConfig
-import org.eclipse.jdt.core.JavaCore
-import org.eclipse.jdt.core.IPackageFragmentRoot
-import org.eclipse.core.resources.IContainer
-import org.eclipse.core.resources.IWorkspaceRoot
-import org.eclipse.core.resources.IFolder
-import org.eclipse.xtend.lib.annotations.Accessors
 
 class EclipseWorkspaceConfigProvider implements Provider<WorkspaceConfig> {
 	
