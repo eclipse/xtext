@@ -202,7 +202,7 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
       it.addConstructor(_function);
     }
     
-    private final static Pattern EMPTY_BODY = Pattern.compile("\\{\\s*\\}");
+    private final static Pattern EMPTY_BODY = Pattern.compile("(\\{(\\s*\\})?)?");
     
     public void makeFinalFieldsConstructor(final MutableConstructorDeclaration it) {
       MutableTypeDeclaration _declaringType = it.getDeclaringType();
