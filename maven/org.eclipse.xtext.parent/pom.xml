@@ -97,7 +97,7 @@
 				<version>1.4</version>
 				<configuration>
 					<executable>/usr/local/bin/gpg</executable>
-					<skip>false</skip>
+					<skip>true</skip>
 				</configuration>
 				<executions>
 					<execution>
