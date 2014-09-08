@@ -8,8 +8,8 @@
 package org.eclipse.xtext.xbase.ui.file;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import java.util.Map;
-import javax.inject.Provider;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.IPath;
