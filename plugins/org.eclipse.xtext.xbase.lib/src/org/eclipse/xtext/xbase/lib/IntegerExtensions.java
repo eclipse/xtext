@@ -35,11 +35,12 @@ import com.google.common.annotations.GwtCompatible;
 	}
 	
 	/**
-	 * The <code>..&lt;</code> operator yields an {@link ExclusiveRange}.
+	 * The <code>..&lt;</code> operator yields an {@link ExclusiveRange} that increments from
+	 * a to b (exclusive).
 	 * 
 	 * @param a the start of the range.
 	 * @param b the end of the range (exclusive).
-	 * @return an {@link ExclusiveRange}. Never <code>null</code>.
+	 * @return an incrementing {@link ExclusiveRange}. Never <code>null</code>.
 	 * @since 2.4
 	 */
 	@Pure
@@ -49,11 +50,12 @@ import com.google.common.annotations.GwtCompatible;
 	}
 	
 	/**
-	 * The <code>&gt;..</code> operator yields an {@link ExclusiveRange}.
+	 * The <code>&gt;..</code> operator yields an {@link ExclusiveRange} that decrements from a
+	 * (exclusive) down to b.
 	 * 
 	 * @param a the start of the range (exclusive).
 	 * @param b the end of the range.
-	 * @return an {@link ExclusiveRange}. Never <code>null</code>.
+	 * @return a decrementing {@link ExclusiveRange}. Never <code>null</code>.
 	 * @since 2.4
 	 */
 	@Pure
