@@ -334,9 +334,12 @@ class TestBatchCompiler {
 	@Test
 	def void testActiveAnnotatons2() {
 		batchCompiler.sourcePath = "./batch-compiler-data/activeAnnotations2"
+		assertTrue(batchCompiler.configureWorkspace)
 		assertTrue(batchCompiler.compile)
 		val javaFiles = new File(OUTPUT_DIRECTORY + "/mypackage").list[dir, name|name.endsWith(".java")].join(",")
 		assertEquals("Client.java", javaFiles)
+		val txtFile = new File(OUTPUT_DIRECTORY + "/Test.txt")
+		assertTrue(txtFile.exists)
 	}
 	
 	@Test
