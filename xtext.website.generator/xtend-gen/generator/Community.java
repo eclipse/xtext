@@ -165,7 +165,7 @@ public class Community extends AbstractWebsite {
     _builder.append("</div>");
     _builder.newLine();
     _builder.append("\t\t      ");
-    _builder.append("<div class=\"span4\"><img src=\"http://www.yourkit.com/images/yjp_logo.gif\"></img></div>");
+    _builder.append("<div class=\"span4\"><img src=\"images/yourkit_java.png/\"></img></div>");
     _builder.newLine();
     _builder.append("\t\t    ");
     _builder.append("</div>");
