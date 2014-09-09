@@ -13,6 +13,7 @@ import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+import org.eclipse.xtend.lib.macro.CodeGenerationContext
 
 @Active(_TESTDATA_InternalClassProcessor)
 annotation _TESTDATA_InternalClassAnnotation {
@@ -30,6 +31,12 @@ class _TESTDATA_InternalClassProcessor extends AbstractClassProcessor {
 				type = string
 			]
 		]
+	}
+	
+	override doGenerateCode(ClassDeclaration annotatedClass, extension CodeGenerationContext context) {
+		annotatedClass.compilationUnit.filePath.targetFolder.append("/Test.txt").contents = '''
+			Hello
+		'''
 	}
 	
 }

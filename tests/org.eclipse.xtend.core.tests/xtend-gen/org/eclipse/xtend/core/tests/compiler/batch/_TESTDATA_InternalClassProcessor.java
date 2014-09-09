@@ -8,12 +8,16 @@
 package org.eclipse.xtend.core.tests.compiler.batch;
 
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
+import org.eclipse.xtend.lib.macro.CodeGenerationContext;
 import org.eclipse.xtend.lib.macro.RegisterGlobalsContext;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
+import org.eclipse.xtend.lib.macro.file.Path;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -42,5 +46,16 @@ public class _TESTDATA_InternalClassProcessor extends AbstractClassProcessor {
       }
     };
     ObjectExtensions.<MutableClassDeclaration>operator_doubleArrow(_findClass, _function);
+  }
+  
+  public void doGenerateCode(final ClassDeclaration annotatedClass, @Extension final CodeGenerationContext context) {
+    CompilationUnit _compilationUnit = annotatedClass.getCompilationUnit();
+    Path _filePath = _compilationUnit.getFilePath();
+    Path _targetFolder = context.getTargetFolder(_filePath);
+    Path _append = _targetFolder.append("/Test.txt");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Hello");
+    _builder.newLine();
+    context.setContents(_append, _builder);
   }
 }

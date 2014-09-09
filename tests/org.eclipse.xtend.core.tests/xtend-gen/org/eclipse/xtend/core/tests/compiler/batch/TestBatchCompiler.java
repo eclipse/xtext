@@ -742,6 +742,8 @@ public class TestBatchCompiler {
   @Test
   public void testActiveAnnotatons2() {
     this.batchCompiler.setSourcePath("./batch-compiler-data/activeAnnotations2");
+    boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
+    Assert.assertTrue(_configureWorkspace);
     boolean _compile = this.batchCompiler.compile();
     Assert.assertTrue(_compile);
     File _file = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/mypackage"));
@@ -753,6 +755,9 @@ public class TestBatchCompiler {
     String[] _list = _file.list(_function);
     final String javaFiles = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(_list)), ",");
     Assert.assertEquals("Client.java", javaFiles);
+    final File txtFile = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/Test.txt"));
+    boolean _exists = txtFile.exists();
+    Assert.assertTrue(_exists);
   }
   
   @Test

@@ -26,23 +26,18 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.compiler.batch.BatchCompiler;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.descriptions.IStubGenerator;
-import org.eclipse.xtext.common.types.descriptions.JvmTypesResourceDescriptionStrategy;
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.mwe.NameBasedFilter;
 import org.eclipse.xtext.mwe.PathTraverser;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.resource.FileExtensionProvider;
-import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
@@ -52,11 +47,10 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
-import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
-import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
+import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -102,13 +96,9 @@ public class XtendBatchCompiler {
 	@Inject
 	protected Provider<ResourceSetBasedResourceDescriptions> resourceSetDescriptionsProvider;
 	@Inject
-	private JvmModelGenerator generator;
-	@Inject
-	private IQualifiedNameProvider qualifiedNameProvider;
+	private IGenerator generator;
 	@Inject
 	private IndexedJvmTypeAccess indexedJvmTypeAccess;
-	@Inject
-	private IGeneratorConfigProvider generatorConfigprovider;
 	@Inject
 	private ProcessorInstanceForJvmTypeProvider annotationProcessorFactory;
 	@Inject
@@ -604,29 +594,11 @@ public class XtendBatchCompiler {
 		JavaIoFileSystemAccess javaIoFileSystemAccess = javaIoFileSystemAccessProvider.get();
 		javaIoFileSystemAccess.setOutputPath(outputPath);
 		javaIoFileSystemAccess.setWriteTrace(writeTraceFiles);
-		ResourceSetBasedResourceDescriptions resourceDescriptions = getResourceDescriptions(resourceSet);
-		Iterable<IEObjectDescription> exportedObjectsByType = resourceDescriptions
-				.getExportedObjectsByType(TypesPackage.Literals.JVM_DECLARED_TYPE);
-		if (log.isInfoEnabled()) {
-			int size = Iterables.size(exportedObjectsByType);
-			if (size == 0) {
-				log.info("No sources to compile in '" + sourcePath + "'");
-			} else {
-				log.info("Compiling " + size + " source " + (size == 1 ? "file" : "files") + " to " + outputPath);
+		
+		for (Resource resource : resourceSet.getResources()) {
+			if (resource instanceof BatchLinkableResource) {
+				generator.doGenerate(resource, javaIoFileSystemAccess);
 			}
-		}
-		for (IEObjectDescription eObjectDescription : exportedObjectsByType) {
-			if (eObjectDescription.getUserData(JvmTypesResourceDescriptionStrategy.IS_NESTED_TYPE) != null) {
-				continue;
-			}
-			JvmDeclaredType jvmGenericType = (JvmDeclaredType) eObjectDescription.getEObjectOrProxy();
-//			JvmDeclaredType jvmGenericType = xtendJvmAssociations.getInferredType(xtendType);
-			CharSequence generatedType = generator.generateType(jvmGenericType, generatorConfigprovider.get(jvmGenericType));
-			QualifiedName qualifiedName = qualifiedNameProvider.getFullyQualifiedName(jvmGenericType);
-			if (log.isDebugEnabled()) {
-				log.debug("write '" + outputPath + File.separator + getJavaFileName(qualifiedName) + "'");
-			}
-			javaIoFileSystemAccess.generateFile(getJavaFileName(qualifiedName), generatedType);
 		}
 	}
 
@@ -635,10 +607,6 @@ public class XtendBatchCompiler {
 		resourceDescriptions.setContext(resourceSet);
 		resourceDescriptions.setRegistry(IResourceServiceProvider.Registry.INSTANCE);
 		return resourceDescriptions;
-	}
-
-	private String getJavaFileName(QualifiedName typeName) {
-		return Strings.concat("/", typeName.getSegments()) + ".java";
 	}
 
 	/* @Nullable */ protected XtendFile getXtendFile(Resource resource) {
