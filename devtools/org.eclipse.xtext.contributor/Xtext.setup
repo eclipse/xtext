@@ -253,7 +253,7 @@
     </workingSets>
   </setupTasks>
   <branches name="master">
-    <setupTasks xsi:type="setup:ApiBaselineTask" documentation="Xtext 2.6 stream API" version="2.6" zipLocation="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.6.0/R201405210727/tmf-xtext-SDK-2.6.0.zip&amp;r=1"/>
+    <setupTasks xsi:type="setup:ApiBaselineTask" documentation="Xtext 2.7 stream API" version="2.7" zipLocation="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.7.0/R201409021032/tmf-xtext-SDK-2.7.0.zip&amp;r=1"/>
   </branches>
   <branches name="maintenance">
     <setupTasks xsi:type="setup:ApiBaselineTask" documentation="Xtext 2.5 stream API" version="2.5" zipLocation="http://download.eclipse.org/modeling/tmf/xtext/downloads/drops/2.5.3/R201402240820/tmf-xtext-SDK-2.5.3.zip"/>
