@@ -78,12 +78,6 @@ public class XtextGeneratorIT {
 	}
 	@Test
 	public void xcore() throws Exception {
-		try {
-			XtextGeneratorIT.class.getClassLoader().loadClass("org.eclipse.xtext.ecore.EcoreSupport");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			return;
-		}
 		Verifier verifier = verifyErrorFreeLog(ROOT + "/xcore-lang");
 		verifier.addCliOption("-U");
 		verifier.assertFilePresent(verifier.getBasedir() + "/src-gen/org/eclipse/xcoretest/MyClass2.java");
