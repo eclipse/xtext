@@ -7,15 +7,13 @@ class Generator {
 	
 	def static void main(String[] args) {
 		System::setProperty("java.awt.headless", "true")
-		XtendStandaloneSetup::doSetup
+		XtendStandaloneSetup.doSetup
 		val out = new File("website")
 		out.generateFiles(
 			new Index,
 			new News,
 			new ReleaseNotes,
 			new Download, 
-			new SevenLanguages,
-			new SevenLanguagesDocumentation, 
 			new Documentation, 
 			new Community 
 		)

@@ -175,9 +175,9 @@ code[Xtend][
     if (executable instanceof Executable) {
       val context = createContext
       context.newValue(QualifiedName.create("this"), tortoise)
-      operation.parameters.forEach[p, i|
+      operation.parameters.forEach\[p, i|
         context.newValue(QualifiedName.create(p.name), argumentValues.get(i))
-      ]
+      \]
       val result = evaluate(executable.body, context, CancelIndicator.NullImpl)
       if(result.exception != null)
         throw result.exception
@@ -206,7 +206,7 @@ code[Xtend][
       this.stopAtLine = stopAtLine
       try {
         program.jvmElements.filter(JvmOperation).head
-          ?.invokeOperation(null, #[])
+          ?.invokeOperation(null, #\[\])
       } catch (StopLineReachedException exc) {
         // ignore
       }
@@ -232,7 +232,7 @@ code[Xtend][
 section:tortoise_additons[Literal Classes]
 
 To make the static methods and fields of codeRef[java.lang.Math] and codeRef[org.eclipse.draw2d.ColorConstants]
-callable directly, we provided the codeRef[org.xtext.tortoiseshell.scoping.TortoiseShellImplicitlyImportedTypes]:
+callable directly, we provided the codeRef[org.xtext.tortoiseshell.scoping.TortoiseShellImplicitlyImportedFeatures]:
 
 code[Xtend][
 class TortoiseShellImplicitlyImportedTypes extends ImplicitlyImportedFeatures {

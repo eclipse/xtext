@@ -1,6 +1,4 @@
-part:general_overview[General Overview]
-
-chapter:introduction[Introduction]
+chapter:sevenlang_introduction[Introduction]
 
 Building a domain-specific language (DSL) for structural parts of an application has always been rather 
 easy with Xtext. But structure alone is not sufficient in many cases. When it comes to the behavioral aspects users 
@@ -62,7 +60,7 @@ section:provisional_API[CAUTION: This is Provisional API]
 e[Please be aware that some of the new API covered in this document is not yet finalized and will 
 likely be improved in future releases in incompatible ways. Usages of such API are marked with a warning.]
 
-chapter:common_requirements[Common Requirements]
+section:common_requirements[Common Requirements]
 
 To run any of the examples, you will need link[http://www.eclipse.org/downloads][Eclipse 3.6 or better]
 for your platform. In addition, you have to install link[http://www.eclipse.org/xtend/download.html][Xtend]
@@ -91,7 +89,7 @@ tr[td[e[org.xtext.<language>.example]]td[Examples for using the language]]
 ] 
 Some of the languages do not include all of these plug-ins but the general structure is always the same.
 
-chapter:xtend_primer[A Short Xtend Primer]
+section:xtend_primer[A Short Xtend Primer]
 
 Any general code in the examples is implemented in link[http://www.xtend-lang.org][Xtend]. Xtend is 
 a more expressive and less verbose way to implement Java applications. It is 100% interoperable with Java APIs and 

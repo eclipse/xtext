@@ -66,7 +66,7 @@ public class Download extends AbstractWebsite {
     _builder.append("<p>");
     _builder.newLine();
     _builder.append("\t\t      ");
-    _builder.append("<strong>New Release Soon! <a href=\"releasenotes.html\">Read more</a>");
+    _builder.append("<strong><a href=\"releasenotes.html\">Release Notes</a>");
     _builder.newLine();
     _builder.append("\t\t      ");
     _builder.append("</strong>");

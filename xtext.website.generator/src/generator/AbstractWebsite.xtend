@@ -132,7 +132,6 @@ abstract class AbstractWebsite implements Resource {
 		newArrayList(
 			'news.html' -> 'News',
 			'download.html' -> 'Download',
-			'7languages.html' -> '7 Languages',
 			'documentation.html' -> 'Documentation',
 			'community.html' -> 'Community',
 			'http://xtend-lang.org' -> 'Xtend',

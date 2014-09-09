@@ -184,7 +184,7 @@ def dispatch void infer(MongoFile file,
                         IJvmDeclaredTypeAcceptor acceptor, 
                         boolean isPreIndexingPhase) {
   for(bean : file.eAllOfType(MongoBean)) {
-       acceptor.accept(bean.toClass(bean.fullyQualifiedName))[
+       acceptor.accept(bean.toClass(bean.fullyQualifiedName))\[
            documentation = bean.documentation
            superTypes += typeRef(IMongoBean)
 ... // calling various methods to create Java members

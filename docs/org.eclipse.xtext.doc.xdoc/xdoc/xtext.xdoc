@@ -104,6 +104,67 @@ codelanguage-def[FowlerExample][events, commands, state, actions, end, resetEven
 
 codelanguage-def[LinkingExample][ref]
 
+codelanguage-def[mongoBeans][
+	extends, super, instanceof, as, new, null, false,
+	true, val, var, if, else, switch, case, default,
+	do, while, for, typeof, throw, try, catch, finally,
+	this, it, int, boolean, short, char, double, float, 
+	long, byte, void, return,
+	package, import
+]
+
+codelanguage-def[tortoise][
+	extends, super, instanceof, as, new, null, false,
+	true, val, var, if, else, switch, case, default,
+	do, while, for, typeof, throw, try, catch, finally,
+	this, it, int, boolean, short, char, double, float, 
+	long, byte, void, return,
+	sub, begin, end
+]
+
+codelanguage-def[routing][
+	inject, extends, super, instanceof, as, new, null, false,
+	true, val, var, if, else, switch, case, default,
+	do, while, for, typeof, throw, try, catch, finally,
+	this, it, int, boolean, short, char, double, float, 
+	long, byte, void, return,
+	GET, POST, PUT, DELETE, HEAD, import, when 
+]
+
+codelanguage-def[scripting][
+	super, instanceof, as, new, null, false,
+	true, val, var, if, else, switch, case, default,
+	do, while, for, typeof, throw, try, catch, finally,
+	this, it, int, boolean, short, char, double, float, 
+	long, byte, void, return
+]
+
+codelanguage-def[guice][
+	to-instance, bind, to, mixin, super, instanceof, as, new, null, false,
+	true, val, var, if, else, switch, case, default,
+	do, while, for, typeof, throw, try, catch, finally,
+	this, it, int, boolean, short, char, double, float, 
+	long, byte, void, return
+]
+
+codelanguage-def[builddsl][
+	extends, super, instanceof, as, new, null, false,
+	true, val, var, if, else, switch, case, default,
+	do, while, for, typeof, throw, try, catch, finally,
+	this, it, int, boolean, short, char, double, float, 
+	long, byte, void, return,
+	package, import, param, task, depends 
+]
+
+codelanguage-def[templates][
+	extends, super, instanceof, as, new, null, false,
+	true, val, var, if, else, switch, case, default,
+	do, while, for, typeof, throw, try, catch, finally,
+	this, it, int, boolean, short, char, double, float, 
+	long, byte, void, return,
+	package, import, param, FOR, ENDFOR, IF, ELSE, ENDIF 
+]
+
 part[Getting Started]
 
 %%chapter-ref[Installation]
@@ -115,6 +176,24 @@ chapter-ref[DomainModelWalkThrough]
 chapter-ref[DomainmodelNextSteps]
 
 chapter-ref[JvmDomainmodel]
+
+part[Seven JVM Languages Built With Xbase]
+
+chapter-ref[sevenlang_introduction]
+
+chapter-ref[scripting]
+
+chapter-ref[builddsl]
+
+chapter-ref[mongoDB]
+
+chapter-ref[guice]
+
+chapter-ref[httpRouting]
+
+chapter-ref[template]
+
+chapter-ref[tortoise]
 
 part[Reference Documentation]
 
