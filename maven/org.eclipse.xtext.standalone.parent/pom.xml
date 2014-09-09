@@ -12,7 +12,7 @@
 	<packaging>pom</packaging>
 	<properties>
 		<juno-url>http://download.eclipse.org/eclipse/updates/3.8</juno-url>
-		<xtext-url>http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases</xtext-url>
+		<xtext-url>http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest</xtext-url>
 		<scripts.dir>${basedir}</scripts.dir>
 		<bundle-destination-dir>${project.build.directory}/dependencies-mvn</bundle-destination-dir>
 	</properties>

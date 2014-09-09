@@ -11,4 +11,16 @@
 		<module>../../../../../../plugins/org.eclipse.xtext.purexbase</module>
 		<module>../../../../../../tests/org.eclipse.xtext.testlanguages</module>
 	</modules>
+	<repositories>
+		<repository>
+			<id>central snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>central snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+		</pluginRepository>
+	</pluginRepositories>
 </project>
