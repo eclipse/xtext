@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtend.ide" version="2">
     <resource path="META-INF/MANIFEST.MF">
-        <filter comment="Xtend is not API" id="927989779">
-            <message_arguments>
-                <message_argument value="2.7.0"/>
-                <message_argument value="org.eclipse.xtend.core"/>
-            </message_arguments>
-        </filter>
-        <filter id="927989779">
-            <message_arguments>
-                <message_argument value="2.7.1"/>
-                <message_argument value="org.eclipse.xtend.core"/>
-            </message_arguments>
-        </filter>
-        <filter id="927989779">
+        <filter comment="xtend.core reexport" id="927989779">
             <message_arguments>
                 <message_argument value="2.8.0"/>
                 <message_argument value="org.eclipse.xtend.core"/>

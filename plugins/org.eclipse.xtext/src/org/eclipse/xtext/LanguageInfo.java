@@ -52,7 +52,7 @@ public class LanguageInfo {
 	}
 	
 	/**
-	 * @since 2.7
+	 * @since 2.8
 	 */
 	public boolean isLanguage(Resource resource) {
 		if (resource instanceof XtextResource) {
