@@ -300,10 +300,7 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 						"\t\t\tbinder.bind(org.eclipse.xtext.ui.editor.IURIEditorOpener.class).annotatedWith(org.eclipse.xtext.ui.LanguageSpecific.class)" +
 						".to(org.eclipse.xtext.xbase.ui.jvmmodel.navigation.DerivedMemberAwareEditorOpener.class); \n" +
 						"\t\t\tbinder.bind(org.eclipse.xtext.common.types.ui.navigation.IDerivedMemberAwareEditorOpener.class).to(org.eclipse.xtext.xbase.ui.jvmmodel.navigation.DerivedMemberAwareEditorOpener.class); \n"+
-						"\t\t}")
-				.addTypeToType("org.eclipse.jface.text.hyperlink.IHyperlinkDetector",
-							"org.eclipse.xtext.xbase.ui.navigation.XbaseHyperlinkDetector");
-
+						"\t\t}");
 		} else {
 			bindFactory =  bindFactory.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameStrategy", 
 					"org.eclipse.xtext.xbase.ui.refactoring.XbaseRenameStrategy");

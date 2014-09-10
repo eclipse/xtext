@@ -11,6 +11,7 @@ import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
+import org.eclipse.xtext.ui.editor.hyperlinking.SingleHoverShowingHyperlinkPresenter;
 
 /**
  * @author Holger Schill - Initial contribution and API
@@ -34,7 +35,7 @@ public class XbaseImplementatorsHyperlink implements IHyperlink {
 	}
 
 	public String getTypeLabel() {
-		return null;
+		return SingleHoverShowingHyperlinkPresenter.SHOW_ALWAYS;
 	}
 
 	public String getHyperlinkText() {

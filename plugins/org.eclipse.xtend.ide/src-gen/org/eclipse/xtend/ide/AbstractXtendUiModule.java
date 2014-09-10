@@ -327,11 +327,6 @@ public abstract class AbstractXtendUiModule extends DefaultUiModule {
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
-	public Class<? extends org.eclipse.jface.text.hyperlink.IHyperlinkDetector> bindIHyperlinkDetector() {
-		return org.eclipse.xtext.xbase.ui.navigation.XbaseHyperlinkDetector.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.xbase.imports.IUnresolvedTypeResolver> bindIUnresolvedTypeResolver() {
 		return org.eclipse.xtext.xbase.ui.imports.InteractiveUnresolvedTypeResolver.class;
 	}
