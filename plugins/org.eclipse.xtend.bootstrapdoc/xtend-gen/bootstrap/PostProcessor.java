@@ -41,9 +41,7 @@ public class PostProcessor {
       String html = it.toString();
       Pattern _codePattern = this.getCodePattern();
       Matcher matcher = _codePattern.matcher(html);
-      boolean _find = matcher.find();
-      boolean _while = _find;
-      while (_while) {
+      while (matcher.find()) {
         {
           String code = matcher.group();
           String _markCodeBegin = this._htmlExtensions.markCodeBegin();
@@ -67,8 +65,6 @@ public class PostProcessor {
           Matcher _matcher = _codePattern_1.matcher(html);
           matcher = _matcher;
         }
-        boolean _find_1 = matcher.find();
-        _while = _find_1;
       }
       _xblockexpression = html;
     }

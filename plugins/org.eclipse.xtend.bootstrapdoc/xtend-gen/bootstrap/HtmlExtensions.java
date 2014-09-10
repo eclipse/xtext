@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
@@ -407,13 +408,13 @@ public class HtmlExtensions {
             }
           }
           JvmDeclaredType _element_4 = it.getElement();
-          String _simpleName = null;
+          String _printName = null;
           if (_element_4!=null) {
-            _simpleName=_element_4.getSimpleName();
+            _printName=this.printName(_element_4);
           }
           String _trim = null;
-          if (_simpleName!=null) {
-            _trim=_simpleName.trim();
+          if (_printName!=null) {
+            _trim=_printName.trim();
           }
           _builder.append(_trim, "");
           _builder.append("</abbr>");
@@ -436,6 +437,20 @@ public class HtmlExtensions {
       _xblockexpression = _builder;
     }
     return _xblockexpression;
+  }
+  
+  public String printName(final JvmIdentifiableElement e) {
+    String _xifexpression = null;
+    EObject _eContainer = e.eContainer();
+    if ((_eContainer instanceof JvmIdentifiableElement)) {
+      EObject _eContainer_1 = e.eContainer();
+      String _printName = this.printName(((JvmIdentifiableElement) _eContainer_1));
+      _xifexpression = (_printName + ".");
+    } else {
+      _xifexpression = "";
+    }
+    String _simpleName = e.getSimpleName();
+    return (_xifexpression + _simpleName);
   }
   
   protected CharSequence _toHtml(final Code it, final ParagraphState state) {
@@ -641,76 +656,18 @@ public class HtmlExtensions {
         return "";
       }
       int start = 0;
-      boolean _and = false;
+      while (((start < (it.length() - 1)) && (Objects.equal(it.substring(start, (start + 1)), " ") || Objects.equal(it.substring(start, (start + 1)), "\t")))) {
+        start = (start + 1);
+      }
+      String _substring = it.substring(start, (start + 1));
+      boolean _equals = Objects.equal(_substring, "\n");
+      if (_equals) {
+        start = (start + 1);
+      }
       int _length = it.length();
-      int _minus = (_length - 1);
-      boolean _lessThan = (start < _minus);
-      if (!_lessThan) {
-        _and = false;
-      } else {
-        boolean _or = false;
-        String _substring = it.substring(start, (start + 1));
-        boolean _equals = Objects.equal(_substring, " ");
-        if (_equals) {
-          _or = true;
-        } else {
-          String _substring_1 = it.substring(start, (start + 1));
-          boolean _equals_1 = Objects.equal(_substring_1, "\t");
-          _or = _equals_1;
-        }
-        _and = _or;
-      }
-      boolean _while = _and;
-      while (_while) {
-        start = (start + 1);
-        boolean _and_1 = false;
-        int _length_1 = it.length();
-        int _minus_1 = (_length_1 - 1);
-        boolean _lessThan_1 = (start < _minus_1);
-        if (!_lessThan_1) {
-          _and_1 = false;
-        } else {
-          boolean _or_1 = false;
-          String _substring_2 = it.substring(start, (start + 1));
-          boolean _equals_2 = Objects.equal(_substring_2, " ");
-          if (_equals_2) {
-            _or_1 = true;
-          } else {
-            String _substring_3 = it.substring(start, (start + 1));
-            boolean _equals_3 = Objects.equal(_substring_3, "\t");
-            _or_1 = _equals_3;
-          }
-          _and_1 = _or_1;
-        }
-        _while = _and_1;
-      }
-      String _substring_2 = it.substring(start, (start + 1));
-      boolean _equals_2 = Objects.equal(_substring_2, "\n");
-      if (_equals_2) {
-        start = (start + 1);
-      }
-      int _length_1 = it.length();
-      int end = (_length_1 - 1);
-      boolean _and_1 = false;
-      if (!(end > 0)) {
-        _and_1 = false;
-      } else {
-        char _charAt = it.charAt(end);
-        boolean _isWhitespace = Character.isWhitespace(_charAt);
-        _and_1 = _isWhitespace;
-      }
-      boolean _while_1 = _and_1;
-      while (_while_1) {
+      int end = (_length - 1);
+      while (((end > 0) && Character.isWhitespace(it.charAt(end)))) {
         end = (end - 1);
-        boolean _and_2 = false;
-        if (!(end > 0)) {
-          _and_2 = false;
-        } else {
-          char _charAt_1 = it.charAt(end);
-          boolean _isWhitespace_1 = Character.isWhitespace(_charAt_1);
-          _and_2 = _isWhitespace_1;
-        }
-        _while_1 = _and_2;
       }
       _xblockexpression = it.substring(start, (end + 1));
     }

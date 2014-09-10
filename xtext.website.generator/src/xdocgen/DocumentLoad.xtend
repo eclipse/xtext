@@ -25,7 +25,7 @@ class DocumentLoad {
 			baseDirs, 
 			[fileExtension == "xdoc"]
 		).values
-		for(uri: uris + xtendFiles) {
+		for(uri: uris) {
 			println("Loading " + uri)
 			rs.getResource(uri, true)
 		}
@@ -51,10 +51,4 @@ class DocumentLoad {
 	}
 	
 	
-	def protected getXtendFiles() {
-		val classPath = System::getProperty("java.class.path");
-		val separator = System::getProperty("path.separator");
-		val entries = classPath.split(separator);
-		new PathTraverser().resolvePathes(entries, [fileExtension == 'xtend']).values
-	}
 }

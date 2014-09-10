@@ -30,6 +30,8 @@ import org.eclipse.xtext.xdoc.xdoc.XdocPackage$Literals
 
 import static bootstrap.ParagraphState.*
 import org.eclipse.xtext.common.types.JvmAnnotationType
+import org.eclipse.xtext.common.types.JvmIdentifiableElement
+import org.eclipse.xtext.common.types.JvmDeclaredType
 
 class ArtificialIds extends AdapterImpl {
 	public Map<Identifiable, String> artificialHrefs = newHashMap() 	
@@ -166,7 +168,7 @@ class HtmlExtensions {
 			IF element instanceof JvmAnnotationType
 				»@«
 			ENDIF
-			»«element?.simpleName?.trim»</abbr>«
+			»«element?.printName?.trim»</abbr>«
 		ENDIF»«
 		IF javaDocURI != null 
 			»</a>«
@@ -174,6 +176,12 @@ class HtmlExtensions {
 		IF sourceCodeURI!=null
 			» <a href="«sourceCodeURI»">(src)</a>«
 		ENDIF»'''
+	}
+	
+	def String printName(JvmIdentifiableElement e) {
+		(if (e.eContainer instanceof JvmIdentifiableElement) {
+			printName(e.eContainer as JvmIdentifiableElement)+'.'
+		} else '') + e.simpleName
 	}
 	
 	def protected dispatch CharSequence toHtml(Code it, ParagraphState state) {
