@@ -11,8 +11,17 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jface.text.Region;
+import org.eclipse.xtend.core.xtend.XtendField;
+import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendPackage;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
+import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkAcceptor;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -23,7 +32,9 @@ import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandida
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ISuspiciouslyOverloadedCandidate;
+import org.eclipse.xtext.xbase.ui.navigation.JvmImplementationOpener;
 import org.eclipse.xtext.xbase.ui.navigation.XbaseHyperLinkHelper;
+import org.eclipse.xtext.xbase.ui.navigation.XbaseImplementatorsHyperlink;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -44,6 +55,12 @@ public class XtendHyperlinkHelper extends XbaseHyperLinkHelper {
 
 	@Inject
 	private IJvmModelAssociations associations;
+	
+	@Inject
+	private IJavaElementFinder javaElementFinder;
+	
+	@Inject
+	private JvmImplementationOpener implOpener;
 
 	/**
 	 * This redirects the hyperlinks to all source elements of an inferred element.
@@ -56,6 +73,42 @@ public class XtendHyperlinkHelper extends XbaseHyperLinkHelper {
 		} else {
 			for (EObject sourceElement : sourceElements) {
 				super.createHyperlinksTo(from, region, sourceElement, acceptor);
+			}
+		}
+	}
+	
+	@Override
+	public void createHyperlinksByOffset(XtextResource resource, int offset, IHyperlinkAcceptor acceptor) {
+		super.createHyperlinksByOffset(resource, offset, acceptor);
+		final EObject element = getEObjectAtOffsetHelper().resolveElementAt(resource, offset);
+		if (element instanceof XtendField) {
+			XtendField member = (XtendField) element;
+			ILeafNode node = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset);
+			if (isNameNode(member, XtendPackage.Literals.XTEND_FIELD__NAME, node) && member.getType()==null) {
+				EObject jvmElement = associations.getPrimaryJvmElement(member);
+				if (jvmElement instanceof JvmIdentifiableElement) {
+					addOpenInferredTypeHyperLink(resource, (JvmIdentifiableElement) jvmElement, node, acceptor);
+				}
+			}
+		}
+		if (element instanceof XtendFunction) {
+			XtendFunction member = (XtendFunction) element;
+			ILeafNode node = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset);
+			if (isNameNode(member, XtendPackage.Literals.XTEND_FUNCTION__NAME, node)) {
+				EObject jvmElement = associations.getPrimaryJvmElement(member);
+				if (jvmElement instanceof JvmIdentifiableElement) {
+					JvmIdentifiableElement identifiableElement = (JvmIdentifiableElement) jvmElement;
+					if (member.getReturnType()==null) {
+						addOpenInferredTypeHyperLink(resource, identifiableElement, node, acceptor);
+					}
+					IJavaElement javaElement = javaElementFinder.findExactElementFor(identifiableElement);
+					if (sourceViewer != null && javaElement != null 
+							&& (javaElement.getElementType() == IJavaElement.METHOD 
+							&& canBeOverridden((IMethod) javaElement))) {
+						Region region = new Region(node.getOffset(), node.getLength());
+						acceptor.accept(new XbaseImplementatorsHyperlink(javaElement, region, sourceViewer, implOpener));
+					}
+				}
 			}
 		}
 	}

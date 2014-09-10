@@ -22,6 +22,7 @@ import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
+import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.xtend.ide.internal.XtendActivator;
@@ -29,7 +30,6 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.xbase.ui.navigation.JvmImplementationOpener;
-import org.eclipse.xtext.xbase.ui.navigation.XbaseHyperlinkDetector;
 import org.eclipse.xtext.xbase.ui.navigation.XbaseImplementatorsHyperlink;
 import org.junit.Test;
 
@@ -50,7 +50,7 @@ public class OpenImplHyperlinksTest extends AbstractEditorTest {
 	@Inject
 	private WorkbenchTestHelper testHelper;
 	@Inject
-	private XbaseHyperlinkDetector hyperlinkDetector;
+	private IHyperlinkDetector hyperlinkDetector;
 
 	@Override
 	public void setUp() throws Exception {
@@ -65,14 +65,17 @@ public class OpenImplHyperlinksTest extends AbstractEditorTest {
 	}
 
 	@Test public void testComputeHyperlink_1() throws Exception {
-		String content = "package foo class Foo implements IBar { override b|ar(String a) {} } interface IBar { def bar(String a) }";
+		String content = "package foo class Foo implements IBar { override bar(String a) { b|ar('foo') } } interface IBar { def String bar(String a) }";
 		XtextEditor xtextEditor = openEditor(content.replace("|", ""));
 		int offset = content.indexOf("|");
 		IHyperlink[] detectHyperlinks = hyperlinkDetector.detectHyperlinks(xtextEditor.getInternalSourceViewer(), new Region(offset,1), true);
-		assertEquals(1, detectHyperlinks.length);
-		IHyperlink hyperlink = detectHyperlinks[0];
-		assertTrue(hyperlink instanceof XbaseImplementatorsHyperlink);
-		XbaseImplementatorsHyperlink casted = (XbaseImplementatorsHyperlink) hyperlink;
+		XbaseImplementatorsHyperlink casted = null;
+		for (IHyperlink iHyperlink : detectHyperlinks) {
+			if (iHyperlink instanceof XbaseImplementatorsHyperlink) {
+				casted = (XbaseImplementatorsHyperlink) iHyperlink;
+			}
+		}
+		@SuppressWarnings("null")
 		Field field = casted.getClass().getDeclaredField("opener");
 		field.setAccessible(true);
 		TestJvmImplementationOpener testOpener = new TestJvmImplementationOpener();
@@ -80,18 +83,20 @@ public class OpenImplHyperlinksTest extends AbstractEditorTest {
 		casted.open();
 		assertTrue(testOpener.isOpenInEditor);
 		assertFalse(testOpener.isOpenQuickHierarchy);
-
 	}
 
 	@Test public void testComputeHyperlink_2() throws Exception {
-		String content = "package foo interface IBar {def void b|ar(String a)} class Foo implements IBar { override bar(String a){} } class Foo2 implements IBar { override bar(String a) {} }";
+		String content = "package foo interface IBar {def void bar(String a)} class Foo implements IBar { override bar(String a){ val IBar x = null; x.b|ar('foo'} } class Foo2 implements IBar { override bar(String a) {} }";
 		XtextEditor xtextEditor = openEditor(content.replace("|", ""));
 		int offset = content.indexOf("|");
 		IHyperlink[] detectHyperlinks = hyperlinkDetector.detectHyperlinks(xtextEditor.getInternalSourceViewer(), new Region(offset,1), true);
-		assertEquals(1, detectHyperlinks.length);
-		IHyperlink hyperlink = detectHyperlinks[0];
-		assertTrue(hyperlink instanceof XbaseImplementatorsHyperlink);
-		XbaseImplementatorsHyperlink casted = (XbaseImplementatorsHyperlink) hyperlink;
+		XbaseImplementatorsHyperlink casted = null;
+		for (IHyperlink iHyperlink : detectHyperlinks) {
+			if (iHyperlink instanceof XbaseImplementatorsHyperlink) {
+				casted = (XbaseImplementatorsHyperlink) iHyperlink;
+			}
+		}
+		@SuppressWarnings("null")
 		Field field = casted.getClass().getDeclaredField("opener");
 		field.setAccessible(true);
 		TestJvmImplementationOpener testOpener = new TestJvmImplementationOpener();

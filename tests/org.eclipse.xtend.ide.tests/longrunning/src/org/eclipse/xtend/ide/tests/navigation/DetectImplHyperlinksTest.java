@@ -17,13 +17,15 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IMethod;
+import org.eclipse.jdt.core.IType;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
+import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
+import org.eclipse.xtext.common.types.xtext.ui.JdtHyperlink;
 import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.xbase.ui.navigation.XbaseHyperlinkDetector;
 import org.eclipse.xtext.xbase.ui.navigation.XbaseImplementatorsHyperlink;
 import org.junit.Test;
 
@@ -45,8 +47,9 @@ public class DetectImplHyperlinksTest extends AbstractEditorTest {
 	private IWorkspace workspace;
 	@Inject
 	private WorkbenchTestHelper testHelper;
+	
 	@Inject
-	private XbaseHyperlinkDetector hyperlinkDetector;
+	private IHyperlinkDetector hyperlinkDetector;
 
 	@Override
 	public void setUp() throws Exception {
@@ -68,13 +71,14 @@ public class DetectImplHyperlinksTest extends AbstractEditorTest {
 		IHyperlink[] detectHyperlinks = hyperlinkDetector.detectHyperlinks(xtextEditor.getInternalSourceViewer(), new Region(offset,1), true);
 		assertEquals(1, detectHyperlinks.length);
 		IHyperlink hyperlink = detectHyperlinks[0];
-		assertTrue(hyperlink instanceof XbaseImplementatorsHyperlink);
-		XbaseImplementatorsHyperlink casted = (XbaseImplementatorsHyperlink) hyperlink;
+		assertTrue(hyperlink instanceof JdtHyperlink);
+		JdtHyperlink casted = (JdtHyperlink) hyperlink;
 		assertEquals(offset -1, casted.getHyperlinkRegion().getOffset());
 		assertEquals(3, casted.getHyperlinkRegion().getLength());
-		IJavaElement element = ((XbaseImplementatorsHyperlink) hyperlink).getElement();
-		assertTrue(element instanceof IMethod);
-		assertEquals("bar", element.getElementName());
+		IJavaElement element = ((JdtHyperlink) hyperlink).getJavaElement();
+		assertTrue(element instanceof IType);
+		assertEquals("Object", element.getElementName());
+		assertEquals("Open Inferred Type - Object", casted.getHyperlinkText());
 	}
 
 	@Test public void testComputeHyperlink_2() throws Exception {
