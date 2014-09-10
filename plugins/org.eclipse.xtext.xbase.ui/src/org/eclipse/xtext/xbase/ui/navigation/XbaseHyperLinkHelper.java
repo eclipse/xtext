@@ -10,25 +10,36 @@ package org.eclipse.xtext.xbase.ui.navigation;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.jdt.core.IMethod;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
+import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
 import org.eclipse.xtext.common.types.xtext.ui.TypeAwareHyperlinkHelper;
+import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.ISourceViewerAware;
 import org.eclipse.xtext.ui.editor.hyperlinking.AbstractHyperlink;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkAcceptor;
+import org.eclipse.xtext.ui.editor.hyperlinking.SingleHoverShowingHyperlinkPresenter;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.imports.StaticallyImportedMemberProvider;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
@@ -43,7 +54,7 @@ import com.google.inject.Inject;
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
-public class XbaseHyperLinkHelper extends TypeAwareHyperlinkHelper {
+public class XbaseHyperLinkHelper extends TypeAwareHyperlinkHelper implements ISourceViewerAware {
 
 	@Inject
 	private IBatchTypeResolver typeResolver;
@@ -53,6 +64,18 @@ public class XbaseHyperLinkHelper extends TypeAwareHyperlinkHelper {
 
 	@Inject
 	private StaticallyImportedMemberProvider staticImpMemberProvider;
+	
+	@Inject
+	private IJavaElementFinder javaElementFinder;
+	
+	@Inject
+	private JvmImplementationOpener implOpener;
+
+	protected ISourceViewer sourceViewer;
+	
+	public void setSourceViewer(ISourceViewer sourceViewer) {
+		this.sourceViewer = sourceViewer; 
+	}
 
 	/**
 	 * If multiple links are requested, all ambiguous candidates are provided for feature and constructor calls.
@@ -92,7 +115,49 @@ public class XbaseHyperLinkHelper extends TypeAwareHyperlinkHelper {
 				}
 			}
 		}
+		if (element instanceof XVariableDeclaration) {
+			XVariableDeclaration variableDeclaration = (XVariableDeclaration) element;
+			ILeafNode node = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset);
+			if (isNameNode(element, XbasePackage.Literals.XVARIABLE_DECLARATION__NAME, node) && variableDeclaration.getType()==null) {
+				addOpenInferredTypeHyperLink(resource, variableDeclaration, node, acceptor);
+			}
+		}
+		if (element instanceof JvmFormalParameter) {
+			JvmFormalParameter param = (JvmFormalParameter) element;
+			ILeafNode node = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset);
+			if (isNameNode(element, TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME, node) && param.getParameterType()==null) {
+				addOpenInferredTypeHyperLink(resource, param, node, acceptor);
+			}
+		}
 		super.createHyperlinksByOffset(resource, offset, acceptor);
+	}
+
+	protected void addOpenInferredTypeHyperLink(final XtextResource resource, JvmIdentifiableElement typedElement,
+			ILeafNode node, final IHyperlinkAcceptor acceptor) {
+		IResolvedTypes resolveTypes = typeResolver.resolveTypes(resource);
+		final LightweightTypeReference type = resolveTypes.getActualType(typedElement);
+		if (type != null && !type.isUnknown()) {
+			createHyperlinksTo(resource, new Region(node.getOffset(), node.getLength()), type.getType(), new IHyperlinkAcceptor() {
+				public void accept(IHyperlink hyperlink) {
+					if (hyperlink instanceof AbstractHyperlink) {
+						AbstractHyperlink abstractHyperlink = (AbstractHyperlink) hyperlink;
+						abstractHyperlink.setHyperlinkText("Open Inferred Type - " + type.getSimpleName());
+						abstractHyperlink.setTypeLabel(SingleHoverShowingHyperlinkPresenter.SHOW_ALWAYS);
+					}
+					acceptor.accept(hyperlink);
+				}
+			});
+		}
+	}
+
+	protected boolean isNameNode(EObject element, EStructuralFeature feature, ILeafNode node) {
+		List<INode> nameNode = NodeModelUtils.findNodesForFeature(element, feature);
+		for (INode iNode : nameNode) {
+			if (iNode.getOffset() <= node.getOffset() && iNode.getLength()>= node.getLength()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	protected void createHyperlinksForCrossRef(XtextResource resource, INode crossRefNode,
@@ -106,6 +171,12 @@ public class XbaseHyperLinkHelper extends TypeAwareHyperlinkHelper {
 			if (targetElement instanceof JvmType || featureCall.getFeature() instanceof JvmEnumerationLiteral) {
 				return;
 			}
+			
+			IJavaElement javaElement = javaElementFinder.findExactElementFor(targetElement);
+			if (sourceViewer != null && javaElement != null && (javaElement.getElementType() == IJavaElement.METHOD && canBeOverridden((IMethod) javaElement))) {
+				acceptor.accept(new XbaseImplementatorsHyperlink(javaElement, new Region(crossRefNode.getOffset(), crossRefNode.getLength()), sourceViewer, implOpener));
+			}
+			
 			LightweightTypeReference typeReference = resolveTypes.getActualType(featureCall);
 			if (typeReference == null || typeReference.isPrimitive() || typeReference.isPrimitiveVoid()) {
 				return;
@@ -133,6 +204,20 @@ public class XbaseHyperLinkHelper extends TypeAwareHyperlinkHelper {
 					return target;
 				}
 			});
+		}
+	}
+
+	@SuppressWarnings("restriction")
+	protected boolean canBeOverridden(IMethod method) {
+		try {
+			return !(org.eclipse.jdt.internal.corext.util.JdtFlags.isPrivate(method) 
+					|| org.eclipse.jdt.internal.corext.util.JdtFlags.isStatic(method) 
+					|| org.eclipse.jdt.internal.corext.util.JdtFlags.isFinal(method) 
+					|| org.eclipse.jdt.internal.corext.util.JdtFlags.isFinal(method.getDeclaringType()) 
+					|| method.isConstructor());
+		} catch (JavaModelException e) {
+			org.eclipse.jdt.internal.ui.JavaPlugin.log(e);
+			return false;
 		}
 	}
 

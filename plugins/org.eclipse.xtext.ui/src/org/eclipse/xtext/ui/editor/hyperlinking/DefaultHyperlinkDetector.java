@@ -12,7 +12,9 @@ import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
+import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.ISourceViewerAware;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -32,9 +34,12 @@ public class DefaultHyperlinkDetector implements IHyperlinkDetector {
 	@Inject
 	private IHyperlinkHelper helper;
 
-	public IHyperlink[] detectHyperlinks(ITextViewer textViewer, final IRegion region, final boolean canShowMultipleHyperlinks) {
+	public IHyperlink[] detectHyperlinks(final ITextViewer textViewer, final IRegion region, final boolean canShowMultipleHyperlinks) {
 		return ((IXtextDocument)textViewer.getDocument()).priorityReadOnly(new IUnitOfWork<IHyperlink[],XtextResource>() {
 			public IHyperlink[] exec(XtextResource resource) throws Exception {
+				if (helper instanceof ISourceViewerAware && textViewer instanceof ISourceViewer) {
+					((ISourceViewerAware) helper).setSourceViewer((ISourceViewer) textViewer);
+				}
 				return helper.createHyperlinksByOffset(resource, region.getOffset(), canShowMultipleHyperlinks);
 			}
 		});

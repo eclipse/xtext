@@ -219,4 +219,22 @@ public class HyperlinkingTest extends AbstractXtendUITestCase {
 		assertEquals("meth(Baz, String) : Baz", hyperlinks[0].getHyperlinkText());
 		assertEquals("Open Return Type - Baz", hyperlinks[1].getHyperlinkText());
 	}
+	
+	@Test public void testOpenInferredType() throws Exception {
+		String modelAsString = "class Baz { def void foo() { var myVar='' println(myVar) } }";
+		XtextResource resource = (XtextResource) testHelper.xtendFile("Baz", modelAsString).eResource();
+		int indexOf_x_FieldRef = modelAsString.indexOf("myVar");
+		IHyperlink[] hyperlinks = hyperlinkHelper.createHyperlinksByOffset(resource, indexOf_x_FieldRef, true);
+		assertEquals(1, hyperlinks.length);
+		assertEquals("Open Inferred Type - String", hyperlinks[0].getHyperlinkText());
+	}	
+	
+	@Test public void testOpenInferredType_01() throws Exception {
+		String modelAsString = "class Baz { def void foo() { for (myVar : #[1,2,3]) { println(myVar) } } }";
+		XtextResource resource = (XtextResource) testHelper.xtendFile("Baz", modelAsString).eResource();
+		int indexOf_x_FieldRef = modelAsString.indexOf("myVar");
+		IHyperlink[] hyperlinks = hyperlinkHelper.createHyperlinksByOffset(resource, indexOf_x_FieldRef, true);
+		assertEquals(1, hyperlinks.length);
+		assertEquals("Open Inferred Type - Integer", hyperlinks[0].getHyperlinkText());
+	}	
 }
