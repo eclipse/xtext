@@ -6,7 +6,7 @@ Bundle-Version: 2.8.0.qualifier
 Bundle-Localization: plugin
 Bundle-SymbolicName: org.eclipse.xtend.ide;singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xtend.core;visibility:=reexport,
+Require-Bundle: org.eclipse.xtend.core,
  org.eclipse.xtext.builder,
  org.eclipse.xtext.ui,
  org.eclipse.xtext.ui.codetemplates.ui,
