@@ -3901,7 +3901,7 @@ class LazyTest {
 						<section id="propertyAnnotation" style="padding-top: 68px; margin-top: -68px;">
 						<h2 style="padding-top: 15px;">@Accessors</h2>
 						<p>
-							If you want to add getter and or setter methods for your fields <a href="http://www.eclipse.org/xtend/api/2.7.0/org/eclipse/xtend/lib/annotations/Accessors.html"><code class="prettyprint lang-xtend">@Accessors</code></a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/annotations/Accessors.java">(src)</a> is your friend.
+							If you want to add getter and or setter methods for your fields <a href="http://www.eclipse.org/xtend/api/2.7.0/org/eclipse/xtend/lib/annotations/Accessors.html"><code class="prettyprint lang-xtend">@Accessors</code></a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/annotations/Accessors.xtend">(src)</a> is your friend.
 							Here's a basic example.
 						</p>
 						<p>
@@ -3929,7 +3929,7 @@ public void setName(final String name) {
 						</p>
 						<p>
 							So by default a public getter and a public setter method is created. The <code class="prettyprint lang-xtend">@Accessors</code> can be configured to tell that you only 
-							want one or the other and to change the visibility. this is done by means of <a href="http://www.eclipse.org/xtend/api/2.7.0/org/eclipse/xtend/lib/annotations/AccessorType.html"><abbr title="org.eclipse.xtend.lib.annotations.AccessorType">AccessorType</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/annotations/AccessorType.java">(src)</a> You can also use the annotation on class level to do the same for all fields.
+							want one or the other and to change the visibility. this is done by means of <a href="http://www.eclipse.org/xtend/api/2.7.0/org/eclipse/xtend/lib/annotations/AccessorType.html"><abbr title="org.eclipse.xtend.lib.annotations.AccessorType">AccessorType</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/annotations/Accessors.xtend">(src)</a> You can also use the annotation on class level to do the same for all fields.
 						</p>
 						<p>
 							Here is a more complex example, that shows how it works:
@@ -3988,7 +3988,7 @@ public void setName(final String name) {
 						<section id="dataAnnotation" style="padding-top: 68px; margin-top: -68px;">
 						<h2 style="padding-top: 15px;">@Data</h2>
 						<p>
-							The annotation <a href="http://www.eclipse.org/xtend/api/2.7.0/org/eclipse/xtend/lib/annotations/Data.html"><code class="prettyprint lang-xtend">@Data</code></a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/annotations/Data.java">(src)</a>, will turn an annotated class into a value object class. A class annotated with <code class="prettyprint lang-xtend">@Data</code> 
+							The annotation <a href="http://www.eclipse.org/xtend/api/2.7.0/org/eclipse/xtend/lib/annotations/Data.html"><code class="prettyprint lang-xtend">@Data</code></a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/annotations/Data.xtend">(src)</a>, will turn an annotated class into a value object class. A class annotated with <code class="prettyprint lang-xtend">@Data</code> 
 							is processed according to the following rules:
 						</p>
 						<p>
@@ -4024,7 +4024,7 @@ public void setName(final String name) {
 						<section id="delegateAnnotation" style="padding-top: 68px; margin-top: -68px;">
 						<h2 style="padding-top: 15px;">@Delegate</h2>
 						<p>
-							The <a href="http://www.eclipse.org/xtend/api/2.7.0/org/eclipse/xtend/lib/annotations/Delegate.html"><code class="prettyprint lang-xtend">@Delegate</code></a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/annotations/Delegate.java">(src)</a> annotation automatically generated delegate methods for all interfaces shared between the delegate and
+							The <a href="http://www.eclipse.org/xtend/api/2.7.0/org/eclipse/xtend/lib/annotations/Delegate.html"><code class="prettyprint lang-xtend">@Delegate</code></a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/annotations/Delegate.xtend">(src)</a> annotation automatically generated delegate methods for all interfaces shared between the delegate and
 							the currently implemented class. You can optionally restrict it to explicitly stated interfaces.
 						</p>
 						<p>
