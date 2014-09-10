@@ -11,11 +11,14 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareBatchTypeResolver;
 
 import com.google.common.collect.Lists;
@@ -29,6 +32,13 @@ public class TypeDeclarationAwareBatchTypeResolver extends LogicalContainerAware
 	protected List<EObject> getEntryPoints(EObject object) {
 		 List<EObject> result = super.getEntryPoints(object);
 		 EObject rootContainer = EcoreUtil.getRootContainer(object);
+		 Resource resource = rootContainer.eResource();
+		 if (resource instanceof XtextResource) {
+			 IParseResult parseResult = ((XtextResource) resource).getParseResult();
+			 if (!parseResult.hasSyntaxErrors()) {
+				 return result;
+			 }
+		 }
 		 if (rootContainer instanceof XtendFile) {
 			 result = Lists.newArrayList(result);
 			 List<XtendTypeDeclaration> typeDeclarations = ((XtendFile) rootContainer).getXtendTypes();
@@ -40,13 +50,8 @@ public class TypeDeclarationAwareBatchTypeResolver extends LogicalContainerAware
 		 return result;
 	}
 
-	/**
-	 * Collects all Xtend type declarations and adds them to the list. The types are added
-	 * from the innermost to the outermost type declaration. That is, nested classes are 
-	 * added before their declarators are added. This greatly simplifies the implementation of
-	 * {@code isHandled} in the concrete {@link org.eclipse.xtext.xbase.typesystem.internal.AbstractRootedReentrantTypeResolver}.
-	 */
 	private void addXtendTypes(XtendTypeDeclaration declaration, List<EObject> result) {
+		result.add(declaration);
 		for(XtendMember member: declaration.getMembers()) {
 			TreeIterator<EObject> iterator = EcoreUtil2.eAll(member);
 			while(iterator.hasNext()) {
@@ -57,7 +62,6 @@ public class TypeDeclarationAwareBatchTypeResolver extends LogicalContainerAware
 				}
 			}
 		}
-		result.add(declaration);
 	}
 	
 }
