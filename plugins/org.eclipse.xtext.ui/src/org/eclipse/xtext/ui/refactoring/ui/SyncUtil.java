@@ -104,8 +104,10 @@ public class SyncUtil {
 						return;
 					final IEditorPart editor = editorReference.getEditor(false);
 					if (editor != null) {
-						if (editor instanceof XtextEditor)
+						if (editor instanceof XtextEditor) {
 							waitForReconciler((XtextEditor) editor);
+							waitForDirtyStateUpdater((XtextEditor) editor);
+						}
 						if (editor.isDirty() && saveAll) {
 							Display display = workbench.getDisplay();
 							display.syncExec(new Runnable() {
