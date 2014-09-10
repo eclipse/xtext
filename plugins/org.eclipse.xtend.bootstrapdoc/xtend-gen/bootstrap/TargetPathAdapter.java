@@ -5,6 +5,7 @@ import java.util.Map;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 import org.eclipse.xtext.xdoc.xdoc.AbstractSection;
 import org.eclipse.xtext.xdoc.xdoc.Identifiable;
@@ -14,21 +15,10 @@ import org.eclipse.xtext.xdoc.xdoc.Identifiable;
 public class TargetPathAdapter extends AdapterImpl {
   private final Map<Identifiable, String> _targetPaths = CollectionLiterals.<Identifiable, String>newHashMap();
   
-  public Map<Identifiable, String> getTargetPaths() {
-    return this._targetPaths;
-  }
-  
   private final List<AbstractSection> _targetFileRoots = CollectionLiterals.<AbstractSection>newArrayList();
   
-  public List<AbstractSection> getTargetFileRoots() {
-    return this._targetFileRoots;
-  }
-  
-  public TargetPathAdapter() {
-    super();
-  }
-  
   @Override
+  @Pure
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
@@ -38,6 +28,7 @@ public class TargetPathAdapter extends AdapterImpl {
   }
   
   @Override
+  @Pure
   public boolean equals(final Object obj) {
     if (this == obj)
       return true;
@@ -62,8 +53,19 @@ public class TargetPathAdapter extends AdapterImpl {
   }
   
   @Override
+  @Pure
   public String toString() {
     String result = new ToStringHelper().toString(this);
     return result;
+  }
+  
+  @Pure
+  public Map<Identifiable, String> getTargetPaths() {
+    return this._targetPaths;
+  }
+  
+  @Pure
+  public List<AbstractSection> getTargetFileRoots() {
+    return this._targetFileRoots;
   }
 }
