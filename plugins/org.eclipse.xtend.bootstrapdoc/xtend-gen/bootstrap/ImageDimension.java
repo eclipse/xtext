@@ -1,6 +1,7 @@
 package bootstrap;
 
 import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 @Data
@@ -8,15 +9,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 public class ImageDimension {
   private final int _width;
   
-  public int getWidth() {
-    return this._width;
-  }
-  
   private final int _height;
-  
-  public int getHeight() {
-    return this._height;
-  }
   
   public ImageDimension(final int width, final int height) {
     super();
@@ -25,6 +18,7 @@ public class ImageDimension {
   }
   
   @Override
+  @Pure
   public int hashCode() {
     final int prime = 31;
     int result = 1;
@@ -34,6 +28,7 @@ public class ImageDimension {
   }
   
   @Override
+  @Pure
   public boolean equals(final Object obj) {
     if (this == obj)
       return true;
@@ -50,8 +45,19 @@ public class ImageDimension {
   }
   
   @Override
+  @Pure
   public String toString() {
     String result = new ToStringHelper().toString(this);
     return result;
+  }
+  
+  @Pure
+  public int getWidth() {
+    return this._width;
+  }
+  
+  @Pure
+  public int getHeight() {
+    return this._height;
   }
 }
