@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
@@ -19,6 +20,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -51,9 +53,11 @@ public class DefaultBatchTypeResolver extends AbstractBatchTypeResolver {
 	}
 	
 	protected IReentrantTypeResolver getTypeResolver(EObject object) {
+		Set<EObject> allRootedExpressions = Sets.newHashSet();
 		List<EObject> roots = getEntryPoints(object);
 		if (roots.size() == 1) {
-			IReentrantTypeResolver result = getOrCreateResolver(roots.get(0));
+			AbstractRootedReentrantTypeResolver result = getOrCreateResolver(roots.get(0));
+			result.setAllRootedExpressions(allRootedExpressions);
 			return result;
 		}
 		if (roots.isEmpty()) {
@@ -61,7 +65,9 @@ public class DefaultBatchTypeResolver extends AbstractBatchTypeResolver {
 		}
 		CompoundReentrantTypeResolver result = new CompoundReentrantTypeResolver();
 		for(EObject root: roots) {
-			result.addResolver(getOrCreateResolver(root));
+			AbstractRootedReentrantTypeResolver resolver = getOrCreateResolver(root);
+			resolver.setAllRootedExpressions(allRootedExpressions);
+			result.addResolver(resolver);
 		}
 		return result;
 	}
@@ -126,6 +132,11 @@ public class DefaultBatchTypeResolver extends AbstractBatchTypeResolver {
 				@Override
 				protected boolean isHandled(XExpression expression) {
 					return newResolver.isHandled(expression);
+				}
+				
+				@Override
+				protected void setAllRootedExpressions(Set<EObject> allRootedExpressions) {
+					newResolver.setAllRootedExpressions(allRootedExpressions);
 				}
 
 			};

@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.Set;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XExpression;
@@ -24,6 +26,12 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(DefaultReentrantTypeResolver.class)
 public abstract class AbstractRootedReentrantTypeResolver implements IReentrantTypeResolver {
 
+	/**
+	 * A set of all root expressions that have been processed so far. May be shared among 
+	 * multiple rooted type resolvers.
+	 */
+	protected Set<EObject> allRootedExpressions;
+
 	protected abstract EObject getRoot();
 	
 	protected abstract boolean isHandled(XExpression expression);
@@ -31,6 +39,10 @@ public abstract class AbstractRootedReentrantTypeResolver implements IReentrantT
 	protected abstract boolean isHandled(JvmIdentifiableElement identifiableElement);
 	
 	protected abstract boolean isHandled(EObject context);
+	
+	protected void setAllRootedExpressions(Set<EObject> allRootedExpressions) {
+		this.allRootedExpressions = allRootedExpressions;
+	}
 	
 	@Override
 	public String toString() {
