@@ -28,7 +28,7 @@ class Download extends AbstractXtendWebsite {
 	public static val WIN_64 = 'win32-x86_64';
 	public static val WIN_32 = 'win32';
 	
-	val currentVersion = "2.6.0";
+	val currentVersion = "2.7.1";
 
 	override contents() '''
 		«headline('Download')»
@@ -141,7 +141,7 @@ class Download extends AbstractXtendWebsite {
 				<div class="span1">&nbsp;</div>
 				  <div class="span9">
 				    <p>
-				      The Xtend IDE integration requires Eclipse 3.5 or higher and a Java SDK 5 or higher. Use one of the udpate sites from above to install the full SDK
+				      The Xtend IDE integration requires Eclipse 3.6 or higher and a Java SDK 5 or higher. Use one of the update sites from above to install the full SDK
 				      into your running Eclipse. If you do not yet have an Eclipse on your machine, you can download one of the pre-packaged distributions on the right.
 				    </p>
 				    <p>
@@ -167,7 +167,8 @@ class Download extends AbstractXtendWebsite {
 							</p>
 							<ul>
 								<li><a href="http://search.maven.org/#search%7Cga%7C1%7Corg.eclipse.xtext.xbase.lib">org.eclipse.xtext.xbase.lib (the extensions to JDK and Guava)</a>
-								<li><a href="http://search.maven.org/#search%7Cga%7C1%7Corg.eclipse.xtend.lib">org.eclipse.xtend.lib (the active annotations API)</a>
+								<li><a href="http://search.maven.org/#search%7Cga%7C1%7Corg.eclipse.xtend.lib">org.eclipse.xtend.lib (active annotations, such as @Accessors, @Data and @Delegate)</a>
+								<li><a href="http://search.maven.org/#search%7Cga%7C1%7Corg.eclipse.xtend.lib.macro">org.eclipse.xtend.lib.macro (the active annotations API)</a>
 								<li><a href="http://search.maven.org/#search%7Cga%7C1%7Ccom.google.guava%20a%3A%22guava%22">com.google.guava (Google Guava)</a>
 							</ul>
 							<p>
@@ -231,7 +232,7 @@ class Download extends AbstractXtendWebsite {
 							<section>
 							<h2 style="padding-top: 15px;">Getting the runtime library via Maven</h2>
 							<p>
-								The <a href="api/2.6.0/index.html">runtime library</a> is available from Maven Central, too: <a href="http://repo.maven.apache.org/maven2">http://repo.maven.apache.org/maven2</a>.
+								The <a href="api/2.7.0/index.html">runtime library</a> is available from Maven Central, too: <a href="http://repo.maven.apache.org/maven2">http://repo.maven.apache.org/maven2</a>.
 							</p>
 							The XML for the dependency is :
 							</p>

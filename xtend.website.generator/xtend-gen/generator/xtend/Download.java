@@ -50,7 +50,7 @@ public class Download extends AbstractXtendWebsite {
   
   public final static String WIN_32 = "win32";
   
-  private final String currentVersion = "2.6.0";
+  private final String currentVersion = "2.7.1";
   
   public CharSequence contents() {
     StringConcatenation _builder = new StringConcatenation();
@@ -402,7 +402,7 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("<p>");
     _builder.newLine();
     _builder.append("\t\t      ");
-    _builder.append("The Xtend IDE integration requires Eclipse 3.5 or higher and a Java SDK 5 or higher. Use one of the udpate sites from above to install the full SDK");
+    _builder.append("The Xtend IDE integration requires Eclipse 3.6 or higher and a Java SDK 5 or higher. Use one of the update sites from above to install the full SDK");
     _builder.newLine();
     _builder.append("\t\t      ");
     _builder.append("into your running Eclipse. If you do not yet have an Eclipse on your machine, you can download one of the pre-packaged distributions on the right.");
@@ -480,7 +480,10 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("<li><a href=\"http://search.maven.org/#search%7Cga%7C1%7Corg.eclipse.xtext.xbase.lib\">org.eclipse.xtext.xbase.lib (the extensions to JDK and Guava)</a>");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t");
-    _builder.append("<li><a href=\"http://search.maven.org/#search%7Cga%7C1%7Corg.eclipse.xtend.lib\">org.eclipse.xtend.lib (the active annotations API)</a>");
+    _builder.append("<li><a href=\"http://search.maven.org/#search%7Cga%7C1%7Corg.eclipse.xtend.lib\">org.eclipse.xtend.lib (active annotations, such as @Accessors, @Data and @Delegate)</a>");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t");
+    _builder.append("<li><a href=\"http://search.maven.org/#search%7Cga%7C1%7Corg.eclipse.xtend.lib.macro\">org.eclipse.xtend.lib.macro (the active annotations API)</a>");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t");
     _builder.append("<li><a href=\"http://search.maven.org/#search%7Cga%7C1%7Ccom.google.guava%20a%3A%22guava%22\">com.google.guava (Google Guava)</a>");
@@ -671,7 +674,7 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("<p>");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t");
-    _builder.append("The <a href=\"api/2.6.0/index.html\">runtime library</a> is available from Maven Central, too: <a href=\"http://repo.maven.apache.org/maven2\">http://repo.maven.apache.org/maven2</a>.");
+    _builder.append("The <a href=\"api/2.7.0/index.html\">runtime library</a> is available from Maven Central, too: <a href=\"http://repo.maven.apache.org/maven2\">http://repo.maven.apache.org/maven2</a>.");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
     _builder.append("</p>");
