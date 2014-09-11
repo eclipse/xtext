@@ -18,11 +18,6 @@ class ChangeListenerAddingFileSystemSupport implements MutableFileSystemSupport 
 	val MutableFileSystemSupport delegate
 	val CompilationUnitImpl compilationUnit
 
-	protected def registerChangeListener(Path path) {
-		compilationUnit.resourceChangeRegistry.register(new org.eclipse.core.runtime.Path(path.toString),
-			compilationUnit.xtendFile)
-	}
-
 	override delete(Path path) {
 		delegate.delete(path)
 	}
@@ -40,42 +35,42 @@ class ChangeListenerAddingFileSystemSupport implements MutableFileSystemSupport 
 	}
 
 	override exists(Path path) {
-		registerChangeListener(path)
+		compilationUnit.resourceChangeRegistry.registerExists(path.toString, compilationUnit.xtendFile.eResource.URI)
 		delegate.exists(path)
 	}
 
 	override getCharset(Path path) {
-		registerChangeListener(path)
+		compilationUnit.resourceChangeRegistry.registerGetCharset(path.toString, compilationUnit.xtendFile.eResource.URI)
 		delegate.getCharset(path)
 	}
 
 	override getChildren(Path path) {
-		registerChangeListener(path)
+		compilationUnit.resourceChangeRegistry.registerGetChildren(path.toString, compilationUnit.xtendFile.eResource.URI)
 		delegate.getChildren(path)
 	}
 
 	override getContents(Path path) {
-		registerChangeListener(path)
+		compilationUnit.resourceChangeRegistry.registerGetContents(path.toString, compilationUnit.xtendFile.eResource.URI)
 		delegate.getContents(path)
 	}
 
 	override getContentsAsStream(Path path) {
-		registerChangeListener(path)
+		compilationUnit.resourceChangeRegistry.registerGetContents(path.toString, compilationUnit.xtendFile.eResource.URI)
 		delegate.getContentsAsStream(path)
 	}
 
 	override getLastModification(Path path) {
-		registerChangeListener(path)
+		compilationUnit.resourceChangeRegistry.registerGetContents(path.toString, compilationUnit.xtendFile.eResource.URI)
 		delegate.getLastModification(path)
 	}
 
 	override isFile(Path path) {
-		registerChangeListener(path)
+		compilationUnit.resourceChangeRegistry.registerExists(path.toString, compilationUnit.xtendFile.eResource.URI)
 		delegate.isFile(path)
 	}
 
 	override isFolder(Path path) {
-		registerChangeListener(path)
+		compilationUnit.resourceChangeRegistry.registerExists(path.toString, compilationUnit.xtendFile.eResource.URI)
 		delegate.isFolder(path)
 	}
 
