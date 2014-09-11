@@ -228,13 +228,13 @@
 
 
 		<!-- setup composite.repository.base appropriate to the build type -->
-		<condition property="composite.repository.base" value="nightly/head">
+		<condition property="composite.repository.base" value="nightly/maintenance">
 			<matches pattern="^N" string="${saved.build.id}" />
 		</condition>
-		<condition property="composite.repository.base" value="milestones/head/${saved.build.id}">
+		<condition property="composite.repository.base" value="milestones/maintenance/${saved.build.id}">
 			<matches pattern="^[IMS]" string="${saved.build.id}" />
 		</condition>
-		<condition property="composite.repository.base" value="releases/head/${saved.build.id}">
+		<condition property="composite.repository.base" value="releases/maintenance/${saved.build.id}">
 			<matches pattern="^R" string="${saved.build.id}" />
 		</condition>
 
