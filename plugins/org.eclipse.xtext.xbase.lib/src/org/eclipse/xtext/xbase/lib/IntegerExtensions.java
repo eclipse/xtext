@@ -74,7 +74,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @return <code>a|b</code>
 	 */
 	@Pure
-	@Inline("($1 | $2)")
+	@Inline(value="($1 | $2)", constantExpression=true)
 	public static int bitwiseOr(int a, int b) {
 		return a | b;
 	}
@@ -89,7 +89,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @return <code>a^b</code>
 	 */
 	@Pure
-	@Inline("($1 ^ $2)")
+	@Inline(value="($1 ^ $2)", constantExpression=true)
 	public static int bitwiseXor(int a, int b) {
 		return a ^ b;
 	}
@@ -104,7 +104,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @return <code>a&b</code>
 	 */
 	@Pure
-	@Inline("($1 & $2)")
+	@Inline(value="($1 & $2)", constantExpression=true)
 	public static int bitwiseAnd(int a, int b) {
 		return a & b;
 	}
@@ -117,7 +117,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @return the bitwise complement of <code>a</code>.
 	 */
 	@Pure
-	@Inline("(~$1)")
+	@Inline(value="(~$1)", constantExpression=true)
 	public static int bitwiseNot(int a) {
 		return ~a;
 	}
@@ -134,7 +134,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @deprecated use {@link #operator_doubleLessThan(int, int)} instead
 	 */
 	@Pure
-	@Inline("($1 << $2)")
+	@Inline(value="($1 << $2)", constantExpression=true)
 	@Deprecated
 	public static int shiftLeft(int a, int distance) {
 		return a << distance;
@@ -152,7 +152,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 << $2)")
+	@Inline(value="($1 << $2)", constantExpression=true)
 	public static int operator_doubleLessThan(int a, int distance) {
 		return a << distance;
 	}
@@ -169,7 +169,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @deprecated use {@link #operator_doubleGreaterThan(int, int)} instead
 	 */
 	@Pure
-	@Inline("($1 >> $2)")
+	@Inline(value="($1 >> $2)", constantExpression=true)
 	@Deprecated
 	public static int shiftRight(int a, int distance) {
 		return a >> distance;
@@ -187,7 +187,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 >> $2)")
+	@Inline(value="($1 >> $2)", constantExpression=true)
 	public static int operator_doubleGreaterThan(int a, int distance) {
 		return a >> distance;
 	}
@@ -204,7 +204,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @deprecated use {@link #operator_tripleGreaterThan(int, int)} instead
 	 */
 	@Pure
-	@Inline("($1 >>> $2)")
+	@Inline(value="($1 >>> $2)", constantExpression=true)
 	@Deprecated
 	public static int shiftRightUnsigned(int a, int distance) {
 		return a >>> distance;
@@ -222,7 +222,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @since 2.3
 	 */
 	@Pure
-	@Inline("($1 >>> $2)")
+	@Inline(value="($1 >>> $2)", constantExpression=true)
 	public static int operator_tripleGreaterThan(int a, int distance) {
 		return a >>> distance;
 	}
