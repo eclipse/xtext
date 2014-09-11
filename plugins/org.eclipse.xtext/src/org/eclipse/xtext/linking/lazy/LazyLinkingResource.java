@@ -237,9 +237,9 @@ public class LazyLinkingResource extends XtextResource {
 	 * @since 2.4
 	 */
 	protected EObject getEObject(String uriFragment, Triple<EObject, EReference, INode> triple) throws AssertionError {
+		if (!resolving.add(triple))
+			return handleCyclicResolution(triple);
 		try {
-			if (!resolving.add(triple))
-				return handleCyclicResolution(triple);
 			Set<String> unresolveableProxies = getUnresolvableURIFragments();
 			if (unresolveableProxies.contains(uriFragment))
 				return null;
