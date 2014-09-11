@@ -1,5 +1,7 @@
 package org.eclipse.xtext.resource.containers;
 
+import static com.google.common.collect.Lists.*;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -48,7 +50,7 @@ public class FlatResourceSetBasedAllContainersState extends AdapterImpl implemen
 			return Collections.emptySet();
 		if (resourceSet instanceof XtextResourceSet) {
 			XtextResourceSet xtextResourceSet = (XtextResourceSet) resourceSet;
-			return xtextResourceSet.getNormalizationMap().values();
+			return newArrayList(xtextResourceSet.getNormalizationMap().values());
 		}
 		List<URI> uris = Lists.newArrayListWithCapacity(resourceSet.getResources().size());
 		URIConverter uriConverter = resourceSet.getURIConverter();
