@@ -185,7 +185,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	@Accessors(PUBLIC_GETTER) @Inject IFileHeaderProvider fileHeaderProvider
 	@Accessors(PUBLIC_GETTER) @Inject JvmTypeExtensions typeExtensions
 	@Accessors(PUBLIC_GETTER) @Inject OverrideHelper overrideHelper
-	@Accessors(PUBLIC_GETTER) @Inject ResourceChangeRegistry resourceChangeRegistry
+	@Accessors(PUBLIC_GETTER) @Inject IResourceChangeRegistry resourceChangeRegistry
 	@Inject AbstractFileSystemSupport fileSystemSupport
 	@Accessors(PUBLIC_GETTER) @Inject FileLocations fileLocations
 	@Accessors(PUBLIC_GETTER) @Inject ReadAndWriteTracking readAndWriteTracking
