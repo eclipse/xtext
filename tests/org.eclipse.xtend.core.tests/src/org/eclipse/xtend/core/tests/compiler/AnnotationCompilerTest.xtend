@@ -346,4 +346,29 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''')
 	}
+	
+	@Test def testAnnotationWithIntArrayAndComputation() throws Exception {
+		'''
+			class TestXtend {
+				val static int a = 4
+				
+				@Click(#[ a, a.bitwiseAnd(3) << 1 ])
+				def meth() {}
+			}
+			
+			annotation Click {
+				int[] value
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class TestXtend {
+			  private final static int a = 4;
+			  
+			  @Click({ TestXtend.a, ((TestXtend.a & 3) << 1) })
+			  public Object meth() {
+			    return null;
+			  }
+			}
+		''')
+	}
 }

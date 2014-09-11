@@ -36,6 +36,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVoid;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.LocationData;
@@ -58,6 +59,8 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
+import org.eclipse.xtext.xbase.lib.IntegerExtensions;
+import org.eclipse.xtext.xbase.lib.LongExtensions;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -367,9 +370,9 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				return false;
 			}
 			// we need to prefer expressions for constant expressions, so they get compiled correctly.
-			// a binary or unary operator is constant if it's method is annotated with @Inline(..., constantExpression=true)
+			// a binary or unary operator is constant if its method is annotated with @Inline(..., constantExpression=true)
 			// and all arguments don't require variableDeclarations.
-			if (featureCall.isOperation()) {
+			if (isPotentialJavaOperation(featureCall)) {
 				JvmAnnotationReference inlineAnnotation = expressionHelper.findInlineAnnotation(featureCall);
 				if (inlineAnnotation == null)
 					return true;
@@ -397,6 +400,25 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			return !b.hasName(feature);
 		}
 		return super.isVariableDeclarationRequired(expr, b);
+	}
+
+	private boolean isPotentialJavaOperation(XAbstractFeatureCall featureCall) {
+		if (featureCall.isOperation()) {
+			return true;
+		}
+		if (featureCall.eClass() == XbasePackage.Literals.XMEMBER_FEATURE_CALL && featureCall.isStatic() && featureCall.isExtension() && featureCall.getActualArguments().size() == 2) {
+			JvmIdentifiableElement feature = featureCall.getFeature();
+			if (feature.eClass() == TypesPackage.Literals.JVM_OPERATION) {
+				JvmDeclaredType declarator = ((JvmOperation) feature).getDeclaringType();
+				if (IntegerExtensions.class.getName().equals(declarator.getIdentifier()) || LongExtensions.class.getName().equals(declarator.getIdentifier())) {
+					String simpleName = feature.getSimpleName();
+					if (simpleName.startsWith("bitwise") || simpleName.startsWith("shift")) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	protected void prepareExpression(XExpression arg, ITreeAppendable b) {
