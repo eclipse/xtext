@@ -27,6 +27,7 @@ Workflow {
 	
 	component = Generator auto-inject {
 		pathRtProject = runtimeProject
+		pathTestProject = runtimeProject
 		projectNameRt = projectName
 		
 		language = {
@@ -87,6 +88,7 @@ Workflow {
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.xtext"
+			fragment = generator.junit.Junit4Fragment {}
 			fragment = @TestLanguagesFragments {}
 		}
 	}

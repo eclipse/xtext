@@ -59,6 +59,7 @@ Workflow {
 	component = Generator auto-inject {
 		mergeManifest = false
 		pathRtProject = runtimeProject
+		pathTestProject = runtimeProject
 		projectNameRt = projectName
 		
 		language = {
@@ -91,6 +92,7 @@ Workflow {
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.xtext"
+			fragment = junit.Junit4Fragment {}
 			fragment = @TestLanguagesFragments {}
 		}
 		language = { 
