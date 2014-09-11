@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.Set;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -76,6 +78,17 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 	
 	private boolean resolving = false;
 	
+	/**
+	 * A set of all root expressions that have been processed so far. May be shared among 
+	 * multiple rooted type resolvers.
+	 */
+	protected Set<EObject> allRootedExpressions;
+	
+	@Override
+	protected void setAllRootedExpressions(Set<EObject> allRootedExpressions) {
+		this.allRootedExpressions = allRootedExpressions;
+	}
+	
 	public final void initializeFrom(EObject root) {
 		if (this.root != null) {
 			throw new IllegalStateException("Cannot reinitialize. Resolver has already a root: " + this.root);
@@ -117,12 +130,19 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 			task.start();
 			resolving = true;
 			return resolve(monitor);
+		} catch(OperationCanceledException e) {
+			clear();
+			throw e;
 		} finally {
 			resolving = false;
 			task.stop();
 		}
 	}
 	
+	protected void clear() {
+		allRootedExpressions = null;
+	}
+
 	protected IResolvedTypes resolve(CancelIndicator monitor) {
 		if (isInvalidRoot()) {
 			return IResolvedTypes.NULL;

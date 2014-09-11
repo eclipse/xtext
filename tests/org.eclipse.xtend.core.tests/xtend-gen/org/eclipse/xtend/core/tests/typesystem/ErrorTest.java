@@ -3485,6 +3485,304 @@ public class ErrorTest extends AbstractXtendTestCase {
     this._oven.fireproof(_builder);
   }
   
+  @Test
+  public void testErrorModel_128() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Test {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extension Util");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def getRunnable() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("new Runnable {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("override ru {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("sayHello");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("} ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static class Util {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("def sayHello() {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("\'Hello\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_129() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Test {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def getRunnable() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val extension Util u = null");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("new Runnable {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("override ru {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("sayHello");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static class Util {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("def sayHello() {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("\'Hello\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_130() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor");
+    _builder.newLine();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val int a");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val String b");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@FinalFieldsConstructor new()");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_131() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor");
+    _builder.newLine();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val int a");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val String b");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@FinalFieldsConstructor new() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_132() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor");
+    _builder.newLine();
+    _builder.append("@FinalFieldsConstructor");
+    _builder.newLine();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val int a");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@FinalFieldsConstructor new");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_133() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor");
+    _builder.newLine();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val int a");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@FinalFieldsConstructor new() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("FinalFieldsConstructor new() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_134() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static interface B {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("static class D {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("} ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("B b = B.C ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("c B.C");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_135() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import .eclipse.xtend.lib.annotations.ToString");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.annotations.Data");
+    _builder.newLine();
+    _builder.append("@ToString(hideFieldNames=true) @Data class Foo { String b = \"Bar\"");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_136() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("@Deprecated");
+    _builder.newLine();
+    _builder.append("final class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static extension D = D.instance");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("@Deprecated");
+    _builder.newLine();
+    _builder.append("package abstract class D {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def static instance() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_137() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def m0() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return new D().m2");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override protected m1() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("new Object() {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("override m3() \'\'");
+    _builder.append("\'\'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class D {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def m2() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder);
+  }
+  
   public XtendFile processWithoutException(final CharSequence input) throws Exception {
     XtextResourceSet _resourceSet = this.getResourceSet();
     URI _createURI = URI.createURI("abcdefg.xtend");
