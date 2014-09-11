@@ -7,9 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.macro.declaration;
 
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.emf.common.util.URI;
 
-public interface ResourceChangeRegistry {
-	public void register(IPath resourcePath, XtendFile interestedFile);
+public interface IResourceChangeRegistry {
+	public void registerExists(String path, URI uri);
+	public void registerGetCharset(String string, URI uri);
+	public void registerGetChildren(String string, URI uri);
+	public void registerGetContents(String string, URI uri);
 }

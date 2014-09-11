@@ -8,9 +8,10 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import java.io.InputStream;
-import java.net.URI;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
-import org.eclipse.xtend.core.macro.declaration.ResourceChangeRegistry;
+import org.eclipse.xtend.core.macro.declaration.IResourceChangeRegistry;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
@@ -23,14 +24,6 @@ public class ChangeListenerAddingFileSystemSupport implements MutableFileSystemS
   private final MutableFileSystemSupport delegate;
   
   private final CompilationUnitImpl compilationUnit;
-  
-  protected void registerChangeListener(final Path path) {
-    ResourceChangeRegistry _resourceChangeRegistry = this.compilationUnit.getResourceChangeRegistry();
-    String _string = path.toString();
-    org.eclipse.core.runtime.Path _path = new org.eclipse.core.runtime.Path(_string);
-    XtendFile _xtendFile = this.compilationUnit.getXtendFile();
-    _resourceChangeRegistry.register(_path, _xtendFile);
-  }
   
   public void delete(final Path path) {
     this.delegate.delete(path);
@@ -51,7 +44,12 @@ public class ChangeListenerAddingFileSystemSupport implements MutableFileSystemS
   public boolean exists(final Path path) {
     boolean _xblockexpression = false;
     {
-      this.registerChangeListener(path);
+      IResourceChangeRegistry _resourceChangeRegistry = this.compilationUnit.getResourceChangeRegistry();
+      String _string = path.toString();
+      XtendFile _xtendFile = this.compilationUnit.getXtendFile();
+      Resource _eResource = _xtendFile.eResource();
+      URI _uRI = _eResource.getURI();
+      _resourceChangeRegistry.registerExists(_string, _uRI);
       _xblockexpression = this.delegate.exists(path);
     }
     return _xblockexpression;
@@ -60,7 +58,12 @@ public class ChangeListenerAddingFileSystemSupport implements MutableFileSystemS
   public String getCharset(final Path path) {
     String _xblockexpression = null;
     {
-      this.registerChangeListener(path);
+      IResourceChangeRegistry _resourceChangeRegistry = this.compilationUnit.getResourceChangeRegistry();
+      String _string = path.toString();
+      XtendFile _xtendFile = this.compilationUnit.getXtendFile();
+      Resource _eResource = _xtendFile.eResource();
+      URI _uRI = _eResource.getURI();
+      _resourceChangeRegistry.registerGetCharset(_string, _uRI);
       _xblockexpression = this.delegate.getCharset(path);
     }
     return _xblockexpression;
@@ -69,7 +72,12 @@ public class ChangeListenerAddingFileSystemSupport implements MutableFileSystemS
   public Iterable<? extends Path> getChildren(final Path path) {
     Iterable<? extends Path> _xblockexpression = null;
     {
-      this.registerChangeListener(path);
+      IResourceChangeRegistry _resourceChangeRegistry = this.compilationUnit.getResourceChangeRegistry();
+      String _string = path.toString();
+      XtendFile _xtendFile = this.compilationUnit.getXtendFile();
+      Resource _eResource = _xtendFile.eResource();
+      URI _uRI = _eResource.getURI();
+      _resourceChangeRegistry.registerGetChildren(_string, _uRI);
       _xblockexpression = this.delegate.getChildren(path);
     }
     return _xblockexpression;
@@ -78,7 +86,12 @@ public class ChangeListenerAddingFileSystemSupport implements MutableFileSystemS
   public CharSequence getContents(final Path path) {
     CharSequence _xblockexpression = null;
     {
-      this.registerChangeListener(path);
+      IResourceChangeRegistry _resourceChangeRegistry = this.compilationUnit.getResourceChangeRegistry();
+      String _string = path.toString();
+      XtendFile _xtendFile = this.compilationUnit.getXtendFile();
+      Resource _eResource = _xtendFile.eResource();
+      URI _uRI = _eResource.getURI();
+      _resourceChangeRegistry.registerGetContents(_string, _uRI);
       _xblockexpression = this.delegate.getContents(path);
     }
     return _xblockexpression;
@@ -87,7 +100,12 @@ public class ChangeListenerAddingFileSystemSupport implements MutableFileSystemS
   public InputStream getContentsAsStream(final Path path) {
     InputStream _xblockexpression = null;
     {
-      this.registerChangeListener(path);
+      IResourceChangeRegistry _resourceChangeRegistry = this.compilationUnit.getResourceChangeRegistry();
+      String _string = path.toString();
+      XtendFile _xtendFile = this.compilationUnit.getXtendFile();
+      Resource _eResource = _xtendFile.eResource();
+      URI _uRI = _eResource.getURI();
+      _resourceChangeRegistry.registerGetContents(_string, _uRI);
       _xblockexpression = this.delegate.getContentsAsStream(path);
     }
     return _xblockexpression;
@@ -96,7 +114,12 @@ public class ChangeListenerAddingFileSystemSupport implements MutableFileSystemS
   public long getLastModification(final Path path) {
     long _xblockexpression = (long) 0;
     {
-      this.registerChangeListener(path);
+      IResourceChangeRegistry _resourceChangeRegistry = this.compilationUnit.getResourceChangeRegistry();
+      String _string = path.toString();
+      XtendFile _xtendFile = this.compilationUnit.getXtendFile();
+      Resource _eResource = _xtendFile.eResource();
+      URI _uRI = _eResource.getURI();
+      _resourceChangeRegistry.registerGetContents(_string, _uRI);
       _xblockexpression = this.delegate.getLastModification(path);
     }
     return _xblockexpression;
@@ -105,7 +128,12 @@ public class ChangeListenerAddingFileSystemSupport implements MutableFileSystemS
   public boolean isFile(final Path path) {
     boolean _xblockexpression = false;
     {
-      this.registerChangeListener(path);
+      IResourceChangeRegistry _resourceChangeRegistry = this.compilationUnit.getResourceChangeRegistry();
+      String _string = path.toString();
+      XtendFile _xtendFile = this.compilationUnit.getXtendFile();
+      Resource _eResource = _xtendFile.eResource();
+      URI _uRI = _eResource.getURI();
+      _resourceChangeRegistry.registerExists(_string, _uRI);
       _xblockexpression = this.delegate.isFile(path);
     }
     return _xblockexpression;
@@ -114,13 +142,18 @@ public class ChangeListenerAddingFileSystemSupport implements MutableFileSystemS
   public boolean isFolder(final Path path) {
     boolean _xblockexpression = false;
     {
-      this.registerChangeListener(path);
+      IResourceChangeRegistry _resourceChangeRegistry = this.compilationUnit.getResourceChangeRegistry();
+      String _string = path.toString();
+      XtendFile _xtendFile = this.compilationUnit.getXtendFile();
+      Resource _eResource = _xtendFile.eResource();
+      URI _uRI = _eResource.getURI();
+      _resourceChangeRegistry.registerExists(_string, _uRI);
       _xblockexpression = this.delegate.isFolder(path);
     }
     return _xblockexpression;
   }
   
-  public URI toURI(final Path path) {
+  public java.net.URI toURI(final Path path) {
     return this.delegate.toURI(path);
   }
   
