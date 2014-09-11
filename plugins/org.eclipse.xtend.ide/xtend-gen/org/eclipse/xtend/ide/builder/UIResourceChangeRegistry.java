@@ -17,7 +17,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 import org.apache.log4j.Logger;
@@ -44,7 +43,6 @@ import org.eclipse.xtext.builder.impl.BuildScheduler;
 import org.eclipse.xtext.builder.impl.IBuildFlag;
 import org.eclipse.xtext.builder.impl.QueuedBuildData;
 import org.eclipse.xtext.ui.XtextProjectHelper;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -101,23 +99,18 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, Resour
     return _xblockexpression;
   }
   
+  private static int RELEVANT_CHANGE_FLAGS = (((IResourceDelta.CONTENT | IResourceDelta.ENCODING) | IResourceDelta.REPLACED) | IResourceDelta.LOCAL_CHANGED);
+  
   private boolean hasRelevantChange(final IResourceDelta delta) {
-    boolean _xifexpression = false;
     int _kind = delta.getKind();
     boolean _equals = (_kind == IResourceDelta.CHANGED);
     if (_equals) {
-      final Function1<Integer, Boolean> _function = new Function1<Integer, Boolean>() {
-        public Boolean apply(final Integer it) {
-          int _flags = delta.getFlags();
-          int _bitwiseAnd = (_flags & (it).intValue());
-          return Boolean.valueOf((_bitwiseAnd == 0));
-        }
-      };
-      _xifexpression = IterableExtensions.<Integer>exists(Collections.<Integer>unmodifiableList(CollectionLiterals.<Integer>newArrayList(Integer.valueOf(IResourceDelta.CONTENT), Integer.valueOf(IResourceDelta.ENCODING), Integer.valueOf(IResourceDelta.REPLACED))), _function);
+      int _flags = delta.getFlags();
+      int _bitwiseAnd = (_flags & UIResourceChangeRegistry.RELEVANT_CHANGE_FLAGS);
+      return (_bitwiseAnd != 0);
     } else {
-      _xifexpression = true;
+      return true;
     }
-    return _xifexpression;
   }
   
   @Inject

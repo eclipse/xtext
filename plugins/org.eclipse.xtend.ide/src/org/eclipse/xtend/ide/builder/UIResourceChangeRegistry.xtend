@@ -68,11 +68,16 @@ class UIResourceChangeRegistry implements IResourceChangeListener, ResourceChang
 		true
 	}
 	
+	static int RELEVANT_CHANGE_FLAGS = CONTENT
+		.bitwiseOr(ENCODING)
+		.bitwiseOr(REPLACED)
+		.bitwiseOr(LOCAL_CHANGED)
+	
 	private def hasRelevantChange(IResourceDelta delta) {
 		if (delta.kind == CHANGED) {
-			#[CONTENT, ENCODING, REPLACED].exists[delta.flags.bitwiseAnd(it) == 0]
+			return delta.flags.bitwiseAnd(RELEVANT_CHANGE_FLAGS) != 0
 		} else {
-			true
+			return true
 		}
 	}
 
