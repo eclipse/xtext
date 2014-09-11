@@ -109,7 +109,7 @@ class TestBatchCompiler {
 			assertEquals("/prj1/bin", project.sourceFolderMappings.get(it).toString)
 		]
 	}
-
+	
 	@Test def void testWorkspaceConfigMultipleSourceDirs2AbsPaths() {
 		batchCompiler.sourcePath = '''/tmp/ws/prj1/src«File.pathSeparator»/tmp/ws/prj1/src-gen'''
 		batchCompiler.outputPath = '''/tmp/ws/prj1/bin'''
@@ -340,6 +340,15 @@ class TestBatchCompiler {
 		assertEquals("Client.java", javaFiles)
 		val txtFile = new File(OUTPUT_DIRECTORY + "/Test.txt")
 		assertTrue(txtFile.exists)
+	}
+	
+	@Test
+	def void testBug443800() {
+		batchCompiler.sourcePath = "./batch-compiler-data/bug443800"
+		assertTrue(batchCompiler.configureWorkspace)
+		assertTrue(batchCompiler.compile)
+		val javaFiles = new File(OUTPUT_DIRECTORY + "/").list[dir, name|name.endsWith(".java")].join(",")
+		assertEquals("Bug443800.java", javaFiles)
 	}
 	
 	@Test
