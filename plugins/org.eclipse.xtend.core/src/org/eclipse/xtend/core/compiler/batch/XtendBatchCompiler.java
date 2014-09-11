@@ -595,7 +595,7 @@ public class XtendBatchCompiler {
 		javaIoFileSystemAccess.setOutputPath(outputPath);
 		javaIoFileSystemAccess.setWriteTrace(writeTraceFiles);
 		
-		for (Resource resource : resourceSet.getResources()) {
+		for (Resource resource : newArrayList(resourceSet.getResources())) {
 			if (resource instanceof BatchLinkableResource) {
 				generator.doGenerate(resource, javaIoFileSystemAccess);
 			}

@@ -761,6 +761,24 @@ public class TestBatchCompiler {
   }
   
   @Test
+  public void testBug443800() {
+    this.batchCompiler.setSourcePath("./batch-compiler-data/bug443800");
+    boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
+    Assert.assertTrue(_configureWorkspace);
+    boolean _compile = this.batchCompiler.compile();
+    Assert.assertTrue(_compile);
+    File _file = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/"));
+    final FilenameFilter _function = new FilenameFilter() {
+      public boolean accept(final File dir, final String name) {
+        return name.endsWith(".java");
+      }
+    };
+    String[] _list = _file.list(_function);
+    final String javaFiles = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(_list)), ",");
+    Assert.assertEquals("Bug443800.java", javaFiles);
+  }
+  
+  @Test
   public void testClassPath() {
     this.batchCompiler.setSourcePath("./batch-compiler-data/classpathTest/src");
     this.batchCompiler.setClassPath("./batch-compiler-data/classpathTest/dependency");
