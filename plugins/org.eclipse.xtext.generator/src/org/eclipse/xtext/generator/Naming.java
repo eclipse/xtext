@@ -28,6 +28,8 @@ public class Naming {
 	private String projectNameRt;
 	private String projectNameUi;
 	private String lineDelimiter = Strings.newLine();
+	private boolean hasUI;
+	
 	
 	/**
 	 * @since 2.3
@@ -170,5 +172,18 @@ public class Naming {
 	public String toPackageName(String name) {
 		return Strings.skipLastToken(name, ".");
 	}
-
+	
+	/**
+	 * @since 2.8
+	 */
+	public boolean hasUI() {
+		return hasUI;
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public void setHasUI(boolean hasUI) {
+		this.hasUI = hasUI;
+	}
 }

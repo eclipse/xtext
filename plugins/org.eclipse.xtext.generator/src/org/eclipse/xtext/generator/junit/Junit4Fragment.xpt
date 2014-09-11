@@ -99,6 +99,7 @@ public class «qualifiedInjectorProviderName().toSimpleName()» implements IInject
 «ENDFILE»
 
 
+«IF getNaming().hasUI()»
 «FILE qualifiedUiInjectorProviderName().asPath()+".java" SRC_GEN_TEST -»
 /*
 «fileHeader()»
@@ -117,6 +118,7 @@ public class «qualifiedUiInjectorProviderName().toSimpleName()» implements IInje
 	
 }
 «ENDFILE»
+«ENDIF»
 
 «ENDDEFINE»
 
