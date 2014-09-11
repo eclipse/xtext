@@ -108,6 +108,7 @@
     <roots id="com.google.guava" versionRange="[15.0.0,16.0.0)"/>
     <roots id="org.objectweb.asm" versionRange="5.0.1"/>
     <roots id="org.junit"/>
+    <roots id="org.eclipse.swtbot.eclipse.feature.group"/>
     <repositoryLists name="juno">
       <p2Repositories url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
       <p2Repositories url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
@@ -136,6 +137,7 @@
     <roots id="org.eclipse.emf.test.ecore.xcore.feature.group"/>
     <roots id="org.eclipse.xtext.examples.feature.group"/>
     <roots id="org.eclipse.xtend.tests.feature.group"/>
+    <roots id="org.eclipse.xtend.swtbot.tests.feature.group"/>
     <sourceLocators rootFolder="${emf.git.location}">
       <predicates xsi:type="predicates:NamePredicate" pattern=".*xcore.*|.*xtext.*"/>
     </sourceLocators>

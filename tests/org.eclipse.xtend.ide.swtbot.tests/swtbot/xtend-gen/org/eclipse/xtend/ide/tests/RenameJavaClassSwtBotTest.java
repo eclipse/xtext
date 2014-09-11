@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.ide.tests;
 
-import com.google.common.collect.Lists;
 import java.util.Collection;
 import java.util.Collections;
 import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
@@ -17,6 +16,7 @@ import org.eclipse.xtend.ide.tests.ParameterizedSWTBotRunner;
 import org.eclipse.xtend.ide.tests.RefactoringTestParameters;
 import org.eclipse.xtend.ide.tests.SwtBotProjectHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
@@ -40,7 +40,7 @@ public class RenameJavaClassSwtBotTest extends AbstractRefactoringSwtBotTest {
       }
     };
     RefactoringTestParameters _doubleArrow = ObjectExtensions.<RefactoringTestParameters>operator_doubleArrow(_refactoringTestParameters, _function);
-    return Collections.<Object[]>unmodifiableList(Lists.<Object[]>newArrayList(new Object[] { _doubleArrow }));
+    return Collections.<Object[]>unmodifiableList(CollectionLiterals.<Object[]>newArrayList(new Object[] { _doubleArrow }));
   }
   
   public RenameJavaClassSwtBotTest(final RefactoringTestParameters testParams) {
