@@ -259,7 +259,7 @@
     <setupTasks xsi:type="setup:ContextVariableTask" name="xtext.git.branch" value="v2.7_Maintenance"/>
     <setupTasks xsi:type="setup:ContextVariableTask" name="emf.git.branch" value="R2_10_maintenance" label=""/>
     <setupTasks xsi:type="setup:ContextVariableTask" name="xtext.nightly.composite" value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/maintenance/nightly/"/>
-    <setupTasks xsi:type="setup:ContextVariableTask" name="emf.update.site" value="https://hudson.eclipse.org/xtext/job/emf-core-maintenance/"/>
+    <setupTasks xsi:type="setup:ContextVariableTask" name="emf.update.site" value="https://hudson.eclipse.org/xtext/job/emf-core-maintenance/lastSuccessfulBuild/artifact/build-result/p2.repository/"/>
     <setupTasks xsi:type="setup:ApiBaselineTask" documentation="Xtext 2.6 stream API" version="2.6" zipLocation="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.6.0/R201405210727/tmf-xtext-SDK-2.6.0.zip&amp;r=1"/>
   </branches>
 </setup:Project>
