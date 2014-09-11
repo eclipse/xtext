@@ -1,4 +1,4 @@
-package org.eclipse.xcor.test;
+package org.eclipse.xcore.test;
 import org.eclipse.xcoretest.MyClass2;
 
 public class JavaClass {
