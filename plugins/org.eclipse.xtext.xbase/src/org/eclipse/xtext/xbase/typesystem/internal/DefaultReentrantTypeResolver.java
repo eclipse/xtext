@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.Set;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -75,6 +77,17 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 	private EObject root;
 	
 	private boolean resolving = false;
+	
+	/**
+	 * A set of all root expressions that have been processed so far. May be shared among 
+	 * multiple rooted type resolvers.
+	 */
+	protected Set<EObject> allRootedExpressions;
+	
+	@Override
+	protected void setAllRootedExpressions(Set<EObject> allRootedExpressions) {
+		this.allRootedExpressions = allRootedExpressions;
+	}
 	
 	public final void initializeFrom(EObject root) {
 		if (this.root != null) {
