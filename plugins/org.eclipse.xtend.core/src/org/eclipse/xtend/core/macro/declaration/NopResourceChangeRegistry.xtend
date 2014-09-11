@@ -7,12 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.macro.declaration
 
-import org.eclipse.xtend.core.macro.declaration.ResourceChangeRegistry
-import org.eclipse.core.runtime.IPath
-import org.eclipse.xtend.core.xtend.XtendFile
+import org.eclipse.emf.common.util.URI
 
-class NopResourceChangeRegistry implements ResourceChangeRegistry {
+class NopResourceChangeRegistry implements IResourceChangeRegistry {
 	
-	override register(IPath resourcePath, XtendFile interestedFile) {}
+	override registerExists(String path, URI uri) {
+	}
+	
+	override registerGetCharset(String string, URI uri) {
+	}
+	
+	override registerGetChildren(String string, URI uri) {
+	}
+	
+	override registerGetContents(String string, URI uri) {
+	}
 	
 }

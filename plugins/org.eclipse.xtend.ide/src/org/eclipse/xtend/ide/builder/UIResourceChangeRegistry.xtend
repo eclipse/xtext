@@ -12,10 +12,12 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.io.DataInputStream
 import java.io.DataOutputStream
-import java.io.EOFException
 import java.io.FileInputStream
 import java.io.FileOutputStream
+import java.io.OutputStream
+import java.util.Set
 import org.apache.log4j.Logger
+import org.eclipse.core.resources.IFolder
 import org.eclipse.core.resources.IResourceChangeEvent
 import org.eclipse.core.resources.IResourceChangeListener
 import org.eclipse.core.resources.IResourceDelta
@@ -24,53 +26,104 @@ import org.eclipse.core.resources.ISaveContext
 import org.eclipse.core.resources.ISaveParticipant
 import org.eclipse.core.resources.IWorkspace
 import org.eclipse.core.runtime.CoreException
-import org.eclipse.core.runtime.IPath
-import org.eclipse.core.runtime.Path
 import org.eclipse.emf.common.util.URI
 import org.eclipse.jdt.core.JavaCore
-import org.eclipse.xtend.core.macro.declaration.ResourceChangeRegistry
-import org.eclipse.xtend.core.xtend.XtendFile
+import org.eclipse.ui.plugin.AbstractUIPlugin
+import org.eclipse.xtend.core.macro.declaration.IResourceChangeRegistry
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.builder.impl.BuildScheduler
 import org.eclipse.xtext.builder.impl.IBuildFlag
 import org.eclipse.xtext.builder.impl.QueuedBuildData
 import org.eclipse.xtext.ui.XtextProjectHelper
 
 import static org.eclipse.core.resources.IResourceDelta.*
-import org.eclipse.ui.plugin.AbstractUIPlugin
+import java.io.InputStream
 
 @Singleton
-class UIResourceChangeRegistry implements IResourceChangeListener, ResourceChangeRegistry, IResourceDeltaVisitor {
+class UIResourceChangeRegistry implements IResourceChangeListener, IResourceChangeRegistry, IResourceDeltaVisitor {
 	static val logger = Logger.getLogger(UIResourceChangeRegistry) 
 	
-	@Inject
-	QueuedBuildData queue
-	@Inject
-	BuildScheduler scheduler
+	@Inject QueuedBuildData queue
+	@Inject BuildScheduler scheduler
 	@Inject AbstractUIPlugin uiPlugin
 	
 	IWorkspace workspace
 
-	val listeners = HashMultimap.<IPath, URI>create
+	// accessible for testing only
+	@Accessors val existsListeners = HashMultimap.<String, URI>create
+	@Accessors val charsetListeners = HashMultimap.<String, URI>create
+	@Accessors val childrenListeners = HashMultimap.<String, URI>create
+	@Accessors val contentsListeners = HashMultimap.<String, URI>create
+	
+	override synchronized registerExists(String path, URI uri) {
+		existsListeners.put(path, uri)
+	}
+	
+	override synchronized registerGetCharset(String path, URI uri) {
+		charsetListeners.put(path, uri)
+	}
+	
+	override synchronized registerGetChildren(String path, URI uri) {
+		childrenListeners.put(path, uri)
+	}
+	
+	override synchronized registerGetContents(String path, URI uri) {
+		contentsListeners.put(path, uri)
+	}
 	
 	override synchronized resourceChanged(IResourceChangeEvent event) {
 		event.delta.accept(this)
 	}
 
-	override synchronized void register(IPath resourcePath, XtendFile interestedFile) {
-		listeners.put(resourcePath, interestedFile.eResource.URI)
-	}
-
 	override visit(IResourceDelta delta) throws CoreException {
-		if (!delta.hasRelevantChange)
-			return true
-		val interestedFiles = listeners.removeAll(delta.resource.fullPath)
-		queue.queueURIs(interestedFiles)
-		true
+		if (!existsListeners.isEmpty && delta.hasExistsChanged) {
+			val interestedFiles = existsListeners.removeAll(delta.resource.fullPath.toString)
+			if (!interestedFiles.isEmpty)
+				queueURIs(interestedFiles)
+		}
+		if (!childrenListeners.isEmpty && (delta.hasExistsChanged || delta.hasChildrenChanged)) {
+			val interestedFiles = childrenListeners.removeAll(delta.resource.fullPath.toString)
+			if (!interestedFiles.isEmpty)
+				queueURIs(interestedFiles)
+		}
+		if (!charsetListeners.empty && (delta.hasExistsChanged || delta.hasCharsetChanged)) {
+			val interestedFiles = charsetListeners.removeAll(delta.resource.fullPath.toString)
+			if (!interestedFiles.isEmpty)
+				queueURIs(interestedFiles)
+		}
+		if (!contentsListeners.empty && (delta.hasExistsChanged || delta.hasContentsChanged)) {
+			val interestedFiles = contentsListeners.removeAll(delta.resource.fullPath.toString)
+			if (!interestedFiles.isEmpty)
+				queueURIs(interestedFiles)
+		}
+		return true
 	}
 	
-	private def hasRelevantChange(IResourceDelta delta) {
+	protected def queueURIs(Set<URI> interestedFiles) {
+		queue.queueURIs(interestedFiles)
+	}
+	
+	private def hasExistsChanged(IResourceDelta delta) {
+		return delta.kind == ADDED || delta.kind == REMOVED
+	}
+	
+	private def hasChildrenChanged(IResourceDelta delta) {
+		if (delta.resource instanceof IFolder) {
+			for (c : delta.affectedChildren) {
+				if (c.hasExistsChanged)
+					return true;
+			}
+		}
+		return false
+	}
+	
+	private def hasCharsetChanged(IResourceDelta delta) {
+		return delta.kind == CHANGED && delta.flags.bitwiseAnd(IResourceDelta.ENCODING) != 0
+	}
+	
+	private def hasContentsChanged(IResourceDelta delta) {
 		if (delta.kind == CHANGED) {
-			#[CONTENT, ENCODING, REPLACED].exists[delta.flags.bitwiseAnd(it) == 0]
+			#[CONTENT, REPLACED].exists[delta.flags.bitwiseAnd(it) != 0]
 		} else {
 			true
 		}
@@ -102,17 +155,7 @@ class UIResourceChangeRegistry implements IResourceChangeListener, ResourceChang
 			}
 			val in = new FileInputStream(location)
 			try {
-				val reader = new DataInputStream(in)
-				try {
-					while(true) {
-						val path = reader.readUTF
-						val numberOfUris = reader.readInt
-						for(var i = 0; i < numberOfUris; i++) {
-							val uri = reader.readUTF
-							listeners.put(new Path(path), URI.createURI(uri))
-						}
-					}
-				} catch (EOFException eof) {}
+				readState(in)
 			} finally {
 				in.close
 			}
@@ -122,24 +165,41 @@ class UIResourceChangeRegistry implements IResourceChangeListener, ResourceChang
 		}
 	}
 	
+	def readState(InputStream in) {
+		val reader = new DataInputStream(in)
+		for (map : #[existsListeners, charsetListeners, childrenListeners, contentsListeners]) {
+			val urisForExists = reader.readInt
+			for(var i = 0; i < urisForExists; i++) {
+				val path = reader.readUTF
+				val uri = reader.readUTF
+				map.put(path, URI.createURI(uri))
+			}
+		}
+	}
+	
 	private def synchronized save() {
 		try {
 			val location = registryStateLocation
 			val out = new FileOutputStream(location)
 			try {
-				val writer = new DataOutputStream(out)
-				listeners.asMap.entrySet.forEach[entry|
-					writer.writeUTF(entry.key.toString)
-					writer.writeInt(entry.value.size)
-					entry.value.forEach[uri|
-						writer.writeUTF(uri.toString)
-					]
-				]
+				writeState(out)
 			} finally {
 				out.close
 			}
 		} catch (Exception e) {
 			logger.warn("Could not save resource listener registry", e)
+		}
+	}
+	
+	def writeState(OutputStream out) {
+		val writer = new DataOutputStream(out)
+		for (map : #[existsListeners, charsetListeners, childrenListeners, contentsListeners]) {
+			val entries = map.entries
+			writer.writeInt(entries.size)
+			for (entry : entries) {
+				writer.writeUTF(entry.key)
+				writer.writeUTF(entry.value.toString)
+			}
 		}
 	}
 	
@@ -153,4 +213,5 @@ class UIResourceChangeRegistry implements IResourceChangeListener, ResourceChang
 		]
 		scheduler.scheduleBuildIfNecessary(projects, IBuildFlag.FORGET_BUILD_STATE_ONLY)
 	}
+	
 }

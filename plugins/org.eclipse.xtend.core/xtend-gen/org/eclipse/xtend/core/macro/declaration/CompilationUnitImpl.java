@@ -40,6 +40,7 @@ import org.eclipse.xtend.core.macro.declaration.AnnotationReferenceProviderImpl;
 import org.eclipse.xtend.core.macro.declaration.AssociatorImpl;
 import org.eclipse.xtend.core.macro.declaration.ChangeListenerAddingFileSystemSupport;
 import org.eclipse.xtend.core.macro.declaration.ExpressionImpl;
+import org.eclipse.xtend.core.macro.declaration.IResourceChangeRegistry;
 import org.eclipse.xtend.core.macro.declaration.InferredTypeReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationTypeDeclarationImpl;
@@ -69,7 +70,6 @@ import org.eclipse.xtend.core.macro.declaration.PrimitiveTypeImpl;
 import org.eclipse.xtend.core.macro.declaration.ProblemSupportImpl;
 import org.eclipse.xtend.core.macro.declaration.ResolvedConstructorImpl;
 import org.eclipse.xtend.core.macro.declaration.ResolvedMethodImpl;
-import org.eclipse.xtend.core.macro.declaration.ResourceChangeRegistry;
 import org.eclipse.xtend.core.macro.declaration.TracabilityImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
@@ -309,7 +309,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
-  private ResourceChangeRegistry resourceChangeRegistry;
+  private IResourceChangeRegistry resourceChangeRegistry;
   
   @Inject
   private AbstractFileSystemSupport fileSystemSupport;
@@ -1949,7 +1949,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   @Pure
-  public ResourceChangeRegistry getResourceChangeRegistry() {
+  public IResourceChangeRegistry getResourceChangeRegistry() {
     return this.resourceChangeRegistry;
   }
   
