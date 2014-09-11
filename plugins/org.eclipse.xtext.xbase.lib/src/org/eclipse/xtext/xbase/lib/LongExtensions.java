@@ -28,7 +28,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @return <code>a|b</code>
 	 */
 	@Pure
-	@Inline("($1 | $2)")
+	@Inline(value="($1 | $2)", constantExpression=true)
 	public static long bitwiseOr(long a, long b) {
 		return a | b;
 	}
@@ -43,7 +43,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @return <code>a^b</code>
 	 */
 	@Pure
-	@Inline("($1 ^ $2)")
+	@Inline(value="($1 ^ $2)", constantExpression=true)
 	public static long bitwiseXor(long a, long b) {
 		return a ^ b;
 	}
@@ -58,7 +58,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @return <code>a&b</code>
 	 */
 	@Pure
-	@Inline("($1 & $2)")
+	@Inline(value="($1 & $2)", constantExpression=true)
 	public static long bitwiseAnd(long a, long b) {
 		return a & b;
 	}
@@ -71,7 +71,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @return the bitwise complement of <code>a</code>.
 	 */
 	@Pure
-	@Inline("(~$1)")
+	@Inline(value="(~$1)", constantExpression=true)
 	public static long bitwiseNot(long a) {
 		return ~a;
 	}
@@ -89,7 +89,7 @@ import com.google.common.annotations.GwtCompatible;
 	 */
 	@Deprecated
 	@Pure
-	@Inline("($1 << $2)")
+	@Inline(value="($1 << $2)", constantExpression=true)
 	public static long shiftLeft(long a, int distance) {
 		return a << distance;
 	}
@@ -105,7 +105,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @return <code>a&lt;&lt;distance</code>
 	 */
 	@Pure
-	@Inline("($1 << $2)")
+	@Inline(value="($1 << $2)", constantExpression=true)
 	public static long operator_doubleLessThan(long a, int distance) {
 		return a << distance;
 	}
@@ -123,7 +123,7 @@ import com.google.common.annotations.GwtCompatible;
 	 */
 	@Deprecated
 	@Pure
-	@Inline("($1 >> $2)")
+	@Inline(value="($1 >> $2)", constantExpression=true)
 	public static long shiftRight(long a, int distance) {
 		return a >> distance;
 	}
@@ -139,7 +139,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @return <code>a&gt;&gt;distance</code>
 	 */
 	@Pure
-	@Inline("($1 >> $2)")
+	@Inline(value="($1 >> $2)", constantExpression=true)
 	public static long operator_doubleGreaterThan(long a, int distance) {
 		return a >> distance;
 	}
@@ -157,7 +157,7 @@ import com.google.common.annotations.GwtCompatible;
 	 */
 	@Deprecated
 	@Pure
-	@Inline("($1 >>> $2)")
+	@Inline(value="($1 >>> $2)", constantExpression=true)
 	public static long shiftRightUnsigned(long a, int distance) {
 		return a >>> distance;
 	}
@@ -173,7 +173,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @return <code>a&gt;&gt;&gt;distance</code>
 	 */
 	@Pure
-	@Inline("($1 >>> $2)")
+	@Inline(value="($1 >>> $2)", constantExpression=true)
 	public static long operator_tripleGreaterThan(long a, int distance) {
 		return a >>> distance;
 	}
