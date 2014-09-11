@@ -78,6 +78,7 @@
 					</languages>
 					<sourceRoots>
 						<root>model</root>
+						<root>src/main/java</root>
 					</sourceRoots>
 				</configuration>
 				<dependencies>
