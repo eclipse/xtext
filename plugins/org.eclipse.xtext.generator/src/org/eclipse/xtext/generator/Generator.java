@@ -108,6 +108,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 		naming.setUiBasePackage(getProjectNameUi());
 		naming.setActivatorName(getActivator());
 		naming.setPathTestProject(getPathTestProject());
+		naming.setHasUI(isUi());
 		Map<String, Grammar> uris = new HashMap<String, Grammar>();
 		for (LanguageConfig config : languageConfigs) {
 			config.registerNaming(naming);
