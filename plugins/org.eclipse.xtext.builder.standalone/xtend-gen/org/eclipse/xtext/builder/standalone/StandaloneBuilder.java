@@ -13,6 +13,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -81,6 +82,9 @@ public class StandaloneBuilder {
   
   @Accessors
   private Iterable<String> sourceDirs;
+  
+  @Accessors
+  private Iterable<String> javaSourceDirs;
   
   @Accessors
   private Iterable<String> classPathEntries;
@@ -243,6 +247,7 @@ public class StandaloneBuilder {
       Iterable<String> _plus_6 = Iterables.<String>concat(allClassPathEntries, _newArrayList_1);
       this.installTypeProvider(_plus_6, resourceSet, this.jvmTypeAccess);
     }
+    StandaloneBuilder.LOG.info("Validate and generate.");
     final Iterator<URI> sourceResourceIterator = sourceResourceURIs.iterator();
     boolean isErrorFree = true;
     while (sourceResourceIterator.hasNext()) {
@@ -321,10 +326,12 @@ public class StandaloneBuilder {
     String _absolutePath = stubsDir.getAbsolutePath();
     String _plus = ("Compiling stubs located in " + _absolutePath);
     StandaloneBuilder.LOG.info(_plus);
+    Iterable<String> _plus_1 = Iterables.<String>concat(this.sourceDirs, this.javaSourceDirs);
     String _absolutePath_1 = stubsDir.getAbsolutePath();
     ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(_absolutePath_1);
-    Iterable<String> _plus_1 = Iterables.<String>concat(this.sourceDirs, _newArrayList);
-    final IJavaCompiler.CompilationResult result = this.compiler.compile(_plus_1, stubsClasses);
+    Iterable<String> _plus_2 = Iterables.<String>concat(_plus_1, _newArrayList);
+    HashSet<String> _newHashSet = CollectionLiterals.<String>newHashSet(((String[])Conversions.unwrapArray(_plus_2, String.class)));
+    final IJavaCompiler.CompilationResult result = this.compiler.compile(_newHashSet, stubsClasses);
     if (result != null) {
       switch (result) {
         case SKIPPED:
@@ -375,7 +382,12 @@ public class StandaloneBuilder {
   
   protected boolean validate(final Resource resource) {
     URI _uRI = resource.getURI();
-    LanguageAccess _languageAccess = this.languageAccess(_uRI);
+    String _lastSegment = _uRI.lastSegment();
+    String _plus = ("Starting validation for input: \'" + _lastSegment);
+    String _plus_1 = (_plus + "\'");
+    StandaloneBuilder.LOG.info(_plus_1);
+    URI _uRI_1 = resource.getURI();
+    LanguageAccess _languageAccess = this.languageAccess(_uRI_1);
     final IResourceValidator resourceValidator = _languageAccess.getResourceValidator();
     final List<Issue> validationResult = resourceValidator.validate(resource, CheckMode.ALL, null);
     return this.issueHandler.handleIssue(validationResult);
@@ -661,6 +673,15 @@ public class StandaloneBuilder {
   
   public void setSourceDirs(final Iterable<String> sourceDirs) {
     this.sourceDirs = sourceDirs;
+  }
+  
+  @Pure
+  public Iterable<String> getJavaSourceDirs() {
+    return this.javaSourceDirs;
+  }
+  
+  public void setJavaSourceDirs(final Iterable<String> javaSourceDirs) {
+    this.javaSourceDirs = javaSourceDirs;
   }
   
   @Pure

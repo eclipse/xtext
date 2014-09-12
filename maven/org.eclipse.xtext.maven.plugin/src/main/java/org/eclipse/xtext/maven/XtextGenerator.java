@@ -69,11 +69,22 @@ public class XtextGenerator extends AbstractMojo {
 	private List<String> classpathElements;
 
 	/**
-	 * Project source roots.
-	 * 
+	 * Project source roots. List of folders, where the source models are located.<br>
+	 * The default value is a reference to the project's ${project.compileSourceRoots}.<br>
+	 * When adding a new entry the default value will be overwritten not extended. 
 	 * @parameter
 	 */
 	private List<String> sourceRoots;
+	
+	/**
+	 * Java source roots. List of folders, where the java source files are located.<br>
+	 * The default value is a reference to the project's ${project.compileSourceRoots}.<br>
+	 * When adding a new entry the default value will be overwritten not extended.<br>
+	 * Used when your language needs java.
+	 * 
+	 * @parameter
+	 */
+	private List<String> javaSourceRoots;
 
 	/**
 	 * @parameter
@@ -130,12 +141,6 @@ public class XtextGenerator extends AbstractMojo {
 		}
 	}
 
-	private void configureDefaults() {
-		if (sourceRoots == null) {
-			sourceRoots = Lists.newArrayList(project.getCompileSourceRoots());
-		}
-	}
-
 	protected void internalExecute() throws MojoExecutionException, MojoFailureException {
 		Map<String, LanguageAccess> languages = new LanguageAccessFactory().createLanguageAccess(getLanguages(), this
 				.getClass().getClassLoader(), project.getBasedir());
@@ -147,6 +152,7 @@ public class XtextGenerator extends AbstractMojo {
 		builder.setClassPathEntries(classPathEntries);
 		builder.setClassPathLookUpFilter(classPathLookupFilter);
 		builder.setSourceDirs(sourceRoots);
+		builder.setJavaSourceDirs(javaSourceRoots);
 		builder.setFailOnValidationError(failOnValidationError);
 		builder.setTempDir(createTempDir().getAbsolutePath());
 		if(clusteringConfig != null)
@@ -172,6 +178,7 @@ public class XtextGenerator extends AbstractMojo {
 		getLog().info("Compiler target level: " + compilerTargetLevel);
 		if (getLog().isDebugEnabled()) {
 			getLog().debug("Source dirs: " + IterableExtensions.join(sourceRoots, ", "));
+			getLog().debug("Java source dirs: " + IterableExtensions.join(javaSourceRoots, ", "));
 			getLog().debug("Classpath entries: " + IterableExtensions.join(classpathElements, ", "));
 		}
 	}
@@ -202,5 +209,14 @@ public class XtextGenerator extends AbstractMojo {
 
 	public void setLanguages(List<Language> languages) {
 		this.languages = languages;
+	}
+
+	private void configureDefaults() {
+		if (sourceRoots == null) {
+			sourceRoots = Lists.newArrayList(project.getCompileSourceRoots());
+		}
+		if (javaSourceRoots == null) {
+			javaSourceRoots = Lists.newArrayList(project.getCompileSourceRoots());
+		}
 	}
 }
