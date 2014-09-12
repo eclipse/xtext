@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.resource.IResourceDescription.Delta
 import java.util.Collection
 import org.eclipse.xtext.resource.IResourceDescriptions
+import java.util.Collections
 
 class XtendResourceDescriptionManager extends DerivedStateAwareResourceDescriptionManager implements IResourceDescription.Manager.AllChangeAware {
 	
@@ -67,6 +68,10 @@ class XtendResourceDescription extends DefaultResourceDescription {
 		if (lookup == null)
 			lookup = new EObjectDescriptionLookUp(computeExportedObjects());
 		return lookup;
+	}
+	
+	override getReferenceDescriptions() {
+		return Collections.emptyList
 	}
 
 	def override Iterable<QualifiedName> getImportedNames() {

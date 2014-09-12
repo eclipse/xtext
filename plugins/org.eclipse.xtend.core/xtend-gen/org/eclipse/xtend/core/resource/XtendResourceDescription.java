@@ -22,6 +22,7 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
 import org.eclipse.xtext.resource.impl.EObjectDescriptionLookUp;
 import org.eclipse.xtext.util.IResourceScopeCache;
@@ -63,6 +64,10 @@ public class XtendResourceDescription extends DefaultResourceDescription {
       this.lookup = _eObjectDescriptionLookUp;
     }
     return this.lookup;
+  }
+  
+  public Iterable<IReferenceDescription> getReferenceDescriptions() {
+    return Collections.<IReferenceDescription>emptyList();
   }
   
   public Iterable<QualifiedName> getImportedNames() {
