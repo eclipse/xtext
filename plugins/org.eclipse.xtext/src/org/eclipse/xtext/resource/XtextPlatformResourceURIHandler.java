@@ -45,20 +45,6 @@ public class XtextPlatformResourceURIHandler extends URIHandlerImpl {
 					URI newResult = baseURI.trimSegments(baseURI.segmentCount() - 1).appendSegments(segments);
 					newResult = newResult.appendFragment(result.fragment());
 					return newResult;
-				} else {
-					if (result.segmentCount() > 2) {
-						// we found something which apparently looks like a platform:/resource URI
-						// so let's double check that the first project name does not look like an
-						// Xtext source folder name
-						String secondSegment = result.segment(1);
-						String thirdSegment = result.segment(2);
-						if (isXtextSourceFolderName(secondSegment) && !isXtextSourceFolderName(thirdSegment) && !"model".equals(thirdSegment)) {
-							String[] fixedSegments = result.segments();
-							fixedSegments[1] = baseURI.segment(1);
-							URI newResult = URI.createHierarchicalURI(result.scheme(), result.authority(), result.device(), fixedSegments, result.query(), result.fragment());
-							return newResult;
-						}
-					}
 				}
 			} else if (ClasspathUriUtil.isClasspathUri(baseURI)) {
 				if (ClasspathUriUtil.isClasspathUri(result) && "..".equals(result.segment(0))) {
