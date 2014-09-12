@@ -78,8 +78,8 @@
 					</languages>
 					<sourceRoots>
 						<root>model</root>
-						<root>src/main/java</root>
 					</sourceRoots>
+					<failOnValidationError>false</failOnValidationError>
 				</configuration>
 				<dependencies>
 					<dependency>
