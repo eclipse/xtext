@@ -18,7 +18,6 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
 	XtextPlatformResourceURIHandlerTest.class,
 	FilesInSameSourceFolderTest.class,
-	FilesInSameProjectTest.class,
 	FilesInDifferentProjectSourceFoldersTest.class,
 	FilesInDifferentProjectModelTest.class,
 	FilesInSourceAndModelSameProjectTest.class,

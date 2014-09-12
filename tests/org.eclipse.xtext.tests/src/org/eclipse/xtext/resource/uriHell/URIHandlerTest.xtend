@@ -112,7 +112,7 @@ abstract class AbstractURIHandlerTest extends Assert {
 	def void testLoadResourceWithPackagedURIs() {
 		doTest(getPackagedResourceURI, getReferencedURI, getPackagedReferencedURI)
 	}
-
+	
 }
 
 /**
@@ -182,28 +182,6 @@ class FilesInSameSourceFolderTest extends AbstractURIHandlerWithEcoreTest {
 		return URI.createURI('platform:/resource/projectName/org/other/Second.ecore')
 	}
 	
-}
-
-/**
- * @author Sebastian Zarnekow - Initial contribution and API
- */
-class FilesInSameProjectTest extends AbstractURIHandlerWithEcoreTest {
-	
-	override getResourceURI() {
-		return URI.createURI('platform:/resource/projectName/src/org/package/First.ecore')
-	}
-	
-	override getPackagedResourceURI() {
-		return URI.createURI('platform:/resource/projectName/org/package/First.ecore')
-	}
-	
-	override getReferencedURI() {
-		return URI.createURI('platform:/resource/projectName/src-gen/org/other/Second.ecore')
-	}
-	
-	override getPackagedReferencedURI() {
-		return URI.createURI('platform:/resource/projectName/org/other/Second.ecore')
-	}
 }
 
 /**
