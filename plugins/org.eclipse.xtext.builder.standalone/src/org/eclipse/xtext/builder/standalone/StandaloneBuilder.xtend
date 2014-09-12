@@ -44,6 +44,7 @@ class StandaloneBuilder {
 	/**  Map key is a file extension provided by Language FileExtensionProvider   */
 	@Accessors Map<String, LanguageAccess> languages
 	@Accessors Iterable<String> sourceDirs
+	@Accessors Iterable<String> javaSourceDirs
 	@Accessors Iterable<String> classPathEntries
 	@Accessors File tempDir = Files.createTempDir
 	@Accessors String encoding
@@ -133,6 +134,7 @@ class StandaloneBuilder {
 			installTypeProvider(allClassPathEntries + newArrayList(stubsClasses), resourceSet, jvmTypeAccess)
 		}
 		// Validate and generate
+		LOG.info("Validate and generate.")
 		val sourceResourceIterator =  sourceResourceURIs.iterator
 		var isErrorFree = true
 		while(sourceResourceIterator.hasNext){
@@ -189,7 +191,7 @@ class StandaloneBuilder {
 		val stubsClasses = createTempDir("classes")
 		compiler.setClassPath(classPathEntries)
 		LOG.info("Compiling stubs located in " + stubsDir.absolutePath)
-		val result = compiler.compile(sourceDirs + newArrayList(stubsDir.absolutePath), stubsClasses)
+		val result = compiler.compile(newHashSet(sourceDirs + javaSourceDirs + newArrayList(stubsDir.absolutePath)), stubsClasses)
 		switch (result) {
 			case CompilationResult.SKIPPED:
 				LOG.info("Nothing to compile. Stubs compilation was skipped.")
@@ -215,6 +217,7 @@ class StandaloneBuilder {
 	}
 
 	def protected validate(Resource resource) {
+		LOG.info("Starting validation for input: '" + resource.getURI().lastSegment() + "'");
 		val resourceValidator = languageAccess(resource.URI).getResourceValidator();
 		val validationResult = resourceValidator.validate(resource, CheckMode.ALL, null);
 		return issueHandler.handleIssue(validationResult)
