@@ -1,426 +1,418 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.xbase.junit" version="2">
-    <resource path="META-INF/MANIFEST.MF">
-        <filter comment="minor" id="923795461">
-            <message_arguments>
-                <message_argument value="2.7.1"/>
-                <message_argument value="2.6.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="testdata/testdata/AbstractClassWithPublicConstructor.java" type="testdata.AbstractClassWithPublicConstructor">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.AbstractClassWithPublicConstructor"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/Annotation1.java" type="testdata.Annotation1">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.Annotation1"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/Annotation2.java" type="testdata.Annotation2">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.Annotation2"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/Annotation3.java" type="testdata.Annotation3">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.Annotation3"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/ArrayClient.java" type="testdata.ArrayClient">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.ArrayClient"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/ArrayClient2.java" type="testdata.ArrayClient2">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.ArrayClient2"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/ClassA.java" type="testdata.ClassA">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.ClassA"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/ClassB.java" type="testdata.ClassB">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.ClassB"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/ClassWithVarArgs.java" type="testdata.ClassWithVarArgs">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.ClassWithVarArgs"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/ClosureClient.java" type="testdata.ClosureClient">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.ClosureClient"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/ClosureClient2.java" type="testdata.ClosureClient2">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.ClosureClient2"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/CoercionClient.java" type="testdata.CoercionClient">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.CoercionClient"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/Constants1.java" type="testdata.Constants1">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.Constants1"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/Constructors.java" type="testdata.Constructors">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.Constructors"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/Constructors2.java" type="testdata.Constructors2">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.Constructors2"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/Enum1.java" type="testdata.Enum1">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.Enum1"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/ExceptionSubclass.java" type="testdata.ExceptionSubclass">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.ExceptionSubclass"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/FieldAccess.java" type="testdata.FieldAccess">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.FieldAccess"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/FieldAccessSub.java" type="testdata.FieldAccessSub">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.FieldAccessSub"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/GenericType1.java" type="testdata.GenericType1">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.GenericType1"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/GenericType2.java" type="testdata.GenericType2">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.GenericType2"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/InterfaceA.java" type="testdata.InterfaceA">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.InterfaceA"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/InterfaceASub.java" type="testdata.InterfaceASub">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.InterfaceASub"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/InterfaceASubClient.java" type="testdata.InterfaceASubClient">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.InterfaceASubClient"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/InterfaceB.java" type="testdata.InterfaceB">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.InterfaceB"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/LinkingStaticType.java" type="testdata.LinkingStaticType">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.LinkingStaticType"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/LinkingStaticTypeEquallyNamed.java" type="testdata.LinkingStaticTypeEquallyNamed">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.LinkingStaticTypeEquallyNamed"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/LinkingType.java" type="testdata.LinkingType">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.LinkingType"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/LinkingTypeEquallyNamed.java" type="testdata.LinkingTypeEquallyNamed">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.LinkingTypeEquallyNamed"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/LinkingTypeExtended.java" type="testdata.LinkingTypeExtended">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.LinkingTypeExtended"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/MethodOverrides1.java" type="testdata.MethodOverrides1">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.MethodOverrides1"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/MethodOverrides2.java" type="testdata.MethodOverrides2">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.MethodOverrides2"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/MethodOverrides3.java" type="testdata.MethodOverrides3">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.MethodOverrides3"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/MethodOverrides4.java" type="testdata.MethodOverrides4">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.MethodOverrides4"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/MethodOverrides5.java" type="testdata.MethodOverrides5">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.MethodOverrides5"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/Methods.java" type="testdata.Methods">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.Methods"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/OuterClass.java" type="testdata.OuterClass">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.OuterClass"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/OverloadedMethods.java" type="testdata.OverloadedMethods">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.OverloadedMethods"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/Properties1.java" type="testdata.Properties1">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.Properties1"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/Properties2.java" type="testdata.Properties2">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.Properties2"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/PropertiesHolder.java" type="testdata.PropertiesHolder">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.PropertiesHolder"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/StaticVisibilitySubClass.java" type="testdata.StaticVisibilitySubClass">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.StaticVisibilitySubClass"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/StaticVisibilitySuperType.java" type="testdata.StaticVisibilitySuperType">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.StaticVisibilitySuperType"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/SugarConflict.java" type="testdata.SugarConflict">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.SugarConflict"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/VisibilitySubClass.java" type="testdata.VisibilitySubClass">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.VisibilitySubClass"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/VisibilitySuperType.java" type="testdata.VisibilitySuperType">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.VisibilitySuperType"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/a/SameSimpleName.java" type="testdata.a.SameSimpleName">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.a.SameSimpleName"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/b/SameSimpleName.java" type="testdata.b.SameSimpleName">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.b.SameSimpleName"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/ordersensitivity/CaseA.java" type="testdata.ordersensitivity.CaseA">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.ordersensitivity.CaseA"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/ordersensitivity/CaseB.java" type="testdata.ordersensitivity.CaseB">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.ordersensitivity.CaseB"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/ordersensitivity/CaseC.java" type="testdata.ordersensitivity.CaseC">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.ordersensitivity.CaseC"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="testdata/testdata/ordersensitivity/CaseD.java" type="testdata.ordersensitivity.CaseD">
-        <filter comment="minor" id="305365105">
+        <filter comment="testdata removed as public api" id="305365105">
             <message_arguments>
                 <message_argument value="testdata.ordersensitivity.CaseD"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.1"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.7.2"/>
             </message_arguments>
         </filter>
     </resource>
