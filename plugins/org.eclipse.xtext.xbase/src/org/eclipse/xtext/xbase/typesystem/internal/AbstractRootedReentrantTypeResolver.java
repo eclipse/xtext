@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import java.util.Set;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XExpression;
@@ -33,8 +31,6 @@ public abstract class AbstractRootedReentrantTypeResolver implements IReentrantT
 	protected abstract boolean isHandled(JvmIdentifiableElement identifiableElement);
 	
 	protected abstract boolean isHandled(EObject context);
-	
-	protected abstract void setAllRootedExpressions(Set<EObject> allRootedExpressions);
 	
 	@Override
 	public String toString() {

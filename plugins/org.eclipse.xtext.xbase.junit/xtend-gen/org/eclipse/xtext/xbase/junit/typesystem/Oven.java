@@ -166,21 +166,7 @@ public class Oven extends Assert {
       final TypeData type = _switchResult;
       String _string = expression.toString();
       String _plus = ("Type is not resolved. Expression: " + _string);
-      boolean _xifexpression = false;
-      if ((expression instanceof XAbstractFeatureCall)) {
-        boolean _or = false;
-        boolean _isPackageFragment = ((XAbstractFeatureCall)expression).isPackageFragment();
-        if (_isPackageFragment) {
-          _or = true;
-        } else {
-          boolean _notEquals = (!Objects.equal(type, null));
-          _or = _notEquals;
-        }
-        _xifexpression = _or;
-      } else {
-        _xifexpression = (!Objects.equal(type, null));
-      }
-      Assert.assertTrue(_plus, _xifexpression);
+      Assert.assertNotNull(_plus, type);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

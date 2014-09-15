@@ -8,15 +8,12 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
@@ -44,14 +41,9 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
-import org.eclipse.xtext.xbase.XCasePart;
-import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
-import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -286,8 +278,6 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	@Inject
 	private IBatchTypeResolver typeResolver;
 	
-	protected Set<EObject> rootedInstances;
-	
 	protected JvmType getRootJvmType() {
 		EObject result = getRoot();
 		if (result instanceof JvmType)
@@ -296,25 +286,10 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	}
 	
 	@Override
-	protected void setAllRootedExpressions(final Set<EObject> allRootedExpressions) {
-		super.setAllRootedExpressions(allRootedExpressions);
-		rootedInstances = new HashSet<EObject>() {
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public boolean add(EObject e) {
-				if (!allRootedExpressions.add(e)) {
-					throw new IllegalStateException("Cannot root object twice: " + e);
-				}
-				return super.add(e);
-			}
-		};
-	}
-	
-	@Override
 	protected boolean isHandled(JvmIdentifiableElement identifiableElement) {
-		// if the identifiable is a formal parameter, use the nearest logical container since
-		// it may be the parameter of a lambda or for loop
+		if (identifiableElement instanceof XExpression) {
+			return isHandled((XExpression) identifiableElement);
+		}
 		JvmIdentifiableElement container = logicalContainerProvider.getNearestLogicalContainer(identifiableElement);
 		if (container != null) {
 			return super.isHandled(container);
@@ -327,47 +302,11 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		JvmIdentifiableElement logicalContainer = logicalContainerProvider.getNearestLogicalContainer(expression);
 		if (logicalContainer == null)
 			return false;
-		XExpression associatedExpression = logicalContainerProvider.getAssociatedExpression(logicalContainer);
-		if (associatedExpression != null && EcoreUtil.isAncestor(associatedExpression, expression) && rootedInstances.contains(associatedExpression)) {
-			return true;
-		}
-		// special treatment for annotations
-		EObject root = expression;
-		EObject container = root.eContainer();
-		while(isPartOfExpressionTree(container)) {
-			root = container;
-			container = root.eContainer();
-		}
-		if (rootedInstances.contains(root)) {
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * Returns true if the container can be nested within the expression tree. First and foremost that's
-	 * true if the container itself is an expression. Other possible types are {@link XCasePart},
-	 * {@link XCatchClause} or {@link XAnnotationElementValuePair}. Clients may override.
-	 */
-	protected boolean isPartOfExpressionTree(EObject container) {
-		if (container instanceof XExpression) {
-			return true;
-		}
-		EClass type = container.eClass();
-		return type == XbasePackage.Literals.XCASE_PART || type == XbasePackage.Literals.XCATCH_CLAUSE || type == XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_PAIR;
+		return isHandled(logicalContainer);
 	}
 	
 	@Override
 	protected boolean isHandled(EObject context) {
-		if (context instanceof XExpression) {
-			return isHandled((XExpression)context);
-		}
-		if (context instanceof JvmIdentifiableElement) {
-			return isHandled((JvmIdentifiableElement)context);
-		}
-		if (isPartOfExpressionTree(context)) {
-			return isHandled((XExpression) context.eContainer());
-		}
 		JvmIdentifiableElement logicalContainer = logicalContainerProvider.getNearestLogicalContainer(context);
 		if (logicalContainer == null)
 			return false;
@@ -380,17 +319,11 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	 */
 	protected Map<JvmIdentifiableElement, ResolvedTypes> prepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession) {
 		Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext = Maps.newHashMapWithExpectedSize(3); 
-		JvmType root = getRootJvmType();
-		rootedInstances.add(root);
-		doPrepare(resolvedTypes, featureScopeSession, root, resolvedTypesByContext);
+		doPrepare(resolvedTypes, featureScopeSession, getRootJvmType(), resolvedTypesByContext);
 		return resolvedTypesByContext;
 	}
 	
 	protected void doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmIdentifiableElement element, Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext) {
-		XExpression expression = getLogicalContainerProvider().getAssociatedExpression(element);
-		if (expression != null) {
-			rootedInstances.add(expression);
-		}
 		if (element instanceof JvmDeclaredType) {
 			_doPrepare(resolvedTypes, featureScopeSession, (JvmDeclaredType) element, resolvedTypesByContext);
 		} else if (element instanceof JvmConstructor) {
@@ -405,7 +338,6 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	protected void _doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmDeclaredType type, Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByType) {
 		IFeatureScopeSession childSession = addThisAndSuper(featureScopeSession, resolvedTypes.getReferenceOwner(), type);
 		prepareMembers(resolvedTypes, childSession, type, resolvedTypesByType);
-		prepareAnnotations(type);
 	}
 
 	protected void prepareMembers(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmDeclaredType type, Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByType) {
@@ -478,7 +410,6 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			JvmTypeReference reference = createComputedTypeReference(resolvedTypesByContext, childResolvedTypes, featureScopeSession, field, null, false);
 			field.setType(reference);
 		}
-		prepareAnnotations(field);
 	}
 	
 	/* @Nullable */
@@ -517,44 +448,8 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		JvmDeclaredType producedType = constructor.getDeclaringType();
 		LightweightTypeReference lightweightReference = childResolvedTypes.getReferenceOwner().toLightweightTypeReference(producedType);
 		childResolvedTypes.setType(constructor, lightweightReference);
-		prepareAnnotations(constructor);
 	}
 	
-	protected void prepareAnnotations(JvmExecutable executable) {
-		List<JvmFormalParameter> parameters = executable.getParameters();
-		for(JvmFormalParameter parameter: parameters) {
-			prepareAnnotations(parameter);
-		}
-		prepareAnnotations((JvmAnnotationTarget) executable);
-	}
-	
-	protected void prepareAnnotations(JvmAnnotationTarget annotable) {
-		List<JvmAnnotationReference> annotations = annotable.getAnnotations();
-		prepareAnnotations(annotations);
-	}
-
-	protected void prepareAnnotations(List<JvmAnnotationReference> annotations) {
-		for(JvmAnnotationReference annotation: annotations) {
-			EObject sourceElement = getSourceElement(annotation);
-			if (sourceElement != annotation) {
-				rootedInstances.add(sourceElement);
-			} else {
-				for(JvmAnnotationValue value: annotation.getExplicitValues()) {
-					if (value instanceof JvmCustomAnnotationValue) {
-						JvmCustomAnnotationValue custom = (JvmCustomAnnotationValue) value;
-						for(Object object: custom.getValues()) {
-							if (object instanceof XExpression) {
-								rootedInstances.add(sourceElement);
-							}
-						}
-					} else if (value instanceof JvmAnnotationAnnotationValue) {
-						prepareAnnotations(((JvmAnnotationAnnotationValue) value).getValues());
-					}
-				}
-			}
-		}
-	}
-
 	protected void _doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmOperation operation, Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext) {
 		StackedResolvedTypes childResolvedTypes = declareTypeParameters(resolvedTypes, operation, resolvedTypesByContext);
 		
@@ -571,7 +466,6 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			JvmTypeReference reference = createComputedTypeReference(resolvedTypesByContext, childResolvedTypes, featureScopeSession, operation, null, true);
 			operation.setReturnType(reference);
 		}
-		prepareAnnotations(operation);
 	}
 	
 	protected JvmTypeReference createComputedTypeReference(
@@ -701,6 +595,9 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		addExtensionProviders(state, constructor.getParameters());
 		state.computeTypes();
 		computeAnnotationTypes(childResolvedTypes, featureScopeSession, constructor);
+		for(JvmFormalParameter parameter: constructor.getParameters()) {
+			computeAnnotationTypes(childResolvedTypes, featureScopeSession, parameter);
+		}
 		computeLocalTypes(preparedResolvedTypes, childResolvedTypes, featureScopeSession, constructor);
 		mergeChildTypes(childResolvedTypes);
 	}
