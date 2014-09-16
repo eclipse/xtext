@@ -4,7 +4,7 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
-import org.xpect.expectation.ITargetSyntaxSupport;
+import org.xpect.expectation.TargetSyntaxSupport;
 import org.xpect.state.Creates;
 import org.xpect.text.IReplacement;
 import org.xpect.text.Replacement;
@@ -14,9 +14,9 @@ import org.xpect.xtext.lib.util.GrammarAnalyzer.CommentRule;
 import org.xpect.xtext.lib.util.GrammarAnalyzer.MLCommentRule;
 import org.xpect.xtext.lib.util.GrammarAnalyzer.SLCommentRule;
 
-public class XtextTargetSyntaxSupport implements ITargetSyntaxSupport {
+public class XtextTargetSyntaxSupport extends TargetSyntaxSupport {
 
-	public class XtextTargetSyntaxLiteral implements ITargetLiteralSupport {
+	public class XtextTargetSyntaxLiteral extends TargetLiteralSupport {
 
 		private final CommentRule commentRule;
 		private final ILeafNode leaf;
@@ -97,7 +97,7 @@ public class XtextTargetSyntaxSupport implements ITargetSyntaxSupport {
 	}
 
 	@Creates
-	public ITargetSyntaxSupport create() {
+	public TargetSyntaxSupport create() {
 		return this;
 	}
 
@@ -135,7 +135,7 @@ public class XtextTargetSyntaxSupport implements ITargetSyntaxSupport {
 		return null;
 	}
 
-	public ITargetLiteralSupport getLiteralSupport(int offset) {
+	public TargetLiteralSupport getLiteralSupport(int offset) {
 		ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset);
 		CommentRule commentRule = findCommentRule(leaf);
 		return new XtextTargetSyntaxLiteral(leaf, commentRule);

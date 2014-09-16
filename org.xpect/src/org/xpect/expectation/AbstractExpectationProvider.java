@@ -26,7 +26,7 @@ public abstract class AbstractExpectationProvider<E> implements IParsedParameter
 		return expectedType.isAssignableFrom(param);
 	}
 
-	protected abstract E createExpectation(ITargetSyntaxSupport targetSyntax);
+	protected abstract E createExpectation(TargetSyntaxSupport targetSyntax);
 
 	@SuppressWarnings("unchecked")
 	public <T> T get(Class<T> expectedType, StateContainer context) {
@@ -43,8 +43,8 @@ public abstract class AbstractExpectationProvider<E> implements IParsedParameter
 		return Collections.<IRegion> singletonList(region);
 	}
 
-	private ITargetSyntaxSupport getTargetSyntax(StateContainer context) {
-		return context.get(ITargetSyntaxSupport.class).get();
+	private TargetSyntaxSupport getTargetSyntax(StateContainer context) {
+		return context.get(TargetSyntaxSupport.class).get();
 	}
 
 }

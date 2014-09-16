@@ -42,7 +42,7 @@ public @interface LinesExpectation {
 
 		private final LinesExpectation annotation;
 
-		public LinesExpectationImpl(LinesExpectation annotation, ITargetSyntaxSupport targetSyntax, IExpectationRegion region) {
+		public LinesExpectationImpl(LinesExpectation annotation, TargetSyntaxSupport targetSyntax, IExpectationRegion region) {
 			super(targetSyntax, region);
 			this.annotation = annotation;
 		}
@@ -134,7 +134,7 @@ public @interface LinesExpectation {
 		}
 
 		@Override
-		protected ILinesExpectation createExpectation(ITargetSyntaxSupport targetSyntax) {
+		protected ILinesExpectation createExpectation(TargetSyntaxSupport targetSyntax) {
 			return new LinesExpectationImpl(annotation, targetSyntax, getClaimedRegion());
 		}
 

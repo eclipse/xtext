@@ -9,7 +9,7 @@ package org.xpect.expectation;
 
 import org.eclipse.xtext.util.Exceptions;
 import org.xpect.expectation.ActualCollection.ActualItem;
-import org.xpect.expectation.ITargetSyntaxSupport.ITargetLiteralSupport;
+import org.xpect.expectation.TargetSyntaxSupport.TargetLiteralSupport;
 
 import com.google.common.base.Function;
 
@@ -30,9 +30,9 @@ public class ActualCollection extends StringCollection<ActualItem> {
 		}
 	}
 
-	private ITargetLiteralSupport targetLiteralSupport;
+	private TargetLiteralSupport targetLiteralSupport;
 
-	public ITargetLiteralSupport getTargetLiteralSupport() {
+	public TargetLiteralSupport getTargetLiteralSupport() {
 		return targetLiteralSupport;
 	}
 
@@ -58,7 +58,7 @@ public class ActualCollection extends StringCollection<ActualItem> {
 			items.add(new ActualItem(obj));
 	}
 
-	public void setTargetLiteralSupport(ITargetLiteralSupport targetLiteralSupport) {
+	public void setTargetLiteralSupport(TargetLiteralSupport targetLiteralSupport) {
 		this.targetLiteralSupport = targetLiteralSupport;
 	}
 }

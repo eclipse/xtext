@@ -33,7 +33,7 @@ public @interface StringExpectation {
 
 		private final StringExpectation annotation;
 
-		public StringExpectationImpl(StringExpectation annotation, ITargetSyntaxSupport targetSyntax, IExpectationRegion region) {
+		public StringExpectationImpl(StringExpectation annotation, TargetSyntaxSupport targetSyntax, IExpectationRegion region) {
 			super(targetSyntax, region);
 			this.annotation = annotation;
 		}
@@ -94,7 +94,7 @@ public @interface StringExpectation {
 		}
 
 		@Override
-		protected IStringExpectation createExpectation(ITargetSyntaxSupport targetSyntax) {
+		protected IStringExpectation createExpectation(TargetSyntaxSupport targetSyntax) {
 			return new StringExpectationImpl(annotation, targetSyntax, getClaimedRegion());
 		}
 

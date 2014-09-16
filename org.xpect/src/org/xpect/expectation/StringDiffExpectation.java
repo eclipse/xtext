@@ -66,7 +66,7 @@ public @interface StringDiffExpectation {
 
 		private final StringDiffExpectation annotation;
 
-		public StringDiffExpectationImpl(StringDiffExpectation annotation, ITargetSyntaxSupport targetSyntax, IExpectationRegion region) {
+		public StringDiffExpectationImpl(StringDiffExpectation annotation, TargetSyntaxSupport targetSyntax, IExpectationRegion region) {
 			super(targetSyntax, region);
 			this.annotation = annotation;
 		}
@@ -176,7 +176,7 @@ public @interface StringDiffExpectation {
 		}
 
 		@Override
-		protected IStringDiffExpectation createExpectation(ITargetSyntaxSupport targetSyntax) {
+		protected IStringDiffExpectation createExpectation(TargetSyntaxSupport targetSyntax) {
 			return new StringDiffExpectationImpl(annotation, targetSyntax, getClaimedRegion());
 		}
 

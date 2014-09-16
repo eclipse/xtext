@@ -39,7 +39,7 @@ public @interface CommaSeparatedValuesExpectation {
 	public class CommaSeparatedValuesExpectationImpl extends AbstractExpectation implements ICommaSeparatedValuesExpectation {
 		private final CommaSeparatedValuesExpectation annotation;
 
-		public CommaSeparatedValuesExpectationImpl(CommaSeparatedValuesExpectation annotation, ITargetSyntaxSupport syntax,
+		public CommaSeparatedValuesExpectationImpl(CommaSeparatedValuesExpectation annotation, TargetSyntaxSupport syntax,
 				IExpectationRegion region) {
 			super(syntax, region);
 			this.annotation = annotation;
@@ -181,7 +181,7 @@ public @interface CommaSeparatedValuesExpectation {
 		}
 
 		@Override
-		protected ICommaSeparatedValuesExpectation createExpectation(ITargetSyntaxSupport targetSyntax) {
+		protected ICommaSeparatedValuesExpectation createExpectation(TargetSyntaxSupport targetSyntax) {
 			return new CommaSeparatedValuesExpectationImpl(annotation, targetSyntax, getClaimedRegion());
 		}
 

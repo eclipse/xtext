@@ -47,7 +47,9 @@ import org.xpect.registry.ITestSuiteInfo;
 import org.xpect.services.XpectGrammarAccess;
 import org.xpect.setup.ISetupInitializer;
 import org.xpect.setup.SetupInitializer;
+import org.xpect.setup.XpectSetup;
 import org.xpect.state.Configuration;
+import org.xpect.state.Creates;
 import org.xpect.state.ResolvedConfiguration;
 import org.xpect.state.StateContainer;
 import org.xpect.text.CharSequences;
@@ -65,9 +67,9 @@ public class XpectFileRunner implements Filterable, Sortable {
 	private Description description;
 	private Throwable error;
 	private final XpectRunner runner;
+	private final StateContainer state;
 	private final URI uri;
 	private final XpectFile xpectFile;
-	private final StateContainer state;
 
 	public XpectFileRunner(XpectRunner runner, URI uri) {
 		this.runner = runner;
@@ -82,22 +84,6 @@ public class XpectFileRunner implements Filterable, Sortable {
 		this.state = createState(createConfiguration());
 	}
 
-	public StateContainer getState() {
-		return state;
-	}
-
-	protected Configuration createConfiguration() {
-		Configuration config = new Configuration();
-		config.addDefaultValue(XpectFile.class, this.xpectFile);
-		config.addDefaultValue(ISetupInitializer.class, createSetupInitializer());
-		return config;
-	}
-
-	protected StateContainer createState(Configuration config) {
-		StateContainer parent = this.getRunner().getState();
-		return new StateContainer(parent, new ResolvedConfiguration(parent.getConfiguration(), config));
-	}
-
 	protected List<AbstractTestRunner> createChildren() {
 		List<AbstractTestRunner> children = Lists.newArrayList();
 		if (xpectFile != null) {
@@ -109,6 +95,13 @@ public class XpectFileRunner implements Filterable, Sortable {
 				children.add(createTestRunner(inv));
 		}
 		return children;
+	}
+
+	protected Configuration createConfiguration() {
+		Configuration config = new Configuration();
+		config.addDefaultValue(XpectFile.class, this.xpectFile);
+		config.addDefaultValue(ISetupInitializer.class, createSetupInitializer());
+		return config;
 	}
 
 	protected Description createDescription() {
@@ -129,6 +122,11 @@ public class XpectFileRunner implements Filterable, Sortable {
 				return new SetupInitializer<Object>(xpectFile.getTest());
 		}
 		return new ISetupInitializer.Null<Object>();
+	}
+
+	protected StateContainer createState(Configuration config) {
+		StateContainer parent = this.getRunner().getState();
+		return new StateContainer(parent, new ResolvedConfiguration(parent.getConfiguration(), config));
 	}
 
 	protected TestRunner createTestRunner(XjmMethod method) {
@@ -190,6 +188,10 @@ public class XpectFileRunner implements Filterable, Sortable {
 		return runner;
 	}
 
+	public StateContainer getState() {
+		return state;
+	}
+
 	public URI getUri() {
 		return uri;
 	}
@@ -205,15 +207,6 @@ public class XpectFileRunner implements Filterable, Sortable {
 		validate(file);
 		validate(res);
 		return file;
-	}
-
-	protected void validate(XpectFile file) {
-		XpectJavaModel model = file.getJavaModel();
-		if (model == null || model.eIsProxy()) {
-			String fileName = file.eResource().getURI().lastSegment();
-			String registry = ITestSuiteInfo.Registry.INSTANCE.toString();
-			throw new IllegalStateException("Could not find test suite for " + fileName + ". Registry:\n" + registry);
-		}
 	}
 
 	protected XtextResource loadXpectResource(URI uri) throws IOException {
@@ -258,6 +251,15 @@ public class XpectFileRunner implements Filterable, Sortable {
 				return sorter.compare(o1.getDescription(), o2.getDescription());
 			}
 		});
+	}
+
+	protected void validate(XpectFile file) {
+		XpectJavaModel model = file.getJavaModel();
+		if (model == null || model.eIsProxy()) {
+			String fileName = file.eResource().getURI().lastSegment();
+			String registry = ITestSuiteInfo.Registry.INSTANCE.toString();
+			throw new IllegalStateException("Could not find test suite for " + fileName + ". Registry:\n" + registry);
+		}
 	}
 
 	protected void validate(XtextResource res) {

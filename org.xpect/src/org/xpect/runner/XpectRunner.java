@@ -25,6 +25,7 @@ import org.xpect.XjmTest;
 import org.xpect.XjmXpectMethod;
 import org.xpect.XpectJavaModel;
 import org.xpect.XpectStandaloneSetup;
+import org.xpect.expectation.TargetSyntaxSupport;
 import org.xpect.runner.XpectTestFiles.Builder;
 import org.xpect.runner.XpectTestFiles.FileRoot;
 import org.xpect.setup.ThisRootTestClass;
@@ -71,6 +72,7 @@ public class XpectRunner extends ParentRunner<XpectFileRunner> {
 		config.addValue(ThisRootTestClass.class, super.getTestClass().getJavaClass());
 		config.addFactory(TestObjectSetup.class);
 		config.addFactory(ValidatingSetup.class);
+		config.addFactory(TargetSyntaxSupport.class);
 		config.addDefaultValue(IXpectURIProvider.class, this.uriProvider);
 		config.addDefaultValue(XpectJavaModel.class, this.xpectJavaModel);
 		for (XjmTest test : this.xpectJavaModel.getTests()) {

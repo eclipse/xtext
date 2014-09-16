@@ -9,7 +9,7 @@ package org.xpect.expectation;
 
 import java.util.List;
 
-import org.xpect.expectation.ITargetSyntaxSupport.ITargetLiteralSupport;
+import org.xpect.expectation.TargetSyntaxSupport.TargetLiteralSupport;
 import org.xpect.text.IReplacement;
 import org.xpect.text.Replacement;
 import org.xpect.text.Text;
@@ -23,10 +23,10 @@ import com.google.common.base.Strings;
  */
 public class AbstractExpectation {
 	private final IExpectationRegion region;
-	private final ITargetLiteralSupport targetLiteral;
-	private final ITargetSyntaxSupport targetSyntax;
+	private final TargetLiteralSupport targetLiteral;
+	private final TargetSyntaxSupport targetSyntax;
 
-	public AbstractExpectation(ITargetSyntaxSupport targetSyntax, IExpectationRegion region) {
+	public AbstractExpectation(TargetSyntaxSupport targetSyntax, IExpectationRegion region) {
 		super();
 		Preconditions.checkPositionIndex(region.getOffset(), region.getDocument().length());
 		Preconditions.checkPositionIndex(region.getOffset() + region.getLength(), region.getDocument().length());
@@ -120,11 +120,11 @@ public class AbstractExpectation {
 		throw new IllegalStateException();
 	}
 
-	public ITargetSyntaxSupport getTargetSyntax() {
+	public TargetSyntaxSupport getTargetSyntax() {
 		return targetSyntax;
 	}
 
-	public ITargetLiteralSupport getTargetSyntaxLiteral() {
+	public TargetLiteralSupport getTargetSyntaxLiteral() {
 		return targetLiteral;
 	}
 
