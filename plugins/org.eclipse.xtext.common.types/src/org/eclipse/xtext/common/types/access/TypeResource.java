@@ -22,6 +22,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.resource.IFragmentProvider;
 import org.eclipse.xtext.resource.ISynchronizable;
+import org.eclipse.xtext.util.Exceptions;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 /**
@@ -122,6 +123,10 @@ public class TypeResource extends ResourceImpl implements ISynchronizable<TypeRe
 				}
 			}
 		} catch(Exception e) {
+			RuntimeException operationCanceledException = Exceptions.getOperationCanceledException(e);
+			if (operationCanceledException != null) {
+				throw operationCanceledException;
+			}
 			throw new CannotLoadTypeResourceException(e);
 		}
 	}
