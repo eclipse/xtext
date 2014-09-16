@@ -155,6 +155,7 @@ public class XtextGenerator extends AbstractMojo {
 		builder.setJavaSourceDirs(javaSourceRoots);
 		builder.setFailOnValidationError(failOnValidationError);
 		builder.setTempDir(createTempDir().getAbsolutePath());
+		builder.setDebugLog(getLog().isDebugEnabled());
 		if(clusteringConfig != null)
 			builder.setClusteringConfig(clusteringConfig.convertToStandaloneConfig());
 		configureCompiler(builder.getCompiler());
@@ -169,7 +170,7 @@ public class XtextGenerator extends AbstractMojo {
 		CompilerConfiguration conf = compiler.getConfiguration();
 		conf.setSourceLevel(compilerSourceLevel);
 		conf.setTargetLevel(compilerTargetLevel);
-		conf.setVerbose(false);
+		conf.setVerbose(getLog().isDebugEnabled());
 	}
 
 	private void logState() {
