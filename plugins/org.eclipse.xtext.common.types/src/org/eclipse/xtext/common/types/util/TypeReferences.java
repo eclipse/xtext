@@ -32,6 +32,7 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.TypeResource;
+import org.eclipse.xtext.util.Exceptions;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -250,6 +251,7 @@ public class TypeReferences {
 			final JvmType result = typeProvider.findTypeByName(typeName);
 			return result;
 		} catch (RuntimeException e) {
+			Exceptions.throwIfOperationCanceledException(e);
 			log.info("Couldn't find JvmType for name '" + typeName + "' in context " + context, e);
 			return null;
 		}

@@ -22,6 +22,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.Exceptions;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
@@ -87,6 +88,7 @@ public class ResourceValidatorImpl implements IResourceValidator {
 				if (monitor.isCanceled())
 					return Collections.emptyList();
 			} catch (RuntimeException e) {
+				Exceptions.throwUncheckedException(e);
 				log.error(e.getMessage(), e);
 			}
 			return result;

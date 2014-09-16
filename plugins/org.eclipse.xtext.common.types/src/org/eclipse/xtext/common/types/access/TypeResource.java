@@ -123,10 +123,7 @@ public class TypeResource extends ResourceImpl implements ISynchronizable<TypeRe
 				}
 			}
 		} catch(Exception e) {
-			RuntimeException operationCanceledException = Exceptions.getOperationCanceledException(e);
-			if (operationCanceledException != null) {
-				throw operationCanceledException;
-			}
+			Exceptions.throwIfOperationCanceledException(e);
 			throw new CannotLoadTypeResourceException(e);
 		}
 	}

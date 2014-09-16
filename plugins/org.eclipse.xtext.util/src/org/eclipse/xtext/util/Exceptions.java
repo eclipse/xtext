@@ -39,4 +39,14 @@ public class Exceptions {
 		}
 		return null;
 	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public static void throwIfOperationCanceledException(Throwable t) {
+		RuntimeException opCanceledException = getOperationCanceledException(t);
+		if (opCanceledException != null) {
+			throw opCanceledException;
+		}
+	}
 }
