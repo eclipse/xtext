@@ -13,7 +13,6 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -329,12 +328,15 @@ public class StandaloneBuilder {
     String _absolutePath = stubsDir.getAbsolutePath();
     String _plus = ("Compiling stubs located in " + _absolutePath);
     StandaloneBuilder.LOG.info(_plus);
-    Iterable<String> _plus_1 = Iterables.<String>concat(this.sourceDirs, this.javaSourceDirs);
+    Iterable<String> _plus_1 = Iterables.<String>concat(this.javaSourceDirs, this.sourceDirs);
     String _absolutePath_1 = stubsDir.getAbsolutePath();
     ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(_absolutePath_1);
     Iterable<String> _plus_2 = Iterables.<String>concat(_plus_1, _newArrayList);
-    HashSet<String> _newHashSet = CollectionLiterals.<String>newHashSet(((String[])Conversions.unwrapArray(_plus_2, String.class)));
-    final IJavaCompiler.CompilationResult result = this.compiler.compile(_newHashSet, stubsClasses);
+    final Set<String> sourcesToCompile = this.uniqueEntries(_plus_2);
+    String _join = IterableExtensions.join(sourcesToCompile, ",");
+    String _plus_3 = ("Compiler source roots: " + _join);
+    this.forceDebugLog(_plus_3);
+    final IJavaCompiler.CompilationResult result = this.compiler.compile(sourcesToCompile, stubsClasses);
     if (result != null) {
       switch (result) {
         case SKIPPED:
@@ -351,6 +353,17 @@ public class StandaloneBuilder {
       }
     }
     return stubsClasses.getAbsolutePath();
+  }
+  
+  protected Set<String> uniqueEntries(final Iterable<String> pathes) {
+    final Function1<String, String> _function = new Function1<String, String>() {
+      public String apply(final String it) {
+        File _file = new File(it);
+        return _file.getAbsolutePath();
+      }
+    };
+    Iterable<String> _map = IterableExtensions.<String, String>map(pathes, _function);
+    return IterableExtensions.<String>toSet(_map);
   }
   
   protected File generateStubs(final ResourceDescriptionsData data, final List<URI> sourceResourceURIs) {

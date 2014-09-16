@@ -90,7 +90,7 @@ class StandaloneBuilder {
 				"Investigating " + rootsToTravers.length + " of " + classPathEntries.length + " class path entries.");
 		}
 		val sourceResourceURIs = collectResources(sourceDirs, resourceSet)
-		val allResourcesURIs = sourceResourceURIs + collectResources(rootsToTravers,resourceSet)
+		val allResourcesURIs = sourceResourceURIs + collectResources(rootsToTravers, resourceSet)
 		forceDebugLog("Finished collecting source models. Took: " + (System.currentTimeMillis - startedAt) + " ms.")
 
 		val allClassPathEntries = (sourceDirs + classPathEntries)
@@ -98,59 +98,63 @@ class StandaloneBuilder {
 			LOG.info("Installing type provider.")
 			installTypeProvider(allClassPathEntries, resourceSet, null)
 		}
-		val strategy = if(clusteringConfig != null){
-			LOG.info("Clustering configured.")
-			new DynamicResourceClusteringPolicy=>[
-				// Convert MB to byte to make it easier for the user
-				setMinimumFreeMemory(clusteringConfig.minimumFreeMemory * 1024 * 1024)
-				setMinimumClusterSize(clusteringConfig.minimumClusterSize)
-				setMinimumPercentFreeMemory(clusteringConfig.minimumPercentFreeMemory)
-			]
-		} else new DisabledClusteringPolicy
+		val strategy = if (clusteringConfig != null) {
+				LOG.info("Clustering configured.")
+				new DynamicResourceClusteringPolicy => [
+					// Convert MB to byte to make it easier for the user
+					setMinimumFreeMemory(clusteringConfig.minimumFreeMemory * 1024 * 1024)
+					setMinimumClusterSize(clusteringConfig.minimumClusterSize)
+					setMinimumPercentFreeMemory(clusteringConfig.minimumPercentFreeMemory)
+				]
+			} else
+				new DisabledClusteringPolicy
+
 		// Fill index
 		var ResourceDescriptionsData index = new ResourceDescriptionsData(newArrayList());
-		var allResourceIterator =  allResourcesURIs.iterator
-		while(allResourceIterator.hasNext){
+		var allResourceIterator = allResourcesURIs.iterator
+		while (allResourceIterator.hasNext) {
 			var List<Resource> resources = newArrayList()
 			var int clusterIndex = 0
 			var continue = true
-			while(allResourceIterator.hasNext && continue){
+			while (allResourceIterator.hasNext && continue) {
 				val uri = allResourceIterator.next
-				val resource = resourceSet.getResource(uri,true)
+				val resource = resourceSet.getResource(uri, true)
 				resources.add(resource)
 				fillIndex(uri, resource, index)
 				clusterIndex++
-				if(!strategy.continueProcessing(resourceSet,null,clusterIndex)){
+				if (!strategy.continueProcessing(resourceSet, null, clusterIndex)) {
 					continue = false
 				}
 			}
-			if(!continue)
+			if (!continue)
 				resourceSet.clearResourceSet
 		}
 		installIndex(resourceSet, index)
+
 		// Generate Stubs
 		if (needsJava) {
 			val stubsClasses = compileStubs(generateStubs(index, sourceResourceURIs))
 			LOG.info("Installing type provider for stubs.")
 			installTypeProvider(allClassPathEntries + newArrayList(stubsClasses), resourceSet, jvmTypeAccess)
 		}
+
 		// Validate and generate
 		LOG.info("Validate and generate.")
-		val sourceResourceIterator =  sourceResourceURIs.iterator
+		val sourceResourceIterator = sourceResourceURIs.iterator
 		var isErrorFree = true
-		while(sourceResourceIterator.hasNext){
+		while (sourceResourceIterator.hasNext) {
 			var List<Resource> resources = newArrayList()
 			var int clusterIndex = 0
 			var continue = true
-			while(sourceResourceIterator.hasNext && continue){
+			while (sourceResourceIterator.hasNext && continue) {
 				val uri = sourceResourceIterator.next
-				val resource = resourceSet.getResource(uri,true)
+				val resource = resourceSet.getResource(uri, true)
 				resources.add(resource)
 				resource.contents // full initialize
 				EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl)
 				isErrorFree = validate(resource)
 				clusterIndex++
-				if(!strategy.continueProcessing(resourceSet,null,clusterIndex)){
+				if (!strategy.continueProcessing(resourceSet, null, clusterIndex)) {
 					continue = false
 				}
 			}
@@ -158,12 +162,12 @@ class StandaloneBuilder {
 				return isErrorFree
 			}
 			generate(resources)
-			if(!continue)
+			if (!continue)
 				resourceSet.clearResourceSet
 		}
 		return isErrorFree
 	}
-	
+
 	def fillIndex(URI uri, Resource resource, ResourceDescriptionsData index) {
 		val description = languageAccess(uri).resourceDescriptionManager.getResourceDescription(resource)
 		index.addDescription(uri, description)
@@ -184,7 +188,7 @@ class StandaloneBuilder {
 		}
 	}
 
-	def protected installIndex(XtextResourceSet resourceSet, ResourceDescriptionsData index){
+	def protected installIndex(XtextResourceSet resourceSet, ResourceDescriptionsData index) {
 		ResourceDescriptionsData.ResourceSetAdapter.installResourceDescriptionsData(resourceSet, index)
 	}
 
@@ -192,7 +196,9 @@ class StandaloneBuilder {
 		val stubsClasses = createTempDir("classes")
 		compiler.setClassPath(classPathEntries)
 		LOG.info("Compiling stubs located in " + stubsDir.absolutePath)
-		val result = compiler.compile(newHashSet(sourceDirs + javaSourceDirs + newArrayList(stubsDir.absolutePath)), stubsClasses)
+		val sourcesToCompile = uniqueEntries(javaSourceDirs + sourceDirs + newArrayList(stubsDir.absolutePath))
+		forceDebugLog("Compiler source roots: " + sourcesToCompile.join(','))
+		val result = compiler.compile(sourcesToCompile, stubsClasses)
 		switch (result) {
 			case CompilationResult.SKIPPED:
 				LOG.info("Nothing to compile. Stubs compilation was skipped.")
@@ -202,6 +208,10 @@ class StandaloneBuilder {
 				forceDebugLog("Stubs compilation successfully finished.")
 		}
 		return stubsClasses.absolutePath
+	}
+
+	def protected uniqueEntries(Iterable<String> pathes) {
+		pathes.map[new File(it).absolutePath].toSet
 	}
 
 	def protected generateStubs(ResourceDescriptionsData data, List<URI> sourceResourceURIs) {
@@ -302,6 +312,7 @@ class StandaloneBuilder {
 	}
 
 	def protected registerBundle(File file) {
+
 		// copied from org.eclipse.emf.mwe.utils.StandaloneSetup.registerBundle(File)
 		var JarFile jarFile = null;
 		try {
@@ -338,25 +349,25 @@ class StandaloneBuilder {
 		compiler
 	}
 
-     /**
+	/**
      * Clears the content of the resource set without sending notifications.
      * This avoids unnecessary, explicit unloads.
      */
-    def void clearResourceSet(ResourceSet resourceSet) {
-        val wasDeliver = resourceSet.eDeliver();
-        try {
-            resourceSet.eSetDeliver(false);
-            resourceSet.getResources().clear();
-        } finally {
-            resourceSet.eSetDeliver(wasDeliver);
-        }
-    }
-    
-    def protected forceDebugLog(String logMessage) {
-    	if(LOG.debugEnabled) {
-    		LOG.debug(logMessage)
-    	} else if(debugLog){
-    		LOG.info(logMessage)
-    	}
-    }
+	def void clearResourceSet(ResourceSet resourceSet) {
+		val wasDeliver = resourceSet.eDeliver();
+		try {
+			resourceSet.eSetDeliver(false);
+			resourceSet.getResources().clear();
+		} finally {
+			resourceSet.eSetDeliver(wasDeliver);
+		}
+	}
+
+	def protected forceDebugLog(String logMessage) {
+		if (LOG.debugEnabled) {
+			LOG.debug(logMessage)
+		} else if (debugLog) {
+			LOG.info(logMessage)
+		}
+	}
 }
