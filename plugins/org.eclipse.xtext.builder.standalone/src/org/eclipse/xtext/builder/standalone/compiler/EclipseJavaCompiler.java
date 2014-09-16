@@ -61,10 +61,7 @@ public class EclipseJavaCompiler implements IJavaCompiler {
 			commandLine.add("\"" + src + "\"");
 		}
 		String cmdLine = concat(" ", commandLine);
-		if (LOG.isDebugEnabled()) {
-			// FIXME any debug logs when using -X-e in maven
-			LOG.debug("invoke batch compiler with '" + cmdLine + "'");
-		}
+		debugLog("invoke batch compiler with '" + cmdLine + "'");
 		boolean result = BatchCompiler.compile(cmdLine, new PrintWriter(getOutputWriter()), new PrintWriter(
 				getErrorWriter()), null);
 		return result ? CompilationResult.SUCCEEDED : CompilationResult.FAILED;
@@ -149,11 +146,20 @@ public class EclipseJavaCompiler implements IJavaCompiler {
 			final File file = new File(path);
 			boolean useEntry = file.exists();
 			if (!useEntry) {
-				LOG.debug("File \'" + path + "\' is missing. Skipping.");
+				debugLog("File \'" + path + "\' is missing. Skipping.");
 			}
 			return useEntry;
 		}
 
+
+	}
+
+	private void debugLog(final String message) {
+		if(LOG.isDebugEnabled()) {
+			LOG.debug(message);
+		} else if(configuration.isVerbose()) {
+			LOG.info(message);
+		}
 	}
 
 	public CompilerConfiguration getConfiguration() {
