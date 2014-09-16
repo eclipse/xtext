@@ -102,6 +102,9 @@ public class StandaloneBuilder {
   private boolean failOnValidationError = true;
   
   @Accessors
+  private boolean debugLog;
+  
+  @Accessors
   private ClusteringConfig clusteringConfig = null;
   
   @Inject
@@ -144,7 +147,7 @@ public class StandaloneBuilder {
     final XtextResourceSet resourceSet = this.resourceSetProvider.get();
     boolean _notEquals = (!Objects.equal(this.encoding, null));
     if (_notEquals) {
-      StandaloneBuilder.LOG.debug("Setting encoding.");
+      this.forceDebugLog("Setting encoding.");
       Collection<LanguageAccess> _values_1 = this.languages.values();
       this.fileEncodingSetup(_values_1, this.encoding);
     }
@@ -179,7 +182,7 @@ public class StandaloneBuilder {
     long _minus = (_currentTimeMillis - startedAt);
     String _plus_4 = ("Finished collecting source models. Took: " + Long.valueOf(_minus));
     String _plus_5 = (_plus_4 + " ms.");
-    StandaloneBuilder.LOG.debug(_plus_5);
+    this.forceDebugLog(_plus_5);
     final Iterable<String> allClassPathEntries = Iterables.<String>concat(this.sourceDirs, this.classPathEntries);
     if (needsJava) {
       StandaloneBuilder.LOG.info("Installing type provider.");
@@ -309,7 +312,7 @@ public class StandaloneBuilder {
         }
       }
       if (!_matched) {
-        StandaloneBuilder.LOG.debug(
+        this.forceDebugLog(
           (((("Couldn\'t set encoding \'" + encoding) + "\' for provider \'") + provider) + 
             "\'. Only subclasses of IEncodingProvider.Runtime are supported."));
       }
@@ -338,10 +341,10 @@ public class StandaloneBuilder {
           StandaloneBuilder.LOG.info("Nothing to compile. Stubs compilation was skipped.");
           break;
         case FAILED:
-          StandaloneBuilder.LOG.debug("Stubs compilation finished with errors.");
+          this.forceDebugLog("Stubs compilation finished with errors.");
           break;
         case SUCCEEDED:
-          StandaloneBuilder.LOG.debug("Stubs compilation successfully finished.");
+          this.forceDebugLog("Stubs compilation successfully finished.");
           break;
         default:
           break;
@@ -539,7 +542,7 @@ public class StandaloneBuilder {
       public boolean apply(final URI input) {
         final boolean matches = nameBasedFilter.matches(input);
         if (matches) {
-          StandaloneBuilder.LOG.debug((("Adding file \'" + input) + "\'"));
+          StandaloneBuilder.this.forceDebugLog((("Adding file \'" + input) + "\'"));
           resources.add(input);
         }
         return matches;
@@ -613,7 +616,7 @@ public class StandaloneBuilder {
         String _absolutePath = file.getAbsolutePath();
         String _plus_1 = ("Could not open Jar file " + _absolutePath);
         String _plus_2 = (_plus_1 + ".");
-        StandaloneBuilder.LOG.debug(_plus_2);
+        this.forceDebugLog(_plus_2);
       } else if (_t instanceof Exception) {
         final Exception e_1 = (Exception)_t;
         String _absolutePath_1 = file.getAbsolutePath();
@@ -654,6 +657,17 @@ public class StandaloneBuilder {
       _resources.clear();
     } finally {
       resourceSet.eSetDeliver(wasDeliver);
+    }
+  }
+  
+  protected void forceDebugLog(final String logMessage) {
+    boolean _isDebugEnabled = StandaloneBuilder.LOG.isDebugEnabled();
+    if (_isDebugEnabled) {
+      StandaloneBuilder.LOG.debug(logMessage);
+    } else {
+      if (this.debugLog) {
+        StandaloneBuilder.LOG.info(logMessage);
+      }
     }
   }
   
@@ -727,6 +741,15 @@ public class StandaloneBuilder {
   
   public void setFailOnValidationError(final boolean failOnValidationError) {
     this.failOnValidationError = failOnValidationError;
+  }
+  
+  @Pure
+  public boolean isDebugLog() {
+    return this.debugLog;
+  }
+  
+  public void setDebugLog(final boolean debugLog) {
+    this.debugLog = debugLog;
   }
   
   @Pure

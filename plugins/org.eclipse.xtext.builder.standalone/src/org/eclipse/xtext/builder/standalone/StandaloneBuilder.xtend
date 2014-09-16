@@ -50,6 +50,7 @@ class StandaloneBuilder {
 	@Accessors String encoding
 	@Accessors String classPathLookUpFilter
 	@Accessors boolean failOnValidationError = true
+	@Accessors boolean debugLog
 	@Accessors ClusteringConfig clusteringConfig = null
 
 	@Inject IndexedJvmTypeAccess jvmTypeAccess
@@ -74,7 +75,7 @@ class StandaloneBuilder {
 		val resourceSet = resourceSetProvider.get
 
 		if (encoding != null) {
-			LOG.debug("Setting encoding.")
+			forceDebugLog("Setting encoding.")
 			fileEncodingSetup(languages.values, encoding)
 		}
 
@@ -90,7 +91,7 @@ class StandaloneBuilder {
 		}
 		val sourceResourceURIs = collectResources(sourceDirs, resourceSet)
 		val allResourcesURIs = sourceResourceURIs + collectResources(rootsToTravers,resourceSet)
-		LOG.debug("Finished collecting source models. Took: " + (System.currentTimeMillis - startedAt) + " ms.")
+		forceDebugLog("Finished collecting source models. Took: " + (System.currentTimeMillis - startedAt) + " ms.")
 
 		val allClassPathEntries = (sourceDirs + classPathEntries)
 		if (needsJava) {
@@ -175,7 +176,7 @@ class StandaloneBuilder {
 					provider.setDefaultEncoding(encoding)
 				}
 				default: {
-					LOG.debug(
+					forceDebugLog(
 						"Couldn't set encoding '" + encoding + "' for provider '" + provider +
 							"'. Only subclasses of IEncodingProvider.Runtime are supported.")
 				}
@@ -196,9 +197,9 @@ class StandaloneBuilder {
 			case CompilationResult.SKIPPED:
 				LOG.info("Nothing to compile. Stubs compilation was skipped.")
 			case CompilationResult.FAILED:
-				LOG.debug("Stubs compilation finished with errors.")
+				forceDebugLog("Stubs compilation finished with errors.")
 			case CompilationResult.SUCCEEDED:
-				LOG.debug("Stubs compilation successfully finished.")
+				forceDebugLog("Stubs compilation successfully finished.")
 		}
 		return stubsClasses.absolutePath
 	}
@@ -285,7 +286,7 @@ class StandaloneBuilder {
 			[ input |
 				val matches = nameBasedFilter.matches(input)
 				if (matches) {
-					LOG.debug("Adding file '" + input + "'");
+					forceDebugLog("Adding file '" + input + "'");
 					resources.add(input);
 				}
 				return matches
@@ -320,7 +321,7 @@ class StandaloneBuilder {
 				EcorePlugin.getPlatformResourceMap().put(name, uri);
 			}
 		} catch (ZipException e) {
-			LOG.debug("Could not open Jar file " + file.getAbsolutePath() + ".");
+			forceDebugLog("Could not open Jar file " + file.getAbsolutePath() + ".");
 		} catch (Exception e) {
 			LOG.error(file.absolutePath, e);
 		} finally {
@@ -349,5 +350,13 @@ class StandaloneBuilder {
         } finally {
             resourceSet.eSetDeliver(wasDeliver);
         }
+    }
+    
+    def protected forceDebugLog(String logMessage) {
+    	if(LOG.debugEnabled) {
+    		LOG.debug(logMessage)
+    	} else if(debugLog){
+    		LOG.info(logMessage)
+    	}
     }
 }

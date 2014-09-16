@@ -63,7 +63,7 @@
 		<dependency>
 			<groupId>org.eclipse.equinox</groupId>
 			<artifactId>common</artifactId>
-			<version>[3.6,)</version>
+			<version>${equinox-common-version}</version>
 		</dependency>
 	</dependencies>
 </project>
