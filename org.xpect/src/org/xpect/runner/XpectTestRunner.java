@@ -72,7 +72,7 @@ public class XpectTestRunner extends AbstractTestRunner {
 	}
 
 	public Description createDescription() {
-		XpectRunner runner = getUriRunner().getRunner();
+		XpectRunner runner = getFileRunner().getRunner();
 		Class<?> javaClass = runner.getTestClass().getJavaClass();
 		Description description = DescriptionFactory.createTestDescription(javaClass, runner.getUriProvider(), invocation);
 		return description;

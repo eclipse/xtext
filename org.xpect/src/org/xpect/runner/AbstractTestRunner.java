@@ -41,7 +41,7 @@ public abstract class AbstractTestRunner extends Runner {
 	@Creates
 	public abstract XjmMethod getMethod();
 
-	public XpectFileRunner getUriRunner() {
+	public XpectFileRunner getFileRunner() {
 		return uriRunner;
 	}
 
@@ -72,5 +72,10 @@ public abstract class AbstractTestRunner extends Runner {
 	}
 
 	protected abstract void runInternal() throws Throwable;
+
+	@Override
+	public String toString() {
+		return getDescription().getDisplayName();
+	}
 
 }

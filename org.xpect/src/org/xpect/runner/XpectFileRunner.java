@@ -63,10 +63,16 @@ public class XpectFileRunner extends Runner implements Filterable, Sortable {
 		if (xpectFile != null) {
 			XpectJavaModel xjm = xpectFile.getJavaModel();
 			for (XjmMethod method : xjm.getMethods().values())
-				if (method instanceof XjmTestMethod)
-					children.add(createTestRunner((XjmTestMethod) method));
-			for (XpectInvocation inv : xpectFile.getInvocations())
-				children.add(createTestRunner(inv));
+				if (method instanceof XjmTestMethod) {
+					Runner testRunner = createTestRunner((XjmTestMethod) method);
+					if (testRunner != null)
+						children.add(testRunner);
+				}
+			for (XpectInvocation inv : xpectFile.getInvocations()) {
+				Runner testRunner = createTestRunner(inv);
+				if (testRunner != null)
+					children.add(testRunner);
+			}
 		}
 		return children;
 	}
