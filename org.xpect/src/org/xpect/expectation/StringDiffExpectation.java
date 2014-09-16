@@ -21,6 +21,7 @@ import org.xpect.text.ITextDifferencer.ISegment;
 import org.xpect.text.ITextDifferencer.ITextDiff;
 import org.xpect.text.ITextDifferencer.ITextDiffConfig;
 import org.xpect.text.StringEndsSimilarityFunction;
+import org.xpect.text.TextDiffToString;
 import org.xpect.text.TextDifferencer;
 import org.xpect.util.IDifferencer.ISimilarityFunction;
 
@@ -89,7 +90,7 @@ public @interface StringDiffExpectation {
 		protected <T> void assertDiffEquals(List<T> left, List<T> right, ITextDiffConfig<T> config) throws ComparisonFailure {
 			ITextDifferencer differencer = createDifferencer();
 			ITextDiff diff = differencer.diff(left, right, config);
-			String actual = diff.toString();
+			String actual = createDiffToString().apply(diff);
 			String escapedActual = getTargetSyntaxLiteral().escape(actual);
 			String originalExpectation = getExpectation();
 			String migratedExpectation;
@@ -130,6 +131,15 @@ public @interface StringDiffExpectation {
 
 		protected ITextDifferencer createDifferencer() {
 			return new TextDifferencer();
+		}
+
+		protected Function<? super ITextDiff, String> createDiffToString() {
+			TextDiffToString toString = new TextDiffToString();
+			toString.setAllowSingleLineDiff(annotation.allowSingleLineDiff());
+			toString.setAllowSingleSegmentDiff(annotation.allowSingleSegmentDiff() && getRegion() instanceof ISingleLineExpectationRegion);
+			toString.setLinesBeforeDiff(annotation.linesBeforeDiff());
+			toString.setLinesAfterDiff(annotation.linesAfterDiff());
+			return toString;
 		}
 
 		protected Function<String, ? extends Iterable<String>> createTokenizer() {
@@ -240,9 +250,15 @@ public @interface StringDiffExpectation {
 
 	}
 
+	boolean allowSingleLineDiff() default true;
+
+	boolean allowSingleSegmentDiff() default true;
+
+	int linesAfterDiff() default 4;
+
+	int linesBeforeDiff() default 4;
+
 	Class<? extends Function<String, ? extends Iterable<String>>> tokenizer() default GenericTokenizer.class;
 
 	boolean whitespaceSensitive() default false;
-
-	// Class<Function<? super Object, ITextBlock>> diffFormatter();
 }

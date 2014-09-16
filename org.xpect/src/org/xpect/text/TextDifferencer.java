@@ -1,13 +1,11 @@
 package org.xpect.text;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.xpect.util.DifferencerImpl;
 import org.xpect.util.IDifferencer.Match;
 import org.xpect.util.IDifferencer.MatchKind;
 
-import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
@@ -65,155 +63,9 @@ public class TextDifferencer implements ITextDifferencer {
 			return segmentDiffs;
 		}
 
-		protected String getHiddenBetween(ISegment seg1, ISegment seg2) {
-			StringBuilder result1 = new StringBuilder();
-			ISegment next = seg1.getNext();
-			while (next != null && next.isHidden() && !next.isWrap()) {
-				result1.append(next);
-				next = next.getNext();
-			}
-			if (next == seg2)
-				return result1.toString();
-			StringBuilder result2 = new StringBuilder();
-			ISegment prev = seg2.getPrevious();
-			while (prev != null && prev.isHidden() && !prev.isWrap()) {
-				result2.insert(0, prev);
-				prev = prev.getPrevious();
-			}
-			if (result1.length() > 0 && result2.length() > 0) {
-				if (result1.length() < result2.length())
-					return result1.toString();
-				return result2.toString();
-			} else if (result1.length() > 0) {
-				return result1.toString();
-			}
-			return result2.toString();
-		}
-
-		protected String toString(List<ISegment> segments, boolean prefix, boolean postfix) {
-			if (segments.isEmpty())
-				return "";
-			StringBuilder builder = new StringBuilder();
-			if (prefix) {
-				ISegment prev = segments.get(0).getPrevious();
-				while (prev != null && prev.isHidden() && !prev.isWrap()) {
-					builder.insert(0, prev);
-					prev = prev.getPrevious();
-				}
-			}
-			ISegment last = null;
-			for (ISegment seg : segments) {
-				if (last != null)
-					builder.append(getHiddenBetween(last, seg));
-				builder.append(seg);
-				last = seg;
-			}
-			if (postfix) {
-				ISegment next = segments.get(segments.size() - 1).getNext();
-				while (next != null && next.isHidden() && !next.isWrap()) {
-					builder.append(next);
-					next = next.getNext();
-				}
-			}
-			return builder.toString();
-		}
-
 		@Override
 		public String toString() {
-			switch (kind) {
-			case EQUAL:
-				return "  " + toString(getLeftSegments(), true, true);
-			case LEFT_ONLY:
-				return "- " + toString(getLeftSegments(), true, true);
-			case RIGHT_ONLY:
-				return "+ " + toString(getRightSegments(), true, true);
-			case SIMILAR:
-				// int equalLenght = 0;
-				// int unequalLenght = 0;
-				// for (ISegmentDiff diff : segmentDiffs)
-				// switch (diff.getKind()) {
-				// case LEFT_ONLY:
-				// unequalLenght += diff.getLeft().toString().length();
-				// break;
-				// case RIGHT_ONLY:
-				// unequalLenght += diff.getRight().toString().length();
-				// break;
-				// case EQUAL:
-				// equalLenght += diff.getLeft().toString().length();
-				// break;
-				// case SIMILAR:
-				// unequalLenght += diff.getRight().toString().length();
-				// unequalLenght += diff.getLeft().toString().length();
-				// break;
-				// }
-				// if (true /* equalLenght > unequalLenght */) {
-				StringBuilder result = new StringBuilder("|");
-				List<ISegment> left = Lists.newArrayList();
-				List<ISegment> right = Lists.newArrayList();
-				List<ISegment> equal = Lists.newArrayList();
-				for (int i = 0; i < segmentDiffs.size(); i++) {
-					ISegmentDiff match = segmentDiffs.get(i);
-					switch (match.getKind()) {
-					case EQUAL:
-						equal.add(match.getLeft());
-						break;
-					case LEFT_ONLY:
-						left.add(match.getLeft());
-						break;
-					case RIGHT_ONLY:
-						right.add(match.getRight());
-						break;
-					case SIMILAR:
-						right.add(match.getRight());
-						left.add(match.getLeft());
-						break;
-					}
-					if (match.getKind() == MatchKind.EQUAL) {
-						if (left.size() > 0 || right.size() > 0) {
-							result.append("[" + toString(left, false, false) + "|" + toString(right, false, false) + "]");
-							left.clear();
-							right.clear();
-						}
-					}
-					if (match.getKind() != MatchKind.EQUAL) {
-						if (equal.size() > 0) {
-							result.append(toString(equal, true, true));
-							equal.clear();
-						}
-					}
-					if (i == segmentDiffs.size() - 1) {
-						if (left.size() > 0 || right.size() > 0)
-							result.append("[" + toString(left, false, false) + "|" + toString(right, false, false) + "]");
-						if (equal.size() > 0)
-							result.append(toString(equal, true, true));
-					}
-				}
-				return result.toString();
-				// } else {
-				// return "- " + toString(getLeftSegments(), true, true) + "\n" + "+ " + toString(getRightSegments(), true, true);
-				// }
-			}
-			return super.toString();
-		}
-
-		protected List<ISegment> getLeftSegments() {
-			List<ISegment> result = Lists.newArrayList();
-			for (ISegmentDiff match : segmentDiffs) {
-				ISegment left = match.getLeft();
-				if (left != null)
-					result.add(left);
-			}
-			return result;
-		}
-
-		protected List<ISegment> getRightSegments() {
-			List<ISegment> result = Lists.newArrayList();
-			for (ISegmentDiff match : segmentDiffs) {
-				ISegment right = match.getRight();
-				if (right != null)
-					result.add(right);
-			}
-			return result;
+			return new TextDiffToString().toPrefixedLine(this);
 		}
 	}
 
@@ -335,42 +187,12 @@ public class TextDifferencer implements ITextDifferencer {
 		}
 
 		public List<ILineDiff> getLines() {
-			return null;
+			return lines;
 		}
 
 		@Override
 		public String toString() {
-			final int treshold = 4;
-			boolean enabled[] = new boolean[lines.size()];
-			Arrays.fill(enabled, false);
-			int l = -treshold;
-			for (int i = 0; i < enabled.length; i++) {
-				if (lines.get(i).getKind() != MatchKind.EQUAL)
-					l = i;
-				if (i - l < treshold)
-					enabled[i] = true;
-			}
-			l = enabled.length + treshold;
-			for (int i = enabled.length - 1; i >= 0; i--) {
-				if (lines.get(i).getKind() != MatchKind.EQUAL)
-					l = i;
-				if (l - i < treshold)
-					enabled[i] = true;
-			}
-			List<String> filtered = Lists.newArrayList();
-			boolean out = false;
-			for (int i = 0; i < enabled.length; i++) {
-				if (enabled[i]) {
-					filtered.add(this.lines.get(i).toString());
-					out = false;
-				} else {
-					if (!out) {
-						filtered.add("(...)");
-						out = true;
-					}
-				}
-			}
-			return Joiner.on('\n').join(filtered);
+			return new TextDiffToString().apply(this);
 		}
 
 	}

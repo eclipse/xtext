@@ -8,6 +8,7 @@ import org.xpect.text.ITextDifferencer.ITextDiffConfig
 import org.xpect.text.StringEndsSimilarityFunction
 import org.xpect.text.TextDifferencer
 import org.junit.Ignore
+import org.xpect.text.TextDiffToString
 
 class TextDifferencerTest {
 	@Test @Ignore def void testEqual() {
@@ -22,7 +23,7 @@ class TextDifferencerTest {
 		val left = #["a", "b", "c"]
 		val right = #["a", "d", "c"]
 		diff(left, right) === '''
-			|a[b|d]c
+			| a[b|d]c
 		'''
 	}
 
@@ -30,7 +31,7 @@ class TextDifferencerTest {
 		val left = #["a", "b", "c"]
 		val right = #["a", "c"]
 		diff(left, right) === '''
-			|a[b|]c
+			| a[b|]c
 		'''
 	}
 
@@ -38,7 +39,7 @@ class TextDifferencerTest {
 		val left = #["a", "c"]
 		val right = #["a", "b", "c"]
 		diff(left, right) === '''
-			|a[|b]c
+			| a[|b]c
 		'''
 	}
 
@@ -46,7 +47,7 @@ class TextDifferencerTest {
 		val left = #["a", "b"]
 		val right = #["a", "c"]
 		diff(left, right) === '''
-			|a[b|c]
+			| a[b|c]
 		'''
 	}
 
@@ -54,7 +55,7 @@ class TextDifferencerTest {
 		val left = #["a", "b"]
 		val right = #["a"]
 		diff(left, right) === '''
-			|a[b|]
+			| a[b|]
 		'''
 	}
 
@@ -62,7 +63,7 @@ class TextDifferencerTest {
 		val left = #["a"]
 		val right = #["a", "b"]
 		diff(left, right) === '''
-			|a[|b]
+			| a[|b]
 		'''
 	}
 
@@ -109,7 +110,7 @@ class TextDifferencerTest {
 		val left = #["a", "  ", "b", "   ", "c"]
 		val right = #["a", "    ", "c"]
 		diff(left, right) === '''
-			|a  [b|]   c
+			| a  [b|]   c
 		'''
 	}
 
@@ -117,12 +118,14 @@ class TextDifferencerTest {
 		val left = #["a", "  ", "b", "   ", "c", "    ", "d"]
 		val right = #["a", "     ", "d"]
 		diff(left, right) === '''
-			|a  [b   c|]    d
+			| a  [b   c|]    d
 		'''
 	}
 
 	def diff(List<String> left, List<String> right) {
-		new TextDifferencer().diff(left, right, new TextDiffConfig).toString
+		val toStr = new TextDiffToString().setAllowSingleLineDiff(false).setAllowSingleSegmentDiff(false)
+		val diff = new TextDifferencer().diff(left, right, new TextDiffConfig)
+		return toStr.apply(diff)
 	}
 
 	def operator_tripleEquals(Object o1, Object o2) {
