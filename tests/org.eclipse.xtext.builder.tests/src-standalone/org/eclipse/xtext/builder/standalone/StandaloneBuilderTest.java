@@ -39,7 +39,7 @@ import com.google.inject.Inject;
 public class StandaloneBuilderTest {
 
 	private static final File PROJECT_DIR = new File("test-data/standalone");
-
+	private static final File TMP_DIR = new File(PROJECT_DIR, "tmp");
 	@Inject
 	private StandaloneBuilder builder;
 
@@ -47,6 +47,10 @@ public class StandaloneBuilderTest {
 	public void cleanup() throws IOException {
 		deleteFolder("src-gen");
 		deleteFolder("src2-gen");
+		if (TMP_DIR.exists()) {
+			Files.sweepFolder(TMP_DIR);
+			TMP_DIR.delete();
+		}
 	}
 
 	@Test
@@ -130,6 +134,20 @@ public class StandaloneBuilderTest {
 				uri.toString().endsWith("test-data/model.in.eclipse.project.jar!/"));
 	}
 
+	@Test
+	public void testDuplicateSourceEntries() {
+		TestLanguageConfiguration config = new TestLanguageConfiguration(false);
+		config.setJavaSupport(true);
+		initBuilder(config);
+		builder.setJavaSourceDirs(ImmutableList.of(new File(PROJECT_DIR, "src2").getPath()));
+		builder.setTempDir(TMP_DIR);
+		builder.setDebugLog(true);
+		assertTrue("Builder launch returned false", builder.launch());
+		File compiledClazz = getFile("tmp/classes/JavaClass.class");
+		assertTrue("java compilation failed", compiledClazz.exists());
+
+	}
+
 	private File getFile(String projectRelativePath) {
 		return new File(PROJECT_DIR, projectRelativePath);
 	}
@@ -156,6 +174,7 @@ public class StandaloneBuilderTest {
 	public static class TestLanguageConfiguration implements ILanguageConfiguration {
 
 		private boolean useOutputPerSource;
+		private boolean javaSupport = false;
 
 		public TestLanguageConfiguration(boolean useOutputPerSource) {
 			this.useOutputPerSource = useOutputPerSource;
@@ -178,8 +197,12 @@ public class StandaloneBuilderTest {
 			return ImmutableSet.of(config);
 		}
 
+		public void setJavaSupport(boolean javaSupport) {
+			this.javaSupport = javaSupport;
+		}
+
 		public boolean isJavaSupport() {
-			return false;
+			return javaSupport;
 		}
 	}
 }
