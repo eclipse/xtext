@@ -7,14 +7,23 @@
  *******************************************************************************/
 package org.xpect.runner;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceFactory;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.validation.CheckMode;
+import org.eclipse.xtext.validation.IResourceValidator;
+import org.eclipse.xtext.validation.Issue;
+import org.junit.ComparisonFailure;
 import org.junit.runner.Description;
+import org.junit.runner.Runner;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.ParentRunner;
@@ -23,17 +32,23 @@ import org.xpect.XjmFactory;
 import org.xpect.XjmMethod;
 import org.xpect.XjmTest;
 import org.xpect.XjmXpectMethod;
+import org.xpect.XpectFile;
 import org.xpect.XpectJavaModel;
 import org.xpect.XpectStandaloneSetup;
+import org.xpect.XpectTest;
 import org.xpect.expectation.TargetSyntaxSupport;
+import org.xpect.registry.ITestSuiteInfo;
 import org.xpect.runner.XpectTestFiles.Builder;
 import org.xpect.runner.XpectTestFiles.FileRoot;
+import org.xpect.setup.ISetupInitializer;
+import org.xpect.setup.SetupInitializer;
 import org.xpect.setup.ThisRootTestClass;
 import org.xpect.setup.ThisTestObject.TestObjectSetup;
 import org.xpect.state.Configuration;
 import org.xpect.state.ResolvedConfiguration;
 import org.xpect.state.StateContainer;
 import org.xpect.util.AnnotationUtil;
+import org.xpect.util.IssueVisualizer;
 import org.xpect.util.XpectJavaModelFactory;
 
 import com.google.common.collect.Lists;
@@ -42,16 +57,16 @@ import com.google.inject.Injector;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class XpectRunner extends ParentRunner<XpectFileRunner> {
+public class XpectRunner extends ParentRunner<Runner> {
 
-	private List<XpectFileRunner> children;
+	public static XpectRunner INSTANCE = null;
+	public static ClassLoader testClassloader = null;
+	private List<Runner> children;
 	private Collection<URI> files;
-	private final XpectJavaModel xpectJavaModel;
+	private final StateContainer state;
 	private final IXpectURIProvider uriProvider;
 	private final Injector xpectInjector;
-	private final StateContainer state;
-	public static ClassLoader testClassloader = null;
-	public static XpectRunner INSTANCE = null;
+	private final XpectJavaModel xpectJavaModel;
 
 	public XpectRunner(Class<?> testClass) throws InitializationError {
 		super(testClass);
@@ -60,19 +75,45 @@ public class XpectRunner extends ParentRunner<XpectFileRunner> {
 		this.uriProvider = findUriProvider(testClass);
 		this.xpectInjector = findXpectInjector();
 		this.xpectJavaModel = this.xpectInjector.getInstance(XpectJavaModelFactory.class).createJavaModel(testClass);
-		this.state = createState(createConfiguration());
+		this.state = createState(createRootConfiguration());
 	}
 
-	public StateContainer getState() {
-		return state;
+	protected Runner createChild(URI uri) {
+		try {
+			XtextResource resource = loadXpectResource(uri);
+			XpectFile file = loadXpectFile(resource);
+			Configuration cfg = createChildConfiguration(file);
+			StateContainer childState = new StateContainer(state, new ResolvedConfiguration(state.getConfiguration(), cfg));
+			return childState.get(XpectFileRunner.class).get();
+		} catch (Throwable t) {
+			return new ErrorReportingRunner(this, uri, t);
+		}
 	}
 
-	protected Configuration createConfiguration() {
+	protected Configuration createChildConfiguration(XpectFile file) {
 		Configuration config = new Configuration();
+		config.addDefaultValue(XpectFile.class, file);
+		config.addDefaultValue(ISetupInitializer.class, createSetupInitializer(file));
+		return config;
+	}
+
+	protected List<Runner> createChildren(Class<?> clazz) {
+		List<Runner> result = Lists.newArrayList();
+		for (URI uri : getFiles())
+			result.add(createChild(uri));
+		return result;
+	}
+
+	protected Configuration createRootConfiguration() {
+		Configuration config = new Configuration();
+		config.addDefaultValue(this);
 		config.addValue(ThisRootTestClass.class, super.getTestClass().getJavaClass());
 		config.addFactory(TestObjectSetup.class);
 		config.addFactory(ValidatingSetup.class);
 		config.addFactory(TargetSyntaxSupport.class);
+		config.addFactory(XpectFileRunner.class);
+		config.addFactory(XpectTestRunner.class);
+		config.addFactory(TestRunner.class);
 		config.addDefaultValue(IXpectURIProvider.class, this.uriProvider);
 		config.addDefaultValue(XpectJavaModel.class, this.xpectJavaModel);
 		for (XjmTest test : this.xpectJavaModel.getTests()) {
@@ -86,40 +127,21 @@ public class XpectRunner extends ParentRunner<XpectFileRunner> {
 		return config;
 	}
 
+	protected ISetupInitializer<Object> createSetupInitializer(XpectFile file) {
+		if (file != null) {
+			XpectTest test = file.getTest();
+			if (test != null && !test.eIsProxy())
+				return new SetupInitializer<Object>(file.getTest());
+		}
+		return new ISetupInitializer.Null<Object>();
+	}
+
 	protected StateContainer createState(Configuration config) {
 		return new StateContainer(new ResolvedConfiguration(config));
 	}
 
-	protected Injector getXpectInjector() {
-		return xpectInjector;
-	}
-
-	public XpectJavaModel getXpectJavaModel() {
-		return xpectJavaModel;
-	}
-
-	protected Injector findXpectInjector() {
-		IResourceServiceProvider rssp = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(URI.createURI("foo.xpect"));
-		if (rssp != null)
-			return rssp.get(Injector.class);
-		if (!EcorePlugin.IS_ECLIPSE_RUNNING)
-			return new XpectStandaloneSetup().createInjectorAndDoEMFRegistration();
-		throw new IllegalStateException("The language *.xpect is not activated");
-	}
-
-	protected XpectFileRunner createChild(Class<?> clazz, URI uri) {
-		return new XpectFileRunner(this, uri);
-	}
-
-	protected List<XpectFileRunner> createChildren(Class<?> clazz) {
-		List<XpectFileRunner> result = Lists.newArrayList();
-		for (URI uri : getFiles())
-			result.add(createChild(clazz, uri));
-		return result;
-	}
-
 	@Override
-	protected Description describeChild(XpectFileRunner child) {
+	protected Description describeChild(Runner child) {
 		return child.getDescription();
 	}
 
@@ -145,8 +167,17 @@ public class XpectRunner extends ParentRunner<XpectFileRunner> {
 		return new XpectTestFiles.Builder().relativeTo(FileRoot.CLASS).create(clazz);
 	}
 
+	protected Injector findXpectInjector() {
+		IResourceServiceProvider rssp = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(URI.createURI("foo.xpect"));
+		if (rssp != null)
+			return rssp.get(Injector.class);
+		if (!EcorePlugin.IS_ECLIPSE_RUNNING)
+			return new XpectStandaloneSetup().createInjectorAndDoEMFRegistration();
+		throw new IllegalStateException("The language *.xpect is not activated");
+	}
+
 	@Override
-	protected List<XpectFileRunner> getChildren() {
+	protected List<Runner> getChildren() {
 		if (children == null)
 			children = createChildren(getTestClass().getJavaClass());
 		return children;
@@ -158,8 +189,36 @@ public class XpectRunner extends ParentRunner<XpectFileRunner> {
 		return files;
 	}
 
+	public StateContainer getState() {
+		return state;
+	}
+
 	public IXpectURIProvider getUriProvider() {
 		return uriProvider;
+	}
+
+	protected Injector getXpectInjector() {
+		return xpectInjector;
+	}
+
+	public XpectJavaModel getXpectJavaModel() {
+		return xpectJavaModel;
+	}
+
+	protected XpectFile loadXpectFile(XtextResource res) throws IOException {
+		XpectFile file = !res.getContents().isEmpty() ? (XpectFile) res.getContents().get(0) : null;
+		if (file == null)
+			throw new IllegalStateException("Resource for " + res.getURI() + " is empty.");
+		validate(file);
+		validate(res);
+		return file;
+	}
+
+	protected XtextResource loadXpectResource(URI uri) throws IOException {
+		XtextResource resource = (XtextResource) getXpectInjector().getInstance(XtextResourceFactory.class).createResource(uri);
+		getXpectJavaModel().eResource().getResourceSet().getResources().add(resource);
+		resource.load(null);
+		return resource;
 	}
 
 	@Override
@@ -181,11 +240,30 @@ public class XpectRunner extends ParentRunner<XpectFileRunner> {
 	}
 
 	@Override
-	protected void runChild(XpectFileRunner child, RunNotifier notifier) {
+	protected void runChild(Runner child, RunNotifier notifier) {
 		try {
 			child.run(notifier);
 		} catch (Throwable t) {
 			notifier.fireTestFailure(new Failure(child.getDescription(), t));
+		}
+	}
+
+	protected void validate(XpectFile file) {
+		XpectJavaModel model = file.getJavaModel();
+		if (model == null || model.eIsProxy()) {
+			String fileName = file.eResource().getURI().lastSegment();
+			String registry = ITestSuiteInfo.Registry.INSTANCE.toString();
+			throw new IllegalStateException("Could not find test suite for " + fileName + ". Registry:\n" + registry);
+		}
+	}
+
+	protected void validate(XtextResource res) {
+		IResourceValidator validator = res.getResourceServiceProvider().get(IResourceValidator.class);
+		List<Issue> issues = validator.validate(res, CheckMode.ALL, CancelIndicator.NullImpl);
+		if (!issues.isEmpty()) {
+			String document = res.getParseResult().getRootNode().getText();
+			String errors = new IssueVisualizer().visualize(document, issues);
+			throw new ComparisonFailure("Errors in " + res.getURI(), document.trim(), errors.trim());
 		}
 	}
 }

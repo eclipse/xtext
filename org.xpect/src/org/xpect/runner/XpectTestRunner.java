@@ -14,15 +14,13 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.junit.runner.Description;
-import org.xpect.XjmMethod;
 import org.xpect.XjmXpectMethod;
 import org.xpect.XpectInvocation;
 import org.xpect.model.XpectInvocationImplCustom;
 import org.xpect.parameter.IParameterProvider;
 import org.xpect.parameter.ParameterProvider;
-import org.xpect.setup.ThisTestClass;
 import org.xpect.setup.ThisTestObject;
-import org.xpect.state.Configuration;
+import org.xpect.state.Creates;
 import org.xpect.state.StateContainer;
 
 import com.google.common.base.Preconditions;
@@ -31,29 +29,14 @@ import com.google.common.base.Preconditions;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class XpectTestRunner extends AbstractTestRunner {
-
 	private final XpectInvocation invocation;
 	private final StateContainer state;
 
-	public XpectTestRunner(XpectFileRunner uriRunner, XpectInvocation invocation) {
+	public XpectTestRunner(StateContainer state, XpectFileRunner uriRunner, XpectInvocation invocation) {
 		super(uriRunner);
 		Preconditions.checkNotNull(invocation);
 		this.invocation = invocation;
-		this.state = createState(createConfiguration());
-	}
-
-	@Override
-	public StateContainer getState() {
-		return state;
-	}
-
-	protected Configuration createConfiguration() {
-		Configuration config = new Configuration();
-		config.addValue(ThisTestClass.class, Class.class, this.invocation.getMethod().getTest().getJavaClass());
-		config.addDefaultValue(XpectInvocation.class, this.invocation);
-		config.addDefaultValue(XjmXpectMethod.class, this.invocation.getMethod());
-		config.addDefaultValue(XjmMethod.class, this.invocation.getMethod());
-		return config;
+		this.state = state;
 	}
 
 	protected List<IParameterProvider> collectParameters() {
@@ -83,6 +66,11 @@ public class XpectTestRunner extends AbstractTestRunner {
 		return result;
 	}
 
+	@Creates
+	public XpectTestRunner create() {
+		return this;
+	}
+
 	public Description createDescription() {
 		XpectRunner runner = getUriRunner().getRunner();
 		Class<?> javaClass = runner.getTestClass().getJavaClass();
@@ -107,6 +95,11 @@ public class XpectTestRunner extends AbstractTestRunner {
 
 	public XjmXpectMethod getMethod() {
 		return invocation.getMethod();
+	}
+
+	@Override
+	public StateContainer getState() {
+		return state;
 	}
 
 	@Override

@@ -9,18 +9,17 @@ package org.xpect.runner;
 
 import org.junit.Ignore;
 import org.junit.runner.Description;
+import org.junit.runner.Runner;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 import org.xpect.XjmMethod;
-import org.xpect.state.ResolvedConfiguration;
-import org.xpect.state.Configuration;
+import org.xpect.state.Creates;
 import org.xpect.state.StateContainer;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public abstract class AbstractTestRunner {
-
+public abstract class AbstractTestRunner extends Runner {
 	private Description description;
 	private final XpectFileRunner uriRunner;
 
@@ -31,11 +30,6 @@ public abstract class AbstractTestRunner {
 
 	public abstract StateContainer getState();
 
-	protected StateContainer createState(Configuration config) {
-		StateContainer parent = getUriRunner().getState();
-		return new StateContainer(parent, new ResolvedConfiguration(parent.getConfiguration(), config));
-	}
-
 	public abstract Description createDescription();
 
 	public Description getDescription() {
@@ -44,6 +38,7 @@ public abstract class AbstractTestRunner {
 		return description;
 	}
 
+	@Creates
 	public abstract XjmMethod getMethod();
 
 	public XpectFileRunner getUriRunner() {

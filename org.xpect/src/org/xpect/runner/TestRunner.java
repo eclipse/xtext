@@ -10,11 +10,9 @@ package org.xpect.runner;
 import java.lang.reflect.InvocationTargetException;
 
 import org.junit.runner.Description;
-import org.xpect.XjmMethod;
 import org.xpect.XjmTestMethod;
-import org.xpect.setup.ThisTestClass;
 import org.xpect.setup.ThisTestObject;
-import org.xpect.state.Configuration;
+import org.xpect.state.Creates;
 import org.xpect.state.StateContainer;
 
 import com.google.common.base.Preconditions;
@@ -28,19 +26,16 @@ public class TestRunner extends AbstractTestRunner {
 
 	private final StateContainer state;
 
-	public TestRunner(XpectFileRunner uriRunner, XjmTestMethod method) {
+	public TestRunner(StateContainer state, XpectFileRunner uriRunner, XjmTestMethod method) {
 		super(uriRunner);
 		Preconditions.checkNotNull(method);
 		this.method = method;
-		this.state = createState(createConfiguration());
+		this.state = state;
 	}
 
-	protected Configuration createConfiguration() {
-		Configuration config = new Configuration();
-		config.addValue(ThisTestClass.class, Class.class, this.method.getTest().getJavaClass());
-		config.addDefaultValue(XjmTestMethod.class, this.method);
-		config.addDefaultValue(XjmMethod.class, this.method);
-		return config;
+	@Creates
+	public TestRunner create() {
+		return this;
 	}
 
 	public Description createDescription() {
