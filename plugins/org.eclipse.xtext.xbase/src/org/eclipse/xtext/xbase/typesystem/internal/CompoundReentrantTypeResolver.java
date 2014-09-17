@@ -8,10 +8,13 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.AbstractList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.RandomAccess;
+import java.util.Set;
 
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
@@ -42,11 +45,17 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 	private boolean sealed = false;
 	private int next;
 	private CancelIndicator monitor;
+	private Set<EObject> allRootedExpressions;
 	
+	public CompoundReentrantTypeResolver(Set<EObject> allRootedExpressions) {
+		this.allRootedExpressions = allRootedExpressions;
+	}
+
 	protected void addResolver(AbstractRootedReentrantTypeResolver resolver) {
 		if (sealed)
 			throw new IllegalStateException();
 		resolvers.add(resolver);
+		resolver.setAllRootedExpressions(allRootedExpressions);
 	}
 	
 	public void initializeFrom(EObject root) {
@@ -54,20 +63,27 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 	}
 	
 	public IResolvedTypes reentrantResolve(CancelIndicator monitor) {
-		this.monitor = monitor;
-		if (!sealed) {
-			sealed = true;
-			delegates = new IResolvedTypes[resolvers.size()];
-		} else {
-			next = next + 1;
+		try {
+			this.monitor = monitor;
+			if (!sealed) {
+				sealed = true;
+				delegates = new IResolvedTypes[resolvers.size()];
+			} else {
+				next = next + 1;
+			}
+			while(next < delegates.length) {
+				int next = this.next;
+				if (delegates[next] == null)
+					delegates[next] = resolvers.get(next).reentrantResolve(monitor);
+				this.next++;
+			}
+			return this;
+		} catch(OperationCanceledException e) {
+			allRootedExpressions.clear();
+			sealed = false;
+			Arrays.fill(delegates, IResolvedTypes.NULL);
+			throw e;
 		}
-		while(next < delegates.length) {
-			int next = this.next;
-			if (delegates[next] == null)
-				delegates[next] = resolvers.get(next).reentrantResolve(monitor);
-			this.next++;
-		}
-		return this;
 	}
 	
 	protected CancelIndicator getMonitor() {

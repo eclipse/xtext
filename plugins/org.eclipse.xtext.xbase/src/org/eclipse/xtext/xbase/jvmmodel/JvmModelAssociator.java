@@ -173,11 +173,13 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		if (container == null)
 			return;
 		final Map<EObject, JvmIdentifiableElement> mapping = getLogicalContainerMapping(container.eResource());
-		Iterator<Entry<EObject, JvmIdentifiableElement>> iterator = mapping.entrySet().iterator();
-		while (iterator.hasNext()) {
-			Entry<EObject, JvmIdentifiableElement> next = iterator.next();
-			if (next.getValue() == container) {
-				iterator.remove();
+		if (!mapping.isEmpty()) {
+			Iterator<Entry<EObject, JvmIdentifiableElement>> iterator = mapping.entrySet().iterator();
+			while (iterator.hasNext()) {
+				Entry<EObject, JvmIdentifiableElement> next = iterator.next();
+				if (next.getValue() == container) {
+					iterator.remove();
+				}
 			}
 		}
 	}
@@ -432,6 +434,8 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 			Set<EObject> targets = sourceToTargetMap.get(sourceElement);
 			targets.remove(jvmElement);
 		}
+		if (jvmElement instanceof JvmIdentifiableElement)
+			removeLogicalChildAssociation((JvmIdentifiableElement) jvmElement);
 	}
 
 	@SuppressWarnings("deprecation")
