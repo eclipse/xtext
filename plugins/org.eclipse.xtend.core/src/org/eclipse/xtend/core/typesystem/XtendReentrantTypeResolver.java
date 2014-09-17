@@ -14,7 +14,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.jvmmodel.AnonymousClassUtil;
@@ -24,7 +23,6 @@ import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
-import org.eclipse.xtend.core.xtend.XtendExecutable;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
@@ -32,7 +30,6 @@ import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
@@ -59,7 +56,6 @@ import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
-import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
@@ -350,55 +346,69 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 			super.computeTypes(resolvedTypes, session);
 		}
 	}
-
+	
 	@Override
 	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, EObject element) {
-		if (element instanceof XtendTypeDeclaration && (element.eClass() != XtendPackage.Literals.ANONYMOUS_CLASS || element == getRoot())) {
-			XtendTypeDeclaration typeDeclaration = (XtendTypeDeclaration) element;
-			computeXtendAnnotationTypes(resolvedTypes, featureScopeSession, ((XtendTypeDeclaration) element).getAnnotations());
-			for (XtendMember member : typeDeclaration.getMembers()) {
-				computeTypes(resolvedTypes, featureScopeSession, member);
+		if (element instanceof XtendTypeDeclaration) {
+			if (element == getRoot()) {
+				computeTypes(resolvedTypes, featureScopeSession, (XtendTypeDeclaration) element);
 			}
-		} else if (element instanceof XtendMember && element.eClass() != XtendPackage.Literals.ANONYMOUS_CLASS) {
-			XtendMember member = (XtendMember) element;
-			XExpression expression = null;
-			if (member instanceof XtendFunction) {
-				XtendFunction function = (XtendFunction) member;
-				expression = function.getExpression();
-				CreateExtensionInfo createInfo = function.getCreateExtensionInfo();
-				if (createInfo != null) {
-					IFeatureScopeSession session = function.isStatic() ? featureScopeSession : featureScopeSession.toInstanceContext();
-					computeTypes(resolvedTypes, session, createInfo.getCreateExpression());
-				}
-				for (XtendParameter parameter : function.getParameters()) {
-					computeXtendAnnotationTypes(resolvedTypes, featureScopeSession, parameter.getAnnotations());
-				}
-			} else if (member instanceof XtendConstructor) {
-				XtendConstructor constructor = (XtendConstructor) member;
-				expression = constructor.getExpression();
-				for (XtendParameter parameter : constructor.getParameters()) {
-					computeXtendAnnotationTypes(resolvedTypes, featureScopeSession, parameter.getAnnotations());
-				}
-			} else if (member instanceof XtendField) {
-				expression = ((XtendField) member).getInitialValue();
-			}
-			if (expression != null) {
-				if (getLogicalContainerProvider().getLogicalContainer(expression) == null) {
-					computeTypes(resolvedTypes, featureScopeSession, expression);
-				} else {
-					TreeIterator<EObject> iterator = EcoreUtil2.getAllNonDerivedContents(expression);
-					while(iterator.hasNext()) {
-						EObject next = iterator.next();
-						if (next instanceof AnonymousClass) {
-							computeTypes(resolvedTypes, featureScopeSession, next);
-							iterator.prune();
-						}
-					}
-				}
-			}
-			computeXtendAnnotationTypes(resolvedTypes, featureScopeSession, member.getAnnotations());
+		} else if (element instanceof XtendMember) {
+			computeTypes(resolvedTypes, featureScopeSession, (XtendMember) element);
 		} else {
 			super.computeTypes(resolvedTypes, featureScopeSession, element);
+		}
+	}
+
+	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
+			XtendTypeDeclaration typeDeclaration) {
+		computeXtendAnnotationTypes(resolvedTypes, featureScopeSession, typeDeclaration.getAnnotations());
+		for (XtendMember member : typeDeclaration.getMembers()) {
+			computeTypes(resolvedTypes, featureScopeSession, member);
+		}
+	}
+
+	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
+			XtendMember member) {
+		XExpression expression = null;
+		if (member instanceof XtendFunction) {
+			XtendFunction function = (XtendFunction) member;
+			expression = function.getExpression();
+			CreateExtensionInfo createInfo = function.getCreateExtensionInfo();
+			if (createInfo != null) {
+				computeDanglingExpressionType(resolvedTypes, featureScopeSession, function, createInfo.getCreateExpression());
+			}
+			for (XtendParameter parameter : function.getParameters()) {
+				computeXtendAnnotationTypes(resolvedTypes, featureScopeSession, parameter.getAnnotations());
+			}
+		} else if (member instanceof XtendConstructor) {
+			XtendConstructor constructor = (XtendConstructor) member;
+			expression = constructor.getExpression();
+			for (XtendParameter parameter : constructor.getParameters()) {
+				computeXtendAnnotationTypes(resolvedTypes, featureScopeSession, parameter.getAnnotations());
+			}
+		} else if (member instanceof XtendField) {
+			expression = ((XtendField) member).getInitialValue();
+		}
+		if (expression != null) {
+			computeDanglingExpressionType(resolvedTypes, featureScopeSession, member, expression);
+		}
+		computeXtendAnnotationTypes(resolvedTypes, featureScopeSession, member.getAnnotations());
+	}
+
+	/**
+	 * Computes the type of the given expression if it was not yet processed.
+	 * Used to compute types for expressions that are contained in heavily broken
+	 * models thus the model inferrer could not put them into proper contexts, or
+	 * for expressions that are dangling after an active annotation did its job in
+	 * an unexpected way. 
+	 */
+	protected void computeDanglingExpressionType(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
+			XtendMember member, XExpression expression) {
+		if (!allRootedExpressions.contains(expression)) {
+			rootedInstances.add(expression);
+			IFeatureScopeSession session = member == null || member.isStatic() ? featureScopeSession : featureScopeSession.toInstanceContext();
+			super.computeTypes(resolvedTypes, session, expression);
 		}
 	}
 
@@ -406,96 +416,30 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 	protected boolean isHandled(XExpression expression) {
 		EObject root = getRoot();
 		if (root instanceof XtendTypeDeclaration) {
-			XtendMember member = EcoreUtil2.getContainerOfType(expression, XtendMember.class);
-			if (member != null) {
-				if (member instanceof AnonymousClass) {
-					member = EcoreUtil2.getContainerOfType(member.eContainer(), XtendMember.class);
-				}
-				XExpression memberExpression = getExpression(member);
-				if (getLogicalContainerProvider().getLogicalContainer(memberExpression) == null) {
-					if (member.eClass() == XtendPackage.Literals.XTEND_MEMBER)
-						member = (XtendMember) member.eContainer();
-					boolean result = member == root || member.eContainer() == root;
-					return result;
-				}
-				
-				XAnnotation annotation = getOutermostAnnotation(expression);
-				if (annotation != null) {
-					if (getInferredElements(annotation).isEmpty()) {
-						return true;
-					}
-				}
-				return false;
-			}
-		} else {
-			XAnnotation annotation = getOutermostAnnotation(expression);
-			if (annotation != null) {
-				if (getInferredElements(annotation).isEmpty()) {
-					return false;
-				}
-			} else {
-				XtendMember member = EcoreUtil2.getContainerOfType(expression, XtendMember.class);
-				if (member instanceof XtendField || member instanceof XtendFunction) {
-					XExpression memberExpression = getExpression(member);
-					if (getLogicalContainerProvider().getLogicalContainer(memberExpression) == null) {
-						return false;
-					}
-				}
-			}
+			return doIsHandled(root, expression);
 		}
 		return super.isHandled(expression);
 	}
 
-	protected XExpression getExpression(XtendMember member) {
-		if (member instanceof XtendField) {
-			return ((XtendField) member).getInitialValue();
-		} 
-		if (member instanceof XtendExecutable) {
-			return ((XtendExecutable) member).getExpression();
-		}
-		EObject container = member.eContainer();
-		if (container instanceof XtendMember) {
-			return getExpression((XtendMember) container);
-		}
-		return null;
-	}
-
-	/* @Nullable */
-	protected XAnnotation getOutermostAnnotation(XExpression expression) {
-		XAnnotation annotation = EcoreUtil2.getContainerOfType(expression, XAnnotation.class);
-		while (annotation != null) {
-			XAnnotation parent = EcoreUtil2.getContainerOfType(annotation.eContainer(), XAnnotation.class);
-			if (parent != null) {
-				annotation = parent;
-			} else {
-				break;
+	protected boolean doIsHandled(EObject root, EObject instance) {
+		if (root.eClass() == XtendPackage.Literals.ANONYMOUS_CLASS) {
+			// the immediate constructor call is not processed by the anonymous class itself
+			AnonymousClass casted = (AnonymousClass) root;
+			if (casted == instance || EcoreUtil.isAncestor(casted.getConstructorCall(), instance)) {
+				return false;
 			}
 		}
-		return annotation;
+		boolean result = EcoreUtil.isAncestor(root, instance);
+		return result;
 	}
 
 	@Override
 	protected boolean isHandled(JvmIdentifiableElement identifiableElement) {
-		if (getRoot() instanceof XtendTypeDeclaration) {
-			boolean result = EcoreUtil.isAncestor(getRoot(), identifiableElement);
-			return result;
-		} else if (identifiableElement instanceof JvmFormalParameter
-				&& (identifiableElement.eContainingFeature() == XbasePackage.Literals.XCLOSURE__IMPLICIT_FORMAL_PARAMETERS
-				|| identifiableElement.eContainingFeature() == XbasePackage.Literals.XCLOSURE__DECLARED_FORMAL_PARAMETERS)) {
-			XtendMember member = EcoreUtil2.getContainerOfType(identifiableElement, XtendMember.class);
-			if (member != null) {
-				XExpression expression = getExpression(member);
-				if (expression != null && getLogicalContainerProvider().getLogicalContainer(expression) == null) {
-					return false;
-				}
-			}
+		EObject root = getRoot();
+		if (root instanceof XtendTypeDeclaration) {
+			return doIsHandled(root, identifiableElement);
 		}
 		return super.isHandled(identifiableElement);
-	}
-
-	protected boolean isAnnotationHolder(XtendMember member) {
-		return member.eClass() == XtendPackage.Literals.XTEND_MEMBER
-				|| member.eClass() == XtendPackage.Literals.XTEND_TYPE_DECLARATION;
 	}
 
 	@Override
@@ -675,8 +619,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 
 	protected void computeXtendAnnotationTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, List<XAnnotation> annotations) {
 		for (XAnnotation annotation : annotations) {
-			if (getInferredElements(annotation).isEmpty())
-				computeTypes(resolvedTypes, featureScopeSession, annotation);
+			computeDanglingExpressionType(resolvedTypes, featureScopeSession, null, annotation);
 		}
 	}
 

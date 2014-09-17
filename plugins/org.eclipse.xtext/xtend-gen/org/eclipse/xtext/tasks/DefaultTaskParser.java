@@ -84,9 +84,7 @@ public class DefaultTaskParser implements ITaskParser {
       boolean _isCaseSensitive = taskTags.isCaseSensitive();
       boolean _not = (!_isCaseSensitive);
       if (_not) {
-        int _bitwiseOr = (flags | Pattern.CASE_INSENSITIVE);
-        int _bitwiseOr_1 = (_bitwiseOr | Pattern.UNICODE_CASE);
-        flags = _bitwiseOr_1;
+        flags = ((flags | Pattern.CASE_INSENSITIVE) | Pattern.UNICODE_CASE);
       }
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("^.*((");

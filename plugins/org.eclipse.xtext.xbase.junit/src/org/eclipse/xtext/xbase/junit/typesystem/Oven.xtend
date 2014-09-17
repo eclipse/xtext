@@ -98,7 +98,7 @@ class Oven extends Assert {
 			} 
 			default: internalTypes.invoke("getTypeData", expression, Boolean.FALSE) as TypeData
 		}
-		assertNotNull("Type is not resolved. Expression: " + expression.toString, type)
+		assertTrue("Type is not resolved. Expression: " + expression.toString, if (expression instanceof XAbstractFeatureCall) expression.packageFragment || type != null else type != null)
 	}
 	
 	def void assertIdentifiableTypeIsResolved(JvmIdentifiableElement identifiable, IResolvedTypes types) {

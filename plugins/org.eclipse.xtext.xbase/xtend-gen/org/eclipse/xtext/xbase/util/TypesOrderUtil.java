@@ -45,11 +45,9 @@ public class TypesOrderUtil {
     {
       @Extension
       final TypeConformanceComputer typeConformanceComputer = this.services.getTypeConformanceComputer();
-      int _bitwiseOr = (RawTypeConformanceComputer.ALLOW_BOXING_UNBOXING | RawTypeConformanceComputer.ALLOW_PRIMITIVE_WIDENING);
-      int _bitwiseOr_1 = (_bitwiseOr | RawTypeConformanceComputer.ALLOW_RAW_TYPE_CONVERSION);
-      final int conformant = typeConformanceComputer.isConformant(previousTypeReference, actualTypeReference, _bitwiseOr_1);
-      int _bitwiseAnd = (conformant & RawTypeConformanceComputer.SUCCESS);
-      _xblockexpression = (_bitwiseAnd != 0);
+      final int conformant = typeConformanceComputer.isConformant(previousTypeReference, actualTypeReference, 
+        ((RawTypeConformanceComputer.ALLOW_BOXING_UNBOXING | RawTypeConformanceComputer.ALLOW_PRIMITIVE_WIDENING) | RawTypeConformanceComputer.ALLOW_RAW_TYPE_CONVERSION));
+      _xblockexpression = ((conformant & RawTypeConformanceComputer.SUCCESS) != 0);
     }
     return _xblockexpression;
   }
