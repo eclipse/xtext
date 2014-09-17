@@ -117,6 +117,54 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		assertTrue(names.contains(nameConverter.toQualifiedName("foo.bar.Person")));
 		assertTrue(names.contains(nameConverter.toQualifiedName("foo.bar.String")));
 	}
+	
+	@Test public void testImports_02() throws Exception {
+		XtextResource resource = getResource(new StringInputStream("import foo.* "), URI
+				.createURI("import.indextestlanguage"));
+		resource.getResourceSet().createResource(URI.createURI("foo.indextestlanguage")).load(
+				new StringInputStream(
+						"foo.bar { " 
+						+ "  entity Person {  " 
+						+ "    String name " 
+						+ "  } "
+						+ "  datatype String " 
+						+ "}"), null);
+
+		IScope scope = scopeProvider.getScope(resource.getContents().get(0), IndexTestLanguagePackage.eINSTANCE
+				.getFile_Elements());
+		List<QualifiedName> names = toListOfNames(scope.getAllElements());
+		assertEquals(names.toString(), 5, names.size());
+		assertTrue(names.contains(nameConverter.toQualifiedName("bar.Person")));
+		assertTrue(names.contains(nameConverter.toQualifiedName("bar.String")));
+		assertTrue(names.contains(nameConverter.toQualifiedName("bar")));
+		assertTrue(names.contains(nameConverter.toQualifiedName("foo.bar")));
+		assertTrue(names.contains(nameConverter.toQualifiedName("foo.bar.Person")));
+		assertTrue(names.contains(nameConverter.toQualifiedName("foo.bar.String")));
+	}
+	
+	@Test public void testImports_03() throws Exception {
+		XtextResource resource = getResource(new StringInputStream("import foo.bar"), URI
+				.createURI("import.indextestlanguage"));
+		resource.getResourceSet().createResource(URI.createURI("foo.indextestlanguage")).load(
+				new StringInputStream(
+						"foo.bar { " 
+						+ "  entity Person {  " 
+						+ "    String name " 
+						+ "  } "
+						+ "  datatype String " 
+						+ "}"), null);
+
+		IScope scope = scopeProvider.getScope(resource.getContents().get(0), IndexTestLanguagePackage.eINSTANCE
+				.getFile_Elements());
+		List<QualifiedName> names = toListOfNames(scope.getAllElements());
+		assertEquals(names.toString(), 5, names.size());
+		assertTrue(names.contains(nameConverter.toQualifiedName("bar.Person")));
+		assertTrue(names.contains(nameConverter.toQualifiedName("bar.String")));
+		assertTrue(names.contains(nameConverter.toQualifiedName("bar")));
+		assertTrue(names.contains(nameConverter.toQualifiedName("foo.bar")));
+		assertTrue(names.contains(nameConverter.toQualifiedName("foo.bar.Person")));
+		assertTrue(names.contains(nameConverter.toQualifiedName("foo.bar.String")));
+	}
 
 	@Test public void testRelativeContext() throws Exception {
 		final XtextResource resource = getResource(new StringInputStream(
