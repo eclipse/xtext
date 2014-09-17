@@ -7,9 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.List;
+
+import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
+import org.eclipse.xtext.xbase.typesystem.LocalVariableCapturer;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -31,7 +36,19 @@ public abstract class AbstractLogicalContainerAwareRootComputationState extends 
 	
 	@Override
 	protected XExpression getRootExpression() {
-		return ((LogicalContainerAwareReentrantTypeResolver) getResolver()).getLogicalContainerProvider().getAssociatedExpression(getMember());
+		XExpression result = ((LogicalContainerAwareReentrantTypeResolver) getResolver()).getLogicalContainerProvider().getAssociatedExpression(getMember());
+		if (result == null && member instanceof JvmFeature) {
+			// make sure we process dangling local classes if the expression has been removed by an
+			// active annotation
+			// 
+			// To some extend this is a workaround for a bug with #setBody which should
+			// take care of local classes, too
+			List<JvmGenericType> localClasses = ((JvmFeature) member).getLocalClasses();
+			for(JvmGenericType localClass: localClasses) {
+				LocalVariableCapturer.captureLocalVariables(localClass, this);
+			}
+		}
+		return result;
 	}
 	
 }
