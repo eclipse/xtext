@@ -28,6 +28,11 @@ public class TestSuiteInfoRegistry implements ITestSuiteInfo.Registry {
 		public void setDelegate(ITestSuiteInfo.Registry delegate) {
 			this.delegate = delegate;
 		}
+
+		@Override
+		public String toString() {
+			return delegate.toString();
+		}
 	}
 
 	public static class TestSuiteInfo implements ITestSuiteInfo {
