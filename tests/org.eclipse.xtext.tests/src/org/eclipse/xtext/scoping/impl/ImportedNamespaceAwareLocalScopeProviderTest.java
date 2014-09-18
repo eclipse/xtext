@@ -133,7 +133,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		IScope scope = scopeProvider.getScope(resource.getContents().get(0), IndexTestLanguagePackage.eINSTANCE
 				.getFile_Elements());
 		List<QualifiedName> names = toListOfNames(scope.getAllElements());
-		assertEquals(names.toString(), 5, names.size());
+		assertEquals(names.toString(), 6, names.size());
 		assertTrue(names.contains(nameConverter.toQualifiedName("bar.Person")));
 		assertTrue(names.contains(nameConverter.toQualifiedName("bar.String")));
 		assertTrue(names.contains(nameConverter.toQualifiedName("bar")));
@@ -157,9 +157,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		IScope scope = scopeProvider.getScope(resource.getContents().get(0), IndexTestLanguagePackage.eINSTANCE
 				.getFile_Elements());
 		List<QualifiedName> names = toListOfNames(scope.getAllElements());
-		assertEquals(names.toString(), 5, names.size());
-		assertTrue(names.contains(nameConverter.toQualifiedName("bar.Person")));
-		assertTrue(names.contains(nameConverter.toQualifiedName("bar.String")));
+		assertEquals(names.toString(), 4, names.size());
 		assertTrue(names.contains(nameConverter.toQualifiedName("bar")));
 		assertTrue(names.contains(nameConverter.toQualifiedName("foo.bar")));
 		assertTrue(names.contains(nameConverter.toQualifiedName("foo.bar.Person")));
