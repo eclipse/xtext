@@ -24,8 +24,13 @@ import com.google.common.collect.Maps;
  */
 public abstract class AbstractRuntimeJvmTypeProvider extends AbstractJvmTypeProvider {
 
+	@Deprecated
 	protected AbstractRuntimeJvmTypeProvider(ResourceSet resourceSet, IndexedJvmTypeAccess indexedJvmTypeAccess) {
 		super(resourceSet, indexedJvmTypeAccess);
+	}
+	
+	protected AbstractRuntimeJvmTypeProvider(ResourceSet resourceSet, IndexedJvmTypeAccess indexedJvmTypeAccess, TypeResourceServices services) {
+		super(resourceSet, indexedJvmTypeAccess, services);
 	}
 
 	protected static class TypeInResourceSetAdapter extends AdapterImpl {

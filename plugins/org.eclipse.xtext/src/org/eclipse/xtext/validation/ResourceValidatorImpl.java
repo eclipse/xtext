@@ -20,9 +20,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.resource.OperationCanceledManager;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.eclipse.xtext.util.Exceptions;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
@@ -60,7 +60,10 @@ public class ResourceValidatorImpl implements IResourceValidator {
 
 	@Inject
 	private IDiagnosticConverter converter;
-
+	
+	@Inject
+	private OperationCanceledManager operationCanceledManager;
+	
 	public List<Issue> validate(Resource resource, final CheckMode mode, CancelIndicator mon) {
 		StoppedTask task = Stopwatches.forTask("ResourceValidatorImpl.validation");
 		try {
@@ -88,7 +91,7 @@ public class ResourceValidatorImpl implements IResourceValidator {
 				if (monitor.isCanceled())
 					return Collections.emptyList();
 			} catch (RuntimeException e) {
-				Exceptions.throwIfOperationCanceledException(e);
+				operationCanceledManager.throwIfOperationCanceledException(e);
 				log.error(e.getMessage(), e);
 			}
 			return result;

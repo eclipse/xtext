@@ -30,7 +30,7 @@ public class ClasspathBasedTypeScopeTest extends AbstractTypeScopeTest {
 
 	@Before
 	public void setUp() throws Exception {
-		factory = new ClasspathTypeProviderFactory(getClass().getClassLoader());
+		factory = new ClasspathTypeProviderFactory(getClass().getClassLoader(), null);
 		resourceSet = new ResourceSetImpl();
 		typeScope = new ClasspathBasedTypeScope(factory.createTypeProvider(resourceSet), new IQualifiedNameConverter.DefaultImpl(),Predicates.<IEObjectDescription>alwaysTrue());
 	}

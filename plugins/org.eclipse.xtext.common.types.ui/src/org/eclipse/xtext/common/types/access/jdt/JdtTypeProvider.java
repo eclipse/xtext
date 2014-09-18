@@ -31,6 +31,7 @@ import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.AbstractJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess.ShadowedTypeException;
+import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.resource.SynchronizedXtextResourceSet;
 import org.eclipse.xtext.util.Strings;
@@ -70,9 +71,19 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	 * @since 2.4
 	 * @noreference This constructor is not intended to be referenced by clients.
 	 */
+	@Deprecated
 	public JdtTypeProvider(IJavaProject javaProject, ResourceSet resourceSet,
 			IndexedJvmTypeAccess indexedJvmTypeAccess, WorkingCopyOwner workingCopyOwner) {
-		super(resourceSet, indexedJvmTypeAccess);
+		this(javaProject, resourceSet, indexedJvmTypeAccess, workingCopyOwner, null);
+	}
+	
+	/**
+	 * @since 2.8
+	 * @noreference This constructor is not intended to be referenced by clients.
+	 */
+	public JdtTypeProvider(IJavaProject javaProject, ResourceSet resourceSet,
+			IndexedJvmTypeAccess indexedJvmTypeAccess, WorkingCopyOwner workingCopyOwner, TypeResourceServices services) {
+		super(resourceSet, indexedJvmTypeAccess, services);
 		if (javaProject == null)
 			throw new IllegalArgumentException("javaProject may not be null");
 		this.javaProject = javaProject;
@@ -212,6 +223,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 
 	private TypeResource createResource(URI resourceURI, IType type) {
 		TypeResource resource = new TypeResource(resourceURI);
+		resource.setTypeResourceServices(services);
 		resource.setIndexedJvmTypeAccess(getIndexedJvmTypeAccess());
 		getResourceSet().getResources().add(resource);
 		if (type.exists()) {
