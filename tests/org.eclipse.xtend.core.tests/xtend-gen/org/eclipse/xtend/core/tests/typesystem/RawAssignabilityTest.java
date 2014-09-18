@@ -23,11 +23,8 @@ public class RawAssignabilityTest extends CommonAssignabilityTest {
   public boolean doIsAssignable(final LightweightTypeReference lhs, final LightweightTypeReference rhs) {
     TypeConformanceComputationArgument _typeConformanceComputationArgument = new TypeConformanceComputationArgument(true, false, true, true, false, true);
     final int result = lhs.internalIsAssignableFrom(rhs, _typeConformanceComputationArgument);
-    int _bitwiseAnd = (result & ConformanceFlags.RAW_TYPE);
-    boolean _notEquals = (_bitwiseAnd != 0);
-    Assert.assertTrue(_notEquals);
-    int _bitwiseAnd_1 = (result & ConformanceFlags.SUCCESS);
-    return (_bitwiseAnd_1 != 0);
+    Assert.assertTrue(((result & ConformanceFlags.RAW_TYPE) != 0));
+    return ((result & ConformanceFlags.SUCCESS) != 0);
   }
   
   @Test
