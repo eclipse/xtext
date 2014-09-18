@@ -13,6 +13,7 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.text.IDocument;
@@ -31,7 +32,7 @@ import org.eclipse.xtext.ui.editor.model.IXtextModelListenerExtension;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.reconciler.XtextReconcilerDebugger;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
@@ -300,10 +301,12 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 			new Job("calculating highlighting") {
 				@Override
 				protected IStatus run(IProgressMonitor monitor) {
-					((XtextDocument) sourceViewer.getDocument()).readOnly(new IUnitOfWork.Void<XtextResource>() {
+					((XtextDocument) sourceViewer.getDocument()).readOnly(new CancelableUnitOfWork<Void,XtextResource>() {
 						@Override
-						public void process(XtextResource state) throws Exception {
-							modelChanged(state);
+						public java.lang.Void exec(XtextResource state, CancelIndicator cancelIndicator)
+								throws Exception {
+							modelChanged(state, cancelIndicator);
+							return null;
 						}
 					});
 					return Status.OK_STATUS;
@@ -335,24 +338,18 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 			if (highlightingPresenter == null)
 				return;
 
-			highlightingPresenter.setCanceled(cancelIndicator.isCanceled());
-			
-			if (highlightingPresenter.isCanceled())
-				return;
+			checkCanceled(cancelIndicator, highlightingPresenter);
 
 			startReconcilingPositions();
 
-			if (!highlightingPresenter.isCanceled() && !cancelIndicator.isCanceled()) {
-				reconcilePositions(resource);
-			}
+			checkCanceled(cancelIndicator, highlightingPresenter);
+			reconcilePositions(resource);
 
-			final TextPresentation[] textPresentation = new TextPresentation[1];
-			if (!highlightingPresenter.isCanceled()) {
-				textPresentation[0] = highlightingPresenter.createPresentation(addedPositions, removedPositions);
-			}
-
-			if (!highlightingPresenter.isCanceled() && !cancelIndicator.isCanceled())
-				updatePresentation(textPresentation[0], addedPositions, removedPositions);
+			checkCanceled(cancelIndicator, highlightingPresenter);
+			final TextPresentation textPresentation = highlightingPresenter.createPresentation(addedPositions, removedPositions);
+			
+			checkCanceled(cancelIndicator, highlightingPresenter);
+			updatePresentation(textPresentation, addedPositions, removedPositions);
 
 		} finally {
 			stopReconcilingPositions();
@@ -360,6 +357,14 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 				reconciling = false;
 			}
 		}
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	protected void checkCanceled(CancelIndicator cancelIndicator, final HighlightingPresenter highlightingPresenter) {
+		if (highlightingPresenter.isCanceled() || cancelIndicator.isCanceled())
+			throw new OperationCanceledException();
 	}
 
 	/**

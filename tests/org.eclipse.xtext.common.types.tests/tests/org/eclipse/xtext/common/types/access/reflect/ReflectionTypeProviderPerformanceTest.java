@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.access.impl.AbstractTypeProviderPerformanceTest;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
+import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
 import org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguageInjectorProvider;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -33,11 +34,14 @@ public class ReflectionTypeProviderPerformanceTest extends AbstractTypeProviderP
 	@Inject
 	private IndexedJvmTypeAccess indexedJvmTypeAccess;
 	
+	@Inject
+	private TypeResourceServices services;
+	
 	private ReflectionTypeProvider typeProvider;
 
 	@Before
 	public void setUp() throws Exception {
-		typeProvider = new ReflectionTypeProvider(getClass().getClassLoader(), resourceSet, indexedJvmTypeAccess);
+		typeProvider = new ReflectionTypeProvider(getClass().getClassLoader(), resourceSet, indexedJvmTypeAccess, services);
 	}
 	
 	@After

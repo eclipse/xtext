@@ -22,6 +22,7 @@ import org.eclipse.xtext.common.types.access.impl.AbstractRuntimeJvmTypeProvider
 import org.eclipse.xtext.common.types.access.impl.ClassFinder;
 import org.eclipse.xtext.common.types.access.impl.ClassMirror;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
+import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -36,8 +37,13 @@ public class ReflectionTypeProvider extends AbstractRuntimeJvmTypeProvider {
 	
 	private final ReflectURIHelper uriHelper;
 	
+	@Deprecated
 	public ReflectionTypeProvider(ClassLoader classLoader, ResourceSet resourceSet, IndexedJvmTypeAccess indexedJvmTypeAccess) {
-		super(resourceSet, indexedJvmTypeAccess);
+		this(classLoader, resourceSet, indexedJvmTypeAccess, null);
+	}
+	
+	public ReflectionTypeProvider(ClassLoader classLoader, ResourceSet resourceSet, IndexedJvmTypeAccess indexedJvmTypeAccess, TypeResourceServices services) {
+		super(resourceSet, indexedJvmTypeAccess, services);
 		classFinder = createClassFinder(classLoader);
 		uriHelper = createClassURIHelper();
 		reflectionTypeFactory = createDeclaredTypeFactory();

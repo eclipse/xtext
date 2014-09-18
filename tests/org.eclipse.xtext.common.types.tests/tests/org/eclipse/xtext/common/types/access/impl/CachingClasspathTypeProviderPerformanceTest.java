@@ -29,13 +29,13 @@ public class CachingClasspathTypeProviderPerformanceTest extends AbstractTypePro
 	@Inject
 	private ResourceSet resourceSet;
 
-	private ClasspathTypeProvider typeProvider;
-	
+	@Inject
 	private CachingClasspathTypeProviderFactory typeProviderFactory;
+
+	private ClasspathTypeProvider typeProvider;
 
 	@Before
 	public void setUp() throws Exception {
-		typeProviderFactory = new CachingClasspathTypeProviderFactory(getClass().getClassLoader()); 
 		typeProvider = typeProviderFactory.createTypeProvider(resourceSet);
 	}
 	

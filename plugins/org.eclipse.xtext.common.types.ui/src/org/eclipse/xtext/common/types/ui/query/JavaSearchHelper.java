@@ -90,7 +90,7 @@ public class JavaSearchHelper {
 				}
 				if (++i % 10 == 0) {
 					if (subMonitor.isCanceled()) {
-						return;
+						return; // not throwing OperationCanceledException, as the client in JDT doesn't seem to handle it properly
 					}
 					subMonitor.worked(1);
 				}

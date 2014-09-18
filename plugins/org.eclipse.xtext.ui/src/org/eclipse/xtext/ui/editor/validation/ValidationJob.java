@@ -18,6 +18,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.util.concurrent.IReadAccess;
@@ -61,7 +62,12 @@ public class ValidationJob extends Job {
 	protected IStatus run(final IProgressMonitor monitor) {
 		if (monitor.isCanceled())
 			return Status.CANCEL_STATUS;
-		List<Issue> issues = createIssues(monitor);
+		List<Issue> issues = null;
+		try {
+			issues = createIssues(monitor);
+		} catch (OperationCanceledError canceled) {
+			return Status.CANCEL_STATUS;
+		}
 		if (monitor.isCanceled())
 			return Status.CANCEL_STATUS;
 		this.validationIssueProcessor.processIssues(issues, monitor);
@@ -75,7 +81,7 @@ public class ValidationJob extends Job {
 				.readOnly(new CancelableUnitOfWork<List<Issue>, XtextResource>() {
 					@Override
 					public List<Issue> exec(XtextResource resource, final CancelIndicator outerIndicator) throws Exception {
-						if (resource == null || resource.isValidationDisabled() || outerIndicator.isCanceled())
+						if (resource == null || resource.isValidationDisabled())
 							return Collections.emptyList();
 						return resourceValidator.validate(resource, getCheckMode(), new CancelIndicator() {
 							public boolean isCanceled() {

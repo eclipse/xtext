@@ -20,9 +20,15 @@ public class CachingClasspathTypeProvider extends ClasspathTypeProvider {
 
 	private ITypeFactory<BinaryClass, JvmDeclaredType> reusedFactory;
 
+	@Deprecated
 	public CachingClasspathTypeProvider(ClassLoader classLoader, ResourceSet resourceSet,
 			IndexedJvmTypeAccess indexedJvmTypeAccess, ITypeFactory<BinaryClass, JvmDeclaredType> reusedFactory) {
-		super(classLoader, resourceSet, indexedJvmTypeAccess);
+		this(classLoader, resourceSet, indexedJvmTypeAccess, reusedFactory, null);
+	}
+	
+	public CachingClasspathTypeProvider(ClassLoader classLoader, ResourceSet resourceSet,
+			IndexedJvmTypeAccess indexedJvmTypeAccess, ITypeFactory<BinaryClass, JvmDeclaredType> reusedFactory, TypeResourceServices services) {
+		super(classLoader, resourceSet, indexedJvmTypeAccess, services);
 		this.reusedFactory = reusedFactory;
 	}
 	
