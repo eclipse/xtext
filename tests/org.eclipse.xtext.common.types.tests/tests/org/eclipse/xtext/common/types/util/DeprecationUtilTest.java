@@ -24,7 +24,7 @@ import com.google.common.base.Predicate;
  */
 public class DeprecationUtilTest extends Assert {
 
-	private ClasspathTypeProvider typesProvider = new ClasspathTypeProviderFactory(getClass().getClassLoader()).createTypeProvider();
+	private ClasspathTypeProvider typesProvider = new ClasspathTypeProviderFactory(getClass().getClassLoader(), null).createTypeProvider();
 
 	@Test
 	public void testDeprecationUtil() {

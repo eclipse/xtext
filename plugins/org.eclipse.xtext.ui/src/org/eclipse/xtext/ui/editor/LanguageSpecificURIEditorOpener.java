@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
@@ -27,6 +28,7 @@ import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.ITextRegion;
@@ -95,21 +97,32 @@ public class LanguageSpecificURIEditorOpener implements IURIEditorOpener {
 			final int indexInList, final boolean select) {
 		final XtextEditor xtextEditor = EditorUtils.getXtextEditor(openEditor);
 		if (xtextEditor != null) {
-			xtextEditor.getDocument().priorityReadOnly(new IUnitOfWork.Void<XtextResource>() {
-				@Override
-				public void process(XtextResource resource) throws Exception {
-					if (resource != null) {
-						EObject object = findEObjectByURI(uri, resource);
-						if (object != null) {
-							ITextRegion location = (crossReference != null) ? locationProvider
-									.getSignificantTextRegion(object, crossReference, indexInList)
-									: locationProvider.getSignificantTextRegion(object);
-							if (select)
-								xtextEditor.selectAndReveal(location.getOffset(), location.getLength());
+			boolean success = false;
+			int tries = 0;
+			while (!success || tries >= 5) {
+				try {
+					xtextEditor.getDocument().priorityReadOnly(new IUnitOfWork.Void<XtextResource>() {
+						@Override
+						public void process(XtextResource resource) throws Exception {
+							if (resource != null) {
+								EObject object = findEObjectByURI(uri, resource);
+								if (object != null) {
+									ITextRegion location = (crossReference != null) ? locationProvider
+											.getSignificantTextRegion(object, crossReference, indexInList)
+											: locationProvider.getSignificantTextRegion(object);
+									if (select)
+										xtextEditor.selectAndReveal(location.getOffset(), location.getLength());
+								}
+							}
 						}
-					}
+					});
+					success = true;
+				} catch (OperationCanceledException e) {
+				} catch (OperationCanceledError e) {
+				} finally {
+					tries++;
 				}
-			});
+			}
 		}
 	}
 

@@ -26,7 +26,6 @@ import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IBatchLinkableResource;
 import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.eclipse.xtext.util.Exceptions;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -110,10 +109,9 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 				}
 				return basicGetEObject(uriFragment);
 			} catch (RuntimeException e) {
-				if (Exceptions.getOperationCanceledException(e) == null) {
-					getErrors().add(new ExceptionDiagnostic(e));
-					log.error("resolution of uriFragment '" + uriFragment + "' failed.", e);
-				}
+				operationCanceledManager.throwIfOperationCanceledException(e);
+				getErrors().add(new ExceptionDiagnostic(e));
+				log.error("resolution of uriFragment '" + uriFragment + "' failed.", e);
 				// wrapped because the javaDoc of this method states that WrappedExceptions are thrown
 				// logged because EcoreUtil.resolve will ignore any exceptions.
 				throw new WrappedException(e);

@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.hover;
 
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextViewer;
@@ -73,19 +74,23 @@ public abstract class AbstractEObjectHover extends AbstractHover implements IEOb
 		IXtextDocument xtextDocument = XtextDocumentUtil.get(textViewer);
 		if(xtextDocument == null) 
 			return null;
-		return xtextDocument.priorityReadOnly(new IUnitOfWork<Object, XtextResource>() {
-			public Object exec(XtextResource state) throws Exception {
-				// resource can be null e.g. read only zip/jar entry
-				if (state == null) {
+		try {
+			return xtextDocument.priorityReadOnly(new IUnitOfWork<Object, XtextResource>() {
+				public Object exec(XtextResource state) throws Exception {
+					// resource can be null e.g. read only zip/jar entry
+					if (state == null) {
+						return null;
+					}
+					Pair<EObject, IRegion> element = getXtextElementAt(state, hoverRegion.getOffset());
+					if (element != null && element.getFirst() != null) {
+						return getHoverInfo(element.getFirst(), textViewer, hoverRegion);
+					}
 					return null;
 				}
-				Pair<EObject, IRegion> element = getXtextElementAt(state, hoverRegion.getOffset());
-				if (element != null && element.getFirst() != null) {
-					return getHoverInfo(element.getFirst(), textViewer, hoverRegion);
-				}
-				return null;
-			}
-		});
+			});
+		} catch (OperationCanceledException e) {
+			return null;
+		}
 	}
 
 	public abstract Object getHoverInfo(final EObject eObject, final ITextViewer textViewer,
