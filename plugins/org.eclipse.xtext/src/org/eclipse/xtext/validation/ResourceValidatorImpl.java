@@ -88,7 +88,7 @@ public class ResourceValidatorImpl implements IResourceValidator {
 				if (monitor.isCanceled())
 					return Collections.emptyList();
 			} catch (RuntimeException e) {
-				Exceptions.throwUncheckedException(e);
+				Exceptions.throwIfOperationCanceledException(e);
 				log.error(e.getMessage(), e);
 			}
 			return result;
