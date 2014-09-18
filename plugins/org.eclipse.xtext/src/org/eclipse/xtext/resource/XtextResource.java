@@ -36,6 +36,7 @@ import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 import org.eclipse.xtext.serializer.ISerializer;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.LazyStringInputStream;
 import org.eclipse.xtext.util.ReplaceRegion;
@@ -92,6 +93,12 @@ public class XtextResource extends ResourceImpl {
 	@Inject
 	@Named(Constants.LANGUAGE_NAME) 
 	private String languageName;
+	
+	/**
+	 * @since 2.8
+	 */
+	@Inject
+	protected OperationCanceledManager operationCanceledManager;
 	
 	private long modificationStamp = Integer.MIN_VALUE;
 	

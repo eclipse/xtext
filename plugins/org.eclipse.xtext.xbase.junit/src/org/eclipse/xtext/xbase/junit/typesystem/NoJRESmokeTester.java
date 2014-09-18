@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
+import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.junit4.smoketest.ScenarioProcessor;
@@ -47,12 +48,15 @@ public class NoJRESmokeTester extends ScenarioProcessor {
 	@Inject
 	private Provider<ResourceValidatorImpl> resourceValidatorProvider;
 	
+	@Inject
+	private TypeResourceServices typeResourceServices; 
+	
 	@Override
 	public void processFile(String data) throws Exception {
 		XtextResourceSet resourceSet = new XtextResourceSet();
 		NoOpClassLoader classLoader = new NoOpClassLoader();
 		resourceSet.setClasspathURIContext(classLoader);
-		ClasspathTypeProviderFactory factory = new ClasspathTypeProviderFactory(classLoader);
+		ClasspathTypeProviderFactory factory = new ClasspathTypeProviderFactory(classLoader, typeResourceServices);
 		factory.createTypeProvider(resourceSet);
 		EObject parsed = parseHelperNoJRE.parse(data, resourceSet);
 		EcoreUtil.resolveAll(parsed);

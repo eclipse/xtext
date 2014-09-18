@@ -37,6 +37,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback.NullImpl;
 import org.eclipse.xtext.ui.editor.SchedulingRuleFactory;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -103,7 +104,11 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 		currentJob = new Job(JOB_NAME) {
 			@Override
 			public IStatus run(IProgressMonitor monitor) {
-				return updateAnnotationModel(monitor);
+				try {
+					return updateAnnotationModel(monitor);
+				} catch (OperationCanceledError e) {
+					throw e.getWrapped();
+				}
 			}
 		};
 		currentJob.setRule(SCHEDULING_RULE);
@@ -119,32 +124,28 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 		}
 		IXtextDocument xtextDocument = xtextEditor.getDocument();
 		IAnnotationModel annotationModel = xtextEditor.getInternalSourceViewer().getAnnotationModel();
-		try {
-			Map<Annotation, Position> annotationToPosition = xtextDocument
-					.readOnly(new CancelableUnitOfWork<Map<Annotation, Position>, XtextResource>() {
-						@Override
-						public Map<Annotation, Position> exec(XtextResource xtextResource, CancelIndicator cancelIndicator) {
-							if (xtextResource == null)
-								return Collections.emptyMap();
-							return createOverrideIndicatorAnnotationMap(xtextResource, cancelIndicator);
-						}
-			});
-			if (monitor.isCanceled())
-				return Status.CANCEL_STATUS;
-			if (annotationModel instanceof IAnnotationModelExtension) {
-				IAnnotationModelExtension annotationModelExtension = (IAnnotationModelExtension) annotationModel;
-				Object lockObject = getLockObject(annotationModel);
-				synchronized (lockObject) {
-					annotationModelExtension.replaceAnnotations(
-							overrideIndicatorAnnotations.toArray(new Annotation[overrideIndicatorAnnotations.size()]),
-							annotationToPosition);
-				}
-				overrideIndicatorAnnotations = annotationToPosition.keySet();
+		Map<Annotation, Position> annotationToPosition = xtextDocument
+				.readOnly(new CancelableUnitOfWork<Map<Annotation, Position>, XtextResource>() {
+					@Override
+					public Map<Annotation, Position> exec(XtextResource xtextResource, CancelIndicator cancelIndicator) {
+						if (xtextResource == null)
+							return Collections.emptyMap();
+						return createOverrideIndicatorAnnotationMap(xtextResource, cancelIndicator);
+					}
+		});
+		if (monitor.isCanceled())
+			throw new OperationCanceledException();
+		if (annotationModel instanceof IAnnotationModelExtension) {
+			IAnnotationModelExtension annotationModelExtension = (IAnnotationModelExtension) annotationModel;
+			Object lockObject = getLockObject(annotationModel);
+			synchronized (lockObject) {
+				annotationModelExtension.replaceAnnotations(
+						overrideIndicatorAnnotations.toArray(new Annotation[overrideIndicatorAnnotations.size()]),
+						annotationToPosition);
 			}
-			return Status.OK_STATUS;
-		} catch(OperationCanceledException exc) {
-			return Status.CANCEL_STATUS;
+			overrideIndicatorAnnotations = annotationToPosition.keySet();
 		}
+		return Status.OK_STATUS;
 	}
 
 	private Object getLockObject(IAnnotationModel annotationModel) {

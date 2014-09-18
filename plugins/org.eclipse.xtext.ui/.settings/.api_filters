@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.xtext.ui" version="2">
+    <resource path="src/org/eclipse/xtext/ui/editor/model/XtextDocument.java" type="org.eclipse.xtext.ui.editor.model.XtextDocument">
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.model.XtextDocument"/>
+                <message_argument value="getOutdatedStateCancelIndicator(XtextResource)"/>
+            </message_arguments>
+        </filter>
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.model.XtextDocument"/>
+                <message_argument value="isOutdated()"/>
+            </message_arguments>
+        </filter>
+        <filter id="338886760">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.model.XtextDocument.OutdatedStateAdapter"/>
+                <message_argument value="org.eclipse.xtext.ui_2.8.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>

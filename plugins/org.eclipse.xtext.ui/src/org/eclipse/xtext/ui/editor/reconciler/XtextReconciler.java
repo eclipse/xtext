@@ -32,13 +32,16 @@ import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.ISourceViewerExtension4;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.resource.OutdatedStateManager;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.ui.editor.ISourceViewerAware;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.IXtextDocumentContentObserver;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.DiffUtil;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -75,6 +78,12 @@ public class XtextReconciler extends Job implements IReconciler {
 	
 	@Inject
 	private XtextReconcilerDebugger debugger;
+	
+	@Inject 
+	private OutdatedStateManager outdatedStateManager;
+	
+	@Inject 
+	private OperationCanceledManager canceledManager;
 	
 	private LinkedBlockingQueue<DocumentEvent> pendingChanges = new LinkedBlockingQueue<DocumentEvent>();
 
@@ -125,6 +134,7 @@ public class XtextReconciler extends Job implements IReconciler {
 					});
 				}
 			} catch (Exception exc) {
+				canceledManager.throwIfOperationCanceledException(exc);
 				log.error("Error while forcing reconciliation", exc);
 			}
 			if (sessionStarted && !paused) {
@@ -391,7 +401,8 @@ public class XtextReconciler extends Job implements IReconciler {
 		if (replaceRegionToBeProcessed != null) {
 			try {
 				if (strategy instanceof IReconcilingStrategyExtension) {
-					((IReconcilingStrategyExtension) strategy).setProgressMonitor(new CancelIndicatorBasedProgressMonitor(XtextDocument.getOutdatedStateCancelIndicator(state)));
+					CancelIndicator cancelIndicator = outdatedStateManager.newCancelIndiciator(state.getResourceSet());
+					((IReconcilingStrategyExtension) strategy).setProgressMonitor(new CancelIndicatorBasedProgressMonitor(cancelIndicator));
 				}
 				if (strategy instanceof XtextDocumentReconcileStrategy) {
 					XtextDocumentReconcileStrategy xtextDocumentReconcileStrategy = (XtextDocumentReconcileStrategy) strategy;

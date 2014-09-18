@@ -9,7 +9,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -29,6 +28,7 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
@@ -39,7 +39,6 @@ import org.eclipse.xtext.validation.IssueSeveritiesProvider;
 import org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -66,41 +65,17 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
   @Extension
   private JvmTypeExtensions _jvmTypeExtensions;
   
+  @Inject
+  private OperationCanceledManager operationCanceledManager;
+  
   public List<Issue> validate(final Resource resource, final CheckMode mode, final CancelIndicator mon) {
-    try {
-      final Provider<List<Issue>> _function = new Provider<List<Issue>>() {
-        public List<Issue> get() {
-          List<Issue> _xblockexpression = null;
-          {
-            final List<Issue> result = CachingResourceValidatorImpl.super.validate(resource, mode, mon);
-            List<Issue> _xifexpression = null;
-            boolean _and = false;
-            boolean _notEquals = (!Objects.equal(mon, null));
-            if (!_notEquals) {
-              _and = false;
-            } else {
-              boolean _isCanceled = mon.isCanceled();
-              _and = _isCanceled;
-            }
-            if (_and) {
-              throw new OperationCanceledException();
-            } else {
-              _xifexpression = result;
-            }
-            _xblockexpression = _xifexpression;
-          }
-          return _xblockexpression;
-        }
-      };
-      return this.cache.<List<Issue>>get(mode, resource, _function);
-    } catch (final Throwable _t) {
-      if (_t instanceof OperationCanceledException) {
-        final OperationCanceledException exc = (OperationCanceledException)_t;
-        return CollectionLiterals.<Issue>emptyList();
-      } else {
-        throw Exceptions.sneakyThrow(_t);
+    final Provider<List<Issue>> _function = new Provider<List<Issue>>() {
+      public List<Issue> get() {
+        CachingResourceValidatorImpl.this.operationCanceledManager.checkCanceled(mon);
+        return CachingResourceValidatorImpl.super.validate(resource, mode, mon);
       }
-    }
+    };
+    return this.cache.<List<Issue>>get(mode, resource, _function);
   }
   
   protected void collectResourceDiagnostics(final Resource resource, final CancelIndicator monitor, final IAcceptor<Issue> acceptor) {
@@ -165,10 +140,7 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
       Iterable<JvmMember> _iterable = IteratorExtensions.<JvmMember>toIterable(_filter_2);
       for (final JvmMember jvmMember : _iterable) {
         {
-          boolean _isCanceled = monitor.isCanceled();
-          if (_isCanceled) {
-            return;
-          }
+          this.operationCanceledManager.checkCanceled(monitor);
           final EObject sourceElement = this._iJvmModelAssociations.getPrimarySourceElement(jvmMember);
           boolean _tripleEquals = (sourceElement == null);
           if (_tripleEquals) {

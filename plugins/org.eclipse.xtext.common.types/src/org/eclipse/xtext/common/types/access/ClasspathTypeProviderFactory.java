@@ -9,6 +9,7 @@ package org.eclipse.xtext.common.types.access;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
+import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
 import com.google.inject.Inject;
@@ -19,10 +20,12 @@ import com.google.inject.Inject;
 public class ClasspathTypeProviderFactory extends AbstractTypeProviderFactory {
 
 	private final ClassLoader classLoader;
+	protected final TypeResourceServices services;
 	
 	@Inject
-	public ClasspathTypeProviderFactory(ClassLoader classLoader) {
+	public ClasspathTypeProviderFactory(ClassLoader classLoader, TypeResourceServices services) {
 		this.classLoader = classLoader;
+		this.services = services;
 	}
 	
 	public ClasspathTypeProvider createTypeProvider(ResourceSet resourceSet) {
@@ -33,7 +36,7 @@ public class ClasspathTypeProviderFactory extends AbstractTypeProviderFactory {
 	}
 
 	protected ClasspathTypeProvider createClasspathTypeProvider(ResourceSet resourceSet) {
-		return new ClasspathTypeProvider(getClassLoader(resourceSet), resourceSet, getIndexedJvmTypeAccess());
+		return new ClasspathTypeProvider(getClassLoader(resourceSet), resourceSet, getIndexedJvmTypeAccess(), services);
 	}
 	
 	public ClassLoader getClassLoader(ResourceSet resourceSet) {
