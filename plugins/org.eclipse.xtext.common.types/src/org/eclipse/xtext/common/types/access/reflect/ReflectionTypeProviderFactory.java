@@ -10,6 +10,7 @@ package org.eclipse.xtext.common.types.access.reflect;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.access.AbstractTypeProviderFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
 import com.google.inject.Inject;
@@ -20,10 +21,12 @@ import com.google.inject.Inject;
 public class ReflectionTypeProviderFactory extends AbstractTypeProviderFactory {
 
 	private final ClassLoader classLoader;
+	protected final TypeResourceServices services;
 	
 	@Inject
-	public ReflectionTypeProviderFactory(ClassLoader classLoader) {
+	public ReflectionTypeProviderFactory(ClassLoader classLoader, TypeResourceServices services) {
 		this.classLoader = classLoader;
+		this.services = services;
 	}
 	
 	public ReflectionTypeProvider createTypeProvider(ResourceSet resourceSet) {
@@ -34,7 +37,7 @@ public class ReflectionTypeProviderFactory extends AbstractTypeProviderFactory {
 	}
 
 	protected ReflectionTypeProvider createClasspathTypeProvider(ResourceSet resourceSet) {
-		return new ReflectionTypeProvider(getClassLoader(resourceSet), resourceSet, getIndexedJvmTypeAccess());
+		return new ReflectionTypeProvider(getClassLoader(resourceSet), resourceSet, getIndexedJvmTypeAccess(), services);
 	}
 	
 	public ClassLoader getClassLoader(ResourceSet resourceSet) {

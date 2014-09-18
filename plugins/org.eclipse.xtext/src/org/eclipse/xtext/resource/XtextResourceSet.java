@@ -49,6 +49,31 @@ public class XtextResourceSet extends ResourceSetImpl {
 		return Collections.unmodifiableMap(normalizationMap);
 	}
 	
+	private volatile int outdatedStamp = 0;
+	private volatile int currentVersion = 0;
+	
+	/**
+	 * @since 2.8
+	 */
+	public void markOutdated() {
+		this.outdatedStamp++;
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public void markSynced() {
+		new Exception().printStackTrace();
+		this.currentVersion = outdatedStamp;
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public boolean isOutdated() {
+		return outdatedStamp != currentVersion;
+	}
+	
 	/**
 	 * @since 2.3
 	 */

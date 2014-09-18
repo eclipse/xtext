@@ -40,6 +40,7 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
@@ -128,9 +129,8 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 				if (document == null) {
 					return Status.OK_STATUS;
 				}
-				if (monitor.isCanceled()) {
-					return Status.CANCEL_STATUS;
-				}
+				if (monitor.isCanceled())
+					throw new OperationCanceledException();
 				int coarseGrainedChangesSeen = coarseGrainedChanges.get();
 				final boolean[] isReparseRequired = new boolean[] { coarseGrainedChangesSeen > 0 };
 				final Pair<IResourceDescription.Event, Integer> event = mergePendingDeltas();
@@ -142,7 +142,9 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 									return null;
 								}
 								Collection<Resource> affectedResources = collectAffectedResources(resource, event.getFirst());
-								if (monitor.isCanceled() || !affectedResources.isEmpty()) {
+								if (monitor.isCanceled())
+									throw new OperationCanceledException();
+								if (!affectedResources.isEmpty()) {
 									return affectedResources;
 								}
 								if (!isReparseRequired[0]) {
@@ -152,9 +154,8 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 							}
 					
 						});
-				if (monitor.isCanceled()) {
-					return Status.CANCEL_STATUS;
-				}
+				if (monitor.isCanceled())
+					throw new OperationCanceledException();
 				unloadAffectedResourcesAndReparseDocument(document, affectedResources, isReparseRequired[0]);
 				for (int i = 0; i < event.getSecond(); i++) {
 					pendingChanges.poll();
@@ -164,6 +165,7 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 			} catch (OperationCanceledException e) {
 				throw e;
 			} catch (Throwable e) {
+				operationCanceledManager.rethrowUnwrapped(e);
 				LOG.error("Error updating dirty state editor", e);
 				return Status.OK_STATUS;
 			}
@@ -319,6 +321,9 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 
 	@Inject
 	private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
+	
+	@Inject  
+	private OperationCanceledManager operationCanceledManager;
 
 	private volatile IDirtyStateEditorSupportClient currentClient;
 	

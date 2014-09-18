@@ -64,14 +64,22 @@ public abstract class AbstractJvmTypeProvider implements IJvmTypeProvider, Resou
 	private final PrimitiveTypeFactory primitiveTypeFactory;
 
 	private final IndexedJvmTypeAccess indexedJvmTypeAccess;
+
+	protected final TypeResourceServices services;
 	
+	@Deprecated
 	protected AbstractJvmTypeProvider(ResourceSet resourceSet, IndexedJvmTypeAccess indexedJvmTypeAccess) {
+		this(resourceSet, indexedJvmTypeAccess, null);
+	}
+	
+	protected AbstractJvmTypeProvider(ResourceSet resourceSet, IndexedJvmTypeAccess indexedJvmTypeAccess, TypeResourceServices services) {
 		if (resourceSet == null)
 			throw new IllegalArgumentException("resourceSet may not be null");
 		this.indexedJvmTypeAccess = indexedJvmTypeAccess;
 		this.resourceSet = resourceSet;
 		registerProtocol(resourceSet);
 		primitiveTypeFactory = new PrimitiveTypeFactory();
+		this.services = services;
 	}
 
 	protected void registerProtocol(ResourceSet resourceSet) {
@@ -99,6 +107,7 @@ public abstract class AbstractJvmTypeProvider implements IJvmTypeProvider, Resou
 
 	protected TypeResource doCreateResource(URI uri) {
 		TypeResource result = new TypeResource(uri);
+		result.setTypeResourceServices(services);
 		result.setIndexedJvmTypeAccess(indexedJvmTypeAccess);
 		return result;
 	}

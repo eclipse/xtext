@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.parser.antlr.Lexer
 import org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.ui.editor.model.DocumentTokenSource
 import org.eclipse.xtext.ui.editor.model.IXtextDocument
 import org.eclipse.xtext.ui.editor.model.XtextDocument
@@ -31,12 +32,14 @@ class DocumentLockerTest extends AbstractXtextDocumentTest {
 	
 	@Test def void testNoUpdateContentProcessOnReentrant(){
 		val s = newArrayList
-		val document = new XtextDocument(createTokenSource, createTextEditComposer) {
+		val document = new XtextDocument(createTokenSource, createTextEditComposer, outdatedStateManager) {
 			override protected boolean updateContentBeforeRead() {
 				s += 'x'
 			}
 		}
-		document.input = new XtextResource
+		document.input = new XtextResource => [
+			new XtextResourceSet().resources += it
+		]
 		assertEquals(0, s.size)
 		document.readOnly [
 			assertEquals(1, s.size)
@@ -54,25 +57,30 @@ class DocumentLockerTest extends AbstractXtextDocumentTest {
 	}
 
 	@Test def void testModifySetsOutdatedFalse() {
-		val document = new XtextDocument(createTokenSource, createTextEditComposer)
-		val resource = new XtextResource
+		val document = new XtextDocument(createTokenSource, createTextEditComposer, outdatedStateManager)
+		val resource = new XtextResource => [
+			new XtextResourceSet().resources += it
+		]
 		document.input = resource
+		val indicator = document.cancelIndicator
 		document.internalModify[
-			assertFalse(document.isOutdated())
+			assertFalse(indicator.isCanceled())
 			null
 		]
-		assertFalse(document.isOutdated())
+		assertFalse(indicator.isCanceled())
 		document.set("fupp");
-		assertTrue(document.isOutdated())
+		assertTrue(indicator.isCanceled())
 		document.internalModify [
-			assertFalse(document.isOutdated())
+			assertFalse(indicator.isCanceled())
 			null
 		]
 	}
 	
 	@Test def void testPriorityReadOnlyCancelsReaders() {
-		val document = new XtextDocument(createTokenSource(), null)
-		document.input = new XtextResource
+		val document = new XtextDocument(createTokenSource(), null, outdatedStateManager)
+		document.input = new XtextResource => [
+			new XtextResourceSet().resources += it
+		]
 		val boolean[] check = newBooleanArrayOfSize(1) 
 		val thread = new Thread([
 			document.readOnly(new CancelableUnitOfWork<Object, XtextResource>() {
@@ -102,8 +110,10 @@ class DocumentLockerTest extends AbstractXtextDocumentTest {
 	}
 	
 	@Test def void testReadOnlyDoesntCancelReaders() {
-		val document = new XtextDocument(createTokenSource(), null)
-		document.input = new XtextResource
+		val document = new XtextDocument(createTokenSource(), null, outdatedStateManager)
+		document.input = new XtextResource => [
+			new XtextResourceSet().resources += it
+		]
 		val cancelIndicators = newArrayList
 		document.addReaderCancelationListener(cancelIndicators)
 		assertTrue(cancelIndicators.empty)

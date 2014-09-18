@@ -8,11 +8,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.validation;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
@@ -21,8 +21,8 @@ import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.eclipse.xtext.util.Exceptions;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
@@ -60,15 +60,17 @@ public class ResourceValidatorImpl implements IResourceValidator {
 
 	@Inject
 	private IDiagnosticConverter converter;
-
+	
+	@Inject
+	private OperationCanceledManager operationCanceledManager;
+	
 	public List<Issue> validate(Resource resource, final CheckMode mode, CancelIndicator mon) {
 		StoppedTask task = Stopwatches.forTask("ResourceValidatorImpl.validation");
 		try {
 			task.start();
 			final CancelIndicator monitor = mon == null ? CancelIndicator.NullImpl : mon;
 			resolveProxies(resource, monitor);
-			if (monitor.isCanceled())
-				return Collections.emptyList();
+			operationCanceledManager.checkCanceled(monitor);
 
 			final List<Issue> result = Lists.newArrayListWithExpectedSize(resource.getErrors().size()
 					+ resource.getWarnings().size());
@@ -79,16 +81,14 @@ public class ResourceValidatorImpl implements IResourceValidator {
 					collectResourceDiagnostics(resource, monitor, acceptor);
 				}
 
-				if (monitor.isCanceled())
-					return Collections.emptyList();
+				operationCanceledManager.checkCanceled(monitor);
 				boolean syntaxDiagFail = !result.isEmpty();
 				logCheckStatus(resource, syntaxDiagFail, "Syntax");
 
 				validate(resource, mode, monitor, acceptor);
-				if (monitor.isCanceled())
-					return Collections.emptyList();
+				operationCanceledManager.checkCanceled(monitor);
 			} catch (RuntimeException e) {
-				Exceptions.throwIfOperationCanceledException(e);
+				operationCanceledManager.throwIfOperationCanceledException(e);
 				log.error(e.getMessage(), e);
 			}
 			return result;
@@ -102,14 +102,12 @@ public class ResourceValidatorImpl implements IResourceValidator {
 	 */
 	protected void collectResourceDiagnostics(Resource resource, final CancelIndicator monitor, IAcceptor<Issue> acceptor) {
 		for (int i = 0; i < resource.getErrors().size(); i++) {
-			if (monitor.isCanceled())
-				return;
+			operationCanceledManager.checkCanceled(monitor);
 			issueFromXtextResourceDiagnostic(resource.getErrors().get(i), Severity.ERROR, acceptor);
 		}
 
 		for (int i = 0; i < resource.getWarnings().size(); i++) {
-			if (monitor.isCanceled())
-				return;
+			operationCanceledManager.checkCanceled(monitor);
 			issueFromXtextResourceDiagnostic(resource.getWarnings().get(i), Severity.WARNING, acceptor);
 		}
 	}
@@ -121,7 +119,7 @@ public class ResourceValidatorImpl implements IResourceValidator {
 			IAcceptor<Issue> acceptor) {
 		for (EObject ele : resource.getContents()) {
 			if (monitor.isCanceled())
-				return;
+				throw new OperationCanceledException();
 			validate(resource, ele, mode, monitor, acceptor);
 		}
 	}
@@ -153,6 +151,7 @@ public class ResourceValidatorImpl implements IResourceValidator {
 				issueFromEValidatorDiagnostic(diagnostic, acceptor);
 			}
 		} catch (RuntimeException e) {
+			operationCanceledManager.throwIfOperationCanceledException(e);
 			log.error(e.getMessage(), e);
 		}
 	}
