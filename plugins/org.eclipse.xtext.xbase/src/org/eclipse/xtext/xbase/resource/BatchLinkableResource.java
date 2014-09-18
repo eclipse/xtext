@@ -25,8 +25,8 @@ import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IBatchLinkableResource;
 import org.eclipse.xtext.resource.ISynchronizable;
+import org.eclipse.xtext.resource.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.eclipse.xtext.util.Exceptions;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -48,6 +48,9 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 	
 	@Inject
 	private CompilerPhases compilerPhases;
+	
+	@Inject
+	private OperationCanceledManager operationCanceledManager;
 	
 	/**
 	 * Returns the lock of the owning {@link ResourceSet}, if it exposes such a lock.
@@ -110,7 +113,7 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 				}
 				return basicGetEObject(uriFragment);
 			} catch (RuntimeException e) {
-				if (Exceptions.getOperationCanceledException(e) == null) {
+				if (operationCanceledManager.getOperationCanceledException(e) == null) {
 					getErrors().add(new ExceptionDiagnostic(e));
 					log.error("resolution of uriFragment '" + uriFragment + "' failed.", e);
 				}

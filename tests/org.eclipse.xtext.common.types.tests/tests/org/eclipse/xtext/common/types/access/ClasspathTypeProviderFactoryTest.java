@@ -27,7 +27,7 @@ public class ClasspathTypeProviderFactoryTest extends Assert {
 
 	@Before
 	public void setUp() throws Exception {
-		factory = new ClasspathTypeProviderFactory(getClass().getClassLoader());
+		factory = new ClasspathTypeProviderFactory(getClass().getClassLoader(), null);
 	}
 	
 	@After
