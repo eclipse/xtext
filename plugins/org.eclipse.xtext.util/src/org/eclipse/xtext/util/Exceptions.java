@@ -24,29 +24,4 @@ public class Exceptions {
 		throw new RuntimeException(e);
 	}
 	
-	/**
-	 * @since 2.8
-	 */
-	public static RuntimeException getOperationCanceledException(Throwable t) {
-		if (t instanceof RuntimeException) {
-			RuntimeException re = (RuntimeException) t;
-			if (re.getClass().getName().equals("com.intellij.openapi.progress.ProcessCanceledException")) {
-				return re;
-			}
-			if (re.getClass().getName().equals("org.eclipse.core.runtime.OperationCanceledException")) {
-				return re;
-			}
-		}
-		return null;
-	}
-	
-	/**
-	 * @since 2.8
-	 */
-	public static void throwIfOperationCanceledException(Throwable t) {
-		RuntimeException opCanceledException = getOperationCanceledException(t);
-		if (opCanceledException != null) {
-			throw opCanceledException;
-		}
-	}
 }

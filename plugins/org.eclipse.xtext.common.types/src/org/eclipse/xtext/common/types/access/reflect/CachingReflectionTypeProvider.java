@@ -10,6 +10,7 @@ package org.eclipse.xtext.common.types.access.reflect;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.access.impl.ClassMirror;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
+import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -19,9 +20,15 @@ public class CachingReflectionTypeProvider extends ReflectionTypeProvider {
 
 	private ReflectionTypeFactory reusedFactory;
 
+	@Deprecated
 	public CachingReflectionTypeProvider(ClassLoader classLoader, ResourceSet resourceSet,
 			IndexedJvmTypeAccess indexedJvmTypeAccess, ReflectionTypeFactory reusedFactory) {
-		super(classLoader, resourceSet, indexedJvmTypeAccess);
+		this(classLoader, resourceSet, indexedJvmTypeAccess, reusedFactory, null);
+	}
+	
+	public CachingReflectionTypeProvider(ClassLoader classLoader, ResourceSet resourceSet,
+			IndexedJvmTypeAccess indexedJvmTypeAccess, ReflectionTypeFactory reusedFactory, TypeResourceServices services) {
+		super(classLoader, resourceSet, indexedJvmTypeAccess, services);
 		this.reusedFactory = reusedFactory;
 	}
 	

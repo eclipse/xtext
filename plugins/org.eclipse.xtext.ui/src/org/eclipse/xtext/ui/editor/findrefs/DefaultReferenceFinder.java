@@ -189,7 +189,7 @@ public class DefaultReferenceFinder extends ReferenceFinder implements org.eclip
 			final IAcceptor<IReferenceDescription> acceptor,
 			IProgressMonitor monitor) {
 		if ((monitor != null && monitor.isCanceled()))
-			return;
+			throw new OperationCanceledException();
 
 		final TargetURIs targetURIs = converter.fromIterable(localTargets);
 		Collection<URI> resourceURIs = targetURIs.getTargetResourceURIs();

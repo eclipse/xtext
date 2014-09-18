@@ -69,7 +69,7 @@ public class DetectImplHyperlinksTest extends AbstractEditorTest {
 		int offset = content.indexOf("|");
 
 		IHyperlink[] detectHyperlinks = hyperlinkDetector.detectHyperlinks(xtextEditor.getInternalSourceViewer(), new Region(offset,1), true);
-		assertEquals(1, detectHyperlinks.length);
+		assertEquals(2, detectHyperlinks.length);
 		IHyperlink hyperlink = detectHyperlinks[0];
 		assertTrue(hyperlink instanceof JdtHyperlink);
 		JdtHyperlink casted = (JdtHyperlink) hyperlink;

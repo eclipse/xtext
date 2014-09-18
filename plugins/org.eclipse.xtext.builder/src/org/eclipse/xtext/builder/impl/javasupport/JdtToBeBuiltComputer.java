@@ -19,6 +19,7 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspace.ProjectOrder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJarEntryResource;
@@ -81,7 +82,10 @@ public class JdtToBeBuiltComputer implements IToBeBuiltComputerContribution {
 	
 	public void updateProject(ToBeBuilt toBeBuilt, IProject project, IProgressMonitor monitor) throws CoreException {
 		SubMonitor progress = SubMonitor.convert(monitor, 2);
-		if (!project.isAccessible() || progress.isCanceled())
+		if (progress.isCanceled()) {
+			throw new OperationCanceledException();
+		}
+		if (!project.isAccessible())
 			return;
 		IJavaProject javaProject = JavaCore.create(project);
 		if (javaProject.exists()) {
@@ -91,7 +95,7 @@ public class JdtToBeBuiltComputer implements IToBeBuiltComputerContribution {
 			ProjectOrder orderedProjects = workspace.computeProjectOrder(workspace.getRoot().getProjects());
 			for (final IPackageFragmentRoot root : roots) {
 				if (progress.isCanceled())
-					return;
+					throw new OperationCanceledException();
 				if (shouldHandle(root) && !isBuiltByUpstream(root, project, orderedProjects.projects)) {
 					Map<URI, IStorage> rootData = jdtUriMapperExtension.getAllEntries(root);
 					for (Map.Entry<URI, IStorage> e : rootData.entrySet())
