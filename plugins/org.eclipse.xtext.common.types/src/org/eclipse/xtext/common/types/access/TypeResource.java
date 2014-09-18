@@ -20,9 +20,9 @@ import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
+import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
 import org.eclipse.xtext.resource.IFragmentProvider;
 import org.eclipse.xtext.resource.ISynchronizable;
-import org.eclipse.xtext.util.Exceptions;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 /**
@@ -38,6 +38,12 @@ public class TypeResource extends ResourceImpl implements ISynchronizable<TypeRe
 	private IMirror mirror;
 	
 	private IndexedJvmTypeAccess indexedJvmTypeAccess;
+	
+	private TypeResourceServices typeResourceServices;
+	
+	public void setTypeResourceServices(TypeResourceServices typeResourceServices) {
+		this.typeResourceServices = typeResourceServices;
+	}
 	
 	private IFragmentProvider.Fallback fragmentProviderFallback = new IFragmentProvider.Fallback() {
 		
@@ -123,7 +129,7 @@ public class TypeResource extends ResourceImpl implements ISynchronizable<TypeRe
 				}
 			}
 		} catch(Exception e) {
-			Exceptions.throwIfOperationCanceledException(e);
+			if (typeResourceServices!=null) typeResourceServices.getProcessCanceledManager().throwIfOperationCanceledException(e);
 			throw new CannotLoadTypeResourceException(e);
 		}
 	}

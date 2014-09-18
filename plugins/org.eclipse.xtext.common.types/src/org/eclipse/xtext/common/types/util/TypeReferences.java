@@ -32,7 +32,7 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.TypeResource;
-import org.eclipse.xtext.util.Exceptions;
+import org.eclipse.xtext.resource.ProcessCanceledManager;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -51,6 +51,9 @@ public class TypeReferences {
 
 	@Inject
 	private IJvmTypeProvider.Factory typeProviderFactory;
+	
+	@Inject
+	private ProcessCanceledManager processCanceledManager;
 	
 	/**
 	 * @return a fresh {@link JvmAnyTypeReference} or null if {@link Object} is not on the context's classpath
@@ -251,7 +254,7 @@ public class TypeReferences {
 			final JvmType result = typeProvider.findTypeByName(typeName);
 			return result;
 		} catch (RuntimeException e) {
-			Exceptions.throwIfOperationCanceledException(e);
+			processCanceledManager.throwIfOperationCanceledException(e);
 			log.info("Couldn't find JvmType for name '" + typeName + "' in context " + context, e);
 			return null;
 		}

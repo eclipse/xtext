@@ -28,8 +28,8 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IDerivedStateComputer;
+import org.eclipse.xtext.resource.ProcessCanceledManager;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.util.Exceptions;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 import org.eclipse.xtext.xbase.XExpression;
@@ -70,6 +70,9 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 
 	@Inject
 	private JvmModelCompleter completer;
+	
+	@Inject
+	private ProcessCanceledManager processCanceledManager;
 
 	public void setCompleter(JvmModelCompleter completer) {
 		this.completer = completer;
@@ -350,7 +353,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 			}
 			inferrer.infer(eObject, acceptor, preIndexingPhase);
 		} catch (RuntimeException e) {
-			Exceptions.throwIfOperationCanceledException(e);
+			processCanceledManager.throwIfOperationCanceledException(e);
 			LOG.error("Error calling inferrer", e);
 		}
 		if (!preIndexingPhase) {
@@ -358,7 +361,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 				try {
 					initializer.getValue().apply(initializer.getKey());
 				} catch (RuntimeException e) {
-					Exceptions.throwIfOperationCanceledException(e);
+					processCanceledManager.throwIfOperationCanceledException(e);
 					LOG.error("Error calling inferrer", e);
 				}
 			}

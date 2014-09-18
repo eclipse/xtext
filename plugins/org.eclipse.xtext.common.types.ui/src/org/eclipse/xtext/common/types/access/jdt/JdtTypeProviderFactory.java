@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.internal.core.DefaultWorkingCopyOwner;
 import org.eclipse.xtext.common.types.access.AbstractTypeProviderFactory;
+import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -27,6 +28,9 @@ public class JdtTypeProviderFactory extends AbstractTypeProviderFactory {
 	
 	@Inject
 	private IWorkingCopyOwnerProvider copyOwnerProvider;
+	
+	@Inject
+	private TypeResourceServices typeResourceServices;
 
 	/**
 	 * @since 2.4
@@ -49,7 +53,7 @@ public class JdtTypeProviderFactory extends AbstractTypeProviderFactory {
 		if (javaProject == null)
 			//TODO throw a serious exception instead of returning a non working implementation
 			return new NullJdtTypeProvider(resourceSet);
-		return new JdtTypeProvider(javaProject, resourceSet, getIndexedJvmTypeAccess(), copyOwnerProvider==null? DefaultWorkingCopyOwner.PRIMARY : copyOwnerProvider.getWorkingCopyOwner(javaProject, resourceSet));
+		return new JdtTypeProvider(javaProject, resourceSet, getIndexedJvmTypeAccess(), copyOwnerProvider==null? DefaultWorkingCopyOwner.PRIMARY : copyOwnerProvider.getWorkingCopyOwner(javaProject, resourceSet), typeResourceServices);
 	}
 
 	@Override

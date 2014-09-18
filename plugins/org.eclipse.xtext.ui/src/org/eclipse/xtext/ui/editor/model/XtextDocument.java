@@ -26,8 +26,6 @@ import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.jface.text.BadLocationException;
@@ -37,7 +35,9 @@ import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Position;
 import org.eclipse.xtext.resource.ISynchronizable;
+import org.eclipse.xtext.resource.ProcessCanceledManager;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.editor.DirtyStateEditorSupport;
 import org.eclipse.xtext.ui.editor.model.IXtextDocumentContentObserver.Processor;
 import org.eclipse.xtext.ui.editor.model.edit.ITextEditComposer;
@@ -60,6 +60,9 @@ public class XtextDocument extends Document implements IXtextDocument {
 	private ITextEditComposer composer;
 
 	@Inject
+	private ProcessCanceledManager processCanceledManager; 
+	
+	@Inject
 	public XtextDocument(DocumentTokenSource tokenSource, ITextEditComposer composer) {
 		this.tokenSource = tokenSource;
 		tokenSource.computeDamageRegion(new DocumentEvent(this, 0, getLength(), this.get()));
@@ -67,7 +70,6 @@ public class XtextDocument extends Document implements IXtextDocument {
 	}
 
 	private XtextResource resource = null;
-	private OutdatedStateAdapter adapter = null;
 	
 	private final List<IXtextModelListener> modelListeners = new ArrayList<IXtextModelListener>();
 	private final ListenerList xtextDocumentObservers = new ListenerList(ListenerList.IDENTITY);
@@ -75,12 +77,8 @@ public class XtextDocument extends Document implements IXtextDocument {
 
 	public void setInput(XtextResource resource) {
 		Assert.isNotNull(resource);
-		for (Adapter a : resource.eAdapters()) {
-			Assert.isTrue(!(a instanceof OutdatedStateAdapter));
-		}
 		this.resource = resource;
-		this.adapter = new OutdatedStateAdapter();
-		this.resource.eAdapters().add(adapter);
+		this.currentIndicator = processCanceledManager.newCancelIndiciator(resource.getResourceSet());
 	}
 
 	public void disposeInput() {
@@ -96,6 +94,8 @@ public class XtextDocument extends Document implements IXtextDocument {
 	}
 
 	private final XtextDocumentLocker stateAccess = createDocumentLocker();
+
+	private volatile CancelIndicator currentIndicator;
 
 	protected XtextDocumentLocker createDocumentLocker() {
 		return new XtextDocumentLocker();
@@ -234,10 +234,10 @@ public class XtextDocument extends Document implements IXtextDocument {
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	public boolean isOutdated() {
-		if (adapter == null) {
+		if (currentIndicator == null) {
 			return false;
 		}
-		return adapter.isOutdated;
+		return currentIndicator.isCanceled();
 	}
 	
 	/**
@@ -245,39 +245,12 @@ public class XtextDocument extends Document implements IXtextDocument {
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	public void setOutdated(boolean outdated) {
-		if (adapter == null) {
+		if (resource == null)
 			return;
-		}
-		adapter.isOutdated = outdated;
-	}
-	
-	/**
-	 * @since 2.7
-	 * @noreference This method is not intended to be referenced by clients.
-	 */
-	public static CancelIndicator getOutdatedStateCancelIndicator(XtextResource resource) {
-		for (Adapter a : resource.eAdapters()) {
-			if (a instanceof OutdatedStateAdapter) {
-				final OutdatedStateAdapter adapter = (OutdatedStateAdapter) a;
-				return new CancelIndicator() {
-					public boolean isCanceled() {
-						return adapter.isOutdated;
-					}
-				};
-			}
-		}
-		return CancelIndicator.NullImpl;
-	}
-	
-	/**
-	 * @since 2.7
-	 */
-	public static class OutdatedStateAdapter extends AdapterImpl {
-		
-		private volatile boolean isOutdated = false;
-		
-		public boolean isOutdated() {
-			return isOutdated;
+		if (outdated) {
+			((XtextResourceSet)resource.getResourceSet()).incrementOutdatedStamp();
+		} else {
+			this.currentIndicator = processCanceledManager.newCancelIndiciator(resource.getResourceSet());
 		}
 	}
 	
