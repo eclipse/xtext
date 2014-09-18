@@ -10,6 +10,7 @@ package org.eclipse.xtext.common.types.access;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
+import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 
 import com.google.inject.Inject;
@@ -21,6 +22,9 @@ public abstract class AbstractTypeProviderFactory implements IJvmTypeProvider.Fa
 
 	@Inject(optional = true)
 	private IndexedJvmTypeAccess indexedJvmTypeAccess;
+	
+	@Inject
+	private TypeResourceServices services;
 	
 	public IJvmTypeProvider findTypeProvider(ResourceSet resourceSet) {
 		if (resourceSet == null)
@@ -45,4 +49,7 @@ public abstract class AbstractTypeProviderFactory implements IJvmTypeProvider.Fa
 		return indexedJvmTypeAccess;
 	}
 
+	protected TypeResourceServices getServices() {
+		return services;
+	}
 }

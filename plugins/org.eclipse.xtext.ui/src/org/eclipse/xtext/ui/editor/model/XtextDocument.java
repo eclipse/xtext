@@ -24,10 +24,9 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.ListenerList;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.jface.text.BadLocationException;
@@ -37,7 +36,11 @@ import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Position;
 import org.eclipse.xtext.resource.ISynchronizable;
+import org.eclipse.xtext.resource.OutdatedStateManager;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.service.OperationCanceledError;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.ui.editor.DirtyStateEditorSupport;
 import org.eclipse.xtext.ui.editor.model.IXtextDocumentContentObserver.Processor;
 import org.eclipse.xtext.ui.editor.model.edit.ITextEditComposer;
@@ -60,6 +63,21 @@ public class XtextDocument extends Document implements IXtextDocument {
 	private ITextEditComposer composer;
 
 	@Inject
+	private OutdatedStateManager outdatedStateManager;
+	
+	@Inject
+	private OperationCanceledManager operationCanceledManager;
+	
+	/**
+	 * @since 2.8
+	 * @noreference This constructor is not intended to be referenced by clients. Only for testing
+	 */
+	public XtextDocument(DocumentTokenSource tokenSource, ITextEditComposer composer,OutdatedStateManager outdatedStateManager) {
+		this(tokenSource, composer);
+		this.outdatedStateManager = outdatedStateManager;
+	}
+	
+	@Inject
 	public XtextDocument(DocumentTokenSource tokenSource, ITextEditComposer composer) {
 		this.tokenSource = tokenSource;
 		tokenSource.computeDamageRegion(new DocumentEvent(this, 0, getLength(), this.get()));
@@ -67,7 +85,6 @@ public class XtextDocument extends Document implements IXtextDocument {
 	}
 
 	private XtextResource resource = null;
-	private OutdatedStateAdapter adapter = null;
 	
 	private final List<IXtextModelListener> modelListeners = new ArrayList<IXtextModelListener>();
 	private final ListenerList xtextDocumentObservers = new ListenerList(ListenerList.IDENTITY);
@@ -75,12 +92,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 
 	public void setInput(XtextResource resource) {
 		Assert.isNotNull(resource);
-		for (Adapter a : resource.eAdapters()) {
-			Assert.isTrue(!(a instanceof OutdatedStateAdapter));
-		}
 		this.resource = resource;
-		this.adapter = new OutdatedStateAdapter();
-		this.resource.eAdapters().add(adapter);
 	}
 
 	public void disposeInput() {
@@ -102,7 +114,10 @@ public class XtextDocument extends Document implements IXtextDocument {
 	}
 
 	public <T> T readOnly(IUnitOfWork<T, XtextResource> work) {
-		return stateAccess.readOnly(work);
+		T readOnly = stateAccess.readOnly(work);
+		if (getCancelIndicator().isCanceled())
+			System.out.println("Ooops was canceled!");
+		return readOnly;
 	}
 	
 	/**
@@ -170,25 +185,24 @@ public class XtextDocument extends Document implements IXtextDocument {
 		synchronized (modelListeners) {
 			modelListenersCopy = newArrayList(modelListeners);
 		}
+		CancelIndicator cancelIndicator = getCancelIndicator();
 		for (IXtextModelListener listener : modelListenersCopy){
 			try {
 				if (res != this.resource) {
 					return;
 				}
-				if (isOutdated()) {
-					return;
-				}
+				
+				operationCanceledManager.checkCanceled(cancelIndicator);
 				if (listener instanceof IXtextModelListenerExtension) {
-					((IXtextModelListenerExtension)listener).modelChanged(res, new CancelIndicator() {
-						public boolean isCanceled() {
-							return isOutdated();
-						}
-					});
+					((IXtextModelListenerExtension)listener).modelChanged(res, cancelIndicator);
 				} else {
 					listener.modelChanged(res);
 				}
 			} catch(Exception exc) {
+				operationCanceledManager.throwIfOperationCanceledException(exc);
 				log.error("Error in IXtextModelListener", exc);
+			} catch (OperationCanceledError e) {
+				throw e.getWrapped();
 			}
 		}
 	}
@@ -230,14 +244,14 @@ public class XtextDocument extends Document implements IXtextDocument {
 	}
 	
 	/**
-	 * @since 2.7
+	 * @since 2.8
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
-	public boolean isOutdated() {
-		if (adapter == null) {
-			return false;
+	public CancelIndicator getCancelIndicator() {
+		if (resource == null || outdatedStateManager == null) {
+			return CancelIndicator.NullImpl;
 		}
-		return adapter.isOutdated;
+		return outdatedStateManager.newCancelIndiciator(resource.getResourceSet());
 	}
 	
 	/**
@@ -245,39 +259,12 @@ public class XtextDocument extends Document implements IXtextDocument {
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	public void setOutdated(boolean outdated) {
-		if (adapter == null) {
+		if (resource == null)
 			return;
-		}
-		adapter.isOutdated = outdated;
-	}
-	
-	/**
-	 * @since 2.7
-	 * @noreference This method is not intended to be referenced by clients.
-	 */
-	public static CancelIndicator getOutdatedStateCancelIndicator(XtextResource resource) {
-		for (Adapter a : resource.eAdapters()) {
-			if (a instanceof OutdatedStateAdapter) {
-				final OutdatedStateAdapter adapter = (OutdatedStateAdapter) a;
-				return new CancelIndicator() {
-					public boolean isCanceled() {
-						return adapter.isOutdated;
-					}
-				};
-			}
-		}
-		return CancelIndicator.NullImpl;
-	}
-	
-	/**
-	 * @since 2.7
-	 */
-	public static class OutdatedStateAdapter extends AdapterImpl {
-		
-		private volatile boolean isOutdated = false;
-		
-		public boolean isOutdated() {
-			return isOutdated;
+		if (outdated) {
+			((XtextResourceSet)resource.getResourceSet()).markOutdated();
+		} else {
+			((XtextResourceSet)resource.getResourceSet()).markSynced();
 		}
 	}
 	
@@ -436,6 +423,10 @@ public class XtextDocument extends Document implements IXtextDocument {
 							}
 						}
 					}
+				} catch (OperationCanceledException e) {
+					throw e;
+				} catch (OperationCanceledError e) {
+					throw e.getWrapped();
 				} catch (RuntimeException e) {
 					try {
 						if (state != null)
@@ -486,11 +477,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 						hadUpdates |= updateContentBeforeRead();
 					}
 					if(work instanceof CancelableUnitOfWork) 
-						((CancelableUnitOfWork<?, XtextResource>) work).setCancelIndicator(new CancelIndicator() {
-							public boolean isCanceled() {
-								return isOutdated();
-							}
-						});
+						((CancelableUnitOfWork<?, XtextResource>) work).setCancelIndicator(getCancelIndicator());
 					T exec = work.exec(state);
 					ensureThatStateIsNotReturned(exec, work);
 					return  exec;
@@ -499,11 +486,16 @@ public class XtextDocument extends Document implements IXtextDocument {
 				} catch (Exception e) {
 					throw new WrappedException(e);
 				} finally {
-					if(potentialUpdaterCount.decrementAndGet() == 0 && (hadUpdates || isCancelReaders)) { 
-						hadUpdates = false;	
-						notifyModelListeners(resource);
+					try {
+						if(potentialUpdaterCount.decrementAndGet() == 0 && (hadUpdates || isCancelReaders)) { 
+							hadUpdates = false;	
+							if (getCancelIndicator().isCanceled())
+								throw new OperationCanceledException();
+							notifyModelListeners(resource);
+						}
+					} finally {
+						releaseReadLock();
 					}
-					releaseReadLock();
 				}
 			}
 		}
@@ -551,7 +543,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 	public void checkAndUpdateAnnotations() {
 		if (validationJob!=null) {
 			validationJob.cancel();
-			if (resource != null && !isOutdated()) {
+			if (resource != null && !getCancelIndicator().isCanceled()) {
 				validationJob.schedule();
 			}
 		}

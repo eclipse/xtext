@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
@@ -125,14 +126,14 @@ public class LazyLinkingResource extends XtextResource {
 		TreeIterator<Object> iterator = EcoreUtil.getAllContents(this, true);
 		while (iterator.hasNext()) {
 			if (monitor.isCanceled())
-				return;
+				throw new OperationCanceledException();
 			InternalEObject source = (InternalEObject) iterator.next();
 			EStructuralFeature[] eStructuralFeatures = ((EClassImpl.FeatureSubsetSupplier) source.eClass()
 					.getEAllStructuralFeatures()).crossReferences();
 			if (eStructuralFeatures != null) {
 				for (EStructuralFeature crossRef : eStructuralFeatures) {
 					if (monitor.isCanceled())
-						return;
+						throw new OperationCanceledException();
 					resolveLazyCrossReference(source, crossRef);
 				}
 			}
@@ -224,6 +225,7 @@ public class LazyLinkingResource extends XtextResource {
 				return getEObject(uriFragment, triple);
 			}
 		} catch (RuntimeException e) {
+			operationCanceledManager.throwIfOperationCanceledException(e);
 			getErrors().add(new ExceptionDiagnostic(e));
 			log.error("resolution of uriFragment '" + uriFragment + "' failed.", e);
 			// wrapped because the javaDoc of this method states that WrappedExceptions are thrown

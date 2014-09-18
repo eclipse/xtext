@@ -26,6 +26,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.ui.editor.DirtyStateEditorSupport;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -123,12 +124,16 @@ public class SyncUtil {
 	}
 
 	public void waitForReconciler(XtextEditor editor) {
-		editor.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
-			@Override
-			public void process(XtextResource state) throws Exception {
-				// this doesn't execute before the reconciler has finished
-			}
-		});
+		try {
+			editor.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
+				@Override
+				public void process(XtextResource state) throws Exception {
+					// this doesn't execute before the reconciler has finished
+				}
+			});
+		} catch (OperationCanceledException e) {
+		} catch (OperationCanceledError e) {
+		}
 	}
 
 	public void waitForBuild(IProgressMonitor monitor) {

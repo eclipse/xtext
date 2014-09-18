@@ -29,6 +29,7 @@ import org.eclipse.xtext.common.types.access.impl.AbstractTypeProviderTest;
 import org.eclipse.xtext.common.types.access.impl.ClassMirror;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.access.impl.PrimitiveMirror;
+import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.common.types.testSetups.AbstractMethods;
 import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParamsSuperSuper;
@@ -57,6 +58,9 @@ public class ReflectionTypeProviderTest extends AbstractTypeProviderTest {
 
 	@Inject
 	protected IndexedJvmTypeAccess indexedJvmTypeAccess;
+	
+	@Inject
+	protected TypeResourceServices services;
 
 	private AbstractRuntimeJvmTypeProvider typeProvider;
 
@@ -67,7 +71,7 @@ public class ReflectionTypeProviderTest extends AbstractTypeProviderTest {
 	}
 
 	protected AbstractRuntimeJvmTypeProvider createTypeProvider() {
-		return new ReflectionTypeProvider(getClass().getClassLoader(), resourceSet, indexedJvmTypeAccess);
+		return new ReflectionTypeProvider(getClass().getClassLoader(), resourceSet, indexedJvmTypeAccess, services);
 	}
 
 	protected ResourceSet getResourceSet() {

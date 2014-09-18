@@ -28,14 +28,14 @@ public class CachingReflectionTypeProviderPerformanceTest extends AbstractTypePr
 
 	@Inject
 	private ResourceSet resourceSet;
-
-	private ReflectionTypeProvider typeProvider;
 	
+	@Inject
 	private CachingReflectionTypeProviderFactory typeProviderFactory;
+	
+	private ReflectionTypeProvider typeProvider;
 
 	@Before
 	public void setUp() throws Exception {
-		typeProviderFactory = new CachingReflectionTypeProviderFactory(getClass().getClassLoader()); 
 		typeProvider = typeProviderFactory.createTypeProvider(resourceSet);
 	}
 	

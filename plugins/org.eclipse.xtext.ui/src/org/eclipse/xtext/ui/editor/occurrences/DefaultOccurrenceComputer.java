@@ -34,6 +34,7 @@ import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -70,6 +71,9 @@ public class DefaultOccurrenceComputer implements IOccurrenceComputer {
 	
 	@Inject
 	private IQualifiedNameProvider qualifiedNameProvider;
+	
+	@Inject
+	private OperationCanceledManager operationCanceledManager;
 	
 	protected void addOccurrenceAnnotation(String type, IDocument document, ITextRegion textRegion,
 			Map<Annotation, Position> annotationMap) {
@@ -130,8 +134,7 @@ public class DefaultOccurrenceComputer implements IOccurrenceComputer {
 								}
 							};
 							referenceFinder.findReferences((TargetURIs) targetURIs, resource, acceptor, localMonitor);
-							if (monitor.isCanceled() || cancelIndicator.isCanceled())
-								return emptyMap();
+							operationCanceledManager.checkCanceled(cancelIndicator);
 							Map<Annotation, Position> result = newHashMapWithExpectedSize(references.size() + 1);
 							if (target.eResource() == resource) {
 								if (!references.isEmpty() || canBeReferencedLocally(target)) {
