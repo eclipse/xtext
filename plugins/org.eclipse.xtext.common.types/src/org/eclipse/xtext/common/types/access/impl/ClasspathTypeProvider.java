@@ -119,8 +119,13 @@ public class ClasspathTypeProvider extends AbstractRuntimeJvmTypeProvider {
 	
 	private final ClassFileBytesAccess readerAccess;
 	
+	@Deprecated
 	public ClasspathTypeProvider(ClassLoader classLoader, ResourceSet resourceSet, IndexedJvmTypeAccess indexedJvmTypeAccess) {
-		super(resourceSet, indexedJvmTypeAccess);
+		this(classLoader, resourceSet, indexedJvmTypeAccess, null);
+	}
+	
+	public ClasspathTypeProvider(ClassLoader classLoader, ResourceSet resourceSet, IndexedJvmTypeAccess indexedJvmTypeAccess, TypeResourceServices services) {
+		super(resourceSet, indexedJvmTypeAccess, services);
 		this.classLoader = classLoader;
 		readerAccess = createClassFileReaderAccess(); 
 		classFinder = createBinaryClassFinder(classLoader);

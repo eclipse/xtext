@@ -13,6 +13,7 @@ import org.eclipse.xtext.common.types.access.impl.CachingClasspathTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.CachingDeclaredTypeFactory;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.DeclaredTypeFactory;
+import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -26,8 +27,8 @@ public class CachingClasspathTypeProviderFactory extends ClasspathTypeProviderFa
 	private CachingDeclaredTypeFactory reusedFactory;
 
 	@Inject
-	public CachingClasspathTypeProviderFactory(ClassLoader classLoader) {
-		super(classLoader);
+	public CachingClasspathTypeProviderFactory(ClassLoader classLoader, TypeResourceServices services) {
+		super(classLoader, services);
 		reusedFactory = newClassReaderTypeFactory(classLoader);
 	}
 
@@ -47,7 +48,7 @@ public class CachingClasspathTypeProviderFactory extends ClasspathTypeProviderFa
 				classLoader, 
 				resourceSet, 
 				getIndexedJvmTypeAccess(),
-				actualFactoryToUse);
+				actualFactoryToUse, services);
 	}
 	
 }
