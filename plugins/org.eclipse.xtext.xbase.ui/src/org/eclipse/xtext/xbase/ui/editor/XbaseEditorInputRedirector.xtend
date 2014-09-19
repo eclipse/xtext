@@ -8,9 +8,10 @@
 package org.eclipse.xtext.xbase.ui.editor
 
 import com.google.inject.Inject
-import org.eclipse.core.resources.IFile
+import org.eclipse.jdt.core.IClasspathEntry
 import org.eclipse.jdt.core.IJavaElement
 import org.eclipse.jdt.core.IPackageFragmentRoot
+import org.eclipse.jdt.core.ITypeRoot
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.ui.IEditorInput
 import org.eclipse.ui.ide.ResourceUtil
@@ -19,9 +20,7 @@ import org.eclipse.xtext.LanguageInfo
 import org.eclipse.xtext.generator.trace.ILocationInResource
 import org.eclipse.xtext.generator.trace.ITraceForStorageProvider
 import org.eclipse.xtext.resource.FileExtensionProvider
-import org.eclipse.xtext.ui.editor.XtextReadonlyEditorInput
-import org.eclipse.jdt.core.IClasspathEntry
-import org.eclipse.jdt.core.ITypeRoot
+import org.eclipse.xtext.ui.editor.utils.EditorUtils
 
 class XbaseEditorInputRedirector {
 
@@ -104,11 +103,8 @@ class XbaseEditorInputRedirector {
 			}
 			if (sourceInformation == null)
 				return input;
-			val originalStorage = sourceInformation.getStorage();
-			switch originalStorage {
-				IFile: return new FileEditorInput(originalStorage)
-				default: return new XtextReadonlyEditorInput(originalStorage)
-			}
+			val originalStorage = sourceInformation.getStorage()
+			return EditorUtils.createEditorInput(originalStorage)
 		}
 		return input;
 	}
