@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
@@ -129,7 +130,7 @@ public class GlobalURIEditorOpener implements IURIEditorOpener {
 
 
 	protected IEditorPart openDefaultEditor(IStorage storage, URI uri) throws PartInitException {
-		XtextReadonlyEditorInput editorInput = new XtextReadonlyEditorInput(storage);
+		IEditorInput editorInput = EditorUtils.createEditorInput(storage); 
 		IWorkbenchPage page = getWorkbench().getActiveWorkbenchWindow().getActivePage();
 		return IDE.openEditor(page, editorInput, PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(
 				uri.lastSegment()).getId());

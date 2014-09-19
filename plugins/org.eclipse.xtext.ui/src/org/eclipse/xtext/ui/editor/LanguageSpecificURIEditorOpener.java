@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.editor;
 import java.util.Iterator;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.OperationCanceledException;
@@ -24,7 +23,6 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.ide.IDE;
-import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
@@ -77,9 +75,7 @@ public class LanguageSpecificURIEditorOpener implements IURIEditorOpener {
 		if (storages != null && storages.hasNext()) {
 			try {
 				IStorage storage = storages.next().getFirst();
-				// TODO we should create a JarEntryEditorInput if storage is a NonJavaResource from jdt to match the editor input used when double clicking on the same resource in a jar.
-				IEditorInput editorInput = (storage instanceof IFile) ? new FileEditorInput((IFile) storage)
-						: new XtextReadonlyEditorInput(storage);
+				IEditorInput editorInput = EditorUtils.createEditorInput(storage);
 				IWorkbenchPage activePage = workbench.getActiveWorkbenchWindow().getActivePage();
 				IEditorPart editor = IDE.openEditor(activePage, editorInput, editorID);
 				selectAndReveal(editor, uri, crossReference, indexInList, select);
