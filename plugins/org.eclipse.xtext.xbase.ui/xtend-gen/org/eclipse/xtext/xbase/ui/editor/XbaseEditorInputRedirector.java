@@ -30,7 +30,7 @@ import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.resource.FileExtensionProvider;
-import org.eclipse.xtext.ui.editor.XtextReadonlyEditorInput;
+import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -191,14 +191,7 @@ public class XbaseEditorInputRedirector {
         return input;
       }
       final IStorage originalStorage = sourceInformation.getStorage();
-      boolean _matched = false;
-      if (!_matched) {
-        if (originalStorage instanceof IFile) {
-          _matched=true;
-          return new FileEditorInput(((IFile)originalStorage));
-        }
-      }
-      return new XtextReadonlyEditorInput(originalStorage);
+      return EditorUtils.createEditorInput(originalStorage);
     }
     return input;
   }
