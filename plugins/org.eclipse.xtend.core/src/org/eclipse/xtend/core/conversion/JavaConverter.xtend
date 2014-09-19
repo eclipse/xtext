@@ -7,24 +7,33 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.conversion
 
+import com.google.inject.Inject
+import com.google.inject.Provider
 import org.eclipse.jdt.core.dom.AST
-import org.eclipse.jdt.core.dom.ASTParser
 import org.eclipse.jdt.core.dom.ASTNode
-import org.eclipse.core.runtime.IProgressMonitor
+import org.eclipse.jdt.core.dom.ASTParser
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  */
 class JavaConverter {
-	
-	def String toXtend(String javaSrc, IProgressMonitor progressMonitor) {
+	@Inject Provider<JavaASTFlattener> flattenerProvider
+
+	def String toXtend(String javaSrc) {
+		toXtend(javaSrc, ASTParser.K_COMPILATION_UNIT)
+	}
+
+	def String toXtend(String javaSrc, int javaSourceKind) {
 		val parser = ASTParser.newParser(AST.JLS3)
+		parser.statementsRecovery = true
+		parser.bindingsRecovery = true
+		parser.kind = javaSourceKind
 		parser.source = javaSrc.toCharArray
-		return doConvert(parser.createAST(progressMonitor))
+		return doConvert(parser.createAST(null))
 	}
 
 	def protected doConvert(ASTNode ast) {
-		val flattener = new XtendASTFlattener
+		val flattener = flattenerProvider.get()
 		ast.accept(flattener)
 		return flattener.result
 	}
