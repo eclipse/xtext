@@ -43,6 +43,8 @@ public class StacktraceBasedEditorDecider {
 				return Decision.FORCE_JAVA;
 			if (isOpenResource(element))
 				return Decision.FORCE_JAVA;
+			if (isOpenGeneratedCode(element))
+				return Decision.FORCE_JAVA;
 			if (isFileSearch(element))
 				return Decision.FORCE_JAVA;
 			if (isOpenCompareEditor(element))
@@ -214,6 +216,15 @@ public class StacktraceBasedEditorDecider {
 	 */
 	protected boolean isOpenResource(StackTraceElement element) {
 		return "org.eclipse.ui.internal.ide.handlers.OpenResourceHandler".equals(element.getClassName())
+				&& "execute".equals(element.getMethodName());
+	}
+	
+	/**
+	 * @noreference This method is not intended to be referenced by clients.
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 */
+	private boolean isOpenGeneratedCode(StackTraceElement element) {
+		return "org.eclipse.xtext.ui.generator.trace.AbstractOpenOppositeFileHandler".equals(element.getClassName())
 				&& "execute".equals(element.getMethodName());
 	}
 
