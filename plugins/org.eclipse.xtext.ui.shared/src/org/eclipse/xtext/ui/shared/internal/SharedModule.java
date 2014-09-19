@@ -26,8 +26,10 @@ import org.eclipse.xtext.builder.impl.ToBeBuiltComputer;
 import org.eclipse.xtext.builder.impl.XtextBuilder;
 import org.eclipse.xtext.builder.resourceloader.IResourceLoader;
 import org.eclipse.xtext.builder.resourceloader.ResourceLoaderProviders;
+import org.eclipse.xtext.builder.trace.ITraceForTypeRootProvider;
 import org.eclipse.xtext.builder.trace.StorageAwareTrace;
 import org.eclipse.xtext.builder.trace.TraceForStorageProvider;
+import org.eclipse.xtext.builder.trace.TraceForTypeRootProvider;
 import org.eclipse.xtext.builder.trace.TraceMarkers;
 import org.eclipse.xtext.generator.trace.DefaultTraceURIConverter;
 import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
@@ -118,6 +120,7 @@ public class SharedModule extends AbstractModule {
 			@Override
 			protected void configure() {
 				bind(ITraceForStorageProvider.class).to(TraceForStorageProvider.class);
+				bind(ITraceForTypeRootProvider.class).to(TraceForTypeRootProvider.class);
 				bind(ITraceURIConverter.class).to(DefaultTraceURIConverter.class);
 				bind(DefaultTraceURIConverter.class).to(ExtensibleTraceURIConverter.class);
 				
@@ -129,6 +132,7 @@ public class SharedModule extends AbstractModule {
 				expose(ITraceURIConverter.class);
 				expose(TraceFileNameProvider.class);
 				expose(ITraceForStorageProvider.class);
+				expose(ITraceForTypeRootProvider.class);
 				expose(StorageAwareTrace.class);
 			}
 		});

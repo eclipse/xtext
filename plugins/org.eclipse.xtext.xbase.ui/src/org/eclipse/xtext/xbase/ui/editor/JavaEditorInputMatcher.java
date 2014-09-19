@@ -60,9 +60,13 @@ public class JavaEditorInputMatcher implements IEditorMatchingStrategy {
 					if (newTypeRoot != null) {
 						IEditorPart existingEditor = editorRef.getEditor(true);
 						if (existingEditor instanceof XbaseEditor) {
-							((XbaseEditor)existingEditor).markNextSelectionAsJavaOffset(newTypeRoot);
+							((XbaseEditor) existingEditor).markNextSelectionAsJavaOffset(newTypeRoot);
 						}
 					}
+				} else {
+					IEditorPart existingEditor = editorRef.getEditor(true);
+					if (existingEditor instanceof XbaseEditor)
+						return false;
 				}
 				return true;
 			}
