@@ -7,27 +7,38 @@
  */
 package org.eclipse.xtend.core.conversion;
 
-import org.eclipse.core.runtime.IProgressMonitor;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTParser;
-import org.eclipse.xtend.core.conversion.XtendASTFlattener;
+import org.eclipse.xtend.core.conversion.JavaASTFlattener;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  */
 @SuppressWarnings("all")
 public class JavaConverter {
-  public String toXtend(final String javaSrc, final IProgressMonitor progressMonitor) {
+  @Inject
+  private Provider<JavaASTFlattener> flattenerProvider;
+  
+  public String toXtend(final String javaSrc) {
+    return this.toXtend(javaSrc, ASTParser.K_COMPILATION_UNIT);
+  }
+  
+  public String toXtend(final String javaSrc, final int javaSourceKind) {
     final ASTParser parser = ASTParser.newParser(AST.JLS3);
+    parser.setStatementsRecovery(true);
+    parser.setBindingsRecovery(true);
+    parser.setKind(javaSourceKind);
     char[] _charArray = javaSrc.toCharArray();
     parser.setSource(_charArray);
-    ASTNode _createAST = parser.createAST(progressMonitor);
+    ASTNode _createAST = parser.createAST(null);
     return this.doConvert(_createAST);
   }
   
   protected String doConvert(final ASTNode ast) {
-    final XtendASTFlattener flattener = new XtendASTFlattener();
+    final JavaASTFlattener flattener = this.flattenerProvider.get();
     ast.accept(flattener);
     return flattener.getResult();
   }
