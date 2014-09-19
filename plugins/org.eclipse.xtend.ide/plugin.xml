@@ -57,6 +57,13 @@
 				</and>
             </activeWhen>
         </handler>
+        <handler 
+        	class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.edit.PasteJavaCodeHandler" 
+        	commandId="org.eclipse.xtend.ide.pasteJavaCode">
+           <activeWhen>
+              <reference definitionId="org.eclipse.xtend.core.Xtend.XtextEditor.opened"/>
+           </activeWhen>
+		</handler>
     </extension>
     <extension point="org.eclipse.core.expressions.definitions">
         <definition id="org.eclipse.xtend.core.Xtend.Editor.opened">
@@ -214,6 +221,11 @@
             categoryId="org.eclipse.ui.category.edit"
             description="Copy the qualified name for the selected element"
             name="Copy Qualified Name">
+      </command>
+      <command
+            categoryId="org.eclipse.ui.category.textEditor"
+            id="org.eclipse.xtend.ide.pasteJavaCode"
+            name="Paste java">
       </command>
     </extension>
     <extension point="org.eclipse.ui.menus">
@@ -1272,6 +1284,12 @@
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             contextId="org.eclipse.xtext.ui.XtextEditorScope"
             platform="gtk"/>
+        <key
+              commandId="org.eclipse.xtend.ide.pasteJavaCode"
+              contextId="org.eclipse.xtend.ide.XtendEditorScope"
+              schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+              sequence="M1+M2+V">
+        </key>
     </extension>
     <extension point="org.eclipse.ui.handlers">
 		<handler 
