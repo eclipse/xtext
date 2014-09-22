@@ -194,6 +194,9 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 			else
 				return null;
 		} 
+		if (textRegion == ITextRegion.EMPTY_REGION) {
+			return null;
+		}
 		ILocationData newData = createLocationData(converter, object, (ITextRegionWithLineInformation) textRegion);
 		return newData;
 	}
