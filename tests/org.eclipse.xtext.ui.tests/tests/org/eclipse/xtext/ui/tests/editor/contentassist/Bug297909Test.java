@@ -22,6 +22,7 @@ import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.reconciler.ReconcilerReplaceRegion;
 import org.eclipse.xtext.ui.editor.reconciler.XtextDocumentReconcileStrategy;
@@ -89,6 +90,8 @@ public class Bug297909Test extends AbstractContentAssistProcessorTest {
 			}
 		});
 		XtextResource resource = injector.getInstance(XtextResource.class);
+		XtextResourceSet resourceSet = injector.getInstance(XtextResourceSet.class);
+		resourceSet.getResources().add(resource);
 		resource.load(new StringInputStream(""), Collections.singletonMap(XtextResource.OPTION_ENCODING, Charset.defaultCharset().name()));
 		document.setInput(resource);
 		document.set("abstract rules firstRule");
