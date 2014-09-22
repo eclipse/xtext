@@ -23,6 +23,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.Scopes;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.junit.Test;
 
@@ -58,12 +59,16 @@ public class NamesAreUniqueValidationHelperTest extends AbstractValidationMessag
 	
 	@Test public void testCancel_01() {
 		maxCallCount = 1;
-		helper.checkUniqueNames(
+		try {
+			helper.checkUniqueNames(
 				Scopes.scopedElementsFor(ImmutableList.of(
 						createEClass(),
 						createEClass()
 				)), 
 				this, this);
+			fail("should be canceled");
+		} catch (OperationCanceledError e) {
+		}
 		assertEquals(maxCallCount, callCount);
 	}
 	
@@ -189,9 +194,13 @@ public class NamesAreUniqueValidationHelperTest extends AbstractValidationMessag
 		for(ENamedElement classifier: elements) {
 			classifier.setName("Same");
 		}
-		helper.checkUniqueNames(
-				Scopes.scopedElementsFor(elements), 
-				this, this);
+		try {
+			helper.checkUniqueNames(
+					Scopes.scopedElementsFor(elements), 
+					this, this);
+			fail("cancellation expected");
+		} catch (OperationCanceledError e) {
+		}
 		assertEquals(1, callCount);
 	}
 	

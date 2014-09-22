@@ -35,7 +35,8 @@ public class NamesAreUniqueValidationHelper implements INamesAreUniqueValidation
 
 	private ImmutableSet<EClass> clusterTypes = getClusterTypes();
 	
-	@Inject OperationCanceledManager operationCanceledManager;
+	@Inject 
+	private OperationCanceledManager operationCanceledManager = new OperationCanceledManager();
 	
 	/**
 	 * <p>Initialize the set of clustering types. A type is considered to be clustering
