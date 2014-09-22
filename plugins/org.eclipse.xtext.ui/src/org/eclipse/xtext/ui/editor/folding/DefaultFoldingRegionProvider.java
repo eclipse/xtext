@@ -109,16 +109,23 @@ public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 		if(parseResult != null){
 			EObject rootASTElement = parseResult.getRootASTElement();
 			if(rootASTElement != null){
-				TreeIterator<EObject> allContents = rootASTElement.eAllContents();
-				while (allContents.hasNext()) {
-					if (cancelIndicator.isCanceled())
-						throw new OperationCanceledException();
-					EObject eObject = allContents.next();
-					if (isHandled(eObject)) {
-						computeObjectFolding(eObject, foldingRegionAcceptor);
-					}
-					if (!shouldProcessContent(eObject)) {
-						allContents.prune();
+				if (cancelIndicator.isCanceled())
+					throw new OperationCanceledException();
+				if (isHandled(rootASTElement)) {
+					computeObjectFolding(rootASTElement, foldingRegionAcceptor);
+				}
+				if (shouldProcessContent(rootASTElement)) {
+					TreeIterator<EObject> allContents = rootASTElement.eAllContents();
+					while (allContents.hasNext()) {
+						if (cancelIndicator.isCanceled())
+							throw new OperationCanceledException();
+						EObject eObject = allContents.next();
+						if (isHandled(eObject)) {
+							computeObjectFolding(eObject, foldingRegionAcceptor);
+						}
+						if (!shouldProcessContent(eObject)) {
+							allContents.prune();
+						}
 					}
 				}
 			}
@@ -130,13 +137,20 @@ public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 	}
 	
 	protected void computeObjectFolding(EObject eObject, IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
+		computeObjectFolding(eObject, foldingRegionAcceptor, false);
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	protected void computeObjectFolding(EObject eObject, IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor, boolean initiallyFolded) {
 		ITextRegion region = locationInFileProvider.getFullTextRegion(eObject);
 		if (region != null) {
 			ITextRegion significant = locationInFileProvider.getSignificantTextRegion(eObject);
 			if (significant == null)
 				throw new NullPointerException("significant region may not be null");
 			int offset = region.getOffset();
-			foldingRegionAcceptor.accept(offset, region.getLength(), significant);
+			((DefaultFoldingRegionAcceptor)foldingRegionAcceptor).accept(offset, region.getLength(), initiallyFolded, significant);
 		}
 	}
 
@@ -150,15 +164,7 @@ public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 				if (cancelIndicator.isCanceled())
 					throw new OperationCanceledException();
 				if (tokenTypeToPartitionTypeMapperExtension.isMultiLineComment(typedRegion.getType())) {
-					int offset = typedRegion.getOffset();
-					int length = typedRegion.getLength();
-					Matcher matcher = getTextPatternInComment().matcher(xtextDocument.get(offset, length));
-					if (matcher.find()) {
-						TextRegion significant = new TextRegion(offset + matcher.start(), 0);
-						foldingRegionAcceptor.accept(offset, length, significant);
-					} else {
-						foldingRegionAcceptor.accept(offset, length);
-					}
+					computeCommentFolding(xtextDocument, foldingRegionAcceptor, typedRegion, false);
 				}
 			}
 		} catch (BadLocationException e) {
@@ -168,6 +174,22 @@ public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 		} catch (AssertionFailedException e) {
 			// partioning failed
 			log.error(e, e);
+		}
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	protected void computeCommentFolding(IXtextDocument xtextDocument, IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor, ITypedRegion typedRegion, boolean initiallyFolded)
+			throws BadLocationException {
+		int offset = typedRegion.getOffset();
+		int length = typedRegion.getLength();
+		Matcher matcher = getTextPatternInComment().matcher(xtextDocument.get(offset, length));
+		if (matcher.find()) {
+			TextRegion significant = new TextRegion(offset + matcher.start(), 0);
+			((DefaultFoldingRegionAcceptor)foldingRegionAcceptor).accept(offset, length, initiallyFolded, significant);
+		} else {
+			((DefaultFoldingRegionAcceptor)foldingRegionAcceptor).accept(offset, length, initiallyFolded);
 		}
 	}
 	

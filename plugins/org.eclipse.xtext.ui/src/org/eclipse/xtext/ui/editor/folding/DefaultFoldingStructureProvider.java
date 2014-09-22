@@ -56,7 +56,7 @@ public class DefaultFoldingStructureProvider implements IFoldingStructureProvide
 	}
 
 	public void initialize() {
-		calculateProjectionAnnotationModel(false);
+		calculateProjectionAnnotationModel(true);
 	}
 
 	public void uninstall() {
@@ -151,7 +151,8 @@ public class DefaultFoldingStructureProvider implements IFoldingStructureProvide
 
 	protected void addProjectionAnnotation(boolean allowCollapse, Position foldingRegion,
 			Map<ProjectionAnnotation, Position> additionsMap) {
-		ProjectionAnnotation projectionAnnotation = createProjectionAnnotation(allowCollapse, foldingRegion);
+		boolean collapse = allowCollapse && (foldingRegion instanceof DefaultFoldedPosition) && ((DefaultFoldedPosition)foldingRegion).isInitiallyFolded();
+		ProjectionAnnotation projectionAnnotation = createProjectionAnnotation(collapse, foldingRegion);
 		additionsMap.put(projectionAnnotation, foldingRegion);
 	}
 
