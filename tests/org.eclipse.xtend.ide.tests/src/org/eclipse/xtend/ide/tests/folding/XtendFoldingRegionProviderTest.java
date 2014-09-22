@@ -14,6 +14,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.editor.folding.DefaultFoldedPosition;
 import org.eclipse.xtext.ui.editor.folding.FoldedPosition;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -47,6 +48,38 @@ public class XtendFoldingRegionProviderTest extends AbstractXtendUITestCase {
 		FoldedPosition first = foldingRegions.iterator().next();
 		assertEquals(13, first.getOffset());
 		assertEquals(43, first.length);
+	}
+	
+	@Test public void testFoldCopyrightHeader() throws Exception {
+		String content = "/**\n * \n * Hello Copyright\n * \n */\npackage test\nimport java.util.List\nimport java.util.Set\nclass Bar{}";
+		IFile iFile = testHelper.createFile("test/Bar",content);
+		Collection<FoldedPosition> foldingRegions = foldingRegionProvider.getFoldingRegions(openFileAndReturnDocument(iFile));
+		assertEquals(2, foldingRegions.size());
+		Iterator<FoldedPosition> iterator = foldingRegions.iterator();
+		FoldedPosition first = iterator.next();
+		assertEquals(48, first.getOffset());
+		assertEquals(43, first.length);
+		assertTrue(((DefaultFoldedPosition)first).isInitiallyFolded());
+		FoldedPosition second = iterator.next();
+		assertEquals(0, second.getOffset());
+		assertEquals(35, second.length);
+		assertTrue(((DefaultFoldedPosition)second).isInitiallyFolded());
+	}
+	
+	@Test public void testFoldCopyrightHeader2() throws Exception {
+		String content = "package test\n/**\n * \n * Hello Copyright\n * \n */\nimport java.util.List\nimport java.util.Set\nclass Bar{}";
+		IFile iFile = testHelper.createFile("test/Bar",content);
+		Collection<FoldedPosition> foldingRegions = foldingRegionProvider.getFoldingRegions(openFileAndReturnDocument(iFile));
+		assertEquals(2, foldingRegions.size());
+		Iterator<FoldedPosition> iterator = foldingRegions.iterator();
+		FoldedPosition first = iterator.next();
+		assertEquals(48, first.getOffset());
+		assertEquals(43, first.length);
+		assertTrue(((DefaultFoldedPosition)first).isInitiallyFolded());
+		FoldedPosition second = iterator.next();
+		assertEquals(13, second.getOffset());
+		assertEquals(35, second.length);
+		assertFalse(((DefaultFoldedPosition)second).isInitiallyFolded());
 	}
 	
 	@Test public void testFoldAnonymousClass() throws Exception {

@@ -8,16 +8,19 @@
 package org.eclipse.xtend.ide.editor;
 
 import java.util.Collection;
+import java.util.Collections;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.text.IRegion;
+import org.eclipse.jdt.ui.PreferenceConstants;
+import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.ITypedRegion;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendPackage;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.folding.DefaultFoldingRegionAcceptor;
 import org.eclipse.xtext.ui.editor.folding.DefaultFoldingRegionProvider;
 import org.eclipse.xtext.ui.editor.folding.FoldedPosition;
@@ -25,16 +28,30 @@ import org.eclipse.xtext.ui.editor.folding.IFoldingRegionAcceptor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.ITextRegion;
 
+import com.google.inject.Inject;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Holger Schill
  */
 public class XtendFoldingRegionProvider extends DefaultFoldingRegionProvider {
-
+	
+	@Inject FoldingPreferences foldingPreferences;
+	
+	@Override
+	public Collection<FoldedPosition> getFoldingRegions(IXtextDocument xtextDocument) {
+		if (foldingPreferences.isEnabled()) {
+			return super.getFoldingRegions(xtextDocument);
+		} else {
+			return Collections.emptyList();
+		}
+	}
+	
 	@Override
 	protected boolean isHandled(EObject object) {
 		EClass clazz = object.eClass();
 		return clazz == XtendPackage.Literals.XTEND_CLASS
+				|| clazz == XtendPackage.Literals.XTEND_FILE
 				|| clazz == XtendPackage.Literals.XTEND_INTERFACE
 				|| clazz == XtendPackage.Literals.XTEND_ENUM
 				|| clazz == XtendPackage.Literals.XTEND_ANNOTATION_TYPE
@@ -49,39 +66,42 @@ public class XtendFoldingRegionProvider extends DefaultFoldingRegionProvider {
 	}
 	
 	@Override
-	protected Collection<FoldedPosition> doGetFoldingRegions(IXtextDocument xtextDocument, XtextResource xtextResource) {
-		Collection<FoldedPosition> result = super.doGetFoldingRegions(xtextDocument, xtextResource);
-		IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor = createAcceptor(xtextDocument, result, true);
-		computeImportFolding(xtextResource, foldingRegionAcceptor);
-		return result;
-	}
-	
-	protected void computeImportFolding(XtextResource xtextResource, IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
-		IParseResult parseResult = xtextResource.getParseResult();
-		if(parseResult != null && parseResult.getRootASTElement() instanceof XtendFile) {
-			XtendFile xtendFile = (XtendFile) parseResult.getRootASTElement();
-			// Only if we have at least 2 imports
-			if(xtendFile.getImportSection() != null 
-				&& xtendFile.getImportSection().getImportDeclarations().size() >1) {
-					ICompositeNode node = NodeModelUtils.findActualNodeFor(xtendFile.getImportSection());
-					if(node != null) {
-						ITextRegion textRegion = node.getTextRegion();
-						foldingRegionAcceptor.accept(textRegion.getOffset(), textRegion.getLength());
-					}
-			}
+	protected void computeCommentFolding(IXtextDocument xtextDocument,
+			IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor, ITypedRegion typedRegion, boolean initiallyFolded)
+			throws BadLocationException {
+		if (xtextDocument.get(0, typedRegion.getOffset()).trim().length()==0) {
+			super.computeCommentFolding(xtextDocument, foldingRegionAcceptor, typedRegion, foldingPreferences.isFoldHeader());
+		} else {
+			super.computeCommentFolding(xtextDocument, foldingRegionAcceptor, typedRegion, foldingPreferences.isFoldComments());
 		}
 	}
 	
-	protected IFoldingRegionAcceptor<ITextRegion> createAcceptor(IXtextDocument xtextDocument, Collection<FoldedPosition> foldedPositions, final boolean initiallyCollapsed) {
-		return new DefaultFoldingRegionAcceptor(xtextDocument, foldedPositions){
-			@Override
-			protected FoldedPosition newFoldedPosition(IRegion region, ITextRegion significantRegion) {
-				if (region == null)
-					return null;
-				if (significantRegion != null)
-					return new InitiallyCollapsableFoldedPosition(region.getOffset(), region.getLength(), significantRegion.getOffset() - region.getOffset(), significantRegion.getLength(), initiallyCollapsed);
-				return new InitiallyCollapsableFoldedPosition(region.getOffset(), region.getLength(), -1, -1, initiallyCollapsed);
+	@Override
+	protected void computeObjectFolding(EObject eObject, IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
+		if (eObject instanceof XtendFile) {
+			computeImportFolding((XtendFile)eObject, foldingRegionAcceptor);
+		} else {
+			boolean initiallyFolded = false;
+			if (eObject instanceof XtendFunction) {
+				initiallyFolded = foldingPreferences.isFoldMethods();
 			}
-		};
+			if (eObject instanceof XtendTypeDeclaration && !(eObject.eContainer() instanceof XtendFile)) {
+				initiallyFolded = foldingPreferences.isFoldInnerTypes();
+			}
+			super.computeObjectFolding(eObject, foldingRegionAcceptor, initiallyFolded);
+		}
 	}
+
+	protected void computeImportFolding(XtendFile xtendFile, IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
+		if(xtendFile.getImportSection() != null 
+				&& xtendFile.getImportSection().getImportDeclarations().size() >1) {
+			ICompositeNode node = NodeModelUtils.findActualNodeFor(xtendFile.getImportSection());
+			if(node != null) {
+				ITextRegion textRegion = node.getTextRegion();
+				String preference = PreferenceConstants.getPreference(PreferenceConstants.EDITOR_FOLDING_IMPORTS,  null);
+				((DefaultFoldingRegionAcceptor)foldingRegionAcceptor).accept(textRegion.getOffset(), textRegion.getLength(), Boolean.valueOf(preference));
+			}
+		}
+	}
+
 }

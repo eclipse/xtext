@@ -33,7 +33,6 @@ import org.eclipse.xtend.ide.contentassist.antlr.FlexerBasedContentAssistContext
 import org.eclipse.xtend.ide.contentassist.antlr.FlexerBasedContentAssistParser;
 import org.eclipse.xtend.ide.contentassist.antlr.FlexerBasedPartialXtendContentAssistParser;
 import org.eclipse.xtend.ide.contentassist.antlr.internal.InternalXtendLexer;
-import org.eclipse.xtend.ide.editor.InitiallyCollapsableAwareFoldingStructureProvider;
 import org.eclipse.xtend.ide.editor.OccurrenceComputer;
 import org.eclipse.xtend.ide.editor.OverrideIndicatorModelListener;
 import org.eclipse.xtend.ide.editor.OverrideIndicatorRulerAction;
@@ -116,7 +115,6 @@ import org.eclipse.xtext.ui.editor.embedded.IEditedResourceProvider;
 import org.eclipse.xtext.ui.editor.findrefs.DelegatingReferenceFinder;
 import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider;
-import org.eclipse.xtext.ui.editor.folding.IFoldingStructureProvider;
 import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider;
@@ -287,10 +285,6 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 
 	public Class<? extends ToggleSLCommentAction.Factory> bindToggleCommentFactory() {
 		return RichStringAwareToggleCommentAction.Factory.class;
-	}
-
-	public Class<? extends IFoldingStructureProvider> bindIFoldingStructureProvider() {
-		return InitiallyCollapsableAwareFoldingStructureProvider.class;
 	}
 
 	@Override
