@@ -1547,6 +1547,38 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     this.tracesTo(_builder, _builder_1);
   }
   
+  @Test
+  public void testEmptyRegionsTraceToContainingRegion() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val foo = new Thread[##]");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private final Thread foo = new Thread(#new Runnable() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("public void run() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}#);");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.tracesTo(_builder, _builder_1);
+  }
+  
   private Pattern p = Pattern.compile("([^#]*)#([^#]*)#([^#]*)", Pattern.DOTALL);
   
   public void tracesTo(final CharSequence xtend, final CharSequence java) {

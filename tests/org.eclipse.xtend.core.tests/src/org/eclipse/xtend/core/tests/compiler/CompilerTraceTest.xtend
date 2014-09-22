@@ -763,6 +763,23 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 		''')
 	}
 	
+	@Test
+	def void testEmptyRegionsTraceToContainingRegion() {
+		'''
+			class Foo {
+				val foo = new Thread[##]
+			}
+		'''.tracesTo('''
+			@SuppressWarnings("all")
+			public class Foo {
+			  private final Thread foo = new Thread(#new Runnable() {
+			    public void run() {
+			    }
+			  }#);
+			}
+		''')
+	}
+	
 	private Pattern p = Pattern::compile("([^#]*)#([^#]*)#([^#]*)", Pattern::DOTALL);
 	
 	def tracesTo(CharSequence xtend, CharSequence java) {

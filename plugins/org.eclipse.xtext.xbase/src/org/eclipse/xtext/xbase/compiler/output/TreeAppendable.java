@@ -194,6 +194,9 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 			else
 				return null;
 		} 
+		if (textRegion == ITextRegion.EMPTY_REGION) {
+			return null;
+		}
 		ILocationData newData = createLocationData(converter, object, (ITextRegionWithLineInformation) textRegion);
 		return newData;
 	}
@@ -242,6 +245,9 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 				log.debug("location provider returned text region without line information. Synthesized dummy data.", new Exception());
 			textRegion = new TextRegionWithLineInformation(textRegion.getOffset(), textRegion.getLength(), 0, 0);
 		} 
+		if (textRegion == ITextRegion.EMPTY_REGION) {
+			return this;
+		}
 		ILocationData newData = createLocationData(traceURIConverter, object, (ITextRegionWithLineInformation) textRegion);
 		return trace(Collections.singleton(newData), false);
 	}
