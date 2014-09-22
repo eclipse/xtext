@@ -63,6 +63,24 @@ public class XtendTraceTests extends AbstractXtendUITestCase {
 		IFile generatedFile = testHelper.getProject().getFile("/xtend-gen/test/Test.java");
 		Iterable<ILocationInResource> locationsByURI = traceToTarget.getAllAssociatedLocations(new TextRegion(20, 0), generatedFile);
 		assertTrue(locationsByURI.iterator().hasNext());
-
+	}
+	
+	@Test
+	public void testNoEmptyTraces() throws Exception {
+		testHelper.createFile("test/Foo.java", 
+				"package test;\n"
+				+ "public class Foo {\n"
+				+ "	public void foo(Object it) {}\n"
+				+ "	public void _foo(Object it) {}\n"
+				+ "}");
+		IFile sourceFile = testHelper.createFile("test/Zar", 
+				"package test\n"
+				+ "class Bar extends Foo {\n"
+				+ "	def dispatch foo(String it) {print(it)}\n"
+				+ "}");
+		waitForAutoBuild();
+		ITrace trace = traceInformation.getTraceToTarget(sourceFile);
+		assertNotNull(trace);
+		trace.getBestAssociatedLocation(new TextRegion(65, 0));
 	}
 }
