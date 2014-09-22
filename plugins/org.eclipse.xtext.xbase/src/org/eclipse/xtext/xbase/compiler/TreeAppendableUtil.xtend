@@ -15,6 +15,7 @@ import org.eclipse.xtext.resource.ILocationInFileProviderExtension
 import org.eclipse.xtext.resource.ILocationInFileProvider
 import com.google.inject.Inject
 import org.eclipse.xtext.xbase.compiler.output.TreeAppendable
+import org.eclipse.xtext.util.ITextRegion
 
 class TreeAppendableUtil {
 	
@@ -29,7 +30,7 @@ class TreeAppendableUtil {
 			appendable.trace(source, ILocationInFileProviderExtension.RegionDescription.SIGNIFICANT, useForDebugging)
 		} else {
 			val it = locationProvider.getSignificantTextRegion(source) as ITextRegionWithLineInformation
-			if (it != null)
+			if (it !== null && it !== ITextRegion.EMPTY_REGION)
 				appendable.trace(new LocationData(offset, length, lineNumber, endLineNumber, null), useForDebugging)
 			else
 				appendable
@@ -44,7 +45,7 @@ class TreeAppendableUtil {
 				ILocationInFileProviderExtension: locationProvider.getTextRegion(source, ILocationInFileProviderExtension.RegionDescription.INCLUDING_COMMENTS)
 				default: locationProvider.getFullTextRegion(source)
 			} as ITextRegionWithLineInformation
-			if (it != null)
+			if (it != null && it !== ITextRegion.EMPTY_REGION)
 				appendable.trace(new LocationData(offset, length, lineNumber, endLineNumber, null))
 			else
 				appendable
