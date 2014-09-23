@@ -152,6 +152,12 @@
             categoryId="org.eclipse.xtext.ui.category.XtextEditor"
             id="org.eclipse.xtext.ui.editor.select.last">
       </command>
+      <command
+            categoryId="org.eclipse.xtext.ui.category.XtextEditor"
+            description="%OpenGeneratedFile_description"
+            id="org.eclipse.xtext.ui.OpenGeneratedFileCommand"
+            name="%OpenGeneratedFile_name">
+      </command>
       <!-- categories -->
       <category
             description="%XtextCommandCategory_description"
