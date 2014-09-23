@@ -7,10 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource
 
-import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.xtext.util.CancelIndicator
 import com.google.inject.Inject
+import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.xtext.service.OperationCanceledError
 import org.eclipse.xtext.service.OperationCanceledManager
+import org.eclipse.xtext.util.CancelIndicator
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -26,14 +27,16 @@ class OutdatedStateManager {
 	 */
 	def CancelIndicator newCancelIndiciator(ResourceSet rs) {
 		if (rs instanceof XtextResourceSet) {
-			[ rs.isOutdated ]
+			val current = rs.modificationStamp
+			return [ rs.isOutdated || current != rs.modificationStamp]
 		} else {
 			CancelIndicator.NullImpl
 		}
 	}
 	
 	/**
-	 * 
+	 * Checks whether the given ResourceSet is in an outdated state and
+	 * throws an {@link OperationCanceledError} if so.
 	 */ 
 	def void checkCanceled(ResourceSet rs) {
 		if (rs instanceof XtextResourceSet) {
