@@ -150,7 +150,7 @@ public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 			if (significant == null)
 				throw new NullPointerException("significant region may not be null");
 			int offset = region.getOffset();
-			((DefaultFoldingRegionAcceptor)foldingRegionAcceptor).accept(offset, region.getLength(), initiallyFolded, significant);
+			((IFoldingRegionAcceptorExtension<ITextRegion>)foldingRegionAcceptor).accept(offset, region.getLength(), initiallyFolded, significant);
 		}
 	}
 
@@ -187,9 +187,9 @@ public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 		Matcher matcher = getTextPatternInComment().matcher(xtextDocument.get(offset, length));
 		if (matcher.find()) {
 			TextRegion significant = new TextRegion(offset + matcher.start(), 0);
-			((DefaultFoldingRegionAcceptor)foldingRegionAcceptor).accept(offset, length, initiallyFolded, significant);
+			((IFoldingRegionAcceptorExtension<ITextRegion>)foldingRegionAcceptor).accept(offset, length, initiallyFolded, significant);
 		} else {
-			((DefaultFoldingRegionAcceptor)foldingRegionAcceptor).accept(offset, length, initiallyFolded);
+			((IFoldingRegionAcceptorExtension<ITextRegion>)foldingRegionAcceptor).accept(offset, length, initiallyFolded);
 		}
 	}
 	
