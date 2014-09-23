@@ -48,7 +48,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	@Inject extension Oven
 	
 	@Test
-	def void testErrorModel_01() throws Exception {
+	def void testErrorModel_001() throws Exception {
 		'''
 			import static extension Throwables.*
 			import java.net.URI
@@ -62,7 +62,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_02() throws Exception {
+	def void testErrorModel_002() throws Exception {
 		val file = '''
 			class TestXtend {
 				val static int a = 4
@@ -77,7 +77,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_03() throws Exception {
+	def void testErrorModel_003() throws Exception {
 		val file = '''
 			class TestXtend {
 				val static int a = 4
@@ -93,7 +93,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_04() throws Exception {
+	def void testErrorModel_004() throws Exception {
 		val file = '''
 			class TestXtend {
 				val static int a = 4
@@ -109,7 +109,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_05() throws Exception {
+	def void testErrorModel_005() throws Exception {
 		val file = '''
 			@
 		'''.processWithoutException
@@ -120,7 +120,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_06() throws Exception {
+	def void testErrorModel_006() throws Exception {
 		val file = '''
 			@Data class A {}
 			@
@@ -132,7 +132,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_07() throws Exception {
+	def void testErrorModel_007() throws Exception {
 		val file = '''
 			@Data class A {}
 			@Data class
@@ -144,7 +144,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_08() throws Exception {
+	def void testErrorModel_008() throws Exception {
 		val file = '''
 			annotation Bar { @
 		'''.processWithoutException
@@ -155,7 +155,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_09() throws Exception {
+	def void testErrorModel_009() throws Exception {
 		val file = '''
 			class X {
 				@Property val S
@@ -167,7 +167,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_10() throws Exception {
+	def void testErrorModel_010() throws Exception {
 		val file = '''
 			@SuppressWarnings("unused"
 		'''.processWithoutException
@@ -178,7 +178,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_11() throws Exception {
+	def void testErrorModel_011() throws Exception {
 		val file = '''
 			annotation { 
 				val inferred = 'bar'
@@ -192,7 +192,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_12() throws Exception {
+	def void testErrorModel_012() throws Exception {
 		val file = '''
 			class Y {
 			 static def <T> IExpectationSetters<T> expect(T value) {
@@ -217,7 +217,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_13() throws Exception {
+	def void testErrorModel_013() throws Exception {
 		val file = '''
 			class Y {
 			 static def <T> IExpectationSetters<T> expect(T value) {
@@ -242,7 +242,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_14() throws Exception {
+	def void testErrorModel_014() throws Exception {
 		val file = '''
 			class B extends  {
 				override foo(String x, String...args) {
@@ -261,7 +261,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_15() throws Exception {
+	def void testErrorModel_015() throws Exception {
 		val file = '''
 			@ class Node {
 			}
@@ -273,7 +273,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_16() throws Exception {
+	def void testErrorModel_016() throws Exception {
 		val file = '''
 			class <T> {
 				val String s
@@ -291,7 +291,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_17() throws Exception {
+	def void testErrorModel_017() throws Exception {
 		val file = '''
 			import static extension Throwables.*
 			import java.net.URI
@@ -320,7 +320,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_18() throws Exception {
+	def void testErrorModel_018() throws Exception {
 		val file = '''
 			class C {
 				def m(@
@@ -334,7 +334,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_19() throws Exception {
+	def void testErrorModel_019() throws Exception {
 		val file = '''
 			package x
 			import bug396879.*
@@ -353,7 +353,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_20() throws Exception {
+	def void testErrorModel_020() throws Exception {
 		val file = '''
 			package x
 			class Y {
@@ -374,7 +374,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 
 	@Test
-	def void testErrorModel_21() throws Exception {
+	def void testErrorModel_021() throws Exception {
 		'''
 			package x class Z {
 				def generate(java.util.List<String> d, String fsa) {
@@ -389,7 +389,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 
 	@Test
-	def void testErrorModel_22() throws Exception {
+	def void testErrorModel_022() throws Exception {
 		'''
 			package generics class Bar {
 				def <T extends (Object)=>T> T bar( t) {
@@ -400,7 +400,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_23() throws Exception {
+	def void testErrorModel_023() throws Exception {
 		'''
 			package generics class Bar {
 				def <T extends (Object)=>T> T bar() {
@@ -411,7 +411,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_24() throws Exception {
+	def void testErrorModel_024() throws Exception {
 		'''
 			class Bug<A> {
 				A a
@@ -426,7 +426,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_25() throws Exception {
+	def void testErrorModel_025() throws Exception {
 		'''
 			package x class Y {
 				def bug343090(Integer a, Integer b) {
@@ -440,7 +440,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_26() throws Exception {
+	def void testErrorModel_026() throws Exception {
 		'''
 			package x class Y {
 				def bug343090(Integer a, Integer b) {
@@ -454,7 +454,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_27() throws Exception {
+	def void testErrorModel_027() throws Exception {
 		'''
 			package x class Y {
 				def bug343090(Integer a, Integer b) {
@@ -468,7 +468,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_28() throws Exception {
+	def void testErrorModel_028() throws Exception {
 		'''
 			package x class Y {
 				def bug343090(Integer a, Integer b) {
@@ -482,7 +482,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_29() throws Exception {
+	def void testErrorModel_029() throws Exception {
 		'''
 			package x
 			class Y {
@@ -500,7 +500,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_30() throws Exception {
+	def void testErrorModel_030() throws Exception {
 		'''
 			package x class Y {
 				def bug343088(Integer a, Integer b) {
@@ -514,7 +514,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_31() throws Exception {
+	def void testErrorModel_031() throws Exception {
 		'''
 			package x class Y {
 				def bug343088(Integer a, Integer b) {
@@ -528,7 +528,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_32() throws Exception {
+	def void testErrorModel_032() throws Exception {
 		'''
 			package x class Y {
 				def bug343090(Integer a, Integer b) {
@@ -542,7 +542,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_33() throws Exception {
+	def void testErrorModel_033() throws Exception {
 		'''
 			package x
 			import java.util.Collection
@@ -569,7 +569,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_34() throws Exception {
+	def void testErrorModel_034() throws Exception {
 		'''
 			package x
 			import java.util.Collection
@@ -598,7 +598,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_35() throws Exception {
+	def void testErrorModel_035() throws Exception {
 		'''
 			package x
 			import java.util.Collection
@@ -622,7 +622,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_36() throws Exception {
+	def void testErrorModel_036() throws Exception {
 		'''
 			class Bar<T extends T> {
 				new Bar(T t) {
@@ -632,7 +632,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_37() throws Exception {
+	def void testErrorModel_037() throws Exception {
 		'''
 			class Bar<T1 extends T2, T2 extends T1> {
 				new Bar(T1 t1, T2 t2) {
@@ -642,7 +642,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_38() throws Exception {
+	def void testErrorModel_038() throws Exception {
 		'''
 			import bug380058.Amount
 			
@@ -660,7 +660,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_39() throws Exception {
+	def void testErrorModel_039() throws Exception {
 		'''
 			abstract class Option<T> {
 			  def <X> Option<X> map((T)=>X f) { switch this {
@@ -674,7 +674,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_40() throws Exception {
+	def void testErrorModel_040() throws Exception {
 		'''
 			abstract class Option<T> {
 			  def <X> Option<X> map((T)=>X f) { switch this {
@@ -690,14 +690,14 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_41() throws Exception {
+	def void testErrorModel_041() throws Exception {
 		'''
 			class E<T> extends E<T> {}
 		'''.processWithoutException
 	}
 	
 	@Test
-	def void testErrorModel_42() throws Exception {
+	def void testErrorModel_042() throws Exception {
 		'''
 			class C<T> extends E<T> {}
 			class D<T> extends C<T> {}
@@ -706,7 +706,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_43() throws Exception {
+	def void testErrorModel_043() throws Exception {
 		'''
 			@Data class Weight<T extends Comparable> implements Comparable<Weight<T>> {
 				T weight
@@ -719,7 +719,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_44() throws Exception {
+	def void testErrorModel_044() throws Exception {
 		'''
 			@Data class Weight<T extends Comparable<T>> implements Comparable<Weight<T>> {
 				T weight
@@ -732,7 +732,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_45() throws Exception {
+	def void testErrorModel_045() throws Exception {
 		'''
 			@Data class Weight<T extends Comparable<T>> implements Comparable<Weight<T>> {
 				T weight
@@ -745,7 +745,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_46() throws Exception {
+	def void testErrorModel_046() throws Exception {
 		'''
 			annotation DependsOn {
 				Class<?>[] value = #[ typeof(), typeof(CharSequence) ]
@@ -754,7 +754,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_47() throws Exception {
+	def void testErrorModel_047() throws Exception {
 		'''
 			@Data class Weight<T extends Comparable<T>> implements Comparable<Weight<T>> {
 				T weight
@@ -765,7 +765,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_48() throws Exception {
+	def void testErrorModel_048() throws Exception {
 		'''
 			@Data class Weight<T extends Comparable<Iterable<T>>> implements Comparable<Iterable<Weight<T>>> {
 				T weight
@@ -778,7 +778,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_49() throws Exception {
+	def void testErrorModel_049() throws Exception {
 		'''
 			class C {
 				def m(Class<?> type) {
@@ -789,7 +789,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_50() throws Exception {
+	def void testErrorModel_050() throws Exception {
 		'''
 			class C {
 				@Test def void m() {
@@ -803,7 +803,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_51() throws Exception {
+	def void testErrorModel_051() throws Exception {
 		'''
 			class C {
 				
@@ -821,7 +821,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_52() throws Exception {
+	def void testErrorModel_052() throws Exception {
 		'''
 			import com.google.inject.Injector
 			class C {
@@ -836,7 +836,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_53() throws Exception {
+	def void testErrorModel_053() throws Exception {
 		'''
 			class C extends D {
 				def m(int it) {
@@ -850,7 +850,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_54() throws Exception {
+	def void testErrorModel_054() throws Exception {
 		'''
 			import org.eclipse.xtext.xbase.lib.Extension
 			class C extends D {
@@ -865,7 +865,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_55() throws Exception {
+	def void testErrorModel_055() throws Exception {
 		'''
 			class C extends D {
 				protected extension String local
@@ -879,7 +879,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_56() throws Exception {
+	def void testErrorModel_056() throws Exception {
 		'''
 			class C extends D {
 				protected extension CharSequence local
@@ -893,7 +893,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_57() throws Exception {
+	def void testErrorModel_057() throws Exception {
 		'''
 			package x class Y {
 				static int j
@@ -912,7 +912,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_58() throws Exception {
+	def void testErrorModel_058() throws Exception {
 		'''
 			class C {
 				def m() {
@@ -926,7 +926,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_59() throws Exception {
+	def void testErrorModel_059() throws Exception {
 		'''
 			class C {
 				def m() {
@@ -940,7 +940,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_60() throws Exception {
+	def void testErrorModel_060() throws Exception {
 		'''
 			class C {
 				def m() {
@@ -951,7 +951,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_61() throws Exception {
+	def void testErrorModel_061() throws Exception {
 		'''
 			class C<T> implements C1<T> {
 				def void m(C1<?> p) {
@@ -966,7 +966,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_62() throws Exception {
+	def void testErrorModel_062() throws Exception {
 		'''
 			class C {
 				def void m(C1<?> p) {
@@ -981,7 +981,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_63() throws Exception {
+	def void testErrorModel_063() throws Exception {
 		'''
 			class C {
 				def void m(C1<?> p) {
@@ -996,7 +996,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_64() throws Exception {
+	def void testErrorModel_064() throws Exception {
 		'''
 			class C<T> implements C1<T> {
 				def void m(C1<T> p) {
@@ -1011,7 +1011,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_65() throws Exception {
+	def void testErrorModel_065() throws Exception {
 		'''
 			class C {
 				def void m(C1<String> p) {
@@ -1026,7 +1026,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_66() throws Exception {
+	def void testErrorModel_066() throws Exception {
 		'''
 			class C {
 				def void m(C1<String> p) {
@@ -1041,7 +1041,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_67() throws Exception {
+	def void testErrorModel_067() throws Exception {
 		'''
 			class C<T> implements C1<T> {
 				def void m(C2<?> p) {
@@ -1056,7 +1056,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_68() throws Exception {
+	def void testErrorModel_068() throws Exception {
 		'''
 			class C<T> implements C1<T> {
 				def void m(C3<?, ?> p) {
@@ -1071,7 +1071,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_69() throws Exception {
+	def void testErrorModel_069() throws Exception {
 		'''
 			class C<T> implements C1<T> {
 				def void m(C4<?, ?> p) {
@@ -1086,7 +1086,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_70() throws Exception {
+	def void testErrorModel_070() throws Exception {
 		'''
 			class C {
 				def void m(C1<?> p) {
@@ -1099,7 +1099,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_71() throws Exception {
+	def void testErrorModel_071() throws Exception {
 		'''
 			import java.util.Map
 			class C {
@@ -1123,7 +1123,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_72() throws Exception {
+	def void testErrorModel_072() throws Exception {
 		'''
 			class TestTypes {
 				def foo() {
@@ -1148,7 +1148,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_73() throws Exception {
+	def void testErrorModel_073() throws Exception {
 		'''
 			class C {
 				def static dispatch m(DoesNotExist d) {
@@ -1159,7 +1159,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_74() throws Exception {
+	def void testErrorModel_074() throws Exception {
 		'''
 			class C {
 				def m(int it) {
@@ -1172,7 +1172,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_75() throws Exception {
+	def void testErrorModel_075() throws Exception {
 		'''
 			class C {
 				def m(int it) {
@@ -1185,7 +1185,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_76() throws Exception {
+	def void testErrorModel_076() throws Exception {
 		val file = '''
 			class C {
 				def String m(boolean b) {
@@ -1209,7 +1209,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_77() throws Exception {
+	def void testErrorModel_077() throws Exception {
 		val file = '''
 			class C {
 				def m() {
@@ -1226,7 +1226,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_78() throws Exception {
+	def void testErrorModel_078() throws Exception {
 		'''
 			package org.eclipse.xtend.core.tests.smoke
 			
@@ -1236,7 +1236,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_79() throws Exception {
+	def void testErrorModel_079() throws Exception {
 		'''
 			package org.eclipse.xtend.core.tests.smoke
 			
@@ -1246,7 +1246,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_80() throws Exception {
+	def void testErrorModel_080() throws Exception {
 		'''
 			package org.eclipse.xtend.core.tests.smoke
 			
@@ -1256,7 +1256,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_81() throws Exception {
+	def void testErrorModel_081() throws Exception {
 		'''
 			package org.eclipse.xtend.core.tests.smoke
 			
@@ -1266,7 +1266,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_82() throws Exception {
+	def void testErrorModel_082() throws Exception {
 		'''
 			package x
 			class Y {
@@ -1286,7 +1286,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_83() throws Exception {
+	def void testErrorModel_083() throws Exception {
 		'''
 			package x
 			class Y {
@@ -1301,7 +1301,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_84() throws Exception {
+	def void testErrorModel_084() throws Exception {
 		'''
 			package foo
 			class Bar {
@@ -1315,7 +1315,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_85() throws Exception {
+	def void testErrorModel_085() throws Exception {
 		'''
 			package foo
 			/**/
@@ -1333,21 +1333,21 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_86() throws Exception {
+	def void testErrorModel_086() throws Exception {
 		'''
 			/*
 		'''.processWithoutException
 	}
 	
 	@Test
-	def void testErrorModel_87() throws Exception {
+	def void testErrorModel_087() throws Exception {
 		'''
 			/
 		'''.processWithoutException
 	}
 	
 	@Test
-	def void testErrorModel_88() throws Exception {
+	def void testErrorModel_088() throws Exception {
 		'''
 			/**
 			 * header
@@ -1360,29 +1360,29 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_89() throws Exception {
+	def void testErrorModel_089() throws Exception {
 		'''/*'''.processWithoutException
 	}
 	
 	@Test
-	def void testErrorModel_90() throws Exception {
+	def void testErrorModel_090() throws Exception {
 		'''/'''.processWithoutException
 	}
 	
 	@Test
-	def void testErrorModel_91() throws Exception {
+	def void testErrorModel_091() throws Exception {
 		'''/**'''.processWithoutException
 	}
 	
 	@Test
-	def void testErrorModel_92() throws Exception {
+	def void testErrorModel_092() throws Exception {
 		'''
 			/*
 			 *'''.processWithoutException
 	}
 	
 	@Test
-	def void testErrorModel_93() throws Exception {
+	def void testErrorModel_093() throws Exception {
 		'''
 			class C {
 				def m(java.util.List<String[]> arg) {}
@@ -1394,7 +1394,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_94() throws Exception {
+	def void testErrorModel_094() throws Exception {
 		'''
 			class C {
 				def enumValue(Class<?> clazz, String value) {
@@ -1406,7 +1406,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_95() throws Exception {
+	def void testErrorModel_095() throws Exception {
 		'''
 			class C {
 				def add(T item) {
@@ -1417,7 +1417,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_96() throws Exception {
+	def void testErrorModel_096() throws Exception {
 		'''
 			class C {
 				def add(T item) {
@@ -1430,7 +1430,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_97() throws Exception {
+	def void testErrorModel_097() throws Exception {
 		'''
 			class A {
 				def void m(Class<?>... c) {
@@ -1441,7 +1441,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_98() throws Exception {
+	def void testErrorModel_098() throws Exception {
 		fireproof('''
 			import java.util.LinkedList
 			
@@ -1468,7 +1468,7 @@ class ErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def void testErrorModel_99() throws Exception {
+	def void testErrorModel_099() throws Exception {
 		fireproof('''
 			package x 
 			class Y {  
@@ -2002,6 +2002,17 @@ class ErrorTest extends AbstractXtendTestCase {
 				}
 			}
 		'''.fireproof
+	}
+	
+	@Test
+	def void testErrorModel_138() throws Exception {
+		val file = '''
+			package test
+			class Bar<T> extends test.Bar.Foo<T> {}
+		'''.processWithoutException
+		file.eResource.errors => [
+			assertFalse(toString, exists [ message.startsWith("Cyclic ")])
+		]
 	}
 	
 	def processWithoutException(CharSequence input) throws Exception {
