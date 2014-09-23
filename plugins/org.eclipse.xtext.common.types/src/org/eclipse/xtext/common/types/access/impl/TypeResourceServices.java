@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
+import org.eclipse.xtext.resource.OutdatedStateManager;
 import org.eclipse.xtext.service.OperationCanceledManager;
 
 import com.google.inject.Inject;
@@ -20,8 +21,13 @@ import com.google.inject.Inject;
 public class TypeResourceServices {
 
 	@Inject OperationCanceledManager operationCanceledManager;
+	@Inject OutdatedStateManager outdatedStateManager;
 	
 	public OperationCanceledManager getOperationCanceledManager() {
 		return operationCanceledManager;
+	}
+	
+	public OutdatedStateManager getOutdatedStateManager() {
+		return outdatedStateManager;
 	}
 }

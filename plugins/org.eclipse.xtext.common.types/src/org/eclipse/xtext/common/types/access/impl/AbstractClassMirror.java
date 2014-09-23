@@ -35,6 +35,14 @@ public abstract class AbstractClassMirror implements IClassMirror {
 
 	private static final Logger logger = Logger.getLogger(AbstractClassMirror.class);
 	private boolean isEmptynessLogged = false;
+	protected TypeResourceServices typeResourceServices;
+
+	public AbstractClassMirror() {
+	}
+	
+	public AbstractClassMirror(TypeResourceServices typeResourceServices) {
+		this.typeResourceServices = typeResourceServices;
+	}
 	
 	public String getFragment(EObject obj, IFragmentProvider.Fallback fallback) {
 		if (obj instanceof JvmTypeParameter)
@@ -76,6 +84,8 @@ public abstract class AbstractClassMirror implements IClassMirror {
 			}
 		} else {
 			if (resource.getContents().isEmpty()) {
+				if (typeResourceServices!= null) 
+					typeResourceServices.outdatedStateManager.checkCanceled(resource.getResourceSet());
 				if (!isEmptynessLogged) {
 					isEmptynessLogged = true;
 					logger.error("resource is empty: " + resource.getURI(), new IllegalStateException());
