@@ -15,6 +15,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.jdt.internal.ui.search.JavaSearchQuery;
 import org.eclipse.jdt.internal.ui.search.SearchResultUpdater;
@@ -52,7 +53,7 @@ public class CompositeSearchQuery extends JavaSearchQuery {
 			IStatus status = child.run(progress.newChild(1));
 			multiStatus.add(status);
 			if(progress.isCanceled()) {
-				throw new OperationCanceledException();
+				return Status.CANCEL_STATUS;
 			}
 		}
 		return multiStatus;

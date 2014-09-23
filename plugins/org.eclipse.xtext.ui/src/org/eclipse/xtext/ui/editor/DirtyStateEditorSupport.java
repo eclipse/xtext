@@ -131,7 +131,7 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 					return Status.OK_STATUS;
 				}
 				if (monitor.isCanceled())
-					throw new OperationCanceledException();
+					return Status.CANCEL_STATUS;
 				int coarseGrainedChangesSeen = coarseGrainedChanges.get();
 				final boolean[] isReparseRequired = new boolean[] { coarseGrainedChangesSeen > 0 };
 				final Pair<IResourceDescription.Event, Integer> event = mergePendingDeltas();
@@ -156,7 +156,7 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 					
 						});
 				if (monitor.isCanceled())
-					throw new OperationCanceledException();
+					return Status.CANCEL_STATUS;
 				unloadAffectedResourcesAndReparseDocument(document, affectedResources, isReparseRequired[0]);
 				for (int i = 0; i < event.getSecond(); i++) {
 					pendingChanges.poll();
@@ -164,9 +164,9 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 				coarseGrainedChanges.addAndGet(-coarseGrainedChangesSeen);
 				return Status.OK_STATUS;
 			} catch (OperationCanceledException e) {
-				throw e;
+				return Status.CANCEL_STATUS;
 			} catch (OperationCanceledError e) {
-				throw e.getWrapped();
+				return Status.CANCEL_STATUS;
 			} catch (Throwable e) {
 				LOG.error("Error updating dirty state editor", e);
 				return Status.OK_STATUS;
