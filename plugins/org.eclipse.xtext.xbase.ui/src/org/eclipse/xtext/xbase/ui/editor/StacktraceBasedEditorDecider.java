@@ -27,7 +27,8 @@ public class StacktraceBasedEditorDecider {
 	 * @nooverride This method is not intended to be re-implemented or extended by clients.
 	 */
 	public Decision decideAccordingToCaller() {
-		return doDecideAccordingToCaller(true);
+		Decision result = doDecideAccordingToCaller(true);
+		return result;
 	}
 
 	protected Decision doDecideAccordingToCaller(boolean respectPackageExplorer) {
@@ -42,6 +43,8 @@ public class StacktraceBasedEditorDecider {
 			if (respectPackageExplorer && isPackageExplorerOrNavigator(element))
 				return Decision.FORCE_JAVA;
 			if (isOpenResource(element))
+				return Decision.FORCE_JAVA;
+			if (isFileOpener(element))
 				return Decision.FORCE_JAVA;
 			if (isFileSearch(element))
 				return Decision.FORCE_JAVA;
@@ -215,6 +218,15 @@ public class StacktraceBasedEditorDecider {
 	protected boolean isOpenResource(StackTraceElement element) {
 		return "org.eclipse.ui.internal.ide.handlers.OpenResourceHandler".equals(element.getClassName())
 				&& "execute".equals(element.getMethodName());
+	}
+	
+	/**
+	 * @noreference This method is not intended to be referenced by clients.
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 */
+	protected boolean isFileOpener(StackTraceElement element) {
+		return "org.eclipse.xtext.ui.generator.trace.EditorInputBasedFileOpener".equals(element.getClassName())
+				|| "org.eclipse.xtext.ui.generator.trace.StorageBasedTextEditorOpener".equals(element.getClassName());
 	}
 
 	/**

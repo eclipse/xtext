@@ -441,8 +441,23 @@
 	</extension>
 	<!-- Editor Menu --> 
 	<extension point="org.eclipse.ui.menus">
+	
+		<menuContribution locationURI="popup:#TextEditorContext?after=xtext.ui.openDeclaration">
+			<command
+         		commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand"
+         		id="xtend.ide.OpenGeneratedCode"
+         		style="push">
+				<visibleWhen 
+					checkEnabled="false">
+ 					<reference 
+ 						definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+ 					</reference>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+		
 		<menuContribution
-			locationURI="popup:#TextEditorContext?after=xtext.ui.openDeclaration">
+			locationURI="popup:#TextEditorContext?after=xtend.ide.OpenGeneratedCode">
 			<command
          commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchy"
          id="xtend.ide.OpenTypeHierachy"
@@ -1375,6 +1390,15 @@
       <handler
             class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.navigation.OpenImplementationHandler"
             commandId="org.eclipse.xtext.xbase.ui.OpenImplementationCommand">
+            <activeWhen>
+				<reference
+					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+				</reference>
+			</activeWhen>
+      </handler>
+      <handler
+            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler"
+            commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand">
             <activeWhen>
 				<reference
 					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">

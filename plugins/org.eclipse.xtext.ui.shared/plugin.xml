@@ -33,6 +33,44 @@
             locationURI="menu:navigate?after=open.ext4">
          <command commandId="org.eclipse.xtext.ui.shared.OpenXtextElementCommand"/>
       </menuContribution>
+      <menuContribution locationURI="popup:#TextEditorContext?after=group.open">
+			<command
+         		commandId="org.eclipse.xtext.ui.shared.OpenSourceFileCommand"
+         		style="push">
+      			<visibleWhen checkEnabled="false">
+      				<with variable="activeEditor">
+						<test property="org.eclipse.xtext.ui.shared.canOpenSourceFile" value="true"/>
+	      			</with>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+       <menuContribution locationURI="popup:#CompilationUnitEditorContext?after=OpenEditor">
+			<command commandId="org.eclipse.xtext.ui.shared.OpenSourceFileCommand" style="push">
+      			<visibleWhen checkEnabled="false">
+      				<with variable="activeEditor">
+						<test property="org.eclipse.xtext.ui.shared.canOpenSourceFile" value="true"/>
+	      			</with>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+       <menuContribution locationURI="popup:#ClassFileEditorContext?after=OpenEditor">
+			<command commandId="org.eclipse.xtext.ui.shared.OpenSourceFileCommand" style="push">
+      			<visibleWhen checkEnabled="false">
+      				<with variable="activeEditor">
+						<test property="org.eclipse.xtext.ui.shared.canOpenSourceFile" value="true"/>
+	      			</with>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+       <menuContribution locationURI="menu:navigate?after=open.ext">
+			<command commandId="org.eclipse.xtext.ui.shared.OpenSourceFileCommand" style="push">
+      			<visibleWhen checkEnabled="false">
+      				<with variable="activeEditor">
+						<test property="org.eclipse.xtext.ui.shared.canOpenSourceFile" value="true"/>
+	      			</with>
+				</visibleWhen>
+			</command>
+		</menuContribution>
    </extension>
   <extension
          point="org.eclipse.ui.popupMenus">
@@ -106,6 +144,11 @@
             id="org.eclipse.xtext.ui.shared.OpenXtextElementCommand"
             name="%OpenModelElementCommand.name">
       </command>
+      <command
+            description="%OpenSourceFileCommand.description"
+            id="org.eclipse.xtext.ui.shared.OpenSourceFileCommand"
+            name="%OpenSourceFileCommand.name">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.bindings">
@@ -121,6 +164,10 @@
       <handler
             class="org.eclipse.xtext.ui.shared.internal.ExecutableExtensionFactory:org.eclipse.xtext.ui.search.OpenXtextElementHandler"
             commandId="org.eclipse.xtext.ui.shared.OpenXtextElementCommand">
+      </handler>
+      <handler
+            class="org.eclipse.xtext.ui.shared.internal.ExecutableExtensionFactory:org.eclipse.xtext.ui.shared.internal.OpenSourceFileHandler"
+            commandId="org.eclipse.xtext.ui.shared.OpenSourceFileCommand">
       </handler>
    </extension>
  	<extension point="org.eclipse.search.searchResultViewPages">
@@ -152,5 +199,15 @@
      <module
            class="org.eclipse.xtext.ui.shared.internal.SharedContributionWithJDT">
      </module>
+  </extension>
+  <extension
+        point="org.eclipse.core.expressions.propertyTesters">
+     <propertyTester
+           class="org.eclipse.xtext.ui.shared.internal.ExecutableExtensionFactory:org.eclipse.xtext.ui.shared.internal.OpenSourceFilePropertyTester"
+           id="org.eclipse.xtext.ui.shared.OpenSourceFilePropertyTester"
+           namespace="org.eclipse.xtext.ui.shared"
+           properties="canOpenSourceFile"
+           type="org.eclipse.ui.IEditorPart">
+     </propertyTester>
   </extension>
 </plugin>
