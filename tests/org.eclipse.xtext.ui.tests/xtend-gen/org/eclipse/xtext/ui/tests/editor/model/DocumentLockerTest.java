@@ -104,12 +104,12 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
     };
     final XtextResource resource = ObjectExtensions.<XtextResource>operator_doubleArrow(_xtextResource, _function);
     document.setInput(resource);
-    final CancelIndicator indicator = document.getCancelIndicator();
     final IUnitOfWork<Object, XtextResource> _function_1 = new IUnitOfWork<Object, XtextResource>() {
       public Object exec(final XtextResource it) throws Exception {
         Object _xblockexpression = null;
         {
-          boolean _isCanceled = indicator.isCanceled();
+          CancelIndicator _cancelIndicator = document.getCancelIndicator();
+          boolean _isCanceled = _cancelIndicator.isCanceled();
           Assert.assertFalse(_isCanceled);
           _xblockexpression = null;
         }
@@ -117,6 +117,7 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
       }
     };
     document.<Object>internalModify(_function_1);
+    final CancelIndicator indicator = document.getCancelIndicator();
     boolean _isCanceled = indicator.isCanceled();
     Assert.assertFalse(_isCanceled);
     document.set("fupp");
@@ -126,7 +127,8 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
       public Object exec(final XtextResource it) throws Exception {
         Object _xblockexpression = null;
         {
-          boolean _isCanceled = indicator.isCanceled();
+          CancelIndicator _cancelIndicator = document.getCancelIndicator();
+          boolean _isCanceled = _cancelIndicator.isCanceled();
           Assert.assertFalse(_isCanceled);
           _xblockexpression = null;
         }

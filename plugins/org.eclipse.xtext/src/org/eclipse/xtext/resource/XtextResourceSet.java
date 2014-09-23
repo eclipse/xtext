@@ -50,7 +50,7 @@ public class XtextResourceSet extends ResourceSetImpl {
 	}
 	
 	private volatile int outdatedStamp = 0;
-	private volatile int currentVersion = 0;
+	private volatile int modificationStamp = 0;
 	
 	/**
 	 * @since 2.8
@@ -63,14 +63,21 @@ public class XtextResourceSet extends ResourceSetImpl {
 	 * @since 2.8
 	 */
 	public void markSynced() {
-		this.currentVersion = outdatedStamp;
+		this.modificationStamp = outdatedStamp;
 	}
 	
 	/**
 	 * @since 2.8
 	 */
 	public boolean isOutdated() {
-		return outdatedStamp != currentVersion;
+		return outdatedStamp != modificationStamp;
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public int getModificationStamp() {
+		return modificationStamp;
 	}
 	
 	/**
