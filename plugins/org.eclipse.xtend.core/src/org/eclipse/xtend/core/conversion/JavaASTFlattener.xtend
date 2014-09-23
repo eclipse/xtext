@@ -114,6 +114,7 @@ class JavaASTFlattener extends ASTVisitor {
 	 */
 	protected StringBuffer fBuffer;
 	@Inject IValueConverterService converterService
+	@Inject extension ASTFlattenerUtils
 
 	/**
 	 * Creates a new AST printer.
@@ -136,18 +137,6 @@ class JavaASTFlattener extends ASTVisitor {
 	 */
 	def void reset() {
 		this.fBuffer.setLength(0)
-	}
-
-	def private isOverrideMethode(MethodDeclaration declaration) {
-		!declaration.modifiers().filter(Annotation).filter [
-			//TODO try to resolve super type
-			"Override" == typeName.toString
-		].empty
-	}
-
-	override visit(StringLiteral it) {
-		appendToBuffer(converterService.toString(literalValue, "STRING"))
-		return false
 	}
 
 	def appendModifieres(ASTNode node, Iterable<IExtendedModifier> ext) {
@@ -191,7 +180,6 @@ class JavaASTFlattener extends ASTVisitor {
 
 	override visit(CompilationUnit it) {
 		if (package != null) {
-
 			package.accept(this)
 		}
 		imports.appendAll
@@ -223,6 +211,11 @@ class JavaASTFlattener extends ASTVisitor {
 
 	override visit(BooleanLiteral it) {
 		appendToBuffer(String.valueOf(booleanValue))
+		return false
+	}
+
+	override visit(StringLiteral it) {
+		appendToBuffer(converterService.toString(literalValue, "STRING"))
 		return false
 	}
 
@@ -314,8 +307,6 @@ class JavaASTFlattener extends ASTVisitor {
 
 	override visit(SimpleName it) {
 		var convertedName = converterService.toString(identifier, "ID")
-		if ("it".equals(convertedName))
-			appendToBuffer("^")
 		appendToBuffer(convertedName)
 		return false
 	}
@@ -377,23 +368,12 @@ class JavaASTFlattener extends ASTVisitor {
 
 	override visit(VariableDeclarationExpression it) {
 		appendModifieres(modifiers())
-		handleVariableDeclaration(modifiers())
+		appendToBuffer(handleVariableDeclaration(modifiers()))
+		appendSpaceToBuffer
 		type.accept(this)
 		appendToBuffer(" ")
 		fragments.appendAllSeparatedByComma
 		return false
-	}
-
-	def handleVariableDeclaration(Iterable<? extends ASTNode> modifier) {
-		if (modifier.filter(Modifier).isFinal) {
-			appendToBuffer('val ')
-		} else {
-			appendToBuffer('var ')
-		}
-	}
-
-	def boolean isFinal(Iterable<Modifier> modifier) {
-		modifier.exists[isFinal]
 	}
 
 	override visit(VariableDeclarationFragment it) {
@@ -430,7 +410,8 @@ class JavaASTFlattener extends ASTVisitor {
 		if (hasAnnotations)
 			appendToBuffer("/*FIXME can not add Annotation to Variable declaration. Java code: ")
 		appendModifieres(modifiers(), [if(hasAnnotations) appendToBuffer("*/") appendLineWrapToBuffer])
-		handleVariableDeclaration(modifiers())
+		appendToBuffer(handleVariableDeclaration(modifiers()))
+		appendSpaceToBuffer
 		type.accept(this)
 		appendToBuffer(" ")
 		fragments.appendAllSeparatedByComma
@@ -541,15 +522,7 @@ class JavaASTFlattener extends ASTVisitor {
 		}
 		appendToBuffer("new ")
 		if (!node.typeArguments().isEmpty()) {
-			appendToBuffer("<")
-			for (var Iterator<Type> it = node.typeArguments().iterator(); it.hasNext();) {
-				var Type t = it.next()
-				t.accept(this)
-				if (it.hasNext()) {
-					appendToBuffer(",")
-				}
-			}
-			appendToBuffer(">")
+			appendTypeParameters(node.typeArguments)
 		}
 		node.getType().accept(this)
 		appendToBuffer("(")
@@ -662,11 +635,10 @@ class JavaASTFlattener extends ASTVisitor {
 		val extendedOperands = node.extendedOperands()
 		if (extendedOperands.size() != 0) {
 			appendToBuffer(' ')
-			for (var Iterator<Expression> ^it = extendedOperands.iterator(); ^it.hasNext();) {
+			extendedOperands.forEach [ Expression e |
 				appendToBuffer(node.getOperator().toString()).append(' ')
-				var Expression e = ^it.next()
 				e.accept(this)
-			}
+			]
 		}
 		return false
 	}
@@ -731,27 +703,11 @@ class JavaASTFlattener extends ASTVisitor {
 			this.fBuffer.append(".")
 		}
 		if (!node.typeArguments().isEmpty()) {
-			this.fBuffer.append("<")
-			for (var Iterator<Type> ^it = node.typeArguments().iterator(); ^it.hasNext();) {
-
-				var Type t = ^it.next()
-				t.accept(this)
-				if (^it.hasNext()) {
-					this.fBuffer.append(",")
-				}
-			}
-			this.fBuffer.append(">")
+			appendTypeParameters(node.typeArguments)
 		}
 		this.fBuffer.append("super(")
-		for (var Iterator<Expression> ^it = node.arguments().iterator(); ^it.hasNext();) {
-
-			var Expression e = ^it.next()
-			e.accept(this)
-			if (^it.hasNext()) {
-				this.fBuffer.append(",")
-			}
-		}
-		this.fBuffer.append(");")
+		node.arguments().appendAllSeparatedByComma
+		this.fBuffer.append(")")
 		return false
 	}
 
@@ -772,36 +728,13 @@ class JavaASTFlattener extends ASTVisitor {
 		}
 		this.fBuffer.append("super.")
 		if (!node.typeArguments().isEmpty()) {
-			this.fBuffer.append("<")
-			for (var Iterator<Type> ^it = node.typeArguments().iterator(); ^it.hasNext();) {
-
-				var Type t = ^it.next()
-				t.accept(this)
-				if (^it.hasNext()) {
-					this.fBuffer.append(",")
-				}
-			}
-			this.fBuffer.append(">")
+			appendTypeParameters(node.typeArguments)
 		}
 		node.getName().accept(this)
 		this.fBuffer.append("(")
-		for (var Iterator<Expression> ^it = node.arguments().iterator(); ^it.hasNext();) {
-
-			var Expression e = ^it.next()
-			e.accept(this)
-			if (^it.hasNext()) {
-				this.fBuffer.append(",")
-			}
-		}
+		node.arguments().appendAllSeparatedByComma
 		this.fBuffer.append(")")
 		return false
-	}
-
-	def protected canHandleAnnotation(ASTNode node) {
-		if (node instanceof VariableDeclarationStatement) {
-			return false
-		}
-		return true
 	}
 
 	override boolean visit(TagElement node) {
@@ -906,13 +839,7 @@ class JavaASTFlattener extends ASTVisitor {
 		appendToBuffer("@")
 		node.getTypeName().accept(this)
 		appendToBuffer("(")
-		for (var Iterator<MemberValuePair> ^it = node.values().iterator(); ^it.hasNext();) {
-			var MemberValuePair p = ^it.next()
-			p.accept(this)
-			if (^it.hasNext()) {
-				appendToBuffer(",")
-			}
-		}
+		node.values().appendAllSeparatedByComma
 		appendToBuffer(")")
 		return false
 	}
@@ -1011,14 +938,11 @@ class JavaASTFlattener extends ASTVisitor {
 	@Override override boolean visit(ArrayCreation node) {
 		this.fBuffer.append("new ")
 		var ArrayType at = node.getType()
-
 		var int dims = at.getDimensions()
-
 		var Type elementType = at.getElementType()
 		elementType.accept(this)
-		for (var Iterator<Expression> ^it = node.dimensions().iterator(); ^it.hasNext();) {
+		for (Expression e : node.dimensions() as Iterable<Expression>) {
 			this.fBuffer.append("[")
-			var Expression e = ^it.next()
 			e.accept(this)
 			this.fBuffer.append("]")
 			dims--
@@ -1077,9 +1001,7 @@ class JavaASTFlattener extends ASTVisitor {
 
 	@Override override boolean visit(ConstructorInvocation node) {
 		if (!node.typeArguments().isEmpty()) {
-			this.fBuffer.append("<")
 			appendTypeParameters(node.typeArguments())
-			this.fBuffer.append(">")
 		}
 		this.fBuffer.append("this(")
 		node.arguments().appendAllSeparatedByComma

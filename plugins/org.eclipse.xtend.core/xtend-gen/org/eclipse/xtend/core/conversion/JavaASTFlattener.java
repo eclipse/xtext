@@ -107,7 +107,9 @@ import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
 import org.eclipse.jdt.core.dom.WhileStatement;
 import org.eclipse.jdt.core.dom.WildcardType;
+import org.eclipse.xtend.core.conversion.ASTFlattenerUtils;
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -126,6 +128,10 @@ public class JavaASTFlattener extends ASTVisitor {
   
   @Inject
   private IValueConverterService converterService;
+  
+  @Inject
+  @Extension
+  private ASTFlattenerUtils _aSTFlattenerUtils;
   
   /**
    * Creates a new AST printer.
@@ -149,28 +155,6 @@ public class JavaASTFlattener extends ASTVisitor {
    */
   public void reset() {
     this.fBuffer.setLength(0);
-  }
-  
-  private boolean isOverrideMethode(final MethodDeclaration declaration) {
-    List _modifiers = declaration.modifiers();
-    Iterable<Annotation> _filter = Iterables.<Annotation>filter(_modifiers, Annotation.class);
-    final Function1<Annotation, Boolean> _function = new Function1<Annotation, Boolean>() {
-      public Boolean apply(final Annotation it) {
-        Name _typeName = it.getTypeName();
-        String _string = _typeName.toString();
-        return Boolean.valueOf(Objects.equal("Override", _string));
-      }
-    };
-    Iterable<Annotation> _filter_1 = IterableExtensions.<Annotation>filter(_filter, _function);
-    boolean _isEmpty = IterableExtensions.isEmpty(_filter_1);
-    return (!_isEmpty);
-  }
-  
-  public boolean visit(final StringLiteral it) {
-    String _literalValue = it.getLiteralValue();
-    String _string = this.converterService.toString(_literalValue, "STRING");
-    this.appendToBuffer(_string);
-    return false;
   }
   
   public void appendModifieres(final ASTNode node, final Iterable<IExtendedModifier> ext) {
@@ -284,6 +268,13 @@ public class JavaASTFlattener extends ASTVisitor {
     boolean _booleanValue = it.booleanValue();
     String _valueOf = String.valueOf(_booleanValue);
     this.appendToBuffer(_valueOf);
+    return false;
+  }
+  
+  public boolean visit(final StringLiteral it) {
+    String _literalValue = it.getLiteralValue();
+    String _string = this.converterService.toString(_literalValue, "STRING");
+    this.appendToBuffer(_string);
     return false;
   }
   
@@ -431,10 +422,6 @@ public class JavaASTFlattener extends ASTVisitor {
   public boolean visit(final SimpleName it) {
     String _identifier = it.getIdentifier();
     String convertedName = this.converterService.toString(_identifier, "ID");
-    boolean _equals = "it".equals(convertedName);
-    if (_equals) {
-      this.appendToBuffer("^");
-    }
     this.appendToBuffer(convertedName);
     return false;
   }
@@ -536,34 +523,15 @@ public class JavaASTFlattener extends ASTVisitor {
     List _modifiers = it.modifiers();
     this.appendModifieres(it, _modifiers);
     List _modifiers_1 = it.modifiers();
-    this.handleVariableDeclaration(_modifiers_1);
+    String _handleVariableDeclaration = this._aSTFlattenerUtils.handleVariableDeclaration(_modifiers_1);
+    this.appendToBuffer(_handleVariableDeclaration);
+    this.appendSpaceToBuffer();
     Type _type = it.getType();
     _type.accept(this);
     this.appendToBuffer(" ");
     List _fragments = it.fragments();
     this.appendAllSeparatedByComma(_fragments);
     return false;
-  }
-  
-  public StringBuffer handleVariableDeclaration(final Iterable<? extends ASTNode> modifier) {
-    StringBuffer _xifexpression = null;
-    Iterable<Modifier> _filter = Iterables.<Modifier>filter(modifier, Modifier.class);
-    boolean _isFinal = this.isFinal(_filter);
-    if (_isFinal) {
-      _xifexpression = this.appendToBuffer("val ");
-    } else {
-      _xifexpression = this.appendToBuffer("var ");
-    }
-    return _xifexpression;
-  }
-  
-  public boolean isFinal(final Iterable<Modifier> modifier) {
-    final Function1<Modifier, Boolean> _function = new Function1<Modifier, Boolean>() {
-      public Boolean apply(final Modifier it) {
-        return Boolean.valueOf(it.isFinal());
-      }
-    };
-    return IterableExtensions.<Modifier>exists(modifier, _function);
   }
   
   public boolean visit(final VariableDeclarationFragment it) {
@@ -624,7 +592,9 @@ public class JavaASTFlattener extends ASTVisitor {
     };
     this.appendModifieres(it, _modifiers_1, _function);
     List _modifiers_2 = it.modifiers();
-    this.handleVariableDeclaration(_modifiers_2);
+    String _handleVariableDeclaration = this._aSTFlattenerUtils.handleVariableDeclaration(_modifiers_2);
+    this.appendToBuffer(_handleVariableDeclaration);
+    this.appendSpaceToBuffer();
     Type _type = it.getType();
     _type.accept(this);
     this.appendToBuffer(" ");
@@ -684,7 +654,7 @@ public class JavaASTFlattener extends ASTVisitor {
         StringBuffer _xifexpression = null;
         if ((node instanceof MethodDeclaration)) {
           StringBuffer _xifexpression_1 = null;
-          boolean _isOverrideMethode = JavaASTFlattener.this.isOverrideMethode(((MethodDeclaration)node));
+          boolean _isOverrideMethode = JavaASTFlattener.this._aSTFlattenerUtils.isOverrideMethode(((MethodDeclaration)node));
           if (_isOverrideMethode) {
             _xifexpression_1 = JavaASTFlattener.this.appendToBuffer("override ");
           } else {
@@ -822,18 +792,8 @@ public class JavaASTFlattener extends ASTVisitor {
     boolean _isEmpty = _typeArguments.isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
-      this.appendToBuffer("<");
-      for (Iterator<Type> it = node.typeArguments().iterator(); it.hasNext();) {
-        {
-          Type t = it.next();
-          t.accept(this);
-          boolean _hasNext = it.hasNext();
-          if (_hasNext) {
-            this.appendToBuffer(",");
-          }
-        }
-      }
-      this.appendToBuffer(">");
+      List _typeArguments_1 = node.typeArguments();
+      this.appendTypeParameters(_typeArguments_1);
     }
     Type _type = node.getType();
     _type.accept(this);
@@ -987,16 +947,16 @@ public class JavaASTFlattener extends ASTVisitor {
     boolean _notEquals = (_size != 0);
     if (_notEquals) {
       this.appendToBuffer(" ");
-      for (Iterator<Expression> it = extendedOperands.iterator(); it.hasNext();) {
-        {
-          InfixExpression.Operator _operator_1 = node.getOperator();
-          String _string_1 = _operator_1.toString();
-          StringBuffer _appendToBuffer = this.appendToBuffer(_string_1);
+      final Procedure1<Expression> _function = new Procedure1<Expression>() {
+        public void apply(final Expression e) {
+          InfixExpression.Operator _operator = node.getOperator();
+          String _string = _operator.toString();
+          StringBuffer _appendToBuffer = JavaASTFlattener.this.appendToBuffer(_string);
           _appendToBuffer.append(" ");
-          Expression e = it.next();
-          e.accept(this);
+          e.accept(JavaASTFlattener.this);
         }
-      }
+      };
+      IterableExtensions.<Expression>forEach(extendedOperands, _function);
     }
     return false;
   }
@@ -1082,31 +1042,13 @@ public class JavaASTFlattener extends ASTVisitor {
     boolean _isEmpty = _typeArguments.isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
-      this.fBuffer.append("<");
-      for (Iterator<Type> it = node.typeArguments().iterator(); it.hasNext();) {
-        {
-          Type t = it.next();
-          t.accept(this);
-          boolean _hasNext = it.hasNext();
-          if (_hasNext) {
-            this.fBuffer.append(",");
-          }
-        }
-      }
-      this.fBuffer.append(">");
+      List _typeArguments_1 = node.typeArguments();
+      this.appendTypeParameters(_typeArguments_1);
     }
     this.fBuffer.append("super(");
-    for (Iterator<Expression> it = node.arguments().iterator(); it.hasNext();) {
-      {
-        Expression e = it.next();
-        e.accept(this);
-        boolean _hasNext = it.hasNext();
-        if (_hasNext) {
-          this.fBuffer.append(",");
-        }
-      }
-    }
-    this.fBuffer.append(");");
+    List _arguments = node.arguments();
+    this.appendAllSeparatedByComma(_arguments);
+    this.fBuffer.append(")");
     return false;
   }
   
@@ -1139,41 +1081,16 @@ public class JavaASTFlattener extends ASTVisitor {
     boolean _isEmpty = _typeArguments.isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
-      this.fBuffer.append("<");
-      for (Iterator<Type> it = node.typeArguments().iterator(); it.hasNext();) {
-        {
-          Type t = it.next();
-          t.accept(this);
-          boolean _hasNext = it.hasNext();
-          if (_hasNext) {
-            this.fBuffer.append(",");
-          }
-        }
-      }
-      this.fBuffer.append(">");
+      List _typeArguments_1 = node.typeArguments();
+      this.appendTypeParameters(_typeArguments_1);
     }
     SimpleName _name = node.getName();
     _name.accept(this);
     this.fBuffer.append("(");
-    for (Iterator<Expression> it = node.arguments().iterator(); it.hasNext();) {
-      {
-        Expression e = it.next();
-        e.accept(this);
-        boolean _hasNext = it.hasNext();
-        if (_hasNext) {
-          this.fBuffer.append(",");
-        }
-      }
-    }
+    List _arguments = node.arguments();
+    this.appendAllSeparatedByComma(_arguments);
     this.fBuffer.append(")");
     return false;
-  }
-  
-  protected boolean canHandleAnnotation(final ASTNode node) {
-    if ((node instanceof VariableDeclarationStatement)) {
-      return false;
-    }
-    return true;
   }
   
   public boolean visit(final TagElement node) {
@@ -1310,16 +1227,8 @@ public class JavaASTFlattener extends ASTVisitor {
     Name _typeName = node.getTypeName();
     _typeName.accept(this);
     this.appendToBuffer("(");
-    for (Iterator<MemberValuePair> it = node.values().iterator(); it.hasNext();) {
-      {
-        MemberValuePair p = it.next();
-        p.accept(this);
-        boolean _hasNext = it.hasNext();
-        if (_hasNext) {
-          this.appendToBuffer(",");
-        }
-      }
-    }
+    List _values = node.values();
+    this.appendAllSeparatedByComma(_values);
     this.appendToBuffer(")");
     return false;
   }
@@ -1456,10 +1365,10 @@ public class JavaASTFlattener extends ASTVisitor {
     int dims = at.getDimensions();
     Type elementType = at.getElementType();
     elementType.accept(this);
-    for (Iterator<Expression> it = node.dimensions().iterator(); it.hasNext();) {
+    List _dimensions = node.dimensions();
+    for (final Expression e : ((Iterable<Expression>) _dimensions)) {
       {
         this.fBuffer.append("[");
-        Expression e = it.next();
         e.accept(this);
         this.fBuffer.append("]");
         dims--;
@@ -1542,10 +1451,8 @@ public class JavaASTFlattener extends ASTVisitor {
     boolean _isEmpty = _typeArguments.isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
-      this.fBuffer.append("<");
       List _typeArguments_1 = node.typeArguments();
       this.appendTypeParameters(_typeArguments_1);
-      this.fBuffer.append(">");
     }
     this.fBuffer.append("this(");
     List _arguments = node.arguments();
