@@ -183,7 +183,7 @@ public class BuildScheduler {
 											+ Messages.BuildScheduler_FailedEtc, x));
 						}
 						if (childProgress.isCanceled())
-							throw new OperationCanceledException();
+							return Status.CANCEL_STATUS;
 					}
 					if (result != null)
 						return result;

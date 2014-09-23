@@ -57,7 +57,7 @@ public class DerivedResourceCleanerJob extends Job {
 	@Override
 	protected IStatus run(IProgressMonitor monitor) {
 		if (monitor.isCanceled()) {
-			throw new OperationCanceledException();
+			return Status.CANCEL_STATUS;
 		}
 		try {
 			new WorkspaceModifyOperation() {
@@ -94,7 +94,7 @@ public class DerivedResourceCleanerJob extends Job {
 
 	protected IStatus cleanUpDerivedResources(IProgressMonitor monitor, IProject project) throws CoreException, OperationCanceledException {
 		if (monitor.isCanceled()) {
-			throw new OperationCanceledException();
+			return Status.CANCEL_STATUS;
 		}
 		if (shouldBeProcessed(project)) {
 			IContainer container = project;
@@ -103,7 +103,7 @@ public class DerivedResourceCleanerJob extends Job {
 			for (IFile derivedFile : derivedResourceMarkers.findDerivedResources(container, null)) {
 				derivedFile.delete(true, monitor);
 				if (monitor.isCanceled()) {
-					throw new OperationCanceledException();
+					return Status.CANCEL_STATUS;
 				}
 			}
 		}
