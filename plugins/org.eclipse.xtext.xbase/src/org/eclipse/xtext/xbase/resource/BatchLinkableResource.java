@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.diagnostics.DiagnosticMessage;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -156,6 +157,16 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 	@Override
 	protected EObject handleCyclicResolution(Triple<EObject, EReference, INode> triple) throws AssertionError {
 		if (!isValidationDisabled()) {
+			EObject context = triple.getFirst();
+			if (context.eClass() == TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE) {
+				// here we may end up with cyclic resolution requests in rare situations, e.g. for input types
+				// like :
+				/*
+				 * package p;
+				 * class C extends p.C.Bogus {}
+				 */
+				return null;
+			}
 			DiagnosticMessage message = new DiagnosticMessage("Cyclic linking detected : " + getReferences(triple, resolving), Severity.ERROR, "cyclic-resolution");
 			List<Diagnostic> list = getDiagnosticList(message);
 			Diagnostic diagnostic = createDiagnostic(triple, message);

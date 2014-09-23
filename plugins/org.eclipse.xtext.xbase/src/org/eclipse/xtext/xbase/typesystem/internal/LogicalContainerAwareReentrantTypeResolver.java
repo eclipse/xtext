@@ -898,7 +898,8 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	/* @Nullable */
 	public JvmTypeReference getExtendedClass(JvmDeclaredType type) {
 		for(JvmTypeReference candidate: type.getSuperTypes()) {
-			if (candidate.getType() instanceof JvmGenericType && !((JvmGenericType) candidate.getType()).isInterface())
+			JvmType candidateType = candidate.getType();
+			if (candidateType instanceof JvmGenericType && !((JvmGenericType) candidateType).isInterface())
 				return candidate;
 		}
 		return null;

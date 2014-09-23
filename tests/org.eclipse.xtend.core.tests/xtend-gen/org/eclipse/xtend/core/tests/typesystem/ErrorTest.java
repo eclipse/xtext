@@ -45,8 +45,11 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.junit.typesystem.Oven;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -72,7 +75,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   private Oven _oven;
   
   @Test
-  public void testErrorModel_01() throws Exception {
+  public void testErrorModel_001() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import static extension Throwables.*");
     _builder.newLine();
@@ -95,7 +98,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_02() throws Exception {
+  public void testErrorModel_002() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class TestXtend {");
     _builder.newLine();
@@ -122,7 +125,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_03() throws Exception {
+  public void testErrorModel_003() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class TestXtend {");
     _builder.newLine();
@@ -152,7 +155,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_04() throws Exception {
+  public void testErrorModel_004() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class TestXtend {");
     _builder.newLine();
@@ -182,7 +185,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_05() throws Exception {
+  public void testErrorModel_005() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@");
     _builder.newLine();
@@ -198,7 +201,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_06() throws Exception {
+  public void testErrorModel_006() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@Data class A {}");
     _builder.newLine();
@@ -216,7 +219,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_07() throws Exception {
+  public void testErrorModel_007() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@Data class A {}");
     _builder.newLine();
@@ -234,7 +237,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_08() throws Exception {
+  public void testErrorModel_008() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("annotation Bar { @");
     _builder.newLine();
@@ -252,7 +255,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_09() throws Exception {
+  public void testErrorModel_009() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class X {");
     _builder.newLine();
@@ -273,7 +276,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_10() throws Exception {
+  public void testErrorModel_010() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@SuppressWarnings(\"unused\"");
     _builder.newLine();
@@ -289,7 +292,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_11() throws Exception {
+  public void testErrorModel_011() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("annotation { ");
     _builder.newLine();
@@ -311,7 +314,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_12() throws Exception {
+  public void testErrorModel_012() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Y {");
     _builder.newLine();
@@ -363,7 +366,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_13() throws Exception {
+  public void testErrorModel_013() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Y {");
     _builder.newLine();
@@ -417,7 +420,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_14() throws Exception {
+  public void testErrorModel_014() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class B extends  {");
     _builder.newLine();
@@ -454,7 +457,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_15() throws Exception {
+  public void testErrorModel_015() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@ class Node {");
     _builder.newLine();
@@ -471,7 +474,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_16() throws Exception {
+  public void testErrorModel_016() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class <T> {");
     _builder.newLine();
@@ -506,7 +509,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_17() throws Exception {
+  public void testErrorModel_017() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import static extension Throwables.*");
     _builder.newLine();
@@ -565,7 +568,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_18() throws Exception {
+  public void testErrorModel_018() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
     _builder.newLine();
@@ -588,7 +591,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_19() throws Exception {
+  public void testErrorModel_019() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package x");
     _builder.newLine();
@@ -623,7 +626,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_20() throws Exception {
+  public void testErrorModel_020() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package x");
     _builder.newLine();
@@ -663,7 +666,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_21() throws Exception {
+  public void testErrorModel_021() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package x class Z {");
     _builder.newLine();
@@ -694,7 +697,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_22() throws Exception {
+  public void testErrorModel_022() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package generics class Bar {");
     _builder.newLine();
@@ -713,7 +716,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_23() throws Exception {
+  public void testErrorModel_023() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package generics class Bar {");
     _builder.newLine();
@@ -732,7 +735,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_24() throws Exception {
+  public void testErrorModel_024() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Bug<A> {");
     _builder.newLine();
@@ -763,7 +766,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_25() throws Exception {
+  public void testErrorModel_025() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package x class Y {");
     _builder.newLine();
@@ -791,7 +794,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_26() throws Exception {
+  public void testErrorModel_026() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package x class Y {");
     _builder.newLine();
@@ -819,7 +822,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_27() throws Exception {
+  public void testErrorModel_027() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package x class Y {");
     _builder.newLine();
@@ -847,7 +850,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_28() throws Exception {
+  public void testErrorModel_028() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package x class Y {");
     _builder.newLine();
@@ -875,7 +878,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_29() throws Exception {
+  public void testErrorModel_029() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package x");
     _builder.newLine();
@@ -914,7 +917,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_30() throws Exception {
+  public void testErrorModel_030() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package x class Y {");
     _builder.newLine();
@@ -942,7 +945,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_31() throws Exception {
+  public void testErrorModel_031() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package x class Y {");
     _builder.newLine();
@@ -970,7 +973,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_32() throws Exception {
+  public void testErrorModel_032() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package x class Y {");
     _builder.newLine();
@@ -998,7 +1001,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_33() throws Exception {
+  public void testErrorModel_033() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package x");
     _builder.newLine();
@@ -1062,7 +1065,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_34() throws Exception {
+  public void testErrorModel_034() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package x");
     _builder.newLine();
@@ -1132,7 +1135,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_35() throws Exception {
+  public void testErrorModel_035() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package x");
     _builder.newLine();
@@ -1187,7 +1190,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_36() throws Exception {
+  public void testErrorModel_036() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Bar<T extends T> {");
     _builder.newLine();
@@ -1203,7 +1206,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_37() throws Exception {
+  public void testErrorModel_037() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Bar<T1 extends T2, T2 extends T1> {");
     _builder.newLine();
@@ -1219,7 +1222,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_38() throws Exception {
+  public void testErrorModel_038() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import bug380058.Amount");
     _builder.newLine();
@@ -1253,7 +1256,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_39() throws Exception {
+  public void testErrorModel_039() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("abstract class Option<T> {");
     _builder.newLine();
@@ -1279,7 +1282,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_40() throws Exception {
+  public void testErrorModel_040() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("abstract class Option<T> {");
     _builder.newLine();
@@ -1309,7 +1312,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_41() throws Exception {
+  public void testErrorModel_041() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class E<T> extends E<T> {}");
     _builder.newLine();
@@ -1317,7 +1320,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_42() throws Exception {
+  public void testErrorModel_042() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C<T> extends E<T> {}");
     _builder.newLine();
@@ -1329,7 +1332,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_43() throws Exception {
+  public void testErrorModel_043() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@Data class Weight<T extends Comparable> implements Comparable<Weight<T>> {");
     _builder.newLine();
@@ -1353,7 +1356,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_44() throws Exception {
+  public void testErrorModel_044() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@Data class Weight<T extends Comparable<T>> implements Comparable<Weight<T>> {");
     _builder.newLine();
@@ -1377,7 +1380,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_45() throws Exception {
+  public void testErrorModel_045() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@Data class Weight<T extends Comparable<T>> implements Comparable<Weight<T>> {");
     _builder.newLine();
@@ -1401,7 +1404,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_46() throws Exception {
+  public void testErrorModel_046() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("annotation DependsOn {");
     _builder.newLine();
@@ -1414,7 +1417,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_47() throws Exception {
+  public void testErrorModel_047() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@Data class Weight<T extends Comparable<T>> implements Comparable<Weight<T>> {");
     _builder.newLine();
@@ -1433,7 +1436,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_48() throws Exception {
+  public void testErrorModel_048() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@Data class Weight<T extends Comparable<Iterable<T>>> implements Comparable<Iterable<Weight<T>>> {");
     _builder.newLine();
@@ -1457,7 +1460,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_49() throws Exception {
+  public void testErrorModel_049() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
     _builder.newLine();
@@ -1476,7 +1479,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_50() throws Exception {
+  public void testErrorModel_050() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
     _builder.newLine();
@@ -1504,7 +1507,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_51() throws Exception {
+  public void testErrorModel_051() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
     _builder.newLine();
@@ -1541,7 +1544,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_52() throws Exception {
+  public void testErrorModel_052() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import com.google.inject.Injector");
     _builder.newLine();
@@ -1571,7 +1574,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_53() throws Exception {
+  public void testErrorModel_053() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C extends D {");
     _builder.newLine();
@@ -1597,7 +1600,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_54() throws Exception {
+  public void testErrorModel_054() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import org.eclipse.xtext.xbase.lib.Extension");
     _builder.newLine();
@@ -1625,7 +1628,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_55() throws Exception {
+  public void testErrorModel_055() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C extends D {");
     _builder.newLine();
@@ -1651,7 +1654,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_56() throws Exception {
+  public void testErrorModel_056() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C extends D {");
     _builder.newLine();
@@ -1677,7 +1680,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_57() throws Exception {
+  public void testErrorModel_057() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package x class Y {");
     _builder.newLine();
@@ -1720,7 +1723,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_58() throws Exception {
+  public void testErrorModel_058() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
     _builder.newLine();
@@ -1748,7 +1751,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_59() throws Exception {
+  public void testErrorModel_059() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
     _builder.newLine();
@@ -1776,7 +1779,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_60() throws Exception {
+  public void testErrorModel_060() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
     _builder.newLine();
@@ -1795,7 +1798,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_61() throws Exception {
+  public void testErrorModel_061() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C<T> implements C1<T> {");
     _builder.newLine();
@@ -1822,7 +1825,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_62() throws Exception {
+  public void testErrorModel_062() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
     _builder.newLine();
@@ -1849,7 +1852,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_63() throws Exception {
+  public void testErrorModel_063() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
     _builder.newLine();
@@ -1876,7 +1879,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_64() throws Exception {
+  public void testErrorModel_064() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C<T> implements C1<T> {");
     _builder.newLine();
@@ -1903,7 +1906,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_65() throws Exception {
+  public void testErrorModel_065() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
     _builder.newLine();
@@ -1930,7 +1933,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_66() throws Exception {
+  public void testErrorModel_066() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
     _builder.newLine();
@@ -1957,7 +1960,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_67() throws Exception {
+  public void testErrorModel_067() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C<T> implements C1<T> {");
     _builder.newLine();
@@ -1984,7 +1987,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_68() throws Exception {
+  public void testErrorModel_068() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C<T> implements C1<T> {");
     _builder.newLine();
@@ -2011,7 +2014,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_69() throws Exception {
+  public void testErrorModel_069() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C<T> implements C1<T> {");
     _builder.newLine();
@@ -2038,7 +2041,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_70() throws Exception {
+  public void testErrorModel_070() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
     _builder.newLine();
@@ -2061,7 +2064,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_71() throws Exception {
+  public void testErrorModel_071() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.Map");
     _builder.newLine();
@@ -2109,7 +2112,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_72() throws Exception {
+  public void testErrorModel_072() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class TestTypes {");
     _builder.newLine();
@@ -2167,7 +2170,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_73() throws Exception {
+  public void testErrorModel_073() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
     _builder.newLine();
@@ -2186,7 +2189,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_74() throws Exception {
+  public void testErrorModel_074() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
     _builder.newLine();
@@ -2211,7 +2214,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_75() throws Exception {
+  public void testErrorModel_075() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
     _builder.newLine();
@@ -2236,7 +2239,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_76() throws Exception {
+  public void testErrorModel_076() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
     _builder.newLine();
@@ -2289,7 +2292,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_77() throws Exception {
+  public void testErrorModel_077() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
     _builder.newLine();
@@ -2322,7 +2325,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_78() throws Exception {
+  public void testErrorModel_078() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package org.eclipse.xtend.core.tests.smoke");
     _builder.newLine();
@@ -2339,7 +2342,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_79() throws Exception {
+  public void testErrorModel_079() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package org.eclipse.xtend.core.tests.smoke");
     _builder.newLine();
@@ -2356,7 +2359,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_80() throws Exception {
+  public void testErrorModel_080() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package org.eclipse.xtend.core.tests.smoke");
     _builder.newLine();
@@ -2374,7 +2377,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_81() throws Exception {
+  public void testErrorModel_081() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package org.eclipse.xtend.core.tests.smoke");
     _builder.newLine();
@@ -2392,7 +2395,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_82() throws Exception {
+  public void testErrorModel_082() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package x");
     _builder.newLine();
@@ -2437,7 +2440,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_83() throws Exception {
+  public void testErrorModel_083() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package x");
     _builder.newLine();
@@ -2467,7 +2470,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_84() throws Exception {
+  public void testErrorModel_084() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();
@@ -2494,7 +2497,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_85() throws Exception {
+  public void testErrorModel_085() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();
@@ -2528,7 +2531,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_86() throws Exception {
+  public void testErrorModel_086() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/*");
     _builder.newLine();
@@ -2536,7 +2539,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_87() throws Exception {
+  public void testErrorModel_087() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/");
     _builder.newLine();
@@ -2544,7 +2547,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_88() throws Exception {
+  public void testErrorModel_088() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -2568,28 +2571,28 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_89() throws Exception {
+  public void testErrorModel_089() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/*");
     this.processWithoutException(_builder);
   }
   
   @Test
-  public void testErrorModel_90() throws Exception {
+  public void testErrorModel_090() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/");
     this.processWithoutException(_builder);
   }
   
   @Test
-  public void testErrorModel_91() throws Exception {
+  public void testErrorModel_091() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     this.processWithoutException(_builder);
   }
   
   @Test
-  public void testErrorModel_92() throws Exception {
+  public void testErrorModel_092() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/*");
     _builder.newLine();
@@ -2599,7 +2602,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_93() throws Exception {
+  public void testErrorModel_093() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
     _builder.newLine();
@@ -2621,7 +2624,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_94() throws Exception {
+  public void testErrorModel_094() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
     _builder.newLine();
@@ -2643,7 +2646,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_95() throws Exception {
+  public void testErrorModel_095() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
     _builder.newLine();
@@ -2663,7 +2666,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_96() throws Exception {
+  public void testErrorModel_096() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
     _builder.newLine();
@@ -2689,7 +2692,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_97() throws Exception {
+  public void testErrorModel_097() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class A {");
     _builder.newLine();
@@ -2709,7 +2712,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_98() throws Exception {
+  public void testErrorModel_098() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.LinkedList");
     _builder.newLine();
@@ -2764,7 +2767,7 @@ public class ErrorTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testErrorModel_99() throws Exception {
+  public void testErrorModel_099() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package x ");
     _builder.newLine();
@@ -3781,6 +3784,32 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     this._oven.fireproof(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_138() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package test");
+    _builder.newLine();
+    _builder.append("class Bar<T> extends test.Bar.Foo<T> {}");
+    _builder.newLine();
+    final XtendFile file = this.processWithoutException(_builder);
+    Resource _eResource = file.eResource();
+    EList<Resource.Diagnostic> _errors = _eResource.getErrors();
+    final Procedure1<EList<Resource.Diagnostic>> _function = new Procedure1<EList<Resource.Diagnostic>>() {
+      public void apply(final EList<Resource.Diagnostic> it) {
+        String _string = it.toString();
+        final Function1<Resource.Diagnostic, Boolean> _function = new Function1<Resource.Diagnostic, Boolean>() {
+          public Boolean apply(final Resource.Diagnostic it) {
+            String _message = it.getMessage();
+            return Boolean.valueOf(_message.startsWith("Cyclic "));
+          }
+        };
+        boolean _exists = IterableExtensions.<Resource.Diagnostic>exists(it, _function);
+        Assert.assertFalse(_string, _exists);
+      }
+    };
+    ObjectExtensions.<EList<Resource.Diagnostic>>operator_doubleArrow(_errors, _function);
   }
   
   public XtendFile processWithoutException(final CharSequence input) throws Exception {
