@@ -134,7 +134,7 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 					}
 		});
 		if (monitor.isCanceled())
-			throw new OperationCanceledException();
+			return Status.CANCEL_STATUS;
 		if (annotationModel instanceof IAnnotationModelExtension) {
 			IAnnotationModelExtension annotationModelExtension = (IAnnotationModelExtension) annotationModel;
 			Object lockObject = getLockObject(annotationModel);
