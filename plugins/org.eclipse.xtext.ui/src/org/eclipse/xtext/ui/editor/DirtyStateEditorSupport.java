@@ -44,6 +44,7 @@ import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
+import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
@@ -168,8 +169,7 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 			} catch (OperationCanceledError e) {
 				return Status.CANCEL_STATUS;
 			} catch (Throwable e) {
-				LOG.error("Error updating dirty state editor", e);
-				return Status.OK_STATUS;
+				return new Status(IStatus.ERROR, Activator.PLUGIN_ID, "Error updating dirty state editor", e);
 			}
 		}
 

@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.Assert;
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.source.Annotation;
@@ -111,14 +110,10 @@ public class DefaultFoldingStructureProvider implements IFoldingStructureProvide
 	protected void calculateProjectionAnnotationModel(boolean allowCollapse) {
 		ProjectionAnnotationModel projectionAnnotationModel = this.viewer.getProjectionAnnotationModel();
 		if (projectionAnnotationModel != null) {
-			try {
-				// make a defensive copy as we modify the folded positions in subsequent operations
-				Collection<FoldedPosition> foldedPositions = Sets.newLinkedHashSet(foldingRegionProvider.getFoldingRegions(editor.getDocument()));
-				Annotation[] newRegions = mergeFoldingRegions(foldedPositions, projectionAnnotationModel);
-				updateFoldingRegions(allowCollapse, projectionAnnotationModel, foldedPositions, newRegions);
-			} catch (OperationCanceledException oce) {
-				// do nothing
-			}
+			// make a defensive copy as we modify the folded positions in subsequent operations
+			Collection<FoldedPosition> foldedPositions = Sets.newLinkedHashSet(foldingRegionProvider.getFoldingRegions(editor.getDocument()));
+			Annotation[] newRegions = mergeFoldingRegions(foldedPositions, projectionAnnotationModel);
+			updateFoldingRegions(allowCollapse, projectionAnnotationModel, foldedPositions, newRegions);
 		}
 	}
 
