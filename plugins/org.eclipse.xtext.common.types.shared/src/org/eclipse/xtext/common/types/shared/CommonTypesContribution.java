@@ -9,10 +9,15 @@ package org.eclipse.xtext.common.types.shared;
 
 import org.eclipse.xtext.builder.impl.javasupport.BuilderDeltaConverter;
 import org.eclipse.xtext.builder.impl.javasupport.JavaChangeQueueFiller;
+import org.eclipse.xtext.builder.trace.ClassFileBasedOpenerContributor;
+import org.eclipse.xtext.builder.trace.ITraceForTypeRootProvider;
+import org.eclipse.xtext.builder.trace.TraceForTypeRootProvider;
 import org.eclipse.xtext.common.types.access.jdt.TypeURIHelper;
 import org.eclipse.xtext.common.types.ui.notification.DeltaConverter;
 import org.eclipse.xtext.common.types.ui.notification.TypeResourceUnloader;
+import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.ui.generator.trace.OppositeFileOpenerContributor;
 import org.eclipse.xtext.ui.shared.contribution.IEagerContribution;
 
 import com.google.inject.Binder;
@@ -35,6 +40,10 @@ public class CommonTypesContribution implements Module {
 		binder.bind(JavaChangeQueueFiller.class);
 		
 		binder.bind(IEagerContribution.class).to(ListenerRegistrar.class);
+	
+		binder.bind(TraceRegionSerializer.class);
+		binder.bind(ITraceForTypeRootProvider.class).to(TraceForTypeRootProvider.class);
+		binder.bind(OppositeFileOpenerContributor.class).to(ClassFileBasedOpenerContributor.class);
 	}
 
 }
