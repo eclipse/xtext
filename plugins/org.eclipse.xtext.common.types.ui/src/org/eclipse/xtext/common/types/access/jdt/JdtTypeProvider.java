@@ -99,7 +99,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	protected TypeURIHelper createTypeURIHelper() {
 		return new TypeURIHelper();
 	}
-
+	
 	@Override
 	public JvmType findTypeByName(String name) {
 		return doFindTypeByName(name, false);
@@ -370,7 +370,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 			// it manifests itself in a way that allows to retrieve ITypes but one cannot obtain bindings for that type
 			return null;
 		}
-		return new JdtTypeMirror(type, typeFactory);
+		return new JdtTypeMirror(type, typeFactory, services);
 	}
 	
 	public IJavaProject getJavaProject() {
