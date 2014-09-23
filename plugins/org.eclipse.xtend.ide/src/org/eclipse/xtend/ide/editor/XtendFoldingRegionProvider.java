@@ -25,6 +25,7 @@ import org.eclipse.xtext.ui.editor.folding.DefaultFoldingRegionAcceptor;
 import org.eclipse.xtext.ui.editor.folding.DefaultFoldingRegionProvider;
 import org.eclipse.xtext.ui.editor.folding.FoldedPosition;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegionAcceptor;
+import org.eclipse.xtext.ui.editor.folding.IFoldingRegionAcceptorExtension;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.ITextRegion;
 
@@ -99,7 +100,7 @@ public class XtendFoldingRegionProvider extends DefaultFoldingRegionProvider {
 			if(node != null) {
 				ITextRegion textRegion = node.getTextRegion();
 				String preference = PreferenceConstants.getPreference(PreferenceConstants.EDITOR_FOLDING_IMPORTS,  null);
-				((DefaultFoldingRegionAcceptor)foldingRegionAcceptor).accept(textRegion.getOffset(), textRegion.getLength(), Boolean.valueOf(preference));
+				((IFoldingRegionAcceptorExtension<ITextRegion>)foldingRegionAcceptor).accept(textRegion.getOffset(), textRegion.getLength(), Boolean.valueOf(preference));
 			}
 		}
 	}
