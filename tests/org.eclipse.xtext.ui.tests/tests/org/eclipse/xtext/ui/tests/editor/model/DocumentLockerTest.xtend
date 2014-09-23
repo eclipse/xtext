@@ -62,16 +62,16 @@ class DocumentLockerTest extends AbstractXtextDocumentTest {
 			new XtextResourceSet().resources += it
 		]
 		document.input = resource
-		val indicator = document.cancelIndicator
-		document.internalModify[
-			assertFalse(indicator.isCanceled())
+		document.internalModify [
+			assertFalse(document.cancelIndicator.isCanceled())
 			null
 		]
+		val indicator = document.cancelIndicator
 		assertFalse(indicator.isCanceled())
 		document.set("fupp");
 		assertTrue(indicator.isCanceled())
 		document.internalModify [
-			assertFalse(indicator.isCanceled())
+			assertFalse(document.cancelIndicator.isCanceled())
 			null
 		]
 	}

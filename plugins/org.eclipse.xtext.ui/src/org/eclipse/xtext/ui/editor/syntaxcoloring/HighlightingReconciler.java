@@ -337,17 +337,25 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 		try {
 			if (highlightingPresenter == null)
 				return;
-
+			
+			if (highlightingPresenter.isCanceled())		
+				return;
 			checkCanceled(cancelIndicator);
 
 			startReconcilingPositions();
 
+			if (highlightingPresenter.isCanceled())		
+				return;
 			checkCanceled(cancelIndicator);
 			reconcilePositions(resource);
 
+			if (highlightingPresenter.isCanceled())		
+				return;
 			checkCanceled(cancelIndicator);
 			final TextPresentation textPresentation = highlightingPresenter.createPresentation(addedPositions, removedPositions);
 			
+			if (highlightingPresenter.isCanceled())		
+				return;
 			checkCanceled(cancelIndicator);
 			updatePresentation(textPresentation, addedPositions, removedPositions);
 

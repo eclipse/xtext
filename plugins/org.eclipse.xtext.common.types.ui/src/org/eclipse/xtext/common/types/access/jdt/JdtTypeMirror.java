@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.access.IMirrorOptionsAware;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.AbstractClassMirror;
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
+import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -34,7 +35,19 @@ public class JdtTypeMirror extends AbstractClassMirror implements Adapter, IMirr
 	private final ITypeFactory<IType, JvmDeclaredType> typeFactory;
 	private TypeResource typeResource;
 
+	/**
+	 * @deprecated use {@link #JdtTypeMirror(IType, ITypeFactory, TypeResourceServices)}
+	 */
+	@Deprecated
 	public JdtTypeMirror(IType type, ITypeFactory<IType, JvmDeclaredType> typeFactory) {
+		this(type, typeFactory, null);
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public JdtTypeMirror(IType type, ITypeFactory<IType, JvmDeclaredType> typeFactory, TypeResourceServices typeResourceServices) {
+		super(typeResourceServices);
 		this.mirroredType = type;
 		this.typeFactory = typeFactory;
 	}
@@ -55,6 +68,9 @@ public class JdtTypeMirror extends AbstractClassMirror implements Adapter, IMirr
 				typeResource.getContents().add(typeFactory.createType(mirroredType));
 			}
 		} catch (RuntimeException e) {
+			if (typeResourceServices != null) {
+				typeResourceServices.getOperationCanceledManager().throwIfOperationCanceledException(e);
+			}
 			LOG.error("Error initializing type "+typeResource.getURI(), e);
 			throw e;
 		}

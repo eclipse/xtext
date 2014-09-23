@@ -10,6 +10,7 @@ package org.eclipse.xtext.resource;
 import com.google.inject.Inject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
 
@@ -29,18 +30,32 @@ public class OutdatedStateManager {
   public CancelIndicator newCancelIndiciator(final ResourceSet rs) {
     CancelIndicator _xifexpression = null;
     if ((rs instanceof XtextResourceSet)) {
+      final int current = ((XtextResourceSet)rs).getModificationStamp();
       final CancelIndicator _function = new CancelIndicator() {
         public boolean isCanceled() {
-          return ((XtextResourceSet)rs).isOutdated();
+          boolean _or = false;
+          boolean _isOutdated = ((XtextResourceSet)rs).isOutdated();
+          if (_isOutdated) {
+            _or = true;
+          } else {
+            int _modificationStamp = ((XtextResourceSet)rs).getModificationStamp();
+            boolean _notEquals = (current != _modificationStamp);
+            _or = _notEquals;
+          }
+          return _or;
         }
       };
-      _xifexpression = _function;
+      return _function;
     } else {
       _xifexpression = CancelIndicator.NullImpl;
     }
     return _xifexpression;
   }
   
+  /**
+   * Checks whether the given ResourceSet is in an outdated state and
+   * throws an {@link OperationCanceledError} if so.
+   */
   public void checkCanceled(final ResourceSet rs) {
     if ((rs instanceof XtextResourceSet)) {
       boolean _isOutdated = ((XtextResourceSet)rs).isOutdated();

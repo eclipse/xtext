@@ -22,6 +22,7 @@ import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.util.ITextRegion;
@@ -52,20 +53,26 @@ public abstract class AbstractEObjectHover extends AbstractHover implements IEOb
 			return null;
 		//TODO this is being called on change in the UI-thread. Not a good idea to do such expensive stuff.
 		// returning the region on a per token basis would be better.
-		return xtextDocument.priorityReadOnly(new IUnitOfWork<IRegion, XtextResource>() {
-			public IRegion exec(XtextResource state) throws Exception {
-				// resource can be null e.g. read only zip/jar entry
-				if (state == null) {
-					return null;
+		try {
+			return xtextDocument.readOnly(new IUnitOfWork<IRegion, XtextResource>() {
+				public IRegion exec(XtextResource state) throws Exception {
+					// resource can be null e.g. read only zip/jar entry
+					if (state == null) {
+						return null;
+					}
+					Pair<EObject, IRegion> element = getXtextElementAt(state, offset);
+					if (element != null) {
+						return element.getSecond();
+					} else {
+						return null;
+					}
 				}
-				Pair<EObject, IRegion> element = getXtextElementAt(state, offset);
-				if (element != null) {
-					return element.getSecond();
-				} else {
-					return null;
-				}
-			}
-		});
+			});
+		} catch (OperationCanceledException e) {
+			return null;
+		} catch (OperationCanceledError e) {
+			return null;
+		}
 	}
 
 	public Object getHoverInfo2(final ITextViewer textViewer, final IRegion hoverRegion) {
@@ -75,7 +82,7 @@ public abstract class AbstractEObjectHover extends AbstractHover implements IEOb
 		if(xtextDocument == null) 
 			return null;
 		try {
-			return xtextDocument.priorityReadOnly(new IUnitOfWork<Object, XtextResource>() {
+			return xtextDocument.readOnly(new IUnitOfWork<Object, XtextResource>() {
 				public Object exec(XtextResource state) throws Exception {
 					// resource can be null e.g. read only zip/jar entry
 					if (state == null) {
@@ -89,6 +96,8 @@ public abstract class AbstractEObjectHover extends AbstractHover implements IEOb
 				}
 			});
 		} catch (OperationCanceledException e) {
+			return null;
+		} catch (OperationCanceledError e) {
 			return null;
 		}
 	}
