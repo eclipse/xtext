@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtext.ui;singleton:=true
-Bundle-Version: 2.7.2.qualifier
+Bundle-Version: 2.7.3.qualifier
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0";visibility:=reexport,
  org.eclipse.core.resources;bundle-version="3.4.0";visibility:=reexport,
@@ -10,7 +10,7 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0";visibility:=reex
  org.eclipse.ui.editors;bundle-version="3.4.0";visibility:=reexport,
  org.eclipse.jface.text;bundle-version="3.4.0";visibility:=reexport,
  org.eclipse.ui.ide;bundle-version="3.4.0",
- org.eclipse.xtext;bundle-version="2.7.2";visibility:=reexport,
+ org.eclipse.xtext;bundle-version="2.7.3";visibility:=reexport,
  org.eclipse.ui.views;bundle-version="3.3.0",
  org.eclipse.emf.edit.ui;bundle-version="2.3.1";visibility:=reexport,
  org.eclipse.ui.workbench.texteditor;bundle-version="3.4.0",
@@ -25,7 +25,7 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0";visibility:=reex
  org.eclipse.team.ui;bundle-version="3.5.102";resolution:=optional;x-installation:=greedy,
  org.eclipse.core.filesystem;bundle-version="1.2.1";resolution:=optional;x-installation:=greedy,
  org.eclipse.jdt.launching;bundle-version="3.5.200";resolution:=optional;x-installation:=greedy,
- org.eclipse.xtext.xbase.lib;bundle-version="2.7.2",
+ org.eclipse.xtext.xbase.lib;bundle-version="2.7.3",
  org.eclipse.ui.forms;bundle-version="3.4.1",
  org.eclipse.xtend.lib,
  org.eclipse.jdt.ui;bundle-version="3.6.0";resolution:=optional

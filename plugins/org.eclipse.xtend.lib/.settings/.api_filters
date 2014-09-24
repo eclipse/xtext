@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtend.lib" version="2">
     <resource path="META-INF/MANIFEST.MF">
-        <filter id="0"/>
         <filter id="923795461">
             <message_arguments>
                 <message_argument value="2.7.2"/>
+                <message_argument value="2.6.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="923795461">
+            <message_arguments>
+                <message_argument value="2.7.3"/>
                 <message_argument value="2.6.0"/>
             </message_arguments>
         </filter>
