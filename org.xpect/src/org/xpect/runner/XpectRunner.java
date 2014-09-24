@@ -49,7 +49,7 @@ import org.xpect.state.ResolvedConfiguration;
 import org.xpect.state.StateContainer;
 import org.xpect.util.AnnotationUtil;
 import org.xpect.util.IssueVisualizer;
-import org.xpect.util.XpectJavaModelFactory;
+import org.xpect.util.XpectJavaModelManager;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Injector;
@@ -74,7 +74,7 @@ public class XpectRunner extends ParentRunner<Runner> {
 		testClassloader = testClass.getClassLoader();
 		this.uriProvider = findUriProvider(testClass);
 		this.xpectInjector = findXpectInjector();
-		this.xpectJavaModel = this.xpectInjector.getInstance(XpectJavaModelFactory.class).createJavaModel(testClass);
+		this.xpectJavaModel = XpectJavaModelManager.createJavaModel(testClass);
 		this.state = createState(createRootConfiguration());
 	}
 

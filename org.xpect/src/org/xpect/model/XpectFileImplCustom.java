@@ -9,8 +9,6 @@ package org.xpect.model;
 
 import java.util.Map;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
@@ -22,7 +20,8 @@ import org.xpect.XpectInvocation;
 import org.xpect.XpectJavaModel;
 import org.xpect.XpectTest;
 import org.xpect.registry.ITestSuiteInfo;
-import org.xpect.util.XpectJavaModelFactory;
+import org.xpect.registry.LazyClass;
+import org.xpect.util.XpectJavaModelManager;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
@@ -40,34 +39,28 @@ public class XpectFileImplCustom extends XpectFileImpl {
 	private XpectJavaModel findJavaModel() {
 		XtextResource resource = (XtextResource) eResource();
 		ResourceSet resourceSet = (XtextResourceSet) resource.getResourceSet();
-		XpectJavaModelFactory fac = new XpectJavaModelFactory();
 		XpectTest test = getTest();
 		if (test != null) {
 			JvmDeclaredType suite = test.getDeclaredSuite();
 			if (suite != null) {
 				if (suite.eIsProxy())
 					return null;
-				URI uri = fac.createURI(suite.getQualifiedName());
-				Resource res = resourceSet.getResource(uri, false);
-				if (res == null)
-					return fac.createJavaModel(resourceSet, suite);
-				else
-					return (XpectJavaModel) res.getContents().get(0);
+				return XpectJavaModelManager.getOrCreate(suite);
 			}
 		}
 		ITestSuiteInfo suiteInfo = ITestSuiteInfo.Registry.INSTANCE.getTestSuite(eResource());
 		if (suiteInfo == null)
 			return null;
-		String className = suiteInfo.getClazz().getName();
-		URI uri = fac.createURI(className);
-		Resource res = eResource().getResourceSet().getResource(uri, false);
-		if (res == null) {
+		LazyClass<Object> lazyClass = suiteInfo.getClazz();
+		if (lazyClass.getLoader() == null) {
 			IJvmTypeProvider iJvmTypeProvider = resource.getResourceServiceProvider().get(IJvmTypeProvider.Factory.class).findOrCreateTypeProvider(resourceSet);
-			JvmType eObject = iJvmTypeProvider.findTypeByName(className);
+			JvmType eObject = iJvmTypeProvider.findTypeByName(lazyClass.getName());
 			if (eObject instanceof JvmDeclaredType)
-				return fac.createJavaModel(resourceSet, (JvmDeclaredType) eObject);
-		} else
-			return (XpectJavaModel) res.getContents().get(0);
+				return XpectJavaModelManager.getOrCreate((JvmDeclaredType) eObject);
+		} else {
+			Class<Object> clazz = lazyClass.load();
+			return XpectJavaModelManager.getOrCreate(resourceSet, clazz);
+		}
 		return null;
 	}
 

@@ -8,6 +8,7 @@
 package org.xpect.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
@@ -17,6 +18,7 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeI
 import org.xpect.ui.highlighting.XpectTokenDefProvider;
 import org.xpect.ui.highlighting.XpectTokenToAttributeMapper;
 import org.xpect.ui.scoping.ClasspathOrJdtBasedTypeScopeProvider;
+import org.xpect.ui.scoping.ClasspathOrJdtBasedTypeScopeProviderFactory;
 import org.xpect.ui.services.XpectEObjectAtOffsetHelper;
 import org.xpect.ui.services.XpectMultiLineTerminalsEditStrategyFactory;
 
@@ -44,6 +46,10 @@ public class XpectUiModule extends org.xpect.ui.AbstractXpectUiModule {
 	@Override
 	public Class<? extends AbstractTypeScopeProvider> bindAbstractTypeScopeProvider() {
 		return ClasspathOrJdtBasedTypeScopeProvider.class;
+	}
+	
+	public Class<? extends IJvmTypeProvider.Factory> bindIJvmTypeProvider$Factory() {
+		return ClasspathOrJdtBasedTypeScopeProviderFactory.class;
 	}
 
 	public Class<? extends MultiLineTerminalsEditStrategy.Factory> bindMultiLineTerminalsEditStrategyFactory() {

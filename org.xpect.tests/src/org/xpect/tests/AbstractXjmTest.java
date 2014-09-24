@@ -2,31 +2,21 @@ package org.xpect.tests;
 
 import java.lang.reflect.Constructor;
 
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 import org.xpect.XpectInjectorProvider;
 import org.xpect.XpectJavaModel;
-import org.xpect.util.XpectJavaModelFactory;
+import org.xpect.util.XpectJavaModelManager;
 
-import com.google.inject.Inject;
-
-@SuppressWarnings("restriction")
 @InjectWith(XpectInjectorProvider.class)
 @RunWith(XtextRunner.class)
 public abstract class AbstractXjmTest {
 
-	@Inject
-	private XpectJavaModelFactory factory;
-
-	@Inject
-	private TypeReferences typeReferences;
-
 	protected void assertXjm(Class<?> clazz) {
 		try {
-			XpectJavaModel javaModel = factory.createJavaModel(clazz);
+			XpectJavaModel javaModel = XpectJavaModelManager.createJavaModel(clazz);
 			Constructor<?> constructor = clazz.getDeclaredConstructor();
 			constructor.setAccessible(true);
 			String expected = constructor.newInstance().toString();

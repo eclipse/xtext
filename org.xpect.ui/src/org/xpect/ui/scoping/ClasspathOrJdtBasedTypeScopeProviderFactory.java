@@ -28,7 +28,7 @@ public class ClasspathOrJdtBasedTypeScopeProviderFactory extends AbstractTypePro
 	private IWorkingCopyOwnerProvider wcProvider;
 
 	protected ClasspathTypeProvider createClasspathTypeProvider(ResourceSet resourceSet) {
-		return new ClasspathTypeProvider(getClassLoader(resourceSet), resourceSet, getIndexedJvmTypeAccess());
+		return new ClasspathTypeProvider(getClassLoader(resourceSet), resourceSet, null /* getIndexedJvmTypeAccess() */);
 	}
 
 	protected IJdtTypeProvider createJdtTypeProvider(IJavaProject javaProject, ResourceSet resourceSet) {
