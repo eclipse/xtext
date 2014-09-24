@@ -10,6 +10,10 @@ package org.eclipse.xtext.ui.editor.utils;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.commands.ExecutionEvent;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IStorage;
+import org.eclipse.jdt.core.IJarEntryResource;
+import org.eclipse.jdt.internal.ui.javaeditor.JarEntryEditorInput;
 import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.jface.resource.DataFormatException;
 import org.eclipse.jface.resource.JFaceResources;
@@ -18,13 +22,16 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.RGB;
+import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
+import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.editor.XtextReadonlyEditorInput;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -99,6 +106,21 @@ public class EditorUtils {
 			return (XtextEditor) openEditor.getAdapter(XtextEditor.class);
 		}
 		return null;
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public static IEditorInput createEditorInput(IStorage storage) {
+		if (storage instanceof IFile)
+			return new FileEditorInput((IFile) storage);
+		try {
+			if (storage instanceof IJarEntryResource)
+				return new JarEntryEditorInput(storage);
+		} catch (NoClassDefFoundError e) {
+			// ignore. can happen if JDT is not available.
+		}
+		return new XtextReadonlyEditorInput(storage);
 	}
 	
 }
