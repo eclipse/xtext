@@ -338,6 +338,8 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 			if (highlightingPresenter == null)
 				return;
 			
+			highlightingPresenter.setCanceled(cancelIndicator.isCanceled());
+			
 			if (highlightingPresenter.isCanceled())		
 				return;
 			checkCanceled(cancelIndicator);
@@ -360,6 +362,8 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 			updatePresentation(textPresentation, addedPositions, removedPositions);
 
 		} finally {
+			if (highlightingPresenter != null)
+				highlightingPresenter.setCanceled(false);
 			stopReconcilingPositions();
 			synchronized (fReconcileLock) {
 				reconciling = false;
