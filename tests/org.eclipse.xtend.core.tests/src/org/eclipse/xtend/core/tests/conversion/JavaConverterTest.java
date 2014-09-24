@@ -9,8 +9,10 @@ package org.eclipse.xtend.core.tests.conversion;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.conversion.JavaConverter;
+import org.eclipse.xtend.core.conversion.JavaConverter.ConversionResult;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
@@ -19,9 +21,13 @@ import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
+import org.junit.Before;
 import org.junit.Test;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -30,12 +36,18 @@ import com.google.inject.Provider;
  */
 public class JavaConverterTest extends AbstractXtendTestCase {
 	@Inject
-	Provider<JavaConverter> javaConverter;
+	Provider<JavaConverter> javaConverterProvider;
+	private JavaConverter j2x;
+
+	@Before
+	public void setUp() {
+		j2x = javaConverterProvider.get();
+	}
 
 	@Test
 	public void testSimpleCalssDeclarationCase() throws Exception {
 		String javaCode = "package pack; import java.lang.Object; public class JavaToConvert<T,U> {}";
-		XtendFile xtendFile = toValidFile(javaCode);
+		XtendFile xtendFile = toValidFile("JavaToConvert", javaCode);
 		assertEquals("pack", xtendFile.getPackage());
 		assertEquals("java.lang.Object", xtendFile.getImportSection().getImportDeclarations().get(0).getImportedName());
 
@@ -55,7 +67,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
 	@Test
 	public void testSimpleInterfaceDeclarationCase() throws Exception {
 		String javaCode = "public interface JavaToConvert<T> {}";
-		XtendTypeDeclaration typeDeclaration = toValidTypeDeclaration(javaCode);
+		XtendTypeDeclaration typeDeclaration = toValidTypeDeclaration("JavaToConvert", javaCode);
 		assertTrue("Compiles to interface", typeDeclaration instanceof XtendInterface);
 
 		XtendInterface xtendInterface = (XtendInterface) typeDeclaration;
@@ -125,7 +137,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
 
 	@Test
 	public void testMethodeDeclarationCase() throws Exception {
-		XtendClass xtendClazz = toValidXtendClass("public class JavaToConvert { public boolean visit(Object node) { return true;}}");
+		XtendClass xtendClazz = toValidXtendClass("public class JavaToConvert { public boolean visit(final Object node) { return true;}}");
 		EList<XtendMember> members = xtendClazz.getMembers();
 		assertEquals("Simple methods count", 1, members.size());
 		XtendFunction xtendMember = (XtendFunction) members.get(0);
@@ -149,11 +161,37 @@ public class JavaConverterTest extends AbstractXtendTestCase {
 	}
 
 	@Test
+	public void testOverride() throws Exception {
+		XtendClass xtendClazz = toValidXtendClass("import public class JavaToConvert implements Statement{"
+				+ "public Iterable statements() { return null;} " + "public String toString() { return null;} "
+				+ "public void accept(JavaToConvert v){}}" + "interface Node { Iterable statements(); } "
+				+ "interface Statement extends Node{ void accept(JavaToConvert v); }");
+		EList<XtendMember> members = xtendClazz.getMembers();
+		assertEquals("Simple methods count", 3, members.size());
+		assertTrue(((XtendFunction) members.get(0)).isOverride());
+		assertTrue(((XtendFunction) members.get(1)).isOverride());
+		assertTrue(((XtendFunction) members.get(2)).isOverride());
+	}
+
+	@Test
 	public void testStringLiteralCase() throws Exception {
 		XtendClass xtendClazz = toValidXtendClass("class TestStringLiteral { String withLineWrap=\"string with wrap\\n\";}");
 		XtendField xtendMember = (XtendField) xtendClazz.getMembers().get(0);
 		assertEquals("withLineWrap", xtendMember.getName());
 		assertEquals("string with wrap\n", ((XStringLiteral) xtendMember.getInitialValue()).getValue());
+	}
+	@Test
+	public void testNumberLiteralCase() throws Exception {
+		XtendClass xtendClazz = toValidXtendClass("class TestStringLiteral {"
+				+ " long l= 0x0000000000000000L;"
+				+ " double d= 2.5d;"
+				+ "}");
+		XtendField xtendMember = (XtendField) xtendClazz.getMembers().get(0);
+		assertEquals("l", xtendMember.getName());
+		assertEquals("0x0000000000000000#L", ((XNumberLiteral) xtendMember.getInitialValue()).getValue());
+		 xtendMember = (XtendField) xtendClazz.getMembers().get(1);
+		assertEquals("d", xtendMember.getName());
+		assertEquals("2.5d", ((XNumberLiteral) xtendMember.getInitialValue()).getValue());
 	}
 
 	@Test
@@ -179,7 +217,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
 		assertNotNull(xtendClazz);
 
 	}
-	
+
 	@Test
 	public void testSimpleInstanceOfCase() throws Exception {
 		XtendClass xtendClazz = toValidXtendClass("class Test {  void doStuff() { String x = null; if(!(x instanceof String)) x = \"\";}");
@@ -192,33 +230,106 @@ public class JavaConverterTest extends AbstractXtendTestCase {
 		assertNotNull(xtendClazz);
 
 	}
-	
+
 	@Test
 	public void testCastCase() throws Exception {
 		XtendClass xtendClazz = toValidXtendClass("public class TestCast { void doStuff() { Object o = (Object)this;}");
 		assertNotNull(xtendClazz);
-		
-	}
-	@Test
-	public void testIfElseCase() throws Exception {
-		XtendClass xtendClazz = toValidXtendClass("public class TestCast { Object o=null; String it = (o==null)?\"true\":\"false\";}");
-		assertNotNull(xtendClazz);
-		
-	}
-	private XtendClass toValidXtendClass(String javaCode) throws Exception {
-		return (XtendClass) toValidTypeDeclaration(javaCode);
+
 	}
 
-	private XtendTypeDeclaration toValidTypeDeclaration(String javaCode) throws Exception {
-		XtendFile file = toValidFile(javaCode);
+	@Test
+	public void testIfElseCase() throws Exception {
+		XtendClass xtendClazz = toValidXtendClass("public class TestCast { Object o=null; String it = (o==null)?\"true\":\"false\";"
+				+ "String other = it; public void fooo() {this.it = null;}}");
+		assertNotNull(xtendClazz);
+
+	}
+
+	@Test
+	public void testStaticImportCase() throws Exception {
+		XtendClass xtendClazz = toValidXtendClass("package foo; import static java.awt.AWTEvent.*; public class Test { long o= ACTION_EVENT_MASK;}");
+		XtendField xtendMember = (XtendField) xtendClazz.getMembers().get(0);
+		assertEquals("o", xtendMember.getName());
+		XFeatureCall xFeatureCall = (XFeatureCall) xtendMember.getInitialValue();
+		assertEquals("ACTION_EVENT_MASK", xFeatureCall.getFeature().getSimpleName());
+
+	}
+
+	@Test
+	public void testInnerClassCase() throws Exception {
+		ConversionResult conversionResult = j2x.toXtend("Clazz", "public class Clazz { class Inner {}"
+				+ " public void inMeth() { class OuterImpl extends Outer {} }}");
+		String xtendCode = conversionResult.getXtendCode();
+		assertFalse(xtendCode.isEmpty());
+		assertEquals(2, Iterables.size(conversionResult.getProblems()));
+	}
+
+	@Test
+	public void testStaticBlockCase() throws Exception {
+		ConversionResult conversionResult = j2x.toXtend("Clazz",
+				"public class Clazz { static String foo;static{foo=\"\";}}");
+		String xtendCode = conversionResult.getXtendCode();
+		assertFalse(xtendCode.isEmpty());
+		assertEquals(0, Iterables.size(conversionResult.getProblems()));
+	}
+
+	@Test
+	public void testConstructorCase() throws Exception {
+		XtendClass clazz = toValidXtendClass("public class Clazz { public Clazz(){}}");
+		assertEquals(JvmVisibility.PUBLIC, ((XtendConstructor) clazz.getMembers().get(0)).getVisibility());
+
+	}
+
+	@Test
+	public void testArrayAccessCase() throws Exception {
+		XtendClass clazz = toValidXtendClass("public class Clazz { String foo(String... strAr) { "
+				+ "String a = (strAr[0] =\"2\"); strAr[1]=a; a=strAr[0]+strAr[1]; return strAr[1]=\"\";}");
+		assertNotNull(clazz);
+	}
+
+	@Test
+	public void testArrayCreationCase() throws Exception {
+		XtendClass clazz = toValidXtendClass("public class Clazz {" + " String[] arr = new String[]{\"\",\"\"};"
+				+ "Class<?>[] argTypes = new Class[arr.length];}");
+		assertNotNull(clazz);
+	}
+
+	@Test
+	public void testPrefixPlusMinusCase() throws Exception {
+		XtendClass clazz = toValidXtendClass("public class Clazz { " + "public static main(String[] args) {"
+				+ "int i=3; System.out.print(\"4=\");System.out.println(++i);"
+				+ "System.out.print(\"3=\");System.out.println(--i);" + "}}");
+		assertNotNull(clazz);
+	}
+
+	@Test
+	public void testPrefixPlusMinusArrayCase() throws Exception {
+		XtendClass clazz = toValidXtendClass("public class Clazz { " + "public static main(String[] args) {"
+				+ "int[] ints = new int[]{1,2,3,4,5};" + "int in = 2;"
+				//TODO				+ "System.out.println(\"3=\"+(ints[in++]++));"
+				//				+ "System.out.println(\"4=\"+(ints[in--]--));"
+				+ "System.out.println(\"1=\"+(--ints[--in]));" + "System.out.println(\"5=\"+(++ints[++in]));" + "}}");
+		assertNotNull(clazz);
+	}
+
+	private XtendClass toValidXtendClass(String javaCode) throws Exception {
+		return (XtendClass) toValidTypeDeclaration("Clazz", javaCode);
+	}
+
+	private XtendTypeDeclaration toValidTypeDeclaration(String unitName, String javaCode) throws Exception {
+		XtendFile file = toValidFile(unitName, javaCode);
 		XtendTypeDeclaration typeDeclaration = file.getXtendTypes().get(0);
 		return typeDeclaration;
 	}
 
-	private XtendFile toValidFile(String javaCode) throws Exception {
-		JavaConverter j2x = javaConverter.get();
-		String xtendCode = j2x.toXtend(javaCode);
+	private XtendFile toValidFile(String unitName, String javaCode) throws Exception {
+		ConversionResult conversionResult = j2x.toXtend(unitName, javaCode);
+		String xtendCode = conversionResult.getXtendCode();
 		System.out.println(xtendCode);
+		for (String problem : conversionResult.getProblems()) {
+			System.err.println(problem);
+		}
 		return file(xtendCode, true);
 	}
 
