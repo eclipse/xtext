@@ -675,6 +675,10 @@
             categoryId="org.eclipse.debug.ui.category.run"
             id="org.eclipse.xtend.ide.launching.junitPdeShortcut.debug">
       </command>
+      <command
+            id="org.eclipse.xtend.ide.convertJavaCode"
+            name="Convert to Xtend">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.contexts">
@@ -1427,6 +1431,10 @@
             class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.imports.MultiOrganizeImportsHandler"
             commandId="org.eclipse.xtext.xbase.ui.multiOrganizeImports">
       </handler>
+      <handler
+            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.edit.ConvertJavaCodeHandler"
+            commandId="org.eclipse.xtend.ide.convertJavaCode">
+      </handler>
    </extension>
    <extension point="org.eclipse.ui.menus">
       <menuContribution
@@ -1449,7 +1457,30 @@
 					</visibleWhen>
             </command>
          </menu>
+         
       </menuContribution>
+      <menuContribution
+            allPopups="true"
+            locationURI="popup:org.eclipse.jdt.ui.PackageExplorer?after=org.eclipse.jdt.ui.refactoring.menu">
+            <command
+                  commandId="org.eclipse.xtend.ide.convertJavaCode"
+                  label="Convert to Xtend"
+                  style="push">
+               <visibleWhen
+                  checkEnabled="false">
+	               <with
+	                     variable="selection">
+	                  <iterate
+	                        ifEmpty="false"
+	                        operator="or">
+	                     <adapt
+	                           type="org.eclipse.jdt.core.ICompilationUnit">
+	                     </adapt>
+	                  </iterate>
+	               </with>
+           		 </visibleWhen>
+            </command>
+       </menuContribution>
        <menuContribution
             locationURI="menu:navigate?after=open.ext4">
          <command commandId="org.eclipse.xtext.xbase.ui.OpenImplementationCommand">
@@ -1473,13 +1504,13 @@
 					         <iterate
 			                    ifEmpty="false"
 			                    operator="or">
-					         <or>
-					         	<adapt type="org.eclipse.jdt.core.IJavaProject"/>
-					         	<adapt type="org.eclipse.jdt.core.IPackageFragment"/>
-					         	<adapt type="org.eclipse.jdt.core.IPackageFragmentRoot"/>
-					    		<adapt type="org.eclipse.ui.IWorkingSet"/>
-					            <reference definitionId="org.eclipse.xtend.fileDef"/>
-					         </or>
+						         <or>
+						         	<adapt type="org.eclipse.jdt.core.IJavaProject"/>
+						         	<adapt type="org.eclipse.jdt.core.IPackageFragment"/>
+						         	<adapt type="org.eclipse.jdt.core.IPackageFragmentRoot"/>
+						    		<adapt type="org.eclipse.ui.IWorkingSet"/>
+						            <reference definitionId="org.eclipse.xtend.fileDef"/>
+						         </or>
 					         </iterate>
 					      </with>
 						<with
