@@ -9,8 +9,10 @@ package org.eclipse.xtend.core.conversion
 
 import com.google.inject.Inject
 import java.util.Iterator
+import java.util.List
 import org.eclipse.jdt.core.dom.AST
 import org.eclipse.jdt.core.dom.ASTNode
+import org.eclipse.jdt.core.dom.ASTParser
 import org.eclipse.jdt.core.dom.ASTVisitor
 import org.eclipse.jdt.core.dom.Annotation
 import org.eclipse.jdt.core.dom.AnnotationTypeDeclaration
@@ -70,6 +72,7 @@ import org.eclipse.jdt.core.dom.ParameterizedType
 import org.eclipse.jdt.core.dom.ParenthesizedExpression
 import org.eclipse.jdt.core.dom.PostfixExpression
 import org.eclipse.jdt.core.dom.PrefixExpression
+import org.eclipse.jdt.core.dom.PrefixExpression.Operator
 import org.eclipse.jdt.core.dom.PrimitiveType
 import org.eclipse.jdt.core.dom.QualifiedName
 import org.eclipse.jdt.core.dom.QualifiedType
@@ -102,19 +105,23 @@ import org.eclipse.jdt.core.dom.VariableDeclarationStatement
 import org.eclipse.jdt.core.dom.WhileStatement
 import org.eclipse.jdt.core.dom.WildcardType
 import org.eclipse.xtext.conversion.IValueConverterService
+import org.eclipse.jdt.core.dom.Statement
 
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
 class JavaASTFlattener extends ASTVisitor {
 
+	@Inject IValueConverterService converterService
+	@Inject extension ASTFlattenerUtils
+
 	/**
 	 * The string buffer into which the serialized representation of the AST is
 	 * written.
 	 */
-	protected StringBuffer fBuffer;
-	@Inject IValueConverterService converterService
-	@Inject extension ASTFlattenerUtils
+	StringBuffer fBuffer;
+	List<String> problems = newArrayList()
+	int javaSourceKind = ASTParser.K_COMPILATION_UNIT
 
 	/**
 	 * Creates a new AST printer.
@@ -133,10 +140,18 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	/**
-	 * Resets this printer so that it can be used again.
+	 * Resets this flattener so that it can be used again.
 	 */
 	def void reset() {
 		this.fBuffer.setLength(0)
+		this.problems = newArrayList()
+	}
+
+	/**
+	 * Returns a list of problems occured during conversion
+	 */
+	def getProblems() {
+		this.problems
 	}
 
 	def appendModifieres(ASTNode node, Iterable<IExtendedModifier> ext) {
@@ -164,10 +179,37 @@ class JavaASTFlattener extends ASTVisitor {
 		fBuffer.append(string)
 	}
 
+	def protected addProblem(String string) {
+		problems.add(string)
+	}
+
 	override boolean visit(Assignment node) {
-		node.getLeftHandSide().accept(this)
-		appendToBuffer(node.getOperator().toString())
-		node.getRightHandSide().accept(this)
+		val leftSide = node.getLeftHandSide()
+
+		// Array write access
+		if (leftSide instanceof ArrayAccess) {
+			appendToBuffer("{")
+			leftSide.getArray().accept(this)
+			this.fBuffer.append(".set")
+			this.fBuffer.append("(")
+			leftSide.getIndex().accept(this)
+			appendToBuffer(",")
+			node.rightHandSide.accept(this)
+			this.fBuffer.append(")")
+			if (!(node.parent instanceof Statement) || (node.parent instanceof ReturnStatement)) {
+				leftSide.getArray().accept(this)
+				this.fBuffer.append(".get")
+				this.fBuffer.append("(")
+				leftSide.getIndex().accept(this)
+				appendToBuffer(")")
+			}
+			appendToBuffer("}")
+
+		} else {
+			leftSide.accept(this)
+			appendToBuffer(node.getOperator().toString())
+			node.getRightHandSide().accept(this)
+		}
 		return false
 	}
 
@@ -237,20 +279,34 @@ class JavaASTFlattener extends ASTVisitor {
 			javadoc.accept(this)
 		}
 		appendModifieres(modifiers())
-		getBody.accept(this)
+		if (modifiers().static) {
+			appendToBuffer(" final Void static_initializer = {")
+			appendLineWrapToBuffer
+			getBody.accept(this)
+			appendToBuffer("null }")
+			appendLineWrapToBuffer
+		} else {
+			getBody.accept(this)
+		}
 		return false
 	}
 
 	override visit(TypeDeclaration it) {
+		if (javaSourceKind == ASTParser.K_CLASS_BODY_DECLARATIONS && isDummyType(it)) {
+			bodyDeclarations.appendAll
+			return false;
+		}
+
+		//TODO only static inner classes allowed
+		if (isNotSupportedInnerType(it)) {
+			addProblem("only static inner classes are allowed")
+			return false
+		}
+
 		if (javadoc != null) {
 			javadoc.accept(this)
 		}
 		appendModifieres(modifiers())
-
-		//TODO only static inner classes allowed
-		if (!isInterface() && (parent instanceof TypeDeclaration) && !modifiers().filter(Modifier).exists[isStatic]) {
-			appendToBuffer('static ')
-		}
 
 		if (modifiers().filter(Modifier).isPackageVisibility()) {
 			appendToBuffer('package ')
@@ -306,7 +362,10 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override visit(SimpleName it) {
-		var convertedName = converterService.toString(identifier, "ID")
+		var convertedName = converterService.toString(identifier, "ValidID")
+		if ("it".equals(convertedName) && shouldConvertName(it)) {
+			convertedName = "renamed_" + convertedName
+		}
 		appendToBuffer(convertedName)
 		return false
 	}
@@ -451,10 +510,12 @@ class JavaASTFlattener extends ASTVisitor {
 		}
 		val afterAnnotationProcessingCallback = [ ASTNode node |
 			if (node instanceof MethodDeclaration) {
-				if (node.isOverrideMethode) {
-					appendToBuffer("override ")
-				} else {
-					appendToBuffer("def ")
+				if (!node.isConstructor) {
+					if (node.isOverrideMethode) {
+						appendToBuffer("override ")
+					} else {
+						appendToBuffer("def ")
+					}
 				}
 			}
 		]
@@ -476,8 +537,10 @@ class JavaASTFlattener extends ASTVisitor {
 				appendToBuffer("void")
 			}
 			appendToBuffer(" ")
+			name.accept(this)
+		} else {
+			appendToBuffer(" new")
 		}
-		name.accept(this)
 		appendToBuffer("(")
 		parameters.appendAllSeparatedByComma
 		appendToBuffer(")")
@@ -487,20 +550,18 @@ class JavaASTFlattener extends ASTVisitor {
 			thrownExceptions.appendAllSeparatedByComma
 			appendToBuffer(" ")
 		}
-		if (getBody() == null) {
-			appendToBuffer(";")
-		} else {
+		if (getBody() != null) {
 			getBody.accept(this)
 		}
 		return false
 	}
 
-	def boolean isPackageVisibility(Iterable<Modifier> modifier) {
-		modifier.filter[public || private || protected].empty
-	}
-
 	override visit(SingleVariableDeclaration it) {
-		appendModifieres(modifiers())
+		if (parent instanceof MethodDeclaration) {
+			appendModifieres(modifiers().filter[Object e|!(e instanceof Modifier && (e as Modifier).final)])
+		} else {
+			appendModifieres(modifiers())
+		}
 		type.accept(this)
 		if (isVarargs()) {
 			appendToBuffer("...")
@@ -546,6 +607,7 @@ class JavaASTFlattener extends ASTVisitor {
 		statements.appendAll
 		appendLineWrapToBuffer
 		appendToBuffer("}")
+		appendLineWrapToBuffer
 		return false
 	}
 
@@ -656,6 +718,7 @@ class JavaASTFlattener extends ASTVisitor {
 			appendToBuffer(" ")
 			node.getExpression().accept(this)
 		}
+		appendToBuffer(" ")
 		return false
 	}
 
@@ -683,8 +746,33 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override boolean visit(PrefixExpression node) {
-		appendToBuffer(node.getOperator().toString())
-		node.getOperand().accept(this)
+		val dummyAST = AST.newAST(AST.JLS3)
+		switch (node.operator) {
+			case Operator.INCREMENT: {
+				val assigment = dummyAST.newAssignment()
+				val infixOp = dummyAST.newInfixExpression
+				infixOp.leftOperand = ASTNode.copySubtree(dummyAST, node.operand) as Expression
+				infixOp.operator = org.eclipse.jdt.core.dom.InfixExpression.Operator.PLUS
+				infixOp.rightOperand = dummyAST.newNumberLiteral("1")
+				assigment.leftHandSide = ASTNode.copySubtree(dummyAST, node.operand) as Expression
+				assigment.rightHandSide = infixOp
+				assigment.accept(this)
+			}
+			case Operator.DECREMENT: {
+				val assigment = dummyAST.newAssignment()
+				val infixOp = dummyAST.newInfixExpression
+				infixOp.leftOperand = ASTNode.copySubtree(dummyAST, node.operand) as Expression
+				infixOp.operator = org.eclipse.jdt.core.dom.InfixExpression.Operator.MINUS
+				infixOp.rightOperand = dummyAST.newNumberLiteral("1")
+				assigment.leftHandSide = ASTNode.copySubtree(dummyAST, node.operand) as Expression
+				assigment.rightHandSide = infixOp
+				assigment.accept(this)
+			}
+			default: {
+				appendToBuffer(node.getOperator().toString())
+				node.getOperand().accept(this)
+			}
+		}
 		return false
 	}
 
@@ -775,7 +863,6 @@ class JavaASTFlattener extends ASTVisitor {
 
 	override boolean visit(TypeLiteral node) {
 		node.getType().accept(this)
-		appendToBuffer(".class")
 		return false
 	}
 
@@ -895,9 +982,10 @@ class JavaASTFlattener extends ASTVisitor {
 			node.getJavadoc().accept(this)
 		}
 		appendModifieres(node, node.modifiers())
-		this.fBuffer.append("@interface ")
+		this.fBuffer.append("annotation ")
 		node.getName().accept(this)
 		this.fBuffer.append(" {")
+		appendLineWrapToBuffer
 		node.bodyDeclarations().appendAll
 		this.fBuffer.append("}")
 		return false
@@ -911,12 +999,11 @@ class JavaASTFlattener extends ASTVisitor {
 		node.getType().accept(this)
 		this.fBuffer.append(" ")
 		node.getName().accept(this)
-		this.fBuffer.append("()")
 		if (node.getDefault() != null) {
-			this.fBuffer.append(" default ")
+			this.fBuffer.append(" = ")
 			node.getDefault().accept(this)
 		}
-		this.fBuffer.append(";")
+		appendLineWrapToBuffer
 		return false
 	}
 
@@ -929,37 +1016,40 @@ class JavaASTFlattener extends ASTVisitor {
 
 	@Override override boolean visit(ArrayAccess node) {
 		node.getArray().accept(this)
-		this.fBuffer.append("[")
+
+		//Write access is handled in visit(Assignment)
+		this.fBuffer.append(".get")
+		this.fBuffer.append("(")
 		node.getIndex().accept(this)
-		this.fBuffer.append("]")
+		this.fBuffer.append(")")
 		return false
 	}
 
+	def isReadAccess(ArrayAccess access) {
+		access.parent instanceof Assignment
+	}
+
 	@Override override boolean visit(ArrayCreation node) {
-		this.fBuffer.append("new ")
-		var ArrayType at = node.getType()
-		var int dims = at.getDimensions()
-		var Type elementType = at.getElementType()
-		elementType.accept(this)
-		for (Expression e : node.dimensions() as Iterable<Expression>) {
-			this.fBuffer.append("[")
-			e.accept(this)
-			this.fBuffer.append("]")
-			dims--
-		}
-		for (var int i = 0; i < dims; i++) {
-			this.fBuffer.append("[]")
+		var at = node.getType()
+		var dims = at.getDimensions()
+		if (dims > 1) {
+			addProblem("Only one dimension arrays are supported")
+			return false
 		}
 		if (node.getInitializer() != null) {
 			node.getInitializer().accept(this)
+		} else {
+			appendToBuffer("newArrayOfSize(")
+			(node.dimensions() as Iterable<Expression>).get(0).accept(this)
+			appendToBuffer(")")
 		}
 		return false
 	}
 
 	@Override override boolean visit(ArrayInitializer node) {
-		this.fBuffer.append("{")
+		this.fBuffer.append("#[")
 		node.expressions().appendAllSeparatedByComma
-		this.fBuffer.append("}")
+		this.fBuffer.append("]")
 		return false
 	}
 
@@ -1010,14 +1100,14 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	@Override override boolean visit(ContinueStatement node) {
-		this.fBuffer.append("/* FIXME Unsupported continue statement")
-		appendLineWrapToBuffer
+		this.fBuffer.append("/* FIXME Unsupported continue statement: ")
 		if (node.getLabel() != null) {
 			this.fBuffer.append(" ")
 			node.getLabel().accept(this)
 		}
 		this.fBuffer.append(";")
 		appendToBuffer("*/")
+		appendLineWrapToBuffer
 		return false
 	}
 
@@ -1163,8 +1253,16 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	@Override override boolean visit(TypeDeclarationStatement node) {
+		if (isNotSupportedInnerType(node)) {
+			addProblem("only static inner classes are allowed")
+			return false
+		}
 		node.getDeclaration().accept(this)
 		return false
+	}
+
+	def void setJavaSourceKind(int i) {
+		this.javaSourceKind = i
 	}
 
 }

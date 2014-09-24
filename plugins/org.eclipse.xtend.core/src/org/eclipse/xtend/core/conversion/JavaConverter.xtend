@@ -9,33 +9,79 @@ package org.eclipse.xtend.core.conversion
 
 import com.google.inject.Inject
 import com.google.inject.Provider
+import java.net.URL
+import java.net.URLClassLoader
+import org.eclipse.jdt.core.JavaCore
 import org.eclipse.jdt.core.dom.AST
-import org.eclipse.jdt.core.dom.ASTNode
 import org.eclipse.jdt.core.dom.ASTParser
+import org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  */
 class JavaConverter {
+
 	@Inject Provider<JavaASTFlattener> flattenerProvider
+	String complianceLevel = "1.5"
 
-	def String toXtend(String javaSrc) {
-		toXtend(javaSrc, ASTParser.K_COMPILATION_UNIT)
+	ASTParser astParser
+
+	def ConversionResult toXtend(String unitName, String javaSrc) {
+		toXtend(unitName, javaSrc, ASTParser.K_COMPILATION_UNIT)
 	}
 
-	def String toXtend(String javaSrc, int javaSourceKind) {
-		val parser = ASTParser.newParser(AST.JLS3)
-		parser.statementsRecovery = true
-		parser.bindingsRecovery = true
+	def ConversionResult toXtend(String unitName, String javaSrc, int javaSourceKind) {
+		val parser = getASTPArser()
 		parser.kind = javaSourceKind
+		parser.unitName = unitName
 		parser.source = javaSrc.toCharArray
-		return doConvert(parser.createAST(null))
+		val flattener = flattenerProvider.get()
+		flattener.setJavaSourceKind(javaSourceKind)
+		parser.createAST(null).accept(flattener)
+		val result = new ConversionResult
+		result.xtendCode = flattener.result
+		if (flattener.problems != null)
+			result.problems = flattener.problems
+		return result
 	}
 
-	def protected doConvert(ASTNode ast) {
-		val flattener = flattenerProvider.get()
-		ast.accept(flattener)
-		return flattener.result
+	def getASTPArser() {
+		if (astParser == null) {
+			astParser = ASTParser.newParser(AST.JLS3)
+			configure(astParser)
+		}
+		return astParser
+	}
+
+	def protected configure(ASTParser parser) {
+		val options = JavaCore.getOptions()
+		JavaCore.setComplianceOptions(complianceLevel, options)
+		parser.compilerOptions = options
+		parser.statementsRecovery = true
+		parser.resolveBindings = true
+		parser.bindingsRecovery = true
+		val cl = class.classLoader
+		if (cl instanceof DefaultClassLoader) {
+			cl.classpathManager.hostClasspathEntries.map[]
+		}
+		val sysClassLoader = ClassLoader.getSystemClassLoader();
+		val cpEntries = (sysClassLoader as URLClassLoader).getURLs().map[file]
+		parser.setEnvironment(cpEntries, null, null, true)
+
+	//		println(cpEntries)
+	}
+
+	static class ConversionResult {
+		String xtendCode
+		Iterable<String> problems = newArrayList()
+
+		def getXtendCode() {
+			xtendCode
+		}
+
+		def getProblems() {
+			problems
+		}
 	}
 
 }

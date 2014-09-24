@@ -17,8 +17,8 @@ import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.core.conversion.JavaConverter;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
-import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtext.mwe.PathTraverser;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.junit.Test;
 
@@ -74,7 +74,10 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
         System.out.println(_plus_1);
         Charset _defaultCharset = Charset.defaultCharset();
         final String java = Files.toString(file, _defaultCharset);
-        final String xtendCode = this.javaToXtend(java);
+        final JavaConverter j2x = this.javaConverter.get();
+        String _name = file.getName();
+        JavaConverter.ConversionResult _xtend = j2x.toXtend(_name, java);
+        final String xtendCode = _xtend.getXtendCode();
         String _fileString_1 = uri.toFileString();
         String _absolutePath_2 = projectRoot.getAbsolutePath();
         final String projectRelative = _fileString_1.replace(_absolutePath_2, "");
@@ -90,23 +93,18 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
         }
         Charset _defaultCharset_1 = Charset.defaultCharset();
         Files.write(xtendCode, targetFile, _defaultCharset_1);
-        this.file(xtendCode, true);
+        try {
+          this.file(xtendCode, true);
+        } catch (final Throwable _t) {
+          if (_t instanceof AssertionError) {
+            final AssertionError error = (AssertionError)_t;
+            String _message = error.getMessage();
+            System.err.print(_message);
+          } else {
+            throw Exceptions.sneakyThrow(_t);
+          }
+        }
       }
     }
-  }
-  
-  public XtendFile toValidFile(final String javaCode) throws Exception {
-    final String xtendCode = this.javaToXtend(javaCode);
-    System.out.println(xtendCode);
-    return this.file(xtendCode, true);
-  }
-  
-  public String javaToXtend(final String javaCode) {
-    String _xblockexpression = null;
-    {
-      final JavaConverter j2x = this.javaConverter.get();
-      _xblockexpression = j2x.toXtend(javaCode);
-    }
-    return _xblockexpression;
   }
 }

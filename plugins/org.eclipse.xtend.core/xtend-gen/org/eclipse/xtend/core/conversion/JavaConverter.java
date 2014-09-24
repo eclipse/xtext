@@ -7,39 +7,115 @@
  */
 package org.eclipse.xtend.core.conversion;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.Hashtable;
+import java.util.List;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTParser;
+import org.eclipse.osgi.baseadaptor.loader.ClasspathEntry;
+import org.eclipse.osgi.baseadaptor.loader.ClasspathManager;
+import org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader;
 import org.eclipse.xtend.core.conversion.JavaASTFlattener;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  */
 @SuppressWarnings("all")
 public class JavaConverter {
+  public static class ConversionResult {
+    private String xtendCode;
+    
+    private Iterable<String> problems = CollectionLiterals.<String>newArrayList();
+    
+    public String getXtendCode() {
+      return this.xtendCode;
+    }
+    
+    public Iterable<String> getProblems() {
+      return this.problems;
+    }
+  }
+  
   @Inject
   private Provider<JavaASTFlattener> flattenerProvider;
   
-  public String toXtend(final String javaSrc) {
-    return this.toXtend(javaSrc, ASTParser.K_COMPILATION_UNIT);
+  private String complianceLevel = "1.5";
+  
+  private ASTParser astParser;
+  
+  public JavaConverter.ConversionResult toXtend(final String unitName, final String javaSrc) {
+    return this.toXtend(unitName, javaSrc, ASTParser.K_COMPILATION_UNIT);
   }
   
-  public String toXtend(final String javaSrc, final int javaSourceKind) {
-    final ASTParser parser = ASTParser.newParser(AST.JLS3);
-    parser.setStatementsRecovery(true);
-    parser.setBindingsRecovery(true);
+  public JavaConverter.ConversionResult toXtend(final String unitName, final String javaSrc, final int javaSourceKind) {
+    final ASTParser parser = this.getASTPArser();
     parser.setKind(javaSourceKind);
+    parser.setUnitName(unitName);
     char[] _charArray = javaSrc.toCharArray();
     parser.setSource(_charArray);
+    final JavaASTFlattener flattener = this.flattenerProvider.get();
+    flattener.setJavaSourceKind(javaSourceKind);
     ASTNode _createAST = parser.createAST(null);
-    return this.doConvert(_createAST);
+    _createAST.accept(flattener);
+    final JavaConverter.ConversionResult result = new JavaConverter.ConversionResult();
+    String _result = flattener.getResult();
+    result.xtendCode = _result;
+    List<String> _problems = flattener.getProblems();
+    boolean _notEquals = (!Objects.equal(_problems, null));
+    if (_notEquals) {
+      List<String> _problems_1 = flattener.getProblems();
+      result.problems = _problems_1;
+    }
+    return result;
   }
   
-  protected String doConvert(final ASTNode ast) {
-    final JavaASTFlattener flattener = this.flattenerProvider.get();
-    ast.accept(flattener);
-    return flattener.getResult();
+  public ASTParser getASTPArser() {
+    boolean _equals = Objects.equal(this.astParser, null);
+    if (_equals) {
+      ASTParser _newParser = ASTParser.newParser(AST.JLS3);
+      this.astParser = _newParser;
+      this.configure(this.astParser);
+    }
+    return this.astParser;
+  }
+  
+  protected void configure(final ASTParser parser) {
+    final Hashtable options = JavaCore.getOptions();
+    JavaCore.setComplianceOptions(this.complianceLevel, options);
+    parser.setCompilerOptions(options);
+    parser.setStatementsRecovery(true);
+    parser.setResolveBindings(true);
+    parser.setBindingsRecovery(true);
+    Class<? extends JavaConverter> _class = this.getClass();
+    final ClassLoader cl = _class.getClassLoader();
+    if ((cl instanceof DefaultClassLoader)) {
+      ClasspathManager _classpathManager = ((DefaultClassLoader)cl).getClasspathManager();
+      ClasspathEntry[] _hostClasspathEntries = _classpathManager.getHostClasspathEntries();
+      final Function1<ClasspathEntry, Object> _function = new Function1<ClasspathEntry, Object>() {
+        public Object apply(final ClasspathEntry it) {
+          return null;
+        }
+      };
+      /* ListExtensions.<ClasspathEntry, Object>map(((List<ClasspathEntry>)Conversions.doWrapArray(_hostClasspathEntries)), _function); */
+    }
+    final ClassLoader sysClassLoader = ClassLoader.getSystemClassLoader();
+    URL[] _uRLs = ((URLClassLoader) sysClassLoader).getURLs();
+    final Function1<URL, String> _function_1 = new Function1<URL, String>() {
+      public String apply(final URL it) {
+        return it.getFile();
+      }
+    };
+    final List<String> cpEntries = ListExtensions.<URL, String>map(((List<URL>)Conversions.doWrapArray(_uRLs)), _function_1);
+    parser.setEnvironment(((String[])Conversions.unwrapArray(cpEntries, String.class)), null, null, true);
   }
 }
