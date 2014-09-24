@@ -12,6 +12,8 @@ import java.lang.reflect.Field;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.jface.text.source.projection.ProjectionViewer;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
@@ -33,6 +35,8 @@ public abstract class AbstractEditorTest extends AbstractWorkbenchTest {
 		IEditorPart openEditor = openEditor(file, getEditorId());
 		XtextEditor xtextEditor = EditorUtils.getXtextEditor(openEditor);
 		if (xtextEditor != null) {
+			ISourceViewer sourceViewer = xtextEditor.getInternalSourceViewer();
+			((ProjectionViewer)sourceViewer).doOperation(ProjectionViewer.EXPAND_ALL);
 			return xtextEditor;
 		}
 		else if (openEditor instanceof ErrorEditorPart) {
