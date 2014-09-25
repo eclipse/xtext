@@ -333,9 +333,8 @@ public class JavaASTFlattener extends ASTVisitor {
   }
   
   public boolean visit(final StringLiteral it) {
-    String _literalValue = it.getLiteralValue();
-    String _string = this.converterService.toString(_literalValue, "STRING");
-    this.appendToBuffer(_string);
+    String _escapedValue = it.getEscapedValue();
+    this.appendToBuffer(_escapedValue);
     return false;
   }
   

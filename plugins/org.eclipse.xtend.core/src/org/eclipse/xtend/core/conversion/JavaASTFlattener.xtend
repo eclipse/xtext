@@ -256,7 +256,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override visit(StringLiteral it) {
-		appendToBuffer(converterService.toString(literalValue, "STRING"))
+		appendToBuffer(escapedValue)
 		return false
 	}
 
@@ -888,7 +888,6 @@ class JavaASTFlattener extends ASTVisitor {
 		//				appendToBuffer(") ")
 		//			}
 		//		}
-
 		node.getBody().accept(this)
 		appendToBuffer(" ")
 		for (var Iterator<CatchClause> _it = node.catchClauses().iterator(); _it.hasNext();) {
@@ -936,18 +935,18 @@ class JavaASTFlattener extends ASTVisitor {
 		appendToBuffer(")")
 		return false
 	}
-//UnionType not supported in Juno
-//	override boolean visit(UnionType node) {
-//		for (var Iterator<Type> _it = node.types().iterator(); _it.hasNext();) {
-//			var Type t = _it.next()
-//			t.accept(this)
-//			if (_it.hasNext()) {
-//				appendToBuffer("|")
-//			}
-//		}
-//		return false
-//	}
 
+	// UnionType is Not available in Juno
+	//	override boolean visit(UnionType node) {
+	//		for (var Iterator<Type> _it = node.types().iterator(); _it.hasNext();) {
+	//			var Type t = _it.next()
+	//			t.accept(this)
+	//			if (_it.hasNext()) {
+	//				appendToBuffer("|")
+	//			}
+	//		}
+	//		return false
+	//	}
 	override boolean visit(CharacterLiteral node) {
 		appendToBuffer(node.getEscapedValue())
 		return false
