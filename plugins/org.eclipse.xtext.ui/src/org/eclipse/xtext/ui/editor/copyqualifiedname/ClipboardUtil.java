@@ -36,4 +36,19 @@ public class ClipboardUtil {
 		return null;
 	}
 
+	public static Object getClipboardContent(int clipboardType) {
+		TextTransfer plainTextTransfer = TextTransfer.getInstance();
+		Clipboard clipboard = null;
+		Object contents;
+		try {
+			Display display = SWTUtil.getStandardDisplay();
+			clipboard = new Clipboard(display);
+			contents = clipboard.getContents(plainTextTransfer, clipboardType);
+		} finally {
+			if (clipboard != null) {
+				clipboard.dispose();
+			}
+		}
+		return contents;
+	}
 }
