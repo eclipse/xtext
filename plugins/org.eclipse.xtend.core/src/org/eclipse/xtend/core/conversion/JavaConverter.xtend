@@ -13,7 +13,6 @@ import java.net.URLClassLoader
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.jdt.core.dom.AST
 import org.eclipse.jdt.core.dom.ASTParser
-import org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader
 
 import org.eclipse.jdt.core.ICompilationUnit
 
@@ -54,10 +53,7 @@ class JavaConverter {
 		parser.statementsRecovery = true
 		parser.resolveBindings = true
 		parser.bindingsRecovery = true
-		val cl = class.classLoader
-		if (cl instanceof DefaultClassLoader) {
-			cl.classpathManager.hostClasspathEntries.map[]
-		}
+
 		val sysClassLoader = ClassLoader.getSystemClassLoader();
 		val cpEntries = (sysClassLoader as URLClassLoader).getURLs().map[file]
 		parser.setEnvironment(cpEntries, null, null, true)

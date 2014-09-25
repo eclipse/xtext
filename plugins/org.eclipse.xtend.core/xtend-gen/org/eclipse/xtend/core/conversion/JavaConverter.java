@@ -19,9 +19,6 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTParser;
-import org.eclipse.osgi.baseadaptor.loader.ClasspathEntry;
-import org.eclipse.osgi.baseadaptor.loader.ClasspathManager;
-import org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader;
 import org.eclipse.xtend.core.conversion.JavaASTFlattener;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -93,26 +90,14 @@ public class JavaConverter {
     parser.setStatementsRecovery(true);
     parser.setResolveBindings(true);
     parser.setBindingsRecovery(true);
-    Class<? extends JavaConverter> _class = this.getClass();
-    final ClassLoader cl = _class.getClassLoader();
-    if ((cl instanceof DefaultClassLoader)) {
-      ClasspathManager _classpathManager = ((DefaultClassLoader)cl).getClasspathManager();
-      ClasspathEntry[] _hostClasspathEntries = _classpathManager.getHostClasspathEntries();
-      final Function1<ClasspathEntry, Object> _function = new Function1<ClasspathEntry, Object>() {
-        public Object apply(final ClasspathEntry it) {
-          return null;
-        }
-      };
-      /* ListExtensions.<ClasspathEntry, Object>map(((List<ClasspathEntry>)Conversions.doWrapArray(_hostClasspathEntries)), _function); */
-    }
     final ClassLoader sysClassLoader = ClassLoader.getSystemClassLoader();
     URL[] _uRLs = ((URLClassLoader) sysClassLoader).getURLs();
-    final Function1<URL, String> _function_1 = new Function1<URL, String>() {
+    final Function1<URL, String> _function = new Function1<URL, String>() {
       public String apply(final URL it) {
         return it.getFile();
       }
     };
-    final List<String> cpEntries = ListExtensions.<URL, String>map(((List<URL>)Conversions.doWrapArray(_uRLs)), _function_1);
+    final List<String> cpEntries = ListExtensions.<URL, String>map(((List<URL>)Conversions.doWrapArray(_uRLs)), _function);
     parser.setEnvironment(((String[])Conversions.unwrapArray(cpEntries, String.class)), null, null, true);
     parser.setKind(javaSourceKind);
     parser.setUnitName(unitName);
