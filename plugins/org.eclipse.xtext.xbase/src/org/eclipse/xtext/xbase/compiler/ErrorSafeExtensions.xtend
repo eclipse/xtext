@@ -104,6 +104,7 @@ class ErrorSafeExtensions {
 				JvmSpecializedTypeReference: typeRef.equivalent.serializeSafely(surrogateType, appendable)
 				JvmUnknownTypeReference: appendable.append(typeRef.qualifiedName)
 				default: {
+					appendable.append('Object')
 					val errorChild = appendable.openErrorAppendable(appendable)
 					errorChild.append("type is 'null'")
 					appendable.closeErrorAppendable(errorChild)
