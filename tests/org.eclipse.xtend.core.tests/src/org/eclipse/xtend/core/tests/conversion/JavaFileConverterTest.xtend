@@ -19,6 +19,7 @@ import org.eclipse.xtend.core.conversion.JavaConverter
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.mwe.PathTraverser
 import org.junit.Test
+import org.junit.Ignore
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -27,7 +28,7 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
 	@Inject
 	private Provider<JavaConverter> javaConverter;
 
-	@Test
+	@Test @Ignore
 	def void testConvertFilesInThisProject() throws Exception {
 		val File projectRoot = new File("").getAbsoluteFile();
 		val testProject = new File(projectRoot.parentFile, "test-converter")
