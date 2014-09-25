@@ -208,6 +208,7 @@ public class ErrorSafeExtensions {
       }
       if (!_matched) {
         {
+          appendable.append("Object");
           final ITreeAppendable errorChild = this.openErrorAppendable(appendable, appendable);
           errorChild.append("type is \'null\'");
           this.closeErrorAppendable(appendable, errorChild);
