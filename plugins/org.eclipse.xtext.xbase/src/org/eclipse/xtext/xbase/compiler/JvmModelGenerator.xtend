@@ -568,9 +568,8 @@ class JvmModelGenerator implements IGenerator {
 				(parameterType as JvmGenericArrayTypeReference).componentType.serializeSafely("Object", tracedAppendable)
 			}
 			tracedAppendable.append("...")
-		} else if (parameterType != null) {
-			parameterType.serializeSafely("Object", tracedAppendable)
 		}
+		parameterType.serializeSafely("Object", tracedAppendable)
 		tracedAppendable.append(" ")
 		val name = tracedAppendable.declareVariable(it, makeJavaIdentifier(simpleName))
 		tracedAppendable.traceSignificant(it).append(name)

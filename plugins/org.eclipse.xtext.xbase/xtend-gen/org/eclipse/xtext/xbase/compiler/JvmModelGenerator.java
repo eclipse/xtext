@@ -1123,14 +1123,9 @@ public class JvmModelGenerator implements IGenerator {
         this._errorSafeExtensions.serializeSafely(_componentType, "Object", tracedAppendable);
       }
       tracedAppendable.append("...");
-    } else {
-      JvmTypeReference _parameterType_2 = it.getParameterType();
-      boolean _notEquals = (!Objects.equal(_parameterType_2, null));
-      if (_notEquals) {
-        JvmTypeReference _parameterType_3 = it.getParameterType();
-        this._errorSafeExtensions.serializeSafely(_parameterType_3, "Object", tracedAppendable);
-      }
     }
+    JvmTypeReference _parameterType_2 = it.getParameterType();
+    this._errorSafeExtensions.serializeSafely(_parameterType_2, "Object", tracedAppendable);
     tracedAppendable.append(" ");
     String _simpleName = it.getSimpleName();
     String _makeJavaIdentifier = this.makeJavaIdentifier(_simpleName);
