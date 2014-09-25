@@ -9,6 +9,7 @@ package org.eclipse.xtend.ide.edit;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -55,11 +56,13 @@ public class ConvertJavaCodeHandler extends AbstractHandler {
 			IFile file = parent.getFile(new Path(iCompilationUnit.getElementName() + ".xtend"));
 			if (!file.exists()) {
 				String content = converter.toXtend(iCompilationUnit).getXtendCode();
-				InputStream source = new ByteArrayInputStream(content.getBytes());
 				try {
+					InputStream source = new ByteArrayInputStream(content.getBytes(file.getCharset()));
 					file.create(source, IResource.NONE, null);
 				} catch (CoreException e) {
 					throw new ExecutionException("Failed to create file. " + file.getFullPath(), e);
+				} catch (UnsupportedEncodingException e) {
+					throw new ExecutionException("Failed to write to file. " + file.getFullPath(), e);
 				}
 			}
 		}
