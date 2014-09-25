@@ -9,12 +9,13 @@ package org.eclipse.xtend.core.conversion
 
 import com.google.inject.Inject
 import com.google.inject.Provider
-import java.net.URL
 import java.net.URLClassLoader
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.jdt.core.dom.AST
 import org.eclipse.jdt.core.dom.ASTParser
 import org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader
+
+import org.eclipse.jdt.core.ICompilationUnit
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -24,36 +25,29 @@ class JavaConverter {
 	@Inject Provider<JavaASTFlattener> flattenerProvider
 	String complianceLevel = "1.5"
 
-	ASTParser astParser
+	def ConversionResult toXtend(ICompilationUnit cu) {
+		val parser = ASTParser.newParser(AST.JLS3)
+		val options = JavaCore.getOptions()
+		JavaCore.setComplianceOptions(complianceLevel, options)
+		parser.compilerOptions = options
+		parser.statementsRecovery = true
+		parser.resolveBindings = true
+		parser.bindingsRecovery = true
+		parser.source = cu
+
+		val flattener = flattenerProvider.get()
+		parser.createAST(null).accept(flattener)
+		val result = ConversionResult.create(flattener)
+		return result
+
+	}
 
 	def ConversionResult toXtend(String unitName, String javaSrc) {
 		toXtend(unitName, javaSrc, ASTParser.K_COMPILATION_UNIT)
 	}
 
 	def ConversionResult toXtend(String unitName, String javaSrc, int javaSourceKind) {
-		val parser = getASTPArser()
-		parser.kind = javaSourceKind
-		parser.unitName = unitName
-		parser.source = javaSrc.toCharArray
-		val flattener = flattenerProvider.get()
-		flattener.setJavaSourceKind(javaSourceKind)
-		parser.createAST(null).accept(flattener)
-		val result = new ConversionResult
-		result.xtendCode = flattener.result
-		if (flattener.problems != null)
-			result.problems = flattener.problems
-		return result
-	}
-
-	def getASTPArser() {
-		if (astParser == null) {
-			astParser = ASTParser.newParser(AST.JLS3)
-			configure(astParser)
-		}
-		return astParser
-	}
-
-	def protected configure(ASTParser parser) {
+		val parser = ASTParser.newParser(AST.JLS3)
 		val options = JavaCore.getOptions()
 		JavaCore.setComplianceOptions(complianceLevel, options)
 		parser.compilerOptions = options
@@ -68,7 +62,16 @@ class JavaConverter {
 		val cpEntries = (sysClassLoader as URLClassLoader).getURLs().map[file]
 		parser.setEnvironment(cpEntries, null, null, true)
 
-	//		println(cpEntries)
+		parser.kind = javaSourceKind
+		parser.unitName = unitName
+		parser.source = javaSrc.toCharArray
+
+		val flattener = flattenerProvider.get()
+		flattener.setJavaSourceKind(javaSourceKind)
+
+		parser.createAST(null).accept(flattener)
+
+		return ConversionResult.create(flattener)
 	}
 
 	static class ConversionResult {
@@ -82,6 +85,15 @@ class JavaConverter {
 		def getProblems() {
 			problems
 		}
+
+		def static create(JavaASTFlattener flattener) {
+			val result = new ConversionResult
+			result.xtendCode = flattener.result
+			if (flattener.problems != null)
+				result.problems = flattener.problems
+			return result
+		}
+
 	}
 
 }
