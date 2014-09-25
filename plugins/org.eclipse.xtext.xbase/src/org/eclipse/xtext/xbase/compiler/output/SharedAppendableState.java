@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.compiler.output;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
@@ -26,8 +27,10 @@ public class SharedAppendableState {
 	private final String lineSeparator;
 	private final ScopeStack scopes;
 	private final ImportManager importManager;
+	private final Resource resource;
 	
-	public SharedAppendableState(String indentation, String lineSeparator, ImportManager importManager) {
+	public SharedAppendableState(String indentation, String lineSeparator, ImportManager importManager, Resource resource) {
+		this.resource = resource;
 		this.indentation = indentation;
 		this.lineSeparator = lineSeparator;
 		this.importManager = importManager;
@@ -35,8 +38,12 @@ public class SharedAppendableState {
 		openScope();
 	}
 	
-	public SharedAppendableState(ImportManager importManager) {
-		this("  ", "\n", importManager);
+	public SharedAppendableState(ImportManager importManager, Resource resource) {
+		this("  ", "\n", importManager, resource);
+	}
+	
+	public Resource getResource() {
+		return resource;
 	}
 	
 	public void appendNewLineAndIndentation(IAcceptor<String> content) {

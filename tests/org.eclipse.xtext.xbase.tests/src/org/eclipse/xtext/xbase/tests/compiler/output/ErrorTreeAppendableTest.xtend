@@ -42,6 +42,6 @@ class ErrorTreeAppendableTest extends AbstractXbaseTestCase {
 	}
 	
 	def createErrorTreeAppendable(EObject source) {
-		new TreeAppendable(new ImportManager(true), converter, locationProvider, jvmModelAssociations, source, " ", "<newline>").errorChild(source)
+		new TreeAppendable(new ImportManager(true), converter, locationProvider, jvmModelAssociations, source, " ", "<newline>").errorChild()
 	}
 }

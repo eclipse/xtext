@@ -63,6 +63,6 @@ public class ErrorTreeAppendableTest extends AbstractXbaseTestCase {
   public ErrorTreeAppendable createErrorTreeAppendable(final EObject source) {
     ImportManager _importManager = new ImportManager(true);
     TreeAppendable _treeAppendable = new TreeAppendable(_importManager, this.converter, this.locationProvider, this.jvmModelAssociations, source, " ", "<newline>");
-    return _treeAppendable.errorChild(source);
+    return _treeAppendable.errorChild();
   }
 }

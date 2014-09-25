@@ -97,7 +97,7 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 	
 	public TreeAppendable(ImportManager importManager, ITraceURIConverter converter, ILocationInFileProvider locationProvider, IJvmModelAssociations jvmModelAssociations, EObject source,
 			String indentation, String lineSeparator) {
-		this(new SharedAppendableState(indentation, lineSeparator, importManager), converter, locationProvider, jvmModelAssociations, source);
+		this(new SharedAppendableState(indentation, lineSeparator, importManager, source.eResource()), converter, locationProvider, jvmModelAssociations, source);
 	}
 
 	protected TreeAppendable(SharedAppendableState state, ITraceURIConverter converter, ILocationInFileProvider locationProvider, IJvmModelAssociations jvmModelAssociations, EObject source) {
@@ -135,8 +135,8 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 	/**
 	 * @since 2.4
 	 */
-	public ErrorTreeAppendable errorChild(EObject context) {
-		ErrorTreeAppendable errorChild = new ErrorTreeAppendable(state, traceURIConverter, locationProvider, jvmModelAssociations, getLocationData(), useForDebugging, context);
+	public ErrorTreeAppendable errorChild() {
+		ErrorTreeAppendable errorChild = new ErrorTreeAppendable(state, traceURIConverter, locationProvider, jvmModelAssociations, getLocationData(), useForDebugging);
 		children.add(errorChild);
 		return errorChild;
 	}

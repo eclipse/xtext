@@ -47,7 +47,7 @@ public interface ITreeAppendable extends IAppendable, ITraceRegionProvider {
 	 */
 	ITreeAppendable trace(ILocationData location, boolean useForDebugging);
 	
-	ErrorTreeAppendable errorChild(EObject context);
+	ErrorTreeAppendable errorChild();
 	
 	ITreeAppendable append(JvmType type);
 	

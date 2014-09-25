@@ -49,7 +49,7 @@ class ErrorSafeExtensions {
 		val loopParams = new LoopParams => loopInitializer
 		val allElementsBroken = elements.filter[it.hasErrors()].size == elements.size
 		var currentAppendable = if(allElementsBroken) 
-				appendable.openErrorAppendable(null, elements.head)
+				appendable.openErrorAppendable(null)
 			else 
 				appendable
 		loopParams.appendPrefix(currentAppendable)
@@ -64,7 +64,7 @@ class ErrorSafeExtensions {
 				body.apply(element, appendable)
 			} else {
 				if(!allElementsBroken)
-					currentAppendable = openErrorAppendable(appendable, currentAppendable, element)
+					currentAppendable = openErrorAppendable(appendable, currentAppendable)
 				if(!isFirst || !isFirstBroken)
 					loopParams.appendSeparator(currentAppendable)
 				isFirstBroken = false
@@ -81,9 +81,9 @@ class ErrorSafeExtensions {
 		appendable.closeErrorAppendable(currentAppendable)
 	}	
 	
-	def protected openErrorAppendable(ITreeAppendable parent, ITreeAppendable child, EObject context) {
+	def protected openErrorAppendable(ITreeAppendable parent, ITreeAppendable child) {
 		if(!(child instanceof ErrorTreeAppendable))
-			parent.errorChild(context).append("/* ")
+			parent.errorChild().append("/* ")
 		else 
 			child
 	}
@@ -104,14 +104,14 @@ class ErrorSafeExtensions {
 				JvmSpecializedTypeReference: typeRef.equivalent.serializeSafely(surrogateType, appendable)
 				JvmUnknownTypeReference: appendable.append(typeRef.qualifiedName)
 				default: {
-					val errorChild = appendable.openErrorAppendable(appendable, typeRef)
+					val errorChild = appendable.openErrorAppendable(appendable)
 					errorChild.append("type is 'null'")
 					appendable.closeErrorAppendable(errorChild)
 				}
 			}
 		} else {
 			if(typeRef.accept(new BrokenTypeRefDetector)) {
-				val errorChild = appendable.openErrorAppendable(appendable, typeRef.eContainer)
+				val errorChild = appendable.openErrorAppendable(appendable)
 				try {
 					serialize(typeRef, typeRef.eContainer, errorChild)
 				} catch(Exception ignoreMe) {}
@@ -126,12 +126,12 @@ class ErrorSafeExtensions {
 	
 	def void serializeSafely(JvmAnnotationReference annotationRef, ITreeAppendable appendable, (ITreeAppendable)=>void onSuccess) {
 		if(annotationRef == null || annotationRef.annotation == null) {
-			val errorChild = appendable.openErrorAppendable(appendable, annotationRef)
+			val errorChild = appendable.openErrorAppendable(appendable)
 			errorChild.append("annotation is 'null'")
 			appendable.closeErrorAppendable(errorChild)
 		} else {
 			if(annotationRef.annotation.eIsProxy) {
-				val errorChild = appendable.openErrorAppendable(appendable, annotationRef.eContainer)
+				val errorChild = appendable.openErrorAppendable(appendable)
 				appendable.append("@")
 				appendable.append(annotationRef.annotation)
 				appendable.closeErrorAppendable(errorChild)

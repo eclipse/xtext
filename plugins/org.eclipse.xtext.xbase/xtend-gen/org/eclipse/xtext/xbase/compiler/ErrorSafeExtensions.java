@@ -97,8 +97,7 @@ public class ErrorSafeExtensions {
     final boolean allElementsBroken = (_size == _size_1);
     ITreeAppendable _xifexpression = null;
     if (allElementsBroken) {
-      T _head = IterableExtensions.<T>head(elements);
-      _xifexpression = this.openErrorAppendable(appendable, null, _head);
+      _xifexpression = this.openErrorAppendable(appendable, null);
     } else {
       _xifexpression = appendable;
     }
@@ -119,7 +118,7 @@ public class ErrorSafeExtensions {
         body.apply(element, appendable);
       } else {
         if ((!allElementsBroken)) {
-          ITreeAppendable _openErrorAppendable = this.openErrorAppendable(appendable, currentAppendable, element);
+          ITreeAppendable _openErrorAppendable = this.openErrorAppendable(appendable, currentAppendable);
           currentAppendable = _openErrorAppendable;
         }
         if (((!isFirst) || (!isFirstBroken))) {
@@ -148,10 +147,10 @@ public class ErrorSafeExtensions {
     this.closeErrorAppendable(appendable, currentAppendable);
   }
   
-  protected ITreeAppendable openErrorAppendable(final ITreeAppendable parent, final ITreeAppendable child, final EObject context) {
+  protected ITreeAppendable openErrorAppendable(final ITreeAppendable parent, final ITreeAppendable child) {
     ITreeAppendable _xifexpression = null;
     if ((!(child instanceof ErrorTreeAppendable))) {
-      ErrorTreeAppendable _errorChild = parent.errorChild(context);
+      ErrorTreeAppendable _errorChild = parent.errorChild();
       _xifexpression = _errorChild.append("/* ");
     } else {
       _xifexpression = child;
@@ -209,7 +208,7 @@ public class ErrorSafeExtensions {
       }
       if (!_matched) {
         {
-          final ITreeAppendable errorChild = this.openErrorAppendable(appendable, appendable, typeRef);
+          final ITreeAppendable errorChild = this.openErrorAppendable(appendable, appendable);
           errorChild.append("type is \'null\'");
           this.closeErrorAppendable(appendable, errorChild);
         }
@@ -218,11 +217,10 @@ public class ErrorSafeExtensions {
       BrokenTypeRefDetector _brokenTypeRefDetector = new BrokenTypeRefDetector();
       Boolean _accept = typeRef.<Boolean>accept(_brokenTypeRefDetector);
       if ((_accept).booleanValue()) {
-        EObject _eContainer = typeRef.eContainer();
-        final ITreeAppendable errorChild = this.openErrorAppendable(appendable, appendable, _eContainer);
+        final ITreeAppendable errorChild = this.openErrorAppendable(appendable, appendable);
         try {
-          EObject _eContainer_1 = typeRef.eContainer();
-          this._typeReferenceSerializer.serialize(typeRef, _eContainer_1, errorChild);
+          EObject _eContainer = typeRef.eContainer();
+          this._typeReferenceSerializer.serialize(typeRef, _eContainer, errorChild);
         } catch (final Throwable _t) {
           if (_t instanceof Exception) {
             final Exception ignoreMe = (Exception)_t;
@@ -236,8 +234,8 @@ public class ErrorSafeExtensions {
           appendable.append(surrogateType);
         }
       } else {
-        EObject _eContainer_2 = typeRef.eContainer();
-        this._typeReferenceSerializer.serialize(typeRef, _eContainer_2, appendable);
+        EObject _eContainer_1 = typeRef.eContainer();
+        this._typeReferenceSerializer.serialize(typeRef, _eContainer_1, appendable);
       }
     }
   }
@@ -253,15 +251,14 @@ public class ErrorSafeExtensions {
       _or = _equals_1;
     }
     if (_or) {
-      final ITreeAppendable errorChild = this.openErrorAppendable(appendable, appendable, annotationRef);
+      final ITreeAppendable errorChild = this.openErrorAppendable(appendable, appendable);
       errorChild.append("annotation is \'null\'");
       this.closeErrorAppendable(appendable, errorChild);
     } else {
       JvmAnnotationType _annotation_1 = annotationRef.getAnnotation();
       boolean _eIsProxy = _annotation_1.eIsProxy();
       if (_eIsProxy) {
-        EObject _eContainer = annotationRef.eContainer();
-        final ITreeAppendable errorChild_1 = this.openErrorAppendable(appendable, appendable, _eContainer);
+        final ITreeAppendable errorChild_1 = this.openErrorAppendable(appendable, appendable);
         appendable.append("@");
         JvmAnnotationType _annotation_2 = annotationRef.getAnnotation();
         appendable.append(_annotation_2);

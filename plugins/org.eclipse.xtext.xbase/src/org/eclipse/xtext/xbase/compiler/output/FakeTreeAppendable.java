@@ -96,7 +96,7 @@ public class FakeTreeAppendable extends StringBuilderBasedAppendable implements 
 		return this;
 	}
 
-	public ErrorTreeAppendable errorChild(EObject context) {
+	public ErrorTreeAppendable errorChild() {
 		throw new UnsupportedOperationException();
 	}
 
