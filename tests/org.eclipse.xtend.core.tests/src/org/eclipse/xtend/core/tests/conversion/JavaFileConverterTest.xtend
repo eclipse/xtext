@@ -19,7 +19,6 @@ import org.eclipse.xtend.core.conversion.JavaConverter
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.mwe.PathTraverser
 import org.junit.Test
-import org.junit.Ignore
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -28,11 +27,11 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
 	@Inject
 	private Provider<JavaConverter> javaConverter;
 
-	@Test @Ignore
+	@Test
 	def void testConvertFilesInThisProject() throws Exception {
 		val File projectRoot = new File("").getAbsoluteFile();
-		val testProject = new File("/Users/dhuebner/Entwicklung/xtext/master/ws/test-converter")
-		System.out.println("Working in " + projectRoot.getPath());
+		val testProject = new File(projectRoot.parentFile, "test-converter")
+		println("Working in " + projectRoot.getPath());
 		val PathTraverser pathTraverser = new PathTraverser();
 		val Set<URI> allResourceUris = pathTraverser.findAllResourceUris(projectRoot.getAbsolutePath(),
 			new Predicate<URI>() {
@@ -44,7 +43,7 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
 			});
 		for (URI uri : allResourceUris) {
 			val File file = new File(uri.toFileString());
-			System.out.println("Converting: " + file.getAbsolutePath());
+			println("Converting: " + file.getAbsolutePath());
 			val String java = Files.toString(file, Charset.defaultCharset());
 			val JavaConverter j2x = javaConverter.get();
 			val String xtendCode = j2x.toXtend(file.name, java).xtendCode
@@ -62,6 +61,7 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
 				System.err.print(error.message)
 			}
 		}
+		println("Done...")
 	}
 
 }

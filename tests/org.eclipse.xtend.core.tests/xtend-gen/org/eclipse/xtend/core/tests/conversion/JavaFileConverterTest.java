@@ -20,7 +20,6 @@ import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtext.mwe.PathTraverser;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -32,14 +31,14 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
   private Provider<JavaConverter> javaConverter;
   
   @Test
-  @Ignore
   public void testConvertFilesInThisProject() throws Exception {
     File _file = new File("");
     final File projectRoot = _file.getAbsoluteFile();
-    final File testProject = new File("/Users/dhuebner/Entwicklung/xtext/master/ws/test-converter");
+    File _parentFile = projectRoot.getParentFile();
+    final File testProject = new File(_parentFile, "test-converter");
     String _path = projectRoot.getPath();
     String _plus = ("Working in " + _path);
-    System.out.println(_plus);
+    InputOutput.<String>println(_plus);
     final PathTraverser pathTraverser = new PathTraverser();
     String _absolutePath = projectRoot.getAbsolutePath();
     final Set<URI> allResourceUris = pathTraverser.findAllResourceUris(_absolutePath, 
@@ -73,7 +72,7 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
         final File file = new File(_fileString);
         String _absolutePath_1 = file.getAbsolutePath();
         String _plus_1 = ("Converting: " + _absolutePath_1);
-        System.out.println(_plus_1);
+        InputOutput.<String>println(_plus_1);
         Charset _defaultCharset = Charset.defaultCharset();
         final String java = Files.toString(file, _defaultCharset);
         final JavaConverter j2x = this.javaConverter.get();
@@ -108,5 +107,6 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
         }
       }
     }
+    InputOutput.<String>println("Done...");
   }
 }

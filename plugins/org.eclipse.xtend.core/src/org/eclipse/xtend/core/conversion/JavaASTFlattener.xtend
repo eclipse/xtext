@@ -179,8 +179,8 @@ class JavaASTFlattener extends ASTVisitor {
 		fBuffer.append(string)
 	}
 
-	def protected addProblem(String string) {
-		problems.add(string)
+	def protected addProblem(ASTNode node, String string) {
+		problems.add('''«string» (start: «node.startPosition», length: «node.length»)''')
 	}
 
 	override boolean visit(Assignment node) {
@@ -296,9 +296,8 @@ class JavaASTFlattener extends ASTVisitor {
 			bodyDeclarations.appendAll
 			return false;
 		}
-
-		//TODO only static inner classes allowed
 		if (isNotSupportedInnerType(it)) {
+			appendToBuffer('''/* FIXME only static inner classes are allowed «it.name»*/''')
 			addProblem("only static inner classes are allowed")
 			return false
 		}
@@ -464,10 +463,10 @@ class JavaASTFlattener extends ASTVisitor {
 
 	override visit(VariableDeclarationStatement it) {
 		val hasAnnotations = !modifiers().filter(Annotation).empty
-
-		// TODO we can't add Annotations to a Variable declarations 
-		if (hasAnnotations)
+		if (hasAnnotations) {
 			appendToBuffer("/*FIXME can not add Annotation to Variable declaration. Java code: ")
+			addProblem("Annotation on Variable declaration is not supported.")
+		}
 		appendModifieres(modifiers(), [if(hasAnnotations) appendToBuffer("*/") appendLineWrapToBuffer])
 		appendToBuffer(handleVariableDeclaration(modifiers()))
 		appendSpaceToBuffer
@@ -527,6 +526,9 @@ class JavaASTFlattener extends ASTVisitor {
 				}
 			}
 		}
+		if (isConstructor()) {
+			appendToBuffer(" new")
+		}
 		if (!typeParameters.isEmpty()) {
 			typeParameters.appendTypeParameters
 		}
@@ -538,8 +540,6 @@ class JavaASTFlattener extends ASTVisitor {
 			}
 			appendToBuffer(" ")
 			name.accept(this)
-		} else {
-			appendToBuffer(" new")
 		}
 		appendToBuffer("(")
 		parameters.appendAllSeparatedByComma
@@ -1039,7 +1039,8 @@ class JavaASTFlattener extends ASTVisitor {
 		var at = node.getType()
 		var dims = at.getDimensions()
 		if (dims > 1) {
-			addProblem("Only one dimension arrays are supported")
+			appendToBuffer('''/* FIXME Only one dimension arrays are supported. «node»*/''')
+			node.addProblem("Only one dimension arrays are supported.")
 			return false
 		}
 		if (node.getInitializer() != null) {
@@ -1077,8 +1078,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	@Override override boolean visit(BreakStatement node) {
-		this.fBuffer.append("/* FIXME unsupported BreakStatement")
-		appendLineWrapToBuffer
+		this.fBuffer.append("/* FIXME unsupported BreakStatement: break ")
 		if (node.getLabel() != null) {
 			this.fBuffer.append(" ")
 			node.getLabel().accept(this)
@@ -1260,7 +1260,8 @@ class JavaASTFlattener extends ASTVisitor {
 
 	@Override override boolean visit(TypeDeclarationStatement node) {
 		if (isNotSupportedInnerType(node)) {
-			addProblem("only static inner classes are allowed")
+			appendToBuffer('''/* only static inner classes are allowed «node»*/''')
+			node.addProblem("only static inner classes are allowed")
 			return false
 		}
 		node.getDeclaration().accept(this)

@@ -110,6 +110,7 @@ import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
 import org.eclipse.jdt.core.dom.WhileStatement;
 import org.eclipse.jdt.core.dom.WildcardType;
 import org.eclipse.xtend.core.conversion.ASTFlattenerUtils;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -217,8 +218,17 @@ public class JavaASTFlattener extends ASTVisitor {
     return this.fBuffer.append(string);
   }
   
-  protected boolean addProblem(final String string) {
-    return this.problems.add(string);
+  protected boolean addProblem(final ASTNode node, final String string) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append(string, "");
+    _builder.append(" (start: ");
+    int _startPosition = node.getStartPosition();
+    _builder.append(_startPosition, "");
+    _builder.append(", length: ");
+    int _length = node.getLength();
+    _builder.append(_length, "");
+    _builder.append(")");
+    return this.problems.add(_builder.toString());
   }
   
   public boolean visit(final Assignment node) {
@@ -386,7 +396,13 @@ public class JavaASTFlattener extends ASTVisitor {
     }
     boolean _isNotSupportedInnerType = this._aSTFlattenerUtils.isNotSupportedInnerType(it);
     if (_isNotSupportedInnerType) {
-      this.addProblem("only static inner classes are allowed");
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("/* FIXME only static inner classes are allowed ");
+      SimpleName _name = it.getName();
+      _builder.append(_name, "");
+      _builder.append("*/");
+      this.appendToBuffer(_builder.toString());
+      this.addProblem(it, "only static inner classes are allowed");
       return false;
     }
     Javadoc _javadoc = it.getJavadoc();
@@ -409,8 +425,8 @@ public class JavaASTFlattener extends ASTVisitor {
     } else {
       this.appendToBuffer("class ");
     }
-    SimpleName _name = it.getName();
-    _name.accept(this);
+    SimpleName _name_1 = it.getName();
+    _name_1.accept(this);
     List _typeParameters = it.typeParameters();
     boolean _isEmpty = _typeParameters.isEmpty();
     boolean _not = (!_isEmpty);
@@ -640,6 +656,7 @@ public class JavaASTFlattener extends ASTVisitor {
     final boolean hasAnnotations = (!_isEmpty);
     if (hasAnnotations) {
       this.appendToBuffer("/*FIXME can not add Annotation to Variable declaration. Java code: ");
+      this.addProblem(it, "Annotation on Variable declaration is not supported.");
     }
     List _modifiers_1 = it.modifiers();
     final Function1<ASTNode, StringBuffer> _function = new Function1<ASTNode, StringBuffer>() {
@@ -752,6 +769,10 @@ public class JavaASTFlattener extends ASTVisitor {
         }
       }
     }
+    boolean _isConstructor = it.isConstructor();
+    if (_isConstructor) {
+      this.appendToBuffer(" new");
+    }
     List _typeParameters = it.typeParameters();
     boolean _isEmpty = _typeParameters.isEmpty();
     boolean _not_1 = (!_isEmpty);
@@ -759,8 +780,8 @@ public class JavaASTFlattener extends ASTVisitor {
       List _typeParameters_1 = it.typeParameters();
       this.appendTypeParameters(_typeParameters_1);
     }
-    boolean _isConstructor = it.isConstructor();
-    boolean _not_2 = (!_isConstructor);
+    boolean _isConstructor_1 = it.isConstructor();
+    boolean _not_2 = (!_isConstructor_1);
     if (_not_2) {
       Type _returnType2 = it.getReturnType2();
       boolean _notEquals_1 = (!Objects.equal(_returnType2, null));
@@ -773,8 +794,6 @@ public class JavaASTFlattener extends ASTVisitor {
       this.appendToBuffer(" ");
       SimpleName _name = it.getName();
       _name.accept(this);
-    } else {
-      this.appendToBuffer(" new");
     }
     this.appendToBuffer("(");
     List _parameters = it.parameters();
@@ -1499,7 +1518,12 @@ public class JavaASTFlattener extends ASTVisitor {
     ArrayType at = node.getType();
     int dims = at.getDimensions();
     if ((dims > 1)) {
-      this.addProblem("Only one dimension arrays are supported");
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("/* FIXME Only one dimension arrays are supported. ");
+      _builder.append(node, "");
+      _builder.append("*/");
+      this.appendToBuffer(_builder.toString());
+      this.addProblem(node, "Only one dimension arrays are supported.");
       return false;
     }
     ArrayInitializer _initializer = node.getInitializer();
@@ -1552,8 +1576,7 @@ public class JavaASTFlattener extends ASTVisitor {
   
   @Override
   public boolean visit(final BreakStatement node) {
-    this.fBuffer.append("/* FIXME unsupported BreakStatement");
-    this.appendLineWrapToBuffer();
+    this.fBuffer.append("/* FIXME unsupported BreakStatement: break ");
     SimpleName _label = node.getLabel();
     boolean _notEquals = (!Objects.equal(_label, null));
     if (_notEquals) {
@@ -1820,7 +1843,12 @@ public class JavaASTFlattener extends ASTVisitor {
   public boolean visit(final TypeDeclarationStatement node) {
     boolean _isNotSupportedInnerType = this._aSTFlattenerUtils.isNotSupportedInnerType(node);
     if (_isNotSupportedInnerType) {
-      this.addProblem("only static inner classes are allowed");
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("/* only static inner classes are allowed ");
+      _builder.append(node, "");
+      _builder.append("*/");
+      this.appendToBuffer(_builder.toString());
+      this.addProblem(node, "only static inner classes are allowed");
       return false;
     }
     AbstractTypeDeclaration _declaration = node.getDeclaration();
