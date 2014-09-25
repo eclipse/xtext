@@ -30,8 +30,6 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
  */
 public class ErrorTreeAppendable extends TreeAppendable {
 	
-	private EObject context;
-	
 	private LazyURIEncoder encoder;
 
 	public ErrorTreeAppendable(SharedAppendableState state, 
@@ -39,15 +37,13 @@ public class ErrorTreeAppendable extends TreeAppendable {
 			ILocationInFileProvider locationProvider,
 			IJvmModelAssociations jvmModelAssociations,
 			Set<ILocationData> sourceLocations, 
-			boolean useForDebugging,
-			EObject context) {
+			boolean useForDebugging) {
 		super(state, converter, locationProvider, jvmModelAssociations, sourceLocations, useForDebugging);
-		this.context = context;
 		encoder = getOrCreateURIEncoder();
 	}
 	
 	protected LazyURIEncoder getOrCreateURIEncoder() {
-		Resource resource = context.eResource();
+		Resource resource = getState().getResource();
 		if (resource instanceof LazyLinkingResource) {
 			return ((LazyLinkingResource) resource).getEncoder();
 		}
@@ -58,7 +54,7 @@ public class ErrorTreeAppendable extends TreeAppendable {
 	public TreeAppendable append(JvmType type) {
 		if(type.eIsProxy()) {
 			String fragment = ((InternalEObject)type).eProxyURI().fragment();
-			Triple<EObject, EReference, INode> unresolvedLink = encoder.decode(context.eResource(), fragment);
+			Triple<EObject, EReference, INode> unresolvedLink = encoder.decode(getState().getResource(), fragment);
 			if(unresolvedLink != null) {
 				INode linkNode = unresolvedLink.getThird();
 				if(linkNode != null) {
