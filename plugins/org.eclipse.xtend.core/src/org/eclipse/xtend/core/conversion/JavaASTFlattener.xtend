@@ -81,6 +81,7 @@ import org.eclipse.jdt.core.dom.SimpleName
 import org.eclipse.jdt.core.dom.SimpleType
 import org.eclipse.jdt.core.dom.SingleMemberAnnotation
 import org.eclipse.jdt.core.dom.SingleVariableDeclaration
+import org.eclipse.jdt.core.dom.Statement
 import org.eclipse.jdt.core.dom.StringLiteral
 import org.eclipse.jdt.core.dom.SuperConstructorInvocation
 import org.eclipse.jdt.core.dom.SuperFieldAccess
@@ -105,7 +106,6 @@ import org.eclipse.jdt.core.dom.VariableDeclarationStatement
 import org.eclipse.jdt.core.dom.WhileStatement
 import org.eclipse.jdt.core.dom.WildcardType
 import org.eclipse.xtext.conversion.IValueConverterService
-import org.eclipse.jdt.core.dom.Statement
 
 /**
  * @author Dennis Huebner - Initial contribution and API
@@ -752,7 +752,7 @@ class JavaASTFlattener extends ASTVisitor {
 				val assigment = dummyAST.newAssignment()
 				val infixOp = dummyAST.newInfixExpression
 				infixOp.leftOperand = ASTNode.copySubtree(dummyAST, node.operand) as Expression
-				infixOp.operator = org.eclipse.jdt.core.dom.InfixExpression.Operator.PLUS
+				infixOp.operator = InfixExpression.Operator.PLUS
 				infixOp.rightOperand = dummyAST.newNumberLiteral("1")
 				assigment.leftHandSide = ASTNode.copySubtree(dummyAST, node.operand) as Expression
 				assigment.rightHandSide = infixOp
@@ -762,7 +762,7 @@ class JavaASTFlattener extends ASTVisitor {
 				val assigment = dummyAST.newAssignment()
 				val infixOp = dummyAST.newInfixExpression
 				infixOp.leftOperand = ASTNode.copySubtree(dummyAST, node.operand) as Expression
-				infixOp.operator = org.eclipse.jdt.core.dom.InfixExpression.Operator.MINUS
+				infixOp.operator = InfixExpression.Operator.MINUS
 				infixOp.rightOperand = dummyAST.newNumberLiteral("1")
 				assigment.leftHandSide = ASTNode.copySubtree(dummyAST, node.operand) as Expression
 				assigment.rightHandSide = infixOp
@@ -918,7 +918,13 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override boolean visit(NumberLiteral node) {
-		appendToBuffer(node.getToken())
+		var value = node.getToken()
+		if (value.startsWith("0x") || value.startsWith("0X")) {
+			val lastChar = value.charAt(value.length - 1)
+			if (Character.isLetter(lastChar))
+				value = value.substring(0, value.length - 1) + "#" + lastChar
+		}
+		appendToBuffer(value)
 		return false
 	}
 

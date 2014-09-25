@@ -1325,8 +1325,30 @@ public class JavaASTFlattener extends ASTVisitor {
   }
   
   public boolean visit(final NumberLiteral node) {
-    String _token = node.getToken();
-    this.appendToBuffer(_token);
+    String value = node.getToken();
+    boolean _or = false;
+    boolean _startsWith = value.startsWith("0x");
+    if (_startsWith) {
+      _or = true;
+    } else {
+      boolean _startsWith_1 = value.startsWith("0X");
+      _or = _startsWith_1;
+    }
+    if (_or) {
+      int _length = value.length();
+      int _minus = (_length - 1);
+      final char lastChar = value.charAt(_minus);
+      boolean _isLetter = Character.isLetter(lastChar);
+      if (_isLetter) {
+        int _length_1 = value.length();
+        int _minus_1 = (_length_1 - 1);
+        String _substring = value.substring(0, _minus_1);
+        String _plus = (_substring + "#");
+        String _plus_1 = (_plus + Character.valueOf(lastChar));
+        value = _plus_1;
+      }
+    }
+    this.appendToBuffer(value);
     return false;
   }
   

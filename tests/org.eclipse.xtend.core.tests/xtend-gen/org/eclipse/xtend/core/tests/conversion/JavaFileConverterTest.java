@@ -20,6 +20,7 @@ import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtext.mwe.PathTraverser;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -31,6 +32,7 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
   private Provider<JavaConverter> javaConverter;
   
   @Test
+  @Ignore
   public void testConvertFilesInThisProject() throws Exception {
     File _file = new File("");
     final File projectRoot = _file.getAbsoluteFile();

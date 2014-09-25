@@ -22,6 +22,7 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.junit.Before;
 import org.junit.Test;
@@ -179,6 +180,19 @@ public class JavaConverterTest extends AbstractXtendTestCase {
 		assertEquals("withLineWrap", xtendMember.getName());
 		assertEquals("string with wrap\n", ((XStringLiteral) xtendMember.getInitialValue()).getValue());
 	}
+	@Test
+	public void testNumberLiteralCase() throws Exception {
+		XtendClass xtendClazz = toValidXtendClass("class TestStringLiteral {"
+				+ " long l= 0x0000000000000000L;"
+				+ " double d= 2.5d;"
+				+ "}");
+		XtendField xtendMember = (XtendField) xtendClazz.getMembers().get(0);
+		assertEquals("l", xtendMember.getName());
+		assertEquals("0x0000000000000000#L", ((XNumberLiteral) xtendMember.getInitialValue()).getValue());
+		 xtendMember = (XtendField) xtendClazz.getMembers().get(1);
+		assertEquals("d", xtendMember.getName());
+		assertEquals("2.5d", ((XNumberLiteral) xtendMember.getInitialValue()).getValue());
+	}
 
 	@Test
 	public void testSimpleTypeParameterCase() throws Exception {
@@ -293,7 +307,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
 	public void testPrefixPlusMinusArrayCase() throws Exception {
 		XtendClass clazz = toValidXtendClass("public class Clazz { " + "public static main(String[] args) {"
 				+ "int[] ints = new int[]{1,2,3,4,5};" + "int in = 2;"
-				//				+ "System.out.println(\"3=\"+(ints[in++]++));"
+				//TODO				+ "System.out.println(\"3=\"+(ints[in++]++));"
 				//				+ "System.out.println(\"4=\"+(ints[in--]--));"
 				+ "System.out.println(\"1=\"+(--ints[--in]));" + "System.out.println(\"5=\"+(++ints[++in]));" + "}}");
 		assertNotNull(clazz);
