@@ -58,6 +58,11 @@ public class OperationCanceledManager {
     return _switchResult;
   }
   
+  public boolean isOperationCanceledException(final Throwable t) {
+    RuntimeException _platformOperationCanceledException = this.getPlatformOperationCanceledException(t);
+    return (!Objects.equal(_platformOperationCanceledException, null));
+  }
+  
   /**
    * @since 2.8
    */

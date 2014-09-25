@@ -34,6 +34,10 @@ class OperationCanceledManager {
 		}
 	}
 	
+	def isOperationCanceledException(Throwable t) {
+		t.platformOperationCanceledException != null
+	}
+	
 	/**
 	 * @since 2.8
 	 */
