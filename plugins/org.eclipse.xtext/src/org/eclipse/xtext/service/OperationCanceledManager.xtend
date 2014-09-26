@@ -87,7 +87,7 @@ class OperationCanceledManager {
 	@Accessors final RuntimeException wrapped
 	
 	override fillInStackTrace() {
-		// don't do this
+		super.fillInStackTrace
 	}
 
 	override getCause() {
