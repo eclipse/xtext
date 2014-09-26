@@ -1697,21 +1697,19 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
   def dispatch void infer(Entity element, 
                 IJvmDeclaredTypeAcceptor acceptor, 
                 boolean isPrelinkingPhase) {
-      acceptor.accept(
-      element.toClass( element.fullyQualifiedName )
-    ).initializeLater [
+    acceptor.accept(element.toClass( element.fullyQualifiedName )) [
       documentation = element.documentation
       if (element.superType != null)
         superTypes += element.superType.cloneWithProxies
       for (feature : element.features) {
         switch feature {
-      
+          
           Property : {
             members += feature.toField(feature.name, feature.type)
             members += feature.toGetter(feature.name, feature.type)
             members += feature.toSetter(feature.name, feature.type)
           }
-      
+          
           Operation : {
             members += feature.toMethod(feature.name, feature.type) [
               documentation = feature.documentation
@@ -1729,7 +1727,7 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
 							<p>
 						</p>
 						<p>
-							Let's go through the code to get an idea of what is going on. (Please also refer to the JavaDoc of the involved API
+							Let's go through the code to get an idea of what is going on. (Please also refer to the JavaDoc of the used API
 							for details, especially the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder">JvmTypesBuilder</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">(src)</a>).
 						</p>
 						<p>
@@ -1744,25 +1742,25 @@ def dispatch void infer(Entity element,
 								    understand Xtend's dispatch functions. Extending <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/jvmmodel/AbstractModelInferrer.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer">AbstractModelInferrer</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/AbstractModelInferrer.java">(src)</a> makes 
 								    sure we don't have to walk the syntax model on our own.</li>
 								<li><pre class="prettyprint lang-xtend linenums">
-acceptor.accept(element.toClass(element.fullyQualifiedName)  
-...</pre>
-								  Every <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/common/types/JvmDeclaredType.html"><abbr title="org.eclipse.xtext.common.types.JvmDeclaredType">JvmDeclaredType</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmDeclaredType.java">(src)</a> you create in the model inference needs
-								  to be passed to the <strong>acceptor</strong> in order to get recognized.
-								  
-								  The extension method <strong>toClass</strong> comes from <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder">JvmTypesBuilder</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">(src)</a>.
-								  That class provides a lot of convenient extension methods, which help making the code extremely readable and concise.
-								  
-								  Most of the methods accept initializer blocks as the last argument, in which the currently created model element is bound
-								  to the implicit variable <code class="prettyprint lang-xtend">it</code>. Therein you can further initialize the created Java element.</li>
-								<li><pre class="prettyprint lang-xtend linenums">
-).initializeLater [</pre>
-								    The type inference has two phases. The first phase happens before linking. Only the empty types have to be created
-								    and be passed to the <strong>acceptor</strong>.
-								    The types' features are created in the second phase. The actions in this phase are specified in the lambda
-								    expression passed to <code class="prettyprint lang-xtend">initializeLater</code>. Think of it as an anonymous class.</li>
+acceptor.accept(element.toClass(element.fullyQualifiedName)) [  
+...
+]</pre>
+								    Every <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/common/types/JvmDeclaredType.html"><abbr title="org.eclipse.xtext.common.types.JvmDeclaredType">JvmDeclaredType</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmDeclaredType.java">(src)</a> you create in the model inference needs
+								    to be passed to the <strong>acceptor</strong> in order to get recognized.
+								    
+								    The extension method <strong>toClass</strong> comes from <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder">JvmTypesBuilder</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">(src)</a>.
+								    That class provides a lot of convenient extension methods, which help making the code extremely readable and concise.
+								    
+								    It is important to understand that the creation and assignment of a qualified name, is done in an early phase where the compiler collects all global symbols.
+								    You cannot resolve type references at this point.</li>
+								<li>The second argument to <strong>accept</strong> is a lambda block, that contains further initialization of the created Java type.
+								    Only in this block you are allowed to do type reference resolution. Also this is the place where you add members
+								    and put the XExpressions into context.
+								    
+								    Let's see what we do in the initialization block in detail:</li>
 								<li><pre class="prettyprint lang-xtend linenums">
 documentation = element.documentation</pre>
-								    Here for instance we assign some JavaDoc to the newly created element. The assignment is translated
+								    Here we assign some JavaDoc to the newly created element. The assignment is translated
 								    to an invocation of the method 
 								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder">JvmTypesBuilder</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">(src)</a><strong>#setDocumentation(<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/common/types/JvmIdentifiableElement.html"><abbr title="org.eclipse.xtext.common.types.JvmIdentifiableElement">JvmIdentifiableElement</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmIdentifiableElement.java">(src)</a> element,String documentation)</strong>
 								    and <code class="prettyprint lang-xtend">element.documentation</code> is in fact calling the extension method  
@@ -11096,10 +11094,9 @@ entity Person {
 						</p>
 						<p>
 							The inference runs in two phases: In the first phase all the types are created with empty bodies. This way you
-							make sure all types exist and are referable when you create their members in the second phase. 
-							Use <code class="prettyprint lang-xtend">acceptor.accept(JvmDeclaredType)</code> for the first phase and provide the initialization
-							code for the second phase. You have to pass a <a href="#Xbase_Expressions_Lambda">lambda expression</a> to the method
-							<code class="prettyprint lang-xtend">initializeLater()</code> on the return type of the <code class="prettyprint lang-xtend">acceptor.accept()</code> method.
+							make sure all types exist when you might lookup types during initializing the members in the second phase. 
+							Use <code class="prettyprint lang-xtend">acceptor.accept(JvmDeclaredType, Procedure1&lt;JvmDeclaredType&gt;)</code> and pass in the created Java type as the first argument
+							and the initialization block as the second.
 							     
 							For our domain model example, we implement a polymorphic dispatch function <strong>infer</strong> for
 							<strong>Entities</strong> to transform them into a <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/common/types/JvmGenericType.html"><abbr title="org.eclipse.xtext.common.types.JvmGenericType">JvmGenericType</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmGenericType.java">(src)</a> in the first phase. 
@@ -11120,7 +11117,7 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
                 IJvmDeclaredTypeAcceptor acceptor, 
                 boolean isPrelinkingPhase) {
     
-    acceptor.accept(element.toClass(element.fullyQualifiedName)).initializeLater [
+    acceptor.accept(element.toClass(element.fullyQualifiedName)) [
       documentation = element.documentation
       for (feature : element.features) {
         members += feature.toField(feature.name, feature.type)

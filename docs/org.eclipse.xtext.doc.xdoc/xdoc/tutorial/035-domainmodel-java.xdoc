@@ -302,21 +302,19 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
   def dispatch void infer(Entity element, 
                 IJvmDeclaredTypeAcceptor acceptor, 
                 boolean isPrelinkingPhase) {
-      acceptor.accept(
-      element.toClass( element.fullyQualifiedName )
-    ).initializeLater \[
+    acceptor.accept(element.toClass( element.fullyQualifiedName )) \[
       documentation = element.documentation
       if (element.superType != null)
         superTypes += element.superType.cloneWithProxies
       for (feature : element.features) {
         switch feature {
-      
+          
           Property : {
             members += feature.toField(feature.name, feature.type)
             members += feature.toGetter(feature.name, feature.type)
             members += feature.toSetter(feature.name, feature.type)
           }
-      
+          
           Operation : {
             members += feature.toMethod(feature.name, feature.type) \[
               documentation = feature.documentation
@@ -333,7 +331,7 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
 }
 ]
 
-Let's go through the code to get an idea of what is going on. (Please also refer to the JavaDoc of the involved API
+Let's go through the code to get an idea of what is going on. (Please also refer to the JavaDoc of the used API
 for details, especially the codeRef[org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder]).
 
 ol[
@@ -350,32 +348,31 @@ ol[
   ]
   item[
     code[Xtend][
-        acceptor.accept(element.toClass(element.fullyQualifiedName)  
+        acceptor.accept(element.toClass(element.fullyQualifiedName)) \[  
         ...
+        \]
     ]
-  Every codeRef[org.eclipse.xtext.common.types.JvmDeclaredType] you create in the model inference needs
-  to be passed to the e[acceptor] in order to get recognized.
-  
-  The extension method e[toClass] comes from codeRef[org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder].
-  That class provides a lot of convenient extension methods, which help making the code extremely readable and concise.
-  
-  Most of the methods accept initializer blocks as the last argument, in which the currently created model element is bound
-  to the implicit variable code[Xtend][it]. Therein you can further initialize the created Java element. 
+    Every codeRef[org.eclipse.xtext.common.types.JvmDeclaredType] you create in the model inference needs
+    to be passed to the e[acceptor] in order to get recognized.
+    
+    The extension method e[toClass] comes from codeRef[org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder].
+    That class provides a lot of convenient extension methods, which help making the code extremely readable and concise.
+    
+    It is important to understand that the creation and assignment of a qualified name, is done in an early phase where the compiler collects all global symbols.
+    You cannot resolve type references at this point.
   ]
   item[
-    code[Xtend][
-     ).initializeLater \[
-    ]
-    The type inference has two phases. The first phase happens before linking. Only the empty types have to be created
-    and be passed to the e[acceptor].
-    The types' features are created in the second phase. The actions in this phase are specified in the lambda
-    expression passed to code[initializeLater]. Think of it as an anonymous class.
+    The second argument to e[accept] is a lambda block, that contains further initialization of the created Java type.
+    Only in this block you are allowed to do type reference resolution. Also this is the place where you add members
+    and put the XExpressions into context.
+    
+    Let's see what we do in the initialization block in detail:
   ]
   item[
     code[Xtend][
         documentation = element.documentation
     ]
-    Here for instance we assign some JavaDoc to the newly created element. The assignment is translated
+    Here we assign some JavaDoc to the newly created element. The assignment is translated
     to an invocation of the method 
     codeRef[org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder]e[#setDocumentation(codeRef[org.eclipse.xtext.common.types.JvmIdentifiableElement] element,String documentation)]
     and code[element.documentation] is in fact calling the extension method  
@@ -390,7 +387,7 @@ ol[
     ]
     Set the e[superType] on the inferred element. Note that we have to clone the type reference from
     the e[element.superType]. If we did not do that, the type reference would be automatically removed 
-    from the e[element], as e[superType] is an EMF containment reference.   
+    from the e[element], as e[superType] is an EMF containment reference.
   ]
   item[
     code[Xtend][
