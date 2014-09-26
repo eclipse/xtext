@@ -115,8 +115,6 @@ public class XtextDocument extends Document implements IXtextDocument {
 
 	public <T> T readOnly(IUnitOfWork<T, XtextResource> work) {
 		T readOnly = stateAccess.readOnly(work);
-		if (getCancelIndicator().isCanceled())
-			System.out.println("Ooops was canceled!");
 		return readOnly;
 	}
 	

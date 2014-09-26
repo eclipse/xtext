@@ -21,7 +21,7 @@ public class OperationCanceledError extends Error {
   private final RuntimeException wrapped;
   
   public Throwable fillInStackTrace() {
-    return null;
+    return super.fillInStackTrace();
   }
   
   public Throwable getCause() {
