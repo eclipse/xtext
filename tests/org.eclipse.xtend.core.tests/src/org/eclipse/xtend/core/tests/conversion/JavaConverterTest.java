@@ -180,16 +180,15 @@ public class JavaConverterTest extends AbstractXtendTestCase {
 		assertEquals("withLineWrap", xtendMember.getName());
 		assertEquals("string with wrap\n", ((XStringLiteral) xtendMember.getInitialValue()).getValue());
 	}
+
 	@Test
 	public void testNumberLiteralCase() throws Exception {
-		XtendClass xtendClazz = toValidXtendClass("class TestStringLiteral {"
-				+ " long l= 0x0000000000000000L;"
-				+ " double d= 2.5d;"
-				+ "}");
+		XtendClass xtendClazz = toValidXtendClass("class TestStringLiteral {" + " long l= 0x0000000000000000L;"
+				+ " double d= 2.5d;" + "}");
 		XtendField xtendMember = (XtendField) xtendClazz.getMembers().get(0);
 		assertEquals("l", xtendMember.getName());
 		assertEquals("0x0000000000000000#L", ((XNumberLiteral) xtendMember.getInitialValue()).getValue());
-		 xtendMember = (XtendField) xtendClazz.getMembers().get(1);
+		xtendMember = (XtendField) xtendClazz.getMembers().get(1);
 		assertEquals("d", xtendMember.getName());
 		assertEquals("2.5d", ((XNumberLiteral) xtendMember.getInitialValue()).getValue());
 	}
@@ -283,8 +282,8 @@ public class JavaConverterTest extends AbstractXtendTestCase {
 
 	@Test
 	public void testArrayAccessCase() throws Exception {
-		XtendClass clazz = toValidXtendClass("public class Clazz { String foo(String... strAr) { "
-				+ "String a = (strAr[0] =\"2\"); strAr[1]=a; a=strAr[0]+strAr[1]; return strAr[1]=\"\";}");
+		XtendClass clazz = toValidXtendClass("public class Clazz { String foo(String... strAr) { int i = 0;System.out.println(strAr[0] + \"\"); "
+				+ "String a = (strAr[0] =\"2\"); strAr[1]=a; a=strAr[0]+strAr[1]; return strAr[i++]=\"\";}");
 		assertNotNull(clazz);
 	}
 
@@ -292,6 +291,13 @@ public class JavaConverterTest extends AbstractXtendTestCase {
 	public void testArrayCreationCase() throws Exception {
 		XtendClass clazz = toValidXtendClass("public class Clazz {" + " String[] arr = new String[]{\"\",\"\"};"
 				+ "Class<?>[] argTypes = new Class[arr.length];}");
+		assertNotNull(clazz);
+	}
+
+	@Test
+	public void testArrayPrefixMinusCase() throws Exception {
+		XtendClass clazz = toValidXtendClass("public class Clazz { public static main(String[] args) {"
+				+ "int i =3; int[] ints = new int[]{1,2,3,4,5}; System.out.print(\"2=\"+(--ints[--i]));}}");
 		assertNotNull(clazz);
 	}
 
@@ -304,12 +310,20 @@ public class JavaConverterTest extends AbstractXtendTestCase {
 	}
 
 	@Test
+	public void testPrefixPlusMinusSimpleArrayCase() throws Exception {
+		XtendClass clazz = toValidXtendClass("public class Clazz { " + "public static main(String[] args) {"
+				+ "int[] ints = new int[]{1,2,3,4,5};" + "int in = 2;" + "System.out.println(\"3=\"+(ints[in]++));"
+				+ "System.out.println(\"4=\"+(ints[in]--));" + "System.out.println(\"1=\"+(--ints[in]));"
+				+ "System.out.println(\"5=\"+(++ints[in]));" + "}}");
+		assertNotNull(clazz);
+	}
+
+	@Test
 	public void testPrefixPlusMinusArrayCase() throws Exception {
 		XtendClass clazz = toValidXtendClass("public class Clazz { " + "public static main(String[] args) {"
-				+ "int[] ints = new int[]{1,2,3,4,5};" + "int in = 2;"
-				//TODO				+ "System.out.println(\"3=\"+(ints[in++]++));"
-				//				+ "System.out.println(\"4=\"+(ints[in--]--));"
-				+ "System.out.println(\"1=\"+(--ints[--in]));" + "System.out.println(\"5=\"+(++ints[++in]));" + "}}");
+				+ "int[] ints = new int[]{1,2,3,4,5};" + "int in = 2;" + "System.out.println(\"3=\"+(ints[in++]++));"
+				+ "System.out.println(\"4=\"+(ints[in--]--));" + "System.out.println(\"1=\"+(--ints[--in]));"
+				+ "System.out.println(\"5=\"+(++ints[++in]));" + "}}");
 		assertNotNull(clazz);
 	}
 

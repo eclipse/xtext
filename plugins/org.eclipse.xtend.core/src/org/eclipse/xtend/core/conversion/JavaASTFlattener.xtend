@@ -121,6 +121,7 @@ class JavaASTFlattener extends ASTVisitor {
 	StringBuffer fBuffer;
 	List<String> problems = newArrayList()
 	int javaSourceKind = ASTParser.K_COMPILATION_UNIT
+	final static int JLS = AST.JLS3
 
 	/**
 	 * Creates a new AST printer.
@@ -187,29 +188,31 @@ class JavaASTFlattener extends ASTVisitor {
 
 		// Array write access
 		if (leftSide instanceof ArrayAccess) {
-			appendToBuffer("{")
+			appendToBuffer("{ ")
+			appendToBuffer("val _tempIndex=")
+			leftSide.getIndex().accept(this)
+			appendSpaceToBuffer
 			leftSide.getArray().accept(this)
 			this.fBuffer.append(".set")
-			this.fBuffer.append("(")
-			leftSide.getIndex().accept(this)
-			appendToBuffer(",")
+			this.fBuffer.append("(_tempIndex,")
 			node.rightHandSide.accept(this)
 			this.fBuffer.append(")")
-			if (!(node.parent instanceof Statement) || (node.parent instanceof ReturnStatement)) {
+			if (node.needsReturnValue()) {
 				leftSide.getArray().accept(this)
 				this.fBuffer.append(".get")
-				this.fBuffer.append("(")
-				leftSide.getIndex().accept(this)
-				appendToBuffer(")")
+				this.fBuffer.append("(_tempIndex)")
 			}
-			appendToBuffer("}")
-
+			this.fBuffer.append("}")
 		} else {
 			leftSide.accept(this)
 			appendToBuffer(node.getOperator().toString())
 			node.getRightHandSide().accept(this)
 		}
 		return false
+	}
+
+	def private boolean needsReturnValue(Assignment node) {
+		(node.parent != null) && (!(node.parent instanceof Statement) || (node.parent instanceof ReturnStatement))
 	}
 
 	override boolean visit(MarkerAnnotation node) {
@@ -477,6 +480,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	def appendAllSeparatedByComma(Iterable<? extends ASTNode> iterable) {
+
 		appendAll(iterable, ", ")
 	}
 
@@ -739,39 +743,99 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override boolean visit(PostfixExpression node) {
-		node.getOperand().accept(this)
-		appendToBuffer(node.getOperator().toString())
+		val dummyAST = AST.newAST(JLS)
+		val pfOperator = node.operator
+		if (node.operand instanceof ArrayAccess) {
+			val pfOperand = node.operand as ArrayAccess
+			if (pfOperator == PostfixExpression.Operator.INCREMENT ||
+				pfOperator == PostfixExpression.Operator.DECREMENT) {
+
+				/* {
+				var in = index
+				var i = ints.get(in)
+				ints.set(in, i-1)
+				i
+			 } */
+				val arrayName = (pfOperand.array as SimpleName).identifier
+				val idxName = '''_tPreInx_«arrayName»'''
+				val tempVarName = '''_tPostVal_«arrayName»'''
+
+				appendToBuffer('''{ var «idxName»=''')
+				pfOperand.index.accept(this)
+				appendToBuffer(''' var  ''')
+				val varDeclaration = dummyAST.newVariableDeclarationFragment
+				varDeclaration.name = dummyAST.newSimpleName(tempVarName)
+				val arrayAccess = ASTNode.copySubtree(dummyAST, pfOperand) as ArrayAccess
+				arrayAccess.index = dummyAST.newSimpleName(idxName)
+				varDeclaration.initializer = arrayAccess
+				varDeclaration.accept(this)
+
+				val infixOp = dummyAST.newInfixExpression
+				infixOp.leftOperand = dummyAST.newSimpleName(tempVarName)
+				if (node.operator == PostfixExpression.Operator.DECREMENT)
+					infixOp.operator = InfixExpression.Operator.MINUS
+				else {
+					infixOp.operator = InfixExpression.Operator.PLUS
+				}
+				infixOp.rightOperand = dummyAST.newNumberLiteral("1")
+
+				val assigment = dummyAST.newAssignment()
+				val writeArray = ASTNode.copySubtree(dummyAST, pfOperand) as ArrayAccess
+				writeArray.index = dummyAST.newSimpleName(idxName)
+				assigment.leftHandSide = writeArray
+				assigment.rightHandSide = ASTNode.copySubtree(dummyAST, infixOp) as Expression
+				assigment.accept(this)
+				appendToBuffer('''«tempVarName» }''')
+				return false
+			}
+		}
+		node.operand.accept(this)
+		appendToBuffer(pfOperator.toString())
 		return false
 	}
 
 	override boolean visit(PrefixExpression node) {
-		val dummyAST = AST.newAST(AST.JLS3)
-		switch (node.operator) {
-			case Operator.INCREMENT: {
+		val dummyAST = AST.newAST(JLS)
+		if (node.operator == Operator.DECREMENT || node.operator == Operator.INCREMENT) {
+			if (node.operand instanceof ArrayAccess) {
+				val pfOperand = node.operand as ArrayAccess
+
+				/*	
+				val _tempIndex = (i = i - 1)
+				ints.set(_tempIndex,ints.get(_tempIndex) - 1)
+				ints.get(_tempIndex) */
+				val arrayName = (pfOperand.array as SimpleName).identifier
+				val idxName = '''_tPreInx_«arrayName»'''
+				var op = "-"
+				if (node.operator == Operator.INCREMENT) {
+					op = "+"
+				}
+				appendToBuffer('''{val «idxName»=''')
+				pfOperand.index.accept(this)
+				appendToBuffer(''' val «idxName»_res=«arrayName».get(«idxName»)«op»1''')
+				appendToBuffer(''' «arrayName».set(«idxName», «idxName»_res)  «idxName»_res}''')
+				return false
+			} else {
 				val assigment = dummyAST.newAssignment()
 				val infixOp = dummyAST.newInfixExpression
 				infixOp.leftOperand = ASTNode.copySubtree(dummyAST, node.operand) as Expression
-				infixOp.operator = InfixExpression.Operator.PLUS
+				if (node.operator == Operator.DECREMENT) {
+					infixOp.operator = InfixExpression.Operator.MINUS
+				} else {
+					infixOp.operator = InfixExpression.Operator.PLUS
+
+				}
 				infixOp.rightOperand = dummyAST.newNumberLiteral("1")
 				assigment.leftHandSide = ASTNode.copySubtree(dummyAST, node.operand) as Expression
 				assigment.rightHandSide = infixOp
-				assigment.accept(this)
-			}
-			case Operator.DECREMENT: {
-				val assigment = dummyAST.newAssignment()
-				val infixOp = dummyAST.newInfixExpression
-				infixOp.leftOperand = ASTNode.copySubtree(dummyAST, node.operand) as Expression
-				infixOp.operator = InfixExpression.Operator.MINUS
-				infixOp.rightOperand = dummyAST.newNumberLiteral("1")
-				assigment.leftHandSide = ASTNode.copySubtree(dummyAST, node.operand) as Expression
-				assigment.rightHandSide = infixOp
-				assigment.accept(this)
-			}
-			default: {
-				appendToBuffer(node.getOperator().toString())
-				node.getOperand().accept(this)
+				val parent = dummyAST.newParenthesizedExpression
+				parent.expression = assigment
+				parent.accept(this)
+				return false
 			}
 		}
+		appendToBuffer(node.getOperator().toString())
+		node.getOperand().accept(this)
 		return false
 	}
 
@@ -874,6 +938,7 @@ class JavaASTFlattener extends ASTVisitor {
 
 	override boolean visit(TryStatement node) {
 		appendToBuffer("try ")
+
 		// TryStatementnode.resources() not supported in Juno
 		//		if (node.getAST().apiLevel() > AST.JLS3) {
 		//			if (node.resources().isEmpty()) {
@@ -1020,13 +1085,13 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	@Override override boolean visit(ArrayAccess node) {
-		node.getArray().accept(this)
 
 		//Write access is handled in visit(Assignment)
-		this.fBuffer.append(".get")
-		this.fBuffer.append("(")
-		node.getIndex().accept(this)
-		this.fBuffer.append(")")
+		appendToBuffer("{val _readIndex=")
+		node.index.accept(this)
+		appendSpaceToBuffer
+		node.array.accept(this)
+		this.fBuffer.append(".get(_readIndex)}")
 		return false
 	}
 
@@ -1126,7 +1191,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	@Override override boolean visit(EmptyStatement node) {
-		appendSpaceToBuffer
+		appendToBuffer(';')
 		return false
 	}
 
@@ -1268,7 +1333,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	def void setJavaSourceKind(int i) {
-		this.javaSourceKind = i
+		javaSourceKind = i
 	}
 
 }
