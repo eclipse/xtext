@@ -1,4 +1,4 @@
-package org.xpect.parameter;
+package org.xpect.setup;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
@@ -12,5 +12,5 @@ import org.xpect.XpectContributionRole;
 @XpectContributionRole
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface XpectParameterAdapter {
+public @interface XpectSetupFactory {
 }

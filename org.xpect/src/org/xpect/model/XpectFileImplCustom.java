@@ -124,4 +124,5 @@ public class XpectFileImplCustom extends XpectFileImpl {
 	public void unsetJavaModel() {
 		javaModel = null;
 	}
+
 }

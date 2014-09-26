@@ -10,14 +10,14 @@ import org.eclipse.xtext.resource.IResourceFactory;
 import org.xpect.XpectFile;
 import org.xpect.XpectJavaModel;
 import org.xpect.runner.IXpectURIProvider;
-import org.xpect.setup.XpectSetup;
+import org.xpect.setup.XpectSetupFactory;
 import org.xpect.state.Creates;
 import org.xpect.state.StateContainer;
 import org.xpect.util.IXtInjectorProvider;
 
 import com.google.inject.Injector;
 
-@XpectSetup(FileSetupContext.class)
+@XpectSetupFactory
 public class FileSetupContext {
 
 	private final StateContainer state;

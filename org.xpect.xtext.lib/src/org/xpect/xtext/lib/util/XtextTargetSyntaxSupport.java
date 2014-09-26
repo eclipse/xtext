@@ -5,6 +5,7 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.xpect.expectation.TargetSyntaxSupport;
+import org.xpect.setup.XpectSetupFactory;
 import org.xpect.state.Creates;
 import org.xpect.text.IReplacement;
 import org.xpect.text.Replacement;
@@ -14,6 +15,7 @@ import org.xpect.xtext.lib.util.GrammarAnalyzer.CommentRule;
 import org.xpect.xtext.lib.util.GrammarAnalyzer.MLCommentRule;
 import org.xpect.xtext.lib.util.GrammarAnalyzer.SLCommentRule;
 
+@XpectSetupFactory
 public class XtextTargetSyntaxSupport extends TargetSyntaxSupport {
 
 	public class XtextTargetSyntaxLiteral extends TargetLiteralSupport {

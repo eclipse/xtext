@@ -1,8 +1,10 @@
 package org.xpect.util;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.util.JavaReflectAccess;
@@ -13,6 +15,10 @@ public interface IJavaReflectAccess {
 	public class Delegate implements IJavaReflectAccess {
 
 		private IJavaReflectAccess delegate;
+
+		public Field getField(JvmField field) {
+			return delegate.getField(field);
+		}
 
 		public Method getMethod(JvmOperation operation) {
 			return delegate.getMethod(operation);
@@ -29,6 +35,13 @@ public interface IJavaReflectAccess {
 	}
 
 	public class RuntimeJavaReflectAccess implements IJavaReflectAccess {
+
+		public Field getField(JvmField field) {
+			XtextResourceSet resourceSet = (XtextResourceSet) field.eResource().getResourceSet();
+			JavaReflectAccess access = new JavaReflectAccess();
+			access.setClassLoader((ClassLoader) resourceSet.getClasspathURIContext());
+			return access.getField(field);
+		}
 
 		public Method getMethod(JvmOperation operation) {
 			XtextResourceSet resourceSet = (XtextResourceSet) operation.eResource().getResourceSet();
@@ -47,6 +60,8 @@ public interface IJavaReflectAccess {
 	}
 
 	public static final IJavaReflectAccess INSTANCE = EcorePlugin.IS_ECLIPSE_RUNNING ? new Delegate() : new RuntimeJavaReflectAccess();
+
+	Field getField(JvmField field);
 
 	Method getMethod(JvmOperation operation);
 

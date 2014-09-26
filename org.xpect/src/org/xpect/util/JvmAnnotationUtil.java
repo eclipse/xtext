@@ -1,7 +1,9 @@
 package org.xpect.util;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -12,17 +14,23 @@ import java.util.Set;
 import java.util.Stack;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmEnumAnnotationValue;
+import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmIntAnnotationValue;
 import org.eclipse.xtext.common.types.JvmStringAnnotationValue;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -100,17 +108,8 @@ public class JvmAnnotationUtil {
 		return getAnnotationValue(getAnnotation(t, a), n, c);
 	}
 
-	public static boolean isAnnotatedWith(JvmAnnotationTarget target, Class<? extends Annotation> annotation) {
-		for (JvmAnnotationReference ref : target.getAnnotations()) {
-			JvmAnnotationType type = ref.getAnnotation();
-			if (type != null && !type.eIsProxy() && type.getQualifiedName().equals(annotation.getName()))
-				return true;
-		}
-		return false;
-	}
-
-	public static Annotation newInstance(final JvmAnnotationReference ref) {
-		Class<?> annotation = IJavaReflectAccess.INSTANCE.getRawType(ref.getAnnotation());
+	public static Annotation getJavaAnnotation(final JvmAnnotationReference ref) {
+		final Class<?> annotation = IJavaReflectAccess.INSTANCE.getRawType(ref.getAnnotation());
 		if (annotation == null)
 			return null;
 		return (Annotation) Proxy.newProxyInstance(annotation.getClassLoader(), new Class<?>[] { annotation }, new InvocationHandler() {
@@ -123,8 +122,41 @@ public class JvmAnnotationUtil {
 					return ((JvmIntAnnotationValue) value).getValues().get(0);
 				if (value instanceof JvmTypeAnnotationValue)
 					return IJavaReflectAccess.INSTANCE.getRawType(((JvmTypeAnnotationValue) value).getValues().get(0).getType());
+				if (value instanceof JvmEnumAnnotationValue)
+					return getValue((JvmEnumAnnotationValue) value);
 
 				throw new RuntimeException("Unhandled annotation value type: " + value.eClass().getName());
+			}
+
+			private Object getValue(JvmEnumAnnotationValue annotationValue) {
+				EList<JvmEnumerationLiteral> values = annotationValue.getValues();
+				JvmTypeReference type = annotationValue.getOperation().getReturnType();
+				if (type instanceof JvmGenericArrayTypeReference) {
+					JvmType componentType = ((JvmGenericArrayTypeReference) type).getComponentType().getType();
+					Class<?> rawType = IJavaReflectAccess.INSTANCE.getRawType(componentType);
+					Object[] result = (Object[]) Array.newInstance(rawType, values.size());
+					for (int i = 0; i < values.size(); i++)
+						result[i] = getValue(values.get(i));
+					return result;
+				} else {
+					if (values.isEmpty())
+						return null;
+					return getValue(values.get(0));
+				}
+			}
+
+			private Object getValue(JvmEnumerationLiteral value) {
+				Field field = IJavaReflectAccess.INSTANCE.getField(value);
+				if (field != null && field.isEnumConstant()) {
+					try {
+						return field.get(null);
+					} catch (IllegalArgumentException e) {
+						throw new RuntimeException(e);
+					} catch (IllegalAccessException e) {
+						throw new RuntimeException(e);
+					}
+				}
+				throw new RuntimeException();
 			}
 
 			public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
@@ -137,9 +169,50 @@ public class JvmAnnotationUtil {
 					return ref.hashCode();
 				if ("equals".equals(method.getName()))
 					return ref.equals(args[0]);
+				if ("annotationType".equals(method.getName()))
+					return annotation;
 				throw new RuntimeException("method '" + method.getName() + "' not found in " + ref.getAnnotation().getIdentifier());
 			}
 		});
+	}
+
+	public static <T extends Annotation> T getJavaAnnotation(JvmAnnotationTarget type, Class<T> ann) {
+		if (type == null || type.eIsProxy())
+			return null;
+		for (JvmAnnotationReference ref : type.getAnnotations()) {
+			JvmAnnotationType annotation = ref.getAnnotation();
+			if (annotation == null || annotation.eIsProxy())
+				continue;
+			if (ann.getName().equals(annotation.getQualifiedName()))
+				return ann.cast(getJavaAnnotation(ref));
+		}
+		return null;
+	}
+
+	public static List<? extends Annotation> getJavaAnnotationsViaMetaAnnotation(JvmAnnotationTarget type, Class<? extends Annotation> ann) {
+		if (type == null || type.eIsProxy())
+			return Collections.emptyList();
+		List<Annotation> result = Lists.newArrayList();
+		for (JvmAnnotationReference ref : type.getAnnotations()) {
+			JvmAnnotationType annotation = ref.getAnnotation();
+			if (annotation == null || annotation.eIsProxy())
+				continue;
+			JvmAnnotationReference metaAnnotation = getAnnotation(annotation, ann);
+			if (metaAnnotation == null || metaAnnotation.eIsProxy())
+				continue;
+			Annotation param = getJavaAnnotation(ref);
+			result.add(param);
+		}
+		return ImmutableList.copyOf(result);
+	}
+
+	public static boolean isAnnotatedWith(JvmAnnotationTarget target, Class<? extends Annotation> annotation) {
+		for (JvmAnnotationReference ref : target.getAnnotations()) {
+			JvmAnnotationType type = ref.getAnnotation();
+			if (type != null && !type.eIsProxy() && type.getQualifiedName().equals(annotation.getName()))
+				return true;
+		}
+		return false;
 	}
 
 	public static <T> T newInstanceFromAnnotation(JvmAnnotationTarget type, Class<T> expected, Class<? extends Annotation> ann) {
@@ -191,7 +264,7 @@ public class JvmAnnotationUtil {
 					Class<?> adapter = IJavaReflectAccess.INSTANCE.getRawType(val.getType());
 					if (adapter != null) {
 						try {
-							Annotation param = newInstance(ref);
+							Annotation param = getJavaAnnotation(ref);
 							if (param == null) {
 								logger.error("Coult not load " + ref);
 								continue REF;

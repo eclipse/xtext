@@ -2,11 +2,13 @@ package org.xpect.xtext.lib.setup;
 
 import org.xpect.XpectFile;
 import org.xpect.XpectJavaModel;
+import org.xpect.setup.XpectSetupFactory;
 import org.xpect.state.Creates;
 import org.xpect.util.IXtInjectorProvider;
 
 import com.google.inject.Injector;
 
+@XpectSetupFactory
 public class InjectorSetup {
 	private final XpectFile file;
 	private final XpectJavaModel xjm;

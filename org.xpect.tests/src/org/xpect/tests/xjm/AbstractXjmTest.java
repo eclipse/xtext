@@ -1,4 +1,4 @@
-package org.xpect.tests;
+package org.xpect.tests.xjm;
 
 import java.lang.reflect.Constructor;
 
@@ -21,7 +21,7 @@ public abstract class AbstractXjmTest {
 			constructor.setAccessible(true);
 			String expected = constructor.newInstance().toString();
 			String actual = javaModel.toString();
-			Assert.assertEquals(expected, actual);
+			Assert.assertEquals(expected.trim(), actual.trim());
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

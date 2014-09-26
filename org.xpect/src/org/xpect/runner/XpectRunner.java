@@ -28,10 +28,7 @@ import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.ParentRunner;
 import org.junit.runners.model.InitializationError;
-import org.xpect.XjmFactory;
-import org.xpect.XjmMethod;
-import org.xpect.XjmTest;
-import org.xpect.XjmXpectMethod;
+import org.xpect.XjmContribution;
 import org.xpect.XpectFile;
 import org.xpect.XpectJavaModel;
 import org.xpect.XpectStandaloneSetup;
@@ -44,10 +41,12 @@ import org.xpect.setup.ISetupInitializer;
 import org.xpect.setup.SetupInitializer;
 import org.xpect.setup.ThisRootTestClass;
 import org.xpect.setup.ThisTestObject.TestObjectSetup;
+import org.xpect.setup.XpectSetupFactory;
 import org.xpect.state.Configuration;
 import org.xpect.state.ResolvedConfiguration;
 import org.xpect.state.StateContainer;
 import org.xpect.util.AnnotationUtil;
+import org.xpect.util.EnvironmentUtil;
 import org.xpect.util.IssueVisualizer;
 import org.xpect.util.XpectJavaModelManager;
 
@@ -116,14 +115,9 @@ public class XpectRunner extends ParentRunner<Runner> {
 		config.addFactory(TestRunner.class);
 		config.addDefaultValue(IXpectURIProvider.class, this.uriProvider);
 		config.addDefaultValue(XpectJavaModel.class, this.xpectJavaModel);
-		for (XjmTest test : this.xpectJavaModel.getTests()) {
-			for (XjmFactory fact : test.getFactories())
-				config.addFactory(fact.getJavaClass());
-			for (XjmMethod method : test.getMethods())
-				if (method instanceof XjmXpectMethod)
-					for (XjmFactory fact : ((XjmXpectMethod) method).getFactories())
-						config.addFactory(fact.getJavaClass());
-		}
+		Iterable<XjmContribution> contributions = this.xpectJavaModel.getContributions(XpectSetupFactory.class, EnvironmentUtil.ENVIRONMENT);
+		for (XjmContribution contribution : contributions)
+			config.addFactory(contribution.getJavaClass());
 		return config;
 	}
 

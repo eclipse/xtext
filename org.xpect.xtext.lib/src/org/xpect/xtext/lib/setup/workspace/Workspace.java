@@ -16,10 +16,12 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
-import org.xpect.setup.XpectSetup;
+import org.xpect.XpectImport;
+import org.xpect.setup.XpectSetupComponent;
 import org.xpect.xtext.lib.setup.FileSetupContext;
 
-@XpectSetup(WorkspaceDefaultsSetup.class)
+@XpectSetupComponent
+@XpectImport(WorkspaceDefaultsSetup.class)
 public class Workspace extends Container<IWorkspaceRoot> {
 
 	public static class Instance {

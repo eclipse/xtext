@@ -12,11 +12,13 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.xpect.setup.XpectSetupComponent;
 import org.xpect.xtext.lib.setup.FileSetupContext;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
+@XpectSetupComponent
 public class JavaProject extends Project {
 
 	private static final String JRE_CONTAINER_1_5 = "org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5";

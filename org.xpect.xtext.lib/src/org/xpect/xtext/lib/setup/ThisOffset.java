@@ -17,10 +17,11 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator;
 import org.eclipse.xtext.resource.XtextResource;
+import org.xpect.XpectImport;
 import org.xpect.XpectInvocation;
 import org.xpect.parameter.AbstractOffsetProvider;
 import org.xpect.parameter.IParameterProvider;
-import org.xpect.setup.XpectSetup;
+import org.xpect.setup.XpectSetupFactory;
 import org.xpect.state.Creates;
 import org.xpect.xtext.lib.setup.ThisOffset.ThisOffsetProvider;
 
@@ -29,9 +30,10 @@ import org.xpect.xtext.lib.setup.ThisOffset.ThisOffsetProvider;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.PARAMETER, ElementType.FIELD })
-@XpectSetup({ XtextStandaloneSetup.class, ThisOffsetProvider.class, XtextWorkspaceSetup.class })
+@XpectImport({ XtextStandaloneSetup.class, ThisOffsetProvider.class, XtextWorkspaceSetup.class })
 public @interface ThisOffset {
 
+	@XpectSetupFactory
 	public static class ThisOffsetProvider extends AbstractOffsetProvider {
 		private final XpectInvocation invocation;
 		private final XtextResource resource;

@@ -11,6 +11,7 @@ import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunListener;
 import org.junit.runner.notification.RunNotifier;
 import org.xpect.XpectFile;
+import org.xpect.XpectImport;
 import org.xpect.XpectInvocation;
 import org.xpect.expectation.IStringDiffExpectation;
 import org.xpect.expectation.IStringExpectation;
@@ -23,7 +24,7 @@ import org.xpect.runner.Xpect;
 import org.xpect.runner.XpectFileRunner;
 import org.xpect.runner.XpectRunner;
 import org.xpect.runner.XpectTestRunner;
-import org.xpect.setup.XpectSetup;
+import org.xpect.setup.XpectSetupFactory;
 import org.xpect.state.StateContainer;
 import org.xpect.text.IRegion;
 
@@ -31,7 +32,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 @RunWith(XpectRunner.class)
-@XpectSetup(ReflectiveXpectFileRunner.class)
+@XpectImport(ReflectiveXpectFileRunner.class)
 public class XpectTestResultTest {
 	public static class FailureListener extends RunListener {
 		private Failure failure;
@@ -51,6 +52,7 @@ public class XpectTestResultTest {
 		}
 	}
 
+	@XpectSetupFactory
 	public final static class ReflectiveXpectFileRunner extends XpectFileRunner {
 
 		private final Map<XpectTestRunner, XpectTestRunner> reflectiveToInspected = Maps.newHashMap();

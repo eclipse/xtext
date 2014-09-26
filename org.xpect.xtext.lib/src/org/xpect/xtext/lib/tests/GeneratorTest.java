@@ -11,12 +11,12 @@ import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.InMemoryFileSystemAccess;
 import org.eclipse.xtext.resource.XtextResource;
 import org.junit.runner.RunWith;
+import org.xpect.XpectImport;
 import org.xpect.expectation.IStringExpectation;
 import org.xpect.expectation.StringExpectation;
 import org.xpect.parameter.ParameterParser;
 import org.xpect.runner.Xpect;
 import org.xpect.runner.XpectRunner;
-import org.xpect.setup.XpectSetup;
 import org.xpect.xtext.lib.setup.ThisResource;
 import org.xpect.xtext.lib.setup.XtextStandaloneSetup;
 import org.xpect.xtext.lib.setup.XtextWorkspaceSetup;
@@ -28,7 +28,7 @@ import com.google.inject.Inject;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 @RunWith(XpectRunner.class)
-@XpectSetup({ XtextStandaloneSetup.class, XtextWorkspaceSetup.class })
+@XpectImport({ XtextStandaloneSetup.class, XtextWorkspaceSetup.class })
 public class GeneratorTest {
 
 	@Inject

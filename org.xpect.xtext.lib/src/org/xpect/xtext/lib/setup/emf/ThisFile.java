@@ -7,10 +7,13 @@
  *******************************************************************************/
 package org.xpect.xtext.lib.setup.emf;
 
+import org.xpect.setup.XpectSetupComponent;
+
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 @Deprecated
+@XpectSetupComponent
 public class ThisFile extends ThisResource {
 
 	public ThisFile() {

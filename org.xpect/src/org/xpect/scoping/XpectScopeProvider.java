@@ -26,14 +26,11 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
-import org.eclipse.xtext.scoping.impl.ImportNormalizer;
-import org.eclipse.xtext.scoping.impl.ImportScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.util.Strings;
-import org.xpect.AbstractComponent;
+import org.xpect.Assignment;
 import org.xpect.Component;
 import org.xpect.XjmMethod;
-import org.xpect.XjmSetup;
 import org.xpect.XjmTest;
 import org.xpect.XpectFile;
 import org.xpect.XpectJavaModel;
@@ -41,7 +38,6 @@ import org.xpect.XpectPackage;
 import org.xpect.XpectTest;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
@@ -57,6 +53,20 @@ public class XpectScopeProvider extends AbstractScopeProvider {
 
 	@Inject
 	private IJvmTypeProvider.Factory typeProviderFactory;
+
+	private Set<JvmDeclaredType> getAssignableTypes(EObject context) {
+		EObject current = context;
+		XpectJavaModel xjm = EcoreUtil2.getContainerOfType(context, XpectFile.class).getJavaModel();
+		ComponentUtil util = new ComponentUtil(xjm);
+		while (current != null) {
+			if (current instanceof Assignment)
+				return util.getValidTypes((Assignment) current);
+			if (current instanceof XpectTest)
+				return util.getValidRootTypes();
+			current = current.eContainer();
+		}
+		return Collections.emptySet();
+	}
 
 	private String getAssignmentTargetFeatureName(JvmFeature feature) {
 		if (feature instanceof JvmOperation) {
@@ -79,79 +89,38 @@ public class XpectScopeProvider extends AbstractScopeProvider {
 		if (reference == XpectPackage.Literals.XPECT_INVOCATION__METHOD)
 			return getScopeForXpectInvocationTestMethod(EcoreUtil2.getContainerOfType(context, XpectFile.class));
 		if (reference == XpectPackage.Literals.ASSIGNMENT__DECLARED_TARGET)
-			return getScopeForAssignmentTarget(EcoreUtil2.getContainerOfType(context, AbstractComponent.class));
+			return getScopeForAssignmentTarget(EcoreUtil2.getContainerOfType(context, Component.class));
 		if (reference == XpectPackage.Literals.COMPONENT__COMPONENT_CLASS) {
-			return getScopeForInstanceType(EcoreUtil2.getContainerOfType(context, AbstractComponent.class), reference);
+			return getScopeForComponentClass(context, reference);
 		}
 		return delegate.getScope(context, reference);
 	}
 
-	private IScope getScopeForTestClassOrSuite(XpectFile xpectFile) {
-		ResourceSet resourceSet = xpectFile.eResource().getResourceSet();
-		return new SimpleTypeScope(typeProviderFactory.findOrCreateTypeProvider(resourceSet));
-	}
-
-	private IScope getScopeForAssignmentTarget(AbstractComponent owner) {
-		List<JvmDeclaredType> types = Lists.newArrayList();
-		if (owner instanceof Component)
-			types.add(((Component) owner).getComponentClass());
-		else if (owner instanceof XpectTest) {
-			XpectJavaModel model = ((XpectTest) owner).getFile().getJavaModel();
-			if (model != null && !model.eIsProxy())
-				for (XjmSetup setup : model.getSetups())
-					types.add(setup.getInitializer());
-		}
+	private IScope getScopeForAssignmentTarget(Component owner) {
 		List<IEObjectDescription> descs = Lists.newArrayList();
-		for (JvmDeclaredType type : types)
+		if (owner != null) {
+			JvmDeclaredType type = ((Component) owner).getComponentClass();
 			if (type != null && !type.eIsProxy())
 				for (JvmFeature feature : type.getAllFeatures()) {
 					String name = getAssignmentTargetFeatureName(feature);
 					if (name != null)
 						descs.add(EObjectDescription.create(QualifiedName.create(name), feature));
 				}
+		}
 		return new SimpleScope(descs);
 	}
 
-	private IScope getScopeForInstanceType(AbstractComponent instance, EReference reference) {
-		IScope scope = delegate.getScope(instance, reference);
-		if (instance instanceof XpectTest)
-			return scope;
-		if (instance instanceof Component) {
-			Set<String> packages = Sets.newLinkedHashSet();
-			AbstractComponent current = ((Component) instance).getAssignment().getInstance();
-			while (true) {
-				if (current instanceof Component) {
-					JvmDeclaredType componentClass = ((Component) current).getComponentClass();
-					if (componentClass != null && !componentClass.eIsProxy())
-						packages.add(componentClass.getPackageName());
-					current = ((Component) current).getAssignment().getInstance();
-				} else if (current instanceof XpectTest) {
-					XpectJavaModel model = ((XpectTest) current).getFile().getJavaModel();
-					if (model != null && !model.eIsProxy())
-						for (XjmSetup setup : model.getSetups()) {
-							JvmDeclaredType jvmClass = setup.getJvmClass();
-							if (jvmClass != null && !jvmClass.eIsProxy())
-								packages.add(jvmClass.getPackageName());
-						}
-					break;
-				} else
-					break;
-			}
-			List<String> pkgs = Lists.newArrayList(packages);
-			Collections.reverse(pkgs);
-			for (String pkg : pkgs) {
-				ImportNormalizer in = new ImportNormalizer(QualifiedName.create(pkg.split("\\.")), true, false);
-				scope = new ImportScope(Collections.singletonList(in), scope, null, reference.getEReferenceType(), false);
-			}
-			ImportNormalizer in = new ImportNormalizer(QualifiedName.create("org.xpect.xtext.lib.setup.emf".split("\\.")), true, false);
-			ImportNormalizer in2 = new ImportNormalizer(QualifiedName.create("org.xpect.xtext.lib.setup.workspace".split("\\.")), true, false);
-			ImportNormalizer in3 = new ImportNormalizer(QualifiedName.create("org.xpect.xtext.lib.setup.generic".split("\\.")), true, false);
-			scope = new ImportScope(Collections.singletonList(in), scope, null, reference.getEReferenceType(), false);
-			scope = new ImportScope(Collections.singletonList(in2), scope, null, reference.getEReferenceType(), false);
-			scope = new ImportScope(Collections.singletonList(in3), scope, null, reference.getEReferenceType(), false);
-			return scope;
-		}
-		return IScope.NULLSCOPE;
+	private IScope getScopeForComponentClass(EObject context, EReference reference) {
+		Set<JvmDeclaredType> types = getAssignableTypes(context);
+		List<IEObjectDescription> descriptions = Lists.newArrayList();
+		for (JvmDeclaredType type : types)
+			descriptions.add(EObjectDescription.create(QualifiedName.create(type.getSimpleName()), type));
+		return new SimpleScope(descriptions);
+	}
+
+	private IScope getScopeForTestClassOrSuite(XpectFile xpectFile) {
+		ResourceSet resourceSet = xpectFile.eResource().getResourceSet();
+		return new SimpleTypeScope(typeProviderFactory.findOrCreateTypeProvider(resourceSet));
 	}
 
 	private IScope getScopeForXpectInvocationTestMethod(XpectFile file) {

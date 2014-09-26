@@ -11,12 +11,11 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.xpect.Environment;
-import org.xpect.parameter.XpectParameterAdapter;
-import org.xpect.setup.XpectSetup;
+import org.xpect.XpectImport;
+import org.xpect.XpectRequiredEnvironment;
+import org.xpect.setup.XpectSetupFactory;
 import org.xpect.state.Creates;
 import org.xpect.state.Invalidates;
-import org.xpect.state.Precondition;
-import org.xpect.util.EnvironmentUtil;
 import org.xpect.xtext.lib.setup.workspace.Workspace;
 import org.xpect.xtext.lib.setup.workspace.Workspace.Instance;
 import org.xpect.xtext.lib.setup.workspace.WorkspaceDefaultsSetup;
@@ -26,14 +25,11 @@ import org.xpect.xtext.lib.util.XtextTargetSyntaxSupport;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
-@XpectParameterAdapter(XtextOffsetAdapter.class)
-@XpectSetup({ WorkspaceDefaultsSetup.class, XtextTargetSyntaxSupport.class, XtextTestObjectSetup.class, InjectorSetup.class, XtextValidatingSetup.class })
+@XpectSetupFactory
+@XpectRequiredEnvironment(Environment.PLUGIN_TEST)
+@XpectImport({ WorkspaceDefaultsSetup.class, XtextTargetSyntaxSupport.class, XtextTestObjectSetup.class, InjectorSetup.class, XtextValidatingSetup.class, FileSetupContext.class,
+		XtextOffsetAdapter.class })
 public class XtextWorkspaceSetup {
-
-	@Precondition
-	public static void checkApplicable() {
-		EnvironmentUtil.requireEnvironment(Environment.PLUGIN_TEST);
-	}
 
 	private final FileSetupContext ctx;
 	private Workspace.Instance workspace;

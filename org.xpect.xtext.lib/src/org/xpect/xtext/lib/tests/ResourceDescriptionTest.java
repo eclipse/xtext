@@ -14,11 +14,11 @@ import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.junit.runner.RunWith;
+import org.xpect.XpectImport;
 import org.xpect.expectation.ILinesExpectation;
 import org.xpect.expectation.LinesExpectation;
 import org.xpect.runner.Xpect;
 import org.xpect.runner.XpectRunner;
-import org.xpect.setup.XpectSetup;
 import org.xpect.xtext.lib.setup.ThisResource;
 import org.xpect.xtext.lib.setup.XtextStandaloneSetup;
 import org.xpect.xtext.lib.setup.XtextWorkspaceSetup;
@@ -31,7 +31,7 @@ import com.google.inject.Inject;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 @RunWith(XpectRunner.class)
-@XpectSetup({ XtextStandaloneSetup.class, XtextWorkspaceSetup.class })
+@XpectImport({ XtextStandaloneSetup.class, XtextWorkspaceSetup.class })
 public class ResourceDescriptionTest {
 
 	protected static class EObjectDescriptionToStringMapper implements Function<IEObjectDescription, String> {

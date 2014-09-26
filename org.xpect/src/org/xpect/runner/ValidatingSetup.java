@@ -1,9 +1,9 @@
 package org.xpect.runner;
 
-import org.xpect.setup.XpectSetup;
+import org.xpect.setup.XpectSetupFactory;
 import org.xpect.state.Creates;
 
-@XpectSetup(ValidatingSetup.class)
+@XpectSetupFactory
 public class ValidatingSetup {
 	public void validate() {
 	}

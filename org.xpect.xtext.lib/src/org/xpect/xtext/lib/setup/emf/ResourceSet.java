@@ -9,14 +9,16 @@ package org.xpect.xtext.lib.setup.emf;
 
 import java.util.List;
 
-import org.xpect.setup.XpectSetup;
+import org.xpect.XpectImport;
+import org.xpect.setup.XpectSetupComponent;
 
 import com.google.common.collect.Lists;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-@XpectSetup(ResourceSetDefaultsSetup.class)
+@XpectSetupComponent
+@XpectImport(ResourceSetDefaultsSetup.class)
 public class ResourceSet {
 	private final List<ResourceFactory> factories = Lists.newArrayList();
 
@@ -27,5 +29,4 @@ public class ResourceSet {
 	public List<ResourceFactory> getFactories() {
 		return factories;
 	}
-
 }

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.jar.JarFile;
@@ -14,6 +15,7 @@ import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
@@ -81,6 +83,18 @@ public class UIJavaReflectAccess implements IJavaReflectAccess {
 			return ClasspathUtil.getSymbolicName(new JarFile(file).getManifest());
 		} catch (IOException e) {
 			LOG.error("Can't get symbolic name from " + file, e);
+			return null;
+		}
+	}
+
+	public Field getField(JvmField field) {
+		Class<?> rawType = getRawType(field.getDeclaringType());
+		if (rawType == null)
+			return null;
+		try {
+			return rawType.getDeclaredField(field.getSimpleName());
+		} catch (Exception e) {
+			LOG.error("Can't find " + field.getIdentifier(), e);
 			return null;
 		}
 	}

@@ -11,11 +11,13 @@ import java.io.IOException;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.xpect.setup.XpectSetupComponent;
 import org.xpect.xtext.lib.setup.FileSetupContext;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@XpectSetupComponent
 public class Resource implements ResourceFactory {
 
 	private final org.xpect.xtext.lib.setup.generic.File delegate;

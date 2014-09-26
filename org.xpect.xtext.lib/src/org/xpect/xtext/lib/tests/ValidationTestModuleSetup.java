@@ -5,7 +5,6 @@ import static com.google.common.collect.Iterables.filter;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
@@ -16,18 +15,21 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
-import org.xpect.Environment;
 import org.xpect.XpectFile;
+import org.xpect.XpectImport;
 import org.xpect.XpectInvocation;
+import org.xpect.XpectReplace;
 import org.xpect.registry.AbstractDelegatingModule;
 import org.xpect.registry.DefaultBinding;
-import org.xpect.setup.IXpectGuiceModuleSetup;
+import org.xpect.setup.XpectGuiceModule;
+import org.xpect.setup.XpectSetupFactory;
 import org.xpect.state.Creates;
 import org.xpect.ui.services.XtResourceValidator;
 import org.xpect.ui.util.XpectFileAccess;
 import org.xpect.xtext.lib.setup.ThisOffset.ThisOffsetProvider;
 import org.xpect.xtext.lib.setup.ThisResource;
 import org.xpect.xtext.lib.setup.XtextValidatingSetup;
+import org.xpect.xtext.lib.tests.ValidationTestModuleSetup.IssuesByOffsetSetup;
 import org.xpect.xtext.lib.util.IssueOverlapsRangePredicate;
 
 import com.google.common.collect.ImmutableMultimap;
@@ -37,16 +39,19 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.inject.Binder;
 import com.google.inject.Key;
-import com.google.inject.Module;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class ValidationTestModuleSetup implements IXpectGuiceModuleSetup {
+@XpectGuiceModule
+@XpectImport(IssuesByOffsetSetup.class)
+public class ValidationTestModuleSetup extends AbstractDelegatingModule {
 	@Retention(RetentionPolicy.RUNTIME)
 	public @interface IssuesByLine {
 	}
 
+	@XpectSetupFactory
+	@XpectReplace(XtextValidatingSetup.class)
 	public static class IssuesByOffsetSetup extends XtextValidatingSetup {
 
 		private Multimap<Integer, Issue> issuesByLine = null;
@@ -63,8 +68,7 @@ public class ValidationTestModuleSetup implements IXpectGuiceModuleSetup {
 		@Creates(IssuesByLine.class)
 		public Multimap<Integer, Issue> collectIssuesByLine() {
 			if (issuesByLine == null) {
-				TestingResourceValidator validator = (TestingResourceValidator) getResource().getResourceServiceProvider()
-						.getResourceValidator();
+				TestingResourceValidator validator = (TestingResourceValidator) getResource().getResourceServiceProvider().getResourceValidator();
 				issuesByLine = validator.validateAndMapByOffset(getResource(), CheckMode.ALL, CancelIndicator.NullImpl);
 			}
 			return issuesByLine;
@@ -102,8 +106,7 @@ public class ValidationTestModuleSetup implements IXpectGuiceModuleSetup {
 					Set<Issue> matched = Sets.newHashSet();
 					for (XpectInvocation inv : xpectFile.getInvocations()) {
 						int offset = new ThisOffsetProvider(inv, xresource).getOffset();
-						Iterable<Issue> selected = filter(issues, new IssueOverlapsRangePredicate(xresource, offset,
-								getExpectedSeverity(inv)));
+						Iterable<Issue> selected = filter(issues, new IssueOverlapsRangePredicate(xresource, offset, getExpectedSeverity(inv)));
 						result.putAll(offset, selected);
 						addAll(matched, selected);
 					}
@@ -117,23 +120,11 @@ public class ValidationTestModuleSetup implements IXpectGuiceModuleSetup {
 		}
 	}
 
-	public static class ValidationTestWorkbenchModule extends AbstractDelegatingModule {
-
-		public void configure(Binder binder) {
-			binder.bind(IResourceValidator.class).to(TestingResourceValidator.class);
-			binder.bind(IResourceValidator.class).annotatedWith(DefaultBinding.class)
-					.to(getOriginalType(Key.get(IResourceValidator.class)));
-		}
+	public void configure(Binder binder) {
+		binder.bind(IResourceValidator.class).to(TestingResourceValidator.class);
+		binder.bind(IResourceValidator.class).annotatedWith(DefaultBinding.class).to(getOriginalType(Key.get(IResourceValidator.class)));
 	}
 
 	public static final Integer UNMATCHED = -1;
-
-	public EnumSet<Environment> getEnvironments() {
-		return EnumSet.of(Environment.PLUGIN_TEST, Environment.STANDALONE_TEST, Environment.WORKBENCH);
-	}
-
-	public Class<? extends Module> getModule() {
-		return ValidationTestWorkbenchModule.class;
-	}
 
 }

@@ -20,8 +20,9 @@ import org.eclipse.xtext.validation.IDiagnosticConverter;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.junit.ComparisonFailure;
+import org.xpect.XpectReplace;
 import org.xpect.runner.ValidatingSetup;
-import org.xpect.setup.XpectSetup;
+import org.xpect.setup.XpectSetupFactory;
 import org.xpect.state.Creates;
 import org.xpect.util.IssueVisualizer;
 
@@ -32,7 +33,8 @@ import com.google.common.collect.Lists;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-@XpectSetup(XtextValidatingSetup.class)
+@XpectSetupFactory
+@XpectReplace(ValidatingSetup.class)
 public class XtextValidatingSetup extends ValidatingSetup {
 
 	protected static class ListAcceptor<T> implements IAcceptor<T> {
@@ -81,7 +83,7 @@ public class XtextValidatingSetup extends ValidatingSetup {
 	}
 
 	@Creates
-	public XtextValidatingSetup create() {
+	public ValidatingSetup create() {
 		return this;
 	}
 

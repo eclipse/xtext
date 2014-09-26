@@ -15,7 +15,8 @@ import java.lang.annotation.Target;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.resource.XtextResource;
-import org.xpect.setup.XpectSetup;
+import org.xpect.XpectImport;
+import org.xpect.setup.XpectSetupFactory;
 import org.xpect.state.Creates;
 import org.xpect.xtext.lib.setup.ThisModel.ThisModelFactory;
 
@@ -26,8 +27,10 @@ import com.google.common.base.Joiner;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.PARAMETER, ElementType.FIELD })
-@XpectSetup(ThisModelFactory.class)
+@XpectImport(ThisModelFactory.class)
 public @interface ThisModel {
+
+	@XpectSetupFactory
 	public class ThisModelFactory {
 		private final XtextResource resource;
 

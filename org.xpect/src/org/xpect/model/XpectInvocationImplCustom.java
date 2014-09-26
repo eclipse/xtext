@@ -9,7 +9,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.xpect.XjmSetup;
+import org.xpect.XjmContribution;
 import org.xpect.XjmTest;
 import org.xpect.XjmXpectMethod;
 import org.xpect.XpectPackage;
@@ -20,6 +20,7 @@ import org.xpect.parameter.IParameterParser.IMultiParameterParser;
 import org.xpect.parameter.IParameterParser.IParsedParameterProvider;
 import org.xpect.parameter.IParameterParser.ISingleParameterParser;
 import org.xpect.parameter.IParameterProvider;
+import org.xpect.parameter.XpectParameterAdapter;
 import org.xpect.text.IRegion;
 import org.xpect.util.IJavaReflectAccess;
 
@@ -58,13 +59,20 @@ public class XpectInvocationImplCustom extends XpectInvocationImpl {
 		XjmTest test = xpectMethod.getTest();
 		if (test == null)
 			return null;
-		for (IParameterAdapter adapter : test.getParameterAdapters())
-			if (adapter.canAdapt(param, expectedType))
-				return adapter.adapt(param, expectedType);
-		for (XjmSetup setup : test.getSetups())
-			for (IParameterAdapter adapter : setup.getParameterAdapters())
+		Iterable<XjmContribution> contributions = getFile().getJavaModel().getContributions(XpectParameterAdapter.class);
+		for (XjmContribution contrib : contributions)
+			if (contrib.isActive()) {
+				IParameterAdapter adapter;
+				try {
+					adapter = (IParameterAdapter) contrib.getJavaClass().newInstance();
+				} catch (InstantiationException e) {
+					throw new RuntimeException(e);
+				} catch (IllegalAccessException e) {
+					throw new RuntimeException(e);
+				}
 				if (adapter.canAdapt(param, expectedType))
 					return adapter.adapt(param, expectedType);
+			}
 		return null;
 	}
 

@@ -4,9 +4,7 @@ import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
 import java.util.Collections;
@@ -16,13 +14,10 @@ import java.util.Set;
 
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
-import org.xpect.setup.IXpectSetup;
-import org.xpect.setup.XpectSetup;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
@@ -169,7 +164,7 @@ public class ResolvedConfiguration {
 		public abstract Class<?> getType();
 	}
 
-	private final Map<Class<?>, List<Throwable>> deactivatedFactories;
+//	private final Map<Class<?>, List<Throwable>> deactivatedFactories;
 	private final List<Throwable> errors;
 	private final List<Class<?>> overwrittenFactories;
 	private final ResolvedConfiguration parent;
@@ -180,17 +175,17 @@ public class ResolvedConfiguration {
 	public ResolvedConfiguration(ResolvedConfiguration parent, Configuration configuration) {
 		this.parent = parent;
 		this.errors = Lists.newArrayList();
-		Set<Class<?>> allFactoryClasses = collectAllFactoryClasses(parent, configuration);
+		Set<Class<?>> allFactoryClasses =  collectAllFactoryClasses(parent, configuration);
 		Set<Class<?>> overwrittenFactoryClasses = collectOverwrittenClasses(allFactoryClasses);
-		Set<Class<?>> unoverwrittenFactoryClasses = Sets.difference(allFactoryClasses, overwrittenFactoryClasses);
-		Map<Class<?>, List<Throwable>> deactivatedFactoryClasses = collectDeactivatedClasses(unoverwrittenFactoryClasses);
-		Set<Class<?>> activeFactoryClasses = Sets.difference(unoverwrittenFactoryClasses, deactivatedFactoryClasses.keySet());
+		Set<Class<?>> activeFactoryClasses = Sets.difference(allFactoryClasses, overwrittenFactoryClasses);
+//		Map<Class<?>, List<Throwable>> deactivatedFactoryClasses = collectDeactivatedClasses(unoverwrittenFactoryClasses);
+//		Set<Class<?>> activeFactoryClasses = Sets.difference(unoverwrittenFactoryClasses, deactivatedFactoryClasses.keySet());
 		Multimap<Class<? extends Annotation>, Value> allValues = collectAllValues(activeFactoryClasses, configuration);
 		Multimap<Class<?>, DerivedValue> annotatio2value = collectDerivedValuesByFactory(allValues.values());
 		Set<Factory> allFactories = collectAllFactories(allValues, annotatio2value);
 		Set<Factory> resolvedFactories = collectResolvedFactories(allFactories);
 		Multimap<Class<? extends Annotation>, Value> resolvedValues = collectValues(allValues, resolvedFactories);
-		this.deactivatedFactories = ImmutableMap.copyOf(deactivatedFactoryClasses);
+//		this.deactivatedFactories = ImmutableMap.copyOf(deactivatedFactoryClasses);
 		this.overwrittenFactories = ImmutableList.copyOf(overwrittenFactoryClasses);
 		this.resolvedFactories = ImmutableList.copyOf(resolvedFactories);
 		this.unresolvedFactories = ImmutableList.copyOf(Sets.difference(allFactories, resolvedFactories));
@@ -231,38 +226,39 @@ public class ResolvedConfiguration {
 		if (parent != null)
 			for (Factory fact : parent.getUnresolvedFactories())
 				result.add(fact.getOwner());
-		for (Class<?> factory : cfg.getFactories())
-			collectAllFactoryClasses(factory, result);
+//		for (Class<?> factory : cfg.getFactories())
+//			collectAllFactoryClasses(factory, result);
+		result.addAll(cfg.getFactories());
 		return result;
 	}
 
-	protected void collectAllFactoryClasses(Class<?> clazz, Set<Class<?>> result) {
-		if (IXpectSetup.class.isAssignableFrom(clazz))
-			return;
-		if (!result.add(clazz))
-			return;
-		collectAllFactoryClasses(clazz.getAnnotation(XpectSetup.class), result);
-		for (Constructor<?> constructor : clazz.getConstructors()) {
-			for (Class<?> parameter : constructor.getParameterTypes())
-				collectAllFactoryClasses(parameter.getAnnotation(XpectSetup.class), result);
-			for (Annotation[] annotations : constructor.getParameterAnnotations())
-				for (Annotation annotation : annotations)
-					collectAllFactoryClasses(annotation.annotationType().getAnnotation(XpectSetup.class), result);
-		}
-		for (Method method : clazz.getMethods()) {
-			for (Class<?> parameter : method.getParameterTypes())
-				collectAllFactoryClasses(parameter.getAnnotation(XpectSetup.class), result);
-			for (Annotation[] annotations : method.getParameterAnnotations())
-				for (Annotation annotation : annotations)
-					collectAllFactoryClasses(annotation.annotationType().getAnnotation(XpectSetup.class), result);
-		}
-	}
-
-	protected void collectAllFactoryClasses(XpectSetup annotation, Set<Class<?>> result) {
-		if (annotation != null)
-			for (Class<?> clazz : annotation.value())
-				collectAllFactoryClasses(clazz, result);
-	}
+//	protected void collectAllFactoryClasses(Class<?> clazz, Set<Class<?>> result) {
+//		if (IXpectSetup.class.isAssignableFrom(clazz))
+//			return;
+//		if (!result.add(clazz))
+//			return;
+//		collectAllFactoryClasses(clazz.getAnnotation(XpectSetup.class), result);
+//		for (Constructor<?> constructor : clazz.getConstructors()) {
+//			for (Class<?> parameter : constructor.getParameterTypes())
+//				collectAllFactoryClasses(parameter.getAnnotation(XpectSetup.class), result);
+//			for (Annotation[] annotations : constructor.getParameterAnnotations())
+//				for (Annotation annotation : annotations)
+//					collectAllFactoryClasses(annotation.annotationType().getAnnotation(XpectSetup.class), result);
+//		}
+//		for (Method method : clazz.getMethods()) {
+//			for (Class<?> parameter : method.getParameterTypes())
+//				collectAllFactoryClasses(parameter.getAnnotation(XpectSetup.class), result);
+//			for (Annotation[] annotations : method.getParameterAnnotations())
+//				for (Annotation annotation : annotations)
+//					collectAllFactoryClasses(annotation.annotationType().getAnnotation(XpectSetup.class), result);
+//		}
+//	}
+//
+//	protected void collectAllFactoryClasses(XpectSetup annotation, Set<Class<?>> result) {
+//		if (annotation != null)
+//			for (Class<?> clazz : annotation.value())
+//				collectAllFactoryClasses(clazz, result);
+//	}
 
 	protected Multimap<Class<? extends Annotation>, Value> collectAllValues(Collection<Class<?>> factories2, Configuration config) {
 		Multimap<Class<? extends Annotation>, Value> annotatio2value = LinkedHashMultimap.create();
@@ -313,15 +309,15 @@ public class ResolvedConfiguration {
 		return annotatio2value;
 	}
 
-	protected Map<Class<?>, List<Throwable>> collectDeactivatedClasses(Set<Class<?>> classes) {
-		Map<Class<?>, List<Throwable>> deactivated = Maps.newLinkedHashMap();
-		for (Class<?> c : classes) {
-			List<Throwable> reasons = getFactoryDeactivationReasons(c);
-			if (!reasons.isEmpty())
-				deactivated.put(c, ImmutableList.copyOf(reasons));
-		}
-		return deactivated;
-	}
+//	protected Map<Class<?>, List<Throwable>> collectDeactivatedClasses(Set<Class<?>> classes) {
+//		Map<Class<?>, List<Throwable>> deactivated = Maps.newLinkedHashMap();
+//		for (Class<?> c : classes) {
+//			List<Throwable> reasons = getFactoryDeactivationReasons(c);
+//			if (!reasons.isEmpty())
+//				deactivated.put(c, ImmutableList.copyOf(reasons));
+//		}
+//		return deactivated;
+//	}
 
 	protected Multimap<Class<?>, DerivedValue> collectDerivedValuesByFactory(Collection<Value> values) {
 		Multimap<Class<?>, DerivedValue> annotatio2value = LinkedHashMultimap.create();
@@ -400,39 +396,39 @@ public class ResolvedConfiguration {
 		return null;
 	}
 
-	public Map<Class<?>, List<Throwable>> getDeactivatedFactories() {
-		return deactivatedFactories;
-	}
+//	public Map<Class<?>, List<Throwable>> getDeactivatedFactories() {
+//		return deactivatedFactories;
+//	}
 
 	public List<Throwable> getErrors() {
 		return errors;
 	}
 
-	protected List<Throwable> getFactoryDeactivationReasons(Class<?> clazz) {
-		List<Throwable> result = Lists.newArrayList();
-		for (Method method : clazz.getMethods()) {
-			if (method.getAnnotation(Precondition.class) != null) {
-				if (!Modifier.isStatic(method.getModifiers())) {
-					this.errors.add(new IllegalStateException("Method " + method + " needs to be static"));
-					continue;
-				}
-				if (method.getParameterTypes().length != 0) {
-					this.errors.add(new IllegalStateException("Method " + method + " can not (yet) have parameters."));
-					continue;
-				}
-				try {
-					method.invoke(null);
-				} catch (IllegalAccessException e) {
-					result.add(e);
-				} catch (IllegalArgumentException e) {
-					result.add(e);
-				} catch (InvocationTargetException e) {
-					result.add(e.getCause());
-				}
-			}
-		}
-		return result;
-	}
+//	protected List<Throwable> getFactoryDeactivationReasons(Class<?> clazz) {
+//		List<Throwable> result = Lists.newArrayList();
+//		for (Method method : clazz.getMethods()) {
+//			if (method.getAnnotation(Precondition.class) != null) {
+//				if (!Modifier.isStatic(method.getModifiers())) {
+//					this.errors.add(new IllegalStateException("Method " + method + " needs to be static"));
+//					continue;
+//				}
+//				if (method.getParameterTypes().length != 0) {
+//					this.errors.add(new IllegalStateException("Method " + method + " can not (yet) have parameters."));
+//					continue;
+//				}
+//				try {
+//					method.invoke(null);
+//				} catch (IllegalAccessException e) {
+//					result.add(e);
+//				} catch (IllegalArgumentException e) {
+//					result.add(e);
+//				} catch (InvocationTargetException e) {
+//					result.add(e.getCause());
+//				}
+//			}
+//		}
+//		return result;
+//	}
 
 	public List<Class<?>> getOverwrittenFactories() {
 		return overwrittenFactories;

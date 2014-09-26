@@ -1,4 +1,4 @@
-package org.xpect.parameter;
+package org.xpect;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
@@ -6,11 +6,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.xpect.XpectContributionRole;
-
 @Inherited
-@XpectContributionRole
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface XpectParameterAdapter {
+public @interface XpectRequiredEnvironment {
+	Environment[] value();
 }

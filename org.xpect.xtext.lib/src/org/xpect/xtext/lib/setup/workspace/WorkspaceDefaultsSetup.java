@@ -7,8 +7,10 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.IGrammarAccess;
+import org.xpect.XpectImport;
 import org.xpect.setup.ISetupInitializer;
-import org.xpect.setup.XpectSetup;
+import org.xpect.setup.XpectSetupFactory;
+import org.xpect.setup.XpectSetupRoot;
 import org.xpect.state.Creates;
 import org.xpect.xtext.lib.setup.InjectorSetup;
 import org.xpect.xtext.lib.util.GrammarAnalyzer;
@@ -16,7 +18,9 @@ import org.xpect.xtext.lib.util.GrammarAnalyzer;
 import com.google.common.collect.Lists;
 import com.google.inject.Injector;
 
-@XpectSetup({ WorkspaceDefaultsSetup.class, InjectorSetup.class })
+@XpectSetupRoot
+@XpectSetupFactory
+@XpectImport({ InjectorSetup.class, File.class, Folder.class, JavaProject.class, Project.class, SrcFolder.class, ThisFile.class })
 public class WorkspaceDefaultsSetup {
 
 	public static final Path XTEND_LIBRARY_PATH = new Path("org.eclipse.xtend.XTEND_CONTAINER");

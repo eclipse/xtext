@@ -15,12 +15,12 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.junit.runner.RunWith;
+import org.xpect.XpectImport;
 import org.xpect.expectation.CommaSeparatedValuesExpectation;
 import org.xpect.expectation.ICommaSeparatedValuesExpectation;
 import org.xpect.parameter.ParameterParser;
 import org.xpect.runner.Xpect;
 import org.xpect.runner.XpectRunner;
-import org.xpect.setup.XpectSetup;
 import org.xpect.xtext.lib.setup.ThisOffset;
 import org.xpect.xtext.lib.setup.XtextStandaloneSetup;
 import org.xpect.xtext.lib.setup.XtextWorkspaceSetup;
@@ -35,7 +35,7 @@ import com.google.inject.Inject;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 @RunWith(XpectRunner.class)
-@XpectSetup({ XtextStandaloneSetup.class, XtextWorkspaceSetup.class })
+@XpectImport({ XtextStandaloneSetup.class, XtextWorkspaceSetup.class })
 public class ScopingTest {
 
 	protected static class EObjectDescriptionToStringMapper implements Function<IEObjectDescription, String> {

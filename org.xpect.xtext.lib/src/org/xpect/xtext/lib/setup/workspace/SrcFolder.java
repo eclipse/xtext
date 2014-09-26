@@ -6,8 +6,10 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.xpect.setup.XpectSetupComponent;
 import org.xpect.xtext.lib.setup.FileSetupContext;
 
+@XpectSetupComponent
 public class SrcFolder extends Container<IFolder> implements IResourceFactory<IFolder, IProject> {
 
 	private final String name;

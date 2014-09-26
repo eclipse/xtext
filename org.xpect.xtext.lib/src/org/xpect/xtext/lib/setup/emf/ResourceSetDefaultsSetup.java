@@ -2,14 +2,19 @@ package org.xpect.xtext.lib.setup.emf;
 
 import java.util.List;
 
+import org.xpect.XpectImport;
 import org.xpect.setup.ISetupInitializer;
-import org.xpect.setup.XpectSetup;
+import org.xpect.setup.XpectSetupFactory;
+import org.xpect.setup.XpectSetupRoot;
 import org.xpect.state.Creates;
 import org.xpect.xtext.lib.setup.generic.Resource;
 
 import com.google.common.collect.Lists;
 
-@XpectSetup(ResourceSetDefaultsSetup.class)
+@XpectSetupRoot
+@XpectSetupFactory
+@SuppressWarnings("deprecation")
+@XpectImport({ org.xpect.xtext.lib.setup.emf.Resource.class, ResourceSet.class, ThisResource.class, File.class, ThisFile.class })
 public class ResourceSetDefaultsSetup {
 
 	private List<Resource> genericResources = Lists.newArrayList();

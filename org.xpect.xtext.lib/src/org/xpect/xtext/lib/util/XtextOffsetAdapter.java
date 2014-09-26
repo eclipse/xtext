@@ -26,6 +26,7 @@ import org.xpect.parameter.AbstractOffsetProvider;
 import org.xpect.parameter.IParameterAdapter;
 import org.xpect.parameter.IParameterParser.IParsedParameterProvider;
 import org.xpect.parameter.IParameterProvider;
+import org.xpect.parameter.XpectParameterAdapter;
 import org.xpect.state.StateContainer;
 import org.xpect.text.IRegion;
 import org.xpect.xtext.lib.setup.ThisResource;
@@ -35,6 +36,7 @@ import com.google.common.collect.Sets;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@XpectParameterAdapter
 public class XtextOffsetAdapter implements IParameterAdapter {
 
 	protected static class CrossEReferenceAndEObject extends EStructuralFeatureAndEObject implements ICrossEReferenceAndEObject {

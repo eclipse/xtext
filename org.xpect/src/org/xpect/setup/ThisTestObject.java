@@ -3,13 +3,15 @@ package org.xpect.setup;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
+import org.xpect.XpectImport;
 import org.xpect.setup.ThisTestObject.TestObjectSetup;
 import org.xpect.state.Creates;
 
 @Retention(RetentionPolicy.RUNTIME)
-@XpectSetup(TestObjectSetup.class)
+@XpectImport(TestObjectSetup.class)
 public @interface ThisTestObject {
 
+	@XpectSetupFactory
 	public class TestObjectSetup {
 		private final Class<?> testClass;
 

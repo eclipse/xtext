@@ -2,12 +2,12 @@ package org.xpect.util;
 
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.xpect.XjmContribution;
 import org.xpect.XpectJavaModel;
 import org.xpect.registry.ILanguageInfo;
-import org.xpect.setup.IXpectGuiceModuleSetup;
+import org.xpect.setup.XpectGuiceModule;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Injector;
@@ -30,11 +30,16 @@ public interface IXtInjectorProvider {
 		protected void collectBuiltinModules(List<Class<? extends Module>> moduleClasses) {
 		}
 
+		@SuppressWarnings("unchecked")
 		protected void collectSetupModules(List<Class<? extends Module>> moduleClasses, XpectJavaModel javaModel) {
 			if (javaModel != null) {
-				EList<IXpectGuiceModuleSetup> moduleSetups = javaModel.getSetups(IXpectGuiceModuleSetup.class, EnvironmentUtil.ENVIRONMENT);
-				for (IXpectGuiceModuleSetup moduleSetup : moduleSetups)
-					moduleClasses.add(moduleSetup.getModule());
+				Iterable<XjmContribution> contributions = javaModel.getContributions(XpectGuiceModule.class, EnvironmentUtil.ENVIRONMENT);
+				for (XjmContribution contribution : contributions)
+					if (contribution.isActive()) {
+						Class<?> javaClass = contribution.getJavaClass();
+						if (Module.class.isAssignableFrom(javaClass))
+							moduleClasses.add((Class<? extends Module>) javaClass);
+					}
 			}
 		}
 

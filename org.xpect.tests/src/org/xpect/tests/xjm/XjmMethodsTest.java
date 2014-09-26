@@ -1,13 +1,13 @@
-package org.xpect.tests;
+package org.xpect.tests.xjm;
 
 import org.junit.Test;
 import org.xpect.runner.Xpect;
 import org.xpect.runner.XpectSuiteClasses;
-import org.xpect.tests.XjmMethodsTest.SuiteWithLoop.LoopMember1;
-import org.xpect.tests.XjmMethodsTest.SuiteWithNameConflicts.Conflict1;
-import org.xpect.tests.XjmMethodsTest.SuiteWithNameConflicts.Conflict2;
-import org.xpect.tests.XjmMethodsTest.SuiteWithNesting.SuiteMember1;
-import org.xpect.tests.XjmMethodsTest.SuiteWithNesting.SuiteMember2;
+import org.xpect.tests.xjm.XjmMethodsTest.SuiteWithLoop.LoopMember1;
+import org.xpect.tests.xjm.XjmMethodsTest.SuiteWithNameConflicts.Conflict1;
+import org.xpect.tests.xjm.XjmMethodsTest.SuiteWithNameConflicts.Conflict2;
+import org.xpect.tests.xjm.XjmMethodsTest.SuiteWithNesting.SuiteMember1;
+import org.xpect.tests.xjm.XjmMethodsTest.SuiteWithNesting.SuiteMember2;
 
 public class XjmMethodsTest extends AbstractXjmTest {
 
@@ -47,8 +47,8 @@ public class XjmMethodsTest extends AbstractXjmTest {
 		@Override
 		public String toString() {
 			StringBuilder buf = new StringBuilder();
-			buf.append("suite org.xpect.tests.XjmMethodsTest$SingleTestWithMethods {\n");
-			buf.append("  test org.xpect.tests.XjmMethodsTest$SingleTestWithMethods {\n");
+			buf.append("suite org.xpect.tests.xjm.XjmMethodsTest$SingleTestWithMethods {\n");
+			buf.append("  test org.xpect.tests.xjm.XjmMethodsTest$SingleTestWithMethods {\n");
 			buf.append("    @Test public void publicTest();\n");
 			buf.append("    @Xpect public void publicXpect();\n");
 			buf.append("  }\n");
@@ -74,11 +74,11 @@ public class XjmMethodsTest extends AbstractXjmTest {
 		@Override
 		public String toString() {
 			StringBuilder buf = new StringBuilder();
-			buf.append("suite org.xpect.tests.XjmMethodsTest$SuiteWithLoop {\n");
-			buf.append("  test org.xpect.tests.XjmMethodsTest$SuiteWithLoop {\n");
+			buf.append("suite org.xpect.tests.xjm.XjmMethodsTest$SuiteWithLoop {\n");
+			buf.append("  test org.xpect.tests.xjm.XjmMethodsTest$SuiteWithLoop {\n");
 			buf.append("    @Test public void testMember0();\n");
 			buf.append("  }\n");
-			buf.append("  test org.xpect.tests.XjmMethodsTest$SuiteWithLoop$LoopMember1 {\n");
+			buf.append("  test org.xpect.tests.xjm.XjmMethodsTest$SuiteWithLoop$LoopMember1 {\n");
 			buf.append("    @Test public void testMember1();\n");
 			buf.append("  }\n");
 			buf.append("}");
@@ -130,12 +130,12 @@ public class XjmMethodsTest extends AbstractXjmTest {
 		@Override
 		public String toString() {
 			StringBuilder buf = new StringBuilder();
-			buf.append("suite org.xpect.tests.XjmMethodsTest$SuiteWithNameConflicts {\n");
-			buf.append("  test org.xpect.tests.XjmMethodsTest$SuiteWithNameConflicts {}\n");
-			buf.append("  test org.xpect.tests.XjmMethodsTest$SuiteWithNameConflicts$Conflict1 {\n");
+			buf.append("suite org.xpect.tests.xjm.XjmMethodsTest$SuiteWithNameConflicts {\n");
+			buf.append("  test org.xpect.tests.xjm.XjmMethodsTest$SuiteWithNameConflicts {}\n");
+			buf.append("  test org.xpect.tests.xjm.XjmMethodsTest$SuiteWithNameConflicts$Conflict1 {\n");
 			buf.append("    @Xpect public void noConflict();\n");
 			buf.append("  }\n");
-			buf.append("  test org.xpect.tests.XjmMethodsTest$SuiteWithNameConflicts$Conflict2 {\n");
+			buf.append("  test org.xpect.tests.xjm.XjmMethodsTest$SuiteWithNameConflicts$Conflict2 {\n");
 			buf.append("    @Test public void noConflict();\n");
 			buf.append("  }\n");
 			buf.append("}");
@@ -183,20 +183,20 @@ public class XjmMethodsTest extends AbstractXjmTest {
 		@Override
 		public String toString() {
 			StringBuilder buf = new StringBuilder();
-			buf.append("suite org.xpect.tests.XjmMethodsTest$SuiteWithNesting {\n");
-			buf.append("  test org.xpect.tests.XjmMethodsTest$SuiteWithNesting {\n");
+			buf.append("suite org.xpect.tests.xjm.XjmMethodsTest$SuiteWithNesting {\n");
+			buf.append("  test org.xpect.tests.xjm.XjmMethodsTest$SuiteWithNesting {\n");
 			buf.append("    @Test public void testMember0();\n");
 			buf.append("    @Xpect public void xpectMember0();\n");
 			buf.append("  }\n");
-			buf.append("  test org.xpect.tests.XjmMethodsTest$SuiteWithNesting$SuiteMember1 {\n");
+			buf.append("  test org.xpect.tests.xjm.XjmMethodsTest$SuiteWithNesting$SuiteMember1 {\n");
 			buf.append("    @Test public void testMember1();\n");
 			buf.append("    @Xpect public void xpectMember1();\n");
 			buf.append("  }\n");
-			buf.append("  test org.xpect.tests.XjmMethodsTest$SuiteWithNesting$SuiteMember2 {\n");
+			buf.append("  test org.xpect.tests.xjm.XjmMethodsTest$SuiteWithNesting$SuiteMember2 {\n");
 			buf.append("    @Test public void testMember2();\n");
 			buf.append("    @Xpect public void xpectMember2();\n");
 			buf.append("  }\n");
-			buf.append("  test org.xpect.tests.XjmMethodsTest$SuiteWithNesting$SuiteMember3 {\n");
+			buf.append("  test org.xpect.tests.xjm.XjmMethodsTest$SuiteWithNesting$SuiteMember3 {\n");
 			buf.append("    @Test public void testMember3();\n");
 			buf.append("    @Xpect public void xpectMember3();\n");
 			buf.append("  }\n");

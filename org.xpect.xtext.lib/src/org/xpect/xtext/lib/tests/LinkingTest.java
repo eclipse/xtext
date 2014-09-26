@@ -18,12 +18,12 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.XtextResource;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
+import org.xpect.XpectImport;
 import org.xpect.expectation.IStringExpectation;
 import org.xpect.expectation.StringExpectation;
 import org.xpect.parameter.ParameterParser;
 import org.xpect.runner.Xpect;
 import org.xpect.runner.XpectRunner;
-import org.xpect.setup.XpectSetup;
 import org.xpect.xtext.lib.setup.ThisOffset;
 import org.xpect.xtext.lib.setup.XtextStandaloneSetup;
 import org.xpect.xtext.lib.setup.XtextWorkspaceSetup;
@@ -34,7 +34,7 @@ import org.xpect.xtext.lib.util.XtextOffsetAdapter.ICrossEReferenceAndEObject;
  */
 @SuppressWarnings("restriction")
 @RunWith(XpectRunner.class)
-@XpectSetup({ XtextStandaloneSetup.class, XtextWorkspaceSetup.class })
+@XpectImport({ XtextStandaloneSetup.class, XtextWorkspaceSetup.class })
 public class LinkingTest {
 
 	protected String deresolve(URI base, URI uri) {

@@ -16,11 +16,11 @@ import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.validation.Issue;
 import org.junit.runner.RunWith;
+import org.xpect.XpectImport;
 import org.xpect.expectation.ILinesExpectation;
 import org.xpect.expectation.LinesExpectation;
 import org.xpect.runner.Xpect;
 import org.xpect.runner.XpectRunner;
-import org.xpect.setup.XpectSetup;
 import org.xpect.xtext.lib.setup.ThisOffset;
 import org.xpect.xtext.lib.setup.ThisResource;
 import org.xpect.xtext.lib.setup.XtextStandaloneSetup;
@@ -36,7 +36,7 @@ import com.google.common.collect.Multimap;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 @RunWith(XpectRunner.class)
-@XpectSetup({ XtextStandaloneSetup.class, XtextWorkspaceSetup.class, ValidationTestModuleSetup.class, IssuesByOffsetSetup.class })
+@XpectImport({ XtextStandaloneSetup.class, XtextWorkspaceSetup.class, ValidationTestModuleSetup.class, IssuesByOffsetSetup.class })
 public class ValidationTest {
 
 	protected Function<? super Issue, String> createIssueFormatter(XtextResource resource, Severity severity) {
@@ -44,22 +44,22 @@ public class ValidationTest {
 	}
 
 	@Xpect
-	public void errors(@LinesExpectation ILinesExpectation expectation, @ThisResource XtextResource resource,
-			@IssuesByLine Multimap<Integer, Issue> line2issue, @ThisOffset int offset) {
+	public void errors(@LinesExpectation ILinesExpectation expectation, @ThisResource XtextResource resource, @IssuesByLine Multimap<Integer, Issue> line2issue,
+			@ThisOffset int offset) {
 		List<String> issues = format(resource, line2issue.get(offset), Severity.ERROR);
 		expectation.assertEquals(issues);
 	}
 
 	@Xpect
-	public void infos(@LinesExpectation ILinesExpectation expectation, @ThisResource XtextResource resource,
-			@IssuesByLine Multimap<Integer, Issue> line2issue, @ThisOffset int offset) {
+	public void infos(@LinesExpectation ILinesExpectation expectation, @ThisResource XtextResource resource, @IssuesByLine Multimap<Integer, Issue> line2issue,
+			@ThisOffset int offset) {
 		List<String> issues = format(resource, line2issue.get(offset), Severity.INFO);
 		expectation.assertEquals(issues);
 	}
 
 	@Xpect
-	public void issues(@LinesExpectation ILinesExpectation expectation, @ThisResource XtextResource resource,
-			@IssuesByLine Multimap<Integer, Issue> line2issue, @ThisOffset int offset) {
+	public void issues(@LinesExpectation ILinesExpectation expectation, @ThisResource XtextResource resource, @IssuesByLine Multimap<Integer, Issue> line2issue,
+			@ThisOffset int offset) {
 		List<String> issues = format(resource, line2issue.get(offset), null);
 		expectation.assertEquals(issues);
 	}
@@ -73,8 +73,8 @@ public class ValidationTest {
 	}
 
 	@Xpect
-	public void warnings(@LinesExpectation ILinesExpectation expectation, @ThisResource XtextResource resource,
-			@IssuesByLine Multimap<Integer, Issue> line2issue, @ThisOffset int offset) {
+	public void warnings(@LinesExpectation ILinesExpectation expectation, @ThisResource XtextResource resource, @IssuesByLine Multimap<Integer, Issue> line2issue,
+			@ThisOffset int offset) {
 		List<String> issues = format(resource, line2issue.get(offset), Severity.WARNING);
 		expectation.assertEquals(issues);
 	}

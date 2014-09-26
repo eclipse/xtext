@@ -5,10 +5,12 @@ import java.io.IOException;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.CoreException;
+import org.xpect.setup.XpectSetupComponent;
 import org.xpect.xtext.lib.setup.FileSetupContext;
 import org.xpect.xtext.lib.setup.workspace.Workspace.Instance;
 import org.xpect.xtext.lib.util.IFileUtil;
 
+@XpectSetupComponent
 public class Folder extends Container<IFolder> implements IResourceFactory<IFolder, IContainer> {
 
 	private final org.xpect.xtext.lib.setup.generic.Folder delegate;
