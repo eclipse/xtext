@@ -91,6 +91,9 @@ public class XbaseBatchScopeProvider implements IBatchScopeProvider , IDelegatin
 				} else if (context instanceof XBinaryOperation) {
 					context = ((XBinaryOperation) context).getLeftOperand();
 					anchor = IExpressionScope.Anchor.RECEIVER;
+				} else if (context instanceof XMemberFeatureCall) {
+					context = ((XMemberFeatureCall) context).getMemberCallTarget();
+					anchor = IExpressionScope.Anchor.RECEIVER;
 				}
 			}
 			IExpressionScope expressionScope = typeResolver.resolveTypes(context).getExpressionScope(context, anchor);
