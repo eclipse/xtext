@@ -8,9 +8,11 @@
 package org.eclipse.xtend.core.tests.conversion;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.xtend.core.conversion.JavaConverter;
 import org.eclipse.xtend.core.conversion.JavaConverter.ConversionResult;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
+import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
@@ -227,7 +229,14 @@ public class JavaConverterTest extends AbstractXtendTestCase {
 	public void testCommentsCase() throws Exception {
 		XtendClass xtendClazz = toValidXtendClass("/** javadoc */public class TestComment { //singleline \\n void doStuff() { /*multiline*/}");
 		assertNotNull(xtendClazz);
+		//TODO handle comments
+	}
 
+	@Test
+	public void testJavadocCase() throws Exception {
+		String xtendCode = j2x.toXtend("Clazz", "/**@param p Param p*/public abstract void foo();",
+				ASTParser.K_CLASS_BODY_DECLARATIONS).getXtendCode();
+		assertTrue("Javadoc Parameter well formed: " + xtendCode, xtendCode.contains("@param p Param p"));
 	}
 
 	@Test
@@ -327,6 +336,24 @@ public class JavaConverterTest extends AbstractXtendTestCase {
 		assertNotNull(clazz);
 	}
 
+	@Test
+	public void testRichStringCase() throws Exception {
+		XtendClass clazz = toValidXtendClass("public class Clazz {"
+				+ "static int i = 2; static String a = (i-i)+i+\"4=\"+(--i)+\"1=\"+(i++)+i;"
+				+ " static String b =\"4=\"+\"1=\";}");
+		assertNotNull(clazz);
+		XtendField xtendMember = (XtendField) clazz.getMembers().get(1);
+		assertEquals("a", xtendMember.getName());
+		assertTrue(xtendMember.getInitialValue() instanceof RichString);
+		assertTrue(((XtendField) clazz.getMembers().get(2)).getInitialValue() instanceof RichString);
+
+		assertEquals(
+				"static package String a='''«(i - i)»«i»4=«((i=i - 1))»1=«(i++)»«i»'''",
+				j2x.toXtend("Clazz", "static String a = (i-i)+i+\"4=\"+(--i)+\"1=\"+(i++)+i;",
+						ASTParser.K_CLASS_BODY_DECLARATIONS).getXtendCode().trim());
+
+	}
+
 	private XtendClass toValidXtendClass(String javaCode) throws Exception {
 		return (XtendClass) toValidTypeDeclaration("Clazz", javaCode);
 	}
@@ -340,7 +367,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
 	private XtendFile toValidFile(String unitName, String javaCode) throws Exception {
 		ConversionResult conversionResult = j2x.toXtend(unitName, javaCode);
 		String xtendCode = conversionResult.getXtendCode();
-		System.out.println(xtendCode);
+//		System.out.println(xtendCode);
 		for (String problem : conversionResult.getProblems()) {
 			System.err.println(problem);
 		}

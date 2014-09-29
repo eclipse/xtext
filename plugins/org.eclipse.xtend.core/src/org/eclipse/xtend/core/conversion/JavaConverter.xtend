@@ -45,6 +45,11 @@ class JavaConverter {
 		toXtend(unitName, javaSrc, ASTParser.K_COMPILATION_UNIT)
 	}
 
+	/**
+ 	* @param unitName some CU name e.g. Clazz. See org.eclipse.jdt.core.dom.ASTParser.setUnitName(String)
+ 	* @param javaSrc Java source code as String
+ 	* @param javaSourceKind ASTParser.K_COMPILATION_UNIT || ASTParser.K_CLASS_BODY_DECLARATION
+ 	*/
 	def ConversionResult toXtend(String unitName, String javaSrc, int javaSourceKind) {
 		val parser = ASTParser.newParser(AST.JLS3)
 		val options = JavaCore.getOptions()
