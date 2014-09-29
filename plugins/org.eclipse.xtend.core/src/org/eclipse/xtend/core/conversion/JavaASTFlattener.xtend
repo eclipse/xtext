@@ -193,16 +193,16 @@ class JavaASTFlattener extends ASTVisitor {
 			leftSide.getIndex().accept(this)
 			appendSpaceToBuffer
 			leftSide.getArray().accept(this)
-			this.fBuffer.append(".set")
-			this.fBuffer.append("(_tempIndex,")
+			appendToBuffer(".set")
+			appendToBuffer("(_tempIndex,")
 			node.rightHandSide.accept(this)
-			this.fBuffer.append(")")
+			appendToBuffer(")")
 			if (node.needsReturnValue()) {
 				leftSide.getArray().accept(this)
-				this.fBuffer.append(".get")
-				this.fBuffer.append("(_tempIndex)")
+				appendToBuffer(".get")
+				appendToBuffer("(_tempIndex)")
 			}
-			this.fBuffer.append("}")
+			appendToBuffer("}")
 		} else {
 			leftSide.accept(this)
 			appendToBuffer(node.getOperator().toString())
@@ -692,18 +692,54 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override boolean visit(InfixExpression node) {
-		node.getLeftOperand().accept(this)
-		appendToBuffer(' ')
-		appendToBuffer(node.getOperator().toString())
-		appendToBuffer(' ')
-		node.getRightOperand().accept(this)
-		val extendedOperands = node.extendedOperands()
-		if (extendedOperands.size() != 0) {
+		if (node.getOperator() == InfixExpression.Operator.PLUS &&
+			( node.getLeftOperand() instanceof StringLiteral || node.getRightOperand() instanceof StringLiteral ) ||
+			node.extendedOperands().exists[e|e instanceof StringLiteral]) {
+			appendToBuffer("'''")
+			if (node.getLeftOperand() instanceof StringLiteral) {
+				appendToBuffer((node.getLeftOperand() as StringLiteral).literalValue)
+			} else {
+				appendToBuffer("«")
+				node.getLeftOperand().accept(this)
+				appendToBuffer("»")
+
+			}
+			if (node.getRightOperand() instanceof StringLiteral) {
+				appendToBuffer((node.getRightOperand() as StringLiteral).literalValue)
+			} else {
+				appendToBuffer("«")
+				node.getRightOperand().accept(this)
+				appendToBuffer("»")
+
+			}
+			val extendedOperands = node.extendedOperands()
+			if (extendedOperands.size() != 0) {
+				extendedOperands.forEach [ Expression e |
+					if (e instanceof StringLiteral) {
+						appendToBuffer(e.literalValue)
+					} else {
+						appendToBuffer("«")
+						e.accept(this)
+						appendToBuffer("»")
+					}
+				]
+			}
+			appendToBuffer("'''")
+
+		} else {
+			node.getLeftOperand().accept(this)
 			appendToBuffer(' ')
-			extendedOperands.forEach [ Expression e |
-				appendToBuffer(node.getOperator().toString()).append(' ')
-				e.accept(this)
-			]
+			appendToBuffer(node.getOperator().toString())
+			appendToBuffer(' ')
+			node.getRightOperand().accept(this)
+			val extendedOperands = node.extendedOperands()
+			if (extendedOperands.size() != 0) {
+				appendToBuffer(' ')
+				extendedOperands.forEach [ Expression e |
+					appendToBuffer(node.getOperator().toString()).append(' ')
+					e.accept(this)
+				]
+			}
 		}
 		return false
 	}
@@ -750,12 +786,6 @@ class JavaASTFlattener extends ASTVisitor {
 			if (pfOperator == PostfixExpression.Operator.INCREMENT ||
 				pfOperator == PostfixExpression.Operator.DECREMENT) {
 
-				/* {
-				var in = index
-				var i = ints.get(in)
-				ints.set(in, i-1)
-				i
-			 } */
 				val arrayName = (pfOperand.array as SimpleName).identifier
 				val idxName = '''_tPreInx_«arrayName»'''
 				val tempVarName = '''_tPostVal_«arrayName»'''
@@ -851,23 +881,23 @@ class JavaASTFlattener extends ASTVisitor {
 	@Override override boolean visit(SuperConstructorInvocation node) {
 		if (node.getExpression() != null) {
 			node.getExpression().accept(this)
-			this.fBuffer.append(".")
+			appendToBuffer(".")
 		}
 		if (!node.typeArguments().isEmpty()) {
 			appendTypeParameters(node.typeArguments)
 		}
-		this.fBuffer.append("super(")
+		appendToBuffer("super(")
 		node.arguments().appendAllSeparatedByComma
-		this.fBuffer.append(")")
+		appendToBuffer(")")
 		return false
 	}
 
 	@Override override boolean visit(SuperFieldAccess node) {
 		if (node.getQualifier() != null) {
 			node.getQualifier().accept(this)
-			this.fBuffer.append(".")
+			appendToBuffer(".")
 		}
-		this.fBuffer.append("super.")
+		appendToBuffer("super.")
 		node.getName().accept(this)
 		return false
 	}
@@ -875,16 +905,16 @@ class JavaASTFlattener extends ASTVisitor {
 	@Override override boolean visit(SuperMethodInvocation node) {
 		if (node.getQualifier() != null) {
 			node.getQualifier().accept(this)
-			this.fBuffer.append(".")
+			appendToBuffer(".")
 		}
-		this.fBuffer.append("super.")
+		appendToBuffer("super.")
 		if (!node.typeArguments().isEmpty()) {
 			appendTypeParameters(node.typeArguments)
 		}
 		node.getName().accept(this)
-		this.fBuffer.append("(")
+		appendToBuffer("(")
 		node.arguments().appendAllSeparatedByComma
-		this.fBuffer.append(")")
+		appendToBuffer(")")
 		return false
 	}
 
@@ -894,24 +924,28 @@ class JavaASTFlattener extends ASTVisitor {
 		} else {
 			appendToBuffer("\n * ")
 		}
+
 		var boolean previousRequiresWhiteSpace = false
 		if (node.getTagName() != null) {
 			appendToBuffer(node.getTagName())
 			previousRequiresWhiteSpace = true
 		}
+
 		var boolean previousRequiresNewLine = false
 		for (var Iterator<? extends ASTNode> it = node.fragments().iterator(); it.hasNext();) {
+
 			var ASTNode e = it.next()
-			var boolean currentIncludesWhiteSpace = e instanceof TextElement
+
+			var boolean currentIncludesWhiteSpace = (e instanceof TextElement)
 			if (previousRequiresNewLine && currentIncludesWhiteSpace) {
 				appendToBuffer("\n * ")
 			}
 			previousRequiresNewLine = currentIncludesWhiteSpace
-			if (previousRequiresWhiteSpace && currentIncludesWhiteSpace) {
+			if (previousRequiresWhiteSpace && !currentIncludesWhiteSpace) {
 				appendToBuffer(" ")
 			}
 			e.accept(this)
-			previousRequiresWhiteSpace = currentIncludesWhiteSpace && e instanceof TagElement
+			previousRequiresWhiteSpace = !currentIncludesWhiteSpace && !(e instanceof TagElement)
 		}
 		if (node.isNested()) {
 			appendToBuffer("}")
@@ -1052,12 +1086,12 @@ class JavaASTFlattener extends ASTVisitor {
 			node.getJavadoc().accept(this)
 		}
 		appendModifieres(node, node.modifiers())
-		this.fBuffer.append("annotation ")
+		appendToBuffer("annotation ")
 		node.getName().accept(this)
-		this.fBuffer.append(" {")
+		appendToBuffer(" {")
 		appendLineWrapToBuffer
 		node.bodyDeclarations().appendAll
-		this.fBuffer.append("}")
+		appendToBuffer("}")
 		return false
 	}
 
@@ -1067,10 +1101,10 @@ class JavaASTFlattener extends ASTVisitor {
 		}
 		appendModifieres(node, node.modifiers())
 		node.getType().accept(this)
-		this.fBuffer.append(" ")
+		appendToBuffer(" ")
 		node.getName().accept(this)
 		if (node.getDefault() != null) {
-			this.fBuffer.append(" = ")
+			appendToBuffer(" = ")
 			node.getDefault().accept(this)
 		}
 		appendLineWrapToBuffer
@@ -1078,9 +1112,9 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	@Override override boolean visit(AnonymousClassDeclaration node) {
-		this.fBuffer.append("{")
+		appendToBuffer("{")
 		node.bodyDeclarations().appendAll
-		this.fBuffer.append("}")
+		appendToBuffer("}")
 		return false
 	}
 
@@ -1091,7 +1125,7 @@ class JavaASTFlattener extends ASTVisitor {
 		node.index.accept(this)
 		appendSpaceToBuffer
 		node.array.accept(this)
-		this.fBuffer.append(".get(_readIndex)}")
+		appendToBuffer(".get(_readIndex)}")
 		return false
 	}
 
@@ -1118,23 +1152,23 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	@Override override boolean visit(ArrayInitializer node) {
-		this.fBuffer.append("#[")
+		appendToBuffer("#[")
 		node.expressions().appendAllSeparatedByComma
-		this.fBuffer.append("]")
+		appendToBuffer("]")
 		return false
 	}
 
 	@Override override boolean visit(ArrayType node) {
 		node.getComponentType().accept(this)
-		this.fBuffer.append("[]")
+		appendToBuffer("[]")
 		return false
 	}
 
 	@Override override boolean visit(AssertStatement node) {
-		this.fBuffer.append("assert ")
+		appendToBuffer("assert ")
 		node.getExpression().accept(this)
 		if (node.getMessage() != null) {
-			this.fBuffer.append(" : ")
+			appendToBuffer(" : ")
 			node.getMessage().accept(this)
 		}
 		appendLineWrapToBuffer
@@ -1142,9 +1176,9 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	@Override override boolean visit(BreakStatement node) {
-		this.fBuffer.append("/* FIXME unsupported BreakStatement: break ")
+		appendToBuffer("/* FIXME unsupported BreakStatement: break ")
 		if (node.getLabel() != null) {
-			this.fBuffer.append(" ")
+			appendToBuffer(" ")
 			node.getLabel().accept(this)
 		}
 		appendToBuffer("*/")
@@ -1152,9 +1186,9 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	@Override override boolean visit(CatchClause node) {
-		this.fBuffer.append("catch (")
+		appendToBuffer("catch (")
 		node.getException().accept(this)
-		this.fBuffer.append(") ")
+		appendToBuffer(") ")
 		node.getBody().accept(this)
 		return false
 	}
@@ -1163,30 +1197,30 @@ class JavaASTFlattener extends ASTVisitor {
 		if (!node.typeArguments().isEmpty()) {
 			appendTypeParameters(node.typeArguments())
 		}
-		this.fBuffer.append("this(")
+		appendToBuffer("this(")
 		node.arguments().appendAllSeparatedByComma
-		this.fBuffer.append(")")
+		appendToBuffer(")")
 		return false
 	}
 
 	@Override override boolean visit(ContinueStatement node) {
-		this.fBuffer.append("/* FIXME Unsupported continue statement: ")
+		appendToBuffer("/* FIXME Unsupported continue statement: ")
 		if (node.getLabel() != null) {
-			this.fBuffer.append(" ")
+			appendToBuffer(" ")
 			node.getLabel().accept(this)
 		}
-		this.fBuffer.append(";")
+		appendToBuffer(";")
 		appendToBuffer("*/")
 		appendLineWrapToBuffer
 		return false
 	}
 
 	@Override override boolean visit(DoStatement node) {
-		this.fBuffer.append("do ")
+		appendToBuffer("do ")
 		node.getBody().accept(this)
-		this.fBuffer.append(" while (")
+		appendToBuffer(" while (")
 		node.getExpression().accept(this)
-		this.fBuffer.append(")")
+		appendToBuffer(")")
 		return false
 	}
 
@@ -1196,11 +1230,11 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	@Override override boolean visit(EnhancedForStatement node) {
-		this.fBuffer.append("for (")
+		appendToBuffer("for (")
 		node.getParameter().accept(this)
-		this.fBuffer.append(" : ")
+		appendToBuffer(" : ")
 		node.getExpression().accept(this)
-		this.fBuffer.append(") ")
+		appendToBuffer(") ")
 		node.getBody().accept(this)
 		return false
 	}
@@ -1212,9 +1246,9 @@ class JavaASTFlattener extends ASTVisitor {
 		appendModifieres(node, node.modifiers())
 		node.getName().accept(this)
 		if (!node.arguments().isEmpty()) {
-			this.fBuffer.append("(")
+			appendToBuffer("(")
 			appendAllSeparatedByComma(node.arguments())
-			this.fBuffer.append(")")
+			appendToBuffer(")")
 		}
 		if (node.getAnonymousClassDeclaration() != null) {
 			node.getAnonymousClassDeclaration().accept(this)
@@ -1227,28 +1261,28 @@ class JavaASTFlattener extends ASTVisitor {
 			node.getJavadoc().accept(this)
 		}
 		appendModifieres(node, node.modifiers())
-		this.fBuffer.append("enum ")
+		appendToBuffer("enum ")
 		node.getName().accept(this)
-		this.fBuffer.append(" ")
+		appendToBuffer(" ")
 		if (!node.superInterfaceTypes().isEmpty()) {
-			this.fBuffer.append("implements ")
+			appendToBuffer("implements ")
 			node.superInterfaceTypes().appendAllSeparatedByComma
-			this.fBuffer.append(" ")
+			appendToBuffer(" ")
 		}
-		this.fBuffer.append("{")
+		appendToBuffer("{")
 		node.enumConstants().appendAllSeparatedByComma
 
 		if (!node.bodyDeclarations().isEmpty()) {
-			this.fBuffer.append("; ")
+			appendToBuffer("; ")
 			node.bodyDeclarations().appendAll
 		}
-		this.fBuffer.append("}")
+		appendToBuffer("}")
 		return false
 	}
 
 	@Override override boolean visit(LabeledStatement node) {
 		node.getLabel().accept(this)
-		this.fBuffer.append(": ")
+		appendToBuffer(": ")
 		node.getBody().accept(this)
 		return false
 	}
@@ -1257,7 +1291,7 @@ class JavaASTFlattener extends ASTVisitor {
 		if (node.getQualifier() != null) {
 			node.getQualifier().accept(this)
 		}
-		this.fBuffer.append("#")
+		appendToBuffer("#")
 		node.getName().accept(this)
 		return false
 	}
@@ -1266,21 +1300,21 @@ class JavaASTFlattener extends ASTVisitor {
 		if (node.getQualifier() != null) {
 			node.getQualifier().accept(this)
 		}
-		this.fBuffer.append("#")
+		appendToBuffer("#")
 		node.getName().accept(this)
-		this.fBuffer.append("(")
+		appendToBuffer("(")
 		node.parameters().appendAllSeparatedByComma
-		this.fBuffer.append(")")
+		appendToBuffer(")")
 		return false
 	}
 
 	@Override override boolean visit(MethodRefParameter node) {
 		node.getType().accept(this)
 		if (node.isVarargs()) {
-			this.fBuffer.append("...")
+			appendToBuffer("...")
 		}
 		if (node.getName() != null) {
-			this.fBuffer.append(" ")
+			appendToBuffer(" ")
 			node.getName().accept(this)
 		}
 		return false
@@ -1288,36 +1322,36 @@ class JavaASTFlattener extends ASTVisitor {
 
 	@Override override boolean visit(QualifiedType node) {
 		node.getQualifier().accept(this)
-		this.fBuffer.append(".")
+		appendToBuffer(".")
 		node.getName().accept(this)
 		return false
 	}
 
 	@Override override boolean visit(SwitchCase node) {
 		if (node.isDefault()) {
-			this.fBuffer.append("default :")
+			appendToBuffer("default :")
 		} else {
-			this.fBuffer.append("case ")
+			appendToBuffer("case ")
 			node.getExpression().accept(this)
-			this.fBuffer.append(":")
+			appendToBuffer(":")
 		}
 		return false
 	}
 
 	@Override override boolean visit(SwitchStatement node) {
-		this.fBuffer.append("switch (")
+		appendToBuffer("switch (")
 		node.getExpression().accept(this)
-		this.fBuffer.append(") ")
-		this.fBuffer.append("{")
+		appendToBuffer(") ")
+		appendToBuffer("{")
 		node.statements().appendAll
-		this.fBuffer.append("}")
+		appendToBuffer("}")
 		return false
 	}
 
 	@Override override boolean visit(SynchronizedStatement node) {
-		this.fBuffer.append("synchronized (")
+		appendToBuffer("synchronized (")
 		node.getExpression().accept(this)
-		this.fBuffer.append(") ")
+		appendToBuffer(") ")
 		node.getBody().accept(this)
 		return false
 	}

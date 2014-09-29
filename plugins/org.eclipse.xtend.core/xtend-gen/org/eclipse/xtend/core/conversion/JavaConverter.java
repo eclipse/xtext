@@ -82,6 +82,11 @@ public class JavaConverter {
     return this.toXtend(unitName, javaSrc, ASTParser.K_COMPILATION_UNIT);
   }
   
+  /**
+   * @param unitName some CU name e.g. Clazz. See org.eclipse.jdt.core.dom.ASTParser.setUnitName(String)
+   * @param javaSrc Java source code as String
+   * @param javaSourceKind ASTParser.K_COMPILATION_UNIT || ASTParser.K_CLASS_BODY_DECLARATION
+   */
   public JavaConverter.ConversionResult toXtend(final String unitName, final String javaSrc, final int javaSourceKind) {
     final ASTParser parser = ASTParser.newParser(AST.JLS3);
     final Hashtable options = JavaCore.getOptions();

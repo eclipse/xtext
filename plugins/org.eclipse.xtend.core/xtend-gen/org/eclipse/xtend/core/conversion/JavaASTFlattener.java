@@ -242,19 +242,19 @@ public class JavaASTFlattener extends ASTVisitor {
       this.appendSpaceToBuffer();
       Expression _array = ((ArrayAccess)leftSide).getArray();
       _array.accept(this);
-      this.fBuffer.append(".set");
-      this.fBuffer.append("(_tempIndex,");
+      this.appendToBuffer(".set");
+      this.appendToBuffer("(_tempIndex,");
       Expression _rightHandSide = node.getRightHandSide();
       _rightHandSide.accept(this);
-      this.fBuffer.append(")");
+      this.appendToBuffer(")");
       boolean _needsReturnValue = this.needsReturnValue(node);
       if (_needsReturnValue) {
         Expression _array_1 = ((ArrayAccess)leftSide).getArray();
         _array_1.accept(this);
-        this.fBuffer.append(".get");
-        this.fBuffer.append("(_tempIndex)");
+        this.appendToBuffer(".get");
+        this.appendToBuffer("(_tempIndex)");
       }
-      this.fBuffer.append("}");
+      this.appendToBuffer("}");
     } else {
       leftSide.accept(this);
       Assignment.Operator _operator = node.getOperator();
@@ -1021,30 +1021,96 @@ public class JavaASTFlattener extends ASTVisitor {
   }
   
   public boolean visit(final InfixExpression node) {
-    Expression _leftOperand = node.getLeftOperand();
-    _leftOperand.accept(this);
-    this.appendToBuffer(" ");
+    boolean _or = false;
+    boolean _and = false;
     InfixExpression.Operator _operator = node.getOperator();
-    String _string = _operator.toString();
-    this.appendToBuffer(_string);
-    this.appendToBuffer(" ");
-    Expression _rightOperand = node.getRightOperand();
-    _rightOperand.accept(this);
-    final List extendedOperands = node.extendedOperands();
-    int _size = extendedOperands.size();
-    boolean _notEquals = (_size != 0);
-    if (_notEquals) {
-      this.appendToBuffer(" ");
-      final Procedure1<Expression> _function = new Procedure1<Expression>() {
-        public void apply(final Expression e) {
-          InfixExpression.Operator _operator = node.getOperator();
-          String _string = _operator.toString();
-          StringBuffer _appendToBuffer = JavaASTFlattener.this.appendToBuffer(_string);
-          _appendToBuffer.append(" ");
-          e.accept(JavaASTFlattener.this);
+    boolean _equals = Objects.equal(_operator, InfixExpression.Operator.PLUS);
+    if (!_equals) {
+      _and = false;
+    } else {
+      _and = ((node.getLeftOperand() instanceof StringLiteral) || (node.getRightOperand() instanceof StringLiteral));
+    }
+    if (_and) {
+      _or = true;
+    } else {
+      List _extendedOperands = node.extendedOperands();
+      final Function1<Object, Boolean> _function = new Function1<Object, Boolean>() {
+        public Boolean apply(final Object e) {
+          return Boolean.valueOf((e instanceof StringLiteral));
         }
       };
-      IterableExtensions.<Expression>forEach(extendedOperands, _function);
+      boolean _exists = IterableExtensions.<Object>exists(_extendedOperands, _function);
+      _or = _exists;
+    }
+    if (_or) {
+      this.appendToBuffer("\'\'\'");
+      Expression _leftOperand = node.getLeftOperand();
+      if ((_leftOperand instanceof StringLiteral)) {
+        Expression _leftOperand_1 = node.getLeftOperand();
+        String _literalValue = ((StringLiteral) _leftOperand_1).getLiteralValue();
+        this.appendToBuffer(_literalValue);
+      } else {
+        this.appendToBuffer("«");
+        Expression _leftOperand_2 = node.getLeftOperand();
+        _leftOperand_2.accept(this);
+        this.appendToBuffer("»");
+      }
+      Expression _rightOperand = node.getRightOperand();
+      if ((_rightOperand instanceof StringLiteral)) {
+        Expression _rightOperand_1 = node.getRightOperand();
+        String _literalValue_1 = ((StringLiteral) _rightOperand_1).getLiteralValue();
+        this.appendToBuffer(_literalValue_1);
+      } else {
+        this.appendToBuffer("«");
+        Expression _rightOperand_2 = node.getRightOperand();
+        _rightOperand_2.accept(this);
+        this.appendToBuffer("»");
+      }
+      final List extendedOperands = node.extendedOperands();
+      int _size = extendedOperands.size();
+      boolean _notEquals = (_size != 0);
+      if (_notEquals) {
+        final Procedure1<Expression> _function_1 = new Procedure1<Expression>() {
+          public void apply(final Expression e) {
+            if ((e instanceof StringLiteral)) {
+              String _literalValue = ((StringLiteral)e).getLiteralValue();
+              JavaASTFlattener.this.appendToBuffer(_literalValue);
+            } else {
+              JavaASTFlattener.this.appendToBuffer("«");
+              e.accept(JavaASTFlattener.this);
+              JavaASTFlattener.this.appendToBuffer("»");
+            }
+          }
+        };
+        IterableExtensions.<Expression>forEach(extendedOperands, _function_1);
+      }
+      this.appendToBuffer("\'\'\'");
+    } else {
+      Expression _leftOperand_3 = node.getLeftOperand();
+      _leftOperand_3.accept(this);
+      this.appendToBuffer(" ");
+      InfixExpression.Operator _operator_1 = node.getOperator();
+      String _string = _operator_1.toString();
+      this.appendToBuffer(_string);
+      this.appendToBuffer(" ");
+      Expression _rightOperand_3 = node.getRightOperand();
+      _rightOperand_3.accept(this);
+      final List extendedOperands_1 = node.extendedOperands();
+      int _size_1 = extendedOperands_1.size();
+      boolean _notEquals_1 = (_size_1 != 0);
+      if (_notEquals_1) {
+        this.appendToBuffer(" ");
+        final Procedure1<Expression> _function_2 = new Procedure1<Expression>() {
+          public void apply(final Expression e) {
+            InfixExpression.Operator _operator = node.getOperator();
+            String _string = _operator.toString();
+            StringBuffer _appendToBuffer = JavaASTFlattener.this.appendToBuffer(_string);
+            _appendToBuffer.append(" ");
+            e.accept(JavaASTFlattener.this);
+          }
+        };
+        IterableExtensions.<Expression>forEach(extendedOperands_1, _function_2);
+      }
     }
     return false;
   }
@@ -1281,7 +1347,7 @@ public class JavaASTFlattener extends ASTVisitor {
     if (_notEquals) {
       Expression _expression_1 = node.getExpression();
       _expression_1.accept(this);
-      this.fBuffer.append(".");
+      this.appendToBuffer(".");
     }
     List _typeArguments = node.typeArguments();
     boolean _isEmpty = _typeArguments.isEmpty();
@@ -1290,10 +1356,10 @@ public class JavaASTFlattener extends ASTVisitor {
       List _typeArguments_1 = node.typeArguments();
       this.appendTypeParameters(_typeArguments_1);
     }
-    this.fBuffer.append("super(");
+    this.appendToBuffer("super(");
     List _arguments = node.arguments();
     this.appendAllSeparatedByComma(_arguments);
-    this.fBuffer.append(")");
+    this.appendToBuffer(")");
     return false;
   }
   
@@ -1304,9 +1370,9 @@ public class JavaASTFlattener extends ASTVisitor {
     if (_notEquals) {
       Name _qualifier_1 = node.getQualifier();
       _qualifier_1.accept(this);
-      this.fBuffer.append(".");
+      this.appendToBuffer(".");
     }
-    this.fBuffer.append("super.");
+    this.appendToBuffer("super.");
     SimpleName _name = node.getName();
     _name.accept(this);
     return false;
@@ -1319,9 +1385,9 @@ public class JavaASTFlattener extends ASTVisitor {
     if (_notEquals) {
       Name _qualifier_1 = node.getQualifier();
       _qualifier_1.accept(this);
-      this.fBuffer.append(".");
+      this.appendToBuffer(".");
     }
-    this.fBuffer.append("super.");
+    this.appendToBuffer("super.");
     List _typeArguments = node.typeArguments();
     boolean _isEmpty = _typeArguments.isEmpty();
     boolean _not = (!_isEmpty);
@@ -1331,10 +1397,10 @@ public class JavaASTFlattener extends ASTVisitor {
     }
     SimpleName _name = node.getName();
     _name.accept(this);
-    this.fBuffer.append("(");
+    this.appendToBuffer("(");
     List _arguments = node.arguments();
     this.appendAllSeparatedByComma(_arguments);
-    this.fBuffer.append(")");
+    this.appendToBuffer(")");
     return false;
   }
   
@@ -1362,11 +1428,11 @@ public class JavaASTFlattener extends ASTVisitor {
           this.appendToBuffer("\n * ");
         }
         previousRequiresNewLine = currentIncludesWhiteSpace;
-        if ((previousRequiresWhiteSpace && currentIncludesWhiteSpace)) {
+        if ((previousRequiresWhiteSpace && (!currentIncludesWhiteSpace))) {
           this.appendToBuffer(" ");
         }
         e.accept(this);
-        previousRequiresWhiteSpace = (currentIncludesWhiteSpace && (e instanceof TagElement));
+        previousRequiresWhiteSpace = ((!currentIncludesWhiteSpace) && (!(e instanceof TagElement)));
       }
     }
     boolean _isNested_1 = node.isNested();
@@ -1532,14 +1598,14 @@ public class JavaASTFlattener extends ASTVisitor {
     }
     List _modifiers = node.modifiers();
     this.appendModifieres(node, _modifiers);
-    this.fBuffer.append("annotation ");
+    this.appendToBuffer("annotation ");
     SimpleName _name = node.getName();
     _name.accept(this);
-    this.fBuffer.append(" {");
+    this.appendToBuffer(" {");
     this.appendLineWrapToBuffer();
     List _bodyDeclarations = node.bodyDeclarations();
     this.appendAll(_bodyDeclarations);
-    this.fBuffer.append("}");
+    this.appendToBuffer("}");
     return false;
   }
   
@@ -1555,13 +1621,13 @@ public class JavaASTFlattener extends ASTVisitor {
     this.appendModifieres(node, _modifiers);
     Type _type = node.getType();
     _type.accept(this);
-    this.fBuffer.append(" ");
+    this.appendToBuffer(" ");
     SimpleName _name = node.getName();
     _name.accept(this);
     Expression _default = node.getDefault();
     boolean _notEquals_1 = (!Objects.equal(_default, null));
     if (_notEquals_1) {
-      this.fBuffer.append(" = ");
+      this.appendToBuffer(" = ");
       Expression _default_1 = node.getDefault();
       _default_1.accept(this);
     }
@@ -1571,10 +1637,10 @@ public class JavaASTFlattener extends ASTVisitor {
   
   @Override
   public boolean visit(final AnonymousClassDeclaration node) {
-    this.fBuffer.append("{");
+    this.appendToBuffer("{");
     List _bodyDeclarations = node.bodyDeclarations();
     this.appendAll(_bodyDeclarations);
-    this.fBuffer.append("}");
+    this.appendToBuffer("}");
     return false;
   }
   
@@ -1586,7 +1652,7 @@ public class JavaASTFlattener extends ASTVisitor {
     this.appendSpaceToBuffer();
     Expression _array = node.getArray();
     _array.accept(this);
-    this.fBuffer.append(".get(_readIndex)}");
+    this.appendToBuffer(".get(_readIndex)}");
     return false;
   }
   
@@ -1625,10 +1691,10 @@ public class JavaASTFlattener extends ASTVisitor {
   
   @Override
   public boolean visit(final ArrayInitializer node) {
-    this.fBuffer.append("#[");
+    this.appendToBuffer("#[");
     List _expressions = node.expressions();
     this.appendAllSeparatedByComma(_expressions);
-    this.fBuffer.append("]");
+    this.appendToBuffer("]");
     return false;
   }
   
@@ -1636,19 +1702,19 @@ public class JavaASTFlattener extends ASTVisitor {
   public boolean visit(final ArrayType node) {
     Type _componentType = node.getComponentType();
     _componentType.accept(this);
-    this.fBuffer.append("[]");
+    this.appendToBuffer("[]");
     return false;
   }
   
   @Override
   public boolean visit(final AssertStatement node) {
-    this.fBuffer.append("assert ");
+    this.appendToBuffer("assert ");
     Expression _expression = node.getExpression();
     _expression.accept(this);
     Expression _message = node.getMessage();
     boolean _notEquals = (!Objects.equal(_message, null));
     if (_notEquals) {
-      this.fBuffer.append(" : ");
+      this.appendToBuffer(" : ");
       Expression _message_1 = node.getMessage();
       _message_1.accept(this);
     }
@@ -1658,11 +1724,11 @@ public class JavaASTFlattener extends ASTVisitor {
   
   @Override
   public boolean visit(final BreakStatement node) {
-    this.fBuffer.append("/* FIXME unsupported BreakStatement: break ");
+    this.appendToBuffer("/* FIXME unsupported BreakStatement: break ");
     SimpleName _label = node.getLabel();
     boolean _notEquals = (!Objects.equal(_label, null));
     if (_notEquals) {
-      this.fBuffer.append(" ");
+      this.appendToBuffer(" ");
       SimpleName _label_1 = node.getLabel();
       _label_1.accept(this);
     }
@@ -1672,10 +1738,10 @@ public class JavaASTFlattener extends ASTVisitor {
   
   @Override
   public boolean visit(final CatchClause node) {
-    this.fBuffer.append("catch (");
+    this.appendToBuffer("catch (");
     SingleVariableDeclaration _exception = node.getException();
     _exception.accept(this);
-    this.fBuffer.append(") ");
+    this.appendToBuffer(") ");
     Block _body = node.getBody();
     _body.accept(this);
     return false;
@@ -1690,24 +1756,24 @@ public class JavaASTFlattener extends ASTVisitor {
       List _typeArguments_1 = node.typeArguments();
       this.appendTypeParameters(_typeArguments_1);
     }
-    this.fBuffer.append("this(");
+    this.appendToBuffer("this(");
     List _arguments = node.arguments();
     this.appendAllSeparatedByComma(_arguments);
-    this.fBuffer.append(")");
+    this.appendToBuffer(")");
     return false;
   }
   
   @Override
   public boolean visit(final ContinueStatement node) {
-    this.fBuffer.append("/* FIXME Unsupported continue statement: ");
+    this.appendToBuffer("/* FIXME Unsupported continue statement: ");
     SimpleName _label = node.getLabel();
     boolean _notEquals = (!Objects.equal(_label, null));
     if (_notEquals) {
-      this.fBuffer.append(" ");
+      this.appendToBuffer(" ");
       SimpleName _label_1 = node.getLabel();
       _label_1.accept(this);
     }
-    this.fBuffer.append(";");
+    this.appendToBuffer(";");
     this.appendToBuffer("*/");
     this.appendLineWrapToBuffer();
     return false;
@@ -1715,13 +1781,13 @@ public class JavaASTFlattener extends ASTVisitor {
   
   @Override
   public boolean visit(final DoStatement node) {
-    this.fBuffer.append("do ");
+    this.appendToBuffer("do ");
     Statement _body = node.getBody();
     _body.accept(this);
-    this.fBuffer.append(" while (");
+    this.appendToBuffer(" while (");
     Expression _expression = node.getExpression();
     _expression.accept(this);
-    this.fBuffer.append(")");
+    this.appendToBuffer(")");
     return false;
   }
   
@@ -1733,13 +1799,13 @@ public class JavaASTFlattener extends ASTVisitor {
   
   @Override
   public boolean visit(final EnhancedForStatement node) {
-    this.fBuffer.append("for (");
+    this.appendToBuffer("for (");
     SingleVariableDeclaration _parameter = node.getParameter();
     _parameter.accept(this);
-    this.fBuffer.append(" : ");
+    this.appendToBuffer(" : ");
     Expression _expression = node.getExpression();
     _expression.accept(this);
-    this.fBuffer.append(") ");
+    this.appendToBuffer(") ");
     Statement _body = node.getBody();
     _body.accept(this);
     return false;
@@ -1761,10 +1827,10 @@ public class JavaASTFlattener extends ASTVisitor {
     boolean _isEmpty = _arguments.isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
-      this.fBuffer.append("(");
+      this.appendToBuffer("(");
       List _arguments_1 = node.arguments();
       this.appendAllSeparatedByComma(_arguments_1);
-      this.fBuffer.append(")");
+      this.appendToBuffer(")");
     }
     AnonymousClassDeclaration _anonymousClassDeclaration = node.getAnonymousClassDeclaration();
     boolean _notEquals_1 = (!Objects.equal(_anonymousClassDeclaration, null));
@@ -1785,31 +1851,31 @@ public class JavaASTFlattener extends ASTVisitor {
     }
     List _modifiers = node.modifiers();
     this.appendModifieres(node, _modifiers);
-    this.fBuffer.append("enum ");
+    this.appendToBuffer("enum ");
     SimpleName _name = node.getName();
     _name.accept(this);
-    this.fBuffer.append(" ");
+    this.appendToBuffer(" ");
     List _superInterfaceTypes = node.superInterfaceTypes();
     boolean _isEmpty = _superInterfaceTypes.isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
-      this.fBuffer.append("implements ");
+      this.appendToBuffer("implements ");
       List _superInterfaceTypes_1 = node.superInterfaceTypes();
       this.appendAllSeparatedByComma(_superInterfaceTypes_1);
-      this.fBuffer.append(" ");
+      this.appendToBuffer(" ");
     }
-    this.fBuffer.append("{");
+    this.appendToBuffer("{");
     List _enumConstants = node.enumConstants();
     this.appendAllSeparatedByComma(_enumConstants);
     List _bodyDeclarations = node.bodyDeclarations();
     boolean _isEmpty_1 = _bodyDeclarations.isEmpty();
     boolean _not_1 = (!_isEmpty_1);
     if (_not_1) {
-      this.fBuffer.append("; ");
+      this.appendToBuffer("; ");
       List _bodyDeclarations_1 = node.bodyDeclarations();
       this.appendAll(_bodyDeclarations_1);
     }
-    this.fBuffer.append("}");
+    this.appendToBuffer("}");
     return false;
   }
   
@@ -1817,7 +1883,7 @@ public class JavaASTFlattener extends ASTVisitor {
   public boolean visit(final LabeledStatement node) {
     SimpleName _label = node.getLabel();
     _label.accept(this);
-    this.fBuffer.append(": ");
+    this.appendToBuffer(": ");
     Statement _body = node.getBody();
     _body.accept(this);
     return false;
@@ -1831,7 +1897,7 @@ public class JavaASTFlattener extends ASTVisitor {
       Name _qualifier_1 = node.getQualifier();
       _qualifier_1.accept(this);
     }
-    this.fBuffer.append("#");
+    this.appendToBuffer("#");
     SimpleName _name = node.getName();
     _name.accept(this);
     return false;
@@ -1845,13 +1911,13 @@ public class JavaASTFlattener extends ASTVisitor {
       Name _qualifier_1 = node.getQualifier();
       _qualifier_1.accept(this);
     }
-    this.fBuffer.append("#");
+    this.appendToBuffer("#");
     SimpleName _name = node.getName();
     _name.accept(this);
-    this.fBuffer.append("(");
+    this.appendToBuffer("(");
     List _parameters = node.parameters();
     this.appendAllSeparatedByComma(_parameters);
-    this.fBuffer.append(")");
+    this.appendToBuffer(")");
     return false;
   }
   
@@ -1861,12 +1927,12 @@ public class JavaASTFlattener extends ASTVisitor {
     _type.accept(this);
     boolean _isVarargs = node.isVarargs();
     if (_isVarargs) {
-      this.fBuffer.append("...");
+      this.appendToBuffer("...");
     }
     SimpleName _name = node.getName();
     boolean _notEquals = (!Objects.equal(_name, null));
     if (_notEquals) {
-      this.fBuffer.append(" ");
+      this.appendToBuffer(" ");
       SimpleName _name_1 = node.getName();
       _name_1.accept(this);
     }
@@ -1877,7 +1943,7 @@ public class JavaASTFlattener extends ASTVisitor {
   public boolean visit(final QualifiedType node) {
     Type _qualifier = node.getQualifier();
     _qualifier.accept(this);
-    this.fBuffer.append(".");
+    this.appendToBuffer(".");
     SimpleName _name = node.getName();
     _name.accept(this);
     return false;
@@ -1887,35 +1953,35 @@ public class JavaASTFlattener extends ASTVisitor {
   public boolean visit(final SwitchCase node) {
     boolean _isDefault = node.isDefault();
     if (_isDefault) {
-      this.fBuffer.append("default :");
+      this.appendToBuffer("default :");
     } else {
-      this.fBuffer.append("case ");
+      this.appendToBuffer("case ");
       Expression _expression = node.getExpression();
       _expression.accept(this);
-      this.fBuffer.append(":");
+      this.appendToBuffer(":");
     }
     return false;
   }
   
   @Override
   public boolean visit(final SwitchStatement node) {
-    this.fBuffer.append("switch (");
+    this.appendToBuffer("switch (");
     Expression _expression = node.getExpression();
     _expression.accept(this);
-    this.fBuffer.append(") ");
-    this.fBuffer.append("{");
+    this.appendToBuffer(") ");
+    this.appendToBuffer("{");
     List _statements = node.statements();
     this.appendAll(_statements);
-    this.fBuffer.append("}");
+    this.appendToBuffer("}");
     return false;
   }
   
   @Override
   public boolean visit(final SynchronizedStatement node) {
-    this.fBuffer.append("synchronized (");
+    this.appendToBuffer("synchronized (");
     Expression _expression = node.getExpression();
     _expression.accept(this);
-    this.fBuffer.append(") ");
+    this.appendToBuffer(") ");
     Block _body = node.getBody();
     _body.accept(this);
     return false;
