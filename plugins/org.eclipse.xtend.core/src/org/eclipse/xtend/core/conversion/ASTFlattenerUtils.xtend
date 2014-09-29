@@ -9,19 +9,23 @@ package org.eclipse.xtend.core.conversion
 
 import org.eclipse.jdt.core.dom.ASTNode
 import org.eclipse.jdt.core.dom.Annotation
+import org.eclipse.jdt.core.dom.Assignment
 import org.eclipse.jdt.core.dom.Block
 import org.eclipse.jdt.core.dom.FieldAccess
 import org.eclipse.jdt.core.dom.FieldDeclaration
 import org.eclipse.jdt.core.dom.IExtendedModifier
+import org.eclipse.jdt.core.dom.IMethodBinding
 import org.eclipse.jdt.core.dom.ITypeBinding
 import org.eclipse.jdt.core.dom.MethodDeclaration
 import org.eclipse.jdt.core.dom.Modifier
+import org.eclipse.jdt.core.dom.ReturnStatement
 import org.eclipse.jdt.core.dom.SimpleName
+import org.eclipse.jdt.core.dom.Statement
+import org.eclipse.jdt.core.dom.StringLiteral
 import org.eclipse.jdt.core.dom.TypeDeclaration
 import org.eclipse.jdt.core.dom.TypeDeclarationStatement
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement
-import org.eclipse.jdt.core.dom.IMethodBinding
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -106,4 +110,21 @@ class ASTFlattenerUtils {
 			( parent instanceof VariableDeclarationFragment && parent.parent instanceof FieldDeclaration))
 	}
 
+	def boolean needsReturnValue(Assignment node) {
+		(node.parent != null) && (!(node.parent instanceof Statement) || (node.parent instanceof ReturnStatement))
+	}
+
+	def richTextValue(StringLiteral literal) {
+		val escVal = literal.escapedValue
+		val value = escVal.substring(1, escVal.length - 1)
+
+		// some one may use opening « and closing » in different string literals 
+		var result = value.replaceAll("«", "«\"«\"» ")
+		result = result.replaceAll("((?!\").)(»)", "$1«\"$2\"»")
+		result = result.replaceAll("(''')", "«\"$1\"»")
+		if(result.endsWith("'")) {
+			result = result.concat("«»")
+		}
+		return result
+	}
 }

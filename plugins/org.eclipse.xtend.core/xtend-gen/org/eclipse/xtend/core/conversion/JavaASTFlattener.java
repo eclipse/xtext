@@ -247,7 +247,7 @@ public class JavaASTFlattener extends ASTVisitor {
       Expression _rightHandSide = node.getRightHandSide();
       _rightHandSide.accept(this);
       this.appendToBuffer(")");
-      boolean _needsReturnValue = this.needsReturnValue(node);
+      boolean _needsReturnValue = this._aSTFlattenerUtils.needsReturnValue(node);
       if (_needsReturnValue) {
         Expression _array_1 = ((ArrayAccess)leftSide).getArray();
         _array_1.accept(this);
@@ -264,18 +264,6 @@ public class JavaASTFlattener extends ASTVisitor {
       _rightHandSide_1.accept(this);
     }
     return false;
-  }
-  
-  private boolean needsReturnValue(final Assignment node) {
-    boolean _and = false;
-    ASTNode _parent = node.getParent();
-    boolean _notEquals = (!Objects.equal(_parent, null));
-    if (!_notEquals) {
-      _and = false;
-    } else {
-      _and = ((!(node.getParent() instanceof Statement)) || (node.getParent() instanceof ReturnStatement));
-    }
-    return _and;
   }
   
   public boolean visit(final MarkerAnnotation node) {
@@ -1047,8 +1035,8 @@ public class JavaASTFlattener extends ASTVisitor {
       Expression _leftOperand = node.getLeftOperand();
       if ((_leftOperand instanceof StringLiteral)) {
         Expression _leftOperand_1 = node.getLeftOperand();
-        String _literalValue = ((StringLiteral) _leftOperand_1).getLiteralValue();
-        this.appendToBuffer(_literalValue);
+        String _richTextValue = this._aSTFlattenerUtils.richTextValue(((StringLiteral) _leftOperand_1));
+        this.appendToBuffer(_richTextValue);
       } else {
         this.appendToBuffer("«");
         Expression _leftOperand_2 = node.getLeftOperand();
@@ -1058,8 +1046,8 @@ public class JavaASTFlattener extends ASTVisitor {
       Expression _rightOperand = node.getRightOperand();
       if ((_rightOperand instanceof StringLiteral)) {
         Expression _rightOperand_1 = node.getRightOperand();
-        String _literalValue_1 = ((StringLiteral) _rightOperand_1).getLiteralValue();
-        this.appendToBuffer(_literalValue_1);
+        String _richTextValue_1 = this._aSTFlattenerUtils.richTextValue(((StringLiteral) _rightOperand_1));
+        this.appendToBuffer(_richTextValue_1);
       } else {
         this.appendToBuffer("«");
         Expression _rightOperand_2 = node.getRightOperand();
@@ -1073,8 +1061,8 @@ public class JavaASTFlattener extends ASTVisitor {
         final Procedure1<Expression> _function_1 = new Procedure1<Expression>() {
           public void apply(final Expression e) {
             if ((e instanceof StringLiteral)) {
-              String _literalValue = ((StringLiteral)e).getLiteralValue();
-              JavaASTFlattener.this.appendToBuffer(_literalValue);
+              String _richTextValue = JavaASTFlattener.this._aSTFlattenerUtils.richTextValue(((StringLiteral)e));
+              JavaASTFlattener.this.appendToBuffer(_richTextValue);
             } else {
               JavaASTFlattener.this.appendToBuffer("«");
               e.accept(JavaASTFlattener.this);

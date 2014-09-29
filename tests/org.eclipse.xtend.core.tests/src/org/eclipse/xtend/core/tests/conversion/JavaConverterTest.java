@@ -354,6 +354,49 @@ public class JavaConverterTest extends AbstractXtendTestCase {
 
 	}
 
+	@Test
+	public void testRichStringSpecialCase() throws Exception {
+		XtendClass clazz = toValidXtendClass("class Z { String richTxt = \"a\" +\"\" +\"'\" +\"s \" + \"''' no «'foo'.length» side-effect '''\";}");
+		assertNotNull(clazz);
+		XtendField xtendMember = (XtendField) clazz.getMembers().get(0);
+		assertEquals("richTxt", xtendMember.getName());
+		assertTrue(xtendMember.getInitialValue() instanceof RichString);
+
+		assertEquals(
+				"package String richTxt='''a«\"'''\"» no «\"«\"» 'foo'.length«\"»\"» side-effect «\"'''\"»'''",
+				j2x.toXtend("Clazz", "String richTxt = \"a\" + \"''' no «'foo'.length» side-effect '''\";",
+						ASTParser.K_CLASS_BODY_DECLARATIONS).getXtendCode().trim());
+
+	}
+
+	@Test
+	public void testRichStringSpecialCase2() throws Exception {
+		XtendClass clazz = toValidXtendClass("class Z { String richTxt = \"test\" + \"''' «FOR a: '123'.toCharArray SEPARATOR ',\\n  \\t'»\\n"
+				+ "      a\\n" + " «ENDFOR»'''\";}");
+		assertNotNull(clazz);
+		XtendField xtendMember = (XtendField) clazz.getMembers().get(0);
+		assertEquals("richTxt", xtendMember.getName());
+		assertTrue(xtendMember.getInitialValue() instanceof RichString);
+
+		assertEquals("package String richTxt='''test«\"'''\"» «\"«\"» FOR a: '123'.toCharArray SEPARATOR ',\\n  \\t'«\"»\"»\\n      a\\n «\"«\"» ENDFOR«\"»\"»«\"'''\"»'''", j2x
+				.toXtend(
+						"Clazz",
+						"String richTxt = \"test\" + \"''' «FOR a: '123'.toCharArray SEPARATOR ',\\n  \\t'»\\n"
+								+ "      a\\n" + " «ENDFOR»'''\";", ASTParser.K_CLASS_BODY_DECLARATIONS).getXtendCode()
+				.trim());
+
+	}
+	
+	@Test
+	public void testRichStringSpecialCase3() throws Exception {
+		XtendClass clazz = toValidXtendClass("class Z { String richTxt = \"x(p1)} def dispatch x(int s) {'int'} def dispatch x(boolean s)\"+\" {'boolean'} def dispatch x(double s) {'double'\";}");
+		assertNotNull(clazz);
+		XtendField xtendMember = (XtendField) clazz.getMembers().get(0);
+		assertEquals("richTxt", xtendMember.getName());
+		assertTrue(xtendMember.getInitialValue() instanceof RichString);
+		
+	}
+
 	private XtendClass toValidXtendClass(String javaCode) throws Exception {
 		return (XtendClass) toValidTypeDeclaration("Clazz", javaCode);
 	}
@@ -367,9 +410,9 @@ public class JavaConverterTest extends AbstractXtendTestCase {
 	private XtendFile toValidFile(String unitName, String javaCode) throws Exception {
 		ConversionResult conversionResult = j2x.toXtend(unitName, javaCode);
 		String xtendCode = conversionResult.getXtendCode();
-//		System.out.println(xtendCode);
+		System.out.println(xtendCode);
 		for (String problem : conversionResult.getProblems()) {
-			System.err.println(problem);
+			System.out.println("ERROR: " + problem);
 		}
 		return file(xtendCode, true);
 	}
