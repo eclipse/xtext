@@ -12,6 +12,7 @@ import com.google.common.collect.Iterables;
 import java.util.List;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.Annotation;
+import org.eclipse.jdt.core.dom.Assignment;
 import org.eclipse.jdt.core.dom.Block;
 import org.eclipse.jdt.core.dom.FieldAccess;
 import org.eclipse.jdt.core.dom.FieldDeclaration;
@@ -21,7 +22,10 @@ import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.Modifier;
 import org.eclipse.jdt.core.dom.Name;
+import org.eclipse.jdt.core.dom.ReturnStatement;
 import org.eclipse.jdt.core.dom.SimpleName;
+import org.eclipse.jdt.core.dom.Statement;
+import org.eclipse.jdt.core.dom.StringLiteral;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.eclipse.jdt.core.dom.TypeDeclarationStatement;
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
@@ -230,5 +234,32 @@ public class ASTFlattenerUtils {
       _or = ((it.getParent() instanceof VariableDeclarationFragment) && (it.getParent().getParent() instanceof FieldDeclaration));
     }
     return _or;
+  }
+  
+  public boolean needsReturnValue(final Assignment node) {
+    boolean _and = false;
+    ASTNode _parent = node.getParent();
+    boolean _notEquals = (!Objects.equal(_parent, null));
+    if (!_notEquals) {
+      _and = false;
+    } else {
+      _and = ((!(node.getParent() instanceof Statement)) || (node.getParent() instanceof ReturnStatement));
+    }
+    return _and;
+  }
+  
+  public String richTextValue(final StringLiteral literal) {
+    final String value = literal.getLiteralValue();
+    String result = value.replaceAll("«", "«\"«\"» ");
+    String _replaceAll = result.replaceAll("((?!\").)(»)", "$1«\"$2\"»");
+    result = _replaceAll;
+    String _replaceAll_1 = result.replaceAll("(\'\'\')", "«\"$1\"»");
+    result = _replaceAll_1;
+    boolean _endsWith = result.endsWith("\'");
+    if (_endsWith) {
+      String _concat = result.concat("«»");
+      result = _concat;
+    }
+    return result;
   }
 }

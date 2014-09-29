@@ -81,7 +81,6 @@ import org.eclipse.jdt.core.dom.SimpleName
 import org.eclipse.jdt.core.dom.SimpleType
 import org.eclipse.jdt.core.dom.SingleMemberAnnotation
 import org.eclipse.jdt.core.dom.SingleVariableDeclaration
-import org.eclipse.jdt.core.dom.Statement
 import org.eclipse.jdt.core.dom.StringLiteral
 import org.eclipse.jdt.core.dom.SuperConstructorInvocation
 import org.eclipse.jdt.core.dom.SuperFieldAccess
@@ -113,6 +112,7 @@ class JavaASTFlattener extends ASTVisitor {
 
 	@Inject IValueConverterService converterService
 	@Inject extension ASTFlattenerUtils
+//	@Inject UnicodeAwarePostProcessor unicodeProcessor
 
 	/**
 	 * The string buffer into which the serialized representation of the AST is
@@ -209,10 +209,6 @@ class JavaASTFlattener extends ASTVisitor {
 			node.getRightHandSide().accept(this)
 		}
 		return false
-	}
-
-	def private boolean needsReturnValue(Assignment node) {
-		(node.parent != null) && (!(node.parent instanceof Statement) || (node.parent instanceof ReturnStatement))
 	}
 
 	override boolean visit(MarkerAnnotation node) {
@@ -697,7 +693,7 @@ class JavaASTFlattener extends ASTVisitor {
 			node.extendedOperands().exists[e|e instanceof StringLiteral]) {
 			appendToBuffer("'''")
 			if (node.getLeftOperand() instanceof StringLiteral) {
-				appendToBuffer((node.getLeftOperand() as StringLiteral).literalValue)
+				appendToBuffer((node.getLeftOperand() as StringLiteral).richTextValue)
 			} else {
 				appendToBuffer("«")
 				node.getLeftOperand().accept(this)
@@ -705,7 +701,7 @@ class JavaASTFlattener extends ASTVisitor {
 
 			}
 			if (node.getRightOperand() instanceof StringLiteral) {
-				appendToBuffer((node.getRightOperand() as StringLiteral).literalValue)
+				appendToBuffer((node.getRightOperand() as StringLiteral).richTextValue)
 			} else {
 				appendToBuffer("«")
 				node.getRightOperand().accept(this)
@@ -716,7 +712,7 @@ class JavaASTFlattener extends ASTVisitor {
 			if (extendedOperands.size() != 0) {
 				extendedOperands.forEach [ Expression e |
 					if (e instanceof StringLiteral) {
-						appendToBuffer(e.literalValue)
+						appendToBuffer(e.richTextValue)
 					} else {
 						appendToBuffer("«")
 						e.accept(this)
