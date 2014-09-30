@@ -23,6 +23,7 @@ import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
@@ -353,6 +354,15 @@ public class JavaConverterTest extends AbstractXtendTestCase {
 						ASTParser.K_CLASS_BODY_DECLARATIONS).getXtendCode().trim());
 
 	}
+	@Test
+	public void testRichStringSimpleCase() throws Exception {
+		
+		assertEquals(
+				"static package String a='''\nfirst line\nsecond line\nthird line\nfourth line'''",
+				j2x.toXtend("Clazz", "static String a = \"first line\"+\"second line\"+\"third line\"+\"fourth line\";",
+						ASTParser.K_CLASS_BODY_DECLARATIONS).getXtendCode().trim());
+		
+	}
 
 	@Test
 	public void testRichStringSpecialCase() throws Exception {
@@ -363,7 +373,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
 		assertTrue(xtendMember.getInitialValue() instanceof RichString);
 
 		assertEquals(
-				"package String richTxt='''a«\"'''\"» no «\"«\"» 'foo'.length«\"»\"» side-effect «\"'''\"»'''",
+				"package String richTxt='''a\n«\"'''\"» no «\"«\"» 'foo'.length«\"»\"» side-effect «\"'''\"»'''",
 				j2x.toXtend("Clazz", "String richTxt = \"a\" + \"''' no «'foo'.length» side-effect '''\";",
 						ASTParser.K_CLASS_BODY_DECLARATIONS).getXtendCode().trim());
 
@@ -378,7 +388,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
 		assertEquals("richTxt", xtendMember.getName());
 		assertTrue(xtendMember.getInitialValue() instanceof RichString);
 
-		assertEquals("package String richTxt='''test«\"'''\"» «\"«\"» FOR a: '123'.toCharArray SEPARATOR ',\n  \t'«\"»\"»\n      a\n «\"«\"» ENDFOR«\"»\"»«\"'''\"»'''", j2x
+		assertEquals("package String richTxt='''test\n«\"'''\"» «\"«\"» FOR a: '123'.toCharArray SEPARATOR ',\n  \t'«\"»\"»\n      a\n «\"«\"» ENDFOR«\"»\"»«\"'''\"»'''", j2x
 				.toXtend(
 						"Clazz",
 						"String richTxt = \"test\" + \"''' «FOR a: '123'.toCharArray SEPARATOR ',\\n  \\t'»\\n"
@@ -396,7 +406,17 @@ public class JavaConverterTest extends AbstractXtendTestCase {
 		assertTrue(xtendMember.getInitialValue() instanceof RichString);
 		
 	}
-
+	@Test
+	public void testAnonymousClassCase() throws Exception {
+		XtendClass clazz = toValidXtendClass("import java.awt.event.ActionEvent;"
+				+ "import java.awt.event.ActionListener;"
+				+ " class Clazz { ActionListener listener = new ActionListener() { public void actionPerformed(ActionEvent arg0) {arg0.getID();}};}");
+		assertNotNull(clazz);
+		XtendField xtendMember = (XtendField) clazz.getMembers().get(0);
+		assertEquals("listener", xtendMember.getName());
+		assertTrue(xtendMember.getInitialValue() instanceof XClosure);
+		
+	}
 	private XtendClass toValidXtendClass(String javaCode) throws Exception {
 		return (XtendClass) toValidTypeDeclaration("Clazz", javaCode);
 	}
