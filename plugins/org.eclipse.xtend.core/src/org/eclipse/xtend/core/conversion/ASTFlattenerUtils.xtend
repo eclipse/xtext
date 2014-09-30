@@ -16,6 +16,7 @@ import org.eclipse.jdt.core.dom.FieldDeclaration
 import org.eclipse.jdt.core.dom.IExtendedModifier
 import org.eclipse.jdt.core.dom.IMethodBinding
 import org.eclipse.jdt.core.dom.ITypeBinding
+import org.eclipse.jdt.core.dom.InfixExpression
 import org.eclipse.jdt.core.dom.MethodDeclaration
 import org.eclipse.jdt.core.dom.Modifier
 import org.eclipse.jdt.core.dom.ReturnStatement
@@ -44,29 +45,35 @@ class ASTFlattenerUtils {
 		}
 		val iMethodBinding = declaration.resolveBinding
 		if (iMethodBinding != null) {
-			return checkOverride(iMethodBinding, iMethodBinding.declaringClass)
+			return findOverride(iMethodBinding, iMethodBinding.declaringClass) != null
 		}
 		return false
 	}
 
-	def boolean checkOverride(IMethodBinding method, ITypeBinding type) {
+	def IMethodBinding findOverride(IMethodBinding method, ITypeBinding type) {
 		val superclass = type.superclass
-		var overrides = false
+		var IMethodBinding overridden = null
 		if (superclass != null) {
-			if (superclass.declaredMethods.exists[method.overrides(it)]) {
-				overrides = true
-			} else {
-				overrides = checkOverride(method, superclass)
-			}
+			overridden = internalFindOverride(method, superclass)
 		}
-		if (!overrides) {
+		if (overridden == null) {
 			for (ITypeBinding interfaze : type.interfaces) {
-				if (interfaze.declaredMethods.exists[method.overrides(it)] || checkOverride(method, interfaze)) {
-					return true
+				overridden = internalFindOverride(method, interfaze)
+				if (overridden != null) {
+					return overridden
 				}
 			}
 		}
-		return overrides
+		return overridden
+	}
+
+	def internalFindOverride(IMethodBinding method, ITypeBinding superType) {
+		val superClassOverride = superType.declaredMethods.filter[method.overrides(it)]
+		if (superClassOverride.size == 1) {
+			return superClassOverride.get(0)
+		} else {
+			return findOverride(method, superType)
+		}
 	}
 
 	def handleVariableDeclaration(Iterable<? extends ASTNode> modifier) {
@@ -114,13 +121,24 @@ class ASTFlattenerUtils {
 		(node.parent != null) && (!(node.parent instanceof Statement) || (node.parent instanceof ReturnStatement))
 	}
 
+	def int countStringConcats(InfixExpression node) {
+		var concats = 0
+		if (node.getOperator() == InfixExpression.Operator.PLUS) {
+			if(node.getLeftOperand() instanceof StringLiteral) concats++
+			if(node.getRightOperand() instanceof StringLiteral) concats++
+			concats = concats + node.extendedOperands().filter[e|e instanceof StringLiteral].size
+		}
+		return concats
+	}
+
 	def richTextValue(StringLiteral literal) {
 		val value = literal.literalValue
+
 		// some one may use opening « and closing » in different string literals 
 		var result = value.replaceAll("«", "«\"«\"» ")
 		result = result.replaceAll("((?!\").)(»)", "$1«\"$2\"»")
 		result = result.replaceAll("(''')", "«\"$1\"»")
-		if(result.endsWith("'")) {
+		if (result.endsWith("'")) {
 			result = result.concat("«»")
 		}
 		return result

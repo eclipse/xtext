@@ -14,11 +14,13 @@ import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.Annotation;
 import org.eclipse.jdt.core.dom.Assignment;
 import org.eclipse.jdt.core.dom.Block;
+import org.eclipse.jdt.core.dom.Expression;
 import org.eclipse.jdt.core.dom.FieldAccess;
 import org.eclipse.jdt.core.dom.FieldDeclaration;
 import org.eclipse.jdt.core.dom.IExtendedModifier;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
+import org.eclipse.jdt.core.dom.InfixExpression;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.Modifier;
 import org.eclipse.jdt.core.dom.Name;
@@ -82,53 +84,52 @@ public class ASTFlattenerUtils {
     boolean _notEquals = (!Objects.equal(iMethodBinding, null));
     if (_notEquals) {
       ITypeBinding _declaringClass = iMethodBinding.getDeclaringClass();
-      return this.checkOverride(iMethodBinding, _declaringClass);
+      IMethodBinding _findOverride = this.findOverride(iMethodBinding, _declaringClass);
+      return (!Objects.equal(_findOverride, null));
     }
     return false;
   }
   
-  public boolean checkOverride(final IMethodBinding method, final ITypeBinding type) {
+  public IMethodBinding findOverride(final IMethodBinding method, final ITypeBinding type) {
     final ITypeBinding superclass = type.getSuperclass();
-    boolean overrides = false;
+    IMethodBinding overridden = null;
     boolean _notEquals = (!Objects.equal(superclass, null));
     if (_notEquals) {
-      IMethodBinding[] _declaredMethods = superclass.getDeclaredMethods();
-      final Function1<IMethodBinding, Boolean> _function = new Function1<IMethodBinding, Boolean>() {
-        public Boolean apply(final IMethodBinding it) {
-          return Boolean.valueOf(method.overrides(it));
-        }
-      };
-      boolean _exists = IterableExtensions.<IMethodBinding>exists(((Iterable<IMethodBinding>)Conversions.doWrapArray(_declaredMethods)), _function);
-      if (_exists) {
-        overrides = true;
-      } else {
-        boolean _checkOverride = this.checkOverride(method, superclass);
-        overrides = _checkOverride;
-      }
+      IMethodBinding _internalFindOverride = this.internalFindOverride(method, superclass);
+      overridden = _internalFindOverride;
     }
-    if ((!overrides)) {
+    boolean _equals = Objects.equal(overridden, null);
+    if (_equals) {
       ITypeBinding[] _interfaces = type.getInterfaces();
       for (final ITypeBinding interfaze : _interfaces) {
-        boolean _or = false;
-        IMethodBinding[] _declaredMethods_1 = interfaze.getDeclaredMethods();
-        final Function1<IMethodBinding, Boolean> _function_1 = new Function1<IMethodBinding, Boolean>() {
-          public Boolean apply(final IMethodBinding it) {
-            return Boolean.valueOf(method.overrides(it));
+        {
+          IMethodBinding _internalFindOverride_1 = this.internalFindOverride(method, interfaze);
+          overridden = _internalFindOverride_1;
+          boolean _notEquals_1 = (!Objects.equal(overridden, null));
+          if (_notEquals_1) {
+            return overridden;
           }
-        };
-        boolean _exists_1 = IterableExtensions.<IMethodBinding>exists(((Iterable<IMethodBinding>)Conversions.doWrapArray(_declaredMethods_1)), _function_1);
-        if (_exists_1) {
-          _or = true;
-        } else {
-          boolean _checkOverride_1 = this.checkOverride(method, interfaze);
-          _or = _checkOverride_1;
-        }
-        if (_or) {
-          return true;
         }
       }
     }
-    return overrides;
+    return overridden;
+  }
+  
+  public IMethodBinding internalFindOverride(final IMethodBinding method, final ITypeBinding superType) {
+    IMethodBinding[] _declaredMethods = superType.getDeclaredMethods();
+    final Function1<IMethodBinding, Boolean> _function = new Function1<IMethodBinding, Boolean>() {
+      public Boolean apply(final IMethodBinding it) {
+        return Boolean.valueOf(method.overrides(it));
+      }
+    };
+    final Iterable<IMethodBinding> superClassOverride = IterableExtensions.<IMethodBinding>filter(((Iterable<IMethodBinding>)Conversions.doWrapArray(_declaredMethods)), _function);
+    int _size = IterableExtensions.size(superClassOverride);
+    boolean _equals = (_size == 1);
+    if (_equals) {
+      return ((IMethodBinding[])Conversions.unwrapArray(superClassOverride, IMethodBinding.class))[0];
+    } else {
+      return this.findOverride(method, superType);
+    }
   }
   
   public String handleVariableDeclaration(final Iterable<? extends ASTNode> modifier) {
@@ -246,6 +247,33 @@ public class ASTFlattenerUtils {
       _and = ((!(node.getParent() instanceof Statement)) || (node.getParent() instanceof ReturnStatement));
     }
     return _and;
+  }
+  
+  public int countStringConcats(final InfixExpression node) {
+    int concats = 0;
+    InfixExpression.Operator _operator = node.getOperator();
+    boolean _equals = Objects.equal(_operator, InfixExpression.Operator.PLUS);
+    if (_equals) {
+      Expression _leftOperand = node.getLeftOperand();
+      if ((_leftOperand instanceof StringLiteral)) {
+        concats++;
+      }
+      Expression _rightOperand = node.getRightOperand();
+      if ((_rightOperand instanceof StringLiteral)) {
+        concats++;
+      }
+      List _extendedOperands = node.extendedOperands();
+      final Function1<Object, Boolean> _function = new Function1<Object, Boolean>() {
+        public Boolean apply(final Object e) {
+          return Boolean.valueOf((e instanceof StringLiteral));
+        }
+      };
+      Iterable<Object> _filter = IterableExtensions.<Object>filter(_extendedOperands, _function);
+      int _size = IterableExtensions.size(_filter);
+      int _plus = (concats + _size);
+      concats = _plus;
+    }
+    return concats;
   }
   
   public String richTextValue(final StringLiteral literal) {

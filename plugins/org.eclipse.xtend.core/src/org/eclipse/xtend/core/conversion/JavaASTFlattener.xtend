@@ -112,8 +112,8 @@ class JavaASTFlattener extends ASTVisitor {
 
 	@Inject IValueConverterService converterService
 	@Inject extension ASTFlattenerUtils
-//	@Inject UnicodeAwarePostProcessor unicodeProcessor
 
+	//	@Inject UnicodeAwarePostProcessor unicodeProcessor
 	/**
 	 * The string buffer into which the serialized representation of the AST is
 	 * written.
@@ -188,19 +188,20 @@ class JavaASTFlattener extends ASTVisitor {
 
 		// Array write access
 		if (leftSide instanceof ArrayAccess) {
+			val arrayName = computeArrayName(leftSide)
 			appendToBuffer("{ ")
-			appendToBuffer("val _tempIndex=")
+			val valName = '''_wrVal_«arrayName»'''
+			val idxName = '''_wrIndx_«arrayName»'''
+
+			appendToBuffer('''val «valName»=''')
+			leftSide.array.accept(this)
+			appendToBuffer(''' val «idxName»=''')
 			leftSide.getIndex().accept(this)
-			appendSpaceToBuffer
-			leftSide.getArray().accept(this)
-			appendToBuffer(".set")
-			appendToBuffer("(_tempIndex,")
+			appendToBuffer(''' «valName».set(«idxName»,''')
 			node.rightHandSide.accept(this)
 			appendToBuffer(")")
 			if (node.needsReturnValue()) {
-				leftSide.getArray().accept(this)
-				appendToBuffer(".get")
-				appendToBuffer("(_tempIndex)")
+				appendToBuffer(''' «valName».get(«idxName»)''')
 			}
 			appendToBuffer("}")
 		} else {
@@ -580,22 +581,44 @@ class JavaASTFlattener extends ASTVisitor {
 			node.getExpression().accept(this)
 			appendToBuffer(".")
 		}
-		appendToBuffer("new ")
-		if (!node.typeArguments().isEmpty()) {
-			appendTypeParameters(node.typeArguments)
-		}
-		node.getType().accept(this)
-		appendToBuffer("(")
-		for (var Iterator<Expression> it = node.arguments().iterator(); it.hasNext();) {
-			var Expression e = it.next()
-			e.accept(this)
-			if (it.hasNext()) {
-				appendToBuffer(",")
+		if (isLambdaCase(node)) {
+			appendToBuffer("[")
+			val method = node.anonymousClassDeclaration.bodyDeclarations.get(0) as MethodDeclaration
+			method.parameters.appendAllSeparatedByComma
+			appendToBuffer("|")
+			method.body.statements.appendAll
+			appendToBuffer("]")
+		} else {
+			appendToBuffer("new ")
+			if (!node.typeArguments().isEmpty()) {
+				appendTypeParameters(node.typeArguments)
+			}
+			node.getType().accept(this)
+			appendToBuffer("(")
+			for (var Iterator<Expression> it = node.arguments().iterator(); it.hasNext();) {
+				var Expression e = it.next()
+				e.accept(this)
+				if (it.hasNext()) {
+					appendToBuffer(",")
+				}
+			}
+			appendToBuffer(")")
+			if (node.getAnonymousClassDeclaration() != null) {
+				node.getAnonymousClassDeclaration().accept(this)
 			}
 		}
-		appendToBuffer(")")
-		if (node.getAnonymousClassDeclaration() != null) {
-			node.getAnonymousClassDeclaration().accept(this)
+		return false
+	}
+
+	def isLambdaCase(ClassInstanceCreation creation) {
+		val anonymousClazz = creation.anonymousClassDeclaration
+		if (anonymousClazz != null && anonymousClazz.bodyDeclarations.size == 1) {
+			val declaredMethod = anonymousClazz.bodyDeclarations.get(0)
+			if (declaredMethod instanceof MethodDeclaration && creation.type.resolveBinding != null) {
+				val methodBinding = (declaredMethod as MethodDeclaration).resolveBinding
+				val overrides = findOverride(methodBinding, methodBinding.declaringClass)
+				return overrides != null && Modifier.isAbstract(overrides.modifiers)
+			}
 		}
 		return false
 	}
@@ -688,40 +711,26 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override boolean visit(InfixExpression node) {
-		if (node.getOperator() == InfixExpression.Operator.PLUS &&
-			( node.getLeftOperand() instanceof StringLiteral || node.getRightOperand() instanceof StringLiteral ) ||
-			node.extendedOperands().exists[e|e instanceof StringLiteral]) {
+		val stringConcats = countStringConcats(node)
+		if (stringConcats > 0) {
 			appendToBuffer("'''")
-			if (node.getLeftOperand() instanceof StringLiteral) {
-				appendToBuffer((node.getLeftOperand() as StringLiteral).richTextValue)
-			} else {
-				appendToBuffer("«")
-				node.getLeftOperand().accept(this)
-				appendToBuffer("»")
+			if (stringConcats > 2) {
+				appendLineWrapToBuffer
+			}
+			node.leftOperand.convertToRichString
+			if (node.leftOperand instanceof StringLiteral && node.rightOperand instanceof StringLiteral) {
+				appendLineWrapToBuffer
+			}
+			node.rightOperand.convertToRichString
+			node.extendedOperands().fold(node.rightOperand) [ prevExpr, Expression currExpr |
+				if (prevExpr instanceof StringLiteral && currExpr instanceof StringLiteral) {
+					appendLineWrapToBuffer
+				}
+				convertToRichString(currExpr)
+				return currExpr
+			]
 
-			}
-			if (node.getRightOperand() instanceof StringLiteral) {
-				appendToBuffer((node.getRightOperand() as StringLiteral).richTextValue)
-			} else {
-				appendToBuffer("«")
-				node.getRightOperand().accept(this)
-				appendToBuffer("»")
-
-			}
-			val extendedOperands = node.extendedOperands()
-			if (extendedOperands.size() != 0) {
-				extendedOperands.forEach [ Expression e |
-					if (e instanceof StringLiteral) {
-						appendToBuffer(e.richTextValue)
-					} else {
-						appendToBuffer("«")
-						e.accept(this)
-						appendToBuffer("»")
-					}
-				]
-			}
 			appendToBuffer("'''")
-
 		} else {
 			node.getLeftOperand().accept(this)
 			appendToBuffer(' ')
@@ -738,6 +747,16 @@ class JavaASTFlattener extends ASTVisitor {
 			}
 		}
 		return false
+	}
+
+	def void convertToRichString(Expression expression) {
+		if (expression instanceof StringLiteral) {
+			appendToBuffer(expression.richTextValue)
+		} else {
+			appendToBuffer("«")
+			expression.accept(this)
+			appendToBuffer("»")
+		}
 	}
 
 	override boolean visit(InstanceofExpression node) {
@@ -782,7 +801,7 @@ class JavaASTFlattener extends ASTVisitor {
 			if (pfOperator == PostfixExpression.Operator.INCREMENT ||
 				pfOperator == PostfixExpression.Operator.DECREMENT) {
 
-				val arrayName = (pfOperand.array as SimpleName).identifier
+				val arrayName = computeArrayName(pfOperand)
 				val idxName = '''_tPreInx_«arrayName»'''
 				val tempVarName = '''_tPostVal_«arrayName»'''
 
@@ -830,7 +849,7 @@ class JavaASTFlattener extends ASTVisitor {
 				val _tempIndex = (i = i - 1)
 				ints.set(_tempIndex,ints.get(_tempIndex) - 1)
 				ints.get(_tempIndex) */
-				val arrayName = (pfOperand.array as SimpleName).identifier
+				val arrayName = computeArrayName(pfOperand)
 				val idxName = '''_tPreInx_«arrayName»'''
 				var op = "-"
 				if (node.operator == Operator.INCREMENT) {
@@ -1115,14 +1134,26 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	@Override override boolean visit(ArrayAccess node) {
+		val arrayname = computeArrayName(node)
 
 		//Write access is handled in visit(Assignment)
-		appendToBuffer("{val _readIndex=")
+		appendToBuffer('''{val _rdIndx_«arrayname»=''')
 		node.index.accept(this)
 		appendSpaceToBuffer
 		node.array.accept(this)
-		appendToBuffer(".get(_readIndex)}")
+		appendToBuffer('''.get(_rdIndx_«arrayname»)}''')
 		return false
+	}
+
+	def computeArrayName(ArrayAccess node) {
+		switch array : node.array {
+			SimpleName:
+				array.identifier
+			MethodInvocation:
+				array.name.identifier
+			default:
+				"tmpNode"
+		}
 	}
 
 	def isReadAccess(ArrayAccess access) {
