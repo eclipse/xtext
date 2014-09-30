@@ -264,13 +264,13 @@ class Community extends AbstractWebsite {
         <td>Henrik Rentz-Reichert, Thomas Schuetz</td>
       </tr>
         <tr>
-        <td><a href="http://sculptor.fornax-platform.org">Fornax Sculptor</a></td>
+        <td><a href="http://sculptorgenerator.org">Sculptor</a></td>
         <td>You express your design intent in a textual DSL, from which
     Sculptor generates high quality Java code and configuration.</td>
         <td>Apache 2 License</td>
         <td>Language, Framework</td>
-        <td>0.7.x, 1.x</td>
-        <td>Patrik Nordwall and others</td>
+        <td>2.x</td>
+        <td>Torsten Juergeleit, Patrik Nordwall and others</td>
       </tr>
       <tr>
         <td><a href="http://fj-eclipse.sourceforge.net/">fj-eclipse</a></td>
@@ -290,6 +290,17 @@ class Community extends AbstractWebsite {
        <td>2.x</td>
        <td>Henrik Lindberg, Cloudsmith Inc.</td>
       </tr>
+        <tr>
+       <td><a href="http://community.jaspersoft.com/project/jaspersoft-studio">Jaspersoft Studio, Report Designer for JasperReports</a></td>
+       <td>The Expression Editor allows to compose Java-like expressions enriched with JasperReports specific tokens. 
+The SQL Query Designer, in text mode, allows to edit simple and advanced SQL expressions.</td>
+       <td>EPL</td>
+          <td>Report Designer</td>
+       <td>2.x</td>
+       <td>Jaspersoft Studio Team (Veaceslav Chicu, Massimo Rabbi, Marco Orlandin and Giulio Toffoli)</td>
+      </tr>
+      
+      
       <tr>
           <td><a href="http://www.jolie-lang.org/joliepse.php">Joliepse
     IDE</a></td>
@@ -423,6 +434,17 @@ class Community extends AbstractWebsite {
         <td>Language</td>
         <td>0.7.x</td>
         <td>Dave Carver</td>
+      </tr>
+      <tr>
+        <td><a href="http://www.sarl.io">SARL</a></td>
+        <td>SARL is a general-purpose agent-oriented language. It aims at providing the fundamental abstractions for 
+        dealing with concurrency, distribution, interaction, decentralization, reactivity, autonomy and dynamic 
+        reconfiguration. The language is platform- and architecture-independent. 
+        The default execution environment is the <a href="http://www.janusproject.io">Janus platform</a>.</td>
+        <td>Apache 2 License</td>
+        <td>Language, Framework</td>
+        <td>2.x</td>
+        <td>Sebastian Rodriguez, Nicolas Gaud, Stéphane Galland</td>
       </tr>
         <tr>
         <td><a href="http://swrtj.sourceforge.net/">SWRTJ: Sugared Welterweight Record-Trait Java</a></td>
