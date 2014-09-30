@@ -7,7 +7,9 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.IGrammarAccess;
+import org.xpect.Environment;
 import org.xpect.XpectImport;
+import org.xpect.XpectRequiredEnvironment;
 import org.xpect.setup.ISetupInitializer;
 import org.xpect.setup.XpectSetupFactory;
 import org.xpect.setup.XpectSetupRoot;
@@ -20,6 +22,7 @@ import com.google.inject.Injector;
 
 @XpectSetupRoot
 @XpectSetupFactory
+@XpectRequiredEnvironment(Environment.PLUGIN_TEST)
 @XpectImport({ InjectorSetup.class, File.class, Folder.class, JavaProject.class, Project.class, SrcFolder.class, ThisFile.class })
 public class WorkspaceDefaultsSetup {
 

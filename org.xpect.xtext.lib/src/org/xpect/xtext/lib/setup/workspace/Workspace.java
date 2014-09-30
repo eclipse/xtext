@@ -16,11 +16,15 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import org.xpect.Environment;
 import org.xpect.XpectImport;
+import org.xpect.XpectRequiredEnvironment;
 import org.xpect.setup.XpectSetupComponent;
+import org.xpect.util.EnvironmentUtil;
 import org.xpect.xtext.lib.setup.FileSetupContext;
 
 @XpectSetupComponent
+@XpectRequiredEnvironment(Environment.PLUGIN_TEST)
 @XpectImport(WorkspaceDefaultsSetup.class)
 public class Workspace extends Container<IWorkspaceRoot> {
 
@@ -58,6 +62,7 @@ public class Workspace extends Container<IWorkspaceRoot> {
 	}
 
 	public void cleanWorkspace() {
+		EnvironmentUtil.requireEnvironment(Environment.PLUGIN_TEST);
 		IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
 		for (int i = projects.length - 1; i >= 0; i--)
 			try {
@@ -68,6 +73,7 @@ public class Workspace extends Container<IWorkspaceRoot> {
 	}
 
 	public Workspace.Instance configureWorkspace(final FileSetupContext ctx) {
+		EnvironmentUtil.requireEnvironment(Environment.PLUGIN_TEST);
 		final Instance instance = new Instance();
 		try {
 			new WorkspaceModifyOperation() {
