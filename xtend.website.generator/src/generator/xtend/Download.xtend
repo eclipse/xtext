@@ -202,26 +202,27 @@ class Download extends AbstractXtendWebsite {
 		    &lt;execution&gt;
 		      &lt;goals&gt;
 		        &lt;goal&gt;compile&lt;/goal&gt;
-		        &lt;!-- &lt;goal&gt;testCompile&lt;/goal&gt; --&gt;
+		        &lt;goal&gt;testCompile&lt;/goal&gt;
 		      &lt;/goals&gt;
-		      &lt;!-- By default the plugin will look for eclipse settings, and if non were found will generate to --&gt;
-		      &lt;!-- ${basedir}/src/main/generated-sources/xtend --&gt;
-		      &lt;!-- You can optionally configure a different target folder like so : --&gt;
-		      &lt;!--
 		      &lt;configuration&gt;
-		        &lt;outputDirectory&gt;${basedir}/src/main/xtend-gen&lt;/outputDirectory&gt;
-		        &lt;testOutputDirectory&gt;${basedir}/src/test/xtend-gen&lt;/testOutputDirectory&gt;
+		        &lt;outputDirectory&gt;${project.build.directory}/xtend-gen/main&lt;/outputDirectory&gt;
+		        &lt;testOutputDirectory&gt;${project.build.directory}/xtend-gen/test&lt;/testOutputDirectory&gt;
 		      &lt;/configuration&gt;
-		      --&gt;
 		    &lt;/execution&gt;
 		  &lt;/executions&gt;
 		&lt;/plugin&gt;</pre>
 								<p>
 							</p>
 							<p>
-								As you see the <strong>outputDirectory</strong> can be specified to match the default of the Eclipse plug-in (<strong>xtend-gen</strong>). Of course you can also change the configuration
-								in Eclipse to match the Maven default (<strong>generated-sources</strong>). To do so right-click on the project and select <strong>Properties</strong> or if you prefer a global setting choose <strong>Eclipse-&gt;Preferences</strong>.
-								In the category <strong>Xtend/Compiler</strong> enter the directory name (see screenshot). It is interpreted as a relative path to the parent of the source folder, which includes the to-be-compiled Xtend file.
+								The xtend-maven-plugin is <a href="http://maven.apache.org/guides/mini/guide-using-toolchains.html">toolchain aware</a>, so you can build against different JDKs than the currently running one.
+							</p>
+							<p>
+								Xtend's m2e integration will automatically configure the Eclipse settings from the POM if you have the Maven project nature enabled.
+							</p>
+							<p>
+								Some users might not want Maven to be the leading system. For that case you can just leave out the outputDirectory configuration in the POM. 
+								The Xtend plugin will then look for Eclipse settings instead. The folder specified in the settings dialog is interpreted as a path relative to
+								the current source folder.
 							</p>
 							<p>
 								<div class="thumbnail">
