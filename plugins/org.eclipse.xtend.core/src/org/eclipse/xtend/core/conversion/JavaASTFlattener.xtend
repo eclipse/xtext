@@ -113,12 +113,12 @@ class JavaASTFlattener extends ASTVisitor {
 	@Inject IValueConverterService converterService
 	@Inject extension ASTFlattenerUtils
 
-	//	@Inject UnicodeAwarePostProcessor unicodeProcessor
 	/**
 	 * The string buffer into which the serialized representation of the AST is
 	 * written.
 	 */
-	StringBuffer fBuffer;
+	StringBuffer fBuffer
+	int indentation = 0
 	List<String> problems = newArrayList()
 	int javaSourceKind = ASTParser.K_COMPILATION_UNIT
 	final static int JLS = AST.JLS3
@@ -154,6 +154,14 @@ class JavaASTFlattener extends ASTVisitor {
 		this.problems
 	}
 
+	def private decreaseIndent() {
+		this.indentation--
+	}
+
+	def private increaseIndent() {
+		this.indentation++
+	}
+
 	def appendModifieres(ASTNode node, Iterable<IExtendedModifier> ext) {
 		appendModifieres(node, ext, null)
 	}
@@ -173,6 +181,17 @@ class JavaASTFlattener extends ASTVisitor {
 
 	def private appendLineWrapToBuffer() {
 		appendToBuffer("\n")
+		appendToBuffer("\t" * indentation)
+	}
+
+	def operator_multiply(String string, int i) {
+		var retVal = ""
+		var counter = 0
+		while (i != counter) {
+			counter++
+			retVal = retVal + string
+		}
+		retVal
 	}
 
 	def private appendToBuffer(String string) {
@@ -332,6 +351,7 @@ class JavaASTFlattener extends ASTVisitor {
 			superInterfaceTypes.appendAllSeparatedByComma
 		}
 		appendToBuffer("{")
+		increaseIndent
 		appendLineWrapToBuffer
 		var BodyDeclaration prev
 		for (BodyDeclaration body : bodyDeclarations() as Iterable<BodyDeclaration>) {
@@ -345,9 +365,9 @@ class JavaASTFlattener extends ASTVisitor {
 			body.accept(this)
 			prev = body
 		}
+		decreaseIndent
 		appendLineWrapToBuffer
 		appendToBuffer("}")
-		appendLineWrapToBuffer
 		return false
 	}
 
@@ -616,8 +636,10 @@ class JavaASTFlattener extends ASTVisitor {
 			val declaredMethod = anonymousClazz.bodyDeclarations.get(0)
 			if (declaredMethod instanceof MethodDeclaration && creation.type.resolveBinding != null) {
 				val methodBinding = (declaredMethod as MethodDeclaration).resolveBinding
-				val overrides = findOverride(methodBinding, methodBinding.declaringClass)
-				return overrides != null && Modifier.isAbstract(overrides.modifiers)
+				if (methodBinding != null) {
+					val overrides = findOverride(methodBinding, methodBinding.declaringClass)
+					return overrides != null && Modifier.isAbstract(overrides.modifiers)
+				}
 			}
 		}
 		return false
@@ -625,8 +647,10 @@ class JavaASTFlattener extends ASTVisitor {
 
 	override visit(Block it) {
 		appendToBuffer("{")
+		increaseIndent
 		appendLineWrapToBuffer
 		statements.appendAll
+		decreaseIndent
 		appendLineWrapToBuffer
 		appendToBuffer("}")
 		appendLineWrapToBuffer
@@ -662,6 +686,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override visit(ForStatement it) {
+		appendLineWrapToBuffer
 		appendToBuffer("for (")
 		initializers.appendAll("")
 		appendToBuffer("; ")
@@ -1128,7 +1153,10 @@ class JavaASTFlattener extends ASTVisitor {
 
 	@Override override boolean visit(AnonymousClassDeclaration node) {
 		appendToBuffer("{")
+		increaseIndent
+		appendLineWrapToBuffer
 		node.bodyDeclarations().appendAll
+		decreaseIndent
 		appendToBuffer("}")
 		return false
 	}
@@ -1145,12 +1173,14 @@ class JavaASTFlattener extends ASTVisitor {
 		return false
 	}
 
-	def computeArrayName(ArrayAccess node) {
+	def String computeArrayName(ArrayAccess node) {
 		switch array : node.array {
 			SimpleName:
 				array.identifier
 			MethodInvocation:
 				array.name.identifier
+			ArrayAccess:
+				"_" + computeArrayName(array)
 			default:
 				"tmpNode"
 		}
@@ -1297,12 +1327,15 @@ class JavaASTFlattener extends ASTVisitor {
 			appendToBuffer(" ")
 		}
 		appendToBuffer("{")
+		increaseIndent
+		appendLineWrapToBuffer
 		node.enumConstants().appendAllSeparatedByComma
 
 		if (!node.bodyDeclarations().isEmpty()) {
 			appendToBuffer("; ")
 			node.bodyDeclarations().appendAll
 		}
+		decreaseIndent
 		appendToBuffer("}")
 		return false
 	}
@@ -1370,7 +1403,9 @@ class JavaASTFlattener extends ASTVisitor {
 		node.getExpression().accept(this)
 		appendToBuffer(") ")
 		appendToBuffer("{")
+		increaseIndent
 		node.statements().appendAll
+		decreaseIndent
 		appendToBuffer("}")
 		return false
 	}

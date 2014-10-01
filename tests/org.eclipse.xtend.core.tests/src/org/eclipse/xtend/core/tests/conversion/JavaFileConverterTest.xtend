@@ -42,6 +42,7 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
 						!fileName.contains("ScenarioBug395002");
 				}
 			});
+		var errors = 0
 		for (URI uri : allResourceUris) {
 			val File file = new File(uri.toFileString());
 			println("Converting: " + file.getAbsolutePath());
@@ -59,9 +60,12 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
 			try {
 				file(xtendCode, true);
 			} catch (AssertionError error) {
-				System.err.print(error.message)
+				System.err.print('''«uri» - «error.message»''')
+				errors++
 			}
 		}
+
+		println('''Errors («errors»)''')
 		println("Done...")
 	}
 
