@@ -57,27 +57,29 @@ public class ExtractVariableHandler extends AbstractHandler {
 			if (editor != null) {
 				final ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
 				final IXtextDocument document = editor.getDocument();
-				document.priorityReadOnly(new IUnitOfWork.Void<XtextResource>() {
-					@Override
-					public void process(XtextResource orig) throws Exception {
-						XtextResource resource = resourceCopier.loadIntoNewResourceSet(orig);
-						XExpression expression = expressionUtil.findSelectedExpression(resource, selection);
-						if(expression != null) {
-							ExtractVariableRefactoring introduceVariableRefactoring = refactoringProvider.get();
-							if(introduceVariableRefactoring.initialize(editor, expression)) {
-								ITextRegion region = locationInFileProvider.getFullTextRegion(expression);
-								editor.selectAndReveal(region.getOffset(), region.getLength());
-								ExtractVariableWizard wizard = new ExtractVariableWizard(introduceVariableRefactoring);
-								RefactoringWizardOpenOperation_NonForking openOperation = new RefactoringWizardOpenOperation_NonForking(
-										wizard);
-								openOperation.run(editor.getSite().getShell(), "Extract Local Variable");
-							}
-						}
+				XtextResource resource = document.priorityReadOnly(new IUnitOfWork<XtextResource, XtextResource>() {
+					public XtextResource exec(XtextResource state) throws Exception {
+						return resourceCopier.loadIntoNewResourceSet(state);
 					}
 				});
+				XExpression expression = expressionUtil.findSelectedExpression(resource, selection);
+				if(expression != null) {
+					ExtractVariableRefactoring introduceVariableRefactoring = refactoringProvider.get();
+					if(introduceVariableRefactoring.initialize(editor, expression)) {
+						ITextRegion region = locationInFileProvider.getFullTextRegion(expression);
+						editor.selectAndReveal(region.getOffset(), region.getLength());
+						ExtractVariableWizard wizard = new ExtractVariableWizard(introduceVariableRefactoring);
+						RefactoringWizardOpenOperation_NonForking openOperation = new RefactoringWizardOpenOperation_NonForking(
+								wizard);
+						openOperation.run(editor.getSite().getShell(), "Extract Local Variable");
+					}
+				}
 			}
 		} catch (InterruptedException e) {
 			return null;
+//		} catch (OperationCanceledException e) {
+//			// cancelled by user, ok
+//			return null;
 		} catch (Exception exc) {
 			LOG.error("Error during refactoring", exc);
 			MessageDialog.openError(Display.getCurrent().getActiveShell(), "Error during refactoring", exc.getMessage()
