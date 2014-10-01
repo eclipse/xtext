@@ -2,92 +2,20 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<parent>
 		<groupId>org.eclipse.xtext</groupId>
-		<artifactId>org.eclipse.xtext.standalone.parent</artifactId>
+		<artifactId>org.eclipse.xtext.parent</artifactId>
 		<version>2.8.0-SNAPSHOT</version>
-		<relativePath>../org.eclipse.xtext.standalone.parent</relativePath>
+		<relativePath>../org.eclipse.xtext.parent</relativePath>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>org.eclipse.xtext.dependencies</artifactId>
 	<name>3rd Party Dependencies - Library</name>
-	<packaging>jar</packaging>
-	<properties>
-		<scripts.dir>${project.parent.relativePath}</scripts.dir>
-	</properties>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.eclipse.tycho.extras</groupId>
-				<artifactId>tycho-p2-extras-plugin</artifactId>
-				<configuration>
-					<source>
-						<!-- source repositories to mirror from -->
-						<repository>
-							<id>juno</id>
-							<layout>p2</layout>
-							<url>${juno-url}</url>
-						</repository>
-					</source>
-					<ius>
-						<iu>
-							<id>org.eclipse.jdt.core</id>
-						</iu>
+	<packaging>pom</packaging>
 
-						<!-- Sources -->
-						<iu>
-							<id>org.eclipse.jdt.core.source</id>
-						</iu>
-					</ius>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>prepare</id>
-						<configuration>
-							<skip>false</skip>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
-	<profiles>
-		<profile>
-			<id>skip-mirror</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-dependency-plugin</artifactId>
-						<version>2.8</version>
-						<executions>
-							<execution>
-								<id>copy-dependencies</id>
-								<goals>
-									<goal>copy-dependencies</goal>
-								</goals>
-								<configuration>
-									<excludeTransitive>true</excludeTransitive>
-									<outputDirectory>${project.build.directory}/dependencies-mvn/plugins</outputDirectory>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-			<dependencies>
-				<dependency>
-					<groupId>org.eclipse.jdt</groupId>
-					<artifactId>org.eclipse.jdt.core</artifactId>
-					<version>3.7.1</version>
-				</dependency>
-			</dependencies>
-		</profile>
-	</profiles>
+	<dependencies>
+		<dependency>
+			<groupId>org.eclipse.tycho</groupId>
+			<artifactId>org.eclipse.jdt.core</artifactId>
+			<version>3.10.0.v20140604-1726</version>
+		</dependency>
+	</dependencies>
 </project>
