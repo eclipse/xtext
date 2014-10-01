@@ -34,7 +34,6 @@ import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.TextRegion;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 
 /**
@@ -118,8 +117,6 @@ public class XbaseEditor extends XtextEditor {
 	private Exception lastCall = null;
 
 	public void markNextSelectionAsJavaOffset(ITypeRoot typeRoot) {
-		if (Objects.equal(this.typeRoot, typeRoot))
-			return;
 		if (expectJavaSelection > 0) {
 			if (!isIgnoreCall) {
 				if (lastCall != null) {
