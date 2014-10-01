@@ -17,10 +17,10 @@ import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.core.conversion.JavaConverter;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.mwe.PathTraverser;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -32,7 +32,6 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
   private Provider<JavaConverter> javaConverter;
   
   @Test
-  @Ignore
   public void testConvertFilesInThisProject() throws Exception {
     File _file = new File("");
     final File projectRoot = _file.getAbsoluteFile();
@@ -68,6 +67,7 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
           return _and;
         }
       });
+    int errors = 0;
     for (final URI uri : allResourceUris) {
       {
         String _fileString = uri.toFileString();
@@ -101,14 +101,24 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
         } catch (final Throwable _t) {
           if (_t instanceof AssertionError) {
             final AssertionError error = (AssertionError)_t;
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append(uri, "");
+            _builder.append(" - ");
             String _message = error.getMessage();
-            System.err.print(_message);
+            _builder.append(_message, "");
+            System.err.print(_builder);
+            errors++;
           } else {
             throw Exceptions.sneakyThrow(_t);
           }
         }
       }
     }
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Errors (");
+    _builder.append(errors, "");
+    _builder.append(")");
+    InputOutput.<String>println(_builder.toString());
     InputOutput.<String>println("Done...");
   }
 }

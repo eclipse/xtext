@@ -28,11 +28,10 @@ import org.junit.Test;
  */
 public class XtendCompilerAntTaskTest {
 	protected Project project;
-	private StringBuffer logBuffer;
-	private StringBuffer fullLogBuffer;
 	private StringBuffer outBuffer;
 	private StringBuffer errBuffer;
 	private BuildException buildException;
+	private AntTestListener antTestListener;
 
 	@Before
 	public void setUp() {
@@ -44,7 +43,7 @@ public class XtendCompilerAntTaskTest {
 	public void tearDown() {
 		project = null;
 	}
-	
+
 	@Test
 	public void testSrcdirAsAttr() {
 		executeTarget("compile");
@@ -93,7 +92,7 @@ public class XtendCompilerAntTaskTest {
 	}
 
 	public String getLog() {
-		return logBuffer.toString();
+		return antTestListener.getLog();
 	}
 
 	public BuildException getBuildException() {
@@ -107,16 +106,14 @@ public class XtendCompilerAntTaskTest {
 	 *            name of project file to run
 	 */
 	protected void configureProject(String filename) throws BuildException {
-		logBuffer = new StringBuffer();
-		fullLogBuffer = new StringBuffer();
 		project = new Project();
 		project.init();
 		File antFile = new File(System.getProperty("root"), filename);
 		File pluginsFolder = new File(new File(TargetPlatform.getLocation()), "plugins");
 		project.setUserProperty("deps.dir", pluginsFolder.getAbsolutePath());
-
 		project.setUserProperty("ant.file", antFile.getAbsolutePath());
-		project.addBuildListener(new AntTestListener(Project.MSG_ERR));
+		antTestListener = new AntTestListener(Project.MSG_ERR);
+		project.addBuildListener(antTestListener);
 		ProjectHelper.configureProject(project, antFile);
 	}
 
@@ -139,9 +136,8 @@ public class XtendCompilerAntTaskTest {
 			errBuffer = new StringBuffer();
 			PrintStream err = new PrintStream(new AntOutputStream(errBuffer));
 			System.setErr(err);
-			logBuffer = new StringBuffer();
-			fullLogBuffer = new StringBuffer();
 			buildException = null;
+			antTestListener = new AntTestListener(Project.MSG_ERR);
 			project.executeTarget(targetName);
 		} finally {
 			System.setOut(sysOut);
@@ -199,14 +195,19 @@ public class XtendCompilerAntTaskTest {
 	/**
 	 * Our own personal build listener.
 	 */
-	private class AntTestListener implements BuildListener {
+	private static class AntTestListener implements BuildListener {
 		private int logLevel;
+		private StringBuffer logBuffer = new StringBuffer();
 
 		/**
 		 * Constructs a test listener which will ignore log events above the given level.
 		 */
 		public AntTestListener(int logLevel) {
 			this.logLevel = logLevel;
+		}
+
+		public String getLog() {
+			return logBuffer.toString();
 		}
 
 		/**
@@ -271,12 +272,11 @@ public class XtendCompilerAntTaskTest {
 				// ignore event
 				return;
 			}
-
 			if (event.getPriority() == Project.MSG_INFO || event.getPriority() == Project.MSG_WARN
 					|| event.getPriority() == Project.MSG_ERR) {
 				logBuffer.append(event.getMessage());
 			}
-			fullLogBuffer.append(event.getMessage());
 		}
+
 	}
 }

@@ -140,6 +140,8 @@ public class JavaASTFlattener extends ASTVisitor {
    */
   private StringBuffer fBuffer;
   
+  private int indentation = 0;
+  
   private List<String> problems = CollectionLiterals.<String>newArrayList();
   
   private int javaSourceKind = ASTParser.K_COMPILATION_UNIT;
@@ -179,6 +181,14 @@ public class JavaASTFlattener extends ASTVisitor {
     return this.problems;
   }
   
+  private int decreaseIndent() {
+    return this.indentation--;
+  }
+  
+  private int increaseIndent() {
+    return this.indentation++;
+  }
+  
   public void appendModifieres(final ASTNode node, final Iterable<IExtendedModifier> ext) {
     this.appendModifieres(node, ext, null);
   }
@@ -215,7 +225,29 @@ public class JavaASTFlattener extends ASTVisitor {
   }
   
   private StringBuffer appendLineWrapToBuffer() {
-    return this.appendToBuffer("\n");
+    StringBuffer _xblockexpression = null;
+    {
+      this.appendToBuffer("\n");
+      String _multiply = this.operator_multiply("\t", this.indentation);
+      _xblockexpression = this.appendToBuffer(_multiply);
+    }
+    return _xblockexpression;
+  }
+  
+  public String operator_multiply(final String string, final int i) {
+    String _xblockexpression = null;
+    {
+      String retVal = "";
+      int counter = 0;
+      while ((i != counter)) {
+        {
+          counter++;
+          retVal = (retVal + string);
+        }
+      }
+      _xblockexpression = retVal;
+    }
+    return _xblockexpression;
   }
   
   private StringBuffer appendToBuffer(final String string) {
@@ -478,6 +510,7 @@ public class JavaASTFlattener extends ASTVisitor {
       this.appendAllSeparatedByComma(_superInterfaceTypes_1);
     }
     this.appendToBuffer("{");
+    this.increaseIndent();
     this.appendLineWrapToBuffer();
     BodyDeclaration prev = null;
     List _bodyDeclarations_1 = it.bodyDeclarations();
@@ -494,9 +527,9 @@ public class JavaASTFlattener extends ASTVisitor {
         prev = body;
       }
     }
+    this.decreaseIndent();
     this.appendLineWrapToBuffer();
     this.appendToBuffer("}");
-    this.appendLineWrapToBuffer();
     return false;
   }
   
@@ -983,9 +1016,11 @@ public class JavaASTFlattener extends ASTVisitor {
   
   public boolean visit(final Block it) {
     this.appendToBuffer("{");
+    this.increaseIndent();
     this.appendLineWrapToBuffer();
     List _statements = it.statements();
     this.appendAll(_statements);
+    this.decreaseIndent();
     this.appendLineWrapToBuffer();
     this.appendToBuffer("}");
     this.appendLineWrapToBuffer();
@@ -1033,6 +1068,7 @@ public class JavaASTFlattener extends ASTVisitor {
   }
   
   public boolean visit(final ForStatement it) {
+    this.appendLineWrapToBuffer();
     this.appendToBuffer("for (");
     List _initializers = it.initializers();
     this.appendAll(_initializers, "");
@@ -1699,8 +1735,11 @@ public class JavaASTFlattener extends ASTVisitor {
   @Override
   public boolean visit(final AnonymousClassDeclaration node) {
     this.appendToBuffer("{");
+    this.increaseIndent();
+    this.appendLineWrapToBuffer();
     List _bodyDeclarations = node.bodyDeclarations();
     this.appendAll(_bodyDeclarations);
+    this.decreaseIndent();
     this.appendToBuffer("}");
     return false;
   }
@@ -1742,6 +1781,13 @@ public class JavaASTFlattener extends ASTVisitor {
         _matched=true;
         SimpleName _name = ((MethodInvocation)array).getName();
         _switchResult = _name.getIdentifier();
+      }
+    }
+    if (!_matched) {
+      if (array instanceof ArrayAccess) {
+        _matched=true;
+        String _computeArrayName = this.computeArrayName(((ArrayAccess)array));
+        _switchResult = ("_" + _computeArrayName);
       }
     }
     if (!_matched) {
@@ -1959,6 +2005,8 @@ public class JavaASTFlattener extends ASTVisitor {
       this.appendToBuffer(" ");
     }
     this.appendToBuffer("{");
+    this.increaseIndent();
+    this.appendLineWrapToBuffer();
     List _enumConstants = node.enumConstants();
     this.appendAllSeparatedByComma(_enumConstants);
     List _bodyDeclarations = node.bodyDeclarations();
@@ -1969,6 +2017,7 @@ public class JavaASTFlattener extends ASTVisitor {
       List _bodyDeclarations_1 = node.bodyDeclarations();
       this.appendAll(_bodyDeclarations_1);
     }
+    this.decreaseIndent();
     this.appendToBuffer("}");
     return false;
   }
@@ -2064,8 +2113,10 @@ public class JavaASTFlattener extends ASTVisitor {
     _expression.accept(this);
     this.appendToBuffer(") ");
     this.appendToBuffer("{");
+    this.increaseIndent();
     List _statements = node.statements();
     this.appendAll(_statements);
+    this.decreaseIndent();
     this.appendToBuffer("}");
     return false;
   }
