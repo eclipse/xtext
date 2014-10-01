@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.swt.widgets.Display;
@@ -62,26 +63,28 @@ public class ExtractMethodHandler extends AbstractHandler {
 			if (editor != null) {
 				final ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
 				final IXtextDocument document = editor.getDocument();
-				document.priorityReadOnly(new IUnitOfWork.Void<XtextResource>() {
-					@Override
-					public void process(XtextResource resource) throws Exception {
-						XtextResource copiedResource = resourceCopier.loadIntoNewResourceSet(resource);
-						List<XExpression> expressions = expressionUtil.findSelectedSiblingExpressions(copiedResource,
-								selection);
-						if (!expressions.isEmpty()) {
-							ExtractMethodRefactoring extractMethodRefactoring = refactoringProvider.get();
-							if (extractMethodRefactoring.initialize(editor, expressions, true)) {
-								updateSelection(editor, expressions);
-								ExtractMethodWizard wizard = wizardFactory.create(extractMethodRefactoring);
-								RefactoringWizardOpenOperation_NonForking openOperation = new RefactoringWizardOpenOperation_NonForking(
-										wizard);
-								openOperation.run(editor.getSite().getShell(), "Extract Method");
-							}
-						}
+				XtextResource copiedResource = document.priorityReadOnly(new IUnitOfWork<XtextResource, XtextResource>() {
+					public XtextResource exec(XtextResource state) throws Exception {
+						return resourceCopier.loadIntoNewResourceSet(state);
 					}
 				});
+				List<XExpression> expressions = expressionUtil.findSelectedSiblingExpressions(copiedResource,
+						selection);
+				if (!expressions.isEmpty()) {
+					ExtractMethodRefactoring extractMethodRefactoring = refactoringProvider.get();
+					if (extractMethodRefactoring.initialize(editor, expressions, true)) {
+						updateSelection(editor, expressions);
+						ExtractMethodWizard wizard = wizardFactory.create(extractMethodRefactoring);
+						RefactoringWizardOpenOperation_NonForking openOperation = new RefactoringWizardOpenOperation_NonForking(
+								wizard);
+						openOperation.run(editor.getSite().getShell(), "Extract Method");
+					}
+				}
 			}
 		} catch (InterruptedException e) {
+			return null;
+		} catch (OperationCanceledException e) {
+			// cancelled by user, ok
 			return null;
 		} catch (Exception exc) {
 			LOG.error("Error during refactoring", exc);
