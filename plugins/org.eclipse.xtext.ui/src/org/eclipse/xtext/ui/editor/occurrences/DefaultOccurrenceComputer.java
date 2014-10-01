@@ -34,6 +34,7 @@ import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -98,68 +99,73 @@ public class DefaultOccurrenceComputer implements IOccurrenceComputer {
 			final SubMonitor monitor) {
 		final IXtextDocument document = editor.getDocument();
 		if(document != null) {
-			return document.readOnly(new CancelableUnitOfWork<Map<Annotation, Position>, XtextResource>() {
-				
-				@Override
-				public Map<Annotation, Position> exec(XtextResource resource, final CancelIndicator cancelIndicator)
-						throws Exception {
-					if(resource != null) {
-						EObject target = eObjectAtOffsetHelper.resolveElementAt(resource, selection.getOffset());
-						if (target != null && ! target.eIsProxy()) {
-							final List<EObjectReferenceAndIndex> references = newArrayList();
-							IReferenceFinder.Acceptor acceptor = new IReferenceFinder.Acceptor() {
-								public void accept(IReferenceDescription reference) {
-									throw new UnsupportedOperationException("Local references are announced per object");
-								}
-
-								public void accept(EObject source, URI sourceURI, EReference eReference, int index,
-										EObject targetOrProxy, URI targetURI) {
-									EObjectReferenceAndIndex acceptMe = new EObjectReferenceAndIndex();
-									acceptMe.source = source;
-									acceptMe.reference = eReference;
-									acceptMe.idx = index;
-									references.add(acceptMe);
-								}
-							};
-							Iterable<URI> targetURIs = getTargetURIs(target);
-							if (!(targetURIs instanceof TargetURIs)) {
-								TargetURIs result = targetURIsProvider.get();
-								result.addAllURIs(targetURIs);
-								targetURIs = result;
-							}
-							IProgressMonitor localMonitor = new NullProgressMonitor() {
-								@Override
-								public boolean isCanceled() {
-									return monitor.isCanceled() || cancelIndicator.isCanceled();
-								}
-							};
-							referenceFinder.findReferences((TargetURIs) targetURIs, resource, acceptor, localMonitor);
-							operationCanceledManager.checkCanceled(cancelIndicator);
-							Map<Annotation, Position> result = newHashMapWithExpectedSize(references.size() + 1);
-							if (target.eResource() == resource) {
-								if (!references.isEmpty() || canBeReferencedLocally(target)) {
-									ITextRegion declarationRegion = locationInFileProvider.getSignificantTextRegion(target);
-									addOccurrenceAnnotation(DECLARATION_ANNOTATION_TYPE, document, declarationRegion, result);
-								}
-							}
-							for (EObjectReferenceAndIndex highlightMe : references) {
-								try {
-									if (localMonitor.isCanceled()) {
-										return emptyMap();
+			try {
+				return document.readOnly(new CancelableUnitOfWork<Map<Annotation, Position>, XtextResource>() {
+					
+					@Override
+					public Map<Annotation, Position> exec(XtextResource resource, final CancelIndicator cancelIndicator)
+							throws Exception {
+						if(resource != null) {
+							EObject target = eObjectAtOffsetHelper.resolveElementAt(resource, selection.getOffset());
+							if (target != null && ! target.eIsProxy()) {
+								final List<EObjectReferenceAndIndex> references = newArrayList();
+								IReferenceFinder.Acceptor acceptor = new IReferenceFinder.Acceptor() {
+									public void accept(IReferenceDescription reference) {
+										throw new UnsupportedOperationException("Local references are announced per object");
 									}
-									ITextRegion textRegion = locationInFileProvider.getSignificantTextRegion(highlightMe.source,
-											highlightMe.reference, highlightMe.idx);
-									addOccurrenceAnnotation(OCCURRENCE_ANNOTATION_TYPE, document, textRegion, result);
-								} catch(Exception exc) {
-									// outdated index information. Ignore
+
+									public void accept(EObject source, URI sourceURI, EReference eReference, int index,
+											EObject targetOrProxy, URI targetURI) {
+										EObjectReferenceAndIndex acceptMe = new EObjectReferenceAndIndex();
+										acceptMe.source = source;
+										acceptMe.reference = eReference;
+										acceptMe.idx = index;
+										references.add(acceptMe);
+									}
+								};
+								Iterable<URI> targetURIs = getTargetURIs(target);
+								if (!(targetURIs instanceof TargetURIs)) {
+									TargetURIs result = targetURIsProvider.get();
+									result.addAllURIs(targetURIs);
+									targetURIs = result;
 								}
+								IProgressMonitor localMonitor = new NullProgressMonitor() {
+									@Override
+									public boolean isCanceled() {
+										return monitor.isCanceled() || cancelIndicator.isCanceled();
+									}
+								};
+								referenceFinder.findReferences((TargetURIs) targetURIs, resource, acceptor, localMonitor);
+								operationCanceledManager.checkCanceled(cancelIndicator);
+								Map<Annotation, Position> result = newHashMapWithExpectedSize(references.size() + 1);
+								if (target.eResource() == resource) {
+									if (!references.isEmpty() || canBeReferencedLocally(target)) {
+										ITextRegion declarationRegion = locationInFileProvider.getSignificantTextRegion(target);
+										addOccurrenceAnnotation(DECLARATION_ANNOTATION_TYPE, document, declarationRegion, result);
+									}
+								}
+								for (EObjectReferenceAndIndex highlightMe : references) {
+									try {
+										if (localMonitor.isCanceled()) {
+											return emptyMap();
+										}
+										ITextRegion textRegion = locationInFileProvider.getSignificantTextRegion(highlightMe.source,
+												highlightMe.reference, highlightMe.idx);
+										addOccurrenceAnnotation(OCCURRENCE_ANNOTATION_TYPE, document, textRegion, result);
+									} catch(Exception exc) {
+										// outdated index information. Ignore
+									}
+								}
+								return result;
 							}
-							return result;
 						}
+						return emptyMap();
 					}
-					return emptyMap();
-				}
-			});
+				});
+			} catch (OperationCanceledError e) {
+				throw e.getWrapped();
+			}
+			
 		} else {
 			return emptyMap();
 		}
