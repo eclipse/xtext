@@ -47,9 +47,11 @@ public class XtextProjectConfigurator extends AbstractProjectConfigurator {
 	private void configureLanguages(ProjectConfigurationRequest request, IProgressMonitor monitor) throws CoreException {
 		for (MojoExecution execution : getMojoExecutions(request, monitor)) {
 			Languages languages = getParameterValue("languages", Languages.class, request.getMavenSession(), execution);
-			ProjectScope projectPreferences = new ProjectScope(request.getProject());
-			for (Language language : languages) {
-				configureLanguage(projectPreferences, language, request);
+			if(languages!=null) {
+				ProjectScope projectPreferences = new ProjectScope(request.getProject());
+				for (Language language : languages) {
+					configureLanguage(projectPreferences, language, request);
+				}
 			}
 		}
 	}
