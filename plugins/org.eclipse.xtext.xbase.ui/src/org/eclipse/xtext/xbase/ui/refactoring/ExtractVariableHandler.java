@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.swt.widgets.Display;
@@ -77,6 +78,8 @@ public class ExtractVariableHandler extends AbstractHandler {
 				});
 			}
 		} catch (InterruptedException e) {
+			return null;
+		} catch (OperationCanceledException e) {
 			return null;
 		} catch (Exception exc) {
 			LOG.error("Error during refactoring", exc);
