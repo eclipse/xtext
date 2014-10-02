@@ -28,7 +28,7 @@ public class BacktrackingLexerPresentationDamagerTest extends PresentationDamage
 				return createLexer();
 			}
 		});
-		XtextDocument document = new XtextDocument(source, null);
+		XtextDocument document = new XtextDocument(source, null, outdatedStateManager);
 		document.set(before);
 		return document;
 	}
