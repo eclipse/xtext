@@ -69,7 +69,7 @@ public class JdtTypeMirror extends AbstractClassMirror implements Adapter, IMirr
 			}
 		} catch (RuntimeException e) {
 			if (typeResourceServices != null) {
-				typeResourceServices.getOperationCanceledManager().throwIfOperationCanceledException(e);
+				typeResourceServices.getOperationCanceledManager().propagateAsErrorIfCancelException(e);
 			}
 			LOG.error("Error initializing type "+typeResource.getURI(), e);
 			throw e;
