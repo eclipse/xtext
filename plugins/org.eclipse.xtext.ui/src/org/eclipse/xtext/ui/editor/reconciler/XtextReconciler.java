@@ -134,7 +134,7 @@ public class XtextReconciler extends Job implements IReconciler {
 					});
 				}
 			} catch (Exception exc) {
-				canceledManager.throwIfOperationCanceledException(exc);
+				canceledManager.propagateAsErrorIfCancelException(exc);
 				log.error("Error while forcing reconciliation", exc);
 			}
 			if (sessionStarted && !paused) {
