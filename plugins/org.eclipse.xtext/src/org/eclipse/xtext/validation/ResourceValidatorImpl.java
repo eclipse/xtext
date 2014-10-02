@@ -88,7 +88,7 @@ public class ResourceValidatorImpl implements IResourceValidator {
 				validate(resource, mode, monitor, acceptor);
 				operationCanceledManager.checkCanceled(monitor);
 			} catch (RuntimeException e) {
-				operationCanceledManager.throwIfOperationCanceledException(e);
+				operationCanceledManager.propagateAsErrorIfCancelException(e);
 				log.error(e.getMessage(), e);
 			}
 			return result;
@@ -151,7 +151,7 @@ public class ResourceValidatorImpl implements IResourceValidator {
 				issueFromEValidatorDiagnostic(diagnostic, acceptor);
 			}
 		} catch (RuntimeException e) {
-			operationCanceledManager.throwIfOperationCanceledException(e);
+			operationCanceledManager.propagateAsErrorIfCancelException(e);
 			log.error(e.getMessage(), e);
 		}
 	}

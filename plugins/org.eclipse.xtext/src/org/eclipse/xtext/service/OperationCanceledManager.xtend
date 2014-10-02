@@ -22,9 +22,6 @@ import org.eclipse.xtext.util.CancelIndicator
  */
 class OperationCanceledManager {
 	
-	/**
-	 * @since 2.8
-	 */
 	protected def RuntimeException getPlatformOperationCanceledException(Throwable t) {
 		switch t {
 			OperationCanceledException : t
@@ -39,12 +36,21 @@ class OperationCanceledManager {
 	}
 	
 	/**
-	 * @since 2.8
+	 * Rethrows OperationCanceledErrors and wraps platform specific OperationCanceledExceptions. Does nothing for any other type of Throwable.
 	 */
-	def void throwIfOperationCanceledException(Throwable t) {
+	def void propagateAsErrorIfCancelException(Throwable t) {
 		val opCanceledException = getPlatformOperationCanceledException(t);
 		if (opCanceledException != null)
 			throw new OperationCanceledError(opCanceledException);
+	}
+	
+	/**
+	 * Rethrows platform specific OperationCanceledExceptions and unwraps OperationCanceledErrors. Does nothing for any other type of Throwable.
+	 */
+	def void propagateIfCancelException(Throwable t) {
+		val cancelException = t.platformOperationCanceledException
+		if (cancelException !== null) 
+			throw cancelException
 	}
 	
 	protected def Error asWrappingOperationCanceledException(Throwable throwable) {
