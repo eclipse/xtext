@@ -23,9 +23,6 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
  */
 @SuppressWarnings("all")
 public class OperationCanceledManager {
-  /**
-   * @since 2.8
-   */
   protected RuntimeException getPlatformOperationCanceledException(final Throwable t) {
     RuntimeException _switchResult = null;
     boolean _matched = false;
@@ -64,9 +61,9 @@ public class OperationCanceledManager {
   }
   
   /**
-   * @since 2.8
+   * Rethrows OperationCanceledErrors and wraps platform specific OperationCanceledExceptions. Does nothing for any other type of Throwable.
    */
-  public void throwIfOperationCanceledException(final Throwable t) {
+  public void propagateAsErrorIfCancelException(final Throwable t) {
     try {
       final RuntimeException opCanceledException = this.getPlatformOperationCanceledException(t);
       boolean _notEquals = (!Objects.equal(opCanceledException, null));
@@ -75,6 +72,17 @@ public class OperationCanceledManager {
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  /**
+   * Rethrows platform specific OperationCanceledExceptions and unwraps OperationCanceledErrors. Does nothing for any other type of Throwable.
+   */
+  public void propagateIfCancelException(final Throwable t) {
+    final RuntimeException cancelException = this.getPlatformOperationCanceledException(t);
+    boolean _tripleNotEquals = (cancelException != null);
+    if (_tripleNotEquals) {
+      throw cancelException;
     }
   }
   

@@ -196,8 +196,9 @@ public class XtextDocument extends Document implements IXtextDocument {
 				} else {
 					listener.modelChanged(res);
 				}
+			
 			} catch(Exception exc) {
-				operationCanceledManager.throwIfOperationCanceledException(exc);
+				operationCanceledManager.propagateIfCancelException(exc);
 				log.error("Error in IXtextModelListener", exc);
 			} catch (OperationCanceledError e) {
 				throw e.getWrapped();
