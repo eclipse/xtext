@@ -27,6 +27,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.OutdatedStateManager;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
 import org.eclipse.xtext.ui.editor.DirtyStateManager;
@@ -37,6 +38,7 @@ import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 import com.google.inject.util.Providers;
 
 /**
@@ -54,6 +56,8 @@ public class ValidationJobSchedulerTest extends AbstractXtextTests implements IR
 	private boolean noDocumentDescription;
 	private URI targetURI;
 	private IResourceDescription targetResource;
+	@Inject
+	private OutdatedStateManager outdatedStateManager;
 
 	@Override
 	public void setUp() throws Exception {
@@ -71,7 +75,7 @@ public class ValidationJobSchedulerTest extends AbstractXtextTests implements IR
 				return new Region(0, 0);
 			}
 		};
-		document = new XtextDocument(nullSource, null) {
+		document = new XtextDocument(nullSource, null, outdatedStateManager) {
 
 			@Override
 			public URI getResourceURI() {
