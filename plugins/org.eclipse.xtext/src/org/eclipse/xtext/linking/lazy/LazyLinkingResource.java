@@ -225,7 +225,7 @@ public class LazyLinkingResource extends XtextResource {
 				return getEObject(uriFragment, triple);
 			}
 		} catch (RuntimeException e) {
-			operationCanceledManager.throwIfOperationCanceledException(e);
+			operationCanceledManager.propagateAsErrorIfCancelException(e);
 			getErrors().add(new ExceptionDiagnostic(e));
 			log.error("resolution of uriFragment '" + uriFragment + "' failed.", e);
 			// wrapped because the javaDoc of this method states that WrappedExceptions are thrown
