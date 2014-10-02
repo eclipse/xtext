@@ -19,10 +19,12 @@ import org.eclipse.jface.text.presentation.IPresentationDamager;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.xtext.parser.antlr.Lexer;
+import org.eclipse.xtext.resource.OutdatedStateManager;
 import org.eclipse.xtext.ui.editor.PresentationDamager;
 import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 
+import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
@@ -69,7 +71,7 @@ public abstract class AbstractDamagerRepairerTest extends TestCase implements ID
 				return createLexer();
 			}
 		});
-		XtextDocument document = new XtextDocument(source, null);
+		XtextDocument document = new XtextDocument(source, null, new OutdatedStateManager());
 		document.set(before);
 		return document;
 	}
