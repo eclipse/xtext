@@ -247,7 +247,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	public CancelIndicator getCancelIndicator() {
-		if (resource == null || outdatedStateManager == null) {
+		if (resource == null) {
 			return CancelIndicator.NullImpl;
 		}
 		return outdatedStateManager.newCancelIndiciator(resource.getResourceSet());
@@ -390,6 +390,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		}
 
 		public <T> T modify(IUnitOfWork<T, XtextResource> work) {
+			boolean isCancelable = work instanceof CancelableUnitOfWork;
 			try {
 				XtextResource state = getState();
 				try {
@@ -401,12 +402,14 @@ public class XtextDocument extends Document implements IXtextDocument {
 							state = getState();
 							if (log.isDebugEnabled())
 								log.debug("write - " + Thread.currentThread().getName());
-							exec = work.exec(state);
+							exec = outdatedStateManager.exec(work, state);
 							return exec;
 						} catch (RuntimeException e) {
 							throw e;
 						} catch (Exception e) {
 							throw new WrappedException(e);
+						} catch (OperationCanceledError e) {
+							throw e.getWrapped();
 						} finally {
 							try {
 								// downgrade lock to read lock 
@@ -417,15 +420,18 @@ public class XtextDocument extends Document implements IXtextDocument {
 									// changes of a ReconcilingUnitOfWork will be handled when the resulting document changes are applied
 									notifyModelListeners(state);
 								}
+							} catch (RuntimeException e) {
+								if (operationCanceledManager.isOperationCanceledException(e)) {
+									if (isCancelable)
+										throw e;
+								} else {
+									throw e;
+								}
 							} finally {
 								releaseReadLock();
 							}
 						}
 					}
-				} catch (OperationCanceledException e) {
-					throw e;
-				} catch (OperationCanceledError e) {
-					throw e.getWrapped();
 				} catch (RuntimeException e) {
 					try {
 						if (state != null)
@@ -459,6 +465,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		 * @since 2.7
 		 */
 		protected <T> T internalReadOnly(IUnitOfWork<T, XtextResource> work, boolean isCancelReaders) {
+			boolean isCancelable = work instanceof CancelableUnitOfWork;
 			if(isCancelReaders) 
 				cancelReaders(resource);
 			XtextResource state = getState();
@@ -475,22 +482,29 @@ public class XtextDocument extends Document implements IXtextDocument {
 					if (getReadHoldCount() == 1 && getWriteHoldCount() == 0) {
 						hadUpdates |= updateContentBeforeRead();
 					}
-					if(work instanceof CancelableUnitOfWork) 
-						((CancelableUnitOfWork<?, XtextResource>) work).setCancelIndicator(getCancelIndicator());
-					T exec = work.exec(state);
+					T exec = outdatedStateManager.exec(work,state);
 					ensureThatStateIsNotReturned(exec, work);
 					return  exec;
 				} catch (RuntimeException e) {
 					throw e;
 				} catch (Exception e) {
 					throw new WrappedException(e);
+				} catch (OperationCanceledError e) {
+					throw e.getWrapped();
 				} finally {
 					try {
 						if(potentialUpdaterCount.decrementAndGet() == 0 && (hadUpdates || isCancelReaders)) { 
-							hadUpdates = false;	
-							if (getCancelIndicator().isCanceled())
+							hadUpdates = false;
+							if (getCancelIndicator().isCanceled() && isCancelable)
 								throw new OperationCanceledException();
 							notifyModelListeners(resource);
+						}
+					} catch (RuntimeException e) {
+						if (operationCanceledManager.isOperationCanceledException(e)) {
+							if (isCancelable)
+								throw e;
+						} else {
+							throw e;
 						}
 					} finally {
 						releaseReadLock();
