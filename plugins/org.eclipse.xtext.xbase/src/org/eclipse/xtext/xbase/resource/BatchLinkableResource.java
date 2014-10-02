@@ -110,7 +110,7 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 				}
 				return basicGetEObject(uriFragment);
 			} catch (RuntimeException e) {
-				operationCanceledManager.throwIfOperationCanceledException(e);
+				operationCanceledManager.propagateAsErrorIfCancelException(e);
 				getErrors().add(new ExceptionDiagnostic(e));
 				log.error("resolution of uriFragment '" + uriFragment + "' failed.", e);
 				// wrapped because the javaDoc of this method states that WrappedExceptions are thrown

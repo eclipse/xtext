@@ -355,7 +355,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 			}
 			inferrer.infer(eObject, acceptor, preIndexingPhase);
 		} catch (RuntimeException e) {
-			operationCanceledManager.throwIfOperationCanceledException(e);
+			operationCanceledManager.propagateAsErrorIfCancelException(e);
 			LOG.error("Error calling inferrer", e);
 		}
 		if (!preIndexingPhase) {
@@ -363,7 +363,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 				try {
 					initializer.getValue().apply(initializer.getKey());
 				} catch (RuntimeException e) {
-					operationCanceledManager.throwIfOperationCanceledException(e);
+					operationCanceledManager.propagateAsErrorIfCancelException(e);
 					LOG.error("Error calling inferrer", e);
 				}
 			}
