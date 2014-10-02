@@ -12,6 +12,9 @@ import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtext.service.OperationCanceledError
 import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.xtext.util.concurrent.IUnitOfWork
+import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork
+import org.eclipse.emf.ecore.resource.Resource
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -22,13 +25,21 @@ class OutdatedStateManager {
 	
 	@Inject OperationCanceledManager canceledManager
 	
+	val cancelationAllowed = new ThreadLocal<Boolean>{
+		override initialValue() {
+			true
+		}
+	}
+	
 	/**
 	 * Created a fresh CancelIndicator
 	 */
 	def CancelIndicator newCancelIndiciator(ResourceSet rs) {
 		if (rs instanceof XtextResourceSet) {
 			val current = rs.modificationStamp
-			return [ rs.isOutdated || current != rs.modificationStamp]
+			return [ 
+				cancelationAllowed.get && (rs.isOutdated || current != rs.modificationStamp)
+			]
 		} else {
 			CancelIndicator.NullImpl
 		}
@@ -40,8 +51,21 @@ class OutdatedStateManager {
 	 */ 
 	def void checkCanceled(ResourceSet rs) {
 		if (rs instanceof XtextResourceSet) {
-			if (rs.outdated)
+			if (rs.outdated && cancelationAllowed.get)
 				canceledManager.throwOperationCanceledException()
+		}
+	}
+	
+	def <R, P extends Resource> R exec(IUnitOfWork<R, P> work, P param) {
+		try {
+			if (work instanceof CancelableUnitOfWork<?,?>) {
+				work.cancelIndicator = param.resourceSet.newCancelIndiciator
+			} else {
+				cancelationAllowed.set(false)
+			}
+			work.exec(param)
+		} finally {
+			cancelationAllowed.set(true)
 		}
 	}
 }
