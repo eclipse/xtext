@@ -25,6 +25,7 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
 import org.eclipse.xtext.parser.antlr.Lexer;
+import org.eclipse.xtext.resource.OutdatedStateManager;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.util.ReplaceRegion;
@@ -65,6 +66,9 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
   
   @Inject
   private FlexerFactory flexerFactory;
+  
+  @Inject
+  private OutdatedStateManager outdatedStateManager;
   
   @Test
   public void testSectionOverlap() {
@@ -617,7 +621,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
         }
       };
       final XtendDocumentTokenSource source = ObjectExtensions.<XtendDocumentTokenSource>operator_doubleArrow(_xtendDocumentTokenSource, _function);
-      final XtextDocument document = new XtextDocument(source, null);
+      final XtextDocument document = new XtextDocument(source, null, this.outdatedStateManager);
       document.set(content);
       document.setInput(((XtextResource) resource));
       _xblockexpression = document;
