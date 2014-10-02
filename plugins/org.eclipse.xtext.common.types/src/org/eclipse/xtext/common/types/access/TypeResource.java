@@ -135,7 +135,7 @@ public class TypeResource extends ResourceImpl implements ISynchronizable<TypeRe
 				if (operationCanceledManager.isOperationCanceledException(e)) {
 					unload();
 				}
-				operationCanceledManager.throwIfOperationCanceledException(e);
+				operationCanceledManager.propagateAsErrorIfCancelException(e);
 			}	
 			throw new CannotLoadTypeResourceException(e);
 		}
