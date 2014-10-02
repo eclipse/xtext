@@ -32,6 +32,7 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.texteditor.IDocumentProvider;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 
 import com.google.inject.Inject;
@@ -118,25 +119,30 @@ public class OccurrenceMarker {
 			final boolean isMarkOccurrences = initialIsMarkOccurrences;
 			final ITextSelection selection = initialSelection;
 			final SubMonitor progress = SubMonitor.convert(monitor, 2);
-			if (!progress.isCanceled()) {
-				final Map<Annotation, Position> annotations = (isMarkOccurrences) ? occurrenceComputer.createAnnotationMap(editor, selection,
-						progress.newChild(1)) : Collections.<Annotation, Position>emptyMap();
+			try {
 				if (!progress.isCanceled()) {
-					Display.getDefault().asyncExec(new Runnable() {
-						public void run() {
-							if (!progress.isCanceled()) {
-								final IAnnotationModel annotationModel = getAnnotationModel(editor);
-								if (annotationModel instanceof IAnnotationModelExtension)
-									((IAnnotationModelExtension) annotationModel).replaceAnnotations(
-											getExistingOccurrenceAnnotations(annotationModel), annotations);
-								else if(annotationModel != null)
-									throw new IllegalStateException(
-											"AnnotationModel does not implement IAnnotationModelExtension");  //$NON-NLS-1$
+					final Map<Annotation, Position> annotations = (isMarkOccurrences) ? occurrenceComputer.createAnnotationMap(editor, selection,
+							progress.newChild(1)) : Collections.<Annotation, Position>emptyMap();
+					if (!progress.isCanceled()) {
+						Display.getDefault().asyncExec(new Runnable() {
+							public void run() {
+								if (!progress.isCanceled()) {
+									final IAnnotationModel annotationModel = getAnnotationModel(editor);
+									if (annotationModel instanceof IAnnotationModelExtension)
+										((IAnnotationModelExtension) annotationModel).replaceAnnotations(
+												getExistingOccurrenceAnnotations(annotationModel), annotations);
+									else if(annotationModel != null)
+										throw new IllegalStateException(
+												"AnnotationModel does not implement IAnnotationModelExtension");  //$NON-NLS-1$
+								}
 							}
-						}
-					});
+						});
+					}
 				}
+			} catch (OperationCanceledError e) {
+				return Status.CANCEL_STATUS;
 			}
+			
 			return progress.isCanceled() ? Status.CANCEL_STATUS : Status.OK_STATUS;
 		}
 
