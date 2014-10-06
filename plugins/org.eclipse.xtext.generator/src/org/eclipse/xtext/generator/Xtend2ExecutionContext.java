@@ -17,7 +17,10 @@ import org.eclipse.xpand2.XpandExecutionContext;
 public class Xtend2ExecutionContext {
 	XpandExecutionContext legacyContext;
 
-	Xtend2ExecutionContext(XpandExecutionContext legacyContext) {
+	/**
+	 * @since 2.8
+	 */
+	public Xtend2ExecutionContext(XpandExecutionContext legacyContext) {
 		super();
 		this.legacyContext = legacyContext;
 	}

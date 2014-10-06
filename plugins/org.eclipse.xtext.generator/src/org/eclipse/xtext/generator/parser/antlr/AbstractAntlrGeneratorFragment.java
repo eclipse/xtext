@@ -92,11 +92,25 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 
 	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
-		AbstractRule firstRule = grammar.getRules().get(0);
-		if (!(firstRule instanceof ParserRule) || GrammarUtil.isDatatypeRule((ParserRule) firstRule))
+		checkGrammar(grammar);
+		super.generate(grammar, ctx);
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	protected void checkGrammar(Grammar grammar) {
+		if (hasProductionRules(grammar))
 			throw new IllegalArgumentException(
 					"You may not generate an ANTLR parser for a grammar without production rules.");
-		super.generate(grammar, ctx);
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	protected boolean hasProductionRules(Grammar grammar) {
+		AbstractRule firstRule = grammar.getRules().get(0);
+		return !(firstRule instanceof ParserRule) || GrammarUtil.isDatatypeRule((ParserRule) firstRule);
 	}
 
 	/**
