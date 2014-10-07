@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -46,7 +45,6 @@ import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 
 import com.google.inject.Inject;
-import com.google.inject.internal.MoreTypes;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -502,20 +500,7 @@ public class OnTheFlyJavaCompiler {
 	}
 
 	protected String toString(Type returnType) {
-		Class<MoreTypes> clazz = MoreTypes.class;
-		Method method = null;
-		try {
-			try {
-				// Guice 3
-				method = clazz.getDeclaredMethod("typeToString", Type.class);
-			} catch (NoSuchMethodException e) {
-				// Guice <3
-				method = clazz.getDeclaredMethod("toString", Type.class);
-			}
-			return (String) method.invoke(null, returnType);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
+		return returnType instanceof Class ? ((Class<?>) returnType).getName() : returnType.toString();
 	}
 
 }
