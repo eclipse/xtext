@@ -11,6 +11,7 @@ import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.Iterator;
 
+import org.eclipse.xtext.util.ReflectionUtil;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -19,7 +20,6 @@ import com.google.inject.Injector;
 import com.google.inject.Key;
 import com.google.inject.Module;
 import com.google.inject.Provider;
-import com.google.inject.internal.MoreTypes;
 import com.google.inject.util.Types;
 
 public class GenericModuleTest extends Assert {
@@ -45,7 +45,7 @@ public class GenericModuleTest extends Assert {
 					continue;
 				if (provider != m instanceof ProviderModule)
 					continue;
-				if (!MoreTypes.getRawType(mod.getKeyType()).equals(from))
+				if (!ReflectionUtil.getRawType(mod.getKeyType()).equals(from))
 					continue;
 				Object object = mod.invokeMethod();
 				if (object==null && to==null || object!=null && object.equals(to))
