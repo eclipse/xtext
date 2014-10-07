@@ -35,7 +35,7 @@ import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.shared.Access;
 
 import com.google.common.collect.Lists;
-import com.google.inject.internal.Maps;
+import com.google.common.collect.Maps;
 
 public class EditingDomainAdapter extends AdapterImpl implements ResourceSetListener,
 		TransactionalEditingDomainListener {
