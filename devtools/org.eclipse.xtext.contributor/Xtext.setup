@@ -109,6 +109,7 @@
     <roots id="org.objectweb.asm" versionRange="5.0.1"/>
     <roots id="org.junit"/>
     <roots id="org.eclipse.swtbot.eclipse.feature.group"/>
+    <roots id="com.google.inject" versionRange="3.0.0"/>
     <repositoryLists name="juno">
       <p2Repositories url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
       <p2Repositories url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
