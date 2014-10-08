@@ -1,0 +1,9 @@
+
+XPECT_SETUP org.xpect.examples.setupcomponents.CustomSetupTest 
+	CustomSetupComponent "myFoo" "myBar" {
+		baz = "myBaz"
+	}
+END_SETUP
+
+
+XPECT mysetup --> CustomSetupComponent{foo=myFoo, bar=myBar, baz=myBaz}
