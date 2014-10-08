@@ -15,7 +15,6 @@ import org.xpect.setup.XpectSetupComponent;
 import org.xpect.setup.XpectSetupRoot;
 
 import com.google.common.base.Joiner;
-import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 
 /**
@@ -26,6 +25,53 @@ import com.google.common.collect.Lists;
 @RunWith(XpectRunner.class)
 @XpectImport({ CustomSetupRoot.class, CustomSetupComponent.class })
 public class CustomSetupTest {
+
+	/**
+	 * XpectSetupComponents can be used (referenced) in the XPECT_SETUP section.
+	 * They can have constructor parameters, add(Foo)-methods and
+	 * set(Foo)-methods.
+	 */
+	@XpectSetupComponent
+	public static class CustomSetupComponent {
+		private final String bar;
+		private String baz = "defaultBaz";
+		private List<CustomSetupComponent> children = Lists.newArrayList();
+		private final String foo;
+
+		public CustomSetupComponent() {
+			this.foo = "defaultFoo";
+			this.bar = "defaultBar";
+		}
+
+		public CustomSetupComponent(String foo, String bar) {
+			this.foo = foo;
+			this.bar = bar;
+		}
+
+		public void add(CustomSetupComponent child) {
+			children.add(child);
+		}
+
+		public void setBaz(String baz) {
+			this.baz = baz;
+		}
+
+		public void setMyChild(CustomSetupComponent child) {
+			children.add(child);
+		}
+
+		public void addMyChildren(CustomSetupComponent child) {
+			children.add(child);
+		}
+
+		@Override
+		public String toString() {
+			String self = getClass().getSimpleName() + " foo=" + foo + " bar=" + bar + " baz=" + baz;
+			if (children.isEmpty())
+				return self;
+			return self + " {\n  " + Joiner.on("\n").join(children).replace("\n", "\n  ") + "\n}";
+		}
+	}
 
 	/**
 	 * A class annotated with @XpectSetupRoot should have add(Foo) methods. All
@@ -39,32 +85,6 @@ public class CustomSetupTest {
 
 		public void add(CustomSetupComponent child) {
 			children.add(child);
-		}
-	}
-
-	/**
-	 * XpectSetupComponents can be used (referenced) in the XPECT_SETUP section.
-	 * They can have constructor parameters, add(Foo)-methods and
-	 * set(Foo)-methods.
-	 */
-	@XpectSetupComponent
-	public static class CustomSetupComponent {
-		private final String foo;
-		private final String bar;
-		private String baz;
-
-		public CustomSetupComponent(String foo, String bar) {
-			this.foo = foo;
-			this.bar = bar;
-		}
-
-		public void setBaz(String baz) {
-			this.baz = baz;
-		}
-
-		@Override
-		public String toString() {
-			return Objects.toStringHelper(this).add("foo", foo).add("bar", bar).add("baz", baz).toString();
 		}
 	}
 

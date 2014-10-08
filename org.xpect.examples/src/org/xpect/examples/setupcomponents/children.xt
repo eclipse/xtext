@@ -1,0 +1,27 @@
+
+XPECT_SETUP org.xpect.examples.setupcomponents.CustomSetupTest 
+	CustomSetupComponent  {                                          // calls CustomSetupRoot.add(CustomSetupComponent)
+		baz = "rootBaz"                                              // calls CustomSetupComponent.setBaz(String)
+		CustomSetupComponent "childFoo1" "childBar1" {               // calls CustomSetupComponent.add(CustomSetupComponent)
+			baz = "childBaz1"                                        // calls CustomSetupComponent.setBaz(String)
+		}	
+		myChild = CustomSetupComponent "childFoo2" "childBar2" {     // calls CustomSetupComponent.setMyChild(CustomSetupComponent)
+			baz = "childBaz2"
+		}
+		myChildren = CustomSetupComponent "childFoo3" "childBar3" {  // calls CustomSetupComponent.addMyChildren(CustomSetupComponent)
+			baz = "childBaz3"
+		}
+//		myChild = {
+//			baz = "childBaz"
+//		} 
+	}
+END_SETUP
+
+
+XPECT mysetup ---
+CustomSetupComponent foo=defaultFoo bar=defaultBar baz=rootBaz {
+  CustomSetupComponent foo=childFoo1 bar=childBar1 baz=childBaz1
+  CustomSetupComponent foo=childFoo2 bar=childBar2 baz=childBaz2
+  CustomSetupComponent foo=childFoo3 bar=childBar3 baz=childBaz3
+}
+---

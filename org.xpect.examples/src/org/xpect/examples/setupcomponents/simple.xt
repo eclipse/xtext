@@ -6,4 +6,4 @@ XPECT_SETUP org.xpect.examples.setupcomponents.CustomSetupTest
 END_SETUP
 
 
-XPECT mysetup --> CustomSetupComponent{foo=myFoo, bar=myBar, baz=myBaz}
+XPECT mysetup --> CustomSetupComponent foo=myFoo bar=myBar baz=myBaz
