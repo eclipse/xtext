@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Factory;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.util.Strings;
 import org.xpect.registry.IEmfFileExtensionInfo.IXtextFileExtensionInfo;
 
 import com.google.common.base.Joiner;
@@ -125,6 +126,16 @@ public class FileExtensionInfoRegistry implements IEmfFileExtensionInfo.Registry
 		@Override
 		protected String getFileExtensionString() {
 			return fileExtension;
+		}
+
+		public List<String> getLocations() {
+			List<String> locations = Lists.newArrayList();
+			for (IExtensionInfo trace : traces) {
+				String location = trace.getLocation();
+				if (!Strings.isEmpty(location))
+					locations.add(location);
+			}
+			return locations;
 		}
 	}
 
@@ -406,7 +417,7 @@ public class FileExtensionInfoRegistry implements IEmfFileExtensionInfo.Registry
 
 	private void warnIfSet(FileExtensionData info, Object value, String name) {
 		if (value != null)
-			LOG.warn("Ignoring " + name + " '" + value + "' for fileExtension '" + info.fileExtension + "'");
+			LOG.warn("Ignoring " + name + " '" + value + "' for fileExtension '" + info.fileExtension + "' from " + info.getLocations());
 	}
 
 }
