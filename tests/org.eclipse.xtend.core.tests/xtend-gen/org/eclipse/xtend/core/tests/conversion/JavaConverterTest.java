@@ -893,7 +893,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder.append("private String richTxt = \"int \"+\"i=\"+i+\".\";");
     _builder.newLine();
     String _classBodyDeclToXtend = this.classBodyDeclToXtend(_builder.toString());
-    Assert.assertEquals("int i=0\nString richTxt=\'\'\'int \ni=«i».\'\'\'", _classBodyDeclToXtend);
+    Assert.assertEquals("int i=0\nString richTxt=\'\'\'int i=«i».\'\'\'", _classBodyDeclToXtend);
   }
   
   @Test
@@ -909,7 +909,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   @Test
   public void testRichStringCase3() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("static String a = \"first line\"+\"second line\"+\"third line\"+\"fourth line\";");
+    _builder.append("static String a = \"first line\\n\"+\"second line\\n\"+\"third line\\n\"+\"fourth line\";");
     String _classBodyDeclToXtend = this.classBodyDeclToXtend(_builder.toString());
     Assert.assertEquals("static package String a=\'\'\'first line\nsecond line\nthird line\nfourth line\'\'\'", _classBodyDeclToXtend);
   }
@@ -927,7 +927,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     XExpression _initialValue = xtendMember.getInitialValue();
     Assert.assertTrue((_initialValue instanceof RichString));
     String _classBodyDeclToXtend = this.classBodyDeclToXtend("String richTxt = \"a\" + \"\'\'\' no «\'foo\'.length» side-effect \'\'\'\";");
-    Assert.assertEquals("package String richTxt=\'\'\'a\n«\"\'\'\'\"» no «\"«\"» \'foo\'.length«\"»\"» side-effect «\"\'\'\'\"»\'\'\'", _classBodyDeclToXtend);
+    Assert.assertEquals("package String richTxt=\'\'\'a«\"\'\'\'\"» no «\"«\"» \'foo\'.length«\"»\"» side-effect «\"\'\'\'\"»\'\'\'", _classBodyDeclToXtend);
   }
   
   @Test
@@ -947,7 +947,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
       (("String richTxt = \"test\" + \"\'\'\' «FOR a: \'123\'.toCharArray SEPARATOR \',\\n  \\t\'»\\n" + "      a\\n") + 
         " «ENDFOR»\'\'\'\";"));
     Assert.assertEquals(
-      "package String richTxt=\'\'\'test\n«\"\'\'\'\"» «\"«\"» FOR a: \'123\'.toCharArray SEPARATOR \',\n  \t\'«\"»\"»\n      a\n «\"«\"» ENDFOR«\"»\"»«\"\'\'\'\"»\'\'\'", _classBodyDeclToXtend);
+      "package String richTxt=\'\'\'test«\"\'\'\'\"» «\"«\"» FOR a: \'123\'.toCharArray SEPARATOR \',\n  \t\'«\"»\"»\n      a\n «\"«\"» ENDFOR«\"»\"»«\"\'\'\'\"»\'\'\'", _classBodyDeclToXtend);
   }
   
   @Test

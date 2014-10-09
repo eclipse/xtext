@@ -242,11 +242,16 @@ public class JavaASTFlattener extends ASTVisitor {
   private StringBuffer appendLineWrapToBuffer() {
     StringBuffer _xblockexpression = null;
     {
-      this.appendToBuffer("\n");
+      String _nl = this.nl();
+      this.appendToBuffer(_nl);
       String _multiply = this.operator_multiply("\t", this.indentation);
       _xblockexpression = this.appendToBuffer(_multiply);
     }
     return _xblockexpression;
+  }
+  
+  protected String nl() {
+    return StringConcatenation.DEFAULT_LINE_DELIMITER;
   }
   
   public String operator_multiply(final String string, final int i) {
@@ -1199,50 +1204,30 @@ public class JavaASTFlattener extends ASTVisitor {
       }
       Expression _leftOperand = node.getLeftOperand();
       this.convertToRichString(_leftOperand);
-      boolean _and = false;
-      Expression _leftOperand_1 = node.getLeftOperand();
-      if (!(_leftOperand_1 instanceof StringLiteral)) {
-        _and = false;
-      } else {
-        Expression _rightOperand = node.getRightOperand();
-        _and = (_rightOperand instanceof StringLiteral);
-      }
-      if (_and) {
-        this.appendLineWrapToBuffer();
-      }
-      Expression _rightOperand_1 = node.getRightOperand();
-      this.convertToRichString(_rightOperand_1);
+      Expression _rightOperand = node.getRightOperand();
+      this.convertToRichString(_rightOperand);
       List _extendedOperands = node.extendedOperands();
-      Expression _rightOperand_2 = node.getRightOperand();
+      Expression _rightOperand_1 = node.getRightOperand();
       final Function2<Expression, Expression, Expression> _function = new Function2<Expression, Expression, Expression>() {
         public Expression apply(final Expression prevExpr, final Expression currExpr) {
-          boolean _and = false;
-          if (!(prevExpr instanceof StringLiteral)) {
-            _and = false;
-          } else {
-            _and = (currExpr instanceof StringLiteral);
-          }
-          if (_and) {
-            JavaASTFlattener.this.appendLineWrapToBuffer();
-          }
           JavaASTFlattener.this.convertToRichString(currExpr);
           return currExpr;
         }
       };
-      IterableExtensions.<Expression, Expression>fold(_extendedOperands, _rightOperand_2, _function);
+      IterableExtensions.<Expression, Expression>fold(_extendedOperands, _rightOperand_1, _function);
       if (firstEntrance) {
         this.appendToBuffer("\'\'\'");
       }
     } else {
-      Expression _leftOperand_2 = node.getLeftOperand();
-      _leftOperand_2.accept(this);
+      Expression _leftOperand_1 = node.getLeftOperand();
+      _leftOperand_1.accept(this);
       StringBuffer _appendSpaceToBuffer = this.appendSpaceToBuffer();
       InfixExpression.Operator _operator = node.getOperator();
       String _string = _operator.toString();
       _appendSpaceToBuffer.append(_string);
       this.appendSpaceToBuffer();
-      Expression _rightOperand_3 = node.getRightOperand();
-      _rightOperand_3.accept(this);
+      Expression _rightOperand_2 = node.getRightOperand();
+      _rightOperand_2.accept(this);
       final List extendedOperands = node.extendedOperands();
       int _size = extendedOperands.size();
       boolean _notEquals = (_size != 0);

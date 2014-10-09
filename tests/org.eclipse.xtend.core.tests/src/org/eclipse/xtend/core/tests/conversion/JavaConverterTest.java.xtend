@@ -494,7 +494,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 	}
 
 	@Test def void testRichStringCase1() throws Exception {
-		assertEquals("int i=0\nString richTxt='''int \ni=«i».'''",
+		assertEquals("int i=0\nString richTxt='''int i=«i».'''",
 			classBodyDeclToXtend(
 				'''
 					private int i = 0;
@@ -513,7 +513,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 
 	@Test def void testRichStringCase3() throws Exception {
 		assertEquals("static package String a='''first line\nsecond line\nthird line\nfourth line'''",
-			classBodyDeclToXtend('''static String a = "first line"+"second line"+"third line"+"fourth line";'''))
+			classBodyDeclToXtend('''static String a = "first line\n"+"second line\n"+"third line\n"+"fourth line";'''))
 	}
 
 	@Test def void testRichStringSpecialCase() throws Exception {
@@ -524,7 +524,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		var XtendField xtendMember = clazz.getMembers().get(0) as XtendField
 		assertEquals("richTxt", xtendMember.getName())
 		assertTrue(xtendMember.getInitialValue() instanceof RichString)
-		assertEquals("package String richTxt='''a\n«\"'''\"» no «\"«\"» 'foo'.length«\"»\"» side-effect «\"'''\"»'''",
+		assertEquals("package String richTxt='''a«\"'''\"» no «\"«\"» 'foo'.length«\"»\"» side-effect «\"'''\"»'''",
 			classBodyDeclToXtend("String richTxt = \"a\" + \"''' no «'foo'.length» side-effect '''\";"))
 	}
 
@@ -537,7 +537,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		assertEquals("richTxt", xtendMember.getName())
 		assertTrue(xtendMember.getInitialValue() instanceof RichString)
 		assertEquals(
-			"package String richTxt='''test\n«\"'''\"» «\"«\"» FOR a: '123'.toCharArray SEPARATOR ',\n  \t'«\"»\"»\n      a\n «\"«\"» ENDFOR«\"»\"»«\"'''\"»'''",
+			"package String richTxt='''test«\"'''\"» «\"«\"» FOR a: '123'.toCharArray SEPARATOR ',\n  \t'«\"»\"»\n      a\n «\"«\"» ENDFOR«\"»\"»«\"'''\"»'''",
 			classBodyDeclToXtend(
 				"String richTxt = \"test\" + \"''' «FOR a: '123'.toCharArray SEPARATOR ',\\n  \\t'»\\n" + "      a\\n" +
 					" «ENDFOR»'''\";"))
