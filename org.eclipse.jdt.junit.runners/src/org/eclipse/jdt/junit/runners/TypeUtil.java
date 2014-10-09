@@ -10,6 +10,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.debug.core.ILaunch;
+import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.jdt.core.IJavaModel;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IType;
@@ -36,11 +37,14 @@ public class TypeUtil {
 			className = ((ITestSuiteElement) element).getSuiteTypeName();
 		else if (element instanceof TestRunSession) {
 			ILaunch launch = ((TestRunSession) element).getLaunch();
-			try {
-				className = launch.getLaunchConfiguration().getAttribute("org.eclipse.jdt.launching.MAIN_TYPE", (String) null);
-			} catch (CoreException e) {
-				e.printStackTrace();
-			}
+			if (launch != null)
+				try {
+					ILaunchConfiguration configuration = launch.getLaunchConfiguration();
+					if (configuration != null)
+						className = configuration.getAttribute("org.eclipse.jdt.launching.MAIN_TYPE", (String) null);
+				} catch (CoreException e) {
+					e.printStackTrace();
+				}
 		}
 		if (className != null && SourceVersion.isName(className))
 			return className;
