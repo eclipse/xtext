@@ -10,6 +10,7 @@ package org.eclipse.xtend.core.conversion
 import com.google.inject.Inject
 import java.util.Iterator
 import java.util.List
+import java.util.Set
 import org.eclipse.jdt.core.dom.AST
 import org.eclipse.jdt.core.dom.ASTNode
 import org.eclipse.jdt.core.dom.ASTParser
@@ -33,6 +34,7 @@ import org.eclipse.jdt.core.dom.CastExpression
 import org.eclipse.jdt.core.dom.CatchClause
 import org.eclipse.jdt.core.dom.CharacterLiteral
 import org.eclipse.jdt.core.dom.ClassInstanceCreation
+import org.eclipse.jdt.core.dom.Comment
 import org.eclipse.jdt.core.dom.CompilationUnit
 import org.eclipse.jdt.core.dom.ConditionalExpression
 import org.eclipse.jdt.core.dom.ConstructorInvocation
@@ -103,9 +105,8 @@ import org.eclipse.jdt.core.dom.VariableDeclarationFragment
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement
 import org.eclipse.jdt.core.dom.WhileStatement
 import org.eclipse.jdt.core.dom.WildcardType
+import org.eclipse.xtend2.lib.StringConcatenation
 import org.eclipse.xtext.conversion.IValueConverterService
-import org.eclipse.jdt.core.dom.Comment
-import java.util.Set
 
 /**
  * @author Dennis Huebner - Initial contribution and API
@@ -193,8 +194,12 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	def private appendLineWrapToBuffer() {
-		appendToBuffer("\n")
+		appendToBuffer(nl())
 		appendToBuffer("\t" * indentation)
+	}
+
+	def protected nl() {
+		return StringConcatenation.DEFAULT_LINE_DELIMITER
 	}
 
 	def operator_multiply(String string, int i) {
@@ -764,15 +769,9 @@ class JavaASTFlattener extends ASTVisitor {
 				appendToBuffer("'''")
 			}
 			node.leftOperand.convertToRichString
-			if (node.leftOperand instanceof StringLiteral && node.rightOperand instanceof StringLiteral) {
-				appendLineWrapToBuffer
-			}
 			node.rightOperand.convertToRichString
 			node.extendedOperands().fold(node.rightOperand) [ prevExpr, Expression currExpr |
-				if (prevExpr instanceof StringLiteral && currExpr instanceof StringLiteral) {
-					appendLineWrapToBuffer
-				}
-				convertToRichString(currExpr)
+				currExpr.convertToRichString
 				return currExpr
 			]
 			if (firstEntrance)
