@@ -32,6 +32,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.resource.DescriptionUtils;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
@@ -470,11 +471,13 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 			return;
 		if (isDirty || ((!resource.isTrackingModification() || resource.isModified()) && delegatingClientAwareResource.isDirty() && dirtyStateManager.manageDirtyState(delegatingClientAwareResource))) {
 			synchronized (dirtyStateManager) {
-				Manager resourceDescriptionManager = getResourceDescriptionManager(resource.getURI());
-				final IResourceDescription newDescription = resourceDescriptionManager.getResourceDescription(resource);
-				if (haveEObjectDescriptionsChanged(newDescription, resourceDescriptionManager)) {
-					dirtyResource.copyState(newDescription);
-					dirtyStateManager.announceDirtyStateChanged(delegatingClientAwareResource);
+				Manager resourceDescriptionManager = getResourceDescriptionManagerIfOwnLanguage(resource);
+				if (resourceDescriptionManager != null) {
+					final IResourceDescription newDescription = resourceDescriptionManager.getResourceDescription(resource);
+					if (haveEObjectDescriptionsChanged(newDescription, resourceDescriptionManager)) {
+						dirtyResource.copyState(newDescription);
+						dirtyStateManager.announceDirtyStateChanged(delegatingClientAwareResource);
+					}
 				}
 			}
 		}
@@ -499,8 +502,25 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 	/**
 	 * @since 2.7
 	 */
+	@Deprecated
+	// use getResourceDescriptionManagerIfOwnLanguage(XtextResource)
 	protected IResourceDescription.Manager getResourceDescriptionManager(URI resourceURI) {
 		return resourceServiceProviderRegistry.getResourceServiceProvider(resourceURI).get(DirtyStateResourceDescription.Manager.class);
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	protected IResourceDescription.Manager getResourceDescriptionManagerIfOwnLanguage(XtextResource resource) {
+		IResourceServiceProvider rsp = resourceServiceProviderRegistry.getResourceServiceProvider(resource.getURI());
+		if (rsp == null)
+			return null;
+		String uriLanguageName = rsp.get(LanguageInfo.class).getLanguageName();
+		String resourceLanguageName = resource.getResourceServiceProvider().get(LanguageInfo.class).getLanguageName();
+		if (!uriLanguageName.equals(resourceLanguageName))
+			return null;
+		Manager result = rsp.get(DirtyStateResourceDescription.Manager.class);
+		return result;
 	}
 
 	/**
