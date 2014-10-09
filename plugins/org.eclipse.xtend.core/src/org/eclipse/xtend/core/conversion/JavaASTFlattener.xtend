@@ -104,24 +104,31 @@ import org.eclipse.jdt.core.dom.VariableDeclarationStatement
 import org.eclipse.jdt.core.dom.WhileStatement
 import org.eclipse.jdt.core.dom.WildcardType
 import org.eclipse.xtext.conversion.IValueConverterService
+import org.eclipse.jdt.core.dom.Comment
+import java.util.Set
 
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
 class JavaASTFlattener extends ASTVisitor {
 
+	final static int JLS = AST.JLS3
+
 	@Inject IValueConverterService converterService
 	@Inject extension ASTFlattenerUtils
+
+	List<String> problems = newArrayList
+	Set<Comment> assignedCommens = newHashSet
 
 	/**
 	 * The string buffer into which the serialized representation of the AST is
 	 * written.
 	 */
 	StringBuffer fBuffer
+	String javaSources
+
 	int indentation = 0
-	List<String> problems = newArrayList()
 	int javaSourceKind = ASTParser.K_COMPILATION_UNIT
-	final static int JLS = AST.JLS3
 
 	/**
 	 * Creates a new AST printer.
@@ -145,6 +152,8 @@ class JavaASTFlattener extends ASTVisitor {
 	def void reset() {
 		this.fBuffer.setLength(0)
 		this.problems = newArrayList()
+		this.assignedCommens = newHashSet()
+		this.javaSources = null
 	}
 
 	/**
@@ -160,6 +169,10 @@ class JavaASTFlattener extends ASTVisitor {
 
 	def private increaseIndent() {
 		this.indentation++
+	}
+
+	private def boolean notAssigned(Comment comment) {
+		!assignedCommens.contains(comment)
 	}
 
 	def appendModifieres(ASTNode node, Iterable<IExtendedModifier> ext) {
@@ -242,8 +255,8 @@ class JavaASTFlattener extends ASTVisitor {
 		if (package != null) {
 			package.accept(this)
 		}
-		imports.appendAll
-		types.appendAll
+		imports.visitAll
+		types.visitAll
 		return false
 	}
 
@@ -251,7 +264,7 @@ class JavaASTFlattener extends ASTVisitor {
 		if (javadoc != null) {
 			javadoc.accept(this)
 		}
-		annotations.appendAll(" ")
+		annotations.visitAll(" ")
 		appendToBuffer("package ")
 		name.accept(this)
 		appendLineWrapToBuffer
@@ -311,7 +324,7 @@ class JavaASTFlattener extends ASTVisitor {
 
 	override visit(TypeDeclaration it) {
 		if (javaSourceKind == ASTParser.K_CLASS_BODY_DECLARATIONS && isDummyType(it)) {
-			bodyDeclarations.appendAll
+			bodyDeclarations.visitAll
 			return false;
 		}
 		if (isNotSupportedInnerType(it)) {
@@ -341,14 +354,14 @@ class JavaASTFlattener extends ASTVisitor {
 		if (getSuperclassType() != null) {
 			appendToBuffer("extends ")
 			getSuperclassType.accept(this)
-			appendToBuffer(" ")
+			appendSpaceToBuffer
 		}
 		if (!superInterfaceTypes.isEmpty()) {
 			if (isInterface())
 				appendToBuffer("extends ")
 			else
 				appendToBuffer("implements ")
-			superInterfaceTypes.appendAllSeparatedByComma
+			superInterfaceTypes.visitAllSeparatedByComma
 		}
 		appendToBuffer("{")
 		increaseIndent
@@ -373,8 +386,9 @@ class JavaASTFlattener extends ASTVisitor {
 
 	override visit(Javadoc it) {
 		appendToBuffer("/** ")
-		tags.appendAll
-		appendToBuffer("\n */")
+		tags.visitAll
+		appendLineWrapToBuffer
+		appendToBuffer(" */")
 		appendLineWrapToBuffer
 		return false
 	}
@@ -438,7 +452,7 @@ class JavaASTFlattener extends ASTVisitor {
 		}
 		type.accept(this)
 		appendSpaceToBuffer
-		fragments.appendAllSeparatedByComma
+		fragments.visitAllSeparatedByComma
 		appendLineWrapToBuffer
 		return false
 	}
@@ -448,8 +462,8 @@ class JavaASTFlattener extends ASTVisitor {
 		appendToBuffer(handleVariableDeclaration(modifiers()))
 		appendSpaceToBuffer
 		type.accept(this)
-		appendToBuffer(" ")
-		fragments.appendAllSeparatedByComma
+		appendSpaceToBuffer
+		fragments.visitAllSeparatedByComma
 		return false
 	}
 
@@ -470,7 +484,7 @@ class JavaASTFlattener extends ASTVisitor {
 		node.getThenExpression().accept(this)
 		appendToBuffer(" else ")
 		node.getElseExpression().accept(this)
-		appendToBuffer(" ")
+		appendSpaceToBuffer
 		return false
 	}
 
@@ -490,25 +504,24 @@ class JavaASTFlattener extends ASTVisitor {
 		appendToBuffer(handleVariableDeclaration(modifiers()))
 		appendSpaceToBuffer
 		type.accept(this)
-		appendToBuffer(" ")
-		fragments.appendAllSeparatedByComma
+		appendSpaceToBuffer
+		fragments.visitAllSeparatedByComma
 		appendLineWrapToBuffer
 		return false
 	}
 
-	def appendAllSeparatedByComma(Iterable<? extends ASTNode> iterable) {
-
-		appendAll(iterable, ", ")
+	def visitAllSeparatedByComma(Iterable<? extends ASTNode> iterable) {
+		visitAll(iterable, ", ")
 	}
 
-	def appendAll(Iterable<? extends ASTNode> iterable) {
+	def visitAll(Iterable<? extends ASTNode> iterable) {
 		if (iterable.empty)
 			return
 		else
-			appendAll(iterable, "")
+			visitAll(iterable, "")
 	}
 
-	def appendAll(Iterable<? extends ASTNode> iterable, String separator) {
+	def visitAll(Iterable<? extends ASTNode> iterable, String separator) {
 		iterable.forEach [ ASTNode it, counter |
 			accept(this)
 			if (counter < iterable.size - 1) {
@@ -519,7 +532,7 @@ class JavaASTFlattener extends ASTVisitor {
 
 	def appendTypeParameters(Iterable<TypeParameter> iterable) {
 		appendToBuffer("<")
-		appendAllSeparatedByComma(iterable)
+		visitAllSeparatedByComma(iterable)
 		appendToBuffer(">")
 	}
 
@@ -558,17 +571,17 @@ class JavaASTFlattener extends ASTVisitor {
 			} else {
 				appendToBuffer("void")
 			}
-			appendToBuffer(" ")
+			appendSpaceToBuffer
 			name.accept(this)
 		}
 		appendToBuffer("(")
-		parameters.appendAllSeparatedByComma
+		parameters.visitAllSeparatedByComma
 		appendToBuffer(")")
 		appendExtraDimensions(extraDimensions)
 		if (!thrownExceptions.isEmpty()) {
 			appendToBuffer(" throws ")
-			thrownExceptions.appendAllSeparatedByComma
-			appendToBuffer(" ")
+			thrownExceptions.visitAllSeparatedByComma
+			appendSpaceToBuffer
 		}
 		if (getBody() != null) {
 			getBody.accept(this)
@@ -586,7 +599,7 @@ class JavaASTFlattener extends ASTVisitor {
 		if (isVarargs()) {
 			appendToBuffer("...")
 		}
-		appendToBuffer(" ")
+		appendSpaceToBuffer
 		name.accept(this)
 		appendExtraDimensions(extraDimensions)
 		if (getInitializer() != null) {
@@ -604,9 +617,9 @@ class JavaASTFlattener extends ASTVisitor {
 		if (isLambdaCase(node)) {
 			appendToBuffer("[")
 			val method = node.anonymousClassDeclaration.bodyDeclarations.get(0) as MethodDeclaration
-			method.parameters.appendAllSeparatedByComma
+			method.parameters.visitAllSeparatedByComma
 			appendToBuffer("|")
-			method.body.statements.appendAll
+			method.body.statements.visitAll
 			appendToBuffer("]")
 		} else {
 			appendToBuffer("new ")
@@ -645,11 +658,19 @@ class JavaASTFlattener extends ASTVisitor {
 		return false
 	}
 
-	override visit(Block it) {
+	override visit(Block node) {
 		appendToBuffer("{")
 		increaseIndent
 		appendLineWrapToBuffer
-		statements.appendAll
+		node.statements.visitAll
+		if (node.root instanceof CompilationUnit) {
+			val cu = node.root as CompilationUnit
+			cu.commentList.filter[Comment c|!c.docComment && c.notAssigned].filter[
+				startPosition < node.startPosition + node.length].forEach [
+				accept(this)
+				assignedCommens.add(it)
+			]
+		}
 		decreaseIndent
 		appendLineWrapToBuffer
 		appendToBuffer("}")
@@ -680,7 +701,7 @@ class JavaASTFlattener extends ASTVisitor {
 		}
 		name.accept(this)
 		appendToBuffer("(")
-		arguments.appendAllSeparatedByComma
+		arguments.visitAllSeparatedByComma
 		appendToBuffer(")")
 		return false
 	}
@@ -688,13 +709,13 @@ class JavaASTFlattener extends ASTVisitor {
 	override visit(ForStatement it) {
 		appendLineWrapToBuffer
 		appendToBuffer("for (")
-		initializers.appendAll("")
+		initializers.visitAll("")
 		appendToBuffer("; ")
 		if (getExpression() != null) {
 			getExpression.accept(this)
 		}
 		appendToBuffer("; ")
-		updaters.appendAll
+		updaters.visitAll
 		appendToBuffer(") ")
 		getBody.accept(this)
 		return false
@@ -738,9 +759,9 @@ class JavaASTFlattener extends ASTVisitor {
 	override boolean visit(InfixExpression node) {
 		val stringConcats = countStringConcats(node)
 		if (stringConcats > 0) {
-			appendToBuffer("'''")
-			if (stringConcats > 2) {
-				appendLineWrapToBuffer
+			val firstEntrance = !(node.parent instanceof InfixExpression)
+			if (firstEntrance) {
+				appendToBuffer("'''")
 			}
 			node.leftOperand.convertToRichString
 			if (node.leftOperand instanceof StringLiteral && node.rightOperand instanceof StringLiteral) {
@@ -754,17 +775,16 @@ class JavaASTFlattener extends ASTVisitor {
 				convertToRichString(currExpr)
 				return currExpr
 			]
-
-			appendToBuffer("'''")
+			if (firstEntrance)
+				appendToBuffer("'''")
 		} else {
 			node.getLeftOperand().accept(this)
-			appendToBuffer(' ')
-			appendToBuffer(node.getOperator().toString())
-			appendToBuffer(' ')
+			appendSpaceToBuffer.append(node.getOperator().toString())
+			appendSpaceToBuffer
 			node.getRightOperand().accept(this)
 			val extendedOperands = node.extendedOperands()
 			if (extendedOperands.size() != 0) {
-				appendToBuffer(' ')
+				appendSpaceToBuffer
 				extendedOperands.forEach [ Expression e |
 					appendToBuffer(node.getOperator().toString()).append(' ')
 					e.accept(this)
@@ -778,9 +798,11 @@ class JavaASTFlattener extends ASTVisitor {
 		if (expression instanceof StringLiteral) {
 			appendToBuffer(expression.richTextValue)
 		} else {
-			appendToBuffer("«")
+			val stringConcat = (expression instanceof InfixExpression) &&
+				countStringConcats(expression as InfixExpression) > 0
+			if(!stringConcat) appendToBuffer("«")
 			expression.accept(this)
-			appendToBuffer("»")
+			if(!stringConcat) appendToBuffer("»")
 		}
 	}
 
@@ -794,20 +816,40 @@ class JavaASTFlattener extends ASTVisitor {
 	override boolean visit(ReturnStatement node) {
 		appendToBuffer("return")
 		if (node.getExpression() != null) {
-			appendToBuffer(" ")
+			appendSpaceToBuffer
 			node.getExpression().accept(this)
 		}
-		appendToBuffer(" ")
+		appendSpaceToBuffer
 		return false
 	}
 
 	override visit(BlockComment node) {
-		appendToBuffer("/* */")
+		if (javaSources != null) {
+			appendToBuffer(node.commentContent)
+			if(node.shouldWrap) appendLineWrapToBuffer
+		}
 		return false
 	}
 
+	def private boolean shouldWrap(BlockComment comment) {
+		val index = comment.startPosition + comment.length
+		if (index < javaSources.length) {
+			val char charAfterComment = javaSources.charAt(index)
+			if (charAfterComment == Character.valueOf('\n') || charAfterComment == Character.valueOf('\r'))
+				return true
+		}
+		return false
+	}
+
+	def private commentContent(Comment comment) {
+		javaSources.substring(comment.startPosition, comment.startPosition + comment.length)
+	}
+
 	override boolean visit(LineComment node) {
-		appendToBuffer("//\n")
+		if (javaSources != null) {
+			appendToBuffer(node.commentContent)
+		}
+		appendLineWrapToBuffer
 		return false
 	}
 
@@ -927,7 +969,7 @@ class JavaASTFlattener extends ASTVisitor {
 			appendTypeParameters(node.typeArguments)
 		}
 		appendToBuffer("super(")
-		node.arguments().appendAllSeparatedByComma
+		node.arguments().visitAllSeparatedByComma
 		appendToBuffer(")")
 		return false
 	}
@@ -953,7 +995,7 @@ class JavaASTFlattener extends ASTVisitor {
 		}
 		node.getName().accept(this)
 		appendToBuffer("(")
-		node.arguments().appendAllSeparatedByComma
+		node.arguments().visitAllSeparatedByComma
 		appendToBuffer(")")
 		return false
 	}
@@ -962,7 +1004,8 @@ class JavaASTFlattener extends ASTVisitor {
 		if (node.isNested()) {
 			appendToBuffer("{")
 		} else {
-			appendToBuffer("\n * ")
+			appendLineWrapToBuffer
+			appendToBuffer(" * ")
 		}
 
 		var boolean previousRequiresWhiteSpace = false
@@ -978,11 +1021,12 @@ class JavaASTFlattener extends ASTVisitor {
 
 			var boolean currentIncludesWhiteSpace = (e instanceof TextElement)
 			if (previousRequiresNewLine && currentIncludesWhiteSpace) {
-				appendToBuffer("\n * ")
+				appendLineWrapToBuffer
+				appendToBuffer(" * ")
 			}
 			previousRequiresNewLine = currentIncludesWhiteSpace
 			if (previousRequiresWhiteSpace && !currentIncludesWhiteSpace) {
-				appendToBuffer(" ")
+				appendSpaceToBuffer
 			}
 			e.accept(this)
 			previousRequiresWhiteSpace = !currentIncludesWhiteSpace && !(e instanceof TagElement)
@@ -1028,7 +1072,7 @@ class JavaASTFlattener extends ASTVisitor {
 		//			}
 		//		}
 		node.getBody().accept(this)
-		appendToBuffer(" ")
+		appendSpaceToBuffer
 		for (var Iterator<CatchClause> _it = node.catchClauses().iterator(); _it.hasNext();) {
 			var CatchClause cc = _it.next()
 			cc.accept(this)
@@ -1070,7 +1114,7 @@ class JavaASTFlattener extends ASTVisitor {
 		appendToBuffer("@")
 		node.getTypeName().accept(this)
 		appendToBuffer("(")
-		node.values().appendAllSeparatedByComma
+		node.values().visitAllSeparatedByComma
 		appendToBuffer(")")
 		return false
 	}
@@ -1087,7 +1131,7 @@ class JavaASTFlattener extends ASTVisitor {
 	//		return false
 	//	}
 	override boolean visit(CharacterLiteral node) {
-		appendToBuffer(node.getEscapedValue())
+		appendToBuffer('''Character.valueOf(«node.getEscapedValue()»).charValue''')
 		return false
 	}
 
@@ -1130,7 +1174,7 @@ class JavaASTFlattener extends ASTVisitor {
 		node.getName().accept(this)
 		appendToBuffer(" {")
 		appendLineWrapToBuffer
-		node.bodyDeclarations().appendAll
+		node.bodyDeclarations().visitAll
 		appendToBuffer("}")
 		return false
 	}
@@ -1141,7 +1185,7 @@ class JavaASTFlattener extends ASTVisitor {
 		}
 		appendModifieres(node, node.modifiers())
 		node.getType().accept(this)
-		appendToBuffer(" ")
+		appendSpaceToBuffer
 		node.getName().accept(this)
 		if (node.getDefault() != null) {
 			appendToBuffer(" = ")
@@ -1155,7 +1199,7 @@ class JavaASTFlattener extends ASTVisitor {
 		appendToBuffer("{")
 		increaseIndent
 		appendLineWrapToBuffer
-		node.bodyDeclarations().appendAll
+		node.bodyDeclarations().visitAll
 		decreaseIndent
 		appendToBuffer("}")
 		return false
@@ -1210,7 +1254,7 @@ class JavaASTFlattener extends ASTVisitor {
 
 	@Override override boolean visit(ArrayInitializer node) {
 		appendToBuffer("#[")
-		node.expressions().appendAllSeparatedByComma
+		node.expressions().visitAllSeparatedByComma
 		appendToBuffer("]")
 		return false
 	}
@@ -1235,7 +1279,7 @@ class JavaASTFlattener extends ASTVisitor {
 	@Override override boolean visit(BreakStatement node) {
 		appendToBuffer("/* FIXME unsupported BreakStatement: break ")
 		if (node.getLabel() != null) {
-			appendToBuffer(" ")
+			appendSpaceToBuffer
 			node.getLabel().accept(this)
 		}
 		appendToBuffer("*/")
@@ -1255,7 +1299,7 @@ class JavaASTFlattener extends ASTVisitor {
 			appendTypeParameters(node.typeArguments())
 		}
 		appendToBuffer("this(")
-		node.arguments().appendAllSeparatedByComma
+		node.arguments().visitAllSeparatedByComma
 		appendToBuffer(")")
 		return false
 	}
@@ -1263,7 +1307,7 @@ class JavaASTFlattener extends ASTVisitor {
 	@Override override boolean visit(ContinueStatement node) {
 		appendToBuffer("/* FIXME Unsupported continue statement: ")
 		if (node.getLabel() != null) {
-			appendToBuffer(" ")
+			appendSpaceToBuffer
 			node.getLabel().accept(this)
 		}
 		appendToBuffer(";")
@@ -1304,7 +1348,7 @@ class JavaASTFlattener extends ASTVisitor {
 		node.getName().accept(this)
 		if (!node.arguments().isEmpty()) {
 			appendToBuffer("(")
-			appendAllSeparatedByComma(node.arguments())
+			visitAllSeparatedByComma(node.arguments())
 			appendToBuffer(")")
 		}
 		if (node.getAnonymousClassDeclaration() != null) {
@@ -1320,20 +1364,20 @@ class JavaASTFlattener extends ASTVisitor {
 		appendModifieres(node, node.modifiers())
 		appendToBuffer("enum ")
 		node.getName().accept(this)
-		appendToBuffer(" ")
+		appendSpaceToBuffer
 		if (!node.superInterfaceTypes().isEmpty()) {
 			appendToBuffer("implements ")
-			node.superInterfaceTypes().appendAllSeparatedByComma
-			appendToBuffer(" ")
+			node.superInterfaceTypes().visitAllSeparatedByComma
+			appendSpaceToBuffer
 		}
 		appendToBuffer("{")
 		increaseIndent
 		appendLineWrapToBuffer
-		node.enumConstants().appendAllSeparatedByComma
+		node.enumConstants().visitAllSeparatedByComma
 
 		if (!node.bodyDeclarations().isEmpty()) {
 			appendToBuffer("; ")
-			node.bodyDeclarations().appendAll
+			node.bodyDeclarations().visitAll
 		}
 		decreaseIndent
 		appendToBuffer("}")
@@ -1363,7 +1407,7 @@ class JavaASTFlattener extends ASTVisitor {
 		appendToBuffer("#")
 		node.getName().accept(this)
 		appendToBuffer("(")
-		node.parameters().appendAllSeparatedByComma
+		node.parameters().visitAllSeparatedByComma
 		appendToBuffer(")")
 		return false
 	}
@@ -1374,7 +1418,7 @@ class JavaASTFlattener extends ASTVisitor {
 			appendToBuffer("...")
 		}
 		if (node.getName() != null) {
-			appendToBuffer(" ")
+			appendSpaceToBuffer
 			node.getName().accept(this)
 		}
 		return false
@@ -1404,7 +1448,7 @@ class JavaASTFlattener extends ASTVisitor {
 		appendToBuffer(") ")
 		appendToBuffer("{")
 		increaseIndent
-		node.statements().appendAll
+		node.statements().visitAll
 		decreaseIndent
 		appendToBuffer("}")
 		return false
@@ -1428,8 +1472,26 @@ class JavaASTFlattener extends ASTVisitor {
 		return false
 	}
 
+	override preVisit(ASTNode node) {
+		if (node instanceof Comment || node instanceof TagElement || node instanceof TextElement) {
+			return
+		}
+		if (node.root instanceof CompilationUnit) {
+			val cu = node.root as CompilationUnit
+			cu.commentList.filter[Comment c|!c.docComment && c.notAssigned].filter[startPosition < node.startPosition].
+				forEach [
+					accept(this)
+					assignedCommens.add(it)
+				]
+		}
+	}
+
 	def void setJavaSourceKind(int i) {
 		javaSourceKind = i
+	}
+
+	def setJavaSources(String javaSources) {
+		this.javaSources = javaSources
 	}
 
 }
