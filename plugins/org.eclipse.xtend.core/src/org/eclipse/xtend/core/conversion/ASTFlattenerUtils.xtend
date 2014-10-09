@@ -124,8 +124,14 @@ class ASTFlattenerUtils {
 	def int countStringConcats(InfixExpression node) {
 		var concats = 0
 		if (node.getOperator() == InfixExpression.Operator.PLUS) {
-			if(node.getLeftOperand() instanceof StringLiteral) concats++
-			if(node.getRightOperand() instanceof StringLiteral) concats++
+			if (node.getLeftOperand() instanceof StringLiteral)
+				concats++
+			else if (node.getLeftOperand() instanceof InfixExpression)
+				concats = concats + countStringConcats(node.getLeftOperand() as InfixExpression)
+			if (node.getRightOperand() instanceof StringLiteral)
+				concats++
+			else if (node.getRightOperand() instanceof InfixExpression)
+				concats = concats + countStringConcats(node.getRightOperand() as InfixExpression)
 			concats = concats + node.extendedOperands().filter[e|e instanceof StringLiteral].size
 		}
 		return concats

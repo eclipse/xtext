@@ -18,8 +18,8 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.core.conversion.JavaConverter
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.mwe.PathTraverser
-import org.junit.Test
 import org.junit.Ignore
+import org.junit.Test
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -43,30 +43,43 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
 				}
 			});
 		var errors = 0
+		var problems = 0
 		for (URI uri : allResourceUris) {
 			val File file = new File(uri.toFileString());
 			println("Converting: " + file.getAbsolutePath());
-			val String java = Files.toString(file, Charset.defaultCharset());
+			val String javaCode = Files.toString(file, Charset.defaultCharset());
 			val JavaConverter j2x = javaConverter.get();
-			val String xtendCode = j2x.toXtend(file.name, java).xtendCode
-			val projectRelative = uri.toFileString().replace(projectRoot.absolutePath, "")
-			val targetFile = new File(testProject, projectRelative + ".xtend")
-			println("Writing to: " + targetFile.absolutePath)
-			if (!targetFile.exists) {
-				Files.createParentDirs(targetFile)
-				targetFile.createNewFile
-			}
-			Files.write(xtendCode, targetFile, Charset.defaultCharset)
+			val xtendResult = j2x.toXtend(file.name, javaCode)
+			problems += xtendResult.problems.size
+			val String xtendCode = xtendResult.xtendCode
+			val javaFileProjRelPath = uri.toFileString().replace(projectRoot.absolutePath, "")
+			var fileName = javaFileProjRelPath + ".xtend"
+			var content =  xtendCode
 			try {
 				file(xtendCode, true);
 			} catch (AssertionError error) {
-				System.err.print('''«uri» - «error.message»''')
+				System.err.println('''«uri» - «error.message»''')
+				writeToFile(testProject, javaFileProjRelPath, javaCode)
+				fileName += ".error"
 				errors++
 			}
+			writeToFile(testProject, fileName, content)
 		}
-
+		println('''Problems («problems»)''')
 		println('''Errors («errors»)''')
 		println("Done...")
+		assertEquals(13, errors)
+		assertEquals(27, problems)
+	}
+	
+	def writeToFile(File parent, String fileName, String content) {
+		val targetFile = new File(parent, fileName)
+		println("Writing to: " + targetFile.absolutePath)
+		if (!targetFile.exists) {
+			Files.createParentDirs(targetFile)
+			targetFile.createNewFile
+		}
+		Files.write(content, targetFile, Charset.defaultCharset)
 	}
 
 }

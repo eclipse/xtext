@@ -266,10 +266,48 @@ class JavaConverterTest extends AbstractXtendTestCase {
 	}
 
 	@Test def void testCommentsCase() throws Exception {
-
-		var XtendClass xtendClazz = toValidXtendClass(
-			"/** javadoc */public class TestComment { //singleline \\n void doStuff() { /*multiline*/}")
-		assertNotNull(xtendClazz)
+		var xtendCode = toXtendCode(
+			'''
+			/**
+			* javadoc
+			*/
+			public class TestComment {
+				/* ML */
+				private int i = 1;
+				//singleline
+				void doStuff() {
+					/*
+					 multiline
+					*/
+				}
+				/**/
+				void doStuff2() {
+					/* some comments */
+					return;
+				}
+			}''')
+		val expected = '''
+		/** 
+		 * javadoc
+		 */
+		class TestComment {
+			/* ML */
+			int i=1
+			//singleline
+			def package void doStuff(){
+				/*
+				 multiline
+				*/
+				
+			}
+			/**/
+			def package void doStuff2(){
+				/* some comments */
+				return 
+			}
+			
+		}'''
+		assertEquals(expected, xtendCode)
 	}
 
 	@Test def void testJavadocCase() throws Exception {
@@ -452,14 +490,30 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		assertTrue(xtendMember.getInitialValue() instanceof RichString)
 		assertTrue((clazz.getMembers().get(2) as XtendField).getInitialValue() instanceof RichString)
 		assertEquals("static package String a='''«(i - i)»«i»4=«((i=i - 1))»1=«(i++)»«i»'''",
-			j2x.toXtend("Clazz", "static String a = (i-i)+i+\"4=\"+(--i)+\"1=\"+(i++)+i;",
-				ASTParser.K_CLASS_BODY_DECLARATIONS).getXtendCode().trim())
+			classBodyDeclToXtend("static String a = (i-i)+i+\"4=\"+(--i)+\"1=\"+(i++)+i;"))
 	}
 
-	@Test def void testRichStringSimpleCase() throws Exception {
-		assertEquals("static package String a='''\nfirst line\nsecond line\nthird line\nfourth line'''",
-			j2x.toXtend("Clazz", "static String a = \"first line\"+\"second line\"+\"third line\"+\"fourth line\";",
-				ASTParser.K_CLASS_BODY_DECLARATIONS).getXtendCode().trim())
+	@Test def void testRichStringCase1() throws Exception {
+		assertEquals("int i=0\nString richTxt='''int \ni=«i».'''",
+			classBodyDeclToXtend(
+				'''
+					private int i = 0;
+					private String richTxt = "int "+"i="+i+".";
+				'''))
+	}
+
+	@Test def void testRichStringCase2() throws Exception {
+		assertEquals(
+			"package String str='''Step: «info» memory: free / total / max MB «runtime.freeMemory() / (1000 * 1000)» / «runtime.totalMemory() / (1000 * 1000)» / «runtime.maxMemory() / (1000 * 1000)»'''",
+			classBodyDeclToXtend(
+				'''
+					String str = "Step: " + info + " memory: free / total / max MB " + runtime.freeMemory() / (1000 * 1000) + " / " + runtime.totalMemory() / (1000 * 1000) + " / " + runtime.maxMemory() / (1000 * 1000)
+				'''))
+	}
+
+	@Test def void testRichStringCase3() throws Exception {
+		assertEquals("static package String a='''first line\nsecond line\nthird line\nfourth line'''",
+			classBodyDeclToXtend('''static String a = "first line"+"second line"+"third line"+"fourth line";'''))
 	}
 
 	@Test def void testRichStringSpecialCase() throws Exception {
@@ -471,8 +525,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		assertEquals("richTxt", xtendMember.getName())
 		assertTrue(xtendMember.getInitialValue() instanceof RichString)
 		assertEquals("package String richTxt='''a\n«\"'''\"» no «\"«\"» 'foo'.length«\"»\"» side-effect «\"'''\"»'''",
-			j2x.toXtend("Clazz", "String richTxt = \"a\" + \"''' no «'foo'.length» side-effect '''\";",
-				ASTParser.K_CLASS_BODY_DECLARATIONS).getXtendCode().trim())
+			classBodyDeclToXtend("String richTxt = \"a\" + \"''' no «'foo'.length» side-effect '''\";"))
 	}
 
 	@Test def void testRichStringSpecialCase2() throws Exception {
@@ -485,9 +538,9 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		assertTrue(xtendMember.getInitialValue() instanceof RichString)
 		assertEquals(
 			"package String richTxt='''test\n«\"'''\"» «\"«\"» FOR a: '123'.toCharArray SEPARATOR ',\n  \t'«\"»\"»\n      a\n «\"«\"» ENDFOR«\"»\"»«\"'''\"»'''",
-			j2x.toXtend("Clazz",
+			classBodyDeclToXtend(
 				"String richTxt = \"test\" + \"''' «FOR a: '123'.toCharArray SEPARATOR ',\\n  \\t'»\\n" + "      a\\n" +
-					" «ENDFOR»'''\";", ASTParser.K_CLASS_BODY_DECLARATIONS).getXtendCode().trim())
+					" «ENDFOR»'''\";"))
 	}
 
 	@Test def void testRichStringSpecialCase3() throws Exception {
@@ -519,6 +572,17 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		assertTrue(xtendMember.getInitialValue() instanceof XClosure)
 	}
 
+	@Test def void testSLCommentCase() throws Exception {
+
+		var XtendClass clazz = toValidXtendClass(
+			'''
+			class Clazz {
+				//Single Line comment
+				String str;
+			}''')
+		assertNotNull(clazz)
+	}
+
 	def private XtendClass toValidXtendClass(String javaCode) throws Exception {
 		return toValidTypeDeclaration("Clazz", javaCode) as XtendClass
 	}
@@ -531,6 +595,13 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		return typeDeclaration
 	}
 
+	def private classBodyDeclToXtend(String string) {
+		val xtendCode = j2x.toXtend("ClassBodyDeclToXtend", string, ASTParser.K_CLASS_BODY_DECLARATIONS).getXtendCode().
+			trim()
+		println(xtendCode)
+		return xtendCode
+	}
+
 	def private XtendFile toValidFile(String unitName, String javaCode) throws Exception {
 
 		var ConversionResult conversionResult = j2x.toXtend(unitName, javaCode)
@@ -541,6 +612,10 @@ class JavaConverterTest extends AbstractXtendTestCase {
 			System.out.println('''ERROR: «problem»''')
 		}
 		return file(xtendCode, true)
+	}
+
+	def private String toXtendCode(String javaCode) throws Exception {
+		return j2x.toXtend("Temp", javaCode).getXtendCode()
 	}
 
 }

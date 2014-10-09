@@ -21,6 +21,8 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.mwe.PathTraverser;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -70,6 +72,7 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
         }
       });
     int errors = 0;
+    int problems = 0;
     for (final URI uri : allResourceUris) {
       {
         String _fileString = uri.toFileString();
@@ -78,26 +81,20 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
         String _plus_1 = ("Converting: " + _absolutePath_1);
         InputOutput.<String>println(_plus_1);
         Charset _defaultCharset = Charset.defaultCharset();
-        final String java = Files.toString(file, _defaultCharset);
+        final String javaCode = Files.toString(file, _defaultCharset);
         final JavaConverter j2x = this.javaConverter.get();
         String _name = file.getName();
-        JavaConverter.ConversionResult _xtend = j2x.toXtend(_name, java);
-        final String xtendCode = _xtend.getXtendCode();
+        final JavaConverter.ConversionResult xtendResult = j2x.toXtend(_name, javaCode);
+        int _problems = problems;
+        Iterable<String> _problems_1 = xtendResult.getProblems();
+        int _size = IterableExtensions.size(_problems_1);
+        problems = (_problems + _size);
+        final String xtendCode = xtendResult.getXtendCode();
         String _fileString_1 = uri.toFileString();
         String _absolutePath_2 = projectRoot.getAbsolutePath();
-        final String projectRelative = _fileString_1.replace(_absolutePath_2, "");
-        final File targetFile = new File(testProject, (projectRelative + ".xtend"));
-        String _absolutePath_3 = targetFile.getAbsolutePath();
-        String _plus_2 = ("Writing to: " + _absolutePath_3);
-        InputOutput.<String>println(_plus_2);
-        boolean _exists = targetFile.exists();
-        boolean _not = (!_exists);
-        if (_not) {
-          Files.createParentDirs(targetFile);
-          targetFile.createNewFile();
-        }
-        Charset _defaultCharset_1 = Charset.defaultCharset();
-        Files.write(xtendCode, targetFile, _defaultCharset_1);
+        final String javaFileProjRelPath = _fileString_1.replace(_absolutePath_2, "");
+        String fileName = (javaFileProjRelPath + ".xtend");
+        String content = xtendCode;
         try {
           this.file(xtendCode, true);
         } catch (final Throwable _t) {
@@ -108,19 +105,49 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
             _builder.append(" - ");
             String _message = error.getMessage();
             _builder.append(_message, "");
-            System.err.print(_builder);
+            System.err.println(_builder);
+            this.writeToFile(testProject, javaFileProjRelPath, javaCode);
+            String _fileName = fileName;
+            fileName = (_fileName + ".error");
             errors++;
           } else {
             throw Exceptions.sneakyThrow(_t);
           }
         }
+        this.writeToFile(testProject, fileName, content);
       }
     }
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("Errors (");
-    _builder.append(errors, "");
+    _builder.append("Problems (");
+    _builder.append(problems, "");
     _builder.append(")");
     InputOutput.<String>println(_builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Errors (");
+    _builder_1.append(errors, "");
+    _builder_1.append(")");
+    InputOutput.<String>println(_builder_1.toString());
     InputOutput.<String>println("Done...");
+    Assert.assertEquals(13, errors);
+    Assert.assertEquals(27, problems);
+  }
+  
+  public void writeToFile(final File parent, final String fileName, final String content) {
+    try {
+      final File targetFile = new File(parent, fileName);
+      String _absolutePath = targetFile.getAbsolutePath();
+      String _plus = ("Writing to: " + _absolutePath);
+      InputOutput.<String>println(_plus);
+      boolean _exists = targetFile.exists();
+      boolean _not = (!_exists);
+      if (_not) {
+        Files.createParentDirs(targetFile);
+        targetFile.createNewFile();
+      }
+      Charset _defaultCharset = Charset.defaultCharset();
+      Files.write(content, targetFile, _defaultCharset);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
 }

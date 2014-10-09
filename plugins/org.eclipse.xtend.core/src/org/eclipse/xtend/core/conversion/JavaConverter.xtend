@@ -35,6 +35,7 @@ class JavaConverter {
 		parser.source = cu
 
 		val flattener = flattenerProvider.get()
+		flattener.setJavaSources(cu.source)
 		parser.createAST(null).accept(flattener)
 		val result = ConversionResult.create(flattener)
 		return result
@@ -69,7 +70,7 @@ class JavaConverter {
 
 		val flattener = flattenerProvider.get()
 		flattener.setJavaSourceKind(javaSourceKind)
-
+		flattener.setJavaSources(javaSrc)
 		parser.createAST(null).accept(flattener)
 
 		return ConversionResult.create(flattener)

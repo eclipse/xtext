@@ -257,10 +257,26 @@ public class ASTFlattenerUtils {
       Expression _leftOperand = node.getLeftOperand();
       if ((_leftOperand instanceof StringLiteral)) {
         concats++;
+      } else {
+        Expression _leftOperand_1 = node.getLeftOperand();
+        if ((_leftOperand_1 instanceof InfixExpression)) {
+          Expression _leftOperand_2 = node.getLeftOperand();
+          int _countStringConcats = this.countStringConcats(((InfixExpression) _leftOperand_2));
+          int _plus = (concats + _countStringConcats);
+          concats = _plus;
+        }
       }
       Expression _rightOperand = node.getRightOperand();
       if ((_rightOperand instanceof StringLiteral)) {
         concats++;
+      } else {
+        Expression _rightOperand_1 = node.getRightOperand();
+        if ((_rightOperand_1 instanceof InfixExpression)) {
+          Expression _rightOperand_2 = node.getRightOperand();
+          int _countStringConcats_1 = this.countStringConcats(((InfixExpression) _rightOperand_2));
+          int _plus_1 = (concats + _countStringConcats_1);
+          concats = _plus_1;
+        }
       }
       List _extendedOperands = node.extendedOperands();
       final Function1<Object, Boolean> _function = new Function1<Object, Boolean>() {
@@ -270,8 +286,8 @@ public class ASTFlattenerUtils {
       };
       Iterable<Object> _filter = IterableExtensions.<Object>filter(_extendedOperands, _function);
       int _size = IterableExtensions.size(_filter);
-      int _plus = (concats + _size);
-      concats = _plus;
+      int _plus_2 = (concats + _size);
+      concats = _plus_2;
     }
     return concats;
   }

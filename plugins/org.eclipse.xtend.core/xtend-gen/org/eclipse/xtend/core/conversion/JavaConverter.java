@@ -22,6 +22,7 @@ import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.xtend.core.conversion.JavaASTFlattener;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 
@@ -63,19 +64,25 @@ public class JavaConverter {
   private String complianceLevel = "1.5";
   
   public JavaConverter.ConversionResult toXtend(final ICompilationUnit cu) {
-    final ASTParser parser = ASTParser.newParser(AST.JLS3);
-    final Hashtable options = JavaCore.getOptions();
-    JavaCore.setComplianceOptions(this.complianceLevel, options);
-    parser.setCompilerOptions(options);
-    parser.setStatementsRecovery(true);
-    parser.setResolveBindings(true);
-    parser.setBindingsRecovery(true);
-    parser.setSource(cu);
-    final JavaASTFlattener flattener = this.flattenerProvider.get();
-    ASTNode _createAST = parser.createAST(null);
-    _createAST.accept(flattener);
-    final JavaConverter.ConversionResult result = JavaConverter.ConversionResult.create(flattener);
-    return result;
+    try {
+      final ASTParser parser = ASTParser.newParser(AST.JLS3);
+      final Hashtable options = JavaCore.getOptions();
+      JavaCore.setComplianceOptions(this.complianceLevel, options);
+      parser.setCompilerOptions(options);
+      parser.setStatementsRecovery(true);
+      parser.setResolveBindings(true);
+      parser.setBindingsRecovery(true);
+      parser.setSource(cu);
+      final JavaASTFlattener flattener = this.flattenerProvider.get();
+      String _source = cu.getSource();
+      flattener.setJavaSources(_source);
+      ASTNode _createAST = parser.createAST(null);
+      _createAST.accept(flattener);
+      final JavaConverter.ConversionResult result = JavaConverter.ConversionResult.create(flattener);
+      return result;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   public JavaConverter.ConversionResult toXtend(final String unitName, final String javaSrc) {
@@ -110,6 +117,7 @@ public class JavaConverter {
     parser.setSource(_charArray);
     final JavaASTFlattener flattener = this.flattenerProvider.get();
     flattener.setJavaSourceKind(javaSourceKind);
+    flattener.setJavaSources(javaSrc);
     ASTNode _createAST = parser.createAST(null);
     _createAST.accept(flattener);
     return JavaConverter.ConversionResult.create(flattener);
