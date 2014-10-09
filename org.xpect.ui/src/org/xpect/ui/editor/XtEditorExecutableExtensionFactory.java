@@ -44,6 +44,8 @@ public class XtEditorExecutableExtensionFactory extends AbstractGuiceAwareExecut
 			throw new RuntimeException("Could not determine which editor is currently being opened.");
 		XpectJavaModel javaModel = XpectUtil.loadJavaModel(file);
 		URI uri = Access.getIStorage2UriMapper().get().getUri(file);
+		if (uri == null)
+			throw new RuntimeException("Could not determine URI for IFile " + file.getFullPath().toString());
 		return IXtInjectorProvider.INSTANCE.getInjector(javaModel, uri);
 	}
 
