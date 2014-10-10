@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IContainer.Manager;
@@ -85,6 +86,8 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 			public <T> T get(Class<T> t) {
 				if(DirtyStateResourceDescription.Manager.class.isAssignableFrom(t)) 
 					return (T) new DirtyStateResourceDescription.Manager(DirtyStateEditorSupportTest.this);
+				if(LanguageInfo.class.isAssignableFrom(t))
+					return (T) new LanguageInfo("FooLanguage");
 				return super.get(t);
 			}
 		};
