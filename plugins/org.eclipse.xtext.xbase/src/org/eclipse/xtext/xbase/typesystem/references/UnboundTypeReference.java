@@ -301,6 +301,7 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	protected boolean resolveWithHints(List<LightweightBoundTypeArgument> allHints) {
 		List<LightweightBoundTypeArgument> inferredHints = Lists.newArrayListWithCapacity(allHints.size());
 		List<LightweightBoundTypeArgument> effectiveHints = Lists.newArrayListWithCapacity(allHints.size());
+		List<LightweightBoundTypeArgument> inferredConstraintHints = Lists.newArrayListWithCapacity(allHints.size());
 		boolean hasContraintHints = false;
 		EnumSet<VarianceInfo> varianceHints = EnumSet.noneOf(VarianceInfo.class);
 		for(LightweightBoundTypeArgument hint: allHints) {
@@ -313,6 +314,9 @@ public class UnboundTypeReference extends LightweightTypeReference {
 				effectiveHints.add(hint);
 				if (hint.getSource() == BoundTypeArgumentSource.INFERRED) {
 					inferredHints.add(hint);
+				}
+				if (hint.getSource() == BoundTypeArgumentSource.INFERRED_CONSTRAINT) {
+					inferredConstraintHints.add(hint);
 				}
 			}
 		}
@@ -329,8 +333,14 @@ public class UnboundTypeReference extends LightweightTypeReference {
 		if (typeArgument != null) {
 			resolvedTo = typeArgument.getTypeReference();
 			if (resolvedTo != null) {
-				if (varianceHints.contains(VarianceInfo.OUT) && varianceHints.size() == 1 && typeArgument.getVariance() == VarianceInfo.INVARIANT && (resolvedTo instanceof WildcardTypeReference)) {
+				boolean outResolvedToInvariant = varianceHints.contains(VarianceInfo.OUT) && varianceHints.size() == 1 && typeArgument.getVariance() == VarianceInfo.INVARIANT;
+				if (outResolvedToInvariant && (resolvedTo.getKind() == LightweightTypeReference.KIND_WILDCARD_TYPE_REFERENCE)) {
 					resolvedTo = resolvedTo.getUpperBoundSubstitute();
+				} else if (outResolvedToInvariant && (resolvedTo.getKind() != LightweightTypeReference.KIND_WILDCARD_TYPE_REFERENCE) && inferredConstraintHints.size() == 1) {
+					LightweightTypeReference constraintTypeRef = inferredConstraintHints.get(0).getTypeReference();
+					if (constraintTypeRef.isAssignableFrom(resolvedTo)) {
+						resolvedTo = constraintTypeRef;
+					}
 				} else if (varianceHints.contains(VarianceInfo.IN) && varianceHints.size() == 1 && typeArgument.getVariance() == VarianceInfo.INVARIANT && (resolvedTo instanceof WildcardTypeReference)) { 
 					resolvedTo = resolvedTo.getInvariantBoundSubstitute();
 				} else if (varianceHints.isEmpty() && typeArgument.getVariance() == VarianceInfo.OUT && allHints.size() == 1) {
@@ -339,6 +349,20 @@ public class UnboundTypeReference extends LightweightTypeReference {
 						WildcardTypeReference wildcard = resolvedTo.getOwner().newWildcardTypeReference();
 						wildcard.addUpperBound(resolvedTo);
 						resolvedTo = wildcard;
+					}
+				} else if (varianceHints.isEmpty() && inferredConstraintHints.size() == 1 && typeArgument.getVariance() == VarianceInfo.INVARIANT) {
+					LightweightBoundTypeArgument constraintTypeRef = inferredConstraintHints.get(0);
+					if (constraintTypeRef.getTypeReference().getKind() != LightweightTypeReference.KIND_WILDCARD_TYPE_REFERENCE && 
+							constraintTypeRef.getDeclaredVariance() == VarianceInfo.OUT && constraintTypeRef.getActualVariance() == VarianceInfo.INVARIANT) {
+						if (resolvedTo.getKind() == LightweightTypeReference.KIND_WILDCARD_TYPE_REFERENCE && ((WildcardTypeReference) resolvedTo).getLowerBound() != null) {
+							if(resolvedTo.getInvariantBoundSubstitute().isAssignableFrom(constraintTypeRef.getTypeReference())) {
+								WildcardTypeReference wildcard = resolvedTo.getOwner().newWildcardTypeReference();
+								wildcard.addUpperBound(resolvedTo.getInvariantBoundSubstitute());
+								resolvedTo = wildcard;
+							}
+						} else if (resolvedTo.isAssignableFrom(constraintTypeRef.getTypeReference())) {
+							resolvedTo = constraintTypeRef.getTypeReference();
+						}
 					}
 				}
 			}

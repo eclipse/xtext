@@ -475,6 +475,11 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
   }
   
   @Test
+  public void testClosure_59() throws Exception {
+    this.resolvesFeatureCallsTo("{ \n\t\t\tval java.util.List<CharSequence> res = null\n\t\t\tval Iterable<? extends Object> obj = null\n\t\t\tres += obj.map[\"\"]\n\t\t}", "List<CharSequence>", "boolean", "Iterable<?>", "Iterable<String>");
+  }
+  
+  @Test
   public void testIfExpression_01() throws Exception {
     this.resolvesFeatureCallsTo("if(true) #{\'f\'} else emptySet", "Set<String>");
   }

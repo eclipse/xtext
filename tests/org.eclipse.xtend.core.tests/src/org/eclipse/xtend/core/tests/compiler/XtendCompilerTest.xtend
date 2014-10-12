@@ -1162,8 +1162,8 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			        throw Exceptions.sneakyThrow(_e);
 			      }
 			    }
-			  }, new Function1<Exception, IllegalArgumentException>() {
-			    public IllegalArgumentException apply(final Exception it) {
+			  }, new Function1<Exception, Exception>() {
+			    public Exception apply(final Exception it) {
 			      return new IllegalArgumentException(it);
 			    }
 			  });
