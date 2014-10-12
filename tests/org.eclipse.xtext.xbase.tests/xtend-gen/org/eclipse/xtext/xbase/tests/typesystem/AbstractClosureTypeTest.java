@@ -89,6 +89,24 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testVariableDeclaration_01() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ var com.google.inject.Provider<CharSequence> p = [ new StringBuilder ] }", "()=>StringBuilder");
+    this.withEquivalents(_resolvesClosuresTo, "Provider<CharSequence>");
+  }
+  
+  @Test
+  public void testVariableDeclaration_02() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ var com.google.inject.Provider<? extends CharSequence> p = [ new StringBuilder ] }", "()=>StringBuilder");
+    this.withEquivalents(_resolvesClosuresTo, "Provider<CharSequence>");
+  }
+  
+  @Test
+  public void testVariableDeclaration_03() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ var com.google.inject.Provider<? super CharSequence> p = [ new StringBuilder ] }", "()=>StringBuilder");
+    this.withEquivalents(_resolvesClosuresTo, "Provider<CharSequence>");
+  }
+  
+  @Test
   public void testSpecializedSubInterface_01() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("closures::Client::invokeSubIntf [ length.toString ]", "(CharSequence)=>String");
     this.withEquivalents(_resolvesClosuresTo, "SubIntf");
@@ -1010,6 +1028,24 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   public void testClosure_58() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(null as Iterable<? super String>).map(e| return e)", "(Object)=>Object");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Object, Object>");
+  }
+  
+  @Test
+  public void testClosure_59() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n\t\t\tval java.util.List<CharSequence> res = null\n\t\t\tval Iterable<? extends Object> obj = null\n\t\t\tres += obj.map[\"\"]\n\t\t}", "(Object)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Object, String>");
+  }
+  
+  @Test
+  public void testClosure_60() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n\t\t\tval Iterable<? extends Object> obj = null\n\t\t\tval Iterable<CharSequence> res = obj.map[\"\"]\n\t\t}", "(Object)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Object, CharSequence>");
+  }
+  
+  @Test
+  public void testClosure_61() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n\t\t\tval java.util.List<? super CharSequence> res = null\n\t\t\tval Iterable<? extends Object> obj = null\n\t\t\tres += obj.map[\"\"]\n\t\t}", "(Object)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<Object, String>");
   }
   
   @Test

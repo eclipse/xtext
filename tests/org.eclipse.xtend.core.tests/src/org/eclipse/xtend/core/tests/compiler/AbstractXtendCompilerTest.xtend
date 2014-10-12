@@ -29,6 +29,8 @@ import org.junit.Before
 import testdata.Annotation1
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider
+import org.antlr.runtime.Lexer
+import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -50,6 +52,9 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			Amount,
 			Data,
 			Inject,
+			javax.inject.Provider,
+			Lexer,
+			InternalXtendLexer,
 			CollectionLiterals,
 			JvmTypeParameter,
 			ITraceRegionProvider,
