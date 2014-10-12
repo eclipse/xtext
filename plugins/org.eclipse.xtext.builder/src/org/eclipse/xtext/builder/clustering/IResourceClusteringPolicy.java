@@ -17,10 +17,10 @@ import com.google.inject.ImplementedBy;
  * be unloaded during the build.
  * 
  * @author Knut Wannheden - Initial contribution and API
- * @Deprecated Use org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy instead
+ * @deprecated Use org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy instead
  */
-@SuppressWarnings("deprecation")
 @ImplementedBy(DisabledClusteringPolicy.class)
+@Deprecated
 public interface IResourceClusteringPolicy extends org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy {
 
 	/**
