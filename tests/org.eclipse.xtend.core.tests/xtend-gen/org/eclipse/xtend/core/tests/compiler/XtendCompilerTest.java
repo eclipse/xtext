@@ -2676,10 +2676,10 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("}, new Function1<Exception, IllegalArgumentException>() {");
+    _builder_1.append("}, new Function1<Exception, Exception>() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public IllegalArgumentException apply(final Exception it) {");
+    _builder_1.append("public Exception apply(final Exception it) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("return new IllegalArgumentException(it);");
