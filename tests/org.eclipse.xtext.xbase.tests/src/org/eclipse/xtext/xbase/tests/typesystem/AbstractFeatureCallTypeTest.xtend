@@ -431,6 +431,14 @@ abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase {
 		"}").resolvesFeatureCallsTo("List<Object>", "List<? super String>", "Object")
 	}
 	
+	@Test def void testClosure_59() throws Exception {
+		'{ 
+			val java.util.List<CharSequence> res = null
+			val Iterable<? extends Object> obj = null
+			res += obj.map[""]
+		}'.resolvesFeatureCallsTo("List<CharSequence>", "boolean", "Iterable<?>", "Iterable<String>")
+	}
+	
 	@Test def void testIfExpression_01() throws Exception {
 		"if(true) #{'f'} else emptySet".resolvesFeatureCallsTo("Set<String>")
 	}

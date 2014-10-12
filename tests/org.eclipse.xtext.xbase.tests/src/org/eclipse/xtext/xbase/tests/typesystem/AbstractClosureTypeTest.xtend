@@ -56,6 +56,18 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 		super.expression(expression, resolve)
 	}
 	
+	@Test def void testVariableDeclaration_01() throws Exception {
+		"{ var com.google.inject.Provider<CharSequence> p = [ new StringBuilder ] }".resolvesClosuresTo("()=>StringBuilder").withEquivalents("Provider<CharSequence>")
+	}
+	
+	@Test def void testVariableDeclaration_02() throws Exception {
+		"{ var com.google.inject.Provider<? extends CharSequence> p = [ new StringBuilder ] }".resolvesClosuresTo("()=>StringBuilder").withEquivalents("Provider<CharSequence>")
+	}
+	
+	@Test def void testVariableDeclaration_03() throws Exception {
+		"{ var com.google.inject.Provider<? super CharSequence> p = [ new StringBuilder ] }".resolvesClosuresTo("()=>StringBuilder").withEquivalents("Provider<CharSequence>")
+	}
+	
 	@Test def void testSpecializedSubInterface_01() throws Exception {
 		"closures::Client::invokeSubIntf [ length.toString ]".resolvesClosuresTo("(CharSequence)=>String").withEquivalents("SubIntf")
 	}
@@ -982,6 +994,29 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 	
 	@Test def void testClosure_58() throws Exception {
 		'(null as Iterable<? super String>).map(e| return e)'.resolvesClosuresTo("(Object)=>Object").withEquivalents("Function1<Object, Object>")
+	}
+	
+	@Test def void testClosure_59() throws Exception {
+		'{ 
+			val java.util.List<CharSequence> res = null
+			val Iterable<? extends Object> obj = null
+			res += obj.map[""]
+		}'.resolvesClosuresTo("(Object)=>String").withEquivalents("Function1<Object, String>")
+	}
+	
+	@Test def void testClosure_60() throws Exception {
+		'{ 
+			val Iterable<? extends Object> obj = null
+			val Iterable<CharSequence> res = obj.map[""]
+		}'.resolvesClosuresTo("(Object)=>String").withEquivalents("Function1<Object, CharSequence>")
+	}
+	
+	@Test def void testClosure_61() throws Exception {
+		'{ 
+			val java.util.List<? super CharSequence> res = null
+			val Iterable<? extends Object> obj = null
+			res += obj.map[""]
+		}'.resolvesClosuresTo("(Object)=>String").withEquivalents("Function1<Object, String>")
 	}
 	
 	@Test def void testEMap_01() throws Exception {

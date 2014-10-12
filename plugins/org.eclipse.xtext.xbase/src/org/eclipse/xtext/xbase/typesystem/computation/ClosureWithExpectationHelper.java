@@ -294,13 +294,18 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 
 		// just in case we have more than 6 closure parameters
 		int paramCount = Math.min(closureParameters.size(), operationParameterTypes.size());
+		boolean returnTypeIsArg = false;
 		for (int i = 0; i < paramCount; i++) {
 			JvmFormalParameter closureParameter = closureParameters.get(i);
 			final LightweightTypeReference operationParameterType = operationParameterTypes.get(i);
 			if (operationParameterType.getKind() == LightweightTypeReference.KIND_UNBOUND_TYPE_REFERENCE) {
 				UnboundTypeReference casted = (UnboundTypeReference)operationParameterType;
-				if (!casted.getHandle().equals(skippedHandle) && !casted.internalIsResolved() && casted.hasSignificantHints()) {
+				boolean isSkippedHandle = casted.getHandle().equals(skippedHandle);
+				if (!isSkippedHandle && !casted.internalIsResolved() && casted.hasSignificantHints()) {
 					casted.acceptHint(VarianceInfo.IN);
+				}
+				if (isSkippedHandle) {
+					returnTypeIsArg = true;
 				}
 			}
 			if (explicit && closureParameter.getParameterType() != null) {
@@ -355,6 +360,9 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 				typeAssigner.assignType(closureParameter, partiallyResolved);
 				resultClosureType.addParameterType(partiallyResolved);
 			}
+		}
+		if (skippedHandle != null && !returnTypeIsArg) {
+			((UnboundTypeReference) returnType).acceptHint(VarianceInfo.OUT);	
 		}
 		for (int i = paramCount; i < closureParameters.size(); i++) {
 			JvmFormalParameter closureParameter = closureParameters.get(i);
