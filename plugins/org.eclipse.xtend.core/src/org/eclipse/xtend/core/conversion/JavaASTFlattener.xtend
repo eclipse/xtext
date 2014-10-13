@@ -293,7 +293,11 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override visit(StringLiteral it) {
-		appendToBuffer(escapedValue)
+
+		// octal syntax \0, 1, 2, 3, 4, 5, 6, or 7 convert to \u000x
+		// octal syntax \123 convert is not yet handled
+		val handleOctal = escapedValue.replaceAll("\\\\([01234567])", "\\u000$1")
+		appendToBuffer(handleOctal)
 		return false
 	}
 
@@ -343,12 +347,12 @@ class JavaASTFlattener extends ASTVisitor {
 		}
 		appendModifieres(modifiers())
 
-		if (modifiers().filter(Modifier).isPackageVisibility()) {
-			appendToBuffer('package ')
-		}
 		if (isInterface()) {
 			appendToBuffer("interface ")
 		} else {
+			if (modifiers().filter(Modifier).isPackageVisibility()) {
+				appendToBuffer('package ')
+			}
 			appendToBuffer("class ")
 		}
 		name.accept(this)
@@ -451,30 +455,41 @@ class JavaASTFlattener extends ASTVisitor {
 		if (javadoc != null) {
 			javadoc.accept(this)
 		}
-		appendModifieres(modifiers())
-		if (modifiers().filter(Modifier).isPackageVisibility()) {
-			appendToBuffer('package ')
-		}
-		type.accept(this)
-		appendSpaceToBuffer
-		fragments.visitAllSeparatedByComma
-		appendLineWrapToBuffer
+
+		//FIXME check array case: int i[] =  new int[]{0};
+		fragments.forEach [ VariableDeclarationFragment frag |
+			appendModifieres(modifiers())
+			if (modifiers().filter(Modifier).isPackageVisibility()) {
+				if (parent instanceof TypeDeclaration) {
+					if (!(parent as TypeDeclaration).isInterface) {
+						appendToBuffer('package ')
+					}
+				}
+			}
+			type.accept(this)
+			appendExtraDimensions(frag.extraDimensions)
+			appendSpaceToBuffer
+			frag.accept(this)
+			appendLineWrapToBuffer
+		]
 		return false
 	}
 
 	override visit(VariableDeclarationExpression it) {
-		appendModifieres(modifiers())
-		appendToBuffer(handleVariableDeclaration(modifiers()))
-		appendSpaceToBuffer
-		type.accept(this)
-		appendSpaceToBuffer
-		fragments.visitAllSeparatedByComma
+		fragments.forEach [ VariableDeclarationFragment frag |
+			appendModifieres(modifiers())
+			appendToBuffer(handleVariableDeclaration(modifiers()))
+			appendSpaceToBuffer
+			type.accept(this)
+			appendSpaceToBuffer
+			frag.accept(this)
+			appendSpaceToBuffer
+		]
 		return false
 	}
 
 	override visit(VariableDeclarationFragment it) {
 		name.accept(this)
-		appendExtraDimensions(extraDimensions)
 		if (getInitializer() != null) {
 			appendToBuffer("=")
 			getInitializer.accept(this)
@@ -501,17 +516,25 @@ class JavaASTFlattener extends ASTVisitor {
 
 	override visit(VariableDeclarationStatement it) {
 		val hasAnnotations = !modifiers().filter(Annotation).empty
-		if (hasAnnotations) {
-			appendToBuffer("/*FIXME can not add Annotation to Variable declaration. Java code: ")
-			addProblem("Annotation on Variable declaration is not supported.")
-		}
-		appendModifieres(modifiers(), [if(hasAnnotations) appendToBuffer("*/") appendLineWrapToBuffer])
-		appendToBuffer(handleVariableDeclaration(modifiers()))
-		appendSpaceToBuffer
-		type.accept(this)
-		appendSpaceToBuffer
-		fragments.visitAllSeparatedByComma
-		appendLineWrapToBuffer
+		fragments.forEach [ VariableDeclarationFragment frag |
+			appendLineWrapToBuffer
+			if (hasAnnotations) {
+				appendToBuffer("/*FIXME can not add Annotation to Variable declaration. Java code: ")
+				addProblem("Annotation on Variable declaration is not supported.")
+			}
+			appendModifieres(modifiers(),
+				[
+					if(hasAnnotations) appendToBuffer("*/")
+					appendLineWrapToBuffer
+				])
+			appendToBuffer(handleVariableDeclaration(modifiers()))
+			appendSpaceToBuffer
+			type.accept(this)
+			appendExtraDimensions(frag.extraDimensions)
+			appendSpaceToBuffer
+			frag.accept(this)
+			appendSpaceToBuffer
+		]
 		return false
 	}
 
@@ -622,8 +645,10 @@ class JavaASTFlattener extends ASTVisitor {
 		if (isLambdaCase(node)) {
 			appendToBuffer("[")
 			val method = node.anonymousClassDeclaration.bodyDeclarations.get(0) as MethodDeclaration
-			method.parameters.visitAllSeparatedByComma
-			appendToBuffer("|")
+			if (!method.parameters.empty) {
+				method.parameters.visitAllSeparatedByComma
+				appendToBuffer("|")
+			}
 			method.body.statements.visitAll
 			appendToBuffer("]")
 		} else {
@@ -817,8 +842,10 @@ class JavaASTFlattener extends ASTVisitor {
 		if (node.getExpression() != null) {
 			appendSpaceToBuffer
 			node.getExpression().accept(this)
+			appendSpaceToBuffer
+		} else {
+			appendToBuffer(';')
 		}
-		appendSpaceToBuffer
 		return false
 	}
 
@@ -1244,7 +1271,10 @@ class JavaASTFlattener extends ASTVisitor {
 		if (node.getInitializer() != null) {
 			node.getInitializer().accept(this)
 		} else {
-			appendToBuffer("newArrayOfSize(")
+			appendToBuffer(
+				'''new«if (node.type.elementType.isPrimitiveType) {
+					(node.type.elementType as PrimitiveType).primitiveTypeCode.toString.toFirstUpper
+				}»ArrayOfSize(''')
 			(node.dimensions() as Iterable<Expression>).get(0).accept(this)
 			appendToBuffer(")")
 		}
@@ -1265,13 +1295,14 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	@Override override boolean visit(AssertStatement node) {
-		appendToBuffer("assert ")
+		appendToBuffer("if(!(")
 		node.getExpression().accept(this)
+		appendToBuffer(")) {")
+		appendToBuffer("throw new AssertionError(")
 		if (node.getMessage() != null) {
-			appendToBuffer(" : ")
 			node.getMessage().accept(this)
 		}
-		appendLineWrapToBuffer
+		appendToBuffer(")}")
 		return false
 	}
 

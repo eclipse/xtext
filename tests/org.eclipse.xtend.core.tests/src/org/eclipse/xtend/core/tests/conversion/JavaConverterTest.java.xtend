@@ -1,5 +1,8 @@
 package org.eclipse.xtend.core.tests.conversion
 
+import com.google.common.collect.Iterables
+import com.google.inject.Inject
+import com.google.inject.Provider
 import org.eclipse.emf.common.util.EList
 import org.eclipse.jdt.core.dom.ASTParser
 import org.eclipse.xtend.core.conversion.JavaConverter
@@ -15,16 +18,14 @@ import org.eclipse.xtend.core.xtend.XtendInterface
 import org.eclipse.xtend.core.xtend.XtendMember
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 import org.eclipse.xtext.common.types.JvmTypeParameter
-import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.xbase.XClosure
 import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.XNumberLiteral
 import org.eclipse.xtext.xbase.XStringLiteral
 import org.junit.Before
 import org.junit.Test
-import com.google.common.collect.Iterables
-import com.google.inject.Inject
-import com.google.inject.Provider
+
+import static org.eclipse.xtext.common.types.JvmVisibility.*
 
 class JavaConverterTest extends AbstractXtendTestCase {
 	@Inject Provider<JavaConverter> javaConverterProvider
@@ -45,7 +46,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		assertEquals("JavaToConvert", typeDeclaration.getName())
 		assertTrue("Compiles to class", typeDeclaration instanceof XtendClass)
 		var XtendClass xtendClass = typeDeclaration as XtendClass
-		assertEquals(JvmVisibility.PUBLIC, xtendClass.getVisibility())
+		assertEquals(PUBLIC, xtendClass.getVisibility())
 		assertFalse("Non Final", xtendClass.isFinal())
 		assertFalse("Non Static", xtendClass.isStatic())
 		assertEquals("T", xtendClass.getTypeParameters().get(0).getSimpleName())
@@ -70,7 +71,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		var EList<XtendMember> members = xtendClazz.getMembers()
 		assertEquals("Simple fields count", 1, members.size())
 		var XtendField xtendMember = members.get(0) as XtendField
-		assertEquals(JvmVisibility.PRIVATE, xtendMember.getVisibility())
+		assertEquals(PRIVATE, xtendMember.getVisibility())
 		assertEquals("String", xtendMember.getType().getSimpleName())
 		assertEquals("str", xtendMember.getName())
 		assertEquals("myString", (xtendMember.getInitialValue() as XStringLiteral).getValue())
@@ -98,25 +99,45 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		checkVisibility(xtendClazz)
 	}
 
+	@Test def void testFieldVisibility1() throws Exception {
+		val interfaze = toValidTypeDeclaration("JavaToConvert",
+			'''
+			public interface JavaToConvert {
+				public static String pub;
+				final String fin;
+				static String def;
+			}''') as XtendInterface
+		assertEquals(PUBLIC, interfaze.field(0).visibility)
+		assertEquals(PUBLIC, interfaze.field(1).visibility)
+		assertEquals(PUBLIC, interfaze.field(2).visibility)
+	}
+
+	def XtendField field(XtendTypeDeclaration typeDecl, int i) {
+		typeDecl.members.get(i) as XtendField
+	}
+
+	def XtendFunction method(XtendTypeDeclaration typeDecl, int i) {
+		typeDecl.members.get(i) as XtendFunction
+	}
+
 	def private void checkVisibility(XtendClass xtendClazz) {
 
-		var EList<XtendMember> members = xtendClazz.getMembers()
-		assertEquals("Simple fields count", 4, members.size())
-		var XtendField xtendMember = members.get(0) as XtendField
+		assertEquals("Simple fields count", 4, xtendClazz.getMembers().size())
+		var XtendField xtendMember = xtendClazz.field(0)
 		assertEquals("priv", xtendMember.getName())
-		assertEquals("field PRIVATE visibility", JvmVisibility.PRIVATE, xtendMember.getVisibility())
+		assertEquals("field PRIVATE visibility", PRIVATE, xtendMember.getVisibility())
 		assertEquals("String", xtendMember.getType().getSimpleName())
-		xtendMember = members.get(1) as XtendField
+		xtendMember = xtendClazz.field(1)
 		assertEquals("pub", xtendMember.getName())
-		assertEquals("field public visibility", JvmVisibility.PUBLIC, xtendMember.getVisibility())
+		assertEquals("field public visibility", PUBLIC, xtendMember.getVisibility())
 		assertEquals("String", xtendMember.getType().getSimpleName())
-		xtendMember = members.get(2) as XtendField
+		xtendMember = xtendClazz.field(2)
 		assertEquals("prot", xtendMember.getName())
-		assertEquals("field PROTECTED visibility", JvmVisibility.PROTECTED, xtendMember.getVisibility())
+		assertEquals("field PROTECTED visibility", PROTECTED, xtendMember.getVisibility())
 		assertEquals("String", xtendMember.getType().getSimpleName())
-		xtendMember = members.get(3) as XtendField
+		xtendMember = xtendClazz.field(3)
 		assertEquals("def", xtendMember.getName())
-		assertEquals("field DEFAULT visibility", JvmVisibility.DEFAULT, xtendMember.getVisibility())
+		assertEquals("field DEFAULT visibility", DEFAULT, xtendMember.getVisibility())
 		assertEquals("String", xtendMember.getType().getSimpleName())
 	}
 
@@ -125,10 +146,9 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		var XtendClass xtendClazz = toValidXtendClass(
 			"public class JavaToConvert {  @Override public String toString() {} }")
 
-		var EList<XtendMember> members = xtendClazz.getMembers()
-		assertEquals("Simple methods count", 1, members.size())
-		var XtendFunction xtendMember = members.get(0) as XtendFunction
-		assertEquals(JvmVisibility.PUBLIC, xtendMember.getVisibility())
+		assertEquals("Simple methods count", 1, xtendClazz.getMembers().size())
+		var xtendMember = xtendClazz.method(0)
+		assertEquals(PUBLIC, xtendMember.getVisibility())
 		assertTrue(xtendMember.isOverride())
 		assertEquals("String", xtendMember.getReturnType().getSimpleName())
 		assertEquals("toString", xtendMember.getName())
@@ -139,10 +159,9 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		var XtendClass xtendClazz = toValidXtendClass(
 			"public class JavaToConvert { public boolean visit(final Object node) { return true;}}")
 
-		var EList<XtendMember> members = xtendClazz.getMembers()
-		assertEquals("Simple methods count", 1, members.size())
-		var XtendFunction xtendMember = members.get(0) as XtendFunction
-		assertEquals(JvmVisibility.PUBLIC, xtendMember.getVisibility())
+		assertEquals("Simple methods count", 1, xtendClazz.getMembers().size())
+		var XtendFunction xtendMember = xtendClazz.method(0)
+		assertEquals(PUBLIC, xtendMember.getVisibility())
 		assertEquals("boolean", xtendMember.getReturnType().getSimpleName())
 		assertEquals("visit", xtendMember.getName())
 	}
@@ -172,8 +191,8 @@ class JavaConverterTest extends AbstractXtendTestCase {
 
 		var EList<XtendMember> members = xtendClazz.getMembers()
 		assertEquals("Simple methods count", 4, members.size())
-		var XtendFunction xtendMember = members.get(1) as XtendFunction
-		assertEquals(JvmVisibility.PUBLIC, xtendMember.getVisibility())
+		var XtendFunction xtendMember = xtendClazz.method(1)
+		assertEquals(PUBLIC, xtendMember.getVisibility())
 		assertEquals("void", xtendMember.getReturnType().getSimpleName())
 		assertEquals("visit", xtendMember.getName())
 	}
@@ -197,17 +216,20 @@ class JavaConverterTest extends AbstractXtendTestCase {
 
 		var EList<XtendMember> members = xtendClazz.getMembers()
 		assertEquals("Simple methods count", 3, members.size())
-		assertTrue((members.get(0) as XtendFunction).isOverride())
-		assertTrue((members.get(1) as XtendFunction).isOverride())
-		assertTrue((members.get(2) as XtendFunction).isOverride())
+		assertTrue(xtendClazz.method(0).isOverride())
+		assertTrue(xtendClazz.method(1).isOverride())
+		assertTrue(xtendClazz.method(2).isOverride())
 	}
 
 	@Test def void testStringLiteralCase() throws Exception {
 
 		var XtendClass xtendClazz = toValidXtendClass(
-			"class TestStringLiteral { String withLineWrap=\"string with wrap\\n\";}")
+			'class TestStringLiteral { 
+				String withLineWrap="string with wrap\\n";
+				String str2 = new String("\\1\\2\\3");
+			}')
 
-		var XtendField xtendMember = xtendClazz.getMembers().get(0) as XtendField
+		var XtendField xtendMember = xtendClazz.field(0)
 		assertEquals("withLineWrap", xtendMember.getName())
 		assertEquals("string with wrap\n", (xtendMember.getInitialValue() as XStringLiteral).getValue())
 	}
@@ -221,10 +243,10 @@ class JavaConverterTest extends AbstractXtendTestCase {
 				double d= 2.5d;
 			}''')
 
-		var XtendField xtendMember = xtendClazz.getMembers().get(0) as XtendField
+		var XtendField xtendMember = xtendClazz.field(0)
 		assertEquals("l", xtendMember.getName())
 		assertEquals("0x0000000000000000#L", (xtendMember.getInitialValue() as XNumberLiteral).getValue())
-		xtendMember = xtendClazz.getMembers().get(1) as XtendField
+		xtendMember = xtendClazz.field(1)
 		assertEquals("d", xtendMember.getName())
 		assertEquals("2.5d", (xtendMember.getInitialValue() as XNumberLiteral).getValue())
 	}
@@ -244,7 +266,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		typeParameter = xtendClazz.getTypeParameters().get(1)
 		assertEquals("U", typeParameter.getName())
 		assertEquals("extends T", typeParameter.getConstraints().get(0).getSimpleName())
-		var XtendFunction xtendMember = xtendClazz.getMembers().get(0) as XtendFunction
+		var XtendFunction xtendMember = xtendClazz.method(0)
 		assertEquals("doStuff", xtendMember.getName())
 		typeParameter = xtendMember.getTypeParameters().get(0)
 		assertEquals("D", typeParameter.getName())
@@ -252,9 +274,35 @@ class JavaConverterTest extends AbstractXtendTestCase {
 	}
 
 	@Test def void testSimpleAssigmentCase() throws Exception {
-
 		var XtendClass xtendClazz = toValidXtendClass(
-			"class TestAssiment {  void doStuff() { String x = null; x = new String();}")
+			"class TestAssiment {  
+				void doStuff() {
+					String x = null;
+					x = new String();
+				}
+			}")
+		assertNotNull(xtendClazz)
+	}
+
+	@Test def void testMultiDeclaration() throws Exception {
+		var XtendClass xtendClazz = toValidXtendClass(
+			"class Test { 
+				int i,j=0;
+				void doStuff() {
+					String x,y = null;
+				}
+			}")
+		assertNotNull(xtendClazz)
+	}
+
+	@Test def void testAssertCase() throws Exception {
+		var XtendClass xtendClazz = toValidXtendClass(
+			"class Test {  
+				void doStuff() {
+					String x = null;
+					assert(x!=null);
+				}
+			}")
 		assertNotNull(xtendClazz)
 	}
 
@@ -303,7 +351,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 			/**/
 			def package void doStuff2(){
 				/* some comments */
-				return 
+				return;
 			}
 			
 		}'''
@@ -368,6 +416,24 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		assertEquals(2, Iterables.size(conversionResult.getProblems()))
 	}
 
+	@Test def void testInnerIntefaceCase() throws Exception {
+
+		var type = toValidTypeDeclaration("Clazz",
+			'''
+			public class Clazz {
+				interface Inner {
+					void test();
+				}
+			}
+			interface Test{}''')
+		val inner = type.members.get(0)
+		assertTrue(inner instanceof XtendInterface)
+		val xtendInterfaze = inner as XtendInterface
+		assertEquals(PUBLIC, xtendInterfaze.visibility)
+		assertEquals(PUBLIC, xtendInterfaze.method(0).visibility)
+
+	}
+
 	@Test def void testStaticBlockCase() throws Exception {
 
 		var ConversionResult conversionResult = j2x.toXtend("Clazz",
@@ -381,7 +447,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 	@Test def void testConstructorCase() throws Exception {
 
 		var XtendClass clazz = toValidXtendClass("public class Clazz { public Clazz(){}}")
-		assertEquals(JvmVisibility.PUBLIC, (clazz.getMembers().get(0) as XtendConstructor).getVisibility())
+		assertEquals(PUBLIC, (clazz.getMembers().get(0) as XtendConstructor).getVisibility())
 	}
 
 	@Test def void testArrayAccessCase() throws Exception {
@@ -402,13 +468,42 @@ class JavaConverterTest extends AbstractXtendTestCase {
 
 	@Test def void testArrayCreationCase() throws Exception {
 
+		//FIXME Set<String> expectedNames = new HashSet<String>(Arrays.asList(new String[]{"AType", "RootRule"}));
 		var XtendClass clazz = toValidXtendClass(
 			'''
+			import java.util.Arrays
+			import java.util.HashSet
+			import java.util.Set
 			public class Clazz {
+				int as[] = new int[1];
+				// int[] as2;
+				// int[][] as4;
+				// int[] as5 = as;
+				int[] as2,as4[],as5 = as[];
+				final int callCount[] = new int[]{0};
+				byte[] buffer = new byte[512];
 				String[] arr = new String[]{"",""};
+				
 				Class<?>[] argTypes = new Class[arr.length];
 			}''')
 		assertNotNull(clazz)
+	}
+
+	@Test def void testArrayShiftDimensionCase() throws Exception {
+		val xtendCode = '''
+			private int ar[] = new int[1];
+			public void arDim() {
+				int ar2[] = new int[2];
+			}
+		'''
+		assertEquals(
+			'''
+			int[] ar=newIntArrayOfSize(1)
+			def void arDim(){
+				
+				
+				var int[] ar2=newIntArrayOfSize(2) 
+			}'''.toString, classBodyDeclToXtend(xtendCode))
 	}
 
 	@Test def void testArrayPrefixMinusCase() throws Exception {
@@ -553,6 +648,20 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		assertTrue(xtendMember.getInitialValue() instanceof RichString)
 	}
 
+	@Test def void testReturnVoidCase() throws Exception {
+
+		var XtendClass clazz = toValidXtendClass(
+			'''
+			class Z {
+				public void ret() {
+					if(true)
+						return;
+					System.out.println("");
+				}	
+			}''')
+		assertNotNull(clazz)
+	}
+
 	@Test def void testAnonymousClassCase() throws Exception {
 
 		var XtendClass clazz = toValidXtendClass(
@@ -573,14 +682,20 @@ class JavaConverterTest extends AbstractXtendTestCase {
 	}
 
 	@Test def void testSLCommentCase() throws Exception {
-
-		var XtendClass clazz = toValidXtendClass(
+		var clazz = toXtendCode(
 			'''
 			class Clazz {
 				//Single Line comment
 				String str;
 			}''')
-		assertNotNull(clazz)
+		println(clazz)
+		assertEquals(
+			'''
+			package class Clazz {
+				//Single Line comment
+				package String str
+				
+			}'''.toString, clazz)
 	}
 
 	def private XtendClass toValidXtendClass(String javaCode) throws Exception {
