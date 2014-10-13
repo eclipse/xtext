@@ -20,6 +20,7 @@ import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.mwe.PathTraverser
 import org.junit.Ignore
 import org.junit.Test
+import org.junit.Before
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -28,18 +29,48 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
 	@Inject
 	private Provider<JavaConverter> javaConverter;
 
+	String sourceProject
+	String targetProject
+	int errorsExpected = 0
+	int problemsExpected = 0
+
+	@Before
+	def void setUp() {
+		sourceProject = null
+		targetProject = null
+		errorsExpected = 0
+		problemsExpected = 0
+	}
+
 	@Test @Ignore
 	def void testConvertFilesInThisProject() throws Exception {
-		val File projectRoot = new File("").getAbsoluteFile();
-		val testProject = new File(projectRoot.parentFile, "test-converter")
-		println("Working in " + projectRoot.getPath());
+		sourceProject = "org.eclipse.xtend.core.tests"
+		targetProject = "test-converter"
+		errorsExpected = 14
+		problemsExpected = 29
+		runConverter
+	}
+
+	@Test@Ignore
+	def void testConvertFilesInXtextTestsProject() throws Exception {
+		sourceProject = "org.eclipse.xtext.tests"
+		targetProject = "org.eclipse.xtext.tests.converted"
+		errorsExpected = 3021
+		problemsExpected = 5035
+		runConverter
+	}
+
+	def runConverter() {
+		val File srcProjectRoot = new File(new File("").getAbsoluteFile().parentFile, sourceProject);
+
+		val testProject = new File(srcProjectRoot.parentFile, targetProject)
+		println("Working in " + srcProjectRoot.getPath());
 		val PathTraverser pathTraverser = new PathTraverser();
-		val Set<URI> allResourceUris = pathTraverser.findAllResourceUris(projectRoot.getAbsolutePath(),
+		val Set<URI> allResourceUris = pathTraverser.findAllResourceUris(srcProjectRoot.getAbsolutePath(),
 			new Predicate<URI>() {
 				override boolean apply(URI input) {
 					val fileName = input.toFileString()
-					return "java".equals(input.fileExtension()) && !fileName.contains("xtend-gen") &&
-						!fileName.contains("ScenarioBug395002");
+					return "java".equals(input.fileExtension()) && !fileName.contains("xtend-gen");
 				}
 			});
 		var errors = 0
@@ -52,26 +83,27 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
 			val xtendResult = j2x.toXtend(file.name, javaCode)
 			problems += xtendResult.problems.size
 			val String xtendCode = xtendResult.xtendCode
-			val javaFileProjRelPath = uri.toFileString().replace(projectRoot.absolutePath, "")
+			val javaFileProjRelPath = uri.toFileString().replace(srcProjectRoot.absolutePath, "")
 			var fileName = javaFileProjRelPath + ".xtend"
-			var content =  xtendCode
+			var content = xtendCode
 			try {
 				file(xtendCode, true);
 			} catch (AssertionError error) {
 				System.err.println('''«uri» - «error.message»''')
-				writeToFile(testProject, javaFileProjRelPath, javaCode)
-				fileName += ".error"
+
+				//				writeToFile(testProject, javaFileProjRelPath, javaCode)
+				//				fileName += ".error"
 				errors++
 			}
 			writeToFile(testProject, fileName, content)
 		}
-		println('''Problems («problems»)''')
 		println('''Errors («errors»)''')
+		println('''Problems («problems»)''')
 		println("Done...")
-		assertEquals(13, errors)
-		assertEquals(27, problems)
+		assertEquals(errorsExpected, errors)
+		assertEquals(problemsExpected, problems)
 	}
-	
+
 	def writeToFile(File parent, String fileName, String content) {
 		val targetFile = new File(parent, fileName)
 		println("Writing to: " + targetFile.absolutePath)

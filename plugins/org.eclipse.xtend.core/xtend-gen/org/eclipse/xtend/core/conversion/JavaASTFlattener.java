@@ -124,6 +124,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
@@ -409,7 +410,8 @@ public class JavaASTFlattener extends ASTVisitor {
   
   public boolean visit(final StringLiteral it) {
     String _escapedValue = it.getEscapedValue();
-    this.appendToBuffer(_escapedValue);
+    final String handleOctal = _escapedValue.replaceAll("\\\\([01234567])", "\\u000$1");
+    this.appendToBuffer(handleOctal);
     return false;
   }
   
@@ -486,16 +488,16 @@ public class JavaASTFlattener extends ASTVisitor {
     }
     List _modifiers = it.modifiers();
     this.appendModifieres(it, _modifiers);
-    List _modifiers_1 = it.modifiers();
-    Iterable<Modifier> _filter = Iterables.<Modifier>filter(_modifiers_1, Modifier.class);
-    boolean _isPackageVisibility = this._aSTFlattenerUtils.isPackageVisibility(_filter);
-    if (_isPackageVisibility) {
-      this.appendToBuffer("package ");
-    }
     boolean _isInterface = it.isInterface();
     if (_isInterface) {
       this.appendToBuffer("interface ");
     } else {
+      List _modifiers_1 = it.modifiers();
+      Iterable<Modifier> _filter = Iterables.<Modifier>filter(_modifiers_1, Modifier.class);
+      boolean _isPackageVisibility = this._aSTFlattenerUtils.isPackageVisibility(_filter);
+      if (_isPackageVisibility) {
+        this.appendToBuffer("package ");
+      }
       this.appendToBuffer("class ");
     }
     SimpleName _name_1 = it.getName();
@@ -657,43 +659,62 @@ public class JavaASTFlattener extends ASTVisitor {
       Javadoc _javadoc_1 = it.getJavadoc();
       _javadoc_1.accept(this);
     }
-    List _modifiers = it.modifiers();
-    this.appendModifieres(it, _modifiers);
-    List _modifiers_1 = it.modifiers();
-    Iterable<Modifier> _filter = Iterables.<Modifier>filter(_modifiers_1, Modifier.class);
-    boolean _isPackageVisibility = this._aSTFlattenerUtils.isPackageVisibility(_filter);
-    if (_isPackageVisibility) {
-      this.appendToBuffer("package ");
-    }
-    Type _type = it.getType();
-    _type.accept(this);
-    this.appendSpaceToBuffer();
     List _fragments = it.fragments();
-    this.visitAllSeparatedByComma(_fragments);
-    this.appendLineWrapToBuffer();
+    final Procedure1<VariableDeclarationFragment> _function = new Procedure1<VariableDeclarationFragment>() {
+      public void apply(final VariableDeclarationFragment frag) {
+        List _modifiers = it.modifiers();
+        JavaASTFlattener.this.appendModifieres(it, _modifiers);
+        List _modifiers_1 = it.modifiers();
+        Iterable<Modifier> _filter = Iterables.<Modifier>filter(_modifiers_1, Modifier.class);
+        boolean _isPackageVisibility = JavaASTFlattener.this._aSTFlattenerUtils.isPackageVisibility(_filter);
+        if (_isPackageVisibility) {
+          ASTNode _parent = it.getParent();
+          if ((_parent instanceof TypeDeclaration)) {
+            ASTNode _parent_1 = it.getParent();
+            boolean _isInterface = ((TypeDeclaration) _parent_1).isInterface();
+            boolean _not = (!_isInterface);
+            if (_not) {
+              JavaASTFlattener.this.appendToBuffer("package ");
+            }
+          }
+        }
+        Type _type = it.getType();
+        _type.accept(JavaASTFlattener.this);
+        int _extraDimensions = frag.getExtraDimensions();
+        JavaASTFlattener.this.appendExtraDimensions(_extraDimensions);
+        JavaASTFlattener.this.appendSpaceToBuffer();
+        frag.accept(JavaASTFlattener.this);
+        JavaASTFlattener.this.appendLineWrapToBuffer();
+      }
+    };
+    IterableExtensions.<VariableDeclarationFragment>forEach(_fragments, _function);
     return false;
   }
   
   public boolean visit(final VariableDeclarationExpression it) {
-    List _modifiers = it.modifiers();
-    this.appendModifieres(it, _modifiers);
-    List _modifiers_1 = it.modifiers();
-    String _handleVariableDeclaration = this._aSTFlattenerUtils.handleVariableDeclaration(_modifiers_1);
-    this.appendToBuffer(_handleVariableDeclaration);
-    this.appendSpaceToBuffer();
-    Type _type = it.getType();
-    _type.accept(this);
-    this.appendSpaceToBuffer();
     List _fragments = it.fragments();
-    this.visitAllSeparatedByComma(_fragments);
+    final Procedure1<VariableDeclarationFragment> _function = new Procedure1<VariableDeclarationFragment>() {
+      public void apply(final VariableDeclarationFragment frag) {
+        List _modifiers = it.modifiers();
+        JavaASTFlattener.this.appendModifieres(it, _modifiers);
+        List _modifiers_1 = it.modifiers();
+        String _handleVariableDeclaration = JavaASTFlattener.this._aSTFlattenerUtils.handleVariableDeclaration(_modifiers_1);
+        JavaASTFlattener.this.appendToBuffer(_handleVariableDeclaration);
+        JavaASTFlattener.this.appendSpaceToBuffer();
+        Type _type = it.getType();
+        _type.accept(JavaASTFlattener.this);
+        JavaASTFlattener.this.appendSpaceToBuffer();
+        frag.accept(JavaASTFlattener.this);
+        JavaASTFlattener.this.appendSpaceToBuffer();
+      }
+    };
+    IterableExtensions.<VariableDeclarationFragment>forEach(_fragments, _function);
     return false;
   }
   
   public boolean visit(final VariableDeclarationFragment it) {
     SimpleName _name = it.getName();
     _name.accept(this);
-    int _extraDimensions = it.getExtraDimensions();
-    this.appendExtraDimensions(_extraDimensions);
     Expression _initializer = it.getInitializer();
     boolean _notEquals = (!Objects.equal(_initializer, null));
     if (_notEquals) {
@@ -729,34 +750,42 @@ public class JavaASTFlattener extends ASTVisitor {
     Iterable<Annotation> _filter = Iterables.<Annotation>filter(_modifiers, Annotation.class);
     boolean _isEmpty = IterableExtensions.isEmpty(_filter);
     final boolean hasAnnotations = (!_isEmpty);
-    if (hasAnnotations) {
-      this.appendToBuffer("/*FIXME can not add Annotation to Variable declaration. Java code: ");
-      this.addProblem(it, "Annotation on Variable declaration is not supported.");
-    }
-    List _modifiers_1 = it.modifiers();
-    final Function1<ASTNode, StringBuffer> _function = new Function1<ASTNode, StringBuffer>() {
-      public StringBuffer apply(final ASTNode it) {
-        StringBuffer _xblockexpression = null;
-        {
-          if (hasAnnotations) {
-            JavaASTFlattener.this.appendToBuffer("*/");
-          }
-          _xblockexpression = JavaASTFlattener.this.appendLineWrapToBuffer();
+    List _fragments = it.fragments();
+    final Procedure1<VariableDeclarationFragment> _function = new Procedure1<VariableDeclarationFragment>() {
+      public void apply(final VariableDeclarationFragment frag) {
+        JavaASTFlattener.this.appendLineWrapToBuffer();
+        if (hasAnnotations) {
+          JavaASTFlattener.this.appendToBuffer("/*FIXME can not add Annotation to Variable declaration. Java code: ");
+          JavaASTFlattener.this.addProblem(it, "Annotation on Variable declaration is not supported.");
         }
-        return _xblockexpression;
+        List _modifiers = it.modifiers();
+        final Function1<ASTNode, StringBuffer> _function = new Function1<ASTNode, StringBuffer>() {
+          public StringBuffer apply(final ASTNode it) {
+            StringBuffer _xblockexpression = null;
+            {
+              if (hasAnnotations) {
+                JavaASTFlattener.this.appendToBuffer("*/");
+              }
+              _xblockexpression = JavaASTFlattener.this.appendLineWrapToBuffer();
+            }
+            return _xblockexpression;
+          }
+        };
+        JavaASTFlattener.this.appendModifieres(it, _modifiers, _function);
+        List _modifiers_1 = it.modifiers();
+        String _handleVariableDeclaration = JavaASTFlattener.this._aSTFlattenerUtils.handleVariableDeclaration(_modifiers_1);
+        JavaASTFlattener.this.appendToBuffer(_handleVariableDeclaration);
+        JavaASTFlattener.this.appendSpaceToBuffer();
+        Type _type = it.getType();
+        _type.accept(JavaASTFlattener.this);
+        int _extraDimensions = frag.getExtraDimensions();
+        JavaASTFlattener.this.appendExtraDimensions(_extraDimensions);
+        JavaASTFlattener.this.appendSpaceToBuffer();
+        frag.accept(JavaASTFlattener.this);
+        JavaASTFlattener.this.appendSpaceToBuffer();
       }
     };
-    this.appendModifieres(it, _modifiers_1, _function);
-    List _modifiers_2 = it.modifiers();
-    String _handleVariableDeclaration = this._aSTFlattenerUtils.handleVariableDeclaration(_modifiers_2);
-    this.appendToBuffer(_handleVariableDeclaration);
-    this.appendSpaceToBuffer();
-    Type _type = it.getType();
-    _type.accept(this);
-    this.appendSpaceToBuffer();
-    List _fragments = it.fragments();
-    this.visitAllSeparatedByComma(_fragments);
-    this.appendLineWrapToBuffer();
+    IterableExtensions.<VariableDeclarationFragment>forEach(_fragments, _function);
     return false;
   }
   
@@ -953,8 +982,13 @@ public class JavaASTFlattener extends ASTVisitor {
       Object _get = _bodyDeclarations.get(0);
       final MethodDeclaration method = ((MethodDeclaration) _get);
       List _parameters = method.parameters();
-      this.visitAllSeparatedByComma(_parameters);
-      this.appendToBuffer("|");
+      boolean _isEmpty = _parameters.isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        List _parameters_1 = method.parameters();
+        this.visitAllSeparatedByComma(_parameters_1);
+        this.appendToBuffer("|");
+      }
       Block _body = method.getBody();
       List _statements = _body.statements();
       this.visitAll(_statements);
@@ -962,9 +996,9 @@ public class JavaASTFlattener extends ASTVisitor {
     } else {
       this.appendToBuffer("new ");
       List _typeArguments = node.typeArguments();
-      boolean _isEmpty = _typeArguments.isEmpty();
-      boolean _not = (!_isEmpty);
-      if (_not) {
+      boolean _isEmpty_1 = _typeArguments.isEmpty();
+      boolean _not_1 = (!_isEmpty_1);
+      if (_not_1) {
         List _typeArguments_1 = node.typeArguments();
         this.appendTypeParameters(_typeArguments_1);
       }
@@ -1289,8 +1323,10 @@ public class JavaASTFlattener extends ASTVisitor {
       this.appendSpaceToBuffer();
       Expression _expression_1 = node.getExpression();
       _expression_1.accept(this);
+      this.appendSpaceToBuffer();
+    } else {
+      this.appendToBuffer(";");
     }
-    this.appendSpaceToBuffer();
     return false;
   }
   
@@ -1930,7 +1966,22 @@ public class JavaASTFlattener extends ASTVisitor {
       ArrayInitializer _initializer_1 = node.getInitializer();
       _initializer_1.accept(this);
     } else {
-      this.appendToBuffer("newArrayOfSize(");
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("new");
+      String _xifexpression = null;
+      ArrayType _type = node.getType();
+      Type _elementType = _type.getElementType();
+      boolean _isPrimitiveType = _elementType.isPrimitiveType();
+      if (_isPrimitiveType) {
+        ArrayType _type_1 = node.getType();
+        Type _elementType_1 = _type_1.getElementType();
+        PrimitiveType.Code _primitiveTypeCode = ((PrimitiveType) _elementType_1).getPrimitiveTypeCode();
+        String _string = _primitiveTypeCode.toString();
+        _xifexpression = StringExtensions.toFirstUpper(_string);
+      }
+      _builder_1.append(_xifexpression, "");
+      _builder_1.append("ArrayOfSize(");
+      this.appendToBuffer(_builder_1.toString());
       List _dimensions = node.dimensions();
       Expression _get = ((Expression[])Conversions.unwrapArray(((Iterable<Expression>) _dimensions), Expression.class))[0];
       _get.accept(this);
@@ -1958,17 +2009,18 @@ public class JavaASTFlattener extends ASTVisitor {
   
   @Override
   public boolean visit(final AssertStatement node) {
-    this.appendToBuffer("assert ");
+    this.appendToBuffer("if(!(");
     Expression _expression = node.getExpression();
     _expression.accept(this);
+    this.appendToBuffer(")) {");
+    this.appendToBuffer("throw new AssertionError(");
     Expression _message = node.getMessage();
     boolean _notEquals = (!Objects.equal(_message, null));
     if (_notEquals) {
-      this.appendToBuffer(" : ");
       Expression _message_1 = node.getMessage();
       _message_1.accept(this);
     }
-    this.appendLineWrapToBuffer();
+    this.appendToBuffer(")}");
     return false;
   }
   

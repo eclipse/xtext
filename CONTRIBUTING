@@ -6,19 +6,18 @@ Thanks for your interest in this project.
 Project description:
 --------------------
 
-The Textual Modeling Framework is an umbrella project for textual modeling frameworks at Eclipse. It contains two concrete projects:
+The Textual Modeling Framework is an umbrella project for textual modeling frameworks at Eclipse. It contains only one concrete project:
 Xtext
-TCS (currently inactive)
- Please refer to the individual project web sites for details.
+ Please refer to the individual project web site for details.
 
-- https://projects.eclipse.org/projects/modeling.tmf
+- http://projects.eclipse.org/projects/modeling.tmf.xtext
 
 Developer resources:
 --------------------
 
 Information regarding source code management, builds, coding standards, and more.
 
-- https://projects.eclipse.org/projects/modeling.tmf/developer
+- http://projects.eclipse.org/projects/modeling.tmf.xtext/developer
 
 Contributor License Agreement:
 ------------------------------

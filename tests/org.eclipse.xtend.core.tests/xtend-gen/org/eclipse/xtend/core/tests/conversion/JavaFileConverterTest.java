@@ -23,6 +23,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -34,102 +35,131 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
   @Inject
   private Provider<JavaConverter> javaConverter;
   
+  private String sourceProject;
+  
+  private String targetProject;
+  
+  private int errorsExpected = 0;
+  
+  private int problemsExpected = 0;
+  
+  @Before
+  public void setUp() {
+    this.sourceProject = null;
+    this.targetProject = null;
+    this.errorsExpected = 0;
+    this.problemsExpected = 0;
+  }
+  
   @Test
   @Ignore
   public void testConvertFilesInThisProject() throws Exception {
-    File _file = new File("");
-    final File projectRoot = _file.getAbsoluteFile();
-    File _parentFile = projectRoot.getParentFile();
-    final File testProject = new File(_parentFile, "test-converter");
-    String _path = projectRoot.getPath();
-    String _plus = ("Working in " + _path);
-    InputOutput.<String>println(_plus);
-    final PathTraverser pathTraverser = new PathTraverser();
-    String _absolutePath = projectRoot.getAbsolutePath();
-    final Set<URI> allResourceUris = pathTraverser.findAllResourceUris(_absolutePath, 
-      new Predicate<URI>() {
-        public boolean apply(final URI input) {
-          final String fileName = input.toFileString();
-          boolean _and = false;
-          boolean _and_1 = false;
-          String _fileExtension = input.fileExtension();
-          boolean _equals = "java".equals(_fileExtension);
-          if (!_equals) {
-            _and_1 = false;
-          } else {
-            boolean _contains = fileName.contains("xtend-gen");
-            boolean _not = (!_contains);
-            _and_1 = _not;
+    this.sourceProject = "org.eclipse.xtend.core.tests";
+    this.targetProject = "test-converter";
+    this.errorsExpected = 14;
+    this.problemsExpected = 29;
+    this.runConverter();
+  }
+  
+  @Test
+  @Ignore
+  public void testConvertFilesInXtextTestsProject() throws Exception {
+    this.sourceProject = "org.eclipse.xtext.tests";
+    this.targetProject = "org.eclipse.xtext.tests.converted";
+    this.errorsExpected = 3021;
+    this.problemsExpected = 5035;
+    this.runConverter();
+  }
+  
+  public void runConverter() {
+    try {
+      File _file = new File("");
+      File _absoluteFile = _file.getAbsoluteFile();
+      File _parentFile = _absoluteFile.getParentFile();
+      final File srcProjectRoot = new File(_parentFile, this.sourceProject);
+      File _parentFile_1 = srcProjectRoot.getParentFile();
+      final File testProject = new File(_parentFile_1, this.targetProject);
+      String _path = srcProjectRoot.getPath();
+      String _plus = ("Working in " + _path);
+      InputOutput.<String>println(_plus);
+      final PathTraverser pathTraverser = new PathTraverser();
+      String _absolutePath = srcProjectRoot.getAbsolutePath();
+      final Set<URI> allResourceUris = pathTraverser.findAllResourceUris(_absolutePath, 
+        new Predicate<URI>() {
+          public boolean apply(final URI input) {
+            final String fileName = input.toFileString();
+            boolean _and = false;
+            String _fileExtension = input.fileExtension();
+            boolean _equals = "java".equals(_fileExtension);
+            if (!_equals) {
+              _and = false;
+            } else {
+              boolean _contains = fileName.contains("xtend-gen");
+              boolean _not = (!_contains);
+              _and = _not;
+            }
+            return _and;
           }
-          if (!_and_1) {
-            _and = false;
-          } else {
-            boolean _contains_1 = fileName.contains("ScenarioBug395002");
-            boolean _not_1 = (!_contains_1);
-            _and = _not_1;
+        });
+      int errors = 0;
+      int problems = 0;
+      for (final URI uri : allResourceUris) {
+        {
+          String _fileString = uri.toFileString();
+          final File file = new File(_fileString);
+          String _absolutePath_1 = file.getAbsolutePath();
+          String _plus_1 = ("Converting: " + _absolutePath_1);
+          InputOutput.<String>println(_plus_1);
+          Charset _defaultCharset = Charset.defaultCharset();
+          final String javaCode = Files.toString(file, _defaultCharset);
+          final JavaConverter j2x = this.javaConverter.get();
+          String _name = file.getName();
+          final JavaConverter.ConversionResult xtendResult = j2x.toXtend(_name, javaCode);
+          int _problems = problems;
+          Iterable<String> _problems_1 = xtendResult.getProblems();
+          int _size = IterableExtensions.size(_problems_1);
+          problems = (_problems + _size);
+          final String xtendCode = xtendResult.getXtendCode();
+          String _fileString_1 = uri.toFileString();
+          String _absolutePath_2 = srcProjectRoot.getAbsolutePath();
+          final String javaFileProjRelPath = _fileString_1.replace(_absolutePath_2, "");
+          String fileName = (javaFileProjRelPath + ".xtend");
+          String content = xtendCode;
+          try {
+            this.file(xtendCode, true);
+          } catch (final Throwable _t) {
+            if (_t instanceof AssertionError) {
+              final AssertionError error = (AssertionError)_t;
+              StringConcatenation _builder = new StringConcatenation();
+              _builder.append(uri, "");
+              _builder.append(" - ");
+              String _message = error.getMessage();
+              _builder.append(_message, "");
+              System.err.println(_builder);
+              errors++;
+            } else {
+              throw Exceptions.sneakyThrow(_t);
+            }
           }
-          return _and;
+          this.writeToFile(testProject, fileName, content);
         }
-      });
-    int errors = 0;
-    int problems = 0;
-    for (final URI uri : allResourceUris) {
-      {
-        String _fileString = uri.toFileString();
-        final File file = new File(_fileString);
-        String _absolutePath_1 = file.getAbsolutePath();
-        String _plus_1 = ("Converting: " + _absolutePath_1);
-        InputOutput.<String>println(_plus_1);
-        Charset _defaultCharset = Charset.defaultCharset();
-        final String javaCode = Files.toString(file, _defaultCharset);
-        final JavaConverter j2x = this.javaConverter.get();
-        String _name = file.getName();
-        final JavaConverter.ConversionResult xtendResult = j2x.toXtend(_name, javaCode);
-        int _problems = problems;
-        Iterable<String> _problems_1 = xtendResult.getProblems();
-        int _size = IterableExtensions.size(_problems_1);
-        problems = (_problems + _size);
-        final String xtendCode = xtendResult.getXtendCode();
-        String _fileString_1 = uri.toFileString();
-        String _absolutePath_2 = projectRoot.getAbsolutePath();
-        final String javaFileProjRelPath = _fileString_1.replace(_absolutePath_2, "");
-        String fileName = (javaFileProjRelPath + ".xtend");
-        String content = xtendCode;
-        try {
-          this.file(xtendCode, true);
-        } catch (final Throwable _t) {
-          if (_t instanceof AssertionError) {
-            final AssertionError error = (AssertionError)_t;
-            StringConcatenation _builder = new StringConcatenation();
-            _builder.append(uri, "");
-            _builder.append(" - ");
-            String _message = error.getMessage();
-            _builder.append(_message, "");
-            System.err.println(_builder);
-            this.writeToFile(testProject, javaFileProjRelPath, javaCode);
-            String _fileName = fileName;
-            fileName = (_fileName + ".error");
-            errors++;
-          } else {
-            throw Exceptions.sneakyThrow(_t);
-          }
-        }
-        this.writeToFile(testProject, fileName, content);
       }
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("Errors (");
+      _builder.append(errors, "");
+      _builder.append(")");
+      InputOutput.<String>println(_builder.toString());
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("Problems (");
+      _builder_1.append(problems, "");
+      _builder_1.append(")");
+      InputOutput.<String>println(_builder_1.toString());
+      InputOutput.<String>println("Done...");
+      Assert.assertEquals(this.errorsExpected, errors);
+      Assert.assertEquals(this.problemsExpected, problems);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("Problems (");
-    _builder.append(problems, "");
-    _builder.append(")");
-    InputOutput.<String>println(_builder.toString());
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Errors (");
-    _builder_1.append(errors, "");
-    _builder_1.append(")");
-    InputOutput.<String>println(_builder_1.toString());
-    InputOutput.<String>println("Done...");
-    Assert.assertEquals(13, errors);
-    Assert.assertEquals(27, problems);
   }
   
   public void writeToFile(final File parent, final String fileName, final String content) {
