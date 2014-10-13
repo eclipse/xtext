@@ -6,6 +6,7 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -422,7 +423,20 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
         }
       };
       Iterable<ResolvedMethod> _filter_1 = IterableExtensions.<ResolvedMethod>filter(_filter, _function_2);
-      return IterableExtensions.<ResolvedMethod>toSet(_filter_1);
+      final Function1<ResolvedMethod, String> _function_3 = new Function1<ResolvedMethod, String>() {
+        public String apply(final ResolvedMethod it) {
+          return it.getSimpleSignature();
+        }
+      };
+      Map<String, List<ResolvedMethod>> _groupBy = IterableExtensions.<String, ResolvedMethod>groupBy(_filter_1, _function_3);
+      Collection<List<ResolvedMethod>> _values = _groupBy.values();
+      final Function1<List<ResolvedMethod>, ResolvedMethod> _function_4 = new Function1<List<ResolvedMethod>, ResolvedMethod>() {
+        public ResolvedMethod apply(final List<ResolvedMethod> it) {
+          return IterableExtensions.<ResolvedMethod>head(it);
+        }
+      };
+      Iterable<ResolvedMethod> _map_1 = IterableExtensions.<List<ResolvedMethod>, ResolvedMethod>map(_values, _function_4);
+      return IterableExtensions.<ResolvedMethod>toSet(_map_1);
     }
     
     public boolean isObjectMethod(final ResolvedMethod it) {
@@ -605,6 +619,12 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       boolean _equals = target.equals(oldType);
       if (_equals) {
         return newType;
+      }
+      boolean _isArray = target.isArray();
+      if (_isArray) {
+        TypeReference _arrayComponentType = target.getArrayComponentType();
+        TypeReference _replace = this.replace(_arrayComponentType, oldType, newType);
+        return this.context.newArrayTypeReference(_replace);
       }
       List<TypeReference> _actualTypeArguments = target.getActualTypeArguments();
       boolean _contains = _actualTypeArguments.contains(oldType);

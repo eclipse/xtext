@@ -207,6 +207,7 @@ class DelegateProcessor implements TransformationParticipant<MutableMemberDeclar
 			delegate.delegatedInterfaces.map[declaredResolvedMethods].flatten
 				.filter[delegate.declaringType.findDeclaredMethod(declaration.simpleName, resolvedParameters.map[resolvedType]) == null]
 				.filter[!isObjectMethod]
+				.groupBy[simpleSignature].values.map[head]
 				.toSet
 		}
 	
@@ -248,9 +249,10 @@ class DelegateProcessor implements TransformationParticipant<MutableMemberDeclar
 		def TypeReference replace(TypeReference target, TypeReference oldType, TypeReference newType) {
 			if (target.equals(oldType)) 
 				return newType
-			if (target.actualTypeArguments.contains(oldType)) {
+			if (target.isArray)
+				return target.arrayComponentType.replace(oldType, newType).newArrayTypeReference
+			if (target.actualTypeArguments.contains(oldType))
 				return newTypeReference(target.type, target.actualTypeArguments.map[replace(oldType, newType)])
-			}
 			return target
 		}
 		

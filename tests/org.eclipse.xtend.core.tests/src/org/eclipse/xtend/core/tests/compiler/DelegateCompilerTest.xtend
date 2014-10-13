@@ -8,10 +8,10 @@
 package org.eclipse.xtend.core.tests.compiler
 
 import com.google.inject.Inject
+import org.eclipse.xtend.core.validation.IssueCodes
 import org.eclipse.xtend.core.xtend.XtendPackage
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Test
-import org.eclipse.xtend.core.validation.IssueCodes
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -467,4 +467,18 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''').assertWarning(XtendPackage.Literals.XTEND_FIELD, IssueCodes.UNUSED_PRIVATE_MEMBER, "delegate")
 	}
+	
+	@Test
+	def void implementingListSmokeTest() {
+		val text = ''' 
+			import org.eclipse.xtend.lib.annotations.Delegate
+			import java.util.List
+			
+			class DelegatingList<E> implements List<E>{
+				@Delegate List<E> delegate
+			}
+		'''
+		text.file.assertNoIssues
+	}
+	
 }
