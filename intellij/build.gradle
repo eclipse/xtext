@@ -3,10 +3,13 @@ allprojects {
   def osName = System.getProperty('os.name')
   ext.isWindows = osName.startsWith('Win')
   ext.isMac = osName.startsWith('Mac')
+  ext.isUnix = osName.startsWith('Linux')
   if (isWindows) {
     ext.intellijLibs = file("${intellijHome}/lib")
   } else if (isMac) {
     ext.intellijLibs = file("${intellijHome}/IntelliJ IDEA 14 CE EAP.app/Contents/lib")
+  } else if (isUnix) {
+    ext.intellijLibs = file("${intellijHome}/lib")
   }
 }
 
@@ -14,6 +17,8 @@ if (isWindows) {
   ext.archiveName = 'ideaIC-138.SNAPSHOT.win.zip'
 } else if (isMac) {
   ext.archiveName = 'ideaIC-138.SNAPSHOT.mac.zip'
+} else if (isUnix) {
+  ext.archiveName = 'ideaIC-138.SNAPSHOT.tar.gz'
 }
 
 task downloadIntellij << {
