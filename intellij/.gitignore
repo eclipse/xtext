@@ -1,0 +1,15 @@
+bin
+.DS_Store
+out
+target
+*.java._trace
+*.java_trace
+*.smap
+system
+index
+availables.xml
+extensions.xml
+config
+.gradle
+intellij-ce
+build/

@@ -1,0 +1,38 @@
+allprojects {
+  ext.intellijHome = file("${rootDir}/intellij-ce")
+  def osName = System.getProperty('os.name')
+  ext.isWindows = osName.startsWith('Win')
+  ext.isMac = osName.startsWith('Mac')
+  if (isWindows) {
+    ext.intellijLibs = file("${intellijHome}/lib")
+  } else if (isMac) {
+    ext.intellijLibs = file("${intellijHome}/IntelliJ IDEA 14 CE EAP.app/Contents/lib")
+  }
+}
+
+if (isWindows) {
+  ext.archiveName = 'ideaIC-138.SNAPSHOT.win.zip'
+} else if (isMac) {
+  ext.archiveName = 'ideaIC-138.SNAPSHOT.mac.zip'
+}
+
+task downloadIntellij << {
+  intellijHome.mkdirs()
+  ant.get(src:"https://teamcity.jetbrains.com/repository/download/bt410/153679:id/${archiveName}?guest", dest: intellijHome, usetimestamp: true)
+  ant.get(src:'https://teamcity.jetbrains.com/repository/download/bt410/153679:id/sources.zip?guest', dest: intellijHome, usetimestamp: true)
+}
+
+task unpackIntellij(type: Copy, dependsOn: downloadIntellij) {
+  from zipTree("${intellijHome}/${archiveName}")
+  into intellijHome
+}
+
+task prepareIntellij(dependsOn: [unpackIntellij, ':intellij-dependencies:eclipseClasspath'])
+
+task cleanTestSystem(type: Delete) {
+  delete "${intellijHome}/test-system"
+}
+
+task cleanIntellij(type: Delete) {
+  delete intellijHome
+}
