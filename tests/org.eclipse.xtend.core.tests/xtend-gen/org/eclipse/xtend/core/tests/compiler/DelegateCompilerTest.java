@@ -1113,4 +1113,28 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void implementingListSmokeTest() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Delegate");
+      _builder.newLine();
+      _builder.append("import java.util.List");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class DelegatingList<E> implements List<E>{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Delegate List<E> delegate");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final String text = _builder.toString();
+      XtendFile _file = this.file(text);
+      this._validationTestHelper.assertNoIssues(_file);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }
