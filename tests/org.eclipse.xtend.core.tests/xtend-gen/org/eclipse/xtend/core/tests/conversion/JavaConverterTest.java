@@ -27,7 +27,9 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
 import org.junit.Assert;
@@ -738,7 +740,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     Assert.assertFalse(_isEmpty);
     Iterable<String> _problems = conversionResult.getProblems();
     int _size = Iterables.size(_problems);
-    Assert.assertEquals(0, _size);
+    Assert.assertEquals(1, _size);
   }
   
   @Test
@@ -1133,6 +1135,44 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder.append("\t");
     _builder.append("ActionListener listener = new ActionListener() {");
     _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("{/*not allowed*/}");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("public void actionPerformed(ActionEvent arg0) {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("arg0.getID();");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("};");
+    _builder.newLine();
+    _builder.append("}");
+    JavaConverter.ConversionResult result = this.j2x.toXtend("Clazz", _builder.toString());
+    Iterable<String> _problems = result.getProblems();
+    int _size = IterableExtensions.size(_problems);
+    Assert.assertEquals(_size, 1);
+    Iterable<String> _problems_1 = result.getProblems();
+    String _get = ((String[])Conversions.unwrapArray(_problems_1, String.class))[0];
+    boolean _startsWith = _get.startsWith("Initializer is not supported in AnonymousClassDeclaration");
+    Assert.assertTrue(_startsWith);
+  }
+  
+  @Test
+  public void testLambdaCase() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.awt.event.ActionEvent;");
+    _builder.newLine();
+    _builder.append("import java.awt.event.ActionListener;");
+    _builder.newLine();
+    _builder.append("class Clazz {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("ActionListener listener = new ActionListener() {");
+    _builder.newLine();
     _builder.append("\t \t");
     _builder.append("public void actionPerformed(ActionEvent arg0) {");
     _builder.newLine();
@@ -1155,6 +1195,52 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     Assert.assertEquals("listener", _name);
     XExpression _initialValue = xtendMember.getInitialValue();
     Assert.assertTrue((_initialValue instanceof XClosure));
+  }
+  
+  @Test
+  public void testLambdaCase2() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.newLine();
+    _builder.append("import java.util.ArrayList;");
+    _builder.newLine();
+    _builder.append("import com.google.common.base.Function;");
+    _builder.newLine();
+    _builder.append("import com.google.common.collect.Iterables;");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtext.scoping.IScope;");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtext.scoping.impl.SimpleScope;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Clazz {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("final int callCount[] = new int[]{0};");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("SimpleScope fun = new SimpleScope(IScope.NULLSCOPE, Iterables.transform(new ArrayList<String>(), new Function<String, IEObjectDescription>(){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("public IEObjectDescription apply(String param) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("callCount[0]++;");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("return null;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}));");
+    _builder.newLine();
+    _builder.append("}");
+    XtendClass clazz = this.toValidXtendClass(_builder.toString());
+    Assert.assertNotNull(clazz);
+    XtendField xtendMember = this.field(clazz, 1);
+    String _name = xtendMember.getName();
+    Assert.assertEquals("fun", _name);
   }
   
   @Test
@@ -1187,6 +1273,145 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     Assert.assertEquals(_string, clazz);
   }
   
+  @Test
+  public void testSwitchCase() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("private String doSwitch() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int i = 0;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("switch (i) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("case 1:");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("i++");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("return \"1\";");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("case 2: {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("return \"2\";");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("default:");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("return \"0\";");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    String clazz = this.classBodyDeclToXtend(_builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("def private String doSwitch(){");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("var int i=0 ");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("switch (i) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("case 1:{");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("i++ return \"1\" ");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("case 2:{");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("return \"2\" ");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("default :{");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("return \"0\" ");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    String _string = _builder_1.toString();
+    Assert.assertEquals(_string, clazz);
+  }
+  
+  @Test
+  public void testSwitchCase2() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public class FooSwitch {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("private void doSwitch2() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("int i = 0;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("switch (i) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("case 1:");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("i++;");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("return;");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("case 2: {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("return;");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("default:");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("return;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    XtendClass clazz = this.toValidXtendClass(_builder.toString());
+    Assert.assertNotNull(clazz);
+  }
+  
   private XtendClass toValidXtendClass(final String javaCode) throws Exception {
     XtendTypeDeclaration _validTypeDeclaration = this.toValidTypeDeclaration("Clazz", javaCode);
     return ((XtendClass) _validTypeDeclaration);
@@ -1210,6 +1435,8 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   private XtendFile toValidFile(final String unitName, final String javaCode) throws Exception {
     JavaConverter.ConversionResult conversionResult = this.j2x.toXtend(unitName, javaCode);
     String xtendCode = conversionResult.getXtendCode();
+    boolean _isEmpty = xtendCode.isEmpty();
+    Assert.assertFalse(_isEmpty);
     System.out.println(xtendCode);
     Iterable<String> _problems = conversionResult.getProblems();
     for (final String problem : _problems) {

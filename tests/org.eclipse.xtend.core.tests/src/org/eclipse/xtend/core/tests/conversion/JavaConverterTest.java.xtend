@@ -441,7 +441,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 
 		var String xtendCode = conversionResult.getXtendCode()
 		assertFalse(xtendCode.isEmpty())
-		assertEquals(0, Iterables.size(conversionResult.getProblems()))
+		assertEquals(1, Iterables.size(conversionResult.getProblems()))
 	}
 
 	@Test def void testConstructorCase() throws Exception {
@@ -664,6 +664,25 @@ class JavaConverterTest extends AbstractXtendTestCase {
 
 	@Test def void testAnonymousClassCase() throws Exception {
 
+		var result = j2x.toXtend("Clazz",
+			'''
+			import java.awt.event.ActionEvent;
+			import java.awt.event.ActionListener;
+			class Clazz {
+				ActionListener listener = new ActionListener() {
+					{/*not allowed*/}
+						public void actionPerformed(ActionEvent arg0) {
+							arg0.getID();
+						}
+				};
+			}''')
+			
+		assertEquals(result.problems.size, 1)
+		assertTrue(result.problems.get(0).startsWith("Initializer is not supported in AnonymousClassDeclaration"))
+	}
+
+	@Test def void testLambdaCase() throws Exception {
+
 		var XtendClass clazz = toValidXtendClass(
 			'''
 			import java.awt.event.ActionEvent;
@@ -679,6 +698,31 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		var XtendField xtendMember = clazz.getMembers().get(0) as XtendField
 		assertEquals("listener", xtendMember.getName())
 		assertTrue(xtendMember.getInitialValue() instanceof XClosure)
+	}
+
+	@Test def void testLambdaCase2() throws Exception {
+
+		var XtendClass clazz = toValidXtendClass(
+			'''
+			
+			import java.util.ArrayList;
+			import com.google.common.base.Function;
+			import com.google.common.collect.Iterables;
+			import org.eclipse.xtext.scoping.IScope;
+			import org.eclipse.xtext.scoping.impl.SimpleScope;
+			
+			class Clazz {
+				final int callCount[] = new int[]{0};
+				SimpleScope fun = new SimpleScope(IScope.NULLSCOPE, Iterables.transform(new ArrayList<String>(), new Function<String, IEObjectDescription>(){
+					public IEObjectDescription apply(String param) {
+						callCount[0]++;
+						return null;
+					}
+				}));
+			}''')
+		assertNotNull(clazz)
+		var XtendField xtendMember = clazz.field(1)
+		assertEquals("fun", xtendMember.getName())
 	}
 
 	@Test def void testSLCommentCase() throws Exception {
@@ -698,14 +742,70 @@ class JavaConverterTest extends AbstractXtendTestCase {
 			}'''.toString, clazz)
 	}
 
+	@Test def void testSwitchCase() throws Exception {
+		var clazz = classBodyDeclToXtend(
+			'''
+			private String doSwitch() {
+				int i = 0;
+				switch (i) {
+					case 1:
+						i++
+						return "1";
+					case 2: {
+						return "2";
+					}
+					default:
+						return "0";
+				}
+			}''')
+		assertEquals(
+			'''
+			def private String doSwitch(){
+				
+				
+				var int i=0 
+				switch (i) {
+					case 1:{
+						i++ return "1" 
+					}
+					case 2:{
+						return "2" 
+					}
+					
+					default :{
+						return "0" 
+					}
+				}
+			}'''.toString, clazz)
+	}
+
+	@Test def void testSwitchCase2() throws Exception {
+		var clazz = toValidXtendClass(
+			'''
+			public class FooSwitch {
+				private void doSwitch2() {
+					int i = 0;
+					switch (i) {
+						case 1:
+							i++;
+							return;
+						case 2: {
+							return;
+						}
+						default:
+							return;
+					}
+				}
+			}''')
+		assertNotNull(clazz)
+	}
+
 	def private XtendClass toValidXtendClass(String javaCode) throws Exception {
 		return toValidTypeDeclaration("Clazz", javaCode) as XtendClass
 	}
 
 	def private XtendTypeDeclaration toValidTypeDeclaration(String unitName, String javaCode) throws Exception {
-
 		var XtendFile file = toValidFile(unitName, javaCode)
-
 		var XtendTypeDeclaration typeDeclaration = file.getXtendTypes().get(0)
 		return typeDeclaration
 	}
@@ -722,6 +822,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		var ConversionResult conversionResult = j2x.toXtend(unitName, javaCode)
 
 		var String xtendCode = conversionResult.getXtendCode()
+		assertFalse(xtendCode.empty)
 		System.out.println(xtendCode)
 		for (String problem : conversionResult.getProblems()) {
 			System.out.println('''ERROR: «problem»''')

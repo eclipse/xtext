@@ -56,8 +56,8 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
   public void testConvertFilesInThisProject() throws Exception {
     this.sourceProject = "org.eclipse.xtend.core.tests";
     this.targetProject = "test-converter";
-    this.errorsExpected = 14;
-    this.problemsExpected = 29;
+    this.errorsExpected = 0;
+    this.problemsExpected = 34;
     this.runConverter();
   }
   
@@ -66,8 +66,8 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
   public void testConvertFilesInXtextTestsProject() throws Exception {
     this.sourceProject = "org.eclipse.xtext.tests";
     this.targetProject = "org.eclipse.xtext.tests.converted";
-    this.errorsExpected = 3021;
-    this.problemsExpected = 5035;
+    this.errorsExpected = 337;
+    this.problemsExpected = 12210;
     this.runConverter();
   }
   
@@ -89,14 +89,22 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
           public boolean apply(final URI input) {
             final String fileName = input.toFileString();
             boolean _and = false;
+            boolean _and_1 = false;
             String _fileExtension = input.fileExtension();
             boolean _equals = "java".equals(_fileExtension);
             if (!_equals) {
-              _and = false;
+              _and_1 = false;
             } else {
               boolean _contains = fileName.contains("xtend-gen");
               boolean _not = (!_contains);
-              _and = _not;
+              _and_1 = _not;
+            }
+            if (!_and_1) {
+              _and = false;
+            } else {
+              boolean _contains_1 = fileName.contains("batch-compiler-data");
+              boolean _not_1 = (!_contains_1);
+              _and = _not_1;
             }
             return _and;
           }
@@ -130,13 +138,22 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
           } catch (final Throwable _t) {
             if (_t instanceof AssertionError) {
               final AssertionError error = (AssertionError)_t;
-              StringConcatenation _builder = new StringConcatenation();
-              _builder.append(uri, "");
-              _builder.append(" - ");
-              String _message = error.getMessage();
-              _builder.append(_message, "");
-              System.err.println(_builder);
-              errors++;
+              Iterable<String> _problems_2 = xtendResult.getProblems();
+              int _size_1 = IterableExtensions.size(_problems_2);
+              boolean _notEquals = (_size_1 != 0);
+              if (_notEquals) {
+                this.writeToFile(testProject, javaFileProjRelPath, javaCode);
+                String _fileName = fileName;
+                fileName = (_fileName + ".error");
+              } else {
+                StringConcatenation _builder = new StringConcatenation();
+                _builder.append(uri, "");
+                _builder.append(" - ");
+                String _message = error.getMessage();
+                _builder.append(_message, "");
+                System.err.println(_builder);
+                errors++;
+              }
             } else {
               throw Exceptions.sneakyThrow(_t);
             }
@@ -145,18 +162,18 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
         }
       }
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("Errors (");
-      _builder.append(errors, "");
+      _builder.append("Problems (");
+      _builder.append(problems, "");
       _builder.append(")");
       InputOutput.<String>println(_builder.toString());
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("Problems (");
-      _builder_1.append(problems, "");
+      _builder_1.append("Errors (");
+      _builder_1.append(errors, "");
       _builder_1.append(")");
       InputOutput.<String>println(_builder_1.toString());
       InputOutput.<String>println("Done...");
-      Assert.assertEquals(this.errorsExpected, errors);
       Assert.assertEquals(this.problemsExpected, problems);
+      Assert.assertEquals(this.errorsExpected, errors);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

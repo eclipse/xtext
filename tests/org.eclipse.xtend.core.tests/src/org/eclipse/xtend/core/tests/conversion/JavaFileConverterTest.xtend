@@ -46,17 +46,17 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
 	def void testConvertFilesInThisProject() throws Exception {
 		sourceProject = "org.eclipse.xtend.core.tests"
 		targetProject = "test-converter"
-		errorsExpected = 14
-		problemsExpected = 29
+		errorsExpected = 0
+		problemsExpected = 34
 		runConverter
 	}
 
-	@Test@Ignore
+	@Test  @Ignore
 	def void testConvertFilesInXtextTestsProject() throws Exception {
 		sourceProject = "org.eclipse.xtext.tests"
 		targetProject = "org.eclipse.xtext.tests.converted"
-		errorsExpected = 3021
-		problemsExpected = 5035
+		errorsExpected = 337
+		problemsExpected = 12210
 		runConverter
 	}
 
@@ -70,7 +70,8 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
 			new Predicate<URI>() {
 				override boolean apply(URI input) {
 					val fileName = input.toFileString()
-					return "java".equals(input.fileExtension()) && !fileName.contains("xtend-gen");
+					return "java".equals(input.fileExtension()) && !fileName.contains("xtend-gen") &&
+						!fileName.contains("batch-compiler-data");
 				}
 			});
 		var errors = 0
@@ -89,19 +90,21 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
 			try {
 				file(xtendCode, true);
 			} catch (AssertionError error) {
-				System.err.println('''«uri» - «error.message»''')
-
-				//				writeToFile(testProject, javaFileProjRelPath, javaCode)
-				//				fileName += ".error"
-				errors++
+				if (xtendResult.problems.size != 0) {
+					writeToFile(testProject, javaFileProjRelPath, javaCode)
+					fileName += ".error"
+				} else {
+					System.err.println('''«uri» - «error.message»''')
+					errors++
+				}
 			}
 			writeToFile(testProject, fileName, content)
 		}
-		println('''Errors («errors»)''')
 		println('''Problems («problems»)''')
+		println('''Errors («errors»)''')
 		println("Done...")
-		assertEquals(errorsExpected, errors)
 		assertEquals(problemsExpected, problems)
+		assertEquals(errorsExpected, errors)
 	}
 
 	def writeToFile(File parent, String fileName, String content) {
