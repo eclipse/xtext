@@ -228,17 +228,18 @@ public class ToBeBuiltComputer {
 		final SubMonitor progress = SubMonitor.convert(monitor, Messages.ToBeBuiltComputer_CollectingResources, 10);
 		progress.subTask(Messages.ToBeBuiltComputer_CollectingResources);
 
-		final ToBeBuilt toBeBuilt = doRemoveProject(project, progress.newChild(9));
+		final ToBeBuilt toBeBuilt = doRemoveProject(project, progress.newChild(8));
 		if (!project.isAccessible())
 			return toBeBuilt;
 		if (progress.isCanceled())
 			throw new OperationCanceledException();
+		final SubMonitor childMonitor = progress.newChild(1);
 		project.accept(new IResourceVisitor() {
 			public boolean visit(IResource resource) throws CoreException {
 				if (progress.isCanceled())
 					throw new OperationCanceledException();
 				if (resource instanceof IStorage) {
-					return updateStorage(null, toBeBuilt, (IStorage) resource);
+					return updateStorage(childMonitor, toBeBuilt, (IStorage) resource);
 				}
 				if (resource instanceof IFolder) {
 					return isHandled((IFolder) resource);

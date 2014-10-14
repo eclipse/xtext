@@ -33,6 +33,40 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
   private ValidationTestHelper _validationTestHelper;
   
   @Test
+  public void testBug447125() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class C {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def m() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("var String s = \'\'");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("new D(s) {}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("class D {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("new(String s) {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XtendFile _parse = this._parseHelper.parse(_builder);
+      this._validationTestHelper.assertNoIssues(_parse);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void test_01() {
     try {
       StringConcatenation _builder = new StringConcatenation();
