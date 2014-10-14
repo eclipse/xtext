@@ -23,10 +23,10 @@ public class FormatterWindowsLinebreakTest extends FormatterTest {
 	}
 	
 	@Override
-	protected void assertFormattedNM(String expected, String model, int offset, int length) throws Exception {
-		if(length != model.length() && offset != 0)
+	protected void assertFormattedNM(String expected, final String modelP, int offset, int length) throws Exception {
+		if(length != modelP.length() && offset != 0)
 			return;
-		model = convertLineBreaks(model);
+		String model = convertLineBreaks(modelP);
 		ICompositeNode node = NodeModelUtils.getNode(getModel(model)).getRootNode();
 		// System.out.println(EmfFormatter.objToStr(node));
 		IFormattedRegion r = getNodeModelFormatter().format(node, 0, model.length());
