@@ -12,8 +12,9 @@ import com.google.common.collect.Iterables;
 import java.util.List;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.Annotation;
-import org.eclipse.jdt.core.dom.Assignment;
+import org.eclipse.jdt.core.dom.AnonymousClassDeclaration;
 import org.eclipse.jdt.core.dom.Block;
+import org.eclipse.jdt.core.dom.ClassInstanceCreation;
 import org.eclipse.jdt.core.dom.Expression;
 import org.eclipse.jdt.core.dom.FieldAccess;
 import org.eclipse.jdt.core.dom.FieldDeclaration;
@@ -28,6 +29,7 @@ import org.eclipse.jdt.core.dom.ReturnStatement;
 import org.eclipse.jdt.core.dom.SimpleName;
 import org.eclipse.jdt.core.dom.Statement;
 import org.eclipse.jdt.core.dom.StringLiteral;
+import org.eclipse.jdt.core.dom.Type;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.eclipse.jdt.core.dom.TypeDeclarationStatement;
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
@@ -91,11 +93,15 @@ public class ASTFlattenerUtils {
   }
   
   public IMethodBinding findOverride(final IMethodBinding method, final ITypeBinding type) {
+    return this.findOverride(method, type, false);
+  }
+  
+  public IMethodBinding findOverride(final IMethodBinding method, final ITypeBinding type, final boolean onlyPrimarylevel) {
     final ITypeBinding superclass = type.getSuperclass();
     IMethodBinding overridden = null;
     boolean _notEquals = (!Objects.equal(superclass, null));
     if (_notEquals) {
-      IMethodBinding _internalFindOverride = this.internalFindOverride(method, superclass);
+      IMethodBinding _internalFindOverride = this.internalFindOverride(method, superclass, onlyPrimarylevel);
       overridden = _internalFindOverride;
     }
     boolean _equals = Objects.equal(overridden, null);
@@ -103,7 +109,7 @@ public class ASTFlattenerUtils {
       ITypeBinding[] _interfaces = type.getInterfaces();
       for (final ITypeBinding interfaze : _interfaces) {
         {
-          IMethodBinding _internalFindOverride_1 = this.internalFindOverride(method, interfaze);
+          IMethodBinding _internalFindOverride_1 = this.internalFindOverride(method, interfaze, onlyPrimarylevel);
           overridden = _internalFindOverride_1;
           boolean _notEquals_1 = (!Objects.equal(overridden, null));
           if (_notEquals_1) {
@@ -115,7 +121,7 @@ public class ASTFlattenerUtils {
     return overridden;
   }
   
-  public IMethodBinding internalFindOverride(final IMethodBinding method, final ITypeBinding superType) {
+  private IMethodBinding internalFindOverride(final IMethodBinding method, final ITypeBinding superType, final boolean onlyPrimarylevel) {
     IMethodBinding[] _declaredMethods = superType.getDeclaredMethods();
     final Function1<IMethodBinding, Boolean> _function = new Function1<IMethodBinding, Boolean>() {
       public Boolean apply(final IMethodBinding it) {
@@ -128,7 +134,11 @@ public class ASTFlattenerUtils {
     if (_equals) {
       return ((IMethodBinding[])Conversions.unwrapArray(superClassOverride, IMethodBinding.class))[0];
     } else {
-      return this.findOverride(method, superType);
+      if ((!onlyPrimarylevel)) {
+        return this.findOverride(method, superType);
+      } else {
+        return null;
+      }
     }
   }
   
@@ -237,7 +247,53 @@ public class ASTFlattenerUtils {
     return _or;
   }
   
-  public boolean needsReturnValue(final Assignment node) {
+  public boolean isLambdaCase(final ClassInstanceCreation creation) {
+    final AnonymousClassDeclaration anonymousClazz = creation.getAnonymousClassDeclaration();
+    boolean _and = false;
+    boolean _notEquals = (!Objects.equal(anonymousClazz, null));
+    if (!_notEquals) {
+      _and = false;
+    } else {
+      List _bodyDeclarations = anonymousClazz.bodyDeclarations();
+      int _size = _bodyDeclarations.size();
+      boolean _equals = (_size == 1);
+      _and = _equals;
+    }
+    if (_and) {
+      List _bodyDeclarations_1 = anonymousClazz.bodyDeclarations();
+      final Object declaredMethod = _bodyDeclarations_1.get(0);
+      boolean _and_1 = false;
+      if (!(declaredMethod instanceof MethodDeclaration)) {
+        _and_1 = false;
+      } else {
+        Type _type = creation.getType();
+        ITypeBinding _resolveBinding = _type.resolveBinding();
+        boolean _notEquals_1 = (!Objects.equal(_resolveBinding, null));
+        _and_1 = _notEquals_1;
+      }
+      if (_and_1) {
+        final IMethodBinding methodBinding = ((MethodDeclaration) declaredMethod).resolveBinding();
+        boolean _notEquals_2 = (!Objects.equal(methodBinding, null));
+        if (_notEquals_2) {
+          ITypeBinding _declaringClass = methodBinding.getDeclaringClass();
+          final IMethodBinding overrides = this.findOverride(methodBinding, _declaringClass, true);
+          boolean _and_2 = false;
+          boolean _notEquals_3 = (!Objects.equal(overrides, null));
+          if (!_notEquals_3) {
+            _and_2 = false;
+          } else {
+            int _modifiers = overrides.getModifiers();
+            boolean _isAbstract = Modifier.isAbstract(_modifiers);
+            _and_2 = _isAbstract;
+          }
+          return _and_2;
+        }
+      }
+    }
+    return false;
+  }
+  
+  public boolean needsReturnValue(final ASTNode node) {
     boolean _and = false;
     ASTNode _parent = node.getParent();
     boolean _notEquals = (!Objects.equal(_parent, null));

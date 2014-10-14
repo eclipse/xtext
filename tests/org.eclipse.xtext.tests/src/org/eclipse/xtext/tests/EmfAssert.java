@@ -31,18 +31,18 @@ public class EmfAssert {
 
 	static final Pattern SPACE = Pattern.compile("[\\s\\n\\r]+");
 
-	public static void assertTokensEqual(String msg, String expected,
-			String actual) {
-		if (expected == null) {
+	public static void assertTokensEqual(String msg, String expectedP,
+			String actualP) {
+		if (expectedP == null) {
 			fail("expected is null");
 			return;
 		}
-		if (actual == null) {
+		if (actualP == null) {
 			fail("actual is null");
 			return;
 		}
-		expected = expected.trim();
-		actual = actual.trim();
+		String expected = expectedP.trim();
+		String actual = actualP.trim();
 		Matcher expM = SPACE.matcher(expected);
 		Matcher actM = SPACE.matcher(actual);
 		int expS = 0, actS = 0;

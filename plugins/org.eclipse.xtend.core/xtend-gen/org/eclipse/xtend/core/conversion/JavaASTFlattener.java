@@ -13,7 +13,9 @@ import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTNode;
@@ -55,8 +57,6 @@ import org.eclipse.jdt.core.dom.FieldAccess;
 import org.eclipse.jdt.core.dom.FieldDeclaration;
 import org.eclipse.jdt.core.dom.ForStatement;
 import org.eclipse.jdt.core.dom.IExtendedModifier;
-import org.eclipse.jdt.core.dom.IMethodBinding;
-import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.IfStatement;
 import org.eclipse.jdt.core.dom.ImportDeclaration;
 import org.eclipse.jdt.core.dom.InfixExpression;
@@ -122,6 +122,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.MapExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -443,6 +444,7 @@ public class JavaASTFlattener extends ASTVisitor {
     List _modifiers_1 = it.modifiers();
     boolean _isStatic = this._aSTFlattenerUtils.isStatic(_modifiers_1);
     if (_isStatic) {
+      this.addProblem(it, "Static initialize are not fully supported");
       this.appendToBuffer(" final Void static_initializer = {");
       this.appendLineWrapToBuffer();
       Block _body = it.getBody();
@@ -450,6 +452,15 @@ public class JavaASTFlattener extends ASTVisitor {
       this.appendToBuffer("null }");
       this.appendLineWrapToBuffer();
     } else {
+      ASTNode _parent = it.getParent();
+      if ((_parent instanceof AnonymousClassDeclaration)) {
+        ASTNode _parent_1 = it.getParent();
+        int _nodeType = _parent_1.getNodeType();
+        Class _nodeClassForType = ASTNode.nodeClassForType(_nodeType);
+        String _simpleName = _nodeClassForType.getSimpleName();
+        String _plus = ("Initializer is not supported in " + _simpleName);
+        this.addProblem(it, _plus);
+      }
       Block _body_1 = it.getBody();
       _body_1.accept(this);
     }
@@ -881,11 +892,15 @@ public class JavaASTFlattener extends ASTVisitor {
     boolean _isEmpty = _typeParameters.isEmpty();
     boolean _not_1 = (!_isEmpty);
     if (_not_1) {
+      boolean _isConstructor_1 = it.isConstructor();
+      if (_isConstructor_1) {
+        this.addProblem(it, "Type parameters are not supported for constructors");
+      }
       List _typeParameters_1 = it.typeParameters();
       this.appendTypeParameters(_typeParameters_1);
     }
-    boolean _isConstructor_1 = it.isConstructor();
-    boolean _not_2 = (!_isConstructor_1);
+    boolean _isConstructor_2 = it.isConstructor();
+    boolean _not_2 = (!_isConstructor_2);
     if (_not_2) {
       Type _returnType2 = it.getReturnType2();
       boolean _notEquals_1 = (!Objects.equal(_returnType2, null));
@@ -974,7 +989,7 @@ public class JavaASTFlattener extends ASTVisitor {
       _expression_1.accept(this);
       this.appendToBuffer(".");
     }
-    boolean _isLambdaCase = this.isLambdaCase(node);
+    boolean _isLambdaCase = this._aSTFlattenerUtils.isLambdaCase(node);
     if (_isLambdaCase) {
       this.appendToBuffer("[");
       AnonymousClassDeclaration _anonymousClassDeclaration = node.getAnonymousClassDeclaration();
@@ -1021,52 +1036,6 @@ public class JavaASTFlattener extends ASTVisitor {
       if (_notEquals_1) {
         AnonymousClassDeclaration _anonymousClassDeclaration_2 = node.getAnonymousClassDeclaration();
         _anonymousClassDeclaration_2.accept(this);
-      }
-    }
-    return false;
-  }
-  
-  public boolean isLambdaCase(final ClassInstanceCreation creation) {
-    final AnonymousClassDeclaration anonymousClazz = creation.getAnonymousClassDeclaration();
-    boolean _and = false;
-    boolean _notEquals = (!Objects.equal(anonymousClazz, null));
-    if (!_notEquals) {
-      _and = false;
-    } else {
-      List _bodyDeclarations = anonymousClazz.bodyDeclarations();
-      int _size = _bodyDeclarations.size();
-      boolean _equals = (_size == 1);
-      _and = _equals;
-    }
-    if (_and) {
-      List _bodyDeclarations_1 = anonymousClazz.bodyDeclarations();
-      final Object declaredMethod = _bodyDeclarations_1.get(0);
-      boolean _and_1 = false;
-      if (!(declaredMethod instanceof MethodDeclaration)) {
-        _and_1 = false;
-      } else {
-        Type _type = creation.getType();
-        ITypeBinding _resolveBinding = _type.resolveBinding();
-        boolean _notEquals_1 = (!Objects.equal(_resolveBinding, null));
-        _and_1 = _notEquals_1;
-      }
-      if (_and_1) {
-        final IMethodBinding methodBinding = ((MethodDeclaration) declaredMethod).resolveBinding();
-        boolean _notEquals_2 = (!Objects.equal(methodBinding, null));
-        if (_notEquals_2) {
-          ITypeBinding _declaringClass = methodBinding.getDeclaringClass();
-          final IMethodBinding overrides = this._aSTFlattenerUtils.findOverride(methodBinding, _declaringClass);
-          boolean _and_2 = false;
-          boolean _notEquals_3 = (!Objects.equal(overrides, null));
-          if (!_notEquals_3) {
-            _and_2 = false;
-          } else {
-            int _modifiers = overrides.getModifiers();
-            boolean _isAbstract = Modifier.isAbstract(_modifiers);
-            _and_2 = _isAbstract;
-          }
-          return _and_2;
-        }
       }
     }
     return false;
@@ -1325,7 +1294,10 @@ public class JavaASTFlattener extends ASTVisitor {
       _expression_1.accept(this);
       this.appendSpaceToBuffer();
     } else {
-      this.appendToBuffer(";");
+      ASTNode _parent = node.getParent();
+      if ((!(_parent instanceof SwitchStatement))) {
+        this.appendToBuffer(";");
+      }
     }
     return false;
   }
@@ -1412,11 +1384,11 @@ public class JavaASTFlattener extends ASTVisitor {
       if (_or) {
         final String arrayName = this.computeArrayName(pfOperand);
         StringConcatenation _builder = new StringConcatenation();
-        _builder.append("_tPreInx_");
+        _builder.append("_postIndx_");
         _builder.append(arrayName, "");
         final String idxName = _builder.toString();
         StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("_tPostVal_");
+        _builder_1.append("_postVal_");
         _builder_1.append(arrayName, "");
         final String tempVarName = _builder_1.toString();
         StringConcatenation _builder_2 = new StringConcatenation();
@@ -1461,7 +1433,12 @@ public class JavaASTFlattener extends ASTVisitor {
         assigment.setRightHandSide(((Expression) _copySubtree_2));
         assigment.accept(this);
         StringConcatenation _builder_4 = new StringConcatenation();
-        _builder_4.append(tempVarName, "");
+        String _xifexpression = null;
+        boolean _needsReturnValue = this._aSTFlattenerUtils.needsReturnValue(assigment);
+        if (_needsReturnValue) {
+          _xifexpression = tempVarName;
+        }
+        _builder_4.append(_xifexpression, "");
         _builder_4.append(" }");
         this.appendToBuffer(_builder_4.toString());
         return false;
@@ -1697,7 +1674,10 @@ public class JavaASTFlattener extends ASTVisitor {
     this.appendToBuffer("throw ");
     Expression _expression = node.getExpression();
     _expression.accept(this);
-    this.appendToBuffer(";");
+    ASTNode _parent = node.getParent();
+    if ((!(_parent instanceof SwitchStatement))) {
+      this.appendToBuffer(";");
+    }
     return false;
   }
   
@@ -2027,6 +2007,7 @@ public class JavaASTFlattener extends ASTVisitor {
   @Override
   public boolean visit(final BreakStatement node) {
     this.appendToBuffer("/* FIXME unsupported BreakStatement: break ");
+    this.addProblem(node, "Break statement is not supported");
     SimpleName _label = node.getLabel();
     boolean _notEquals = (!Objects.equal(_label, null));
     if (_notEquals) {
@@ -2256,6 +2237,7 @@ public class JavaASTFlattener extends ASTVisitor {
   
   @Override
   public boolean visit(final SwitchCase node) {
+    this.appendLineWrapToBuffer();
     boolean _isDefault = node.isDefault();
     if (_isDefault) {
       this.appendToBuffer("default :");
@@ -2270,6 +2252,7 @@ public class JavaASTFlattener extends ASTVisitor {
   
   @Override
   public boolean visit(final SwitchStatement node) {
+    this.appendLineWrapToBuffer();
     this.appendToBuffer("switch (");
     Expression _expression = node.getExpression();
     _expression.accept(this);
@@ -2277,8 +2260,50 @@ public class JavaASTFlattener extends ASTVisitor {
     this.appendToBuffer("{");
     this.increaseIndent();
     List _statements = node.statements();
-    this.visitAll(_statements);
+    LinkedHashMap<SwitchCase, ArrayList<Statement>> _newLinkedHashMap = CollectionLiterals.<SwitchCase, ArrayList<Statement>>newLinkedHashMap();
+    final Function2<Map<SwitchCase, ArrayList<Statement>>, Statement, Map<SwitchCase, ArrayList<Statement>>> _function = new Function2<Map<SwitchCase, ArrayList<Statement>>, Statement, Map<SwitchCase, ArrayList<Statement>>>() {
+      public Map<SwitchCase, ArrayList<Statement>> apply(final Map<SwitchCase, ArrayList<Statement>> map, final Statement currStatement) {
+        if ((currStatement instanceof SwitchCase)) {
+          ArrayList<Statement> _newArrayList = CollectionLiterals.<Statement>newArrayList();
+          map.put(((SwitchCase)currStatement), _newArrayList);
+        } else {
+          Set<SwitchCase> _keySet = map.keySet();
+          SwitchCase _last = IterableExtensions.<SwitchCase>last(_keySet);
+          ArrayList<Statement> _get = map.get(_last);
+          _get.add(currStatement);
+        }
+        return map;
+      }
+    };
+    final Map<SwitchCase, ArrayList<Statement>> foldedCases = IterableExtensions.<Statement, Map<SwitchCase, ArrayList<Statement>>>fold(_statements, _newLinkedHashMap, _function);
+    final Procedure2<SwitchCase, ArrayList<Statement>> _function_1 = new Procedure2<SwitchCase, ArrayList<Statement>>() {
+      public void apply(final SwitchCase switchCase, final ArrayList<Statement> statements) {
+        switchCase.accept(JavaASTFlattener.this);
+        boolean _and = false;
+        int _size = statements.size();
+        boolean _greaterThan = (_size > 0);
+        if (!_greaterThan) {
+          _and = false;
+        } else {
+          _and = (!(statements.get(0) instanceof Block));
+        }
+        final boolean surround = _and;
+        if (surround) {
+          JavaASTFlattener.this.appendToBuffer("{");
+          JavaASTFlattener.this.increaseIndent();
+          JavaASTFlattener.this.appendLineWrapToBuffer();
+        }
+        JavaASTFlattener.this.visitAll(statements);
+        if (surround) {
+          JavaASTFlattener.this.decreaseIndent();
+          JavaASTFlattener.this.appendLineWrapToBuffer();
+          JavaASTFlattener.this.appendToBuffer("}");
+        }
+      }
+    };
+    MapExtensions.<SwitchCase, ArrayList<Statement>>forEach(foldedCases, _function_1);
     this.decreaseIndent();
+    this.appendLineWrapToBuffer();
     this.appendToBuffer("}");
     return false;
   }
