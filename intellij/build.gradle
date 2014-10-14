@@ -4,12 +4,10 @@ allprojects {
   ext.isWindows = osName.startsWith('Win')
   ext.isMac = osName.startsWith('Mac')
   ext.isUnix = osName.startsWith('Linux')
-  if (isWindows) {
+  if (isWindows || isUnix) {
     ext.intellijLibs = file("${intellijHome}/lib")
   } else if (isMac) {
     ext.intellijLibs = file("${intellijHome}/IntelliJ IDEA 14 CE EAP.app/Contents/lib")
-  } else if (isUnix) {
-    ext.intellijLibs = file("${intellijHome}/lib")
   }
 }
 
@@ -21,10 +19,13 @@ if (isWindows) {
   ext.archiveName = 'ideaIC-138.SNAPSHOT.tar.gz'
 }
 
-task downloadIntellij << {
-  intellijHome.mkdirs()
-  ant.get(src:"http://teamcity.jetbrains.com/repository/download/bt410/153679:id/${archiveName}?guest", dest: intellijHome, usetimestamp: true)
-  ant.get(src:'http://teamcity.jetbrains.com/repository/download/bt410/153679:id/sources.zip?guest', dest: intellijHome, usetimestamp: true)
+task downloadIntellij {
+  onlyIf {!file("${intellijHome}/${archiveName}").exists()}
+  doLast {
+    intellijHome.mkdirs()
+    ant.get(src:"http://teamcity.jetbrains.com/repository/download/bt410/153679:id/${archiveName}?guest", dest: intellijHome)
+    ant.get(src:'http://teamcity.jetbrains.com/repository/download/bt410/153679:id/sources.zip?guest', dest: intellijHome)
+  }
 }
 
 task unpackIntellij(type: Copy, dependsOn: downloadIntellij) {
