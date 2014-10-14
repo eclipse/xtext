@@ -24,6 +24,20 @@ class AnonymousClassValidationTest extends AbstractXtendTestCase {
 	@Inject extension ParseHelper<XtendFile>
 	@Inject extension ValidationTestHelper
 
+	@Test def void testBug447125() {
+		'''
+			class C {
+				def m() {
+					var String s = ''
+					new D(s) {}
+				}
+			}
+			class D {
+				new(String s) {}
+			}
+		'''.parse.assertNoIssues
+	}
+
 	@Test def void test_01() {
 		'''
 			class C {
