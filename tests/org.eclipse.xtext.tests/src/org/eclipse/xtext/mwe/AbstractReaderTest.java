@@ -200,18 +200,19 @@ public abstract class AbstractReaderTest extends AbstractXtextTests {
 		return fileURI2.resolve(fileURI).toFileString();
 	}
 	
-	public Object get(Object obj, String path) {
+	public Object get(final Object obj, String path) {
 		String[] split = path.split("\\.");
+		Object retVal = obj;
 		for (String string : split) {
 			try {
-				Field field = findField(obj.getClass(),string);
+				Field field = findField(retVal.getClass(),string);
 				field.setAccessible(true);
-				obj = field.get(obj);
+				retVal = field.get(retVal);
 			} catch (Exception e) {
 				return null;
 			}
 		}
-		return obj;
+		return retVal;
 	}
 
 	protected Field findField(Class<? extends Object> class1, String string) {
