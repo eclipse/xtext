@@ -27,6 +27,7 @@ import org.eclipse.jdt.core.dom.TypeDeclaration
 import org.eclipse.jdt.core.dom.TypeDeclarationStatement
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement
+import org.eclipse.jdt.core.dom.ClassInstanceCreation
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -51,14 +52,18 @@ class ASTFlattenerUtils {
 	}
 
 	def IMethodBinding findOverride(IMethodBinding method, ITypeBinding type) {
+		findOverride(method, type, false)
+	}
+
+	def IMethodBinding findOverride(IMethodBinding method, ITypeBinding type, boolean onlyPrimarylevel) {
 		val superclass = type.superclass
 		var IMethodBinding overridden = null
 		if (superclass != null) {
-			overridden = internalFindOverride(method, superclass)
+			overridden = internalFindOverride(method, superclass, onlyPrimarylevel)
 		}
 		if (overridden == null) {
 			for (ITypeBinding interfaze : type.interfaces) {
-				overridden = internalFindOverride(method, interfaze)
+				overridden = internalFindOverride(method, interfaze, onlyPrimarylevel)
 				if (overridden != null) {
 					return overridden
 				}
@@ -67,12 +72,14 @@ class ASTFlattenerUtils {
 		return overridden
 	}
 
-	def internalFindOverride(IMethodBinding method, ITypeBinding superType) {
+	def private internalFindOverride(IMethodBinding method, ITypeBinding superType, boolean onlyPrimarylevel) {
 		val superClassOverride = superType.declaredMethods.filter[method.overrides(it)]
 		if (superClassOverride.size == 1) {
 			return superClassOverride.get(0)
-		} else {
+		} else if (!onlyPrimarylevel) {
 			return findOverride(method, superType)
+		} else {
+			return null
 		}
 	}
 
@@ -117,7 +124,22 @@ class ASTFlattenerUtils {
 			( parent instanceof VariableDeclarationFragment && parent.parent instanceof FieldDeclaration))
 	}
 
-	def boolean needsReturnValue(Assignment node) {
+	def isLambdaCase(ClassInstanceCreation creation) {
+		val anonymousClazz = creation.anonymousClassDeclaration
+		if (anonymousClazz != null && anonymousClazz.bodyDeclarations.size == 1) {
+			val declaredMethod = anonymousClazz.bodyDeclarations.get(0)
+			if (declaredMethod instanceof MethodDeclaration && creation.type.resolveBinding != null) {
+				val methodBinding = (declaredMethod as MethodDeclaration).resolveBinding
+				if (methodBinding != null) {
+					val overrides = findOverride(methodBinding, methodBinding.declaringClass, true)
+					return overrides != null && Modifier.isAbstract(overrides.modifiers)
+				}
+			}
+		}
+		return false
+	}
+
+	def boolean needsReturnValue(ASTNode node) {
 		(node.parent != null) && (!(node.parent instanceof Statement) || (node.parent instanceof ReturnStatement))
 	}
 
