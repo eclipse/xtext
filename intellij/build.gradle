@@ -23,13 +23,17 @@ task downloadIntellij {
   onlyIf {!file("${intellijHome}/${archiveName}").exists()}
   doLast {
     intellijHome.mkdirs()
-    ant.get(src:"http://teamcity.jetbrains.com/repository/download/bt410/153679:id/${archiveName}?guest", dest: intellijHome)
-    ant.get(src:'http://teamcity.jetbrains.com/repository/download/bt410/153679:id/sources.zip?guest', dest: intellijHome)
+    ant.get(src:"https://teamcity.jetbrains.com/repository/download/bt410/153679:id/${archiveName}?guest", dest: intellijHome)
+    ant.get(src:'https://teamcity.jetbrains.com/repository/download/bt410/153679:id/sources.zip?guest', dest: intellijHome)
   }
 }
 
 task unpackIntellij(type: Copy, dependsOn: downloadIntellij) {
-  from zipTree("${intellijHome}/${archiveName}")
+	if (isUnix) {
+	  from tarTree("${intellijHome}/${archiveName}")
+	} else {
+	  from zipTree("${intellijHome}/${archiveName}")	
+	}
   into intellijHome
 }
 
