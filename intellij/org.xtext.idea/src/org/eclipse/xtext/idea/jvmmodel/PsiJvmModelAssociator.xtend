@@ -9,6 +9,11 @@ import org.eclipse.xtext.psi.IPsiModelAssociations
 import org.eclipse.xtext.psi.IPsiModelAssociator
 import org.eclipse.xtext.psi.PsiElementProvider
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
+import org.eclipse.xtext.common.types.JvmExecutable
+import com.intellij.psi.PsiClass
+import org.eclipse.xtext.common.types.JvmField
+import org.eclipse.xtext.common.types.JvmFormalParameter
+import com.intellij.psi.PsiMethod
 
 class PsiJvmModelAssociator extends JvmModelAssociator {
 
@@ -38,7 +43,46 @@ class PsiJvmModelAssociator extends JvmModelAssociator {
 		switch jvmElement {
 			JvmDeclaredType: {
 				return [
-					new JvmPsiClassImpl(jvmElement, sourceElement.psiElement as PsiNamedElement)
+					if (jvmElement.declaringType == null) {
+						new JvmPsiClassImpl(jvmElement, sourceElement.psiElement as PsiNamedElement)
+					} else {
+						val psiClass = psiAssociations.getPsiElement(jvmElement.declaringType) as PsiClass
+						if (psiClass == null)
+							return null
+						psiClass.innerClasses.findFirst [
+							getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY) == jvmElement
+						]
+					}
+				]
+			}
+			JvmExecutable: {
+				[
+					val psiClass = psiAssociations.getPsiElement(jvmElement.declaringType) as PsiClass
+					if (psiClass == null)
+						return null
+					psiClass.methods.findFirst [
+						getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY) == jvmElement
+					]
+				]
+			}
+			JvmField: {
+				[
+					val psiClass = psiAssociations.getPsiElement(jvmElement.declaringType) as PsiClass
+					if (psiClass == null)
+						return null
+					psiClass.fields.findFirst [
+						getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY) == jvmElement
+					]
+				]
+			}
+			JvmFormalParameter: {
+				[
+					val psiMethod = psiAssociations.getPsiElement(jvmElement.eContainer) as PsiMethod
+					if (psiMethod == null)
+						return null
+					psiMethod.parameterList.parameters.findFirst [
+						getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY) == jvmElement
+					]
 				]
 			}
 		}

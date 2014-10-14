@@ -3,6 +3,7 @@ package org.eclipse.xtext.idea.types.psi.impl;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.intellij.lang.Language;
+import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.Pair;
 import com.intellij.pom.java.LanguageLevel;
 import com.intellij.psi.HierarchicalMethodSignature;
@@ -72,7 +73,6 @@ import org.eclipse.xtext.idea.types.psi.JvmPsiClass;
 import org.eclipse.xtext.idea.types.psi.impl.AnnotatableModifierList;
 import org.eclipse.xtext.idea.types.psi.impl.LightAnnotation;
 import org.eclipse.xtext.idea.types.psi.impl.LightFieldBuilder;
-import org.eclipse.xtext.psi.PsiElementProvider;
 import org.eclipse.xtext.psi.PsiModelAssociations;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
@@ -84,6 +84,8 @@ import org.eclipse.xtext.xtype.XComputedTypeReference;
 
 @SuppressWarnings("all")
 public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensibleClass {
+  public final static Key<Object> JVM_ELEMENT_KEY = new Key<Object>("org.eclipse.xtext.idea.jvm.element");
+  
   @Inject
   private PsiModelAssociations psiAssocations;
   
@@ -171,7 +173,9 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
             it.setDocComment(_psiDocComment);
             boolean _isDeprecated = f.isDeprecated();
             it.setDeprecated(_isDeprecated);
-            JvmPsiClassImpl.this.associatePrimary(f, it);
+            PsiElement _navigationElement = JvmPsiClassImpl.this.getNavigationElement(f);
+            it.setNavigationElement(_navigationElement);
+            it.<Object>putUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY, f);
           }
         };
         LightFieldBuilder _doubleArrow = ObjectExtensions.<LightFieldBuilder>operator_doubleArrow(_lightFieldBuilder, _function);
@@ -204,7 +208,9 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
               PsiType _psiType = JvmPsiClassImpl.this.toPsiType(_returnType);
               it.setMethodReturnType(_psiType);
             }
-            JvmPsiClassImpl.this.associatePrimary(m, it);
+            PsiElement _navigationElement = JvmPsiClassImpl.this.getNavigationElement(m);
+            it.setNavigationElement(_navigationElement);
+            it.<Object>putUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY, m);
           }
         };
         LightMethodBuilder _doubleArrow = ObjectExtensions.<LightMethodBuilder>operator_doubleArrow(_lightMethodBuilder, _function);
@@ -247,9 +253,15 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
             JvmTypeReference _parameterType = p.getParameterType();
             PsiType _psiType = JvmPsiClassImpl.this.toPsiType(_parameterType);
             Language _language = it.getLanguage();
-            final LightParameter psiParameter = new LightParameter(_simpleName, _psiType, JvmPsiClassImpl.this.psiElement, _language);
-            JvmPsiClassImpl.this.associatePrimary(p, psiParameter);
-            it.addParameter(psiParameter);
+            LightParameter _lightParameter = new LightParameter(_simpleName, _psiType, JvmPsiClassImpl.this.psiElement, _language);
+            final Procedure1<LightParameter> _function = new Procedure1<LightParameter>() {
+              public void apply(final LightParameter it) {
+                PsiElement _navigationElement = JvmPsiClassImpl.this.getNavigationElement(p);
+                it.setNavigationElement(_navigationElement);
+                it.<Object>putUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY, p);
+              }
+            };
+            ObjectExtensions.<LightParameter>operator_doubleArrow(_lightParameter, _function);
           }
         };
         IterableExtensions.<JvmFormalParameter>forEach(_parameters, _function);
@@ -258,18 +270,11 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
     return ObjectExtensions.<LightParameterListBuilder>operator_doubleArrow(_lightParameterListBuilder, _function);
   }
   
-  private boolean associatePrimary(final EObject jvmElement, final LightElement psiElement) {
-    boolean _xblockexpression = false;
+  private PsiElement getNavigationElement(final EObject jvmElement) {
+    PsiElement _xblockexpression = null;
     {
       final EObject primarySourceElement = this.jvmAssocations.getPrimarySourceElement(jvmElement);
-      final PsiElement navigationElement = this.psiAssocations.getPsiElement(primarySourceElement);
-      psiElement.setNavigationElement(navigationElement);
-      final PsiElementProvider _function = new PsiElementProvider() {
-        public PsiElement get() {
-          return psiElement;
-        }
-      };
-      _xblockexpression = this.psiAssocations.associatePrimary(primarySourceElement, _function);
+      _xblockexpression = this.psiAssocations.getPsiElement(primarySourceElement);
     }
     return _xblockexpression;
   }
@@ -368,7 +373,6 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
               LightAnnotation _addAnnotation = it.addAnnotation(_qualifiedName);
               final Procedure1<LightAnnotation> _function = new Procedure1<LightAnnotation>() {
                 public void apply(final LightAnnotation it) {
-                  JvmPsiClassImpl.this.associatePrimary(m, it);
                 }
               };
               ObjectExtensions.<LightAnnotation>operator_doubleArrow(_addAnnotation, _function);
@@ -406,7 +410,9 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
           JvmPsiClassImpl _jvmPsiClassImpl = new JvmPsiClassImpl(inner, psiElement);
           final Procedure1<JvmPsiClassImpl> _function = new Procedure1<JvmPsiClassImpl>() {
             public void apply(final JvmPsiClassImpl it) {
-              it.associatePrimary(inner, it);
+              PsiElement _navigationElement = JvmPsiClassImpl.this.getNavigationElement(inner);
+              it.setNavigationElement(_navigationElement);
+              it.<Object>putUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY, inner);
             }
           };
           JvmPsiClassImpl _doubleArrow = ObjectExtensions.<JvmPsiClassImpl>operator_doubleArrow(_jvmPsiClassImpl, _function);

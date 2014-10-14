@@ -2,6 +2,7 @@ package org.eclipse.xtext.idea.types.psi.impl
 
 import com.google.inject.Inject
 import com.intellij.lang.Language
+import com.intellij.openapi.util.Key
 import com.intellij.psi.JavaElementVisitor
 import com.intellij.psi.PsiAnnotation
 import com.intellij.psi.PsiAnnotationMemberValue
@@ -63,6 +64,8 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xtype.XComputedTypeReference
 
 class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensibleClass {
+
+	public static val JVM_ELEMENT_KEY = new Key("org.eclipse.xtext.idea.jvm.element")
 
 	@Inject
 	PsiModelAssociations psiAssocations
@@ -135,21 +138,24 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 				modifierList = f.psiModifiers
 				docComment = f.psiDocComment
 				deprecated = f.deprecated
-				associatePrimary(f, it)
+				navigationElement = f.navigationElement
+				putUserData(JVM_ELEMENT_KEY, f)
 			]) as PsiField
 		].toList
 	}
 
 	override getOwnMethods() {
 		jvmType.members.filter(JvmExecutable).map [ m |
-			(new LightMethodBuilder(manager, language, m.simpleName, m.psiParameters, m.psiModifiers, m.psiThrowsList, m.psiTypeParameterList) => [
+			(new LightMethodBuilder(manager, language, m.simpleName, m.psiParameters, m.psiModifiers, m.psiThrowsList,
+				m.psiTypeParameterList) => [
 				containingClass = this
 				constructor = m instanceof JvmConstructor
 				//TODO subclass to allow doccomment
 				if (m instanceof JvmOperation) {
 					methodReturnType = m.returnType.toPsiType
 				}
-				associatePrimary(m, it)
+				navigationElement = m.navigationElement
+				putUserData(JVM_ELEMENT_KEY, m)
 			]) as PsiMethod
 		].toList
 	}
@@ -165,18 +171,17 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 	private def getPsiParameters(JvmExecutable m) {
 		new LightParameterListBuilder(manager, language) => [
 			m.parameters.forEach [ p |
-				val psiParameter = new LightParameter(p.simpleName, p.parameterType.toPsiType, psiElement, language)
-				associatePrimary(p, psiParameter)
-				addParameter(psiParameter)
+				new LightParameter(p.simpleName, p.parameterType.toPsiType, psiElement, language) => [
+					navigationElement = p.navigationElement
+					putUserData(JVM_ELEMENT_KEY, p)
+				]
 			]
 		]
 	}
 
-	private def associatePrimary(EObject jvmElement, LightElement psiElement) {
+	private def getNavigationElement(EObject jvmElement) {
 		val primarySourceElement = jvmAssocations.getPrimarySourceElement(jvmElement)
-		val navigationElement = psiAssocations.getPsiElement(primarySourceElement)
-		psiElement.navigationElement = navigationElement
-		psiAssocations.associatePrimary(primarySourceElement, [psiElement])
+		psiAssocations.getPsiElement(primarySourceElement)
 	}
 
 	private def getPsiModifiers(JvmMember m) {
@@ -226,10 +231,8 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 					addModifier(PsiModifier.SYNCHRONIZED)
 			}
 			if (m instanceof JvmAnnotationTarget) {
-				m.annotations.forEach[anno|
-					addAnnotation(anno.annotation.qualifiedName) => [
-						associatePrimary(m, it) 
-					]
+				m.annotations.forEach [ anno |
+					addAnnotation(anno.annotation.qualifiedName) => []
 				]
 			}
 		]
@@ -248,7 +251,8 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 			val sourceElement = jvmAssocations.getPrimarySourceElement(inner)
 			val psiElement = psiAssocations.getPsiElement(sourceElement) as PsiNamedElement
 			(new JvmPsiClassImpl(inner, psiElement) => [
-				associatePrimary(inner, it)
+				navigationElement = inner.navigationElement
+				putUserData(JVM_ELEMENT_KEY, inner)
 			]) as PsiClass
 		].toList
 	}
@@ -338,7 +342,7 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 	override getDocComment() {
 		jvmType.psiDocComment
 	}
-	
+
 	private def getPsiDocComment(EObject jvmObject) {
 		val adapter = EcoreUtil.getAdapter(jvmObject.eAdapters, DocumentationAdapter) as DocumentationAdapter;
 		new PsiDocCommentImpl(adapter?.documentation ?: "")
@@ -368,7 +372,8 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 		}
 	}
 
-	override processDeclarations(PsiScopeProcessor processor, ResolveState state, PsiElement lastParent, PsiElement place) {
+	override processDeclarations(PsiScopeProcessor processor, ResolveState state, PsiElement lastParent,
+		PsiElement place) {
 		if (isEnum) {
 			if(!PsiClassImplUtil.processDeclarationsInEnum(processor, state, membersCache)) return false
 		}
@@ -484,14 +489,13 @@ public class LightFieldBuilder extends LightVariableBuilder<LightFieldBuilder> i
 }
 
 public class AnnotatableModifierList extends LightModifierList {
-	
+
 	val annotations = <PsiAnnotation>newArrayList
-	
+
 	new(PsiManager manager, Language language) {
 		super(manager, language, #[])
 	}
-	
-	
+
 	override LightAnnotation addAnnotation(String qualifiedName) {
 		val anno = new LightAnnotation(manager, language, qualifiedName)
 		anno.owner = this
@@ -518,9 +522,9 @@ public class AnnotatableModifierList extends LightModifierList {
 public class LightAnnotation extends LightElement implements PsiAnnotation {
 
 	String qualifiedName
-	
+
 	@Accessors PsiAnnotationOwner owner
-	
+
 	public new(PsiManager manager, Language language, String qualifiedName) {
 		super(manager, language)
 		this.qualifiedName = qualifiedName
