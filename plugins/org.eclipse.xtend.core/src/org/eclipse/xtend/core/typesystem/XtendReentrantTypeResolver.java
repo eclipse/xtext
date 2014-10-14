@@ -889,20 +889,26 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 	}
 	
 	private EObject getNearestClosureOrTypeDeclaration(EObject object, IResolvedTypes resolvedTypes) {
-		while(object != null) {
-			if (object instanceof XClosure) {
-				return object;
+		EObject candidate = object;
+		while(candidate != null) {
+			if (candidate instanceof XClosure) {
+				return candidate;
 			}
-			if (object instanceof XtendTypeDeclaration) {
-				return object;
+			if (candidate instanceof XConstructorCall) {
+				// skip anonymous class constructors themselves
+				if (candidate.eContainingFeature() == XtendPackage.Literals.ANONYMOUS_CLASS__CONSTRUCTOR_CALL) {
+					candidate = candidate.eContainer();
+				}
+			} else if (candidate instanceof XtendTypeDeclaration) {
+				return candidate;
 			}
-			if (object instanceof RichString) {
-				LightweightTypeReference type = resolvedTypes.getActualType((RichString)object);
+			if (candidate instanceof RichString) {
+				LightweightTypeReference type = resolvedTypes.getActualType((RichString)candidate);
 				if (type != null && type.isType(StringConcatenationClient.class)) {
-					return object;
+					return candidate;
 				}
 			}
-			object = object.eContainer();
+			candidate = candidate.eContainer();
 		}
 		return null;
 	}
