@@ -10,17 +10,19 @@ allprojects {
     ext.intellijLibs = file("${intellijHome}/IntelliJ IDEA 14 CE EAP.app/Contents/lib")
   }
 }
-
+def archiveBaseName = 'ideaIC-138.SNAPSHOT'
+def archiveName
 if (isWindows) {
-  ext.archiveName = 'ideaIC-138.SNAPSHOT.win.zip'
+  archiveName = "${archiveBaseName}.win.zip"
 } else if (isMac) {
-  ext.archiveName = 'ideaIC-138.SNAPSHOT.mac.zip'
+  archiveName = "${archiveBaseName}.mac.zip"
 } else if (isUnix) {
-  ext.archiveName = 'ideaIC-138.SNAPSHOT.tar.gz'
+  archiveName = "${archiveBaseName}.tar.gz"
 }
+def archiveFile = file("${intellijHome}/${archiveName}")
 
 task downloadIntellij {
-  onlyIf {!file("${intellijHome}/${archiveName}").exists()}
+  onlyIf {!archiveFile.exists()}
   doLast {
     intellijHome.mkdirs()
     ant.get(src:"https://teamcity.jetbrains.com/repository/download/bt410/153679:id/${archiveName}?guest", dest: intellijHome)
@@ -30,11 +32,17 @@ task downloadIntellij {
 
 task unpackIntellij(type: Copy, dependsOn: downloadIntellij) {
 	if (isUnix) {
-	  from tarTree("${intellijHome}/${archiveName}")
+	  from tarTree(archiveFile)
+		into(intellijHome) {
+			eachFile {file ->
+				def targetPath = (file.path - "${archiveBaseName}/")
+				file.path = targetPath
+			}
+		}
 	} else {
-	  from zipTree("${intellijHome}/${archiveName}")	
+	  from zipTree(archiveFile)	
+		into intellijHome
 	}
-  into intellijHome
 }
 
 task prepareIntellij(dependsOn: [unpackIntellij, ':intellij-dependencies:eclipseClasspath'])
