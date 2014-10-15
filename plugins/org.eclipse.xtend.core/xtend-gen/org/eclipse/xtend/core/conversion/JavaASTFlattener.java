@@ -143,7 +143,7 @@ public class JavaASTFlattener extends ASTVisitor {
   
   private List<String> problems = CollectionLiterals.<String>newArrayList();
   
-  private Set<Comment> assignedCommens = CollectionLiterals.<Comment>newHashSet();
+  private Set<Comment> assignedComments = CollectionLiterals.<Comment>newHashSet();
   
   /**
    * The string buffer into which the serialized representation of the AST is
@@ -156,6 +156,8 @@ public class JavaASTFlattener extends ASTVisitor {
   private int indentation = 0;
   
   private int javaSourceKind = ASTParser.K_COMPILATION_UNIT;
+  
+  private boolean fallBackStrategy = false;
   
   /**
    * Creates a new AST printer.
@@ -182,8 +184,10 @@ public class JavaASTFlattener extends ASTVisitor {
     ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
     this.problems = _newArrayList;
     HashSet<Comment> _newHashSet = CollectionLiterals.<Comment>newHashSet();
-    this.assignedCommens = _newHashSet;
+    this.assignedComments = _newHashSet;
     this.javaSources = null;
+    this.javaSourceKind = ASTParser.K_COMPILATION_UNIT;
+    this.indentation = 0;
   }
   
   /**
@@ -202,7 +206,7 @@ public class JavaASTFlattener extends ASTVisitor {
   }
   
   private boolean notAssigned(final Comment comment) {
-    boolean _contains = this.assignedCommens.contains(comment);
+    boolean _contains = this.assignedComments.contains(comment);
     return (!_contains);
   }
   
@@ -444,13 +448,16 @@ public class JavaASTFlattener extends ASTVisitor {
     List _modifiers_1 = it.modifiers();
     boolean _isStatic = this._aSTFlattenerUtils.isStatic(_modifiers_1);
     if (_isStatic) {
-      this.addProblem(it, "Static initialize are not fully supported");
-      this.appendToBuffer(" final Void static_initializer = {");
-      this.appendLineWrapToBuffer();
-      Block _body = it.getBody();
-      _body.accept(this);
-      this.appendToBuffer("null }");
-      this.appendLineWrapToBuffer();
+      if (this.fallBackStrategy) {
+        this.addProblem(it, "Static initialize are not fully supported");
+      } else {
+        this.appendToBuffer(" final Void static_initializer = {");
+        this.appendLineWrapToBuffer();
+        Block _body = it.getBody();
+        _body.accept(this);
+        this.appendToBuffer("null }");
+        this.appendLineWrapToBuffer();
+      }
     } else {
       ASTNode _parent = it.getParent();
       if ((_parent instanceof AnonymousClassDeclaration)) {
@@ -597,7 +604,24 @@ public class JavaASTFlattener extends ASTVisitor {
   public boolean visit(final QualifiedName it) {
     Name _qualifier = it.getQualifier();
     _qualifier.accept(this);
-    this.appendToBuffer(".");
+    boolean _and = false;
+    boolean _and_1 = false;
+    if (!this.fallBackStrategy) {
+      _and_1 = false;
+    } else {
+      boolean _isStaticMemberCall = this._aSTFlattenerUtils.isStaticMemberCall(it);
+      _and_1 = _isStaticMemberCall;
+    }
+    if (!_and_1) {
+      _and = false;
+    } else {
+      _and = (!((it.getParent() instanceof SimpleType) || (it.getParent() instanceof ImportDeclaration)));
+    }
+    if (_and) {
+      this.appendToBuffer("::");
+    } else {
+      this.appendToBuffer(".");
+    }
     SimpleName _name = it.getName();
     _name.accept(this);
     return false;
@@ -934,6 +958,8 @@ public class JavaASTFlattener extends ASTVisitor {
     if (_notEquals_2) {
       Block _body_1 = it.getBody();
       _body_1.accept(this);
+    } else {
+      this.appendLineWrapToBuffer();
     }
     return false;
   }
@@ -1003,22 +1029,38 @@ public class JavaASTFlattener extends ASTVisitor {
         List _parameters_1 = method.parameters();
         this.visitAllSeparatedByComma(_parameters_1);
         this.appendToBuffer("|");
+      } else {
+        if (this.fallBackStrategy) {
+          this.appendToBuffer("|");
+        }
       }
       Block _body = method.getBody();
       List _statements = _body.statements();
       this.visitAll(_statements);
       this.appendToBuffer("]");
+      if (this.fallBackStrategy) {
+        this.appendToBuffer(" as ");
+        List _typeArguments = node.typeArguments();
+        boolean _isEmpty_1 = _typeArguments.isEmpty();
+        boolean _not_1 = (!_isEmpty_1);
+        if (_not_1) {
+          List _typeArguments_1 = node.typeArguments();
+          this.appendTypeParameters(_typeArguments_1);
+        }
+        Type _type = node.getType();
+        _type.accept(this);
+      }
     } else {
       this.appendToBuffer("new ");
-      List _typeArguments = node.typeArguments();
-      boolean _isEmpty_1 = _typeArguments.isEmpty();
-      boolean _not_1 = (!_isEmpty_1);
-      if (_not_1) {
-        List _typeArguments_1 = node.typeArguments();
-        this.appendTypeParameters(_typeArguments_1);
+      List _typeArguments_2 = node.typeArguments();
+      boolean _isEmpty_2 = _typeArguments_2.isEmpty();
+      boolean _not_2 = (!_isEmpty_2);
+      if (_not_2) {
+        List _typeArguments_3 = node.typeArguments();
+        this.appendTypeParameters(_typeArguments_3);
       }
-      Type _type = node.getType();
-      _type.accept(this);
+      Type _type_1 = node.getType();
+      _type_1.accept(this);
       this.appendToBuffer("(");
       for (Iterator<Expression> it = node.arguments().iterator(); it.hasNext();) {
         {
@@ -1080,7 +1122,7 @@ public class JavaASTFlattener extends ASTVisitor {
       final Procedure1<Comment> _function_2 = new Procedure1<Comment>() {
         public void apply(final Comment it) {
           it.accept(JavaASTFlattener.this);
-          JavaASTFlattener.this.assignedCommens.add(it);
+          JavaASTFlattener.this.assignedComments.add(it);
         }
       };
       IterableExtensions.<Comment>forEach(_filter_1, _function_2);
@@ -1114,7 +1156,18 @@ public class JavaASTFlattener extends ASTVisitor {
     if (_notEquals) {
       Expression _expression_1 = it.getExpression();
       _expression_1.accept(this);
-      this.appendToBuffer(".");
+      boolean _and = false;
+      if (!this.fallBackStrategy) {
+        _and = false;
+      } else {
+        boolean _isStaticMemberCall = this._aSTFlattenerUtils.isStaticMemberCall(it);
+        _and = _isStaticMemberCall;
+      }
+      if (_and) {
+        this.appendToBuffer("::");
+      } else {
+        this.appendToBuffer(".");
+      }
     }
     List _typeArguments = it.typeArguments();
     boolean _isEmpty = _typeArguments.isEmpty();
@@ -1191,15 +1244,26 @@ public class JavaASTFlattener extends ASTVisitor {
   public boolean visit(final FieldAccess it) {
     Expression _expression = it.getExpression();
     _expression.accept(this);
-    this.appendToBuffer(".");
+    boolean _and = false;
+    if (!this.fallBackStrategy) {
+      _and = false;
+    } else {
+      boolean _isStaticMemberCall = this._aSTFlattenerUtils.isStaticMemberCall(it);
+      _and = _isStaticMemberCall;
+    }
+    if (_and) {
+      this.appendToBuffer("::");
+    } else {
+      this.appendToBuffer(".");
+    }
     SimpleName _name = it.getName();
     _name.accept(this);
     return false;
   }
   
   public boolean visit(final InfixExpression node) {
-    final int stringConcats = this._aSTFlattenerUtils.countStringConcats(node);
-    if ((stringConcats > 0)) {
+    final boolean useRichString = this._aSTFlattenerUtils.canConvertToRichText(node);
+    if (useRichString) {
       ASTNode _parent = node.getParent();
       final boolean firstEntrance = (!(_parent instanceof InfixExpression));
       if (firstEntrance) {
@@ -1260,9 +1324,8 @@ public class JavaASTFlattener extends ASTVisitor {
       if (!(expression instanceof InfixExpression)) {
         _and = false;
       } else {
-        int _countStringConcats = this._aSTFlattenerUtils.countStringConcats(((InfixExpression) expression));
-        boolean _greaterThan = (_countStringConcats > 0);
-        _and = _greaterThan;
+        boolean _canConvertToRichText = this._aSTFlattenerUtils.canConvertToRichText(((InfixExpression) expression));
+        _and = _canConvertToRichText;
       }
       final boolean stringConcat = _and;
       if ((!stringConcat)) {
@@ -1665,8 +1728,14 @@ public class JavaASTFlattener extends ASTVisitor {
   }
   
   public boolean visit(final TypeLiteral node) {
+    if (this.fallBackStrategy) {
+      this.appendToBuffer("typeof(");
+    }
     Type _type = node.getType();
     _type.accept(this);
+    if (this.fallBackStrategy) {
+      this.appendToBuffer(")");
+    }
     return false;
   }
   
@@ -2110,6 +2179,7 @@ public class JavaASTFlattener extends ASTVisitor {
     boolean _isEmpty = _arguments.isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
+      this.addProblem(node, "Enum constant may not have any arguments");
       this.appendToBuffer("(");
       List _arguments_1 = node.arguments();
       this.visitAllSeparatedByComma(_arguments_1);
@@ -2118,6 +2188,7 @@ public class JavaASTFlattener extends ASTVisitor {
     AnonymousClassDeclaration _anonymousClassDeclaration = node.getAnonymousClassDeclaration();
     boolean _notEquals_1 = (!Objects.equal(_anonymousClassDeclaration, null));
     if (_notEquals_1) {
+      this.addProblem(node, "Enum constant may not have any anonymous class declarations");
       AnonymousClassDeclaration _anonymousClassDeclaration_1 = node.getAnonymousClassDeclaration();
       _anonymousClassDeclaration_1.accept(this);
     }
@@ -2134,6 +2205,12 @@ public class JavaASTFlattener extends ASTVisitor {
     }
     List _modifiers = node.modifiers();
     this.appendModifieres(node, _modifiers);
+    List _modifiers_1 = node.modifiers();
+    Iterable<Modifier> _filter = Iterables.<Modifier>filter(_modifiers_1, Modifier.class);
+    boolean _isPackageVisibility = this._aSTFlattenerUtils.isPackageVisibility(_filter);
+    if (_isPackageVisibility) {
+      this.appendToBuffer("package ");
+    }
     this.appendToBuffer("enum ");
     SimpleName _name = node.getName();
     _name.accept(this);
@@ -2142,6 +2219,7 @@ public class JavaASTFlattener extends ASTVisitor {
     boolean _isEmpty = _superInterfaceTypes.isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
+      this.addProblem(node, "Enum may not have a super type");
       this.appendToBuffer("implements ");
       List _superInterfaceTypes_1 = node.superInterfaceTypes();
       this.visitAllSeparatedByComma(_superInterfaceTypes_1);
@@ -2156,7 +2234,9 @@ public class JavaASTFlattener extends ASTVisitor {
     boolean _isEmpty_1 = _bodyDeclarations.isEmpty();
     boolean _not_1 = (!_isEmpty_1);
     if (_not_1) {
-      this.appendToBuffer("; ");
+      this.addProblem(node, "Enum may not have any body declaration statements");
+      this.appendToBuffer(";");
+      this.appendLineWrapToBuffer();
       List _bodyDeclarations_1 = node.bodyDeclarations();
       this.visitAll(_bodyDeclarations_1);
     }
@@ -2377,7 +2457,7 @@ public class JavaASTFlattener extends ASTVisitor {
       final Procedure1<Comment> _function_2 = new Procedure1<Comment>() {
         public void apply(final Comment it) {
           it.accept(JavaASTFlattener.this);
-          JavaASTFlattener.this.assignedCommens.add(it);
+          JavaASTFlattener.this.assignedComments.add(it);
         }
       };
       IterableExtensions.<Comment>forEach(_filter_1, _function_2);
@@ -2390,5 +2470,13 @@ public class JavaASTFlattener extends ASTVisitor {
   
   public String setJavaSources(final String javaSources) {
     return this.javaSources = javaSources;
+  }
+  
+  /**
+   * @param fallBackStrategy - if <code>true</code> ASTFlattener uses a strategy which is less error prone,<br>
+   *  but in fact may produces more noisy syntax.
+   */
+  public boolean useFallBackStrategy(final boolean fallBackStrategy) {
+    return this.fallBackStrategy = fallBackStrategy;
   }
 }

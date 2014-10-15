@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.conversion;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.Annotation;
@@ -18,13 +19,17 @@ import org.eclipse.jdt.core.dom.ClassInstanceCreation;
 import org.eclipse.jdt.core.dom.Expression;
 import org.eclipse.jdt.core.dom.FieldAccess;
 import org.eclipse.jdt.core.dom.FieldDeclaration;
+import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.IExtendedModifier;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
+import org.eclipse.jdt.core.dom.IVariableBinding;
 import org.eclipse.jdt.core.dom.InfixExpression;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
+import org.eclipse.jdt.core.dom.MethodInvocation;
 import org.eclipse.jdt.core.dom.Modifier;
 import org.eclipse.jdt.core.dom.Name;
+import org.eclipse.jdt.core.dom.QualifiedName;
 import org.eclipse.jdt.core.dom.ReturnStatement;
 import org.eclipse.jdt.core.dom.SimpleName;
 import org.eclipse.jdt.core.dom.Statement;
@@ -34,6 +39,7 @@ import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.eclipse.jdt.core.dom.TypeDeclarationStatement;
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -204,6 +210,30 @@ public class ASTFlattenerUtils {
     return IterableExtensions.<Modifier>exists(_filter, _function);
   }
   
+  public boolean isStaticMemberCall(final MethodInvocation methInv) {
+    IMethodBinding _resolveMethodBinding = methInv.resolveMethodBinding();
+    return this.isStaticBinding(_resolveMethodBinding);
+  }
+  
+  public boolean isStaticMemberCall(final QualifiedName expr) {
+    IBinding _resolveBinding = expr.resolveBinding();
+    return this.isStaticBinding(_resolveBinding);
+  }
+  
+  public boolean isStaticMemberCall(final FieldAccess expr) {
+    IVariableBinding _resolveFieldBinding = expr.resolveFieldBinding();
+    return this.isStaticBinding(_resolveFieldBinding);
+  }
+  
+  private boolean isStaticBinding(final IBinding binding) {
+    boolean _notEquals = (!Objects.equal(binding, null));
+    if (_notEquals) {
+      int _modifiers = binding.getModifiers();
+      return Modifier.isStatic(_modifiers);
+    }
+    return false;
+  }
+  
   public boolean isPackageVisibility(final Iterable<Modifier> modifier) {
     final Function1<Modifier, Boolean> _function = new Function1<Modifier, Boolean>() {
       public Boolean apply(final Modifier it) {
@@ -305,61 +335,83 @@ public class ASTFlattenerUtils {
     return _and;
   }
   
-  public int countStringConcats(final InfixExpression node) {
-    int concats = 0;
-    InfixExpression.Operator _operator = node.getOperator();
-    boolean _equals = Objects.equal(_operator, InfixExpression.Operator.PLUS);
-    if (_equals) {
-      Expression _leftOperand = node.getLeftOperand();
-      if ((_leftOperand instanceof StringLiteral)) {
-        concats++;
-      } else {
-        Expression _leftOperand_1 = node.getLeftOperand();
-        if ((_leftOperand_1 instanceof InfixExpression)) {
-          Expression _leftOperand_2 = node.getLeftOperand();
-          int _countStringConcats = this.countStringConcats(((InfixExpression) _leftOperand_2));
-          int _plus = (concats + _countStringConcats);
-          concats = _plus;
-        }
-      }
-      Expression _rightOperand = node.getRightOperand();
-      if ((_rightOperand instanceof StringLiteral)) {
-        concats++;
-      } else {
-        Expression _rightOperand_1 = node.getRightOperand();
-        if ((_rightOperand_1 instanceof InfixExpression)) {
-          Expression _rightOperand_2 = node.getRightOperand();
-          int _countStringConcats_1 = this.countStringConcats(((InfixExpression) _rightOperand_2));
-          int _plus_1 = (concats + _countStringConcats_1);
-          concats = _plus_1;
-        }
-      }
-      List _extendedOperands = node.extendedOperands();
-      final Function1<Object, Boolean> _function = new Function1<Object, Boolean>() {
-        public Boolean apply(final Object e) {
-          return Boolean.valueOf((e instanceof StringLiteral));
+  public boolean canConvertToRichText(final InfixExpression node) {
+    final Iterable<StringLiteral> nodes = this.collectCompatibleNodes(node);
+    boolean _and = false;
+    boolean _isEmpty = IterableExtensions.isEmpty(nodes);
+    boolean _not = (!_isEmpty);
+    if (!_not) {
+      _and = false;
+    } else {
+      final Function1<StringLiteral, Boolean> _function = new Function1<StringLiteral, Boolean>() {
+        public Boolean apply(final StringLiteral it) {
+          return Boolean.valueOf(ASTFlattenerUtils.this.canTranslate(it));
         }
       };
-      Iterable<Object> _filter = IterableExtensions.<Object>filter(_extendedOperands, _function);
-      int _size = IterableExtensions.size(_filter);
-      int _plus_2 = (concats + _size);
-      concats = _plus_2;
+      boolean _forall = IterableExtensions.<StringLiteral>forall(nodes, _function);
+      _and = _forall;
     }
-    return concats;
+    return _and;
+  }
+  
+  private Iterable<StringLiteral> collectCompatibleNodes(final InfixExpression node) {
+    final ArrayList<StringLiteral> strings = CollectionLiterals.<StringLiteral>newArrayList();
+    InfixExpression.Operator _operator = node.getOperator();
+    boolean _notEquals = (!Objects.equal(_operator, InfixExpression.Operator.PLUS));
+    if (_notEquals) {
+      return strings;
+    }
+    final Expression left = node.getLeftOperand();
+    if ((left instanceof StringLiteral)) {
+      strings.add(((StringLiteral)left));
+    } else {
+      if ((left instanceof InfixExpression)) {
+        Iterable<StringLiteral> _collectCompatibleNodes = this.collectCompatibleNodes(((InfixExpression)left));
+        Iterables.<StringLiteral>addAll(strings, _collectCompatibleNodes);
+      }
+    }
+    final Expression right = node.getRightOperand();
+    if ((right instanceof StringLiteral)) {
+      strings.add(((StringLiteral)right));
+    } else {
+      if ((right instanceof InfixExpression)) {
+        Iterable<StringLiteral> _collectCompatibleNodes_1 = this.collectCompatibleNodes(((InfixExpression)right));
+        Iterables.<StringLiteral>addAll(strings, _collectCompatibleNodes_1);
+      }
+    }
+    List _extendedOperands = node.extendedOperands();
+    Iterable<StringLiteral> _filter = Iterables.<StringLiteral>filter(_extendedOperands, StringLiteral.class);
+    Iterables.<StringLiteral>addAll(strings, _filter);
+    return strings;
+  }
+  
+  private boolean canTranslate(final StringLiteral literal) {
+    final String value = literal.getEscapedValue();
+    boolean _or = false;
+    boolean _or_1 = false;
+    boolean _contains = value.contains("«");
+    if (_contains) {
+      _or_1 = true;
+    } else {
+      boolean _contains_1 = value.contains("»");
+      _or_1 = _contains_1;
+    }
+    if (_or_1) {
+      _or = true;
+    } else {
+      boolean _contains_2 = value.contains("\'\'\'");
+      _or = _contains_2;
+    }
+    return (!_or);
   }
   
   public String richTextValue(final StringLiteral literal) {
-    final String value = literal.getLiteralValue();
-    String result = value.replaceAll("«", "«\"«\"» ");
-    String _replaceAll = result.replaceAll("((?!\").)(»)", "$1«\"$2\"»");
-    result = _replaceAll;
-    String _replaceAll_1 = result.replaceAll("(\'\'\')", "«\"$1\"»");
-    result = _replaceAll_1;
-    boolean _endsWith = result.endsWith("\'");
+    String value = literal.getLiteralValue();
+    boolean _endsWith = value.endsWith("\'");
     if (_endsWith) {
-      String _concat = result.concat("«»");
-      result = _concat;
+      String _concat = value.concat("«»");
+      value = _concat;
     }
-    return result;
+    return value;
   }
 }

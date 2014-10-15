@@ -57,7 +57,7 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
     this.sourceProject = "org.eclipse.xtend.core.tests";
     this.targetProject = "test-converter";
     this.errorsExpected = 0;
-    this.problemsExpected = 34;
+    this.problemsExpected = 33;
     this.runConverter();
   }
   
@@ -66,8 +66,8 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
   public void testConvertFilesInXtextTestsProject() throws Exception {
     this.sourceProject = "org.eclipse.xtext.tests";
     this.targetProject = "org.eclipse.xtext.tests.converted";
-    this.errorsExpected = 337;
-    this.problemsExpected = 12210;
+    this.errorsExpected = 198;
+    this.problemsExpected = 12173;
     this.runConverter();
   }
   
@@ -111,6 +111,8 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
         });
       int errors = 0;
       int problems = 0;
+      int files = 0;
+      int filesWithErrorsOrProblems = 0;
       for (final URI uri : allResourceUris) {
         {
           String _fileString = uri.toFileString();
@@ -120,28 +122,21 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
           InputOutput.<String>println(_plus_1);
           Charset _defaultCharset = Charset.defaultCharset();
           final String javaCode = Files.toString(file, _defaultCharset);
-          final JavaConverter j2x = this.javaConverter.get();
           String _name = file.getName();
-          final JavaConverter.ConversionResult xtendResult = j2x.toXtend(_name, javaCode);
-          int _problems = problems;
-          Iterable<String> _problems_1 = xtendResult.getProblems();
-          int _size = IterableExtensions.size(_problems_1);
-          problems = (_problems + _size);
-          final String xtendCode = xtendResult.getXtendCode();
+          final JavaConverter.ConversionResult xtendResult = this.converToXtend(_name, javaCode);
+          Iterable<String> _problems = xtendResult.getProblems();
+          final int problemsFound = IterableExtensions.size(_problems);
+          String xtendCode = xtendResult.getXtendCode();
           String _fileString_1 = uri.toFileString();
           String _absolutePath_2 = srcProjectRoot.getAbsolutePath();
           final String javaFileProjRelPath = _fileString_1.replace(_absolutePath_2, "");
           String fileName = (javaFileProjRelPath + ".xtend");
-          String content = xtendCode;
           try {
             this.file(xtendCode, true);
           } catch (final Throwable _t) {
             if (_t instanceof AssertionError) {
               final AssertionError error = (AssertionError)_t;
-              Iterable<String> _problems_2 = xtendResult.getProblems();
-              int _size_1 = IterableExtensions.size(_problems_2);
-              boolean _notEquals = (_size_1 != 0);
-              if (_notEquals) {
+              if ((problemsFound != 0)) {
                 this.writeToFile(testProject, javaFileProjRelPath, javaCode);
                 String _fileName = fileName;
                 fileName = (_fileName + ".error");
@@ -154,26 +149,68 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
                 System.err.println(_builder);
                 errors++;
               }
+              filesWithErrorsOrProblems++;
             } else {
               throw Exceptions.sneakyThrow(_t);
             }
           }
-          this.writeToFile(testProject, fileName, content);
+          int _problems_1 = problems;
+          problems = (_problems_1 + problemsFound);
+          files++;
+          this.writeToFile(testProject, fileName, xtendCode);
         }
       }
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("Problems (");
-      _builder.append(problems, "");
+      _builder.append("Files read (");
+      _builder.append(files, "");
       _builder.append(")");
       InputOutput.<String>println(_builder.toString());
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("Errors (");
-      _builder_1.append(errors, "");
+      _builder_1.append("Files with errors/problems (");
+      _builder_1.append(filesWithErrorsOrProblems, "");
       _builder_1.append(")");
       InputOutput.<String>println(_builder_1.toString());
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("Errors (");
+      _builder_2.append(errors, "");
+      _builder_2.append(")");
+      InputOutput.<String>println(_builder_2.toString());
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("Problems (");
+      _builder_3.append(problems, "");
+      _builder_3.append(")");
+      InputOutput.<String>println(_builder_3.toString());
       InputOutput.<String>println("Done...");
       Assert.assertEquals(this.problemsExpected, problems);
       Assert.assertEquals(this.errorsExpected, errors);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public JavaConverter.ConversionResult converToXtend(final String unitName, final String javaCode) {
+    try {
+      final JavaConverter j2x = this.javaConverter.get();
+      JavaConverter.ConversionResult result = j2x.toXtend(unitName, javaCode);
+      Iterable<String> _problems = result.getProblems();
+      int _size = IterableExtensions.size(_problems);
+      boolean _equals = (_size == 0);
+      if (_equals) {
+        try {
+          String _xtendCode = result.getXtendCode();
+          this.file(_xtendCode, true);
+        } catch (final Throwable _t) {
+          if (_t instanceof AssertionError) {
+            final AssertionError error = (AssertionError)_t;
+            JavaConverter _useRobustSyntax = j2x.useRobustSyntax();
+            JavaConverter.ConversionResult _xtend = _useRobustSyntax.toXtend(unitName, javaCode);
+            result = _xtend;
+          } else {
+            throw Exceptions.sneakyThrow(_t);
+          }
+        }
+      }
+      return result;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
