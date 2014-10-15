@@ -1,1 +1,1 @@
-include 'intellij-dependencies'
+include 'intellij-dependencies','org.xtext.idea','org.xtext.idea.builder'
