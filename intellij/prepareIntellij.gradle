@@ -32,8 +32,8 @@ task downloadIntellij {
 
 task unpackIntellij(type: Copy, dependsOn: downloadIntellij) {
 	if (isUnix) {
-	  from tarTree(archiveFile)
 		into(intellijHome) {
+			from tarTree(archiveFile)
 			eachFile {file ->
 				def targetPath = (file.path - "${archiveBaseName}/")
 				file.path = targetPath
