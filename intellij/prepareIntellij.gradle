@@ -10,14 +10,14 @@ allprojects {
     ext.intellijLibs = file("${intellijHome}/IntelliJ IDEA 14 CE EAP.app/Contents/lib")
   }
 }
-def archiveBaseName = 'ideaIC-138.SNAPSHOT'
+def buildQualifier = '138.SNAPSHOT'
 def archiveName
 if (isWindows) {
-  archiveName = "${archiveBaseName}.win.zip"
+  archiveName = "ideaIC-${buildQualifier}.win.zip"
 } else if (isMac) {
-  archiveName = "${archiveBaseName}.mac.zip"
+  archiveName = "ideaIC-${buildQualifier}.mac.zip"
 } else if (isUnix) {
-  archiveName = "${archiveBaseName}.tar.gz"
+  archiveName = "ideaIC-${buildQualifier}.tar.gz"
 }
 def archiveFile = file("${intellijHome}/${archiveName}")
 
@@ -35,7 +35,7 @@ task unpackIntellij(type: Copy, dependsOn: downloadIntellij) {
     from tarTree(archiveFile)
     into(intellijHome)
     eachFile {file ->
-      file.path = (file.path - "${archiveBaseName}/")
+      file.path = (file.path - "idea-IC-${buildQualifier}/")
     }
   } else {
     from zipTree(archiveFile)
