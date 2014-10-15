@@ -10,13 +10,14 @@ allprojects {
     ext.intellijLibs = file("${intellijHome}/IntelliJ IDEA 14 CE EAP.app/Contents/lib")
   }
 }
-
+def archiveBaseName = 'ideaIC-138.SNAPSHOT'
+def archiveName
 if (isWindows) {
-  ext.archiveName = 'ideaIC-138.SNAPSHOT.win.zip'
+  archiveName = '${archiveBaseName}.win.zip'
 } else if (isMac) {
-  ext.archiveName = 'ideaIC-138.SNAPSHOT.mac.zip'
+  archiveName = '${archiveBaseName}.mac.zip'
 } else if (isUnix) {
-  ext.archiveName = 'ideaIC-138.SNAPSHOT.tar.gz'
+  archiveName = '${archiveBaseName}.tar.gz'
 }
 
 task downloadIntellij {
@@ -31,10 +32,16 @@ task downloadIntellij {
 task unpackIntellij(type: Copy, dependsOn: downloadIntellij) {
 	if (isUnix) {
 	  from tarTree("${intellijHome}/${archiveName}")
+		into(intellijHome) {
+			eachFile {file ->
+				def targetPath = (file.path - "${archiveBaseName}/")
+				file.path = targetPath
+			}
+		}
 	} else {
 	  from zipTree("${intellijHome}/${archiveName}")	
+		into intellijHome
 	}
-  into intellijHome
 }
 
 task prepareIntellij(dependsOn: [unpackIntellij, ':intellij-dependencies:eclipseClasspath'])
