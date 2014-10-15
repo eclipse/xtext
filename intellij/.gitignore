@@ -12,4 +12,4 @@ extensions.xml
 config
 .gradle
 intellij-ce
-build/
+/build/
