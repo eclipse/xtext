@@ -8,8 +8,10 @@
 package org.eclipse.xtend.core.conversion
 
 import com.google.inject.Inject
+import java.util.ArrayList
 import java.util.Iterator
 import java.util.List
+import java.util.Map
 import java.util.Set
 import org.eclipse.jdt.core.dom.AST
 import org.eclipse.jdt.core.dom.ASTNode
@@ -83,6 +85,7 @@ import org.eclipse.jdt.core.dom.SimpleName
 import org.eclipse.jdt.core.dom.SimpleType
 import org.eclipse.jdt.core.dom.SingleMemberAnnotation
 import org.eclipse.jdt.core.dom.SingleVariableDeclaration
+import org.eclipse.jdt.core.dom.Statement
 import org.eclipse.jdt.core.dom.StringLiteral
 import org.eclipse.jdt.core.dom.SuperConstructorInvocation
 import org.eclipse.jdt.core.dom.SuperFieldAccess
@@ -320,12 +323,16 @@ class JavaASTFlattener extends ASTVisitor {
 		}
 		appendModifieres(modifiers())
 		if (modifiers().static) {
+			addProblem("Static initialize are not fully supported")
 			appendToBuffer(" final Void static_initializer = {")
 			appendLineWrapToBuffer
 			getBody.accept(this)
 			appendToBuffer("null }")
 			appendLineWrapToBuffer
 		} else {
+			if (parent instanceof AnonymousClassDeclaration) {
+				addProblem("Initializer is not supported in " + ASTNode.nodeClassForType(parent.nodeType).simpleName)
+			}
 			getBody.accept(this)
 		}
 		return false
@@ -591,6 +598,9 @@ class JavaASTFlattener extends ASTVisitor {
 			appendToBuffer(" new")
 		}
 		if (!typeParameters.isEmpty()) {
+			if (isConstructor) {
+				addProblem("Type parameters are not supported for constructors")
+			}
 			typeParameters.appendTypeParameters
 		}
 		if (!isConstructor()) {
@@ -668,21 +678,6 @@ class JavaASTFlattener extends ASTVisitor {
 			appendToBuffer(")")
 			if (node.getAnonymousClassDeclaration() != null) {
 				node.getAnonymousClassDeclaration().accept(this)
-			}
-		}
-		return false
-	}
-
-	def isLambdaCase(ClassInstanceCreation creation) {
-		val anonymousClazz = creation.anonymousClassDeclaration
-		if (anonymousClazz != null && anonymousClazz.bodyDeclarations.size == 1) {
-			val declaredMethod = anonymousClazz.bodyDeclarations.get(0)
-			if (declaredMethod instanceof MethodDeclaration && creation.type.resolveBinding != null) {
-				val methodBinding = (declaredMethod as MethodDeclaration).resolveBinding
-				if (methodBinding != null) {
-					val overrides = findOverride(methodBinding, methodBinding.declaringClass)
-					return overrides != null && Modifier.isAbstract(overrides.modifiers)
-				}
 			}
 		}
 		return false
@@ -843,7 +838,7 @@ class JavaASTFlattener extends ASTVisitor {
 			appendSpaceToBuffer
 			node.getExpression().accept(this)
 			appendSpaceToBuffer
-		} else {
+		} else if (!(node.parent instanceof SwitchStatement)) {
 			appendToBuffer(';')
 		}
 		return false
@@ -895,8 +890,8 @@ class JavaASTFlattener extends ASTVisitor {
 				pfOperator == PostfixExpression.Operator.DECREMENT) {
 
 				val arrayName = computeArrayName(pfOperand)
-				val idxName = '''_tPreInx_«arrayName»'''
-				val tempVarName = '''_tPostVal_«arrayName»'''
+				val idxName = '''_postIndx_«arrayName»'''
+				val tempVarName = '''_postVal_«arrayName»'''
 
 				appendToBuffer('''{ var «idxName»=''')
 				pfOperand.index.accept(this)
@@ -923,7 +918,7 @@ class JavaASTFlattener extends ASTVisitor {
 				assigment.leftHandSide = writeArray
 				assigment.rightHandSide = ASTNode.copySubtree(dummyAST, infixOp) as Expression
 				assigment.accept(this)
-				appendToBuffer('''«tempVarName» }''')
+				appendToBuffer('''«if(needsReturnValue(assigment)) tempVarName» }''')
 				return false
 			}
 		}
@@ -1076,7 +1071,8 @@ class JavaASTFlattener extends ASTVisitor {
 	override boolean visit(ThrowStatement node) {
 		appendToBuffer("throw ")
 		node.getExpression().accept(this)
-		appendToBuffer(";")
+		if (!(node.parent instanceof SwitchStatement))
+			appendToBuffer(";")
 		return false
 	}
 
@@ -1308,6 +1304,7 @@ class JavaASTFlattener extends ASTVisitor {
 
 	@Override override boolean visit(BreakStatement node) {
 		appendToBuffer("/* FIXME unsupported BreakStatement: break ")
+		node.addProblem("Break statement is not supported")
 		if (node.getLabel() != null) {
 			appendSpaceToBuffer
 			node.getLabel().accept(this)
@@ -1462,6 +1459,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	@Override override boolean visit(SwitchCase node) {
+		appendLineWrapToBuffer
 		if (node.isDefault()) {
 			appendToBuffer("default :")
 		} else {
@@ -1473,13 +1471,38 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	@Override override boolean visit(SwitchStatement node) {
+		appendLineWrapToBuffer
 		appendToBuffer("switch (")
 		node.getExpression().accept(this)
 		appendToBuffer(") ")
 		appendToBuffer("{")
 		increaseIndent
-		node.statements().visitAll
+		val foldedCases = node.statements.fold(newLinkedHashMap,
+			[ Map<SwitchCase, ArrayList<Statement>> map, Statement currStatement |
+				if (currStatement instanceof SwitchCase) {
+					map.put(currStatement, newArrayList)
+				} else {
+					map.get(map.keySet.last).add(currStatement)
+				}
+				return map
+			])
+		foldedCases.forEach [ switchCase, statements |
+			switchCase.accept(this)
+			val surround = statements.size > 0 && !(statements.get(0) instanceof Block)
+			if (surround) {
+				appendToBuffer("{")
+				increaseIndent
+				appendLineWrapToBuffer
+			}
+			statements.visitAll
+			if (surround) {
+				decreaseIndent
+				appendLineWrapToBuffer
+				appendToBuffer("}")
+			}
+		]
 		decreaseIndent
+		appendLineWrapToBuffer
 		appendToBuffer("}")
 		return false
 	}
@@ -1508,11 +1531,11 @@ class JavaASTFlattener extends ASTVisitor {
 		}
 		if (node.root instanceof CompilationUnit) {
 			val cu = node.root as CompilationUnit
-			cu.commentList.filter[Comment c|!c.docComment && c.notAssigned].filter[startPosition < node.startPosition].
-				forEach [
-					accept(this)
-					assignedCommens.add(it)
-				]
+			cu.commentList.filter[Comment c|!c.docComment && c.notAssigned].filter[
+				startPosition < node.startPosition].forEach [
+				accept(this)
+				assignedCommens.add(it)
+			]
 		}
 	}
 

@@ -66,8 +66,8 @@ public class FormatterTest extends AbstractXtextTests {
 		assertEquals(revealLineBreaks(convertLineBreaks(expected)), revealLineBreaks(res));
 	}
 
-	protected void assertPreserved(String model) throws Exception {
-		model = convertLineBreaks(model);
+	protected void assertPreserved(final String modelP) throws Exception {
+		String model = convertLineBreaks(modelP);
 		EObject m = getModel(model);
 		String res = getSerializer().serialize(m, SaveOptions.newBuilder().getOptions());
 		assertEquals(revealLineBreaks(model), revealLineBreaks(res));
