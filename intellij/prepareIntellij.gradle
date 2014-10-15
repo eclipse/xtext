@@ -31,18 +31,16 @@ task downloadIntellij {
 }
 
 task unpackIntellij(type: Copy, dependsOn: downloadIntellij) {
-	if (isUnix) {
-		into(intellijHome) {
-			from tarTree(archiveFile)
-			eachFile {file ->
-				def targetPath = (file.path - "${archiveBaseName}/")
-				file.path = targetPath
-			}
-		}
-	} else {
-	  from zipTree(archiveFile)	
-		into intellijHome
-	}
+  if (isUnix) {
+    from tarTree(archiveFile)
+    into(intellijHome)
+    eachFile {file ->
+      file.path = (file.path - "${archiveBaseName}/")
+    }
+  } else {
+    from zipTree(archiveFile)
+    into intellijHome
+  }
 }
 
 task prepareIntellij(dependsOn: [unpackIntellij, ':intellij-dependencies:eclipseClasspath'])
