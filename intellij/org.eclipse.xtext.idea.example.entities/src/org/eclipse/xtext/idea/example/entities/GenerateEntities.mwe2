@@ -10,6 +10,7 @@ var projectName = "org.eclipse.xtext.idea.example.entities"
 var runtimeProject = "../${projectName}"
 var generateXtendStub = true
 var encoding = "UTF-8"
+var lineDelimiter = "\n"
 
 Workflow {
     bean = StandaloneSetup {
@@ -36,7 +37,7 @@ Workflow {
     	directory = "${runtimeProject}.tests/src-gen"
     }
     
-    component = Generator {
+    component = Generator auto-inject {
     	pathRtProject = runtimeProject
     	pathUiProject = "${runtimeProject}.ui"
     	pathTestProject = "${runtimeProject}.tests"
