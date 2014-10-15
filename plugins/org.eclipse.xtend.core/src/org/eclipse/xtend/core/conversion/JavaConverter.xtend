@@ -8,7 +8,6 @@
 package org.eclipse.xtend.core.conversion
 
 import com.google.inject.Inject
-import com.google.inject.Provider
 import java.net.URLClassLoader
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.jdt.core.dom.AST
@@ -21,8 +20,9 @@ import org.eclipse.jdt.core.ICompilationUnit
  */
 class JavaConverter {
 
-	@Inject Provider<JavaASTFlattener> flattenerProvider
+	@Inject JavaASTFlattener astFlattener
 	String complianceLevel = "1.5"
+	boolean fallbackConversionStartegy = false
 
 	def ConversionResult toXtend(ICompilationUnit cu) {
 		val parser = ASTParser.newParser(AST.JLS3)
@@ -33,11 +33,11 @@ class JavaConverter {
 		parser.resolveBindings = true
 		parser.bindingsRecovery = true
 		parser.source = cu
-
-		val flattener = flattenerProvider.get()
-		flattener.setJavaSources(cu.source)
-		parser.createAST(null).accept(flattener)
-		val result = ConversionResult.create(flattener)
+		astFlattener.reset
+		astFlattener.useFallBackStrategy = fallbackConversionStartegy
+		astFlattener.setJavaSources(cu.source)
+		parser.createAST(null).accept(astFlattener)
+		val result = ConversionResult.create(astFlattener)
 		return result
 
 	}
@@ -68,12 +68,12 @@ class JavaConverter {
 		parser.unitName = unitName
 		parser.source = javaSrc.toCharArray
 
-		val flattener = flattenerProvider.get()
-		flattener.setJavaSourceKind(javaSourceKind)
-		flattener.setJavaSources(javaSrc)
-		parser.createAST(null).accept(flattener)
-
-		return ConversionResult.create(flattener)
+		astFlattener.reset
+		astFlattener.useFallBackStrategy = fallbackConversionStartegy
+		astFlattener.setJavaSourceKind(javaSourceKind)
+		astFlattener.setJavaSources(javaSrc)
+		parser.createAST(null).accept(astFlattener)
+		return ConversionResult.create(astFlattener)
 	}
 
 	static class ConversionResult {
@@ -96,6 +96,15 @@ class JavaConverter {
 			return result
 		}
 
+	}
+
+	/**
+	 * @param fallBackStrategy - if <code>true</code> JavaConverter uses a strategy which is less error prone,<br>
+	 *  but may produces more noisy syntax.
+	 */
+	def JavaConverter useRobustSyntax() {
+		this.fallbackConversionStartegy = true
+		return this
 	}
 
 }

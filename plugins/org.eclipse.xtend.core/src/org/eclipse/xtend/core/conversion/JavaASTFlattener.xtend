@@ -122,7 +122,7 @@ class JavaASTFlattener extends ASTVisitor {
 	@Inject extension ASTFlattenerUtils
 
 	List<String> problems = newArrayList
-	Set<Comment> assignedCommens = newHashSet
+	Set<Comment> assignedComments = newHashSet
 
 	/**
 	 * The string buffer into which the serialized representation of the AST is
@@ -133,6 +133,7 @@ class JavaASTFlattener extends ASTVisitor {
 
 	int indentation = 0
 	int javaSourceKind = ASTParser.K_COMPILATION_UNIT
+	boolean fallBackStrategy = false
 
 	/**
 	 * Creates a new AST printer.
@@ -156,8 +157,10 @@ class JavaASTFlattener extends ASTVisitor {
 	def void reset() {
 		this.fBuffer.setLength(0)
 		this.problems = newArrayList()
-		this.assignedCommens = newHashSet()
+		this.assignedComments = newHashSet()
 		this.javaSources = null
+		this.javaSourceKind = ASTParser.K_COMPILATION_UNIT
+		this.indentation = 0
 	}
 
 	/**
@@ -176,7 +179,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	private def boolean notAssigned(Comment comment) {
-		!assignedCommens.contains(comment)
+		!assignedComments.contains(comment)
 	}
 
 	def appendModifieres(ASTNode node, Iterable<IExtendedModifier> ext) {
@@ -323,12 +326,15 @@ class JavaASTFlattener extends ASTVisitor {
 		}
 		appendModifieres(modifiers())
 		if (modifiers().static) {
-			addProblem("Static initialize are not fully supported")
-			appendToBuffer(" final Void static_initializer = {")
-			appendLineWrapToBuffer
-			getBody.accept(this)
-			appendToBuffer("null }")
-			appendLineWrapToBuffer
+			if (fallBackStrategy) {
+				addProblem("Static initialize are not fully supported")
+			} else {
+				appendToBuffer(" final Void static_initializer = {")
+				appendLineWrapToBuffer
+				getBody.accept(this)
+				appendToBuffer("null }")
+				appendLineWrapToBuffer
+			}
 		} else {
 			if (parent instanceof AnonymousClassDeclaration) {
 				addProblem("Initializer is not supported in " + ASTNode.nodeClassForType(parent.nodeType).simpleName)
@@ -420,7 +426,12 @@ class JavaASTFlattener extends ASTVisitor {
 
 	override visit(QualifiedName it) {
 		getQualifier.accept(this)
-		appendToBuffer(".")
+		if (fallBackStrategy && isStaticMemberCall &&
+			!(parent instanceof SimpleType || parent instanceof ImportDeclaration)) {
+			appendToBuffer("::")
+		} else {
+			appendToBuffer(".")
+		}
 		name.accept(this)
 		return false
 	}
@@ -462,8 +473,6 @@ class JavaASTFlattener extends ASTVisitor {
 		if (javadoc != null) {
 			javadoc.accept(this)
 		}
-
-		//FIXME check array case: int i[] =  new int[]{0};
 		fragments.forEach [ VariableDeclarationFragment frag |
 			appendModifieres(modifiers())
 			if (modifiers().filter(Modifier).isPackageVisibility()) {
@@ -623,6 +632,8 @@ class JavaASTFlattener extends ASTVisitor {
 		}
 		if (getBody() != null) {
 			getBody.accept(this)
+		} else {
+			appendLineWrapToBuffer
 		}
 		return false
 	}
@@ -658,9 +669,18 @@ class JavaASTFlattener extends ASTVisitor {
 			if (!method.parameters.empty) {
 				method.parameters.visitAllSeparatedByComma
 				appendToBuffer("|")
+			} else if (fallBackStrategy) {
+				appendToBuffer("|")
 			}
 			method.body.statements.visitAll
 			appendToBuffer("]")
+			if (fallBackStrategy) {
+				appendToBuffer(" as ")
+				if (!node.typeArguments().isEmpty()) {
+					appendTypeParameters(node.typeArguments)
+				}
+				node.getType().accept(this)
+			}
 		} else {
 			appendToBuffer("new ")
 			if (!node.typeArguments().isEmpty()) {
@@ -693,7 +713,7 @@ class JavaASTFlattener extends ASTVisitor {
 			cu.commentList.filter[Comment c|!c.docComment && c.notAssigned].filter[
 				startPosition < node.startPosition + node.length].forEach [
 				accept(this)
-				assignedCommens.add(it)
+				assignedComments.add(it)
 			]
 		}
 		decreaseIndent
@@ -719,7 +739,11 @@ class JavaASTFlattener extends ASTVisitor {
 	override visit(MethodInvocation it) {
 		if (getExpression() != null) {
 			getExpression.accept(this)
-			appendToBuffer(".")
+			if (fallBackStrategy && isStaticMemberCall) {
+				appendToBuffer("::")
+			} else {
+				appendToBuffer(".")
+			}
 		}
 		if (!typeArguments.isEmpty()) {
 			typeArguments.appendTypeParameters
@@ -776,14 +800,18 @@ class JavaASTFlattener extends ASTVisitor {
 
 	override visit(FieldAccess it) {
 		getExpression.accept(this)
-		appendToBuffer(".")
+		if (fallBackStrategy && isStaticMemberCall) {
+			appendToBuffer("::")
+		} else {
+			appendToBuffer(".")
+		}
 		name.accept(this)
 		return false
 	}
 
 	override boolean visit(InfixExpression node) {
-		val stringConcats = countStringConcats(node)
-		if (stringConcats > 0) {
+		val useRichString = node.canConvertToRichText
+		if (useRichString) {
 			val firstEntrance = !(node.parent instanceof InfixExpression)
 			if (firstEntrance) {
 				appendToBuffer("'''")
@@ -794,8 +822,11 @@ class JavaASTFlattener extends ASTVisitor {
 				currExpr.convertToRichString
 				return currExpr
 			]
-			if (firstEntrance)
+			if (firstEntrance) {
 				appendToBuffer("'''")
+
+			//TODO append 'toString' where necessary
+			}
 		} else {
 			node.getLeftOperand().accept(this)
 			appendSpaceToBuffer.append(node.getOperator().toString())
@@ -818,7 +849,7 @@ class JavaASTFlattener extends ASTVisitor {
 			appendToBuffer(expression.richTextValue)
 		} else {
 			val stringConcat = (expression instanceof InfixExpression) &&
-				countStringConcats(expression as InfixExpression) > 0
+				canConvertToRichText(expression as InfixExpression)
 			if(!stringConcat) appendToBuffer("«")
 			expression.accept(this)
 			if(!stringConcat) appendToBuffer("»")
@@ -1064,7 +1095,9 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override boolean visit(TypeLiteral node) {
+		if(fallBackStrategy) appendToBuffer("typeof(")
 		node.getType().accept(this)
+		if(fallBackStrategy) appendToBuffer(")")
 		return false
 	}
 
@@ -1374,11 +1407,13 @@ class JavaASTFlattener extends ASTVisitor {
 		appendModifieres(node, node.modifiers())
 		node.getName().accept(this)
 		if (!node.arguments().isEmpty()) {
+			node.addProblem("Enum constant may not have any arguments")
 			appendToBuffer("(")
 			visitAllSeparatedByComma(node.arguments())
 			appendToBuffer(")")
 		}
 		if (node.getAnonymousClassDeclaration() != null) {
+			node.addProblem("Enum constant may not have any anonymous class declarations")
 			node.getAnonymousClassDeclaration().accept(this)
 		}
 		return false
@@ -1389,10 +1424,14 @@ class JavaASTFlattener extends ASTVisitor {
 			node.getJavadoc().accept(this)
 		}
 		appendModifieres(node, node.modifiers())
+		if (node.modifiers().filter(Modifier).isPackageVisibility()) {
+			appendToBuffer('package ')
+		}
 		appendToBuffer("enum ")
 		node.getName().accept(this)
 		appendSpaceToBuffer
 		if (!node.superInterfaceTypes().isEmpty()) {
+			node.addProblem("Enum may not have a super type")
 			appendToBuffer("implements ")
 			node.superInterfaceTypes().visitAllSeparatedByComma
 			appendSpaceToBuffer
@@ -1403,7 +1442,9 @@ class JavaASTFlattener extends ASTVisitor {
 		node.enumConstants().visitAllSeparatedByComma
 
 		if (!node.bodyDeclarations().isEmpty()) {
-			appendToBuffer("; ")
+			node.addProblem("Enum may not have any body declaration statements")
+			appendToBuffer(";")
+			appendLineWrapToBuffer
 			node.bodyDeclarations().visitAll
 		}
 		decreaseIndent
@@ -1534,7 +1575,7 @@ class JavaASTFlattener extends ASTVisitor {
 			cu.commentList.filter[Comment c|!c.docComment && c.notAssigned].filter[
 				startPosition < node.startPosition].forEach [
 				accept(this)
-				assignedCommens.add(it)
+				assignedComments.add(it)
 			]
 		}
 	}
@@ -1547,4 +1588,11 @@ class JavaASTFlattener extends ASTVisitor {
 		this.javaSources = javaSources
 	}
 
+	/**
+	 * @param fallBackStrategy - if <code>true</code> ASTFlattener uses a strategy which is less error prone,<br>
+	 *  but in fact may produces more noisy syntax.
+	 */
+	def useFallBackStrategy(boolean fallBackStrategy) {
+		this.fallBackStrategy = fallBackStrategy
+	}
 }
