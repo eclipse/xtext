@@ -9,7 +9,6 @@ package org.eclipse.xtend.core.conversion;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Hashtable;
@@ -59,9 +58,11 @@ public class JavaConverter {
   }
   
   @Inject
-  private Provider<JavaASTFlattener> flattenerProvider;
+  private JavaASTFlattener astFlattener;
   
   private String complianceLevel = "1.5";
+  
+  private boolean fallbackConversionStartegy = false;
   
   public JavaConverter.ConversionResult toXtend(final ICompilationUnit cu) {
     try {
@@ -73,12 +74,13 @@ public class JavaConverter {
       parser.setResolveBindings(true);
       parser.setBindingsRecovery(true);
       parser.setSource(cu);
-      final JavaASTFlattener flattener = this.flattenerProvider.get();
+      this.astFlattener.reset();
+      this.astFlattener.useFallBackStrategy(this.fallbackConversionStartegy);
       String _source = cu.getSource();
-      flattener.setJavaSources(_source);
+      this.astFlattener.setJavaSources(_source);
       ASTNode _createAST = parser.createAST(null);
-      _createAST.accept(flattener);
-      final JavaConverter.ConversionResult result = JavaConverter.ConversionResult.create(flattener);
+      _createAST.accept(this.astFlattener);
+      final JavaConverter.ConversionResult result = JavaConverter.ConversionResult.create(this.astFlattener);
       return result;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -115,11 +117,21 @@ public class JavaConverter {
     parser.setUnitName(unitName);
     char[] _charArray = javaSrc.toCharArray();
     parser.setSource(_charArray);
-    final JavaASTFlattener flattener = this.flattenerProvider.get();
-    flattener.setJavaSourceKind(javaSourceKind);
-    flattener.setJavaSources(javaSrc);
+    this.astFlattener.reset();
+    this.astFlattener.useFallBackStrategy(this.fallbackConversionStartegy);
+    this.astFlattener.setJavaSourceKind(javaSourceKind);
+    this.astFlattener.setJavaSources(javaSrc);
     ASTNode _createAST = parser.createAST(null);
-    _createAST.accept(flattener);
-    return JavaConverter.ConversionResult.create(flattener);
+    _createAST.accept(this.astFlattener);
+    return JavaConverter.ConversionResult.create(this.astFlattener);
+  }
+  
+  /**
+   * @param fallBackStrategy - if <code>true</code> JavaConverter uses a strategy which is less error prone,<br>
+   *  but may produces more noisy syntax.
+   */
+  public JavaConverter useRobustSyntax() {
+    this.fallbackConversionStartegy = true;
+    return this;
   }
 }

@@ -21,6 +21,7 @@ import org.eclipse.xtext.mwe.PathTraverser
 import org.junit.Ignore
 import org.junit.Test
 import org.junit.Before
+import org.eclipse.xtend.core.conversion.JavaConverter.ConversionResult
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -47,16 +48,16 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
 		sourceProject = "org.eclipse.xtend.core.tests"
 		targetProject = "test-converter"
 		errorsExpected = 0
-		problemsExpected = 34
+		problemsExpected = 33
 		runConverter
 	}
 
-	@Test  @Ignore
+	@Test @Ignore
 	def void testConvertFilesInXtextTestsProject() throws Exception {
 		sourceProject = "org.eclipse.xtext.tests"
 		targetProject = "org.eclipse.xtext.tests.converted"
-		errorsExpected = 337
-		problemsExpected = 12210
+		errorsExpected = 198
+		problemsExpected = 12173
 		runConverter
 	}
 
@@ -76,35 +77,56 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
 			});
 		var errors = 0
 		var problems = 0
+		var files = 0
+		var filesWithErrorsOrProblems = 0
 		for (URI uri : allResourceUris) {
 			val File file = new File(uri.toFileString());
 			println("Converting: " + file.getAbsolutePath());
 			val String javaCode = Files.toString(file, Charset.defaultCharset());
-			val JavaConverter j2x = javaConverter.get();
-			val xtendResult = j2x.toXtend(file.name, javaCode)
-			problems += xtendResult.problems.size
-			val String xtendCode = xtendResult.xtendCode
+
+			val xtendResult = converToXtend(file.name, javaCode)
+
+			val problemsFound = xtendResult.problems.size
+			var xtendCode = xtendResult.xtendCode
+
 			val javaFileProjRelPath = uri.toFileString().replace(srcProjectRoot.absolutePath, "")
 			var fileName = javaFileProjRelPath + ".xtend"
-			var content = xtendCode
 			try {
 				file(xtendCode, true);
 			} catch (AssertionError error) {
-				if (xtendResult.problems.size != 0) {
+				if (problemsFound != 0) {
 					writeToFile(testProject, javaFileProjRelPath, javaCode)
 					fileName += ".error"
 				} else {
 					System.err.println('''«uri» - «error.message»''')
 					errors++
 				}
+				filesWithErrorsOrProblems++
 			}
-			writeToFile(testProject, fileName, content)
+			problems += problemsFound
+			files++
+			writeToFile(testProject, fileName, xtendCode)
 		}
-		println('''Problems («problems»)''')
+		println('''Files read («files»)''')
+		println('''Files with errors/problems («filesWithErrorsOrProblems»)''')
 		println('''Errors («errors»)''')
+		println('''Problems («problems»)''')
 		println("Done...")
 		assertEquals(problemsExpected, problems)
 		assertEquals(errorsExpected, errors)
+	}
+
+	def ConversionResult converToXtend(String unitName, String javaCode) {
+		val JavaConverter j2x = javaConverter.get();
+		var result = j2x.toXtend(unitName, javaCode)
+		if (result.problems.size == 0) {
+			try {
+				file(result.xtendCode, true);
+			} catch (AssertionError error) {
+				result = j2x.useRobustSyntax.toXtend(unitName, javaCode)
+			}
+		}
+		return result
 	}
 
 	def writeToFile(File parent, String fileName, String content) {
