@@ -9,16 +9,19 @@ package org.eclipse.xtend.core.conversion
 
 import org.eclipse.jdt.core.dom.ASTNode
 import org.eclipse.jdt.core.dom.Annotation
-import org.eclipse.jdt.core.dom.Assignment
 import org.eclipse.jdt.core.dom.Block
+import org.eclipse.jdt.core.dom.ClassInstanceCreation
 import org.eclipse.jdt.core.dom.FieldAccess
 import org.eclipse.jdt.core.dom.FieldDeclaration
+import org.eclipse.jdt.core.dom.IBinding
 import org.eclipse.jdt.core.dom.IExtendedModifier
 import org.eclipse.jdt.core.dom.IMethodBinding
 import org.eclipse.jdt.core.dom.ITypeBinding
 import org.eclipse.jdt.core.dom.InfixExpression
 import org.eclipse.jdt.core.dom.MethodDeclaration
+import org.eclipse.jdt.core.dom.MethodInvocation
 import org.eclipse.jdt.core.dom.Modifier
+import org.eclipse.jdt.core.dom.QualifiedName
 import org.eclipse.jdt.core.dom.ReturnStatement
 import org.eclipse.jdt.core.dom.SimpleName
 import org.eclipse.jdt.core.dom.Statement
@@ -27,7 +30,6 @@ import org.eclipse.jdt.core.dom.TypeDeclaration
 import org.eclipse.jdt.core.dom.TypeDeclarationStatement
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement
-import org.eclipse.jdt.core.dom.ClassInstanceCreation
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -108,6 +110,25 @@ class ASTFlattenerUtils {
 		modifiers.filter(Modifier).exists[isStatic]
 	}
 
+	def boolean isStaticMemberCall(MethodInvocation methInv) {
+		return methInv.resolveMethodBinding.isStaticBinding
+	}
+
+	def boolean isStaticMemberCall(QualifiedName expr) {
+		return expr.resolveBinding.isStaticBinding
+	}
+
+	def boolean isStaticMemberCall(FieldAccess expr) {
+		return expr.resolveFieldBinding.isStaticBinding
+	}
+
+	def private boolean isStaticBinding(IBinding binding) {
+		if (binding != null) {
+			return Modifier.isStatic(binding.modifiers)
+		}
+		return false
+	}
+
 	def boolean isPackageVisibility(Iterable<Modifier> modifier) {
 		modifier.filter[public || private || protected].empty
 	}
@@ -143,32 +164,43 @@ class ASTFlattenerUtils {
 		(node.parent != null) && (!(node.parent instanceof Statement) || (node.parent instanceof ReturnStatement))
 	}
 
-	def int countStringConcats(InfixExpression node) {
-		var concats = 0
-		if (node.getOperator() == InfixExpression.Operator.PLUS) {
-			if (node.getLeftOperand() instanceof StringLiteral)
-				concats++
-			else if (node.getLeftOperand() instanceof InfixExpression)
-				concats = concats + countStringConcats(node.getLeftOperand() as InfixExpression)
-			if (node.getRightOperand() instanceof StringLiteral)
-				concats++
-			else if (node.getRightOperand() instanceof InfixExpression)
-				concats = concats + countStringConcats(node.getRightOperand() as InfixExpression)
-			concats = concats + node.extendedOperands().filter[e|e instanceof StringLiteral].size
+	def boolean canConvertToRichText(InfixExpression node) {
+		val nodes = node.collectCompatibleNodes()
+		return !nodes.empty && nodes.forall[canTranslate]
+	}
+
+	def private Iterable<StringLiteral> collectCompatibleNodes(InfixExpression node) {
+		val strings = newArrayList()
+		if (node.getOperator() != InfixExpression.Operator.PLUS) {
+			return strings
 		}
-		return concats
+		val left = node.leftOperand
+		if (left instanceof StringLiteral) {
+			strings.add(left)
+		} else if (left instanceof InfixExpression) {
+			strings.addAll(collectCompatibleNodes(left))
+		}
+
+		val right = node.rightOperand
+		if (right instanceof StringLiteral) {
+			strings.add(right)
+		} else if (right instanceof InfixExpression) {
+			strings.addAll(collectCompatibleNodes(right))
+		}
+		strings.addAll(node.extendedOperands().filter(StringLiteral))
+		return strings
+	}
+
+	def private boolean canTranslate(StringLiteral literal) {
+		val value = literal.escapedValue
+		return !(value.contains("«") || value.contains("»") || value.contains("'''"))
 	}
 
 	def richTextValue(StringLiteral literal) {
-		val value = literal.literalValue
-
-		// some one may use opening « and closing » in different string literals 
-		var result = value.replaceAll("«", "«\"«\"» ")
-		result = result.replaceAll("((?!\").)(»)", "$1«\"$2\"»")
-		result = result.replaceAll("(''')", "«\"$1\"»")
-		if (result.endsWith("'")) {
-			result = result.concat("«»")
+		var value = literal.literalValue
+		if (value.endsWith("'")) {
+			value = value.concat("«»")
 		}
-		return result
+		return value
 	}
 }

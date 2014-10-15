@@ -55,8 +55,8 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
 	def void testConvertFilesInXtextTestsProject() throws Exception {
 		sourceProject = "org.eclipse.xtext.tests"
 		targetProject = "org.eclipse.xtext.tests.converted"
-		errorsExpected = 337
-		problemsExpected = 12210
+		errorsExpected = 207
+		problemsExpected = 12283
 		runConverter
 	}
 
@@ -76,13 +76,16 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
 			});
 		var errors = 0
 		var problems = 0
+		var files =0
+		var filesWithErrorsOrProblems =0
 		for (URI uri : allResourceUris) {
 			val File file = new File(uri.toFileString());
 			println("Converting: " + file.getAbsolutePath());
 			val String javaCode = Files.toString(file, Charset.defaultCharset());
 			val JavaConverter j2x = javaConverter.get();
 			val xtendResult = j2x.toXtend(file.name, javaCode)
-			problems += xtendResult.problems.size
+			val problemsFound = xtendResult.problems.size
+			problems += problemsFound
 			val String xtendCode = xtendResult.xtendCode
 			val javaFileProjRelPath = uri.toFileString().replace(srcProjectRoot.absolutePath, "")
 			var fileName = javaFileProjRelPath + ".xtend"
@@ -90,18 +93,22 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
 			try {
 				file(xtendCode, true);
 			} catch (AssertionError error) {
-				if (xtendResult.problems.size != 0) {
+				if (problemsFound != 0) {
 					writeToFile(testProject, javaFileProjRelPath, javaCode)
 					fileName += ".error"
 				} else {
 					System.err.println('''«uri» - «error.message»''')
 					errors++
 				}
+				filesWithErrorsOrProblems++
 			}
+			files++
 			writeToFile(testProject, fileName, content)
 		}
-		println('''Problems («problems»)''')
+		println('''Files read («files»)''')
+		println('''Files with errors/problems («filesWithErrorsOrProblems»)''')
 		println('''Errors («errors»)''')
+		println('''Problems («problems»)''')
 		println("Done...")
 		assertEquals(problemsExpected, problems)
 		assertEquals(errorsExpected, errors)
