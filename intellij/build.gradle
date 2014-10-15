@@ -1,6 +1,6 @@
 apply from: 'prepareIntellij.gradle'
 
-subprojects {
+configure(subprojects.findAll{p->p.name !='intellij-dependencies'}) {
 	apply plugin: 'java'
 	
 	repositories {

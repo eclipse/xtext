@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import java.math.BigInteger;
+
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 import com.google.common.annotations.GwtCompatible;

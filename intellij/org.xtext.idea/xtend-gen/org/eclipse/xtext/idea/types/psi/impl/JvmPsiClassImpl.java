@@ -261,7 +261,8 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
                 it.<Object>putUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY, p);
               }
             };
-            ObjectExtensions.<LightParameter>operator_doubleArrow(_lightParameter, _function);
+            LightParameter _doubleArrow = ObjectExtensions.<LightParameter>operator_doubleArrow(_lightParameter, _function);
+            it.addParameter(_doubleArrow);
           }
         };
         IterableExtensions.<JvmFormalParameter>forEach(_parameters, _function);

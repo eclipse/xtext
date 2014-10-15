@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="xtend-gen"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="src-gen"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/intellij-dependencies"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/org.xtext.idea"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.xtext.idea.example.entities"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
