@@ -26,6 +26,8 @@ import org.junit.Before
 import org.junit.Test
 
 import static org.eclipse.xtext.common.types.JvmVisibility.*
+import org.eclipse.xtend.core.xtend.XtendEnum
+import org.eclipse.xtend.core.xtend.XtendEnumLiteral
 
 class JavaConverterTest extends AbstractXtendTestCase {
 	@Inject Provider<JavaConverter> javaConverterProvider
@@ -110,35 +112,6 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		assertEquals(PUBLIC, interfaze.field(0).visibility)
 		assertEquals(PUBLIC, interfaze.field(1).visibility)
 		assertEquals(PUBLIC, interfaze.field(2).visibility)
-	}
-
-	def XtendField field(XtendTypeDeclaration typeDecl, int i) {
-		typeDecl.members.get(i) as XtendField
-	}
-
-	def XtendFunction method(XtendTypeDeclaration typeDecl, int i) {
-		typeDecl.members.get(i) as XtendFunction
-	}
-
-	def private void checkVisibility(XtendClass xtendClazz) {
-
-		assertEquals("Simple fields count", 4, xtendClazz.getMembers().size())
-		var XtendField xtendMember = xtendClazz.field(0)
-		assertEquals("priv", xtendMember.getName())
-		assertEquals("field PRIVATE visibility", PRIVATE, xtendMember.getVisibility())
-		assertEquals("String", xtendMember.getType().getSimpleName())
-		xtendMember = xtendClazz.field(1)
-		assertEquals("pub", xtendMember.getName())
-		assertEquals("field public visibility", PUBLIC, xtendMember.getVisibility())
-		assertEquals("String", xtendMember.getType().getSimpleName())
-		xtendMember = xtendClazz.field(2)
-		assertEquals("prot", xtendMember.getName())
-		assertEquals("field PROTECTED visibility", PROTECTED, xtendMember.getVisibility())
-		assertEquals("String", xtendMember.getType().getSimpleName())
-		xtendMember = xtendClazz.field(3)
-		assertEquals("def", xtendMember.getName())
-		assertEquals("field DEFAULT visibility", DEFAULT, xtendMember.getVisibility())
-		assertEquals("String", xtendMember.getType().getSimpleName())
 	}
 
 	@Test def void testOverrideMethodeDeclarationCase() throws Exception {
@@ -398,6 +371,31 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		assertEquals("ACTION_EVENT_MASK", xFeatureCall.getFeature().getSimpleName())
 	}
 
+	@Test def void testStaticAccessCase() throws Exception {
+		var XtendClass xtendClazz = toValidXtendClass(
+			'''import org.eclipse.emf.common.util.URI
+
+				public class Test2 {
+					
+				 URI getURI(){
+				 	int i = URI.FRAGMENT_FIRST_SEPARATOR;
+				 	if(URI.FRAGMENT_FIRST_SEPARATOR==0) return null;
+					return URI.createURI("myURI")
+				}
+			}''')
+		var xtendMember = xtendClazz.method(0)
+		assertEquals("getURI", xtendMember.getName())
+	}
+
+	@Test def void testStaticAccessCase2() throws Exception {
+		var XtendClass xtendClazz = toValidXtendClass(
+			'''
+			import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+			import org.eclipse.emf.ecore.impl.MinimalEObjectImpl.Container;
+			public class Test extends MinimalEObjectImpl.Container{}''')
+		assertNotNull(xtendClazz)
+	}
+
 	@Test def void testInnerClassCase() throws Exception {
 
 		var ConversionResult conversionResult = j2x.toXtend("Clazz",
@@ -448,6 +446,50 @@ class JavaConverterTest extends AbstractXtendTestCase {
 
 		var XtendClass clazz = toValidXtendClass("public class Clazz { public Clazz(){}}")
 		assertEquals(PUBLIC, (clazz.getMembers().get(0) as XtendConstructor).getVisibility())
+	}
+
+	@Test def void testEnumCase() throws Exception {
+		var enum = toValidXtendEnum('public enum MyEnum { NEW,OLD }')
+		assertEquals(PUBLIC, (enum.getMembers().get(0) as XtendEnumLiteral).getVisibility())
+		assertEquals(PUBLIC, (enum.getMembers().get(1) as XtendEnumLiteral).getVisibility())
+	}
+
+	@Test def void testEnumCase1() throws Exception {
+		var enum = toValidXtendClass(
+			'public class MyClazz{
+	 			enum MyEnum { NEW }
+			}')
+		assertEquals(DEFAULT, (enum.getMembers().get(0) as XtendEnum).getVisibility())
+	}
+
+	@Test def void testEnumNotSupportedCase() throws Exception {
+		var enum = j2x.toXtend("MyEnum",
+			'public enum MyEnum {
+				NEW(1), OLD(2);
+				private MyEnum(int value) {}
+			}
+			')
+
+		assertEquals(3, enum.problems.size)
+	}
+
+	@Test def void testEnumNotSupportedCase2() throws Exception {
+		var enum = j2x.toXtend("MyEnum",
+			'public enum MyEnum  implements Enumerator {
+				NEW
+			}
+			')
+
+		assertEquals(1, enum.problems.size)
+	}
+
+	@Test def void testEnumNotSupportedCase3() throws Exception {
+		var enum = j2x.toXtend("MyClazz",
+			'public class MyClazz{
+	 			enum MyEnum implements Enumerator{ NEW }
+			}
+			')
+		assertEquals(1, enum.problems.size)
 	}
 
 	@Test def void testArrayAccessCase() throws Exception {
@@ -611,6 +653,19 @@ class JavaConverterTest extends AbstractXtendTestCase {
 			classBodyDeclToXtend('''static String a = "first line\n"+"second line\n"+"third line\n"+"fourth line";'''))
 	}
 
+	@Test def void testRichStringCase4() throws Exception {
+		assertEquals(
+			"public String someVar=\".\"
+public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError''').replace(Character.valueOf('.').charValue, Character.valueOf('/').charValue)».xtexterror'''",
+			classBodyDeclToXtend(
+				'''
+					public String someVar=".";
+					public String loadingURI = "classpath:/"
+						+ (someVar + "LoadingResourceWithError").replace('.', '/')
+						+ ".xtexterror";
+				'''))
+	}
+
 	@Test def void testRichStringSpecialCase() throws Exception {
 
 		var XtendClass clazz = toValidXtendClass(
@@ -618,30 +673,23 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		assertNotNull(clazz)
 		var XtendField xtendMember = clazz.getMembers().get(0) as XtendField
 		assertEquals("richTxt", xtendMember.getName())
-		assertTrue(xtendMember.getInitialValue() instanceof RichString)
-		assertEquals("package String richTxt='''a«\"'''\"» no «\"«\"» 'foo'.length«\"»\"» side-effect «\"'''\"»'''",
-			classBodyDeclToXtend("String richTxt = \"a\" + \"''' no «'foo'.length» side-effect '''\";"))
+		assertFalse(xtendMember.getInitialValue() instanceof RichString)
 	}
 
 	@Test def void testRichStringSpecialCase2() throws Exception {
 		var clazz = toValidXtendClass(
-			"class Z { String richTxt = \"test\" + \"''' «FOR a: '123'.toCharArray SEPARATOR ',\\n  \\t'»\\n" +
-				"      a\\n" + " «ENDFOR»'''\";}")
+			"class Z { String richTxt = \"test\" + \"'''«FOR a: '123'.toCharArray SEPARATOR ',\\n  \\t'»\\n" + "a\\n" +
+				"«ENDFOR»'''\";}")
 		assertNotNull(clazz)
 		var XtendField xtendMember = clazz.getMembers().get(0) as XtendField
 		assertEquals("richTxt", xtendMember.getName())
-		assertTrue(xtendMember.getInitialValue() instanceof RichString)
-		assertEquals(
-			"package String richTxt='''test«\"'''\"» «\"«\"» FOR a: '123'.toCharArray SEPARATOR ',\n  \t'«\"»\"»\n      a\n «\"«\"» ENDFOR«\"»\"»«\"'''\"»'''",
-			classBodyDeclToXtend(
-				"String richTxt = \"test\" + \"''' «FOR a: '123'.toCharArray SEPARATOR ',\\n  \\t'»\\n" + "      a\\n" +
-					" «ENDFOR»'''\";"))
+		assertFalse(xtendMember.getInitialValue() instanceof RichString)
 	}
 
 	@Test def void testRichStringSpecialCase3() throws Exception {
 
 		var XtendClass clazz = toValidXtendClass(
-			"class Z { String richTxt = \"x(p1)} def dispatch x(int s) {'int'} def dispatch x(boolean s)\"+\" {'boolean'} def dispatch x(double s) {'double'\";}")
+			"class Z {String richTxt = \"x(p1)} def dispatch x(int s) {'int'} def dispatch x(boolean s)\"+\" {'boolean'} def dispatch x(double s) {'double'\";}")
 		assertNotNull(clazz)
 		var XtendField xtendMember = clazz.getMembers().get(0) as XtendField
 		assertEquals("richTxt", xtendMember.getName())
@@ -676,7 +724,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 						}
 				};
 			}''')
-			
+
 		assertEquals(result.problems.size, 1)
 		assertTrue(result.problems.get(0).startsWith("Initializer is not supported in AnonymousClassDeclaration"))
 	}
@@ -801,6 +849,10 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		return toValidTypeDeclaration("Clazz", javaCode) as XtendClass
 	}
 
+	def private XtendEnum toValidXtendEnum(String javaCode) throws Exception {
+		return toValidTypeDeclaration("EnumClazz", javaCode) as XtendEnum
+	}
+
 	def private XtendTypeDeclaration toValidTypeDeclaration(String unitName, String javaCode) throws Exception {
 		var XtendFile file = toValidFile(unitName, javaCode)
 		var XtendTypeDeclaration typeDeclaration = file.getXtendTypes().get(0)
@@ -829,6 +881,35 @@ class JavaConverterTest extends AbstractXtendTestCase {
 
 	def private String toXtendCode(String javaCode) throws Exception {
 		return j2x.toXtend("Temp", javaCode).getXtendCode()
+	}
+
+	def XtendField field(XtendTypeDeclaration typeDecl, int i) {
+		typeDecl.members.get(i) as XtendField
+	}
+
+	def XtendFunction method(XtendTypeDeclaration typeDecl, int i) {
+		typeDecl.members.get(i) as XtendFunction
+	}
+
+	def private void checkVisibility(XtendClass xtendClazz) {
+
+		assertEquals("Simple fields count", 4, xtendClazz.getMembers().size())
+		var XtendField xtendMember = xtendClazz.field(0)
+		assertEquals("priv", xtendMember.getName())
+		assertEquals("field PRIVATE visibility", PRIVATE, xtendMember.getVisibility())
+		assertEquals("String", xtendMember.getType().getSimpleName())
+		xtendMember = xtendClazz.field(1)
+		assertEquals("pub", xtendMember.getName())
+		assertEquals("field public visibility", PUBLIC, xtendMember.getVisibility())
+		assertEquals("String", xtendMember.getType().getSimpleName())
+		xtendMember = xtendClazz.field(2)
+		assertEquals("prot", xtendMember.getName())
+		assertEquals("field PROTECTED visibility", PROTECTED, xtendMember.getVisibility())
+		assertEquals("String", xtendMember.getType().getSimpleName())
+		xtendMember = xtendClazz.field(3)
+		assertEquals("def", xtendMember.getName())
+		assertEquals("field DEFAULT visibility", DEFAULT, xtendMember.getVisibility())
+		assertEquals("String", xtendMember.getType().getSimpleName())
 	}
 
 }

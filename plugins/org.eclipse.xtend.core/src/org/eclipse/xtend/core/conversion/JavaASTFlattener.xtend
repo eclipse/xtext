@@ -420,7 +420,11 @@ class JavaASTFlattener extends ASTVisitor {
 
 	override visit(QualifiedName it) {
 		getQualifier.accept(this)
-		appendToBuffer(".")
+		if (isStaticMemberCall && !(parent instanceof SimpleType ||parent instanceof ImportDeclaration)) {
+			appendToBuffer("::")
+		} else {
+			appendToBuffer(".")
+		}
 		name.accept(this)
 		return false
 	}
@@ -462,8 +466,6 @@ class JavaASTFlattener extends ASTVisitor {
 		if (javadoc != null) {
 			javadoc.accept(this)
 		}
-
-		//FIXME check array case: int i[] =  new int[]{0};
 		fragments.forEach [ VariableDeclarationFragment frag |
 			appendModifieres(modifiers())
 			if (modifiers().filter(Modifier).isPackageVisibility()) {
@@ -623,6 +625,8 @@ class JavaASTFlattener extends ASTVisitor {
 		}
 		if (getBody() != null) {
 			getBody.accept(this)
+		} else {
+			appendLineWrapToBuffer
 		}
 		return false
 	}
@@ -719,7 +723,11 @@ class JavaASTFlattener extends ASTVisitor {
 	override visit(MethodInvocation it) {
 		if (getExpression() != null) {
 			getExpression.accept(this)
-			appendToBuffer(".")
+			if (isStaticMemberCall) {
+				appendToBuffer("::")
+			} else {
+				appendToBuffer(".")
+			}
 		}
 		if (!typeArguments.isEmpty()) {
 			typeArguments.appendTypeParameters
@@ -776,14 +784,18 @@ class JavaASTFlattener extends ASTVisitor {
 
 	override visit(FieldAccess it) {
 		getExpression.accept(this)
-		appendToBuffer(".")
+		if (isStaticMemberCall) {
+			appendToBuffer("::")
+		} else {
+			appendToBuffer(".")
+		}
 		name.accept(this)
 		return false
 	}
 
 	override boolean visit(InfixExpression node) {
-		val stringConcats = countStringConcats(node)
-		if (stringConcats > 0) {
+		val useRichString = node.canConvertToRichText
+		if (useRichString) {
 			val firstEntrance = !(node.parent instanceof InfixExpression)
 			if (firstEntrance) {
 				appendToBuffer("'''")
@@ -794,8 +806,11 @@ class JavaASTFlattener extends ASTVisitor {
 				currExpr.convertToRichString
 				return currExpr
 			]
-			if (firstEntrance)
+			if (firstEntrance) {
 				appendToBuffer("'''")
+
+			//TODO append 'toString' where necessary
+			}
 		} else {
 			node.getLeftOperand().accept(this)
 			appendSpaceToBuffer.append(node.getOperator().toString())
@@ -818,7 +833,7 @@ class JavaASTFlattener extends ASTVisitor {
 			appendToBuffer(expression.richTextValue)
 		} else {
 			val stringConcat = (expression instanceof InfixExpression) &&
-				countStringConcats(expression as InfixExpression) > 0
+				canConvertToRichText(expression as InfixExpression)
 			if(!stringConcat) appendToBuffer("«")
 			expression.accept(this)
 			if(!stringConcat) appendToBuffer("»")
@@ -1374,11 +1389,13 @@ class JavaASTFlattener extends ASTVisitor {
 		appendModifieres(node, node.modifiers())
 		node.getName().accept(this)
 		if (!node.arguments().isEmpty()) {
+			node.addProblem("Enum constant may not have any arguments")
 			appendToBuffer("(")
 			visitAllSeparatedByComma(node.arguments())
 			appendToBuffer(")")
 		}
 		if (node.getAnonymousClassDeclaration() != null) {
+			node.addProblem("Enum constant may not have any anonymous class declarations")
 			node.getAnonymousClassDeclaration().accept(this)
 		}
 		return false
@@ -1389,10 +1406,14 @@ class JavaASTFlattener extends ASTVisitor {
 			node.getJavadoc().accept(this)
 		}
 		appendModifieres(node, node.modifiers())
+		if (node.modifiers().filter(Modifier).isPackageVisibility()) {
+			appendToBuffer('package ')
+		}
 		appendToBuffer("enum ")
 		node.getName().accept(this)
 		appendSpaceToBuffer
 		if (!node.superInterfaceTypes().isEmpty()) {
+			node.addProblem("Enum may not have a super type")
 			appendToBuffer("implements ")
 			node.superInterfaceTypes().visitAllSeparatedByComma
 			appendSpaceToBuffer
@@ -1403,7 +1424,9 @@ class JavaASTFlattener extends ASTVisitor {
 		node.enumConstants().visitAllSeparatedByComma
 
 		if (!node.bodyDeclarations().isEmpty()) {
-			appendToBuffer("; ")
+			node.addProblem("Enum may not have any body declaration statements")
+			appendToBuffer(";")
+			appendLineWrapToBuffer
 			node.bodyDeclarations().visitAll
 		}
 		decreaseIndent
