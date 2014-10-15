@@ -1,0 +1,36 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Idea Entity Example
+Bundle-Vendor: Eclipse Xtext
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: org.eclipse.xtext.idea.example.entities; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext;visibility:=reexport,
+ org.eclipse.xtext.xbase;resolution:=optional;visibility:=reexport,
+ org.eclipse.xtext.generator;resolution:=optional,
+ org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional,
+ org.eclipse.emf.codegen.ecore;resolution:=optional,
+ org.eclipse.emf.mwe.utils;resolution:=optional,
+ org.eclipse.emf.mwe2.launch;resolution:=optional,
+ org.eclipse.xtext.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.common,
+ org.eclipse.xtext.xbase.lib,
+ org.antlr.runtime,
+ org.eclipse.xtext.common.types,
+ org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional,
+ org.xtext.idea
+Import-Package: org.apache.log4j
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.eclipse.xtext.idea.example.entities,
+ org.eclipse.xtext.idea.example.entities.services,
+ org.eclipse.xtext.idea.example.entities.domainmodel,
+ org.eclipse.xtext.idea.example.entities.domainmodel.impl,
+ org.eclipse.xtext.idea.example.entities.domainmodel.util,
+ org.eclipse.xtext.idea.example.entities.serializer,
+ org.eclipse.xtext.idea.example.entities.parser.antlr,
+ org.eclipse.xtext.idea.example.entities.parser.antlr.internal,
+ org.eclipse.xtext.idea.example.entities.validation,
+ org.eclipse.xtext.idea.example.entities.formatting,
+ org.eclipse.xtext.idea.example.entities.jvmmodel
+
