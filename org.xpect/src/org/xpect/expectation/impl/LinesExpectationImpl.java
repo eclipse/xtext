@@ -31,14 +31,10 @@ public class LinesExpectationImpl extends AbstractExpectation implements ILinesE
 	}
 
 	public void assertEquals(Iterable<?> actual) {
-		assertEquals("", actual, false);
+		assertEquals("", actual);
 	}
 
 	public void assertEquals(String message, Iterable<?> actual) {
-		assertEquals(message, actual, false);
-	}
-
-	protected void assertEquals(String message, Iterable<?> actual, boolean forceFail) {
 		Assert.assertNotNull(actual);
 
 		ExpectationCollection exp = new ExpectationCollection();
@@ -81,10 +77,6 @@ public class LinesExpectationImpl extends AbstractExpectation implements ILinesE
 	@Creates
 	public ILinesExpectation create() {
 		return this;
-	}
-
-	public void fail(String message, Iterable<?> actual) {
-		assertEquals(message, actual, true);
 	}
 
 	public LinesExpectation getAnnotation() {
