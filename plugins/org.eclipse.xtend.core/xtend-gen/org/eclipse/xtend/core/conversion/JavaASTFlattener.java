@@ -1284,6 +1284,9 @@ public class JavaASTFlattener extends ASTVisitor {
       IterableExtensions.<Expression, Expression>fold(_extendedOperands, _rightOperand_1, _function);
       if (firstEntrance) {
         this.appendToBuffer("\'\'\'");
+        if (this.fallBackStrategy) {
+          this.appendToBuffer(".toString");
+        }
       }
     } else {
       Expression _leftOperand_1 = node.getLeftOperand();
@@ -2012,8 +2015,16 @@ public class JavaASTFlattener extends ASTVisitor {
     ArrayInitializer _initializer = node.getInitializer();
     boolean _notEquals = (!Objects.equal(_initializer, null));
     if (_notEquals) {
+      if (this.fallBackStrategy) {
+        this.appendToBuffer("(");
+      }
       ArrayInitializer _initializer_1 = node.getInitializer();
       _initializer_1.accept(this);
+      if (this.fallBackStrategy) {
+        this.appendToBuffer(" as ");
+        at.accept(this);
+        this.appendToBuffer(")");
+      }
     } else {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("new");
@@ -2118,6 +2129,7 @@ public class JavaASTFlattener extends ASTVisitor {
   @Override
   public boolean visit(final ContinueStatement node) {
     this.appendToBuffer("/* FIXME Unsupported continue statement: ");
+    this.addProblem(node, "Continue statement is not supported");
     SimpleName _label = node.getLabel();
     boolean _notEquals = (!Objects.equal(_label, null));
     if (_notEquals) {

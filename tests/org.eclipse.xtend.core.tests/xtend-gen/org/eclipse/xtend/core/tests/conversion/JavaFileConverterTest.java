@@ -66,7 +66,7 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
   public void testConvertFilesInXtextTestsProject() throws Exception {
     this.sourceProject = "org.eclipse.xtext.tests";
     this.targetProject = "org.eclipse.xtext.tests.converted";
-    this.errorsExpected = 198;
+    this.errorsExpected = 200;
     this.problemsExpected = 12173;
     this.runConverter();
   }
@@ -120,12 +120,13 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
           String _absolutePath_1 = file.getAbsolutePath();
           String _plus_1 = ("Converting: " + _absolutePath_1);
           InputOutput.<String>println(_plus_1);
+          boolean compileError = false;
           Charset _defaultCharset = Charset.defaultCharset();
           final String javaCode = Files.toString(file, _defaultCharset);
           String _name = file.getName();
           final JavaConverter.ConversionResult xtendResult = this.converToXtend(_name, javaCode);
           Iterable<String> _problems = xtendResult.getProblems();
-          final int problemsFound = IterableExtensions.size(_problems);
+          final int knownProblemsFound = IterableExtensions.size(_problems);
           String xtendCode = xtendResult.getXtendCode();
           String _fileString_1 = uri.toFileString();
           String _absolutePath_2 = srcProjectRoot.getAbsolutePath();
@@ -136,48 +137,51 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
           } catch (final Throwable _t) {
             if (_t instanceof AssertionError) {
               final AssertionError error = (AssertionError)_t;
-              if ((problemsFound != 0)) {
-                this.writeToFile(testProject, javaFileProjRelPath, javaCode);
-                String _fileName = fileName;
-                fileName = (_fileName + ".error");
-              } else {
-                StringConcatenation _builder = new StringConcatenation();
-                _builder.append(uri, "");
-                _builder.append(" - ");
-                String _message = error.getMessage();
-                _builder.append(_message, "");
-                System.err.println(_builder);
-                errors++;
-              }
-              filesWithErrorsOrProblems++;
+              compileError = true;
+              StringConcatenation _builder = new StringConcatenation();
+              _builder.append(uri, "");
+              _builder.append(" - ");
+              String _message = error.getMessage();
+              _builder.append(_message, "");
+              System.err.println(_builder);
             } else {
               throw Exceptions.sneakyThrow(_t);
             }
           }
+          if (((knownProblemsFound != 0) || compileError)) {
+            filesWithErrorsOrProblems++;
+            if ((knownProblemsFound != 0)) {
+              this.writeToFile(testProject, javaFileProjRelPath, javaCode);
+              String _fileName = fileName;
+              fileName = (_fileName + ".error");
+            } else {
+              errors++;
+            }
+          }
           int _problems_1 = problems;
-          problems = (_problems_1 + problemsFound);
+          problems = (_problems_1 + knownProblemsFound);
           files++;
           this.writeToFile(testProject, fileName, xtendCode);
         }
       }
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("Files read (");
-      _builder.append(files, "");
+      _builder.append("Not covered Errors (");
+      _builder.append(errors, "");
       _builder.append(")");
       InputOutput.<String>println(_builder.toString());
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("Files with errors/problems (");
-      _builder_1.append(filesWithErrorsOrProblems, "");
+      _builder_1.append("Known Problems (");
+      _builder_1.append(problems, "");
       _builder_1.append(")");
       InputOutput.<String>println(_builder_1.toString());
       StringConcatenation _builder_2 = new StringConcatenation();
-      _builder_2.append("Errors (");
-      _builder_2.append(errors, "");
+      _builder_2.append("Files read (");
+      _builder_2.append(files, "");
       _builder_2.append(")");
       InputOutput.<String>println(_builder_2.toString());
       StringConcatenation _builder_3 = new StringConcatenation();
-      _builder_3.append("Problems (");
-      _builder_3.append(problems, "");
+      _builder_3.append("Files with errors/problems (");
+      _builder_3.append(filesWithErrorsOrProblems, "");
       _builder_3.append(")");
       InputOutput.<String>println(_builder_3.toString());
       InputOutput.<String>println("Done...");

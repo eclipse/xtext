@@ -369,7 +369,6 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		assertEquals("ACTION_EVENT_MASK", xFeatureCall.getFeature().getSimpleName())
 	}
 
-	@Ignore
 	@Test def void testStaticAccessCase() throws Exception {
 		j2x.useRobustSyntax
 		var XtendClass xtendClazz = toValidXtendClass(
@@ -531,6 +530,13 @@ class JavaConverterTest extends AbstractXtendTestCase {
 				Class<?>[] argTypes = new Class[arr.length];
 			}''')
 		assertNotNull(clazz)
+	}
+
+	@Test def void testArrayCreationCase2() throws Exception {
+		j2x.useRobustSyntax
+		var xtendCode = classBodyDeclToXtend(
+			'private List<String> l=Arrays.asList(new String[] { "AType", "RootRule" });')
+		assertEquals('List<String> l=Arrays.asList((#["AType", "RootRule"] as String[]))', xtendCode)
 	}
 
 	@Test def void testArrayShiftDimensionCase() throws Exception {
