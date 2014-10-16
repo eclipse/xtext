@@ -1,0 +1,25 @@
+/* XPECT_SETUP org.eclipse.xtext.example.domainmodel.xpect.tests.validation.DMValidationTest 
+	IgnoredIssues {
+		LinkingAndValidationIssues {}
+	}
+END_SETUP */
+
+package pkg1 {
+	
+	// there should not be any (filtered) issues in the next line
+	// XPECT noIssues
+	entity MyEntity {
+		
+		op calc():void {
+			val x = 1
+			
+			x = 2 // this is a validation error, but we ignore it
+		}
+		
+		Prop1:String Prop2:int // a warning, but we ignore it
+	}
+}
+
+// XPECT errors --> "extraneous input 'foobar' expecting EOF" at "foobar"
+foobar
+

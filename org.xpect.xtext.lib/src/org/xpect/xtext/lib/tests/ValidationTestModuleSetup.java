@@ -1,6 +1,5 @@
 package org.xpect.xtext.lib.tests;
 
-import static com.google.common.collect.Iterables.addAll;
 import static com.google.common.collect.Iterables.filter;
 
 import java.lang.annotation.Retention;
@@ -105,17 +104,18 @@ public class ValidationTestModuleSetup extends AbstractDelegatingModule {
 				XtextResource xresource = (XtextResource) resource;
 				List<Issue> issuesFromDelegate = validateDelegate(resource, mode, indicator);
 				if (issuesFromDelegate != null && !issuesFromDelegate.isEmpty()) {
-					Set<Issue> issues = Sets.newLinkedHashSet(issuesFromDelegate);
 					XpectFile xpectFile = XpectFileAccess.getXpectFile(resource);
+					ValidationTestConfig config = new ValidationTestConfig(xpectFile.<ValidationTestConfig> createSetupInitializer());
+					Set<Issue> issues = Sets.newLinkedHashSet(issuesFromDelegate);
 					Set<Issue> matched = Sets.newHashSet();
 					for (XpectInvocation inv : xpectFile.getInvocations()) {
 						IRegion region = new NextLineProvider(xresource, inv).getNextLine();
-						Iterable<Issue> selected = filter(issues, new IssueOverlapsRangePredicate(region, getExpectedSeverity(inv)));
+						List<Issue> selected = Lists.newArrayList(filter(issues, new IssueOverlapsRangePredicate(region, getExpectedSeverity(inv))));
 						result.putAll(region, selected);
-						addAll(matched, selected);
+						matched.addAll(selected);
 					}
 					issues.removeAll(matched);
-					result.putAll(UNMATCHED, issues);
+					result.putAll(UNMATCHED, filter(issues, config.getIgnoreFilter()));
 				}
 				result.putAll(UNMATCHED, validateXpect(xresource, mode, indicator));
 			} else

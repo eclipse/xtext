@@ -21,6 +21,8 @@ import org.xpect.XpectJavaModel;
 import org.xpect.XpectTest;
 import org.xpect.registry.ITestSuiteInfo;
 import org.xpect.registry.LazyClass;
+import org.xpect.setup.ISetupInitializer;
+import org.xpect.setup.SetupInitializer;
 import org.xpect.util.XpectJavaModelManager;
 
 import com.google.common.collect.Iterables;
@@ -35,6 +37,14 @@ public class XpectFileImplCustom extends XpectFileImpl {
 	private Map<String, XpectInvocation> id2invocation;
 
 	private XpectJavaModel javaModel;
+
+	@Override
+	public <T> ISetupInitializer<T> createSetupInitializer() {
+		XpectTest test = getTest();
+		if (test != null && !test.eIsProxy())
+			return new SetupInitializer<T>(test);
+		return new ISetupInitializer.Null<T>();
+	}
 
 	private XpectJavaModel findJavaModel() {
 		XtextResource resource = (XtextResource) eResource();

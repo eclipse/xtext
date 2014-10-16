@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.xpect.util;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -30,7 +31,7 @@ public class IssueVisualizer {
 		return result.toString();
 	}
 
-	public String visualize(String documentString, List<Issue> issues) {
+	public String visualize(String documentString, Collection<Issue> issues) {
 		Text document = new Text(documentString);
 		@SuppressWarnings("unchecked")
 		List<Issue>[] mapped = new List[document.length()];
