@@ -824,8 +824,9 @@ class JavaASTFlattener extends ASTVisitor {
 			]
 			if (firstEntrance) {
 				appendToBuffer("'''")
-
-			//TODO append 'toString' where necessary
+				if (fallBackStrategy) {
+					appendToBuffer(".toString")
+				}
 			}
 		} else {
 			node.getLeftOperand().accept(this)
@@ -1298,7 +1299,13 @@ class JavaASTFlattener extends ASTVisitor {
 			return false
 		}
 		if (node.getInitializer() != null) {
+			if(fallBackStrategy) appendToBuffer('(')
 			node.getInitializer().accept(this)
+			if (fallBackStrategy) {
+				appendToBuffer(' as ')
+				at.accept(this)
+				appendToBuffer(')')
+			}
 		} else {
 			appendToBuffer(
 				'''new«if (node.type.elementType.isPrimitiveType) {
@@ -1366,6 +1373,7 @@ class JavaASTFlattener extends ASTVisitor {
 
 	@Override override boolean visit(ContinueStatement node) {
 		appendToBuffer("/* FIXME Unsupported continue statement: ")
+		node.addProblem("Continue statement is not supported")
 		if (node.getLabel() != null) {
 			appendSpaceToBuffer
 			node.getLabel().accept(this)

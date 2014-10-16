@@ -56,7 +56,7 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
 	def void testConvertFilesInXtextTestsProject() throws Exception {
 		sourceProject = "org.eclipse.xtext.tests"
 		targetProject = "org.eclipse.xtext.tests.converted"
-		errorsExpected = 198
+		errorsExpected = 200
 		problemsExpected = 12173
 		runConverter
 	}
@@ -82,11 +82,11 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
 		for (URI uri : allResourceUris) {
 			val File file = new File(uri.toFileString());
 			println("Converting: " + file.getAbsolutePath());
+			var compileError = false
 			val String javaCode = Files.toString(file, Charset.defaultCharset());
 
 			val xtendResult = converToXtend(file.name, javaCode)
-
-			val problemsFound = xtendResult.problems.size
+			val knownProblemsFound = xtendResult.problems.size
 			var xtendCode = xtendResult.xtendCode
 
 			val javaFileProjRelPath = uri.toFileString().replace(srcProjectRoot.absolutePath, "")
@@ -94,23 +94,26 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
 			try {
 				file(xtendCode, true);
 			} catch (AssertionError error) {
-				if (problemsFound != 0) {
+				compileError = true
+				System.err.println('''«uri» - «error.message»''')
+			}
+			if (knownProblemsFound != 0 || compileError) {
+				filesWithErrorsOrProblems++
+				if (knownProblemsFound != 0) {
 					writeToFile(testProject, javaFileProjRelPath, javaCode)
 					fileName += ".error"
 				} else {
-					System.err.println('''«uri» - «error.message»''')
 					errors++
 				}
-				filesWithErrorsOrProblems++
 			}
-			problems += problemsFound
+			problems += knownProblemsFound
 			files++
 			writeToFile(testProject, fileName, xtendCode)
 		}
+		println('''Not covered Errors («errors»)''')
+		println('''Known Problems («problems»)''')
 		println('''Files read («files»)''')
 		println('''Files with errors/problems («filesWithErrorsOrProblems»)''')
-		println('''Errors («errors»)''')
-		println('''Problems («problems»)''')
 		println("Done...")
 		assertEquals(problemsExpected, problems)
 		assertEquals(errorsExpected, errors)
