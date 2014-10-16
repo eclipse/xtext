@@ -325,7 +325,7 @@ public class StateContainer {
 				super();
 				this.declaredScope = scope;
 				this.value = value;
-				this.keyType = value.getType().getName();
+				this.keyType = value.getType() == null ? "null" : value.getType().getName();
 				this.keyAnnotation = value.getAnnotatedWith().getSimpleName();
 			}
 
