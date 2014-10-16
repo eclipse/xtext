@@ -201,7 +201,8 @@ public class JvmAnnotationUtil {
 			if (metaAnnotation == null || metaAnnotation.eIsProxy())
 				continue;
 			Annotation param = getJavaAnnotation(ref);
-			result.add(param);
+			if (param != null)
+				result.add(param);
 		}
 		return ImmutableList.copyOf(result);
 	}
