@@ -108,12 +108,13 @@ public class ValidationTestModuleSetup extends AbstractDelegatingModule {
 					ValidationTestConfig config = new ValidationTestConfig(xpectFile.<ValidationTestConfig> createSetupInitializer());
 					Set<Issue> issues = Sets.newLinkedHashSet(issuesFromDelegate);
 					Set<Issue> matched = Sets.newHashSet();
-					for (XpectInvocation inv : xpectFile.getInvocations()) {
-						IRegion region = new NextLineProvider(xresource, inv).getNextLine();
-						List<Issue> selected = Lists.newArrayList(filter(issues, new IssueOverlapsRangePredicate(region, getExpectedSeverity(inv))));
-						result.putAll(region, selected);
-						matched.addAll(selected);
-					}
+					for (XpectInvocation inv : xpectFile.getInvocations())
+						if (!inv.isIgnore()) {
+							IRegion region = new NextLineProvider(xresource, inv).getNextLine();
+							List<Issue> selected = Lists.newArrayList(filter(issues, new IssueOverlapsRangePredicate(region, getExpectedSeverity(inv))));
+							result.putAll(region, selected);
+							matched.addAll(selected);
+						}
 					issues.removeAll(matched);
 					result.putAll(UNMATCHED, filter(issues, config.getIgnoreFilter()));
 				}
