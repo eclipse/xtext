@@ -253,8 +253,8 @@ public class OverrideTester {
 		for(int i = 0; i < overridingParameterTypes.size(); i++) {
 			LightweightTypeReference overridingParameterType = overridingParameterTypes.get(i);
 			LightweightTypeReference overriddenParameterType = overriddenParameterTypes.get(i);
-			String overridingParameterTypeIdentifier = overridingParameterType.getJavaIdentifier();
-			if (!overridingParameterTypeIdentifier.equals(overriddenParameterType.getJavaIdentifier())) {
+			String overridingParameterTypeIdentifier = overridingParameterType.getUniqueIdentifier();
+			if (!overridingParameterTypeIdentifier.equals(overriddenParameterType.getUniqueIdentifier())) {
 				if (!overriding.getTypeParameters().isEmpty()) {
 					return false;
 				}
@@ -297,7 +297,7 @@ public class OverrideTester {
 			}
 			if (overridingSuperTypes.size() == 1) {
 				LightweightTypeReference resolved = substitutor.substitute(overriddenSuperTypes.get(0));
-				if (!overridingSuperTypes.get(0).getJavaIdentifier().equals(resolved.getJavaIdentifier())) {
+				if (!overridingSuperTypes.get(0).getUniqueIdentifier().equals(resolved.getUniqueIdentifier())) {
 					return false;
 				}
 			} else {

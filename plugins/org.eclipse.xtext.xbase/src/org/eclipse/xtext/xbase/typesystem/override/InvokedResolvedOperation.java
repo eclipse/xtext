@@ -26,6 +26,7 @@ import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
 /**
@@ -76,7 +77,10 @@ public class InvokedResolvedOperation extends BottomResolvedOperation {
 	
 	@Override
 	protected Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> computeContextTypeParameterMapping() {
-		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> result = super.computeContextTypeParameterMapping();
+		if (typeArguments.isEmpty()) {
+			return super.computeContextTypeParameterMapping();
+		}
+		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> result = Maps.newHashMap(super.computeContextTypeParameterMapping());
 		List<JvmTypeParameter> typeParameters = getDeclaration().getTypeParameters();
 		for(int i = 0; i < Math.min(typeParameters.size(), typeArguments.size()); i++) {
 			result.put(typeParameters.get(i), new LightweightMergedBoundTypeArgument(typeArguments.get(i), VarianceInfo.INVARIANT));
