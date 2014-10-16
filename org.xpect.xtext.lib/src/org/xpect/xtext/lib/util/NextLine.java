@@ -11,6 +11,7 @@ import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator;
 import org.eclipse.xtext.resource.XtextResource;
 import org.xpect.XpectImport;
 import org.xpect.XpectInvocation;
+import org.xpect.parameter.IStatementRelatedRegion;
 import org.xpect.setup.XpectSetupFactory;
 import org.xpect.state.Creates;
 import org.xpect.state.XpectStateAnnotation;
@@ -42,15 +43,15 @@ public @interface NextLine {
 		}
 
 		private ILeafNode findNextNonHiddenLeaf(ICompositeNode rootNode, XpectInvocation statement) {
-			ICompositeNode statementNode = NodeModelUtils.getNode(statement);
-			ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(rootNode, statementNode.getOffset() + statementNode.getLength());
+			IStatementRelatedRegion statementRegion = statement.getExtendedRegion();
+			ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(rootNode, statementRegion.getOffset() + statementRegion.getLength());
 			NodeIterator it = new NodeIterator(leaf);
 			while (it.hasNext()) {
 				INode next = it.next();
 				if (next instanceof ILeafNode && !((ILeafNode) next).isHidden())
 					return (ILeafNode) next;
 			}
-			throw new IllegalStateException();
+			throw new IllegalStateException("No line with non-hidden tokens found after \n" + statementRegion.toString());
 		}
 
 		@Creates(NextLine.class)
