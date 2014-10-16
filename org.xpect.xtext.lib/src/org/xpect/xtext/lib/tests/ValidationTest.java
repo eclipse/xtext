@@ -16,6 +16,7 @@ import java.util.List;
 
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.Issue;
+import org.junit.Assert;
 import org.junit.ComparisonFailure;
 import org.junit.runner.RunWith;
 import org.xpect.XpectImport;
@@ -56,6 +57,8 @@ public class ValidationTest {
 		Collection<Issue> issuesInLine = line2issue.get(line);
 		List<Issue> filteredIssues = Lists.newArrayList(filter(issuesInLine, cfg.getIgnoreFilter()));
 		List<String> formattedIssues = newArrayList(transform(filteredIssues, createIssueFormatter(line.getDocument(), severity)));
+		if (formattedIssues.isEmpty())
+			Assert.fail("No issues found in line " + line);
 		return formattedIssues;
 	}
 
