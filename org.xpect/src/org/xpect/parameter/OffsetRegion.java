@@ -1,8 +1,9 @@
 package org.xpect.parameter;
 
-import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.emf.common.util.EList;
+import org.xpect.Member;
 import org.xpect.XpectInvocation;
+import org.xpect.text.CharSequences;
 import org.xpect.text.IRegion;
 
 public class OffsetRegion extends DerivedRegion {
@@ -19,15 +20,16 @@ public class OffsetRegion extends DerivedRegion {
 		else
 			add = 0;
 		XpectInvocation statement = getStatement();
-		INode node = NodeModelUtils.getNode(statement);
-		int nodeOffset = node.getOffset() + node.getLength();
-		for (IStatementRelatedRegion region : statement.getRelatedRegions()) {
-			int regionEnd = region.getOffset() + region.getLength();
-			if (regionEnd > nodeOffset)
-				nodeOffset = regionEnd;
-		}
+		IStatementRelatedRegion extendedRegion = statement.getExtendedRegion();
+		int nodeOffset = extendedRegion.getOffset() + extendedRegion.getLength();
 		String text = statement.getFile().getDocument();
-		int result = text.indexOf(val, nodeOffset);
+
+		int result = -1;
+		do {
+			result = text.indexOf(val, nodeOffset);
+			nodeOffset = result + 1;
+		} while (isInsideStatementRegion(result));
+
 		if (result >= 0) {
 			this.matchedOffset = result + add;
 			if (add > 0)
@@ -48,6 +50,37 @@ public class OffsetRegion extends DerivedRegion {
 
 	public IRegion getMatchedRegion() {
 		return matchedRegion;
+	}
+
+	protected boolean isInsideStatementRegion(int offset) {
+		if (offset < 0)
+			return false;
+		XpectInvocation statement = getStatement();
+		EList<Member> members = statement.getFile().getMembers();
+		for (int i = members.indexOf(statement) + 1; i < members.size(); i++) {
+			Member member = members.get(i);
+			if (member instanceof XpectInvocation) {
+				IStatementRelatedRegion region = ((XpectInvocation) member).getExtendedRegion();
+				int o = region.getOffset();
+				int e = o + region.getLength();
+				if (o <= offset && offset <= e)
+					return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public String toString() {
+		int offset = matchedRegion.getOffset();
+		int end = offset + matchedRegion.getLength();
+		CharSequence document = getDocument();
+		String prefix = CharSequences.getPrefix(document, offset, 24);
+		String postfix = CharSequences.getPostfix(document, end, 24);
+		String before = document.subSequence(offset, matchedOffset).toString();
+		String after = document.subSequence(matchedOffset, end).toString();
+		return prefix + ">>>" + before + "|" + after + "<<<" + postfix;
+
 	}
 
 }

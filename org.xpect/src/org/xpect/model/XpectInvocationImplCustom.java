@@ -16,6 +16,7 @@ import org.xpect.XpectJavaModel;
 import org.xpect.XpectPackage;
 import org.xpect.parameter.IStatementRelatedRegion;
 import org.xpect.parameter.IStatementRelatedRegionProvider;
+import org.xpect.parameter.StatementRelatedRegion;
 import org.xpect.parameter.StatementRelatedRegionProvider;
 import org.xpect.util.IJavaReflectAccess;
 
@@ -41,6 +42,25 @@ public class XpectInvocationImplCustom extends XpectInvocationImpl {
 			}
 		}
 		return super.getArguments();
+	}
+
+	@Override
+	public IStatementRelatedRegion getExtendedRegion() {
+		if (this.extendedRegion == null) {
+			INode node = NodeModelUtils.getNode(this);
+			int offset = node.getOffset();
+			int end = offset + node.getLength();
+			for (IStatementRelatedRegion region : getRelatedRegions()) {
+				int o = region.getOffset();
+				if (o < offset)
+					offset = o;
+				int e = o + region.getLength();
+				if (e > end)
+					end = e;
+			}
+			this.extendedRegion = new StatementRelatedRegion(this, offset, end - offset);
+		}
+		return super.getExtendedRegion();
 	}
 
 	@Override
@@ -120,6 +140,7 @@ public class XpectInvocationImplCustom extends XpectInvocationImpl {
 		((XpectFileImplCustom) getFile()).unsetInvocationIDs();
 		this.relatedRegions = null;
 		this.arguments = null;
+		this.extendedRegion = null;
 		super.setMethod(newMethod);
 	}
 

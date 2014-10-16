@@ -24,8 +24,4 @@ public class StatementRelatedRegion extends Region implements IStatementRelatedR
 		return statement;
 	}
 
-	@Override
-	public String toString() {
-		return getRegionText();
-	}
 }

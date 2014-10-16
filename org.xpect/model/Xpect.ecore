@@ -49,6 +49,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="relatedRegions" unique="false"
         upperBound="-1" eType="#//StatementRelatedRegion" changeable="false" transient="true"
         derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extendedRegion" eType="#//StatementRelatedRegion"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XpectArgument">
     <eOperations name="getJavaType">
