@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.xpect.expectation;
+package org.xpect.expectation.impl;
 
 import java.util.Collection;
 import java.util.Iterator;

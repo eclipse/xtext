@@ -1,5 +1,7 @@
 package org.xpect.state;
 
+import org.xpect.text.CharSequences;
+
 public class ManagedImpl<T> implements Managed<T> {
 
 	private final T value;
@@ -18,7 +20,7 @@ public class ManagedImpl<T> implements Managed<T> {
 
 	@Override
 	public String toString() {
-		return "Managed[" + value + "]";
+		return "Managed[" + CharSequences.toSingleLineString(value, 80) + "]";
 	}
 
 }

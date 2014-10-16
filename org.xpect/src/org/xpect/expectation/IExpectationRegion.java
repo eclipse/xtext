@@ -1,17 +1,13 @@
 package org.xpect.expectation;
 
-import org.xpect.text.IRegion;
+import org.xpect.parameter.IStatementRelatedRegion;
 
 /**
- * 
  * @author Moritz Eysholdt
  */
-public interface IExpectationRegion extends IRegion {
-
-	CharSequence getDocument();
+public interface IExpectationRegion extends IStatementRelatedRegion {
 
 	String getSeparator();
 
 	int getOpeningSeparatorOffset();
-
 }

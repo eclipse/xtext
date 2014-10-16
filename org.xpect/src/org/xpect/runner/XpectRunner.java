@@ -33,7 +33,7 @@ import org.xpect.XpectFile;
 import org.xpect.XpectJavaModel;
 import org.xpect.XpectStandaloneSetup;
 import org.xpect.XpectTest;
-import org.xpect.expectation.TargetSyntaxSupport;
+import org.xpect.expectation.impl.TargetSyntaxSupport;
 import org.xpect.registry.ITestSuiteInfo;
 import org.xpect.runner.XpectTestFiles.Builder;
 import org.xpect.runner.XpectTestFiles.FileRoot;
@@ -90,7 +90,7 @@ public class XpectRunner extends ParentRunner<Runner> {
 	}
 
 	protected Configuration createChildConfiguration(XpectFile file) {
-		Configuration config = new Configuration();
+		Configuration config = new Configuration(file.eResource().getURI().lastSegment());
 		config.addDefaultValue(XpectFile.class, file);
 		config.addDefaultValue(ISetupInitializer.class, createSetupInitializer(file));
 		return config;
@@ -104,7 +104,7 @@ public class XpectRunner extends ParentRunner<Runner> {
 	}
 
 	protected Configuration createRootConfiguration() {
-		Configuration config = new Configuration();
+		Configuration config = new Configuration("Root");
 		config.addDefaultValue(this);
 		config.addValue(ThisRootTestClass.class, super.getTestClass().getJavaClass());
 		config.addFactory(TestObjectSetup.class);
@@ -113,6 +113,7 @@ public class XpectRunner extends ParentRunner<Runner> {
 		config.addFactory(XpectFileRunner.class);
 		config.addFactory(XpectTestRunner.class);
 		config.addFactory(TestRunner.class);
+		config.addFactory(ArgumentContributor.class);
 		config.addDefaultValue(IXpectURIProvider.class, this.uriProvider);
 		config.addDefaultValue(XpectJavaModel.class, this.xpectJavaModel);
 		Iterable<XjmContribution> contributions = this.xpectJavaModel.getContributions(XpectSetupFactory.class, EnvironmentUtil.ENVIRONMENT);

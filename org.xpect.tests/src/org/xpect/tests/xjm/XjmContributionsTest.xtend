@@ -1,5 +1,7 @@
 package org.xpect.tests.xjm
 
+import java.lang.annotation.Retention
+import java.lang.annotation.RetentionPolicy
 import org.junit.Ignore
 import org.junit.Test
 import org.xpect.XpectImport
@@ -19,6 +21,10 @@ class XjmContributionsTest extends AbstractXjmTest {
 
 	@Test def void methodType() {
 		assertXjm(MethodType)
+	}
+
+	@Test def void methodAnnotation() {
+		assertXjm(MethodAnnotation)
 	}
 
 	@Ignore @Test def void annotationType() {
@@ -82,6 +88,25 @@ class MethodType {
 	'''
 }
 
+class MethodAnnotation {
+
+	@AnnotationWithImport
+	@Xpect def void test() {
+	}
+
+	override toString() '''
+		suite org.xpect.tests.xjm.MethodAnnotation {
+		  test org.xpect.tests.xjm.MethodAnnotation {
+		    @Xpect public void test(); // Imports: Contribution1
+		  }
+		  contributionsFor @XpectSetupFactory {
+		    org.xpect.tests.xjm.Contribution1 ImportedBy:MethodAnnotation.test()
+		  }
+		}
+	'''
+}
+
+@Retention(RetentionPolicy.RUNTIME)
 @XpectImport(Contribution1)
 annotation AnnotationWithImport {
 }

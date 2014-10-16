@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.xpect.expectation;
+package org.xpect.expectation.impl;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -16,8 +16,8 @@ import java.util.Set;
 
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
-import org.xpect.expectation.ActualCollection.ActualItem;
-import org.xpect.expectation.ExpectationCollection.ExpectationItem;
+import org.xpect.expectation.impl.ActualCollection.ActualItem;
+import org.xpect.expectation.impl.ExpectationCollection.ExpectationItem;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.HashMultiset;

@@ -1,5 +1,6 @@
 package org.xpect.expectation;
 
+
 /**
  * 
  * @author Moritz Eysholdt

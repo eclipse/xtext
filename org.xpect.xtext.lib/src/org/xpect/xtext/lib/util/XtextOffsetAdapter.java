@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.xpect.xtext.lib.util;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -17,27 +15,30 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator;
 import org.eclipse.xtext.resource.XtextResource;
-import org.xpect.parameter.AbstractOffsetProvider;
-import org.xpect.parameter.IParameterAdapter;
-import org.xpect.parameter.IParameterParser.IParsedParameterProvider;
-import org.xpect.parameter.IParameterProvider;
-import org.xpect.parameter.XpectParameterAdapter;
-import org.xpect.state.StateContainer;
-import org.xpect.text.IRegion;
+import org.xpect.XpectImport;
+import org.xpect.XpectInvocation;
+import org.xpect.parameter.OffsetRegion;
+import org.xpect.setup.ThisArgumentType;
+import org.xpect.setup.XpectSetupFactory;
+import org.xpect.state.Creates;
+import org.xpect.text.OffsetToString;
 import org.xpect.xtext.lib.setup.ThisResource;
+import org.xpect.xtext.lib.util.XtextOffsetAdapter.EObjectProvider;
+import org.xpect.xtext.lib.util.XtextOffsetAdapter.NodeProvider;
 
 import com.google.common.collect.Sets;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-@XpectParameterAdapter
-public class XtextOffsetAdapter implements IParameterAdapter {
+@XpectImport({ NodeProvider.class, EObjectProvider.class })
+public class XtextOffsetAdapter {
 
 	protected static class CrossEReferenceAndEObject extends EStructuralFeatureAndEObject implements ICrossEReferenceAndEObject {
 
@@ -51,15 +52,15 @@ public class XtextOffsetAdapter implements IParameterAdapter {
 
 	}
 
+	@XpectSetupFactory
 	protected static class CrossEReferenceAndEObjectProvider extends EStructuralFeatureAndEObjectProvider {
 
-		public CrossEReferenceAndEObjectProvider(AbstractOffsetProvider delegate) {
-			super(delegate);
+		public CrossEReferenceAndEObjectProvider(@ThisResource XtextResource resource, XpectInvocation statement) {
+			super(resource, statement);
 		}
 
-		@Override
-		public boolean canProvide(Class<?> expectedType) {
-			return expectedType.isAssignableFrom(ICrossEReferenceAndEObject.class);
+		public CrossEReferenceAndEObjectProvider(@ThisResource XtextResource resource, XpectInvocation statement, OffsetRegion region) {
+			super(resource, statement, region);
 		}
 
 		@Override
@@ -67,35 +68,19 @@ public class XtextOffsetAdapter implements IParameterAdapter {
 			return new CrossEReferenceAndEObject(object, feat);
 		}
 
+		@Creates
+		public ICrossEReferenceAndEObject createCrossEReferenceAndEObject() {
+			return (ICrossEReferenceAndEObject) createStructuralFeatureAndEObject();
+		}
+
 		@Override
 		protected boolean matches(EObject object, EStructuralFeature feature) {
 			return feature instanceof EReference && !((EReference) feature).isContainment();
 		}
 
-	}
-
-	protected abstract static class DelegatingOffsetBasedProvider implements IParsedParameterProvider {
-		protected final AbstractOffsetProvider delegate;
-
-		public DelegatingOffsetBasedProvider(AbstractOffsetProvider delegate) {
-			super();
-			this.delegate = delegate;
-		}
-
-		public IRegion getClaimedRegion() {
-			if (delegate instanceof IParsedParameterProvider)
-				return ((IParsedParameterProvider) delegate).getClaimedRegion();
-			return null;
-		}
-
-		protected int getOffset() {
-			return delegate.getOffset();
-		}
-
-		public List<IRegion> getSemanticRegions() {
-			if (delegate instanceof IParsedParameterProvider)
-				return ((IParsedParameterProvider) delegate).getSemanticRegions();
-			return Collections.emptyList();
+		@Creates
+		public ICrossEReferenceAndEObject create() {
+			return (ICrossEReferenceAndEObject) createStructuralFeatureAndEObject();
 		}
 
 	}
@@ -112,15 +97,25 @@ public class XtextOffsetAdapter implements IParameterAdapter {
 
 	}
 
+	@XpectSetupFactory
 	protected static class EAttributeAndEObjectProvider extends EStructuralFeatureAndEObjectProvider {
 
-		public EAttributeAndEObjectProvider(AbstractOffsetProvider delegate) {
-			super(delegate);
+		public EAttributeAndEObjectProvider(XtextResource resource, XpectInvocation statement) {
+			super(resource, statement);
+		}
+
+		public EAttributeAndEObjectProvider(XtextResource resource, XpectInvocation statement, OffsetRegion region) {
+			super(resource, statement, region);
 		}
 
 		@Override
 		protected EStructuralFeatureAndEObject create(EObject object, EStructuralFeature feat) {
 			return new EAttributeAndEObject(object, feat);
+		}
+
+		@Creates
+		public IEAttributeAndEObject createEAttributeAndEObject() {
+			return (IEAttributeAndEObject) createStructuralFeatureAndEObject();
 		}
 
 		@Override
@@ -130,30 +125,38 @@ public class XtextOffsetAdapter implements IParameterAdapter {
 
 	}
 
-	protected static class EObjectProvider extends DelegatingOffsetBasedProvider {
+	@XpectSetupFactory
+	protected static class EObjectProvider<T extends EObject> {
 
-		public EObjectProvider(AbstractOffsetProvider delegate) {
-			super(delegate);
+		private final T eObject;
+
+		public EObjectProvider(@ThisResource XtextResource resource, XpectInvocation statement, @ThisArgumentType Class<T> expectedType) {
+			ICompositeNode statementNode = NodeModelUtils.getNode(statement);
+			this.eObject = find(resource, statementNode.getOffset() + statementNode.getLength(), expectedType);
+		}
+
+		public EObjectProvider(@ThisResource XtextResource resource, XpectInvocation statement, @ThisArgumentType Class<T> expectedType, OffsetRegion offset) {
+			this.eObject = find(resource, offset.getMatchedOffset(), expectedType);
 		}
 
 		public boolean canProvide(Class<?> expectedType) {
 			return EObject.class.isAssignableFrom(expectedType);
 		}
 
-		protected EObject find(Class<?> expectedType, INode node, Set<EObject> visited) {
+		protected T find(Class<T> expectedType, INode node, Set<EObject> visited) {
 			EObject current = node.getSemanticElement();
 			int startoffset = node.getOffset();
-			EObject result = null;
+			T result = null;
 			while (current != null && NodeModelUtils.getNode(current).getOffset() >= startoffset) {
 				if (expectedType.isInstance(current))
-					result = current;
+					result = expectedType.cast(current);
 				visited.add(current);
 				current = current.eContainer();
 			}
 			return result;
 		}
 
-		protected EObject find(XtextResource res, int offset, Class<?> expectedType) {
+		protected T find(XtextResource res, int offset, Class<T> expectedType) {
 			INode leaf = NodeModelUtils.findLeafNodeAtOffset(res.getParseResult().getRootNode(), offset);
 			Set<EObject> visited = Sets.newHashSet();
 			NodeIterator ni = null;
@@ -161,20 +164,16 @@ public class XtextOffsetAdapter implements IParameterAdapter {
 				INode next = ni == null ? leaf : ni.next();
 				if (ni == null)
 					ni = new NodeIterator(leaf);
-				EObject result = find(expectedType, next, visited);
+				T result = find(expectedType, next, visited);
 				if (result != null)
 					return result;
 			}
 			return null;
 		}
 
-		@SuppressWarnings("unchecked")
-		public <T> T get(Class<T> expectedType, StateContainer context) {
-			XtextResource xtextResource = context.get(XtextResource.class, ThisResource.class).get();
-			EObject result = find(xtextResource, getOffset(), expectedType);
-			if (expectedType.isInstance(result))
-				return (T) result;
-			return null;
+		@Creates
+		public T getEObject() {
+			return eObject;
 		}
 
 	}
@@ -191,20 +190,25 @@ public class XtextOffsetAdapter implements IParameterAdapter {
 
 	}
 
+	@XpectSetupFactory
 	protected static class EReferenceAndEObjectProvider extends EStructuralFeatureAndEObjectProvider {
 
-		public EReferenceAndEObjectProvider(AbstractOffsetProvider delegate) {
-			super(delegate);
+		public EReferenceAndEObjectProvider(XtextResource resource, XpectInvocation statement) {
+			super(resource, statement);
 		}
 
-		@Override
-		public boolean canProvide(Class<?> expectedType) {
-			return expectedType.isAssignableFrom(IEReferenceAndEObject.class);
+		public EReferenceAndEObjectProvider(XtextResource resource, XpectInvocation statement, OffsetRegion region) {
+			super(resource, statement, region);
 		}
 
 		@Override
 		protected EStructuralFeatureAndEObject create(EObject object, EStructuralFeature feat) {
 			return new EReferenceAndEObject(object, feat);
+		}
+
+		@Creates
+		public IEReferenceAndEObject createReferenceAndEObject() {
+			return (IEReferenceAndEObject) createStructuralFeatureAndEObject();
 		}
 
 		@Override
@@ -233,21 +237,37 @@ public class XtextOffsetAdapter implements IParameterAdapter {
 
 	}
 
-	protected static class EStructuralFeatureAndEObjectProvider extends DelegatingOffsetBasedProvider {
+	@XpectSetupFactory
+	protected static class EStructuralFeatureAndEObjectProvider {
 
-		public EStructuralFeatureAndEObjectProvider(AbstractOffsetProvider delegate) {
-			super(delegate);
+		private final IEStructuralFeatureAndEObject structuralFeatureAndEObject;
+
+		public EStructuralFeatureAndEObjectProvider(@ThisResource XtextResource resource, XpectInvocation statement) {
+			ICompositeNode statementNode = NodeModelUtils.getNode(statement);
+			int offset = statementNode.getOffset() + statementNode.getLength();
+			this.structuralFeatureAndEObject = findAfterOffset(resource, offset);
 		}
 
-		public boolean canProvide(Class<?> expectedType) {
-			return expectedType.isAssignableFrom(IEStructuralFeatureAndEObject.class);
+		public EStructuralFeatureAndEObjectProvider(@ThisResource XtextResource resource, XpectInvocation statement, OffsetRegion region) {
+			int offset = region.getMatchedOffset();
+			this.structuralFeatureAndEObject = findAtOffset(resource, region, offset);
 		}
 
 		protected EStructuralFeatureAndEObject create(EObject object, EStructuralFeature feat) {
 			return new EStructuralFeatureAndEObject(object, feat);
 		}
 
-		protected EStructuralFeatureAndEObject find(XtextResource resource, int offset) {
+		@Creates
+		public IEStructuralFeatureAndEObject createStructuralFeatureAndEObject() {
+			return this.structuralFeatureAndEObject;
+		}
+
+		protected IEStructuralFeatureAndEObject findInParent(INode node) {
+
+			return null;
+		}
+
+		protected IEStructuralFeatureAndEObject findAfterOffset(XtextResource resource, int offset) {
 			INode leaf = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset);
 			NodeIterator ni = null;
 			while (ni == null || ni.hasNext()) {
@@ -269,22 +289,39 @@ public class XtextOffsetAdapter implements IParameterAdapter {
 			throw new RuntimeException("No EStructuralFeature found at offset " + offset);
 		}
 
-		@SuppressWarnings("unchecked")
-		public <T> T get(Class<T> expectedType, StateContainer context) {
-			XtextResource xtextResource = context.get(XtextResource.class, ThisResource.class).get();
-			return (T) find(xtextResource, getOffset());
+		protected IEStructuralFeatureAndEObject findAtOffset(XtextResource resource, OffsetRegion region, int offset) {
+			ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset);
+			EObject object = NodeModelUtils.findActualSemanticObjectFor(leaf);
+			INode current = leaf;
+			do {
+				Assignment ass = GrammarUtil.containingAssignment(current.getGrammarElement());
+				if (ass != null) {
+					EStructuralFeature feat = object.eClass().getEStructuralFeature(ass.getFeature());
+					if (feat != null) {
+						if (matches(object, feat))
+							return create(object, feat);
+						String name = feat.eClass().getName() + " '" + feat.getEContainingClass().getName() + "." + feat.getName() + "'";
+						String offsetString = new OffsetToString().with(offset, region.getDocument()).toString();
+						throw new RuntimeException("The " + name + " found at " + offsetString + " is not valid here.");
+					}
+				}
+				current = current.getParent();
+			} while (current != null && object == NodeModelUtils.findActualSemanticObjectFor(current));
+			String offsetString = new OffsetToString().with(offset, region.getDocument()).toString();
+			throw new RuntimeException("no EStructuralFeature found at '" + offsetString + "'");
 		}
 
 		protected boolean matches(EObject object, EStructuralFeature feature) {
 			return true;
 		}
-
 	}
 
+	@XpectImport(CrossEReferenceAndEObjectProvider.class)
 	public static interface ICrossEReferenceAndEObject extends IEObjectOwner {
 		EReference getCrossEReference();
 	}
 
+	@XpectImport(EAttributeAndEObjectProvider.class)
 	public static interface IEAttributeAndEObject extends IEObjectOwner {
 		EAttribute getEAttribute();
 	}
@@ -293,64 +330,54 @@ public class XtextOffsetAdapter implements IParameterAdapter {
 		EObject getEObject();
 	}
 
+	@XpectImport(EReferenceAndEObjectProvider.class)
 	public static interface IEReferenceAndEObject extends IEObjectOwner {
 		EReference getEReference();
 	}
 
+	@XpectImport(EStructuralFeatureAndEObjectProvider.class)
 	public static interface IEStructuralFeatureAndEObject extends IEObjectOwner {
 		EStructuralFeature getEStructuralFeature();
 	}
 
-	protected static class NodeProvider extends DelegatingOffsetBasedProvider {
+	@XpectSetupFactory
+	protected static class NodeProvider {
 
-		public NodeProvider(AbstractOffsetProvider delegate) {
-			super(delegate);
+		private final ILeafNode leaf;
+
+		public NodeProvider(@ThisResource XtextResource resource, XpectInvocation statement) {
+			ICompositeNode statementNode = NodeModelUtils.getNode(statement);
+			int offset = statementNode.getOffset() + statementNode.getLength();
+			ILeafNode node = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset);
+			NodeIterator it = new NodeIterator(node);
+			ILeafNode cand = null;
+			while (cand == null && it.hasNext()) {
+				INode next = it.next();
+				if (next instanceof ILeafNode && !((ILeafNode) next).isHidden())
+					cand = (ILeafNode) next;
+			}
+			this.leaf = cand;
 		}
 
-		public boolean canProvide(Class<?> expectedType) {
-			return expectedType.isAssignableFrom(ILeafNode.class);
+		public NodeProvider(@ThisResource XtextResource resource, XpectInvocation statement, OffsetRegion offset) {
+			this.leaf = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset.getMatchedOffset());
 		}
 
-		@SuppressWarnings("unchecked")
-		public <T> T get(Class<T> expectedType, StateContainer context) {
-			XtextResource xtextResource = context.get(XtextResource.class, ThisResource.class).get();
-			return (T) NodeModelUtils.findLeafNodeAtOffset(xtextResource.getParseResult().getRootNode(), getOffset());
+		@Creates
+		public ICompositeNode getCompositeNode() {
+			return leaf.getParent();
 		}
 
-	}
-
-	public IParameterProvider adapt(IParameterProvider provider, Class<?> expectedType) {
-		if (provider instanceof AbstractOffsetProvider) {
-			AbstractOffsetProvider delegate = (AbstractOffsetProvider) provider;
-			if (expectedType == IEStructuralFeatureAndEObject.class)
-				return new EStructuralFeatureAndEObjectProvider(delegate);
-			if (expectedType == IEAttributeAndEObject.class)
-				return new EAttributeAndEObjectProvider(delegate);
-			if (expectedType == IEReferenceAndEObject.class)
-				return new EReferenceAndEObjectProvider(delegate);
-			if (expectedType == ICrossEReferenceAndEObject.class)
-				return new CrossEReferenceAndEObjectProvider(delegate);
-			if (expectedType == INode.class || expectedType == ILeafNode.class)
-				return new NodeProvider(delegate);
-			if (EObject.class.isAssignableFrom(expectedType))
-				return new EObjectProvider(delegate);
+		@Creates
+		public ILeafNode getLeafNode() {
+			return leaf;
 		}
-		return null;
-	}
 
-	protected boolean canAdapt(Class<?> expectedType) {
-		return expectedType == IEStructuralFeatureAndEObject.class || //
-				expectedType == IEAttributeAndEObject.class || //
-				expectedType == IEReferenceAndEObject.class || //
-				expectedType == ICrossEReferenceAndEObject.class || //
-				expectedType == INode.class || //
-				expectedType == ILeafNode.class || //
-				EObject.class.isAssignableFrom(expectedType);
+		@Creates
+		public INode getNode() {
+			return leaf;
+		}
 
-	}
-
-	public boolean canAdapt(IParameterProvider provider, Class<?> expectedType) {
-		return provider instanceof AbstractOffsetProvider && canAdapt(expectedType);
 	}
 
 }

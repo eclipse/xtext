@@ -13,10 +13,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import org.xpect.XpectImport;
+import org.xpect.state.XpectStateAnnotation;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@XpectStateAnnotation
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.PARAMETER, ElementType.FIELD })
 @XpectImport({ XtextStandaloneSetup.class, XtextWorkspaceSetup.class })

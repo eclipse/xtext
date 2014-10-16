@@ -1,27 +1,29 @@
-/*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *******************************************************************************/
 package org.xpect.parameter;
 
+import org.xpect.setup.XpectSetupFactory;
+import org.xpect.state.Creates;
 
-/**
- * @author Moritz Eysholdt - Initial contribution and API
- */
-public class IntegerProvider extends AbstractIntegerProvider {
+@XpectSetupFactory
+public class IntegerProvider {
 
-	private String value;
+	private final IntegerRegion region;
 
-	public IntegerProvider(String value) {
-		this.value = value;
+	public IntegerProvider() {
+		super();
+		this.region = null;
 	}
 
-	@Override
-	public String getValue() {
-		return value;
+	public IntegerProvider(IntegerRegion region) {
+		super();
+		this.region = region;
+	}
+
+	@Creates
+	public int getIntegerValue() {
+		if (region == null)
+			return 0;
+		String text = region.getRegionText();
+		return Integer.valueOf(text);
 	}
 
 }

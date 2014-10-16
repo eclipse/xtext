@@ -6,7 +6,9 @@ import java.lang.annotation.RetentionPolicy;
 import org.xpect.XpectImport;
 import org.xpect.setup.ThisTestObject.TestObjectSetup;
 import org.xpect.state.Creates;
+import org.xpect.state.XpectStateAnnotation;
 
+@XpectStateAnnotation
 @Retention(RetentionPolicy.RUNTIME)
 @XpectImport(TestObjectSetup.class)
 public @interface ThisTestObject {

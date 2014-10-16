@@ -10,12 +10,18 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.xpect.parameter.ParameterParser;
 import org.xpect.state.ResolvedConfiguration.DerivedValue;
 import org.xpect.state.ResolvedConfiguration.Factory;
 import org.xpect.state.ResolvedConfiguration.PrimaryValue;
 import org.xpect.state.ResolvedConfiguration.Value;
+import org.xpect.text.CharSequences;
+import org.xpect.text.Table;
+import org.xpect.text.Table.Row;
 
 import com.google.common.base.Joiner;
+import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -90,7 +96,7 @@ public class StateContainer {
 	}
 
 	public StateContainer(IAcceptor<Configuration> config) {
-		Configuration cfg = new Configuration();
+		Configuration cfg = new Configuration("default");
 		config.accept(cfg);
 		this.config = new ResolvedConfiguration(cfg);
 		this.state = new State();
@@ -104,7 +110,7 @@ public class StateContainer {
 	}
 
 	public StateContainer(StateContainer parent, IAcceptor<Configuration> config) {
-		Configuration cfg = new Configuration();
+		Configuration cfg = new Configuration("default");
 		config.accept(cfg);
 		this.config = new ResolvedConfiguration(cfg);
 		this.state = parent.state;
@@ -147,7 +153,8 @@ public class StateContainer {
 		} catch (IllegalArgumentException e) {
 			throw new RuntimeException(e);
 		} catch (InvocationTargetException e) {
-			throw new RuntimeException(e);
+			Exceptions.sneakyThrow(e.getCause());
+			return null;
 		}
 	}
 
@@ -190,6 +197,20 @@ public class StateContainer {
 		return get(expectedType, true, annotations);
 	}
 
+	/**
+	 * The following workflow is performed to get the argument of expected type (annotated with given annotations):
+	 * <ol>
+	 * <li>get "raw" value:
+	 * <ol>
+	 * <li>get the parameter from the parser defined by {@link ParameterParser} if possible
+	 * <li>if this fails, get value identified via annotations (used as key) and type
+	 * </ol>
+	 * <li>for all parsers (some parameters may be parsers, e.g., expectations), get the {@link IParameterProvider} via {@code parseRegion()} defined similarly (not equally) in
+	 * {@link IParameterParser} subtypes.
+	 * <li>if necessary, also create {@link IParameterAdapter}, configured via {@link XpectParameterAdapter}.
+	 * <li>use {@link IParameterProvider} or {@link IParameterAdapter} to get argument
+	 * </ol>
+	 */
 	public <T> T tryGet(Class<T> expectedType, Object... annotations) {
 		Managed<T> managed = get(expectedType, false, annotations);
 		if (managed != null)
@@ -204,9 +225,10 @@ public class StateContainer {
 		Class<? extends Annotation> annotatedWith = getAnnotation(annotations);
 		Value value = config.getValue(annotatedWith, expectedType);
 		if (value == null) {
-			if (throwException)
+			if (throwException) {
+				System.out.println(this);
 				throw new IllegalStateException("Unknown key @" + annotatedWith.getName() + " " + expectedType.getName());
-			else
+			} else
 				return null;
 		}
 		Instance instance = state.value2instance.get(value);
@@ -296,24 +318,154 @@ public class StateContainer {
 			state.factory2instance.remove(fact.factory);
 	}
 
+	protected class ToString {
+		protected class ValueRow implements Comparable<ValueRow> {
+
+			public ValueRow(ResolvedConfiguration scope, Value value) {
+				super();
+				this.declaredScope = scope;
+				this.value = value;
+				this.keyType = value.getType().getName();
+				this.keyAnnotation = value.getAnnotatedWith().getSimpleName();
+			}
+
+			private final Value value;
+			private final String keyType;
+			private final String keyAnnotation;
+			private final ResolvedConfiguration declaredScope;
+			private ResolvedConfiguration lifecycleScope = null;
+			private Set<ValueRow> dependencies = Sets.newHashSet();
+
+			public String getInstanceString() {
+				if (value instanceof PrimaryValue)
+					return CharSequences.toSingleLineString(((PrimaryValue) value).getValue(), 80);
+				Instance instance = state.value2instance.get(value);
+				if (instance == null)
+					return "(not created)";
+				Object object = instance.get();
+				if (object == null)
+					return "(null)";
+				return CharSequences.toSingleLineString(object, 80);
+			}
+
+			public int compareTo(ValueRow o) {
+				return ComparisonChain.start().compare(keyType, o.keyType).compare(keyAnnotation, keyAnnotation).result();
+			}
+
+			public String getKeyString() {
+				if (Default.class.getSimpleName().equals(keyAnnotation))
+					return keyType;
+				return "@" + keyAnnotation + " " + keyType;
+			}
+
+			public Object getDependenciesString() {
+				List<ValueRow> dependencies = Lists.newArrayList(this.dependencies);
+				Collections.sort(dependencies);
+				List<String> result = Lists.newArrayList();
+				for (ValueRow val : dependencies)
+					result.add(val.getKeyString());
+				return Joiner.on(", ").join(result);
+			}
+
+			public Object getScopeString() {
+				if (lifecycleScope != null)
+					return lifecycleScope.getName();
+				return declaredScope.getName();
+			}
+		}
+
+		private Map<Value, ValueRow> rows = Maps.newHashMap();
+
+		private void collectValues(ResolvedConfiguration cfg) {
+			for (Value value : cfg.getValues().values())
+				rows.put(value, new ValueRow(cfg, value));
+			ResolvedConfiguration parent = cfg.getParent();
+			if (parent != null)
+				collectValues(parent);
+		}
+
+		private void updateCollectDependencies(ResolvedConfiguration cfg) {
+			for (ResolvedConfiguration.Factory fac : cfg.getResolvedFactories())
+				for (Value out : fac.getOut()) {
+					ValueRow row = rows.get(out);
+					for (Value in : fac.getIn())
+						row.dependencies.add(rows.get(in));
+				}
+			ResolvedConfiguration parent = cfg.getParent();
+			if (parent != null)
+				updateCollectDependencies(parent);
+		}
+
+		private boolean isMoreNarrow(ResolvedConfiguration candidate, ResolvedConfiguration ref) {
+			if (candidate == null || ref == null || candidate == ref)
+				return false;
+			ResolvedConfiguration parent = candidate.getParent();
+			if (parent == ref)
+				return true;
+			return isMoreNarrow(parent, ref);
+		}
+
+		private ResolvedConfiguration updateScope(ValueRow row) {
+			ResolvedConfiguration result = row.lifecycleScope;
+			if (result != null)
+				return result;
+			result = row.declaredScope;
+			for (ValueRow dependency : row.dependencies) {
+				ResolvedConfiguration dep = updateScope(dependency);
+				if (isMoreNarrow(dep, result))
+					result = dep;
+			}
+			row.lifecycleScope = result;
+			return result;
+		}
+
+		@Override
+		public String toString() {
+			collectValues(config);
+			updateCollectDependencies(config);
+			for (ValueRow row1 : rows.values())
+				updateScope(row1);
+			List<ValueRow> rows = Lists.newArrayList(this.rows.values());
+			Collections.sort(rows);
+			Table table = new Table();
+			table.setRowSeparatorHeight(0);
+			Row header = table.addRow();
+			header.addCell().setText("Key");
+			header.addCell().setText("Scope");
+			header.addCell().setText("Value");
+			header.addCell().setText("Dependencies");
+			header.getBottomSeparator().setHeight(1).setBackground("-");
+			for (ValueRow vr : rows) {
+				Row row = table.addRow();
+				row.addCell().setText(vr.getKeyString());
+				row.addCell().setText(vr.getScopeString());
+				row.addCell().setText(vr.getInstanceString());
+				row.addCell().setText(vr.getDependenciesString());
+			}
+			return table.toString();
+		}
+	}
+
 	@Override
 	public String toString() {
-		List<String> values = Lists.newArrayList();
-		List<String> factories = Lists.newArrayList();
-		for (Map.Entry<Value, Instance> e : state.value2instance.entrySet())
-			values.add(e.getKey() + " -> " + e.getValue().toString().replace("\n", "\n  "));
-		for (Map.Entry<Factory, FactoryInstance> e : state.factory2instance.entrySet())
-			factories.add(e.getKey() + " -> " + e.getValue().toString().replace("\n", "\n  "));
-		Collections.sort(values);
-		Collections.sort(factories);
-		StringBuilder result = new StringBuilder();
-		result.append(getClass().getSimpleName());
-		result.append(" {\n  Values {\n    ");
-		result.append(Joiner.on("\n").join(values).replace("\n", "\n    "));
-		result.append("\n  } Factories {\n    ");
-		result.append(Joiner.on("\n").join(factories).replace("\n", "\n    "));
-		result.append("\n  } Configuration {\n    ");
-		result.append(config.toString().replace("\n", "\n    "));
-		return result.toString();
+		return new ToString().toString();
+		// key, status, scope, value, dependencies/errors
+		// List<String> values = Lists.newArrayList();
+		// List<String> factories = Lists.newArrayList();
+		// for (Map.Entry<Value, Instance> e : state.value2instance.entrySet())
+		// values.add(e.getKey() + " -> " + e.getValue().toString().replace("\n", "\n  "));
+		// for (Map.Entry<Factory, FactoryInstance> e : state.factory2instance.entrySet())
+		// factories.add(e.getKey() + " -> " + e.getValue().toString().replace("\n", "\n  "));
+		// Collections.sort(values);
+		// Collections.sort(factories);
+		// StringBuilder result = new StringBuilder();
+		// result.append(getClass().getSimpleName());
+		// result.append(" {\n  Values {\n    ");
+		// result.append(Joiner.on("\n").join(values).replace("\n", "\n    "));
+		// result.append("\n  } Factories {\n    ");
+		// result.append(Joiner.on("\n").join(factories).replace("\n", "\n    "));
+		// result.append("\n  } Configuration {\n    ");
+		// result.append(config.toString().replace("\n", "\n    "));
+		// return result.toString();
 	}
 }

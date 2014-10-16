@@ -1,4 +1,4 @@
-package org.xpect.expectation;
+package org.xpect.expectation.impl;
 
 import org.xpect.state.Creates;
 import org.xpect.text.IReplacement;

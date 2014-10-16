@@ -5,11 +5,11 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.xpect.expectation;
+package org.xpect.expectation.impl;
 
 import org.eclipse.xtext.util.Exceptions;
-import org.xpect.expectation.ActualCollection.ActualItem;
-import org.xpect.expectation.TargetSyntaxSupport.TargetLiteralSupport;
+import org.xpect.expectation.impl.ActualCollection.ActualItem;
+import org.xpect.expectation.impl.TargetSyntaxSupport.TargetLiteralSupport;
 
 import com.google.common.base.Function;
 

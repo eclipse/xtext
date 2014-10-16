@@ -12,5 +12,6 @@ import org.xpect.XpectContributionRole;
 @XpectContributionRole
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface XpectParameterAdapter {
+public @interface StatementRelatedRegionProvider {
+
 }

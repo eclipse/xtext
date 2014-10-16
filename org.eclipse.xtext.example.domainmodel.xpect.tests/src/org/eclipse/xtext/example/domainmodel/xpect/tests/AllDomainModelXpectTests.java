@@ -1,5 +1,6 @@
 package org.eclipse.xtext.example.domainmodel.xpect.tests;
 
+import org.eclipse.xtext.example.domainmodel.xpect.tests.generator.DMGeneratorTest;
 import org.eclipse.xtext.example.domainmodel.xpect.tests.jvmmodelinferrer.DMJvmModelInferrerTest;
 import org.eclipse.xtext.example.domainmodel.xpect.tests.linking.DMLinkingTest;
 import org.eclipse.xtext.example.domainmodel.xpect.tests.modify.DeleteUtilTest;
@@ -18,6 +19,7 @@ import org.junit.runners.Suite.SuiteClasses;
 		DeleteUtilTest.class,//
 		ParserTest.class,//
 		DMResourceDescriptionTest.class,//
+		DMGeneratorTest.class,//
 		DMScopingTest.class,//
 		DMXtextTests.class,//
 		DMValidationTest.class //

@@ -7,6 +7,7 @@ import java.util.List;
 import org.xpect.state.Creates;
 import org.xpect.state.Invalidates;
 import org.xpect.state.Managed;
+import org.xpect.state.XpectStateAnnotation;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
@@ -152,14 +153,17 @@ public class LoggingTestData {
 
 	}
 
+	@XpectStateAnnotation
 	@Retention(RetentionPolicy.RUNTIME)
 	public @interface Ann {
 	}
 
+	@XpectStateAnnotation
 	@Retention(RetentionPolicy.RUNTIME)
 	public @interface AnnDerived1 {
 	}
 
+	@XpectStateAnnotation
 	@Retention(RetentionPolicy.RUNTIME)
 	public @interface AnnDerived2 {
 	}

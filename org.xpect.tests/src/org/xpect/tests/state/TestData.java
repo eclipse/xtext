@@ -6,6 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import org.xpect.state.Creates;
 import org.xpect.state.Managed;
 import org.xpect.state.ManagedImpl;
+import org.xpect.state.XpectStateAnnotation;
 
 public class TestData {
 	public static class StaticValueProvider {
@@ -33,6 +34,7 @@ public class TestData {
 		}
 	}
 
+	@XpectStateAnnotation
 	@Retention(RetentionPolicy.RUNTIME)
 	public @interface Ann {
 	}

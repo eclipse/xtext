@@ -36,7 +36,7 @@ public class Text {
 		int nl = indexOf('\n', offset);
 		if (nl > 0)
 			return text.charAt(nl - 1) == '\r' ? nl - 1 : nl;
-		return nl;
+		return text.length();
 	}
 
 	public int currentLineEndLenght(int offset) {
@@ -177,7 +177,7 @@ public class Text {
 		int length = text.length() - prefix - suffix + 1;
 		int endIndex = other.length() - suffix + 1;
 		String replacement = prefix < endIndex ? other.substring(prefix, endIndex) : "";
-		return new Replacement(prefix, length, replacement);
+		return new Replacement(text, prefix, length, replacement);
 	}
 
 	public List<String> splitIntoLines() {

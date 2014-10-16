@@ -4,7 +4,7 @@ package pkg1 {
 	entity MyEntity1 {
 		
 		// int should be the java primitive
-		// XPECT linkedName at id --> int
+		// XPECT linkedName at int --> int
 		id:int
 		
 		// String should be from java.lang 

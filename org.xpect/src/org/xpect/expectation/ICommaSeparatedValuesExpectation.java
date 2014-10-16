@@ -7,11 +7,15 @@
  *******************************************************************************/
 package org.xpect.expectation;
 
+import org.xpect.XpectImport;
+import org.xpect.expectation.impl.CommaSeparatedValuesExpectationImpl;
+
 import com.google.common.base.Predicate;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@XpectImport(CommaSeparatedValuesExpectationImpl.class)
 public interface ICommaSeparatedValuesExpectation {
 	void assertEquals(Iterable<?> string);
 

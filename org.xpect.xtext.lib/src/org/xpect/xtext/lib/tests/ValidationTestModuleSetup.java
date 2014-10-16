@@ -24,13 +24,16 @@ import org.xpect.registry.DefaultBinding;
 import org.xpect.setup.XpectGuiceModule;
 import org.xpect.setup.XpectSetupFactory;
 import org.xpect.state.Creates;
+import org.xpect.state.XpectStateAnnotation;
+import org.xpect.text.IRegion;
+import org.xpect.text.Region;
 import org.xpect.ui.services.XtResourceValidator;
 import org.xpect.ui.util.XpectFileAccess;
-import org.xpect.xtext.lib.setup.ThisOffset.ThisOffsetProvider;
 import org.xpect.xtext.lib.setup.ThisResource;
 import org.xpect.xtext.lib.setup.XtextValidatingSetup;
-import org.xpect.xtext.lib.tests.ValidationTestModuleSetup.IssuesByOffsetSetup;
+import org.xpect.xtext.lib.tests.ValidationTestModuleSetup.IssuesByLineProvider;
 import org.xpect.xtext.lib.util.IssueOverlapsRangePredicate;
+import org.xpect.xtext.lib.util.NextLine.NextLineProvider;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.LinkedHashMultimap;
@@ -44,19 +47,20 @@ import com.google.inject.Key;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 @XpectGuiceModule
-@XpectImport(IssuesByOffsetSetup.class)
+@XpectImport(IssuesByLineProvider.class)
 public class ValidationTestModuleSetup extends AbstractDelegatingModule {
+	@XpectStateAnnotation
 	@Retention(RetentionPolicy.RUNTIME)
 	public @interface IssuesByLine {
 	}
 
 	@XpectSetupFactory
 	@XpectReplace(XtextValidatingSetup.class)
-	public static class IssuesByOffsetSetup extends XtextValidatingSetup {
+	public static class IssuesByLineProvider extends XtextValidatingSetup {
 
-		private Multimap<Integer, Issue> issuesByLine = null;
+		private Multimap<IRegion, Issue> issuesByLine = null;
 
-		public IssuesByOffsetSetup(@ThisResource XtextResource resource) {
+		public IssuesByLineProvider(@ThisResource XtextResource resource) {
 			super(resource);
 		}
 
@@ -66,7 +70,7 @@ public class ValidationTestModuleSetup extends AbstractDelegatingModule {
 		}
 
 		@Creates(IssuesByLine.class)
-		public Multimap<Integer, Issue> collectIssuesByLine() {
+		public Multimap<IRegion, Issue> collectIssuesByLine() {
 			if (issuesByLine == null) {
 				TestingResourceValidator validator = (TestingResourceValidator) getResource().getResourceServiceProvider().getResourceValidator();
 				issuesByLine = validator.validateAndMapByOffset(getResource(), CheckMode.ALL, CancelIndicator.NullImpl);
@@ -95,8 +99,8 @@ public class ValidationTestModuleSetup extends AbstractDelegatingModule {
 			return Lists.newArrayList(validateAndMapByOffset(resource, mode, indicator).get(UNMATCHED));
 		}
 
-		public Multimap<Integer, Issue> validateAndMapByOffset(Resource resource, CheckMode mode, CancelIndicator indicator) {
-			Multimap<Integer, Issue> result = LinkedHashMultimap.create();
+		public Multimap<IRegion, Issue> validateAndMapByOffset(Resource resource, CheckMode mode, CancelIndicator indicator) {
+			Multimap<IRegion, Issue> result = LinkedHashMultimap.create();
 			if (resource instanceof XtextResource && ((XtextResource) resource).getParseResult() != null) {
 				XtextResource xresource = (XtextResource) resource;
 				List<Issue> issuesFromDelegate = validateDelegate(resource, mode, indicator);
@@ -105,9 +109,9 @@ public class ValidationTestModuleSetup extends AbstractDelegatingModule {
 					XpectFile xpectFile = XpectFileAccess.getXpectFile(resource);
 					Set<Issue> matched = Sets.newHashSet();
 					for (XpectInvocation inv : xpectFile.getInvocations()) {
-						int offset = new ThisOffsetProvider(inv, xresource).getOffset();
-						Iterable<Issue> selected = filter(issues, new IssueOverlapsRangePredicate(xresource, offset, getExpectedSeverity(inv)));
-						result.putAll(offset, selected);
+						IRegion region = new NextLineProvider(xresource, inv).getNextLine();
+						Iterable<Issue> selected = filter(issues, new IssueOverlapsRangePredicate(region, getExpectedSeverity(inv)));
+						result.putAll(region, selected);
 						addAll(matched, selected);
 					}
 					issues.removeAll(matched);
@@ -120,11 +124,11 @@ public class ValidationTestModuleSetup extends AbstractDelegatingModule {
 		}
 	}
 
+	public static final IRegion UNMATCHED = new Region("(unmatched)", -1, 0);
+
 	public void configure(Binder binder) {
 		binder.bind(IResourceValidator.class).to(TestingResourceValidator.class);
 		binder.bind(IResourceValidator.class).annotatedWith(DefaultBinding.class).to(getOriginalType(Key.get(IResourceValidator.class)));
 	}
-
-	public static final Integer UNMATCHED = -1;
 
 }

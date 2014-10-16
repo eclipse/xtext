@@ -69,6 +69,6 @@ public class FileSetupContext {
 
 	@Override
 	public String toString() {
-		return state.toString();
+		return xpectFile.toString();
 	}
 }

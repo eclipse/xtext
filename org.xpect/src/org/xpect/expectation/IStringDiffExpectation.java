@@ -1,5 +1,12 @@
 package org.xpect.expectation;
 
+import org.xpect.XpectImport;
+import org.xpect.expectation.impl.StringDiffExpectationImpl;
+
+/**
+ * Asserts that a specific diff has been created, used to test modifications (e.g., delete or add elements).
+ */
+@XpectImport(StringDiffExpectationImpl.class)
 public interface IStringDiffExpectation {
 
 	public interface ITokenAdapter<T> {

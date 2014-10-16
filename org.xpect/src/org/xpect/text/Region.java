@@ -12,14 +12,15 @@ package org.xpect.text;
  */
 public class Region implements IRegion {
 
+	private final CharSequence document;
 	private final int length;
-
 	private final int offset;
 
-	public Region(int offset, int length) {
+	public Region(CharSequence document, int offset, int length) {
 		super();
 		this.offset = offset;
 		this.length = length;
+		this.document = document;
 	}
 
 	@Override
@@ -28,6 +29,10 @@ public class Region implements IRegion {
 			return false;
 		Region other = (Region) obj;
 		return length == other.length && offset == other.offset;
+	}
+
+	public CharSequence getDocument() {
+		return document;
 	}
 
 	public int getLength() {
@@ -41,6 +46,11 @@ public class Region implements IRegion {
 	@Override
 	public int hashCode() {
 		return length + (offset * 13);
+	}
+
+	@Override
+	public String toString() {
+		return new RegionToString().with(this).toString();
 	}
 
 }

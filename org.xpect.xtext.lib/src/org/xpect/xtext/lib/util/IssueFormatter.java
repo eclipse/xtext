@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.xpect.xtext.lib.util;
 
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.validation.Issue;
 
 import com.google.common.base.Function;
@@ -17,12 +16,12 @@ import com.google.common.base.Function;
  */
 public class IssueFormatter implements Function<Issue, String> {
 
-	private final XtextResource resource;
+	private final CharSequence document;
 	private final boolean showSeverity;
 
-	public IssueFormatter(XtextResource resource, boolean showSeverity) {
+	public IssueFormatter(CharSequence document, boolean showSeverity) {
 		super();
-		this.resource = resource;
+		this.document = document;
 		this.showSeverity = showSeverity;
 	}
 
@@ -43,14 +42,19 @@ public class IssueFormatter implements Function<Issue, String> {
 		return result.toString();
 	}
 
-	protected String getIssueLocationText(Issue issue) {
-		String text = resource.getParseResult().getRootNode().getText();
-		String markertext = text.substring(issue.getOffset(), issue.getOffset() + issue.getLength());
-		return markertext.replace('\n', ' ').replace('\r', ' ');
+	public CharSequence getDocument() {
+		return document;
 	}
 
-	public XtextResource getResource() {
-		return resource;
+	protected String getIssueLocationText(Issue issue) {
+		Integer offset = issue.getOffset();
+		Integer length = issue.getLength();
+		if (offset == null)
+			return "(offset is null)";
+		if (length == null)
+			return "(length is null)";
+		String markertext = document.subSequence(offset, offset + length).toString();
+		return markertext.replace('\n', ' ').replace('\r', ' ');
 	}
 
 	public boolean isShowSeverity() {

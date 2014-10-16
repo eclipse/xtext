@@ -78,14 +78,14 @@ public class XpectFileRunner extends Runner implements Filterable, Sortable {
 	}
 
 	protected Configuration createConfiguration(XjmTestMethod method) {
-		Configuration config = new Configuration();
+		Configuration config = new Configuration(method.getName() + "()");
 		config.addValue(ThisTestClass.class, Class.class, method.getTest().getJavaClass());
 		config.addDefaultValue(XjmTestMethod.class, method);
 		return config;
 	}
 
 	protected Configuration createConfiguration(XpectInvocation invocation) {
-		Configuration config = new Configuration();
+		Configuration config = new Configuration(invocation.getMethodName() + "(...)");
 		config.addValue(ThisTestClass.class, Class.class, invocation.getMethod().getTest().getJavaClass());
 		config.addDefaultValue(XpectInvocation.class, invocation);
 		config.addDefaultValue(XjmXpectMethod.class, invocation.getMethod());

@@ -9,8 +9,10 @@ package org.xpect.util;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.List;
 
 import com.google.common.collect.Lists;
@@ -126,5 +128,14 @@ public class AnnotationUtil {
 				return r;
 		}
 		return null;
+	}
+
+	public static <T extends Annotation> T newInstanceWithDefaults(Class<T> annotationType) {
+		Object proxy = Proxy.newProxyInstance(annotationType.getClassLoader(), new Class<?>[] { annotationType }, new InvocationHandler() {
+			public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+				return method.getDefaultValue();
+			}
+		});
+		return annotationType.cast(proxy);
 	}
 }

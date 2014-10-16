@@ -18,6 +18,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.xpect.XpectImport;
 import org.xpect.setup.XpectSetupFactory;
 import org.xpect.state.Creates;
+import org.xpect.state.XpectStateAnnotation;
 import org.xpect.xtext.lib.setup.ThisModel.ThisModelFactory;
 
 import com.google.common.base.Joiner;
@@ -25,6 +26,7 @@ import com.google.common.base.Joiner;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@XpectStateAnnotation
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.PARAMETER, ElementType.FIELD })
 @XpectImport(ThisModelFactory.class)

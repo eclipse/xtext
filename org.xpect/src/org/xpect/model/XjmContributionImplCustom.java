@@ -3,6 +3,7 @@ package org.xpect.model;
 import java.lang.annotation.Annotation;
 import java.util.Collection;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.util.Strings;
@@ -14,6 +15,8 @@ import org.xpect.util.JvmAnnotationUtil;
 import com.google.common.collect.Lists;
 
 public class XjmContributionImplCustom extends XjmContributionImpl {
+
+	private static final Logger LOG = Logger.getLogger(XjmContributionImplCustom.class);
 
 	public void initialize(JvmDeclaredType type, Collection<? extends Annotation> roles) {
 		super.setDeactivationReason(null);
@@ -34,6 +37,22 @@ public class XjmContributionImplCustom extends XjmContributionImpl {
 	public boolean isActive() {
 		JvmDeclaredType cls = getJvmClass();
 		return cls != null && !cls.eIsProxy() && Strings.isEmpty(getDeactivationReason());
+	}
+
+	@Override
+	public <T> T newInstance(Class<T> expectedType) {
+		Class<?> clazz = getJavaClass();
+		if (clazz == null || !expectedType.isAssignableFrom(clazz))
+			return null;
+		try {
+			T result = expectedType.cast(clazz.newInstance());
+			return result;
+		} catch (InstantiationException e) {
+			LOG.error(e.getMessage(), e);
+		} catch (IllegalAccessException e) {
+			LOG.error(e.getMessage(), e);
+		}
+		return null;
 	}
 
 	@Override

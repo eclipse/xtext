@@ -8,8 +8,8 @@ public class Replacement extends Region implements IReplacement {
 
 	private final String replacement;
 
-	public Replacement(int offset, int length, String replacement) {
-		super(offset, length);
+	public Replacement(CharSequence document, int offset, int length, String replacement) {
+		super(document, offset, length);
 		this.replacement = replacement;
 	}
 

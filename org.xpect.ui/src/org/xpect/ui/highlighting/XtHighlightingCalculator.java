@@ -24,10 +24,8 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.xpect.XpectFile;
 import org.xpect.XpectInvocation;
-import org.xpect.parameter.IParameterParser.IParsedParameterProvider;
-import org.xpect.parameter.IParameterProvider;
+import org.xpect.parameter.IStatementRelatedRegion;
 import org.xpect.registry.DefaultBinding;
-import org.xpect.text.IRegion;
 import org.xpect.ui.util.XpectFileAccess;
 
 import com.google.common.collect.Maps;
@@ -108,9 +106,7 @@ public class XtHighlightingCalculator implements ISemanticHighlightingCalculator
 		for (EObject obj : xpectResource.getContents())
 			if (obj instanceof XpectFile)
 				for (XpectInvocation inv : ((XpectFile) obj).getInvocations())
-					for (IParameterProvider prov : inv.getParameters())
-						if (prov instanceof IParsedParameterProvider)
-							for (IRegion region : ((IParsedParameterProvider) prov).getSemanticRegions())
-								acceptor.addPosition(region.getOffset(), region.getLength(), XtHighlightingConfiguration.DEFAULT_ID);
+					for (IStatementRelatedRegion region : inv.getRelatedRegions())
+						acceptor.addPosition(region.getOffset(), region.getLength(), XtHighlightingConfiguration.DEFAULT_ID);
 	}
 }

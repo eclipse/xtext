@@ -5,11 +5,15 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.xpect.expectation;
+package org.xpect.expectation.impl;
 
 import java.util.List;
 
-import org.xpect.expectation.TargetSyntaxSupport.TargetLiteralSupport;
+import org.xpect.XpectArgument;
+import org.xpect.expectation.IExpectationRegion;
+import org.xpect.expectation.IMultiLineExpectationRegion;
+import org.xpect.expectation.ISingleLineExpectationRegion;
+import org.xpect.expectation.impl.TargetSyntaxSupport.TargetLiteralSupport;
 import org.xpect.text.IReplacement;
 import org.xpect.text.Replacement;
 import org.xpect.text.Text;
@@ -22,17 +26,19 @@ import com.google.common.base.Strings;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class AbstractExpectation {
+	private final XpectArgument argument;
 	private final IExpectationRegion region;
 	private final TargetLiteralSupport targetLiteral;
 	private final TargetSyntaxSupport targetSyntax;
 
-	public AbstractExpectation(TargetSyntaxSupport targetSyntax, IExpectationRegion region) {
+	public AbstractExpectation(XpectArgument argument, TargetSyntaxSupport targetSyntax) {
 		super();
+		this.argument = argument;
+		this.region = argument.getStatement().getRelatedRegion(IExpectationRegion.class);
 		Preconditions.checkPositionIndex(region.getOffset(), region.getDocument().length());
 		Preconditions.checkPositionIndex(region.getOffset() + region.getLength(), region.getDocument().length());
 		this.targetSyntax = targetSyntax;
 		this.targetLiteral = targetSyntax.getLiteralSupport(region.getOffset());
-		this.region = region;
 	}
 
 	protected String findValidSeparator(String value, String suggestedSeparator) {
@@ -47,6 +53,10 @@ public class AbstractExpectation {
 			}
 		}
 		throw new IllegalStateException();
+	}
+
+	public XpectArgument getArgument() {
+		return argument;
 	}
 
 	public String getExpectation() {
@@ -89,7 +99,7 @@ public class AbstractExpectation {
 			builder.append(indented);
 			builder.append(betweenExpectationAndSeparator);
 			builder.append(separator);
-			return new Replacement(sepOpening, (sepClosing + mlRegion.getSeparator().length()) - sepOpening, builder.toString());
+			return new Replacement(document.getText(), sepOpening, (sepClosing + mlRegion.getSeparator().length()) - sepOpening, builder.toString());
 		} else if (region instanceof ISingleLineExpectationRegion) {
 			ISingleLineExpectationRegion slRegion = (ISingleLineExpectationRegion) region;
 			if (enforceMultiLine) {
@@ -112,9 +122,9 @@ public class AbstractExpectation {
 				builder.append(indentation);
 				builder.append(separator);
 				int length = (slRegion.getOffset() - slRegion.getOpeningSeparatorOffset()) + slRegion.getLength();
-				return new Replacement(slRegion.getOpeningSeparatorOffset(), length, builder.toString());
+				return new Replacement(document.getText(), slRegion.getOpeningSeparatorOffset(), length, builder.toString());
 			} else {
-				return new Replacement(region.getOffset(), region.getLength(), value.toString());
+				return new Replacement(document.getText(), region.getOffset(), region.getLength(), value.toString());
 			}
 		}
 		throw new IllegalStateException();

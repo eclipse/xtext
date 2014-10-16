@@ -24,7 +24,7 @@ package pkg1 {
 	entity MyEntity1 extends MyEntity3 {
 		
 		// int should be the java primitive
-		// XPECT linkedName at id --> int
+		// XPECT linkedName at int --> int
 		id:int
 		
 		// String should be from java.lang 
@@ -36,7 +36,7 @@ package pkg1 {
 	// XPECT linkedFragment at MyEntity3 --> test2.dmodel#/1
 	entity MyEntity2 extends MyEntity3 {
 		
-		// XPECT linkedFragment at id --> java:/Primitives#int
+		// XPECT linkedFragment at int --> java:/Primitives#int
 		id:int
 		
 		// XPECT linkedFragment at String --> java:/Objects/java.lang.String#java.lang.String

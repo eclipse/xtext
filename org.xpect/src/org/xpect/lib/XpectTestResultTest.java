@@ -13,13 +13,12 @@ import org.junit.runner.notification.RunNotifier;
 import org.xpect.XpectFile;
 import org.xpect.XpectImport;
 import org.xpect.XpectInvocation;
+import org.xpect.expectation.IExpectationRegion;
 import org.xpect.expectation.IStringDiffExpectation;
 import org.xpect.expectation.IStringExpectation;
 import org.xpect.expectation.StringDiffExpectation;
 import org.xpect.expectation.StringExpectation;
 import org.xpect.lib.XpectTestResultTest.ReflectiveXpectFileRunner;
-import org.xpect.parameter.IParameterParser.IParsedParameterProvider;
-import org.xpect.parameter.IParameterProvider;
 import org.xpect.runner.Xpect;
 import org.xpect.runner.XpectFileRunner;
 import org.xpect.runner.XpectRunner;
@@ -96,10 +95,7 @@ public class XpectTestResultTest {
 	}
 
 	protected IRegion getExpectationRegion(XpectTestRunner runner) {
-		for (IParameterProvider provider : runner.getInvocation().getParameters())
-			if (provider instanceof IParsedParameterProvider)
-				return ((IParsedParameterProvider) provider).getClaimedRegion();
-		return null;
+		return runner.getInvocation().getRelatedRegion(IExpectationRegion.class);
 	}
 
 	protected Failure run(XpectTestRunner inspected) {

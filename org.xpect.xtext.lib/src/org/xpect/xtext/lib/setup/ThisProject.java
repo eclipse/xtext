@@ -6,7 +6,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import org.xpect.XpectImport;
+import org.xpect.state.XpectStateAnnotation;
 
+@XpectStateAnnotation
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.PARAMETER, ElementType.FIELD })
 @XpectImport(XtextWorkspaceSetup.class)

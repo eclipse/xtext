@@ -159,6 +159,8 @@ public class XpectJavaModelImplCustom extends XpectJavaModelImpl {
 				JvmOperation jvmMethod = method.getJvmMethod();
 				if (jvmMethod == null || jvmMethod.eIsProxy())
 					continue;
+				for (JvmAnnotationReference ref : jvmMethod.getAnnotations())
+					collectContributions(ref.getAnnotation(), method, contributions, visited);
 				for (JvmFormalParameter param : jvmMethod.getParameters()) {
 					for (JvmAnnotationReference ref : param.getAnnotations())
 						collectContributions(ref.getAnnotation(), method, contributions, visited);

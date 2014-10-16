@@ -1,6 +1,8 @@
 package org.xpect.text;
 
 public class CharSequences {
+	private static final String DOTS = "...";
+
 	public static <T extends CharSequence> T getMostSimilarCandiate(Iterable<? extends T> candiates, T defautValue, CharSequence similarTo) {
 		if (similarTo == null || similarTo.length() == 0)
 			return defautValue;
@@ -14,6 +16,18 @@ public class CharSequences {
 			}
 		}
 		return result;
+	}
+
+	public static String getPostfix(CharSequence document, int offset, int maxLenght) {
+		if (offset + maxLenght > document.length())
+			return document.subSequence(offset, document.length()).toString();
+		return document.subSequence(offset, offset + (maxLenght - DOTS.length())) + DOTS;
+	}
+
+	public static String getPrefix(CharSequence document, int offset, int maxLenght) {
+		if (offset < maxLenght)
+			return document.subSequence(0, offset).toString();
+		return DOTS + document.subSequence(offset - (maxLenght - DOTS.length()), offset);
 	}
 
 	public static int getSimilarity(CharSequence s1, CharSequence s2) {
@@ -30,5 +44,14 @@ public class CharSequences {
 			else
 				break;
 		return result;
+	}
+
+	public static String toSingleLineString(Object seq, int maxLenght) {
+		if (seq == null)
+			return null;
+		String result = seq.toString().replace("\n", "\\n");
+		if (result.length() <= maxLenght)
+			return result;
+		return result.substring(0, maxLenght - DOTS.length()) + DOTS;
 	}
 }

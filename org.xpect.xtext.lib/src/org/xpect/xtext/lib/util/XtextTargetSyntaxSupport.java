@@ -4,7 +4,7 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
-import org.xpect.expectation.TargetSyntaxSupport;
+import org.xpect.expectation.impl.TargetSyntaxSupport;
 import org.xpect.setup.XpectSetupFactory;
 import org.xpect.state.Creates;
 import org.xpect.text.IReplacement;
@@ -82,7 +82,7 @@ public class XtextTargetSyntaxSupport extends TargetSyntaxSupport {
 				newText.append(text.substring(beginIndex, end));
 			newText.append(" ");
 			newText.append(mlRule.getEnd());
-			return new Replacement(leaf.getOffset(), end, newText.toString());
+			return new Replacement(replacement.getDocument(), leaf.getOffset(), end, newText.toString());
 		} else {
 			String document = leaf.getRootNode().getText();
 			StringBuilder postIndentaiton = new StringBuilder();
@@ -94,7 +94,7 @@ public class XtextTargetSyntaxSupport extends TargetSyntaxSupport {
 			String oldIndentation = "\n" + indentation;
 			String newIndentation = "\n" + indentation + slRule.getStart() + postIndentaiton;
 			String newText = replacement.getReplacement().replace(oldIndentation, newIndentation);
-			return new Replacement(replacement.getOffset(), replacement.getLength(), newText);
+			return new Replacement(replacement.getDocument(), replacement.getOffset(), replacement.getLength(), newText);
 		}
 	}
 
@@ -105,7 +105,7 @@ public class XtextTargetSyntaxSupport extends TargetSyntaxSupport {
 
 	protected IReplacement escapeTextInMultiLineComment(MLCommentRule commentRule, IReplacement replacement) {
 		String text = escapeTextInMultiLineComment(commentRule, replacement.getReplacement());
-		return new Replacement(replacement.getOffset(), replacement.getLength(), text);
+		return new Replacement(replacement.getDocument(), replacement.getOffset(), replacement.getLength(), text);
 	}
 
 	protected String escapeTextInMultiLineComment(MLCommentRule commentRule, String replacement) {
