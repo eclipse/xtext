@@ -75,6 +75,8 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.internal.FeatureLinkHelper;
+import org.eclipse.xtext.xbase.typesystem.override.BottomResolvedOperation;
+import org.eclipse.xtext.xbase.typesystem.override.OverrideTester;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
@@ -98,6 +100,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	
 	@Inject
 	private FeatureLinkHelper featureLinkHelper;
+	
+	@Inject
+	private OverrideTester overrideTester;
 	
 	/**
 	 * @param isReferenced unused in this context but necessary for dispatch signature 
@@ -1530,6 +1535,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			if (operation != null) {
 				final LightweightTypeReference returnType = getClosureOperationReturnType(type, operation);
 				appendOperationVisibility(b, operation);
+				if (!operation.getTypeParameters().isEmpty()) {
+					appendTypeParameters(b, operation, type);
+				}
 				b.append(returnType);
 				b.append(" ").append(operation.getSimpleName());
 				b.append("(");
@@ -1561,6 +1569,30 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			b.closeScope();
 		}
 		return b.decreaseIndentation().newLine().append("}");
+	}
+	
+	private void appendTypeParameters(ITreeAppendable b, JvmOperation operation, LightweightTypeReference instantiatedType) {
+		BottomResolvedOperation resolvedOperation = new BottomResolvedOperation(operation, instantiatedType, overrideTester);
+		List<JvmTypeParameter> typeParameters = resolvedOperation.getResolvedTypeParameters();
+		b.append("<");
+		for(int i = 0; i < typeParameters.size(); i++) {
+			if (i != 0) {
+				b.append(", ");
+			}
+			JvmTypeParameter typeParameter = typeParameters.get(i);
+			b.append(typeParameter.getName());
+			List<LightweightTypeReference> constraints = resolvedOperation.getResolvedTypeParameterConstraints(i);
+			if (!constraints.isEmpty()) {
+				b.append(" extends ");
+				for(int j = 0; j < constraints.size(); j++) {
+					if (j != 0) {
+						b.append(" & ");
+					}
+					b.append(constraints.get(j));
+				}
+			}
+		}
+		b.append("> ");
 	}
 
 	protected void appendClosureParameter(JvmFormalParameter closureParam, LightweightTypeReference parameterType, ITreeAppendable appendable) {

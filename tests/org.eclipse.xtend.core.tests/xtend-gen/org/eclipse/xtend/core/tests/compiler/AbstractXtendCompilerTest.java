@@ -27,6 +27,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.generator.IFilePostProcessor;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.util.concurrent.IReadAccess;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
 import org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter;
@@ -69,7 +70,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
   @Before
   public void setupCompiler() {
     Class<? extends AbstractXtendCompilerTest> _class = this.getClass();
-    final Class<?>[] classes = new Class<?>[] { _class, Amount.class, Data.class, Inject.class, Provider.class, Lexer.class, InternalXtendLexer.class, CollectionLiterals.class, JvmTypeParameter.class, ITraceRegionProvider.class, XExpression.class, Object.class, Annotation1.class, Lists.class, EObject.class, Matcher.class, Is.class, Assert.class };
+    final Class<?>[] classes = new Class<?>[] { _class, Amount.class, Data.class, Inject.class, Provider.class, Lexer.class, InternalXtendLexer.class, IReadAccess.class, CollectionLiterals.class, JvmTypeParameter.class, ITraceRegionProvider.class, XExpression.class, Object.class, Annotation1.class, Lists.class, EObject.class, Matcher.class, Is.class, Assert.class };
     this.compilationTestHelper.setJavaCompilerClassPath(classes);
     Class<? extends AbstractXtendCompilerTest> _class_1 = this.getClass();
     ClassLoader _classLoader = _class_1.getClassLoader();

@@ -451,18 +451,28 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	public void checkTypeParameterNotUsedInStaticContext(JvmTypeReference ref) {
 		if(ref.getType() instanceof JvmTypeParameter) {
 			JvmTypeParameter typeParameter = (JvmTypeParameter) ref.getType();
-			EObject currentParent = logicalContainerProvider.getNearestLogicalContainer(ref);
-			while(currentParent != null) {
-				if(currentParent == typeParameter.eContainer())
-					return;
-				else if(isStaticContext(currentParent)) 
-					error("Cannot make a static reference to the non-static type " + typeParameter.getName(), 
-							ref, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, -1, STATIC_ACCESS_TO_INSTANCE_MEMBER);
-				currentParent = currentParent.eContainer();
+			if (!(typeParameter.getDeclarator() instanceof JvmOperation) || !isTypeParameterOfClosureImpl(ref)) {
+				EObject currentParent = logicalContainerProvider.getNearestLogicalContainer(ref);
+				while(currentParent != null) {
+					if(currentParent == typeParameter.eContainer())
+						return;
+					else if(isStaticContext(currentParent)) 
+						error("Cannot make a static reference to the non-static type " + typeParameter.getName(), 
+								ref, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, -1, STATIC_ACCESS_TO_INSTANCE_MEMBER);
+					currentParent = currentParent.eContainer();
+				}
 			}
 		}
 	}
 		
+	private boolean isTypeParameterOfClosureImpl(JvmTypeReference ref) {
+		JvmFormalParameter parameter = EcoreUtil2.getContainerOfType(ref, JvmFormalParameter.class);
+		if (parameter != null) {
+			return parameter.eContainer() instanceof XClosure;
+		}
+		return false;
+	}
+
 	protected boolean isStaticContext(EObject element) {
 		if(element instanceof JvmConstructor)
 			return false;
