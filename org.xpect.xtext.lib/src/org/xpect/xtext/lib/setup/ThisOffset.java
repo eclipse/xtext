@@ -12,52 +12,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.xpect.XpectImport;
-
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@Deprecated
+// now the OFFSET parameter from @ParameterParser takes care of default offsets
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.PARAMETER, ElementType.FIELD })
-@XpectImport({ XtextStandaloneSetup.class /* , ThisOffsetProvider.class, */, XtextWorkspaceSetup.class })
 public @interface ThisOffset {
 
-	// @XpectSetupFactory
-	// public static class ThisOffsetProvider extends AbstractOffsetProvider {
-	// private final XpectInvocation invocation;
-	// private final XtextResource resource;
-	//
-	// public ThisOffsetProvider(XpectInvocation invocation, @ThisResource XtextResource resource) {
-	// this.invocation = invocation;
-	// this.resource = resource;
-	// }
-	//
-	// public XpectInvocation getInvocation() {
-	// return invocation;
-	// }
-	//
-	// @Override
-	// @Creates(ThisOffset.class)
-	// public int getOffset() {
-	// INode invNode = NodeModelUtils.getNode(invocation);
-	// int invEnd = invNode.getOffset() + invNode.getLength();
-	// INode node = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), invEnd);
-	// NodeIterator ni = new NodeIterator(node);
-	// while (ni.hasNext()) {
-	// INode next = ni.next();
-	// if (next instanceof ILeafNode && !((ILeafNode) next).isHidden())
-	// return next.getOffset();
-	// }
-	// return -1;
-	// }
-	//
-	// @Creates(ThisOffset.class)
-	// public IParameterProvider getProvider() {
-	// return this;
-	// }
-	//
-	// public XtextResource getResource() {
-	// return resource;
-	// }
-	// }
 }
