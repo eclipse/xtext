@@ -31,6 +31,7 @@ import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider
 import org.antlr.runtime.Lexer
 import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer
+import org.eclipse.xtext.util.concurrent.IReadAccess
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -55,6 +56,7 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			javax.inject.Provider,
 			Lexer,
 			InternalXtendLexer,
+			IReadAccess,
 			CollectionLiterals,
 			JvmTypeParameter,
 			ITraceRegionProvider,
