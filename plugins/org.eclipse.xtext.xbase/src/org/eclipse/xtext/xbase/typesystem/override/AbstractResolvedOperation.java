@@ -177,6 +177,14 @@ public abstract class AbstractResolvedOperation extends AbstractResolvedExecutab
 	}
 	
 	@Override
+	protected boolean isRawTypeInheritance() {
+		if (getDeclaration().isStatic()) {
+			return false;
+		}
+		return super.isRawTypeInheritance();
+	}
+	
+	@Override
 	protected boolean isResolvedTypeParameter(JvmTypeParameter typeParameter) {
 		if (getResolvedTypeParameters().contains(typeParameter)) {
 			return true;

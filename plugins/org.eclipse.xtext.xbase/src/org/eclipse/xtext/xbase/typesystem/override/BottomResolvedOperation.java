@@ -54,6 +54,9 @@ public class BottomResolvedOperation extends AbstractResolvedOperation {
 	}
 
 	protected Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> computeContextTypeParameterMapping() {
+		if (getDeclaration().isStatic()) {
+			return Collections.emptyMap();
+		}
 		return new DeclaratorTypeArgumentCollector().getTypeParameterMapping(getContextType());
 	}
 	
