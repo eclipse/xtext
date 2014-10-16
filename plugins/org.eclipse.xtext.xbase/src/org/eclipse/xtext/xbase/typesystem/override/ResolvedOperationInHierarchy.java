@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.override;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -85,6 +86,9 @@ public class ResolvedOperationInHierarchy extends AbstractResolvedOperation {
 	
 	@Override
 	protected Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getContextTypeParameterMapping()  {
+		if (getDeclaration().isStatic()) {
+			return Collections.emptyMap();
+		}
 		return getBottom().getContextTypeParameterMapping();
 	}
 	

@@ -48,6 +48,9 @@ public class BottomResolvedOperation extends AbstractResolvedOperation {
 
 	@Override
 	protected Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getContextTypeParameterMapping() {
+		if (getDeclaration().isStatic()) {
+			return Collections.emptyMap();
+		}
 		if (typeParameterMapping != null)
 			return typeParameterMapping;
 		return typeParameterMapping = Collections.unmodifiableMap(computeContextTypeParameterMapping());
