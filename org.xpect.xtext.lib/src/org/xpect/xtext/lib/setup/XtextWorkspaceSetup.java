@@ -63,7 +63,11 @@ public class XtextWorkspaceSetup {
 		if (workspace == null) {
 			workspaceConfig.cleanWorkspace();
 			workspace = workspaceConfig.configureWorkspace(ctx);
-			workspaceConfig.waitForAutoBuild();
+			if (workspaceConfig.isAutobuild()) {
+				workspaceConfig.waitForAutoBuild();
+			} else {
+				workspaceConfig.buildIncrementally();
+			}
 			// System.out.println(new IResourceFormatter().formatWorkspace());
 		}
 		return workspace;
