@@ -1,6 +1,7 @@
 package org.xpect.expectation.impl;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.xtext.util.Pair;
 import org.junit.ComparisonFailure;
@@ -14,16 +15,52 @@ import org.xpect.setup.XpectSetupFactory;
 import org.xpect.state.Creates;
 import org.xpect.text.Text;
 
+import com.google.common.base.Objects;
+import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 
 @XpectSetupFactory
 @XpectImport(ExpectationRegionProvider.class)
 public class CommaSeparatedValuesExpectationImpl extends AbstractExpectation implements ICommaSeparatedValuesExpectation {
+	protected static class ValueImpl implements ICommaSeparatedValuesExpectation.Value {
+
+		private final ExpectationCollection.ExpectationItem delegate;
+
+		public ValueImpl(ExpectationItem delegate) {
+			super();
+			this.delegate = delegate;
+		}
+
+		public String getText() {
+			return delegate.getPure();
+		}
+
+		public boolean isNegated() {
+			return delegate.isNegated();
+		}
+
+		public boolean isWildcard() {
+			return delegate.isWildcard();
+		}
+
+		@Override
+		public String toString() {
+			ToStringHelper helper = Objects.toStringHelper(ICommaSeparatedValuesExpectation.Value.class);
+			helper.add("text", getText()).add("negated", isNegated()).add("wildcard", isWildcard());
+			return helper.toString();
+		}
+	}
+
 	private final CommaSeparatedValuesExpectation annotation;
+
+	private final ExpectationCollection expectationCollection;
 
 	public CommaSeparatedValuesExpectationImpl(XpectArgument argument, TargetSyntaxSupport syntax) {
 		super(argument, syntax);
 		this.annotation = argument.getAnnotationOrDefault(CommaSeparatedValuesExpectation.class);
+		this.expectationCollection = createExpectationCollection();
 	}
 
 	public void assertEquals(Iterable<?> actual) {
@@ -31,14 +68,6 @@ public class CommaSeparatedValuesExpectationImpl extends AbstractExpectation imp
 	}
 
 	public void assertEquals(Iterable<?> actual, Predicate<String> predicate) {
-		ExpectationCollection exp = new ExpectationCollection();
-		exp.setCaseSensitive(annotation.caseSensitive());
-		exp.setOrdered(annotation.ordered());
-		exp.setQuoted(annotation.quoted());
-		exp.setSeparator(',');
-		exp.setWhitespaceSensitive(annotation.whitespaceSensitive());
-		exp.init(getExpectation());
-
 		ActualCollection act = new ActualCollection();
 		act.setTargetLiteralSupport(getTargetSyntaxLiteral());
 		act.setCaseSensitive(annotation.caseSensitive());
@@ -47,26 +76,26 @@ public class CommaSeparatedValuesExpectationImpl extends AbstractExpectation imp
 		act.setSeparator(',');
 		act.setWhitespaceSensitive(annotation.whitespaceSensitive());
 		if (actual != null && predicate != null) {
-			if (exp.isWildcard())
-				act.init(exp.applyPredicate(predicate), annotation.itemFormatter());
+			if (expectationCollection.isWildcard())
+				act.init(expectationCollection.applyPredicate(predicate), annotation.itemFormatter());
 			else
 				act.init(actual, annotation.itemFormatter());
 		} else if (predicate != null)
-			act.init(exp.applyPredicate(predicate), annotation.itemFormatter());
+			act.init(expectationCollection.applyPredicate(predicate), annotation.itemFormatter());
 		else if (actual != null)
 			act.init(actual, annotation.itemFormatter());
 		else
 			throw new NullPointerException();
 
 		String nl = new Text(this.getRegion().getDocument()).getNL();
-		if (!exp.matches(act)) {
+		if (!expectationCollection.matches(act)) {
 			StringBuilder expString = new StringBuilder();
 			StringBuilder actString = new StringBuilder();
 			boolean expWrap = false;
 			boolean expEmpty = false;
 			boolean actWrap = false;
 			int lineLength = 0, lineCount = 0;
-			for (Pair<Collection<ExpectationItem>, ActualItem> pair : exp.map(act)) {
+			for (Pair<Collection<ExpectationItem>, ActualItem> pair : expectationCollection.map(act)) {
 				String expItem = null;
 				String actItem = null;
 				if (pair.getFirst() != null && !pair.getFirst().isEmpty()) {
@@ -125,8 +154,26 @@ public class CommaSeparatedValuesExpectationImpl extends AbstractExpectation imp
 		return this;
 	}
 
+	protected ExpectationCollection createExpectationCollection() {
+		ExpectationCollection exp = new ExpectationCollection();
+		exp.setCaseSensitive(annotation.caseSensitive());
+		exp.setOrdered(annotation.ordered());
+		exp.setQuoted(annotation.quoted());
+		exp.setSeparator(',');
+		exp.setWhitespaceSensitive(annotation.whitespaceSensitive());
+		exp.init(getExpectation());
+		return exp;
+	}
+
 	public CommaSeparatedValuesExpectation getAnnotation() {
 		return annotation;
+	}
+
+	public List<Value> getExpectedValues() {
+		List<Value> result = Lists.newArrayList();
+		for (ExpectationItem item : expectationCollection)
+			result.add(new ValueImpl(item));
+		return ImmutableList.copyOf(result);
 	}
 
 	protected String str(int length) {
