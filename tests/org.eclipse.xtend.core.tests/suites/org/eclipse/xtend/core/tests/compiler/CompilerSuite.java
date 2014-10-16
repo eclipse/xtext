@@ -72,6 +72,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	CompilerBug441099Test.class,
 	CompilerBug441580Test.class,
 	CompilerBug445487Test.class,
+	CompilerBug447516Test.class,
 	CompilerBugDependentTypeParametersTest.class,
 	CompilerBugInheritedDispatchTest.class,
 	CompilerBugProtectedVisibilityTest.class,
