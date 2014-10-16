@@ -46,6 +46,13 @@ public class CharSequences {
 		return result;
 	}
 
+	public static boolean isWhitespace(CharSequence seq) {
+		for (int i = 0; i < seq.length(); i++)
+			if (!Character.isWhitespace(seq.charAt(i)))
+				return false;
+		return true;
+	}
+
 	public static String toSingleLineString(Object seq, int maxLenght) {
 		if (seq == null)
 			return null;

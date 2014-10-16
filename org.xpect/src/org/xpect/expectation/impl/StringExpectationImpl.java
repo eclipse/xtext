@@ -8,6 +8,9 @@ import org.xpect.expectation.IStringExpectation;
 import org.xpect.expectation.StringExpectation;
 import org.xpect.setup.XpectSetupFactory;
 import org.xpect.state.Creates;
+import org.xpect.text.Text;
+
+import com.google.common.base.Joiner;
 
 @XpectSetupFactory
 @SuppressWarnings("restriction")
@@ -24,9 +27,11 @@ public class StringExpectationImpl extends AbstractExpectation implements IStrin
 	public void assertEquals(Object string) {
 		if (string == null)
 			throw new NullPointerException("Object is null");
-		String actual = string.toString();
-		String escapedActual = getTargetSyntaxLiteral().escape(actual);
 		String originalExpectation = getExpectation();
+		String nl = new Text(originalExpectation).getNL();
+		String actual = string.toString();
+		String actualWithNL = Joiner.on(nl).join(new Text(actual).splitIntoLines());
+		String escapedActual = getTargetSyntaxLiteral().escape(actualWithNL);
 		String migratedExpectation;
 		if (!annotation.whitespaceSensitive()) {
 			FormattingMigrator migrator = new FormattingMigrator();

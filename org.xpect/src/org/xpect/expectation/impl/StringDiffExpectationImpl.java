@@ -12,6 +12,7 @@ import org.xpect.expectation.IStringDiffExpectation;
 import org.xpect.expectation.StringDiffExpectation;
 import org.xpect.setup.XpectSetupFactory;
 import org.xpect.state.Creates;
+import org.xpect.text.CharSequences;
 import org.xpect.text.ITextDifferencer;
 import org.xpect.text.ITextDifferencer.ISegment;
 import org.xpect.text.ITextDifferencer.ITextDiff;
@@ -71,10 +72,7 @@ public class StringDiffExpectationImpl extends AbstractExpectation implements IS
 		public boolean isHidden(String token, String segment) {
 			if (whitespaceSensitive)
 				return false;
-			for (int i = 0; i < segment.length(); i++)
-				if (!Character.isWhitespace(segment.charAt(i)))
-					return false;
-			return true;
+			return CharSequences.isWhitespace(segment);
 		}
 
 		public float similarity(ISegment object1, ISegment object2) {
