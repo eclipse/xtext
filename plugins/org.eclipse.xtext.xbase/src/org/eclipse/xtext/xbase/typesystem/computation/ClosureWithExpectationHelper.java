@@ -32,8 +32,10 @@ import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
+import org.eclipse.xtext.xbase.typesystem.util.ConstraintVisitingInfo;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByUnboundSubstitutor;
@@ -190,11 +192,20 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 		}
 	}
 
-	protected FunctionTypeReference initKnownClosureType(JvmType type, JvmOperation operation) {
+	protected FunctionTypeReference initKnownClosureType(JvmType type, final JvmOperation operation) {
 		ITypeReferenceOwner owner = getExpectation().getReferenceOwner();
 		FunctionTypeReference result = owner.newFunctionTypeReference(type);
 		TypeParameterByUnboundSubstitutor substitutor = new TypeParameterByUnboundSubstitutor(
 				Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument> emptyMap(), owner) {
+			@Override
+			protected LightweightTypeReference getUnmappedSubstitute(ParameterizedTypeReference reference, JvmTypeParameter type,
+					ConstraintVisitingInfo visiting) {
+				if (type.getDeclarator() == operation) {
+					return reference.copyInto(getOwner());
+				}
+				return super.getUnmappedSubstitute(reference, type, visiting);
+			}
+			
 			@Override
 			protected UnboundTypeReference createUnboundTypeReference(JvmTypeParameter type) {
 				UnboundTypeReference result = getExpectation().createUnboundTypeReference(getClosure(), type);
