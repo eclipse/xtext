@@ -36,7 +36,7 @@ class OutdatedStateManager {
 	 */
 	def CancelIndicator newCancelIndiciator(ResourceSet rs) {
 		if (rs instanceof XtextResourceSet) {
-			val cancelationAllowed = this.cancelationAllowed.get 
+			val boolean cancelationAllowed = this.cancelationAllowed.get 
 			val current = rs.modificationStamp
 			return [ 
 				cancelationAllowed && (rs.isOutdated || current != rs.modificationStamp)
