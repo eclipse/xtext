@@ -33,11 +33,15 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.ICaseInsensitivityHelper;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
+import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
 import org.eclipse.xtext.ui.editor.model.edit.IssueModificationContext;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.StopWatch;
-import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
 
 import com.google.common.collect.Lists;
@@ -73,6 +77,9 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 	
 	@Inject
 	private CrossRefResolutionConverter converter;
+	
+	@Inject
+	private OperationCanceledManager cancelManager;
 
 	/**
 	 *
@@ -115,14 +122,19 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 		final IXtextDocument xtextDocument = modificationContext.getXtextDocument();
 		if (xtextDocument == null)
 			return;
-		xtextDocument.readOnly(new IUnitOfWork.Void<XtextResource>() {
+		xtextDocument.readOnly(new CancelableUnitOfWork<Void, XtextResource>() {
+			
+			IssueResolutionAcceptor myAcceptor = null;
+			
 			@Override
-			public void process(XtextResource state) throws Exception {
+			public java.lang.Void exec(XtextResource state, CancelIndicator cancelIndicator) throws Exception {
+				myAcceptor = getCancelableAcceptor(issueResolutionAcceptor, cancelIndicator);
 				EObject target = state.getEObject(issue.getUriToProblem().fragment());
 				EReference reference = getUnresolvedEReference(issue, target);
 				if (reference == null)
-					return;
+					return null;
 				fixUnresolvedReference(issue, xtextDocument, target, reference);
+				return null;
 			}
 
 			protected void fixUnresolvedReference(final Issue issue, final IXtextDocument xtextDocument,
@@ -190,7 +202,7 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 				} else {
 					logger.error("either keyword or ruleName have to present", new IllegalStateException());
 				}
-				issueResolutionAcceptor.accept(issue, replaceLabel, replaceLabel, fixCrossReferenceImage(
+				myAcceptor.accept(issue, replaceLabel, replaceLabel, fixCrossReferenceImage(
 						issueString, replacement), new ReplaceModification(issue, replacement));
 			}
 
@@ -270,5 +282,73 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 	 */
 	protected ISimilarityMatcher getSimilarityMatcher() {
 		return similarityMatcher;
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	protected OperationCanceledManager getCancelManager() {
+		return cancelManager;
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	protected IssueResolutionAcceptor getCancelableAcceptor(
+			final IssueResolutionAcceptor issueResolutionAcceptor, CancelIndicator cancelIndicator) {
+		if (getCancelManager() != null) {
+			return new CancelableResolutionAcceptor(issueResolutionAcceptor, cancelIndicator, getCancelManager());
+		}
+		return issueResolutionAcceptor;
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	protected static class CancelableResolutionAcceptor extends IssueResolutionAcceptor {
+
+		private CancelIndicator monitor;
+		private IssueResolutionAcceptor delegate;
+		private OperationCanceledManager manager;
+
+		public CancelableResolutionAcceptor(IssueResolutionAcceptor delegate, CancelIndicator monitor, OperationCanceledManager manager) {
+			super(null);
+			this.delegate = delegate;
+			this.monitor = monitor;
+			this.manager = manager;
+		}
+
+		@Override
+		public void accept(Issue issue, String label, String description, String image, IModification modification) {
+			manager.checkCanceled(monitor);
+			delegate.accept(issue, label, description, image, modification);
+		}
+
+		@Override
+		public void accept(Issue issue, String label, String description, String image,
+				ISemanticModification semanticModification) {
+			manager.checkCanceled(monitor);
+			delegate.accept(issue, label, description, image, semanticModification);
+		}
+
+		@Override
+		public void accept(Issue issue, String label, String description, String image, IModification modification,
+				int relevance) {
+			manager.checkCanceled(monitor);
+			delegate.accept(issue, label, description, image, modification, relevance);
+		}
+
+		@Override
+		public void accept(Issue issue, String label, String description, String image,
+				ISemanticModification semanticModification, int relevance) {
+			manager.checkCanceled(monitor);
+			delegate.accept(issue, label, description, image, semanticModification, relevance);
+		}
+		
+		@Override
+		public List<IssueResolution> getIssueResolutions() {
+			return delegate.getIssueResolutions();
+		}
+		
 	}
 }
