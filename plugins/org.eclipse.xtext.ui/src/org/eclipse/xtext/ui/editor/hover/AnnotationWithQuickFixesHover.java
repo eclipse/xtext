@@ -684,12 +684,15 @@ public class AnnotationWithQuickFixesHover extends AbstractProblemHover {
 			for (Annotation annotation : annotations) {
 				if (annotation.getText() != null) {
 					Position position = getAnnotationModel().getPosition(annotation);
-					final IQuickAssistInvocationContext invocationContext = new QuickAssistInvocationContext(sourceViewer, position.getOffset(), position.getLength(), true);
+					final QuickAssistInvocationContext invocationContext = new QuickAssistInvocationContext(sourceViewer, position.getOffset(), position.getLength(), true);
 					CompletionProposalRunnable runnable = new CompletionProposalRunnable(invocationContext);	
 					// Note: the resolutions have to be retrieved from the UI thread, otherwise
 					// workbench.getActiveWorkbenchWindow() will return null in LanguageSpecificURIEditorOpener and
 					// cause an exception
 					Display.getDefault().syncExec(runnable);
+					if (invocationContext.isMarkedCancelled()) {
+						return null;
+					}
 					result = new AnnotationInfo (annotation, position, sourceViewer, runnable.proposals);
 					recentAnnotationInfo = result;
 					return result;
