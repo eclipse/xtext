@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.Position;
@@ -46,7 +47,7 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 	
 	@Inject
 	private ICompletionProposalComparator comparator;
-
+	
 	private String errorMessage;
 
 	public String getErrorMessage() {
@@ -104,6 +105,8 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
             selectAndRevealQuickfix(invocationContext, applicableAnnotations, result);
 		} catch (BadLocationException e) {
 			errorMessage = e.getMessage();
+		} catch (OperationCanceledException e) {
+			return null;
 		}
 		sortQuickfixes(result);
 		return result.toArray(new ICompletionProposal[result.size()]);

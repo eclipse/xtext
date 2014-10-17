@@ -24,7 +24,8 @@ import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.ui.editor.quickfix.ReplaceModification;
-import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XCasePart;
@@ -482,34 +483,34 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 	 */
 	@Override
 	public void createLinkingIssueResolutions(final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
-		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(
-				issue);
+		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(issue);
 		final IXtextDocument xtextDocument = modificationContext.getXtextDocument();
 		if (xtextDocument != null) {
-			xtextDocument.readOnly(new IUnitOfWork.Void<XtextResource>() {
+			xtextDocument.readOnly(new CancelableUnitOfWork<Void, XtextResource>() {
 				@Override
-				public void process(XtextResource state) throws Exception {
+				public java.lang.Void exec(XtextResource state, CancelIndicator cancelIndicator) throws Exception {
 					try {
 						EObject target = state.getEObject(issue.getUriToProblem().fragment());
 						EReference reference = getUnresolvedEReference(issue, target);
-						if(reference != null && reference.getEReferenceType() != null) 
+						if(reference != null && reference.getEReferenceType() != null) {
 							createLinkingIssueQuickfixes(
 									issue,
-									issueResolutionAcceptor,
+									getCancelableAcceptor(issueResolutionAcceptor, cancelIndicator),
 									xtextDocument,
 									state,
 									target,
 									reference);
+						}
 					} catch(WrappedException e) {
 						// issue information seems to be out of sync, e.g. there is no
 						// EObject with the given fragment
-						return;
 					}
+					return null;
 				}
 			});
 		}
 	}
-
+	
 	protected void createLinkingIssueQuickfixes(Issue issue, IssueResolutionAcceptor issueResolutionAcceptor, 
 			IXtextDocument xtextDocument,
 			XtextResource state, EObject target, EReference reference) throws Exception {
