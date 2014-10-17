@@ -9,6 +9,7 @@ import org.eclipse.xtext.util.StringInputStream
 import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.validation.IResourceValidator
 import org.junit.Test
+import org.eclipse.xtext.resource.XtextResourceSet
 
 class Bug390595Test extends AbstractXbaseQuickfixTest {
 
@@ -39,6 +40,7 @@ class Bug390595Test extends AbstractXbaseQuickfixTest {
 	def getDocument(XtextResource xtextResource, String code) {
 		document.setInput(xtextResource)
 		document.set(code)
+		(xtextResource.resourceSet as XtextResourceSet).markSynced
 		document
 	}
 
