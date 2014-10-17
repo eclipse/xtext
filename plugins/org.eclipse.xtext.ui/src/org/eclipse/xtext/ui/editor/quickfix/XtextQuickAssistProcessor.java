@@ -87,6 +87,11 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 		ISourceViewer sourceViewer = invocationContext.getSourceViewer();
 		if (sourceViewer == null)
 			return new ICompletionProposal[0];
+		if (invocationContext instanceof QuickAssistInvocationContext) {
+			if (((QuickAssistInvocationContext) invocationContext).isCancelled()) {
+				return null;
+			}
+		}
 		final IDocument document = sourceViewer.getDocument();
 		if (!(document instanceof IXtextDocument))
 			return new ICompletionProposal[0];
