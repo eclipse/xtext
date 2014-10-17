@@ -24,7 +24,6 @@ import org.eclipse.xtext.ui.editor.PresentationDamager;
 import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 
-import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
