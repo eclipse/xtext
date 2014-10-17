@@ -2,8 +2,10 @@ package org.eclipse.xtext.xbase.ui.tests.quickfix;
 
 import com.google.inject.Inject;
 import java.util.List;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
@@ -64,6 +66,8 @@ public class Bug390595Test extends AbstractXbaseQuickfixTest {
     {
       this.document.setInput(xtextResource);
       this.document.set(code);
+      ResourceSet _resourceSet = xtextResource.getResourceSet();
+      ((XtextResourceSet) _resourceSet).markSynced();
       _xblockexpression = this.document;
     }
     return _xblockexpression;

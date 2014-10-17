@@ -40,12 +40,12 @@ public class OutdatedStateManager {
   public CancelIndicator newCancelIndiciator(final ResourceSet rs) {
     CancelIndicator _xifexpression = null;
     if ((rs instanceof XtextResourceSet)) {
-      final Boolean cancelationAllowed = this.cancelationAllowed.get();
+      final boolean cancelationAllowed = (this.cancelationAllowed.get()).booleanValue();
       final int current = ((XtextResourceSet)rs).getModificationStamp();
       final CancelIndicator _function = new CancelIndicator() {
         public boolean isCanceled() {
           boolean _and = false;
-          if (!(cancelationAllowed).booleanValue()) {
+          if (!cancelationAllowed) {
             _and = false;
           } else {
             boolean _or = false;
