@@ -61,7 +61,7 @@ import com.google.common.base.Objects;
 	 * @return Java's <code>a == b</code>
 	 */
 	@Pure
-	@Inline("($1 == $2)")
+	@Inline(value = "($1 == $2)", constantExpression = true)
 	public static boolean identityEquals(Object a, Object b) {
 		return a == b;
 	}
@@ -78,7 +78,7 @@ import com.google.common.base.Objects;
 	 * @since 2.4
 	 */
 	@Pure
-	@Inline("($1 == $2)")
+	@Inline(value = "($1 == $2)", constantExpression = true)
 	public static boolean operator_tripleEquals(Object a, Object b) {
 		return a == b;
 	}
@@ -95,7 +95,7 @@ import com.google.common.base.Objects;
 	 * @since 2.4
 	 */
 	@Pure
-	@Inline("($1 != $2)")
+	@Inline(value = "($1 != $2)", constantExpression = true)
 	public static boolean operator_tripleNotEquals(Object a, Object b) {
 		return a != b;
 	}
