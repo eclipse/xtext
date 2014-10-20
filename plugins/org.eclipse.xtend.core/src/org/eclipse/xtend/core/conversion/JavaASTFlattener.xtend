@@ -228,7 +228,7 @@ class JavaASTFlattener extends ASTVisitor {
 
 	override boolean visit(Assignment node) {
 		val leftSide = node.getLeftHandSide()
-
+		
 		// Array write access
 		if (leftSide instanceof ArrayAccess) {
 			val arrayName = computeArrayName(leftSide)
@@ -326,14 +326,19 @@ class JavaASTFlattener extends ASTVisitor {
 		}
 		appendModifieres(modifiers())
 		if (modifiers().static) {
-			if (fallBackStrategy) {
-				addProblem("Static initialize are not fully supported")
-			} else {
+			if ((it.parent as TypeDeclaration).fields.filter[modifiers().static && modifiers().final].forall [ f |
+				f.fragments.forall[VariableDeclarationFragment fragment|!getBody().isAssignedInBody(fragment)]
+			]) {
 				appendToBuffer(" final Void static_initializer = {")
 				appendLineWrapToBuffer
 				getBody.accept(this)
 				appendToBuffer("null }")
 				appendLineWrapToBuffer
+			} else {
+				addProblem("Static initializer is not fully supported")
+				appendToBuffer("{/*FIXME ")
+				getBody.accept(this)
+				appendToBuffer("*/}")
 			}
 		} else {
 			if (parent instanceof AnonymousClassDeclaration) {
@@ -536,7 +541,8 @@ class JavaASTFlattener extends ASTVisitor {
 			appendLineWrapToBuffer
 			if (hasAnnotations) {
 				appendToBuffer("/*FIXME can not add Annotation to Variable declaration. Java code: ")
-				addProblem("Annotation on Variable declaration is not supported.")
+
+			//	addProblem("Annotation on Variable declaration is not supported.")
 			}
 			appendModifieres(modifiers(),
 				[
@@ -545,12 +551,23 @@ class JavaASTFlattener extends ASTVisitor {
 				])
 			appendToBuffer(handleVariableDeclaration(modifiers()))
 			appendSpaceToBuffer
-			type.accept(this)
+			if (!type.isMissingType()) {
+				type.accept(this)
+			}
 			appendExtraDimensions(frag.extraDimensions)
 			appendSpaceToBuffer
 			frag.accept(this)
 			appendSpaceToBuffer
 		]
+		return false
+	}
+
+	def boolean isMissingType(Type type) {
+		if (type instanceof SimpleType) {
+			if (type.name.isSimpleName) {
+				return "MISSING".equals((type.name as SimpleName).identifier)
+			}
+		}
 		return false
 	}
 
@@ -622,6 +639,17 @@ class JavaASTFlattener extends ASTVisitor {
 			name.accept(this)
 		}
 		appendToBuffer("(")
+		parameters.reverseView.forEach[SingleVariableDeclaration p|
+			if (body.isAssignedInBody(p.name)) {
+				val varFrag = p.getAST().newVariableDeclarationFragment
+				varFrag.name = p.getAST().newSimpleName(p.name.toString)
+				p.name = p.getAST().newSimpleName(p.name + "_finalParam_")
+				varFrag.initializer = p.getAST().newSimpleName(p.name.toString)
+				val varDecl = p.getAST().newVariableDeclarationStatement(varFrag)
+				val typeCopy = p.getAST().createInstance(SimpleType) as Type
+				varDecl.type = typeCopy
+				body.statements.add(0, varDecl)
+			}]
 		parameters.visitAllSeparatedByComma
 		appendToBuffer(")")
 		appendExtraDimensions(extraDimensions)
@@ -1461,8 +1489,10 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	@Override override boolean visit(LabeledStatement node) {
+		node.addProblem("LabeledStatement are not supported")
+		appendToBuffer("/*")
 		node.getLabel().accept(this)
-		appendToBuffer(": ")
+		appendToBuffer(": */")
 		node.getBody().accept(this)
 		return false
 	}
