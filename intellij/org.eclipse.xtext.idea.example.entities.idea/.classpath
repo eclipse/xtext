@@ -7,5 +7,7 @@
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/intellij-dependencies"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/org.xtext.idea"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.xtext.idea.example.entities"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.xtext.idea.example.entities.ui"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.xtext.ui"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

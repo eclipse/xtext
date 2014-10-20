@@ -24,7 +24,6 @@
 		<targetElementEvaluator language="org.eclipse.xtext.idea.example.entities.Entities"
 								factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
 								implementationClass="org.eclipse.xtext.idea.jvmmodel.codeInsight.PsiJvmTargetElementEvaluator"/>
-
 		<fileTypeFactory implementation="org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesFileTypeFactory"/>
 		<stubElementTypeHolder class="org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesElementTypeProvider"/>
 		<lang.ast.factory language="org.eclipse.xtext.idea.example.entities.Entities"
@@ -40,6 +39,7 @@
 								factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
 								implementationClass="org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider"/>
       	<lang.syntaxHighlighterFactory key="org.eclipse.xtext.idea.example.entities.Entities" implementationClass="org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesSyntaxHighlighterFactory" />
+		<completion.contributor language="org.eclipse.xtext.idea.example.entities.Entities" implementationClass="org.eclipse.xtext.idea.example.entities.idea.completion.EntitiesCompletionContributor"/>
       	<annotator language="org.eclipse.xtext.idea.example.entities.Entities"
       							factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
       							implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"/>
