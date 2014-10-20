@@ -17,6 +17,7 @@ import org.eclipse.jdt.core.dom.IBinding
 import org.eclipse.jdt.core.dom.IExtendedModifier
 import org.eclipse.jdt.core.dom.IMethodBinding
 import org.eclipse.jdt.core.dom.ITypeBinding
+import org.eclipse.jdt.core.dom.IVariableBinding
 import org.eclipse.jdt.core.dom.InfixExpression
 import org.eclipse.jdt.core.dom.MethodDeclaration
 import org.eclipse.jdt.core.dom.MethodInvocation
@@ -24,12 +25,17 @@ import org.eclipse.jdt.core.dom.Modifier
 import org.eclipse.jdt.core.dom.QualifiedName
 import org.eclipse.jdt.core.dom.ReturnStatement
 import org.eclipse.jdt.core.dom.SimpleName
+import org.eclipse.jdt.core.dom.SingleVariableDeclaration
 import org.eclipse.jdt.core.dom.Statement
 import org.eclipse.jdt.core.dom.StringLiteral
 import org.eclipse.jdt.core.dom.TypeDeclaration
 import org.eclipse.jdt.core.dom.TypeDeclarationStatement
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement
+import org.eclipse.jdt.core.dom.ChildListPropertyDescriptor
+import org.eclipse.jdt.core.dom.Assignment
+import org.eclipse.jdt.core.dom.ASTVisitor
+import org.eclipse.jdt.core.dom.Name
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -203,4 +209,54 @@ class ASTFlattenerUtils {
 		}
 		return value
 	}
+
+	def Boolean isAssignedInBody(Block scope, (Assignment)=>Boolean constraint) {
+		if (scope != null) {
+			val assigments = newHashSet()
+			scope.accept(
+				new ASTVisitor() {
+					override visit(Assignment node) {
+						if (constraint.apply(node)) {
+							assigments.add(node)
+						}
+						return true
+					}
+				})
+			return !assigments.empty
+		}
+		return false
+	}
+
+	def Boolean isAssignedInBody(Block scope, VariableDeclarationFragment fieldDeclFragment) {
+		return scope.isAssignedInBody(
+			[
+				if (leftHandSide instanceof Name) {
+					val simpleName = (leftHandSide as Name)
+					val binding = simpleName.resolveBinding()
+					if (binding instanceof IVariableBinding) {
+						return binding.field && fieldDeclFragment.name.identifier.equals(simpleName.toSimpleName)
+					}
+				}
+				return false
+			])
+	}
+
+	def Boolean isAssignedInBody(Block scope, SimpleName nameToLookFor) {
+		return scope.isAssignedInBody(
+			[
+				if (leftHandSide  instanceof SimpleName) {
+					return nameToLookFor.identifier.equals((leftHandSide as SimpleName).identifier)
+				}
+				return false
+			])
+	}
+
+	def dispatch String toSimpleName(SimpleName name) {
+		name.identifier
+	}
+
+	def dispatch String toSimpleName(QualifiedName name) {
+		name.name.identifier
+	}
+
 }

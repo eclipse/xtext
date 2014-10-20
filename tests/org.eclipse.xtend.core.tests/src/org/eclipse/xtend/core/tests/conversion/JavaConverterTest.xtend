@@ -125,7 +125,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		assertEquals("toString", xtendMember.getName())
 	}
 
-	@Test def void testMethodeDeclarationCase() throws Exception {
+	@Test def void testMethodDeclarationCase() throws Exception {
 
 		var XtendClass xtendClazz = toValidXtendClass(
 			"public class JavaToConvert { public boolean visit(final Object node) { return true;}}")
@@ -135,6 +135,28 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		assertEquals(PUBLIC, xtendMember.getVisibility())
 		assertEquals("boolean", xtendMember.getReturnType().getSimpleName())
 		assertEquals("visit", xtendMember.getName())
+	}
+
+	@Test def void testNonFinalMethodParameterCase() throws Exception {
+		var XtendClass xtendClazz = toValidXtendClass(
+			'''
+			public class JavaToConvert {
+				public boolean visit(Object node, Object node2, int[] array, int[] array2, String... varArgs) {
+					node = null;
+					node2 = null;
+					array[0] = null;
+					array2 = null
+					varArgs = null
+					return true;
+				}
+			}''')
+		var XtendFunction xtendMember = xtendClazz.method(0)
+		assertEquals(PUBLIC, xtendMember.getVisibility())
+		assertEquals("node_finalParam_", xtendMember.parameters.get(0).getName())
+		assertEquals("node2_finalParam_", xtendMember.parameters.get(1).getName())
+		assertEquals("array", xtendMember.parameters.get(2).getName())
+		assertEquals("array2_finalParam_", xtendMember.parameters.get(3).getName())
+		assertEquals("varArgs_finalParam_", xtendMember.parameters.get(4).getName())
 	}
 
 	@Test def void testBasicForStatementCase() throws Exception {
@@ -436,12 +458,49 @@ class JavaConverterTest extends AbstractXtendTestCase {
 	}
 
 	@Test def void testStaticBlockCase() throws Exception {
-		j2x.useRobustSyntax
-		var ConversionResult conversionResult = j2x.toXtend("Clazz",
-			"public class Clazz { static String foo;static{foo=\"\";}}")
+		var conversionResult = toValidXtendClass("public class Clazz { static String foo;static{foo=\"\";}}")
+		assertEquals("foo", conversionResult.field(0).name)
+	}
 
+	@Test def void testStaticBlockCase1() throws Exception {
+		var ConversionResult conversionResult = j2x.toXtend("Clazz",
+			"public class Clazz { static final String foo;static{foo=\"\";}}")
 		var String xtendCode = conversionResult.getXtendCode()
 		assertFalse(xtendCode.isEmpty())
+		println(xtendCode)
+		assertEquals(1, Iterables.size(conversionResult.getProblems()))
+	}
+
+	@Test def void testStaticBlockCase2() throws Exception {
+		var conversionResult = toValidXtendClass(
+			'''
+				public class Clazz {
+					static final String foo=null;
+					static {
+						String foo;
+						foo = "bar";
+						//Clazz.foo = "";
+					}
+				}
+			''')
+		assertEquals("foo", conversionResult.field(0).name)
+	}
+
+	@Test def void testStaticBlockCase3() throws Exception {
+		var conversionResult = j2x.toXtend("Clazz",
+			'''
+				public class Clazz {
+					static final String foo;
+					static {
+						String foo;
+						foo = "bar";
+						Clazz.foo = "";
+					}
+				}
+			''')
+		var String xtendCode = conversionResult.getXtendCode()
+		assertFalse(xtendCode.isEmpty())
+		println(xtendCode)
 		assertEquals(1, Iterables.size(conversionResult.getProblems()))
 	}
 
@@ -777,19 +836,17 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 		var XtendField xtendMember = clazz.field(1)
 		assertEquals("fun", xtendMember.getName())
 	}
-
 	@Ignore
 	@Test def void testLambdaCase3() throws Exception {
 		j2x.useRobustSyntax
 		var XtendClass clazz = toValidXtendClass(
 			'''
-			import org.eclipse.emf.ecore.EPackage;
 			import org.eclipse.xtext.util.concurrent.AbstractReadWriteAcces;
 			import org.eclipse.xtext.util.concurrent.IReadAccess;
 			class Clazz {
-				final IReadAccess<EPackage> stateAccess = new AbstractReadWriteAcces<EPackage>() {
+				final IReadAccess<String> stateAccess = new AbstractReadWriteAcces<String>() {
 					@Override
-					protected EPackage getState() {
+					protected String getState() {
 						return null;
 					}
 				};
