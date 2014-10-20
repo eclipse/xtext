@@ -99,9 +99,19 @@ public class OutdatedStateManager {
           R _xblockexpression_1 = null;
           {
             if ((work instanceof CancelableUnitOfWork<?, ?>)) {
-              ResourceSet _resourceSet = param.getResourceSet();
-              CancelIndicator _newCancelIndiciator = this.newCancelIndiciator(_resourceSet);
-              ((CancelableUnitOfWork<?, ?>)work).setCancelIndicator(_newCancelIndiciator);
+              CancelIndicator _xifexpression = null;
+              if ((param == null)) {
+                final CancelIndicator _function = new CancelIndicator() {
+                  public boolean isCanceled() {
+                    return true;
+                  }
+                };
+                _xifexpression = _function;
+              } else {
+                ResourceSet _resourceSet = param.getResourceSet();
+                _xifexpression = this.newCancelIndiciator(_resourceSet);
+              }
+              ((CancelableUnitOfWork<?, ?>)work).setCancelIndicator(_xifexpression);
             } else {
               this.cancelationAllowed.set(Boolean.valueOf(false));
             }
