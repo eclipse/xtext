@@ -31,6 +31,7 @@ import org.eclipse.xtext.idea.types.access.StubURIHelper;
 import org.eclipse.xtext.psi.IPsiModelAssociator;
 import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -164,9 +165,24 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
         }
       }
       ProgressIndicatorProvider.checkCanceled();
-      ResourceSet _resourceSet_1 = this.getResourceSet();
-      final Resource resource = _resourceSet_1.getResource(resourceURI, true);
-      _xblockexpression = this.findType(resource, fragment, traverseNestedTypes);
+      JvmType _xtrycatchfinallyexpression = null;
+      try {
+        JvmType _xblockexpression_1 = null;
+        {
+          ResourceSet _resourceSet_1 = this.getResourceSet();
+          final Resource resource = _resourceSet_1.getResource(resourceURI, true);
+          _xblockexpression_1 = this.findType(resource, fragment, traverseNestedTypes);
+        }
+        _xtrycatchfinallyexpression = _xblockexpression_1;
+      } catch (final Throwable _t) {
+        if (_t instanceof OperationCanceledError) {
+          final OperationCanceledError e = (OperationCanceledError)_t;
+          throw e.getWrapped();
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+      _xblockexpression = _xtrycatchfinallyexpression;
     }
     return _xblockexpression;
   }

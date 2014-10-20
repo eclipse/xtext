@@ -155,7 +155,10 @@ public class PsiModelAssociations implements IPsiModelAssociations, IPsiModelAss
 		if (objectDescription == null) {
 			return null;
 		}
-		EObject object = context.eResource().getResourceSet().getEObject(objectDescription.getEObjectURI(), true);
+		EObject object = objectDescription.getEObjectOrProxy();
+		if (object.eIsProxy()) {
+			object = context.eResource().getResourceSet().getEObject(objectDescription.getEObjectURI(), true);
+		}
 		return getPsiElement(object);
 	}
 

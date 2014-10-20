@@ -15,9 +15,11 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 
 import com.google.common.collect.Sets;
@@ -34,6 +36,9 @@ public class DefaultBatchTypeResolver extends AbstractBatchTypeResolver {
 	
 	@Inject
 	private Provider<AbstractRootedReentrantTypeResolver> typeResolverProvider;
+	
+	@Inject
+	private OperationCanceledManager operationCanceledManager; 
 	
 	@Override
 	protected IResolvedTypes doResolveTypes(/* @Nullable */ EObject object,  /* @Nullable */ CancelIndicator monitor) {
@@ -90,18 +95,19 @@ public class DefaultBatchTypeResolver extends AbstractBatchTypeResolver {
 				private int reentrance = 0;
 				
 				public IResolvedTypes reentrantResolve(CancelIndicator monitor) {
-					RuntimeException e = null;
+					Throwable e = null;
 					try {
 						reentrance++;
 						IResolvedTypes result = newResolver.reentrantResolve(monitor);
 						return result;
-					} catch(RuntimeException caught) {
+					} catch(Throwable caught) {
 						e = caught;
-						throw caught;
+						throw Exceptions.sneakyThrow(caught);
 					} finally {
 						reentrance--;
 						if (reentrance == 0 && !adapters.remove(newAdapter)) {
 							if (e != null) {
+								operationCanceledManager.propagateAsErrorIfCancelException(e);
 								throw new IllegalStateException("The TypeResolutionStateAdapter was removed while resolving", e);
 							}
 							throw new IllegalStateException("The TypeResolutionStateAdapter was removed while resolving");

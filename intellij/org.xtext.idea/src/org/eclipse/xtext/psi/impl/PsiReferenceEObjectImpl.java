@@ -32,7 +32,9 @@ public class PsiReferenceEObjectImpl<T extends StubElement> extends PsiEObjectIm
     public PsiReference getReference() {
     	ASTNode node = getNode();
 		TextRange textRange = node.getTextRange();
-    	TextRange childRange = node.getLastChildNode().getTextRange();
+    	ASTNode lastChild = node.getLastChildNode();
+    	ASTNode childNode = lastChild == null ? node : lastChild;
+		TextRange childRange = childNode.getTextRange();
     	int startOffset = childRange.getStartOffset() - textRange.getStartOffset();
 		int endOffset = startOffset + childRange.getLength();
 		return new PsiEObjectReference(this, new TextRange(startOffset, endOffset));
