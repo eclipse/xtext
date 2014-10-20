@@ -25,7 +25,7 @@ class OutdatedStateManager {
 	
 	@Inject OperationCanceledManager canceledManager
 	
-	val cancelationAllowed = new ThreadLocal<Boolean>{
+	val cancelationAllowed = new ThreadLocal<Boolean> {
 		override initialValue() {
 			true
 		}
@@ -61,7 +61,10 @@ class OutdatedStateManager {
 		val wasCancelationAllowed = cancelationAllowed.get
 		try {
 			if (work instanceof CancelableUnitOfWork<?,?>) {
-				work.cancelIndicator = param.resourceSet.newCancelIndiciator
+				work.cancelIndicator = if (param === null)
+					[ true ]
+				else
+					param.resourceSet.newCancelIndiciator
 			} else {
 				cancelationAllowed.set(false)
 			}
