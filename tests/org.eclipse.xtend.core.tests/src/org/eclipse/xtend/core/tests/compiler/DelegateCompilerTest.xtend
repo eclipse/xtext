@@ -474,11 +474,10 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 			import org.eclipse.xtend.lib.annotations.Delegate
 			import java.util.List
 			
-			class DelegatingList<E> implements List<E>{
-				@Delegate List<E> delegate
+			class DelegatingList<T> implements List<T>{
+				@Delegate List<T> delegate
 			}
 		'''
 		text.file.assertNoIssues
 	}
-	
 }
