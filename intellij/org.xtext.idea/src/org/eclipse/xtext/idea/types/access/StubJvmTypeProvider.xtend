@@ -26,6 +26,7 @@ import static extension org.eclipse.xtend.lib.annotations.AccessorType.*
 import org.eclipse.xtext.resource.XtextResourceSet
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.psi.search.SearchScope
+import org.eclipse.xtext.service.OperationCanceledError
 
 class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 	
@@ -104,8 +105,12 @@ class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 			}
 		}
 		ProgressIndicatorProvider.checkCanceled
-		val resource = resourceSet.getResource(resourceURI, true)
-		resource.findType(fragment, traverseNestedTypes)
+		try {
+			val resource = resourceSet.getResource(resourceURI, true)
+			resource.findType(fragment, traverseNestedTypes)
+		} catch (OperationCanceledError e) {
+			throw e.wrapped
+		}
 	}
 	
 	protected def findType(Resource resource, String fragment, boolean traverseNestedTypes) {

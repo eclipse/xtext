@@ -18,6 +18,7 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -79,11 +80,18 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 			}
 			return this;
 		} catch(OperationCanceledException e) {
-			allRootedExpressions.clear();
-			sealed = false;
-			Arrays.fill(delegates, IResolvedTypes.NULL);
+			handleCancelation();
+			throw e;
+		} catch(OperationCanceledError e) {
+			handleCancelation();
 			throw e;
 		}
+	}
+
+	private void handleCancelation() {
+		allRootedExpressions.clear();
+		sealed = false;
+		Arrays.fill(delegates, IResolvedTypes.NULL);
 	}
 	
 	protected CancelIndicator getMonitor() {
