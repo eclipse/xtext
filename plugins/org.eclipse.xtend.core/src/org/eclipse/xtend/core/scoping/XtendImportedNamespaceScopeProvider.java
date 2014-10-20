@@ -171,23 +171,21 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 		List<List<JvmTypeParameter>> typeParameters = null;
 		XtendMember workWithMe = syntacticContainer;
 		while(workWithMe != null) {
-			Set<EObject> elements = getAssociations().getJvmElements(workWithMe);
-			for (EObject derivedJvmElement : elements) {
-				// scope for JvmTypeParameterDeclarator
-				if (derivedJvmElement instanceof JvmTypeParameterDeclarator) {
-					JvmTypeParameterDeclarator parameterDeclarator = (JvmTypeParameterDeclarator) derivedJvmElement;
-					List<JvmTypeParameter> current = parameterDeclarator.getTypeParameters();
-					if (!current.isEmpty()) {
-						if (typeParameters == null) {
-							typeParameters = Lists.newArrayListWithCapacity(3);
-						}
-						typeParameters.add(current);
+			EObject derivedJvmElement = getAssociations().getPrimaryJvmElement(workWithMe);
+			// scope for JvmTypeParameterDeclarator
+			if (derivedJvmElement instanceof JvmTypeParameterDeclarator) {
+				JvmTypeParameterDeclarator parameterDeclarator = (JvmTypeParameterDeclarator) derivedJvmElement;
+				List<JvmTypeParameter> current = parameterDeclarator.getTypeParameters();
+				if (!current.isEmpty()) {
+					if (typeParameters == null) {
+						typeParameters = Lists.newArrayListWithCapacity(3);
 					}
+					typeParameters.add(current);
 				}
-				if (innermost == null && derivedJvmElement instanceof JvmDeclaredType) {
-					if (syntacticContainer != workWithMe) { // prevent stackoverflow / cyclic resolution
-						innermost = (JvmDeclaredType) derivedJvmElement;
-					}
+			}
+			if (innermost == null && derivedJvmElement instanceof JvmDeclaredType) {
+				if (syntacticContainer != workWithMe) { // prevent stackoverflow / cyclic resolution
+					innermost = (JvmDeclaredType) derivedJvmElement;
 				}
 			}
 			EObject container = workWithMe;
