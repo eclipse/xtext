@@ -17,6 +17,7 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend.core.xtend.XtendMember;
+import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -204,7 +205,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testMethodeDeclarationCase() throws Exception {
+  public void testMethodDeclarationCase() throws Exception {
     XtendClass xtendClazz = this.toValidXtendClass(
       "public class JavaToConvert { public boolean visit(final Object node) { return true;}}");
     EList<XtendMember> _members = xtendClazz.getMembers();
@@ -218,6 +219,62 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     Assert.assertEquals("boolean", _simpleName);
     String _name = xtendMember.getName();
     Assert.assertEquals("visit", _name);
+  }
+  
+  @Test
+  public void testNonFinalMethodParameterCase() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public class JavaToConvert {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public boolean visit(Object node, Object node2, int[] array, int[] array2, String... varArgs) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("node = null;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("node2 = null;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("array[0] = null;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("array2 = null");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("varArgs = null");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return true;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    XtendClass xtendClazz = this.toValidXtendClass(_builder.toString());
+    XtendFunction xtendMember = this.method(xtendClazz, 0);
+    JvmVisibility _visibility = xtendMember.getVisibility();
+    Assert.assertEquals(JvmVisibility.PUBLIC, _visibility);
+    EList<XtendParameter> _parameters = xtendMember.getParameters();
+    XtendParameter _get = _parameters.get(0);
+    String _name = _get.getName();
+    Assert.assertEquals("node_finalParam_", _name);
+    EList<XtendParameter> _parameters_1 = xtendMember.getParameters();
+    XtendParameter _get_1 = _parameters_1.get(1);
+    String _name_1 = _get_1.getName();
+    Assert.assertEquals("node2_finalParam_", _name_1);
+    EList<XtendParameter> _parameters_2 = xtendMember.getParameters();
+    XtendParameter _get_2 = _parameters_2.get(2);
+    String _name_2 = _get_2.getName();
+    Assert.assertEquals("array", _name_2);
+    EList<XtendParameter> _parameters_3 = xtendMember.getParameters();
+    XtendParameter _get_3 = _parameters_3.get(3);
+    String _name_3 = _get_3.getName();
+    Assert.assertEquals("array2_finalParam_", _name_3);
+    EList<XtendParameter> _parameters_4 = xtendMember.getParameters();
+    XtendParameter _get_4 = _parameters_4.get(4);
+    String _name_4 = _get_4.getName();
+    Assert.assertEquals("varArgs_finalParam_", _name_4);
   }
   
   @Test
@@ -739,12 +796,86 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   
   @Test
   public void testStaticBlockCase() throws Exception {
-    this.j2x.useRobustSyntax();
+    XtendClass conversionResult = this.toValidXtendClass("public class Clazz { static String foo;static{foo=\"\";}}");
+    XtendField _field = this.field(conversionResult, 0);
+    String _name = _field.getName();
+    Assert.assertEquals("foo", _name);
+  }
+  
+  @Test
+  public void testStaticBlockCase1() throws Exception {
     JavaConverter.ConversionResult conversionResult = this.j2x.toXtend("Clazz", 
-      "public class Clazz { static String foo;static{foo=\"\";}}");
+      "public class Clazz { static final String foo;static{foo=\"\";}}");
     String xtendCode = conversionResult.getXtendCode();
     boolean _isEmpty = xtendCode.isEmpty();
     Assert.assertFalse(_isEmpty);
+    InputOutput.<String>println(xtendCode);
+    Iterable<String> _problems = conversionResult.getProblems();
+    int _size = Iterables.size(_problems);
+    Assert.assertEquals(1, _size);
+  }
+  
+  @Test
+  public void testStaticBlockCase2() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public class Clazz {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static final String foo=null;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("String foo;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("foo = \"bar\";");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("//Clazz.foo = \"\";");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    XtendClass conversionResult = this.toValidXtendClass(_builder.toString());
+    XtendField _field = this.field(conversionResult, 0);
+    String _name = _field.getName();
+    Assert.assertEquals("foo", _name);
+  }
+  
+  @Test
+  public void testStaticBlockCase3() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public class Clazz {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static final String foo;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("String foo;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("foo = \"bar\";");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("Clazz.foo = \"\";");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    JavaConverter.ConversionResult conversionResult = this.j2x.toXtend("Clazz", _builder.toString());
+    String xtendCode = conversionResult.getXtendCode();
+    boolean _isEmpty = xtendCode.isEmpty();
+    Assert.assertFalse(_isEmpty);
+    InputOutput.<String>println(xtendCode);
     Iterable<String> _problems = conversionResult.getProblems();
     int _size = Iterables.size(_problems);
     Assert.assertEquals(1, _size);
@@ -1319,8 +1450,6 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   public void testLambdaCase3() throws Exception {
     this.j2x.useRobustSyntax();
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import org.eclipse.emf.ecore.EPackage;");
-    _builder.newLine();
     _builder.append("import org.eclipse.xtext.util.concurrent.AbstractReadWriteAcces;");
     _builder.newLine();
     _builder.append("import org.eclipse.xtext.util.concurrent.IReadAccess;");
@@ -1328,13 +1457,13 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder.append("class Clazz {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("final IReadAccess<EPackage> stateAccess = new AbstractReadWriteAcces<EPackage>() {");
+    _builder.append("final IReadAccess<String> stateAccess = new AbstractReadWriteAcces<String>() {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("@Override");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("protected EPackage getState() {");
+    _builder.append("protected String getState() {");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("return null;");

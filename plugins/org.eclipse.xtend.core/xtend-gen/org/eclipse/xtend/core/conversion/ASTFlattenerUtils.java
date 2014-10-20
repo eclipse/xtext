@@ -10,10 +10,14 @@ package org.eclipse.xtend.core.conversion;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import org.eclipse.jdt.core.dom.ASTNode;
+import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.Annotation;
 import org.eclipse.jdt.core.dom.AnonymousClassDeclaration;
+import org.eclipse.jdt.core.dom.Assignment;
 import org.eclipse.jdt.core.dom.Block;
 import org.eclipse.jdt.core.dom.ClassInstanceCreation;
 import org.eclipse.jdt.core.dom.Expression;
@@ -413,5 +417,90 @@ public class ASTFlattenerUtils {
       value = _concat;
     }
     return value;
+  }
+  
+  public Boolean isAssignedInBody(final Block scope, final Function1<? super Assignment, ? extends Boolean> constraint) {
+    boolean _notEquals = (!Objects.equal(scope, null));
+    if (_notEquals) {
+      final HashSet<Assignment> assigments = CollectionLiterals.<Assignment>newHashSet();
+      scope.accept(
+        new ASTVisitor() {
+          public boolean visit(final Assignment node) {
+            Boolean _apply = constraint.apply(node);
+            if ((_apply).booleanValue()) {
+              assigments.add(node);
+            }
+            return true;
+          }
+        });
+      boolean _isEmpty = assigments.isEmpty();
+      return Boolean.valueOf((!_isEmpty));
+    }
+    return Boolean.valueOf(false);
+  }
+  
+  public Boolean isAssignedInBody(final Block scope, final VariableDeclarationFragment fieldDeclFragment) {
+    final Function1<Assignment, Boolean> _function = new Function1<Assignment, Boolean>() {
+      public Boolean apply(final Assignment it) {
+        Expression _leftHandSide = it.getLeftHandSide();
+        if ((_leftHandSide instanceof Name)) {
+          Expression _leftHandSide_1 = it.getLeftHandSide();
+          final Name simpleName = ((Name) _leftHandSide_1);
+          final IBinding binding = simpleName.resolveBinding();
+          if ((binding instanceof IVariableBinding)) {
+            boolean _and = false;
+            boolean _isField = ((IVariableBinding)binding).isField();
+            if (!_isField) {
+              _and = false;
+            } else {
+              SimpleName _name = fieldDeclFragment.getName();
+              String _identifier = _name.getIdentifier();
+              String _simpleName = ASTFlattenerUtils.this.toSimpleName(simpleName);
+              boolean _equals = _identifier.equals(_simpleName);
+              _and = _equals;
+            }
+            return Boolean.valueOf(_and);
+          }
+        }
+        return Boolean.valueOf(false);
+      }
+    };
+    return this.isAssignedInBody(scope, _function);
+  }
+  
+  public Boolean isAssignedInBody(final Block scope, final SimpleName nameToLookFor) {
+    final Function1<Assignment, Boolean> _function = new Function1<Assignment, Boolean>() {
+      public Boolean apply(final Assignment it) {
+        Expression _leftHandSide = it.getLeftHandSide();
+        if ((_leftHandSide instanceof SimpleName)) {
+          String _identifier = nameToLookFor.getIdentifier();
+          Expression _leftHandSide_1 = it.getLeftHandSide();
+          String _identifier_1 = ((SimpleName) _leftHandSide_1).getIdentifier();
+          return Boolean.valueOf(_identifier.equals(_identifier_1));
+        }
+        return Boolean.valueOf(false);
+      }
+    };
+    return this.isAssignedInBody(scope, _function);
+  }
+  
+  protected String _toSimpleName(final SimpleName name) {
+    return name.getIdentifier();
+  }
+  
+  protected String _toSimpleName(final QualifiedName name) {
+    SimpleName _name = name.getName();
+    return _name.getIdentifier();
+  }
+  
+  public String toSimpleName(final Name name) {
+    if (name instanceof QualifiedName) {
+      return _toSimpleName((QualifiedName)name);
+    } else if (name instanceof SimpleName) {
+      return _toSimpleName((SimpleName)name);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(name).toString());
+    }
   }
 }
