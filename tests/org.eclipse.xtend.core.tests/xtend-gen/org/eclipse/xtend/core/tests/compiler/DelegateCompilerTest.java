@@ -1123,10 +1123,10 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("import java.util.List");
       _builder.newLine();
       _builder.newLine();
-      _builder.append("class DelegatingList<E> implements List<E>{");
+      _builder.append("class DelegatingList<T> implements List<T>{");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("@Delegate List<E> delegate");
+      _builder.append("@Delegate List<T> delegate");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
