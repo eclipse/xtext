@@ -44,7 +44,7 @@ class StandaloneBuilder {
 	/**  Map key is a file extension provided by Language FileExtensionProvider   */
 	@Accessors Map<String, LanguageAccess> languages
 	@Accessors Iterable<String> sourceDirs
-	@Accessors Iterable<String> javaSourceDirs
+	@Accessors Iterable<String> javaSourceDirs = newArrayList
 	@Accessors Iterable<String> classPathEntries
 	@Accessors File tempDir = Files.createTempDir
 	@Accessors String encoding
