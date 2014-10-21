@@ -1306,6 +1306,24 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testRichStringSpecialCase4() throws Exception {
+    XtendInterface interfaze = this.toValidXtendInterface(
+      "interface Z {\n\t\t\t\tString CONSTANT_VAL = \"SOMEVALUE\" + \"ADDITION\";\n\t\t\t\tString CONSTANT_VAL2 = \"SOMEVALUE\" + CONSTANT_VAL;\n\t\t\t}");
+    Assert.assertNotNull(interfaze);
+    XtendField xtendMember = this.field(interfaze, 0);
+    String _name = xtendMember.getName();
+    Assert.assertEquals("CONSTANT_VAL", _name);
+    XExpression _initialValue = xtendMember.getInitialValue();
+    Assert.assertFalse((_initialValue instanceof RichString));
+    XtendField _field = this.field(interfaze, 1);
+    xtendMember = _field;
+    String _name_1 = xtendMember.getName();
+    Assert.assertEquals("CONSTANT_VAL2", _name_1);
+    XExpression _initialValue_1 = xtendMember.getInitialValue();
+    Assert.assertFalse((_initialValue_1 instanceof RichString));
+  }
+  
+  @Test
   public void testReturnVoidCase() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Z {");

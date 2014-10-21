@@ -8,7 +8,9 @@
 package org.eclipse.xtend.core.conversion
 
 import org.eclipse.jdt.core.dom.ASTNode
+import org.eclipse.jdt.core.dom.ASTVisitor
 import org.eclipse.jdt.core.dom.Annotation
+import org.eclipse.jdt.core.dom.Assignment
 import org.eclipse.jdt.core.dom.Block
 import org.eclipse.jdt.core.dom.ClassInstanceCreation
 import org.eclipse.jdt.core.dom.FieldAccess
@@ -22,20 +24,16 @@ import org.eclipse.jdt.core.dom.InfixExpression
 import org.eclipse.jdt.core.dom.MethodDeclaration
 import org.eclipse.jdt.core.dom.MethodInvocation
 import org.eclipse.jdt.core.dom.Modifier
+import org.eclipse.jdt.core.dom.Name
 import org.eclipse.jdt.core.dom.QualifiedName
 import org.eclipse.jdt.core.dom.ReturnStatement
 import org.eclipse.jdt.core.dom.SimpleName
-import org.eclipse.jdt.core.dom.SingleVariableDeclaration
 import org.eclipse.jdt.core.dom.Statement
 import org.eclipse.jdt.core.dom.StringLiteral
 import org.eclipse.jdt.core.dom.TypeDeclaration
 import org.eclipse.jdt.core.dom.TypeDeclarationStatement
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement
-import org.eclipse.jdt.core.dom.ChildListPropertyDescriptor
-import org.eclipse.jdt.core.dom.Assignment
-import org.eclipse.jdt.core.dom.ASTVisitor
-import org.eclipse.jdt.core.dom.Name
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -171,8 +169,26 @@ class ASTFlattenerUtils {
 	}
 
 	def boolean canConvertToRichText(InfixExpression node) {
+		val parentFieldDecl = node.findParentOfType(FieldDeclaration)
+		if (parentFieldDecl != null) {
+			val typeDeclr = parentFieldDecl.findParentOfType(TypeDeclaration)
+
+			//Do not convert static final fields
+			if (typeDeclr.isInterface || parentFieldDecl.modifiers().isFinal && parentFieldDecl.modifiers().isStatic)
+				return false
+		}
 		val nodes = node.collectCompatibleNodes()
 		return !nodes.empty && nodes.forall[canTranslate]
+	}
+
+	def <T extends ASTNode> T findParentOfType(ASTNode someNode, Class<T> parentType) {
+		if (someNode.parent == null) {
+			return null
+		} else if (parentType.isInstance(someNode.parent)) {
+			return parentType.cast(someNode.parent)
+		} else {
+			return someNode.parent.findParentOfType(parentType)
+		}
 	}
 
 	def private Iterable<StringLiteral> collectCompatibleNodes(InfixExpression node) {

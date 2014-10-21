@@ -16,10 +16,13 @@ import org.eclipse.jdt.core.dom.ASTParser
 import org.eclipse.jdt.core.ICompilationUnit
 
 /**
- * @author Dennis Hübner - Initial contribution and API
+ * Converts Java code or an ICompilationUnit to Xtend code<br>
+ * 
+ *  @author Dennis Hübner - Initial contribution and API
  */
 class JavaConverter {
 
+	/*TODO Refactore this class. Remove state, extract common logic. */
 	@Inject JavaASTFlattener astFlattener
 	String complianceLevel = "1.5"
 	boolean fallbackConversionStartegy = false
@@ -98,10 +101,6 @@ class JavaConverter {
 
 	}
 
-	/**
-	 * @param fallBackStrategy - if <code>true</code> JavaConverter uses a strategy which is less error prone,<br>
-	 *  but may produces more noisy syntax.
-	 */
 	def JavaConverter useRobustSyntax() {
 		this.fallbackConversionStartegy = true
 		return this

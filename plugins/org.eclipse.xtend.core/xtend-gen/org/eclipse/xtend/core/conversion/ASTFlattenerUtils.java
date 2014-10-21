@@ -340,12 +340,37 @@ public class ASTFlattenerUtils {
   }
   
   public boolean canConvertToRichText(final InfixExpression node) {
+    final FieldDeclaration parentFieldDecl = this.<FieldDeclaration>findParentOfType(node, FieldDeclaration.class);
+    boolean _notEquals = (!Objects.equal(parentFieldDecl, null));
+    if (_notEquals) {
+      final TypeDeclaration typeDeclr = this.<TypeDeclaration>findParentOfType(parentFieldDecl, TypeDeclaration.class);
+      boolean _or = false;
+      boolean _isInterface = typeDeclr.isInterface();
+      if (_isInterface) {
+        _or = true;
+      } else {
+        boolean _and = false;
+        List _modifiers = parentFieldDecl.modifiers();
+        boolean _isFinal = this.isFinal(_modifiers);
+        if (!_isFinal) {
+          _and = false;
+        } else {
+          List _modifiers_1 = parentFieldDecl.modifiers();
+          boolean _isStatic = this.isStatic(_modifiers_1);
+          _and = _isStatic;
+        }
+        _or = _and;
+      }
+      if (_or) {
+        return false;
+      }
+    }
     final Iterable<StringLiteral> nodes = this.collectCompatibleNodes(node);
-    boolean _and = false;
+    boolean _and_1 = false;
     boolean _isEmpty = IterableExtensions.isEmpty(nodes);
     boolean _not = (!_isEmpty);
     if (!_not) {
-      _and = false;
+      _and_1 = false;
     } else {
       final Function1<StringLiteral, Boolean> _function = new Function1<StringLiteral, Boolean>() {
         public Boolean apply(final StringLiteral it) {
@@ -353,9 +378,27 @@ public class ASTFlattenerUtils {
         }
       };
       boolean _forall = IterableExtensions.<StringLiteral>forall(nodes, _function);
-      _and = _forall;
+      _and_1 = _forall;
     }
-    return _and;
+    return _and_1;
+  }
+  
+  public <T extends ASTNode> T findParentOfType(final ASTNode someNode, final Class<T> parentType) {
+    ASTNode _parent = someNode.getParent();
+    boolean _equals = Objects.equal(_parent, null);
+    if (_equals) {
+      return null;
+    } else {
+      ASTNode _parent_1 = someNode.getParent();
+      boolean _isInstance = parentType.isInstance(_parent_1);
+      if (_isInstance) {
+        ASTNode _parent_2 = someNode.getParent();
+        return parentType.cast(_parent_2);
+      } else {
+        ASTNode _parent_3 = someNode.getParent();
+        return this.<T>findParentOfType(_parent_3, parentType);
+      }
+    }
   }
   
   private Iterable<StringLiteral> collectCompatibleNodes(final InfixExpression node) {

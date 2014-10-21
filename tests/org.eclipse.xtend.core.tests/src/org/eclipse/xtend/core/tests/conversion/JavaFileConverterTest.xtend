@@ -48,7 +48,7 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
 		sourceProject = "org.eclipse.xtend.core.tests"
 		targetProject = "test-converter"
 		errorsExpected = 0
-		problemsExpected = 33
+		problemsExpected = 22
 		runConverter
 	}
 
@@ -56,8 +56,8 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
 	def void testConvertFilesInXtextTestsProject() throws Exception {
 		sourceProject = "org.eclipse.xtext.tests"
 		targetProject = "org.eclipse.xtext.tests.converted"
-		errorsExpected = 200
-		problemsExpected = 12173
+		errorsExpected = 87
+		problemsExpected = 13404
 		runConverter
 	}
 
@@ -81,7 +81,8 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
 		var filesWithErrorsOrProblems = 0
 		for (URI uri : allResourceUris) {
 			val File file = new File(uri.toFileString());
-			println("Converting: " + file.getAbsolutePath());
+			val javaFileProjRelPath = uri.toFileString().replace(srcProjectRoot.absolutePath, "")
+			println("Converting: " + javaFileProjRelPath);
 			var compileError = false
 			val String javaCode = Files.toString(file, Charset.defaultCharset());
 
@@ -89,13 +90,12 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
 			val knownProblemsFound = xtendResult.problems.size
 			var xtendCode = xtendResult.xtendCode
 
-			val javaFileProjRelPath = uri.toFileString().replace(srcProjectRoot.absolutePath, "")
 			var fileName = javaFileProjRelPath + ".xtend"
 			try {
 				file(xtendCode, true);
 			} catch (AssertionError error) {
 				compileError = true
-				System.err.println('''«uri» - «error.message»''')
+				System.err.println('''«javaFileProjRelPath» - «error.message»''')
 			}
 			if (knownProblemsFound != 0 || compileError) {
 				filesWithErrorsOrProblems++
@@ -134,7 +134,7 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
 
 	def writeToFile(File parent, String fileName, String content) {
 		val targetFile = new File(parent, fileName)
-		println("Writing to: " + targetFile.absolutePath)
+		println('''Writing to: «fileName»''')
 		if (!targetFile.exists) {
 			Files.createParentDirs(targetFile)
 			targetFile.createNewFile

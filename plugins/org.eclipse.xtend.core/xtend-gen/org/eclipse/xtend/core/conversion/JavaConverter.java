@@ -26,7 +26,9 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 /**
- * @author Dennis Hübner - Initial contribution and API
+ * Converts Java code or an ICompilationUnit to Xtend code<br>
+ * 
+ *  @author Dennis Hübner - Initial contribution and API
  */
 @SuppressWarnings("all")
 public class JavaConverter {
@@ -57,6 +59,9 @@ public class JavaConverter {
     }
   }
   
+  /**
+   * TODO Refactore this class. Remove state, extract common logic.
+   */
   @Inject
   private JavaASTFlattener astFlattener;
   
@@ -126,10 +131,6 @@ public class JavaConverter {
     return JavaConverter.ConversionResult.create(this.astFlattener);
   }
   
-  /**
-   * @param fallBackStrategy - if <code>true</code> JavaConverter uses a strategy which is less error prone,<br>
-   *  but may produces more noisy syntax.
-   */
   public JavaConverter useRobustSyntax() {
     this.fallbackConversionStartegy = true;
     return this;

@@ -57,7 +57,7 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
     this.sourceProject = "org.eclipse.xtend.core.tests";
     this.targetProject = "test-converter";
     this.errorsExpected = 0;
-    this.problemsExpected = 33;
+    this.problemsExpected = 22;
     this.runConverter();
   }
   
@@ -66,8 +66,8 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
   public void testConvertFilesInXtextTestsProject() throws Exception {
     this.sourceProject = "org.eclipse.xtext.tests";
     this.targetProject = "org.eclipse.xtext.tests.converted";
-    this.errorsExpected = 200;
-    this.problemsExpected = 12173;
+    this.errorsExpected = 87;
+    this.problemsExpected = 13404;
     this.runConverter();
   }
   
@@ -117,9 +117,10 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
         {
           String _fileString = uri.toFileString();
           final File file = new File(_fileString);
-          String _absolutePath_1 = file.getAbsolutePath();
-          String _plus_1 = ("Converting: " + _absolutePath_1);
-          InputOutput.<String>println(_plus_1);
+          String _fileString_1 = uri.toFileString();
+          String _absolutePath_1 = srcProjectRoot.getAbsolutePath();
+          final String javaFileProjRelPath = _fileString_1.replace(_absolutePath_1, "");
+          InputOutput.<String>println(("Converting: " + javaFileProjRelPath));
           boolean compileError = false;
           Charset _defaultCharset = Charset.defaultCharset();
           final String javaCode = Files.toString(file, _defaultCharset);
@@ -128,9 +129,6 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
           Iterable<String> _problems = xtendResult.getProblems();
           final int knownProblemsFound = IterableExtensions.size(_problems);
           String xtendCode = xtendResult.getXtendCode();
-          String _fileString_1 = uri.toFileString();
-          String _absolutePath_2 = srcProjectRoot.getAbsolutePath();
-          final String javaFileProjRelPath = _fileString_1.replace(_absolutePath_2, "");
           String fileName = (javaFileProjRelPath + ".xtend");
           try {
             this.file(xtendCode, true);
@@ -139,7 +137,7 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
               final AssertionError error = (AssertionError)_t;
               compileError = true;
               StringConcatenation _builder = new StringConcatenation();
-              _builder.append(uri, "");
+              _builder.append(javaFileProjRelPath, "");
               _builder.append(" - ");
               String _message = error.getMessage();
               _builder.append(_message, "");
@@ -223,9 +221,10 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
   public void writeToFile(final File parent, final String fileName, final String content) {
     try {
       final File targetFile = new File(parent, fileName);
-      String _absolutePath = targetFile.getAbsolutePath();
-      String _plus = ("Writing to: " + _absolutePath);
-      InputOutput.<String>println(_plus);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("Writing to: ");
+      _builder.append(fileName, "");
+      InputOutput.<String>println(_builder.toString());
       boolean _exists = targetFile.exists();
       boolean _not = (!_exists);
       if (_not) {
