@@ -83,7 +83,7 @@ public class StandaloneBuilder {
   private Iterable<String> sourceDirs;
   
   @Accessors
-  private Iterable<String> javaSourceDirs;
+  private Iterable<String> javaSourceDirs = CollectionLiterals.<String>newArrayList();
   
   @Accessors
   private Iterable<String> classPathEntries;
