@@ -763,6 +763,22 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 		assertTrue(xtendMember.getInitialValue() instanceof RichString)
 	}
 
+	@Test def void testRichStringSpecialCase4() throws Exception {
+
+		var interfaze = toValidXtendInterface(
+			'interface Z {
+				String CONSTANT_VAL = "SOMEVALUE" + "ADDITION";
+				String CONSTANT_VAL2 = "SOMEVALUE" + CONSTANT_VAL;
+			}')
+		assertNotNull(interfaze)
+		var xtendMember = interfaze.field(0)
+		assertEquals("CONSTANT_VAL", xtendMember.getName())
+		assertFalse(xtendMember.getInitialValue() instanceof RichString)
+		xtendMember = interfaze.field(1)
+		assertEquals("CONSTANT_VAL2", xtendMember.getName())
+		assertFalse(xtendMember.getInitialValue() instanceof RichString)
+	}
+
 	@Test def void testReturnVoidCase() throws Exception {
 
 		var XtendClass clazz = toValidXtendClass(
@@ -836,6 +852,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 		var XtendField xtendMember = clazz.field(1)
 		assertEquals("fun", xtendMember.getName())
 	}
+
 	@Ignore
 	@Test def void testLambdaCase3() throws Exception {
 		j2x.useRobustSyntax
