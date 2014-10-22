@@ -13,9 +13,6 @@ import com.google.inject.name.Names;
 
 /**
  * Manual modifications go to {org.eclipse.xtext.xbase.XbaseRuntimeModule}
- * 
- * @noreference This class is not intended to be referenced by clients.
- * @since 2.7
  */
  @SuppressWarnings("all")
 public abstract class AbstractXbaseRuntimeModule extends DefaultRuntimeModule {
@@ -250,16 +247,6 @@ public abstract class AbstractXbaseRuntimeModule extends DefaultRuntimeModule {
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.xbase.scoping.featurecalls.StaticImplicitMethodsFeatureForTypeProvider.ExtensionClassNameProvider> bindStaticImplicitMethodsFeatureForTypeProvider$ExtensionClassNameProvider() {
 		return org.eclipse.xtext.xbase.scoping.batch.ImplicitlyImportedTypesAdapter.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
-	public Class<? extends org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport> bindMutableFileSystemSupport() {
-		return org.eclipse.xtext.xbase.file.JavaIOFileSystemSupport.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
-	public Class<? extends org.eclipse.xtend.lib.macro.file.FileLocations> bindFileLocations() {
-		return org.eclipse.xtext.xbase.file.FileLocationsImpl.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment

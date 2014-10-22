@@ -22,8 +22,8 @@ import org.eclipse.xtend.core.jvmmodel.XtendJvmModelInferrer;
 import org.eclipse.xtend.core.linking.RuntimeLinker;
 import org.eclipse.xtend.core.linking.XtendEObjectAtOffsetHelper;
 import org.eclipse.xtend.core.linking.XtendLinkingDiagnosticMessageProvider;
-import org.eclipse.xtend.core.macro.declaration.NopResourceChangeRegistry;
 import org.eclipse.xtend.core.macro.declaration.IResourceChangeRegistry;
+import org.eclipse.xtend.core.macro.declaration.NopResourceChangeRegistry;
 import org.eclipse.xtend.core.naming.XtendQualifiedNameProvider;
 import org.eclipse.xtend.core.parser.CustomXtendParser;
 import org.eclipse.xtend.core.parser.FlexTokenRegionProvider;
@@ -351,5 +351,13 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 	
 	public Class<? extends IResourceChangeRegistry> bindResourceChangeRegistry() {
 		return NopResourceChangeRegistry.class;
+	}
+	
+	public Class<? extends org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport> bindMutableFileSystemSupport() {
+		return org.eclipse.xtext.xbase.file.JavaIOFileSystemSupport.class;
+	}
+
+	public Class<? extends org.eclipse.xtend.lib.macro.file.FileLocations> bindFileLocations() {
+		return org.eclipse.xtext.xbase.file.FileLocationsImpl.class;
 	}
 }

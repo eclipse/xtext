@@ -17,8 +17,6 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xpand2.XpandExecutionContext;
-import org.eclipse.xtend.lib.macro.file.FileLocations;
-import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -189,8 +187,6 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 				.addTypeToType(CancelableDiagnostician.class.getCanonicalName(), "org.eclipse.xtext.xbase.validation.XbaseDiagnostician")
 				.addTypeToType("org.eclipse.xtext.xbase.scoping.featurecalls.StaticImplicitMethodsFeatureForTypeProvider.ExtensionClassNameProvider",
 						"org.eclipse.xtext.xbase.scoping.batch.ImplicitlyImportedTypesAdapter")
-				.addTypeToType(MutableFileSystemSupport.class.getCanonicalName(), "org.eclipse.xtext.xbase.file.JavaIOFileSystemSupport")
-				.addTypeToType(FileLocations.class.getCanonicalName(), "org.eclipse.xtext.xbase.file.FileLocationsImpl")
 				.addTypeToProvider("org.eclipse.xtext.xbase.file.WorkspaceConfig", "org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider");
 		if (doesUseXbaseWithAnnotations(grammar)) {
 			config = config
