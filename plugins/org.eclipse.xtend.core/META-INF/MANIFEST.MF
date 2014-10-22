@@ -10,7 +10,7 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtend.core;x-internal:=true,
  org.eclipse.xtend.core.compiler;x-friends:="org.eclipse.xtend.m2e",
  org.eclipse.xtend.core.compiler.batch,
- org.eclipse.xtend.core.conversion;x-internal:=true,
+ org.eclipse.xtend.core.conversion;x-friends:="org.eclipse.xtend.ide",
  org.eclipse.xtend.core.documentation;x-internal:=true,
  org.eclipse.xtend.core.formatting;x-friends:="org.eclipse.xtend.ide",
  org.eclipse.xtend.core.imports;x-internal:=true,

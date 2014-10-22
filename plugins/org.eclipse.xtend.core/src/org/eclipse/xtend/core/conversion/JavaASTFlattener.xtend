@@ -228,7 +228,7 @@ class JavaASTFlattener extends ASTVisitor {
 
 	override boolean visit(Assignment node) {
 		val leftSide = node.getLeftHandSide()
-		
+
 		// Array write access
 		if (leftSide instanceof ArrayAccess) {
 			val arrayName = computeArrayName(leftSide)
@@ -342,7 +342,7 @@ class JavaASTFlattener extends ASTVisitor {
 			}
 		} else {
 			if (parent instanceof AnonymousClassDeclaration) {
-				addProblem("Initializer is not supported in " + ASTNode.nodeClassForType(parent.nodeType).simpleName)
+				addProblem('''Initializer is not supported in «ASTNode.nodeClassForType(parent.nodeType).simpleName»''')
 			}
 			getBody.accept(this)
 		}
@@ -355,9 +355,8 @@ class JavaASTFlattener extends ASTVisitor {
 			return false;
 		}
 		if (isNotSupportedInnerType(it)) {
-			appendToBuffer('''/* FIXME only static inner classes are allowed «it.name»*/''')
-			addProblem("only static inner classes are allowed")
-			return false
+			appendToBuffer('''/* FIXME None static inner classes are not supported.*/''')
+			addProblem("None static inner classes are not supported.")
 		}
 
 		if (javadoc != null) {
@@ -1371,7 +1370,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	@Override override boolean visit(BreakStatement node) {
-		appendToBuffer("/* FIXME unsupported BreakStatement: break ")
+		appendToBuffer('''/* FIXME unsupported BreakStatement: ''')
 		node.addProblem("Break statement is not supported")
 		if (node.getLabel() != null) {
 			appendSpaceToBuffer
@@ -1596,9 +1595,8 @@ class JavaASTFlattener extends ASTVisitor {
 
 	@Override override boolean visit(TypeDeclarationStatement node) {
 		if (isNotSupportedInnerType(node)) {
-			appendToBuffer('''/* only static inner classes are allowed «node»*/''')
-			node.addProblem("only static inner classes are allowed")
-			return false
+			appendToBuffer('''/*FIXME None static inner classes are not supported. */''')
+			node.addProblem("None static inner classes are not supported.")
 		}
 		node.getDeclaration().accept(this)
 		return false

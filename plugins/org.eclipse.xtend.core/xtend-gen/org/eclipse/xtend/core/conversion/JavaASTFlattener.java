@@ -498,12 +498,14 @@ public class JavaASTFlattener extends ASTVisitor {
     } else {
       ASTNode _parent_1 = it.getParent();
       if ((_parent_1 instanceof AnonymousClassDeclaration)) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("Initializer is not supported in ");
         ASTNode _parent_2 = it.getParent();
         int _nodeType = _parent_2.getNodeType();
         Class _nodeClassForType = ASTNode.nodeClassForType(_nodeType);
         String _simpleName = _nodeClassForType.getSimpleName();
-        String _plus = ("Initializer is not supported in " + _simpleName);
-        this.addProblem(it, _plus);
+        _builder.append(_simpleName, "");
+        this.addProblem(it, _builder.toString());
       }
       Block _body_2 = it.getBody();
       _body_2.accept(this);
@@ -527,13 +529,9 @@ public class JavaASTFlattener extends ASTVisitor {
     boolean _isNotSupportedInnerType = this._aSTFlattenerUtils.isNotSupportedInnerType(it);
     if (_isNotSupportedInnerType) {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("/* FIXME only static inner classes are allowed ");
-      SimpleName _name = it.getName();
-      _builder.append(_name, "");
-      _builder.append("*/");
+      _builder.append("/* FIXME None static inner classes are not supported.*/");
       this.appendToBuffer(_builder.toString());
-      this.addProblem(it, "only static inner classes are allowed");
-      return false;
+      this.addProblem(it, "None static inner classes are not supported.");
     }
     Javadoc _javadoc = it.getJavadoc();
     boolean _notEquals = (!Objects.equal(_javadoc, null));
@@ -555,8 +553,8 @@ public class JavaASTFlattener extends ASTVisitor {
       }
       this.appendToBuffer("class ");
     }
-    SimpleName _name_1 = it.getName();
-    _name_1.accept(this);
+    SimpleName _name = it.getName();
+    _name.accept(this);
     List _typeParameters = it.typeParameters();
     boolean _isEmpty = _typeParameters.isEmpty();
     boolean _not = (!_isEmpty);
@@ -2178,7 +2176,9 @@ public class JavaASTFlattener extends ASTVisitor {
   
   @Override
   public boolean visit(final BreakStatement node) {
-    this.appendToBuffer("/* FIXME unsupported BreakStatement: break ");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("/* FIXME unsupported BreakStatement: ");
+    this.appendToBuffer(_builder.toString());
     this.addProblem(node, "Break statement is not supported");
     SimpleName _label = node.getLabel();
     boolean _notEquals = (!Objects.equal(_label, null));
@@ -2510,12 +2510,9 @@ public class JavaASTFlattener extends ASTVisitor {
     boolean _isNotSupportedInnerType = this._aSTFlattenerUtils.isNotSupportedInnerType(node);
     if (_isNotSupportedInnerType) {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("/* only static inner classes are allowed ");
-      _builder.append(node, "");
-      _builder.append("*/");
+      _builder.append("/*FIXME None static inner classes are not supported. */");
       this.appendToBuffer(_builder.toString());
-      this.addProblem(node, "only static inner classes are allowed");
-      return false;
+      this.addProblem(node, "None static inner classes are not supported.");
     }
     AbstractTypeDeclaration _declaration = node.getDeclaration();
     _declaration.accept(this);
