@@ -86,8 +86,7 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
   
   private void runActiveAnnotationValidation(final Resource resource, final CancelIndicator monitor) {
     final ActiveAnnotationContexts contexts = ActiveAnnotationContexts.find(resource);
-    boolean _tripleEquals = (contexts == null);
-    if (_tripleEquals) {
+    if ((contexts == null)) {
       return;
     }
     try {
@@ -142,8 +141,7 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
         {
           this.operationCanceledManager.checkCanceled(monitor);
           final EObject sourceElement = this._iJvmModelAssociations.getPrimarySourceElement(jvmMember);
-          boolean _tripleEquals = (sourceElement == null);
-          if (_tripleEquals) {
+          if ((sourceElement == null)) {
             this.addWarningForOrphanedJvmElement(resource, jvmMember, severity, acceptor);
           }
         }
@@ -202,8 +200,8 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
       _append_1.append(_qualifiedName);
       if ((member instanceof JvmExecutable)) {
         EList<JvmFormalParameter> _parameters = ((JvmExecutable)member).getParameters();
-        final Function1<JvmFormalParameter, String> _function = new Function1<JvmFormalParameter, String>() {
-          public String apply(final JvmFormalParameter it) {
+        final Function1<JvmFormalParameter, CharSequence> _function = new Function1<JvmFormalParameter, CharSequence>() {
+          public CharSequence apply(final JvmFormalParameter it) {
             JvmTypeReference _parameterType = it.getParameterType();
             return _parameterType.getSimpleName();
           }

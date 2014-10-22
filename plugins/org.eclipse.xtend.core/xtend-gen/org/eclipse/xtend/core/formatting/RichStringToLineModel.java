@@ -208,8 +208,7 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
           }
           final Chunk lastWs = IterableExtensions.<Chunk>last(this.indentationStack);
           int _xifexpression = (int) 0;
-          boolean _tripleEquals = (lastWs == null);
-          if (_tripleEquals) {
+          if ((lastWs == null)) {
             int _rootIndentLenght = this.model.getRootIndentLenght();
             _xifexpression = (newContentStartColumn - _rootIndentLenght);
           } else {

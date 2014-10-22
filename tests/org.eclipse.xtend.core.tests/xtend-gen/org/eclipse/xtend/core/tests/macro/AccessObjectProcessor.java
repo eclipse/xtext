@@ -63,8 +63,7 @@ public class AccessObjectProcessor implements TransformationParticipant<MutableC
         int _minus = (_length - _length_1);
         final String pkg = _qualifiedName.substring(0, _minus);
         final TypeReference ser = ctx.newTypeReference(Serializable.class);
-        boolean _tripleEquals = (ser == null);
-        if (_tripleEquals) {
+        if ((ser == null)) {
           ctx.addError(it, "Cannot find Serializable");
         }
         String _simpleName_1 = it.getSimpleName();

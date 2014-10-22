@@ -34,8 +34,7 @@ public class ResolvedExecutableImpl<T extends IResolvedExecutable, D extends Exe
   public Iterable<? extends ResolvedParameter> getResolvedParameters() {
     Iterable<? extends ResolvedParameter> _xblockexpression = null;
     {
-      boolean _tripleEquals = (this.resolvedParameters == null);
-      if (_tripleEquals) {
+      if ((this.resolvedParameters == null)) {
         T _delegate = this.getDelegate();
         JvmExecutable _declaration = _delegate.getDeclaration();
         EList<JvmFormalParameter> _parameters = _declaration.getParameters();

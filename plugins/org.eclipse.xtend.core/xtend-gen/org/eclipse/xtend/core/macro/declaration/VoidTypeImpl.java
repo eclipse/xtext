@@ -22,8 +22,7 @@ public class VoidTypeImpl extends AbstractElementImpl<JvmVoid> implements VoidTy
   }
   
   public boolean isAssignableFrom(final Type otherType) {
-    boolean _tripleEquals = (otherType == null);
-    if (_tripleEquals) {
+    if ((otherType == null)) {
       return false;
     }
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();

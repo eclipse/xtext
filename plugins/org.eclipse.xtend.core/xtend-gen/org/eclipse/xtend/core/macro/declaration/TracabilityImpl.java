@@ -45,8 +45,7 @@ public class TracabilityImpl implements Tracability {
       EObject _delegate = ((AbstractElementImpl<?>) source).getDelegate();
       Set<EObject> _jvmElements = _jvmModelAssociations.getJvmElements(_delegate);
       final EObject derivedElement = IterableExtensions.<EObject>head(_jvmElements);
-      boolean _tripleNotEquals = (derivedElement != null);
-      if (_tripleNotEquals) {
+      if ((derivedElement != null)) {
         return this.unit.toJvmElement(derivedElement);
       }
     } else {
@@ -159,8 +158,7 @@ public class TracabilityImpl implements Tracability {
     boolean _xblockexpression = false;
     {
       final Element source = this.getPrimarySourceElement(target);
-      boolean _tripleEquals = (source == null);
-      if (_tripleEquals) {
+      if ((source == null)) {
         return false;
       }
       Element _primaryGeneratedJavaElement = this.getPrimaryGeneratedJavaElement(source);

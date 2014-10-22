@@ -37,15 +37,7 @@ public class TreeAppendableUtil {
         ITextRegion _significantTextRegion = this.locationProvider.getSignificantTextRegion(source);
         final ITextRegionWithLineInformation it = ((ITextRegionWithLineInformation) _significantTextRegion);
         ITreeAppendable _xifexpression_1 = null;
-        boolean _and = false;
-        boolean _tripleNotEquals = (it != null);
-        if (!_tripleNotEquals) {
-          _and = false;
-        } else {
-          boolean _tripleNotEquals_1 = (it != ITextRegion.EMPTY_REGION);
-          _and = _tripleNotEquals_1;
-        }
-        if (_and) {
+        if (((it != null) && (it != ITextRegion.EMPTY_REGION))) {
           int _offset = it.getOffset();
           int _length = it.getLength();
           int _lineNumber = it.getLineNumber();
@@ -88,8 +80,7 @@ public class TreeAppendableUtil {
         if (!_notEquals) {
           _and = false;
         } else {
-          boolean _tripleNotEquals = (it != ITextRegion.EMPTY_REGION);
-          _and = _tripleNotEquals;
+          _and = (it != ITextRegion.EMPTY_REGION);
         }
         if (_and) {
           int _offset = it.getOffset();

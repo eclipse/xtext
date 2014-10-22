@@ -212,11 +212,9 @@ public class ReorderedVarArgFeatureCallArgumentsTest extends AbstractTestingType
         boolean _hasUnprocessedArguments = arguments.hasUnprocessedArguments();
         Assert.assertTrue(_hasUnprocessedArguments);
         final IFeatureCallArgumentSlot slot = arguments.getNextUnprocessedArgumentSlot();
-        boolean _tripleEquals = (it == null);
         boolean _isSuperfluous = slot.isSuperfluous();
-        Assert.assertEquals(Boolean.valueOf(_tripleEquals), Boolean.valueOf(_isSuperfluous));
-        boolean _tripleNotEquals = (it != null);
-        if (_tripleNotEquals) {
+        Assert.assertEquals(Boolean.valueOf((it == null)), Boolean.valueOf(_isSuperfluous));
+        if ((it != null)) {
           LightweightTypeReference _declaredType = slot.getDeclaredType();
           String _simpleName = _declaredType.getSimpleName();
           Assert.assertEquals(it, _simpleName);

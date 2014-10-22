@@ -105,8 +105,7 @@ public class AssignmentFeatureCallArgumentsTest extends AbstractTestingTypeRefer
         _parameterType=_head.getParameterType();
       }
       final JvmTypeReference declaredType = _parameterType;
-      boolean _tripleNotEquals = (declaredType != null);
-      if (_tripleNotEquals) {
+      if ((declaredType != null)) {
         LightweightTypeReference _lightweightTypeReference = this.toLightweightTypeReference(declaredType);
         return new AssignmentFeatureCallArguments(value, _lightweightTypeReference);
       } else {

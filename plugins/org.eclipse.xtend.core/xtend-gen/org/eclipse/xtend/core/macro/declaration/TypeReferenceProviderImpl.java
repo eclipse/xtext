@@ -127,8 +127,7 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
       TypeReferences _typeReferences = this.compilationUnit.getTypeReferences();
       XtendFile _xtendFile = this.compilationUnit.getXtendFile();
       final JvmType type = _typeReferences.findDeclaredType(typeName, _xtendFile);
-      boolean _tripleEquals = (type == null);
-      if (_tripleEquals) {
+      if ((type == null)) {
         return null;
       }
       final Function1<TypeReference, JvmTypeReference> _function = new Function1<TypeReference, JvmTypeReference>() {
@@ -144,8 +143,7 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
   }
   
   public JvmParameterizedTypeReference createTypeRef(final JvmType type, final JvmTypeReference... typeArgs) {
-    boolean _tripleEquals = (type == null);
-    if (_tripleEquals) {
+    if ((type == null)) {
       throw new NullPointerException("type");
     }
     final JvmParameterizedTypeReference reference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
@@ -261,8 +259,7 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
         throw new IllegalArgumentException(("couldn\'t construct type reference for type " + typeDeclaration));
       }
       final JvmComponentType type = _switchResult;
-      boolean _tripleEquals = (type == null);
-      if (_tripleEquals) {
+      if ((type == null)) {
         return null;
       }
       final Function1<TypeReference, JvmTypeReference> _function = new Function1<TypeReference, JvmTypeReference>() {
@@ -283,8 +280,7 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
   
   public TypeReference newWildcardTypeReference(final TypeReference upperBound) {
     TypeReference _xifexpression = null;
-    boolean _tripleEquals = (upperBound == null);
-    if (_tripleEquals) {
+    if ((upperBound == null)) {
       TypeReferences _typeReferences = this.compilationUnit.getTypeReferences();
       JvmWildcardTypeReference _wildCard = _typeReferences.wildCard();
       _xifexpression = this.compilationUnit.toTypeReference(_wildCard);
@@ -299,8 +295,7 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
   
   public TypeReference newWildcardTypeReferenceWithLowerBound(final TypeReference lowerBound) {
     TypeReference _xifexpression = null;
-    boolean _tripleEquals = (lowerBound == null);
-    if (_tripleEquals) {
+    if ((lowerBound == null)) {
       TypeReferences _typeReferences = this.compilationUnit.getTypeReferences();
       JvmWildcardTypeReference _wildCard = _typeReferences.wildCard();
       _xifexpression = this.compilationUnit.toTypeReference(_wildCard);

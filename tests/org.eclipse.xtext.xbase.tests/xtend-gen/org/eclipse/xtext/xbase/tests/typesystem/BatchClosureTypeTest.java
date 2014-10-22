@@ -126,8 +126,8 @@ public class BatchClosureTypeTest extends AbstractClosureTypeTest {
     _builder.append(_simpleName, "");
     _builder.append("<");
     List<LightweightTypeReference> _typeArguments_1 = type.getTypeArguments();
-    final Function1<LightweightTypeReference, String> _function = new Function1<LightweightTypeReference, String>() {
-      public String apply(final LightweightTypeReference it) {
+    final Function1<LightweightTypeReference, CharSequence> _function = new Function1<LightweightTypeReference, CharSequence>() {
+      public CharSequence apply(final LightweightTypeReference it) {
         return it.getSimpleName();
       }
     };

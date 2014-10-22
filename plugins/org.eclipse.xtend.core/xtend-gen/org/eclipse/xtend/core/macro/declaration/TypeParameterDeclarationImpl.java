@@ -72,8 +72,7 @@ public class TypeParameterDeclarationImpl extends AbstractElementImpl<JvmTypePar
   }
   
   public boolean isAssignableFrom(final Type otherType) {
-    boolean _tripleEquals = (otherType == null);
-    if (_tripleEquals) {
+    if ((otherType == null)) {
       return false;
     }
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();

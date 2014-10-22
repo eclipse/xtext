@@ -103,8 +103,8 @@ public class EclipseFileSystemTest extends JavaIoFileSystemTest {
   @Test
   public void testGetWorkspaceChildren() {
     Iterable<? extends Path> _children = this.fs.getChildren(Path.ROOT);
-    final Function1<Path, String> _function = new Function1<Path, String>() {
-      public String apply(final Path it) {
+    final Function1<Path, CharSequence> _function = new Function1<Path, CharSequence>() {
+      public CharSequence apply(final Path it) {
         List<String> _segments = it.getSegments();
         return IterableExtensions.join(_segments, ".");
       }
@@ -118,8 +118,8 @@ public class EclipseFileSystemTest extends JavaIoFileSystemTest {
     boolean _exists = this.fs.exists(path);
     Assert.assertTrue(_exists);
     Iterable<? extends Path> _children_2 = this.fs.getChildren(Path.ROOT);
-    final Function1<Path, String> _function_1 = new Function1<Path, String>() {
-      public String apply(final Path it) {
+    final Function1<Path, CharSequence> _function_1 = new Function1<Path, CharSequence>() {
+      public CharSequence apply(final Path it) {
         List<String> _segments = it.getSegments();
         return IterableExtensions.join(_segments, ".");
       }

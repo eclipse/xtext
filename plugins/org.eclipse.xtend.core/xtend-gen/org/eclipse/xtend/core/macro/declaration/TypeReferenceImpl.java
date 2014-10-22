@@ -89,8 +89,7 @@ public class TypeReferenceImpl extends AbstractDelegator<LightweightTypeReferenc
   public TypeReference getArrayComponentType() {
     LightweightTypeReference _delegate = this.getDelegate();
     final LightweightTypeReference componentType = _delegate.getComponentType();
-    boolean _tripleEquals = (componentType == null);
-    if (_tripleEquals) {
+    if ((componentType == null)) {
       return null;
     }
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();

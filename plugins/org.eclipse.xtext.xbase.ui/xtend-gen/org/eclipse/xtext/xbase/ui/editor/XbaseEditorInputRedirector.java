@@ -164,8 +164,7 @@ public class XbaseEditorInputRedirector {
     boolean _notEquals = (!Objects.equal(resource, null));
     if (_notEquals) {
       final IEditorInput original = this.findOriginalSourceForOuputFolderCopy(input);
-      boolean _tripleNotEquals = (original != input);
-      if (_tripleNotEquals) {
+      if ((original != input)) {
         return original;
       }
       final ITrace trace = this.traceInformation.getTraceToSource(resource);

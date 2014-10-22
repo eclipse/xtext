@@ -109,8 +109,8 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
         return type.getQualifiedName('.');
       }
     };
-    final Function1<JvmDeclaredType, Iterable<JvmDeclaredType>> _function_1 = new Function1<JvmDeclaredType, Iterable<JvmDeclaredType>>() {
-      public Iterable<JvmDeclaredType> apply(final JvmDeclaredType type) {
+    final Function1<JvmDeclaredType, Iterable<? extends JvmDeclaredType>> _function_1 = new Function1<JvmDeclaredType, Iterable<? extends JvmDeclaredType>>() {
+      public Iterable<? extends JvmDeclaredType> apply(final JvmDeclaredType type) {
         EList<JvmMember> _members = type.getMembers();
         return Iterables.<JvmDeclaredType>filter(_members, JvmDeclaredType.class);
       }
@@ -190,8 +190,8 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
         return _qualifiedNameConverter.toString(_fullyQualifiedName);
       }
     };
-    final Function1<XtendTypeDeclaration, Iterable<XtendTypeDeclaration>> _function_1 = new Function1<XtendTypeDeclaration, Iterable<XtendTypeDeclaration>>() {
-      public Iterable<XtendTypeDeclaration> apply(final XtendTypeDeclaration type) {
+    final Function1<XtendTypeDeclaration, Iterable<? extends XtendTypeDeclaration>> _function_1 = new Function1<XtendTypeDeclaration, Iterable<? extends XtendTypeDeclaration>>() {
+      public Iterable<? extends XtendTypeDeclaration> apply(final XtendTypeDeclaration type) {
         EList<XtendMember> _members = type.getMembers();
         return Iterables.<XtendTypeDeclaration>filter(_members, XtendTypeDeclaration.class);
       }
@@ -282,8 +282,7 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
     final IEObjectDescription result = _scope.getSingleElement(qualifiedName);
     boolean _and = false;
     boolean _and_1 = false;
-    boolean _tripleNotEquals = (result != null);
-    if (!_tripleNotEquals) {
+    if (!(result != null)) {
       _and_1 = false;
     } else {
       EClass _eClass = result.getEClass();
