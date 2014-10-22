@@ -243,25 +243,33 @@ public class NodeModelBuilder {
 				if (firstChild instanceof ILeafNode && !firstChild.basicHasNextSibling()) {
 					return result;
 				}
-				root.basicSetFirstChild(firstChild);
-				firstChild.basicSetParent(root);
-				AbstractNode child = firstChild;
-				while(child.basicHasNextSibling()) {
-					child = child.basicGetNextSibling();
-					child.basicSetParent(root);
-				}
-				root.basicSetGrammarElement(casted.basicGetGrammarElement());
-				root.basicSetSemanticElement(casted.basicGetSemanticElement());
-				root.basicSetSyntaxErrorMessage(casted.getSyntaxErrorMessage());
-				root.basicSetLookAhead(casted.getLookAhead());
-				EObject semanticElement = casted.getSemanticElement();
-				if (semanticElement != null) {
-					semanticElement.eAdapters().remove(casted);
-					root.getSemanticElement().eAdapters().add(root);
-				}
+				replaceByRootNode(casted, root);
 			}
 		}
 		return result;
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	protected void replaceByRootNode(CompositeNode oldNode, RootNode rootNode) {
+		AbstractNode firstChild = oldNode.basicGetFirstChild();
+		rootNode.basicSetFirstChild(firstChild);
+		firstChild.basicSetParent(rootNode);
+		AbstractNode child = firstChild;
+		while(child.basicHasNextSibling()) {
+			child = child.basicGetNextSibling();
+			child.basicSetParent(rootNode);
+		}
+		rootNode.basicSetGrammarElement(oldNode.basicGetGrammarElement());
+		rootNode.basicSetSemanticElement(oldNode.basicGetSemanticElement());
+		rootNode.basicSetSyntaxErrorMessage(oldNode.getSyntaxErrorMessage());
+		rootNode.basicSetLookAhead(oldNode.getLookAhead());
+		EObject semanticElement = oldNode.getSemanticElement();
+		if (semanticElement != null) {
+			semanticElement.eAdapters().remove(oldNode);
+			rootNode.getSemanticElement().eAdapters().add(rootNode);
+		}
 	}
 	
 	private /* @Nullable */ EObject[] newEObjectArray(/* @Nullable */ EObject first, EObject[] rest) {
