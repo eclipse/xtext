@@ -234,6 +234,12 @@ class JavaConverterTest extends AbstractXtendTestCase {
 			class TestStringLiteral {
 				long l= 0x0000000000000000L;
 				double d= 2.5d;
+				long l2= 0x000000000000A;
+				long l3= 0x000000000000B;
+				long l4= 0x000000000000c;
+				long l5= 0x000000000000d;
+				long l6= 0x000000000000e;
+				long l7= 0x000000000000f;
 			}''')
 
 		var XtendField xtendMember = xtendClazz.field(0)
@@ -242,6 +248,28 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		xtendMember = xtendClazz.field(1)
 		assertEquals("d", xtendMember.getName())
 		assertEquals("2.5d", (xtendMember.getInitialValue() as XNumberLiteral).getValue())
+	}
+
+	@Test def void testNumberLiteralCase2() throws Exception {
+
+		var XtendClass xtendClazz = toValidXtendClass(
+			'''
+			class TestStringLiteral {
+				long l= 0x598df91c;
+				double d = 0x43p-43;
+				float f = 0x43p-43f;
+			}''')
+
+		var XtendField xtendMember = xtendClazz.field(0)
+		assertEquals("l", xtendMember.getName())
+		assertEquals("0x598df91c", (xtendMember.getInitialValue() as XNumberLiteral).getValue())
+		xtendMember = xtendClazz.field(1)
+		assertEquals("d", xtendMember.getName())
+		assertEquals("7.617018127348274E-12", (xtendMember.getInitialValue() as XNumberLiteral).getValue())
+		xtendMember = xtendClazz.field(2)
+		assertEquals("f", xtendMember.getName())
+		assertEquals("7.617018E-12f", (xtendMember.getInitialValue() as XNumberLiteral).getValue())
+
 	}
 
 	@Test def void testSimpleTypeParameterCase() throws Exception {
