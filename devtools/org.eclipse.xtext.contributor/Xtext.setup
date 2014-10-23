@@ -171,6 +171,7 @@
         <operands xsi:type="workingsets:ExclusionPredicate" excludedWorkingSets="//@setupTasks.16/@workingSets.6"/>
         <operands xsi:type="workingsets:ExclusionPredicate" excludedWorkingSets="//@setupTasks.16/@workingSets.0"/>
         <operands xsi:type="workingsets:ExclusionPredicate" excludedWorkingSets="//@setupTasks.16/@workingSets.7"/>
+        <operands xsi:type="predicates:NamePredicate" pattern="org.eclipse.xtex.*"/>
       </predicates>
     </workingSets>
     <workingSets name="Xbase">
@@ -199,7 +200,7 @@
     <workingSets name="Xtext Tests">
       <predicates xsi:type="predicates:AndPredicate">
         <operands xsi:type="predicates:RepositoryPredicate" project="org.eclipse.xtext"/>
-        <operands xsi:type="predicates:NamePredicate" pattern=".*tests.*"/>
+        <operands xsi:type="predicates:NamePredicate" pattern="org.eclipse.xtext.*tests.*"/>
         <operands xsi:type="workingsets:ExclusionPredicate" excludedWorkingSets="//@setupTasks.16/@workingSets.8"/>
         <operands xsi:type="workingsets:ExclusionPredicate" excludedWorkingSets="//@setupTasks.16/@workingSets.4"/>
         <operands xsi:type="workingsets:ExclusionPredicate" excludedWorkingSets="//@setupTasks.16/@workingSets.6"/>
@@ -216,6 +217,7 @@
       <predicates xsi:type="predicates:AndPredicate">
         <operands xsi:type="predicates:NamePredicate" pattern=".*example.*"/>
         <operands xsi:type="predicates:RepositoryPredicate" project="org.eclipse.xtext.example.arithmetics"/>
+        <operands xsi:type="workingsets:ExclusionPredicate" excludedWorkingSets="//@setupTasks.16/@workingSets.13"/>
       </predicates>
     </workingSets>
     <workingSets name="Xtext Features">
@@ -253,6 +255,11 @@
       <predicates xsi:type="predicates:AndPredicate">
         <operands xsi:type="predicates:RepositoryPredicate" project="org.eclipse.emf.ecore.xcore"/>
         <operands xsi:type="predicates:NaturePredicate" nature="org.eclipse.pde.FeatureNature"/>
+      </predicates>
+    </workingSets>
+    <workingSets name="Idea">
+      <predicates xsi:type="predicates:AndPredicate">
+        <operands xsi:type="predicates:NamePredicate" pattern="intellij-dependencies|.*\.idea(\..*)?"/>
       </predicates>
     </workingSets>
   </setupTasks>
