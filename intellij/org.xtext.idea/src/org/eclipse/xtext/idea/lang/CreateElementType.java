@@ -1,6 +1,6 @@
 package org.eclipse.xtext.idea.lang;
 
-import com.intellij.psi.impl.source.tree.CompositeElement;
+import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.IElementType;
 
 public class CreateElementType extends IElementType {
@@ -29,7 +29,7 @@ public class CreateElementType extends IElementType {
 
 	public interface CreateCallback {
 
-		void onCreate(CompositeElement composite);
+		void onCreate(ASTNode composite);
 		
 	}
 

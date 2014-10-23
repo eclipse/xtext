@@ -1,12 +1,13 @@
 package org.eclipse.xtext.idea.lang;
 
 import org.eclipse.xtext.psi.PsiNamedEObject;
-import org.eclipse.xtext.psi.PsiNamedEObjectStub;
+import org.eclipse.xtext.psi.stubs.PsiNamedEObjectStub;
 
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 
+// FIXME: get rid of this interface
 public interface IElementTypeProvider {
 
 	IFileElementType getFileType();

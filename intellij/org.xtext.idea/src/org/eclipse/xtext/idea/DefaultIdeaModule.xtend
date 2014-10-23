@@ -2,6 +2,7 @@ package org.eclipse.xtext.idea
 
 import com.google.inject.Binder
 import org.eclipse.xtext.idea.containers.ResolveScopeBasedContainerManger
+import org.eclipse.xtext.idea.resource.impl.ProjectScopeBasedResourceDescriptions
 import org.eclipse.xtext.psi.IPsiModelAssociations
 import org.eclipse.xtext.psi.IPsiModelAssociator
 import org.eclipse.xtext.psi.PsiModelAssociations
@@ -10,7 +11,6 @@ import org.eclipse.xtext.resource.IContainer
 import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.service.AbstractGenericModule
 import org.eclipse.xtext.service.SingletonBinding
-import org.eclipse.xtext.idea.resource.impl.ProjectScopeBasedResourceDescriptions
 
 class DefaultIdeaModule extends AbstractGenericModule {
 

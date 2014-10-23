@@ -1,0 +1,192 @@
+package org.eclipse.xtext.idea.nodemodel;
+
+import com.google.common.base.Objects;
+import com.google.inject.Inject;
+import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.Key;
+import com.intellij.psi.impl.source.tree.CompositeElement;
+import com.intellij.psi.impl.source.tree.LeafElement;
+import com.intellij.psi.tree.IElementType;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtend.lib.annotations.AccessorType;
+import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.impl.AbstractNode;
+import org.eclipse.xtext.nodemodel.impl.CompositeNode;
+import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
+import org.eclipse.xtext.nodemodel.impl.RootNode;
+import org.eclipse.xtext.parser.antlr.TokenTool;
+import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Pure;
+
+@SuppressWarnings("all")
+public class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder {
+  public final static Key<Boolean> HIDDEN_KEY = Key.<Boolean>create("HIDDEN_KEY");
+  
+  public final static Key<Integer> LOOK_AHEAD_KEY = Key.<Integer>create("LOOK_AHEAD_KEY");
+  
+  public final static Key<IElementType> TOKEN_TYPE_KEY = Key.<IElementType>create("TOKEN_TYPE_KEY");
+  
+  @Inject
+  private IGrammarAccess grammarAccess;
+  
+  @Accessors(AccessorType.PUBLIC_GETTER)
+  private final Map<ASTNode, INode> nodesMapping = CollectionLiterals.<ASTNode, INode>newHashMap();
+  
+  @Accessors(AccessorType.PUBLIC_GETTER)
+  private final Map<INode, List<ASTNode>> reverseNodesMapping = CollectionLiterals.<INode, List<ASTNode>>newHashMap();
+  
+  protected void associate(final ASTNode astNode, final INode node) {
+    this.nodesMapping.put(astNode, node);
+    List<ASTNode> _elvis = null;
+    List<ASTNode> _get = this.reverseNodesMapping.get(node);
+    if (_get != null) {
+      _elvis = _get;
+    } else {
+      ArrayList<ASTNode> _xblockexpression = null;
+      {
+        final ArrayList<ASTNode> result = CollectionLiterals.<ASTNode>newArrayList();
+        this.reverseNodesMapping.put(node, result);
+        _xblockexpression = result;
+      }
+      _elvis = _xblockexpression;
+    }
+    final List<ASTNode> reverseMapping = _elvis;
+    reverseMapping.add(astNode);
+  }
+  
+  protected void replaceAssociations(final INode oldNode, final INode newNode) {
+    final List<ASTNode> mapping = this.reverseNodesMapping.remove(oldNode);
+    for (final ASTNode astNode : mapping) {
+      this.associate(astNode, newNode);
+    }
+  }
+  
+  protected void replaceByRootNode(final CompositeNode oldNode, final RootNode rootNode) {
+    super.replaceByRootNode(oldNode, rootNode);
+    this.replaceAssociations(oldNode, rootNode);
+  }
+  
+  protected void replaceChildren(final AbstractNode oldNode, final AbstractNode newNode) {
+    super.replaceChildren(oldNode, newNode);
+    this.replaceAssociations(oldNode, newNode);
+  }
+  
+  public ILeafNode newLeafNode(final LeafElement it, final EObject grammarElement, final ICompositeNode parent) {
+    ILeafNode _xblockexpression = null;
+    {
+      int _startOffset = it.getStartOffset();
+      int _textLength = it.getTextLength();
+      final ILeafNode leafNode = this.newLeafNode(_startOffset, _textLength, grammarElement, false, null, parent);
+      this.associate(it, leafNode);
+      _xblockexpression = leafNode;
+    }
+    return _xblockexpression;
+  }
+  
+  public ILeafNode newLeafNode(final ASTNode it, final ICompositeNode parent) {
+    ILeafNode _xblockexpression = null;
+    {
+      final IElementType elementType = it.getElementType();
+      EObject _xifexpression = null;
+      if ((elementType instanceof IGrammarAwareElementType)) {
+        _xifexpression = ((IGrammarAwareElementType)elementType).getGrammarElement();
+      } else {
+        AbstractRule _xblockexpression_1 = null;
+        {
+          final IElementType tokenType = it.<IElementType>getUserData(ASTNodeAwareNodeModelBuilder.TOKEN_TYPE_KEY);
+          AbstractRule _xifexpression_1 = null;
+          boolean _notEquals = (!Objects.equal(tokenType, null));
+          if (_notEquals) {
+            AbstractRule _xblockexpression_2 = null;
+            {
+              final String tokenName = tokenType.toString();
+              AbstractRule _xifexpression_2 = null;
+              boolean _isLexerRule = TokenTool.isLexerRule(tokenName);
+              if (_isLexerRule) {
+                AbstractRule _xblockexpression_3 = null;
+                {
+                  final String ruleName = TokenTool.getLexerRuleName(tokenName);
+                  Grammar _grammar = this.grammarAccess.getGrammar();
+                  List<AbstractRule> _allRules = GrammarUtil.allRules(_grammar);
+                  final Function1<AbstractRule, Boolean> _function = new Function1<AbstractRule, Boolean>() {
+                    public Boolean apply(final AbstractRule it) {
+                      String _name = it.getName();
+                      return Boolean.valueOf(Objects.equal(_name, ruleName));
+                    }
+                  };
+                  _xblockexpression_3 = IterableExtensions.<AbstractRule>findFirst(_allRules, _function);
+                }
+                _xifexpression_2 = _xblockexpression_3;
+              }
+              _xblockexpression_2 = _xifexpression_2;
+            }
+            _xifexpression_1 = _xblockexpression_2;
+          }
+          _xblockexpression_1 = _xifexpression_1;
+        }
+        _xifexpression = _xblockexpression_1;
+      }
+      final EObject grammarElement = _xifexpression;
+      Boolean _elvis = null;
+      Boolean _userData = it.<Boolean>getUserData(ASTNodeAwareNodeModelBuilder.HIDDEN_KEY);
+      if (_userData != null) {
+        _elvis = _userData;
+      } else {
+        _elvis = Boolean.valueOf(false);
+      }
+      final Boolean hidden = _elvis;
+      int _startOffset = it.getStartOffset();
+      int _textLength = it.getTextLength();
+      final ILeafNode leafNode = this.newLeafNode(_startOffset, _textLength, grammarElement, (hidden).booleanValue(), null, parent);
+      this.associate(it, leafNode);
+      _xblockexpression = leafNode;
+    }
+    return _xblockexpression;
+  }
+  
+  public ICompositeNode newCompositeNode(final CompositeElement it, final ICompositeNode parent) {
+    ICompositeNode _xblockexpression = null;
+    {
+      final IElementType elementType = it.getElementType();
+      ICompositeNode _xifexpression = null;
+      if ((elementType instanceof IGrammarAwareElementType)) {
+        ICompositeNode _xblockexpression_1 = null;
+        {
+          final EObject grammarElement = ((IGrammarAwareElementType)elementType).getGrammarElement();
+          final Integer lookAhead = it.<Integer>getUserData(ASTNodeAwareNodeModelBuilder.LOOK_AHEAD_KEY);
+          final ICompositeNode compositeNode = this.newCompositeNode(grammarElement, (lookAhead).intValue(), parent);
+          this.associate(it, compositeNode);
+          _xblockexpression_1 = compositeNode;
+        }
+        _xifexpression = _xblockexpression_1;
+      } else {
+        throw new IllegalStateException(("Composite element with unexpected element type: " + it));
+      }
+      _xblockexpression = _xifexpression;
+    }
+    return _xblockexpression;
+  }
+  
+  @Pure
+  public Map<ASTNode, INode> getNodesMapping() {
+    return this.nodesMapping;
+  }
+  
+  @Pure
+  public Map<INode, List<ASTNode>> getReverseNodesMapping() {
+    return this.reverseNodesMapping;
+  }
+}

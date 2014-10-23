@@ -3,14 +3,14 @@ package org.eclipse.xtext.psi.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.psi.PsiNamedEObject;
-import org.eclipse.xtext.psi.PsiNamedEObjectStub;
+import org.eclipse.xtext.psi.stubs.PsiNamedEObjectStub;
 
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.util.io.StringRef;
 
-public class PsiNamedEObjectStubImpl<T extends PsiNamedEObject> extends StubBase<T> implements PsiNamedEObjectStub<T> {
+public class PsiNamedEObjectStubImpl<T extends PsiNamedEObject<?>> extends StubBase<T> implements PsiNamedEObjectStub<T> {
 	
 	private final EClass type;
 

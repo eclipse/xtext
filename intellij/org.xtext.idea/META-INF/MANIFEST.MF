@@ -3,15 +3,13 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Idea
 Bundle-SymbolicName: org.xtext.idea
 Bundle-Version: 1.0.0.qualifier
-Export-Package: org.eclipse.xtext.generator.idea,
- org.eclipse.xtext.idea,
+Export-Package: org.eclipse.xtext.idea,
  org.eclipse.xtext.idea.annotation,
  org.eclipse.xtext.idea.build,
  org.eclipse.xtext.idea.findusages,
  org.eclipse.xtext.idea.jvmmodel,
  org.eclipse.xtext.idea.jvmmodel.codeInsight,
  org.eclipse.xtext.idea.lang,
- org.eclipse.xtext.idea.lang.parser,
  org.eclipse.xtext.idea.refactoring,
  org.eclipse.xtext.idea.resource,
  org.eclipse.xtext.idea.resource.impl,
