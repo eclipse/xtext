@@ -1,22 +1,16 @@
 allprojects {
   ext.intellijHome = file("${rootDir}/intellij-ce")
-  def osName = System.getProperty('os.name')
-  ext.isWindows = osName.startsWith('Win')
-  ext.isMac = osName.startsWith('Mac')
-  ext.isUnix = osName.startsWith('Linux')
-  if (isWindows || isUnix) {
-    ext.intellijLibs = file("${intellijHome}/lib")
-  } else if (isMac) {
-    ext.intellijLibs = file("${intellijHome}/IntelliJ IDEA 14 CE EAP.app/Contents/lib")
-  }
+  ext.os = org.gradle.internal.os.OperatingSystem.current()
+  ext.intellijLibs = file("${intellijHome}/lib")
 }
+
 def buildQualifier = '138.SNAPSHOT'
 def archiveName
-if (isWindows) {
+if (os.windows) {
   archiveName = "ideaIC-${buildQualifier}.win.zip"
-} else if (isMac) {
+} else if (os.macOsX) {
   archiveName = "ideaIC-${buildQualifier}.mac.zip"
-} else if (isUnix) {
+} else if (os.linux) {
   archiveName = "ideaIC-${buildQualifier}.tar.gz"
 }
 def archiveFile = file("${intellijHome}/${archiveName}")
@@ -31,15 +25,19 @@ task downloadIntellij {
 }
 
 task unpackIntellij(type: Copy, dependsOn: downloadIntellij) {
-  if (isUnix) {
+  into(intellijHome)
+  if (os.linux) {
     from tarTree(archiveFile)
-    into(intellijHome)
     eachFile {file ->
-      file.path = (file.path - "idea-IC-${buildQualifier}/")
+      file.path = file.path - "idea-IC-${buildQualifier}/"
     }
   } else {
     from zipTree(archiveFile)
-    into intellijHome
+    if (os.macOsX) {
+      eachFile {file ->
+        file.path = file.path - "IntelliJ IDEA 14 CE EAP.app/Contents/"
+      }
+    }
   }
 }
 
