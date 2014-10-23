@@ -1900,14 +1900,30 @@ public class JavaASTFlattener extends ASTVisitor {
       int _length = value.length();
       int _minus = (_length - 1);
       final char lastChar = value.charAt(_minus);
-      boolean _isLetter = Character.isLetter(lastChar);
-      if (_isLetter) {
+      String _string = Character.valueOf(lastChar).toString();
+      String _lowerCase = _string.toLowerCase();
+      boolean _equals = Objects.equal("l", _lowerCase);
+      if (_equals) {
         int _length_1 = value.length();
         int _minus_1 = (_length_1 - 1);
         String _substring = value.substring(0, _minus_1);
         String _plus = (_substring + "#");
         String _plus_1 = (_plus + Character.valueOf(lastChar));
         value = _plus_1;
+      }
+      final int binExponent = value.indexOf("p");
+      if ((binExponent >= 2)) {
+        boolean _endsWith = value.endsWith("f");
+        if (_endsWith) {
+          Float _valueOf = Float.valueOf(value);
+          String _string_1 = _valueOf.toString();
+          String _plus_2 = (_string_1 + "f");
+          value = _plus_2;
+        } else {
+          Double _valueOf_1 = Double.valueOf(value);
+          String _string_2 = _valueOf_1.toString();
+          value = _string_2;
+        }
       }
     }
     this.appendToBuffer(value);
