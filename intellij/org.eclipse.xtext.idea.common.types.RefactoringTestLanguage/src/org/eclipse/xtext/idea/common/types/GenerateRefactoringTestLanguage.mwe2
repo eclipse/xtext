@@ -1,0 +1,74 @@
+module org.eclipse.xtext.common.types.xtext.ui.GenerateRefactoringTestLanguage
+
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.ui.generator.*
+
+var referencedGenModels = ""
+var genModel = ""
+var basePackage = ""
+var javaModelDirectory = ""
+var xmiModelDirectory = ""
+var classSplitting = true
+var skipGenerate = false
+var backtrack = false
+var memoize = false
+var emfRuntimeVersion = "2.9"
+var grammarURI = "classpath:/org/eclipse/xtext/idea/common/types/RefactoringTestLanguage.xtext"
+var fileExtensions = "typesRefactoring"
+var projectName = "org.eclipse.xtext.idea.common.types.RefactoringTestLanguage"
+var runtimeProject = "../${projectName}"
+var encoding = "UTF-8"
+
+Workflow {
+	bean = StandaloneSetup {
+		scanClassPath = true
+		platformUri = "${runtimeProject}/.."
+		registerGenModelFile = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
+	}
+
+	component = DirectoryCleaner {
+		directory = "${runtimeProject}/src-gen"
+	}
+
+	component = DirectoryCleaner {
+		directory = "${runtimeProject}/model/generated"
+	}
+
+	component = Generator {
+		pathRtProject = runtimeProject
+		pathUiProject = runtimeProject
+		pathTestProject = runtimeProject
+		projectNameRt = projectName
+		encoding = encoding
+		language = auto-inject {
+			uri = grammarURI
+			fragment = ecore.EcoreGeneratorFragment auto-inject {}
+			fragment = grammarAccess.GrammarAccessFragment auto-inject {}
+			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
+			fragment = resourceFactory.ResourceFactoryFragment {
+				fileExtensions = fileExtensions
+			}
+			fragment = scoping.ImportNamespacesScopingFragment {}
+			fragment = exporting.QualifiedNamesFragment {}
+			fragment = types.TypesGeneratorFragment {}
+			fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
+				options = auto-inject {}
+			}
+			fragment = contentAssist.JavaBasedContentAssistFragment {}
+			fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {
+				options = auto-inject {}
+			}
+			fragment = org.xtext.idea.generator.IdeaPluginGenerator auto-inject {
+				pathIdeaPluginProject = runtimeProject
+				pathRuntimePluginProject = runtimeProject
+				fileExtensions = fileExtensions
+				typesIntegrationRequired = true
+			}
+			fragment = org.xtext.idea.generator.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {
+				pathIdeaPluginProject = runtimeProject
+			}
+		}
+	}
+}
+
