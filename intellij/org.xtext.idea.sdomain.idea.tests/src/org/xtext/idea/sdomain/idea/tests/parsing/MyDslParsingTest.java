@@ -76,7 +76,7 @@ public class MyDslParsingTest extends ParsingTestCase {
 		doTest(true);
 	}
 	
-	public void testSyntaxErrors2() {
+	public void testSyntaxErrors2() {
 		doTest(true);
 	}
 	

@@ -1,4 +1,4 @@
-org.xtext.idea.sdomain.idea.lang.psi.impl.SDomainFileImpl:SyntaxErrors2.sdomain(0,35)
+org.xtext.idea.sdomain.idea.lang.psi.impl.SDomainFileImpl:SyntaxErrors2.sdomain(0,35)
   org.eclipse.xtext.psi.impl.PsiEObjectImpl(File_ELEMENT_TYPE)(0,19)
     org.eclipse.xtext.psi.impl.PsiEObjectImpl(File_ElementsElementParserRuleCall_0_ELEMENT_TYPE)(0,19)
       org.eclipse.xtext.psi.impl.PsiEObjectImpl(Element_ImportParserRuleCall_2_ELEMENT_TYPE)(0,19)
