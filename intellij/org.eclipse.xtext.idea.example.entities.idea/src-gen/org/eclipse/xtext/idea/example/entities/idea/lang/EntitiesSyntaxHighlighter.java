@@ -1,6 +1,6 @@
 package org.eclipse.xtext.idea.example.entities.idea.lang;
 
-import org.eclipse.xtext.generator.idea.TokenTypeProvider;
+import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.jetbrains.annotations.NotNull;
 import org.eclipse.xtext.idea.example.entities.parser.antlr.internal.InternalEntitiesLexer;
 

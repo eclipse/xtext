@@ -1,8 +1,8 @@
 package org.eclipse.xtext.idea.example.entities.idea.lang.parser;
 
-import static org.eclipse.xtext.idea.example.entities.parser.antlr.internal.InternalEntitiesParser.*;
+import static org.eclipse.xtext.idea.example.entities.idea.parser.antlr.internal.PsiInternalEntitiesParser.*;
 
-import org.eclipse.xtext.generator.idea.TokenTypeProvider;
+import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesLanguage;
 
 import com.google.inject.Singleton;

@@ -13,9 +13,6 @@
 
 	<project-components>
 		<component>
-			<implementation-class>org.eclipse.xtext.idea.resource.PsiFileUpdater</implementation-class>
-		</component>
-		<component>
 			<implementation-class>org.eclipse.xtext.idea.build.XtextCompilerComponent</implementation-class>
 		</component>
 	</project-components>

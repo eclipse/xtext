@@ -8,7 +8,6 @@ import org.eclipse.xtext.idea.lang.IElementTypeProvider;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.psi.PsiNamedEObject;
-import org.eclipse.xtext.psi.PsiNamedEObjectStub;
 import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 import org.eclipse.xtext.psi.impl.PsiNamedEObjectStubImpl;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;

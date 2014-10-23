@@ -10,7 +10,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.idea.resource.ProjectAdapter;
-import org.eclipse.xtext.linking.lazy.ICrossReferenceDescription;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.service.OperationCanceledError;
@@ -151,20 +150,13 @@ public class PsiModelAssociations implements IPsiModelAssociations, IPsiModelAss
     	return (BaseXtextFile) psiFile;
 	}
     
-	public PsiElement getPsiElement(IEObjectDescription objectDescription, EObject context) {
+	public PsiElement getPsiElement(IEObjectDescription objectDescription, Resource context) {
 		if (objectDescription == null) {
 			return null;
 		}
-		EObject object = context.eResource().getResourceSet().getEObject(objectDescription.getEObjectURI(), true);
+		EObject object = context.getResourceSet().getEObject(objectDescription.getEObjectURI(), true);
 		return getPsiElement(object);
 	}
-
-    public ICrossReferenceDescription getCrossReferenceDescription(PsiReferenceEObject element) {
-    	if (element == null) {
-    		return null;
-    	}
-    	return element.getCrossReferenceDescription();
-    }
 
 	@Override
 	public boolean associate(EObject eObject, PsiElementProvider psiElementProvider) {
