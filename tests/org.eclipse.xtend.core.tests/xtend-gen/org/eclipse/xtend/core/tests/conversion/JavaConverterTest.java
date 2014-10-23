@@ -412,6 +412,24 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder.append("\t");
     _builder.append("double d= 2.5d;");
     _builder.newLine();
+    _builder.append("\t");
+    _builder.append("long l2= 0x000000000000A;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("long l3= 0x000000000000B;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("long l4= 0x000000000000c;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("long l5= 0x000000000000d;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("long l6= 0x000000000000e;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("long l7= 0x000000000000f;");
+    _builder.newLine();
     _builder.append("}");
     XtendClass xtendClazz = this.toValidXtendClass(_builder.toString());
     XtendField xtendMember = this.field(xtendClazz, 0);
@@ -427,6 +445,44 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     XExpression _initialValue_1 = xtendMember.getInitialValue();
     String _value_1 = ((XNumberLiteral) _initialValue_1).getValue();
     Assert.assertEquals("2.5d", _value_1);
+  }
+  
+  @Test
+  public void testNumberLiteralCase2() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class TestStringLiteral {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("long l= 0x598df91c;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("double d = 0x43p-43;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("float f = 0x43p-43f;");
+    _builder.newLine();
+    _builder.append("}");
+    XtendClass xtendClazz = this.toValidXtendClass(_builder.toString());
+    XtendField xtendMember = this.field(xtendClazz, 0);
+    String _name = xtendMember.getName();
+    Assert.assertEquals("l", _name);
+    XExpression _initialValue = xtendMember.getInitialValue();
+    String _value = ((XNumberLiteral) _initialValue).getValue();
+    Assert.assertEquals("0x598df91c", _value);
+    XtendField _field = this.field(xtendClazz, 1);
+    xtendMember = _field;
+    String _name_1 = xtendMember.getName();
+    Assert.assertEquals("d", _name_1);
+    XExpression _initialValue_1 = xtendMember.getInitialValue();
+    String _value_1 = ((XNumberLiteral) _initialValue_1).getValue();
+    Assert.assertEquals("7.617018127348274E-12", _value_1);
+    XtendField _field_1 = this.field(xtendClazz, 2);
+    xtendMember = _field_1;
+    String _name_2 = xtendMember.getName();
+    Assert.assertEquals("f", _name_2);
+    XExpression _initialValue_2 = xtendMember.getInitialValue();
+    String _value_2 = ((XNumberLiteral) _initialValue_2).getValue();
+    Assert.assertEquals("7.617018E-12f", _value_2);
   }
   
   @Test

@@ -1186,8 +1186,17 @@ class JavaASTFlattener extends ASTVisitor {
 		var value = node.getToken()
 		if (value.startsWith("0x") || value.startsWith("0X")) {
 			val lastChar = value.charAt(value.length - 1)
-			if (Character.isLetter(lastChar))
+			if ('l' == lastChar.toString.toLowerCase) {
 				value = value.substring(0, value.length - 1) + "#" + lastChar
+			}
+			val binExponent = value.indexOf('p')
+			if (binExponent >= 2) {
+				if (value.endsWith('f')) {
+					value = Float.valueOf(value).toString + "f"
+				} else {
+					value = Double.valueOf(value).toString
+				}
+			}
 		}
 		appendToBuffer(value)
 		return false
@@ -1608,11 +1617,11 @@ class JavaASTFlattener extends ASTVisitor {
 		}
 		if (node.root instanceof CompilationUnit) {
 			val cu = node.root as CompilationUnit
-			cu.commentList.filter[Comment c|!c.docComment && c.notAssigned].filter[
-				startPosition < node.startPosition].forEach [
-				accept(this)
-				assignedComments.add(it)
-			]
+			cu.commentList.filter[Comment c|!c.docComment && c.notAssigned].filter[startPosition < node.startPosition].
+				forEach [
+					accept(this)
+					assignedComments.add(it)
+				]
 		}
 	}
 
