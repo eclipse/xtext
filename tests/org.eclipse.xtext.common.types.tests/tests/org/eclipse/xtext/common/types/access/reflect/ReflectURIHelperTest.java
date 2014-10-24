@@ -10,6 +10,7 @@ package org.eclipse.xtext.common.types.access.reflect;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.core.JavaModelException;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -97,4 +98,10 @@ public class ReflectURIHelperTest extends Assert {
 		assertEquals(Map.Entry.class.getName() + "[]", fragment);
 	}
 	
+	@Test public void testFragmentURI_07() throws JavaModelException {
+		String fragment = uriHelper.getFragment(Foo$3.class);
+		assertEquals(Foo$3.class.getName(), fragment);
+	}
+	
+	static class Foo$3 {}
 }
