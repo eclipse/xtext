@@ -7,60 +7,92 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.edit;
 
+import java.util.List;
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jdt.core.dom.ASTParser;
-import org.eclipse.jdt.internal.corext.refactoring.reorg.JavaElementTransfer;
+import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.Region;
+import org.eclipse.jface.text.formatter.IContentFormatter;
 import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.dnd.Clipboard;
-import org.eclipse.swt.dnd.DND;
-import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.graphics.Point;
+import org.eclipse.text.edits.MalformedTreeException;
 import org.eclipse.xtend.core.conversion.JavaConverter;
 import org.eclipse.xtend.core.conversion.JavaConverter.ConversionResult;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.copyqualifiedname.ClipboardUtil;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
-import org.eclipse.xtext.ui.util.SWTUtil;
+import org.eclipse.xtext.ui.util.ClipboardUtil;
+import org.eclipse.xtext.ui.util.ClipboardUtil.JavaImportData;
+import org.eclipse.xtext.util.ReplaceRegion;
+import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.xbase.imports.RewritableImportSection;
+import org.eclipse.xtext.xbase.ui.imports.ReplaceConverter;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
- * @author dhuebner - Initial contribution and API
+ * @author Dennis Huebner - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class PasteJavaCodeHandler extends AbstractHandler {
-	private @Inject JavaConverter java2xtendConverter;
+	private @Inject Provider<JavaConverter> javaConverterProvider;
+	@Inject
+	private RewritableImportSection.Factory importSectionFactory;
+	@Inject
+	private ReplaceConverter replaceConverter;
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		XtextEditor activeXtextEditor = EditorUtils.getActiveXtextEditor(event);
+		final XtextEditor activeXtextEditor = EditorUtils.getActiveXtextEditor(event);
 		if (activeXtextEditor == null) {
 			return null;
 		}
-		Clipboard clipboard = null;
-		JavaElementTransfer javaElementTransfer = JavaElementTransfer.getInstance();
-		Object contents = null;
-		try {
-			Display display = SWTUtil.getStandardDisplay();
-			clipboard = new Clipboard(display);
-			contents = clipboard.getContents(javaElementTransfer, DND.CLIPBOARD);
-		} finally {
-			if (clipboard != null) {
-				clipboard.dispose();
+
+		String clipboardText = ClipboardUtil.getTextFromClipboard();
+		if (!Strings.isEmpty(clipboardText)) {
+			StyledText textWidget = activeXtextEditor.getInternalSourceViewer().getTextWidget();
+			int sourceKind = ASTParser.K_CLASS_BODY_DECLARATIONS;
+			ConversionResult conversionResult = javaConverterProvider.get().toXtend("SNIPPET", clipboardText,
+					sourceKind);
+			final String xtendCode = conversionResult.getXtendCode();
+			if (!Strings.isEmpty(xtendCode)) {
+				final Point sel = textWidget.getSelectionRange();
+				textWidget.replaceTextRange(sel.x, sel.y, xtendCode);
+				final JavaImportData javaImports = ClipboardUtil.getJavaImportsContent();
+				final IXtextDocument xtextDocument = activeXtextEditor.getDocument();
+				IContentFormatter formatter = activeXtextEditor.getXtextSourceViewerConfiguration()
+						.getContentFormatter(activeXtextEditor.getInternalSourceViewer());
+				formatter.format(xtextDocument, new Region(sel.x, xtendCode.length()));
+				addImports(javaImports, xtextDocument);
 			}
 		}
-		Object clipboardContent = ClipboardUtil.getClipboardContent(DND.CLIPBOARD);
-		int sourceKind = ASTParser.K_CLASS_BODY_DECLARATIONS;
-		//TODO		if (contents != null) {
-		//			IJavaElement iJavaElement = ((org.eclipse.jdt.core.IJavaElement[]) contents)[0];
-		//			if (iJavaElement.getElementType() == IJavaElement.COMPILATION_UNIT) {
-		//				sourceKind = ASTParser.K_COMPILATION_UNIT;
-		//			}
-		//		}
-		StyledText textWidget = activeXtextEditor.getInternalSourceViewer().getTextWidget();
-		ConversionResult conversionResult = java2xtendConverter.toXtend("SNIPPET",clipboardContent.toString(), sourceKind);
-		String xtendCode = conversionResult.getXtendCode();
-		textWidget.insert(xtendCode);
 		return null;
+	}
+
+	private void addImports(final JavaImportData javaImports, final IXtextDocument xtextDocument) {
+		List<ReplaceRegion> result = xtextDocument.readOnly(new IUnitOfWork<List<ReplaceRegion>, XtextResource>() {
+			public List<ReplaceRegion> exec(XtextResource state) throws Exception {
+				RewritableImportSection impSection = importSectionFactory.parse(state);
+				for (String javaImport : javaImports.getImports()) {
+					impSection.addImport(javaImport);
+				}
+				//for (String javaImport : javaImports.getStaticImports()) {
+				//	//impSection.addStaticImport(jvmType);
+				//	System.out.println("TODO static import: " + javaImport);
+				//}
+				return impSection.rewrite();
+			}
+		});
+		try {
+			replaceConverter.convertToTextEdit(result).apply(xtextDocument);
+		} catch (MalformedTreeException e) {
+			//ignore if adding imports fails
+		} catch (BadLocationException e) {
+			//ignore if adding imports fails
+		}
 	}
 }
