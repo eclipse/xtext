@@ -597,10 +597,18 @@ public class TypeURIHelper implements URIHelperConstants {
 	
 	protected void createFragmentForClass(String signature, StringBuilder uriBuilder) {
 		String fragment = Signature.toString(signature);
+		if (fragment.startsWith("new ")) {
+			int dollar = signature.lastIndexOf('$');
+			createFragmentForClass(signature.substring(0, dollar) + ";", uriBuilder);
+			uriBuilder.append(signature.substring(dollar, signature.length() - 1));
+			return;
+		}
 		int start = signature.length();
 		int lastDot = fragment.length();
 		while ((start = signature.lastIndexOf('$', start)) >= 0) {
 			lastDot = fragment.lastIndexOf('.', lastDot);
+			if (lastDot == -1)
+				break;
 			fragment = fragment.substring(0, lastDot) + '$' + fragment.substring(lastDot + 1);
 			start--;
 		}

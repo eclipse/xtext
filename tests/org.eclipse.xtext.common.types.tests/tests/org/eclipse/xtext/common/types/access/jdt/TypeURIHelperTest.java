@@ -99,6 +99,11 @@ public class TypeURIHelperTest extends Assert {
 		assertEquals(Map.Entry.class.getName() + "[]", fragment);
 	}
 	
+	@Test public void testFragmentURI_07() throws JavaModelException {
+		String fragment = uriHelper.getFragment(Signature.createTypeSignature("Foo$3", true));
+		assertEquals("Foo$3", fragment);
+	}
+	
 	@Test public void testBug300216() throws JavaModelException {
 		String signature = "DoesNotExist";
 		URI uri = uriHelper.getFullURIForClass(signature);
