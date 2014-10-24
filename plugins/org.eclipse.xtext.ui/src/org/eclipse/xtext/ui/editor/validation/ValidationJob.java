@@ -15,6 +15,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.xtext.resource.XtextResource;
@@ -33,7 +34,6 @@ import com.google.common.collect.ImmutableMap;
  * @author Michael Clay
  */
 public class ValidationJob extends Job {
-	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(ValidationJob.class);
 	public static final Object XTEXT_VALIDATION_FAMILY = new Object();
 	protected static final Map<?, ?> DEFAULT_VALIDATION_CONTEXT = ImmutableMap.of(CheckMode.KEY, CheckMode.FAST_ONLY);
@@ -59,15 +59,22 @@ public class ValidationJob extends Job {
 	
 	@Override
 	protected IStatus run(final IProgressMonitor monitor) {
-		if (monitor.isCanceled())
+		try {
+			if (monitor.isCanceled())
+				return Status.CANCEL_STATUS;
+			List<Issue> issues = createIssues(monitor);
+			if (monitor.isCanceled())
+				return Status.CANCEL_STATUS;
+			this.validationIssueProcessor.processIssues(issues, monitor);
+			if (monitor.isCanceled())
+				return Status.CANCEL_STATUS;
+			return Status.OK_STATUS;
+		} catch (OperationCanceledException oce) {
 			return Status.CANCEL_STATUS;
-		List<Issue> issues = createIssues(monitor);
-		if (monitor.isCanceled())
-			return Status.CANCEL_STATUS;
-		this.validationIssueProcessor.processIssues(issues, monitor);
-		if (monitor.isCanceled())
-			return Status.CANCEL_STATUS;
-		return Status.OK_STATUS;
+		} catch (Exception t) {
+			log.error("Error running validator", t);
+			return Status.OK_STATUS;
+		}
 	}
 
 	public List<Issue> createIssues(final IProgressMonitor monitor) {
