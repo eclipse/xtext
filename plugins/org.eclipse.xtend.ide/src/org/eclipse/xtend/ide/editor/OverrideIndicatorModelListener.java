@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
@@ -56,6 +57,7 @@ import com.google.inject.Inject;
  */
 public class OverrideIndicatorModelListener extends NullImpl implements IXtextModelListener {
 	
+	private final static Logger LOG = Logger.getLogger(OverrideIndicatorModelListener.class);
 	public static final String JOB_NAME = "Override Indicator Updater";
 	private static ISchedulingRule SCHEDULING_RULE = SchedulingRuleFactory.INSTANCE.newSequence();
 
@@ -144,6 +146,9 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 			return Status.OK_STATUS;
 		} catch(OperationCanceledException exc) {
 			return Status.CANCEL_STATUS;
+		} catch (Exception t) {
+			LOG.error("Error updating override indicator", t);
+			return Status.OK_STATUS;
 		}
 	}
 

@@ -57,7 +57,7 @@ public class OutlineRefreshJob extends Job {
 			return Status.OK_STATUS;
 		} catch (OperationCanceledException oce) {
 			return Status.CANCEL_STATUS;
-		} catch (Throwable t) {
+		} catch (Exception t) {
 			LOG.error("Error refreshing outline", t);
 			return Status.OK_STATUS;
 		}
