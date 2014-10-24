@@ -15,10 +15,10 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.util.concurrent.IReadAccess;
@@ -34,7 +34,6 @@ import com.google.common.collect.ImmutableMap;
  * @author Michael Clay
  */
 public class ValidationJob extends Job {
-	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(ValidationJob.class);
 	public static final Object XTEXT_VALIDATION_FAMILY = new Object();
 	protected static final Map<?, ?> DEFAULT_VALIDATION_CONTEXT = ImmutableMap.of(CheckMode.KEY, CheckMode.FAST_ONLY);
@@ -65,8 +64,11 @@ public class ValidationJob extends Job {
 		List<Issue> issues = null;
 		try {
 			issues = createIssues(monitor);
-		} catch (OperationCanceledError canceled) {
+		} catch (OperationCanceledException canceled) {
 			return Status.CANCEL_STATUS;
+		} catch (Exception e) {
+			log.error("Error running validator", e);
+			return Status.OK_STATUS;
 		}
 		if (monitor.isCanceled())
 			return Status.CANCEL_STATUS;
