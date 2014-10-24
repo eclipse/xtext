@@ -28,18 +28,22 @@ class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvider {
 		switch result {
 			CurrentDescriptions.ResourceSetAware : {
 				switch d:result.delegate {
-					// in the builder we don't want to see any non-local xtend files.
+					// in the builder we don't want to see upstream Xtend files.
 					CurrentDescriptions : {
-						// during indexing we don't want to see any local xtend files either.
-						if (compilerPhases.isIndexing(resourceSet)) {
-							return new IResourceDescriptions.NullImpl();
-						}
+						// we expect platform:/resource URIs here, where the second segment denotes the project's name.
 						val encodedProjectName = URI.encodeSegment(project.project.name, true)
+						if (compilerPhases.isIndexing(resourceSet)) {
+							// during indexing we don't want to see any local files at all
+							return new FilteringResourceDescriptions(result, [ uri |
+								if (uri == null || uri.segmentCount<2)
+									return false
+								return uri.segment(1) != encodedProjectName && uri.fileExtension != 'xtend'
+							])
+						}
 						return new FilteringResourceDescriptions(result, [ uri |
-							// we expect platform:/resource URIs here, where the second segment denotes the project's name.
 							if (uri == null || uri.segmentCount<2)
 								return false
-							return uri.segment(1) == encodedProjectName 
+							return uri.segment(1) == encodedProjectName || uri.fileExtension != 'xtend'
 						])
 					}
 				}
