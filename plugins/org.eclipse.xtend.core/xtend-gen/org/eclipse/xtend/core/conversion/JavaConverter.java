@@ -59,8 +59,10 @@ public class JavaConverter {
     }
   }
   
+  private final static int JLS = AST.JLS3;
+  
   /**
-   * TODO Refactore this class. Remove state, extract common logic.
+   * TODO Refactor this class. Remove state, extract common logic.
    */
   @Inject
   private JavaASTFlattener astFlattener;
@@ -71,7 +73,7 @@ public class JavaConverter {
   
   public JavaConverter.ConversionResult toXtend(final ICompilationUnit cu) {
     try {
-      final ASTParser parser = ASTParser.newParser(AST.JLS3);
+      final ASTParser parser = ASTParser.newParser(JavaConverter.JLS);
       final Hashtable options = JavaCore.getOptions();
       JavaCore.setComplianceOptions(this.complianceLevel, options);
       parser.setCompilerOptions(options);
@@ -102,7 +104,7 @@ public class JavaConverter {
    * @param javaSourceKind ASTParser.K_COMPILATION_UNIT || ASTParser.K_CLASS_BODY_DECLARATION
    */
   public JavaConverter.ConversionResult toXtend(final String unitName, final String javaSrc, final int javaSourceKind) {
-    final ASTParser parser = ASTParser.newParser(AST.JLS3);
+    final ASTParser parser = ASTParser.newParser(JavaConverter.JLS);
     final Hashtable options = JavaCore.getOptions();
     JavaCore.setComplianceOptions(this.complianceLevel, options);
     parser.setCompilerOptions(options);
