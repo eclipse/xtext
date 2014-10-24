@@ -21,14 +21,15 @@ import org.eclipse.jdt.core.ICompilationUnit
  *  @author Dennis Hübner - Initial contribution and API
  */
 class JavaConverter {
+	final static int JLS = AST.JLS3
 
-	/*TODO Refactore this class. Remove state, extract common logic. */
+	/*TODO Refactor this class. Remove state, extract common logic. */
 	@Inject JavaASTFlattener astFlattener
 	String complianceLevel = "1.5"
 	boolean fallbackConversionStartegy = false
 
 	def ConversionResult toXtend(ICompilationUnit cu) {
-		val parser = ASTParser.newParser(AST.JLS3)
+		val parser = ASTParser.newParser(JLS)
 		val options = JavaCore.getOptions()
 		JavaCore.setComplianceOptions(complianceLevel, options)
 		parser.compilerOptions = options
@@ -55,14 +56,13 @@ class JavaConverter {
  	* @param javaSourceKind ASTParser.K_COMPILATION_UNIT || ASTParser.K_CLASS_BODY_DECLARATION
  	*/
 	def ConversionResult toXtend(String unitName, String javaSrc, int javaSourceKind) {
-		val parser = ASTParser.newParser(AST.JLS3)
+		val parser = ASTParser.newParser(JLS)
 		val options = JavaCore.getOptions()
 		JavaCore.setComplianceOptions(complianceLevel, options)
 		parser.compilerOptions = options
 		parser.statementsRecovery = true
 		parser.resolveBindings = true
 		parser.bindingsRecovery = true
-
 		val sysClassLoader = ClassLoader.getSystemClassLoader();
 		val cpEntries = (sysClassLoader as URLClassLoader).getURLs().map[file]
 		parser.setEnvironment(cpEntries, null, null, true)
