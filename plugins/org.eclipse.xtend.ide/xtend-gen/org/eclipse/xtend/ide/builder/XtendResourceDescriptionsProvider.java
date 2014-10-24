@@ -39,14 +39,41 @@ public class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvi
         if (!_matched_1) {
           if (d instanceof CurrentDescriptions) {
             _matched_1=true;
-            boolean _isIndexing = this.compilerPhases.isIndexing(resourceSet);
-            if (_isIndexing) {
-              return new IResourceDescriptions.NullImpl();
-            }
             IProject _project = project.getProject();
             String _name = _project.getName();
             final String encodedProjectName = URI.encodeSegment(_name, true);
-            final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
+            boolean _isIndexing = this.compilerPhases.isIndexing(resourceSet);
+            if (_isIndexing) {
+              final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
+                public Boolean apply(final URI uri) {
+                  boolean _or = false;
+                  boolean _equals = Objects.equal(uri, null);
+                  if (_equals) {
+                    _or = true;
+                  } else {
+                    int _segmentCount = uri.segmentCount();
+                    boolean _lessThan = (_segmentCount < 2);
+                    _or = _lessThan;
+                  }
+                  if (_or) {
+                    return Boolean.valueOf(false);
+                  }
+                  boolean _and = false;
+                  String _segment = uri.segment(1);
+                  boolean _notEquals = (!Objects.equal(_segment, encodedProjectName));
+                  if (!_notEquals) {
+                    _and = false;
+                  } else {
+                    String _fileExtension = uri.fileExtension();
+                    boolean _notEquals_1 = (!Objects.equal(_fileExtension, "xtend"));
+                    _and = _notEquals_1;
+                  }
+                  return Boolean.valueOf(_and);
+                }
+              };
+              return new FilteringResourceDescriptions(result, _function);
+            }
+            final Function1<URI, Boolean> _function_1 = new Function1<URI, Boolean>() {
               public Boolean apply(final URI uri) {
                 boolean _or = false;
                 boolean _equals = Objects.equal(uri, null);
@@ -60,11 +87,20 @@ public class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvi
                 if (_or) {
                   return Boolean.valueOf(false);
                 }
+                boolean _or_1 = false;
                 String _segment = uri.segment(1);
-                return Boolean.valueOf(Objects.equal(_segment, encodedProjectName));
+                boolean _equals_1 = Objects.equal(_segment, encodedProjectName);
+                if (_equals_1) {
+                  _or_1 = true;
+                } else {
+                  String _fileExtension = uri.fileExtension();
+                  boolean _notEquals = (!Objects.equal(_fileExtension, "xtend"));
+                  _or_1 = _notEquals;
+                }
+                return Boolean.valueOf(_or_1);
               }
             };
-            return new FilteringResourceDescriptions(result, _function);
+            return new FilteringResourceDescriptions(result, _function_1);
           }
         }
       }
