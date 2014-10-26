@@ -231,6 +231,7 @@ class DelegateProcessor implements TransformationParticipant<MutableMemberDeclar
 				resolvedMethod.resolvedTypeParameters.forEach[param|
 					val copy = impl.addTypeParameter(param.declaration.simpleName, param.resolvedUpperBounds)
 					typeParameterMappings.put(param.declaration.newTypeReference, copy.newTypeReference)
+					copy.upperBounds = copy.upperBounds.map[replace(typeParameterMappings)]
 				]
 				impl.exceptions = resolvedMethod.resolvedExceptionTypes.map[replace(typeParameterMappings)]
 				impl.varArgs = declaration.varArgs
@@ -247,12 +248,18 @@ class DelegateProcessor implements TransformationParticipant<MutableMemberDeclar
 		}
 		
 		def TypeReference replace(TypeReference target, TypeReference oldType, TypeReference newType) {
-			if (target.equals(oldType)) 
+			if (target == oldType)
 				return newType
+			if (!target.actualTypeArguments.isEmpty)
+				return newTypeReference(target.type, target.actualTypeArguments.map[replace(oldType, newType)])
+			if (target.wildCard) {
+				if (target.upperBound != object)
+					return target.upperBound.replace(oldType, newType).newWildcardTypeReference
+				else if (!target.lowerBound.isAnyType)
+					return target.lowerBound.replace(oldType, newType).newWildcardTypeReferenceWithLowerBound
+			}
 			if (target.isArray)
 				return target.arrayComponentType.replace(oldType, newType).newArrayTypeReference
-			if (target.actualTypeArguments.contains(oldType))
-				return newTypeReference(target.type, target.actualTypeArguments.map[replace(oldType, newType)])
 			return target
 		}
 		
