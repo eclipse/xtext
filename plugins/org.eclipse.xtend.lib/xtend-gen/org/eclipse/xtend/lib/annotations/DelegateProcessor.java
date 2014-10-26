@@ -545,6 +545,14 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
                 TypeReference _newTypeReference = Util.this.context.newTypeReference(_declaration_1);
                 TypeReference _newTypeReference_1 = Util.this.context.newTypeReference(copy);
                 typeParameterMappings.put(_newTypeReference, _newTypeReference_1);
+                Iterable<? extends TypeReference> _upperBounds = copy.getUpperBounds();
+                final Function1<TypeReference, TypeReference> _function = new Function1<TypeReference, TypeReference>() {
+                  public TypeReference apply(final TypeReference it) {
+                    return Util.this.replace(it, typeParameterMappings);
+                  }
+                };
+                Iterable<TypeReference> _map = IterableExtensions.map(_upperBounds, _function);
+                copy.setUpperBounds(_map);
               }
             };
             IterableExtensions.forEach(_resolvedTypeParameters, _function);
@@ -584,8 +592,8 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
                 _builder.append(_simpleName, "");
                 _builder.append("(");
                 Iterable<? extends ParameterDeclaration> _parameters = declaration.getParameters();
-                final Function1<ParameterDeclaration, String> _function = new Function1<ParameterDeclaration, String>() {
-                  public String apply(final ParameterDeclaration it) {
+                final Function1<ParameterDeclaration, CharSequence> _function = new Function1<ParameterDeclaration, CharSequence>() {
+                  public CharSequence apply(final ParameterDeclaration it) {
                     return it.getSimpleName();
                   }
                 };
@@ -616,19 +624,14 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
     }
     
     public TypeReference replace(final TypeReference target, final TypeReference oldType, final TypeReference newType) {
-      boolean _equals = target.equals(oldType);
+      boolean _equals = Objects.equal(target, oldType);
       if (_equals) {
         return newType;
       }
-      boolean _isArray = target.isArray();
-      if (_isArray) {
-        TypeReference _arrayComponentType = target.getArrayComponentType();
-        TypeReference _replace = this.replace(_arrayComponentType, oldType, newType);
-        return this.context.newArrayTypeReference(_replace);
-      }
       List<TypeReference> _actualTypeArguments = target.getActualTypeArguments();
-      boolean _contains = _actualTypeArguments.contains(oldType);
-      if (_contains) {
+      boolean _isEmpty = _actualTypeArguments.isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
         Type _type = target.getType();
         List<TypeReference> _actualTypeArguments_1 = target.getActualTypeArguments();
         final Function1<TypeReference, TypeReference> _function = new Function1<TypeReference, TypeReference>() {
@@ -638,6 +641,32 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
         };
         List<TypeReference> _map = ListExtensions.<TypeReference, TypeReference>map(_actualTypeArguments_1, _function);
         return this.context.newTypeReference(_type, ((TypeReference[])Conversions.unwrapArray(_map, TypeReference.class)));
+      }
+      boolean _isWildCard = target.isWildCard();
+      if (_isWildCard) {
+        TypeReference _upperBound = target.getUpperBound();
+        TypeReference _object = this.context.getObject();
+        boolean _notEquals = (!Objects.equal(_upperBound, _object));
+        if (_notEquals) {
+          TypeReference _upperBound_1 = target.getUpperBound();
+          TypeReference _replace = this.replace(_upperBound_1, oldType, newType);
+          return this.context.newWildcardTypeReference(_replace);
+        } else {
+          TypeReference _lowerBound = target.getLowerBound();
+          boolean _isAnyType = _lowerBound.isAnyType();
+          boolean _not_1 = (!_isAnyType);
+          if (_not_1) {
+            TypeReference _lowerBound_1 = target.getLowerBound();
+            TypeReference _replace_1 = this.replace(_lowerBound_1, oldType, newType);
+            return this.context.newWildcardTypeReferenceWithLowerBound(_replace_1);
+          }
+        }
+      }
+      boolean _isArray = target.isArray();
+      if (_isArray) {
+        TypeReference _arrayComponentType = target.getArrayComponentType();
+        TypeReference _replace_2 = this.replace(_arrayComponentType, oldType, newType);
+        return this.context.newArrayTypeReference(_replace_2);
       }
       return target;
     }
@@ -705,8 +734,8 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
           _builder_2.append(_simpleName_4, "");
           _builder_2.append("\", new Class[]{");
           Iterable<? extends ParameterDeclaration> _parameters_1 = method.getParameters();
-          final Function1<ParameterDeclaration, String> _function_1 = new Function1<ParameterDeclaration, String>() {
-            public String apply(final ParameterDeclaration it) {
+          final Function1<ParameterDeclaration, CharSequence> _function_1 = new Function1<ParameterDeclaration, CharSequence>() {
+            public CharSequence apply(final ParameterDeclaration it) {
               TypeReference _type = it.getType();
               Type _type_1 = _type.getType();
               String _simpleName = _type_1.getSimpleName();
@@ -717,8 +746,8 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
           _builder_2.append(_join, "");
           _builder_2.append("}, new Object[]{");
           Iterable<? extends ParameterDeclaration> _parameters_2 = method.getParameters();
-          final Function1<ParameterDeclaration, String> _function_2 = new Function1<ParameterDeclaration, String>() {
-            public String apply(final ParameterDeclaration it) {
+          final Function1<ParameterDeclaration, CharSequence> _function_2 = new Function1<ParameterDeclaration, CharSequence>() {
+            public CharSequence apply(final ParameterDeclaration it) {
               return it.getSimpleName();
             }
           };
