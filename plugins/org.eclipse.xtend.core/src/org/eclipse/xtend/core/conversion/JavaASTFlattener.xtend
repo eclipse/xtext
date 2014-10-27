@@ -536,8 +536,8 @@ class JavaASTFlattener extends ASTVisitor {
 
 	override visit(VariableDeclarationStatement it) {
 		val hasAnnotations = !modifiers().filter(Annotation).empty
+		appendLineWrapToBuffer
 		fragments.forEach [ VariableDeclarationFragment frag |
-			appendLineWrapToBuffer
 			if (hasAnnotations) {
 				appendToBuffer("/*FIXME can not add Annotation to Variable declaration. Java code: ")
 
@@ -545,8 +545,10 @@ class JavaASTFlattener extends ASTVisitor {
 			}
 			appendModifieres(modifiers(),
 				[
-					if(hasAnnotations) appendToBuffer("*/")
-					appendLineWrapToBuffer
+					if (hasAnnotations) {
+						appendToBuffer("*/")
+						appendLineWrapToBuffer
+					}
 				])
 			appendToBuffer(handleVariableDeclaration(modifiers()))
 			appendSpaceToBuffer
