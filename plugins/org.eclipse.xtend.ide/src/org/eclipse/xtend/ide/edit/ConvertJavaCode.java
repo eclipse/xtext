@@ -41,9 +41,11 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtend.core.conversion.JavaConverter;
 import org.eclipse.xtend.core.conversion.JavaConverter.ConversionResult;
+import org.eclipse.xtend.ide.formatting.FormatterFactory;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
@@ -65,11 +67,16 @@ public class ConvertJavaCode {
 	private Provider<JavaConverter> converterProvider;
 	@Inject
 	private FileExtensionProvider fileExtensionProvider;
+	private @Inject Provider<XtextDocument> documentProvider;
+	private @Inject FormatterFactory.ContentFormatter formatter;
 
 	public void runJavaConverter(final Set<ICompilationUnit> compilationUnits, Shell activeShell)
 			throws ExecutionException {
 		Map<ICompilationUnit, ConversionResult> conversionResults = newHashMap();
-		convertAllWithProgress(activeShell, compilationUnits, conversionResults);
+		boolean canceled = convertAllWithProgress(activeShell, compilationUnits, conversionResults);
+		if (canceled) {
+			return;
+		}
 		boolean hasConversionFailures = any(conversionResults.values(), new Predicate<ConversionResult>() {
 			public boolean apply(ConversionResult input) {
 				return input.getProblems().iterator().hasNext();
@@ -94,7 +101,12 @@ public class ConvertJavaCode {
 		}
 		for (final Entry<ICompilationUnit, ConversionResult> result : conversionResults.entrySet()) {
 			ICompilationUnit compilationUnit = result.getKey();
-			writeToFile(xtendFileToCreate(compilationUnit), result.getValue().getXtendCode());
+			String xtendCode = result.getValue().getXtendCode();
+			//			XtextDocument xtextDocument = documentProvider.get();
+			//			xtextDocument.set(xtendCode);
+			//			formatter.format(xtextDocument, new Region(0, xtendCode.length()));
+			//			xtendCode = xtextDocument.get();
+			writeToFile(xtendFileToCreate(compilationUnit), xtendCode);
 			if (deleteJavaFiles == 0) {
 				try {
 					compilationUnit.delete(true, null);
@@ -106,7 +118,10 @@ public class ConvertJavaCode {
 
 	}
 
-	private void convertAllWithProgress(final Shell shell, final Set<ICompilationUnit> compilationUnits,
+	/**
+	 * @return <code>true</code> if canceled by user
+	 */
+	private boolean convertAllWithProgress(final Shell shell, final Set<ICompilationUnit> compilationUnits,
 			final Map<ICompilationUnit, ConversionResult> conversionResults) throws ExecutionException {
 		IRunnableWithProgress op = new IRunnableWithProgress() {
 			public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
@@ -119,16 +134,22 @@ public class ConvertJavaCode {
 			}
 		};
 		try {
-			new ProgressMonitorDialog(shell).run(false, true, op);
+			new ProgressMonitorDialog(shell).run(true, true, op);
 		} catch (InvocationTargetException e) {
 			handleException("An exception occures during conversion proccess.", e, null);
 		} catch (InterruptedException e) {
+			//interrupted by user
+			return true;
 		}
+		return false;
 	}
 
 	private void doConvert(final Set<ICompilationUnit> compilationUnits, IProgressMonitor monitor,
-			Map<ICompilationUnit, ConversionResult> conversionResults) throws ExecutionException {
+			Map<ICompilationUnit, ConversionResult> conversionResults) throws ExecutionException, InterruptedException {
 		for (ICompilationUnit iCompilationUnit : compilationUnits) {
+			if (monitor.isCanceled()) {
+				throw new InterruptedException();
+			}
 			JavaConverter converter = converterProvider.get();
 			ConversionResult conversionResult = converter.toXtend(iCompilationUnit);
 			monitor.subTask("Working with " + iCompilationUnit.getElementName());
