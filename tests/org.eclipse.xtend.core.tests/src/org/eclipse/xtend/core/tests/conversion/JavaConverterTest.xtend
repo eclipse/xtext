@@ -638,7 +638,6 @@ class JavaConverterTest extends AbstractXtendTestCase {
 			int[] ar=newIntArrayOfSize(1)
 			def void arDim(){
 				
-				
 				var int[] ar2=newIntArrayOfSize(2) 
 			}'''.toString, classBodyDeclToXtend(xtendCode))
 	}
@@ -939,7 +938,6 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 		assertEquals(
 			'''
 			def private String doSwitch(){
-				
 				
 				var int i=0 
 				switch (i) {
