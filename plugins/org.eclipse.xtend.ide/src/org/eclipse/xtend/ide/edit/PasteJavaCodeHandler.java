@@ -14,9 +14,7 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jface.text.BadLocationException;
-import org.eclipse.jface.text.Region;
-import org.eclipse.jface.text.formatter.IContentFormatter;
-import org.eclipse.swt.custom.StyledText;
+import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.text.edits.MalformedTreeException;
 import org.eclipse.xtend.core.conversion.JavaConverter;
@@ -54,19 +52,30 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 
 		String clipboardText = ClipboardUtil.getTextFromClipboard();
 		if (!Strings.isEmpty(clipboardText)) {
-			StyledText textWidget = activeXtextEditor.getInternalSourceViewer().getTextWidget();
+			ISourceViewer sourceViewer = activeXtextEditor.getInternalSourceViewer();
 			int sourceKind = ASTParser.K_CLASS_BODY_DECLARATIONS;
 			ConversionResult conversionResult = javaConverterProvider.get().toXtend("SNIPPET", clipboardText,
 					sourceKind);
 			final String xtendCode = conversionResult.getXtendCode();
 			if (!Strings.isEmpty(xtendCode)) {
-				final Point sel = textWidget.getSelectionRange();
-				textWidget.replaceTextRange(sel.x, sel.y, xtendCode);
-				final JavaImportData javaImports = ClipboardUtil.getJavaImportsContent();
+				final Point sel = sourceViewer.getSelectedRange();
 				final IXtextDocument xtextDocument = activeXtextEditor.getDocument();
-				IContentFormatter formatter = activeXtextEditor.getXtextSourceViewerConfiguration()
-						.getContentFormatter(activeXtextEditor.getInternalSourceViewer());
-				formatter.format(xtextDocument, new Region(sel.x, xtendCode.length()));
+				try {
+					xtextDocument.replace(sel.x, sel.y, xtendCode);
+				} catch (BadLocationException e) {
+					throw new ExecutionException("Failed to replace content.", e);
+				}
+				int offset = sel.x;
+				int length = xtendCode.length();
+				if (offset - 1 >= 0) {
+					offset--;
+					length++;
+				}
+				sourceViewer.setSelectedRange(offset, length);
+				sourceViewer.getTextOperationTarget().doOperation(ISourceViewer.FORMAT);
+				int resoreCaretAtOffset = sourceViewer.getSelectedRange().x + sourceViewer.getSelectedRange().y;
+				sourceViewer.setSelectedRange(resoreCaretAtOffset, 0);
+				JavaImportData javaImports = ClipboardUtil.getJavaImportsContent();
 				addImports(javaImports, xtextDocument);
 			}
 		}
@@ -88,7 +97,8 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 			}
 		});
 		try {
-			replaceConverter.convertToTextEdit(result).apply(xtextDocument);
+			if (!result.isEmpty())
+				replaceConverter.convertToTextEdit(result).apply(xtextDocument);
 		} catch (MalformedTreeException e) {
 			//ignore if adding imports fails
 		} catch (BadLocationException e) {

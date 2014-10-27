@@ -1104,8 +1104,6 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder_1.append("\t");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.newLine();
-    _builder_1.append("\t");
     _builder_1.append("var int[] ar2=newIntArrayOfSize(2) ");
     _builder_1.newLine();
     _builder_1.append("}");
@@ -1633,8 +1631,6 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     String clazz = this.classBodyDeclToXtend(_builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("def private String doSwitch(){");
-    _builder_1.newLine();
-    _builder_1.append("\t");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.newLine();

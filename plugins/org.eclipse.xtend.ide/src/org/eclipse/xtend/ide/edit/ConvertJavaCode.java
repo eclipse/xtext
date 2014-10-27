@@ -37,6 +37,7 @@ import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.jface.text.Region;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtend.core.conversion.JavaConverter;
@@ -48,6 +49,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.LazyStringInputStream;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
 
@@ -60,13 +62,9 @@ import com.google.inject.Provider;
  * @author dhuebner - Initial contribution and API
  */
 public class ConvertJavaCode {
-
-	@Inject
-	private IResourceSetProvider resourceSetProvider;
-	@Inject
-	private Provider<JavaConverter> converterProvider;
-	@Inject
-	private FileExtensionProvider fileExtensionProvider;
+	private @Inject Provider<JavaConverter> converterProvider;
+	private @Inject IResourceSetProvider resourceSetProvider;
+	private @Inject FileExtensionProvider fileExtensionProvider;
 	private @Inject Provider<XtextDocument> documentProvider;
 	private @Inject FormatterFactory.ContentFormatter formatter;
 
@@ -101,12 +99,16 @@ public class ConvertJavaCode {
 		}
 		for (final Entry<ICompilationUnit, ConversionResult> result : conversionResults.entrySet()) {
 			ICompilationUnit compilationUnit = result.getKey();
-			String xtendCode = result.getValue().getXtendCode();
-			//			XtextDocument xtextDocument = documentProvider.get();
-			//			xtextDocument.set(xtendCode);
-			//			formatter.format(xtextDocument, new Region(0, xtendCode.length()));
-			//			xtendCode = xtextDocument.get();
-			writeToFile(xtendFileToCreate(compilationUnit), xtendCode);
+			ConversionResult conversionResult = result.getValue();
+			String xtendCode = conversionResult.getXtendCode();
+			IFile xtendFileToCreate = xtendFileToCreate(compilationUnit);
+			if (!conversionResult.getProblems().iterator().hasNext()) {
+				String formattedCode = formatXtendCode(xtendFileToCreate, xtendCode);
+				if (formattedCode != null) {
+					xtendCode = formattedCode;
+				}
+			}
+			writeToFile(xtendFileToCreate, xtendCode);
 			if (deleteJavaFiles == 0) {
 				try {
 					compilationUnit.delete(true, null);
@@ -155,13 +157,27 @@ public class ConvertJavaCode {
 			monitor.subTask("Working with " + iCompilationUnit.getElementName());
 			if (!conversionResult.getProblems().iterator().hasNext()) {
 				IFile file = xtendFileToCreate(iCompilationUnit);
-				if (!validateFile(file, conversionResult.getXtendCode())) {
+				Resource resource = createResource(file, conversionResult.getXtendCode());
+				if (!validateResource(resource)) {
 					monitor.subTask("Conversion was not successfull. Re-trying with another strategy.");
 					conversionResult = converter.useRobustSyntax().toXtend(iCompilationUnit);
 				}
 			}
 			conversionResults.put(iCompilationUnit, conversionResult);
 			monitor.worked(1);
+		}
+	}
+
+	private String formatXtendCode(IFile xtendFile, final String xtendCode) throws ExecutionException {
+		try {
+			XtextDocument xtextDocument = documentProvider.get();
+			XtextResource resource = (XtextResource) createResource(xtendFile, xtendCode);
+			xtextDocument.setInput(resource);
+			xtextDocument.set(xtendCode);
+			formatter.format(xtextDocument, new Region(0, xtendCode.length()));
+			return xtextDocument.get();
+		} catch (ExecutionException e) {
+			return null;
 		}
 	}
 
@@ -176,7 +192,7 @@ public class ConvertJavaCode {
 	/*
 	 * Available in com.google.guava 14
 	 */
-	private static String getNameWithoutExtension(String file) {
+	private String getNameWithoutExtension(String file) {
 		String fileName = new File(file).getName();
 		int dotIndex = fileName.lastIndexOf('.');
 		return (dotIndex == -1) ? fileName : fileName.substring(0, dotIndex);
@@ -197,16 +213,7 @@ public class ConvertJavaCode {
 		}
 	}
 
-	private boolean validateFile(IFile file, String content) throws ExecutionException {
-		ResourceSet set = resourceSetProvider.get(file.getProject());
-		Resource resource = set.createResource(URI.createPlatformResourceURI(file.getFullPath().toString(), false));
-		try {
-			resource.load(new ByteArrayInputStream(content.getBytes(file.getCharset())), null);
-		} catch (CoreException e) {
-			handleException("Failed to read file content", e, file);
-		} catch (IOException e) {
-			handleException("Failed to load resource.", e, file);
-		}
+	private boolean validateResource(Resource resource) {
 		if (resource.getErrors().size() == 0) {
 			List<Issue> issues = Lists.newArrayList(filter(((XtextResource) resource).getResourceServiceProvider()
 					.getResourceValidator().validate(resource, CheckMode.ALL, CancelIndicator.NullImpl),
@@ -218,6 +225,19 @@ public class ConvertJavaCode {
 			return issues.size() == 0;
 		}
 		return false;
+	}
+
+	private Resource createResource(IFile file, String content) throws ExecutionException {
+		ResourceSet set = resourceSetProvider.get(file.getProject());
+		Resource resource = set.createResource(URI.createPlatformResourceURI(file.getFullPath().toString(), false));
+		try {
+			resource.load(new LazyStringInputStream(content, file.getCharset()), null);
+		} catch (CoreException e) {
+			handleException("Failed to read file content", e, file);
+		} catch (IOException e) {
+			handleException("Failed to load resource.", e, file);
+		}
+		return resource;
 	}
 
 	private void handleException(String message, Throwable e, IResource file) throws ExecutionException {

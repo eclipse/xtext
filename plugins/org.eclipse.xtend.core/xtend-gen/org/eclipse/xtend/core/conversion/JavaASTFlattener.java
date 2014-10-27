@@ -820,24 +820,26 @@ public class JavaASTFlattener extends ASTVisitor {
     Iterable<Annotation> _filter = Iterables.<Annotation>filter(_modifiers, Annotation.class);
     boolean _isEmpty = IterableExtensions.isEmpty(_filter);
     final boolean hasAnnotations = (!_isEmpty);
+    this.appendLineWrapToBuffer();
     List _fragments = it.fragments();
     final Procedure1<VariableDeclarationFragment> _function = new Procedure1<VariableDeclarationFragment>() {
       public void apply(final VariableDeclarationFragment frag) {
-        JavaASTFlattener.this.appendLineWrapToBuffer();
         if (hasAnnotations) {
           JavaASTFlattener.this.appendToBuffer("/*FIXME can not add Annotation to Variable declaration. Java code: ");
         }
         List _modifiers = it.modifiers();
         final Function1<ASTNode, StringBuffer> _function = new Function1<ASTNode, StringBuffer>() {
           public StringBuffer apply(final ASTNode it) {
-            StringBuffer _xblockexpression = null;
-            {
-              if (hasAnnotations) {
+            StringBuffer _xifexpression = null;
+            if (hasAnnotations) {
+              StringBuffer _xblockexpression = null;
+              {
                 JavaASTFlattener.this.appendToBuffer("*/");
+                _xblockexpression = JavaASTFlattener.this.appendLineWrapToBuffer();
               }
-              _xblockexpression = JavaASTFlattener.this.appendLineWrapToBuffer();
+              _xifexpression = _xblockexpression;
             }
-            return _xblockexpression;
+            return _xifexpression;
           }
         };
         JavaASTFlattener.this.appendModifieres(it, _modifiers, _function);
