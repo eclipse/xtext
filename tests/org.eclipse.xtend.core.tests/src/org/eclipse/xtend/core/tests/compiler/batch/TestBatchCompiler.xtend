@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.tests.compiler.batch
 
 import com.google.inject.Inject
 import java.io.File
+import java.io.IOException
 import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
 import org.eclipse.xtext.junit4.InjectWith
@@ -376,9 +377,17 @@ class TestBatchCompiler {
 
 	@Test
 	def void testCompileSymlinkedResource() {
-		batchCompiler.writeTraceFiles = true
-		val wsRoot = new File("./batch-compiler-data/test-resources/symlink-test-ws/").toURI().normalize().getPath()
-		workspaceConfigProvider.workspaceConfig = new WorkspaceConfig(wsRoot) => [
+		val tstResources = new File("./batch-compiler-data/test-resources/").toURI().normalize().getPath()
+		val wsRootFile = new File(tstResources, "symlink-test-ws/")
+		val wsRootPath = wsRootFile.getPath()
+		if (!createSymLink(tstResources + "/linked-folder/linked-src/", wsRootPath + "/plain-folder/linked-src")) {
+			System.err.println(
+				"Symlink creation is not possible - skip test. org.eclipse.xtend.core.tests.compiler.batch.TestBatchCompiler.testCompileSymlinkedResource()")
+			return
+		}
+		assertTrue("plain-folder/linked-src/ is a symlink", isSymlink(new File(wsRootFile, "plain-folder/linked-src/")))
+		assertTrue("plain-folder/src/ is not a symlink", !isSymlink(new File(wsRootFile, "plain-folder/src/")))
+		workspaceConfigProvider.workspaceConfig = new WorkspaceConfig(wsRootPath) => [
 			addProjectConfig(
 				new ProjectConfig('plain-folder') => [
 					addSourceFolderMapping("src", "bin")
@@ -391,9 +400,41 @@ class TestBatchCompiler {
 				]
 			)
 		]
-		batchCompiler.sourcePath = wsRoot + "plain-folder/src" + File.pathSeparator + wsRoot + "plain-folder/linked-src"
-		batchCompiler.outputPath = "./batch-compiler-data/test-resources/symlink-test-ws/plain-folder/output-symlink-test-ws"
+		batchCompiler.writeTraceFiles = true
+		batchCompiler.sourcePath = wsRootPath + "/plain-folder/src" + File.pathSeparator + wsRootPath +
+			"/plain-folder/linked-src"
+		val customOutput = wsRootPath + "/plain-folder/target"
+		batchCompiler.outputPath = customOutput
 		assertTrue(batchCompiler.compile)
+		assertTrue(new File( wsRootPath + "/plain-folder/bin/Test.txt").exists)
+		assertEquals(2, new File(customOutput).list[dir, name|name.endsWith(".java")].size)
+		assertEquals(2, new File(customOutput).list[dir, name|name.endsWith("._trace")].size)
+	}
+
+	def private boolean createSymLink(String linkTarget, String link) {
+		var File linkFile = new File(link)
+		if (linkFile.exists() && linkFile.symlink) {
+			return true
+		}
+		var String[] cmd = #["ln", "-s", linkTarget, link]
+		try {
+			println("Exec: " + cmd.join(' '))
+			val proc = Runtime.getRuntime.exec(cmd)
+			return proc.waitFor == 0
+		} catch (IOException ioe) {
+			return false
+		}
+	}
+
+	def private boolean isSymlink(File file) {
+		var File canon
+		if (file.getParent() == null) {
+			canon = file
+		} else {
+			var File canonDir = file.getParentFile().getCanonicalFile()
+			canon = new File(canonDir, file.getName())
+		}
+		return !canon.getCanonicalFile().equals(canon.getAbsoluteFile())
 	}
 
 	@Test
