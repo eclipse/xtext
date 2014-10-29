@@ -7,9 +7,11 @@
  */
 package org.eclipse.xtend.core.tests.compiler.batch;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
 import java.net.URI;
 import java.util.Collection;
 import java.util.List;
@@ -29,6 +31,7 @@ import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -838,12 +841,27 @@ public class TestBatchCompiler {
   
   @Test
   public void testCompileSymlinkedResource() {
-    this.batchCompiler.setWriteTraceFiles(true);
-    File _file = new File("./batch-compiler-data/test-resources/symlink-test-ws/");
+    File _file = new File("./batch-compiler-data/test-resources/");
     URI _uRI = _file.toURI();
     URI _normalize = _uRI.normalize();
-    final String wsRoot = _normalize.getPath();
-    WorkspaceConfig _workspaceConfig = new WorkspaceConfig(wsRoot);
+    final String tstResources = _normalize.getPath();
+    final File wsRootFile = new File(tstResources, "symlink-test-ws/");
+    final String wsRootPath = wsRootFile.getPath();
+    boolean _createSymLink = this.createSymLink((tstResources + "/linked-folder/linked-src/"), (wsRootPath + "/plain-folder/linked-src"));
+    boolean _not = (!_createSymLink);
+    if (_not) {
+      System.err.println(
+        "Symlink creation is not possible - skip test. org.eclipse.xtend.core.tests.compiler.batch.TestBatchCompiler.testCompileSymlinkedResource()");
+      return;
+    }
+    File _file_1 = new File(wsRootFile, "plain-folder/linked-src/");
+    boolean _isSymlink = this.isSymlink(_file_1);
+    Assert.assertTrue("plain-folder/linked-src/ is a symlink", _isSymlink);
+    File _file_2 = new File(wsRootFile, "plain-folder/src/");
+    boolean _isSymlink_1 = this.isSymlink(_file_2);
+    boolean _not_1 = (!_isSymlink_1);
+    Assert.assertTrue("plain-folder/src/ is not a symlink", _not_1);
+    WorkspaceConfig _workspaceConfig = new WorkspaceConfig(wsRootPath);
     final Procedure1<WorkspaceConfig> _function = new Procedure1<WorkspaceConfig>() {
       public void apply(final WorkspaceConfig it) {
         ProjectConfig _projectConfig = new ProjectConfig("plain-folder");
@@ -867,10 +885,94 @@ public class TestBatchCompiler {
     };
     WorkspaceConfig _doubleArrow = ObjectExtensions.<WorkspaceConfig>operator_doubleArrow(_workspaceConfig, _function);
     this.workspaceConfigProvider.setWorkspaceConfig(_doubleArrow);
-    this.batchCompiler.setSourcePath(((((wsRoot + "plain-folder/src") + File.pathSeparator) + wsRoot) + "plain-folder/linked-src"));
-    this.batchCompiler.setOutputPath("./batch-compiler-data/test-resources/symlink-test-ws/plain-folder/output-symlink-test-ws");
+    this.batchCompiler.setWriteTraceFiles(true);
+    this.batchCompiler.setSourcePath(((((wsRootPath + "/plain-folder/src") + File.pathSeparator) + wsRootPath) + 
+      "/plain-folder/linked-src"));
+    final String customOutput = (wsRootPath + "/plain-folder/target");
+    this.batchCompiler.setOutputPath(customOutput);
     boolean _compile = this.batchCompiler.compile();
     Assert.assertTrue(_compile);
+    File _file_3 = new File((wsRootPath + "/plain-folder/bin/Test.txt"));
+    boolean _exists = _file_3.exists();
+    Assert.assertTrue(_exists);
+    File _file_4 = new File(customOutput);
+    final FilenameFilter _function_1 = new FilenameFilter() {
+      public boolean accept(final File dir, final String name) {
+        return name.endsWith(".java");
+      }
+    };
+    String[] _list = _file_4.list(_function_1);
+    int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
+    Assert.assertEquals(2, _size);
+    File _file_5 = new File(customOutput);
+    final FilenameFilter _function_2 = new FilenameFilter() {
+      public boolean accept(final File dir, final String name) {
+        return name.endsWith("._trace");
+      }
+    };
+    String[] _list_1 = _file_5.list(_function_2);
+    int _size_1 = ((List<String>)Conversions.doWrapArray(_list_1)).size();
+    Assert.assertEquals(2, _size_1);
+  }
+  
+  private boolean createSymLink(final String linkTarget, final String link) {
+    try {
+      File linkFile = new File(link);
+      boolean _and = false;
+      boolean _exists = linkFile.exists();
+      if (!_exists) {
+        _and = false;
+      } else {
+        boolean _isSymlink = this.isSymlink(linkFile);
+        _and = _isSymlink;
+      }
+      if (_and) {
+        return true;
+      }
+      String[] cmd = { "ln", "-s", linkTarget, link };
+      try {
+        final String[] _converted_cmd = (String[])cmd;
+        String _join = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(_converted_cmd)), " ");
+        String _plus = ("Exec: " + _join);
+        InputOutput.<String>println(_plus);
+        Runtime _runtime = Runtime.getRuntime();
+        final Process proc = _runtime.exec(cmd);
+        int _waitFor = proc.waitFor();
+        return (_waitFor == 0);
+      } catch (final Throwable _t) {
+        if (_t instanceof IOException) {
+          final IOException ioe = (IOException)_t;
+          return false;
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  private boolean isSymlink(final File file) {
+    try {
+      File canon = null;
+      String _parent = file.getParent();
+      boolean _equals = Objects.equal(_parent, null);
+      if (_equals) {
+        canon = file;
+      } else {
+        File _parentFile = file.getParentFile();
+        File canonDir = _parentFile.getCanonicalFile();
+        String _name = file.getName();
+        File _file = new File(canonDir, _name);
+        canon = _file;
+      }
+      File _canonicalFile = canon.getCanonicalFile();
+      File _absoluteFile = canon.getAbsoluteFile();
+      boolean _equals_1 = _canonicalFile.equals(_absoluteFile);
+      return (!_equals_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
