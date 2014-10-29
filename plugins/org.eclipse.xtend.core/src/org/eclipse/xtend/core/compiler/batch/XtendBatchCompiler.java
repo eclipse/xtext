@@ -130,7 +130,7 @@ public class XtendBatchCompiler {
 	protected List<File> tempFolders = Lists.newArrayList();
 	protected boolean writeTraceFiles = true;
 	protected ClassLoader currentClassLoader = getClass().getClassLoader();
-	
+
 	public void setCurrentClassLoader(ClassLoader currentClassLoader) {
 		this.currentClassLoader = currentClassLoader;
 	}
@@ -146,15 +146,15 @@ public class XtendBatchCompiler {
 	public void setTempDirectory(String tempDirectory) {
 		this.tempDirectory = tempDirectory;
 	}
-	
+
 	public boolean isWriteTraceFiles() {
 		return writeTraceFiles;
 	}
-	
+
 	public void setWriteTraceFiles(boolean writeTraceFiles) {
 		this.writeTraceFiles = writeTraceFiles;
 	}
-	
+
 	@Inject
 	public void setResourceSetProvider(Provider<ResourceSet> resourceSetProvider) {
 		this.resourceSetProvider = resourceSetProvider;
@@ -225,12 +225,12 @@ public class XtendBatchCompiler {
 	public void setClassPath(String classPath) {
 		this.classPath = classPath;
 	}
-	
+
 	/**
 	 * @since 2.7
 	 */
 	public void setBootClassPath(String bootClassPath) {
-		this.bootClassPath= bootClassPath;
+		this.bootClassPath = bootClassPath;
 	}
 
 	public void setOutputPath(String outputPath) {
@@ -260,7 +260,7 @@ public class XtendBatchCompiler {
 	public void setFileEncoding(String encoding) {
 		this.fileEncoding = encoding;
 	}
-	
+
 	public boolean configureWorkspace() {
 		List<File> sourceFileList = getSourcePathFileList();
 		File outputFile = getOutputPathFile();
@@ -271,8 +271,7 @@ public class XtendBatchCompiler {
 		File commonRoot = determineCommonRoot(outputFile, sourceFileList);
 
 		// We don't want to use root ("/") as a workspace folder, didn't we?
-		if (commonRoot == null || commonRoot.getParent() == null
-				|| commonRoot.getParentFile().getParent() == null) {
+		if (commonRoot == null || commonRoot.getParent() == null || commonRoot.getParentFile().getParent() == null) {
 			log.error("All source folders and the output folder should have "
 					+ "a common parent non-top level folder (like project folder)");
 			for (File sourceFile : sourceFileList) {
@@ -288,16 +287,14 @@ public class XtendBatchCompiler {
 		java.net.URI commonURI = commonRoot.toURI();
 		java.net.URI relativizedTarget = commonURI.relativize(outputFile.toURI());
 		if (relativizedTarget.isAbsolute()) {
-			log.error("Target folder '" + outputFile
-					+ "' must be a child of the project folder '" + commonRoot + "'");
+			log.error("Target folder '" + outputFile + "' must be a child of the project folder '" + commonRoot + "'");
 			return false;
 		}
 
 		for (File source : sourceFileList) {
 			java.net.URI relativizedSrc = commonURI.relativize(source.toURI());
 			if (relativizedSrc.isAbsolute()) {
-				log.error("Source folder '" + source
-						+ "' must be a child of the project folder '" + commonRoot + "'");
+				log.error("Source folder '" + source + "' must be a child of the project folder '" + commonRoot + "'");
 				return false;
 			}
 			projectConfig.addSourceFolderMapping(relativizedSrc.getPath(), relativizedTarget.getPath());
@@ -411,7 +408,7 @@ public class XtendBatchCompiler {
 		final NameBasedFilter nameBasedFilter = new NameBasedFilter();
 		nameBasedFilter.setExtension(fileExtensionProvider.getPrimaryFileExtension());
 		PathTraverser pathTraverser = new PathTraverser();
-		List<String> sourcePathDirectories = getSourcePathDirectories(); 
+		List<String> sourcePathDirectories = getSourcePathDirectories();
 		Multimap<String, URI> pathes = pathTraverser.resolvePathes(sourcePathDirectories, new Predicate<URI>() {
 			public boolean apply(URI input) {
 				boolean matches = nameBasedFilter.matches(input);
@@ -419,11 +416,11 @@ public class XtendBatchCompiler {
 			}
 		});
 		for (String src : pathes.keySet()) {
-			URI baseDir = URI.createFileURI(src+"/");
+			URI baseDir = URI.createFileURI(src + "/");
 			String identifier = Joiner.on("_").join(baseDir.segments());
-			URI platformResourceURI = URI.createPlatformResourceURI(identifier+"/", true);
-			resourceSet.getURIConverter().getURIMap().put(platformResourceURI,baseDir);
-			for (URI uri :  pathes.get(src)) {
+			URI platformResourceURI = URI.createPlatformResourceURI(identifier + "/", true);
+			resourceSet.getURIConverter().getURIMap().put(platformResourceURI, baseDir);
+			for (URI uri : pathes.get(src)) {
 				if (log.isDebugEnabled()) {
 					log.debug("load xtend file '" + uri + "'");
 				}
@@ -433,7 +430,7 @@ public class XtendBatchCompiler {
 		}
 		return resourceSet;
 	}
-	
+
 	@Deprecated
 	protected ResourceSet loadXtendFiles() {
 		final ResourceSet resourceSet = resourceSetProvider.get();
@@ -459,10 +456,10 @@ public class XtendBatchCompiler {
 			commandLine.add("-verbose");
 		}
 		if (!isEmpty(bootClassPath)) {
-			commandLine.add("-bootclasspath \"" + concat(File.pathSeparator, getBootClassPathEntries())+"\"");
+			commandLine.add("-bootclasspath \"" + concat(File.pathSeparator, getBootClassPathEntries()) + "\"");
 		}
 		if (!isEmpty(classPath)) {
-			commandLine.add("-cp \"" + concat(File.pathSeparator, getClassPathEntries())+"\"");
+			commandLine.add("-cp \"" + concat(File.pathSeparator, getClassPathEntries()) + "\"");
 		}
 		commandLine.add("-d \"" + classDirectory.toString() + "\"");
 		commandLine.add("-" + getComplianceLevel());
@@ -496,20 +493,21 @@ public class XtendBatchCompiler {
 		}
 		return issues;
 	}
-	
+
 	/**
-	 * Installs the complete JvmTypeProvider including index access into the {@link ResourceSet}.
-	 * The lookup classpath is enhanced with the given tmp directory.
+	 * Installs the complete JvmTypeProvider including index access into the {@link ResourceSet}. The lookup classpath
+	 * is enhanced with the given tmp directory.
+	 * 
 	 * @deprecated use the explicit variant {@link #installJvmTypeProvider(ResourceSet, File, boolean)} instead.
 	 */
 	@Deprecated
 	protected void installJvmTypeProvider(ResourceSet resourceSet, File tmpClassDirectory) {
 		internalInstallJvmTypeProvider(resourceSet, tmpClassDirectory, false);
 	}
-	
+
 	/**
-	 * Installs the JvmTypeProvider optionally including index access into the {@link ResourceSet}.
-	 * The lookup classpath is enhanced with the given tmp directory.
+	 * Installs the JvmTypeProvider optionally including index access into the {@link ResourceSet}. The lookup classpath
+	 * is enhanced with the given tmp directory.
 	 */
 	protected void installJvmTypeProvider(ResourceSet resourceSet, File tmpClassDirectory, boolean skipIndexLookup) {
 		if (skipIndexLookup) {
@@ -558,9 +556,10 @@ public class XtendBatchCompiler {
 		ClassLoader urlClassLoader = new URLClassLoader(toArray(classPathUrls, URL.class), parentClassLoader);
 		new ClasspathTypeProvider(urlClassLoader, resourceSet, skipIndexLookup ? null : indexedJvmTypeAccess);
 		((XtextResourceSet) resourceSet).setClasspathURIContext(urlClassLoader);
-		
+
 		// for annotation processing we need to have the compiler's classpath as a parent.
-		URLClassLoader urlClassLoaderForAnnotationProcessing = new URLClassLoader(toArray(classPathUrls, URL.class), currentClassLoader);
+		URLClassLoader urlClassLoaderForAnnotationProcessing = new URLClassLoader(toArray(classPathUrls, URL.class),
+				currentClassLoader);
 		annotationProcessorFactory.setClassLoader(urlClassLoaderForAnnotationProcessing);
 	}
 
@@ -594,7 +593,7 @@ public class XtendBatchCompiler {
 		JavaIoFileSystemAccess javaIoFileSystemAccess = javaIoFileSystemAccessProvider.get();
 		javaIoFileSystemAccess.setOutputPath(outputPath);
 		javaIoFileSystemAccess.setWriteTrace(writeTraceFiles);
-		
+
 		for (Resource resource : newArrayList(resourceSet.getResources())) {
 			if (resource instanceof BatchLinkableResource) {
 				generator.doGenerate(resource, javaIoFileSystemAccess);
@@ -609,7 +608,7 @@ public class XtendBatchCompiler {
 		return resourceDescriptions;
 	}
 
-	/* @Nullable */ protected XtendFile getXtendFile(Resource resource) {
+	/* @Nullable */protected XtendFile getXtendFile(Resource resource) {
 		XtextResource xtextResource = (XtextResource) resource;
 		IParseResult parseResult = xtextResource.getParseResult();
 		if (parseResult != null) {
@@ -625,7 +624,7 @@ public class XtendBatchCompiler {
 	protected List<String> getClassPathEntries() {
 		return getDirectories(classPath);
 	}
-	
+
 	/**
 	 * @since 2.7
 	 */
@@ -644,11 +643,7 @@ public class XtendBatchCompiler {
 		final List<String> split = split(emptyIfNull(path), File.pathSeparator);
 		return transform(split, new Function<String, String>() {
 			public String apply(String from) {
-				try {
-					return new File(from).getCanonicalPath();
-				} catch (IOException e) {
-					throw new WrappedException("Invalid source path: '" + from + "'", e);
-				}
+				return new File(new File(from).getAbsoluteFile().toURI().normalize()).getAbsolutePath();
 			}
 		});
 	}

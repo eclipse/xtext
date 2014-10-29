@@ -14,7 +14,9 @@ import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.smoketest.IgnoredBySmokeTest
+import org.eclipse.xtext.xbase.file.ProjectConfig
 import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider
+import org.eclipse.xtext.xbase.file.WorkspaceConfig
 import org.junit.After
 import org.junit.Before
 import org.junit.Ignore
@@ -35,57 +37,58 @@ class TestBatchCompiler {
 
 	@Inject
 	XtendBatchCompiler batchCompiler
-	
+
 	@Inject RuntimeWorkspaceConfigProvider workspaceConfigProvider
-	
-    static String OUTPUT_DIRECTORY_WITH_SPACES = "./test result"
-    static String OUTPUT_DIRECTORY = "./test-result"
-    static String XTEND_SRC_DIRECTORY = "./batch-compiler-data/test data"
-    static String BUG396747_SRC_DIRECTORY = "./batch-compiler-data/bug396747"
-    static String BUG410594_SRC_DIRECTORY = "./batch-compiler-data/bug410594"
-    static String BUG416262_SRC_DIRECTORY = "./batch-compiler-data/bug416262"
-    static String BUG417177_SRC_DIRECTORY_1 = "./batch-compiler-data/bug417177/dir1/src1/"
-    static String BUG417177_SRC_DIRECTORY_2 = "./batch-compiler-data/bug417177/dir2/dir2a/src2"
-    static String BUG417177_OUTPUT_DIRECTORY = "./batch-compiler-data/bug417177/dir3/bin"
-    static String TEMP_DIRECTORY = "./test-temp-dir"
-    static String TEMP_DIRECTORY_WITH_SPACES = "./test temp dir"
+
+	static String OUTPUT_DIRECTORY_WITH_SPACES = "./test result"
+	static String OUTPUT_DIRECTORY = "./test-result"
+	static String XTEND_SRC_DIRECTORY = "./batch-compiler-data/test data"
+	static String BUG396747_SRC_DIRECTORY = "./batch-compiler-data/bug396747"
+	static String BUG410594_SRC_DIRECTORY = "./batch-compiler-data/bug410594"
+	static String BUG416262_SRC_DIRECTORY = "./batch-compiler-data/bug416262"
+	static String BUG417177_SRC_DIRECTORY_1 = "./batch-compiler-data/bug417177/dir1/src1/"
+	static String BUG417177_SRC_DIRECTORY_2 = "./batch-compiler-data/bug417177/dir2/dir2a/src2"
+	static String BUG417177_OUTPUT_DIRECTORY = "./batch-compiler-data/bug417177/dir3/bin"
+	static String TEMP_DIRECTORY = "./test-temp-dir"
+	static String TEMP_DIRECTORY_WITH_SPACES = "./test temp dir"
 
 	@Before
-	def void onSetup () {
-        batchCompiler.sourcePath = XTEND_SRC_DIRECTORY
-        batchCompiler.outputPath = OUTPUT_DIRECTORY
-        batchCompiler.deleteTempDirectory = true
-        batchCompiler.useCurrentClassLoaderAsParent = true
-        batchCompiler.currentClassLoader = class.classLoader
-        new File(OUTPUT_DIRECTORY).mkdir
-        cleanFolder(new File(OUTPUT_DIRECTORY), null, true, false)
-        new File(OUTPUT_DIRECTORY_WITH_SPACES).mkdir
-        cleanFolder(new File(OUTPUT_DIRECTORY_WITH_SPACES), null, true, false)
+	def void onSetup() {
+		batchCompiler.sourcePath = XTEND_SRC_DIRECTORY
+		batchCompiler.outputPath = OUTPUT_DIRECTORY
+		batchCompiler.deleteTempDirectory = true
+		batchCompiler.useCurrentClassLoaderAsParent = true
+		batchCompiler.currentClassLoader = class.classLoader
+		new File(OUTPUT_DIRECTORY).mkdir
+		cleanFolder(new File(OUTPUT_DIRECTORY), null, true, false)
+		new File(OUTPUT_DIRECTORY_WITH_SPACES).mkdir
+		cleanFolder(new File(OUTPUT_DIRECTORY_WITH_SPACES), null, true, false)
 	}
 
 	@After
 	def void onTearDown() {
-       cleanFolder(new File(OUTPUT_DIRECTORY), null, true, true)
-       cleanFolder(new File(OUTPUT_DIRECTORY_WITH_SPACES), null, true, true)
-       if (new File(TEMP_DIRECTORY).exists) {
-           cleanFolder(new File(TEMP_DIRECTORY), null, true, true)
-       }
-       if (new File(TEMP_DIRECTORY_WITH_SPACES).exists) {
-           cleanFolder(new File(TEMP_DIRECTORY_WITH_SPACES), null, true, true)
-       }
+		workspaceConfigProvider.workspaceConfig = null
+		cleanFolder(new File(OUTPUT_DIRECTORY), null, true, true)
+		cleanFolder(new File(OUTPUT_DIRECTORY_WITH_SPACES), null, true, true)
+		if (new File(TEMP_DIRECTORY).exists) {
+			cleanFolder(new File(TEMP_DIRECTORY), null, true, true)
+		}
+		if (new File(TEMP_DIRECTORY_WITH_SPACES).exists) {
+			cleanFolder(new File(TEMP_DIRECTORY_WITH_SPACES), null, true, true)
+		}
 	}
-	
+
 	@Test def void testWorkspaceConfig() {
 		assertTrue(batchCompiler.configureWorkspace());
 		val config = workspaceConfigProvider.get
 		assertEquals(new File('..').canonicalPath, config.absoluteFileSystemPath)
 		val project = config.projects.values.head
-		val projectPath = "/"+new File(".").canonicalFile.name
+		val projectPath = "/" + new File(".").canonicalFile.name
 		assertEquals(projectPath, project.rootPath.toString)
 		val src = project.sourceFolderMappings.keySet.head
-		assertEquals(projectPath+"/batch-compiler-data/test data",src.toString)
+		assertEquals(projectPath + "/batch-compiler-data/test data", src.toString)
 		val target = project.sourceFolderMappings.get(src)
-		assertEquals(projectPath+"/test-result",target.toString)
+		assertEquals(projectPath + "/test-result", target.toString)
 	}
 
 	@Test def void testWorkspaceConfigMultipleSourceDirs1() {
@@ -109,7 +112,7 @@ class TestBatchCompiler {
 			assertEquals("/prj1/bin", project.sourceFolderMappings.get(it).toString)
 		]
 	}
-	
+
 	@Test def void testWorkspaceConfigMultipleSourceDirs2AbsPaths() {
 		batchCompiler.sourcePath = '''/tmp/ws/prj1/src«File.pathSeparator»/tmp/ws/prj1/src-gen'''
 		batchCompiler.outputPath = '''/tmp/ws/prj1/bin'''
@@ -199,10 +202,8 @@ class TestBatchCompiler {
 	}
 
 	@Test def void testWorkspaceConfigMultipleSourceDirs6() {
-		batchCompiler.sourcePath = '''dir1/ws/prj1/dir2/dir3/dir4/src1«File.pathSeparator
-								     »dir1/ws/prj1/dir2/dir3/src2«File.pathSeparator
-								     »dir1/ws/prj1/dir2/src3«File.pathSeparator
-								     »dir1/ws/prj1/src4'''
+		batchCompiler.sourcePath = '''dir1/ws/prj1/dir2/dir3/dir4/src1«File.pathSeparator»dir1/ws/prj1/dir2/dir3/src2«File.
+			pathSeparator»dir1/ws/prj1/dir2/src3«File.pathSeparator»dir1/ws/prj1/src4'''
 		batchCompiler.outputPath = '''dir1/ws/prj1/dir2/dir3/dir4/dir5/bin'''
 
 		assertTrue(batchCompiler.configureWorkspace());
@@ -270,8 +271,7 @@ class TestBatchCompiler {
 		assertTrue(batchCompiler.configureWorkspace());
 	}
 
-
-    @Test
+	@Test
 	def void bug368551() {
 		batchCompiler.tempDirectory = TEMP_DIRECTORY_WITH_SPACES
 		batchCompiler.sourcePath = XTEND_SRC_DIRECTORY
@@ -279,7 +279,7 @@ class TestBatchCompiler {
 		batchCompiler.compile
 		assertEquals(14, new File(OUTPUT_DIRECTORY_WITH_SPACES + "/test").list.size)
 	}
-	
+
 	@Test
 	def void bug387829() {
 		batchCompiler.tempDirectory = TEMP_DIRECTORY_WITH_SPACES
@@ -297,13 +297,13 @@ class TestBatchCompiler {
 		batchCompiler.sourcePath = BUG396747_SRC_DIRECTORY
 		assertTrue("Compiling empty file pass", batchCompiler.compile)
 	}
-	
+
 	@Test
 	def void bug410594() {
 		batchCompiler.sourcePath = BUG410594_SRC_DIRECTORY
 		assertTrue("Compiling empty file pass", batchCompiler.compile)
 	}
-	
+
 	@Test
 	@Ignore
 	def void bug416262() {
@@ -323,14 +323,14 @@ class TestBatchCompiler {
 		assertTrue(new File(outputDir, "mypackage/Bug417177_1.java").exists)
 		assertTrue(new File(outputDir, "mypackage/Bug417177_2.java").exists)
 	}
-	
+
 	@Test
 	def void testActiveAnnotatons1() {
 		batchCompiler.sourcePath = "./batch-compiler-data/activeAnnotations1"
 		assertTrue(batchCompiler.compile)
 		assertEquals(3, new File(OUTPUT_DIRECTORY + "/mypackage").list[dir, name|name.endsWith(".java")].size)
 	}
-	
+
 	@Test
 	def void testActiveAnnotatons2() {
 		batchCompiler.sourcePath = "./batch-compiler-data/activeAnnotations2"
@@ -341,7 +341,7 @@ class TestBatchCompiler {
 		val txtFile = new File(OUTPUT_DIRECTORY + "/Test.txt")
 		assertTrue(txtFile.exists)
 	}
-	
+
 	@Test
 	def void testBug443800() {
 		batchCompiler.sourcePath = "./batch-compiler-data/bug443800"
@@ -350,7 +350,7 @@ class TestBatchCompiler {
 		val javaFiles = new File(OUTPUT_DIRECTORY + "/").list[dir, name|name.endsWith(".java")].join(",")
 		assertEquals("Bug443800.java", javaFiles)
 	}
-	
+
 	@Test
 	def void testClassPath() {
 		batchCompiler.sourcePath = './batch-compiler-data/classpathTest/src'
@@ -375,20 +375,42 @@ class TestBatchCompiler {
 	}
 
 	@Test
-	def void tempDirectory() {
-        batchCompiler.deleteTempDirectory = false
-        batchCompiler.tempDirectory = TEMP_DIRECTORY
-        assertTrue(batchCompiler.compile)
-        assertEquals(2, new File(batchCompiler.getTempDirectory).list.size)
-        assertTrue(batchCompiler.compile)
-        assertEquals(4, new File(batchCompiler.getTempDirectory).list.size)
+	def void testCompileSymlinkedResource() {
+		batchCompiler.writeTraceFiles = true
+		val wsRoot = new File("./batch-compiler-data/test-resources/symlink-test-ws/").toURI().normalize().getPath()
+		workspaceConfigProvider.workspaceConfig = new WorkspaceConfig(wsRoot) => [
+			addProjectConfig(
+				new ProjectConfig('plain-folder') => [
+					addSourceFolderMapping("src", "bin")
+					addSourceFolderMapping("linked-src", "bin")
+				]
+			)
+			addProjectConfig(
+				new ProjectConfig('linked-folder') => [
+					addSourceFolderMapping("src", "bin")
+				]
+			)
+		]
+		batchCompiler.sourcePath = wsRoot + "plain-folder/src" + File.pathSeparator + wsRoot + "plain-folder/linked-src"
+		batchCompiler.outputPath = "./batch-compiler-data/test-resources/symlink-test-ws/plain-folder/output-symlink-test-ws"
+		assertTrue(batchCompiler.compile)
 	}
 
 	@Test
-    def void deleteTempDirectory() {
-        batchCompiler.deleteTempDirectory = true
-        batchCompiler.tempDirectory = TEMP_DIRECTORY
-        assertTrue(batchCompiler.compile)
-        assertEquals(0, new File(TEMP_DIRECTORY).list.size)
-    }
+	def void tempDirectory() {
+		batchCompiler.deleteTempDirectory = false
+		batchCompiler.tempDirectory = TEMP_DIRECTORY
+		assertTrue(batchCompiler.compile)
+		assertEquals(2, new File(batchCompiler.getTempDirectory).list.size)
+		assertTrue(batchCompiler.compile)
+		assertEquals(4, new File(batchCompiler.getTempDirectory).list.size)
+	}
+
+	@Test
+	def void deleteTempDirectory() {
+		batchCompiler.deleteTempDirectory = true
+		batchCompiler.tempDirectory = TEMP_DIRECTORY
+		assertTrue(batchCompiler.compile)
+		assertEquals(0, new File(TEMP_DIRECTORY).list.size)
+	}
 }

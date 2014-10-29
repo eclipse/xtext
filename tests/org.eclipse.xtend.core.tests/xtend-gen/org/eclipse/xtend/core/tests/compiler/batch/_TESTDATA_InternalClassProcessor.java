@@ -51,8 +51,8 @@ public class _TESTDATA_InternalClassProcessor extends AbstractClassProcessor {
   public void doGenerateCode(final ClassDeclaration annotatedClass, @Extension final CodeGenerationContext context) {
     CompilationUnit _compilationUnit = annotatedClass.getCompilationUnit();
     Path _filePath = _compilationUnit.getFilePath();
-    Path _targetFolder = context.getTargetFolder(_filePath);
-    Path _append = _targetFolder.append("/Test.txt");
+    final Path tF = context.getTargetFolder(_filePath);
+    Path _append = tF.append("/Test.txt");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Hello");
     _builder.newLine();
