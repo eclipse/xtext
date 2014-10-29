@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.core.tests.compiler.batch;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.io.File;
 import java.io.FilenameFilter;
@@ -839,11 +840,18 @@ public class TestBatchCompiler {
   @Test
   public void testCompileSymlinkedResource() {
     this.batchCompiler.setWriteTraceFiles(true);
-    File _file = new File("./batch-compiler-data/test-resources/symlink-test-ws/");
-    URI _uRI = _file.toURI();
+    final File wsRootFile = new File("./batch-compiler-data/test-resources/symlink-test-ws/");
+    URI _uRI = wsRootFile.toURI();
     URI _normalize = _uRI.normalize();
-    final String wsRoot = _normalize.getPath();
-    WorkspaceConfig _workspaceConfig = new WorkspaceConfig(wsRoot);
+    final String wsRootPath = _normalize.getPath();
+    File _file = new File(wsRootFile, "plain-folder/linked-src/");
+    boolean _isSymlink = TestBatchCompiler.isSymlink(_file);
+    Assert.assertTrue("plain-folder/linked-src/ is a symlink", _isSymlink);
+    File _file_1 = new File(wsRootFile, "plain-folder/src/");
+    boolean _isSymlink_1 = TestBatchCompiler.isSymlink(_file_1);
+    boolean _not = (!_isSymlink_1);
+    Assert.assertTrue("plain-folder/src/ is not a symlink", _not);
+    WorkspaceConfig _workspaceConfig = new WorkspaceConfig(wsRootPath);
     final Procedure1<WorkspaceConfig> _function = new Procedure1<WorkspaceConfig>() {
       public void apply(final WorkspaceConfig it) {
         ProjectConfig _projectConfig = new ProjectConfig("plain-folder");
@@ -867,10 +875,34 @@ public class TestBatchCompiler {
     };
     WorkspaceConfig _doubleArrow = ObjectExtensions.<WorkspaceConfig>operator_doubleArrow(_workspaceConfig, _function);
     this.workspaceConfigProvider.setWorkspaceConfig(_doubleArrow);
-    this.batchCompiler.setSourcePath(((((wsRoot + "plain-folder/src") + File.pathSeparator) + wsRoot) + "plain-folder/linked-src"));
-    this.batchCompiler.setOutputPath("./batch-compiler-data/test-resources/symlink-test-ws/plain-folder/output-symlink-test-ws");
+    this.batchCompiler.setSourcePath(((((wsRootPath + "plain-folder/src") + File.pathSeparator) + wsRootPath) + 
+      "plain-folder/linked-src"));
+    this.batchCompiler.setOutputPath((wsRootPath + "/plain-folder/output-symlink-test-ws"));
     boolean _compile = this.batchCompiler.compile();
     Assert.assertTrue(_compile);
+  }
+  
+  public static boolean isSymlink(final File file) {
+    try {
+      File canon = null;
+      String _parent = file.getParent();
+      boolean _equals = Objects.equal(_parent, null);
+      if (_equals) {
+        canon = file;
+      } else {
+        File _parentFile = file.getParentFile();
+        File canonDir = _parentFile.getCanonicalFile();
+        String _name = file.getName();
+        File _file = new File(canonDir, _name);
+        canon = _file;
+      }
+      File _canonicalFile = canon.getCanonicalFile();
+      File _absoluteFile = canon.getAbsoluteFile();
+      boolean _equals_1 = _canonicalFile.equals(_absoluteFile);
+      return (!_equals_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test

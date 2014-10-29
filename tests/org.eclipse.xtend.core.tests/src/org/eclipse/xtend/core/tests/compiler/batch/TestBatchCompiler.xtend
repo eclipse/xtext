@@ -377,8 +377,11 @@ class TestBatchCompiler {
 	@Test
 	def void testCompileSymlinkedResource() {
 		batchCompiler.writeTraceFiles = true
-		val wsRoot = new File("./batch-compiler-data/test-resources/symlink-test-ws/").toURI().normalize().getPath()
-		workspaceConfigProvider.workspaceConfig = new WorkspaceConfig(wsRoot) => [
+		val wsRootFile = new File("./batch-compiler-data/test-resources/symlink-test-ws/")
+		val wsRootPath = wsRootFile.toURI().normalize().getPath()
+		assertTrue("plain-folder/linked-src/ is a symlink", isSymlink(new File(wsRootFile, "plain-folder/linked-src/")))
+		assertTrue("plain-folder/src/ is not a symlink", !isSymlink(new File(wsRootFile, "plain-folder/src/")))
+		workspaceConfigProvider.workspaceConfig = new WorkspaceConfig(wsRootPath) => [
 			addProjectConfig(
 				new ProjectConfig('plain-folder') => [
 					addSourceFolderMapping("src", "bin")
@@ -391,9 +394,21 @@ class TestBatchCompiler {
 				]
 			)
 		]
-		batchCompiler.sourcePath = wsRoot + "plain-folder/src" + File.pathSeparator + wsRoot + "plain-folder/linked-src"
-		batchCompiler.outputPath = "./batch-compiler-data/test-resources/symlink-test-ws/plain-folder/output-symlink-test-ws"
+		batchCompiler.sourcePath = wsRootPath + "plain-folder/src" + File.pathSeparator + wsRootPath +
+			"plain-folder/linked-src"
+		batchCompiler.outputPath = wsRootPath + "/plain-folder/output-symlink-test-ws"
 		assertTrue(batchCompiler.compile)
+	}
+
+	def static boolean isSymlink(File file) {
+		var File canon
+		if (file.getParent() == null) {
+			canon = file
+		} else {
+			var File canonDir = file.getParentFile().getCanonicalFile()
+			canon = new File(canonDir, file.getName())
+		}
+		return !canon.getCanonicalFile().equals(canon.getAbsoluteFile())
 	}
 
 	@Test
