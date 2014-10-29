@@ -34,7 +34,8 @@ class _TESTDATA_InternalClassProcessor extends AbstractClassProcessor {
 	}
 	
 	override doGenerateCode(ClassDeclaration annotatedClass, extension CodeGenerationContext context) {
-		annotatedClass.compilationUnit.filePath.targetFolder.append("/Test.txt").contents = '''
+		val tF = annotatedClass.compilationUnit.filePath.targetFolder
+		tF.append("/Test.txt").contents = '''
 			Hello
 		'''
 	}

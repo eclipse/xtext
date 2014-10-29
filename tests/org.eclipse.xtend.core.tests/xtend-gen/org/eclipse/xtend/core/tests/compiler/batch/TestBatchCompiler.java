@@ -10,6 +10,7 @@ package org.eclipse.xtend.core.tests.compiler.batch;
 import com.google.inject.Inject;
 import java.io.File;
 import java.io.FilenameFilter;
+import java.net.URI;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -101,6 +102,7 @@ public class TestBatchCompiler {
   @After
   public void onTearDown() {
     try {
+      this.workspaceConfigProvider.setWorkspaceConfig(null);
       File _file = new File(TestBatchCompiler.OUTPUT_DIRECTORY);
       Files.cleanFolder(_file, null, true, true);
       File _file_1 = new File(TestBatchCompiler.OUTPUT_DIRECTORY_WITH_SPACES);
@@ -832,6 +834,43 @@ public class TestBatchCompiler {
     String[] _list_1 = _file_1.list(_function_1);
     int _size_1 = ((List<String>)Conversions.doWrapArray(_list_1)).size();
     Assert.assertEquals(0, _size_1);
+  }
+  
+  @Test
+  public void testCompileSymlinkedResource() {
+    this.batchCompiler.setWriteTraceFiles(true);
+    File _file = new File("./batch-compiler-data/test-resources/symlink-test-ws/");
+    URI _uRI = _file.toURI();
+    URI _normalize = _uRI.normalize();
+    final String wsRoot = _normalize.getPath();
+    WorkspaceConfig _workspaceConfig = new WorkspaceConfig(wsRoot);
+    final Procedure1<WorkspaceConfig> _function = new Procedure1<WorkspaceConfig>() {
+      public void apply(final WorkspaceConfig it) {
+        ProjectConfig _projectConfig = new ProjectConfig("plain-folder");
+        final Procedure1<ProjectConfig> _function = new Procedure1<ProjectConfig>() {
+          public void apply(final ProjectConfig it) {
+            it.addSourceFolderMapping("src", "bin");
+            it.addSourceFolderMapping("linked-src", "bin");
+          }
+        };
+        ProjectConfig _doubleArrow = ObjectExtensions.<ProjectConfig>operator_doubleArrow(_projectConfig, _function);
+        it.addProjectConfig(_doubleArrow);
+        ProjectConfig _projectConfig_1 = new ProjectConfig("linked-folder");
+        final Procedure1<ProjectConfig> _function_1 = new Procedure1<ProjectConfig>() {
+          public void apply(final ProjectConfig it) {
+            it.addSourceFolderMapping("src", "bin");
+          }
+        };
+        ProjectConfig _doubleArrow_1 = ObjectExtensions.<ProjectConfig>operator_doubleArrow(_projectConfig_1, _function_1);
+        it.addProjectConfig(_doubleArrow_1);
+      }
+    };
+    WorkspaceConfig _doubleArrow = ObjectExtensions.<WorkspaceConfig>operator_doubleArrow(_workspaceConfig, _function);
+    this.workspaceConfigProvider.setWorkspaceConfig(_doubleArrow);
+    this.batchCompiler.setSourcePath(((((wsRoot + "plain-folder/src") + File.pathSeparator) + wsRoot) + "plain-folder/linked-src"));
+    this.batchCompiler.setOutputPath("./batch-compiler-data/test-resources/symlink-test-ws/plain-folder/output-symlink-test-ws");
+    boolean _compile = this.batchCompiler.compile();
+    Assert.assertTrue(_compile);
   }
   
   @Test
