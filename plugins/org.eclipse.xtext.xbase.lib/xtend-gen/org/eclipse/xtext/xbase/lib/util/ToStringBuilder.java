@@ -296,14 +296,7 @@ public final class ToStringBuilder {
         builder.increaseIndent();
       }
       for (final Part part : this.parts) {
-        boolean _or = false;
-        if ((!this.skipNulls)) {
-          _or = true;
-        } else {
-          boolean _tripleNotEquals = (part.value != null);
-          _or = _tripleNotEquals;
-        }
-        if (_or) {
+        if (((!this.skipNulls) || (part.value != null))) {
           if (this.multiLine) {
             builder.newLine();
           } else {
@@ -311,8 +304,7 @@ public final class ToStringBuilder {
             nextSeparator = ", ";
           }
           boolean _and = false;
-          boolean _tripleNotEquals_1 = (part.fieldName != null);
-          if (!_tripleNotEquals_1) {
+          if (!(part.fieldName != null)) {
             _and = false;
           } else {
             _and = this.showFieldNames;

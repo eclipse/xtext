@@ -80,8 +80,7 @@ public class OperationCanceledManager {
    */
   public void propagateIfCancelException(final Throwable t) {
     final RuntimeException cancelException = this.getPlatformOperationCanceledException(t);
-    boolean _tripleNotEquals = (cancelException != null);
-    if (_tripleNotEquals) {
+    if ((cancelException != null)) {
       throw cancelException;
     }
   }

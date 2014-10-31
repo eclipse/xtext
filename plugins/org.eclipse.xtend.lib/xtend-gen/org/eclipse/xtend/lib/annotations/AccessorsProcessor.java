@@ -141,8 +141,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
         _elvis = _accessorsAnnotation_1;
       }
       final AnnotationReference annotation = _elvis;
-      boolean _tripleNotEquals = (annotation != null);
-      if (_tripleNotEquals) {
+      if ((annotation != null)) {
         EnumerationValueDeclaration[] _enumArrayValue = annotation.getEnumArrayValue("value");
         final Function1<EnumerationValueDeclaration, AccessorType> _function = new Function1<EnumerationValueDeclaration, AccessorType>() {
           public AccessorType apply(final EnumerationValueDeclaration it) {
@@ -263,8 +262,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
         _elvis = _accessorsAnnotation_1;
       }
       final AnnotationReference annotation = _elvis;
-      boolean _tripleNotEquals = (annotation != null);
-      if (_tripleNotEquals) {
+      if ((annotation != null)) {
         EnumerationValueDeclaration[] _enumArrayValue = annotation.getEnumArrayValue("value");
         final Function1<EnumerationValueDeclaration, AccessorType> _function = new Function1<EnumerationValueDeclaration, AccessorType>() {
           public AccessorType apply(final EnumerationValueDeclaration it) {
@@ -400,8 +398,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
     
     private TypeReference orObject(final TypeReference ref) {
       TypeReference _xifexpression = null;
-      boolean _tripleEquals = (ref == null);
-      if (_tripleEquals) {
+      if ((ref == null)) {
         _xifexpression = this.context.getObject();
       } else {
         _xifexpression = ref;

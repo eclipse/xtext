@@ -57,8 +57,7 @@ public class ToStringProcessor extends AbstractClassProcessor {
         Type _findTypeGlobally = this.context.findTypeGlobally(ToString.class);
         final AnnotationReference anno = it.findAnnotation(_findTypeGlobally);
         ToStringConfiguration _xifexpression = null;
-        boolean _tripleEquals = (anno == null);
-        if (_tripleEquals) {
+        if ((anno == null)) {
           _xifexpression = null;
         } else {
           _xifexpression = new ToStringConfiguration(anno);

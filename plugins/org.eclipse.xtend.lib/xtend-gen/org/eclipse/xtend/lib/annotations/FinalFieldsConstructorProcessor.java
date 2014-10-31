@@ -334,8 +334,7 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
     
     private TypeReference orObject(final TypeReference ref) {
       TypeReference _xifexpression = null;
-      boolean _tripleEquals = (ref == null);
-      if (_tripleEquals) {
+      if ((ref == null)) {
         _xifexpression = this.context.getObject();
       } else {
         _xifexpression = ref;
