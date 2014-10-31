@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.text.Region;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
@@ -55,12 +56,19 @@ public class AnnotationWithQuickFixesHoverTest extends AbstractEditorTest {
 		List<Issue> issues = document.readOnly(new IUnitOfWork<List<Issue>, XtextResource>() {
 			public List<Issue> exec(XtextResource state) throws Exception {
 				return state.getResourceServiceProvider().getResourceValidator().validate(state, CheckMode.ALL, null);
-			}	
+			}
 		});
-		assertEquals (2, issues.size());
-		MarkerCreator markerCreator =  Activator.getInstance().getInjector(getEditorId()).getInstance(MarkerCreator.class);
+		assertEquals(2, issues.size());
+		MarkerCreator markerCreator = Activator.getInstance().getInjector(getEditorId())
+				.getInstance(MarkerCreator.class);
 		for (Issue issue : issues) {
 			markerCreator.createMarker(issue, file, MarkerTypes.forCheckType(issue.getType()));
+		}
+
+		if (Display.getCurrent().getActiveShell() != editor.getShell()) {
+			System.out.println("Editor shell is not active. Active shell is: " + Display.getCurrent().getActiveShell());
+			getWorkbenchWindow().getShell().forceActive();
+			editor.getInternalSourceViewer().getTextWidget().forceFocus();
 		}
 	}
 

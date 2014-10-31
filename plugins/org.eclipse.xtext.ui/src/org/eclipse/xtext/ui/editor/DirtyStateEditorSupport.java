@@ -505,7 +505,7 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 		if (rsp == null)
 			return null;
 		String uriLanguageName = rsp.get(LanguageInfo.class).getLanguageName();
-		String resourceLanguageName = resource.getLanguageName();
+		String resourceLanguageName = resource.getResourceServiceProvider().get(LanguageInfo.class).getLanguageName();
 		if (!uriLanguageName.equals(resourceLanguageName))
 			return null;
 		return getResourceDescriptionManager(resource.getURI());
