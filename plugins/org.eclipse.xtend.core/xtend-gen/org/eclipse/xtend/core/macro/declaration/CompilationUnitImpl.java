@@ -480,8 +480,8 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   public ResolvedConstructor toResolvedConstructor(final IResolvedConstructor delegate) {
-    final Function1<CompilationUnitImpl, ResolvedConstructorImpl> _function = new Function1<CompilationUnitImpl, ResolvedConstructorImpl>() {
-      public ResolvedConstructorImpl apply(final CompilationUnitImpl it) {
+    final Function1<IResolvedConstructor, ResolvedConstructorImpl> _function = new Function1<IResolvedConstructor, ResolvedConstructorImpl>() {
+      public ResolvedConstructorImpl apply(final IResolvedConstructor it) {
         ResolvedConstructorImpl _resolvedConstructorImpl = new ResolvedConstructorImpl();
         final Procedure1<ResolvedConstructorImpl> _function = new Procedure1<ResolvedConstructorImpl>() {
           public void apply(final ResolvedConstructorImpl it) {
@@ -492,7 +492,7 @@ public class CompilationUnitImpl implements CompilationUnit {
         return ObjectExtensions.<ResolvedConstructorImpl>operator_doubleArrow(_resolvedConstructorImpl, _function);
       }
     };
-    return this.<CompilationUnitImpl, ResolvedConstructorImpl>getOrCreate(this, _function);
+    return this.<IResolvedConstructor, ResolvedConstructorImpl>getOrCreate(delegate, _function);
   }
   
   public Type toType(final JvmType delegate) {
