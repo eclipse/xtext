@@ -480,4 +480,52 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 		'''
 		text.file.assertNoIssues
 	}
+	
+	@Test
+	def void recursiveGenerics() {
+		val text = ''' 
+			import org.eclipse.xtend.lib.annotations.Delegate
+			interface Foo {
+				def <T extends Comparable<T>> T foo(T t)
+			}
+			
+			class Bar implements Foo {
+				@Delegate Bar bar
+			}
+		'''
+		text.file.assertNoIssues
+	}
+	
+	@Test
+	def void genericsWithLowerBound() {
+		val text = ''' 
+			import org.eclipse.xtend.lib.annotations.Delegate
+			interface Matcher<T> {
+			}
+			interface Matchers {
+				def <T> Matcher<T> both(Matcher<? super T> first, Matcher<? super T> second)
+			}
+			
+			class Foo implements Matchers {
+				@Delegate Matchers delegate
+			}
+		'''
+		text.file.assertNoIssues
+	}
+	
+	@Test
+	def void noStackOverflowOnRecursiveSuperTypes() {
+		val text = ''' 
+			import org.eclipse.xtend.lib.annotations.Delegate
+			class Foo extends Bar {
+			}
+			
+			class Bar extends Foo {
+				@Delegate Bar b
+			}
+		'''
+		text.file
+	}
+	
+
 }
