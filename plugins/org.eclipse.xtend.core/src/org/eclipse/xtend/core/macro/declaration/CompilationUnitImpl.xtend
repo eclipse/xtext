@@ -278,7 +278,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	}
 	
 	def ResolvedConstructor toResolvedConstructor(IResolvedConstructor delegate) {
-		getOrCreate[
+		getOrCreate(delegate)[
 			new ResolvedConstructorImpl => [
 				it.delegate = delegate
 				compilationUnit = this

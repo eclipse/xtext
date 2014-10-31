@@ -936,4 +936,53 @@ public class NewDataCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testBug449185() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Data");
+      _builder.newLine();
+      _builder.append("@Data class A {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("@Data class C extends A {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val int c");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("@Data class B {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val int b");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("@Data class D extends B {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val double d");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        public void accept(final CompilationTestHelper.Result it) {
+          final Class<?> d = it.getCompiledClass("D");
+          Constructor<?>[] _declaredConstructors = d.getDeclaredConstructors();
+          Constructor<?> _head = IterableExtensions.<Constructor<?>>head(((Iterable<Constructor<?>>)Conversions.doWrapArray(_declaredConstructors)));
+          final Class<?>[] parameterTypes = _head.getParameterTypes();
+          Assert.assertArrayEquals(new Object[] { int.class, double.class }, parameterTypes);
+        }
+      };
+      this.compilationTestHelper.compile(_builder, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }
