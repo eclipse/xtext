@@ -34,7 +34,8 @@ public class QuickAssistInvocationContext extends TextInvocationContext {
 	
 	/**
 	 * May be called from all threads.
-	 * @since 2.8
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	public boolean isMarkedCancelled() {
 		return wasCancelled;
@@ -42,9 +43,10 @@ public class QuickAssistInvocationContext extends TextInvocationContext {
 	
 	/**
 	 * May only be called from Display thread.
-	 * @since 2.8
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
-	public boolean isCancelled() {
+	boolean isCancelled() {
 		if (wasCancelled) {
 			return true;
 		}
