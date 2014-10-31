@@ -356,4 +356,31 @@ class NewDataCompilerTest extends AbstractXtendCompilerTest {
 			assertTrue(getGeneratedCode("Bar").contains("public Bar(final X foo) {"))
 		]
 	}
+	
+	@Test
+	def testBug449185() {
+		'''
+			import org.eclipse.xtend.lib.annotations.Data
+			@Data class A {
+			}
+			
+			@Data class C extends A {
+				val int c
+			}
+			
+			@Data class B {
+				val int b
+			}
+			
+			@Data class D extends B {
+				val double d
+			}
+		'''.compile[
+			val d = getCompiledClass("D")
+			val parameterTypes = d.declaredConstructors.head.parameterTypes
+			assertArrayEquals(#[int, double], parameterTypes)
+		]
+	}
+	
+	
 }
