@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -198,8 +199,8 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
         Iterable<? extends MemberDeclaration> _otherDelegates = this.otherDelegates(delegate);
         for (final MemberDeclaration other : _otherDelegates) {
           {
-            final Set<? extends TypeReference> otherInterfaces = this.getDelegatedInterfaces(other);
-            Set<? extends TypeReference> _delegatedInterfaces = this.getDelegatedInterfaces(delegate);
+            final Set<TypeReference> otherInterfaces = this.getDelegatedInterfaces(other);
+            Set<TypeReference> _delegatedInterfaces = this.getDelegatedInterfaces(delegate);
             for (final TypeReference iface : _delegatedInterfaces) {
               boolean _contains = otherInterfaces.contains(iface);
               if (_contains) {
@@ -237,9 +238,9 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       {
         TypeDeclaration _declaringType = delegate.getDeclaringType();
         final TypeReference declaringType = this.context.newSelfTypeReference(_declaringType);
-        final Set<? extends TypeReference> interfacesOfDeclaringType = this.getImplementedInterfaces(declaringType);
+        final Set<TypeReference> interfacesOfDeclaringType = this.getImplementedInterfaces(declaringType);
         TypeReference _type = this.getType(delegate);
-        final Set<? extends TypeReference> availableInterfaces = this.getImplementedInterfaces(_type);
+        final Set<TypeReference> availableInterfaces = this.getImplementedInterfaces(_type);
         final Set<TypeReference> listedInterfaces = this.listedInterfaces(delegate);
         boolean valid = true;
         for (final TypeReference iface : listedInterfaces) {
@@ -251,7 +252,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
                 return Boolean.valueOf(Objects.equal(_type, _type_1));
               }
             };
-            boolean _exists = IterableExtensions.exists(availableInterfaces, _function);
+            boolean _exists = IterableExtensions.<TypeReference>exists(availableInterfaces, _function);
             boolean _not = (!_exists);
             if (_not) {
               StringConcatenation _builder = new StringConcatenation();
@@ -271,7 +272,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
                 return Boolean.valueOf(Objects.equal(_type, _type_1));
               }
             };
-            boolean _exists_1 = IterableExtensions.exists(interfacesOfDeclaringType, _function_1);
+            boolean _exists_1 = IterableExtensions.<TypeReference>exists(interfacesOfDeclaringType, _function_1);
             boolean _not_1 = (!_exists_1);
             if (_not_1) {
               StringConcatenation _builder_1 = new StringConcatenation();
@@ -290,7 +291,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
         if (!_isEmpty) {
           _and = false;
         } else {
-          Sets.SetView<? extends TypeReference> _intersection = Sets.intersection(interfacesOfDeclaringType, availableInterfaces);
+          Sets.SetView<TypeReference> _intersection = Sets.<TypeReference>intersection(interfacesOfDeclaringType, availableInterfaces);
           boolean _isEmpty_1 = _intersection.isEmpty();
           _and = _isEmpty_1;
         }
@@ -330,35 +331,47 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       return IterableExtensions.<TypeReference>toSet(((Iterable<TypeReference>)Conversions.doWrapArray(_classArrayValue)));
     }
     
-    public Set<? extends TypeReference> getImplementedInterfaces(final TypeReference it) {
-      Iterable<? extends TypeReference> _declaredSuperTypes = it.getDeclaredSuperTypes();
-      final Function1<TypeReference, Set<? extends TypeReference>> _function = new Function1<TypeReference, Set<? extends TypeReference>>() {
-        public Set<? extends TypeReference> apply(final TypeReference it) {
-          return Util.this.getImplementedInterfaces(it);
-        }
-      };
-      Iterable<Set<? extends TypeReference>> _map = IterableExtensions.map(_declaredSuperTypes, _function);
-      Iterable<TypeReference> _flatten = Iterables.<TypeReference>concat(_map);
-      Iterable<TypeReference> _plus = Iterables.<TypeReference>concat(Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(it)), _flatten);
-      final Function1<TypeReference, Boolean> _function_1 = new Function1<TypeReference, Boolean>() {
-        public Boolean apply(final TypeReference it) {
-          Type _type = it.getType();
-          return Boolean.valueOf((_type instanceof InterfaceDeclaration));
-        }
-      };
-      Iterable<TypeReference> _filter = IterableExtensions.<TypeReference>filter(_plus, _function_1);
-      return IterableExtensions.<TypeReference>toSet(_filter);
+    public Set<TypeReference> getImplementedInterfaces(final TypeReference it) {
+      Set<TypeReference> _xblockexpression = null;
+      {
+        final LinkedHashSet<TypeReference> seen = CollectionLiterals.<TypeReference>newLinkedHashSet();
+        this.collectAllSuperTypes(it, seen);
+        final Function1<TypeReference, Boolean> _function = new Function1<TypeReference, Boolean>() {
+          public Boolean apply(final TypeReference it) {
+            Type _type = it.getType();
+            return Boolean.valueOf((_type instanceof InterfaceDeclaration));
+          }
+        };
+        Iterable<TypeReference> _filter = IterableExtensions.<TypeReference>filter(seen, _function);
+        _xblockexpression = IterableExtensions.<TypeReference>toSet(_filter);
+      }
+      return _xblockexpression;
     }
     
-    public Set<? extends TypeReference> getDelegatedInterfaces(final MemberDeclaration delegate) {
-      Set<? extends TypeReference> _xblockexpression = null;
+    private void collectAllSuperTypes(final TypeReference it, final Set<TypeReference> seen) {
+      boolean _add = seen.add(it);
+      final boolean cycle = (!_add);
+      if (cycle) {
+        return;
+      }
+      Iterable<? extends TypeReference> _declaredSuperTypes = it.getDeclaredSuperTypes();
+      final Procedure1<TypeReference> _function = new Procedure1<TypeReference>() {
+        public void apply(final TypeReference it) {
+          Util.this.collectAllSuperTypes(it, seen);
+        }
+      };
+      IterableExtensions.forEach(_declaredSuperTypes, _function);
+    }
+    
+    public Set<TypeReference> getDelegatedInterfaces(final MemberDeclaration delegate) {
+      Set<TypeReference> _xblockexpression = null;
       {
         TypeDeclaration _declaringType = delegate.getDeclaringType();
         TypeReference _newSelfTypeReference = this.context.newSelfTypeReference(_declaringType);
-        final Set<? extends TypeReference> interfacesOfDeclaringType = this.getImplementedInterfaces(_newSelfTypeReference);
+        final Set<TypeReference> interfacesOfDeclaringType = this.getImplementedInterfaces(_newSelfTypeReference);
         final Set<TypeReference> listedInterfaces = this.listedInterfaces(delegate);
         TypeReference _type = this.getType(delegate);
-        final Set<? extends TypeReference> availableInterfaces = this.getImplementedInterfaces(_type);
+        final Set<TypeReference> availableInterfaces = this.getImplementedInterfaces(_type);
         final Function1<TypeReference, Boolean> _function = new Function1<TypeReference, Boolean>() {
           public Boolean apply(final TypeReference iface) {
             boolean _and = false;
@@ -384,20 +397,20 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
             return Boolean.valueOf(_and);
           }
         };
-        Iterable<? extends TypeReference> _filter = IterableExtensions.filter(availableInterfaces, _function);
-        _xblockexpression = IterableExtensions.toSet(_filter);
+        Iterable<TypeReference> _filter = IterableExtensions.<TypeReference>filter(availableInterfaces, _function);
+        _xblockexpression = IterableExtensions.<TypeReference>toSet(_filter);
       }
       return _xblockexpression;
     }
     
     public Set<ResolvedMethod> getMethodsToImplement(final MemberDeclaration delegate) {
-      Set<? extends TypeReference> _delegatedInterfaces = this.getDelegatedInterfaces(delegate);
+      Set<TypeReference> _delegatedInterfaces = this.getDelegatedInterfaces(delegate);
       final Function1<TypeReference, Iterable<? extends ResolvedMethod>> _function = new Function1<TypeReference, Iterable<? extends ResolvedMethod>>() {
         public Iterable<? extends ResolvedMethod> apply(final TypeReference it) {
           return it.getDeclaredResolvedMethods();
         }
       };
-      Iterable<Iterable<? extends ResolvedMethod>> _map = IterableExtensions.map(_delegatedInterfaces, _function);
+      Iterable<Iterable<? extends ResolvedMethod>> _map = IterableExtensions.<TypeReference, Iterable<? extends ResolvedMethod>>map(_delegatedInterfaces, _function);
       Iterable<ResolvedMethod> _flatten = Iterables.<ResolvedMethod>concat(_map);
       final Function1<ResolvedMethod, Boolean> _function_1 = new Function1<ResolvedMethod, Boolean>() {
         public Boolean apply(final ResolvedMethod it) {
