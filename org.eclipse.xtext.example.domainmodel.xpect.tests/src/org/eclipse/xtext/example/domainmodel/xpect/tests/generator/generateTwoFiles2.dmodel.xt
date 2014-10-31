@@ -2,7 +2,7 @@
 
 /*
 Test the full generated code
-XPECT generated ---
+XPECT !generated ---
 -- DEFAULT_OUTPUTpkg1/MyEntity1.java --
   package pkg1;
   

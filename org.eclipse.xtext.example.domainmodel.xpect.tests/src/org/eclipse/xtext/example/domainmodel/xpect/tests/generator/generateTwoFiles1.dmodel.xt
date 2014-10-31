@@ -4,7 +4,7 @@
 
 
 test generating MyEntity1.java
-XPECT generated file MyEntity1.java ---
+XPECT !generated file MyEntity1.java ---
   package pkg1;
   
   import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -39,7 +39,7 @@ XPECT generated file MyEntity1.java ---
 
 
 test generating MyEntity2.java
-XPECT generated file MyEntity2.java ---
+XPECT !generated file MyEntity2.java ---
   package pkg1;
   
   import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;

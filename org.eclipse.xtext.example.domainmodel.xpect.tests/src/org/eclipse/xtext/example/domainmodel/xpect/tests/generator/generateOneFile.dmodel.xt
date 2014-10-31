@@ -2,7 +2,7 @@
 
 /*
 Test the full generated code
-XPECT generated ---
+XPECT !generated ---
 package pkg1;
 
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
