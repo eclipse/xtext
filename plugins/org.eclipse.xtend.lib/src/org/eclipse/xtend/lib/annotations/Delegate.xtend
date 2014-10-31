@@ -190,7 +190,7 @@ class DelegateProcessor implements TransformationParticipant<MutableMemberDeclar
 		}
 
 		def Set<? extends TypeReference> getImplementedInterfaces(TypeReference it) {
-			(#[it] + declaredSuperTypes.map[implementedInterfaces].flatten).filter[type instanceof InterfaceDeclaration].toSet 
+			(#[it] + declaredSuperTypes.filter[superType|superType != it].map[implementedInterfaces].flatten).filter[type instanceof InterfaceDeclaration].toSet 
 		}
 
 		def getDelegatedInterfaces(MemberDeclaration delegate) {

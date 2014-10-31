@@ -332,22 +332,28 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
     
     public Set<? extends TypeReference> getImplementedInterfaces(final TypeReference it) {
       Iterable<? extends TypeReference> _declaredSuperTypes = it.getDeclaredSuperTypes();
-      final Function1<TypeReference, Set<? extends TypeReference>> _function = new Function1<TypeReference, Set<? extends TypeReference>>() {
+      final Function1<TypeReference, Boolean> _function = new Function1<TypeReference, Boolean>() {
+        public Boolean apply(final TypeReference superType) {
+          return Boolean.valueOf((!Objects.equal(superType, it)));
+        }
+      };
+      Iterable<? extends TypeReference> _filter = IterableExtensions.filter(_declaredSuperTypes, _function);
+      final Function1<TypeReference, Set<? extends TypeReference>> _function_1 = new Function1<TypeReference, Set<? extends TypeReference>>() {
         public Set<? extends TypeReference> apply(final TypeReference it) {
           return Util.this.getImplementedInterfaces(it);
         }
       };
-      Iterable<Set<? extends TypeReference>> _map = IterableExtensions.map(_declaredSuperTypes, _function);
+      Iterable<Set<? extends TypeReference>> _map = IterableExtensions.map(_filter, _function_1);
       Iterable<TypeReference> _flatten = Iterables.<TypeReference>concat(_map);
       Iterable<TypeReference> _plus = Iterables.<TypeReference>concat(Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(it)), _flatten);
-      final Function1<TypeReference, Boolean> _function_1 = new Function1<TypeReference, Boolean>() {
+      final Function1<TypeReference, Boolean> _function_2 = new Function1<TypeReference, Boolean>() {
         public Boolean apply(final TypeReference it) {
           Type _type = it.getType();
           return Boolean.valueOf((_type instanceof InterfaceDeclaration));
         }
       };
-      Iterable<TypeReference> _filter = IterableExtensions.<TypeReference>filter(_plus, _function_1);
-      return IterableExtensions.<TypeReference>toSet(_filter);
+      Iterable<TypeReference> _filter_1 = IterableExtensions.<TypeReference>filter(_plus, _function_2);
+      return IterableExtensions.<TypeReference>toSet(_filter_1);
     }
     
     public Set<? extends TypeReference> getDelegatedInterfaces(final MemberDeclaration delegate) {

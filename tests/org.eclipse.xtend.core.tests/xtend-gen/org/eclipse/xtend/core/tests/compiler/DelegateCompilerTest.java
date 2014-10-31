@@ -1137,4 +1137,86 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void recursiveGenerics() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Delegate");
+      _builder.newLine();
+      _builder.append("interface Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def <T extends Comparable<T>> T foo(T t)");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Bar implements Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Delegate Bar bar");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final String text = _builder.toString();
+      XtendFile _file = this.file(text);
+      this._validationTestHelper.assertNoIssues(_file);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void genericsWithLowerBound() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Delegate");
+      _builder.newLine();
+      _builder.append("interface Matcher<T> {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("interface Matchers {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def <T> Matcher<T> both(Matcher<? super T> first, Matcher<? super T> second)");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Foo implements Matchers {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Delegate Matchers delegate");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final String text = _builder.toString();
+      XtendFile _file = this.file(text);
+      this._validationTestHelper.assertNoIssues(_file);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void noStackOverflowOnRecursiveSuperTypes() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Delegate");
+      _builder.newLine();
+      _builder.append("class Foo extends Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Delegate Foo foo");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final String text = _builder.toString();
+      this.file(text);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }
