@@ -189,8 +189,17 @@ class DelegateProcessor implements TransformationParticipant<MutableMemberDeclar
 			findAnnotation(findTypeGlobally(Delegate)).getClassArrayValue("value").toSet
 		}
 
-		def Set<? extends TypeReference> getImplementedInterfaces(TypeReference it) {
-			(#[it] + declaredSuperTypes.map[implementedInterfaces].flatten).filter[type instanceof InterfaceDeclaration].toSet 
+		def Set<TypeReference> getImplementedInterfaces(TypeReference it) {
+			val seen = newLinkedHashSet
+			collectAllSuperTypes(seen)
+			seen.filter[type instanceof InterfaceDeclaration].toSet
+		}
+		
+		private def void collectAllSuperTypes(TypeReference it, Set<TypeReference> seen) {
+			val cycle = !seen.add(it)
+			if (cycle)
+				return;
+			declaredSuperTypes.forEach[collectAllSuperTypes(seen)]
 		}
 
 		def getDelegatedInterfaces(MemberDeclaration delegate) {
