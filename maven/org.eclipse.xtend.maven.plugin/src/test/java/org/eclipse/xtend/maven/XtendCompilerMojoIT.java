@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Arrays;
 
 import junit.framework.Assert;
 
@@ -12,6 +13,8 @@ import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 import org.apache.maven.shared.utils.io.FileUtils;
 import org.junit.Test;
+
+import com.google.common.base.Objects;
 
 public class XtendCompilerMojoIT {
 
@@ -152,6 +155,35 @@ public class XtendCompilerMojoIT {
 		verifier.assertFilePresent(xtendTestGenDir + "/tests/XtendC.java");
 	}
 
+	@Test
+	public void readSymlinks() throws Exception {
+		String root = ResourceExtractor.simpleExtractResources(getClass(), ROOT).getAbsolutePath();
+		File link = new File(root + "/symlinks/src/main/java");
+		File link2 = new File(root + "/symlinks/src/test/java");
+		createSymLink(root + "/multisources/src/main/java/", link.getAbsolutePath());
+		createSymLink(root + "/multisources/src/test/java/", link2.getAbsolutePath());
+		try {
+			Verifier verifier = newVerifier(ROOT + "/symlinks");
+			verifier.setDebug(true);
+			verifier.executeGoal("test");
+			verifier.verifyErrorFreeLog();
+			String outputdir = verifier.getBasedir();
+
+			verifier.assertFilePresent(outputdir + "/src/main/generated-sources/xtend/test/XtendA.java");
+			verifier.assertFilePresent(outputdir + "/src/main/generated-sources/xtend/test/XtendC.java");
+			verifier.assertFilePresent(outputdir + "/src/main/generated-sources/xtend/test/.XtendA.java._trace");
+			verifier.assertFilePresent(outputdir + "/src/main/generated-sources/xtend/test/.XtendC.java._trace");
+
+			verifier.assertFilePresent(outputdir + "/src/test/generated-sources/xtend/foo/FooClass.java");
+			verifier.assertFilePresent(outputdir + "/src/test/generated-sources/xtend/foo/FooTest.java");
+			verifier.assertFilePresent(outputdir + "/src/test/generated-sources/xtend/foo/.FooClass.java._trace");
+			verifier.assertFilePresent(outputdir + "/src/test/generated-sources/xtend/foo/.FooTest.java._trace");
+		} finally {
+			link.delete();
+			link2.delete();
+		}
+	}
+
 	private void verifyErrorFreeLog(String pathToTestProject) throws IOException, VerificationException {
 		verifyErrorFreeLog(pathToTestProject, "verify");
 	}
@@ -170,6 +202,43 @@ public class XtendCompilerMojoIT {
 		// verifier.setDebugJvm(true);
 		// verifier.setForkJvm(false);
 		return verifier;
+	}
+
+	private boolean createSymLink(final String linkTarget, final String link) throws IOException {
+		File linkFile = new File(link);
+		if (linkFile.exists() && isSymlink(linkFile)) {
+			return true;
+		}
+
+		String[] cmd = { "ln", "-s", linkTarget, link };
+		try {
+			System.out.println("Exec:" + Arrays.toString(cmd));
+			final Process proc = Runtime.getRuntime().exec(cmd);
+			int _waitFor = proc.waitFor();
+			return (_waitFor == 0);
+		} catch (final Exception e) {
+			return false;
+		}
+
+	}
+
+	private boolean isSymlink(final File file) throws IOException {
+		File canon = null;
+		String _parent = file.getParent();
+		boolean _equals = Objects.equal(_parent, null);
+		if (_equals) {
+			canon = file;
+		} else {
+			File _parentFile = file.getParentFile();
+			File canonDir = _parentFile.getCanonicalFile();
+			String _name = file.getName();
+			File _file = new File(canonDir, _name);
+			canon = _file;
+		}
+		File _canonicalFile = canon.getCanonicalFile();
+		File _absoluteFile = canon.getAbsoluteFile();
+		boolean _equals_1 = _canonicalFile.equals(_absoluteFile);
+		return (!_equals_1);
 	}
 
 	public void assertFileContainsUTF16(Verifier verifier, String file, String contained) {
