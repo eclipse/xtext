@@ -487,7 +487,7 @@ class JavaASTFlattener extends ASTVisitor {
 				}
 			}
 			type.accept(this)
-			appendExtraDimensions(frag.extraDimensions)
+			appendExtraDimensions(frag.getExtraDimensions())
 			appendSpaceToBuffer
 			frag.accept(this)
 			appendLineWrapToBuffer
@@ -555,7 +555,7 @@ class JavaASTFlattener extends ASTVisitor {
 			if (!type.isMissingType()) {
 				type.accept(this)
 			}
-			appendExtraDimensions(frag.extraDimensions)
+			appendExtraDimensions(frag.getExtraDimensions())
 			appendSpaceToBuffer
 			frag.accept(this)
 			appendSpaceToBuffer
@@ -653,7 +653,7 @@ class JavaASTFlattener extends ASTVisitor {
 			}]
 		parameters.visitAllSeparatedByComma
 		appendToBuffer(")")
-		appendExtraDimensions(extraDimensions)
+		appendExtraDimensions(getExtraDimensions())
 		if (!thrownExceptions.isEmpty()) {
 			appendToBuffer(" throws ")
 			thrownExceptions.visitAllSeparatedByComma
@@ -679,7 +679,7 @@ class JavaASTFlattener extends ASTVisitor {
 		}
 		appendSpaceToBuffer
 		name.accept(this)
-		appendExtraDimensions(extraDimensions)
+		appendExtraDimensions(getExtraDimensions())
 		if (getInitializer() != null) {
 			appendToBuffer("=")
 			getInitializer.accept(this)
