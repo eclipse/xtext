@@ -10,6 +10,7 @@
         <bundles name="org.junit" versionRange="[3.8.2.v3_8_2_v20100427-1100]"/>
         <bundles name="org.eclipse.pde.junit.runtime"/>
         <features name="org.eclipse.jdt.feature.group" versionRange="[3.6.0,3.7.0)"/>
+        <features name="org.eclipse.platform.feature.group" versionRange="[3.6.0,3.7.0)"/>
       </repositories>
       <repositories location="http://download.eclipse.org/releases/helios">
         <bundles name="org.eclipse.draw2d.feature.group"/>

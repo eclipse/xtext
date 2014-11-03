@@ -10,7 +10,7 @@
         <bundles name="org.junit" versionRange="[4.10.0.v4_10_0_v20120426-0900]"/>
         <bundles name="org.eclipse.jdt.annotation" versionRange="[1.0.0,2.0.0)"/>
         <features name="org.eclipse.jdt.feature.group"/>
-        <features name="org.eclipse.platform.feature.group" versionRange="4.4.0"/>
+        <features name="org.eclipse.platform.feature.group" versionRange="4.5.0"/>
       </repositories>
       <repositories location="http://download.eclipse.org/eclipse/updates/4.2/">
         <bundles name="org.junit4"/>
