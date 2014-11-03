@@ -458,8 +458,18 @@ public class JvmModelGenerator implements IGenerator {
       _traceSignificant.append(_simpleName);
       childAppendable.append(" {");
       Iterable<JvmMember> _membersToBeCompiled = this.getMembersToBeCompiled(it);
-      Iterable<JvmOperation> _filter = Iterables.<JvmOperation>filter(_membersToBeCompiled, JvmOperation.class);
-      for (final JvmOperation operation : _filter) {
+      Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_membersToBeCompiled, JvmDeclaredType.class);
+      for (final JvmDeclaredType innerType : _filter) {
+        {
+          final ITreeAppendable innerTypeAppendable = childAppendable.trace(innerType);
+          innerTypeAppendable.increaseIndentation();
+          this.generateMember(innerType, innerTypeAppendable, config);
+          innerTypeAppendable.decreaseIndentation();
+        }
+      }
+      Iterable<JvmMember> _membersToBeCompiled_1 = this.getMembersToBeCompiled(it);
+      Iterable<JvmOperation> _filter_1 = Iterables.<JvmOperation>filter(_membersToBeCompiled_1, JvmOperation.class);
+      for (final JvmOperation operation : _filter_1) {
         this.generateAnnotationMethod(operation, childAppendable, config);
       }
       ITreeAppendable _newLine = childAppendable.newLine();

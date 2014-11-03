@@ -615,4 +615,37 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
+  
+  @Test
+  public void testInnerEnum() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("annotation A {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("enum B { C }");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("B b");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("public @interface A {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public enum B {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("C;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public A.B b();");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
 }
