@@ -102,6 +102,32 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/quickfix/QuickAssistInvocationContext.java" type="org.eclipse.xtext.ui.editor.quickfix.QuickAssistInvocationContext">
+        <filter id="1141899266">
+            <message_arguments>
+                <message_argument value="2.8"/>
+                <message_argument value="2.7"/>
+                <message_argument value="isCancelled()"/>
+            </message_arguments>
+        </filter>
+        <filter id="1141899266">
+            <message_arguments>
+                <message_argument value="2.8"/>
+                <message_argument value="2.7"/>
+                <message_argument value="isMarkedCancelled()"/>
+            </message_arguments>
+        </filter>
+        <filter id="1143996420">
+            <message_arguments>
+                <message_argument value="isCancelled()"/>
+            </message_arguments>
+        </filter>
+        <filter id="1143996420">
+            <message_arguments>
+                <message_argument value="isMarkedCancelled()"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtext/ui/editor/quickfix/XtextResourceMarkerAnnotationModel.java" type="org.eclipse.xtext.ui.editor.quickfix.XtextResourceMarkerAnnotationModel">
         <filter comment="Intentional extends clause" id="571473929">
             <message_arguments>
