@@ -145,6 +145,17 @@ class JvmModelTests extends AbstractXtendTestCase {
 	}
 	
 	@Test
+	def testEnumInAnnotationIsStatic() {
+		val inferred = '''
+			annotation Foo {
+				enum E { L0, L1 }
+			}
+		'''.toString.annotationType.inferredAnnotationType
+		val e = inferred.members.head as JvmEnumerationType
+		assertTrue(e.static)
+	}
+	
+	@Test
 	def testClassInInterfaceIsStatic() {
 		val inferred = '''
 			interface Foo {
