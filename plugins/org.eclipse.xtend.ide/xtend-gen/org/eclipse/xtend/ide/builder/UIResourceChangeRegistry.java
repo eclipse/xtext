@@ -65,10 +65,13 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, Resour
   
   private IWorkspace workspace;
   
+  private boolean loaded = false;
+  
   private final HashMultimap<IPath, URI> listeners = HashMultimap.<IPath, URI>create();
   
   public synchronized void resourceChanged(final IResourceChangeEvent event) {
     try {
+      this.ensureLoaded();
       IResourceDelta _delta = event.getDelta();
       _delta.accept(this);
     } catch (Throwable _e) {
@@ -77,9 +80,23 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, Resour
   }
   
   public synchronized void register(final IPath resourcePath, final XtendFile interestedFile) {
+    this.ensureLoaded();
     Resource _eResource = interestedFile.eResource();
     URI _uRI = _eResource.getURI();
     this.listeners.put(resourcePath, _uRI);
+  }
+  
+  private boolean ensureLoaded() {
+    boolean _xifexpression = false;
+    if ((!this.loaded)) {
+      boolean _xblockexpression = false;
+      {
+        this.load();
+        _xblockexpression = this.loaded = true;
+      }
+      _xifexpression = _xblockexpression;
+    }
+    return _xifexpression;
   }
   
   public boolean visit(final IResourceDelta delta) throws CoreException {
@@ -117,7 +134,6 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, Resour
   public void init(final IWorkspace workspace) {
     try {
       this.workspace = workspace;
-      this.load();
       workspace.addSaveParticipant(this.uiPlugin, new ISaveParticipant() {
         public void saving(final ISaveContext context) throws CoreException {
           UIResourceChangeRegistry.this.save();

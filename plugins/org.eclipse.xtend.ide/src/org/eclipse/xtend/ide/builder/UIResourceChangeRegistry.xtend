@@ -46,18 +46,29 @@ class UIResourceChangeRegistry implements IResourceChangeListener, ResourceChang
 	QueuedBuildData queue
 	@Inject
 	BuildScheduler scheduler
-	@Inject AbstractUIPlugin uiPlugin
+	@Inject 
+	AbstractUIPlugin uiPlugin
 	
 	IWorkspace workspace
+	boolean loaded = false
 
 	val listeners = HashMultimap.<IPath, URI>create
 	
 	override synchronized resourceChanged(IResourceChangeEvent event) {
+		ensureLoaded
 		event.delta.accept(this)
 	}
 
 	override synchronized void register(IPath resourcePath, XtendFile interestedFile) {
+		ensureLoaded
 		listeners.put(resourcePath, interestedFile.eResource.URI)
+	}
+	
+	private def ensureLoaded() {
+		if (!loaded) {
+			load
+			loaded = true
+		}
 	}
 
 	override visit(IResourceDelta delta) throws CoreException {
@@ -84,7 +95,6 @@ class UIResourceChangeRegistry implements IResourceChangeListener, ResourceChang
 	@Inject
 	def init(IWorkspace workspace) {
 		this.workspace = workspace
-		load
 		workspace.addSaveParticipant(uiPlugin, new ISaveParticipant() {
 			override saving(ISaveContext context) throws CoreException {
 				save
