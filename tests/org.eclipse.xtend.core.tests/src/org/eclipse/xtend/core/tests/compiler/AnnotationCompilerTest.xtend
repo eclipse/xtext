@@ -354,4 +354,21 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''')
 	}
+	
+	/// @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=448564
+	@Test def testInnerEnum() {
+		'''
+			annotation A {
+			    enum B { C }
+				B b
+			}
+		'''.assertCompilesTo('''
+			public @interface A {
+			  public enum B {
+			    C;
+			  }
+			  public A.B b();
+			}
+		''')
+	}
 }
