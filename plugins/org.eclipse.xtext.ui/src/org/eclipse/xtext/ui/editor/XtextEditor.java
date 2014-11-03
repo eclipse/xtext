@@ -241,14 +241,27 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 		}
 		removePropertyListener(dirtyListener);
 		callback.beforeSetInput(this);
-		boolean isReset = getEditorInput() != null;
-		if(isReset)
-			dirtyStateEditorSupport.removeDirtyStateSupport(this);
+		removeDirtyStateSupport();
 		super.doSetInput(input);
-		if(isReset) 
-			dirtyStateEditorSupport.initializeDirtyStateSupport(this);
+		initializeDirtyStateSupport();
 		callback.afterSetInput(this);
 		addPropertyListener(dirtyListener);
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	protected void removeDirtyStateSupport() {
+		if(getSourceViewer() != null && getEditorInput() != null)
+			dirtyStateEditorSupport.removeDirtyStateSupport(this);
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	protected void initializeDirtyStateSupport() {
+		if(getSourceViewer() != null && getEditorInput() != null) 
+			dirtyStateEditorSupport.initializeDirtyStateSupport(this);
 	}
 
 	@Override
@@ -490,7 +503,7 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 		installFoldingSupport(projectionViewer);
 		installHighlightingHelper();
 		installSelectionChangedListener();
-		dirtyStateEditorSupport.initializeDirtyStateSupport(this);
+		initializeDirtyStateSupport();
 		callback.afterCreatePartControl(this);
 	}
 
