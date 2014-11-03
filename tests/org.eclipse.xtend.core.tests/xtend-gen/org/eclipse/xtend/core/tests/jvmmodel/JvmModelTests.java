@@ -318,6 +318,30 @@ public class JvmModelTests extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testEnumInAnnotationIsStatic() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("annotation Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("enum E { L0, L1 }");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      String _string = _builder.toString();
+      XtendAnnotationType _annotationType = this.annotationType(_string);
+      final JvmAnnotationType inferred = this._iXtendJvmAssociations.getInferredAnnotationType(_annotationType);
+      EList<JvmMember> _members = inferred.getMembers();
+      JvmMember _head = IterableExtensions.<JvmMember>head(_members);
+      final JvmEnumerationType e = ((JvmEnumerationType) _head);
+      boolean _isStatic = e.isStatic();
+      Assert.assertTrue(_isStatic);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testClassInInterfaceIsStatic() {
     try {
       StringConcatenation _builder = new StringConcatenation();
