@@ -11,6 +11,7 @@
         <bundles name="org.junit"/>
         <bundles name="org.eclipse.jdt.annotation"/>
         <features name="org.eclipse.jdt.feature.group"/>
+        <features name="org.eclipse.platform.feature.group" versionRange="[4.2.0,4.3.0)"/>
       </repositories>
       <repositories location="http://download.eclipse.org/releases/juno/">
         <bundles name="org.eclipse.m2e.core"/>
