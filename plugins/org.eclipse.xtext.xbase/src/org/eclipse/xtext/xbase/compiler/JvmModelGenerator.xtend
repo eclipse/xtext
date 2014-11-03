@@ -232,6 +232,9 @@ class JvmModelGenerator implements IGenerator {
 		childAppendable.append("@interface ")
 		childAppendable.traceSignificant(it).append(simpleName)
 		childAppendable.append(" {")
+		for (innerType: membersToBeCompiled.filter(JvmDeclaredType)) {
+			generateMember(innerType, childAppendable, config)
+		}
 		for (operation : membersToBeCompiled.filter(JvmOperation)) {
 			generateAnnotationMethod(operation, childAppendable, config)
 		}
