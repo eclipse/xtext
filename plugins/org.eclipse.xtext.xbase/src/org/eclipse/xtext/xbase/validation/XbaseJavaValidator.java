@@ -1088,10 +1088,19 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	}
 
 	@Check
-	public  void checkLocalUsageOfDeclared(XVariableDeclaration variableDeclaration) {
+	public void checkLocalUsageOfDeclared(XVariableDeclaration variableDeclaration) {
 		if(!isIgnored(UNUSED_LOCAL_VARIABLE) && !isLocallyUsed(variableDeclaration, variableDeclaration.eContainer())){
 			String message = "The value of the local variable " + variableDeclaration.getName() + " is not used";
 			addIssueToState(UNUSED_LOCAL_VARIABLE, message, XbasePackage.Literals.XVARIABLE_DECLARATION__NAME);
+		}
+	}
+	
+	@Check
+	public void checkLocalUsageOfSwitchParameter(XSwitchExpression switchExpression) {
+		JvmFormalParameter switchParam = switchExpression.getDeclaredParam();
+		if(!isIgnored(UNUSED_LOCAL_VARIABLE) && switchParam != null && !isLocallyUsed(switchParam, switchExpression)){
+			String message = "The value of the local variable " + switchParam.getName() + " is not used";
+			addIssue(message, switchParam, TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME, UNUSED_LOCAL_VARIABLE);
 		}
 	}
 	

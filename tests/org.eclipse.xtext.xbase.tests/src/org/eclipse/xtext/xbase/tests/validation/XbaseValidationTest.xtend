@@ -532,7 +532,7 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 	@Test def void testIncompleteCasesOnEnum() {
 		'''
 		{
-			switch x : org.eclipse.xtext.xbase.tests.validation.Color.RED {
+			switch org.eclipse.xtext.xbase.tests.validation.Color.RED {
 				case RED: {
 					1
 				}
@@ -544,7 +544,7 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 	@Test def void testIncompleteCasesOnEnum_2() {
 		'''
 		{
-			switch x : org.eclipse.xtext.xbase.tests.validation.Color.RED {
+			switch org.eclipse.xtext.xbase.tests.validation.Color.RED {
 				case RED: {
 					1
 				}
@@ -563,7 +563,7 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 		'''
 		{
 			val y = Integer.valueOf("1")
-			switch x : org.eclipse.xtext.xbase.tests.validation.Color.RED {
+			switch org.eclipse.xtext.xbase.tests.validation.Color.RED {
 				case RED: {
 					1
 				}
@@ -578,7 +578,7 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 	@Test def void testIncompleteCasesOnEnum_4() {
 		'''
 		{
-			switch x : org.eclipse.xtext.xbase.tests.validation.Color.RED {
+			switch org.eclipse.xtext.xbase.tests.validation.Color.RED {
 				case RED: {
 					1
 				}
@@ -593,7 +593,7 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 	@Test def void testIncompleteCasesOnEnum_5() {
 		'''
 		{
-			switch x : org.eclipse.xtext.xbase.tests.validation.Color.RED {
+			switch org.eclipse.xtext.xbase.tests.validation.Color.RED {
 			}
 		}
 		'''.expression.assertWarning(XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.INCOMPLETE_CASES_ON_ENUM)
@@ -602,7 +602,7 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 	@Test def void testIncompleteCasesOnEnum_6() {
 		'''
 		{
-			switch x : org.eclipse.xtext.xbase.tests.validation.Color.RED {
+			switch org.eclipse.xtext.xbase.tests.validation.Color.RED {
 				default: {
 					1
 				}
@@ -635,7 +635,7 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 			switch Object x : org.eclipse.xtext.xbase.tests.validation.Color.RED {
 			}
 		}
-		'''.expression.assertNoIssues
+		'''.expression.assertNoIssue(XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.INCOMPLETE_CASES_ON_ENUM)
 	}
 	
 	@Test def void testIncompleteCasesOnEnum_10() {
@@ -644,7 +644,7 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 			switch (Object x : org.eclipse.xtext.xbase.tests.validation.Color.RED) {
 			}
 		}
-		'''.expression.assertNoIssues
+		'''.expression.assertNoIssue(XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.INCOMPLETE_CASES_ON_ENUM)
 	}
 	
 	@Test def void testIncompleteCasesOnEnum_11() {
@@ -659,58 +659,80 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 		'''.expression.assertNoIssues
 	}
 	
-	@Test def void testSwitchDeclaredParameter() {
-		'''
-		{
-			switch Object x : "lalala" {
+	@Test def void testSwitchNoParameter() {
+		val block = '''
+			{
+				switch "lalala" {
+				}
 			}
-		}
-		'''.expression.assertNoIssues
+		'''.expression
+		block.assertNoIssues
+	}
+	
+	@Test def void testSwitchDeclaredParameter() {
+		val block = '''
+			{
+				switch Object x : "lalala" {
+				}
+			}
+		'''.expression
+		block.assertNoErrors
+		block.assertWarning(TypesPackage.Literals.JVM_FORMAL_PARAMETER, IssueCodes.UNUSED_LOCAL_VARIABLE)
 	}
 	
 	@Test def void testSwitchDeclaredParameter_1() {
-		'''
-		{
-			switch String x : "lalala" {
+		val block = '''
+			{
+				switch String x : "lalala" {
+				}
 			}
-		}
-		'''.expression.assertNoIssues
+		'''.expression
+		block.assertNoErrors
+		block.assertWarning(TypesPackage.Literals.JVM_FORMAL_PARAMETER, IssueCodes.UNUSED_LOCAL_VARIABLE)
 	}
 	
 	@Test def void testSwitchDeclaredParameter_2() {
-		'''
-		{
-			switch Integer x : "lalala" {
+		val block = '''
+			{
+				switch Integer x : "lalala" {
+				}
 			}
-		}
-		'''.expression.assertError(XbasePackage.Literals.XSTRING_LITERAL, IssueCodes.INCOMPATIBLE_TYPES)
+		'''.expression
+		block.assertError(XbasePackage.Literals.XSTRING_LITERAL, IssueCodes.INCOMPATIBLE_TYPES)
+		block.assertWarning(TypesPackage.Literals.JVM_FORMAL_PARAMETER, IssueCodes.UNUSED_LOCAL_VARIABLE)
 	}
 	
 	@Test def void testSwitchDeclaredParameter_3() {
-		'''
-		{
-			switch (Object x : "lalala") {
+		val block = '''
+			{
+				switch (Object x : "lalala") {
+				}
 			}
-		}
-		'''.expression.assertNoIssues
+		'''.expression
+		block.assertNoErrors
+		block.assertWarning(TypesPackage.Literals.JVM_FORMAL_PARAMETER, IssueCodes.UNUSED_LOCAL_VARIABLE)
 	}
 	
 	@Test def void testSwitchDeclaredParameter_4() {
-		'''
-		{
-			switch (String x : "lalala") {
+		val block = '''
+			{
+				switch (String x : "lalala") {
+				}
 			}
-		}
-		'''.expression.assertNoIssues
+		'''.expression
+		block.assertNoErrors
+		block.assertWarning(TypesPackage.Literals.JVM_FORMAL_PARAMETER, IssueCodes.UNUSED_LOCAL_VARIABLE)
 	}
 	
 	@Test def void testSwitchDeclaredParameter_5() {
-		'''
-		{
-			switch (Integer x : "lalala") {
+		val block = '''
+			{
+				switch (Integer x : "lalala") {
+				}
 			}
-		}
-		'''.expression.assertError(XbasePackage.Literals.XSTRING_LITERAL, IssueCodes.INCOMPATIBLE_TYPES)
+		'''.expression
+		block.assertError(XbasePackage.Literals.XSTRING_LITERAL, IssueCodes.INCOMPATIBLE_TYPES)
+		block.assertWarning(TypesPackage.Literals.JVM_FORMAL_PARAMETER, IssueCodes.UNUSED_LOCAL_VARIABLE)
 	}
 	
 	@Test def void testBasicForLoop_InvalidInnerExpression() {
@@ -720,6 +742,15 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 			}
 		}
 		'''.expression.assertNoIssues
+	}
+	
+	@Test def void testBasicForLoop_UnusedVariable() {
+		'''
+		{
+			for(var condition = true;;) {
+			}
+		}
+		'''.expression.assertWarning(XbasePackage.Literals.XVARIABLE_DECLARATION, IssueCodes.UNUSED_LOCAL_VARIABLE)
 	}
 	
 	@Test def void testSynchronizedExpression_1() {
