@@ -61,7 +61,6 @@ annotation ToString {
  * @since 2.7
  */
 @Beta
-@GwtCompatible
 class ToStringConfiguration {
 	val boolean skipNulls
 	val boolean singleLine
@@ -100,7 +99,6 @@ class ToStringConfiguration {
  * @since 2.7
  */
 @Beta
-@GwtCompatible
 class ToStringProcessor extends AbstractClassProcessor {
 
 	override doTransform(MutableClassDeclaration it, extension TransformationContext context) {
@@ -123,7 +121,6 @@ class ToStringProcessor extends AbstractClassProcessor {
 	* @since 2.7
 	*/
 	@Beta
-	@GwtCompatible
 	static class Util {
 		extension TransformationContext context
 

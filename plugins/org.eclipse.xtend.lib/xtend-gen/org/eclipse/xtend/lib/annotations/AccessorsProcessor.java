@@ -1,7 +1,6 @@
 package org.eclipse.xtend.lib.annotations;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Objects;
 import java.util.Arrays;
 import java.util.Collections;
@@ -45,14 +44,12 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
  * @since 2.7
  */
 @Beta
-@GwtCompatible
 @SuppressWarnings("all")
 public class AccessorsProcessor implements TransformationParticipant<MutableMemberDeclaration> {
   /**
    * @since 2.7
    */
   @Beta
-  @GwtCompatible
   public static class Util {
     @Extension
     private TransformationContext context;

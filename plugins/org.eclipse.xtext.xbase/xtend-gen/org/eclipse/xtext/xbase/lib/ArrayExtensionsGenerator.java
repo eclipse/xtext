@@ -159,6 +159,8 @@ public class ArrayExtensionsGenerator {
     _builder.newLine();
     _builder.append("@Inline(\"$1.clone()\")");
     _builder.newLine();
+    _builder.append("@GwtIncompatible(\"clone\")");
+    _builder.newLine();
     _builder.append("public static ");
     _builder.append(string, "");
     _builder.append("[] clone(");
@@ -176,6 +178,12 @@ public class ArrayExtensionsGenerator {
   public CharSequence generateEquals(final String string) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* Returns whether the array and the given other object are identical.");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("*");
     _builder.newLine();
     _builder.append(" ");
     _builder.append("* Delegates to {@link Object#equals(Object)}");
@@ -196,7 +204,7 @@ public class ArrayExtensionsGenerator {
     _builder.append("*            the other element to compare to");
     _builder.newLine();
     _builder.append(" ");
-    _builder.append("* @return the hash code");
+    _builder.append("* @return whether the two given argument are identical ");
     _builder.newLine();
     _builder.append(" ");
     _builder.append("* @since 2.5");

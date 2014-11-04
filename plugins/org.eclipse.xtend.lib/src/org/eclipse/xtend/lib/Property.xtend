@@ -31,7 +31,6 @@ annotation Property {
  * @since 2.7
  */
 @Deprecated
-@GwtCompatible
 class PropertyProcessor extends AbstractFieldProcessor {
 	
 	override doTransform(MutableFieldDeclaration it, extension TransformationContext context) {
