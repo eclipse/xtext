@@ -44,7 +44,7 @@ import com.google.common.annotations.GwtCompatible;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.3
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 public class StringConcatenation implements CharSequence {
 
 	/**
@@ -52,7 +52,7 @@ public class StringConcatenation implements CharSequence {
 	 * <code>System.getProperty("line.separator")</code>.
 	 * @since 2.3
 	 */
-	public static final String DEFAULT_LINE_DELIMITER = System.getProperty("line.separator");
+	public static final String DEFAULT_LINE_DELIMITER = DefaultLineDelimiter.get();
 
 	/**
 	 * The complete content of this sequence. It may contain insignificant trailing parts that are not part of the final
@@ -208,7 +208,7 @@ public class StringConcatenation implements CharSequence {
 		for (int i = segments.size() - 1; i >= 0; i--) {
 			String segment = segments.get(i);
 			for (int j = 0; j < segment.length(); j++) {
-				if (!Character.isWhitespace(segment.charAt(j))) {
+				if (!WhitespaceMatcher.isWhiteSpace(segment.charAt(j))) {
 					append(object, indentation, i + 1);
 					return;
 				}
@@ -313,7 +313,7 @@ public class StringConcatenation implements CharSequence {
 				return;
 			}
 			for (int j = 0; j < segment.length(); j++) {
-				if (!Character.isWhitespace(segment.charAt(j))) {
+				if (!WhitespaceMatcher.isWhiteSpace(segment.charAt(j))) {
 					newLine();
 					return;
 				}
@@ -350,7 +350,7 @@ public class StringConcatenation implements CharSequence {
 				return segments.subList(0, i + 1);
 			}
 			for (int j = 0; j < segment.length(); j++) {
-				if (!Character.isWhitespace(segment.charAt(j))) {
+				if (!WhitespaceMatcher.isWhiteSpace(segment.charAt(j))) {
 					return segments;
 				}
 			}

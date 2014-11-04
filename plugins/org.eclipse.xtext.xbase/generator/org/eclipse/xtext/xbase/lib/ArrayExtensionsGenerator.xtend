@@ -83,6 +83,7 @@ class ArrayExtensionsGenerator {
 		 */
 		@Pure
 		@Inline("$1.clone()")
+		@GwtIncompatible("clone")
 		public static «string»[] clone(«string»[] array) {
 			return array.clone();
 		}
