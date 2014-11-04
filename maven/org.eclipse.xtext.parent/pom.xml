@@ -32,6 +32,7 @@
 		<module>../org.eclipse.xtend.maven.plugin</module>
 		<module>../org.eclipse.xtend.maven.archetype</module>
 		<module>../org.eclipse.xtend.maven.android.archetype</module>
+		<module>../org.eclipse.xtend.lib.gwt.test</module>
 	</modules>
 	<name>Xtext Parent/Container</name>
 
