@@ -78,7 +78,6 @@ annotation Delegate {
  * @since 2.7
  */
 @Beta
-@GwtCompatible
 class DelegateProcessor implements TransformationParticipant<MutableMemberDeclaration> {
 
 	override doTransform(List<? extends MutableMemberDeclaration> elements, extension TransformationContext context) {
@@ -94,7 +93,6 @@ class DelegateProcessor implements TransformationParticipant<MutableMemberDeclar
 	 * @since 2.7
  	*/
  	@Beta
-	@GwtCompatible
 	static class Util {
 		extension TransformationContext context
 

@@ -30,17 +30,7 @@ import java.util.IdentityHashMap
 @GwtCompatible
 final class ToStringBuilder {
 
-	static extension ToStringContext = ToStringContext.instance
-
-	private static def gwtCompatibleSimpleName(Class<?> clazz) {
-		var name = clazz.name.replaceAll("\\$[0-9]+", "\\$")
-		var start = name.lastIndexOf('$')
-		if (start == -1) {
-			start = name.lastIndexOf('.')
-		}
-		val simpleName = name.substring(start + 1)
-		return if(simpleName.empty) "Anonymous" else simpleName
-	}
+	static extension ToStringContext = ToStringContext.INSTANCE
 
 	val Object instance
 	val String typeName
@@ -58,7 +48,7 @@ final class ToStringBuilder {
 	 */
 	new(Object instance) {
 		this.instance = instance
-		this.typeName = instance.class.gwtCompatibleSimpleName
+		this.typeName = instance.class.simpleName
 	}
 
 	/**
@@ -117,6 +107,7 @@ final class ToStringBuilder {
 		instance.class.allDeclaredFields.findFirst[name == fieldName].addField
 	}
 
+	@GwtIncompatible("java.lang.reflect.Field")
 	private def addField(Field field) {
 		if (!Modifier.isStatic(field.modifiers)) {
 			field.accessible = true
@@ -231,8 +222,7 @@ final class ToStringBuilder {
 
 	private def void serializeIterable(Iterable<?> object, ToStringBuilder.IndentationAwareStringBuilder sb) {
 		val iterator = object.iterator
-		val simpleName = object.class.gwtCompatibleSimpleName
-		sb.append(simpleName).append(" (")
+		sb.append(object.class.simpleName).append(" (")
 		if (multiLine) {
 			sb.increaseIndent
 		}
@@ -257,9 +247,10 @@ final class ToStringBuilder {
 	}
 
 	private def toSimpleReferenceString(Object obj) {
-		obj.class.gwtCompatibleSimpleName + "@" + System.identityHashCode(obj)
+		obj.class.simpleName + "@" + System.identityHashCode(obj)
 	}
 
+	@GwtIncompatible("java.lang.reflect.Field")
 	private def getAllDeclaredFields(Class<?> clazz) {
 		var current = clazz
 		val result = <Field>newArrayList
@@ -270,13 +261,11 @@ final class ToStringBuilder {
 		return result
 	}
 
-	@GwtCompatible
 	private static final class Part {
 		String fieldName
 		Object value
 	}
 
-	@GwtCompatible
 	private static class IndentationAwareStringBuilder {
 		val builder = new StringBuilder
 		val indentationString = "  "
@@ -317,49 +306,26 @@ final class ToStringBuilder {
 
 }
 
-@GwtCompatible
-package abstract class ToStringContext {
-
-	def static instance() {
-		try {
-			ToStringContext.classLoader.loadClass("org.eclipse.xtext.xbase.lib.util.ThreadLocalToStringContext").newInstance as ToStringContext
-		} catch (ClassNotFoundException e) {
-			ToStringContext.classLoader.loadClass("org.eclipse.xtext.xbase.lib.util.GwtToStringContext").newInstance as ToStringContext
-		}
-	}
-
-	def boolean startProcessing(Object obj) {
-		currentlyProcessed.put(obj, Boolean.TRUE) == null
-	}
-
-	def void endProcessing(Object obj) {
-		currentlyProcessed.remove(obj)
-	}
-
-	def abstract IdentityHashMap<Object, Boolean> getCurrentlyProcessed()
-}
-
-package class ThreadLocalToStringContext extends ToStringContext {
-
+/*
+ * On GWT we just use a static variable instead of a ThreadLocal
+ */
+@GwtCompatible(emulated=true)
+package class ToStringContext {
+	
+	public static val INSTANCE = new ToStringContext
+	
 	static val currentlyProcessed = new ThreadLocal<IdentityHashMap<Object, Boolean>>() {
 		override initialValue() {
 			new IdentityHashMap
 		}
 	}
 
-	override getCurrentlyProcessed() {
-		ThreadLocalToStringContext.currentlyProcessed.get
+	def boolean startProcessing(Object obj) {
+		currentlyProcessed.get.put(obj, Boolean.TRUE) == null
 	}
 
-}
-
-@GwtCompatible
-package class GwtToStringContext extends ToStringContext {
-
-	static val currentlyProcessed = new IdentityHashMap<Object, Boolean>
-
-	override getCurrentlyProcessed() {
-		GwtToStringContext.currentlyProcessed
+	def void endProcessing(Object obj) {
+		currentlyProcessed.get.remove(obj)
 	}
 
 }

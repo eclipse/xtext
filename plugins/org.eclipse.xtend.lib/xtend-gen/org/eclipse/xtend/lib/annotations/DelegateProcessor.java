@@ -1,7 +1,6 @@
 package org.eclipse.xtend.lib.annotations;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
@@ -49,14 +48,12 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  * @since 2.7
  */
 @Beta
-@GwtCompatible
 @SuppressWarnings("all")
 public class DelegateProcessor implements TransformationParticipant<MutableMemberDeclaration> {
   /**
    * @since 2.7
    */
   @Beta
-  @GwtCompatible
   public static class Util {
     @Extension
     private TransformationContext context;
@@ -605,8 +602,8 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
                 _builder.append(_simpleName, "");
                 _builder.append("(");
                 Iterable<? extends ParameterDeclaration> _parameters = declaration.getParameters();
-                final Function1<ParameterDeclaration, CharSequence> _function = new Function1<ParameterDeclaration, CharSequence>() {
-                  public CharSequence apply(final ParameterDeclaration it) {
+                final Function1<ParameterDeclaration, String> _function = new Function1<ParameterDeclaration, String>() {
+                  public String apply(final ParameterDeclaration it) {
                     return it.getSimpleName();
                   }
                 };
@@ -747,8 +744,8 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
           _builder_2.append(_simpleName_4, "");
           _builder_2.append("\", new Class[]{");
           Iterable<? extends ParameterDeclaration> _parameters_1 = method.getParameters();
-          final Function1<ParameterDeclaration, CharSequence> _function_1 = new Function1<ParameterDeclaration, CharSequence>() {
-            public CharSequence apply(final ParameterDeclaration it) {
+          final Function1<ParameterDeclaration, String> _function_1 = new Function1<ParameterDeclaration, String>() {
+            public String apply(final ParameterDeclaration it) {
               TypeReference _type = it.getType();
               Type _type_1 = _type.getType();
               String _simpleName = _type_1.getSimpleName();
@@ -759,8 +756,8 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
           _builder_2.append(_join, "");
           _builder_2.append("}, new Object[]{");
           Iterable<? extends ParameterDeclaration> _parameters_2 = method.getParameters();
-          final Function1<ParameterDeclaration, CharSequence> _function_2 = new Function1<ParameterDeclaration, CharSequence>() {
-            public CharSequence apply(final ParameterDeclaration it) {
+          final Function1<ParameterDeclaration, String> _function_2 = new Function1<ParameterDeclaration, String>() {
+            public String apply(final ParameterDeclaration it) {
               return it.getSimpleName();
             }
           };
