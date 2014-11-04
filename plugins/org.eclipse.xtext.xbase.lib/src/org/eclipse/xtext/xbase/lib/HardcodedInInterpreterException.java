@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import com.google.common.annotations.GwtCompatible;
+
 /**
  * This exception is thrown if a method was invoked directly though it is usually inlined by the compiler by means of
  * the {@link Inline @Inline annotation} and executed in a custom manner by the interpreter.
@@ -14,6 +16,7 @@ package org.eclipse.xtext.xbase.lib;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.6
  */
+@GwtCompatible
 class HardcodedInInterpreterException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;

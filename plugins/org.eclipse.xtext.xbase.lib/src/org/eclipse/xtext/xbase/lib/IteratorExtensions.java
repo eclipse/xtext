@@ -24,6 +24,7 @@ import org.eclipse.xtext.xbase.lib.internal.FunctionDelegate;
 import org.eclipse.xtext.xbase.lib.internal.KeyComparator;
 
 import com.google.common.annotations.GwtCompatible;
+import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicates;
 import com.google.common.collect.AbstractIterator;
@@ -309,6 +310,7 @@ import com.google.common.collect.Sets;
 	 *         type. Never <code>null</code>.
 	 */
 	@Pure
+	@GwtIncompatible("Class.isInstance")
 	@Inline(value="$3.$4filter($1, $2)", imported=Iterators.class)
 	public static <T> Iterator<T> filter(Iterator<?> unfiltered, Class<T> type) {
 		return Iterators.filter(unfiltered, type);

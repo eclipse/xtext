@@ -78,7 +78,6 @@ enum AccessorType {
  * @since 2.7
  */
 @Beta
-@GwtCompatible
 class AccessorsProcessor implements TransformationParticipant<MutableMemberDeclaration> {
 
 	override doTransform(List<? extends MutableMemberDeclaration> elements, extension TransformationContext context) {
@@ -110,7 +109,6 @@ class AccessorsProcessor implements TransformationParticipant<MutableMemberDecla
 	 * @since 2.7
 	 */
 	@Beta
-	@GwtCompatible
 	static class Util {
 		extension TransformationContext context
 

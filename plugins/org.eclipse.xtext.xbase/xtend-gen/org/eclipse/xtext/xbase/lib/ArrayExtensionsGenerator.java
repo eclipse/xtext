@@ -159,6 +159,8 @@ public class ArrayExtensionsGenerator {
     _builder.newLine();
     _builder.append("@Inline(\"$1.clone()\")");
     _builder.newLine();
+    _builder.append("@GwtIncompatible(\"clone\")");
+    _builder.newLine();
     _builder.append("public static ");
     _builder.append(string, "");
     _builder.append("[] clone(");

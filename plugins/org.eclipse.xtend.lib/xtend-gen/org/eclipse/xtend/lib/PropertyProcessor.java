@@ -1,6 +1,5 @@
 package org.eclipse.xtend.lib;
 
-import com.google.common.annotations.GwtCompatible;
 import org.eclipse.xtend.lib.annotations.AccessorsProcessor;
 import org.eclipse.xtend.lib.macro.AbstractFieldProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
@@ -13,7 +12,6 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
  * @since 2.7
  */
 @Deprecated
-@GwtCompatible
 @SuppressWarnings("all")
 public class PropertyProcessor extends AbstractFieldProcessor {
   public void doTransform(final MutableFieldDeclaration it, @Extension final TransformationContext context) {
