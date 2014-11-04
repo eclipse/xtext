@@ -1,7 +1,6 @@
 package org.eclipse.xtend.lib.annotations;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
@@ -49,14 +48,12 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  * @since 2.7
  */
 @Beta
-@GwtCompatible
 @SuppressWarnings("all")
 public class DelegateProcessor implements TransformationParticipant<MutableMemberDeclaration> {
   /**
    * @since 2.7
    */
   @Beta
-  @GwtCompatible
   public static class Util {
     @Extension
     private TransformationContext context;

@@ -8,7 +8,7 @@
 package org.eclipse.xtext.xbase.lib;
 
 import com.google.common.annotations.GwtCompatible;
-
+import com.google.common.annotations.GwtIncompatible;
 /**
  * An extension library for arrays, to be used with Xtend. It allows to use an array without converting it to a list
  * first.
@@ -56,6 +56,7 @@ public class ArrayExtensions {
 	 */
 	@Pure
 	@Inline("$1.clone()")
+	@GwtIncompatible("clone")
 	public static <T> T[] clone(T[] array) {
 		return array.clone();
 	}
@@ -89,7 +90,7 @@ public class ArrayExtensions {
 	
 	/**
 	 * Returns whether the array and the given other object are identical.
-	 * 
+	 *
 	 * Delegates to {@link Object#equals(Object)}
 	 * 
 	 * @param array
@@ -158,7 +159,7 @@ public class ArrayExtensions {
 	
 	/**
 	 * Returns whether the array and the given other object are identical.
-	 * 
+	 *
 	 * Delegates to {@link Object#equals(Object)}
 	 * 
 	 * @param array
@@ -184,6 +185,7 @@ public class ArrayExtensions {
 	 */
 	@Pure
 	@Inline("$1.clone()")
+	@GwtIncompatible("clone")
 	public static boolean[] clone(boolean[] array) {
 		return array.clone();
 	}
@@ -241,7 +243,7 @@ public class ArrayExtensions {
 	
 	/**
 	 * Returns whether the array and the given other object are identical.
-	 * 
+	 *
 	 * Delegates to {@link Object#equals(Object)}
 	 * 
 	 * @param array
@@ -267,6 +269,7 @@ public class ArrayExtensions {
 	 */
 	@Pure
 	@Inline("$1.clone()")
+	@GwtIncompatible("clone")
 	public static double[] clone(double[] array) {
 		return array.clone();
 	}
@@ -324,7 +327,7 @@ public class ArrayExtensions {
 	
 	/**
 	 * Returns whether the array and the given other object are identical.
-	 * 
+	 *
 	 * Delegates to {@link Object#equals(Object)}
 	 * 
 	 * @param array
@@ -350,6 +353,7 @@ public class ArrayExtensions {
 	 */
 	@Pure
 	@Inline("$1.clone()")
+	@GwtIncompatible("clone")
 	public static float[] clone(float[] array) {
 		return array.clone();
 	}
@@ -407,7 +411,7 @@ public class ArrayExtensions {
 	
 	/**
 	 * Returns whether the array and the given other object are identical.
-	 * 
+	 *
 	 * Delegates to {@link Object#equals(Object)}
 	 * 
 	 * @param array
@@ -433,6 +437,7 @@ public class ArrayExtensions {
 	 */
 	@Pure
 	@Inline("$1.clone()")
+	@GwtIncompatible("clone")
 	public static long[] clone(long[] array) {
 		return array.clone();
 	}
@@ -490,7 +495,7 @@ public class ArrayExtensions {
 	
 	/**
 	 * Returns whether the array and the given other object are identical.
-	 * 
+	 *
 	 * Delegates to {@link Object#equals(Object)}
 	 * 
 	 * @param array
@@ -516,6 +521,7 @@ public class ArrayExtensions {
 	 */
 	@Pure
 	@Inline("$1.clone()")
+	@GwtIncompatible("clone")
 	public static int[] clone(int[] array) {
 		return array.clone();
 	}
@@ -573,7 +579,7 @@ public class ArrayExtensions {
 	
 	/**
 	 * Returns whether the array and the given other object are identical.
-	 * 
+	 *
 	 * Delegates to {@link Object#equals(Object)}
 	 * 
 	 * @param array
@@ -599,6 +605,7 @@ public class ArrayExtensions {
 	 */
 	@Pure
 	@Inline("$1.clone()")
+	@GwtIncompatible("clone")
 	public static char[] clone(char[] array) {
 		return array.clone();
 	}
@@ -656,7 +663,7 @@ public class ArrayExtensions {
 	
 	/**
 	 * Returns whether the array and the given other object are identical.
-	 * 
+	 *
 	 * Delegates to {@link Object#equals(Object)}
 	 * 
 	 * @param array
@@ -682,6 +689,7 @@ public class ArrayExtensions {
 	 */
 	@Pure
 	@Inline("$1.clone()")
+	@GwtIncompatible("clone")
 	public static short[] clone(short[] array) {
 		return array.clone();
 	}
@@ -739,7 +747,7 @@ public class ArrayExtensions {
 	
 	/**
 	 * Returns whether the array and the given other object are identical.
-	 * 
+	 *
 	 * Delegates to {@link Object#equals(Object)}
 	 * 
 	 * @param array
@@ -765,6 +773,7 @@ public class ArrayExtensions {
 	 */
 	@Pure
 	@Inline("$1.clone()")
+	@GwtIncompatible("clone")
 	public static byte[] clone(byte[] array) {
 		return array.clone();
 	}
