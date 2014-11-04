@@ -1259,7 +1259,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.append("{");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("switch x : org.eclipse.xtext.xbase.tests.validation.Color.RED {");
+      _builder.append("switch org.eclipse.xtext.xbase.tests.validation.Color.RED {");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("case RED: {");
@@ -1289,7 +1289,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.append("{");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("switch x : org.eclipse.xtext.xbase.tests.validation.Color.RED {");
+      _builder.append("switch org.eclipse.xtext.xbase.tests.validation.Color.RED {");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("case RED: {");
@@ -1340,7 +1340,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.append("val y = Integer.valueOf(\"1\")");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("switch x : org.eclipse.xtext.xbase.tests.validation.Color.RED {");
+      _builder.append("switch org.eclipse.xtext.xbase.tests.validation.Color.RED {");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("case RED: {");
@@ -1379,7 +1379,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.append("{");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("switch x : org.eclipse.xtext.xbase.tests.validation.Color.RED {");
+      _builder.append("switch org.eclipse.xtext.xbase.tests.validation.Color.RED {");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("case RED: {");
@@ -1418,7 +1418,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.append("{");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("switch x : org.eclipse.xtext.xbase.tests.validation.Color.RED {");
+      _builder.append("switch org.eclipse.xtext.xbase.tests.validation.Color.RED {");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("}");
@@ -1439,7 +1439,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.append("{");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("switch x : org.eclipse.xtext.xbase.tests.validation.Color.RED {");
+      _builder.append("switch org.eclipse.xtext.xbase.tests.validation.Color.RED {");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("default: {");
@@ -1519,7 +1519,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.append("}");
       _builder.newLine();
       XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoIssues(_expression);
+      this._validationTestHelper.assertNoIssue(_expression, XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.INCOMPLETE_CASES_ON_ENUM);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1540,7 +1540,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.append("}");
       _builder.newLine();
       XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoIssues(_expression);
+      this._validationTestHelper.assertNoIssue(_expression, XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.INCOMPLETE_CASES_ON_ENUM);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1577,6 +1577,27 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testSwitchNoParameter() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("switch \"lalala\" {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XExpression block = this.expression(_builder);
+      this._validationTestHelper.assertNoIssues(block);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testSwitchDeclaredParameter() {
     try {
       StringConcatenation _builder = new StringConcatenation();
@@ -1590,8 +1611,9 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoIssues(_expression);
+      final XExpression block = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(block);
+      this._validationTestHelper.assertWarning(block, TypesPackage.Literals.JVM_FORMAL_PARAMETER, IssueCodes.UNUSED_LOCAL_VARIABLE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1611,8 +1633,9 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoIssues(_expression);
+      final XExpression block = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(block);
+      this._validationTestHelper.assertWarning(block, TypesPackage.Literals.JVM_FORMAL_PARAMETER, IssueCodes.UNUSED_LOCAL_VARIABLE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1632,8 +1655,9 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XSTRING_LITERAL, IssueCodes.INCOMPATIBLE_TYPES);
+      final XExpression block = this.expression(_builder);
+      this._validationTestHelper.assertError(block, XbasePackage.Literals.XSTRING_LITERAL, IssueCodes.INCOMPATIBLE_TYPES);
+      this._validationTestHelper.assertWarning(block, TypesPackage.Literals.JVM_FORMAL_PARAMETER, IssueCodes.UNUSED_LOCAL_VARIABLE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1653,8 +1677,9 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoIssues(_expression);
+      final XExpression block = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(block);
+      this._validationTestHelper.assertWarning(block, TypesPackage.Literals.JVM_FORMAL_PARAMETER, IssueCodes.UNUSED_LOCAL_VARIABLE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1674,8 +1699,9 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoIssues(_expression);
+      final XExpression block = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(block);
+      this._validationTestHelper.assertWarning(block, TypesPackage.Literals.JVM_FORMAL_PARAMETER, IssueCodes.UNUSED_LOCAL_VARIABLE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1695,8 +1721,9 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XSTRING_LITERAL, IssueCodes.INCOMPATIBLE_TYPES);
+      final XExpression block = this.expression(_builder);
+      this._validationTestHelper.assertError(block, XbasePackage.Literals.XSTRING_LITERAL, IssueCodes.INCOMPATIBLE_TYPES);
+      this._validationTestHelper.assertWarning(block, TypesPackage.Literals.JVM_FORMAL_PARAMETER, IssueCodes.UNUSED_LOCAL_VARIABLE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1718,6 +1745,27 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       XExpression _expression = this.expression(_builder);
       this._validationTestHelper.assertNoIssues(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBasicForLoop_UnusedVariable() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("for(var condition = true;;) {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertWarning(_expression, XbasePackage.Literals.XVARIABLE_DECLARATION, IssueCodes.UNUSED_LOCAL_VARIABLE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

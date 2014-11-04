@@ -13,12 +13,14 @@ import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 import java.math.BigInteger;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
@@ -491,7 +493,7 @@ public class ValidationTests extends AbstractXbaseTestCase {
 				"      throw new Exception() " +
 				"   null" +
 				"}");
-		helper.assertNoErrors(expression);
+		helper.assertNoErrors(expression, UNREACHABLE_CODE);
 	}
 	
 	@Test public void testUnreachableCode_01() throws Exception {
