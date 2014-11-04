@@ -66,7 +66,12 @@ public class RefactoringIntegrationTest extends AbstractXtendUITestCase {
 	}
 
 	@Test public void testRenameTypeParameter() throws Exception {
+		// Test with broken model
 		performRenameTest("Foo", "class Foo <T> { def T foo() null }", "T", "U");
+	}
+	
+	@Test public void testRenameTypeParameter2() throws Exception {
+		performRenameTest("Foo", "class Foo <T> { def T foo() {null} }", "T", "U");
 	}
 
 	@Test public void testRenameSwitchVar() throws Exception {
