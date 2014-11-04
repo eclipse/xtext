@@ -13,12 +13,14 @@ import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 import java.math.BigInteger;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
@@ -491,7 +493,7 @@ public class ValidationTests extends AbstractXbaseTestCase {
 				"      throw new Exception() " +
 				"   null" +
 				"}");
-		helper.assertNoErrors(expression);
+		helper.assertNoErrors(expression, UNREACHABLE_CODE);
 	}
 	
 	@Test public void testUnreachableCode_01() throws Exception {
@@ -834,6 +836,47 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertNoIssues(expressionA);
 	}
 	
+	@Test public void testUsedForLoopParameter() throws Exception {
+		XForLoopExpression xForLoopExpression = (XForLoopExpression) expression("for (i: 1..2) { println(i) }");
+		JvmFormalParameter loopParam = xForLoopExpression.getDeclaredParam();
+		helper.assertNoIssues(loopParam);
+	}
+	
+	@Test public void testUnsedForLoopParameter() throws Exception {
+		XForLoopExpression xForLoopExpression = (XForLoopExpression) expression("for (i: 1..2) { }");
+		JvmFormalParameter loopParam = xForLoopExpression.getDeclaredParam();
+		helper.assertWarning(loopParam, TypesPackage.Literals.JVM_FORMAL_PARAMETER, UNUSED_LOCAL_VARIABLE, "used");
+	}
+	
+	@Test public void testUsedSwitchParameter_0() throws Exception {
+		XSwitchExpression switchExpression = (XSwitchExpression) expression("switch (s: '') { default: s.length }");
+		JvmFormalParameter switchParam = switchExpression.getDeclaredParam();
+		helper.assertNoIssues(switchParam);
+	}
+
+	@Test public void testUsedSwitchParameter_1() throws Exception {
+		XSwitchExpression switchExpression = (XSwitchExpression) expression("switch s: '' { default: s.length }");
+		JvmFormalParameter switchParam = switchExpression.getDeclaredParam();
+		helper.assertNoIssues(switchParam);
+	}
+
+	@Test public void testUnusedSwitchParameter_0() throws Exception {
+		XSwitchExpression switchExpression = (XSwitchExpression) expression("switch (s: '') { }");
+		JvmFormalParameter switchParam = switchExpression.getDeclaredParam();
+		helper.assertWarning(switchParam, TypesPackage.Literals.JVM_FORMAL_PARAMETER, UNUSED_LOCAL_VARIABLE, "used");
+	}
+
+	@Test public void testUnusedSwitchParameter_1() throws Exception {
+		XSwitchExpression switchExpression = (XSwitchExpression) expression("switch s: '' { }");
+		JvmFormalParameter switchParam = switchExpression.getDeclaredParam();
+		helper.assertWarning(switchParam, TypesPackage.Literals.JVM_FORMAL_PARAMETER, UNUSED_LOCAL_VARIABLE, "used");
+	}
+
+	@Test public void testUnusedSwitchParameter_2() throws Exception {
+		XSwitchExpression switchExpression = (XSwitchExpression) expression("switch '' { }");
+		helper.assertNoIssues(switchExpression);
+	}
+
 	@Test public void testNumberLiteral_0() throws Exception {
 		XExpression expression = expression("1e10.2e10");
 		helper.assertError(expression, XNUMBER_LITERAL, INVALID_NUMBER_FORMAT);
