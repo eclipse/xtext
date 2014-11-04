@@ -3,8 +3,7 @@
 <module>
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name="com.google.common.collect.Collect" />
+	<inherits name="org.eclipse.xtend2.lib.Lib" />
 	<source path=""/>
-	<source path="internal"/>
-	<source path="util"/>
 	<super-source path="super"/>
 </module>

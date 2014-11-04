@@ -1,7 +1,6 @@
 package org.eclipse.xtend.lib.annotations;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.ArrayList;
@@ -44,14 +43,12 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 /**
  * @since 2.7
  */
-@GwtCompatible
 @Beta
 @SuppressWarnings("all")
 public class FinalFieldsConstructorProcessor implements TransformationParticipant<MutableTypeParameterDeclarator> {
   /**
    * @since 2.7
    */
-  @GwtCompatible
   @Beta
   public static class Util {
     @Extension
