@@ -31,7 +31,6 @@ annotation EqualsHashCode {
  * @since 2.7
  */
 @Beta
-@GwtCompatible
 class EqualsHashCodeProcessor extends AbstractClassProcessor {
 
 	override doTransform(MutableClassDeclaration it, extension TransformationContext context) {
@@ -56,7 +55,6 @@ class EqualsHashCodeProcessor extends AbstractClassProcessor {
 	 * @since 2.7
  	 */
 	@Beta
-	@GwtCompatible
 	static class Util {
 
 		extension TransformationContext context

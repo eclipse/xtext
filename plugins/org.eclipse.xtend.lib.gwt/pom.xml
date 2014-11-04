@@ -15,24 +15,21 @@
 			<groupId>com.google.code.findbugs</groupId>
 			<artifactId>jsr305</artifactId>
 			<version>1.3.9</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
+			<artifactId>guava-gwt</artifactId>
 			<version>${guava.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.eclipse.xtend</groupId>
-			<artifactId>org.eclipse.xtend.lib</artifactId>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xbase.lib.gwt</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtend</groupId>
 			<artifactId>org.eclipse.xtend.lib</artifactId>
 			<version>${project.version}</version>
-			<classifier>sources</classifier>
-			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 	<build>
@@ -53,13 +50,19 @@
 							<overWrite>true</overWrite>
 							<excludeTransitive>true</excludeTransitive>
 							<excludes>META-INF/MANIFEST.MF</excludes>
-							<includeScope>provided</includeScope>
 							<outputDirectory>${project.build.directory}/xtend-sources</outputDirectory>
-							<type>java-source</type>
 							<silent>false</silent>
 						</configuration>
 					</execution>
 				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.eclipse.xtend</groupId>
+						<artifactId>org.eclipse.xtend.lib</artifactId>
+						<version>${project.version}</version>
+						<classifier>sources</classifier>
+					</dependency>
+				</dependencies>
 			</plugin>
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
@@ -72,7 +75,8 @@
 						</goals>
 						<configuration>
 							<target name="copy-gwt-resources">
-								<copy toDir="${project.build.directory}/xtend-gwt-sources" verbose="true">
+								<copy toDir="${project.build.directory}/xtend-gwt-sources"
+									verbose="true">
 									<fileset dir="${project.build.directory}/xtend-sources">
 										<and>
 											<contains text="@GwtCompatible" />
@@ -95,15 +99,13 @@
 				<directory>src</directory>
 			</resource>
 			<resource>
-				<directory>src-super</directory>
-			</resource>
-			<resource>
 				<directory>${project.build.directory}/xtend-gwt-sources</directory>
 			</resource>
 		</resources>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
