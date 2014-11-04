@@ -39,7 +39,7 @@ import com.google.common.collect.Sets;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 public class IterableExtensions {
 
 	/**
