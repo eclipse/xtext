@@ -10,7 +10,6 @@ package org.eclipse.xtext.common.types.access.jdt;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -23,8 +22,6 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
-import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
-import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.inject.Inject;
@@ -42,27 +39,20 @@ public class WorkingCopyOwnerProvider implements IWorkingCopyOwnerProvider {
 	
 	@Inject private ResourceDescriptionsProvider descriptionsProvider;
 	
-	@Inject private IStorage2UriMapper storage2UriMapper;
-	
 	@Inject private EObjectDescriptionBasedStubGenerator stubGenerator;
 
-	public WorkingCopyOwner getWorkingCopyOwner(final IJavaProject javaProject, final ResourceSet resourceset) {
+	public WorkingCopyOwner getWorkingCopyOwner(final IJavaProject javaProject, final ResourceSet resourceSet) {
 		return new WorkingCopyOwner() {
 			@Override
 			public String findSource(String typeName, String packageName) {
 				if (packageName.startsWith("java"))
 					return super.findSource(typeName, packageName);
 				QualifiedName qn = toQualifiedName(packageName, typeName);
-				final IResourceDescriptions descriptions = descriptionsProvider.getResourceDescriptions(resourceset);
+				final IResourceDescriptions descriptions = descriptionsProvider.getResourceDescriptions(resourceSet);
 				Iterator<IEObjectDescription> exportedObjects = descriptions.getExportedObjects(TypesPackage.Literals.JVM_DECLARED_TYPE, qn, false).iterator();
 				while (exportedObjects.hasNext()) {
-					final IEObjectDescription candidate = exportedObjects.next();
-					Iterator<Pair<IStorage, IProject>> storage = storage2UriMapper.getStorages(candidate.getEObjectURI().trimFragment()).iterator();
-					while (storage.hasNext()) {
-						IStorage next = storage.next().getFirst();
-						if (isOnClassPath(javaProject, next))
-							return getSource(typeName, packageName, candidate, resourceset);
-					}
+					IEObjectDescription candidate = exportedObjects.next();
+					return getSource(typeName, packageName, candidate, resourceSet);
 				}
 				return super.findSource(typeName, packageName);
 			}
