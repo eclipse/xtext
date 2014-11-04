@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend2.lib;
 
+import com.google.common.annotations.GwtCompatible;
+
 /**
  * A callback object that allows to reuse an existing {@link StringConcatenation}
  * to append content to it. This puts clients into the position that they can
@@ -21,6 +23,7 @@ package org.eclipse.xtend2.lib;
  * to allow for better interaction with overloaded methods that accept functional
  * types.
  */
+@GwtCompatible
 public abstract class StringConcatenationClient {
 	
 	/**
