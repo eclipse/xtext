@@ -40,6 +40,7 @@ import org.eclipse.xtext.xbase.typesystem.util.Maps2;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 
@@ -66,7 +67,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 	private JvmElementsProxifyingUnloader unloader;
 
 	@Inject
-	private IJvmModelInferrer inferrer;
+	private Provider<IJvmModelInferrer> inferrerProvider;
 
 	@Inject
 	private JvmModelCompleter completer;
@@ -78,8 +79,11 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		this.completer = completer;
 	}
 
-	public void setInferrer(IJvmModelInferrer inferrer) {
-		this.inferrer = inferrer;
+	/**
+	 * @noreference This method is not intended to be referenced by clients
+	 */
+	public void setInferrerProvider(Provider<IJvmModelInferrer> inferrerProvider) {
+		this.inferrerProvider = inferrerProvider;
 	}
 
 	protected static class Adapter extends AdapterImpl {
@@ -350,6 +354,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		task.start();
 		JvmDeclaredTypeAcceptor acceptor = new JvmDeclaredTypeAcceptor(resource);
 		try {
+			IJvmModelInferrer inferrer = inferrerProvider.get();
 			if (inferrer instanceof AbstractModelInferrer) {
 				((AbstractModelInferrer) inferrer).setContext(resource);
 			}

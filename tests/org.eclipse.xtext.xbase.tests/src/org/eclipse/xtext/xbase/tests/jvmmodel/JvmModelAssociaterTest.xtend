@@ -36,7 +36,7 @@ class JvmModelAssociaterTest extends AbstractJvmModelTest {
 	
 	@Test
 	def void testInference() {
-		assoc.inferrer = [obj, acceptor, preIndexing|
+		assoc.inferrerProvider = [[obj, acceptor, preIndexing|
 			val firstType = obj.toClass('foo.Bar')
 			val secondType = obj.toClass('foo.Baz') 
 			assertNull(secondType.eResource)
@@ -49,7 +49,7 @@ class JvmModelAssociaterTest extends AbstractJvmModelTest {
 				^abstract = true
 				assertNotNull(firstType.eResource)
 			]
-		]
+		]]
 		resource.setDerivedStateComputer(null)
 		resource.URI = URI::createURI('foo.txt')
 		resourceSet.classpathURIContext = getClass()
