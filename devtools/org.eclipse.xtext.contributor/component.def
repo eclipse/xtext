@@ -6,7 +6,7 @@
     xmlns:targlets="http://www.eclipse.org/oomph/targlets/1.0"
     xsi:schemaLocation="http://www.eclipse.org/oomph/targlets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Targlets.ecore"
     id="org.eclipse.xtext.contributor"
-    version="1.0.0.qualifier">
+    version="1.0.0">
   <requirement
       id="org.eclipse.xtend.sdk.feature.group"/>
   <requirement
