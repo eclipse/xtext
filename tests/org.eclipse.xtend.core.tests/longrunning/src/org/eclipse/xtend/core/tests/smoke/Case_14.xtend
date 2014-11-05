@@ -24,7 +24,7 @@ class Case_14 extends AbstractXtendTestCase {
 
        @Test
        def void testInference() {
-               assoc.inferrer = [obj, acceptor, preIndexing|
+               assoc.inferrerProvider = [[obj, acceptor, preIndexing|
                        val firstType = obj.toClass('foo.Bar')
                        val secondType = obj.toClass('foo.Baz')
                        assertNull(secondType.eResource)
@@ -37,7 +37,7 @@ class Case_14 extends AbstractXtendTestCase {
                                ^abstract = true
                                assertNotNull(firstType.eResource)
                        ]
-               ]
+               ]]
                resource.setDerivedStateComputer(null)
                resource.URI = URI::createURI('foo.txt')
                resourceSet.classpathURIContext = getClass()
