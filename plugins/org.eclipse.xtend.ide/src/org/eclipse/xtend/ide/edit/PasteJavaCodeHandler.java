@@ -58,8 +58,11 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 					sourceKind);
 			final String xtendCode = conversionResult.getXtendCode();
 			if (!Strings.isEmpty(xtendCode)) {
-				final Point sel = sourceViewer.getSelectedRange();
 				final IXtextDocument xtextDocument = activeXtextEditor.getDocument();
+				JavaImportData javaImports = ClipboardUtil.getJavaImportsContent();
+				if (javaImports != null)
+					addImports(javaImports, xtextDocument);
+				final Point sel = sourceViewer.getSelectedRange();
 				try {
 					xtextDocument.replace(sel.x, sel.y, xtendCode);
 				} catch (BadLocationException e) {
@@ -73,26 +76,29 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 				}
 				sourceViewer.setSelectedRange(offset, length);
 				sourceViewer.getTextOperationTarget().doOperation(ISourceViewer.FORMAT);
-				int resoreCaretAtOffset = sourceViewer.getSelectedRange().x + sourceViewer.getSelectedRange().y;
-				sourceViewer.setSelectedRange(resoreCaretAtOffset, 0);
-				JavaImportData javaImports = ClipboardUtil.getJavaImportsContent();
-				addImports(javaImports, xtextDocument);
+				int restoreCaretAtOffset = sourceViewer.getSelectedRange().x + sourceViewer.getSelectedRange().y;
+				sourceViewer.setSelectedRange(restoreCaretAtOffset, 0);
 			}
 		}
 		return null;
 	}
 
 	private void addImports(final JavaImportData javaImports, final IXtextDocument xtextDocument) {
-		List<ReplaceRegion> result = xtextDocument.readOnly(new IUnitOfWork<List<ReplaceRegion>, XtextResource>() {
+		List<ReplaceRegion> result = xtextDocument.modify(new IUnitOfWork<List<ReplaceRegion>, XtextResource>() {
 			public List<ReplaceRegion> exec(XtextResource state) throws Exception {
 				RewritableImportSection impSection = importSectionFactory.parse(state);
 				for (String javaImport : javaImports.getImports()) {
 					impSection.addImport(javaImport);
 				}
-				//for (String javaImport : javaImports.getStaticImports()) {
-				//	//impSection.addStaticImport(jvmType);
-				//	System.out.println("TODO static import: " + javaImport);
-				//}
+				for (String javaImport : javaImports.getStaticImports()) {
+					int memberIdx = javaImport.lastIndexOf('.');
+					String type = javaImport.substring(0, memberIdx);
+					String member = javaImport.substring(memberIdx + 1);
+					if (member.endsWith("()")) {
+						member = member.substring(0, member.length() - 2);
+					}
+					impSection.addStaticImport(type, member);
+				}
 				return impSection.rewrite();
 			}
 		});
