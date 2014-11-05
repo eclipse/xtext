@@ -155,16 +155,22 @@ public class RewritableImportSection {
 		if (!needsImport(fqn)) {
 			return false;
 		}
-		XImportDeclaration importDeclaration = XtypeFactory.eINSTANCE.createXImportDeclaration();
-		importDeclaration.setImportedNamespace(fqn);
-		addedImportDeclarations.add(importDeclaration);
-		return true;
+		return addedImportDeclarations.add(createImport(fqn, null));
 	}
 
-	protected boolean needsImport(String fqn) {
+	protected XImportDeclaration createImport(String importedNamespace, String member) {
+		XImportDeclaration importDeclaration = XtypeFactory.eINSTANCE.createXImportDeclaration();
+		importDeclaration.setImportedNamespace(importedNamespace);
+		if (member != null) {
+			importDeclaration.setMemberName(member);
+		}
+		return importDeclaration;
+	}
+
+	protected boolean needsImport(final String fqn) {
 		for (String string : implicitlyImportedPackages) {
 			if (fqn.startsWith(string)) {
-				return false;
+				return fqn.substring(string.length()).lastIndexOf('.') > 0;
 			}
 		}
 		return true;
@@ -256,6 +262,12 @@ public class RewritableImportSection {
 		}
 		addedImportDeclarations.add(importDeclaration);
 		return true;
+	}
+
+	public boolean addStaticImport(String typeFqn, String member) {
+		XImportDeclaration importDecl = createImport(typeFqn, member);
+		importDecl.setStatic(true);
+		return addedImportDeclarations.add(importDecl);
 	}
 
 	public boolean removeStaticImport(JvmDeclaredType type, String memberName) {
