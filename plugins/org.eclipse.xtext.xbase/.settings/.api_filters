@@ -37,6 +37,11 @@
             <message_arguments>
                 <message_argument value="MutableFileSystemSupport"/>
                 <message_argument value="ParallelFileSystemSupport"/>
+    <resource path="src/org/eclipse/xtext/xbase/jvmmodel/JvmModelAssociator.java" type="org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator">
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator"/>
+                <message_argument value="setInferrer(IJvmModelInferrer)"/>
             </message_arguments>
         </filter>
     </resource>
