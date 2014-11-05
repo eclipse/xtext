@@ -2,6 +2,7 @@ package org.eclipse.xtend.core.tests.smoke;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -45,33 +46,38 @@ public class Case_14 extends AbstractXtendTestCase {
   
   @Test
   public void testInference() {
-    final IJvmModelInferrer _function = new IJvmModelInferrer() {
-      public void infer(final EObject obj, final IJvmDeclaredTypeAcceptor acceptor, final boolean preIndexing) {
-        final JvmGenericType firstType = Case_14.this._jvmTypesBuilder.toClass(obj, "foo.Bar");
-        final JvmGenericType secondType = Case_14.this._jvmTypesBuilder.toClass(obj, "foo.Baz");
-        Resource _eResource = secondType.eResource();
-        Assert.assertNull(_eResource);
-        final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
-          public void apply(final JvmGenericType it) {
-            it.setAbstract(true);
-            Resource _eResource = firstType.eResource();
-            Assert.assertNotNull(_eResource);
-            Resource _eResource_1 = secondType.eResource();
-            Assert.assertNotNull(_eResource_1);
+    final Provider<IJvmModelInferrer> _function = new Provider<IJvmModelInferrer>() {
+      public IJvmModelInferrer get() {
+        final IJvmModelInferrer _function = new IJvmModelInferrer() {
+          public void infer(final EObject obj, final IJvmDeclaredTypeAcceptor acceptor, final boolean preIndexing) {
+            final JvmGenericType firstType = Case_14.this._jvmTypesBuilder.toClass(obj, "foo.Bar");
+            final JvmGenericType secondType = Case_14.this._jvmTypesBuilder.toClass(obj, "foo.Baz");
+            Resource _eResource = secondType.eResource();
+            Assert.assertNull(_eResource);
+            final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+              public void apply(final JvmGenericType it) {
+                it.setAbstract(true);
+                Resource _eResource = firstType.eResource();
+                Assert.assertNotNull(_eResource);
+                Resource _eResource_1 = secondType.eResource();
+                Assert.assertNotNull(_eResource_1);
+              }
+            };
+            acceptor.<JvmGenericType>accept(firstType, _function);
+            final Procedure1<JvmGenericType> _function_1 = new Procedure1<JvmGenericType>() {
+              public void apply(final JvmGenericType it) {
+                it.setAbstract(true);
+                Resource _eResource = firstType.eResource();
+                Assert.assertNotNull(_eResource);
+              }
+            };
+            acceptor.<JvmGenericType>accept(secondType, _function_1);
           }
         };
-        acceptor.<JvmGenericType>accept(firstType, _function);
-        final Procedure1<JvmGenericType> _function_1 = new Procedure1<JvmGenericType>() {
-          public void apply(final JvmGenericType it) {
-            it.setAbstract(true);
-            Resource _eResource = firstType.eResource();
-            Assert.assertNotNull(_eResource);
-          }
-        };
-        acceptor.<JvmGenericType>accept(secondType, _function_1);
+        return _function;
       }
     };
-    this.assoc.setInferrer(_function);
+    this.assoc.setInferrerProvider(_function);
     this.resource.setDerivedStateComputer(null);
     URI _createURI = URI.createURI("foo.txt");
     this.resource.setURI(_createURI);
