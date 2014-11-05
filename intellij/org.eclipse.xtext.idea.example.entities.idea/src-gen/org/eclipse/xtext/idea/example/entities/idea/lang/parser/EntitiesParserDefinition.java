@@ -2,7 +2,7 @@ package org.eclipse.xtext.idea.example.entities.idea.lang.parser;
 
 import org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesElementTypeProvider;
 import org.eclipse.xtext.idea.example.entities.idea.lang.psi.impl.EntitiesFileImpl;
-import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.xbase.idea.lang.parser.XbaseParserDefinition;
 import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
@@ -12,7 +12,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 
-public class EntitiesParserDefinition extends AbstractXtextParserDefinition {
+public class EntitiesParserDefinition extends XbaseParserDefinition {
 
 	@Inject 
 	private EntitiesElementTypeProvider elementTypeProvider;

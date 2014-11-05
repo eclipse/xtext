@@ -42,7 +42,6 @@ import org.eclipse.xtext.idea.jvmmodel.codeInsight.PsiJvmTargetElementEvaluator
 import org.eclipse.xtext.idea.lang.BaseXtextASTFactory
 import org.eclipse.xtext.idea.lang.IElementTypeProvider
 import org.eclipse.xtext.idea.parser.AbstractAntlrDelegatingIdeaLexer
-import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition
 import org.eclipse.xtext.idea.parser.AbstractXtextPsiParser
 import org.eclipse.xtext.idea.parser.TokenTypeProvider
 import org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider
@@ -415,7 +414,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	}
 	
 	def setFileExtensions(String fileExtensions) {
-		this.fileExtension = fileExtensions.split("\\s*,\\s*").get(0)
+		this.fileExtension = fileExtensions.split("\\s*,\\s*").head
 	}
 	
 	def void setEncoding(String encoding) {
@@ -899,8 +898,10 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		«ENDIF»
 		import «grammar.elementTypeProviderName»;
 		import «grammar.fileImplName»;
-		import «AbstractXtextParserDefinition.name»;
-		«IF !grammar.eAllContents.filter(RuleCall).filter[assigned && containingAssignment.feature == 'name'].empty»
+		import «grammar.superParserDefinitionName»;
+		«IF grammar.eAllContents.filter(RuleCall).filter[assigned && containingAssignment.feature == 'name'].exists[ nameRuleCall |
+			!grammar.eAllContents.filter(RuleCall).filter[rule.eAllContents.exists[it == nameRuleCall]].empty
+		]»
 		import «PsiNamedEObjectImpl.name»;
 		«ENDIF»
 		
@@ -911,7 +912,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		import «PsiFile.name»;
 		import «IElementType.name»;
 
-		public class «grammar.parserDefinitionName.toSimpleName» extends «AbstractXtextParserDefinition.simpleName» {
+		public class «grammar.parserDefinitionName.toSimpleName» extends «grammar.superParserDefinitionName.toSimpleName» {
 
 			@Inject 
 			private «grammar.elementTypeProviderName.toSimpleName» elementTypeProvider;

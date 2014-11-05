@@ -1,6 +1,7 @@
 package org.xtext.idea.generator
 
 import org.eclipse.xtext.Grammar
+import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition
 import org.eclipse.xtext.idea.types.psi.search.JvmElementsReferencesSearch
 import org.eclipse.xtext.util.Strings
 
@@ -92,6 +93,10 @@ class IdeaPluginClassNames {
 	
 	def String getLexerName(Grammar it) {
 		basePackageName+'.lang.parser.'+it.name.toSimpleName+'Lexer'
+	}
+	
+	def String getSuperParserDefinitionName(Grammar it) {
+		usedGrammars.head?.parserDefinitionName ?: AbstractXtextParserDefinition.name
 	}
 	
 	def String getParserDefinitionName(Grammar it) {

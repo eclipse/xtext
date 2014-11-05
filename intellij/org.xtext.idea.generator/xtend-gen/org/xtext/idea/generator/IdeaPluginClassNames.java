@@ -1,8 +1,11 @@
 package org.xtext.idea.generator;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
 import org.eclipse.xtext.idea.types.psi.search.JvmElementsReferencesSearch;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class IdeaPluginClassNames {
@@ -182,6 +185,23 @@ public class IdeaPluginClassNames {
     String _simpleName = this.toSimpleName(_name);
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "Lexer");
+  }
+  
+  public String getSuperParserDefinitionName(final Grammar it) {
+    String _elvis = null;
+    EList<Grammar> _usedGrammars = it.getUsedGrammars();
+    Grammar _head = IterableExtensions.<Grammar>head(_usedGrammars);
+    String _parserDefinitionName = null;
+    if (_head!=null) {
+      _parserDefinitionName=this.getParserDefinitionName(_head);
+    }
+    if (_parserDefinitionName != null) {
+      _elvis = _parserDefinitionName;
+    } else {
+      String _name = AbstractXtextParserDefinition.class.getName();
+      _elvis = _name;
+    }
+    return _elvis;
   }
   
   public String getParserDefinitionName(final Grammar it) {

@@ -9,5 +9,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.xtext.idea.example.entities"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.xtext.idea.example.entities.ui"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.xtext.ui"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.xtext.xbase.idea"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
