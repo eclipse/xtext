@@ -87,5 +87,10 @@ public enum Modifier {
 	 * The override modifier, can be present on {@link MethodDeclaration
 	 * methods}
 	 */
-	OVERRIDE
+	OVERRIDE,
+	
+	/**
+	 * The extension modifier, can be present on {@link FieldDeclaration fields}
+	 */
+	EXTENSION,
 }
