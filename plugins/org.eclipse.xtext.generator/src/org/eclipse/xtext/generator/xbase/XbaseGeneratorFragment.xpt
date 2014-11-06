@@ -210,7 +210,7 @@ class «getJvmModelInferrerName().toSimpleName()» extends AbstractModelInferrer {
    </extension>
    <extension point="org.eclipse.ui.popupMenus">
       <viewerContribution
-         targetID="«name».ide.RulerContext"
+         targetID="«name».RulerContext"
          id="«name».ide.RulerPopupActions">
          <action
             label="Toggle Breakpoint"
