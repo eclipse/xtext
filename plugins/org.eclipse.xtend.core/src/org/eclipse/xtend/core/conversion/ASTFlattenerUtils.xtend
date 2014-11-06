@@ -28,10 +28,13 @@ import org.eclipse.jdt.core.dom.Name
 import org.eclipse.jdt.core.dom.QualifiedName
 import org.eclipse.jdt.core.dom.ReturnStatement
 import org.eclipse.jdt.core.dom.SimpleName
+import org.eclipse.jdt.core.dom.SingleVariableDeclaration
 import org.eclipse.jdt.core.dom.Statement
 import org.eclipse.jdt.core.dom.StringLiteral
+import org.eclipse.jdt.core.dom.Type
 import org.eclipse.jdt.core.dom.TypeDeclaration
 import org.eclipse.jdt.core.dom.TypeDeclarationStatement
+import org.eclipse.jdt.core.dom.VariableDeclarationExpression
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement
 
@@ -218,17 +221,58 @@ class ASTFlattenerUtils {
 		return !(value.contains("«") || value.contains("»") || value.contains("'''"))
 	}
 
-	def richTextValue(StringLiteral literal) {
-		var value = literal.literalValue
-		if (value.endsWith("'")) {
-			value = value.concat("«»")
+	def Type findDeclaredType(SimpleName simpleName) {
+		var scope = simpleName.findParentOfType(Block)
+		while (scope != null) {
+			val type = scope.findDeclaredType(simpleName)
+			if (!type.empty) {
+				return type.head
+			}
+			scope = scope.findParentOfType(Block)
 		}
-		return value
+		return null
 	}
 
-	def Boolean isAssignedInBody(Block scope, (Assignment)=>Boolean constraint) {
+	def private Iterable<Type> findDeclaredType(Block scope, SimpleName simpleName) {
+		val matchesFound = newArrayList
+		scope.accept(
+			new ASTVisitor() {
+				override boolean visit(VariableDeclarationFragment node) {
+					if (node.name.identifier.equals(simpleName.identifier)) {
+						val parentNode = node.parent
+						switch parentNode {
+							VariableDeclarationStatement: {
+								matchesFound.add(parentNode.type)
+							}
+							FieldDeclaration: {
+								matchesFound.add(parentNode.type)
+							}
+							VariableDeclarationExpression: {
+								matchesFound.add(parentNode.type)
+							}
+						}
+					}
+					return false
+				}
+
+				override preVisit2(ASTNode node) {
+					matchesFound.empty
+				}
+
+				override boolean visit(SingleVariableDeclaration node) {
+					if (node.name.equals(simpleName)) {
+						matchesFound.add(node.type)
+					}
+					return false
+				}
+
+			})
+		return matchesFound
+	}
+
+	def private Iterable<Assignment> findAssigmentsInBlock(Block scope, (Assignment)=>Boolean constraint) {
+		val assigments = newHashSet()
 		if (scope != null) {
-			val assigments = newHashSet()
 			scope.accept(
 				new ASTVisitor() {
 					override visit(Assignment node) {
@@ -238,13 +282,12 @@ class ASTFlattenerUtils {
 						return true
 					}
 				})
-			return !assigments.empty
 		}
-		return false
+		return assigments
 	}
 
 	def Boolean isAssignedInBody(Block scope, VariableDeclarationFragment fieldDeclFragment) {
-		return scope.isAssignedInBody(
+		return !scope.findAssigmentsInBlock(
 			[
 				if (leftHandSide instanceof Name) {
 					val simpleName = (leftHandSide as Name)
@@ -254,17 +297,17 @@ class ASTFlattenerUtils {
 					}
 				}
 				return false
-			])
+			]).empty
 	}
 
 	def Boolean isAssignedInBody(Block scope, SimpleName nameToLookFor) {
-		return scope.isAssignedInBody(
+		return !scope.findAssigmentsInBlock(
 			[
 				if (leftHandSide  instanceof SimpleName) {
 					return nameToLookFor.identifier.equals((leftHandSide as SimpleName).identifier)
 				}
 				return false
-			])
+			]).empty
 	}
 
 	def dispatch String toSimpleName(SimpleName name) {

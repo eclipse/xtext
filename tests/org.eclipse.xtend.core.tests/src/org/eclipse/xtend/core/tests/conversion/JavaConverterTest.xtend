@@ -976,6 +976,56 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 		assertNotNull(clazz)
 	}
 
+	@Test def void testXORExpressionCase() throws Exception {
+		var clazz = toValidXtendClass(
+			'''
+			public class XorCase {
+				public void doXorOperation() {
+					boolean b = true;
+					if(true ^ b) {
+						return;
+					}
+					if(b ^ b) {
+						return;
+					}
+					if(b ^ false) {
+						return;
+					}
+					int i = 1;
+					if (((1 ^ 2 ^ 4) + (i ^ 2) - (3 ^ i) ^ 2) > i) {
+						return;
+					}
+				}
+				
+			}''')
+		assertNotNull(clazz)
+	}
+
+	@Test def void testIntegerBitwiseOperatorsCase() throws Exception {
+		val java = '''
+		public void doBitwiseOperation() {
+			if ((1 & 2) > 0) {
+				return;
+			}
+			if ((1 | 2) > 0) {
+				return;
+			}
+		}'''
+		var body = classBodyDeclToXtend(java)
+		assertEquals(
+			'''
+			def void doBitwiseOperation(){
+				if ((1.bitwiseAnd(2)) > 0) {
+					return;
+				}
+				if ((1.bitwiseOr(2)) > 0) {
+					return;
+				}
+				
+			}'''.toString, body)
+
+	}
+
 	def private XtendClass toValidXtendClass(String javaCode) throws Exception {
 		return toValidTypeDeclaration("Clazz", javaCode) as XtendClass
 	}
