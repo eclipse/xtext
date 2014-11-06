@@ -135,13 +135,8 @@ public class OverrideHelper {
 								boolean matchesSignature = true;
 								for(int i = 0; i < parameterSize && matchesSignature; i++) {
 									JvmFormalParameter parameter = operation.getParameters().get(i);
-									String identifier = parameter.getParameterType().getIdentifier();
 									JvmFormalParameter candidateParameter = candidate.getParameters().get(i);
-									LightweightTypeReference candidateParameterType =
-											substitutor.substitute(owner.toLightweightTypeReference(candidateParameter.getParameterType()));
-									if (!identifier.equals(candidateParameterType.getJavaIdentifier())) {
-										matchesSignature = false;
-									}
+									matchesSignature = isMatchesSignature(parameter, candidateParameter, substitutor, owner);
 								}
 								if (matchesSignature) {
 									return candidate;
@@ -153,6 +148,16 @@ public class OverrideHelper {
 			}
 		}
 		return null;
+	}
+
+	protected boolean isMatchesSignature(JvmFormalParameter parameter, JvmFormalParameter candidateParameter, TypeParameterSubstitutor<?> substitutor, ITypeReferenceOwner owner) {
+		JvmTypeReference parameterType = parameter.getParameterType();
+		if (parameterType == null || parameterType.getType() == null) {
+			return false;
+		} 
+		String identifier = parameterType.getIdentifier();
+		LightweightTypeReference candidateParameterType = substitutor.substitute(owner.toLightweightTypeReference(candidateParameter.getParameterType()));
+		return identifier.equals(candidateParameterType.getJavaIdentifier());
 	}
 
 	protected TypeParameterSubstitutor<?> createSubstitutor(ITypeReferenceOwner owner,
