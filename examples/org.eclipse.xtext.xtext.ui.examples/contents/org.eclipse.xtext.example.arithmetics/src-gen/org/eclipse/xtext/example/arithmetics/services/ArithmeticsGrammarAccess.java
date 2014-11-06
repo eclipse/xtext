@@ -493,30 +493,44 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	
-	private ModuleElements pModule;
-	private ImportElements pImport;
-	private ImportNameElements pImportName;
-	private StatementElements pStatement;
-	private DefinitionElements pDefinition;
-	private DeclaredParameterElements pDeclaredParameter;
-	private AbstractDefinitionElements pAbstractDefinition;
-	private EvaluationElements pEvaluation;
-	private ExpressionElements pExpression;
-	private AdditionElements pAddition;
-	private MultiplicationElements pMultiplication;
-	private PrimaryExpressionElements pPrimaryExpression;
-	private TerminalRule tNUMBER;
-	private TerminalRule tINT;
+	private final ModuleElements pModule;
+	private final ImportElements pImport;
+	private final ImportNameElements pImportName;
+	private final StatementElements pStatement;
+	private final DefinitionElements pDefinition;
+	private final DeclaredParameterElements pDeclaredParameter;
+	private final AbstractDefinitionElements pAbstractDefinition;
+	private final EvaluationElements pEvaluation;
+	private final ExpressionElements pExpression;
+	private final AdditionElements pAddition;
+	private final MultiplicationElements pMultiplication;
+	private final PrimaryExpressionElements pPrimaryExpression;
+	private final TerminalRule tNUMBER;
+	private final TerminalRule tINT;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public ArithmeticsGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModule = new ModuleElements();
+		this.pImport = new ImportElements();
+		this.pImportName = new ImportNameElements();
+		this.pStatement = new StatementElements();
+		this.pDefinition = new DefinitionElements();
+		this.pDeclaredParameter = new DeclaredParameterElements();
+		this.pAbstractDefinition = new AbstractDefinitionElements();
+		this.pEvaluation = new EvaluationElements();
+		this.pExpression = new ExpressionElements();
+		this.pAddition = new AdditionElements();
+		this.pMultiplication = new MultiplicationElements();
+		this.pPrimaryExpression = new PrimaryExpressionElements();
+		this.tNUMBER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "NUMBER");
+		this.tINT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "INT");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -549,7 +563,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	//Module:
 	//	"module" name=ID imports+=Import* statements+=Statement*;
 	public ModuleElements getModuleAccess() {
-		return (pModule != null) ? pModule : (pModule = new ModuleElements());
+		return pModule;
 	}
 	
 	public ParserRule getModuleRule() {
@@ -559,7 +573,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	//Import:
 	//	"import" importedNamespace=ImportName;
 	public ImportElements getImportAccess() {
-		return (pImport != null) ? pImport : (pImport = new ImportElements());
+		return pImport;
 	}
 	
 	public ParserRule getImportRule() {
@@ -569,7 +583,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	//ImportName:
 	//	ID ("." "*")?;
 	public ImportNameElements getImportNameAccess() {
-		return (pImportName != null) ? pImportName : (pImportName = new ImportNameElements());
+		return pImportName;
 	}
 	
 	public ParserRule getImportNameRule() {
@@ -579,7 +593,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	//Statement:
 	//	Definition | Evaluation;
 	public StatementElements getStatementAccess() {
-		return (pStatement != null) ? pStatement : (pStatement = new StatementElements());
+		return pStatement;
 	}
 	
 	public ParserRule getStatementRule() {
@@ -589,7 +603,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	//Definition:
 	//	"def" name=ID ("(" args+=DeclaredParameter ("," args+=DeclaredParameter)* ")")? ":" expr=Expression ";";
 	public DefinitionElements getDefinitionAccess() {
-		return (pDefinition != null) ? pDefinition : (pDefinition = new DefinitionElements());
+		return pDefinition;
 	}
 	
 	public ParserRule getDefinitionRule() {
@@ -599,7 +613,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	//DeclaredParameter:
 	//	name=ID;
 	public DeclaredParameterElements getDeclaredParameterAccess() {
-		return (pDeclaredParameter != null) ? pDeclaredParameter : (pDeclaredParameter = new DeclaredParameterElements());
+		return pDeclaredParameter;
 	}
 	
 	public ParserRule getDeclaredParameterRule() {
@@ -609,7 +623,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	//AbstractDefinition:
 	//	Definition | DeclaredParameter;
 	public AbstractDefinitionElements getAbstractDefinitionAccess() {
-		return (pAbstractDefinition != null) ? pAbstractDefinition : (pAbstractDefinition = new AbstractDefinitionElements());
+		return pAbstractDefinition;
 	}
 	
 	public ParserRule getAbstractDefinitionRule() {
@@ -619,7 +633,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	//Evaluation:
 	//	expression=Expression ";";
 	public EvaluationElements getEvaluationAccess() {
-		return (pEvaluation != null) ? pEvaluation : (pEvaluation = new EvaluationElements());
+		return pEvaluation;
 	}
 	
 	public ParserRule getEvaluationRule() {
@@ -629,7 +643,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	//Expression:
 	//	Addition;
 	public ExpressionElements getExpressionAccess() {
-		return (pExpression != null) ? pExpression : (pExpression = new ExpressionElements());
+		return pExpression;
 	}
 	
 	public ParserRule getExpressionRule() {
@@ -639,7 +653,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	//Addition returns Expression:
 	//	Multiplication (({Plus.left=current} "+" | {Minus.left=current} "-") right=Multiplication)*;
 	public AdditionElements getAdditionAccess() {
-		return (pAddition != null) ? pAddition : (pAddition = new AdditionElements());
+		return pAddition;
 	}
 	
 	public ParserRule getAdditionRule() {
@@ -649,7 +663,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	//Multiplication returns Expression:
 	//	PrimaryExpression (({Multi.left=current} "*" | {Div.left=current} "/") right=PrimaryExpression)*;
 	public MultiplicationElements getMultiplicationAccess() {
-		return (pMultiplication != null) ? pMultiplication : (pMultiplication = new MultiplicationElements());
+		return pMultiplication;
 	}
 	
 	public ParserRule getMultiplicationRule() {
@@ -660,7 +674,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	//	"(" Expression ")" | {NumberLiteral} value=NUMBER | {FunctionCall} func=[AbstractDefinition] ("(" args+=Expression
 	//	("," args+=Expression)* ")")?;
 	public PrimaryExpressionElements getPrimaryExpressionAccess() {
-		return (pPrimaryExpression != null) ? pPrimaryExpression : (pPrimaryExpression = new PrimaryExpressionElements());
+		return pPrimaryExpression;
 	}
 	
 	public ParserRule getPrimaryExpressionRule() {
@@ -670,13 +684,13 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	//terminal NUMBER returns ecore::EBigDecimal:
 	//	"0".."9"* ("." "0".."9"+)?;
 	public TerminalRule getNUMBERRule() {
-		return (tNUMBER != null) ? tNUMBER : (tNUMBER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "NUMBER"));
+		return tNUMBER;
 	} 
 
 	//terminal INT returns ecore::EInt:
 	//	"this one has been deactivated";
 	public TerminalRule getINTRule() {
-		return (tINT != null) ? tINT : (tINT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "INT"));
+		return tINT;
 	} 
 
 	//terminal ID:
