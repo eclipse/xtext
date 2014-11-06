@@ -1726,6 +1726,120 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     Assert.assertNotNull(clazz);
   }
   
+  @Test
+  public void testXORExpressionCase() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public class XorCase {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public void doXorOperation() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("boolean b = true;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("if(true ^ b) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("return;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("if(b ^ b) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("return;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("if(b ^ false) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("return;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("int i = 1;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("if (((1 ^ 2 ^ 4) + (i ^ 2) - (3 ^ i) ^ 2) > i) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("return;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    XtendClass clazz = this.toValidXtendClass(_builder.toString());
+    Assert.assertNotNull(clazz);
+  }
+  
+  @Test
+  public void testIntegerBitwiseOperatorsCase() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public void doBitwiseOperation() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("if ((1 & 2) > 0) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("if ((1 | 2) > 0) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    final String java = _builder.toString();
+    String body = this.classBodyDeclToXtend(java);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("def void doBitwiseOperation(){");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("if ((1.bitwiseAnd(2)) > 0) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("return;");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("if ((1.bitwiseOr(2)) > 0) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("return;");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    String _string = _builder_1.toString();
+    Assert.assertEquals(_string, body);
+  }
+  
   private XtendClass toValidXtendClass(final String javaCode) throws Exception {
     XtendTypeDeclaration _validTypeDeclaration = this.toValidTypeDeclaration("Clazz", javaCode);
     return ((XtendClass) _validTypeDeclaration);

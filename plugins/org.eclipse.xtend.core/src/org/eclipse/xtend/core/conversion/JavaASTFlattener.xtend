@@ -845,10 +845,10 @@ class JavaASTFlattener extends ASTVisitor {
 			if (firstEntrance) {
 				appendToBuffer("'''")
 			}
-			node.leftOperand.convertToRichString
-			node.rightOperand.convertToRichString
+			node.leftOperand.appendAsRichString
+			node.rightOperand.appendAsRichString
 			node.extendedOperands().fold(node.rightOperand) [ prevExpr, Expression currExpr |
-				currExpr.convertToRichString
+				currExpr.appendAsRichString
 				return currExpr
 			]
 			if (firstEntrance) {
@@ -859,22 +859,70 @@ class JavaASTFlattener extends ASTVisitor {
 			}
 		} else {
 			node.getLeftOperand().accept(this)
-			appendSpaceToBuffer.append(node.getOperator().toString())
-			appendSpaceToBuffer
-			node.getRightOperand().accept(this)
+			val operator = node.getOperator()
+			node.handleInfixRightSide(operator, node.getRightOperand())
 			val extendedOperands = node.extendedOperands()
 			if (extendedOperands.size() != 0) {
-				appendSpaceToBuffer
 				extendedOperands.forEach [ Expression e |
-					appendToBuffer(node.getOperator().toString()).append(' ')
-					e.accept(this)
+					node.handleInfixRightSide(operator, e)
 				]
 			}
 		}
 		return false
 	}
 
-	def void convertToRichString(Expression expression) {
+	def handleInfixRightSide(InfixExpression infixParent, org.eclipse.jdt.core.dom.InfixExpression.Operator operator,
+		Expression rightSide) {
+		switch operator {
+			case InfixExpression.Operator.XOR:
+				if (isBooleanInvolved(infixParent)) {
+					appendToBuffer(".xor(")
+					rightSide.accept(this)
+					appendToBuffer(")")
+				} else {
+					appendToBuffer(".bitwiseXor(")
+					rightSide.accept(this)
+					appendToBuffer(")")
+				}
+			case InfixExpression.Operator.AND,
+			case InfixExpression.Operator.OR: {
+				if (!isBooleanInvolved(infixParent)) {
+					appendToBuffer('''.bitwise«if(operator == InfixExpression.Operator.AND) "And" else "Or"»(''')
+					rightSide.accept(this)
+					appendToBuffer(")")
+				}
+			}
+			default: {
+				appendSpaceToBuffer
+				appendToBuffer(operator.toString())
+				appendSpaceToBuffer
+				rightSide.accept(this)
+			}
+		}
+	}
+
+	def boolean isBooleanInvolved(InfixExpression it) {
+		return leftOperand.isBooleanType || rightOperand.isBooleanType
+	}
+
+	def boolean isBooleanType(Expression expression) {
+		if (expression instanceof BooleanLiteral) {
+			return true
+		}
+		if (expression instanceof SimpleName) {
+			val declType = findDeclaredType(expression)
+			if (declType != null) {
+				switch declType {
+					case declType.isPrimitiveType: {
+						return (declType as PrimitiveType).getPrimitiveTypeCode == PrimitiveType.BOOLEAN
+					}
+				}
+			}
+		}
+		return false
+	}
+
+	def void appendAsRichString(Expression expression) {
 		if (expression instanceof StringLiteral) {
 			appendToBuffer(expression.richTextValue)
 		} else {
@@ -884,6 +932,16 @@ class JavaASTFlattener extends ASTVisitor {
 			expression.accept(this)
 			if(!stringConcat) appendToBuffer("»")
 		}
+	}
+
+	def richTextValue(StringLiteral literal) {
+		var value = literal.literalValue
+
+		//FIXME append only on latest string in concatenation 
+		if (value.endsWith("'")) {
+			value = value.concat("«»")
+		}
+		return value
 	}
 
 	override boolean visit(InstanceofExpression node) {
