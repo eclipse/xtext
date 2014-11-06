@@ -475,7 +475,7 @@
    </extension>
    <extension point="org.eclipse.ui.popupMenus">
       <viewerContribution
-         targetID="org.eclipse.xtext.example.domainmodel.Domainmodel.ide.rulerContextMenu"
+         targetID="org.eclipse.xtext.example.domainmodel.Domainmodel.ide.RulerContext"
          id="org.eclipse.xtext.example.domainmodel.Domainmodel.ide.RulerPopupActions">
          <action
             label="Toggle Breakpoint"
