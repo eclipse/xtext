@@ -223,6 +223,24 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   }
   
   @Test
+  public void formatClosuresMultiLine03() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("new Thread [|");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"foo\")");
+    _builder.newLine();
+    _builder.append("]");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("new Thread[  | println(\"foo\")");
+    _builder_1.newLine();
+    _builder_1.append("]");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
   public void formatClosuresMultiLineSemicolon() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("val x = newArrayList(\"A\", \"b\")");
