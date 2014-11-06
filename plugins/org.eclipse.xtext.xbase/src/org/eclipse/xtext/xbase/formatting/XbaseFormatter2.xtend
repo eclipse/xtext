@@ -957,8 +957,12 @@ class XbaseFormatter2 extends AbstractFormatter {
 		formatClosureParameters(expr, format)
 		val explicit = expr.nodeForFeature(XCLOSURE__EXPLICIT_SYNTAX)
 		if (explicit != null) {
-			format += open.append[oneSpace]
-			format += explicit.prepend[oneSpace]
+			if (expr.declaredFormalParameters.empty) {
+				format += explicit.prepend[noSpace]
+			} else {
+				format += open.append[oneSpace]
+				format += explicit.prepend[oneSpace]
+			}
 			format += explicit.append[newLine; increaseIndentation]
 		} else {
 			format += open.append[newLine; increaseIndentation]
