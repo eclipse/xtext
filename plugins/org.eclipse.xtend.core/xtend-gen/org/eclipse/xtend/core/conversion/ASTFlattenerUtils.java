@@ -36,11 +36,13 @@ import org.eclipse.jdt.core.dom.Name;
 import org.eclipse.jdt.core.dom.QualifiedName;
 import org.eclipse.jdt.core.dom.ReturnStatement;
 import org.eclipse.jdt.core.dom.SimpleName;
+import org.eclipse.jdt.core.dom.SingleVariableDeclaration;
 import org.eclipse.jdt.core.dom.Statement;
 import org.eclipse.jdt.core.dom.StringLiteral;
 import org.eclipse.jdt.core.dom.Type;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.eclipse.jdt.core.dom.TypeDeclarationStatement;
+import org.eclipse.jdt.core.dom.VariableDeclarationExpression;
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -452,20 +454,81 @@ public class ASTFlattenerUtils {
     return (!_or);
   }
   
-  public String richTextValue(final StringLiteral literal) {
-    String value = literal.getLiteralValue();
-    boolean _endsWith = value.endsWith("\'");
-    if (_endsWith) {
-      String _concat = value.concat("«»");
-      value = _concat;
+  public Type findDeclaredType(final SimpleName simpleName) {
+    Block scope = this.<Block>findParentOfType(simpleName, Block.class);
+    while ((!Objects.equal(scope, null))) {
+      {
+        final Iterable<Type> type = this.findDeclaredType(scope, simpleName);
+        boolean _isEmpty = IterableExtensions.isEmpty(type);
+        boolean _not = (!_isEmpty);
+        if (_not) {
+          return IterableExtensions.<Type>head(type);
+        }
+        Block _findParentOfType = this.<Block>findParentOfType(scope, Block.class);
+        scope = _findParentOfType;
+      }
     }
-    return value;
+    return null;
   }
   
-  public Boolean isAssignedInBody(final Block scope, final Function1<? super Assignment, ? extends Boolean> constraint) {
+  private Iterable<Type> findDeclaredType(final Block scope, final SimpleName simpleName) {
+    final ArrayList<Type> matchesFound = CollectionLiterals.<Type>newArrayList();
+    scope.accept(
+      new ASTVisitor() {
+        public boolean visit(final VariableDeclarationFragment node) {
+          SimpleName _name = node.getName();
+          String _identifier = _name.getIdentifier();
+          String _identifier_1 = simpleName.getIdentifier();
+          boolean _equals = _identifier.equals(_identifier_1);
+          if (_equals) {
+            final ASTNode parentNode = node.getParent();
+            boolean _matched = false;
+            if (!_matched) {
+              if (parentNode instanceof VariableDeclarationStatement) {
+                _matched=true;
+                Type _type = ((VariableDeclarationStatement)parentNode).getType();
+                matchesFound.add(_type);
+              }
+            }
+            if (!_matched) {
+              if (parentNode instanceof FieldDeclaration) {
+                _matched=true;
+                Type _type = ((FieldDeclaration)parentNode).getType();
+                matchesFound.add(_type);
+              }
+            }
+            if (!_matched) {
+              if (parentNode instanceof VariableDeclarationExpression) {
+                _matched=true;
+                Type _type = ((VariableDeclarationExpression)parentNode).getType();
+                matchesFound.add(_type);
+              }
+            }
+          }
+          return false;
+        }
+        
+        public boolean preVisit2(final ASTNode node) {
+          return matchesFound.isEmpty();
+        }
+        
+        public boolean visit(final SingleVariableDeclaration node) {
+          SimpleName _name = node.getName();
+          boolean _equals = _name.equals(simpleName);
+          if (_equals) {
+            Type _type = node.getType();
+            matchesFound.add(_type);
+          }
+          return false;
+        }
+      });
+    return matchesFound;
+  }
+  
+  private Iterable<Assignment> findAssigmentsInBlock(final Block scope, final Function1<? super Assignment, ? extends Boolean> constraint) {
+    final HashSet<Assignment> assigments = CollectionLiterals.<Assignment>newHashSet();
     boolean _notEquals = (!Objects.equal(scope, null));
     if (_notEquals) {
-      final HashSet<Assignment> assigments = CollectionLiterals.<Assignment>newHashSet();
       scope.accept(
         new ASTVisitor() {
           public boolean visit(final Assignment node) {
@@ -476,10 +539,8 @@ public class ASTFlattenerUtils {
             return true;
           }
         });
-      boolean _isEmpty = assigments.isEmpty();
-      return Boolean.valueOf((!_isEmpty));
     }
-    return Boolean.valueOf(false);
+    return assigments;
   }
   
   public Boolean isAssignedInBody(final Block scope, final VariableDeclarationFragment fieldDeclFragment) {
@@ -508,7 +569,9 @@ public class ASTFlattenerUtils {
         return Boolean.valueOf(false);
       }
     };
-    return this.isAssignedInBody(scope, _function);
+    Iterable<Assignment> _findAssigmentsInBlock = this.findAssigmentsInBlock(scope, _function);
+    boolean _isEmpty = IterableExtensions.isEmpty(_findAssigmentsInBlock);
+    return Boolean.valueOf((!_isEmpty));
   }
   
   public Boolean isAssignedInBody(final Block scope, final SimpleName nameToLookFor) {
@@ -524,7 +587,9 @@ public class ASTFlattenerUtils {
         return Boolean.valueOf(false);
       }
     };
-    return this.isAssignedInBody(scope, _function);
+    Iterable<Assignment> _findAssigmentsInBlock = this.findAssigmentsInBlock(scope, _function);
+    boolean _isEmpty = IterableExtensions.isEmpty(_findAssigmentsInBlock);
+    return Boolean.valueOf((!_isEmpty));
   }
   
   protected String _toSimpleName(final SimpleName name) {

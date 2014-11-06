@@ -1362,14 +1362,14 @@ public class JavaASTFlattener extends ASTVisitor {
         this.appendToBuffer("\'\'\'");
       }
       Expression _leftOperand = node.getLeftOperand();
-      this.convertToRichString(_leftOperand);
+      this.appendAsRichString(_leftOperand);
       Expression _rightOperand = node.getRightOperand();
-      this.convertToRichString(_rightOperand);
+      this.appendAsRichString(_rightOperand);
       List _extendedOperands = node.extendedOperands();
       Expression _rightOperand_1 = node.getRightOperand();
       final Function2<Expression, Expression, Expression> _function = new Function2<Expression, Expression, Expression>() {
         public Expression apply(final Expression prevExpr, final Expression currExpr) {
-          JavaASTFlattener.this.convertToRichString(currExpr);
+          JavaASTFlattener.this.appendAsRichString(currExpr);
           return currExpr;
         }
       };
@@ -1383,25 +1383,16 @@ public class JavaASTFlattener extends ASTVisitor {
     } else {
       Expression _leftOperand_1 = node.getLeftOperand();
       _leftOperand_1.accept(this);
-      StringBuffer _appendSpaceToBuffer = this.appendSpaceToBuffer();
-      InfixExpression.Operator _operator = node.getOperator();
-      String _string = _operator.toString();
-      _appendSpaceToBuffer.append(_string);
-      this.appendSpaceToBuffer();
+      final InfixExpression.Operator operator = node.getOperator();
       Expression _rightOperand_2 = node.getRightOperand();
-      _rightOperand_2.accept(this);
+      this.handleInfixRightSide(node, operator, _rightOperand_2);
       final List extendedOperands = node.extendedOperands();
       int _size = extendedOperands.size();
       boolean _notEquals = (_size != 0);
       if (_notEquals) {
-        this.appendSpaceToBuffer();
         final Procedure1<Expression> _function_1 = new Procedure1<Expression>() {
           public void apply(final Expression e) {
-            InfixExpression.Operator _operator = node.getOperator();
-            String _string = _operator.toString();
-            StringBuffer _appendToBuffer = JavaASTFlattener.this.appendToBuffer(_string);
-            _appendToBuffer.append(" ");
-            e.accept(JavaASTFlattener.this);
+            JavaASTFlattener.this.handleInfixRightSide(node, operator, e);
           }
         };
         IterableExtensions.<Expression>forEach(extendedOperands, _function_1);
@@ -1410,9 +1401,121 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
-  public void convertToRichString(final Expression expression) {
+  public StringBuffer handleInfixRightSide(final InfixExpression infixParent, final InfixExpression.Operator operator, final Expression rightSide) {
+    StringBuffer _switchResult = null;
+    boolean _matched = false;
+    if (!_matched) {
+      if (Objects.equal(operator, InfixExpression.Operator.XOR)) {
+        _matched=true;
+        StringBuffer _xifexpression = null;
+        boolean _isBooleanInvolved = this.isBooleanInvolved(infixParent);
+        if (_isBooleanInvolved) {
+          StringBuffer _xblockexpression = null;
+          {
+            this.appendToBuffer(".xor(");
+            rightSide.accept(this);
+            _xblockexpression = this.appendToBuffer(")");
+          }
+          _xifexpression = _xblockexpression;
+        } else {
+          StringBuffer _xblockexpression_1 = null;
+          {
+            this.appendToBuffer(".bitwiseXor(");
+            rightSide.accept(this);
+            _xblockexpression_1 = this.appendToBuffer(")");
+          }
+          _xifexpression = _xblockexpression_1;
+        }
+        _switchResult = _xifexpression;
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(operator, InfixExpression.Operator.AND)) {
+        _matched=true;
+      }
+      if (!_matched) {
+        if (Objects.equal(operator, InfixExpression.Operator.OR)) {
+          _matched=true;
+        }
+      }
+      if (_matched) {
+        StringBuffer _xifexpression_1 = null;
+        boolean _isBooleanInvolved_1 = this.isBooleanInvolved(infixParent);
+        boolean _not = (!_isBooleanInvolved_1);
+        if (_not) {
+          StringBuffer _xblockexpression_2 = null;
+          {
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append(".bitwise");
+            String _xifexpression_2 = null;
+            boolean _equals = Objects.equal(operator, InfixExpression.Operator.AND);
+            if (_equals) {
+              _xifexpression_2 = "And";
+            } else {
+              _xifexpression_2 = "Or";
+            }
+            _builder.append(_xifexpression_2, "");
+            _builder.append("(");
+            this.appendToBuffer(_builder.toString());
+            rightSide.accept(this);
+            _xblockexpression_2 = this.appendToBuffer(")");
+          }
+          _xifexpression_1 = _xblockexpression_2;
+        }
+        _switchResult = _xifexpression_1;
+      }
+    }
+    if (!_matched) {
+      {
+        this.appendSpaceToBuffer();
+        String _string = operator.toString();
+        this.appendToBuffer(_string);
+        this.appendSpaceToBuffer();
+        rightSide.accept(this);
+      }
+    }
+    return _switchResult;
+  }
+  
+  public boolean isBooleanInvolved(final InfixExpression it) {
+    boolean _or = false;
+    Expression _leftOperand = it.getLeftOperand();
+    boolean _isBooleanType = this.isBooleanType(_leftOperand);
+    if (_isBooleanType) {
+      _or = true;
+    } else {
+      Expression _rightOperand = it.getRightOperand();
+      boolean _isBooleanType_1 = this.isBooleanType(_rightOperand);
+      _or = _isBooleanType_1;
+    }
+    return _or;
+  }
+  
+  public boolean isBooleanType(final Expression expression) {
+    if ((expression instanceof BooleanLiteral)) {
+      return true;
+    }
+    if ((expression instanceof SimpleName)) {
+      final Type declType = this._aSTFlattenerUtils.findDeclaredType(((SimpleName)expression));
+      boolean _notEquals = (!Objects.equal(declType, null));
+      if (_notEquals) {
+        boolean _matched = false;
+        if (!_matched) {
+          boolean _isPrimitiveType = declType.isPrimitiveType();
+          if (_isPrimitiveType) {
+            _matched=true;
+            PrimitiveType.Code _primitiveTypeCode = ((PrimitiveType) declType).getPrimitiveTypeCode();
+            return Objects.equal(_primitiveTypeCode, PrimitiveType.BOOLEAN);
+          }
+        }
+      }
+    }
+    return false;
+  }
+  
+  public void appendAsRichString(final Expression expression) {
     if ((expression instanceof StringLiteral)) {
-      String _richTextValue = this._aSTFlattenerUtils.richTextValue(((StringLiteral)expression));
+      String _richTextValue = this.richTextValue(((StringLiteral)expression));
       this.appendToBuffer(_richTextValue);
     } else {
       boolean _and = false;
@@ -1431,6 +1534,16 @@ public class JavaASTFlattener extends ASTVisitor {
         this.appendToBuffer("»");
       }
     }
+  }
+  
+  public String richTextValue(final StringLiteral literal) {
+    String value = literal.getLiteralValue();
+    boolean _endsWith = value.endsWith("\'");
+    if (_endsWith) {
+      String _concat = value.concat("«»");
+      value = _concat;
+    }
+    return value;
   }
   
   public boolean visit(final InstanceofExpression node) {
