@@ -11,6 +11,7 @@ import org.eclipse.xtend.lib.macro.declaration.Visibility
 import org.eclipse.xtend.lib.macro.declaration.Modifier
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
 import java.lang.annotation.Documented
+import com.google.common.annotations.GwtCompatible
 
 /**
  * Turns this class into a read-only Data object. 
@@ -30,6 +31,7 @@ import java.lang.annotation.Documented
 @Target(ElementType.TYPE)
 @Active(DataProcessor)
 @Documented
+@GwtCompatible
 annotation Data {
 }
 

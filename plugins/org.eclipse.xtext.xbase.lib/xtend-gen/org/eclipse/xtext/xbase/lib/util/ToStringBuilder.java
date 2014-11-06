@@ -41,14 +41,12 @@ import org.eclipse.xtext.xbase.lib.util.ToStringContext;
 @GwtCompatible
 @SuppressWarnings("all")
 public final class ToStringBuilder {
-  @GwtCompatible
   private static final class Part {
     private String fieldName;
     
     private Object value;
   }
   
-  @GwtCompatible
   private static class IndentationAwareStringBuilder {
     private final StringBuilder builder = new StringBuilder();
     
@@ -94,26 +92,7 @@ public final class ToStringBuilder {
   }
   
   @Extension
-  private static ToStringContext _toStringContext = ToStringContext.instance();
-  
-  private static String gwtCompatibleSimpleName(final Class<?> clazz) {
-    String _name = clazz.getName();
-    String name = _name.replaceAll("\\$[0-9]+", "\\$");
-    int start = name.lastIndexOf("$");
-    if ((start == (-1))) {
-      int _lastIndexOf = name.lastIndexOf(".");
-      start = _lastIndexOf;
-    }
-    final String simpleName = name.substring((start + 1));
-    String _xifexpression = null;
-    boolean _isEmpty = simpleName.isEmpty();
-    if (_isEmpty) {
-      _xifexpression = "Anonymous";
-    } else {
-      _xifexpression = simpleName;
-    }
-    return _xifexpression;
-  }
+  private static ToStringContext _toStringContext = ToStringContext.INSTANCE;
   
   private final Object instance;
   
@@ -136,8 +115,8 @@ public final class ToStringBuilder {
   public ToStringBuilder(final Object instance) {
     this.instance = instance;
     Class<?> _class = instance.getClass();
-    String _gwtCompatibleSimpleName = ToStringBuilder.gwtCompatibleSimpleName(_class);
-    this.typeName = _gwtCompatibleSimpleName;
+    String _simpleName = _class.getSimpleName();
+    this.typeName = _simpleName;
   }
   
   /**
@@ -219,6 +198,7 @@ public final class ToStringBuilder {
     return this.addField(_findFirst);
   }
   
+  @GwtIncompatible("java.lang.reflect.Field")
   private ToStringBuilder addField(final Field field) {
     try {
       ToStringBuilder _xifexpression = null;
@@ -398,8 +378,8 @@ public final class ToStringBuilder {
   private void serializeIterable(final Iterable<?> object, final IndentationAwareStringBuilder sb) {
     final Iterator<?> iterator = object.iterator();
     Class<? extends Iterable> _class = object.getClass();
-    final String simpleName = ToStringBuilder.gwtCompatibleSimpleName(_class);
-    IndentationAwareStringBuilder _append = sb.append(simpleName);
+    String _simpleName = _class.getSimpleName();
+    IndentationAwareStringBuilder _append = sb.append(_simpleName);
     _append.append(" (");
     if (this.multiLine) {
       sb.increaseIndent();
@@ -436,12 +416,13 @@ public final class ToStringBuilder {
   
   private String toSimpleReferenceString(final Object obj) {
     Class<?> _class = obj.getClass();
-    String _gwtCompatibleSimpleName = ToStringBuilder.gwtCompatibleSimpleName(_class);
-    String _plus = (_gwtCompatibleSimpleName + "@");
+    String _simpleName = _class.getSimpleName();
+    String _plus = (_simpleName + "@");
     int _identityHashCode = System.identityHashCode(obj);
     return (_plus + Integer.valueOf(_identityHashCode));
   }
   
+  @GwtIncompatible("java.lang.reflect.Field")
   private ArrayList<Field> getAllDeclaredFields(final Class<?> clazz) {
     Class<?> current = clazz;
     final ArrayList<Field> result = CollectionLiterals.<Field>newArrayList();

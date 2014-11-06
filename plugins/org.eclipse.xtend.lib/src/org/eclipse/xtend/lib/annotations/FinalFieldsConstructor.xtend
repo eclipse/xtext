@@ -48,7 +48,6 @@ annotation FinalFieldsConstructor {
 /**
  * @since 2.7
  */
-@GwtCompatible
 @Beta
 class FinalFieldsConstructorProcessor implements TransformationParticipant<MutableTypeParameterDeclarator> {
 
@@ -76,7 +75,6 @@ class FinalFieldsConstructorProcessor implements TransformationParticipant<Mutab
 	/**
 	 * @since 2.7
 	 */
-	@GwtCompatible
 	@Beta
 	static class Util {
 		extension TransformationContext context
