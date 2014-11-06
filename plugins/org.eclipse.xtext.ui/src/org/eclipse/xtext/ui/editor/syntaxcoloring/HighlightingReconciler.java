@@ -17,6 +17,7 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.IDocumentExtension4;
 import org.eclipse.jface.text.ITextInputListener;
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.TextPresentation;
@@ -189,15 +190,25 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 	 *            the added positions
 	 * @param removedPositions
 	 *            the removed positions
+	 * @param modificationStamp
+	 *            the modification stamp when the positions were calculated 
 	 */
 	private void updatePresentation(TextPresentation textPresentation, List<AttributedPosition> addedPositions,
-			List<AttributedPosition> removedPositions) {
-		Runnable runnable = presenter.createUpdateRunnable(textPresentation, addedPositions, removedPositions);
+			List<AttributedPosition> removedPositions, final long modificationStamp) {
+		final Runnable runnable = presenter.createUpdateRunnable(textPresentation, addedPositions, removedPositions);
 		if (runnable == null)
 			return;
-
+		
 		Display display = getDisplay();
-		display.asyncExec(runnable);
+		display.asyncExec(new Runnable() {
+			public void run() {
+				// never apply outdated highlighting
+				if(sourceViewer != null 
+						&& sourceViewer.getDocument() instanceof IDocumentExtension4
+						&& ((IDocumentExtension4) sourceViewer.getDocument()).getModificationStamp() == modificationStamp)
+					runnable.run();
+			}
+		});
 	}
 	
 	private Display getDisplay() {
@@ -359,7 +370,7 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 			if (highlightingPresenter.isCanceled())		
 				return;
 			checkCanceled(cancelIndicator);
-			updatePresentation(textPresentation, addedPositions, removedPositions);
+			updatePresentation(textPresentation, addedPositions, removedPositions, resource.getModificationStamp());
 
 		} finally {
 			if (highlightingPresenter != null)
