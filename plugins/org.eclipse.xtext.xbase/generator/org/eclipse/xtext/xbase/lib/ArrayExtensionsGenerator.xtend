@@ -83,6 +83,7 @@ class ArrayExtensionsGenerator {
 		 */
 		@Pure
 		@Inline("$1.clone()")
+		@GwtIncompatible("clone")
 		public static «string»[] clone(«string»[] array) {
 			return array.clone();
 		}
@@ -90,13 +91,15 @@ class ArrayExtensionsGenerator {
 	
 	def generateEquals(String string) '''
 		/**
+		 * Returns whether the array and the given other object are identical.
+		 *
 		 * Delegates to {@link Object#equals(Object)}
 		 * 
 		 * @param array
 		 *            the array
 		 * @param other
 		 *            the other element to compare to
-		 * @return the hash code
+		 * @return whether the two given argument are identical 
 		 * @since 2.5
 		 */
 		@Pure
