@@ -206,6 +206,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 		XtextResource xtextResource = (XtextResource) resourceForEditorInputFactory.createResource(editorInput);
 		// encoding can be null for FileRevisionEditorInput
 		loadResource(xtextResource, xtextDocument.get(), encoding == null ? getWorkspaceOrDefaultEncoding() : encoding);
+		xtextResource.setModificationStamp(xtextDocument.getModificationStamp());
 		xtextDocument.setInput(xtextResource);
 	}
 
