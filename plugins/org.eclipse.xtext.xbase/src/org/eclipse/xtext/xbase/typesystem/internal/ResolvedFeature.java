@@ -22,6 +22,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.util.Wrapper;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArgumentSlot;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
@@ -37,6 +38,7 @@ import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
+import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -148,6 +150,21 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 	@Override
 	protected List<JvmTypeReference> getPlainSyntacticTypeArguments() {
 		return getFeatureCall().getTypeArguments();
+	}
+	
+	@Override
+	protected void computeVarArgumentType(IFeatureCallArgumentSlot slot, TypeParameterSubstitutor<?> substitutor) {
+		if (isExtension()) {
+			List<XExpression> arguments = slot.getArgumentExpressions();
+			if (arguments.size() == 1) {
+				XExpression singleArgument = arguments.get(0);
+				if (singleArgument == getSyntacticReceiver() || singleArgument == getImplicitFirstArgument()) {
+					computeFixedArityArgumentType(slot, substitutor);
+					return;
+				}
+			}
+		}
+		super.computeVarArgumentType(slot, substitutor);
 	}
 	
 	@Override
