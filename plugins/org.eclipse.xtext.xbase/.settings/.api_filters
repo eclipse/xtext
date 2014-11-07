@@ -37,6 +37,9 @@
             <message_arguments>
                 <message_argument value="MutableFileSystemSupport"/>
                 <message_argument value="ParallelFileSystemSupport"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtext/xbase/jvmmodel/JvmModelAssociator.java" type="org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator">
         <filter id="338792546">
             <message_arguments>
