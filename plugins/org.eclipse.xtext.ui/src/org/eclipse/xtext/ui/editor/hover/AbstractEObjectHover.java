@@ -51,7 +51,7 @@ public abstract class AbstractEObjectHover extends AbstractHover implements IEOb
 			return null;
 		//TODO this is being called on change in the UI-thread. Not a good idea to do such expensive stuff.
 		// returning the region on a per token basis would be better.
-		return xtextDocument.priorityReadOnly(new IUnitOfWork<IRegion, XtextResource>() {
+		return xtextDocument.readOnly(new IUnitOfWork<IRegion, XtextResource>() {
 			public IRegion exec(XtextResource state) throws Exception {
 				// resource can be null e.g. read only zip/jar entry
 				if (state == null) {
@@ -73,7 +73,7 @@ public abstract class AbstractEObjectHover extends AbstractHover implements IEOb
 		IXtextDocument xtextDocument = XtextDocumentUtil.get(textViewer);
 		if(xtextDocument == null) 
 			return null;
-		return xtextDocument.priorityReadOnly(new IUnitOfWork<Object, XtextResource>() {
+		return xtextDocument.readOnly(new IUnitOfWork<Object, XtextResource>() {
 			public Object exec(XtextResource state) throws Exception {
 				// resource can be null e.g. read only zip/jar entry
 				if (state == null) {
