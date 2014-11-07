@@ -40,6 +40,7 @@ import org.eclipse.jface.text.IDocumentListener;
 import org.eclipse.jface.text.IDocumentPartitioner;
 import org.eclipse.jface.text.source.AnnotationModel;
 import org.eclipse.jface.text.source.IAnnotationModel;
+import org.eclipse.jface.viewers.deferred.SetModel;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.IStorageEditorInput;
@@ -206,6 +207,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 		XtextResource xtextResource = (XtextResource) resourceForEditorInputFactory.createResource(editorInput);
 		// encoding can be null for FileRevisionEditorInput
 		loadResource(xtextResource, xtextDocument.get(), encoding == null ? getWorkspaceOrDefaultEncoding() : encoding);
+		xtextResource.setModificationStamp(xtextDocument.getModificationStamp());
 		xtextDocument.setInput(xtextResource);
 	}
 
