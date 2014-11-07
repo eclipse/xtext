@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.ui" version="2">
+    <resource path="src/org/eclipse/xtext/ui/containers/AbstractProjectsStateHelper.java" type="org.eclipse.xtext.ui.containers.AbstractProjectsStateHelper">
+        <filter comment="Newly added non-api type" id="1110441988">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.containers.AbstractProjectsStateHelper"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtext/ui/editor/XtextSourceViewer.java" type="org.eclipse.xtext.ui.editor.XtextSourceViewer">
         <filter comment="Intentional extends clause" id="571473929">
             <message_arguments>
