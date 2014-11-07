@@ -17,8 +17,6 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJarEntryResource;
@@ -28,7 +26,6 @@ import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.launching.JavaRuntime;
-import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions;
 import org.eclipse.xtext.util.Pair;
 
@@ -40,12 +37,9 @@ import com.google.inject.Singleton;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @Singleton
-public class JavaProjectsStateHelper extends AbstractStorage2UriMapperClient {
+public class JavaProjectsStateHelper extends AbstractProjectsStateHelper {
 
 	private final static Logger log = Logger.getLogger(JavaProjectsStateHelper.class);
-	
-	@Inject
-	private IWorkspace workspace;
 	
 	@Inject
 	private IStorage2UriMapperJdtExtensions uriMapperExtensions;
@@ -158,7 +152,7 @@ public class JavaProjectsStateHelper extends AbstractStorage2UriMapperClient {
 					IJavaProject javaProject = fragmentRoot.getJavaProject();
 					if (isAccessibleXtextProject(javaProject.getProject()))
 						return fragmentRoot;
-					if (result != null)
+					if (result == null)
 						result = fragmentRoot;
 				}
 			}
@@ -166,15 +160,4 @@ public class JavaProjectsStateHelper extends AbstractStorage2UriMapperClient {
 		return result;
 	}
 	
-	protected boolean isAccessibleXtextProject(IProject p) {
-		return p != null && XtextProjectHelper.hasNature(p) && XtextProjectHelper.hasBuilder(p);
-	}
-	
-	protected IWorkspaceRoot getWorkspaceRoot() {
-		return workspace.getRoot();
-	}
-	
-	public void setWorkspace(IWorkspace workspace) {
-		this.workspace = workspace;
-	}
 }
