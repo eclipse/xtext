@@ -16,28 +16,21 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.ui.XtextProjectHelper;
 
 import com.google.common.collect.Lists;
-import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @Singleton
-public class WorkspaceProjectsStateHelper extends AbstractStorage2UriMapperClient {
+public class WorkspaceProjectsStateHelper extends AbstractProjectsStateHelper {
 
 	private final static Logger log = Logger.getLogger(WorkspaceProjectsStateHelper.class);
-	
-	@Inject
-	private IWorkspace workspace;
 	
 	public String initHandle(URI uri) {
 		if (!uri.isPlatform())
@@ -92,15 +85,4 @@ public class WorkspaceProjectsStateHelper extends AbstractStorage2UriMapperClien
 		return Collections.emptyList();
 	}
 	
-	protected boolean isAccessibleXtextProject(IProject p) {
-		return p != null && XtextProjectHelper.hasNature(p);
-	}
-	
-	protected IWorkspaceRoot getWorkspaceRoot() {
-		return workspace.getRoot();
-	}
-
-	public void setWorkspace(IWorkspace workspace) {
-		this.workspace = workspace;
-	}
 }
