@@ -66,8 +66,8 @@ public class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwn
         }
       }
       _builder.append(" void method(");
-      final Function1<String, String> _function = new Function1<String, String>() {
-        public String apply(final String it) {
+      final Function1<String, CharSequence> _function = new Function1<String, CharSequence>() {
+        public CharSequence apply(final String it) {
           return it;
         }
       };
