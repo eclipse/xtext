@@ -26,6 +26,7 @@ import com.intellij.lang.PsiBuilder;
 }
 
 @parser::members {
+
 public XbaseWithAnnotationsElementTypeProvider elementTypeProvider;
 
 public PsiInternalXbaseWithAnnotationsParser(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, XbaseWithAnnotationsElementTypeProvider elementTypeProvider) {
@@ -53,6 +54,10 @@ finally {
 ruleXAnnotation:
 	(
 		(
+			{
+				markComposite();
+				doneComposite(elementTypeProvider.getXAnnotation_XAnnotationAction_0ElementType());
+			}
 		)
 		{
 			markLeaf();
@@ -239,6 +244,10 @@ ruleXAnnotationElementValueOrCommaList:
 				)=>
 				(
 					(
+						{
+							markComposite();
+							doneComposite(elementTypeProvider.getXAnnotationElementValueOrCommaList_XListLiteralAction_0_0_0_0ElementType());
+						}
 					)
 					{
 						markLeaf();
@@ -308,6 +317,10 @@ ruleXAnnotationElementValueOrCommaList:
 			}
 			(
 				(
+					{
+						markComposite();
+						doneComposite(elementTypeProvider.getXAnnotationElementValueOrCommaList_XListLiteralElementsAction_1_1_0ElementType());
+					}
 				)
 				(
 					{
@@ -357,6 +370,10 @@ ruleXAnnotationElementValue:
 				)=>
 				(
 					(
+						{
+							markComposite();
+							doneComposite(elementTypeProvider.getXAnnotationElementValue_XListLiteralAction_0_0_0_0ElementType());
+						}
 					)
 					{
 						markLeaf();
@@ -490,6 +507,10 @@ ruleXAssignment:
 	(
 		(
 			(
+				{
+					markComposite();
+					doneComposite(elementTypeProvider.getXAssignment_XAssignmentAction_0_0ElementType());
+				}
 			)
 			(
 				(
@@ -544,6 +565,10 @@ ruleXAssignment:
 					)=>
 					(
 						(
+							{
+								markComposite();
+								doneComposite(elementTypeProvider.getXAssignment_XBinaryOperationLeftOperandAction_1_1_0_0_0ElementType());
+							}
 						)
 						(
 							(
@@ -731,6 +756,10 @@ ruleXOrExpression:
 				)=>
 				(
 					(
+						{
+							markComposite();
+							doneComposite(elementTypeProvider.getXOrExpression_XBinaryOperationLeftOperandAction_1_0_0_0ElementType());
+						}
 					)
 					(
 						(
@@ -813,6 +842,10 @@ ruleXAndExpression:
 				)=>
 				(
 					(
+						{
+							markComposite();
+							doneComposite(elementTypeProvider.getXAndExpression_XBinaryOperationLeftOperandAction_1_0_0_0ElementType());
+						}
 					)
 					(
 						(
@@ -895,6 +928,10 @@ ruleXEqualityExpression:
 				)=>
 				(
 					(
+						{
+							markComposite();
+							doneComposite(elementTypeProvider.getXEqualityExpression_XBinaryOperationLeftOperandAction_1_0_0_0ElementType());
+						}
 					)
 					(
 						(
@@ -1000,6 +1037,10 @@ ruleXRelationalExpression:
 					)=>
 					(
 						(
+							{
+								markComposite();
+								doneComposite(elementTypeProvider.getXRelationalExpression_XInstanceOfExpressionExpressionAction_1_0_0_0_0ElementType());
+							}
 						)
 						{
 							markLeaf();
@@ -1037,6 +1078,10 @@ ruleXRelationalExpression:
 					)=>
 					(
 						(
+							{
+								markComposite();
+								doneComposite(elementTypeProvider.getXRelationalExpression_XBinaryOperationLeftOperandAction_1_1_0_0_0ElementType());
+							}
 						)
 						(
 							(
@@ -1155,6 +1200,10 @@ ruleXOtherOperatorExpression:
 				)=>
 				(
 					(
+						{
+							markComposite();
+							doneComposite(elementTypeProvider.getXOtherOperatorExpression_XBinaryOperationLeftOperandAction_1_0_0_0ElementType());
+						}
 					)
 					(
 						(
@@ -1390,6 +1439,10 @@ ruleXAdditiveExpression:
 				)=>
 				(
 					(
+						{
+							markComposite();
+							doneComposite(elementTypeProvider.getXAdditiveExpression_XBinaryOperationLeftOperandAction_1_0_0_0ElementType());
+						}
 					)
 					(
 						(
@@ -1482,6 +1535,10 @@ ruleXMultiplicativeExpression:
 				)=>
 				(
 					(
+						{
+							markComposite();
+							doneComposite(elementTypeProvider.getXMultiplicativeExpression_XBinaryOperationLeftOperandAction_1_0_0_0ElementType());
+						}
 					)
 					(
 						(
@@ -1571,6 +1628,10 @@ ruleXUnaryOperation:
 	(
 		(
 			(
+				{
+					markComposite();
+					doneComposite(elementTypeProvider.getXUnaryOperation_XUnaryOperationAction_0_0ElementType());
+				}
 			)
 			(
 				(
@@ -1673,6 +1734,10 @@ ruleXCastedExpression:
 				)=>
 				(
 					(
+						{
+							markComposite();
+							doneComposite(elementTypeProvider.getXCastedExpression_XCastedExpressionTargetAction_1_0_0_0ElementType());
+						}
 					)
 					{
 						markLeaf();
@@ -1730,6 +1795,10 @@ ruleXPostfixOperation:
 			)=>
 			(
 				(
+					{
+						markComposite();
+						doneComposite(elementTypeProvider.getXPostfixOperation_XPostfixOperationOperandAction_1_0_0ElementType());
+					}
 				)
 				(
 					(
@@ -1821,6 +1890,10 @@ ruleXMemberFeatureCall:
 					)=>
 					(
 						(
+							{
+								markComposite();
+								doneComposite(elementTypeProvider.getXMemberFeatureCall_XAssignmentAssignableAction_1_0_0_0_0ElementType());
+							}
 						)
 						(
 							{
@@ -1900,6 +1973,10 @@ ruleXMemberFeatureCall:
 					)=>
 					(
 						(
+							{
+								markComposite();
+								doneComposite(elementTypeProvider.getXMemberFeatureCall_XMemberFeatureCallMemberCallTargetAction_1_1_0_0_0ElementType());
+							}
 						)
 						(
 							{
@@ -2391,6 +2468,10 @@ finally {
 ruleXSetLiteral:
 	(
 		(
+			{
+				markComposite();
+				doneComposite(elementTypeProvider.getXSetLiteral_XSetLiteralAction_0ElementType());
+			}
 		)
 		{
 			markLeaf();
@@ -2462,6 +2543,10 @@ finally {
 ruleXListLiteral:
 	(
 		(
+			{
+				markComposite();
+				doneComposite(elementTypeProvider.getXListLiteral_XListLiteralAction_0ElementType());
+			}
 		)
 		{
 			markLeaf();
@@ -2541,6 +2626,10 @@ ruleXClosure:
 			)=>
 			(
 				(
+					{
+						markComposite();
+						doneComposite(elementTypeProvider.getXClosure_XClosureAction_0_0_0ElementType());
+					}
 				)
 				{
 					markLeaf();
@@ -2656,6 +2745,10 @@ finally {
 ruleXExpressionInClosure:
 	(
 		(
+			{
+				markComposite();
+				doneComposite(elementTypeProvider.getXExpressionInClosure_XBlockExpressionAction_0ElementType());
+			}
 		)
 		(
 			(
@@ -2722,6 +2815,10 @@ ruleXShortClosure:
 			)=>
 			(
 				(
+					{
+						markComposite();
+						doneComposite(elementTypeProvider.getXShortClosure_XClosureAction_0_0_0ElementType());
+					}
 				)
 				(
 					(
@@ -2832,6 +2929,10 @@ finally {
 ruleXIfExpression:
 	(
 		(
+			{
+				markComposite();
+				doneComposite(elementTypeProvider.getXIfExpression_XIfExpressionAction_0ElementType());
+			}
 		)
 		{
 			markLeaf();
@@ -2915,6 +3016,10 @@ finally {
 ruleXSwitchExpression:
 	(
 		(
+			{
+				markComposite();
+				doneComposite(elementTypeProvider.getXSwitchExpression_XSwitchExpressionAction_0ElementType());
+			}
 		)
 		{
 			markLeaf();
@@ -3097,6 +3202,10 @@ finally {
 ruleXCasePart:
 	(
 		(
+			{
+				markComposite();
+				doneComposite(elementTypeProvider.getXCasePart_XCasePartAction_0ElementType());
+			}
 		)
 		(
 			(
@@ -3194,6 +3303,10 @@ ruleXForLoopExpression:
 			)=>
 			(
 				(
+					{
+						markComposite();
+						doneComposite(elementTypeProvider.getXForLoopExpression_XForLoopExpressionAction_0_0_0ElementType());
+					}
 				)
 				{
 					markLeaf();
@@ -3274,6 +3387,10 @@ finally {
 ruleXBasicForLoopExpression:
 	(
 		(
+			{
+				markComposite();
+				doneComposite(elementTypeProvider.getXBasicForLoopExpression_XBasicForLoopExpressionAction_0ElementType());
+			}
 		)
 		{
 			markLeaf();
@@ -3414,6 +3531,10 @@ finally {
 ruleXWhileExpression:
 	(
 		(
+			{
+				markComposite();
+				doneComposite(elementTypeProvider.getXWhileExpression_XWhileExpressionAction_0ElementType());
+			}
 		)
 		{
 			markLeaf();
@@ -3474,6 +3595,10 @@ finally {
 ruleXDoWhileExpression:
 	(
 		(
+			{
+				markComposite();
+				doneComposite(elementTypeProvider.getXDoWhileExpression_XDoWhileExpressionAction_0ElementType());
+			}
 		)
 		{
 			markLeaf();
@@ -3541,6 +3666,10 @@ finally {
 ruleXBlockExpression:
 	(
 		(
+			{
+				markComposite();
+				doneComposite(elementTypeProvider.getXBlockExpression_XBlockExpressionAction_0ElementType());
+			}
 		)
 		{
 			markLeaf();
@@ -3624,6 +3753,10 @@ finally {
 ruleXVariableDeclaration:
 	(
 		(
+			{
+				markComposite();
+				doneComposite(elementTypeProvider.getXVariableDeclaration_XVariableDeclarationAction_0ElementType());
+			}
 		)
 		(
 			(
@@ -3809,6 +3942,10 @@ finally {
 ruleXFeatureCall:
 	(
 		(
+			{
+				markComposite();
+				doneComposite(elementTypeProvider.getXFeatureCall_XFeatureCallAction_0ElementType());
+			}
 		)
 		(
 			{
@@ -4081,6 +4218,10 @@ finally {
 ruleXConstructorCall:
 	(
 		(
+			{
+				markComposite();
+				doneComposite(elementTypeProvider.getXConstructorCall_XConstructorCallAction_0ElementType());
+			}
 		)
 		{
 			markLeaf();
@@ -4279,6 +4420,10 @@ finally {
 ruleXBooleanLiteral:
 	(
 		(
+			{
+				markComposite();
+				doneComposite(elementTypeProvider.getXBooleanLiteral_XBooleanLiteralAction_0ElementType());
+			}
 		)
 		(
 			{
@@ -4317,6 +4462,10 @@ finally {
 ruleXNullLiteral:
 	(
 		(
+			{
+				markComposite();
+				doneComposite(elementTypeProvider.getXNullLiteral_XNullLiteralAction_0ElementType());
+			}
 		)
 		{
 			markLeaf();
@@ -4341,6 +4490,10 @@ finally {
 ruleXNumberLiteral:
 	(
 		(
+			{
+				markComposite();
+				doneComposite(elementTypeProvider.getXNumberLiteral_XNumberLiteralAction_0ElementType());
+			}
 		)
 		(
 			(
@@ -4369,6 +4522,10 @@ finally {
 ruleXStringLiteral:
 	(
 		(
+			{
+				markComposite();
+				doneComposite(elementTypeProvider.getXStringLiteral_XStringLiteralAction_0ElementType());
+			}
 		)
 		(
 			(
@@ -4397,6 +4554,10 @@ finally {
 ruleXTypeLiteral:
 	(
 		(
+			{
+				markComposite();
+				doneComposite(elementTypeProvider.getXTypeLiteral_XTypeLiteralAction_0ElementType());
+			}
 		)
 		{
 			markLeaf();
@@ -4457,6 +4618,10 @@ finally {
 ruleXThrowExpression:
 	(
 		(
+			{
+				markComposite();
+				doneComposite(elementTypeProvider.getXThrowExpression_XThrowExpressionAction_0ElementType());
+			}
 		)
 		{
 			markLeaf();
@@ -4492,6 +4657,10 @@ finally {
 ruleXReturnExpression:
 	(
 		(
+			{
+				markComposite();
+				doneComposite(elementTypeProvider.getXReturnExpression_XReturnExpressionAction_0ElementType());
+			}
 		)
 		{
 			markLeaf();
@@ -4528,6 +4697,10 @@ finally {
 ruleXTryCatchFinallyExpression:
 	(
 		(
+			{
+				markComposite();
+				doneComposite(elementTypeProvider.getXTryCatchFinallyExpression_XTryCatchFinallyExpressionAction_0ElementType());
+			}
 		)
 		{
 			markLeaf();
@@ -4632,6 +4805,10 @@ ruleXSynchronizedExpression:
 			)=>
 			(
 				(
+					{
+						markComposite();
+						doneComposite(elementTypeProvider.getXSynchronizedExpression_XSynchronizedExpressionAction_0_0_0ElementType());
+					}
 				)
 				{
 					markLeaf();
@@ -4909,6 +5086,10 @@ ruleJvmTypeReference:
 				)=>
 				(
 					(
+						{
+							markComposite();
+							doneComposite(elementTypeProvider.getJvmTypeReference_JvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0ElementType());
+						}
 					)
 					{
 						markComposite();
@@ -5124,6 +5305,10 @@ ruleJvmParameterizedTypeReference:
 					)=>
 					(
 						(
+							{
+								markComposite();
+								doneComposite(elementTypeProvider.getJvmParameterizedTypeReference_JvmInnerTypeReferenceOuterAction_1_4_0_0_0ElementType());
+							}
 						)
 						{
 							markLeaf();
@@ -5243,6 +5428,10 @@ finally {
 ruleJvmWildcardTypeReference:
 	(
 		(
+			{
+				markComposite();
+				doneComposite(elementTypeProvider.getJvmWildcardTypeReference_JvmWildcardTypeReferenceAction_0ElementType());
+			}
 		)
 		{
 			markLeaf();

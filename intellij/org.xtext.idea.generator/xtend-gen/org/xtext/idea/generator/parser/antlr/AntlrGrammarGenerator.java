@@ -713,17 +713,16 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     if (supportActions) {
       String _switchResult = null;
       AbstractRule _rule = it.getRule();
-      final AbstractRule rule = _rule;
       boolean _matched = false;
       if (!_matched) {
-        if (rule instanceof EnumRule) {
+        if (_rule instanceof EnumRule) {
           boolean _isAssigned = GrammarUtil.isAssigned(it);
           if (_isAssigned) {
             _matched=true;
           }
         }
         if (!_matched) {
-          if (rule instanceof ParserRule) {
+          if (_rule instanceof ParserRule) {
             boolean _isAssigned = GrammarUtil.isAssigned(it);
             if (_isAssigned) {
               _matched=true;
@@ -735,11 +734,11 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
         }
       }
       if (!_matched) {
-        if (rule instanceof EnumRule) {
+        if (_rule instanceof EnumRule) {
           _matched=true;
         }
         if (!_matched) {
-          if (rule instanceof ParserRule) {
+          if (_rule instanceof ParserRule) {
             _matched=true;
           }
         }
@@ -780,7 +779,7 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
         }
       }
       if (!_matched) {
-        if (rule instanceof TerminalRule) {
+        if (_rule instanceof TerminalRule) {
           _matched=true;
           StringConcatenation _builder_1 = new StringConcatenation();
           String _localVar_2 = this._grammarAccessExtensions.localVar(it);
@@ -1387,14 +1386,13 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     if (supportActions) {
       String _switchResult = null;
       AbstractRule _rule = it.getRule();
-      final AbstractRule rule = _rule;
       boolean _matched = false;
       if (!_matched) {
-        if (rule instanceof EnumRule) {
+        if (_rule instanceof EnumRule) {
           _matched=true;
         }
         if (!_matched) {
-          if (rule instanceof ParserRule) {
+          if (_rule instanceof ParserRule) {
             _matched=true;
           }
         }
@@ -1468,7 +1466,7 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
         }
       }
       if (!_matched) {
-        if (rule instanceof TerminalRule) {
+        if (_rule instanceof TerminalRule) {
           _matched=true;
           StringConcatenation _builder_1 = new StringConcatenation();
           String _localVar_2 = this._grammarAccessExtensions.localVar(assignment, it);

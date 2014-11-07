@@ -4,6 +4,7 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.Key;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.impl.source.tree.CompositeElement;
 import com.intellij.psi.impl.source.tree.LeafElement;
 import com.intellij.psi.tree.IElementType;
@@ -17,6 +18,7 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -32,7 +34,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
-public class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder {
+public class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder implements IASTNodeAwareNodeModelBuilder {
   public final static Key<Boolean> HIDDEN_KEY = Key.<Boolean>create("HIDDEN_KEY");
   
   public final static Key<Integer> LOOK_AHEAD_KEY = Key.<Integer>create("LOOK_AHEAD_KEY");
@@ -69,13 +71,31 @@ public class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder {
   
   protected void replaceAssociations(final INode oldNode, final INode newNode) {
     final List<ASTNode> mapping = this.reverseNodesMapping.remove(oldNode);
-    for (final ASTNode astNode : mapping) {
-      this.associate(astNode, newNode);
+    boolean _notEquals = (!Objects.equal(mapping, null));
+    if (_notEquals) {
+      for (final ASTNode astNode : mapping) {
+        this.associate(astNode, newNode);
+      }
+    }
+  }
+  
+  protected void removeAssociations(final INode node) {
+    final List<ASTNode> mapping = this.reverseNodesMapping.remove(node);
+    boolean _notEquals = (!Objects.equal(mapping, null));
+    if (_notEquals) {
+      for (final ASTNode astNode : mapping) {
+        this.nodesMapping.remove(astNode);
+      }
     }
   }
   
   protected void replaceByRootNode(final CompositeNode oldNode, final RootNode rootNode) {
+    final INode firstChild = rootNode.getFirstChild();
     super.replaceByRootNode(oldNode, rootNode);
+    boolean _notEquals = (!Objects.equal(firstChild, null));
+    if (_notEquals) {
+      this.removeAssociations(firstChild);
+    }
     this.replaceAssociations(oldNode, rootNode);
   }
   
@@ -178,6 +198,21 @@ public class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder {
       _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
+  }
+  
+  public ICompositeNode newCompositeNodeAsParentOf(final CompositeElement it, final EObject grammarElement, final int lookahead, final ICompositeNode existing) {
+    ICompositeNode _xblockexpression = null;
+    {
+      final ICompositeNode compositeNode = this.newCompositeNodeAsParentOf(grammarElement, lookahead, existing);
+      this.associate(it, compositeNode);
+      _xblockexpression = compositeNode;
+    }
+    return _xblockexpression;
+  }
+  
+  public ICompositeNode newRootNode(final PsiFile psiFile) {
+    String _text = psiFile.getText();
+    return this.newRootNode(_text);
   }
   
   @Pure

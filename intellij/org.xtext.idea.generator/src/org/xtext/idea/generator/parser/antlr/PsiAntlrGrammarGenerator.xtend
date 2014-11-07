@@ -19,6 +19,7 @@ import org.eclipse.xtext.idea.parser.TokenTypeProvider
 import org.xtext.idea.generator.IdeaPluginClassNames
 
 import static extension org.eclipse.xtext.GrammarUtil.*
+import org.eclipse.xtext.Action
 
 @Singleton
 class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
@@ -34,6 +35,17 @@ class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 
 		options {
 			superClass=«AbstractPsiAntlrParser.simpleName»;
+		«IF options.backtrack || options.memoize || options.k >= 0»
+			«IF options.backtrack»
+			backtrack=true
+			«ENDIF»
+			«IF options.memoize»
+			memoize=true
+			«ENDIF»
+			«IF options.k >= 0»
+			memoize=«options.k»
+			«ENDIF»
+		«ENDIF»
 		}
 	'''
 	
@@ -49,6 +61,14 @@ class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 	override protected compileParserMembers(Grammar it, AntlrOptions options) '''
 		
 		@parser::members {
+		
+		«IF options.backtrack»
+		/*
+		  This grammar contains a lot of empty actions to work around a bug in ANTLR.
+		  Otherwise the ANTLR tool will create synpreds that cannot be compiled in some rare cases.
+		*/
+		
+		«ENDIF»
 		public «grammar.elementTypeProviderName.toSimpleName» elementTypeProvider;
 		
 		public «grammar.psiInternalParserName.toSimpleName»(PsiBuilder builder, TokenStream input, «TokenTypeProvider.simpleName» tokenTypeProvider, «grammar.elementTypeProviderName.toSimpleName» elementTypeProvider) {
@@ -98,7 +118,7 @@ class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 	
 	override protected _dataTypeEbnf2(RuleCall it, boolean supportActions) {
 		if (supportActions) {
-			switch rule : rule {
+			switch rule {
 				EnumRule case assigned,
 				ParserRule case assigned: 
 					super._dataTypeEbnf2(it, supportActions)
@@ -129,6 +149,22 @@ class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 		}
 	}
 	
+	override protected _ebnf2(Action it, AntlrOptions options, boolean supportActions) {
+		if (!supportActions)
+			return super._ebnf2(it, options, supportActions)
+		else '''
+			«IF options.backtrack»
+			{
+				/* */
+			}
+			«ENDIF»
+			{
+				«markComposite»
+				«doneComposite»
+			}
+		'''
+	}
+	
 	override protected _ebnf2(Keyword it, AntlrOptions options, boolean supportActions) {
 		if (!supportActions)
 			return super._ebnf2(it, options, supportActions)
@@ -154,12 +190,17 @@ class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 	
 	override protected _ebnf2(RuleCall it, AntlrOptions options, boolean supportActions) {
 		if (supportActions) {
-			switch rule : rule {
+			switch rule {
 				EnumRule case assigned,
 				ParserRule case assigned: 
 					super._ebnf2(it, options, supportActions)
 				EnumRule, 
 				ParserRule: '''
+					«IF options.backtrack»
+					{
+						/* */
+					}
+					«ENDIF»
 					{
 						«markComposite»
 					}
@@ -217,7 +258,7 @@ class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 	
 	override protected _assignmentEbnf(RuleCall it, Assignment assignment, AntlrOptions options, boolean supportActions) {
 		if (supportActions) {
-			switch rule : rule {
+			switch rule {
 				EnumRule,
 				ParserRule: '''
 					{

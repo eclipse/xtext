@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.GrammarUtil;
@@ -132,6 +133,13 @@ public class PsiToEcoreTransformator implements IParser {
     transformationContext.compress();
   }
   
+  protected void _transform(final CompositeElement it, final Action action, @Extension final PsiToEcoreTransformationContext transformationContext) {
+    final EObject value = transformationContext.getCurrent();
+    transformationContext.forceCreateModelElement(action);
+    transformationContext.assign(value, action);
+    transformationContext.newCompositeNodeAsParentOfCurrentNode(it, action);
+  }
+  
   protected void _transform(final CompositeElement it, final RuleCall ruleCall, @Extension final PsiToEcoreTransformationContext transformationContext) {
     AbstractRule _rule = ruleCall.getRule();
     final AbstractRule rule = _rule;
@@ -241,38 +249,42 @@ public class PsiToEcoreTransformator implements IParser {
     }
   }
   
-  protected void transform(final ASTNode it, final EObject crossReference, final PsiToEcoreTransformationContext transformationContext) {
+  protected void transform(final ASTNode it, final EObject action, final PsiToEcoreTransformationContext transformationContext) {
     if (it instanceof CompositeElement
-         && crossReference instanceof CrossReference) {
-      _transform((CompositeElement)it, (CrossReference)crossReference, transformationContext);
+         && action instanceof Action) {
+      _transform((CompositeElement)it, (Action)action, transformationContext);
       return;
     } else if (it instanceof CompositeElement
-         && crossReference instanceof ParserRule) {
-      _transform((CompositeElement)it, (ParserRule)crossReference, transformationContext);
+         && action instanceof CrossReference) {
+      _transform((CompositeElement)it, (CrossReference)action, transformationContext);
       return;
     } else if (it instanceof CompositeElement
-         && crossReference instanceof RuleCall) {
-      _transform((CompositeElement)it, (RuleCall)crossReference, transformationContext);
+         && action instanceof ParserRule) {
+      _transform((CompositeElement)it, (ParserRule)action, transformationContext);
+      return;
+    } else if (it instanceof CompositeElement
+         && action instanceof RuleCall) {
+      _transform((CompositeElement)it, (RuleCall)action, transformationContext);
       return;
     } else if (it instanceof LeafElement
-         && crossReference instanceof CrossReference) {
-      _transform((LeafElement)it, (CrossReference)crossReference, transformationContext);
+         && action instanceof CrossReference) {
+      _transform((LeafElement)it, (CrossReference)action, transformationContext);
       return;
     } else if (it instanceof LeafElement
-         && crossReference instanceof Keyword) {
-      _transform((LeafElement)it, (Keyword)crossReference, transformationContext);
+         && action instanceof Keyword) {
+      _transform((LeafElement)it, (Keyword)action, transformationContext);
       return;
     } else if (it instanceof LeafElement
-         && crossReference instanceof RuleCall) {
-      _transform((LeafElement)it, (RuleCall)crossReference, transformationContext);
+         && action instanceof RuleCall) {
+      _transform((LeafElement)it, (RuleCall)action, transformationContext);
       return;
     } else if (it != null
-         && crossReference != null) {
-      _transform(it, crossReference, transformationContext);
+         && action != null) {
+      _transform(it, action, transformationContext);
       return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(it, crossReference, transformationContext).toString());
+        Arrays.<Object>asList(it, action, transformationContext).toString());
     }
   }
   

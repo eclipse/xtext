@@ -24,6 +24,7 @@ public class TestDecoratorProcessor extends AbstractClassProcessor {
     if (_equals) {
       context.addWarning(it, "Delegate is not declared");
     }
+    delegate.markAsRead();
     TypeReference _type = delegate.getType();
     Iterable<? extends ResolvedMethod> _allResolvedMethods = _type.getAllResolvedMethods();
     final Function1<ResolvedMethod, MethodDeclaration> _function = new Function1<ResolvedMethod, MethodDeclaration>() {

@@ -10,6 +10,7 @@ import javax.inject.Provider
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.Action
 import org.eclipse.xtext.Assignment
 import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.EnumRule
@@ -17,7 +18,7 @@ import org.eclipse.xtext.Keyword
 import org.eclipse.xtext.ParserRule
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.conversion.ValueConverterException
-import org.eclipse.xtext.idea.nodemodel.ASTNodeAwareNodeModelBuilder
+import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder
 import org.eclipse.xtext.nodemodel.ICompositeNode
 import org.eclipse.xtext.nodemodel.ILeafNode
 import org.eclipse.xtext.nodemodel.INode
@@ -35,22 +36,22 @@ class PsiToEcoreTransformationContext {
 
 	@Inject
 	IAstFactory semanticModelBuilder
-	
+
 	@Inject
 	IPsiModelAssociator psiModelAssociator
-	
+
 	@Inject
 	ISyntaxErrorMessageProvider syntaxErrorProvider
 
 	@Inject
 	Provider<PsiToEcoreTransformationContext> psiToEcoreTransformationContextProvider
-	
+
 	@Accessors(PUBLIC_GETTER)
 	boolean hadErrors
 
 	@Accessors(PUBLIC_GETTER)
 	EObject current
-	
+
 	@Accessors(PUBLIC_GETTER)
 	DatatypeRuleToken datatypeRuleToken
 
@@ -59,8 +60,8 @@ class PsiToEcoreTransformationContext {
 	@Accessors(PUBLIC_GETTER)
 	ICompositeNode currentNode
 
-	extension ASTNodeAwareNodeModelBuilder nodeModelBuilder
-	
+	extension IASTNodeAwareNodeModelBuilder nodeModelBuilder
+
 	def getNodesMapping() {
 		nodeModelBuilder.nodesMapping
 	}
@@ -72,7 +73,7 @@ class PsiToEcoreTransformationContext {
 		childTransformationContext.nodeModelBuilder = nodeModelBuilder
 		childTransformationContext
 	}
-	
+
 	def withDatatypeRule() {
 		datatypeRuleToken = new AntlrDatatypeRuleToken
 		this
@@ -96,7 +97,7 @@ class PsiToEcoreTransformationContext {
 		}
 		this
 	}
-	
+
 	def compress() {
 		val newCurrentNode = currentNode.compressAndReturnParent
 		if (currentNode == lastConsumedNode) {
@@ -109,7 +110,7 @@ class PsiToEcoreTransformationContext {
 	def void newLeafNode(LeafElement it, EObject grammarElement, String ruleName) {
 		lastConsumedNode = newLeafNode(grammarElement, currentNode)
 		mergeDatatypeRuleToken
-		
+
 		if (grammarElement.ensureModelElementCreated) {
 			val assignment = grammarElement.containingAssignment
 			if (assignment.booleanAssignment) {
@@ -127,27 +128,57 @@ class PsiToEcoreTransformationContext {
 	def void newCompositeNode(CompositeElement it) {
 		currentNode = newCompositeNode(currentNode)
 	}
-	
+
+	def newCompositeNodeAsParentOfCurrentNode(CompositeElement compositeElement, Action action) {
+		currentNode = compositeElement.newCompositeNodeAsParentOf(action, currentNode.lookAhead, currentNode)
+		associateWithSemanticElement(currentNode)
+	}
+
+	def forceCreateModelElement(Action action) {
+		current = semanticModelBuilder.create(action.type.classifier)
+	}
+
 	def ensureModelElementCreated(EObject grammarElement) {
-		if (grammarElement.assigned) {
-			grammarElement.modelElement
+		if (!grammarElement.assigned) {
+			return false
+		}
+		if (current != null) {
 			return true
 		}
-		false
+		val classifier = grammarElement.containingParserRule.type.classifier
+		current = semanticModelBuilder.create(classifier)
+		associateWithSemanticElement(
+			switch grammarElement {
+				case grammarElement.terminalRuleCall,
+				case grammarElement instanceof Keyword,
+				CrossReference case grammarElement.terminal.terminalRuleCall,
+				CrossReference case grammarElement.terminal instanceof Keyword:
+					currentNode
+				default:
+					currentNode.parent
+			}
+		)
+		true
 	}
-	
+
 	protected def void mergeDatatypeRuleToken(LeafElement it) {
 		if (datatypeRuleToken != null) {
-			datatypeRuleToken.merge(new AntlrDatatypeRuleToken => [ token |
-				token.text = text
-				token.startOffset = startOffset
-			])
+			datatypeRuleToken.merge(
+				new AntlrDatatypeRuleToken => [ token |
+					token.text = text
+					token.startOffset = startOffset
+				])
+		}
+	}
+
+	def assign(EObject value, Action action) {
+		if (action.feature != null) {
+			current.assign(action.operator, action.feature, value, null, currentNode)
 		}
 	}
 
 	def void assign(Object value, EObject grammarElement, String ruleName) {
 		if (grammarElement.assigned) {
-			val current = grammarElement.modelElement
 			val node = switch grammarElement {
 				RuleCall case grammarElement.rule instanceof EnumRule || grammarElement.rule instanceof ParserRule:
 					currentNode
@@ -155,60 +186,45 @@ class PsiToEcoreTransformationContext {
 					lastConsumedNode
 			}
 			current.assign(
+				grammarElement.containingAssignment,
 				value,
 				ruleName,
-				grammarElement.containingAssignment,
 				node
 			)
 		}
 	}
 
-	protected def EObject getModelElement(EObject grammarElement) {
-		if (current == null && grammarElement.assigned) {
-			val classifier = grammarElement.containingParserRule.type.classifier
-			current = semanticModelBuilder.create(classifier)
-			associateWithSemanticElement(
-				switch grammarElement {
-					case grammarElement.terminalRuleCall,
-					case grammarElement instanceof Keyword,
-					CrossReference case grammarElement.terminal.terminalRuleCall,
-					CrossReference case grammarElement.terminal instanceof Keyword:
-						currentNode
-					default:
-						currentNode.parent
-				}
-			)
-		}
-		current
-	}
-	
 	protected def associateWithSemanticElement(ICompositeNode node) {
 		node.associateWithSemanticElement(current)
 		val astNode = reverseNodesMapping.get(node)?.last
 		if (astNode != null) {
-			psiModelAssociator.associate(current) [|astNode.psi]
+			psiModelAssociator.associate(current)[|astNode.psi]
 		}
 	}
 
-	protected def assign(EObject parent, Object value, String ruleName, Assignment assignment, INode node) {
+	protected def assign(EObject parent, Assignment assignment, Object value, String ruleName, INode node) {
+		parent.assign(assignment.operator, assignment.feature, value, ruleName, node)
+	}
+
+	protected def assign(EObject parent, String operator, String feature, Object value, String ruleName, INode node) {
 		try {
-			if (assignment.operator == '+=') {
-				semanticModelBuilder.add(parent, assignment.feature, value, ruleName, node)
+			if (operator == '+=') {
+				semanticModelBuilder.add(parent, feature, value, ruleName, node)
 			} else {
-				semanticModelBuilder.set(parent, assignment.feature, value, ruleName, node)
+				semanticModelBuilder.set(parent, feature, value, ruleName, node)
 			}
 		} catch (ValueConverterException vce) {
 			handleValueConverterException(vce)
 		}
 	}
-	
+
 	def void appendSyntaxError(PsiErrorElement errorElement) {
 		hadErrors = true;
 		val errorContext = createErrorContext(errorElement)
 		val error = syntaxErrorProvider.getSyntaxErrorMessage(errorContext)
 		lastLeafNode.appendError(error)
 	}
-	
+
 	def protected INode getLastLeafNode() {
 		var iter = currentNode.asTreeIterable.iterator
 		while (iter.hasPrevious) {
@@ -222,15 +238,16 @@ class PsiToEcoreTransformationContext {
 			currentNode
 		}
 	}
-	
+
 	protected def ISyntaxErrorMessageProvider.IParserErrorContext createErrorContext(PsiErrorElement errorElement) {
 		new ParserErrorContext(this, errorElement)
 	}
 
-	protected def ISyntaxErrorMessageProvider.IValueConverterErrorContext createValueConverterErrorContext(ValueConverterException vce) {
+	protected def ISyntaxErrorMessageProvider.IValueConverterErrorContext createValueConverterErrorContext(
+		ValueConverterException vce) {
 		new ValueConverterErrorContext(this, vce)
 	}
-	
+
 	protected def handleValueConverterException(ValueConverterException vce) {
 		hadErrors = true;
 		val cause = vce.cause as Exception
@@ -243,7 +260,7 @@ class PsiToEcoreTransformationContext {
 			throw new RuntimeException(vce)
 		}
 	}
-	
+
 	protected def appendError(INode node, SyntaxErrorMessage error) {
 		if (node.syntaxErrorMessage == null) {
 			val newNode = node.syntaxError = error
@@ -252,22 +269,22 @@ class PsiToEcoreTransformationContext {
 		}
 	}
 
-	protected def newRootNode(PsiFile it) {
+	protected def newRootNode(PsiFile psiFile) {
 		hadErrors = false
-		currentNode = text.newRootNode
+		currentNode = nodeModelBuilder.newRootNode(psiFile)
 	}
 
 	static class PsiToEcoreTransformationContextProvider {
-		
+
 		@Inject
-		Provider<ASTNodeAwareNodeModelBuilder> astNodenodeModelBuilderProvider
+		Provider<IASTNodeAwareNodeModelBuilder> astNodeModelBuilderProvider
 
 		@Inject
 		Provider<PsiToEcoreTransformationContext> psiToEcoreTransformationContextProvider
 
 		def newTransformationContext(PsiFile it) {
 			val context = psiToEcoreTransformationContextProvider.get
-			context.nodeModelBuilder = astNodenodeModelBuilderProvider.get 
+			context.nodeModelBuilder = astNodeModelBuilderProvider.get
 			context.newRootNode(it)
 			context
 		}
@@ -278,14 +295,14 @@ class PsiToEcoreTransformationContext {
 
 @FinalFieldsConstructor
 class ErrorContext {
-	
-	val	PsiToEcoreTransformationContext transformationContext
-	
+
+	val PsiToEcoreTransformationContext transformationContext
+
 	def getCurrentContext() {
 		if (currentNode != null)
 			currentNode.semanticElement
 	}
-	
+
 	def getCurrentNode() {
 		transformationContext.currentNode
 	}
@@ -311,19 +328,19 @@ class ValueConverterErrorContext extends ErrorContext implements ISyntaxErrorMes
 
 @FinalFieldsConstructor
 class ParserErrorContext extends ErrorContext implements ISyntaxErrorMessageProvider.IParserErrorContext {
-	
+
 	val PsiErrorElement errorElement
-	
+
 	override getRecognitionException() {
 		null
 	}
-	
+
 	override getTokenNames() {
 		null
 	}
-	
+
 	override getDefaultMessage() {
 		errorElement.errorDescription
 	}
-	
+
 }

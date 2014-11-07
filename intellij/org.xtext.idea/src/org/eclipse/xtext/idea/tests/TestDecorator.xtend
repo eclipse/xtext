@@ -16,6 +16,7 @@ class TestDecoratorProcessor extends AbstractClassProcessor {
 		if (delegate == null) {
 			addWarning("Delegate is not declared")
 		}
+		delegate.markAsRead
 		for (declaredMethod : delegate.type.allResolvedMethods.map[declaration].filter [
 			simpleName.startsWith('test')
 		]) {

@@ -22,6 +22,7 @@ import org.eclipse.xtext.psi.tree.IGrammarAwareElementType
 import org.eclipse.xtext.util.ReplaceRegion
 
 import static extension org.eclipse.xtext.GrammarUtil.*
+import org.eclipse.xtext.Action
 
 class PsiToEcoreTransformator implements IParser {
 
@@ -105,6 +106,14 @@ class PsiToEcoreTransformator implements IParser {
 		newCompositeNode
 		transformChildren(transformationContext)
 		compress
+	}
+	
+	protected def dispatch void transform(CompositeElement it, Action action,
+		extension PsiToEcoreTransformationContext transformationContext) {
+		val value = current
+		action.forceCreateModelElement
+		assign(value, action)
+		newCompositeNodeAsParentOfCurrentNode(action)
 	}
 
 	protected def dispatch void transform(CompositeElement it, RuleCall ruleCall,

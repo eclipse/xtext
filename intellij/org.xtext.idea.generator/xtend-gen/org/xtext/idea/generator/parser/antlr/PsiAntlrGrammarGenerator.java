@@ -7,6 +7,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EnumRule;
@@ -46,6 +47,50 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     _builder.append(_simpleName, "\t");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
+    {
+      boolean _or = false;
+      boolean _or_1 = false;
+      boolean _isBacktrack = options.isBacktrack();
+      if (_isBacktrack) {
+        _or_1 = true;
+      } else {
+        boolean _isMemoize = options.isMemoize();
+        _or_1 = _isMemoize;
+      }
+      if (_or_1) {
+        _or = true;
+      } else {
+        int _k = options.getK();
+        boolean _greaterEqualsThan = (_k >= 0);
+        _or = _greaterEqualsThan;
+      }
+      if (_or) {
+        {
+          boolean _isBacktrack_1 = options.isBacktrack();
+          if (_isBacktrack_1) {
+            _builder.append("backtrack=true");
+            _builder.newLine();
+          }
+        }
+        {
+          boolean _isMemoize_1 = options.isMemoize();
+          if (_isMemoize_1) {
+            _builder.append("memoize=true");
+            _builder.newLine();
+          }
+        }
+        {
+          int _k_1 = options.getK();
+          boolean _greaterEqualsThan_1 = (_k_1 >= 0);
+          if (_greaterEqualsThan_1) {
+            _builder.append("memoize=");
+            int _k_2 = options.getK();
+            _builder.append(_k_2, "");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
     _builder.append("}");
     _builder.newLine();
     return _builder.toString();
@@ -84,6 +129,23 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     _builder.newLine();
     _builder.append("@parser::members {");
     _builder.newLine();
+    _builder.newLine();
+    {
+      boolean _isBacktrack = options.isBacktrack();
+      if (_isBacktrack) {
+        _builder.append("/*");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("This grammar contains a lot of empty actions to work around a bug in ANTLR.");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("Otherwise the ANTLR tool will create synpreds that cannot be compiled in some rare cases.");
+        _builder.newLine();
+        _builder.append("*/");
+        _builder.newLine();
+        _builder.newLine();
+      }
+    }
     _builder.append("public ");
     Grammar _grammar = GrammarUtil.getGrammar(it);
     String _elementTypeProviderName = this._ideaPluginClassNames.getElementTypeProviderName(_grammar);
@@ -216,17 +278,16 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     if (supportActions) {
       String _switchResult = null;
       AbstractRule _rule = it.getRule();
-      final AbstractRule rule = _rule;
       boolean _matched = false;
       if (!_matched) {
-        if (rule instanceof EnumRule) {
+        if (_rule instanceof EnumRule) {
           boolean _isAssigned = GrammarUtil.isAssigned(it);
           if (_isAssigned) {
             _matched=true;
           }
         }
         if (!_matched) {
-          if (rule instanceof ParserRule) {
+          if (_rule instanceof ParserRule) {
             boolean _isAssigned = GrammarUtil.isAssigned(it);
             if (_isAssigned) {
               _matched=true;
@@ -238,11 +299,11 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
         }
       }
       if (!_matched) {
-        if (rule instanceof EnumRule) {
+        if (_rule instanceof EnumRule) {
           _matched=true;
         }
         if (!_matched) {
-          if (rule instanceof ParserRule) {
+          if (_rule instanceof ParserRule) {
             _matched=true;
           }
         }
@@ -271,7 +332,7 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
         }
       }
       if (!_matched) {
-        if (rule instanceof TerminalRule) {
+        if (_rule instanceof TerminalRule) {
           _matched=true;
           StringConcatenation _builder_1 = new StringConcatenation();
           _builder_1.append("{");
@@ -306,6 +367,41 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
       _xifexpression = _switchResult;
     } else {
       _xifexpression = super._dataTypeEbnf2(it, supportActions);
+    }
+    return _xifexpression;
+  }
+  
+  protected String _ebnf2(final Action it, final AntlrOptions options, final boolean supportActions) {
+    String _xifexpression = null;
+    if ((!supportActions)) {
+      return super._ebnf2(it, options, supportActions);
+    } else {
+      StringConcatenation _builder = new StringConcatenation();
+      {
+        boolean _isBacktrack = options.isBacktrack();
+        if (_isBacktrack) {
+          _builder.append("{");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("/* */");
+          _builder.newLine();
+          _builder.append("}");
+          _builder.newLine();
+        }
+      }
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      CharSequence _markComposite = this.markComposite(it);
+      _builder.append(_markComposite, "\t");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      CharSequence _doneComposite = this.doneComposite(it);
+      _builder.append(_doneComposite, "\t");
+      _builder.newLineIfNotEmpty();
+      _builder.append("}");
+      _builder.newLine();
+      _xifexpression = _builder.toString();
     }
     return _xifexpression;
   }
@@ -382,17 +478,16 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     if (supportActions) {
       String _switchResult = null;
       AbstractRule _rule = it.getRule();
-      final AbstractRule rule = _rule;
       boolean _matched = false;
       if (!_matched) {
-        if (rule instanceof EnumRule) {
+        if (_rule instanceof EnumRule) {
           boolean _isAssigned = GrammarUtil.isAssigned(it);
           if (_isAssigned) {
             _matched=true;
           }
         }
         if (!_matched) {
-          if (rule instanceof ParserRule) {
+          if (_rule instanceof ParserRule) {
             boolean _isAssigned = GrammarUtil.isAssigned(it);
             if (_isAssigned) {
               _matched=true;
@@ -404,16 +499,28 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
         }
       }
       if (!_matched) {
-        if (rule instanceof EnumRule) {
+        if (_rule instanceof EnumRule) {
           _matched=true;
         }
         if (!_matched) {
-          if (rule instanceof ParserRule) {
+          if (_rule instanceof ParserRule) {
             _matched=true;
           }
         }
         if (_matched) {
           StringConcatenation _builder = new StringConcatenation();
+          {
+            boolean _isBacktrack = options.isBacktrack();
+            if (_isBacktrack) {
+              _builder.append("{");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("/* */");
+              _builder.newLine();
+              _builder.append("}");
+              _builder.newLine();
+            }
+          }
           _builder.append("{");
           _builder.newLine();
           _builder.append("\t");
@@ -437,7 +544,7 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
         }
       }
       if (!_matched) {
-        if (rule instanceof TerminalRule) {
+        if (_rule instanceof TerminalRule) {
           _matched=true;
           StringConcatenation _builder_1 = new StringConcatenation();
           _builder_1.append("{");
@@ -561,14 +668,13 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     if (supportActions) {
       String _switchResult = null;
       AbstractRule _rule = it.getRule();
-      final AbstractRule rule = _rule;
       boolean _matched = false;
       if (!_matched) {
-        if (rule instanceof EnumRule) {
+        if (_rule instanceof EnumRule) {
           _matched=true;
         }
         if (!_matched) {
-          if (rule instanceof ParserRule) {
+          if (_rule instanceof ParserRule) {
             _matched=true;
           }
         }
@@ -600,7 +706,7 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
         }
       }
       if (!_matched) {
-        if (rule instanceof TerminalRule) {
+        if (_rule instanceof TerminalRule) {
           _matched=true;
           StringConcatenation _builder_1 = new StringConcatenation();
           _builder_1.append("{");

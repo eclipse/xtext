@@ -3,6 +3,7 @@ package org.eclipse.xtext.idea.nodemodel
 import com.google.inject.Inject
 import com.intellij.lang.ASTNode
 import com.intellij.openapi.util.Key
+import com.intellij.psi.PsiFile
 import com.intellij.psi.impl.source.tree.CompositeElement
 import com.intellij.psi.impl.source.tree.LeafElement
 import com.intellij.psi.tree.IElementType
@@ -22,7 +23,7 @@ import org.eclipse.xtext.psi.tree.IGrammarAwareElementType
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.parser.antlr.TokenTool.*
 
-class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder {
+class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder implements IASTNodeAwareNodeModelBuilder {
 
 	public static val HIDDEN_KEY = Key.<Boolean>create('HIDDEN_KEY')
 
@@ -51,13 +52,28 @@ class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder {
 	
 	protected def replaceAssociations(INode oldNode, INode newNode) {
 		val mapping = reverseNodesMapping.remove(oldNode)
-		for (astNode : mapping) {
-			associate(astNode, newNode)
+		if (mapping != null) {
+			for (astNode : mapping) {
+				associate(astNode, newNode)
+			}
+		}
+	}
+	
+	protected def removeAssociations(INode node) {
+		val mapping = reverseNodesMapping.remove(node)
+		if (mapping != null) {
+			for (astNode : mapping) {
+				nodesMapping.remove(astNode)
+			}
 		}
 	}
 	
 	override protected replaceByRootNode(CompositeNode oldNode, RootNode rootNode) {
+		val firstChild = rootNode.firstChild
 		super.replaceByRootNode(oldNode, rootNode)
+		if (firstChild != null) {
+			removeAssociations(firstChild)
+		}
 		replaceAssociations(oldNode, rootNode)
 	}
 	
@@ -66,13 +82,13 @@ class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder {
 		replaceAssociations(oldNode, newNode)
 	}
 
-	def newLeafNode(LeafElement it, EObject grammarElement, ICompositeNode parent) {
+	override newLeafNode(LeafElement it, EObject grammarElement, ICompositeNode parent) {
 		val leafNode = newLeafNode(startOffset, textLength, grammarElement, false, null, parent) 
 		associate(leafNode)
 		leafNode
 	}
 
-	def newLeafNode(ASTNode it, ICompositeNode parent) {
+	override newLeafNode(ASTNode it, ICompositeNode parent) {
 		val elementType = elementType
 		val grammarElement = if (elementType instanceof IGrammarAwareElementType) {
 				elementType.grammarElement
@@ -92,7 +108,7 @@ class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder {
 		leafNode
 	}
 
-	def newCompositeNode(CompositeElement it, ICompositeNode parent) {
+	override newCompositeNode(CompositeElement it, ICompositeNode parent) {
 		val elementType = elementType
 		if (elementType instanceof IGrammarAwareElementType) {
 			val grammarElement = elementType.grammarElement
@@ -103,6 +119,16 @@ class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder {
 		} else {
 			throw new IllegalStateException('Composite element with unexpected element type: ' + it)
 		}
+	}
+	
+	override newCompositeNodeAsParentOf(CompositeElement it, EObject grammarElement, int lookahead, ICompositeNode existing) {
+		val compositeNode = grammarElement.newCompositeNodeAsParentOf(lookahead, existing) 
+		associate(compositeNode)
+		compositeNode
+	}
+	
+	override newRootNode(PsiFile psiFile) {
+		newRootNode(psiFile.text)
 	}
 
 }

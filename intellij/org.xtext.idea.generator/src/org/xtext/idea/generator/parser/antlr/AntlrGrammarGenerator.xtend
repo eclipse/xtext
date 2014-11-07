@@ -238,7 +238,7 @@ class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 	
 	protected override String _dataTypeEbnf2(RuleCall it, boolean supportActions) {
 		if (supportActions)
-			switch rule : rule {
+			switch rule {
 				EnumRule case assigned,
 				ParserRule case assigned: 
 					super._dataTypeEbnf2(it, supportActions)
@@ -453,7 +453,7 @@ class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 	
 	protected override String _assignmentEbnf(RuleCall it, Assignment assignment, AntlrOptions options, boolean supportActions) {
 		if (supportActions)
-			switch rule : rule {
+			switch rule {
 				EnumRule,
 				ParserRule: '''
 					{

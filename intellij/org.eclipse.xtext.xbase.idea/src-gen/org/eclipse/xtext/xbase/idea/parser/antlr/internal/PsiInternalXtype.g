@@ -26,6 +26,7 @@ import com.intellij.lang.PsiBuilder;
 }
 
 @parser::members {
+
 public XtypeElementTypeProvider elementTypeProvider;
 
 public PsiInternalXtypeParser(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, XtypeElementTypeProvider elementTypeProvider) {
@@ -69,6 +70,10 @@ ruleJvmTypeReference:
 				)=>
 				(
 					(
+						{
+							markComposite();
+							doneComposite(elementTypeProvider.getJvmTypeReference_JvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0ElementType());
+						}
 					)
 					{
 						markComposite();
@@ -284,6 +289,10 @@ ruleJvmParameterizedTypeReference:
 					)=>
 					(
 						(
+							{
+								markComposite();
+								doneComposite(elementTypeProvider.getJvmParameterizedTypeReference_JvmInnerTypeReferenceOuterAction_1_4_0_0_0ElementType());
+							}
 						)
 						{
 							markLeaf();
@@ -403,6 +412,10 @@ finally {
 ruleJvmWildcardTypeReference:
 	(
 		(
+			{
+				markComposite();
+				doneComposite(elementTypeProvider.getJvmWildcardTypeReference_JvmWildcardTypeReferenceAction_0ElementType());
+			}
 		)
 		{
 			markLeaf();
