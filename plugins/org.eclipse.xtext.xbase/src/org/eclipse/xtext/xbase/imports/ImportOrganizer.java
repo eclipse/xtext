@@ -33,38 +33,38 @@ public class ImportOrganizer {
 
 	@Inject
 	private RewritableImportSection.Factory importSectionFactory;
-	
+
 	@Inject
 	private Provider<TypeUsageCollector> typeUsageCollectorProvider;
-	
-	@Inject 
+
+	@Inject
 	private ConflictResolver conflictResolver;
-	
+
 	@Inject
 	private NonOverridableTypesProvider nonOverridableTypesProvider;
-	
-	@Inject(optional=true)
+
+	@Inject(optional = true)
 	private IUnresolvedTypeResolver unresolvedTypeResolver;
-	
+
 	@Inject
 	private XbaseQualifiedNameValueConverter nameValueConverter;
-	
+
 	public List<ReplaceRegion> getOrganizedImportChanges(XtextResource resource) {
 		TypeUsageCollector typeUsageCollector = typeUsageCollectorProvider.get();
 		TypeUsages typeUsages = typeUsageCollector.collectTypeUsages(resource);
-		if(unresolvedTypeResolver != null) 
+		if (unresolvedTypeResolver != null)
 			unresolvedTypeResolver.resolve(typeUsages, resource);
 		Map<String, JvmDeclaredType> name2type = conflictResolver.resolveConflicts(typeUsages, nonOverridableTypesProvider, resource);
-		return getOrganizedImportChanges(resource, name2type, typeUsages); 
+		return getOrganizedImportChanges(resource, name2type, typeUsages);
 	}
 
 	private List<ReplaceRegion> getOrganizedImportChanges(XtextResource resource, Map<String, JvmDeclaredType> resolvedConflicts, TypeUsages typeUsages) {
 		RewritableImportSection oldImportSection = importSectionFactory.parse(resource);
-		
+
 		RewritableImportSection newImportSection = importSectionFactory.createNewEmpty(resource);
 		addImports(resolvedConflicts, typeUsages, newImportSection);
 		List<ReplaceRegion> replaceRegions = getReplacedUsageSites(resolvedConflicts, typeUsages, newImportSection);
-		for(JvmMember staticImport: typeUsages.getStaticImports()) {
+		for (JvmMember staticImport : typeUsages.getStaticImports()) {
 			JvmDeclaredType declaringType = staticImport.getDeclaringType();
 			if (oldImportSection.hasStaticImport(declaringType, staticImport.getSimpleName(), false)) {
 				newImportSection.addStaticImport(staticImport);
@@ -72,7 +72,7 @@ public class ImportOrganizer {
 				newImportSection.addStaticImport(declaringType, null);
 			}
 		}
-		for(JvmMember extensionImport: typeUsages.getExtensionImports()) {
+		for (JvmMember extensionImport : typeUsages.getExtensionImports()) {
 			JvmDeclaredType declaringType = extensionImport.getDeclaringType();
 			if (oldImportSection.hasStaticImport(declaringType, extensionImport.getSimpleName(), true)) {
 				newImportSection.addStaticExtensionImport(extensionImport);
@@ -87,7 +87,7 @@ public class ImportOrganizer {
 	private List<ReplaceRegion> getReplacedUsageSites(Map<String, JvmDeclaredType> resolvedConflicts, TypeUsages typeUsages,
 			RewritableImportSection newImportSection) {
 		List<ReplaceRegion> result = newArrayList();
-		for(Map.Entry<String, JvmDeclaredType> textToType: resolvedConflicts.entrySet()) {
+		for (Map.Entry<String, JvmDeclaredType> textToType : resolvedConflicts.entrySet()) {
 			getReplacedUsagesOf(textToType, typeUsages, newImportSection, result);
 		}
 		return result;
@@ -98,7 +98,7 @@ public class ImportOrganizer {
 		String nameToUse = nameToType.getKey();
 		JvmDeclaredType type = nameToType.getValue();
 		String packageLocalName = getPackageLocalName(type);
-		for(TypeUsage typeUsage: typeUsages.getUsages(type)) {
+		for (TypeUsage typeUsage : typeUsages.getUsages(type)) {
 			ReplaceRegion replaceRegion = getReplaceRegion(nameToUse, packageLocalName, type, typeUsage, importSection);
 			if (replaceRegion != null) {
 				result.add(replaceRegion);
@@ -107,15 +107,15 @@ public class ImportOrganizer {
 	}
 
 	/* @Nullable */
-	private ReplaceRegion getReplaceRegion(String nameToUse, String packageLocalName, JvmDeclaredType type,
-			TypeUsage usage, RewritableImportSection importSection) {
+	private ReplaceRegion getReplaceRegion(String nameToUse, String packageLocalName, JvmDeclaredType type, TypeUsage usage,
+			RewritableImportSection importSection) {
 		// if the resource contains two types with the same simple name, we don't add any import
 		// but we can still use the package local name within the same package.
-		if(equal(usage.getContextPackageName(), type.getPackageName())) {
+		if (equal(usage.getContextPackageName(), type.getPackageName())) {
 			if (type.eContainer() != null) {
 				String declarationLocalName = getLocalName(type, usage.getContext());
 				nameToUse = declarationLocalName;
-			} else if(importSection.getImportedTypes(packageLocalName) == null) {
+			} else if (importSection.getImportedTypes(packageLocalName) == null) {
 				nameToUse = packageLocalName;
 			}
 		}
@@ -124,9 +124,11 @@ public class ImportOrganizer {
 	}
 
 	private String getLocalName(JvmDeclaredType type, JvmMember context) {
-		JvmMember containerCandidate = context; 
-		while(containerCandidate != null) {
-			if (EcoreUtil.isAncestor(containerCandidate, type)) {
+		JvmMember containerCandidate = context;
+		while (containerCandidate != null) {
+			if (containerCandidate == type) {
+				return type.getSimpleName();
+			} else if (EcoreUtil.isAncestor(containerCandidate, type)) {
 				String contextName = containerCandidate.getQualifiedName('.');
 				String typeName = type.getQualifiedName('.');
 				return typeName.substring(contextName.length() + 1);
@@ -151,7 +153,7 @@ public class ImportOrganizer {
 		} else {
 			if (usedType != importedType) {
 				List<String> segments = Lists.newLinkedList();
-				while(usedType != importedType) {
+				while (usedType != importedType) {
 					segments.add(0, usedType.getSimpleName());
 					usedType = usedType.getDeclaringType();
 				}
@@ -169,13 +171,13 @@ public class ImportOrganizer {
 		suffix = suffix.replace('$', '.').replace("::", ".");
 		return suffix;
 	}
-	
+
 	private void addImports(Map<String, JvmDeclaredType> resolvedConflicts, TypeUsages typeUsages, RewritableImportSection target) {
-		for(Map.Entry<String, JvmDeclaredType> entry: resolvedConflicts.entrySet()) {
+		for (Map.Entry<String, JvmDeclaredType> entry : resolvedConflicts.entrySet()) {
 			String text = entry.getKey();
 			JvmDeclaredType type = entry.getValue();
 			Iterable<TypeUsage> usages = typeUsages.getUsages(type);
-			if(needsImport(type, text, nonOverridableTypesProvider, usages)) {
+			if (needsImport(type, text, nonOverridableTypesProvider, usages)) {
 				target.addImport(type);
 			}
 		}
@@ -183,24 +185,21 @@ public class ImportOrganizer {
 
 	protected String getPackageLocalName(JvmDeclaredType type) {
 		String packageName = type.getPackageName();
-		if(isEmpty(packageName)) 
+		if (isEmpty(packageName))
 			return type.getQualifiedName('.');
-		else 
+		else
 			return type.getQualifiedName('.').substring(packageName.length() + 1);
 	}
-	
-	protected boolean needsImport(JvmDeclaredType type, String name, 
-			NonOverridableTypesProvider nonOverridableTypesProvider, Iterable<TypeUsage> usages)  {
+
+	protected boolean needsImport(JvmDeclaredType type, String name, NonOverridableTypesProvider nonOverridableTypesProvider, Iterable<TypeUsage> usages) {
 		boolean nameEquals = type.getQualifiedName().equals(name) || type.getQualifiedName('.').equals(name);
-		return !( nameEquals || isUsedInLocalContextOnly(type, usages, nonOverridableTypesProvider, name));
+		return !(nameEquals || isUsedInLocalContextOnly(type, usages, nonOverridableTypesProvider, name));
 	}
-	
-	protected boolean isUsedInLocalContextOnly(JvmDeclaredType type, Iterable<TypeUsage> usages, 
-			NonOverridableTypesProvider nonOverridableTypesProvider, String name) {
-		for(TypeUsage usage: usages) {
-			if(nonOverridableTypesProvider.getVisibleType(usage.getContext(), name) == null
-					&& !equal(usage.getContextPackageName(), type.getPackageName())
-					) 
+
+	protected boolean isUsedInLocalContextOnly(JvmDeclaredType type, Iterable<TypeUsage> usages, NonOverridableTypesProvider nonOverridableTypesProvider,
+			String name) {
+		for (TypeUsage usage : usages) {
+			if (nonOverridableTypesProvider.getVisibleType(usage.getContext(), name) == null && !equal(usage.getContextPackageName(), type.getPackageName()))
 				return false;
 		}
 		return true;

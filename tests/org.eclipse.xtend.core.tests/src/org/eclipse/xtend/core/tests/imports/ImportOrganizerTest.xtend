@@ -624,7 +624,33 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			}
 		''', false)
 	}
-
+	
+	/**https://bugs.eclipse.org/bugs/show_bug.cgi?id=448728 */
+	@Test def testBug448728() {
+		'''
+			package p
+			class SomeObject {
+				static class OtherObject {
+					def static createNew() {
+						val result = new OtherObject
+						return result
+					}
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			package p
+			
+			class SomeObject {
+				static class OtherObject {
+					def static createNew() {
+						val result = new OtherObject
+						return result
+					}
+				}
+			}
+		''', false)
+	}
+	
 	@Test def testNameClashSameFileWins_1() {
 		'''
 			package foo
