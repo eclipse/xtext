@@ -230,8 +230,8 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
       _append_1.append(_qualifiedName);
       if ((member instanceof JvmExecutable)) {
         EList<JvmFormalParameter> _parameters = ((JvmExecutable)member).getParameters();
-        final Function1<JvmFormalParameter, String> _function = new Function1<JvmFormalParameter, String>() {
-          public String apply(final JvmFormalParameter it) {
+        final Function1<JvmFormalParameter, CharSequence> _function = new Function1<JvmFormalParameter, CharSequence>() {
+          public CharSequence apply(final JvmFormalParameter it) {
             JvmTypeReference _parameterType = it.getParameterType();
             return _parameterType.getSimpleName();
           }

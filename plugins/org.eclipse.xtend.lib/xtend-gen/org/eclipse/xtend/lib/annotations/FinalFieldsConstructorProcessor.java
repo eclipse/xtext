@@ -283,8 +283,8 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
           _builder.append("super(");
-          final Function1<ResolvedParameter, String> _function = new Function1<ResolvedParameter, String>() {
-            public String apply(final ResolvedParameter it) {
+          final Function1<ResolvedParameter, CharSequence> _function = new Function1<ResolvedParameter, CharSequence>() {
+            public CharSequence apply(final ResolvedParameter it) {
               ParameterDeclaration _declaration = it.getDeclaration();
               return _declaration.getSimpleName();
             }

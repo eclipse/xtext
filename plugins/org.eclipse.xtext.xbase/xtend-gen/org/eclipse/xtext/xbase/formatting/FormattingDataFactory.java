@@ -501,8 +501,8 @@ public class FormattingDataFactory {
   }
   
   public Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> surround(final INode node, final Procedure1<? super FormattingDataInit> init) {
-    final Function1<FormattableDocument, ArrayList<FormattingData>> _function = new Function1<FormattableDocument, ArrayList<FormattingData>>() {
-      public ArrayList<FormattingData> apply(final FormattableDocument doc) {
+    final Function1<FormattableDocument, Iterable<FormattingData>> _function = new Function1<FormattableDocument, Iterable<FormattingData>>() {
+      public Iterable<FormattingData> apply(final FormattableDocument doc) {
         ArrayList<FormattingData> _xblockexpression = null;
         {
           final ArrayList<FormattingData> result = CollectionLiterals.<FormattingData>newArrayList();
@@ -546,8 +546,8 @@ public class FormattingDataFactory {
   }
   
   public Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> surround(final INode node, final Procedure1<? super FormattingDataInit> before, final Procedure1<? super FormattingDataInit> after) {
-    final Function1<FormattableDocument, ArrayList<FormattingData>> _function = new Function1<FormattableDocument, ArrayList<FormattingData>>() {
-      public ArrayList<FormattingData> apply(final FormattableDocument doc) {
+    final Function1<FormattableDocument, Iterable<FormattingData>> _function = new Function1<FormattableDocument, Iterable<FormattingData>>() {
+      public Iterable<FormattingData> apply(final FormattableDocument doc) {
         ArrayList<FormattingData> _xblockexpression = null;
         {
           final ArrayList<FormattingData> result = CollectionLiterals.<FormattingData>newArrayList();

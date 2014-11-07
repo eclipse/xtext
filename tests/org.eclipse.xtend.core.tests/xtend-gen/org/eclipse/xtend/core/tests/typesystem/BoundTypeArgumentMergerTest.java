@@ -59,8 +59,8 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("def void method(");
-      final Function1<Triple<String, VarianceInfo, VarianceInfo>, String> _function = new Function1<Triple<String, VarianceInfo, VarianceInfo>, String>() {
-        public String apply(final Triple<String, VarianceInfo, VarianceInfo> it) {
+      final Function1<Triple<String, VarianceInfo, VarianceInfo>, CharSequence> _function = new Function1<Triple<String, VarianceInfo, VarianceInfo>, CharSequence>() {
+        public CharSequence apply(final Triple<String, VarianceInfo, VarianceInfo> it) {
           return it.getFirst();
         }
       };
@@ -106,8 +106,8 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
       Assert.assertTrue(_greaterThan);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("def void method(");
-      final Function1<Triple<String, VarianceInfo, VarianceInfo>, String> _function = new Function1<Triple<String, VarianceInfo, VarianceInfo>, String>() {
-        public String apply(final Triple<String, VarianceInfo, VarianceInfo> it) {
+      final Function1<Triple<String, VarianceInfo, VarianceInfo>, CharSequence> _function = new Function1<Triple<String, VarianceInfo, VarianceInfo>, CharSequence>() {
+        public CharSequence apply(final Triple<String, VarianceInfo, VarianceInfo> it) {
           return it.getFirst();
         }
       };
