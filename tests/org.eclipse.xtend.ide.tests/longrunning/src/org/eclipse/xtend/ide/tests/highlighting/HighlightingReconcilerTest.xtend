@@ -15,6 +15,7 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.ui.editor.syntaxcoloring.HighlightingPresenter
 import org.junit.After
 import org.junit.Test
+import org.junit.Before
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -22,6 +23,10 @@ import org.junit.Test
 class HighlightingReconcilerTest extends AbstractXtendUITestCase {
 	
 	@Inject extension WorkbenchTestHelper helper
+	
+	@Before def void start() {
+		closeWelcomePage
+	}
 	
 	@After def void close() {
 		helper.tearDown
@@ -59,5 +64,28 @@ class HighlightingReconcilerTest extends AbstractXtendUITestCase {
 		assertEquals('Highlighting regions broken', 2, semanticSnippets.size)
 		assertEquals('foo', semanticSnippets.head)
 		assertEquals('3', semanticSnippets.last)
+	}
+	
+	@Test def void testNoSematicHighlightingOnOpen() {
+		val model = '''
+			class Foo {
+			  static val foo = ''
+			}
+		'''
+		val editor = openEditor("Foo.xtend", model)
+		val document = editor.document
+//		document.readOnly[
+//			// toggle reconciling, queues second highlighting job
+//		]
+		while(Display.getDefault.readAndDispatch) {
+			// yield to the queued highlighting update jobs
+			// - the first one should be skipped, as it refers to an outdated document state
+			// - the second one should be executed
+		}
+		val highlighterCategory = document.positionCategories.findFirst[startsWith(HighlightingPresenter.canonicalName)]
+		val semanticSnippets = document.getPositions(highlighterCategory).map[document.get(offset, length)]
+		// this fails if the first highlighting job hasn't been skipped
+		assertEquals('Highlighting regions broken' + semanticSnippets.join(','), 1, semanticSnippets.size)
+		assertEquals('foo', semanticSnippets.head)
 	}
 }

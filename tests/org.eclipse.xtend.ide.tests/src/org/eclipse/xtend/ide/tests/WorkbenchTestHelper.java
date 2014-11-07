@@ -39,6 +39,7 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.internal.ErrorEditorPart;
@@ -231,6 +232,13 @@ public class WorkbenchTestHelper extends Assert {
 			return b.toString();
 		} finally {
 			inputStream.close();
+		}
+	}
+	
+	public void closeWelcomePage() throws InterruptedException {
+		if (PlatformUI.getWorkbench().getIntroManager().getIntro() != null) {
+			PlatformUI.getWorkbench().getIntroManager().closeIntro(
+					PlatformUI.getWorkbench().getIntroManager().getIntro());
 		}
 	}
 
