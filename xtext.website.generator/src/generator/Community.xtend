@@ -263,15 +263,6 @@ class Community extends AbstractWebsite {
         <td>1.x</td>
         <td>Henrik Rentz-Reichert, Thomas Schuetz</td>
       </tr>
-        <tr>
-        <td><a href="http://sculptorgenerator.org">Sculptor</a></td>
-        <td>You express your design intent in a textual DSL, from which
-    Sculptor generates high quality Java code and configuration.</td>
-        <td>Apache 2 License</td>
-        <td>Language, Framework</td>
-        <td>2.x</td>
-        <td>Torsten Juergeleit, Patrik Nordwall and others</td>
-      </tr>
       <tr>
         <td><a href="http://fj-eclipse.sourceforge.net/">fj-eclipse</a></td>
         <td>an Eclipse-based IDE for Featherweight Java, implemented using Xtext.</td>
@@ -339,6 +330,14 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
         <td>Language</td>
         <td>1.x</td>
         <td>Cedric Vidal</td>
+      </tr>
+        <tr>
+        <td><a href="http://logicals.com/">logi.CAD 3</a></td>
+        <td>ogi.CAD 3 is a tool for programming a wide variety of PLCs (Programmable Logic Controllers) according to the industry standard IEC 61131-3. It is an Eclipse RCP based (E3/E4) integrated development environment (IDE) using XText for implementing the editors for the IEC programming languages ST (Structured Text), FBD (Function Block Diagram) and SFC (Sequential Function Chart).</td>
+        <td>Commercial</td>
+        <td>Language</td>
+        <td>2.6</td>
+        <td>logi.cals Austria (http://logicals.com)</td>
       </tr>
       <tr>
           <td><a href="http://mads.sourceforge.net">MADS</a></td>
@@ -445,6 +444,15 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
         <td>Language, Framework</td>
         <td>2.x</td>
         <td>Sebastian Rodriguez, Nicolas Gaud, Stéphane Galland</td>
+      </tr>
+        <tr>
+        <td><a href="http://sculptorgenerator.org">Sculptor</a></td>
+        <td>You express your design intent in a textual DSL, from which
+    Sculptor generates high quality Java code and configuration.</td>
+        <td>Apache 2 License</td>
+        <td>Language, Framework</td>
+        <td>2.x</td>
+        <td>Torsten Juergeleit, Patrik Nordwall and others</td>
       </tr>
         <tr>
         <td><a href="http://swrtj.sourceforge.net/">SWRTJ: Sugared Welterweight Record-Trait Java</a></td>

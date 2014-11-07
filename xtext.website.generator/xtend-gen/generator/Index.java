@@ -104,13 +104,13 @@ public class Index extends AbstractWebsite {
     _builder.append("from parsers, over linker, compiler or interpreter to fully-blown");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("top-notch Eclipse IDE integration. It comes with good defaults for");
+    _builder.append("top-notch Eclipse IDE integration. It comes with great defaults for");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("all these aspects and at the same time every single aspect can be");
+    _builder.append("all these aspects which at the same time can be easily tailored to your ");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("tailored to your needs.</p>");
+    _builder.append("individual needs.</p>");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("</div>");
