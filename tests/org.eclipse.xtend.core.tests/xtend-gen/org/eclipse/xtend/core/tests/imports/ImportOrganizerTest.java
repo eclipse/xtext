@@ -1216,6 +1216,65 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     this.assertIsOrganizedTo(_builder, _builder_1, false);
   }
   
+  /**
+   * https://bugs.eclipse.org/bugs/show_bug.cgi?id=448728
+   */
+  @Test
+  public void testBug448728() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package p");
+    _builder.newLine();
+    _builder.append("class SomeObject {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static class OtherObject {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("def static createNew() {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("val result = new OtherObject");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("return result");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package p");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class SomeObject {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("static class OtherObject {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("def static createNew() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("val result = new OtherObject");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("return result");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1, false);
+  }
+  
   @Test
   public void testNameClashSameFileWins_1() {
     StringConcatenation _builder = new StringConcatenation();
