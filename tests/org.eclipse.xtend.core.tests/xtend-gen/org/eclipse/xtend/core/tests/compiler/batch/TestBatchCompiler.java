@@ -28,6 +28,7 @@ import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -36,6 +37,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -78,6 +80,8 @@ public class TestBatchCompiler {
   private static String TEMP_DIRECTORY = "./test-temp-dir";
   
   private static String TEMP_DIRECTORY_WITH_SPACES = "./test temp dir";
+  
+  private final static Set<File> abfalleimer = CollectionLiterals.<File>newHashSet();
   
   @Before
   public void onSetup() {
@@ -124,6 +128,29 @@ public class TestBatchCompiler {
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @AfterClass
+  public static void afterClass() {
+    try {
+      final Procedure1<File> _function = new Procedure1<File>() {
+        public void apply(final File it) {
+          boolean _exists = it.exists();
+          if (_exists) {
+            it.delete();
+          }
+        }
+      };
+      IterableExtensions.<File>forEach(TestBatchCompiler.abfalleimer, _function);
+    } catch (final Throwable _t) {
+      if (_t instanceof Exception) {
+        final Exception e = (Exception)_t;
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    } finally {
+      TestBatchCompiler.abfalleimer.clear();
     }
   }
   
@@ -847,7 +874,8 @@ public class TestBatchCompiler {
     final String tstResources = _normalize.getPath();
     final File wsRootFile = new File(tstResources, "symlink-test-ws/");
     final String wsRootPath = wsRootFile.getPath();
-    boolean _createSymLink = this.createSymLink((tstResources + "/linked-folder/linked-src/"), (wsRootPath + "/plain-folder/linked-src"));
+    final String linkToCreate = (wsRootPath + "/plain-folder/linked-src");
+    boolean _createSymLink = this.createSymLink((tstResources + "/linked-folder/linked-src/"), linkToCreate);
     boolean _not = (!_createSymLink);
     if (_not) {
       System.err.println(
@@ -918,6 +946,7 @@ public class TestBatchCompiler {
   private boolean createSymLink(final String linkTarget, final String link) {
     try {
       File linkFile = new File(link);
+      TestBatchCompiler.abfalleimer.add(linkFile);
       boolean _and = false;
       boolean _exists = linkFile.exists();
       if (!_exists) {

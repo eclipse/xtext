@@ -10,6 +10,7 @@ package org.eclipse.xtend.core.tests.compiler.batch
 import com.google.inject.Inject
 import java.io.File
 import java.io.IOException
+import java.util.Set
 import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
 import org.eclipse.xtext.junit4.InjectWith
@@ -19,6 +20,7 @@ import org.eclipse.xtext.xbase.file.ProjectConfig
 import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider
 import org.eclipse.xtext.xbase.file.WorkspaceConfig
 import org.junit.After
+import org.junit.AfterClass
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
@@ -52,6 +54,7 @@ class TestBatchCompiler {
 	static String BUG417177_OUTPUT_DIRECTORY = "./batch-compiler-data/bug417177/dir3/bin"
 	static String TEMP_DIRECTORY = "./test-temp-dir"
 	static String TEMP_DIRECTORY_WITH_SPACES = "./test temp dir"
+	static final Set<File> abfalleimer = newHashSet()
 
 	@Before
 	def void onSetup() {
@@ -76,6 +79,16 @@ class TestBatchCompiler {
 		}
 		if (new File(TEMP_DIRECTORY_WITH_SPACES).exists) {
 			cleanFolder(new File(TEMP_DIRECTORY_WITH_SPACES), null, true, true)
+		}
+	}
+
+	@AfterClass
+	def static void afterClass() {
+		try {
+			abfalleimer.forEach[if(exists) delete]
+		} catch (Exception e) {
+		} finally {
+			abfalleimer.clear
 		}
 	}
 
@@ -380,7 +393,8 @@ class TestBatchCompiler {
 		val tstResources = new File("./batch-compiler-data/test-resources/").toURI().normalize().getPath()
 		val wsRootFile = new File(tstResources, "symlink-test-ws/")
 		val wsRootPath = wsRootFile.getPath()
-		if (!createSymLink(tstResources + "/linked-folder/linked-src/", wsRootPath + "/plain-folder/linked-src")) {
+		val linkToCreate = wsRootPath + "/plain-folder/linked-src"
+		if (!createSymLink(tstResources + "/linked-folder/linked-src/", linkToCreate)) {
 			System.err.println(
 				"Symlink creation is not possible - skip test. org.eclipse.xtend.core.tests.compiler.batch.TestBatchCompiler.testCompileSymlinkedResource()")
 			return
@@ -406,13 +420,15 @@ class TestBatchCompiler {
 		val customOutput = wsRootPath + "/plain-folder/target"
 		batchCompiler.outputPath = customOutput
 		assertTrue(batchCompiler.compile)
-		assertTrue(new File( wsRootPath + "/plain-folder/bin/Test.txt").exists)
+		assertTrue(new File(wsRootPath + "/plain-folder/bin/Test.txt").exists)
 		assertEquals(2, new File(customOutput).list[dir, name|name.endsWith(".java")].size)
 		assertEquals(2, new File(customOutput).list[dir, name|name.endsWith("._trace")].size)
+
 	}
 
 	def private boolean createSymLink(String linkTarget, String link) {
 		var File linkFile = new File(link)
+		abfalleimer.add(linkFile)
 		if (linkFile.exists() && linkFile.symlink) {
 			return true
 		}
