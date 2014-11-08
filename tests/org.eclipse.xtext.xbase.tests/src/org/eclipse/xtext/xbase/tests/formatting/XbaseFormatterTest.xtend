@@ -142,6 +142,17 @@ class XbaseFormatterTest extends AbstractXbaseFormatterTest {
 		''')
 	}
 	
+	@Test def formatClosuresMultiLine03() {
+		assertFormattedExpression('''
+			new Thread [|
+				println("foo")
+			]
+		''', '''
+			new Thread[  | println("foo")
+			]
+		''')
+	}
+	
 	@Test def formatClosuresMultiLineSemicolon() {
 		assertFormattedExpression('''
 			val x = newArrayList("A", "b")
