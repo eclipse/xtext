@@ -199,7 +199,7 @@ class «getJvmModelInferrerName().toSimpleName()» extends AbstractModelInferrer {
    </extension>
    <extension point="org.eclipse.ui.editorActions">
       <editorContribution targetID="«name»" 
-                          id="«name».ide.rulerActions">
+                          id="«name».rulerActions">
 	     <action
 	             label="Not Used"
 	             class="«executableExtensionFactory()»:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
@@ -210,26 +210,26 @@ class «getJvmModelInferrerName().toSimpleName()» extends AbstractModelInferrer {
    </extension>
    <extension point="org.eclipse.ui.popupMenus">
       <viewerContribution
-         targetID="«name».ide.RulerContext"
-         id="«name».ide.RulerPopupActions">
+         targetID="«name».RulerContext"
+         id="«name».RulerPopupActions">
          <action
             label="Toggle Breakpoint"
             class="«executableExtensionFactory()»:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
             menubarPath="debug"
-            id="«name».ide.rulerContextMenu.toggleBreakpointAction">
+            id="«name».rulerContextMenu.toggleBreakpointAction">
          </action>
          <action
             label="Not used"
             class="«executableExtensionFactory()»:org.eclipse.debug.ui.actions.RulerEnableDisableBreakpointActionDelegate"
             menubarPath="debug"
-            id="«name».ide.rulerContextMenu.enableDisableBreakpointAction">
+            id="«name».rulerContextMenu.enableDisableBreakpointAction">
          </action>
          <action
            label="Breakpoint Properties"
            helpContextId="breakpoint_properties_action_context"
            class="«executableExtensionFactory()»:org.eclipse.jdt.debug.ui.actions.JavaBreakpointPropertiesRulerActionDelegate"
            menubarPath="group.properties"
-           id="«name».ide.rulerContextMenu.openBreapointPropertiesAction">
+           id="«name».rulerContextMenu.openBreapointPropertiesAction">
          </action>
       </viewerContribution>
    </extension>
