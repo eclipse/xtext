@@ -19,7 +19,6 @@ import java.util.Map;
 import java.util.Set;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTNode;
-import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
 import org.eclipse.jdt.core.dom.Annotation;
@@ -133,7 +132,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
  */
 @SuppressWarnings("all")
 public class JavaASTFlattener extends ASTVisitor {
-  private final static int JLS = AST.JLS3;
+  public final static int JLS = AST.JLS3;
   
   @Inject
   private IValueConverterService converterService;
@@ -155,8 +154,6 @@ public class JavaASTFlattener extends ASTVisitor {
   private String javaSources;
   
   private int indentation = 0;
-  
-  private int javaSourceKind = ASTParser.K_COMPILATION_UNIT;
   
   private boolean fallBackStrategy = false;
   
@@ -187,7 +184,6 @@ public class JavaASTFlattener extends ASTVisitor {
     HashSet<Comment> _newHashSet = CollectionLiterals.<Comment>newHashSet();
     this.assignedComments = _newHashSet;
     this.javaSources = null;
-    this.javaSourceKind = ASTParser.K_COMPILATION_UNIT;
     this.indentation = 0;
   }
   
@@ -363,16 +359,20 @@ public class JavaASTFlattener extends ASTVisitor {
   }
   
   public boolean visit(final CompilationUnit it) {
-    PackageDeclaration _package = it.getPackage();
-    boolean _notEquals = (!Objects.equal(_package, null));
-    if (_notEquals) {
-      PackageDeclaration _package_1 = it.getPackage();
-      _package_1.accept(this);
-    }
-    List _imports = it.imports();
-    this.visitAll(_imports);
     List _types = it.types();
-    this.visitAll(_types);
+    AbstractTypeDeclaration _head = IterableExtensions.<AbstractTypeDeclaration>head(_types);
+    boolean _isDummyType = this._aSTFlattenerUtils.isDummyType(_head);
+    boolean _not = (!_isDummyType);
+    if (_not) {
+      PackageDeclaration _package = it.getPackage();
+      if (_package!=null) {
+        _package.accept(this);
+      }
+      List _imports = it.imports();
+      this.visitAll(_imports);
+    }
+    List _types_1 = it.types();
+    this.visitAll(_types_1);
     return false;
   }
   
@@ -514,14 +514,8 @@ public class JavaASTFlattener extends ASTVisitor {
   }
   
   public boolean visit(final TypeDeclaration it) {
-    boolean _and = false;
-    if (!(this.javaSourceKind == ASTParser.K_CLASS_BODY_DECLARATIONS)) {
-      _and = false;
-    } else {
-      boolean _isDummyType = this._aSTFlattenerUtils.isDummyType(it);
-      _and = _isDummyType;
-    }
-    if (_and) {
+    boolean _isDummyType = this._aSTFlattenerUtils.isDummyType(it);
+    if (_isDummyType) {
       List _bodyDeclarations = it.bodyDeclarations();
       this.visitAll(_bodyDeclarations);
       return false;
@@ -1724,93 +1718,107 @@ public class JavaASTFlattener extends ASTVisitor {
   
   public boolean visit(final PrefixExpression node) {
     final AST dummyAST = AST.newAST(JavaASTFlattener.JLS);
-    boolean _or = false;
     PrefixExpression.Operator _operator = node.getOperator();
-    boolean _equals = Objects.equal(_operator, PrefixExpression.Operator.DECREMENT);
-    if (_equals) {
-      _or = true;
-    } else {
-      PrefixExpression.Operator _operator_1 = node.getOperator();
-      boolean _equals_1 = Objects.equal(_operator_1, PrefixExpression.Operator.INCREMENT);
-      _or = _equals_1;
-    }
-    if (_or) {
-      Expression _operand = node.getOperand();
-      if ((_operand instanceof ArrayAccess)) {
-        Expression _operand_1 = node.getOperand();
-        final ArrayAccess pfOperand = ((ArrayAccess) _operand_1);
-        final String arrayName = this.computeArrayName(pfOperand);
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("_tPreInx_");
-        _builder.append(arrayName, "");
-        final String idxName = _builder.toString();
-        String op = "-";
-        PrefixExpression.Operator _operator_2 = node.getOperator();
-        boolean _equals_2 = Objects.equal(_operator_2, PrefixExpression.Operator.INCREMENT);
-        if (_equals_2) {
-          op = "+";
+    boolean _matched = false;
+    if (!_matched) {
+      if (Objects.equal(_operator, PrefixExpression.Operator.DECREMENT)) {
+        _matched=true;
+      }
+      if (!_matched) {
+        if (Objects.equal(_operator, PrefixExpression.Operator.INCREMENT)) {
+          _matched=true;
         }
-        StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("{val ");
-        _builder_1.append(idxName, "");
-        _builder_1.append("=");
-        this.appendToBuffer(_builder_1.toString());
-        Expression _index = pfOperand.getIndex();
-        _index.accept(this);
-        StringConcatenation _builder_2 = new StringConcatenation();
-        _builder_2.append(" ");
-        _builder_2.append("val ");
-        _builder_2.append(idxName, " ");
-        _builder_2.append("_res=");
-        _builder_2.append(arrayName, " ");
-        _builder_2.append(".get(");
-        _builder_2.append(idxName, " ");
-        _builder_2.append(")");
-        _builder_2.append(op, " ");
-        _builder_2.append("1");
-        this.appendToBuffer(_builder_2.toString());
-        StringConcatenation _builder_3 = new StringConcatenation();
-        _builder_3.append(" ");
-        _builder_3.append(arrayName, " ");
-        _builder_3.append(".set(");
-        _builder_3.append(idxName, " ");
-        _builder_3.append(", ");
-        _builder_3.append(idxName, " ");
-        _builder_3.append("_res)  ");
-        _builder_3.append(idxName, " ");
-        _builder_3.append("_res}");
-        this.appendToBuffer(_builder_3.toString());
-        return false;
-      } else {
-        final Assignment assigment = dummyAST.newAssignment();
-        final InfixExpression infixOp = dummyAST.newInfixExpression();
-        Expression _operand_2 = node.getOperand();
-        ASTNode _copySubtree = ASTNode.copySubtree(dummyAST, _operand_2);
-        infixOp.setLeftOperand(((Expression) _copySubtree));
-        PrefixExpression.Operator _operator_3 = node.getOperator();
-        boolean _equals_3 = Objects.equal(_operator_3, PrefixExpression.Operator.DECREMENT);
-        if (_equals_3) {
-          infixOp.setOperator(InfixExpression.Operator.MINUS);
+      }
+      if (_matched) {
+        Expression _operand = node.getOperand();
+        if ((_operand instanceof ArrayAccess)) {
+          Expression _operand_1 = node.getOperand();
+          final ArrayAccess pfOperand = ((ArrayAccess) _operand_1);
+          final String arrayName = this.computeArrayName(pfOperand);
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("_tPreInx_");
+          _builder.append(arrayName, "");
+          final String idxName = _builder.toString();
+          String op = "-";
+          PrefixExpression.Operator _operator_1 = node.getOperator();
+          boolean _equals = Objects.equal(_operator_1, PrefixExpression.Operator.INCREMENT);
+          if (_equals) {
+            op = "+";
+          }
+          StringConcatenation _builder_1 = new StringConcatenation();
+          _builder_1.append("{val ");
+          _builder_1.append(idxName, "");
+          _builder_1.append("=");
+          this.appendToBuffer(_builder_1.toString());
+          Expression _index = pfOperand.getIndex();
+          _index.accept(this);
+          StringConcatenation _builder_2 = new StringConcatenation();
+          _builder_2.append(" ");
+          _builder_2.append("val ");
+          _builder_2.append(idxName, " ");
+          _builder_2.append("_res=");
+          _builder_2.append(arrayName, " ");
+          _builder_2.append(".get(");
+          _builder_2.append(idxName, " ");
+          _builder_2.append(")");
+          _builder_2.append(op, " ");
+          _builder_2.append("1");
+          this.appendToBuffer(_builder_2.toString());
+          StringConcatenation _builder_3 = new StringConcatenation();
+          _builder_3.append(" ");
+          _builder_3.append(arrayName, " ");
+          _builder_3.append(".set(");
+          _builder_3.append(idxName, " ");
+          _builder_3.append(", ");
+          _builder_3.append(idxName, " ");
+          _builder_3.append("_res)  ");
+          _builder_3.append(idxName, " ");
+          _builder_3.append("_res}");
+          this.appendToBuffer(_builder_3.toString());
+          return false;
         } else {
-          infixOp.setOperator(InfixExpression.Operator.PLUS);
+          final Assignment assigment = dummyAST.newAssignment();
+          final InfixExpression infixOp = dummyAST.newInfixExpression();
+          Expression _operand_2 = node.getOperand();
+          ASTNode _copySubtree = ASTNode.copySubtree(dummyAST, _operand_2);
+          infixOp.setLeftOperand(((Expression) _copySubtree));
+          PrefixExpression.Operator _operator_2 = node.getOperator();
+          boolean _equals_1 = Objects.equal(_operator_2, PrefixExpression.Operator.DECREMENT);
+          if (_equals_1) {
+            infixOp.setOperator(InfixExpression.Operator.MINUS);
+          } else {
+            infixOp.setOperator(InfixExpression.Operator.PLUS);
+          }
+          NumberLiteral _newNumberLiteral = dummyAST.newNumberLiteral("1");
+          infixOp.setRightOperand(_newNumberLiteral);
+          Expression _operand_3 = node.getOperand();
+          ASTNode _copySubtree_1 = ASTNode.copySubtree(dummyAST, _operand_3);
+          assigment.setLeftHandSide(((Expression) _copySubtree_1));
+          assigment.setRightHandSide(infixOp);
+          final ParenthesizedExpression parent = dummyAST.newParenthesizedExpression();
+          parent.setExpression(assigment);
+          parent.accept(this);
+          return false;
         }
-        NumberLiteral _newNumberLiteral = dummyAST.newNumberLiteral("1");
-        infixOp.setRightOperand(_newNumberLiteral);
-        Expression _operand_3 = node.getOperand();
-        ASTNode _copySubtree_1 = ASTNode.copySubtree(dummyAST, _operand_3);
-        assigment.setLeftHandSide(((Expression) _copySubtree_1));
-        assigment.setRightHandSide(infixOp);
-        final ParenthesizedExpression parent = dummyAST.newParenthesizedExpression();
-        parent.setExpression(assigment);
-        parent.accept(this);
-        return false;
       }
     }
-    PrefixExpression.Operator _operator_4 = node.getOperator();
-    String _string = _operator_4.toString();
-    this.appendToBuffer(_string);
-    Expression _operand_4 = node.getOperand();
-    _operand_4.accept(this);
+    if (!_matched) {
+      if (Objects.equal(_operator, PrefixExpression.Operator.COMPLEMENT)) {
+        _matched=true;
+        Expression _operand_4 = node.getOperand();
+        _operand_4.accept(this);
+        this.appendToBuffer(".bitwiseNot");
+      }
+    }
+    if (!_matched) {
+      {
+        PrefixExpression.Operator _operator_3 = node.getOperator();
+        String _string = _operator_3.toString();
+        this.appendToBuffer(_string);
+        Expression _operand_5 = node.getOperand();
+        _operand_5.accept(this);
+      }
+    }
     return false;
   }
   
@@ -2696,10 +2704,6 @@ public class JavaASTFlattener extends ASTVisitor {
       };
       IterableExtensions.<Comment>forEach(_filter_1, _function_2);
     }
-  }
-  
-  public void setJavaSourceKind(final int i) {
-    this.javaSourceKind = i;
   }
   
   public String setJavaSources(final String javaSources) {

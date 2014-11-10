@@ -4,7 +4,6 @@ import com.google.common.collect.Iterables
 import com.google.inject.Inject
 import com.google.inject.Provider
 import org.eclipse.emf.common.util.EList
-import org.eclipse.jdt.core.dom.ASTParser
 import org.eclipse.xtend.core.conversion.JavaConverter
 import org.eclipse.xtend.core.conversion.JavaConverter.ConversionResult
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
@@ -26,7 +25,6 @@ import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.XNumberLiteral
 import org.eclipse.xtext.xbase.XStringLiteral
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
 
 import static org.eclipse.xtext.common.types.JvmVisibility.*
@@ -194,10 +192,19 @@ class JavaConverterTest extends AbstractXtendTestCase {
 
 		var XtendClass xtendClazz = toValidXtendClass(
 			'''
+				import java.util.Iterator;
 				public class JavaToConvert implements Statement {
 					public Iterable statements() { return null;} 
 					public String toString() { return null;} 
 					public void accept(JavaToConvert v){}
+					public <DH> Iterator<DH> doAnonymousClass() {
+						return new Iterator<DH>() {
+							public int hashCode() {return super.hashCode();}
+							public boolean hasNext() { return true;}
+							public DH next() { return null;}
+							public void remove() {}
+						};
+					}
 				}
 				interface Node {
 					Iterable statements();
@@ -208,10 +215,11 @@ class JavaConverterTest extends AbstractXtendTestCase {
 			''')
 
 		var EList<XtendMember> members = xtendClazz.getMembers()
-		assertEquals("Simple methods count", 3, members.size())
+		assertEquals("Simple methods count", 4, members.size())
 		assertTrue(xtendClazz.method(0).isOverride())
 		assertTrue(xtendClazz.method(1).isOverride())
 		assertTrue(xtendClazz.method(2).isOverride())
+		assertFalse(xtendClazz.method(3).isOverride())
 	}
 
 	@Test def void testStringLiteralCase() throws Exception {
@@ -381,8 +389,8 @@ class JavaConverterTest extends AbstractXtendTestCase {
 
 	@Test def void testJavadocCase() throws Exception {
 
-		var String xtendCode = j2x.toXtend("Clazz", "/**@param p Param p*/public abstract void foo();",
-			ASTParser.K_CLASS_BODY_DECLARATIONS).getXtendCode()
+		var String xtendCode = j2x.bodyDeclarationToXtend("/**@param p Param p*/public abstract void foo();", null).
+			xtendCode
 		assertTrue('''Javadoc Parameter well formed: «xtendCode»''', xtendCode.contains("@param p Param p"))
 	}
 
@@ -880,7 +888,6 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 		assertEquals("fun", xtendMember.getName())
 	}
 
-	@Ignore
 	@Test def void testLambdaCase3() throws Exception {
 		j2x.useRobustSyntax
 		var XtendClass clazz = toValidXtendClass(
@@ -926,6 +933,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 				int i = 0;
 				switch (i) {
 					case 1:
+						// switch int
 						i++
 						return "1";
 					case 2: {
@@ -942,6 +950,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 				var int i=0 
 				switch (i) {
 					case 1:{
+						// switch int
 						i++ return "1" 
 					}
 					case 2:{
@@ -1025,6 +1034,24 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 			}'''.toString, body)
 
 	}
+	
+	@Test def void testBitwiseComplementCase() throws Exception {
+		val javaBody = '''
+		public void doBitwiseOperation() {
+			int i = 1;
+			i = ~i;
+		}'''
+		val clazz = toValidXtendClass('''class Test {«javaBody»}''')
+		assertNotNull(clazz)
+		var body = classBodyDeclToXtend(javaBody)
+		assertEquals(
+			'''
+			def void doBitwiseOperation(){
+				
+				var int i=1 i=i.bitwiseNot 
+			}'''.toString, body)
+
+	}
 
 	def private XtendClass toValidXtendClass(String javaCode) throws Exception {
 		return toValidTypeDeclaration("Clazz", javaCode) as XtendClass
@@ -1045,8 +1072,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 	}
 
 	def private classBodyDeclToXtend(String string) {
-		val xtendCode = j2x.toXtend("ClassBodyDeclToXtend", string, ASTParser.K_CLASS_BODY_DECLARATIONS).getXtendCode().
-			trim()
+		val xtendCode = j2x.bodyDeclarationToXtend(string, null).getXtendCode().trim()
 		println(xtendCode)
 		return xtendCode
 	}

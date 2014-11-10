@@ -15,6 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTVisitor;
+import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
 import org.eclipse.jdt.core.dom.Annotation;
 import org.eclipse.jdt.core.dom.AnonymousClassDeclaration;
 import org.eclipse.jdt.core.dom.Assignment;
@@ -55,27 +56,30 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
  */
 @SuppressWarnings("all")
 public class ASTFlattenerUtils {
-  public boolean isDummyType(final TypeDeclaration it) {
-    boolean _and = false;
-    boolean _and_1 = false;
-    SimpleName _name = it.getName();
-    String _identifier = _name.getIdentifier();
-    boolean _equals = "MISSING".equals(_identifier);
-    if (!_equals) {
-      _and_1 = false;
-    } else {
-      boolean _isInterface = it.isInterface();
-      boolean _not = (!_isInterface);
-      _and_1 = _not;
+  public boolean isDummyType(final AbstractTypeDeclaration it) {
+    if ((it instanceof TypeDeclaration)) {
+      boolean _and = false;
+      boolean _and_1 = false;
+      SimpleName _name = ((TypeDeclaration)it).getName();
+      String _identifier = _name.getIdentifier();
+      boolean _equals = "MISSING".equals(_identifier);
+      if (!_equals) {
+        _and_1 = false;
+      } else {
+        boolean _isInterface = ((TypeDeclaration)it).isInterface();
+        boolean _not = (!_isInterface);
+        _and_1 = _not;
+      }
+      if (!_and_1) {
+        _and = false;
+      } else {
+        int _modifiers = ((TypeDeclaration)it).getModifiers();
+        boolean _equals_1 = (_modifiers == 0);
+        _and = _equals_1;
+      }
+      return _and;
     }
-    if (!_and_1) {
-      _and = false;
-    } else {
-      int _modifiers = it.getModifiers();
-      boolean _equals_1 = (_modifiers == 0);
-      _and = _equals_1;
-    }
-    return _and;
+    return false;
   }
   
   public boolean isOverrideMethode(final MethodDeclaration declaration) {
@@ -458,11 +462,10 @@ public class ASTFlattenerUtils {
     Block scope = this.<Block>findParentOfType(simpleName, Block.class);
     while ((!Objects.equal(scope, null))) {
       {
-        final Iterable<Type> type = this.findDeclaredType(scope, simpleName);
-        boolean _isEmpty = IterableExtensions.isEmpty(type);
-        boolean _not = (!_isEmpty);
-        if (_not) {
-          return IterableExtensions.<Type>head(type);
+        final Type type = this.findDeclaredType(scope, simpleName);
+        boolean _notEquals = (!Objects.equal(type, null));
+        if (_notEquals) {
+          return type;
         }
         Block _findParentOfType = this.<Block>findParentOfType(scope, Block.class);
         scope = _findParentOfType;
@@ -471,7 +474,7 @@ public class ASTFlattenerUtils {
     return null;
   }
   
-  private Iterable<Type> findDeclaredType(final Block scope, final SimpleName simpleName) {
+  private Type findDeclaredType(final Block scope, final SimpleName simpleName) {
     final ArrayList<Type> matchesFound = CollectionLiterals.<Type>newArrayList();
     scope.accept(
       new ASTVisitor() {
@@ -522,7 +525,7 @@ public class ASTFlattenerUtils {
           return false;
         }
       });
-    return matchesFound;
+    return IterableExtensions.<Type>head(matchesFound);
   }
   
   private Iterable<Assignment> findAssigmentsInBlock(final Block scope, final Function1<? super Assignment, ? extends Boolean> constraint) {
