@@ -653,7 +653,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		} else if (expr instanceof XTryCatchFinallyExpression) {
 			XTryCatchFinallyExpression tryExpr = (XTryCatchFinallyExpression) expr;
 			checkInitializationRec(tryExpr.getExpression(),fields,  initializedForSure, initializedMaybe, visited);
-			checkInitializationRec(tryExpr.getFinallyExpression(), fields, initializedForSure, initializedMaybe, visited);
+			XExpression finallyExpression = tryExpr.getFinallyExpression();
+			if (finallyExpression != null)
+				checkInitializationRec(finallyExpression, fields, initializedForSure, initializedMaybe, visited);
 		} else if (expr instanceof XIfExpression) {
 			XIfExpression ifExpr = (XIfExpression) expr;
 			checkInitializationRec(ifExpr.getIf(), fields, initializedForSure, initializedMaybe, visited);
