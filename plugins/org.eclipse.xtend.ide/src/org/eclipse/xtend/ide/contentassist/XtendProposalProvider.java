@@ -223,6 +223,15 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	}
 	
 	@Override
+	public void completeParameterizedTypeReferenceWithTypeArgs_Type(EObject model, Assignment assignment,
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		// all way that end up in this call graph will already have been processed by another
+		// call graph that leads to type proposals
+		
+		// completeJvmParameterizedTypeReference_Type(model, assignment, context, acceptor);
+	}
+	
+	@Override
 	public void completeMember_ReturnType(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		if (context.getPrefix().length() == 0) {
