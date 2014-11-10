@@ -12,6 +12,7 @@ package example5;
 import example5.Distance;
 import example5.Speed;
 import example5.Time;
+import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -35,13 +36,14 @@ public class Units {
     Distance _multiply = _plus_1.operator_multiply(2);
     Assert.assertEquals(_km_2, _multiply);
     Distance distance = Distance.km(10);
-    for (int i = 1; (i <= 10); i++) {
+    IntegerRange _upTo = new IntegerRange(1, 10);
+    for (final Integer i : _upTo) {
       Distance _distance = distance;
-      Distance _km_4 = Distance.km(i);
+      Distance _km_4 = Distance.km((i).intValue());
       distance = _distance.operator_plus(_km_4);
     }
-    Distance _km_4 = Distance.km(65);
-    Assert.assertEquals(_km_4, distance);
+    Distance _km_5 = Distance.km(65);
+    Assert.assertEquals(_km_5, distance);
   }
   
   @Test
