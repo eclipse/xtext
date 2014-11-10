@@ -35,25 +35,16 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.idea.lang.XbaseLanguage;
+import org.eclipse.xtext.xbase.idea.tests.parsing.IdeaXbaseParserTest;
 import org.eclipse.xtext.xbase.idea.tests.parsing.NodeModelPrinter;
+import org.eclipse.xtext.xbase.idea.tests.parsing.XExpressionChecker;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.tests.parser.XbaseParserTest;
 
 @TestDecorator
 @SuppressWarnings("all")
-public class XbaseParsingTest extends ParsingTestCase {
-  private XbaseParserTest delegate = new XbaseParserTest() {
-    protected XExpression expression(final CharSequence string) throws Exception {
-      String _string = string.toString();
-      return XbaseParsingTest.this.doExpression(_string, false);
-    }
-    
-    protected XExpression expression(final CharSequence string, final boolean resolve) throws Exception {
-      String _string = string.toString();
-      return XbaseParsingTest.this.doExpression(_string, resolve);
-    }
-  };
+public class XbaseParsingTest extends ParsingTestCase implements XExpressionChecker {
+  private IdeaXbaseParserTest delegate;
   
   @Inject
   private InvariantChecker invariantChecker;
@@ -72,13 +63,19 @@ public class XbaseParsingTest extends ParsingTestCase {
   public XbaseParsingTest() {
     super("", "___xbase", XbaseLanguage.INSTANCE.<ParserDefinition>getInstance(ParserDefinition.class));
     XbaseLanguage.INSTANCE.injectMembers(this);
+    IdeaXbaseParserTest _ideaXbaseParserTest = new IdeaXbaseParserTest(this);
+    this.delegate = _ideaXbaseParserTest;
   }
   
   @Override
-  protected void setUp() throws Exception {
-    super.setUp();
-    ASTFactory _instance = XbaseLanguage.INSTANCE.<ASTFactory>getInstance(BaseXtextASTFactory.class);
-    this.<ASTFactory>addExplicitExtension(LanguageASTFactory.INSTANCE, XbaseLanguage.INSTANCE, _instance);
+  protected void setUp() {
+    try {
+      super.setUp();
+      ASTFactory _instance = XbaseLanguage.INSTANCE.<ASTFactory>getInstance(BaseXtextASTFactory.class);
+      this.<ASTFactory>addExplicitExtension(LanguageASTFactory.INSTANCE, XbaseLanguage.INSTANCE, _instance);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Override
@@ -96,55 +93,59 @@ public class XbaseParsingTest extends ParsingTestCase {
     return true;
   }
   
-  public XExpression doExpression(final String code, final boolean resolve) throws Exception {
-    XExpression _xblockexpression = null;
-    {
-      super.doCodeTest(code);
-      XtextResource expectedResource = this.getExpectedResource();
-      IParseResult _parseResult = expectedResource.getParseResult();
-      ICompositeNode expectedRootNode = _parseResult.getRootNode();
-      XtextResource actualResource = this.getActualResource();
-      IParseResult _parseResult_1 = actualResource.getParseResult();
-      ICompositeNode actualRootNode = _parseResult_1.getRootNode();
-      String _print = this.nodeModelPrinter.print(expectedRootNode);
-      String _print_1 = this.nodeModelPrinter.print(actualRootNode);
-      TestCase.assertEquals(_print, _print_1);
-      EObject _semanticElement = expectedRootNode.getSemanticElement();
-      String _objToStr = EmfFormatter.objToStr(_semanticElement);
-      EObject _semanticElement_1 = actualRootNode.getSemanticElement();
-      String _objToStr_1 = EmfFormatter.objToStr(_semanticElement_1);
-      TestCase.assertEquals(_objToStr, _objToStr_1);
-      this.invariantChecker.checkInvariant(actualRootNode);
-      PsiToEcoreAdapter _get = PsiToEcoreAdapter.get(actualResource);
-      Map<ASTNode, INode> nodesMapping = _get.getNodesMapping();
-      Set<ASTNode> _keySet = nodesMapping.keySet();
-      for (final ASTNode astNode : _keySet) {
-        {
-          INode node = nodesMapping.get(astNode);
-          boolean belongsToTree = false;
-          BidiTreeIterable<INode> _asTreeIterable = actualRootNode.getAsTreeIterable();
-          for (final INode child : _asTreeIterable) {
-            boolean _equals = Objects.equal(child, node);
-            if (_equals) {
-              belongsToTree = true;
+  public XExpression testExpression(final String code, final boolean resolve) {
+    try {
+      XExpression _xblockexpression = null;
+      {
+        super.doCodeTest(code);
+        XtextResource expectedResource = this.getExpectedResource();
+        IParseResult _parseResult = expectedResource.getParseResult();
+        ICompositeNode expectedRootNode = _parseResult.getRootNode();
+        XtextResource actualResource = this.getActualResource();
+        IParseResult _parseResult_1 = actualResource.getParseResult();
+        ICompositeNode actualRootNode = _parseResult_1.getRootNode();
+        String _print = this.nodeModelPrinter.print(expectedRootNode);
+        String _print_1 = this.nodeModelPrinter.print(actualRootNode);
+        TestCase.assertEquals(_print, _print_1);
+        EObject _semanticElement = expectedRootNode.getSemanticElement();
+        String _objToStr = EmfFormatter.objToStr(_semanticElement);
+        EObject _semanticElement_1 = actualRootNode.getSemanticElement();
+        String _objToStr_1 = EmfFormatter.objToStr(_semanticElement_1);
+        TestCase.assertEquals(_objToStr, _objToStr_1);
+        this.invariantChecker.checkInvariant(actualRootNode);
+        PsiToEcoreAdapter _get = PsiToEcoreAdapter.get(actualResource);
+        Map<ASTNode, INode> nodesMapping = _get.getNodesMapping();
+        Set<ASTNode> _keySet = nodesMapping.keySet();
+        for (final ASTNode astNode : _keySet) {
+          {
+            INode node = nodesMapping.get(astNode);
+            boolean belongsToTree = false;
+            BidiTreeIterable<INode> _asTreeIterable = actualRootNode.getAsTreeIterable();
+            for (final INode child : _asTreeIterable) {
+              boolean _equals = Objects.equal(child, node);
+              if (_equals) {
+                belongsToTree = true;
+              }
             }
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append("Node ");
+            _builder.append(node, "");
+            _builder.append(" is not a part of the tree");
+            TestCase.assertTrue(_builder.toString(), belongsToTree);
           }
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("Node ");
-          _builder.append(node, "");
-          _builder.append(" is not a part of the tree");
-          TestCase.assertTrue(_builder.toString(), belongsToTree);
         }
+        EList<EObject> _contents = actualResource.getContents();
+        EObject _head = IterableExtensions.<EObject>head(_contents);
+        final XExpression expression = ((XExpression) _head);
+        if (resolve) {
+          this.validationHelper.assertNoErrors(expression);
+        }
+        _xblockexpression = expression;
       }
-      EList<EObject> _contents = actualResource.getContents();
-      EObject _head = IterableExtensions.<EObject>head(_contents);
-      final XExpression expression = ((XExpression) _head);
-      if (resolve) {
-        this.validationHelper.assertNoErrors(expression);
-      }
-      _xblockexpression = expression;
+      return _xblockexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
-    return _xblockexpression;
   }
   
   protected XtextResource getActualResource() {
@@ -257,8 +258,12 @@ public class XbaseParsingTest extends ParsingTestCase {
     delegate.testBlockExpression_withVariableDeclaration_4();
   }
   
-  public void testBooleanLiteral() throws Exception {
-    delegate.testBooleanLiteral();
+  public void testBooleanLiteral_1() throws Exception {
+    delegate.testBooleanLiteral_1();
+  }
+  
+  public void testBooleanLiteral_2() throws Exception {
+    delegate.testBooleanLiteral_2();
   }
   
   public void testCastedExpression() throws Exception {

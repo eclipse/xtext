@@ -14,6 +14,7 @@ import org.eclipse.xtext.idea.lang.BaseXtextASTFactory
 import org.eclipse.xtext.idea.resource.PsiToEcoreAdapter
 import org.eclipse.xtext.idea.resource.PsiToEcoreTransformator
 import org.eclipse.xtext.idea.tests.TestDecorator
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.nodemodel.ICompositeNode
 import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.nodemodel.impl.InvariantChecker
@@ -23,23 +24,11 @@ import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.util.EmfFormatter
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.idea.lang.XbaseLanguage
-import org.eclipse.xtext.xbase.tests.parser.XbaseParserTest
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 
 @TestDecorator
-class XbaseParsingTest extends ParsingTestCase {
+class XbaseParsingTest extends ParsingTestCase implements XExpressionChecker {
 
-	XbaseParserTest delegate = new XbaseParserTest() {
-
-		override protected expression(CharSequence string) throws Exception {
-			doExpression(string.toString, false)
-		}
-		
-		override protected expression(CharSequence string, boolean resolve) throws Exception {
-			doExpression(string.toString, resolve)
-		}
-
-	}
+	IdeaXbaseParserTest delegate
 
 	@Inject InvariantChecker invariantChecker
 
@@ -55,9 +44,10 @@ class XbaseParsingTest extends ParsingTestCase {
 	new() {
 		super("", "___xbase", XbaseLanguage.INSTANCE.getInstance(ParserDefinition))
 		XbaseLanguage.INSTANCE.injectMembers(this)
+		delegate = new IdeaXbaseParserTest(this)
 	}
 
-	@Override override protected void setUp() throws Exception {
+	@Override override protected void setUp() {
 		super.setUp()
 		addExplicitExtension(LanguageASTFactory.INSTANCE, XbaseLanguage.INSTANCE,
 			XbaseLanguage.INSTANCE.getInstance(BaseXtextASTFactory))
@@ -75,7 +65,7 @@ class XbaseParsingTest extends ParsingTestCase {
 		return true
 	}
 
-	def XExpression doExpression(String code, boolean resolve) throws Exception {
+	override XExpression testExpression(String code, boolean resolve) {
 		super.doCodeTest(code)
 		var XtextResource expectedResource = getExpectedResource()
 		var ICompositeNode expectedRootNode = expectedResource.getParseResult().getRootNode()
