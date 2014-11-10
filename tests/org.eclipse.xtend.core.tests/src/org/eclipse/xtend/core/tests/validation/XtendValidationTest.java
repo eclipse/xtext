@@ -1740,6 +1740,11 @@ public class XtendValidationTest extends AbstractXtendTestCase {
     	helper.assertNoErrors(clazz);
     }
     
+    @Test public void testFinalFieldInit_20() throws Exception {
+    	XtendClass clazz = clazz("class C { val String test new() { try {} catch(Throwable t) {} } }");
+    	helper.assertError(clazz.getMembers().get(1), XTEND_CONSTRUCTOR, FIELD_NOT_INITIALIZED);
+    }
+    
     @Test public void testFieldTypeInference_01() throws Exception {
     	XtendClass clazz = clazz("class Foo { var test }");
     	helper.assertError(clazz.getMembers().get(0), XTEND_FIELD, TOO_LITTLE_TYPE_INFORMATION);
