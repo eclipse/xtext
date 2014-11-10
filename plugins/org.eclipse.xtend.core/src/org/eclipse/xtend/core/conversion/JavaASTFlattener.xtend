@@ -15,7 +15,6 @@ import java.util.Map
 import java.util.Set
 import org.eclipse.jdt.core.dom.AST
 import org.eclipse.jdt.core.dom.ASTNode
-import org.eclipse.jdt.core.dom.ASTParser
 import org.eclipse.jdt.core.dom.ASTVisitor
 import org.eclipse.jdt.core.dom.Annotation
 import org.eclipse.jdt.core.dom.AnnotationTypeDeclaration
@@ -116,7 +115,7 @@ import org.eclipse.xtext.conversion.IValueConverterService
  */
 class JavaASTFlattener extends ASTVisitor {
 
-	final static int JLS = AST.JLS3
+	final static public int JLS = AST.JLS3
 
 	@Inject IValueConverterService converterService
 	@Inject extension ASTFlattenerUtils
@@ -132,7 +131,6 @@ class JavaASTFlattener extends ASTVisitor {
 	String javaSources
 
 	int indentation = 0
-	int javaSourceKind = ASTParser.K_COMPILATION_UNIT
 	boolean fallBackStrategy = false
 
 	/**
@@ -159,7 +157,6 @@ class JavaASTFlattener extends ASTVisitor {
 		this.problems = newArrayList()
 		this.assignedComments = newHashSet()
 		this.javaSources = null
-		this.javaSourceKind = ASTParser.K_COMPILATION_UNIT
 		this.indentation = 0
 	}
 
@@ -263,10 +260,10 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override visit(CompilationUnit it) {
-		if (package != null) {
-			package.accept(this)
+		if (!types.head.isDummyType) {
+			package?.accept(this)
+			imports.visitAll
 		}
-		imports.visitAll
 		types.visitAll
 		return false
 	}
@@ -350,7 +347,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override visit(TypeDeclaration it) {
-		if (javaSourceKind == ASTParser.K_CLASS_BODY_DECLARATIONS && isDummyType(it)) {
+		if (isDummyType(it)) {
 			bodyDeclarations.visitAll
 			return false;
 		}
@@ -871,8 +868,7 @@ class JavaASTFlattener extends ASTVisitor {
 		return false
 	}
 
-	def handleInfixRightSide(InfixExpression infixParent, org.eclipse.jdt.core.dom.InfixExpression.Operator operator,
-		Expression rightSide) {
+	def handleInfixRightSide(InfixExpression infixParent, InfixExpression.Operator operator, Expression rightSide) {
 		switch operator {
 			case InfixExpression.Operator.XOR:
 				if (isBooleanInvolved(infixParent)) {
@@ -1048,46 +1044,54 @@ class JavaASTFlattener extends ASTVisitor {
 
 	override boolean visit(PrefixExpression node) {
 		val dummyAST = AST.newAST(JLS)
-		if (node.operator == Operator.DECREMENT || node.operator == Operator.INCREMENT) {
-			if (node.operand instanceof ArrayAccess) {
-				val pfOperand = node.operand as ArrayAccess
+		switch (node.operator) {
+			case Operator.DECREMENT,
+			case Operator.INCREMENT: {
+				if (node.operand instanceof ArrayAccess) {
+					val pfOperand = node.operand as ArrayAccess
 
-				/*	
-				val _tempIndex = (i = i - 1)
-				ints.set(_tempIndex,ints.get(_tempIndex) - 1)
-				ints.get(_tempIndex) */
-				val arrayName = computeArrayName(pfOperand)
-				val idxName = '''_tPreInx_«arrayName»'''
-				var op = "-"
-				if (node.operator == Operator.INCREMENT) {
-					op = "+"
-				}
-				appendToBuffer('''{val «idxName»=''')
-				pfOperand.index.accept(this)
-				appendToBuffer(''' val «idxName»_res=«arrayName».get(«idxName»)«op»1''')
-				appendToBuffer(''' «arrayName».set(«idxName», «idxName»_res)  «idxName»_res}''')
-				return false
-			} else {
-				val assigment = dummyAST.newAssignment()
-				val infixOp = dummyAST.newInfixExpression
-				infixOp.leftOperand = ASTNode.copySubtree(dummyAST, node.operand) as Expression
-				if (node.operator == Operator.DECREMENT) {
-					infixOp.operator = InfixExpression.Operator.MINUS
+					/*	
+					val _tempIndex = (i = i - 1)
+					ints.set(_tempIndex,ints.get(_tempIndex) - 1)
+					ints.get(_tempIndex) */
+					val arrayName = computeArrayName(pfOperand)
+					val idxName = '''_tPreInx_«arrayName»'''
+					var op = "-"
+					if (node.operator == Operator.INCREMENT) {
+						op = "+"
+					}
+					appendToBuffer('''{val «idxName»=''')
+					pfOperand.index.accept(this)
+					appendToBuffer(''' val «idxName»_res=«arrayName».get(«idxName»)«op»1''')
+					appendToBuffer(''' «arrayName».set(«idxName», «idxName»_res)  «idxName»_res}''')
+					return false
 				} else {
-					infixOp.operator = InfixExpression.Operator.PLUS
-
+					val assigment = dummyAST.newAssignment()
+					val infixOp = dummyAST.newInfixExpression
+					infixOp.leftOperand = ASTNode.copySubtree(dummyAST, node.operand) as Expression
+					if (node.operator == Operator.DECREMENT) {
+						infixOp.operator = InfixExpression.Operator.MINUS
+					} else {
+						infixOp.operator = InfixExpression.Operator.PLUS
+					}
+					infixOp.rightOperand = dummyAST.newNumberLiteral("1")
+					assigment.leftHandSide = ASTNode.copySubtree(dummyAST, node.operand) as Expression
+					assigment.rightHandSide = infixOp
+					val parent = dummyAST.newParenthesizedExpression
+					parent.expression = assigment
+					parent.accept(this)
+					return false
 				}
-				infixOp.rightOperand = dummyAST.newNumberLiteral("1")
-				assigment.leftHandSide = ASTNode.copySubtree(dummyAST, node.operand) as Expression
-				assigment.rightHandSide = infixOp
-				val parent = dummyAST.newParenthesizedExpression
-				parent.expression = assigment
-				parent.accept(this)
-				return false
+			}
+			case Operator.COMPLEMENT: {
+				node.getOperand().accept(this)
+				appendToBuffer(".bitwiseNot")
+			}
+			default: {
+				appendToBuffer(node.getOperator().toString())
+				node.getOperand().accept(this)
 			}
 		}
-		appendToBuffer(node.getOperator().toString())
-		node.getOperand().accept(this)
 		return false
 	}
 
@@ -1683,10 +1687,6 @@ class JavaASTFlattener extends ASTVisitor {
 					assignedComments.add(it)
 				]
 		}
-	}
-
-	def void setJavaSourceKind(int i) {
-		javaSourceKind = i
 	}
 
 	def setJavaSources(String javaSources) {

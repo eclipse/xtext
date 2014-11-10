@@ -7,16 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.edit;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.jdt.core.dom.ASTParser;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.text.edits.MalformedTreeException;
+import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.xtend.core.conversion.JavaConverter;
 import org.eclipse.xtend.core.conversion.JavaConverter.ConversionResult;
 import org.eclipse.xtext.resource.XtextResource;
@@ -31,6 +36,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.imports.RewritableImportSection;
 import org.eclipse.xtext.xbase.ui.imports.ReplaceConverter;
 
+import com.google.common.base.Function;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -53,13 +59,33 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 		String clipboardText = ClipboardUtil.getTextFromClipboard();
 		if (!Strings.isEmpty(clipboardText)) {
 			ISourceViewer sourceViewer = activeXtextEditor.getInternalSourceViewer();
-			int sourceKind = ASTParser.K_CLASS_BODY_DECLARATIONS;
-			ConversionResult conversionResult = javaConverterProvider.get().toXtend("SNIPPET", clipboardText,
-					sourceKind);
+			JavaImportData javaImports = ClipboardUtil.getJavaImportsContent();
+
+			String javaText = clipboardText;
+
+			IJavaProject project = null;
+			IEditorInput editorInput = activeXtextEditor.getEditorInput();
+			if (editorInput instanceof IFileEditorInput) {
+				IProject iProject = ((IFileEditorInput) editorInput).getFile().getProject();
+				project = JavaCore.create(iProject);
+			}
+			final StringBuilder sb = new StringBuilder();
+			if (javaImports != null) {
+				String imports = Strings.toString(Arrays.asList(javaImports.getImports()),
+						new Function<String, String>() {
+							public String apply(String input) {
+								return "import " + input + ";";
+							}
+						}, "");
+				sb.append(imports);
+
+			}
+			sb.append(javaText);
+			ConversionResult conversionResult = javaConverterProvider.get().bodyDeclarationToXtend(sb.toString(),
+					project);
 			final String xtendCode = conversionResult.getXtendCode();
 			if (!Strings.isEmpty(xtendCode)) {
 				final IXtextDocument xtextDocument = activeXtextEditor.getDocument();
-				JavaImportData javaImports = ClipboardUtil.getJavaImportsContent();
 				if (javaImports != null)
 					addImports(javaImports, xtextDocument);
 				final Point sel = sourceViewer.getSelectedRange();
