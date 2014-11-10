@@ -103,10 +103,13 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertEquals("bar", literal.getValue());
 	}
 
-	@Test public void testBooleanLiteral() throws Exception {
+	@Test public void testBooleanLiteral_1() throws Exception {
 		XBooleanLiteral literal = (XBooleanLiteral) expression("true");
 		assertTrue(literal.isIsTrue());
-		literal = (XBooleanLiteral) expression("false");
+	}
+
+	@Test public void testBooleanLiteral_2() throws Exception {
+		XBooleanLiteral literal = (XBooleanLiteral) expression("false");
 		assertFalse(literal.isIsTrue());
 	}
 
@@ -262,47 +265,47 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertEquals("baz",call.getConcreteSyntaxFeatureName());
 		assertTrue(call.getExplicitArguments().get(0) instanceof XNumberLiteral);
 	}
-	
-	@Test public void testStaticFeatureCall_0() throws Exception {
-		XMemberFeatureCall call = (XMemberFeatureCall) expression("String::valueOf('')");
+
+	protected void doTestStaticFeatureCall_ValueOf(XMemberFeatureCall call) {
 		assertNotNull(call.getMemberCallTarget());
 		assertEquals("java.lang.String", ((XAbstractFeatureCall) call.getMemberCallTarget()).getFeature().getQualifiedName());
 		assertEquals("java.lang.String.valueOf(java.lang.Object)", call.getFeature().getIdentifier());
+	}
+
+	protected void doTestStaticFeatureCall_CaseInsensitiveOrder(XMemberFeatureCall call) {
+		assertNotNull(call.getMemberCallTarget());
+		assertEquals("java.lang.String", ((XAbstractFeatureCall) call.getMemberCallTarget()).getFeature().getQualifiedName());
+		assertEquals("java.lang.String.CASE_INSENSITIVE_ORDER", call.getFeature().getIdentifier());
+	}
+	
+	@Test public void testStaticFeatureCall_0() throws Exception {
+		XMemberFeatureCall call = (XMemberFeatureCall) expression("String::valueOf('')");
+		doTestStaticFeatureCall_ValueOf(call);
 	}
 	
 	@Test public void testStaticFeatureCall_1() throws Exception {
 		XMemberFeatureCall call = (XMemberFeatureCall) expression("String::CASE_INSENSITIVE_ORDER");
-		assertNotNull(call.getMemberCallTarget());
-		assertEquals("java.lang.String", ((XAbstractFeatureCall) call.getMemberCallTarget()).getFeature().getQualifiedName());
-		assertEquals("java.lang.String.CASE_INSENSITIVE_ORDER", call.getFeature().getIdentifier());
+		doTestStaticFeatureCall_CaseInsensitiveOrder(call);
 	}
 
 	@Test public void testStaticFeatureCall_2() throws Exception {
 		XMemberFeatureCall call = (XMemberFeatureCall) expression("java::lang::String::valueOf('')");
-		assertNotNull(call.getMemberCallTarget());
-		assertEquals("java.lang.String", ((XAbstractFeatureCall) call.getMemberCallTarget()).getFeature().getQualifiedName());
-		assertEquals("java.lang.String.valueOf(java.lang.Object)", call.getFeature().getIdentifier());
+		doTestStaticFeatureCall_ValueOf(call);
 	}
 	
 	@Test public void testStaticFeatureCall_3() throws Exception {
 		XMemberFeatureCall call = (XMemberFeatureCall) expression("java::lang::String::CASE_INSENSITIVE_ORDER");
-		assertNotNull(call.getMemberCallTarget());
-		assertEquals("java.lang.String", ((XAbstractFeatureCall) call.getMemberCallTarget()).getFeature().getQualifiedName());
-		assertEquals("java.lang.String.CASE_INSENSITIVE_ORDER", call.getFeature().getIdentifier());
+		doTestStaticFeatureCall_CaseInsensitiveOrder(call);
 	}
 	
 	@Test public void testStaticFeatureCall_4() throws Exception {
 		XMemberFeatureCall call = (XMemberFeatureCall) expression("java.lang.String::valueOf('')");
-		assertNotNull(call.getMemberCallTarget());
-		assertEquals("java.lang.String", ((XAbstractFeatureCall) call.getMemberCallTarget()).getFeature().getQualifiedName());
-		assertEquals("java.lang.String.valueOf(java.lang.Object)", call.getFeature().getIdentifier());
+		doTestStaticFeatureCall_ValueOf(call);
 	}
 	
 	@Test public void testStaticFeatureCall_5() throws Exception {
 		XMemberFeatureCall call = (XMemberFeatureCall) expression("java.lang.String::CASE_INSENSITIVE_ORDER");
-		assertNotNull(call.getMemberCallTarget());
-		assertEquals("java.lang.String", ((XAbstractFeatureCall) call.getMemberCallTarget()).getFeature().getQualifiedName());
-		assertEquals("java.lang.String.CASE_INSENSITIVE_ORDER", call.getFeature().getIdentifier());
+		doTestStaticFeatureCall_CaseInsensitiveOrder(call);
 	}
 	
 	@Test public void testMemberFeatureCall_00() throws Exception {
@@ -388,6 +391,10 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	
 	@Test public void testSwitch_2() throws Exception {
 		XSwitchExpression se = (XSwitchExpression) expression("switch foo{ String case foo.length(): bar String : {baz;}}");
+		doTestSwitch_2(se);
+	}
+
+	protected void doTestSwitch_2(XSwitchExpression se) {
 		assertEquals(2,se.getCases().size());
 		assertNull(se.getDefault());
 		XCasePart c1 = se.getCases().get(0);
@@ -493,6 +500,10 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 
 	@Test public void testConstructorCall_0() throws Exception {
 		XConstructorCall cc = (XConstructorCall) expression("new java.util.ArrayList()");
+		doTestConstructorCall_0(cc);
+	}
+
+	protected void doTestConstructorCall_0(XConstructorCall cc) {
 		assertNotNull(cc.getConstructor());
 		assertFalse(cc.getConstructor().eIsProxy());
 		assertEquals(0, cc.getArguments().size());
@@ -500,6 +511,10 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 
 	@Test public void testConstructorCall_1() throws Exception {
 		XConstructorCall cc = (XConstructorCall) expression("new java.util.ArrayList(1)",true);
+		doTestConstructorCall_1(cc);
+	}
+
+	protected void doTestConstructorCall_1(XConstructorCall cc) {
 		assertNotNull(cc.getConstructor());
 		assertFalse(cc.getConstructor().eIsProxy());
 		assertEquals(1, cc.getArguments().size());
@@ -508,6 +523,10 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 
 	@Test public void testConstructorCall_2() throws Exception {
 		XConstructorCall cc = (XConstructorCall) expression("new java.util.ArrayList<String>(13)");
+		doTestConstructorCall_2(cc);
+	}
+
+	protected void doTestConstructorCall_2(XConstructorCall cc) {
 		assertNotNull(cc.getConstructor());
 		assertFalse(cc.getConstructor().eIsProxy());
 		assertEquals(1, cc.getArguments().size());
@@ -524,6 +543,10 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	
 	@Test public void testForLoopExpression_1() throws Exception {
 		XForLoopExpression forExp = (XForLoopExpression) expression("for(String s : foo) bar");
+		doTestForLoopExpression_1(forExp);
+	}
+
+	protected void doTestForLoopExpression_1(XForLoopExpression forExp) {
 		assertFeatureCall("foo",forExp.getForExpression());
 		assertEquals("s",forExp.getDeclaredParam().getName());
 		assertEquals("java.lang.String", forExp.getDeclaredParam().getParameterType().getIdentifier());
@@ -549,11 +572,19 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 
 	@Test public void testTypeLiteral() throws Exception {
 		XTypeLiteral expression = (XTypeLiteral) expression("typeof(String)");
+		doTestTypeLiteral(expression);
+	}
+
+	protected void doTestTypeLiteral(XTypeLiteral expression) {
 		assertEquals("java.lang.String",expression.getType().getIdentifier());
 	}
 	
 	@Test public void testInstanceOf() throws Exception {
 		XInstanceOfExpression expression = (XInstanceOfExpression) expression("true instanceof Boolean");
+		doTestInstanceOf(expression);
+	}
+
+	protected void doTestInstanceOf(XInstanceOfExpression expression) {
 		assertEquals("java.lang.Boolean",expression.getType().getIdentifier());
 		assertTrue(expression.getExpression() instanceof XBooleanLiteral);
 	}
@@ -561,8 +592,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	@Test public void testInstanceOf_1() throws Exception {
 		XClosure closure = (XClosure) expression("[|true instanceof Boolean]");
 		XInstanceOfExpression expression = (XInstanceOfExpression) ((XBlockExpression)closure.getExpression()).getExpressions().get(0);
-		assertEquals("java.lang.Boolean",expression.getType().getIdentifier());
-		assertTrue(expression.getExpression() instanceof XBooleanLiteral);
+		doTestInstanceOf(expression);
 	}
 	
 	@Test public void testThrowExpression() throws Exception {
@@ -573,6 +603,10 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	@Test public void testTryCatchExpression() throws Exception {
 		XTryCatchFinallyExpression tryEx = (XTryCatchFinallyExpression) expression(
 				"try throw foo catch (Exception e) bar finally baz");
+		doTestTryCatchExpression(tryEx);
+	}
+
+	protected void doTestTryCatchExpression(XTryCatchFinallyExpression tryEx) {
 		assertFeatureCall("foo", ((XThrowExpression)tryEx.getExpression()).getExpression());
 		assertFeatureCall("baz", tryEx.getFinallyExpression());
 		
@@ -593,6 +627,10 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	@Test public void testTryCatchExpression_2() throws Exception {
 		XTryCatchFinallyExpression tryEx = (XTryCatchFinallyExpression) expression(
 		"try foo catch (java.lang.Exception e) bar");
+		doTestTryCatchExpression_2(tryEx);
+	}
+
+	protected void doTestTryCatchExpression_2(XTryCatchFinallyExpression tryEx) {
 		assertFeatureCall("foo", tryEx.getExpression());
 		assertNull(tryEx.getFinallyExpression());
 		
