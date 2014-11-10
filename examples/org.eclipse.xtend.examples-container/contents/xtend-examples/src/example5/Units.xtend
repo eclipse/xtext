@@ -27,7 +27,7 @@ class Units {
 		
 		//if you implement +, you get += for free
 		var distance = 10.km
-		for (var i = 1; i <= 10; i++) {
+		for (i: 1..10) {
 			distance += i.km
 		}
 		assertEquals(65.km, distance)
