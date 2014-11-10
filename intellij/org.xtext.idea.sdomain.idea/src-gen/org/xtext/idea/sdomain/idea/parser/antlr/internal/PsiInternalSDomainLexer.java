@@ -190,10 +190,10 @@ public class PsiInternalSDomainLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:416:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:416:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:417:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:417:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:416:11: ( '^' )?
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:417:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -202,7 +202,7 @@ public class PsiInternalSDomainLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:416:11: '^'
+                    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:417:11: '^'
                     {
                     match('^'); 
 
@@ -220,7 +220,7 @@ public class PsiInternalSDomainLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:416:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:417:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -269,10 +269,10 @@ public class PsiInternalSDomainLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:418:10: ( ( '0' .. '9' )+ )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:418:12: ( '0' .. '9' )+
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:419:10: ( ( '0' .. '9' )+ )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:419:12: ( '0' .. '9' )+
             {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:418:12: ( '0' .. '9' )+
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:419:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -286,7 +286,7 @@ public class PsiInternalSDomainLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:418:13: '0' .. '9'
+            	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:419:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -318,10 +318,10 @@ public class PsiInternalSDomainLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:420:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:420:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:421:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:421:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:420:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:421:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -339,10 +339,10 @@ public class PsiInternalSDomainLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:420:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:421:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:420:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:421:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -358,7 +358,7 @@ public class PsiInternalSDomainLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:420:21: '\\\\' .
+                    	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:421:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -366,7 +366,7 @@ public class PsiInternalSDomainLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:420:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:421:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -391,10 +391,10 @@ public class PsiInternalSDomainLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:420:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:421:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:420:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:421:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -410,7 +410,7 @@ public class PsiInternalSDomainLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:420:54: '\\\\' .
+                    	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:421:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -418,7 +418,7 @@ public class PsiInternalSDomainLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:420:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:421:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -461,12 +461,12 @@ public class PsiInternalSDomainLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:422:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:422:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:423:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:423:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:422:24: ( options {greedy=false; } : . )*
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:423:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -491,7 +491,7 @@ public class PsiInternalSDomainLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:422:52: .
+            	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:423:52: .
             	    {
             	    matchAny(); 
 
@@ -521,12 +521,12 @@ public class PsiInternalSDomainLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:424:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:424:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:425:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:425:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:424:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:425:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -539,7 +539,7 @@ public class PsiInternalSDomainLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:424:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:425:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -559,7 +559,7 @@ public class PsiInternalSDomainLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:424:40: ( ( '\\r' )? '\\n' )?
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:425:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -568,9 +568,9 @@ public class PsiInternalSDomainLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:424:41: ( '\\r' )? '\\n'
+                    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:425:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:424:41: ( '\\r' )?
+                    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:425:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -579,7 +579,7 @@ public class PsiInternalSDomainLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:424:41: '\\r'
+                            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:425:41: '\\r'
                             {
                             match('\r'); 
 
@@ -611,10 +611,10 @@ public class PsiInternalSDomainLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:426:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:426:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:427:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:427:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:426:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:427:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -668,8 +668,8 @@ public class PsiInternalSDomainLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:428:16: ( . )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:428:18: .
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:429:16: ( . )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:429:18: .
             {
             matchAny(); 
 

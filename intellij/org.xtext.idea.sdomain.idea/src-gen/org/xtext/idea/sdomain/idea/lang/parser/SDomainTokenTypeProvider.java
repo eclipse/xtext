@@ -31,14 +31,17 @@ import com.intellij.psi.tree.TokenSet;
     	return tokenTypes[antlrType];
     }
 
+	@Override
 	public TokenSet getWhitespaceTokens() {
 		return WHITESPACE_TOKENS;
 	}
 
+	@Override
 	public TokenSet getCommentTokens() {
 		return COMMENT_TOKENS;
 	}
 
+	@Override
 	public TokenSet getStringLiteralTokens() {
 		return STRING_TOKENS;
 	}

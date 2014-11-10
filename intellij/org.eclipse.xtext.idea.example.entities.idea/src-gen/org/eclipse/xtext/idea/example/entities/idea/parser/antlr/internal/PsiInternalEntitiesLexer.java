@@ -1712,10 +1712,10 @@ public class PsiInternalEntitiesLexer extends Lexer {
         try {
             int _type = RULE_HEX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5688:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
-            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5688:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5861:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
+            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5861:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             {
-            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5688:12: ( '0x' | '0X' )
+            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5861:12: ( '0x' | '0X' )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -1743,7 +1743,7 @@ public class PsiInternalEntitiesLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5688:13: '0x'
+                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5861:13: '0x'
                     {
                     match("0x"); 
 
@@ -1751,7 +1751,7 @@ public class PsiInternalEntitiesLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5688:18: '0X'
+                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5861:18: '0X'
                     {
                     match("0X"); 
 
@@ -1761,7 +1761,7 @@ public class PsiInternalEntitiesLexer extends Lexer {
 
             }
 
-            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5688:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
+            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5861:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
             int cnt2=0;
             loop2:
             do {
@@ -1799,7 +1799,7 @@ public class PsiInternalEntitiesLexer extends Lexer {
                 cnt2++;
             } while (true);
 
-            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5688:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5861:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -1808,10 +1808,10 @@ public class PsiInternalEntitiesLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5688:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5861:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     {
                     match('#'); 
-                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5688:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5861:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
@@ -1829,7 +1829,7 @@ public class PsiInternalEntitiesLexer extends Lexer {
                     }
                     switch (alt3) {
                         case 1 :
-                            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5688:64: ( 'b' | 'B' ) ( 'i' | 'I' )
+                            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5861:64: ( 'b' | 'B' ) ( 'i' | 'I' )
                             {
                             if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                                 input.consume();
@@ -1853,7 +1853,7 @@ public class PsiInternalEntitiesLexer extends Lexer {
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5688:84: ( 'l' | 'L' )
+                            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5861:84: ( 'l' | 'L' )
                             {
                             if ( input.LA(1)=='L'||input.LA(1)=='l' ) {
                                 input.consume();
@@ -1892,11 +1892,11 @@ public class PsiInternalEntitiesLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5690:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
-            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5690:12: '0' .. '9' ( '0' .. '9' | '_' )*
+            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5863:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
+            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5863:12: '0' .. '9' ( '0' .. '9' | '_' )*
             {
             matchRange('0','9'); 
-            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5690:21: ( '0' .. '9' | '_' )*
+            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5863:21: ( '0' .. '9' | '_' )*
             loop5:
             do {
                 int alt5=2;
@@ -1945,11 +1945,11 @@ public class PsiInternalEntitiesLexer extends Lexer {
         try {
             int _type = RULE_DECIMAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5692:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
-            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5692:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5865:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
+            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5865:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             {
             mRULE_INT(); 
-            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5692:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
+            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5865:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1958,7 +1958,7 @@ public class PsiInternalEntitiesLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5692:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
+                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5865:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
                     {
                     if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
                         input.consume();
@@ -1969,7 +1969,7 @@ public class PsiInternalEntitiesLexer extends Lexer {
                         recover(mse);
                         throw mse;}
 
-                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5692:36: ( '+' | '-' )?
+                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5865:36: ( '+' | '-' )?
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -2002,7 +2002,7 @@ public class PsiInternalEntitiesLexer extends Lexer {
 
             }
 
-            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5692:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5865:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             int alt8=3;
             int LA8_0 = input.LA(1);
 
@@ -2014,7 +2014,7 @@ public class PsiInternalEntitiesLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5692:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
+                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5865:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
                     {
                     if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                         input.consume();
@@ -2038,7 +2038,7 @@ public class PsiInternalEntitiesLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5692:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
+                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5865:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
                     {
                     if ( input.LA(1)=='D'||input.LA(1)=='F'||input.LA(1)=='L'||input.LA(1)=='d'||input.LA(1)=='f'||input.LA(1)=='l' ) {
                         input.consume();
@@ -2071,10 +2071,10 @@ public class PsiInternalEntitiesLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5694:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5694:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5867:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
+            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5867:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5694:11: ( '^' )?
+            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5867:11: ( '^' )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -2083,7 +2083,7 @@ public class PsiInternalEntitiesLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5694:11: '^'
+                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5867:11: '^'
                     {
                     match('^'); 
 
@@ -2101,7 +2101,7 @@ public class PsiInternalEntitiesLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5694:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5867:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             loop10:
             do {
                 int alt10=2;
@@ -2150,10 +2150,10 @@ public class PsiInternalEntitiesLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5696:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? ) )
-            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5696:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
+            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5869:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? ) )
+            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5869:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
             {
-            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5696:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
+            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5869:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -2171,10 +2171,10 @@ public class PsiInternalEntitiesLexer extends Lexer {
             }
             switch (alt15) {
                 case 1 :
-                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5696:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )?
+                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5869:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )?
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5696:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5869:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop11:
                     do {
                         int alt11=3;
@@ -2190,7 +2190,7 @@ public class PsiInternalEntitiesLexer extends Lexer {
 
                         switch (alt11) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5696:21: '\\\\' .
+                    	    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5869:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -2198,7 +2198,7 @@ public class PsiInternalEntitiesLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5696:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5869:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2218,7 +2218,7 @@ public class PsiInternalEntitiesLexer extends Lexer {
                         }
                     } while (true);
 
-                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5696:44: ( '\"' )?
+                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5869:44: ( '\"' )?
                     int alt12=2;
                     int LA12_0 = input.LA(1);
 
@@ -2227,7 +2227,7 @@ public class PsiInternalEntitiesLexer extends Lexer {
                     }
                     switch (alt12) {
                         case 1 :
-                            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5696:44: '\"'
+                            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5869:44: '\"'
                             {
                             match('\"'); 
 
@@ -2240,10 +2240,10 @@ public class PsiInternalEntitiesLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5696:49: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )?
+                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5869:49: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )?
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5696:54: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5869:54: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop13:
                     do {
                         int alt13=3;
@@ -2259,7 +2259,7 @@ public class PsiInternalEntitiesLexer extends Lexer {
 
                         switch (alt13) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5696:55: '\\\\' .
+                    	    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5869:55: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -2267,7 +2267,7 @@ public class PsiInternalEntitiesLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5696:62: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5869:62: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2287,7 +2287,7 @@ public class PsiInternalEntitiesLexer extends Lexer {
                         }
                     } while (true);
 
-                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5696:79: ( '\\'' )?
+                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5869:79: ( '\\'' )?
                     int alt14=2;
                     int LA14_0 = input.LA(1);
 
@@ -2296,7 +2296,7 @@ public class PsiInternalEntitiesLexer extends Lexer {
                     }
                     switch (alt14) {
                         case 1 :
-                            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5696:79: '\\''
+                            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5869:79: '\\''
                             {
                             match('\''); 
 
@@ -2327,12 +2327,12 @@ public class PsiInternalEntitiesLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5698:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5698:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5871:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5871:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5698:24: ( options {greedy=false; } : . )*
+            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5871:24: ( options {greedy=false; } : . )*
             loop16:
             do {
                 int alt16=2;
@@ -2357,7 +2357,7 @@ public class PsiInternalEntitiesLexer extends Lexer {
 
                 switch (alt16) {
             	case 1 :
-            	    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5698:52: .
+            	    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5871:52: .
             	    {
             	    matchAny(); 
 
@@ -2387,12 +2387,12 @@ public class PsiInternalEntitiesLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5700:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5700:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5873:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5873:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5700:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5873:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop17:
             do {
                 int alt17=2;
@@ -2405,7 +2405,7 @@ public class PsiInternalEntitiesLexer extends Lexer {
 
                 switch (alt17) {
             	case 1 :
-            	    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5700:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5873:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2425,7 +2425,7 @@ public class PsiInternalEntitiesLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5700:40: ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5873:40: ( ( '\\r' )? '\\n' )?
             int alt19=2;
             int LA19_0 = input.LA(1);
 
@@ -2434,9 +2434,9 @@ public class PsiInternalEntitiesLexer extends Lexer {
             }
             switch (alt19) {
                 case 1 :
-                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5700:41: ( '\\r' )? '\\n'
+                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5873:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5700:41: ( '\\r' )?
+                    // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5873:41: ( '\\r' )?
                     int alt18=2;
                     int LA18_0 = input.LA(1);
 
@@ -2445,7 +2445,7 @@ public class PsiInternalEntitiesLexer extends Lexer {
                     }
                     switch (alt18) {
                         case 1 :
-                            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5700:41: '\\r'
+                            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5873:41: '\\r'
                             {
                             match('\r'); 
 
@@ -2477,10 +2477,10 @@ public class PsiInternalEntitiesLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5702:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5702:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5875:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5875:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5702:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5875:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt20=0;
             loop20:
             do {
@@ -2534,8 +2534,8 @@ public class PsiInternalEntitiesLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5704:16: ( . )
-            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5704:18: .
+            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5877:16: ( . )
+            // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5877:18: .
             {
             matchAny(); 
 

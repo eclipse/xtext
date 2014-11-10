@@ -26,6 +26,7 @@ import com.intellij.lang.PsiBuilder;
 }
 
 @parser::members {
+
 public RefactoringTestLanguageElementTypeProvider elementTypeProvider;
 
 public PsiInternalRefactoringTestLanguageParser(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, RefactoringTestLanguageElementTypeProvider elementTypeProvider) {

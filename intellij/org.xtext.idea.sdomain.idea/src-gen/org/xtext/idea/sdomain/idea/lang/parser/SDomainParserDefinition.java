@@ -3,7 +3,7 @@ package org.xtext.idea.sdomain.idea.lang.parser;
 import org.eclipse.xtext.psi.impl.PsiEObjectReference;
 import org.xtext.idea.sdomain.idea.lang.SDomainElementTypeProvider;
 import org.xtext.idea.sdomain.idea.lang.psi.impl.SDomainFileImpl;
-import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.common.idea.lang.parser.TerminalsParserDefinition;
 import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
@@ -13,7 +13,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 
-public class SDomainParserDefinition extends AbstractXtextParserDefinition {
+public class SDomainParserDefinition extends TerminalsParserDefinition {
 
 	@Inject 
 	private SDomainElementTypeProvider elementTypeProvider;

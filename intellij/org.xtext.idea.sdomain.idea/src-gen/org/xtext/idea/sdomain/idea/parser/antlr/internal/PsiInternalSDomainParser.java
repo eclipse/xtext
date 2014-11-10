@@ -50,6 +50,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
     public String getGrammarFileName() { return "../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g"; }
 
 
+
     public SDomainElementTypeProvider elementTypeProvider;
 
     public PsiInternalSDomainParser(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, SDomainElementTypeProvider elementTypeProvider) {
@@ -66,11 +67,11 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "entryRuleFile"
-    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:44:1: entryRuleFile : ruleFile EOF ;
+    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:45:1: entryRuleFile : ruleFile EOF ;
     public final void entryRuleFile() throws RecognitionException {
         try {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:44:14: ( ruleFile EOF )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:45:2: ruleFile EOF
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:45:14: ( ruleFile EOF )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:46:2: ruleFile EOF
             {
              markComposite(); 
             pushFollow(FOLLOW_ruleFile_in_entryRuleFile54);
@@ -98,13 +99,13 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "ruleFile"
-    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:53:1: ruleFile : ( (lv_elements_0_0= ruleElement ) )* ;
+    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:54:1: ruleFile : ( (lv_elements_0_0= ruleElement ) )* ;
     public final void ruleFile() throws RecognitionException {
         try {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:53:9: ( ( (lv_elements_0_0= ruleElement ) )* )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:54:2: ( (lv_elements_0_0= ruleElement ) )*
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:54:9: ( ( (lv_elements_0_0= ruleElement ) )* )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:55:2: ( (lv_elements_0_0= ruleElement ) )*
             {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:54:2: ( (lv_elements_0_0= ruleElement ) )*
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:55:2: ( (lv_elements_0_0= ruleElement ) )*
             loop1:
             do {
                 int alt1=2;
@@ -117,10 +118,10 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:55:3: (lv_elements_0_0= ruleElement )
+            	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:56:3: (lv_elements_0_0= ruleElement )
             	    {
-            	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:55:3: (lv_elements_0_0= ruleElement )
-            	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:56:4: lv_elements_0_0= ruleElement
+            	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:56:3: (lv_elements_0_0= ruleElement )
+            	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:57:4: lv_elements_0_0= ruleElement
             	    {
 
             	    				markComposite();
@@ -161,11 +162,11 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "entryRuleImport"
-    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:68:1: entryRuleImport : ruleImport EOF ;
+    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:69:1: entryRuleImport : ruleImport EOF ;
     public final void entryRuleImport() throws RecognitionException {
         try {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:68:16: ( ruleImport EOF )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:69:2: ruleImport EOF
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:69:16: ( ruleImport EOF )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:70:2: ruleImport EOF
             {
              markComposite(); 
             pushFollow(FOLLOW_ruleImport_in_entryRuleImport115);
@@ -193,16 +194,16 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "ruleImport"
-    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:77:1: ruleImport : (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) ) ) ;
+    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:78:1: ruleImport : (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) ) ) ;
     public final void ruleImport() throws RecognitionException {
         Token otherlv_0=null;
 
         try {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:77:11: ( (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) ) ) )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:78:2: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) ) )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:78:11: ( (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) ) ) )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:79:2: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) ) )
             {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:78:2: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) ) )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:79:3: otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:79:2: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) ) )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:80:3: otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) )
             {
 
             			markLeaf();
@@ -211,11 +212,11 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
             			doneLeaf(otherlv_0, elementTypeProvider.getImport_ImportKeyword_0ElementType());
             		
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:86:3: ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:87:4: (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:87:3: ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:88:4: (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard )
             {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:87:4: (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:88:5: lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:88:4: (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:89:5: lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard
             {
 
             					markComposite();
@@ -253,11 +254,11 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "entryRuleQualifiedNameWithWildCard"
-    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:101:1: entryRuleQualifiedNameWithWildCard : ruleQualifiedNameWithWildCard EOF ;
+    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:102:1: entryRuleQualifiedNameWithWildCard : ruleQualifiedNameWithWildCard EOF ;
     public final void entryRuleQualifiedNameWithWildCard() throws RecognitionException {
         try {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:101:35: ( ruleQualifiedNameWithWildCard EOF )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:102:2: ruleQualifiedNameWithWildCard EOF
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:102:35: ( ruleQualifiedNameWithWildCard EOF )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:103:2: ruleQualifiedNameWithWildCard EOF
             {
              markComposite(); 
             pushFollow(FOLLOW_ruleQualifiedNameWithWildCard_in_entryRuleQualifiedNameWithWildCard202);
@@ -285,16 +286,16 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "ruleQualifiedNameWithWildCard"
-    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:110:1: ruleQualifiedNameWithWildCard : ( ruleQualifiedName (kw= '.*' )? ) ;
+    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:111:1: ruleQualifiedNameWithWildCard : ( ruleQualifiedName (kw= '.*' )? ) ;
     public final void ruleQualifiedNameWithWildCard() throws RecognitionException {
         Token kw=null;
 
         try {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:110:30: ( ( ruleQualifiedName (kw= '.*' )? ) )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:111:2: ( ruleQualifiedName (kw= '.*' )? )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:111:30: ( ( ruleQualifiedName (kw= '.*' )? ) )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:112:2: ( ruleQualifiedName (kw= '.*' )? )
             {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:111:2: ( ruleQualifiedName (kw= '.*' )? )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:112:3: ruleQualifiedName (kw= '.*' )?
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:112:2: ( ruleQualifiedName (kw= '.*' )? )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:113:3: ruleQualifiedName (kw= '.*' )?
             {
 
             			markComposite();
@@ -307,7 +308,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
             			doneComposite(elementTypeProvider.getQualifiedNameWithWildCard_QualifiedNameParserRuleCall_0ElementType());
             		
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:119:3: (kw= '.*' )?
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:120:3: (kw= '.*' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -316,7 +317,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:120:4: kw= '.*'
+                    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:121:4: kw= '.*'
                     {
 
                     				markLeaf();
@@ -350,11 +351,11 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "entryRuleQualifiedName"
-    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:132:1: entryRuleQualifiedName : ruleQualifiedName EOF ;
+    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:133:1: entryRuleQualifiedName : ruleQualifiedName EOF ;
     public final void entryRuleQualifiedName() throws RecognitionException {
         try {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:132:23: ( ruleQualifiedName EOF )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:133:2: ruleQualifiedName EOF
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:133:23: ( ruleQualifiedName EOF )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:134:2: ruleQualifiedName EOF
             {
              markComposite(); 
             pushFollow(FOLLOW_ruleQualifiedName_in_entryRuleQualifiedName275);
@@ -382,18 +383,18 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "ruleQualifiedName"
-    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:141:1: ruleQualifiedName : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
+    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:142:1: ruleQualifiedName : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
     public final void ruleQualifiedName() throws RecognitionException {
         Token this_ID_0=null;
         Token kw=null;
         Token this_ID_2=null;
 
         try {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:141:18: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:142:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:142:18: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:143:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
             {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:142:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:143:3: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:143:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:144:3: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
             {
 
             			markLeaf();
@@ -402,7 +403,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
             			doneLeaf(this_ID_0, elementTypeProvider.getQualifiedName_IDTerminalRuleCall_0ElementType());
             		
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:150:3: (kw= '.' this_ID_2= RULE_ID )*
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:151:3: (kw= '.' this_ID_2= RULE_ID )*
             loop3:
             do {
                 int alt3=2;
@@ -415,7 +416,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:151:4: kw= '.' this_ID_2= RULE_ID
+            	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:152:4: kw= '.' this_ID_2= RULE_ID
             	    {
 
             	    				markLeaf();
@@ -459,11 +460,11 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "entryRuleNamespace"
-    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:170:1: entryRuleNamespace : ruleNamespace EOF ;
+    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:171:1: entryRuleNamespace : ruleNamespace EOF ;
     public final void entryRuleNamespace() throws RecognitionException {
         try {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:170:19: ( ruleNamespace EOF )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:171:2: ruleNamespace EOF
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:171:19: ( ruleNamespace EOF )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:172:2: ruleNamespace EOF
             {
              markComposite(); 
             pushFollow(FOLLOW_ruleNamespace_in_entryRuleNamespace367);
@@ -491,23 +492,23 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "ruleNamespace"
-    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:179:1: ruleNamespace : ( ( (lv_name_0_0= ruleQualifiedName ) ) otherlv_1= '{' ( (lv_elements_2_0= ruleElement ) )* otherlv_3= '}' ) ;
+    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:180:1: ruleNamespace : ( ( (lv_name_0_0= ruleQualifiedName ) ) otherlv_1= '{' ( (lv_elements_2_0= ruleElement ) )* otherlv_3= '}' ) ;
     public final void ruleNamespace() throws RecognitionException {
         Token otherlv_1=null;
         Token otherlv_3=null;
 
         try {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:179:14: ( ( ( (lv_name_0_0= ruleQualifiedName ) ) otherlv_1= '{' ( (lv_elements_2_0= ruleElement ) )* otherlv_3= '}' ) )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:180:2: ( ( (lv_name_0_0= ruleQualifiedName ) ) otherlv_1= '{' ( (lv_elements_2_0= ruleElement ) )* otherlv_3= '}' )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:180:14: ( ( ( (lv_name_0_0= ruleQualifiedName ) ) otherlv_1= '{' ( (lv_elements_2_0= ruleElement ) )* otherlv_3= '}' ) )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:181:2: ( ( (lv_name_0_0= ruleQualifiedName ) ) otherlv_1= '{' ( (lv_elements_2_0= ruleElement ) )* otherlv_3= '}' )
             {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:180:2: ( ( (lv_name_0_0= ruleQualifiedName ) ) otherlv_1= '{' ( (lv_elements_2_0= ruleElement ) )* otherlv_3= '}' )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:181:3: ( (lv_name_0_0= ruleQualifiedName ) ) otherlv_1= '{' ( (lv_elements_2_0= ruleElement ) )* otherlv_3= '}'
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:181:2: ( ( (lv_name_0_0= ruleQualifiedName ) ) otherlv_1= '{' ( (lv_elements_2_0= ruleElement ) )* otherlv_3= '}' )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:182:3: ( (lv_name_0_0= ruleQualifiedName ) ) otherlv_1= '{' ( (lv_elements_2_0= ruleElement ) )* otherlv_3= '}'
             {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:181:3: ( (lv_name_0_0= ruleQualifiedName ) )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:182:4: (lv_name_0_0= ruleQualifiedName )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:182:3: ( (lv_name_0_0= ruleQualifiedName ) )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:183:4: (lv_name_0_0= ruleQualifiedName )
             {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:182:4: (lv_name_0_0= ruleQualifiedName )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:183:5: lv_name_0_0= ruleQualifiedName
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:183:4: (lv_name_0_0= ruleQualifiedName )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:184:5: lv_name_0_0= ruleQualifiedName
             {
 
             					markComposite();
@@ -533,7 +534,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
             			doneLeaf(otherlv_1, elementTypeProvider.getNamespace_LeftCurlyBracketKeyword_1ElementType());
             		
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:199:3: ( (lv_elements_2_0= ruleElement ) )*
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:200:3: ( (lv_elements_2_0= ruleElement ) )*
             loop4:
             do {
                 int alt4=2;
@@ -546,10 +547,10 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
                 switch (alt4) {
             	case 1 :
-            	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:200:4: (lv_elements_2_0= ruleElement )
+            	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:201:4: (lv_elements_2_0= ruleElement )
             	    {
-            	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:200:4: (lv_elements_2_0= ruleElement )
-            	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:201:5: lv_elements_2_0= ruleElement
+            	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:201:4: (lv_elements_2_0= ruleElement )
+            	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:202:5: lv_elements_2_0= ruleElement
             	    {
 
             	    					markComposite();
@@ -600,11 +601,11 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "entryRuleElement"
-    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:221:1: entryRuleElement : ruleElement EOF ;
+    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:222:1: entryRuleElement : ruleElement EOF ;
     public final void entryRuleElement() throws RecognitionException {
         try {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:221:17: ( ruleElement EOF )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:222:2: ruleElement EOF
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:222:17: ( ruleElement EOF )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:223:2: ruleElement EOF
             {
              markComposite(); 
             pushFollow(FOLLOW_ruleElement_in_entryRuleElement507);
@@ -632,13 +633,13 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "ruleElement"
-    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:230:1: ruleElement : ( ruleNamespace | ruleType | ruleImport ) ;
+    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:231:1: ruleElement : ( ruleNamespace | ruleType | ruleImport ) ;
     public final void ruleElement() throws RecognitionException {
         try {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:230:12: ( ( ruleNamespace | ruleType | ruleImport ) )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:231:2: ( ruleNamespace | ruleType | ruleImport )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:231:12: ( ( ruleNamespace | ruleType | ruleImport ) )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:232:2: ( ruleNamespace | ruleType | ruleImport )
             {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:231:2: ( ruleNamespace | ruleType | ruleImport )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:232:2: ( ruleNamespace | ruleType | ruleImport )
             int alt5=3;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -666,7 +667,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
             switch (alt5) {
                 case 1 :
-                    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:232:3: ruleNamespace
+                    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:233:3: ruleNamespace
                     {
 
                     			markComposite();
@@ -683,7 +684,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:240:3: ruleType
+                    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:241:3: ruleType
                     {
 
                     			markComposite();
@@ -700,7 +701,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:248:3: ruleImport
+                    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:249:3: ruleImport
                     {
 
                     			markComposite();
@@ -735,11 +736,11 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "entryRuleType"
-    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:259:1: entryRuleType : ruleType EOF ;
+    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:260:1: entryRuleType : ruleType EOF ;
     public final void entryRuleType() throws RecognitionException {
         try {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:259:14: ( ruleType EOF )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:260:2: ruleType EOF
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:260:14: ( ruleType EOF )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:261:2: ruleType EOF
             {
              markComposite(); 
             pushFollow(FOLLOW_ruleType_in_entryRuleType594);
@@ -767,13 +768,13 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "ruleType"
-    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:268:1: ruleType : ( ruleEntity | ruleDatatype ) ;
+    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:269:1: ruleType : ( ruleEntity | ruleDatatype ) ;
     public final void ruleType() throws RecognitionException {
         try {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:268:9: ( ( ruleEntity | ruleDatatype ) )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:269:2: ( ruleEntity | ruleDatatype )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:269:9: ( ( ruleEntity | ruleDatatype ) )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:270:2: ( ruleEntity | ruleDatatype )
             {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:269:2: ( ruleEntity | ruleDatatype )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:270:2: ( ruleEntity | ruleDatatype )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -791,7 +792,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:270:3: ruleEntity
+                    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:271:3: ruleEntity
                     {
 
                     			markComposite();
@@ -808,7 +809,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:278:3: ruleDatatype
+                    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:279:3: ruleDatatype
                     {
 
                     			markComposite();
@@ -843,11 +844,11 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "entryRuleEntity"
-    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:289:1: entryRuleEntity : ruleEntity EOF ;
+    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:290:1: entryRuleEntity : ruleEntity EOF ;
     public final void entryRuleEntity() throws RecognitionException {
         try {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:289:16: ( ruleEntity EOF )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:290:2: ruleEntity EOF
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:290:16: ( ruleEntity EOF )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:291:2: ruleEntity EOF
             {
              markComposite(); 
             pushFollow(FOLLOW_ruleEntity_in_entryRuleEntity661);
@@ -875,7 +876,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "ruleEntity"
-    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:298:1: ruleEntity : (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_properties_3_0= ruleProperty ) )* otherlv_4= '}' ) ;
+    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:299:1: ruleEntity : (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_properties_3_0= ruleProperty ) )* otherlv_4= '}' ) ;
     public final void ruleEntity() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_name_1_0=null;
@@ -883,11 +884,11 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
         Token otherlv_4=null;
 
         try {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:298:11: ( (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_properties_3_0= ruleProperty ) )* otherlv_4= '}' ) )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:299:2: (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_properties_3_0= ruleProperty ) )* otherlv_4= '}' )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:299:11: ( (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_properties_3_0= ruleProperty ) )* otherlv_4= '}' ) )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:300:2: (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_properties_3_0= ruleProperty ) )* otherlv_4= '}' )
             {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:299:2: (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_properties_3_0= ruleProperty ) )* otherlv_4= '}' )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:300:3: otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_properties_3_0= ruleProperty ) )* otherlv_4= '}'
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:300:2: (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_properties_3_0= ruleProperty ) )* otherlv_4= '}' )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:301:3: otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_properties_3_0= ruleProperty ) )* otherlv_4= '}'
             {
 
             			markLeaf();
@@ -896,11 +897,11 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
             			doneLeaf(otherlv_0, elementTypeProvider.getEntity_EntityKeyword_0ElementType());
             		
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:307:3: ( (lv_name_1_0= RULE_ID ) )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:308:4: (lv_name_1_0= RULE_ID )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:308:3: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:309:4: (lv_name_1_0= RULE_ID )
             {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:308:4: (lv_name_1_0= RULE_ID )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:309:5: lv_name_1_0= RULE_ID
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:309:4: (lv_name_1_0= RULE_ID )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:310:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf();
@@ -922,7 +923,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
             			doneLeaf(otherlv_2, elementTypeProvider.getEntity_LeftCurlyBracketKeyword_2ElementType());
             		
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:325:3: ( (lv_properties_3_0= ruleProperty ) )*
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:326:3: ( (lv_properties_3_0= ruleProperty ) )*
             loop7:
             do {
                 int alt7=2;
@@ -935,10 +936,10 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:326:4: (lv_properties_3_0= ruleProperty )
+            	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:327:4: (lv_properties_3_0= ruleProperty )
             	    {
-            	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:326:4: (lv_properties_3_0= ruleProperty )
-            	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:327:5: lv_properties_3_0= ruleProperty
+            	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:327:4: (lv_properties_3_0= ruleProperty )
+            	    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:328:5: lv_properties_3_0= ruleProperty
             	    {
 
             	    					markComposite();
@@ -989,11 +990,11 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "entryRuleDatatype"
-    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:347:1: entryRuleDatatype : ruleDatatype EOF ;
+    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:348:1: entryRuleDatatype : ruleDatatype EOF ;
     public final void entryRuleDatatype() throws RecognitionException {
         try {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:347:18: ( ruleDatatype EOF )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:348:2: ruleDatatype EOF
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:348:18: ( ruleDatatype EOF )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:349:2: ruleDatatype EOF
             {
              markComposite(); 
             pushFollow(FOLLOW_ruleDatatype_in_entryRuleDatatype815);
@@ -1021,17 +1022,17 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "ruleDatatype"
-    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:356:1: ruleDatatype : (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:357:1: ruleDatatype : (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final void ruleDatatype() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_name_1_0=null;
 
         try {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:356:13: ( (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) ) )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:357:2: (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:357:13: ( (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) ) )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:358:2: (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:357:2: (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:358:3: otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:358:2: (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:359:3: otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) )
             {
 
             			markLeaf();
@@ -1040,11 +1041,11 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
             			doneLeaf(otherlv_0, elementTypeProvider.getDatatype_DatatypeKeyword_0ElementType());
             		
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:365:3: ( (lv_name_1_0= RULE_ID ) )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:366:4: (lv_name_1_0= RULE_ID )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:366:3: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:367:4: (lv_name_1_0= RULE_ID )
             {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:366:4: (lv_name_1_0= RULE_ID )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:367:5: lv_name_1_0= RULE_ID
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:367:4: (lv_name_1_0= RULE_ID )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:368:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf();
@@ -1078,11 +1079,11 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "entryRuleProperty"
-    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:380:1: entryRuleProperty : ruleProperty EOF ;
+    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:381:1: entryRuleProperty : ruleProperty EOF ;
     public final void entryRuleProperty() throws RecognitionException {
         try {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:380:18: ( ruleProperty EOF )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:381:2: ruleProperty EOF
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:381:18: ( ruleProperty EOF )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:382:2: ruleProperty EOF
             {
              markComposite(); 
             pushFollow(FOLLOW_ruleProperty_in_entryRuleProperty902);
@@ -1110,22 +1111,22 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "ruleProperty"
-    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:389:1: ruleProperty : ( ( ( ruleQualifiedName ) ) ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:390:1: ruleProperty : ( ( ( ruleQualifiedName ) ) ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final void ruleProperty() throws RecognitionException {
         Token lv_name_1_0=null;
 
         try {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:389:13: ( ( ( ( ruleQualifiedName ) ) ( (lv_name_1_0= RULE_ID ) ) ) )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:390:2: ( ( ( ruleQualifiedName ) ) ( (lv_name_1_0= RULE_ID ) ) )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:390:13: ( ( ( ( ruleQualifiedName ) ) ( (lv_name_1_0= RULE_ID ) ) ) )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:391:2: ( ( ( ruleQualifiedName ) ) ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:390:2: ( ( ( ruleQualifiedName ) ) ( (lv_name_1_0= RULE_ID ) ) )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:391:3: ( ( ruleQualifiedName ) ) ( (lv_name_1_0= RULE_ID ) )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:391:2: ( ( ( ruleQualifiedName ) ) ( (lv_name_1_0= RULE_ID ) ) )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:392:3: ( ( ruleQualifiedName ) ) ( (lv_name_1_0= RULE_ID ) )
             {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:391:3: ( ( ruleQualifiedName ) )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:392:4: ( ruleQualifiedName )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:392:3: ( ( ruleQualifiedName ) )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:393:4: ( ruleQualifiedName )
             {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:392:4: ( ruleQualifiedName )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:393:5: ruleQualifiedName
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:393:4: ( ruleQualifiedName )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:394:5: ruleQualifiedName
             {
 
             					markComposite();
@@ -1144,11 +1145,11 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
 
             }
 
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:402:3: ( (lv_name_1_0= RULE_ID ) )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:403:4: (lv_name_1_0= RULE_ID )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:403:3: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:404:4: (lv_name_1_0= RULE_ID )
             {
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:403:4: (lv_name_1_0= RULE_ID )
-            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:404:5: lv_name_1_0= RULE_ID
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:404:4: (lv_name_1_0= RULE_ID )
+            // ../org.xtext.idea.sdomain.idea/src-gen/org/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:405:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf();

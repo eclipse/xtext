@@ -15,6 +15,12 @@ public class XtextIDEAGeneratorExtensions {
   
   private final String IDEA_SRC_GEN = "IDEA_SRC_GEN";
   
+  public Outlet getOutlet(final Xtend2ExecutionContext it, final String outletName) {
+    XpandExecutionContext _xpandExecutionContext = it.getXpandExecutionContext();
+    Output _output = _xpandExecutionContext.getOutput();
+    return _output.getOutlet(outletName);
+  }
+  
   public Outlet getSrcOutlet(final Xtend2ExecutionContext it) {
     return this.getOutlet(it, this.IDEA_SRC);
   }
@@ -23,18 +29,7 @@ public class XtextIDEAGeneratorExtensions {
     return this.getOutlet(it, this.IDEA_SRC_GEN);
   }
   
-  public Outlet getOutlet(final Xtend2ExecutionContext it, final String outletName) {
-    XpandExecutionContext _xpandExecutionContext = it.getXpandExecutionContext();
-    Output _output = _xpandExecutionContext.getOutput();
-    return _output.getOutlet(outletName);
-  }
-  
-  public void installOutlets(final Xtend2ExecutionContext it, final String pathIdeaPluginProject, final String encoding) {
-    this.installOutlet(it, pathIdeaPluginProject, this.IDEA_SRC, "/src", encoding, Generator.SRC);
-    this.installOutlet(it, pathIdeaPluginProject, this.IDEA_SRC_GEN, "/src-gen", encoding, Generator.SRC_GEN);
-  }
-  
-  public void installOutlet(final Xtend2ExecutionContext it, final String pathIdeaPluginProject, final String outletName, final String projectPath, final String encoding, final String defaultOutletName) {
+  protected void installOutlet(final Xtend2ExecutionContext it, final String pathIdeaPluginProject, final String outletName, final String projectPath, final String encoding, final boolean overwrite, final String defaultOutletName) {
     Outlet _outlet = this.getOutlet(it, outletName);
     boolean _notEquals = (!Objects.equal(_outlet, null));
     if (_notEquals) {
@@ -42,6 +37,7 @@ public class XtextIDEAGeneratorExtensions {
     }
     final Outlet outlet = new Outlet(outletName);
     outlet.setName(outletName);
+    outlet.setOverwrite(overwrite);
     outlet.setFileEncoding(encoding);
     String _xifexpression = null;
     boolean _notEquals_1 = (!Objects.equal(pathIdeaPluginProject, null));
@@ -55,5 +51,10 @@ public class XtextIDEAGeneratorExtensions {
     XpandExecutionContext _xpandExecutionContext = it.getXpandExecutionContext();
     Output _output = _xpandExecutionContext.getOutput();
     _output.addOutlet(outlet);
+  }
+  
+  public void installOutlets(final Xtend2ExecutionContext it, final String pathIdeaPluginProject, final String encoding) {
+    this.installOutlet(it, pathIdeaPluginProject, this.IDEA_SRC, "/src", encoding, false, Generator.SRC);
+    this.installOutlet(it, pathIdeaPluginProject, this.IDEA_SRC_GEN, "/src-gen", encoding, true, Generator.SRC_GEN);
   }
 }

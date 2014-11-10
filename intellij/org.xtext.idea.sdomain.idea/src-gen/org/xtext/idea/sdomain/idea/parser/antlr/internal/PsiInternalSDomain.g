@@ -26,6 +26,7 @@ import com.intellij.lang.PsiBuilder;
 }
 
 @parser::members {
+
 public SDomainElementTypeProvider elementTypeProvider;
 
 public PsiInternalSDomainParser(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, SDomainElementTypeProvider elementTypeProvider) {

@@ -499,7 +499,7 @@
    </extension>
    <extension point="org.eclipse.ui.editorActions">
       <editorContribution targetID="org.eclipse.xtext.idea.example.entities.Entities" 
-                          id="org.eclipse.xtext.idea.example.entities.Entities.ide.rulerActions">
+                          id="org.eclipse.xtext.idea.example.entities.Entities.rulerActions">
 	     <action
 	             label="Not Used"
 	             class="org.eclipse.xtext.idea.example.entities.ui.EntitiesExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
@@ -510,26 +510,26 @@
    </extension>
    <extension point="org.eclipse.ui.popupMenus">
       <viewerContribution
-         targetID="org.eclipse.xtext.idea.example.entities.Entities.ide.RulerContext"
-         id="org.eclipse.xtext.idea.example.entities.Entities.ide.RulerPopupActions">
+         targetID="org.eclipse.xtext.idea.example.entities.Entities.RulerContext"
+         id="org.eclipse.xtext.idea.example.entities.Entities.RulerPopupActions">
          <action
             label="Toggle Breakpoint"
             class="org.eclipse.xtext.idea.example.entities.ui.EntitiesExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
             menubarPath="debug"
-            id="org.eclipse.xtext.idea.example.entities.Entities.ide.rulerContextMenu.toggleBreakpointAction">
+            id="org.eclipse.xtext.idea.example.entities.Entities.rulerContextMenu.toggleBreakpointAction">
          </action>
          <action
             label="Not used"
             class="org.eclipse.xtext.idea.example.entities.ui.EntitiesExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerEnableDisableBreakpointActionDelegate"
             menubarPath="debug"
-            id="org.eclipse.xtext.idea.example.entities.Entities.ide.rulerContextMenu.enableDisableBreakpointAction">
+            id="org.eclipse.xtext.idea.example.entities.Entities.rulerContextMenu.enableDisableBreakpointAction">
          </action>
          <action
            label="Breakpoint Properties"
            helpContextId="breakpoint_properties_action_context"
            class="org.eclipse.xtext.idea.example.entities.ui.EntitiesExecutableExtensionFactory:org.eclipse.jdt.debug.ui.actions.JavaBreakpointPropertiesRulerActionDelegate"
            menubarPath="group.properties"
-           id="org.eclipse.xtext.idea.example.entities.Entities.ide.rulerContextMenu.openBreapointPropertiesAction">
+           id="org.eclipse.xtext.idea.example.entities.Entities.rulerContextMenu.openBreapointPropertiesAction">
          </action>
       </viewerContribution>
    </extension>
