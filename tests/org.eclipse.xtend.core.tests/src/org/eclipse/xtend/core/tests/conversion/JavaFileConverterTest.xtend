@@ -43,7 +43,7 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
 		problemsExpected = 0
 	}
 
-	@Test @Ignore
+	@Test 
 	def void testConvertFilesInThisProject() throws Exception {
 		sourceProject = "org.eclipse.xtend.core.tests"
 		targetProject = "test-converter"

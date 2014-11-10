@@ -19,7 +19,6 @@ import java.util.Map;
 import java.util.Set;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTNode;
-import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
 import org.eclipse.jdt.core.dom.Annotation;
@@ -133,7 +132,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
  */
 @SuppressWarnings("all")
 public class JavaASTFlattener extends ASTVisitor {
-  private final static int JLS = AST.JLS3;
+  public final static int JLS = AST.JLS3;
   
   @Inject
   private IValueConverterService converterService;
@@ -155,8 +154,6 @@ public class JavaASTFlattener extends ASTVisitor {
   private String javaSources;
   
   private int indentation = 0;
-  
-  private int javaSourceKind = ASTParser.K_COMPILATION_UNIT;
   
   private boolean fallBackStrategy = false;
   
@@ -187,7 +184,6 @@ public class JavaASTFlattener extends ASTVisitor {
     HashSet<Comment> _newHashSet = CollectionLiterals.<Comment>newHashSet();
     this.assignedComments = _newHashSet;
     this.javaSources = null;
-    this.javaSourceKind = ASTParser.K_COMPILATION_UNIT;
     this.indentation = 0;
   }
   
@@ -363,16 +359,20 @@ public class JavaASTFlattener extends ASTVisitor {
   }
   
   public boolean visit(final CompilationUnit it) {
-    PackageDeclaration _package = it.getPackage();
-    boolean _notEquals = (!Objects.equal(_package, null));
-    if (_notEquals) {
-      PackageDeclaration _package_1 = it.getPackage();
-      _package_1.accept(this);
-    }
-    List _imports = it.imports();
-    this.visitAll(_imports);
     List _types = it.types();
-    this.visitAll(_types);
+    AbstractTypeDeclaration _head = IterableExtensions.<AbstractTypeDeclaration>head(_types);
+    boolean _isDummyType = this._aSTFlattenerUtils.isDummyType(_head);
+    boolean _not = (!_isDummyType);
+    if (_not) {
+      PackageDeclaration _package = it.getPackage();
+      if (_package!=null) {
+        _package.accept(this);
+      }
+      List _imports = it.imports();
+      this.visitAll(_imports);
+    }
+    List _types_1 = it.types();
+    this.visitAll(_types_1);
     return false;
   }
   
@@ -514,14 +514,8 @@ public class JavaASTFlattener extends ASTVisitor {
   }
   
   public boolean visit(final TypeDeclaration it) {
-    boolean _and = false;
-    if (!(this.javaSourceKind == ASTParser.K_CLASS_BODY_DECLARATIONS)) {
-      _and = false;
-    } else {
-      boolean _isDummyType = this._aSTFlattenerUtils.isDummyType(it);
-      _and = _isDummyType;
-    }
-    if (_and) {
+    boolean _isDummyType = this._aSTFlattenerUtils.isDummyType(it);
+    if (_isDummyType) {
       List _bodyDeclarations = it.bodyDeclarations();
       this.visitAll(_bodyDeclarations);
       return false;
@@ -2696,10 +2690,6 @@ public class JavaASTFlattener extends ASTVisitor {
       };
       IterableExtensions.<Comment>forEach(_filter_1, _function_2);
     }
-  }
-  
-  public void setJavaSourceKind(final int i) {
-    this.javaSourceKind = i;
   }
   
   public String setJavaSources(final String javaSources) {

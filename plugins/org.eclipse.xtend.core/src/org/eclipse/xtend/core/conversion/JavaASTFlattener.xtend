@@ -15,7 +15,6 @@ import java.util.Map
 import java.util.Set
 import org.eclipse.jdt.core.dom.AST
 import org.eclipse.jdt.core.dom.ASTNode
-import org.eclipse.jdt.core.dom.ASTParser
 import org.eclipse.jdt.core.dom.ASTVisitor
 import org.eclipse.jdt.core.dom.Annotation
 import org.eclipse.jdt.core.dom.AnnotationTypeDeclaration
@@ -116,7 +115,7 @@ import org.eclipse.xtext.conversion.IValueConverterService
  */
 class JavaASTFlattener extends ASTVisitor {
 
-	final static int JLS = AST.JLS3
+	final static public int JLS = AST.JLS3
 
 	@Inject IValueConverterService converterService
 	@Inject extension ASTFlattenerUtils
@@ -132,7 +131,6 @@ class JavaASTFlattener extends ASTVisitor {
 	String javaSources
 
 	int indentation = 0
-	int javaSourceKind = ASTParser.K_COMPILATION_UNIT
 	boolean fallBackStrategy = false
 
 	/**
@@ -159,7 +157,6 @@ class JavaASTFlattener extends ASTVisitor {
 		this.problems = newArrayList()
 		this.assignedComments = newHashSet()
 		this.javaSources = null
-		this.javaSourceKind = ASTParser.K_COMPILATION_UNIT
 		this.indentation = 0
 	}
 
@@ -263,10 +260,10 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override visit(CompilationUnit it) {
-		if (package != null) {
-			package.accept(this)
+		if (!types.head.isDummyType) {
+			package?.accept(this)
+			imports.visitAll
 		}
-		imports.visitAll
 		types.visitAll
 		return false
 	}
@@ -299,7 +296,6 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override visit(StringLiteral it) {
-
 		// octal syntax \0, 1, 2, 3, 4, 5, 6, or 7 convert to \u000x
 		// octal syntax \123 convert is not yet handled
 		val handleOctal = escapedValue.replaceAll("\\\\([01234567])", "\\u000$1")
@@ -350,7 +346,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override visit(TypeDeclaration it) {
-		if (javaSourceKind == ASTParser.K_CLASS_BODY_DECLARATIONS && isDummyType(it)) {
+		if (isDummyType(it)) {
 			bodyDeclarations.visitAll
 			return false;
 		}
@@ -871,8 +867,7 @@ class JavaASTFlattener extends ASTVisitor {
 		return false
 	}
 
-	def handleInfixRightSide(InfixExpression infixParent, org.eclipse.jdt.core.dom.InfixExpression.Operator operator,
-		Expression rightSide) {
+	def handleInfixRightSide(InfixExpression infixParent, InfixExpression.Operator operator, Expression rightSide) {
 		switch operator {
 			case InfixExpression.Operator.XOR:
 				if (isBooleanInvolved(infixParent)) {
@@ -1683,10 +1678,6 @@ class JavaASTFlattener extends ASTVisitor {
 					assignedComments.add(it)
 				]
 		}
-	}
-
-	def void setJavaSourceKind(int i) {
-		javaSourceKind = i
 	}
 
 	def setJavaSources(String javaSources) {

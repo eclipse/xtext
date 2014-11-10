@@ -4,7 +4,6 @@ import com.google.common.collect.Iterables
 import com.google.inject.Inject
 import com.google.inject.Provider
 import org.eclipse.emf.common.util.EList
-import org.eclipse.jdt.core.dom.ASTParser
 import org.eclipse.xtend.core.conversion.JavaConverter
 import org.eclipse.xtend.core.conversion.JavaConverter.ConversionResult
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
@@ -194,10 +193,19 @@ class JavaConverterTest extends AbstractXtendTestCase {
 
 		var XtendClass xtendClazz = toValidXtendClass(
 			'''
+				import java.util.Iterator;
 				public class JavaToConvert implements Statement {
 					public Iterable statements() { return null;} 
 					public String toString() { return null;} 
 					public void accept(JavaToConvert v){}
+					public <DH> Iterator<DH> doAnonymousClass() {
+						return new Iterator<DH>() {
+							public int hashCode() {return super.hashCode();}
+							public boolean hasNext() { return true;}
+							public DH next() { return null;}
+							public void remove() {}
+						};
+					}
 				}
 				interface Node {
 					Iterable statements();
@@ -208,10 +216,11 @@ class JavaConverterTest extends AbstractXtendTestCase {
 			''')
 
 		var EList<XtendMember> members = xtendClazz.getMembers()
-		assertEquals("Simple methods count", 3, members.size())
+		assertEquals("Simple methods count", 4, members.size())
 		assertTrue(xtendClazz.method(0).isOverride())
 		assertTrue(xtendClazz.method(1).isOverride())
 		assertTrue(xtendClazz.method(2).isOverride())
+		assertFalse(xtendClazz.method(3).isOverride())
 	}
 
 	@Test def void testStringLiteralCase() throws Exception {
@@ -381,8 +390,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 
 	@Test def void testJavadocCase() throws Exception {
 
-		var String xtendCode = j2x.toXtend("Clazz", "/**@param p Param p*/public abstract void foo();",
-			ASTParser.K_CLASS_BODY_DECLARATIONS).getXtendCode()
+		var String xtendCode = j2x.toXtend(null, "/**@param p Param p*/public abstract void foo();").getXtendCode()
 		assertTrue('''Javadoc Parameter well formed: «xtendCode»''', xtendCode.contains("@param p Param p"))
 	}
 
@@ -926,6 +934,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 				int i = 0;
 				switch (i) {
 					case 1:
+						// switch int
 						i++
 						return "1";
 					case 2: {
@@ -942,6 +951,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 				var int i=0 
 				switch (i) {
 					case 1:{
+						// switch int
 						i++ return "1" 
 					}
 					case 2:{
@@ -1045,8 +1055,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 	}
 
 	def private classBodyDeclToXtend(String string) {
-		val xtendCode = j2x.toXtend("ClassBodyDeclToXtend", string, ASTParser.K_CLASS_BODY_DECLARATIONS).getXtendCode().
-			trim()
+		val xtendCode = j2x.bodyDeclarationToXtend(string, null).getXtendCode().trim()
 		println(xtendCode)
 		return xtendCode
 	}
