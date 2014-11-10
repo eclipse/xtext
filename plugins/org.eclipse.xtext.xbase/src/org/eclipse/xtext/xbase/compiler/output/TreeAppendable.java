@@ -97,11 +97,28 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 	
 	public TreeAppendable(ImportManager importManager, ITraceURIConverter converter, ILocationInFileProvider locationProvider, IJvmModelAssociations jvmModelAssociations, EObject source,
 			String indentation, String lineSeparator) {
-		this(new SharedAppendableState(indentation, lineSeparator, importManager), converter, locationProvider, jvmModelAssociations, source);
+		this(
+				new SharedAppendableState(indentation, lineSeparator, importManager),
+				converter,
+				locationProvider,
+				jvmModelAssociations,
+				source);
 	}
 
 	protected TreeAppendable(SharedAppendableState state, ITraceURIConverter converter, ILocationInFileProvider locationProvider, IJvmModelAssociations jvmModelAssociations, EObject source) {
-		this(state, converter, locationProvider, jvmModelAssociations, createAllLocationData(converter, locationProvider, jvmModelAssociations, source, ILocationInFileProviderExtension.RegionDescription.INCLUDING_COMMENTS), false);
+		this(
+				state,
+				converter,
+				locationProvider,
+				jvmModelAssociations,
+				createAllLocationData(
+						converter,
+						locationProvider,
+						jvmModelAssociations,
+						source,
+						ILocationInFileProviderExtension.RegionDescription.INCLUDING_COMMENTS,
+						false), // don't skip empty root regions
+				false);
 	}
 	
 	protected TreeAppendable(SharedAppendableState state,
@@ -184,6 +201,11 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 
 	/* @Nullable */
 	protected static ILocationData createLocationData(ITraceURIConverter converter, ILocationInFileProvider locationProvider, EObject object, ILocationInFileProviderExtension.RegionDescription query) {
+		return createLocationData(converter, locationProvider, object, query, true);
+	}
+	
+	/* @Nullable */
+	private static ILocationData createLocationData(ITraceURIConverter converter, ILocationInFileProvider locationProvider, EObject object, ILocationInFileProviderExtension.RegionDescription query, boolean skipEmpty) {
 		ITextRegion textRegion = locationProvider instanceof ILocationInFileProviderExtension ? 
 				((ILocationInFileProviderExtension) locationProvider).getTextRegion(object, query) : locationProvider.getFullTextRegion(object);
 		if (!(textRegion instanceof ITextRegionWithLineInformation)) {
@@ -194,31 +216,37 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 			else
 				return null;
 		} 
-		if (textRegion == ITextRegion.EMPTY_REGION) {
+		// usually we want to skip empty regions but if the root region is empty, we want to use it to store the path information along
+		// with the empty offset / length pair
+		if (skipEmpty && textRegion == ITextRegion.EMPTY_REGION) {
 			return null;
 		}
 		ILocationData newData = createLocationData(converter, object, (ITextRegionWithLineInformation) textRegion);
 		return newData;
 	}
 	
-	protected static Set<ILocationData> createAllLocationData(ITraceURIConverter converter, ILocationInFileProvider locationProvider, IJvmModelAssociations jvmModelAssociations, EObject object, ILocationInFileProviderExtension.RegionDescription query) {
+	protected static Set<ILocationData> createAllLocationData(ITraceURIConverter converter, ILocationInFileProvider locationProvider, IJvmModelAssociations jvmModelAssociations, EObject object, ILocationInFileProviderExtension.RegionDescription query, boolean skipEmpty) {
 		Set<EObject> sourceElements = jvmModelAssociations.getSourceElements(object);
 		Set<ILocationData> result = Collections.emptySet();
 		if (sourceElements.isEmpty()) {
-			ILocationData locationData = createLocationData(converter, locationProvider, object, query);
+			ILocationData locationData = createLocationData(converter, locationProvider, object, query, skipEmpty);
 			if (locationData != null) {
 				result = Collections.singleton(locationData);
 			}
 		} else {
 			result = Sets.newHashSet();
 			for(EObject sourceElement: sourceElements) {
-				ILocationData locationData = createLocationData(converter, locationProvider, sourceElement, query);
+				ILocationData locationData = createLocationData(converter, locationProvider, sourceElement, query, skipEmpty);
 				if (locationData != null) {
 					result.add(locationData);
 				}	
 			}
 		}
 		return result;
+	}
+	
+	private static Set<ILocationData> createAllLocationData(ITraceURIConverter converter, ILocationInFileProvider locationProvider, IJvmModelAssociations jvmModelAssociations, EObject object, ILocationInFileProviderExtension.RegionDescription query) {
+		return createAllLocationData(converter, locationProvider, jvmModelAssociations, object, query, true);
 	}
 	
 	public ITreeAppendable trace(Iterable<? extends EObject> objects) {
