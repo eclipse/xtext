@@ -76,6 +76,9 @@ public class JavaIoFileSystemAccess extends AbstractFileSystemAccess2 {
 
 	public void generateFile(String fileName, String outputConfigName, CharSequence contents) throws RuntimeIOException {
 		File file = getFile(fileName, outputConfigName);
+		if (!getOutputConfig(outputConfigName).isOverrideExistingResources() && file.exists()) {
+			return;
+		}
 		try {
 			createFolder(file.getParentFile());
 			String encoding = getEncoding(getURI(fileName, outputConfigName));
@@ -180,6 +183,9 @@ public class JavaIoFileSystemAccess extends AbstractFileSystemAccess2 {
 	 */
 	public void generateFile(String fileName, String outputCfgName, InputStream content) throws RuntimeIOException {
 		File file = getFile(fileName, outputCfgName);
+		if (!getOutputConfig(outputCfgName).isOverrideExistingResources() && file.exists()) {
+	      return;
+		}
 		try {
 			createFolder(file.getParentFile());
 			OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
