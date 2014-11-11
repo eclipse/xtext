@@ -52,7 +52,6 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
   }
   
   @Test
-  @Ignore
   public void testConvertFilesInThisProject() throws Exception {
     this.sourceProject = "org.eclipse.xtend.core.tests";
     this.targetProject = "test-converter";
